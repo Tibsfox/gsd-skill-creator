@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComfyUI Integration &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cfu">
+  <header>
+    <h1>ComfyUI Integration</h1>
+    <div class="subtitle">API Bridge &middot; Image Pipeline &middot; Video Pipeline &middot; Skill-Creator Integration &middot; Security</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-api-bridge">API Bridge</a>
+      <a href="page.html?doc=02-image-pipeline">Image</a>
+      <a href="page.html?doc=03-video-pipeline">Video</a>
+      <a href="page.html?doc=04-skill-integration">Integration</a>
+      <a href="page.html?doc=05-security-sandboxing">Security</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      ComfyUI embodies the Amiga Principle at the inference layer &mdash; a directed-acyclic-graph engine
+      where node connections define data flow, partial re-execution prevents redundant computation,
+      and a clean HTTP/WebSocket API makes the entire pipeline accessible from any framework.
+      The meaning lives in the connection between intent, the workflow graph, and the artifact that emerges.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">14</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~349K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Agent Roles</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-api-bridge" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: ComfyUI API Bridge</h3>
+        <div class="meta"><span class="tag tag-api">API</span> Track A &middot; Foundation layer</div>
+        <p>Complete REST and WebSocket API mapping for ComfyUI server. Workflow JSON schema: nodes, links, execution order. Queue management via /prompt endpoint. Real-time progress tracking over WebSocket. Python client implementation with async dispatch and artifact retrieval.</p>
+      </a>
+
+      <a href="page.html?doc=02-image-pipeline" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Image Production Pipeline</h3>
+        <div class="meta"><span class="tag tag-image">Image</span> Track B &middot; Generation layer</div>
+        <p>Model landscape: FLUX.1 Dev/Schnell (FP8 quantized), SDXL, SD 3.5. VRAM tier routing for 8/12/16/24GB GPUs. ControlNet integration for pose, depth, and edge-guided generation. Workflow templates: text-to-image, image-to-image, inpainting, upscaling. Batch generation with consistent seed management.</p>
+      </a>
+
+      <a href="page.html?doc=03-video-pipeline" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Video Production Pipeline</h3>
+        <div class="meta"><span class="tag tag-video">Video</span> Track B &middot; Motion layer</div>
+        <p>Video model survey: LTX-2.3, Wan 2.2, CogVideoX, HunyuanVideo, AnimateDiff. Text-to-video and image-to-video workflows. Frame interpolation and temporal consistency. Multi-clip assembly with consistent seeds. VRAM requirements and quantization strategies for consumer GPUs.</p>
+      </a>
+
+      <a href="page.html?doc=04-skill-integration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Skill-Creator Integration</h3>
+        <div class="meta"><span class="tag tag-integ">Integration</span> Synthesis &middot; DACP layer</div>
+        <p>DACP three-part bundle structure for generation requests: human intent, workflow JSON, executable trigger. MCP bridge specification adapting the planning-bridge pattern. Registry feedback loop: recurring prompt patterns become reusable workflow templates. Model auto-discovery via /object_info endpoint parsing.</p>
+      </a>
+
+      <a href="page.html?doc=05-security-sandboxing" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Security &amp; Sandboxing</h3>
+        <div class="meta"><span class="tag tag-sec">Security</span> Synthesis &middot; Safety layer</div>
+        <p>Docker isolation for ComfyUI instances: mount-only access to /models, /input, /output. Custom node security audit: eval/exec scanning, runtime-pip detection. Audited node allowlist with 10+ verified nodes. Network policy restricting container to localhost API only. Cryptominer and credential stealer detection patterns.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>DACP bundle protocol</td><td>M1, M4</td><td>LLM, AIH, MST, TCP</td></tr>
+        <tr><td>WebSocket real-time events</td><td>M1, M2, M3</td><td>TCP, PNP, SYS</td></tr>
+        <tr><td>VRAM tier management</td><td>M2, M3</td><td>LLM, AIH</td></tr>
+        <tr><td>Docker sandboxing</td><td>M5</td><td>K8S, SYS, LLM</td></tr>
+        <tr><td>Model quantization (FP8/FP16)</td><td>M2, M3</td><td>LLM, AIH</td></tr>
+        <tr><td>Skill-creator learning loop</td><td>M4, M1</td><td>LLM, AIH, MST</td></tr>
+        <tr><td>REST API design</td><td>M1, M4</td><td>TCP, DNS, SYS</td></tr>
+        <tr><td>ControlNet / guided generation</td><td>M2</td><td>AIH</td></tr>
+        <tr><td>Custom node security</td><td>M5</td><td>SYS, K8S</td></tr>
+        <tr><td>MCP bridge pattern</td><td>M4</td><td>LLM, AIH, MST</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+COMFYUI INTEGRATION -- ARCHITECTURE
+===============================================================
+
+  SKILL-CREATOR LAYER           DACP BRIDGE              COMFYUI ENGINE
+  +-------------------+     +-------------------+     +-------------------+
+  | Observe/Detect    |     | Human Intent      |     | DAG Execution     |
+  | Suggest/Manage    |----&gt;| Workflow JSON     |----&gt;| Node Graph        |
+  | Autoload/Learn    |     | Trigger Code      |     | Partial Re-exec   |
+  +-------------------+     +-------------------+     +-------------------+
+        |                         |                         |
+        v                         v                         v
+  +-------------------+     +-------------------+     +-------------------+
+  | Registry          |     | MCP Bridge        |     | REST API          |
+  | Pattern Detection |&lt;----| Planning-Bridge   |&lt;----| WebSocket Events  |
+  | Template Library  |     | Handshake         |     | /prompt /queue    |
+  +-------------------+     +-------------------+     +-------------------+
+        |                                                   |
+        +---------------------------------------------------+
+                    FEEDBACK LOOP (learn from outcomes)
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: API Bridge] ---------&gt; [M4: Skill Integration]
+       |                              |
+       v                              v
+  [M2: Image Pipeline]         [M5: Security]
+       |                              ^
+       v                              |
+  [M3: Video Pipeline] ---------------+
+
+  Parallel tracks:
+    Track A: M1 (API bridge foundation)
+    Track B: M2 + M3 (image + video pipelines)
+    Synthesis: M4 + M5 (integration + security)
+    </pre>
+  </main>
+
+  <footer>
+    <p>ComfyUI Integration &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

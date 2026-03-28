@@ -1,0 +1,1297 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology color scheme: Steel / Electric / Graphite
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{alertred}{HTML}{B71C1C}
+\definecolor{successgreen}{HTML}{1B5E20}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{ComfyUI / Skill-Creator Integration}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={ComfyUI Integration -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─── TITLE PAGE ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{ComfyUI Integration\\[0.3em]with Skill-Creator}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Local Image \& Video Production Infrastructure}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 4--6 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{ComfyUI / Skill-Creator Integration --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{gsd-skill-creator v1.49+ (DACP milestone), GSD Chipset Architecture}
+\metafield{Context Window:}{4--6 windows (Squadron profile, parallel image + video tracks)}
+
+\subsection{Vision}
+
+The GSD ecosystem has always operated on the Amiga Principle: extraordinary output through
+architectural leverage rather than brute force. ComfyUI embodies this principle at the
+inference layer --- a directed-acyclic-graph engine where node connections define data flow,
+partial re-execution prevents redundant computation, and a clean HTTP/WebSocket API makes
+the entire pipeline accessible from any language or framework. Skill-Creator, already managing
+the six-step observe-detect-suggest-manage-autoload-learn loop, is the natural orchestrator
+for this kind of modular production infrastructure.
+
+The vision is a local, sovereign image and video production layer --- no cloud fees, no
+prompt logging, no content filters imposed from outside --- woven directly into the skill-creator
+ecosystem via structured DACP bundles. A skill dispatches a three-part bundle (human intent +
+workflow JSON + executable trigger code) to a running ComfyUI instance over its REST API,
+receives WebSocket progress events in real time, retrieves the finished artifact, and logs
+the generation into the skill registry for pattern detection. The loop closes back through
+skill-creator's learning layer: recurring prompt patterns become reusable workflow templates;
+hardware-specific optimizations accumulate as skill metadata; model availability is
+auto-discovered at session start.
+
+This is the \emph{spaces between} made productive. The meaning is not in the image itself
+--- it lives in the connection between the user's intent, the workflow graph, the model's
+latent space traversal, and the artifact that emerges. Skill-Creator provides the structure;
+ComfyUI provides the traversal; the user provides the intent. Nothing is wasted. Only the
+parts of the graph that change between executions are re-evaluated.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Cloud dependency and privacy exposure.} Commercial image/video generation
+  APIs log prompts, impose content filters, change pricing without notice, and remove
+  user sovereignty over the creative process. Local production eliminates these risks
+  but currently requires manual ComfyUI setup outside the GSD workflow.
+
+  \item \textbf{No structured handshake between agents and inference engines.}
+  Skill-Creator agents currently have no formal protocol for dispatching generation
+  requests to ComfyUI. Workflows are produced ad hoc, results arrive as unstructured
+  files, and no learning loop captures which parameters produced which outcomes.
+
+  \item \textbf{Model landscape complexity.} Image models (FLUX.1 Dev/Schnell, SDXL,
+  SD 3.5) and video models (LTX-2.3, Wan 2.2, CogVideoX, HunyuanVideo) have radically
+  different VRAM profiles, licensing terms, quantization strategies, and ControlNet
+  compatibility matrices. No single skill currently navigates this landscape for the
+  orchestrator.
+
+  \item \textbf{Security risks from untrusted custom nodes.} ComfyUI's community
+  ecosystem has been compromised by malicious nodes carrying cryptominers and credential
+  stealers. A GSD-integrated deployment requires an audited node allowlist, Docker
+  sandboxing, and safety-by-structure boundaries consistent with the ecosystem's core
+  security philosophy.
+
+  \item \textbf{No video production path in the current skill-creator pipeline.}
+  Skill-creator can orchestrate text and code tasks but has no primitives for queueing
+  multi-second video generation jobs, tracking frame-by-frame progress over WebSocket,
+  or assembling multi-clip sequences with consistent seeds.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{ComfyUI as a Deterministic Inference Microservice} --- a local HTTP/WebSocket
+server that receives workflow JSON bundles over \texttt{POST /prompt}, streams node-level
+progress events, and returns artifact filenames via \texttt{/history}. Skill-Creator
+wraps this with a DACP-compliant skill that translates agent intents into typed workflow
+bundles, tracks job state, and feeds outcomes back into the learning registry.
+
+\subsubsection{System Architecture}
+
+\begin{asciibox}
+GSD Skill-Creator (Orchestrator Layer)
+  |
+  |  DACP Bundle: {intent, workflow_json, trigger_code}
+  v
+ComfyUI Skill (Paula / I/O layer)
+  |
+  |-- POST /prompt  --> ComfyUI REST API (port 8188)
+  |-- ws://8188/ws  --> WebSocket progress feed
+  |-- GET /history  --> Artifact retrieval
+  |
+  v
+ComfyUI Server (Local, GPU-bound)
+  |
+  |-- Image Pipeline: FLUX.1/SDXL/ControlNet/LoRA
+  |-- Video Pipeline: LTX-2.3 / Wan 2.2 / CogVideoX
+  |-- Upscale/Post:  RealESRGAN / RIFE / RTX-VSR
+  |
+  v
+/output/*.png | /output/*.mp4
+  |
+  v
+Skill Registry (pattern detection, template accumulation)
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+Module 01: API Bridge        Module 02: Image Pipeline
+  ComfyUI REST/WebSocket        FLUX / SDXL / ControlNet
+  Workflow JSON schema           LoRA / VAE / Upscale
+  Python client patterns        VRAM tier routing
+        |                              |
+        +----------+  +----------------+
+                   |  |
+                   v  v
+         Module 04: Skill-Creator Integration
+           DACP bundle schema for generation
+           Skill file structure + trigger code
+           MCP bridge to ComfyUI (planning-bridge pattern)
+                   |
+        +----------+  +--------------+
+        |                            |
+        v                            v
+Module 03: Video Pipeline   Module 05: Security & Sandboxing
+  LTX-2.3 / Wan 2.2            Docker isolation strategy
+  CogVideoX / Hunyuan           Node allowlist / trust system
+  Audio-sync / RIFE interp      GSD safety-by-structure
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- ComfyUI API Bridge}
+Architecture deep-dive: the Python/PyTorch backend, Flask-based HTTP server, litegraph.js
+frontend, and headless API mode. Key endpoints: \texttt{/prompt} (workflow submission),
+\texttt{/ws} (WebSocket progress), \texttt{/history} (artifact retrieval),
+\texttt{/object\_info} (node catalog). Workflow JSON schema: DAG structure, node IDs,
+\texttt{class\_type}/\texttt{inputs} anatomy. Python client patterns including both
+synchronous polling and WebSocket streaming. ComfyScript and ComfyUI-to-Python
+transpilation. Partial re-execution optimization (only changed subgraph nodes re-run).
+
+\subsubsection{Module 02 --- Image Production Pipeline}
+Current model landscape (March 2026): FLUX.1 Dev (24GB FP16, 12--16GB FP8, 8GB GGUF Q4),
+FLUX.1 Schnell (4-step distilled), SDXL (8--12GB), SD 3.5. ControlNet integration, LoRA
+loading, VAE selection, KSampler configuration. VRAM tier routing table for auto-selecting
+model variant based on hardware profile. Upscale chain: RealESRGAN $\rightarrow$ ESRGAN
+variants. NVIDIA NVFP4/FP8 optimization path (2.5x faster, 60\% less VRAM on RTX 50-series).
+Batch generation and parameter sweep patterns.
+
+\subsubsection{Module 03 --- Video Production Pipeline}
+Text-to-video and image-to-video model matrix: LTX-2.3 (real-time 4K, audio sync,
+Day-0 ComfyUI v0.16 support, 24GB native/16GB quantized), Wan 2.2 (best photorealism,
+Apache 2.0, 8GB for 1.3B, 24GB for 14B), CogVideoX (beginner-friendly, 8--12GB),
+HunyuanVideo 1.5 (13B, 40\% VRAM reduction). Frame interpolation via RIFE/GIMM-VFI.
+Multi-clip assembly with consistent seeds. RTX Video Super Resolution node for 4K upscale.
+Audio-conditioned generation via LTX-2.3 mel-spectrogram conditioning.
+
+\subsubsection{Module 04 --- Skill-Creator Integration Architecture}
+DACP-compliant skill file structure for ComfyUI dispatch: the three-part bundle
+(human intent string + workflow JSON payload + Python trigger code). MCP bridge pattern
+reusing the planning-bridge Cloudflare tunnel approach. Session handshake for ComfyUI
+readiness detection. Skill registry feedback loop: generation metadata (model, steps,
+CFG, seed, VRAM peak) stored per generation and surfaced for pattern detection.
+Auto-load rules for model-specific workflow templates. ComfyUI MCP server landscape
+(artokun/comfyui-mcp, alecc08/comfyui-mcp, nikolaibibo pattern). Claude Code nodes
+(christian-byrne/claude-code-comfyui-nodes) as reference for inverse direction.
+
+\subsubsection{Module 05 --- Security and Sandboxing}
+Custom node threat surface: eval/exec RCE vectors, path traversal, supply chain
+attacks (2025 cryptominer/credential-stealer incidents). ComfyUI's January 2025 security
+update: eval/exec bans, pip-install-at-runtime prohibition, verified author system.
+Comfy.org CI system for dependency conflict detection. Docker isolation strategy for
+node allowlist enforcement. GSD safety-by-structure principle applied: architectural
+OS-level sandboxing rather than permission prompts. Secret management (no credentials
+in ComfyUI server environment). Network isolation for local-only deployments.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# comfyui-integration chipset
+agnus:           # Orchestration / DMA / context
+  model: opus
+  role: synthesis, skill-schema design, security decisions
+  context_budget: 80k
+
+denise:          # Display / output rendering
+  model: sonnet
+  role: workflow JSON assembly, documentation, API integration code
+  context_budget: 40k
+
+paula:           # Audio / I/O / anticipatory
+  model: sonnet
+  role: ComfyUI API bridge code, WebSocket handler, DACP bundle builder
+  context_budget: 40k
+
+gary_68000:      # CPU / glue logic
+  model: haiku
+  role: shared schemas, VRAM tier table, node allowlist scaffolding
+  context_budget: 10k
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item ComfyUI Python API client skill with WebSocket progress tracking
+  \item DACP bundle schema for image and video generation requests
+  \item VRAM tier routing table (8GB / 12GB / 16GB / 24GB / 40GB+)
+  \item Image workflow templates: FLUX FP8, SDXL standard, SDXL+ControlNet
+  \item Video workflow templates: LTX-2.3 T2V, Wan 2.2 T2V, CogVideoX T2V/I2V
+  \item Skill registry feedback loop: generation metadata logging
+  \item Docker isolation spec for ComfyUI server deployment
+  \item Node allowlist: curated set of verified, audited custom nodes
+  \item MCP bridge integration spec (reusing planning-bridge pattern)
+  \item Model auto-discovery at skill startup via \texttt{GET /object\_info}
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item LoRA training or fine-tuning within GSD (separate mission)
+  \item Cloud/remote ComfyUI deployment (local-first only in v1.0)
+  \item Audio-only generation (ElevenLabs integration is separate)
+  \item 3D asset generation (Hunyuan3D, TripoSR --- separate mission)
+  \item CivitAI model marketplace integration
+  \item Real-time collaborative generation (multi-user queue)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item A skill file in \texttt{.claude/skills/comfyui/} dispatches a generation request
+  to a running ComfyUI instance via \texttt{POST /prompt} and returns the artifact path.
+
+  \item DACP bundle schema is formally specified: JSON schema with \texttt{intent},
+  \texttt{workflow\_json}, and \texttt{trigger\_code} fields, validated before dispatch.
+
+  \item VRAM tier routing table correctly selects model variant given GPU VRAM
+  declaration in skill config (8GB / 12GB / 16GB / 24GB tiers, all four tested).
+
+  \item Image generation round-trip (prompt $\to$ artifact) completes in under
+  90 seconds on a 16GB VRAM GPU using FLUX FP8.
+
+  \item Video generation round-trip (prompt $\to$ MP4) completes using at least
+  one of LTX-2.3 or Wan 2.2, with progress events streamed over WebSocket.
+
+  \item All ComfyUI custom nodes in the allowlist pass Docker-isolated security
+  audit (no eval/exec patterns, no runtime pip install, no non-standard network calls).
+
+  \item Skill registry accumulates generation metadata (model, steps, CFG, VRAM peak,
+  latency) and surfaces recurring prompt patterns after 10 generations.
+
+  \item MCP bridge connection between skill-creator and ComfyUI is demonstrated
+  (using planning-bridge Cloudflare tunnel or equivalent local transport).
+
+  \item Model auto-discovery at startup populates available checkpoints and nodes
+  via \texttt{GET /object\_info} without manual configuration.
+
+  \item Partial re-execution optimization is verified: submitting the same workflow
+  with only the seed changed does not reload the checkpoint model.
+
+  \item Security boundary test: a Docker-isolated ComfyUI instance cannot access
+  the host filesystem outside its designated \texttt{/models}, \texttt{/input},
+  and \texttt{/output} mounts.
+
+  \item Full integration test: a skill-creator agent receives a natural-language
+  production brief, translates it to a DACP bundle, dispatches to ComfyUI, and
+  delivers a finished image or video artifact without human intervention.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+GSD Chipset Architecture Vision & ComfyUI skill maps to Paula (I/O); orchestration to Agnus \\
+GSD Staging Layer Vision & ComfyUI artifacts flow through staging for review before publication \\
+Planning Bridge (MCP) & Reuses Cloudflare tunnel session handshake for ComfyUI dispatch \\
+DACP Milestone (v1.49+) & ComfyUI skill implements DACP three-part bundle as first media use case \\
+Fox Infrastructure Group & FoxCompute GPU infrastructure is eventual production host \\
+Deep Audio Analyzer Mission & Audio-conditioned video (LTX-2.3) bridges audio and video pipelines \\
+GSD BBS Educational Pack & ComfyUI-generated imagery for educational visual assets \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga 500 rendered graphics through a chipset so elegantly partitioned that Agnus,
+Denise, and Paula divided the work by domain --- not by brute force, but by architectural
+clarity about what each chip was \emph{for}. ComfyUI is the Amiga chipset of local
+generative inference. Its DAG is not a bureaucracy of nodes; it is a topology of
+dependencies, each edge a declaration that this output is the input to that operation.
+Nothing executes that does not need to. Nothing loads that is already resident.
+
+The skill-creator integration does not bolt ComfyUI onto the side of the GSD ecosystem
+--- it threads it into the same philosophy. A DACP bundle is not a command; it is a
+statement of intent plus structure plus executable form. The ComfyUI server receives
+it not as an instruction but as a complete workflow: \emph{here is what you need, here
+is how to connect it, here is the code that starts it.} The WebSocket stream that follows
+is the system thinking in real time, reporting its traversal of the latent space. The
+artifact that arrives at \texttt{/output} is the resolution of a mathematical journey
+through compressed probability --- the same journey, at a different scale, that the
+versine and exsecant trace between points on a circle.
+
+The spaces between the nodes are where the image lives.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{ComfyUI / Skill-Creator Integration --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from cold-start web research (March 2026) across five
+modules. Primary sources are official repositories, technical documentation, security
+advisories, and developer guides from the ComfyUI ecosystem. All claims are attributed
+to identified sources.
+
+\textbf{Key source organizations and repositories:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Comfy-Org / ComfyUI} --- \url{https://github.com/comfy-org/ComfyUI} (GPL-3.0)
+  \item \textbf{ComfyUI Official Docs} --- \url{https://docs.comfy.org}
+  \item \textbf{Comfy.org Blog} --- Security and release announcements
+  \item \textbf{artokun/comfyui-mcp} --- Full MCP server with Claude Code plugin
+  \item \textbf{alecc08/comfyui-mcp} --- T2I/I2I/resize MCP server for Claude Desktop
+  \item \textbf{christian-byrne/claude-code-comfyui-nodes} --- Claude Code as ComfyUI nodes
+  \item \textbf{Snyk Labs} --- Custom node security research (Dec 2024 / updated May 2025)
+  \item \textbf{Comfy.org Security Blog} --- January 2025 security update post
+  \item \textbf{InsiderLLM} --- Local video generation benchmark guide (Feb 2026)
+  \item \textbf{NVIDIA Blogs} --- GDC 2026 RTX/ComfyUI optimization announcements
+\end{itemize}
+
+\subsection{Module 01 Reference --- ComfyUI API Bridge}
+
+\subsubsection{Architecture Overview}
+
+ComfyUI implements a Python backend (PyTorch inference engine) paired with a Flask-based
+HTTP server and a JavaScript frontend (litegraph.js). The critical architectural property
+for skill-creator integration is that the UI is merely a frontend for the same HTTP
+endpoints any programmatic client uses. Swapping the UI layer does not touch the inference
+engine.
+
+The graph executes lazily: nodes evaluate only when their outputs are needed. Partial
+re-execution is a first-class feature: only subgraph nodes that changed between
+executions re-run. For skill-creator, this means submitting a workflow with a new seed
+or prompt does not reload the checkpoint from disk --- model weights stay resident in VRAM.
+
+\subsubsection{Core API Endpoints}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Endpoint} & \tableheader{Method} & \tableheader{Purpose} \\
+\midrule
+\texttt{/prompt} & POST & Submit workflow JSON for execution \\
+\texttt{/ws} & WebSocket & Real-time node progress events \\
+\texttt{/history/\{prompt\_id\}} & GET & Retrieve output filenames + metadata \\
+\texttt{/view} & GET & Fetch generated image bytes by filename \\
+\texttt{/object\_info} & GET & Full node catalog: types, inputs, defaults \\
+\texttt{/free} & POST & Unload cached models, free VRAM \\
+\texttt{/queue} & GET/DELETE & Queue status, cancel pending jobs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Workflow JSON Schema}
+
+A ComfyUI workflow submitted to \texttt{/prompt} is a flat dictionary mapping string
+node IDs to node descriptor objects. Each descriptor has a \texttt{class\_type} (the
+registered node class name) and an \texttt{inputs} dictionary. Upstream node outputs
+are referenced as two-element arrays \texttt{[node\_id, output\_index]}.
+
+\begin{asciibox}
+{
+  "prompt": {
+    "1": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": { "ckpt_name": "flux1-dev-fp8.safetensors" }
+    },
+    "2": {
+      "class_type": "CLIPTextEncode",
+      "inputs": { "text": "...", "clip": ["1", 1] }
+    },
+    "3": {
+      "class_type": "KSampler",
+      "inputs": {
+        "model": ["1", 0],
+        "positive": ["2", 0],
+        "seed": 42, "steps": 20, "cfg": 3.5,
+        "sampler_name": "euler", "scheduler": "normal"
+      }
+    }
+  }
+}
+\end{asciibox}
+
+\subsubsection{Python Client Patterns}
+
+Two integration patterns are documented in ComfyUI's \texttt{script\_examples}:
+
+\textbf{Pattern A (SaveImage + polling):} Submit workflow $\to$ poll
+\texttt{/history/\{id\}} until complete $\to$ fetch image bytes via \texttt{/view}.
+Suitable for batch jobs where real-time feedback is not needed.
+
+\textbf{Pattern B (SaveImageWebsocket + streaming):} Submit workflow using
+\texttt{SaveImageWebsocket} node $\to$ receive binary image frames directly over
+the WebSocket connection. More efficient for real-time applications; no disk I/O
+for intermediate results.
+
+\textbf{ComfyScript} (Chaoses-Ib/ComfyScript) provides a Python DSL that transpiles
+to workflow JSON, enabling loops, conditionals, and library calls mixed with ComfyUI
+node chains --- directly relevant for skill-creator's batch generation and parameter
+sweep use cases.
+
+\textbf{ComfyUI-to-Python} (pydn) translates saved workflow JSON files into executable
+Python scripts. CLI option \texttt{--output -} pipes the generated image to stdout,
+enabling shell-level integration.
+
+\subsection{Module 02 Reference --- Image Production Pipeline}
+
+\subsubsection{Model Landscape (March 2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}L{2.2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{VRAM (FP16)} & \tableheader{License} & \tableheader{Notes} \\
+\midrule
+FLUX.1 Dev & 24 GB & Non-commercial & Best prompt adherence; T5-XXL text encoder (10GB alone) \\
+FLUX.1 Dev FP8 & 12--16 GB & Non-commercial & Minimal quality loss vs FP16; recommended for 16GB tier \\
+FLUX.1 Dev GGUF Q4 & 8 GB & Non-commercial & Quantized via ComfyUI-GGUF; viable on RTX 3060 12GB \\
+FLUX.1 Schnell & 12 GB & Apache 2.0 & 4-step distilled; 5x faster than Dev; commercial use OK \\
+FLUX.2 Klein 4B/9B & 8--12 GB & TBD & NVFP4 support; Day-0 ComfyUI; GDC 2026 announcement \\
+SDXL Base 1.0 & 8 GB & RAIL-M & Workhorse; thousands of community fine-tunes on CivitAI \\
+SD 3.5 Medium & 8 GB & Stability AI & Better text rendering than SDXL; triple CLIP encoding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{VRAM Tier Routing}
+
+Skill-Creator's VRAM tier routing selects the appropriate model variant at startup.
+Community benchmarks and official documentation establish these tiers:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{VRAM} & \tableheader{GPU Examples} & \tableheader{Recommended Image Config} \\
+\midrule
+8 GB & RTX 3060, 4060 & SDXL standard; FLUX GGUF Q4 with \texttt{--lowvram} \\
+12 GB & RTX 3060 12GB & SDXL + ControlNet; FLUX FP8 at 768px \\
+16 GB & RTX 4080, 4060 Ti 16GB & FLUX.1 Dev FP8 at 1024px (recommended sweet spot) \\
+24 GB & RTX 4090, RTX 3090 & FLUX.1 Dev FP16 full precision; SDXL batches \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{ControlNet and LoRA Integration}
+
+ControlNet nodes extract structural features (edges, depth, pose) from reference images
+and condition the generation process. The ComfyUI node chain: preprocessor node
+(e.g., DWPose for pose estimation) $\to$ ControlNet Apply node $\to$ KSampler.
+Strength parameter (0--1) tunes influence. LoRA files load via a dedicated
+\texttt{LoRALoader} node inserted between \texttt{CheckpointLoaderSimple} and
+\texttt{CLIPTextEncode}. Multiple LoRAs stack.
+
+\subsubsection{NVIDIA RTX Optimization Path (March 2026)}
+
+NVIDIA announced at GDC 2026 that NVFP4 and FP8 model variants are now available for
+FLUX.2 Klein and LTX-2.3 in ComfyUI, delivering up to 2.5x performance improvement
+and 60\% VRAM reduction on RTX 50-series GPUs. RTX Video Super Resolution is available
+as a standalone ComfyUI node (4K upscale 30x faster than ESRGAN alternatives). For
+the GSD integration, this optimization path should be auto-detected via GPU model
+string and applied automatically by the VRAM router skill.
+
+\subsection{Module 03 Reference --- Video Production Pipeline}
+
+\subsubsection{Video Model Matrix (March 2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Min VRAM} & \tableheader{License} & \tableheader{Strengths} \\
+\midrule
+LTX-2.3 & 16 GB (24GB full) & Custom & Real-time 4K; audio sync; Day-0 ComfyUI v0.16; best temporal consistency \\
+Wan 2.2 & 8 GB (1.3B) & Apache 2.0 & Best photorealism for human subjects; MoE architecture; commercial OK \\
+CogVideoX-5B & 8--12 GB & Apache 2.0 & Best for beginners; strong text comprehension; GGUF quantization \\
+HunyuanVideo 1.5 & 24 GB & Custom & 13B parameter; 40\% VRAM reduction vs v1.0; strong faces \\
+AnimateDiff & 8 GB & Apache 2.0 & Motion modules for SD 1.5/SDXL; access to entire SD ecosystem \\
+Mochi 1 & 20 GB & Apache 2.0 & Historical interest; surpassed by Wan 2.2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Video Pipeline Patterns}
+
+Three production patterns are established in the community as of early 2026:
+
+\textbf{Rapid Iteration Pipeline (LTX-2.3):} Generate at 768$\times$512 in seconds,
+iterate on prompts, then upscale winners with RTX Video Super Resolution 4K node.
+Lowest cost-per-iteration path.
+
+\textbf{Quality Pipeline (Wan 2.2 + post-processing):} Generate at 480p/720p,
+upscale with RealESRGAN 4$\times$, interpolate frames with RIFE or GIMM-VFI.
+Best photorealism; higher per-clip compute.
+
+\textbf{Image-to-Video Pipeline (FLUX/SDXL + CogVideoX I2V):} Generate a hero
+image with FLUX or SDXL, animate it with CogVideoX's image-to-video mode.
+Strong compositional control; consistent style across clips.
+
+\subsubsection{Audio-Conditioned Video (LTX-2.3)}
+
+LTX-2.3 supports audio-driven video generation by conditioning the diffusion process
+on mel-spectrogram features extracted from input audio. ComfyUI v0.16 provides Day-0
+support with dedicated LTX 2.3 nodes. Minimum 24GB VRAM native; 16GB with quantized
+models at lower resolutions. Workflow supports T2V, I2V, and audio-driven modes
+within the same node graph.
+
+For GSD's Deep Audio Analyzer mission, this creates a direct bridge: audio analysis
+outputs (tempo, energy envelope, frequency bands) can parameterize the mel-spectrogram
+conditioning, producing video that responds to analyzed musical structure.
+
+\subsubsection{Multi-Clip Assembly}
+
+Current models cap at 5--10 second clips. Longer sequences require generating
+multiple clips with consistent seeds and overlapping prompts, then assembling via
+a post-processing node chain. RIFE frame interpolation smooths transitions.
+Quality degrades with naive stitching; keyframing techniques with seed control
+maintain consistency.
+
+\subsection{Module 04 Reference --- Skill-Creator Integration Architecture}
+
+\subsubsection{MCP Server Landscape}
+
+A dedicated ecosystem of ComfyUI MCP servers has emerged, all connecting Claude
+agents to local ComfyUI instances over stdio/SSE transports:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Repository} & \tableheader{Capabilities} \\
+\midrule
+artokun/comfyui-mcp & Full-featured: workflow execution, visualization, parameter sweep, progress monitor, VRAM watchdog, debug, model management; Claude Code plugin with slash commands \\
+alecc08/comfyui-mcp & T2I, img2img, resize; intelligent parameter injection; request history; REST API for MCP tools \\
+nikolaibibo/claude-comfyui-mcp & Template-based simple generation; \texttt{comfy\_generate\_simple}, \texttt{comfy\_submit\_workflow}, \texttt{comfy\_get\_status} tools \\
+christian-byrne/claude-code-comfyui-nodes & Inverse direction: Claude Code agents as ComfyUI nodes; stateless command execution; context chaining \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{DACP Bundle Schema for Generation}
+
+Applying DACP to ComfyUI dispatch produces a three-part bundle:
+
+\begin{asciibox}
+DACP Generation Bundle
+{
+  "intent": {
+    "type": "image_generation",
+    "description": "Generate hero image for Seattle hip-hop module cover",
+    "output_path": ".planning/staging/assets/module05_cover.png"
+  },
+  "data": {
+    "model_tier": "16gb",
+    "workflow_template": "flux_fp8_standard",
+    "positive_prompt": "...",
+    "negative_prompt": "...",
+    "width": 1024, "height": 1024,
+    "steps": 20, "cfg": 3.5, "seed": -1
+  },
+  "executable": {
+    "skill": "comfyui/dispatch.py",
+    "entry": "generate_image",
+    "args": "${data}",
+    "on_complete": "registry.log_generation"
+  }
+}
+\end{asciibox}
+
+\subsubsection{Planning-Bridge Integration Pattern}
+
+The planning-bridge MCP server (\texttt{deposit\_mission} tool connecting claude.ai to
+\texttt{.planning/staging/inbox/}) established the session handshake pattern. The same
+Cloudflare tunnel approach can bridge skill-creator's claude.ai session to a local
+ComfyUI instance, treating ComfyUI as another planning-layer service. The ComfyUI MCP
+server runs as a local process; the Cloudflare tunnel exposes it to the claude.ai
+session; the DACP bundle is deposited as a structured JSON file that the MCP skill
+picks up and dispatches to \texttt{localhost:8188}.
+
+\subsubsection{Skill Registry Feedback Loop}
+
+Generation metadata logged per job: model name, workflow template, positive/negative
+prompt hashes, steps, CFG, seed, VRAM peak (from \texttt{/free} before/after stats),
+generation latency, output artifact path. After 10 generations, skill-creator's
+pattern detection layer can identify recurring prompt structures and propose workflow
+template promotions --- elevating ad-hoc generation parameters to named, reusable
+skill entries.
+
+\subsection{Module 05 Reference --- Security and Sandboxing}
+
+\subsubsection{Threat Surface}
+
+ComfyUI custom nodes run as arbitrary Python code with full system access. Snyk Labs
+research (December 2024, updated May 2025) identified three primary attack vectors:
+(1) \texttt{eval}/\texttt{exec} injection via user-controlled STRING inputs; (2) path
+traversal via unvalidated file inputs enabling arbitrary file write; (3) supply chain
+attacks --- malicious nodes in the community repository, including cryptominer and
+credential-stealer incidents discovered in early 2025.
+
+\subsubsection{ComfyUI Security Roadmap (January 2025 Update)}
+
+The Comfy-Org January 2025 security post committed to: blocking new \texttt{eval}/\texttt{exec}
+calls in registry nodes (immediate); prohibiting runtime pip install by custom nodes
+(6-month migration window); obfuscation detection (multi-statement patterns, undefined
+variables); verified author system; CI-based dependency conflict scanning at
+\texttt{ci.comfy.org}; remote kill switch for malicious nodes via ComfyUI Manager;
+experimental Windows Sandbox for ComfyUI Desktop. The April 2025 Manager update added
+automated scanning for base64 in suspicious contexts, non-standard domain connections,
+and unusual filesystem access patterns.
+
+\subsubsection{GSD Sandboxing Specification}
+
+For GSD integration, the security posture follows the ecosystem's
+\textbf{safety-by-structure} principle: boundaries are architectural, not advisory.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Control} & \tableheader{Type} & \tableheader{Implementation} \\
+\midrule
+Docker isolation & ABSOLUTE & ComfyUI runs in container; host mounts limited to \texttt{/models}, \texttt{/input}, \texttt{/output} \\
+Node allowlist & ABSOLUTE & Only nodes passing manual code audit are installed; list version-pinned \\
+eval/exec ban & ABSOLUTE & Any custom node using eval/exec is excluded regardless of source reputation \\
+No credentials in env & ABSOLUTE & ComfyUI server environment contains no tokens, keys, or credentials \\
+Network isolation & GATE & Container has no outbound network except \texttt{huggingface.co} model downloads (during setup only) \\
+Runtime pip ban & GATE & No node may install packages at runtime; all deps in \texttt{requirements.txt} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Approach} \\
+\midrule
+Custom node supply chain & ABSOLUTE & Allowlist-only; no untested nodes installed in production \\
+Credentials in server env & ABSOLUTE & No tokens or keys in ComfyUI Docker environment \\
+Model licensing for commercial use & GATE & FLUX.1 Dev is non-commercial; Schnell/Wan/CogVideoX are Apache 2.0 \\
+Content filtering bypass & ANNOTATE & Local deployment has no cloud content filters; user responsibility for acceptable use policy \\
+VRAM exhaustion / OOM & ANNOTATE & VRAM watchdog (artokun pattern) logs warnings; clear\_vram before large jobs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official Repositories and Documentation}
+\begin{itemize}[leftmargin=1.5em]
+  \item Comfy-Org/ComfyUI. \textit{GitHub Repository}. \url{https://github.com/comfy-org/ComfyUI}
+  \item ComfyUI Official Documentation. \url{https://docs.comfy.org}
+  \item artokun/comfyui-mcp. \textit{GitHub Repository}. \url{https://github.com/artokun/comfyui-mcp}
+  \item alecc08/comfyui-mcp. \textit{GitHub Repository}. \url{https://github.com/alecc08/comfyui-mcp}
+  \item christian-byrne/claude-code-comfyui-nodes. \textit{GitHub Repository}. \url{https://github.com/christian-byrne/claude-code-comfyui-nodes}
+  \item Chaoses-Ib/ComfyScript. \textit{GitHub Repository}. \url{https://github.com/Chaoses-Ib/ComfyScript}
+  \item pydn/ComfyUI-to-Python-Extension. \textit{GitHub Repository}. \url{https://github.com/pydn/ComfyUI-to-Python-Extension}
+  \item SaladTechnologies/comfyui-api. \textit{GitHub Repository}. \url{https://github.com/SaladTechnologies/comfyui-api}
+\end{itemize}
+
+\subsubsection{Security Research}
+\begin{itemize}[leftmargin=1.5em]
+  \item Snyk Labs. ``Don't Get Too Comfortable: Hacking ComfyUI Through Custom Nodes.'' December 16, 2024 (updated May 27, 2025). \url{https://labs.snyk.io/resources/hacking-comfyui-through-custom-nodes/}
+  \item Yan, Yoland. ``ComfyUI 2025 Jan Security Update.'' Comfy.org Blog, January 3, 2025. \url{https://blog.comfy.org/p/comfyui-2025-jan-security-update}
+  \item Doyensec LLC. ``ComfyUI Manager RCE via Custom Node Install.'' Security Advisory, 2025.
+  \item Apatero. ``ComfyUI Custom Nodes Security Guide.'' November 26, 2025. \url{https://apatero.com/blog/comfyui-custom-nodes-security-guide-protect-yourself-2025}
+\end{itemize}
+
+\subsubsection{Model and Hardware Research}
+\begin{itemize}[leftmargin=1.5em]
+  \item NVIDIA Blogs. ``NVIDIA and ComfyUI Streamline Local AI Video Generation at GDC.'' March 2026. \url{https://blogs.nvidia.com/blog/rtx-ai-garage-flux-ltx-video-comfyui-gdc/}
+  \item InsiderLLM. ``Local AI Video Generation: What Works in 2026.'' February 5, 2026. \url{https://insiderllm.com/guides/local-ai-video-generation/}
+  \item AI Free Forever. ``31 Open-Source AI Video Models: Free Tools to Make Videos in 2026.'' \url{https://aifreeforever.com/blog/open-source-ai-video-models-free-tools-to-make-videos}
+  \item Apatero. ``Best Open Source Video AI Models 2025: Complete Comparison.'' December 3, 2025. \url{https://apatero.com/blog/open-source-video-models-comparison-december-2025}
+  \item Apatero. ``Run AI Image Generator Locally: GPU Guide 2026.'' February 13, 2026. \url{https://apatero.com/blog/run-ai-image-generator-locally-gpu-guide-2026}
+  \item Apatero. ``ComfyUI LTX 2.3 Workflow: Audio-Synced Video Tutorial.'' March 2026. \url{https://apatero.com/blog/comfyui-ltx-2-3-audio-video-workflow-tutorial-2026}
+  \item Mucahitceylan. ``ComfyUI: A Technical Deep Dive.'' Medium, September 2025. \url{https://medium.com/@mucahitceylan/comfyui-a-technical-deep-dive-into-the-ultimate-stable-diffusion-workflow-engine-df1a7db3f7f5}
+  \item Awesome Agents. ``The Best AI Image Generation Models You Can Run on Your Own GPU in 2026.'' February 2026. \url{https://awesomeagents.ai/guides/best-local-image-generation-models-2026/}
+\end{itemize}
+
+\subsubsection{Integration and Deployment}
+\begin{itemize}[leftmargin=1.5em]
+  \item DevLog 20250710. ``ComfyUI API.'' DEV Community. \url{https://dev.to/methodox/devlog-20250710-comfyui-api-1mi0}
+  \item BentoML. ``Deploying Custom ComfyUI Workflows as APIs.'' \url{https://www.baseten.co/blog/deploying-custom-comfyui-workflows-as-apis/}
+  \item BentoML Documentation. ``ComfyUI: Deploy workflows as APIs.'' \url{https://docs.bentoml.com/en/latest/examples/comfyui.html}
+  \item ViewComfy. ``Integrate ComfyUI Workflows into your apps via API.'' April 2025. \url{https://www.viewcomfy.com/blog/integrate-comfyui-workflows-into-your-apps-via-api}
+  \item Wong, Shawn. ``How to Use ComfyUI API with Python.'' Medium, March 2025. \url{https://medium.com/@next.trail.tech/how-to-use-comfyui-api-with-python-a-complete-guide-f786da157d37}
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Design, implement, and validate a DACP-compliant ComfyUI integration skill for the
+GSD Skill-Creator ecosystem that enables any Skill-Creator agent to dispatch local
+image and video generation requests to a Docker-isolated ComfyUI instance, track
+progress over WebSocket, receive artifacts, and accumulate generation metadata in the
+skill registry --- all within the Amiga Principle of architectural elegance over
+brute force.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave 0: Foundation
+  [schema] [vram_table] [node_allowlist] [workflow_templates]
+                    |
+  +-----------------+--------------------+
+  |                                      |
+Wave 1A: API Bridge          Wave 1B: Production Pipelines
+  Module 01 implementation      Modules 02 + 03 implementation
+  Python client skill           Image + Video workflow templates
+  WebSocket handler             VRAM routing + model selection
+  DACP bundle schema            Audio-conditioned video spec
+  |                                      |
+  +-----------------+--------------------+
+                    |
+Wave 2: Integration + Security
+  Module 04: DACP integration + MCP bridge
+  Module 05: Docker spec + node security audit
+                    |
+Wave 3: Publication + Verification
+  Full integration test + documentation
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Schema Layer (Wave 0):} Shared DACP bundle schema, VRAM tier table, node allowlist,
+  workflow template library (JSON files)
+  \item \textbf{API Bridge Layer (Wave 1A):} Python skill file, REST client, WebSocket handler,
+  artifact retrieval, model auto-discovery
+  \item \textbf{Pipeline Layer (Wave 1B):} Image workflow templates (FLUX/SDXL), video workflow
+  templates (LTX-2.3/Wan/CogVideoX), VRAM router, upscale chain
+  \item \textbf{Integration Layer (Wave 2):} DACP bundle builder, MCP bridge spec, registry
+  feedback loop, planning-bridge handshake
+  \item \textbf{Security Layer (Wave 2):} Docker Compose spec, node allowlist audit, security
+  boundary tests
+  \item \textbf{Verification Layer (Wave 3):} Integration test suite, documentation, skill
+  registry seeding
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Wave} \\
+\midrule
+1 & DACP bundle schema & JSON Schema spec passes validation; all three fields required & Wave 0 \\
+2 & VRAM tier routing table & Covers 8/12/16/24GB tiers; auto-selects model variant & Wave 0 \\
+3 & Node allowlist & $\geq$10 audited nodes; eval/exec and runtime-pip checks complete & Wave 0 \\
+4 & Workflow templates & $\geq$5 templates (FLUX FP8, SDXL, SDXL+ControlNet, LTX-2.3 T2V, Wan T2V) & Wave 0 \\
+5 & ComfyUI Python skill & Dispatches workflow, tracks WebSocket, retrieves artifact & Wave 1A \\
+6 & Model auto-discovery & \texttt{/object\_info} parsed at startup; checkpoints enumerated & Wave 1A \\
+7 & Image pipeline & FLUX FP8 round-trip $<$90s on 16GB GPU & Wave 1B \\
+8 & Video pipeline & LTX-2.3 or Wan 2.2 T2V completes; MP4 artifact returned & Wave 1B \\
+9 & MCP bridge spec & Planning-bridge pattern adapted for ComfyUI; handshake documented & Wave 2 \\
+10 & Registry feedback loop & 10-generation test: metadata logged, patterns surfaced & Wave 2 \\
+11 & Docker Compose spec & Isolated container: only \texttt{/models}, \texttt{/input}, \texttt{/output} mounts & Wave 2 \\
+12 & Security boundary tests & Container cannot access host FS outside mounts (verified) & Wave 2 \\
+13 & Integration test & Full brief $\to$ artifact pipeline runs without human intervention & Wave 3 \\
+14 & Skill documentation & SKILL.md, README, and workflow template usage guide & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}L{1.8cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema + tables & None & Haiku & 8k \\
+DACP bundle schema spec & Shared schema & Sonnet & 12k \\
+VRAM tier routing table & Shared schema & Haiku & 6k \\
+Node allowlist audit & None & Sonnet & 15k \\
+Workflow template library & VRAM table & Sonnet & 20k \\
+ComfyUI Python skill (API bridge) & Schema, templates & Sonnet & 25k \\
+WebSocket handler + artifact retrieval & Python skill & Sonnet & 15k \\
+Model auto-discovery module & API bridge & Sonnet & 10k \\
+Image workflow FLUX/SDXL & API bridge, templates & Sonnet & 18k \\
+Video workflow LTX/Wan/CogVideoX & API bridge, templates & Sonnet & 20k \\
+DACP integration + MCP bridge spec & All Wave 1 components & Opus & 30k \\
+Registry feedback loop & MCP bridge, API bridge & Opus & 20k \\
+Docker Compose + security spec & Node allowlist & Opus & 18k \\
+Security boundary tests & Docker spec & Sonnet & 12k \\
+Integration test suite & All components & Opus & 25k \\
+Documentation (SKILL.md + README) & All components & Sonnet & 15k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & $\sim$30\% & DACP integration architecture; MCP bridge design; registry feedback loop; Docker security spec; integration test design; cross-module synthesis \\
+Sonnet & $\sim$60\% & Python skill implementation; workflow templates; WebSocket handler; node allowlist audit; image/video pipeline code; documentation \\
+Haiku & $\sim$10\% & Shared schema scaffolding; VRAM tier table; JSON fixtures; boilerplate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku + Sonnet & Schema, VRAM table, allowlist, workflow templates \\
+1A & API Bridge & Parallel & Sonnet & Python skill, WebSocket handler, auto-discovery \\
+1B & Pipelines & Parallel & Sonnet & Image + video workflow implementations \\
+2 & Integration + Security & Sequential & Opus + Sonnet & DACP integration, MCP bridge, Docker spec \\
+3 & Publication & Sequential & Sonnet + Opus & Integration tests, documentation, registry seeding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Deliverable} \\
+\midrule
+DACP bundle JSON schema & EXEC-1 & Sonnet & \texttt{schemas/generation\_bundle.json} \\
+VRAM tier routing table & EXEC-1 & Haiku & \texttt{config/vram\_tiers.yaml} \\
+Node allowlist initialization & EXEC-2 & Sonnet & \texttt{config/node\_allowlist.yaml} (10 audited nodes) \\
+Workflow template stubs & EXEC-2 & Haiku & \texttt{templates/*.json} (5 template stubs) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{HITL Gate:} Review DACP schema and node allowlist before Wave 1 begins. Allowlist
+requires Tibsfox approval --- no node installs before manual code audit signoff.
+
+\subsection{Wave 1A: API Bridge (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Deliverable} \\
+\midrule
+ComfyUI Python skill dispatch & EXEC-1 & Sonnet & \texttt{comfyui/dispatch.py} \\
+WebSocket progress handler & EXEC-1 & Sonnet & \texttt{comfyui/ws\_monitor.py} \\
+Artifact retrieval + history & EXEC-1 & Sonnet & \texttt{comfyui/artifacts.py} \\
+Model auto-discovery & EXEC-1 & Sonnet & \texttt{comfyui/discover.py} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Production Pipelines (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Deliverable} \\
+\midrule
+FLUX FP8 image workflow & EXEC-2 & Sonnet & \texttt{templates/flux\_fp8.json} (complete) \\
+SDXL standard workflow & EXEC-2 & Sonnet & \texttt{templates/sdxl\_standard.json} \\
+SDXL + ControlNet workflow & EXEC-2 & Sonnet & \texttt{templates/sdxl\_controlnet.json} \\
+LTX-2.3 T2V workflow & EXEC-2 & Sonnet & \texttt{templates/ltx23\_t2v.json} \\
+Wan 2.2 T2V workflow & EXEC-2 & Sonnet & \texttt{templates/wan22\_t2v.json} \\
+CogVideoX I2V workflow & EXEC-2 & Sonnet & \texttt{templates/cogvideox\_i2v.json} \\
+VRAM router implementation & EXEC-2 & Sonnet & \texttt{comfyui/vram\_router.py} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{HITL Gate:} Review workflow templates before Wave 2. Verify VRAM router selects
+correct template given test GPU profiles. Test at least one image generation round-trip.
+
+\subsection{Wave 2: Integration + Security}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Deliverable} \\
+\midrule
+DACP bundle builder + validator & CRAFT-API & Opus & \texttt{comfyui/dacp\_builder.py} \\
+MCP bridge integration spec & CRAFT-API & Opus & \texttt{docs/mcp\_bridge\_spec.md} \\
+Registry feedback loop & CRAFT-API & Opus & \texttt{comfyui/registry\_logger.py} \\
+Docker Compose spec & CRAFT-SEC & Opus & \texttt{docker/docker-compose.yml} \\
+Security boundary test suite & CRAFT-SEC & Sonnet & \texttt{tests/security/} \\
+Node allowlist deep audit & CRAFT-SEC & Opus & \texttt{config/node\_allowlist.yaml} (completed) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Deliverable} \\
+\midrule
+Full integration test & EXEC-1 & Opus & Test report: brief $\to$ artifact pipeline \\
+Core functionality tests & EXEC-2 & Sonnet & \texttt{tests/core/} test suite \\
+SKILL.md documentation & EXEC-2 & Sonnet & \texttt{.claude/skills/comfyui/SKILL.md} \\
+README and workflow guide & EXEC-2 & Sonnet & \texttt{README.md} \\
+Registry seeding (10 test generations) & EXEC-1 & Sonnet & \texttt{.skill\_registry/comfyui/} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Shared DACP schema computed once in Wave 0; injected into all Wave 1/2 contexts as system prompt prefix
+  \item VRAM tier table compiled once; distributed to all workflow template tasks as constant reference
+  \item Workflow template stubs from Wave 0 serve as cache seeds for Wave 1B completions
+  \item Python skill modules (dispatch.py, ws\_monitor.py, artifacts.py) share a common ComfyUI client base class, enabling cache-hit on the base class definition across modules
+  \item 5-minute TTL cache optimization: Wave 1A and 1B tasks share the same base prompt prefix (ComfyUI endpoint spec) to maximize prefix cache hits between parallel agents
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Primary Tasks} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0 & Schema + tables + templates & 61k \\
+Wave 1A & API bridge (3 modules) & 50k \\
+Wave 1B & 6 workflow templates + router & 73k \\
+Wave 2 & Integration + security (6 modules) & 110k \\
+Wave 3 & Tests + documentation & 55k \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total Estimated}} & \textbf{349k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[W0: schema] ──────────────────────────────────────┐
+[W0: vram_table] ───────────────────────────────────┤
+[W0: node_allowlist] ───────────────────────────────┤
+[W0: template_stubs] ───────────────────────────────┤
+                                                     │
+             ┌───────────────────────────────────────┘
+             │
+  ┌──────────┴──────────┐
+  │ [HITL Gate 0]       │
+  └──────────┬──────────┘
+             │
+  ┌──────────┴──────────┐        ┌─────────────────────┐
+  │ W1A: API Bridge     │        │ W1B: Pipelines      │
+  │  dispatch.py        │        │  flux_fp8.json      │
+  │  ws_monitor.py      │        │  wan22_t2v.json     │
+  │  artifacts.py       │        │  ltx23_t2v.json     │
+  │  discover.py        │        │  vram_router.py     │
+  └──────────┬──────────┘        └─────────────────────┘
+             │                               │
+  ┌──────────┴───────────────────────────────┘
+  │ [HITL Gate 1]
+  └──────────┬──────────┐
+             │
+  ┌──────────┴──────────┐
+  │ W2: Integration     │
+  │  dacp_builder.py    │
+  │  mcp_bridge_spec    │
+  │  docker-compose.yml │
+  │  security tests     │
+  └──────────┬──────────┘
+             │
+  ┌──────────┴──────────┐
+  │ W3: Publication     │
+  │  integration test   │
+  │  SKILL.md           │
+  └─────────────────────┘
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Scope} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & Security boundaries, node audit, credentials \\
+Core functionality & 18 & Required & BLOCK & API bridge, VRAM routing, artifact retrieval \\
+Integration & 10 & Required & BLOCK & DACP bundle, MCP bridge, registry loop \\
+Edge cases & 8 & Best-effort & LOG & OOM handling, missing models, malformed workflows \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & Node allowlist enforcement & ComfyUI container refuses to load any custom node not on the audited allowlist \\
+SC-02 & No eval/exec in allowed nodes & Static scan of all allowlisted node Python files finds zero eval() or exec() calls \\
+SC-03 & No runtime pip install & Allowlisted nodes contain no subprocess pip calls or importlib runtime installs \\
+SC-04 & Docker filesystem isolation & Container cannot write to or read from host paths outside \texttt{/models}, \texttt{/input}, \texttt{/output} \\
+SC-05 & No credentials in environment & \texttt{docker inspect} of ComfyUI container environment contains no API keys, tokens, or passwords \\
+SC-06 & No outbound network from container & Container network policy blocks all outbound connections except model download allow-list (setup phase only) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Skill dispatches to ComfyUI via POST /prompt & CF-01, CF-02 & Pending \\
+2. DACP bundle schema is formally specified & CF-03, CF-04 & Pending \\
+3. VRAM routing covers all four tiers & CF-05, CF-06, CF-07, CF-08 & Pending \\
+4. Image round-trip $<$90s on 16GB GPU & CF-09, CF-10 & Pending \\
+5. Video round-trip completes with MP4 artifact & CF-11, CF-12 & Pending \\
+6. Node allowlist passes Docker security audit & SC-01, SC-02, SC-03 & Pending \\
+7. Registry accumulates 10-generation metadata & IN-01, IN-02 & Pending \\
+8. MCP bridge connection demonstrated & IN-03, IN-04 & Pending \\
+9. Model auto-discovery populates checkpoints & CF-13, CF-14 & Pending \\
+10. Partial re-execution optimization verified & CF-15 & Pending \\
+11. Docker isolation verified & SC-04, SC-05, SC-06 & Pending \\
+12. Full pipeline brief $\to$ artifact & IN-05, IN-06, IN-07 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at each HITL gate \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency sequencing \\
+SCOUT & Research Agent & Additional web research if model landscape changes during execution \\
+EXEC-1 & API Bridge Executor & Modules 01 + integration test (dispatch.py, ws\_monitor.py, etc.) \\
+EXEC-2 & Pipeline Executor & Modules 02 + 03 (workflow templates, VRAM router) \\
+CRAFT-API & API Architect & DACP integration, MCP bridge spec, registry feedback loop \\
+CRAFT-SEC & Security Warden & Docker spec, node allowlist audit, security boundary tests \\
+VERIFY & Verification Agent & Source validation; schema compliance; test execution \\
+INTEG & Integration Agent & Cross-module validation; DACP bundle round-trip testing \\
+CAPCOM & HITL Interface & Human approval channel at Wave 0, 1, and 3 gates \\
+BUDGET & Resource Manager & Token budget tracking; session boundary planning \\
+SURGEON & Health Monitor & Research quality degradation detection; OOM event logging \\
+LOG & Chronicle Agent & Audit trail; commit messages; skill registry entries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (API Bridge, Image Pipeline, Video Pipeline, Integration, Security) \\
+Estimated Token Budget & 349k across all waves \\
+Estimated Context Windows & 4--6 windows across 2--3 Claude Code sessions \\
+Parallel Tracks & 2 (Wave 1A: API Bridge, Wave 1B: Pipelines) \\
+HITL Gates & 3 (post-Wave 0, post-Wave 1, post-Wave 3) \\
+Safety-Critical Tests & 6 (all BLOCK on failure) \\
+Total Test Cases & 42 \\
+Primary Deliverable & \texttt{.claude/skills/comfyui/} skill directory \\
+Secondary Deliverable & \texttt{docker/} container spec for isolated ComfyUI deployment \\
+Licensing Constraint & FLUX.1 Dev = non-commercial; use Schnell/Wan/CogVideoX for commercial work \\
+Primary Target GPU & RTX 4090 (24GB) for full pipeline; RTX 4060 Ti 16GB for FLUX FP8 \\
+Repository & github.com/Tibsfox/gsd-skill-creator (dev branch) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Each node represents a specific operation, and the connections between them define
+the data flow. The beauty of ComfyUI lies in its flexibility --- the graph is not a
+command sequence but a topology of dependencies.''}\\[0.5em]
+--- Technical summary of ComfyUI's DAG architecture, adapted from community documentation\\[1em]
+The GSD skill is not a command either. It is a topology: intent $\rightarrow$ data
+$\rightarrow$ executable. The workflow graph is the spaces between the nodes made legible.
+When the KSampler traverses the latent space, it is solving the same kind of problem
+the versine solves --- reaching across the gap between two known points to find what
+lives in the arc between them. The Amiga Principle holds: not more power, but better
+connections.
+\end{quotebox}
+
+\end{document}

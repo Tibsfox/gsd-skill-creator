@@ -31,6 +31,7 @@
     { id: 'CHS', name: 'Chaos Sense', path: 'CHS/index.html' },
     { id: 'CDL', name: 'College Deep Linking', path: 'CDL/index.html' },
     { id: 'CDS', name: 'Central District', path: 'CDS/index.html' },
+    { id: 'CFU', name: 'ComfyUI', path: 'CFU/index.html' },
     { id: 'CDP', name: 'Coldplay', path: 'CDP/index.html' },
     { id: 'COI', name: 'Coil', path: 'COI/index.html' },
     { id: 'COK', name: 'College of Knowledge', path: 'COK/index.html' },
