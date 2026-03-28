@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Beautiful Mind — GSD Research Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #311B92;
+      --secondary: #880E4F;
+      --tertiary: #004D40;
+      --accent: #512DA8;
+      --light-primary: #EDE7F6;
+      --light-secondary: #FCE4EC;
+      --gold: #F9A825;
+      --bg: #0D0B1A;
+      --surface: #1A1530;
+      --card: #221D3A;
+      --card-dark: #1D1830;
+      --border: rgba(129, 100, 255, 0.2);
+      --text: #E8E4FF;
+      --muted: #9B95BB;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1A0A4E 0%, #2D1B69 40%, #1A0A3D 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(129,100,255,0.15) 0%, transparent 70%);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+    }
+
+    .mission-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span {
+      color: #B39DDB;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #C5BCE8;
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+
+    .tagline {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .pipeline {
+      margin-top: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .pipe-stage {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .pipe-stage.vision  { background: rgba(49,27,146,0.6); color: #B39DDB; border: 1px solid rgba(179,157,219,0.3); }
+    .pipe-stage.research { background: rgba(136,14,79,0.5); color: #F48FB1; border: 1px solid rgba(244,143,177,0.3); }
+    .pipe-stage.mission { background: rgba(0,77,64,0.5); color: #80CBC4; border: 1px solid rgba(128,203,196,0.3); }
+
+    .pipe-arrow { color: var(--muted); font-size: 1rem; }
+
+    .meta-row {
+      margin-top: 1.4rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .meta-item strong {
+      color: #D1C8F0;
+      font-weight: 500;
+    }
+
+    /* ── Main Content ────────────────────────────────────────────────────── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    /* ── File Cards ──────────────────────────────────────────────────────── */
+    .files-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 620px) {
+      .files-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.8rem; }
+    }
+
+    .file-card {
+      display: block;
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .file-card:hover {
+      background: #261F46;
+      border-color: rgba(179,157,219,0.5);
+      transform: translateY(-2px);
+    }
+
+    .file-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .file-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #D1C8F0;
+      margin-bottom: 0.3rem;
+    }
+
+    .file-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .file-size {
+      margin-top: 0.7rem;
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Sections ────────────────────────────────────────────────────────── */
+    section { margin-bottom: 2.2rem; }
+
+    section h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #B39DDB;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Contents Table ──────────────────────────────────────────────────── */
+    .contents-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    @media (max-width: 620px) {
+      .contents-grid { grid-template-columns: 1fr; }
+    }
+
+    .stage-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+
+    .stage-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stage-label.s1 { color: #B39DDB; }
+    .stage-label.s2 { color: #F48FB1; }
+    .stage-label.s3 { color: #80CBC4; }
+
+    .stage-block ul {
+      list-style: none;
+    }
+
+    .stage-block li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-left: 0.8em;
+      position: relative;
+    }
+
+    .stage-block li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: #6B5BB8;
+    }
+
+    /* ── Modules ─────────────────────────────────────────────────────────── */
+    .modules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .module-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 0.8rem 1.1rem;
+    }
+
+    .module-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      min-width: 2rem;
+    }
+
+    .module-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #D1C8F0;
+      min-width: 10rem;
+    }
+
+    .module-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Instructions ────────────────────────────────────────────────────── */
+    .instructions {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+    }
+
+    .instructions ol {
+      margin-left: 1.2rem;
+    }
+
+    .instructions li {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.3rem;
+    }
+
+    .instructions li strong {
+      color: #D1C8F0;
+    }
+
+    /* ── Code Block ─────────────────────────────────────────────────────── */
+    .code-block {
+      background: #0E0B1E;
+      border: 1px solid rgba(129,100,255,0.15);
+      border-radius: 6px;
+      padding: 0.9rem 1.2rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: #A5F3A5;
+      margin-top: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* ── Quote ───────────────────────────────────────────────────────────── */
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.3rem;
+      background: rgba(81,45,168,0.1);
+      border-radius: 0 6px 6px 0;
+      margin: 0;
+    }
+
+    blockquote p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: #C5BCE8;
+      line-height: 1.65;
+      margin-bottom: 0.5rem;
+    }
+
+    blockquote cite {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #5A537A;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="mission-label">GSD Research Mission Package</div>
+      <h1>A Beautiful Mind<br><span>Neurodivergence, Creativity &amp; Genius</span></h1>
+      <p class="subtitle">Psychology · Neuroscience · Art · Music · Mathematics</p>
+      <p class="tagline">The extraordinary spectrum of human intelligence — mapped and mission-packaged for GSD execution</p>
+
+      <div class="pipeline">
+        <span class="pipe-stage vision">Stage 1: Vision</span>
+        <span class="pipe-arrow">→</span>
+        <span class="pipe-stage research">Stage 2: Research</span>
+        <span class="pipe-arrow">→</span>
+        <span class="pipe-stage mission">Stage 3: Mission</span>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item"><strong>Date:</strong> March 27, 2026</div>
+        <div class="meta-item"><strong>Profile:</strong> Squadron (12 roles)</div>
+        <div class="meta-item"><strong>Modules:</strong> 5</div>
+        <div class="meta-item"><strong>Pages:</strong> 30</div>
+        <div class="meta-item"><strong>Status:</strong> Ready for GSD Orchestrator</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- File Downloads -->
+    <section>
+      <h2>Package Files</h2>
+      <div class="files-grid">
+        <a class="file-card" href="beautiful_mind_mission.pdf" download>
+          <span class="file-icon">📄</span>
+          <div class="file-name">beautiful_mind_mission.pdf</div>
+          <div class="file-desc">Full three-stage mission package. Vision guide, research reference, and executable mission spec in one publication-quality document.</div>
+          <div class="file-size">PDF · 30 pages · 196 KB</div>
+        </a>
+        <a class="file-card" href="beautiful_mind_mission.tex" download>
+          <span class="file-icon">📝</span>
+          <div class="file-name">beautiful_mind_mission.tex</div>
+          <div class="file-desc">XeLaTeX source file. Modify content, add new module findings, update the bibliography, and recompile with three XeLaTeX passes.</div>
+          <div class="file-size">LaTeX Source · Editable</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Contents -->
+    <section>
+      <h2>Document Contents</h2>
+      <div class="contents-grid">
+        <div class="stage-block">
+          <div class="stage-label s1">Stage 1 — Vision</div>
+          <ul>
+            <li>Mission vision narrative</li>
+            <li>Five problem statements</li>
+            <li>Cognitive landscape (ASCII)</li>
+            <li>Module architecture diagram</li>
+            <li>Chipset YAML config</li>
+            <li>12 success criteria</li>
+            <li>Ecosystem relationships</li>
+            <li>The through-line</li>
+          </ul>
+        </div>
+        <div class="stage-block">
+          <div class="stage-label s2">Stage 2 — Research</div>
+          <ul>
+            <li>Paradigm: deficit → difference</li>
+            <li>Neuroscience findings + data</li>
+            <li>Absolute pitch statistics</li>
+            <li>Savant syndrome models</li>
+            <li>Prodigy portraits (20+ figures)</li>
+            <li>Twice-exceptional (2e) profiles</li>
+            <li>Safety considerations table</li>
+            <li>Full bibliography (25+ sources)</li>
+          </ul>
+        </div>
+        <div class="stage-block">
+          <div class="stage-label s3">Stage 3 — Mission</div>
+          <ul>
+            <li>Milestone specification</li>
+            <li>Wave execution plan (4 waves)</li>
+            <li>Parallel track architecture</li>
+            <li>Component breakdown + tokens</li>
+            <li>Cache optimization strategy</li>
+            <li>7 safety-critical tests</li>
+            <li>SC verification matrix</li>
+            <li>Full crew manifest</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Modules -->
+    <section>
+      <h2>Research Modules</h2>
+      <div class="modules-list">
+        <div class="module-item">
+          <span class="module-num">M1</span>
+          <span class="module-title">The Paradigm</span>
+          <span class="module-desc">History of neurodiversity from Judy Singer (1998) through today. Medical model vs. social model. Diagnostic evolution DSM-III → DSM-5.</span>
+        </div>
+        <div class="module-item">
+          <span class="module-num">M2</span>
+          <span class="module-title">The Neuroscience</span>
+          <span class="module-desc">Cognitive architecture of creativity. ADHD divergent thinking. Absolute pitch in autism (5–11% vs &lt;0.01%). Savant hyperconnectivity theory. Dyslexia explorative bias.</span>
+        </div>
+        <div class="module-item">
+          <span class="module-num">M3</span>
+          <span class="module-title">The Prodigies</span>
+          <span class="module-desc">Documented portraits: Nash, Tesla, Turing, Einstein, da Vinci, Mozart, van Gogh, Warhol, Andersen, Dickinson, Grandin, Barnett, and more. Epistemic framework applied throughout.</span>
+        </div>
+        <div class="module-item">
+          <span class="module-num">M4</span>
+          <span class="module-title">Twice-Exceptional (2e)</span>
+          <span class="module-desc">Giftedness meets neurodivergence. Three identification failure modes. Masking and burnout. Adult 2e experience. SENG framework. Evidence-based support systems.</span>
+        </div>
+        <div class="module-item">
+          <span class="module-num">M5</span>
+          <span class="module-title">Enabling Environments</span>
+          <span class="module-desc">Synthesis: cognitive profile × domain alignment × environmental fit. UDL, strengths-based assessment, workplace design. Conditions that unlock vs. suppress neurodivergent genius.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Instructions -->
+    <section>
+      <h2>How to Execute This Mission</h2>
+      <div class="instructions">
+        <ol>
+          <li><strong>Open in Claude Code:</strong> Load the PDF as context for the gsd-skill-creator orchestrator agent.</li>
+          <li><strong>Wave 0 first:</strong> Instruct the Haiku agent to build the source index JSON and portrait schema before any other work begins.</li>
+          <li><strong>CAPCOM gate:</strong> Review the source index before launching Wave 1. Verify all 25+ sources are credible (peer-reviewed, institutional, or professional).</li>
+          <li><strong>Parallel launch:</strong> Wave 1A (M1 + M2) and Wave 1B (M3 + M4) can run in the same session within the 5-minute cache TTL window.</li>
+          <li><strong>Portrait review gate:</strong> Before Wave 2 Opus synthesis, human-review the M3 prodigy portraits for epistemic language compliance (ST-01 test).</li>
+          <li><strong>Opus for synthesis:</strong> M5 and sensitivity review must run on Opus — do not delegate to Sonnet.</li>
+          <li><strong>Verify before delivery:</strong> Run the SC verification matrix and all 7 safety-critical tests before presenting the final document.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- LaTeX Recompile -->
+    <section>
+      <h2>Recompile from Source</h2>
+      <div class="instructions">
+        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:0.6rem;">Edit <code style="color:#A5F3A5; font-size:0.8rem;">beautiful_mind_mission.tex</code> and recompile with three XeLaTeX passes (required for TOC, cross-references, and page count):</p>
+        <div class="code-block">xelatex -interaction=nonstopmode beautiful_mind_mission.tex
+xelatex -interaction=nonstopmode beautiful_mind_mission.tex
+xelatex -interaction=nonstopmode beautiful_mind_mission.tex</div>
+        <p style="font-size:0.75rem; color:var(--muted); margin-top:0.7rem;">Requires XeLaTeX with DejaVu fonts (DejaVu Serif, Sans, Mono) and packages: fontspec, tcolorbox, tabularx, longtable, colortbl, lastpage, fancyhdr, titlesec, booktabs, enumitem, hyperref, xcolor, parskip.</p>
+      </div>
+    </section>
+
+    <!-- Closing Quote -->
+    <section>
+      <h2>Through-Line</h2>
+      <blockquote>
+        <p>"I wouldn't have had good scientific ideas if I had thought more normally."</p>
+        <cite>— John Forbes Nash Jr., Nobel Laureate in Economics, mathematician</cite>
+      </blockquote>
+    </section>
+
+  </main>
+
+  <footer>
+    GSD Research Mission Package · A Beautiful Mind · March 27, 2026 · Vision → Research → Mission
+  </footer>
+
+</body>
+</html>
