@@ -1,0 +1,1037 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: History / Music industry (burgundy + gold + slate) ─────────
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{6A1B9A}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% ── Table helpers ─────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Headers / Footers ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Module 05 Split Analysis}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Module 05 Split Analysis -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Module 05 Split Analysis\\[0.3em]NastyMix Records \& CD Place Memory}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Seattle Hip-Hop Cultural Series}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{What Could Be Better --- A Structural Remediation Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 8--10 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ── TOC ──────────────────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Module 05 Split Analysis --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Structural Remediation / Cold-Start Research}
+\metafield{Parent Series:}{Seattle Hip-Hop Cultural Study}
+\metafield{Problem:}{Module 05 at 613 lines is the longest single module in the series}
+\metafield{Depends on:}{Central District Cultural Study (CD mission), deepaudioanalyzermission.pdf}
+\metafield{Context:}{Investigating whether Module 05 should be decomposed into two focused modules}
+
+\subsection{Vision}
+
+A record label is not the same thing as the neighborhood that produced it. NastyMix Records was
+born in the Central District, but it quickly became something else: a business, a brand, a distribution
+machine, a legal battleground. By 1990, Nastymix had signed acts from Tacoma, New Jersey, Miami,
+and a British Euro-disco duo --- not because Ed Locke stopped caring about Seattle, but because the
+label's logic had outgrown any single neighborhood. The music industry story and the place story began
+diverging the moment ``Square Dance Rap'' broke in Flint, Michigan.
+
+Module 05's 613 lines are overloaded because they are trying to tell both stories at once. The NastyMix
+roster --- Sir Mix-A-Lot, Kid Sensation, High Performance, Criminal Nation, and a dozen lesser-known
+signings --- belongs to a music industry narrative about independent label economics, regional distribution,
+the cassette economy, and what happens when a West Coast label's anchor artist walks out the door. The
+Central District mapping, MOHAI documentation, and gentrification analysis belong to a place narrative
+about a neighborhood that went from 65\% Black to under 20\% Black in a single generation, and the
+cultural institutions that are racing to document what remains.
+
+These are not the same story. They share geography and a time period, but their analytical frames,
+primary sources, and questions of consequence diverge sharply. The label story asks: how does an
+independent hip-hop label work, what does it build, and what destroys it? The place story asks: what
+happens to a neighborhood after the music moves out?
+
+Separating them produces two modules of approximately 280--320 lines each --- consistent with the
+series median and far more focused in execution. It also reveals a structural insight: the NastyMix
+label story is a music industry module, while the CD place memory module is a cultural geography and
+archival module. They require different research methodologies, different primary sources, and different
+analytical frames. Keeping them fused was always a category error.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+\item \textbf{Category mismatch in a single module.} NastyMix Records is a music industry subject
+(label economics, roster strategy, distribution deals, artist-label disputes). The Central District's
+gentrification arc is a cultural geography subject (spatial mapping, demographic data, archival
+documentation, community memory). These require different analytical frames, different primary
+sources, and different success criteria. Fusing them into Module 05 produced a 613-line overshoot
+that serves neither subject adequately.
+
+\item \textbf{The label roster is underdocumented at the individual artist level.} The NastyMix
+roster extended well beyond Sir Mix-A-Lot: Kid Sensation, High Performance (Tacoma), Criminal
+Nation (Tacoma), The Acu\"sed (Oak Harbor metal), Adrienne (R\&B), Whiz Kid, Bob \& the Mob
+(New Jersey), Side F-X (Miami), Rodney O \& Joe Cooley (California). Many of these artists are
+poorly documented in existing modules because they were compressed into a roster list rather than
+receiving the contextual treatment their role in the label's economics demands.
+
+\item \textbf{The MOHAI documentation layer is architecturally important and currently thin.}
+MOHAI's ``Legacy of Seattle Hip-Hop'' exhibit (September 2015 -- May 2016) is the single most
+important institutional documentation of the CD hip-hop scene, curated by community members
+Jazmyn Scott and Aaron Walker-Loud and recognized by the AASLH with a 2016 Leadership in
+History Award. This exhibit warrants detailed treatment as a primary archival source, not a
+passing citation.
+
+\item \textbf{The gentrification data deserves its own analytical arc.} The Central District went
+from over 65\% Black in the 1970s--80s to under 20\% Black by 2020 (MOHAI/AASLH documentation).
+This is a well-documented displacement event with its own timeline, causal factors (redlining,
+tech boom, rising rents), artistic responses (Draze's ``The Hood Ain't The Same,'' 2014), and
+institutional preservation efforts (NAAM, 206 Zulu, Washington Hall, Wa Na Wari). Treating it
+as a sub-point within a label history module buries its significance.
+
+\item \textbf{The split creates two well-scoped parallelizable modules.} Module 05a (NastyMix
+Label Ecosystem) and Module 05b (Central District Place Memory) can run simultaneously in the
+series wave plan, each with a clear self-contained scope, distinct primary sources, and specific
+success criteria. The split also aligns Module 05a with the music industry cluster and Module
+05b with the community heritage cluster within the larger series architecture.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One Zip Code, Two Stories: Separate What Diverges, Connect What Converges}
+
+The NastyMix label and the Central District neighborhood share a founding moment --- the Rotary
+Boys and Girls Club, Sir Mix-A-Lot, Nes Rodriguez, Ed Locke, a Commodore 64, and a cassette.
+But from that shared origin, they follow divergent trajectories. The label expands outward (Tower
+Building, Gold Party at the Four Seasons, national distribution, a New Jersey signing, a British
+duo). The neighborhood contracts inward under gentrification pressure. Separating the two modules
+follows the logic of the divergence. Connecting them through the series wave plan preserves the
+shared origin.
+
+\subsubsection{Module Architecture After Split}
+
+\begin{asciibox}
+BEFORE SPLIT
+  Module 05 (613 lines)
+  |-- NastyMix roster (label economics)
+  |-- Central District mapping (geography)
+  |-- MOHAI documentation (archives)
+  `-- Gentrification analysis (displacement)
+  [CATEGORY ERROR: music industry + cultural geography fused]
+
+AFTER SPLIT
+  Module 05a: NastyMix Label Ecosystem        (~300 lines)
+  |-- Founding story (1985, four co-founders)
+  |-- Complete roster with contextual profiles
+  |-- Business arc: $900 startup to platinum to collapse
+  |-- Distribution mechanics and cassette economics
+  |-- Radio pipeline: KFOX FreshTracks as label infrastructure
+  `-- Collapse: Mix departs 1991, rights, Ichiban partnership
+
+  Module 05b: Central District Place Memory   (~300 lines)
+  |-- Spatial mapping: neighborhood boundaries and key sites
+  |-- MOHAI as primary archive (Legacy exhibit 2015-16)
+  |-- Gentrification arc: 65%+ Black -> under 20% (1970-2020)
+  |-- Redlining foundation: restrictive covenants, segregation
+  |-- Artistic documentation: Draze "The Hood Ain't The Same"
+  `-- Preservation infrastructure: NAAM, 206 Zulu, Wa Na Wari
+
+SERIES INTEGRATION
+  05a feeds: Music industry cluster (label economics, artist development)
+  05b feeds: Community heritage cluster (MOHAI, NAAM, spatial memory)
+  Both connect to: Module 03 (CD ecosystem) as shared foundation
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{MA: NastyMix Founding and Co-Founder Profiles}
+
+The label's founding is a four-person story often collapsed into two. Ed Locke (former KYAC DJ,
+$900 budget, near bankruptcy on first pressing) and Greg Jones (investor) are the business side.
+Nes Rodriguez (Filipino-American, FreshTracks host, the ``Nasty'' of the name) and Sir Mix-A-Lot
+(Anthony Ray, the artist, the product) are the music side. The Tower Building offices at 1809 7th
+Avenue Suite 800 represent the physical expression of the label's success. The NAMA Outstanding
+Achievement Award and back-to-back ``Best Company of the Year'' and ``Independent Record Label
+of the Year'' awards (1990) mark its institutional recognition. Locke's stated goal of expanding
+from rap to ``a variety of pop styles'' explains the diverse and ultimately fatal late-period signings.
+
+\subsubsection{MB: Full Roster --- Regional Acts}
+
+The Northwest core: Sir Mix-A-Lot (Auburn/CD), Kid Sensation (Stephen Spence, Mix's teen prot\'eg\'e,
+first appearance on \textit{Swass} 1988, debut LP \textit{Rollin' With Number One} 1990), High Performance
+(Tacoma hard-core rap, both dance tunes and political songs), Criminal Nation (Tacoma, active 1990--92,
+\textit{Release The Pressure} 1990, \textit{Trouble In The Hood} 1992, DJ Eugenius as regional connector).
+The Acu\"sed (Oak Harbor speed-metal, the label's ill-fated rock expansion). These Northwest acts share
+geographic proximity and the KFOX/FreshTracks promotional pipeline.
+
+\subsubsection{MC: Full Roster --- National Signings}
+
+Locke's 1990 expansion: Adrienne Baseden (R\&B vocalist, Wilberforce University scholar, Whitney
+Houston-vein), Whiz Kid (former New York rapper), Bob \& the Mob (New Jersey, MC Speedo and
+DJ Slayer, funk-rap updates of Spinners and Marvin Gaye), Side F-X (Miami, Reggie ``Kut Mighty
+Swift'' La Lanne), Rodney O \& Joe Cooley (California). These signings represent Locke's attempt
+to diversify beyond Seattle rap --- and the strategic error that diluted the label's identity and
+ultimately failed to produce any second-tier successes.
+
+\subsubsection{MD: Business Arc and Collapse}
+
+\$900 startup budget (1985) $\rightarrow$ ``Square Dance Rap'' breaks in Flint, Michigan $\rightarrow$
+SWASS platinum (1988) $\rightarrow$ Gold Party at the Four Seasons Olympic Hotel (April 29, 1989)
+$\rightarrow$ Seminar gold (1989) $\rightarrow$ Mix departs 1991, takes all rights $\rightarrow$
+Ichiban partnership (rocky) $\rightarrow$ closure 1992. The structural vulnerability: a single-artist
+label whose anchor artist owned his masters. When Mix left, he took the revenue base. The Northwest
+rap expansion (Kid Sensation as ``Seattle's next rap star'') failed to produce a second platinum act.
+
+\subsubsection{ME: CD Spatial Mapping and Key Sites}
+
+The Central District's hip-hop geography: Bryant Manor apartments (19th Ave and East Yesler Way,
+Mix's childhood residence), Rotary Boys and Girls Club (CD, founding meeting point), Rainier Vista
+Boys and Girls Club (South Seattle, Mix's early DJ parties), Martin Luther King Jr. Way (formerly
+Empire Way, as noted in Mix's lyrics), 23rd Ave and Union (Uncle Ike's controversy, Draze's
+``Irony on 23rd Street''), MLK Jr. Way and Cherry Street (The Facts newspaper building, converted
+to dog daycare --- gentrification's emblem in Draze's documentation).
+
+\subsubsection{MF: MOHAI as Primary Archive}
+
+``The Legacy of Seattle Hip-Hop'' (MOHAI, September 2015 -- May 2016): curated by Jazmyn Scott
+and Aaron Walker-Loud; partnership with the Black Heritage Society; the February 2014 community
+day drew nearly 1,000 attendees (``wholly unexpected''); eight-month exhibit covering graffiti,
+DJing, dance, production, emceeing; Dr.\ Daudi Abe lecture series; 2016 AASLH Leadership in
+History Award; 2016 Charles Redd Center for Western Studies Honorable Mention. MOHAI's
+``Segregated Seattle: From Redlining to Gentrification'' (programming, in partnership with NAAM).
+MOHAI digital photograph collection (civil rights documentation). MOHAI as Smithsonian Affiliate.
+
+\subsubsection{MG: Gentrification Arc and Preservation Response}
+
+Displacement timeline: African Americans arrive Seattle 1880s--90s (coal mine labor recruitment),
+settle East Madison and Yesler--Jackson $\rightarrow$ Central District consolidates as Black cultural
+hub $\rightarrow$ 1970s--80s: over 65\% Black (AASLH/MOHAI data) $\rightarrow$ 2015: CD designated
+Arts \& Cultural District $\rightarrow$ 2020: under 20\% Black. Causal factors: redlining (restrictive
+covenants documented by UW Civil Rights \& Labor History Project), tech-economy rent pressure,
+school busing (1978--1999, Mix-A-Lot documented this directly). Artistic response: Draze's ``The
+Hood Ain't The Same'' (2014), ``Irony on 23rd Street.'' Preservation infrastructure: Northwest
+African American Museum (NAAM), 206 Zulu, Washington Hall, Wa Na Wari (``Our Home,'' co-founded
+2019 by Inye Wokoma et al., former Black-owned family home as art space).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml -- Module 05 Split
+chipset:
+  name: "mod05-split-analysis"
+  version: "1.0.0"
+  description: "Module 05 structural decomposition: NastyMix label + CD place memory"
+  parent_series: "seattle-hip-hop-cultural-study"
+
+modules:
+  mod05a:
+    name: "nastymix-label-ecosystem"
+    scope: "Music industry: founding, roster, economics, collapse"
+    primary_source: "HistoryLink.org (files 9793, 9794), Daudi Abe Emerald Street"
+    line_target: 280-320
+    tracks: [MA, MB, MC, MD]
+    cluster: "music-industry"
+
+  mod05b:
+    name: "central-district-place-memory"
+    scope: "Cultural geography: spatial mapping, MOHAI archives, gentrification arc"
+    primary_source: "MOHAI Legacy exhibit, UW Civil Rights & Labor History Project"
+    line_target: 280-320
+    tracks: [ME, MF, MG]
+    cluster: "community-heritage"
+
+integration:
+  shared_foundation: "Module 03 (Central District ecosystem)"
+  cross_reference: "05a <-> 05b at founding moment (Rotary Boys & Girls Club)"
+  series_wave: "Both 05a and 05b run in Wave 1 as parallel tracks"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (Module 05a --- NastyMix Label Ecosystem)}
+
+\begin{itemize}
+\item Complete four-founder story (Locke, Jones, Rodriguez, Ray) with individual profiles
+\item Full roster with contextual treatment of each act's geographic origin and role
+\item Business arc from \$900 budget to platinum to collapse, including the Ichiban partnership
+\item The Gold Party (1989) and Fifth Anniversary Party (1990) as cultural milestones
+\item Artist-label dispute mechanics (Mix's departure, rights ownership)
+\item KFOX FreshTracks as the label's de facto promotional infrastructure
+\item NAMA awards as institutional recognition data points
+\item The failed rock/pop expansion as a structural analysis case
+\end{itemize}
+
+\subsubsection{In Scope (Module 05b --- Central District Place Memory)}
+
+\begin{itemize}
+\item CD spatial mapping with specific addresses and neighborhood boundaries
+\item MOHAI ``Legacy of Seattle Hip-Hop'' exhibit as primary archival documentation
+\item Gentrification arc with demographic data (65\%+ to under 20\% Black, 1970--2020)
+\item Redlining and restrictive covenant history (UW Civil Rights \& Labor History Project)
+\item School busing program (1978--1999) as spatial and social context
+\item Draze's ``The Hood Ain't The Same'' (2014) as artistic documentation source
+\item Preservation infrastructure: NAAM, 206 Zulu, Washington Hall, Wa Na Wari
+\item 2015 Arts \& Cultural District designation
+\end{itemize}
+
+\subsubsection{Out of Scope (Both Modules)}
+
+\begin{itemize}
+\item Detailed musical analysis (covered by audio analysis modules in series)
+\item Post-Nastymix Sir Mix-A-Lot career (Rhyme Cartel, Def American, Mack Daddy)
+\item New NastyMix Records revival (Maurice ``MC Duce'' Owens, 2020s)
+\item National gentrification policy analysis (CD-specific only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+\item Module 05a lands within 280--320 lines, consistent with series median.
+\item Module 05b lands within 280--320 lines, consistent with series median.
+\item Every artist on the NastyMix roster receives a minimum two-sentence contextual entry
+   (origin, role, and fate post-label), not merely a name in a list.
+\item The business arc in 05a is traceable as a timeline: founding year $\rightarrow$ first
+   national hit $\rightarrow$ Gold Party $\rightarrow$ Fifth Anniversary $\rightarrow$ Mix
+   departure $\rightarrow$ Ichiban $\rightarrow$ closure, with dates and sales figures sourced
+   to HistoryLink.org and Emerald Street.
+\item MOHAI's Legacy exhibit in 05b is documented at the level of: curators, duration, community
+   partnerships, attendee count (the 2014 community day and the 8-month exhibit), and AASLH
+   award year.
+\item The gentrification arc in 05b includes at least three demographic data points with sources,
+   covers the redlining foundation, and names specific institutions in the preservation response.
+\item Both modules explicitly cross-reference at the Rotary Boys and Girls Club founding moment
+   (the shared origin point before the label story and place story diverge).
+\item The split is validated by the series wave plan: 05a and 05b can execute as parallel tracks
+   in Wave 1 with no inter-module dependency.
+\item All roster claims in 05a cross-reference against Daudi Abe's \textit{Emerald Street}
+   (UW Press, 2020) as the primary scholarly authority.
+\item The Nasty Nes preservation urgency marker (health crisis documented Nov. 2024, Seattle Times)
+   is retained in 05a as a provenance note for first-person source accessibility.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Central District Cultural Study & Foundation module for the CD ecosystem; 05b deepens the place memory layer it established & Extends \\
+deepaudioanalyzermission.pdf & Parent series context; Module 05 overshoot identified in What Could Be Better review & Parent \\
+gsd-foxfire-heritage-skills-vision.md & Parallel community documentation methodology (oral history, cultural geography) & Lateral \\
+Emerald Street (Daudi Abe, UW Press 2020) & Primary scholarly authority for all roster and scene claims in both modules & Source \\
+HistoryLink.org (files 9793, 9794) & Primary source for NastyMix milestone events and party documentation & Source \\
+MOHAI Legacy of Seattle Hip-Hop (2015) & Primary archival source for 05b; community-curated exhibit with AASLH award & Source \\
+UW Civil Rights \& Labor History Project & Primary source for redlining, restrictive covenants, and gentrification data & Source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The NastyMix label and the Central District share a 1985 origin point, diverge almost immediately,
+and are connected in 2015 at MOHAI by Jazmyn Scott and Aaron Walker-Loud --- two community curators
+who understood that the label's story and the neighborhood's story are inseparable even when they
+require separate analytical frames.
+
+That is the Amiga Principle applied to historical research: you can run the label economics and the
+cultural geography in parallel, each with its own specialized execution path, because the architecture
+of the larger series holds them in relation. They converge in the origin (the Rotary Boys and Girls
+Club) and they converge in the preservation moment (the Legacy exhibit). In between, they do their
+own work, ask their own questions, and produce their own findings. That is not a bug in Module 05's
+original design. It is the module telling you it needs two chips.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Module 05 Split Analysis --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section provides sourced findings for each of the seven research tracks (MA--MG) organized
+across the two proposed modules. Tracks MA--MD feed Module 05a (NastyMix Label Ecosystem).
+Tracks ME--MG feed Module 05b (Central District Place Memory). The primary scholarly authority
+for all scene claims is Daudi Abe, \textit{Emerald Street: A History of Hip-Hop in Seattle}
+(University of Washington Press, 2020).
+
+Key source organizations:
+\begin{itemize}
+\item \textbf{HistoryLink.org} --- Seattle/Washington state online encyclopedia; primary source for
+   NastyMix milestone documentation (files 9793, 9794)
+\item \textbf{MOHAI (Museum of History \& Industry)} --- Primary archival repository for Central
+   District hip-hop documentation; Smithsonian Affiliate, AASLH award-winner
+\item \textbf{UW Civil Rights \& Labor History Project} --- Redlining, restrictive covenants,
+   gentrification bibliography and primary document archive
+\item \textbf{Humanities Washington / Spark Magazine} --- Daudi Abe's contextualization of the
+   NastyMix era for general audiences (January 2022)
+\item \textbf{Seattle Times Archive} --- Period reporting on Nastymix Records (June 1990,
+   October 1992) and Nasty Nes health crisis (November 2024)
+\item \textbf{AASLH (American Association of State and Local History)} --- MOHAI Legacy exhibit
+   documentation, Leadership in History Award 2016
+\end{itemize}
+
+\subsection{Track MA: NastyMix Founding Profiles}
+
+\subsubsection{The Four Co-Founders}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Co-Founder} & \tableheader{Background} & \tableheader{Role at Nastymix} \\
+\midrule
+Ed Locke & Former KYAC DJ; self-described ``disco freak''; acted in high school / UW drama & CEO; business operations; relationship management with radio, press, distributors \\
+Greg Jones & Investor & Initial capital (label launched on \$900 budget); near-bankruptcy on first pressing \\
+``Nasty'' Nes Rodriguez & Filipino-American; arrived US 1970; KFOX FreshTracks host from 1980 & Promotions; radio pipeline; the ``Nasty'' of NastyMix; left Seattle 1997 for LA (HITS magazine) \\
+Anthony ``Sir Mix-A-Lot'' Ray & Born Auburn 1963; grew up CD; Bryant Manor apartments & Sole recording artist at founding; creative engine; left 1991 with all masters \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The label name fused Rodriguez's ``Nasty'' with Ray's ``Mix-A-Lot.'' The label's operational address
+moved from ``humble offices off Western Avenue'' to the Tower Building at 1809 7th Avenue Suite 800
+--- a spatial indicator of growth. Locke acknowledged the label almost died before launch: California
+pressing company oversupply, returns, near-bankruptcy, saved by Locke cold-calling radio stations
+until ``Square Dance Rap'' broke in Flint, Michigan.
+
+\textit{Source: Seattle Times archive, June 3, 1990 (``A Mix Bag''); Humanities Washington/Spark (Jan. 2022)}
+
+\subsection{Track MB: Northwest Roster Profiles}
+
+\subsubsection{Sir Mix-A-Lot}
+
+Two platinum Nastymix albums: \textit{SWASS} (1988, 1M+ shipped) and \textit{Seminar} (1989, 500K+).
+``Posse on Broadway'' (1988) was the record that ``put Seattle on the rap map'' (Seattle Times). Mix
+wrote, arranged, programmed, performed, produced, and engineered his recordings himself. Left 1991
+after dispute over creative control and promotional strategy; took all rights. Estimated \$100M+ lifetime
+royalties from ``Baby Got Back'' alone. \textit{Source: HistoryLink file 9793; Seattle Times; Blackpast.org}
+
+\subsubsection{Kid Sensation (Stephen Spence)}
+
+Mix's teen prot\'eg\'e; first appearance on \textit{Swass} (1988). Solo debut \textit{Rollin' With Number One}
+(Nastymix, 1990). Second LP \textit{The Power of Rhyme} (Nastymix/Ichiban/Emerald City Records, 1992,
+featuring Ken Griffey Jr. --- ``The Way We Swing''). Left Nastymix for Ichiban; released \textit{Seatown Funk}
+(1995). Later produced for Jackie Jackson; created jingles for NFL and NBA franchises. Considered a
+Northwest legend. \textit{Source: Good Ol'Dayz; Town Love/Crane City Music}
+
+\subsubsection{High Performance}
+
+Tacoma hard-core rap group. Group leader: Maurice ``MC Duce'' Owens (later revived the Nastymix
+brand in 2020s). Characterized by both dance tunes and ``hard political songs'' (Seattle Times, 1990).
+Performed at the 1989 Gold Party and 1990 Fifth Anniversary Party. Represented the label's South
+Sound geographic reach. \textit{Source: HistoryLink file 9794; New Nastymix Records}
+
+\subsubsection{Criminal Nation}
+
+Tacoma-based; active 1990--1992 on Nastymix. Albums: \textit{Release The Pressure} (1990),
+\textit{Trouble In The Hood} (1992). Briefly resurfaced 1998 (Ocean Records, \textit{Resurrection}).
+DJ Eugenius was a regional connector who later worked with Sir Mix-A-Lot and other Northwest artists
+as writer, DJ, and producer. Wojack (MC Deff) released two post-Nastymix solo albums (1997, 2001).
+\textit{Source: Good Ol'Dayz}
+
+\subsubsection{The Acu\"sed}
+
+Oak Harbor (Whidbey Island) speed-metal band. Nastymix's most conspicuous genre departure.
+Announced at the 1990 Fifth Anniversary Party alongside the rap acts. Represented Locke's attempt
+to diversify the label beyond Black music and beyond Seattle, which The Rocket and industry observers
+questioned. \textit{Source: HistoryLink file 9794; Seattle Times, June 3, 1990}
+
+\subsection{Track MC: National Signings}
+
+By 1990, Locke doubled the label's client list with acts from outside the Northwest:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Act} & \tableheader{Origin} & \tableheader{Nastymix Role / Notes} \\
+\midrule
+Adrienne (Baseden) & Wilberforce, OH & R\&B vocalist, Whitney Houston style; full LP delayed by college schedule \\
+Whiz Kid & New York & Street-oriented rapper; Nastymix debut singles only \\
+Bob \& the Mob & New Jersey & MC Speedo and DJ Slayer; funk-rap covers of Spinners and Marvin Gaye \\
+Side F-X & Miami & Reggie ``Kut Mighty Swift'' La Lanne; Nastymix release in late 1990 \\
+Rodney O \& Joe Cooley & California & Listed on final Nastymix roster; never prominent in Seattle scene \\
+Rococo & United Kingdom & Euro-disco twin sisters; Locke's furthest genre reach \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+None of the national signings produced charting releases. The strategic rationale was diversification;
+the practical result was dilution of the label's Northwest identity and financial exposure without
+offsetting revenue. \textit{Source: Seattle Times, June 3, 1990}
+
+\subsection{Track MD: Business Arc and Collapse}
+
+\subsubsection{Milestone Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Milestone} & \tableheader{Significance} \\
+\midrule
+1985 & Label founded & \$900 budget; Ed Locke + Greg Jones + Nes Rodriguez + Sir Mix-A-Lot \\
+1985 & ``Square Dance Rap'' EP & 45,000+ copies sold; breaks in Flint, MI and other scattered markets \\
+1988 & \textit{SWASS} released & Platinum (1M shipped); spent 1+ year on both Billboard Black and Pop LP charts \\
+Apr. 1989 & Gold Party at Four Seasons & Spanish Ballroom, Olympic Hotel; 400+ attendees; SWASS Gold award \\
+1989 & \textit{Seminar} released & Gold (500K+); ``My Hooptie'' hit; Mix unhappy with promotion \\
+Nov. 1990 & Fifth Anniversary Party & Phantom Club (332 5th Ave N); SWASS Platinum + Seminar Gold presented; NAMA awards \\
+1990--91 & National expansion & Roster doubles; rock, pop, R\&B, international signings; none charted \\
+1991 & Mix departs & Took all masters and rights; Rhyme Cartel formed with Ricardo Frazer \\
+1991--92 & Ichiban partnership & Georgia-based distributor; described by Locke as ``rocky'' \\
+Late 1992 & Label closes & Kid Sensation's 1992 LP carried Ichiban distribution logo; final release \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: HistoryLink files 9793, 9794; Seattle Times October 6, 1992; Town Love/Crane City Music}
+
+\subsubsection{Structural Vulnerability}
+
+The label's fatal structural problem: its entire revenue base resided in a single artist who owned
+his masters. When Mix departed, he took everything --- catalog rights, future royalties, and the
+promotional credibility that had underwritten the national expansion. Kid Sensation was positioned
+as ``Seattle's next rap star'' but never approached Mix's commercial performance. The national
+signings produced no revenue to compensate.
+
+\subsection{Track ME: Central District Spatial Mapping}
+
+\subsubsection{Key Sites}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Location} & \tableheader{Significance} \\
+\midrule
+Bryant Manor Apartments, 19th Ave \& E. Yesler Way & Sir Mix-A-Lot's childhood residence; recording origin point (Commodore 64 setup) \\
+Rotary Boys and Girls Club, Central District & Founding meeting point: Mix meets Nes Rodriguez; NastyMix origin story \\
+Rainier Vista Boys and Girls Club, South Seattle & Mix's early DJ party venue (pre-Nastymix, 1983) \\
+Martin Luther King Jr. Way (formerly Empire Way) & Central axis of the Black CD; Mix references original name in ``What's Real'' \\
+23rd Ave \& Union & Uncle Ike's pot shop controversy (2010s gentrification flashpoint; Draze ``Irony on 23rd St'') \\
+MLK Jr. Way \& Cherry Street & Site of \textit{The Facts} newspaper (Seattle's oldest Black paper, founded 1961); converted to dog daycare \\
+Washington Hall & Historic CD cultural venue; preservation anchor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: Sir Mix-A-Lot Wikipedia; Emerald Street excerpts (artenoir.org); Seattle Globalist}
+
+\subsection{Track MF: MOHAI as Primary Archive}
+
+\subsubsection{The Legacy of Seattle Hip-Hop Exhibit}
+
+\begin{itemize}
+\item \textbf{Dates:} September 19, 2015 -- May 1, 2016 (8 months)
+\item \textbf{Curators:} Jazmyn Scott (owner, The Town Entertainment; co-founder 50 Next: Seattle
+   Hip-Hop Worldwide) and Aaron Walker-Loud (founder, Big World Breaks; co-founder 50 Next;
+   Education Director, Seattle JazzED)
+\item \textbf{Partnership:} MOHAI + Black Heritage Society
+\item \textbf{Origin:} February 2014 community day; nearly 1,000 attendees (``wholly unexpected'')
+   triggered the full 8-month exhibit
+\item \textbf{Content:} Audio recordings, photography, artwork, artifacts; graffiti, DJing, dance,
+   production, emceeing; first-person narratives; QTPOC community panel (DJ Sassy Black Cat, moderator)
+\item \textbf{Dr.\ Daudi Abe lecture:} Previewed themes of \textit{Emerald Street}; covered the
+   Emerald Street Boys, FreshTracks, NastyMix era
+\item \textbf{Awards:} 2016 AASLH Leadership in History Award; 2016 Charles Redd Center for
+   Western Studies Exhibition Excellence Honorable Mention
+\end{itemize}
+
+\textit{Source: MOHAI exhibit page; AASLH.org case study; Seattle Times September 18, 2015}
+
+\subsubsection{MOHAI's Broader CD Documentation Role}
+
+``Segregated Seattle: From Redlining to Gentrification'' (MOHAI programming, partnership with
+NAAM; sold-out event). MOHAI digital photograph collection (civil rights documentation, indexed in
+UW Civil Rights \& Labor History Project bibliography). MOHAI as Smithsonian Affiliate. The AASLH
+case study notes the exhibit ``became a kind of community center'' for a neighborhood undergoing
+rapid gentrification.
+
+\subsection{Track MG: Gentrification Arc and Preservation Response}
+
+\subsubsection{Demographic Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{Status} \\
+\midrule
+1880s--90s & African Americans arrive Seattle for coal mine labor; settle East Madison and Yesler--Jackson \\
+Early 20th c. & Restrictive covenants confine Black residents to the Central Area \\
+1960s--80s & Over 65\% of Central District residents are Black (MOHAI/AASLH documentation) \\
+1978--1999 & School busing program: minorities bused from CD and South End to North End schools \\
+2014 & Draze releases ``The Hood Ain't The Same'' video; CD gentrification documented in hip-hop \\
+2015 & CD designated an official Arts \& Cultural District \\
+2020 & Under 20\% of Central District residents are Black (MOHAI/AASLH documentation) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Artistic Documentation: Draze}
+
+Dumi ``Draze'' Maraire Jr. (b. Seattle; parents: Dumisani Abraham Maraire Sr., Zimbabwean musician;
+childhood time in Zimbabwe). ``The Hood Ain't The Same'' (2014): shot around the CD and South End;
+documents the conversion of \textit{The Facts} newspaper building to a dog daycare; ``we was red lined
+in but now we black balled out so they can sell green.'' ``Irony on 23rd Street'': Uncle Ike's pot shop
+at 23rd \& Union (``how many brothers went to jail on this corner from moving dime bags...'').
+Video screened at MOHAI as part of the Legacy exhibit programming.
+
+\textit{Source: Arte Noir (Emerald Street excerpts); Seattle Globalist; TheGrio}
+
+\subsubsection{Preservation Infrastructure}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Institution} & \tableheader{Founded} & \tableheader{Role} \\
+\midrule
+NAAM (Northwest African American Museum) & 2008 & Primary museum for Black Seattle cultural heritage; MOHAI partner \\
+206 Zulu & Est. & Seattle hip-hop cultural organization; referenced in MOHAI exhibit as preservation anchor \\
+Washington Hall & Historic & Historic CD performance venue; preservation anchor for Black performance arts \\
+Wa Na Wari (``Our Home'') & 2019 & Former Black-owned family home (Frank and Goldyne Green's); co-founded by Inye Wokoma et al.; art exhibits, performances, screenings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: The Root (7 Black Sites); AASLH Legacy exhibit documentation}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Artist-label dispute details & GATE & Present Mix-A-Lot's departure as documented fact; do not speculate on financial terms beyond what is sourced \\
+Gentrification causality & ANNOTATE & Present evidence (redlining, busing, tech economy) without policy advocacy \\
+Nes Rodriguez health status & ANNOTATE & Flag as preservation urgency (first-person source accessibility at risk); use respectfully, not as tragedy narrative \\
+Cultural ownership claims & GATE & ``Our Home'' (Wa Na Wari), Black Heritage Society --- community-asserted framing; honor without editorializing \\
+QTPOC community content & GATE & From Legacy exhibit panels; present without over-summarizing or flattening community-led framing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Archival Sources}
+\begin{itemize}
+\item Daudi Abe. \textit{Emerald Street: A History of Hip-Hop in Seattle 1979--2015.} University of Washington Press, 2020. [Primary scholarly authority]
+\item HistoryLink.org, File 9793: ``Nastymix Records party celebrates Gold Record awarded to Sir Mix-A-Lot's SWASS album, April 29, 1989.''
+\item HistoryLink.org, File 9794: ``Nastymix Records hosts fifth Anniversary party, November 29, 1990.''
+\item Seattle Times Archive, June 3, 1990: ``A Mix Bag --- Seattle's Nastymix Records Is Becoming a Key Player...'' (period reporting)
+\item Seattle Times Archive, October 6, 1992: ``Nastymix Records To Close.''
+\item Seattle Times, November 27, 2024: ``Community rallies around Seattle rap producer, DJ who shaped local scene.'' [Nes Rodriguez health crisis]
+\end{itemize}
+
+\subsubsection{Institutional Documentation}
+\begin{itemize}
+\item MOHAI. ``The Legacy of Seattle Hip-Hop'' exhibit page. mohai.org/exhibits/the-legacy-of-seattle-hip-hop/
+\item AASLH. ``The Legacy of Seattle Hip-Hop'' case study. aaslh.org/the-legacy-of-seattle-hip-hop/ (2018)
+\item Daudi Abe excerpts at Arte Noir. artenoir.org/post/excerpts-from-emerald-street (July 2025)
+\item UW Civil Rights \& Labor History Project. ``African American Civil Rights Movement History in Seattle: Bibliography.'' depts.washington.edu/civilr/bib\_af\_am.htm
+\end{itemize}
+
+\subsubsection{Secondary Sources}
+\begin{itemize}
+\item Humanities Washington / Spark. ``How the Northwest Shocked the Hip-hop World.'' January 20, 2022.
+\item Blackpast.org. ``Anthony `Sir Mix-A-Lot' Ray (1963--).''
+\item AASLH case study. ``The Legacy of Seattle Hip-Hop.'' (2018)
+\item Seattle Globalist. ``What the South End Sounds Like: Draze Drops `Seattle's Own'.'' March 31, 2016.
+\item TheGrio. ``Hip-hop artist mourns gentrification of black Seattle neighborhood.'' February 28, 2018.
+\item The Root. ``7 Black Sites You Must See in Seattle.''
+\item New Nastymix Records. ``About Us.'' newnastymixrecords.com/about-us/
+\item Town Love / Crane City Music. Sir Mix-A-Lot, Kid Sensation, Criminal Nation archives. townlove.cranecitymusic.com
+\item Good Ol'Dayz. Kid Sensation, Criminal Nation artist pages. thegoodoldayz.com
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Mission Objective:}{Decompose Module 05 of the Seattle Hip-Hop Cultural Series into two focused modules:
+Module 05a (NastyMix Label Ecosystem, music industry frame) and Module 05b (Central District Place Memory,
+cultural geography frame). Each module targets 280--320 lines, consistent with series median.
+The split resolves the category-error overshoot and enables parallel execution.}
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [Haiku] Shared schemas, cross-reference contracts, series integration map
+
+WAVE 1: Parallel Execution
+  [Sonnet] Track A: 05a Label Ecosystem (MA+MB+MC+MD)
+  [Sonnet] Track B: 05b Place Memory (ME+MF+MG)
+  [Both run simultaneously -- no inter-module dependency until Wave 2]
+
+WAVE 2: Synthesis
+  [Opus] Cross-module integration: shared founding moment, series arc validation
+         Emerald Street cross-reference audit (all roster claims)
+         Line count calibration (target: 280-320 each)
+
+WAVE 3: Verification + Publication
+  [Sonnet] Final modules delivered to series; success criteria checklist; CAPCOM review
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+\item \textbf{Source Layer} --- HistoryLink, Emerald Street, MOHAI exhibit, UW CRL\&HP, Seattle Times archive
+\item \textbf{Research Layer} --- Seven tracks (MA--MG) producing structured findings per module
+\item \textbf{Module Layer} --- 05a (music industry) and 05b (cultural geography) as distinct deliverables
+\item \textbf{Series Integration Layer} --- Cross-reference contracts linking both modules to Module 03 and series wave plan
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Track} \\
+\midrule
+1 & Module 05a: NastyMix Label Ecosystem & 280--320 lines; full roster; business arc with dates; Emerald Street cross-ref & MA, MB, MC, MD \\
+2 & Module 05b: Central District Place Memory & 280--320 lines; MOHAI exhibit documented; gentrification arc with 3+ data points & ME, MF, MG \\
+3 & Cross-reference contract & Both modules cite shared founding moment; 05a $\leftrightarrow$ 05b link documented & Wave 2 \\
+4 & Series integration update & Series wave plan updated: 05a and 05b as parallel Wave 1 tracks replacing original 05 & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0: Shared schemas & None & Haiku & 5K \\
+Track MA: Founding profiles & Wave 0 & Sonnet & 12K \\
+Track MB: Northwest roster & Wave 0, MA & Sonnet & 15K \\
+Track MC: National signings & Wave 0, MA & Sonnet & 10K \\
+Track MD: Business arc & Wave 0, MA--MC & Sonnet & 12K \\
+Track ME: Spatial mapping & Wave 0 & Sonnet & 12K \\
+Track MF: MOHAI archive & Wave 0, ME & Sonnet & 15K \\
+Track MG: Gentrification arc & Wave 0, ME, MF & Sonnet & 15K \\
+Wave 2: Synthesis + audit & MA--MG & Opus & 25K \\
+Wave 3: Verification & All & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.2cm}XC{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Work} & \tableheader{Parallel} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation schemas & No & Haiku & 5K \\
+1 & 05a tracks (MA--MD) + 05b tracks (ME--MG) & Yes (2 tracks) & Sonnet & 64K \\
+2 & Synthesis, Emerald Street audit, calibration & No & Opus & 25K \\
+3 & Verification, series integration update & No & Sonnet & 10K \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total estimated:}} & \textbf{$\sim$104K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0 ──> Shared Schemas
+            |
+            +──> Track A (05a): MA -> MB -> MC -> MD ──+
+            |                                           |
+            +──> Track B (05b): ME -> MF -> MG ────────+
+                                                        |
+                                               Wave 2: Synthesis (Opus)
+                                                        |
+                                               Wave 3: Verification (Sonnet)
+                                                        |
+                                               Series Integration Update
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Failure} \\
+\midrule
+Safety-Critical & 4 & Mandatory & BLOCK: do not deliver \\
+Scholarly Authority & 4 & Mandatory & BLOCK: do not deliver \\
+Core Functionality & 8 & High & Revise before delivery \\
+Integration & 4 & Medium & Note and flag \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests (BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & No undocumented financial claims & All dollar figures and sales numbers attributed to HistoryLink or Seattle Times or Abe \\
+SC-02 & Nes Rodriguez health note handled appropriately & Note included as preservation urgency, not exploited as tragedy narrative \\
+SC-03 & Gentrification data sourced & All demographic percentages attributed to MOHAI/AASLH documentation \\
+SC-04 & QTPOC Legacy exhibit content & Panel content presented from community-curated framing; not flattened or summarized beyond MOHAI documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Scholarly Authority Tests (BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SA-01 & Emerald Street cross-reference & All formation-era roster claims cross-referenced against Abe (2020) before finalization \\
+SA-02 & HistoryLink primary sourcing & Gold Party (1989) and Fifth Anniversary (1990) details sourced to files 9793 and 9794 specifically \\
+SA-03 & MOHAI exhibit accuracy & Exhibit dates, curators, partnerships, and awards match MOHAI exhibit page and AASLH documentation \\
+SA-04 & UW Civil Rights project for redlining & Redlining and restrictive covenant claims reference UW CRL\&HP bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}L{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+Both modules land 280--320 lines & CF-01, CF-02 & \\
+Full roster with 2+ sentence profiles & CF-03 & \\
+Business arc traceable as dated timeline & CF-04, SA-02 & \\
+MOHAI exhibit documented at full detail & CF-05, SA-03 & \\
+Gentrification arc with 3+ sourced data points & CF-06, SC-03 & \\
+Founding moment cross-reference in both modules & INT-01 & \\
+Wave plan updated with 05a/05b as parallel tracks & INT-02 & \\
+All roster claims cross-referenced to Emerald Street & SA-01 & \\
+Nes Rodriguez preservation note handled appropriately & SC-02 & \\
+Both modules pass CAPCOM review before commit & CF-07 & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+Mission Commander & DIRECTOR & Overall split execution; wave sequencing; series integration \\
+Label Historian & ARCHIVIST-A & Tracks MA--MD; NastyMix founding, roster, business arc \\
+Place Historian & ARCHIVIST-B & Tracks ME--MG; spatial mapping, MOHAI, gentrification \\
+Synthesis Lead & WEAVER & Wave 2 cross-module integration; founding moment cross-reference \\
+Source Auditor & VERITAS & Emerald Street cross-reference audit; HistoryLink sourcing verification \\
+Safety Warden & GUARDIAN & SC-01 through SC-04; community content sensitivity review \\
+Series Integrator & NAVIGATOR & Series wave plan update; 05a/05b integration into larger series \\
+CAPCOM & CAPCOM & Human checkpoint before final commit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total research tracks & 7 (MA--MG) \\
+Parallel execution tracks & 2 (Wave 1: 05a + 05b simultaneously) \\
+Sequential depth & 4 waves \\
+Model split & Opus $\sim$25\% / Sonnet $\sim$65\% / Haiku $\sim$10\% \\
+Estimated context windows & $\sim$8--10 \\
+Estimated sessions & 2--3 \\
+Total estimated tokens & $\sim$104K \\
+Total tests & 20 (8 mandatory-pass BLOCK) \\
+Target line count per module & 280--320 (series median) \\
+Primary scholarly authority & Daudi Abe, \textit{Emerald Street} (UW Press, 2020) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``Nastymix's 1989 `Gold Party' was not only the moment which defined Northwest Hip-Hop's
+arrival as a force in the local music community \ldots''}
+
+\vspace{0.5em}
+{\small\textcolor{subtlegray}{--- Glen Boyd, cited in HistoryLink file 9793}}
+
+\vspace{1em}
+The label and the neighborhood share a founding myth. Separating them into two modules
+does not diminish that myth --- it gives each half room to breathe, and room to mean
+what it actually means. The NastyMix story is a story about what independent labels
+can build from a \$900 budget and a cassette player. The Central District story is a
+story about what a community preserves after the buildings change hands.
+Both stories need the full stage.
+\end{quotebox}
+
+\vspace{1em}
+\begin{center}
+{\small\sffamily\textcolor{subtlegray}{GSD Research Mission Package $\cdot$ Module 05 Split Analysis $\cdot$ March 2026 $\cdot$ Ready for GSD Orchestrator}}
+\end{center}
+
+\end{document}
