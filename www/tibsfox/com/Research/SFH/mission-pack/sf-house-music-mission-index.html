@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bay Area House Music — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #212121;
+  --secondary: #E65100;
+  --tertiary: #37474F;
+  --accent: #1565C0;
+  --light-bg: #FBE9E7;
+  --card-bg: #F5F5F5;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 60%, #1a237e 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: var(--secondary); letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--secondary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--secondary);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: var(--tertiary); font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bay Area House Music</h1>
+  <h2>DJs &middot; Clubs &middot; Raves &middot; Past &middot; Present &middot; Future</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="sf_house_music_mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Editable source file. Modify modules, update research, recompile with three XeLaTeX passes.</div>
+    </a>
+    <a href="../index.html" class="file-card">
+      <div class="ext">HTML &middot; Research Project</div>
+      <div class="name">SFH Research Project</div>
+      <div class="desc">Complete research output: 5 modules covering 50 years of Bay Area house music culture.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 — Vision Document</span>
+        <ul>
+          <li>Vision narrative, problem statement (5 problems), core concept</li>
+          <li>Cultural geography and module dependency diagrams</li>
+          <li>5 research modules: Queer Disco, Rave Era, Labels & Sound, Venues, Outdoor & Future</li>
+          <li>Chipset configuration, scope boundaries, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 — Research Reference</span>
+        <ul>
+          <li>Queer disco pre-history: Patrick Cowley, Sylvester, Megatone, hi-NRG</li>
+          <li>UK invasion and rave golden era: Wicked, Hardkiss, Baker Beach</li>
+          <li>Label genealogy: Megatone through Dark Entries and Dirtybird</li>
+          <li>Venue timeline: 15+ venues with gentrification impact mapping</li>
+          <li>Outdoor continuum: Baker Beach to Burning Man, 35+ year span</li>
+          <li>Safety and sensitivity: AIDS, queer identity, Ghost Ship, Cowley materials</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 — Mission Package</span>
+        <ul>
+          <li>8 deliverables, 4-wave execution plan with 3 parallel tracks</li>
+          <li>Fleet activation profile: 17 roles including culture and sound specialists</li>
+          <li>25 tests (4 safety-critical), verification matrix</li>
+          <li>~103K token budget, 6 context windows, 3 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the source</li>
+      <li>Wave 0 produces shared schema, source index, and sensitivity flags</li>
+      <li>Wave 1 executes three parallel tracks (A: Foundations+Era, B: Labels+Venues, C: Outdoor+Future)</li>
+      <li>Wave 2 synthesizes the West Coast sound definition and queer thread</li>
+      <li>Wave 3 assembles, verifies, and delivers the final document</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: #F5F5F5; padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode sf_house_music_mission.tex
+xelatex -interaction=nonstopmode sf_house_music_mission.tex
+xelatex -interaction=nonstopmode sf_house_music_mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "It was a vacuum. We were pretty unconcerned with what was happening elsewhere. Everyone was in
+    love with the music and the times." — Gavin Hardkiss, on San Francisco in the 1990s
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; Bay Area House Music &middot; March 2026
+</footer>
+
+</body>
+</html>

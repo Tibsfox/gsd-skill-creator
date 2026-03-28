@@ -1,0 +1,984 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─────────────────────────────────────────────
+% COLOR SCHEME: Music / Cultural History
+% Deep SF Night / Gold / Fog
+% ─────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep SF midnight indigo
+\definecolor{secondary}{HTML}{E65100}     % Warehouse amber/orange
+\definecolor{tertiary}{HTML}{37474F}      % Fog gray
+\definecolor{accent}{HTML}{283593}        % Mid indigo
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Pale indigo
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{goldaccent}{HTML}{F9A825}
+
+% ─────────────────────────────────────────────
+% SECTION FORMATTING
+% ─────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─────────────────────────────────────────────
+% CUSTOM ENVIRONMENTS
+% ─────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─────────────────────────────────────────────
+% HEADERS / FOOTERS
+% ─────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{SF Bay Area House Music}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─────────────────────────────────────────────
+% HYPERLINKS
+% ─────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={SF Bay Area House Music -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────
+% DOCUMENT BEGIN
+% ─────────────────────────────────────────────
+\begin{document}
+
+% ─── TITLE PAGE ───────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{San Francisco Bay Area\\[0.3em]House Music}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{DJs · Clubs · Raves · Past · Present · Future}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Cultural Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 6 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{SF Bay Area House Music --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Cold-Start Research Completed / Ready for Execution}
+\metafield{Activation Profile:}{Fleet (6 modules, high cultural sensitivity)}
+\metafield{Context:}{Deep cultural research mission; music, queer history, counterculture, and the living present}
+
+\subsection{Vision}
+
+San Francisco has always been a city of arrivals --- people coming to the edge of the continent to escape, to invent, to become. The house music that took root here carries that same directional charge. It did not simply transplant itself from Chicago or London; it mutated, psychedelicized, queered, and salt-aired itself into something specific to this geography and its people. To study SF Bay Area house music is to study an unbroken chain of chosen communities using rhythm as a technology for survival, joy, and radical belonging.
+
+The story begins before ``house'' had a name: in the sweat-drenched gay discotheques of the Castro and SoMa in the late 1970s, where Patrick Cowley and Sylvester were constructing hi-NRG from scratch, building a San Francisco Sound that defined queer dance music for a generation. When AIDS tore through that community, the next generation of dancers --- now processing grief with harder, more urgent rhythms --- inherited the dancefloor and pushed into house and techno. When British acid house zealots arrived in 1991 to throw full-moon parties on Baker Beach, they did not land in a vacuum. They landed in a city that had been dancing at the edge of the world for twenty years, and knew exactly what to do with them.
+
+What emerged --- through the Hardkiss Brothers, the Wicked Sound System, 1015 Folsom, Dirtybird Records, Honey Soundsystem, and dozens of other crews, labels, and venues --- was a West Coast sound that is psychedelic, dubby, and never entirely serious about itself. It is music that carries the DNA of the Summer of Love, the trauma of the AIDS epidemic, the anarchist spirit of the free outdoor party, and the tech-town's appetite for the new. To trace it is to trace the city itself.
+
+This research mission maps the full arc: the pre-history in queer disco, the UK importation, the golden 1990s rave era, the institutional consolidation of the 2000s, the queer revival and archival renaissance of the 2010s, and the living present --- a scene still anchored in SoMa warehouse spaces and Golden Gate Park, still exporting its distinctive sensibility to Burning Man and the world.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Fragmented history:} The SF house music story spans multiple eras, communities, and sub-scenes (queer disco, rave, outdoor parties, club culture) that have rarely been synthesized into a single coherent account. The queer foundations are especially underrepresented.
+  \item \textbf{Threatened cultural memory:} The AIDS epidemic wiped out an entire generation of DJs, promoters, and dancers. Key figures like Patrick Cowley and Scott Hardkiss are gone; the primary sources --- flyers, mixtapes, personal archives --- are deteriorating or lost.
+  \item \textbf{Venue precarity:} Tech-sector gentrification has driven up rents and closed legendary venues (The Mezzanine, Club Mighty). The SoMa warehouse district that birthed the scene is under sustained development pressure.
+  \item \textbf{Sound identity diffusion:} The specific West Coast psychedelic-deep-house sound developed by Wicked, Hardkiss, and Dirtybird is increasingly blurred into the global EDM mainstream; local producers struggle for distinct identity in a streaming-homogenized market.
+  \item \textbf{Future visibility:} The next generation of Bay Area house artists and collectives has limited documentation, making it difficult to project the scene's trajectory or support emerging talent with historical context.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The San Francisco House Music Continuum:} One unbroken thread of community-driven dance music running from queer disco (1975) through hi-NRG (1980), rave (1991), club institutionalization (1996--2010), queer archival revival (2006--present), and the contemporary multi-venue ecosystem (2010--2026+). At every node, the defining characteristics are the same: psychedelic openness, radical inclusivity, outdoor sensibility, and a willingness to bring UK and Chicago influences into conversation with Bay Area counterculture.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+SF BAY AREA HOUSE MUSIC -- CULTURAL GEOGRAPHY
+===============================================
+
+GEOGRAPHY LAYER
+  San Francisco (SoMa, Castro, Haight, Golden Gate Park)
+  Oakland (warehouses, underground, New Parish)
+  Baker Beach / Marin Headlands (outdoor parties)
+  Black Rock Desert, NV (Burning Man continuum)
+
+TEMPORAL LAYER
+  1975-1982  Pre-History: Queer Disco & Hi-NRG
+             [Sylvester, Patrick Cowley, Megatone Records]
+  1983-1990  Bridge: AIDS crisis, harder sounds, transition
+             [End Up, Trocadero Transfer legacy]
+  1991-1999  Golden Era: UK Invasion + Hardkiss Explosion
+             [Wicked, Hardkiss Music, Full Moon raves]
+  2000-2010  Institutionalization
+             [1015 Folsom, Spundae/Release, Dirtybird founding]
+  2005-2015  Queer Revival & Archival Renaissance
+             [Honey Soundsystem, Dark Entries, Cowley resurrection]
+  2010-2026  Contemporary Ecosystem
+             [The Midway, Public Works, F8, Great Northern, Halcyon]
+
+SOUND IDENTITY
+  Chicago House + UK Acid House
+       + Bay Area Psychedelia + Queer Disco DNA
+       + Outdoor Festival Ethos
+       = West Coast Psychedelic Deep House
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+==============================
+
+MODULE 01: Queer Disco Pre-History (1975-1990)
+  Patrick Cowley / Sylvester / Megatone Records
+  Trocadero Transfer / The End Up / hi-NRG
+  AIDS epidemic: loss and legacy
+
+MODULE 02: The UK Invasion & Rave Golden Era (1991-1999)
+  Wicked Sound System (Jeno, Garth, Thomas, Markie)
+  Hardkiss Brothers (Gavin, Scott, Robbie)
+  Baker Beach / Full Moon parties / outdoor raves
+  Freaky Chakra, Pacific Sound System, Dubtribe
+
+MODULE 03: Labels, Records & the SF Sound
+  Hardkiss Music / Grayhound Recordings
+  Om Records / Dirtybird Records
+  Dark Entries Records / HNYTRX
+  West Coast sound defined
+
+MODULE 04: Clubs, Venues & Events
+  1015 Folsom (Spundae, Release, Gus Presents)
+  The Mezzanine / Club Mighty / The End Up
+  The Great Northern / Public Works / F8 / The Midway
+  Halcyon / Underground SF
+
+MODULE 05: The Outdoor & Festival Continuum
+  Burning Man (Baker Beach origin 1986; Wicked 1991)
+  Sunset Sound System / Dirtybird BBQ & Campout
+  How Weird Street Faire / Golden Gate Park
+  Decompression / Burnal Equinox
+
+MODULE 06: Queer Underground Revival & Future Trajectory
+  Honey Soundsystem / Dark Entries / Patrick Cowley revival
+  Tech-gentrification pressures on the scene
+  Contemporary DJs & producers
+  Future vectors: streaming, AI production, post-pandemic rebuilding
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Queer Disco Pre-History (1975--1990)}
+Examines the founding generation of SF's dance music scene --- the gay discotheques, hi-NRG innovators, and the catastrophic rupture of the AIDS crisis. Primary focus: Patrick Cowley (hi-NRG architect, Megatone Records co-founder), Sylvester (performance icon), DJ Bobby Viteritti (Trocadero Transfer), and the venues that made a specifically San Franciscan queer sound.
+
+\subsubsection{Module 02: The UK Invasion \& Rave Golden Era (1991--1999)}
+Documents the arrival of the Wicked Sound System (Jeno, Garth, Thomas, Markie) from London's acid house scene in 1991, their full moon parties at Baker Beach, and the parallel explosion of the Hardkiss Brothers and their crew. Maps the complete ecosystem of 1990s Bay Area raving: flyers, warehouse spaces, Burning Man integration, and the West Coast sound that resulted.
+
+\subsubsection{Module 03: Labels, Records \& the SF Sound}
+A comprehensive discography and label history: Hardkiss Music (1991), Grayhound Recordings (1998), Om Records, Dirtybird Records (2005), Dark Entries (2009), HNYTRX. Analyzes how each label expressed and transmitted a specific facet of the Bay Area house music identity to national and global audiences.
+
+\subsubsection{Module 04: Clubs, Venues \& Events}
+Institutional history of the spaces that hosted the scene. Traces the lineage from Trocadero Transfer and the End Up through 1015 Folsom's legendary weekly parties (Spundae, Release, Gus Presents) to the contemporary multi-venue SoMa cluster. Documents venue closures due to gentrification and the scene's adaptive responses.
+
+\subsubsection{Module 05: The Outdoor \& Festival Continuum}
+The outdoor party is as central to SF house culture as the club. This module traces the unbroken thread from Baker Beach bonfires (1986, Burning Man origins) through Wicked's full moon parties (1991), Sunset Sound System's 25+ year run, Dirtybird BBQs and Campout, and the contemporary Decompression/Burnal Equinox calendar.
+
+\subsubsection{Module 06: Queer Underground Revival \& Future Trajectory}
+The 2006--present revival of queer dance culture via Honey Soundsystem, Dark Entries' archival work, and the Patrick Cowley resurrection. Contemporary pressures: tech-sector gentrification, venue loss, post-pandemic rebuilding. Future projections: AI-assisted production, streaming economics, and the next generation of Bay Area producers.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:                          # Orchestration / Context
+    model: claude-opus-4-6
+    role: FLIGHT
+    responsibilities:
+      - Mission direction and go/no-go gates
+      - Cultural sensitivity review (queer history, AIDS)
+      - Cross-module synthesis and through-line
+      - Capcom handoff decisions
+    allocation: 30%
+
+  denise:                         # Execution / Output Rendering
+    model: claude-sonnet-4-6
+    role: EXEC (x2)
+    responsibilities:
+      - Document production per module
+      - Source verification and citation
+      - Table and timeline assembly
+      - LaTeX output rendering
+    allocation: 60%
+
+  paula:                          # Scaffolding / I/O
+    model: claude-haiku-4-5
+    role: LOG + BUDGET
+    responsibilities:
+      - Shared schema generation
+      - Token budget tracking
+      - Commit message drafting
+      - Template scaffolding
+    allocation: 10%
+
+  gary:                           # Glue / Communication
+    model: claude-sonnet-4-6
+    role: CAPCOM / INTEG
+    responsibilities:
+      - HITL checkpoints at wave boundaries
+      - Cross-module relationship validation
+      - Human approval gating
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item SF Bay Area house music, 1975--2026
+  \item All sub-genres: hi-NRG, deep house, acid house, tech-house, psychedelic house, West Coast sound
+  \item Key DJs, producers, collectives, and crews operating primarily in the Bay Area
+  \item Venues and events in San Francisco, Oakland, and the broader Bay Area
+  \item The outdoor/festival continuum including Burning Man Bay Area community events
+  \item Labels headquartered in or primarily associated with the Bay Area
+  \item The queer underground thread from disco through contemporary
+  \item Relationships to UK acid house scene (Wicked), Chicago house, Detroit techno
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Los Angeles or Seattle house scenes (except as comparison)
+  \item Techno and drum and bass scenes in depth (acknowledged but not primary focus)
+  \item National EDM festival circuit (Outside Lands, etc.) beyond brief mention
+  \item Production technique deep-dives (covered in separate audio analysis missions)
+  \item Individual DJ biographies beyond scene-relevant depth
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{Pre-History Coverage:} Module 01 produces a documented account of SF queer disco (1975--1990) with at least 8 named DJs, 5 venues, and 3 labels, citing primary sources or academic/journalistic accounts.
+  \item \textbf{Wicked Documentation:} Module 02 reconstructs the Wicked Sound System's SF timeline (1991--2004) including key party locations, sound system specifications, and named DJs, with citations from at least 2 primary source interviews.
+  \item \textbf{Hardkiss Documentation:} Module 02 documents Hardkiss Music's output (1991--1997) including at least 10 releases, production approach, and the collective's role in defining the West Coast sound.
+  \item \textbf{Label Discography:} Module 03 produces a verifiable discography of at least 5 Bay Area labels with founding dates, key releases, and current status.
+  \item \textbf{Venue Timeline:} Module 04 maps at least 15 venues in a chronological timeline showing openings, closures, and the gentrification impact pattern.
+  \item \textbf{Outdoor Continuum:} Module 05 traces the Baker Beach / Burning Man / full moon party lineage with dates and named parties spanning at least 35 years (1986--2026).
+  \item \textbf{Queer Thread:} Modules 01 and 06 together document the unbroken queer underground thread from Patrick Cowley through Honey Soundsystem / Dark Entries, with named figures and cultural context.
+  \item \textbf{Contemporary Scene:} Module 06 provides a current-state snapshot (2023--2026) with at least 6 active venues, 6 active collectives or promoters, and 6 emerging artists.
+  \item \textbf{Future Projections:} Module 06 synthesizes at least 3 credible vectors for the scene's future, supported by current trend data.
+  \item \textbf{West Coast Sound Definition:} The synthesis document produces a defensible, specific definition of the ``West Coast sound'' drawing on evidence from all 6 modules.
+  \item \textbf{Source Quality:} All factual claims attributed to named sources; no unsourced assertions; minimum 30 citations across the full document.
+  \item \textbf{Cultural Sensitivity:} All AIDS-era content handled with archival care; queer identities named specifically, never generically; no voyeuristic framing of rave drug culture.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Deep Audio Analyzer Mission & Complements: production technique analysis for tracks cited here & Complete \\
+Seattle Hip-Hop Series (05a/05b) & Parallel: Pacific Northwest music culture research strand & Active \\
+GSD Amiga Vision & Philosophical foundation: Amiga Principle applied to music ecosystems & Reference \\
+Fox Infrastructure Group & Orthogonal: Pacific Rim corridor; SF anchor city context & Active \\
+The Space Between & Mathematical spine: L-Systems model of cultural evolution applies here & Reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that remarkable complexity emerges not from brute force but from elegant, specialized building blocks faithfully iterated. San Francisco house music is its own proof of this. No single moment, no single DJ, no single venue built this scene --- it was built in the spaces between them. The chemistry between Patrick Cowley's synthesizer and Sylvester's falsetto. The crack between a British acid house record and a Baker Beach bonfire. The gap between a Burning Man dust storm and a Sunday afternoon Dirtybird BBQ in Golden Gate Park.
+
+The continuum survives every disruption --- AIDS, gentrification, the dot-com boom and bust, the pandemic --- because the core protocol is resilient: bring people together, play music that moves them, hold the space. The specific sound evolves. The human function it serves does not.
+
+This mission documents not just a music scene but a living system, one that has been computing belonging for fifty years in a city that has always made belonging difficult. Every flyer was an invitation. Every warehouse was a commons. Every sunrise set was a proof.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{SF Bay Area House Music --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings from primary sources, music journalism, and historical documentation. Each module section provides the evidentiary base for GSD subagent execution. Agents should read the relevant module section before producing their deliverable.
+
+Key source organizations and authorities:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{DJ Mag} --- Longform historical journalism; ``Renegade Soundsystems of California'' series
+  \item \textbf{Resident Advisor (RA)} --- Contemporary artist and venue documentation
+  \item \textbf{Bandcamp Daily} --- Label profiles; Honey Soundsystem / Dark Entries coverage
+  \item \textbf{XLR8R} --- SF-based electronic music magazine; primary scene coverage since 1993
+  \item \textbf{KQED Arts} --- Bay Area public media; Dirtybird and scene journalism
+  \item \textbf{SF Weekly / 48 Hills} --- Local cultural journalism; venue and party coverage
+  \item \textbf{Magnetic Magazine} --- Wicked Sound System interviews and retrospectives
+  \item \textbf{Vice / Okayfuture} --- Rave era retrospective interviews (Gavin Hardkiss, DJ Garth)
+  \item \textbf{The Dowsers} --- SF disco and hi-NRG historical analysis
+  \item \textbf{East Bay Express} --- Patrick Cowley / Honey Soundsystem investigative journalism
+\end{itemize}
+
+\subsection{Module 01: Queer Disco Pre-History (1975--1990)}
+
+\subsubsection{The San Francisco Sound: Hi-NRG Foundations}
+
+San Francisco's queer nightlife predates house music but directly birthed it. The city's specific contribution was hi-NRG --- a harder, faster evolution of disco that flourished on gay dancefloors after mainstream disco peaked in 1979. The chief architect was Patrick Cowley (born 1950, Buffalo, NY; arrived SF 1971), a self-taught electronic musician who studied at City College and began composing for gay clubs while working as a lighting technician.
+
+Cowley's method was prototypical for what would become house music: extended mixing, synthesizer layering, building tension over long arcs. His collaboration with Sylvester --- a former member of the Cockettes performance troupe and owner of one of pop music's most extraordinary falsetto voices --- produced ``You Make Me Feel (Mighty Real)'' (1978) and ``Do Ya Wanna Funk'' (1982), records that remain canonical.
+
+In 1981, Cowley and Marty Blecman co-founded Megatone Records, the Bay Area's first gay-targeted dance label. Megatone's catalog defined hi-NRG: Sylvester's output, Paul Parker's ``Right on Target,'' Cowley's solo albums \textit{Menergy} and \textit{Mind Warp}. Cowley died of AIDS in November 1982, age 32, before understanding what killed him.
+
+\subsubsection{Key Venues of the Pre-History Era}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Venue} & \tableheader{Active} & \tableheader{Significance} \\
+\midrule
+Trocadero Transfer & 1977--1995 & Premier gay discotheque; DJ Bobby Viteritti's legendary residency; comparable to NYC's Paradise Garage \\
+The End Up & 1973--present & Iconic after-hours; Sunday morning parties; survived the AIDS era; still operating \\
+The I-Beam & 1977--1993 & Haight-Ashbury gay dance club; key hi-NRG/house transition venue \\
+Megatone Records Club & 1981--1992 & Label-affiliated events; home of Cowley's live appearances \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The AIDS Rupture and Its Legacy}
+
+The AIDS crisis (1982--mid-1990s) devastated the founding generation of SF dance music. Cowley, Blecman, Sylvester, and countless DJs, promoters, and dancers died. The social infrastructure of a generation --- the bathhouses, the networks, the institutional memory --- was dismantled.
+
+The next generation of dancers responded not by retreating but by dancing harder, into house and techno sounds that carried both grief and defiance. This direct line from disco survival through AIDS and into the 1990s house scene is one of the defining characteristics that makes SF house culturally distinctive. It is music that has metabolized loss.
+
+\subsection{Module 02: The UK Invasion \& Rave Golden Era (1991--1999)}
+
+\subsubsection{Wicked Sound System: The UK Transplant}
+
+In early 1991, four DJs from the London acid house scene --- Jeno, Thomas Bullock (Tom of England), Markie, and Garth (Garth Wynne-Jones) --- relocated to San Francisco. They had been part of London's anarchist squat-party scene (Whoosh, Tonka) and were drawn by SF's countercultural energy, which they recognized as kindred. They formed the Wicked Sound System.
+
+Their first event used a borrowed sound system at Baker Beach --- the same beach where Larry Harvey had lit the original Burning Man bonfire in 1986. The fit was immediate: the city's hippie-psychedelic heritage absorbed acid house not as foreign music but as a natural evolution.
+
+Wicked's early years were defined by full moon parties, warehouse nights on Jessie Street, loft parties above BPM Records, and eventually a semi-permanent residency at the King Street Garage with a custom Tony Andrews-designed Turbosound system imported in 1994. By 1995, Wicked had become the go-to SF destination for touring DJs including DJ Harvey, Tony Humphries, and DJ Pierre. They disbanded in 2004 after a 13-year run.
+
+\subsubsection{The Hardkiss Brothers: American Parallel}
+
+Scott, Gavin, and Robbie Hardkiss (not blood relatives; Scott Friedel, Gavin Bieber, Robbie Sternberg) met at Penn State and drifted separately to San Francisco, where they launched Hardkiss Music in 1991 --- the same year as Wicked's arrival. Their sound was explicitly psychedelic: acid, progressive house, deep house, tribal, and breaks interleaved into long arcs of altered-state music-making.
+
+Their 1993 compilation \textit{Delusions of Grandeur} remains the definitive artifact of the SF rave era sound. Scott Hardkiss's solo project ``God Within'' and its track ``Raincry'' became canonical. The brothers signed to Columbia Records in 1997, but the deal collapsed; they disbanded and worked separately. Scott Hardkiss died of a cerebral aneurysm on March 25, 2014.
+
+\subsubsection{The Ecosystem of 1990s Bay Area Raving}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Crew / Party / Artist} & \tableheader{Contribution} \\
+\midrule
+Wicked Sound System & Full moon parties; Baker Beach lineage; UK acid house bridge \\
+Hardkiss Brothers & Psychedelic West Coast sound; Hardkiss Music label \\
+Freaky Chakra & Ambient/chill strand; Exist Dance label releases \\
+Pacific Sound System / Sunset Sound System & Outdoor party specialists; boat parties on SF Bay; 25+ year run \\
+Dubtribe Sound System & Live electronic; dub-house aesthetic \\
+Come Unity & Early rave collective; community-focus ethos \\
+Full Moon Raves & Regular outdoor format; non-commercial gathering \\
+Funky Tekno Tribe & Techno cross-pollination; SoMa warehouse parties \\
+Sister SF & Queer-inclusive large-scale events \\
+Toon Town & Large warehouse parties; international DJ bookings \\
+DJ Mark Farina & Mushroom Jazz series; defining deep house aesthetic \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 03: Labels, Records \& the SF Sound}
+
+\subsubsection{Label Genealogy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.8cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Label} & \tableheader{Founded} & \tableheader{Sound / Key Artists} & \tableheader{Status} \\
+\midrule
+Megatone Records & 1981 & Hi-NRG; Sylvester, Patrick Cowley, Paul Parker & Defunct 1992 \\
+Hardkiss Music & 1991 & Psychedelic house, acid, progressive; God Within, Hardkiss & Hibernated 1997 \\
+Exist Dance & 1993 & Ambient, chill; Freaky Chakra / Tranquility Bass & Defunct \\
+Grayhound Recordings & 1998 & Deep house, tech house; DJ Garth, Markie, DJ Harvey & Active \\
+Om Records & 1996 & Soulful/deep house; Miguel Migs, Kaskade early work & Defunct 2014 \\
+Dirtybird Records & 2005 & Tech-funk, playful house; VonStroke, Justin Martin, FISHER & Active (EMPIRE 2022) \\
+Dark Entries Records & 2009 & Reissue/archival; Cowley, post-punk, new wave, italo & Active \\
+HNYTRX & 2010 & Queer underground; Bezier, Jackie House & Active \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Defining the West Coast Sound}
+
+Multiple sources (DJ Mag, Vice, Resident Advisor) converge on a consistent characterization of the Bay Area house music sound that crystallized in the mid-1990s. Key characteristics:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Psychedelic depth:} Longer tracks, slower builds, emphasis on altered-state experience over peak-time drops
+  \item \textbf{Dub influence:} Spacious mixing, echo and reverb as structural elements, reggae-influenced low-end
+  \item \textbf{Organic texture:} Less clinical than Detroit techno; more warmth and groove than Chicago's minimalism
+  \item \textbf{Outdoor sensibility:} Music designed to sound right under open sky, at sunrise, in dust
+  \item \textbf{Eclectic sourcing:} Comfortable moving between acid, tribal, ambient, and funk within a single set
+\end{itemize}
+
+Dirtybird's ``tech-funk'' represented the next evolution: bouncier, more humorous, less ceremonial --- but still carrying the outdoor-party DNA and the willingness to be weird.
+
+\subsection{Module 04: Clubs, Venues \& Events}
+
+\subsubsection{The 1015 Folsom Lineage}
+
+1015 Folsom is the central institution of SF house music club culture. The address has housed dance venues continuously since the early 1980s (originally a bathhouse, then Major Ponds, then Das Klub, then Martini, then 1015). From 1996 onward, its weekend programming --- \textbf{Spundae} and \textbf{Release} --- became the longest-running weekly parties in SF history, launching the careers of Carl Cox, Paul Van Dyk, and Tiesto in the US market alongside deep local programming. The 20,000 sq ft space with five rooms across three levels remains active in 2026.
+
+\subsubsection{Venue Timeline: SF House Music Spaces}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Venue} & \tableheader{Key Years} & \tableheader{Role in Scene} \\
+\midrule
+Trocadero Transfer & 1977--1995 & Disco/hi-NRG anchor; bridge to house era \\
+The End Up & 1973--present & After-hours institution; queer anchor \\
+King Street Garage & 1992--2004 & Wicked Sound System home base; custom Turbosound \\
+1015 Folsom & 1991--present & Central institution; Spundae/Release weeklies \\
+Club Mighty & 2000s--2016 & Wicked reunions; community anchor; closed \\
+The Mezzanine & 1999--2019 & 12,000 sq ft SoMa; Dirtybird's home 2008--2018 \\
+Public Works & 2010--present & Community-focus; Funktion-One; 161 Erie St \\
+F8 & 2010--present & Intimate underground; 1192 Folsom; house+techno \\
+The Great Northern & 2013--present & Big-room; 119 Utah St; Void sound system \\
+The Midway & 2016--present & 40,000 sq ft Dogpatch; art+music; Funktion-One \\
+Halcyon & 2015--present & Late-night specialist; 1111 Folsom \\
+Underground SF & 2005--present & Intimate; 424 Haight; resident-led \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Gentrification Impact}
+
+The closure of Club Mighty, the Mezzanine, and several SoMa warehouse-adjacent spaces correlates directly with the 2010s tech boom. The remaining venues (Public Works, F8, Great Northern, The Midway) have survived partly through programming flexibility and community investment, and partly through operating in Dogpatch and SoMa areas that remain light-industrial. The venue ecosystem is smaller and more precarious than in the 1990s.
+
+\subsection{Module 05: The Outdoor \& Festival Continuum}
+
+\subsubsection{Baker Beach to Black Rock Desert: The Founding Line}
+
+The outdoor party is not incidental to SF house culture --- it \textit{is} SF house culture. The lineage:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{1986:} Larry Harvey and Jerry James burn a wooden man on Baker Beach, June 22. This becomes Burning Man.
+  \item \textbf{1991:} Wicked Sound System sets up their first sound system at Baker Beach (same beach) for a full moon party. Burning Man has recently relocated to Nevada. The two communities share DNA, personnel, and aesthetics for the next thirty years.
+  \item \textbf{1991--2004:} Wicked's full moon parties span Baker Beach, the Marin Headlands, and multiple outdoor locations. By 1994 they have a 1947 Greyhound bus to tour the country.
+  \item \textbf{1994--present:} Sunset Sound System founded; boat parties on SF Bay; annual Sunset Campout (Northern California).
+  \item \textbf{2003:} Claude VonStroke throws his first Golden Gate Park party with a picnic permit and 12 attendees.
+  \item \textbf{2005--present:} Dirtybird BBQ series in SF harbor-side parks; annual Dirtybird Campout festival (est. 2015).
+  \item \textbf{Ongoing:} How Weird Street Faire (longest-running electronic music street festival in North America); Burnal Equinox; Burning Man Decompression (annual SF/Oakland event).
+\end{itemize}
+
+\subsection{Module 06: Queer Underground Revival \& Future Trajectory}
+
+\subsubsection{Honey Soundsystem and the Cowley Resurrection}
+
+In 2007, five members of the newly formed Honey Soundsystem visited the SF apartment of John Hedges, former co-owner of Megatone Records, who was departing for Palm Springs. Among his record collection were two unmarked boxes of reel-to-reel tapes --- Patrick Cowley's unreleased recordings. Honey Soundsystem, whose explicit mission was ``continuing the queer musical traditions that thrived in San Francisco before the HIV/AIDS epidemic,'' recognized immediately what they had found.
+
+The resulting reissue campaign (via HNYTRX and Josh Cheon's Dark Entries Records) transformed Cowley from a mostly-forgotten session musician into an icon. \textit{School Daze} (2013), a double-LP of Cowley's gay porn film soundtracks, received universal acclaim from Pitchfork, NPR Music, and the global electronic music press. It demonstrated that SF's queer house origins were not merely local history but a living influence.
+
+\subsubsection{Contemporary Scene (2023--2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Entity} & \tableheader{Role in Current Scene} \\
+\midrule
+Dark Entries Records & Premier archival/reissue label; Josh Cheon; queer history stewardship \\
+Dirtybird (under EMPIRE) & National label presence; Campout and BBQ events; VonStroke now in ``underground return'' mode \\
+Honey Soundsystem & Long-running queer party series; archival stewardship \\
+Sunset Sound System & 25+ year outdoor party legacy; boat parties; Sunset Campout \\
+Public Works & Community anchor; international bookings + local support \\
+F8 & Underground intimacy; nurtures emerging talent \\
+The Great Northern & Big-room statement nights; Void sound system \\
+The Midway & Scale + art installation integration; Dogpatch anchor \\
+Halcyon & Late-night specialist; 1111 Folsom \\
+Burning Man community & Annual Decompression + Burnal Equinox; year-round scene social glue \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Future Trajectory Vectors}
+
+Three credible vectors for the scene's future:
+
+\begin{enumerate}
+  \item \textbf{Underground consolidation:} As the post-pandemic music economy normalizes, SF's scene is consolidating around a smaller number of quality venues with committed communities. Claude VonStroke's 2026 ``wrong number'' pivot --- intimate venues, lean records, underground ethos --- signals broader direction.
+  \item \textbf{Archival renaissance continues:} Dark Entries and HNYTRX have established SF as a world center for dance music reissue and archival work. This generates international attention and supports a living connection between the city's music past and present.
+  \item \textbf{Burning Man community adaptation:} With Burning Man itself in financial difficulty (2024--2025), the Bay Area community events (Decompression, Burnal Equinox) are growing in importance as year-round touchpoints. The dance music community that coheres around these events is the strongest active connective tissue in the contemporary scene.
+\end{enumerate}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+AIDS epidemic content & GATE & Handle with archival care; no voyeurism; center the human loss and cultural continuity \\
+Queer identity framing & ABSOLUTE & Name specifically; do not genericize or tokenize; ``gay,'' ``queer,'' ``LGBTQ'' as appropriate to era \\
+Rave drug culture & ANNOTATE & Contextualize historically; do not glamorize; do not editorialize morally \\
+Living subjects & GATE & Verify consent-appropriate framing for living DJs quoted or characterized \\
+Patrick Cowley materials & ANNOTATE & His gay porn soundtracks are legitimate artistic work; treat as archival music, not prurient content \\
+Oakland Ghost Ship fire & ABSOLUTE & Reference with full respect; 36 lives lost December 2, 2016; do not use as scene color \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Music Journalism \& Longform}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item DJ Mag. ``The Renegade Soundsystems of California that Shaped West Coast Rave Culture.'' Jan 2020.
+  \item DJ Mag. ``It Takes a Village, People: Preserving San Francisco's Gay Disco History.'' Jan 2022.
+  \item Vice / Okayfuture. ``Meet the Renegade DJ Crew Who Helped Bring Rave Culture to the West Coast'' (Wicked retrospective).
+  \item Magnetic Magazine. ``The Rave Pioneers: Catching Up With San Francisco's Wicked Sound System.'' July 2016.
+  \item Okayfuture. ``Throwback Thursdays: San Francisco Raves in the 1990s'' (5-part series).
+  \item KQED Arts. ``How SF's Dirtybird Grew from Outsider Party to Beloved House Music Label.''
+  \item Bandcamp Daily. ``The Queer Underground Dance Music of Honey Soundsystem Records.'' Feb 2024.
+  \item East Bay Express. ``Celebrating the Last of Disco Innovator Patrick Cowley's Lost Porn Soundtracks.'' Nov 2017.
+  \item SF Weekly. ``Hive Mind: Honey Soundsystem Turns 10.'' Nov 2017.
+  \item XLR8R. ``Money Shots: Five Things You Need to Know About Gay Electronic Wizard Patrick Cowley.''
+  \item The Dowsers. ``Studs, Synths, and Liberation: A Brief History of SF Disco.''
+  \item Electronic Beats. ``11 DJs and Producers Reviving San Francisco's Scene.'' Dec 2019.
+  \item Modern Luxury. ``Bay Area Rave Culture: A Journey from Underground to Mainstream.'' May 2025.
+  \item Spotify for Artists. ``Label Spotlight: Dirtybird Records.''
+  \item Billboard. ``Claude VonStroke's Dirtybird Label Acquired by EMPIRE.'' Oct 2022.
+  \item Blacksine. ``San Francisco House \& Techno Clubs: A 2025 Guide.'' Oct 2025.
+\end{itemize}
+
+\subsubsection{Wikipedia Reference Articles}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item ``House music'' --- Wikipedia (global history with SF section)
+  \item ``Dirtybird Records'' --- Wikipedia
+  \item ``Claude VonStroke'' --- Wikipedia
+  \item ``DJ Garth'' --- Wikipedia
+  \item ``Burning Man'' --- Wikipedia
+\end{itemize}
+
+\subsubsection{Venue \& Event Primary Sources}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item 1015.com/about/ --- 1015 Folsom institutional history
+  \item Claude VonStroke official site (claudevonstroke.com) --- 2026 artist statement
+  \item Burning Man Project (burningman.org) --- Decompression and Burnal Equinox documentation
+  \item 19hz.info --- Bay Area electronic music event listing database
+  \item Gestalten. Josh Cheon interview. 2019.
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality cultural history and contemporary survey of the San Francisco Bay Area house music scene --- spanning queer disco roots (1975), through the UK rave invasion (1991), the golden era of clubs and raves (1990s), the queer archival revival (2006--present), and the living contemporary scene (2026). The output is a comprehensive reference document suitable for archival use, educational purposes, and handoff to the GSD skill-creator ecosystem for further execution.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+SF HOUSE MUSIC MISSION -- WAVE ARCHITECTURE
+=============================================
+
+WAVE 0: FOUNDATION (Sequential, Haiku)
+  [schema] [source-index] [sensitivity-flags]
+
+WAVE 1A (Parallel):                WAVE 1B (Parallel):
+  MOD-01: Queer Disco Pre-History    MOD-04: Clubs & Venues Timeline
+  MOD-02: UK Invasion & Rave Era     MOD-05: Outdoor & Festival Continuum
+
+WAVE 1C (Parallel):
+  MOD-03: Labels & the SF Sound
+
+        |               |               |
+        v               v               v
+         \             |             /
+          \            |            /
+           \           v           /
+WAVE 2: SYNTHESIS (Sequential, Opus)
+  [west-coast-sound-def] [queer-thread-synthesis]
+  [venue-gentrification-analysis] [future-projection]
+  CAPCOM GATE: Cultural sensitivity review
+
+WAVE 3: PUBLICATION (Sequential, Sonnet)
+  [final-document-assembly] [LaTeX-compilation]
+  [index-html-generation] [present-files]
+
+         MOD-06: Contemporary Scene & Future
+         (runs concurrent with Wave 2 synthesis)
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Cultural Archive Layer:} Primary historical documentation --- people, dates, labels, venues, events
+  \item \textbf{Sound Analysis Layer:} Musical characterization --- defining the West Coast sound and its evolution
+  \item \textbf{Community Layer:} Social and political context --- queer identity, AIDS, counterculture, gentrification
+  \item \textbf{Continuity Layer:} The outdoor/festival thread connecting 1986 Baker Beach to 2026
+  \item \textbf{Contemporary Layer:} Active venue, artist, and collective mapping
+  \item \textbf{Synthesis Layer:} Cross-module integration and future projection
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 01 Doc & 8+ DJs, 5+ venues, 3+ labels documented; AIDS context handled with sensitivity & MOD-01-SPEC \\
+2 & Module 02 Doc & Wicked + Hardkiss timelines; 1990s party ecosystem table; West Coast sound characterized & MOD-02-SPEC \\
+3 & Module 03 Doc & 8+ labels; discography samples; sound definition synthesized & MOD-03-SPEC \\
+4 & Module 04 Doc & 15+ venues in timeline; gentrification pattern mapped & MOD-04-SPEC \\
+5 & Module 05 Doc & Baker Beach–Burning Man–outdoor lineage; 35-year span; named events & MOD-05-SPEC \\
+6 & Module 06 Doc & 6+ active venues, collectives, artists; 3 future vectors & MOD-06-SPEC \\
+7 & Synthesis Report & West Coast sound defined; queer thread unified; cross-module connections & SYNTH-SPEC \\
+8 & Final PDF & Complete 3-stage document; XeLaTeX compiled; 40+ pages & PDF-SPEC \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0-Schema & None & Haiku & 2K \\
+W0-Source-Index & None & Haiku & 3K \\
+MOD-01-Pre-History & Schema, Sources & Sonnet & 12K \\
+MOD-02-Rave-Era & Schema, Sources & Sonnet & 15K \\
+MOD-03-Labels & Schema, Sources & Sonnet & 10K \\
+MOD-04-Venues & Schema, Sources & Sonnet & 10K \\
+MOD-05-Outdoor & Schema, Sources & Sonnet & 8K \\
+MOD-06-Contemporary & Schema, Sources, MOD-03-06 & Opus & 15K \\
+W2-Synthesis & All MODs & Opus & 20K \\
+W3-Publication & Synthesis & Sonnet & 8K \\
+\textbf{Total} & & & \textbf{$\sim$103K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schema + source index \\
+1A & Pre-History + Venues & Parallel & Sonnet & MOD-01 + MOD-04 \\
+1B & Rave Era + Outdoor & Parallel & Sonnet & MOD-02 + MOD-05 \\
+1C & Labels & Parallel & Sonnet & MOD-03 \\
+1D & Contemporary & Concurrent w/ Wave 2 & Opus & MOD-06 \\
+2 & Synthesis & Sequential & Opus & Synthesis doc + sensitivity review \\
+3 & Publication & Sequential & Sonnet & Final PDF + index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{HITL CAPCOM Gates}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Gate} & \tableheader{Trigger} & \tableheader{Review Required} \\
+\midrule
+POST-WAVE-0 & Foundation complete & Confirm source index; approve sensitivity flag list \\
+POST-WAVE-1 & All module docs complete & Scope check; confirm West Coast sound characterization; queer content review \\
+POST-WAVE-2 & Synthesis complete & Full cultural sensitivity review; approve future projection framing \\
+POST-WAVE-3 & PDF compiled & Final approval before present\_files delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Shared source index (30 sources) computed once in Wave 0, reused across all module agents (5-minute TTL)
+  \item Cultural sensitivity flag set computed once in Wave 0, passed to all agents as shared context
+  \item Venue/label tables generated in canonical format in Wave 1 modules, reused in Synthesis without regeneration
+  \item West Coast sound definition built progressively: MOD-02 proposes draft, MOD-03 refines, Synthesis locks
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+W0-Schema ─────────────────────────────────────────┐
+W0-Source-Index ────────────────────────────────────┤
+                                                    │
+              ┌──── MOD-01 (Pre-History)            │
+              ├──── MOD-02 (Rave Era)        ←──────┤
+              ├──── MOD-03 (Labels)                 │
+              ├──── MOD-04 (Venues)          ←──────┤
+              └──── MOD-05 (Outdoor)                │
+                         │                          │
+              ┌──── MOD-06 (Contemporary)    ←──────┘
+              │         │
+              └─────────┼──────────────────────────┐
+                        v                          │
+               W2-Synthesis ←──────────────────────┘
+                        │
+                        v
+               W3-Publication
+                        │
+                        v
+                 present_files()
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical (cultural sensitivity) & 4 & P0 & BLOCK -- halt until resolved \\
+Core Factual Accuracy & 8 & P1 & REVISE before proceeding \\
+Coverage Completeness & 6 & P2 & FLAG for human review \\
+Integration (cross-module) & 4 & P2 & REVISE synthesis \\
+Edge Cases & 3 & P3 & ANNOTATE and continue \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+SC-01 & AIDS content handling & No voyeuristic or sensationalized framing; loss centered, community resilience foregrounded \\
+SC-02 & Queer identity naming & Named specifically (``gay,'' ``queer,'' not ``alternative lifestyle''); historically appropriate terms \\
+SC-03 & Oakland Ghost Ship & If referenced, full respect; no use as scene color; 36 deaths named as human loss \\
+SC-04 & Patrick Cowley's materials & Porn soundtracks treated as legitimate archival music; no prurient framing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Pre-history: 8 DJs, 5 venues, 3 labels & CORE-01, COV-01 & Pre-execution \\
+Wicked timeline documented & CORE-02, COV-02 & Pre-execution \\
+Hardkiss documented & CORE-03 & Pre-execution \\
+Label discography (5+ labels) & CORE-04, COV-03 & Pre-execution \\
+Venue timeline (15+ venues) & CORE-05, COV-04 & Pre-execution \\
+Outdoor continuum (35+ years) & CORE-06, COV-05 & Pre-execution \\
+Queer thread documented & SC-01, SC-02, INTEG-01 & Pre-execution \\
+Contemporary scene (6+) & COV-06, CORE-07 & Pre-execution \\
+Future vectors (3) & CORE-08, EDGE-01 & Pre-execution \\
+West Coast sound defined & INTEG-02, INTEG-03 & Pre-execution \\
+30+ citations & CORE-07 & Pre-execution \\
+Cultural sensitivity & SC-01, SC-02, SC-03, SC-04 & Pre-execution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go; cross-module coherence \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Gap-fill web research; source validation \\
+EXEC-A & Executor Alpha & MOD-01, MOD-02 document production \\
+EXEC-B & Executor Beta & MOD-03, MOD-04 document production \\
+EXEC-C & Executor Gamma & MOD-05, MOD-06 document production \\
+CRAFT-CULT & Culture Specialist & Queer history depth; AIDS era handling \\
+CRAFT-SOUND & Sound Specialist & Musical characterization; West Coast sound definition \\
+CRAFT-HIST & History Specialist & Chronology; venue timelines; label genealogy \\
+VERIFY & Verification Agent & Source validation; factual accuracy \\
+INTEG & Integration Agent & Cross-module consistency; through-line validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Cultural drift detection; sensitivity degradation \\
+TOPO & Topology Manager & Team structure; mid-mission restructuring if needed \\
+RETRO & Retrospective & Post-wave lessons; synthesis quality \\
+LOG & Chronicle Agent & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Research Modules & 6 \\
+Crew Size & 17 roles \\
+Execution Waves & 4 (0--3) + Wave 1 has 4 parallel tracks \\
+CAPCOM Gates & 4 \\
+Estimated Token Budget & $\sim$103K across all agents \\
+Estimated Sessions & 3 \\
+Estimated Context Windows & 6 \\
+Safety Classification & HIGH (queer history, AIDS, living subjects) \\
+Primary Output & Publication-quality PDF cultural history \\
+Secondary Outputs & Module docs, synthesis report, index.html \\
+Handoff Target & gsd-skill-creator (Claude Code) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``It was a vacuum. We were pretty unconcerned with what was happening elsewhere. Everyone was in love with the music and the times.''} --- Gavin Hardkiss, on San Francisco in the 1990s
+
+\vspace{0.8em}
+{\small\sffamily\textcolor{tertiary}{The spaces between are where meaning lives. Between Baker Beach and Black Rock Desert. Between Patrick Cowley's synthesizer and Sylvester's voice. Between the AIDS memorial and the next sunrise party. The mission is to document those spaces --- not to fill them, but to make them visible. The Amiga Principle holds here too: the remarkable complexity of a living music scene emerges not from any single genius, but from faithful, beautiful iteration of a simple protocol: come together, play music, hold space, survive.}}
+\end{quotebox}
+
+\end{document}

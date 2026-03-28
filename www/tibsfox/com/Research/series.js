@@ -112,6 +112,7 @@
     { id: 'SAL', name: 'Salmon Heritage', path: 'SAL/index.html' },
     { id: 'SET', name: 'SETI', path: 'SET/index.html' },
     { id: 'SFC', name: 'Silicon Forest', path: 'SFC/index.html' },
+    { id: 'SFH', name: 'SF House Music', path: 'SFH/index.html' },
     { id: 'SGL', name: 'Signal & Light', path: 'SGL/index.html' },
     { id: 'SGM', name: 'Sacred Geometry', path: 'SGM/index.html' },
     { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
