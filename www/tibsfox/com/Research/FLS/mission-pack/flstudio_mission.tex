@@ -1,0 +1,1096 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Technology domain colors ──────────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep navy – precision
+\definecolor{secondary}{HTML}{0277BD}     % Signal blue – energy
+\definecolor{tertiary}{HTML}{37474F}      % Graphite – depth
+\definecolor{accent}{HTML}{1565C0}        % Electric blue – highlights
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section formatting ─────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom environments ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and footers ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{FL Studio / FruityLoops}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ─────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={FL Studio / FruityLoops -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════════════════
+% TITLE PAGE
+% ════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{FL Studio\\[0.3em]The Architecture of Instant Gratification}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{FruityLoops 1997 to FL Studio 2025 --- Full Ecosystem Study}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 5--7 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ════════════════════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ════════════════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════
+% STAGE 1: VISION DOCUMENT
+% ════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{FL Studio --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{GSD Core Workflow Engine, Amiga Principle Architectural Reference}
+\metafield{Context:}{This mission explores FL Studio (formerly FruityLoops) as a case study in the Amiga Principle --- how architectural elegance and low-barrier design can generate outsized cultural and sonic impact far exceeding what brute-force resources alone would predict.}
+
+\subsection{Vision}
+
+There is a Belgian software company whose founders once sold an adult Tetris clone on floppy disks. From that improbable seed grew one of the most genre-defining pieces of software in music history. FL Studio --- born in 1997 as the four-channel MIDI step sequencer FruityLoops, renamed after a trademark challenge from a breakfast cereal company --- is the story of how a programmer with no musical training and no interest in making music accidentally gave the entire world a new way to think about sound.
+
+The ``spaces between'' are everywhere in FL Studio's story. The space between a step being lit and a step being dark is a beat. The space between a pattern on the Channel Rack and a position on the Playlist is an arrangement. The space between a 12-year-old in a bedroom in Wolverhampton clicking step buttons and a charting grime producer is, often, just time. FL Studio did not succeed because it was the most powerful DAW. It succeeded because it minimized the friction between thought and execution --- because it understood that creative hesitation kills ideas, and that the fastest path from imagination to sound is worth more than any feature set.
+
+The Amiga Principle is fully alive here. Image-Line is a small Belgian company, not a Silicon Valley titan. FruityLoops 1.0 was built by a single developer. Yet the pattern-based architecture that Didier Dambrin designed in 1997 went on to power hip-hop trap beats, UK grime, Dutch bubbling, South African Amapiano, Mexican tribal guarachero, and festival EDM heard by billions. The architecture was right. The architecture was lean. And through faithful, continuous iteration --- Lifetime Free Updates, every version free to every registered user --- it compounded into a cultural phenomenon.
+
+This mission documents FL Studio across five axes: its origins and version evolution, its technical architecture, its native plugin ecosystem, its global cultural footprint, and the business model that made all of it possible. The goal is a complete reference document ready for GSD execution --- one that understands the ``spaces between'' as a lived design philosophy, not just a metaphor.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The democratization gap is poorly documented.} FL Studio is frequently cited as having ``democratized'' music production, but the specific mechanisms --- piracy as inadvertent distribution, the Lifetime Free Updates model as a countermeasure, the free trial's unlimited-time structure --- are scattered across interviews, forums, and company blog posts. No single comprehensive reference connects these threads.
+
+  \item \textbf{The architecture of ``instant gratification'' is under-theorized.} The pattern-based workflow that made FruityLoops an overnight viral success is often described as ``easy to use'' without structural analysis. The Channel Rack $\rightarrow$ Piano Roll $\rightarrow$ Playlist pipeline embodies specific design decisions that warrant systematic documentation.
+
+  \item \textbf{Genre-formation linkages are opaque.} FL Studio's role in the formation of trap, grime, dubstep, and Amapiano is acknowledged but not traced in detail. Which specific affordances enabled which sonic innovations? Why did Atlanta trap producers and East London grime producers converge on the same Belgian step sequencer?
+
+  \item \textbf{The native plugin ecosystem lacks consolidated reference.} FL Studio ships with over 100 instruments and effects --- Sytrus, Harmor, Gross Beat, ZGameEditor Visualizer, FLEX, Kepler, Maximus --- each with significant technical depth. No single document covers the full constellation.
+
+  \item \textbf{The business model's long-term sustainability is an open question.} Lifetime Free Updates is the DAW industry's most user-favorable pricing model and almost unique in the market. As FL Cloud, AI mastering, and subscription services arrive alongside it, the tension between the perpetual license ethos and SaaS revenue pressures needs examination.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Step is the Unit.} FL Studio's entire architecture radiates outward from a single, atomic interaction: clicking a step button in the Channel Rack. Everything else --- Piano Roll, Playlist, Mixer, automation, plugin hosting --- is an elaboration of that primal act. The design philosophy is: make the first thing so simple it feels like a game, then reveal infinite depth as the user is ready for it.
+
+\subsubsection{Domain Map: Image-Line Ecosystem}
+
+\begin{asciibox}
+FL STUDIO ECOSYSTEM MAP
+========================
+
+  IMAGE-LINE SOFTWARE (Ghent, Belgium, founded 1994)
+  |
+  |── FL STUDIO (desktop: Windows + macOS)
+  |    |── Channel Rack / Step Sequencer
+  |    |── Piano Roll (widely regarded best-in-class)
+  |    |── Playlist (arrangement layer)
+  |    |── Mixer (up to 500 insert tracks, FL Studio 2025)
+  |    |── Plugin Architecture (FL Native / VST / AU / CLAP)
+  |    |── FL Cloud (AI mastering + sample library, 2023+)
+  |    `── Gopher (AI assistant, 2025)
+  |
+  |── FL STUDIO MOBILE (iOS / Android / UWP)
+  |
+  |── NATIVE PLUGINS (100+)
+  |    |── Synthesizers: Sytrus, Harmor, FLEX, Kepler, 3xOSC
+  |    |── Samplers:    DirectWave, Slicex, Fruity Slicer 2
+  |    |── Effects:     Gross Beat, Maximus, ZGameEditor Viz
+  |    `── Analysis:    Stem Separation (v21.2), Edison
+  |
+  `── HARDWARE PARTNERSHIPS
+       |── Akai FIRE (channel rack controller)
+       `── Novation FLkey (dedicated keyboard line)
+
+VERSION TIMELINE (major milestones)
+=====================================
+  1997 ─── FruityLoops 1.0 (4-channel MIDI drum machine)
+  1998 ─── Official launch; servers crash from demand
+  1999 ─── VST/DirectX plugin support added
+  2003 ─── Renamed FL Studio 4.0 (Kellogg's trademark)
+  2007 ─── FL Studio 7; Deckadance DJ app
+  2018 ─── FL Studio 20; macOS support at last
+  2022 ─── FL Studio 21; upgraded Browser, LuxeVERB
+  2023 ─── FL Studio 21.2; Stem Separation + FL Cloud
+  2024 ─── FL Studio 2024.1; CLAP plugin format support
+  2025 ─── FL Studio 2025.2; Fruity Slicer 2, Emphasizer,
+           500 Mixer Tracks, Gopher AI assistant
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+==============================
+
+  MODULE 01: ORIGINS & EVOLUTION
+    |- FruityLoops 1.0 through FL Studio 2025
+    |- Didier Dambrin; Image-Line founding; Kellogg's saga
+    `- Piracy crisis and the invention of Lifetime Free Updates
+
+  MODULE 02: TECHNICAL ARCHITECTURE
+    |- Pattern engine; Channel Rack; Step Sequencer
+    |- Piano Roll (MIDI editing, scale snapping, scripts)
+    |- Playlist (arrangement), Mixer (routing, sends)
+    `- Audio engine: 32-bit float, 192kHz, VST/AU/CLAP
+
+  MODULE 03: NATIVE PLUGIN ECOSYSTEM
+    |- Synthesizers: Sytrus (FM+subtractive), Harmor (additive+resynthesis)
+    |- FLEX (preset-based), Kepler (analog modeling), 3xOSC
+    |- Effects: Gross Beat (stutter/gate), ZGE Visualizer, Maximus
+    `- AI tools: Stem Separation, Gopher, FL Cloud mastering
+
+  MODULE 04: CULTURAL IMPACT & GENRE FORMATION
+    |- Hip-hop / Trap: Lex Luger, Metro Boomin, Southside
+    |- Grime / Dubstep: UK bedroom producers
+    |- Global scenes: Bubbling (NL), Amapiano (ZA), Guarachero (MX)
+    `- EDM: Deadmau5, Avicii, Martin Garrix, Madeon
+
+  MODULE 05: BUSINESS MODEL & FUTURE
+    |- Lifetime Free Updates: origins, mechanics, ethos
+    |- Pricing tiers: Fruity / Producer / Signature / All Plugins
+    |- FL Cloud: AI mastering, sample library, SaaS tension
+    `- FL Mobile, hardware, and the web-browser DAW horizon
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Origins and Evolution}
+Documents the full developmental arc from FruityLoops 1.0 (December 18, 1997) to FL Studio 2025.2. Key nodes: Didier Dambrin's role as accidental inventor; Image-Line's founding by Jean-Marie Cannie and Frank Van Biesen; the shareware distribution strategy that crashed hosting servers on launch day; the piracy crisis that nearly killed the company; the Kellogg's trademark dispute and the 2003 rename; the 2018 macOS expansion; and the current AI-integration phase.
+
+\subsubsection{Module 02: Technical Architecture}
+Systematic documentation of FL Studio's four primary interface components --- Channel Rack/Step Sequencer, Piano Roll, Playlist, and Mixer --- and their interconnection logic. Includes the audio engine specification (32-bit float, 192kHz), plugin wrapper architecture (FL Native, VST 2/3, DirectX, AU, CLAP), and the pattern-versus-timeline debate that has defined FL Studio's identity. Also covers FL Studio 2025's expansion to 500 dynamic Mixer tracks and per-clip audio editing.
+
+\subsubsection{Module 03: Native Plugin Ecosystem}
+Catalogs the over-100-plugin native toolkit with technical depth on flagship instruments and effects. Focus on: Sytrus (hybrid FM/subtractive synthesis with ring modulation), Harmor (additive synthesis with image resynthesis), Gross Beat (time/pitch stuttering), ZGameEditor Visualizer (beat-reactive music video rendering), FLEX (preset-based streaming instrument), Kepler (analog Juno/Jupiter recreation), and AI-powered additions including Stem Separation and the Gopher assistant.
+
+\subsubsection{Module 04: Cultural Impact and Genre Formation}
+Traces FL Studio's role as infrastructure for multiple genre-formation events across global music scenes. Primary focus on the trap production lineage (Atlanta 2010s), UK grime development, and FL Studio's unusual penetration into non-Western popular music markets. Analyzes the specific DAW affordances --- step sequencer immediacy, visual beat programming, accessible 808 integration --- that made FL Studio the preferred tool for producers working outside formal music education systems.
+
+\subsubsection{Module 05: Business Model and Future}
+Examines Image-Line's distinctive Lifetime Free Updates model as a response to early piracy pressure and its evolution into a competitive advantage. Documents current pricing tiers, FL Cloud's subscription overlay, the FL Mobile mobile strategy, and the emerging tensions as cloud/AI services arrive alongside a perpetual-license heritage. Also covers hardware partnerships (Akai FIRE, Novation FLkey) and speculative analysis of browser-based DAW futures.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# FL Studio Research Mission --- Chipset YAML
+# GSD Amiga Architecture
+
+agnus:                    # Orchestration / DMA / Context Management
+  model: claude-opus-4-5
+  role: FLIGHT + PLAN
+  responsibilities:
+    - Mission direction and go/no-go gates
+    - Wave decomposition and dependency management
+    - Cross-module integration decisions
+    - Cultural sensitivity review (genre attribution)
+
+denise:                   # Display / Output Rendering
+  model: claude-sonnet-4-5
+  role: EXEC (x2) + LOG
+  responsibilities:
+    - Module document production (primary executor)
+    - Source formatting and bibliography assembly
+    - Audit trail and commit messages
+
+paula:                    # I/O / Anticipatory / Research
+  model: claude-sonnet-4-5
+  role: SCOUT + VERIFY + CRAFT-HIST + CRAFT-TECH
+  responsibilities:
+    - Web research and source gathering
+    - Technical architecture documentation (CRAFT-TECH)
+    - Historical timeline assembly (CRAFT-HIST)
+    - Source validation and accuracy checking
+
+gary_68000:               # Scaffolding / Glue Logic
+  model: claude-haiku-4-5
+  role: BUDGET + CAPCOM + SURGEON + INTEG
+  responsibilities:
+    - Token budget tracking
+    - HITL approval interface
+    - Health monitoring
+    - Cross-module consistency checking
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item FL Studio version history from FruityLoops 1.0 (1997) to FL Studio 2025.2
+  \item Technical architecture of all four primary interface components
+  \item Native plugin catalog with technical depth on flagship instruments and effects
+  \item Cultural impact documentation across hip-hop, grime, EDM, and identified global scenes
+  \item Image-Line business model including Lifetime Free Updates, FL Cloud, and FL Mobile
+  \item Hardware partnerships (Akai FIRE, Novation FLkey line)
+  \item Competitive positioning vs. Ableton Live, Logic Pro, and Pro Tools
+  \item AI integration features through FL Studio 2025 release date
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Step-by-step production tutorials or instructional content
+  \item Third-party plugin ecosystem (Serum, Nexus, Omnisphere)
+  \item Undocumented features, pre-release betas beyond publicly announced releases
+  \item Specific financial data for Image-Line (privately held)
+  \item Artist royalty and production credit disputes
+  \item Legal proceedings beyond the Kellogg's trademark matter
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Complete version timeline from FruityLoops 1.0 to FL Studio 2025 with at least 12 documented milestones and sources for each
+  \item Technical architecture of all four primary interface components documented with accurate functional descriptions
+  \item Native plugin catalog covers all flagship synthesizers (Sytrus, Harmor, FLEX, Kepler) and effects (Gross Beat, ZGE Visualizer, Maximus) with synthesis methodology specified
+  \item AI-powered feature set (Stem Separation, Gopher, FL Cloud mastering) documented with current version accuracy as of FL Studio 2025
+  \item Cultural impact section covers at least four distinct genre/regional scenes with named producers and specific production affordances identified
+  \item Piracy crisis narrative traced from onset through Lifetime Free Updates response with timeline accuracy
+  \item Kellogg's trademark dispute documented with outcome and branding consequence
+  \item Business model comparison includes current pricing tier structure and FL Cloud subscription mechanics
+  \item Hardware partnership documentation covers both Akai FIRE and Novation FLkey with functional descriptions
+  \item CLAP plugin format adoption documented with transition context from VST
+  \item All claims attributed to Image-Line official sources, Wikipedia (with primary source verification), or professional music technology press
+  \item Document is self-contained: a reader with no prior FL Studio knowledge can build a comprehensive understanding from it alone
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Deep Audio Analyzer Mission & Shares audio signal processing concepts; FL Studio's Edison/Stem Separation map to analyzer signal chains & Complete \\
+GSD Instruction Set Architecture Vision & FL Studio's pattern engine is an instructive model for GSD's own Slice/Task hierarchy & Active \\
+The Space Between (TSB) & FL Studio's step sequencer as embodiment of TSB's ``spaces between'' philosophy --- lit vs. unlit steps as binary states in a vector space & Reference \\
+GSD Amiga Vision & FL Studio's Chipset YAML maps directly; Agnus/Denise/Paula roles mirror Image-Line's architectural decisions & Active \\
+College of Knowledge & FL Studio production methodology as candidate curriculum module & Future \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Didier Dambrin had no musical training. He built FruityLoops because he thought it would be interesting, not because he was a producer. The development team at Image-Line had little formal music theory background. COO Scott Fisher explicitly credited this non-expert origin for the software's accessibility: ``Dambrin credits the ease of use to the development team's lack of musical knowledge.''
+
+This is the Amiga Principle in its purest form. The most transformative tool was built by people who had no preconceptions about how music production ``should'' work. They built for the spaces between notes --- for the rhythm of clicking and releasing, for the visual feedback of a lit grid, for the satisfaction of making something that sounded like music in under five minutes. They built for instant gratification, and in doing so they gave the world a creativity accelerator.
+
+The through-line connecting FL Studio's architecture to GSD's own design philosophy is not metaphorical. Both systems understand that the bottleneck is not computational power or feature count --- it is the friction between intention and execution. FL Studio's Channel Rack minimizes that friction for a beat-maker. GSD's fresh-context subagent architecture minimizes it for a builder. The step is the unit. The task is the unit. Start there. Elaborate from there. Trust the iteration to compound.
+
+
+% ════════════════════════════════════════════════════════════════════
+% STAGE 2: RESEARCH REFERENCE
+% ════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{FL Studio --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This stage contains the compiled research findings organized by module. All claims are attributed. Agent crews executing Module documents should treat this section as the primary source substrate; conduct additional targeted web research only to fill cited gaps.
+
+Key source organizations and references:
+\begin{itemize}[noitemsep]
+  \item \textbf{Image-Line official sources:} \url{https://www.image-line.com} (company history, version notes, feature documentation)
+  \item \textbf{FL Studio official manual:} \url{https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/}
+  \item \textbf{DJ Mag longread:} ``How FL Studio Changed Electronic Music Forever'' (September 2024)
+  \item \textbf{Red Bull Music Academy Daily:} ``How Fruity Loops Changed Music-Making Forever'' (May 2015)
+  \item \textbf{Wikipedia:} FL Studio and Image-Line articles (with primary source cross-checking required)
+  \item \textbf{FL Studio official forum:} \url{https://forum.image-line.com} (version release threads)
+\end{itemize}
+
+\subsection{Module 01 Reference: Origins and Evolution}
+
+\subsubsection{Founding of Image-Line}
+
+Image-Line was founded in 1994 by Jean-Marie Cannie and Frank Van Biesen, both former employees of Pavell Software (stock market software). After leaving Pavell, their first product was an adult Tetris clone sold on floppy disks via classified ads in a Belgian computer magazine. They subsequently partnered with adult video game publisher Private on CD-ROM titles. Their participation in IBM's ``Da Vinci'' multimedia contest introduced them to Didier ``Gol'' Dambrin, who had won both the overall contest and the game category.
+
+\subsubsection{FruityLoops 1.0 (December 18, 1997)}
+
+Inspired by Hammerhead Rhythm Station (a TR-909 emulation) and Rebirth 338 (early software synthesizer), Dambrin developed FruityLoops as an attempt to merge the two into a single step sequencer. He had no musical training. Image-Line was initially unsure how to position the product. The first public release on December 18, 1997 (a partial release; full launch in early 1998) crashed hosting servers within days from download demand. Jean-Marie Cannie described the launch: ``One crashed hosting server after another proved the market validity of our new product.''
+
+The shareware strategy was distinctive: rather than imposing a time limit, the trial version allowed unlimited use including audio export. The only restriction was that saved projects could not be reloaded without purchase. This created a compelling incentive structure that prefigured the modern freemium model.
+
+\subsubsection{Early Growth and Piracy Crisis}
+
+FruityLoops grew rapidly but software piracy was an existential threat. Image-Line spent nearly five years without turning a profit as cracked copies circulated through peer-to-peer networks. By approximately 2003, the situation had become critical. Image-Line's response was structural rather than purely defensive: they embraced the demo model, offered a fully functional trial, and introduced \textbf{Lifetime Free Updates} --- a policy granting all registered users every future version of FL Studio at no additional cost. This anti-piracy strategy through value creation became the company's defining competitive differentiator.
+
+\subsubsection{The Kellogg's Trademark Dispute and the FL Studio Rename (2003)}
+
+When Image-Line attempted to register ``FruityLoops'' as a trademark in the United States, Kellogg's (manufacturer of Froot Loops cereal) filed an objection. Image-Line believed they had a strong case --- the two industries were clearly separate. However, Kellogg's claimed they had distributed software CDs in cereal boxes, establishing a software-industry presence. Rather than litigate for years, Image-Line opted for a rebrand. The name ``FruityLoops'' also carried marketing liabilities: it was frequently not taken seriously in hardware manufacturer meetings, requiring lengthy explanations that it was a legitimate production tool. The rename to ``FL Studio'' in version 4.0 (2003) immediately elevated the software's professional credibility.
+
+\subsubsection{Version History: Major Milestones}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Version} & \tableheader{Key Development} & \tableheader{Year} \\
+\midrule
+FruityLoops 1.0 & 4-channel MIDI step sequencer; server-crashing launch & Dec 1997 \\
+FruityLoops 2.x & VST and DirectX plugin support added & 1999--2000 \\
+FL Studio 4.0 & Kellogg's rename; full DAW structure; mastering tools & 2003 \\
+FL Studio 7 & Fruity Wrapper for 3rd-party VST hosting & 2007 \\
+FL Studio 9 & ZGameEditor Visualizer introduced (early version) & 2009--2010 \\
+FL Studio 11 & Performance mode, Playlist track improvements & 2013 \\
+FL Studio 12 & Step Sequencer renamed Channel Rack; deeper Piano Roll integration & 2015 \\
+FL Studio 20 & macOS support; lifetime update policy reinforced & May 2018 \\
+FL Studio 21 & Upgraded Browser, LuxeVERB, Multiband Delay, Vintage Phaser & 2022 \\
+FL Studio 21.2 & Stem Separation (AI), FL Cloud, Kepler synth, AI mastering & 2023 \\
+FL Studio 2024.1 & CLAP plugin format; Kepler EXO; Chord Progression Tool & 2024 \\
+FL Studio 2025 & 500 Dynamic Mixer Tracks, Loop Starter expansion, Gopher AI & 2025 \\
+FL Studio 2025.2 & Fruity Slicer 2, Emphasizer, Patcherize function & Dec 2025 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 02 Reference: Technical Architecture}
+
+\subsubsection{The Pattern Engine}
+
+FL Studio's core design is pattern-centric. A \textbf{Pattern} is the fundamental unit of musical content --- a container holding instrument note data from any channels in the Channel Rack. Patterns are composable: multiple patterns can be placed on Playlist tracks to build an arrangement. This differs from purely linear (timeline-based) DAWs, where tracks extend continuously from left to right.
+
+Key architectural decision: \textbf{every Pattern has access to all instruments in the Channel Rack}. This means a single pattern can contain drums, bass, melody, and pads simultaneously. It enables rapid iteration (a full loop can be assembled in one Pattern), but introduces a ``visual disconnect'' challenge in large projects where channel-to-clip, clip-to-mixer, and clip-to-playlist mappings must be manually tracked.
+
+\subsubsection{Channel Rack and Step Sequencer}
+
+The Channel Rack is the central hub of FL Studio's workflow. Each channel corresponds to one instrument or sample. The built-in Step Sequencer provides a 16-step (default) grid representing one bar of music at a 16th-note resolution. Steps can be extended up to 128 (eight bars). Per-step parameters include note, velocity, panning, cutoff, and resonance via the Graph Editor.
+
+Design philosophy: Jonwayne (LA rapper/producer) described FL Studio's interface as being like ``water,'' with other DAWs feeling ``more like blocks of wood sliding all over each other.'' Grime producer Darq E Freaker noted that at his school ``everyone had FruityLoops on their computers at home and making tunes was more like a game.''
+
+\subsubsection{Piano Roll}
+
+FL Studio's Piano Roll is widely regarded as one of the strongest piano roll implementations in any DAW. It shares view with the Step Sequencer (since FL Studio 12): notes programmed via the step grid appear in the Piano Roll, and vice versa. Features include scale snapping (introduced FL Studio 21), custom note tools, piano roll scripting (automatable via Gopher in 2025), velocity/pan/modulation per-note lanes, and time signature support. The Piano Roll supports drawing, painting, selection, detuning, and stamping of chord shapes.
+
+\subsubsection{Playlist and Mixer}
+
+The \textbf{Playlist} is the arrangement canvas. Patterns are dragged from the Pattern picker onto Playlist tracks and arranged horizontally. Audio clips, automation clips, and MIDI clips can all coexist. FL Studio 2025 introduced per-clip audio editing (stretch, pitch, reverse) directly in the Playlist.
+
+The \textbf{Mixer} handles signal routing, effects chains, sends/returns, and mastering. FL Studio 2025 expanded the Mixer to 500 dynamic Insert tracks (from 125), with tracks now addable and deletable as needed rather than pre-allocated.
+
+\subsubsection{Audio Engine}
+
+FL Studio processes audio using a 32-bit floating-point internal engine, supporting sampling rates up to 192 kHz via WDM or ASIO drivers. Audio can be imported and exported as WAV, MP3, OGG, FLAC, MIDI, ZIP, or native .FLP format. The plugin architecture supports FL Native format, VST2, VST3, DirectX, AU (macOS), and CLAP (since 2024).
+
+\subsection{Module 03 Reference: Native Plugin Ecosystem}
+
+\subsubsection{Flagship Synthesizers}
+
+\textbf{Sytrus} is a hybrid FM/subtractive synthesizer with ring modulation. It was gifted free to all FL Studio Producer Edition users with FL Studio 12 (previously a paid add-on). Known for versatility and complex sound design; includes 90+ Seamless and Nucleon presets. Image-Line describes it as ``known for its versatility, power and unique sound design capabilities.''
+
+\textbf{Harmor} is an additive synthesis/resynthesis engine with a unique image-import feature (allowing users to use bitmap images as spectral data). Introduced in 2011. Included in Signature and All Plugins editions.
+
+\textbf{FLEX} is a preset-based instrument with a streaming sample library that updates via FL Cloud. Serves as FL Studio's primary preset-discovery interface. Organized by genre (HyperPop, Chip-Tune, Moon Dust for hip-hop, etc.).
+
+\textbf{Kepler} (introduced FL Studio 21.2) is a painstaking recreation of iconic 1980s analog synthesizers including the Roland Juno and Jupiter families. Included in Producer Edition and above. Kepler EXO (2024.1) is a lo-fi companion variant.
+
+\textbf{3xOSC} is a straightforward three-oscillator subtractive synthesizer --- minimal interface, maximum utility. Included in all editions. Frequently the starting point for basic leads, basses, and stabs.
+
+\subsubsection{Effects}
+
+\textbf{Gross Beat} is a time/pitch stuttering and gating effect, a signature tool of modern trap and electronic production. Included in Signature Bundle and above. Described as ``a producer favorite effect since it was introduced.''
+
+\textbf{ZGameEditor Visualizer (ZGE)} is a beat-reactive music video rendering plugin based on the open-source ZGameEditor game engine. It supports up to 25 visual layers, video texture import, DMX lighting control, 4K+ rendering, and H.264 MP4 export. It has become a standard tool for low-budget music video production.
+
+\textbf{Maximus} is a multiband dynamic processor (compressor/limiter) included free in Producer Edition with FL Studio 12. Previously a paid product.
+
+\textbf{Stem Separation} (FL Studio 21.2) uses AI to separate any audio file into vocals, music, bass, and drums. Available in Producer Edition and above. FL Studio 2025.2 added routing each stem to a separate Mixer track.
+
+\subsubsection{AI and Cloud Features (2023--2025)}
+
+\textbf{FL Cloud} (launched with FL Studio 21.2) provides an integrated sample library synced to project tempo, AI-powered mastering (one-click with genre presets, loudness-optimized for streaming platforms), and an expanding set of third-party VST plugins. All FL Studio customers receive one free month of full FL Cloud access.
+
+\textbf{Gopher} (FL Studio 2025) is an integrated AI assistant that answers manual questions in multiple languages and generates Piano Roll scripts from natural language prompts (e.g., ``Create a Piano roll script to transpose every second note under the control of a knob'').
+
+\subsection{Module 04 Reference: Cultural Impact and Genre Formation}
+
+\subsubsection{Trap Music and the Atlanta Pipeline}
+
+FL Studio's role in the formation of trap music is direct and documented. \textbf{Lex Luger} is the most prominent early example: his productions for Waka Flocka Flame (``Hard in da Paint,'' 2010) and Rick Ross (``B.M.F.,'' 2010) used FL Studio to create the orchestral, 808-heavy, rapid hi-hat template that defined early 2010s trap. Luger's process: melody first, then drums, 808s, then counter-melodies (strings) using reFX Nexus 2 presets.
+
+\textbf{Metro Boomin} (Leland Tyler Wayne) used FL Studio throughout his collaborative run with Future, 21 Savage, Drake, Migos, and The Weeknd. Hits produced with FL Studio include ``Mask Off'' (Future), ``Jumpman'' (Drake \& Future), and numerous others on the HNDRXX and DS2 albums.
+
+\textbf{Southside} and \textbf{808 Mafia} (the production collective) are documented FL Studio users, contributing to the darker, more menacing evolution of trap following Luger's initial template.
+
+Other documented FL Studio users: TM88, Young Chop, Murda Beatz, Mike WiLL Made-It, Boi-1da, Vinylz, OG Parker, Tay Keith.
+
+\subsubsection{UK Grime and Dubstep}
+
+FL Studio's penetration into East London's bedroom producer scene was enabled by the same factors that drove its Atlanta adoption: low cost (including pirated access), visual intuitiveness, and immediate sonic feedback. Grime producer \textbf{Dexplicit} noted: ``Many of us back then didn't have access to big studios.'' \textbf{Darq E Freaker} described making tunes in FL Studio as being ``more like a game.'' \textbf{Skream} (dubstep pioneer) graduated from PlayStation loop-making to FL Studio. \textbf{Hudson Mohawke} followed a similar path.
+
+\subsubsection{Global Scenes}
+
+FL Studio's cultural footprint extends beyond Western markets:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Bubbling (Netherlands):} An Afro-Caribbean-influenced electronic genre whose producers used FL Studio's step sequencer for its characteristic syncopated patterns
+  \item \textbf{Tribal Guarachero (Mexico):} A hyper-regional scene whose producers adopted FL Studio in bedrooms and small studios
+  \item \textbf{Amapiano (South Africa):} FL Studio's producer list explicitly credits it as enabling the creation of Amapiano alongside other new styles
+  \item \textbf{EDM (Global):} Martin Garrix produced early career material including ``Animals'' in FL Studio; \textbf{Avicii} used FL Studio for stage performance and early productions; \textbf{Deadmau5}, \textbf{Madeon}, \textbf{Porter Robinson}, and \textbf{Alan Walker} are all documented users
+\end{itemize}
+
+\subsubsection{The Bedroom Producer Revolution}
+
+A recurring theme across all these scenes is geographic and economic: FL Studio enabled production in environments without access to professional studios, formal music education, or expensive hardware. The software's visual interface, characterized as game-like by multiple producers, lowered the cognitive barrier to entry. Several noted that their first DAW experience came via video games (Music Creation for the PlayStation) before transitioning to FL Studio. The DJ Mag longread calls FL Studio ``the most influential beat program since the MPC'' --- a comparison that situates it in a lineage of hardware democratizers.
+
+\subsection{Module 05 Reference: Business Model and Future}
+
+\subsubsection{Lifetime Free Updates}
+
+The Lifetime Free Updates policy is FL Studio's most distinctive business decision. Every registered user receives every future version of FL Studio for free, indefinitely. This policy was conceived as a response to piracy: if the legitimate license provided perpetual value, the incentive to use cracked software diminished. Image-Line's COO Scott Fisher articulated the four-pillar legitimate-value strategy: (1) time-unlimited full-featured trial; (2) customer forum access and developer engagement; (3) exclusive content for registered users; (4) lifetime updates.
+
+The policy is almost unique in the professional software market. Competing DAWs --- Ableton Live, Logic Pro, Pro Tools --- either charge for major version upgrades or require subscriptions.
+
+\subsubsection{Pricing Tiers (2025)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Edition} & \tableheader{Included Capabilities} & \tableheader{Price (USD)} \\
+\midrule
+Fruity Edition & Channel Rack, Piano Roll, Playlist, basic plugins; no audio recording & \$99 \\
+Producer Edition & Full recording, Sytrus, Maximus, Kepler; Stem Separation; 500 Mixer tracks & \$199 \\
+Signature Bundle & Adds Gross Beat, Harmor, Gross Beat, Directwave, advanced effects & \$299 \\
+All Plugins Edition & Every native plugin (100+) including all premium instruments and effects & \$499 \\
+FL Studio Mobile & iOS/Android/UWP; 7 instruments, 29 effects; integrates with desktop & \$14.99 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{FL Cloud and the SaaS Tension}
+
+FL Cloud (launched 2023) introduces a subscription layer alongside the perpetual license model. Subscribers get an ever-growing sample library (auto-synced to project tempo), expanded third-party plugin access, and premium AI mastering features beyond the basic included tier. All FL Studio editions receive one free month of FL Cloud and continued basic AI mastering without subscription.
+
+The tension: FL Cloud's subscription model overlaps with the philosophical identity of a company that built its brand on ``no subscriptions, no upgrade fees, ever.'' Image-Line's current framing --- FL Studio desktop remains perpetual, FL Cloud is an optional enrichment layer --- has been accepted by the community, though scrutiny will intensify as cloud features mature.
+
+\subsubsection{Hardware Partnerships}
+
+The \textbf{Akai Professional FIRE} (released 2018) is a MIDI controller built around FL Studio's Channel Rack pattern editor. Touch- and pressure-sensitive buttons. Up to four units can be chained to a single FL Studio instance. Available in two variants (bare controller and bundled Fruity Fire Edition).
+
+The \textbf{Novation FLkey} line (Mini, 37, 61) are redesigned versions of Novation's Launchkey keyboards, customized for FL Studio with grey cases and FL-themed RGB lighting. Deep integration with Channel Rack, Mixer, and transport.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Level} \\
+\midrule
+Source attribution & All technical claims must cite Image-Line official sources or verified press; no user-forum speculation & GATE \\
+Artist attribution & Producer-DAW associations should be attributed to documented statements, not assumed from genre affiliation & GATE \\
+Cultural representation & Genre origin claims (trap = Atlanta; grime = East London) must be accurately attributed; avoid flattening regional specificity & ANNOTATE \\
+Pricing data & Pricing tiers change; mark all price data with version/date and recommend verification before publication & ANNOTATE \\
+FL Cloud subscription model & Ongoing evolution; frame as current-state with note that model is actively developing & ANNOTATE \\
+Indigenous and regional music scenes & Global scene attributions (Amapiano, Guarachero) must be accurate and non-reductive & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Official Sources}
+\begin{itemize}[noitemsep]
+  \item Image-Line. ``Company History.'' \url{https://www.image-line.com/company-history}
+  \item Image-Line. ``FL Studio History.'' \url{https://www.image-line.com/history}
+  \item Image-Line. ``FL Studio 21.2 --- What's New.'' \url{https://www.image-line.com/fl-studio-news/fl-studio-21-2-whats-new}
+  \item Image-Line. ``FL Studio 2024 --- What's New.'' \url{https://www.image-line.com/fl-studio-news/fl-studio-2024-whats-new}
+  \item Image-Line. ``FL Studio 2025.'' \url{https://www.image-line.com/fl-studio-news/fl-studio-2025-whats-new-2}
+  \item Image-Line Forum. ``FL Studio 2025.2.2 Latest Release.'' December 2025. \url{https://forum.image-line.com/viewtopic.php?t=338196}
+  \item Image-Line. ``Report Piracy.'' \url{https://www.image-line.com/reportpiracy}
+  \item Image-Line. ``Channel Rack \& Step Sequencer.'' FL Studio Online Manual. \url{https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/html/channelrack.htm}
+\end{itemize}
+
+\subsubsection{Encyclopedic and Reference Sources}
+\begin{itemize}[noitemsep]
+  \item Wikipedia. ``FL Studio.'' \url{https://en.wikipedia.org/wiki/FL_Studio} (accessed March 2026)
+  \item Wikipedia. ``Image-Line.'' \url{https://en.wikipedia.org/wiki/Image-Line} (accessed March 2026)
+\end{itemize}
+
+\subsubsection{Professional Music Technology Press}
+\begin{itemize}[noitemsep]
+  \item DJ Mag. ``How FL Studio Changed Electronic Music Forever.'' September 2024. \url{https://djmag.com/longreads/how-fl-studio-changed-electronic-music-forever}
+  \item Red Bull Music Academy Daily. ``How Fruity Loops Changed Music-Making Forever.'' Laurent Fintoni. May 2015. \url{https://daily.redbullmusicacademy.com/2015/05/fruity-loops-feature/}
+  \item Gearnews. ``FL Studio 2025.2 Update Brings 2 New Plugins and More.'' November 2025. \url{https://www.gearnews.com/fl-studio-daw-software/}
+  \item MusicTech. ``Working with Patterns in FL Studio 20.'' January 2019.
+  \item Musco Sound. ``FL Studio Review: From Bedroom DAW to Industry Workhorse.'' February 2026.
+\end{itemize}
+
+
+% ════════════════════════════════════════════════════════════════════
+% STAGE 3: MISSION PACKAGE
+% ════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality reference document on FL Studio / FruityLoops covering five research modules: Origins \& Evolution, Technical Architecture, Native Plugin Ecosystem, Cultural Impact \& Genre Formation, and Business Model \& Future. The deliverable is a professionally formatted document ready for integration into the GSD College of Knowledge curriculum and usable as a standalone reference for producers, researchers, and ecosystem analysts. All claims are source-attributed; all modules are internally consistent and cross-referenced.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+FL STUDIO MISSION EXECUTION ARCHITECTURE
+==========================================
+
+WAVE 0: FOUNDATION (Sequential)
+  HAIKU: Shared schemas, source index template, module outlines
+  Output: schema.yaml, source_index.json, module_templates/
+
+  |
+  v
+
+WAVE 1A: HISTORICAL + BUSINESS (Parallel Track A)
+  SONNET: Module 01 (Origins & Evolution)
+  SONNET: Module 05 (Business Model & Future)
+  OPUS:   Cultural Sensitivity Review
+  Output: module_01_origins.md, module_05_business.md
+
+WAVE 1B: TECHNICAL + PLUGINS (Parallel Track B -- concurrent with 1A)
+  SONNET: Module 02 (Technical Architecture)
+  SONNET: Module 03 (Native Plugin Ecosystem)
+  OPUS:   Technical Accuracy Review
+  Output: module_02_architecture.md, module_03_plugins.md
+
+  |
+  v (CAPCOM gate: review modules 01-03, 05 before proceeding)
+
+WAVE 1C: CULTURAL IMPACT (Sequential -- depends on 1A genre framing)
+  OPUS:   Module 04 (Cultural Impact & Genre Formation)
+  SONNET: Source verification for cultural claims
+  Output: module_04_culture.md
+
+  |
+  v
+
+WAVE 2: SYNTHESIS (Sequential)
+  OPUS:   Cross-module integration, through-line composition
+  SONNET: Final document assembly, bibliography, TOC
+  Output: flstudio_research_reference.md (complete)
+
+  |
+  v (CAPCOM gate: full document review)
+
+WAVE 3: PUBLICATION + VERIFICATION (Sequential)
+  SONNET: LaTeX/PDF rendering
+  SONNET: Source validation sweep
+  HAIKU:  Verification matrix population
+  Output: flstudio_reference.pdf, verification_matrix.csv
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer (Wave 0):} Shared document schema, source index, and module outline templates ensuring consistency across all five modules
+  \item \textbf{Research Layer (Wave 1A/1B/1C):} Parallel and sequential module document production using the Research Reference as primary substrate; web research to fill identified gaps only
+  \item \textbf{Synthesis Layer (Wave 2):} Cross-module integration, through-line composition, and final document assembly with bibliography and internal cross-references
+  \item \textbf{Publication Layer (Wave 3):} PDF rendering, source validation sweep, and verification matrix population
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+1 & Foundation schema package & schema.yaml + source\_index.json + 5 module templates; no errors & 0 \\
+2 & Module 01: Origins & Complete version timeline; 12+ milestones; sources for each & 1A \\
+3 & Module 02: Architecture & All 4 interface components documented; audio engine spec accurate & 1B \\
+4 & Module 03: Plugin Ecosystem & 6 flagship plugins documented; synthesis method specified per synth & 1B \\
+5 & Module 04: Cultural Impact & 4+ genre/regional scenes; named producers; affordances identified & 1C \\
+6 & Module 05: Business Model & Pricing tiers current; FL Cloud mechanics accurate; timeline noted & 1A \\
+7 & Integrated reference document & All modules assembled; cross-references active; bibliography complete & 2 \\
+8 & Final PDF & Renders without errors; all 12 success criteria verified & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Foundation schema & None & Haiku & 4K \\
+Module 01 (Origins) & Source index & Sonnet & 12K \\
+Module 05 (Business) & Source index & Sonnet & 10K \\
+Module 02 (Architecture) & Source index & Sonnet & 14K \\
+Module 03 (Plugins) & Source index & Sonnet & 16K \\
+Cultural sensitivity review & M01 + M04 draft & Opus & 8K \\
+Module 04 (Culture) & M01 framing, M05 pricing & Opus & 16K \\
+Technical accuracy review & M02 + M03 & Opus & 6K \\
+Cross-module integration & All modules & Opus & 10K \\
+Final assembly & All modules & Sonnet & 8K \\
+Source validation & All modules & Sonnet & 6K \\
+PDF rendering & Final doc & Sonnet & 4K \\
+Verification matrix & Final doc, test plan & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Cultural impact analysis (Module 04) requires judgment about genre attribution, regional nuance, and avoiding reductive claims; cross-module integration requires synthesis reasoning; cultural sensitivity review is judgment-heavy \\
+Sonnet & $\sim$60\% & Module document production (01, 02, 03, 05), final assembly, source validation, and PDF rendering are structural tasks well-suited to Sonnet's efficiency \\
+Haiku & $\sim$10\% & Foundation schema, templates, and verification matrix population are scaffolding tasks with clear structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Key Actions} & \tableheader{Type} & \tableheader{CAPCOM} \\
+\midrule
+0 & Foundation & Schema, source index, module templates & Sequential & No \\
+1A & Historical + Business & Modules 01 + 05; cultural sensitivity review & Parallel & No \\
+1B & Technical + Plugins & Modules 02 + 03; technical accuracy review & Parallel (with 1A) & No \\
+1C & Cultural Impact & Module 04 (Opus); source verification & Sequential & \textbf{Yes} \\
+2 & Synthesis & Cross-module integration; final assembly & Sequential & \textbf{Yes} \\
+3 & Publication & PDF render; source sweep; verification matrix & Sequential & No \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Shared schema & schema.yaml with module fields and required sections & Haiku \\
+Source index & source\_index.json listing all 20 sources with URLs and reliability tier & Haiku \\
+Module templates & Five .md templates with section headers matching Stage 2 structure & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Historical + Business (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Module 01: Origins \& Evolution & Complete version timeline + narrative history & Sonnet \\
+Module 05: Business Model & Pricing table + Lifetime Updates narrative + FL Cloud mechanics & Sonnet \\
+Cultural sensitivity review & Review pass on any genre/attribution claims in M01 & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Technical + Plugins (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Module 02: Technical Architecture & Channel Rack, Piano Roll, Playlist, Mixer, audio engine & Sonnet \\
+Module 03: Plugin Ecosystem & 6+ flagship plugins with synthesis methods; AI features & Sonnet \\
+Technical accuracy review & Review pass verifying plugin specifications against IL manual & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1C: Cultural Impact}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Module 04: Cultural Impact & Full genre/scene analysis with named producers and affordances & Opus \\
+Source verification for cultural claims & Confirm all producer/DAW associations with documented sources & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Cross-module integration & Through-line composition; cross-references; thematic consistency & Opus \\
+Final document assembly & All modules merged; bibliography complete; TOC generated & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+PDF rendering & flstudio\_reference.pdf & Sonnet \\
+Source validation sweep & Each citation verified traceable to listed source & Sonnet \\
+Verification matrix & All 12 success criteria mapped to test IDs & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Stage 2 Research Reference constitutes the shared system prompt for all Wave 1 agents --- compute once, cache for all five module executors
+  \item Source index JSON is a shared attribute included in all agent contexts; single computation amortized across 10+ tool calls
+  \item Waves 1A and 1B run concurrently; no sequential dependency between historical and technical tracks
+  \item Wave 1C (Opus for cultural impact) is sequenced after 1A cultural sensitivity review --- the review output is cached and passed as context
+  \item 5-minute cache TTL window exploited by batching all Wave 1A and 1B tasks within a single session
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Primary Tasks} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Wave 0 & Schema, source index, templates & Haiku & 7K \\
+Wave 1A & Modules 01 + 05 + cultural review & Sonnet + Opus & 30K \\
+Wave 1B & Modules 02 + 03 + technical review & Sonnet + Opus & 36K \\
+Wave 1C & Module 04 + source verification & Opus + Sonnet & 24K \\
+Wave 2 & Integration + final assembly & Opus + Sonnet & 18K \\
+Wave 3 & PDF + validation + matrix & Sonnet + Haiku & 13K \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & & \textbf{128K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+==================
+
+  [Wave 0: Foundation]
+       |
+       +----------+----------+
+       |                     |
+  [Wave 1A]            [Wave 1B]
+  M01+M05               M02+M03
+  (Parallel)            (Parallel)
+       |                     |
+       +-------- + ----------+
+                 |
+         [CAPCOM GATE: M01-M03, M05 review]
+                 |
+           [Wave 1C: M04]
+                 |
+         [CAPCOM GATE: Full document review]
+                 |
+           [Wave 2: Synthesis]
+                 |
+           [Wave 3: Publication]
+                 |
+              [DONE]
+
+LEGEND: [] = wave/task   + = parallel merge   | = sequential dependency
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-Critical & Non-negotiable source and attribution standards & 5 & Mandatory & BLOCK \\
+Core Functionality & Deliverable acceptance against success criteria & 18 & Required & BLOCK \\
+Integration & Cross-module consistency and completeness & 8 & Required & BLOCK \\
+Edge Cases & Data gaps, disputed attribution, temporal currency & 6 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to Image-Line official sources, Wikipedia (primary-source-backed), or professional music technology press. Zero entertainment blogs or unsourced fan wikis. \\
+SC-NUM & Numerical attribution & Every version number, release date, pricing figure, or plugin count attributed to a specific documented source \\
+SC-ADV & No advocacy & Document presents FL Studio's capabilities, history, and impact without advocating for it as the superior DAW or against competitors \\
+SC-ATT & Artist attribution & Every producer-to-FL-Studio association cites a documented statement or professional source; no assumed associations from genre alone \\
+SC-REG & Regional accuracy & All non-Western genre attributions (Amapiano, Guarachero, Bubbling) are geographically and culturally accurate; no homogenization of distinct scenes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Sample)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Version timeline completeness & Timeline covers 12+ named milestones from FruityLoops 1.0 (1997) to FL Studio 2025 with year and source for each \\
+CF-02 & macOS launch date accuracy & FL Studio macOS date recorded as May 22, 2018 (FL Studio 20), not approximate \\
+CF-03 & CLAP support documented & CLAP plugin format adoption documented in FL Studio 2024.1 with transition context \\
+CF-04 & Channel Rack architectural description & Description distinguishes step-based (Channel Rack grid) from piano-roll-based programming with functional accuracy \\
+CF-05 & Piano Roll capabilities current & Piano Roll documentation includes scale snapping (v21), note tools, and piano roll scripting (2025) \\
+CF-06 & Sytrus synthesis method specified & Sytrus described as hybrid FM/subtractive with ring modulation; not generically as ``a synthesizer'' \\
+CF-07 & ZGE Visualizer capabilities & ZGE Visualizer documented as beat-reactive music video renderer with H.264 export and 25-layer support \\
+CF-08 & Stem Separation version accuracy & Stem Separation documented as introduced in FL Studio 21.2 with per-stem Mixer routing added in 2025.2 \\
+CF-09 & Trap producer associations sourced & Lex Luger, Metro Boomin, Southside associated with FL Studio via documented sources, not assumption \\
+CF-10 & Four genre/regional scenes covered & Cultural impact section covers Atlanta trap, UK grime/dubstep, and at least two additional scenes (Amapiano, Bubbling, Guarachero, or EDM) \\
+CF-11 & Kellogg's dispute documented & Trademark dispute, Image-Line's decision not to litigate, and 2003 FL Studio rename documented with accurate outcome \\
+CF-12 & Lifetime Free Updates origin documented & LFU policy traced to piracy crisis response with Image-Line's four-pillar rationale included \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Version timeline; 12+ milestones sourced & CF-01, CF-02, CF-03 & Pending \\
+2. 4 interface components documented accurately & CF-04, CF-05 & Pending \\
+3. 6 flagship plugins with synthesis methods & CF-06, CF-07 & Pending \\
+4. AI features current to FL Studio 2025 & CF-08 & Pending \\
+5. Cultural impact covers 4+ scenes with producers & CF-09, CF-10 & Pending \\
+6. Piracy crisis narrative complete & CF-12 & Pending \\
+7. Kellogg's dispute documented & CF-11 & Pending \\
+8. Business model comparison with pricing & CF-12, IN-04 & Pending \\
+9. Hardware partnerships documented & IN-05 & Pending \\
+10. CLAP adoption documented & CF-03 & Pending \\
+11. All claims attributed to professional sources & SC-SRC, SC-NUM & Pending \\
+12. Document self-contained & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at CAPCOM gates; scope management \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency enforcement \\
+SCOUT & Research Agent & Web research for source gaps; source index population; citation verification \\
+EXEC-A & Executor Alpha & Module 01 and Module 05 document production (Track A) \\
+EXEC-B & Executor Beta & Module 02 and Module 03 document production (Track B) \\
+CRAFT-HIST & History Specialist & Historical narrative accuracy; timeline cross-checking; Image-Line company history \\
+CRAFT-TECH & Technology Specialist & FL Studio technical architecture verification; plugin specification accuracy \\
+VERIFY & Verification & Source validation sweep; SC test suite execution \\
+INTEG & Integration Agent & Cross-module consistency; through-line coherence; M04 genre attribution review \\
+CAPCOM & HITL Interface & Human approval at Wave 1C gate and Wave 2 gate \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache optimization \\
+LOG & Chronicle Agent & Audit trail; milestone summaries; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (Origins, Architecture, Plugins, Culture, Business) \\
+Total Estimated Tokens & $\sim$128K across all waves \\
+Context Windows & 5--7 \\
+Parallel Tracks & 2 (Waves 1A and 1B concurrent) \\
+CAPCOM Gates & 2 (post-Wave 1C; post-Wave 2) \\
+Safety-Critical Tests & 5 (all mandatory BLOCK) \\
+Total Test Cases & 37 \\
+Primary Model (Sonnet) & $\sim$60\% of token budget \\
+Judgment Model (Opus) & $\sim$30\% (culture, integration, synthesis) \\
+Scaffolding Model (Haiku) & $\sim$10\% (schema, templates, matrix) \\
+Primary Source Type & Image-Line official + professional music press \\
+Sensitivity Domain & Cultural attribution (genre origin, regional music scenes) \\
+Key Risk & Artist-DAW associations overclaimed; mitigated by SC-ATT gate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``It was an overnight success, not for income, but visibility and popularity. The simplicity and speed with which users could make something that sounded like music [was a big part of its early success]. Specifically, a beat and bassline. The Step Sequencer workflow is all about instant gratification.''}
+
+\vspace{0.5em}
+\hfill --- Scott Fisher, COO, Image-Line (DJ Mag, 2024)
+
+\vspace{1em}
+\textit{The step is the unit. Click it and something happens. That is the Amiga Principle applied to music production --- not the most powerful tool, but the one with the shortest path from intention to sound. Everything else is elaboration.}
+\end{quotebox}
+
+\end{document}

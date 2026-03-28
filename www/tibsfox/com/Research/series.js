@@ -48,6 +48,7 @@
     { id: 'FCC', name: 'FCC Catalog', path: 'FCC/index.html' },
     { id: 'FDR', name: 'Fire Dragon', path: 'FDR/index.html' },
     { id: 'FEC', name: 'Forward Error Correction', path: 'FEC/index.html' },
+    { id: 'FLS', name: 'FL Studio', path: 'FLS/index.html' },
     { id: 'FEG', name: 'FoxEdu Gap-Fill', path: 'FEG/index.html' },
     { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' },
     { id: 'FQC', name: 'Freq. Continuum', path: 'FQC/index.html' },
