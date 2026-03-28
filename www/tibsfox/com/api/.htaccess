@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Deny access to config and schema
+<Files "config.php">
+    Require all denied
+</Files>
+<Files "schema.sql">
+    Require all denied
+</Files>
