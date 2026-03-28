@@ -1,0 +1,152 @@
+{
+  "degree": 3,
+  "artist": "Ernestine Anderson",
+  "slug": "003-ernestine-anderson",
+  "genre": "Jazz (vocal, swing, blues)",
+  "energy": 2,
+  "era": "1950s-2010s",
+  "location": {
+    "origin": "Houston, TX",
+    "formative": "Seattle, WA — Central District, Garfield High School, Jackson Street corridor",
+    "career": "National touring (Otis, Jacquet, Hampton) → Stockholm → Seattle (returned, Central District / citywide)"
+  },
+  "born": "1928-11-11",
+  "died": "2016-03-10",
+  "labels": ["Mercury", "Concord Jazz"],
+  "theory_nodes": [
+    {
+      "concept": "Vocal jazz phrasing",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/vocal/jazz-phrasing.md",
+      "examples": [
+        "Never Make Your Move Too Soon (1980, Concord Jazz) — behind-the-beat syllable placement creating elastic swing",
+        "Hello Like Before (1976, Concord Jazz) — vowel stretching across bar lines",
+        "Hot Cargo (1958, Mercury) — youthful phrasing establishing rhythmic identity"
+      ],
+      "description": "The placement of syllables against the beat, stretching vowels across bar lines, compressing consonants to create rhythmic tension. Behind-the-beat phrasing as systematic displacement — syllable onset slightly after the pulse, creating anticipation. The lyric is both meaning and material: semantic content plus rhythmic placement. First vocal theory node in the S36 engine.",
+      "genealogy": {
+        "ancestors": [],
+        "relationship": "new branch — first vocal-specific concept in S36. Degrees 0-2 address instrumental theory; degree 3 introduces the voice as instrument."
+      }
+    },
+    {
+      "concept": "Call-and-response (vocal-instrumental dialogue)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/vocal/call-and-response.md",
+      "examples": [
+        "Live from Concord to London (1978) — real-time voice-piano dialogue",
+        "Jazz Alley live performances — audience-audible call-and-response with rhythm section",
+        "Hot Cargo small-group tracks — voice-horn conversation"
+      ],
+      "description": "Continuous dialogue between voice and accompanying instruments. Singer phrases; piano answers; singer responds to the answer. Rooted in West African vocal traditions carried through the Black church into blues, gospel, jazz. Not scripted but structured by shared harmonic framework. Singer as participant in conversation, not soloist over accompaniment.",
+      "genealogy": {
+        "ancestors": ["Composed improvisation (degree 2)"],
+        "relationship": "parallel structure — Horvitz's composed improvisation and Anderson's call-and-response both provide frameworks where structure and freedom coexist. In call-and-response, the alternation pattern is the structure; the content of each exchange is the freedom."
+      }
+    },
+    {
+      "concept": "Blues tonality in jazz ballad context",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/vocal/blues-tonality-jazz-context.md",
+      "examples": [
+        "Never Make Your Move Too Soon (1980) — blue notes shadowing major-key melody",
+        "Big City ballad tracks (1983) — pitch inflection on emotionally weighted syllables",
+        "Hot Cargo blues-inflected standards (1958) — blues tonality in standard repertoire"
+      ],
+      "description": "The blue note (flatted 3rd, 5th, or 7th) as tonal color, not chromatic alteration. Microtonal pitch bending that the piano cannot replicate but the voice can. Blues tonality shadows even major-key performances — a gravitational pull toward the minor mode expressed through inflection rather than harmonic structure. The most intimate form of chromaticism: it exists in the body.",
+      "genealogy": {
+        "ancestors": ["Chromatic bass lines (degree 0)", "Chromaticism in the upper register (degree 1)"],
+        "relationship": "embodied chromaticism — Jones used chromatic bass lines (instrument-level), Frisell used chromatic neighbor tones (guitar-level), Anderson uses pitch inflection (body-level). Same chromatic principle, progressively more intimate deployment."
+      }
+    },
+    {
+      "concept": "Swing rhythm (behind-the-beat phrasing)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/swing-behind-the-beat.md",
+      "examples": [
+        "Hot Cargo (1958) — triplet subdivision with systematic behind-the-beat placement",
+        "Hello Like Before (1976) — elastic time over steady pulse",
+        "Concord Jazz recordings (1976-1990s) — mature swing phrasing with deeper behind-the-beat lean"
+      ],
+      "description": "Swing as triplet subdivision with behind-the-beat placement. The pulse is present and steady but the vocalist floats above it, leaning back. Not rubato (dissolved pulse) or syncopation (displaced accents within fixed grid) — continuous microtiming between voice and rhythm section. Fourth position on the rhythmic spectrum: Jones (regular pulse), Horvitz (multiplied pulse), Frisell (dissolved pulse), Anderson (elastic pulse).",
+      "genealogy": {
+        "ancestors": ["Polymetric structures (degree 2)"],
+        "relationship": "rhythmic spectrum extension — Jones (swing syncopation), Horvitz (polymetric), Frisell (rubato), Anderson (elastic swing). Four degrees, four rhythmic positions. Anderson's swing is the oldest technique but the newest data point."
+      }
+    },
+    {
+      "concept": "The singer as interpreter",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/vocal/singer-as-interpreter.md",
+      "examples": [
+        "All Concord Jazz recordings — standard repertoire transformed through phrasing, dynamics, timbre",
+        "Decades-spanning evolution of signature songs (Never Make Your Move Too Soon performed at 50 vs. 80)",
+        "Hot Cargo (1958) vs. late-career renditions of the same material — interpretation deepening with age"
+      ],
+      "description": "Interpretation as a creative act equal to composition and improvisation. Receiving a fixed text (melody + lyric) and transforming it through phrasing, dynamics, timbre, and emotional presence into something personal and spontaneous-sounding. Fourth position on the composition-improvisation spectrum: Jones (full composition), Horvitz (composed improvisation), Frisell (loose frameworks + free improvisation), Anderson (interpretation of existing material). Undervalued in music education but equally demanding.",
+      "genealogy": {
+        "ancestors": ["Composed improvisation (degree 2)", "Silence as structure (degree 1)", "Big band orchestration (degree 0)"],
+        "relationship": "fourth position on composition-improvisation spectrum — Jones composes everything, Horvitz composes structure with improvisation at openings, Frisell provides loose frameworks for free improvisation, Anderson interprets existing compositions through vocal transformation"
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-001", "S36-002", "S36-004", "S36-006", "GRV", "RBH", "CDS"],
+  "seattle_connection": "Central District (arrived 1944, age 16). Garfield High School (same era as Quincy Jones). Jackson Street corridor — direct participation as a performing vocalist. Performed regularly at Dimitriou's Jazz Alley and Earshot Jazz Festival. NEA Jazz Master (2002). Seattle's resident jazz anchor for decades. Died in Seattle, 2016.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Vocal jazz phrasing — first instance, new branch (vocal-specific theory)",
+      "Call-and-response — first instance, rooted in African American vocal tradition",
+      "Blues tonality — first instance, embodied chromaticism (body-level vs. instrument-level)",
+      "Swing rhythm (elastic pulse) — first instance, fourth position on rhythmic spectrum",
+      "Singer as interpreter — first instance, fourth position on composition-improvisation spectrum"
+    ],
+    "immediate_items": [
+      "Floyd Standifer (degree 4) inherits: Central District jazz contemporary, Jackson Street era direct participant, educator dimension — Standifer as teacher vs. Anderson as performer, both anchoring Seattle jazz across the same decades",
+      "Patti Bown (degree 6) inherits: Central District, gender dimension of Seattle jazz, Black women in jazz",
+      "The Garfield pipeline now has two confirmed alumni (Jones, Anderson) — degree 4 and beyond should track whether Standifer or others add to this pipeline",
+      "The Stay pattern should be tracked: which subsequent artists return to Seattle vs. export vs. import?",
+      "Vocal theory branch introduced — subsequent vocalists should extend these five nodes with artist-specific variations"
+    ],
+    "pattern_items": [
+      "Composition-improvisation spectrum now has four positions: full composition (Jones), composed improvisation (Horvitz), loose frameworks + free improvisation (Frisell), interpretation (Anderson). Continue tracking.",
+      "Rhythmic spectrum now has four positions: regular pulse/syncopation (Jones), polymetric (Horvitz), rubato (Frisell), elastic swing (Anderson). Continue tracking.",
+      "Chromaticism thread now has three registral deployments: bass-line (Jones), upper-register (Frisell), embodied/vocal (Anderson). Horvitz uses cluster voicings as a fourth chromatic technique.",
+      "Artist-city relationship taxonomy now has four named patterns: The Seattle Export (Jones), The Seattle Draw (Frisell/Horvitz), The European Exile (Anderson's middle period), The Stay (Anderson's late career). Classify every subsequent artist.",
+      "Artist-as-institution spectrum: industry (Jones), community (Horvitz), performer (Frisell), presence (Anderson). Four positions.",
+      "The Mercury Records connection links degrees 0 and 3 at the label level — track all label connections across the 360.",
+      "The Lionel Hampton band pipeline links degrees 0 and 3 directly — both launched through Hampton. Track all shared band alumni."
+    ]
+  },
+  "key_albums": [
+    {"title": "Hot Cargo", "year": 1958, "label": "Mercury", "significance": "Stockholm breakthrough. Time magazine: 'best new jazz voice in America.' Critical acclaim in Sweden."},
+    {"title": "Hello Like Before", "year": 1976, "label": "Concord Jazz", "significance": "Comeback album after Monterey revival. Title track became signature song."},
+    {"title": "Live from Concord to London", "year": 1978, "label": "Concord Jazz", "significance": "Live energy captured. Audience interaction as part of the performance."},
+    {"title": "Never Make Your Move Too Soon", "year": 1980, "label": "Concord Jazz", "significance": "Grammy-nominated. Blues-inflected ballads and medium-tempo swingers."},
+    {"title": "Big City", "year": 1983, "label": "Concord Jazz", "significance": "Grammy-nominated. Orchestrated setting with strings. Proved Anderson could work at larger scale."}
+  ],
+  "degree_neighbors": [
+    {"name": "Floyd Standifer", "relationship": "Central District contemporary, Jackson Street era, parallel career as Seattle jazz anchor", "future_degree": 4},
+    {"name": "Patti Bown", "relationship": "Central District, gender dimension, Black women in Seattle jazz", "future_degree": 6},
+    {"name": "Buddy Catlett", "relationship": "Garfield High School pipeline, Jackson Street era", "future_degree": null}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones — attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson — attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": true,
+    "seattle_draw": false,
+    "european_exile": true,
+    "the_stay": true,
+    "institution_type": "presence"
+  },
+  "sources_count": 18,
+  "word_count_research": 3400,
+  "release_date": "2026-03-28"
+}
