@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 9&deg; &mdash; Hadley Caliman &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .cornish-pipeline {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cornish-pipeline h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .cornish-pipeline p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .cornish-pipeline table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cornish-pipeline td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .cornish-pipeline td:first-child { font-weight: 600; width: 30%; }
+
+    .voice-parallel {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .voice-parallel h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .voice-parallel table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .voice-parallel td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .voice-parallel td:first-child { font-weight: 600; width: 30%; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">9&deg;</div>
+      <div>
+        <h1>Hadley Caliman</h1>
+        <div class="subtitle">Jazz &middot; Tenor Saxophone &middot; Hard Bop &middot; Post-Bop &mdash; Idabel, Oklahoma 1932 &rarr; Seattle &mdash; d. 2010</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../008-gary-peacock/index.html">Degree 8&deg; (Peacock)</a>
+      <a href="../007-julian-priester/index.html">Degree 7&deg; (Priester)</a>
+      <a href="../004-floyd-standifer/index.html">Degree 4&deg; (Standifer)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Dexter Gordon. Freddie Hubbard. Bobby Hutcherson. Gerald Wilson.
+          Hard bop tenor saxophone from Oklahoma through Los Angeles to Seattle.
+          The reed arrives at degree 9 &mdash; the instrument closest to the human voice.
+          Cornish College faculty alongside Julian Priester. The middle voice sings.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Reed Arrives</h2>
+
+        <p>Hadley Caliman was born on January 11, 1932, in <strong>Idabel, Oklahoma</strong> &mdash;
+        a small town in the southeastern corner of the state, near the Choctaw Nation. He is the
+        first reed player in the S36 engine, the first saxophonist, the first Oklahoma-born artist,
+        and the first whose instrument is a single-reed woodwind.</p>
+
+        <p>Caliman moved to <strong>Los Angeles</strong> and entered the West Coast jazz scene, where
+        he played alongside <strong>Dexter Gordon</strong> (the tenor saxophone colossus who defined
+        the bebop-to-hard-bop transition), <strong>Freddie Hubbard</strong> (trumpet virtuoso),
+        <strong>Bobby Hutcherson</strong> (vibraphone, Blue Note aesthetic), and <strong>Gerald
+        Wilson</strong> (arranger-bandleader whose big band was one of LA&rsquo;s most important
+        jazz institutions). These associations placed Caliman at the intersection of hard bop
+        intensity and West Coast sophistication.</p>
+
+        <p>He recorded two leader albums: <strong><em>Hadley Caliman</em></strong> (1971, Mainstream)
+        with Bobby Hutcherson on vibraphone, and <strong><em>Iapetus</em></strong> (1972, Catalyst),
+        a post-bop session with modal structures named for one of Saturn&rsquo;s moons. Both
+        document his mature tenor voice &mdash; blues-rooted, melodically direct, absorbing the
+        Coltrane revolution without abandoning his own identity.</p>
+
+        <p>Caliman moved to the <strong>Seattle area</strong> and joined the faculty at
+        <strong>Cornish College of the Arts</strong>, teaching alongside <strong>Julian Priester</strong>
+        (degree 7&deg;). He maintained an active performance career in Pacific Northwest clubs while
+        transmitting the hard bop saxophone tradition to the next generation. He died on December 8,
+        2010, in <strong>Tacoma, Washington</strong>, at age 78 &mdash; the first S36 artist to die
+        in the Pacific Northwest.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: AllMusic; Catalyst Records;
+        Cornish College of the Arts; DownBeat; JazzTimes; Earshot Jazz; Ted Gioia, <em>West Coast
+        Jazz</em>, 1992; Paul de Barros, <em>Jackson Street After Hours</em>, 1993</p>
+
+        <!-- ========================================
+             CORNISH PIPELINE
+             ======================================== -->
+
+        <div class="cornish-pipeline">
+          <h4>The Cornish College Pipeline: Two Faculty Members</h4>
+          <p>Caliman is the <strong>second Cornish faculty member</strong> in S36, after Priester
+          (degree 7&deg;). Together they form a brass-reed pedagogical duo covering both poles of
+          jazz expression:</p>
+          <table>
+            <tr>
+              <td>Priester (7&deg;)</td>
+              <td><strong>Expansion pedagogy.</strong> Trombone. Experimental, electronic, Afrofuturism.
+              Mwandishi and ECM lineage. &ldquo;Go beyond this.&rdquo;</td>
+            </tr>
+            <tr>
+              <td>Caliman (9&deg;)</td>
+              <td><strong>Transmission pedagogy.</strong> Tenor saxophone. Hard bop craft, blues
+              vocabulary, embouchure, motivic development. &ldquo;Play this until it becomes yours.&rdquo;</td>
+            </tr>
+            <tr>
+              <td>The Pipeline</td>
+              <td><strong>Dual pedagogy.</strong> Cornish students had access to both the experimental
+              and traditional wings of jazz simultaneously &mdash; the second multi-artist institutional
+              pipeline in S36, after Garfield High School.</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             VOICE PARALLEL
+             ======================================== -->
+
+        <div class="voice-parallel">
+          <h4>The Voice-Range Parallel: Saxophone as Singing</h4>
+          <table>
+            <tr>
+              <td>Anderson (3&deg;)</td>
+              <td><strong>The human voice.</strong> Contralto range (approx. E3&ndash;E5). Body IS
+              the instrument. Vocal cords vibrate, resonating chambers shape the sound. Warm, blues-rooted,
+              storytelling.</td>
+            </tr>
+            <tr>
+              <td>Caliman (9&deg;)</td>
+              <td><strong>The singing horn.</strong> Tenor saxophone range overlaps substantially with
+              the vocal range. Reed vibrates like vocal cords. Embouchure controls pitch and tone like
+              throat tension. Warm, blues-rooted, storytelling.</td>
+            </tr>
+            <tr>
+              <td>The Parallel</td>
+              <td><strong>Same tradition, two instruments.</strong> Both are the voice of the ensemble.
+              Both bend blue notes through body-mediated vibration. Both tell stories with warmth and
+              directness. The tenor saxophone is the instrument that sings.</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             TENOR SAXOPHONE AS VOICE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Tenor Saxophone: The Middle Voice</h2>
+
+        <p>The tenor saxophone is the <strong>first reed instrument</strong> in the engine, filling
+        the register gap between Standifer&rsquo;s trumpet (high brass, 4&deg;) and Peacock&rsquo;s
+        bass (low strings, 8&deg;). The tenor specifically occupies the <strong>middle register
+        &mdash; the range closest to the human singing voice</strong>.</p>
+
+        <p>Saxophone tone production is fundamentally different from every instrument previously
+        documented: a <strong>single reed</strong> (a thin piece of cane) vibrates against the
+        mouthpiece when the player blows air across it. The player&rsquo;s <strong>embouchure</strong>
+        (lip and jaw pressure on the reed) controls the vibration &mdash; analogous to how vocal
+        cords vibrate under the singer&rsquo;s breath and throat tension. The saxophone&rsquo;s
+        <strong>conical brass bore</strong> produces a warmer, more voice-like tone than the
+        cylindrical bore of the clarinet.</p>
+
+        <table>
+          <thead>
+            <tr><th>Instrument</th><th>Tone Production</th><th>S36 Artist</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Voice</td><td>Vocal cords &mdash; body IS the instrument</td><td>Anderson (3&deg;)</td></tr>
+            <tr><td>Trumpet</td><td>Lip buzz into brass tube &mdash; valves select pitch</td><td>Standifer (4&deg;)</td></tr>
+            <tr><td>Trombone</td><td>Lip buzz + slide &mdash; continuous pitch access</td><td>Priester (7&deg;)</td></tr>
+            <tr><td>Piano</td><td>Hammers striking strings &mdash; mechanical separation</td><td>Berry (5&deg;), Bown (6&deg;)</td></tr>
+            <tr><td>Guitar</td><td>Plucked strings &mdash; finger to string</td><td>Frisell (1&deg;)</td></tr>
+            <tr><td>Bass</td><td>Plucked/bowed strings &mdash; lowest register</td><td>Peacock (8&deg;)</td></tr>
+            <tr><td><strong>Tenor Saxophone</strong></td><td><strong>Reed + embouchure &mdash; closest to voice</strong></td><td><strong>Caliman (9&deg;)</strong></td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             HARD BOP VOCABULARY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Hard Bop Melodic Vocabulary</h2>
+
+        <p>Caliman&rsquo;s improvisational language is rooted in the <strong>hard bop tradition</strong>
+        &mdash; the set of melodic phrases, rhythmic patterns, and harmonic approaches descending
+        from bebop (Parker, Gillespie) but foregrounding the blues:</p>
+
+        <ul>
+          <li><strong>Blues emphasis:</strong> Blues-based phrases anchor improvisations with warmth
+          and emotional grounding. Caliman&rsquo;s playing is warmer and more direct than bebop&rsquo;s
+          cerebral velocity.</li>
+          <li><strong>Bebop enclosures:</strong> Melodic patterns approaching target notes from above
+          and below &mdash; creating forward motion and harmonic specificity. Caliman&rsquo;s enclosures
+          follow the Dexter Gordon lineage: broader, more relaxed than rapid-fire Parker style.</li>
+          <li><strong>Motivic development:</strong> Taking a short melodic idea and developing it through
+          repetition, variation, transposition, and transformation. The compositional dimension of
+          improvisation &mdash; building a narrative, not stringing together phrases.</li>
+          <li><strong>Modal improvisation:</strong> The post-bop dimension, especially on <em>Iapetus</em>.
+          Improvising over scales rather than rapid chord changes &mdash; more melodic space, but
+          demanding stronger melodic invention. The Coltrane influence.</li>
+        </ul>
+
+        <!-- ========================================
+             THE RECORDINGS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Recordings: Mainstream &amp; Catalyst (1971&ndash;1972)</h2>
+
+        <p><strong><em>Hadley Caliman</em></strong> (1971, Mainstream Records) &mdash; hard bop session
+        with <strong>Bobby Hutcherson</strong> on vibraphone. The Caliman-Hutcherson pairing evokes the
+        Blue Note aesthetic of the late 1960s. Warm tenor over metallic vibraphone: timbral contrast
+        that highlights the saxophone&rsquo;s voice-like quality. Documents Caliman&rsquo;s mature
+        hard bop voice.</p>
+
+        <p><strong><em>Iapetus</em></strong> (1972, Catalyst Records) &mdash; post-bop session with
+        modal structures. Named for one of Saturn&rsquo;s moons. Longer forms, slower harmonic rhythm,
+        extended improvisations over static chords. The Coltrane influence absorbed without abandoning
+        blues-rooted identity. The Catalyst label &mdash; a small independent &mdash; documents the
+        economics of jazz recording in the early 1970s, when major labels were retreating from jazz.</p>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1932 &mdash; Born in Idabel, Oklahoma</div>
+          <p>Born January 11, 1932, in southeastern Oklahoma, near the Choctaw Nation. The second
+          Southern-origin S36 artist (after Jones, born in Chicago but with southern roots).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1950s&ndash;1960s &mdash; Los Angeles: Hard Bop Scene</div>
+          <p>Entered the West Coast jazz scene. Played with <strong>Dexter Gordon</strong>
+          (the hard bop tenor colossus), <strong>Freddie Hubbard</strong> (trumpet),
+          <strong>Bobby Hutcherson</strong> (vibraphone), and <strong>Gerald Wilson</strong>
+          (big band). The LA hard bop stream &mdash; blues-rooted, intense, West Coast sophisticated.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1971 &mdash; Hadley Caliman (Mainstream Records)</div>
+          <p>First leader album. Hard bop session with Bobby Hutcherson on vibraphone. Documents
+          Caliman&rsquo;s mature tenor voice: blues-based phrases, motivic development, warm core
+          tone. The Caliman-Hutcherson pairing evokes the Blue Note aesthetic.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1972 &mdash; Iapetus (Catalyst Records)</div>
+          <p>Second leader album. Post-bop, modal structures. Named for Saturn&rsquo;s moon.
+          Extended improvisations, slower harmonic rhythm. Coltrane influence absorbed through
+          Caliman&rsquo;s own blues-rooted identity. Small independent label documenting the
+          1970s jazz economics.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1980s&ndash;2000s &mdash; Seattle: Cornish College &amp; the Working Life</div>
+          <p>Joined <strong>Cornish College of the Arts</strong> faculty alongside
+          <strong>Julian Priester</strong> (degree 7&deg;). Brass-reed pedagogical duo. Maintained
+          active performance career in Pacific Northwest clubs. Working pedagogue: taught AND performed,
+          modeling sustainable jazz career. Participated in Earshot Jazz Festival and regional events.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2010 &mdash; Death in Tacoma, Washington</div>
+          <p>Died December 8, 2010, at age 78. The first S36 artist to die in the Pacific Northwest.
+          Lived, taught, performed, and died in the Seattle/Tacoma area. The region was home.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Five theory nodes &mdash; establishing the saxophone/reed theory branch (three nodes: tone
+        production, hard bop vocabulary, overtone control) plus the ninth blue note deployment and the
+        Cornish pipeline as dual-pedagogy institution.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Tenor Saxophone: Tone Production</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Single reed vibrating against mouthpiece, controlled by embouchure (lip/jaw pressure).
+            Conical brass bore produces warm, voice-like tone. The closest wind instrument to the
+            human voice &mdash; reed mechanism analogous to vocal cords, embouchure analogous to
+            throat tension. Caliman&rsquo;s tone: warm, centered, blues-inflected, Dexter Gordon lineage.</p>
+            <div class="examples">Caliman (warm core); Dexter Gordon (canonical hard bop tenor); Sonny Rollins (rhythmic energy); Coltrane (overtone mastery)</div>
+            <div class="genealogy"><strong>Thread:</strong> Anderson (3&deg;, voice/vocal cords) &rarr; Standifer (4&deg;, trumpet/lip buzz) &rarr; Priester (7&deg;, trombone/slide) &rarr; Caliman (9&deg;, saxophone/reed). Body-mediated tone production, closest to voice.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Hard Bop Melodic Vocabulary</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Blues emphasis (warmth over cerebral velocity), bebop enclosures (approaching target
+            notes from above and below), motivic development (building narrative through repetition
+            and variation), and modal improvisation (post-bop expansion via scales rather than changes).
+            Caliman spans all four &mdash; rooted in Gordon lineage, absorbing Coltrane&rsquo;s modal influence.</p>
+            <div class="examples">Caliman/<em>Hadley Caliman</em> + <em>Iapetus</em>; Gordon/<em>Go!</em>; Rollins/<em>Saxophone Colossus</em>; Coltrane/<em>Giant Steps</em></div>
+            <div class="genealogy"><strong>Parallel:</strong> Bown (6&deg;) hard bop comping vocabulary for piano. Caliman (9&deg;) hard bop melodic vocabulary for saxophone. Same tradition, different instruments, different domains (accompaniment vs. solo).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Overtone Control: Spectral Manipulation</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Saxophone overtone spectrum controlled by embouchure, air speed, throat, and tongue.
+            Four zones: <strong>subtone</strong> (breathy whisper), <strong>core tone</strong>
+            (balanced &mdash; the classic sound), <strong>overtone emphasis</strong> (brighter, penetrating),
+            <strong>altissimo</strong> (extreme high register via overtone fingerings). Caliman occupied
+            core-to-warm &mdash; the storyteller&rsquo;s voice, not the preacher&rsquo;s shout.</p>
+            <div class="examples">Caliman (warm core); Ben Webster (subtone mastery); Coltrane (overtone extremes through altissimo); Gordon (balanced canonical tone)</div>
+            <div class="genealogy"><strong>Extends:</strong> Peacock (8&deg;) introduced overtone series as bass-register physics. Caliman (9&deg;) introduces overtone control as saxophone performance technique. Same physics, different register, different control mechanism (embouchure vs. finger placement).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Saxophone Voice</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Ninth deployment. The saxophone blue note is the <strong>most vocal non-vocal blue
+            note</strong> &mdash; the reed-embouchure bending mechanism is the closest to the vocal
+            cord&rsquo;s pitch bending. Caliman bends through embouchure manipulation: loosening or
+            tightening jaw pressure to slide pitch through the quarter-tone zone. In the Dexter
+            Gordon tradition: broad, warm, behind-the-beat bends.</p>
+            <div class="examples">Caliman (blues-inflected bending); Gordon (definitive hard bop blue note); Rollins (rhythmic blue note deployment); Webster (subtone blue notes)</div>
+            <div class="genealogy"><strong>Nine deployments:</strong> bass-line (0&deg;), guitar (1&deg;), vocal (3&deg;), trumpet (4&deg;), piano crush (5&deg;), altered voicings (6&deg;), trombone slide (7&deg;), bass fundamental (8&deg;), saxophone voice (9&deg;). The most vocal non-vocal deployment.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Cornish Pipeline: Dual Pedagogy</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Cornish College is the <strong>second multi-artist pipeline</strong> in S36 (after
+            Garfield). Two faculty members reveal <strong>dual pedagogy</strong>: Priester
+            (expansion &mdash; experimental, electronic, boundary-crossing) and Caliman
+            (transmission &mdash; hard bop craft, embodied instrument knowledge, blues tradition).
+            Students accessed both poles simultaneously. Institutional successor to the organic
+            Central District jazz ecosystem.</p>
+            <div class="examples">Priester (7&deg;)/Caliman (9&deg;) at Cornish; Jones (0&deg;)/Anderson (3&deg;) at Garfield</div>
+            <div class="genealogy"><strong>Pipeline evolution:</strong> Garfield (1940s-1950s, community incubator, performers) &rarr; Cornish (1979-present, arts college, musician-educators). The Central District&rsquo;s jazz infrastructure was dismantled; Cornish absorbed the educational function.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             ENERGY SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Energy 2: The Working Musician&rsquo;s Register</h2>
+
+        <p>Caliman is the <strong>fifth energy-2 artist</strong> in the engine. Energy 2 is the
+        working musician&rsquo;s register &mdash; consistent, warm, professional, musically serious
+        without being sonically extreme. The energy of craft rather than spectacle.</p>
+
+        <table>
+          <thead>
+            <tr><th>Energy</th><th>Artists</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Peacock (8&deg;)</td><td>Meditative, foundational, ego-dissolved</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Frisell (1&deg;), Standifer (4&deg;), Berry (5&deg;), Priester (7&deg;), Caliman (9&deg;)</strong></td><td><strong>Atmospheric, warm, professional, community-facing</strong></td></tr>
+            <tr><td>3</td><td>Jones (0&deg;), Horvitz (2&deg;), Anderson (3&deg;), Bown (6&deg;)</td><td>Commanding, intense, projective</td></tr>
+          </tbody>
+        </table>
+
+        <p>Distribution: 1:5:4. Energy-2 is now the <strong>dominant cluster</strong> &mdash; the
+        sustaining frequency of the Seattle jazz scene. The spectacular artists (energy-3) put the
+        scene on the map; the sustaining artists (energy-2) keep it running.</p>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Ten Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator</td></tr>
+            <tr><td>The Quiet Draw</td><td>Peacock (8&deg;)</td><td>Global cultivation &rarr; PNW settlement &rarr; gravitational presence</td></tr>
+            <tr><td><strong>The Working Pedagogue-Draw</strong></td><td><strong>Caliman (9&deg;)</strong></td><td><strong>Global cultivation &rarr; local settlement &rarr; educator AND active performer</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>Caliman&rsquo;s <strong>Working Pedagogue-Draw</strong> is a variant of Priester&rsquo;s
+        Pedagogue-Draw with the performance dimension retained. Priester&rsquo;s emphasis is on
+        experimental expansion; Caliman&rsquo;s is on hard bop craft transmission. Both settled in
+        Seattle to teach; Caliman also modeled the working musician&rsquo;s life for his students.</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;8&deg;</h4>
+          <ul>
+            <li><strong>Saxophone/reed branch:</strong> THREE new nodes (tone production, hard bop
+            vocabulary, overtone control). First reed-specific branch in the engine.</li>
+            <li><strong>Cornish pipeline:</strong> DEEPENED to two artists (Priester 7&deg;, Caliman 9&deg;).
+            Dual pedagogy: experimental + traditional. Second multi-artist pipeline after Garfield.</li>
+            <li><strong>Voice parallel:</strong> Tenor saxophone is the closest instrument to the human
+            voice. Caliman (9&deg;) and Anderson (3&deg;) share range, timbre, and storytelling approach.</li>
+            <li><strong>Blue note thread:</strong> Nine deployments across ten degrees. Saxophone voice
+            is the most vocal non-vocal deployment.</li>
+            <li><strong>Energy spectrum:</strong> Distribution now 1:5:4. Energy-2 is the dominant cluster.</li>
+            <li><strong>Pedagogy axis:</strong> Fourth mode: transmission (master-to-apprentice
+            embodied knowledge). The most ancient form of music education.</li>
+            <li><strong>Genre rotation:</strong> CRITICAL for degree 10. Ten consecutive jazz artists.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../007-julian-priester/index.html">S36-007 &mdash; Julian Priester (Degree 7&deg;)</a> &mdash; Cornish College pipeline: brass-reed pedagogical duo. Expansion (Priester) + transmission (Caliman).</li>
+            <li><a href="../004-floyd-standifer/index.html">S36-004 &mdash; Floyd Standifer (Degree 4&deg;)</a> &mdash; Educator parallel: UW (preservation) and Cornish (transmission). Trumpet + tenor sax = primary jazz melodic voices.</li>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a> &mdash; Hard bop connection: Jones&rsquo;s arrangements speak the same vocabulary Caliman&rsquo;s tenor plays. Both passed through LA.</li>
+            <li><a href="../003-ernestine-anderson/index.html">S36-003 &mdash; Ernestine Anderson (Degree 3&deg;)</a> &mdash; Voice-range parallel: contralto vocal and tenor saxophone overlap. Both warm, blues-rooted storytellers.</li>
+            <li><a href="../008-gary-peacock/index.html">S36-008 &mdash; Gary Peacock (Degree 8&deg;)</a> &mdash; West Coast pipeline: both passed through LA jazz scene before PNW. Bass + tenor sax = foundation + melody.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Caliman, Hadley. <em>Hadley Caliman</em>. Mainstream Records, 1971.</li>
+          <li>Caliman, Hadley. <em>Iapetus</em>. Catalyst Records, 1972.</li>
+          <li>DownBeat. Hadley Caliman reviews and artist mentions, 1960s&ndash;2010.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="4">
+          <li>Gioia, Ted. <em>West Coast Jazz</em>. Oxford University Press, 1992.</li>
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>AllMusic. Hadley Caliman artist biography and discography.</li>
+          <li>JazzTimes. West Coast jazz history and artist coverage.</li>
+        </ol>
+
+        <h3>Institutional &amp; Discographic</h3>
+        <ol start="8">
+          <li>Cornish College of the Arts. Faculty records and jazz program descriptions.</li>
+          <li>Earshot Jazz. Seattle jazz community coverage and Caliman obituary.</li>
+          <li>KNKX (Seattle). Jazz programming and Pacific Northwest coverage.</li>
+          <li>Catalyst Records. Label catalog and discography.</li>
+          <li>Mainstream Records. Label catalog and discography.</li>
+          <li>Bobby Hutcherson discography. Blue Note Records catalog.</li>
+          <li>Dexter Gordon discography. Blue Note and Prestige Records catalogs.</li>
+          <li>Gerald Wilson Orchestra discography and personnel records.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1932</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">2010</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Idabel, Oklahoma</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Seattle (general)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">School</span>
+            <span class="stat-value">Cornish College</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Tenor Saxophone</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">9&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (tenor sax)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1960s&ndash;2010s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Catalyst</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">Leader #1</span>
+            <span class="stat-value">Hadley Caliman (1971)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Leader #2</span>
+            <span class="stat-value">Iapetus (1972)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Mainstream, Catalyst</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Collaborator</span>
+            <span class="stat-value">Bobby Hutcherson</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reed Branch</span>
+            <span class="stat-value">3 (NEW)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">5 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cornish College Pipeline</h4>
+          <div class="stat-row">
+            <span class="stat-label">Faculty #1</span>
+            <span class="stat-value">Priester (7&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Faculty #2</span>
+            <span class="stat-value">Caliman (9&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Mode</span>
+            <span class="stat-value">Dual pedagogy</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipeline #</span>
+            <span class="stat-value">2nd multi-artist</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Working Pedagogue-Draw</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Teaches + performs</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died in PNW</span>
+            <span class="stat-value">Yes (1st in S36)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">LA pipeline</span>
+            <span class="stat-value">2 artists (8&deg;, 9&deg;)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Energy 1</span>
+            <span class="stat-value">Peacock (8&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 2</span>
+            <span class="stat-value">5 artists (dominant)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 3</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">1:5:4</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;8&deg; &rarr; 9&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">New Branch</span>
+            <span class="stat-value">Saxophone (3 nodes)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipeline</span>
+            <span class="stat-value">Cornish (2 artists)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">9th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">10 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">11 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 9&deg; / 360 &middot;
+      <a href="../008-gary-peacock/index.html">Prev: 8&deg; Peacock</a> &middot;
+      <a href="../007-julian-priester/index.html">7&deg; Priester</a> &middot;
+      <a href="../004-floyd-standifer/index.html">4&deg; Standifer</a> &middot;
+      <a href="../003-ernestine-anderson/index.html">3&deg; Anderson</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
