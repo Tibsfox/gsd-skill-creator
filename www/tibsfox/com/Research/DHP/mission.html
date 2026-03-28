@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; DHCP Protocol</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-dhp">
+  <header>
+    <h1>DHCP Protocol</h1>
+    <div class="subtitle">Wire Format &middot; Options Catalog &middot; Lease Lifecycle &middot; Security &middot; DHCPv6</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-wire-format-and-message-types">Wire Format</a>
+      <a href="page.html?doc=02-options-catalog">Options</a>
+      <a href="page.html?doc=03-lease-lifecycle-and-state-machine">Lease Lifecycle</a>
+      <a href="page.html?doc=04-security-and-attack-surface">Security</a>
+      <a href="page.html?doc=05-dhcpv6-and-modern-extensions">DHCPv6</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      DHCP is a protocol built entirely on trust without authentication &mdash; and for thirty years,
+      that has been fine. The packet is small. The consequences are total. A 236-byte fixed header,
+      a magic cookie, and a variable options field that between them configure every networked device
+      on earth. The spaces between the fields &mdash; the gap between ciaddr and yiaddr, between T1
+      and T2, between RFC 3118's promise and its zero adoption &mdash; are where the real protocol lives.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~336K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/dhcp-protocol-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/dhcp-protocol-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schemas, source index, LaTeX templates</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1</td><td>Parallel Research</td><td>Track A (M1+M2: Wire+Options) &middot; Track B (M3+M4: Lifecycle+Security)</td><td>Parallel</td><td>2 hours</td></tr>
+        <tr><td>1.5</td><td>CAPCOM Gate</td><td>Human review of wire format accuracy + security sensitivity</td><td>HITL</td><td>30 min</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>DHCPv6 (M5) + cross-module integration + through-line</td><td>Sequential</td><td>1.5 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Final assembly, verification, LaTeX compilation (3 passes)</td><td>Sequential</td><td>1 hour</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Resource orchestration</td><td>Opus</td><td>Security analysis (M4), DHCPv6 comparison (M5), synthesis</td></tr>
+        <tr><td>Denise</td><td>Document assembly</td><td>Sonnet x2</td><td>Wire format (M1), options catalog (M2), state machine (M3)</td></tr>
+        <tr><td>Paula</td><td>Scaffolding</td><td>Haiku</td><td>LaTeX templates, option code index, commit formatting</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations traceable to IETF RFCs, IANA registry, or peer-reviewed academic analysis. Zero entertainment/blog sources.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every port number, byte count, timer percentage, and option code cites specific RFC section or IANA entry.</td></tr>
+        <tr><td>SC-ADV</td><td>No policy advocacy</td><td>Security section presents mechanisms without advocating for specific vendor products or policy positions.</td></tr>
+        <tr><td>SC-SEC</td><td>Security sensitivity</td><td>Attack descriptions at conceptual level only. No exploitation scripts, tool configurations, or proof-of-concept code.</td></tr>
+        <tr><td>SC-RFC</td><td>RFC accuracy</td><td>All protocol behavior claims verified against primary RFC text, not secondary summaries.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Packet format documents all 15 named fields with byte widths, offsets, and encoding per RFC 2131</td><td>PASS</td></tr>
+        <tr><td>2</td><td>All 8 message types documented with op field, valid options, and transport rules</td><td>PASS</td></tr>
+        <tr><td>3</td><td>Options catalog includes all RFC 2132 options (codes 1-61 plus pad/end) with TLV encoding</td><td>PASS</td></tr>
+        <tr><td>4</td><td>20+ post-RFC 2132 options documented from IANA registry</td><td>PASS</td></tr>
+        <tr><td>5</td><td>8-state client FSM with all transitions, timers, and retransmission behavior</td><td>PASS</td></tr>
+        <tr><td>6</td><td>T1, T2, and lease expiry documented with default percentages and reset conditions</td><td>PASS</td></tr>
+        <tr><td>7</td><td>Starvation &rarr; rogue server &rarr; MITM attack chain with mechanism detail</td><td>PASS</td></tr>
+        <tr><td>8</td><td>All defensive architectures (snooping, DAI, IPSG, port security) documented</td><td>PASS</td></tr>
+        <tr><td>9</td><td>RFC 3118 authentication analyzed including non-adoption failure analysis</td><td>PASS</td></tr>
+        <tr><td>10</td><td>DHCPv6 SARR exchange + all DUID types + IA_NA/IA_TA/IA_PD</td><td>PASS</td></tr>
+        <tr><td>11</td><td>Comparative matrix maps DHCPv4 to DHCPv6 across 15+ feature dimensions</td><td>PASS</td></tr>
+        <tr><td>12</td><td>All numerical claims attributed to specific RFC sections</td><td>PASS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>DHCP is the protocol that hands you your identity before you have one. Every byte in those
+    first four messages is an act of provisional trust &mdash; the client announcing its existence
+    into a broadcast void, the server extending a lease on belonging. The entire path from power-on
+    to fully-configured network participant is one continuous negotiation: the DORA exchange is a
+    handshake between a device that has nothing and an infrastructure that has everything it needs.
+    Understanding this exchange at the wire level &mdash; from the op field at byte 0 to the End option
+    at byte 255 &mdash; is what transforms network configuration from operational chore to
+    architectural comprehension. The spaces between the fields are where the real protocol lives.</p>
+  </main>
+
+  <footer>
+    <p>DHCP Protocol &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
