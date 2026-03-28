@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Living Curriculum — Center Camp</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1a12; color: #e8dcc8; font-family: 'Georgia','Times New Roman',serif; min-height: 100vh; }
+
+    /* Nav */
+    .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; flex-wrap: wrap; }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 3rem 2rem 2rem; background: radial-gradient(ellipse at 30% 80%, rgba(45,90,58,0.1) 0%, transparent 40%), radial-gradient(ellipse at 70% 80%, rgba(122,204,82,0.06) 0%, transparent 40%); }
+    .hero h1 { font-size: 2.4rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+    .hero .subtitle { font-size: 0.95rem; color: rgba(232,220,200,0.5); font-style: italic; max-width: 36rem; margin: 0 auto 1.5rem; }
+    .stats-bar { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 1rem 2rem; border-top: 1px solid rgba(122,154,90,0.1); border-bottom: 1px solid rgba(122,154,90,0.1); margin-bottom: 1.5rem; }
+    .stat { text-align: center; }
+    .stat-val { display: block; font-size: 1.4rem; color: #c8b890; font-weight: 300; }
+    .stat-label { font-size: 0.7rem; color: rgba(232,220,200,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Toggle bar */
+    .toggle-bar { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; padding: 0 2rem 0.8rem; align-items: center; }
+    .toggle-btn { padding: 0.6rem 1.4rem; border-radius: 6px; font-size: 0.88rem; font-family: inherit; cursor: pointer; transition: all 0.2s; border: 2px solid; font-weight: 500; }
+    .toggle-btn.offerings { background: rgba(45,90,58,0.15); border-color: rgba(45,90,58,0.4); color: #2d5a3a; }
+    .toggle-btn.offerings.active { background: rgba(45,90,58,0.35); border-color: #2d5a3a; color: #e8dcc8; }
+    .toggle-btn.frontiers { background: rgba(122,204,82,0.08); border-color: rgba(122,204,82,0.3); color: #7acc52; }
+    .toggle-btn.frontiers.active { background: rgba(122,204,82,0.2); border-color: #7acc52; color: #e8dcc8; }
+    .toggle-btn:hover { transform: translateY(-1px); }
+
+    /* Filters */
+    .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; padding: 0.6rem 2rem; align-items: center; }
+    .filter-btn { background: rgba(26,42,32,0.6); border: 1px solid rgba(122,154,90,0.15); color: rgba(232,220,200,0.6); padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.75rem; font-family: inherit; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: rgba(122,154,90,0.4); color: #e8dcc8; }
+    .filter-btn.active { background: rgba(122,154,90,0.2); border-color: rgba(122,154,90,0.5); color: #e8dcc8; }
+    .search-box { background: rgba(26,42,32,0.6); border: 1px solid rgba(122,154,90,0.2); color: #e8dcc8; padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.75rem; font-family: inherit; outline: none; width: 150px; transition: border-color 0.2s; }
+    .search-box:focus { border-color: rgba(122,154,90,0.5); }
+    .search-box::placeholder { color: rgba(232,220,200,0.3); }
+
+    /* Canvas */
+    .viz-wrap { text-align: center; margin: 1rem auto 1.5rem; }
+    .viz-wrap canvas { border: 1px solid rgba(122,154,90,0.1); border-radius: 8px; cursor: crosshair; max-width: 100%; }
+    .viz-label { font-size: 0.7rem; color: rgba(232,220,200,0.25); margin-top: 0.4rem; }
+
+    /* Card grid */
+    .card-grid { max-width: 64rem; margin: 0 auto; padding: 1rem 2rem 3rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.2rem; }
+
+    .cur-card { background: rgba(26,42,32,0.55); border: 1px solid rgba(122,154,90,0.12); border-radius: 8px; padding: 1.1rem 1.2rem; transition: all 0.25s; }
+    .cur-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .cur-card.hidden { display: none; }
+    .cur-card.old-growth { border-left: 3px solid #2d5a3a; }
+    .cur-card.frontier-card { border-left: 3px solid #7acc52; }
+    .cur-card:hover.old-growth { border-color: rgba(45,90,58,0.5); }
+    .cur-card:hover.frontier-card { border-color: rgba(122,204,82,0.5); }
+
+    .card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+    .card-species { font-size: 1rem; font-weight: 400; }
+    .card-species.og-color { color: #4a9a5a; }
+    .card-species.fr-color { color: #7acc52; }
+    .card-sci { font-size: 0.78rem; color: rgba(232,220,200,0.4); font-style: italic; margin-bottom: 0.5rem; }
+    .card-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .badge { font-size: 0.66rem; padding: 0.12rem 0.45rem; border-radius: 10px; border: 1px solid; }
+    .badge-growth { border-color: rgba(45,90,58,0.4); color: rgba(45,90,58,0.8); }
+    .badge-growth.new { border-color: rgba(122,204,82,0.4); color: rgba(122,204,82,0.8); }
+    .badge-type { border-color: rgba(94,184,196,0.3); color: rgba(94,184,196,0.7); }
+    .badge-project { border-color: rgba(200,184,144,0.3); color: rgba(200,184,144,0.6); text-decoration: none; }
+    .badge-project:hover { color: #c8b890; }
+
+    .card-knowledge { font-size: 0.82rem; color: rgba(232,220,200,0.65); line-height: 1.6; margin-bottom: 0.4rem; }
+    .card-knowledge em { font-style: normal; color: rgba(232,220,200,0.4); font-size: 0.76rem; }
+    .card-story { font-size: 0.8rem; color: rgba(232,220,200,0.45); font-style: italic; line-height: 1.5; margin-bottom: 0.5rem; }
+    .card-question { background: rgba(45,90,58,0.12); border: 1px solid rgba(45,90,58,0.2); border-radius: 6px; padding: 0.5rem 0.7rem; font-size: 0.78rem; color: rgba(232,220,200,0.6); line-height: 1.5; }
+    .card-question .qlabel { font-size: 0.68rem; color: rgba(232,220,200,0.35); text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.2rem; }
+    .card-compass { background: rgba(122,204,82,0.08); border: 1px solid rgba(122,204,82,0.2); border-radius: 6px; padding: 0.5rem 0.7rem; font-size: 0.78rem; color: rgba(232,220,200,0.6); line-height: 1.5; }
+    .card-compass .dlabel { font-size: 0.68rem; color: rgba(122,204,82,0.5); text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.2rem; }
+
+    /* Footer */
+    .camp-footer { max-width: 42rem; margin: 0 auto; text-align: center; padding: 2rem 2rem 3rem; font-size: 0.82rem; color: rgba(232,220,200,0.4); line-height: 1.8; }
+    .camp-footer p { margin-bottom: 1rem; }
+    .camp-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+    .camp-footer a:hover { color: #7a9a5a; }
+    .camp-footer .links { margin-top: 1.5rem; font-size: 0.78rem; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      .toggle-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research</a>
+  <span class="sep">/</span>
+  <a href="curriculum.html" class="active">Living Curriculum</a>
+</div>
+
+<div class="hero">
+  <h1>The Living Curriculum</h1>
+  <div class="subtitle">What the forest teaches, and what it still needs to learn</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-val">128</span><span class="stat-label">Species</span></div>
+  <div class="stat"><span class="stat-val">64</span><span class="stat-label">Offerings</span></div>
+  <div class="stat"><span class="stat-val">64</span><span class="stat-label">Frontiers</span></div>
+  <div class="stat"><span class="stat-val">11</span><span class="stat-label">Clusters</span></div>
+</div>
+
+<div class="toggle-bar">
+  <button class="toggle-btn offerings active" id="btnOfferings">Old Growth &mdash; What We Know</button>
+  <button class="toggle-btn frontiers" id="btnFrontiers">New Growth &mdash; What We Need to Discover</button>
+</div>
+
+<div class="filter-row">
+  <button class="filter-btn active" data-type="All">All</button>
+  <button class="filter-btn" data-type="Trees">Trees</button>
+  <button class="filter-btn" data-type="Birds">Birds</button>
+  <button class="filter-btn" data-type="Mammals">Mammals</button>
+  <button class="filter-btn" data-type="Marine">Marine</button>
+  <button class="filter-btn" data-type="Insects">Insects</button>
+  <button class="filter-btn" data-type="Fungi">Fungi</button>
+  <button class="filter-btn" data-type="Other">Other</button>
+  <input class="search-box" id="searchBox" type="text" placeholder="Search species...">
+</div>
+
+<div class="viz-wrap">
+  <canvas id="forest" width="700" height="350"></canvas>
+  <div class="viz-label">hover to identify &middot; click to jump to card</div>
+</div>
+
+<div class="card-grid" id="cardGrid"></div>
+
+<div class="camp-footer">
+  <p>The old growth is what we know. The new growth is what we need to discover. Every offering raises a frontier. Every frontier, once answered, becomes old growth. The forest teaches through both.</p>
+  <div class="links">
+    <a href="deep-trails.html">Deep Trails</a> &middot;
+    <a href="hundred-stories.html">Hundred Stories</a> &middot;
+    <a href="seeds.html">Seed Catalog</a> &middot;
+    <a href="index.html">Center Camp</a>
+  </div>
+</div>
+
+<script src="curriculum.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var all = CURRICULUM.offerings.concat(CURRICULUM.frontiers);
+  var mode = 'offerings'; // 'offerings' | 'frontiers' | (we show the active set)
+  var typeFilter = 'All';
+  var searchTerm = '';
+
+  var GROWTH_ICON = { 'old-growth': '\u{1F332} Old-growth', 'sapling': '\u{1F33F} Sapling', 'seedling': '\u{1F331} Seedling' };
+  var OG = '#2d5a3a', FR = '#7acc52';
+
+  // --- Build all cards ---
+  var grid = document.getElementById('cardGrid');
+  all.forEach(function(item) {
+    var isFrontier = item.id > 64;
+    var card = document.createElement('div');
+    card.className = 'cur-card ' + (isFrontier ? 'frontier-card' : 'old-growth');
+    card.id = 'c-' + item.id;
+    card.setAttribute('data-type', item.type);
+    card.setAttribute('data-mode', isFrontier ? 'frontiers' : 'offerings');
+
+    var colorClass = isFrontier ? 'fr-color' : 'og-color';
+    var growthNew = (item.growth === 'seedling' || item.growth === 'sapling') ? ' new' : '';
+
+    var html = '<div class="card-head"><span class="card-species ' + colorClass + '">' + item.species + '</span></div>';
+    html += '<div class="card-sci">' + item.sci + '</div>';
+    html += '<div class="card-badges">';
+    html += '<span class="badge badge-growth' + growthNew + '">' + (GROWTH_ICON[item.growth] || item.growth) + '</span>';
+    html += '<span class="badge badge-type">' + item.type + '</span>';
+    html += '<span class="badge badge-project">' + item.project + '</span>';
+    html += '</div>';
+
+    if (!isFrontier) {
+      html += '<div class="card-knowledge"><em>Teaches:</em> ' + item.knowledge + '</div>';
+      html += '<div class="card-story">' + item.story + '</div>';
+      html += '<div class="card-question"><span class="qlabel">Deeper question</span>' + item.question + '</div>';
+    } else {
+      html += '<div class="card-knowledge"><em>Frontier:</em> ' + item.frontier + '</div>';
+      html += '<div class="card-story">' + item.story + '</div>';
+      html += '<div class="card-compass"><span class="dlabel">Direction</span>' + item.direction + '</div>';
+    }
+
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+
+  // --- Filter logic ---
+  function applyFilters() {
+    var cards = grid.querySelectorAll('.cur-card');
+    var q = searchTerm.toLowerCase();
+    cards.forEach(function(c) {
+      var modeMatch = c.getAttribute('data-mode') === mode;
+      var typeMatch = typeFilter === 'All' || c.getAttribute('data-type') === typeFilter;
+      var id = parseInt(c.id.replace('c-', ''));
+      var item = all.find(function(x) { return x.id === id; });
+      var searchMatch = !q || item.species.toLowerCase().indexOf(q) !== -1 || item.sci.toLowerCase().indexOf(q) !== -1;
+      c.classList.toggle('hidden', !(modeMatch && typeMatch && searchMatch));
+    });
+  }
+
+  // Toggle buttons
+  document.getElementById('btnOfferings').addEventListener('click', function() {
+    mode = 'offerings';
+    this.classList.add('active');
+    document.getElementById('btnFrontiers').classList.remove('active');
+    applyFilters(); drawForest();
+  });
+  document.getElementById('btnFrontiers').addEventListener('click', function() {
+    mode = 'frontiers';
+    this.classList.add('active');
+    document.getElementById('btnOfferings').classList.remove('active');
+    applyFilters(); drawForest();
+  });
+
+  // Type filters
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      typeFilter = this.getAttribute('data-type');
+      applyFilters(); drawForest();
+    });
+  });
+
+  // Search
+  document.getElementById('searchBox').addEventListener('input', function() {
+    searchTerm = this.value;
+    applyFilters();
+  });
+
+  applyFilters();
+
+  // --- Forest Visualization ---
+  var canvas = document.getElementById('forest');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var hovered = null;
+  var dots = [];
+
+  function buildDots() {
+    dots = [];
+    var set = mode === 'offerings' ? CURRICULUM.offerings : CURRICULUM.frontiers;
+    var filtered = typeFilter === 'All' ? set : set.filter(function(s) { return s.type === typeFilter; });
+    var n = filtered.length;
+    filtered.forEach(function(item, i) {
+      var isOG = item.growth === 'old-growth';
+      var isSap = item.growth === 'sapling';
+      var x, y, h;
+      if (mode === 'offerings') {
+        // Old-growth left, younger right
+        var t = n > 1 ? i / (n - 1) : 0.5;
+        x = 40 + t * (W - 80);
+        h = isOG ? 60 + Math.random() * 80 : (isSap ? 30 + Math.random() * 40 : 10 + Math.random() * 20);
+        y = H - 40 - h * 0.5;
+      } else {
+        // Saplings/seedlings spread across, taller in center
+        var t = n > 1 ? i / (n - 1) : 0.5;
+        x = 40 + t * (W - 80);
+        h = isOG ? 50 + Math.random() * 60 : (isSap ? 25 + Math.random() * 35 : 8 + Math.random() * 18);
+        y = H - 40 - h * 0.5;
+      }
+      dots.push({ x: x, y: y, h: h, item: item, isOG: isOG, isSap: isSap });
+    });
+  }
+
+  function drawForest() {
+    buildDots();
+    ctx.clearRect(0, 0, W, H);
+
+    // Ground line
+    ctx.strokeStyle = 'rgba(45,90,58,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(20, H - 38);
+    ctx.lineTo(W - 20, H - 38);
+    ctx.stroke();
+
+    // Ground label
+    ctx.fillStyle = 'rgba(232,220,200,0.15)';
+    ctx.font = '10px Georgia';
+    if (mode === 'offerings') {
+      ctx.textAlign = 'left';
+      ctx.fillText('old-growth', 25, H - 25);
+      ctx.textAlign = 'right';
+      ctx.fillText('seedlings', W - 25, H - 25);
+    } else {
+      ctx.textAlign = 'left';
+      ctx.fillText('frontiers', 25, H - 25);
+      ctx.textAlign = 'right';
+      ctx.fillText('new growth', W - 25, H - 25);
+    }
+
+    // Mist boundary (center)
+    var grd = ctx.createLinearGradient(W * 0.4, 0, W * 0.6, 0);
+    grd.addColorStop(0, 'rgba(232,220,200,0)');
+    grd.addColorStop(0.5, 'rgba(232,220,200,0.03)');
+    grd.addColorStop(1, 'rgba(232,220,200,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(W * 0.4, 20, W * 0.2, H - 60);
+
+    // Draw trees
+    dots.forEach(function(d) {
+      var baseColor = mode === 'offerings' ? OG : FR;
+      var alpha = d.isOG ? 0.8 : (d.isSap ? 0.6 : 0.4);
+      var isHov = hovered && hovered.item.id === d.item.id;
+
+      // Trunk
+      ctx.strokeStyle = isHov ? '#e8dcc8' : 'rgba(90,70,50,' + (alpha * 0.5) + ')';
+      ctx.lineWidth = d.isOG ? 3 : (d.isSap ? 2 : 1);
+      ctx.beginPath();
+      ctx.moveTo(d.x, H - 39);
+      ctx.lineTo(d.x, d.y);
+      ctx.stroke();
+
+      // Canopy
+      if (d.isOG || d.isSap) {
+        ctx.fillStyle = isHov ? '#e8dcc8' : baseColor;
+        ctx.globalAlpha = isHov ? 0.9 : alpha;
+        var r = d.isOG ? d.h * 0.18 : d.h * 0.2;
+        ctx.beginPath();
+        // Simple triangle tree
+        ctx.moveTo(d.x, d.y - r);
+        ctx.lineTo(d.x - r * 0.7, d.y + r * 0.6);
+        ctx.lineTo(d.x + r * 0.7, d.y + r * 0.6);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      } else {
+        // Seedling dot
+        ctx.fillStyle = isHov ? '#e8dcc8' : baseColor;
+        ctx.globalAlpha = isHov ? 0.9 : alpha;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+
+      // Hover label
+      if (isHov) {
+        ctx.fillStyle = '#e8dcc8';
+        ctx.font = '11px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText(d.item.species, d.x, d.y - (d.isOG ? d.h * 0.22 : 12));
+      }
+    });
+  }
+
+  canvas.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var sx = canvas.width / rect.width;
+    var mx = (e.clientX - rect.left) * sx;
+    var my = (e.clientY - rect.top) * (canvas.height / rect.height);
+    hovered = null;
+    for (var i = 0; i < dots.length; i++) {
+      var dx = dots[i].x - mx, dy = dots[i].y - my;
+      if (Math.sqrt(dx * dx + dy * dy) < 15) { hovered = dots[i]; break; }
+    }
+    drawForest();
+  });
+
+  canvas.addEventListener('mouseleave', function() { hovered = null; drawForest(); });
+
+  canvas.addEventListener('click', function() {
+    if (hovered) {
+      var el = document.getElementById('c-' + hovered.item.id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  drawForest();
+})();
+</script>
+</body>
+</html>
