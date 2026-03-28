@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; OpenStack Cloud Platform</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ops">
+  <header>
+    <h1>OpenStack Cloud Platform</h1>
+    <div class="subtitle">NASA Engineering Rigor &middot; IaaS Self-Hosting &middot; OpenStack &middot; Kolla-Ansible &middot; Cloud Primitives</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-openstack-architecture">Architecture</a>
+      <a href="page.html?doc=02-nasa-se-cloud-ops">NASA SE Rigor</a>
+      <a href="page.html?doc=03-iaas-self-hosting">IaaS Self-Hosting</a>
+      <a href="page.html?doc=04-networking-orchestration">Networking &amp; Orchestration</a>
+      <a href="page.html?doc=05-cloud-comparison-sovereignty">Cloud Comparison</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      NASA achieved mission success not through heroic improvisation but through disciplined process.
+      The Systems Engineering Handbook exists because missions matter &mdash; because a spacecraft that
+      fails due to a preventable oversight is not just an engineering failure but a failure of process.
+      OpenStack exists because NASA chose to share. This project carries that commitment forward:
+      applying NASA's engineering rigor to cloud infrastructure, then publishing everything so that
+      a person who wants to understand cloud computing does not need a corporate certification
+      budget to learn.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">15</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~355K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">148</span><span class="stat-label">Total Tests</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/gsd-openstack-nasa-vision.md">Vision Document</a></td><td>Markdown</td><td>Complete north star: two-part architecture, problem statement, NASA SE phase mapping, success criteria</td></tr>
+        <tr><td><a href="mission-pack/gsd-openstack-nasa-reference.md">Research Reference</a></td><td>Markdown</td><td>NASA SE Engine mapped to cloud ops, life-cycle reviews, OpenStack architecture with authoritative sources</td></tr>
+        <tr><td><a href="mission-pack/00-milestone-spec.md">Milestone Specification</a></td><td>Markdown</td><td>15 deliverables with acceptance criteria, component breakdown, shared interfaces, filesystem contracts</td></tr>
+        <tr><td><a href="mission-pack/01-wave-execution-plan.md">Wave Execution Plan</a></td><td>Markdown</td><td>6 waves, 3 parallel tracks, 15 tasks. Critical path and cache optimization strategy</td></tr>
+        <tr><td><a href="mission-pack/02-test-plan.md">Test Plan</a></td><td>Markdown</td><td>148 tests: 22 safety-critical, 52 core functionality, 38 integration, 24 doc verification</td></tr>
+        <tr><td><a href="mission-pack/README.md">Package README</a></td><td>Markdown</td><td>Package manifest, execution instructions, and pre-execution checklist</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared types, NASA SE methodology skill</td><td>Sequential</td><td>1.5 hrs</td></tr>
+        <tr><td>1</td><td>Skills</td><td>Track A (Core) &middot; Track B (Ops) &middot; Track C (Doc)</td><td>Parallel</td><td>3 hrs</td></tr>
+        <tr><td>2</td><td>Crews &amp; Chipset</td><td>Deploy/Ops crews &middot; Doc crew &middot; Chipset definition</td><td>Parallel</td><td>2.5 hrs</td></tr>
+        <tr><td>3</td><td>Documentation</td><td>SysAdmin Guide &middot; Ops Manual &middot; Runbooks + Ref Library</td><td>Parallel</td><td>4 hrs</td></tr>
+        <tr><td>4</td><td>Verification</td><td>V&amp;V Plan + Compliance Matrix &middot; Dashboard Console</td><td>Parallel</td><td>3 hrs</td></tr>
+        <tr><td>5</td><td>Integration</td><td>Full system verification &middot; Lessons learned</td><td>Sequential</td><td>4 hrs</td></tr>
+      </tbody>
+    </table>
+
+    <h2>NASA SE Phase Mapping</h2>
+
+    <table>
+      <thead><tr><th>NASA Review</th><th>Cloud Equivalent</th><th>Evaluates</th></tr></thead>
+      <tbody>
+        <tr><td>MCR</td><td>Cloud Architecture Review</td><td>Is the proposed architecture feasible for this hardware?</td></tr>
+        <tr><td>SRR</td><td>Requirements Baseline Review</td><td>Are requirements complete, consistent, and traceable?</td></tr>
+        <tr><td>SDR</td><td>Design Decision Review</td><td>Are trade studies complete? Is selected approach sound?</td></tr>
+        <tr><td>PDR</td><td>Configuration Review</td><td>Are Kolla-Ansible configs correct? V&amp;V plan ready?</td></tr>
+        <tr><td>CDR</td><td>Pre-Deployment Review</td><td>Everything ready to deploy? Rollback procedures documented?</td></tr>
+        <tr><td>SIR</td><td>Integration Test Review</td><td>Do all services work together?</td></tr>
+        <tr><td>ORR</td><td>Operations Handoff Review</td><td>Can the ops team run this? Runbooks verified?</td></tr>
+        <tr><td>FRR</td><td>Production Go/No-Go</td><td>All systems nominal, all docs verified, all personnel trained?</td></tr>
+        <tr><td>PLAR</td><td>Post-Deployment Assessment</td><td>Is the cloud healthy? Issues from deployment?</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Launch Checklist (Safety-Critical Tests)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>Credentials excluded from git</td><td>No passwords, tokens, or private keys in any git-tracked file. Absolute boundary.</td></tr>
+        <tr><td>SC-02</td><td>No external binding without HITL</td><td>Default config binds only to management network. External exposure requires explicit human approval.</td></tr>
+        <tr><td>SC-03</td><td>Destructive ops have rollback</td><td>Every procedure tagged destructive has a non-empty, tested rollback section.</td></tr>
+        <tr><td>SC-04</td><td>Source quality</td><td>All citations from standards bodies, peer-reviewed sources, or official project documentation. Zero entertainment media.</td></tr>
+        <tr><td>SC-05</td><td>Numerical attribution</td><td>Every performance metric, timing value, and configuration parameter attributed to a specific source.</td></tr>
+        <tr><td>SC-06</td><td>No policy advocacy</td><td>Document presents technical analysis without advocating for specific vendors or policy positions.</td></tr>
+        <tr><td>SC-07</td><td>Security: credential isolation</td><td>All credentials stored in local-only directory excluded from version control. Rotation procedures documented.</td></tr>
+        <tr><td>SC-08</td><td>Security: network exploitation</td><td>No operational vulnerability details for OpenStack API or management network exploitation.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>OpenStack architecture fully documented with all 8 core services and their API contracts</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>NASA SE Engine's 17 processes mapped to cloud operations with NPR 7123.1D cross-references</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>IaaS self-hosting covers Ceph integration, backup strategies, and data sovereignty rationale</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Neutron SDN fully specified including OVS/OVN comparison, security groups, and floating IPs</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Heat orchestration documented with HOT template format and stack lifecycle management</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Cloud primitive translation table covers OpenStack, AWS, GCP, Azure, and Kubernetes equivalents</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Life-cycle reviews (MCR through PLAR) mapped with entrance and success criteria</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Self-hosted vs. managed cloud TCO framework with decision criteria documented</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>&ge;15 authoritative sources per module, zero entertainment media</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Every numerical claim attributed to a specific source</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>Verification methods (TAID) applied to each cloud service with documented test procedures</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>Document is self-contained: a reader with Linux fundamentals can follow every module</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>This project is where the metaphor becomes the method. Since its inception, GSD has drawn on
+    NASA's engineering philosophy as a design guide. The mission crew manifest adapts the flight control
+    room. The vision-to-mission pipeline mirrors the SE Engine. But philosophy without practice is
+    just decoration. When GSD deploys an OpenStack cloud using its own mission management architecture,
+    documented with the same methodology NASA uses for spacecraft, the metaphor stops being a metaphor.
+    It becomes evidence. And because OpenStack itself was born from NASA's commitment to public knowledge
+    infrastructure, the project carries that commitment forward. Everything produced is open &mdash;
+    not because open source is a business strategy, but because knowledge created through collective
+    effort toward shared understanding has a moral character that demands sharing.</p>
+  </main>
+
+  <footer>
+    <p>OpenStack Cloud Platform &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
