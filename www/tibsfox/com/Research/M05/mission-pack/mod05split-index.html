@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 05 Split Analysis — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #37474F;
+  --secondary: #E65100;
+  --tertiary: #1565C0;
+  --accent: #EF6C00;
+  --light-bg: #ECEFF1;
+  --card-bg: #CFD8DC;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, #1a2327 0%, var(--primary) 60%, #4E342E 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: var(--accent); letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--secondary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: var(--primary); font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Module 05 Split Analysis</h1>
+  <h2>NastyMix Records &amp; CD Place Memory &mdash; Structural Remediation Study</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="mod05split-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Complete three-stage mission package. Modify modules, update research, recompile with three XeLaTeX passes.</div>
+    </a>
+    <a href="../index.html" class="file-card">
+      <div class="ext">HTML &middot; Web Project</div>
+      <div class="name">Research Project</div>
+      <div class="desc">The M05 research project with 5 modules covering module split analysis methodology and the Module 05 case study.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 &mdash; Vision Document</span>
+        <ul>
+          <li>Vision narrative: one zip code, two stories</li>
+          <li>Problem statement (5 problems), core concept</li>
+          <li>Module architecture before and after split</li>
+          <li>7 research modules (MA-MG), chipset configuration, scope boundaries</li>
+          <li>10 success criteria, through-line</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 &mdash; Research Reference</span>
+        <ul>
+          <li>Track MA: NastyMix founding and 4 co-founder profiles</li>
+          <li>Track MB: Northwest roster (Mix, Kid Sensation, High Performance, Criminal Nation, Accused)</li>
+          <li>Track MC: National signings (Adrienne, Whiz Kid, Bob &amp; Mob, Side F-X, Rococo)</li>
+          <li>Track MD: Business arc timeline ($900 to platinum to collapse)</li>
+          <li>Track ME: Central District spatial mapping with key sites</li>
+          <li>Track MF: MOHAI Legacy exhibit documentation (AASLH award)</li>
+          <li>Track MG: Gentrification arc (65%+ to under 20% Black) and preservation</li>
+          <li>Safety considerations and full source bibliography</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 &mdash; Mission Package</span>
+        <ul>
+          <li>4 deliverables, 4-wave execution plan with 2 parallel tracks</li>
+          <li>8 mission crew roles</li>
+          <li>20 tests (8 mandatory-pass BLOCK)</li>
+          <li>~104K token budget, ~8-10 context windows, ~2-3 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section</li>
+      <li>Wave 0 produces shared schemas and cross-reference contracts</li>
+      <li>Wave 1 executes two parallel tracks (A: 05a Label, B: 05b Place)</li>
+      <li>Wave 2 synthesizes cross-module integration and Emerald Street audit</li>
+      <li>Wave 3 verifies, calibrates line counts, and delivers</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: var(--light-bg); padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode mod05split-mission.tex
+xelatex -interaction=nonstopmode mod05split-mission.tex
+xelatex -interaction=nonstopmode mod05split-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "Nastymix's 1989 'Gold Party' was not only the moment which defined Northwest Hip-Hop's arrival
+    as a force in the local music community..." &mdash; Glen Boyd, cited in HistoryLink file 9793
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; Module 05 Split Analysis &middot; March 2026
+</footer>
+
+</body>
+</html>
