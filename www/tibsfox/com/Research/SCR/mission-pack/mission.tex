@@ -1,0 +1,1260 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ============================================================
+% COLOR SCHEME — Technology / Code domain
+% Steel blue, electric blue, graphite
+% ============================================================
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{safetyred}{HTML}{B71C1C}
+\definecolor{warnambr}{HTML}{E65100}
+\definecolor{safetyyellow}{HTML}{FFF8E1}
+\definecolor{successgreen}{HTML}{1B5E20}
+
+% ============================================================
+% SECTION FORMATTING
+% ============================================================
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ============================================================
+% CUSTOM ENVIRONMENTS
+% ============================================================
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{safetybox}{
+  colback=safetyyellow, colframe=safetyred,
+  arc=2pt, boxrule=1pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ============================================================
+% HEADERS AND FOOTERS
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{gsd-skill-creator Code Documentation}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ============================================================
+% HYPERLINKS
+% ============================================================
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={The Source Code Tells the Story -- Mission Package},
+  pdfsubject={Deep Code Review and Documentation Web Mission},
+}
+
+% ============================================================
+% DOCUMENT BEGIN
+% ============================================================
+\begin{document}
+
+% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Source Code Tells the Story\\[0.3em]gsd-skill-creator Deep Code Review}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Full Documentation Web for Every Line of Code}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Living Architecture Study — v1.49.21 (DACP Milestone)}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Storage is Cheap; Understanding is Priceless}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17+ roles) \quad|\quad Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Source Code Tells the Story --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Vision Phase --- Pre-Execution}
+\metafield{Depends On:}{gsd-skill-creator dev branch (v1.49.21), The Space Between (tibsfox.com/media/The\_Space\_Between.pdf)}
+\metafield{Context:}{This mission addresses the complete documentation web for gsd-skill-creator --- the adaptive learning layer, GSD execution engine, College of Knowledge, DACP protocol, chipset architecture, holomorphic mathematics engine, and safety/cultural sovereignty systems. All 7,451 files. Every line.}
+
+\subsection{Vision}
+
+There is a principle in the GSD ecosystem: \textit{storage is cheap compared to the value of well-organized information, and all paths should lead to further discovery.} A codebase without documentation trails is like a city with no street signs --- you can live there for years without ever knowing what neighborhood you are actually in.
+
+The gsd-skill-creator is not merely a CLI tool. It is the Amiga Principle instantiated in TypeScript. It models skills as complex numbers on a holomorphic plane, routes agent communication through deterministic three-part bundles, maintains a College of Knowledge with 42 academic departments, calibrates itself through continuous feedback loops, and governs itself with cultural sovereignty policies that cannot be overridden by credentials or academic exception. The code \textit{is} the theory. The architecture \textit{is} the philosophy. Every file has a reason. Every design decision has a lineage. Almost none of that is currently visible to someone entering the project cold.
+
+This mission produces the full documentation web: inline JSDoc commentary linking every function back to its intellectual origin, a cross-reference map connecting code modules to College departments and research topics, a code genealogy tracing each subsystem through its milestone history, and a navigator layer so that anyone --- contributor, student, AI agent, or future maintainer --- can enter at any file and follow trails outward until the entire architecture makes sense. No orphan code. No unexplained decisions. Every door opens onto something richer.
+
+The through-line is the same as in \textit{The Space Between}: meaning lives in the connections between nodes, not the nodes themselves. The nodes already exist. This mission builds the connections.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The documentation delta is 25+ milestones wide.} The public docs site is frozen at v1.33. The codebase is at v1.49.21. Twenty-five milestones of architectural decisions --- DACP, the holomorphic plane, the chipset Northbridge, AMIGA multi-team governance, the College of Knowledge, Heritage Skills cultural sovereignty, the planning-bridge MCP server --- exist only in CHANGELOG entries and source comments. No one can reconstruct the design rationale from those alone.
+
+  \item \textbf{Every entry point is a dead end without cross-references.} A developer encountering \texttt{src/plane/activation.ts} sees ``Tangent Activation Engine'' but has no trail to the unit circle metaphor in \textit{The Space Between}, the $z = r \cdot e^{i\theta}$ skill model, or the v1.49.3 milestone that introduced geometric scoring. The intellectual depth is invisible.
+
+  \item \textbf{The College departments are undocumented as integration points.} The 42 departments in \texttt{.college/departments/} are the intended destination for documentation cross-references, yet no code file currently links outward to a College wing. The bridge exists architecturally but has never been built at the file level.
+
+  \item \textbf{Safety boundaries and cultural sovereignty policies have no code-level trail.} The OCAP/CARE/UNDRIP four-level classification system, the physical safety warden, and the 18 red-team scenarios cleared for Heritage Skills deployment are critically important --- but they live in CHANGELOG prose, not in code comments visible during development. A future contributor could unknowingly erode a hard boundary without ever seeing its rationale.
+
+  \item \textbf{The DACP fidelity model is architecturally central but undocumented.} The shift from markdown (non-deterministic) to three-part bundles (deterministic) is the central architectural thesis of v1.49+. Understanding why \texttt{FidelityLevel} 0--4 exists, why \texttt{.complete} markers use atomic writes, and why opcodes map to ISA encodings requires knowledge that currently lives only in conversation context.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Documentation Web:} Every source file is a node. Every College department, research topic, mathematical concept, and design decision is also a node. This mission installs the edges --- hyperlinks, JSDoc tags, cross-reference files, and a machine-readable index --- so the graph becomes navigable from any entry point.
+
+\begin{asciibox}
+Source File (any .ts)
+    |
+    |--- @module tag         --> docs/architecture/ page
+    |--- @see tag            --> College department wing URL
+    |--- @milestone tag      --> CHANGELOG entry + milestone spec
+    |--- @mathematical tag   --> The Space Between chapter/section
+    |--- @safety tag         --> Safety policy document
+    |
+    v
+ Navigator Index (.planning/docs-index.json)
+    |
+    +--- by-module/          forward lookup: file -> all links
+    +--- by-concept/         reverse lookup: concept -> all files
+    +--- by-department/      College index: dept -> code modules
+    +--- by-milestone/       temporal index: milestone -> files changed
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 01: Core Observer-Detective Loop
+  src/observation/ + src/detection/ + src/learning/ + src/calibration/
+  The six-step lifecycle: Observe->Detect->Suggest->Apply->Learn->Compose
+
+MODULE 02: DACP Protocol
+  src/dacp/
+  Fidelity 0-4, bus opcodes, bundle assembly, retrospective analyzer
+
+MODULE 03: Chipset Architecture (Northbridge)
+  src/chipset/ (Copper/Blitter/Gastown/Teams/Exec/Integration)
+  src/amiga/ (CE-1/GL-1/MC-1/ME-1/ICD)
+
+MODULE 04: Application Pipeline and Complex Plane
+  src/application/ stages + src/plane/
+  Skill scoring, token budgets, geometric activation, chord detection
+
+MODULE 05: College of Knowledge and Rosetta Core
+  .college/ (42 departments, cross-reference resolver, calibration)
+
+MODULE 06: Holomorphic Mathematics Engine
+  src/holomorphic/ + math-coprocessor/
+  Mandelbrot/Julia, DMD, Koopman operators, skill dynamics model
+
+MODULE 07: Safety, Security, and Cultural Sovereignty
+  Heritage Skills warden, OCAP/CARE/UNDRIP, physical safety domains
+
+MODULE 08: CLI, Infrastructure, and Documentation Web Layer
+  src/cli/ + www/tibsfox/ + GitHub Actions + docs/
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\# docs-web mission chipset v1.0.0
+agnus:
+  role: orchestration
+  model: claude-opus-4-5
+  responsibilities:
+    - Cross-module dependency analysis
+    - College department mapping decisions
+    - Safety boundary verification
+    - Milestone genealogy reconstruction
+
+denise:
+  role: output-rendering
+  model: claude-sonnet-4-5
+  responsibilities:
+    - JSDoc generation for all modules
+    - Cross-reference file production
+    - Navigator index assembly
+    - docs/ page authoring
+
+paula:
+  role: anticipatory-io
+  model: claude-haiku-4-5
+  responsibilities:
+    - Shared tag schema generation
+    - File scaffolding and templating
+    - Index record insertion
+
+gary:
+  role: glue-logic
+  model: claude-sonnet-4-5
+  responsibilities:
+    - CHANGELOG mining and milestone extraction
+    - Safety annotation harvesting
+    - Verification passes
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item JSDoc commentary for all public functions in \texttt{src/} (TypeScript)
+  \item \texttt{@module}, \texttt{@see}, \texttt{@milestone}, \texttt{@mathematical}, \texttt{@safety} tag schema and application
+  \item Navigator index (\texttt{.planning/docs-index.json}) with four lookup dimensions
+  \item College department cross-reference files (one per department linking to relevant source modules)
+  \item Architecture docs in \texttt{docs/architecture/} updated through v1.49.21
+  \item DACP protocol formal specification document
+  \item Chipset architecture reference document (Copper/Blitter/Gastown/AMIGA subsystems)
+  \item Safety and cultural sovereignty policy annotations in Heritage Skills code
+  \item Mathematical foundation annotations linking \texttt{src/holomorphic/} and \texttt{src/plane/} to \textit{The Space Between}
+  \item CHANGELOG-to-code genealogy map (\texttt{docs/GENEALOGY.md})
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Rust source in \texttt{src-tauri/} (separate mission, separate language)
+  \item GLSL shaders in desktop (visual documentation is a distinct discipline)
+  \item Auto-generated \texttt{dist/} files
+  \item \texttt{www/tibsfox/com/Research/} HTML output files (these are build artifacts)
+  \item Public-facing tibsfox.com site redesign
+  \item New College department content (this mission documents; it does not expand)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Every public function in \texttt{src/} has JSDoc with at minimum a description, \texttt{@param}, \texttt{@returns}, and at least one \texttt{@see} link.
+  \item Every source module in \texttt{src/} has a \texttt{@module} block with a plain-English one-paragraph description and its milestone introduction.
+  \item All 42 College departments in \texttt{.college/departments/} have a corresponding cross-reference file listing all \texttt{src/} modules that implement or relate to the department's domain.
+  \item The Navigator Index (\texttt{.planning/docs-index.json}) is complete with all four lookup dimensions populated and machine-validated with AJV.
+  \item Every \texttt{FidelityLevel}, \texttt{BusOpcode}, and ICD payload type in \texttt{src/dacp/} has inline commentary explaining its purpose and linking to the DACP formal spec.
+  \item All safety boundaries in Heritage Skills code (\texttt{GATE}, \texttt{ANNOTATE}, \texttt{BLOCK}) are annotated with \texttt{@safety} tags that link to the cultural sovereignty policy document.
+  \item The holomorphic mathematics module (\texttt{src/holomorphic/}) has annotations linking each algorithm to its corresponding chapter in \textit{The Space Between}.
+  \item The complex plane module (\texttt{src/plane/}) has annotations linking \texttt{TaskVector}, \texttt{GeometricScore}, and chord detection to the unit circle metaphor and the $z = r \cdot e^{i\theta}$ skill model.
+  \item \texttt{docs/GENEALOGY.md} traces each major subsystem from its first milestone introduction through its current form, with CHANGELOG excerpts and file-path anchors.
+  \item The \texttt{CLAUDE.md} at project root is updated with documentation web entry points, link conventions, and how to navigate the four index dimensions.
+  \item All new documentation compiles cleanly (TypeScript typedoc passes, JSON indexes validate with AJV, internal hyperlinks resolve).
+  \item A contributor with no prior GSD knowledge can, starting from any single \texttt{.ts} file, follow documentation links to understand: what the file does, why it exists, when it was introduced, which College department it belongs to, and what mathematical or philosophical principles underpin it.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+\textit{The Space Between} (tibsfox.com) & Primary mathematical source; chapters are the \texttt{@mathematical} link targets \\
+CHANGELOG.md (dev branch) & Source material for GENEALOGY.md and \texttt{@milestone} annotations \\
+docs/CORE-CONCEPTS.md & Extended and updated as part of this mission \\
+docs/architecture/*.md & Completed and brought current to v1.49.21 \\
+gsd-skill-creator PR \#28 review & Informs which architectural decisions need urgent documentation \\
+GSD v1.50 milestone plan & This mission is preparatory --- documentation web enables the systematic retrospective \\
+College of Knowledge (.college/) & Destination for all department cross-reference files produced by this mission \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga did not win because it had more RAM than the PC. It won because every chip knew exactly what it was doing and the bus between them was designed for flow, not bottlenecks. The documentation web is that bus for the gsd-skill-creator ecosystem. It does not add new functionality. It removes friction. It eliminates the tax that every new contributor, every new AI agent, every future \textit{you} pays when entering the codebase without a map.
+
+\textit{The Space Between} is the mathematical spine of this ecosystem. The code is the spine instantiated. The documentation web is the myelin sheath --- the insulating layer that makes signal transmission fast and reliable. Without it, every impulse has to find its own path through resistance. With it, the architecture conducts at its designed frequency.
+
+Storage is cheap. Understanding is not. This mission makes understanding cheap too.
+
+\newpage
+
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{gsd-skill-creator --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference documents the actual codebase as found in the dev branch at v1.49.21 (commit frozen March 7, 2026). All findings come from direct source inspection: \texttt{git clone --branch dev --depth 1 https://github.com/Tibsfox/gsd-skill-creator.git}. File paths, line counts, class names, and architectural patterns are drawn from the live code.
+
+\textbf{Key source locations:}
+\begin{itemize}[noitemsep]
+  \item \texttt{src/} --- 80+ subdirectories, TypeScript library and CLI (7,451 total files, 20,600+ tests)
+  \item \texttt{.college/} --- 42 departments with RosettaConcept files, calibration models, cross-references
+  \item \texttt{.claude/skills/} --- 13 auto-activating skill files for the Gastown chipset agents
+  \item \texttt{math-coprocessor/} --- Python MCP server for mathematical computation (GPU, JIT, streams)
+  \item \texttt{docs/} --- 158+ markdown documentation files
+  \item \texttt{www/tibsfox/com/Research/} --- 80+ three-letter research topic directories (mission packs)
+\end{itemize}
+
+\subsection{Module 01: Core Observer-Detective Loop}
+
+\subsubsection{Architecture and Files}
+
+The six-step lifecycle (Observe $\to$ Detect $\to$ Suggest $\to$ Manage $\to$ Auto-Load $\to$ Learn/Compose) is distributed across four source directories: \texttt{src/observation/}, \texttt{src/detection/}, \texttt{src/learning/}, and \texttt{src/calibration/}.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{File} & \tableheader{Class / Export} & \tableheader{Role in Lifecycle} \\
+\midrule
+\texttt{observation/transcript-parser.ts} & \texttt{TranscriptParser} & Streams JSONL Claude Code transcripts; filters sidechain subagent entries \\
+\texttt{observation/session-observer.ts} & \texttt{SessionObserver} & Wraps parser; emits structured session start/end events \\
+\texttt{observation/pattern-summarizer.ts} & \texttt{PatternSummarizer} & Compresses raw transcript entries into compact pattern summaries \\
+\texttt{observation/promotion-evaluator.ts} & \texttt{PromotionEvaluator} & Decides when a recurring pattern crosses the promotion threshold \\
+\texttt{observation/promotion-gatekeeper.ts} & \texttt{PromotionGatekeeper} & Hard safety gate before any pattern becomes a skill candidate \\
+\texttt{observation/determinism-analyzer.ts} & \texttt{DeterminismAnalyzer} & Classifies operations as deterministic vs ephemeral for storage tiering \\
+\texttt{observation/drift-monitor.ts} & \texttt{DriftMonitor} & Detects pattern drift and demotes skills that no longer match usage \\
+\texttt{observation/lineage-tracker.ts} & \texttt{LineageTracker} & Maintains parent-child provenance chain for all promoted skills \\
+\texttt{detection/pattern-analyzer.ts} & \texttt{PatternAnalyzer} & Frequency-map analysis; 3+ occurrences threshold for candidacy \\
+\texttt{detection/suggestion-manager.ts} & \texttt{SuggestionManager} & Interactive REPL for accept/defer/dismiss on skill candidates \\
+\texttt{detection/gsd-reference-injector.ts} & \texttt{GsdReferenceInjector} & Injects GSD workflow context into generated skill content \\
+\texttt{learning/feedback-store.ts} & \texttt{FeedbackStore} & JSONL persistence for user corrections (\texttt{.planning/patterns/feedback.jsonl}) \\
+\texttt{learning/refinement-engine.ts} & \texttt{RefinementEngine} & Applies bounded refinements (max 20\% content change, 7-day cooldown) \\
+\texttt{learning/drift-tracker.ts} & \texttt{DriftTracker} & Measures cumulative skill drift across refinement cycles \\
+\texttt{learning/version-manager.ts} & \texttt{VersionManager} & Rollback support for skill refinements \\
+\texttt{calibration/calibration-store.ts} & \texttt{CalibrationStore} & Records activation decisions and user outcomes for threshold tuning \\
+\texttt{calibration/threshold-optimizer.ts} & \texttt{ThresholdOptimizer} & MCC-based threshold optimization; \texttt{calculateMCC()} function \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Design Decisions for Documentation}
+
+\textbf{JSONL as the observation medium:} All observations are appended to \texttt{.planning/patterns/sessions.jsonl}. The \texttt{TranscriptParser} uses Node.js \texttt{readline} interface for streaming, never loading the full file into memory. This is a deliberate choice for large sessions --- document it with \texttt{@design Memory-efficient streaming: readline interface over full-file load for sessions.jsonl.}
+
+\textbf{Sidechain filter:} The transcript parser discards entries where \texttt{isSidechain === true}. This filters out subagent Task tool invocations that would otherwise pollute the pattern signal. This single-line check is architecturally critical and needs a \texttt{@see} link to the Task tool documentation.
+
+\textbf{The 20\% refinement ceiling:} Hardcoded in \texttt{learning/refinement-engine.ts} as a \texttt{DEFAULT\_BOUNDED\_CONFIG} constant. This is a safety principle, not a configuration option --- the number comes from empirical study of skill drift. Needs \texttt{@safety} annotation.
+
+\textbf{MCC for threshold optimization:} The calibration system uses Matthews Correlation Coefficient rather than accuracy or F1 because MCC is robust to class imbalance (most activations are negative). This is a non-obvious choice that every reader will question --- document with full \texttt{@mathematical} annotation linking to the \textit{The Space Between} statistics chapter.
+
+\subsection{Module 02: DACP Protocol}
+
+\subsubsection{Architecture and Files}
+
+DACP (Deterministic Agent Communication Protocol) is the central architectural thesis of the DACP milestone (v1.49+): agent-to-agent communication should pass structured three-part bundles (human intent + structured data + executable code), not ambiguous markdown.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{File} & \tableheader{Export} & \tableheader{Purpose} \\
+\midrule
+\texttt{dacp/types.ts} & Zod schemas + inferred types & Single source of truth for all DACP types. \texttt{FidelityLevel} (0--4), \texttt{BusOpcode} (9 values), \texttt{BundleManifest} \\
+\texttt{dacp/bundle.ts} & \texttt{CreateBundleOptions}, layout & Filesystem layout spec; \texttt{.complete} atomicity marker; 50KB data / 10KB script / 100KB total limits \\
+\texttt{dacp/assembler/} & \texttt{BundleAssembler} & Constructs validated bundles from intent + data + code inputs \\
+\texttt{dacp/bus/} & \texttt{FilesystemBus} & GSD filesystem bus; routes bundles between agents via directory polling \\
+\texttt{dacp/fidelity/} & \texttt{FidelityNegotiator} & Upgrades/downgrades bundle fidelity based on agent capability declarations \\
+\texttt{dacp/schema-generator.ts} & \texttt{generateBundleSchema()} & Produces JSON Schema from Zod types for runtime validation \\
+\texttt{dacp/retrospective/} & \texttt{RetrospectiveAnalyzer} & Post-execution analysis; measures fidelity level adoption over time \\
+\texttt{dacp/templates/} & Template bundles & Pre-built bundle templates for standard GSD operations (EXEC, VERIFY, REPORT) \\
+\texttt{dacp/msg-fallback.ts} & \texttt{MsgFallback} & Graceful degradation to markdown when bundle creation fails \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Fidelity Level Model}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Level} & \tableheader{Name} & \tableheader{Description \& Documentation Target} \\
+\midrule
+0 & \texttt{PROSE} & Markdown-only intent. Equivalent to current agent communication. Link to milestone introduction in CHANGELOG v1.48. \\
+1 & \texttt{PROSE\_DATA} & Markdown + structured JSON data. First step toward determinism. \\
+2 & \texttt{PROSE\_DATA\_SCHEMA} & Adds JSON Schema validation. Bundles are now self-describing and verifiable. \\
+3 & \texttt{PROSE\_DATA\_CODE} & Adds executable scripts. Receiving agent can run the code directly. \\
+4 & \texttt{PROSE\_DATA\_CODE\_TESTS} & Full bundle with test fixtures. Maximum determinism --- receiving agent can verify execution. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{The \texttt{.complete} marker pattern:} Every bundle write ends with \texttt{writeFile('.complete', '')}. Consumers call \texttt{access('.complete')} before reading. This guarantees atomic reads. Link to \texttt{src/security/file-lock.ts} which implements the same pattern at the security layer.
+
+\subsubsection{Bus Opcodes}
+
+The nine \texttt{BusOpcode} values (\texttt{EXEC}, \texttt{VERIFY}, \texttt{TRANSFORM}, \texttt{CONFIG}, \texttt{RESEARCH}, \texttt{REPORT}, \texttt{QUESTION}, \texttt{PATCH}, \texttt{ALERT}) map directly to the GSD Instruction Set Architecture encoding. Each needs a \texttt{@see} tag linking to \texttt{docs/architecture/} ISA reference and the relevant GSD command definition in \texttt{.claude/commands/}.
+
+\subsection{Module 03: Chipset Architecture}
+
+\subsubsection{Chipset Subsystems}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Subsystem} & \tableheader{Source Path} & \tableheader{Role and Documentation Priority} \\
+\midrule
+\textbf{Copper} & \texttt{src/chipset/copper/} & Pipeline coprocessor. GSD lifecycle event routing, activation modes, compiler for pipeline instructions. Maps to Amiga Copper: runs in sync with display beam, executing instructions at precise timing. HIGH documentation priority. \\
+\textbf{Blitter} & \texttt{src/chipset/blitter/} & Bulk memory operations. Batch skill moves, content transformations. Maps to Amiga Blitter: DMA-driven bulk copy/fill without CPU. \\
+\textbf{Gastown} & \texttt{src/chipset/gastown/} & State manager for convoy/bead/work-item architecture. \texttt{StateManager}, \texttt{validateChipset()}. The Northbridge. \\
+\textbf{Teams} & \texttt{src/chipset/teams/} & Agent team topology management within the chipset context. \\
+\textbf{Exec} & \texttt{src/chipset/exec/} & Low-level execution harness for chipset operations. \\
+\textbf{Integration} & \texttt{src/chipset/integration/} & \texttt{StackBridge} --- cross-subsystem integration layer. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{AMIGA Multi-Team Architecture}
+
+The \texttt{src/amiga/} module implements full multi-team governance for missions at Fleet scale. Five teams with 14 agents:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Team} & \tableheader{Prefix} & \tableheader{Responsibility} \\
+\midrule
+\textbf{MC-1} & Control Surface & Dashboard (\texttt{AlertRenderer}, \texttt{TelemetryConsumer}, \texttt{CommandParser}) \\
+\textbf{ME-1} & Mission Environment & Manifest, \texttt{TelemetryEmitter}, Provisioner, \texttt{PhaseEngine}, \texttt{GateController}, \texttt{SwarmCoordinator}, \texttt{ArchiveWriter} \\
+\textbf{CE-1} & Commons Engine & \texttt{AttributionLedger}, \texttt{ContributionRegistry}, \texttt{InvocationRecorder}, \texttt{TokenArchitecture} \\
+\textbf{GL-1} & Governance Layer & Charter, Weighting Docs, Dispute Records, Rules Engine, Decision Log, Policy Query \\
+\textbf{M-5} & Meta-Mission Gate & \texttt{MetaMissionHarness}, \texttt{SkillCandidateDetector} (Launch Gate for self-modification) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The ICD (Interface Control Documents) --- \texttt{icd-01} through \texttt{icd-04} --- define the formal typed contracts between teams. These are the most critical documentation targets in the entire codebase: they are the architectural contract layer.
+
+\subsubsection{Gastown Skill YAML Files (Agent Skills)}
+
+The \texttt{.claude/skills/} directory contains 13 agent skill files implementing the Gastown chipset in SKILL.md format:
+
+\begin{itemize}[noitemsep]
+  \item \texttt{mayor-coordinator} --- Northbridge pattern; convoy dispatch via sling; never executes work directly
+  \item \texttt{polecat-worker} --- Worker agent receiving dispatched work items
+  \item \texttt{witness-observer} --- Passive telemetry monitor; escalates to mayor on anomalies
+  \item \texttt{sling-dispatch} --- The message bus between mayor and polecats
+  \item \texttt{beads-state} --- Work item state management (bead = atomic unit of work in a convoy)
+  \item \texttt{gupp-propulsion} --- Forward momentum enforcement; prevents convoy stalls
+  \item \texttt{nudge-sync} --- Soft synchronization signal between asynchronous agents
+  \item \texttt{mail-async} --- Async message delivery with delivery receipts
+  \item \texttt{refinery-merge} --- Output merging and deduplication for parallel worker results
+  \item \texttt{hook-persistence} --- Hook state persistence across context resets
+  \item \texttt{done-retirement} --- Clean retirement of completed work items
+  \item \texttt{runtime-hal} --- Hardware abstraction layer for Claude Code vs Codex vs fallback
+  \item \texttt{mayor-coordinator/references/gastown-origin.md} --- Origin story for all skills; cross-link target
+\end{itemize}
+
+Every skill file needs its \texttt{gastown-origin.md} cross-reference updated to link to the AMIGA architecture docs.
+
+\subsection{Module 04: Application Pipeline and Complex Plane}
+
+\subsubsection{Skill Application Pipeline}
+
+The \texttt{src/application/} module implements the multi-stage pipeline that loads skills into context:
+
+\begin{asciibox}
+Input Context
+    |
+    v [ScoreStage]       -- Relevance scoring via embeddings + heuristic
+    |
+    v [ResolveStage]     -- Scope resolution (user vs project precedence)
+    |
+    v [ModelFilterStage] -- Filter by model tier (Opus/Sonnet/Haiku)
+    |
+    v [LoadStage]        -- Content loading and reference resolution
+    |
+    v [BudgetStage]      -- Token budget enforcement (2-5% of context)
+    |
+    v [CacheOrderStage]  -- Cache tier ordering (5-minute TTL exploitation)
+    |
+    v Active Skills (injected into context window)
+\end{asciibox}
+
+\textbf{Key class:} \texttt{SkillPipeline} in \texttt{src/application/skill-pipeline.ts} (introduced Phase 52). The \texttt{PipelineStage} interface and \texttt{PipelineContext} type are the extension points --- document with \texttt{@extensible} tag explaining the stage composition pattern.
+
+\subsubsection{Complex Plane Module (src/plane/)}
+
+This is the most mathematically significant module in the codebase and the most under-documented. Skills are positioned on the complex plane as $z = r \cdot e^{i\theta}$ where $r$ encodes relevance magnitude and $\theta$ encodes the conceptual angle between concrete and abstract.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{File} & \tableheader{Mathematical Content Requiring Annotation} \\
+\midrule
+\texttt{plane/types.ts} & \texttt{SkillPosition} (\textit{The Space Between} Ch.~3), \texttt{TangentContext}, \texttt{TangentMatch} \\
+\texttt{plane/arithmetic.ts} & \texttt{computeTangent()}, \texttt{pointToTangentDistance()} --- pure geometric functions \\
+\texttt{plane/activation.ts} & \texttt{TaskVector} (concrete/abstract components), \texttt{GeometricScore}, tangent-line proximity scoring \\
+\texttt{plane/signal-classification.ts} & Observer signal classification --- links observation module to plane positioning \\
+\texttt{plane/chords.ts} & \texttt{ChordDetector}, \texttt{ChordStore} --- chord = stable angular relationship between two skill positions \\
+\texttt{plane/promotion.ts} & Plane-aware promotion decisions --- bridges observation module to complex plane \\
+\texttt{plane/observer-bridge.ts} & \texttt{ObserverAngularBridge} --- converts raw observation signals to angular positions \\
+\texttt{plane/position-store.ts} & Persistence for skill positions across sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The \texttt{TaskVector} is computed as a 2D position: x-axis (concrete signals: file paths, commands, tool calls) and y-axis (abstract signals: conceptual terms, design patterns, architectural terms). This directly implements the real/imaginary axis decomposition from \textit{The Space Between} Chapter 3.
+
+\subsection{Module 05: College of Knowledge and Rosetta Core}
+
+\subsubsection{Directory Architecture}
+
+\begin{asciibox}
+.college/
+  calibration/          -- Universal calibration engine (delta-store, engine)
+  college/              -- CollegeLoader, DepartmentExplorer, CrossReferenceResolver
+  cross-references/     -- xref-registry, dep-chain-validator, xref-resolver
+  departments/          -- 42 departments, each with:
+      DEPARTMENT.md     -- Human-readable department overview
+      *-department.ts   -- TypeScript department class
+      calibration/      -- Department-specific calibration model
+      concepts/         -- RosettaConcept files organized by wing
+      try-sessions/     -- JSON try-session definitions
+\end{asciibox}
+
+\subsubsection{The 42 Departments}
+
+All 42 departments need College cross-reference files produced by this mission. Priority tier for code documentation linkage:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Priority} & \tableheader{Departments} & \tableheader{Code Modules That Link} \\
+\midrule
+\textbf{Tier 1} & mathematics, statistics, logic, philosophy & \texttt{src/plane/}, \texttt{src/holomorphic/}, \texttt{calibration/}, \texttt{src/conflicts/} \\
+\textbf{Tier 1} & coding, technology, computer science & \texttt{src/dacp/}, \texttt{src/application/}, \texttt{src/detection/} \\
+\textbf{Tier 1} & history, culture & Heritage Skills pack, \texttt{src/amiga/gl-1/} governance \\
+\textbf{Tier 2} & physics, electronics, cloud-systems & \texttt{src/chipset/}, \texttt{math-coprocessor/gpu.ts} \\
+\textbf{Tier 2} & music, art, astronomy & \texttt{src/holomorphic/} (Julia/Mandelbrot aesthetics), audio engineering module \\
+\textbf{Tier 3} & All remaining 32 departments & Standard cross-reference files with generic skill-creator entry points \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Progressive Disclosure Architecture}
+
+\texttt{CollegeLoader} implements a three-tier progressive disclosure system: Summary ($\sim$3K tokens, always loaded) $\to$ Wing ($\sim$12K tokens, on demand) $\to$ Deep ($\sim$50K tokens, on request). This is the same pattern used by \texttt{SkillPipeline}'s budget stages and is a core ecosystem pattern. Document with \texttt{@pattern Progressive disclosure: three reading speeds (glance/scan/read).}
+
+\subsection{Module 06: Holomorphic Mathematics Engine}
+
+\subsubsection{Architecture Overview}
+
+\texttt{src/holomorphic/} contains the most mathematically sophisticated code in the project. Ten progressive modules (HD-01 through HD-10), 187 tests across 23 test files, zero external math dependencies.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Subdirectory} & \tableheader{Content} & \tableheader{Mathematical Target (\textit{The Space Between})} \\
+\midrule
+\texttt{complex/arithmetic.ts} & \texttt{add, sub, mul, div, cexp, cpow}, constants \texttt{ZERO, ONE, I} & Ch.~3: Complex Arithmetic \\
+\texttt{complex/iterate.ts} & \texttt{computeOrbit()}, \texttt{detectPeriod()}, \texttt{classifyFixedPoint()} & Ch.~6: Iteration Theory \\
+\texttt{renderer/core.ts} & \texttt{mandelbrotEscape()}, \texttt{juliaEscape()}, \texttt{colorMap()} & Ch.~6: Fractal Geometry \\
+\texttt{dmd/} & Five DMD variants: standard, control, multi-resolution, physics-informed, bootstrap & Ch.~8: Information Systems Theory \\
+\texttt{modules/} & Koopman operator, Extended DMD with dictionary lifting & Ch.~8: Koopman Lifting \\
+\texttt{skills/} & \texttt{SkillDynamics} --- maps skill-creator onto the complex plane & Cross-module: The Space Between $\leftrightarrow$ code \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{math-coprocessor (Python MCP Server)}
+
+The \texttt{math-coprocessor/} directory is a Python MCP server providing GPU-accelerated computation. Key files: \texttt{server.py} (MCP endpoint), \texttt{gpu.py} (CUDA/MPS detection), \texttt{jit.py} (Numba JIT compilation), \texttt{streams.py} (async streaming for long computations), \texttt{vram.py} (VRAM management). This is the only Python code in the project and needs a dedicated architecture doc explaining the TypeScript--Python boundary.
+
+\subsection{Module 07: Safety, Security, and Cultural Sovereignty}
+
+\subsubsection{Safety Boundaries Summary}
+
+\begin{safetybox}
+\textbf{ABSOLUTE SAFETY BOUNDARIES --- These cannot be weakened by documentation, configuration, or credential claims.}
+
+\textbf{Cultural Sovereignty (Heritage Skills):}
+\begin{itemize}[noitemsep,topsep=2pt]
+  \item Level 4 hard block: no academic exception, no credential override, no self-attestation
+  \item UNDRIP Article 31 compliance required for all Indigenous knowledge references
+  \item Nation-specific attribution always required; no generic ``Indigenous peoples''
+  \item 24-hour suspension commitment for community removal requests
+\end{itemize}
+
+\textbf{Physical Safety Domains (10):}
+food, plant, tool, medical, structural, fire, chemical, animal, arctic-survival, marine
+  \begin{itemize}[noitemsep,topsep=2pt]
+    \item GATE rules are mandatory-pass and override all other logic
+    \item ANNOTATE rules add context but do not block
+  \end{itemize}
+
+\textbf{Skill Self-Modification:}
+  \begin{itemize}[noitemsep,topsep=2pt]
+    \item \texttt{push.default=nothing} enforced architecturally
+    \item Mandatory staging gate before any promoted skill reaches main branch
+    \item M-5 Launch Gate in AMIGA: \texttt{SkillCandidateDetector} must clear before self-modification
+  \end{itemize}
+\end{safetybox}
+
+\subsubsection{Key Safety Files}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{File} & \tableheader{Safety Annotation Target} \\
+\midrule
+\texttt{src/security/file-lock.ts} & Atomic write pattern; same as DACP \texttt{.complete} marker \\
+\texttt{src/security/integrity-monitor.ts} & Hash-based integrity verification for skill files \\
+\texttt{src/security/operation-cooldown.ts} & Rate limiting for self-modification operations \\
+\texttt{src/validation/path-safety.ts} & \texttt{assertSafePath()}, \texttt{PathTraversalError} --- path traversal prevention \\
+\texttt{src/validation/yaml-safety.ts} & \texttt{safeParseFrontmatter()} --- YAML injection prevention \\
+\texttt{heritage-skills-pack/} (warden files) & OCAP/CARE/UNDRIP four-level classification implementation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 08: CLI, Infrastructure, and Documentation Web Layer}
+
+\subsubsection{CLI Command Architecture}
+
+The main entry point \texttt{src/cli.ts} imports 25+ command modules from \texttt{src/cli/commands/}. Key commands requiring documentation:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Command} & \tableheader{Documentation Priority} \\
+\midrule
+\texttt{calibrate} & Links to calibration module + MCC mathematical basis \\
+\texttt{simulate} & Links to simulation module + ActivationSimulator \\
+\texttt{chip} & Links to chipset architecture docs \\
+\texttt{eval} & Links to evaluation framework + test plan \\
+\texttt{budget} / \texttt{budget-estimate} & Links to token budget theory + DEFAULT\_PROFILES \\
+\texttt{mcp-server} & Links to planning-bridge MCP server design \\
+\texttt{publish} & Links to packaging pipeline + aminet module \\
+\texttt{score-activation} & Links to complex plane scoring + GeometricScore \\
+\texttt{reload-embeddings} & Links to embeddings module + HuggingFace integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Research Web (www/tibsfox/com/Research/)}
+
+The \texttt{www/} directory contains 80+ three-letter research topic directories (e.g., \texttt{OCN/} for Ocean Compute, \texttt{FIG/} for Fox Infrastructure Group, etc.). Each has \texttt{mission-pack/} and \texttt{research/} subdirectories. This is the physical research web --- every module's documentation should eventually link outward to the relevant research topics. This connection is not currently made anywhere in the codebase.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Documentation Requirement} \\
+\midrule
+Cultural sovereignty policy & ABSOLUTE & Every Heritage Skills code path must \texttt{@safety} tag with policy doc link \\
+Physical safety temperatures & ABSOLUTE & Safety temperature constants must be documented as non-overridable \\
+Skill self-modification paths & GATE & M-5 gate must be documented as mandatory before any self-modification \\
+Path traversal prevention & GATE & \texttt{assertSafePath()} must be documented at every filesystem entry point \\
+YAML injection prevention & GATE & \texttt{safeParseFrontmatter()} must be documented at every frontmatter parse \\
+Academic exception claims & ANNOTATE & Document why academic exception is explicitly refused in Heritage Skills \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources (Direct Code Inspection)}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{gsd-skill-creator dev branch v1.49.21} --- github.com/Tibsfox/gsd-skill-creator (inspected March 27, 2026)
+  \item \textbf{CHANGELOG.md} --- Complete milestone history from v1.0.0 through v1.49.21
+  \item \textbf{CLAUDE.md} --- Project entry point; tech stack, key file locations, commit conventions
+  \item \textbf{docs/CORE-CONCEPTS.md} --- Foundational concepts through v1.49.19
+  \item \textbf{docs/HOW-IT-WORKS.md} --- Six-step lifecycle and execution engine description
+  \item \textbf{docs/architecture/*.md} --- Architecture overview, layers, data flows, storage, extending
+\end{itemize}
+
+\subsubsection{Mathematical Reference}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Foxglove, M.T.} \textit{The Space Between.} 923 pp. Available: tibsfox.com/media/The\_Space\_Between.pdf --- Primary mathematical source for holomorphic module, complex plane, and unit circle skill model annotations
+\end{itemize}
+
+\subsubsection{Protocol and Standards}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{UNDRIP Article 31} --- United Nations Declaration on the Rights of Indigenous Peoples --- Referenced in Heritage Skills cultural sovereignty policy
+  \item \textbf{OCAP Principles} --- First Nations Information Governance Centre (fnigc.ca) --- Ownership, Control, Access, Possession framework
+  \item \textbf{CARE Principles} --- Global Indigenous Data Alliance --- Collective Benefit, Authority to Control, Responsibility, Ethics
+  \item \textbf{Zod v4} (zod.dev) --- Schema-first type inference pattern used throughout codebase
+  \item \textbf{Vitest} (vitest.dev) --- Test framework; 20,600+ tests at v1.49.21
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete, machine-navigable documentation web for every source file in gsd-skill-creator (dev branch, v1.49.21) by writing JSDoc commentary with four custom tag types, generating a Navigator Index with four lookup dimensions, creating College department cross-reference files for all 42 departments, authoring architecture and formal specification documents for DACP and the chipset, and updating CLAUDE.md and docs/ to bring all documentation current through the DACP milestone. The output must satisfy the condition: a contributor entering at any single \texttt{.ts} file can follow documentation trails to understand what the file does, why it exists, when it was introduced, which College department it belongs to, and what mathematical or philosophical principles underpin it.
+
+\subsection{Architecture Overview (Wave Diagram)}
+
+\begin{asciibox}
+WAVE 0  [Sequential, Haiku]
+  Tag Schema + Navigator Index Schema + File Inventory Scaffolding
+
+WAVE 1A [Parallel, Sonnet]            WAVE 1B [Parallel, Opus]
+  JSDoc: Modules 01-02                  JSDoc: Modules 03-04
+  (Observation, Detection,              (Chipset, AMIGA, Application
+   Learning, Calibration, DACP)          Pipeline, Complex Plane)
+
+WAVE 1C [Parallel, Sonnet]
+  JSDoc: Modules 05-08
+  (College xrefs, Holomorphic,
+   Safety, CLI)
+
+              CAPCOM GATE (Human review of safety annotations)
+
+WAVE 2  [Sequential, Opus]
+  DACP Formal Spec + Chipset Architecture Reference
+  GENEALOGY.md + Navigator Index Population
+  The Space Between annotation pass (holomorphic + plane)
+
+WAVE 3  [Sequential, Sonnet]
+  CLAUDE.md update + docs/ current pass
+  AJV index validation + typedoc compile pass
+  Final verification matrix check
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Tag Schema Layer} --- Custom JSDoc tags (\texttt{@module}, \texttt{@see}, \texttt{@milestone}, \texttt{@mathematical}, \texttt{@safety}) with machine-readable structure
+  \item \textbf{Source Annotation Layer} --- JSDoc applied to all public functions in \texttt{src/} (TypeScript)
+  \item \textbf{Navigator Index Layer} --- \texttt{.planning/docs-index.json} with four dimensions, AJV-validated
+  \item \textbf{College Bridge Layer} --- 42 cross-reference files connecting departments to source modules
+  \item \textbf{Architecture Document Layer} --- DACP spec, chipset reference, genealogy map
+  \item \textbf{Entry Point Update Layer} --- CLAUDE.md, docs/CORE-CONCEPTS.md, docs/HOW-IT-WORKS.md
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Wave} \\
+\midrule
+1 & Tag schema definition (\texttt{docs/TAG-SCHEMA.md}) & All 5 tag types specified with examples and machine format & 0 \\
+2 & JSDoc: Modules 01--02 & Every public function has description + \texttt{@param} + \texttt{@returns} + \texttt{@see} & 1A \\
+3 & JSDoc: Modules 03--04 & Every ICD payload type has fidelity annotation; plane types link to \textit{The Space Between} & 1B \\
+4 & JSDoc: Modules 05--08 & All 42 dept cross-ref files exist; safety tags on all warden paths & 1C \\
+5 & CAPCOM gate sign-off & Human confirms safety annotations are correct and complete & Gate \\
+6 & DACP Formal Spec (\texttt{docs/DACP-SPEC.md}) & Fidelity model, opcodes, bundle layout, atomicity pattern fully specified & 2 \\
+7 & Chipset Reference (\texttt{docs/CHIPSET-REFERENCE.md}) & All 6 subsystems + AMIGA teams + ICD contracts documented & 2 \\
+8 & \texttt{docs/GENEALOGY.md} & Every subsystem traced from introduction milestone to current form & 2 \\
+9 & Navigator Index (\texttt{.planning/docs-index.json}) & 4 dimensions populated; AJV validation passes & 2 \\
+10 & CLAUDE.md update & Documentation web entry points and navigation conventions described & 3 \\
+11 & Final verification pass & typedoc compiles clean; all internal hyperlinks resolve; AJV passes & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Tag Schema + Scaffolding & None & Haiku & 15K \\
+File Inventory Script & Tag Schema & Haiku & 10K \\
+JSDoc: Observation + Detection & File Inventory & Sonnet & 60K \\
+JSDoc: Learning + Calibration & File Inventory & Sonnet & 40K \\
+JSDoc: DACP (types + bundle) & File Inventory & Sonnet & 45K \\
+JSDoc: Chipset (Copper/Gastown) & File Inventory & Opus & 70K \\
+JSDoc: AMIGA (ICD + teams) & File Inventory & Opus & 80K \\
+JSDoc: Application Pipeline & File Inventory & Sonnet & 50K \\
+JSDoc: Complex Plane & \textit{The Space Between}, File Inventory & Opus & 65K \\
+JSDoc: College Bridge (42 depts) & File Inventory & Sonnet & 55K \\
+JSDoc: Holomorphic + math-coprocessor & \textit{The Space Between}, File Inventory & Opus & 70K \\
+JSDoc: Safety + Heritage Skills & OCAP/CARE/UNDRIP refs & Opus & 60K \\
+JSDoc: CLI + infrastructure & File Inventory & Sonnet & 35K \\
+DACP Formal Spec document & DACP JSDoc complete & Opus & 40K \\
+Chipset Architecture Reference & Chipset JSDoc complete & Opus & 50K \\
+GENEALOGY.md & CHANGELOG, all JSDoc & Sonnet & 45K \\
+Navigator Index assembly & All JSDoc complete & Sonnet & 30K \\
+AJV validation + typedoc pass & All outputs complete & Sonnet & 20K \\
+CLAUDE.md + docs update & All outputs complete & Sonnet & 25K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated tokens:} $\sim$865K across 4--6 sessions.
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assigned To} & \tableheader{\% Budget} \\
+\midrule
+\textbf{Opus} & Complex plane math (\textit{The Space Between} linkage), AMIGA ICD contracts, Heritage Skills safety annotations, DACP spec, chipset reference, holomorphic module --- all judgment-heavy content where annotation errors have architectural consequences & 35\% \\
+\textbf{Sonnet} & Observation/detection/learning/calibration JSDoc, application pipeline, College bridge files, CLI docs, GENEALOGY.md, Navigator Index assembly, verification passes & 55\% \\
+\textbf{Haiku} & Tag schema, scaffolding, file inventory script, template generation & 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}L{3cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Type} & \tableheader{Model} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & None \\
+1A & Core Loop JSDoc & Parallel & Sonnet & None \\
+1B & Chipset + Plane JSDoc & Parallel & Opus & None \\
+1C & College + Safety JSDoc & Parallel & Sonnet & None \\
+$\emptyset$ & CAPCOM Safety Review & Gate & Human & BLOCK \\
+2 & Synthesis Documents & Sequential & Opus & None \\
+3 & Verification + Publish & Sequential & Sonnet & None \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Define custom tag schema & \texttt{docs/TAG-SCHEMA.md} with 5 tag types, examples, machine format & Haiku \\
+Generate file inventory & \texttt{.planning/docs-index/file-list.json} --- all \texttt{.ts} files with module path, line count & Haiku \\
+Scaffold Navigator Index & \texttt{.planning/docs-index.json} with empty four-dimension structure + AJV schema & Haiku \\
+Clone CHANGELOG facts & \texttt{.planning/docs-index/milestone-map.json} --- subsystem $\to$ first-introduction milestone & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Core Loop JSDoc (Parallel Track A)}
+
+Agent: EXEC-CORE (Sonnet). Files: \texttt{src/observation/}, \texttt{src/detection/}, \texttt{src/learning/}, \texttt{src/calibration/}, \texttt{src/dacp/}.
+
+\textbf{Required tag applications:} \texttt{@module} on every barrel \texttt{index.ts}; \texttt{@milestone} on every class introduction; \texttt{@design} on streaming JSONL choice, sidechain filter, 20\% ceiling, MCC selection; \texttt{@see} links to College/statistics and College/coding departments.
+
+\subsection{Wave 1B: Chipset + Plane JSDoc (Parallel Track B)}
+
+Agent: EXEC-ARCH (Opus). Files: \texttt{src/chipset/}, \texttt{src/amiga/}, \texttt{src/application/}, \texttt{src/plane/}.
+
+\textbf{Required tag applications:} \texttt{@mathematical} on all plane module types linking to \textit{The Space Between} chapters; \texttt{@see} links between Copper/Blitter/Gastown and their Amiga hardware analogs; ICD payload types annotated with contract-layer explanation; \texttt{@extensible} on \texttt{PipelineStage} interface.
+
+\subsection{Wave 1C: College + Safety JSDoc (Parallel Track C)}
+
+Agent: EXEC-COLLEGE (Sonnet). Files: \texttt{.college/}, \texttt{src/holomorphic/}, \texttt{math-coprocessor/}, safety/security files, \texttt{src/cli/}, Heritage Skills warden.
+
+\textbf{Required tag applications:} All 42 department cross-reference files created; \texttt{@safety} tags on every GATE/ANNOTATE/BLOCK path in Heritage Skills; TypeScript--Python boundary documented in math-coprocessor; CLI commands linked to their underlying module documentation.
+
+\subsection{CAPCOM Gate: Safety Annotation Review}
+
+\textbf{Human review required before Wave 2 proceeds.} Verify:
+\begin{itemize}[noitemsep]
+  \item Every Heritage Skills GATE boundary has a \texttt{@safety} tag with correct policy link
+  \item Cultural sovereignty Level 4 hard block is annotated in all relevant paths
+  \item Physical safety temperature constants are annotated as non-configurable
+  \item M-5 Launch Gate annotation is present in AMIGA meta-mission code
+  \item No safety annotation has been softened from BLOCK to ANNOTATE
+\end{itemize}
+
+\subsection{Wave 2: Synthesis Documents (Sequential)}
+
+Agent: AGNUS-SYNTH (Opus).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Content} & \tableheader{Model} \\
+\midrule
+\texttt{docs/DACP-SPEC.md} & Fidelity 0--4 formal spec, opcode table, bundle layout, atomicity pattern, fidelity negotiation protocol & Opus \\
+\texttt{docs/CHIPSET-REFERENCE.md} & Copper/Blitter/Gastown/Teams/Exec/Integration + AMIGA team topology + ICD-01 through ICD-04 contracts & Opus \\
+\texttt{docs/GENEALOGY.md} & All 8 subsystems: first milestone $\to$ evolution $\to$ current form, with CHANGELOG excerpts and file-path anchors & Opus \\
+Navigator Index population & Merge all \texttt{@tag} metadata from Wave 1 into four-dimension index & Sonnet \\
+\textit{The Space Between} annotation pass & Verify holomorphic and plane modules have correct chapter citations & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Verification and Publication}
+
+Agent: DENISE-VERIFY (Sonnet).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Pass Criterion} & \tableheader{Model} \\
+\midrule
+\texttt{npm run docs:api} (typedoc) & Zero errors; all \texttt{@see} links resolve & Sonnet \\
+AJV Navigator Index validation & Schema passes; all four dimensions populated & Sonnet \\
+Internal hyperlink check & All \texttt{\#anchor} references in docs/ resolve & Sonnet \\
+CLAUDE.md update & Documentation web section added; navigation instructions complete & Sonnet \\
+docs/ currency pass & All outdated ``v1.33'' references updated to ``v1.49.21'' & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 outputs (file inventory, tag schema, milestone map) are shared attributes --- compute once, cache for all Wave 1 agents
+  \item \textit{The Space Between} PDF is loaded once in Wave 1B/1C and cached for Wave 2 annotation pass
+  \item CHANGELOG.md is loaded once in Wave 0 and not re-fetched
+  \item Heritage Skills policy documents loaded once in Wave 1C and reused for CAPCOM gate and Wave 2 safety pass
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tokens (est.)} & \tableheader{Sessions} & \tableheader{Model} \\
+\midrule
+Wave 0 & 25K & 1 & Haiku \\
+Wave 1A & 145K & 1--2 & Sonnet \\
+Wave 1B & 215K & 2 & Opus \\
+Wave 1C & 185K & 1--2 & Sonnet \\
+Wave 2 & 185K & 1--2 & Opus \\
+Wave 3 & 110K & 1 & Sonnet \\
+\midrule
+\textbf{Total} & \textbf{865K} & \textbf{8--10} & \textbf{Mixed} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0: Tag Schema + File Inventory + Milestone Map
+  |
+  +----------+----------+
+  |          |          |
+ 1A         1B         1C
+(Core)    (Arch)    (College)
+  |          |          |
+  +----+-----+-----+----+
+            |
+       CAPCOM Gate
+            |
+         Wave 2
+      (Synthesis Docs)
+            |
+         Wave 3
+      (Verify + Publish)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 8 & Mandatory & BLOCK \\
+Core functionality & 22 & Required & BLOCK \\
+Integration & 9 & Required & BLOCK \\
+Edge cases & 7 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{46} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & Heritage Skills safety tags present & Every GATE/ANNOTATE/BLOCK path in Heritage Skills warden code has a \texttt{@safety} tag with policy document URL. Zero untagged safety paths. \\
+SC-02 & Cultural sovereignty never weakened & No \texttt{@safety} annotation uses ANNOTATE or LOG for paths documented as BLOCK in source policy. \\
+SC-03 & Level 4 hard block annotated & \texttt{@safety} tags on Level 4 cultural sovereignty blocks include explicit statement that academic exception and credential override are refused. \\
+SC-04 & Safety temperature constants documented as non-configurable & All food/medical safety temperature constants annotated with ``non-configurable'' and safety warden role. \\
+SC-05 & M-5 Launch Gate annotation present & \texttt{SkillCandidateDetector} and \texttt{MetaMissionHarness} have \texttt{@safety} tags referencing the mandatory-pass requirement before self-modification. \\
+SC-06 & No GPS/location data for endangered species & No documentation or cross-reference file introduces location data for protected species (Heritage Skills ecological references). \\
+SC-07 & Path traversal prevention annotated & \texttt{assertSafePath()} and \texttt{PathTraversalError} have \texttt{@safety} tags at every filesystem entry point. \\
+SC-08 & YAML injection prevention annotated & \texttt{safeParseFrontmatter()} has \texttt{@safety} tags at every frontmatter parse site in \texttt{src/storage/}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Every public function has JSDoc & typedoc passes with zero undocumented public symbols \\
+CF-02 & Every \texttt{index.ts} has \texttt{@module} block & Grep for \texttt{@module} in all barrel files: 100\% coverage \\
+CF-03 & Every class has \texttt{@milestone} tag & All 40+ exported classes have the milestone that introduced them \\
+CF-04 & DACP Fidelity 0--4 fully annotated & \texttt{FidelityLevelSchema} and all five levels have inline docs with use-case examples \\
+CF-05 & Complex plane types link to \textit{The Space Between} & \texttt{TaskVector}, \texttt{SkillPosition}, \texttt{TangentMatch} have \texttt{@mathematical} tags with chapter citations \\
+CF-06 & All 42 College dept cross-ref files exist & \texttt{find .college/departments -name 'CODE-MODULES.md' | wc -l} equals 42 \\
+CF-07 & Navigator Index AJV passes & \texttt{ajv validate -s .planning/docs-index-schema.json -d .planning/docs-index.json} exits 0 \\
+CF-08 & GENEALOGY.md covers all 8 subsystems & Document contains sections for Observer Loop, DACP, Chipset, Plane, College, Holomorphic, Safety, CLI \\
+CF-09 & DACP Formal Spec complete & \texttt{docs/DACP-SPEC.md} contains fidelity table, opcode table, bundle layout diagram, atomicity section \\
+CF-10 & Chipset Reference complete & \texttt{docs/CHIPSET-REFERENCE.md} contains all 6 subsystems + AMIGA teams + ICD-01 through ICD-04 \\
+CF-11 & CLAUDE.md updated with docs web section & CLAUDE.md contains ``Documentation Web'' section with Navigator Index instructions \\
+CF-12 & No broken \texttt{@see} links & typedoc emits zero ``broken link'' warnings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Observation $\to$ College bridge & \texttt{.college/departments/statistics/CODE-MODULES.md} links to \texttt{src/calibration/threshold-optimizer.ts} \\
+IN-02 & Plane $\to$ mathematics department & \texttt{.college/departments/mathematics/CODE-MODULES.md} links to \texttt{src/plane/} and \texttt{src/holomorphic/} \\
+IN-03 & DACP $\to$ ISA cross-reference & DACP formal spec cross-references ISA encoding in \texttt{docs/architecture/} \\
+IN-04 & Heritage Skills $\to$ history department & \texttt{.college/departments/history/CODE-MODULES.md} links to Heritage Skills warden and cultural sovereignty policy \\
+IN-05 & Navigator Index $\to$ by-department lookup & \texttt{docs-index.json\#by-department/mathematics} returns at least 5 source module paths \\
+IN-06 & Navigator Index $\to$ by-milestone lookup & \texttt{docs-index.json\#by-milestone/v1.49.0} returns the DACP bundle and types files \\
+IN-07 & GENEALOGY $\to$ CHANGELOG anchors & Every CHANGELOG excerpt in GENEALOGY.md has a corresponding version anchor in CHANGELOG.md \\
+IN-08 & Holomorphic $\to$ \textit{The Space Between} chapters & At least 6 distinct chapter citations across \texttt{src/holomorphic/} annotations \\
+IN-09 & Document self-containment & A reader entering \texttt{src/dacp/bundle.ts} can reach DACP Formal Spec, GENEALOGY.md, and College/coding in $\leq$3 link hops \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Every public function has JSDoc & CF-01, CF-12 & Pending \\
+2. Every module has \texttt{@module} block + milestone & CF-02, CF-03 & Pending \\
+3. All 42 College dept cross-ref files exist & CF-06, IN-01, IN-02, IN-04 & Pending \\
+4. Navigator Index complete and AJV-validated & CF-07, IN-05, IN-06 & Pending \\
+5. DACP fidelity model fully annotated & CF-04, CF-09, IN-03 & Pending \\
+6. Safety boundaries annotated with \texttt{@safety} tags & SC-01 through SC-08 & Pending \\
+7. Holomorphic module links to \textit{The Space Between} & CF-05, IN-08 & Pending \\
+8. Complex plane types link to unit circle model & CF-05, IN-02 & Pending \\
+9. GENEALOGY.md traces all 8 subsystems & CF-08, IN-07 & Pending \\
+10. CLAUDE.md updated & CF-11 & Pending \\
+11. Documentation compiles cleanly & CF-01, CF-07, CF-12 & Pending \\
+12. 3-link reachability from any file & IN-09 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Agnus-Orchestrator (Opus) & Mission direction; CAPCOM gate decisions; safety annotation final approval \\
+PLAN & Paula-Planner (Sonnet) & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Scout-Research (Sonnet) & CHANGELOG mining; \textit{The Space Between} chapter mapping; source verification \\
+EXEC-A & Denise-Core (Sonnet) & JSDoc: Observation, Detection, Learning, Calibration, DACP \\
+EXEC-B & Denise-Arch (Opus) & JSDoc: Chipset, AMIGA, Application Pipeline, Complex Plane \\
+EXEC-C & Denise-College (Sonnet) & JSDoc: College bridge files, Holomorphic, Safety, CLI \\
+CRAFT-MATH & Opus-Math (Opus) & \textit{The Space Between} chapter annotations; holomorphic + plane mathematical accuracy \\
+CRAFT-CULT & Opus-Sovereignty (Opus) & Heritage Skills safety annotations; OCAP/CARE/UNDRIP accuracy \\
+VERIFY & Gary-Verify (Sonnet) & typedoc pass; AJV validation; link resolution; safety annotation audit \\
+INTEG & Sonnet-Integ (Sonnet) & Navigator Index population; cross-module consistency; GENEALOGY assembly \\
+CAPCOM & Human-in-Loop & Safety gate sign-off between Wave 1 and Wave 2; scope confirmation \\
+BUDGET & Paula-Budget (Haiku) & Token budget tracking; session boundary planning \\
+SURGEON & Haiku-Health (Haiku) & Documentation quality degradation detection; incomplete annotation flagging \\
+TOPO & Agnus-Topo (Opus) & Mid-mission restructuring if parallel tracks diverge \\
+ARCH & Opus-Arch (Opus) & Cross-cutting structural decisions; ICD contract documentation \\
+SECURE & Opus-Secure (Opus) & Safety boundary enforcement in documentation; prevents annotation weakening \\
+LOG & Sonnet-Log (Sonnet) & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 roles) \\
+Source Files in Scope & $\sim$1,200 \texttt{.ts} files in \texttt{src/} with public exports \\
+Total Repository Files & 7,451 \\
+College Departments & 42 (all require cross-reference files) \\
+Custom JSDoc Tags & 5 (\texttt{@module}, \texttt{@see}, \texttt{@milestone}, \texttt{@mathematical}, \texttt{@safety}) \\
+Navigator Index Dimensions & 4 (by-module, by-concept, by-department, by-milestone) \\
+Architecture Documents Produced & 3 (DACP Spec, Chipset Reference, GENEALOGY) \\
+Safety-Critical Tests & 8 (all mandatory-pass / BLOCK) \\
+Total Tests & 46 \\
+Estimated Token Budget & 865K \\
+Estimated Sessions & 8--10 \\
+Estimated Wall Time & 2--3 hours (parallel Wave 1 tracks) \\
+Primary Mathematical Reference & \textit{The Space Between} (tibsfox.com) \\
+Human Gates Required & 1 (CAPCOM safety review between Wave 1 and Wave 2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{The Amiga did not win by having more. It won by knowing exactly what each part was for, and by making every bus between them a first-class design decision. The source code already knows what it is for. This mission makes that knowledge legible to everyone who enters it. Storage is cheap. Understanding is not. All paths should lead to further discovery.}
+
+\vspace{0.8em}
+{\small\sffamily\textcolor{subtlegray}{--- From the gsd-skill-creator Documentation Web Vision, March 2026}}
+\end{quotebox}
+
+\end{document}
