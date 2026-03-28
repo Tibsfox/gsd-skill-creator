@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Musical Forest Vol. IV — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8a040; --accent-fire:#c75b3a; --border-forest:rgba(122,154,90,0.25); --panel-bg:rgba(26,42,30,0.5); }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; overflow-x: hidden; }
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-forest); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+  .hero { text-align: center; padding: 4rem 2rem 2.5rem; background: radial-gradient(ellipse at 50% 80%, rgba(199,91,58,0.06) 0%, rgba(42,138,150,0.04) 30%, transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); font-style: italic; margin-bottom: 1.8rem; }
+  .hero-text { max-width: 38rem; margin: 0 auto; font-size: 0.9rem; line-height: 1.85; color: var(--text-mid); }
+  .ensemble-filters { max-width: 74rem; margin: 1.5rem auto 0.5rem; padding: 0 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+  .ens-pill { background: transparent; border: 1px solid rgba(122,154,90,0.2); color: var(--text-dim); padding: 0.3rem 0.85rem; border-radius: 12px; font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
+  .ens-pill:hover { border-color: rgba(122,154,90,0.4); color: var(--text); }
+  .ens-pill.active { border-color: var(--accent-green); color: var(--text); background: rgba(122,154,90,0.15); }
+  .ens-pill .ens-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  .ens-controls { text-align: center; margin: 0.5rem 0; }
+  .random-ens-btn { background: rgba(199,91,58,0.15); border: 1px solid rgba(199,91,58,0.3); color: var(--text); font-family: Georgia, serif; font-size: 0.82rem; padding: 0.4rem 1.1rem; border-radius: 18px; cursor: pointer; transition: all 0.3s; }
+  .random-ens-btn:hover { background: rgba(199,91,58,0.25); border-color: rgba(199,91,58,0.5); }
+  .ens-count { text-align: center; font-size: 0.78rem; color: var(--text-dim); margin: 1rem 0; font-style: italic; }
+  .ens-count .count-num { color: var(--accent-gold); font-style: normal; }
+  .ens-grid { max-width: 74rem; margin: 0 auto; padding: 0 1.25rem 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .ens-card { background: var(--panel-bg); border: 1px solid var(--border-forest); border-radius: 8px; overflow: hidden; transition: all 0.3s; }
+  .ens-card:hover { border-color: rgba(122,154,90,0.4); transform: translateY(-2px); }
+  .ens-card.dimmed { opacity: 0.15; pointer-events: none; filter: grayscale(0.6); }
+  .ens-card.highlight { border-color: var(--accent-fire); box-shadow: 0 0 12px rgba(199,91,58,0.3); }
+  .ens-header { padding: 0.7rem 0.9rem 0.3rem; display: flex; justify-content: space-between; align-items: flex-start; }
+  .ens-members { font-size: 0.82rem; font-weight: 400; color: var(--accent-green); }
+  .ens-roles { font-size: 0.65rem; color: var(--text-dim); display: block; font-style: italic; margin-top: 0.15rem; }
+  .ens-badge { font-size: 0.62rem; padding: 0.15rem 0.45rem; border-radius: 3px; background: rgba(199,91,58,0.15); border: 1px solid rgba(199,91,58,0.3); color: var(--accent-fire); white-space: nowrap; flex-shrink: 0; margin-left: 0.3rem; margin-top: 0.1rem; }
+  .ens-body { padding: 0.6rem 0.9rem; }
+  .ens-instrument { font-size: 0.88rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 400; letter-spacing: 0.03em; }
+  .ens-pattern { font-size: 0.78rem; line-height: 1.7; color: var(--text-mid); font-style: italic; margin-bottom: 0.6rem; }
+  .ens-teaching { font-size: 0.75rem; line-height: 1.6; color: rgba(232,220,200,0.45); padding-top: 0.5rem; border-top: 1px solid rgba(122,154,90,0.08); }
+  .page-footer { text-align: center; padding: 3rem 2rem 4rem; font-size: 0.85rem; color: var(--text-dim); font-style: italic; line-height: 1.8; }
+  .page-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .page-footer a:hover { color: var(--accent-green); }
+  @media (max-width: 900px) { .ens-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .ens-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.8rem; } }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</div>
+
+<div class="hero">
+  <h1>The Musical Forest</h1>
+  <div class="subtitle">Fourth Movement: Ensembles &mdash; forty-eight groups, forty-eight combined instruments</div>
+  <p class="hero-text">
+    The first movement mapped solo instruments. The second described their air-paintings. The third
+    paired voices into duets. The fourth movement gathers three or more muses into ensembles &mdash;
+    discovering the emergent sound when entire ecological relationships play together.
+    Every ensemble is grounded in real PNW ecology: predator-prey, habitat, food-web,
+    and atmospheric systems that make the forest orchestrate as one.
+  </p>
+</div>
+
+<div class="ensemble-filters" id="ens-filters"></div>
+<div class="ens-controls">
+  <button class="random-ens-btn" onclick="randomEnsemble()">Random Ensemble</button>
+</div>
+<div class="ens-count" id="ens-count"></div>
+<div class="ens-grid" id="grid"></div>
+
+<div class="page-footer">
+  Forty-eight ensembles. The forest never plays alone &mdash; every system finds its chorus.<br><br>
+  <a href="musical-forest.html">&larr; First Movement</a> &nbsp;&middot;&nbsp;
+  <a href="sounds-2.html">Second Movement</a> &nbsp;&middot;&nbsp;
+  <a href="sounds-3.html">Third Movement</a> &nbsp;&middot;&nbsp;
+  <a href="index.html">Center Camp</a> &nbsp;&middot;&nbsp;
+  <a href="../index.html">Research Series</a>
+</div>
+
+<script src="sounds-4.js"></script>
+<script>
+var M={cedar:{n:'Cedar',r:'the record',t:'tree'},lex:{n:'Lex',r:'the specification',t:'concept'},moss:{n:'Moss',r:'the carpet',t:'bryophyte'},lichen:{n:'Lichen',r:'the breath',t:'symbiosis'},sturgeon:{n:'Sturgeon',r:'the ancient',t:'fish'},fern:{n:'Fern',r:'the foundation',t:'plant'},chanterelle:{n:'Chanterelle',r:'the network',t:'fungus'},star:{n:'Star',r:'the keystone',t:'echinoderm'},crab:{n:'Crab',r:'the harvest',t:'crustacean'},beaver:{n:'Beaver',r:'the maker',t:'mammal'},salamander:{n:'Salamander',r:'the headwater',t:'amphibian'},hemlock:{n:'Hemlock',r:'the standard',t:'tree'},fire:{n:'Fire',r:'the renewal',t:'force'},cougar:{n:'Cougar',r:'the ghost',t:'mammal'},wolf:{n:'Wolf',r:'the return',t:'mammal'},rain:{n:'Rain',r:'the cycle',t:'force'},fog:{n:'Fog',r:'the invisible',t:'force'},bear:{n:'Bear',r:'the season',t:'mammal'},waterfall:{n:'Waterfall',r:'the descent',t:'force'},foxy:{n:'Foxy',r:'the map',t:'animal'},sitka:{n:'Sitka',r:'the root',t:'tree'},eulachon:{n:'Eulachon',r:'the first gift',t:'fish'},steelhead:{n:'Steelhead',r:'the twice-born',t:'fish'},dipper:{n:'Dipper',r:'the water-walker',t:'bird'},chinook:{n:'Chinook',r:'the current',t:'salmon'},orca:{n:'Orca',r:'the elder',t:'marine'},sam:{n:'Sam',r:'the question',t:'animal'},coyote:{n:'Coyote',r:'the trickster',t:'canid'},dragonfly:{n:'Dragonfly',r:'the iridescent',t:'insect'},octopus:{n:'Octopus',r:'the reinventor',t:'marine'},willow:{n:'Willow',r:'the welcome',t:'tree'},bee:{n:'Bee',r:'the pollinator',t:'insect'},otter:{n:'Otter',r:'the play',t:'mustelid'},hawk:{n:'Hawk',r:'the formation',t:'bird'},eagle:{n:'Eagle',r:'the guardian',t:'bird'},madrone:{n:'Madrone',r:'the hearth',t:'tree'},owl:{n:'Owl',r:'the clock',t:'bird'},marten:{n:'Marten',r:'the signal',t:'mammal'},bat:{n:'Bat',r:'the echolocator',t:'mammal'},raven:{n:'Raven',r:'the pattern',t:'bird'},thrush:{n:'Thrush',r:'the tone',t:'bird'},nutcracker:{n:'Nutcracker',r:'the cache',t:'bird'},wren:{n:'Wren',r:'the song',t:'bird'},kelp:{n:'Kelp',r:'the tide forest',t:'alga'},alder:{n:'Alder',r:'the resonance',t:'tree'},osprey:{n:'Osprey',r:'the horizon',t:'bird'},pika:{n:'Pika',r:'the sentinel',t:'mammal'},glacier:{n:'Glacier',r:'the archive',t:'force'}};
+
+var ENS_COLORS = {
+  'predator-prey': '#c75b3a',
+  'habitat': '#7a9a5a',
+  'food-web': '#c8a040',
+  'atmospheric': '#4a9ed4',
+  'riparian': '#2a8a96',
+  'successional': '#b48c3c'
+};
+var ENS_LABELS = {
+  all: 'All',
+  'predator-prey': 'Predator-Prey',
+  'habitat': 'Habitat',
+  'food-web': 'Food Web',
+  'atmospheric': 'Atmospheric',
+  'riparian': 'Riparian',
+  'successional': 'Successional'
+};
+var activeEns = 'all';
+
+// Build ensemble type filter pills
+(function(){
+  var bar = document.getElementById('ens-filters');
+  var ensSet = { all: true };
+  SOUNDS_4.forEach(function(e){ if (e.ensemble) ensSet[e.ensemble] = true; });
+  Object.keys(ENS_LABELS).forEach(function(ens){
+    if (!ensSet[ens]) return;
+    var btn = document.createElement('button');
+    btn.className = 'ens-pill' + (ens === 'all' ? ' active' : '');
+    if (ens !== 'all' && ENS_COLORS[ens]) {
+      btn.innerHTML = '<span class="ens-dot" style="background:' + ENS_COLORS[ens] + '"></span>' + ENS_LABELS[ens];
+    } else {
+      btn.textContent = ENS_LABELS[ens];
+    }
+    btn.onclick = function(){ filterEnsemble(ens, btn); };
+    bar.appendChild(btn);
+  });
+})();
+
+function filterEnsemble(ens, btn) {
+  activeEns = ens;
+  document.querySelectorAll('.ens-pill').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.ens-card').forEach(function(c){
+    if (ens === 'all' || c.getAttribute('data-ens') === ens) {
+      c.classList.remove('dimmed');
+    } else {
+      c.classList.add('dimmed');
+    }
+  });
+  updateEnsCount();
+}
+
+function updateEnsCount() {
+  var visible = document.querySelectorAll('.ens-card:not(.dimmed)').length;
+  document.getElementById('ens-count').innerHTML =
+    '<span class="count-num">' + visible + '</span> of <span class="count-num">' + SOUNDS_4.length + '</span> ensembles in the fourth movement';
+}
+
+function randomEnsemble() {
+  var cards = document.querySelectorAll('.ens-card:not(.dimmed)');
+  if (cards.length === 0) return;
+  var idx = Math.floor(Math.random() * cards.length);
+  var card = cards[idx];
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.classList.add('highlight');
+  setTimeout(function(){ card.classList.remove('highlight'); }, 2000);
+}
+
+// Build grid
+(function(){
+  var grid = document.getElementById('grid');
+  SOUNDS_4.forEach(function(d){
+    var names = [];
+    var roles = [];
+    d.muses.forEach(function(id){
+      var m = M[id] || {n:id, r:''};
+      names.push(m.n);
+      roles.push(m.r);
+    });
+    var ensColor = ENS_COLORS[d.ensemble] || '#7a8a8a';
+
+    var card = document.createElement('div');
+    card.className = 'ens-card';
+    card.setAttribute('data-ens', d.ensemble || '');
+    card.innerHTML =
+      '<div class="ens-header">' +
+        '<div>' +
+          '<span class="ens-members">' + names.join(' + ') + '</span>' +
+          '<span class="ens-roles">' + roles.join(' &amp; ') + '</span>' +
+        '</div>' +
+        '<span class="ens-badge" style="border-color:' + ensColor + '; color:' + ensColor + '; background:rgba(0,0,0,0.25);">' + (d.ensemble || 'ensemble') + '</span>' +
+      '</div>' +
+      '<div class="ens-body">' +
+        '<div class="ens-instrument">' + d.instrument + '</div>' +
+        '<div class="ens-pattern">' + d.pattern + '</div>' +
+        '<div class="ens-teaching">' + d.teaching + '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+  updateEnsCount();
+})();
+</script>
+
+</body>
+</html>

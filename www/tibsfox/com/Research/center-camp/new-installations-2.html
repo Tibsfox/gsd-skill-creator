@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The New Clearings — Volume II — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8a040; --accent-fire:#c75b3a; --accent-water:#4a8ab0; --accent-ice:#8ab8d0; --border-forest:rgba(122,154,90,0.25); --panel-bg:rgba(26,42,30,0.5); }
+  body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; min-height:100vh; overflow-x:hidden; }
+  ::selection { background:rgba(122,154,90,0.35); color:var(--text); }
+  .nav-bar { background:#1a2a1f; padding:0.5rem 1.5rem; display:flex; gap:1rem; align-items:center; font-size:0.8rem; position:sticky; top:0; z-index:100; backdrop-filter:blur(8px); border-bottom:1px solid var(--border-forest); }
+  .nav-bar a { color:rgba(255,255,255,0.6); text-decoration:none; transition:color 0.2s; }
+  .nav-bar a:hover { color:white; }
+  .nav-bar .active { color:white; font-weight:600; }
+  .nav-bar .sep { color:rgba(255,255,255,0.2); }
+  .hero { text-align:center; padding:4rem 2rem 2.5rem; background:radial-gradient(ellipse at 50% 80%,rgba(74,138,176,0.06) 0%,transparent 60%),linear-gradient(180deg,var(--bg) 0%,#0f1e15 50%,var(--bg) 100%); }
+  .hero h1 { font-size:2.6rem; font-weight:300; letter-spacing:0.12em; margin-bottom:0.3rem; }
+  .hero .subtitle { font-size:0.95rem; color:var(--text-dim); font-style:italic; margin-bottom:1.8rem; }
+  .hero-text { max-width:36rem; margin:0 auto; font-size:0.9rem; line-height:1.85; color:var(--text-mid); }
+  .trail { max-width:700px; margin:0 auto; padding:0 1.25rem 4rem; }
+  .trail-section { padding:2rem 0 0.5rem; text-align:center; }
+  .trail-section h2 { font-size:1.4rem; font-weight:300; letter-spacing:0.1em; color:var(--accent-water); margin-bottom:0.2rem; }
+  .trail-section p { font-size:0.8rem; color:var(--text-dim); font-style:italic; }
+  .trail-divider { display:flex; align-items:center; gap:1rem; padding:2rem 0; color:var(--text-dim); font-size:0.78rem; font-style:italic; }
+  .trail-divider::before, .trail-divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(74,138,176,0.2),transparent); }
+  .trail-divider .leaf { font-size:1rem; opacity:0.4; display:inline-block; }
+  .inst { background:var(--panel-bg); border:1px solid var(--border-forest); border-radius:8px; overflow:hidden; transition:border-color 0.3s; margin-bottom:0.5rem; }
+  .inst:hover { border-color:rgba(74,138,176,0.45); }
+  .inst-header { padding:1.2rem 1.5rem 0.8rem; }
+  .inst-header h3 { font-size:1.15rem; font-weight:400; letter-spacing:0.06em; margin-bottom:0.15rem; }
+  .inst-header .sys-name { font-size:0.78rem; color:var(--accent-water); font-style:italic; }
+  .inst-canvas-wrap { position:relative; width:100%; background:#080f0a; cursor:pointer; }
+  .inst-canvas-wrap canvas { display:block; width:100%; height:auto; }
+  .inst-controls { padding:0.6rem 1.2rem; display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap; font-size:0.75rem; color:var(--text-dim); background:rgba(0,0,0,0.15); border-top:1px solid rgba(74,138,176,0.1); }
+  .inst-controls button { background:rgba(74,138,176,0.15); border:1px solid rgba(74,138,176,0.3); color:var(--text); padding:0.3rem 0.75rem; border-radius:4px; font-family:inherit; font-size:0.72rem; cursor:pointer; transition:all 0.2s; }
+  .inst-controls button:hover { background:rgba(74,138,176,0.3); }
+  .inst-controls input[type="range"] { width:100px; accent-color:var(--accent-water); height:3px; }
+  .inst-controls .stat { margin-left:auto; font-variant-numeric:tabular-nums; }
+  .inst-teaching { padding:1rem 1.5rem 1.3rem; font-size:0.82rem; line-height:1.7; color:var(--text-mid); border-top:1px solid rgba(74,138,176,0.1); }
+  .inst-teaching em { color:var(--text); font-style:italic; }
+  .trail-footer { text-align:center; padding:3rem 2rem 4rem; font-size:0.85rem; color:var(--text-dim); font-style:italic; }
+  @media (max-width:600px) { .hero h1{font-size:1.8rem;} .trail{padding:0 0.75rem 3rem;} .inst-header{padding:1rem 1rem 0.6rem;} .inst-teaching{padding:0.8rem 1rem 1rem;} }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="new-installations.html">Vol I</a>
+  <span class="sep">/</span>
+  <a href="terrain.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research</a>
+  <span class="sep">/</span>
+  <span class="active">New Clearings II</span>
+</div>
+
+<div class="hero">
+  <h1>The New Clearings &mdash; Volume II</h1>
+  <p class="subtitle">Thirty-two ecosystem simulations from the living forest</p>
+  <p class="hero-text">
+    The forest runs on systems older than thought. Water carves. Fire clears. Animals trace
+    territories in scent and song. Climate shifts the rules while the game is still being played.
+    These thirty-two simulations model real PNW processes. Touch the sliders. Press play.
+    Watch what the forest already knows.
+  </p>
+</div>
+
+<div class="trail">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 1: WATER SYSTEMS (1-8) -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="trail-section"><h2>Water Systems</h2><p>Rain to river to ocean and back again</p></div>
+
+<!-- 1. RAIN TO RIVER TO OCEAN -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> where the water begins</div>
+<div class="inst" id="inst-w1">
+  <div class="inst-header"><h3>Rain to River to Ocean</h3><span class="sys-name">The Watershed Cycle</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w1" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="w1-rain">Release Rain</button><input type="range" id="w1-slope" min="5" max="45" value="20"><span style="font-size:0.7rem;">Slope</span><span class="stat" id="w1-stat">Drops: 0</span></div>
+  <div class="inst-teaching">Click to release rain on the mountain. Adjust slope to see how terrain angle changes where water flows and how fast it reaches the ocean.<br><em>Water does not choose its path. Gravity writes the map.</em></div>
+</div>
+
+<!-- 2. GROUNDWATER FLOW -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~40 paces, look beneath...</div>
+<div class="inst" id="inst-w2">
+  <div class="inst-header"><h3>Groundwater Flow</h3><span class="sys-name">The Hidden Aquifer</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w2" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Permeability:</span><input type="range" id="w2-perm" min="1" max="10" value="5"><span class="stat" id="w2-stat">Flow: 2.4 m/day</span></div>
+  <div class="inst-teaching">Adjust soil permeability and watch groundwater seep through layers. Gravel moves water fast; clay holds it back.<br><em>The river you see is fed by a river you cannot.</em></div>
+</div>
+
+<!-- 3. TIDAL CYCLES -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~60 paces to the shore...</div>
+<div class="inst" id="inst-w3">
+  <div class="inst-header"><h3>Tidal Cycles</h3><span class="sys-name">The Moon's Pull</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w3" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="w3-play">Play</button><span class="stat" id="w3-stat">Hour 0 &middot; High Tide &middot; Moon: Full</span></div>
+  <div class="inst-teaching">Watch 24 hours of tidal change driven by lunar position. The intertidal zone appears and disappears twice daily.<br><em>The moon moves the ocean. The ocean moves everything else.</em></div>
+</div>
+
+<!-- 4. WAVE EROSION -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~80 paces along the bluff...</div>
+<div class="inst" id="inst-w4">
+  <div class="inst-header"><h3>Wave Erosion</h3><span class="sys-name">The Patient Sculptor</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w4" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Wave Power:</span><input type="range" id="w4-power" min="1" max="10" value="5"><span class="stat" id="w4-stat">Years: 0 &middot; Cliff intact</span></div>
+  <div class="inst-teaching">Increase wave power and watch centuries of coastal erosion in fast-forward. Sea stacks form as softer rock retreats around harder cores.<br><em>The coast is a sculpture the ocean never stops carving.</em></div>
+</div>
+
+<!-- 5. FLOOD DYNAMICS -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~50 paces to the floodplain...</div>
+<div class="inst" id="inst-w5">
+  <div class="inst-header"><h3>Flood Dynamics</h3><span class="sys-name">The River's Memory</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w5" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Rainfall:</span><input type="range" id="w5-rain" min="1" max="10" value="3"><span class="stat" id="w5-stat">Stage: Normal &middot; 1.2m</span></div>
+  <div class="inst-teaching">Increase rainfall intensity. Watch the river overflow its banks and spread across the floodplain. Trees and wetlands slow the surge.<br><em>A floodplain is not wasted land. It is the river's pressure valve.</em></div>
+</div>
+
+<!-- 6. SNOWMELT TIMING -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~70 paces uphill to the snowline...</div>
+<div class="inst" id="inst-w6">
+  <div class="inst-header"><h3>Snowmelt Timing</h3><span class="sys-name">The Mountain Battery</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w6" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Temperature:</span><input type="range" id="w6-temp" min="-5" max="20" value="2"><span class="stat" id="w6-stat">Snowpack: 100% &middot; Stream: Low</span></div>
+  <div class="inst-teaching">Raise temperature and watch the snowpack shrink. The stream responds weeks later as meltwater works downhill through soil.<br><em>The mountain stores water as snow. The question is when it releases.</em></div>
+</div>
+
+<!-- 7. ESTUARY MIXING -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~90 paces where river meets sea...</div>
+<div class="inst" id="inst-w7">
+  <div class="inst-header"><h3>Estuary Mixing</h3><span class="sys-name">Where Fresh Meets Salt</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w7" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">River Flow:</span><input type="range" id="w7-flow" min="1" max="10" value="5"><span style="font-size:0.7rem;">Tide:</span><input type="range" id="w7-tide" min="1" max="10" value="5"><span class="stat" id="w7-stat">Salinity: 18 ppt</span></div>
+  <div class="inst-teaching">Balance river flow against tidal push. The salt wedge moves upstream or retreats depending on which force dominates.<br><em>The estuary is a negotiation between river and ocean, settled twice daily.</em></div>
+</div>
+
+<!-- 8. WATERSHED HEALTH -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~55 paces to the overlook...</div>
+<div class="inst" id="inst-w8">
+  <div class="inst-header"><h3>Watershed Health</h3><span class="sys-name">The System Score</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-w8" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="w8-log">Add Logging</button><button id="w8-restore">Restore Forest</button><span class="stat" id="w8-stat">Health: 95% &middot; Pristine</span></div>
+  <div class="inst-teaching">Click to log sections of the watershed. Watch how removing tree cover increases runoff, erosion, and temperature while reducing habitat quality.<br><em>The watershed is one system. What you do upstream, the fish feel downstream.</em></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 2: FOREST SYSTEMS (9-16) -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="trail-section"><h2>Forest Systems</h2><p>From seed to canopy and back to soil</p></div>
+
+<!-- 9. SEED GERMINATION -->
+<div class="trail-divider"><span class="leaf">&#127793;</span> where the seed lands</div>
+<div class="inst" id="inst-f1">
+  <div class="inst-header"><h3>Seed Germination</h3><span class="sys-name">The First Decision</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f1" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Moisture:</span><input type="range" id="f1-moist" min="0" max="10" value="5"><span style="font-size:0.7rem;">Light:</span><input type="range" id="f1-light" min="0" max="10" value="5"><span class="stat" id="f1-stat">Seeds: 20 &middot; Germinated: 0</span></div>
+  <div class="inst-teaching">Adjust moisture and light. Each seed has a different threshold. Too dry and nothing sprouts. Too dark and even sprouted seeds die.<br><em>A seed does not hope. It measures, then commits.</em></div>
+</div>
+
+<!-- 10. CANOPY LIGHT COMPETITION -->
+<div class="trail-divider"><span class="leaf">&#127794;</span> ~60 paces, look up...</div>
+<div class="inst" id="inst-f2">
+  <div class="inst-header"><h3>Canopy Light Competition</h3><span class="sys-name">The Race for Sky</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f2" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="f2-play">Play 100 Years</button><span class="stat" id="f2-stat">Year 0 &middot; All seedlings equal</span></div>
+  <div class="inst-teaching">Press play and watch seedlings compete for canopy space over 100 years. Shade-tolerant species win below, sun-lovers win above.<br><em>The canopy is not a ceiling. It is a war fought in slow motion.</em></div>
+</div>
+
+<!-- 11. ROOT GROWTH -->
+<div class="trail-divider"><span class="leaf">&#127793;</span> ~45 paces, dig here...</div>
+<div class="inst" id="inst-f3">
+  <div class="inst-header"><h3>Root Growth Network</h3><span class="sys-name">The Underground Map</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f3" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Water Table:</span><input type="range" id="f3-water" min="1" max="10" value="6"><span class="stat" id="f3-stat">Root depth: 2.1m &middot; Mycorrhizal links: 0</span></div>
+  <div class="inst-teaching">Adjust the water table depth. Roots grow toward water, branching through soil layers. Mycorrhizal connections appear between neighboring trees.<br><em>The roots know where the water is. They have been finding it for 400 million years.</em></div>
+</div>
+
+<!-- 12. FIRE SPREAD -->
+<div class="trail-divider"><span class="leaf">&#128293;</span> ~80 paces, smell the smoke...</div>
+<div class="inst" id="inst-f4">
+  <div class="inst-header"><h3>Fire Spread</h3><span class="sys-name">The Red Wind</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f4" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Fuel Load:</span><input type="range" id="f4-fuel" min="1" max="10" value="5"><span style="font-size:0.7rem;">Wind:</span><input type="range" id="f4-wind" min="0" max="10" value="3"><span class="stat" id="f4-stat">Click forest to ignite</span></div>
+  <div class="inst-teaching">Click to start a fire. Fuel load and wind determine whether it burns out or crowns. Firebreaks and wet areas slow the spread.<br><em>Fire is not the forest's enemy. Fire suppression is.</em></div>
+</div>
+
+<!-- 13. WIND DAMAGE -->
+<div class="trail-divider"><span class="leaf">&#127788;</span> ~70 paces to the exposed ridge...</div>
+<div class="inst" id="inst-f5">
+  <div class="inst-header"><h3>Wind Damage</h3><span class="sys-name">The Gale Test</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f5" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Wind Speed:</span><input type="range" id="f5-wind" min="20" max="150" value="40"><span class="stat" id="f5-stat">40 km/h &middot; All standing</span></div>
+  <div class="inst-teaching">Increase wind speed. Tall trees with shallow roots go first. Deep-rooted species survive longer. Edge trees shelter interior ones.<br><em>The tree that bends survives. The tree that shelters others bends more.</em></div>
+</div>
+
+<!-- 14. INSECT OUTBREAK -->
+<div class="trail-divider"><span class="leaf">&#127793;</span> ~55 paces to the beetle zone...</div>
+<div class="inst" id="inst-f6">
+  <div class="inst-header"><h3>Insect Outbreak</h3><span class="sys-name">The Bark Beetle Wave</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f6" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="f6-play">Release Beetles</button><span style="font-size:0.7rem;">Drought:</span><input type="range" id="f6-drought" min="0" max="10" value="3"><span class="stat" id="f6-stat">Trees: 40 &middot; Infested: 0</span></div>
+  <div class="inst-teaching">Release mountain pine beetles. Drought-stressed trees cannot produce enough pitch to repel them. Watch the infestation spread tree by tree.<br><em>The beetle does not kill the forest. Drought opens the door; the beetle walks through.</em></div>
+</div>
+
+<!-- 15. FUNGAL SPREAD -->
+<div class="trail-divider"><span class="leaf">&#127812;</span> ~40 paces to the nurse log...</div>
+<div class="inst" id="inst-f7">
+  <div class="inst-header"><h3>Fungal Network Spread</h3><span class="sys-name">The Underground Internet</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f7" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="f7-play">Play</button><span class="stat" id="f7-stat">Mycelium: 0% &middot; Trees connected: 0/12</span></div>
+  <div class="inst-teaching">Watch mycorrhizal mycelium spread through soil, connecting tree roots into a network. Carbon and nutrients flow along established links.<br><em>The forest has had internet for 450 million years. It runs on sugar, not electricity.</em></div>
+</div>
+
+<!-- 16. NURSE LOG SUCCESSION -->
+<div class="trail-divider"><span class="leaf">&#127795;</span> ~50 paces to the fallen giant...</div>
+<div class="inst" id="inst-f8">
+  <div class="inst-header"><h3>Nurse Log Succession</h3><span class="sys-name">Death Feeding Life</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-f8" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="f8-play">Play 400 Years</button><span class="stat" id="f8-stat">Year 0 &middot; Fresh fallen log</span></div>
+  <div class="inst-teaching">Watch a fallen tree decompose over 400 years. Moss arrives first, then seedlings, then a full colonnade of new trees standing on stilt roots above the vanished log.<br><em>The dead tree feeds the living. The living stand on what came before.</em></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 3: ANIMAL SYSTEMS (17-24) -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="trail-section"><h2>Animal Systems</h2><p>Territory, migration, pursuit, and display</p></div>
+
+<!-- 17. TERRITORY MAPPING -->
+<div class="trail-divider"><span class="leaf">&#128062;</span> where the scent marks begin</div>
+<div class="inst" id="inst-a1">
+  <div class="inst-header"><h3>Territory Mapping</h3><span class="sys-name">The Scent Boundary</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a1" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="a1-add">Add Wolf Pack</button><span class="stat" id="a1-stat">Packs: 3 &middot; Voronoi cells: 3</span></div>
+  <div class="inst-teaching">Click to add wolf packs. Territory boundaries form automatically as Voronoi cells — each point in the landscape belongs to the nearest pack.<br><em>Nobody draws the boundary. Proximity draws it for them.</em></div>
+</div>
+
+<!-- 18. MIGRATION TIMING -->
+<div class="trail-divider"><span class="leaf">&#128038;</span> ~80 paces to the flyway...</div>
+<div class="inst" id="inst-a2">
+  <div class="inst-header"><h3>Migration Timing</h3><span class="sys-name">The Calendar in the Sky</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a2" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Month:</span><input type="range" id="a2-month" min="1" max="12" value="3"><span class="stat" id="a2-stat">March &middot; Northbound: Swallows, Warblers</span></div>
+  <div class="inst-teaching">Slide through the months. Different species move at different times, each following day length, temperature, and food availability cues.<br><em>Migration is not a decision. It is a schedule written in hormones and starlight.</em></div>
+</div>
+
+<!-- 19. PREDATOR-PREY PURSUIT -->
+<div class="trail-divider"><span class="leaf">&#128062;</span> ~60 paces to the meadow edge...</div>
+<div class="inst" id="inst-a3">
+  <div class="inst-header"><h3>Predator-Prey Pursuit</h3><span class="sys-name">The Chase Equation</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a3" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Wolf Speed:</span><input type="range" id="a3-wolf" min="30" max="65" value="55"><span style="font-size:0.7rem;">Elk Speed:</span><input type="range" id="a3-elk" min="40" max="70" value="60"><span class="stat" id="a3-stat">Click to start chase</span></div>
+  <div class="inst-teaching">Click the canvas to start a pursuit. The wolf is slower in a straight line but cuts corners. The elk has speed but must outrun stamina.<br><em>The race is not always to the swift. Sometimes it goes to the one who quits last.</em></div>
+</div>
+
+<!-- 20. MATING DISPLAY -->
+<div class="trail-divider"><span class="leaf">&#128038;</span> ~70 paces to the lek...</div>
+<div class="inst" id="inst-a4">
+  <div class="inst-header"><h3>Mating Display</h3><span class="sys-name">The Grouse Lek</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a4" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="a4-play">Start Display Season</button><span class="stat" id="a4-stat">Males: 8 &middot; Females watching: 0</span></div>
+  <div class="inst-teaching">Watch sage grouse males compete on the lek. The top 2 males get 90% of matings. Females choose based on display intensity and position.<br><em>The best spot on the lek goes to the bird who earned it. Every other bird is auditioning.</em></div>
+</div>
+
+<!-- 21. NEST BUILDING -->
+<div class="trail-divider"><span class="leaf">&#128038;</span> ~45 paces to the tall snag...</div>
+<div class="inst" id="inst-a5">
+  <div class="inst-header"><h3>Nest Building</h3><span class="sys-name">The Eagle Architecture</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a5" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><button id="a5-add">Add Sticks</button><span class="stat" id="a5-stat">Year 1 &middot; Mass: 12 kg &middot; Sticks: 48</span></div>
+  <div class="inst-teaching">Click to add material each season. The nest grows year over year, eventually reaching 2 tonnes. The tree must bear the accumulating load.<br><em>The nest is never finished. Each year is another layer of commitment.</em></div>
+</div>
+
+<!-- 22. HIBERNATION PREP -->
+<div class="trail-divider"><span class="leaf">&#128059;</span> ~90 paces to the den site...</div>
+<div class="inst" id="inst-a6">
+  <div class="inst-header"><h3>Hibernation Preparation</h3><span class="sys-name">The Fat Budget</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a6" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Salmon Run:</span><input type="range" id="a6-salmon" min="1" max="10" value="7"><span style="font-size:0.7rem;">Berry Crop:</span><input type="range" id="a6-berry" min="1" max="10" value="6"><span class="stat" id="a6-stat">Fat reserve: 22% &middot; Need: 30%</span></div>
+  <div class="inst-teaching">Adjust food availability. The bear must reach 30% body fat before denning. A bad salmon run plus a poor berry crop means a bear that does not wake up.<br><em>Hibernation is not sleep. It is a budget bet placed every autumn.</em></div>
+</div>
+
+<!-- 23. PACK HUNTING -->
+<div class="trail-divider"><span class="leaf">&#128062;</span> ~65 paces through the timber...</div>
+<div class="inst" id="inst-a7">
+  <div class="inst-header"><h3>Pack Hunting</h3><span class="sys-name">The Relay Strategy</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a7" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Pack Size:</span><input type="range" id="a7-pack" min="2" max="12" value="6"><span class="stat" id="a7-stat">Pack: 6 &middot; Success rate: 14%</span></div>
+  <div class="inst-teaching">Adjust pack size. Wolves take turns leading the chase while others rest. Larger packs sustain longer pursuits but share the meal more ways.<br><em>The wolf that catches the elk is not the one that started the chase. It is the one who was fresh.</em></div>
+</div>
+
+<!-- 24. FLOCK FORMATION -->
+<div class="trail-divider"><span class="leaf">&#128038;</span> ~75 paces to the open sky...</div>
+<div class="inst" id="inst-a8">
+  <div class="inst-header"><h3>Flock Formation</h3><span class="sys-name">The Murmuration</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-a8" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Birds:</span><input type="range" id="a8-count" min="20" max="200" value="80"><button id="a8-hawk">Introduce Hawk</button><span class="stat" id="a8-stat">Flock: 80 &middot; Cohesion: High</span></div>
+  <div class="inst-teaching">Watch boids flock using three rules: stay close, match heading, avoid collision. Introduce a hawk and watch the flock respond as one organism.<br><em>No bird leads the murmuration. Each bird follows three rules. The shape follows itself.</em></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 4: CLIMATE SYSTEMS (25-32) -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="trail-section"><h2>Climate Systems</h2><p>The rules are changing while the game is being played</p></div>
+
+<!-- 25. GREENHOUSE EFFECT -->
+<div class="trail-divider"><span class="leaf">&#127777;</span> where the atmosphere traps heat</div>
+<div class="inst" id="inst-c1">
+  <div class="inst-header"><h3>Greenhouse Effect</h3><span class="sys-name">The Glass Ceiling</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c1" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">CO2 (ppm):</span><input type="range" id="c1-co2" min="280" max="800" value="420"><span class="stat" id="c1-stat">420 ppm &middot; +1.2&deg;C</span></div>
+  <div class="inst-teaching">Raise CO2 levels. Watch infrared photons bounce between surface and atmosphere more times before escaping to space. More bounces, more warming.<br><em>The greenhouse effect is not a theory. It is physics you can measure with a thermometer.</em></div>
+</div>
+
+<!-- 26. OCEAN ACIDIFICATION -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~85 paces to the tide pool...</div>
+<div class="inst" id="inst-c2">
+  <div class="inst-header"><h3>Ocean Acidification</h3><span class="sys-name">The Other CO2 Problem</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c2" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">pH:</span><input type="range" id="c2-ph" min="7.6" max="8.3" value="8.1" step="0.05"><span class="stat" id="c2-stat">pH 8.1 &middot; Shells: Healthy</span></div>
+  <div class="inst-teaching">Lower ocean pH by absorbing more CO2. Watch shells thin, coral bleach, and pteropod shells dissolve. Half a pH unit reshapes the marine world.<br><em>CO2 does not just warm the air. It dissolves into the ocean and eats the shells.</em></div>
+</div>
+
+<!-- 27. GLACIAL RETREAT -->
+<div class="trail-divider"><span class="leaf">&#127956;</span> ~100 paces to the cirque...</div>
+<div class="inst" id="inst-c3">
+  <div class="inst-header"><h3>Glacial Retreat</h3><span class="sys-name">The Disappearing Archive</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c3" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Decade:</span><input type="range" id="c3-decade" min="1900" max="2100" value="2020" step="10"><span class="stat" id="c3-stat">2020 &middot; 38% of 1900 area</span></div>
+  <div class="inst-teaching">Slide through decades and watch PNW glaciers shrink. Each glacier stores centuries of water that feeds summer streams when rain stops.<br><em>A glacier is not a feature. It is a water bank. When it closes, the account is empty.</em></div>
+</div>
+
+<!-- 28. DROUGHT PROGRESSION -->
+<div class="trail-divider"><span class="leaf">&#127777;</span> ~60 paces to the dry creek...</div>
+<div class="inst" id="inst-c4">
+  <div class="inst-header"><h3>Drought Progression</h3><span class="sys-name">The Slow Emergency</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c4" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Weeks Without Rain:</span><input type="range" id="c4-weeks" min="0" max="20" value="0"><span class="stat" id="c4-stat">Week 0 &middot; Soil moisture: 100%</span></div>
+  <div class="inst-teaching">Advance through rainless weeks. Soil dries from the top down. Shallow-rooted plants die first. Deep-rooted trees survive longer but eventually fail.<br><em>Drought does not announce itself. It arrives one dry week at a time until everything is brittle.</em></div>
+</div>
+
+<!-- 29. WILDFIRE SMOKE -->
+<div class="trail-divider"><span class="leaf">&#128293;</span> ~55 paces upwind...</div>
+<div class="inst" id="inst-c5">
+  <div class="inst-header"><h3>Wildfire Smoke</h3><span class="sys-name">The Orange Sky</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c5" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">PM2.5:</span><input type="range" id="c5-pm" min="0" max="500" value="12"><span class="stat" id="c5-stat">AQI: Good &middot; PM2.5: 12</span></div>
+  <div class="inst-teaching">Increase particulate levels. Watch the sky shift from blue to yellow to orange to red. At 300+ PM2.5, visibility drops and the sun turns blood-red.<br><em>When the sky turns orange, the forest is telling you it is on fire somewhere you cannot see.</em></div>
+</div>
+
+<!-- 30. TEMPERATURE GRADIENT -->
+<div class="trail-divider"><span class="leaf">&#127777;</span> ~70 paces from sea to summit...</div>
+<div class="inst" id="inst-c6">
+  <div class="inst-header"><h3>Temperature Gradient</h3><span class="sys-name">The Elevation Ladder</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c6" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Base Temp (&deg;C):</span><input type="range" id="c6-base" min="5" max="35" value="18"><span class="stat" id="c6-stat">Sea level: 18&deg;C &middot; Treeline: 5.5&deg;C &middot; Summit: -2&deg;C</span></div>
+  <div class="inst-teaching">Adjust the base temperature. Temperature drops 6.5 degrees per 1000m. Watch biome zones shift up or down the mountain as the base changes.<br><em>Climb 1,000 meters and you travel the same climate distance as driving 600 km north.</em></div>
+</div>
+
+<!-- 31. PRECIPITATION SHIFT -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~65 paces through changing weather...</div>
+<div class="inst" id="inst-c7">
+  <div class="inst-header"><h3>Precipitation Shift</h3><span class="sys-name">Rain to Snow to Rain</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c7" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Warming (&deg;C):</span><input type="range" id="c7-warm" min="0" max="5" value="0" step="0.5"><span class="stat" id="c7-stat">+0.0&deg;C &middot; Snow: 60% &middot; Rain: 40%</span></div>
+  <div class="inst-teaching">Add warming. Watch snow convert to rain at middle elevations. Total precipitation stays the same, but the form changes — and rivers feel the difference.<br><em>The same water falling as rain instead of snow arrives all at once instead of slowly. The river does not know the word gradual.</em></div>
+</div>
+
+<!-- 32. SEA LEVEL RISE -->
+<div class="trail-divider"><span class="leaf">&#127754;</span> ~95 paces to the lowest shore...</div>
+<div class="inst" id="inst-c8">
+  <div class="inst-header"><h3>Sea Level Rise</h3><span class="sys-name">The Slow Flood</span></div>
+  <div class="inst-canvas-wrap"><canvas id="c-c8" width="700" height="400"></canvas></div>
+  <div class="inst-controls"><span style="font-size:0.7rem;">Rise (m):</span><input type="range" id="c8-rise" min="0" max="3" value="0" step="0.1"><span class="stat" id="c8-stat">+0.0 m &middot; Coastline: Current</span></div>
+  <div class="inst-teaching">Raise sea level centimeter by centimeter. Watch low-lying areas flood, salt marshes migrate inland, and river mouths widen.<br><em>A meter of sea level rise does not move the ocean one meter inland. It moves it a kilometer.</em></div>
+</div>
+
+<div class="trail-footer">
+  The forest runs on systems. Systems run on time.<br>
+  Everything here is already happening. These are just the clocks that let you watch.
+</div>
+
+</div><!-- .trail -->
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   SHARED INFRASTRUCTURE — IntersectionObserver, canvas helpers
+   ═══════════════════════════════════════════════════════════════ */
+var frames={},inits={};
+function G(id){var c=document.getElementById(id);if(!c)return null;var ctx=c.getContext('2d');return{canvas:c,ctx:ctx,w:c.width,h:c.height}}
+function P(c,e){var r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*(c.width/r.width),y:(e.clientY-r.top)*(c.height/r.height)}}
+function reg(elId,initFn){inits[elId]=initFn}
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){
+  if(e.isIntersecting&&inits[e.target.id]){inits[e.target.id]();delete inits[e.target.id]}
+  if(!e.isIntersecting&&frames[e.target.id]){cancelAnimationFrame(frames[e.target.id]);delete frames[e.target.id]}
+})},{threshold:0.1});
+document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.inst').forEach(function(el){obs.observe(el)})});
+
+/* ═══ 1. RAIN TO RIVER TO OCEAN ═══ */
+reg('inst-w1',function(){
+  var g=G('c-w1'),ctx=g.ctx,w=g.w,h=g.h,drops=[],t=0;
+  var slope=20;document.getElementById('w1-slope').addEventListener('input',function(){slope=+this.value});
+  function mkDrop(){var x=100+Math.random()*400;return{x:x,y:20+Math.random()*40,vx:Math.cos(slope*Math.PI/180)*1.5,vy:1+Math.random(),phase:'rain',life:0}}
+  function terrain(x){var s=slope/45;return h-60-Math.max(0,(w/2-Math.abs(x-w/2))*s*0.8)+Math.sin(x*0.03)*15}
+  function draw(){t+=0.016;ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#0a2535';ctx.fillRect(0,h-50,w,50);
+    for(var x=0;x<w;x+=2){var ty=terrain(x);ctx.fillStyle='#1a2e1f';ctx.fillRect(x,ty,2,h-50-ty)}
+    for(var i=drops.length-1;i>=0;i--){var d=drops[i];d.life++;
+      if(d.phase==='rain'){d.y+=d.vy*2;d.vy+=0.1;var ty=terrain(d.x);if(d.y>=ty){d.phase='runoff';d.vy=1;d.vx=d.x<w/2?1.5:-1.5}}
+      else if(d.phase==='runoff'){d.x+=d.vx;d.y=terrain(d.x)-1;if(d.y>=h-52){d.phase='ocean';d.vy=0;d.vx=d.x<w/2?-0.3:0.3}}
+      else{d.x+=d.vx;d.y=h-50+Math.sin(t*2+d.x*0.05)*5+20;if(d.life>500)drops.splice(i,1)}
+      var c=d.phase==='rain'?'rgba(100,180,240,0.7)':d.phase==='runoff'?'rgba(80,160,200,0.8)':'rgba(60,120,180,0.4)';
+      ctx.beginPath();ctx.arc(d.x,d.y,d.phase==='ocean'?1.5:2,0,Math.PI*2);ctx.fillStyle=c;ctx.fill()}
+    document.getElementById('w1-stat').textContent='Drops: '+drops.length;
+    frames['inst-w1']=requestAnimationFrame(draw)}
+  document.getElementById('w1-rain').addEventListener('click',function(){for(var i=0;i<30;i++)drops.push(mkDrop())});
+  g.canvas.addEventListener('click',function(){for(var i=0;i<15;i++)drops.push(mkDrop())});
+  draw()
+});
+
+/* ═══ 2. GROUNDWATER FLOW ═══ */
+reg('inst-w2',function(){
+  var g=G('c-w2'),ctx=g.ctx,w=g.w,h=g.h,particles=[],perm=5;
+  document.getElementById('w2-perm').addEventListener('input',function(){perm=+this.value;
+    document.getElementById('w2-stat').textContent='Flow: '+(perm*0.48).toFixed(1)+' m/day'});
+  for(var i=0;i<60;i++)particles.push({x:50+Math.random()*100,y:120+Math.random()*250,vx:0,vy:0});
+  var layers=[{y:0,h:80,c:'#2a1e10',n:'Topsoil'},{y:80,h:80,c:'#3a2e18',n:'Sand'},{y:160,h:80,c:'#252520',n:'Gravel'},{y:240,h:80,c:'#1e1e28',n:'Clay'},{y:320,h:80,c:'#252530',n:'Bedrock'}];
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    for(var i=0;i<layers.length;i++){var l=layers[i];ctx.fillStyle=l.c;ctx.fillRect(0,l.y,w,l.h);
+      ctx.fillStyle='rgba(232,220,200,0.15)';ctx.font='10px Georgia';ctx.textAlign='right';ctx.fillText(l.n,w-15,l.y+l.h/2+4)}
+    for(var i=0;i<particles.length;i++){var p=particles[i];
+      var layerIdx=Math.floor(p.y/80);var lperm=layerIdx===3?0.2:layerIdx===4?0.05:layerIdx===2?2:layerIdx===1?1.2:0.8;
+      p.vx=perm*lperm*0.15;p.vy=Math.sin(p.x*0.01+p.y*0.02)*0.3*lperm;p.x+=p.vx;p.y+=p.vy;
+      if(p.x>w){p.x=50;p.y=120+Math.random()*250}if(p.y<80)p.y=80;if(p.y>390)p.y=390;
+      var a=lperm>1?0.7:lperm>0.5?0.5:0.2;
+      ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fillStyle='rgba(80,160,220,'+a+')';ctx.fill()}
+    ctx.strokeStyle='rgba(80,160,220,0.3)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(0,120);ctx.lineTo(w,100);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='rgba(80,160,220,0.2)';ctx.font='10px Georgia';ctx.textAlign='left';ctx.fillText('Water Table',10,95);
+    frames['inst-w2']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 3. TIDAL CYCLES ═══ */
+reg('inst-w3',function(){
+  var g=G('c-w3'),ctx=g.ctx,w=g.w,h=g.h,hour=0,playing=0;
+  function tideH(hr){return Math.cos(hr*Math.PI/6.21)*0.5+Math.cos(hr*Math.PI/12.42)*0.3}
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var tl=tideH(hour),waterY=h*0.5-tl*100;
+    ctx.fillStyle='#0a2535';ctx.fillRect(0,waterY,w,h-waterY);
+    for(var i=0;i<5;i++){ctx.beginPath();ctx.moveTo(0,waterY+5+i*8);
+      for(var x=0;x<w;x+=3)ctx.lineTo(x,waterY+5+i*8+Math.sin(hour*0.5+x*0.02+i)*3);
+      ctx.strokeStyle='rgba(80,140,180,'+(0.15-i*0.02)+')';ctx.lineWidth=1;ctx.stroke()}
+    ctx.fillStyle='#1a2e1f';ctx.beginPath();ctx.moveTo(0,h*0.3);ctx.lineTo(w*0.15,h*0.5);ctx.lineTo(w*0.3,h*0.45);ctx.lineTo(w*0.3,h);ctx.lineTo(0,h);ctx.fill();
+    ctx.fillStyle='#1a2e1f';ctx.beginPath();ctx.moveTo(w,h*0.35);ctx.lineTo(w*0.8,h*0.5);ctx.lineTo(w*0.7,h*0.48);ctx.lineTo(w*0.7,h);ctx.lineTo(w,h);ctx.fill();
+    var intertidal=waterY>h*0.45&&waterY<h*0.6;
+    if(intertidal){ctx.fillStyle='rgba(122,154,90,0.3)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('INTERTIDAL EXPOSED',w/2,waterY+20)}
+    var moonX=w*0.85,moonY=50,moonPhase=(hour%24)/24;
+    ctx.beginPath();ctx.arc(moonX,moonY,15,0,Math.PI*2);ctx.fillStyle='rgba(220,220,200,0.9)';ctx.fill();
+    ctx.beginPath();ctx.arc(moonX+10*Math.cos(moonPhase*Math.PI*2),moonY,15,0,Math.PI*2);ctx.fillStyle='#060d0a';ctx.fill();
+    var tn=tl>0.3?'High':tl<-0.3?'Low':'Mid',mn=Math.floor(hour/6)%4===0?'Full':Math.floor(hour/6)%4===2?'New':'Quarter';
+    document.getElementById('w3-stat').textContent='Hour '+Math.floor(hour)+' | '+tn+' Tide | Moon: '+mn;
+    if(playing){hour+=0.05;frames['inst-w3']=requestAnimationFrame(draw)}}
+  document.getElementById('w3-play').addEventListener('click',function(){playing=!playing;this.textContent=playing?'Pause':'Play';if(playing)draw()});
+  g.canvas.addEventListener('click',function(){hour+=1;draw()});
+  draw()
+});
+
+/* ═══ 4. WAVE EROSION ═══ */
+reg('inst-w4',function(){
+  var g=G('c-w4'),ctx=g.ctx,w=g.w,h=g.h,t=0,power=5,cliff=[];
+  for(var y=0;y<h;y++)cliff.push(w*0.6+(Math.random()-0.5)*20);
+  document.getElementById('w4-power').addEventListener('input',function(){power=+this.value});
+  var years=0,stacks=[];
+  function draw(){t+=0.02;
+    ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#0a2535';ctx.fillRect(0,h*0.55,w,h*0.45);
+    for(var i=0;i<3;i++){ctx.beginPath();ctx.moveTo(0,h*0.55+i*15);
+      for(var x=0;x<w;x+=3)ctx.lineTo(x,h*0.55+i*15+Math.sin(t*3+x*0.015+i)*5*power/5);
+      ctx.strokeStyle='rgba(80,140,180,'+(0.2-i*0.05)+')';ctx.lineWidth=1.5;ctx.stroke()}
+    for(var y=0;y<h;y++){if(cliff[y]<w){ctx.fillStyle=y<h*0.3?'#3a2e18':'#2a2420';ctx.fillRect(cliff[y],y,w-cliff[y],1)}}
+    for(var i=0;i<stacks.length;i++){var s=stacks[i];ctx.fillStyle='#2a2420';ctx.fillRect(s.x,s.y,s.w,h-s.y)}
+    if(t%0.1<0.025){years+=power*0.01;for(var y=Math.floor(h*0.4);y<h;y++){var erosion=power*0.02*(1+Math.random()*0.5);
+      if(y>h*0.55)erosion*=2;cliff[y]=Math.min(w-10,cliff[y]+erosion);
+      if(cliff[y]>w*0.85&&Math.random()<0.001&&stacks.length<5)stacks.push({x:cliff[y]-15,y:y-30,w:12})}}
+    var status=years<10?'Cliff intact':years<50?'Notch forming':years<200?'Retreat visible':'Sea stacks emerging';
+    document.getElementById('w4-stat').textContent='Years: '+Math.floor(years)+' | '+status;
+    frames['inst-w4']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 5. FLOOD DYNAMICS ═══ */
+reg('inst-w5',function(){
+  var g=G('c-w5'),ctx=g.ctx,w=g.w,h=g.h,rain=3,t=0;
+  document.getElementById('w5-rain').addEventListener('input',function(){rain=+this.value;
+    var st=rain<4?'Normal':rain<7?'High':rain<9?'Flood':'Catastrophic';
+    document.getElementById('w5-stat').textContent='Stage: '+st+' | '+(1.2+rain*0.4).toFixed(1)+'m'});
+  function draw(){t+=0.02;ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var baseY=h*0.7,level=rain*8;
+    ctx.fillStyle='#1a2e1f';ctx.beginPath();ctx.moveTo(0,baseY-40);ctx.lineTo(w*0.2,baseY);ctx.lineTo(w*0.8,baseY);ctx.lineTo(w,baseY-30);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
+    var waterY=baseY-level;ctx.fillStyle='rgba(60,120,180,0.5)';ctx.fillRect(w*0.2,waterY,w*0.6,baseY-waterY);
+    if(rain>5){var spread=(rain-5)*15;ctx.fillStyle='rgba(60,120,180,0.25)';ctx.fillRect(w*0.2-spread,waterY+10,spread,baseY-waterY-10);ctx.fillRect(w*0.8,waterY+10,spread,baseY-waterY-10)}
+    for(var i=0;i<8;i++){var tx=w*0.1+i*w*0.1;ctx.fillStyle='#2a4a2a';ctx.fillRect(tx,baseY-30-Math.random()*10,4,30)}
+    for(var x=w*0.25;x<w*0.75;x+=4){ctx.beginPath();ctx.moveTo(x,waterY);for(var dx=0;dx<4;dx++)ctx.lineTo(x+dx,waterY+Math.sin(t*3+x*0.05)*2);ctx.strokeStyle='rgba(100,180,220,0.3)';ctx.stroke()}
+    frames['inst-w5']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 6. SNOWMELT TIMING ═══ */
+reg('inst-w6',function(){
+  var g=G('c-w6'),ctx=g.ctx,w=g.w,h=g.h,temp=2;
+  document.getElementById('w6-temp').addEventListener('input',function(){temp=+this.value;
+    var snow=Math.max(0,Math.min(100,100-temp*5)),stream=temp>0?Math.min(100,temp*8):5;
+    document.getElementById('w6-stat').textContent='Snowpack: '+Math.round(snow)+'% | Stream: '+(stream<30?'Low':stream<60?'Medium':'High')});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var snow=Math.max(0,100-temp*5)/100,mtnPeak=60;
+    ctx.fillStyle='#1e2e25';ctx.beginPath();ctx.moveTo(0,h);ctx.lineTo(w*0.1,h*0.7);ctx.lineTo(w*0.3,mtnPeak);ctx.lineTo(w*0.5,h*0.4);ctx.lineTo(w*0.7,mtnPeak+20);ctx.lineTo(w*0.9,h*0.6);ctx.lineTo(w,h);ctx.fill();
+    if(snow>0){var snowLine=mtnPeak+(1-snow)*200;ctx.fillStyle='rgba(220,230,240,'+(0.5+snow*0.4)+')';ctx.beginPath();ctx.moveTo(w*0.15,snowLine);ctx.lineTo(w*0.3,mtnPeak);ctx.lineTo(w*0.5,mtnPeak+20);ctx.lineTo(w*0.65,snowLine+10);ctx.fill()}
+    var streamH=temp>0?Math.min(60,temp*4):3;
+    ctx.fillStyle='rgba(60,120,180,0.5)';ctx.fillRect(w*0.4,h-40,w*0.5,streamH);
+    ctx.fillStyle='rgba(232,220,200,0.2)';ctx.font='10px Georgia';ctx.textAlign='center';
+    ctx.fillText(temp+'°C',w/2,h-50);ctx.fillText('Snowline',w*0.35,mtnPeak+(1-snow)*200-10);
+    frames['inst-w6']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 7. ESTUARY MIXING ═══ */
+reg('inst-w7',function(){
+  var g=G('c-w7'),ctx=g.ctx,w=g.w,h=g.h,flow=5,tide=5,t=0,particles=[];
+  for(var i=0;i<80;i++)particles.push({x:Math.random()*w,y:h*0.3+Math.random()*h*0.5,salt:Math.random()>0.5});
+  document.getElementById('w7-flow').addEventListener('input',function(){flow=+this.value;upd()});
+  document.getElementById('w7-tide').addEventListener('input',function(){tide=+this.value;upd()});
+  function upd(){var s=Math.round(5+tide*1.3-flow*0.8);document.getElementById('w7-stat').textContent='Salinity: '+s+' ppt'}
+  function draw(){t+=0.02;ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var wedgeX=w*0.3+flow*20-tide*15;
+    ctx.fillStyle='rgba(60,120,180,0.2)';ctx.fillRect(0,h*0.3,w,h*0.55);
+    ctx.fillStyle='rgba(40,80,130,0.3)';ctx.beginPath();ctx.moveTo(w,h*0.5);ctx.lineTo(wedgeX,h*0.85);ctx.lineTo(w,h*0.85);ctx.fill();
+    for(var i=0;i<particles.length;i++){var p=particles[i];
+      p.x+=p.salt?(tide-flow)*0.3-0.5:(flow-tide)*0.3+0.5;p.x+=Math.sin(t+i)*0.3;
+      if(p.x>w)p.x=0;if(p.x<0)p.x=w;
+      ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fillStyle=p.salt?'rgba(40,80,150,0.6)':'rgba(100,180,220,0.6)';ctx.fill()}
+    ctx.fillStyle='rgba(232,220,200,0.2)';ctx.font='10px Georgia';ctx.textAlign='center';
+    ctx.fillText('RIVER (fresh)',100,h*0.25);ctx.fillText('OCEAN (salt)',w-100,h*0.25);ctx.fillText('Salt Wedge',wedgeX+50,h*0.75);
+    frames['inst-w7']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 8. WATERSHED HEALTH ═══ */
+reg('inst-w8',function(){
+  var g=G('c-w8'),ctx=g.ctx,w=g.w,h=g.h,logged=0,trees=[];
+  for(var i=0;i<40;i++)trees.push({x:50+Math.random()*(w-100),y:80+Math.random()*200,alive:1,h:20+Math.random()*30});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#1a2e1f';ctx.beginPath();ctx.moveTo(0,h*0.4);ctx.lineTo(w*0.3,h*0.25);ctx.lineTo(w*0.6,h*0.35);ctx.lineTo(w,h*0.3);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
+    var alive=0;for(var i=0;i<trees.length;i++){var t=trees[i];if(!t.alive)continue;alive++;
+      ctx.fillStyle='#2a5a2a';ctx.beginPath();ctx.arc(t.x,t.y-t.h,8,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#3a2e18';ctx.fillRect(t.x-1.5,t.y-t.h,3,t.h)}
+    ctx.fillStyle='rgba(60,120,180,0.4)';ctx.fillRect(w*0.35,h*0.7,w*0.3,15+logged*2);
+    var health=Math.round((alive/40)*100);var st=health>80?'Pristine':health>50?'Degraded':'Critical';
+    document.getElementById('w8-stat').textContent='Health: '+health+'% | '+st}
+  document.getElementById('w8-log').addEventListener('click',function(){var count=0;for(var i=0;i<trees.length&&count<5;i++){if(trees[i].alive){trees[i].alive=0;count++}}logged+=count;draw()});
+  document.getElementById('w8-restore').addEventListener('click',function(){for(var i=0;i<trees.length;i++)trees[i].alive=1;logged=0;draw()});
+  draw()
+});
+
+/* ═══ 9. SEED GERMINATION ═══ */
+reg('inst-f1',function(){
+  var g=G('c-f1'),ctx=g.ctx,w=g.w,h=g.h,seeds=[];
+  for(var i=0;i<20;i++)seeds.push({x:50+Math.random()*(w-100),y:h*0.6+Math.random()*80,mThresh:2+Math.random()*6,lThresh:2+Math.random()*6,germ:0,sprout:0});
+  var moist=5,light=5;
+  document.getElementById('f1-moist').addEventListener('input',function(){moist=+this.value;upd()});
+  document.getElementById('f1-light').addEventListener('input',function(){light=+this.value;upd()});
+  function upd(){var g=0;for(var i=0;i<seeds.length;i++){if(moist>=seeds[i].mThresh&&light>=seeds[i].lThresh){seeds[i].germ=1;seeds[i].sprout=Math.min(30,seeds[i].sprout+1);g++}else{seeds[i].germ=0;seeds[i].sprout=Math.max(0,seeds[i].sprout-0.5)}}
+    document.getElementById('f1-stat').textContent='Seeds: 20 | Germinated: '+g;draw()}
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='rgba(200,180,100,'+(light/15)+')';ctx.fillRect(0,0,w,h*0.3);
+    ctx.fillStyle='#1e2a18';ctx.fillRect(0,h*0.55,w,h*0.45);
+    ctx.fillStyle='rgba(60,120,180,'+(moist/20)+')';ctx.fillRect(0,h*0.85,w,h*0.15);
+    for(var i=0;i<seeds.length;i++){var s=seeds[i];
+      ctx.beginPath();ctx.arc(s.x,s.y,3,0,Math.PI*2);ctx.fillStyle=s.germ?'#7a9a5a':'#5a4a3a';ctx.fill();
+      if(s.sprout>0){ctx.strokeStyle='#5a8a3a';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x,s.y-s.sprout);ctx.stroke();
+        if(s.sprout>10){ctx.fillStyle='#7aaa5a';ctx.beginPath();ctx.arc(s.x-3,s.y-s.sprout,3,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(s.x+3,s.y-s.sprout,3,0,Math.PI*2);ctx.fill()}}}}
+  draw()
+});
+
+/* ═══ 10. CANOPY LIGHT COMPETITION ═══ */
+reg('inst-f2',function(){
+  var g=G('c-f2'),ctx=g.ctx,w=g.w,h=g.h,trees=[],year=0,playing=0;
+  for(var i=0;i<15;i++)trees.push({x:40+i*45,ht:10+Math.random()*5,rate:0.5+Math.random()*1.5,shade:Math.random()>0.5,c:Math.random()>0.5?'#2a5a2a':'#3a6a2a'});
+  function step(){year++;for(var i=0;i<trees.length;i++){var t=trees[i];var blocked=0;
+    for(var j=0;j<trees.length;j++){if(j!==i&&Math.abs(trees[j].x-t.x)<40&&trees[j].ht>t.ht)blocked++}
+    var growth=t.rate*(blocked===0?1:t.shade?0.4:0.1);t.ht=Math.min(300,t.ht+growth)}}
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-30,w,30);
+    for(var i=0;i<trees.length;i++){var t=trees[i];var ty=h-30-t.ht;
+      ctx.fillStyle='#3a2e18';ctx.fillRect(t.x-2,ty+t.ht*0.3,4,t.ht*0.7);
+      ctx.fillStyle=t.c;ctx.beginPath();ctx.arc(t.x,ty+t.ht*0.15,8+t.ht*0.04,0,Math.PI*2);ctx.fill()}
+    document.getElementById('f2-stat').textContent='Year '+year+' | Tallest: '+Math.round(trees.reduce(function(m,t){return Math.max(m,t.ht)},0))+'m'}
+  document.getElementById('f2-play').addEventListener('click',function(){playing=!playing;
+    if(playing){(function run(){if(!playing)return;step();draw();setTimeout(run,80)})()}});
+  draw()
+});
+
+/* ═══ 11. ROOT GROWTH ═══ */
+reg('inst-f3',function(){
+  var g=G('c-f3'),ctx=g.ctx,w=g.w,h=g.h,waterTbl=6,roots=[];
+  for(var i=0;i<5;i++){var bx=100+i*130;roots.push({x:bx,segs:[{x:bx,y:60}]})}
+  document.getElementById('f3-water').addEventListener('input',function(){waterTbl=+this.value;grow();draw()});
+  function grow(){var wY=60+waterTbl*30;for(var i=0;i<roots.length;i++){var r=roots[i];
+    if(r.segs.length<30){var last=r.segs[r.segs.length-1];var dy=last.y<wY?5:1;var dx=(Math.random()-0.5)*15;
+      r.segs.push({x:last.x+dx,y:last.y+dy})}
+    document.getElementById('f3-stat').textContent='Root depth: '+(wY/100).toFixed(1)+'m | Mycorrhizal links: '+Math.min(roots.length-1,Math.floor(waterTbl/3))}}
+  function draw(){ctx.fillStyle='#1a1510';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#0d1a12';ctx.fillRect(0,0,w,60);
+    var wY=60+waterTbl*30;ctx.fillStyle='rgba(60,120,180,0.1)';ctx.fillRect(0,wY,w,h-wY);
+    ctx.strokeStyle='rgba(60,120,180,0.3)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(0,wY);ctx.lineTo(w,wY);ctx.stroke();ctx.setLineDash([]);
+    for(var i=0;i<roots.length;i++){var r=roots[i];
+      ctx.fillStyle='#2a5a2a';ctx.fillRect(r.x-3,20,6,40);ctx.beginPath();ctx.arc(r.x,15,10,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle='rgba(160,120,80,0.5)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(r.segs[0].x,r.segs[0].y);
+      for(var j=1;j<r.segs.length;j++)ctx.lineTo(r.segs[j].x,r.segs[j].y);ctx.stroke();
+      if(waterTbl>3&&i<roots.length-1){var nr=roots[i+1];ctx.strokeStyle='rgba(200,160,80,0.2)';ctx.lineWidth=1;ctx.beginPath();
+        ctx.moveTo(r.segs[Math.min(5,r.segs.length-1)].x,r.segs[Math.min(5,r.segs.length-1)].y);
+        ctx.lineTo(nr.segs[Math.min(5,nr.segs.length-1)].x,nr.segs[Math.min(5,nr.segs.length-1)].y);ctx.stroke()}}}
+  for(var i=0;i<15;i++)grow();draw()
+});
+
+/* ═══ 12. FIRE SPREAD ═══ */
+reg('inst-f4',function(){
+  var g=G('c-f4'),ctx=g.ctx,w=g.w,h=g.h,fuel=5,wind=3,cells=[];
+  var cols=35,rows=20;for(var r=0;r<rows;r++){cells[r]=[];for(var c=0;c<cols;c++)cells[r][c]={state:'tree',fuel:0.5+Math.random()*0.5}}
+  for(var r=0;r<rows;r++){cells[r][0].state='empty';cells[r][cols-1].state='empty'}
+  document.getElementById('f4-fuel').addEventListener('input',function(){fuel=+this.value});
+  document.getElementById('f4-wind').addEventListener('input',function(){wind=+this.value});
+  function ignite(cr,cc){if(cr>=0&&cr<rows&&cc>=0&&cc<cols&&cells[cr][cc].state==='tree'){cells[cr][cc].state='fire';cells[cr][cc].timer=10}}
+  g.canvas.addEventListener('click',function(e){var p=P(g.canvas,e);var cc=Math.floor(p.x/(w/cols)),cr=Math.floor(p.y/(h/rows));ignite(cr,cc);
+    document.getElementById('f4-stat').textContent='Fire spreading...'});
+  function step(){for(var r=0;r<rows;r++)for(var c=0;c<cols;c++){var cell=cells[r][c];
+    if(cell.state==='fire'){cell.timer--;if(cell.timer<=0){cell.state='burned'}
+      var spread=fuel*0.06*cell.fuel;if(Math.random()<spread)ignite(r-1,c);if(Math.random()<spread)ignite(r+1,c);
+      if(Math.random()<spread+wind*0.02)ignite(r,c+1);if(Math.random()<spread*0.5)ignite(r,c-1)}}}
+  function draw(){step();ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var cw=w/cols,ch=h/rows;for(var r=0;r<rows;r++)for(var c=0;c<cols;c++){var cell=cells[r][c];
+      var color=cell.state==='tree'?'#1e3a1e':cell.state==='fire'?'#c75b3a':cell.state==='burned'?'#2a1a10':'#0a0a0a';
+      ctx.fillStyle=color;ctx.fillRect(c*cw+1,r*ch+1,cw-2,ch-2)}
+    frames['inst-f4']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 13. WIND DAMAGE ═══ */
+reg('inst-f5',function(){
+  var g=G('c-f5'),ctx=g.ctx,w=g.w,h=g.h,windSpd=40,trees=[];
+  for(var i=0;i<20;i++)trees.push({x:30+i*33,ht:60+Math.random()*100,rootDepth:0.3+Math.random()*0.7,lean:0,fallen:0});
+  document.getElementById('f5-wind').addEventListener('input',function(){windSpd=+this.value;
+    for(var i=0;i<trees.length;i++){var t=trees[i];if(!t.fallen){
+      var force=windSpd*windSpd*0.001*t.ht/100;var resist=t.rootDepth*2;
+      t.lean=Math.min(80,force/resist*20);if(t.lean>60){t.fallen=1;t.lean=85}}}
+    var standing=trees.filter(function(t){return!t.fallen}).length;
+    document.getElementById('f5-stat').textContent=windSpd+' km/h | '+standing+' standing';draw()});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-30,w,30);
+    for(var i=0;i<trees.length;i++){var t=trees[i];ctx.save();ctx.translate(t.x,h-30);ctx.rotate(t.lean*Math.PI/180);
+      ctx.fillStyle=t.fallen?'#3a2e18':'#2a4a1e';ctx.fillRect(-3,-t.ht,6,t.ht);
+      ctx.fillStyle=t.fallen?'#4a3a2a':'#2a5a2a';ctx.beginPath();ctx.arc(0,-t.ht,10+t.ht*0.04,0,Math.PI*2);ctx.fill();ctx.restore()}}
+  draw()
+});
+
+/* ═══ 14. INSECT OUTBREAK ═══ */
+reg('inst-f6',function(){
+  var g=G('c-f6'),ctx=g.ctx,w=g.w,h=g.h,drought=3,trees=[],running=0;
+  for(var i=0;i<40;i++)trees.push({x:15+i*17,y:h-40,ht:50+Math.random()*60,hp:1,infested:0});
+  document.getElementById('f6-drought').addEventListener('input',function(){drought=+this.value});
+  function step(){for(var i=0;i<trees.length;i++){var t=trees[i];if(t.infested&&t.hp>0){t.hp-=0.01;
+    if(Math.random()<0.05*drought/5){var ni=Math.min(39,Math.max(0,i+(Math.random()>0.5?1:-1)));
+      if(!trees[ni].infested&&trees[ni].hp>drought*0.08){}else{trees[ni].infested=1}}}}}
+  function draw(){if(running)step();ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-30,w,30);
+    var inf=0;for(var i=0;i<trees.length;i++){var t=trees[i];if(t.infested)inf++;
+      var green=t.hp>0.5?'#2a5a2a':t.hp>0.2?'#5a4a2a':'#4a2a1a';
+      ctx.fillStyle='#3a2e18';ctx.fillRect(t.x-1.5,t.y-t.ht,3,t.ht);
+      ctx.fillStyle=green;ctx.beginPath();ctx.arc(t.x,t.y-t.ht,6,0,Math.PI*2);ctx.fill();
+      if(t.infested){ctx.fillStyle='rgba(200,50,50,0.4)';ctx.beginPath();ctx.arc(t.x,t.y-t.ht-8,3,0,Math.PI*2);ctx.fill()}}
+    document.getElementById('f6-stat').textContent='Trees: 40 | Infested: '+inf;
+    if(running)frames['inst-f6']=requestAnimationFrame(draw)}
+  document.getElementById('f6-play').addEventListener('click',function(){
+    trees[20].infested=1;running=!running;if(running)draw()});
+  draw()
+});
+
+/* ═══ 15. FUNGAL SPREAD ═══ */
+reg('inst-f7',function(){
+  var g=G('c-f7'),ctx=g.ctx,w=g.w,h=g.h,playing=0,hyphae=[],trees=[];
+  for(var i=0;i<12;i++)trees.push({x:60+i*55,y:h*0.4,connected:0});
+  hyphae.push({x:trees[0].x,y:trees[0].y+50,vx:1,vy:0});trees[0].connected=1;
+  function step(){for(var i=0;i<hyphae.length;i++){var hy=hyphae[i];
+    hy.x+=hy.vx+Math.random()*2-1;hy.y+=hy.vy+Math.random()*2-1;
+    hy.x=Math.max(10,Math.min(w-10,hy.x));hy.y=Math.max(h*0.4,Math.min(h-20,hy.y));
+    for(var j=0;j<trees.length;j++){if(!trees[j].connected){var dx=hy.x-trees[j].x,dy=hy.y-(trees[j].y+50);
+      if(dx*dx+dy*dy<400){trees[j].connected=1;hyphae.push({x:trees[j].x,y:trees[j].y+50,vx:Math.random()*2-1,vy:Math.random()*2-1})}}}
+    if(Math.random()<0.02&&hyphae.length<100)hyphae.push({x:hy.x,y:hy.y,vx:Math.random()*2-1,vy:Math.random()*2-1})}}
+  function draw(){if(playing)step();ctx.fillStyle='#1a1510';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#0d1a12';ctx.fillRect(0,0,w,h*0.35);
+    for(var i=0;i<hyphae.length;i++){var hy=hyphae[i];ctx.beginPath();ctx.arc(hy.x,hy.y,1.5,0,Math.PI*2);ctx.fillStyle='rgba(200,180,100,0.4)';ctx.fill()}
+    var conn=0;for(var i=0;i<trees.length;i++){var t=trees[i];if(t.connected)conn++;
+      ctx.fillStyle=t.connected?'#2a5a2a':'#1e3a1e';ctx.fillRect(t.x-2,t.y-30,4,30);ctx.beginPath();ctx.arc(t.x,t.y-35,8,0,Math.PI*2);ctx.fill();
+      if(t.connected){ctx.fillStyle='rgba(200,160,80,0.3)';ctx.beginPath();ctx.arc(t.x,t.y+50,5,0,Math.PI*2);ctx.fill()}}
+    var pct=Math.round(hyphae.length/100*100);
+    document.getElementById('f7-stat').textContent='Mycelium: '+Math.min(100,pct)+'% | Trees connected: '+conn+'/12';
+    if(playing)frames['inst-f7']=requestAnimationFrame(draw)}
+  document.getElementById('f7-play').addEventListener('click',function(){playing=!playing;if(playing)draw()});
+  draw()
+});
+
+/* ═══ 16. NURSE LOG SUCCESSION ═══ */
+reg('inst-f8',function(){
+  var g=G('c-f8'),ctx=g.ctx,w=g.w,h=g.h,year=0,playing=0;
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-30,w,30);
+    var logY=h-70,logW=w*0.7,logX=(w-logW)/2,decay=Math.min(1,year/400);
+    var logH=30*(1-decay*0.8);ctx.fillStyle='rgb('+(60+decay*40)+','+(40+decay*10)+','+(20)+')';
+    ctx.fillRect(logX,logY-logH/2,logW,logH);
+    if(year>20){var mossA=Math.min(1,(year-20)/50);ctx.fillStyle='rgba(80,140,60,'+mossA*0.5+')';ctx.fillRect(logX,logY-logH/2-3,logW,6)}
+    if(year>50){var n=Math.min(6,Math.floor((year-50)/50));for(var i=0;i<n;i++){var tx=logX+40+i*(logW-80)/6,tht=Math.min(120,(year-50-i*40)*0.8);
+      ctx.fillStyle='#3a2e18';ctx.fillRect(tx-1.5,logY-logH/2-tht,3,tht);
+      ctx.fillStyle='#2a5a2a';ctx.beginPath();ctx.arc(tx,logY-logH/2-tht-5,5+tht*0.03,0,Math.PI*2);ctx.fill();
+      if(year>300){ctx.strokeStyle='rgba(120,90,60,0.3)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(tx,logY);ctx.lineTo(tx,logY+15);ctx.stroke()}}}
+    var stage=year<20?'Fresh fallen':year<80?'Moss colonizing':year<200?'Seedlings establishing':year<350?'Young trees growing':'Colonnade on stilt roots';
+    document.getElementById('f8-stat').textContent='Year '+Math.round(year)+' | '+stage;
+    if(playing){year+=0.5;if(year>400)year=400;frames['inst-f8']=requestAnimationFrame(draw)}}
+  document.getElementById('f8-play').addEventListener('click',function(){year=0;playing=!playing;if(playing)draw()});
+  draw()
+});
+
+/* ═══ 17. TERRITORY MAPPING ═══ */
+reg('inst-a1',function(){
+  var g=G('c-a1'),ctx=g.ctx,w=g.w,h=g.h;
+  var packs=[{x:200,y:150,c:'#c07030'},{x:450,y:200,c:'#5a7a9a'},{x:350,y:350,c:'#7a9a5a'}];
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    for(var px=0;px<w;px+=4)for(var py=0;py<h;py+=4){var minD=Infinity,minI=0;
+      for(var i=0;i<packs.length;i++){var dx=px-packs[i].x,dy=py-packs[i].y,d=dx*dx+dy*dy;if(d<minD){minD=d;minI=i}}
+      ctx.fillStyle=packs[minI].c+'15';ctx.fillRect(px,py,4,4)}
+    for(var px=0;px<w;px+=2)for(var py=0;py<h;py+=2){var dists=[];
+      for(var i=0;i<packs.length;i++){var dx=px-packs[i].x,dy=py-packs[i].y;dists.push(Math.sqrt(dx*dx+dy*dy))}
+      dists.sort(function(a,b){return a-b});if(Math.abs(dists[0]-dists[1])<8){ctx.fillStyle='rgba(232,220,200,0.15)';ctx.fillRect(px,py,2,2)}}
+    for(var i=0;i<packs.length;i++){var p=packs[i];ctx.beginPath();ctx.arc(p.x,p.y,8,0,Math.PI*2);ctx.fillStyle=p.c;ctx.fill();
+      ctx.fillStyle='rgba(232,220,200,0.5)';ctx.font='10px Georgia';ctx.textAlign='center';ctx.fillText('Pack '+(i+1),p.x,p.y-14)}
+    document.getElementById('a1-stat').textContent='Packs: '+packs.length+' | Voronoi cells: '+packs.length}
+  document.getElementById('a1-add').addEventListener('click',function(){if(packs.length<8){
+    var colors=['#c8a040','#8a3a5a','#9a8a6a','#5a5a8a','#8a6a3a'];
+    packs.push({x:50+Math.random()*(w-100),y:50+Math.random()*(h-100),c:colors[packs.length%5]});draw()}});
+  g.canvas.addEventListener('click',function(e){var p=P(g.canvas,e);if(packs.length<8){
+    packs.push({x:p.x,y:p.y,c:'#'+Math.floor(Math.random()*0x808080+0x404040).toString(16)});draw()}});
+  draw()
+});
+
+/* ═══ 18. MIGRATION TIMING ═══ */
+reg('inst-a2',function(){
+  var g=G('c-a2'),ctx=g.ctx,w=g.w,h=g.h,month=3;
+  var species=[{n:'Rufous Hummingbird',north:[3,4],south:[8,9],c:'#c75b3a'},{n:'Barn Swallow',north:[3,4,5],south:[9,10],c:'#5a7a9a'},
+    {n:'Western Tanager',north:[4,5],south:[8,9],c:'#c8a040'},{n:'Swainson\'s Thrush',north:[4,5,6],south:[9,10],c:'#7a9a5a'},
+    {n:'Gray Whale',north:[2,3,4],south:[10,11,12],c:'#8a8a8a'},{n:'Chinook Salmon',north:[5,6,7],south:[],c:'#c07030'}];
+  document.getElementById('a2-month').addEventListener('input',function(){month=+this.value;draw()});
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#0f1e15';ctx.fillRect(w*0.6,0,w*0.4,h);
+    ctx.fillStyle='rgba(80,140,200,0.05)';ctx.fillRect(0,0,w*0.6,h);
+    ctx.fillStyle='rgba(232,220,200,0.15)';ctx.font='10px Georgia';ctx.textAlign='center';
+    ctx.fillText('PACIFIC',w*0.3,20);ctx.fillText('COASTLINE',w*0.58,20);ctx.fillText('INLAND',w*0.8,20);
+    ctx.fillText('N',w*0.3,h-10);ctx.fillText('S',w*0.3,h*0.9);
+    var active=[];for(var i=0;i<species.length;i++){var s=species[i],northbound=s.north.indexOf(month)>=0,southbound=s.south.indexOf(month)>=0;
+      var y=40+i*60;ctx.fillStyle=s.c;ctx.font='11px Georgia';ctx.textAlign='left';ctx.fillText(s.n,w*0.62,y);
+      if(northbound||southbound){active.push(s.n);ctx.fillStyle=s.c;
+        for(var d=0;d<5;d++){var dx=w*0.45+Math.random()*80,dy=northbound?y+30-d*10:y-10+d*10;
+          ctx.beginPath();ctx.arc(dx,dy,3,0,Math.PI*2);ctx.fill()}
+        ctx.fillStyle=s.c+'80';ctx.font='9px Georgia';ctx.fillText(northbound?'Northbound':'Southbound',w*0.62,y+14)}
+      else{ctx.fillStyle='rgba(232,220,200,0.2)';ctx.font='9px Georgia';ctx.fillText('Resident / absent',w*0.62,y+14)}}
+    var dir=month>=2&&month<=6?'Northbound':month>=8&&month<=11?'Southbound':'Transitional';
+    document.getElementById('a2-stat').textContent=months[month-1]+' | '+dir+': '+(active.length?active.join(', '):'quiet')}
+  draw()
+});
+
+/* ═══ 19. PREDATOR-PREY PURSUIT ═══ */
+reg('inst-a3',function(){
+  var g=G('c-a3'),ctx=g.ctx,w=g.w,h=g.h,wolf=null,elk=null,chasing=0;
+  var wolfSpd=55,elkSpd=60;
+  document.getElementById('a3-wolf').addEventListener('input',function(){wolfSpd=+this.value});
+  document.getElementById('a3-elk').addEventListener('input',function(){elkSpd=+this.value});
+  g.canvas.addEventListener('click',function(e){var p=P(g.canvas,e);wolf={x:50,y:h/2,stamina:100};elk={x:p.x,y:p.y,stamina:80};chasing=1;draw()});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-20,w,20);
+    if(chasing&&wolf&&elk){var dx=elk.x-wolf.x,dy=elk.y-wolf.y,dist=Math.sqrt(dx*dx+dy*dy);
+      wolf.x+=dx/dist*wolfSpd*0.04;wolf.y+=dy/dist*wolfSpd*0.04;wolf.stamina-=0.15;
+      elk.x+=(dx/dist)*elkSpd*0.04+Math.sin(elk.x*0.05)*3;elk.y+=(dy/dist)*elkSpd*0.02;elk.stamina-=0.2;
+      elk.x=Math.max(20,Math.min(w-20,elk.x));elk.y=Math.max(20,Math.min(h-30,elk.y));
+      if(dist<15){chasing=0;document.getElementById('a3-stat').textContent='Caught! Wolf stamina: '+Math.round(wolf.stamina)+'%'}
+      else if(wolf.stamina<=0){chasing=0;document.getElementById('a3-stat').textContent='Wolf exhausted. Elk escapes.'}
+      else if(elk.x>w-25||elk.stamina<=0){chasing=0;document.getElementById('a3-stat').textContent=elk.stamina<=0?'Elk exhausted. Caught.':'Elk escaped!'}}
+    if(wolf){ctx.fillStyle='#8a8a8a';ctx.beginPath();ctx.arc(wolf.x,wolf.y,6,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(232,220,200,0.4)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('Wolf',wolf.x,wolf.y-10)}
+    if(elk){ctx.fillStyle='#c8a040';ctx.beginPath();ctx.arc(elk.x,elk.y,7,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(232,220,200,0.4)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('Elk',elk.x,elk.y-12)}
+    if(chasing)frames['inst-a3']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 20. MATING DISPLAY ═══ */
+reg('inst-a4',function(){
+  var g=G('c-a4'),ctx=g.ctx,w=g.w,h=g.h,males=[],females=[],playing=0,t=0;
+  for(var i=0;i<8;i++)males.push({x:80+i*75,y:h*0.6,display:0.3+Math.random()*0.7,score:0,phase:0});
+  function draw(){t+=0.03;ctx.fillStyle='#0d0d08';ctx.fillRect(0,0,w,h);ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-20,w,20);
+    ctx.fillStyle='rgba(232,220,200,0.1)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('THE LEK',w/2,25);
+    for(var i=0;i<males.length;i++){var m=males[i];var pulse=Math.sin(t*3+i)*0.3*m.display;
+      var r=8+m.display*8+pulse*3;ctx.fillStyle='rgba(100,80,40,'+(0.3+m.display*0.4)+')';
+      ctx.beginPath();ctx.arc(m.x,m.y,r+10,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#8a6a3a';ctx.beginPath();ctx.arc(m.x,m.y,5,0,Math.PI*2);ctx.fill();
+      if(playing&&m.display>0.5){ctx.strokeStyle='rgba(200,160,60,'+(m.display*0.4)+')';ctx.lineWidth=1;
+        for(var f=0;f<3;f++){ctx.beginPath();ctx.arc(m.x,m.y,r+15+f*8+pulse*5,0,Math.PI*2);ctx.stroke()}}
+      ctx.fillStyle='rgba(232,220,200,0.3)';ctx.font='9px Georgia';ctx.fillText(Math.round(m.display*100)+'%',m.x,m.y+25)}
+    for(var i=0;i<females.length;i++){var f=females[i];ctx.fillStyle='#6a5a4a';ctx.beginPath();ctx.arc(f.x,f.y,4,0,Math.PI*2);ctx.fill()}
+    document.getElementById('a4-stat').textContent='Males: '+males.length+' | Females watching: '+females.length;
+    if(playing)frames['inst-a4']=requestAnimationFrame(draw)}
+  document.getElementById('a4-play').addEventListener('click',function(){playing=!playing;
+    if(playing){females=[];for(var i=0;i<6;i++)females.push({x:100+Math.random()*(w-200),y:h*0.3+Math.random()*60});draw()}});
+  draw()
+});
+
+/* ═══ 21. NEST BUILDING ═══ */
+reg('inst-a5',function(){
+  var g=G('c-a5'),ctx=g.ctx,w=g.w,h=g.h,sticks=[],year=1,mass=12;
+  for(var i=0;i<48;i++)sticks.push({x:w/2-40+Math.random()*80,y:h*0.45+Math.random()*20,a:Math.random()*Math.PI,l:10+Math.random()*15});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#3a2e18';ctx.fillRect(w/2-4,h*0.2,8,h*0.8);
+    ctx.fillStyle='#2a4a1e';ctx.beginPath();ctx.arc(w/2-25,h*0.2,15,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(w/2+25,h*0.22,12,0,Math.PI*2);ctx.fill();
+    for(var i=0;i<sticks.length;i++){var s=sticks[i];ctx.save();ctx.translate(s.x,s.y);ctx.rotate(s.a);
+      ctx.strokeStyle='#5a4a30';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-s.l/2,0);ctx.lineTo(s.l/2,0);ctx.stroke();ctx.restore()}
+    document.getElementById('a5-stat').textContent='Year '+year+' | Mass: '+mass+' kg | Sticks: '+sticks.length}
+  document.getElementById('a5-add').addEventListener('click',function(){year++;mass+=Math.round(15+Math.random()*10);
+    var baseY=h*0.45-sticks.length*0.1;for(var i=0;i<20;i++)sticks.push({x:w/2-45+Math.random()*90,y:baseY+Math.random()*15,a:Math.random()*Math.PI,l:10+Math.random()*15});draw()});
+  draw()
+});
+
+/* ═══ 22. HIBERNATION PREP ═══ */
+reg('inst-a6',function(){
+  var g=G('c-a6'),ctx=g.ctx,w=g.w,h=g.h,salmon=7,berry=6;
+  document.getElementById('a6-salmon').addEventListener('input',function(){salmon=+this.value;upd()});
+  document.getElementById('a6-berry').addEventListener('input',function(){berry=+this.value;upd()});
+  function upd(){var fat=Math.round((salmon*2+berry*1.5));
+    document.getElementById('a6-stat').textContent='Fat reserve: '+fat+'% | Need: 30% | '+(fat>=30?'Ready to den':'Not enough');draw()}
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var fat=(salmon*2+berry*1.5)/100;var bearW=60+fat*40,bearH=50+fat*30;
+    ctx.fillStyle='#4a3a2a';ctx.beginPath();ctx.ellipse(w/2,h/2,bearW,bearH,0,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#3a2a1a';ctx.beginPath();ctx.arc(w/2-20,h/2-bearH+10,12,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(w/2+20,h/2-bearH+10,12,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#1a1a1a';ctx.beginPath();ctx.arc(w/2-8,h/2-15,3,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(w/2+8,h/2-15,3,0,Math.PI*2);ctx.fill();
+    var barW=200,barX=(w-barW)/2,barY=h-50;ctx.fillStyle='#1a1a1a';ctx.fillRect(barX,barY,barW,15);
+    ctx.fillStyle=fat>=0.3?'#5a8a3a':'#c75b3a';ctx.fillRect(barX,barY,barW*Math.min(1,fat/0.5),15);
+    ctx.strokeStyle='rgba(232,220,200,0.5)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(barX+barW*0.6,barY-3);ctx.lineTo(barX+barW*0.6,barY+18);ctx.stroke();
+    ctx.fillStyle='rgba(232,220,200,0.4)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('30% threshold',barX+barW*0.6,barY-6);
+    ctx.fillStyle='rgba(200,100,60,0.3)';for(var i=0;i<salmon;i++){ctx.beginPath();ctx.ellipse(100+i*20,h*0.75,8,4,0.2,0,Math.PI*2);ctx.fill()}
+    ctx.fillStyle='rgba(100,60,120,0.3)';for(var i=0;i<berry;i++){ctx.beginPath();ctx.arc(w-100-i*15,h*0.75,4,0,Math.PI*2);ctx.fill()}}
+  upd()
+});
+
+/* ═══ 23. PACK HUNTING ═══ */
+reg('inst-a7',function(){
+  var g=G('c-a7'),ctx=g.ctx,w=g.w,h=g.h,packSize=6;
+  document.getElementById('a7-pack').addEventListener('input',function(){packSize=+this.value;
+    var rate=Math.round(packSize<3?5:packSize<6?14:packSize<9?21:26);
+    document.getElementById('a7-stat').textContent='Pack: '+packSize+' | Success rate: '+rate+'%';draw()});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-20,w,20);
+    ctx.fillStyle='#c8a040';ctx.beginPath();ctx.arc(w*0.7,h*0.4,10,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(232,220,200,0.3)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('Elk',w*0.7,h*0.4-15);
+    var angle=Math.PI*2/packSize;for(var i=0;i<packSize;i++){var a=angle*i-Math.PI/2,r=80+Math.sin(i*1.5)*20;
+      var wx=w*0.7+Math.cos(a)*r,wy=h*0.4+Math.sin(a)*r;
+      ctx.fillStyle=i===0?'#aaa':'#888';ctx.beginPath();ctx.arc(wx,wy,5,0,Math.PI*2);ctx.fill();
+      if(i===0){ctx.fillStyle='rgba(232,220,200,0.3)';ctx.font='8px Georgia';ctx.fillText('Lead',wx,wy-9)}
+      ctx.strokeStyle='rgba(232,220,200,0.1)';ctx.beginPath();ctx.moveTo(wx,wy);ctx.lineTo(w*0.7,h*0.4);ctx.stroke()}}
+  draw()
+});
+
+/* ═══ 24. FLOCK FORMATION ═══ */
+reg('inst-a8',function(){
+  var g=G('c-a8'),ctx=g.ctx,w=g.w,h=g.h,boids=[],hawk=null,count=80;
+  function mkBoid(){return{x:Math.random()*w,y:Math.random()*h,vx:Math.random()*2-1,vy:Math.random()*2-1}}
+  for(var i=0;i<count;i++)boids.push(mkBoid());
+  document.getElementById('a8-count').addEventListener('input',function(){count=+this.value;
+    while(boids.length<count)boids.push(mkBoid());while(boids.length>count)boids.pop()});
+  document.getElementById('a8-hawk').addEventListener('click',function(){hawk=hawk?null:{x:w/2,y:h/2}});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    for(var i=0;i<boids.length;i++){var b=boids[i],cx=0,cy=0,sx=0,sy=0,ax=0,ay=0,n=0;
+      for(var j=0;j<boids.length;j++){if(i===j)continue;var dx=boids[j].x-b.x,dy=boids[j].y-b.y,d=dx*dx+dy*dy;
+        if(d<2500){cx+=boids[j].x;cy+=boids[j].y;sx+=boids[j].vx;sy+=boids[j].vy;n++;if(d<400){ax-=dx;ay-=dy}}}
+      if(n>0){b.vx+=(cx/n-b.x)*0.003+(sx/n-b.vx)*0.05+ax*0.05;b.vy+=(cy/n-b.y)*0.003+(sy/n-b.vy)*0.05+ay*0.05}
+      if(hawk){var hx=hawk.x-b.x,hy=hawk.y-b.y,hd=hx*hx+hy*hy;if(hd<10000){b.vx-=hx*0.01;b.vy-=hy*0.01}}
+      var spd=Math.sqrt(b.vx*b.vx+b.vy*b.vy);if(spd>3){b.vx=b.vx/spd*3;b.vy=b.vy/spd*3}
+      b.x+=b.vx;b.y+=b.vy;if(b.x<0)b.x=w;if(b.x>w)b.x=0;if(b.y<0)b.y=h;if(b.y>h)b.y=0;
+      ctx.fillStyle='rgba(200,200,220,0.7)';ctx.beginPath();ctx.arc(b.x,b.y,2,0,Math.PI*2);ctx.fill()}
+    if(hawk){hawk.x+=Math.sin(Date.now()*0.001)*2;hawk.y+=Math.cos(Date.now()*0.0015)*1.5;
+      ctx.fillStyle='#c75b3a';ctx.beginPath();ctx.arc(hawk.x,hawk.y,5,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(232,220,200,0.3)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('Hawk',hawk.x,hawk.y-10)}
+    document.getElementById('a8-stat').textContent='Flock: '+boids.length+' | Cohesion: '+(hawk?'Evading':'High');
+    frames['inst-a8']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 25. GREENHOUSE EFFECT ═══ */
+reg('inst-c1',function(){
+  var g=G('c-c1'),ctx=g.ctx,w=g.w,h=g.h,co2=420,photons=[],t=0;
+  document.getElementById('c1-co2').addEventListener('input',function(){co2=+this.value;
+    var dT=((co2-280)/280*3.7/5.35).toFixed(1);document.getElementById('c1-stat').textContent=co2+' ppm | +'+dT+'°C'});
+  function draw(){t+=0.02;ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#1e2a18';ctx.fillRect(0,h-40,w,40);
+    var atmoY=h*0.3,atmoH=h*0.3;ctx.fillStyle='rgba(100,120,180,'+(co2/2000)+')';ctx.fillRect(0,atmoY,w,atmoH);
+    ctx.fillStyle='rgba(200,180,60,0.9)';ctx.beginPath();ctx.arc(w/2,30,20,0,Math.PI*2);ctx.fill();
+    if(Math.random()<0.1)photons.push({x:w/2+Math.random()*200-100,y:50,vy:2,type:'solar'});
+    for(var i=photons.length-1;i>=0;i--){var p=photons[i];
+      if(p.type==='solar'){p.y+=p.vy;if(p.y>h-40){p.type='ir';p.vy=-1.5;p.x+=Math.random()*20-10}if(p.y>h){photons.splice(i,1);continue}}
+      else{p.y+=p.vy;p.x+=Math.sin(t+i)*0.5;
+        if(p.y<atmoY+atmoH&&p.y>atmoY&&Math.random()<co2/3000){p.vy=1.5;p.type='trapped'}
+        if(p.type==='trapped'&&p.y>h-40){p.vy=-1.5;p.type='ir'}
+        if(p.y<0||p.y>h)photons.splice(i,1)}
+      if(photons[i]){var c=p.type==='solar'?'rgba(255,220,80,0.8)':p.type==='ir'?'rgba(255,80,60,0.6)':'rgba(255,60,40,0.8)';
+        ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fillStyle=c;ctx.fill()}}
+    while(photons.length>200)photons.shift();
+    ctx.fillStyle='rgba(232,220,200,0.2)';ctx.font='9px Georgia';ctx.textAlign='center';
+    ctx.fillText('ATMOSPHERE',w/2,atmoY+atmoH/2);ctx.fillText('SURFACE',w/2,h-20);
+    frames['inst-c1']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 26. OCEAN ACIDIFICATION ═══ */
+reg('inst-c2',function(){
+  var g=G('c-c2'),ctx=g.ctx,w=g.w,h=g.h,ph=8.1;
+  document.getElementById('c2-ph').addEventListener('input',function(){ph=+this.value;
+    var st=ph>8.0?'Healthy':ph>7.9?'Stressed':ph>7.8?'Thinning':'Dissolving';
+    document.getElementById('c2-stat').textContent='pH '+parseFloat(ph).toFixed(2)+' | Shells: '+st;draw()});
+  var organisms=[{n:'Oyster',x:150,y:300,sz:15},{n:'Coral',x:300,y:280,sz:20},{n:'Pteropod',x:450,y:200,sz:8},{n:'Urchin',x:550,y:320,sz:12},{n:'Mussel',x:200,y:340,sz:10}];
+  function draw(){ctx.fillStyle='#0a1a2a';ctx.fillRect(0,0,w,h);
+    for(var i=0;i<organisms.length;i++){var o=organisms[i];var health=Math.max(0,Math.min(1,(ph-7.6)/0.6));
+      var sz=o.sz*health;ctx.fillStyle='rgba(200,180,150,'+health+')';ctx.beginPath();ctx.arc(o.x,o.y,sz,0,Math.PI*2);ctx.fill();
+      ctx.strokeStyle='rgba(200,180,150,'+(health*0.5)+')';ctx.lineWidth=health*3;ctx.stroke();
+      ctx.fillStyle='rgba(232,220,200,'+(0.2+health*0.3)+')';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText(o.n,o.x,o.y+o.sz+15)}
+    ctx.fillStyle='rgba(60,120,180,0.1)';ctx.fillRect(0,0,w,h);
+    for(var i=0;i<15;i++){ctx.beginPath();ctx.arc(Math.random()*w,Math.random()*h,1,0,Math.PI*2);ctx.fillStyle='rgba(100,180,220,0.2)';ctx.fill()}}
+  draw()
+});
+
+/* ═══ 27. GLACIAL RETREAT ═══ */
+reg('inst-c3',function(){
+  var g=G('c-c3'),ctx=g.ctx,w=g.w,h=g.h,decade=2020;
+  document.getElementById('c3-decade').addEventListener('input',function(){decade=+this.value;
+    var pct=Math.max(5,Math.round(100-((decade-1900)/200)*100));
+    document.getElementById('c3-stat').textContent=decade+' | '+pct+'% of 1900 area';draw()});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var retreat=(decade-1900)/200;ctx.fillStyle='#1e2e25';ctx.beginPath();ctx.moveTo(0,h);ctx.lineTo(w*0.2,h*0.3);ctx.lineTo(w*0.5,h*0.15);ctx.lineTo(w*0.8,h*0.25);ctx.lineTo(w,h);ctx.fill();
+    var glacierTop=h*0.15+retreat*h*0.3,glacierW=w*0.4*(1-retreat*0.8);
+    ctx.fillStyle='rgba(180,210,230,'+(0.8-retreat*0.5)+')';ctx.beginPath();ctx.moveTo(w*0.3,glacierTop);ctx.lineTo(w*0.3+glacierW,glacierTop+20);ctx.lineTo(w*0.3+glacierW*0.8,glacierTop+80);ctx.lineTo(w*0.3+10,glacierTop+60);ctx.fill();
+    if(retreat>0.3){var lakeY=glacierTop+80,lakeW=glacierW*retreat;ctx.fillStyle='rgba(60,140,180,0.4)';ctx.beginPath();ctx.ellipse(w*0.3+glacierW*0.5,lakeY+10,lakeW*0.5,15,0,0,Math.PI*2);ctx.fill()}}
+  draw()
+});
+
+/* ═══ 28. DROUGHT PROGRESSION ═══ */
+reg('inst-c4',function(){
+  var g=G('c-c4'),ctx=g.ctx,w=g.w,h=g.h,weeks=0;
+  document.getElementById('c4-weeks').addEventListener('input',function(){weeks=+this.value;
+    var moist=Math.max(0,100-weeks*5);document.getElementById('c4-stat').textContent='Week '+weeks+' | Soil moisture: '+moist+'%';draw()});
+  var plants=[];for(var i=0;i<30;i++)plants.push({x:30+i*22,depth:Math.random(),ht:20+Math.random()*40});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);var dry=weeks/20;
+    ctx.fillStyle='rgb('+(30+dry*40)+','+(42-dry*20)+','+(18)+')';ctx.fillRect(0,h*0.6,w,h*0.4);
+    for(var d=0;d<4;d++){var moist=Math.max(0,1-dry+d*0.15);ctx.fillStyle='rgba(60,120,180,'+moist*0.15+')';ctx.fillRect(0,h*0.6+d*h*0.1,w,h*0.1)}
+    for(var i=0;i<plants.length;i++){var p=plants[i];var alive=p.depth>dry*0.8;var wilt=alive?Math.max(0,(dry-p.depth)*2):1;
+      ctx.fillStyle=alive?'rgba('+(40+wilt*80)+','+(90-wilt*50)+',30,'+(1-wilt*0.3)+')':'#4a3a20';
+      var ht=p.ht*(alive?1-wilt*0.4:0.3);ctx.fillRect(p.x-1,h*0.6-ht,2,ht);
+      if(alive&&ht>10){ctx.beginPath();ctx.arc(p.x,h*0.6-ht,3+p.ht*0.04,0,Math.PI*2);ctx.fill()}}}
+  draw()
+});
+
+/* ═══ 29. WILDFIRE SMOKE ═══ */
+reg('inst-c5',function(){
+  var g=G('c-c5'),ctx=g.ctx,w=g.w,h=g.h,pm=12,t=0;
+  document.getElementById('c5-pm').addEventListener('input',function(){pm=+this.value;
+    var aqi=pm<12?'Good':pm<35?'Moderate':pm<55?'Unhealthy (Sensitive)':pm<150?'Unhealthy':pm<250?'Very Unhealthy':'Hazardous';
+    document.getElementById('c5-stat').textContent='AQI: '+aqi+' | PM2.5: '+pm});
+  function draw(){t+=0.01;ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var smoke=pm/500;var r=Math.round(80+smoke*150),gr=Math.round(120+smoke*60-smoke*smoke*100),b=Math.round(180-smoke*160);
+    var grad=ctx.createLinearGradient(0,0,0,h*0.6);grad.addColorStop(0,'rgb('+r+','+gr+','+Math.max(0,b)+')');grad.addColorStop(1,'rgb('+Math.round(r*0.7)+','+Math.round(gr*0.5)+','+Math.max(0,Math.round(b*0.3))+')');
+    ctx.fillStyle=grad;ctx.fillRect(0,0,w,h*0.6);
+    var sunR=20,sunY=80,sunA=Math.max(0.1,1-smoke*1.5);ctx.fillStyle='rgba('+(255-smoke*60)+','+(200-smoke*100)+','+(50)+','+sunA+')';
+    ctx.beginPath();ctx.arc(w*0.7,sunY,sunR,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#1e2a18';ctx.fillRect(0,h*0.6,w,h*0.4);
+    for(var i=0;i<8;i++){var tx=50+i*80;ctx.fillStyle='rgba(30,50,30,'+(1-smoke*0.5)+')';ctx.fillRect(tx-2,h*0.45,4,h*0.15);ctx.beginPath();ctx.arc(tx,h*0.42,12,0,Math.PI*2);ctx.fill()}
+    for(var i=0;i<smoke*30;i++){ctx.beginPath();ctx.arc(Math.random()*w,Math.random()*h*0.6,Math.random()*20+5,0,Math.PI*2);
+      ctx.fillStyle='rgba(150,130,110,'+(smoke*0.08)+')';ctx.fill()}
+    frames['inst-c5']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 30. TEMPERATURE GRADIENT ═══ */
+reg('inst-c6',function(){
+  var g=G('c-c6'),ctx=g.ctx,w=g.w,h=g.h,baseT=18;
+  document.getElementById('c6-base').addEventListener('input',function(){baseT=+this.value;
+    var tl=baseT-6.5*1.9,sm=baseT-6.5*3.5;
+    document.getElementById('c6-stat').textContent='Sea level: '+baseT+'°C | Treeline: '+tl.toFixed(1)+'°C | Summit: '+sm.toFixed(1)+'°C';draw()});
+  function draw(){ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var zones=[{name:'Coast',minE:0,maxE:200,c:'#1a3a2a'},{name:'Lowland Forest',minE:200,maxE:800,c:'#1a3a1a'},
+      {name:'Montane',minE:800,maxE:1500,c:'#2a3a2a'},{name:'Subalpine',minE:1500,maxE:2200,c:'#2a3a3a'},
+      {name:'Alpine',minE:2200,maxE:3500,c:'#3a3a4a'}];
+    var maxElev=3500,treeline=(baseT-5)/6.5*1000;
+    for(var i=0;i<zones.length;i++){var z=zones[i];var y1=h-(z.maxE/maxElev)*h,y2=h-(z.minE/maxElev)*h;
+      ctx.fillStyle=z.c;ctx.fillRect(0,y1,w*0.6,y2-y1);
+      ctx.fillStyle='rgba(232,220,200,0.3)';ctx.font='10px Georgia';ctx.textAlign='left';ctx.fillText(z.name,10,y1+(y2-y1)/2+4)}
+    var tlY=h-(treeline/maxElev)*h;ctx.strokeStyle='rgba(200,60,60,0.5)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(0,tlY);ctx.lineTo(w,tlY);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='rgba(200,60,60,0.4)';ctx.font='9px Georgia';ctx.textAlign='right';ctx.fillText('Treeline',w-10,tlY-5);
+    for(var e=0;e<=3500;e+=500){var y=h-(e/maxElev)*h,t=baseT-6.5*(e/1000);
+      ctx.fillStyle='rgba(232,220,200,0.2)';ctx.font='9px Georgia';ctx.textAlign='right';ctx.fillText(e+'m: '+t.toFixed(1)+'°C',w-10,y+4)}}
+  draw()
+});
+
+/* ═══ 31. PRECIPITATION SHIFT ═══ */
+reg('inst-c7',function(){
+  var g=G('c-c7'),ctx=g.ctx,w=g.w,h=g.h,warm=0,t=0;
+  document.getElementById('c7-warm').addEventListener('input',function(){warm=+this.value;
+    var snow=Math.max(10,Math.round(60-warm*10)),rain=100-snow;
+    document.getElementById('c7-stat').textContent='+'+parseFloat(warm).toFixed(1)+'°C | Snow: '+snow+'% | Rain: '+rain+'%'});
+  function draw(){t+=0.02;ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    ctx.fillStyle='#1e2e25';ctx.beginPath();ctx.moveTo(0,h);ctx.lineTo(w*0.3,h*0.2);ctx.lineTo(w*0.5,h*0.1);ctx.lineTo(w*0.7,h*0.25);ctx.lineTo(w,h);ctx.fill();
+    var snowLine=h*0.1+warm*h*0.12;
+    for(var i=0;i<20;i++){var x=Math.random()*w,y=Math.random()*h*0.8;
+      if(y<snowLine&&warm<4){ctx.fillStyle='rgba(220,230,240,0.6)';ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(x+1,y+2,1.5,0,Math.PI*2);ctx.fill()}
+      else{ctx.fillStyle='rgba(100,180,220,0.5)';ctx.fillRect(x,y,1,4)}}
+    if(warm<3){var snowPct=1-warm/3;ctx.fillStyle='rgba(220,230,240,'+(snowPct*0.6)+')';ctx.beginPath();ctx.moveTo(w*0.2,snowLine);ctx.lineTo(w*0.5,h*0.1);ctx.lineTo(w*0.6,snowLine+10);ctx.fill()}
+    var streamH=10+warm*8;ctx.fillStyle='rgba(60,120,180,0.4)';ctx.fillRect(w*0.35,h-30,w*0.3,streamH);
+    ctx.fillStyle='rgba(232,220,200,0.2)';ctx.font='9px Georgia';ctx.textAlign='center';ctx.fillText('Snow/rain line',w*0.4,snowLine-5);
+    frames['inst-c7']=requestAnimationFrame(draw)}
+  draw()
+});
+
+/* ═══ 32. SEA LEVEL RISE ═══ */
+reg('inst-c8',function(){
+  var g=G('c-c8'),ctx=g.ctx,w=g.w,h=g.h,rise=0,t=0;
+  document.getElementById('c8-rise').addEventListener('input',function(){rise=+this.value;
+    document.getElementById('c8-stat').textContent='+'+parseFloat(rise).toFixed(1)+' m | Coastline: '+(rise<0.3?'Current':rise<1?'Retreating':rise<2?'Major retreat':'Catastrophic')});
+  function draw(){t+=0.02;ctx.fillStyle='#060d0a';ctx.fillRect(0,0,w,h);
+    var baseWater=h*0.6,risePixels=rise*50;
+    ctx.fillStyle='#1e2e25';ctx.beginPath();ctx.moveTo(0,baseWater-80);ctx.lineTo(w*0.15,baseWater-40);
+    for(var x=w*0.15;x<w;x+=20)ctx.lineTo(x,baseWater-40+(x-w*0.15)*0.1+Math.sin(x*0.02)*10);
+    ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
+    var waterY=baseWater-risePixels;ctx.fillStyle='rgba(40,80,130,0.5)';ctx.fillRect(0,waterY,w,h-waterY);
+    for(var i=0;i<4;i++){ctx.beginPath();ctx.moveTo(0,waterY+3+i*6);
+      for(var x=0;x<w;x+=3)ctx.lineTo(x,waterY+3+i*6+Math.sin(t*2+x*0.02+i)*2);
+      ctx.strokeStyle='rgba(80,140,180,'+(0.15-i*0.03)+')';ctx.lineWidth=1;ctx.stroke()}
+    if(rise>0){ctx.strokeStyle='rgba(200,60,60,0.3)';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(0,baseWater);ctx.lineTo(w,baseWater);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='rgba(200,60,60,0.3)';ctx.font='9px Georgia';ctx.textAlign='left';ctx.fillText('Original coastline',10,baseWater-5)}
+    ctx.fillStyle='rgba(232,220,200,0.2)';ctx.font='9px Georgia';ctx.textAlign='center';
+    var inundated=Math.round(rise*rise*50);ctx.fillText(inundated+' hectares inundated',w/2,h-15);
+    frames['inst-c8']=requestAnimationFrame(draw)}
+  draw()
+});
+
+</script>
+</body>
+</html>

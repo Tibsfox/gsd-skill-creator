@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories Around the Fire Vol. IV — Center Camp</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1a12; color: #e8dcc8; font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; }
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid rgba(122,154,90,0.2); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+  .hero { text-align: center; padding: 4rem 2rem 2rem; background: radial-gradient(ellipse at 50% 80%, rgba(199,91,58,0.12) 0%, transparent 60%), linear-gradient(180deg, #0d1a12 0%, #0f1e15 50%, #0d1a12 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.1em; color: #e8dcc8; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 1rem; color: rgba(232,220,200,0.5); font-style: italic; margin-bottom: 2rem; }
+  .campfire { display: flex; justify-content: center; align-items: center; margin-bottom: 2rem; position: relative; height: 40px; }
+  .flame { width: 10px; height: 10px; background: #c75b3a; border-radius: 50%; position: relative; animation: burn 2s ease-in-out infinite; }
+  .flame::before { content: ''; position: absolute; width: 6px; height: 6px; background: #e8a04a; border-radius: 50%; top: -4px; left: 2px; animation: flicker 1.5s ease-in-out infinite alternate; }
+  .flame::after { content: ''; position: absolute; width: 4px; height: 4px; background: #f0c060; border-radius: 50%; top: -7px; left: 3px; animation: flicker 1.1s ease-in-out infinite alternate-reverse; }
+  @keyframes burn {
+    0%, 100% { box-shadow: 0 0 8px rgba(199,91,58,0.6), 0 0 20px rgba(199,91,58,0.3), 0 0 40px rgba(199,91,58,0.15), 0 0 60px rgba(199,91,58,0.05); }
+    33% { box-shadow: 0 0 12px rgba(232,160,74,0.7), 0 0 28px rgba(199,91,58,0.4), 0 0 50px rgba(199,91,58,0.2), 0 0 80px rgba(199,91,58,0.08); }
+    66% { box-shadow: 0 0 10px rgba(199,91,58,0.65), 0 0 24px rgba(199,91,58,0.35), 0 0 45px rgba(199,91,58,0.18), 0 0 70px rgba(199,91,58,0.06); }
+  }
+  @keyframes flicker { 0% { opacity: 0.6; transform: translateY(0) scale(1); } 50% { opacity: 1; transform: translateY(-2px) scale(1.1); } 100% { opacity: 0.4; transform: translateY(1px) scale(0.9); } }
+  .controls { max-width: 42rem; margin: 0 auto 1rem; padding: 0 2rem; text-align: center; }
+  .random-btn { background: rgba(199,91,58,0.15); border: 1px solid rgba(199,91,58,0.3); color: #e8dcc8; font-family: Georgia, serif; font-size: 0.85rem; padding: 0.5rem 1.2rem; border-radius: 20px; cursor: pointer; transition: all 0.3s; margin-bottom: 1rem; }
+  .random-btn:hover { background: rgba(199,91,58,0.25); border-color: rgba(199,91,58,0.5); }
+  .filter-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-bottom: 0.5rem; }
+  .filter-btn { background: rgba(26,42,32,0.5); border: 1px solid rgba(200,184,144,0.12); color: rgba(232,220,200,0.55); font-family: Georgia, serif; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 14px; cursor: pointer; transition: all 0.25s; }
+  .filter-btn:hover { border-color: rgba(200,184,144,0.3); color: #e8dcc8; }
+  .filter-btn.active { background: rgba(200,184,144,0.12); border-color: rgba(200,184,144,0.35); color: #e8dcc8; }
+  .stories { max-width: 42rem; margin: 0 auto; padding: 2rem 2rem 3rem; }
+  .story-card { padding: 1.8rem 2rem; margin-bottom: 0; border-radius: 8px; background: rgba(26,42,32,0.3); border-left: 3px solid transparent; transition: all 0.4s; }
+  .story-card.hidden { display: none; }
+  .story-card:hover { background: rgba(26,42,32,0.5); }
+  .story-card.highlight { background: rgba(199,91,58,0.1); transition: background 0.3s; }
+  .story-header { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.8rem; }
+  .story-name { font-size: 1.1rem; font-weight: 400; letter-spacing: 0.04em; }
+  .story-role { font-size: 0.78rem; color: rgba(232,220,200,0.35); font-style: italic; }
+  .story-project { font-size: 0.72rem; color: rgba(122,154,90,0.6); margin-top: 0.6rem; }
+  .story-project a { color: rgba(122,154,90,0.6); text-decoration: none; transition: color 0.2s; }
+  .story-project a:hover { color: #7a9a5a; }
+  .story-text { font-size: 0.92rem; font-style: italic; line-height: 1.85; color: rgba(232,220,200,0.75); }
+  .ember { text-align: center; padding: 1rem 0; }
+  .ember-dot { display: inline-block; width: 3px; height: 3px; background: #c75b3a; border-radius: 50%; box-shadow: 0 0 4px rgba(199,91,58,0.4); margin: 0 4px; animation: ember-glow 4s ease-in-out infinite; }
+  .ember-dot:nth-child(2) { animation-delay: 0.7s; }
+  .ember-dot:nth-child(3) { animation-delay: 1.4s; }
+  @keyframes ember-glow { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.9; } }
+  .type-tree { border-left-color: rgba(74,124,63,0.5); } .type-tree .story-name { color: #7a9a5a; }
+  .type-bird { border-left-color: rgba(94,184,196,0.5); } .type-bird .story-name { color: #5eb8c4; }
+  .type-mammal { border-left-color: rgba(200,160,96,0.5); } .type-mammal .story-name { color: #c8a060; }
+  .type-fish { border-left-color: rgba(42,138,150,0.5); } .type-fish .story-name { color: #2a8a96; }
+  .type-salmon { border-left-color: rgba(42,138,150,0.5); } .type-salmon .story-name { color: #2a8a96; }
+  .type-marine { border-left-color: rgba(30,100,160,0.5); } .type-marine .story-name { color: #4a9ed4; }
+  .type-insect { border-left-color: rgba(180,140,60,0.5); } .type-insect .story-name { color: #b48c3c; }
+  .type-force { border-left-color: rgba(199,91,58,0.5); } .type-force .story-name { color: #c75b3a; }
+  .type-bryophyte { border-left-color: rgba(155,180,100,0.5); } .type-bryophyte .story-name { color: #9bb464; }
+  .type-symbiosis { border-left-color: rgba(170,160,120,0.5); } .type-symbiosis .story-name { color: #aaa078; }
+  .type-plant { border-left-color: rgba(100,160,80,0.5); } .type-plant .story-name { color: #64a050; }
+  .type-fungus { border-left-color: rgba(180,140,80,0.5); } .type-fungus .story-name { color: #b48c50; }
+  .type-echinoderm { border-left-color: rgba(180,100,140,0.5); } .type-echinoderm .story-name { color: #b4648c; }
+  .type-crustacean { border-left-color: rgba(180,100,80,0.5); } .type-crustacean .story-name { color: #b46450; }
+  .type-amphibian { border-left-color: rgba(120,160,120,0.5); } .type-amphibian .story-name { color: #78a078; }
+  .type-animal { border-left-color: rgba(200,160,96,0.5); } .type-animal .story-name { color: #c8a060; }
+  .type-concept { border-left-color: rgba(200,184,144,0.5); } .type-concept .story-name { color: #c8b890; }
+  .type-canid { border-left-color: rgba(200,160,96,0.5); } .type-canid .story-name { color: #c8a060; }
+  .type-mustelid { border-left-color: rgba(200,160,96,0.5); } .type-mustelid .story-name { color: #c8a060; }
+  .type-alga { border-left-color: rgba(30,100,160,0.5); } .type-alga .story-name { color: #4a9ed4; }
+  .stories-footer { text-align: center; padding: 2rem 2rem 3rem; max-width: 42rem; margin: 0 auto; }
+  .stories-footer .closing { font-size: 0.92rem; font-style: italic; color: rgba(232,220,200,0.45); margin-bottom: 1.5rem; line-height: 1.6; }
+  .stories-footer a { color: rgba(199,91,58,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .stories-footer a:hover { color: #c75b3a; }
+  .camp-footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: rgba(232,220,200,0.25); line-height: 1.8; border-top: 1px solid rgba(122,154,90,0.1); }
+  .camp-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .camp-footer a:hover { color: #7a9a5a; }
+  @media (max-width: 600px) { .hero h1 { font-size: 1.8rem; } .story-card { padding: 1.4rem 1.2rem; } .stories { padding: 1.5rem 1rem 2rem; } }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</div>
+
+<div class="hero">
+  <div class="campfire"><div class="flame"></div></div>
+  <h1>Stories Around the Fire</h1>
+  <div class="subtitle">Volume IV &mdash; What We Built</div>
+</div>
+
+<div class="controls">
+  <button class="random-btn" onclick="randomStory()">Random Story</button>
+  <div class="filter-bar" id="filter-bar"></div>
+</div>
+
+<div class="stories" id="stories"></div>
+
+<div class="stories-footer">
+  <div class="closing">Forty-eight builders. Each muse reflects on what they created this session &mdash; the work that stays when the fire goes out.</div>
+  <a href="stories.html">&larr; Volume I</a> &nbsp;&middot;&nbsp;
+  <a href="stories-2.html">Volume II</a> &nbsp;&middot;&nbsp;
+  <a href="stories-3.html">Volume III</a> &nbsp;&middot;&nbsp;
+  <a href="index.html">Return to the fire &rarr;</a>
+</div>
+
+<div class="camp-footer">
+  The work is public. The fire is ours.<br>
+  <a href="../index.html">Research Series</a> &middot;
+  <a href="../compass.html">The Compass</a> &middot;
+  <a href="stories.html">Volume I</a> &middot;
+  <a href="stories-2.html">Volume II</a> &middot;
+  <a href="stories-3.html">Volume III</a>
+</div>
+
+<script src="stories-4.js"></script>
+<script>
+// Muse roster — all 48
+var M={cedar:{n:'Cedar',r:'the record',t:'tree'},lex:{n:'Lex',r:'the specification',t:'concept'},moss:{n:'Moss',r:'the carpet',t:'bryophyte'},lichen:{n:'Lichen',r:'the breath',t:'symbiosis'},sturgeon:{n:'Sturgeon',r:'the ancient',t:'fish'},fern:{n:'Fern',r:'the foundation',t:'plant'},chanterelle:{n:'Chanterelle',r:'the network',t:'fungus'},star:{n:'Star',r:'the keystone',t:'echinoderm'},crab:{n:'Crab',r:'the harvest',t:'crustacean'},beaver:{n:'Beaver',r:'the maker',t:'mammal'},salamander:{n:'Salamander',r:'the headwater',t:'amphibian'},hemlock:{n:'Hemlock',r:'the standard',t:'tree'},fire:{n:'Fire',r:'the renewal',t:'force'},cougar:{n:'Cougar',r:'the ghost',t:'mammal'},wolf:{n:'Wolf',r:'the return',t:'mammal'},rain:{n:'Rain',r:'the cycle',t:'force'},fog:{n:'Fog',r:'the invisible',t:'force'},bear:{n:'Bear',r:'the season',t:'mammal'},waterfall:{n:'Waterfall',r:'the descent',t:'force'},foxy:{n:'Foxy',r:'the map',t:'animal'},sitka:{n:'Sitka',r:'the root',t:'tree'},eulachon:{n:'Eulachon',r:'the first gift',t:'fish'},steelhead:{n:'Steelhead',r:'the twice-born',t:'fish'},dipper:{n:'Dipper',r:'the water-walker',t:'bird'},chinook:{n:'Chinook',r:'the current',t:'salmon'},orca:{n:'Orca',r:'the elder',t:'marine'},sam:{n:'Sam',r:'the question',t:'animal'},coyote:{n:'Coyote',r:'the trickster',t:'canid'},dragonfly:{n:'Dragonfly',r:'the iridescent',t:'insect'},octopus:{n:'Octopus',r:'the reinventor',t:'marine'},willow:{n:'Willow',r:'the welcome',t:'tree'},bee:{n:'Bee',r:'the pollinator',t:'insect'},otter:{n:'Otter',r:'the play',t:'mustelid'},hawk:{n:'Hawk',r:'the formation',t:'bird'},eagle:{n:'Eagle',r:'the guardian',t:'bird'},madrone:{n:'Madrone',r:'the hearth',t:'tree'},owl:{n:'Owl',r:'the clock',t:'bird'},marten:{n:'Marten',r:'the signal',t:'mammal'},bat:{n:'Bat',r:'the echolocator',t:'mammal'},raven:{n:'Raven',r:'the pattern',t:'bird'},thrush:{n:'Thrush',r:'the tone',t:'bird'},nutcracker:{n:'Nutcracker',r:'the cache',t:'bird'},wren:{n:'Wren',r:'the song',t:'bird'},kelp:{n:'Kelp',r:'the tide forest',t:'alga'},alder:{n:'Alder',r:'the resonance',t:'tree'},osprey:{n:'Osprey',r:'the horizon',t:'bird'},pika:{n:'Pika',r:'the sentinel',t:'mammal'},glacier:{n:'Glacier',r:'the archive',t:'force'}};
+
+var ALL_TYPES = ['all','tree','bird','mammal','fish','salmon','marine','insect','force','bryophyte','symbiosis','plant','fungus','echinoderm','crustacean','amphibian','animal','concept','canid','mustelid','alga'];
+var TYPE_LABELS = {all:'All',tree:'Trees',bird:'Birds',mammal:'Mammals',fish:'Fish',salmon:'Salmon',marine:'Marine',insect:'Insects',force:'Forces',bryophyte:'Bryophytes',symbiosis:'Symbiosis',plant:'Plants',fungus:'Fungi',echinoderm:'Echinoderms',crustacean:'Crustaceans',amphibian:'Amphibians',animal:'Animals',concept:'Concepts',canid:'Canids',mustelid:'Mustelids',alga:'Algae'};
+
+// Build filter bar — only show types that have stories
+(function(){
+  var bar = document.getElementById('filter-bar');
+  var typeSet = {};
+  STORIES_4.forEach(function(s){
+    var m = M[s.id];
+    if (m) typeSet[m.t] = true;
+  });
+  ALL_TYPES.forEach(function(tp){
+    if (tp !== 'all' && !typeSet[tp]) return;
+    var btn = document.createElement('button');
+    btn.className = 'filter-btn' + (tp === 'all' ? ' active' : '');
+    btn.setAttribute('data-type', tp);
+    btn.textContent = TYPE_LABELS[tp] || tp;
+    btn.onclick = function(){ filterStories(tp, btn); };
+    bar.appendChild(btn);
+  });
+})();
+
+// Build story cards from data
+(function(){
+  var container = document.getElementById('stories');
+  STORIES_4.forEach(function(s, i){
+    var m = M[s.id] || {n:s.id, r:'', t:'animal'};
+    var typeClass = 'type-' + m.t;
+
+    var card = document.createElement('div');
+    card.className = 'story-card ' + typeClass;
+    card.setAttribute('data-type', m.t);
+    card.id = 'story-' + s.id;
+
+    var projectLink = s.project ? '<div class="story-project"><a href="../' + s.project + '/index.html">&rarr; ' + s.project + '</a></div>' : '';
+
+    card.innerHTML =
+      '<div class="story-header">' +
+        '<span class="story-name">' + m.n + '</span>' +
+        '<span class="story-role">' + m.r + '</span>' +
+      '</div>' +
+      '<div class="story-text">\u201C' + s.story + '\u201D</div>' +
+      projectLink;
+    container.appendChild(card);
+
+    if (i < STORIES_4.length - 1) {
+      var ember = document.createElement('div');
+      ember.className = 'ember';
+      ember.innerHTML = '<span class="ember-dot"></span><span class="ember-dot"></span><span class="ember-dot"></span>';
+      container.appendChild(ember);
+    }
+  });
+})();
+
+function randomStory() {
+  var cards = document.querySelectorAll('.story-card:not(.hidden)');
+  if (cards.length === 0) return;
+  var idx = Math.floor(Math.random() * cards.length);
+  var card = cards[idx];
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.classList.add('highlight');
+  setTimeout(function(){ card.classList.remove('highlight'); }, 2000);
+}
+
+function filterStories(type, btn) {
+  var cards = document.querySelectorAll('.story-card');
+  var embers = document.querySelectorAll('.ember');
+  var btns = document.querySelectorAll('.filter-btn');
+  btns.forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  if (type === 'all') {
+    cards.forEach(function(c){ c.classList.remove('hidden'); });
+    embers.forEach(function(e){ e.style.display = ''; });
+  } else {
+    cards.forEach(function(c){
+      if (c.getAttribute('data-type') === type) { c.classList.remove('hidden'); }
+      else { c.classList.add('hidden'); }
+    });
+    var visible = document.querySelectorAll('.story-card:not(.hidden)');
+    embers.forEach(function(e){ e.style.display = 'none'; });
+    visible.forEach(function(card, i){
+      if (i < visible.length - 1) {
+        var next = card.nextElementSibling;
+        if (next && next.classList.contains('ember')) { next.style.display = ''; }
+      }
+    });
+  }
+}
+</script>
+
+</body>
+</html>
