@@ -1,0 +1,1144 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage[skins,breakable]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology color scheme — Steel blue / Electric / Graphite
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{1976D2}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnyellow}{HTML}{F57F17}
+\definecolor{successgreen}{HTML}{1B5E20}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{warnbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Caliber $\times$ GSD Skill-Creator Integration}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Caliber x GSD Skill-Creator Integration -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ─── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Caliber $\times$ GSD\\[0.3em]Skill-Creator Integration}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Deep Code Review \& Integration Mission}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{caliber-ai-org/ai-setup $\longleftrightarrow$ Tibsfox/gsd-skill-creator}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.8cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 6 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+%% ─── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION DOCUMENT
+%% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Integration Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{gsd-skill-creator dev branch (v1.49+, DACP milestone)}
+\metafield{Context:}{Both repos reviewed via deep code analysis; Caliber at v1.29.4 (147 stars), gsd-skill-creator at 73 commits on main}
+
+\subsection{Vision}
+
+Two TypeScript CLIs share the same gravity well. Caliber (caliber-ai-org/ai-setup) approaches the problem from the outside in: given any codebase, score its AI agent configuration quality, generate missing pieces, and keep everything synchronized as the code evolves. The gsd-skill-creator approaches from the inside out: given a developer's actual working patterns, observe what they do repeatedly, crystallize those patterns into reusable skills, and compose those skills into specialized agents.
+
+They are not competitors. They are complements operating at different layers of the same stack. Caliber is the infrastructure layer — the scoring engine, the drift detector, the session learning harness. gsd-skill-creator is the intelligence layer — the pattern recognizer, the skill lifecycle manager, the agent emergence system. Together they form a complete AI configuration lifecycle: Caliber scores and syncs the container; gsd-skill-creator fills it with living, adaptive knowledge.
+
+The Amiga Principle applies directly here: neither project needs to become the other. Caliber's deterministic scoring engine (100\% LLM-free, filesystem-cross-reference) is a specialized execution path that gsd-skill-creator doesn't have and should never reinvent from scratch. gsd-skill-creator's bounded learning loop, co-activation tracking, and DACP communication protocol are architectural innovations that Caliber doesn't have and would benefit from knowing about. The integration lives in the spaces between them.
+
+The spaces between are real. Caliber's CALIBER\_LEARNINGS.md is a goldmine of operational patterns — but they're stored as flat categorized bullets, not structured feedback that feeds back into skill refinement. gsd-skill-creator's feedback system is architected for bounded refinement — but its input is raw JSONL corrections, not categorized operational intelligence. Bridge the two and you get a self-improving skill ecosystem where session learnings automatically feed the refinement engine, and the refinement engine's outputs are scored by a deterministic quality gate before they commit.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{gsd-skill-creator has no deterministic skill quality scoring.} Skill health is currently measured by token consumption alone — skills that cost more tokens than they save are flagged, but there is no rubric for description effectiveness, trigger precision, grounding against the actual codebase, or freshness relative to git history. Caliber has already solved this problem with a 100-point, LLM-free scoring engine.
+
+  \item \textbf{Skill content drifts silently as codebases evolve.} When TypeScript files are renamed, directory structures change, or dependencies are added, skills with file-pattern triggers become stale. There is currently no mechanism to detect this drift. Caliber's \texttt{refresh} command — which analyzes git diffs and updates configs — solves this exact problem for CLAUDE.md and MCP configs, and can be ported.
+
+  \item \textbf{Session learnings are captured but not categorized or cross-referenced.} gsd-skill-creator's feedback.jsonl accumulates corrections but doesn't distinguish between ``gotcha'' (environment quirk), ``correction'' (wrong advice), ``pattern'' (recurring solution), or ``convention'' (team standard). Caliber's CALIBER\_LEARNINGS taxonomy provides this categorization and has been validated across 30+ real development sessions.
+
+  \item \textbf{Skill refinement has no data-driven safety gate.} The 20\% content change cap is a good structural constraint, but it doesn't verify that the refinement actually improves activation quality before committing. Caliber's score regression guard — snapshot before, score after, revert if worse — provides exactly this safety layer.
+
+  \item \textbf{gsd-skill-creator is platform-siloed.} All 202 tests and 43 implemented requirements target Claude Code exclusively. The broader agent skills ecosystem (Cursor, Codex, Gemini CLI) uses the same SKILL.md format. Caliber's multi-platform output engine (\texttt{--agent claude,cursor,codex}) provides a reference implementation for cross-platform skill generation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Caliber provides the quality infrastructure; gsd-skill-creator provides the intelligence infrastructure. Integration produces a scored, drift-aware, self-improving skill lifecycle.}
+
+\subsubsection{Integration Architecture Map}
+
+\begin{asciibox}
+                    CALIBER (ai-setup)                  GSD-SKILL-CREATOR
+                    ==================                  =================
+
+  caliber score     [Scoring Engine]  ─────────────>   skill-creator score
+  (LLM-free,        Files \& Setup                      SKILL.md quality
+   filesystem)      Quality                            Trigger precision
+                    Grounding                          Codebase grounding
+                    Accuracy                           Freshness vs git
+                    Freshness                          [PORT: deterministic]
+
+  caliber refresh   [Drift Detector]  ─────────────>   skill-creator refresh
+  (git diff         staged diffs                       file trigger staleness
+   analysis)        unstaged diffs                     path reference check
+                    committed diffs                    [PORT: adapted]
+
+  CALIBER\_          [Learning Taxonomy] ────────────>   FeedbackCategory enum
+  LEARNINGS.md      [correction]                        feedback-store.ts
+                    [gotcha]                            30+ validated patterns
+                    [pattern]                           [PORT: enrichment]
+                    [convention]
+
+  score-history     [ROI Tracking]    ─────────────>   skill-metrics.jsonl
+  .jsonl            trend analysis                     activation rate
+                    delta arrows                       correction rate
+                    cooldown guard                     token ROI
+                                                       [PORT: adapted]
+
+  --agent flag      [Multi-platform]  ─────────────>   --agent flag
+  claude/cursor/    OpenSkills output                  strip extension fields
+  codex             platform routing                   multi-target output
+                                                       [PORT: new feature]
+
+                    GSD-NATIVE (no Caliber equivalent)
+                    ====================================
+                    DACP bundles carry skill score payload
+                    Bounded learning (20% cap, 7-day cooldown)
+                    Co-activation tracking -> agent emergence
+                    Kahn's algorithm cycle detection (extends:)
+                    .planning/ staging layer (deposit\_mission MCP)
+                    Chipset YAML model assignment
+\end{asciibox}
+
+\subsubsection{Integration Module Architecture}
+
+\begin{asciibox}
+  Module 1: Caliber Architecture Analysis
+    Scoring engine internals, session learning pipeline,
+    refresh/drift detection, multi-platform generation
+
+  Module 2: gsd-skill-creator Architecture Analysis
+    DACP protocol, skill lifecycle, bounded learning,
+    agent composition, planning layer
+
+  Module 3: Integration Mapping
+    10 direct ports, 5 adapted patterns, 3 GSD-native enhancements
+
+  Module 4: Implementation Slices
+    Wave-based execution plan, prioritized PRs, test coverage
+
+  Module 5: Risk \& Compatibility Analysis
+    Architectural conflicts, DACP alignment, scope boundaries
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\# Integration Mission — Chipset YAML
+
+chipset:
+  name: caliber-gsd-integration
+  derived\_from: gsd-default
+  version: "1.0"
+
+  agnus:                              \# Orchestration / DMA / context management
+    model: claude-opus-4-6
+    roles: [FLIGHT, INTEG, CAPCOM]
+    responsibilities:
+      - Cross-module integration decisions
+      - Scope boundary enforcement (don't let Caliber replace gsd-skill-creator)
+      - HITL gate management at wave boundaries
+
+  denise:                             \# Display / output rendering
+    model: claude-sonnet-4-6
+    roles: [EXEC-1, EXEC-2, CRAFT-ARCH, CRAFT-LEARN]
+    responsibilities:
+      - Port implementation specs (scoring engine, refresh command)
+      - Learning taxonomy enrichment
+      - Multi-platform output module
+
+  paula:                              \# Audio / I/O / anticipatory
+    model: claude-haiku-4-5
+    roles: [BUDGET, LOG, SCOUT]
+    responsibilities:
+      - Score computation (LLM-free operations use Haiku)
+      - Pattern matching / trigger classification
+      - Shared schemas and type definitions
+
+  "68000":                            \# CPU / glue logic
+    model: claude-sonnet-4-6
+    roles: [PLAN, VERIFY, SURGEON]
+    responsibilities:
+      - Wave decomposition and dependency ordering
+      - Source validation and code review
+      - Implementation quality monitoring
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.50 integration work)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Port Caliber's deterministic scoring engine as \texttt{skill-creator score} command
+  \item Port Caliber's git diff-based refresh as \texttt{skill-creator refresh} command
+  \item Enrich gsd-skill-creator's \texttt{FeedbackCategory} enum with Caliber's taxonomy
+  \item Add score regression guard to the refinement engine
+  \item Add \texttt{skill-metrics.jsonl} and \texttt{skill-creator insights} command
+  \item Add \texttt{--agent} flag for multi-platform skill output
+  \item Add DACP skill score payload to inter-agent communication bundles
+  \item Backup/undo layer for refinement operations (\texttt{skill-backups/})
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Merging the two CLIs into one tool — they have different deployment models
+  \item Adopting Caliber's LLM provider abstraction (gsd uses chipset model assignment)
+  \item Replicating Caliber's MCP server auto-discovery (out of scope for skill-creator's charter)
+  \item Caliber's cross-repo sources system (GSD handles this via .planning/ and staging layer)
+  \item Any changes to Caliber's codebase — this mission targets gsd-skill-creator only
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \texttt{skill-creator score} produces a 100-point, LLM-free quality score for any skill directory
+  \item Score categories cover: Existence (25), Quality (25), Grounding (20), Accuracy (15), Freshness (10), Bonus (5)
+  \item \texttt{skill-creator score --compare <ref>} shows per-skill score delta vs a git ref
+  \item \texttt{skill-creator refresh} detects and reports skills with stale file-pattern triggers after git diffs
+  \item FeedbackStore records and queries by category: \texttt{correction}, \texttt{gotcha}, \texttt{fix}, \texttt{pattern}, \texttt{env}, \texttt{convention}
+  \item Refinement engine runs pre/post score comparison; auto-reverts if post-score is lower than pre-score
+  \item \texttt{skill-metrics.jsonl} captures activation rate, correction rate, and token ROI per skill per session
+  \item \texttt{skill-creator insights} shows trend arrows (\textuparrow/\textdownarrow/\textrightarrow) for skill health over time
+  \item \texttt{skill-creator create --agent cursor} generates SKILL.md without gsd-skill-creator extension fields
+  \item DACP communication bundles include \texttt{skillScorePayload} in the structured data envelope
+  \item All new commands achieve 90\%+ test coverage using vitest
+  \item All 202 existing tests continue to pass after integration changes
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Vision Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency} \\
+\midrule
+gsd-skill-creator-analysis.md & Provides the prior analysis that identified scoring, distribution, and multi-platform as top priorities & Input \\
+gsd-chipset-architecture-vision.md & Chipset YAML model assignment governs model tier decisions in skill-creator & Architecture \\
+DACP milestone (v1.49) & Integration bundles extend DACP data envelope with score payload & Dependency \\
+gsd-planning-docs-vision.md & Skill metrics can feed the planning docs dashboard agent activity log & Future \\
+gsd-staging-layer-vision.md & deposit\_mission MCP can carry skill score reports as structured DACP payloads & Future \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga shipped with a custom chipset because Motorola didn't make chips that could handle video DMA, sprite multiplexing, and audio synthesis simultaneously. The Amiga team didn't wait for a general-purpose solution — they built specialized silicon for the exact problem they faced. That specialization is why a 7.16 MHz machine produced effects that contemporary 32 MHz IBM PCs couldn't match.
+
+Caliber and gsd-skill-creator each have specialized silicon. Caliber's scoring engine is deterministic, fast, and LLM-free — it runs in milliseconds, produces stable reproducible results, and never hallucinates a path reference. gsd-skill-creator's bounded learning loop is careful, human-supervised, and architecturally conservative — it will never corrupt a skill with runaway LLM changes, because the 20\% cap and 7-day cooldown are structural, not policy-based. These are not limitations. They are design choices that make each system trustworthy in its domain.
+
+The integration lives in the spaces between. Not by merging the tools, but by connecting their specialized outputs — Caliber's score cards flowing into gsd-skill-creator's refinement gates, gsd-skill-creator's DACP bundles carrying quality metadata that Caliber's taxonomy helped define. Architecture as leverage. Specialization in service of capability.
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Integration Research Reference}
+
+\subsection{How to Use This Document}
+
+This stage documents findings from deep code review of both repositories conducted March 27, 2026. All findings are traceable to specific files, line ranges, and observable behavior.
+
+\textbf{Primary sources reviewed:}
+\begin{itemize}[leftmargin=1.5em]
+  \item caliber-ai-org/ai-setup: README.md, CALIBER\_LEARNINGS.md, TODOS.md, CHANGELOG.md
+  \item Tibsfox/gsd-skill-creator (main branch): Full README, src/ module structure (73 commits)
+  \item Project knowledge: gsd-skill-creator-analysis.md, gsd-chipset-architecture-vision.md, gsd-staging-layer-vision.md
+  \item Ecosystem context: awesome-claude-skills, anthropics/skills, OpenSkills format specification
+\end{itemize}
+
+\subsection{Module 1: Caliber Architecture Analysis}
+
+\subsubsection{Scoring Engine (Files: src/scoring/)}
+
+Caliber's scoring engine is the most immediately portable subsystem. Key properties observed:
+
+\textbf{Deterministic, LLM-free operation.} The \texttt{caliber score} command cross-references config files against the project filesystem with zero LLM calls. This is architecturally significant: it means scoring can run in CI, in git hooks, and in \texttt{skill-creator refresh} loops without API cost or latency.
+
+\textbf{Five-category 100-point rubric:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Points} & \tableheader{What it checks} \\
+\midrule
+Files \& Setup & 25 & Config files exist, skills present, MCP servers, cross-platform parity \\
+Quality & 25 & Code blocks present, token budget concise, structured headings, concrete instructions \\
+Grounding & 20 & Config references actual project directories and files on disk \\
+Accuracy & 15 & Referenced paths exist, freshness vs git history, no stale references \\
+Freshness \& Safety & 10 & Recently updated, no leaked secrets, permissions configured \\
+Bonus & 5 & Auto-refresh hooks, AGENTS.md, OpenSkills format compliance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Score regression guard.} Before any write operation: snapshot current score. After write: rescore. If post-score < pre-score, auto-revert all changes. This pattern is implemented in the \texttt{refresh} command and should be ported to gsd-skill-creator's refinement engine.
+
+\textbf{Score history tracking.} Key pattern from CALIBER\_LEARNINGS: \textit{``record scores at key decision points (init, regenerate, refresh, score, manual triggers) into .caliber/score-history.jsonl for trend analysis and ROI calculation. Use recordScore(result, 'trigger') to append JSONL entries.''}
+
+\textbf{Structured fix data.} Every failing check produces structured fix data that is injected into the LLM prompt when running \texttt{caliber init}. The LLM receives exactly what's wrong and how to fix it — not just a vague prompt about improving the config.
+
+\subsubsection{Session Learning System (Files: src/learning/)}
+
+\textbf{CALIBER\_LEARNINGS.md taxonomy.} Caliber's session learning pipeline distills tool usage, failures, and corrections into categorized learnings. Six categories validated across 30+ sessions:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Category} & \tableheader{Semantics \& Examples from CALIBER\_LEARNINGS} \\
+\midrule
+\texttt{[correction]} & Wrong advice that needed user override. Maps to gsd-skill-creator's existing feedback detection. \\
+\texttt{[gotcha]} & Environment quirks and non-obvious constraints. E.g., ``GitHub video tags don't render in README''; ``ora spinners swallow stderr'' \\
+\texttt{[fix]} & Specific code fixes for recurring bugs. E.g., ``If learn finalize crashes with content.split is not a function...'' \\
+\texttt{[pattern]} & Recurring successful solutions. E.g., scoring checks use git check-ignore not git ls-files; retry LLM calls once on transient failure \\
+\texttt{[env]} & Environment setup and configuration. E.g., npm install required before test runs; CLAUDECODE env var conflicts \\
+\texttt{[convention]} & Team/project style standards. E.g., lazy-initialize dynamic CLI strings; use ``config'' not ``setup'' in messaging \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Known issue: lock file persistence.} From CALIBER\_LEARNINGS: \textit{``caliber learn finalize may fail silently with a stale lock file (.caliber/learning/finalize.lock) if a previous session crashed.''} gsd-skill-creator should implement lock file cleanup in its PatternStore retention manager.
+
+\textbf{Two-tier model system.} Caliber automatically uses a fast model for classification and scoring operations, reserving the configured heavy model for generation. This maps directly onto GSD's chipset model assignment: Haiku for relevance scoring, Sonnet for skill generation.
+
+\subsubsection{Drift Detection / Refresh System}
+
+\textbf{Three-layer diff analysis.} \texttt{caliber refresh} analyzes: committed changes (\texttt{git diff HEAD\textasciitilde{}1 --name-only}), staged changes (\texttt{git diff --cached --name-only}), and unstaged changes (\texttt{git diff --name-only}). This gives complete awareness of what has changed since the last session.
+
+\textbf{Rate limiting.} 30-second cooldown between refresh operations (\texttt{REFRESH\_COOLDOWN\_MS = 30\_000}) prevents excessive LLM calls in CI/hook loops. Critical for gsd-skill-creator's pre-commit hook integration.
+
+\textbf{Retry on transient failure.} LLM calls retry once before failing. Important for hook-triggered refreshes which run silently.
+
+\subsubsection{Multi-Platform Output System}
+
+\textbf{\texttt{--agent} flag.} \texttt{caliber init --agent claude,cursor,codex} generates platform-specific configs simultaneously. Key insight from TODOS.md: the parity scoring check currently hardcodes Claude+Cursor; a planned refactor will count ``any 2 of N configured platforms.'' This is the right architecture for gsd-skill-creator's multi-platform feature.
+
+\textbf{Platform-specific skill directories:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Claude Code: \texttt{.claude/skills/*/SKILL.md}
+  \item Cursor: \texttt{.cursor/skills/*/SKILL.md}
+  \item Codex: \texttt{.agents/skills/*/SKILL.md}
+\end{itemize}
+
+The SKILL.md format is shared; only extension fields (triggers, extends, version, enabled) need to be stripped for non-GSD targets.
+
+\subsection{Module 2: gsd-skill-creator Architecture Analysis}
+
+\subsubsection{DACP Protocol (v1.49 dev branch)}
+
+The Deterministic Agent Communication Protocol is the most architecturally significant recent addition. Key properties:
+
+\textbf{Three-part bundle structure:} intent (human-readable goal statement) + data (structured JSON payload) + executable code (deterministic action, not markdown instructions). Markdown is non-deterministic; code is deterministic. This is the philosophical foundation.
+
+\textbf{Integration opportunity:} The \texttt{data} payload of skill suggestion and refinement bundles should carry a \texttt{skillScorePayload}: \texttt{\{score: 73, categories: \{...\}, failedChecks: [...]\}}. This makes skill quality a first-class citizen in inter-agent communication, observable by downstream agents without re-running the scorer.
+
+\subsubsection{Skill Lifecycle: src/ Module Map}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Directory} & \tableheader{Key Files} & \tableheader{Integration Touch Points} \\
+\midrule
+\texttt{src/storage/} & skill-store.ts, pattern-store.ts, skill-index.ts & Add score cache to SkillIndex; add metrics to PatternStore \\
+\texttt{src/learning/} & feedback-store.ts, refinement-engine.ts, version-manager.ts & Add FeedbackCategory enum; add pre/post score gate \\
+\texttt{src/detection/} & pattern-analyzer.ts, skill-generator.ts & Add grounding check during generation \\
+\texttt{src/observation/} & session-observer.ts, retention-manager.ts & Add lock file cleanup; add category tagging at capture \\
+\texttt{src/application/} & relevance-scorer.ts & Downgrade to Haiku tier (two-tier model) \\
+\texttt{src/cli.ts} & CLI entry point & Add score, refresh, insights commands \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Bounded Learning Constraints}
+
+The 20\% content change cap, 3-correction minimum, 7-day cooldown, and mandatory user confirmation are structural safety features. They should be \textbf{augmented}, not replaced, by the score regression guard:
+
+\begin{asciibox}
+  CURRENT refinement gate:
+    corrections >= 3 AND change <= 20% AND cooldown elapsed
+    -> apply (with user confirm)
+
+  PROPOSED refinement gate (post-integration):
+    corrections >= 3 AND change <= 20% AND cooldown elapsed
+    -> snapshot skill score (pre)
+    -> generate refinement
+    -> score refined version (post)
+    -> if post < pre: auto-revert, log regression
+    -> else: present to user (with pre/post score delta)
+    -> user confirm -> apply
+\end{asciibox}
+
+\subsubsection{Known Issues Relevant to Integration}
+
+\textbf{GitHub \#11205: User-level agent discovery.} Agents in \texttt{\textasciitilde{}/.claude/agents/} may not be auto-discovered. Workaround: use project-level agents. This does not affect skill scoring (skills live at \texttt{.claude/skills/}), but affects any integration that auto-generates agents.
+
+\textbf{Pattern retention unbounded growth risk.} The JSONL append-only format is correct; the 90-day/1000-session retention is bounded. Adding new JSONL files (skill-metrics.jsonl) must follow the same retention constraints.
+
+\subsection{Module 3: Integration Mapping}
+
+\subsubsection{Tier 1: Direct Ports (Highest Confidence)}
+
+These Caliber features can be ported with minimal adaptation. The core logic is extracted from Caliber and re-skinned for the skill domain.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Caliber Feature} & \tableheader{gsd-skill-creator Port} & \tableheader{Notes} \\
+\midrule
+Scoring rubric (100-pt, LLM-free) & \texttt{skill-creator score} & Map categories to skill domain \\
+Score history JSONL & \texttt{skill-metrics.jsonl} & Add activation/correction dimensions \\
+Score regression guard & Refinement engine gate & Pre/post score comparison on every refinement \\
+Structured fix data & Skill generation prompt & Failed checks injected into skill generator \\
+CALIBER\_LEARNINGS taxonomy & FeedbackCategory enum & 6 categories, validated in production \\
+\texttt{--compare <ref>} flag & \texttt{skill-creator score --compare} & Per-skill delta vs git ref \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tier 2: Adapted Patterns (Medium Confidence)}
+
+These require architectural adaptation for the GSD/skill-creator context.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Caliber Feature} & \tableheader{gsd-skill-creator Adaptation} & \tableheader{Key Difference} \\
+\midrule
+\texttt{caliber refresh} (git diff) & \texttt{skill-creator refresh} & Focus on trigger staleness, not config regeneration \\
+Two-tier model system & Relevance scorer downgrade & Haiku for scoring; Sonnet for generation \\
+Multi-platform \texttt{--agent} flag & \texttt{skill-creator create --agent} & Strip extension fields for non-GSD targets \\
+Backup/undo system & \texttt{skill-backups/} pre-refinement & Less complex (no branching configs to track) \\
+30s refresh rate limit & Session hook cooldown & Adapt for gsd-skill-creator hook model \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tier 3: GSD-Native Enhancements (New Ground)}
+
+These have no Caliber equivalent but are informed by the comparative analysis.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Enhancement} & \tableheader{Description} \\
+\midrule
+DACP score payload & Skill quality score as structured data in DACP bundles \\
+Activation precision scoring & Run skill triggers against last 10 sessions; measure true/false positive rate \\
+Lock file cleanup in retention manager & Prevent silent finalize failures (Caliber's known gotcha) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: Caliber TODOS — What gsd-skill-creator Can Learn From Their Roadmap}
+
+Caliber's TODOS.md reveals roadmap decisions that inform gsd-skill-creator's own priorities:
+
+\textbf{Org-level context directory} (\texttt{\textasciitilde{}/.caliber/org/}): Caliber is planning a team-wide standards directory. gsd-skill-creator should ship \texttt{\textasciitilde{}/.gsd/skills/} (cross-project skill registry) before Caliber ships org-level context, establishing a compatible pattern. This feeds directly into the Wasteland/DoltHub federation vision.
+
+\textbf{Bidirectional source awareness}: Caliber wants cross-repo constraint propagation. This is architecturally similar to gsd-skill-creator's \texttt{extends:} inheritance. The skill inheritance cycle detection (Kahn's algorithm) is a direct solution to the circular dependency problem Caliber is trying to solve.
+
+\textbf{Remote URL source type}: Caliber wants to fetch standards from Notion/Confluence. gsd-skill-creator's \texttt{skill-creator install} (planned) should support URL-based skill sources from the start, avoiding the retrofit problem Caliber is now facing.
+
+\subsection{Module 5: Risk \& Compatibility Analysis}
+
+\subsubsection{Architectural Risks}
+
+\textbf{Risk 1: Scoring semantic mismatch.} Caliber scores CLAUDE.md files (prose documents). gsd-skill-creator scores SKILL.md files (structured YAML + markdown). The rubric categories map well, but the specific checks differ. The ``Grounding'' check must target skill trigger file patterns against \texttt{git ls-files}, not CLAUDE.md directory references.
+
+\textbf{Risk 2: Token budget for score operations.} Caliber's scoring is LLM-free. If gsd-skill-creator's skill scorer stays LLM-free (which it should), there's no token budget concern. However, the \texttt{insights} command (trend analysis, LLM-distilled summaries) should be gated behind user intent — not auto-running on every session.
+
+\textbf{Risk 3: PR \#28 — Tessl external contribution conflict.} PR \#28 from an external Tessl contributor contains three distinct changes with different risk profiles. Treating it as a single accept/decline decision is wrong — the correct resolution is a surgical partial merge. Full analysis follows in Section~\ref{sec:pr28}.
+
+\textbf{Risk 4: Lock file race condition in multi-session environments.} The CALIBER\_LEARNINGS gotcha about stale lock files applies directly to gsd-skill-creator's PatternStore. The fix is the same: check for stale lock (PID no longer running) and clean up before acquiring.
+
+\subsubsection{Compatibility Wins}
+
+Both projects are TypeScript/Node.js, targeting Claude Code, using JSONL for append-only data stores, and following the same SKILL.md format. The integration surface is smooth — no language boundary, no format conversion, no runtime incompatibility.
+
+Caliber's test framework is vitest (same as gsd-skill-creator). Test patterns are directly portable. The 202-test baseline in gsd-skill-creator provides a solid regression suite for integration changes.
+
+\subsection{PR \#28 Resolution: Surgical Partial Merge}
+\label{sec:pr28}
+
+PR \#28 from an external Tessl contributor is not a single unit. It contains three independent changes that require three independent decisions. Treating it as a blanket accept or decline wastes a legitimate contribution and creates unnecessary friction with a contributor from a credible organization in the Claude Code ecosystem.
+
+\subsubsection{The Three Changes and Their Risk Profiles}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{3cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Change} & \tableheader{Files Affected} & \tableheader{Decision} & \tableheader{Reason} \\
+\midrule
+Summary flattening & feedback-store.ts, feedback.jsonl schema & \textbf{\textcolor{red}{DECLINE}} & Destroys the structured \texttt{FeedbackEntry} fields required by the \texttt{FeedbackCategory} enum port. Any PR that collapses entries to a flat string makes Wave 1B impossible without an immediate revert. \\
+Terminology renames & feedback-store.ts, test files & \textbf{\textcolor{warnyellow}{HOLD}} & Renames may be valid but must happen \textit{after} v1.50 enum work lands, not before. Running them now breaks the 202-test string-comparison baseline silently. Request a separate PR post-v1.50. \\
+Unpinned GitHub Action & .github/workflows/*.yml & \textbf{\textcolor{successgreen}{ACCEPT}} & Zero-risk security hygiene. Can be merged immediately, independently of the other two changes. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Why Summary Flattening Breaks the Integration}
+
+The \texttt{FeedbackCategory} enum port requires \texttt{FeedbackEntry} to remain a structured object. The minimum viable shape after Wave 1B is:
+
+\begin{asciibox}
+  // REQUIRED shape (post-Wave 1B)
+  interface FeedbackEntry {
+    skillName:  string;
+    content:    string;
+    timestamp:  string;
+    category:   FeedbackCategory;   // <-- added in Wave 1B
+  }
+
+  // If PR \#28 summary-flattening merges first:
+  interface FeedbackEntry {
+    summary: string;   // flattened — category field has nowhere to live
+  }
+
+  // Result: Wave 1B has to revert PR \#28 before it can proceed.
+  // Net effect: wasted review cycles, contributor frustration, no gain.
+\end{asciibox}
+
+The \texttt{FeedbackCategory} enum itself is not in PR \#28 — it belongs to this integration work. But the structural prerequisite for it (a typed, field-bearing \texttt{FeedbackEntry}) must be intact when Wave 1B runs.
+
+\subsubsection{PR Comment Script}
+
+The comment to the contributor should be direct, explain the architectural reason, and keep the contribution alive rather than closing it:
+
+\begin{asciibox}
+  "Thanks for this — the Action pin is exactly right and we'll take that now.
+
+  The summary flattening and field renames touch areas that are actively
+  being extended. Typed feedback categories (FeedbackCategory enum) are
+  landing in the next milestone and require FeedbackEntry to stay
+  structured. Merging the flattening first would require an immediate
+  revert — not a great outcome for either of us.
+
+  Would you be willing to:
+    1. Pull the summary flattening and rename hunks from this PR, and
+       merge the Action fix as a standalone?
+    2. Open a new PR for the renames after v1.50 lands — happy to flag
+       when the milestone closes.
+
+  If you want to contribute to the FeedbackCategory design itself, I can
+  loop you in on the spec."
+\end{asciibox}
+
+\subsubsection{Tripwire Test: Automated PR Guard}
+
+Rather than relying on manual review to catch future structure-collapsing PRs, add a structural regression test to the Wave 0 baseline. This test is green before the enum port and remains green after it. Any PR that flattens \texttt{FeedbackEntry} to a string will fail it immediately:
+
+\begin{asciibox}
+  // feedback-store.test.ts — added in Wave 0 (Task 0.3)
+  // Purpose: structural guard against schema-flattening PRs
+
+  it('FeedbackEntry preserves required fields through serialization', () => {
+    const entry = {
+      skillName:  'typescript-patterns',
+      content:    'skill suggested wrong interface pattern',
+      timestamp:  new Date().toISOString(),
+    };
+    const roundtripped = JSON.parse(JSON.stringify(entry));
+    expect(roundtripped).toHaveProperty('skillName');
+    expect(roundtripped).toHaveProperty('content');
+    expect(roundtripped).toHaveProperty('timestamp');
+    // category field added in Wave 1B — its absence here is intentional.
+    // When Wave 1B adds it, extend this test to assert FeedbackCategory values.
+  });
+
+  it('FeedbackStore.append() accepts structured entry', async () => {
+    const store = new FeedbackStore(tmpDir);
+    await store.append({
+      skillName: 'test-skill',
+      content:   'correction text',
+      timestamp: new Date().toISOString(),
+    });
+    const entries = await store.read('test-skill');
+    expect(entries[0]).toHaveProperty('skillName', 'test-skill');
+    expect(entries[0]).toHaveProperty('content');
+    // Flat-string schema would fail this: entries[0] would be a string,
+    // not an object with named properties.
+  });
+\end{asciibox}
+
+\textbf{Where this test lives in the wave plan:} Wave 0, Task 0.3 (Define FeedbackCategory enum). Write the structural guard first, before the enum field exists. This establishes the contract the enum will extend rather than defining the enum and hoping the contract holds.
+
+\subsubsection{Pre-Merge Gate for Future External PRs}
+
+Add a check to the PR review checklist (in CONTRIBUTING.md or as a GitHub PR template) covering the three schema-sensitive files in this integration:
+
+\begin{asciibox}
+  \#\# Integration Guard Checklist (reviewer use)
+
+  For any PR touching feedback-store.ts, feedback.jsonl schema,
+  or learning/ directory:
+
+  [ ] FeedbackEntry remains a typed object (not flattened to string)
+  [ ] Existing field names preserved (or rename coordinated with CHANGELOG)
+  [ ] No new required fields added without migration path for existing JSONL
+  [ ] skill-creator score --compare output format unchanged
+  [ ] 202 existing tests still pass (CI enforces, but reviewer confirm)
+\end{asciibox}
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Integrate Caliber's deterministic scoring, drift detection, and session learning taxonomy into gsd-skill-creator's skill lifecycle to produce a scored, drift-aware, self-improving skill ecosystem. All work targets the gsd-skill-creator dev branch. Zero changes to Caliber's codebase. All 202 existing tests must continue to pass.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  Wave 0: Foundation
+    Shared types: FeedbackCategory enum, SkillScore type, SkillMetricsEntry
+    Skill scoring utility: score-engine.ts (LLM-free)
+    Lock file cleanup utility: lock-manager.ts
+
+  Wave 1A: Core Scoring                  Wave 1B: Learning Enrichment
+    score-engine.ts implementation          FeedbackCategory enum in feedback-store.ts
+    skill-creator score command             Category tagging in feedback-detector.ts
+    .planning/skill-metrics.jsonl           Pre/post score gate in refinement-engine.ts
+    score --compare <ref> flag              skill-backups/ pre-refinement snapshots
+
+  Wave 2: Synthesis
+    skill-creator refresh (git diff + trigger staleness)
+    skill-creator insights (trend analysis + arrows)
+    DACP skillScorePayload in communication bundles
+
+  Wave 3: Verification + Documentation
+    Multi-platform --agent flag (strip extension fields)
+    Relevance scorer model demotion (Haiku tier)
+    Full test suite (target 270+ tests)
+    CHANGELOG entry, docs update, CLAUDE.md refresh
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & \texttt{score-engine.ts} & LLM-free, 100-pt rubric, all 5 categories & CF-01--CF-05 \\
+2 & \texttt{skill-creator score} command & Outputs grade + failing checks + fix data & CF-06--CF-07 \\
+3 & \texttt{skill-creator score --compare} & Per-skill delta vs git ref & CF-08 \\
+4 & \texttt{FeedbackCategory} enum & 6 categories, used in feedback-store.ts & CF-09 \\
+5 & Refinement score gate & Pre/post score; auto-revert on regression & CF-10--CF-11 \\
+6 & \texttt{skill-metrics.jsonl} & Activation rate, correction rate, token ROI & CF-12 \\
+7 & \texttt{skill-creator refresh} & Git diff + trigger staleness detection & CF-13--CF-14 \\
+8 & \texttt{skill-creator insights} & Trend arrows, ROI summary & CF-15 \\
+9 & DACP score payload & \texttt{skillScorePayload} in data envelope & CF-16 \\
+10 & \texttt{--agent} flag & Multi-platform output, extension field stripping & CF-17 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+score-engine.ts (LLM-free) & git CLI, fs & Haiku & 800 \\
+skill-creator score command & score-engine.ts & Haiku & 600 \\
+FeedbackCategory enum & feedback-store.ts & Haiku & 300 \\
+Refinement score gate & refinement-engine.ts, score-engine.ts & Sonnet & 1,200 \\
+skill-metrics.jsonl schema + PatternStore update & pattern-store.ts & Haiku & 400 \\
+skill-creator refresh & score-engine.ts, git CLI & Sonnet & 1,400 \\
+skill-creator insights & skill-metrics.jsonl & Sonnet & 1,000 \\
+DACP score payload & score-engine.ts, DACP types & Sonnet & 800 \\
+--agent flag + platform output & skill-store.ts, workflows/ & Sonnet & 1,200 \\
+Relevance scorer demotion & relevance-scorer.ts & Haiku & 200 \\
+Test suite (all deliverables) & vitest & Sonnet & 3,000 \\
+\textbf{Total} & & & \textbf{11,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared types, lock-manager, score-engine skeleton \\
+1A & Core Scoring & Parallel & Sonnet & score command, metrics JSONL \\
+1B & Learning Enrichment & Parallel & Sonnet & FeedbackCategory, refinement gate \\
+2 & Synthesis & Sequential & Sonnet+Opus & refresh, insights, DACP payload \\
+3 & Verification + Docs & Sequential & Sonnet & Tests, --agent flag, CHANGELOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation (Sequential, Haiku)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{T} & \tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+0.1 & Define SkillScore type & \texttt{src/types/score.ts} & Haiku \\
+0.2 & Define SkillMetricsEntry type & \texttt{src/types/metrics.ts} & Haiku \\
+0.3 & Define FeedbackCategory enum + write structural tripwire test & \texttt{src/types/learning.ts} update + \texttt{feedback-store.test.ts} guard & Haiku \\
+0.4 & Implement lock-manager.ts & \texttt{src/utils/lock-manager.ts} & Haiku \\
+0.5 & Score-engine skeleton + git-diff utility & \texttt{src/scoring/score-engine.ts} & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A — Core Scoring (Sonnet):}
+\begin{itemize}[leftmargin=1.5em]
+  \item T1A.1: Implement score-engine.ts five categories (Existence, Quality, Grounding, Accuracy, Freshness)
+  \item T1A.2: Implement \texttt{skill-creator score} CLI command with grade output + structured fix data
+  \item T1A.3: Add \texttt{--compare <ref>} flag and per-skill delta computation
+  \item T1A.4: Extend PatternStore with \texttt{skill-metrics.jsonl} write/read/retention
+  \item T1A.5: Add Haiku-tier call to relevance-scorer.ts (remove any Sonnet model references)
+\end{itemize}
+
+\textbf{Track B — Learning Enrichment (Sonnet):}
+\begin{itemize}[leftmargin=1.5em]
+  \item T1B.1: Add FeedbackCategory enum to feedback-store.ts; update FeedbackEntry type
+  \item T1B.2: Update feedback-detector.ts to infer category from correction context
+  \item T1B.3: Add pre-refinement score snapshot to refinement-engine.ts
+  \item T1B.4: Add post-refinement score comparison; auto-revert logic
+  \item T1B.5: Implement \texttt{skill-backups/} pre-refinement snapshot write/restore
+\end{itemize}
+
+\subsection{Wave 2: Synthesis (Sequential, Sonnet+Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{5cm}L{4cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{T} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+2.1 & Implement \texttt{skill-creator refresh} & \texttt{src/commands/refresh.ts} & Sonnet \\
+2.2 & Git diff trigger-staleness matching & Update refresh.ts & Sonnet \\
+2.3 & Implement \texttt{skill-creator insights} & \texttt{src/commands/insights.ts} & Sonnet \\
+2.4 & Trend arrow calculation from metrics JSONL & Update insights.ts & Sonnet \\
+2.5 & DACP skillScorePayload in bundles (Opus review) & Update DACP types + serializers & Opus \\
+2.6 & HITL CAPCOM gate: review all new commands & Scope validation report & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Verification + Documentation (Sequential, Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{5cm}L{4cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{T} & \tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+3.1 & Implement \texttt{--agent} flag in create workflow & Update create-skill-workflow.ts & Sonnet \\
+3.2 & Platform-specific extension field stripping & \texttt{src/utils/platform-output.ts} & Sonnet \\
+3.3 & Full test suite for all new commands & vitest test files & Sonnet \\
+3.4 & Run full 202+ test suite, confirm no regressions & CI pass confirmation & Haiku \\
+3.5 & CHANGELOG.md entry (v1.50 integration) & CHANGELOG update & Haiku \\
+3.6 & CLAUDE.md refresh (new commands documented) & CLAUDE.md update & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Shared attribute layer:} SkillScore type + FeedbackCategory enum computed once in Wave 0, reused by all Wave 1 agents via shared context injection
+  \item \textbf{5-minute TTL:} Score-engine.ts implementation cached across T1A.1--T1A.3 to avoid re-reading the implementation during --compare work
+  \item \textbf{Test patterns:} Vitest test file templates generated once in Wave 0 scaffold, extended in Wave 3
+  \item \textbf{Git utility:} The git-diff utility (T0.5) is shared between score-engine (Grounding/Accuracy checks) and refresh command (T2.1), compute once
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tasks} & \tableheader{Est. Tokens} & \tableheader{Model Mix} \\
+\midrule
+Wave 0 & 5 & 2,500 & 80\% Haiku, 20\% Sonnet \\
+Wave 1A & 5 & 4,500 & 70\% Sonnet, 30\% Haiku \\
+Wave 1B & 5 & 4,000 & 80\% Sonnet, 20\% Haiku \\
+Wave 2 & 6 & 5,000 & 60\% Sonnet, 40\% Opus \\
+Wave 3 & 6 & 4,000 & 60\% Sonnet, 40\% Haiku \\
+\textbf{Total} & \textbf{27} & \textbf{20,000} & \textbf{Opus 16\% / Sonnet 62\% / Haiku 22\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [Wave 0: Foundation]
+    SkillScore type ─────────────────────────────┐
+    SkillMetricsEntry type ──────────────────────┤
+    FeedbackCategory enum ───────────────────────┤
+    lock-manager.ts ─────────────────────────────┤
+    score-engine.ts skeleton ────────────────────┤
+                                                 ↓
+  [Wave 1A: Core Scoring] ←──────────────────── [Wave 0 complete]
+    score-engine.ts (full impl.)
+    skill-creator score command
+    --compare flag
+    skill-metrics.jsonl
+    relevance scorer demotion
+         │
+         ↓
+  [Wave 1B: Learning] ←─────────────────────── [Wave 0 complete]
+    FeedbackCategory in store
+    Feedback detector update
+    Refinement score gate (uses score-engine)
+    skill-backups/
+         │
+         ↓
+  [Wave 2: Synthesis] ←──────────────────────── [Wave 1A AND 1B complete]
+    skill-creator refresh (uses score-engine + git-diff)
+    skill-creator insights (uses skill-metrics.jsonl)
+    DACP payload (uses SkillScore type)
+    HITL CAPCOM gate
+         │
+         ↓
+  [Wave 3: Verification] ←─────────────────── [Wave 2 complete]
+    --agent flag
+    Full test suite
+    Documentation
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK release \\
+Core functionality & 28 & Required & BLOCK merge \\
+Integration & 12 & Required & BLOCK merge \\
+Edge cases & 8 & Best-effort & LOG \& document \\
+\textbf{Total} & \textbf{53} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & Score regression guard & Refinement that produces lower score MUST be auto-reverted; no user action required to trigger revert \\
+SC-02 & No LLM calls in score-engine & \texttt{score-engine.ts} must complete with zero LLM API calls; filesystem-only \\
+SC-03 & Existing 202 tests pass & All pre-integration tests continue to pass after all integration changes \\
+SC-04 & DACP payload does not break bundles & Adding skillScorePayload to DACP data envelope must not corrupt existing bundle consumers \\
+SC-05 & FeedbackEntry structural guard & Tripwire test (Wave 0, Task 0.3) must pass before and after PR \#28 action-pin merge; any schema-flattening change causes explicit test failure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Sample)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Existence scoring & SKILL.md present = 10pts; frontmatter complete = 10pts; description present = 5pts \\
+CF-02 & Quality scoring — description effectiveness & Description containing ``Use when...'' clause scores 15/25 Quality; missing clause scores 5/25 \\
+CF-03 & Grounding scoring & Trigger file pattern matching zero files in git ls-files = 0 Grounding; exact match = full score \\
+CF-04 & Freshness scoring & Skill not updated in 60+ days while referenced files changed = 0 Freshness \\
+CF-05 & Score total computation & Sum of categories = total; total maps to grade A(90+)/B(70-89)/C(40-69)/F(<40) \\
+CF-06 & Structured fix data & Every failing check produces \{check, description, fix\} object \\
+CF-07 & Score command output format & Output includes total, grade, per-category breakdown, failing checks \\
+CF-08 & Compare flag & \texttt{--compare HEAD\textasciitilde{}1} shows delta for each skill that changed \\
+CF-09 & FeedbackCategory enum completeness & All 6 categories present; correction/gotcha/fix/pattern/env/convention \\
+CF-10 & Pre-refinement snapshot & skill-backups/ entry written before any refinement applied \\
+CF-11 & Post-refinement score gate — regression & Mock refinement reduces score by 5 pts; assert auto-revert called \\
+CF-12 & skill-metrics.jsonl write & Each session appends activation\_rate, correction\_rate, token\_roi per skill \\
+CF-13 & Refresh — staged file detection & Stage a .ts file; run refresh; assert skills with *.ts trigger flagged \\
+CF-14 & Refresh — trigger staleness report & Skill with trigger pointing to deleted path flagged as stale \\
+CF-15 & Insights trend arrows & 3 sessions with improving score → upward arrow; degrading → downward \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (Sample)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & score-engine → refinement-engine cascade & Score computed by score-engine feeds correctly into refinement-engine gate \\
+IN-02 & FeedbackCategory → refinement-engine & Correction entries with category=gotcha do not trigger refinement (env-only corrections excluded) \\
+IN-03 & skill-metrics → insights & metrics.jsonl written by observer; read correctly by insights command \\
+IN-04 & DACP payload → bundle integrity & Bundle with skillScorePayload parses correctly by bundle consumer \\
+IN-05 & refresh → score-engine consistency & Files flagged by refresh as stale show reduced Accuracy score \\
+IN-06 & --agent cursor output & Skill created with --agent cursor has no triggers/extends/version/enabled fields \\
+IN-07 & lock-manager → PatternStore & Stale lock file cleaned up before PatternStore write; no silent failure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. skill-creator score produces 100-pt LLM-free score & SC-02, CF-01--CF-05 & Pending \\
+2. Score categories cover all 5 dimensions & CF-01--CF-04 & Pending \\
+3. score --compare shows per-skill delta & CF-08 & Pending \\
+4. skill-creator refresh detects stale triggers & CF-13, CF-14, IN-05 & Pending \\
+5. FeedbackStore uses 6-category taxonomy & CF-09, IN-02 & Pending \\
+6. Refinement auto-reverts on score regression & SC-01, CF-10, CF-11 & Pending \\
+7. skill-metrics.jsonl tracks activation/correction/ROI & CF-12, IN-03 & Pending \\
+8. skill-creator insights shows trend arrows & CF-15 & Pending \\
+9. --agent cursor strips extension fields & CF-goal-17, IN-06 & Pending \\
+10. DACP bundles carry skillScorePayload & SC-04, IN-04 & Pending \\
+11. New commands achieve 90\%+ coverage & CF-01--CF-15 composite & Pending \\
+12. All 202 existing tests pass & SC-03 & Pending \\
+12. PR \#28 action-pin merged; flattening declined; tripwire green & SC-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; architecture decisions; scope guard (no Caliber changes) \\
+PLAN & Planner (Sonnet) & Wave decomposition; dependency ordering; parallel track management \\
+SCOUT & Research (Haiku) & Caliber source code pattern extraction; existing test inventory \\
+EXEC-1 & Executor-Score (Sonnet) & score-engine.ts, score command, metrics JSONL \\
+EXEC-2 & Executor-Learn (Sonnet) & FeedbackCategory, refinement gate, skill-backups \\
+CRAFT-ARCH & Architecture Specialist (Opus) & DACP payload design; score regression guard architecture \\
+CRAFT-LEARN & Learning Specialist (Sonnet) & Caliber taxonomy port; feedback-detector category inference \\
+VERIFY & Verification (Sonnet) & Source validation; test coverage audit; interface contract checks \\
+INTEG & Integration (Opus) & Cross-module relationship validation; bundle consumer impact \\
+CAPCOM & HITL Interface (Sonnet) & Human approval at Wave 2 gate (DACP payload scope) \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; model demotion enforcement \\
+SURGEON & Health Monitor (Sonnet) & Existing test regression detection; score-engine LLM-free verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total tasks & 27 \\
+Parallel tracks (max) & 2 (Wave 1A + 1B simultaneously) \\
+Sequential depth & 5 waves \\
+Opus / Sonnet / Haiku split & 16\% / 62\% / 22\% \\
+Estimated context windows & 6 \\
+Estimated sessions & 3 \\
+Estimated wall time & 3--4 hours \\
+Total tests (new) & 53 \\
+Existing tests (must pass) & 202 \\
+Target total test count & 255+ \\
+Target new command coverage & 90\%+ \\
+New source files & 8 (score-engine, lock-manager, refresh cmd, insights cmd, platform-output, score type, metrics type, score tests) \\
+Modified source files & 7 (feedback-store, feedback-detector, refinement-engine, pattern-store, relevance-scorer, create-workflow, cli.ts) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textbf{\sffamily The key architectural insight from this review:} Caliber solved the scoring problem right — deterministic, LLM-free, filesystem-cross-reference, structured fix data. gsd-skill-creator solved the learning problem right — bounded, human-supervised, structurally safe. Neither project needs to become the other. The integration is a bridge, not a merger. Port the scoring engine, enrich the taxonomy, add the regression guard. The spaces between the two codebases are exactly where the value lives.
+
+\vspace{0.5em}
+\textit{--- Caliber $\times$ GSD Skill-Creator Deep Code Review, March 27, 2026}
+\end{quotebox}
+
+\end{document}
