@@ -108,6 +108,7 @@
     { id: 'PSG', name: 'Pacific Spine', path: 'PSG/index.html' },
     { id: 'PSS', name: 'PNW Signal Stack', path: 'PSS/index.html' },
     { id: 'RBH', name: 'Radio History', path: 'RBH/index.html' },
+    { id: 'RFC', name: 'RFC Archive', path: 'RFC/index.html' },
     { id: 'RLS', name: 'Resonant Lands', path: 'RLS/index.html' },
     { id: 'ROF', name: 'Ring of Fire', path: 'ROF/index.html' },
     { id: 'SAL', name: 'Salmon Heritage', path: 'SAL/index.html' },
