@@ -1,0 +1,1000 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Broadcast Indigo / PNW Teal / Signal Amber ──────────────
+\definecolor{primary}{HTML}{1A237E}
+\definecolor{secondary}{HTML}{00695C}
+\definecolor{tertiary}{HTML}{BF360C}
+\definecolor{accent}{HTML}{283593}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ───────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Headers and Footers ───────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Student Voice in Educational Broadcasting}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Student Voice in Educational Broadcasting -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ── TITLE PAGE ────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Student Voice\\[0.3em]in Educational Broadcasting}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{An Oral History Framework for High School Radio}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron \quad|\quad Estimated: 4--6 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═════════════════════════════════════════════════════════════════════════
+
+\section{Student Voice in Educational Broadcasting --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{GSD Foxfire Heritage Skills Vision, GSD BBS Educational Pack Vision}
+\metafield{Context:}{Oral history component for the GSD College layer; PNW institutional heritage}
+
+\subsection{Vision}
+
+There is a category error at the heart of how we document student radio stations. The institutional record is meticulous. FCC license filings, power increase applications, transmitter specifications, magnet-school grant documentation, budget line items --- the paper trail is dense and well-preserved. What it cannot tell you is what it felt like at seventeen to sit behind a console broadcasting at 30 kilowatts across the Puget Sound. It cannot tell you what you said when the ON AIR light first came on, or how the silence of an empty studio at midnight felt different from the silence of a school hallway. The documents record the institution. They do not record the person inside it.
+
+This is the gap the oral history project addresses. The GSD ecosystem builds things from the spaces between --- the connections that institutional records leave unmapped. A 30~kW station broadcasting from a high school in Seattle's Meadowbrook neighborhood is a remarkable technical and civic achievement. What it did to the students who lived inside it, year after year across five decades, is a different kind of remarkable, and it is at serious risk of being lost. Alumni are aging. Memory is imperfect. The tapes are in attics.
+
+The mission is to build a research framework, interview methodology, and archive specification for capturing student experience at high school radio stations of significant broadcast reach --- using KNHC/C89.5 (Nathan Hale High School, Seattle) as the primary case, while developing a generalizable methodology applicable to comparable stations nationally. The work is not to produce a station history. The institutional history already exists in partial form. The work is to produce a \textit{felt} history: what it was to be the human in the room when the signal went out.
+
+This mission lives within the GSD ecosystem's Foxfire principle --- the preservation of living knowledge before it becomes archaeology. The oral history framework produced here is itself a skill: a replicable, open methodology that any school, library, or community radio organization can adopt to capture voices that would otherwise fade.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The institutional record systematically excludes student subjectivity.} FCC filings, school district documents, and station histories document power levels, call signs, format changes, and budget crises. They do not document what students experienced, felt, or learned. The experiential dimension is absent from every official archive.
+
+  \item \textbf{Alumni cohorts are time-bounded.} Students who operated stations in the 1970s and 1980s --- when power levels were low and audiences intimate --- are now in their 60s and 70s. The memories of the transition periods (AM to FM, 10 watts to 30 kW, analog to digital) exist only in living people. Each year, that cohort shrinks.
+
+  \item \textbf{No methodological standard exists for youth broadcaster oral history.} The Oral History Association's best practices address narrator consent, recording standards, and archive deposit. They do not address the specific dynamics of interviewing narrators about experiences that occurred during adolescence --- a developmentally distinct period with its own memory characteristics, identity implications, and power dynamics relative to institutional authority.
+
+  \item \textbf{The ``teaching hospital'' model is underdocumented as a learning phenomenon.} Stations like KNHC/C89.5 operate as what one commentator called ``the radio equivalent of a teaching hospital'' --- student practitioners operating real infrastructure with real audiences. The educational literature treats this model abstractly. There is no phenomenological account of what the model produces in the people who go through it.
+
+  \item \textbf{Digital fragmentation is accelerating loss.} Early recordings exist on formats (reel-to-reel, cassette, MiniDisc) approaching unplayability. Station websites have migrated and lost archival pages. The pandemic interrupted station operations and broke continuity in institutional memory for a critical 18-month window.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Felt History Model}: capture experiential truth through structured oral history, producing a multi-generational, multi-narrator archive indexed to station history milestones, and archived in a publicly accessible repository with full OHA-compliant documentation.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+SUBJECT DOMAIN: HIGH SCHOOL EDUCATIONAL BROADCASTING
+=======================================================
+
+ KNHC/C89.5 (Primary Case)         Comparable Stations (Secondary)
+ Nathan Hale High School, Seattle   KBPS Portland / WNAS Indiana /
+ 30 kW (peak) / 8,500 W (current)   El Cerrito KECG / WLNX Lincoln IL
+ ~1969 -- present (55+ years)
+             |
+             v
+ ┌────────────────────────────────────────────────────┐
+ │           EXPERIENTIAL RECORD (MISSING)            │
+ │  • Pre-broadcast ritual / first airshift           │
+ │  • Live audience awareness (200k+ weekly)          │
+ │  • Identity formation through broadcast voice      │
+ │  • Power dynamics: student vs. professional staff  │
+ │  • Coming of age while operating real infrastructure│
+ │  • Memory of format transitions and crises         │
+ └────────────────────────────────────────────────────┘
+             |
+             v
+ ┌────────────────────────────────────────────────────┐
+ │           ORAL HISTORY METHODOLOGY                 │
+ │  OHA Principles & Best Practices (2018/2022)       │
+ │  Youth narrator protocols / power sensitivity      │
+ │  Multi-generational narrator selection             │
+ │  Archive deposit: OHA-compliant repository         │
+ └────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+==============================
+                    ┌──────────────┐
+                    │  M1: STATION │
+                    │  HERITAGE    │  ← Institutional context + gap map
+                    └──────┬───────┘
+                           │
+           ┌───────────────┼───────────────┐
+           v               v               v
+    ┌──────────┐   ┌──────────────┐   ┌──────────┐
+    │M2: FELT  │   │M3: ORAL HIST │   │M4: INTRVW│
+    │EXPERIENCE│   │METHODOLOGY   │   │FRAMEWORK │
+    └────┬─────┘   └──────┬───────┘   └─────┬────┘
+         │                │                  │
+         └────────────────┼──────────────────┘
+                          v
+                   ┌──────────────┐
+                   │ M5: ARCHIVE  │
+                   │& DISSEMINATE │  ← Repository spec + public access
+                   └──────────────┘
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Station Heritage}
+Survey the documented history of KNHC/C89.5 and peer stations: call sign chronology, power milestones, format changes, budget crises, institutional relationships. Map what institutional sources capture and what they explicitly omit. Produce a milestone timeline correlated with narrator cohort windows (e.g., ``1977--1981: magnet school era,'' ``1988--1995: 30 kW expansion,'' ``2002--2009: digital transition'').
+
+\subsubsection{Module 2: The Felt Experience}
+Synthesize existing accounts (Seattle Times profiles, C89.5 donor testimonials, EdSource reporting on comparable stations) to characterize the phenomenology of student broadcasting: first airshift, live audience awareness, identity formation through broadcast persona, relationship to professional staff, memory of technical milestones as personal events. Identify the categories of experience for which no existing account exists.
+
+\subsubsection{Module 3: Oral History Methodology}
+Adapt OHA Core Principles and Best Practices for the specific context of youth broadcaster narrators. Address: (a) memory reliability for adolescent-era experiences; (b) power dynamics when interviewing former students about institutional authority figures; (c) consent frameworks for narrators whose experiences occurred as minors; (d) multi-generational narrator selection for maximum era coverage.
+
+\subsubsection{Module 4: Interview Framework}
+Develop the interview guide: question bank organized by thematic domain (technical, social, emotional, identity, community), with era-specific variants for each narrator cohort. Include pre-interview research protocols, recording standards, and lead-in/lead-out scripts. Design narrator intake and screening forms.
+
+\subsubsection{Module 5: Archive and Dissemination}
+Specify the repository strategy: primary archive options (University of Washington Libraries, Seattle Public Library Special Collections, C89.5 station archive), metadata schema, indexing approach, digital access plan, and long-term preservation standards. Produce deposit agreement templates and a public-facing discovery layer specification.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: student-voice-oral-history
+  version: 1.0
+  domain: educational-broadcasting-history
+  primary_case: KNHC-C89.5-Nathan-Hale-Seattle
+  activation_profile: squadron
+  model_split:
+    opus: 30%       # synthesis, cross-module, youth ethics
+    sonnet: 60%     # survey compilation, interview framework, archive spec
+    haiku: 10%      # schemas, templates, consent form scaffolding
+  sensitivity:
+    youth_narrators: HIGH
+    adolescent_memory: HIGH
+    institutional_power_dynamics: MODERATE
+    indigenous_context: ANNOTATE  # Coast Salish geography; use OCAP(R) where relevant
+  output_formats:
+    - interview_guide_pdf
+    - narrator_intake_form
+    - archive_deposit_template
+    - station_heritage_timeline
+    - felt_experience_synthesis
+    - methodology_reference
+    - repository_specification
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item KNHC/C89.5, Nathan Hale High School, Seattle (primary case)
+  \item Narrators: current students, recent alumni (last 10 years), and historical alumni (1970s--2010s)
+  \item OHA-compliant oral history methodology adapted for youth broadcaster context
+  \item Interview guide: question bank, era variants, pre-interview protocols
+  \item Archive specification: repository options, metadata schema, deposit templates
+  \item Comparative reference to 3--5 peer stations (KBPS, WNAS, KECG) for methodological validation
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Production of completed oral history interviews (framework only; interviews are subsequent project)
+  \item Full institutional history of KNHC (documented elsewhere)
+  \item Commercial radio or college radio stations (distinct institutional dynamics)
+  \item Stations outside the United States (FCC regulatory context is scope boundary)
+  \item Digital rights / music licensing history of the station
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Station Heritage Timeline covers all documented power milestones, format changes, and institutional events from 1969 to present, with explicit notation of experiential gaps.
+  \item Narrator Cohort Map identifies at least 6 distinct era windows correlated to station history, with estimated living narrator populations per window.
+  \item Oral History Methodology document addresses all four youth-specific adaptation areas (memory, power, consent, selection) with reference to OHA source documents.
+  \item Interview Question Bank contains a minimum of 40 distinct questions organized across 5 thematic domains, with era-specific variants for at least 3 cohorts.
+  \item Pre-Interview Protocol is executable by a non-expert interviewer without additional guidance.
+  \item Narrator Intake Form captures all required OHA consent and release elements.
+  \item Repository Specification names at least 2 viable archive partners with deposit agreement templates.
+  \item Metadata Schema is compatible with Dublin Core and OHA indexing standards.
+  \item All outputs are produced as editable source files (Markdown, LaTeX, or plaintext) suitable for direct use in the GSD skill-creator pipeline.
+  \item Cross-module synthesis identifies at least 3 experiential themes not captured by any existing institutional source.
+  \item Felt Experience Synthesis document is readable by a general audience (Flesch-Kincaid grade $\leq$ 12).
+  \item Methodology Reference is citable: all OHA source documents are fully attributed.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Foxfire Heritage Skills Vision & Parent vision & Foxfire principle: capture living knowledge before it becomes archaeology \\
+GSD BBS Educational Pack Vision & Sibling & Parallel preservation of pre-web learning culture \\
+GSD College Layer (.college/) & Integration target & Oral history methodology is a .college/ module candidate \\
+GSD Fair Use Educational Mission & Constraint & Recording / broadcast clip use in outputs must satisfy fair use analysis \\
+GSD Learn Kung Fu Pack & Methodology parallel & Structured skill transfer via apprenticeship; oral history as the inverse (capture vs.\ transmit) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The GSD ecosystem is built on a conviction that meaning lives in the spaces between nodes, not in the nodes themselves. A radio transmitter broadcasting at 30 kW is a node. A student at the console at 17 years old, aware for the first time that 200,000 people can hear them, is a moment in the space between. The signal travels; something happens in the person who sent it. That something is what institutions cannot document and what oral history is designed to preserve.
+
+KNHC/C89.5 is, as one observer put it, the radio equivalent of a teaching hospital. A teaching hospital is defined not by its equipment but by what it does to the people who train in it --- the moment when the student becomes, provisionally and terrifyingly, the practitioner. Fifty-five years of that moment, recurring annually in a room at Nathan Hale High School in Seattle's Meadowbrook neighborhood, constitutes a body of human experience that has never been systematically gathered. This mission builds the vessel to gather it.
+
+The Amiga Principle applies here too: you do not need brute-force resources to produce something remarkable. You need the right architecture and faithful execution. A well-designed interview guide, a willing narrator, a decent recording device, and an open-access archive --- these are the components. What they can produce, assembled with care, is a record of what it means to be young and powerful and heard.
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═════════════════════════════════════════════════════════════════════════
+
+\section{Student Voice in Educational Broadcasting --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the evidentiary foundation for mission execution. Agents should treat this as the primary factual source; web research should be used only to fill explicitly identified gaps. All claims are sourced to the organizations listed below.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item Oral History Association (OHA) --- Core Principles (2020), Best Practices (2022), Ethics Statement
+  \item C89.5/KNHC public station records and the Seattle Public Schools institutional archive
+  \item Wikipedia: High School Radio; Campus Radio; KNHC (cross-referenced against primary sources)
+  \item EdSource (edsource.org) --- El Cerrito High School radio program reporting (2023)
+  \item Northwest Progressive Institute Cascadia Advocate --- C89.5 50th anniversary coverage (2021)
+  \item Voice of Witness --- Community oral history methodology
+  \item Smithsonian Institution Archives --- Oral history best practices guide
+  \item Dance Music Northwest --- C89.5 50th anniversary interview with June Fox and Drew Bailey
+\end{itemize}
+
+\subsection{Module 1 Reference: Station Heritage}
+
+\subsubsection{KNHC/C89.5 --- Milestone Timeline}
+
+KNHC began in December 1969 as a 100-milliwatt AM station at 1210 kHz, built by Nathan Hale electronics teacher Larry Adams to give students ``hands-on, practical work in electronics.'' The FM construction permit followed in September 1970; first FM broadcast was January 25, 1971 at 10 watts on 89.5 MHz, covering approximately a 5-mile circle in north Seattle with an estimated 5,000--15,000 listeners.
+
+Power increases tracked institutional investment in the program: 320 watts (September 1972), 1,500 watts directional (November 1974), 3 kW non-directional (October 1981), and the landmark application in December 1988 to increase to 30 kW --- implemented in 1991. The station's transmitter was eventually moved to Cougar Mountain in 2002, at 8,500 watts, significantly extending reach from Everett to roughly halfway into Tacoma and across Puget Sound. Current weekly listenership is estimated at 150,000--200,000.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Year} & \tableheader{Power / Event} & \tableheader{Institutional Context} \\
+\midrule
+1969 & 100 mW AM & Electronics class project; Larry Adams, teacher-founder \\
+1971 & 10 W FM & First FM broadcast; call letters KNHC (Nathan Hale + Cleveland) \\
+1974 & 1,500 W dir. & Stereo operations added 1973 \\
+1977 & 5,000 W & Mass Communications magnet program begins \\
+1981 & 3 kW non-dir. & Budget crisis; district threatens shutdown; community college partnership saves station \\
+1982 & Format: R\&B/Urban & ``More funk than junk''; rapid listener growth \\
+1983 & C89 identity & Jack Straw Foundation files to share frequency (case won 1988) \\
+1988 & 30 kW filed & Application for power increase; grant secured \\
+1991 & 30 kW live & Full-power broadcasts begin reaching greater Seattle \\
+1995 & Digital audio & Three digital editing workstations installed \\
+1997 & Internet stream & First streaming broadcast; one of earliest in US \\
+2002 & Cougar Mountain & Transmitter relocation; 8,500 W; expanded reach \\
+2003 & Best HS Station & Village Voice ``Best of New York'' high school station (internet stream) \\
+2004 & Billboard panel & First non-commercial US station on Billboard Dance chart \\
+2008 & Lady Gaga & Students book pre-fame Lady Gaga for 400-person campus show \\
+2009 & New studios & New digital studios at Nathan Hale; HD Radio \\
+2021 & 50th anniversary & Post-COVID resumption; 50 years of continuous FM operation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Documented Gaps in the Institutional Record}
+
+The institutional record captures infrastructure events. It consistently omits: student names, student accounts of specific broadcasts, descriptions of the studio experience, accounts of the social dynamics between student and professional staff, descriptions of the audience awareness moment, and narratives of how the experience shaped subsequent career or personal identity. The 1980 course manual by Larry Adams describes the KNHC facility as ``a vocationally approved classroom designed to provide students with the opportunity to apply their electricity and electronics training in the development of entry-level employment skills.'' This framing is vocational-utilitarian; the experiential and developmental dimensions are not addressed.
+
+\subsubsection{Peer Stations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Station} & \tableheader{School} & \tableheader{Founded} & \tableheader{Notable} \\
+\midrule
+KBPS & Benson Polytechnic, Portland OR & 1923 & Oldest HS station in US (AM 1450); still operating \\
+WNAS & New Albany HS, Indiana & 1949 & Oldest HS FM station \\
+KECG & El Cerrito HS, California & 1978 & NPR partnership; NYT top 10 student podcast \\
+WLNX & Lincoln-Way HS, Illinois & --- & Active HS FM program \\
+WHHS & Haverford Senior HS, Pennsylvania & 1949 & Early FM HS station \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: The Felt Experience}
+
+\subsubsection{Existing Accounts}
+
+The Seattle Times Pacific NW Magazine (August 2021) provides the richest existing experiential account, describing the summer 2021 resumption of student programming post-COVID. Operations Manager Drew Bailey is quoted noting that students are ``such a big part of it, and it's designed for them'' --- with student co-hosts a normal feature of the morning show. The article captures the post-COVID re-entry moment but not the deeper longitudinal experience.
+
+The C89.5 Washington Gives donor profile of James McKenna captures a rare alumni testimony: ``I discovered c89.5 when I was in 9th grade and ended up virtually living at the station. My radio teacher got me my first job in radio. A few years later I'm a young producer on a comedy series called Almost Live! That's where I met Bill [Nye] and Erren and the rest is history.'' McKenna later co-created \textit{Bill Nye the Science Guy}. This is an outlier account (notable career trajectory) that reveals the station's potential but is not representative of the general student experience.
+
+\subsubsection{Experience Categories Without Existing Documentation}
+
+The following experiential categories were identified as entirely absent from the documentary record:
+
+\begin{itemize}
+  \item \textbf{The first airshift.} No first-person account of a student's first solo on-air broadcast exists in the public record.
+  \item \textbf{Audience awareness at scale.} What it felt like to know (or not know) that 200,000 people could hear you.
+  \item \textbf{The studio as sanctuary.} Accounts of the station as a social space, an identity space, or an escape.
+  \item \textbf{Failure and recovery.} Dead air, wrong carts, technical errors --- the learning-by-doing dimension.
+  \item \textbf{Format transition as personal event.} Students who were there when R\&B became dance music; when analog became digital; when streaming began.
+  \item \textbf{Student/professional staff dynamics.} Navigating the authority structure of a licensed station while being a minor.
+  \item \textbf{The signal boundary.} Did students think about where the signal reached? Did they call friends in Tacoma?
+\end{itemize}
+
+\subsubsection{Developmental Context}
+
+Research on adolescent identity formation (Erikson's identity vs.\ role confusion stage, ages 12--18) frames the broadcast experience as occurring during the precise developmental window in which voice, authority, and public self are under active construction. A student who acquires a broadcast voice during this window is, in a meaningful sense, using a 30-kilowatt transmitter to conduct the developmental work of adolescence at metropolitan scale. This framing --- absent from the institutional record --- is the conceptual heart of the oral history project.
+
+\subsection{Module 3 Reference: Oral History Methodology}
+
+\subsubsection{OHA Core Framework}
+
+The Oral History Association's Core Principles (adopted 2020, updated 2022) establish the foundational framework. Key principles for this project:
+
+\begin{itemize}
+  \item \textbf{Narrator-centered.} Narrators are co-creators of the interview. The interviewer's authority does not supersede the narrator's right to their own story.
+  \item \textbf{Informed consent is ongoing.} Consent is not a one-time signature; it is an evolving agreement throughout the process, from first contact to archival deposit.
+  \item \textbf{Power sensitivity.} Practitioners must be sensitive to differences in power between interviewer and narrator, and to divergent interests and expectations.
+  \item \textbf{Narrator owns their words.} Copyright in the interview rests with the narrator until and unless transferred via a deed of gift or equivalent agreement.
+  \item \textbf{Preservation is an obligation.} Interviews should be preserved and made accessible to future researchers whenever possible.
+\end{itemize}
+
+\subsubsection{Youth-Specific Adaptations Required}
+
+Standard OHA methodology requires the following adaptations for youth broadcaster narrators:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Dimension} & \tableheader{Required Adaptation} \\
+\midrule
+Memory reliability & Adolescent-era memories are subject to telescoping, confabulation, and affective distortion. Interview guides should anchor questions to specific concrete events (first airshift, a specific broadcast, a crisis moment) rather than general period recall. \\
+Power dynamics & Many narrators will describe relationships with teachers and professional staff who had authority over them as minors. Questions about these relationships require care to avoid leading questions and to hold space for both positive and negative accounts. \\
+Consent for minor-era experiences & Narrators are now adults describing experiences that occurred as minors. Standard adult consent is sufficient. However, if any interview content would identify other minors (classmates), anonymization protocols are required. \\
+Multi-generational selection & Narrator selection must be intentional about era coverage. Alumni from the 1970s--1980s are in their 60s--70s; their memories of the station's early, low-power years are irreplaceable. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Interview Duration and Format}
+
+OHA Best Practices recommend a minimum of one hour per interview session, with 90 minutes as a more realistic planning target for narrative-rich subjects. For this project, a two-session model is recommended: Session 1 (90 min) covers the experiential narrative; Session 2 (60 min) covers reflection, corrections, and thematic follow-up. Total interview duration per narrator: approximately 3 hours including pre-interview.
+
+\subsection{Module 4 Reference: Interview Framework}
+
+\subsubsection{Thematic Domains}
+
+The interview guide is organized across five thematic domains. These domains were derived from the experience category analysis in Module 2 and from the OHA guidance on topical interview preparation.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Domain} & \tableheader{Coverage} \\
+\midrule
+Technical & Equipment, console, transmitter awareness, signal reach, technical failures, digital transitions \\
+Social & Station community, student/staff dynamics, friend groups, the studio as space \\
+Emotional & First airshift, nervousness, pride, identity, failure and recovery \\
+Audience & Listener awareness, phone calls, requests, community feedback, scale of reach \\
+Career/Legacy & How the experience shaped subsequent life; what they would tell a current student \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Selected Anchor Questions}
+
+Anchor questions target specific concrete events to activate episodic rather than semantic memory:
+
+\begin{itemize}
+  \item \textit{Technical:} ``Walk me through the first time you were alone at the console. What did the room look, sound, and smell like?''
+  \item \textit{Emotional:} ``Was there a moment when the scale of the broadcast --- the signal reach --- became real to you? What happened?''
+  \item \textit{Social:} ``Describe the social world of the station. Who were the characters? What were the unwritten rules?''
+  \item \textit{Audience:} ``Did you ever get a call or a message from a listener? Tell me about it.''
+  \item \textit{Career/Legacy:} ``What did the station give you that your regular classes didn't?''
+\end{itemize}
+
+\subsection{Module 5 Reference: Archive and Dissemination}
+
+\subsubsection{Repository Options}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Repository} & \tableheader{Type} & \tableheader{Notes} \\
+\midrule
+University of Washington Libraries Special Collections & University archive & Robust digital preservation; Pacific Northwest collection context; experienced with community oral history \\
+Seattle Public Library Special Collections & Public library & Broad public access; city institutional relationship; lower barrier for community contributors \\
+C89.5/KNHC Station Archive & Self-archive & Deepest contextual knowledge; risk of institutional discontinuity; requires preservation partnership \\
+Washington State Digital Archives & State government & Appropriate for Seattle Public Schools-owned content; WARC-compliant \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Metadata Schema}
+
+Each interview record should carry, at minimum: narrator name, birth year, years at station, era window code, recording date, interviewer name, recording format, duration, thematic tags (from the 5 domain taxonomy), and OHA consent/release status. The schema is designed to be compatible with Dublin Core and the OHA's recommended indexing vocabulary.
+
+\subsubsection{Digital Access}
+
+Completed interviews should be deposited in both audio (lossless FLAC, archival WAV) and transcript form. Time-indexed transcripts enable segment-level access for researchers. A public-facing discovery layer --- a simple searchable web interface indexed to the thematic domain taxonomy --- should be specified as a Phase 2 deliverable, after initial deposit is complete.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Area} & \tableheader{Level} & \tableheader{Protocol} \\
+\midrule
+Youth narrator experiences & HIGH & All narrators are now adults; minor-era content does not require parental consent. Classmate identification requires anonymization option. \\
+Institutional authority figures & MODERATE & Questions about teachers and professional staff hold space for complex or negative accounts without leading. \\
+Trauma and failure & MODERATE & Some narrators may describe distressing experiences (public failure, professional rejection). Interviewers must be prepared to pause and redirect. \\
+Coast Salish geography & ANNOTATE & The station broadcasts on unceded Coast Salish territory. Where relevant to narrator accounts of place and community, this context should be acknowledged using nation-specific attribution (Duwamish, Muckleshoot, Suquamish, Snoqualmie). \\
+Minor identifications & HIGH & Any reference to third parties who were minors during the described period must be handled with anonymization default. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Government \& Agency Sources}
+\begin{itemize}
+  \item Federal Communications Commission. Class D Non-Commercial Educational FM License History. FCC.gov.
+  \item Seattle Public Schools. ``Building for Learning 2022: Hale Radio Station.'' Institutional archive, April 2024.
+  \item Washington State Digital Archives. WARC preservation standards.
+\end{itemize}
+
+\textbf{Professional Organizations}
+\begin{itemize}
+  \item Oral History Association. \textit{Core Principles of the Oral History Association}. Adopted 2020. oralhistory.org.
+  \item Oral History Association. \textit{OHA Best Practices for Oral History}. Updated 2022. oralhistory.org.
+  \item Oral History Association. \textit{OHA Statement on Ethics}. oralhistory.org.
+  \item Smithsonian Institution Archives. \textit{How to Do Oral History}. siarchives.si.edu.
+  \item Voice of Witness. \textit{Benefits of Oral History}. voiceofwitness.org.
+\end{itemize}
+
+\textbf{Journalism and Institutional Accounts}
+\begin{itemize}
+  \item Bailey, Drew (C89.5 Operations Manager), and Fox, June (General Manager). Interviewed in Dance Music Northwest, ``C89.5 Celebrates 50 Years,'' December 2021. dancemusicnw.com.
+  \item C89.5/KNHC. Station history and about page. c895.org.
+  \item Acceturo, Jeanne Marie. Quoted in EdSource, ``El Cerrito High School Students Run Their Own Radio Shows,'' May 2023.
+  \item McKenna, James. Donor profile, Washington Gives / C89.5 KNHC Public Radio Association. wagives.org.
+  \item Villeneuve, Andrew. ``Congratulations, KNHC: Seattle's Student-Run C89.5 Is Celebrating Its Fiftieth Anniversary.'' NPI Cascadia Advocate, January 2021.
+  \item Seattle Times Pacific NW Magazine. ``Kids Are Learning, Having Fun---and Maybe Even Finding a Career---at Nathan Hale's Radio Station.'' August 2021.
+  \item Jewell, Katherine Rye. \textit{Live from the Underground: A History of College Radio}. Discussed on Unsung History Podcast, July 2025.
+\end{itemize}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete, executable oral history framework for capturing student experience at high school radio stations of significant broadcast reach. The primary deliverable is a publication-ready methodology package --- interview guide, narrator intake forms, archive specification, and felt-experience synthesis --- scoped to KNHC/C89.5 and generalizable to peer stations. All outputs are structured for direct ingestion by the GSD skill-creator pipeline.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE: STUDENT VOICE ORAL HISTORY MISSION
+=======================================================
+
+WAVE 0: FOUNDATION (Sequential, Haiku)
+  [0.1] Shared schema: narrator cohort taxonomy
+  [0.2] Source index: OHA docs + KNHC institutional sources
+  [0.3] Template scaffolding: intake form, consent form shells
+        |
+        v
+WAVE 1: PARALLEL RESEARCH (Parallel, Sonnet + Opus)
+  Track A                          Track B
+  [1A.1] Station Heritage          [1B.1] Oral History Methodology
+  [1A.2] Peer Station Survey       [1B.2] Youth-Specific Adaptations
+  [1A.3] Gap Map Production        [1B.3] Interview Framework Draft
+        |                                  |
+        └──────────────┬───────────────────┘
+                       v
+WAVE 2: SYNTHESIS (Sequential, Opus)
+  [2.1] Felt Experience Synthesis (cross-module)
+  [2.2] Interview Guide Integration
+  [2.3] Archive Specification
+        |
+        v
+WAVE 3: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  [3.1] Output assembly (all deliverables)
+  [3.2] OHA compliance verification
+  [3.3] GSD pipeline handoff package
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} (Wave 0) --- Shared data schemas, source index, template shells
+  \item \textbf{Research Layer} (Wave 1) --- Station heritage + oral history methodology in parallel
+  \item \textbf{Synthesis Layer} (Wave 2) --- Cross-module integration producing the core deliverables
+  \item \textbf{Publication Layer} (Wave 3) --- Final assembly, verification, and handoff package
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4cm}L{3.5cm}L{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D1 & Station Heritage Timeline & All power milestones + format events + gap notation & Markdown table \\
+D2 & Narrator Cohort Map & 6+ era windows with estimated narrator populations & Markdown \\
+D3 & Felt Experience Synthesis & 5+ undocumented experience categories; readable prose & PDF/Markdown \\
+D4 & Oral History Methodology Reference & All 4 youth adaptations; OHA citations; citable & PDF \\
+D5 & Interview Question Bank & 40+ questions; 5 domains; 3+ era variants & Markdown / YAML \\
+D6 & Pre-Interview Protocol & Executable by non-expert; step-by-step & Markdown \\
+D7 & Narrator Intake \& Consent Form & OHA-compliant; all required elements & PDF form \\
+D8 & Repository Specification & 2+ archive partners; deposit templates; metadata schema & Markdown \\
+D9 & GSD Handoff Package & All above as zip; index.md; skill-creator ready & .zip \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema + source index & None & Haiku & 4K \\
+Consent form shells & Schema & Haiku & 3K \\
+Station Heritage Timeline (D1) & Source index & Sonnet & 8K \\
+Peer Station Survey & Source index & Sonnet & 6K \\
+Gap Map (feeds D3) & Heritage Timeline & Sonnet & 5K \\
+Oral History Methodology (D4) & Source index & Sonnet & 10K \\
+Youth Adaptations (feeds D4) & OHA docs & Opus & 8K \\
+Interview Framework Draft (D5, D6) & Gap Map + OHA & Sonnet & 12K \\
+Felt Experience Synthesis (D3) & All Wave 1 outputs & Opus & 12K \\
+Interview Guide Integration (D5 final) & Framework + Synthesis & Opus & 10K \\
+Archive Specification (D8) & Methodology + Schema & Sonnet & 8K \\
+Narrator Cohort Map (D2) & Heritage Timeline & Sonnet & 5K \\
+Output Assembly + Verification & All Wave 2 & Sonnet & 8K \\
+GSD Handoff Package (D9) & All deliverables & Sonnet & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Youth ethics analysis, cross-module synthesis (Felt Experience), interview guide integration where developmental context and OHA compliance must be held simultaneously \\
+Sonnet & $\sim$60\% & Survey compilation (station heritage, peer stations), structured document production (methodology reference, archive spec, question bank), verification \\
+Haiku & $\sim$10\% & Schema generation, template scaffolding, consent form shells, index generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index, templates \\
+1A & Station Heritage & Parallel & Sonnet & D1 draft, peer survey, gap map \\
+1B & Methodology & Parallel & Sonnet+Opus & D4 draft, youth adaptations, framework \\
+2 & Synthesis & Sequential & Opus & D3, D5 final, D8 \\
+3 & Publication & Sequential & Sonnet & D2, D6, D7, D9, verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+0.1 Narrator cohort schema & YAML schema: era\_window, years, power\_level, format, estimated\_narrators & Haiku \\
+0.2 Source index & Markdown table: source, type, URL, reliability tier, last verified & Haiku \\
+0.3 Template shells & Consent form (blank), intake form (blank), question bank (empty domains) & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Station Heritage (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+1A.1 Heritage Timeline & Complete D1: all documented events 1969--present with experiential gap notation & Sonnet \\
+1A.2 Peer Survey & 5 comparable stations: founding, power, notable events, any existing oral history & Sonnet \\
+1A.3 Gap Map & Identify and categorize all experiential gaps; map to narrator cohort windows & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Methodology (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+1B.1 OHA Methodology & Synthesize Core Principles, Best Practices, Ethics Statement into working methodology summary; all claims cited & Sonnet \\
+1B.2 Youth Adaptations & Produce 4-domain youth adaptation framework (memory, power, consent, selection) with OHA source mapping & Opus \\
+1B.3 Framework Draft & Draft interview question bank (D5): 40+ questions across 5 domains; 3 era cohort variants & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+2.1 Felt Experience Synthesis & Integrate gap map + existing accounts + developmental context into D3; 5+ undocumented categories; general-audience readable & Opus \\
+2.2 Interview Guide Integration & Merge framework draft with synthesis findings; produce final D5 with anchor questions; validate against OHA interview guidance & Opus \\
+2.3 Archive Specification & Produce D8: repository comparison, deposit templates, metadata schema, digital access plan; compatible with Dublin Core & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+3.1 Remaining deliverables & D2 (Cohort Map), D4 (Methodology Reference final), D6 (Pre-Interview Protocol), D7 (Consent Form) & Sonnet \\
+3.2 OHA compliance check & Verify all 9 deliverables against OHA Core Principles; flag any violations & Sonnet \\
+3.3 Handoff package & Assemble D9: zip with index.md, all deliverables, README for skill-creator & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Waves 1A and 1B run in parallel within the same 5-minute cache window; source index from Wave 0 is shared context.
+  \item OHA source documents (Core Principles, Best Practices, Ethics Statement) are loaded once at Wave 0 and treated as cached context through Wave 3.
+  \item All Wave 1 outputs are assembled into a single synthesis brief before Wave 2 begins, minimizing context reconstruction cost.
+  \item Wave 3 reads all Wave 2 deliverables in a single pass for compliance verification.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Input (K)} & \tableheader{Output (K)} & \tableheader{Total (K)} \\
+\midrule
+Wave 0 & 5 & 7 & 12 \\
+Wave 1A & 15 & 20 & 35 \\
+Wave 1B & 18 & 24 & 42 \\
+Wave 2 & 60 & 30 & 90 \\
+Wave 3 & 90 & 25 & 115 \\
+\midrule
+\rowcolor{lighttertiary}
+\textbf{Total} & \textbf{188} & \textbf{106} & \textbf{294} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+[0.1 Schema] ──────────────────────────────────────────┐
+[0.2 Source Index] ─────────────────┐                  │
+[0.3 Templates] ─────────────────┐  │                  │
+                                 │  │                  │
+         ┌───────────────────────┘  │                  │
+         │                          │                  │
+    [1A Heritage] ◄──────────────── │ ─────────────────┘
+    [1A Peer Survey] ◄────────────── │
+    [1A Gap Map] ◄──── [1A Heritage]─┘
+         │
+         │              [1B OHA Methodology] ◄─[0.2]
+         │              [1B Youth Adaptations] ◄─[1B OHA]
+         │              [1B Framework Draft] ◄─[1B OHA]+[1A Gap Map]
+         │                          │
+         └──────────────────────────┘
+                        │
+               [2.1 Felt Experience] ◄─ [1A Gap Map]+[1B Adaptations]
+               [2.2 Interview Guide] ◄─ [2.1]+[1B Framework]
+               [2.3 Archive Spec] ◄─── [0.1 Schema]+[1B OHA]
+                        │
+          [3.1 Remaining Deliverables] ◄── [2.x all]
+          [3.2 OHA Compliance Check] ◄──── [3.1]
+          [3.3 Handoff Package D9] ◄─────── [3.2]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}L{4cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical (OHA compliance) & 4 & BLOCK & Do not release; remediate \\
+Core functionality & 6 & HIGH & CAPCOM review before Wave 3 \\
+Integration & 4 & MEDIUM & Flag for synthesis review \\
+Edge cases & 3 & LOW & Document; address in v1.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+SC-01 & OHA consent elements present in D7 & Narrator Consent Form contains all OHA-required elements: informed consent statement, narrator rights, copyright assignment option, restriction options \\
+SC-02 & Minor identification anonymization protocol & D6 (Pre-Interview Protocol) explicitly instructs interviewers to anonymize references to third parties who were minors during described events \\
+SC-03 & No leading questions in D5 regarding authority figures & Review of question bank confirms zero questions that presuppose a positive or negative characterization of staff or teachers \\
+SC-04 & Coast Salish attribution present where geographic context invoked & Any reference to the station's broadcast geography that invokes place includes nation-specific attribution (Duwamish, Muckleshoot, Suquamish, Snoqualmie) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{2.5cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Heritage timeline covers all milestones 1969--present & CORE-01 & $\square$ \\
+Narrator cohort map: 6+ era windows & CORE-02 & $\square$ \\
+Methodology addresses all 4 youth adaptations & CORE-03 & $\square$ \\
+Question bank: 40+ questions, 5 domains, 3+ era variants & CORE-04 & $\square$ \\
+Pre-interview protocol executable by non-expert & CORE-05 & $\square$ \\
+Narrator intake form: all OHA consent elements & SC-01 & $\square$ \\
+2+ archive partners named in D8 & CORE-06 & $\square$ \\
+Metadata schema: Dublin Core compatible & INTEG-01 & $\square$ \\
+All outputs as editable source files & INTEG-02 & $\square$ \\
+3+ experiential themes absent from institutional record & INTEG-03 & $\square$ \\
+Felt Experience Synthesis: FK grade $\leq$ 12 & INTEG-04 & $\square$ \\
+All OHA sources fully attributed & SC-01+SC-04 & $\square$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go at wave boundaries; holds OHA compliance standard \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; OHA document retrieval; KNHC institutional source compilation \\
+EXEC-A & Executor Alpha & Track A document production (heritage, peer survey, gap map) \\
+EXEC-B & Executor Beta & Track B document production (methodology, adaptations, framework) \\
+CRAFT-ORAL & Oral History Specialist & OHA methodology deep analysis; youth adaptation framework; interview guide integration \\
+CRAFT-CONTEXT & Heritage Specialist & KNHC timeline, felt-experience synthesis, developmental framing \\
+VERIFY & Verification Agent & OHA compliance check; source attribution validation; SC test execution \\
+INTEG & Integration Agent & Cross-module relationship validation; felt experience $\leftrightarrow$ interview guide coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only channel crossing human-machine boundary \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summary at completion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & student-voice-oral-history-v1.0 \\
+Activation profile & Squadron (12 roles) \\
+Total components & 14 \\
+Estimated token budget & $\sim$294K tokens \\
+Estimated context windows & 4--6 \\
+Estimated sessions & 2--3 \\
+Parallel tracks & 2 (Wave 1) \\
+Safety-critical tests & 4 (all BLOCK) \\
+Core functionality tests & 6 \\
+Primary deliverables & 9 \\
+Model split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary sensitivity area & Youth narrator ethics (HIGH) \\
+Archive target & UW Libraries Special Collections (primary) \\
+GSD ecosystem layer & .college/ module candidate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``There's still so many gaps in this history that the recorded record is really not there. It's in the tapes of DJs in their attics, if they've held on to them, or in their scrapbooks and their memories.''}
+
+\vspace{0.5em}
+--- Dr.\ Katherine Rye Jewell, historian, on the unmapped interior of college radio history (\textit{Unsung History Podcast}, 2025)
+
+\vspace{1em}
+The student voice is the signal that never quite made it to tape. This mission is the antenna pointed at what was broadcast between the lines.
+\end{quotebox}
+
+\end{document}
