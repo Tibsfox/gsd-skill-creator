@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Television Era — GSD Research Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #B71C1C;
+      --tertiary: #37474F;
+      --accent: #283593;
+      --light-primary: #E8EAF6;
+      --light-secondary: #FFEBEE;
+      --row-gray: #F5F5F5;
+      --border-gray: #BDBDBD;
+      --subtle-gray: #757575;
+      --dark-text: #212121;
+      --white: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #F7F8FC;
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, #0D47A1 50%, var(--accent) 100%);
+      padding: 64px 40px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 30px,
+        rgba(255,255,255,0.02) 30px,
+        rgba(255,255,255,0.02) 60px
+      );
+    }
+
+    .header-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 16px;
+    }
+
+    .header-rule {
+      width: 120px;
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+      margin: 16px auto;
+    }
+
+    .header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .header h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+    }
+
+    .header-meta span {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Pipeline bar */
+    .pipeline {
+      background: var(--secondary);
+      padding: 10px 40px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Main content */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    /* File cards */
+    .files-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 600px) {
+      .files-grid { grid-template-columns: 1fr; }
+    }
+
+    .file-card {
+      background: #DCEEFF;
+      border: 1px solid #B0C4DE;
+      border-radius: 8px;
+      padding: 24px;
+      text-decoration: none;
+      color: var(--dark-text);
+      display: block;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border-left: 4px solid var(--primary);
+    }
+
+    .file-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26,35,126,0.15);
+    }
+
+    .file-card.secondary {
+      background: #FFE8E8;
+      border: 1px solid #FFCDD2;
+      border-left: 4px solid var(--secondary);
+    }
+
+    .file-card .file-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .file-card .file-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .file-card.secondary .file-name {
+      color: var(--secondary);
+    }
+
+    .file-card .file-desc {
+      font-size: 13px;
+      color: var(--subtle-gray);
+      line-height: 1.5;
+    }
+
+    .file-card .file-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 2px 10px;
+      background: var(--primary);
+      color: white;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .file-card.secondary .file-badge {
+      background: var(--secondary);
+    }
+
+    /* Section headers */
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--light-primary);
+    }
+
+    /* Stage breakdown */
+    .stages {
+      margin-bottom: 48px;
+    }
+
+    .stage {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+      padding: 24px;
+      margin-bottom: 16px;
+      border-left: 5px solid var(--primary);
+    }
+
+    .stage:nth-child(2) { border-left-color: var(--secondary); }
+    .stage:nth-child(3) { border-left-color: var(--tertiary); }
+
+    .stage-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--subtle-gray);
+      margin-bottom: 4px;
+    }
+
+    .stage h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .stage:nth-child(2) h3 { color: var(--secondary); }
+    .stage:nth-child(3) h3 { color: var(--tertiary); }
+
+    .stage-modules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .module-tag {
+      background: var(--light-primary);
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .module-tag.red { background: var(--light-secondary); color: var(--secondary); }
+    .module-tag.gray { background: var(--row-gray); color: var(--tertiary); }
+
+    /* Usage instructions */
+    .usage {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border-gray);
+      padding: 28px;
+      margin-bottom: 32px;
+    }
+
+    .usage ol {
+      padding-left: 20px;
+    }
+
+    .usage li {
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .usage code {
+      background: var(--row-gray);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: monospace;
+      color: var(--secondary);
+    }
+
+    /* Recompile box */
+    .recompile {
+      background: var(--row-gray);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+
+    .recompile h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--tertiary);
+      margin-bottom: 10px;
+    }
+
+    .recompile pre {
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 12px;
+      color: var(--dark-text);
+      background: white;
+      padding: 12px 16px;
+      border-radius: 4px;
+      border: 1px solid var(--border-gray);
+      overflow-x: auto;
+    }
+
+    /* Closing quote */
+    .closing-quote {
+      background: var(--light-primary);
+      border: 1px solid rgba(26,35,126,0.2);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-top: 48px;
+    }
+
+    .closing-quote p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--primary);
+      line-height: 1.7;
+    }
+
+    .closing-quote .attribution {
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--subtle-gray);
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 12px;
+      color: var(--subtle-gray);
+      border-top: 1px solid var(--border-gray);
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-label">GSD Research Mission Package</div>
+    <div class="header-rule"></div>
+    <h1>The Television Era</h1>
+    <h2>US Broadcasting 1920s–2026 &bull; Pacific Northwest Stations &bull; FCC Law &bull; The Streamer Bridge</h2>
+    <div class="header-meta">
+      <span>Fleet Activation Profile</span>
+      <span>6 Modules</span>
+      <span>31 Pages</span>
+      <span>March 27, 2026</span>
+      <span>Miles Tiberius Foxglove</span>
+    </div>
+  </div>
+
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission &mdash; Full Pipeline</div>
+
+  <div class="container">
+
+    <!-- File Downloads -->
+    <div class="section-title">Mission Files</div>
+    <div class="files-grid">
+      <a href="tv_mission.pdf" download class="file-card">
+        <div class="file-icon">📡</div>
+        <div class="file-name">tv_mission.pdf</div>
+        <div class="file-desc">The complete 31-page research mission: Vision, Research Reference (6 modules), and Mission Package ready for GSD orchestrator handoff.</div>
+        <div class="file-badge">Download PDF</div>
+      </a>
+      <a href="tv_mission.tex" download class="file-card secondary">
+        <div class="file-icon">⚙️</div>
+        <div class="file-name">tv_mission.tex</div>
+        <div class="file-desc">Full XeLaTeX source. Modify and recompile to extend the document, update regulatory references, or add PNW station histories.</div>
+        <div class="file-badge">Download .tex Source</div>
+      </a>
+    </div>
+
+    <!-- Stage Breakdown -->
+    <div class="section-title">Document Contents</div>
+    <div class="stages">
+
+      <div class="stage">
+        <div class="stage-label">Stage 1</div>
+        <h3>Vision Document</h3>
+        <p>Narrative framing of the Television Era as a broadcast history with a living edge: the Streamer Bridge as the natural continuation of community television's founding impulse. Problem statement (5 problems), core concept, ASCII domain map and module architecture, chipset configuration, scope boundaries, 12 success criteria, and philosophical through-line connecting LPTV to the Amiga Principle.</p>
+        <div class="stage-modules">
+          <span class="module-tag">Vision Narrative</span>
+          <span class="module-tag">Problem Statement</span>
+          <span class="module-tag">Module Architecture</span>
+          <span class="module-tag">Chipset Config</span>
+          <span class="module-tag">12 Success Criteria</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-label">Stage 2</div>
+        <h3>Research Reference</h3>
+        <p>Six fully-sourced research modules drawing from FCC, ATSC, NAB, HistoryLink.org, Archives West, Federal Register, and industry sources. Every CFR citation is current through December 2025. PNW station histories sourced from HistoryLink and University of Washington archives.</p>
+        <div class="stage-modules">
+          <span class="module-tag red">Mod A: TV History 1920–2026</span>
+          <span class="module-tag red">Mod B: PNW Stations</span>
+          <span class="module-tag red">Mod C: NTSC/ATSC/UHF Tech</span>
+          <span class="module-tag red">Mod D: FCC Licensing &amp; Law</span>
+          <span class="module-tag red">Mod E: Cable/MTV/Streaming</span>
+          <span class="module-tag red">Mod F: Streamer Bridge Guide</span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-label">Stage 3</div>
+        <h3>Mission Package</h3>
+        <p>Fleet-profile execution plan: milestone spec, wave architecture (Waves 0–3 with 3 parallel tracks), component breakdown with model assignments (30/60/10 Opus/Sonnet/Haiku split), token budget (267K across 4 sessions), dependency graph, 4 safety-critical tests (BLOCK-level), verification matrix, 21-role crew manifest, and execution summary.</p>
+        <div class="stage-modules">
+          <span class="module-tag gray">Fleet Profile (21 roles)</span>
+          <span class="module-tag gray">3 Parallel Tracks</span>
+          <span class="module-tag gray">3 HITL Gates</span>
+          <span class="module-tag gray">267K Token Budget</span>
+          <span class="module-tag gray">4 Safety-Critical Tests</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Usage Instructions -->
+    <div class="section-title">How to Use This Package</div>
+    <div class="usage">
+      <ol>
+        <li><strong>Review the Vision Document (Stage 1)</strong> to confirm scope alignment, especially Module F's Streamer Bridge operational model. If scope needs adjustment, modify <code>tv_mission.tex</code> and recompile.</li>
+        <li><strong>Hand Stage 2 Research Reference to Claude Code</strong> with the instruction: <em>"Execute the Television Era mission package. Load Stage 2 as the research cache. Begin with Wave 0 foundation."</em></li>
+        <li><strong>Activate GSD orchestrator</strong> with Fleet profile. The crew manifest (Stage 3) lists all 21 roles. CAPCOM is the only agent that crosses the human-machine boundary; approve each of the 3 HITL gates before proceeding.</li>
+        <li><strong>For the Streamer Bridge specifically:</strong> Module F contains an 8-step operational guide (Step 1: Build online audience → Step 8: Deploy ATSC 3.0 Run3TV hybrid). This can be extracted as a standalone deliverable for community broadcasters.</li>
+        <li><strong>For Fox Infrastructure Group alignment:</strong> See the Execution Summary table for downstream use notes on FoxFiber/FoxCompute broadcast node feasibility research.</li>
+        <li><strong>For regulatory updates:</strong> All FCC citations are current through December 2025. The next license renewal cycle opens 2028–2031. Monitor <code>fcc.gov/media</code> for new LPTV filing windows (none currently open as of March 2026).</li>
+      </ol>
+    </div>
+
+    <!-- Recompile -->
+    <div class="recompile">
+      <h3>🔧 Recompile Instructions (XeLaTeX, three passes required)</h3>
+      <pre>xelatex -interaction=nonstopmode tv_mission.tex
+xelatex -interaction=nonstopmode tv_mission.tex
+xelatex -interaction=nonstopmode tv_mission.tex</pre>
+    </div>
+
+    <!-- Closing quote -->
+    <div class="closing-quote">
+      <p>"The antenna preceded the cable. The streamer preceded the LPTV license. The signal, as it always has, is looking for a way home."</p>
+      <div class="attribution">— Stage 1 Through-Line, The Television Era Mission Package</div>
+    </div>
+
+  </div>
+
+  <footer>
+    GSD Research Mission Package &bull; The Television Era &bull; March 27, 2026 &bull; Miles Tiberius Foxglove (Tibsfox)
+  </footer>
+
+</body>
+</html>
