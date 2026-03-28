@@ -19,6 +19,7 @@
       <a href="page.html?doc=03-sonic-identity">Sound</a>
       <a href="page.html?doc=04-cultural-legacy">Legacy</a>
       <a href="page.html?doc=05-desert-ecology">Ecology</a>
+      <a href="page.html?doc=06-dj-profiles">DJs</a>
       <a href="mission.html">Mission Pack</a>
     </nav>
   </header>
@@ -34,7 +35,7 @@
     </blockquote>
 
     <div class="stats">
-      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
       <div class="stat"><span class="stat-value">22</span><span class="stat-label">Test Cases</span></div>
       <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
       <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
@@ -74,6 +75,12 @@
         <div class="meta"><span class="tag tag-ecology">Ecology</span> Track B &middot; Environmental context</div>
         <p>Mojave Desert ecological profile. Biological soil crust (50&ndash;250 year recovery). Flora and fauna at risk (desert tortoise, kit fox). Sound propagation and wildlife impact. Leave No Trace practices. Fire safety protocols. Indigenous land acknowledgment.</p>
       </a>
+
+      <a href="page.html?doc=06-dj-profiles" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: DJ Profiles &mdash; The Desert Residents</h3>
+        <div class="meta"><span class="tag tag-sonic">Sound</span> Track A &middot; Artist documentation</div>
+        <p>Eight individual DJ profiles across three generational cohorts (1993&ndash;present). Treavor Moontribe, Daniel Chavez, John Kelley, Brian Seed, Brad Moontribe, Chadwick, dela, DJ Maggie. The anti-headliner principle. Labels as community extensions. The desert as instrument. The archive problem.</p>
+      </a>
     </div>
 
     <h2>Cross-Reference Map</h2>
@@ -99,6 +106,10 @@
         <tr><td>Transformational festivals</td><td>M4</td><td>BRC, FFA</td></tr>
         <tr><td>Indigenous land stewardship</td><td>M5</td><td>TIBS, COI</td></tr>
         <tr><td>Anti-commercialization theory</td><td>M2, M4</td><td>BRC, TIBS</td></tr>
+        <tr><td>DJ culture / anti-headliner ethos</td><td>M3, M6</td><td>BMR, FFA, DPM</td></tr>
+        <tr><td>Independent labels / gift-to-institution</td><td>M2, M6</td><td>PRS, DPM</td></tr>
+        <tr><td>Archival practice</td><td>M3, M6</td><td>DAA, PRS</td></tr>
+        <tr><td>Global festival circuit</td><td>M4, M6</td><td>BMR, HFE</td></tr>
       </tbody>
     </table>
 
@@ -135,6 +146,15 @@ MOONTRIBE COLLECTIVE -- DOMAIN MAP
         |  Sound System Culture | |  Underground Preserv. |
         |  Theta/Trance States  | |  Generational Trans.  |
         +-----------------------+ +-----------------------+
+                    |                         |
+        +-----------+-------------------------+
+        |   DJ PROFILES (THE DESERT RESIDENTS)          |
+        |                                               |
+        |  8 Resident DJs / 3 Generational Cohorts      |
+        |  Anti-Headliner Principle / Gift Economy       |
+        |  4 Community Labels / Archive Practices        |
+        |  The Desert as Shared Instrument               |
+        +-----------------------------------------------+
     </pre>
 
     <h2>Module Dependency Graph</h2>
@@ -148,15 +168,17 @@ MODULE DEPENDENCY GRAPH
             |                                |
             v                                v
   [M2: Community Architecture]  -------->  [M4: Cultural Legacy]
-                    |
-                    v
-         [M5: Desert Ecology]
+                    |                        |
+                    v                        v
+         [M5: Desert Ecology]     [M6: DJ Profiles]
+                                    (depends on M1, M2, M3)
 
   Parallel tracks:
-    Track A: M1 + M2 + M3 (history, community, sound)
+    Track A: M1 + M2 + M3 + M6 (history, community, sound, artists)
     Track B: M4 + M5 (cultural synthesis + ecology)
     M4 depends on M1, M2, M3 completion
     M5 runs independently
+    M6 depends on M1, M2, M3 for context
     </pre>
   </main>
 
