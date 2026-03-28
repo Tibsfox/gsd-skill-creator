@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSH & Remote Desktop Protocol Specifications — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --accent: #0288D1;
+    --light-bg: #ECEFF1;
+    --light-secondary: #E3F2FD;
+    --border: #B0BEC5;
+    --text: #212121;
+    --muted: #546E7A;
+    --card-bg: #1C2833;
+    --card-bg-light: #2C3E50;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0D1117;
+    color: #E0E0E0;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #263238 0%, #1565C0 60%, #0288D1 100%);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    border-bottom: 2px solid #0288D1;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: #90CAF9;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+  }
+  header h1 span { color: #90CAF9; }
+  header .subtitle {
+    font-size: 1rem;
+    color: #90CAF9;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  .pipeline-badge {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: #B3E5FC;
+    background: rgba(2, 136, 209, 0.2);
+    border: 1px solid rgba(2, 136, 209, 0.4);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  .cards-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 640px) { .cards-row { grid-template-columns: 1fr; } }
+
+  .file-card {
+    background: var(--card-bg);
+    border: 1px solid #37474F;
+    border-radius: 6px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .file-card:hover {
+    border-color: #0288D1;
+    transform: translateY(-2px);
+  }
+  .file-card .file-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: #90CAF9;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .file-card h3 { font-size: 1.1rem; color: #E0E0E0; margin-bottom: 0.4rem; font-weight: 600; }
+  .file-card p { font-size: 0.85rem; color: #90A4AE; line-height: 1.5; }
+  .file-card .dl-hint {
+    margin-top: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: #0288D1;
+  }
+
+  section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.25rem;
+    color: #90CAF9;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #37474F;
+  }
+  section { margin-bottom: 2.5rem; }
+
+  .contents-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) { .contents-grid { grid-template-columns: 1fr; } }
+
+  .stage-block {
+    background: #1C2833;
+    border-left: 3px solid var(--secondary);
+    padding: 1rem 1rem 1rem 1.2rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .stage-block.s2 { border-left-color: var(--accent); }
+  .stage-block.s3 { border-left-color: #37474F; border-left-color: #546E7A; }
+  .stage-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: #90CAF9;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .stage-block h4 { font-size: 0.9rem; color: #E0E0E0; margin-bottom: 0.5rem; }
+  .stage-block ul { list-style: none; padding: 0; }
+  .stage-block li {
+    font-size: 0.82rem;
+    color: #90A4AE;
+    padding: 0.2rem 0;
+    border-bottom: 1px solid #263238;
+  }
+  .stage-block li:last-child { border-bottom: none; }
+
+  .usage-steps { counter-reset: steps; list-style: none; padding: 0; }
+  .usage-steps li {
+    counter-increment: steps;
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: #B0BEC5;
+    line-height: 1.6;
+  }
+  .usage-steps li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  code {
+    font-family: 'DM Mono', monospace;
+    background: #1C2833;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.85em;
+    color: #80DEEA;
+  }
+  pre {
+    background: #1C2833;
+    border: 1px solid #37474F;
+    border-radius: 4px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: #80DEEA;
+    line-height: 1.6;
+    margin-top: 0.75rem;
+  }
+
+  .meta-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .meta-table td { padding: 0.4rem 0.8rem; border-bottom: 1px solid #263238; color: #B0BEC5; }
+  .meta-table td:first-child { color: #90CAF9; font-family: 'DM Mono', monospace; font-size: 0.78rem; width: 40%; }
+
+  blockquote {
+    background: #1C2833;
+    border-left: 4px solid #263238;
+    padding: 1.2rem 1.5rem;
+    margin-top: 2rem;
+    border-radius: 0 4px 4px 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: #90A4AE;
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  blockquote cite { display: block; margin-top: 0.75rem; font-style: normal; font-size: 0.78rem; color: #546E7A; font-family: 'DM Mono', monospace; }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: #37474F;
+    font-family: 'DM Mono', monospace;
+    border-top: 1px solid #1C2833;
+    margin-top: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">GSD Research Mission Package</div>
+  <h1>SSH &amp; Remote Desktop<br><span>Protocol Specifications</span></h1>
+  <div class="subtitle">Full Wire-Level Protocol Mapping</div>
+  <div class="pipeline-badge">Vision → Research → Mission &nbsp;|&nbsp; Fleet Profile (17 roles) &nbsp;|&nbsp; 30 pages</div>
+</header>
+
+<main>
+
+  <section>
+    <div class="cards-row">
+      <a href="ssh_rdp_mission.pdf" download class="file-card">
+        <div class="file-type">PDF Document</div>
+        <h3>ssh_rdp_mission.pdf</h3>
+        <p>Complete 30-page mission package. All three stages compiled. Ready for reading or handoff to gsd-skill-creator.</p>
+        <div class="dl-hint">↓ Click to download</div>
+      </a>
+      <a href="ssh_rdp_mission.tex" download class="file-card">
+        <div class="file-type">LaTeX Source</div>
+        <h3>ssh_rdp_mission.tex</h3>
+        <p>Full XeLaTeX source file. Recompile with three-pass xelatex. Modify and extend as needed.</p>
+        <div class="dl-hint">↓ Click to download</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Package Contents</h2>
+    <div class="contents-grid">
+      <div class="stage-block">
+        <div class="stage-label">Stage 1 — Vision</div>
+        <h4>Protocol Vision Guide</h4>
+        <ul>
+          <li>Problem statement (5 problems)</li>
+          <li>Protocol architecture maps (ASCII)</li>
+          <li>6-module decomposition</li>
+          <li>Chipset YAML configuration</li>
+          <li>12 success criteria</li>
+          <li>Scope boundaries</li>
+          <li>The Through-Line</li>
+        </ul>
+      </div>
+      <div class="stage-block s2">
+        <div class="stage-label">Stage 2 — Research</div>
+        <h4>Research Reference</h4>
+        <ul>
+          <li>SSH binary packet format</li>
+          <li>Curve25519 / DH key exchange</li>
+          <li>SSH auth + channel lifecycle</li>
+          <li>SFTP message catalog</li>
+          <li>RDP 10-phase connection</li>
+          <li>VNC/RFB encoding registry</li>
+          <li>SPICE channel architecture</li>
+          <li>CVE landscape + hardening</li>
+          <li>Full bibliography (21 sources)</li>
+        </ul>
+      </div>
+      <div class="stage-block s3">
+        <div class="stage-label">Stage 3 — Mission</div>
+        <h4>Execution Package</h4>
+        <ul>
+          <li>Fleet activation (17 roles)</li>
+          <li>4-wave execution plan</li>
+          <li>3 parallel research tracks</li>
+          <li>Component breakdown + tokens</li>
+          <li>Cache optimization strategy</li>
+          <li>38 test cases (6 safety-critical)</li>
+          <li>Verification matrix</li>
+          <li>Full crew manifest</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mission Metadata</h2>
+    <table class="meta-table">
+      <tr><td>Date</td><td>March 27, 2026</td></tr>
+      <tr><td>Activation Profile</td><td>Fleet — 17 roles</td></tr>
+      <tr><td>Modules</td><td>6 (SSH Transport, SSH App, RDP, VNC/RFB, SPICE, Security)</td></tr>
+      <tr><td>Parallel Tracks</td><td>3 (Wave 1)</td></tr>
+      <tr><td>Model Split</td><td>Opus 30% / Sonnet 60% / Haiku 10%</td></tr>
+      <tr><td>Primary Sources</td><td>15 IETF RFCs + MS-RDPBCGR + NIST SP series + IANA registries</td></tr>
+      <tr><td>Token Budget</td><td>~76K input / ~41K output</td></tr>
+      <tr><td>HITL Gates</td><td>4 (post-Wave-0, post-Track-B/C, post-Synthesis, pre-Publication)</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>How to Use This Package</h2>
+    <ol class="usage-steps">
+      <li><strong>Read the Vision (Stage 1)</strong> to understand scope, module decomposition, and success criteria before execution.</li>
+      <li><strong>Hand to gsd-skill-creator via Claude Code</strong>: open the PDF as context and say <em>"Execute this research mission — start with Wave 0."</em></li>
+      <li><strong>Confirm CAPCOM gates</strong> at the end of each wave. The package specifies 4 human approval points before proceeding.</li>
+      <li><strong>Parallel tracks in Wave 1</strong> can run simultaneously. Assign Track A (SSH) and Track B (RDP/VNC) to separate agent instances.</li>
+      <li><strong>Opus handles synthesis</strong> in Wave 2 — security analysis and hardening guidance require judgment-level reasoning.</li>
+      <li><strong>Deliverable</strong>: 9 output files including compiled PDF, .tex source, and bibliography.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>LaTeX Recompilation</h2>
+    <p style="font-size:0.85rem;color:#90A4AE;margin-bottom:0.5rem;">Three passes required to resolve TOC, cross-references, lastpage, and hyperlinks.</p>
+    <pre>xelatex -interaction=nonstopmode ssh_rdp_mission.tex
+xelatex -interaction=nonstopmode ssh_rdp_mission.tex
+xelatex -interaction=nonstopmode ssh_rdp_mission.tex</pre>
+    <p style="margin-top:0.75rem;font-size:0.82rem;color:#90A4AE;">Requires XeLaTeX with DejaVu fonts. On Ubuntu: <code>apt install texlive-xetex fonts-dejavu</code></p>
+  </section>
+
+  <blockquote>
+    "A protocol specification is the most honest thing in computing. It does not have opinions, does not defer to authority, does not explain itself in terms of what was intended. Security is not a property you add to a protocol — it is either present in the wire format or it is not."
+    <cite>— SSH &amp; Remote Desktop Protocol Mission, GSD Ecosystem, v1.0</cite>
+  </blockquote>
+
+</main>
+
+<footer>
+  GSD Research Mission Package &nbsp;|&nbsp; SSH &amp; Remote Desktop Protocol Specifications &nbsp;|&nbsp; March 27, 2026 &nbsp;|&nbsp; Fleet Profile
+</footer>
+
+</body>
+</html>
