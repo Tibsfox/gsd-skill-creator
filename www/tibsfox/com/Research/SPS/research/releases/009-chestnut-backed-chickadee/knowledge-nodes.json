@@ -1,0 +1,356 @@
+{
+  "degree": 9,
+  "species": "Chestnut-backed Chickadee",
+  "scientific_name": "Poecile rufescens",
+  "subspecies": "P. r. rufescens (nominate, Pacific coast -- darkest and most richly colored form)",
+  "sound_type": "rapid chick-a-dee-dee",
+  "energy": 2,
+  "ecosystem": "coastal conifer",
+  "season": "resident (year-round in wet coastal conifer forest)",
+  "family": "Paridae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle / Puget Sound reference; primary habitat is wet coastal conifer forest from southeast Alaska to central California"
+  },
+  "physical": {
+    "length_in": "3.9-4.7",
+    "wingspan_in": "7.1-7.5",
+    "weight_g": "7-12"
+  },
+  "plumage": {
+    "cap": "Dark brown crown from bill to nape (not solid black like Black-capped)",
+    "bib": "Dark brown throat patch",
+    "cheeks": "White patches",
+    "back": "Rich chestnut-brown (diagnostic -- the field mark that names the species)",
+    "flanks": "Rufous-brown wash (much warmer than Black-capped's buffy flanks)",
+    "breast": "Grayish-white below bib",
+    "shoulders": "Chestnut-brown, continuous with back color",
+    "overall_impression": "The most colorful chickadee in North America -- warm, saturated, brown-toned versus the Black-capped's crisp black-and-white-and-gray"
+  },
+  "frequency_range": {
+    "alarm_a_hz": ">5500",
+    "alarm_b_hz": "3500-5500",
+    "alarm_c_hz": "broadband FM sweep",
+    "alarm_d_hz": "2500-5500 broadband (buzzier than Black-capped)",
+    "gargle_hz": "4000-8000",
+    "register": "Alto-soprano (2.5-5.5+ kHz, shifted higher than Black-capped)"
+  },
+  "alarm_call_metrics": {
+    "note_types": 4,
+    "note_type_labels": ["A (chick)", "B (-a-)", "C (sweep)", "D (dee)"],
+    "ordering_rule": "Alphabetical (A before B before C before D); invariant -- SAME as Black-capped",
+    "optional_constituency": "Any note type can be omitted -- SAME as Black-capped",
+    "d_note_variation": "Variable count -- SAME encoding principle as Black-capped",
+    "referential": true,
+    "combinatorial": true,
+    "syntax_conserved_across_speciation": true,
+    "divergence_from_black_capped": {
+      "tempo": "Faster -- notes compressed in time, rapid-fire delivery",
+      "pitch": "Higher -- consistent with smaller body size",
+      "timbre": "Buzzier, harsher -- more broadband noise energy in D notes",
+      "fee_bee_song": "Absent or vestigial (reproductive advertisement diverges while alarm syntax is conserved)"
+    },
+    "structural_invariants": ["Note types (A, B, C, D)", "Alphabetical ordering rule", "Optional constituency", "Variable D-note count", "Referential encoding of predator threat"],
+    "performance_parameters": ["Tempo", "Pitch", "Timbre", "Fee-bee presence/absence", "Habitat acoustic context"],
+    "interspecific_receivers": ["Red-breasted Nuthatch", "Golden-crowned Kinglet", "Brown Creeper", "Pacific Wren", "Downy Woodpecker"]
+  },
+  "variation_principle": {
+    "theme_species": "Black-capped Chickadee (Poecile atricapillus, degree 3)",
+    "variation_species": "Chestnut-backed Chickadee (Poecile rufescens, degree 9)",
+    "divergence_time": "~2.5 million years ago (Pliocene glacial cycles)",
+    "what_is_conserved": "Combinatorial syntax (A-B-C-D note types, ordering rules, D-note encoding) -- the COMPOSITION",
+    "what_varies": "Tempo, pitch, timbre, fee-bee presence -- the PERFORMANCE",
+    "music_theory_equivalent": "Variation form -- theme stated at degree 3, variation performed at degree 9. Same relationship as a jazz standard and its cover versions. The standard is older than any single performer.",
+    "key_insight": "The cover version reveals what is ESSENTIAL (structural invariants) versus INCIDENTAL (performance parameters). The chickadee speciation event performs this analysis on the chick-a-dee call."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Variation form (same syntax, different performance -- the biological cover version)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/variation/",
+      "examples": [
+        "Black-capped (degree 3) states the theme; Chestnut-backed (degree 9) performs the variation",
+        "Same A-B-C-D note types, same ordering rules, same D-note encoding -- different tempo, pitch, timbre",
+        "The syntax is conserved across 2.5 million years of independent evolution",
+        "Bach's Goldberg Variations, Beethoven's Diabelli Variations, jazz standard tradition -- all the same principle: persistent structure + varied performance"
+      ],
+      "music_theory_parallel": "Variation form -- the composition persists while the arrangement changes. The theme is the structural invariant; the performance is the variable parameter. Degrees 3 and 9 together prove that combinatorial syntax is a conserved compositional structure, not a species-specific invention."
+    },
+    {
+      "concept": "Tempo as species identity (faster tempo distinguishes the Chestnut-backed)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/tempo/",
+      "examples": [
+        "Experienced birders distinguish the two chickadees primarily by tempo and tone quality",
+        "Same note structure, different cadence -- the feel changes, the chart does not",
+        "A ballad and an uptempo reading of the same standard are recognizably the same composition",
+        "Tempo is how performers -- and species -- individuate their interpretation of a shared form"
+      ],
+      "music_theory_parallel": "Tempo as identity marker -- in both music and biology, tempo is a primary parameter for distinguishing different performers of the same material. The faster Chestnut-backed and the moderate Black-capped play the same chart at different tempos."
+    },
+    {
+      "concept": "Habitat as reverb (room acoustics shape the performance)",
+      "level": "intermediate",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/acoustics/habitat-reverb/",
+      "examples": [
+        "Wet coastal conifer = dense, absorptive, reverberant -- the dampened club",
+        "Mixed woodland = open, reflective, airy -- the concert hall",
+        "Morton (1975) and Wiley & Richards (1978): acoustic adaptation theory predicts vocal traits from habitat structure",
+        "The room is not separate from the performance -- it is part of the sound"
+      ],
+      "music_theory_parallel": "Room acoustics as part of the music -- a recording in a cathedral and a recording in a closet are acoustically different even with the same performer and microphone. The forest is the room. The habitat shapes the call. Same score, different venue."
+    },
+    {
+      "concept": "Dual broadcast / network redundancy (two alarm stations, same protocol)",
+      "level": "advanced",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/communication/",
+      "examples": [
+        "Two broadcaster species (Black-capped degree 3, Chestnut-backed degree 9) using the same A-B-C-D protocol",
+        "Receivers (nuthatch, kinglet, wren) decode both broadcasts using the same neural processing",
+        "In the overlap zone, the forest has two alarm stations -- fault-tolerant architecture",
+        "Loss of one broadcaster (habitat degradation) does not collapse the network -- redundancy as resilience"
+      ],
+      "music_theory_parallel": "In network architecture and audio engineering: redundant signal paths. Two transmitters broadcasting on the same protocol with overlapping coverage. The internet's redundant routing. The biological equivalent of an open protocol -- hardware-independent, vendor-neutral, standards-based."
+    },
+    {
+      "concept": "Conserved syntax across speciation (the standard is older than the performer)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/syntax/conserved/",
+      "examples": [
+        "A-B-C-D combinatorial syntax conserved across a 2.5-million-year speciation event",
+        "The common ancestor of both species already possessed the four-note-type system",
+        "Both lineages inherited the syntax; both modified the performance parameters",
+        "The 32-bar AABA form was not invented by any single jazz musician -- it was inherited. The chickadee syntax is the avian equivalent."
+      ],
+      "music_theory_parallel": "The jazz standard as cultural inheritance -- the compositional structure persists across generations of performers. No living musician invented 'All the Things You Are.' No living chickadee species invented the A-B-C-D syntax. Both inherited it. Both perform their own variation on it."
+    },
+    {
+      "concept": "The cover version principle (what a cover reveals about essential vs. incidental)",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/cover-version/",
+      "examples": [
+        "A cover version changes tempo, key, instrumentation, phrasing -- but melody and harmony remain recognizable",
+        "The elements that persist across covers are structural invariants; elements that change are performance parameters",
+        "The chickadee speciation performs this analysis naturally: syntax (invariant) vs. tempo/pitch/timbre (variable)",
+        "This is the scientific equivalent of hearing the same standard played by two musicians in two different clubs"
+      ],
+      "music_theory_parallel": "The cover version as analytical tool -- it reveals which elements of a composition are essential (structure, harmony, form) and which are incidental (arrangement, tempo, instrumentation). Two chickadee species performing the same call syntax is the biological version of two artists covering the same song."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "MATCHED PAIR. The core relationship. Same genus (Poecile), same call syntax (A-B-C-D), different performance (tempo, pitch, timbre). Degree 3 stated the theme. Degree 9 performs the variation. Together they prove the syntax is older than either species -- conserved across a 2.5-million-year speciation event."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "Eavesdropper on both chickadee alarm broadcasts. Decodes D-note information from both species using the same neural processing -- confirms the protocol is species-independent."
+    },
+    {
+      "project": "SPS-008",
+      "title": "Golden-crowned Kinglet (Degree 8)",
+      "connection": "Canopy-apex eavesdropper in the alarm network. Now receives from two broadcasters. The network has 4 nodes and 4+ directed edges spanning from mixed woodland through coastal conifer to canopy apex."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Paridae comparative taxonomy and distribution. This release adds variation-form analysis, niche differentiation mapping, and acoustic adaptation hypothesis."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Coastal conifer ecology, niche differentiation theory, acoustic adaptation in forest environments, mixed-species flock dynamics in wet conifer."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Caliman at degree 9. Both occupy a predecessor's niche with their own variation. The form is larger than any single performer. The standard is older than any single species."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "The heron's silence at degree 0 predates all sound. Degree 9 is a variation on a theme first documented at degree 3. The circle now contains both originals and covers."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "In wet coastal conifer forests, the wren eavesdrops on the Chestnut-backed's alarms -- it is the Chestnut-backed, not the Black-capped, that serves as the local alarm broadcaster in the wren's habitat."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Both are characteristic voices of the wet coastal conifer forest. The thrush's sustained AM drone and the chickadee's rapid combinatorial call are two very different acoustic strategies for the same dark, damp, reverberant room."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- 4 nodes, 4+ directed edges (was 3 nodes, 2 edges). Second BROADCASTER added.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "edges": [
+      { "from": "Black-capped Chickadee", "to": "Red-breasted Nuthatch", "type": "alarm eavesdropping", "citation": "Templeton et al. 2005, 2007" },
+      { "from": "Black-capped Chickadee", "to": "Golden-crowned Kinglet", "type": "alarm eavesdropping", "citation": "Templeton et al. 2007" },
+      { "from": "Chestnut-backed Chickadee", "to": "Red-breasted Nuthatch", "type": "alarm eavesdropping", "citation": "Same protocol; nuthatch decodes both" },
+      { "from": "Chestnut-backed Chickadee", "to": "Golden-crowned Kinglet", "type": "alarm eavesdropping", "citation": "Both species co-occur in coastal conifer" }
+    ],
+    "note": "The alarm network now has redundant broadcasters. In the habitat overlap zone (Puget Sound lowlands), both chickadee species broadcast on the same A-B-C-D protocol. Receivers do not need species-specific decoding -- the protocol is an open standard. This is fault-tolerant network architecture.",
+    "topology_change": "Single-broadcaster (degree 3-8) to dual-broadcaster (degree 9). The network gains resilience through redundancy."
+  },
+  "part_a_parallel": {
+    "artist": "Caliman",
+    "degree": 9,
+    "genre": "S36",
+    "shared_principle": "Both occupy a similar niche to a predecessor and both bring their own variation. Caliman at degree 9 in S36 inhabits a space carved by earlier artists but performs it with their own voice, their own context, their own energy. The Chestnut-backed inhabits the chickadee niche in wet coastal conifer but performs the inherited call syntax at a faster tempo, higher pitch, and buzzier timbre. The form is larger than the performer.",
+    "resonance_points": [
+      "Niche variation: Both occupy a structural position similar to a predecessor (Black-capped at degree 3, earlier S36 artists) but bring their own distinct expression -- the form permits multiple inhabitants.",
+      "The standard is older than the performer: Caliman interprets inherited musical forms; the Chestnut-backed performs inherited call syntax. Neither invented the structure. Both make it their own.",
+      "Habitat specificity: Caliman operates in a specific musical context that shapes the performance. The Chestnut-backed operates in wet coastal conifer that shapes the call. Context is not background -- it is part of the art.",
+      "Coexistence through differentiation: Both coexist with their 'predecessor' (the degree 3 equivalent) by occupying a different niche within the same territory -- same genre, different venue; same syntax, different forest."
+    ]
+  },
+  "degree_arc": {
+    "position": "The variation -- same syntax, different performance. Biological cover version of degree 3. Second alarm broadcaster. Network redundancy.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9)",
+    "key_insight": "Degree 9 introduces three new dimensions: (1) VARIATION FORM -- the first species that explicitly reprises and modifies a predecessor's vocalization, proving the syntax is conserved across speciation; (2) DUAL BROADCAST -- the interspecies alarm network gains a second broadcaster, introducing redundancy and fault tolerance; (3) HABITAT AS REVERB -- the acoustic environment (wet coastal conifer vs. mixed woodland) shapes the performance of the same compositional structure, paralleling room acoustics in music.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Closed-canopy, moist coniferous forest -- Sitka spruce, western redcedar, western hemlock, Douglas fir in the wet maritime zone. Prefers dense canopy, moss-laden branches, dark understory.",
+    "niche_differentiation": "Where both species co-occur (Puget Sound lowlands), Black-capped occupies open/edge/deciduous habitats; Chestnut-backed retreats into closed-canopy wet conifer interior. Range overlap with habitat separation.",
+    "foraging_strategy": "Active gleaner in conifer canopy and mid-canopy, often hanging upside-down from branch tips. Frequently joins mixed-species flocks in winter.",
+    "diet": "Insects and their eggs, spiders, seeds -- similar to Black-capped but with greater emphasis on conifer-associated arthropods.",
+    "nesting": "Cavity nester -- uses natural cavities and old woodpecker holes in snags. Will use nest boxes. Typically nests higher in conifer forest than Black-capped.",
+    "nuclear_species": "Functions as nuclear species in coastal conifer mixed-species flocks, replacing the Black-capped in this role within wet conifer habitat.",
+    "flock_composition": "Leads winter flocks including Red-breasted Nuthatches, Brown Creepers, Golden-crowned Kinglets, Downy Woodpeckers, and occasionally Varied Thrushes and Pacific Wrens."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~10 million (Partners in Flight 2020)",
+    "trend": "Generally stable; some local declines in areas of conifer forest loss",
+    "threats": "Clear-cutting of closed-canopy conifer forest, urbanization converting wet conifer to developed land, habitat fragmentation reducing connectivity between conifer stands",
+    "vulnerability": "Less tolerant of habitat degradation than Black-capped Chickadee. Requires closed canopy; does not thrive in open or edge habitats.",
+    "network_resilience_note": "Loss of Chestnut-backed from an area eliminates one of two alarm broadcasters -- the alarm network loses redundancy. Conservation of the Chestnut-backed is conservation of network fault tolerance."
+  },
+  "key_sites": [
+    {
+      "name": "Olympic Peninsula temperate rainforest",
+      "type": "year-round",
+      "description": "Dominant chickadee in Sitka spruce and western hemlock rainforest -- dense, wet, closed-canopy",
+      "region": "Olympic Peninsula"
+    },
+    {
+      "name": "Seattle urban parks with mature conifer",
+      "type": "year-round",
+      "description": "Seward Park, Discovery Park, Lincoln Park -- wherever closed-canopy conifer persists within the urban matrix",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Western Cascades foothills",
+      "type": "year-round",
+      "description": "Wet conifer forest on the western slope of the Cascades, often co-occurring with Black-capped in transition zones",
+      "region": "Western Cascades, WA"
+    },
+    {
+      "name": "San Juan Islands coastal forest",
+      "type": "year-round",
+      "description": "Coastal conifer stands with dense canopy on the islands",
+      "region": "Salish Sea / San Juan Islands"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides comparative recordings showing tempo and pitch differences between Black-capped and Chestnut-backed chick-a-dee calls",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Comparative spectrograms of Black-capped vs. Chestnut-backed chick-a-dee calls clearly show the tempo compression and frequency upshift in the Chestnut-backed's version. The structural similarity (A-B-C-D note sequence) is visually apparent; the performance differences (compressed timing, elevated frequency) are measurable."
+  },
+  "sources": [
+    "Dahlsten, D.L., Brennan, L.A., McCallum, D.A., and Gaunt, S.L. (2002). Chestnut-backed Chickadee (Poecile rufescens). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Chestnut-backed Chickadee. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Chestnut-backed Chickadee. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Chestnut-backed Chickadee species account. birdweb.org",
+    "Gill, F.B., Slikas, B. & Sheldon, F.H. (2005). Phylogeny of titmice (Paridae). MPE 35(1): 147-164.",
+    "Brennan, L.A. & Morrison, M.L. (1991). Long-term trends of chickadee populations. Condor 93: 130-137.",
+    "Hailman, J.P., Ficken, M.S. & Ficken, R.W. (1985). Chick-a-dee calls as recombinant system. Semiotica 56(3/4): 191-224.",
+    "Hailman, J.P. (1989). Organization of major vocalizations in the Paridae. Wilson Bulletin 101(2): 305-343.",
+    "Templeton, C.N., Greene, E. & Davis, K. (2005). Allometry of alarm calls. Science 308(5730): 1934-1937.",
+    "Templeton, C.N. & Greene, E. (2007). Nuthatches eavesdrop on chickadee alarms. PNAS 104(13): 5479-5482.",
+    "Ryan, M.J. & Brenowitz, E.A. (1985). Body size and bird song evolution. American Naturalist 126(1): 87-100.",
+    "Morton, E.S. (1975). Ecological sources of selection on avian sounds. American Naturalist 109(965): 17-34.",
+    "Wiley, R.H. & Richards, D.G. (1978). Physical constraints on acoustic communication. Behavioral Ecology and Sociobiology 3(1): 69-94.",
+    "Contreras, T.A. & Sieving, K.E. (2011). Leadership of winter mixed-species flocks. Behavioral Ecology 22(4): 697-706.",
+    "Nettl, B. (1983). The Study of Ethnomusicology. University of Illinois Press.",
+    "Hockett, C.F. (1960). The origin of speech. Scientific American 203(3): 88-96.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Chestnut-backed Chickadee (Poecile rufescens). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Chestnut-backed Chickadee. wdfw.wa.gov",
+    "eBird. Chestnut-backed Chickadee observation data, Pacific Northwest. ebird.org/species/chbchi",
+    "Macaulay Library. Chestnut-backed Chickadee recordings. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "009",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

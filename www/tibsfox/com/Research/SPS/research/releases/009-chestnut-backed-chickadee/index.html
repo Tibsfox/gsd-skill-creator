@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 9&deg; &mdash; Chestnut-backed Chickadee &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.variation { background: #7B1FA2; }
+    .theory-icon.tempo { background: #C62828; }
+    .theory-icon.habitat { background: var(--puget-dark); }
+    .theory-icon.redundancy { background: #1565C0; }
+    .theory-icon.conserved { background: #E65100; }
+    .theory-icon.cover { background: var(--earth-mid); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Variation card (unique to degree 9) */
+    .variation-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #FFF3E0 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .variation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .variation-table { margin: 0.75rem 0; width: 100%; }
+    .variation-table th { font-size: 0.78rem; }
+    .variation-table td { font-size: 0.85rem; }
+
+    /* Network card */
+    .network-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #E0F2F1 100%);
+      border: 1px solid #A5D6A7;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .network-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #2E7D32;
+    }
+
+    /* Progression card */
+    .progression-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .progression-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .progression-table { margin: 0.75rem 0; width: 100%; overflow-x: auto; display: block; }
+    .progression-table th { font-size: 0.72rem; }
+    .progression-table td { font-size: 0.8rem; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">9&deg;</div>
+      <div class="release-title-block">
+        <h2>Chestnut-backed Chickadee</h2>
+        <div class="scientific">Poecile rufescens &middot; Family Paridae (Tits, Chickadees &amp; Titmice)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Rapid Chick-a-dee-dee &middot; Coastal Conifer &middot; Resident &middot; Energy 2</div>
+
+    <blockquote>
+      The same song, different performance. The Chestnut-backed Chickadee uses the same A-B-C-D
+      call syntax as the Black-capped Chickadee at degree 3 &mdash; same note types, same ordering
+      rules, same D-note encoding. But the tempo is faster, the pitch is higher, the timbre is
+      buzzier. A biological cover version. A variation on a 2.5-million-year-old theme.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Chestnut-backed Chickadee is a small, non-migratory passerine of the family
+          <strong>Paridae</strong> within the order Passeriformes. It is the Pacific Northwest&rsquo;s
+          <strong>characteristic chickadee</strong> &mdash; the chickadee of the wet coastal forests.
+          Where the Black-capped Chickadee (degree 3&deg;) is a habitat generalist, the Chestnut-backed
+          is a <strong>specialist of the Pacific maritime conifer zone</strong>, often the more abundant
+          species in closed-canopy conifer stands west of the Cascades.
+        </p>
+        <p>
+          Diagnostic field marks: <strong>rich chestnut-brown back, shoulders, and flanks</strong>,
+          <strong>dark brown cap</strong> (not solid black like the Black-capped),
+          <strong>white cheek patches</strong>, grayish-white underparts with rufous flanks.
+          The most colorful chickadee in North America. At <strong>7&ndash;12 grams</strong>
+          and <strong>3.9&ndash;4.7 inches</strong> in length, it is marginally smaller than
+          the Black-capped and closer in mass to the Golden-crowned Kinglet (degree 8&deg;).
+        </p>
+        <p>
+          Molecular phylogenetic studies (Gill et al. 2005) place the Chestnut-backed as a
+          relatively <strong>early divergence</strong> from the Black-capped lineage, with speciation
+          approximately <strong>2.5 million years ago</strong> during Pliocene glacial cycles.
+          Two species, one inherited call syntax.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; Variation on a Theme</h2>
+        <h3>The Same Call Syntax, Different Performance</h3>
+        <p>
+          The Chestnut-backed Chickadee produces the <strong>same &ldquo;chick-a-dee&rdquo; call</strong>
+          as the Black-capped at degree 3&deg;: the same <strong>four note types (A, B, C, D)</strong>,
+          the same alphabetical ordering rule, the same optional constituency, the same variable
+          D-note encoding. The combinatorial syntax documented by Hailman, Ficken &amp; Ficken (1985)
+          applies across both species.
+        </p>
+        <p>
+          But the <strong>performance</strong> is different:
+        </p>
+        <ul>
+          <li><strong>Tempo:</strong> Faster &mdash; notes compressed in time, rapid-fire delivery</li>
+          <li><strong>Pitch:</strong> Higher &mdash; consistent with smaller body size (Ryan &amp; Brenowitz 1985)</li>
+          <li><strong>Timbre:</strong> Buzzier and harsher &mdash; more broadband noise energy in the D notes</li>
+          <li><strong>Fee-bee song:</strong> Absent or vestigial &mdash; the reproductive advertisement diverges while the alarm syntax is conserved</li>
+        </ul>
+
+        <!-- Variation Card -->
+        <div class="variation-card">
+          <h3>The Biological Cover Version: Theme &amp; Variation</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degree 3&deg; stated the theme. Degree 9&deg; performs the variation. Same composition,
+            different arrangement. The syntax is 2.5 million years older than either performer.
+          </p>
+          <table class="variation-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>3&deg; Black-capped</th>
+                <th>9&deg; Chestnut-backed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Note types</strong></td><td>A, B, C, D</td><td>A, B, C, D (same)</td></tr>
+              <tr><td><strong>Ordering</strong></td><td>Alphabetical</td><td>Alphabetical (same)</td></tr>
+              <tr><td><strong>D-note encoding</strong></td><td>Variable count</td><td>Variable count (same)</td></tr>
+              <tr><td><strong>Tempo</strong></td><td>Moderate</td><td><strong>Faster</strong></td></tr>
+              <tr><td><strong>Pitch</strong></td><td>Lower</td><td><strong>Higher</strong></td></tr>
+              <tr><td><strong>Timbre</strong></td><td>Cleaner, tonal</td><td><strong>Buzzier, harsher</strong></td></tr>
+              <tr><td><strong>Fee-bee song</strong></td><td>Present (minor third)</td><td><strong>Absent / vestigial</strong></td></tr>
+              <tr><td><strong>Habitat</strong></td><td>Mixed woodland</td><td><strong>Wet coastal conifer</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>A notes (&ldquo;chick&rdquo;)</td><td>&gt;5.5 kHz</td><td>&lt;0.08 s</td><td>Alarm introductory (higher than Black-capped)</td></tr>
+            <tr><td>B notes (&ldquo;-a-&rdquo;)</td><td>3.5&ndash;5.5 kHz</td><td>~0.08 s</td><td>Alarm medial</td></tr>
+            <tr><td>C notes (sweep)</td><td>Broadband FM</td><td>~0.08 s</td><td>Alarm transitional</td></tr>
+            <tr><td>D notes (&ldquo;dee&rdquo;)</td><td>2.5&ndash;5.5 kHz</td><td>0.04&ndash;0.12 s</td><td>Threat-level encoding (buzzier than Black-capped)</td></tr>
+            <tr><td>Gargle / high calls</td><td>4&ndash;8 kHz</td><td>Variable</td><td>Social, aggression, flock contact</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Ecology -->
+        <h2>Ecological Niche Differentiation: Same Song, Different Room</h2>
+        <p>
+          The Black-capped is a habitat generalist: mixed woodland, urban parks, suburban edges.
+          The Chestnut-backed is a <strong>coastal conifer specialist</strong>: Sitka spruce,
+          western redcedar, western hemlock, Douglas fir in the wet maritime zone. In the Puget
+          Sound lowlands, the two species <strong>overlap in range but separate by habitat</strong>
+          &mdash; the Black-capped in open and edge habitats, the Chestnut-backed in closed-canopy
+          wet conifer interior. Classic niche differentiation.
+        </p>
+        <p>
+          The acoustic analogy: two musicians playing the same song in <strong>different rooms</strong>.
+          The mixed woodland is the concert hall (open, reflective). The wet coastal conifer is the
+          small, dampened club (dense, absorptive). Acoustic adaptation theory (Morton 1975; Wiley
+          &amp; Richards 1978) predicts that the Chestnut-backed&rsquo;s faster tempo and buzzier
+          timbre are adaptations to coastal conifer acoustics &mdash; packing more information into
+          shorter bursts before attenuation degrades the signal.
+        </p>
+
+        <!-- Network Card -->
+        <div class="network-card">
+          <h3>Interspecies Network: Two Broadcast Stations</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The alarm network gains a <strong>second broadcaster</strong>. The Chestnut-backed uses
+            the same A-B-C-D protocol as the Black-capped &mdash; receivers don&rsquo;t need separate
+            decoding for each species. This is <strong>fault-tolerant broadcast architecture</strong>.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th></th><th>Before Degree 9</th><th>After Degree 9</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Broadcasters</strong></td><td>1 (Black-capped, 3&deg;)</td><td><strong>2</strong> (Black-capped 3&deg;, Chestnut-backed 9&deg;)</td></tr>
+              <tr><td><strong>Receivers</strong></td><td>2 (Nuthatch 5&deg;, Kinglet 8&deg;)</td><td>2+ (same, plus overlap-zone coverage)</td></tr>
+              <tr><td><strong>Protocol</strong></td><td>A-B-C-D syntax</td><td>A-B-C-D syntax (same &mdash; species-independent)</td></tr>
+              <tr><td><strong>Redundancy</strong></td><td>None</td><td><strong>Fault-tolerant</strong> in overlap zone</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon variation">V</div>
+            <div class="theory-content">
+              <h4>Variation Form <span class="theory-level advanced">Advanced</span></h4>
+              <p>Same syntax, different performance. The biological equivalent of a cover version &mdash; the theme (A-B-C-D) is conserved across 2.5M years of speciation; tempo, pitch, and timbre are the performance parameters that vary.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon tempo">T</div>
+            <div class="theory-content">
+              <h4>Tempo as Species Identity <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Faster tempo distinguishes the Chestnut-backed from the Black-capped by ear. In music, tempo is how performers individuate their interpretation of a standard. Same chart, different feel.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon habitat">H</div>
+            <div class="theory-content">
+              <h4>Habitat as Reverb <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Wet coastal conifer = dampened room. Mixed woodland = bright room. The room shapes the performance. Acoustic adaptation theory predicts the Chestnut-backed&rsquo;s buzzier timbre as an adaptation to dense, absorptive forest.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon redundancy">R</div>
+            <div class="theory-content">
+              <h4>Dual Broadcast / Network Redundancy <span class="theory-level advanced">Advanced</span></h4>
+              <p>Two alarm broadcasters on the same open protocol. Receivers decode both without separate processing. Fault-tolerant architecture &mdash; if one broadcaster is absent, the network still functions.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon conserved">C</div>
+            <div class="theory-content">
+              <h4>Conserved Syntax (Standard &gt; Performer) <span class="theory-level advanced">Advanced</span></h4>
+              <p>The A-B-C-D combinatorial system is older than either species. The composition predates the performers. The jazz standard predates any single artist&rsquo;s interpretation.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cover">P</div>
+            <div class="theory-content">
+              <h4>The Cover Version Principle <span class="theory-level foundational">Foundational</span></h4>
+              <p>A cover reveals what is essential (structure) vs. incidental (performance). The chickadee pair reveals which call elements are compositional (note types, ordering) vs. performative (tempo, pitch, timbre).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Variation form.</strong> The deepest mapping of this release. Degrees 3&deg; and 9&deg;
+          together establish variation form as a <strong>conserved principle</strong> &mdash; conserved
+          across speciation in biology, conserved across re-interpretation in music. Bach&rsquo;s
+          <em>Goldberg Variations</em>, Beethoven&rsquo;s <em>Diabelli Variations</em>, and the
+          jazz standard tradition all demonstrate the same relationship: theme + systematic modification
+          of performance parameters while structural invariants persist.
+        </p>
+        <p>
+          <strong>Tempo as identity.</strong> An experienced birder distinguishes the two chickadees
+          primarily by tempo and tone quality, not by note structure. A ballad and an uptempo reading
+          of the same standard are recognizably the same composition but feel like different pieces.
+          Tempo is how species &mdash; and performers &mdash; individuate.
+        </p>
+        <p>
+          <strong>Habitat as reverb.</strong> The wet coastal conifer and the mixed woodland have different
+          reverberation, absorption, and noise characteristics. The room is not separate from the
+          performance &mdash; it is part of the sound. A cathedral recording and a closet recording
+          of the same piece are acoustically different. The forest shapes the call.
+        </p>
+        <p>
+          <strong>Dual broadcast as network design.</strong> Two broadcasters, same protocol,
+          overlapping coverage. The internet was designed with redundant routing for resilience.
+          The chickadee alarm system in Puget Sound has the same property. Degree 3 established the
+          broadcast. Degree 9 establishes the redundancy.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-003</strong> &mdash; Black-capped Chickadee
+            <p>MATCHED PAIR. Same genus, same call syntax, different performance. Degree 3&deg; = theme. Degree 9&deg; = variation. Syntax conserved across 2.5M-year speciation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005</strong> &mdash; Red-breasted Nuthatch
+            <p>Eavesdropper on both chickadee broadcasts. Decodes D-note information from both species using the same processing &mdash; confirms the protocol is species-independent.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-008</strong> &mdash; Golden-crowned Kinglet
+            <p>Canopy-apex eavesdropper in the alarm network. Now receives from two broadcasters. Network has 4 nodes and 4+ directed edges.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Paridae comparative taxonomy. This release adds variation-form analysis and niche differentiation mapping to AVI&rsquo;s distributional context.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Coastal conifer ecology, niche differentiation, acoustic adaptation in forest environments, mixed-species flock dynamics.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Caliman at degree 9&deg;. Both occupy a predecessor&rsquo;s niche with their own variation. The form is larger than any single performer.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>The heron&rsquo;s silence predates all sound. Degree 9 is a variation on a theme first heard at degree 3 &mdash; the circle now contains originals and covers.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>In wet coastal conifer, wrens eavesdrop on the Chestnut-backed&rsquo;s alarms, not the Black-capped&rsquo;s. The local broadcaster species matches the local habitat.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Both are characteristic voices of the wet coastal conifer forest. Thrush&rsquo;s sustained AM drone and the chickadee&rsquo;s rapid combinatorial call &mdash; two acoustic strategies for the same dark, damp room.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Dahlsten, D.L. et al. (2002). &ldquo;Chestnut-backed Chickadee.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Gill, F.B., Slikas, B. &amp; Sheldon, F.H. (2005). Phylogeny of titmice. <em>MPE</em> 35(1).</li>
+          <li>Hailman, J.P., Ficken, M.S. &amp; Ficken, R.W. (1985). Chick-a-dee calls as recombinant system. <em>Semiotica</em> 56(3/4).</li>
+          <li>Templeton, C.N., Greene, E. &amp; Davis, K. (2005). Allometry of alarm calls. <em>Science</em> 308(5730).</li>
+          <li>Templeton, C.N. &amp; Greene, E. (2007). Nuthatches eavesdrop on chickadee alarms. <em>PNAS</em> 104(13).</li>
+          <li>Morton, E.S. (1975). Ecological sources of selection on avian sounds. <em>American Naturalist</em> 109(965).</li>
+          <li>Wiley, R.H. &amp; Richards, D.G. (1978). Physical constraints on acoustic communication. <em>Behav Ecol Sociobiol</em> 3(1).</li>
+          <li>Ryan, M.J. &amp; Brenowitz, E.A. (1985). Body size and bird song evolution. <em>American Naturalist</em> 126(1).</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Chestnut-backed Chickadee. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Chestnut-backed Chickadee. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Macaulay Library. Chestnut-backed Chickadee recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Paridae</div>
+          <div class="stat-detail">Tits, chickadees, titmice</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value"><em>rufescens</em></div>
+          <div class="stat-detail">Nominate (Pacific coast)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">3.9&ndash;4.7 in</div>
+          <div class="stat-detail">10&ndash;12 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">7&ndash;12 g</div>
+          <div class="stat-detail">~2 nickels</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">7.1&ndash;7.5 in</div>
+          <div class="stat-detail">18&ndash;19 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Call Syntax</div>
+          <div class="stat-value">A, B, C, D</div>
+          <div class="stat-detail">Same syntax as Black-capped (3&deg;)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Alarm Range</div>
+          <div class="stat-value">2.5&ndash;5.5+ kHz</div>
+          <div class="stat-detail">Higher-pitched than Black-capped</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Tempo</div>
+          <div class="stat-value">Rapid</div>
+          <div class="stat-detail">Faster than Black-capped</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Timbre</div>
+          <div class="stat-value">Buzzy</div>
+          <div class="stat-detail">Harsher, more broadband noise</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Variation</div>
+          <div class="stat-detail">Same syntax, different performance</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">9&deg;</div>
+          <div class="stat-detail">The variation &mdash; cover version</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Social broadcast energy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Coastal Conifer</div>
+          <div class="stat-detail">Wet maritime forest specialist</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Network Role</div>
+          <div class="stat-value">Broadcaster</div>
+          <div class="stat-detail">2nd alarm station (redundancy)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 9&deg; &mdash; S36</div>
+          <div class="parallel-name">Caliman</div>
+          <div class="parallel-detail">Both occupy a predecessor&rsquo;s niche with their own variation. The form is larger than any single performer. The standard is older than any single species.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 009 of 360 &middot;
+      <a href="../008-golden-crowned-kinglet/index.html">Degree 8&deg;: Golden-crowned Kinglet</a> &middot;
+      <a href="../003-black-capped-chickadee/index.html">Degree 3&deg;: Black-capped Chickadee</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
