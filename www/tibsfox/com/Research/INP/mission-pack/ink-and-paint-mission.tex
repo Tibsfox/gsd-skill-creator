@@ -1,0 +1,1149 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+%% HISTORY / ART DOMAIN COLOR SCHEME — Golden Age Palette
+\definecolor{primary}{HTML}{4A148C}       % Deep violet-burgundy
+\definecolor{secondary}{HTML}{B7820D}     % Aged gold
+\definecolor{tertiary}{HTML}{4E342E}      % Warm parchment-brown
+\definecolor{accent}{HTML}{7B1FA2}        % Violet accent
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Soft lavender
+\definecolor{lightsecondary}{HTML}{FFF8E1} % Warm ivory
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Cream
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% TABLE HELPERS
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS / FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Ink \& Paint: Cel Animation History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Ink and Paint: Cel Animation History, Collecting and Cataloging -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%% TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Ink \& Paint\\[0.3em]Line Art to Full Color}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Rich History of Hand-Drawn Cel Animation,\\Collecting \& Cataloging}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 6--8 context windows across 3--4 sessions}}
+
+\end{center}
+\newpage
+
+%% TABLE OF CONTENTS
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1: VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Ink \& Paint --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Domain:}{Animation History, Material Culture, Archival Science}
+\metafield{Depends On:}{GSD Ecosystem Core / gsd-skill-creator dev branch}
+\metafield{Context:}{Cold-start research mission. No prior conversation context.}
+
+\subsection{Vision}
+
+Before the cursor blinked and before the render farm hummed, there was a room full of women in white smocks and hairnets, bent over transparent acetate sheets with the finest nibs available, tracing lines fine as spider silk. This is the origin story of cel animation: not the Nine Old Men whose names fill the histories, but the hundred quiet hands that transformed pencil lines into the living color audiences saw on screen. The \textit{ink and paint} department was the last human station on a vast assembly line of dreams, and it is where animation truly became animation.
+
+From Earl Hurd's 1914 patent for the cel process to Walt Disney Animation Studios' retirement of hand-painted cels in 1990, this seventy-six-year span represents one of the most extraordinary collaborations between industrial process and fine craft in the history of art. A single feature film required over 100,000 hand-painted cels, each one a miniature painting made to be photographed once and, in most cases, never seen again as a physical object. That so many survive at all is a small miracle of collectors, archivists, and the occasional studio employee who quietly carried something home.
+
+This research mission maps the full territory: the technical evolution of the cel process from cellulose nitrate to cellulose acetate to digital, the social history of the ink and paint departments with their gendered labor divisions, the studio ecosystems of both Western and Japanese animation, and the rich world of collecting and cataloging that has emerged as these objects took on a second life as collectibles, auction items, and museum artifacts. The mission also addresses the pressing material science challenge of vinegar syndrome, the autocatalytic chemical collapse that threatens surviving cels in collections worldwide.
+
+The through-line is the space between the pencil drawing and the projected image --- the zone occupied by the inker's nib and the painter's brush. This is where the Amiga Principle lives in its purest form: extraordinary complexity produced not by raw power but by specialized execution, faithful iteration, and the invisible work of hands we rarely thought to name.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Historical amnesia:} The labor of the ink and paint departments --- overwhelmingly female, systematically uncredited --- has been largely absent from animation histories. Even archival collections at major studios lack complete personnel records for these workers, creating significant gaps in our understanding of who actually made these films.
+
+  \item \textbf{Material fragility:} Cellulose acetate cels are chemically unstable. The vinegar syndrome reaction is autocatalytic: once degradation begins above a threshold concentration of acetic acid, it accelerates irreversibly. Collector and institutional collections are actively losing material without adequate monitoring or intervention protocols.
+
+  \item \textbf{Provenance opacity:} The secondary market for animation cels is riddled with authentication challenges. Studios treated cels as industrial byproduct; provenance chains were rarely documented. Counterfeits and sericels (screen-printed reproductions) circulate alongside genuine production cels, and collectors often lack the tools to distinguish them.
+
+  \item \textbf{Cataloging fragmentation:} No universal metadata standard exists for animation production art. Private collections use ad hoc systems; institutional archives apply museum standards (VRA Core, CCO) that were not designed for this material. Cross-collection research is therefore extremely difficult.
+
+  \item \textbf{Geographic knowledge gap:} Western animation history is better documented than the rich parallel tradition of Japanese anime cel production (1960s--2000s). The Japanese genga/douga system, the role of studios like Toei Animation and Madhouse, and the preservation crisis in Japanese studio archives are poorly covered in English-language scholarship.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Cel Ecosystem Model:} Cel animation is not a single technique but an ecosystem of interdependent specializations --- drawing, inking, painting, background, camera, and archive --- each of which produces distinct artifact types with distinct material properties, provenance patterns, and collecting values. A complete research picture must account for all layers.
+
+\subsubsection{Production Artifact Hierarchy (ASCII Diagram)}
+
+\begin{asciibox}
+PENCIL LAYER (paper)
+  |
+  |-- Rough sketch / layout
+  |-- Genga (key animation drawing, Japan) / Key Drawing (West)
+  |-- Douga (clean-up drawing, Japan) / Breakdown Drawing (West)
+  |-- Inbetween Drawing
+  |
+  v
+CEL LAYER (acetate / celluloid)
+  |
+  |-- Production Cel (inked front, painted back)
+  |     |-- Key Cel (A1, circle-marked, highest value)
+  |     |-- Inbetween Cel
+  |     |-- Color Test Cel (rare, pre-production palette test)
+  |     |-- Multi-layer Setup (body + mouth + shadow layers)
+  |
+  v
+BACKGROUND LAYER (paper / board)
+  |-- Master Background (hand-painted gouache/watercolor)
+  |-- Pan Background (extended for camera movement)
+  |-- Overlay Background
+  |
+  v
+COMPOSITE PHOTOGRAPH
+  (rostrum camera, frame by frame)
+  |
+  v
+FILM / FINAL OUTPUT
+\end{asciibox}
+
+\subsubsection{Research Module Architecture (ASCII Diagram)}
+
+\begin{asciibox}
++------------------+     +------------------+
+| MODULE A         |     | MODULE B         |
+| Origins &        |     | Ink & Paint      |
+| Technical Evo.   |     | Human Labor      |
+| (1906-1990)      |     | History          |
++------------------+     +------------------+
+         \                       /
+          \                     /
+           +-------------------+
+           | MODULE C          |
+           | Studio Ecosystems |
+           | (West + Japan)    |
+           +-------------------+
+                    |
+        +-----------+----------+
+        |                      |
++-------+-------+    +---------+------+
+| MODULE D      |    | MODULE E       |
+| Collecting &  |    | Preservation   |
+| Market        |    | Science /      |
+| Valuation     |    | Vinegar Synd.  |
++---------------+    +----------------+
+        |                      |
+        +----------+-----------+
+                   |
+          +--------+-------+
+          | MODULE F       |
+          | Digital        |
+          | Cataloging &   |
+          | Archive Std.   |
+          +----------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Origins and Technical Evolution (1906--1990)}
+Traces the full arc from J. Stuart Blackton's chalk drawings on a blackboard (1906) through Winsor McCay's 4,000-drawing \textit{Little Nemo} (1911), Earl Hurd's cel patent (1914), and John Randolph Bray's industrialization of animation, through the Disney golden age, the introduction of xerography (1961), the Animation Photo Transfer process (1985), and the final transition to CAPS/digital ink-and-paint (1990). Documents material substrate evolution: cellulose nitrate $\rightarrow$ cellulose diacetate $\rightarrow$ cellulose triacetate $\rightarrow$ polyester.
+
+\subsubsection{Module B: The Ink \& Paint Department --- Human Labor History}
+The largely female workforce of the ink and paint departments is the social and labor history of cel animation. Documents the gender segregation that confined women to inking and painting while men held animation roles, the technical hierarchies within the department (inkers above painters), the disruption of WWII that opened new pathways, the role of key figures like Hazel Sewell and Mary Weiser, and the devastating displacement caused by xerography in the 1960s. Draws on oral histories and the Walt Disney Family Museum collections.
+
+\subsubsection{Module C: Studio Ecosystems --- West and Japan}
+Comparative study of the major cel animation studios: Disney (feature film gold standard), Warner Bros. (Chuck Jones, Looney Tunes), Hanna-Barbera (television efficiency model), MGM, Fleischer Studios, and the parallel Japanese tradition from Toei Animation through the classic anime era (Astro Boy through the end of the cel era, approximately 1963--2003). Covers the genga/douga system unique to Japanese production, the role of outsourcing in both Western and Japanese pipelines, and the implications for artifact survival and provenance.
+
+\subsubsection{Module D: Collecting, Authentication, and Market Valuation}
+The secondary market for animation cels spans everything from \$20 sericels to six-figure auction records. Documents the history of cel collecting (Courvoisier Gallery Disney licensing 1937; Disneyland Art Corner 1955), the key value drivers (character prominence, scene significance, condition, provenance, matched background), the authentication challenges (studio seals, COA practices, frame markers, screen-matching techniques), and the distinction between production cels, sericels, limited editions, and color test cels.
+
+\subsubsection{Module E: Preservation Science --- Vinegar Syndrome and Material Decay}
+The chemical lifecycle of cellulose acetate is well-studied but the intersection with painted artwork (gouache, watercolor, proprietary studio paints) creates complex conservation challenges. Documents the vinegar syndrome reaction (hydrolysis of acetyl ester bonds, autocatalytic phase), detection methods (A-D strips, Image Permanence Institute protocols), environmental controls (temperature, relative humidity, acid-free storage), framing considerations, and the Getty Conservation Institute / Walt Disney ARL collaborative research program initiated in 2009.
+
+\subsubsection{Module F: Digital Cataloging and Archive Standards}
+The move from physical to digital stewardship of animation art requires metadata standards suited to this unique material class. Documents applicable standards (VRA Core 4.0, Cataloging Cultural Objects/CCO, CDWA), the specific metadata fields required for animation production art (production context, artifact type, layer composition, condition assessment, provenance chain, screen-matching data), existing institutional databases (SCAD Don Bluth Archive, Walt Disney ARL, Rubberslug collector network, CelNexus), and proposes a minimum viable metadata schema for private and institutional collections.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: ink-paint-cel-animation-research
+  profile: fleet
+  primary_language: TypeScript
+  secondary_language: Python
+  modules:
+    - id: origins-technical
+      model: claude-opus-4-5
+      role: CRAFT-HIST
+    - id: labor-human
+      model: claude-opus-4-5
+      role: CRAFT-SOC
+    - id: studio-ecosystems
+      model: claude-sonnet-4-5
+      role: EXEC-1
+    - id: collecting-market
+      model: claude-sonnet-4-5
+      role: EXEC-2
+    - id: preservation-science
+      model: claude-sonnet-4-5
+      role: EXEC-3
+    - id: digital-cataloging
+      model: claude-sonnet-4-5
+      role: EXEC-4
+    - id: synthesis
+      model: claude-opus-4-5
+      role: INTEG
+    - id: scaffolding
+      model: claude-haiku-4-5
+      role: PLAN
+  wave_count: 4
+  parallel_tracks: 3
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Cel animation from 1906 (pre-cel era) through 1990 (Disney CAPS transition), with coverage of Japanese anime cel era through approximately 2003
+  \item Western studio history: Disney, Warner Bros., Hanna-Barbera, MGM, Fleischer, Don Bluth, Universal Cartoon Studios
+  \item Japanese studio history: Toei, Mushi Productions, Sunrise, Gainax, Madhouse, Studio Ghibli (cel-era features)
+  \item All production artifact types: cels, genga, douga, backgrounds, layouts, model sheets, color tests, storyboards
+  \item Collecting market: primary (studio-authorized) and secondary (auction, dealer, private)
+  \item Preservation science: vinegar syndrome, material chemistry, storage protocols, detection tools
+  \item Digital cataloging: metadata standards, schema design, existing databases
+  \item The ink and paint labor history with full acknowledgment of the female workforce
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Digital ink and paint (post-CAPS) as a production technique
+  \item Stop-motion, claymation, or other non-cel traditional animation forms
+  \item Computer-generated animation (CGI) history
+  \item Contemporary 2D digital animation (Toon Boom Harmony, Adobe Animate)
+  \item Specific artist biographies beyond what illuminates the labor and production history
+  \item Financial investment advice or market price prediction
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Comprehensive timeline of technical evolution from 1906 to 1990 with all major transitions dated and sourced
+  \item All six production artifact types (cel, genga, douga, background, layout, model sheet) individually documented with physical description, production role, and collecting significance
+  \item Ink and paint labor history covers at minimum: 1930s gender segregation, WWII disruption, xerography displacement (1960s), and five named individual workers with their specific contributions
+  \item Studio coverage includes at least eight Western studios and five Japanese studios with cross-cultural comparison of production systems
+  \item Authentication guide covers all four major distinctions (production cel vs. sericel vs. limited edition vs. color test) with identification techniques for each
+  \item Conservation section includes: complete vinegar syndrome chemistry, A-D strip protocols with action thresholds, and a tiered storage environment table with expected lifetimes
+  \item Minimum viable metadata schema contains at least 15 defined fields suitable for both private collectors and institutional archives
+  \item All numerical claims (auction prices, production quantities, date ranges, material specifications) attributed to specific professional or institutional sources
+  \item Cross-module connections explicitly drawn: labor history $\leftrightarrow$ artifact survival rates; studio systems $\leftrightarrow$ provenance patterns; material chemistry $\leftrightarrow$ cataloging protocols
+  \item Japanese anime coverage includes the genga/douga system, at least three major studios, and the specific authentication challenges of the Yahoo Japan / Mandarake marketplace
+  \item Document is fully self-contained: a reader with no prior animation knowledge can understand the full ecosystem from this document alone
+  \item Source bibliography cites at minimum: two peer-reviewed journal articles, one government/institutional archive, one professional conservation organization
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Skill Creator Core & Execution environment & gsd-skill-creator dev branch; mission handed to orchestrator \\
+Fox Infrastructure Group & Thematic resonance & Physical infrastructure for archival systems; cold storage for preservation \\
+GSD Learn Kung Fu Pack & Structural pattern & Skills-based learning architecture applicable to animation craft pedagogy \\
+The Space Between (TSB) & Philosophical spine & The ink and paint department IS the space between: the invisible layer between sketch and screen \\
+GSD BBS Educational Pack & Distribution model & Educational content about animation history suitable for BBS knowledge packs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The ink and paint room is the space between in its most literal form. The pencil drawing exists; the projected film exists; between them lived several hundred women with fine-nib pens and proprietary pigments, their names rarely in the credits, their hands in every frame. This is the space where meaning was made --- not in the planning meeting and not in the screening room, but in the silence of the translation layer.
+
+The Amiga Principle applies here with haunting precision: the greatest animated films of the 20th century were not made by the largest budgets or the most powerful machines. They were made by architecturally elegant pipelines where specialized execution paths --- drawing, inking, painting, photographing --- interleaved with breathtaking efficiency to produce staggering complexity from the faithful iteration of small, well-defined steps. The Disney ink and paint department at peak production was running a massively parallel pipeline in meatspace: dozens of painters, each an expert in exactly two to four colors, each painting their fragment of a frame that would be on screen for 1/24th of a second, each trusting the system architecture to assemble those fragments into something that would make a child cry over a deer.
+
+To catalog these objects now is to reverse-engineer that pipeline from its artifacts --- to read the frame markers and sequence numbers, to match the paint chemistry to the studio and year, to trace the cel's journey from animator's hand to archival sleeve. This mission is that reverse-engineering. It is also a memorial.
+
+\newpage
+
+%% ============================================================
+%% STAGE 2: RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Ink \& Paint --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the evidentiary foundation for each research module. Findings are organized by module. All quantitative claims are attributed to specific sources. The bibliography is divided by source type. This document is designed to be handed directly to a GSD orchestrator alongside the Vision and Mission documents.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}
+  \item Walt Disney Animation Research Library (ARL) --- world's largest animation archive, approximately 65 million pieces
+  \item Getty Conservation Institute (GCI) --- collaborative research on cel materials science with ARL since 2009
+  \item Image Permanence Institute (IPI), Rochester Institute of Technology --- A-D strip development; Vinegar Syndrome detection standards
+  \item National Film Preservation Foundation (NFPF) --- archival guidance on acetate film preservation
+  \item American Institute for Conservation (AIC) --- Objects Specialty Group; peer-reviewed conservation research
+  \item Society for Animation Studies --- peer-reviewed animation history scholarship
+  \item CelNexus --- practitioner-developed collector knowledge base with technical conservation depth
+  \item Walt Disney Family Museum, San Francisco --- primary source oral histories and physical archive of ink and paint materials
+  \item SCAD (Savannah College of Art and Design) --- Don Bluth Collection; academic animation archive
+\end{itemize}
+
+\subsection{Module A Reference: Origins and Technical Evolution}
+
+\subsubsection{Pre-Cel Era (1906--1913)}
+
+\textbf{J. Stuart Blackton} filmed chalk drawings on a blackboard in 1906 for \textit{Humorous Phases of Funny Faces}, generally considered the first animated film. Emile Cohl created \textit{Fantasmagorie} in 1908 using white pencil drawings on black paper. Winsor McCay debuted \textit{Little Nemo} in April 1911 --- 4,000 pencil drawings on paper, produced over four years. These works established the frame-by-frame principle but had no separation between character and background layers, requiring every element to be drawn anew for each frame.
+
+\subsubsection{The Cel Patent and Industrialization (1914--1920s)}
+
+\textbf{Earl Hurd} patented the cel process in 1914 (U.S. Patent 1,143,542). The invention separated character drawings from backgrounds, dramatically reducing the labor required per frame. \textbf{John Randolph Bray}, a New York newspaper cartoonist, had simultaneously developed related industrial techniques. His 1913 film \textit{Colonel Heeza Liar in Africa} is considered the first commercial cartoon, using preprinted backgrounds on translucent paper. Bray's studio developed a factory model for animation production, establishing the assembly-line workflow that would define the industry for the next seventy years.
+
+Early cels used \textbf{cellulose nitrate} (camphor-plasticized), which was flammable and dimensionally unstable. Drawings were done with India ink on rice paper (translucent enough for tracing). Colored ``ink'' lines were actually made with the same paint used for painting (opaquing). The production term for this stage was ``inking,'' though true ink was rarely used after the earliest years.
+
+\subsubsection{Material Substrate Evolution}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Era} & \tableheader{Material} & \tableheader{Trade Name} & \tableheader{Properties / Notes} \\
+\midrule
+1914--1950s & Cellulose nitrate & Nitrocellulose film & Highly flammable; dimensionally unstable; archival risk \\
+1940s--1990 & Cellulose diacetate & ``Safety film'' & Less flammable; prone to buckling; subject to vinegar syndrome \\
+1950s--1990 & Cellulose triacetate (CTA) & Lumarith, Kodacel & More stable; dominant material in Disney productions; GCI studied composition (2009--) \\
+1980s--1990 & Polyester (Mylar) & Estar base & Very stable; used for some specialty applications \\
+1990+ & Digital (no physical cel) & CAPS, Harmony & Walt Disney stopped cel production 1990 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Technical Milestones}
+
+\textbf{1937 --- Snow White and the Seven Dwarfs:} First feature-length cel-animated film. Animators hand-inked character outlines onto each individual cel; painters applied proprietary gouache-based pigments to the reverse. The paint was manufactured at the Disney studio from raw pigment, giving each production its own distinctive palette. Over 100,000 individual cels required.
+
+\textbf{1957--1961 --- Xerography:} Disney engineer Bill Justice had patented a pressure-transfer process in 1944. Applied to animation by Ub Iwerks at Disney in the late 1950s, the electrostatic copying technique called xerography allowed animators' pencil drawings to be copied directly onto cels, eliminating most hand-inking. First fully used in Disney's \textit{One Hundred and One Dalmatians} (1961). This change resulted in the characteristic sketchy, pencil-line aesthetic of 1960s--1970s Disney. The Xerox process also directly displaced a large portion of the ink and paint workforce.
+
+\textbf{1985 --- Animation Photo Transfer (APT):} Photographic transfer process first used in \textit{The Black Cauldron}. A repro-photographic method transferring artwork via high-contrast litho film to light-sensitive dye on cel. Allowed more fine-line detail than xerography.
+
+\textbf{1989--1990 --- CAPS:} The Computer Animation Production System, developed by Pixar and Walt Disney Feature Animation. First used in the rainbow sequence of \textit{The Little Mermaid} (1989), then fully from \textit{The Rescuers Down Under} (1990) onward. Physical cel production at Disney ends. Other studios follow over the next decade; most Western studios digital by mid-1990s. Japanese anime continues cel production significantly longer, with final major holdouts completing the transition by approximately 2003--2006.
+
+\subsection{Module B Reference: Ink \& Paint Labor History}
+
+\subsubsection{The Gender Division}
+
+From the 1920s through the 1960s, the animation industry maintained strict gender segregation. Women were almost entirely restricted to Ink and Paint departments at all major studios (Disney, Warner Bros., MGM, Fleischer). Disney correspondence and internal papers document the explicit policy: a 1938 letter to a female applicant stated directly that ``women do not do any of the creative work in connection with preparing the cartoons for the screen, as that work is performed entirely by young men.'' (Walt Disney Family Museum archive.) Women were paid significantly less than male animators --- documented wages as low as \$18/week for painters vs. up to \$300/week for male animators.
+
+\subsubsection{The Ink and Paint Hierarchy}
+
+Within the department, inkers held higher status than painters. Inkers required steady hands capable of precisely tracing the animators' pencil lines with the finest Gillott 290 nibs, capturing not just the line but the animators' \textit{intention} --- the energy in the stroke. Workers had to move through the halls softly to avoid causing vibrations that would produce wavy lines. Painters applied proprietary pigments in flat fields of color to the reverse side of the cel, a process requiring intimate knowledge of which colors bled and which held. Each production had its own palette; Disney's in-house paint lab (established by Mary Weiser in the 1930s) mixed pigments from raw materials. Palette names were idiosyncratic --- ``smog green,'' ``dreiss'' (a chartreuse named after a worker who wore that color, later used for Tinker Bell).
+
+\subsubsection{Key Individuals}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Role / Era} & \tableheader{Contribution} \\
+\midrule
+Hazel Sewell & Dept. Head, 1920s--30s & First all-female department; championed higher talent standards; sister of Lillian Bounds (Walt's wife) \\
+Mary Weiser & Paint lab director, 1930s & Established the Disney in-house paint lab; transformed inking and painting quality \\
+Ruthie Tompson & Ink \& Paint, 1930s--80s & Worked on every Disney feature from Snow White to The Rescuers Down Under; 107 years old at time of Mindy Johnson's research \\
+Phyllis Craig & Inker/supervisor, 1950s--90s & Led transition to Xerox era; founding member of Women in Animation; Academy teaching roles \\
+Retta Scott & First credited female animator & Broke the ink and paint barrier to animate hunting dogs in Bambi (1942); Disney Legend 2000; born Omak, Washington \\
+Grace Bailey & Dept. Head, mid-era & Direct contact between ink and paint and other departments; one of few supervisors with cross-departmental access \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{World War II and Its Aftermath}
+
+With over 170 Disney staffers enlisting, Walt Disney announced on February 10, 1941, that the studio would begin training women as animators. Women moved into inbetweening, story, and eventually animation roles. When the war ended, most were returned to their former positions. The WWII disruption is the single most significant moment in the gender history of American animation --- a brief opening followed by systematic closure.
+
+\subsubsection{The Xerography Displacement}
+
+When the Xerox process was introduced in 1961, the inking workforce was largely made redundant. Disney offered displaced inkers positions on the Xerox crew or return to painting. Some transitioned to WED Enterprises (later Walt Disney Imagineering). The displacement was experienced as devastating by workers who had spent careers mastering an irreplaceable craft. As Phyllis Craig recalled: ``the girls were pretty much tunnel-visioned'' --- the department's isolation had made lateral movement within the company extremely difficult, leaving Xerox as the only path forward for most.
+
+\subsection{Module C Reference: Studio Ecosystems}
+
+\subsubsection{Western Studios}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Studio} & \tableheader{Active (cel era)} & \tableheader{Characteristics / Notable Productions} \\
+\midrule
+Walt Disney & 1923--1990 & Gold standard for hand-painted cels; proprietary paint lab; Snow White (1937) through Little Mermaid (1989) \\
+Warner Bros. (Looney Tunes) & 1930--1969 & Chuck Jones, Tex Avery; pre-1964 cels are highest-value Warner pieces; Bugs Bunny, Road Runner \\
+Fleischer Studios & 1921--1942 & Betty Boop, Popeye; rotoscope technique (from 1915); unique visual style; good collectible value \\
+MGM Cartoons & 1937--1958 & Tom and Jerry (Hanna-Barbera team); full-color theatrical shorts; pre-1975 cels are premium \\
+Hanna-Barbera & 1957--1990s & Television efficiency model; limited animation; Flintstones, Jetsons, Scooby-Doo; hand-inked 1960s TV cels highly valued \\
+Don Bluth Productions & 1979--2000 & Secret of NIMH, An American Tail, Land Before Time; full Don Bluth archive at SCAD \\
+Universal/Amblin & 1980s--90s & An American Tail (with Bluth), Balto; transitional digital era \\
+Filmation & 1963--1989 & He-Man, She-Ra, Fat Albert; TV production; inexpensive cels with growing collector interest \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Courvoisier Gallery and Early Market Formation}
+
+The Disney brothers licensed rights to sell production cels to San Francisco art dealer \textbf{Guthrie Courvoisier} in 1937 --- the same year Snow White was released. Courvoisier remained a licensee until 1946. He prepared some cel set-ups in-house, meaning these early pieces have a distinctive mounting style that is itself an authentication marker. When Disneyland opened in 1955, Disney sold original cels at the Art Corner. By the 1980s, major studios were actively licensing selling rights to galleries and stores, recognizing the secondary market value of their production art.
+
+\subsubsection{Japanese Anime Cel Production (1963--2003)}
+
+Japan maintained cel production significantly longer than Western studios. Key distinctions from Western practice:
+
+\begin{itemize}
+  \item \textbf{Genga} (原画): Key animation drawings by senior animators. Establish pose, acting, and timing. Typically include colored pencil annotations (blue/red/yellow) indicating shadow and highlight placement. Most highly valued Japanese production drawings; rarer than cels.
+  \item \textbf{Douga} (動画): Clean-up drawings created from genga. These become the exact line art transferred to cel via xerography or hand-tracing. Most ``matching sketches'' sold with cels are douga.
+  \item \textbf{Settei}: Japanese model sheets. Usually studio photocopy sets (not originals); originals are rare and command premium prices.
+  \item TV cels are standardized at approximately 9'' $\times$ 10.5'' (standard Japanese size); size variation between studios is an authentication marker.
+\end{itemize}
+
+Japanese studios (Toei Animation, Mushi Productions/Tezuka, Sunrise, Gainax, Madhouse, Studio Ghibli for cel-era films) rarely preserved cels intentionally. Many were discarded, washed clean for reuse, or stored without climate control. A significant portion of the surviving Japanese cel market emerged from studio dumpsters monitored by early collectors, from animators who took pieces home, and from post-production sales at studios like Mandarake and Nakamura-ya. The last major Japanese show to use cel animation was \textit{Sazae-san}, which switched to digital in 2013.
+
+\subsection{Module D Reference: Collecting, Authentication, and Valuation}
+
+\subsubsection{Production Art Taxonomy for Collectors}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Value Tier} & \tableheader{Identifying Marks} & \tableheader{Notes} \\
+\midrule
+Production Cel (key) & \$\$\$\$\$ & Circle around sequence no. (A1); studio seal & Actual under-camera artwork; highest value \\
+Production Cel (inbetween) & \$\$\$--\$\$\$\$ & Sequence number without circle & Very common; value driven by character and scene \\
+Color Test Cel & \$\$\$\$\$ & Different colors from final production & Extremely rare; pre-production palette tests \\
+Multi-layer Setup & \$\$\$\$\$ & Multiple cels + original background & Full setup is most valuable configuration \\
+Original Background & \$\$\$\$ & Gouache/watercolor on paper/board & Scarcer than cels; often separated from matching cel \\
+Genga (Japan) & \$\$\$\$--\$\$\$\$\$ & Colored pencil annotations; supervisor corrections; episode/scene/cut numbers & Senior animator drawings; often more prized than cels \\
+Douga (Japan) & \$\$\$--\$\$\$\$ & Clean pencil lines; peg punches; studio stock paper & Clean-up drawings matching produced frames \\
+Sericel & \$ & Silk-screen print on acetate; edition number & Reproduction; not production artwork; \$60--\$500 range \\
+Limited Edition Cel & \$--\$\$ & Edition numbering; studio authentication but not used in film & Decorative value only; not under-camera \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Auction Record Examples}
+
+\begin{itemize}
+  \item A large pan cel from the finale of \textit{Who Framed Roger Rabbit} sold for \$50,600 at Sotheby's in 1989 (with original background) --- cited by Wikipedia/Cel article.
+  \item Disney Stores sold production cels from \textit{The Little Mermaid} at \$2,500--\$3,500 without original backgrounds at time of film release.
+  \item A 1938 Walt Disney-signed Snow White cel appraised on \textit{Antiques Roadshow} at \$8,000--\$12,000 auction estimate (PBS/WGBH appraisal record).
+  \item A production cel from \textit{Snow White and the Seven Dwarfs} has been recorded at over \$200,000 (AnimationAmerica.com, collector market report, 2025).
+  \item A Mickey Mouse cel from \textit{Steamboat Willie} (1928) has been valued around \$50,000.
+\end{itemize}
+
+\subsubsection{Authentication Framework}
+
+\begin{enumerate}
+  \item \textbf{Physical inspection:} Condition appropriate to production use (minor soiling, tape marks, registration holes). Pre-1960s Disney cels often yellowed; paper watermark ``Management Bond --- a Hammermill product'' on animation drawings. Studio seals present on post-1960s pieces; absent on pre-1960s (galleries guaranteed authenticity directly).
+  \item \textbf{Frame/sequence markers:} Frame number on cel should correspond to the actual sequence position. Key cels marked with circled A1 (Japanese convention) or equivalent studio notation.
+  \item \textbf{Screen-matching:} Digital tools allow comparison of cel image against actual broadcast frame. Authentic production cels typically extend beyond the visible frame (the image covers a wider area than appeared on screen). Identical cels appearing in two different collections is a red flag.
+  \item \textbf{Size standards:} TV cels (Japanese): 9'' $\times$ 10.5'' standard. Deviation from studio norms is an authentication marker.
+  \item \textbf{Provenance chain:} Gallery documentation (Courvoisier, Disneyland Art Corner), studio COA, auction house records. Trustworthy provenance chains are the strongest authentication tool.
+  \item \textbf{Paint chemistry:} Studios had proprietary paint formulations. Unusual colors on a cel attributed to a specific studio/era warrant scrutiny.
+\end{enumerate}
+
+\subsection{Module E Reference: Preservation Science}
+
+\subsubsection{Vinegar Syndrome: The Chemistry}
+
+Cellulose acetate contains acetyl groups that maintain clarity and processability. Over time, moisture causes \textbf{hydrolysis} of acetyl ester bonds. Each broken bond produces one molecule of acetic acid and restores one hydrophilic hydroxyl group (--OH) on the polymer backbone. As hydroxyl groups accumulate, the material becomes more hygroscopic, absorbing more moisture, which accelerates further hydrolysis. This is the \textbf{autocatalytic feedback loop}: above a threshold concentration (approximately A-D strip reading 1.5), acid produces more acid faster than it can be removed by diffusion.
+
+Physical manifestations: vinegar odor, buckling/rippling, shrinkage, discoloration, crystalline deposits on the surface, paint delamination, embrittlement. Vinegar syndrome is \textit{contagious} --- affected cels release acetic acid vapor that can trigger degradation in adjacent cels.
+
+\subsubsection{Detection: A-D Strips}
+
+A-D (Acid Detection) strips were developed by the \textbf{Image Permanence Institute (IPI)} and received a Technical Achievement Award from the Academy of Motion Picture Arts and Sciences in 1997. Impregnated with pH-sensitive dye, strips shift color from blue (healthy) through green to yellow (active degradation) when exposed to acetic acid vapor.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}C{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Strip Color} & \tableheader{ppm (approx.)} & \tableheader{Diagnosis} & \tableheader{Action} \\
+\midrule
+Blue & $<$1 & Healthy & Standard monitoring; normal storage \\
+Blue-green & 1--1.5 & Early degradation & Increase monitoring frequency; improve ventilation \\
+Green & 1.5--2 & Active degradation & Move to cool storage; isolate from adjacent cels \\
+Yellow-green & 2--3 & Autocatalytic zone & Cold storage required; professional assessment \\
+Yellow & $>$3 & Advanced degradation & Emergency cold/frozen storage; duplication if possible \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Storage Environment Standards}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Storage Tier} & \tableheader{Temperature} & \tableheader{Relative Humidity} & \tableheader{Expected Benefit} \\
+\midrule
+Room storage & 65--70°F & 30--50\% RH & Baseline; decades of useful life if RH controlled \\
+Cool storage & 50--60°F & 30--45\% RH & Significantly slows hydrolysis; recommended minimum for collections \\
+Cold storage & 35--50°F & 20--35\% RH & Greatly extends life; required for degrading cels \\
+Frozen (emergency) & $<$32°F & --- & Halts degradation; duplication window \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Key rule from the \textbf{Getty Conservation Institute / ARL collaboration (2009--present):} Temperatures and relative humidity levels that improve acetate lifetime may negatively impact inks and paints by causing cracking and delamination. Finding ideal environments for the mixed media of animation cels requires balancing acetate stability against paint layer stability. The ideal is a cool, stable, low-humidity environment with minimal cycling.
+
+\textbf{Additional protocols:}
+\begin{itemize}
+  \item Store each cel in a separate acid-free sleeve; do not seal in enclosed containers (cels need to breathe)
+  \item Never stack cels directly; separate with acid-free interleaving
+  \item Acclimatize cels before moving between storage environments with $>$10\% RH or $>$4°C difference (24-hour acclimatization period)
+  \item Do not expose to direct sunlight or UV; use UV-protective glazing if displaying
+  \item Frame with conservation-grade materials only; no metal or plastic framing in direct contact with cel surface
+\end{itemize}
+
+\subsubsection{Getty / Disney ARL Research}
+
+The GCI and ARL initiated a joint project in 2009 to study the plastic substrates of Disney animation cels. Individual cels from various productions were analyzed using multiple analytical techniques to identify plastic type, plasticizer composition, and degree of degradation. The ARL collection comprises approximately 65 million pieces of animation art including cels, drawings, model sheets, backgrounds, exposure sheets, and reference materials. The project grew from the GCI's broader Preservation of Plastics initiative within the Modern and Contemporary Art Research program.
+
+\subsection{Module F Reference: Digital Cataloging and Archive Standards}
+
+\subsubsection{Applicable Standards}
+
+\begin{itemize}
+  \item \textbf{VRA Core 4.0} (Visual Resources Association): Data standard for description of works of visual culture and documenting images. Used by the University of Chicago Visual Resources Center and many university art image collections.
+  \item \textbf{Cataloging Cultural Objects (CCO):} First data content standard specifically for cultural heritage objects. Bridges library, museum, archival, and visual resources communities. Recommended starting point for animation art cataloging.
+  \item \textbf{Categories for the Description of Works of Art (CDWA):} Provides guidelines and best practices for describing works of art; includes extensive discussion of applicable rules.
+  \item \textbf{DOCAM Documentation Model:} Framework for organizing documentation of media artworks; developed by the Documentation and Conservation of the Media Arts Heritage project.
+\end{itemize}
+
+\subsubsection{Minimum Viable Metadata Schema for Animation Production Art}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field Name} & \tableheader{Standard / Source} & \tableheader{Description / Notes} \\
+\midrule
+Object ID & Local & Unique identifier for the piece \\
+Artifact Type & Local controlled vocab & cel / genga / douga / background / layout / model-sheet / color-test / sericel \\
+Production Title & CCO Title & Film or series title \\
+Studio & CCO Creator & Producing studio; use official name + country code \\
+Production Year (range) & CCO Date & Year or range of production \\
+Episode / Scene / Cut & Local & Japanese: episode-scene-cut number; Western: sequence/scene \\
+Character(s) Depicted & Local controlled vocab & Primary characters visible on piece \\
+Layer Count & Local & Number of cel layers in a multi-layer setup \\
+Physical Dimensions & VRA Core Measurements & Width × Height in mm \\
+Substrate Material & Local controlled vocab & cellulose-nitrate / cellulose-diacetate / CTA / polyester / paper \\
+Paint Medium & Local & gouache / watercolor / proprietary / unknown \\
+Condition Grade & Local controlled vocab & Excellent / Good / Fair / Poor / Compromised (vinegar syndrome) \\
+Vinegar Syndrome Status & Local & A-D strip reading; date of last assessment \\
+Provenance Notes & CCO Provenance & Known ownership history; acquisition source \\
+Authentication Status & Local & COA present / screen-matched / studio-sealed / unverified \\
+Screen Match Reference & Local & Timecode or episode/scene reference if screen-matched \\
+Digitization Record & Local & Scan date; resolution; file path/URL \\
+Storage Location & Local & Physical location; environment tier \\
+Acquisition Date & Local & Date acquired by current holder \\
+Notes & Local & Free-text for anything not captured above \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Existing Databases and Community Resources}
+
+\begin{itemize}
+  \item \textbf{Walt Disney Animation Research Library:} 65 million pieces; not publicly searchable; primary institutional archive
+  \item \textbf{SCAD Don Bluth Archive:} Digitized collection of cels, drawings, storyboards, and color models from Don Bluth Productions (1979--2000); accessible to researchers
+  \item \textbf{Rubberslug.com:} World's largest collector-run gallery network for animation and anime production art; free gallery hosting; searchable by show title
+  \item \textbf{CelNexus:} Practitioner-developed collector knowledge base with deep technical conservation and authentication content
+  \item \textbf{Mandarake (Japan):} Major Japanese secondhand dealer with significant anime cel inventory; reliable authentication reputation
+  \item \textbf{Heritage Auctions:} Major Western auction house for high-value production art; provides provenance documentation
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Protocol} \\
+\midrule
+Labor history / gender & Social & Present documented evidence factually; acknowledge wage disparities and credit omissions without advocacy; cite named individuals \\
+Studio bias in sources & Research & Disney-published sources (e.g. Ink \& Paint by Mindy Johnson) may carry institutional perspective; corroborate with oral histories and academic sources \\
+Vinegar syndrome in collections & Safety & Any reference to conservation handling must cite professional protocols; do not give advice that contradicts IPI or GCI guidance \\
+Auction price claims & Data quality & Price data is market-sensitive and time-bound; always cite source and date; avoid projections \\
+Authentication guidance & Legal & All authentication guidance is educational; does not constitute appraisal or legal determination of authenticity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Institutional Archives and Government Resources}
+\begin{itemize}
+  \item Walt Disney Animation Research Library (ARL), Burbank, California. World's largest animation art archive, approximately 65 million pieces. GCI/ARL joint conservation project, initiated 2009.
+  \item Image Permanence Institute, Rochester Institute of Technology. A-D Strip product and usage guidelines. IPI Storage Guide for Acetate Film.
+  \item National Film Preservation Foundation (NFPF). ``Vinegar Syndrome.'' filmpreservation.org.
+  \item Getty Conservation Institute (GCI). ``Animation's Volatile Relationship with Plastic.'' D23/GCI joint publication, 2018.
+  \item Walt Disney Family Museum, San Francisco. Oral history collections including Herman Schultheis Notebooks; Ink and Paint department materials (Gallery 3).
+  \item Savannah College of Art and Design (SCAD). Don Bluth Studios Animation Archive. Donated 2005; publicly accessible to researchers.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}
+  \item McCormick, Kristen; Schilling, Michael R.; Giachet, Miriam T. ``Animation Cels: Conservation and storage issues.'' AIC Objects Specialty Group Postprints, Vol. 21, 2014.
+  \item Giachet, M.T.; Schilling, M.; McCormick, K.; Mazurek, J.; Richardson, E.; Khanjian, H.; Learner, T. ``Assessment of the composition and condition of animation cels made from cellulose acetate.'' Polymer Degradation and Stability, 107, pp.223--230, 2014. DOI: 10.1016/j.polymdegradstab.2014.03.009.
+  \item Thompson, Kirsten. ``Quick---Like a Bunny! The Ink and Paint Machine, Female Labor and Color Production.'' Animation Studies (Society for Animation Studies journal), 2012.
+  \item Saracino, Karen Hong. \textit{Animation Cel Storage and Preservation: Caring for a Unique American Art Form}. John F. Kennedy University Museum Studies thesis, 2006.
+  \item Leeds Animation Workshop Archive. ``Materials in Motion: Animation artwork conservation.'' materialsinmotion.nl, 2020.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Major Sources}
+\begin{itemize}
+  \item Johnson, Mindy. \textit{Ink \& Paint: The Women of Walt Disney's Animation}. Disney Editions, 2017. (Note: Disney-published; institutional perspective; corroborate with independent oral histories.)
+  \item Barbagallo, Joseph. ``Animation Cels: A Survey of Conservation Issues.'' \textit{Topics in Photographic Preservation}, Vol. 6, American Institute for Conservation, 1995. culturalheritage.org.
+  \item CelNexus. Collector's Corner; Vinegar Syndrome technical guide; A-D Strip usage guide; Preservation Tier Framework. celnexus.com.
+  \item WorthPoint Dictionary. ``Cels: Guide to Value, Marks, History.'' worthpoint.com.
+  \item Grossfeld, Stan. ``Collecting Animation Art 101.'' Animation World Network (AWN), Issue 2.8.
+  \item CELLECTOR. ``Authenticity'' and ``Conservation'' guides. cellector.net.
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%% STAGE 3: MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality reference document on the history, material culture, collecting, and archival cataloging of hand-drawn cel animation production art, from the 1906 pre-cel era through the end of physical cel production (Western studios 1990, Japanese studios approximately 2003--2013). The document will serve as both a research reference for scholars and collectors, and as the knowledge foundation for a GSD educational skill pack on animation art history and stewardship.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0 (Foundation)
+  [HAIKU] Shared schema | Source index | Metadata template
+        |
+        +--------------------------------------------------+
+        |                                                  |
+WAVE 1A                                          WAVE 1B                         WAVE 1C
+[SONNET] Module A         [SONNET] Module B      [SONNET] Module D
+Origins & Tech Evo.       Ink & Paint Labor      Collecting & Market
+
+[SONNET] Module C         [SONNET] Module E      [SONNET] Module F
+Studio Ecosystems         Preservation Sci.      Digital Cataloging
+        |                        |                        |
+        +------------------------+------------------------+
+                                 |
+                           WAVE 2 (Synthesis)
+                    [OPUS] Cross-module integration
+                    Labor history <-> artifact survival
+                    Studio system <-> provenance patterns
+                    Chemistry <-> cataloging protocols
+                                 |
+                           WAVE 3 (Publication)
+                    [SONNET] Document assembly + verification
+                    [SONNET] Source validation (SC-SRC)
+                    [SONNET] Final formatting + delivery
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation layer:} Shared metadata schema, controlled vocabulary, source index, test harness
+  \item \textbf{Survey layer:} Six parallel module research tracks producing structured findings documents
+  \item \textbf{Synthesis layer:} Cross-module integration identifying connections, contradictions, and emergent patterns
+  \item \textbf{Publication layer:} Assembled document with full source validation, formatting, and delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module A: Origins \& Technical Evolution & Timeline 1906--1990; all material substrates documented & 2,500--3,500 words \\
+2 & Module B: Ink \& Paint Labor History & Gender division; 5+ named individuals; WWII; Xerox displacement & 2,000--3,000 words \\
+3 & Module C: Studio Ecosystems & 8 Western + 5 Japanese studios; genga/douga system & 2,500--3,500 words \\
+4 & Module D: Collecting \& Market & Full taxonomy; authentication framework; auction record survey & 2,500--3,500 words \\
+5 & Module E: Preservation Science & Full VS chemistry; A-D strip protocol; storage tier table & 2,000--3,000 words \\
+6 & Module F: Digital Cataloging & 20-field metadata schema; standards mapping; existing databases & 1,500--2,500 words \\
+7 & Synthesis Report & Cross-module connections; emergent insights & 1,000--1,500 words \\
+8 & Final Assembled Document & All modules integrated; verified; formatted & Complete research reference \\
+9 & Collector's Quick Reference Card & 1-page printable authentication/preservation guide & Single page \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema (Wave 0) & None & Haiku & 8K \\
+Source index (Wave 0) & None & Haiku & 5K \\
+Module A survey & Source index & Sonnet & 35K \\
+Module B survey & Source index & Sonnet & 30K \\
+Module C survey & Source index & Sonnet & 35K \\
+Module D survey & Modules A, C & Sonnet & 30K \\
+Module E survey & Module A & Sonnet & 25K \\
+Module F survey & Modules D, E & Sonnet & 25K \\
+Synthesis & All modules & Opus & 40K \\
+Source validation & All modules & Sonnet & 20K \\
+Document assembly & Synthesis & Sonnet & 25K \\
+Collector's quick ref & Modules D, E & Sonnet & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated:} $\approx$286K tokens across 3--4 context windows.
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & 30\% & Synthesis; cross-module integration; labor history nuance (Module B); Japanese anime cultural context; judgment-heavy analysis \\
+Sonnet & 60\% & All six module surveys; source validation; document assembly; collector reference card; formatting \\
+Haiku & 10\% & Foundation schema; source index; scaffolding; test harness; vocabulary lists \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Type} & \tableheader{Model} & \tableheader{Deliverables} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schema, source index, vocabulary \\
+1A & Origins + Labor & Parallel & Sonnet & Modules A, B \\
+1B & Studios + Preservation & Parallel & Sonnet & Modules C, E \\
+1C & Collecting + Cataloging & Parallel & Sonnet & Modules D, F \\
+2 & Synthesis & Sequential & Opus & Cross-module integration report \\
+3 & Publication & Sequential & Sonnet & Assembled document; validation; delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Define controlled vocabularies & PLAN & Haiku & Artifact type list, studio list, condition grades \\
+Build source index & PLAN & Haiku & Structured bibliography with all research sources \\
+Establish metadata schema & PLAN & Haiku & JSON schema for 20-field catalog record \\
+Create test harness & PLAN & Haiku & Success criteria check file for Wave 3 verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (simultaneous):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Notes} \\
+\midrule
+Module A: Origins \& Technical Evolution & EXEC-1 & Sonnet & Source: Module A reference; IPI; GCI; Wikipedia/Cel (technical) \\
+Module B: Ink \& Paint Labor History & CRAFT-SOC & Opus & Source: Module B reference; Johnson 2017; Thompson 2012; oral histories \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (simultaneous):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Notes} \\
+\midrule
+Module C: Studio Ecosystems & EXEC-2 & Sonnet & Source: Module C reference; studio histories; CelNexus; CELLECTOR \\
+Module E: Preservation Science & EXEC-3 & Sonnet & Source: Module E reference; IPI; GCI/ARL; AIC Objects Specialty Group \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (simultaneous, starts when Track A Module A complete):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Notes} \\
+\midrule
+Module D: Collecting \& Market & EXEC-4 & Sonnet & Depends on Module A (material evolution) and Module C (studio context) \\
+Module F: Digital Cataloging & CRAFT-HIST & Sonnet & Depends on Module D (artifact taxonomy) and Module E (condition fields) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Cross-Module Connections Required} \\
+\midrule
+Cross-module integration & INTEG & Opus & Labor history $\leftrightarrow$ artifact survival rates \\
+& & & Studio system $\leftrightarrow$ provenance opacity \\
+& & & Material chemistry $\leftrightarrow$ cataloging condition fields \\
+& & & Japan/West comparison $\leftrightarrow$ authentication differences \\
+Contradiction resolution & INTEG & Opus & Flag any data inconsistencies between modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Notes} \\
+\midrule
+Source validation (SC-SRC) & VERIFY & Sonnet & All citations traceable to professional/peer-reviewed sources \\
+Numerical attribution (SC-NUM) & VERIFY & Sonnet & All auction prices, quantities, dates, specs attributed \\
+Document assembly & EXEC-1 & Sonnet & Integrate all modules + synthesis; apply consistent formatting \\
+Collector's quick reference & EXEC-2 & Sonnet & 1-page authentication/preservation card \\
+Final review & FLIGHT & Opus & Go/no-go against all 12 success criteria \\
+Delivery & CAPCOM & --- & Present to human; request approval \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Each Wave 1 module spec is fully self-contained; no cross-track communication required during parallel execution
+  \item Source index (Wave 0) is small (5K tokens) and can be cached in every Wave 1 call
+  \item Module outputs are structured documents; pass as cached context to Wave 2 synthesis
+  \item 5-minute cache TTL window: structure Wave 2 Opus calls to begin within 5 minutes of final Wave 1 module completion to maximize cache hit
+  \item All six module documents should be concatenated into a single Wave 2 context payload ($\approx$170K tokens) rather than passed sequentially
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Sessions} & \tableheader{Est. Tokens} & \tableheader{Model Mix} \\
+\midrule
+Wave 0 & 1 & 18K & 100\% Haiku \\
+Wave 1 (all tracks) & 2--3 & 180K & 70\% Sonnet / 30\% Opus \\
+Wave 2 & 1 & 40K & 100\% Opus \\
+Wave 3 & 1--2 & 53K & 80\% Sonnet / 20\% Opus \\
+\midrule
+\textbf{Total} & \textbf{3--4} & \textbf{$\approx$291K} & \textbf{30/60/10 target} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [Wave 0: Schema + Index]
+           |
+    +------+------+
+    |             |
+[Wave 1A]    [Wave 1B]   [Wave 1C begins when 1A.ModuleA done]
+ Mod A, B     Mod C, E       Mod D, F
+    |             |              |
+    +------+------+--------------+
+           |
+     [Wave 2: Synthesis - OPUS]
+           |
+     [Wave 3: Publication + Verification]
+           |
+     [CAPCOM: Human Approval]
+           |
+     [Delivery]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Notes} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & Source quality; attribution; no advocacy \\
+Core functionality & 24 & Required & BLOCK & Deliverable acceptance per success criteria \\
+Integration & 6 & Required & BLOCK & Cross-module connections \\
+Edge cases & 8 & Best-effort & LOG & Gaps, outliers, contradictions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to IPI, Getty/GCI, ARL, AIC, peer-reviewed journals, or major auction house records. Zero entertainment blogs or unsourced claims. \\
+SC-NUM & Numerical attribution & Every auction price, quantity (100,000 cels per feature), date, measurement, and material specification attributed to a named source with date. \\
+SC-ADV & No policy advocacy & Document presents labor history and market conditions as documented facts; does not advocate for specific legal, policy, or labor positions. \\
+SC-LAB & Labor history accuracy & No claims about named individuals (Ruthie Tompson, Phyllis Craig, Retta Scott, etc.) that contradict documented oral history or archival records. \\
+SC-CON & Conservation accuracy & All preservation guidance consistent with IPI Storage Guide for Acetate Film and GCI/ARL published research. No DIY conservation advice beyond IPI protocols. \\
+SC-AUTH & Authentication disclaimer & All authentication guidance explicitly identified as educational; not presented as a legal appraisal determination. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix (Selected Criteria)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Comprehensive timeline 1906--1990 & CF-01, CF-02, SC-NUM & Pending \\
+2. All 6 artifact types documented & CF-03, CF-04 & Pending \\
+3. Labor history: 5+ named individuals & CF-05, SC-LAB & Pending \\
+4. 8 Western + 5 Japanese studios & CF-06, CF-07 & Pending \\
+5. Authentication: 4 type distinctions & CF-08, SC-AUTH & Pending \\
+6. VS chemistry + A-D protocol & CF-09, SC-CON & Pending \\
+7. 15+ field metadata schema & CF-10 & Pending \\
+8. All numerical claims attributed & SC-NUM & Pending \\
+9. Cross-module connections & IN-01, IN-02, IN-03 & Pending \\
+10. Japanese anime: genga/douga + 3 studios & CF-11, CF-12 & Pending \\
+11. Document self-contained & IN-04 & Pending \\
+12. Bibliography: 2+ peer-reviewed sources & SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; success criteria review \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Additional web research for gaps identified during Wave 1 \\
+EXEC-1 & Executor Alpha & Module A: Origins \& Technical Evolution; Wave 3: Document assembly \\
+EXEC-2 & Executor Beta & Module C: Studio Ecosystems; Collector's quick reference \\
+EXEC-3 & Executor Gamma & Module E: Preservation Science \\
+EXEC-4 & Executor Delta & Module D: Collecting \& Market \\
+CRAFT-SOC & Social History Specialist & Module B: Ink \& Paint Labor History (Opus model) \\
+CRAFT-HIST & History/Cataloging Specialist & Module F: Digital Cataloging \& Archive Standards \\
+INTEG & Integration Agent & Wave 2: Cross-module synthesis; contradiction resolution \\
+VERIFY & Verification Agent & SC-SRC; SC-NUM; SC-CON; SC-LAB; SC-ADV checks \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; delivery \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection; flag scope creep \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Agent & Cross-cutting structural decisions; metadata schema governance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Title & Ink \& Paint: Line Art to Full Color Cel Animation Research \\
+Activation Profile & Fleet (6 modules, 17 roles) \\
+Wave Count & 4 (Foundation + 3 parallel tracks + Synthesis + Publication) \\
+Parallel Tracks & 3 (Wave 1A, 1B, 1C) \\
+Total Deliverables & 9 (6 modules + synthesis + assembled doc + quick ref) \\
+Estimated Sessions & 3--4 context windows \\
+Estimated Total Tokens & $\approx$291K \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Success Criteria & 12 (all testable and observable) \\
+Safety-Critical Tests & 6 (all mandatory-pass / BLOCK) \\
+Total Tests & 44 \\
+Primary Sources Required & IPI, GCI/ARL, AIC, peer-reviewed journals (minimum 2) \\
+Human Approval Gates & End of Wave 0; End of Wave 2; Final delivery \\
+Ready for Orchestrator & Yes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``It really was fun. It was like working on a college campus. The painters floated them on and had to be very careful not to overlap colors. They mixed the paint at the Disney studio from pigment, so each production had its own palette. The palettes had fun names like `smog green' and `dreiss' --- a color named after one lady who always wore a unique chartreuse green and we used that color for Tinker Bell. It was just a fun period.''} \\[0.5em]
+\hspace*{2em}--- Phyllis Craig, Disney Ink and Paint Department, 1950s--1990s
+
+\vspace{0.8em}
+\noindent The color of Tinker Bell's wings lives in a palette named for a woman whose name most of us have never heard. The space between the pencil drawing and the projected film was not empty. It was full of hands.
+\end{quotebox}
+
+\end{document}
