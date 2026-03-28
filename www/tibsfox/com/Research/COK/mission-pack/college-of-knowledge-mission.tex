@@ -1,0 +1,1402 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ─── COLOR SCHEME: Philosophical/Mathematical ─────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo — mathematical, cosmic
+\definecolor{secondary}{HTML}{00695C}     % Teal — organic growth, nature
+\definecolor{tertiary}{HTML}{E65100}      % Burnt orange — the fox, illumination
+\definecolor{accent}{HTML}{283593}        % Rich indigo — highlights, arrows
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{FFF3E0}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{goldaccent}{HTML}{F9A825}
+
+%% ─── SECTION FORMATTING ───────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ─── CUSTOM ENVIRONMENTS ──────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{tealbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{orangebox}{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% ─── TABLE HELPERS ────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ─── HEADERS / FOOTERS ────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{College of Knowledge \textbar{} Complex Plane of Experience}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ─── HYPERLINKS ───────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={College of Knowledge and the Complex Plane of Experience -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ══════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+%% ─── TITLE PAGE ───────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The College of Knowledge\\[0.3em]and the Complex Plane\\[0.3em]of Experience}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Deep Linking, Seed Growth, and the Art of the Space Between}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Retrospective and Lessons Learned}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Profile}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6 Modules) \quad|\quad Estimated: 18--22 context windows across 6--8 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Ecosystem: \texttt{github.com/Tibsfox/gsd-skill-creator} (dev branch)}}
+\end{center}
+\newpage
+
+%% ─── TABLE OF CONTENTS ────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%%═══════════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION DOCUMENT
+%%═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The College of Knowledge and the Complex Plane of Experience --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Deep Retrospective --- Ready for Fleet Execution}
+\metafield{Depends on:}{\texttt{gsd-skill-creator-analysis.md}, \texttt{cooking-with-claude-compiled-session.md},
+\texttt{unit-circle-skill-creator-synthesis.md}, \texttt{gsd-mathematical-foundations-conversation.md},
+\textit{The Space Between} (923 pages), \texttt{10-perl-cpan-addendum.md}}
+\metafield{Context:}{This mission unifies three previously separate but deeply linked bodies of work ---
+the College Structure architectural spec, the mathematical framework of the Complex Plane of Experience,
+and the fractal growth pattern that connects them both. It is simultaneously a technical specification,
+a pedagogical framework, and a philosophical retrospective.}
+
+\subsection{Vision}
+
+There is a moment in every great architectural discovery when you realize the structure you were
+building already existed --- that you were not inventing, but uncovering. The College of Knowledge
+arrived this way. It wasn't designed from first principles in a whiteboard session. It grew,
+rhizomatically, from a series of conversations about cooking, mathematics, Perl, and the Amiga.
+And in growing, it revealed something: the \textit{space between} knowledge domains is not empty.
+It is the most structurally rich region of all.
+
+The Complex Plane of Experience is the mathematical home of this discovery. In \textit{The Space
+Between}, the plane is defined with two axes: Logic$\leftrightarrow$Creativity on the real axis,
+Real$\leftrightarrow$Imaginary on the imaginary axis. Together, they produce a coordinate system
+for all human understanding --- not as metaphor, but as working geometry. Every concept has a
+position. Every skill has a trajectory. Every learning path traces an arc across the plane. The
+unit circle is not an illustration of this model. It \textit{is} the model, made operational.
+
+The College Structure is what happens when you build an institution on this plane rather than a
+flat grid. Departments are not filing cabinets of categorized information. They are \textit{seed
+organisms} --- minimal axioms that, faithfully iterated through Rosetta panels and calibration
+cycles, grow into forests of interconnected understanding. A single concept --- ``exponential decay''
+--- when planted in the Mathematics Department and expressed across seven language panels, generates
+connections to cooking thermodynamics, signal processing, population biology, and the physics of
+radioactive materials. The seed does not contain the forest. The grammar that grows the seed does.
+
+This is the Amiga Principle applied to epistemology: remarkable outcomes through architectural
+elegance and specialized execution paths, not brute-force content accumulation.
+
+The deep linking problem is the hardest and most interesting part. A student who understands
+Newton's cooling law in the Cooking Department should find that understanding \textit{already present}
+when she arrives at the Calculus wing of the Mathematics Department. The knowledge shouldn't move ---
+the student moves. The College's job is to ensure the landscape she walks through is coherent.
+Cross-department chords (in the unit circle sense) make this possible: direct connections between
+circle positions that would otherwise require traveling the full arc.
+
+This mission retrospects what was built, surfaces the fractal patterns that emerged, formalizes
+the deep linking architecture, and prepares a Fleet execution plan for building the complete
+College seeding system.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The flat-grid problem.} The original Knowledge Graph (16$\times$16 Cartesian) placed
+  concepts at fixed positions with Euclidean distances. This was correct as a map but wrong as a
+  learning model. Learning is not distance-minimization. It's angular traversal across the Complex
+  Plane. Without the plane geometry, prerequisite chains are guesswork.
+
+  \item \textbf{The orphaned-island problem.} Departments built in isolation become content silos.
+  A Mathematics Department and a Cooking Department that share Newton's cooling law but don't know
+  it means a student encounters the same concept twice, from different angles, with no bridge between.
+  Deep links --- cross-department concept pointers --- don't yet exist as a first-class architectural
+  feature.
+
+  \item \textbf{The dormant-seed problem.} The College seeds (Mathematics, Cooking, etc.) exist in
+  specification but have not been formally seeded into the skill-creator runtime. The fractal
+  expansion machinery (Complex Plane positioning, calibration feedback, Rosetta panel routing)
+  exists in architectural documents but not as executable code that produces living departments.
+
+  \item \textbf{The retrospective debt.} Sixty-five milestones and 500k+ lines of code represent
+  enormous architectural intelligence that has never been systematically documented as lessons
+  learned. Patterns that were discovered through friction --- the DACP protocol, the staging layer,
+  the Teacher/Student/Support model --- exist as implementations without formal retrospectives.
+  Future architects will rediscover the same friction points.
+
+  \item \textbf{The fractal-depth problem.} Fractal expansion promises that a simple seed self-replicates
+  outward with increasing detail. But the depth limit is undefined. Without formal angular velocity
+  constraints (from the unit circle model), a seed can over-expand into incoherence, or fail to
+  expand past the first iteration because the calibration engine lacks context to guide growth.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{tealbox}
+\textbf{The College of Knowledge is an L-system seeded on the Complex Plane of Experience.}
+Each Department is an axiom. Each Rosetta Panel is a production rule. Each calibration cycle
+is a generation. The output is not stored knowledge --- it is a living structure that grows
+toward the specific learner standing at a specific angle on the unit circle.
+\end{tealbox}
+
+\subsubsection{Domain Map: The Complex Plane of Experience}
+
+\begin{asciibox}
+                    IMAGINARY AXIS
+                   (Real Experience)
+                          |
+    CONCRETE              |              CONCRETE
+    + CREATIVE           |             + LOGICAL
+    (Art, cooking,       |           (Engineering,
+     music, craft)      |            code, math)
+                        |
+CREATIVE  ──────────────+──────────────  LOGICAL
+AXIS                    |              (Real Axis)
+                        |
+    ABSTRACT            |              ABSTRACT
+    + CREATIVE          |             + LOGICAL
+    (Philosophy,        |           (Theory, proofs,
+     metaphor)         |            pure math)
+                        |
+                   (Imaginary Experience)
+                   IMAGINARY AXIS
+
+  Every skill has a (θ, r) position:
+    θ = angle on the plane (abstract↔concrete, logic↔creativity)
+    r = radius (maturity / depth of coverage)
+    Tangent line at θ = activation interface for real-world application
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  COLLEGE OF KNOWLEDGE — MODULE ARCHITECTURE
+  ═══════════════════════════════════════════
+
+  Module 1: COMPLEX PLANE FOUNDATIONS
+  ├── Axes, coordinate system, angular positions
+  ├── Unit circle as activation geometry
+  └── Euler's formula as skill composition law
+
+  Module 2: COLLEGE ARCHITECTURE
+  ├── Department/Wing/Concept hierarchy
+  ├── Rosetta panels (7-language expression)
+  └── .college/ directory structure
+
+  Module 3: DEEP LINKING ENGINE
+  ├── Cross-department concept pointers
+  ├── Chord detection (shortcut identification)
+  └── Versine gap analysis (missing bridges)
+
+  Module 4: SEED GROWTH & FRACTAL EXPANSION
+  ├── L-system production rules for concept growth
+  ├── Calibration engine as iteration driver
+  └── Angular velocity constraints
+
+  Module 5: RETROSPECTIVE & LESSONS LEARNED
+  ├── 65-milestone audit (Amiga Principle instances)
+  ├── Friction points → architectural patterns
+  └── Teacher/Student/Support model origins
+
+  Module 6: THE ART OF THE SPACE BETWEEN
+  ├── Philosophical synthesis across authored works
+  ├── Through-line: from quark to College
+  └── What the gaps between departments contain
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Complex Plane Foundations}
+
+The mathematical backbone of the entire system. This module formalizes the Complex Plane of
+Experience as a working coordinate system: the two axes, the unit circle as activation geometry,
+the tangent line as the skill-to-application interface, and Euler's formula ($e^{i\theta} = \cos\theta
++ i\sin\theta$) as the composition law for combining skills. This is the mathematical bridge
+between \textit{The Space Between} (philosophical framework) and skill-creator (executable
+system). The old 16$\times$16 Knowledge Graph is formally retired in favor of $(θ, r)$ polar
+coordinates on the plane.
+
+\subsubsection{Module 2: College Architecture}
+
+The `.college/` directory structure, its Department/Wing/Concept hierarchy, the Rosetta panels
+(7-language expression: Python, C++, Java, Perl, Lisp, Pascal, Fortran), and the three-tier
+knowledge organization (pedagogical annotation + panel expression + calibration profile). This
+module maps the CPAN architectural lineage (PAUSE $\to$ contribution pipeline, CPAN Index $\to$
+concept registry, BackPAN $\to$ delta store) directly onto the College Structure's design
+constraints. It also specifies the Mathematics Department seed in full detail as the reference
+implementation.
+
+\subsubsection{Module 3: Deep Linking Engine}
+
+The hardest unsolved problem: how does a concept in one Department ``know about'' its equivalent
+in another? This module formalizes cross-department concept pointers as \textit{chords} on the
+unit circle --- direct connections between angular positions that bypass the arc path. Chord
+detection is an algorithmic problem (given two concept $(θ, r)$ positions, compute the straight-line
+distance and tag as a cross-department bridge if shorter than arc travel). Versine gap analysis
+identifies \textit{missing} links: where a bridge should exist (two concepts near each other
+on the plane) but doesn't yet.
+
+\subsubsection{Module 4: Seed Growth and Fractal Expansion}
+
+The L-system formalization of how a minimal Department seed expands into a full knowledge
+ecosystem. Production rules govern how a parent concept generates child concepts; angular velocity
+constraints prevent over-expansion; calibration feedback (Observe $\to$ Compare $\to$ Adjust $\to$
+Record) drives each generation. This module defines the mathematical limits of fractal depth ---
+the conditions under which expansion produces coherence vs.\ noise --- and specifies the
+Mandelbrot-equivalent boundary condition for College growth.
+
+\subsubsection{Module 5: Retrospective and Lessons Learned}
+
+A systematic audit of all 65+ milestones through the lens of the Amiga Principle. This module
+extracts the \textit{friction-to-pattern} transformations: every place where the build hit a
+wall, and what architectural insight the wall revealed. Key discoveries to document include the
+DACP protocol origin (markdown ambiguity $\to$ three-part bundle), the staging layer emergence,
+the Teacher/Student/Support model, the planning-bridge MCP server, and the virtual Black Rock
+City experiment. This is the ecosystem's institutional memory.
+
+\subsubsection{Module 6: The Art of the Space Between}
+
+The philosophical synthesis. This module weaves the through-line across all five authored works
+(\textit{The Space Between}, \textit{The Hundred Voices}, \textit{The Quark and the Compiler},
+\textit{The Longer Road}, and the GSD ecosystem itself as a sixth ``living work''). It asks: what
+\textit{is} the space between departments in the College? What lives in the chords, the versine
+gaps, the tangent extensions? The answer, consistent across every scale of the ecosystem, is that
+the space between is not absence. It is the highest-density region of meaning --- the morphism in
+category theory, the functor that preserves structure across maps, the Coast Salish concept of
+\textit{everything in relation}.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml — College of Knowledge Mission
+
+chipset:
+  name: "college-knowledge-complex-plane"
+  version: "1.0.0"
+  profile: fleet
+
+  agnus:           # DMA / orchestration
+    role: FLIGHT
+    model: claude-opus-4-20250514
+    context_windows: 4
+    responsibilities:
+      - Module synthesis and integration
+      - Cross-department chord validation
+      - Philosophical through-line coherence
+
+  denise:          # Display / pattern generation
+    role: CRAFT-FRACTAL
+    model: claude-opus-4-20250514
+    context_windows: 3
+    responsibilities:
+      - L-system production rule formalization
+      - Fractal depth boundary conditions
+      - Angular velocity constraint derivation
+
+  paula:           # Audio / calibration (feedback loops)
+    role: CRAFT-CALIBRATION
+    model: claude-sonnet-4-20250514
+    context_windows: 3
+    responsibilities:
+      - Calibration engine specification
+      - Observe-Compare-Adjust-Record formalization
+      - Feedback loop integration testing
+
+  68000:           # CPU / execution
+    role: EXEC (×2)
+    model: claude-sonnet-4-20250514
+    context_windows: 6
+    responsibilities:
+      - Document production (parallel tracks)
+      - Rosetta panel expressions
+      - College seed implementations
+
+  support:
+    role: HAIKU scaffolding
+    model: claude-haiku-4-5-20251001
+    context_windows: 2
+    responsibilities:
+      - Schema generation
+      - Template scaffolding
+      - Wave 0 foundation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Full formalization of the Complex Plane of Experience as executable coordinate system
+  \item `.college/` directory structure specification and reference seed implementation (Mathematics)
+  \item Deep linking engine: chord detection algorithm, versine gap analysis, cross-department pointer format
+  \item L-system production rules for Department seed growth, angular velocity constraints
+  \item 65-milestone retrospective: friction points, architectural patterns, institutional memory document
+  \item Philosophical synthesis: through-line across all authored works
+  \item Test suite for plane positioning, chord computation, and seed expansion
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Full implementation of all College Departments (Mathematics is the reference; others are seeded v2.0+)
+  \item Perl panel implementation (addressed in \texttt{10-perl-cpan-addendum.md})
+  \item Wasteland/DoltHub federation integration (separate mission)
+  \item 3D extension of the Complex Plane (v3.0 consideration)
+  \item Public documentation site update (frozen pending architecture finalization)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item The Complex Plane coordinate system is implemented and returns a $(θ, r)$ position for any
+  given concept with deterministic consistency ($\pm 0.01$ radians tolerance).
+
+  \item The `.college/` directory structure exists with complete schema documentation; the Mathematics
+  Department seed compiles and loads without errors.
+
+  \item The Rosetta Core routes any concept query to the correct panel based on its plane position
+  (systems/heritage/bridge routing verified against 20 test concepts).
+
+  \item The chord detection algorithm identifies cross-department bridges with $\geq 90\%$ precision
+  against a hand-labeled test set of 30 known concept pairs.
+
+  \item The versine gap analysis produces a ranked list of missing cross-department bridges, with
+  the top 10 verified as legitimate gaps by human review.
+
+  \item L-system production rules expand the Mathematics seed to at least 3 generations without
+  coherence degradation (calibration engine confirms).
+
+  \item The angular velocity constraint system prevents over-expansion: a bounded seed stays within
+  defined plane region with $> 95\%$ of generated concepts remaining coherent.
+
+  \item The 65-milestone retrospective document is complete: every milestone has at least one
+  friction point and one architectural pattern derived from it.
+
+  \item The friction-to-pattern registry contains at least 15 distinct patterns with formal names,
+  descriptions, and instances.
+
+  \item All authored works (\textit{The Space Between}, \textit{The Hundred Voices}, \textit{The
+  Quark and the Compiler}, \textit{The Longer Road}) have their through-line mapped to specific
+  College Architecture decisions.
+
+  \item The deep linking test suite passes: 95\%+ of cross-department navigation paths resolve
+  correctly from any starting Department to any target concept.
+
+  \item The complete package is self-contained: a new engineer can build and run the College seed
+  system from this document alone, with no additional context.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{What It Contributes} \\
+\midrule
+\textit{The Space Between} (923pp) & Foundation & Complex Plane of Experience framework, set-theoretic identity model, fractal geometry \\
+\texttt{unit-circle-skill-creator-synthesis.md} & Prerequisite & Unit circle as activation geometry, tangent/chord/versine mechanics \\
+\texttt{cooking-with-claude-compiled-session.md} & Parallel & College Structure spec, Rosetta Core, calibration engine, Mathematics seed \\
+\texttt{gsd-mathematical-foundations-conversation.md} & Prerequisite & L-system formalization, category theory as morphism model \\
+\texttt{10-perl-cpan-addendum.md} & Extension & Perl panel, CPAN $\to$ College lineage, 7th panel routing \\
+\texttt{gsd-skill-creator-analysis.md} & Context & Current codebase state (500k+ LOC, 65 milestones) \\
+\texttt{gsd-bbs-educational-pack-vision.md} & Parallel & BBS as historical College (FidoNet $\to$ Kafka functor) \\
+\texttt{gsd-chipset-architecture-vision.md} & Context & Amiga chip naming convention, specialized execution paths \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga was not the most powerful computer of its era. It was the most architecturally leveraged.
+Agnus handled DMA so the CPU could think. Denise handled display so the CPU could compute. Paula
+handled audio so the CPU could reason about structure rather than samples. The chips did not share
+work randomly --- each had a domain, a specialty, a piece of the whole that only it could hold.
+
+The College of Knowledge is an Amiga.
+
+Each Department is a chip. Mathematics handles the DMA of abstraction --- the background movement
+of formal structure through the system. Cooking handles the display layer --- the sensory, concrete
+interface where understanding becomes visible and delicious. Music handles the audio layer --- the
+temporal, rhythmic, emotional channel. Each Department expresses the same underlying concepts
+(energy, transformation, pattern, composition) through its specialized substrate, and in doing so
+frees the learner's CPU to do what only humans can: \textit{stand in the space between and see
+what the chips cannot.}
+
+The space between departments is not a gap to be filled. It is the highest-value real estate in
+the entire system. It is where Euler lives --- that astonishing moment when $e^{i\pi} + 1 = 0$,
+and you realize that five apparently unrelated mathematical constants are secretly one conversation.
+It is where the cook who understands heat transfer meets the engineer who understands differential
+equations, and they discover they've been solving the same problem in different vocabularies.
+
+The art of the space between is not decoration. It is the curriculum.
+
+\newpage
+
+%%═══════════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%%═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{College of Knowledge and Complex Plane --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference synthesizes findings across the GSD ecosystem's primary sources. Each
+module's findings are organized as self-contained reference material for the corresponding
+execution wave. Sources are from authored works, architectural conversation transcripts, and
+peer-validated mathematical frameworks.
+
+\textbf{Key source authorities:}
+\begin{itemize}[noitemsep]
+  \item \textit{The Space Between} (Tibsfox / Miles Tiberius Foxglove) --- primary philosophical and mathematical source
+  \item \texttt{unit-circle-skill-creator-synthesis.md} --- unit circle geometry formalization
+  \item \texttt{cooking-with-claude-compiled-session.md} --- College Structure specification
+  \item \texttt{gsd-mathematical-foundations-conversation.md} --- L-system and category theory framework
+  \item \texttt{10-perl-cpan-addendum.md} --- CPAN architectural lineage
+  \item \textit{The Hundred Voices} (Tibsfox) --- fractal narrative structure across 100 authorial voices
+\end{itemize}
+
+\subsection{Module 1 Reference: Complex Plane Foundations}
+
+\subsubsection{The Two Axes}
+
+The Complex Plane of Experience as defined in \textit{The Space Between} establishes a coordinate
+system for all human experience and understanding:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Axis} & \tableheader{Negative Pole} & \tableheader{Positive Pole} & \tableheader{What It Measures} \\
+\midrule
+Real (horizontal) & Pure Logic / Analysis & Pure Creativity / Synthesis & Balance between analytical and generative thinking \\
+Imaginary (vertical) & Purely Abstract / Theoretical & Purely Concrete / Experiential & Distance from direct sensory/practical engagement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Every concept, skill, and learning path has a position on this plane. A pure mathematical proof
+sits deep in the Logic + Abstract quadrant. A cooking technique sits in the Creativity + Concrete
+quadrant. A recipe that teaches thermodynamics crosses quadrants --- and that crossing is precisely
+why it works as pedagogy.
+
+\subsubsection{Unit Circle as Activation Geometry}
+
+The unit circle synthesis established that every classical trigonometric function maps to a
+concrete skill-creator function:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Segment} & \tableheader{Geometric Identity} & \tableheader{Skill-Creator Function} \\
+\midrule
+sin($\theta$) & Height of point on circle & Abstract reach of a skill --- how far into theory it extends \\
+cos($\theta$) & Horizontal grounding & Concrete applicability --- how much is directly usable \\
+tan($\theta$) & Reach beyond the circle & Activation reach --- how far the skill extends into real-world application \\
+arc & Curved path along circumference & The learning path --- distance traveled around the plane \\
+chord & Straight line between two positions & Cross-department shortcut --- the deep link \\
+versine & $1 - \cos\theta$ (gap from full grounding) & Gap analysis --- what's missing from complete understanding \\
+exsecant & sec$\theta - 1$ (reach beyond circle) & External resource reach --- MCP integrations, community skills \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Critical insight:} Point A (where the circle meets the tangent line) is the interface
+between bounded abstract exploration and unbounded real-world application. The direction of
+application is entirely determined by the angle of abstract exploration. Change $\theta$ and the
+same body of abstract knowledge connects to completely different concrete applications.
+
+\subsubsection{Euler's Formula as Composition Law}
+
+$e^{i\theta} = \cos\theta + i\sin\theta$ is not merely a mathematical curiosity --- it is the
+composition law for skill-creator. When two skills at angles $\theta_1$ and $\theta_2$ combine,
+the result is their product as complex numbers: $e^{i(\theta_1 + \theta_2)}$. This means:
+
+\begin{itemize}[noitemsep]
+  \item Skills compose by \textit{adding angles} --- the combined skill's plane position is predictable
+  \item The radius (depth/maturity) multiplies
+  \item Skills at opposite angles ($\theta$ and $\theta + \pi$) cancel --- they are true complements
+  \item The identity skill (no transformation) sits at angle $0$ --- it does not change the learner's position
+\end{itemize}
+
+\subsection{Module 2 Reference: College Architecture}
+
+\subsubsection{The CPAN Lineage}
+
+The College Structure did not emerge from a vacuum. Its direct intellectual ancestor is CPAN (1995),
+which established the architectural patterns that have governed every major knowledge ecosystem since:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{CPAN Component} & \tableheader{College Equivalent} & \tableheader{Principle} \\
+\midrule
+PAUSE upload server & Contribution Pipeline & Human-reviewed ingestion with namespace protection \\
+CPAN Index & Concept Registry & Canonical mapping of names to locations \\
+Module namespaces & Department/Wing/Concept hierarchy & Hierarchical knowledge organization \\
+META.yml & RosettaConcept metadata & Structured metadata: dependencies, version, description \\
+CPAN Testers & Calibration Engine gates & Automated cross-environment quality assurance \\
+Mirror network & Progressive disclosure tiers & Distributed, cached copies at multiple fidelity levels \\
+BackPAN (archive) & Delta Store & Complete history retained, nothing truly deleted \\
+Developer releases & Observation pipeline (draft) & Tentative knowledge that doesn't pollute the index \\
+\texttt{perldoc} viewer & College Loader's explore() & Browse knowledge without modifying it \\
+POD embedded docs & Code-as-curriculum & Documentation lives with the code it describes \\
+Dependency resolution & Concept prerequisite loading & Load what you need, resolve chains automatically \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Three-Tier Knowledge Organization}
+
+The College Structure inherited the ``cookbook'' three-tier pattern from Numerical Recipes (Press et al.)
+and refined it for executable knowledge:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Tier} & \tableheader{Name} & \tableheader{Contents} \\
+\midrule
+Tier 1 & Pedagogical Annotation & Why this concept matters; connections to other concepts; historical context \\
+Tier 2 & Panel Expressions & 7 Rosetta panel implementations (Python, C++, Java, Perl, Lisp, Pascal, Fortran) \\
+Tier 3 & Calibration Profiles & Known good parameters; feedback-refined defaults; edge case handling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Seven Rosetta Panels}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Panel} & \tableheader{Family} & \tableheader{What It Teaches} \\
+\midrule
+Python & Systems & Readability, scientific computing, rapid prototyping \\
+C++ & Systems & Memory management, performance, templates \\
+Java & Systems & Type safety, OOP patterns, enterprise architecture \\
+Perl & Bridge & Linguistics, regex as syntax, CPAN ecosystem architecture, TMTOWTDI \\
+Lisp & Heritage & Functional programming, homoiconicity, code-as-data \\
+Pascal & Heritage & Structured programming, educational clarity, Wirth's principles \\
+Fortran & Heritage & Numerical computing, array operations, scientific heritage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Perl ``bridge'' panel is uniquely positioned on the Complex Plane: it spans systems and heritage
+families. Designed by a trained linguist (Larry Wall), Perl's syntax encodes Huffman coding
+(common operations are concise), context sensitivity, and TMTOWTDI (``There's More Than One Way
+To Do It'') --- the Rosetta principle expressed as language philosophy.
+
+\subsection{Module 3 Reference: Deep Linking Engine}
+
+\subsubsection{Chord Geometry}
+
+A chord on the unit circle connects two points $(θ_1, r_1)$ and $(θ_2, r_2)$. Its length is:
+
+\[
+  \text{chord} = \sqrt{r_1^2 + r_2^2 - 2r_1 r_2 \cos(\theta_2 - \theta_1)}
+\]
+
+The arc distance between the same two points (staying on the circle at radius $r$) is:
+
+\[
+  \text{arc} = r \cdot |\theta_2 - \theta_1|
+\]
+
+A deep link is warranted when chord $\ll$ arc --- when the straight-line connection is significantly
+shorter than the arc path. The threshold is empirically calibrated: a chord/arc ratio below $0.6$
+is a strong deep link candidate.
+
+\subsubsection{Known Cross-Department Bridges}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Concept A (Dept)} & \tableheader{Concept B (Dept)} & \tableheader{Bridge Type} & \tableheader{Shared Structure} \\
+\midrule
+Newton's cooling (Math) & Maillard reaction temp (Cooking) & Exponential decay & $dT/dt = k(T - T_\text{env})$ \\
+Fourier series (Math) & Timbre/overtones (Music) & Frequency decomposition & Harmonic analysis \\
+Fibonacci sequence (Math) & Phyllotaxis (Biology) & Irrational growth ratio & Golden ratio $\phi$ \\
+Gradient descent (Math) & Instrument tuning (Music) & Error minimization & Feedback correction \\
+Entropy (Physics) & Sourdough fermentation (Cooking) & Thermodynamic disorder & Spontaneous state change \\
+Set theory (Math) & Recipe ingredient sets (Cooking) & Membership functions & Inclusion/exclusion \\
+L-systems (Math) & Branching recipes (Cooking) & Production grammar & Recursive substitution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Versine Gap Analysis}
+
+The versine ($1 - \cos\theta$) measures the gap between a concept's current grounding and complete
+concretization. Applied to the College, a high versine score means a concept is theoretically
+present but not yet concretely expressed. The gap analysis produces a ranked list of ``missing
+bridges'' --- concept pairs whose plane positions are close (high cosine similarity) but whose
+chord link does not yet exist in the College Structure.
+
+\subsection{Module 4 Reference: Seed Growth and Fractal Expansion}
+
+\subsubsection{The L-System Model}
+
+From the mathematical foundations work, the GSD ecosystem is formally an L-system (Lindenmayer
+system), a string-rewriting grammar originally developed to model plant growth:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{L-System Component} & \tableheader{College Equivalent} \\
+\midrule
+Axiom & Minimal Department seed (e.g., ``complex numbers'') \\
+Production rules & Rosetta panel expressions that generate child concepts \\
+Iteration (generation $n$) & Each calibration cycle \\
+Output string & The full concept graph of a Department at generation $n$ \\
+Bracket notation $[\ ]$ & Branch protection --- concepts that grow but don't alter the parent \\
+Stochastic variation & The human learner's unique derivation path \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key property:} Some children will sprint across that bridge. Some will stop halfway and
+build something beautiful where they are. Some will find a side path that nobody knew existed.
+That's an L-system with stochastic variation. The grammar doesn't dictate the tree. It enables
+the tree.
+
+\subsubsection{Fractal Depth Constraints}
+
+Without boundary conditions, L-system expansion produces infinite regress. The angular velocity
+constraint limits how fast a seed's $\theta$ position can rotate per generation:
+
+\[
+  \left|\frac{d\theta}{dn}\right| \leq \omega_\text{max}
+\]
+
+where $\omega_\text{max}$ is calibrated per learner context. A highly concrete learner (low $r$,
+concrete $\theta$) has a lower $\omega_\text{max}$ --- concepts should stay near the concrete axis.
+An advanced learner exploring abstract connections has a higher $\omega_\text{max}$.
+
+The Mandelbrot boundary condition for College growth: a concept remains coherent if, iterated
+through the production rules, its orbit on the plane stays bounded. If it escapes to infinity
+(incoherence), the calibration engine terminates that branch.
+
+\subsubsection{The Calibration Loop as Generation Driver}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Step} & \tableheader{L-System Role} & \tableheader{What Happens} \\
+\midrule
+Observe & Read string & Current concept graph state is captured \\
+Compare & Apply production rules & New concepts are generated from current state \\
+Adjust & Prune/promote & Coherent branches promoted; incoherent branches pruned \\
+Record & Write string (generation $n+1$) & New concept graph state is stored \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5 Reference: Retrospective and Lessons Learned}
+
+\subsubsection{The Friction-to-Pattern Registry (Selected Entries)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Friction Point} & \tableheader{Pattern Derived} & \tableheader{Where It Lives Now} \\
+\midrule
+Markdown ambiguity in agent handoffs & DACP: three-part bundle (intent + data + code) & v1.49, agent communication protocol \\
+Agent overwhelm with full codebase context & Staging layer / inbox pattern & Planning bridge MCP server \\
+Teacher explaining to student who knows more & Teacher/Student/Support model (Opus/Sonnet/Haiku) & v1.50 pedagogy design \\
+Flat grid failing to model prerequisite chains & Complex Plane $(θ, r)$ positioning & College Architecture spec \\
+Skills isolated by language & Rosetta Core multi-panel expression & Cooking with Claude mission \\
+Single-purpose skills over-specialized & Calibration engine generalizes from feedback & Fractal expansion machinery \\
+Documentation 25 milestones behind code & Institutional retrospective mission (this doc) & v1.50 Half A audit \\
+Over-eager integration proposals & Comprehension-before-integration principle & Ecosystem working patterns \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Amiga Principle in Practice: Milestone Instances}
+
+Every time the ecosystem encountered a problem that brute-force (more tokens, larger models,
+longer prompts) would solve expensively, the Amiga Principle found an architectural solution:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{DACP (v1.49):} Instead of longer markdown prompts between agents, structured
+  three-part bundles. Smaller. Faster. Deterministic. The Agnus chip solution.
+
+  \item \textbf{Staging layer:} Instead of loading full codebase context every session, a
+  planning-bridge MCP server stages work in \texttt{.planning/staging/inbox/}. The Denise chip
+  solution --- offload to the display chip, free the CPU.
+
+  \item \textbf{Teacher/Student/Support:} Instead of one Opus model doing everything, specialized
+  roles with appropriate model sizing. 30\% Opus judgment, 60\% Sonnet structure, 10\% Haiku
+  scaffolding. The Paula chip solution --- audio doesn't need a full CPU.
+
+  \item \textbf{Rosetta panels:} Instead of one monolithic language implementation, seven
+  specialized panel expressions that together cover every learner angle. Amiga custom chips,
+  not generic processing.
+\end{itemize}
+
+\subsection{Module 6 Reference: The Art of the Space Between}
+
+\subsubsection{Authored Works Through-Line}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Work} & \tableheader{Core Claim} & \tableheader{Connection to College Architecture} \\
+\midrule
+\textit{The Space Between} (923pp) & The maps between things matter more than the things & The morphism \textit{is} the curriculum; cross-department chords are where learning lives \\
+\textit{The Hundred Voices} (733pp) & 100 authorial voices spanning 1926--2025; the forest, not the trees & Fractal expansion: same axiom, stochastic variation, every voice a unique derivation \\
+\textit{The Quark and the Compiler} & Tracing one particle through 13.8B years of grammar & L-system trace: the quark is the seed, the production rules are physics, the output is consciousness \\
+\textit{The Longer Road} & Incremental, grounded progress over rushing to completion & Angular velocity constraint: don't over-rotate; the path matters \\
+GSD ecosystem (living work) & Giving people their lives back & The endgame: when the College handles friction, humans focus on family, art, music, connection \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Category Theory as the Deep Link Formalism}
+
+Category theory provides the formal language for the space between. A functor is a structure-preserving
+map between categories. The deep links in the College are functors: they don't just connect two
+concepts, they preserve the \textit{structure of relationships} between them. When Newton's
+cooling law in the Math Department connects to the Maillard reaction in the Cooking Department,
+the functor doesn't just say ``these are related.'' It says: every derivative in the Math structure
+maps to a rate of change in the Cooking structure. Every boundary condition maps to a culinary
+threshold. The entire abstract structure is preserved across the map.
+
+This is why \textit{The Space Between} is a category-theoretic claim as a title: what matters is
+not what humans are or what machines are, but the morphism between them.
+
+\subsubsection{Coast Salish Cultural Context}
+
+The concept of the space between has deep roots in Coast Salish worldview: everything in relation,
+the cedar and the salmon and the raven and the human as nodes in a network where the \textit{connections}
+carry the meaning. The College Architecture embeds this principle structurally: no Department exists
+in isolation; every concept carries its relationship metadata; the between-space is first-class.
+Nation-specific attribution: this is specifically Coast Salish epistemology, not a generic
+``Indigenous perspective.''
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary} & \tableheader{Approach} \\
+\midrule
+Coast Salish cultural reference & GATE & Use specific nation attribution; never generic ``Indigenous''; validate with OCAP\textregistered{} principles \\
+Learner data from calibration & GATE & Calibration profiles are private by default; shared data requires explicit opt-in \\
+Mathematical claims & ANNOTATE & All quantitative claims (angular velocity, chord thresholds) are empirically calibrated, not derived from first principles \\
+Authored work citations & ABSOLUTE & All citations to authored works use exact titles and pen name; never paraphrase core philosophical claims \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Primary Sources (Authored):}
+\begin{itemize}[noitemsep]
+  \item Foxglove, M.T. (Tibsfox). \textit{The Space Between: The Autodidact's Guide to the Galaxy.} 923 pp. Available: \url{https://tibsfox.com/media/The_Space_Between.pdf}
+  \item Tibsfox. \textit{The Hundred Voices.} 733 pp., 100 authorial voices, 1926--2025.
+  \item Tibsfox. \textit{The Quark and the Compiler.} Philosophical essay.
+  \item Tibsfox. \textit{The Longer Road.} Philosophical essay.
+\end{itemize}
+
+\textbf{GSD Ecosystem Documents:}
+\begin{itemize}[noitemsep]
+  \item \texttt{unit-circle-skill-creator-synthesis.md} — Unit circle geometry formalization
+  \item \texttt{cooking-with-claude-compiled-session.md} — College Structure specification and Rosetta Core
+  \item \texttt{gsd-mathematical-foundations-conversation.md} — L-system, category theory, set theory frameworks
+  \item \texttt{10-perl-cpan-addendum.md} — Perl panel, CPAN architectural lineage
+  \item \texttt{gsd-skill-creator-analysis.md} — Current codebase architecture (500k+ LOC, 65 milestones)
+\end{itemize}
+
+\textbf{Mathematical Foundations:}
+\begin{itemize}[noitemsep]
+  \item Lindenmayer, A. (1968). Mathematical models for cellular interactions in development. \textit{Journal of Theoretical Biology}, 18(3), 280--315. [L-system original paper]
+  \item Mandelbrot, B.B. (1982). \textit{The Fractal Geometry of Nature.} W.H. Freeman.
+  \item Mac Lane, S. (1971). \textit{Categories for the Working Mathematician.} Springer. [Category theory / functors]
+  \item Wall, L., Christiansen, T., \& Orwant, J. (2000). \textit{Programming Perl} (3rd ed.). O'Reilly.
+  \item Press, W.H. et al. (1992). \textit{Numerical Recipes in C: The Art of Scientific Computing.} Cambridge University Press.
+\end{itemize}
+
+\newpage
+
+%%═══════════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%%═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Formalize the College of Knowledge as an executable L-system seeded on the Complex Plane of
+Experience, implement the deep linking engine for cross-department chord navigation, produce a
+systematic retrospective of the 65+ milestone journey, and synthesize the philosophical
+through-line across all authored works into a living architectural document. The mission operates
+as a Fleet-profile execution across six parallel-capable modules, culminating in a complete
+College seeding system ready for handoff to the GSD orchestrator.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  FLEET EXECUTION ARCHITECTURE
+  ══════════════════════════════════════════════════════
+
+  Wave 0 (Sequential, Haiku):
+  └── Foundation schemas, concept metadata format, test fixtures
+
+  Wave 1A (Parallel Track A, Sonnet):         Wave 1B (Parallel Track B, Opus):
+  ├── Module 1: Complex Plane math impl.       ├── Module 5: Retrospective audit
+  └── Module 2: College Architecture spec      └── Module 6: Philosophical synthesis
+
+  Wave 1C (Parallel Track C, Sonnet):
+  ├── Module 3: Deep Linking engine
+  └── Module 4: Seed Growth / L-system
+
+  Wave 2 (Sequential, Opus):
+  └── Cross-module integration: plane ↔ links ↔ seeds ↔ retrospective
+
+  Wave 3 (Sequential, Sonnet):
+  └── Publication: compiled College doc + test suite + index.html
+
+  ══════════════════════════════════════════════════════
+  Dependencies: 1A,1B,1C must complete before Wave 2
+                Wave 2 must complete before Wave 3
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Foundation Layer} (Wave 0) — Shared schemas, test fixtures, concept metadata format
+  \item \textbf{Mathematical Layer} (Wave 1A) — Complex Plane coordinate system, unit circle geometry, Euler composition
+  \item \textbf{Architectural Layer} (Wave 1A) — College directory structure, Department seeds, Rosetta panel routing
+  \item \textbf{Linking Layer} (Wave 1C) — Chord detection, versine gap analysis, cross-department pointer format
+  \item \textbf{Growth Layer} (Wave 1C) — L-system rules, angular velocity constraints, calibration loop
+  \item \textbf{Memory Layer} (Wave 1B) — Milestone retrospective, friction-to-pattern registry, institutional memory
+  \item \textbf{Synthesis Layer} (Wave 2) — Integration, cross-module coherence, philosophical through-line
+  \item \textbf{Publication Layer} (Wave 3) — Final docs, test suite, index page
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Location} \\
+\midrule
+D1 & Complex Plane coordinate system & $(θ, r)$ for any concept, deterministic within $\pm 0.01$ rad & Module 1 \\
+D2 & `.college/` directory structure & Compiles; Mathematics seed loads without errors & Module 2 \\
+D3 & Rosetta panel routing & 20 test concepts routed correctly & Module 2 \\
+D4 & Chord detection algorithm & $\geq 90\%$ precision on 30 test pairs & Module 3 \\
+D5 & Versine gap analysis report & Top 10 gaps verified by human review & Module 3 \\
+D6 & L-system production rules & Mathematics seed expands 3 generations coherently & Module 4 \\
+D7 & Angular velocity constraints & Bounded expansion, $> 95\%$ coherence & Module 4 \\
+D8 & Retrospective document & All 65+ milestones with friction point + pattern & Module 5 \\
+D9 & Friction-to-pattern registry & $\geq 15$ named patterns with formal descriptions & Module 5 \\
+D10 & Philosophical synthesis doc & All authored works through-line mapped to architecture & Module 6 \\
+D11 & Test suite & All 12 success criteria covered, 2--4 tests each & Wave 3 \\
+D12 & Complete College document & Self-contained; new engineer can build from doc alone & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Concept metadata schema & None & Haiku & 8k \\
+W0: Test fixture generation & None & Haiku & 6k \\
+W1A: Plane coordinate impl. & W0 schemas & Sonnet & 22k \\
+W1A: College Architecture spec & W0 schemas & Sonnet & 28k \\
+W1B: Milestone retrospective & W0 schemas & Opus & 35k \\
+W1B: Philosophical synthesis & The Space Between & Opus & 30k \\
+W1C: Chord detection algorithm & W1A Plane & Sonnet & 20k \\
+W1C: Versine gap analysis & W1A Plane & Sonnet & 18k \\
+W1C: L-system production rules & W1A Plane & Sonnet & 22k \\
+W1C: Angular velocity constraints & W1C L-system & Sonnet & 15k \\
+W2: Cross-module integration & All W1 & Opus & 40k \\
+W3: Test suite compilation & W2 & Sonnet & 20k \\
+W3: Final document assembly & W2 & Sonnet & 25k \\
+W3: Index page & W3 docs & Sonnet & 8k \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated tokens:}} & \textbf{$\sim$297k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$32\% & Retrospective, philosophical synthesis, cross-module integration & High judgment: surfacing patterns from 65 milestones requires architectural intuition; philosophical through-line requires coherence across complex abstractions \\
+Sonnet & $\sim$58\% & Plane implementation, College spec, chord/versine/L-system algorithms, test suite, final assembly & Structured content with clear specifications; document assembly; algorithmic implementations \\
+Haiku & $\sim$10\% & Schemas, test fixtures, scaffolding & Minimal-footprint generation; token efficiency for repeatable low-judgment work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Gate Condition} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas validated \\
+1A & Architecture track & Parallel & Sonnet & Plane + College spec complete \\
+1B & Memory track & Parallel & Opus & Retrospective + Synthesis complete \\
+1C & Engine track & Parallel & Sonnet & Linking + Growth engines complete \\
+2 & Synthesis & Sequential & Opus & All Wave 1 tracks PASS \\
+3 & Publication & Sequential & Sonnet & Integration PASS; tests green \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+W0-1: Concept metadata schema & \texttt{RosettaConcept.ts} type definition & theta, r, panels, dependencies, dept \\
+W0-2: Plane coordinate schema & \texttt{PlanePosition.ts} & $(\theta, r)$, quadrant, angular velocity \\
+W0-3: Deep link schema & \texttt{ConceptLink.ts} & Source, target, chord length, link type \\
+W0-4: Test fixture set & \texttt{fixtures/concepts.json} & 30 labeled concept pairs for chord testing \\
+W0-5: L-system schema & \texttt{LSystemRule.ts} & Axiom, production rules, generation metadata \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Architecture Track (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+W1A-1: Plane coordinate impl. & \texttt{src/college/plane.ts} & $(θ,r)$ assignment for any concept input \\
+W1A-2: Euler composition & \texttt{src/college/compose.ts} & Skill combination via complex multiplication \\
+W1A-3: `.college/` directory & \texttt{.college/} directory with schema & Math, Cooking dept stubs \\
+W1A-4: Math Dept seed & \texttt{.college/math/seed.yaml} & Full Mathematics seed (7 panels) \\
+W1A-5: Rosetta routing & \texttt{src/college/router.ts} & Maps plane position to panel selection \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Memory Track (Parallel, Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+W1B-1: Milestone audit (0--32) & \texttt{docs/retro/milestones-0-32.md} & First 33 milestones, friction + pattern \\
+W1B-2: Milestone audit (33--65) & \texttt{docs/retro/milestones-33-65.md} & Milestones 33--65+, friction + pattern \\
+W1B-3: Friction-to-pattern registry & \texttt{docs/retro/patterns.md} & $\geq$15 named patterns, formal descriptions \\
+W1B-4: Philosophical synthesis & \texttt{docs/philosophy/through-line.md} & All 5 authored works mapped to architecture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1C: Engine Track (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+W1C-1: Chord detection & \texttt{src/college/chord.ts} & Chord/arc ratio, deep link threshold \\
+W1C-2: Versine gap analysis & \texttt{src/college/versine.ts} & Missing bridge detection, ranked output \\
+W1C-3: Cross-dept pointer format & \texttt{src/college/links.ts} & Link type: chord, functor, exsecant \\
+W1C-4: L-system rules (Math) & \texttt{src/college/lsystem.ts} & Production rules for Math Department \\
+W1C-5: Angular velocity constraints & \texttt{src/college/growth.ts} & Bounded expansion, Mandelbrot gate \\
+W1C-6: Calibration loop integration & \texttt{src/college/calibrate.ts} & Observe→Compare→Adjust→Record \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+W2-1: Plane $\leftrightarrow$ routing integration & Integration test suite & Verify plane positions drive panel routing \\
+W2-2: Chord $\leftrightarrow$ seed integration & Cross-dept expansion test & Seed growth respects chord boundaries \\
+W2-3: Retro $\leftrightarrow$ architecture mapping & Architecture decision log & Friction points directly reference code \\
+W2-4: Synthesis document & \texttt{docs/synthesis.md} & All modules coherent; through-line verified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+W3-1: Test suite compilation & \texttt{tests/college/} & Full 12-criterion coverage \\
+W3-2: Final College document & \texttt{docs/college-complete.md} & Self-contained; new-engineer-ready \\
+W3-3: README update & \texttt{README.md} patch & College Structure section added \\
+W3-4: Index page & \texttt{docs/college/index.html} & Navigable entry point \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 outputs (schemas) loaded once and cached across all Wave 1 tracks. Do not re-derive.
+  \item \textit{The Space Between} plane definitions are static reference; cache for entire session.
+  \item Rosetta panel routing table (W1A-5) cached before Wave 1C begins; chord calculations reference it.
+  \item Retrospective audit (W1B-1, W1B-2) split into two sub-sessions with explicit handoff; each sub-session receives the previous's friction-to-pattern summary as preamble.
+  \item Wave 2 integration receives synthesis summary from each Wave 1 track, not full outputs. Token budget: 3k summary per track.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 8k & 15k & Schemas + fixtures \\
+Wave 1A & 25k & 40k & Plane + College \\
+Wave 1B & 60k & 55k & Retro audit (long context) \\
+Wave 1C & 20k & 35k & Engine implementations \\
+Wave 2 & 30k & 25k & Synthesis (summaries only) \\
+Wave 3 & 25k & 30k & Final assembly \\
+\midrule
+\textbf{Total} & \textbf{$\sim$168k} & \textbf{$\sim$200k} & \textbf{$\sim$368k total} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  W0 (Foundation)
+   ├──────────────────────────────────┐
+   │                                  │
+  W1A (Architecture)    W1B (Memory)  W1C (Engines)
+  [Plane, College]       [Retro,Synth]  [Links, Growth]
+         │                   │              │
+         └───────────────────┼──────────────┘
+                             │
+                         W2 (Synthesis)
+                             │
+                         W3 (Publication)
+
+  Legend:
+  ──→  Data dependency (output of A is input of B)
+  W1A, W1B, W1C run fully in parallel (no cross-deps)
+  W2 requires ALL W1 tracks to PASS
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 4 & BLOCK & Mission halt; do not proceed \\
+Plane geometry & 8 & HIGH & BLOCK Wave 1C if fails \\
+College structure & 6 & HIGH & BLOCK Wave 2 if fails \\
+Deep linking & 8 & HIGH & BLOCK Wave 2 if fails \\
+Fractal growth & 6 & HIGH & BLOCK Wave 3 if fails \\
+Retrospective completeness & 4 & MEDIUM & Flag; human review before Wave 3 \\
+Integration (cross-module) & 8 & HIGH & Rerun Wave 2 with fixes \\
+Edge cases & 10 & LOW & Document and defer \\
+\midrule
+\textbf{Total} & \textbf{54} & --- & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+SC-01 & Cultural attribution accuracy & Coast Salish references use nation-specific language; no generic ``Indigenous'' \\
+SC-02 & Authored work citation integrity & All references to authored works use exact titles and pen name \\
+SC-03 & Learner data privacy & Calibration profiles do not leak across learner sessions; default private \\
+SC-04 & Incoherence gate (Mandelbrot) & Unbounded seed expansion is terminated, not allowed to corrupt concept graph \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Plane coordinate system deterministic & PG-01, PG-02, INT-01 & Pending \\
+College seed loads without errors & CS-01, CS-02 & Pending \\
+Rosetta routing correct & CS-03, CS-04, INT-02 & Pending \\
+Chord detection $\geq 90\%$ precision & DL-01, DL-02, DL-03 & Pending \\
+Versine gap top 10 verified & DL-04, DL-05 & Pending \\
+L-system expands 3 generations & FG-01, FG-02, FG-03 & Pending \\
+Angular velocity constraint holds & FG-04, FG-05, SC-04 & Pending \\
+Retrospective document complete & RC-01, RC-02 & Pending \\
+Friction-to-pattern registry $\geq 15$ & RC-03, RC-04 & Pending \\
+Authored works through-line mapped & INT-07, INT-08 & Pending \\
+Cross-dept navigation 95\%+ correct & DL-06, DL-07, INT-04 & Pending \\
+Self-contained for new engineer & INT-08, INT-09 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & AGNUS-ORCH & Mission direction; go/no-go at every wave boundary; architecture coherence \\
+PLAN & PLAN-WAVE & Wave decomposition; parallel track optimization; cache exploitation \\
+TOPO & TOPO-STRUCT & Agent team topology; mid-mission restructuring if W1 tracks diverge \\
+ARCH & ARCH-PLANE & Cross-cutting decisions about Complex Plane coordinate system \\
+SCOUT & SCOUT-LINK & Source gathering for retrospective; milestone history compilation \\
+EXEC-A & DENISE-ARCH & Document production: Wave 1A outputs \\
+EXEC-B & 68K-ENGINE & Document production: Wave 1C outputs \\
+CRAFT-FRACTAL & PAULA-FRACTAL & L-system formalization; fractal depth boundary conditions \\
+CRAFT-RETRO & RAVEN-RETRO & Milestone retrospective; friction-to-pattern extraction \\
+CRAFT-PHILO & FOX-PHILO & Philosophical synthesis; through-line coherence across authored works \\
+INTEG & INTEG-CHORD & Cross-module relationship validation; chord/plane/seed coherence \\
+VERIFY & VERIFY-TEST & Source validation; test suite execution; accuracy checking \\
+SECURE & SECURE-CULTURAL & Cultural attribution enforcement; SC-01, SC-02 mandatory-pass \\
+ANALYST & ANALYST-PATTERN & Cross-module pattern detection in retrospective data \\
+CAPCOM & CAPCOM-HUMAN & Human approval at wave boundaries; ONLY channel to Tibsfox \\
+BUDGET & BUDGET-TOK & Token budget tracking; session planning; cache TTL exploitation \\
+SURGEON & SURGEON-HEALTH & Research quality degradation detection; coherence monitoring \\
+RETRO & RETRO-WAVE & Post-wave analysis; lessons learned within this mission \\
+LOG & CHRONICLE & Audit trail; commit messages; milestone summary for v1.50 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Fleet (6 modules, 19 roles) \\
+Total deliverables & 12 (D1--D12) \\
+Total tests & 54 (4 safety-critical, 50 functional/integration) \\
+Estimated context windows & 18--22 across 6--8 sessions \\
+Estimated token budget & $\sim$368k total \\
+Parallel tracks & 3 (Wave 1A, 1B, 1C simultaneous) \\
+Hard dependencies & W0 $\to$ W1; W1 complete $\to$ W2; W2 $\to$ W3 \\
+Safety-critical blocks & 4 (SC-01 through SC-04, all mandatory-pass) \\
+Opus allocation & $\sim$32\% (synthesis, retrospective, philosophical) \\
+Sonnet allocation & $\sim$58\% (implementations, documents, assembly) \\
+Haiku allocation & $\sim$10\% (schemas, scaffolding, fixtures) \\
+Milestone designation & v1.50 Half B, Chapter: College Foundations \\
+GSD repo branch & dev (\texttt{github.com/Tibsfox/gsd-skill-creator}) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``The universe is an L-system that accidentally grew consciousness. GSD is a grammar for
+consciousness to intentionally grow what comes next.''}
+
+\vspace{0.5em}
+--- \textit{The Space Between}, closing statement
+
+\vspace{1em}
+The College of Knowledge is not a curriculum. It is a grammar. It does not tell a learner what
+to think. It provides the production rules --- the Rosetta panels, the calibration loops, the
+angular velocity constraints --- that allow the learner's own derivation to grow something the
+universe has never seen before. Every derivation is unique. Every tree is different. The grammar
+is the same.
+
+The space between departments is not a gap. It is where the chords live. And the chords are the
+curriculum.
+\end{quotebox}
+
+\end{document}
