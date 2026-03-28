@@ -42,6 +42,7 @@
     { id: 'EAZ', name: 'East Asian Zodiac', path: 'EAZ/index.html' },
     { id: 'ECO', name: 'Living Systems', path: 'ECO/index.html' },
     { id: 'EMG', name: 'Electric Motors', path: 'EMG/index.html' },
+    { id: 'ENB', name: 'Eskimo North BBS', path: 'ENB/index.html' },
     { id: 'FCC', name: 'FCC Catalog', path: 'FCC/index.html' },
     { id: 'FDR', name: 'Fire Dragon', path: 'FDR/index.html' },
     { id: 'FEG', name: 'FoxEdu Gap-Fill', path: 'FEG/index.html' },
