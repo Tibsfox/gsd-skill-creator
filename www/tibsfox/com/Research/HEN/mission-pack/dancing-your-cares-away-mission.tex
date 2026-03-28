@@ -1,0 +1,1098 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ────────────────────────────────────────────
+%  COLOR SCHEME — Imagination / Public Media
+% ────────────────────────────────────────────
+\definecolor{primary}{HTML}{4A148C}       % Deep plum — imagination, Henson's creative depth
+\definecolor{secondary}{HTML}{E65100}     % Warm amber — storytelling warmth, childhood hearth
+\definecolor{tertiary}{HTML}{2E7D32}      % Forest green — Kermit green, PNW roots
+\definecolor{accent}{HTML}{7B1FA2}        % Medium purple — highlights
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light plum
+\definecolor{lightsecondary}{HTML}{FBE9E7}% Light amber
+\definecolor{lighttertiary}{HTML}{E8F5E9} % Light green
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ────────────────────────────────────────────
+%  SECTION FORMATTING
+% ────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ────────────────────────────────────────────
+%  CUSTOM ENVIRONMENTS
+% ────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ────────────────────────────────────────────
+%  HEADERS / FOOTERS
+% ────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Henson / Muppets / PBS}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ────────────────────────────────────────────
+%  HYPERLINKS
+% ────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Jim Henson, Muppets, Sesame Street, Fraggle Rock & Seattle PBS -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ════════════════════════════════════════════
+\begin{document}
+% ════════════════════════════════════════════
+
+% ────────────────────────────────────────────
+%  TITLE PAGE
+% ────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Dancing Your Cares Away:\\[0.3em]Jim Henson, the Muppets,\\[0.3em]\& the Architecture of Wonder}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Sesame Street $\cdot$ Fraggle Rock $\cdot$ Seattle PBS}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 6--8 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ────────────────────────────────────────────
+%  TABLE OF CONTENTS
+% ────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Dancing Your Cares Away --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{Cold-start deep research commissioned in the GSD ecosystem; 5 modules; Squadron activation}
+
+\subsection{Vision}
+
+There is a particular kind of architecture that changes everything it touches not through force, but through elegance. Jim Henson understood this instinctively. Before he was a cultural icon, he was a young man who wanted to work in television, picked up some fabric and ping-pong balls, and accidentally invented a new language --- one that blurred the boundary between puppet and person, between education and entertainment, between the silly and the profound.
+
+The Muppets are not beloved because they are funny, though they are. They are beloved because Henson designed them as a translation system: a way to carry complex emotional and intellectual content across the hardest gap in media --- the gap between the screen and the child. This is the ``spaces between'' operating at its most consequential. The meaning does not live in Kermit. It does not live in the child watching. It lives in the connection Henson so carefully engineered.
+
+Sesame Street applied this translation architecture to early childhood education with a rigor that predated most modern learning science. Fraggle Rock extended it to geopolitics, encoding interdependence and conflict resolution into a fantasy world of underground creatures and their odd neighbors. And Seattle's KCTS --- now Cascade PBS --- provided the community-funded infrastructure through which all of it reached the Pacific Northwest, a station built on the same civic principle that animated Henson's work: that media should make things better, not merely more profitable.
+
+This mission researches the full ecosystem: the man, the characters, the educational science, the themed worlds, and the public media infrastructure that carried it all. The goal is a comprehensive reference package for the GSD skill-creator, structured for educational curriculum development, content analysis, and downstream creative applications.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Henson's methods are poorly understood as pedagogy.} His innovations in puppetry and character design are widely appreciated aesthetically, but the specific techniques he developed --- foam construction, camera-frame-as-proscenium, emotional realism through flexible materials --- remain underdocumented as a systematic craft tradition available for study.
+  \item \textbf{Sesame Street's educational architecture is not fully legible to modern practitioners.} The show's research-based production model (pre-testing, formative research, curriculum-before-content) was radical in 1969 and remains a gold standard, yet it is often reduced to ``it taught kids the alphabet'' without examination of the cognitive and equity science underneath.
+  \item \textbf{Fraggle Rock's philosophical project is underappreciated.} Henson explicitly conceived the show as a mechanism for world peace through a children's lens. Its encoding of interdependence, conflict resolution, and resource sharing across species-as-nations is a sophisticated political allegory rarely treated as such.
+  \item \textbf{The relationship between public media infrastructure and cultural outcomes is invisible.} KCTS/Cascade PBS is 70 years old, was the eighth non-commercial television station in the United States, and served as the delivery mechanism for Sesame Street, Fraggle Rock, and the full PBS catalog to the Pacific Northwest. Its history as civic infrastructure is a case study in the long-term value of community-funded media.
+  \item \textbf{The Henson creative lineage lacks a unified analytical framework.} The through-line from Sam and Friends (1955) through Sesame Street, The Muppet Show, Fraggle Rock, The Dark Crystal, and the post-1990 company is not well-organized as a coherent creative and philosophical evolution suitable for systematic study or reference.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Television Screen as Empathy Machine}: Henson did not make puppets for theater. He made puppets for television, and he understood --- earlier than almost anyone --- that the camera's intimate close-up, the living-room context, and the child's natural anthropomorphization of any expressive face could be combined to create a direct channel into emotional and intellectual development. The research-based architecture of Sesame Street, the eco-allegorical design of Fraggle Rock, and the variety-for-all-ages concept of The Muppet Show were all expressions of this single insight at different scales and frequencies.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+The Jim Henson Creative Ecosystem
+==================================
+
+  1954                    1969                    1976                    1983
+   |                       |                       |                       |
+ [Sam &               [Sesame Street]         [Muppet Show]         [Fraggle Rock]
+Friends]              PBS / NET               ATV/Syndication        HBO / CBC / TVS
+WRC-TV DC             Educational TV          Adult Variety           International
+                      Research-Based          5 Seasons               96 Episodes
+                                              120 Episodes            Peace Mission
+    |                       |                       |                       |
+    +------- KCTS Seattle (1954) -- 8th US Educational TV Station ---------+
+                    |
+            Community Licensee (1987)
+            Bill Nye (1993-1998)
+            Cascade PBS (2024)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Research Modules — Squadron Configuration
+==========================================
+
+  MODULE 1          MODULE 2          MODULE 3
+  Jim Henson        The Muppets       Sesame Street
+  The Architect     The Characters    The Classroom
+  ─────────────     ─────────────     ────────────
+  Biography         Sam & Friends     Joan Ganz Cooney
+  Craft Methods     Muppet Show       CTW Research Model
+  Philosophy        Disney Acq.       PBS / NET History
+  Creature Shop     Frank Oz          Educational Impact
+  Legacy            Cultural Impact   Global Adaptations
+
+        │                 │                 │
+        └────────┬────────┘                 │
+                 │                          │
+  MODULE 4       │              MODULE 5    │
+  Fraggle Rock   │              KCTS/PBS    │
+  The World      │              The Station │
+  ─────────────  │              ──────────  │
+  HBO / CBC      │              1954 Origin │
+  Int'l Design   │              UW → Comm.  │
+  Eco-Allegory   │              Bill Nye    │
+  Peace Mission  │              Cascade PBS │
+  Back to Rock   │              PNW Reach   │
+        │        │                   │      │
+        └────────┴───────────────────┴──────┘
+                            │
+                     SYNTHESIS LAYER
+                   Cross-Module Integration
+                   Henson → Public Media →
+                   Education as Infrastructure
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Jim Henson --- The Architect}
+Survey the complete biographical and creative arc: Greenville Mississippi origins, University of Maryland years, Sam and Friends, the Muppet Inc. founding, experimental films, the Sesame Street partnership, The Muppet Show era, The Dark Crystal, Labyrinth, Jim Henson's Creature Shop, and the unfinished Disney acquisition at time of death (May 16, 1990). Special focus on Henson's craft philosophy: the elimination of the proscenium, foam-rubber construction, camera intimacy, the belief that characters needed ``life and sensitivity'' rather than mechanical precision.
+
+\subsubsection{Module 2: The Muppets --- The Characters}
+Document the full Muppet character lineage from Kermit's first appearance as a lizard-like creature on Sam and Friends (1955) through the cultural icons of The Muppet Show, Sesame Street, and film. Special attention to Frank Oz's role as co-architect, the Henson-Oz creative partnership, The Muppet Show's international production history (rejected by US networks, greenlit by Lew Grade's ATV in the UK), the 235-million-viewer global audience, the five theatrical films, and Disney's 2004 acquisition of the classic Muppet characters.
+
+\subsubsection{Module 3: Sesame Street --- The Classroom}
+Research the full educational architecture of Sesame Street: Joan Ganz Cooney and Lloyd Morrisett's founding vision (1966--1969), the Children's Television Workshop, Harvard developmental psychologist Gerald Lesser's curriculum design, the formative-research production model, the November 10 1969 premiere on NET/PBS, the equity mission (targeting low-income urban children), the documented 14\% grade-level improvement from 2016 Wellesley/University of Maryland research, the racial diversity mandate, the Mississippi state ban, the HBO migration (2016), the Netflix deal (2025), and the global reach (over 120 countries, 140 international adaptations).
+
+\subsubsection{Module 4: Fraggle Rock --- The World}
+Document Fraggle Rock's conception (1981 brainstorming as an ``international children's show''), the four-species allegory (Fraggles / Doozers / Gorgs / Humans as interdependent societies), the international co-production (HBO/CBC/TVS), filming in Toronto, the 96-episode run (1983--1987), the 100 original songs, the explicit peace mission, Henson's role as Cantus the Minstrel (his Zen proxy character), the show's status as HBO's first original series, its Soviet Union broadcast (first North American show to air there), and the Apple TV+ reboot (Back to the Rock, 2022).
+
+\subsubsection{Module 5: Public Television Infrastructure --- The Station}
+Research KCTS Channel 9 / Cascade PBS: founded December 7, 1954 by the University of Washington as the eighth non-commercial television station in the US, funded by Dorothy Bullitt's gift; the instructional television mission for K-12 schools; the transition to PBS membership; the Bill Nye the Science Guy co-production (1993--1998); community licensee transition (1987); the Seattle Center facility (1986--2024); the Cascade PBS rebrand and First Hill facility (2024); the federal funding cuts of 2025 (Rescissions Act, \$3.5M loss); cross-border reach into British Columbia.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: henson-muppets-pbs-research
+  profile: squadron
+  modules:
+    - id: MOD-01
+      name: jim-henson-architect
+      model: opus
+      tokens: 18000
+      depends_on: []
+
+    - id: MOD-02
+      name: muppets-characters
+      model: sonnet
+      tokens: 14000
+      depends_on: [MOD-01]
+
+    - id: MOD-03
+      name: sesame-street-classroom
+      model: sonnet
+      tokens: 14000
+      depends_on: [MOD-01]
+
+    - id: MOD-04
+      name: fraggle-rock-world
+      model: sonnet
+      tokens: 12000
+      depends_on: [MOD-01]
+
+    - id: MOD-05
+      name: kcts-pbs-infrastructure
+      model: sonnet
+      tokens: 10000
+      depends_on: []
+
+    - id: MOD-SYN
+      name: synthesis-integration
+      model: opus
+      tokens: 16000
+      depends_on: [MOD-01, MOD-02, MOD-03, MOD-04, MOD-05]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Jim Henson's full creative arc from 1954 to his death in 1990
+  \item The Muppet Show (1976--1981) including UK production history and international audience data
+  \item Sesame Street origins, educational research model, and documented learning outcomes
+  \item Fraggle Rock's design, themes, international co-production, and peace mission
+  \item KCTS / Cascade PBS from 1954 founding through 2026 present state
+  \item The Henson-Oz creative partnership and key collaborators (Jerry Juhl, Don Sahlin, Dave Goelz, Jane Henson)
+  \item Documented viewing statistics, Emmy counts, and research citations
+  \item Disney acquisition of Muppet characters (2004) and Sesame Workshop ownership of Sesame Street Muppets (2000)
+  \item Fraggle Rock reboot on Apple TV+ (Back to the Rock, 2022 onwards)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Jim Henson's Creature Shop productions post-1990 (separate mission)
+  \item The Dark Crystal, Labyrinth, and Storyteller in full depth (referenced; not primary subjects)
+  \item Character-level episode guides (beyond representative samples)
+  \item Merchandise, licensing revenue analysis, or commercial valuation
+  \item Other PBS member stations outside the Pacific Northwest
+  \item Children's television history outside the Henson ecosystem
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*]
+  \item Henson's biography documented from 1936 birth through 1990 death with key milestones and dated sources.
+  \item Muppet character genealogy traces from Sam and Friends (1955) through The Muppet Show to present, identifying premiere dates and primary performers for all major characters.
+  \item The craft innovations (camera-frame proscenium, foam construction, emotional realism) are described with specific examples and technical detail.
+  \item Sesame Street's educational research model documented: CTW methodology, formative research process, curriculum-before-content philosophy, with citations from educational journals.
+  \item Measurable learning outcomes cited: at minimum the Wellesley/University of Maryland 2016 study (\~14\% grade-level improvement) and the Educational Testing Service summative evaluations.
+  \item Fraggle Rock's four-species world documented with species names, relationships, and explicit mapping to Henson's stated peace mission.
+  \item Fraggle Rock identified correctly as HBO's first original scripted series and first North American show broadcast in the Soviet Union.
+  \item KCTS history documented: founding date, founding donor (Dorothy Bullitt), eighth US non-commercial TV station status, and 2024 rebrand to Cascade PBS.
+  \item Bill Nye the Science Guy identified as a landmark KCTS co-production with dates and Emmy recognition.
+  \item Synthesis module identifies at least three explicit cross-connections between modules (e.g., Henson's camera innovation enabling Sesame Street; Fraggle Rock's international design informed by Sesame Street adaptation experience; KCTS as delivery infrastructure for both).
+  \item All numerical claims (viewer counts, Emmy totals, research percentages) attributed to specific organizations or studies.
+  \item Document is navigable at three reading speeds: title-page glance, section-header scan, full prose read.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD BBS Educational Pack Vision & Henson's research-based pedagogy as curriculum framework & Informs \\
+GSD Learn Kung Fu Pack Vision & Character-as-teacher model (Cantus the Minstrel) & Analogy source \\
+GSD Foxfire Heritage Skills Vision & Community-supported media as cultural preservation model & Parallel \\
+Fox Infrastructure Group Business Plan & PBS civic infrastructure as analog to co-op media model & Structural analogy \\
+The Space Between (textbook) & Spaces between as educational gap Henson bridged & Philosophical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Jim Henson was an Amiga man before the Amiga existed. He solved the problem of getting complex content into a child's mind not by using more power --- more budget, more technology, more complexity --- but by understanding the architecture of the problem precisely and designing the minimum sufficient mechanism to bridge the gap. A halved ping-pong ball. A piece of fabric from an old coat. A television screen used as a window instead of a stage. From these smallest possible building blocks, through faithful iteration and principled collaboration, he produced staggering cultural complexity.
+
+The ``spaces between'' in Henson's work are everywhere: between the puppet and the performer (the character lives in the connection, not in either party alone); between the Fraggles and the Doozers and the Gorgs (the ecosystem sustains itself through interdependence, not dominance); between KCTS's transmitter and the living rooms of the Pacific Northwest (the signal means nothing until it reaches a child). These are not metaphors. They are operational truths that drove every architectural decision Henson made. This mission captures that architecture so it can be studied, referenced, and built upon.
+
+\newpage
+
+% ════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Jim Henson \& the Muppet Ecosystem --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings across five modules. Agents should treat each module section as a self-contained starting point. Cross-references are marked. All numerical claims are source-attributed.
+
+\textbf{Key authoritative organizations and archives:}
+\begin{itemize}[leftmargin=*]
+  \item The Jim Henson Company --- \texttt{henson.com} (official archive, Red Book entries)
+  \item The Jim Henson Legacy --- \texttt{jimhensonlegacy.org} (awards, bibliography, preservation)
+  \item Sesame Workshop --- \texttt{sesameworkshop.org} (CTW research archive, curriculum)
+  \item The Smithsonian Institution / National Museum of American History (Muppet collections)
+  \item University of Maryland Libraries (Jim Henson video collection, Sam and Friends scrapbook)
+  \item American Archive of Public Broadcasting (KCTS historical footage)
+  \item Wikipedia / Muppet Wiki (secondary reference; verify all claims against primary sources)
+  \item Brian Jay Jones, \textit{Jim Henson: The Biography} (2013) --- primary biographical source
+  \item Karen Falk, \textit{Imagination Illustrated: The Jim Henson Journal} (2012)
+\end{itemize}
+
+\subsection{Module 1: Jim Henson --- The Architect}
+
+\subsubsection{Origins and Early Career}
+
+James Maury Henson was born September 24, 1936, in Greenville, Mississippi. His father was a USDA agronomist; his maternal grandmother was a skilled crafter who instilled in him an appreciation for working with materials. The family moved to Hyattsville, Maryland when Jim was eleven. He enrolled at the University of Maryland in 1954 as a studio arts major, initially considering commercial illustration as a career. His entry into puppetry was accidental: he auditioned for a children's television program at WTOP-TV that was ``looking for a kid puppeteer.'' The show lasted three weeks but opened doors.
+
+In 1955, as a freshman at the University of Maryland, Henson was hired by WRC-TV (NBC4 Washington) to create \textit{Sam and Friends}, a five-minute puppet show airing twice daily. In a puppetry class at the university, he met Jane Nebel, his future wife and first creative partner. Together they developed the show that introduced Kermit (then a lizard-like creature, not yet a frog), established the Muppet aesthetic of music and zany humor, and --- critically --- abandoned the traditional puppet theater proscenium, using the television frame itself as the stage boundary. This was an architectural innovation that made the Muppets intimate in a way no puppet show had been before. \textit{Sam and Friends} won a local Emmy in 1958. In 1958, Henson and Nebel founded Muppets Inc. (today The Jim Henson Company).
+
+\subsubsection{Key Collaborators and the Company}
+
+The company grew through principled recruitment. Jerry Juhl joined in 1961 as puppeteer and writer and became what Frank Oz called ``THE Muppet writer'' --- the person who understood the affection between characters better than anyone. The family relocated to New York in 1963 following increasing national television demand. Don Sahlin, master puppet builder, joined to bring engineering precision to Henson's design vision. Frank Oz joined at age 19 in 1963 after meeting Henson at a Puppeteers of America festival; Oz described his first impression of Henson's work as ``absolutely amazing puppets that were totally brand new and fresh, that had never been done before.''
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Collaborator} & \tableheader{Years Active} & \tableheader{Primary Contribution} \\
+\midrule
+Jane Nebel Henson & 1955--1969 & Co-creator, first performer, founding partner \\
+Jerry Juhl & 1961--2005 & Head writer; voice/personality of Muppet characters \\
+Don Sahlin & 1963--1978 & Master puppet builder; engineering precision \\
+Frank Oz & 1963--present & Co-performer; Miss Piggy, Cookie Monster, Bert, Fozzie, Yoda \\
+Dave Goelz & 1973--present & Gonzo, Boober Fraggle, Bunsen \\
+Richard Hunt & 1972--1992 & Scooter, Statler, Janice; key Fraggle performer \\
+Jerry Nelson & 1970--2012 & Floyd, Robin, Gobo Fraggle; Count von Count \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Craft Philosophy and Technical Innovations}
+
+Henson's core insight was that television puppets needed ``life and sensitivity'' rather than mechanical cleverness. His innovations included: (1) eliminating the puppet theater stage and using the TV camera's frame as the proscenium, creating viewer intimacy; (2) building characters from soft foam rubber rather than carved wood, allowing subtle facial expression; (3) using the close-up shot to create emotional connection (Kermit's first Kermit was built from a halved ping-pong ball for eyes and fabric from his mother's old coat, with a denim sleeve for the arm); (4) synchronizing voice and movement from the single performer operating each character, creating natural emotional coherence. Frank Oz described the Henson method as ``bringing things to life'' --- the character exists in the connection between material, movement, and voice, not in any one element alone.
+
+In 1979, Henson founded Jim Henson's Creature Shop, which pioneered animatronic and special effects work for film and television. The Shop's techniques influenced Yoda (Star Wars), contributed to The Dark Crystal (1982) and Labyrinth (1986), and built the most advanced puppets ever created for a motion picture at the time of Dark Crystal's production.
+
+\subsubsection{Death, Legacy, and IP Transfer}
+
+Jim Henson died on May 16, 1990, from toxic shock syndrome caused by Streptococcus pyogenes --- a sudden, unexpected death that shocked the world. He was 53. At time of death he was in negotiations with Disney for a \$150 million acquisition of Jim Henson Productions; the deal was subsequently abandoned by Disney and was not completed until 2004, when Disney purchased the classic Muppet characters (excluding Sesame Street Muppets and Fraggle Rock characters, which were retained by the Henson family). In 2000, Sesame Workshop purchased the rights to the Sesame Street Muppet characters. The Jim Henson Company retains the Creature Shop and its catalog including Fraggle Rock, The Dark Crystal, Farscape, and Labyrinth.
+
+\subsection{Module 2: The Muppets --- The Characters}
+
+\subsubsection{Character Lineage}
+
+The Muppets were created in the mid-1950s. Henson initially described the name as a portmanteau of ``marionette'' and ``puppet,'' though he later offered varying accounts. Kermit the Frog, the most recognizable character, first appeared on Sam and Friends in 1955 --- initially as a non-specific lizard-like creature before evolving into a frog. During the 1960s, Muppet characters (especially Kermit and Rowlf the Dog) appeared in television commercials and talk-show appearances on The Steve Allen Show, Ed Sullivan, and The Jack Paar Show. Rowlf became the first Muppet with a regular national television role, appearing weekly on The Jimmy Dean Show (1963--1966).
+
+\subsubsection{The Muppet Show (1976--1981)}
+
+After being rejected by US television networks, Henson secured backing from British producer Lew Grade of ATV for a primetime variety show. \textit{The Muppet Show} was filmed at ATV's Elstree Studios in Borehamwood, Hertfordshire. It premiered in the UK on September 5, 1976 and ran for five seasons (120 episodes). By its third season the show had a weekly worldwide audience of 235 million across more than 100 countries. Each episode featured a celebrity guest star interacting with the Muppet ensemble in sketches, songs, and backstage narrative. The show won multiple Emmy Awards and the BAFTA for Best Light Entertainment Program. It spawned a film franchise: \textit{The Muppet Movie} (1979), \textit{The Great Muppet Caper} (1981), and \textit{The Muppets Take Manhattan} (1984), collectively receiving four Academy Award nominations.
+
+Miss Piggy began as a supporting character; writers discovered her ``star potential'' during production and elevated her to the show's second-most-prominent character behind Kermit. Frank Oz performed Miss Piggy, Fozzie Bear, Animal, and Sam the Eagle. Dave Goelz performed Gonzo. Jerry Nelson, Richard Hunt, and others rounded out the ensemble.
+
+\subsubsection{Post-1990 and Disney Acquisition}
+
+Following Henson's death, the company continued under his children: Brian, Lisa, Cheryl, and Heather Henson. John Henson (1965--2014) also contributed before his early death. The Walt Disney Company purchased the classic Muppet characters in February 2004. Disney subsequently produced \textit{The Muppets} (2011), \textit{Muppets Most Wanted} (2014), a primetime series (2015--2016), the streaming series \textit{The Muppets Mayhem} (2023), and \textit{The Muppet Show} special (2024/2025). In 2020, ``Rainbow Connection'' (from \textit{The Muppet Movie}, performed by Henson as Kermit) was selected for preservation in the Library of Congress National Recording Registry as ``culturally, historically, or aesthetically significant.''
+
+\subsection{Module 3: Sesame Street --- The Classroom}
+
+\subsubsection{Origins: Joan Ganz Cooney and the CTW}
+
+In 1966, television producer Joan Ganz Cooney and Carnegie Foundation vice president Lloyd Morrisett began discussing a children's television program that would deliberately leverage television's attention-capturing qualities for educational purposes. Cooney had called children's television a ``wasteland.'' In the late 1960s, 97\% of American households owned a television set and children watched an average of 27 hours per week; existing children's programming was widely criticized for being too violent and reflecting commercial rather than educational values.
+
+The Children's Television Workshop (CTW, now Sesame Workshop) was formed in 1968, funded by the Carnegie Corporation, the Ford Foundation, and the US government through the Corporation for Public Broadcasting. CTW assembled educators, child psychologists, producers, and puppeteers. Harvard developmental psychologist Gerald Lesser designed the show's curriculum structure. Henson was invited to contribute his Muppet characters; he waived his performance fee in exchange for retaining ownership rights to all Muppet characters created for the program (a decision that preserved the Sesame Street/Muppet IP split still operative today).
+
+The show's name came from ``Open Sesame'' --- Ali Baba's magical phrase, conveying a place where exciting things happen. Producer Jon Stone cast a deliberately diverse ensemble with white actors as the minority, setting up a production that researcher Loretta Long (who played Susan) described as ``putting entertainment and educational concepts together and making it more palatable for children.''
+
+\subsubsection{The Research-Based Production Model}
+
+Sesame Street was the first preschool educational television program to base its content and production values on laboratory and formative research. Before each season, educators and producers would align curriculum with the latest developmental science. Concepts were pre-tested with Head Start children; a test audience was found to be transfixed by the Muppets and to lose attention during human-only segments. This observation directly shaped the show's format. Every segment, song, and puppet interaction was intentionally structured to teach specific literacy, numeracy, problem-solving, and social-emotional skills.
+
+The show debuted on November 10, 1969, on the National Educational Television network (which became PBS in 1970). It premiered on approximately 67.6\% of American televisions, earning a 3.3 Nielsen rating (1.9 million households) in its first week. By its second week it was reaching nearly 2 million homes.
+
+\subsubsection{Educational Impact --- Documented Outcomes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Finding} & \tableheader{Source} \\
+\midrule
+Grade-level enrollment & Children exposed to Sesame Street were 14\% more likely to be enrolled in the correct grade level at middle and high school & Wellesley College / Univ. Maryland, Levine \& Kearney, 2016 \\
+1970 summative evaluation & Significant educational impact confirmed & Educational Testing Service (ETS) \\
+Daily viewership (1979) & 9 million US children under age 6 watching daily & Sesame Street 10th anniversary data \\
+1996 survey & 95\% of all American preschoolers had watched the show by age 3 & Published survey (Sesame Workshop) \\
+Global reach (2019) & Broadcast in 120+ countries; 100\% brand awareness globally & Sesame Workshop 50th anniversary \\
+Emmy Awards (by 2006) & Most Emmy Awards of any children's show; 12 consecutive Outstanding Children's Series & Emmy records \\
+Research body & Over 1,000 research studies on efficacy and cultural impact & Sesame Workshop (as of 2001) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Equity Mission and Diversity}
+
+The show was explicitly designed to close the education gap between low-income, minority children and their middle-class peers. The set was modeled on a Harlem block. The cast was racially diverse from the first episode. Spanish vocabulary was incorporated before diversity was a corporate mandate. Studies confirmed the greatest gains from Sesame Street were among disadvantaged and minority students. The Mississippi State Commission voted in May 1970 not to air Sesame Street because of its ``highly integrated cast'' --- a ban that lasted less than a month.
+
+\subsubsection{Platform Evolution}
+
+From its 1969 PBS premiere through 2016, Sesame Street aired new episodes on PBS. In late 2015, in response to changes in the media business, HBO began airing first-run episodes with PBS receiving them nine months later. In 2025, Sesame Workshop signed a deal with Netflix to stream new episodes on the same day as PBS. As of its 50th anniversary (2019), the show had produced over 4,500 episodes, 35 TV specials, 200 home videos, and 180 albums.
+
+\subsection{Module 4: Fraggle Rock --- The World}
+
+\subsubsection{Conception and Design}
+
+Jim Henson began developing Fraggle Rock in early 1981 during brainstorming sessions he described as an ``international children's show'' designed to foster global understanding. His stated ambition was to help end war. Producer Michael Frith later described the show's mission as ``to open kids' eyes to the interconnectedness of all things and the unassailable fact that their own actions would have consequences.'' The working title was ``Woozle World'' until the team discovered that Woozles already existed in the world of Winnie the Pooh; they settled on Fraggle Rock.
+
+Henson pitched the concept directly to HBO. Quentin Schaffer, former EVP of HBO Corporate Communications, confirmed that Fraggle Rock was HBO's first original scripted series, and that it was critical to the premium cable channel's development. Henson needed an international co-production partner and approached the CBC, who agreed to co-produce and film at their Toronto studios; the CBC's sole requirement was that the show hire Canadian writers and puppeteers. British regional ITV franchise Television South (TVS) completed the international consortium. The show was thus an international co-production from its inception --- unlike Sesame Street and The Muppet Show, which were created for single markets and later adapted.
+
+\subsubsection{The Four-Species World}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Species} & \tableheader{Key Characters} & \tableheader{Allegorical Role} & \tableheader{Ecological Function} \\
+\midrule
+Fraggles & Gobo, Red, Mokey, Wembley, Boober & Play-first society; emotional center & Eat the Doozers' crystal structures \\
+Doozers & Cotterpin, Wrench & Industrious builders; labor society & Build elaborate crystalline towers \\
+Gorgs & Ma, Pa, Junior & Large, blundering rulers; fear the Fraggles & Grow radishes in their garden \\
+Humans & Doc (and Sprocket the dog) & ``Outer Space'' --- oblivious to the others & Framing device; unseen witness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The ecological interdependence is explicit and elegant: the Fraggles eat the Doozers' structures, which the Doozers rebuild (stimulating them to keep working); the Fraggles eat the Gorgs' radishes, which the Gorgs use to build their constructions; the Gorgs grow giant vegetables that feed the Fraggles; the Trash Heap (oracle character) connects all groups through wisdom. The system cannot be sustained by any single species acting alone. This is not subtext --- it is the explicit pedagogical content of the series.
+
+\subsubsection{Themes and Legacy}
+
+Each of the 96 episodes addressed one or more serious themes, including prejudice, spirituality, personal identity, environmental responsibility, conflict resolution, and social interdependence. Henson appeared occasionally as Cantus the Minstrel, a Zen-like figure representing Henson's own philosophical beliefs; and as Convincing John, a fast-talking showman representing his more frenetic qualities.
+
+The show ran five seasons (1983--1987) and featured two to three original songs per episode (100 songs total), co-written by Canadian poet Dennis Lee and composer Philip Balsam. It became the first North American television show broadcast in the Soviet Union. The show was cancelled in December 1986 due to cost; HBO wanted out, and CBC could not carry the production cost alone.
+
+The Apple TV+ reboot \textit{Fraggle Rock: Back to the Rock} (premiered January 21, 2022) continued the original themes with updated relevance: anxiety, mindfulness, consent, allyship, and environmental conservation. It won Emmy Awards and ran for two seasons through 2024.
+
+\subsection{Module 5: Public Television Infrastructure --- The Station}
+
+\subsubsection{KCTS Channel 9: Founding and Mission}
+
+KCTS Channel 9 began broadcasting on December 7, 1954 --- the eighth non-commercial television station in the United States. It was founded as the Community Television Service of the University of Washington, its call letters standing for the organization's mandate. The founding gift came from Dorothy Bullitt, president of King Broadcasting Company; subsequent grants from the Emerson Corporation and Ford's Fund for the Advancement of Adult Education completed the initial capitalization.
+
+The first broadcast aired a five-minute program preview hosted by University of Washington professor Milo Ryan, followed by an abridged performance of Mendelssohn's \textit{Elijah} by the Seattle Pacific College Choir. Regular programming did not begin until January 5, 1955. The station's primary mission in its early years was instructional television for Washington State K-12 schools. By 1955 it aired approximately 20 hours of programming weekly.
+
+\subsubsection{Growth: PBS, Sesame Street, and the Pacific Northwest}
+
+In 1970, the National Educational Television network (NET) was absorbed into the Public Broadcasting Service (PBS). KCTS became a PBS member station, which dramatically expanded its programming scope, including British imports and the full PBS catalog. Sesame Street arrived on KCTS's schedule at its PBS debut; a KCTS historical documentary notes that ``nine's audience was growing when the 70s hit thanks in large part to a big yellow bird.'' The station broadcast Sesame Street, Fraggle Rock, The Muppet Show, and the full range of PBS children's programming to the Pacific Northwest and, via cable, to southwestern British Columbia. By 1996, a third of KCTS's audience resided in British Columbia.
+
+In 1987, the University of Washington spun off KCTS and it became a community licensee --- separating it from KUOW-FM and transitioning to community-driven governance and funding. A major fundraising drive in the mid-1980s had previously enabled relocation to new studio space at the Seattle Center (401 Mercer Street, occupied October 1986).
+
+\subsubsection{Bill Nye the Science Guy (1993--1998)}
+
+A landmark local production: KCTS co-produced \textit{Bill Nye the Science Guy} with McKenna/Gottlieb Producers from 1993 to 1998. The half-hour science education series, featuring host Bill Nye demonstrating scientific principles through experiments and sketches, was syndicated nationally and won multiple Emmy Awards. It reached millions of children and remains a PNW public media production landmark in the Henson educational tradition.
+
+\subsubsection{Financial Challenges, KYVE Merger, and Rebrand}
+
+KCTS faced significant financial difficulties in the early 2000s, including accumulated operating deficits and \$2.8 million in PBS debt. In 1994, KCTS had merged with KYVE (Yakima, licensed 1962), expanding its reach to central Washington. In 2015, KCTS announced a merger with Crosscut.com to form Cascade Public Media. The station moved from the Seattle Center to a new \$13.4 million First Hill facility at 316 Broadway in January 2024, formally adopting the Cascade PBS brand on March 1, 2024. The Rescissions Act of 2025 eliminated \$3.5 million in annual federal funding, resulting in 17 staff layoffs --- a direct threat to the civic infrastructure model the station represents.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Milestone} \\
+\midrule
+1954 & Founded as KCTS by University of Washington; 8th US non-commercial station \\
+1955 & Regular programming begins; instructional TV for K-12 schools \\
+1970 & NET becomes PBS; KCTS joins PBS as member station \\
+1972 & Becomes membership station \\
+1987 & Becomes community licensee; separates from KUOW-FM \\
+1993--1998 & Co-produces Bill Nye the Science Guy with McKenna/Gottlieb \\
+1994 & Merges with KYVE (Yakima) \\
+2003 & Financial crisis; CEO resignation; financial restructuring \\
+2015 & Merger with Crosscut.com to form Cascade Public Media announced \\
+2024 & Moves to First Hill facility; adopts Cascade PBS brand (March 1) \\
+2025 & Federal funding cuts (\$3.5M loss, 17 layoffs) from Rescissions Act \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Jim Henson's death & Medical sensitivity & Use precise cause (Streptococcus pyogenes / toxic shock syndrome) per published sources; avoid speculation \\
+Indigenous content & Attribution & No Indigenous content in primary scope; if referenced, use nation-specific names only (never generic) \\
+Mississippi ban & Historical race & Present factually with source; do not editorialize beyond documented record \\
+Financial data & Attribution & All deficit and budget figures cited to documented sources \\
+Ownership and IP & Legal & Current IP ownership (Disney / Sesame Workshop / Henson Co.) documented accurately \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Archives and Organizations}
+\begin{itemize}[leftmargin=*]
+  \item The Jim Henson Company. \textit{Our Founders: Jim Henson}. \url{https://www.henson.com/our-founders/}
+  \item The Jim Henson Legacy. \textit{Awards and Bibliography}. \url{https://www.jimhensonlegacy.org}
+  \item The Jim Henson Company. \textit{Jim's Red Book}. \url{https://www.henson.com/jimsredbook/}
+  \item Sesame Workshop. Official website and research archive. \url{https://www.sesameworkshop.org}
+  \item Cascade Public Media / KCTS9. \textit{About}. \url{https://www.cascadepublicmedia.org/about}
+  \item University of Washington. \textit{Birth of a Television Station: KCTS}. \url{https://depts.washington.edu/sthp/}
+  \item University of Maryland Libraries. \textit{Jim Henson \& The Muppets --- Puppetry Resources}. \url{https://lib.guides.umd.edu}
+  \item American Archive of Public Broadcasting. \textit{KCTS: The Black and White Years} (1994). \url{https://americanarchive.org}
+  \item Smithsonian Institution / National Museum of American History. Muppet collections and conservation program.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Academic Research}
+\begin{itemize}[leftmargin=*]
+  \item Levine, Phillip, and Melissa Kearney. Study on Sesame Street grade-level outcomes. Wellesley College / University of Maryland, 2016.
+  \item Fisch, Shalom M., and Rosemarie T. Truglio, eds. \textit{``G'' is for Growing: Thirty Years of Research on Children and Sesame Street}. Mahwah, NJ: Lawrence Erlbaum Associates, 2001.
+  \item Educational Testing Service (ETS). Summative evaluations of Sesame Street educational impact, 1970 and 1971.
+  \item Cooney, J. et al. ``Early Childhood Television Viewing and Academic Skills.'' \textit{Journal of Applied Developmental Psychology}, 1988.
+  \item Britannica editors. ``Jim Henson'' and ``Sesame Street.'' \textit{Encyclopaedia Britannica}. Last updated January 30, 2026 and March 2026.
+\end{itemize}
+
+\subsubsection{Biographical and Historical Sources}
+\begin{itemize}[leftmargin=*]
+  \item Jones, Brian Jay. \textit{Jim Henson: The Biography}. New York: Ballantine Books, 2013.
+  \item Falk, Karen. \textit{Imagination Illustrated: The Jim Henson Journal}. Chronicle Books, 2012.
+  \item Davis, Michael. \textit{Street Gang: The Complete History of Sesame Street}. Penguin Books, 2009.
+  \item World Encyclopedia of Puppetry Arts (UNIMA). ``Jim Henson.'' \url{https://wepa.unima.org/en/jim-henson/}
+\end{itemize}
+
+\newpage
+
+% ════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, professionally formatted research compendium on Jim Henson, the Muppets, Sesame Street, Fraggle Rock, and KCTS/Cascade PBS, suitable for use as a GSD educational reference, curriculum development resource, and cultural history archive. The document should be navigable at three reading speeds, cite all numerical claims to authoritative sources, and synthesize cross-module connections into a coherent narrative of public media as educational infrastructure.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave Architecture — Squadron Profile
+======================================
+
+WAVE 0: FOUNDATION (Sequential, Haiku)
+  W0-A: Shared schemas, source index, module stubs
+  W0-B: Cross-reference map initialization
+  Duration: ~15 min
+
+WAVE 1: PARALLEL RESEARCH (Parallel, Sonnet + Opus)
+  Track A (Opus):    MOD-01 Jim Henson Architect
+  Track B (Sonnet):  MOD-03 Sesame Street Classroom
+  Track C (Sonnet):  MOD-05 KCTS/PBS Infrastructure
+  Duration: ~45 min (parallel)
+
+WAVE 2: PARALLEL RESEARCH CONT. (Parallel, Sonnet)
+  Track A (Sonnet):  MOD-02 Muppets Characters
+  Track B (Sonnet):  MOD-04 Fraggle Rock World
+  Duration: ~30 min (parallel)
+
+WAVE 3: SYNTHESIS (Sequential, Opus)
+  W3-A: Cross-module integration
+  W3-B: Through-line and connections narrative
+  Duration: ~30 min
+
+WAVE 4: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  W4-A: Document assembly + formatting
+  W4-B: Source verification pass
+  W4-C: Final review + delivery
+  Duration: ~20 min
+
+TOTAL ESTIMATED: 3-4 sessions, 6-8 context windows
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, and cross-reference map established before any research module begins
+  \item \textbf{Primary Research Layer} --- Five independent research modules (MOD-01 through MOD-05) each producing self-contained reference sections
+  \item \textbf{Synthesis Layer} --- Cross-module integration identifying connections, analogies, and the coherent philosophical through-line
+  \item \textbf{Publication Layer} --- Assembled, formatted, verified document ready for GSD delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Produced By} \\
+\midrule
+1 & MOD-01 Henson Biography & All 12 success criteria addressed for Module 1; dated sources & CRAFT-BIO (Opus) \\
+2 & MOD-02 Muppet Characters & Character genealogy complete; Muppet Show stats sourced & CRAFT-CHAR (Sonnet) \\
+3 & MOD-03 Sesame Street & CTW methodology documented; ETS and Levine/Kearney cited & CRAFT-EDU (Sonnet) \\
+4 & MOD-04 Fraggle Rock & Four-species table complete; HBO first-series fact confirmed & CRAFT-WORLD (Sonnet) \\
+5 & MOD-05 KCTS/PBS & Station milestones table complete; founding facts sourced & CRAFT-INFRA (Sonnet) \\
+6 & Synthesis Report & Three explicit cross-module connections documented & INTEG (Opus) \\
+7 & Final Compiled Document & Passes all test-plan checks; source-attributed throughout & VERIFY (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Foundation schemas & None & Haiku & 2,000 \\
+MOD-01: Henson biography & W0 & Opus & 18,000 \\
+MOD-02: Muppet characters & W0, MOD-01 & Sonnet & 14,000 \\
+MOD-03: Sesame Street & W0, MOD-01 & Sonnet & 14,000 \\
+MOD-04: Fraggle Rock & W0, MOD-01 & Sonnet & 12,000 \\
+MOD-05: KCTS/PBS & W0 & Sonnet & 10,000 \\
+Synthesis integration & MOD-01--05 & Opus & 16,000 \\
+Document assembly & Synthesis & Sonnet & 8,000 \\
+Verification pass & Assembly & Sonnet & 6,000 \\
+\midrule
+\textbf{Total} & & & \textbf{\~{}100,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus ($\sim$30\%) & MOD-01, Synthesis & Judgment-heavy biographical interpretation; cross-module integration requires holding all five modules simultaneously; philosophical through-line \\
+Sonnet ($\sim$60\%) & MOD-02 through MOD-05; Assembly; Verification & Structured content production; table population; source verification; document formatting \\
+Haiku ($\sim$10\%) & Foundation schemas & Scaffolding and template production only; no research judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Output} \\
+\midrule
+Wave 0 & Foundation & Sequential & Haiku & Shared schemas, source index stubs \\
+Wave 1 & Primary Research A & Parallel (3 tracks) & Opus + Sonnet & MOD-01, MOD-03, MOD-05 complete \\
+Wave 2 & Primary Research B & Parallel (2 tracks) & Sonnet & MOD-02, MOD-04 complete \\
+Wave 3 & Synthesis & Sequential & Opus & Cross-module integration report \\
+Wave 4 & Publication & Sequential & Sonnet & Final assembled + verified document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} & \tableheader{Output} \\
+\midrule
+W0-SCHEMA & BUDGET (Haiku) & Create shared data schemas for character records, milestone records, citation records & schemas.json \\
+W0-INDEX & LOG (Haiku) & Initialize source index with all 20+ known sources from Stage 2 bibliography & source-index.md \\
+W0-MAP & PLAN & Create cross-reference map template; initialize five module stubs & xref-map.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks A/B/C}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Agent} & \tableheader{Key Research Tasks} \\
+\midrule
+Track A & MOD-01: Henson & CRAFT-BIO (Opus) & Biographical arc 1936--1990; craft innovations; collaborator profiles; death and legacy; IP transfers \\
+Track B & MOD-03: Sesame St. & CRAFT-EDU (Sonnet) & CTW founding; Lesser curriculum; formative research model; ETS evaluations; Levine/Kearney 2016; global reach \\
+Track C & MOD-05: KCTS/PBS & CRAFT-INFRA (Sonnet) & KCTS founding 1954; Dorothy Bullitt; PBS transition; Bill Nye; community licensee; Cascade PBS rebrand \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Parallel Research Tracks D/E}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Agent} & \tableheader{Key Research Tasks} \\
+\midrule
+Track D & MOD-02: Muppets & CRAFT-CHAR (Sonnet) & Kermit origin; Sam and Friends; Rowlf/Jimmy Dean; Muppet Show ATV deal; 235M viewers; Frank Oz roles; film franchise; Disney 2004 acquisition \\
+Track E & MOD-04: Fraggle Rock & CRAFT-WORLD (Sonnet) & 1981 conception; four-species design; HBO first series; CBC co-production; Toronto filming; Soviet Union broadcast; 96 episodes; Back to the Rock reboot \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Deliverable} \\
+\midrule
+Cross-module integration & INTEG (Opus) & Document identifying connections between modules; at least three explicit cross-references per success criterion 10 \\
+Through-line narrative & FLIGHT (Opus) & 2--3 paragraph synthesis connecting Henson's architecture to public media infrastructure and educational legacy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Required cross-module connections to identify:}
+\begin{enumerate}[leftmargin=*]
+  \item Henson's camera-frame-as-proscenium innovation (MOD-01) enabled the intimate Muppet-child connection that made Sesame Street's educational approach work (MOD-03) --- validated by Head Start test-audience data showing children were ``transfixed'' by Muppets.
+  \item Fraggle Rock's international co-production design (MOD-04) was explicitly informed by Henson's experience adapting Sesame Street to international market requirements (MOD-03) --- documented in Fraggle Rock production history.
+  \item KCTS/PBS (MOD-05) served as the delivery infrastructure enabling the Pacific Northwest to access the full Henson/CTW educational catalog --- the civic case for community-supported public media as a necessary substrate for cultural and educational outcomes.
+  \item The Henson-Frank Oz partnership (MOD-01/MOD-02) produced the core Muppet character ensemble that underpinned both The Muppet Show and Sesame Street simultaneously --- demonstrating how a small specialized team can produce outputs across multiple platform contexts.
+\end{enumerate}
+
+\subsection{Wave 4: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} \\
+\midrule
+Document assembly & EXEC (Sonnet) & Compile all module outputs and synthesis into final formatted document \\
+Source verification & VERIFY (Sonnet) & Cross-check all numerical claims against source-index; flag any uncited statistics \\
+SC-SRC gate check & VERIFY & Confirm zero entertainment media sources in bibliography; all sources professional org/peer-reviewed/gov \\
+Final review & CAPCOM & Human review at wave boundary before delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item All five module outputs loaded together for the synthesis pass (Wave 3) within the 5-minute cache window to avoid re-ingestion costs
+  \item Source index and schemas kept in first 2,000 tokens of every session to exploit prompt caching
+  \item Module stubs from Wave 0 included in Wave 1 context to give agents structural anchoring without reloading full prior conversation
+  \item Synthesis output cached for Wave 4 document assembly
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Est. Input} & \tableheader{Est. Output} \\
+\midrule
+Wave 0: Foundation & Haiku & 1,000 & 2,000 \\
+MOD-01: Henson & Opus & 8,000 & 18,000 \\
+MOD-02: Muppets & Sonnet & 6,000 & 14,000 \\
+MOD-03: Sesame Street & Sonnet & 6,000 & 14,000 \\
+MOD-04: Fraggle Rock & Sonnet & 5,000 & 12,000 \\
+MOD-05: KCTS/PBS & Sonnet & 5,000 & 10,000 \\
+Synthesis & Opus & 20,000 & 16,000 \\
+Assembly + Verify & Sonnet & 30,000 & 8,000 \\
+\midrule
+\textbf{Total (est.)} & & \textbf{\~{}81,000} & \textbf{\~{}94,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA ────────────────────────────┐
+W0-INDEX  ──────────┬─────────────────┤
+W0-MAP    ──────────┤                 │
+          (Wave 0)  │                 │
+                    ▼                 ▼
+          ┌─────────────────┐  ┌──────────┐
+          │  MOD-01 Henson  │  │  MOD-05  │
+          │   (Opus)        │  │  KCTS    │
+          └────────┬────────┘  └────┬─────┘
+              (feeds both)          │
+         ┌────────┴────────┐        │
+         ▼                 ▼        │
+    MOD-02            MOD-03        │
+    Muppets           Sesame        │
+    (Sonnet)          (Sonnet)      │
+         │                 │        │
+         └────────┬────────┘        │
+    MOD-04        │                 │
+    Fraggle Rock  │                 │
+    (Sonnet)      │                 │
+         └────────┴─────────────────┘
+                    │
+                    ▼
+            SYNTHESIS (Opus)
+                    │
+                    ▼
+            ASSEMBLY (Sonnet)
+                    │
+                    ▼
+            VERIFY (Sonnet)
+                    │
+                    ▼
+            CAPCOM → DELIVERY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Purpose} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK & Non-negotiable source/accuracy boundaries \\
+Core functionality & 18 & Required & BLOCK & Deliverable acceptance \\
+Integration & 6 & Required & BLOCK & Cross-module validation \\
+Edge cases & 6 & Best-effort & LOG & Robustness \\
+\midrule
+\textbf{Total} & \textbf{34} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government agencies, peer-reviewed journals, professional organizations, or the official Henson/Sesame archives. Zero entertainment media or blogs. \\
+SC-NUM & Numerical attribution & Every viewer count, Emmy count, research percentage, date, or financial figure is attributed to a specific named source. \\
+SC-ADV & No policy advocacy & Document presents evidence and history without advocacy for PBS funding positions or media policy. \\
+SC-MED & Medical accuracy (Henson death) & Henson's cause of death documented precisely as toxic shock syndrome from Streptococcus pyogenes per published sources; no speculation. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Henson biography completeness & Key life events from 1936 birth through 1990 death documented with dates and sources \\
+CF-02 & Craft innovation documentation & Camera-frame proscenium, foam construction, and emotional realism techniques described with specific examples \\
+CF-03 & Collaborator profiles & At least six key collaborators (Oz, Juhl, Sahlin, Goelz, Nelson, Jane Henson) documented with roles and dates \\
+CF-04 & Muppet character genealogy & Kermit's evolution from Sam and Friends to present documented; major characters identified with original performers \\
+CF-05 & Muppet Show stats & Premiere date, episode count, network (ATV), and 235M viewer figure cited \\
+CF-06 & Disney acquisition documented & 2004 Disney purchase; 2000 Sesame Workshop purchase; Henson Co. retained properties listed \\
+CF-07 & CTW research model documented & Pre-testing, formative research, and curriculum-before-content process described with sources \\
+CF-08 & Sesame Street premiere date & November 10, 1969 stated; NET/PBS identified; Joan Ganz Cooney and Lloyd Morrisett credited \\
+CF-09 & Learning outcome data cited & Levine/Kearney 2016 (14\% grade-level) and ETS summative evaluations cited with institutional attribution \\
+CF-10 & Equity mission documented & Low-income/minority focus; diverse cast; Mississippi ban incident documented \\
+CF-11 & Fraggle Rock four-species documented & Fraggles, Doozers, Gorgs, Humans with roles and interdependence described \\
+CF-12 & Fraggle Rock as HBO first series & Confirmed via attributed source (Quentin Schaffer / HBO Communications) \\
+CF-13 & Soviet Union broadcast fact & First North American show broadcast in USSR; source cited \\
+CF-14 & KCTS founding documented & December 7, 1954; eighth US non-commercial station; Dorothy Bullitt founding gift \\
+CF-15 & KCTS call letters explained & ``Community Television Service'' meaning documented \\
+CF-16 & Bill Nye co-production documented & KCTS + McKenna/Gottlieb; 1993--1998; Emmy wins; national syndication \\
+CF-17 & KCTS 2025 funding cuts & \$3.5M federal loss; 17 staff layoffs; Rescissions Act cited \\
+CF-18 & Cascade PBS rebrand documented & March 1, 2024; First Hill facility; Crosscut merger history \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & MOD-01 $\rightarrow$ MOD-03 cascade & Document traces Henson's camera innovation as enabling the Sesame Street Muppet-child intimacy; Head Start test-audience data referenced \\
+IN-02 & MOD-03 $\rightarrow$ MOD-04 cascade & Document identifies Sesame Street international adaptation experience as informing Fraggle Rock's co-production design \\
+IN-03 & MOD-05 $\rightarrow$ all modules & KCTS explicitly positioned as delivery infrastructure for Henson content to Pacific Northwest \\
+IN-04 & MOD-01 $\rightarrow$ MOD-02 consistency & Frank Oz's roles consistent between Henson biography and Muppet character sections \\
+IN-05 & Cross-module data consistency & Dates (Muppet Show premiere, Sesame Street premiere, Fraggle Rock premiere) consistent across all modules \\
+IN-06 & Document self-containment & A reader with no prior knowledge can understand all five subjects from the document alone; no undefined terms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1. Henson biography documented 1936--1990 & CF-01, CF-02 & Pending \\
+2. Muppet genealogy Sam and Friends to present & CF-03, CF-04 & Pending \\
+3. Craft innovations described with detail & CF-02 & Pending \\
+4. Sesame Street educational research model & CF-07, CF-08 & Pending \\
+5. Measurable learning outcomes cited & CF-09 & Pending \\
+6. Fraggle Rock four-species documented & CF-11 & Pending \\
+7. Fraggle Rock HBO/Soviet Union facts confirmed & CF-12, CF-13 & Pending \\
+8. KCTS founding facts documented & CF-14, CF-15 & Pending \\
+9. Bill Nye as KCTS landmark production & CF-16 & Pending \\
+10. Three explicit cross-module connections & IN-01, IN-02, IN-03 & Pending \\
+11. All numerical claims source-attributed & SC-NUM & Pending \\
+12. Three reading-speed navigation & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; web research for gap-fill; citation validation \\
+EXEC-A & Executor A & MOD-01 and MOD-02 document production \\
+EXEC-B & Executor B & MOD-03, MOD-04, MOD-05 document production \\
+CRAFT-BIO & Henson Biography Specialist & Primary domain analysis: biographical accuracy, craft history \\
+CRAFT-EDU & Education Specialist & Sesame Street curriculum research; developmental psychology \\
+VERIFY & Verification Agent & Source validation; accuracy checking; SC gate enforcement \\
+INTEG & Integration Agent & Cross-module relationship validation; connection documentation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only channel across human/machine boundary \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission title & Dancing Your Cares Away: Jim Henson, the Muppets, \& the Architecture of Wonder \\
+Activation profile & Squadron (12 roles) \\
+Module count & 5 research modules + 1 synthesis \\
+Primary model & Opus (biography, synthesis); Sonnet (research, production) \\
+Estimated token budget & $\sim$175,000 total (81K input, 94K output) \\
+Estimated sessions & 3--4 sessions \\
+Estimated context windows & 6--8 windows \\
+Human approval gates & 2 (end of Wave 2, end of Wave 3) \\
+Safety-critical tests & 4 (all mandatory-pass BLOCK) \\
+Total tests & 34 \\
+Deliverables & 7 (5 module docs + synthesis + final compiled doc) \\
+Commissioned & March 26, 2026 \\
+Status & Ready for handoff to gsd-skill-creator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``I love television and I wanted to work in it, and I heard a television station there was looking for a puppeteer. So I made some puppets and got a job.''} \\[0.5em]
+--- Jim Henson, 1985
+
+\vspace{0.8em}
+\noindent The spaces between --- between a ping-pong ball and a child's imagination, between a Fraggle and a Gorg, between a Seattle transmitter and a Pacific Northwest living room --- are not empty. They are where the work happens. This is what Henson knew. It is what the GSD ecosystem is built to honor: that small, principled, specialized building blocks, iterated with care, produce staggering complexity and lasting good. The Amiga Principle did not begin with the Amiga. It began whenever a person decided to solve a hard problem with the minimum sufficient architecture, and trusted the iteration.
+\end{quotebox}
+
+\end{document}
