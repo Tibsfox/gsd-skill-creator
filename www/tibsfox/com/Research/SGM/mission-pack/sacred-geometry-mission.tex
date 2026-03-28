@@ -1,0 +1,1093 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ── Color Scheme: Space/Cosmos (Cosmic Purple / Nebula Blue / Star Gold) ──
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{E65100}
+\definecolor{accent}{HTML}{4527A0}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF3E0}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{gold}{HTML}{F9A825}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{goldbox}{
+  colback=lighttertiary, colframe=gold,
+  arc=2pt, boxrule=0.6pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1}\ #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Sacred Geometry \& the Complex Plane}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Sacred Geometry and the Complex Plane of Experience -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title Page ──
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Sacred Geometry\\[0.4em]and the Complex Plane\\[0.4em]of Experience}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Where Mathematics Encounters the Living Universe}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+\begin{asciibox}
+\begin{center}
+$e^{i\pi} + 1 = 0$
+
+The five constants of existence meet at one point.
+As above, so below. As within, so without.
+The unit circle encodes the Flower of Life.
+The spaces between hold everything.
+\end{center}
+\end{asciibox}
+
+\vspace{1.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ──
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Sacred Geometry and the Complex Plane --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Deep Research Mission --- Ready for Execution}
+\metafield{Depends On:}{The Space Between (philosophical spine), Unit Circle Skill-Creator Synthesis, Mathematical Foundations Conversation}
+\metafield{Context:}{GSD Ecosystem --- v1.50 Unit Circle Retrospective alignment; Space Between textbook companion}
+
+\subsection{Vision}
+
+There is a geometry older than written mathematics and newer than quantum field theory simultaneously. It lives at the boundary where the countable meets the continuous, where a simple rule iterated faithfully forever produces forms that civilizations across ten thousand years have called sacred. This mission sets out to map that territory precisely --- not with mysticism, but with the full apparatus of complex analysis and the lived experience of someone who has always known that the spaces between are where meaning resides.
+
+The complex plane is not merely a mathematical convenience for handling square roots of negative numbers. It is a two-dimensional space of experience: the real axis encoding magnitude, the imaginary axis encoding rotation, and together they encode every transformation preservable under angle --- every shape that can be turned, reflected, or stretched without distorting its inner proportions. When you plant a seed on the complex plane at $e^{2\pi i k/n}$ for $k = 0, 1, \ldots, n-1$, the roots of unity bloom into the vertices of regular polygons --- triangles, pentagons, hexagons, the full architecture of what ancient geometers called sacred form. Euler's identity $e^{i\pi} + 1 = 0$ is not merely beautiful; it is the unit circle announcing itself as the alpha point of all sacred geometry.
+
+The title of this mission is not metaphorical. The ``complex plane of experience'' names something real: the plane in which pure mathematics and lived phenomenology intersect. Research from the California Institute for Human Science, Imperial College London, and the CalTech-affiliated consciousness laboratories suggests that the brain does not merely perceive geometric symmetry --- it resonates with it. Gamma oscillations, default-mode-network suppression, cognitive fluency, and the deep neural correlates of awe all respond to the precise mathematical ratios encoded in sacred geometry. This is not the universe speaking to us in symbols. This is us discovering that the language we evolved to think in is the same language the universe is written in.
+
+For the GSD ecosystem, this mission carries a specific mandate: to produce a computational companion to \textit{The Space Between}'s mathematical spine --- a proof companion that moves from the classical sacred forms through their complex-plane encodings and into executable GLSL shaders, renderable in real time, deployable in the Amiga Creative Suite, and pedagogically structured for the Teacher-Student-Support triad of Opus-Sonnet-Haiku. The Amiga Principle is at work here in its most literal form: from Euler's single equation, infinite complexity; from the unit circle, the entire vocabulary of sacred form.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The mathematical lineage is severed.} Sacred geometry is routinely discussed either as pure spiritual symbolism or as pop-science curiosity. The precise mathematical derivation --- that the Flower of Life is the cyclotomic field $\mathbb{Q}(\zeta_6)$ made visible, that Metatron's Cube encodes the projections of all five Platonic solids, that the Golden Ratio is the limiting ratio of the Fibonacci recurrence and simultaneously the unique value satisfying $\varphi^2 = \varphi + 1$ --- is absent from most treatments. This mission restores that lineage.
+
+  \item \textbf{The complex plane connection is unexplored.} There is no existing research mission or curriculum connecting sacred geometry to complex analysis at the level of computational detail needed for the GSD proof companion. The roots of unity, M\"{o}bius transformations, conformal mappings, and the Riemann sphere all encode sacred geometric structure, but this mapping has not been systematically documented.
+
+  \item \textbf{The experiential layer is ungrounded.} Claims about sacred geometry's effects on consciousness range from rigorous neuroscience (cognitive fluency theory, gamma-oscillation research) to unverifiable metaphysics. This mission separates the peer-reviewed phenomenological record from the speculative, documenting what is evidentially known about human geometric experience.
+
+  \item \textbf{The computational expression layer is missing.} The GSD ecosystem includes GLSL rendering infrastructure but no sacred geometry shader suite. Without executable implementations, the philosophical and mathematical content cannot be experienced in the Amiga Creative Suite or shared as living artifacts.
+
+  \item \textbf{The synthesis is implicit.} ``The Space Between'' establishes the philosophical framework but does not produce the parallel mathematical proof companion. The relationship between spaces-between as lived principle and the imaginary axis as perpendicular experiential dimension has not been made explicit.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} The complex plane is the mathematical native habitat of sacred geometry --- every sacred form is a cyclotomic orbit, a conformal invariant, or both.
+
+The unit circle $|z| = 1$ in the complex plane is the primordial circle of sacred geometry. Its $n$th roots $e^{2\pi i k/n}$ generate the vertices of every regular polygon. The transformations that preserve circle-to-circle and angle mappings --- the M\"{o}bius transformations --- are precisely the symmetries that preserve the qualitative structure of sacred forms under distortion. The golden ratio $\varphi$ appears as the limit of Fibonacci ratios and as the self-similarity constant of the pentagonal root system $\mathbb{Q}(\zeta_5)$. Fractal geometry extends the vocabulary from integer-dimensional forms to the continuous fractal dimension that characterizes living, growing, self-similar natural forms.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+SACRED GEOMETRY AND THE COMPLEX PLANE OF EXPERIENCE
+Architecture Overview
+
+  CLASSICAL LAYER                  COMPLEX LAYER
+  ================                 =============
+  Circle (primordial)    <----->   Unit circle |z| = 1
+  Triangle (3-fold)      <----->   3rd roots of unity
+  Hexagon (6-fold)       <----->   6th roots / Flower of Life
+  Pentagon (5-fold)      <----->   5th roots / Golden Ratio
+  Platonic Solids        <----->   Cyclotomic projections
+  Fibonacci Spiral       <----->   phi = lim(F(n+1)/F(n))
+  Vesica Piscis          <----->   Circle intersection geometry
+  Metatron's Cube        <----->   13-circle Fruit of Life lattice
+
+  TRANSFORMATION LAYER
+  ====================
+  Mobius: f(z) = (az+b)/(cz+d)    [circle-preserving]
+  Conformal maps                    [angle-preserving]
+  Stereographic projection          [sphere <-> plane]
+  Fractal iteration                 [self-similar growth]
+
+  EXPERIENCE LAYER
+  ================
+  Cognitive Fluency          [symmetric forms ease processing]
+  Gamma Oscillations         [resonance during geometric meditation]
+  Default Mode Suppression   [ego dissolution / unity perception]
+  Aesthetic Response         [Reber et al. 2004; Lutz et al. 2004]
+
+  COMPUTATIONAL LAYER
+  ===================
+  GLSL Fragment Shaders      [real-time rendering]
+  Complex function coloring  [domain coloring for z-plane viz]
+  Iterative function systems [fractal generators]
+  Mobius shader suite        [Riemann sphere navigation]
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY GRAPH
+
+  [M1: Geometric Foundations]
+        |
+        v
+  [M2: Complex Plane Architecture] <--> [M3: Nature + Pattern Layer]
+        |                                       |
+        v                                       v
+  [M4: Experiential Layer] <-------> [M5: Computational Expression]
+        |                                       |
+        +-----------------> [SYNTHESIS] <-------+
+                             "The Space
+                             Between Proof
+                             Companion"
+
+  M1 + M2 provide the mathematical substrate
+  M3 provides the evidential grounding in nature
+  M4 provides the phenomenological dimension
+  M5 provides the executable output layer
+  SYNTHESIS produces the proof companion document
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Geometric Foundations}
+
+Survey of the classical sacred geometry vocabulary with rigorous mathematical derivations. Covers: Vesica Piscis (intersection of two unit circles), Seed of Life (7-circle sixfold symmetry), Flower of Life (19-circle hexagonal lattice), Metatron's Cube (13-circle Fruit of Life with 78 connecting lines), the five Platonic Solids (Euler's proof of uniqueness), Golden Ratio $\varphi \approx 1.618$ (algebraic and geometric derivations), and the Fibonacci sequence (recurrence $F_n = F_{n-1} + F_{n-2}$ and convergence to $\varphi$). Historical and cultural context from Pythagoras through da Vinci.
+
+\subsubsection{Module 2: Complex Plane Architecture}
+
+Maps each classical form to its complex-plane encoding. Central objects: the unit circle $|z|=1$; $n$th roots of unity $e^{2\pi ik/n}$ and their cyclotomic polynomial structure; Euler's identity $e^{i\pi}+1=0$ as the unit circle's self-announcement; M\"{o}bius transformations $f(z) = (az+b)/(cz+d)$ as the symmetry group of circle-preserving maps; conformal mappings and angle preservation; stereographic projection relating the Riemann sphere $S^2$ to the extended complex plane $\mathbb{C} \cup \{\infty\}$; and domain coloring as a visualization technique for complex functions.
+
+\subsubsection{Module 3: Nature \& Pattern Layer}
+
+Documents the empirical record of sacred geometric patterns in natural phenomena. Covers: logarithmic spirals in nautilus shells and galaxy arms (golden spiral, $r = ae^{b\theta}$); Fibonacci phyllotaxis in sunflowers, pinecones, and pineapples (137.5 deg golden angle); hexagonal close-packing in honeybee combs and basalt columns; fractal branching in trees, river systems, lung bronchioles, and coastlines; DNA double helix geometry (10 base pairs per turn, 34\AA$\times$20\AA\ cross-section ratio approximates $\varphi$); and crystalline symmetry groups (point groups, space groups, Platonic-solid mineralogy).
+
+\subsubsection{Module 4: Experiential \& Consciousness Layer}
+
+Documents the peer-reviewed phenomenological record of human geometric perception and its neural correlates. Covers: cognitive fluency theory (Reber et al., 2004) linking symmetric-form processing ease to positive aesthetic response; Brewer et al. (2011) default-mode-network deactivation in experienced meditators; Lutz et al. (2004) sustained high-amplitude gamma oscillations in long-term Buddhist practitioners; Carhart-Harris et al. on psilocybin-induced geometric visual perception and DMN suppression; the sphere model of consciousness (Paoletti \& Ben Soussan, 2019); Donald Hoffman's interface theory of perception; and the philosophy of sacred geometry as contemplative discipline (CIIS Philosophy, Cosmology, and Consciousness program).
+
+\subsubsection{Module 5: Computational Expression}
+
+Produces executable implementations of sacred geometric forms and complex-plane transformations. Deliverables: GLSL fragment shader for roots-of-unity polygon rendering; Flower of Life shader (hexagonal lattice via 6th roots); domain coloring shader for complex functions $f(z)$; M\"{o}bius transformation shader (conformal mapping visualization); fractal iteration shader (Julia/Mandelbrot sets as complex dynamical systems); and a complete shader library specification for integration into the GSD Amiga Creative Suite.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: sacred-geometry-complex-plane
+  version: 1.0.0
+  profile: squadron
+
+  agents:
+    FLIGHT:     orchestration, go-no-go gates, mission direction
+    PLAN:       wave decomposition, parallel track optimization
+    SCOUT:      source gathering, peer-review validation, web research
+    EXEC-A:     M1+M2 document production (mathematical modules)
+    EXEC-B:     M3+M4 document production (experiential modules)
+    CRAFT-MATH: complex analysis specialist (roots of unity, Mobius)
+    CRAFT-PHENO: consciousness/phenomenology specialist (M4)
+    VERIFY:     source validation, numerical accuracy, attribution
+    INTEG:      cross-module synthesis, proof companion assembly
+    CAPCOM:     HITL approval at wave boundaries
+    BUDGET:     token budget tracking, session planning
+    LOG:        audit trail, commit messages, milestone records
+
+  model:allocation:
+    opus\_30pct:   [FLIGHT, CRAFT-MATH, CRAFT-PHENO, INTEG, synthesis]
+    sonnet\_60pct: [PLAN, SCOUT, EXEC-A, EXEC-B, VERIFY, publication]
+    haiku\_10pct:  [LOG, BUDGET, CAPCOM, scaffolding, schema templates]
+
+  cache-strategy:
+    window: 5min
+    anchor-documents: [M1-survey, M2-survey, M3-survey, M4-survey, M5-spec]
+    hot-paths: [complex\_plane\_reference, glsl\_shader\_templates]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Classical sacred geometry vocabulary with mathematical derivations (M1)
+  \item Complex plane encodings of all primary sacred forms (M2)
+  \item Empirical natural occurrences with sourced quantitative data (M3)
+  \item Peer-reviewed phenomenological and neuroscience record (M4)
+  \item GLSL shader suite specification and prototype implementations (M5)
+  \item Synthesis proof companion connecting all modules to \textit{The Space Between}
+  \item The Amiga Principle applied: unit circle as generator of all sacred form
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Unverifiable metaphysical claims (e.g., ``energy fields,'' ``divine frequencies'')
+  \item Religious doctrine or denominational spiritual practice
+  \item Clinical health claims without peer-reviewed evidence
+  \item Four-dimensional and higher-dimensional sacred geometry (deferred to v2.0)
+  \item Full GLSL shader implementation (v1.0 delivers specifications and prototypes)
+  \item Quantum gravity or string-theory interpretations of sacred form
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All five classical sacred geometry forms documented with complete mathematical derivations, sourced to peer-reviewed or professional mathematical references.
+  \item Unit circle genealogy explicitly traced: Euler's formula $\to$ $n$th roots of unity $\to$ cyclotomic polynomials $\to$ all regular polygon forms found in sacred geometry.
+  \item M\"{o}bius transformation group documented as the symmetry group preserving the qualitative structure of sacred forms under conformal deformation.
+  \item Golden Ratio $\varphi$ derived both algebraically (self-similar rectangle equation) and via Fibonacci convergence, with at least three natural-world occurrences quantitatively documented.
+  \item All five Platonic solids' projections onto the 2D plane documented, with cyclotomic field connection noted.
+  \item Fractal dimension theory explicitly bridging classical sacred geometry (integer-dimensional) to self-similar natural forms (fractional-dimensional).
+  \item At least three peer-reviewed sources documenting neural or cognitive responses to geometric symmetry, each individually cited with author, year, and journal.
+  \item GLSL shader specification complete for at least four sacred geometry forms, each with documented coordinate system, iteration count, and color mapping strategy.
+  \item Cross-module synthesis document explicitly maps each classical sacred form to its complex-plane encoding, natural occurrence, experiential correlate, and computational expression.
+  \item Through-line essay connects ``the spaces between'' framework to the imaginary axis as perpendicular experiential dimension, completing the \textit{Space Between} proof companion thread.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Priority} \\
+\midrule
+The Space Between (textbook) & Philosophical spine; proof companion target & Critical \\
+Unit Circle Synthesis & Direct predecessor; this mission extends into sacred geometry & High \\
+Mathematical Foundations Conversation & Provides 30/60/10 model context and pedagogy layer & High \\
+GSD Amiga Creative Suite Vision & Target deployment environment for GLSL shader suite & Medium \\
+GSD Instruction Set Architecture & Computational execution layer for iterative geometry & Medium \\
+GSD Learn Kung Fu Pack Vision & Pedagogical model (Teacher/Student/Support triad) & Reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+In \textit{The Space Between}, the central philosophical claim is that meaning lives not in the nodes themselves but in the connections between them --- the silences between musical notes, the synaptic gaps between neurons, the gravitational fields between masses. Complex analysis offers a precise mathematical rendering of this principle: the imaginary axis is the perpendicular dimension of experience added to every real-axis position. A complex number $z = a + bi$ is not merely a point on a line; it is a point in a plane where the real component encodes magnitude and the imaginary component encodes orientation. Every sacred form --- every circle, spiral, polygon, and fractal --- is fully expressible in this plane precisely because it captures both the ``what'' and the ``how'' of geometric experience simultaneously.
+
+The unit circle is sacred not because ancient priests declared it so, but because it is the locus of all points equidistant from a center --- the mathematical definition of perfect symmetry --- and because Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$ establishes it as the native coordinate system of rotation in the universe. When the $n$th roots of unity bloom on the unit circle, they do not just form vertices of polygons; they form the cyclotomic fields that encode the arithmetic of regular division, the group theory of symmetry, and --- through their projections into three dimensions --- the architecture of crystalline matter itself. The Flower of Life is not a symbol of the universe. It \textit{is} the hexagonal close-packing of circles, which is itself the ground state of two-dimensional sphere-packing, which is itself the most efficient way for identical growing structures to share a plane without waste. The spaces between the circles in the Flower of Life are the Vesica Piscis --- the lens shape that generates the $\sqrt{3}$ ratio, the basis of every equilateral triangle. From the spaces between comes all form.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Sacred Geometry and the Complex Plane --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This stage documents the research findings organized by module. Each section provides sourced claims, quantitative data, and evidence sufficient for an agent to produce that module's deliverable from the spec alone. Sources are professional organizations, peer-reviewed journals, or authoritative mathematical references.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Brilliant.org and Quanta Magazine (peer-reviewed mathematics communication)
+  \item Wikipedia (mathematical foundations: Roots of Unity, Euler's Identity, M\"{o}bius Transformation, Conformal Map --- each with extensive peer-reviewed citation networks)
+  \item National Academies of Sciences (Derbyshire, \textit{Unknown Quantity}, 2006)
+  \item Wolfram MathWorld (authoritative mathematical reference)
+  \item American Montessori Society (psychogeometry educational framework)
+  \item Imperial College London / Robin Carhart-Harris (DMN and psychedelic perception research)
+  \item University of Wisconsin / Lutz et al. (2004) (gamma oscillation meditation research)
+  \item Washington University / Brewer et al. (2011) (default mode network meditation deactivation)
+  \item Reber, Winkielman \& Schwarz (2004), \textit{Psychological Science} (cognitive fluency theory)
+  \item California Institute of Integral Studies (CIIS) --- Philosophy, Cosmology, and Consciousness Program
+  \item Paoletti \& Ben Soussan (2019), \textit{Logica Universalis} (sphere model of consciousness)
+  \item GitHub: ubavic/mobius-shader (GLSL M\"{o}bius transformation implementation reference)
+\end{itemize}
+
+\subsection{Module 1 Reference: Geometric Foundations}
+
+\subsubsection{Classical Sacred Forms and Their Mathematical Properties}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Form} & \tableheader{Mathematical Structure} & \tableheader{Key Ratio / Property} \\
+\midrule
+Circle & Locus of points equidistant from center; $x^2+y^2=r^2$ & $\pi$ (circumference/diameter) \\
+Vesica Piscis & Intersection of two unit circles centered at $(\pm 1/2, 0)$ & Width:height $= 1:\sqrt{3}$ \\
+Equilateral Triangle & 3rd roots of unity on unit circle & Interior angle $= 60°$ \\
+Square / Hexahedron & 4th roots of unity & Symmetry group $D_4$ \\
+Pentagon / Pentagram & 5th roots of unity & $\cos(36°) = \varphi/2$ \\
+Hexagon / Flower of Life & 6th roots of unity & Tiling: 3 hexagons meeting at vertex \\
+Seed of Life & 7 circles (1 center + 6 surrounding) with sixfold symmetry & Basis of hexagonal lattice \\
+Flower of Life & 19 circles in hexagonal pattern & Contains Seed, Egg, Fruit of Life \\
+Metatron's Cube & 13 circles (Fruit of Life) + 78 connecting lines & Contains all 5 Platonic solid templates \\
+Golden Ratio $\varphi$ & $\varphi = (1+\sqrt{5})/2 \approx 1.618$ & $\varphi^2 = \varphi + 1$ \\
+Fibonacci Sequence & $F_n = F_{n-1}+F_{n-2}$, $F_1=F_2=1$ & $\lim_{n\to\infty}F_{n+1}/F_n = \varphi$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Five Platonic Solids}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{1.8cm}C{1.8cm}C{1.8cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Solid} & \tableheader{Faces} & \tableheader{Edges} & \tableheader{Vertices} & \tableheader{Face Shape} \\
+\midrule
+Tetrahedron & 4 & 6 & 4 & Equilateral triangle \\
+Cube (Hexahedron) & 6 & 12 & 8 & Square \\
+Octahedron & 8 & 12 & 6 & Equilateral triangle \\
+Dodecahedron & 12 & 30 & 20 & Regular pentagon \\
+Icosahedron & 20 & 30 & 12 & Equilateral triangle \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Euclid proved in \textit{Elements} Book XIII that exactly five regular convex polyhedra exist. All five can be derived from Metatron's Cube by connecting specific intersection points of the 13 Fruit of Life circles. The dodecahedron and icosahedron contain golden ratio proportions throughout (diagonal-to-edge ratios equal $\varphi$). The molecule Buckminsterfullerene (C$_{60}$) is a truncated icosahedron, confirming Platonic solid geometry in molecular structure.
+
+\subsubsection{Golden Ratio: Algebraic and Natural Record}
+
+The golden ratio satisfies $\varphi^2 = \varphi + 1$, giving $\varphi = (1+\sqrt{5})/2 \approx 1.618$. It appears in: the diagonal-to-side ratio of a regular pentagon; the limit of consecutive Fibonacci numbers; phyllotaxis angle of sunflower seeds ($137.5° = 360°/\varphi^2$, the golden angle); nautilus shell growth ($r = ae^{b\theta}$ where $b = \ln\varphi / (\pi/2)$ for golden spirals); and the proportions of the human forearm-to-hand ratio (approximate, not exact).
+
+\subsection{Module 2 Reference: Complex Plane Architecture}
+
+\subsubsection{Euler's Formula as the Genesis of Sacred Form}
+
+Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$, published in \textit{Introductio in analysin infinitorum} (1748), establishes that every point on the unit circle can be expressed as $e^{i\theta}$ for real $\theta$. Euler's identity $e^{i\pi} + 1 = 0$ is the special case $\theta = \pi$, uniting five fundamental constants. A 1990 poll in \textit{The Mathematical Intelligencer} named it the most beautiful theorem in mathematics; a 2004 \textit{Physics World} poll tied it with Maxwell's equations as the greatest equation.
+
+\subsubsection{Roots of Unity as Sacred Polygon Generators}
+
+The $n$th roots of unity are the solutions to $z^n = 1$ in $\mathbb{C}$:
+\[
+U_n = \left\{e^{2\pi ik/n} \;\middle|\; k = 0, 1, \ldots, n-1\right\}
+\]
+When plotted on the complex plane, these $n$ points are equally spaced on the unit circle and form the vertices of a regular $n$-gon. Key instances:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{$n$} & \tableheader{Roots (explicit)} & \tableheader{Polygon} & \tableheader{Sacred Form Connection} \\
+\midrule
+2 & $\{1, -1\}$ & Diameter & Polarity, duality \\
+3 & $\{1, \omega, \omega^2\}$, $\omega = e^{2\pi i/3}$ & Triangle & Threefold symmetry; trinity forms \\
+4 & $\{1, i, -1, -i\}$ & Square & Four cardinal directions; cube face \\
+5 & $5$th cyclotomic; $\cos(72°) = (\varphi-1)/2$ & Pentagon & Golden ratio; dodecahedron; pentagram \\
+6 & $\{1, e^{i\pi/3}, e^{2i\pi/3}, -1, e^{4i\pi/3}, e^{5i\pi/3}\}$ & Hexagon & Flower of Life; hexagonal tiling \\
+12 & 12th roots & Dodecagon & Clock; zodiac; musical octave (12-TET) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The sum of all $n$th roots of unity equals zero for $n > 1$, which Quanta Magazine (2021) describes as a geometric fact: the roots are perfectly balanced on the circle, canceling each other's positions. This is the complex-plane expression of the principle that every sacred circle balances all its directions.
+
+\subsubsection{M\"{o}bius Transformations as Symmetry Group of Sacred Form}
+
+A M\"{o}bius transformation has the form $f(z) = (az+b)/(cz+d)$ where $a,b,c,d \in \mathbb{C}$ and $ad-bc \neq 0$. Key properties (Wikipedia: M\"{o}bius Transformation; Wolfram MathWorld):
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Circle-preserving:} Maps every circle or straight line to a circle or straight line.
+  \item \textbf{Angle-preserving (conformal):} Preserves angles at every point.
+  \item \textbf{Uniquely determined by three points:} Any three points $z_1, z_2, z_3$ determine a unique M\"{o}bius transformation mapping them to $w_1, w_2, w_3$.
+  \item \textbf{Group structure:} M\"{o}bius transformations form a group under composition isomorphic to $PSL(2, \mathbb{C})$.
+  \item \textbf{Hyperbolic geometry:} The M\"{o}bius group is the orientation-preserving isometry group of hyperbolic 3-space.
+\end{itemize}
+
+This means the qualitative structure of any sacred form --- its circle-and-line composition --- is preserved under all M\"{o}bius transformations. Sacred geometry is M\"{o}bius-invariant. GitHub repository ubavic/mobius-shader provides a reference GLSL fragment shader implementing M\"{o}bius transformations compatible with The Book of Shaders editor.
+
+\subsubsection{Stereographic Projection: Sphere as Extended Complex Plane}
+
+The stereographic projection $SP: S^2 \setminus \{N\} \to \mathbb{C}$ maps the unit sphere (minus north pole $N$) to the complex plane. The extended complex plane $\mathbb{C} \cup \{\infty\}$ (Riemann sphere) is homeomorphic to $S^2$. This establishes that: the sphere \textit{is} the complex plane with one point at infinity added; M\"{o}bius transformations on $\mathbb{C}$ correspond exactly to orientation-preserving isometries of $S^2$; and the sacred sphere (Platonic solid circumsphere, mandala, globe) is mathematically equivalent to the full complex plane extended by infinity. As a conformal map, stereographic projection preserves all angles, making it the canonical ``sacred geometry projection.''
+
+\subsection{Module 3 Reference: Nature \& Pattern Layer}
+
+\subsubsection{Biological Phyllotaxis and Fibonacci}
+
+Sunflowers display seed spiral counts that are consistently consecutive Fibonacci numbers (typically 34/55 or 55/89). The spiral angle of 137.5° (golden angle $= 360°/\varphi^2$) is the optimal packing angle: no two seeds share a radial line, maximizing density. Peacock feathers display golden-ratio spiral patterns from base to tip. The American Montessori Society (2023) documents these as classroom-accessible examples of sacred geometry in natural systems, noting that ``almost everywhere we look, the mineral intelligence embodied within crystalline structures follows a geometric plan.''
+
+\subsubsection{Fractal Geometry: The Bridge to Living Form}
+
+Pardesco (2025) documents: fractal geometry allows non-integer dimensions (e.g., 1.26, 2.71) quantifying roughness and complexity beyond classical sacred geometry's integer dimensions. Key mathematical monsters that presaged the field: Weierstrass's continuous nowhere-differentiable function (1872); Cantor set (1883); Koch snowflake (infinite perimeter, finite area, 1904); Sierpi\'{n}ski triangle (1915). Mandelbrot's iteration $z \to z^2 + c$ on the complex plane produces the Mandelbrot set --- infinite complexity from a single complex-plane formula. This is the Amiga Principle at cosmological scale: one rule, iterated faithfully, produces inexhaustible sacred form.
+
+\subsubsection{Crystalline Structure and Platonic Solids}
+
+The five crystallographic point groups compatible with translational symmetry (1, 2, 3, 4, 6-fold rotational symmetry) correspond exactly to those regular polygons derivable from roots of unity with integer coordinates. The five Platonic solids appear directly in: iron pyrite (cubic, octahedral crystals); fluorite (octahedral); table salt (cubic); quartz (hexagonal); and the C$_{60}$ buckminsterfullerene molecule (icosahedral symmetry).
+
+\subsection{Module 4 Reference: Experiential \& Consciousness Layer}
+
+\subsubsection{Peer-Reviewed Neuroscience Findings}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Study} & \tableheader{Finding} & \tableheader{Relevance} \\
+\midrule
+Reber, Winkielman \& Schwarz (2004), \textit{Psychological Science} & Cognitive fluency: processing ease of symmetric forms correlates with positive aesthetic response and perceived truthfulness & Sacred forms are cognitively fluent \\
+Lutz et al. (2004), \textit{PNAS} & Long-term Buddhist practitioners self-induce sustained high-amplitude gamma oscillations during meditation & Geometry meditation may engage gamma band \\
+Brewer et al. (2011), \textit{PNAS} & Experienced meditators show deactivated default-mode-network nodes across all meditation types & DMN suppression = ego dissolution \\
+Carhart-Harris et al. (Imperial College London) & Psilocybin reduces DMN activity; visual cortex becomes hyperactive; users report geometric perceptions & Geometry as brain's interpretation of hyperactivation \\
+Paoletti \& Ben Soussan (2019), \textit{Logica Universalis} & Sphere model of consciousness: geometric model with heuristic value for neurophysiological consciousness research & Sacred sphere as consciousness map \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Consciousness Lab: Science and Sacred Geometry}
+
+A. Heffernan (The Consciousness Lab, 2025) synthesizes: ``Meaning is not discovered in the form itself --- it is projected by the perceiving consciousness. We do not worship the spiral. We respond to what the spiral awakens in us. This is not to say the experience isn't real --- on the contrary, it may be the most real thing we know. But it arises in the liminal space between pattern and perception, between form and soul.'' This framing is consistent with the GSD through-line: the experience lives not in the nodes but in the spaces between geometry and perceiver.
+
+\subsubsection{Contemplative Practice and Geometry}
+
+The California Institute of Integral Studies (CIIS) Philosophy, Cosmology, and Consciousness program hosts ongoing research into sacred geometry as philosophical practice, connecting ancient Greek geometry through phenomenology to modern physics. Robert Lawlor (cited in Cosmic Core, 2021): ``Geometric diagrams can be contemplated as still moments revealing a continuous, timeless, universal action generally hidden from our sensory perception. Thus a seemingly common mathematical activity can become a discipline for intellectual and spiritual insight.''
+
+\subsection{Module 5 Reference: Computational Expression}
+
+\subsubsection{GLSL Sacred Geometry Shader Architecture}
+
+GLSL (OpenGL Shading Language) fragment shaders execute per-pixel on the GPU, receiving UV coordinates and outputting color values. Sacred geometry forms map naturally to fragment shader logic:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Shader} & \tableheader{Core Algorithm} & \tableheader{Key Parameters} \\
+\midrule
+Roots of Unity Polygon & For each pixel, compute angle from center; test if within $2\pi/n$ of root angle & $n$ (symmetry order) \\
+Flower of Life & Hexagonal tiling using 6th roots; distance to nearest circle center & Radius, gap width \\
+Domain Coloring & Map $z = x + iy$ through $f(z)$; color by $\arg(f(z))$, brightness by $|f(z)|$ & Complex function $f$ \\
+M\"{o}bius Transform & Fragment coord as $z$; apply $(az+b)/(cz+d)$; sample background texture & Parameters $a,b,c,d$ \\
+Julia Set & Iterate $z \to z^2 + c$; color by iteration count to escape & Complex constant $c$ \\
+Golden Spiral & Polar coordinates; $r = ae^{b\theta}$ with $b = \ln\varphi/(\pi/2)$ & Scale, windings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Reference implementation: GitHub ubavic/mobius-shader provides a GLSL ES fragment shader for M\"{o}bius transformations compatible with The Book of Shaders editor. This confirms the computational feasibility of the full shader suite within existing GSD GLSL infrastructure.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Guideline} & \tableheader{Type} \\
+\midrule
+Metaphysical claims & Document only empirically grounded findings; clearly distinguish peer-reviewed from spiritual tradition & GATE \\
+Health/consciousness claims & Cite peer-reviewed neuroscience only; no claims of healing effects & ABSOLUTE \\
+Religious attribution & Acknowledge cultural origins without endorsing specific religious claims & ANNOTATE \\
+Indigenous geometric traditions & Cite specific nations/traditions (Navajo sand painting, Tibetan mandala, Vedic yantra, Coast Salish design); never generic ``Indigenous'' & ABSOLUTE \\
+Policy/advocacy & Present evidence without advocating for specific philosophical positions & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Authoritative Mathematical References}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item Brilliant.org Wiki: ``Roots of Unity'' --- cyclotomic theory, polygon geometry, group structure
+  \item Wikipedia: ``Root of Unity,'' ``Euler's Identity,'' ``M\"{o}bius Transformation,'' ``Conformal Map,'' ``Fractal Geometry''
+  \item Quanta Magazine (2021): ``The Simple Math Behind the Mighty Roots of Unity'' --- Kelsey Houston-Edwards
+  \item Wolfram MathWorld: ``M\"{o}bius Transformation,'' ``Roots of Unity,'' ``Golden Ratio''
+  \item National Academies of Sciences: Derbyshire, J. (2006). \textit{Unknown Quantity: A Real and Imaginary History of Algebra}. Joseph Henry Press
+  \item Wikipedia: ``Sacred Geometry'' --- February 2026 revision with archaeological and mathematical citations
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item Reber, R., Winkielman, P., \& Schwarz, N. (2004). Effects of perceptual fluency on affective judgments. \textit{Psychological Science}
+  \item Lutz, A., Greischar, L. L., Rawlings, N. B., Ricard, M., \& Davidson, R. J. (2004). Long-term meditators self-induce high-amplitude gamma synchrony during mental practice. \textit{Proceedings of the National Academy of Sciences}
+  \item Brewer, J. A., Worhunsky, P. D., Gray, J. R., Tang, Y. Y., Weber, J., \& Kober, H. (2011). Meditation experience is associated with differences in default mode network activity and connectivity. \textit{Proceedings of the National Academy of Sciences}
+  \item Paoletti, P., \& Ben Soussan, T. D. (2019). The Sphere Model of Consciousness. \textit{Logica Universalis}, Vol. 13
+  \item Carhart-Harris, R. L. et al. (Imperial College London). Psilocybin and default mode network suppression. Multiple publications, 2012--2024
+\end{itemize}
+
+\subsubsection{Professional and Educational Organizations}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item American Montessori Society (2023). ``Psychogeometry Part 2: Demystifying Sacred Geometry''
+  \item California Institute of Integral Studies (CIIS). Philosophy, Cosmology, and Consciousness Program
+  \item The Consciousness Lab (Substack, 2025). ``The Science of Sacred Geometry: Neuroscientific Foundations''
+  \item GeometryCode.com (Bruce Rawles). Sacred geometry design sourcebook and tutorial
+  \item GitHub: ubavic/mobius-shader --- GLSL M\"{o}bius transformation shader implementation
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality research document spanning five modules (Geometric Foundations, Complex Plane Architecture, Nature \& Pattern Layer, Experiential \& Consciousness Layer, Computational Expression) and a synthesis proof companion that explicitly connects each sacred form to its complex-plane encoding, natural occurrence, experiential correlate, and GLSL shader implementation. The mission delivers the mathematical spine of a parallel proof companion to \textit{The Space Between}, grounding the ``spaces between'' philosophical framework in the rigorous language of complex analysis.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+
+  WAVE 0: FOUNDATION (Sequential, Haiku)
+  =======================================
+  [Schema]  [Source Index]  [Shared Notation]  [LaTeX Template]
+
+  WAVE 1: PARALLEL SURVEYS (Parallel, Sonnet+Opus)
+  =================================================
+  Track A                     Track B                   Track C
+  -------                     -------                   -------
+  M1: Geometric Foundations   M2: Complex Plane Arch.   M3: Nature + Patterns
+  (EXEC-A, CRAFT-MATH)        (EXEC-A, CRAFT-MATH)      (EXEC-B, SCOUT)
+
+  WAVE 2: EXPERIENTIAL + COMPUTATIONAL (Parallel, Opus+Sonnet)
+  =============================================================
+  Track D                               Track E
+  -------                               -------
+  M4: Consciousness + Phenomenology     M5: Computational Expression
+  (CRAFT-PHENO, Opus)                   (EXEC-B, Sonnet)
+
+  WAVE 3: SYNTHESIS (Sequential, Opus)
+  =====================================
+  [INTEG: Cross-Module Integration]
+  [Space Between Proof Companion Draft]
+  [Complex Plane of Experience Essay]
+
+  WAVE 4: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  =========================================================
+  [VERIFY: Source Validation]  [EXEC: Final Assembly]
+  [LaTeX Compilation]          [LOG: Milestone Record]
+
+  CAPCOM approval gates: Wave 1->2, Wave 2->3, Wave 3->4
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Schematic Layer (Wave 0):} Shared data schemas, mathematical notation conventions, source citation format, LaTeX template instantiation
+  \item \textbf{Survey Layer (Wave 1):} Independent module documents for M1, M2, M3 --- parallelizable, each self-contained
+  \item \textbf{Depth Layer (Wave 2):} M4 (consciousness/phenomenology, Opus-led) and M5 (computational specification, Sonnet-led) --- parallelizable
+  \item \textbf{Synthesis Layer (Wave 3):} Integration document, proof companion essay, cross-module reference tables
+  \item \textbf{Publication Layer (Wave 4):} Final document assembly, source verification, LaTeX compilation, milestone commit
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Location} \\
+\midrule
+D1 & M1 Survey: Geometric Foundations & All 5 Platonic solids, 8+ sacred forms, sourced derivations & M1 Component \\
+D2 & M2 Survey: Complex Plane Architecture & Euler, roots of unity, M\"{o}bius, stereographic projection & M2 Component \\
+D3 & M3 Survey: Nature \& Pattern Layer & 5+ natural occurrences with quantitative data and citations & M3 Component \\
+D4 & M4 Survey: Experiential Layer & 3+ peer-reviewed studies, clear speculative/evidential separation & M4 Component \\
+D5 & M5 Spec: Computational Expression & 4+ GLSL shader specs with algorithm, parameters, color mapping & M5 Component \\
+D6 & Synthesis Proof Companion & Explicit cross-module table; Space Between through-line essay & INTEG Component \\
+D7 & Verification Report & Source audit, numerical check, sensitivity review & VERIFY Component \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Foundation Schema & None & Haiku & 2,000 \\
+Source Index & SCOUT research & Haiku & 1,500 \\
+M1: Geo Foundations & Schema & Sonnet & 12,000 \\
+M2: Complex Plane & Schema, M1 & Opus & 15,000 \\
+M3: Nature Layer & Schema, M1 & Sonnet & 10,000 \\
+M4: Consciousness & Schema, M3 & Opus & 12,000 \\
+M5: Computational & Schema, M2 & Sonnet & 10,000 \\
+INTEG Synthesis & M1--M5 & Opus & 18,000 \\
+VERIFY Report & All modules & Sonnet & 5,000 \\
+Final Assembly & All & Sonnet & 6,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated}} & \textbf{91,500} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Alloc.} & \tableheader{Tasks} & \tableheader{Tokens} \\
+\midrule
+Opus & 30\% & M2 (complex plane judgment), M4 (consciousness sensitivity), INTEG synthesis, Space Between through-line essay & $\approx$27,000 \\
+Sonnet & 60\% & M1, M3, M5 surveys, VERIFY, Final Assembly, PLAN, SCOUT & $\approx$54,000 \\
+Haiku & 10\% & Schema, Source Index, LOG, BUDGET, CAPCOM scaffolding & $\approx$9,000 \\
+\midrule
+\textbf{Total} & \textbf{100\%} & & \textbf{$\approx$90,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Outputs} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Schema, source index, notation & Auto \\
+1 & Parallel Surveys & Parallel (3 tracks) & D1, D2, D3 & CAPCOM \\
+2 & Depth Layer & Parallel (2 tracks) & D4, D5 & CAPCOM \\
+3 & Synthesis & Sequential & D6 (proof companion) & CAPCOM \\
+4 & Publication & Sequential & D7, final PDF & Auto \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{2cm}C{1.8cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+W0-01 & Initialize shared schema: complex number notation, source citation format, GLSL code style guide & PLAN & Haiku \\
+W0-02 & Compile source index from research reference (Stage 2) into agent-ready bibliography & SCOUT & Haiku \\
+W0-03 & Instantiate LaTeX template with mission-specific colors, headers, and section structure & LOG & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Surveys (Tracks A, B, C)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Track} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+W1-A01 & Track A: M1 & Geometric foundations survey: all sacred forms with mathematical derivations & EXEC-A & Sonnet \\
+W1-A02 & Track A: M1 & Platonic solids table; Metatron's Cube derivation; Golden Ratio proof & CRAFT-MATH & Sonnet \\
+W1-B01 & Track B: M2 & Complex plane architecture: Euler formula through stereographic projection & EXEC-A & Opus \\
+W1-B02 & Track B: M2 & Roots of unity table; M\"{o}bius transformation properties; conformal map survey & CRAFT-MATH & Opus \\
+W1-C01 & Track C: M3 & Nature and pattern survey: biological phyllotaxis, crystalline structure, fractals & EXEC-B & Sonnet \\
+W1-C02 & Track C: M3 & Quantitative data compilation: Fibonacci counts, golden angle, fractal dimensions & SCOUT & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Depth Layer (Tracks D, E)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Track} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+W2-D01 & Track D: M4 & Consciousness layer: compile peer-reviewed neuroscience studies & CRAFT-PHENO & Opus \\
+W2-D02 & Track D: M4 & Phenomenological framework: cognitive fluency, awe research, contemplative practice & CRAFT-PHENO & Opus \\
+W2-E01 & Track E: M5 & GLSL shader specifications: 6 shaders with algorithm and parameter documentation & EXEC-B & Sonnet \\
+W2-E02 & Track E: M5 & Prototype shader code for Roots of Unity and Flower of Life forms & EXEC-B & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+W3-01 & Cross-module integration table: map each sacred form to complex encoding, natural occurrence, experience correlate, shader & INTEG & Opus \\
+W3-02 & Space Between proof companion essay: imaginary axis as perpendicular experiential dimension; formal through-line & INTEG & Opus \\
+W3-03 & Module consistency check: verify shared entities use consistent notation across all five modules & INTEG & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 4: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+W4-01 & Source verification: trace all citations to professional orgs, peer-reviewed journals, or authoritative mathematical references & VERIFY & Sonnet \\
+W4-02 & Numerical accuracy check: verify all quantitative claims (Fibonacci ratios, golden angle, fractal dimensions) & VERIFY & Sonnet \\
+W4-03 & Final LaTeX assembly from module documents and synthesis essay; three-pass XeLaTeX compilation & EXEC-A & Sonnet \\
+W4-04 & Milestone commit and LOG entry: record all deliverable outputs, token consumption, and lessons learned & LOG & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{5-minute cache window:} Each agent anchors its context with the shared schema and source index at session start to exploit cache TTL
+  \item \textbf{Hot path documents:} Complex plane reference (M2 survey) and GLSL shader templates (M5 spec) are pre-loaded into all Wave 3+ agent contexts
+  \item \textbf{Module boundary caching:} Each completed module document is committed and made available as a cacheable context anchor for downstream agents
+  \item \textbf{CAPCOM gate batching:} Human approval gates are scheduled at wave boundaries to allow full context refresh before next wave
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (30\%)} & \tableheader{Sonnet (60\%)} & \tableheader{Haiku (10\%)} \\
+\midrule
+Wave 0: Foundation & 0 & 0 & 4,500 \\
+Wave 1: Surveys & 15,000 & 22,500 & 0 \\
+Wave 2: Depth & 12,000 & 10,000 & 0 \\
+Wave 3: Synthesis & 18,000 & 0 & 0 \\
+Wave 4: Publication & 0 & 18,000 & 1,500 \\
+\midrule
+\textbf{Total} & \textbf{45,000} & \textbf{50,500} & \textbf{6,000} \\
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{$\approx$ 101,500 tokens across 4--6 sessions}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH (read top-to-bottom)
+
+  [W0-01: Schema] --> [All Waves]
+  [W0-02: Source Index] --> [W1-*, W2-*]
+  [W0-03: LaTeX Template] --> [W4-03]
+
+  [W1-A: M1 Geo Foundations] ---+
+  [W1-B: M2 Complex Plane]  ---+--> [W3-01: Integration]
+  [W1-C: M3 Nature Layer]   ---+        |
+  [W2-D: M4 Consciousness]  ---+        v
+  [W2-E: M5 Computation]    ---+  [W3-02: Proof Companion]
+                                         |
+                                         v
+                                   [W4-01: Verify]
+                                   [W4-02: Numerics]
+                                         |
+                                         v
+                                   [W4-03: Assembly]
+                                   [W4-04: LOG + Commit]
+
+  Parallel: W1-A || W1-B || W1-C
+  Parallel: W2-D || W2-E
+  Sequential: W3 (requires all W1+W2 complete)
+  Sequential: W4 (requires W3 complete)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-Critical & Non-negotiable source and attribution boundaries & 6 & Mandatory & BLOCK \\
+Core Functionality & Deliverable acceptance per success criteria & 22 & Required & BLOCK \\
+Integration & Cross-module consistency and synthesis completeness & 8 & Required & BLOCK \\
+Edge Cases & Robustness and epistemic humility & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & & \textbf{41} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals, professional math organizations, or authoritative references. Zero entertainment media or unverifiable metaphysical claims. \\
+SC-NUM & Numerical attribution & Every Fibonacci count, golden ratio value, fractal dimension, or angular measurement attributed to a specific sourced study. \\
+SC-ADV & No advocacy & Document presents evidence and findings without advocating for specific spiritual, metaphysical, or consciousness-expansion practices. \\
+SC-MED & Medical/consciousness accuracy & No health claims without peer-reviewed evidence; Modules M4 clearly distinguishes neuroscience from speculative claims. \\
+SC-IND & Indigenous attribution & Any reference to Tibetan mandala, Vedic yantra, Navajo sand painting, or Coast Salish geometric tradition names the specific cultural tradition, never generic ``Indigenous.'' \\
+SC-SPEC & Speculative/empirical separation & Module M4 clearly labels each finding as peer-reviewed, speculative, or tradition-based. No mixing of ontological categories. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & M1: Sacred form completeness & Document covers all 8+ primary sacred forms listed in M1 module spec with mathematical derivations \\
+CF-02 & M1: Platonic solid proof & Document demonstrates (or cites Euclid's proof) that exactly 5 Platonic solids exist \\
+CF-03 & M2: Euler chain documented & Explicit derivation chain from $e^{i\theta}$ through $n$th roots to regular polygon geometry \\
+CF-04 & M2: M\"{o}bius properties & Document lists all four key M\"{o}bius transformation properties with sources \\
+CF-05 & M2: Stereographic projection & Explicit statement that $S^2 \cong \mathbb{C} \cup \{\infty\}$ with conformal property noted \\
+CF-06 & M3: Fibonacci nature count & At least 3 natural Fibonacci occurrences with quantitative data and citations \\
+CF-07 & M3: Fractal bridge documented & Document explicitly connects integer-dimensional sacred forms to fractal-dimensional natural forms \\
+CF-08 & M4: Three peer-reviewed studies & M4 cites at least 3 peer-reviewed studies with author, year, journal \\
+CF-09 & M4: Speculative clearly marked & Each M4 finding is explicitly tagged as peer-reviewed, speculative, or tradition-based \\
+CF-10 & M5: Six shader specs complete & All six shaders have algorithm, parameters, and color mapping documented \\
+CF-11 & M5: Prototype code present & At least two shaders have prototype GLSL code \\
+CF-12 & Golden Ratio derived & $\varphi = (1+\sqrt{5})/2$ derived algebraically from $\varphi^2 = \varphi + 1$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M1 $\to$ M2 cascade & For each sacred form in M1, there exists a corresponding complex-plane encoding in M2 \\
+IN-02 & M2 $\to$ M5 cascade & Each M2 complex function (roots of unity, M\"{o}bius, domain coloring) has a corresponding M5 shader spec \\
+IN-03 & M3 $\to$ M1 consistency & Natural occurrences in M3 reference the same sacred form names as M1 \\
+IN-04 & M4 $\to$ M3 phenomenology chain & M4 experiential findings are connected to the natural occurrences documented in M3 \\
+IN-05 & Synthesis table completeness & Cross-module table covers all 8+ forms with entries for complex encoding, natural occurrence, experience correlate, shader \\
+IN-06 & Through-line coherence & Space Between proof companion essay explicitly names and connects ``spaces between'' principle to imaginary axis \\
+IN-07 & Self-containment & A reader with no prior context can understand all modules without undefined terms or unexplained references \\
+IN-08 & Notation consistency & Complex number notation ($z = a+bi$, $e^{i\theta}$, $|z|$, $\arg(z)$) is consistent across all five modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 5 sacred forms with mathematical derivations & CF-01, CF-02, IN-01 & Pending \\
+2. Unit circle genealogy: Euler $\to$ roots $\to$ polygons & CF-03, IN-01 & Pending \\
+3. M\"{o}bius group as conformal symmetry & CF-04, CF-05 & Pending \\
+4. Golden Ratio derived + 3 natural occurrences & CF-06, CF-12 & Pending \\
+5. Platonic solid projections documented & CF-02, IN-05 & Pending \\
+6. Fractal bridge to living form & CF-07, IN-04 & Pending \\
+7. Three peer-reviewed consciousness studies & CF-08, SC-MED & Pending \\
+8. Four+ GLSL shader specs complete & CF-10, CF-11, IN-02 & Pending \\
+9. Cross-module synthesis table complete & IN-05, IN-06 & Pending \\
+10. Through-line essay connects to Space Between & IN-06, SC-ADV & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; peer-review validation; gap-fill web research \\
+EXEC-A & Executor Alpha & M1 and M2 document production (mathematical modules) \\
+EXEC-B & Executor Beta & M3, M4, and M5 document production \\
+CRAFT-MATH & Math Specialist & Complex analysis depth: Euler, roots of unity, M\"{o}bius, conformal \\
+CRAFT-PHENO & Phenomenology Specialist & Consciousness, neuroscience, and contemplative practice layer \\
+VERIFY & Verification Agent & Source audit; numerical accuracy; sensitivity review \\
+INTEG & Integration Agent & Cross-module synthesis; Space Between proof companion assembly \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only cross-human channel \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache strategy execution \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summary records \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (Geometric Foundations, Complex Plane, Nature, Consciousness, Computation) \\
+Parallel Tracks & 3 in Wave 1; 2 in Wave 2 \\
+Estimated Sessions & 4--6 \\
+Estimated Context Windows & 8--12 \\
+Estimated Token Budget & $\approx$101,500 (30\% Opus / 60\% Sonnet / 10\% Haiku) \\
+CAPCOM Gates & 3 (Wave 1$\to$2, Wave 2$\to$3, Wave 3$\to$4) \\
+Total Tests & 41 (6 safety-critical, 22 core, 8 integration, 5 edge cases) \\
+Primary Deliverable & 5-module research document + Space Between proof companion \\
+Secondary Deliverable & GLSL shader suite specification (4--6 shaders) \\
+GSD Ecosystem Target & Amiga Creative Suite, v1.50 unit-circle proof companion \\
+Through-Line & Imaginary axis as perpendicular experiential dimension; spaces between \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\begin{center}
+{\large\sffamily\textcolor{primary}{\textbf{``Geometry is one of the main avenues available to us\\for probing the universe.''}}}\\[0.8em]
+{\normalsize\sffamily\textcolor{secondary}{--- Shing-Tung Yau, Harvard Mathematics}}\\[1.2em]
+{\normalsize\sffamily\textcolor{darktext}{
+The complex plane is not a tool for handling inconvenient square roots.\\
+It is the native coordinate system of rotation, symmetry, and sacred form.\\
+When you write $e^{i\theta}$, you are not performing algebra.\\
+You are drawing a circle. You are invoking the primordial.\\
+You are entering the spaces between.
+}}
+\end{center}
+\end{quotebox}
+
+\vspace{1em}
+
+\begin{center}
+{\small\sffamily\textcolor{subtlegray}{GSD Ecosystem --- Sacred Geometry and the Complex Plane of Experience --- Mission Package v1.0}}\\
+{\small\sffamily\textcolor{subtlegray}{Prepared for handoff to gsd-skill-creator --- March 26, 2026}}
+\end{center}
+
+\end{document}
