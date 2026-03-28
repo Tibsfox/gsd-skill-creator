@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 7&deg; &mdash; Julian Priester &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .rotation-achieved {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .rotation-achieved h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .rotation-achieved p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .bridge-diagram {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .bridge-diagram h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .bridge-diagram table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .bridge-diagram td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .bridge-diagram td:first-child { font-weight: 600; width: 30%; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">7&deg;</div>
+      <div>
+        <h1>Julian Priester</h1>
+        <div class="subtitle">Jazz &middot; Trombone &middot; Post-Bop &middot; Avant-Garde &middot; ECM &mdash; Chicago 1935 &rarr; Seattle</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../006-patti-brown/index.html">Degree 6&deg; (Bown)</a>
+      <a href="../004-floyd-standifer/index.html">Degree 4&deg; (Standifer)</a>
+      <a href="../002-wayne-horvitz/index.html">Degree 2&deg; (Horvitz)</a>
+      <a href="../001-bill-frisell/index.html">Degree 1&deg; (Frisell)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Sun Ra&rsquo;s Arkestra. Max Roach. Duke Ellington. Herbie Hancock&rsquo;s Mwandishi.
+          ECM Records. Cornish College of the Arts. The trombone is the only orchestral
+          brass instrument with a continuous pitch slide &mdash; and Priester has been
+          sliding between traditions for seven decades.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Chicago-to-Seattle Pipeline</h2>
+
+        <p>Julian Priester was born on June 29, 1935, in <strong>Chicago, Illinois</strong> &mdash;
+        the first S36 artist born outside the Pacific Northwest. He attended
+        <strong>DuSable High School</strong> on Chicago&rsquo;s South Side, where Captain Walter
+        Dyett&rsquo;s music program produced Nat King Cole, Dinah Washington, Gene Ammons,
+        Johnny Griffin, and dozens of other jazz professionals. DuSable was to Chicago jazz what
+        Garfield was to Seattle jazz &mdash; the institutional pipeline that converted neighborhood
+        talent into professional musicians.</p>
+
+        <p>At eighteen, Priester joined <strong>Sun Ra&rsquo;s Arkestra</strong> (1953&ndash;56) &mdash;
+        the most radical laboratory in American jazz. He then played with
+        <strong>Max Roach</strong> (late 1950s&ndash;60s), <strong>Duke Ellington</strong>&rsquo;s
+        orchestra, and became a founding member of <strong>Herbie Hancock&rsquo;s Mwandishi
+        sextet</strong> (1970&ndash;73), the pioneering electronic jazz group whose three albums
+        &mdash; <em>Mwandishi</em>, <em>Crossings</em>, <em>Sextant</em> &mdash; are canonical
+        documents of jazz electronics.</p>
+
+        <p>Priester moved to <strong>Seattle</strong> around 1979 and joined the faculty at
+        <strong>Cornish College of the Arts</strong>, where he became a pillar of the city&rsquo;s
+        experimental jazz scene alongside <a href="../002-wayne-horvitz/index.html">Wayne Horvitz</a>
+        (2&deg;) and <a href="../001-bill-frisell/index.html">Bill Frisell</a> (1&deg;). He recorded
+        for <strong>ECM Records</strong>, connecting him to Frisell&rsquo;s ECM catalog and to the
+        label&rsquo;s aesthetic of space, texture, and contemplation.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: ECM Records catalog;
+        AllMusic; DownBeat; John Szwed, <em>Space Is the Place</em> (1997); Herbie Hancock,
+        <em>Possibilities</em> (2014); Bob Gluck, <em>You&rsquo;ll Know When You Get There</em>
+        (2012); Cornish College of the Arts; Earshot Jazz; HistoryLink.org</p>
+
+        <!-- ========================================
+             GEOGRAPHIC ROTATION
+             ======================================== -->
+
+        <div class="rotation-achieved">
+          <h4>Geographic Rotation Achieved: First Non-Central District Degree</h4>
+          <p>Degrees 0&ndash;6 concentrated in the Central District &mdash; six of seven artists
+          directly connected to the CD. Degree 7 rotates on two axes:
+          <strong>geographic</strong> (Priester is associated with Seattle generally and Cornish
+          College, not the Central District) and <strong>origin</strong> (born in Chicago, not
+          Seattle). The rotation does not close the CD thread &mdash; it can always be revisited.
+          But the engine has demonstrated it can document artists connected to Seattle through
+          residence and pedagogy rather than birth and neighborhood.</p>
+        </div>
+
+        <!-- ========================================
+             THE SUN RA / HANCOCK BRIDGE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Sun Ra / Hancock Bridge</h2>
+
+        <p>Priester bridges two of the most important experimental traditions in jazz history.
+        <strong>Sun Ra&rsquo;s Arkestra</strong> was cosmic Afrofuturism &mdash; music as vehicle
+        for ideas larger than entertainment, referencing ancient Egypt, Saturn, intergalactic
+        travel, and the transcendence of terrestrial oppression. <strong>Hancock&rsquo;s
+        Mwandishi</strong> was electronic expansion &mdash; extending jazz&rsquo;s timbral
+        palette through Fender Rhodes, wah-wah, Echoplex, and ARP synthesizer without
+        abandoning rhythmic and harmonic sophistication.</p>
+
+        <div class="bridge-diagram">
+          <h4>The Bridge: Cosmic Philosophy &rarr; Electronic Method</h4>
+          <table>
+            <tr>
+              <td>Sun Ra&rsquo;s Arkestra</td>
+              <td><strong>Permission.</strong> Music can be anything, go anywhere, is not obligated to
+              satisfy conventional expectations. Cosmic mythology, collective improvisation,
+              total artistic commitment.</td>
+            </tr>
+            <tr>
+              <td>Mwandishi Sextet</td>
+              <td><strong>Method.</strong> Here is how to extend the territory systematically &mdash;
+              electronic processing, new instruments, electroacoustic texture. Not chaos;
+              precisely constructed sonic architecture.</td>
+            </tr>
+            <tr>
+              <td>Julian Priester</td>
+              <td><strong>The Bridge.</strong> Participated in both at the highest level.
+              Carried the Arkestra&rsquo;s ambition into Hancock&rsquo;s technology.
+              One of very few musicians in jazz history to span both traditions.</td>
+            </tr>
+          </table>
+        </div>
+
+        <p>Both traditions were about <em>expanding the territory of jazz</em> &mdash; Sun Ra into
+        space mythology and Afrofuturist consciousness, Hancock into electronic timbre and
+        electroacoustic texture. Priester is the connective tissue between philosophy
+        (&ldquo;music can be anything&rdquo;) and technology (&ldquo;here is how&rdquo;).</p>
+
+        <!-- ========================================
+             TROMBONE AS UNIQUE VOICE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Trombone: Continuous Pitch in a Discrete World</h2>
+
+        <p>The trombone is the <strong>only standard orchestral brass instrument</strong> that
+        produces pitch through a continuous slide mechanism rather than through valves or keys.
+        A trumpet has three valves. A French horn has four. Each valve adds a fixed length of
+        tubing, producing discrete pitch positions. The trombone&rsquo;s telescoping slide can
+        stop <em>anywhere</em> &mdash; producing any frequency within its range, including all
+        microtonal intervals between Western twelve-tone pitches.</p>
+
+        <p>This is the same distinction that separates a <strong>fretted guitar</strong> (discrete)
+        from a <strong>fretless bass</strong> (continuous), or a <strong>piano</strong> (discrete)
+        from a <strong>human voice</strong> (continuous). The trombone is the brass instrument
+        most like the human voice: both produce pitch through continuous, analog mechanisms
+        unconstrained to a fixed scale.</p>
+
+        <table>
+          <thead>
+            <tr><th>Instrument</th><th>Mechanism</th><th>Pitch Type</th><th>S36 Artist</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Trumpet</td><td>Valves (3)</td><td>Discrete positions</td><td>Standifer (4&deg;)</td></tr>
+            <tr><td>Trombone</td><td>Slide (continuous)</td><td>Continuous &mdash; any frequency</td><td>Priester (7&deg;)</td></tr>
+            <tr><td>Voice</td><td>Vocal folds (continuous)</td><td>Continuous &mdash; any frequency</td><td>Anderson (3&deg;)</td></tr>
+            <tr><td>Piano</td><td>Keys (fixed strings)</td><td>Discrete &mdash; 88 pitches</td><td>Berry (5&deg;), Bown (6&deg;)</td></tr>
+            <tr><td>Guitar</td><td>Frets + bending</td><td>Discrete with analog bend</td><td>Frisell (1&deg;)</td></tr>
+          </tbody>
+        </table>
+
+        <p>The trombone&rsquo;s continuous slide gives it <strong>direct physical access to the
+        blue note zone</strong> &mdash; the microtonal region between the major and minor third
+        that defines blues and jazz expression. Every other brass instrument must approximate
+        this through lip-bending (embouchure). The trombonist simply moves the slide.</p>
+
+        <!-- ========================================
+             SEATTLE EXPERIMENTAL CONSTELLATION
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Experimental Jazz Constellation</h2>
+
+        <p>Three musicians from three experimental traditions converged in Seattle to create a
+        nationally significant experimental jazz scene:</p>
+
+        <table>
+          <thead>
+            <tr><th>Artist</th><th>Origin</th><th>Tradition</th><th>Arrived</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="../001-bill-frisell/index.html">Frisell (1&deg;)</a></td>
+              <td>Denver / Berklee / NYC</td>
+              <td>Americana + avant-garde; processed guitar (2nd wave)</td>
+              <td>Late 1980s</td>
+            </tr>
+            <tr>
+              <td><a href="../002-wayne-horvitz/index.html">Horvitz (2&deg;)</a></td>
+              <td>NYC downtown</td>
+              <td>Downtown improv; mixed media; composition-as-structure</td>
+              <td>Late 1980s</td>
+            </tr>
+            <tr>
+              <td>Priester (7&deg;)</td>
+              <td>Chicago / Sun Ra / Hancock</td>
+              <td>Cosmic Afrofuturism + electronic jazz (1st wave)</td>
+              <td>~1979</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Priester arrived first &mdash; nearly a decade before Frisell and Horvitz. He was the
+        <strong>advance party</strong>. When Frisell and Horvitz arrived in the late 1980s,
+        Priester was already established at Cornish, already part of the local scene, already
+        teaching the next generation. The constellation was built in stages.</p>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1935 &mdash; Born in Chicago</div>
+          <p>Born June 29, 1935, on Chicago&rsquo;s South Side. Attended DuSable High School
+          under Captain Walter Dyett &mdash; the pipeline that produced Nat King Cole,
+          Dinah Washington, Gene Ammons, and a generation of jazz professionals.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1953&ndash;1956 &mdash; Sun Ra&rsquo;s Arkestra</div>
+          <p>Joined at age eighteen. The most radical laboratory in American jazz. Cosmic
+          Afrofuturism, collective improvisation, total artistic commitment. The philosophical
+          foundation for everything that followed.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1950s&ndash;1960s &mdash; Max Roach &amp; Duke Ellington</div>
+          <p>Hard bop discipline with Roach (political jazz, <em>We Insist! Freedom Now Suite</em>).
+          Orchestral sophistication with Ellington (composition, arrangement, ensemble precision).
+          From cosmic chaos to concert-hall order &mdash; and back again.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970&ndash;1973 &mdash; Herbie Hancock&rsquo;s Mwandishi</div>
+          <p>The first wave of electronic jazz. Fender Rhodes, wah-wah, Echoplex, ARP synthesizer.
+          Three canonical albums: <em>Mwandishi</em>, <em>Crossings</em>, <em>Sextant</em>.
+          Priester adopted the Swahili name <strong>Pepo Mtoto</strong>. The trombone became an
+          electroacoustic source &mdash; neither purely acoustic nor purely electronic.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">~1979 &mdash; Move to Seattle</div>
+          <p>Joined Cornish College of the Arts faculty. Not the Central District, not the
+          Jackson Street corridor (largely gone by then). Seattle at large &mdash; the first
+          S36 artist to settle in the city without a CD connection. The Pedagogue-Draw pattern.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1974 &amp; 1980s&ndash;present &mdash; ECM Records &amp; Cornish</div>
+          <p>Recorded <em>Love, Love</em> (ECM, 1974) and subsequent ECM projects.
+          Taught at Cornish for decades, influencing generations of Seattle musicians.
+          Part of the Priester-Horvitz-Frisell experimental constellation.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Five theory nodes &mdash; extending the brass branch (from one to three nodes) and
+        adding electronic jazz texture and pedagogical philosophy.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Trombone Slide: Continuous Pitch</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>The only orchestral brass instrument with continuous pitch &mdash; the slide can
+            stop at any point, producing any frequency, including all microtonal intervals.
+            No valves, no keys, no frets. The most voice-like brass instrument. Discrete
+            (trumpet/Standifer) vs. continuous (trombone/Priester) = the brass branch&rsquo;s
+            fundamental spectrum.</p>
+            <div class="examples">Priester&rsquo;s Mwandishi recordings; J.J. Johnson; New Orleans tailgate trombone (Kid Ory)</div>
+            <div class="genealogy"><strong>Thread:</strong> Standifer (trumpet, discrete, 4&deg;) &rarr; Priester (trombone, continuous, 7&deg;). The brass branch now spans the discrete-continuous spectrum.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Microtonal Blue Note Continuum</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>The blue note is a zone, not a pitch. The trombone&rsquo;s slide provides
+            <strong>direct physical access</strong> to that microtonal zone &mdash; no lip-bending
+            approximation required. Seventh deployment of the blue note thread: bass-line (0&deg;),
+            guitar bend (1&deg;), vocal melisma (3&deg;), trumpet vibrato (4&deg;), pianistic
+            crush (5&deg;), altered voicings (6&deg;), trombone slide continuum (7&deg;).</p>
+            <div class="examples">Priester&rsquo;s extended trombone techniques; J.J. Johnson hard bop blue notes; New Orleans tailgate cries</div>
+            <div class="genealogy"><strong>Seven deployments:</strong> The trombone slide is the most literal embodiment because the mechanism itself is continuous. Every other instrument approximates continuous pitch through technique.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Modal Jazz: Dorian / Mixolydian / Lydian</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Modal jazz replaces bebop&rsquo;s rapid chord changes with static harmonic fields.
+            Dorian (minor with raised 6th), Mixolydian (major with flatted 7th &mdash; blues
+            foundation), Lydian (major with raised 4th &mdash; floating, ethereal). The trombone
+            excels in modal contexts: static fields reward sustained tones, long phrases, and
+            gradual microtonal variation &mdash; exactly what the slide produces naturally.</p>
+            <div class="examples">Miles Davis <em>Kind of Blue</em>; Hancock <em>Mwandishi</em>; George Russell <em>Ezz-thetics</em></div>
+            <div class="genealogy"><strong>Harmonic shift:</strong> From ii-V-I chord-change density (Jones 0&deg;, Bown 6&deg;) to static modal fields (Priester 7&deg;). The trombone&rsquo;s sustained-tone capability is a natural fit.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Electronic Jazz Texture: First Wave</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Mwandishi (1970&ndash;73): Fender Rhodes + wah-wah + Echoplex tape delay + ARP
+            synthesizer. Priester&rsquo;s trombone was both acoustic source and electronic
+            processing candidate. The trombone&rsquo;s natural portamento matched the
+            synthesizer&rsquo;s pitch-bending, the wah-wah&rsquo;s frequency sweep, and the
+            Echoplex&rsquo;s time-stretching. First &ldquo;electroacoustic&rdquo; jazz in S36.</p>
+            <div class="examples"><em>Mwandishi</em> (1971); <em>Crossings</em> (1972); <em>Sextant</em> (1973)</div>
+            <div class="genealogy"><strong>Three waves:</strong> Sun Ra proto-electronic (1950s) &rarr; Mwandishi first wave (1970s) &rarr; Frisell/Horvitz second wave (1980s+). Priester bridges all three.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Pedagogy: Expansion vs. Preservation</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Three educator profiles: Standifer (4&deg;, UW) &mdash; preservation-oriented,
+            teaching the canon. Bown (6&deg;, informal) &mdash; survival-based, underdocumented.
+            Priester (7&deg;, Cornish) &mdash; expansion-oriented, teaching boundary-crossing
+            and experimentalism. Two brass educators, two institutions, two philosophies:
+            &ldquo;learn this&rdquo; vs. &ldquo;go beyond this.&rdquo;</p>
+            <div class="examples">Cornish experimental curriculum; UW jazz repertoire program; DuSable pipeline</div>
+            <div class="genealogy"><strong>Pedagogical axis:</strong> Standifer (preservation, 4&deg;) &harr; Priester (expansion, 7&deg;). A tradition needs both.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Eight Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator &rarr; expansion-oriented teaching</td></tr>
+          </tbody>
+        </table>
+
+        <p>Priester&rsquo;s pattern is the first <strong>compound pattern</strong> in the taxonomy &mdash;
+        a hybrid of The Draw (arrived from elsewhere) and The Teacher (became an educator). He was drawn
+        to Seattle AND he became a teacher, but his teaching is oriented toward expansion rather than
+        preservation. The Pedagogue-Draw cannot be reduced to a single mode.</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;6&deg;</h4>
+          <ul>
+            <li><strong>Central District rotation:</strong> ACHIEVED. First non-CD degree. Geographic diversification begins. The CD thread can be revisited at any future degree but is no longer mandatory.</li>
+            <li><strong>Brass lineage:</strong> Three nodes across two degrees (Standifer 4&deg;: trumpet/discrete; Priester 7&deg;: trombone/continuous, microtonal blue note). The brass branch now spans the discrete-continuous spectrum.</li>
+            <li><strong>Electronic jazz:</strong> Three waves documented &mdash; Sun Ra proto-electronic, Mwandishi first wave, Frisell/Horvitz second wave. Priester bridges all three.</li>
+            <li><strong>ECM label thread:</strong> Two artists (Frisell 1&deg;, Priester 7&deg;). First shared label in S36 beyond Mercury (Jones/Anderson). Track all subsequent ECM connections.</li>
+            <li><strong>Pedagogical axis:</strong> Three educator profiles (preservation/Standifer, expansion/Priester, survival/Bown). Two brass educators, two institutions, two orientations.</li>
+            <li><strong>Artist-city taxonomy:</strong> Eight named patterns. First compound pattern (Pedagogue-Draw). Classify every subsequent degree.</li>
+            <li><strong>Blue note thread:</strong> Seven deployments across eight degrees. The trombone slide is the most literal continuous-pitch mechanism.</li>
+            <li><strong>Educational pipelines:</strong> Nine pipelines across eight degrees. DuSable (Chicago) parallels Garfield (Seattle) &mdash; segregation-era public school pipelines.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../004-floyd-standifer/index.html">S36-004 &mdash; Floyd Standifer (Degree 4&deg;)</a> &mdash; Brass pair: trumpet/trombone. Educator pair: UW/Cornish.</li>
+            <li><a href="../002-wayne-horvitz/index.html">S36-002 &mdash; Wayne Horvitz (Degree 2&deg;)</a> &mdash; Experimental constellation. Both Draws from elsewhere.</li>
+            <li><a href="../001-bill-frisell/index.html">S36-001 &mdash; Bill Frisell (Degree 1&deg;)</a> &mdash; ECM label. Experimental constellation. Electronic jazz (1st/2nd wave).</li>
+            <li><a href="../006-patti-brown/index.html">S36-006 &mdash; Patti Bown (Degree 6&deg;)</a> &mdash; Hard bop era overlap. NYC ecosystem. Different visibility outcomes.</li>
+            <li><a href="../../../CDS/index.html">CDS &mdash; Central District</a> &mdash; FIRST NON-CD DEGREE. The rotation begins.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Priester, Julian. <em>Love, Love</em>. ECM Records, 1974.</li>
+          <li>Hancock, Herbie. <em>Mwandishi</em>. Warner Bros., 1971.</li>
+          <li>Hancock, Herbie. <em>Crossings</em>. Warner Bros., 1972.</li>
+          <li>Hancock, Herbie. <em>Sextant</em>. Columbia, 1973.</li>
+          <li>DownBeat. Artist profiles and reviews, Julian Priester, 1958&ndash;present.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="6">
+          <li>Szwed, John F. <em>Space Is the Place: The Lives and Times of Sun Ra</em>. Pantheon Books, 1997.</li>
+          <li>Hancock, Herbie, with Lisa Dickey. <em>Possibilities</em>. Viking, 2014.</li>
+          <li>Gluck, Bob. <em>You&rsquo;ll Know When You Get There: Herbie Hancock and the Mwandishi Band</em>. University of Chicago Press, 2012.</li>
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>AllMusic. Julian Priester artist biography and discography.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="11">
+          <li>Cornish College of the Arts. Faculty records and program descriptions.</li>
+          <li>DuSable High School (Chicago). Music program history and alumni records.</li>
+          <li>Earshot Jazz. Seattle jazz community coverage.</li>
+          <li>ECM Records. Artist catalog and discography.</li>
+          <li>HistoryLink.org. Seattle music history essays.</li>
+          <li>Smithsonian Institution. Duke Ellington archive and jazz oral history collections.</li>
+          <li>KNKX (Seattle). Jazz programming and artist interviews.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1935</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Chicago, IL</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Seattle (general)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">School</span>
+            <span class="stat-value">DuSable HS (Chicago)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Teaching</span>
+            <span class="stat-value">Cornish College</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Trombone</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">7&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (trombone)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1970s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">ECM</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">Leader</span>
+            <span class="stat-value">Love, Love (ECM)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sideman</span>
+            <span class="stat-value">Mwandishi trilogy</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">ECM / Warner / Columbia</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Available (reissues)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Brass Branch</span>
+            <span class="stat-value">3 total (1+2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">5 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Bridge</h4>
+          <div class="stat-row">
+            <span class="stat-label">Sun Ra</span>
+            <span class="stat-value">1953&ndash;56</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Max Roach</span>
+            <span class="stat-value">Late 1950s&ndash;60s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ellington</span>
+            <span class="stat-value">1960s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Mwandishi</span>
+            <span class="stat-value">1970&ndash;73</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle</span>
+            <span class="stat-value">~1979&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Constellation</h4>
+          <div class="stat-row">
+            <span class="stat-label">Priester</span>
+            <span class="stat-value">~1979 (advance)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Frisell (1&deg;)</span>
+            <span class="stat-value">Late 1980s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Horvitz (2&deg;)</span>
+            <span class="stat-value">Late 1980s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shared Label</span>
+            <span class="stat-value">ECM (w/ Frisell)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Pedagogue-Draw</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Compound (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Brass pair</span>
+            <span class="stat-value">Standifer (4&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">ECM pair</span>
+            <span class="stat-value">Frisell (1&deg;)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Geographic Rotation</h4>
+          <div class="stat-row">
+            <span class="stat-label">CD Thread</span>
+            <span class="stat-value">ROTATED</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">First non-CD</span>
+            <span class="stat-value">Degree 7&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Chicago (DuSable)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle base</span>
+            <span class="stat-value">Cornish College</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;6&deg; &rarr; 7&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Rotation</span>
+            <span class="stat-value">Achieved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Nodes</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">7th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">8 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">9 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 7&deg; / 360 &middot;
+      <a href="../006-patti-brown/index.html">Prev: 6&deg; Bown</a> &middot;
+      <a href="../004-floyd-standifer/index.html">4&deg; Standifer</a> &middot;
+      <a href="../001-bill-frisell/index.html">1&deg; Frisell</a> &middot;
+      <a href="../002-wayne-horvitz/index.html">2&deg; Horvitz</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
