@@ -122,6 +122,7 @@
     { id: 'SGM', name: 'Sacred Geometry', path: 'SGM/index.html' },
     { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
     { id: 'SRG', name: 'Susan Rogers', path: 'SRG/index.html' },
+    { id: 'SRD', name: 'SSH & RDP', path: 'SRD/index.html' },
     { id: 'SSM', name: 'Street Music', path: 'SSM/index.html' },
     { id: 'SST', name: 'States & Tape', path: 'SST/index.html' },
     { id: 'STE', name: 'Storage Forensics', path: 'STE/index.html' },
