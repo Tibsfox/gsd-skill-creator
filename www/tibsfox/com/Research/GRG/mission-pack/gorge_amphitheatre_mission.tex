@@ -1,0 +1,1025 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME: Columbia Basin — basalt midnight / river teal / canyon fire
+\definecolor{primary}{HTML}{1B3A4B}       % Columbia midnight — section headers
+\definecolor{secondary}{HTML}{006064}     % River teal — subsection headers
+\definecolor{tertiary}{HTML}{BF360C}      % Canyon fire — subsubsection headers
+\definecolor{accent}{HTML}{0097A7}        % Bright teal — highlights
+\definecolor{lightprimary}{HTML}{E0EAF0}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E0F7FA}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% TABLE HELPERS
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS AND FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Gorge Amphitheatre}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Gorge Amphitheatre -- Full History Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ============================================================
+\begin{document}
+
+%% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Gorge Amphitheatre\\[0.3em]Full History}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{George, Washington --- Columbia River Basin}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 28, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 5--6 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+%% TABLE OF CONTENTS
+\tableofcontents
+\newpage
+
+%% =============================================================
+%% STAGE 1 — VISION DOCUMENT
+%% =============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Gorge Amphitheatre --- Vision Guide}
+
+\metafield{Date:}{March 28, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{Columbia River Gorge geology, Wanapum Nation history, Pacific Northwest music culture}
+\metafield{Context:}{Cold-start research mission. Full web research conducted prior to packaging.}
+
+\subsection{Vision}
+
+There are places on earth where geology and human longing collide so precisely that no architecture could improve upon them. The Gorge Amphitheatre in George, Washington is one such place. Carved across millennia by volcanic eruption and catastrophic flood, the Columbia River Gorge produced a natural bowl of basalt cliffs and terraced hillside so acoustically perfect that a neurosurgeon hiking his vineyard property in 1986 could hear every word spoken more than a thousand feet below him. That hike changed everything.
+
+What followed is one of the most unlikely origin stories in American music history: a winery-concert hybrid born of serendipity, growing in thirty years from a makeshift plywood stage serving 3,000 wine enthusiasts to a 27,500-capacity Live Nation amphitheatre that is nine times the winner of Pollstar Magazine's best outdoor music venue award. The Dave Matthews Band has played it 79 times. Pearl Jam committed an entire box set to its stage. Joni Mitchell chose it for her first ticketed performance in over two decades.
+
+But the full history of the Gorge reaches further back than Dr.\ Vincent Bryan's vineyard. The Wanapum people---whose name means "river people" in the Sahaptin language---have lived along the Columbia at this latitude for millennia, carving over 300 petroglyphs into the same basalt the glacial floods carved into cliffs. The amphitheatre sits in one of the most geologically dramatic landscapes in North America, a place where the land itself has always been a kind of stage. This mission traces that full arc: from cataclysmic flood to winery dream to pilgrimage destination for live music culture across the Pacific Northwest and the world.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The geological substrate is poorly integrated into venue histories.} Most documentation of the Gorge Amphitheatre begins in 1986 with the Bryan family, omitting the Missoula Flood geology (15,000--19,000 years ago) and Columbia River Basalt eruptions (6--17 million years ago) that created the amphitheatre's physical form and acoustic properties.
+
+  \item \textbf{Wanapum cultural history is absent from entertainment media coverage.} The land on which the venue sits is part of the ancestral territory of the Wanapum people, who were present when Lewis and Clark passed through (1805), never signed a treaty, and continue to maintain cultural sites nearby at Priest Rapids. This history is systematically omitted from venue profiles.
+
+  \item \textbf{The ownership transition chain is fragmented across sources.} Bryan (1980--1993) $\rightarrow$ MCA Concerts ($3.9M, 1993) $\rightarrow$ House of Blues (1999) $\rightarrow$ Live Nation (2006) forms a clear corporate lineage, but no single document traces this arc with financial and operational detail alongside the physical expansion of the venue.
+
+  \item \textbf{The venue's music-cultural significance lacks systematic documentation.} The Gorge has been the recording site for landmark live albums (Pearl Jam's \textit{Live at the Gorge 05/06}, Dave Matthews Band's \textit{The Gorge}), a launching pad for Pacific Northwest music identity, and a festival ecosystem spanning country, electronic, jam, and rock genres---all documented piecemeal.
+
+  \item \textbf{Safety and community incidents have not been contextualized.} The June 2023 mass shooting during Beyond Wonderland requires factual documentation within the broader context of the venue's record and its community response.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Amphitheatre as Geological Instrument:} The Gorge works because the Missoula Floods and Columbia River Basalt Group created a natural bowl with unobstructed sightlines and open-air acoustics. Dr.\ Bryan did not build an amphitheatre---he discovered one.
+
+\subsubsection{Study Region Map}
+
+\begin{asciibox}
+Columbia River Basin --- Central Washington
+--------------------------------------------------------------
+
+              CASCADE RANGE
+                   |
+    Seattle -------+-------- I-90 --------+------ Spokane
+    (150 mi)                              |       (130 mi)
+                                     GEORGE, WA
+                                     (The Gorge)
+                                          |
+                               Columbia River Gorge
+                              (Basalt cliffs, 1000+ ft)
+                                          |
+                              Channeled Scablands
+                          (Missoula Flood outwash plain)
+
+Adjacent features:
+  - Cave B Estate Winery (Bryan family, est. 2000)
+  - Wanapum Heritage Center (Priest Rapids, ~20 mi south)
+  - White River Amphitheatre (Auburn, WA --- 2003 competitor)
+  - I-90 corridor (primary audience ingress route)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE MAP --- The Gorge Amphitheatre Full History
+--------------------------------------------------------------
+
+  [MOD-1: GEOLOGY]     [MOD-2: INDIGENOUS]
+  Missoula Floods       Wanapum Nation
+  Basalt formation      Smohalla/Washani
+  Acoustic physics      Columbia Plateau
+       |                      |
+       +----------+-----------+
+                  |
+          [MOD-3: FOUNDING ERA]
+          Bryan family 1980-1993
+          Champs de Brionne
+          Plywood stage to 19K seats
+                  |
+          [MOD-4: CORPORATE ERA]
+          MCA -> HOB -> Live Nation
+          Stage build / Mountain Productions
+          White River competition
+                  |
+          [MOD-5: MUSIC LEGACY]
+          Dave Matthews / Pearl Jam / Phish
+          Festival ecosystem
+          Cultural pilgrimage identity
+          Enormous documentary (2021)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Geological Genesis}
+Documents the Columbia River Gorge's multi-epoch formation: Columbia River Flood Basalts (6--17 million years ago), Cascade Range uplift (3 million years ago), and the Missoula Floods (15,000--19,000 years ago) that carved the terraced bowl. Covers the acoustic and visual properties that make the site a natural amphitheatre.
+
+\subsubsection{Module 2: Indigenous Deep History}
+Documents the Wanapum people's presence and cultural relationship with the Columbia River at this latitude. Covers: Wanapum language and villages (P'n\`a), Lewis and Clark contact (1805), David Thompson's first written description (1811), the Washani religion of Smohalla, absence from treaty negotiations (1855), Manhattan Project displacement, dam construction impacts, and the present-day Wanapum Heritage Center.
+
+\subsubsection{Module 3: Founding Era (1980--1993)}
+Documents Dr.\ Vincent Bryan II and Carol Bryan's land acquisition (1980), Champs de Brionne winery, the acoustic discovery hike, construction of the first stage, inaugural season (1986, 3,000 seats), rapid expansion to 15,000 (1988) and 19,000 (1993), and the final Champs de Brionne show (Steve Miller Band, August 14, 1993).
+
+\subsubsection{Module 4: Corporate Era and Physical Development (1993--present)}
+Documents MCA Concerts' purchase (\$3.9M, 1993), \$2M infrastructure investment, House of Blues acquisition (1999), Live Nation takeover (2006), Mountain Productions' permanent stage installation, the White River Amphitheatre competitive challenge (2003), capacity expansion to 27,500, and the Cave B winery rebirth adjacent to the venue (2000).
+
+\subsubsection{Module 5: Musical Legacy and Cultural Impact}
+Documents the venue's concert history and cultural significance: landmark recordings (Pearl Jam, Dave Matthews Band), the annual DMB Labor Day weekend residency, Phish's 22 appearances, iconic single concerts (Bob Dylan 1988, Pearl Jam / Neil Young 1993, Joni Mitchell 2023), the full festival roster (Sasquatch!, Watershed, Bass Canyon, Paradiso, Beyond Wonderland, Lollapalooza, Lilith Fair), the 2023 Beyond Wonderland shooting, and the 2021 documentary \textit{Enormous: The Gorge Story}.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# gorge_history_mission_chipset.yaml
+# GSD Chipset --- The Gorge Amphitheatre Full History
+
+agnus:           # Orchestration / DMA / Context Management
+  model: claude-opus-4-6
+  role: FLIGHT
+  responsibilities:
+    - Cross-module synthesis (geology -> music culture arc)
+    - Indigenous content sensitivity oversight
+    - Go/no-go gates at each wave boundary
+    - Final through-line integration
+
+denise:          # Display / Output Rendering
+  model: claude-sonnet-4-6
+  role: EXEC (x2)
+  responsibilities:
+    - Module document assembly (two parallel tracks)
+    - LaTeX section production
+    - Source bibliography compilation
+    - Timeline construction
+
+paula:           # Audio / I/O / Anticipatory
+  model: claude-haiku-4-5
+  role: BUDGET + LOG
+  responsibilities:
+    - Shared schema production (date tables, ownership chart)
+    - Token budget monitoring
+    - Commit messages and audit trail
+
+gary_68000:      # CPU / Glue Logic
+  model: claude-sonnet-4-6
+  role: PLAN + VERIFY
+  responsibilities:
+    - Wave decomposition
+    - Source validation
+    - Cross-reference accuracy checking
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Full geological history of the Columbia River Gorge at the amphitheatre site
+  \item Wanapum Nation history at this latitude (not the full Columbia Plateau survey)
+  \item Bryan family founding era: 1980--1993
+  \item Ownership timeline: MCA, House of Blues, Live Nation
+  \item Mountain Productions stage installation
+  \item Artist residency records (DMB, Pearl Jam, Phish) with source citations
+  \item Major festival history and genre evolution
+  \item Pollstar award history and industry recognition
+  \item Cave B Estate Winery and its relationship to the venue
+  \item 2021 documentary \textit{Enormous: The Gorge Story}
+  \item 2023 Beyond Wonderland shooting --- factual record only
+  \item 2026 concert season as present-state documentation
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Setlist-level documentation for individual concerts
+  \item Broader Columbia River Gorge National Scenic Area policy history (Oregon side)
+  \item Full tribal histories of all Columbia Plateau nations (Yakama, Nez Perce, etc.)
+  \item Grand Coulee Dam and hydroelectric system history (separate mission)
+  \item Live Nation corporate structure beyond Washington State operations
+  \item White River Amphitheatre detailed history
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Geological timeline documented from Columbia River Basalt eruptions through Missoula Floods, with specific dates and USGS-sourced measurements.
+  \item Wanapum Nation history documented with nation-specific attribution, covering at minimum: village P'n\`a, Lewis and Clark contact (1805), Smohalla, treaty non-participation (1855), and current Heritage Center.
+  \item Bryan founding era documented with: land acquisition year (1980), original purpose (vineyard), acoustic discovery narrative, inaugural season (1986), and capacity milestones with dates.
+  \item Corporate ownership chain documented with verified transaction data: MCA purchase price (\$3.9M, 1993), House of Blues (1999), Live Nation (2006).
+  \item Dave Matthews Band show count documented with source, including Labor Day weekend residency tradition and at least two official live releases from the venue.
+  \item Pearl Jam's relationship with the venue documented including \textit{Live at the Gorge 05/06} box set details and the 1993 Neil Young concert.
+  \item Festival ecosystem documented covering at minimum: Sasquatch!, Watershed, Bass Canyon, Beyond Wonderland, Paradiso, with genre and founding year for each.
+  \item Venue capacity and physical design evolution documented: 3,000 (1986) $\rightarrow$ 15,000 (1988) $\rightarrow$ 19,000 (1993) $\rightarrow$ 27,500 (current).
+  \item Pollstar award history documented (nine-time winner) alongside Billboard Touring Award (2013).
+  \item Bob Dylan's 1988 show documented as the first large-crowd event with source.
+  \item 2023 Beyond Wonderland shooting documented factually: date, fatalities (2), suspect identity, outcome.
+  \item Present state documented: 2026 concert season highlights, current capacity, Live Nation management structure.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Fox Infrastructure Group & Columbia River hydroelectric and Pacific Spine corridor; Priest Rapids Dam connects to Wanapum story & Parallel \\
+Seattle Hip-Hop Module 05a/05b & Pacific Northwest music culture; Gorge as PNW concert identity anchor & Adjacent \\
+PNW Bioregion Taxonomy & Columbia Basin species and ecological context for venue landscape & Parent \\
+GSD Deep Audio Analyzer Mission & Live concert audio analysis methods applicable to venue acoustics study & Adjacent \\
+Salish Sea Expansion Vision & Regional indigenous governance context for Columbia Plateau nations & Parent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Gorge Amphitheatre is proof of the Amiga Principle at geological scale. The Columbia River did not brute-force a concert venue into existence. Over millions of years of lava deposition, three million years of Cascade uplift, and tens of thousands of years of catastrophic flooding, it created the precise conditions---a natural bowl, basalt walls, unobstructed sky---that allow 27,500 people to hear a guitar note from a quarter-mile away. Dr.\ Bryan did not build anything. He listened.
+
+This is what the \textit{spaces between} look like when the canvas is a thousand-foot canyon. The meaning is not in the basalt walls, not in the stage, not even in the musicians. It lives in the resonance between all of them---between rock and sound, between river and crowd, between the ancient Wanapum petroglyphs carved into these same cliffs and the annual Labor Day pilgrimage of tens of thousands who have no idea they are visiting a sacred geography. A research mission into the full history of the Gorge is ultimately a study in how places hold meaning across radically different human timescales: geological, indigenous, commercial, and cultural. All four are present here. None can be omitted.
+
+%% =============================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% =============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Gorge Amphitheatre --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference synthesizes findings from targeted web research (March 2026) across government geology databases, historical archives, Indigenous heritage resources, and music industry publications. Each claim is attributed to a specific source. The five research modules proceed from deepest time to present day.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item U.S.\ Geological Survey (USGS) --- Missoula Floods and Columbia River geology
+  \item Oregon Encyclopedia (Oregon Historical Society) --- Columbia River Gorge regional history
+  \item HistoryLink.org --- Washington State historical record (Wanapum)
+  \item Confluence Project --- Columbia River tribal documentation
+  \item Grant County PUD --- Wanapum Heritage Center and dam history
+  \item Wikipedia / Grokipedia --- Venue facts (cross-validated against Seattle Times archive)
+  \item Seattle Times (archived 2002) --- Ownership financial details
+  \item Pollstar Magazine --- Award records
+  \item Live Nation / Mountain Productions --- Physical venue specifications
+  \item Spokesman-Review (2021) --- \textit{Enormous} documentary coverage
+\end{itemize}
+
+\subsection{Module 1: Geological Genesis}
+
+\subsubsection{Columbia River Flood Basalts (17--6 Million Years Ago)}
+
+The geological substrate of the Gorge Amphitheatre is the Columbia River Basalt Group (CRBG), a series of massive flood basalt eruptions originating in eastern Oregon and Washington beginning approximately 17 million years ago during the Miocene epoch. According to USGS publications, these eruptions produced an estimated 41,000 cubic miles of lava that covered thousands of square miles and created the flat-lying basalt plateau that defines the region. The lava cooled into characteristic hexagonal columnar basalt formations visible in the Gorge's cliff walls today. Approximately 21 separate vent systems poured lava into the Columbia corridor, building layered basalt walls 2,000--5,000 feet thick in some areas.
+
+\subsubsection{Cascade Range Uplift and Canyon Carving (3 Million Years Ago)}
+
+As documented in USGS field studies on the Columbia River Gorge, the uplift of the High Cascades beginning approximately three million years ago raised the regional landscape over 3,000 feet, exposing the CRBG to the relentless incision of the Columbia River. This process, not the Missoula Floods, created the primary canyon form. The river carved through successive basalt layers as the land rose beneath it, creating the dramatic cliffs and canyon walls that frame the amphitheatre stage.
+
+\subsubsection{Missoula Floods and Final Sculpting (19,000--13,000 Years Ago)}
+
+The USGS documents at least 40---and likely more than 100---separate cataclysmic outburst floods between approximately 19,000 and 13,000 years ago, caused by periodic ruptures of an ice dam on the Clark Fork River that impounded Glacial Lake Missoula in present-day Montana. As documented in peer-reviewed USGS publications by O'Connor and Benito, the largest floods discharged approximately 10 cubic kilometers per hour---13 times the flow of the modern Amazon River. Flood speeds approached 36 meters per second. According to the Oregon Encyclopedia, these floods ``stripped away loose talus and soil to shape'' the gorge's present landforms between 19,000 and 15,000 years ago. The Gorge Amphitheatre's bowl-shaped terrain---the terraced hillside that became lawn seating---was sculpted by these events.
+
+The Spokesman-Review and the venue's own historical documentation note that the bowl was ``carved 15,000 years ago by the Missoula Floods'' (live music history documentation, 2021). USGS records indicate that indigenous people were present in the Columbia Basin as early as 16,600--15,300 years ago and almost certainly witnessed the final Missoula Floods.
+
+\subsubsection{Acoustic Properties}
+
+The venue's natural acoustic advantage derives from the same geology. According to Live Nation and venue documentation, the bowl-shaped hillside focuses sound toward the stage while basalt walls on three sides provide natural reflection without enclosed reverb. Playmakers Community documentation notes that at natural outdoor amphitheatres, ``sound travels directly from the source to the audience with little or no interference along the way.'' Dr.\ Bryan's founding hike---documented in \textit{Enormous: The Gorge Story} (2021) and multiple venue histories---confirmed this property: standing at the rim, he could hear every word spoken more than 1,000 feet below.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Event} & \tableheader{Date} & \tableheader{Significance for Venue} \\
+\midrule
+CRBG Eruptions & 17--6 Ma & Basalt walls and cliff faces \\
+Cascade Uplift & $\sim$3 Ma & Canyon carving begins \\
+Missoula Floods & 19,000--13,000 BP & Bowl terrain, terraced hillside \\
+Human arrival & $\sim$16,600--15,300 BP & Wanapum ancestors witness final floods \\
+Wanapum village P'n\`a & Pre-contact & Village 2 miles downstream of Priest Rapids \\
+Lewis \& Clark & October 1805 & First European written record of Wanapum \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Indigenous Deep History}
+
+\subsubsection{The Wanapum People}
+
+According to Wikipedia and the Confluence Project, the Wanapum (Sahaptin: W\'{a}napam) are a Sahaptin-speaking people whose name means ``river people''---from \textit{w\'{a}na} (river) + \textit{-pam} (people). They inhabited the Columbia River from present-day Pasco, Washington, upstream to the Priest Rapids area, approximately 20 miles south of the Gorge Amphitheatre. Their principal village, P'n\`a, was located approximately two miles downstream of what is now the Priest Rapids Dam. Over 300 petroglyphs were carved by Wanapum into the same Columbia Basalt cliffs that form the amphitheatre backdrop; according to Wikipedia, approximately 60 were blasted from the rock before being flooded by dam construction in 1953--1966, with surviving petroglyphs relocatable to Ginkgo Petrified Forest State Park.
+
+\subsubsection{Lewis and Clark Contact and David Thompson (1805, 1811)}
+
+According to HistoryLink.org, Captain Clark's journals from October 1805 describe the Wanapum, led by chief Cutssahnem, greeting the Corps of Discovery and sharing food and entertainment. Canadian explorer David Thompson provided the first detailed written description of Wanapum life on July 8--9, 1811, documenting their use of seine nets, diet of pounded roots and salmon, and the singing and dancing of women, described as containing ``something of a religious nature.''
+
+\subsubsection{Smohalla and the Washani Religion}
+
+According to HistoryLink.org and Wikipedia, in the 1850s a Wanapum spiritual leader named Smohalla (c.\ 1815--1895) created the Washani religion (also called ``Dreamer Religion''), which held that the land could not be owned and that traditional lifeways should be maintained rather than taking up arms. The Wanapum never fought white settlers, did not sign the Yakama Treaty of 1855 (their leaders were not invited to negotiations according to HistoryLink.org), and as a result retained no federally recognized land rights. Governor Isaac Stevens was reportedly unaware of their existence as a distinct people.
+
+\subsubsection{Displacement and Continuity}
+
+According to Wikipedia and Grant PUD records, the 1942 Manhattan Project (Hanford Engineer Works) forced temporary relocation of approximately 30 Wanapum from their winter camp, though they were allowed to remain near ancestral fishing grounds. Construction of Priest Rapids Dam (1953) and Wanapum Dam (1966) flooded the riverbanks where the Wanapum had lived in traditional tule houses. Today, approximately 60 Wanapum live near the Priest Rapids Dam site under a cooperative arrangement with Grant County PUD. The Wanapum Heritage Center (completed 2015, 50,000 square feet) documents Wanapum culture and maintains the permanent exhibition ``Life as a Wanapum.''
+
+\subsection{Module 3: Founding Era (1980--1993)}
+
+\subsubsection{Land Acquisition and Vineyard Vision}
+
+According to Grokipedia (citing venue records) and multiple venue histories, in 1980 neurosurgeon Dr.\ Vincent Bryan II and his wife Carol Bryan purchased several hundred acres of land near George, Washington, initially for vineyard development. The land's loess-covered basalt and southerly slopes---the same geological conditions noted in Missoula Flood research as ideal for orchards and vineyards---made it suitable for grape cultivation. The adjacent winery, Champs de Brionne, was established and the planned concert facility was named after it.
+
+\subsubsection{The Acoustic Discovery}
+
+According to \textit{Enormous: The Gorge Story} (2021), as documented in Live for Live Music (2019) coverage, during a hike of the natural bowl with friends, Dr.\ Bryan remained at the rim while others descended to the river level (over 1,000 feet below) and discovered he could hear every word they spoke. The natural acoustic properties of the basalt bowl---which focused and amplified sound from the valley floor---revealed the site's potential as a concert venue. The decision was initially conceived as a tactic to bring visitors to the estate winery, not to build a major amphitheatre.
+
+\subsubsection{Inaugural Season and Rapid Growth}
+
+According to multiple venue sources and Wikipedia, Champs de Brionne Music Theatre opened in 1986 with a capacity of approximately 3,000 spectators, featuring ``a small wooden stage, and a few hastily-laid sod terraces'' (Live for Live Music, 2019). Bob Dylan's 1988 show was the first to draw a truly large crowd, with Live Nation Northwest President Jeff Trisler later recalling in the \textit{Enormous} documentary: they ``just kept selling tickets. It was a perfect storm of good things for business. Operationally, not so much. There were like 12 security people tearing tickets and a line as far as the eye could see.'' By 1988 capacity had reached 15,000; by 1993 it stood at 19,000.
+
+The final show under the Champs de Brionne name featured The Steve Miller Band \& Paul Rodgers on August 14, 1993 (kw3.com, concert archives).
+
+\subsubsection{Bryan Legacy Post-Sale}
+
+According to Live for Live Music (2019), after the 1993 sale Dr.\ Bryan went on to invent the artificial disc for the human spine. The Bryans retained the surrounding vineyards and in 2000 approached winemaker Brian Carter about producing wine under a new label, Cave B. They subsequently built the Cave B Estate Winery, a restaurant, and lodging adjacent to the Gorge Amphitheatre, completing the circuit between the original vineyard vision and the concert legacy.
+
+\subsection{Module 4: Corporate Era and Physical Development}
+
+\subsubsection{MCA Concerts Acquisition (1993)}
+
+According to a Seattle Times archive report (August 4, 2002), MCA Concerts---the concert arm of entertainment giant MCA, which would later become Universal Concerts---purchased the amphitheatre and approximately 100 acres from the Bryan family for \textbf{\$3.9 million} in 1993. MCA subsequently invested \$2 million in site improvements. The 1993 purchase renamed the facility the Gorge Amphitheatre and shifted it from family operation to commercial concert programming under a major entertainment conglomerate. In 1994, Grant County began collecting a 5\% fee on all tickets sold at the Gorge; that year MCA paid nearly \$275,000 in fees to the county.
+
+\subsubsection{House of Blues Ownership (1999)}
+
+According to the Seattle Times (2002), House of Blues purchased the venue in 1999. By 2001 (the last year referenced in the 2002 article), annual attendance had approached 300,000, generating over \$700,000 in county ticket fees.
+
+\subsubsection{Live Nation Acquisition (2006)}
+
+According to Wikipedia and multiple venue sources, Live Nation Entertainment acquired the Gorge Amphitheatre in 2006 and has managed it since. Under Live Nation's management, capacity expanded to its current range of 20,000--27,500 depending on event configuration. Live Nation is described in venue documentation as ``the global concert promoter that has since managed expansions, bookings, and operations'' (Grokipedia, 2026).
+
+\subsubsection{Mountain Productions Stage Installation}
+
+According to Mountain Productions' own portfolio documentation, the company ``played a critical role in the Gorge's history and provided the stage installation that remains standing today.'' Mountain Productions constructed the permanent stage structure overlooking the canyon with what they describe as ``skilled engineering and experienced construction.'' The permanent stage---which gives spectators unobstructed views of the Columbia River Gorge canyon---replaced earlier temporary configurations.
+
+\subsubsection{White River Amphitheatre Competition}
+
+According to Wikipedia, the White River Amphitheatre opened in 2003 on the Muckleshoot Indian Reservation near Auburn, Washington, offering direct competition to the Gorge for the Seattle market. White River is approximately 40 minutes from Seattle versus 2 hours 20 minutes for the Gorge. However, according to Wikipedia, a Seattle Times columnist noted the Gorge offers a preferable view and ``experience,'' and the Gorge has maintained its dominant position as the premier Pacific Northwest outdoor concert destination.
+
+\subsection{Module 5: Musical Legacy and Cultural Impact}
+
+\subsubsection{Dave Matthews Band --- 79 Shows and Counting}
+
+According to Wikipedia (updated through 2025), Dave Matthews Band has played 79 shows at the Gorge Amphitheatre, the most of any artist at the venue. The band has maintained an annual Labor Day weekend three-night residency that has become one of the most celebrated recurring events in Pacific Northwest concert culture. Official live releases from the venue include: \textit{The Gorge} (2-CD/1-DVD, released June 29, 2004, highlights from the 2002 tour closer); \textit{Live Trax Vol.\ 44} (December 8, 2017, from the September 4, 2016 show); and \textit{Take Me Back: Live From the Gorge} (February 6, 2026, from the August 30, 2025 show featuring the complete performance of \textit{Before These Crowded Streets}).
+
+\subsubsection{Pearl Jam}
+
+According to Wikipedia and the Live at the Gorge box set Wikipedia entry, Seattle-based Pearl Jam released \textit{Live at the Gorge 05/06}, a seven-disc live box set through Rhino Entertainment/Warner Music Group on June 26, 2007, documenting their 2005 and 2006 shows at the venue. The box set debuted at \#36 on the Billboard 200 with approximately 19,000 copies sold in its first week. The band's celebrated joint concert with Neil Young in 1993 was one of the venue's earliest landmark events. Pearl Jam guitarist Mike McCready appears in the 2021 \textit{Enormous} documentary.
+
+\subsubsection{Phish}
+
+According to Wikipedia, Phish has played the Gorge Amphitheatre 22 times since 1997, making it one of the jam-band community's most significant recurring venues.
+
+\subsubsection{Milestone and Historic Performances}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Artist/Event} & \tableheader{Significance} \\
+\midrule
+August 1988 & Bob Dylan & First major crowd event; capacity management crisis documented \\
+August 14, 1993 & Steve Miller Band \& Paul Rodgers & Final show as ``Champs de Brionne Music Theatre'' \\
+September 1993 & Pearl Jam \& Neil Young & First landmark joint performance at renamed Gorge \\
+June 12, 2001 & Brooks \& Dunn & ``Only in America'' music video filmed here \\
+September 2002 & Dave Matthews Band & Three-night tour closer; later released as \textit{The Gorge} live album \\
+September 2005--2006 & Pearl Jam & Shows released as \textit{Live at the Gorge 05/06} (7 discs, 2007) \\
+September 16--17, 2017 & Above \& Beyond & Group Therapy Radio episode 250 \\
+August 2018 (annual) & Excision / Bass Canyon & Annual bass music festival begins \\
+June 10, 2023 & Joni Mitchell & First ticketed performance in over 20 years \\
+June 17, 2023 & Beyond Wonderland & Mass shooting in campground; 2 fatalities \\
+August 30, 2025 & Dave Matthews Band & Full performance of \textit{Before These Crowded Streets}; released Feb 2026 \\
+September 11--13, 2026 & Above \& Beyond & ABGT700 celebration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Festival Ecosystem}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Festival} & \tableheader{Genre} & \tableheader{Notes} \\
+\midrule
+Sasquatch! Music Festival & Multi-genre indie & Annual Memorial Day weekend; became flagship cultural event \\
+Watershed Festival & Country & Three-day; nominee 2013 ACM Festival of the Year \\
+Bass Canyon & Dubstep/bass & Founded 2018 by Excision; annual late summer \\
+Beyond Wonderland & EDM & Annual since 2021; Insomniac Events \\
+Paradiso Festival & EDM/dance & Annual summer \\
+Lollapalooza & Multi-genre rock & Earlier era \\
+Lilith Fair & Female-led pop/folk & 1990s era \\
+Ozzfest & Metal & 1990s--2000s era \\
+H.O.R.D.E.\ Festival & Jam/rock & 1990s era \\
+Creation Festival & Christian music & Annual \\
+Vans Warped Tour & Punk/alternative & Multiple years \\
+Pain in the Grass & Hard rock & Regional Pacific Northwest festival \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Industry Recognition}
+
+According to Wikipedia, Pollstar Magazine, and venue documentation:
+\begin{itemize}[noitemsep]
+  \item Nine-time winner: Pollstar Magazine ``Best Outdoor Music Venue'' award
+  \item 2013 Billboard Touring Award: Top Amphitheatre
+  \item ConcertBoom: ``Best Outdoor Concert Venues in America''
+  \item 2013 attendance: approximately 400,000 (Wikipedia)
+\end{itemize}
+
+\subsubsection{2023 Beyond Wonderland Shooting}
+
+According to Wikipedia, on June 17, 2023, during the Beyond Wonderland music festival, a mass shooting occurred at a campground near the Gorge Amphitheatre. The shooter killed two people and wounded two others; a security guard was also struck by a deflected bullet but survived. Suspect: James M.\ Kelly, 26, U.S.\ Army personnel from Strongsville, Ohio. Kelly was shot by police and arrested. The two fatalities were a female couple from the Seattle area.
+
+\subsubsection{Enormous: The Gorge Story (2021)}
+
+According to the Spokesman-Review (2021), the documentary \textit{Enormous: The Gorge Story} was directed by Nic Davis and features testimony from Dave Matthews, Pearl Jam guitarist Mike McCready, Dierks Bentley, Train's Pat Monahan, John Oates, and Steve Miller. Production commenced in 2016. The film covers the venue's evolution from winery to concert venue to Live Nation crown jewel, incorporating fan perspectives including superfan Pat Coates of Spokane. It was released in theaters in July 2021.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Boundary Type} & \tableheader{Requirement} \\
+\midrule
+Wanapum Nation history & ABSOLUTE & Always cite as ``Wanapum'' specifically, never generic ``Indigenous peoples'' \\
+Wanapum cultural sites & GATE & Do not publish specific coordinates of cultural or sacred sites \\
+2023 shooting & ANNOTATE & Document factually; avoid sensationalizing; present in historical context \\
+Petroglyphs & GATE & Reference location (Ginkgo State Park) but not specific GPS coordinates \\
+Source quality & ABSOLUTE & All claims sourced to USGS, HistoryLink, Seattle Times, or peer-reviewed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[noitemsep]
+  \item U.S.\ Geological Survey. ``The Missoula and Bonneville Floods---A Review of Ice-Age Megafloods in the Columbia River Basin.'' \url{https://www.usgs.gov}
+  \item U.S.\ Geological Survey. ``Cataclysms and Controversy: Aspects of the Geomorphology of the Columbia River Gorge.'' \url{https://www.usgs.gov}
+  \item Grant County PUD. ``The Wanapum.'' \url{https://www.grantpud.org/the-wanapum}
+  \item Grant County, WA. ``The Gorge Amphitheater.'' \url{https://www.grantcountywa.gov}
+\end{itemize}
+
+\subsubsection{Historical and Archival Sources}
+\begin{itemize}[noitemsep]
+  \item Oregon Encyclopedia / Oregon Historical Society. ``Columbia River Gorge.'' \url{https://www.oregonencyclopedia.org}
+  \item HistoryLink.org. ``Wanapum People After Smohalla.'' File 9524.
+  \item HistoryLink.org. ``David Thompson records first written description of the Wanapum, July 8--9, 1811.'' File 9010.
+  \item Seattle Times (Archive). ``Huge Concerts Take Root in Unlikely Soil.'' August 4, 2002.
+  \item Discover Lewis \& Clark. ``The Columbia River Gorge.'' \url{https://lewis-clark.org}
+\end{itemize}
+
+\subsubsection{Professional and Industry Sources}
+\begin{itemize}[noitemsep]
+  \item Wikipedia. ``The Gorge Amphitheatre.'' Updated February 5, 2026.
+  \item Wikipedia. ``Live at the Gorge 05/06.''
+  \item Wikipedia. ``Wanapum.'' Updated January 6, 2026.
+  \item Wikipedia. ``Missoula Floods.''
+  \item Grokipedia. ``The Gorge Amphitheatre.'' January 14, 2026.
+  \item Mountain Productions, Inc. ``Portfolio: The Gorge.'' \url{https://www.mountainproductions.com}
+  \item Confluence Project. ``Tribes of the Columbia River System.''
+  \item Spokesman-Review. ``The Story of the Gorgeous Gorge Finally Hits the Screen.'' July 15, 2021.
+  \item Live for Live Music. ``The Story of the Gorge: How a Broken Dam \& Attempted Winery Created the Gorgeous Amphitheatre.'' September 1, 2019.
+  \item Playmakers Community. ``Five Amazing Amphitheaters That Define Their Communities.'' 2023.
+\end{itemize}
+
+%% =============================================================
+%% STAGE 3 — MISSION PACKAGE
+%% =============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research document on the full history of the Gorge Amphitheatre in George, Washington, covering five integrated dimensions: geological genesis, Wanapum Indigenous history, Bryan founding era, corporate ownership and physical development, and music/cultural legacy. The output is a research document structured for both standalone reading and integration into the GSD ecosystem as a Pacific Northwest cultural heritage reference.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+--------------------------------------------------------------
+
+WAVE 0 (Foundation)
+  [Haiku] Shared schemas: timeline table, ownership table,
+  concert milestone table, source index
+  Duration: 1 session | Sequential
+
+WAVE 1 (Parallel Research Tracks)
+  Track A: [Sonnet] MOD-1 Geology + MOD-2 Indigenous
+  Track B: [Sonnet] MOD-3 Founding + MOD-4 Corporate
+  Duration: 2-3 sessions | Parallel
+        |
+   CAPCOM GATE: Review Indigenous content (Wanapum attribution)
+        |
+WAVE 2 (Synthesis)
+  [Opus] MOD-5 Music Legacy + Cross-module integration
+  Connects geology -> acoustics -> founding discovery
+  Connects Wanapum -> land meaning -> pilgrimage culture
+  Duration: 1 session | Sequential
+
+WAVE 3 (Publication)
+  [Sonnet] LaTeX assembly, XeLaTeX compilation (3 passes)
+  [Sonnet] Index.html generation
+  Duration: 1 session | Sequential
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Schema Layer} (Wave 0) --- Shared data structures: timeline, ownership chain, milestone concerts, festival roster, capacity evolution table
+  \item \textbf{Survey Layer} (Wave 1) --- Five module documents: geological survey, Indigenous history, founding era narrative, corporate history, music legacy
+  \item \textbf{Synthesis Layer} (Wave 2) --- Cross-module integration: geological substrate $\rightarrow$ acoustic discovery arc; Indigenous land relationship $\rightarrow$ pilgrimage culture thread
+  \item \textbf{Publication Layer} (Wave 3) --- Assembled LaTeX PDF, compiled output, index page
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.4cm}L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Geological module & USGS-sourced timeline; basalt/flood dates verified & 800--1,200 words \\
+2 & Indigenous history module & Wanapum-specific; P'n\`a to Heritage Center arc & 900--1,400 words \\
+3 & Founding era module & Bryan narrative with verified dates and capacity milestones & 700--1,000 words \\
+4 & Corporate era module & Full ownership chain with financial data; Mountain Productions & 600--900 words \\
+5 & Music legacy module & DMB/Pearl Jam/Phish records; festival table; 2023 incident; \textit{Enormous} & 1,000--1,500 words \\
+6 & Assembled research document & All five modules integrated; LaTeX-compiled PDF & 40--60 pages \\
+7 & Source bibliography & All citations verified against source quality rules & 25+ sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Shared schema production & None & Haiku & 3K \\
+Geological survey & USGS sources & Sonnet & 8K \\
+Indigenous history & HistoryLink, Grant PUD & Sonnet + Opus review & 10K \\
+Founding era narrative & Seattle Times archive & Sonnet & 7K \\
+Corporate era history & Seattle Times, Grokipedia & Sonnet & 6K \\
+Music legacy compilation & Wikipedia, Spokesman-Review & Sonnet & 12K \\
+Cross-module synthesis & All five modules & Opus & 8K \\
+LaTeX assembly + compile & All components & Sonnet & 6K \\
+Index HTML & PDF output & Sonnet & 2K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task Type} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+Indigenous content review & Opus & Cultural sensitivity requires highest judgment; Wanapum attribution is non-negotiable \\
+Cross-module synthesis & Opus & Connecting geological time to music culture requires architectural thinking \\
+Module production & Sonnet & Structured content assembly from verified sources; reliable at document scale \\
+Schema / scaffolding & Haiku & Repetitive table generation; no judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Model} \\
+\midrule
+0 & Foundation & Schemas, source index & Sequential & Haiku \\
+1A & Geology + Indigenous & MOD-1, MOD-2 & Parallel & Sonnet/Opus \\
+1B & Founding + Corporate & MOD-3, MOD-4 & Parallel & Sonnet \\
+2 & Synthesis & MOD-5, integration & Sequential & Opus \\
+3 & Publication & Assembly, compile & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Timeline schema & Shared geological--historical--music timeline table & Haiku \\
+Ownership chain schema & Bryan $\to$ MCA $\to$ HOB $\to$ Live Nation table & Haiku \\
+Concert milestones schema & Date / artist / significance table template & Haiku \\
+Source index & All 25+ sources catalogued with URL and access date & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Geology and Indigenous (runs in parallel with Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+CRBG documentation & Flood basalt geology, cliff formation, geological timeline & CRAFT-GEO (Sonnet) \\
+Missoula Floods section & Flood events, canyon sculpting, acoustic implications & CRAFT-GEO (Sonnet) \\
+Wanapum history & P'n\`a to Heritage Center; Smohalla; dam impacts & CRAFT-CONTEXT (Sonnet) \\
+Indigenous content review & Attribution accuracy; cultural sensitivity & FLIGHT (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Founding and Corporate (runs in parallel with Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Bryan era narrative & 1980--1993 founding story with dates and capacity milestones & CRAFT-ANALYSIS (Sonnet) \\
+Corporate era section & MCA (\$3.9M) $\to$ HOB $\to$ Live Nation with financial data & EXEC-1 (Sonnet) \\
+Mountain Productions section & Stage construction, permanent structure documentation & EXEC-1 (Sonnet) \\
+White River competition & Auburn amphitheatre context, competitive dynamics & EXEC-1 (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate after Wave 1:} Human review of Indigenous content attribution. Verify: (1) Wanapum cited as ``Wanapum'' throughout, never generic; (2) No specific sacred site coordinates; (3) No cultural knowledge presented without attribution to Wanapum Heritage Center or HistoryLink.org source. \textbf{BLOCK if failed.}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Music legacy module & DMB/Pearl Jam/Phish records; festival table; \textit{Enormous}; 2023 incident & EXEC-2 (Sonnet) \\
+Geological--acoustic arc & Explicit connection: Missoula Floods $\to$ bowl terrain $\to$ Bryan discovery & FLIGHT (Opus) \\
+Indigenous--pilgrimage arc & Wanapum land relationship $\to$ concert pilgrimage culture through-line & FLIGHT (Opus) \\
+Cross-module integration & Ensure no contradictions; add cross-references; through-line draft & INTEG (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+LaTeX assembly & All five modules assembled into full document structure & EXEC-1 (Sonnet) \\
+XeLaTeX compilation & Three-pass compile; TOC, cross-references, LastPage resolved & EXEC-1 (Sonnet) \\
+Source verification & All 25+ citations checked against source quality rules & VERIFY (Sonnet) \\
+Index HTML & Download page with color scheme, file cards, usage instructions & EXEC-2 (Sonnet) \\
+Final delivery & PDF + .tex + index.html presented to user & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Geological data tables computed once in Wave 0 and passed as shared context to both Wave 1 tracks
+  \item Source bibliography built incrementally from Wave 0 schema; each module agent appends rather than rebuilds
+  \item Wanapum attribution rules specified once in FLIGHT system prompt; inherited by all agents via shared context
+  \item Five-minute prompt cache TTL exploited by running parallel Wave 1 tracks within same session window
+  \item Ownership chain schema (Wave 0) reused directly in corporate era module without re-derivation
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0 schemas & 2K & 3K & 5K \\
+MOD-1 Geology & 5K & 8K & 13K \\
+MOD-2 Indigenous & 6K & 10K & 16K \\
+MOD-3 Founding & 5K & 7K & 12K \\
+MOD-4 Corporate & 4K & 6K & 10K \\
+MOD-5 Music Legacy & 8K & 12K & 20K \\
+Synthesis (Opus) & 12K & 8K & 20K \\
+LaTeX assembly & 15K & 6K & 21K \\
+Index HTML & 3K & 2K & 5K \\
+\midrule
+\rowcolor{lightsecondary}
+\textbf{Total Estimated} & \textbf{60K} & \textbf{62K} & \textbf{122K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+--------------------------------------------------------------
+
+[W0: Schemas] ──────┬──────────────────────┐
+                    |                      |
+             [W1A: Geology]        [W1B: Founding]
+             [W1A: Indigenous]     [W1B: Corporate]
+                    |                      |
+              CAPCOM GATE (Indigenous review)
+                    |                      |
+                    └──────────┬───────────┘
+                               |
+                    [W2: Music Legacy]
+                    [W2: Cross-module synthesis]
+                               |
+                    [W3: LaTeX assembly]
+                    [W3: Source verification]
+                    [W3: Index HTML]
+                               |
+                          DELIVERY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} \\
+\midrule
+Safety-critical & Non-negotiable boundaries & 6 & Mandatory & BLOCK \\
+Core functionality & Deliverable acceptance & 18 & Required & BLOCK \\
+Integration & Cross-module validation & 6 & Required & BLOCK \\
+Edge cases & Robustness & 4 & Best-effort & LOG \\
+\midrule
+\rowcolor{lightsecondary}
+Total & & 34 & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations trace to USGS, HistoryLink, Seattle Times archive, Wikipedia with cross-validation, or professional industry sources. Zero entertainment blogs as sole citation. \\
+SC-NUM & Numerical attribution & Every capacity figure, flood discharge, purchase price, and attendance number attributed to a named source. \\
+SC-ADV & No policy advocacy & Document presents venue, geological, and Indigenous history without advocacy for specific policy positions regarding Indigenous land rights, concert venue development, or dam removal. \\
+SC-IND & Indigenous attribution & Every reference to the people whose ancestral territory includes this land uses ``Wanapum'' specifically. No instance of generic ``Indigenous peoples'' or ``Native Americans'' without named nation. \\
+SC-END & Sacred site protection & No GPS coordinates or specific locations of Wanapum cultural or sacred sites published. Petroglyphs referenced by their Ginkgo State Park relocation, not original coordinates. \\
+SC-FACT & 2023 incident factual accuracy & All facts about the Beyond Wonderland shooting (date, fatalities, suspect) match Wikipedia and law enforcement record. No speculation about causes or policy implications. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Geological timeline with USGS-sourced dates & CF-01, CF-02 & Pending \\
+2. Wanapum history nation-specific & SC-IND, CF-03 & Pending \\
+3. Bryan founding era with dates and capacity milestones & CF-04, CF-05 & Pending \\
+4. Corporate ownership chain with financial data & CF-06, SC-NUM & Pending \\
+5. DMB show count with sources and live releases & CF-07, CF-08 & Pending \\
+6. Pearl Jam box set and 1993 concert documented & CF-09 & Pending \\
+7. Festival ecosystem table complete & CF-10, IN-01 & Pending \\
+8. Capacity evolution documented & CF-11, SC-NUM & Pending \\
+9. Pollstar/Billboard awards documented & CF-12 & Pending \\
+10. Bob Dylan 1988 first large crowd documented & CF-13 & Pending \\
+11. 2023 shooting documented factually & SC-FACT, CF-14 & Pending \\
+12. 2026 season documented as present state & CF-15, EC-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent Name} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; Indigenous content oversight; through-line synthesis \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering (already complete); gap fill searches if needed \\
+EXEC-1 & Columbia & MOD-3 Founding + MOD-4 Corporate + LaTeX assembly \\
+EXEC-2 & Cascades & MOD-5 Music Legacy + Index HTML \\
+CRAFT-GEO & Basalt & MOD-1 Geological survey; USGS source integration \\
+CRAFT-CONTEXT & Wanapum & MOD-2 Indigenous history; HistoryLink + Grant PUD sources \\
+VERIFY & Verification & Source quality check; numerical attribution audit \\
+INTEG & Integration & Cross-module reference validation; arc consistency \\
+CAPCOM & HITL Interface & Human approval at Indigenous content gate; final delivery \\
+BUDGET & Resource Manager & Token budget tracking across five sessions \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1) \\
+Total Waves & 4 (0 through 3) \\
+HITL Gates & 1 mandatory (Indigenous content), 1 final delivery \\
+Model Split & Opus: $\sim$30\% (synthesis, sensitivity); Sonnet: $\sim$60\% (production); Haiku: $\sim$10\% (scaffolding) \\
+Estimated Sessions & 2--3 \\
+Estimated Total Tokens & $\sim$122K \\
+Primary Risk & Wanapum attribution accuracy; SC-IND must pass \\
+Output Format & LaTeX PDF + .tex source + index.html \\
+Ready for GSD & Yes --- hand to gsd-skill-creator with this document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``I know every inch of ground out there. I love the place.''}
+
+\hfill --- Pat Coates, Spokane superfan, \textit{Enormous: The Gorge Story} (2021)
+
+\vspace{1em}
+\small\sffamily\textcolor{subtlegray}{The Gorge Amphitheatre is proof that the most powerful acoustic chambers are not engineered. The Missoula Floods carved this bowl 15,000 years ago. Dr.\ Bryan listened. The music followed. Understanding the full history requires standing at the same geological, cultural, and musical layers simultaneously---which is precisely what this mission is built to do.}
+\end{quotebox}
+
+\end{document}

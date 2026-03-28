@@ -1,0 +1,1108 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+%% ── Mood Indigo Color Scheme ──────────────────────────────────────────────────
+%% Primary: deep indigo (Mood Indigo/Duke Ellington — origin of the name)
+%% Secondary: deep crimson (emotional intensity of the music)
+%% Tertiary: warm earth/parchment (late-60s pastoral English sensibility)
+\definecolor{primary}{HTML}{1A237E}
+\definecolor{secondary}{HTML}{880E4F}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{283593}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FCE4EC}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% ── Section Formatting ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── Custom Environments ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── Headers / Footers ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Moody Blues}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Moody Blues -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% TITLE PAGE
+%% ═══════════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Moody Blues\\[0.3em]Origins, Architecture, Legacy}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Birmingham 1964 $\rightarrow$ Rock Hall of Fame 2018}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 28, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles)  |  Estimated: 10--14 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% TABLE OF CONTENTS
+%% ═══════════════════════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION DOCUMENT
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Moody Blues --- Vision Guide}
+
+\metafield{Date:}{March 28, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{Rock and Roll Hall of Fame collections, Decca/Deram archive resources}
+\metafield{Context:}{Cold-start deep research mission; no prior conversation context to harvest}
+
+\subsection{Vision}
+
+The Moody Blues occupy a rare position in the history of recorded music: they are the band that should not have worked. A rhythm-and-blues outfit from Birmingham's working-class circuit, deeply in debt to their record label, handed a commission to produce a promotional stereo demonstration record based on a Dvorak symphony --- and instead, by a series of what Justin Hayward would later call ``wonderful accidents,'' they produced one of the most consequential albums in the development of progressive rock. That record, \textit{Days of Future Passed} (1967), became the blueprint for an entire genre.
+
+What makes the Moody Blues worth studying in depth is not merely the catalog --- sixteen studio albums, seventy million copies sold, eighteen platinum and gold LPs --- but the architectural intelligence embedded in their creative decisions. They understood, perhaps intuitively, that the most powerful territory in music lives in the spaces between established forms. Between R\&B and classical. Between pop single and orchestral suite. Between the rock stage and the philosophy lecture. Between the three-minute single and the seven-minute meditation. They found those spaces and built an entire aesthetic inside them.
+
+Mike Pinder's Mellotron is the technical symbol of this philosophy. The instrument itself is a machine that lives between states: not quite keyboard, not quite orchestra, not quite synthesizer, but a tape-replay device that calls up the ghost of recorded musicians every time a key is pressed. Pinder modified it further --- stripping its rhythm tracks, doubling its orchestral tapes, working with engineer Derek Varnals to create an ``orchestral wave'' sound that the instrument was never designed to produce. He turned a limitation into a signature. The Mellotron became so identified with the Moody Blues that within three years of \textit{Days of Future Passed}, it was the defining sound of progressive rock across the industry, deployed by Yes, Genesis, King Crimson, and dozens of others who traced its usage directly back to Pinder.
+
+Their lyrical world extended this in-between territory into consciousness itself. The classic albums (1967--1972) return obsessively to threshold states: dawn and dusk, waking and dreaming, the edge of understanding, the moment before revelation. ``On the Threshold of a Dream'' names the state precisely. ``In Search of the Lost Chord'' positions the entire act of music-making as a spiritual quest. The day-as-allegory structure of \textit{Days of Future Passed} --- morning as birth, evening as age, night as death --- makes the ordinary cosmological. This was not accident. Graeme Edge's spoken-word \textit{Late Lament} that closes ``Nights in White Satin'' explicitly asks what it means to exist. The band was working philosophically, years before philosophy became a standard prog rock posture.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, labelsep=1em]
+  \item \textbf{Genre origin documentation is fragmented.} The Moody Blues are widely credited as pioneers of progressive rock, yet no single authoritative study traces the precise architectural decisions --- instrumentation, production technique, concept album structure, Mellotron engineering --- that caused \textit{Days of Future Passed} to become the genre's ur-text. The story is scattered across oral histories, liner notes, and rock journalism.
+  
+  \item \textbf{The transformation from R\&B to symphonic rock is poorly understood.} The band's pivot in 1966--1967 was one of the most dramatic creative reinventions in rock history. The departure of Denny Laine and Clint Warwick, the arrival of Justin Hayward and John Lodge, the accidental commission from Decca's stereo promotion department --- these converging events created the classic band, yet the causal chain has never been synthesized as a coherent study.
+  
+  \item \textbf{The Mellotron's role is underexamined.} Pinder's specific modifications to the instrument --- the engineering decisions made with Tony Clarke and Derek Varnals --- created the ``wave sound'' that defined the band's sonic signature and influenced the instrument's subsequent use across the industry. This is a documented but under-studied chapter in music technology history.
+  
+  \item \textbf{The philosophical dimension has been either over-dismissed or over-romanticized.} Critics alternately mocked the band as ``thought-jello'' (New York magazine, 1967) or elevated them to spiritual guides. A calibrated study of the actual lyrical and thematic content --- the specific philosophical traditions drawn upon (Descartes, Leary/Timothy, Eastern mysticism, C.S. Lewis) --- would provide more grounded cultural analysis.
+  
+  \item \textbf{The band's influence genealogy needs formal mapping.} Yes, Genesis, ELO, and Deep Purple are routinely cited as direct descendants. The specific sonic and conceptual pathways --- who borrowed what, when, and how --- have not been systematically documented.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{The Threshold Architecture:} Musical significance emerges at the boundary between established forms. The Moody Blues did not invent classical music, rock, or the concept album --- they found the membrane between them and built a new genre in that space.
+\end{quotebox}
+
+\subsubsection{Domain Map (ASCII)}
+
+\begin{asciibox}
+ TEMPORAL ARC: 1958 - 2025
+ ════════════════════════════════════════════════════════════════
+  El Riot & the Rebels (1958)
+    ├─ R&B Birmingham scene
+    │    └─ M&B5 / Moody Blues formation (May 1964)
+    │         ├─ Denny Laine era: "Go Now" #1 UK (1964-66)
+    │         └─ PIVOT: Hayward + Lodge join (Oct 1966)
+    │              └─ Days of Future Passed (Nov 1967) ←── GENESIS
+    │                   ├─ Mellotron enters rock mainstream
+    │                   ├─ First prog concept album
+    │                   └─ FM radio synergy (1968-72)
+    │
+    ├─ CLASSIC ERA (1968-1974): 7 albums, 6 UK Top 3
+    │    ├─ Threshold Records (1969) ← artistic independence
+    │    ├─ Apollo 15 carries "Threshold" tapes to the moon
+    │    └─ Hiatus (1974-1977)
+    │
+    ├─ REUNION ERA (1977-1991): Moraz replaces Pinder (1978)
+    │    ├─ Long Distance Voyager (1981) #1 US
+    │    └─ Synth-pop adaptation (1986-1991)
+    │
+    └─ LEGACY (1992-2018)
+         ├─ Orchestra tours (1992-2002)
+         ├─ Rock and Roll Hall of Fame induction (2018)
+         └─ Band retires: Edge (2018), dies 2021
+              Last original member (Pinder) dies 2024
+              John Lodge dies 2025
+\end{asciibox}
+
+\subsubsection{Module Architecture (ASCII)}
+
+\begin{asciibox}
+ RESEARCH MODULE MAP
+ ════════════════════════════════════════════════════════
+  [M1] Birmingham Origins      [M2] The Great Transformation
+   R&B roots, M&B5,              1966 lineup change, Hayward/Lodge,
+   formation, Go Now             Decca commission, D.o.F.P.
+        │                               │
+        └──────────────┬────────────────┘
+                       ▼
+              FOUNDATION LAYER
+              (chronology + members)
+                       │
+        ┌──────────────┼────────────────┐
+        ▼              ▼                ▼
+  [M3] Classic Era  [M4] Threshold   [M5] Signature Songs
+  1968-1974 albums  Records &         Nights in White Satin,
+  philosophy themes artistic          FM ecology, charting
+  hiatus/reunion    independence       across 3 decades
+        │              │                │
+        └──────────────┴────────────────┘
+                       │
+                       ▼
+              [M6] Legacy & Influence
+              Yes/Genesis/ELO lineage,
+              Rock Hall 2018, Amiga echo
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Birmingham Origins and the R\&B Era (1958--1966)}
+
+Survey of the Birmingham beat scene that produced the band: El Riot \& the Rebels, Krew Cats, Danny King \& the Dukes, Gerry Levine \& the Avengers. Formation of M\&B5 at the Carlton Ballroom, Erdington. The management trajectory through Tony Secunda, Ridgepride, and Brian Epstein. The ``Go Now'' (1964) breakthrough and subsequent commercial decline. Relationship with the Rolling Stones (touring support), Chuck Berry, and The Kinks. The 1965--1966 fallow period: working-men's clubs, European cabaret circuit, frustration that catalyzed reinvention.
+
+\subsubsection{Module 2: The Great Transformation (1966--1967)}
+
+The precise sequence of the 1966 pivot: Warwick's departure (June 1966), Rod Clark's three-month interim, Laine's departure (October 1966), and the simultaneous arrivals of Justin Hayward and John Lodge. The Decca ``Deramic Stereo'' commission, the attempted Dvorak \textit{New World Symphony} project, and its abandonment in favor of original material. Tony Clarke as producer, Derek Varnals as engineer. Mike Pinder's Mellotron history: working at the Streetly Electronics Mellotron factory, modifying the instrument's tape configuration, introducing it to the Beatles. The specific studio engineering of the \textit{Days of Future Passed} sessions.
+
+\subsubsection{Module 3: The Classic Era --- Albums, Philosophy, and the Hiatus (1968--1977)}
+
+Seven-album run: \textit{In Search of the Lost Chord} (1968), \textit{On the Threshold of a Dream} (1969, UK \#1), \textit{To Our Children's Children's Children} (1969, first Threshold release, carried to the moon by Apollo 15 astronaut Al Worden), \textit{A Question of Balance} (1970, UK \#1, US \#3), \textit{Every Good Boy Deserves Favour} (1971, \#1 UK and US), \textit{Seventh Sojourn} (1972, \#1 US and UK), \textit{Octave} (1978, post-hiatus). Lyrical and philosophical themes: Cartesian doubt (\textit{On the Threshold}), Timothy Leary and LSD consciousness (\textit{Legend of a Mind}), lunar/cosmic imagery, Tolkien-inspired pastoral. The 1974 hiatus rationale and 1977 reunion.
+
+\subsubsection{Module 4: Threshold Records and Artistic Independence}
+
+Formation of Threshold Records (1969), modeled on the Beatles' Apple Records. Gatefold cover design as artistic statement. Distribution partnership retained with Decca/London while creative and business control shifted to the band. Other artists produced for the label (Trapeze, Providence). The Threshold record shop in Cobham, Surrey (operated through 2011). The legal dispute between Pinder and the remaining members over the \textit{Long Distance Voyager} album name rights (1981). How the Threshold model influenced subsequent artist-owned labels.
+
+\subsubsection{Module 5: Signature Songs and the FM Radio Ecology}
+
+Deep study of ``Nights in White Satin'' as a cultural artifact: composition by 19-year-old Hayward (satin bedsheets, unrequited love), Mellotron versus London Festival Orchestra instrumentation (the two groups never actually played simultaneously), the Late Lament poem, three distinct chart lives (1967, 1972, 1979). The FM radio breakout story: regional origin in Seattle, spread through San Francisco to Los Angeles, rise to Billboard \#2 without promotion. ``Tuesday Afternoon,'' ``Question,'' ``The Story in Your Eyes,'' ``Isn't Life Strange,'' and ``I'm Just a Singer (In a Rock and Roll Band)'' as supporting case studies. The FM format's alignment with Decca's Deramic Stereo recording technology.
+
+\subsubsection{Module 6: Legacy, Influence, and Cultural Resonance}
+
+Documented influence on Yes, Genesis, ELO, Deep Purple, and subsequent progressive rock. The Mellotron's proliferation post-1967 as traceable to Pinder's public championing of the instrument. Ivor Novello Award (Pinder, ``A Simple Game,'' 1968). Mike Pinder's work with the Beatles (\textit{Strawberry Fields}, \textit{I Am the Walrus}, \textit{The Fool on the Hill}, \textit{Imagine}). Rock and Roll Hall of Fame induction 2018 (presenter Ann Wilson). Critical reassessment trajectory: from ``ponderous mound of thought-jello'' (1967) to Rock Hall inductees (2018). The band's unusual mortality arc: all five original members deceased by 2024; John Lodge (classic era) died October 2025.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset — Moody Blues Deep Research Mission
+# Fleet Profile | 17 roles
+
+agnus:                         # DMA / Orchestration / Context Management
+  model: claude-opus-4-6
+  role: FLIGHT + ARCH
+  responsibilities:
+    - Mission-level synthesis decisions
+    - Cross-module philosophical integration
+    - Mellotron/FM Radio/Influence lineage judgment calls
+    - Critical reassessment calibration (not over-romanticizing)
+
+denise:                        # Display / Output Rendering
+  model: claude-sonnet-4-6
+  role: EXEC x2 + INTEG + VERIFY
+  responsibilities:
+    - Document production (Stages 1, 2, 3)
+    - Cross-module consistency validation
+    - Source verification and attribution
+
+paula:                         # I/O / Anticipatory / Specialist
+  model: claude-haiku-4-5
+  role: SCOUT + BUDGET + LOG
+  responsibilities:
+    - Web research queue management
+    - Token budget tracking
+    - Commit message generation
+
+craft_agents:
+  - CRAFT-HIST:   Birmingham R&B scene and British beat era
+  - CRAFT-TECH:   Mellotron engineering and studio production
+  - CRAFT-PHIL:   Philosophical and lyrical themes
+  - CRAFT-MUSIC:  Discography, charting, FM radio ecology
+  - CRAFT-LEGACY: Influence genealogy and RRHOF documentation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item Full band history 1958 (precursor bands) through 2025 (Lodge death)
+  \item All 16 studio albums with detailed analysis of the 7 classic-era LPs
+  \item Mellotron technology history and Pinder's engineering contributions
+  \item Threshold Records as an artist-independence case study
+  \item FM radio ecology and its role in the band's US commercial trajectory
+  \item Influence genealogy: Yes, Genesis, ELO, Deep Purple, later prog
+  \item Key songs: ``Nights in White Satin,'' ``Tuesday Afternoon,'' ``Question,'' ``Legend of a Mind,'' ``Isn't Life Strange,'' ``Your Wildest Dreams''
+  \item Rock and Roll Hall of Fame induction 2018
+  \item Critical reception arc from dismissal to reassessment
+  \item Philosophical and literary sources (Descartes, Tolkien, Leary, C.S. Lewis)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Solo careers of individual members beyond their impact on the band narrative
+  \item Bootleg recordings, unreleased material, or unofficial live recordings
+  \item Comprehensive coverage of non-Moody Blues artists on Threshold Records
+  \item Deep musicological analysis (chord structures, modal theory, orchestration scores)
+  \item Post-2018 solo activity of Justin Hayward and Patrick Moraz
+  \item Merchandise, touring revenue, or business financials beyond Threshold Records
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, labelsep=1em]
+  \item \textbf{Formation narrative complete}: Origins traced from El Riot \& the Rebels (1958) through M\&B5 formation (May 1964) with key personnel, venues, and managers named and sourced.
+  \item \textbf{Transformation sequence documented}: 1966 pivot (Warwick/Laine departures, Hayward/Lodge arrivals) and the Decca Deramic Stereo commission story documented with specific dates and attributed quotes.
+  \item \textbf{Mellotron engineering detailed}: Pinder's modifications to the instrument, the Clarke/Varnals ``wave sound'' engineering, and the Beatles introduction documented with named sources.
+  \item \textbf{Classic era discography complete}: All 7 classic-era albums (1967--1972) profiled with release dates, chart positions (UK and US), key tracks, and thematic content.
+  \item \textbf{Threshold Records case study executable}: Label formation rationale, operating structure, notable releases, and legacy documented with sourced data.
+  \item \textbf{``Nights in White Satin'' traced across three chart lives}: 1967, 1972, and 1979 chart trajectories documented; FM breakout origin in Seattle confirmed with sourced attribution.
+  \item \textbf{Influence genealogy mapped}: At minimum Yes, Genesis, ELO, and Deep Purple documented as direct descendants with specific sonic/conceptual pathways identified.
+  \item \textbf{Critical reassessment arc documented}: Key negative reviews (Rolling Stone 1967, New York magazine 1967) and subsequent rehabilitations (Rolling Stone 2007 essential list, RRHOF 2018) documented with sources.
+  \item \textbf{Philosophical theme taxonomy complete}: At least four identified intellectual traditions (Descartes, Leary/Eastern mysticism, C.S. Lewis/Christian, Tolkien/pastoral) traced to specific songs and albums.
+  \item \textbf{All numerical claims attributed}: Every chart position, sales figure, and date attributed to specific primary or secondary source.
+  \item \textbf{Member mortality timeline accurate}: All original members, classic-era members, and post-classic members with birth/death dates and verification.
+  \item \textbf{GSD ecosystem through-line explicit}: Document connects Moody Blues' threshold philosophy to GSD's ``spaces between'' principle in at least two synthesis passages.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Priority} \\
+\midrule
+Deep Audio Analyzer Mission & Production technique overlap; studio engineering parallel & High \\
+GSD Amiga Vision & Architectural leverage theme; doing more with less & High \\
+GSD Mathematical Foundations & Threshold/boundary concepts; unit circle as day-cycle metaphor & Medium \\
+The Space Between (Tibsfox) & Core philosophical alignment: meaning in connections between nodes & High \\
+Seattle Hip-Hop Module 05 & FM radio ecology; Pacific Northwest regional breakout of ``Nights in White Satin'' & Medium \\
+Post-Industrial Network Study & Coil/TG/Industrial lineage partly traces through prog rock deconstruction & Low \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Moody Blues did something that the GSD ecosystem is built to replicate at the level of software architecture: they identified the \textit{space between} two established systems and built a new form of value inside it. Classical music and rock were fully formed traditions. The concept album existed in embryonic form. The Mellotron was a commercial curiosity. FM radio was nascent. None of these things, in isolation, produced what the Moody Blues produced. But the \textit{connections} between them --- the Mellotron as a bridge between keyboard and orchestra, the concept album as a bridge between song and symphony, FM stereo as a bridge between audiophile experience and mass audiences --- created a sustained creative arc that influenced every major progressive rock band that followed.
+
+This is the Amiga Principle as music history. Not the most powerful band, not the most virtuosic, not the most formally trained. The band that found architectural leverage in the threshold --- in the membrane between forms --- and exploited it faithfully for seven years. Their most important instrument was not the Mellotron but the \textit{threshold itself}: the space between what was expected and what was possible, where meaning waits.
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Moody Blues --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides sourced findings for each of the six research modules defined in Stage 1. All numerical claims are attributed; all quotations are identified by speaker and publication. Agents executing research tasks should treat this section as the primary evidential baseline before conducting supplementary web research.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item Rock and Roll Hall of Fame Library and Archive (Cleveland, Ohio)
+  \item Wikipedia: The Moody Blues, Days of Future Passed, List of Band Members, Nights in White Satin, Threshold Records (all accessed March 2026, consistent with their sourced Wikipedia articles)
+  \item Rolling Stone (multiple articles, oral history of ``Nights in White Satin,'' 2018)
+  \item Mix Magazine (``Classic Tracks: Nights in White Satin,'' February 2019)
+  \item Britannica (The Moody Blues entry)
+  \item EBSCO Research Starters (The Moody Blues, music group)
+  \item BrumBeat.net (primary source for Birmingham beat scene detail)
+  \item VocalGroup.org Hall of Fame induction essay
+  \item Ultimate Classic Rock (Days of Future Passed anniversary coverage)
+  \item Pop History Dig (1967--1972 Moody Blues breakout analysis)
+\end{itemize}
+
+\subsection{Module 1 Reference: Birmingham Origins and R\&B Era}
+
+\subsubsection{Pre-Formation: El Riot \& the Rebels and the Birmingham Beat Scene}
+
+The band's story begins in 1958 with the formation of El Riot \& the Rebels in Birmingham, featuring Ray Thomas on vocals and harmonica (``El Riot'') and John Lodge on bass. Keyboardist Mike Pinder joined in early 1963 after returning from army service. The Birmingham beat scene contemporaries included Danny King \& the Dukes (featuring Clint Warwick on bass), Gerry Levine \& the Avengers (featuring Graeme Edge on drums and Roy Wood --- later of the Move and ELO --- on guitar), and Denny \& the Diplomats (featuring Denny Laine and Bev Bevan, also later of the Move and ELO).
+
+When Lodge declined an offer to join a professional band (he was still in college), Thomas and Pinder recruited Edge and Laine, with Warwick completing the lineup. Their first performance was at the Carlton Ballroom on Erdington High Street in May 1964. The Carlton Ballroom later became Mothers, one of Birmingham's most storied rock venues.
+
+\subsubsection{Naming the Band}
+
+The name M\&B5 was chosen in hope of sponsorship from the Mitchells \& Butlers brewery, which owned numerous live music clubs across Birmingham. When the sponsorship failed to materialize, the name evolved to Moody Blues. The name was a dual reference: the M\&B initials and the Duke Ellington song ``Mood Indigo.'' Denny Laine recalled that Mike Pinder coined the final name; Pinder connected ``Moody'' to music's capacity to alter emotional states and ``Blues'' to their genre.
+
+\subsubsection{Management and Record Deal}
+
+Through a connection at The Moathouse Club (an audience member named Tim Hudson who had London management contacts), the band connected with Tony Secunda of Ridgepride, which also controlled Beatles merchandise rights (``Seltaeb'' --- ``Beatles'' spelled backwards). Secunda booked a major tour and secured an engagement at London's Marquee Club, which led to a Decca Records contract within six months of formation. Brian Epstein (the Beatles' manager) subsequently took on the Moody Blues' management.
+
+\subsubsection{``Go Now'' and the First Wave}
+
+``Go Now'' was released in November 1964 and reached \#1 in the UK and the US Top 10 (US chart position: \#10 on the Hot 100). Denny Laine sang lead vocals. The song was a cover of a Bessie Banks composition. It remains the only Denny Laine-era recording to chart as a major hit. The subsequent \textit{Magnificent Moodies} album (1965) did not perform commercially. By spring 1966, chart success had evaporated and the band was reduced to working-men's clubs and European cabaret engagements.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Member} & \tableheader{Dates} & \tableheader{Instrument} & \tableheader{Previous Band} \\
+\midrule
+Denny Laine & 1964--1966 & Guitar/vocals & Denny \& the Diplomats \\
+Clint Warwick & 1964--1966 & Bass/vocals & Danny King \& the Dukes \\
+Mike Pinder & 1964--1978 & Keys/Mellotron & El Riot \& the Rebels \\
+Ray Thomas & 1964--2002 & Flute/vocals & El Riot \& the Rebels \\
+Graeme Edge & 1964--2018 & Drums & Gerry Levine \& the Avengers \\
+John Lodge & 1966--2025 & Bass/vocals & El Riot \& the Rebels \\
+Justin Hayward & 1966--2018 & Guitar/vocals & Marty Wilde's band \\
+Patrick Moraz & 1978--1991 & Keyboards & Yes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: The Great Transformation}
+
+\subsubsection{The 1966 Pivot}
+
+The sequence of departures and arrivals in 1966 was rapid. Clint Warwick left in June 1966, citing that touring kept him from his wife and two young children. Rod Clark replaced him for three months. Denny Laine departed in October 1966 to pursue a solo career (he later joined Paul McCartney's Wings). In the same month, guitarist Justin Hayward (aged 19, formerly of Marty Wilde's backing band) and bassist John Lodge both joined. Hayward had previously sent demo tapes to Eric Burdon of the Animals; Burdon passed them to Mike Pinder, who invited Hayward to London.
+
+\subsubsection{The Decca Commission and Its Subversion}
+
+By autumn 1967, the Moody Blues owed Decca Records several thousand pounds in unrecouped advances. Decca's Deram subsidiary was promoting a new ``Deramic Stereo'' recording format and needed a demonstration LP. The band was assigned to record a rock adaptation of Dvorak's \textit{New World Symphony}. They attempted the assignment but convinced producer Tony Clarke and engineer Derek Varnals that the Dvorak adaptation was misguided. Clarke, impressed by the band's original compositions depicting an archetypal day from morning to night, agreed to record original material instead. Decca executives were not informed until the album was completed. Justin Hayward stated in 1990: ``We all thought we were making some sort of limited-appeal art record'' and expected invitation to ``a few sort of champagne parties.''
+
+\subsubsection{The Mellotron: History and Engineering}
+
+Mike Pinder had worked at Streetly Electronics, the Birmingham company that manufactured the Mellotron, before the band's formation. He could not afford to purchase one until 1967. The Mellotron is an electro-mechanical polyphonic tape-replay keyboard: pressing a key causes a pre-recorded magnetic tape to play. Pinder's modification involved removing the instrument's left-hand rhythm/sound-effects tapes and replacing them with additional right-hand orchestral instrument recordings, effectively creating two banks of orchestral sounds. Engineer Derek Varnals, working with Pinder and Clarke, further modified the playback to produce an overlapping ``wave'' sound rather than the instrument's characteristic sharp cutoff. This engineering decision --- removing the harsh tape-splice transient --- created the ``orchestral wave'' sound that defined the Moody Blues' sonic signature.
+
+Pinder also introduced the Mellotron to the Beatles. He called the group and sent four Mellotrons to their studio; the instrument's influence is audible on ``Strawberry Fields Forever.'' Pinder and Thomas played harmonica on ``I Am the Walrus'' and ``The Fool on the Hill.'' Pinder later contributed tambourine to John Lennon's \textit{Imagine} sessions (on ``I Don't Wanna Be a Soldier Mama'').
+
+\subsubsection{Days of Future Passed: Production and Reception}
+
+\textit{Days of Future Passed} was released on November 17, 1967 on Deram Records. The concept: a full day in the life of an ordinary person, from dawn to night, used as an allegory for the phases of human life itself. Each of the five songwriting members contributed original compositions (Edge contributed spoken-word poetry). Peter Knight, a staff composer at Decca, wrote and conducted the London Festival Orchestra interludes. Crucially, the London Festival Orchestra and the Moody Blues never played together simultaneously: the band recorded their tracks, Peter Knight wrote orchestral arrangements for the gaps, and the orchestra recorded its parts separately.
+
+Initial critical reception was hostile. Rolling Stone called it music ``constantly marred by one of the most startlingly saccharine conceptions of beauty and mysticism.'' New York magazine called it ``a ponderous mound of thought-jello.'' The album reached the UK Top 30 and performed modestly. By 2007, Rolling Stone had included it in its essential albums of 1967 list. Spin cited it as a classic of progressive rock. The Rock and Roll Hall of Fame described it as ``one of the very first progressive rock albums.''
+
+\subsection{Module 3 Reference: Classic Era Discography}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{1.2cm}C{1.2cm}C{1.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{UK} & \tableheader{US} & \tableheader{Notes} \\
+\midrule
+The Magnificent Moodies & 1965 & --- & --- & Laine-era; did not chart \\
+Days of Future Passed & 1967 & 27 & 3 & Genre-founding; 5 years on Billboard \\
+In Search of the Lost Chord & 1968 & 5 & 23 & Timothy Leary; 30 instruments, no orchestra \\
+On the Threshold of a Dream & 1969 & 1 & 20 & First UK \#1; Descartes opening \\
+To Our Children's Children's Children & 1969 & 2 & 14 & First Threshold LP; Apollo 15 carried to moon \\
+A Question of Balance & 1970 & 1 & 3 & First album designed to be performed live \\
+Every Good Boy Deserves Favour & 1971 & 1 & 2 & \#1 UK and US \\
+Seventh Sojourn & 1972 & 5 & 1 & \#1 US; last classic-era LP; 1974 hiatus follows \\
+Octave & 1978 & 6 & 13 & Post-hiatus; Pinder last album \\
+Long Distance Voyager & 1981 & 7 & 1 & Moraz replaces Pinder; \#1 US \\
+The Present & 1983 & 15 & 26 & Synth era \\
+The Other Side of Life & 1986 & 24 & 9 & ``Your Wildest Dreams'' \#1 Adult Contemporary \\
+Sur La Mer & 1988 & 21 & 38 & Visconti production \\
+Keys of the Kingdom & 1991 & 54 & 94 & Moraz final album \\
+Strange Times & 1999 & 41 & 68 & Last studio album \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Philosophical Themes of the Classic Era}
+
+The classic era (1968--1972) drew on a coherent, if eclectic, philosophical tradition. \textit{On the Threshold of a Dream} opens with Graeme Edge's spoken-word piece ``In The Beginning,'' directly referencing Rene Descartes's \textit{cogito ergo sum}: ``I think, therefore I am'' mutates into ``I think. I think I am. Therefore I am. I think?'' --- an enactment of the Cartesian doubt rather than its resolution. \textit{In Search of the Lost Chord} (1968) explored psychedelic consciousness through multiple traditions simultaneously: Ray Thomas's ``Legend of a Mind'' referenced LSD guide Timothy Leary (``Timothy Leary's dead / No, no, no, no. He's outside, looking in''); Pinder's ``Om'' reached toward Eastern meditation; Lodge's ``House of Four Doors'' questioned whether any tradition holds the answer.
+
+The band explicitly acknowledged LSD use in interviews as a spiritual practice of the era rather than mere recreation. Justin Hayward incorporated C.S. Lewis and Christian mysticism alongside Leary's work; Tolkien's imagery of pastoral English landscape and quest narrative was acknowledged as a direct influence on the pastoral acoustic textures of the 1967--1969 period. After the release of \textit{Seventh Sojourn}, Graeme Edge told Rolling Stone: ``We've got two Christians, one Mystic, one Pedantic and one Mess, and we all get on a treat.'' The lyric ``I'm Just a Singer (In a Rock and Roll Band)'' was explicitly written by Lodge in response to fans who had mistaken the Moodies for actual spiritual leaders.
+
+\subsubsection{Apollo 15 and the Cosmic Dimension}
+
+\textit{On the Threshold of a Dream} and \textit{To Our Children's Children's Children} were among the tapes carried by Apollo 15 astronaut Al Worden to the moon in 1971. The \textit{To Our Children's Children's Children} album was explicitly inspired by the moon landing and is organized around a journey from earth into space and back.
+
+\subsection{Module 4 Reference: Threshold Records}
+
+\subsubsection{Formation and Rationale}
+
+Threshold Records was founded in 1969 by the Moody Blues, following the precedent of the Beatles' Apple Records (1968). The name came from their UK \#1 album \textit{On the Threshold of a Dream}. The stated motivation, per Justin Hayward speaking to \textit{Melody Maker}: ``After we'd completed each of our albums we found that we had so many ideas left over\ldots we felt that we weren't able to exercise sufficient control over our material.''
+
+The label operated under a distribution and facilities agreement with Decca Records, giving the band access to Decca's recording studios and distribution network while retaining creative and business control over their releases, gatefold packaging, and artist roster decisions.
+
+\subsubsection{Label Activity and Legacy}
+
+The first Threshold release was \textit{To Our Children's Children's Children} (THS-1, 1969). All subsequent Moody Blues albums through 1999's \textit{Strange Times} bore the Threshold logo. The band also produced other artists: bassist John Lodge produced the rock sextet Trapeze; Providence also recorded for the label. The Threshold record shop in Cobham, Surrey operated from the early 1970s through February 2011. A second shop operated in Swindon in the late 1970s.
+
+The Threshold model anticipated a structural shift in the industry: artist-owned labels, gatefold packaging as artistic expression, and integrated record/retail operations. The Rolling Stones (Rolling Stones Records), Deep Purple (Purple Records), and Led Zeppelin (Swan Song Records) all formed similar structures during the 1970s, with the Moody Blues among the earliest British rock acts to pursue this model.
+
+\subsection{Module 5 Reference: Signature Songs and FM Radio Ecology}
+
+\subsubsection{``Nights in White Satin'' --- Composition}
+
+Written by Justin Hayward at age 19 in Swindon after a girlfriend gave him a gift of satin bedsheets. The song was inspired by unrequited love. Hayward presented it to the band; Pinder's Mellotron arrangement was the decisive moment: ``When I played the other guys `Nights in White Satin' they weren't that impressed until Mike went on the Mellotron and then everyone was kind of interested.''
+
+The song was recorded for \textit{Days of Future Passed} at Decca's Studio 2 in West Hampstead, London, with producer Tony Clarke and engineer Derek Varnals. The London Festival Orchestra provided orchestral accompaniment for the introduction and conclusion. The Mellotron provided all orchestral sounds during the band's performance sections. The London Festival Orchestra and the Moody Blues did not play together at any point during the recording. Graeme Edge's spoken-word ``Late Lament'' poem closes the track.
+
+\subsubsection{Three Chart Lives}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Release} & \tableheader{UK Chart} & \tableheader{US Chart} & \tableheader{Notes} \\
+\midrule
+Nov 1967 & \#19 & \#103 (bubbling) & Initial release; European success (\#1 Holland) \\
+Re-issue 1972 & \#9 & \#2 (Billboard) / \#1 (Cash Box) & FM radio breakout from Seattle; no label promotion \\
+Re-issue 1979 & \#9 & \--- & Third UK charting; \#9 peak \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The FM Radio Breakout}
+
+In 1972, a regional breakout began in Seattle without label promotion. Graeme Edge explained to Rolling Stone (2018): ``There used to be things called regional breakouts. Instead of the big conglomerate radio stations like now, there were these FM guys and they had their own playlists. DJs were stars in those days and they prided themselves on discovering new talent. We had a regional breakout in Seattle. I think after the breakout started happening, there was a decision to re-promote it in other areas. It spread from Seattle down to San Francisco and down to L.A.''
+
+The success was enabled by a specific alignment: the Decca Deramic Stereo recording format produced a wide, immersive stereo picture that FM's wide-band frequency response could fully reproduce, unlike AM radio. Justin Hayward stated: ``I could never see where this record was going to be played, outside of a few enthusiasts that were into sound quality, audiophile people. It wasn't until we got to America in 1968, where FM was just starting, and we said, `Wow, that's how you're meant to hear this.'''
+
+\subsubsection{Additional Signature Songs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{1.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Song} & \tableheader{Year} & \tableheader{Significance} & \tableheader{Writer} \\
+\midrule
+``Go Now'' & 1964 & UK \#1, US \#10; only Laine-era hit & Bessie Banks (cover) \\
+``Tuesday Afternoon'' & 1967 & US \#24 (initial); FM radio staple & Hayward \\
+``Ride My See-Saw'' & 1968 & UK \#8; harder rock texture & Lodge \\
+``Legend of a Mind'' & 1968 & Timothy Leary tribute; flute solo & Thomas \\
+``Question'' & 1970 & UK \#2; rare Moodies ``political'' song & Hayward \\
+``The Story in Your Eyes'' & 1971 & US \#23; harder-edged guitar & Hayward \\
+``Isn't Life Strange'' & 1972 & UK \#13; orchestral pop & Lodge \\
+``I'm Just a Singer'' & 1973 & US \#12; response to guru-worship fans & Lodge \\
+``Your Wildest Dreams'' & 1986 & \#1 US Adult Contemporary; MTV & Hayward \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 6 Reference: Legacy and Influence}
+
+\subsubsection{Influence Genealogy}
+
+The Rock and Roll Hall of Fame documentation states: ``This new sound influenced an entire generation of musicians, including Yes, Genesis, and ELO.'' Deep Purple is additionally cited across multiple sources. The specific pathways:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Yes}: Mellotron use, concept album structure, philosophical lyrical content, symphonic textures --- all direct inheritances. \textit{Close to the Edge} (1972) is architecturally similar to the Moodies' classic-era LPs.
+  \item \textbf{Genesis}: English pastoral imagery, literary reference points, spoken-word elements, theatrical concept albums. Peter Gabriel's pre-Genesis band (Garden Wall) was actively listening to the Moodies.
+  \item \textbf{Electric Light Orchestra (ELO)}: Roy Wood, who had played alongside future Moody Blues members in Birmingham bands, founded ELO explicitly to continue the Moodies' work of blending rock and classical orchestration. Jeff Lynne carried this directly forward.
+  \item \textbf{Deep Purple}: Purple's use of orchestral keyboards and the Royal Philharmonic on the \textit{Concerto for Group and Orchestra} (1969) directly parallels \textit{Days of Future Passed}.
+  \item \textbf{Mellotron proliferation}: Yes (\textit{Starship Trooper}, 1971), King Crimson (\textit{In the Court of the Crimson King}, 1969), Led Zeppelin (``The Rain Song,'' 1973), Barclay James Harvest, and dozens of others adopted the instrument after the Moodies established it as essential prog-rock vocabulary.
+\end{itemize}
+
+\subsubsection{Awards and Critical Reassessment}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Recognition} & \tableheader{Source/Notes} \\
+\midrule
+1968 & Ivor Novello Award & Pinder's ``A Simple Game'' (covered by Four Tops) \\
+1973 & Five gold discs (Australia) & At time, only 8 had ever been awarded in Australia \\
+2006 & Vocal Group Hall of Fame & Inducted \\
+2007 & Essential Albums of 1967 & Rolling Stone (reversal of 1967 review) \\
+2014 & Ultimate Classic Rock Hall of Fame & ``Perennial victims of an unaccountable snubbing'' \\
+2018 & Rock and Roll Hall of Fame & Inducted; Ann Wilson presenter; Ray Thomas honored posthumously \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Member Mortality Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Member} & \tableheader{Born} & \tableheader{Died} & \tableheader{Notes} \\
+\midrule
+Clint Warwick & 1940 & 2004 & Original bassist; not included in RRHOF induction \\
+Ray Thomas & Dec 29, 1941 & Jan 4, 2018 & Founding flautist; inducted posthumously RRHOF \\
+Graeme Edge & Mar 30, 1941 & Nov 11, 2021 & Sole constant member; retired 2018 \\
+Denny Laine & Oct 29, 1944 & Dec 5, 2023 & Original lead vocalist; later Wings \\
+Mike Pinder & Dec 27, 1941 & Apr 24, 2024 & Last surviving original member \\
+Rod Clark & --- & Mar 17, 2025 & Brief 1966 bassist \\
+John Lodge & Jul 20, 1945 & Oct 10, 2025 & Classic-era bassist/vocalist \\
+Justin Hayward & Oct 14, 1946 & --- & Lead songwriter; still active \\
+Patrick Moraz & Jun 24, 1948 & --- & Post-Pinder keyboardist; still active \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Level} & \tableheader{Guidance} \\
+\midrule
+LSD/psychedelic content & ANNOTATE & Factually documented; members acknowledged use for spiritual purposes. Present in historical context without advocacy or glorification. \\
+Timothy Leary references & ANNOTATE & Leary is a documented historical figure; his role in ``Legend of a Mind'' is cultural/musical history, not advocacy for controlled substance use. \\
+Death dates and mortality & GATE & All member deaths verified to multiple sources before inclusion; several deaths occurred 2021--2025, verify current sources. \\
+Critical attribution & GATE & Attribute all negative quotes (e.g., ``thought-jello'') to their specific publications and years; do not present as current critical consensus. \\
+AI-generated music connection & AVOID & Do not editorialize about AI-generated music emulating the Moody Blues' style. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Archive Sources}
+\begin{itemize}[leftmargin=*]
+  \item Rock and Roll Hall of Fame, Moody Blues Inductee Page and Library Guide. Cleveland, Ohio. Accessed March 2026. \url{https://rockhall.com/inductees/moody-blues/}
+  \item Rock and Roll Hall of Fame Library, Progressive Rock Guide. \url{https://library.rockhall.com/progressive_rock}
+  \item Wikipedia: ``The Moody Blues,'' ``Days of Future Passed,'' ``Nights in White Satin,'' ``List of the Moody Blues Band Members,'' ``Threshold Records,'' ``On the Threshold of a Dream.'' Multiple access dates, March 2026.
+\end{itemize}
+
+\subsubsection{Journalism and Long-Form Sources}
+\begin{itemize}[leftmargin=*]
+  \item Rolling Stone. ``The Moody Blues' Nights in White Satin: An Oral History.'' August 2020. Hayward, Pinder, Edge interviews. \url{https://www.rollingstone.com/music/music-features/}
+  \item Rolling Stone. ``Rock Hall of Fame 2018 Recap.'' June 2018. Ann Wilson presenter quote.
+  \item Mix Magazine. ``Classic Tracks: The Moody Blues' Nights in White Satin.'' Matt Hurwitz. February 2019. Varnals and Clarke engineering detail.
+  \item Ultimate Classic Rock. ``How Moody Blues Broke the Rules on Days of Future Passed.'' November 2022.
+  \item Pop History Dig. ``The Moody Blues Breakout Music: 1967--1972.'' Detailed chart analysis.
+  \item SongwriterUniverse. Justin Hayward interview: stereo recording and FM radio account.
+  \item Den of Geek. ``The Moody Blues Offered a Different Kind of Soul Music.'' May 2018. Philosophical content analysis.
+  \item BrumBeat.net. Birmingham beat scene primary source documentation.
+  \item Encyclopedia.com (Contemporary Musicians). Moody Blues entry. Threshold Records history.
+  \item EBSCO Research Starters. ``The Moody Blues (music group).'' Academic overview.
+  \item VocalGroup.org Hall of Fame. Moody Blues induction essay.
+  \item Britannica. ``The Moody Blues.'' Encyclopedic overview with influence documentation.
+\end{itemize}
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on the Moody Blues covering all six modules (Birmingham Origins, The Great Transformation, Classic Era, Threshold Records, Signature Songs/FM Radio, Legacy/Influence), fully sourced, with integrated cross-module synthesis connecting the band's architectural creative decisions to the GSD ecosystem's ``spaces between'' philosophy. The final deliverable shall serve both as a standalone research reference and as a chapter in the GSD College of Knowledge music history curriculum.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+ WAVE EXECUTION ARCHITECTURE
+ ════════════════════════════════════════════════════════════════
+  WAVE 0: Foundation (Sequential | Haiku)
+  ├─ Shared member chronology schema
+  ├─ Discography index with chart data
+  └─ Source validation index
+
+  WAVE 1A: Origins + Transformation (Parallel Track A | Sonnet)
+  ├─ Module 1: Birmingham Origins and R&B Era
+  └─ Module 2: Great Transformation (1966-67 pivot + DoFP)
+
+  WAVE 1B: Classic + Threshold (Parallel Track B | Sonnet+Opus)
+  ├─ Module 3: Classic Era Discography and Philosophy
+  └─ Module 4: Threshold Records Case Study
+
+  ┌── HITL CAPCOM GATE ──────────────────────────────────────┐
+  │  Scope review: philosophical content calibration         │
+  │  LSD/Leary framing review before Wave 2                  │
+  └──────────────────────────────────────────────────────────┘
+
+  WAVE 1C: Songs + Legacy (Parallel Track C | Sonnet+Opus)
+  ├─ Module 5: Signature Songs and FM Radio Ecology
+  └─ Module 6: Influence Genealogy and Cultural Resonance
+
+  WAVE 2: Synthesis (Sequential | Opus)
+  ├─ Cross-module integration
+  ├─ GSD through-line passages
+  └─ Amiga Principle / Spaces Between connection points
+
+  ┌── HITL CAPCOM GATE ──────────────────────────────────────┐
+  │  Full draft review before publication wave               │
+  └──────────────────────────────────────────────────────────┘
+
+  WAVE 3: Publication + Verification (Sequential | Sonnet)
+  ├─ LaTeX compilation (3 passes)
+  ├─ Source verification sweep
+  └─ Final PDF + index.html delivery
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer}: Shared schemas, member chronology, discography index, source index
+  \item \textbf{Survey Layer}: Module-by-module research compilation (Waves 1A, 1B, 1C)
+  \item \textbf{Synthesis Layer}: Cross-module integration and GSD through-line (Wave 2)
+  \item \textbf{Publication Layer}: Document assembly, verification, and delivery (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Owner} \\
+\midrule
+1 & Foundation schema set & Member timeline + discography index complete; source index seeded & EXEC-A (Haiku) \\
+2 & Module 1 survey & Birmingham origins, naming, management, Go Now; all claims sourced & EXEC-A (Sonnet) \\
+3 & Module 2 survey & 1966 pivot, Decca commission, Mellotron engineering; quotes attributed & EXEC-A (Sonnet) \\
+4 & Module 3 survey & Classic era 7 albums with charts, philosophy themes, Apollo 15 & EXEC-B (Sonnet) \\
+5 & Module 4 survey & Threshold Records formation, roster, retail, legacy model & EXEC-B (Sonnet) \\
+6 & Module 5 survey & Nights in White Satin composition, 3 chart lives, FM breakout & EXEC-B (Opus) \\
+7 & Module 6 survey & Influence genealogy (Yes/Genesis/ELO/DP), RRHOF 2018, critical arc & EXEC-B (Opus) \\
+8 & Synthesis document & All modules integrated; 2 GSD through-line passages; CAPCOM approved & FLIGHT (Opus) \\
+9 & Final LaTeX PDF & 3-pass XeLaTeX compilation; no errors; TOC, headers, all tables & EXEC-A (Sonnet) \\
+10 & index.html & Download cards, usage instructions, recompile guide & EXEC-A (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schemas & None & Haiku & 2,000 \\
+Module 1: Origins & Schemas & Sonnet & 8,000 \\
+Module 2: Transformation & Schemas, M1 & Sonnet & 12,000 \\
+Module 3: Classic Era & Schemas, M2 & Sonnet & 15,000 \\
+Module 4: Threshold & Schemas, M3 & Sonnet & 8,000 \\
+Module 5: Songs/FM & Schemas, M3 & Opus & 12,000 \\
+Module 6: Legacy & All modules & Opus & 12,000 \\
+Cross-module synthesis & All modules & Opus & 10,000 \\
+LaTeX assembly & All modules, synthesis & Sonnet & 8,000 \\
+Verification sweep & All & Sonnet & 4,000 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & & \textbf{$\sim$91,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task Type} & \tableheader{Model} & \tableheader{\% Budget} & \tableheader{Rationale} \\
+\midrule
+Philosophical synthesis, LSD/Leary calibration, influence genealogy judgment & Opus & 30\% & Judgment-heavy; requires calibration between over-romanticizing and dismissal \\
+Module surveys, document assembly, chart tables, source verification & Sonnet & 60\% & Structured content production; high reliability \\
+Schema creation, template setup, scaffolding, commit messages & Haiku & 10\% & Lightweight, fast, deterministic structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Models} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, indices \\
+1A & Origins + Transform & Parallel & Sonnet & Modules 1, 2 \\
+1B & Classic + Threshold & Parallel & Sonnet/Opus & Modules 3, 4 \\
+1C & Songs + Legacy & Parallel & Sonnet/Opus & Modules 5, 6 \\
+-- & CAPCOM Gate 1 & Sequential & -- & Human approval \\
+2 & Synthesis & Sequential & Opus & Integrated document \\
+-- & CAPCOM Gate 2 & Sequential & -- & Human approval \\
+3 & Publication & Sequential & Sonnet & PDF + HTML delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Member chronology schema & JSON/YAML: name, birth, death, instruments, dates active, prior bands & BUDGET (Haiku) \\
+Discography index & All 16 albums: year, label, UK chart, US chart, key tracks & LOG (Haiku) \\
+Source index & 20+ sources indexed: type, URL, access date, reliability tier & SCOUT (Haiku) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (Modules 1 \& 2):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Spec} & \tableheader{Agent} \\
+\midrule
+M1: Birmingham origins & Full pre-formation narrative; naming story; Go Now chart detail & CRAFT-HIST (Sonnet) \\
+M2: 1966 pivot & Departure sequence; Hayward/Lodge arrivals; Decca commission story & CRAFT-HIST (Sonnet) \\
+M2: Mellotron engineering & Pinder modifications; Clarke/Varnals wave sound; Beatles introduction & CRAFT-TECH (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Modules 3 \& 4):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Spec} & \tableheader{Agent} \\
+\midrule
+M3: Classic discography & All 7 classic LPs with charts and key tracks & CRAFT-MUSIC (Sonnet) \\
+M3: Philosophy taxonomy & Identify all intellectual traditions; map to specific songs & CRAFT-PHIL (Opus) \\
+M4: Threshold Records & Formation, roster, retail shops, legacy model & CRAFT-HIST (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (Modules 5 \& 6):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Spec} & \tableheader{Agent} \\
+\midrule
+M5: Nights in White Satin & Composition, 3 chart lives, FM breakout origin (Seattle) & CRAFT-MUSIC (Opus) \\
+M5: FM radio ecology & Deramic Stereo / FM alignment; regional breakout mechanics & CRAFT-MUSIC (Sonnet) \\
+M6: Influence genealogy & Yes/Genesis/ELO/Deep Purple pathways; Mellotron proliferation & CRAFT-LEGACY (Opus) \\
+M6: Critical arc & 1967 dismissal $\rightarrow$ 2007 rehabilitation $\rightarrow$ RRHOF 2018 & CRAFT-LEGACY (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Spec} & \tableheader{Agent} \\
+\midrule
+Cross-module integration & Trace causal chains: Birmingham $\to$ pivot $\to$ DoFP $\to$ FM $\to$ RRHOF & FLIGHT (Opus) \\
+GSD through-line 1 & Threshold philosophy / ``spaces between'' connection in Vision & FLIGHT (Opus) \\
+GSD through-line 2 & Amiga Principle echo: architectural leverage over brute force & FLIGHT (Opus) \\
+LSD/Leary calibration & Ensure historical framing; neither advocacy nor dismissal & FLIGHT (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Shared attribute layer}: Member chronology schema computed once in Wave 0; all subsequent modules reference it without recomputing.
+  \item \textbf{Discography index as cache anchor}: All chart references in Modules 3, 5, and 6 pull from Wave 0 index rather than independent lookups.
+  \item \textbf{5-minute TTL window}: Waves 1A, 1B, and 1C designed to complete within 5 minutes each so shared context (source index, schema) remains in cache across parallel track starts.
+  \item \textbf{Source index pre-seeded}: SCOUT completes source index in Wave 0 so all module agents have pre-validated source list; no duplicate validation work.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Est. Tokens} & \tableheader{\% of Total} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 6,000 & 7\% & Foundation schemas (Haiku) \\
+Wave 1A & 20,000 & 22\% & Origins + Transformation (Sonnet) \\
+Wave 1B & 23,000 & 25\% & Classic Era + Threshold (Sonnet/Opus) \\
+Wave 1C & 24,000 & 26\% & Songs + Legacy (Sonnet/Opus) \\
+Wave 2 & 10,000 & 11\% & Synthesis (Opus) \\
+Wave 3 & 8,000 & 9\% & Publication (Sonnet) \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{91,000} & \textbf{100\%} & 10--14 context windows (4--5 sessions) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+ Wave 0: Foundation
+   ├─ member_chronology.yaml ──────────────────────────┐
+   ├─ discography_index.yaml ──────────────────────────┤
+   └─ source_index.yaml ───────────────────────────────┤
+          │                                            │
+   Wave 1A (Track A)           Wave 1B (Track B)       │
+   ├─ module_01_birmingham      ├─ module_03_classic    │
+   └─ module_02_transform       └─ module_04_threshold  │
+          │                            │               │
+          │                     Wave 1C (Track C)       │
+          │                     ├─ module_05_songs      │
+          │                     └─ module_06_legacy     │
+          └──────────────────────┬────────────────┘   │
+                                 │                     │
+                          CAPCOM GATE 1               │
+                                 │                     │
+                          Wave 2: Synthesis ←──────────┘
+                          ├─ synthesis_draft
+                          └─ through_line_passages
+                                 │
+                          CAPCOM GATE 2
+                                 │
+                          Wave 3: Publication
+                          ├─ moody_blues_mission.pdf
+                          ├─ moody_blues_mission.tex
+                          └─ index.html
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Scope} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & Source quality, numerical attribution, LSD framing \\
+Core functionality & 20 & Required & BLOCK & One test per deliverable + success criterion \\
+Integration & 6 & Required & BLOCK & Cross-module consistency, causal chain integrity \\
+Edge cases & 6 & Best-effort & LOG & Minority views, data gaps, disputed facts \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{38} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to Rock and Roll Hall of Fame, named journalism (Rolling Stone, Mix Magazine, etc.), or academic sources. Zero entertainment blogs or unsourced fan wikis as primary sources. \\
+SC-NUM & Numerical attribution & Every chart position, sales figure, date, and album count attributed to a specific named source. No unattributed statistics. \\
+SC-ADV & No policy advocacy & LSD/Leary content presented as documented historical cultural fact, not as advocacy. No endorsement of substance use. \\
+SC-LSD & LSD calibration & Timothy Leary and psychedelic references framed historically (``the band acknowledged use as spiritual practice of the era''); not romanticized or moralized. \\
+SC-MORT & Member death verification & All death dates cross-verified to at least two sources. Edge (2021), Laine (2023), Pinder (2024), Lodge (2025) confirmed. \\
+SC-CRIT & Critical attribution & Negative quotes (``thought-jello,'' ``saccharine'') attributed to specific publication and year; presented as historical critical position, not current consensus. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix (Selected Criteria)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Formation narrative complete & CF-01, CF-02 & Pending \\
+2. Transformation sequence documented & CF-03, CF-04, SC-NUM & Pending \\
+3. Mellotron engineering detailed & CF-05, CF-06 & Pending \\
+4. Classic era discography complete & CF-07, CF-08 & Pending \\
+5. Threshold Records case study & CF-09, IN-01 & Pending \\
+6. ``Nights'' three chart lives traced & CF-10, CF-11, SC-NUM & Pending \\
+7. Influence genealogy mapped & CF-12, CF-13, IN-02 & Pending \\
+8. Critical reassessment arc & CF-14, SC-CRIT & Pending \\
+9. Philosophical theme taxonomy & CF-15, SC-ADV, SC-LSD & Pending \\
+10. Numerical claims attributed & SC-NUM & Pending \\
+11. Mortality timeline accurate & SC-MORT & Pending \\
+12. GSD through-line explicit & IN-05, IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at CAPCOM gates; synthesis oversight \\
+ARCH & Architecture & Cross-cutting structural decisions; GSD through-line integration \\
+PLAN & Planner & Wave decomposition; parallel track dependency management \\
+TOPO & Topology & Agent team structure; mid-mission reallocation if needed \\
+SCOUT & Research Agent & Web research queue; source validation; gap-fill searches \\
+EXEC-A & Executor (Origins) & Modules 1, 2, 5; LaTeX assembly; index.html \\
+EXEC-B & Executor (Classic) & Modules 3, 4, 6; document production \\
+CRAFT-HIST & History Specialist & Birmingham R\&B scene, British beat era, management history \\
+CRAFT-TECH & Tech Specialist & Mellotron engineering, Streetly Electronics, studio production \\
+CRAFT-PHIL & Philosophy Specialist & Lyrical themes, intellectual traditions, consciousness motifs \\
+CRAFT-MUSIC & Music Specialist & Discography, charting, FM radio ecology, song analysis \\
+CRAFT-LEGACY & Legacy Specialist & Influence genealogy, RRHOF documentation, critical arc \\
+INTEG & Integration Agent & Cross-module consistency; no contradictions between modules \\
+VERIFY & Verification & Source validation; accuracy against primary sources \\
+CAPCOM & HITL Interface & Human approval at Wave 1$\to$2 and Wave 2$\to$3 gates \\
+SURGEON & Health Monitor & Research quality degradation detection; flag hallucination risk \\
+BUDGET & Resource Manager & Token budget tracking; session planning across 4--5 sessions \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 roles) \\
+Research Modules & 6 \\
+Parallel Tracks & 3 (Waves 1A, 1B, 1C) \\
+CAPCOM Gates & 2 \\
+Total Estimated Tokens & $\sim$91,000 \\
+Context Windows & 10--14 \\
+Sessions & 4--5 \\
+Opus Allocation & $\sim$30\% (synthesis, philosophy, legacy) \\
+Sonnet Allocation & $\sim$60\% (surveys, assembly, verification) \\
+Haiku Allocation & $\sim$10\% (schemas, scaffolding) \\
+Safety-Critical Tests & 6 (all BLOCK) \\
+Total Tests & 38 \\
+Primary Deliverable & LaTeX PDF + .tex source + index.html \\
+Target College of Knowledge Section & Music History / Progressive Rock Origins \\
+GSD Ecosystem Alignment & ``Spaces Between'' / Amiga Principle \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+%% ── Closing Quote ─────────────────────────────────────────────────────────────
+\vspace{1.5em}
+\begin{quotebox}
+\textit{``We were lower middle class English boys singing about life in the deep south of the USA and it wasn't honest. As soon as we began to express our own feelings and to create our own music our fortunes changed.''}
+
+\vspace{0.5em}
+--- Justin Hayward, Los Angeles Times, 1990
+
+\vspace{1em}
+The spaces between: not between Birmingham and the Deep South --- between what you were assigned to be and what you were actually capable of. The Moody Blues found that space in 1966. Every song they wrote afterward lived there. The threshold is not a problem to be solved. It is where the work happens.
+\end{quotebox}
+
+\end{document}
