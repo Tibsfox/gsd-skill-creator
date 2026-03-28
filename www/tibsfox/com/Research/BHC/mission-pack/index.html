@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Hole Catalog & Mapping — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary:     #311B92;
+      --secondary:   #0277BD;
+      --tertiary:    #F9A825;
+      --accent:      #4527A0;
+      --light-bg:    #EDE7F6;
+      --card-bg:     #D1C4E9;
+      --text:        #212121;
+      --subtle:      #757575;
+      --border:      #BDBDBD;
+      --white:       #FFFFFF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #F5F3FF;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 60%, var(--secondary) 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    header .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.82);
+      font-style: italic;
+      margin-bottom: 1.25rem;
+    }
+
+    header .meta-row {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    header .meta-row span strong {
+      color: var(--tertiary);
+    }
+
+    .pipeline {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .pipeline .step {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      padding: 0.3rem 0.8rem;
+    }
+
+    .pipeline .arrow { color: var(--tertiary); font-size: 1rem; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid rgba(49,27,146,0.2);
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(49,27,146,0.18);
+    }
+
+    .card .file-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card .file-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .card .file-desc {
+      font-size: 0.82rem;
+      color: var(--subtle);
+      line-height: 1.5;
+    }
+
+    .card .file-size {
+      margin-top: 0.75rem;
+      font-size: 0.76rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .contents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 700px) { .contents-grid { grid-template-columns: 1fr; } }
+
+    .stage-block {
+      background: white;
+      border-radius: 6px;
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.1rem;
+    }
+
+    .stage-block:nth-child(2) { border-color: var(--secondary); }
+    .stage-block:nth-child(3) { border-color: var(--tertiary); }
+
+    .stage-block .stage-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .stage-block:nth-child(2) .stage-label { color: var(--secondary); }
+    .stage-block:nth-child(3) .stage-label { color: #8a6000; }
+
+    .stage-block ul {
+      list-style: none;
+      padding: 0;
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: var(--subtle);
+    }
+
+    .usage-steps {
+      counter-reset: steps;
+      list-style: none;
+      padding: 0;
+    }
+
+    .usage-steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .usage-steps li::before {
+      content: counter(steps);
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      font-size: 0.75rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .code-block {
+      background: #1A1A2E;
+      color: #C5CAE9;
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.8rem;
+      padding: 1rem 1.2rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      line-height: 1.65;
+      margin-top: 0.5rem;
+    }
+
+    .quote {
+      background: var(--light-bg);
+      border-left: 4px solid var(--primary);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 6px 6px 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--accent);
+      margin-top: 2rem;
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-style: normal;
+      font-size: 0.78rem;
+      color: var(--subtle);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--light-bg);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-right: 0.3rem;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">GSD Research Mission Package</div>
+  <h1>Black Hole Catalog &amp; Mapping</h1>
+  <div class="subtitle">Known Black Holes Across the Observable Universe — A Deep Research Study</div>
+  <div class="meta-row">
+    <span><strong>Date:</strong> March 27, 2026</span>
+    <span><strong>Profile:</strong> Squadron (12 roles)</span>
+    <span><strong>Waves:</strong> 5 (W0 + W1A/B + W2 + W3)</span>
+    <span><strong>Windows:</strong> 8–12 context windows</span>
+  </div>
+  <div class="pipeline">
+    <span class="step">Vision</span>
+    <span class="arrow">→</span>
+    <span class="step">Research</span>
+    <span class="arrow">→</span>
+    <span class="step">Mission</span>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">📦 Mission Files</h2>
+  <div class="cards">
+    <a class="card" href="blackhole_mission.pdf" download>
+      <div class="file-icon">📄</div>
+      <div class="file-name">blackhole_mission.pdf</div>
+      <div class="file-desc">Complete 25-page mission package: Vision Guide, Research Reference, and Mission Package with full catalog tables and wave execution plan.</div>
+      <div class="file-size">PDF · 25 pages · XeLaTeX compiled</div>
+    </a>
+    <a class="card" href="blackhole_mission.tex" download>
+      <div class="file-icon">🧾</div>
+      <div class="file-name">blackhole_mission.tex</div>
+      <div class="file-desc">Full LaTeX source. Recompile to update, extend, or remix. All tables, ASCII diagrams, and bibliography are editable.</div>
+      <div class="file-size">.tex source · XeLaTeX + DejaVu fonts</div>
+    </a>
+  </div>
+
+  <h2 class="section-title">📋 Contents</h2>
+  <div class="contents-grid">
+    <div class="stage-block">
+      <div class="stage-label">Stage 1 — Vision Guide</div>
+      <ul>
+        <li>Mission metadata</li>
+        <li>Narrative vision (4 paragraphs)</li>
+        <li>5-problem problem statement</li>
+        <li>Mass taxonomy ASCII diagram</li>
+        <li>5 research modules</li>
+        <li>Chipset YAML configuration</li>
+        <li>12 success criteria</li>
+        <li>The Through-Line</li>
+      </ul>
+    </div>
+    <div class="stage-block">
+      <div class="stage-label">Stage 2 — Research Reference</div>
+      <ul>
+        <li>Stellar BH catalog (selected)</li>
+        <li>LIGO GW detection summary</li>
+        <li>IMBH candidates table</li>
+        <li>SMBH catalog (10+ named)</li>
+        <li>Detection method taxonomy</li>
+        <li>Dynamics phenomena (5 types)</li>
+        <li>Safety &amp; sensitivity notes</li>
+        <li>Full source bibliography</li>
+      </ul>
+    </div>
+    <div class="stage-block">
+      <div class="stage-label">Stage 3 — Mission Package</div>
+      <ul>
+        <li>Milestone specification</li>
+        <li>Wave architecture diagram</li>
+        <li>8 deliverables table</li>
+        <li>Component breakdown</li>
+        <li>Wave execution plan (W0–W3)</li>
+        <li>Cache optimization strategy</li>
+        <li>Test plan + safety-critical tests</li>
+        <li>Squadron crew manifest (12 roles)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title">🚀 How to Use This Package</h2>
+  <ol class="usage-steps">
+    <li>Open the PDF and review Stage 1 (Vision) to confirm scope aligns with your needs. Adjust the success criteria or scope boundaries if necessary before handing off.</li>
+    <li>Hand the PDF to <strong>gsd-skill-creator</strong> (Claude Code) with the directive: <em>"Execute this research mission starting at Wave 0."</em></li>
+    <li>The orchestrator will initialize the catalog schema, index the Chandra press archive, then launch parallel Wave 1A (Stellar + IMBH) and Wave 1B (SMBH + Detection).</li>
+    <li>Approve each CAPCOM gate (4 total) before the next wave proceeds. Gate 2 (post-Wave 1) is the most important: confirm module completeness before Opus synthesis begins.</li>
+    <li>Wave 3 delivers the final catalog PDF and machine-readable JSON/CSV export. The Chandra cross-index is included as a separate reference file.</li>
+  </ol>
+
+  <h2 class="section-title">🔧 Recompile the LaTeX Source</h2>
+  <div class="code-block">
+# Requires XeLaTeX + DejaVu fonts (pre-installed on Ubuntu 24)
+# Three passes required for TOC + cross-references + lastpage
+
+xelatex -interaction=nonstopmode blackhole_mission.tex
+xelatex -interaction=nonstopmode blackhole_mission.tex
+xelatex -interaction=nonstopmode blackhole_mission.tex
+
+# Font fallback if DejaVu unavailable:
+# Replace DejaVu Serif/Sans/Mono with Liberation Serif/Sans/Mono
+# in the \setmainfont / \setsansfont / \setmonofont lines
+  </div>
+
+  <div class="section-title" style="margin-top:2rem;">🏷️ Tags</div>
+  <div>
+    <span class="tag">Astrophysics</span>
+    <span class="tag">Space/Physics</span>
+    <span class="tag">Chandra</span>
+    <span class="tag">LIGO</span>
+    <span class="tag">EHT</span>
+    <span class="tag">Squadron</span>
+    <span class="tag">Deep Research</span>
+    <span class="tag">Catalog</span>
+    <span class="tag">Black Holes</span>
+    <span class="tag">Multi-Messenger</span>
+  </div>
+
+  <div class="quote">
+    "The no-hair theorem tells us that a black hole is described entirely by three numbers: mass, charge, and spin. From this minimal description, the universe generates everything — accretion disks painting the X-ray sky, jets spanning millions of light-years, gravitational waves rippling across the cosmos. This catalog is an act of faithful listening: recording every signature these minimal objects leave in the instruments we have aimed at them."
+    <cite>— GSD Black Hole Catalog Mission, Vision Through-Line</cite>
+  </div>
+
+</main>
+
+<footer>
+  GSD Ecosystem · Research Mission Package · Black Hole Catalog &amp; Mapping · March 27, 2026<br/>
+  Primary source: NASA/CXC Chandra X-ray Observatory Press Archive · chandra.harvard.edu/press/category/blackholes.html
+</footer>
+
+</body>
+</html>
