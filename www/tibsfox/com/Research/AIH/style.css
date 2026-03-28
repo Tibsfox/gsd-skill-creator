@@ -1,0 +1,206 @@
+/* AIH — Horizon Orange / Deep Blue / Twilight Gradient theme, AI Intelligence Horizon
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --horizon-orange: #E65100;
+  --horizon-light: #FFF3E0;
+  --horizon-mid: #EF6C00;
+  --horizon-dark: #BF360C;
+  --deep-blue: #0D47A1;
+  --deep-light: #E3F2FD;
+  --deep-mid: #1565C0;
+  --twilight-dark: #1A237E;
+  --twilight-light: #E8EAF6;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--deep-blue);
+  --link-hover: var(--twilight-dark);
+  --accent: var(--deep-blue);
+  --accent-light: var(--deep-light);
+  --accent-dark: var(--twilight-dark);
+  --card-bg: white;
+  --card-border: #B0BEC5;
+  --card-shadow: rgba(13,71,161,0.12);
+  --border: #B0BEC5;
+  --parchment: #ECEFF1;
+}
+
+/* ===================================================
+   2. HEADER -- horizon gradient (orange to deep blue)
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #BF360C 0%, #E65100 20%, #1565C0 55%, #0D47A1 75%, #1A237E 100%);
+  border-bottom: 4px solid var(--horizon-orange);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 20% 60%, rgba(230,81,0,0.2) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 40%, rgba(13,71,161,0.2) 0%, transparent 55%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #FFF3E0; }
+header .subtitle { color: #FFCC80; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--twilight-dark);
+  border-bottom-color: #ECEFF1;
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--deep-blue); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--horizon-light);
+  border-left: 4px solid var(--horizon-orange);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--twilight-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(13,71,161,0.04); }
+tr:hover { background: rgba(13,71,161,0.08); }
+
+pre {
+  background: #0d1117;
+  color: #FFCC80;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--horizon-orange);
+}
+code {
+  background: var(--deep-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--deep-blue);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #B0BEC5;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(13,71,161,0.12); border-color: var(--deep-blue); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #B0BEC5;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--deep-blue);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-history { background: var(--horizon-light); color: var(--horizon-orange); }
+.tag-transformer { background: var(--deep-light); color: var(--deep-blue); }
+.tag-frontier { background: #F3E5F5; color: #7B1FA2; }
+.tag-agentic { background: #E8F5E9; color: #2E7D32; }
+.tag-alignment { background: #FEF2F2; color: #B71C1C; }
+.tag-college { background: var(--twilight-light); color: var(--twilight-dark); }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.protocol-diagram {
+  background: #0d1117;
+  color: #FFCC80;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+  border-left: 3px solid var(--horizon-orange);
+}
+
+.cross-links {
+  background: white;
+  border: 1px solid #B0BEC5;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--deep-blue); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--deep-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--deep-blue);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #BBDEFB; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
