@@ -1,0 +1,967 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Color Scheme: Technology ---
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Multi-Cluster Federation \& Service Mesh}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% --- Hyperlinks ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Multi-Cluster Federation and Service Mesh -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ============================================================
+\begin{document}
+
+% --- Title Page ---
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Multi-Cluster Federation\\[0.3em]\& Service Mesh Patterns}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{FoxCompute Distributed Deployment Architecture}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \ | \ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \ | \ Estimated: 8 context windows across 3 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Mission Scope: Federation control planes, cross-cluster mesh, Day-2 operations, FoxCompute integration}}
+\end{center}
+\newpage
+
+% --- Table of Contents ---
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Multi-Cluster Federation \& Service Mesh --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{gsdmeshprototypespec.pdf, FoxCompute Amiga-node topology, GSD mesh cluster 10-node spec}
+\metafield{Context:}{The FoxCompute distributed deployment model is built on the Amiga Principle --- specialized execution paths produce staggering capability through architectural leverage. But a single-cluster K8s story cannot support the geographic distribution, sovereign data requirements, and workload isolation that FoxCompute demands. This mission fills that gap.}
+
+\subsection{Vision}
+
+Kubernetes was designed to be remarkable at one thing: orchestrating containers inside a single administrative domain. It succeeded brilliantly. But the FoxCompute architecture is not a single administrative domain. It is a federation of islands --- BC coast nodes, valley compute clusters, edge inference boxes, a future spine stretching south --- each with different ownership, different connectivity, different regulatory context, different thermal and power profiles. Single-cluster Kubernetes treats all of this as one undifferentiated pool. That is the wrong model.
+
+The right model is what the internet itself figured out decades ago: peers who speak a common protocol, maintain their own sovereignty, and cooperate on terms they negotiate. The emerging generation of Kubernetes federation tools --- Liqo, Karmada, Admiralty, Cilium ClusterMesh --- is finally arriving at this vision. They allow cluster operators to peer clusters the way autonomous systems peer on the internet: establishing trust, advertising capacity, offloading workloads across boundaries, and withdrawing that trust cleanly when circumstances change.
+
+The service mesh layer sits above this. Where federation handles \textit{where} workloads run, the mesh handles \textit{how they talk}. Istio's east-west gateways, Linkerd's service mirroring, and Cilium's eBPF-native cross-cluster load balancing each represent a different trade-off in the same design space: secure, observable, policy-governed communication between services that may reside in physically separate clusters with no shared network.
+
+For FoxCompute, this research mission establishes the architectural vocabulary, the tool landscape, and the integration pathway for a 10-node mesh prototype to evolve into a genuine federated compute cooperative --- one that can participate in the Wasteland protocol, support sovereign data requirements for Coast Salish community infrastructure, and eventually anchor the Electric City thesis at Grand Coulee scale.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Single-cluster K8s cannot model FoxCompute's physical topology.} The 10-node Amiga-principle cluster spec describes Agnus/Denise/Paula/68000 node roles, geographic distribution, and variable connectivity (rural internet, solar-intermittent power). A single etcd-backed control plane is a single point of failure that does not map to this reality.
+
+  \item \textbf{The federation landscape is fragmented and rapidly evolving.} KubeFed is archived. Three actively-maintained successors (Karmada, Liqo, Admiralty) take fundamentally different architectural approaches --- centralized control plane vs.\ peer-to-peer virtual kubelet vs.\ scheduling-layer federation. Choosing wrong means re-architecting later.
+
+  \item \textbf{Cross-cluster service communication is an unsolved integration problem.} Services deployed across cluster boundaries cannot communicate without explicit mesh configuration. The choice of Istio, Linkerd, or Cilium for cross-cluster east-west traffic has major implications for overhead, complexity, and operational burden at small-cluster scale.
+
+  \item \textbf{Day-2 operations at multi-cluster scale are an exponential problem.} Configuration drift, fragmented observability, inconsistent RBAC, and the ``context-switching tax'' of managing independent kubeconfig contexts all compound as cluster count grows. No single tool solves this without architectural commitment.
+
+  \item \textbf{Sovereign data and blast-radius isolation are not addressed in the current mesh spec.} FoxCompute nodes serving Coast Salish community infrastructure must provide data-residency guarantees. A breach or misconfiguration in one cluster must not cascade. These are architectural constraints, not operational policies.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Federated Cluster Peers with Identity-Scoped East-West Mesh}
+
+The model: FoxCompute clusters are autonomous peers that negotiate resource-sharing relationships, maintain independent control planes, and expose services across cluster boundaries through an identity-aware mesh that enforces policy at the kernel or sidecar layer. The federation layer (Karmada or Liqo) handles workload placement and failover. The mesh layer (Cilium ClusterMesh or Linkerd mirroring) handles service-to-service traffic and mTLS. The two layers are composed, not merged.
+
+\subsubsection{FoxCompute Federated Cluster Map}
+
+\begin{asciibox}
+  FOXCOMPUTE FEDERATED TOPOLOGY (Target State)
+  =============================================
+
+  [Cluster: Valley-Prime]          [Cluster: Valley-Secondary]
+  Agnus x2, Denise x2             Denise x2, Paula x2
+  Control-plane node              Workload-only node
+  karmada-host / Liqo peer        karmada-member / Liqo peer
+        |                                  |
+        +----------[ WireGuard / BGP ]------+
+        |                                  |
+  [Cluster: Edge-PNW]             [Cluster: Future-ElectricCity]
+  68000 x2 (inference)            TBD --- Grand Coulee spine
+  Liqo peered, low-power          Karmada join via Pull mode
+        |
+  [ Cilium ClusterMesh: unified pod-to-pod, global services ]
+  [ Karmada PropagationPolicy: workload placement & failover ]
+  [ Linkerd Service Mirror: opt-in cross-cluster service exposure ]
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+  MODULE DEPENDENCY GRAPH
+  =======================
+
+  [M1: Federation Control Planes]
+       |-- informs --> [M3: Network Fabric]
+       |-- informs --> [M5: FoxCompute Integration]
+
+  [M2: Service Mesh Cross-Cluster]
+       |-- informs --> [M3: Network Fabric]
+       |-- informs --> [M4: Day-2 Operations]
+
+  [M3: Network Fabric & CNI]
+       |-- informs --> [M5: FoxCompute Integration]
+
+  [M4: Day-2 Operations]
+       |-- informs --> [M5: FoxCompute Integration]
+
+  [M5: FoxCompute Integration]  <-- SYNTHESIS
+       |-- produces --> Amiga-principle node assignment
+       |-- produces --> Phase-1 cluster peering spec
+       |-- produces --> Service mesh selection recommendation
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1 --- Federation Control Planes}
+Survey of Karmada, Liqo, and Admiralty: architectural model (centralized vs.\ P2P vs.\ scheduling-layer), CNCF maturity, scalability benchmarks (Karmada tested to 100 large-scale clusters), failover behavior, and suitability for a 3--5 cluster FoxCompute prototype. Includes KubeFed lineage and why it was archived.
+
+\subsubsection{M2 --- Service Mesh Cross-Cluster Patterns}
+Survey of Istio multi-cluster (primary-remote vs.\ multi-primary), Linkerd service mirroring architecture, and Cilium ClusterMesh east-west behavior. Performance benchmarks (Linkerd fastest; Cilium eBPF 40--60\% less overhead than traditional sidecar in high-throughput; Istio highest operational surface). Ambient Mesh (sidecar-free Istio) as emerging pattern.
+
+\subsubsection{M3 --- Network Fabric \& CNI}
+Deep dive on Cilium ClusterMesh: eBPF-native pod-to-pod across cluster boundaries without VPN setup; shared CA requirement; global service discovery via CoreDNS integration. Comparison with Submariner (L3 routing, daemon agents) and Skupper (L7 virtual application network). Performance data from Red Hat Research ICPE 2025 study.
+
+\subsubsection{M4 --- Day-2 Operations \& Observability}
+Configuration drift mechanics, GitOps fleet patterns (ArgoCD multi-cluster, Flux), blast-radius containment strategy, data sovereignty enforcement, cross-cluster RBAC and identity federation (OIDC, SPIFFE/SPIRE). Observability stack: Hubble (Cilium), distributed tracing with OpenTelemetry, Kiali multi-cluster graph.
+
+\subsubsection{M5 --- FoxCompute Integration Architecture}
+Synthesis module. Maps Amiga-principle node roles to cluster boundaries. Recommends federation stack and mesh stack for Phase 1 prototype. Produces cluster peering runbook, PropagationPolicy templates for workload classes, and mesh configuration reference. Evaluates carbon-aware scheduling (Liqo + Karmada carbon-intensity offloading pattern from Ananta Cloud research).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# FoxCompute Multi-Cluster Chipset Config (v1.0)
+chipset:
+  name: foxcompute-federation
+  principle: amiga                    # specialized execution paths
+  cluster_roles:
+    agnus:   control-plane            # memory/DMA in Amiga = etcd + apiserver
+    denise:  workload-primary         # video chip = GPU inference, rendering
+    paula:   workload-secondary       # audio/IO chip = data pipeline, storage
+    68000:   edge-node                # CPU = lightweight inference, gateway
+  federation:
+    control_plane: karmada            # centralized propagation (Phase 1)
+    peer_protocol: liqo               # P2P offloading for dynamic bursting
+    network_fabric: cilium-cluster-mesh
+  mesh:
+    primary: cilium                   # eBPF-native, sidecar-free L3-L4
+    l7_overlay: linkerd               # opt-in service mirroring where needed
+    identity: spiffe                  # workload identity across cluster bounds
+  gitops:
+    tool: argocd
+    pattern: app-of-apps              # one ArgoCD per cluster, federated
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Federation control plane comparison: Karmada, Liqo, Admiralty architectural analysis
+  \item Service mesh cross-cluster: Istio, Linkerd, Cilium east-west pattern documentation
+  \item Cilium ClusterMesh deep-dive: setup, global services, network policy enforcement
+  \item Day-2 operations patterns: GitOps fleet, drift detection, blast-radius isolation
+  \item FoxCompute integration architecture: Phase 1 (2-cluster prototype) recommendation
+  \item Sovereign data and data-residency constraint mapping
+  \item Carbon-aware scheduling patterns (Liqo + Karmada)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Full production cluster provisioning (handled by gsd-mesh-prototype-spec)
+  \item Wasteland/DoltHub protocol integration (separate federation mission)
+  \item Cloud-managed K8s (EKS, AKS, GKE) --- FoxCompute is bare-metal / k3s
+  \item Service mesh for north-south traffic (ingress/egress) --- east-west only
+  \item Cost optimization tooling beyond FinOps framing
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{SC-01} A documented architecture decision record (ADR) comparing Karmada vs.\ Liqo for FoxCompute Phase 1, with explicit recommendation and rationale.
+  \item \textbf{SC-02} A service mesh selection matrix covering Istio, Linkerd, Cilium for the 3--5 cluster FoxCompute prototype, with performance benchmarks cited.
+  \item \textbf{SC-03} A Cilium ClusterMesh setup reference covering shared CA generation, cluster ID assignment, and global service annotation pattern.
+  \item \textbf{SC-04} Amiga-principle node roles mapped to specific cluster boundaries (which nodes form which clusters).
+  \item \textbf{SC-05} A PropagationPolicy template set for workload classes: inference jobs (GPU-affinity), data pipelines (storage-locality), control plane services (cluster-local).
+  \item \textbf{SC-06} A blast-radius isolation matrix: which failure modes are contained by cluster boundaries vs.\ which require additional controls.
+  \item \textbf{SC-07} Data sovereignty control map: which workload classes require cluster-local enforcement, and which federation-layer controls enforce this.
+  \item \textbf{SC-08} A Day-2 observability stack spec: metrics aggregation, Hubble relay, distributed tracing, alerting across clusters.
+  \item \textbf{SC-09} Carbon-aware scheduling pattern documented as an optional FoxCompute feature, applicable when solar-intermittent power profiles differ between clusters.
+  \item \textbf{SC-10} All findings executable: mission output includes working YAML templates, not just narrative recommendations.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+gsdmeshprototypespec.pdf & Depends on this & Phase-1 cluster spec needs federation \& mesh layer decisions from this mission \\
+foxinfrastructuregroup.pdf & Parent context & FIG's 21-co-op subsidiary model implies multi-cluster at regional scale \\
+gsd-silicon-layer-spec.md & Parallel & Silicon layer defines compute primitives; this mission defines how clusters federate \\
+gsd-local-cloud-provisioning-vision.md & Upstream & Local cloud provisioning determines cluster boundaries \\
+GSD-2 CLI integration & Downstream & GSD-2 multi-cluster commands need federation topology from this mission \\
+Wasteland / DoltHub & Future & Federation protocol for Wasteland participation is a separate follow-on mission \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga was not powerful because it had more transistors than the IBM PC. It was powerful because its three custom chips --- Agnus, Denise, Paula --- each did one thing with mastery, and communicated across a shared bus with minimal overhead. The CPU was freed to think while the chips handled everything else. That is the multi-cluster federation thesis in a sentence.
+
+A federated cluster topology where Agnus-class nodes run the control plane, Denise-class nodes run GPU inference, Paula-class nodes run the data fabric, and 68000-class edge nodes handle ingress and lightweight inference is not a K8s cluster. It is a specialized execution substrate. The federation layer is the chip bus. The service mesh is the DMA channel. The result, like the Amiga, is something that punches far above its weight.
+
+The spaces between the clusters are not dead zones. They are where the protocol lives --- where Karmada PropagationPolicies make placement decisions, where Cilium ClusterMesh routes east-west traffic at the kernel level, where SPIFFE-issued workload identities cross administrative boundaries carrying cryptographic proof of who they are. Meaning lives in those connections. That is the principle this mission is designed to surface, specify, and make executable.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Multi-Cluster Federation \& Service Mesh --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings organized by research module. All claims are sourced from professional organizations, CNCF project documentation, peer-reviewed conference proceedings (ICPE 2025), and engineering publications from production practitioners. Agents executing this mission should treat module reference sections as the authoritative data layer for their survey tasks.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{CNCF} (cncf.io) --- Karmada (incubating), Cilium (graduated), Linkerd (graduated), Liqo project blog
+  \item \textbf{Liqo Project} (liqo.io / github.com/liqotech/liqo) --- architecture papers, benchmarks
+  \item \textbf{Karmada Project} (karmada.io / github.com/karmada-io/karmada) --- scalability test reports, v1.11 release notes
+  \item \textbf{Cilium Project} (cilium.io / docs.cilium.io) --- ClusterMesh documentation
+  \item \textbf{Red Hat Research} (research.redhat.com) --- ICPE 2025 multi-cluster networking performance study
+  \item \textbf{Buoyant} (buoyant.io) --- Linkerd multi-cluster reference architecture
+  \item \textbf{Istio Project} (istio.io) --- Multi-cluster traffic management documentation
+  \item \textbf{Ananta Cloud} (anantacloud.com) --- Carbon-aware scheduling with Liqo + Karmada (Sept 2025)
+\end{itemize}
+
+\subsection{M1 --- Federation Control Planes Reference}
+
+\subsubsection{The KubeFed Lineage}
+
+KubeFed (Federation v1 and v2) was the Kubernetes SIG answer to multi-cluster management. It was archived because: the federated-resources API created extra learning burden for users migrating from single-cluster; lack of extensibility led to highly diverged forks; and the project failed to build a community around a standardized implementation (CNCF, 2022). Three active successors emerged.
+
+\subsubsection{Karmada --- Centralized Propagation Model}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Value} \\
+\midrule
+CNCF Status & Incubating \\
+Architecture & Centralized control plane with dedicated etcd; member clusters join via Push or Pull mode \\
+Key APIs & ResourceTemplate, PropagationPolicy, OverridePolicy \\
+Scheduling & Multi-dimensional (cluster resources, fault domains, K8s version, add-ons); weighted replica division \\
+Failover & Automatic traffic redirect to healthy clusters on member cluster failure \\
+Scalability & Tested to 100 large-scale member clusters (Karmada scalability report, Oct 2022) \\
+Connection Modes & Push (direct apiserver access) or Pull (agent in member cluster) \\
+Notable Features & Cross-cluster rolling upgrades (v1.11), blue-green and canary across clusters, carbon-aware via custom controller \\
+Best For & Centralized governance, enterprise multi-cloud, geographically distributed workloads with uniform policy \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Karmada's architecture mirrors a single K8s cluster: it has its own apiserver, scheduler, controller manager, and etcd. The control plane does not depend on member cluster count, but on the number of multi-cluster applications --- a key scalability property. The Karmada community tested API call latency during resource distribution and found it within reasonable ranges across all 100-cluster test scenarios.
+
+\subsubsection{Liqo --- Peer-to-Peer Virtual Kubelet Model}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Value} \\
+\midrule
+CNCF Status & Sandbox \\
+Architecture & P2P peering; each peer cluster discovers others via DNS/mDNS; spawns Virtual Kubelet instances for remote clusters \\
+Key Mechanism & Virtual Kubelet collapses a remote cluster to a local virtual node; no K8s API modifications required \\
+Network Fabric & Integrated CNI-agnostic network fabric for pod-to-pod and multi-cluster east-west services \\
+Offloading & Namespace-based; per-namespace policies select eligible remote clusters by label \\
+Performance & Overhead of a few milliseconds vs.\ vanilla K8s even at 10,000 pods (Liqo benchmark, 2022) \\
+Split Brain & Liqo provides application reliability mechanisms during split-brain; tensile-kube does not \\
+vs. Admiralty & Admiralty's scheduling-driven approach showed unbearable overhead at high pod-offloading volumes (arxiv 2204.05710) \\
+Best For & Dynamic resource bursting, cloud-edge continuum, CNI-agnostic heterogeneous clusters \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Liqo's ``liquid computing'' vision: a workload should flow to wherever resources are available, constrained only by administrator-defined policies and data-placement requirements. The two-level selection mechanism (namespace-level cluster affinity labels + per-deployment constraints) maps naturally to FoxCompute's Amiga-node role differentiation.
+
+\subsubsection{Admiralty --- Scheduling-Layer Federation}
+
+Admiralty operates at the pod scheduling level: annotated pods become ``proxy pods'' scheduled on a virtual-kubelet node, with corresponding ``delegate pods'' created in remote clusters. A feedback loop synchronizes status. Admiralty integrates with standard Kubernetes API resources (Deployments, Jobs) and supports cross-cloud scheduling including EKS, AKS, GKE, k3s, and on-prem. However, benchmarks show significantly worse performance than Liqo when offloading high numbers of pods simultaneously --- making it less suitable for burst-heavy GPU workloads.
+
+\subsection{M2 --- Service Mesh Cross-Cluster Patterns Reference}
+
+\subsubsection{Istio Multi-Cluster}
+
+Istio supports multiple deployment models for multi-cluster: primary-remote (shared control plane, one Istiod governs remote cluster's data plane) and multi-primary (independent Istiod per cluster, mesh spans clusters). Cross-cluster service communication routes through east-west gateways. Key constraints: within a mesh, service names must be unique; namespace sameness is required for cross-cluster load balancing.
+
+Traffic management specifics: \texttt{MeshConfig.serviceSettings.clusterLocal} allows marking services as cluster-local (traffic stays within originating cluster). Subset-based routing can differentiate cluster-specific variants but mixes service-level and topology-level policy --- increasing manifest complexity. SPIRE federation provides workload identity across cluster boundaries, replacing the deprecated Kubernetes Workload Registrar.
+
+\textbf{2025 status:} Istio graduated to CNCF in 2025. Ambient Mesh (sidecar-free, using ztunnel and waypoint proxies) is advancing toward mainstream; it substantially reduces resource overhead while maintaining full L7 policy capability. The Kiali observability UI supports multi-cluster Istio with Cluster Boxes and Namespace Boxes for cross-cluster traffic visualization (stable as of May 2025).
+
+\subsubsection{Linkerd Service Mirroring}
+
+Linkerd's multi-cluster mechanism has two components: the Service Mirror (watches a target cluster for service updates and mirrors them as local services in the source cluster) and the Gateway (receives requests from source clusters in the target). A shared trust anchor (root CA certificate) encrypts inter-cluster traffic via mTLS and authorizes requests through the gateway.
+
+Services are not automatically mirrored --- only those annotated with \texttt{mirror.linkerd.io/exported} are exposed. This opt-in model is a significant operational advantage: cross-cluster exposure is explicit and auditable. Each cluster maintains its own control plane, improving fault isolation. Performance benchmarks consistently show Linkerd as the fastest service mesh (25--35\% faster than Istio; faster than Cilium in most scenarios except high-connection-count internal traffic).
+
+\subsubsection{Cilium Service Mesh \& ClusterMesh}
+
+Cilium operates in two modes: sidecar mode (with Envoy for full L7 feature parity) and sidecar-free eBPF mode (exceptional performance, some feature trade-offs). In high-throughput scenarios, financial services and real-time data platforms have reported 40--60\% reduction in network overhead compared to traditional sidecar proxies (reintech.io, 2026).
+
+For multi-cluster, Cilium ClusterMesh is the primary mechanism (see M3). At the service mesh layer, Cilium integrates with Envoy per-node (not per-pod) --- a middle path between full-sidecar overhead and pure eBPF. CiliumNetworkPolicies support L7 HTTP inspection for API-level access control across cluster boundaries.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.8cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Dimension} & \tableheader{Istio} & \tableheader{Linkerd} & \tableheader{Cilium} \\
+\midrule
+Performance overhead & 25--35\% vs baseline & Fastest (best baseline) & 20--40\% (eBPF mode best) \\
+Multi-cluster model & East-west gateways & Service mirroring & ClusterMesh (eBPF) \\
+Sidecar-free option & Ambient Mesh (2025) & No (Rust micro-proxy) & Yes (eBPF native) \\
+Operational complexity & High & Low & Medium \\
+CNCF status & Graduated (2025) & Graduated & Graduated \\
+L7 policy & Full (Envoy) & Limited & Via per-node Envoy \\
+Best for FoxCompute & Large-scale future & Phase-1 simplicity & CNI + mesh unified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M3 --- Network Fabric \& CNI Reference}
+
+\subsubsection{Cilium ClusterMesh Architecture}
+
+ClusterMesh connects multiple K8s clusters at the networking layer using eBPF, enabling pods in different clusters to communicate directly via pod IPs --- no VPN setup or routing configuration required. Key architectural requirements:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item All clusters must run Cilium as CNI
+  \item Shared Certificate Authority (CA) across all clusters for mutual trust
+  \item Each cluster requires a unique cluster ID and name
+  \item PodCIDR ranges and node IPs must be non-overlapping across clusters
+  \item Nodes across clusters require IP connectivity (VPN tunnel or network peering)
+\end{itemize}
+
+Service discovery: Cilium integrates with CoreDNS to provide a unified DNS name routing requests to all service instances across clusters. If a pod in Cluster A queries a service unavailable locally, Cilium automatically reroutes to a healthy endpoint in Cluster B. Global services (annotated with \texttt{service.cilium.io/global: "true"}) enable cross-AZ failover at the eBPF level --- load balancing decisions happen in kernel space without context switches to userspace.
+
+Security: the unified identity model enforces policies based on cryptographic workload identity (not IP address) across all clusters. CiliumNetworkPolicies extend across cluster boundaries for L3--L7 unified enforcement. Hubble relay provides cross-cluster network flow observability.
+
+\subsubsection{Submariner (Comparison)}
+
+Submariner uses L3 routing with daemon agents and gateway nodes to forward encrypted traffic between clusters. It operates at a lower abstraction level than ClusterMesh: it establishes encrypted tunnels between clusters and advertises routes, but does not provide the eBPF-native performance or the integrated service mesh capabilities. Red Hat Research's ICPE 2025 study compared Submariner, Skupper, and Cilium ClusterMesh performance characteristics in a controlled environment, finding meaningful differences in latency and CPU overhead depending on traffic pattern and connection count.
+
+\subsubsection{Skupper (L7 Application Network)}
+
+Skupper operates at Layer 7, creating a virtual application network with a dedicated router pod. This provides application-level transparency (services communicate as if local) without kernel or CNI integration. The trade-off is higher latency and resource consumption compared to eBPF approaches, but lower infrastructure requirements (no shared CNI, no overlapping IP constraints). For FoxCompute's heterogeneous node infrastructure, Skupper is a viable fallback for edges that cannot run Cilium.
+
+\subsection{M4 --- Day-2 Operations \& Observability Reference}
+
+\subsubsection{Configuration Drift}
+
+The primary Day-2 failure mode in multi-cluster fleets is configuration drift: individual clusters deviate from their intended Git-defined state through manual interventions, partial upgrades, or provider-specific defaults. At 3--5 clusters, this is manageable manually. At 10+ clusters, drift compounds exponentially (Qovery, March 2026).
+
+GitOps mitigation: ArgoCD in an app-of-apps pattern (one ArgoCD per cluster, all pointing to a shared Git source of truth) is the standard approach for FoxCompute-scale fleets. The ``centralized management, decentralized execution'' model keeps clusters architecturally independent (preserving blast-radius isolation) while standardizing deployments through Git.
+
+\subsubsection{Blast Radius Isolation}
+
+Multi-cluster architecture's primary security value: if one cluster is compromised or misconfigured, the blast radius is contained to that cluster. This requires: (a) independent control planes (no shared etcd, no KubeFed-style single API server), (b) network-level cluster isolation with explicit peering, (c) independent RBAC models per cluster with cross-cluster identity federation via OIDC (not cross-cluster RBAC inheritance).
+
+\subsubsection{Data Sovereignty Controls}
+
+Regulatory and tribal data sovereignty requirements map directly to cluster boundaries. Per GDPR and analogous First Nations data governance frameworks (OCAP\textsuperscript{\textregistered}): data must physically reside where regulations require. The enforcement mechanism in Karmada is PropagationPolicy \texttt{clusterAffinity} with label selectors enforcing geographic cluster selection. In Liqo, namespace offloading policies use cluster labels to prohibit offloading of sovereign-data namespaces to clusters outside the required jurisdiction.
+
+\subsubsection{Cross-Cluster Observability Stack}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Layer} & \tableheader{Tool} & \tableheader{Multi-Cluster Pattern} \\
+\midrule
+Network flows & Hubble + Hubble Relay & Relay aggregates flows from all clusters into single query endpoint \\
+Metrics & Prometheus + Thanos & Per-cluster Prometheus; Thanos Querier federates across clusters \\
+Distributed traces & OpenTelemetry Collector & Per-cluster collector; OTLP export to central Jaeger or Tempo \\
+Service mesh viz & Kiali (Istio) & Multi-cluster graph with Cluster Boxes since May 2025 \\
+Logs & Loki + promtail & Per-cluster promtail; Loki multi-tenancy with cluster labels \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M5 --- FoxCompute Integration: Pre-Research Notes}
+
+The synthesis module (M5) will execute during Wave 2 after M1--M4 survey tracks complete. Key integration questions to resolve:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Phase 1 cluster count:} 2-cluster prototype (Valley-Prime + Valley-Secondary) or include Edge-PNW as cluster 3 from the start?
+  \item \textbf{Karmada vs.\ Liqo for Phase 1:} Karmada's centralized model is simpler to operate for a small team; Liqo's P2P peering model maps better to FoxCompute's eventual decentralized architecture. Likely answer: Karmada for control-plane workload placement + Liqo for dynamic burst/offload.
+  \item \textbf{Mesh selection:} Cilium ClusterMesh as the CNI-level fabric (unified identity, eBPF performance, no sidecar) + Linkerd for opt-in L7 service mirroring where needed.
+  \item \textbf{Solar-intermittent scheduling:} Liqo + Karmada carbon-aware pattern is directly applicable to solar-intermittent clusters. Off-peak solar = low carbon score = preferred offload target for batch inference.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Tribal data sovereignty & ABSOLUTE & Cluster boundary controls for OCAP\textsuperscript{\textregistered}-governed data must be architecturally enforced, not policy-only. PropagationPolicy hard affinity, not soft preference. \\
+Cross-cluster RBAC escalation & GATE & Cross-cluster identity federation (OIDC) must not allow privilege escalation across cluster boundaries. Separate service accounts per cluster. \\
+mTLS certificate management & GATE & Shared CAs (required by Cilium ClusterMesh) must use short-lived certificates with automated rotation. cronJob-based cert rotation is the documented pattern. \\
+Rural connectivity intermittency & ANNOTATE & WireGuard tunnel between clusters must tolerate intermittent connectivity. Liqo and Karmada Pull mode both designed for unreliable WAN links. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{CNCF \& Project Documentation}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item CNCF Blog: ``Simplifying multi-clusters in Kubernetes'' (Arbezzano, Palesandro, Jan 2024) --- cncf.io
+  \item CNCF Blog: ``Karmada and OCM: two new approaches to multicluster fleet management'' (Eads, Wang, Sept 2022) --- cncf.io
+  \item Liqo Project: github.com/liqotech/liqo, liqo.io
+  \item Karmada Project: github.com/karmada-io/karmada, karmada.io --- including v1.11 blog and 100-cluster scalability test report
+  \item Cilium Project: docs.cilium.io, cilium.io/use-cases/cluster-mesh
+  \item Istio Project: istio.io/docs/ops/configuration/traffic-management/multicluster
+  \item Linkerd / Buoyant: buoyant.io multi-cluster multi-region setup guide (Sept 2025)
+  \item Kiali: kiali.io/docs/features/multi-cluster (updated May 2025)
+  \item Virtual Kubelet: github.com/virtual-kubelet/virtual-kubelet
+\end{itemize}
+
+\textbf{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item Iorio, M. et al.: ``Benchmarking Liqo: Kubernetes Multi-Cluster Performance'' (Liqo Blog / Medium, Apr 2022)
+  \item Liqo Architecture Paper: ``Computing Without Borders: The Way Towards Liquid Computing'' (arxiv.org/pdf/2204.05710) --- includes head-to-head performance comparison with Admiralty and tensile-kube
+  \item Red Hat Research: ``Bridging clusters: a comparative look at multicluster networking performance in Kubernetes'' (ICPE 2025, Toronto --- CODECO project, EU-funded, 16 partners)
+\end{itemize}
+
+\textbf{Engineering Publications}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item Ananta Cloud Engineering: ``Cloud-Native Meets Carbon Intelligence: Multi-Cluster Sustainability with Liqo and Karmada'' (Sept 2025)
+  \item Tetrate: ``Seamless Cross-Cluster Connectivity for Multicluster Istio Service Mesh Deployments'' (July 2024)
+  \item reintech.io: ``Kubernetes Service Mesh Comparison 2026: Istio vs Linkerd vs Cilium'' (Feb 2026)
+  \item LiveWyer: ``Service Meshes Decoded: Istio vs Linkerd vs Cilium'' (May 2024)
+  \item Nutanix Dev: ``How to Enable Cilium Cluster Mesh in Nutanix Kubernetes Platform'' (Sept 2025)
+  \item Cloud Native Now: ``Service Mesh at a Crossroads: Istio's Graduation and the Road Ahead'' (Aug 2025)
+  \item Qovery: ``Kubernetes multi-cluster: the day-2 enterprise strategy'' and ``Mastering multi-cluster Kubernetes management'' (March 2026)
+  \item Introl: ``Kubernetes for GPU Orchestration'' including multi-cluster federation patterns (Feb 2026)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Research, document, and synthesize the multi-cluster federation and service mesh landscape for FoxCompute, producing: (a) an architecture decision record recommending federation and mesh stacks for Phase 1 prototype, (b) executable YAML templates for workload propagation and service mesh configuration, and (c) a Day-2 operations reference covering observability, drift detection, blast-radius isolation, and data sovereignty enforcement. All outputs must be directly usable by the GSD orchestrator without additional context.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE EXECUTION ARCHITECTURE
+  ===========================
+
+  WAVE 0: Foundation (Sequential, Haiku)
+  ├── W0-A: Shared schemas + source index
+  └── W0-B: YAML template scaffolding
+
+  WAVE 1: Parallel Survey Tracks (Parallel, Sonnet + Opus)
+  ├── Track A: Federation Control Planes (M1) + Network Fabric (M3)
+  └── Track B: Service Mesh Cross-Cluster (M2) + Day-2 Ops (M4)
+      (tracks run simultaneously, 5-min cache window)
+
+  WAVE 2: Synthesis (Sequential, Opus)
+  ├── W2-A: FoxCompute integration architecture (M5)
+  ├── W2-B: ADR: Federation stack recommendation
+  └── W2-C: ADR: Mesh stack recommendation
+
+  WAVE 3: Publication + Verification (Sequential, Sonnet)
+  ├── W3-A: YAML template set production
+  ├── W3-B: Day-2 runbook assembly
+  └── W3-C: Verification matrix + test execution
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Research Layer} --- Web research and documentation synthesis for M1--M4
+  \item \textbf{Analysis Layer} --- Architecture comparison, benchmark evaluation, trade-off analysis
+  \item \textbf{Synthesis Layer} --- FoxCompute-specific integration mapping (M5)
+  \item \textbf{Template Layer} --- Executable YAML: PropagationPolicy, ClusterMesh config, Linkerd setup
+  \item \textbf{Operations Layer} --- Day-2 runbook, observability stack spec, data sovereignty controls
+  \item \textbf{Verification Layer} --- Success criteria validation, cross-reference checking
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.8cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Federation ADR & SC-01 & Karmada vs.\ Liqo decision for Phase 1, with rationale and Phase-2 migration path \\
+2 & Service Mesh Selection Matrix & SC-02 & Istio / Linkerd / Cilium with benchmarks, FoxCompute recommendation \\
+3 & Cilium ClusterMesh Setup Reference & SC-03 & Shared CA, cluster IDs, Helm values for 2-cluster prototype \\
+4 & Amiga Node--Cluster Mapping & SC-04 & Table mapping 10 nodes to cluster boundaries by role \\
+5 & PropagationPolicy Template Set & SC-05 & GPU-affinity, storage-locality, cluster-local workload classes \\
+6 & Blast Radius Isolation Matrix & SC-06 & Failure mode taxonomy with cluster-boundary containment analysis \\
+7 & Data Sovereignty Control Map & SC-07 & OCAP\textsuperscript{\textregistered}-relevant workload classes with enforcement mechanism \\
+8 & Observability Stack Spec & SC-08 & Hubble relay, Thanos, OTEL Collector, Loki pattern for 3--5 clusters \\
+9 & Carbon-Aware Scheduling Reference & SC-09 & Liqo + Karmada pattern adapted to solar-intermittent FoxCompute power profile \\
+10 & Verification Report & SC-10 & All templates tested; all success criteria verified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-A: Shared schemas & None & Haiku & 2k \\
+W0-B: YAML scaffolding & None & Haiku & 3k \\
+W1-A1: M1 Federation survey & W0-A, research & Sonnet & 12k \\
+W1-A2: M3 Network fabric survey & W0-A, research & Sonnet & 10k \\
+W1-B1: M2 Mesh cross-cluster survey & W0-A, research & Sonnet & 12k \\
+W1-B2: M4 Day-2 ops survey & W0-A, research & Sonnet & 10k \\
+W2-A: M5 FoxCompute integration & M1, M2, M3, M4 & Opus & 15k \\
+W2-B: Federation ADR & M1, M5 & Opus & 8k \\
+W2-C: Mesh ADR & M2, M3, M5 & Opus & 8k \\
+W3-A: YAML template set & W2-A, W2-B, W2-C & Sonnet & 10k \\
+W3-B: Day-2 runbook & M4, W2-A & Sonnet & 8k \\
+W3-C: Verification & All & Sonnet & 5k \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & \textbf{30/60/10} & \textbf{\textasciitilde103k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & \textasciitilde30\% & Synthesis (M5 integration), Architecture Decision Records, cross-module relationship analysis, sovereignty constraint reasoning \\
+Sonnet & \textasciitilde60\% & Survey compilation (M1--M4), YAML template production, Day-2 runbook assembly, verification \\
+Haiku & \textasciitilde10\% & Shared schemas, template scaffolding, index structures \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Auto-pass \\
+1 & Parallel Survey & Parallel (2 tracks) & Sonnet & CAPCOM review \\
+2 & Synthesis & Sequential & Opus & CAPCOM approval \\
+3 & Publication & Sequential & Sonnet & Final verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W0-A & LOG (Haiku) & Shared output schema: ADR template, YAML template structure, survey section headers & 2k \\
+W0-B & LOG (Haiku) & Scaffolded YAML files: karmada-propagation.yaml, cilium-clustermesh-values.yaml, linkerd-multicluster.yaml & 3k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A (M1 + M3) --- Federation \& Network Fabric}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W1-A1 & CRAFT-ARCH + EXEC-1 & M1 Federation Control Planes survey: Karmada, Liqo, Admiralty comparison table; scalability data; Phase-1 recommendation draft & 12k \\
+W1-A2 & CRAFT-ARCH + EXEC-1 & M3 Network Fabric survey: Cilium ClusterMesh architecture deep-dive; Submariner/Skupper comparison; setup requirements table & 10k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (M2 + M4) --- Service Mesh \& Day-2 Operations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W1-B1 & CRAFT-PERF + EXEC-2 & M2 Service Mesh survey: Istio/Linkerd/Cilium cross-cluster patterns; performance matrix; Ambient Mesh status & 12k \\
+W1-B2 & CRAFT-PERF + EXEC-2 & M4 Day-2 Ops survey: config drift patterns; blast-radius taxonomy; observability stack options; OIDC cross-cluster identity & 10k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W2-A & INTEG + FLIGHT (Opus) & M5 FoxCompute Integration: Amiga-node cluster mapping; Phase-1 topology; carbon-aware scheduling pattern; sovereign data enforcement map & 15k \\
+W2-B & FLIGHT (Opus) & Federation ADR: formal decision between Karmada and Liqo for Phase 1, with Phase-2 migration path and rationale & 8k \\
+W2-C & FLIGHT (Opus) & Mesh ADR: Cilium ClusterMesh + Linkerd (opt-in) recommendation with operational trade-off analysis & 8k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+W3-A & EXEC-1 (Sonnet) & YAML template set: PropagationPolicy x3, ClusterMesh Helm values x2, Linkerd trust anchor setup, SPIFFE workload identity config & 10k \\
+W3-B & EXEC-2 (Sonnet) & Day-2 runbook: ArgoCD app-of-apps config, Thanos Querier setup, Hubble relay, drift detection alerts, cert rotation cronJob & 8k \\
+W3-C & VERIFY (Sonnet) & Verification matrix execution: all 10 success criteria checked; YAML templates validated against K8s schema & 5k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Wave 1 tracks A and B start within the 5-minute cache window of Wave 0 completion to share the shared schema context at zero additional cost
+  \item Research Reference (Stage 2 of this document) is the primary cache anchor --- all Wave 1 agents should load it first and process within the same context window
+  \item YAML scaffolding from W0-B is passed as a single shared artifact to W3-A to avoid re-generating structure; W3-A fills content only
+  \item Wave 2 synthesis loads M1--M4 survey outputs as a single concatenated context; M5, ADR-B, and ADR-C execute sequentially in the same session to share synthesis context
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tasks} & \tableheader{Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 2 & 5k & Haiku; minimal cost \\
+Wave 1 (Track A) & 2 & 22k & Sonnet; parallel \\
+Wave 1 (Track B) & 2 & 22k & Sonnet; parallel \\
+Wave 2 & 3 & 31k & Opus; highest value \\
+Wave 3 & 3 & 23k & Sonnet; production \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{12} & \textbf{103k} & Opus: 31k (30\%), Sonnet: 67k (65\%), Haiku: 5k (5\%) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  W0-A --> W1-A1, W1-B1
+  W0-B --> W3-A
+  W1-A1 --> W2-A, W2-B
+  W1-A2 --> W2-A, W2-C
+  W1-B1 --> W2-A, W2-C
+  W1-B2 --> W2-A
+  W2-A --> W2-B, W2-C, W3-A, W3-B
+  W2-B --> W3-A
+  W2-C --> W3-A
+  W3-A --> W3-C
+  W3-B --> W3-C
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical (sovereignty, blast-radius) & 3 & P0 & BLOCK --- mission does not deliver without passing \\
+Core Technical Accuracy & 5 & P1 & REQUIRE-FIX before delivery \\
+Integration (YAML validity, cross-reference) & 4 & P1 & REQUIRE-FIX before delivery \\
+Edge Cases (rural connectivity, solar-intermittent) & 3 & P2 & ANNOTATE in deliverable \\
+\midrule
+Total & 15 & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{warnred}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+T-SC-01 & Data sovereignty enforcement is architecturally enforced, not policy-only & PropagationPolicy for OCAP\textsuperscript{\textregistered}-governed namespaces uses \texttt{clusterAffinity} hard constraint, not soft preference; verified by YAML inspection \\
+T-SC-02 & Blast-radius isolation matrix covers all node-failure and control-plane-failure modes & Matrix entries exist for: etcd failure, apiserver failure, network partition, cluster compromise; each has containment boundary documented \\
+T-SC-03 & mTLS certificate rotation is automated, not manual & ClusterMesh Helm values include cronJob-based cert rotation; no manual cert steps in Phase-1 runbook \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4.5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC-01 & Federation ADR delivered with recommendation & T-CORE-01 & \textcolor{secondary}{Pending W2} \\
+SC-02 & Mesh selection matrix with benchmarks & T-CORE-02 & \textcolor{secondary}{Pending W1-B} \\
+SC-03 & ClusterMesh setup reference complete & T-INTEG-01 & \textcolor{secondary}{Pending W3} \\
+SC-04 & Node-cluster mapping documented & T-CORE-03 & \textcolor{secondary}{Pending W2} \\
+SC-05 & PropagationPolicy templates valid & T-INTEG-02 & \textcolor{secondary}{Pending W3} \\
+SC-06 & Blast-radius matrix complete & T-SC-02 & \textcolor{secondary}{Pending W2} \\
+SC-07 & Sovereignty control map complete & T-SC-01 & \textcolor{secondary}{Pending W2} \\
+SC-08 & Observability stack spec delivered & T-CORE-04 & \textcolor{secondary}{Pending W3} \\
+SC-09 & Carbon-aware scheduling pattern documented & T-CORE-05 & \textcolor{secondary}{Pending W2} \\
+SC-10 & YAML templates tested and valid & T-INTEG-03, T-INTEG-04 & \textcolor{secondary}{Pending W3} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates between waves; synthesis review \\
+PLAN & Planner & Wave decomposition; parallel track timing; dependency enforcement \\
+SCOUT & Research Agent & Source gathering; validating CNCF project status; confirming benchmark data \\
+EXEC-1 & Document Agent A & Track A production: M1 federation survey, M3 network fabric, W3-A YAML templates \\
+EXEC-2 & Document Agent B & Track B production: M2 mesh survey, M4 Day-2 ops, W3-B Day-2 runbook \\
+CRAFT-ARCH & Architecture Specialist & Primary domain: federation architecture, K8s control plane topology \\
+CRAFT-PERF & Performance Specialist & Service mesh benchmarks, eBPF performance data, overhead analysis \\
+VERIFY & Verification Agent & YAML schema validation, success criteria checking, cross-reference audit \\
+INTEG & Integration Agent & Cross-module synthesis, FoxCompute node-cluster mapping, ADR cross-check \\
+CAPCOM & HITL Interface & Human approval at Wave 1 review, Wave 2 ADR approval; only human-facing role \\
+BUDGET & Resource Manager & Token budget tracking; cache window enforcement; session planning \\
+LOG & Chronicle Agent & Commit messages, milestone summaries, audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & foxcompute-multicluster-federation-v1 \\
+Activation Profile & Squadron (12 roles) \\
+Total Waves & 4 (Wave 0--3) \\
+Parallel Tracks & 2 (Wave 1: Track A + Track B) \\
+Critical Path & W0 $\to$ W1-A + W1-B $\to$ W2-A $\to$ W2-B/C $\to$ W3-A $\to$ W3-C \\
+Estimated Token Budget & 103k total \\
+Model Split & Opus 30\% / Sonnet 65\% / Haiku 5\% \\
+Safety-Critical Tests & 3 (T-SC-01, T-SC-02, T-SC-03) --- all BLOCK \\
+Primary Deliverables & 10 (ADRs, templates, runbooks, maps) \\
+Estimated Sessions & 3 sessions across 8 context windows \\
+Human Approval Gates & 2 (post-W1 survey review; post-W2 ADR approval) \\
+Research Grounding & CNCF, peer-reviewed (ICPE 2025), CNCF graduated projects, production practitioner engineering posts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The spaces between the chips are where the magic happens. Agnus doesn't need to know what Denise is rendering. Paula doesn't need to know what Agnus is managing. The bus speaks. The chips listen. Complexity emerges from faithfully simple interfaces faithfully honored.''}
+
+\vspace{0.8em}
+\textbf{--- FoxCompute Multi-Cluster Architecture Through-Line}
+
+\vspace{0.6em}
+\normalfont\small
+The federated cluster topology this mission specifies is not Kubernetes at scale. It is the Amiga Principle at infrastructure scale: specialized nodes with dedicated roles, communicating through minimal well-specified interfaces (Karmada PropagationPolicy, Cilium ClusterMesh, SPIFFE workload identities), producing a system whose capability exceeds what any single cluster could achieve. The spaces between the clusters are not dead zones. They are where the protocol lives.
+\end{quotebox}
+
+\end{document}

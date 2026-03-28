@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; GSD Alignment</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsa">
+  <header>
+    <h1>GSD Alignment</h1>
+    <div class="subtitle">Ecosystem Alignment &middot; Workflow-to-Outcome Mapping &middot; Bus Architecture &middot; Prompts to Silicon</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-yegge-ecosystem-alignment">Yegge Ecosystem</a>
+      <a href="page.html?doc=02-gas-city-chipset-bridge">Gas City Bridge</a>
+      <a href="page.html?doc=03-control-surface-wire-harness">Wire Harness</a>
+      <a href="page.html?doc=04-isa-bus-architecture">ISA &amp; Bus</a>
+      <a href="page.html?doc=05-intent-to-adapter-routing">Intent Routing</a>
+      <a href="page.html?doc=06-gpu-silicon-execution">GPU Silicon</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The copper list is cheap. The CPU is the scarce resource. The architecture that understands
+      this builds a system where the copper processor runs against the beam while the CPU composes
+      the next frame. Every stage of the prompt-to-silicon pipeline is a copper list waiting to be
+      written. The wire harness is the backplane. The ISA is the instruction reference. The silicon
+      is the coprocessor. And the spaces between &mdash; between a prompt and a tile, between a
+      polecat and a wave plan, between a gas town and a thousand of them &mdash; are where the
+      architecture lives.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~218K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/gsd-alignment-mission.pdf">Mission Package</a></td><td>PDF &middot; 30 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/gsd-alignment-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/gsd-alignment-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schema, source index, adapter format spec</td><td>Sequential</td><td>8K</td></tr>
+        <tr><td>1</td><td>Parallel Research</td><td>Track A (M1+M2) &middot; Track B (M4+M6) &middot; Track C (M3+M5)</td><td>Parallel</td><td>165K</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-module integration, full-stack diagram, gap analysis</td><td>Sequential</td><td>20K</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Final assembly, verification, CAPCOM gate</td><td>Sequential</td><td>25K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Orchestration / DMA</td><td>Opus</td><td>Cross-module synthesis, Gas City bridge judgment, go/no-go gates</td></tr>
+        <tr><td>Denise</td><td>Execution (x3 parallel)</td><td>Sonnet</td><td>Module document assembly, source verification, LaTeX production</td></tr>
+        <tr><td>Paula</td><td>I/O / anticipatory</td><td>Haiku</td><td>Shared schema generation, token budget tracking, audit trail</td></tr>
+        <tr><td>M68000</td><td>Architecture / security</td><td>Opus</td><td>Wire harness review, safety boundary enforcement, ISA validation</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations from peer-reviewed papers, official documentation, or GitHub repositories. Zero unverifiable claims.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every performance figure (tok/s, MB, latency, speedup) attributed to a specific paper or benchmark</td></tr>
+        <tr><td>SC-ZFC</td><td>ZFC compliance</td><td>Intent classifier specification contains no heuristic reasoning in orchestration code; compliant with Yegge ZFC principle</td></tr>
+        <tr><td>SC-VRAM</td><td>VRAM arithmetic</td><td>Budget table sums to &le;7,700MB; base model + hot adapters + KV cache leaves 500MB headroom</td></tr>
+        <tr><td>SC-BRIDGE</td><td>Bridge proposal scope</td><td>Gas City bridge spec is clearly labeled as proposal requiring external review; does not claim implementation</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix: The Alignment Report</h2>
+
+    <table>
+      <thead><tr><th>Success Criterion</th><th>Test ID(s)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1. Gastown v0.10.0 delta complete</td><td>CF-01, SC-SRC</td><td>Pre-mission</td></tr>
+        <tr><td>2. Five integration phases re-evaluated</td><td>CF-02, IN-04</td><td>Pre-mission</td></tr>
+        <tr><td>3. Gas City YAML bridge specified</td><td>CF-03, SC-BRIDGE, IN-01</td><td>Pre-mission</td></tr>
+        <tr><td>4. Wire harness fully specified</td><td>CF-04, IN-05</td><td>Pre-mission</td></tr>
+        <tr><td>5. ISA five-layer stack specified</td><td>CF-05, IN-02</td><td>Pre-mission</td></tr>
+        <tr><td>6. FPGA synthesis pipeline specified</td><td>CF-06, IN-06</td><td>Pre-mission</td></tr>
+        <tr><td>7. VRAM residency policy specified</td><td>CF-07, SC-VRAM</td><td>Pre-mission</td></tr>
+        <tr><td>8. Intent classifier to router bridge</td><td>CF-08, CF-09, IN-06</td><td>Pre-mission</td></tr>
+        <tr><td>9. Multi-LoRA serving patterns documented</td><td>CF-10, CF-11</td><td>Pre-mission</td></tr>
+        <tr><td>10. Performance benchmarks sourced</td><td>CF-12, SC-NUM</td><td>Pre-mission</td></tr>
+        <tr><td>11. All numerical claims attributed</td><td>SC-NUM</td><td>Pre-mission</td></tr>
+        <tr><td>12. Dependency graph complete</td><td>IN-07, IN-03</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Gastown v0.10.0 delta analysis is complete, covering Trust Tier Escalation Engine, Gas City current state, and Wasteland Phase 1 protocol changes since March 6</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Each of the five skill-creator integration phases is re-evaluated with valid/modified/superseded classification</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Gas City / chipset YAML bridge specification exists with YAML examples for all 7 Gas Town roles</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>GSD-OS control surface wire harness fully specified: bus signal types, bandwidth, interrupt priority table</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>ISA five-layer stack fully specified with encoding tables, register maps, and bus protocol</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>FPGA synthesis pipeline specified as executable six-step process with input/output contracts</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>VRAM residency policy for RTX 4060 Ti 8GB specified with hot/cold adapter budget arithmetic</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Intent classifier to adapter router bridge fully specified with confidence threshold and fallback path</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Multi-LoRA serving integration patterns documented for vLLM, NVIDIA NIM, LoRAX, and LoRA-Switch</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Performance expectations documented with sources: inference throughput, LoRAFusion speedup, adapter swap latency</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>All numerical claims attributed to specific sources (arXiv, NVIDIA, EuroSys 2026)</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>Dependency graph shows construction order with cross-module relationships</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The Amiga's secret was that the hardware was honest. The register maps were in the manual.
+    The copper list was a list anyone could write. The architecture was visible all the way down,
+    and that visibility was what made the platform generative. You couldn't hide complexity behind
+    a black box because there was no black box. Every scanline was an opportunity; every blitter
+    operation was documented.</p>
+
+    <p>The GSD ecosystem is building the same kind of honest architecture for the age of AI agents.
+    The chipset YAML is the register map. The ISA is the instruction reference. The silicon layer
+    spec is the schematic. The bus protocol is the backplane diagram. And Gas City &mdash; if the
+    chipset.yaml bridge holds &mdash; will allow GSD to become the Amiga Hardware Reference Manual
+    for a federation of a thousand agent orchestrators.</p>
+
+    <p>The spaces between &mdash; between a prompt and a silicon tile, between a Gas Town polecat
+    and a GSD wave plan, between the bus signal and the CUDA kernel &mdash; are not gaps. They
+    are the architecture.</p>
+  </main>
+
+  <footer>
+    <p>GSD Alignment &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Minecraft Real-Time Weather</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mrw">
+  <header>
+    <h1>Minecraft Real-Time Weather</h1>
+    <div class="subtitle">NOAA &middot; Open-Meteo &middot; GOES-19 SDR &middot; Fabric Modding &middot; PNW Microclimates &middot; Voxel Atmosphere</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-global-weather-data-sources">Data Sources</a>
+      <a href="page.html?doc=02-diy-satellite-reception">Satellite</a>
+      <a href="page.html?doc=03-minecraft-weather-api">MC Weather API</a>
+      <a href="page.html?doc=04-microclimate-simulation">Microclimate</a>
+      <a href="page.html?doc=05-gsd-mesh-integration">Mesh Integration</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Amiga's designers understood something that its contemporaries didn't: you don't win by
+      having the fastest CPU. You win by giving the CPU specialized help. Agnus handled DMA and
+      blitter operations. Denise handled display. Paula handled audio and I/O. The 68000 was freed
+      to do the work only it could do &mdash; synthesis and judgment. This mission applies that same
+      insight to meteorology. NOAA has already built the atmospheric models. NASA has already put the
+      satellites in orbit. We need a translation layer &mdash; an Agnus for weather data, a Denise for
+      visual state, a Paula for effect synthesis &mdash; that converts the real sky into the game sky
+      with enough fidelity to feel true.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~383K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/minecraft-weather-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Complete three-stage document: vision, research reference, and mission specification. Recompile with three XeLaTeX passes.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>WeatherState schema, source index, test scaffolding</td><td>Sequential</td><td>30K</td></tr>
+        <tr><td>1A</td><td>Data Sources</td><td>Open-Meteo client, HRRR parser, GEOS-5 client, GOES-19 guide</td><td>Parallel</td><td>78K</td></tr>
+        <tr><td>1B</td><td>MC Architecture</td><td>MC API survey, WMO translation, zone system, coord mapping</td><td>Parallel</td><td>80K</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-source normalization, data broker, sidecar assembly, RCON bridge, safety audit</td><td>Sequential</td><td>115K</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Fabric mod spec, deployment config, test execution, final package</td><td>Sequential</td><td>80K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Data orchestration / fetch pipeline</td><td>Sonnet</td><td>Open-Meteo polling, HRRR GRIB2 retrieval, GEOS-5 queries, data normalization</td></tr>
+        <tr><td>Denise</td><td>Display / visualization / rendering</td><td>Sonnet</td><td>Minecraft biome zone mapping, weather state visual translation, particle effects, sky color</td></tr>
+        <tr><td>Paula</td><td>Audio / game effect synthesis</td><td>Haiku</td><td>Rain/thunder sound events, wind effects, template scaffolding</td></tr>
+        <tr><td>M68000</td><td>Synthesis / integration / judgment</td><td>Opus</td><td>Cross-module microclimate synthesis, satellite data fusion, architecture review, verification</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests &mdash; The Weather Report</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All data sources documented as gov agency, open-source, or peer-reviewed. Zero commercial API dependencies in production path.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every translation function parameter (WMO code threshold, temperature cutoff) cites specific source documentation.</td></tr>
+        <tr><td>SC-PRIV</td><td>Player privacy</td><td>No player IP addresses queried or logged. All geolocation uses admin-configured coordinates only.</td></tr>
+        <tr><td>SC-RATE</td><td>API rate compliance</td><td>Sidecar enforces Open-Meteo fair-use limit (10K/day). Exponential backoff on 429 responses. GEOS-5 research-only flag documented.</td></tr>
+        <tr><td>SC-EULA</td><td>Minecraft EULA</td><td>Weather feature does not constitute a paid advantage. Sidecar is server-admin tooling only.</td></tr>
+        <tr><td>SC-SAFE</td><td>Extreme weather filter</td><td>NWS SAME alert check prevents in-game thunder/storm trigger when real tornado/hurricane warning active in player region.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix &mdash; The Weather Report</h2>
+
+    <table>
+      <thead><tr><th>Success Criterion</th><th>Test ID(s)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1. Data source survey complete</td><td>CF-01, CF-02</td><td>Pre-mission</td></tr>
+        <tr><td>2. Variable mapping complete</td><td>CF-03, CF-04, SC-NUM</td><td>Pre-mission</td></tr>
+        <tr><td>3. Biome-region differentiation (&ge;4 zones)</td><td>CF-05, IN-01</td><td>Pre-mission</td></tr>
+        <tr><td>4. 15-minute update latency</td><td>CF-06, EC-01</td><td>Pre-mission</td></tr>
+        <tr><td>5. HRRR integration functional</td><td>CF-07, IN-02</td><td>Pre-mission</td></tr>
+        <tr><td>6. Open-Meteo integration functional</td><td>CF-08, IN-02</td><td>Pre-mission</td></tr>
+        <tr><td>7. GOES-19 pipeline documented</td><td>CF-09, EC-02</td><td>Pre-mission</td></tr>
+        <tr><td>8. Fabric mod bridge specified</td><td>CF-10, IN-03</td><td>Pre-mission</td></tr>
+        <tr><td>9. Sidecar service deployable (&lt;200 MB)</td><td>CF-11, SC-RATE</td><td>Pre-mission</td></tr>
+        <tr><td>10. Coordinate mapping complete</td><td>CF-12, IN-04</td><td>Pre-mission</td></tr>
+        <tr><td>11. Zero commercial API dependencies</td><td>SC-SRC, CF-13</td><td>Pre-mission</td></tr>
+        <tr><td>12. Configuration schema published</td><td>CF-14, IN-05</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>All five target APIs (Open-Meteo, NOAA HRRR, GEOS-5, GFS, GOES-19) documented with endpoints, parameters, response schemas, and license terms</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Every meteorological variable mapped to a Minecraft weather state with a deterministic translation function</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>At least 4 distinct weather zones definable within a single world, each independently receiving real weather</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>End-to-end pipeline achieves &le;15 minute latency from API fetch to in-game weather state change</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>NOAA HRRR GRIB2 data parseable and normalized to WeatherState schema with Python tooling</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Open-Meteo forecast API queried at target coordinates; 15-minutely HRRR data available for North America</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Complete hardware and software spec for DIY GOES-19 HRIT reception published</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Reference architecture for Fabric mod accepting external WeatherState JSON produced</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Python sidecar service runnable on GSD mesh node with &lt;200 MB RAM footprint</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Algorithm for mapping real-world lat/lon to Minecraft X/Z chunk regions documented and tested</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>All data sources in production pipeline free, open, and gov-operated or open-source licensed</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>YAML schema for Foxy's Playground deployment fully specified</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Crew Manifest</h2>
+
+    <table>
+      <thead><tr><th>Role</th><th>Agent</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>FLIGHT</td><td>Orchestrator</td><td>Overall mission direction; go/no-go gates; wave approvals</td></tr>
+        <tr><td>PLAN</td><td>Planner</td><td>Wave decomposition; parallel track optimization; dependency management</td></tr>
+        <tr><td>SCOUT</td><td>Research Agent</td><td>API documentation gathering; mod survey; SDR community research</td></tr>
+        <tr><td>EXEC-1</td><td>Executor (Data)</td><td>Track A: API clients, HRRR parser, SDR guide</td></tr>
+        <tr><td>EXEC-2</td><td>Executor (MC)</td><td>Track B: MC API, translation lib, zone system</td></tr>
+        <tr><td>CRAFT-ATMO</td><td>Atmospheric Specialist</td><td>Open-Meteo, HRRR, GEOS-5 integration; meteorological accuracy</td></tr>
+        <tr><td>CRAFT-GAME</td><td>Game Architecture Specialist</td><td>Minecraft mod API, Fabric bridge, RCON protocol</td></tr>
+        <tr><td>VERIFY</td><td>Verification Agent</td><td>Source validation; test execution; API compliance</td></tr>
+        <tr><td>INTEG</td><td>Integration Agent</td><td>Cross-module WeatherState contract; data broker consistency</td></tr>
+        <tr><td>CAPCOM</td><td>HITL Interface</td><td>Human approval at wave boundaries; only human-machine channel</td></tr>
+        <tr><td>BUDGET</td><td>Resource Manager</td><td>Token budget tracking; session planning; cache efficiency</td></tr>
+        <tr><td>LOG</td><td>Chronicle Agent</td><td>Commit messages; milestone summaries; audit trail</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The sky is not a backdrop. It is the atmosphere &mdash; a membrane between the satellite and the
+    soil, between the orbital and the inhabited. When we teach the game to read the real sky, we close
+    one of the oldest gaps in simulation: the gap between the world we model and the world we live in.
+    The Amiga didn't have faster hardware. It had specialized translators &mdash; chips that understood
+    what the CPU needed and spoke the language of the display, the audio, the memory. This mission
+    builds those same translators for a different domain: from the language of satellite telemetry and
+    numerical weather prediction to the language of block states and weather ticks. The translation is
+    not trivial. But the data is already there, falling from orbit, updated every fifteen minutes, free
+    to anyone willing to point an antenna at the right part of the sky.</p>
+  </main>
+
+  <footer>
+    <p>Minecraft Real-Time Weather &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

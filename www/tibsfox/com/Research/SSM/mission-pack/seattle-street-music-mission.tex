@@ -1,0 +1,1060 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color Scheme — Market Red / Chestnut / Forest Green
+\definecolor{primary}{HTML}{5C1010}
+\definecolor{secondary}{HTML}{7B4F2E}
+\definecolor{tertiary}{HTML}{1B4332}
+\definecolor{accent}{HTML}{C0392B}
+\definecolor{lightprimary}{HTML}{FDECEA}
+\definecolor{lightsecondary}{HTML}{FDF3E7}
+\definecolor{lighttertiary}{HTML}{E9F5EE}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section Formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom Environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Seattle Street Music}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Seattle Street Music -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{0.7em}
+
+\begin{document}
+
+% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Seattle Street Music\\[0.3em]A Living Tradition}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Pike Place Market and the PNW Busking Ecosystem}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 4--6 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+%% ===========================================================
+%% STAGE 1 — VISION DOCUMENT
+%% ===========================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Seattle Street Music --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Cold-Start Research Mission / Ready for Orchestrator}
+\metafield{Depends On:}{GSD Ecosystem baseline; cultural heritage frameworks}
+\metafield{Context:}{Pacific Northwest oral tradition; urban public space as creative commons}
+
+\subsection{Vision}
+
+There is a painted musical note on the sidewalk at Pike Place Market. It is small. Easy to miss. But stop near it on a gray Seattle morning and something happens --- a piano materializes from nowhere, or spoons clatter into rhythm against a human body, or a voice rises over the fish-throwers and flower vendors and the general gorgeous racket of the oldest continuously operating farmers market in America. For over fifty years, those painted notes have served as launch pads.
+
+Street music in Seattle is not background noise. It is constitutional history, artist incubation, and community memory woven into the same cobblestones. In 1974, a folk singer named Jim Page sang his testimony to an overflowing city council chamber and convinced Seattle's lawmakers --- unanimously --- to legalize what had been criminalized: the act of standing on a public street and playing music for tips. From that moment forward, the street became a school, a stage, and a livelihood for thousands of performers across five decades.
+
+Pike Place Market sits at the center of this tradition, but the story radiates outward. It touches Soundgarden's Grammy catalog, the debut album of a band that would fill Coachella, the Depression-era Greek clarinetist who played under John Philip Sousa and returned to busk for change, and the blind harpist who rode a Ballard bus with her instruments every day until she simply could not. These are not footnotes. They are the acoustic signature of a city.
+
+This mission documents that signature --- its origins, its legends, its governance, its pipeline to the larger music world, and its contested present in the post-COVID city. Music lives in the spaces between commerce and community, between sidewalk and stage. The notes painted on the Market floor are coordinates for those spaces.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Institutional memory at risk.} The busking generation that built Seattle's street music culture --- Jim Page, Artis the Spoonman, Jeanie Towne, Jim Hinde, Baby Gramps --- is aging or gone. COVID-19 severed the continuity of the scene, and many performers who left in 2020 did not return. Without systematic documentation, this living oral tradition will become archival silence.
+
+  \item \textbf{Legal and civic history poorly known.} The 1974 Seattle ordinance that legalized street performing --- championed by a single busker who sang his case in city council chambers --- is one of the most significant acts of folk-art civil rights in Pacific Northwest history. It is cited in First Amendment litigation across the country, yet remains largely undocumented outside a handful of performer memoirs and NPR local features.
+
+  \item \textbf{The pipeline from pavement to stage is invisible.} The Head and the Heart busked in a Market stairwell for \$17 before performing for 30,000 people on the Market's rooftop. Sierra Ferrell arrived in Seattle with a backpack and a dog and made \$300 on her first day at Pike Place. This pipeline is real, quantifiable, and culturally significant --- but no systematic study of it exists.
+
+  \item \textbf{Post-COVID fragility unquantified.} The Market prohibited busking in March 2020. Nearly three years later, few performers had returned to what Jonny Hahn --- 34-year Market piano veteran --- once called ``a busker's paradise.'' The economic, social, and cultural losses are real but unmeasured.
+
+  \item \textbf{Governance frameworks under-documented.} The 1983 Hildt Agreement, the 2001 Buskers' Guild, the First Amendment court cases (Berger v. City of Seattle, 2005), and the current permit system form a complex governance layer that shapes who gets to perform, where, and for how long. This framework is operationally important for future performers and legally significant for public space scholars.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Painted Note as System}: Street music at Pike Place Market is not informal. It is an organized ecology of public creative expression --- bounded by law, sustained by community, and perpetually generative of new artistic careers. The painted musical notes on the sidewalk are not decorative; they are the physical instantiation of a fifty-year constitutional argument.
+
+\subsubsection{Study Region Map}
+
+\begin{asciibox}
+SEATTLE STREET MUSIC ECOSYSTEM
+================================
+
+PIKE PLACE MARKET (Core)
++---[Painted Note Spots]-------+
+|  Main Arcade                 |
+|  Post Alley                  |  <-- "Norm in Post Alley"
+|  Stairwell Corridor          |  <-- Head and the Heart origins
+|  South Entrance Bridge       |  <-- Carley Calbero
+|  Under the Clock             |  <-- Dave McKessen, "Dre"
++------------------------------+
+
+ADJACENT ZONES
+  Lower Pike Street  <-- Jim Page's 1974 arrest location
+  Pioneer Square     <-- PK Dwyer & Donna Beck, 1973
+  Post Alley         <-- anarchist bookstore corner
+
+EXTENDED ECOSYSTEM
+  Conor Byrne Pub (Ballard)   <-- Head and the Heart formation
+  Fremont Taverns             <-- Artis the Spoonman early career
+  Seattle Center              <-- Magic Mike / First Amendment battles
+  WA State Ferries            <-- David Michaels harp controversy
+  Sound Transit Link Rail     <-- new busking frontier
+  Neighborhood Farmers Markets <-- NFM / SFMA permit systems
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+=============================
+
+ M1: HISTORICAL ROOTS        M2: LEGENDARY FIGURES
+ Pre-1974 busking origins     Artis, Page, Hinde, Towne,
+ Depression-era performers    Baby Gramps, Jonny Hahn
+ Woody Guthrie connection     Career trajectories
+ Jim Page / 1974 ordinance    Oral histories
+        |                            |
+        +------------+---------------+
+                     |
+             SYNTHESIS LAYER
+             Cross-module patterns
+             Cultural lineage mapping
+                     |
+        +------------+---------------+
+        |                            |
+ M3: LEGAL FRAMEWORK         M4: PAVEMENT-TO-STAGE
+ 1974 ordinance text         The Head and the Heart
+ Hildt Agreement (1983)      Sierra Ferrell
+ Hildt-Licata (1999)         Ron Bailey / Moisture Festival
+ First Amendment battles     Baby Gramps discography
+ Current permit system       Systematic pipeline analysis
+        |                            |
+        +------------+---------------+
+                     |
+             M5: PRESENT-DAY ECOSYSTEM
+             Current performer profiles
+             COVID-19 impact / recovery
+             Smartphone era challenges
+             Sound Transit expansion
+             Governance current state
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Historical Roots (Pre-1974 to Legalization)}
+
+Traces street music in Seattle from its pre-legal era through the watershed 1974 ordinance. Covers the Depression-era performer Nicholas Oeconamacos (trained under John Philip Sousa and Seattle Symphony conductor Homer Hadley), the legendary oral report that Woody Guthrie first heard the word ``hootenanny'' near 3rd Avenue and Pike Street, and the full story of Jim Page's 1974 campaign: the motorcycle cop threat, the walk to city hall, the flyer reading ``Jim Page --- Live at City Council!'', the packed chambers, the sung testimony, and the unanimous vote.
+
+\subsubsection{Module 2: Legendary Figures}
+
+Documents the canonical performers whose careers define the Pike Place busking tradition: Artis the Spoonman (active since 1972; Frank Zappa collaboration 1981; Soundgarden's Grammy-winning ``Spoonman'' 1994; currently Port Townsend); Jim Page (legalized busking; 50 Most Influential Musicians in Seattle History; Buskers' Guild founder); Jim Hinde (long-time Market fixture, died 2008); Jeanie Towne (blind harpist, Ballard-to-Market daily commute, wrote for Pike Place Market News, died post-COVID); Baby Gramps (steel guitar, wide-brimmed hat, vaudeville-adjacent); Jonny Hahn (64-key acoustic piano, 34-year Market veteran, COVID-displaced).
+
+\subsubsection{Module 3: Legal and Governance Framework}
+
+The constitutional and institutional architecture of Seattle street music. Covers: the 1974 ordinance (City Council 103824, passed September 16, signed September 20); the 1983 Hildt Agreement and formal inclusion of buskers in Market governance; the 1999 Hildt-Licata renewal; the 2001 Pike Place Market Buskers' Guild formation; Berger v. City of Seattle (2005 federal ruling striking Seattle Center permit rules as First Amendment violations); current permit system (annual \$35, daily \$10, musical-note painted spots, one-hour rotations, acoustic-only zones); Sound Transit light rail busking program; Seattle Farmers Market Association rules (pre-1922 public domain only).
+
+\subsubsection{Module 4: From Pavement to Stage}
+
+Systematic documentation of the pipeline from Pike Place busking to national and international careers. Anchor cases: The Head and the Heart (stairwell busking ca. 2009; Sub Pop deal; Gold debut album; 2019 rooftop concert for 30,000); Sierra Ferrell (busked with backpack and dog; \$300 first day; now Grand Ole Opry, sold-out tours); Ron Bailey (Market busking led to vaudeville troupe, Paris, Western Europe touring, founding the Moisture Festival 2004); Baby Gramps (cult national figure from Market origins); Artis the Spoonman (street-to-Grammy arc via Soundgarden). Analysis of what structural features of the Market enabled this pipeline.
+
+\subsubsection{Module 5: Present-Day Ecosystem and Post-COVID State}
+
+Documents the current state of the busking scene: active performers (Accordion Cat/Evan since 2009, Bob Goldstick/Hammer Dulcimer, Zach Hochstein/guitar-vocals, and approximately 200 annual permit holders); the COVID-19 disruption (March 2020 prohibition; Jonny Hahn's Green Lake Aqua Theater relocation; emotional return June 2021; low performer return rate); smartphone-era attention economy challenges; ArtsFund finding that Washington's arts sector lost nearly \$100M to COVID; downtown Seattle recovery context; Sound Transit busking expansion as new frontier.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+gsd_chipset:
+  mission: seattle-street-music-research
+  version: v1.0
+
+  agnus:  # Memory and asset coordination
+    role: source_index
+    manages: [citation_registry, performer_profiles, legal_documents]
+    cache_ttl: 300
+
+  denise:  # Visual output
+    role: document_renderer
+    outputs: [latex_pdf, index_html, ascii_diagrams]
+
+  paula:  # Audio/narrative synthesis
+    role: cultural_synthesizer
+    specialty: oral_tradition_preservation
+    handles: [performer_voices, through_line, vision_narrative]
+
+  68000:  # Core orchestration
+    role: mission_director
+    wave_control: true
+    parallel_tracks: 2
+    human_checkpoints: [wave_1_complete, wave_2_complete]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Pike Place Market busking history from the 1920s Depression era through 2025
+  \item The 1974 legalization campaign and its legal progeny
+  \item Documented performer profiles for the canonical Market figures
+  \item The pipeline from Market busking to national/international careers (top 10 cases)
+  \item Legal and governance framework: ordinances, agreements, court cases, current permit rules
+  \item COVID-19 impact and post-pandemic recovery state
+  \item Adjacent busking venues: Seattle Center, Sound Transit, WA State Ferries, Neighborhood Farmers Markets
+  \item The Artis the Spoonman / Soundgarden cultural moment as PNW music history node
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Indoor venue music (clubs, coffee shops, concert halls)
+  \item Broader Seattle music history not connected to street performance
+  \item Music tourism or event planning guides
+  \item Comparative analysis of other US cities' busking traditions
+  \item Policy advocacy regarding permit fees or busking regulations
+  \item Individual performer earnings data beyond published sources
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Pre-1974 busking history documented with at least three named performers and sourced dates.
+  \item Jim Page's 1974 legalization campaign narrated with primary source accuracy (city council vote date, ordinance number, key testimony details).
+  \item All five canonical Module 2 performers profiled with career arc, Market tenure dates, and cross-cultural connections.
+  \item The Artis the Spoonman / Soundgarden connection documented with Grammy Award context and Chris Cornell quotation on street performer perception.
+  \item Legal framework timeline complete: 1974 ordinance $\rightarrow$ 1983 Hildt $\rightarrow$ 1999 Hildt-Licata $\rightarrow$ 2001 Guild $\rightarrow$ 2005 Berger ruling $\rightarrow$ current permit system.
+  \item Current permit rules documented accurately: fee structure, hours, rotation system, acoustic rules, musical-note spots.
+  \item At least five pavement-to-stage pipeline cases documented with career milestones and sourced revenue/audience figures.
+  \item COVID-19 impact on Market busking documented with specific dates (March 2020 prohibition; June 2021 reopening) and performer responses.
+  \item Post-COVID performer return rate addressed qualitatively with named sources.
+  \item Smartphone and attention-economy challenges documented with performer testimony.
+  \item Sound Transit and WA State Ferry busking situations documented as adjacent governance cases.
+  \item Through-line connecting Seattle street music tradition to GSD ecosystem's ``spaces between'' philosophy explicit and substantiated.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Relevance} \\
+\midrule
+GSD BBS Educational Pack & Parallel vision & Both preserve living traditions through structured documentation \\
+GSD Foxfire Heritage Skills & Sibling mission & Shared commitment to oral/craft tradition preservation \\
+GSD Amiga Vision & Philosophical parent & Amiga Principle: architectural elegance $>$ brute force; applies to busking governance \\
+The Space Between & Source philosophy & ``The spaces between'' as foundational frame for street music's role \\
+GSD Cloud Ops Curriculum & Adjacent mission & Both document informal knowledge pipelines to formal outcomes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga computer's designers understood something that hardware engineers still argue about: you do not need raw power if your architecture is precise. A dedicated custom chip doing one job elegantly outperforms a general processor doing that job clumsily. Pike Place Market's busking system is the same insight applied to urban culture. The painted note on the sidewalk is not a restriction --- it is a scaffold. One hour, one spot, acoustic, no amplification in the main arcade. These constraints are the architecture. Within them, Artis the Spoonman played spoons on a Grammy-winning single. Within them, The Head and the Heart wrote ``Lost in My Mind'' --- the first song they ever composed in Seattle --- before anyone had heard of them. The constraints are the school.
+
+``The spaces between'' is not only a title or a metaphor. On a busy Market morning it is a physical fact: the space between the fish counter and the flower stall, between the tourists streaming toward the clock and the commuters heading to the ferry, between one note and the next. A busker occupies that space and transforms it. This is what Jim Page argued to city council in 1974 when he sang his case instead of reading a brief. The street is not a stage you build. It is a stage that already exists in the interstitial space of the city. The mission of this research is to document that stage --- its history, its people, its rules, and its extraordinary generative power --- before more of it goes silent.
+
+\newpage
+
+%% ===========================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% ===========================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Seattle Street Music --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference synthesizes findings from web research conducted in March 2026 using primary sources including the Pike Place Market PDA, Seattle City Archives, KNKX Public Radio, The Seattle Times, and performer primary sources (official websites, direct interviews on record). All claims are attributed. Where performer testimony appears, it is quoted from on-record published interviews only.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Pike Place Market PDA (\url{pikeplacemarket.org}) --- official history, current permit rules, busker program
+  \item Seattle City Archives (\url{seattle.gov/cityarchives}) --- 1975 council transcripts, ordinance records
+  \item KNKX Public Radio (NPR affiliate) --- oral history interviews, 40th anniversary coverage
+  \item Seattle Times archives --- performer profiles, COVID coverage, First Amendment cases
+  \item Jim Page official website (\url{jimpage.net}) --- primary source memoir of 1974 campaign
+  \item Artis the Spoonman official website (\url{artisthespoonman.net}) --- career chronology
+  \item ArtsFund (\url{artsfund.org}) --- COVID cultural impact data for Washington State
+\end{itemize}
+
+\subsection{Module 1: Historical Roots Reference}
+
+\subsubsection{Pre-Legal Era (Pre-1974)}
+
+Street music in Seattle predates its legality by at least four decades. Nicholas Oeconamacos, a Greek clarinetist who had performed under bandleader John Philip Sousa and Seattle Symphony conductor Homer Hadley, returned to Seattle during the Great Depression and played for change on the street. This represents the earliest documented instance of Pike Place--adjacent busking in the historical record.
+
+The folk connection runs deeper. Oral tradition holds that Woody Guthrie sang somewhere along 3rd Avenue and Pike Street --- not far from the Market --- and that it was in Seattle that Guthrie first encountered the word ``hootenanny,'' a term that would define an era of American folk organizing. While this cannot be confirmed with archival precision, the geographic overlap of Guthrie's documented Pacific Coast travels and the Market's location makes it historically plausible.
+
+By the early 1970s, Pike Place Market had become one of the only reliable venues for buskers in Seattle. As Artis the Spoonman recalled: ``Aside from street fairs, the Market was one of the only venues for buskers in the early 1970s'' --- this before legalization, before permits, in a city where street music was technically a citable offense.
+
+\subsubsection{Jim Page and the 1974 Legalization Campaign}
+
+Jim Page arrived in Seattle in 1971 after a year in New York's Greenwich Village, carrying a guitar and a repertoire of political folk songs in the tradition of Woody Guthrie and Buffy Sainte-Marie. He began performing on downtown sidewalks near Pike Place Market.
+
+The triggering incident: in 1974, a motorcycle police officer pulled up while Page was singing in front of Oliver's Meats on lower Pike Street. ``Do you have a permit?'' the officer asked. Page said no. ``Next time I see you, I'll give you a ticket.'' Page looked into getting a permit and discovered that street performing licenses were only available to blind and disabled persons.
+
+His campaign was characteristically direct. He visited City Council member Randy Revelle of the Public Safety Committee. Revelle was sympathetic. He arranged a public hearing at City Council chambers. Page made flyers: ``Jim Page --- Live at City Council!'' He posted them in rock bars and at the University of Washington campus. He composed an original song for the occasion: ``Now's the Time for Talking.''
+
+The chambers were packed. The Seattle Times and the PI covered it. Page sang his testimony. The vote was unanimous in favor of overturning the old law. On September 16, 1974, the City Council passed Ordinance 103824. The mayor signed it September 20. Street performing was legal in Seattle.
+
+Page later reflected on why the constitutional argument mattered beyond his own livelihood: ``I still maintain that busking and access to the streets is very important for our public mental health, to keep secrets from strangling us, to be able to talk in public. But also, we have the right to live in a carnival, if we so choose.''
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Event} & \tableheader{Significance} \\
+\midrule
+1930s & Nicholas Oeconamacos busking & Earliest documented Market-area street music \\
+Early 1970s & Artis arrives in Seattle & Market as primary busking venue pre-legalization \\
+1971 & Jim Page arrives from Greenwich Village & Key agent of legalization \\
+1974 (Spring) & Police threat, Oliver's Meats & Triggering incident \\
+April 1974 & City Council hearing & Page performs original song; testimony delivered \\
+Sept 16, 1974 & Ordinance 103824 passed & Unanimous vote; street performing legalized \\
+Sept 20, 1974 & Mayor's signature & Ordinance in force \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Legendary Figures Reference}
+
+\subsubsection{Artis the Spoonman (b. October 3, 1948)}
+
+Artis began performing spoons at age 10. After a stint in the US Navy, he began hitchhiking and busking across the country in the early 1970s. He moved to Seattle from Santa Cruz, frequented Fremont taverns playing jukebox duets for tips, and established his Market presence beginning in 1972.
+
+His first major collaboration came in 1981, when he appeared onstage with Frank Zappa in Eugene, Oregon, and at New York's Palladium. His career watershed came in 1992 at Bumbershoot Seattle, where he performed as a ``tweener'' between Soundgarden and the Melvins. Soundgarden manager Susan Silver told him that Chris Cornell was writing a song called ``Spoonman'' and would Artis like to record on it. In 1993, he went to the studio and cut it in four takes.
+
+``Spoonman'' was released February 14, 1994, as the lead single from Soundgarden's \textit{Superunknown}. Artis played the spoon solo in the bridge. The song peaked at No. 3 on the Billboard Mainstream Rock Tracks chart. At the 1995 Grammy Awards it won Best Metal Performance. Chris Cornell described the song's theme: ``It's more about the paradox of who he is and what people perceive him as. He's a street musician, but when he's playing on the street, he is given a value and judged completely wrong by someone else.''
+
+Artis received a flat fee of \$1,000 for performing on the recording and \$7,000 for the music video (in which the band appears only in black-and-white still photographs, making Artis the film's subject). He earned no Grammy invitation. He remains sanguine: ``Who ever had a Grammy Award-winning song, a multiplatinum song about himself?''
+
+He suffered a heart attack in 2002; a benefit at a Seattle festival raised over \$3,200. He has lived in Port Townsend, Washington since 2009. His longtime performing partner at the Market is Jim Page.
+
+\subsubsection{Jim Page (b. 1949)}
+
+Born in Palo Alto, California; arrived in Seattle 1971. In addition to legalizing busking, Page co-founded the Pike Place Market Buskers' Guild in 2000--2001 and organized the first Buskers' Festival run entirely by performers. Seattle Metropolitan Magazine named him one of the 50 Most Influential Musicians in Seattle History, a list he shares with Jimi Hendrix, Nirvana, and Bill Frisell. He has toured 17 countries and released 23 full-length albums. His songs have been covered by the Doobie Brothers, Christy Moore, and Michael Hedges. He continues to perform at the Market.
+
+\subsubsection{Jim Hinde}
+
+A long-time Market fixture who, according to the Seattle Times, ``helped define Pike Place Market.'' He died in 2008. His memorial was held inside the Market's main arcade on July 2, 2008. Jim Page performed ``Jim's Song'' in his honor. Artis the Spoonman was a close associate. Donations to the Jim Hinde Memorial Fund were directed to veterans organizations.
+
+\subsubsection{Jeanie Towne}
+
+For decades, Jeanie Towne was known as ``the blind harpist at the Market.'' She was blind, but she was emphatic that blindness not define her. She wrote for the Pike Place Market News, contributed articles on subjects from kosher food to algae, and appeared as the inspiration for a 1990s comic strip called ``Adventures of a Sightless Streetsinger.''
+
+She rode a bus from Ballard to the Market every day with her instruments. She lived off her busking. She wrote to the Seattle Times in the 1980s: ``I feel that soothing the grind of city noises, raining out peoples' blues, and kindling some hope and cheer are as useful and challenging an occupation as any.'' She was, by Artis the Spoonman's account, ``a legend.'' ``You practically had to put your ear up to her harp to hear her, but you did. There was nobody like...'' The Market prohibited busking in March 2020 due to COVID-19. Towne was too frail to return. She died after the pandemic. She had been asking to be driven to the Market to play ``as recently as a few weeks ago.''
+
+\subsubsection{Baby Gramps}
+
+A guitarist and steel-guitar player recognizable by his wide-brimmed signature hat. Baby Gramps plays with finger-picks and occasional elbow-chords on steel guitar. He has achieved cult national recognition from his Market origins, performing a genre-fluid repertoire described as vaudeville-adjacent. He is documented in the Market's ``Street Music'' profile series.
+
+\subsubsection{Jonny Hahn}
+
+A piano player who has performed at Pike Place Market for 34 years --- wrestling a 64-key acoustic piano to his corner every day. His op-ed in the Seattle Times (July 24, 2020) documented the COVID experience: ``How strange and unsettling it is to suddenly find that my livelihood has been banned by the governor.'' He was permitted to resume briefly on July 5, 2020, then prohibited again July 20. He relocated to perform beneath the old Green Lake Aqua Theater. When the Market reopened to performers on June 25, 2021, the public response moved him: ``It was just heart energy spilling over. People just kept saying how glad they were to have me back.'' He later observed that smartphones have fundamentally eroded the public attention that once made the Market ``a busker's paradise.''
+
+\subsection{Module 3: Legal and Governance Framework Reference}
+
+\subsubsection{The 1974 Ordinance}
+
+City Council Ordinance 103824. Passed September 16, 1974; signed by the mayor September 20, 1974. Overturned the requirement that street performers obtain a permit to perform. Previous permits had been available only to blind and disabled persons. The ordinance established that performers asking for donations were not subject to vendor laws. It was the first such ordinance in Seattle's history and has served as a legal foundation for street performing rights in the Pacific Northwest ever since.
+
+\subsubsection{Regulatory Milestones}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Action} & \tableheader{Effect} \\
+\midrule
+1974 & Ordinance 103824 & Street performing legalized citywide; unanimous vote \\
+March 4, 1975 & City Council hearing & Discussion of regulating Market musicians; PDA requests management authority \\
+1983 & Hildt Agreement & Buskers formally included in Market governance; permit framework established \\
+1999 & Hildt-Licata Agreement & Ten-year renewal; sponsored by council members Hildt and Licata \\
+2000--2001 & Pike Place Market Buskers' Guild & First buskers' union; organized annual Buskers' Festival \\
+2001 & First Buskers' Festival & Annual September tradition begins \\
+2005 & Berger v. City of Seattle & Federal judge rules Seattle Center permit rules violate First Amendment \\
+2020--2021 & COVID-19 suspension & Market busking prohibited March 2020; reopened June 25, 2021 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Current Pike Place Market Permit System}
+
+The current system (as of 2025--2026 permit year) operates as follows: Annual permit cost is \$35; one-day traveling permits cost \$10. First-time applicants complete a virtual orientation; returning buskers renew directly. Performance spots are marked by painted musical notes on the sidewalk; the number on each note indicates how many performers may occupy it simultaneously. Performers rotate on one-hour sets when others are waiting. Performances must remain at acoustic levels that do not significantly interfere with verbal communication. Amplification is permitted only in designated ``low amp'' zones with management approval. Horns and amplified music are not permitted in the main arcade.
+
+The Pike Place Market PDA notes that for over 50 years, nearly 200 artists perform year-round across the historic district.
+
+\subsubsection{The Seattle Farmers Market Association Rules}
+
+A notable constraint at SFMA-operated markets (distinct from the PDA-operated Pike Place Market): musicians may only perform original music or music in the public domain, defined as any song or musical work published in 1922 or earlier. This strict copyright interpretation is not universal across Seattle's busking venues but represents the most conservative end of the governance spectrum.
+
+\subsubsection{Sound Transit Busking Program}
+
+Sound Transit permits busking at approved Link light rail stations, marked with stars on station maps. Rules include: no amplification; volume must not compromise passenger comfort; no high-risk performances (knives, fire); all content must be suitable for general family audiences; no performance during special events at listed stations (e.g., UW Station during Husky games). Sound Transit reserves the right to stop or relocate performers for safety or operational reasons.
+
+\subsection{Module 4: From Pavement to Stage Reference}
+
+\subsubsection{The Head and the Heart}
+
+The Head and the Heart formed around Conor Byrne Pub's open mic nights in Ballard, ca. 2009. Jonathan Russell, a Virginia native newly arrived in Seattle, heard co-founder Josiah Johnson covering Bon Iver's ``Skinny Love.'' The band coalesced quickly, adding violinist Charity Rose Thielen, keyboardist Kenny Hensley, and bassist Chris Zasche.
+
+Before they had a record deal, several members busked in a stairwell below the main entrance of Pike Place Market. Russell described the spot: ``You know where the bathrooms are when you go downstairs and there's an in-between corridor area? That was our favorite spot because it just had this natural cavernous reverb.'' They chose it because ``the acoustics were free, our songs were tested via passersby, and sometimes we would gather enough gifted cash to share a good meal.''
+
+In 2011, the band self-released their debut album, which produced the AAA No. 1 single ``Lost in My Mind'' and entered the folk mainstream. The album is now certified Gold. Their subsequent albums \textit{Let's Be Still} (2013) and \textit{Signs of Light} (2016) both reached Billboard's Top 10. In August 2019, they returned to Pike Place Market to perform a free rooftop concert in front of an estimated 30,000 people --- two stories above where they had busked for \$17 a decade earlier. The concert was filmed as \textit{Rivers and Roads: The Head and the Heart --- Live from Pike Place Market}, released January 2021 on Amazon Prime.
+
+\subsubsection{Sierra Ferrell}
+
+Sierra Ferrell arrived in Seattle as a transient musician with a backpack and a dog. Her first ``gig'' in the city was at Pike Place Market. ``When I first got to town and I had my backpack and my dog and I wasn't sure what to do or where I was going, I just kind of posted up over here on this musical note, set down my backpack and played. Made about \$300 that day.'' She later performed at the Grand Ole Opry and sold out cross-country tours. She returned to Pike Place Market to perform a sold-out show at the Neptune Theatre, pausing to revisit her old busking spot first.
+
+\subsubsection{Ron Bailey}
+
+Singer, songwriter, and guitarist who began his performance career at the Market. While busking at Pike Place, he formed a vaudeville theater troupe. The troupe eventually relocated to Paris, where they performed in the streets and toured across Western Europe combining song, dance, and circus acts. In 2004, Bailey returned to Seattle and founded the Moisture Festival, the city's comedy and variety series, drawing directly on his vaudeville roots developed at the Market.
+
+\subsubsection{Pipeline Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{Market Period} & \tableheader{Career Outcome} \\
+\midrule
+Artis the Spoonman & 1972--present & Grammy Award-winning single; international touring \\
+Jim Page & 1971--present & 50 Most Influential Seattle Musicians; 17 countries toured \\
+The Head and the Heart & ca. 2009--2011 & Gold debut album; Coachella/Lollapalooza; 30,000-person homecoming \\
+Sierra Ferrell & ca. 2010s & Grand Ole Opry; sold-out Neptune Theatre; national touring \\
+Ron Bailey & 1980s--1990s & Vaudeville touring in Western Europe; Moisture Festival founder \\
+Baby Gramps & Long-tenured & Cult national following; ``Street Music'' documentary feature \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5: Present-Day Ecosystem Reference}
+
+\subsubsection{Current Performers}
+
+The current Market busking community includes approximately 200 annual permit holders. Notable active performers include:
+
+\textbf{Accordion Cat (Evan):} Full-time busker since 2009. Graduated from Seattle University in 2006; left corporate life after falling in love with a borrowed accordion during a breakup. Performs solo and as a duo with ``Violin Cat.'' Wears a cat mask while playing. His constant presence has made him iconic to Market regulars.
+
+\textbf{Bob Goldstick:} Hammer Dulcimer player. A lifetime musician who spent years in bars and nursing homes before discovering the structured Market system. Emphasizes the protective value of the permit framework: ``Here, you're protected. You have security, and it's legitimate, and you sign up for your spot.''
+
+\textbf{Zach Hochstein:} Third-year interdisciplinary arts student playing guitar and vocals. Has adapted his repertoire strategically: ``You don't have to, but it's good to play what people want to hear. I think I've sung `Blowin' in the Wind' maybe a thousand times.'' Tracks cruise ship schedules to optimize audience size.
+
+\subsubsection{COVID-19 Impact and Recovery}
+
+The Market prohibited busking in March 2020 at the onset of the COVID-19 pandemic. Jonny Hahn's op-ed in the Seattle Times (July 24, 2020) documented the lived impact: a brief reopening July 5--July 20, 2020 was rescinded, leaving performers in a policy limbo that Hahn described as ``highly unjust'' given the outdoor nature of the activity and Phase 2 reopening of indoor businesses.
+
+The Market reopened to performers on June 25, 2021. Hahn's emotional return was met with what he called ``heart energy spilling over.'' However, few other performers returned to previous levels of activity. The post-pandemic street music scene at Pike Place represents an ongoing recovery rather than a restoration.
+
+ArtsFund's COVID Cultural Impact Study (2022) documented that Washington's arts and culture sector lost nearly \$100 million to the pandemic. While this figure encompasses all arts organizations, it provides quantitative context for the structural damage to the informal performance economy that busking represents.
+
+\subsubsection{Smartphone and Attention Economy Challenges}
+
+Jonny Hahn, who has observed the Market from his piano corner for over three decades, identified the smartphone as the primary long-term threat to busking culture, predating COVID: ``It started with smartphones. People's attention spans were diminished by orders of magnitude. Constant texting and Googling and taking photos completely altered public space.'' This observation from a practitioner with 30+ years of comparative data is a significant primary-source data point on the structural transformation of the public-attention economy.
+
+\subsubsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Concern} & \tableheader{Protocol} \\
+\midrule
+Performer income & Privacy of earnings & Use only published/self-reported figures \\
+Health conditions & Jeanie Towne's blindness & She explicitly rejected disability framing; follow her lead \\
+Mental health & Josiah Johnson / THATH & Follow public record only; respect recovery narrative \\
+First Amendment & Policy sensitivity & Present legal record; do not advocate \\
+Indigenous peoples & Any Coast Salish context & Use nation-specific attribution per OCAP/CARE principles \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Institutional Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Seattle City Archives, Record Series 1628-02: Pike Place Market Visual Images and Audiotapes; City Council Public Safety and Health Committee minutes, March 4, 1975; Comptroller File 280842 (\url{seattle.gov/cityarchives})
+  \item City of Seattle Ordinance 103824, September 16, 1974 (street performing legalization)
+  \item Pike Place Market Public Development Authority, \textit{Market History} and \textit{Become a Pike Place Market Busker}, 2025 (\url{pikeplacemarket.org})
+  \item Sound Transit, \textit{Busker Guidelines}, current edition (\url{soundtransit.org})
+  \item ArtsFund, \textit{COVID Cultural Impact Study}, 2022 (\url{artsfund.org})
+  \item Seattle Farmers Market Association, \textit{Busking Rules} (\url{sfmamarkets.com})
+\end{itemize}
+
+\subsubsection{Professional and Journalistic Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item KNKX / KPLU Public Radio (NPR affiliate), Gabriel Spitzer, ``How This Musician Made Seattle Street Performing Legal 40 Years Ago,'' September 8, 2014
+  \item \textit{The Seattle Times}: Jonny Hahn COVID op-ed (July 24, 2020); Danny Westneat on Jeanie Towne (2022); THATH rooftop concert coverage (2019, 2021)
+  \item \textit{The Seattle Spectator}, ``The Propitious Performers of Pike Place,'' May 2025
+  \item Paul Dorpat, \textit{Seattle Now \& Then}: Pike Place Market Buskers (Artis the Spoonman, 1975), published October 28, 2021
+  \item KING 5, Sierra Ferrell Market return story, 2023
+  \item \textit{Seattle Magazine}, ``Meet Seattle Busker Jim Page''
+\end{itemize}
+
+\subsubsection{Primary Source Materials}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Jim Page, \textit{The Street Singing Saga} (\url{jimpage.net}) --- first-person account of 1974 campaign
+  \item Artis the Spoonman official website (\url{artisthespoonman.net}) --- career chronology
+  \item The Head and the Heart, band statement on Pike Place Market significance (January 2021, \textit{Broadway World})
+  \item Jonathan Russell interview, \textit{Seattle Times}, August 2019
+  \item Jonny Hahn, op-ed, \textit{Seattle Times}, July 24, 2020
+  \item Chris Cornell on ``Spoonman'' in \textit{Entertainment Weekly} and MTV special
+  \item Wikipedia entries: ``Artis the Spoonman,'' ``Spoonman (Soundgarden),'' ``Jim Page (singer)'' --- used for cross-referencing, not as primary sources
+\end{itemize}
+
+\newpage
+
+%% ===========================================================
+%% STAGE 3 — MISSION PACKAGE
+%% ===========================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Seattle's street music traditions at Pike Place Market and adjacent urban venues, covering the period from the Depression era through the post-COVID recovery (approximately 1930--2025). The document will preserve the oral and institutional memory of a living tradition, document the legal history that made it possible, and analyze the artist pipeline from pavement to stage with sufficient rigor to serve as a cultural reference for future performers, historians, and urban public-space scholars.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+==================
+
+Wave 0: FOUNDATION (Sequential, Haiku)
+  [Shared schema] [Source index] [Templates]
+
+Wave 1A: RESEARCH TRACK A (Parallel, Sonnet)     Wave 1B: RESEARCH TRACK B (Parallel, Opus)
+  M1: Historical Roots                             M3: Legal / Governance
+  M2: Legendary Figures                            M4: Pavement to Stage
+
+             |                                              |
+             +--------------------+--------------------------+
+                                  |
+                       Wave 2: SYNTHESIS (Sequential, Opus)
+                         Cross-module integration
+                         M5: Present-Day Ecosystem
+                         Cultural through-line
+
+                                  |
+                       Wave 3: PUBLICATION (Sequential, Sonnet)
+                         LaTeX PDF compilation
+                         Index page
+                         Verification
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Schema Layer} --- performer profile templates, legal timeline schema, pipeline case template
+  \item \textbf{Source Index Layer} --- citation registry with source quality ratings
+  \item \textbf{Research Layer} --- five modules executed in parallel tracks
+  \item \textbf{Synthesis Layer} --- cross-module integration; cultural analysis; through-line construction
+  \item \textbf{Publication Layer} --- LaTeX PDF, index HTML, XeLaTeX compilation
+  \item \textbf{Verification Layer} --- source traceability, numerical attribution, test matrix execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Performer Profiles (Module 2) & 5 performers; career arc + Market tenure + cross-connections; sourced & M2 spec \\
+2 & Legal Timeline (Module 3) & 8 milestones; ordinance numbers/dates accurate; court cases cited & M3 spec \\
+3 & Pipeline Analysis (Module 4) & 5+ cases; milestones + audience/revenue figures where published & M4 spec \\
+4 & Historical Narrative (Module 1) & Pre-1974 to legalization; Page campaign fully narrated; primary sources & M1 spec \\
+5 & Present Ecosystem Survey (Module 5) & Current performers; COVID dates; smartphone thesis with sourced testimony & M5 spec \\
+6 & Synthesis Document & Cross-module patterns; through-line connecting to GSD philosophy & Synthesis spec \\
+7 & Final LaTeX PDF & Compiles clean; all citations; all sections complete & XeLaTeX 3-pass \\
+8 & Index HTML & File cards; download links; usage instructions & Template spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Schema and templates & None & Haiku & 2,000 \\
+Source index & Schema & Haiku & 3,000 \\
+M1: Historical roots survey & Source index & Sonnet & 8,000 \\
+M2: Legendary figures profiles & Schema, M1 & Sonnet & 12,000 \\
+M3: Legal framework analysis & Source index & Opus & 10,000 \\
+M4: Pipeline case documentation & M2, M3 & Opus & 10,000 \\
+M5: Present ecosystem & M1--M4 & Sonnet & 8,000 \\
+Cross-module synthesis & M1--M5 & Opus & 8,000 \\
+Through-line construction & Synthesis & Opus & 3,000 \\
+LaTeX compilation & All modules & Sonnet & 15,000 \\
+Verification pass & All modules & Sonnet & 5,000 \\
+Index HTML & PDF complete & Sonnet & 2,000 \\
+\midrule
+\textbf{Total} & & & \textbf{$\approx$86,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Pct.} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & M3 legal analysis, M4 pipeline, synthesis, through-line & Judgment-heavy; requires evaluating First Amendment arguments, cultural significance, and cross-module integration \\
+Sonnet & 60\% & M1, M2, M5 surveys, LaTeX, verification, HTML & Survey compilation, document assembly, structured content production \\
+Haiku & 10\% & Schema, source index, templates & Shared scaffolding with minimal reasoning load \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}L{3cm}C{2cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Tasks} & \tableheader{Model} & \tableheader{Mode} \\
+\midrule
+0 & Foundation & Schema, source index & Haiku & Sequential \\
+1A & Research Track A & M1, M2 & Sonnet & Parallel \\
+1B & Research Track B & M3, M4 & Opus & Parallel \\
+2 & Synthesis & M5, integration, through-line & Opus & Sequential \\
+3 & Publication & LaTeX, verification, HTML & Sonnet & Sequential \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0-T1: Schema & Performer profile template; legal milestone schema; pipeline case template & Haiku & 2,000 \\
+W0-T2: Source Index & Index all 20+ sources with quality rating; validate URLs & Haiku & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Tokens} \\
+\midrule
+W1A-T1: M1 Historical & Pre-1974 era, Depression buskers, Woody Guthrie, Jim Page 1974 campaign full narrative & 8,000 \\
+W1A-T2: M2 Figures & Profile Artis, Page, Hinde, Towne, Baby Gramps, Hahn; use performer-profile schema & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Opus):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Tokens} \\
+\midrule
+W1B-T1: M3 Legal & Full governance timeline; ordinance text; Hildt Agreements; Berger case; current rules & 10,000 \\
+W1B-T2: M4 Pipeline & THATH, Ferrell, Bailey, Artis, Page careers; analyze structural pipeline features & 10,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W2-T1: M5 Ecosystem & Current performers; COVID impact; smartphone thesis; Sound Transit; recovery state & Opus & 8,000 \\
+W2-T2: Integration & Cross-module analysis; legal framework $\rightarrow$ pipeline; historical roots $\rightarrow$ present & Opus & 8,000 \\
+W2-T3: Through-line & Connect to GSD ``spaces between'' philosophy; painted note as architectural metaphor & Opus & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W3-T1: LaTeX & Assemble full document from all modules; three XeLaTeX passes & Sonnet & 15,000 \\
+W3-T2: Verification & Execute test matrix; source traceability; numerical attribution check & Sonnet & 5,000 \\
+W3-T3: Index HTML & Generate index.html with file cards; Market red color scheme & Sonnet & 2,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Wave 0 schema cached; load once at session start; reuse across all Wave 1 agents
+  \item Source index loaded as shared context for all module agents (reduces redundant validation)
+  \item Module outputs committed to structured JSON before Wave 2 synthesis to enable cache reuse
+  \item LaTeX template loaded once in Wave 3; do not regenerate per-section
+  \item Total estimated cache exploitation: 5-minute TTL window across Wave 1 parallel tracks
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tasks} & \tableheader{Tokens} & \tableheader{Pct. of Budget} \\
+\midrule
+Wave 0 & 2 & 5,000 & 6\% \\
+Wave 1A & 2 & 20,000 & 23\% \\
+Wave 1B & 2 & 20,000 & 23\% \\
+Wave 2 & 3 & 19,000 & 22\% \\
+Wave 3 & 3 & 22,000 & 26\% \\
+\midrule
+\textbf{Total} & \textbf{12} & \textbf{86,000} & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+W0-T1 (Schema) ----+----> W1A-T2 (M2 Figures)
+                   |
+W0-T2 (Sources) ---+----> W1A-T1 (M1 Historical)
+                   |
+                   +----> W1B-T1 (M3 Legal)
+                   |
+                   +----> W1B-T2 (M4 Pipeline)
+
+W1A-T1 (M1) --+
+W1A-T2 (M2) --+----> W2-T1 (M5 Ecosystem)
+W1B-T1 (M3) --+
+W1B-T2 (M4) --+----> W2-T2 (Integration)
+
+W2-T1 + W2-T2 -------> W2-T3 (Through-line)
+
+W2-T3 (Through-line) -> W3-T1 (LaTeX PDF)
+W3-T1 (LaTeX PDF) ----> W3-T2 (Verification)
+W3-T2 (Verification) -> W3-T3 (Index HTML)
+
+HUMAN CHECKPOINTS:
+  [C1] After Wave 1 complete: review module drafts
+  [C2] After Wave 2 complete: review synthesis + through-line
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK \\
+Core functionality & 18 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{33} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to government archives, NPR, Seattle Times, official performer sites, or ArtsFund. Zero entertainment blogs as primary sources. \\
+SC-NUM & Numerical attribution & Every date, fee amount, Grammy chart position, audience count, and revenue figure attributed to a named source. \\
+SC-ADV & No policy advocacy & Document presents permit fee structure and regulations as facts; does not advocate for or against specific policies. \\
+SC-IND & Indigenous attribution & Any Coast Salish or other Indigenous content uses nation-specific names, not generic ``Indigenous peoples.'' OCAP/CARE principles applied. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Pre-1974 historical coverage & At least 3 named performers documented with dates \\
+CF-02 & 1974 ordinance accuracy & Ordinance number 103824; dates Sept 16 (council) and Sept 20 (signature) both present \\
+CF-03 & Jim Page campaign completeness & Oliver's Meats location; city council performance; ``Now's the Time for Talking'' song; unanimous vote all documented \\
+CF-04 & Artis Spoonman profile & Active since 1972; Frank Zappa 1981; Bumbershoot 1992; Spoonman recording 1993; Grammy 1995; Port Townsend residence all present \\
+CF-05 & Grammy context accurate & No. 3 Mainstream Rock; No. 9 Modern Rock; Best Metal Performance 1995 Grammy; Artis paid \$1K recording / \$7K video \\
+CF-06 & Jeanie Towne profile accuracy & Blind harpist; Ballard commute; Market News writer; died post-COVID; her own framing of disability honored \\
+CF-07 & Legal timeline completeness & All 7 milestones (1974, 1975 hearing, 1983, 1999, 2001 Guild, 2001 Festival, 2005 Berger) present with correct dates \\
+CF-08 & Current permit fees accurate & \$35 annual; \$10 daily; musical-note spots; one-hour rotation documented \\
+CF-09 & THATH pipeline documented & Stairwell busking; ``cavernous reverb'' detail; \$17 earnings; Gold debut; 30,000-person rooftop concert all sourced \\
+CF-10 & Sierra Ferrell pipeline documented & Backpack + dog arrival; \$300 first day; Grand Ole Opry; Neptune Theatre sourced \\
+CF-11 & COVID dates accurate & March 2020 prohibition; July 5--20 brief reopening; June 25 2021 full reopening all present \\
+CF-12 & Smartphone thesis sourced & Jonny Hahn testimony cited as primary source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Legal $\rightarrow$ Pipeline cascade & Document traces how 1974 legalization enabled the structured permit system that made the pavement-to-stage pipeline possible \\
+IN-02 & Historical roots $\rightarrow$ Present continuity & Document explicitly connects Depression-era busking to present-day tradition as unbroken thread \\
+IN-03 & Figures $\rightarrow$ Governance cross-reference & Artis, Page, Towne, Hahn each appear in governance context (not only as biographical subjects) \\
+IN-04 & Cross-module data consistency & Grammy year (1995) consistent across M2 and M4; COVID dates consistent across M2 and M5 \\
+IN-05 & Document self-containment & No undefined terms; painted-note system explained before referenced; all acronyms spelled out \\
+IN-06 & Through-line connection & GSD ``spaces between'' connection explicitly made and grounded in specific Market details \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Pre-1974 history documented & CF-01 & Pending \\
+2. 1974 campaign narrated accurately & CF-02, CF-03 & Pending \\
+3. Five figures profiled & CF-04, CF-06 & Pending \\
+4. Spoonman/Soundgarden documented & CF-04, CF-05 & Pending \\
+5. Legal timeline complete & CF-07 & Pending \\
+6. Current permit rules accurate & CF-08 & Pending \\
+7. Pipeline cases documented & CF-09, CF-10 & Pending \\
+8. COVID impact dated & CF-11 & Pending \\
+9. Post-COVID return addressed & CF-11, CF-12 & Pending \\
+10. Smartphone thesis sourced & CF-12 & Pending \\
+11. Adjacent venues documented & IN-01, IN-03 & Pending \\
+12. Through-line explicit & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at Wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; primary source validation; oral history retrieval \\
+EXEC-A & Executor Alpha & Track A document production (M1, M2) \\
+EXEC-B & Executor Beta & Track B document production (M3, M4) \\
+CRAFT-HIST & History Specialist & Pre-1974 era; oral tradition analysis; archival sourcing \\
+CRAFT-LEGAL & Legal Specialist & Ordinance analysis; First Amendment case law; governance documentation \\
+VERIFY & Verification Agent & Source traceability; numerical attribution; test matrix execution \\
+INTEG & Integration Agent & Cross-module consistency; through-line validation \\
+CAPCOM & HITL Interface & Human approval at Wave 1 and Wave 2 checkpoints \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache TTL monitoring \\
+LOG & Chronicle Agent & Commit messages; audit trail; milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Name & Seattle Street Music: A Living Tradition \\
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (Historical Roots, Legendary Figures, Legal Framework, Pipeline, Present Ecosystem) \\
+Parallel Tracks & 2 (Wave 1A Sonnet / Wave 1B Opus) \\
+Human Checkpoints & 2 (after Wave 1; after Wave 2) \\
+Total Waves & 4 (0 Foundation, 1 Research, 2 Synthesis, 3 Publication) \\
+Estimated Tokens & $\approx$86,000 \\
+Estimated Sessions & 2--3 \\
+Context Windows & 4--6 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Deliverable & Structured research document (LaTeX PDF) \\
+Safety-Critical Tests & 4 (all mandatory-pass BLOCK) \\
+Total Tests & 33 \\
+Total Success Criteria & 12 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% Closing Quote Box
+\vspace{2em}
+\begin{quotebox}
+\textit{``I still maintain that busking and access to the streets is very important for our public mental health, to keep secrets from strangling us, to be able to talk in public. But also, we have the right to live in a carnival, if we so choose.''}
+
+\vspace{0.5em}
+\hfill --- Jim Page, musician and busking advocate, reflecting on the 40th anniversary\\
+\hfill of his 1974 Seattle City Council performance that legalized street music
+
+\vspace{1em}
+\textcolor{tertiary}{\small\sffamily The painted note on the sidewalk is not decoration. It is the architectural residue of a unanimous vote, a folk singer who performed his testimony, and fifty years of music that lived in the spaces the city forgot to close off.}
+\end{quotebox}
+
+\end{document}

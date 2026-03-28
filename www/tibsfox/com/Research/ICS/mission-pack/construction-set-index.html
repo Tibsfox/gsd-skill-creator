@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Infinite and One Construction Set &mdash; GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #E65100;
+  --secondary: #1565C0;
+  --tertiary: #37474F;
+  --accent: #BF360C;
+  --light-bg: #FFF3E0;
+  --card-bg: #FFCC80;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #37474F 40%, #4E342E 80%, #BF360C 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: var(--card-bg); letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: #ECEFF1; border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--tertiary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--primary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--primary);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: var(--tertiary); font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Infinite and One Construction Set</h1>
+  <h2>From Spring Terminal to Hadron Collider: A 100-Level Engineering Curriculum</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="construction-set-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; 1,656 lines &middot; XeLaTeX</div>
+      <div class="name">Mission Package Source</div>
+      <div class="desc">Complete three-stage document: vision, research reference, and mission specification. The largest TeX pack in the series.</div>
+    </a>
+    <a href="../index.html" class="file-card">
+      <div class="ext">HTML &middot; Research Browser</div>
+      <div class="name">ICS Research Modules</div>
+      <div class="desc">Browse the 6 research modules covering modularity, computation, history, theory, composition, and software architecture.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 &mdash; Vision Document</span>
+        <ul>
+          <li>Vision narrative: spring terminal to LHC, engineering fidelity as single thread</li>
+          <li>5 problem statements: abstraction ladder, hobby-to-physics gap, fidelity unnamed, periodic table as chemistry, AI fragility</li>
+          <li>Core concept: One Thread, Ten Octaves &mdash; 10 layers, 100 levels</li>
+          <li>10-module fleet architecture, chipset configuration, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 &mdash; Research Reference</span>
+        <ul>
+          <li>M01 Matter: 40+ elements mapped, spring terminal anatomy, periodic table as engineering inventory</li>
+          <li>M02 Signal: Cardboard box experiment L11&ndash;15, Kirchhoff's laws, RC/555, impedance matching</li>
+          <li>M03 Logic: Boolean algebra, 7 gates, CMOS, IEEE 754, bfloat16</li>
+          <li>M04 Compute: ATmega328P, CPU pipeline, Amiga 68000 chipset case study, memory hierarchy</li>
+          <li>M05 Software: LLVM pipeline, undefined behavior, OS abstraction, Rust ownership</li>
+          <li>M06 Network: OSI model as fidelity stack, mesh networks, LHC TTC timing</li>
+          <li>M07 Intelligence: Perceptron to transformer, GPU architecture, loss as fidelity metric</li>
+          <li>M08 Quantum: Double slit, Schr&ouml;dinger equation, qubit coherence, error correction</li>
+          <li>M09 Collider: Standard Model (17 particles), LHC Run 3 parameters, GNN track reconstruction</li>
+          <li>M10 Fidelity: 10-layer calibration chain, NIST traceability, spring-to-Higgs narrative</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 &mdash; Mission Package</span>
+        <ul>
+          <li>13 deliverables, 6-wave execution plan with 3 parallel tracks</li>
+          <li>Fleet activation: 20 roles including 10 CRAFT specialists</li>
+          <li>47 tests (6 safety-critical), verification matrix</li>
+          <li>~160K token budget, ~15 context windows, ~6&ndash;8 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the TeX source</li>
+      <li>Wave 0 produces shared schema, level taxonomy, and source index</li>
+      <li>Wave 1 executes three parallel tracks (A: Matter/Signal/Logic, B: Compute/Software/Network, C: Intelligence/Quantum/Collider/Fidelity)</li>
+      <li>Wave 2 synthesizes layer bridges and the unified calibration chain</li>
+      <li>Wave 3 verifies, compiles, and delivers the final 100-level curriculum PDF</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Compilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: #ECEFF1; padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode construction-set-mission.tex
+xelatex -interaction=nonstopmode construction-set-mission.tex
+xelatex -interaction=nonstopmode construction-set-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "A spring terminal on a piece of cardboard. A superconducting dipole at 1.9 Kelvin in a
+    27-kilometer ring. Between them: the same idea, expressed at different scales &mdash; a connection
+    made precise, held by a force calibrated to preserve information across a material interface.
+    The spring constant of the one and the Tesla rating of the other are measurements on the same
+    calibration chain, separated by seventeen orders of magnitude in energy but united by a single
+    principle: engineering fidelity."
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; The Infinite and One Construction Set &middot; March 2026
+</footer>
+
+</body>
+</html>

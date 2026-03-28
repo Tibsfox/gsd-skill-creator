@@ -1,0 +1,1251 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Silicon / Compute color scheme — deep navy, electric cyan, amber gold
+\definecolor{primary}{HTML}{0D1B2A}       % Deep navy — Section headers
+\definecolor{secondary}{HTML}{006989}     % Dark teal — Subsection headers
+\definecolor{tertiary}{HTML}{B5600B}      % Amber — Subsubsection headers
+\definecolor{accent}{HTML}{00A8CC}        % Electric cyan — highlights
+\definecolor{lightprimary}{HTML}{E8F4F8}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E0F4FF}
+\definecolor{lighttertiary}{HTML}{FFF3E0}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{codeblue}{HTML}{1565C0}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{cyanbox}{
+  colback=lightsecondary, colframe=accent,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Art of the Compute Engine}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Art of the Compute Engine -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Art of the\\[0.3em]Compute Engine}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Claude Code $\cdot$ Rosetta Core $\cdot$ Silicon Architecture $\cdot$ Mesh Cluster Computing}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{0.4cm}
+{\normalsize\sffamily\textcolor{subtlegray}{From the GSD Skill-Creator Ecosystem}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \ | \ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6 Modules) \ | \ Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TOC
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Art of the Compute Engine --- Vision Guide}
+
+\subsection{Metadata}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research-Backed}
+\metafield{Depends On:}{\texttt{gsd-chipset-architecture-vision.md}, \texttt{gsd-silicon-layer-spec.md}, \texttt{gsd-instruction-set-architecture-vision.md}, \texttt{cooking-with-claude-compiled-session.md}}
+\metafield{Context:}{GSD Skill-Creator ecosystem, Rosetta Core architectural identity, Amiga Principle}
+\metafield{Authored By:}{GSD Research Mission Generator}
+
+\subsection{Vision}
+
+Programming is not a single language. It is a single idea expressed across many languages simultaneously --- and the genius move is to build the engine that knows all of them at once.
+
+The Amiga had four specialized chips: Agnus, Denise, Paula, and the 68000. Each spoke a dialect. Together they produced something that no single chip could have achieved. The sum was not additive --- it was multiplicative, because each chip's specialized architecture freed the others to do what they were best at. Thirty years later, the lesson holds. A mesh cluster of white-box nodes with dual RTX 5090s, phase-synchronized over high-speed interconnect, coordinated by a multi-agent GSD orchestrator running CUDA kernels in parallel --- that is the modern Amiga. And Claude Code, running in that environment, directed by well-structured CLAUDE.md manifests, is the 68000: the general-purpose intelligence that connects the specialized coprocessors into a coherent, intentional system.
+
+This research mission is a deep dive into every layer of that architecture. It asks: what does Claude Code \textit{actually} look like under the hood? What is the Rosetta Core --- the translation engine that makes skill-creator alive? How do you write a CUDA kernel that performs? How does a 10-node mesh cluster achieve phase synchronization? And underneath all of it: what does Knuth's Art of Computer Programming have to teach us about the art of \textit{building} compute engines, not just using them?
+
+The fractal documentation fidelity pass is the final act: treating the documentation itself as a first-class artifact, self-similar at every zoom level, because the system that cannot explain itself cannot grow.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Claude Code's architecture is a black box to most practitioners.} Developers use it without understanding the single-threaded master loop, the dual-buffer async queue, the CLAUDE.md manifest contract, or how sub-agent spawning actually works. This ignorance produces poor prompting patterns, context contamination, and missed architectural leverage.
+  
+  \item \textbf{The Rosetta Core is skill-creator's identity, but it lacks a complete specification.} The insight that skill-creator IS a translation engine --- not that it has one --- has been articulated but never fully decomposed into a buildable architecture with concrete language panels, linking schemas, and TAOCP algorithmic foundations.
+  
+  \item \textbf{CUDA kernel development remains inaccessible to systems builders.} The hierarchy of threads, blocks, grids, warps, shared memory, and global memory; the relationship between occupancy and throughput; the new cuTile tile-based programming model in CUDA 13.x --- these are not adequately connected to the GSD silicon layer's adapter and shader pipeline.
+  
+  \item \textbf{Mesh cluster phase synchronization is poorly documented at the practical level.} The theoretical literature exists, but a practitioner building a 10-node white-box cluster needs concrete guidance on bus topology, NVLink/InfiniBand vs.\ gigabit ethernet, time synchronization protocols, and distributed consensus under partial failure --- mapped to the GSD node taxonomy (Agnus/Denise/Paula/68000).
+  
+  \item \textbf{Knuth's TAOCP is treated as reference rather than design philosophy.} MMIX, MIXAL, literate programming, the Knuth reward check discipline, the WEB system --- these are not historical curiosities. They are a living philosophy about how to build systems that survive decades. The GSD ecosystem has parallel architectural commitments but has not yet formally linked them.
+  
+  \item \textbf{Documentation fidelity degrades as systems grow.} The fractal documentation principle --- self-similar structure at every zoom level --- is philosophically established but not yet operationalized as a concrete pass pattern in the skill-creator workflow.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{cyanbox}
+\textbf{The Amiga Principle, Stated for Compute Engines:}\\[0.4em]
+A compute engine achieves maximum leverage not when every component is powerful, but when every component is \textit{specialized} --- and when the bus architecture between them is clean enough that specialization multiplies rather than adds. The art is in the connections, not in the nodes. The meaning lives in the spaces between.
+\end{cyanbox}
+
+\vspace{0.5em}
+
+The GSD compute engine is a six-layer architecture:
+
+\begin{asciibox}
+LAYER 1: Claude Code (Agentic Core)
+  The single-threaded master loop. CLAUDE.md as firmware. Sub-agents as DMA.
+  
+LAYER 2: Rosetta Core (Translation Engine)
+  The engine that IS skill-creator. Multi-language panels. Cross-domain linking.
+  TAOCP algorithmic foundations. Code IS curriculum.
+  
+LAYER 3: Skills / Agents / Teams (Chipset Architecture)
+  Agnus = skill-creator + DMA. Denise = WebGL display. Paula = I/O.
+  Bus arbitration. ISA. Budget control. Phase signals.
+  
+LAYER 4: CUDA Kernels (Silicon Layer)
+  Thread hierarchy. Warp execution. Shared memory. cuTile tile programming.
+  LoRA adapter compilation. GPU shader generation.
+  
+LAYER 5: Mesh + Phase Sync (Cluster Architecture)
+  10-node white-box topology. NVLink / InfiniBand / 10GbE bus.
+  Distributed consensus. Clock recovery. Frog chorus protocol.
+  
+LAYER 6: Fractal Documentation (Fidelity Pass)
+  Self-similar at every zoom level. Literate programming lineage.
+  Every layer documents itself. The code IS the curriculum.
+\end{asciibox}
+
+\subsection{Study Architecture}
+
+\begin{asciibox}
+DOMAIN MAP: The Art of the Compute Engine
+
+  Claude Code                    Rosetta Core
+  (Agentic Layer)                (Translation Layer)
+       |                               |
+       +--------+     +---------------+
+                |     |
+          [ GSD BUS / ISA ]
+                |     |
+       +--------+     +---------------+
+       |                               |
+  Chipset / Agents              CUDA Kernels
+  (Orchestration Layer)         (Silicon Layer)
+       |                               |
+       +--------+     +---------------+
+                |     |
+          [ MESH INTERCONNECT ]
+                |     |
+       +--------+     +---------------+
+       |                               |
+  Phase Sync / Cluster          Fractal Docs
+  (Infrastructure Layer)        (Fidelity Layer)
+  
+  TAOCP (Knuth) threads through all six layers as the philosophical spine.
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Claude Code --- Agentic Architecture Deep Dive}
+
+A complete technical study of Claude Code's internal architecture: the single-threaded master loop (codenamed \texttt{nO}), the real-time steering capability (\texttt{h2A} dual-buffer queue), context compression via the \texttt{Compressor wU2} system at 92\% context utilization, CLAUDE.md manifest design patterns (empirical study of 253 files from 242 repositories), sub-agent spawning and coordination patterns, git worktree parallelism, MCP server integration, hooks system, and the Agent SDK for custom orchestration. Includes best practices for CLAUDE.md firmware design in the GSD context.
+
+\subsubsection{Module 2: Rosetta Core --- Cross-Domain Programming Translation Engine}
+
+A complete specification of the Rosetta Core as skill-creator's fundamental identity: multi-language panel architecture (C++/cmath, Java/Math, Python/math, Perl/CPAN, Lisp homoiconicity, COBOL, Fortran, Pascal, VHDL), the College Structure as explorable code, cross-domain linking schemas between programming languages and human knowledge domains, the TAOCP algorithmic foundation (MMIX ISA, MIXAL, literate programming, Knuth's WEB/CWEB), and the calibration feedback loop (Observe → Compare → Adjust → Record).
+
+\subsubsection{Module 3: Skills, Agents, Teams --- GSD Multi-Agent Orchestration}
+
+The complete GSD chipset architecture as a living execution environment: Agnus/Denise/Paula/68000 node mapping, the ISA filesystem bus protocol, bus arbitration and DMA channels, skill promotion pipeline (observation → pattern → skill → adapter → compiled shader), team-of-teams topology, DACP structured handoff bundles (intent + data + code), budget control, and the safety warden pattern. Mapped to Claude Code's sub-agent spawning model.
+
+\subsubsection{Module 4: CUDA Kernels --- Silicon Layer Architecture}
+
+A practitioner-grade study of CUDA kernel development: thread/block/grid/warp hierarchy, memory hierarchy (registers, shared memory, L1/L2 cache, global memory, unified memory), occupancy and throughput optimization, the new CUDA 13.x cuTile tile-based programming model (abstracting tensor cores, block-level parallelism, and memory movement), cuda.compute Python API, PTX intermediate representation, NVVM IR, and the mapping from GSD silicon layer LoRA adapters to compiled GPU compute shaders. Dual RTX 5090 configuration for PNW summer cooling constraints.
+
+\subsubsection{Module 5: Mesh and Phase Synchronization --- Large-Scale Cluster Computing}
+
+The architecture of the 10-node GSD white-box mesh cluster: Agnus/Denise/Paula/68000 node type taxonomy, bus topology options (NVLink NVSwitch, InfiniBand HDR, 10GbE), time synchronization protocols (PTP/IEEE 1588, NTP hierarchy, FLTS consensus-based algorithm for mesh-star architectures), distributed phase coherence (frog chorus protocol), MPI message passing patterns, inter-node DMA, partial failure handling, and solar power budget for self-sufficient PNW operation. Cooling strategy for dual RTX 5090 nodes in summer heat.
+
+\subsubsection{Module 6: The Art of the Compute Engine --- Fractal Documentation Fidelity Pass}
+
+The philosophy and practice of documentation as a first-class artifact: Knuth's literate programming paradigm (weaving + tangling, WEB/CWEB, code-as-literature), TAOCP as a model of self-explanatory systems, the fractal documentation principle (self-similar structure at every zoom level), the GSD \texttt{CLAUDE.md} manifest as firmware, documentation generation as a first-class skill-creator function, the relationship between \textit{The Space Between} as a mathematical textbook and skill-creator's Rosetta panels, and the Fractal Fidelity Pass as an explicit workflow stage in the skill-creator production pipeline.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# compute_engine_mission.yaml
+mission: art_of_compute_engine
+version: "1.0"
+activation_profile: fleet
+modules: 6
+parallel_tracks: 3
+
+chipset:
+  flight:      { model: opus,   role: "Mission direction, go/no-go gates" }
+  plan:        { model: opus,   role: "Wave decomposition, dependency management" }
+  scout:       { model: sonnet, role: "Source gathering, evidence compilation" }
+  exec_a:      { model: sonnet, role: "Module 1+2 production (Claude Code + Rosetta)" }
+  exec_b:      { model: sonnet, role: "Module 3+4 production (Agents + CUDA)" }
+  exec_c:      { model: sonnet, role: "Module 5+6 production (Mesh + Docs)" }
+  craft_code:  { model: opus,   role: "Claude Code architecture analysis" }
+  craft_gpu:   { model: opus,   role: "CUDA kernel + silicon layer synthesis" }
+  craft_knuth: { model: opus,   role: "TAOCP lineage + literate programming" }
+  verify:      { model: sonnet, role: "Source validation, accuracy checking" }
+  integ:       { model: opus,   role: "Cross-module relationship validation" }
+  capcom:      { model: sonnet, role: "Human approval at wave boundaries" }
+  budget:      { model: haiku,  role: "Token budget tracking" }
+  surgeon:     { model: sonnet, role: "Research quality degradation detection" }
+  topo:        { model: opus,   role: "Agent team restructuring mid-mission" }
+  arch:        { model: opus,   role: "Cross-cutting structural decisions" }
+  secure:      { model: sonnet, role: "Safety boundary enforcement" }
+  analyst:     { model: opus,   role: "Cross-module pattern detection" }
+  retro:       { model: sonnet, role: "Post-wave analysis, lessons learned" }
+  log:         { model: haiku,  role: "Audit trail, commit messages" }
+
+model_split: { opus: 30, sonnet: 60, haiku: 10 }
+cache_ttl_exploitation: true
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Claude Code architecture: master loop, steering queue, compression, CLAUDE.md manifests, sub-agents, hooks, Agent SDK
+  \item Rosetta Core: complete multi-language panel inventory, cross-domain linking schema, TAOCP foundations, College Structure
+  \item GSD chipset: Agnus/Denise/Paula/68000 mapping, ISA filesystem bus, DACP bundles, skill promotion pipeline
+  \item CUDA: thread/block/grid/warp model, memory hierarchy, occupancy, cuTile (CUDA 13.x), cuda.compute Python, PTX/NVVM IR
+  \item Mesh cluster: 10-node topology spec, time synchronization, phase coherence, inter-node DMA, partial failure
+  \item Fractal documentation: literate programming, Knuth WEB/CWEB, CLAUDE.md-as-firmware, fidelity pass workflow
+  \item Dual RTX 5090 configuration and cooling strategy
+  \item Solar power budget integration for cluster self-sufficiency
+\end{itemize}
+
+\subsubsection{Out of Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item AMD ROCm / Intel OneAPI (CUDA-centric scope; alternatives noted in comparative section only)
+  \item Kubernetes orchestration layer (deferred to \texttt{gsd-local-cloud-provisioning-vision.md})
+  \item Full College Structure curriculum content (deferred to v1.50 college build)
+  \item Physical hardware procurement and build-out (deferred to \texttt{gsdmeshprototypespec.pdf})
+  \item Minecraft EULA compliance analysis for Foxy's Playground
+  \item Federation with Wasteland/DoltHub ecosystem (separate mission)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{Claude Code architecture documented:} Complete description of the master loop, steering queue, compression system, and CLAUDE.md manifest patterns, with GSD-specific CLAUDE.md firmware template produced.
+  \item \textbf{Rosetta Core specification complete:} All language panels inventoried with cross-references to TAOCP algorithms; cross-domain linking schema defined; College Structure blueprint drafted.
+  \item \textbf{GSD chipset-to-Claude Code bridge mapped:} Explicit mapping between Agnus/Denise/Paula/68000 node roles and Claude Code sub-agent spawning patterns; DACP bundles translated to Claude Code hook syntax.
+  \item \textbf{CUDA kernel patterns documented:} Thread hierarchy, memory model, cuTile tile programming model, and occupancy optimization patterns documented with concrete kernel examples; LoRA adapter compilation path specified.
+  \item \textbf{Cluster topology decided:} 10-node mesh architecture with selected bus technology (NVLink/InfiniBand/10GbE), time synchronization protocol, phase coherence algorithm, and failure handling specified.
+  \item \textbf{Fractal fidelity pass operationalized:} Explicit workflow stage defined for skill-creator's documentation pipeline; literate programming principles mapped to CLAUDE.md practice; self-similarity criteria established.
+  \item \textbf{TAOCP lineage documented:} MMIX/MIXAL to CUDA/PTX conceptual lineage established; literate programming to GSD documentation philosophy mapped; Knuth's algorithmic analysis methodology connected to skill-creator's calibration engine.
+  \item \textbf{Cooling strategy specified:} Concrete cooling design for dual RTX 5090 nodes in PNW summer conditions with solar power budget integration.
+  \item \textbf{All six modules independently deliverable:} Each module spec is self-contained enough for a single agent to execute without cross-module context.
+  \item \textbf{Cross-module integration map produced:} Explicit data flow diagram showing how outputs from each module feed inputs to adjacent modules.
+  \item \textbf{CLAUDE.md firmware template produced:} A production-grade CLAUDE.md template for the GSD skill-creator repo, incorporating all six module findings.
+  \item \textbf{Fractal documentation proof-of-concept:} At least one subsystem documented at three zoom levels (executive summary, architectural overview, implementation detail) demonstrating self-similar structure.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+\texttt{gsd-chipset-architecture-vision.md} & Module 3 is a direct extension; Agnus/Denise/Paula taxonomy originates here \\
+\texttt{gsd-silicon-layer-spec.md} & Module 4 (CUDA) builds the silicon layer's compilation pipeline \\
+\texttt{gsd-instruction-set-architecture-vision.md} & Filesystem bus architecture is the ISA spec for Module 3 \\
+\texttt{gsdmeshprototypespec.pdf} & Module 5 (Mesh) is the software architecture behind this hardware spec \\
+\texttt{cooking-with-claude-compiled-session.md} & Rosetta Core identity and College Structure originate here \\
+\texttt{10-perl-cpan-addendum.md} & Perl/CPAN panel detail for Module 2 \\
+\texttt{gsd-amiga-vision-architectural-leverage.md} & Core Amiga Principle philosophy threading all six modules \\
+\texttt{thespacebetween.pdf} & Mathematical spine of Module 2's math department panel \\
+\texttt{gsd-os-desktop-vision.md} & Boot sequence and block registry connect to Module 3 \\
+\texttt{gsd-upstream-intelligence-pack-v1\_43.md} & UIP becomes a seventh module candidate in v1.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Knuth spent sixty years writing the same book. Not because he was slow, but because every algorithm he added demanded that the surrounding architecture be adequate to hold it. The WEB literate programming system --- built as a byproduct of needing to document TeX --- produced more lasting value than the thing it was built to serve. The Knuth reward check for found errors is not pedantry. It is the discipline that makes a system trustworthy enough to build on.
+
+The GSD compute engine is building the same thing in a different medium. Every skill that gets added to skill-creator demands that the underlying bus architecture be adequate to route it. Every CUDA kernel that gets written demands that the documentation be adequate to explain it. Every node added to the mesh cluster demands that the synchronization protocol be adequate to keep it coherent. The Amiga Principle is not just an architectural preference --- it is the operating philosophy of a craftsperson who understands that the quality of the connections determines the quality of the system.
+
+The art is in the spaces between.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Art of the Compute Engine --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for all six research modules. Module agents should read their assigned section before beginning production. Cross-module references are marked with \textbf{[M$n$]} notation.
+
+\textbf{Key source organizations and references:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Anthropic --- Claude Code documentation (\texttt{code.claude.ai/docs}), GitHub (\texttt{anthropics/claude-code})
+  \item NVIDIA Developer --- CUDA Toolkit docs (\texttt{docs.nvidia.com/cuda}), NVIDIA Technical Blog
+  \item Stanford University --- Knuth's TAOCP, literate programming papers (\texttt{www-cs-faculty.stanford.edu/\textasciitilde knuth})
+  \item arXiv cs.DC --- Distributed, Parallel, and Cluster Computing preprint server
+  \item GSD Project Knowledge --- \texttt{gsd-chipset-architecture-vision.md}, \texttt{gsd-silicon-layer-spec.md}, \texttt{gsd-instruction-set-architecture-vision.md}, \texttt{cooking-with-claude-compiled-session.md}
+  \item ZenML LLMOps Database --- Claude Code architecture case study
+  \item IEEE Transactions on Computers --- Mesh synchronization research
+  \item Jefferson Lab --- High Performance Cluster Computing with Mesh Network whitepaper
+\end{itemize}
+
+\subsection{Module 1: Claude Code --- Agentic Architecture}
+
+\subsubsection{The Single-Threaded Master Loop}
+
+Claude Code's production architecture centers on a deliberately simplified design philosophy: a single-threaded master loop (internally codenamed \texttt{nO}) combined with disciplined tools and planning delivers controllable autonomy. This approach prioritizes debuggability, transparency, and reliability over complex multi-agent swarms.
+
+The layered architecture separates concerns as follows. At the highest level, a user interaction layer supports CLI, VS Code plugin, and web UI. Below this sits the agent core scheduling layer with the critical production components. The system gained traction rapidly: users ran Claude Code continuously for 24/7 workflows, requiring Anthropic to implement weekly usage limits.
+
+\textbf{Key architectural components:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Master Loop:} Single-threaded; flat message history design with TODO-based planning; diff-based workflows for file editing; robust safety measures including permission systems
+  \item \textbf{Real-Time Steering (\texttt{h2A} dual-buffer queue):} Asynchronous queue enabling mid-task course correction without complete restart; cooperates with master loop for interactive streaming; allows injection of new instructions while agent is actively working
+  \item \textbf{Context Compression (\texttt{Compressor wU2}):} Automatically triggers at approximately 92\% context utilization; summarizes conversations; moves important information to long-term storage implemented as simple Markdown documents
+  \item \textbf{Sub-Agent Spawning:} Controlled parallelism; a lead agent coordinates work, assigns subtasks, and merges results; git worktrees enable simultaneous parallel sessions on independent features
+\end{itemize}
+
+\subsubsection{CLAUDE.md Manifest Architecture}
+
+An empirical study of 253 CLAUDE.md files from 242 repositories (arXiv:2509.14744, Kashiwa 2025) found that manifests typically have shallow hierarchies with one main heading and several subsections. Content is dominated by operational commands, technical implementation notes, and high-level architecture.
+
+CLAUDE.md serves as \textbf{agent firmware} in the GSD framing: it provides the agent with essential project context, identity, and operational rules before any task execution. Claude builds auto-memory as it works, saving learnings like build commands and debugging insights across sessions without explicit authoring.
+
+\textbf{GSD CLAUDE.md firmware categories:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Category} & \tableheader{Contents} \\
+\midrule
+Identity & Project name, version, ecosystem role, Amiga Principle statement \\
+Architecture & Chipset mapping, bus topology, skill promotion pipeline \\
+Coding Standards & Language preferences, formatter, linter, test runner \\
+Operational Rules & Branch policy, commit format, safety boundaries \\
+Model Assignment & Opus/Sonnet/Haiku routing rules, token budget ceilings \\
+Skill Registry & Active skills, their trigger patterns, their execution paths \\
+Custom Commands & /review-pr, /deploy-staging, /skill-promote, /dacp-bundle \\
+Hooks & Pre/post file-edit actions, auto-format, lint gates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Parallelism Patterns}
+
+Claude Code supports several parallelism patterns: spawning multiple agents on different codebase areas simultaneously, git worktree isolation for feature parallelism, the Agent SDK for fully custom orchestration with control over tool access and permissions, and MCP server integration for external service connectivity. The key constraint is that sub-agents operate under the same permission model as the lead agent.
+
+\subsection{Module 2: Rosetta Core --- Cross-Domain Translation Engine}
+
+\subsubsection{The Rosetta Identity}
+
+From the GSD project knowledge: skill-creator should BE a Rosetta Stone --- not as a feature, but as its core identity. The fundamental logic that says ``I understand this concept, and I can express it in whatever form you need.'' The translation engine is not something skill-creator has; it is what skill-creator \textit{is}.
+
+Three historical Rosetta patterns:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{The Rosetta Stone (artifact):} Same message in three scripts --- if you can read one, you decode the others
+  \item \textbf{Rosetta Code (wiki):} Same programming tasks solved in hundreds of languages side by side
+  \item \textbf{Claude (AI):} Natively works across dozens of human languages AND programming languages
+\end{itemize}
+
+\subsubsection{Language Panel Inventory}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Panel} & \tableheader{Domain} & \tableheader{Rosetta Contribution} \\
+\midrule
+C++/\texttt{cmath} & Systems / HPC & Low-level numerics; architecture-aware; connects to CUDA [M4] \\
+Java/\texttt{Math} & Enterprise & Portable; static typing; pedagogy (AP CS) \\
+Python/\texttt{math} & Scientific & Data science; ML/AI; connects to cuTile Python [M4] \\
+Perl/CPAN & Text / Glue & Linguist-designed (Larry Wall); Huffman coding; 250+ mirror ecosystem \\
+Lisp & Foundations & Homoiconicity (code = data); purest Rosetta expression \\
+COBOL & Business logic & Legacy domain translation; 95\% of ATM transactions \\
+Fortran & Scientific HPC & Array operations; connects to LAPACK/cuBLAS [M4] \\
+Pascal & Pedagogy & Niklaus Wirth; designed to teach; explicit type discipline \\
+VHDL & Hardware & Code that describes circuits; connects to GSD ISA [M3] \\
+MMIX/MIXAL & Foundations & Knuth's RISC reference machine; connects to TAOCP [M6] \\
+UML/SGML/XML/HTML & Structured repr. & The markup lineage; code-as-documentation \\
+GLSL/HLSL & GPU shaders & Compiled compute; connects to CUDA pipeline [M4] \\
+Rust & Systems & Memory safety; async; connects to GSD-2 SDK \\
+TypeScript & GSD primary & Skill-creator main implementation language \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{TAOCP as Algorithmic Foundation}
+
+Donald Knuth's \textit{The Art of Computer Programming} (TAOCP) spans volumes 1 (Fundamental Algorithms), 2 (Seminumerical Algorithms), 3 (Sorting and Searching), 4A/4B (Combinatorial Algorithms), and continuing volumes. Fascicle 7 (Constraint Satisfaction, planned for Volume 4C) was published February 5, 2025.
+
+The GSD Rosetta Core connections are:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{MMIX/MIXAL:} Knuth's RISC hypothetical machine (replacing MIX) is the reference architecture for algorithm analysis. Its 64-bit clean design maps to modern ISA concepts [M3]. GNU MDK provides emulation.
+  \item \textbf{Literate Programming / WEB:} Programs written as human-readable literature with embedded code macros. Weaving produces documentation; tangling produces compilable source. The \textit{code IS the curriculum} thesis [M6].
+  \item \textbf{Knuth Reward Check discipline:} \$2.56 (\$1.00 hexadecimal) for any error found. The mathematical approach to correctness-as-practice. Parallel to GSD's verification gate pattern.
+  \item \textbf{LR(k) parsing, attribute grammars, Knuth-Bendix:} The algorithmic foundations that underpin every compiler, every language panel in the Rosetta Core.
+\end{itemize}
+
+From Knuth's own reflection: ``Here was a marvelous thing: a mathematical theory of language in which I could use a computer programmer's intuition! The mathematical, linguistic, and algorithmic parts of my life had previously been totally separate.'' This is the Rosetta insight, stated by its most rigorous practitioner.
+
+\subsubsection{College Structure Blueprint}
+
+The codebase IS the library. Walking through the math department's source code teaches mathematics the same way walking through library stacks teaches a field. The code is the truth; web pages, documents, Minecraft worlds, and VR spaces are projections.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Department} & \tableheader{Seed Document} & \tableheader{Primary Language Panels} \\
+\midrule
+Mathematics & \textit{The Space Between} (923pp) & C++/cmath, Python/math, Fortran, MMIX \\
+Computer Science & TAOCP Vols. 1--4B & MMIX/MIXAL, Lisp, Pascal, C++ \\
+Systems Hardware & GSD ISA + Chipset visions & VHDL, C, Rust, GLSL \\
+Natural Language & Perl/CPAN \texttt{Lingua::} hierarchy & Perl, Python/NLTK, Lisp \\
+Culinary Arts & Cooking with Claude session & Python, TeX, structured YAML \\
+Music & Deep Audio Analyzer mission & Python, C++, GLSL (audio shaders) \\
+Data Infrastructure & CKAN (20-year ecosystem) & Python, SQL, YAML, JSON \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3: Skills, Agents, Teams --- Chipset Architecture}
+
+\subsubsection{Agnus / Denise / Paula / 68000 Mapping}
+
+From \texttt{gsd-instruction-set-architecture-vision.md}: The original Amiga had a 68000 CPU with three custom chips. The GSD-OS maps these precisely.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Chip} & \tableheader{Original Role} & \tableheader{GSD Role} & \tableheader{Claude Code Parallel} \\
+\midrule
+68000 & General CPU & Claude API & Master loop orchestrator \\
+Agnus & DMA + memory & Skill-creator + budget & Sub-agent spawning + token DMA \\
+Denise & Display engine & WebGL shaders & Artifact rendering \\
+Paula & Audio + I/O & tmux session + GPIO & Hooks + MCP servers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Filesystem Bus Protocol (GSD ISA)}
+
+The GSD ecosystem uses the filesystem as its primary message bus. The ISA formalizes this into three bus types:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Control Bus:} Opcodes and phase signals (files in \texttt{.planning/console/inbox/})
+  \item \textbf{Address Bus:} Agent IDs, skill references, filesystem paths
+  \item \textbf{Data Bus:} Artifacts, configs, observation records (files in \texttt{.planning/console/outbox/})
+\end{itemize}
+
+Bus signals map to filesystem operations: WRITE = create/update file; READ = read file; ACK = move to acknowledged/; IRQ = create in notifications/; DMA = direct artifact transfer bypassing main bus; RESET = clear pipeline state.
+
+\subsubsection{DACP --- Deterministic Agent Communication Protocol}
+
+DACP (v1.49) shifts agent-to-agent handoffs from ambiguous markdown to structured three-part bundles:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Intent:} What the sending agent accomplished and what it needs next
+  \item \textbf{Data:} Structured payload (JSON/YAML, not prose)
+  \item \textbf{Code:} Executable artifacts, not descriptions of artifacts
+\end{itemize}
+
+In Claude Code terms: DACP bundles map directly to the sub-agent result structure. The lead agent receives DACP-formatted results from spawned sub-agents and can route them without markdown parsing.
+
+\subsubsection{Skill Promotion Pipeline}
+
+\begin{asciibox}
+SKILL PROMOTION PIPELINE
+
+  Observation      Pattern        Skill          Adapter        Compiled
+  (session #N)  -> (5+ repeats) -> (SKILL.md) -> (LoRA .safetensors) -> (GPU shader)
+  
+  Cost:    0        low           medium          high             highest
+  Speed:   slow     slow          fast            very fast        native
+  Model:   Claude   Claude        Claude/Local    Local            Hardware
+  
+  The pipeline is the Amiga Principle in motion:
+  proven patterns move from expensive general execution
+  to cheap specialized execution.
+\end{asciibox}
+
+\subsection{Module 4: CUDA Kernels --- Silicon Layer Architecture}
+
+\subsubsection{Thread Hierarchy Fundamentals}
+
+CUDA organizes computation hierarchically. A \textbf{kernel} is a function marked \texttt{\_\_global\_\_} that executes on the GPU across many threads simultaneously. The hierarchy:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Thread:} Lowest abstraction unit; executes kernel code; has \texttt{threadIdx.x/y/z} position within its block
+  \item \textbf{Warp:} 32 threads executing in lockstep (SIMT model); warp divergence kills performance
+  \item \textbf{Block:} Group of threads (multiple of 32, typically 256); share \textbf{shared memory} and \textbf{L1 cache}; run on a single SM
+  \item \textbf{Grid:} All blocks for a kernel launch; can be 1D/2D/3D
+  \item \textbf{Cluster (CUDA 11.2+):} Group of up to 8 thread blocks sharing distributed shared memory; portable cluster size
+\end{itemize}
+
+\textbf{SM (Streaming Multiprocessor) contents:} CUDA Cores (integer/float arithmetic), Special Function Units (transcendentals), Warp Schedulers, Register File, Shared Memory/L1 Cache, Tensor Cores (newer architectures for matrix operations).
+
+\subsubsection{Memory Hierarchy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Memory Type} & \tableheader{Scope} & \tableheader{Latency} & \tableheader{Notes} \\
+\midrule
+Registers & Per thread & ~1 cycle & Fastest; limited per SM \\
+Shared Memory & Per block & ~5--10 cycles & L1 cache sibling; software-managed \\
+L1 Cache & Per SM & ~5--10 cycles & Hardware-managed \\
+L2 Cache & Per GPU & ~100 cycles & All SMs share \\
+Global Memory & Per GPU & ~400--600 cycles & Large (VRAM); main bottleneck \\
+Constant Memory & Per GPU & ~5 cycles (cached) & Read-only; 64KB \\
+Unified Memory & Host + Device & Variable & VM abstraction; migrates on demand \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Key optimization principle: minimize global memory access; maximize shared memory reuse; coalesce memory access patterns for full memory bandwidth.
+
+\subsubsection{CUDA 13.x --- cuTile Tile-Based Programming}
+
+CUDA 13.1 (December 2025) introduced the largest update to the CUDA platform since its invention. The centerpiece is \textbf{CUDA Tile}: a tile-based GPU programming model that abstracts away hardware details (tensor cores, block-level parallelism, memory movement) for better portability across GPU architectures.
+
+\textbf{cuTile Python} expresses the tile model in Python: focusing on dividing arrays into tiles operated on in parallel, with the NVIDIA compiler and runtime automating low-level GPU tasks. CUDA 13.2 extends cuTile support to Ampere and Ada architectures (in addition to Blackwell) and introduces closures and recursion.
+
+\textbf{cuBLAS update (CUDA 13.0):} New APIs for FP64 matrix multiplications using FP32 emulation on Tensor Cores (GB200 NVL72 and RTX PRO 6000 Blackwell Server Edition).
+
+\textbf{GSD Silicon Layer mapping:}
+\begin{itemize}[leftmargin=1.5em]
+  \item LoRA adapter training → cuTile tiles for QLoRA gradient computation
+  \item Compiled shader generation → PTX bytecode via NVCC or NVVM IR
+  \item Intent classifier → CUDA kernel running inference on local adapter
+  \item VRAM budget management → occupancy API (\texttt{cudaOccupancyMaxPotentialClusterSize})
+\end{itemize}
+
+\subsubsection{cuda.compute Python API}
+
+NVIDIA's \texttt{cuda.compute} library (released 2026) provides a high-level Pythonic API for device-wide CUB primitives. JIT-compiles specialized kernels with link-time optimization. Achieved near-speed-of-light performance equivalent to handwritten CUDA C++. Supports custom data types and operators defined in Python --- removing the C++ binding requirement.
+
+Standard primitives covered: sort, scan (prefix sum), reduce, histogram. These are the building blocks of the Rosetta Core's pattern detection and calibration engines [M2].
+
+\subsubsection{GSD Dual RTX 5090 Configuration}
+
+For the GSD white-box node with dual RTX 5090s in PNW summer:
+\begin{itemize}[leftmargin=1.5em]
+  \item Blackwell architecture (GB202); compute capability 12.x; cuTile natively supported (CUDA 13.1+)
+  \item NVLink bridge for peer-to-peer VRAM access between the two cards
+  \item Cooling: liquid cooling required for sustained dual-5090 load in ambient temps exceeding 30°C; 360mm AIO per card minimum; intake from cool north-facing wall if possible
+  \item Power: 575W TDP per card × 2 = 1150W GPU draw; 1600W+ PSU recommended with 80+ Platinum; solar array sizing: 3--4kW panels + 10kWh battery for 8-hour burst duty cycle
+\end{itemize}
+
+\subsection{Module 5: Mesh and Phase Synchronization}
+
+\subsubsection{10-Node GSD Cluster Topology}
+
+From \texttt{gsdmeshprototypespec.pdf} and the Amiga node taxonomy:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node Type} & \tableheader{Amiga Role} & \tableheader{Count} & \tableheader{Function} \\
+\midrule
+Agnus-class & DMA + Orchestration & 2 & Mission control; skill-creator primary; token budget master \\
+Denise-class & Display + Render & 2 & GPU-heavy inference; shader compilation; WebGL serve \\
+Paula-class & I/O + Audio & 2 & MCP bridge nodes; external API gateway; storage I/O \\
+68000-class & General CPU & 4 & General compute; Claude API routing; compilation workers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Bus Technology Selection}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Technology} & \tableheader{Bandwidth} & \tableheader{Latency} & \tableheader{GSD Fit} \\
+\midrule
+NVLink NVSwitch & 900 GB/s & $<$1 µs & GPU-to-GPU only; single chassis; Denise↔Denise pairs \\
+InfiniBand HDR & 200 Gb/s & $<$1 µs & Ideal for Agnus↔Agnus; high cost \\
+10GbE (10GBASE-T) & 10 Gb/s & 10--30 µs & Cost-effective; sufficient for Claude API routing \\
+25GbE SFP+ & 25 Gb/s & $<$10 µs & Recommended for Agnus↔Paula gateway nodes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Recommended architecture:} NVLink bridges within dual-GPU nodes; 25GbE SFP+ for Agnus and Paula nodes; 10GbE for 68000-class workers. Total inter-node switch: managed 24-port 25GbE with jumbo frames (9000 MTU).
+
+\subsubsection{Time Synchronization and Phase Coherence}
+
+From IEEE PMC research (FLTS algorithm) and Jefferson Lab QCD cluster whitepaper:
+
+\textbf{PTP (IEEE 1588 Precision Time Protocol):} Sub-microsecond accuracy; requires PTP-capable NICs or managed switches with hardware timestamping. Recommended for Agnus-class master clock nodes.
+
+\textbf{Consensus-Based Synchronization (FLTS):} Fast and Low-overhead Time Synchronization for mesh-star hybrid architectures. Two-layer approach: (1) mesh layer routing nodes synchronize via average consensus algorithm; (2) star layer broadcast from edge routing nodes to leaf nodes with two consecutive packets. FLTS achieves faster convergence speed than cluster-head-based approaches (CCTS) while reducing communication overhead.
+
+\textbf{Frog Chorus Protocol (GSD):} Phase synchronization modeled on frog chorus dynamics: each node ``listens'' before ``speaking''; phase offsets self-correct through distributed feedback. Applied to GSD wave boundary synchronization: agents in Wave N complete before Wave N+1 begins, with Agnus-class nodes as phase reference.
+
+\subsubsection{Mesh Network Communication Patterns}
+
+Jefferson Lab's Lattice QCD mesh architecture provides the relevant template: each node has 6 nearest neighbors in a 4D hypercube topology; nearest-neighbor communication dominates; 64KB buffering per link; host overhead per send+receive must be $\leq$2 µs for repetitive patterns.
+
+For GSD: skill-creator's wave-based execution maps cleanly to nearest-neighbor communication patterns. Wave dependencies define the ``nearest neighbor'' relationship. DMA-style skill transfer (bypassing the main bus) maps to the QCD ``direct artifact transfer'' pattern.
+
+\subsection{Module 6: Fractal Documentation --- Fidelity Pass}
+
+\subsubsection{Literate Programming Lineage}
+
+Knuth's literate programming (1984): a methodology combining a programming language with a documentation language, making programs more robust, portable, and maintainable. The main idea: treat a program as a piece of literature addressed to human beings rather than to a computer.
+
+\textbf{Key operations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Weaving:} Generates the comprehensive human-readable document
+  \item \textbf{Tangling:} Extracts compilable source code from the same source
+  \item Both operations applied to the same source, guaranteeing consistency
+\end{itemize}
+
+Knuth's WEB/CWEB implementation has been used by millions. The resurgence in the 2010s via computational notebooks (Jupyter) validates the paradigm. TeX itself is a proof: literate programming produces software that lasts decades.
+
+\subsubsection{Fractal Documentation Principle}
+
+Self-similar documentation structure at every zoom level:
+
+\begin{asciibox}
+ZOOM LEVEL 1: Executive Summary (3 sentences)
+  "skill-creator is a translation engine. It expresses
+   concepts across programming languages, human languages,
+   and output formats. It runs in Claude Code."
+
+ZOOM LEVEL 2: Architectural Overview (1 page)
+  The Rosetta Core panels, the College Structure,
+  the calibration loop, the chipset mapping.
+
+ZOOM LEVEL 3: Implementation Detail (full spec)
+  Language panel inventory, TAOCP foundations,
+  cross-domain linking schema, CLAUDE.md firmware.
+
+Each level is complete. Each level references the next.
+The structure is identical at each zoom. This is the
+fractal documentation principle.
+\end{asciibox}
+
+\textbf{GSD Fidelity Pass Workflow} (new production stage):
+\begin{enumerate}
+  \item After any Wave 2 (Synthesis), trigger the Fidelity Pass as a pre-Wave 3 gate
+  \item CRAFT-KNUTH agent checks: Is this system documented at all three zoom levels?
+  \item VERIFY agent checks: Is the documentation self-similar across zoom levels?
+  \item INTEG agent checks: Do cross-module references resolve correctly?
+  \item If all pass: proceed to Wave 3 (Publication). If any fail: loop back to Wave 2.
+\end{enumerate}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+CUDA kernel memory & Safety-critical & Buffer overruns in GPU kernels cause silent data corruption; all kernel bounds-checking mandatory \\
+Cluster authentication & Security & All inter-node communication must be authenticated; no unauthenticated DMA across node boundary \\
+Power draw & Infrastructure & Dual RTX 5090 nodes draw 575W each; circuit breaker and UPS sizing must be verified before deployment \\
+Solar system sizing & Infrastructure & Battery bank must handle full compute burst without grid; PNW winter insolation ($\approx$3 peak hours/day) governs minimum array size \\
+CLAUDE.md as firmware & Architectural & Malformed CLAUDE.md can cause agent behavior drift; version-controlled, reviewed before commit \\
+Model token budgets & Operational & Opus at 30\% budget ceiling enforced by BUDGET agent; unrestricted Opus use will exhaust API budgets rapidly \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Technical Documentation}
+\begin{itemize}[leftmargin=1.5em]
+  \item Anthropic. \textit{Claude Code Overview}. \url{https://code.claude.ai/docs/en/overview}, 2025.
+  \item Anthropic. \textit{Claude Code GitHub Repository}. \url{https://github.com/anthropics/claude-code}, 2025.
+  \item NVIDIA. \textit{CUDA Toolkit Documentation 13.2}. \url{https://docs.nvidia.com/cuda/}, 2026.
+  \item NVIDIA Technical Blog. \textit{NVIDIA CUDA 13.1 Powers Next-Gen GPU Programming with NVIDIA CUDA Tile}. December 2025.
+  \item NVIDIA Technical Blog. \textit{Simplify GPU Programming with NVIDIA CUDA Tile in Python}. December 2025.
+  \item NVIDIA Technical Blog. \textit{Topping the GPU MODE Kernel Leaderboard with NVIDIA cuda.compute}. February 2026.
+  \item Knuth, D.E. \textit{The Art of Computer Programming}, Volumes 1--4B. Addison-Wesley, 1968--2022.
+  \item Knuth, D.E. Fascicle 7 (Constraint Satisfaction). February 5, 2025. \url{https://www-cs-faculty.stanford.edu/~knuth/taocp.html}
+  \item Knuth, D.E. \textit{Literate Programming}. CSLI, 1992. \url{https://www-cs-faculty.stanford.edu/~knuth/lp.html}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=1.5em]
+  \item Kashiwa, Y. et al. ``On the Use of Agentic Coding Manifests: An Empirical Study of Claude Code.'' arXiv:2509.14744, September 2025.
+  \item Tang, Z. et al. ``DreamDDP: Accelerating Data Parallel Distributed LLM Training with Layer-wise Scheduled Partial Synchronization.'' arXiv, February 2025.
+  \item PMC/IEEE. ``Fast and Low-Overhead Time Synchronization for Industrial Wireless Sensor Networks with Mesh-Star Architecture.'' IEEE Access, 2023.
+  \item ZenML LLMOps Database. ``Claude Code Agent Architecture: Single-Threaded Master Loop for Autonomous Coding.'' 2025. \url{https://www.zenml.io/llmops-database/...}
+\end{itemize}
+
+\subsubsection{GSD Ecosystem Project Knowledge}
+\begin{itemize}[leftmargin=1.5em]
+  \item Tibsfox. \textit{gsd-chipset-architecture-vision.md}. GSD Project Knowledge, 2025--2026.
+  \item Tibsfox. \textit{gsd-silicon-layer-spec.md}. GSD Project Knowledge, February 2026.
+  \item Tibsfox. \textit{gsd-instruction-set-architecture-vision.md}. GSD Project Knowledge, 2025--2026.
+  \item Tibsfox. \textit{cooking-with-claude-compiled-session.md}. GSD Project Knowledge, March 2026.
+  \item Tibsfox. \textit{10-perl-cpan-addendum.md}. GSD Project Knowledge, 2026.
+  \item Tibsfox. \textit{gsdmeshprototypespec.pdf}. GSD Project Knowledge, 2026.
+  \item Tibsfox. \textit{The Space Between: The Autodidact's Guide to the Galaxy}. 923pp. (pen name Miles Tiberius Foxglove)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{The Art of the Compute Engine --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a complete, authoritative research reference for the six-layer GSD compute engine architecture, from Claude Code's agentic internals through Rosetta Core translation, GSD chipset orchestration, CUDA silicon layer, mesh cluster phase synchronization, and fractal documentation fidelity --- sufficient for immediate execution by any competent agent team without additional context.
+
+\begin{asciibox}
+MISSION ARCHITECTURE OVERVIEW
+
+  Wave 0: Foundation
+    [H] Shared schemas, source index, DACP bundle templates
+  
+  Wave 1: Parallel Tracks (A + B + C simultaneous)
+    [A] Modules 1+2: Claude Code + Rosetta Core (EXEC-A + CRAFT-CODE)
+    [B] Modules 3+4: Chipset/Agents + CUDA Kernels (EXEC-B + CRAFT-GPU)
+    [C] Modules 5+6: Mesh/Sync + Fractal Docs (EXEC-C + CRAFT-KNUTH)
+  
+  Wave 2: Synthesis
+    [O] Cross-module integration (INTEG + ANALYST + ARCH)
+    [O] CLAUDE.md firmware template production (CRAFT-CODE + INTEG)
+    [O] Fractal Fidelity Pass (CRAFT-KNUTH + VERIFY)
+  
+  Wave 3: Publication + Verification
+    [S] Final document assembly (EXEC-A)
+    [S] Source verification (VERIFY)
+    [S] Human review gate (CAPCOM)
+    [S] Chronicle + commit (LOG)
+  
+  [H]=Haiku  [S]=Sonnet  [O]=Opus  Parallel=simultaneous
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer:} Shared schemas, source index, DACP bundle format definitions, test templates
+  \item \textbf{Research Layer A:} Claude Code architecture + Rosetta Core specification
+  \item \textbf{Research Layer B:} GSD chipset/agents/teams + CUDA silicon layer
+  \item \textbf{Research Layer C:} Mesh cluster phase synchronization + fractal documentation fidelity
+  \item \textbf{Synthesis Layer:} Cross-module integration map, CLAUDE.md firmware template, fidelity pass
+  \item \textbf{Publication Layer:} Final verified document, source validation, human approval
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}L{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criteria} & \tableheader{Format} \\
+\midrule
+1 & Claude Code Architecture Doc & Master loop, steering queue, compression, CLAUDE.md patterns & Markdown \\
+2 & Rosetta Core Specification & All panels inventoried, linking schema, TAOCP connections & Markdown \\
+3 & GSD Chipset Bridge Map & Agnus/Denise/Paula to Claude Code sub-agents, DACP↔hooks & Markdown \\
+4 & CUDA Kernel Reference & Thread hierarchy, memory model, cuTile examples, LoRA path & Markdown \\
+5 & Mesh Cluster Spec & 10-node topology, bus technology selected, sync protocol & Markdown \\
+6 & Fractal Fidelity Pass Guide & 3-zoom-level template, pass workflow, Knuth connections & Markdown \\
+7 & CLAUDE.md Firmware Template & Production-grade template for GSD skill-creator repo & CLAUDE.md \\
+8 & Cross-Module Integration Map & Data flow diagram, dependency graph & Markdown + ASCII \\
+9 & Cooling + Power Budget & Dual RTX 5090 thermal design, solar sizing calc & Markdown \\
+10 & This Research Mission PDF & Complete three-stage pipeline document & PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}L{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Source Index & None & Haiku & 5K \\
+W0: Schema Defs & None & Haiku & 3K \\
+W1A: Claude Code Research & W0 & Sonnet & 40K \\
+W1A: Rosetta Core Spec & W0, TAOCP refs & Opus & 50K \\
+W1B: Chipset Bridge Map & W0, GSD vision docs & Sonnet & 35K \\
+W1B: CUDA Reference & W0, NVIDIA docs & Opus & 45K \\
+W1C: Mesh Cluster Spec & W0, mesh spec PDF & Sonnet & 35K \\
+W1C: Fractal Docs Guide & W0, Knuth refs & Opus & 30K \\
+W2: Cross-Module Integration & W1A+B+C complete & Opus & 30K \\
+W2: CLAUDE.md Firmware & W1A+W2 Integration & Opus & 20K \\
+W2: Fidelity Pass & W1C+W2 Integration & Opus & 15K \\
+W3: Final Assembly & W2 complete & Sonnet & 20K \\
+W3: Verification & W3 draft & Sonnet & 15K \\
+\textbf{TOTAL} & & & \textbf{$\approx$343K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2cm}L{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Model} & \tableheader{Outputs} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index \\
+1 & Research Tracks & Parallel (3) & Sonnet+Opus & 6 module deliverables \\
+2 & Synthesis & Sequential & Opus & Integration map, firmware template, fidelity pass \\
+3 & Publication & Sequential & Sonnet & Final verified document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} & \tableheader{Model} \\
+\midrule
+W0-1 & LOG & Initialize audit trail, mission manifest & Haiku \\
+W0-2 & BUDGET & Set token ceilings per component & Haiku \\
+W0-3 & PLAN & Create DACP bundle templates for W1 handoffs & Haiku \\
+W0-4 & PLAN & Build source index from bibliography & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A: Claude Code + Rosetta Core}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} & \tableheader{Model} \\
+\midrule
+W1A-1 & SCOUT & Fetch latest Claude Code docs and arXiv:2509.14744 & Sonnet \\
+W1A-2 & CRAFT-CODE & Analyze master loop, steering queue, compression architecture & Opus \\
+W1A-3 & EXEC-A & Produce Claude Code Architecture Document (Deliverable 1) & Sonnet \\
+W1A-4 & CRAFT-CODE & Map Rosetta Core panels, TAOCP connections & Opus \\
+W1A-5 & EXEC-A & Produce Rosetta Core Specification (Deliverable 2) & Opus \\
+W1A-6 & VERIFY & Cross-check Deliverables 1+2 against sources & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Chipset/Agents + CUDA Kernels}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} & \tableheader{Model} \\
+\midrule
+W1B-1 & EXEC-B & Read GSD chipset, ISA, OS vision docs & Sonnet \\
+W1B-2 & EXEC-B & Produce GSD Chipset Bridge Map (Deliverable 3) & Sonnet \\
+W1B-3 & CRAFT-GPU & Deep study: CUDA thread hierarchy, memory model & Opus \\
+W1B-4 & CRAFT-GPU & Study cuTile CUDA 13.x tile programming model & Opus \\
+W1B-5 & EXEC-B & Produce CUDA Kernel Reference (Deliverable 4) & Opus \\
+W1B-6 & CRAFT-GPU & Specify dual RTX 5090 cooling + power budget & Opus \\
+W1B-7 & VERIFY & Cross-check Deliverables 3+4 against NVIDIA docs & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: Mesh Cluster + Fractal Documentation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} & \tableheader{Model} \\
+\midrule
+W1C-1 & EXEC-C & Read gsdmeshprototypespec.pdf, Jefferson Lab whitepaper & Sonnet \\
+W1C-2 & EXEC-C & Produce Mesh Cluster Spec (Deliverable 5) & Sonnet \\
+W1C-3 & CRAFT-KNUTH & Deep study: TAOCP MMIX, literate programming, WEB/CWEB & Opus \\
+W1C-4 & CRAFT-KNUTH & Map Knuth discipline to GSD fidelity pass workflow & Opus \\
+W1C-5 & EXEC-C & Produce Fractal Fidelity Pass Guide (Deliverable 6) & Opus \\
+W1C-6 & VERIFY & Cross-check Deliverables 5+6 against sources & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} & \tableheader{Model} \\
+\midrule
+W2-1 & INTEG & Validate cross-module data flows (M1→M3, M2→M4, M4→M5) & Opus \\
+W2-2 & ANALYST & Detect cross-cutting patterns across all 6 modules & Opus \\
+W2-3 & ARCH & Produce Cross-Module Integration Map (Deliverable 8) & Opus \\
+W2-4 & CRAFT-CODE+INTEG & Produce CLAUDE.md Firmware Template (Deliverable 7) & Opus \\
+W2-5 & CRAFT-GPU & Produce Cooling + Power Budget (Deliverable 9) & Opus \\
+W2-6 & CRAFT-KNUTH+VERIFY & Execute Fractal Fidelity Pass on all deliverables & Opus \\
+W2-7 & CAPCOM & Present synthesis to human for go/no-go gate decision & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Action} & \tableheader{Model} \\
+\midrule
+W3-1 & EXEC-A & Assemble final document (all 10 deliverables) & Sonnet \\
+W3-2 & VERIFY & Final source verification pass & Sonnet \\
+W3-3 & SURGEON & Check for research quality degradation & Sonnet \\
+W3-4 & CAPCOM & Human final review and approval & Sonnet \\
+W3-5 & LOG & Audit trail, commit message, milestone summary & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{5-minute cache window:} All Wave 1 tracks share the same base context (W0 schemas + source index) loaded in the first call; subsequent calls within 5 minutes reuse cached prefix
+  \item \textbf{Document prefix caching:} GSD vision docs (chipset, ISA, silicon layer, cooking session) loaded as a shared prefix across all tracks; each track appends module-specific sources
+  \item \textbf{Haiku for scaffolding only:} Wave 0 scaffold work maximizes cache reuse for Wave 1
+  \item \textbf{Opus reserved for judgment:} CRAFT agents (Opus) are invoked only after Sonnet/EXEC agents have pre-assembled content; Opus edits rather than generates from scratch
+  \item \textbf{DACP bundles minimize re-context:} Wave handoffs use DACP structured bundles; receiving agents don't re-read source documents already processed in prior wave
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{3cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model Mix} & \tableheader{Est. Output Tokens} & \tableheader{Sessions} \\
+\midrule
+Wave 0 & 100\% Haiku & 8K & 1 \\
+Wave 1 Track A & 40\% Opus, 60\% Sonnet & 90K & 2 \\
+Wave 1 Track B & 50\% Opus, 50\% Sonnet & 80K & 2 \\
+Wave 1 Track C & 50\% Opus, 50\% Sonnet & 65K & 2 \\
+Wave 2 & 80\% Opus, 20\% Sonnet & 65K & 2 \\
+Wave 3 & 20\% Opus, 80\% Sonnet & 35K & 1 \\
+\textbf{TOTAL} & \textbf{$\approx$30\% O / 60\% S / 10\% H} & \textbf{$\approx$343K} & \textbf{10} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH: Art of the Compute Engine
+
+  W0 (Foundation)
+   |
+   +---> W1A (Claude Code + Rosetta)  ---+
+   |                                     |
+   +---> W1B (Chipset + CUDA)       -----+--> W2 (Synthesis)
+   |                                     |         |
+   +---> W1C (Mesh + Fractal Docs)  ---+           |
+                                                   |
+                                             W3 (Publication)
+                                                   |
+                                           DELIVERABLES (1-10)
+
+Data flow between modules:
+  M1 (Claude Code) --> M3 (Agents/Teams): sub-agent spawning patterns
+  M2 (Rosetta)     --> M4 (CUDA): Python panel + cuTile connection
+  M2 (Rosetta)     --> M6 (Fractal Docs): literate programming lineage
+  M3 (Chipset)     --> M5 (Mesh): node taxonomy + bus arbitration
+  M4 (CUDA)        --> M5 (Mesh): NVLink topology, dual-5090 config
+  M6 (Fractal)     --> ALL: fidelity pass applied to all module outputs
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical & 4 & MANDATORY & BLOCK --- do not ship \\
+Core Functionality & 12 & HIGH & LOOP --- return to wave \\
+Cross-Module Integration & 6 & HIGH & LOOP --- return to W2 \\
+Fractal Fidelity & 4 & MEDIUM & ANNOTATE --- log for v1.1 \\
+Edge Cases & 4 & LOW & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Safety-Critical Tests (MANDATORY PASS / BLOCK):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-1 & CLAUDE.md firmware template reviewed & Human has reviewed and approved before production use in live repo \\
+SC-2 & CUDA kernel memory safety & All kernel examples use bounds-checked indexing; no raw pointer arithmetic without guard \\
+SC-3 & Cluster authentication requirement & All inter-node specs include authentication requirement; no unauthenticated DMA \\
+SC-4 & Power safety specification & Dual RTX 5090 power draw correctly specified; circuit breaker sizing included \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{3cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Claude Code master loop documented & C-1, C-2 & Pending \\
+Rosetta Core panels inventoried & C-3, C-4 & Pending \\
+Chipset-to-Claude Code bridge mapped & C-5, C-6, INT-1 & Pending \\
+CUDA kernel patterns documented & C-7, C-8, SC-2 & Pending \\
+Cluster topology decided & C-9, C-10, SC-3, SC-4 & Pending \\
+Fractal fidelity pass operationalized & C-11, FF-1, FF-2 & Pending \\
+TAOCP lineage documented & C-12 & Pending \\
+Cooling strategy specified & C-8b, SC-4 & Pending \\
+All modules independently deliverable & INT-2 & Pending \\
+Cross-module integration map produced & INT-1, INT-3 & Pending \\
+CLAUDE.md firmware template produced & C-2b, SC-1 & Pending \\
+Fractal proof-of-concept & FF-1, FF-2, FF-3 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; cross-wave coordination \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; web research; document fetching \\
+EXEC-A & Executor Alpha & Modules 1+2 production (Claude Code + Rosetta Core) \\
+EXEC-B & Executor Beta & Modules 3+4 production (Chipset/Agents + CUDA Kernels) \\
+EXEC-C & Executor Gamma & Modules 5+6 production (Mesh/Sync + Fractal Docs) \\
+CRAFT-CODE & Code Architect & Claude Code deep analysis; CLAUDE.md firmware design \\
+CRAFT-GPU & GPU Specialist & CUDA kernels; silicon layer; cuTile; LoRA pipeline \\
+CRAFT-KNUTH & Knuth Scholar & TAOCP analysis; literate programming; fractal fidelity \\
+VERIFY & Verification & Source validation; accuracy checking; safety-critical gates \\
+INTEG & Integration & Cross-module data flow validation; dependency resolution \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only human-facing channel \\
+BUDGET & Resource Manager & Token budget enforcement; Opus 30\% ceiling; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection; context drift detection \\
+TOPO & Topology Manager & Agent team restructuring mid-mission if tracks diverge \\
+ARCH & Architecture & Cross-cutting structural decisions; Amiga Principle arbiter \\
+SECURE & Security & Authentication specs; safety boundary enforcement \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; Rosetta connection mapping \\
+RETRO & Retrospective & Post-wave analysis; lessons learned; v1.1 backlog \\
+LOG & Chronicle & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (20 roles) \\
+Modules & 6 (Claude Code, Rosetta Core, Chipset/Agents, CUDA, Mesh, Fractal Docs) \\
+Parallel Tracks & 3 simultaneous in Wave 1 \\
+Estimated Sessions & 10--12 context windows \\
+Estimated Output Tokens & 343K \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Safety-Critical Gates & 4 (BLOCK on fail) \\
+Deliverables & 10 artifacts \\
+CLAUDE.md Firmware & 1 production template \\
+Wave Structure & 4 waves (Foundation → Research → Synthesis → Publication) \\
+Human Approval Gates & Wave 2 synthesis review + Wave 3 final approval \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1em}
+
+\begin{quotebox}
+\textbf{\sffamily\large The Through-Line}
+
+\vspace{0.5em}
+
+\textit{``The art of programming is the art of organizing complexity.''}\\
+--- Edsger W.\ Dijkstra
+
+\vspace{0.8em}
+
+The GSD compute engine is not trying to be powerful. It is trying to be \textit{organized}. Every layer exists to make the layer below it invisible and the layer above it possible. Claude Code does not try to be a multi-agent swarm --- it runs a clean single-threaded loop and trusts that a simple, principled architecture can deliver controllable autonomy at scale. The Rosetta Core does not try to know every language --- it tries to understand the single underlying concept that all languages are expressing. The CUDA kernel does not try to do everything on every thread --- it identifies the specialized execution path and runs it thousands of times in parallel.
+
+This is the Amiga Principle. This is the art of the compute engine. The spaces between the nodes are where the meaning lives.
+
+\vspace{0.5em}
+\textit{``Your chipset will get faster as you use it.''}
+--- GSD Ecosystem Boot Sequence
+\end{quotebox}
+
+\end{document}

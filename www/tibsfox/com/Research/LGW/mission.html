@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; LIGO Gravitational Waves</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-lgw">
+  <header>
+    <h1>LIGO Gravitational Waves</h1>
+    <div class="subtitle">Interferometry &middot; Strain Measurement &middot; Chirp Analysis &middot; Multi-Messenger Astronomy &middot; Sonification</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-ligo-hanford-interferometry">Interferometry</a>
+      <a href="page.html?doc=02-first-detection-gw150914">GW150914</a>
+      <a href="page.html?doc=03-chirp-signal-analysis">Chirp Analysis</a>
+      <a href="page.html?doc=04-multi-messenger-astronomy">Multi-Messenger</a>
+      <a href="page.html?doc=05-visualization-and-sonification">Visualization</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      Einstein predicted gravitational waves in 1916. He also doubted they would ever be detected &mdash;
+      the strains were too small, the universe too noisy. LIGO proved him wrong in 2015 with a
+      1.3-billion-year-old chirp that lasted 0.2 seconds and displaced a mirror by 10<sup>&minus;18</sup>
+      meters. That is the Amiga Principle applied at cosmological scale: not more mirror, not more laser
+      power in the simple sense, but a 4-kilometer interferometer arm that uses squeezed quantum light to
+      beat the Heisenberg uncertainty principle itself. The space between a black hole merger 1.3 billion
+      light-years away and a block of glowing sea lantern in a Minecraft world is exactly the kind of
+      connection this ecosystem was built to make.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~200K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/ligo-gw-mission.pdf">Mission Package</a></td><td>PDF &middot; 30 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/ligo-gw-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/ligo-gw-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schemas, env setup, test fixtures, cache spec</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1A</td><td>Data + DSP</td><td>GWOSC client, GWpy pipeline, Q-transform, sonification, alerts</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>1B</td><td>Rendering</td><td>OpenGL engine, GLSL shaders, Minecraft bridge, block palette</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Integration pipeline, dispatcher, end-to-end tests</td><td>Sequential</td><td>2 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Documentation, packaging, world template, README</td><td>Sequential</td><td>1 hour</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Flight + Integration</td><td>Opus</td><td>Cross-module dependencies, GraceDB alert routing, integration pipeline, HITL gates</td></tr>
+        <tr><td>Denise</td><td>Display + Rendering</td><td>Sonnet</td><td>OpenGL GLSL shaders, VBO mesh, screensaver loop, Minecraft block palette</td></tr>
+        <tr><td>Paula</td><td>I/O + Signal</td><td>Sonnet</td><td>GWpy pipeline, Q-transform, sonification, RCON bridge, alert consumer</td></tr>
+        <tr><td>Gary/68000</td><td>CPU + Scaffolding</td><td>Haiku</td><td>Shared schemas, token budget, commit messages, test fixtures</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Detection Report &mdash; Verification Matrix</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>GraceDB RETRACTION handling</td><td>System removes retracted event from featured queue within 5 seconds; no display of retracted event</td></tr>
+        <tr><td>SC-02</td><td>Strain scale attribution</td><td>All visual output includes strain scale annotation (h ~ 10<sup>&minus;21</sup>); no unlabeled raw strain presented as physical distances</td></tr>
+        <tr><td>SC-03</td><td>Data provenance attribution</td><td>All visualizations display LIGO/Virgo/KAGRA Collaboration attribution; GWOSC data release version cited</td></tr>
+        <tr><td>SC-04</td><td>LOW_SIGNIFICANCE events</td><td>Events with significant=false displayed with explicit "candidate" label; not presented as confirmed detections</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>GWpy pipeline fetches and processes strain data for at least 10 named GWTC events without error</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Q-transform output shows visually distinct chirp signatures for BNS events (GW170817) distinguishable from noise</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Sonified WAV output for GW150914 matches LIGO published audio within perceptual equivalence</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>OpenGL screensaver renders at &ge;60 fps on mid-range GPU with 1024-column spectrogram mesh</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Spacetime mesh shader visibly distorts at strain amplitude peaks, recoverable to flat at noise floor</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Minecraft bridge places block terrain for full GW170817 30-second chirp without RCON timeout</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Block palette encodes strain amplitude in 5+ visually distinguishable block types</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>GraceDB alert listener triggers featured event display within 30 seconds of mock alert</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Integration pipeline handles two simultaneous renderer targets without data loss</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>All processing modules have unit tests with &ge;80% coverage; integration tests exercise full data path</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>Developer unfamiliar with GW physics can set up and run screensaver within 2 hours</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>System operates in offline/demo mode using cached O4a data when GWOSC is unavailable</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The space between GW150914 and a block of glowing sea lantern in a Minecraft world is exactly the
+    kind of connection this ecosystem was built to make. The data is public. The tools exist. The signal
+    has already been heard. LIGO Hanford sits in the Pacific Northwest &mdash; on the DOE Hanford Site in
+    southeastern Washington, in the semi-arid shrub-steppe landscape east of the Cascades. The same region
+    that produced plutonium for the Manhattan Project now houses one of humanity&rsquo;s most sensitive
+    instruments, listening for ripples in spacetime from events that happened before our solar system
+    formed. The detector arms stretch across the desert like a compass needle pointing at the cosmos.
+    The mission is to build the space between that needle and the screen where someone watches a chirp
+    sweep upward through a purple spectrogram, hears it rise through their speakers, and understands
+    &mdash; viscerally, not just intellectually &mdash; that spacetime itself just shivered.</p>
+  </main>
+
+  <footer>
+    <p>LIGO Gravitational Waves &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

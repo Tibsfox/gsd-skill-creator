@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hi-Fidelity Audio Reproduction &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-hfr">
+  <header>
+    <h1>Hi-Fidelity Audio Reproduction</h1>
+    <div class="subtitle">Speaker Physics &middot; Amplifier Topology &middot; DAC Architecture &middot; Room Acoustics &middot; Analog Warmth</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-speaker-physics-transducers">Speakers</a>
+      <a href="page.html?doc=02-amplifier-topology">Amplifiers</a>
+      <a href="page.html?doc=03-dac-architectures-digital-path">DAC &amp; Digital</a>
+      <a href="page.html?doc=04-room-acoustics-psychoacoustics">Room Acoustics</a>
+      <a href="page.html?doc=05-headphone-technology-personal-audio">Headphones</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Sound is physics made audible. A pressure wave &mdash; a disturbance in air molecules propagating
+      outward at 343 meters per second &mdash; becomes a voltage through a transducer, travels along a
+      conductor shaped by resistance, capacitance, and inductance, is amplified by circuits whose behavior
+      is governed by quantum mechanics at the junction level, and is finally reconverted to pressure through
+      a driver pushing a cone against the resistance of air. High fidelity is the art and science of minimizing
+      every transformation loss until the reproduction and the original are indistinguishable to the most
+      demanding instrument we possess: the human auditory system.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">38</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">80+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Domain Areas</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-speaker-physics-transducers" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Speaker Physics &amp; Transducer Design</h3>
+        <div class="meta"><span class="tag tag-phys">Physics</span> Track A &middot; Electromechanical</div>
+        <p>Moving-coil driver physics, Thiele-Small parameters, crossover network theory, enclosure acoustics (sealed, ported, transmission line), electrostatic and planar magnetic drivers, ribbon tweeters, horn loading, and the complete loudspeaker as a system.</p>
+      </a>
+
+      <a href="page.html?doc=02-amplifier-topology" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Amplifier Topology &amp; Circuit Design</h3>
+        <div class="meta"><span class="tag tag-elec">Electronics</span> Track A &middot; Power stages</div>
+        <p>Class A, AB, B, D, G, H amplifier topologies. Vacuum tube physics (triode, pentode, push-pull). Solid-state output stages. Negative feedback theory. Damping factor and speaker control. Distortion mechanisms: THD, IMD, TIM. Power supply design for audio.</p>
+      </a>
+
+      <a href="page.html?doc=03-dac-architectures-digital-path" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: DAC Architectures &amp; the Digital Path</h3>
+        <div class="meta"><span class="tag tag-elec">Electronics</span> Track B &middot; Conversion</div>
+        <p>R-2R ladder, delta-sigma, multibit, and hybrid DAC architectures. Nyquist-Shannon sampling theorem. Oversampling and noise shaping. Digital filter topologies. Jitter analysis and reclocking. USB audio class, I2S, S/PDIF interfaces. Vinyl vs digital: the complete technical comparison.</p>
+      </a>
+
+      <a href="page.html?doc=04-room-acoustics-psychoacoustics" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Room Acoustics &amp; Psychoacoustics</h3>
+        <div class="meta"><span class="tag tag-phys">Physics</span> Track B &middot; Listening environment</div>
+        <p>Room modes, standing waves, RT60 reverberation time, Sabine and Eyring equations. Absorption, diffusion, and reflection. Psychoacoustic foundations: Fletcher-Munson equal-loudness contours, critical bands, auditory masking, localization. Measurement vs subjective listening: the measurement-subjectivist debate.</p>
+      </a>
+
+      <a href="page.html?doc=05-headphone-technology-personal-audio" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Headphone Technology &amp; Personal Audio</h3>
+        <div class="meta"><span class="tag tag-phys">Physics</span> Track C &middot; Personal listening</div>
+        <p>Dynamic, planar magnetic, electrostatic, and balanced armature driver technologies. Open-back vs closed-back acoustic design. Headphone amplifier requirements: impedance matching, voltage swing, current delivery. HRTF and binaural audio. IEM design and crossover architectures. Headphone measurement standards (IEC 60268-7).</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Transducer physics (electromechanical)</td><td>M1, M2, M5</td><td>DAA, SGL, EMG</td></tr>
+        <tr><td>Crossover networks / filter theory</td><td>M1, M2, M4</td><td>SGL, FQC, DAA</td></tr>
+        <tr><td>Amplifier distortion (THD, IMD)</td><td>M2, M3</td><td>DAA, SGL</td></tr>
+        <tr><td>DAC conversion / sampling theory</td><td>M3, M4</td><td>DAA, FQC, SGL</td></tr>
+        <tr><td>Nyquist-Shannon theorem</td><td>M3</td><td>SGL, DAA, FQC</td></tr>
+        <tr><td>Room modes / standing waves</td><td>M4, M1</td><td>BPS, SNL</td></tr>
+        <tr><td>Psychoacoustics (Fletcher-Munson)</td><td>M4, M5</td><td>DAA, SGL, SNY</td></tr>
+        <tr><td>Impedance matching</td><td>M1, M2, M5</td><td>SGL, EMG, LED</td></tr>
+        <tr><td>Noise floor / SNR analysis</td><td>M2, M3, M5</td><td>DAA, SGL, BPS</td></tr>
+        <tr><td>Vacuum tube / solid-state physics</td><td>M2</td><td>LED, EMG</td></tr>
+        <tr><td>Digital audio interfaces (I2S, S/PDIF)</td><td>M3</td><td>SGL, DAA</td></tr>
+        <tr><td>HRTF / spatial audio</td><td>M5, M4</td><td>SNL, DAA, SNY</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+HI-FIDELITY AUDIO REPRODUCTION -- DOMAIN MAP
+===============================================================
+
+  SOURCE DOMAIN            ELECTRONICS DOMAIN       ACOUSTIC DOMAIN
+  +---------------+       +----------------+       +---------------+
+  | Vinyl / Tape  |       | Phono Preamp   |       | Room Modes    |
+  | CD / SACD     |------&gt;| DAC Stage      |------&gt;| Speaker       |
+  | Streaming     |       | Power Amp      |       | Headphone     |
+  | Digital File  |       | Crossover      |       | Ear Canal     |
+  +---------------+       +----------------+       +---------------+
+        |                       |                       |
+        v                       v                       v
+  +---------------+       +----------------+       +---------------+
+  | Sampling      |       | Class A/AB/D   |       | Standing Wave |
+  | Quantization  |       | Tube / SS      |       | Absorption    |
+  | Noise Shaping |       | Feedback       |       | Diffusion     |
+  | Jitter        |       | Damping Factor |       | RT60          |
+  +---------------+       +----------------+       +---------------+
+        |                       |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   PERCEPTION LAYER    |
+                    |                       |
+                    |  Fletcher-Munson      |
+                    |  Critical Bands       |
+                    |  Auditory Masking     |
+                    |  HRTF / Binaural      |
+                    |  Measurement vs       |
+                    |  Subjective Listening  |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Speaker Physics] ---------&gt; [M2: Amplifier Topology]
+         |                                |
+         |                                |
+         v                                v
+  [M4: Room Acoustics] &lt;---- [M3: DAC &amp; Digital Path]
+         |                                |
+         v                                v
+  [M5: Headphone Technology &amp; Personal Audio]
+
+  Parallel tracks:
+    Track A: M1 + M2 (transducers + amplification)
+    Track B: M3 + M4 (digital conversion + listening space)
+    Track C: M5 (personal audio synthesis)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Hi-Fidelity Audio Reproduction &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

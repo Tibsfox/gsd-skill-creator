@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBC/Radio-Canada — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #B71C1C;
+  --secondary: #1A237E;
+  --tertiary: #4A0E2A;
+  --accent: #9E2A47;
+  --light-bg: #FFEBEE;
+  --card-bg: #ECEFF1;
+  --text: #212121;
+  --subtle: #757575;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #FAFAFA; line-height: 1.6; }
+header {
+  background: linear-gradient(135deg, #4A0000 0%, #7F0000 40%, #B71C1C 60%, #1A237E 100%);
+  color: white; padding: 3rem 2rem; text-align: center;
+}
+header h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
+header h2 { font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 1.1rem; opacity: 0.85; }
+header .pipeline { margin-top: 1.5rem; font-size: 0.95rem; color: #EF9A9A; letter-spacing: 0.1em; }
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+.files { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+.file-card {
+  background: var(--card-bg); border-radius: 8px; padding: 1.5rem;
+  text-decoration: none; color: var(--text); transition: transform 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.file-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.file-card .ext { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+.file-card .name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; margin: 0.4rem 0 0.3rem; }
+.file-card .desc { font-size: 0.85rem; color: var(--subtle); }
+h3 { font-family: 'Libre Baskerville', serif; color: var(--tertiary); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--light-bg); padding-bottom: 0.4rem; }
+.contents { background: var(--light-bg); border-radius: 8px; padding: 1.5rem 2rem; }
+.contents ol { padding-left: 1.2rem; }
+.contents li { margin: 0.4rem 0; }
+.contents .stage { font-weight: 700; color: var(--primary); }
+.instructions { margin: 2rem 0; }
+.instructions ol { padding-left: 1.5rem; }
+.instructions li { margin: 0.6rem 0; }
+code { background: var(--light-bg); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+.quote {
+  background: var(--light-bg); border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem; margin: 2rem 0; font-family: 'Libre Baskerville', serif;
+  font-style: italic; color: var(--tertiary); font-size: 0.95rem;
+}
+footer { text-align: center; padding: 2rem; color: var(--subtle); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CBC/Radio-Canada</h1>
+  <h2>Cultural Sovereignty Study</h2>
+  <div class="pipeline">Vision &rarr; Research &rarr; Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="files">
+    <a href="cbc-radio-canada-mission.pdf" download class="file-card">
+      <div class="ext">PDF &middot; 30 pages</div>
+      <div class="name">Mission Package</div>
+      <div class="desc">Complete three-stage document: vision, research reference, and mission specification ready for GSD orchestrator.</div>
+    </a>
+    <a href="cbc-radio-canada-mission.tex" download class="file-card">
+      <div class="ext">TEX &middot; XeLaTeX source</div>
+      <div class="name">LaTeX Source</div>
+      <div class="desc">Editable source file. Modify modules, update research, recompile with three XeLaTeX passes.</div>
+    </a>
+  </div>
+
+  <h3>Contents</h3>
+  <div class="contents">
+    <ol>
+      <li><span class="stage">Stage 1 &mdash; Vision Document</span>
+        <ul>
+          <li>Vision narrative, problem statement (5 problems), core concept</li>
+          <li>Domain architecture and module dependency diagrams</li>
+          <li>5 research modules: History, Funding, Services, Indigenous Languages, Digital Future</li>
+          <li>Chipset configuration (12 roles), scope boundaries, 12 success criteria</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 2 &mdash; Research Reference</span>
+        <ul>
+          <li>Founding arc: Aird Commission (1929) through CBC establishment (1936)</li>
+          <li>Legislative milestones: Broadcasting Acts of 1932, 1958, 1991</li>
+          <li>Financial architecture: $1.4B appropriation, per-capita comparisons, defunding mechanics</li>
+          <li>Full service inventory: 4 radio, 4 TV, Gem streaming, Northern Service, RCI</li>
+          <li>Indigenous languages: 8 languages with nation-specific attribution, OCAP compliance</li>
+          <li>Digital transformation: CBC Gem metrics, 2025-2030 strategic plan, sovereignty argument</li>
+        </ul>
+      </li>
+      <li><span class="stage">Stage 3 &mdash; Mission Package</span>
+        <ul>
+          <li>10 deliverables, 4-wave execution plan with 2 parallel tracks</li>
+          <li>Squadron activation profile: 12 roles including 2 CRAFT specialists</li>
+          <li>26 tests (6 safety-critical), verification matrix &ldquo;The Broadcast Standard&rdquo;</li>
+          <li>~148K token budget, ~10-13 context windows, ~4 sessions</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Usage Instructions</h3>
+  <div class="instructions">
+    <ol>
+      <li>Point GSD's <code>new-project</code> at the vision section of the PDF</li>
+      <li>Wave 0 produces shared schema, source index, and directory structure</li>
+      <li>Wave 1 executes two parallel tracks (A: History+Funding, B: Services+Indigenous)</li>
+      <li>Wave 2 synthesizes Module 5 + OCAP review + political balance review + cross-module synthesis</li>
+      <li>Wave 3 verifies sources, assembles final pack, and runs full test plan</li>
+    </ol>
+  </div>
+
+  <h3>LaTeX Recompilation</h3>
+  <div class="instructions">
+    <p>Requires XeLaTeX with DejaVu fonts installed. Three passes for TOC and cross-references:</p>
+    <pre style="background: var(--light-bg); padding: 1rem; border-radius: 6px; margin-top: 0.8rem; font-size: 0.9rem; overflow-x: auto;"><code>xelatex -interaction=nonstopmode cbc-radio-canada-mission.tex
+xelatex -interaction=nonstopmode cbc-radio-canada-mission.tex
+xelatex -interaction=nonstopmode cbc-radio-canada-mission.tex</code></pre>
+  </div>
+
+  <div class="quote">
+    "The state, or the United States. The frequency, or the void. The mission is to understand which
+    it has been &mdash; and map what making it otherwise would cost."
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package &middot; CBC/Radio-Canada &middot; March 2026
+</footer>
+
+</body>
+</html>
