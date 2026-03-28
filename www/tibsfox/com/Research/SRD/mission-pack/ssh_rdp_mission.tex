@@ -1,0 +1,1288 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% Technology color scheme: steel, electric, graphite
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{safegreen}{HTML}{1B5E20}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{SSH \& Remote Desktop Protocols}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={SSH and Remote Desktop Protocols -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\begin{document}
+
+%% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{SSH \& Remote Desktop\\[0.3em]Protocol Specifications}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Full Wire-Level Protocol Mapping}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad|\quad Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Vision: SSH \& Remote Desktop Protocols}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Ready for Research Execution}
+\metafield{Depends On:}{GSD Skill Creator v1.49+ (DACP milestone), gsd-skill-creator dev branch}
+\metafield{Context:}{Protocol specification deep dive for implementation, security auditing, and GSD toolchain integration}
+
+\subsection{Vision}
+
+Every time a terminal window opens to a remote server, every time a desktop session springs to life across a network, a conversation is happening at the wire level---a conversation defined down to individual bits, message type bytes, and cryptographic handshakes. These conversations have been formalized into protocol specifications: RFCs, open standards, and proprietary documents that define exactly how machines negotiate trust, encode pixels, and multiplex streams across a single TCP connection.
+
+The goal of this research mission is to map these conversations completely. Not just conceptually---every packet field, every message type byte, every key derivation function, every encoding variant. The SSH protocol family (RFCs 4250--4256, updated by 5656, 6668, 8268, 8308, 8332, 8709, 8731, 9142) represents one of the most carefully designed security protocol stacks ever standardized. Its three-layer architecture---Transport, Authentication, Connection---is a masterwork of compositional design: each layer does exactly one thing, hands off cleanly to the next, and the whole is stronger than the sum of its parts. The Amiga Principle lives here: small, principled building blocks (a 32-byte ECDH public key, a 4-byte padding field, a one-byte message type) producing a system capable of securing billions of connections daily.
+
+Remote desktop protocols occupy a different philosophical space. RDP (MS-RDPBCGR), built on ITU T.120/T.125/X.224, optimizes for rich graphical fidelity and Windows integration, trading protocol elegance for feature depth. VNC/RFB (RFC 6143) chooses radical simplicity---the entire display model is ``put a rectangle of pixel data at x,y''---and achieves universal portability through that constraint. SPICE (open-sourced by Red Hat, 2009) solves the virtualization-specific problem: how to pass rendering commands through a hypervisor boundary with hardware-accelerated semantics. Each represents a different answer to the same question: what is the minimum faithful representation of a remote user interface that can survive the network?
+
+This mission maps every layer of every protocol with full wire-level fidelity. The output serves implementers, security auditors, GSD toolchain developers, and anyone who needs to reason about what is actually on the wire.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+\item \textbf{Protocol specification fragmentation.} SSH is defined across 7+ RFCs (4250--4256) plus extensions covering elliptic curves (5656, 8731), SHA-2 updates (6668, 8268, 8332), chacha20-poly1305 (8758), and algorithm deprecations (9142). No single document maps the complete current-state protocol including all deprecated paths, recommended paths, and forbidden paths.
+
+\item \textbf{Implementation traps in packet handling.} The SSH binary packet format has subtle requirements (encrypted packet\_length field, minimum 4-byte padding, block-size alignment constraint, AEAD vs MAC-then-encrypt ordering) that differ between implementations. Misunderstandings cause interoperability failures and security vulnerabilities.
+
+\item \textbf{RDP complexity without authoritative summary.} MS-RDPBCGR spans hundreds of pages covering a 10-phase connection sequence, 31 static virtual channels, multiple security modes (Standard/Enhanced/NLA/CredSSP), and graphics pipeline variants. No accessible reference maps the complete handshake flow with field-level detail.
+
+\item \textbf{VNC/RFB security defaults are dangerously weak.} RFC 6143's base security type 2 (VNC Authentication) uses DES, widely considered broken. The encoding registry, security type registry, and extension mechanisms are maintained separately from the spec. The gap between ``RFC 6143 compliant'' and ``actually secure'' is wide and underdocumented.
+
+\item \textbf{Protocol selection without quantitative comparison.} Choosing between SSH tunneling + VNC, native RDP, SPICE, or X11 forwarding requires understanding performance characteristics, security posture, network overhead, and feature set tradeoffs---currently scattered across implementation documentation and CVE disclosures.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Wire-Level Protocol Cartography}: Every protocol is a finite state machine with defined message types, field formats, and state transitions. Complete specification means mapping all states, all valid transitions, all message formats, all cipher negotiation trees, and all known vulnerability boundary conditions. Security properties emerge from the architecture; they cannot be grafted on after the fact.
+
+\subsubsection{Protocol Architecture Map}
+
+\begin{asciibox}
+REMOTE ACCESS PROTOCOL LANDSCAPE
+=================================
+
+SSH FAMILY (IETF RFCs)            REMOTE DESKTOP FAMILY
+---------------------------       ---------------------------
+TCP Port 22                       TCP Port 3389 (RDP)
+                                  TCP Port 5900 (VNC/RFB)
+
++-------------------+             +--------------------+
+| SSH Connection    |             | SPICE (multi-TCP)  |
+| Protocol RFC 4254 |             | QXL/VDI interface  |
++-------------------+             +--------------------+
+| SSH Auth          |             | RDP / MS-RDPBCGR   |
+| Protocol RFC 4252 |             | T.120 / MCS / GCC  |
++-------------------+             +--------------------+
+| SSH Transport     |             | VNC / RFB RFC 6143 |
+| Protocol RFC 4253 |             | Framebuffer model  |
++-------------------+             +--------------------+
+| TCP / IP          |             | TCP / IP           |
++-------------------+             +--------------------+
+
+SSH BINARY PACKET FORMAT (RFC 4253 §6)
+---------------------------------------
+ uint32  packet_length
+ byte    padding_length
+ byte[]  payload (compressed if negotiated)
+ byte[]  random_padding (min 4, max 255 bytes)
+ byte[]  MAC (or AEAD tag)
+ NOTE: total of first 4 fields MUST be multiple
+       of cipher block size or 8, whichever larger
+
+RDP CONNECTION SEQUENCE (10 phases)
+-------------------------------------
+ 1. Connection Initiation (X.224)
+ 2. Basic Settings Exchange (MCS/GCC)
+ 3. Channel Connection (MCS Attach+Join)
+ 4. RDP Security Commencement (if Standard)
+ 5. Secure Settings Exchange (Client Info PDU)
+ 6. Optional Connect-Time Auto-Detection
+ 7. Licensing
+ 8. Capabilities Exchange
+ 9. Connection Finalization
+10. Data Exchange (input / graphics / audio)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DECOMPOSITION
+====================
+
+Module A: SSH Core Transport       Module D: VNC / RFB Protocol
+  - Protocol architecture            - RFC 6143 spec
+  - Binary packet format             - Framebuffer model
+  - Cipher negotiation               - Encoding types
+  - Key exchange (DH/ECDH)           - Security type registry
+  - Message type catalog             - Handshake sequence
+
+Module B: SSH Application Layer    Module E: SPICE & Alternatives
+  - RFC 4252 Authentication          - SPICE protocol
+  - RFC 4254 Connection/Channels     - QXL/VDI interface
+  - Port forwarding / X11            - X11 forwarding
+  - SFTP subsystem                   - NX/NoMachine/XPRA
+
+Module C: RDP Protocol             Module F: Security & Implementation
+  - MS-RDPBCGR wire format           - Protocol security comparison
+  - 10-phase connection              - CVE landscape
+  - Virtual channels                 - Hardening guidance
+  - Graphics pipeline                - Cipher recommendations
+  - NLA / CredSSP / TLS
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset YAML -- SSH/RDP Protocol Mission
+chipset:
+  agnus:                         # Orchestration / DMA
+    model: claude-opus-4
+    role: >
+      Mission direction, security analysis synthesis,
+      cross-protocol comparison, CVE impact assessment
+  denise:                        # Display / Output
+    model: claude-sonnet-4
+    role: >
+      Document assembly, table formatting, wire format
+      diagrams, bibliography compilation
+  paula:                         # I/O / Anticipatory
+    model: claude-haiku-4-5
+    role: >
+      Shared schemas, template scaffolding, source
+      index generation, boilerplate tables
+  gary:                          # Glue Logic
+    model: claude-haiku-4-5
+    role: >
+      Validation passes, cross-reference checks,
+      compilation verification
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+\item SSH protocol family: RFCs 4250--4256 plus all active extension RFCs (5656, 6668, 8268, 8308, 8332, 8709, 8731, 9142)
+\item SSH binary packet format, all field definitions, alignment constraints
+\item SSH key exchange: DH (group1/group14/group-exchange), ECDH (nistp256/384/521), Curve25519, Curve448
+\item SSH authentication: publickey, password, keyboard-interactive (RFC 4256), certificate-based
+\item SSH connection: channel types, flow control, port forwarding, X11 forwarding, SFTP subsystem
+\item RDP connection sequence: all 10 phases with PDU structures and field definitions
+\item RDP virtual channels: static (max 31) and dynamic channel architecture
+\item RDP security modes: Standard (4 encryption levels), Enhanced (TLS/CredSSP/Kerberos), NLA
+\item VNC/RFB: RFC 6143, handshake, encoding registry, security type registry
+\item SPICE: channel architecture, QXL device model, TLS/SASL authentication
+\item CVE landscape: BlueKeep (CVE-2019-0708), DejaBlue, SSH-specific historical CVEs
+\item Cipher suite recommendations per IETF RFC 9142 and NIST guidance
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+\item SSH1 (deprecated; historical reference only, no implementation guidance)
+\item Citrix ICA/HDX (proprietary, not publicly specified)
+\item Microsoft RDS gateway protocol layer above RDP
+\item WAP/mobile remote desktop clients
+\item QUIC or UDP-based transport variants (future protocols)
+\item Full X11 core protocol specification (separate mission scope)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*.}]
+\item SSH binary packet format documented with all field sizes, alignment rules, and per-field encryption boundaries.
+\item Complete SSH key exchange flow charted for all currently recommended algorithms (curve25519-sha256, ecdh-sha2-nistp256/384/521, diffie-hellman-group14-sha256, diffie-hellman-group-exchange-sha256) with 6-key derivation procedure.
+\item All SSH message type numbers (SSH\_MSG\_*) catalogued from RFC 4250 with layer assignments.
+\item SSH authentication methods (publickey, password, keyboard-interactive) documented with wire-level message sequences.
+\item SSH channel lifecycle (open, data transfer, flow control, close) fully mapped including all channel types.
+\item RDP 10-phase connection sequence documented with PDU names, ITU/MCS framing, and security mode branches.
+\item RDP virtual channel architecture (static max 31, dynamic channels, chunk size 1600 bytes default, CHANNEL\_FLAG\_FIRST/LAST reassembly) fully specified.
+\item VNC/RFB handshake sequence documented for protocol versions 3.3, 3.7, 3.8 with security type negotiation tree.
+\item VNC encoding registry catalogued (Raw, CopyRect, RRE, CoRRE, Hextile, Zlib, Tight, ZRLE, TRLE, Zlib Hextile) with compression characteristics.
+\item SPICE multi-channel architecture documented with channel types (main, display, inputs, cursor, playback, record, smartcard, usbredir) and TLS/SASL security modes.
+\item Protocol security comparison table completed: SSH vs RDP vs VNC vs SPICE across authentication strength, transport encryption, known CVE count, and default security posture.
+\item Hardening recommendations produced per protocol, citing IETF RFC 9142 and NIST SP 800-series guidance.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+GSD Mesh Prototype Spec & Network transport layer; SSH tunneling underpins mesh comms & Active \\
+GSD Chipset Architecture & Agent comms uses SSH/DACP; protocol mapping informs handshake design & Active \\
+GSD Staging Layer Vision & Staging inbox uses SSH/SFTP for file delivery & Active \\
+MCP Planning Bridge & SSH tunnel approach for Cloudflare to planning-bridge server & Active \\
+Fox Infrastructure Group & Pacific Spine network security architecture; SSH backbone & Planned \\
+GSD-OS Desktop Vision & SSH client integration for remote terminal in Tauri app & Planned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between are where protocols live. Between the client's SSH\_MSG\_KEXINIT and the server's reply is a negotiation of cryptographic primitives that will protect everything that follows. Between the raw X.224 Connection Request and the first RDP graphics update are ten phases of mutual configuration. These protocols are not about the data they carry---they are about the infrastructure of trust that makes the data safe to carry at all.
+
+This is the Amiga Principle operating at the protocol layer. A 32-byte Curve25519 public key. A 4-byte MAC. A 1-byte padding length field. Each component does its single job with mathematical precision, and together they produce a channel through which anything---terminal sessions, file transfers, desktop pixels, audio streams---can flow securely. The wire format is not bureaucracy. It is architecture. Understanding it at this level means never having to wonder what is actually on the wire, and never having to trust a black box to get it right.
+
+%% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{SSH and Remote Desktop Protocols: Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles wire-level specifications for all major remote access protocols. It is organized by protocol family, then by architectural layer from bottom (transport) to top (application). All claims are attributed to the authoritative specifications below.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}
+\item IETF RFC Editor (\texttt{rfc-editor.org}) --- SSH protocol family (RFCs 4250--4256, 5656, 8731, 9142)
+\item Microsoft Open Specifications (\texttt{learn.microsoft.com/openspecs}) --- MS-RDPBCGR and extensions
+\item IANA Registry (\texttt{iana.org}) --- RFB encoding/security type registries (since December 2012)
+\item NIST Computer Security Division --- cipher suite guidance (SP 800-57, SP 800-131A)
+\item spice-space.org --- SPICE protocol documentation
+\item OpenSSH Project (\texttt{openssh.com}) --- Reference implementation specifications
+\end{itemize}
+
+%% MODULE A
+\subsection{Module A: SSH Core Transport (RFC 4253)}
+
+\subsubsection{Protocol Architecture Overview}
+
+The SSH protocol consists of three compositionally-stacked layers, each defined in a separate RFC, each running atop the one below, and each communicating through a clean interface:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Layer} & \tableheader{RFC} & \tableheader{Function} \\
+\midrule
+Connection Protocol & RFC 4254 & Multiplexed channels, shell/exec/subsystem/forwarding \\
+Authentication Protocol & RFC 4252 & Client identity verification (publickey/password/etc.) \\
+Transport Layer Protocol & RFC 4253 & Host authentication, encryption, integrity \\
+TCP/IP & --- & Reliable byte stream, default port 22 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Binary Packet Format (RFC 4253 \S6)}
+
+After the protocol version exchange, all communication uses the binary packet format. Each packet has five fields:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Type / Size} & \tableheader{Description} \\
+\midrule
+packet\_length & uint32 (4 bytes) & Length of packet in bytes, NOT including mac or itself. Encrypted when cipher is active. \\
+padding\_length & byte (1 byte) & Length of random\_padding field. Must be at least 4. \\
+payload & byte[n1] & Useful content. n1 = packet\_length -- padding\_length -- 1. Compressed if negotiated. \\
+random\_padding & byte[n2] & n2 = padding\_length random bytes. Total (packet\_length + padding\_length + payload + random\_padding) must be multiple of block size or 8. \\
+mac & byte[m] & MAC or AEAD tag. m = mac\_length (0 before key exchange). Computed BEFORE encryption. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key constraint (RFC 4253 \S6):} Minimum packet size is 16 bytes or cipher block size (whichever is larger) plus MAC. Maximum uncompressed payload is 32,768 bytes; implementations must support total packet size of 35,000 bytes.
+
+\textbf{MAC computation (RFC 4253 \S6.4):}
+\begin{asciibox}
+mac = MAC(key, sequence_number || unencrypted_packet)
+  where unencrypted_packet = packet_length || padding_length || payload || random_padding
+  sequence_number = implicit uint32, starts at 0, increments per packet, NOT transmitted
+\end{asciibox}
+
+\subsubsection{Protocol Version Exchange}
+
+Before any binary packets, both sides send a version string in text format:
+\begin{asciibox}
+SSH-protoversion-softwareversion SP comments CR LF
+  Example: SSH-2.0-OpenSSH_9.0<CR><LF>
+  protoversion for SSH2: "2.0"
+  Backward compat (SSH1+2): server may advertise "1.99"
+  Max string length: 255 characters including CR LF
+  Null character MUST NOT be sent
+\end{asciibox}
+
+\subsubsection{Algorithm Negotiation: SSH\_MSG\_KEXINIT}
+
+Both sides send SSH\_MSG\_KEXINIT (message type byte = 20) containing name-lists of supported algorithms in preference order. The first mutually-supported algorithm in each category is selected.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Current Recommended Algorithms (RFC 9142, 2022)} \\
+\midrule
+kex\_algorithms & curve25519-sha256 (MUST), ecdh-sha2-nistp256/384/521, diffie-hellman-group14-sha256 \\
+server\_host\_key & ssh-ed25519, rsa-sha2-512, rsa-sha2-256, ecdsa-sha2-nistp256/384/521 \\
+encryption & chacha20-poly1305@openssh.com, aes128-gcm@openssh.com, aes256-gcm@openssh.com, aes256-ctr \\
+mac & hmac-sha2-256 (with CTR ciphers), hmac-sha2-512 \\
+compression & none, zlib@openssh.com (delayed compression after auth) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Deprecated (MUST NOT use per RFC 9142):} diffie-hellman-group1-sha1, any kex using SHA-1 (except as last resort fallback).
+
+\subsubsection{Diffie-Hellman Key Exchange (RFC 4253 \S8)}
+
+The classical DH exchange uses a safe prime p, generator g, and subgroup order q:
+\begin{asciibox}
+Client:  choose random x (1 < x < q)
+         compute e = g^x mod p
+         send SSH_MSG_KEXDH_INIT containing e
+
+Server:  choose random y (1 < y < q)
+         compute f = g^y mod p
+         compute K = e^y mod p  (shared secret)
+         compute H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K)
+         sign H with private host key -> signature s
+         send SSH_MSG_KEXDH_REPLY containing (K_S || f || s)
+
+Client:  compute K = f^x mod p
+         verify K_S against known_hosts
+         verify signature s on H
+         => both sides now hold K and H
+
+6 keys derived via KDF:
+  Encryption key C->S:  HASH(K || H || "C" || session_id)
+  Encryption key S->C:  HASH(K || H || "D" || session_id)
+  IV C->S:              HASH(K || H || "A" || session_id)
+  IV S->C:              HASH(K || H || "B" || session_id)
+  MAC key C->S:         HASH(K || H || "E" || session_id)
+  MAC key S->C:         HASH(K || H || "F" || session_id)
+\end{asciibox}
+
+\subsubsection{Curve25519 Key Exchange (RFC 8731, 2020)}
+
+Curve25519 provides ~128 bits of security with smaller key material than MODP groups:
+\begin{asciibox}
+Method name: "curve25519-sha256"
+Public key size: 32 bytes (fixed-length unsigned little-endian)
+
+Client: generate ephemeral X25519 keypair (Q_C)
+        send SSH_MSG_KEX_ECDH_INIT with Q_C (32 bytes)
+
+Server: generate ephemeral X25519 keypair (Q_S)
+        compute K = X25519(d_S, Q_C)  [shared secret, 32 bytes]
+        ABORT if K is all-zero (RFC 7748 §6)
+        encode K as mpint (variable-length signed big-endian)
+        compute H, sign H -> s
+        send SSH_MSG_KEX_ECDH_REPLY with (K_S || Q_S || s)
+
+NOTE: little-endian byte string -> re-interpreted as big-endian mpint
+      before hashing (per RFC 8731 §3)
+\end{asciibox}
+
+\subsubsection{Key Re-Exchange (RFC 4253 \S9)}
+
+Implementations SHOULD re-key after 1 GB of data transferred or 1 hour elapsed (whichever comes first). Either party may initiate by sending SSH\_MSG\_KEXINIT at any time after initial key exchange completes.
+
+%% MODULE B
+\subsection{Module B: SSH Application Layer (RFC 4252, RFC 4254)}
+
+\subsubsection{User Authentication Protocol (RFC 4252)}
+
+Authentication is \emph{client-driven}. After the transport layer is established (server authenticated, encryption active), the client requests access to a service (typically ``ssh-connection'').
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{Msg Type} & \tableheader{Mechanism} \\
+\midrule
+none & SSH\_MSG\_USERAUTH\_REQUEST (50) & Query which methods are available \\
+publickey & 50 & Client presents pubkey; server challenges; client signs session\_id + challenge \\
+password & 50 & Client sends plaintext password over encrypted channel \\
+keyboard-interactive & 50 / 60 & RFC 4256; server sends prompts; client responds; enables PAM/OTP \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Publickey authentication flow:}
+\begin{asciibox}
+1. Client: SSH_MSG_USERAUTH_REQUEST
+           method: "publickey"
+           boolean FALSE (query only)
+           public key algorithm name
+           public key blob
+
+2. Server: SSH_MSG_USERAUTH_PK_OK (60) if key acceptable
+           OR SSH_MSG_USERAUTH_FAILURE if not
+
+3. Client: SSH_MSG_USERAUTH_REQUEST
+           method: "publickey"
+           boolean TRUE (actual auth)
+           public key algorithm name
+           public key blob
+           signature over (session_id || entire_auth_message)
+
+4. Server: SSH_MSG_USERAUTH_SUCCESS (52) or FAILURE (51)
+\end{asciibox}
+
+\subsubsection{Connection Protocol: Channels (RFC 4254)}
+
+All higher-level services run over channels. A single SSH connection may multiplex any number of simultaneous channels.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Channel Type} & \tableheader{Use} \\
+\midrule
+session & Remote program execution: shell, exec, subsystem (SFTP, netconf) \\
+direct-tcpip & Client-to-server TCP port forwarding (local forward) \\
+forwarded-tcpip & Server-to-client TCP port forwarding (remote forward) \\
+x11 & X11 forwarding channel \\
+auth-agent@openssh.com & SSH agent forwarding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Channel open/close flow:}
+\begin{asciibox}
+Open:   SSH_MSG_CHANNEL_OPEN (90)
+          string  channel type
+          uint32  sender channel (local)
+          uint32  initial window size
+          uint32  maximum packet size
+          [type-specific data]
+
+Reply:  SSH_MSG_CHANNEL_OPEN_CONFIRMATION (91)
+          uint32  recipient channel
+          uint32  sender channel (remote)
+          uint32  initial window size
+          uint32  maximum packet size
+        OR SSH_MSG_CHANNEL_OPEN_FAILURE (92)
+
+Data:   SSH_MSG_CHANNEL_DATA (94)
+          uint32  recipient channel
+          string  data
+
+Adjust: SSH_MSG_CHANNEL_WINDOW_ADJUST (93)
+          uint32  recipient channel
+          uint32  bytes to add
+
+Close:  SSH_MSG_CHANNEL_EOF (96) then SSH_MSG_CHANNEL_CLOSE (97)
+\end{asciibox}
+
+\subsubsection{SFTP Subsystem}
+
+SFTP (Secure File Transfer Protocol) runs as an SSH-2 subsystem over a session channel. It is NOT FTP over SSH---it is a distinct binary protocol designed by the IETF SECSH working group. Current widely-deployed version is draft-ietf-secsh-filexfer-13 (Version 3/4/5/6; Version 3 most common).
+
+\begin{asciibox}
+Channel request: "subsystem" with name "sftp"
+SFTP packet: uint32 length + byte type + uint32 request-id + type-specific data
+
+Key SFTP message types:
+  SSH_FXP_INIT (1)       -- client announces version
+  SSH_FXP_VERSION (2)    -- server confirms version
+  SSH_FXP_OPEN (3)       -- open a file
+  SSH_FXP_CLOSE (4)      -- close a handle
+  SSH_FXP_READ (5)       -- read data
+  SSH_FXP_WRITE (6)      -- write data
+  SSH_FXP_LSTAT (7)      -- stat (no symlink follow)
+  SSH_FXP_FSTAT (8)      -- stat on handle
+  SSH_FXP_STATUS (101)   -- response with status code
+  SSH_FXP_HANDLE (102)   -- response with file handle
+  SSH_FXP_DATA (103)     -- response with file data
+  SSH_FXP_NAME (104)     -- response with file names (readdir)
+  SSH_FXP_ATTRS (105)    -- response with file attributes
+\end{asciibox}
+
+%% MODULE C
+\subsection{Module C: RDP Protocol (MS-RDPBCGR)}
+
+\subsubsection{Protocol Stack}
+
+RDP uses a layered protocol stack derived from ITU T.120 standards:
+\begin{asciibox}
+Application Data (keyboard, mouse, graphics, audio)
+     |
+RDP Layer (application-specific PDUs, virtual channels)
+     |
+T.125 MCS (Multipoint Communication Service) -- channel multiplexing
+     |
+T.124 GCC (Generic Conference Control) -- session management
+     |
+X.224 / COTP (ISO 8073) -- connection-oriented transport
+     |
+TPKT (RFC 1006) -- TCP packetization (4-byte header: version + length)
+     |
+TCP/IP (default port 3389)
+\end{asciibox}
+
+\subsubsection{10-Phase Connection Sequence}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{Phase \arabic*.}]
+\item \textbf{Connection Initiation} --- Client sends X.224 Connection Request PDU with RDP\_NEG\_REQ (supported security protocols bitmask). Server responds with X.224 Connection Confirm + RDP\_NEG\_RSP. All subsequent PDUs wrapped in X.224 Data PDU.
+
+\item \textbf{Basic Settings Exchange} --- Client sends MCS Connect-Initial PDU containing GCC Conference Create Request with three user data blocks: TS\_UD\_CS\_CORE (version, desktop geometry, color depth), TS\_UD\_CS\_SEC (encryption methods), TS\_UD\_CS\_NET (virtual channel list). Server responds with MCS Connect-Response + GCC Conference Create Response.
+
+\item \textbf{Channel Connection} --- Client: MCS Erect Domain Request, then MCS Attach User Request. Server: MCS Attach User Confirm (with User Channel ID). Client then joins user channel, I/O channel, and each static virtual channel via MCS Channel Join Request/Confirm pairs. Maximum 31 static virtual channels.
+
+\item \textbf{RDP Security Commencement} --- If Standard RDP Security and encryption in force: client sends Security Exchange PDU with a 32-byte random encrypted with server's public key. Both sides derive session keys from the two 32-byte randoms.
+
+\item \textbf{Secure Settings Exchange} --- Client Info PDU (always security-headered, even if no encryption): username, password, auto-reconnect cookie, working directory, shell override.
+
+\item \textbf{Optional Connect-Time Auto-Detection} --- Bandwidth/RTT probing introduced in RDP 8.
+
+\item \textbf{Licensing} --- License request/challenge exchange. Clients with valid licenses proceed; otherwise, client is granted a temporary license.
+
+\item \textbf{Capabilities Exchange} --- Server Demand Active PDU (capability sets). Client Confirm Active PDU (client capabilities). Capability sets include: General, Bitmap, Order, BitmapCache, Control, Window Activation, Pointer, Share, Color Table, Input, Sound, Font, Brush, Glyph Cache, OffscreenBitmapCache, VirtualChannel, DrawNineGridCache, DrawGdiPlus, Rail, Window, Large Pointer, Surface Commands, Bitmap Codecs, Frame Acknowledge.
+
+\item \textbf{Connection Finalization} --- Client Synchronize, Client Control (Cooperate), Client Control (Request Control), Client Font List PDU. Server Synchronize, Server Control (Cooperate), Server Control (Granted Control), Server Font Map PDU.
+
+\item \textbf{Data Exchange} --- Steady state. Client sends input PDUs (keyboard, mouse, touch). Server sends graphics update PDUs, pointer PDUs, audio PDUs.
+\end{enumerate}
+
+\subsubsection{Virtual Channels}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Channel Name} & \tableheader{Channel ID} & \tableheader{Function} \\
+\midrule
+rdpdr & 1004 & Drive / device redirection \\
+cliprdr & 1005 & Clipboard synchronization \\
+rdpsnd & 1006 & Audio output \\
+MS\_T120 & (any) & Bound to 31; CVE-2019-0708 (BlueKeep) exploited mis-binding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Virtual Channel chunking:} Default max chunk size is 1,600 bytes (without VCChunkSize capability). Larger payloads use CHANNEL\_FLAG\_FIRST (0x00000001) and CHANNEL\_FLAG\_LAST (0x00000002) flags in the Channel PDU Header. Chunks must be sent in order; no out-of-order reassembly is possible.
+
+\subsubsection{Security Modes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Description} \\
+\midrule
+Standard RDP Security & RC4 encryption, 4 levels (Low/Client Compatible/High/FIPS). Proprietary certificate for server auth. Weak by modern standards. \\
+Enhanced RDP Security (TLS) & TLS wraps entire RDP traffic before X.224. Requires valid server certificate. \\
+Enhanced RDP Security (CredSSP/NLA) & Network Level Authentication. Client authenticates via CredSSP (NTLM or Kerberos) BEFORE RDP connection established. Mitigates unauthenticated RCE class. \\
+Enhanced RDP Security (RDSTLS) & Token-based reconnection security. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+%% MODULE D
+\subsection{Module D: VNC / RFB Protocol (RFC 6143)}
+
+\subsubsection{Design Philosophy}
+
+RFB (Remote Framebuffer) is built on a single primitive: ``put a rectangle of pixel data at position (x, y)''. This radical simplicity makes it universally portable---any windowing system, any operating system. The entire display state is a framebuffer; the entire update model is a sequence of rectangle operations. Default TCP port: 5900 (IANA assigned); secondary server instances on 5901, 5902, etc.; HTTP/Java client on port 5800.
+
+\subsubsection{Handshake Sequence (Protocol Version 3.8)}
+
+\begin{asciibox}
+1. Server -> Client: ProtocolVersion
+   "RFB 003.008\n" (12 bytes, ASCII)
+
+2. Client -> Server: ProtocolVersion
+   "RFB 003.008\n" (must be <= server's version)
+
+3. Server -> Client: SecurityTypes
+   uint8  number-of-security-types
+   uint8[] security-types (ordered by server preference)
+
+4. Client -> Server: SecurityType
+   uint8  chosen-security-type
+
+5. [Security subprotocol runs, e.g., VNC Authentication]
+
+6. Server -> Client: SecurityResult
+   uint32  0 = OK, 1 = Failed, 2 = TooManyAttempts
+
+7. Client -> Server: ClientInit
+   uint8  shared-flag (0 = disconnect others, 1 = share)
+
+8. Server -> Client: ServerInit
+   uint16  framebuffer-width
+   uint16  framebuffer-height
+   PixelFormat  server-pixel-format (16 bytes)
+   uint32  name-length
+   uint8[]  name-string
+\end{asciibox}
+
+\subsubsection{Security Type Registry (IANA, since December 2012)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Number} & \tableheader{Name} & \tableheader{Security Level} \\
+\midrule
+0 & Invalid & N/A (error indicator) \\
+1 & None & No auth, no encryption. LAN use only. \\
+2 & VNC Authentication & DES challenge-response. Broken. No transport encryption. \\
+16 & Tight & Extension framework (tunnels + auth). Enables TLS or other schemes. \\
+18 & TLS & TLS wrapper. No authentication itself. \\
+19 & VeNCrypt & TLS with X.509 certificate authentication. Recommended. \\
+20 & GTK-VNC SASL & SASL framework (Kerberos, SCRAM, etc.) \\
+128--255 & RealVNC proprietary & Commercial extensions; not publicly specified. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Encoding Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Encoding} & \tableheader{Type Value} & \tableheader{Description} \\
+\midrule
+Raw & 0 & Uncompressed pixel data. Baseline. \\
+CopyRect & 1 & Reference a region already on screen. Efficient for scrolling. \\
+RRE & 2 & Rising Rectangle Encoding. Background + subrectangles. \\
+Hextile & 5 & 16x16 tile-based. Background/foreground optimized. \\
+Zlib & 6 & Raw + zlib compression per update. \\
+Tight & 7 & Mixed JPEG/palette/gradient + zlib. Most efficient for photos. \\
+Tight PNG & -260 & Tight with PNG encoding. \\
+ZRLE & 16 & Zlib Run-Length Encoding. 64x64 tiles. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+%% MODULE E
+\subsection{Module E: SPICE \& Alternative Protocols}
+
+\subsubsection{SPICE Architecture}
+
+SPICE (Simple Protocol for Independent Computing Environments) was developed by Qumranet (2007), acquired by Red Hat (2008), open-sourced December 2009. Designed specifically for KVM/QEMU virtual machine display remoting with hardware-acceleration semantics.
+
+\textbf{Four components:}
+\begin{itemize}
+\item \textbf{Protocol} -- Wire format specification (spice-protocol module; defines all message formats)
+\item \textbf{Server} -- libspice library; pluggable via VDI (Virtual Device Interface)
+\item \textbf{Client} -- spice-gtk (GTK+GObject); also spice-html5 (JavaScript/WebSocket)
+\item \textbf{Guest} -- QXL paravirtual video driver + spice-vdagent daemon
+\end{itemize}
+
+\textbf{Channel architecture:} Each SPICE channel runs over a separate TCP connection (or Unix socket). Channels may use TLS independently.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Channel Type} & \tableheader{Purpose} \\
+\midrule
+main & Session control, agent communication, migration \\
+display & Graphics commands from QXL device tree \\
+inputs & Keyboard and mouse events to guest \\
+cursor & Cursor shape and position \\
+playback & Audio output (guest to client) \\
+record & Audio input (client to guest) \\
+usbredir & USB device redirection over network \\
+smartcard & Smart card device virtualization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{QXL Graphics Pipeline:} Guest application -> OS graphics engine (X/GDI) -> QXL driver -> QXL command ring (in device memory) -> libspice pulls commands -> graphic commands tree -> client renders or server rasterizes as fallback. SPICE always attempts to offload rendering to client GPU.
+
+\textbf{SPICE Authentication:}
+\begin{itemize}
+\item \textbf{Ticket}: Server generates RSA keypair; sends public key to client; client encrypts password ticket; server decrypts and verifies.
+\item \textbf{SASL}: Enables Kerberos, SCRAM-SHA-1, DIGEST-MD5, or site-defined mechanisms.
+\end{itemize}
+
+\subsubsection{X11 Forwarding (SSH)}
+
+X11 forwarding tunnels X display protocol over an SSH channel of type ``x11''. The client sets DISPLAY to a forwarded socket (e.g., localhost:10.0), and X applications on the server send display commands back to the client's X server through the SSH tunnel. Core protocol uses TCP port 6000 + display number.
+
+%% MODULE F
+\subsection{Module F: Security Analysis \& Hardening}
+
+\subsubsection{CVE Landscape: Critical Protocol Vulnerabilities}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{CVE} & \tableheader{Protocol / Score} & \tableheader{Description} \\
+\midrule
+CVE-2019-0708 (BlueKeep) & RDP / CVSS 9.8 & Pre-auth RCE in RDP virtual channel handling. MS\_T120 channel mis-binding. Wormable. Affects Windows XP through Server 2008 R2. \\
+CVE-2019-9510 & RDP NLA / NVD & NLA session locking bypass on Windows 10 1803+. Network interruption restores session without re-auth. Not patched (by design). \\
+DejaBlue cluster & RDP / CVSS 9.8 & August 2019. Pre-auth RCE in Windows 7 through Windows 10. Multiple CVEs. \\
+CVE-2016-0777 & SSH (OpenSSH) & Roaming feature info leak exposed private keys. Fixed in OpenSSH 7.1p2. \\
+CVE-2020-15778 & SSH (OpenSSH) & scp client arbitrary command injection via crafted source argument. \\
+Terrapin (2024) & SSH / ChaCha20 & Prefix truncation attack on ChaCha20-Poly1305 and CBC/Encrypt-then-MAC. Requires active MitM. Mitigated by strict KEX extension. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Protocol Security Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}CCCC}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{SSH} & \tableheader{RDP+NLA} & \tableheader{VNC+TLS} & \tableheader{SPICE+TLS} \\
+\midrule
+Default transport encryption & Strong & Moderate & None & Optional \\
+Default auth strength & Key/PW & NLA/Kerberos & Weak DES & Ticket/SASL \\
+Forward secrecy & Yes (ECDH) & Partial (TLS) & No & No \\
+Pre-auth attack surface & Minimal & Large (BlueKeep) & Large & Small \\
+Known critical CVEs & Few & Many & Few (protocol) & Few \\
+Port exposure default & 22 & 3389 & 5900 & 5900+ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{SSH Hardening (per RFC 9142 + OpenSSH best practice)}
+
+\begin{itemize}
+\item \textbf{Disable}: diffie-hellman-group1-sha1, all KEX using SHA-1, arcfour, 3des-cbc, none cipher
+\item \textbf{Require}: HostKey algorithms: ssh-ed25519, rsa-sha2-512; KEX: curve25519-sha256 first
+\item \textbf{Enforce}: \texttt{PasswordAuthentication no}, \texttt{PermitRootLogin no}, \texttt{AllowUsers} whitelist
+\item \textbf{Key re-exchange}: \texttt{RekeyLimit 1G 1h} (1 GB or 1 hour, whichever first)
+\item \textbf{MODP groups}: Minimum 2048-bit modulus per RFC 8270
+\item \textbf{ChaCha20-Poly1305}: Apply strict KEX extension (OpenSSH 9.6+) to mitigate Terrapin
+\end{itemize}
+
+\subsubsection{RDP Hardening}
+
+\begin{itemize}
+\item \textbf{Enable NLA}: Requires valid credentials before RDP session allocates kernel resources. Partially mitigates BlueKeep class.
+\item \textbf{Use Enhanced RDP Security (TLS)}: Deploy valid PKI certificates via AD CS + GPO.
+\item \textbf{Block port 3389 externally}: Use VPN or SSH tunnel for remote access; never expose 3389 to internet.
+\item \textbf{Apply patch for BlueKeep} (MS19-0708): Forces MS\_T120 channel to always bind to channel ID 31.
+\item \textbf{NLA over TLS}: Disable NLA over NTLM; require NLA over TLS/Kerberos for domain environments.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Type} \\
+\midrule
+CVE details & Provide enough detail for defense; avoid step-by-step exploitation instructions & GATE \\
+Cipher deprecations & All deprecations cite specific RFCs; no inferences & ABSOLUTE \\
+RDP security advice & Present evidence; do not advocate specific vendor products & ANNOTATE \\
+VNC default weakness & Clearly label DES-based auth as broken; recommend VeNCrypt & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{IETF / RFC Sources}
+\begin{itemize}
+\item RFC 4251 -- SSH Protocol Architecture. Ylonen \& Lonvick. January 2006.
+\item RFC 4252 -- SSH Authentication Protocol. Ylonen \& Lonvick. January 2006.
+\item RFC 4253 -- SSH Transport Layer Protocol. Ylonen \& Lonvick. January 2006.
+\item RFC 4254 -- SSH Connection Protocol. Ylonen \& Lonvick. January 2006.
+\item RFC 4256 -- Generic Message Exchange Authentication for SSH (keyboard-interactive).
+\item RFC 5656 -- Elliptic Curve Algorithm Integration in SSH Transport Layer. Stebila \& Green. 2009.
+\item RFC 6143 -- The Remote Framebuffer Protocol. Richardson \& Levine. RealVNC Ltd. March 2011.
+\item RFC 6668 -- SHA-2 Data Integrity Verification for SSH.
+\item RFC 8268 -- More Modular Exponentiation (MODP) DH Key Exchange Groups for SSH.
+\item RFC 8308 -- Extension Negotiation in SSH.
+\item RFC 8332 -- Use of RSA Keys with SHA-256 and SHA-512 in SSH.
+\item RFC 8709 -- Ed25519 and Ed448 Public Key Algorithms for SSH.
+\item RFC 8731 -- SSH Key Exchange Using Curve25519 and Curve448. Adamantiadis et al. 2020.
+\item RFC 8758 -- Deprecating RC4 in SSH.
+\item RFC 9142 -- Key Exchange (KEX) Method Updates and Recommendations for SSH. Baushke. 2022.
+\end{itemize}
+
+\subsubsection{Microsoft Open Specifications}
+\begin{itemize}
+\item MS-RDPBCGR -- Remote Desktop Protocol: Basic Connectivity and Graphics Remoting. Microsoft Corporation.
+\item MS-RDPELE -- Remote Desktop Protocol: Licensing Extension.
+\item MS-RDPEGDI -- Remote Desktop Protocol: GDI Acceleration.
+\item ``Understanding Remote Desktop Protocol.'' Microsoft Support Article. learn.microsoft.com.
+\end{itemize}
+
+\subsubsection{Protocol Specifications and Research}
+\begin{itemize}
+\item SPICE Protocol Documentation. spice-space.org.
+\item ``Spice for Newbies.'' spice-space.org/spice-for-newbies.html.
+\item NIST Special Publication 800-57. Recommendation for Key Management. NIST.
+\item NIST Special Publication 800-131A Rev. 2. Transitioning the Use of Cryptographic Algorithms. NIST.
+\item BlueKeep (CVE-2019-0708). National Vulnerability Database. NIST NVD.
+\item ``RDP Security Explained.'' McAfee Labs. 2019.
+\item ``SSH Handshake Explained.'' Teleport Engineering Blog. goteleport.com.
+\item Bellare, Kohno, Namprempre. ``Authenticated Encryption in SSH.'' ACM CCS 2004.
+\end{itemize}
+
+%% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete, publication-quality wire-level reference document for SSH (RFCs 4250--4256 plus all active extensions), RDP (MS-RDPBCGR), VNC/RFB (RFC 6143), and SPICE protocols, covering all packet formats, message type catalogs, key exchange procedures, security modes, known vulnerability boundaries, and hardening guidance. The output serves implementers, security auditors, and the GSD toolchain integration team.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION (Sequential)
+  Paula/Haiku: shared schemas, protocol message type tables, source index
+
+WAVE 1: PARALLEL RESEARCH TRACKS (Parallel)
+  Track A (Sonnet):   SSH Core Transport (Module A) + SSH App Layer (Module B)
+  Track B (Sonnet):   RDP Protocol (Module C) + VNC/RFB (Module D)
+  Track C (Sonnet):   SPICE/Alternatives (Module E)
+
+WAVE 2: SYNTHESIS (Sequential)
+  Opus: Cross-protocol security comparison
+  Opus: CVE landscape analysis
+  Opus: Hardening guidance synthesis
+  Sonnet: Unified bibliography verification
+
+WAVE 3: PUBLICATION + VERIFICATION (Sequential)
+  Sonnet: LaTeX compilation + PDF production
+  Sonnet: Source citation verification pass
+  Sonnet: Test plan execution
+  Sonnet: Deliver PDF + .tex + index.html
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+\item \textbf{Foundation Layer} -- Shared schemas, message type number catalogs, source index
+\item \textbf{SSH Layer} -- Transport + Authentication + Connection protocols; packet formats
+\item \textbf{Remote Desktop Layer} -- RDP (MS-RDPBCGR), VNC/RFB (RFC 6143), SPICE
+\item \textbf{Security Layer} -- CVE analysis, comparison table, hardening guidance
+\item \textbf{Publication Layer} -- LaTeX source, compiled PDF, bibliography, index page
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}X L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Spec} \\
+\midrule
+1 & SSH Transport Reference & All RFC 4253 fields documented; key exchange flows for all recommended algorithms & Module A \\
+2 & SSH Auth + Connection Reference & Auth methods with wire sequences; channel lifecycle; SFTP message types & Module B \\
+3 & RDP Protocol Reference & 10-phase connection sequence; virtual channel spec; all security modes & Module C \\
+4 & VNC/RFB Protocol Reference & Handshake sequence; encoding registry; security type registry & Module D \\
+5 & SPICE \& Alternatives Reference & Channel architecture; QXL pipeline; auth modes & Module E \\
+6 & Security Analysis & Protocol comparison table; CVE catalog; hardening checklists & Module F \\
+7 & Compiled PDF (XeLaTeX) & Compiles cleanly in three passes; TOC correct; page count accurate & All \\
+8 & LaTeX source (.tex) & Readable, well-commented, recompilable & All \\
+9 & Index page (index.html) & File cards; download links; usage instructions & All \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}L{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema + source index & None & Haiku & 2K \\
+SSH Transport (Module A) & Source index & Sonnet & 8K \\
+SSH App Layer (Module B) & Module A & Sonnet & 6K \\
+RDP Protocol (Module C) & Source index & Sonnet & 8K \\
+VNC/RFB (Module D) & Source index & Sonnet & 5K \\
+SPICE \& Alternatives (Module E) & Source index & Sonnet & 4K \\
+Security Analysis (Module F) & A--E & Opus & 10K \\
+Document assembly & A--F & Sonnet & 6K \\
+Verification pass & Document & Sonnet & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Parallel?} & \tableheader{Agents} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & No & Paula (Haiku) & 2K \\
+1 & Research & Yes (3 tracks) & 3x CRAFT Sonnet & 27K \\
+2 & Synthesis & No & FLIGHT Opus (security) + VERIFY Sonnet & 14K \\
+3 & Publication & No & EXEC Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Gate} \\
+\midrule
+Build SSH RFC index & PLAN / Paula & source\_index.yaml with all 15 SSH RFCs + URLs & Auto \\
+Build RDP/VNC/SPICE index & PLAN / Paula & Extend source\_index with 6 additional specs & Auto \\
+Generate message type schemas & PLAN / Paula & SSH\_MSG\_* catalog YAML; RFB client/server msg YAML & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Research Tracks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Modules} & \tableheader{Agent} & \tableheader{Key Deliverables} \\
+\midrule
+Track A & A + B & CRAFT-SSH / Sonnet & SSH binary packet format; key exchange math; auth flows; channel lifecycle; SFTP message catalog \\
+Track B & C + D & CRAFT-RDP / Sonnet & RDP 10-phase sequence; virtual channel chunking; NLA/CredSSP; RFB handshake; encoding registry \\
+Track C & E & CRAFT-REMOTE / Sonnet & SPICE channel architecture; QXL pipeline; X11 forwarding; comparative performance notes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Gate} \\
+\midrule
+Security comparison & FLIGHT / Opus & Module F security table + CVE catalog & CAPCOM \\
+Hardening synthesis & FLIGHT / Opus & Per-protocol hardening checklists (SSH, RDP, VNC, SPICE) & CAPCOM \\
+Cross-module integration & INTEG / Sonnet & Verify consistency across modules; no contradictions & Auto \\
+Bibliography validation & VERIFY / Sonnet & All sources traceable to primary docs & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}
+\item Source index (Wave 0 output) is a shared read-only artifact: cache once, inject into all three Wave 1 agent contexts
+\item SSH message type catalog (Paula) used by Track A, Track B (comparison), and Synthesis
+\item RFC full-text retrieval deferred to Track A only; B and C reference the index
+\item Parallel track contexts share no state; cache TTL 5 minutes sufficient for Wave 1 execution
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{3cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phase} & \tableheader{Tokens (Input)} & \tableheader{Tokens (Output)} \\
+\midrule
+Wave 0: Foundation & 4,000 & 2,000 \\
+Wave 1: Track A (SSH) & 12,000 & 8,000 \\
+Wave 1: Track B (RDP/VNC) & 14,000 & 9,000 \\
+Wave 1: Track C (SPICE) & 8,000 & 4,000 \\
+Wave 2: Synthesis & 18,000 & 10,000 \\
+Wave 3: Publication & 20,000 & 8,000 \\
+\midrule
+\textbf{Total Estimated} & \textbf{76,000} & \textbf{41,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Foundation]
+  source_index.yaml
+  msg_type_catalog.yaml
+        |
+        v
+[Wave 1: PARALLEL]
+  Track A (SSH Core + App) ----+
+  Track B (RDP + VNC/RFB) ----+----> [Wave 2: Synthesis]
+  Track C (SPICE + Alt)   ----+          security_analysis.md
+                                         hardening_guide.md
+                                         bibliography_verified.bib
+                                              |
+                                              v
+                                    [Wave 3: Publication]
+                                    ssh_rdp_mission.tex
+                                    ssh_rdp_mission.pdf
+                                    index.html
+                                    *** DONE ***
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical & Non-negotiable security boundaries & 6 & BLOCK \\
+Core Functionality & Deliverable completeness & 18 & BLOCK \\
+Integration & Cross-module consistency & 8 & BLOCK \\
+Edge Cases & Robustness and coverage & 6 & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to RFCs, Microsoft Open Specs, NIST, IANA, or peer-reviewed security research. Zero entertainment media or unsourced claims. \\
+SC-NUM & Numerical attribution & Every field size (bytes), CVE score, port number, and version number attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents specifications and security evidence without advocating for specific commercial products \\
+SC-SEC & Security sensitivity & CVE descriptions provide defensive value without constituting step-by-step exploitation guides \\
+SC-DEP & Deprecation accuracy & All deprecated algorithms labeled with the specific RFC that deprecated them; no deprecated algo described as acceptable without explicit caveat \\
+SC-INT & Implementation safety & No guidance that could weaken default security posture; hardening checklists reviewed by Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{7cm}L{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. SSH binary packet format all fields documented & CF-01, CF-02 & Pending \\
+2. Key exchange flows for all recommended algorithms & CF-03, CF-04, CF-05 & Pending \\
+3. SSH message type catalog complete & CF-06 & Pending \\
+4. Auth methods documented with wire sequences & CF-07, CF-08 & Pending \\
+5. Channel lifecycle fully mapped & CF-09 & Pending \\
+6. RDP 10-phase sequence documented & CF-10, CF-11 & Pending \\
+7. RDP virtual channel architecture specified & CF-12 & Pending \\
+8. VNC/RFB handshake sequence documented & CF-13, CF-14 & Pending \\
+9. VNC encoding registry catalogued & CF-15 & Pending \\
+10. SPICE multi-channel architecture documented & CF-16 & Pending \\
+11. Protocol security comparison completed & CF-17, IN-01 & Pending \\
+12. Hardening recommendations produced & CF-18, IN-02 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; security analysis; go/no-go at wave boundaries \\
+PLAN & Planner (Sonnet) & Wave decomposition; dependency management; source index \\
+SCOUT & Research (Sonnet) & RFC retrieval; MS-RDPBCGR fetching; source validation \\
+CRAFT-SSH & SSH Specialist (Sonnet) & SSH Core + App Layer documents \\
+CRAFT-RDP & RDP/VNC Specialist (Sonnet) & RDP + VNC/RFB documents \\
+CRAFT-REMOTE & Remote Desktop Specialist (Sonnet) & SPICE + alternatives \\
+EXEC-1 & Executor (Sonnet) & SSH document assembly \\
+EXEC-2 & Executor (Sonnet) & RDP/VNC/SPICE document assembly \\
+VERIFY & Verification (Sonnet) & Source traceability; citation accuracy; no policy advocacy \\
+INTEG & Integration (Sonnet) & Cross-module consistency; comparison table correctness \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager (Haiku) & Token tracking; session budget \\
+SURGEON & Health Monitor (Haiku) & Research quality degradation detection \\
+TOPO & Topology Manager (Sonnet) & Agent team structure mid-mission \\
+ARCH & Architecture (Opus) & Cross-cutting specification decisions \\
+SECURE & Security Warden (Opus) & SC-SEC, SC-DEP enforcement; CVE guidance review \\
+LOG & Chronicle (Haiku) & Commit messages; wave summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 roles) \\
+Module Count & 6 (A: SSH Transport, B: SSH App, C: RDP, D: VNC/RFB, E: SPICE, F: Security) \\
+Wave Count & 4 (Foundation, Research, Synthesis, Publication) \\
+Parallel Tracks & 3 (Wave 1) \\
+Model Split & Opus 30\% (security synthesis, architecture) / Sonnet 60\% (research, assembly) / Haiku 10\% (scaffolding) \\
+Primary Sources & 15 RFCs + MS-RDPBCGR + NIST SP series + IANA registries \\
+Estimated Token Budget & 76K input / 41K output \\
+Estimated Context Windows & 8--12 across 3--4 sessions \\
+HITL Gates & 4 (post-Wave-0, post-Track-B/C, post-Synthesis, pre-Publication) \\
+SC-SEC Tests & 6 mandatory-pass / BLOCK on failure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily The Wire Is Honest.}
+
+\vspace{0.5em}
+
+A protocol specification is the most honest thing in computing. It does not have opinions, does not defer to authority, does not explain itself in terms of what was intended. It specifies exactly what bits appear on the wire, in exactly what order, with exactly what meaning. Security is not a property you add to a protocol---it is either present in the wire format or it is not. Curve25519's 32-byte ephemeral key is not ``secure-ish'' or ``probably fine''---it provides exactly 128 bits of security through mathematically-defined properties that do not change with time or fashion.
+
+This is the Amiga Principle at the protocol layer: small, precise, mathematically-grounded primitives that compose faithfully. The padding field in the SSH binary packet format exists to thwart traffic analysis. The 4-byte minimum is not arbitrary---it ensures that even a single-byte payload produces multiple plausible packet sizes. These are not implementation details. They are architecture.
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- GSD Ecosystem / SSH \& Remote Desktop Protocol Mission, v1.0}}
+\end{quotebox}
+
+\end{document}
