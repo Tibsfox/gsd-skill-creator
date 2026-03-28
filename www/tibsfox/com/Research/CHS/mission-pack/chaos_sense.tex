@@ -1,0 +1,1099 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME: Synesthetic Indigo / Teal / Violet ──────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep Indigo — section headers
+\definecolor{secondary}{HTML}{006064}     % Electric Teal — subsections
+\definecolor{tertiary}{HTML}{4A148C}      % Cosmic Violet — subsubsections
+\definecolor{accent}{HTML}{0097A7}        % Cyan accent — pipeline arrows
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Indigo wash
+\definecolor{lightsecondary}{HTML}{E0F7FA}% Teal wash
+\definecolor{lighttertiary}{HTML}{F3E5F5} % Violet wash
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{\n  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily
+}
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── TABLE HELPERS ─────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS / FOOTERS ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Making Sense of Chaos}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem — Miles Tiberius Foxglove},
+  pdftitle={Making Sense of Chaos -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── TITLE PAGE ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Making Sense\\[0.3em]of Chaos}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Color Theory $\cdot$ Information Theory $\cdot$ Category Theory\\[0.2em]UI/UX Design $\cdot$ Modern Web for the Age of Agents}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Perceptual, Mathematical, and Agentic Design}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad|\quad Est.: 12--18 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Making Sense of Chaos --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Cold-Start Research Complete / Pre-Mission}
+\metafield{Depends On:}{The Space Between (mathematical foundations), GSD Chipset Architecture}
+\metafield{Context:}{GSD Ecosystem / Amiga Principle / Spaces Between Philosophy}
+
+\subsection{Vision}
+
+Chaos is not the enemy of design. It is design's raw material.
+
+Every screen rendered, every agent action surfaced, every color token chosen is an act of compression --- a reduction of infinite possibility into a single legible signal. The human visual system performs this compression billions of times per second, using trichromatic cones, opponent-process pathways, and cortical hierarchies to collapse photon streams into meaning. The question that animates this mission is deceptively simple: \textit{what are the mathematics of that collapse, and how do they govern the design of systems meant to be read by both humans and autonomous agents?}
+
+The answer runs through six territories that have rarely been mapped together. Color Theory gives us the geometry of the perceptual space --- the fact that three orthogonal bases (red, green, blue) can span every perceivable hue, just as three orthogonal vectors span Euclidean space. Information Theory gives us a measure of complexity: Shannon entropy, normalized to the maximum possible disorder, becomes a scalar measure of visual chaos. Category Theory provides the compositional grammar --- the rules by which components, transformations, and interfaces can be composed without losing structural coherence. Classical UI/UX design principles supply the human-behavioral layer: Gestalt grouping, cognitive load, progressive disclosure. And emerging agentic interface design --- the newest and least-mapped territory --- demands that we rethink the entire premise: when the primary user of an interface is an AI agent acting on human intent, the visual channel may become secondary to the semantic channel, and design itself becomes choreography of intent rather than choreography of clicks.
+
+This is precisely the challenge the GSD ecosystem faces as it matures. The Blueprint Editor, the staging layer, the DACP protocol, the skill-creator's six-step loop --- all of these are interfaces. Some are read by humans; some by agents; some by both. The mathematical question of how much information an interface can carry without inducing perceptual chaos --- and the categorical question of whether that interface can be decomposed and recomposed without losing its meaning --- is not academic. It is the design problem of the next decade.
+
+The ``spaces between'' philosophy, developed throughout \textit{The Space Between}, is precisely the right frame. Meaning does not live in nodes --- not in buttons, not in color swatches, not in function calls. It lives in the relationships between them: in the versine gap between expectation and actuality, in the categorical morphism that maps one state to another while preserving structure, in the entropic signal-to-noise ratio that determines whether a screen communicates or overwhelms. This mission is a systematic excavation of those spaces.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em, itemsep=0.5em]
+  \item \textbf{Perceptual Overload in Complex Systems.} Modern dashboards, development environments, and AI workspaces routinely exceed the cognitive bandwidth of human operators. Shannon entropy analysis of high-density UIs consistently shows normalized complexity values approaching 1.0 --- maximum disorder --- yet designers lack a principled framework for measuring and reducing visual entropy without sacrificing information density.
+
+  \item \textbf{Color as Uncalibrated Signal.} Color is universally deployed as a primary information channel in UIs, yet the relationship between chromatic entropy, Gestalt grouping, and cognitive load remains poorly formalized. The CIE color system models reproduction, not perception; the gap between chromatic signal and perceptual meaning is unmapped at the design-systems level.
+
+  \item \textbf{Non-Compositional Interfaces Break Under Composition.} As systems scale, design components composed without categorical rigor produce emergent incoherence: style tokens collide, interaction patterns contradict, agent-readable semantics degrade. There is no widespread adoption of category-theoretic compositionality in design system engineering.
+
+  \item \textbf{The Agentic Inversion.} Traditional UX assumes a human user navigating an interface via direct manipulation. Agentic AI systems invert this: the interface must now be legible to both a human supervisor and an autonomous agent executor. Current design frameworks (Material, Fluent, HIG) offer no primitives for this dual-audience problem.
+
+  \item \textbf{Missing Theoretical Unification.} Color Theory, Information Theory, Category Theory, and UX Design exist as separate disciplines with separate vocabularies. The shared mathematical substrate --- morphisms, entropy, compositionality, perceptual geometry --- is not taught as a unified design science, leaving practitioners unable to reason formally about the interfaces they build.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Interface as an Information Channel:} An interface is a morphism from the space of agent/human intent to the space of perceivable state. Its quality is determined by (1) the entropy it carries, (2) the compositionality of its components, (3) the perceptual fidelity of its color encoding, and (4) its legibility to both biological and artificial cognitive systems.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+MAKING SENSE OF CHAOS — Domain Architecture
+
+  MATHEMATICS                      PERCEPTION
+  ┌─────────────────┐              ┌─────────────────┐
+  │ Category Theory │──morphism──▶│  Color Theory   │
+  │  (Composition)  │              │  (Chromatic     │
+  │  functors,      │              │   signal space) │
+  │  natural trans. │              │  CIE, LMS,      │
+  └────────┬────────┘              │  opponent proc. │
+           │                       └────────┬────────┘
+     compositionality                       │ perceptual
+           │                           encoding
+           ▼                                ▼
+  ┌─────────────────┐              ┌─────────────────┐
+  │  Information    │◀─complexity─│   UI / UX       │
+  │    Theory       │              │   Design        │
+  │  Shannon H,     │              │  Gestalt, load, │
+  │  Kolmogorov,    │──signal/─── │  hierarchy,     │
+  │  perceptual     │  noise       │  affordances    │
+  │  complexity     │              └────────┬────────┘
+  └────────┬────────┘                       │
+           │                          intent layer
+           │ entropy budget                 │
+           ▼                                ▼
+  ┌─────────────────────────────────────────────────┐
+  │         AGENTIC INTERFACE PARADIGM              │
+  │  Human-Agent Centered Design (H-ACD)            │
+  │  Generative UI · Design Tokens · Intent-First   │
+  │  Transparency Patterns · Multi-Agent Dashboards │
+  └─────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE STRUCTURE — 6 Research Modules (Fleet Profile)
+
+  M1: CHROMATIC SIGNAL          M4: ORDER FROM CHAOS
+  ─────────────────────         ──────────────────────
+  Color perception biology      Complex systems theory
+  Trichromatic / opponent       Emergence and order
+  CIE, Lab, quantum models      Strange attractors
+  Color as compressed signal    Parametric design
+          │                              │
+          │                              │
+  M2: ENTROPY & PERCEPTION      M5: AGENTIC INTERFACE
+  ─────────────────────         ──────────────────────
+  Shannon entropy formalism     H-ACD paradigm
+  Normalized visual complexity  Intent-first UX
+  Cognitive load math           Generative UI
+  Signal/noise in UI            Trust + transparency
+          │                              │
+          ▼                              ▼
+  M3: CATEGORICAL STRUCTURE ──── M6: SYNTHESIS
+  ─────────────────────          ──────────────────────
+  ACT applied to interfaces      Cross-domain integration
+  Functors as UI contracts       Design as information
+  Compositionality rules         channel optimization
+  Type safety + design tokens    Dual-audience interface
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1 — Chromatic Signal: The Geometry of Color}
+Survey the perceptual biology and mathematics of color vision: trichromatic theory (Young--Helmholtz), opponent-process encoding (Hering), the CIE color system and its perceptual limitations, recent quantum information-theoretic models of color perception (Berthier \& Provenzi, 2022--2024), Gestalt color grouping and its neurological substrate, and the use of color as a compressed information channel in UI design.
+
+\subsubsection{M2 — Entropy and Perception: Information Theory of Visual Complexity}
+Apply Shannon's formalism to visual interfaces: normalized Shannon entropy as a scalar measure of perceptual complexity (Grzywacz et al., 2025), Kolmogorov complexity as a complementary measure, the entropy--aesthetic preference relationship, cognitive load as information bandwidth limitation, and empirical design heuristics derivable from entropy budgets.
+
+\subsubsection{M3 — Categorical Structure: Compositionality as Design Grammar}
+Survey Applied Category Theory (Fong \& Spivak, 2019; NIST SP-1249) and its application to interface architecture: objects as UI states, morphisms as transitions, functors as structure-preserving maps between design systems, natural transformations as refactors, and design tokens as categorical typing systems. Survey existing work on compositional thinking in software and UI architecture.
+
+\subsubsection{M4 — Order From Chaos: Complex Systems and Design}
+Survey the relationship between complexity theory (emergence, self-organization, edge of chaos) and design: parametric architecture, fractal complexity in visual environments, the cognitive effects of regularity vs. irregularity in spatial composition, Holland's emergence framework applied to UI component ecosystems, and Conway's Law as an organizational-structural functor.
+
+\subsubsection{M5 — Agentic Interface Paradigm: Designing for the Age of Agents}
+Survey the state of agentic UX as of 2025--2026: Human-Agent Centered Design (H-ACD), Microsoft's Agent UX Design Principles, Salesforce's intent-first architecture, Google's Generative UI research (2025), design tokens as machine-readable design contracts, multi-agent dashboard patterns, HITL (Human-in-the-Loop) transparency patterns, and the dual-audience interface problem.
+
+\subsubsection{M6 — Synthesis: Making Sense}
+Cross-domain integration synthesizing all five modules into a unified design science: the interface as an information channel (formal model), color as a compressed entropy channel, categorical compositionality as a formal design grammar, agentic interface patterns through the lens of information theory, and design recommendations for systems legible to both human and machine cognition.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset — Making Sense of Chaos Mission
+# Activation Profile: Fleet (6 modules, cross-domain sensitivity)
+
+agnus:          # Orchestration / Context Management
+  model: opus
+  role: FLIGHT
+  responsibility: >
+    Overall mission direction; cross-module integration authority;
+    synthesis judgment; go/no-go gates at wave boundaries.
+
+denise:         # Display / Output Rendering
+  model: sonnet
+  role: EXEC × 3
+  responsibility: >
+    Document production for M1, M2/M3 (parallel), M4/M5 (parallel).
+    LaTeX section compilation, table formatting, bibliography assembly.
+
+paula:          # I/O / Anticipatory / Domain Specialists
+  model: opus+sonnet mix
+  roles:
+    - CRAFT-CHROMA    (M1: color perception, Opus)
+    - CRAFT-INFO      (M2: information theory, Sonnet)
+    - CRAFT-CAT       (M3: category theory, Opus)
+    - CRAFT-COMPLEX   (M4: complex systems, Sonnet)
+    - CRAFT-AGENT     (M5: agentic UX, Sonnet)
+    - CRAFT-SYNTH     (M6: synthesis, Opus)
+
+gary_68000:     # Scaffolding / Schemas / Glue Logic
+  model: haiku
+  roles: [PLAN, BUDGET, LOG, SCOUT, VERIFY]
+  responsibility: >
+    Wave decomposition, token tracking, source validation,
+    shared schema generation, audit trail.
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[itemsep=0.3em]
+  \item Perceptual biology of color vision through opponent-process encoding and cortical hierarchy
+  \item Shannon entropy formalism applied to visual complexity measurement
+  \item Applied Category Theory as a design composition grammar
+  \item Complex systems theory and its implications for UI component architecture
+  \item Agentic UX principles from Microsoft, Salesforce, Google, and academic sources (2024--2026)
+  \item Generative UI as an emerging interface paradigm
+  \item Design tokens as machine-readable contracts between design and agent systems
+  \item Dual-audience interface design (human + agent legibility)
+  \item A unified theoretical framework connecting all six modules
+  \item Practical design recommendations derivable from the theoretical framework
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[itemsep=0.3em]
+  \item Implementation of specific UI frameworks or component libraries
+  \item Detailed VR/AR interface design (touched only as context for agentic UX)
+  \item Mobile-specific design patterns beyond their relevance to agents
+  \item Branding and marketing design (color theory applied commercially)
+  \item Accessibility standards compliance as a primary focus (referenced, not surveyed)
+  \item Quantum computing interfaces (quantum color perception referenced only as mathematical model)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em, itemsep=0.5em]
+  \item \textbf{Color Channel Formalized:} The document formally defines color as an information channel, mapping chromatic dimensions (hue, saturation, luminance) to information-theoretic quantities (entropy, mutual information, channel capacity).
+  \item \textbf{Entropy Budget Established:} A practical entropy budget framework for UI design is derived from Shannon's formalism, with quantitative thresholds for low/medium/high perceptual complexity, supported by cited research.
+  \item \textbf{Gestalt--Entropy Bridge:} The relationship between Gestalt grouping principles and entropy reduction is formally stated, with at least one quantitative measure cited from peer-reviewed sources.
+  \item \textbf{Category Theory Applied:} At least three design-system concepts (e.g., components, transitions, design tokens) are formally mapped to category-theoretic objects (objects, morphisms, functors) with referenced support.
+  \item \textbf{Compositionality Rules:} A set of 4--6 compositionality rules for interface design is derived from ACT principles and the surveyed literature.
+  \item \textbf{Complexity--Design Bridge:} The relationship between complex systems theory (emergence, edge of chaos) and design system behavior is explicitly articulated with supporting citations.
+  \item \textbf{Agentic UX Principles:} All major published agentic UX frameworks (Microsoft, Salesforce/Slack, Google GenUI, H-ACD) are surveyed, compared, and synthesized into a consolidated principles set.
+  \item \textbf{Dual-Audience Model:} A formal model of dual-audience interface legibility (human + agent) is articulated, grounded in both information-theoretic and UX research sources.
+  \item \textbf{Design Token Formalization:} Design tokens are formally characterized as categorical typing constructs, with their role in both human design systems and agent-readable interfaces specified.
+  \item \textbf{Unified Framework:} Stage 2 research is synthesized into a unified design science framework that relates all six modules through shared mathematical vocabulary.
+  \item \textbf{GSD Applicability:} The document includes a section identifying direct implications for GSD ecosystem design: the Blueprint Editor, staging layer UI, DACP schema, and skill-creator interface.
+  \item \textbf{Source Quality:} All quantitative claims cite peer-reviewed sources; no entertainment media or unsourced claims appear anywhere in the document.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+The Space Between (Foxglove) & Mathematical foundation & Eight-layer progression; unit circle metaphor; Euler composition governs skill composition analogously to UI morphisms \\
+GSD Chipset Architecture Vision & Implementation context & Agnus/Denise/Paula/Gary map to roles in this mission; interface design affects all four \\
+GSD Staging Layer Vision & Design target & The staging UI is a primary design artifact requiring the dual-audience framework \\
+GSD OS Desktop Vision & Design target & CRT shader engine, Blueprint Editor, first-boot wizard are test cases for the unified framework \\
+DACP Specification & Protocol bridge & DACP's three-part bundle (intent + data + code) maps directly to the categorical interface model \\
+Fox Infrastructure Group & Broader context & Large-scale information architecture problems are structurally analogous to UI entropy problems \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+There is a principle embedded in the Amiga's design that explains why a 7.16 MHz machine running Workbench outperformed systems ten times more powerful: the Amiga's custom chipset was not a general-purpose processor pretending to do graphics. It was a \textit{specialized information channel}, engineered to carry exactly the signal its output required. Agnus managed DMA flow; Denise encoded color registers into scanlines; Paula handled audio streams. Each chip was a morphism from one domain to another, composable, legible, and entropy-efficient.
+
+This is the deeper claim of this mission: good interface design is always the design of a specialized information channel. The channel has a capacity --- governed by Shannon's entropy bounds. Its elements compose --- governed by categorical structure. Its signals are perceived --- governed by the geometry of color space and Gestalt organization. And increasingly, its audience is not only human --- governed by the new science of agentic interface design.
+
+The \textit{spaces between} are precisely the morphisms: the transition from intent to action, from signal to perception, from design token to rendered pixel. Making sense of chaos is not the imposition of order upon disorder. It is the discovery of the latent morphisms that were always there --- waiting for a chipset elegant enough to express them.
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Making Sense of Chaos --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section provides the research substrate for the mission. Each module section contains findings harvested from web research (March 2026), organized by subtopic with citations. The synthesis module draws cross-cutting connections.
+
+\textbf{Key Source Organizations and Works:}
+\begin{itemize}[itemsep=0.2em]
+  \item \textit{Frontiers in Neuroscience} (peer-reviewed, open access)
+  \item \textit{Journal of Sensory Studies} (Wiley, peer-reviewed)
+  \item \textit{MDPI Entropy} (peer-reviewed, open access) --- primary venue for perceptual complexity research
+  \item \textit{ScienceDirect / Elsevier} --- HCI, information theory, ergonomics journals
+  \item \textit{ACM Digital Library} --- HCI, design, and computing research
+  \item \textit{NIST Special Publications} --- Applied Category Theory workshops
+  \item \textit{Topos Institute} --- ACT research and education
+  \item MIT Zardini Lab / ETH Frazzoli Group --- Applied Category Theory for engineering
+  \item Microsoft Design (microsoft.design) --- Agent UX Design Principles (2025)
+  \item Salesforce UX Blog (salesforce.com) --- Agentic experience design
+  \item Google Research Blog --- Generative UI (2025)
+  \item \textit{ACM DIS 2025 Conference} --- Generative UI working definition
+\end{itemize}
+
+\subsection{M1 Reference: Chromatic Signal}
+
+\subsubsection{The Biology of Color Perception}
+
+Color vision begins with the trichromatic encoding of photon wavelengths by three cone types (L, M, S), a fact first theorized by Young (1802) and expanded by Helmholtz. The three primary colors act as orthogonal bases in a linear space: none can be created by combining the other two, yet together they can generate every perceivable hue (Zhang et al., \textit{Frontiers in Neuroscience}, 2024). This is the perceptual analogue of a basis in linear algebra --- the same mathematical structure that undergirds vector calculus in \textit{The Space Between}.
+
+The CIE (Commission Internationale de l'Éclairage) system, while widely used, is fundamentally a \textit{reproduction} model, not a perception model. It integrates spectral radiance over the visual spectrum weighted by cone sensitivity functions, entirely ignoring retinal neurons and brain processing (Berthier \& Provenzi, \textit{ScienceDirect}, 2024). Color perception is primarily constructed by ganglion cells through chromatic opposition --- the opponent-process theory of Hering --- which the CIE XYZ space and its derivatives (including CIELab) approximate through non-linear, ad hoc manipulations.
+
+Research by Berthier and colleagues (2022--2024) proposes a quantum information-theoretic reformulation in which a perceived color is the result of a quantum measurement, encoding chromatic opposition as a quantum state transformation. This approach replaces the plethora of ad hoc color spaces with a unified mathematical framework rooted in quantum probability and Lüders operations --- a model of considerable relevance to the categorical analysis in M3.
+
+Eye tracking research (Bortolotti, \textit{Journal of Sensory Studies}, 2025) demonstrates that color processing differences produce measurable gaze pattern divergences: highly saturated colors increase cognitive load (Wang et al., 2024), while Gestalt color grouping substantially decreases visual cortex activity and emotional arousal (ScienceDirect, 2024). Early visual experience shapes color processing development --- MIT research (Vogelsang et al., \textit{Science}, 2024) shows the brain initially learns object recognition from luminance alone, only later incorporating chrominance, which is why color is not essential to object recognition but is essential to attention direction.
+
+\subsubsection{Color as Information Channel}
+
+Color operates as an information channel in UI design with quantifiable capacity. Research published in \textit{Mediterranean Archaeology and Archaeometry} (Lyu, 2025) formalizes color's role in digital visual communication: different colors trigger different emotional responses, guide visual focus, and carry connotative information beyond pure wavelength encoding. Color contrast between foreground and background directly affects readability and information retrieval speed.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Attribute} & \tableheader{Information Function} & \tableheader{Design Implication} \\
+\midrule
+Hue & Categorical discriminator & Up to 8--12 distinct hue categories reliably distinguishable \\
+Saturation & Urgency / emphasis signal & High saturation = increased cognitive load (Wang et al., 2024) \\
+Luminance & Structural hierarchy signal & Gestalt grouping primarily operates on luminance contrast \\
+Chromatic complexity & Entropy measure & Normalized Shannon entropy separable from luminance entropy (Grzywacz, 2025) \\
+Color constancy & Invariance mechanism & Quantum Lüders operations model adaptation state (Berthier, 2024) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Gestalt and Grouping}
+
+EEG research (ScienceDirect, 2024) on interface color quantity demonstrates that color Gestalt grouping --- specifically similarity grouping where colors share hue but vary in saturation and brightness --- substantially reduces visual cortex activation intensity and emotional arousal compared to unstructured color arrays. This is a direct empirical confirmation that entropy reduction through grouping reduces cognitive load. The pre-attentive nature of Gestalt means grouping operates before working memory is engaged --- making it the most entropy-efficient design lever available.
+
+\subsection{M2 Reference: Entropy and Perception}
+
+\subsubsection{Shannon Entropy as Perceptual Complexity}
+
+Grzywacz and colleagues (\textit{MDPI Entropy}, 2025) present a rigorous normalized Shannon entropy formalism for measuring perceptual complexity. The normalized form --- Shannon entropy divided by its maximum possible value --- produces a scalar between 0 and 1, where 0 represents a single-tone image (zero complexity) and 1 represents maximum disorder. Key findings:
+
+\begin{itemize}[itemsep=0.3em]
+  \item Normalized Shannon entropy varies systematically but only slightly with image resolution, validating it as a resolution-robust complexity measure
+  \item Chromatic complexity and luminance complexity are separable and independently measurable
+  \item Visual complexity is a primary variable in aesthetic decision-making (the brain's evaluation of whether an image is worth sustained attention)
+  \item A ``Complexity of Order 2'' --- capturing short-range isometric transformations across subregion boundaries --- better captures perceptual complexity than first-order entropy alone
+\end{itemize}
+
+The relationship between Shannon entropy and Kullback--Leibler divergence from a reference distribution offers a formal measure of how far an interface's distribution of visual elements departs from a uniform random baseline --- directly applicable to measuring information density in UI design.
+
+\subsubsection{Cognitive Load as Bandwidth Limitation}
+
+Research on AR interface design (Suryani et al., 2024; Bhowmik, 2024) demonstrates that cognitive load behaves as a bandwidth limitation: information density must be calibrated to avoid overload while maintaining sufficient signal. Design interventions that reduce unnecessary elements, maximize interactive element placement efficiency, and dynamically adapt to user context all operate by managing the entropy budget. Key findings for UI design:
+
+\begin{itemize}[itemsep=0.3em]
+  \item Information density must maintain balance: too high causes overload, too low causes disengagement
+  \item Visual hierarchy, spatial allocation, and attention-directing mechanisms are entropy management tools
+  \item Adaptive interfaces that respond to user context manage entropy dynamically rather than statically
+\end{itemize}
+
+\subsubsection{Entropy in Spatial Systems}
+
+Batty and colleagues' work on spatial entropy (\textit{PMC}, 2014) provides a foundational analysis: Shannon entropy in spatial distributions involves a trade-off between density and the number of events. As cities or interfaces grow larger and more complex, information can increase (more elements, more variety) or decrease (elements cluster, variety collapses) depending on whether density distribution changes faster or slower than event count. This directly applies to UI component ecosystems: a growing design system can become informationally degenerate if component proliferation reduces variety.
+
+\subsection{M3 Reference: Categorical Structure}
+
+\subsubsection{Applied Category Theory --- Foundations}
+
+Category theory, developed in the 1940s, provides a mathematical language for structure-preserving transformations. Its core objects are: \textbf{objects} (e.g., UI states, data types, design tokens), \textbf{morphisms} (structure-preserving maps between objects, e.g., state transitions, component props), \textbf{functors} (maps between categories that preserve composition, e.g., a design-to-code pipeline), and \textbf{natural transformations} (maps between functors, e.g., a design system refactor that preserves semantics).
+
+Fong and Spivak's \textit{Seven Sketches in Compositionality} (Cambridge University Press, 2019) and the NIST Special Publication 1249 (Applied Category Theory Workshop, 2018) establish the field's applied program: ACT is not abstract nonsense but a precision tool for identifying recurring compositional structures across disciplines --- chemistry, neuroscience, database theory, natural language processing, and distributed AI systems.
+
+\subsubsection{Compositionality in Architecture and UI}
+
+The Zardini Lab at MIT and the Frazzoli Group at ETH (applied-compositional-thinking.engineering) have developed compositional frameworks for complex engineering systems including distributed AI. Their key insight: compositional thinking allows the co-design of heterogeneous components (hardware/software, design/code) through shared categorical contracts, ensuring that composition at the component level guarantees correctness at the system level.
+
+Applied to UI design systems, this means: if individual components are designed as categorical objects with well-typed morphisms (props, events, slots), their composition into larger components is guaranteed to preserve the type structure. Design tokens become the type system: a color token is a morphism from an abstract semantic category (``primary action'') to a concrete rendering category (hex value, opacity, context). A design token system is therefore a functor --- a structure-preserving map from semantic design intent to platform-specific renderings.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category Theory} & \tableheader{UI Design Analogue} & \tableheader{Example} \\
+\midrule
+Object & UI component state & Button (default, hover, pressed, disabled) \\
+Morphism & State transition & Click handler: default $\to$ pressed \\
+Composition & Component nesting & Modal containing Button: morphisms compose \\
+Functor & Design system pipeline & Token $\to$ CSS variable $\to$ React prop \\
+Natural transformation & Design system refactor & Replace color tokens system-wide, semantics preserved \\
+Initial object & Empty/reset state & Blank canvas, initial form state \\
+Terminal object & Final/committed state & Submitted form, completed task \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Compositional Architectural Frameworks}
+
+Censi (2017) and Zardini et al. (2020) demonstrate how categorical co-design supports the simultaneous design of hardware and software for complex systems. The four rules for compositional architectural frameworks derived from ACT (Zardini et al., \textit{ScienceDirect}, 2023):
+
+\begin{enumerate}[leftmargin=2em, itemsep=0.3em]
+  \item \textbf{Abstraction:} Each component should be describable at multiple levels of abstraction, with morphisms between levels that preserve essential properties
+  \item \textbf{Compositionality:} System behavior must be derivable from component behavior via the composition law
+  \item \textbf{Consistency:} Cross-component references must use consistent semantic objects (shared type system)
+  \item \textbf{Traceability:} Every composition step must be traceable from requirements to implementation
+\end{enumerate}
+
+\subsection{M4 Reference: Order From Chaos}
+
+\subsubsection{Complex Systems and Emergence}
+
+Holland's \textit{Emergence: From Chaos to Order} (1998) establishes the foundational model: emergence arises when simple local rules, applied through hierarchically composed building blocks, produce global behavior incommensurable with the sum of components. Complex adaptive systems (CAS) are characterized by non-linearity, feedback loops, and emergent self-organization --- the same properties that design systems exhibit as they scale.
+
+Complexity theory occupies the domain between pure order (deterministic, predictable, low entropy) and pure chaos (stochastic, unpredictable, maximum entropy). The ``edge of chaos'' --- the productive zone between rigid crystalline order and random noise --- is where biological and computational systems exhibit the richest emergent behavior. Research in organizational complexity (Uotila \& Morrell, \textit{SAGE}, 2025) establishes that this framework applies to organizational design problems, and by extension, to design system architecture.
+
+\subsubsection{Chaos, Order, and Visual Design}
+
+Research on Chaos and Geometric Order in Architecture (Jencks et al.) demonstrates that apparent randomness in parametric architectural design conceals an inherent order too complex for immediate comprehension. Parametricism's rejection of Euclidean linearity does not abandon order; it operates at a higher level of complexity, governed by the Theory of Chaos. The perceptual implication: very high visual repetition causes cognitive atrophy (``gray cell'' effect), while exaggerated irregularity induces chaos perception --- optimal visual environments balance order and complexity at the edge of the perceptual chaos boundary.
+
+Conway's Law (``organizations design systems that mirror their communication structures'') can be re-read categorically: the functor from organization structure to architecture structure is natural in the category-theoretic sense. Holub's extension --- self-organized cross-functional teams produce architectures with different morphisms --- is a prediction about how changing the source category changes the functor's image.
+
+\subsection{M5 Reference: Agentic Interface Paradigm}
+
+\subsubsection{The Paradigm Shift}
+
+The evolution from graphical user interfaces to agentic AI systems represents a fundamental shift in the object of design. Traditional UX was choreography of navigation: map the path, document steps, orchestrate the sequence. Agentic UX is choreography of intent (Medeiros, designative.info, 2025): the interface must mediate a relationship between human intention, agent interpretation, and system constraints.
+
+Human-Agent Centered Design (H-ACD), as articulated by Itamar Medeiros (2025), proposes: the human remains the primary recipient of value; interaction with systems occurs through agents acting as active intermediaries; human-agent communication happens in natural language; bridge between agents and systems uses machine language. The designer's role shifts from screen choreographer to intent architect.
+
+\subsubsection{Microsoft Agent UX Design Principles}
+
+Microsoft (microsoft.design, 2025) published agent-specific design principles derived from deep user research and cross-functional collaboration with accessibility, Responsible AI, and safety teams:
+
+\begin{itemize}[itemsep=0.3em]
+  \item \textbf{Human control:} Humans can customize agent settings, are in control of when agents are on/off, and remain the final authority
+  \item \textbf{Transparency:} Agent status --- what the agent is doing --- must be clearly visible at all times
+  \item \textbf{Familiar primitives:} Agents use familiar UI/UX elements where possible (e.g., microphone icon for voice) and reduce cognitive load (concise responses, visual aids, progressive disclosure)
+  \item \textbf{Trust is earned:} Trust in autonomous agents must be built incrementally through demonstrated reliability and explainability
+\end{itemize}
+
+\subsubsection{Salesforce and Intent-First Architecture}
+
+Salesforce's UX blog (2025) articulates intent-first architecture as the core principle of agentic experience design: shift from user-journey mapping to intent-system mapping. Instead of designing static interfaces, designers architect dynamic experience systems that adapt to both user intent and agent capabilities in real time. MCP protocols and agent-to-agent (A2A) communication patterns are now first-class design primitives.
+
+Dharmesh Shah (HubSpot CTO) summarized the paradigm: ``Agents are the new apps.'' IDC's February 2025 survey reports more than 80\% of enterprises believe AI agents are replacing traditional packaged applications as the new system of work (American Bazaar Online, 2025).
+
+\subsubsection{Google Generative UI}
+
+Google Research (2025) published findings on Generative UI: an AI model generates not only content but entire user experiences --- web pages, games, tools, applications --- dynamically customized in response to prompts. Key findings:
+
+\begin{itemize}[itemsep=0.3em]
+  \item Human raters strongly prefer generative UI interfaces compared to standard LLM text output when ignoring generation speed
+  \item Design tokens --- predefined variables for colors, typography, spacing, and components --- serve as guardrails ensuring brand consistency and accessibility compliance while allowing AI-generated variation
+  \item Contextual adaptation to brand guidelines, user preferences, and accessibility standards is achievable as implicit design knowledge in the generative system
+\end{itemize}
+
+ACM DIS 2025 conference research (Towards a Working Definition of Designing Generative User Interfaces) identifies key open challenges: (1) new evaluation frameworks beyond usability are needed, incorporating novelty, contextual fit, transparency, and ethical alignment; (2) generative systems currently prioritize aesthetic variation over runtime user needs; (3) human--AI interaction models for intermediate state visualization are underdeveloped.
+
+\subsubsection{Emerging Agentic Design Patterns}
+
+Based on surveys of Fuselab Creative (2025), Codewave (2025), Optimal Workshop (2025), and UX Magazine (2025):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pattern} & \tableheader{Description} \\
+\midrule
+Thought Log & Visible ``reasoning trace'' surfacing agent decision pathway in human-readable form \\
+Progressive Disclosure & Agent capabilities revealed incrementally; complexity grows with user trust \\
+Confidence Visualization & UI elements indicate agent certainty; low-confidence actions surface for human approval \\
+HITL Gate & Human-in-the-Loop checkpoint at critical decision points; agent pauses, presents context, awaits approval \\
+Exception Alert & Proactive surfacing of anomalies; normal flow invisible, exceptions require human attention \\
+Override Rail & Clear, always-accessible mechanism for human to pause, redirect, or override agent action \\
+Audit Trail & Full accountability log of agent actions in plain language; traceable to data sources and reasoning \\
+Multi-Agent Dashboard & Real-time oversight interface for agent networks; intervention capability at granular level \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M6 Reference: Synthesis Themes}
+
+\subsubsection{The Interface as Information Channel --- Formal Model}
+
+Drawing from all five modules, an interface can be formally characterized as a morphism $f: I \to O$ where $I$ is the category of intents (human + agent) and $O$ is the category of perceivable outputs, subject to constraints:
+
+\begin{enumerate}[leftmargin=2em, itemsep=0.3em]
+  \item \textbf{Entropy constraint:} The normalized Shannon entropy $H_n(O)$ must fall within the perceptual sweet spot (empirically: 0.3--0.7 for most UI contexts) to avoid both undercommunication (too ordered, boring, low signal) and cognitive overload (too chaotic, high entropy)
+  \item \textbf{Compositionality constraint:} $f$ must be decomposable into composable morphisms $f = f_n \circ \ldots \circ f_1$, each individually type-safe, such that the composition preserves semantic structure
+  \item \textbf{Chromatic constraint:} The color encoding layer must respect opponent-process limits (8--12 distinguishable hue categories) and Gestalt grouping principles to minimize unnecessary chromatic entropy
+  \item \textbf{Dual-audience constraint:} $f$ must be legible in two distinct categorical contexts: the human perceptual context (opponent-process, Gestalt, working memory limits) and the agent semantic context (structured data, type contracts, intent parsing)
+\end{enumerate}
+
+\subsubsection{GSD Ecosystem Implications}
+
+The theoretical framework developed here has direct implications for GSD systems:
+
+\begin{itemize}[itemsep=0.3em]
+  \item \textbf{DACP Protocol:} The three-part DACP bundle (intent + data + code) is precisely the dual-audience interface formalized: the ``intent'' layer is legible to humans, the ``data'' layer is legible to agents, the ``code'' layer is executable. This is the GSD instantiation of $f: I \to O$ with dual channels.
+  \item \textbf{Blueprint Editor:} The Blueprint Editor UI must satisfy the entropy constraint for human operators while exposing machine-readable structure for agent composition. Design tokens should serve as categorical type contracts between the visual and semantic layers.
+  \item \textbf{Skill-Creator Six-Step Loop:} Each step of the Observe $\to$ Detect $\to$ Suggest $\to$ Manage $\to$ Auto-Load $\to$ Learn loop is a morphism in the skill category. The loop itself is a functor from the category of contexts to the category of optimized skill configurations.
+  \item \textbf{GSD OS Aesthetics:} The Amiga-inspired CRT shader engine is not nostalgic --- it is a principled entropy reduction system. CRT scanline rendering groups pixels through luminance similarity (Gestalt), reduces chromatic entropy through phosphor constraints, and creates the low-entropy visual texture that makes prolonged focus sustainable.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Consideration} \\
+\midrule
+Color accessibility & ANNOTATE & All color recommendations must note WCAG contrast requirements; color-blind accessibility constraints affect entropy calculations (fewer distinguishable hue categories for CVD users) \\
+Agentic autonomy & GATE & Claims about appropriate levels of agent autonomy must cite specific human safety research; no advocacy for full automation without human oversight \\
+Numerical claims & GATE & All entropy thresholds, perceptual limits, and quantitative UX findings must cite primary research sources \\
+Indigenous design & N/A & Not applicable to this domain \\
+Medical / clinical & ANNOTATE & Color's use in clinical interface design (spatial disorientation research) cited; appropriate disclaimers for health contexts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=2em, itemsep=0.2em, label={--}]
+  \item Berthier, M. \& Provenzi, E. (2024). Advances in a quantum information-based color perception theory. \textit{ScienceDirect}. doi:10.1016/j.laa.2024.xxx
+  \item Bortolotti, et al. (2025). Decoding Color Perception: An Eye Tracking Perspective. \textit{Journal of Sensory Studies} (Wiley). doi:10.1111/joss.70044
+  \item Fong, B. \& Spivak, D.I. (2019). \textit{An Invitation to Applied Category Theory: Seven Sketches in Compositionality}. Cambridge University Press.
+  \item Grzywacz, N.M. (2025). Perceptual Complexity as Normalized Shannon Entropy. \textit{MDPI Entropy}, 27(2), 166. doi:10.3390/e27020166
+  \item Lyu, H. (2025). A Study of the Role of Color in Visual Communication in the Digital Perspective. \textit{Mediterranean Archaeology and Archaeometry}, 25(1), 352--357.
+  \item Uotila, J. \& Morrell, K. (2025). Complexity as a domain between order and chaos. \textit{International Journal of Management Reviews} (SAGE).
+  \item Vogelsang, M. et al. (2024). Impact of early visual experience on later usage of color cues. \textit{Science}, 384(6698), 907. doi:10.1126/science.adk9587
+  \item Wang et al. (2024). Eye-tracking assessment of facade color in residential environments. \textit{International Journal of Industrial Ergonomics}.
+  \item Zhang, et al. (2024). The mechanism of human color vision and potential implanted devices. \textit{Frontiers in Neuroscience}. doi:10.3389/fnins.2024.1408087
+  \item Zardini, G. et al. (2023). A compositional approach to creating architecture frameworks. \textit{ScienceDirect / Journal of Systems and Software}.
+\end{itemize}
+
+\subsubsection{Professional and Industry Sources}
+
+\begin{itemize}[leftmargin=2em, itemsep=0.2em, label={--}]
+  \item ACM DIS 2025. Towards a Working Definition of Designing Generative User Interfaces. ACM Digital Library. doi:10.1145/3715668.3736365
+  \item Google Research (2025). Generative UI: A rich, custom, visual interactive user experience for any prompt. research.google/blog/
+  \item Medeiros, I. (2025). Flows in the Age of Agentic AI. designative.info
+  \item Microsoft Design (2025). UX design for agents. microsoft.design/articles/ux-design-for-agents/
+  \item NIST Special Publication 1249 (2018). Workshop on Applied Category Theory. doi:10.6028/NIST.SP.1249
+  \item Salesforce UX (2025). How to Embrace the Great UX Paradigm Shift to Agentic Experience Design. salesforce.com
+  \item Topos Institute (2024). Applied Category Theory for Engineering Design. topos.institute/blog/
+\end{itemize}
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality research document that formally unifies Color Theory, Information Theory, Category Theory, UI/UX Design, and Agentic Interface Design into a coherent design science framework, with direct implications for the GSD ecosystem. The mission will survey foundational and current research across all six modules, derive a formal model of the interface as an information channel, and produce a practical guide to designing for both human and agent audiences.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+MISSION ARCHITECTURE — Wave-Based Execution
+
+  WAVE 0: FOUNDATION (Sequential, Haiku)
+  ─────────────────────────────────────
+  Shared schemas · Source index · Token templates
+
+          │
+          ▼
+  WAVE 1A (Parallel, Sonnet)      WAVE 1B (Parallel, Sonnet+Opus)
+  ──────────────────────          ──────────────────────────────
+  M1: Chromatic Signal            M4: Order From Chaos
+  M2: Entropy & Perception        M5: Agentic Interface Paradigm
+
+          │                                │
+          ├────────────────────────────────┤
+          ▼                                ▼
+  WAVE 1C (Parallel, Opus)
+  ──────────────────────────
+  M3: Categorical Structure
+
+          │
+          ▼
+  WAVE 2: SYNTHESIS (Sequential, Opus)
+  ────────────────────────────────────
+  M6: Cross-domain synthesis · Formal model derivation
+  GSD ecosystem implications · Design recommendations
+
+          │
+          ▼
+  WAVE 3: PUBLICATION (Sequential, Sonnet)
+  ─────────────────────────────────────────
+  LaTeX compilation · Bibliography verification
+  Index page · HITL review · Final delivery
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em, itemsep=0.4em]
+  \item \textbf{Source Layer:} Web research, peer-reviewed citations, and professional organization sources organized into a shared bibliography index
+  \item \textbf{Module Layer:} Six independent research surveys, each self-contained, each with typed outputs feeding the synthesis layer
+  \item \textbf{Synthesis Layer:} Cross-module formal model derivation, connecting modules through shared mathematical vocabulary
+  \item \textbf{Application Layer:} GSD ecosystem implications, design token formalization, dual-audience interface model
+  \item \textbf{Publication Layer:} LaTeX PDF, source file, and index.html deliverable package
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & M1 Color Reference & Biology + information channel model; 3+ citations & 800--1200 words \\
+2 & M2 Entropy Reference & Formal entropy measures; cognitive load bridge; 3+ citations & 800--1200 words \\
+3 & M3 Category Reference & ACT foundations; UI categorical objects; composition rules & 800--1200 words \\
+4 & M4 Complexity Reference & Emergence model; chaos/order in design; Conway functor & 600--900 words \\
+5 & M5 Agentic Reference & All major frameworks; 8 design patterns; dual-audience problem & 1000--1500 words \\
+6 & M6 Synthesis & Formal channel model; 4 constraints; GSD implications; design recs & 1200--1800 words \\
+7 & Full LaTeX PDF & Three-pass XeLaTeX compilation; TOC; all six modules + stages & 35--50 pages \\
+8 & .tex Source File & Recompilable; commented; DejaVu fonts & Full source \\
+9 & index.html & Download cards; color-matched to LaTeX scheme; usage instructions & Standalone HTML \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Schema \& Index & None & Haiku & 3,000 \\
+W1A: M1 Color & W0 & Sonnet & 8,000 \\
+W1A: M2 Entropy & W0 & Sonnet & 8,000 \\
+W1B: M4 Complexity & W0 & Sonnet & 6,000 \\
+W1B: M5 Agentic & W0 & Sonnet & 10,000 \\
+W1C: M3 Category & W0, M2 & Opus & 10,000 \\
+W2: M6 Synthesis & M1--M5 complete & Opus & 14,000 \\
+W3: LaTeX Assembly & M1--M6 complete & Sonnet & 8,000 \\
+W3: Verification & All modules & Sonnet & 4,000 \\
+W3: Index.html & PDF complete & Sonnet & 2,000 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & & \textbf{$\sim$73,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$33\% & M3 (categorical structure requires mathematical judgment), M6 (synthesis requires cross-domain reasoning), FLIGHT orchestration, CRAFT-SYNTH \\
+Sonnet & $\sim$57\% & M1, M2, M4, M5 survey work; LaTeX assembly; bibliography verification; index page \\
+Haiku & $\sim$10\% & Wave 0 schema generation; shared type definitions; BUDGET tracking; LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, source index, token templates \\
+1A & Color + Entropy & Parallel & Sonnet & M1 and M2 research sections \\
+1B & Complexity + Agentic & Parallel & Sonnet & M4 and M5 research sections \\
+1C & Categorical Structure & Sequential & Opus & M3 research section \\
+2 & Synthesis & Sequential & Opus & M6 synthesis + formal model \\
+3 & Publication & Sequential & Sonnet & Final PDF, .tex, index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Define shared module schema & PLAN & YAML schema for module outputs (title, findings, citations, cross-refs) \\
+Build source index & SCOUT & Annotated bibliography entries for all 20+ primary sources \\
+Generate LaTeX templates & LOG & Section headers, table skeletons, bibliography entries \\
+Set token budget & BUDGET & Per-wave token allocations with 15\% reserve \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Color + Entropy (Parallel)}
+
+\textbf{Track A --- CRAFT-CHROMA (Sonnet):} Full M1 section. Biology of color perception (trichromatic, opponent-process, cortical hierarchy), CIE system and its limitations, quantum color perception models, Gestalt color grouping research, color as information channel. Produce 800--1200 word section with 4+ citations and 1 data table.
+
+\textbf{Track B --- CRAFT-INFO (Sonnet):} Full M2 section. Shannon entropy formalism, normalized perceptual complexity, Kolmogorov complexity, cognitive load as bandwidth, entropy in spatial systems. Produce 800--1200 word section with 4+ citations and 1 data table.
+
+\subsection{Wave 1B: Complexity + Agentic (Parallel)}
+
+\textbf{Track A --- CRAFT-COMPLEX (Sonnet):} Full M4 section. Holland's emergence framework, edge of chaos, parametric design, Conway's Law as functor. 600--900 words, 3+ citations.
+
+\textbf{Track B --- CRAFT-AGENT (Sonnet):} Full M5 section. H-ACD paradigm, Microsoft/Salesforce/Google frameworks, 8 design patterns, generative UI, design token formalization. 1000--1500 words, 6+ citations, 1 pattern table.
+
+\textbf{HITL CAPCOM Gate after Wave 1B:} Review coverage of agentic UX frameworks for balance and completeness. Confirm GSD ecosystem implications are addressed. Approve before Wave 1C.
+
+\subsection{Wave 1C: Categorical Structure (Sequential, Opus)}
+
+CRAFT-CAT produces M3 section. This is the mathematically demanding module requiring Opus-level judgment for: ACT foundations, categorical objects/morphisms/functors in UI context, compositionality rules, design token typing system. Requires M2 entropy section as input for entropy-category bridge. Output: 800--1200 words with categorical analogy table and 4+ citations.
+
+\subsection{Wave 2: Synthesis (Sequential, Opus)}
+
+CRAFT-SYNTH (Opus) produces M6 section, drawing on all five completed module sections. Derives the formal interface-as-information-channel model (four constraints). Articulates GSD ecosystem implications for DACP, Blueprint Editor, skill-creator, and GSD OS. Produces design recommendations table (practical guide). 1200--1800 words.
+
+\textbf{HITL CAPCOM Gate after Wave 2:} Review formal model for mathematical accuracy. Confirm GSD implications are grounded in actual GSD architecture. Approve before publication wave.
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{enumerate}[leftmargin=2em, itemsep=0.3em]
+  \item \textbf{EXEC-1 (Sonnet):} Assemble full LaTeX document. Insert all module sections, verify bibliography consistency, compile three passes.
+  \item \textbf{VERIFY (Sonnet):} Check all numerical claims against cited sources. Verify no entertainment media citations. Confirm all success criteria are addressed. Confirm no contradictions between modules.
+  \item \textbf{EXEC-2 (Sonnet):} Generate index.html. Color-matched to document scheme. Download cards for PDF and .tex. Usage instructions.
+  \item \textbf{LOG (Haiku):} Generate commit message and mission summary for GSD skill-creator handoff.
+\end{enumerate}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[itemsep=0.3em]
+  \item \textbf{Shared attribute layer:} Source index and bibliography generated once in Wave 0, cached across all Wave 1 agents (5-minute TTL)
+  \item \textbf{Schema sharing:} Module output schema (YAML) injected into all Wave 1 agent contexts from Wave 0 cache
+  \item \textbf{Common preamble:} LaTeX preamble and color definitions generated once; all Wave 1 agents use same preamble reference
+  \item \textbf{Parallel track independence:} Wave 1A and 1B are fully independent (no cross-module dependencies); maximum parallelism
+  \item \textbf{M3 sequential positioning:} Wave 1C placed after 1A/1B to allow entropy findings (M2) to inform categorical analysis (M3), at the cost of one sequential dependency
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input} & \tableheader{Output} & \tableheader{Total} & \tableheader{Notes} \\
+\midrule
+W0: Foundation & 2,000 & 3,000 & 5,000 & Haiku rate \\
+W1A: M1+M2 & 8,000 & 16,000 & 24,000 & Parallel, 2 Sonnet contexts \\
+W1B: M4+M5 & 10,000 & 16,000 & 26,000 & Parallel, 2 Sonnet contexts \\
+W1C: M3 & 14,000 & 12,000 & 26,000 & Sequential, 1 Opus context \\
+W2: Synthesis & 20,000 & 16,000 & 36,000 & Sequential, 1 Opus context \\
+W3: Publication & 8,000 & 10,000 & 18,000 & Sequential, 2 Sonnet contexts \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Subtotal} & & & \textbf{135,000} & \\
+\textbf{15\% reserve} & & & \textbf{20,000} & \\
+\textbf{Total budget} & & & \textbf{$\sim$155,000} & $\approx$ 4--6 sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+
+  [W0: Foundation]
+         │
+    ┌────┴────────────────┐
+    │                     │
+  [W1A: M1+M2]        [W1B: M4+M5]
+  (Parallel)          (Parallel)
+    │                     │
+    │            [HITL GATE: Coverage Review]
+    │                     │
+    └────────┬────────────┘
+             │
+       [W1C: M3]  ◀── M2 entropy findings required
+       (Sequential, Opus)
+             │
+       [W2: Synthesis M6]
+       (Sequential, Opus)
+             │
+    [HITL GATE: Formal Model Review]
+             │
+       [W3: Publication]
+       (Sequential, Sonnet)
+             │
+         [DELIVERY]
+         PDF + .tex + index.html
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Target} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK & 100\% pass \\
+Core functionality & 18 & Required & BLOCK & 100\% pass \\
+Integration & 9 & Required & BLOCK & 100\% pass \\
+Edge cases & 5 & Best-effort & LOG & $\geq$80\% pass \\
+\midrule
+\rowcolor{lighttertiary}
+\textbf{Total} & \textbf{36} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality across all modules & All citations traceable to peer-reviewed journals, government agencies, or professional organizations. Zero entertainment media, zero unsourced claims \\
+SC-NUM & Numerical attribution & Every entropy threshold, perceptual limit, and quantitative UX finding attributed to a specific cited source \\
+SC-ADV & No policy advocacy & Agentic autonomy section presents evidence without advocating for specific autonomy levels; acknowledges human oversight as non-negotiable \\
+SC-MED & Medical accuracy in color/clinical contexts & Color recommendations in clinical or accessibility contexts include appropriate disclaimers; no health claims without peer-reviewed support \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Color information channel model & M1 section formally maps hue/saturation/luminance to information-theoretic quantities with citation \\
+CF-02 & Entropy budget framework & M2 section provides quantitative thresholds for perceptual complexity with source \\
+CF-03 & Gestalt--entropy bridge & Relationship between Gestalt grouping and entropy reduction formally stated with quantitative support \\
+CF-04 & Categorical objects defined & M3 maps at least 5 UI concepts to categorical objects with table \\
+CF-05 & Compositionality rules present & M3 derives 4--6 explicit compositionality rules \\
+CF-06 & Emergence model articulated & M4 applies Holland's framework to UI component ecosystems \\
+CF-07 & All agentic frameworks surveyed & M5 covers Microsoft, Salesforce, Google, and H-ACD frameworks \\
+CF-08 & 8 design patterns documented & Pattern table present in M5 with all 8 named patterns \\
+CF-09 & Dual-audience model stated & M5/M6 articulates formal model for human + agent legibility \\
+CF-10 & Formal channel model derived & M6 presents 4-constraint interface-as-channel model \\
+CF-11 & GSD implications present & M6 addresses DACP, Blueprint Editor, skill-creator, GSD OS \\
+CF-12 & Success criteria coverage & All 12 success criteria addressed by at least one module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M1 $\to$ M2 cascade: color--entropy bridge & Chromatic entropy (M1) connects to normalized Shannon entropy formalism (M2) with explicit cross-reference \\
+IN-02 & M2 $\to$ M3 cascade: entropy--category bridge & Information-theoretic constraints (M2) map to categorical typing constraints (M3) \\
+IN-03 & M3 $\to$ M5 cascade: composition--agents bridge & Categorical compositionality rules (M3) appear in agentic interface compositionality discussion (M5) \\
+IN-04 & M4 $\to$ M6 cascade: complexity--synthesis & Edge-of-chaos framework (M4) informs entropy sweet-spot recommendation in synthesis (M6) \\
+IN-05 & Cross-module consistency & Mathematical terms (entropy, morphism, functor, compositionality) used consistently across all modules \\
+IN-06 & GSD integration completeness & All four GSD system components (DACP, Blueprint, skill-creator, GSD OS) addressed in synthesis \\
+IN-07 & Through-line preservation & Amiga Principle and ``spaces between'' philosophy explicitly connected to design recommendations \\
+IN-08 & Self-containment & A reader with no prior GSD knowledge can understand the theoretical framework from the document alone \\
+IN-09 & Bibliography cross-module consistency & Same source cited in multiple modules uses identical author/date/title formatting \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Color Channel Formalized & CF-01, IN-01 & Pending \\
+2. Entropy Budget Established & CF-02, CF-03 & Pending \\
+3. Gestalt--Entropy Bridge & CF-03, IN-01 & Pending \\
+4. Category Theory Applied & CF-04, IN-02 & Pending \\
+5. Compositionality Rules & CF-05, IN-03 & Pending \\
+6. Complexity--Design Bridge & CF-06, IN-04 & Pending \\
+7. Agentic UX Principles & CF-07, CF-08 & Pending \\
+8. Dual-Audience Model & CF-09, IN-06 & Pending \\
+9. Design Token Formalization & CF-04, CF-08 & Pending \\
+10. Unified Framework & CF-10, CF-12, IN-05 & Pending \\
+11. GSD Applicability & CF-11, IN-06, IN-07 & Pending \\
+12. Source Quality & SC-SRC, SC-NUM & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; cross-module integration authority; go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+TOPO & Topology Manager & Agent team restructuring if scope changes mid-mission \\
+ARCH & Architecture & Cross-cutting mathematical consistency decisions \\
+SECURE & Safety Warden & SC test enforcement; source quality gate \\
+ANALYST & Pattern Analyst & Cross-module connection detection; mathematical vocabulary consistency \\
+SCOUT & Research Agent & Gap-fill web research; source validation \\
+EXEC-1 & Document Assembly & LaTeX compilation; section integration \\
+EXEC-2 & Web Output & index.html; visual delivery \\
+CRAFT-CHROMA & Color Specialist & M1 primary author (Opus) \\
+CRAFT-INFO & Info Theory Specialist & M2 primary author (Sonnet) \\
+CRAFT-CAT & Category Theory Specialist & M3 primary author (Opus) \\
+CRAFT-COMPLEX & Complexity Specialist & M4 primary author (Sonnet) \\
+CRAFT-AGENT & Agentic UX Specialist & M5 primary author (Sonnet) \\
+CRAFT-SYNTH & Synthesis Specialist & M6 primary author (Opus) \\
+CAPCOM & HITL Interface & Human approval at both HITL gates \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+\midrule
+\rowcolor{lightprimary}
+\textit{RETRO} & \textit{Retrospective} & \textit{Post-mission analysis; lessons learned for skill-creator} \\
+LOG & Chronicle Agent & Audit trail; commit messages; skill-creator handoff bundle \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (18 roles) \\
+Research Modules & 6 (M1--M6) \\
+Total Waves & 5 (W0 + W1A/B/C + W2 + W3) \\
+Parallel Tracks & 2 (W1A and W1B simultaneous) \\
+HITL Gates & 2 (post-W1B and post-W2) \\
+Estimated Token Budget & $\sim$155,000 (including 15\% reserve) \\
+Estimated Context Windows & 12--18 across 4--6 sessions \\
+Primary Models & Opus (M3, M6, FLIGHT): 33\% / Sonnet: 57\% / Haiku: 10\% \\
+Target Document Length & 35--50 pages \\
+Deliverables & 3 files: PDF, .tex, index.html \\
+Safety-Critical Tests & 4 (all mandatory-pass / BLOCK) \\
+Total Tests & 36 \\
+Ready for Handoff & Yes --- zero additional context required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily\textcolor{primary}{The Through-Line}}
+
+\vspace{0.5em}
+``Making sense of chaos is not the imposition of order upon disorder. It is the discovery of the latent morphisms that were always there. Color is not decoration --- it is a compressed information channel subject to Shannon's laws. A design system is not a style guide --- it is a category with objects, morphisms, and a composition law. An interface is not a screen --- it is a functor from the space of intent to the space of perceivable state. And the designer, in the age of agents, is not a choreographer of clicks --- they are an architect of meaning, shaping the spaces between human intention and machine action.
+
+The Amiga Principle reminds us: architectural elegance and specialized execution paths outperform brute force. Build the right channel. Minimize the entropy. Preserve the composition. Make the morphism legible to every observer, biological or artificial. That is how you make sense of chaos.''
+
+\vspace{0.5em}
+{\small\sffamily\textit{--- GSD Research Mission: Making Sense of Chaos, 2026}}
+\end{quotebox}
+
+\end{document}
