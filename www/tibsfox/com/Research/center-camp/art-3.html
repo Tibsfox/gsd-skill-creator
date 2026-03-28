@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art Trail Vol. III — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8a040; --accent-fire:#c75b3a; --border-forest:rgba(122,154,90,0.25); --panel-bg:rgba(26,42,30,0.5); }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; overflow-x: hidden; }
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-forest); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .active { color: white; font-weight: 600; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+  .hero { text-align: center; padding: 4rem 2rem 2.5rem; background: radial-gradient(ellipse at 50% 80%, rgba(122,154,90,0.06) 0%, transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); font-style: italic; margin-bottom: 1.8rem; }
+  .hero-text { max-width: 36rem; margin: 0 auto; font-size: 0.9rem; line-height: 1.85; color: var(--text-mid); }
+  .group-filters { max-width: 42rem; margin: 1.5rem auto 0.5rem; padding: 0 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+  .grp-pill { background: transparent; border: 1px solid rgba(122,154,90,0.2); color: var(--text-dim); padding: 0.3rem 0.85rem; border-radius: 12px; font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
+  .grp-pill:hover { border-color: rgba(122,154,90,0.4); color: var(--text); }
+  .grp-pill.active { border-color: var(--accent-green); color: var(--text); background: rgba(122,154,90,0.15); }
+  .trail { max-width: 700px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  .trail-divider { display: flex; align-items: center; gap: 1rem; padding: 2.5rem 0; color: var(--text-dim); font-size: 0.78rem; font-style: italic; }
+  .trail-divider::before, .trail-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(122,154,90,0.2), transparent); }
+  .trail-divider .leaf { font-size: 1rem; opacity: 0.4; display: inline-block; }
+  .group-header { text-align: center; padding: 2.5rem 0 1rem; font-size: 0.82rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; }
+  .group-header::before, .group-header::after { content: ' \u2014 '; color: rgba(122,154,90,0.3); }
+  .art-piece { background: var(--panel-bg); border: 1px solid var(--border-forest); border-radius: 8px; overflow: hidden; transition: border-color 0.3s; }
+  .art-piece:hover { border-color: rgba(122,154,90,0.45); }
+  .art-piece.dimmed { opacity: 0.15; pointer-events: none; }
+  .art-header { padding: 1.2rem 1.5rem 0.8rem; display: flex; justify-content: space-between; align-items: flex-start; }
+  .art-header h2 { font-size: 1.25rem; font-weight: 400; letter-spacing: 0.06em; margin-bottom: 0.15rem; flex: 1; }
+  .art-header .muse-name { font-size: 0.78rem; color: var(--accent-green); font-style: italic; display: block; }
+  .art-type-badge { font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 3px; background: rgba(122,154,90,0.12); border: 1px solid rgba(122,154,90,0.25); color: var(--accent-green); text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0; margin-left: 1rem; margin-top: 0.15rem; }
+  .art-description { padding: 0.8rem 1.5rem 1rem; font-size: 0.85rem; line-height: 1.8; color: var(--text-mid); }
+  .art-teaching { padding: 0.8rem 1.5rem 1.2rem; font-size: 0.82rem; line-height: 1.7; color: rgba(232,220,200,0.45); border-top: 1px solid rgba(122,154,90,0.1); }
+  .art-teaching em { color: var(--text); font-style: italic; }
+  .trail-footer { text-align: center; padding: 3rem 2rem 4rem; font-size: 0.85rem; color: var(--text-dim); font-style: italic; line-height: 1.8; }
+  .trail-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .trail-footer a:hover { color: var(--accent-green); }
+  @media (max-width: 600px) { .hero h1 { font-size: 1.8rem; } .trail { padding: 0 0.75rem 3rem; } .art-header { padding: 1rem 1rem 0.6rem; } .art-description { padding: 0.6rem 1rem 0.8rem; } .art-teaching { padding: 0.6rem 1rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</div>
+
+<div class="hero">
+  <h1>The Art Trail</h1>
+  <div class="subtitle">Volume III &mdash; thirty-two installations across Earth, Water, Sky, and Life</div>
+  <p class="hero-text">
+    The muses built deeper into the forest and found four clearings &mdash; one for each science.
+    Earth science maps the ground beneath. Water science follows every drop. Sky science reads
+    the atmosphere. Life science counts every heartbeat. Walk the trail. Touch everything.
+  </p>
+</div>
+
+<div class="group-filters" id="group-filters"></div>
+<div class="trail" id="trail"></div>
+
+<div class="trail-footer">
+  Thirty-two installations. Four sciences. The forest is the laboratory.<br><br>
+  <a href="art-trail.html">&larr; Volume I</a> &nbsp;&middot;&nbsp;
+  <a href="art-2.html">Volume II</a> &nbsp;&middot;&nbsp;
+  <a href="index.html">Center Camp</a> &nbsp;&middot;&nbsp;
+  <a href="../index.html">Research Series</a>
+</div>
+
+<script src="art-3.js"></script>
+<script>
+var MUSE_NAMES = {
+  cedar:{name:'Cedar',role:'the record',type:'tree'},lex:{name:'Lex',role:'the specification',type:'concept'},moss:{name:'Moss',role:'the carpet',type:'bryophyte'},lichen:{name:'Lichen',role:'the breath',type:'symbiosis'},sturgeon:{name:'Sturgeon',role:'the ancient',type:'fish'},fern:{name:'Fern',role:'the foundation',type:'plant'},chanterelle:{name:'Chanterelle',role:'the network',type:'fungus'},star:{name:'Star',role:'the keystone',type:'echinoderm'},crab:{name:'Crab',role:'the harvest',type:'crustacean'},beaver:{name:'Beaver',role:'the maker',type:'mammal'},salamander:{name:'Salamander',role:'the headwater',type:'amphibian'},hemlock:{name:'Hemlock',role:'the standard',type:'tree'},fire:{name:'Fire',role:'the renewal',type:'force'},cougar:{name:'Cougar',role:'the ghost',type:'mammal'},wolf:{name:'Wolf',role:'the return',type:'mammal'},rain:{name:'Rain',role:'the cycle',type:'force'},fog:{name:'Fog',role:'the invisible',type:'force'},bear:{name:'Bear',role:'the season',type:'mammal'},waterfall:{name:'Waterfall',role:'the descent',type:'force'},foxy:{name:'Foxy',role:'the map',type:'animal'},sitka:{name:'Sitka',role:'the root',type:'tree'},eulachon:{name:'Eulachon',role:'the first gift',type:'fish'},steelhead:{name:'Steelhead',role:'the twice-born',type:'fish'},dipper:{name:'Dipper',role:'the water-walker',type:'bird'},chinook:{name:'Chinook',role:'the current',type:'salmon'},orca:{name:'Orca',role:'the elder',type:'marine'},sam:{name:'Sam',role:'the question',type:'animal'},coyote:{name:'Coyote',role:'the trickster',type:'canid'},dragonfly:{name:'Dragonfly',role:'the iridescent',type:'insect'},octopus:{name:'Octopus',role:'the reinventor',type:'marine'},willow:{name:'Willow',role:'the welcome',type:'tree'},bee:{name:'Bee',role:'the pollinator',type:'insect'},otter:{name:'Otter',role:'the play',type:'mustelid'},hawk:{name:'Hawk',role:'the formation',type:'bird'},eagle:{name:'Eagle',role:'the guardian',type:'bird'},madrone:{name:'Madrone',role:'the hearth',type:'tree'},owl:{name:'Owl',role:'the clock',type:'bird'},marten:{name:'Marten',role:'the signal',type:'mammal'},bat:{name:'Bat',role:'the echolocator',type:'mammal'},raven:{name:'Raven',role:'the pattern',type:'bird'},thrush:{name:'Thrush',role:'the tone',type:'bird'},nutcracker:{name:'Nutcracker',role:'the cache',type:'bird'},wren:{name:'Wren',role:'the song',type:'bird'},kelp:{name:'Kelp',role:'the tide forest',type:'alga'},alder:{name:'Alder',role:'the resonance',type:'tree'},osprey:{name:'Osprey',role:'the horizon',type:'bird'},pika:{name:'Pika',role:'the sentinel',type:'mammal'},glacier:{name:'Glacier',role:'the archive',type:'force'}
+};
+
+var GROUPS = ['Earth Science','Water Science','Sky Science','Life Science'];
+var GROUP_COLORS = {'Earth Science':'#c8a040','Water Science':'#2a8a96','Sky Science':'#5eb8c4','Life Science':'#7a9a5a'};
+
+var TRAIL_PHRASES = [
+  '~50 paces further...',
+  '~80 paces through old growth...',
+  'the canopy thickens...',
+  'a clearing opens...',
+  'deeper into the understory...',
+  '~100 paces along the creek...',
+  'the trail narrows...',
+  'moss covers everything here...',
+  'the light changes...',
+  'ferns brush your knees...',
+  '~60 paces downhill...',
+  'a fallen log bridges the trail...',
+  'the sound of water grows...',
+  'the trees are older here...',
+  'lichen maps the bark...',
+  '~70 paces through salal...',
+  'the air smells of cedar...',
+  'a nurse log hosts seedlings...',
+  'woodpecker holes mark the way...',
+  'the trail bends east...',
+  'sword ferns line both sides...',
+  'the canopy opens to sky...',
+  'volcanic soil underfoot...',
+  'glacial erratics mark the turn...',
+  'the creek crosses the path...',
+  'a snag stands sentinel...',
+  'bracket fungi stair the trunk...',
+  'the understory glows green...',
+  'old stumps sprout new life...',
+  'the ridge reveals the valley...',
+  'fog drifts through the gaps...'
+];
+
+var LEAF_CODES = ['&#127793;','&#127810;','&#127794;','&#127795;','&#127807;','&#127811;'];
+
+var activeGroup = 'all';
+
+// Build group filters
+(function(){
+  var bar = document.getElementById('group-filters');
+  var allBtn = document.createElement('button');
+  allBtn.className = 'grp-pill active';
+  allBtn.textContent = 'All';
+  allBtn.onclick = function(){ filterGroup('all', allBtn); };
+  bar.appendChild(allBtn);
+  GROUPS.forEach(function(g){
+    var btn = document.createElement('button');
+    btn.className = 'grp-pill';
+    btn.textContent = g;
+    btn.onclick = function(){ filterGroup(g, btn); };
+    bar.appendChild(btn);
+  });
+})();
+
+function filterGroup(group, btn) {
+  activeGroup = group;
+  document.querySelectorAll('.grp-pill').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.art-piece').forEach(function(p){
+    if (group === 'all' || p.getAttribute('data-group') === group) {
+      p.classList.remove('dimmed');
+    } else {
+      p.classList.add('dimmed');
+    }
+  });
+  document.querySelectorAll('.group-header').forEach(function(h){
+    if (group === 'all') { h.style.display = ''; }
+    else if (h.getAttribute('data-group') === group) { h.style.display = ''; }
+    else { h.style.display = 'none'; }
+  });
+  document.querySelectorAll('.trail-divider').forEach(function(d){
+    d.style.display = (group === 'all') ? '' : 'none';
+  });
+}
+
+(function(){
+  var trail = document.getElementById('trail');
+  var lastGroup = '';
+  var phraseIdx = 0;
+
+  ART_3.forEach(function(art, i){
+    var m = MUSE_NAMES[art.muse] || {name: art.muse, role: ''};
+
+    // Group header
+    if (art.group !== lastGroup) {
+      var header = document.createElement('div');
+      header.className = 'group-header';
+      header.setAttribute('data-group', art.group);
+      header.textContent = art.group;
+      trail.appendChild(header);
+      lastGroup = art.group;
+    }
+
+    var piece = document.createElement('div');
+    piece.className = 'art-piece';
+    piece.id = 'piece-' + (i + 1);
+    piece.setAttribute('data-group', art.group);
+    piece.innerHTML =
+      '<div class="art-header">' +
+        '<div>' +
+          '<h2>' + art.name + '</h2>' +
+          '<span class="muse-name">' + m.name + '\'s Installation &mdash; ' + m.role + '</span>' +
+        '</div>' +
+        '<span class="art-type-badge">' + art.type + '</span>' +
+      '</div>' +
+      '<div class="art-description">' + art.description + '</div>' +
+      '<div class="art-teaching"><em>' + art.teaching + '</em></div>';
+    trail.appendChild(piece);
+
+    // Trail divider between pieces
+    if (i < ART_3.length - 1) {
+      var divider = document.createElement('div');
+      divider.className = 'trail-divider';
+      var leaf = LEAF_CODES[i % LEAF_CODES.length];
+      divider.innerHTML = '<span class="leaf">' + leaf + '</span> ' + TRAIL_PHRASES[phraseIdx % TRAIL_PHRASES.length];
+      trail.appendChild(divider);
+      phraseIdx++;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

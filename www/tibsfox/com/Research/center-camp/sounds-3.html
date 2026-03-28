@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Musical Forest Vol. III — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8a040; --accent-fire:#c75b3a; --border-forest:rgba(122,154,90,0.25); --panel-bg:rgba(26,42,30,0.5); }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; overflow-x: hidden; }
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-forest); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .active { color: white; font-weight: 600; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+  .hero { text-align: center; padding: 4rem 2rem 2.5rem; background: radial-gradient(ellipse at 50% 80%, rgba(199,91,58,0.06) 0%, rgba(42,138,150,0.04) 30%, transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); font-style: italic; margin-bottom: 1.8rem; }
+  .hero-text { max-width: 38rem; margin: 0 auto; font-size: 0.9rem; line-height: 1.85; color: var(--text-mid); }
+  .duet-filters { max-width: 74rem; margin: 1.5rem auto 0.5rem; padding: 0 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+  .rel-pill { background: transparent; border: 1px solid rgba(122,154,90,0.2); color: var(--text-dim); padding: 0.3rem 0.85rem; border-radius: 12px; font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
+  .rel-pill:hover { border-color: rgba(122,154,90,0.4); color: var(--text); }
+  .rel-pill.active { border-color: var(--accent-green); color: var(--text); background: rgba(122,154,90,0.15); }
+  .rel-pill .rel-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  .duet-controls { text-align: center; margin: 0.5rem 0; }
+  .random-duet-btn { background: rgba(199,91,58,0.15); border: 1px solid rgba(199,91,58,0.3); color: var(--text); font-family: Georgia, serif; font-size: 0.82rem; padding: 0.4rem 1.1rem; border-radius: 18px; cursor: pointer; transition: all 0.3s; }
+  .random-duet-btn:hover { background: rgba(199,91,58,0.25); border-color: rgba(199,91,58,0.5); }
+  .duet-count { text-align: center; font-size: 0.78rem; color: var(--text-dim); margin: 1rem 0; font-style: italic; }
+  .duet-count .count-num { color: var(--accent-gold); font-style: normal; }
+  .duet-grid { max-width: 74rem; margin: 0 auto; padding: 0 1.25rem 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .duet-card { background: var(--panel-bg); border: 1px solid var(--border-forest); border-radius: 8px; overflow: hidden; transition: all 0.3s; }
+  .duet-card:hover { border-color: rgba(122,154,90,0.4); transform: translateY(-2px); }
+  .duet-card.dimmed { opacity: 0.15; pointer-events: none; filter: grayscale(0.6); }
+  .duet-card.highlight { border-color: var(--accent-fire); box-shadow: 0 0 12px rgba(199,91,58,0.3); }
+  .duet-header { padding: 0.7rem 0.9rem 0.3rem; display: flex; justify-content: space-between; align-items: flex-start; }
+  .duet-pair { font-size: 0.82rem; font-weight: 400; color: var(--accent-green); }
+  .duet-roles { font-size: 0.65rem; color: var(--text-dim); display: block; font-style: italic; margin-top: 0.15rem; }
+  .duet-badge { font-size: 0.62rem; padding: 0.15rem 0.45rem; border-radius: 3px; background: rgba(199,91,58,0.15); border: 1px solid rgba(199,91,58,0.3); color: var(--accent-fire); white-space: nowrap; flex-shrink: 0; margin-left: 0.3rem; margin-top: 0.1rem; }
+  .duet-body { padding: 0.6rem 0.9rem; }
+  .duet-instrument { font-size: 0.88rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 400; letter-spacing: 0.03em; }
+  .duet-pattern { font-size: 0.78rem; line-height: 1.7; color: var(--text-mid); font-style: italic; margin-bottom: 0.6rem; }
+  .duet-teaching { font-size: 0.75rem; line-height: 1.6; color: rgba(232,220,200,0.45); padding-top: 0.5rem; border-top: 1px solid rgba(122,154,90,0.08); }
+  .page-footer { text-align: center; padding: 3rem 2rem 4rem; font-size: 0.85rem; color: var(--text-dim); font-style: italic; line-height: 1.8; }
+  .page-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .page-footer a:hover { color: var(--accent-green); }
+  @media (max-width: 900px) { .duet-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .duet-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.8rem; } }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</div>
+
+<div class="hero">
+  <h1>The Musical Forest</h1>
+  <div class="subtitle">Third Movement: Duets &mdash; forty-eight pairs, forty-eight combined instruments</div>
+  <p class="hero-text">
+    The first movement mapped solo instruments. The second described their air-paintings. The third
+    movement pairs two muses together &mdash; discovering what new sound emerges when their teachings
+    combine. Every duet is grounded in real PNW ecology: the relationships between species,
+    forces, and systems that make the forest sing as one.
+  </p>
+</div>
+
+<div class="duet-filters" id="duet-filters"></div>
+<div class="duet-controls">
+  <button class="random-duet-btn" onclick="randomDuet()">Random Duet</button>
+</div>
+<div class="duet-count" id="duet-count"></div>
+<div class="duet-grid" id="grid"></div>
+
+<div class="page-footer">
+  Forty-eight duets. The forest never plays alone &mdash; every voice finds its counterpart.<br><br>
+  <a href="musical-forest.html">&larr; First Movement</a> &nbsp;&middot;&nbsp;
+  <a href="sounds-2.html">Second Movement</a> &nbsp;&middot;&nbsp;
+  <a href="index.html">Center Camp</a> &nbsp;&middot;&nbsp;
+  <a href="../index.html">Research Series</a>
+</div>
+
+<script src="sounds-3.js"></script>
+<script>
+var MUSE_NAMES = {
+  cedar:{name:'Cedar',role:'the record',type:'tree'},lex:{name:'Lex',role:'the specification',type:'concept'},moss:{name:'Moss',role:'the carpet',type:'bryophyte'},lichen:{name:'Lichen',role:'the breath',type:'symbiosis'},sturgeon:{name:'Sturgeon',role:'the ancient',type:'fish'},fern:{name:'Fern',role:'the foundation',type:'plant'},chanterelle:{name:'Chanterelle',role:'the network',type:'fungus'},star:{name:'Star',role:'the keystone',type:'echinoderm'},crab:{name:'Crab',role:'the harvest',type:'crustacean'},beaver:{name:'Beaver',role:'the maker',type:'mammal'},salamander:{name:'Salamander',role:'the headwater',type:'amphibian'},hemlock:{name:'Hemlock',role:'the standard',type:'tree'},fire:{name:'Fire',role:'the renewal',type:'force'},cougar:{name:'Cougar',role:'the ghost',type:'mammal'},wolf:{name:'Wolf',role:'the return',type:'mammal'},rain:{name:'Rain',role:'the cycle',type:'force'},fog:{name:'Fog',role:'the invisible',type:'force'},bear:{name:'Bear',role:'the season',type:'mammal'},waterfall:{name:'Waterfall',role:'the descent',type:'force'},foxy:{name:'Foxy',role:'the map',type:'animal'},sitka:{name:'Sitka',role:'the root',type:'tree'},eulachon:{name:'Eulachon',role:'the first gift',type:'fish'},steelhead:{name:'Steelhead',role:'the twice-born',type:'fish'},dipper:{name:'Dipper',role:'the water-walker',type:'bird'},chinook:{name:'Chinook',role:'the current',type:'salmon'},orca:{name:'Orca',role:'the elder',type:'marine'},sam:{name:'Sam',role:'the question',type:'animal'},coyote:{name:'Coyote',role:'the trickster',type:'canid'},dragonfly:{name:'Dragonfly',role:'the iridescent',type:'insect'},octopus:{name:'Octopus',role:'the reinventor',type:'marine'},willow:{name:'Willow',role:'the welcome',type:'tree'},bee:{name:'Bee',role:'the pollinator',type:'insect'},otter:{name:'Otter',role:'the play',type:'mustelid'},hawk:{name:'Hawk',role:'the formation',type:'bird'},eagle:{name:'Eagle',role:'the guardian',type:'bird'},madrone:{name:'Madrone',role:'the hearth',type:'tree'},owl:{name:'Owl',role:'the clock',type:'bird'},marten:{name:'Marten',role:'the signal',type:'mammal'},bat:{name:'Bat',role:'the echolocator',type:'mammal'},raven:{name:'Raven',role:'the pattern',type:'bird'},thrush:{name:'Thrush',role:'the tone',type:'bird'},nutcracker:{name:'Nutcracker',role:'the cache',type:'bird'},wren:{name:'Wren',role:'the song',type:'bird'},kelp:{name:'Kelp',role:'the tide forest',type:'alga'},alder:{name:'Alder',role:'the resonance',type:'tree'},osprey:{name:'Osprey',role:'the horizon',type:'bird'},pika:{name:'Pika',role:'the sentinel',type:'mammal'},glacier:{name:'Glacier',role:'the archive',type:'force'}
+};
+
+var REL_COLORS = {
+  symbiotic: '#7a9a5a',
+  predator: '#c75b3a',
+  elemental: '#4a9ed4',
+  seasonal: '#c8a040',
+  territorial: '#b48c3c',
+  migratory: '#5eb8c4'
+};
+var REL_LABELS = {
+  all: 'All',
+  symbiotic: 'Symbiotic',
+  predator: 'Predator-Prey',
+  elemental: 'Elemental',
+  seasonal: 'Seasonal',
+  territorial: 'Territorial',
+  migratory: 'Migratory'
+};
+var activeRel = 'all';
+
+// Build relationship filter pills
+(function(){
+  var bar = document.getElementById('duet-filters');
+  var relSet = { all: true };
+  SOUNDS_3.forEach(function(d){ if (d.relationship) relSet[d.relationship] = true; });
+  Object.keys(REL_LABELS).forEach(function(rel){
+    if (!relSet[rel]) return;
+    var btn = document.createElement('button');
+    btn.className = 'rel-pill' + (rel === 'all' ? ' active' : '');
+    if (rel !== 'all' && REL_COLORS[rel]) {
+      btn.innerHTML = '<span class="rel-dot" style="background:' + REL_COLORS[rel] + '"></span>' + REL_LABELS[rel];
+    } else {
+      btn.textContent = REL_LABELS[rel];
+    }
+    btn.onclick = function(){ filterRelationship(rel, btn); };
+    bar.appendChild(btn);
+  });
+})();
+
+function filterRelationship(rel, btn) {
+  activeRel = rel;
+  document.querySelectorAll('.rel-pill').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.duet-card').forEach(function(c){
+    if (rel === 'all' || c.getAttribute('data-rel') === rel) {
+      c.classList.remove('dimmed');
+    } else {
+      c.classList.add('dimmed');
+    }
+  });
+  updateDuetCount();
+}
+
+function updateDuetCount() {
+  var visible = document.querySelectorAll('.duet-card:not(.dimmed)').length;
+  document.getElementById('duet-count').innerHTML =
+    '<span class="count-num">' + visible + '</span> of <span class="count-num">' + SOUNDS_3.length + '</span> duets in the third movement';
+}
+
+function randomDuet() {
+  var cards = document.querySelectorAll('.duet-card:not(.dimmed)');
+  if (cards.length === 0) return;
+  var idx = Math.floor(Math.random() * cards.length);
+  var card = cards[idx];
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.classList.add('highlight');
+  setTimeout(function(){ card.classList.remove('highlight'); }, 2000);
+}
+
+// Build grid
+(function(){
+  var grid = document.getElementById('grid');
+  SOUNDS_3.forEach(function(d){
+    var m1 = MUSE_NAMES[d.muse1] || {name:d.muse1, role:''};
+    var m2 = MUSE_NAMES[d.muse2] || {name:d.muse2, role:''};
+    var relColor = REL_COLORS[d.relationship] || '#7a8a8a';
+
+    var card = document.createElement('div');
+    card.className = 'duet-card';
+    card.setAttribute('data-rel', d.relationship || '');
+    card.innerHTML =
+      '<div class="duet-header">' +
+        '<div>' +
+          '<span class="duet-pair">' + m1.name + ' + ' + m2.name + '</span>' +
+          '<span class="duet-roles">' + m1.role + ' &amp; ' + m2.role + '</span>' +
+        '</div>' +
+        '<span class="duet-badge" style="border-color:' + relColor + '; color:' + relColor + '; background:rgba(0,0,0,0.25);">' + (d.relationship || 'duet') + '</span>' +
+      '</div>' +
+      '<div class="duet-body">' +
+        '<div class="duet-instrument">' + d.instrument + '</div>' +
+        '<div class="duet-pattern">' + d.pattern + '</div>' +
+        '<div class="duet-teaching">' + d.teaching + '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+  updateDuetCount();
+})();
+</script>
+
+</body>
+</html>
