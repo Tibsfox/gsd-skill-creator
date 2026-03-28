@@ -1,0 +1,364 @@
+{
+  "degree": 7,
+  "species": "Hermit Thrush",
+  "scientific_name": "Catharus guttatus",
+  "subspecies": "Up to 12 subspecies; PNW populations primarily C. g. guttatus (coastal Pacific) and C. g. nanus (interior Pacific NW)",
+  "sound_type": "ethereal spiraling flute song",
+  "energy": 2,
+  "ecosystem": "mountain forest",
+  "season": "summer (altitudinal migrant; breeds at elevation, winters at lower elevations or southward)",
+  "family": "Turdidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle / Puget Sound reference; breeding habitat at Cascade and Olympic mountain elevations (2,000-7,000 ft)"
+  },
+  "physical": {
+    "length_in": "6.5-7",
+    "wingspan_in": "~11.5",
+    "weight_g": "23-37"
+  },
+  "plumage": {
+    "upperparts": "Brown to olive-brown",
+    "underparts": "Pale with bold dark breast spots",
+    "tail": "Distinctly rufous -- contrasts sharply with browner back (diagnostic visual field mark)",
+    "eye_ring": "Thin, pale",
+    "bill": "Thin, slightly decurved -- typical thrush bill for ground-foraging insects and berries",
+    "legs": "Pink",
+    "diagnostic_visual": "Rufous tail contrasting with olive-brown back -- unique among Catharus thrushes"
+  },
+  "frequency_range": {
+    "fundamental_hz_low": 1500,
+    "fundamental_hz_high": 4000,
+    "overtone_usage": "Preferentially selects from harmonic series (Doolittle & Brumm 2014, PNAS)",
+    "register": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)"
+  },
+  "vocalization_metrics": {
+    "primary_song": {
+      "name": "Ethereal spiraling flute song",
+      "phrase_duration_s": "1.5-3.0",
+      "inter_phrase_interval_s": "2-8",
+      "notes_per_phrase": "5-12",
+      "phrase_contour": "Arch form -- ascending spiral then descending",
+      "timbre": "Pure, flute-like -- breathy fundamental with minimal upper harmonics (near-sinusoidal per note)",
+      "harmonic_series": "Statistically validated: pitch selections cluster around harmonic series ratios (Doolittle & Brumm 2014)",
+      "repertoire_size": "6-12 distinct phrase types per individual",
+      "calling_period": "Dawn and dusk peaks; also throughout day in breeding season",
+      "key_property": "THE harmonic series bird -- peer-reviewed proof that pitch selection follows the mathematical foundation of all tonal music"
+    }
+  },
+  "harmonic_series_finding": {
+    "publication": "Doolittle, E.L. and Brumm, H. (2014). PNAS 111(46): 16616-16621",
+    "doi": "10.1073/pnas.1406023111",
+    "methodology": "Analysis of 71 songs from 14 individuals; statistical comparison of observed pitch intervals against harmonic series ratios",
+    "key_result": "Hermit Thrush preferentially selects pitches from the harmonic series -- significantly more than expected by chance",
+    "significance": "First peer-reviewed demonstration that a bird species' song follows the same mathematical relationships (integer frequency ratios) that define consonance in human tonal music",
+    "implication": "The connection between the harmonic series and aesthetic pleasure in sound may not be a cultural artifact but may be rooted in the physics of vibrating systems and shared vertebrate auditory neurobiology"
+  },
+  "thrush_inversion": {
+    "principle": "Timbre complexity and melodic complexity are inversely related across the thrush family",
+    "varied_thrush": {
+      "degree": 2,
+      "timbre": "Complex (AM-modulated buzz, rich overtone spectrum per note)",
+      "melody": "Simple (one sustained pitch per phrase)",
+      "modulation": "AM (amplitude modulation within each note)",
+      "contour": "Flat (single sustained frequency)"
+    },
+    "hermit_thrush": {
+      "degree": 7,
+      "timbre": "Simple (pure, flute-like, near-sinusoidal per note)",
+      "melody": "Complex (multiple pitches per phrase, harmonic series intervals)",
+      "modulation": "FM (frequency changes between notes within phrases)",
+      "contour": "Arch (ascending then descending)"
+    },
+    "design_principle": "Acoustic bandwidth is finite -- a bird can invest complexity in spectral richness of individual notes (timbre) or in temporal sequence of multiple notes (melody). The Turdidae family demonstrates both extremes in the same PNW forest."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Harmonic series navigation (peer-reviewed pitch selection following overtone ratios)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/harmonic-series/",
+      "examples": [
+        "Doolittle & Brumm 2014: Hermit Thrush preferentially selects pitches from the harmonic series (1:2:3:4:5:6)",
+        "Octave (2:1), perfect fifth (3:2), perfect fourth (4:3), major third (5:4) -- the same ratios that define all tonal music",
+        "Not metaphor -- statistically validated, published in PNAS",
+        "The bird navigates overtone ratios the way a jazz musician navigates chord changes"
+      ],
+      "music_theory_parallel": "The harmonic series is the mathematical foundation of ALL tonal music. Every tuning system, every scale, every chord derives from integer frequency ratios. The Hermit Thrush's pitch selection follows these ratios -- the strongest bridge between biology and music theory in the 360-degree circle."
+    },
+    {
+      "concept": "Arch form (ascending-climax-descending melodic contour)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/form/arch/",
+      "examples": [
+        "Each phrase ascends through several notes, reaches a peak pitch, then descends",
+        "Successive phrases start at different pitches, creating a spiraling effect through pitch space",
+        "Arch form is one of the most universal melodic shapes: Gregorian chant, Baroque melody, pop hooks",
+        "The spiral is the degree-7 signature shape -- curvature introduced to the circle for the first time"
+      ],
+      "music_theory_parallel": "The arch form (ascending-climax-descending) is a fundamental melodic shape found across all musical traditions. The Hermit Thrush's phrases are natural arch forms. The spiraling quality (successive arches at different starting pitches) creates the impression of melody that orbits rather than progresses linearly."
+    },
+    {
+      "concept": "Timbre-melody inversion (bandwidth allocation between spectral and temporal complexity)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/design/bandwidth-allocation/",
+      "examples": [
+        "Varied Thrush: rich timbre (AM buzz) + simple melody (one note). Hermit Thrush: simple timbre (flute) + rich melody (harmonic series).",
+        "Same family (Turdidae), same forest, opposite acoustic architecture",
+        "Acoustic bandwidth is finite -- complexity must be allocated between timbre and melody",
+        "Pure-tone timbre makes interval relationships MORE audible (fewer masking overtones)"
+      ],
+      "music_theory_parallel": "Signal processing bandwidth allocation -- a communication system with finite bandwidth must choose between spectral complexity (timbre/tone color) and temporal complexity (melody/rhythm). The Turdidae family demonstrates both extremes: the Varied Thrush invests in timbre, the Hermit Thrush invests in melody."
+    },
+    {
+      "concept": "Pure tone timbre as sine wave approximation (flute-like = fundamental with minimal harmonics)",
+      "level": "foundational",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/synthesis/pure-tone/",
+      "examples": [
+        "Each individual note is breathy, warm, pure -- close to a sine wave with slight breath noise",
+        "A flute generates sound by air across an edge, producing few upper harmonics",
+        "Spectral simplicity per note makes inter-note INTERVAL relationships more audible",
+        "Timbre serves melody -- the pure tone is not incidental, it is functionally necessary"
+      ],
+      "music_theory_parallel": "The sine wave is the simplest periodic waveform -- a single frequency with no overtones. A flute approximates this. The Hermit Thrush approximates it. Pure timbre lets the listener perceive pitch relationships (melody) without competing overtone clutter. The bird's timbre is in service of its harmonic-series melody."
+    },
+    {
+      "concept": "Elevation as acoustic register (mountain habitat = high register = treble)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/register/elevation/",
+      "examples": [
+        "First species whose habitat is defined by altitude -- introduces the vertical dimension",
+        "Mountain forest: more open canopy, less absorption, longer transmission distances",
+        "Pure tones carry farther in open mountain forest than buzzy tones in dense lowland canopy",
+        "Habitat progression now includes a vertical axis: sea level (0) to mountain (7)"
+      ],
+      "music_theory_parallel": "Register -- the vertical position in pitch space. High register = treble = bright. Low register = bass = dark. The Hermit Thrush's mountain habitat maps to high register in the ensemble. The acoustic environment (open mountain canopy) favors the pure tones the bird produces."
+    },
+    {
+      "concept": "Unit circle connection (harmonic series = oscillation = trigonometry)",
+      "level": "advanced",
+      "department": "mathematics",
+      "college_path": ".college/mathematics/unit-circle/harmonic-series/",
+      "examples": [
+        "A sine wave traces a circle plotted against time -- the unit circle IS the phase space of oscillation",
+        "Harmonic series: integer multiples of a fundamental frequency = integer relationships on the unit circle",
+        "2nd harmonic = 2 cycles per fundamental cycle; phase relationships form unit circle geometry",
+        "The College of Knowledge mathematics: unit circle -> trigonometry -> oscillation -> harmonic series -> music"
+      ],
+      "music_theory_parallel": "The harmonic series and the unit circle are unified through oscillation mathematics. Fourier analysis decomposes any periodic signal into sine components -- unit circle rotations at integer frequency ratios. The Hermit Thrush sings the harmonic series. The harmonic series IS the unit circle mapped to frequency."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Catharus thrush section, mountain forest avifauna. This release adds harmonic-series bioacoustics, elevation-dependent habitat analysis, timbre-melody inversion theory, and the strongest biology-music bridge in the series."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mountain forest ecology, altitudinal zonation, subalpine ecosystem structure, climate-driven upward habitat shift. First species explicitly tied to elevation gradient and vertical landscape dimension."
+    },
+    {
+      "project": "BPS",
+      "title": "BPS Sensor Network",
+      "connection": "Acoustic signature for elevation-based sensor placement. Hermit Thrush song as mountain forest zone indicator. Altitudinal migration creates seasonal signal patterns at different elevations -- present at high elevation in summer, low elevation in winter."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Priester at degree 7. Both are spiraling artists -- ascending melodic architecture that orbits rather than progresses linearly. The spiral as artistic signature."
+    },
+    {
+      "project": "MPC",
+      "title": "Math Co-Processor",
+      "connection": "Harmonic series mathematics: integer frequency ratios (1:2:3:4:5:6), unit circle, Fourier analysis, oscillation. The Hermit Thrush's pitch selection connects directly to the mathematical foundations taught in the College of Knowledge."
+    },
+    {
+      "project": "SPS-006",
+      "title": "Pacific-slope Flycatcher (Degree 6)",
+      "connection": "Direct predecessor. Flycatcher's ascending linear sweep (pitch sweep synthesis) vs. Hermit Thrush's spiraling arch (harmonic-series navigation). Both ascend, but the flycatcher goes straight up and stops; the Hermit Thrush curves up and back down. Linear vs. curved contour."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "Nuthatch's metronomic pulse (pure temporal reference) vs. Hermit Thrush's harmonic-series melody (pure pitch reference). Rhythm vs. harmony. Time domain vs. frequency domain."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Northern Spotted Owl (Degree 4)",
+      "connection": "Both occupy mature/old-growth forest at different elevations. Owl's four-note motif is rhythmic (time-domain pattern). Hermit Thrush's phrase is melodic (frequency-domain pattern). Both are crepuscular/twilight singers."
+    },
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "Chickadee's combinatorial syntax generates meaning from discrete elements. Hermit Thrush's harmonic-series navigation generates consonance from mathematical relationships. Both are compositional systems -- one encodes information, the other encodes beauty."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "THE KEY COMPARISON. Same family (Turdidae), opposite acoustic strategy. AM drone (rich timbre, simple melody) vs. FM melody (simple timbre, rich melody). Timbre-melody inversion. Two thrushes, two solutions to the problem of haunting the forest."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Both small forest birds with complex vocalizations. Wren's complexity is temporal density (100+ notes in a cascade). Hermit Thrush's complexity is harmonic density (harmonic-series intervals in arch phrases). Speed vs. pitch relationships."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "Heron's silence is the absence of the harmonic series. Hermit Thrush's song is the harmonic series made audible. Degree 0 and degree 7 are endpoints on the arc from silence to mathematical music."
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Priester",
+    "degree": 7,
+    "genre": "S36",
+    "shared_principle": "Both are spiraling artists. Priester's musical architecture ascends and orbits rather than progressing linearly -- melodic lines that curve through harmonic space. The Hermit Thrush's song phrases spiral through the harmonic series in arch forms. Both create the impression of melody that circles rather than marches.",
+    "resonance_points": [
+      "Spiraling architecture: Priester's ascending lines orbit through harmonic territory; the Hermit Thrush's phrases spiral through overtone space -- both are curvilinear rather than linear",
+      "Mathematical underpinning: Priester's music has structural depth beneath the surface; the Hermit Thrush's song literally follows the harmonic series -- mathematical precision beneath aesthetic beauty",
+      "Pure tone quality: Priester's clarity of musical voice parallels the Hermit Thrush's flute-like purity -- both invest in melodic clarity over timbral density",
+      "Elevation and transcendence: Both operate at a level that transcends the immediate context -- the bird at mountain elevation, the artist at conceptual elevation"
+    ]
+  },
+  "degree_arc": {
+    "position": "The harmonic series -- biology sings mathematics. Spiraling flute melody, pure tone timbre, mountain forest, elevation as register.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7)",
+    "key_insight": "Degree 7 introduces three new dimensions: (1) the harmonic series as a compositional system -- not metaphor but measured mathematical correspondence between avian pitch selection and the integer ratios that define all tonal music (Doolittle & Brumm 2014, PNAS); (2) the ELEVATION dimension -- first species whose habitat is defined by altitude, introducing vertical landscape to the engine; (3) the timbre-melody inversion with the Varied Thrush (degree 2) -- same family, opposite acoustic architecture, proving that Turdidae allocate acoustic bandwidth between spectral and temporal complexity.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern, this is my time)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species -- voice as constitutive)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series -- beauty as physics)"
+    },
+    "temporal_progression": {
+      "degree_0": "Diurnal (day-active)",
+      "degree_1": "Dawn chorus (crepuscular peak)",
+      "degree_2": "Crepuscular (dusk/dawn emphasis)",
+      "degree_3": "Diurnal (daytime alarm system)",
+      "degree_4": "Nocturnal (first night species -- time as territory)",
+      "degree_5": "Diurnal (year-round daytime pulse -- returns to daylight)",
+      "degree_6": "Diurnal/seasonal (FIRST MIGRANT -- present spring-fall only, absent winter)",
+      "degree_7": "Crepuscular/seasonal (dawn and dusk peaks; breeds at elevation in summer, descends in winter)"
+    },
+    "season_progression": {
+      "degree_0": "Resident",
+      "degree_1": "Resident",
+      "degree_2": "Resident (partially migratory)",
+      "degree_3": "Resident",
+      "degree_4": "Resident",
+      "degree_5": "Resident (occasionally irruptive)",
+      "degree_6": "Neotropical migrant (FIRST non-resident species)",
+      "degree_7": "Altitudinal migrant / partial migrant (breeds at mountain elevation, winters at lower elevations or southward)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor (FIRST deciduous/riparian habitat)",
+      "degree_7": "Mountain forest (FIRST elevation-defined habitat -- subalpine fir, mountain hemlock, Engelmann spruce)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Mountain forest -- subalpine fir, mountain hemlock, Engelmann spruce, higher-elevation Douglas fir; breeds at 2,000-7,000 ft in WA Cascades and Olympics",
+    "foraging_strategy": "Ground-forager and low-perch gleaner -- scratches in leaf litter, flips leaves to expose insects; also takes berries in fall and winter",
+    "diet": "Insects (beetles, caterpillars, ants, flies) during breeding season; berries (salal, huckleberry, elderberry, madrone) in fall and winter",
+    "nesting": "On or near the ground in mountain forest -- typically in a low shrub, on a mossy bank, or against a fallen log; cup nest of moss, leaves, bark strips",
+    "altitudinal_migration": "Breeds at mountain elevations in summer; descends to lowland thickets, parks, and suburban edges in winter (altitudinal migrant)",
+    "indicator_species": "Presence at elevation indicates intact mountain forest structure; song as acoustic indicator of subalpine zone",
+    "climate_vulnerability": "Mountain habitats face upward shift with warming -- 'sky island' problem as total area decreases at higher elevations"
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~72 million (Partners in Flight 2020)",
+    "trend": "Overall stable with regional variation; some western populations show modest declines",
+    "threats": "Climate-driven upward habitat shift (sky island effect), mountain forest habitat loss, logging of high-elevation forests",
+    "vulnerability": "Broad habitat tolerance provides resilience (breeds in many forest types and elevations), but mountain populations face long-term climate pressure",
+    "significance": "Relatively secure species -- large population, broad range. Mountain habitat introduces the climate-elevation dynamic as a conservation concept."
+  },
+  "key_sites": [
+    {
+      "name": "Cascade Range mountain forests",
+      "type": "breeding",
+      "description": "Subalpine fir, mountain hemlock, and Engelmann spruce forests at 2,000-7,000 ft elevation",
+      "region": "Washington Cascades"
+    },
+    {
+      "name": "Olympic Mountains",
+      "type": "breeding",
+      "description": "Mountain hemlock and subalpine fir zones on the Olympic Peninsula",
+      "region": "Olympic Peninsula"
+    },
+    {
+      "name": "Puget Sound lowlands (winter)",
+      "type": "wintering",
+      "description": "Parks, suburban edges, lowland thickets with berry-producing shrubs",
+      "region": "Puget Sound lowlands"
+    },
+    {
+      "name": "Southern US and Mexico",
+      "type": "wintering",
+      "description": "Some populations migrate latitudinally to winter across the southern United States and into Mexico",
+      "region": "Southern US / Mexico"
+    }
+  ],
+  "sources": [
+    "Doolittle, E.L. and Brumm, H. (2014). Quantifying the harmonic series in Hermit Thrush song. PNAS 111(46): 16616-16621. doi:10.1073/pnas.1406023111 [LANDMARK PAPER]",
+    "Dellinger, R., Wood, P.B., Jones, P.W., and Donovan, T.M. (2012). Birds of the World. Cornell Lab of Ornithology. [Hermit Thrush species account.]",
+    "Cornell Lab of Ornithology. All About Birds: Hermit Thrush. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Hermit Thrush. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Hermit Thrush species account. birdweb.org",
+    "Sibley, D.A. (2014). The Sibley Guide to Birds, 2nd ed. Alfred A. Knopf. [Catharus thrush identification.]",
+    "Rivers, J.W. & Kroodsma, D.E. (2000). Singing behavior of the Hermit Thrush. J. Field Ornithology 71(3): 467-471.",
+    "Jones, P.W. & Donovan, T.M. (1996). Birds of North America, No. 261. [Hermit Thrush ecology and behavior.]",
+    "Macaulay Library. Hermit Thrush recordings and spectrograms. Cornell Lab of Ornithology.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "USGS Breeding Bird Survey. Population trend data. mbr-pwrc.usgs.gov",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey Results 1966-2019. USGS Patuxent.",
+    "IUCN Red List. Hermit Thrush (Catharus guttatus). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Hermit Thrush. wdfw.wa.gov",
+    "eBird. Hermit Thrush observation data, Pacific Northwest. ebird.org/species/herthr"
+  ],
+  "release_metadata": {
+    "release_number": "007",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

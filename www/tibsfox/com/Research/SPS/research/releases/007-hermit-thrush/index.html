@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 7&deg; &mdash; Hermit Thrush &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.harmonic { background: #1565C0; }
+    .theory-icon.arch { background: #7B1FA2; }
+    .theory-icon.inversion { background: #C62828; }
+    .theory-icon.pure-tone { background: var(--puget-dark); }
+    .theory-icon.elevation { background: #2E7D32; }
+    .theory-icon.unit-circle { background: #E65100; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Progression card */
+    .progression-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .progression-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .progression-table { margin: 0.75rem 0; width: 100%; }
+    .progression-table th { font-size: 0.78rem; }
+    .progression-table td { font-size: 0.85rem; }
+
+    /* Harmonic series card */
+    .harmonic-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 100%);
+      border: 1px solid #64B5F6;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .harmonic-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1565C0;
+    }
+    .ratio-bar {
+      display: flex;
+      margin: 0.75rem 0;
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .ratio-bar .ratio-segment {
+      padding: 0.35rem 0.3rem;
+      text-align: center;
+      color: white;
+    }
+    .ratio-bar .r1 { background: #1565C0; flex: 2; }
+    .ratio-bar .r2 { background: #1976D2; flex: 1.5; }
+    .ratio-bar .r3 { background: #1E88E5; flex: 1.33; }
+    .ratio-bar .r4 { background: #42A5F5; flex: 1.25; }
+    .ratio-bar .r5 { background: #64B5F6; flex: 1.2; color: #1565C0; }
+    .ratio-bar .r6 { background: #90CAF9; flex: 1.17; color: #1565C0; }
+
+    /* Inversion comparison card */
+    .inversion-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFEBEE 100%);
+      border: 1px solid #EF9A9A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .inversion-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C62828;
+    }
+    .inversion-table { margin: 0.75rem 0; width: 100%; }
+    .inversion-table th { font-size: 0.78rem; }
+    .inversion-table td { font-size: 0.85rem; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">7&deg;</div>
+      <div class="release-title-block">
+        <h2>Hermit Thrush</h2>
+        <div class="scientific">Catharus guttatus &middot; Family Turdidae (Thrushes)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Ethereal Spiraling Flute Song &middot; Mountain Forest &middot; Summer (Altitudinal Migrant) &middot; Energy 2</div>
+
+    <blockquote>
+      The Hermit Thrush spirals a flute song through the mountain forest &mdash; ethereal,
+      pure-toned, mathematically precise. Its phrases follow the harmonic series: the same
+      integer ratios that define the octave, the fifth, and the third in every musical
+      tradition on Earth. This is not metaphor. It is measured, published, peer-reviewed.
+      A PNW bird sings in tune with the physics of sound.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Hermit Thrush is a medium-small passerine of the family <strong>Turdidae</strong>
+          (thrushes), order Passeriformes. The genus <em>Catharus</em> (&ldquo;pure&rdquo; in
+          Greek &mdash; <em>katharos</em>) contains five North American species. The genus name
+          itself declares this bird&rsquo;s defining characteristic: <strong>purity of voice</strong>.
+          At <strong>6.5&ndash;7 inches</strong> and <strong>23&ndash;37 grams</strong>, brown
+          above with a distinctly <strong>rufous tail</strong> &mdash; the diagnostic visual mark
+          that separates it from all other <em>Catharus</em> thrushes. Pale underparts with bold
+          dark breast spots. Thin pale eye-ring. Pink legs.
+        </p>
+        <p>
+          <strong>The Turdidae connection.</strong> The Hermit Thrush and the Varied Thrush
+          (degree 2&deg;, <em>Ixoreus naevius</em>) are both members of <strong>Turdidae</strong>.
+          Both produce sounds universally described as &ldquo;haunting.&rdquo; Both occupy PNW forest.
+          But their acoustic strategies are <strong>opposite</strong> &mdash; a fact that becomes the
+          central insight of degree 7.
+        </p>
+
+        <!-- Harmonic Series Card -->
+        <div class="harmonic-card">
+          <h3>The Harmonic Series Bird &mdash; Doolittle &amp; Brumm 2014 (PNAS)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Emily Doolittle and Henrik Brumm analyzed 71 songs from 14 individuals and demonstrated
+            that the Hermit Thrush <strong>preferentially selects pitches from the harmonic series</strong>.
+            The same integer frequency ratios &mdash; 2:1 (octave), 3:2 (fifth), 5:4 (major third)
+            &mdash; that define all tonal music. Published in the <em>Proceedings of the National
+            Academy of Sciences</em>. Not metaphor. Measured. Peer-reviewed.
+          </p>
+          <div class="ratio-bar">
+            <div class="ratio-segment r1">2:1 Octave</div>
+            <div class="ratio-segment r2">3:2 Fifth</div>
+            <div class="ratio-segment r3">4:3 Fourth</div>
+            <div class="ratio-segment r4">5:4 Maj 3rd</div>
+            <div class="ratio-segment r5">6:5 Min 3rd</div>
+            <div class="ratio-segment r6">7:6 Blue</div>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--page-text-light); margin-top: 0.5rem; font-family: system-ui, sans-serif;">
+            The bird navigates the harmonic series the way a jazz musician navigates chord changes
+            &mdash; selecting from available overtones to create melodic phrases with mathematical
+            interval structure. The strongest &ldquo;music IS biology&rdquo; evidence in the
+            entire 360-degree circle.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Ethereal Spiraling Flute</h2>
+        <h3>Song Structure</h3>
+        <p>
+          Each song phrase lasts <strong>1.5&ndash;3.0 seconds</strong>, containing
+          <strong>5&ndash;12 notes</strong> in an <strong>arch form</strong>: ascending
+          through several pitches, reaching a peak, then descending. The inter-phrase silence
+          of <strong>2&ndash;8 seconds</strong> lets each phrase settle before the next begins.
+          Individual birds maintain <strong>6&ndash;12 distinct phrase types</strong>, delivered
+          in a loose order with variation. The overall effect: a melody that
+          <strong>spirals</strong> through pitch space &mdash; ascending, turning, descending,
+          pausing, then beginning again at a new starting point.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Fundamental range</td><td>1.5&ndash;4.0 kHz (varies by phrase)</td></tr>
+            <tr><td>Overtone usage</td><td>Harmonic series (Doolittle &amp; Brumm 2014)</td></tr>
+            <tr><td>Phrase duration</td><td>1.5&ndash;3.0 s</td></tr>
+            <tr><td>Notes per phrase</td><td>5&ndash;12</td></tr>
+            <tr><td>Phrase contour</td><td>Arch form (ascending &rarr; peak &rarr; descending)</td></tr>
+            <tr><td>Timbre</td><td>Pure, flute-like (near-sinusoidal per note)</td></tr>
+            <tr><td>Repertoire</td><td>6&ndash;12 phrase types per individual</td></tr>
+            <tr><td>Peak activity</td><td>Dawn and dusk (crepuscular peaks)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>The Flute Timbre</h3>
+        <p>
+          Each individual note approximates a <strong>sine wave</strong> &mdash; a strong
+          fundamental with minimal upper harmonics, giving the voice its
+          &ldquo;flute-like&rdquo; purity. This is functionally necessary: <strong>pure
+          timbre makes interval relationships more audible</strong>. Complex timbre (like the
+          Varied Thrush&rsquo;s buzzy tone) would obscure the inter-note intervals. Simple
+          timbre lets the harmonic relationships shine through. The bird&rsquo;s timbre
+          <em>serves</em> its melody.
+        </p>
+
+        <!-- Inversion Card -->
+        <div class="inversion-card">
+          <h3>The Thrush Inversion &mdash; Degree 2&deg; vs. Degree 7&deg;</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Same family (Turdidae). Same forest. Opposite acoustic architecture. <strong>Timbre
+            complexity and melodic complexity are inversely related</strong> across the thrush family.
+          </p>
+          <table class="inversion-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>Varied Thrush (2&deg;)</th>
+                <th>Hermit Thrush (7&deg;)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Timbre</strong></td><td>Complex (AM buzz, rich overtones)</td><td>Simple (pure flute, near-sinusoidal)</td></tr>
+              <tr><td><strong>Melody</strong></td><td>Simple (one sustained pitch)</td><td>Complex (harmonic series intervals)</td></tr>
+              <tr><td><strong>Modulation</strong></td><td>AM (within each note)</td><td>FM (between notes in phrase)</td></tr>
+              <tr><td><strong>Contour</strong></td><td>Flat (sustained frequency)</td><td>Arch (ascending &rarr; descending)</td></tr>
+              <tr><td><strong>Notes/phrase</strong></td><td>1</td><td>5&ndash;12</td></tr>
+              <tr><td><strong>Elevation</strong></td><td>Lowland to mid-elevation</td><td>Mountain forest</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.82rem; color: var(--page-text-light); margin-top: 0.5rem; font-family: system-ui, sans-serif;">
+            Acoustic bandwidth is finite. A bird can invest complexity in timbre (spectral richness
+            per note) or melody (temporal sequence of pitches). The Turdidae explore both extremes
+            in the same PNW forest.
+          </p>
+        </div>
+
+        <!-- Mountain Forest -->
+        <h2>Mountain Forest &mdash; The Elevation Dimension</h2>
+        <p>
+          The Hermit Thrush breeds in <strong>mountain forest</strong> &mdash; subalpine fir,
+          mountain hemlock, Engelmann spruce at <strong>2,000&ndash;7,000 feet</strong> in the
+          Washington Cascades and Olympics. This is the first species in the circle whose habitat
+          is defined by <strong>altitude</strong>. Degrees 0&ndash;6 occupy habitats defined by
+          ecosystem type (estuary, old-growth, conifer, riparian) but not by elevation. Degree 7
+          introduces the <strong>vertical dimension</strong> &mdash; the species engine&rsquo;s
+          first explicit acknowledgment that the PNW landscape rises.
+        </p>
+        <p>
+          <strong>Altitudinal migration.</strong> The Hermit Thrush is the only common
+          <em>Catharus</em> thrush that <strong>winters in the lower 48</strong>. In the PNW,
+          some populations are <strong>altitudinal migrants</strong> &mdash; breeding at mountain
+          elevation in summer, descending to lowland thickets and parks in winter. Unlike the
+          Pacific-slope Flycatcher (degree 6), which disappears entirely from the PNW in winter,
+          the Hermit Thrush may be present year-round but in <strong>different zones</strong> at
+          different seasons. Vertical migration rather than latitudinal.
+        </p>
+        <p>
+          <strong>Elevation as register.</strong> In the ensemble metaphor, the mountain habitat
+          maps to <strong>high register</strong>. Mountain forest is acoustically distinct from
+          lowland forest: more open canopy, less absorption, longer transmission distances. Pure
+          tones carry farther in open mountain canopy than buzzy tones in dense lowland forest.
+          The habitat and the voice are co-adapted.
+        </p>
+
+        <!-- Progression Card -->
+        <div class="progression-card">
+          <h3>The Arc: Silence &rarr; Cascade &rarr; Drone &rarr; Language &rarr; Motif &rarr; Metronome &rarr; Question &rarr; Harmony</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degree 7 adds HARMONIC SERIES MELODY &mdash; not metaphor but measured mathematical
+            correspondence between avian pitch selection and the integer ratios that define all
+            tonal music. The ensemble gains its first voice that sings in tune with the physics
+            of sound.
+          </p>
+          <table class="progression-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>0&deg;</th>
+                <th>1&deg;</th>
+                <th>2&deg;</th>
+                <th>3&deg;</th>
+                <th>4&deg;</th>
+                <th>5&deg;</th>
+                <th>6&deg;</th>
+                <th>7&deg;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Species</strong></td><td>Heron</td><td>Wren</td><td>V. Thrush</td><td>Chickadee</td><td>Owl</td><td>Nuthatch</td><td>Flycatcher</td><td><strong>H. Thrush</strong></td></tr>
+              <tr><td><strong>Sound</strong></td><td>Silence</td><td>Cascade</td><td>Tone</td><td>Named call</td><td>4-note</td><td>Steady beat</td><td>Upslur</td><td><strong>Flute spiral</strong></td></tr>
+              <tr><td><strong>Synthesis</strong></td><td>None</td><td>FM</td><td>AM</td><td>Combin.</td><td>Rhythm</td><td>Metron.</td><td>Sweep</td><td><strong>Harmonic</strong></td></tr>
+              <tr><td><strong>Content</strong></td><td>Absence</td><td>Identity</td><td>Presence</td><td>Referential</td><td>Territory</td><td>Grid</td><td>Question</td><td><strong>Consonance</strong></td></tr>
+              <tr><td><strong>Role</strong></td><td>Rest</td><td>Soloist</td><td>Drone</td><td>Vocalist</td><td>Ostinato</td><td>Click</td><td>Half cad.</td><td><strong>Harmony</strong></td></tr>
+              <tr><td><strong>Habitat</strong></td><td>Estuary</td><td>Old-growth</td><td>Conifer</td><td>Mixed</td><td>Old-growth</td><td>Conifer</td><td>Riparian</td><td><strong>Mountain</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon harmonic">H</div>
+            <div class="theory-content">
+              <h4>Harmonic Series Navigation <span class="theory-level advanced">Advanced</span></h4>
+              <p>Pitch selection from overtone ratios &mdash; the mathematical foundation of all tonal music. The bird selects from the same integer ratios (2:1, 3:2, 5:4) that define consonance in every musical culture on Earth.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon arch">A</div>
+            <div class="theory-content">
+              <h4>Arch Form (Spiraling Melodic Contour) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Each phrase ascends, peaks, descends. Successive phrases start at different pitches, spiraling through pitch space. The arch is one of the most universal melodic shapes &mdash; Gregorian chant, Baroque melody, pop hooks.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon inversion">I</div>
+            <div class="theory-content">
+              <h4>Timbre-Melody Inversion (Bandwidth Allocation) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Varied Thrush: rich timbre + simple melody. Hermit Thrush: simple timbre + rich melody. Same family, opposite strategy. Acoustic bandwidth allocated between spectral and temporal complexity.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon pure-tone">F</div>
+            <div class="theory-content">
+              <h4>Pure Tone Timbre (Sine Wave Approximation) <span class="theory-level foundational">Foundational</span></h4>
+              <p>Flute-like purity &mdash; strong fundamental, minimal upper harmonics. Pure timbre makes interval relationships more audible. The timbre serves the melody: spectral simplicity enables harmonic clarity.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon elevation">E</div>
+            <div class="theory-content">
+              <h4>Elevation as Acoustic Register <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Mountain habitat = high register. More open canopy, less absorption, longer transmission distances. Pure tones carry farther in open mountain forest. The first species whose habitat is defined by altitude.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon unit-circle">U</div>
+            <div class="theory-content">
+              <h4>Unit Circle Connection (Harmonic Series = Oscillation) <span class="theory-level advanced">Advanced</span></h4>
+              <p>The harmonic series IS the unit circle mapped to frequency. Sine waves trace circles. Integer frequency multiples create the overtone series. Fourier analysis, trigonometry, and the Hermit Thrush&rsquo;s song all converge on the same mathematics.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>The harmonic series as composition.</strong> Every previous degree mapped a
+          musical concept to an avian behavior by analogy: silence as rest, cascade as improvisation,
+          drone as pedal point. Degree 7 is different. <strong>The mapping is mathematical.</strong>
+          The same ratios that define musical consonance are present in the bird&rsquo;s song.
+          Doolittle and Brumm measured it. <em>PNAS</em> published it. The Hermit Thrush does
+          not <em>resemble</em> a musician. It is a musician, operating on the same mathematical
+          substrate.
+        </p>
+        <p>
+          <strong>The spiraling contour.</strong> Each phrase follows an arch: ascending notes
+          (building tension), a peak (climax), descending notes (resolution). Successive phrases
+          at different starting pitches create the spiral. This is the degree-7 signature shape
+          &mdash; the first curved contour in the circle. Previous contours: flat (silence, drone,
+          beat), cascading (wren), stepped (chickadee), looping (owl), ascending (flycatcher).
+          Degree 7 introduces <strong>curvature</strong>.
+        </p>
+        <p>
+          <strong>The unit circle connection.</strong> The harmonic series and the unit circle
+          are linked through oscillation mathematics. A sine wave traces a circle. The harmonic
+          series is what happens when oscillations coexist at integer frequency ratios. The
+          College of Knowledge mathematics: unit circle &rarr; trigonometry &rarr; oscillation
+          &rarr; harmonic series &rarr; music. The Hermit Thrush sings the mathematics.
+        </p>
+        <p>
+          <strong>The thrush inversion.</strong> The Varied Thrush and the Hermit Thrush
+          demonstrate a design principle: timbre complexity and melodic complexity trade off.
+          AM drone (rich notes, simple sequence) vs. FM melody (simple notes, rich sequence).
+          This maps to signal processing theory &mdash; bandwidth is finite, and the Turdidae
+          family has explored both allocation strategies.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Catharus thrush section. Harmonic-series bioacoustics, elevation-dependent habitat, timbre-melody inversion theory.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Mountain forest ecology, altitudinal zonation, climate-driven habitat shift. First species tied to elevation gradient.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; BPS Sensor Network
+            <p>Acoustic signature for elevation-based sensor placement. Altitudinal migration creates seasonal signal patterns at different elevations.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Priester at 7&deg;. Both spiraling artists &mdash; ascending melodic architecture that orbits rather than progresses linearly.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MPC</strong> &mdash; Math Co-Processor
+            <p>Harmonic series mathematics: integer frequency ratios, unit circle, Fourier analysis. The Hermit Thrush&rsquo;s pitch selection connects directly to the mathematical foundations.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-006</strong> &mdash; Pacific-slope Flycatcher
+            <p>Direct predecessor. Flycatcher&rsquo;s linear ascending sweep vs. Hermit Thrush&rsquo;s spiraling arch. Both ascend &mdash; one goes straight up; the other curves up and back down.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005</strong> &mdash; Red-breasted Nuthatch
+            <p>Nuthatch&rsquo;s metronomic pulse (temporal reference) vs. Hermit Thrush&rsquo;s harmonic-series melody (pitch reference). Rhythm vs. harmony. Time vs. frequency.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004</strong> &mdash; Northern Spotted Owl
+            <p>Both in mature forest at different elevations. Owl&rsquo;s motif is rhythmic (time-domain). Hermit Thrush&rsquo;s phrase is melodic (frequency-domain). Both crepuscular.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003</strong> &mdash; Black-capped Chickadee
+            <p>Chickadee&rsquo;s syntax generates meaning from discrete elements. Hermit Thrush&rsquo;s harmony generates consonance from mathematical relationships. Information vs. beauty.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p><strong>THE KEY COMPARISON.</strong> Same family. Opposite strategy. AM drone (rich timbre, simple melody) vs. FM melody (simple timbre, rich melody). Two thrushes. Two solutions.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Both small forest birds with complex songs. Wren = temporal density (100+ notes cascading). Hermit Thrush = harmonic density (overtone intervals in arch phrases).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>Heron&rsquo;s silence = absence of the harmonic series. Hermit Thrush&rsquo;s song = the harmonic series made audible. Degree 0 and degree 7: silence to mathematical music.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Doolittle, E.L. &amp; Brumm, H. (2014). &ldquo;Quantifying the harmonic series in Hermit Thrush song.&rdquo; <em>PNAS</em> 111(46): 16616&ndash;16621. <strong>[LANDMARK]</strong></li>
+          <li>Dellinger, R., Wood, P.B., Jones, P.W. &amp; Donovan, T.M. (2012). &ldquo;Hermit Thrush.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Rivers, J.W. &amp; Kroodsma, D.E. (2000). Singing behavior of the Hermit Thrush. <em>J. Field Ornithology</em> 71(3): 467&ndash;471.</li>
+          <li>Jones, P.W. &amp; Donovan, T.M. (1996). Hermit Thrush. <em>Birds of North America</em>, No. 261.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Hermit Thrush. allaboutbirds.org</li>
+          <li>BirdWeb (Seattle Audubon Society). Hermit Thrush. birdweb.org</li>
+          <li>Macaulay Library. Hermit Thrush recordings. Cornell Lab of Ornithology.</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>USGS Breeding Bird Survey. Population trend data. mbr-pwrc.usgs.gov</li>
+          <li>Sauer, J.R. et al. (2020). BBS Results 1966&ndash;2019. USGS Patuxent.</li>
+          <li>IUCN Red List. Hermit Thrush. iucnredlist.org</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Turdidae</div>
+          <div class="stat-detail">Thrushes &mdash; same family as Varied Thrush (2&deg;)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Catharus</div>
+          <div class="stat-detail">&ldquo;Pure&rdquo; &mdash; named for purity of voice</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">6.5&ndash;7 in</div>
+          <div class="stat-detail">16&ndash;18 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">23&ndash;37 g</div>
+          <div class="stat-detail">Larger than flycatcher (8&ndash;12 g)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">~11.5 in</div>
+          <div class="stat-detail">~29 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">Rufous Tail</div>
+          <div class="stat-detail">Contrasts with olive-brown back</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Fundamental</div>
+          <div class="stat-value">1.5&ndash;4.0 kHz</div>
+          <div class="stat-detail">Harmonic series overtone selection</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Phrase Duration</div>
+          <div class="stat-value">1.5&ndash;3.0 s</div>
+          <div class="stat-detail">5&ndash;12 notes per phrase</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Phrase Contour</div>
+          <div class="stat-value">Arch / Spiral</div>
+          <div class="stat-detail">Ascending &rarr; peak &rarr; descending</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Timbre</div>
+          <div class="stat-value">Pure Flute</div>
+          <div class="stat-detail">Near-sinusoidal &mdash; minimal harmonics per note</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Harmonic Series</div>
+          <div class="stat-detail">Peer-reviewed: PNAS 2014</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">7&deg;</div>
+          <div class="stat-detail">Harmony &mdash; the harmonic series bird</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Low-energy ethereal voice</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mountain Forest</div>
+          <div class="stat-detail">First elevation-defined habitat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Altitudinal migrant (descends in winter)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">~72M &mdash; overall stable</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Thrush Pair</div>
+          <div class="stat-value">2&deg; &harr; 7&deg;</div>
+          <div class="stat-detail">AM drone &harr; FM melody (inversion)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 7&deg; &mdash; S36</div>
+          <div class="parallel-name">Priester</div>
+          <div class="parallel-detail">Both are spiraling artists. Priester&rsquo;s ascending melodic architecture orbits through harmonic space; the Hermit Thrush&rsquo;s phrases spiral through the overtone series. Mathematical precision beneath aesthetic beauty. Elevation and transcendence.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 007 of 360 &middot;
+      <a href="../006-pacific-slope-flycatcher/index.html">Degree 6&deg;: Pacific-slope Flycatcher</a> &middot;
+      <a href="../005-red-breasted-nuthatch/index.html">Degree 5&deg;: Red-breasted Nuthatch</a> &middot;
+      <a href="../002-varied-thrush/index.html">Degree 2&deg;: Varied Thrush</a> &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
