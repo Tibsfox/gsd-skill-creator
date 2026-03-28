@@ -1,0 +1,1062 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === SPACE/PHYSICS COLOR SCHEME ===
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue
+\definecolor{tertiary}{HTML}{F57F17}      % Star gold (amber)
+\definecolor{accent}{HTML}{1565C0}        % Deep blue
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Light purple
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Yuri's Night: The World Space Party}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Yuri's Night -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Yuri's Night\\[0.3em]The World Space Party}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{April 12 · Global · Human Spaceflight}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 4--6 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Yuri's Night — Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Execution}
+\metafield{Depends On:}{NASA Historical Archives, UN Resolution A/RES/65/271, SpaceKind Foundation records}
+\metafield{Context:}{Cold-start deep research mission on the origins, history, global reach, and educational mission of Yuri's Night (The World Space Party).}
+
+\subsection{Vision}
+
+On the morning of April 12, 1961, Yuri Gagarin's call sign \emph{Kedr} — Siberian pine — crackled across the radio at Baikonur Cosmodrome as a rocket rose from the steppe of Kazakhstan. One hundred eight minutes later, a single human had circled the entire Earth. The orbit was not merely geographic; it was philosophical. In the space between launch and landing, something irreversible happened to the human species. We became, for the first time, a spacefaring civilization.
+
+Twenty years to the day, a different machine rose from a different launch pad. Space Shuttle Columbia, carrying Commander John Young and Pilot Robert Crippen, did not carry nuclear warheads as its ancestor rocket once did. It carried a dream of \emph{reusability} — the idea that leaving Earth need not mean abandoning hardware, ambition, or the possibility of return. The date was a coincidence of scheduling delays and computer failures. But coincidences have a way of accumulating meaning.
+
+Yuri's Night was born from the recognition that these dates — these \emph{gaps} between political history and human wonder — deserve ritual. In 1999, at a UN space conference in Vienna, three young organizers saw that the world had no secular feast day for spaceflight. No annual moment where every culture, every language, every hemisphere was invited to look up together. The World Space Party became that feast. It is not owned by a nation or a program. It is organized by volunteers, powered by music and art, and scaled through the simple mechanism of invitation: come celebrate what we did together as a species.
+
+The GSD framework understands this instinctively. The Amiga Principle teaches that remarkable results emerge not from monopolized resources but from elegant, distributed architecture. Yuri's Night is that principle applied to civilization-scale inspiration: a small non-profit, an annual date, and the networked creativity of thousands of independent organizers produce an event felt across 75 countries and seven continents. The spaces between local events are where the global community actually lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{Historical amnesia about spaceflight origins.} Most living generations have no memory of Vostok 1 or STS-1. Without annual ritual reinforcement, the cultural weight of these milestones erodes, leaving future space advocates without a felt sense of why the endeavor matters.
+
+  \item \textbf{Fragmentation of space inspiration across political lines.} Gagarin flew for the Soviet Union; Young and Crippen flew for the United States. The Cold War framing that surrounded these missions still distorts how they are remembered and taught, obscuring their shared significance for all of humanity.
+
+  \item \textbf{Weak STEM pipeline connected to cultural inspiration.} Science education frequently struggles to connect abstract concepts to lived meaning. Events like Yuri's Night that embed STEM outreach inside celebration and community represent an under-studied model for engagement.
+
+  \item \textbf{Inconsistent global documentation of the event's reach and impact.} No single authoritative longitudinal dataset tracks event counts, attendance, geographic distribution, and educational outcomes across the 25-year history of the celebration.
+
+  \item \textbf{Tension between party format and substantive advocacy.} Critics note that Yuri's Night's festive structure may prioritize entertainment over rigorous policy discourse on orbital sustainability, commercial space governance, or equitable access to space.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} \emph{A distributed, volunteer-run global feast day for human spaceflight — seeded by two coincident April 12 milestones, grown through open invitation, and anchored by the SpaceKind Foundation's non-profit infrastructure.}
+
+The core mechanism is the \emph{dual anniversary}: Vostok 1 (April 12, 1961) and STS-1 (April 12, 1981) share a date by technological accident, but that accident became the structural foundation of a holiday that bridges Cold War rivals, celebrates reusability alongside pioneering bravery, and invites both nations' legacies into the same ceremony.
+
+\subsubsection{April 12 Anniversary Architecture (ASCII Diagram)}
+
+\begin{asciibox}
+APRIL 12 — THE DUAL ANNIVERSARY
+=================================
+
+1961                           1981
+|                               |
++-- Vostok 1                   +-- STS-1 / Columbia
+    Yuri Gagarin                   John Young
+    Baikonur Cosmodrome            Robert Crippen
+    108 minutes, 1 orbit           Kennedy Space Center
+    27,400 km/h                    37 orbits, 54.5 hrs
+    Soviet Union                   United States
+    |                               |
+    |   Cold War rivals             |
+    |   20 years apart              |
+    |   Same date (coincidence)     |
+    +-------------------------------+
+                    |
+           APRIL 12 ANNIVERSARY
+                    |
+       +------------+------------+
+       |                         |
+  2001: Yuri's Night        2011: UN Declares
+  World Space Party         International Day of
+  40th anniversary          Human Space Flight
+  Los Angeles + global      Resolution A/RES/65/271
+       |                         |
+       +------------+------------+
+                    |
+     SpaceKind Foundation (501c3)
+     ~320-567 events/year
+     50-75 countries / 7 continents
+     Music + Art + Science + Community
+\end{asciibox}
+
+\subsubsection{Research Module Architecture (ASCII Diagram)}
+
+\begin{asciibox}
+MODULE ARCHITECTURE — YURI'S NIGHT RESEARCH MISSION
+====================================================
+
+  [ MODULE 01 ]       [ MODULE 02 ]
+  Vostok 1 &          STS-1 &
+  Gagarin Flight      Space Shuttle Era
+       |                   |
+       +-------------------+
+                |
+       [ MODULE 03 ]
+       Yuri's Night Origins
+       & Organization History
+                |
+       +--------+--------+
+       |                 |
+  [ MODULE 04 ]    [ MODULE 05 ]
+  Global Events    UN Recognition
+  & STEM Outreach  & Policy Context
+       |                 |
+       +-----------------+
+                |
+       [ SYNTHESIS ]
+       Significance, Legacy,
+       Future Directions
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 — Vostok 1 and Gagarin's Historic Flight}
+Documents the technical, political, and human dimensions of the April 12, 1961 mission: spacecraft design, cosmonaut selection, Cold War context, 108-minute orbital profile, landing sequence, and immediate global impact. Primary sources: NASA NSSDCA, The Planetary Society, Wikipedia (Vostok 1), FAI records.
+
+\subsubsection{Module 02 — STS-1 and the Space Shuttle Era}
+Covers the April 12, 1981 first flight of Space Shuttle Columbia: the computer delay that accidentally preserved the anniversary date, the crew of Young and Crippen, technical specifications, mission duration, and the significance of reusability as a philosophical departure from the capsule era. Primary sources: NASA STS-1 mission archives, National Air and Space Museum, NASA Kennedy Space Center.
+
+\subsubsection{Module 03 — Yuri's Night Organization and History}
+Traces the founding by Loretta Hidalgo Whitesides, George T. Whitesides, and Trish Garner at UNISPACE III (1999) through the first event in Los Angeles (2001), the 50th anniversary milestone of 2011, organizational evolution into the SpaceKind Foundation, and the 2022 Ukraine crisis navigation. Primary sources: yurisnight.net, SpaceKind Foundation records.
+
+\subsubsection{Module 04 — Global Events, STEM Outreach, and Cultural Programming}
+Surveys the diversity of Yuri's Night events globally: from NASA centers and planetariums to bars and nightclubs; notable headliners (Les Claypool, N*E*R*D, Common); signature programs (AstroAccess, Cosmic Odyssey Scholarship, Spirit of Yuri's Night Award, Moon Trees); 2024 event distribution across 50 countries. Primary sources: yurisnight.net/about-us, Loretta Whitesides biography, event registrations.
+
+\subsubsection{Module 05 — UN Recognition and Policy Context}
+Examines the UN General Assembly's 2011 declaration of April 12 as the International Day of Human Spaceflight (Resolution A/RES/65/271), the role of UNOOSA, connections to sustainable development goals, the Outer Space Treaty, and the broader policy architecture surrounding space as the "province of all mankind." Primary sources: UN General Assembly resolution text, UNOOSA documentation, time-and-date.com.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:                          # Orchestration / Context Management
+    model: claude-opus-4-6
+    role: Mission director; synthesis agent; cultural sensitivity gate
+    modules: [03, 05, SYNTHESIS]
+    responsibility: Cross-module integration; political/cultural nuance
+    allocation: ~30%
+
+  denise:                         # Output Rendering
+    model: claude-sonnet-4-6
+    role: Document production; survey compilation; table assembly
+    modules: [01, 02, 04]
+    responsibility: Primary document authors for survey modules
+    allocation: ~60%
+
+  paula:                          # I/O / Anticipatory
+    model: claude-haiku-4-5-20251001
+    role: Scaffolding; shared schemas; source index; template hydration
+    modules: [WAVE-0]
+    responsibility: Foundation layer; reusable data structures
+    allocation: ~10%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Full technical and historical documentation of Vostok 1 (April 12, 1961)
+  \item Full documentation of STS-1 / Columbia (April 12, 1981)
+  \item Founding narrative of Yuri's Night from UNISPACE III through present
+  \item Organizational evolution: Space Generation Advisory Council → SpaceKind Foundation
+  \item Global event statistics and geographic distribution (2001--2025)
+  \item UN International Day of Human Spaceflight declaration and policy context
+  \item STEM outreach programs: AstroAccess, Cosmic Odyssey Scholarship, Moon Trees
+  \item Political and cultural sensitivity: Ukraine war 2022 response; Cold War framing
+  \item Connections to GSD Amiga Principle: distributed architecture, network effects
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Detailed technical documentation of other Vostok program flights (Vostok 2--6)
+  \item Comprehensive Space Shuttle program history beyond STS-1
+  \item Commercial space industry analysis (SpaceX, Blue Origin, etc.)
+  \item Other space celebration dates (World Space Week, Cosmonautics Day in Russia)
+  \item Detailed individual event planning guides or logistics
+  \item Financial/budget analysis of the SpaceKind Foundation
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*}]
+  \item Vostok 1 mission documented with all key parameters: launch time, orbital altitude, duration, crew, landing method, and FAI record certification.
+  \item STS-1 documented with correct technical specs and the computer-delay story fully explained — confirming the April 12 date was a coincidence, not a tribute.
+  \item Founding of Yuri's Night traced from UNISPACE III (1999) through first event (2001) with all three founders named and their roles described.
+  \item Organizational lineage documented: Space Generation Advisory Council → Space Generation Foundation (2001--2010) → independent 501(c)(3) (2010) → SpaceKind Foundation (2022).
+  \item 2011 milestone event quantitatively documented: 100,000+ attendees, 567 events, 75 countries, 7 continents, 12-hour global webcast.
+  \item 2024 event statistics captured: 320+ events, 50 countries as minimum recent baseline.
+  \item UN resolution A/RES/65/271 (7 April 2011) documented with full citation and purpose language.
+  \item AstroAccess, Cosmic Odyssey Scholarship, Spirit of Yuri's Night Award, and Moon Tree programs each individually described.
+  \item 2022 Ukraine war response documented: Space Foundation renaming and SpaceKind Foundation's statement of position.
+  \item Cross-module connection established between Gagarin's quote (``safeguard and enhance this beauty'') and the organizational philosophy of SpaceKind Foundation.
+  \item STEM outreach connection mapped: how celebration format integrates educational components without displacing the party ethos.
+  \item Through-line connecting Amiga Principle distributed architecture to Yuri's Night's volunteer-network model made explicit.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Priority} \\
+\midrule
+GSD Amiga Vision & Distributed architecture philosophy mirrors volunteer-network model & High \\
+Fox Infrastructure Group & Pacific Rim cooperative model parallels space-as-global-commons framing & Medium \\
+College of Knowledge & Space history module potential seed content & Medium \\
+The Space Between & Cosmological scale reasoning; the ``spaces between'' as philosophical anchor & High \\
+GSD Ecosystem Field Guide & Amiga Principle reference for through-line section & Reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga computer was remarkable not because it had the most transistors, but because its designers understood that the spaces between components — the bus, the coprocessor channels, the custom chip communication lanes — were where the real work happened. Yuri's Night operates on the same principle. The SpaceKind Foundation is deliberately small. The events are deliberately decentralized. The date is the architecture, and the volunteers are the coprocessors. What travels across the network is not data but \emph{wonder}.
+
+Gagarin himself understood this. From orbit, looking down at an Earth without national borders, he said: ``People of the world, let us safeguard and enhance this beauty — not destroy it.'' That sentence is not a political statement. It is a systems observation: that seen from the right altitude, we are all running on the same substrate. The World Space Party is the annual reminder that the substrate persists.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Yuri's Night — Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from primary source research conducted March 2026. Each module corresponds to a Stage 1 research module. Agents executing Module surveys should draw directly from this section. All quantitative claims are attributed to specific sources.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{NASA} (nasa.gov) — STS-1, Vostok 1, historical spaceflight archives
+  \item \textbf{NASA NSSDCA} (nssdc.gsfc.nasa.gov) — Spacecraft catalog, Vostok 1 parameters
+  \item \textbf{The Planetary Society} (planetary.org) — Vostok 1 mission history
+  \item \textbf{National Air and Space Museum, Smithsonian} (airandspace.si.edu) — STS-1 historical analysis
+  \item \textbf{United Nations / UNOOSA} (unoosa.org, un.org) — Resolution A/RES/65/271, IDHSF
+  \item \textbf{SpaceKind Foundation / Yuri's Night} (yurisnight.net) — Organizational history, events
+  \item \textbf{Wikipedia (Vostok 1, STS-1, Yuri Gagarin, Yuri's Night)} — Aggregated, cross-checked secondary source
+  \item \textbf{This Day in Aviation} (thisdayinaviation.com) — Technical launch parameters
+\end{itemize}
+
+\subsection{Module 01 — Vostok 1 and Gagarin's Historic Flight}
+
+\subsubsection{Mission Overview}
+
+On April 12, 1961, at 06:07 UTC, the Vostok 3KA-3 spacecraft was launched from Baikonur Cosmodrome, Kazakhstan, carrying Soviet cosmonaut Yuri Alekseyevich Gagarin. The flight was the first human orbital spaceflight in history. Key parameters per NASA NSSDCA and FAI records:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value (Source)} \\
+\midrule
+Launch time & 06:06:59.7 UTC, April 12, 1961 (This Day in Aviation) \\
+Launch site & Baikonur Cosmodrome, Kazakhstan (NASA NSSDCA) \\
+Duration & 108 minutes (NASA) \\
+Orbits completed & 1 (NASA NSSDCA) \\
+Orbital speed & 27,400 km/h (NASA) \\
+Apogee & 327 km / 315 km (FAI record / Wikipedia) \\
+Perigee & 169 km (NASA NSSDCA) \\
+Orbital period & 89.34 minutes (This Day in Aviation) \\
+Landing & Parachute ejection at 7 km altitude, near Smelovka village (Wikipedia) \\
+Call sign & Kedr (Siberian pine/cedar) (Wikipedia) \\
+Cosmonaut age & 27 years old (HISTORY.com) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Spacecraft and Launch Vehicle}
+
+The Vostok spacecraft consisted of a pressurized sphere 2 meters wide with three portholes, radios, life support, instrumentation, and an ejection seat (The Planetary Society). The launch vehicle was the Vostok-K 8K72 rocket — a modified R-7A Semyorka ICBM originally designed to carry nuclear warheads — with total liftoff thrust of approximately 950,000--1,150,000 lbs (Space Age Chronicle). The spacecraft's manual controls were locked prior to launch due to uncertainty about human reactions to weightlessness; Gagarin was given the unlock code (1-2-5) verbally in advance (Wikipedia, Vostok 1).
+
+\subsubsection{Context: Space Race}
+
+Gagarin's flight came 25 days before the first U.S. suborbital flight (Alan Shepard, May 5, 1961) and preceded the first American orbital flight by ten months (John Glenn, February 1962, three orbits). President Kennedy responded to Vostok 1 on April 20, 1961 by tasking Vice President Johnson to identify a way to match the Soviets — ultimately leading to the declaration of the Apollo program on May 25, 1961 (The Planetary Society).
+
+\subsubsection{Global Impact}
+
+After landing, Gagarin was immediately flown to Moscow, awarded Hero of the Soviet Union by Premier Khrushchev, and became an instant worldwide celebrity. He visited the United Kingdom, Poland, Brazil, Bulgaria, Canada, Cuba, Czechoslovakia, Finland, Hungary, Iceland, and approximately 30 other countries in the years following his flight (Wikipedia, Yuri Gagarin). FAI officially certified three world records: orbital flight duration (108 minutes), altitude in elliptical orbit (327 km), and greatest mass lifted (4,725 kg) (This Day in Aviation).
+
+Gagarin died on March 27, 1968 in a routine jet training flight crash. His ashes were placed in the Kremlin wall. Apollo 11 astronauts Neil Armstrong and Buzz Aldrin left a memorial satchel with medals commemorating him on the Moon's surface in 1969. A commemorative plaque left at Hadley-Apennine during Apollo 15 (1971) includes his name alongside 13 other fallen astronauts and cosmonauts (Friends of NASA).
+
+\subsection{Module 02 — STS-1 and the Space Shuttle Era}
+
+\subsubsection{Mission Overview}
+
+STS-1 (Space Transportation System-1) was the first orbital spaceflight of NASA's Space Shuttle program. Per NASA and Wikipedia:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value (Source)} \\
+\midrule
+Launch date/time & April 12, 1981, 12:00:04 UTC / 7:00:03 a.m. EST (NASA, Wikipedia) \\
+Launch site & Pad 39A, Kennedy Space Center, Florida (NASA) \\
+Crew & Commander John W. Young; Pilot Robert L. Crippen (NASA) \\
+Duration & 2 days, 6 hours, 20 minutes, 53 seconds (NASA) \\
+Orbits & 37 (NASA) \\
+Altitude & 166 nautical miles / 251 km apogee (NASA, Wikipedia) \\
+Inclination & 40.3 degrees (NASA) \\
+Distance traveled & 1,074,567 miles / 1,729,348 km (NASA) \\
+Landing & Edwards Air Force Base, California, April 14, 1981 (NASA) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The April 12 Coincidence}
+
+The April 12 date was not chosen to honor the Vostok 1 anniversary. The original planned launch was April 10, 1981. A timing skew in Columbia's IBM System/4 Pi general purpose computers caused the backup flight software to fail to synchronize with the primary avionics system, scrubbing the launch attempt (Wikipedia STS-1; Spaceline.org). The two-day delay placed the launch on April 12 — exactly 20 years after Vostok 1 — by technical accident. This is confirmed in multiple primary sources and acknowledged by Yuri's Night as a ``cosmic coincidence'' (yurisnight.net).
+
+\subsubsection{Historical Significance}
+
+STS-1 was the first American crewed spaceflight since Apollo-Soyuz in 1975 — a six-year gap. It was also the first time a new crewed American spacecraft launched without a prior uncrewed powered test flight (Wikipedia). Commander John Young had already walked on the Moon in 1972 (Apollo 16); STS-1 was his fifth spaceflight. Pilot Robert Crippen was on his first spaceflight. The mission carried 2,214 switches and displays in the cockpit — roughly three times the Apollo command module count (Wikipedia STS-1).
+
+STS-1 demonstrated the reusable orbiter concept but also revealed challenges: approximately 70 anomalies were observed, including loss of 16 heat shield tiles and damage to 148 others from SRB pressure waves (Wikipedia STS-1). Columbia flew 27 more missions before disintegrating on reentry during STS-107 on February 1, 2003, killing all seven crew members (NASA).
+
+\subsection{Module 03 — Yuri's Night Organization and History}
+
+\subsubsection{Founding (1999--2001)}
+
+The concept of Yuri's Night originated at the Space Generation Forum during the UNISPACE III Conference in Vienna, 1999 (yurisnight.net/about-us). Founders: \textbf{Loretta Hidalgo Whitesides}, \textbf{George T. Whitesides}, and \textbf{Trish Garner}. UNISPACE III had established World Space Week (October 4--10) to commemorate Sputnik 1 and the Outer Space Treaty. The founders chose to create a separate event specifically honoring the \emph{human} dimension of spaceflight, anchored on April 12.
+
+The first Yuri's Night was announced in 2000 for April 12, 2001 (the 40th anniversary of Gagarin's flight) in Los Angeles. Friends and colleagues from the Space Generation Forum immediately asked to host simultaneous events worldwide. The World Space Party was born at its first edition (yurisnight.net).
+
+\subsubsection{Organizational Evolution}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{Organization} & \tableheader{Status} \\
+\midrule
+2001--2010 & Space Generation Advisory Council / Space Generation Foundation & Project under SGAC \\
+2010 & Yuri's Night & Independent 501(c)(3) non-profit, United States \\
+2022--present & The SpaceKind Foundation & Renamed to reflect expanded programs; Yuri's Night brand retained \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Milestones}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Milestone} \\
+\midrule
+2001 & First global Yuri's Night — Los Angeles anchor event \\
+2004 & LA event attended by Ray Bradbury, Dennis Tito, Peter Diamandis, Lance Bass, Nichelle Nichols (Wikipedia) \\
+2007 & NASA Ames Research Center hosts Bay Area event \\
+2011 & 50th anniversary: 100,000+ attendees, 567 events, 75 countries, 7 continents; ISS crew greeting; 12-hr global webcast; UN declares April 12 IDHSF \\
+2021 & Virtual event only due to COVID-19 pandemic \\
+2022 & Space Foundation renames its event amid Ukraine war; SpaceKind Foundation issues solidarity statement \\
+2024 & 320+ events in 50 countries across 7 continents \\
+2025 & California Science Center (LA) hosts week-early April 5 event; Puerto Rico Space Foundation hosts April 12 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{2022 Ukraine War Navigation}
+
+During the Russian invasion of Ukraine, the Space Foundation announced it would rename its 2022 celebration from ``Yuri's Night'' to ``A Celebration of Space: Discover What's Next'' as part of a broader boycott of Russia. SpaceKind Foundation / Yuri's Night issued a statement condemning the invasion while maintaining that Gagarin's flight was carried out in the name of the entire Soviet Union (which included both Russia and Ukraine as Soviet Republics), and that ``this war was chosen by the leader of Russia, and many brave Russian citizens are protesting against the war every day, often at grave personal risk'' (yurisnight.net/peace). The organization continued the Yuri's Night name and framing.
+
+\subsection{Module 04 — Global Events, STEM Outreach, and Cultural Programming}
+
+\subsubsection{Event Diversity}
+
+Per yurisnight.net and Wikipedia, Yuri's Night events take place at NASA centers, museums, planetariums, schools, bars, nightclubs, houses, and other locations. Formats include: parties, science events, astronomy gatherings, festivals, jams, hackathons, raves, cosplay gatherings, comic-cons, movie marathons, and gaming tournaments (Loretta Whitesides biography). Headlining musical acts have included Les Claypool, N*E*R*D, Common, NASA (the band), and The Crystal Method (Wikipedia). Notable venue locations include: Reno, Ottawa, Los Angeles, San Francisco Bay Area, Huntsville (AL), New Orleans, Inverness, Stockholm, Tel Aviv, Tokyo, Lisbon, Helsinki, Afghanistan, Nairobi, Latvia, Romania, Peru, Antarctica, and the International Space Station (Wikipedia).
+
+\subsubsection{Signature Programs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Program} & \tableheader{Description (Source)} \\
+\midrule
+AstroAccess & Fiscal management of project with SciAccess; launches groups of disabled scientists, veterans, athletes, students, and artists on parabolic flights as a step toward space access for diverse populations (yurisnight.net) \\
+Cosmic Odyssey Scholarship & Sends pediatric cancer survivors and their families to Space Camp (yurisnight.net) \\
+Spirit of Yuri's Night Award & Recognizes people/teams using music and art to make space inspiring (yurisnight.net) \\
+Moon Trees & Planted hundreds of moon trees globally in collaboration with American Forests (yurisnight.net/about-us) \\
+Space Leader Training & Next-generation leader training for National Space Society, Virgin Galactic, Space Florida (yurisnight.net) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Notable Speakers and Participants}
+
+Per yurisnight.net/about-us, speakers and participants since 2001 have included: Sir Richard Branson, Ray Bradbury, Will Wright, George Takei, Richard Garriott, Anousheh Ansari, Nichelle Nichols, and Peter Diamandis, among many others from aerospace, art, science, and music. The organization received the ``Best Presentation of Space'' award from the Space Frontier Foundation.
+
+\subsection{Module 05 — UN Recognition and Policy Context}
+
+\subsubsection{UN General Assembly Resolution A/RES/65/271}
+
+On April 7, 2011 — five days before the 50th anniversary of Gagarin's flight — the UN General Assembly unanimously adopted Resolution A/RES/65/271, declaring April 12 the \textbf{International Day of Human Space Flight} (UNOOSA). The resolution's stated purpose: ``to celebrate each year at the international level the beginning of the space era for mankind, reaffirming the important contribution of space science and technology in achieving sustainable development goals and increasing the well-being of States and peoples, as well as ensuring the realization of their aspiration to maintain outer space for peaceful purposes'' (UN.org). The resolution was introduced by the Russian Federation's representative, Vitaly I. Churkin.
+
+\subsubsection{Policy Architecture}
+
+The IDHSF is grounded in the broader UN framework for peaceful space exploration:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Outer Space Treaty (1967):} Foundation for space as ``province of all mankind,'' prohibiting weapons of mass destruction in orbit or on celestial bodies
+  \item \textbf{UNOOSA:} UN Office for Outer Space Affairs — administers IDHSF, promotes equitable space access for developing nations
+  \item \textbf{SDG linkages:} Space science contributes to SDG 3 (Health), SDG 4 (Education), SDG 6 (Clean Water), SDG 13 (Climate Action) via satellite technology (sdgresources.relx.com)
+\end{itemize}
+
+\subsubsection{Cosmonautics Day (Russia)}
+
+In the Soviet Union, April 12 was observed as Cosmonautics Day beginning 1963 — two years after Gagarin's flight. This observance continues in Russia and some former Soviet states. The UN's IDHSF declaration in 2011 brought the date into global formal recognition, aligning the US-originated Yuri's Night with the UN system and the Russian national holiday simultaneously (Wikipedia, IDHSF).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Sensitivity Area} & \tableheader{Guidance} & \tableheader{Type} \\
+\midrule
+Russia/Ukraine framing & Distinguish between Gagarin as human symbol vs. Russia as geopolitical actor; follow SpaceKind Foundation's own framing & GATE \\
+Soviet vs. Russian attribution & Vostok 1 was a Soviet mission; the USSR included Russia, Ukraine, and 13 other republics — attribution must be accurate & ABSOLUTE \\
+Cold War framing & Present Space Race as context without valorizing either side's militaristic motivations & ANNOTATE \\
+STS-1 date coincidence & Always make explicit that April 12, 1981 was a technical coincidence, not a planned tribute & ABSOLUTE \\
+Organizational claims & Verify program status (AstroAccess, scholarships) against current yurisnight.net; some programs may evolve & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[leftmargin=*]
+  \item NASA NSSDCA — Vostok 1 spacecraft record (nssdc.gsfc.nasa.gov)
+  \item NASA — STS-1 mission page (nasa.gov/mission/sts-1)
+  \item NASA — April 1961 First Human in Space (nasa.gov)
+  \item NASA Kennedy Space Center — April 12, 1981 launch article
+  \item UNOOSA — International Day of Human Space Flight (unoosa.org)
+  \item United Nations — Resolution A/RES/65/271, IDHSF (un.org)
+  \item Smithsonian National Air and Space Museum — STS-1 40th anniversary (airandspace.si.edu)
+\end{itemize}
+
+\subsubsection{Professional Organizations and Academic Sources}
+\begin{itemize}[leftmargin=*]
+  \item The Planetary Society — Vostok 1 mission history (planetary.org)
+  \item SpaceKind Foundation / Yuri's Night — About Us, History, Peace statement (yurisnight.net)
+  \item Fédération Aéronautique Internationale — Gagarin world records (via Wikipedia, NSSDCA)
+  \item Space Age Chronicle — Technical launch details (spaceagechronicle.com)
+  \item This Day in Aviation — Launch parameters, timeline (thisdayinaviation.com)
+\end{itemize}
+
+\subsubsection{Secondary Sources (Cross-Referenced)}
+\begin{itemize}[leftmargin=*]
+  \item Wikipedia — Vostok 1, STS-1, Yuri Gagarin, Space Shuttle Columbia, Yuri's Night, IDHSF
+  \item HISTORY.com — April 12, 1961 first man in space
+  \item NASASpaceFlight.com — 50 years human spaceflight / 30 years shuttle (2011)
+  \item SDG Resources (RELX) — IDHSF 2026 and SDG linkages
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Yuri's Night (The World Space Party) covering five modules: the Vostok 1 mission, STS-1, the organization's founding and history, global event and outreach programming, and UN/policy context. The document will be suitable for use as seeding material for the College of Knowledge and as a cultural context reference for GSD ecosystem operations touching space, infrastructure, or cooperative network design.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+WAVE 0: Foundation (Sequential — Haiku)
+  ├── Shared source index
+  ├── Document schema
+  └── Sensitivity checklist
+
+        ↓
+WAVE 1A (Parallel — Sonnet)       WAVE 1B (Parallel — Sonnet/Opus)
+  Module 01: Vostok 1               Module 03: Org History
+  Module 02: STS-1                  Module 05: UN/Policy
+
+        ↓
+WAVE 1C (Parallel — Sonnet)
+  Module 04: Global Events & Outreach
+
+        ↓
+[HITL CAPCOM GATE: Scope + Sensitivity Review]
+
+        ↓
+WAVE 2: Synthesis (Sequential — Opus)
+  ├── Cross-module integration
+  ├── Amiga Principle through-line
+  └── Legacy and future directions section
+
+        ↓
+WAVE 3: Publication (Sequential — Sonnet)
+  ├── Final document assembly
+  ├── Source verification pass
+  └── PDF compilation (XeLaTeX)
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer (Wave 0):} Source index, shared schemas, sensitivity checklist — consumed by all subsequent waves
+  \item \textbf{Survey Layer (Wave 1):} Five module surveys executing in parallel tracks — each self-contained, each contributing to synthesis
+  \item \textbf{Synthesis Layer (Wave 2):} Cross-module integration, through-line construction, legacy framing — requires all Wave 1 outputs
+  \item \textbf{Publication Layer (Wave 3):} Assembly, verification, LaTeX compilation — the visible deliverable
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Vostok 1 Module & All 11 technical parameters sourced; Cold War context documented & SC-01 \\
+2 & STS-1 Module & All 9 technical parameters sourced; coincidence story explicit & SC-02 \\
+3 & Org History Module & Full founding narrative; 4-stage org lineage; 2022 crisis documented & SC-03, SC-04, SC-09 \\
+4 & Events \& Outreach Module & 5 signature programs documented; geographic range confirmed & SC-08 \\
+5 & UN/Policy Module & Resolution text cited; SDG linkages listed; Outer Space Treaty referenced & SC-07 \\
+6 & Synthesis Section & Amiga Principle through-line; Gagarin quote connection; legacy framing & SC-10, SC-11, SC-12 \\
+7 & Final PDF & XeLaTeX, 3-pass compile; TOC; headers/footers; full bibliography & All SC \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Source Index & None & Haiku & 2k \\
+W0: Schema + Checklist & None & Haiku & 1k \\
+W1A: Vostok 1 Survey & Source Index & Sonnet & 8k \\
+W1A: STS-1 Survey & Source Index & Sonnet & 6k \\
+W1B: Org History Survey & Source Index & Sonnet & 8k \\
+W1B: UN/Policy Survey & Source Index & Opus & 6k \\
+W1C: Events \& Outreach & Source Index & Sonnet & 8k \\
+W2: Synthesis & All W1 outputs & Opus & 12k \\
+W3: Assembly \& Verify & All W2 outputs & Sonnet & 6k \\
+W3: XeLaTeX Compilation & Assembly & Sonnet & 3k \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated}} & \textbf{\textasciitilde60k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task Type} & \tableheader{Model} & \tableheader{Rationale} & \tableheader{Allocation} \\
+\midrule
+Synthesis, through-line, UN/policy nuance & Opus & Judgment-heavy; cultural/political sensitivity required & \textasciitilde30\% \\
+Survey compilation, table assembly, document production & Sonnet & Structured content generation; high throughput needed & \textasciitilde60\% \\
+Schema, index, scaffolding & Haiku & Simple structured output; no judgment required & \textasciitilde10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Auto-proceed \\
+1A & Vostok 1, STS-1 & Parallel & Sonnet & Proceed to 1B/1C \\
+1B & Org History, UN/Policy & Parallel & Sonnet/Opus & Proceed to 1C \\
+1C & Events \& Outreach & Parallel & Sonnet & HITL CAPCOM \\
+2 & Synthesis & Sequential & Opus & Auto-proceed \\
+3 & Publication & Sequential & Sonnet & Human review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Source index compilation & Structured list of all 14 primary/secondary sources with URLs & Paula (Haiku) \\
+Document schema definition & JSON schema for module output structure & Paula (Haiku) \\
+Sensitivity checklist & 5-item sensitivity flag list from Stage 2 & Paula (Haiku) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A (Simultaneous execution):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Primary Research Task} & \tableheader{Agent} \\
+\midrule
+01 -- Vostok 1 & Mission parameters table; spacecraft description; Space Race context; Gagarin biography highlights; post-flight global impact & EXEC-1 (Sonnet) \\
+02 -- STS-1 & Mission parameters table; coincidence story; reusability significance; Columbia history; Young/Crippen profiles & EXEC-2 (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Simultaneous execution):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Primary Research Task} & \tableheader{Agent} \\
+\midrule
+03 -- Org History & Founding narrative; org lineage table; milestone timeline; Ukraine response; SpaceKind rebranding & CRAFT-HIST (Sonnet) \\
+05 -- UN/Policy & Resolution A/RES/65/271 full text; UNOOSA programs; SDG connections; Outer Space Treaty linkage; Cosmonautics Day comparison & CRAFT-POLICY (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (After 1A complete):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Primary Research Task} & \tableheader{Agent} \\
+\midrule
+04 -- Events \& Outreach & Event diversity survey; signature programs table; geographic range; notable speakers; cultural programming highlights & EXEC-3 (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{HITL CAPCOM Gate (Between Wave 1 and Wave 2)}
+
+Required human review points before proceeding to synthesis:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Scope confirmation:} Are all 5 modules complete and self-contained?
+  \item \textbf{Sensitivity review:} Has the Russia/Ukraine framing been handled per guidance? Is the STS-1 coincidence clearly stated?
+  \item \textbf{Attribution check:} Are Vostok 1 parameters attributed to NASA/NSSDCA? Is the org lineage accurate?
+  \item \textbf{Go/No-Go:} Human approves Wave 2 synthesis proceeding
+\end{itemize}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Cross-module integration & Connections between Vostok 1 Cold War context → Yuri's Night diplomatic softening & Agnus (Opus) \\
+Amiga Principle through-line & Explicit mapping of distributed volunteer network to GSD architectural philosophy & Agnus (Opus) \\
+Legacy and future section & Significance of April 12 as secular space feast day; future of celebration in commercial era & Agnus (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Document assembly & Full unified document integrating all modules and synthesis & Denise (Sonnet) \\
+Source verification & All numerical claims cross-checked against source index & VERIFY (Sonnet) \\
+XeLaTeX compilation & 3-pass compile; TOC resolution; lastpage counter & Denise (Sonnet) \\
+Index page & index.html with download links & Denise (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item The Stage 2 Research Reference (this document) serves as the shared cache for all Wave 1 agents — no redundant web searches needed
+  \item Source index (Wave 0 output) is prepended to all Wave 1 agent contexts within 5-minute cache TTL
+  \item Sensitivity checklist is shared across all wave contexts as a compact constant
+  \item Wave 1A and 1B execute simultaneously — cache the foundation layer once, consumed by both tracks
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Est. Input} & \tableheader{Est. Output} & \tableheader{Notes} \\
+\midrule
+Wave 0 (Foundation) & 2k & 3k & Minimal; scaffolding only \\
+Wave 1A (Vostok, STS-1) & 15k & 14k & Research Reference as context \\
+Wave 1B (Org, Policy) & 15k & 14k & Research Reference as context \\
+Wave 1C (Events) & 10k & 8k & Smaller module \\
+Wave 2 (Synthesis) & 55k & 12k & All W1 outputs in context \\
+Wave 3 (Publication) & 60k & 8k & Full document assembly \\
+\midrule
+\textbf{Total} & \textbf{\textasciitilde157k} & \textbf{\textasciitilde59k} & \textbf{4--6 context windows} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+[W0: SOURCE INDEX] ─────────────────────────────────┐
+[W0: SCHEMA]        ────────────────────────────┐   │
+[W0: CHECKLIST]     ──────────────┐             │   │
+                                  │             │   │
+                    ┌─────────────▼──┐   ┌──────▼───▼──┐
+                    │ W1A: M01+M02   │   │ W1B: M03+M05 │
+                    │ (parallel)     │   │ (parallel)   │
+                    └───────┬────────┘   └──────┬───────┘
+                            │                   │
+                            └─────────┬─────────┘
+                                      │
+                            ┌─────────▼────────┐
+                            │ W1C: M04 Events  │
+                            └─────────┬────────┘
+                                      │
+                          [HITL CAPCOM GATE]
+                                      │
+                            ┌─────────▼────────┐
+                            │  W2: SYNTHESIS   │
+                            └─────────┬────────┘
+                                      │
+                            ┌─────────▼────────┐
+                            │  W3: PUBLICATION │
+                            └──────────────────┘
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Priority} & \tableheader{Count} \\
+\midrule
+Safety-critical & Non-negotiable source and attribution boundaries & Mandatory / BLOCK & 5 \\
+Core functionality & Deliverable acceptance per success criteria & Required / BLOCK & 18 \\
+Integration & Cross-module consistency and completeness & Required / BLOCK & 6 \\
+Edge cases & Robustness and temporal currency & Best-effort / LOG & 4 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total}} & \textbf{33} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to NASA, UNOOSA, UN.org, Smithsonian, Planetary Society, or SpaceKind Foundation. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every orbital parameter, attendance figure, country count, and event count attributed to a specific named source \\
+SC-ADV & No policy advocacy & Document presents evidence about space exploration and Yuri's Night without advocating for specific legislative positions on commercial space or arms control \\
+SC-SOV & Soviet attribution accuracy & Vostok 1 attributed to the Soviet Union, not Russia alone; acknowledgment that USSR included both Russia and Ukraine \\
+SC-COIN & Coincidence disclosure & STS-1's April 12 date explicitly documented as a computer-delay coincidence, not a planned tribute; sourced to NASA or Wikipedia STS-1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Vostok 1 parameters complete & All 11 rows of the mission table populated with sourced data \\
+CF-02 & STS-1 parameters complete & All 9 rows of the mission table populated with sourced data \\
+CF-03 & Three founders named & Loretta Hidalgo Whitesides, George T. Whitesides, Trish Garner all present with UNISPACE III context \\
+CF-04 & Org lineage documented & All 4 org stages present with date ranges \\
+CF-05 & 2011 milestone quantified & 100,000 attendees, 567 events, 75 countries, 7 continents all present \\
+CF-06 & UN resolution cited & A/RES/65/271 cited with date (April 7, 2011) and purpose language \\
+CF-07 & 5 programs documented & AstroAccess, Cosmic Odyssey, Spirit Award, Moon Trees, Space Leader Training all present \\
+CF-08 & 2022 Ukraine response & Space Foundation renaming and SpaceKind statement both documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-01: Vostok 1 parameters & CF-01, SC-NUM & Pending \\
+SC-02: STS-1 + coincidence & CF-02, SC-COIN & Pending \\
+SC-03: Founding narrative & CF-03 & Pending \\
+SC-04: Org lineage & CF-04 & Pending \\
+SC-05: 2011 milestone & CF-05 & Pending \\
+SC-06: 2024 statistics & CF-05 (variant) & Pending \\
+SC-07: UN resolution & CF-06 & Pending \\
+SC-08: 5 programs & CF-07 & Pending \\
+SC-09: 2022 response & CF-08, SC-SOV & Pending \\
+SC-10: Gagarin quote connection & Integration test IN-03 & Pending \\
+SC-11: STEM outreach connection & Integration test IN-02 & Pending \\
+SC-12: Amiga Principle through-line & Integration test IN-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; scope authority \\
+PLAN & Planner & Wave decomposition; parallel track scheduling; dependency management \\
+SCOUT & Research Agent & Source validation; gap-fill web research if Stage 2 has holes \\
+EXEC-1 & Vostok/STS Executor & Module 01 + 02 document production \\
+EXEC-2 & Events Executor & Module 04 document production \\
+CRAFT-HIST & History Specialist & Module 03 organizational history analysis \\
+CRAFT-POLICY & Policy Specialist & Module 05 UN/policy analysis (Opus) \\
+VERIFY & Verification Agent & Source validation; numerical accuracy; sensitivity compliance \\
+INTEG & Integration Agent & Cross-module consistency; through-line coherence check \\
+CAPCOM & HITL Interface & Human approval at Wave 1/2 boundary; only channel to user \\
+BUDGET & Resource Manager & Token budget tracking across sessions \\
+LOG & Chronicle Agent & Commit messages; session handoff notes; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & Yuri's Night: The World Space Party \\
+Activation profile & Squadron (12 roles) \\
+Research modules & 5 (Vostok 1, STS-1, Org History, Events/Outreach, UN/Policy) \\
+Wave structure & 0 + 1 (3 tracks) + HITL gate + 2 + 3 \\
+Model allocation & \textasciitilde30\% Opus / \textasciitilde60\% Sonnet / \textasciitilde10\% Haiku \\
+Estimated token budget & \textasciitilde216k total (input + output) \\
+Estimated context windows & 4--6 across 2--3 sessions \\
+HITL gates & 1 mandatory (post-Wave 1 sensitivity review) \\
+Success criteria & 12 (all testable and observable) \\
+Safety-critical tests & 5 (all mandatory-pass / BLOCK) \\
+Total tests & 33 \\
+Primary deliverable & Publication-quality research PDF \\
+Secondary use & College of Knowledge seed content; GSD cultural reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Circling the earth in my orbital spaceship I marveled at the beauty of our planet. People of the world, let us safeguard and enhance this beauty — not destroy it.''}
+
+\vspace{0.5em}
+\hfill — Yuri Gagarin, April 1961
+
+\vspace{1em}
+Every year on April 12, the World Space Party is the planet's answer to that call. The Amiga Principle tells us that remarkable results emerge from elegant, distributed architecture — not from monopolized resources. Yuri's Night is that principle at civilization scale: a small foundation, an open invitation, a single date, and the networked creativity of thousands of volunteers producing an event felt across 75 countries and seven continents. The spaces between local parties are where the global community actually lives.
+\end{quotebox}
+
+\end{document}

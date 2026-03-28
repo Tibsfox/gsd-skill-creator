@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuri's Night — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cosmic: #311B92;
+    --nebula: #0277BD;
+    --gold: #F57F17;
+    --lightpurple: #EDE7F6;
+    --lightblue: #E1F5FE;
+    --white: #FAFAFA;
+    --dark: #1A1A2E;
+    --text: #212121;
+    --muted: #757575;
+    --border: #BDBDBD;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* STARFIELD */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 65%, rgba(255,255,255,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--cosmic) 0%, #1A0A5E 60%, #0277BD 100%);
+    padding: 60px 24px 50px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '✦';
+    position: absolute;
+    top: 20px; right: 40px;
+    font-size: 32px;
+    opacity: 0.25;
+    color: var(--gold);
+  }
+
+  .mission-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  header h1 span {
+    color: var(--gold);
+  }
+
+  .header-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+
+  .pipeline-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 1px;
+  }
+
+  .pipeline-tag span {
+    color: var(--gold);
+  }
+
+  /* META BAR */
+  .meta-bar {
+    background: rgba(49, 27, 146, 0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 18px 28px;
+    margin: 32px 0 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #E8E8FF;
+  }
+
+  /* SECTION LABELS */
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nebula);
+    font-weight: 600;
+    margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* FILE CARDS */
+  .files-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .files-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 30px; }
+    .meta-bar { flex-direction: column; }
+  }
+
+  .file-card {
+    background: rgba(49, 27, 146, 0.35);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 24px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .file-card:hover {
+    background: rgba(49, 27, 146, 0.6);
+    border-color: var(--nebula);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(2, 119, 189, 0.2);
+  }
+
+  .file-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .file-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
+  }
+
+  .file-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+
+  .file-badge {
+    display: inline-block;
+    background: var(--cosmic);
+    border: 1px solid var(--nebula);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--nebula);
+    font-weight: 500;
+    margin-top: 6px;
+    align-self: flex-start;
+  }
+
+  /* CONTENTS */
+  .stages-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .stages-grid { grid-template-columns: 1fr; }
+  }
+
+  .stage-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 18px 16px;
+  }
+
+  .stage-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .stage-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+  }
+
+  .stage-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .stage-items li {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .stage-items li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--nebula);
+  }
+
+  /* USAGE STEPS */
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    background: var(--cosmic);
+    border: 1px solid var(--nebula);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--nebula);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+  }
+
+  .step-text code {
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 12px;
+    color: #B3E5FC;
+  }
+
+  /* QUOTE */
+  .closing-quote {
+    background: linear-gradient(135deg, rgba(49,27,146,0.4), rgba(2,119,189,0.2));
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-top: 48px;
+  }
+
+  .quote-text {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .quote-attribution {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px 24px 0;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="mission-badge">GSD Research Mission Package</div>
+    <h1>Yuri's Night<br><span>The World Space Party</span></h1>
+    <div class="header-sub">April 12 · Global Celebration · Human Spaceflight</div>
+    <div class="pipeline-tag">Vision <span>→</span> Research <span>→</span> Mission</div>
+
+    <div class="meta-bar">
+      <div class="meta-item">
+        <span class="meta-label">Date</span>
+        <span class="meta-value">March 27, 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Profile</span>
+        <span class="meta-value">Squadron · 12 Roles</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Modules</span>
+        <span class="meta-value">5 Research Modules</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Pages</span>
+        <span class="meta-value">26 · Full Pipeline</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Status</span>
+        <span class="meta-value">Ready for GSD Orchestrator</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="section-title">Files</div>
+  <div class="files-grid">
+    <a href="yurisnight_mission.pdf" download class="file-card">
+      <div class="file-icon">📄</div>
+      <div class="file-name">yurisnight_mission.pdf</div>
+      <div class="file-desc">Full 26-page mission package — Vision, Research Reference, and Mission Package in one document.</div>
+      <span class="file-badge">Primary Deliverable</span>
+    </a>
+    <a href="yurisnight_mission.tex" download class="file-card">
+      <div class="file-icon">📝</div>
+      <div class="file-name">yurisnight_mission.tex</div>
+      <div class="file-desc">XeLaTeX source file. Modify sections and recompile to customize the mission package.</div>
+      <span class="file-badge">LaTeX Source</span>
+    </a>
+  </div>
+
+  <div class="section-title">Contents</div>
+  <div class="stages-grid">
+    <div class="stage-card">
+      <div class="stage-label">Stage 1</div>
+      <div class="stage-name">Vision Guide</div>
+      <ul class="stage-items">
+        <li>Narrative vision — Amiga Principle through-line</li>
+        <li>5 problem statements</li>
+        <li>Dual anniversary architecture diagram</li>
+        <li>5 research module descriptions</li>
+        <li>Chipset YAML (Opus/Sonnet/Haiku)</li>
+        <li>Scope boundaries</li>
+        <li>12 testable success criteria</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <div class="stage-label">Stage 2</div>
+      <div class="stage-name">Research Reference</div>
+      <ul class="stage-items">
+        <li>Vostok 1 mission parameters (NASA/NSSDCA)</li>
+        <li>STS-1 parameters + coincidence story</li>
+        <li>Yuri's Night founding &amp; org lineage</li>
+        <li>Global events + 5 signature programs</li>
+        <li>UN Resolution A/RES/65/271</li>
+        <li>Sensitivity table</li>
+        <li>14-source bibliography</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <div class="stage-label">Stage 3</div>
+      <div class="stage-name">Mission Package</div>
+      <ul class="stage-items">
+        <li>Milestone spec + deliverables table</li>
+        <li>Wave execution plan (0 → 1A/B/C → 2 → 3)</li>
+        <li>Component breakdown with model assignments</li>
+        <li>HITL CAPCOM gate specification</li>
+        <li>33-test test plan + verification matrix</li>
+        <li>12-role Squadron crew manifest</li>
+        <li>Token budget: ~216k</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">How to Use</div>
+  <div class="steps-list">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Download the PDF and review Stages 1 and 2 to confirm research scope and module boundaries are correct.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Open a Claude Code session (or gsd-skill-creator session) and paste the Stage 3 milestone spec as your execution brief.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Launch Wave 0 first: <code>haiku</code> agent builds the source index, schema, and sensitivity checklist from Stage 2.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Execute Wave 1 tracks A and B in parallel. Track C (Events) follows after A completes. Each agent receives the Stage 2 Research Reference as context.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-text">At the CAPCOM gate, perform the 4-point human review (scope, sensitivity, attribution, go/no-go) before releasing Wave 2.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-text">Wave 2 (Opus synthesis) builds the through-line. Wave 3 assembles and compiles the final document with <code>xelatex</code> (3 passes).</div>
+    </div>
+  </div>
+
+  <div class="section-title">Recompile LaTeX</div>
+  <div class="steps-list">
+    <div class="step">
+      <div class="step-num">→</div>
+      <div class="step-text">
+        Edit <code>yurisnight_mission.tex</code> then compile with:<br>
+        <code>xelatex -interaction=nonstopmode yurisnight_mission.tex</code><br>
+        Run three passes to resolve the TOC, cross-references, and page count.
+      </div>
+    </div>
+  </div>
+
+  <div class="closing-quote">
+    <div class="quote-text">"Circling the earth in my orbital spaceship I marveled at the beauty of our planet. People of the world, let us safeguard and enhance this beauty — not destroy it."</div>
+    <div class="quote-attribution">— Yuri Gagarin, April 1961 · The foundational call that Yuri's Night answers every April 12</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Mission Package · Yuri's Night: The World Space Party · March 27, 2026
+</footer>
+
+</body>
+</html>
