@@ -1,0 +1,1077 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ─── COLOR SCHEME: Cedar / River / Ember ───────────────────────────────────
+\definecolor{primary}{HTML}{3E2723}       % Cedar bark — Section headers
+\definecolor{secondary}{HTML}{1565C0}     % Columbia River blue — Subsections
+\definecolor{tertiary}{HTML}{BF360C}      % Salmon ember — Subsubsections
+\definecolor{accent}{HTML}{6D4C41}        % Copper — highlights
+\definecolor{lightprimary}{HTML}{EFEBE9}  % Pale cedar — quote boxes
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% ─── SECTION FORMATTING ────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ─── CUSTOM ENVIRONMENTS ───────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% ─── TABLE HELPERS ─────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ─── HEADERS / FOOTERS ─────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Indigenous Broadcasting — Pacific Northwest}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ─── HYPERLINKS ─────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Indigenous Broadcasting PNW -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+%% ─── TITLE PAGE ─────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Sovereign Signals\\[0.3em]Indigenous Broadcasting\\[0.3em]of the Pacific Northwest}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{KWSO, KYNR, Daybreak Star, and the Tribal Airwaves\\
+of Washington, Oregon, and Idaho}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 8--10 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+%% ─── TABLE OF CONTENTS ──────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ════════════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION
+%% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Indigenous Broadcasting PNW --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Vision Complete / Research Complete / Ready for Execution}
+\metafield{Depends On:}{gsd-bbs-educational-pack-vision.md, gsd-foxfire-heritage-skills-vision.md}
+\metafield{Context:}{This module complements the GSD BBS Educational Pack and Foxfire Heritage Skills by grounding\\ media literacy in living, sovereign Indigenous communication infrastructure.}
+
+\subsection{Vision}
+
+There are signals moving through the air over the PNW right now that most people never hear. They carry birthday greetings and wildfire alerts, powwow schedules and obituaries, Ichishkíin phrases and salmon-run news. These are tribal radio signals — sovereign frequencies operating outside the mainstream media ecosystem, built by and for nations whose right to communicate in their own voice predates every FCC license by ten thousand years.
+
+KWSO 91.9 FM in Warm Springs, Oregon, has been broadcasting since September 1986. It serves three distinct nations — the Warm Springs, Wasco, and Paiute peoples — from a transmitter atop Eagle Butte, reaching 50,000 people across Jefferson County and into the surrounding region. It is operated by the Confederated Tribes of Warm Springs as a department of their Health and Human Services branch. It broadcasts emergency alerts for wildfire and snowstorms. It runs an on-air job board. If a community member has a question they cannot find the answer to, they call KWSO, because they trust the answer they will get there. It also publishes, in the same eco-friendly solar-powered media center, the \textit{Spilyay Tymoo}, the Tribes' community newspaper. Three distinct cultures. Three distinct languages. One signal.
+
+KYNR 1490 AM is the Voice of the Yakama Nation in Toppenish, Washington. It went on air in November 2000, and in October 2018 it was robbed. Burglars stripped the control board, the microphones, the broadcast equipment. Morning host Roy Dick walked in and found the studio ransacked. ``I was about ready to cry,'' he said. ``There was nothing we could work with to even tell everybody we're off the air.'' The Yakama Tribal Council allocated \$34,000 to revamp the station. Staff asked that when it came back on air, tribal leaders come bless the building. ``Because we have to heal.'' Almost a year after the theft, KYNR was broadcasting again. That episode captures everything about what these stations are: they are not just infrastructure; they are living cultural organs, and their loss is experienced as physical harm.
+
+This research mission documents the tribal broadcasting ecosystem of the Pacific Northwest --- its stations, its languages, its funding structures, its sovereignty architecture, and the crisis it currently faces. The GSD ecosystem exists to give people their lives back; Indigenous radio stations exist for exactly the same reason, for the nations they serve. Understanding them is not peripheral to the GSD mission. It \textit{is} the GSD mission, expressed through a different frequency.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Underrepresentation in media studies:} Tribal radio stations in the PNW operate as genuine sovereign media institutions, yet receive almost no coverage in journalism curricula, media literacy programs, or educational technology frameworks. Students studying broadcasting are rarely introduced to KWSO or KYNR as models of community-owned, public-interest media.
+  \item \textbf{Funding crisis and CPB dependence:} The 2025 Congressional rescission of Corporation for Public Broadcasting funding threatens to eliminate up to 40\% of KWSO's operating budget and destabilize the entire Native Public Media network (57 tribal radio stations across 20 states). These stations lack development staff to pursue complex alternative funding, making them structurally vulnerable.
+  \item \textbf{Digital divide and infrastructure gaps:} Many tribal radio stations serve communities with unreliable broadband and cell coverage. Radio remains the dominant and often \textit{only} reliable communication channel — including for Emergency Alert System broadcasts, Missing Endangered Persons Alerts, and wildfire notifications. The transition to digital-first media threatens to bypass these communities entirely.
+  \item \textbf{Language documentation and revitalization capacity:} Stations like KWSO serve communities with three distinct living languages. On-air language programming is among the most scalable revitalization tools available, yet stations operate with minimal staff (KWSO has six total employees, two CPB-funded) and lack resources for systematic archiving and curriculum integration.
+  \item \textbf{Sovereignty in the licensing framework:} Tribal stations face a structural paradox: some are licensed to the tribe directly, others to nonprofits, creating unequal access to funding programs nominally designed to help them. The FCC licensing framework was not designed with tribal sovereignty in mind, and navigating it requires legal and administrative capacity that small stations rarely possess.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Sovereign Signal Architecture:} Tribal radio stations are not ``community radio'' in the generic sense. They are sovereign media infrastructure — communication organs of federally recognized nations, operating under treaty rights and tribal constitutions. Understanding them requires mapping both their technical architecture (transmitter, wattage, reach, format) and their governance architecture (tribal council as board of directors, HHS branch integration, sovereign licensing).
+
+\subsubsection{Study Region Map}
+
+\begin{asciibox}
+Pacific Northwest Indigenous Broadcasting Region
+================================================
+
+  WASHINGTON                         OREGON
+  ──────────                         ──────
+  Toppenish (KYNR 1490 AM)           Warm Springs (KWSO 91.9 FM)
+  Yakama Nation                      Confederated Tribes of Warm Springs
+  1,000 watts / Toppenish            4,300 watts / Eagle Butte transmitter
+  est. November 2000                 est. September 1986
+  │                                  │
+  ▼                                  ▼
+  Voice of the Yakama Nation         Warm Springs Radio
+  National Native News               Local news + Emergency Alert System
+  Native America Calling             Spilyay Tymoo (newspaper)
+  Powwow + sports + birthday         Cultural programming in 3 languages
+  announcements                      │
+                                     ▼
+  SEATTLE (online)            Warm Springs Media Center
+  ──────────────────          (solar-powered, 11.4 kW array)
+  Daybreak Star Radio
+  United Indians of All
+  Tribes Foundation
+  Discovery Park Cultural Center
+  90%+ Indigenous artists
+  International reach / streaming
+
+  NATIONAL NETWORK LAYER
+  ──────────────────────
+  Native Voice One (NV1) / Koahnic Broadcast Corporation (KBC)
+  National Native News → 400+ stations
+  Native America Calling → daily syndication
+  Native Public Media → 57 tribal radio + 3 TV stations / 20 states
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Research Module Architecture
+============================
+
+  M-1: Station Profiles        M-2: Language & Culture
+  ─────────────────────        ────────────────────────
+  KWSO / KYNR / Daybreak       Language programming
+  Station histories            Revitalization function
+  Wattage / reach / format     Archive and curriculum
+  Staff and governance         Nation-specific practices
+        │                             │
+        └──────────┬──────────────────┘
+                   │
+            M-3: Infrastructure          M-4: Programming Ecosystem
+            & Funding Crisis             ──────────────────────────
+            ────────────────             NV1 / National Native News
+            CPB rescission               Native America Calling
+            EAS / emergency role         Nation-specific local content
+            Digital divide               Syndication architecture
+            Equipment vulnerability      Urban vs reservation models
+                   │                             │
+                   └──────────┬──────────────────┘
+                              │
+                     M-5: Sovereignty & Futures
+                     ───────────────────────────
+                     FCC licensing models
+                     Tribal council governance
+                     Digital expansion
+                     UNDRIP Article 31 framework
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Station Profiles}
+Documentary profiles of the primary tribal broadcasting institutions in Washington and Oregon, with extension into broader PNW context. Covers KWSO (Confederated Tribes of Warm Springs), KYNR (Confederated Tribes and Bands of the Yakama Nation), and Daybreak Star Radio (United Indians of All Tribes Foundation, Seattle). Includes technical specifications (frequency, wattage, transmitter location, reach), founding histories, current staff, governance structures, and relationship to tribal government branches.
+
+\subsubsection{Module 2: Language and Cultural Transmission}
+Survey of how tribal radio stations function as language revitalization and cultural transmission infrastructure. Documents the multilingual broadcasting context of KWSO (Warm Springs, Wasco, and Paiute languages), language programming strategies, oral tradition preservation, and the relationship between on-air cultural content and community identity. Examines archiving capacity and curriculum integration potential.
+
+\subsubsection{Module 3: Infrastructure, Funding, and Crisis}
+Analysis of the material and financial infrastructure supporting tribal broadcasting in the PNW, with particular attention to the 2025 Corporation for Public Broadcasting funding crisis. Documents CPB funding dependence (KWSO: potential 40\% budget loss), the Emergency Alert System function of tribal stations, digital infrastructure gaps on reservation lands, and equipment vulnerability (KYNR 2018 burglary as case study). Maps the structural challenges of alternative funding pathways.
+
+\subsubsection{Module 4: Programming Ecosystem and Networks}
+Documentation of the syndicated programming networks that supply tribal stations with national content. Covers Native Voice One (NV1), National Native News (distributed to 400+ stations via Koahnic Broadcast Corporation), Native America Calling (daily national call-in program), and the role of local station staff in producing nation-specific content. Contrasts the reservation-based model (KWSO, KYNR) with the urban online model (Daybreak Star Radio).
+
+\subsubsection{Module 5: Sovereignty, Governance, and Futures}
+Analysis of the legal and governance frameworks within which tribal stations operate. Covers the FCC licensing paradox (tribe-licensed vs. nonprofit-licensed stations and unequal funding access), the role of tribal councils as station boards, treaty-rights context for sovereign communication, UNDRIP Article 31 (cultural heritage and media rights), and emerging digital/streaming expansion strategies. Projects sustainability pathways and risks.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: indigenous-broadcasting-pnw
+  profile: squadron
+  model_allocation:
+    opus: 30%     # Sovereignty analysis, cultural sensitivity, synthesis
+    sonnet: 60%   # Station profiles, funding research, programming docs
+    haiku: 10%    # Shared schemas, station data tables, index structure
+  wave_count: 4
+  parallel_tracks: 2
+  modules: [station-profiles, language-culture, infrastructure-funding,
+            programming-ecosystem, sovereignty-futures]
+  sensitivity:
+    level: HIGH
+    flags:
+      - Indigenous cultural sovereignty (HIGH)
+      - Nation-specific language attribution (ABSOLUTE)
+      - Funding crisis / political sensitivity (MODERATE)
+      - Emergency infrastructure / public safety (HIGH)
+  safety_warden: ACTIVE
+  nation_specificity: REQUIRED
+  generic_indigenous_references: PROHIBITED
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item KWSO 91.9 FM — Confederated Tribes of Warm Springs (Warm Springs, Wasco, Paiute peoples)
+  \item KYNR 1490 AM — Confederated Tribes and Bands of the Yakama Nation
+  \item Daybreak Star Radio — United Indians of All Tribes Foundation (Seattle)
+  \item Native Voice One / National Native News / Native America Calling syndication network
+  \item Native Public Media network context (57 stations / 20 states, national frame)
+  \item CPB funding crisis (2025) and its specific impact on PNW tribal stations
+  \item FCC licensing framework and tribal sovereignty implications
+  \item Emergency Alert System function of tribal stations
+  \item Language revitalization programming (with nation-specific attribution)
+  \item Digital divide context on reservation lands
+  \item UNDRIP Article 31 framework for cultural media rights
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Tribal television stations (distinct infrastructure and regulatory regime)
+  \item Canadian First Nations broadcasting (CRTC framework, distinct governance)
+  \item Tribal newspapers and print media (separate research module warranted)
+  \item Alaska Native broadcasting (distinct geography and CPB funding structure)
+  \item Specific programming content analysis or editorial assessment
+  \item Policy advocacy or legislative recommendations
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All five primary research stations profiled with technical specifications, founding date, ownership, wattage, reach, and current governance structure, each attributed to the specific tribal nation (not generic).
+  \item KWSO history documented from September 1986 founding through the 2009 Warm Springs Media Center, with CPB funding structure and 2025 crisis impact quantified.
+  \item KYNR history documented from November 2000 founding through the 2018 burglary and recovery, with Yakama Tribal Council funding response documented.
+  \item Daybreak Star Radio documented as a distinct urban/online model, with its 90\%+ Indigenous music mandate, Lummi Nation and Cowlitz Tribe staff involvement, and pan-Indigenous programming philosophy characterized.
+  \item All three languages served by KWSO (Warm Springs, Wasco, Paiute) individually identified; language programming strategies documented with nation-specific attribution.
+  \item Native Voice One / Koahnic Broadcast Corporation syndication architecture documented, including National Native News (400+ station distribution) and Native America Calling.
+  \item CPB funding crisis documented with specific impact data: KWSO potential 40\% budget loss, staffing at risk (2 of 6 CPB-funded), Native Public Media network-wide scope (57 stations).
+  \item Emergency Alert System function of tribal stations documented, including KWSO's EAS role for the Warm Springs area and the Missing Endangered Persons Alert (FCC August 2024).
+  \item FCC licensing model paradox documented: tribe-licensed vs.\ nonprofit-licensed stations and differential access to funding programs.
+  \item UNDRIP Article 31 framework applied as analytical lens: the right to maintain, control, protect, and develop cultural heritage and traditional knowledge through media.
+  \item Digital divide context documented: broadband and cell coverage gaps on reservation lands as structural driver of radio's continued centrality.
+  \item Document self-contained and ready for handoff to gsd-skill-creator with zero additional context required.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Vision Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Integration Point} \\
+\midrule
+gsd-bbs-educational-pack-vision.md & Extends & BBS educational content should include tribal station case studies as examples of sovereign community media infrastructure \\
+gsd-foxfire-heritage-skills-vision.md & Parallels & Foxfire documents living traditional knowledge; tribal radio stations \textit{broadcast} living traditional knowledge in real time \\
+gsd-fair-use-educational-mission.md & Informs & Indigenous broadcasting raises distinct intellectual property considerations under tribal law and UNDRIP \\
+gsd-learn-kung-fu-pack-vision.md & Models & Station-as-school pattern: KWSO functions as a living learning institution for its community \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that remarkable outcomes emerge from architectural elegance and specialized execution paths, not raw power. KWSO runs on six staff members, 4,300 watts, and an 11.4-kilowatt solar array atop Eagle Butte. It is one of the only reliable communication channels for 50,000 people. It is embedded in the Health and Human Services branch of a sovereign government. It runs emergency alerts and language programming and job boards and obituaries. It is, in every sense that matters, an Amiga-class system: small, principled, deeply specialized, and producing outcomes far beyond what its resource profile suggests possible.
+
+The ``spaces between'' framework holds that meaning lives in connection rather than in the nodes themselves. Tribal radio stations are pure spaces-between infrastructure. They exist not as monuments to themselves but as the connective tissue of a living community --- the medium through which births and deaths, fires and floods, ceremonies and elections, are woven into a shared present. KYNR staff, when their station was robbed, described its absence as a physical wound. When it returned, they asked for a blessing. That is what the spaces between feel like when they go dark.
+
+This research mission gives the GSD ecosystem the vocabulary to understand and document sovereign signal architecture --- the distinct model of media infrastructure that tribal nations have built to give their own people their lives back, in their own voices, on their own frequencies.
+
+\newpage
+
+%% ════════════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Indigenous Broadcasting PNW --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings organized by research module. Each subsection is self-contained. Agents assigned to specific modules should read their section first and cross-reference the sovereignty module (Section 2.6) for applicable governance context.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{KWSO 91.9 FM} --- kwso.org (primary station documentation)
+  \item \textbf{Confederated Tribes of Warm Springs} --- wstribes.org
+  \item \textbf{Yakama Nation Multimedia Services} --- yakama.com/programs/multimedia/
+  \item \textbf{Native Public Media} --- nativepublicmedia.org (57 tribal stations, national advocacy)
+  \item \textbf{Native Voice One / Koahnic Broadcast Corporation} --- nv1.org
+  \item \textbf{Corporation for Public Broadcasting} --- cpb.org
+  \item \textbf{American Archive of Public Broadcasting} --- americanarchive.org
+  \item \textbf{Northwest Public Broadcasting (NWPB)} --- nwpb.org (coverage of KYNR)
+  \item \textbf{Oregon Public Broadcasting (OPB)} --- opb.org (KWSO crisis coverage)
+  \item \textbf{Nieman Journalism Lab} --- niemanlab.org (CPB crisis analysis)
+  \item \textbf{United Indians of All Tribes Foundation} --- unitedindians.org (Daybreak Star Radio)
+\end{itemize}
+
+\subsection{Module 1: Station Profiles}
+
+\subsubsection{KWSO 91.9 FM --- Confederated Tribes of Warm Springs}
+
+KWSO 91.9 FM (``Warm Springs Radio'') is a non-commercial community radio station owned and operated by the Confederated Tribes of Warm Springs (CTWS), a federally recognized sovereign nation located in central Oregon, 104 miles south of Portland and 60 miles north of Bend. The reservation encompasses 640,000 acres and is home to three distinct peoples: the Warm Springs, Wasco, and Paiute Tribes.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Call Letters & KWSO \\
+Frequency & 91.9 FM \\
+Station Name & Warm Springs Radio \\
+License Holder & Confederated Tribes of Warm Springs Reservation \\
+Founded & September 1986 \\
+Wattage & 4,300 watts \\
+Transmitter & Eagle Butte, Warm Springs Reservation \\
+Reach & 50,000+ listeners (all of Jefferson County; parts of Wasco, Crook, Deschutes Counties) \\
+Format & Hot Adult Contemporary + local news + cultural programming \\
+Governance & Department of Health \& Human Services, CTWS; Tribal Council as Board of Directors \\
+Media Center & Warm Springs Media Center (opened 2009; 11.4 kW solar array; also houses \textit{Spilyay Tymoo} newspaper) \\
+Staff & 6 total (2 positions CPB-funded) \\
+EAS Role & Emergency Alert System provider for Warm Springs area \\
+Website & kwso.org \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+KWSO was funded in part by the Meyer Memorial Trust and a Corporation for Public Broadcasting Community Service Grant. The 2009 Warm Springs Media Center is eco-friendly, featuring an 11.4-kilowatt solar panel array. The station's stated mission is to deliver local news, promote education and cultural knowledge, support language preservation, and increase awareness of social, health, and safety issues. It provides daily community calendar programming and functions informally as a trusted local information source --- community members call the station when they cannot find answers elsewhere. During wildfire season, KWSO provides extensive fire coverage, reflecting both safety imperatives and the community's substantial involvement in wildland firefighting work.
+
+\subsubsection{KYNR 1490 AM --- Confederated Tribes and Bands of the Yakama Nation}
+
+KYNR 1490 AM (``Voice of the Yakama Nation'') is a non-commercial radio station owned and operated by the Confederated Tribes and Bands of the Yakama Nation. It broadcasts from Toppenish, Washington, in south-central Washington state.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Call Letters & KYNR \\
+Frequency & 1490 AM \\
+Station Name & Voice of the Yakama Nation / Yakima Nation Radio \\
+License Holder & Confederated Tribes and Bands of the Yakama Nation \\
+Founded & November 2000 (purchased and went on air) \\
+Wattage & 1,000 watts \\
+Location & Toppenish, WA 98948 \\
+Format & Variety: National Native News, Native America Calling, tribal powwow, Native American artists, local sports, community events \\
+Governance & Yakama Nation Multimedia Services Program; Yakama Tribal Council \\
+Newspaper Partner & Yakama Nation Review (bi-weekly broadsheet, est. May 1970 by Tribal Council Resolution) \\
+Crisis Event & October 2018: burglary stripped control board and broadcast equipment; station off-air ~11 months \\
+Recovery Funding & \$34,000 allocated by Yakama Tribal Council \\
+Website & yakama.com/programs/multimedia/ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+KYNR was identified by Morning Host Roy Dick as one of only four tribal-operated radio stations in the Washington, Oregon, and Idaho corridor. The station holds what Dick described as one of the largest libraries of contemporary Native music in the Northwest. Commercial radio does not provide space for Native voices and musicians; KYNR staff describe filling that gap as a core mission. The 2018 theft was experienced as a community wound: station staff member Ronny Washines articulated the station as the vehicle through which the Yakama Nation can tell its own stories in its own language: ``We're dedicated to getting tribal news out from our perspective. We want to do some stories that tell us why, in our own words, our language is important. Because it was the creator's gift to us.''
+
+\subsubsection{Daybreak Star Radio --- United Indians of All Tribes Foundation, Seattle}
+
+Daybreak Star Radio is an online Indigenous radio station operated by the United Indians of All Tribes Foundation (UIATF) from the Daybreak Star Indian Cultural Center in Discovery Park, Seattle. It launched in summer 2021 and serves a pan-Indigenous urban and international audience.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Station Name & Daybreak Star Radio Network \\
+Operator & United Indians of All Tribes Foundation (UIATF) \\
+Location & Daybreak Star Indian Cultural Center, Discovery Park, Seattle, WA \\
+Founded & Summer 2021 \\
+Format & Online streaming; 90\%+ Indigenous artists (all Americas); all genres: traditional, powwow, hip-hop, R\&B, rock, metal, jazz \\
+Notable Staff & RONN!E (Cowlitz Tribe), production manager; DJ Big Rez (David Hillaire, Lummi Nation); Dominick Joseph (Tulalip Tribes), social media \\
+Mission & ``Indigenize the airwaves'' --- platform for Native artists not represented on mainstream radio \\
+Reach & International online streaming; listeners across Pacific Northwest and nationwide \\
+App & Android and iOS \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Daybreak Star Radio plays music from across the Americas and occasionally from global Indigenous communities (e.g., Sami Nation in Norway, Indigenous death metal from Ecuador). RONN!E described the station's founding philosophy: ``When they created this radio station, it was no more about asking for a seat at the table. It was, `We're going to make our own damn table now.''' The station features music from PNW-specific artists including Litefoot (Cherokee and Chichimeca, Seattle-based), Katherine Paul aka Black Belt Eagle Scout (Swinomish/I\~nupiaq, Portland), and Blue Flamez (Confederated Tribes of Warm Springs).
+
+\subsection{Module 2: Language and Cultural Transmission}
+
+\subsubsection{KWSO: Three Peoples, Three Languages}
+
+The Confederated Tribes of Warm Springs encompasses three distinct nations, each with their own language. Station Manager Sue Matters has explicitly described this context: ``Three distinct cultures. Three distinct languages.'' KWSO's programming must navigate this multilingual reality and serves language revitalization goals for all three communities.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Nation} & \tableheader{Language} & \tableheader{Context} \\
+\midrule
+Warm Springs (Tenino) & Ichishkíin Sínwit (Sahaptin) & Part of the Sahaptin language family, related to Yakama language \\
+Wasco (Wishxam) & Kiksht & Upper Chinookan language, distinct family from Sahaptin \\
+Paiute & Northern Paiute (Numu) & Numic branch of Uto-Aztecan language family \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+KWSO's cultural programming includes content specifically addressing tribal traditions and the 1855 Treaty with the Tribes of Middle Oregon (which defines reservation boundaries and ensures access to traditional hunting, fishing, and gathering areas). The American Archive of Public Broadcasting holds historical KWSO programs including ``Salmon in the Native American Culture'' (1994) and ``Treaties and Traditions'' (1994), demonstrating decades of on-air cultural documentation.
+
+\subsubsection{KYNR: Yakama Language and Sovereignty}
+
+KYNR broadcasts content addressing the importance of Yakama language preservation. Staff member Ronny Washines articulated the station's role in language: ``We want to do some stories that tell us why, in our own words, our language is important. Because it was the creator's gift to us.'' The Yakama language (Ichishkíin Sínwit, a dialect of Sahaptin) is the cultural foundation that KYNR's local production staff work to support and amplify.
+
+\subsubsection{Daybreak Star Radio: Pan-Indigenous Musical Heritage}
+
+Daybreak Star Radio's curatorial philosophy explicitly encompasses the full breadth of Indigenous musical expression --- from traditional drums, powwow, and Native flute to hip-hop, metal, and R\&B --- as a form of cultural sovereignty. Station manager Sherry Steele (Peoria Indians of Oklahoma) describes the mission: ``to show the world we're not extinct, that there is Native music being made all the time.'' Production Manager RONN!E (Cowlitz Tribe), who identifies as Two-Spirit, notes that Daybreak Star creates space for Indigenous artists to discuss issues they would not feel comfortable raising with non-Native interviewers on mainstream platforms.
+
+\subsection{Module 3: Infrastructure, Funding, and Crisis}
+
+\subsubsection{CPB Funding Crisis (2025)}
+
+In July 2025, the U.S.\ Senate voted to rescind Corporation for Public Broadcasting funding, triggering a financial crisis for tribal radio stations across the country. The impact on PNW tribal broadcasting was documented by Oregon Public Broadcasting and the Nieman Journalism Lab.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Station/Entity} & \tableheader{Documented Impact} \\
+\midrule
+KWSO (Warm Springs) & Could lose up to 40\% of operating budget; 2 of 6 staff positions funded by CPB \\
+Native Public Media network & Characterized CPB funding as ``irreplaceable''; described cuts as ``devastating'' (CEO Loris Taylor) \\
+Network scale & 57 tribal radio stations + 3 tribal TV stations in 20 states at risk \\
+Proposed workaround & Sen.\ Rounds (R-SD) proposed diverting environmental program funds to Indigenous stations; characterized by APTS as a ``half-measure'' \\
+Licensing complexity & Some stations licensed to tribe; some to nonprofits; no clean definition of eligible entities \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Sue Matters at KWSO noted: ``What's most troubling isn't just the short-term scramble for funding — it's the long-term risk of dismantling an information ecosystem built over decades.'' KWSO is technically a tribal government department (Health \& Human Services), and the Confederated Tribes of Warm Springs indicated openness to temporarily covering the funding gap. However, long-term sustainability without CPB is uncertain.
+
+\subsubsection{Emergency Alert System Function}
+
+KWSO serves as the Emergency Alert System provider for the Warm Springs area, broadcasting critical notifications for wildfires, snowstorms, road closures, and school closures. The Federal Communications Commission adopted the Missing Endangered Persons Alert (analogous to AMBER alerts) in August 2024, with national launch pending; tribal stations are a critical node in this new alert infrastructure for reservation communities with cell coverage gaps.
+
+\subsubsection{KYNR Equipment Vulnerability (2018 Case Study)}
+
+In October 2018, KYNR was burglarized. The thieves took the control board, microphones, and equipment necessary for broadcast, taking the station completely off-air. The stolen equipment was valued at approximately \$20,000. The Yakama Tribal Council ultimately allocated \$34,000 for full station revamp. The station was off-air for approximately eleven months, during which time 6,000-plus tribal members and non-Native listeners lost access to local news. The episode highlighted both the fragility of tribal station infrastructure and the depth of community dependence on the signal. Staff explicitly connected equipment replacement to cultural healing, requesting a blessing ceremony upon the station's return.
+
+\subsubsection{Digital Divide Context}
+
+Native Public Media and the Nieman Journalism Lab document that many tribal nations, particularly in rural areas, lack reliable broadband and cell service. Radio remains the most dependable communication tool in these communities. The transition to digital-first media models --- streaming, podcasting, apps --- risks bypassing reservation communities unless tribal stations can maintain their terrestrial radio infrastructure while simultaneously developing digital presence. Daybreak Star Radio represents an urban digital model; KWSO and KYNR represent the terrestrial rural model. Both are necessary; neither substitutes for the other.
+
+\subsection{Module 4: Programming Ecosystem and Networks}
+
+\subsubsection{Native Voice One / Koahnic Broadcast Corporation}
+
+Native Voice One (NV1), a division of the Koahnic Broadcast Corporation (KBC) based in Anchorage, Alaska, distributes nationally syndicated Indigenous programming. Its flagship products are National Native News (daily news program begun in the 1980s, now distributed to 400+ radio stations) and Native America Calling (daily national call-in program). KYNR carries both programs. KWSO's programming from NV1 is at risk if CPB cuts force NV1 to cancel or make these shows unaffordable to smaller stations. KBC President and CEO Jaclyn Sallee noted in 2025 that stations are uncertain whether they can continue operations from October 1 or later in the fiscal year.
+
+\subsubsection{Native Public Media Network}
+
+Native Public Media (NPM) functions as an NPR-equivalent infrastructure organization for tribal stations. As of 2025, the NPM network includes 57 tribal radio stations and 3 tribal television stations across 20 states. NPM CEO Loris Taylor has been the primary public spokesperson for the tribal broadcasting sector during the CPB funding crisis.
+
+\subsubsection{Local Production: Nation-Specific Content}
+
+The irreplaceable value of tribal stations lies not in syndicated content but in local production: birthday announcements, obituaries, powwow schedules, tribal election results, emergency updates, language programming, on-air job boards, sports coverage (including high school sports --- KYNR provides live broadcasts of Yakama-area high school games), and community calendar programming. KWSO runs an informal local Google function: community members call the station to ask questions because they trust the answers. This hyper-local, culturally embedded programming cannot be replicated by national syndication.
+
+\subsubsection{Urban vs.\ Reservation Broadcasting Models}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4.5cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Dimension} & \tableheader{Reservation Model (KWSO, KYNR)} & \tableheader{Urban Online Model (Daybreak Star)} \\
+\midrule
+Medium & AM/FM terrestrial radio & Internet streaming + app \\
+Audience & Nation-specific reservation community & Pan-Indigenous, urban, international \\
+Governance & Tribal council / tribal government & Nonprofit foundation (UIATF) \\
+Primary function & Local news, EAS, cultural programming, language & Music platform, cultural expression, artist visibility \\
+Infrastructure dependency & Transmitter, antenna, physical equipment & Servers, bandwidth, app platform \\
+Funding vulnerability & CPB dependence & Foundation grants, donations \\
+Language focus & Nation-specific (Ichishkíin, Kiksht, Numu) & Pan-Indigenous music; cultural expression \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5: Sovereignty, Governance, and Futures}
+
+\subsubsection{Tribal Sovereignty and Broadcasting Rights}
+
+The Confederated Tribes of Warm Springs entered into a Treaty with the United States in 1855 (Treaty with the Tribes of Middle Oregon), which defines reservation boundaries and ensures access to traditional hunting, fishing, and gathering areas. The Tribal Constitution and By-Laws were adopted in 1938. KWSO operates as a department of the tribal government's Health and Human Services branch; the Tribal Council acts as the station's Board of Directors. This governance structure means KWSO is not merely a licensed broadcaster --- it is a function of sovereign governance.
+
+\subsubsection{UNDRIP Article 31 Framework}
+
+The United Nations Declaration on the Rights of Indigenous Peoples (UNDRIP), Article 31, affirms that ``Indigenous peoples have the right to maintain, control, protect and develop their cultural heritage, traditional knowledge and traditional cultural expressions, as well as the manifestations of their sciences, technologies and cultures.'' Tribal radio stations are, in UNDRIP terms, media through which nations exercise this right. The CPB funding crisis represents a structural threat to this right when external funding withdrawal forces station closures.
+
+\subsubsection{FCC Licensing Paradox}
+
+The FCC licensing framework was not designed with tribal sovereignty in mind. Tribal stations exist in two configurations: those licensed directly to the tribe (as KWSO is licensed to the Confederated Tribes of Warm Springs), and those licensed to nonprofit entities. Emergency funding proposals designed to help tribal stations have encountered definitional ambiguity about which stations qualify. Sue Matters (KWSO) identified this as a structural challenge: ``Some tribal stations are licensed by their tribe. Some tribal stations are nonprofits. And so what's the definition of who that is?'' Small stations lack grant-writing staff to navigate complex alternative funding mechanisms.
+
+\subsubsection{Digital Futures}
+
+Daybreak Star Radio represents a digital-native Indigenous broadcasting model: online streaming, app distribution, pan-Indigenous scope, and an explicit mission to create international reach. This model is complementary to, not competitive with, the terrestrial reservation model. The future of PNW Indigenous broadcasting likely requires both: terrestrial radio for emergency alerts, language programming, and reservation community service; digital streaming for urban Indigenous audiences, cultural visibility, and intergenerational engagement.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Classification} & \tableheader{Handling Requirement} \\
+\midrule
+Nation-specific attribution & ABSOLUTE & Every Indigenous nation referenced by its specific, correct name (e.g., ``Confederated Tribes of Warm Springs,'' not ``Oregon tribe'') \\
+Language attribution & ABSOLUTE & Each language attributed to its specific nation; no generic ``Indigenous language'' references \\
+Sovereignty framing & HIGH & Broadcasting described as sovereign governance function, not merely media service \\
+Treaty rights context & HIGH & 1855 Treaty references must be accurate to the specific treaty and parties \\
+UNDRIP application & MODERATE & Applied as analytical framework, not policy advocacy \\
+Two-Spirit identity & HIGH & RONN!E's identity documented respectfully with the term they use \\
+Funding crisis coverage & MODERATE & Data presented factually; no policy advocacy for or against CPB funding \\
+Historical trauma & MODERATE & 2018 KYNR burglary and its emotional impact documented with sensitivity to community experience \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Station Sources}
+\begin{itemize}[leftmargin=2em]
+  \item KWSO 91.9 FM. ``About KWSO.'' kwso.org/about-kwso/. Confederated Tribes of Warm Springs.
+  \item KWSO 91.9 FM. ``Policy/Compliance.'' kwso.org/about-kwso/policycompliance/. Confederated Tribes of Warm Springs.
+  \item KWSO 91.9 FM. ``Staff.'' kwso.org/about-kwso/staff/. Confederated Tribes of Warm Springs.
+  \item Yakama Nation. ``Multimedia Services Program.'' yakama.com/programs/multimedia/. Confederated Tribes and Bands of the Yakama Nation.
+  \item United Indians of All Tribes Foundation. ``Daybreak Star Radio Network.'' unitedindians.org/daybreak-star-radio-network-indigenize-the-airwaves/.
+\end{itemize}
+
+\subsubsection{News and Journalism Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Oregon Public Broadcasting. ``Northwest rural and tribal public broadcasters brace for possible federal cuts.'' opb.org, July 16, 2025.
+  \item Nieman Journalism Lab. ``How tribal radio stations are preparing for a future without the Corporation for Public Broadcasting.'' niemanlab.org, August 2025.
+  \item Northwest Public Broadcasting. ``Yakama Nation's KYNR Back On Air After Nearly A Year Without Its Voice.'' nwpb.org, September 12, 2019.
+  \item Northwest Public Broadcasting. ``More Than Radio: KYNR Brings Back `Voice Of The Yakama Nation' After Theft.'' nwpb.org, October 19, 2018.
+  \item KUOW. ``Yakama Nation radio station KYNR gets its groove back.'' kuow.org, 2019.
+  \item Cascade PBS. ``Live from Seattle: a brand-new Indigenous radio station.'' cascadepbs.org, August 2021.
+  \item KIRO 7. ``New Seattle radio station elevates Indigenous music from around the world.'' kiro7.com, January 2022.
+  \item RIZE Magazine. ``Creating Space for Native Voices in Radio.'' rize-magazine.com, 2022.
+\end{itemize}
+
+\subsubsection{Institutional and Policy Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Native Public Media. ``Preserving Native Voices: How We Can Support Tribal Radio.'' nativepublicmedia.org, December 2025.
+  \item Native Voice One / Koahnic Broadcast Corporation. nv1.org.
+  \item American Archive of Public Broadcasting. ``Native Americans in Contemporary News Media.'' americanarchive.org.
+  \item Listening Post Collective. ``KWSO Warm Springs Radio.'' listeningpostcollective.org/grantees/kwso-warm-springs/.
+  \item United Nations. ``Declaration on the Rights of Indigenous Peoples.'' UNDRIP, 2007. Article 31.
+  \item U.S.\ Bureau of Reclamation. ``Tribes in the Pacific Northwest Region.'' usbr.gov/native/support/tribes/.
+\end{itemize}
+
+\newpage
+
+%% ════════════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, source-attributed research document on Indigenous broadcasting infrastructure in the Pacific Northwest, with primary focus on KWSO (Confederated Tribes of Warm Springs), KYNR (Confederated Tribes and Bands of the Yakama Nation), and Daybreak Star Radio (United Indians of All Tribes Foundation). The document will cover station profiles, language and cultural programming, infrastructure and funding challenges, the national syndication ecosystem, and sovereignty governance frameworks --- ready for integration into the GSD BBS Educational Pack and Foxfire Heritage Skills modules.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+=================
+
+  WAVE 0: Foundation (Sequential, Haiku)
+  ├─ Shared schemas (station data model, nation attribution registry)
+  ├─ Source index (all URLs validated, archive.org fallbacks confirmed)
+  └─ Output templates (station profile cards, language tables)
+          │
+          ▼
+  WAVE 1: Parallel Research Tracks (Parallel, Sonnet+Opus)
+  ├─ Track A: Station Profiles + Infrastructure (M1 + M3) → EXEC-A
+  └─ Track B: Language/Culture + Programming Ecosystem (M2 + M4) → EXEC-B
+          │
+          ▼
+  WAVE 2: Synthesis (Sequential, Opus)
+  ├─ Sovereignty and Futures analysis (M5)
+  ├─ Cross-module integration (INTEG)
+  └─ UNDRIP framework application
+          │
+          ▼
+  WAVE 3: Publication + Verification (Sequential, Sonnet)
+  ├─ Document assembly and formatting
+  ├─ Source validation (SC-IND check: all nations named specifically)
+  └─ GSD integration package + handoff artifacts
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.4cm}L{3.5cm}L{4cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Station Profile Cards & All 3+ stations fully profiled with technical specs and governance structure & M1 spec \\
+2 & Language \& Culture Module & All three CTWS languages individually documented; Yakama language context; Daybreak Star philosophy & M2 spec \\
+3 & Infrastructure \& Funding Report & CPB crisis data quantified; EAS function documented; KYNR 2018 case study complete & M3 spec \\
+4 & Programming Ecosystem Map & NV1/NNN/NAC architecture; local production value articulated; urban vs. reservation model compared & M4 spec \\
+5 & Sovereignty Analysis & UNDRIP Article 31 applied; FCC licensing paradox documented; governance structures mapped & M5 spec \\
+6 & GSD Integration Package & Cross-references to BBS Educational Pack, Foxfire Heritage Skills; handoff-ready artifacts & Integration spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-SCH: Shared schemas & None & Haiku & 2K \\
+W0-IDX: Source index & None & Haiku & 1K \\
+W1A-PROF: Station profiles & W0 & Sonnet & 8K \\
+W1A-INFRA: Infrastructure \& funding & W0, W1A-PROF & Sonnet & 8K \\
+W1B-LANG: Language \& culture & W0 & Opus & 10K \\
+W1B-PROG: Programming ecosystem & W0 & Sonnet & 7K \\
+W2-SOV: Sovereignty analysis & W1A, W1B & Opus & 10K \\
+W2-INT: Cross-module integration & W1A, W1B, W2-SOV & Opus & 8K \\
+W3-ASM: Document assembly & W2 & Sonnet & 5K \\
+W3-VER: Source validation & W3-ASM & Sonnet & 4K \\
+W3-GSD: GSD integration package & W3-VER & Sonnet & 3K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Estimated Total}} & \textbf{66K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Language and cultural transmission (M2) requires deep cultural sensitivity; sovereignty analysis (M5) requires legal/governance nuance; UNDRIP framework application requires judgment-heavy synthesis \\
+Sonnet & 60\% & Station profiles, infrastructure documentation, programming ecosystem mapping, document assembly, and verification are structured, evidence-driven tasks well-suited to Sonnet \\
+Haiku & 10\% & Shared schemas, data templates, and source index creation are scaffolding tasks requiring minimal judgment \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Mode} & \tableheader{Model} & \tableheader{HITL Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & No \\
+1 & Parallel research & Parallel (2 tracks) & Sonnet + Opus & Yes (post-W1) \\
+2 & Synthesis & Sequential & Opus & Yes (post-W2) \\
+3 & Publication & Sequential & Sonnet & Yes (final) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0-SCH & Define station data schema (fields: call letters, frequency, nation, founding date, wattage, reach, governance, staff, format, EAS) & Haiku & 2K \\
+W0-IDX & Validate all source URLs; create fallback index with archive.org copies for news sources & Haiku & 1K \\
+W0-TPL & Create output templates: station profile card, language table, funding impact table & Haiku & 1K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Station Profiles + Infrastructure:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W1A-PROF & Produce station profile cards for KWSO, KYNR, Daybreak Star, and additional PNW tribal stations from NV1 affiliate list & Sonnet & 8K \\
+W1A-INFRA & Document CPB crisis (quantified), EAS function, KYNR 2018 case study, digital divide context, equipment vulnerability patterns & Sonnet & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Language/Culture + Programming Ecosystem:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W1B-LANG & Document language programming at KWSO (Warm Springs/Wasco/Paiute), KYNR (Ichishkíin), Daybreak Star (music as cultural expression); AAPB historical archive; revitalization function & Opus & 10K \\
+W1B-PROG & Document NV1/NNN/NAC architecture, station syndication relationships, local production categories, urban vs.\ reservation comparison & Sonnet & 7K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W2-SOV & Sovereignty and governance analysis: UNDRIP Article 31, FCC licensing paradox, tribal council as board, treaty rights context, digital futures & Opus & 10K \\
+W2-INT & Cross-module integration: trace connections between infrastructure vulnerability and language loss risk; connect digital divide to EAS dependency; synthesize GSD ecosystem integration points & Opus & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W3-ASM & Assemble full document from wave outputs; apply consistent formatting; ensure progressive disclosure (summary callouts per section) & Sonnet & 5K \\
+W3-VER & SC-IND validation: verify every Indigenous reference names specific nation; SC-SRC: all claims attributed; SC-NUM: quantitative data sourced & Sonnet & 4K \\
+W3-GSD & Produce GSD integration package: cross-reference markers for BBS Educational Pack and Foxfire Heritage Skills; handoff summary; recommended placement & Sonnet & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{5-minute cache window:} Station profile data schema (W0-SCH) cached at Wave 0; reused by W1A-PROF, W1B-LANG, W2-INT, W3-VER within session.
+  \item \textbf{Source index:} W0-IDX cached and passed to all subsequent waves to avoid redundant URL validation.
+  \item \textbf{Nation attribution registry:} The definitive list of correct nation names (compiled in W0-SCH) passed as a cached prefix to all Opus tasks in W1B and W2.
+  \item \textbf{Parallel track isolation:} Tracks A and B in Wave 1 share only W0 outputs; no inter-track dependency allows full parallel execution.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Haiku} & \tableheader{Sonnet} & \tableheader{Opus} \\
+\midrule
+Wave 0: Foundation & 4K & --- & --- \\
+Wave 1A: Profiles + Infra & --- & 16K & --- \\
+Wave 1B: Language + Prog & --- & 7K & 10K \\
+Wave 2: Synthesis & --- & --- & 18K \\
+Wave 3: Publication & --- & 12K & --- \\
+\midrule
+\textbf{Subtotals} & \textbf{4K} & \textbf{35K} & \textbf{28K} \\
+\textbf{Grand Total} & \multicolumn{3}{c}{\textbf{$\sim$67K tokens across 3--4 sessions}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Allocation: Opus 28/67 = 42\%; Sonnet 35/67 = 52\%; Haiku 4/67 = 6\%. Slightly Opus-heavy vs.\ standard 30/60/10 due to cultural sensitivity requirements in language and sovereignty modules.}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCH ──┬── W1A-PROF ──── W3-ASM ──── W3-VER ──── W3-GSD
+         │      │                         │
+W0-IDX ──┤   W1A-INFRA                  SC-IND
+         │      │                         │
+W0-TPL ──┤   W2-INT ◄────────────────────┤
+         │      │                         │
+         └── W1B-LANG ──── W2-SOV ────────┘
+                │
+             W1B-PROG
+
+Legend:
+──►  Sequential dependency
+◄──  Input consumer
+     (W2-INT consumes both W1A and W1B outputs)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Priority} & \tableheader{Count} \\
+\midrule
+Safety-Critical & Nation-specific attribution; sovereignty framing; source quality & Mandatory & 6 \\
+Core Functionality & Station profiles, language docs, funding data, programming maps & Required & 16 \\
+Integration & Cross-module connections; document self-containment & Required & 5 \\
+Edge Cases & Data gaps; outlier cases; temporal currency & Best-effort & 4 \\
+\midrule
+\textbf{Total} & & & \textbf{31} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior / BLOCK Condition} \\
+\midrule
+SC-IND & Nation-specific attribution & Every Indigenous reference names a specific nation (e.g., ``Confederated Tribes of Warm Springs,'' ``Confederated Tribes and Bands of the Yakama Nation''). Zero generic ``Indigenous'' or ``tribal'' references without specific nation name. BLOCK on violation. \\
+SC-SRC & Source quality & All citations traceable to tribal organizations, government agencies (FCC, CPB), professional journalism (OPB, NWPB, NPR), or peer-reviewed research. Zero entertainment media or unsourced claims. BLOCK on violation. \\
+SC-NUM & Numerical attribution & Every statistic (40\% budget cut, 4,300 watts, 50,000 listeners, \$34,000 recovery, 6 staff, 2 CPB-funded, 57 network stations) attributed to a specific source. BLOCK on unattributed numbers. \\
+SC-ADV & No policy advocacy & Document presents funding crisis data factually without advocating for specific legislative positions on CPB funding. BLOCK on detectable advocacy framing. \\
+SC-SOV & Sovereignty framing accuracy & Tribal stations described as functions of sovereign governance, not merely as ``community radio'' equivalents. Tribal council governance documented accurately. BLOCK on mischaracterization. \\
+SC-LNG & Language attribution accuracy & Each language named with its correct linguistic name and attributed to its correct nation (Ichishkíin Sínwit/Sahaptin to Warm Springs and Yakama; Kiksht/Upper Chinookan to Wasco; Northern Paiute/Numu to Paiute people). BLOCK on misattribution. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & KWSO profile completeness & All 12 technical and governance parameters present and sourced \\
+CF-02 & KYNR profile completeness & All parameters present; 2018 burglary and recovery documented \\
+CF-03 & Daybreak Star profile & Founding, mission, staff nations, 90\%+ mandate, format philosophy documented \\
+CF-04 & Language table completeness & All three CTWS languages individually identified with linguistic family \\
+CF-05 & Yakama language context & Ichishkíin Sínwit context documented with sovereignty framing \\
+CF-06 & CPB crisis quantification & 40\% budget figure for KWSO; 2 of 6 staff figures; NPM network scope (57 stations) all present and sourced \\
+CF-07 & EAS documentation & KWSO EAS function documented; Missing Endangered Persons Alert (FCC, August 2024) referenced \\
+CF-08 & KYNR 2018 case study & Off-air duration ($\sim$11 months), stolen equipment value (\$20K), recovery cost (\$34K) all attributed \\
+CF-09 & NV1/NNN/NAC architecture & National Native News (400+ station distribution), Koahnic Broadcast Corporation, KNBA connection documented \\
+CF-10 & NPM network scope & 57 tribal radio + 3 TV stations in 20 states confirmed \\
+CF-11 & Urban vs.\ reservation comparison & Comparison table present with at least 6 dimensions \\
+CF-12 & UNDRIP Article 31 applied & Article text accurately characterized and applied to tribal broadcasting context \\
+CF-13 & FCC licensing paradox & Both licensing configurations (tribe-licensed vs.\ nonprofit) documented with funding access implications \\
+CF-14 & Daybreak Star artist attribution & At least 3 PNW-based Indigenous artists cited with nation affiliation \\
+CF-15 & Digital divide documentation & Broadband/cell gap context for reservation communities documented with source \\
+CF-16 & Treaty context & 1855 Treaty with Tribes of Middle Oregon referenced accurately for CTWS sovereignty context \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Infrastructure $\rightarrow$ language risk cascade & Document traces how CPB funding loss threatens language programming staff, not just operations \\
+IN-02 & Digital divide $\rightarrow$ EAS dependency link & Document connects broadband gaps to reason terrestrial radio remains essential for emergency alerts \\
+IN-03 & Sovereignty $\rightarrow$ licensing paradox connection & UNDRIP Article 31 analysis explicitly connected to FCC licensing structure's failure to account for sovereignty \\
+IN-04 & Cross-station consistency & Station data (nations, staff counts, wattage, founding dates) consistent across all sections \\
+IN-05 & Document self-containment & A reader with no prior knowledge of tribal broadcasting can understand the full ecosystem from this document alone; no undefined terms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.8cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 3+ stations profiled with full technical specs & CF-01, CF-02, CF-03 & Pending \\
+2. KWSO history through 2025 crisis quantified & CF-01, CF-06 & Pending \\
+3. KYNR history through 2018--2019 recovery & CF-02, CF-08 & Pending \\
+4. Daybreak Star urban model documented & CF-03, CF-14 & Pending \\
+5. All three CTWS languages individually named & CF-04, SC-LNG & Pending \\
+6. NV1/NNN/NAC architecture documented & CF-09, CF-10 & Pending \\
+7. CPB crisis impact quantified & CF-06, SC-NUM & Pending \\
+8. EAS function documented & CF-07 & Pending \\
+9. FCC licensing paradox documented & CF-13, IN-03 & Pending \\
+10. UNDRIP Article 31 applied & CF-12, IN-03 & Pending \\
+11. Digital divide context documented & CF-15, IN-02 & Pending \\
+12. Document ready for handoff & IN-05, W3-GSD & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at Wave 1, 2, and 3 boundaries \\
+PLAN & Planner & Wave decomposition; parallel track A/B scheduling; dependency management \\
+SCOUT & Research Agent & Source validation; URL confirmation; archive.org fallback indexing \\
+EXEC-A & Executor Alpha & Station profiles (M1) + Infrastructure/Funding (M3) documentation \\
+EXEC-B & Executor Beta & Language/Culture (M2) + Programming Ecosystem (M4) documentation \\
+CRAFT-SOV & Sovereignty Specialist & Sovereignty analysis (M5); UNDRIP framework; FCC licensing; treaty context \\
+CRAFT-LANG & Language Specialist & Language attribution accuracy; nation-specific naming; linguistic family verification \\
+VERIFY & Verification Agent & SC-IND enforcement; source quality; numerical attribution; document consistency \\
+INTEG & Integration Agent & Cross-module relationship tracing; IN-01 through IN-05 validation \\
+CAPCOM & HITL Interface & Human approval gates at Wave 1, 2, and 3 boundaries; escalation path \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache window exploitation \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; wave completion audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Milestone name & indigenous-broadcasting-pnw-v1.0 \\
+Activation profile & Squadron (12 roles) \\
+Research modules & 5 (Station Profiles, Language/Culture, Infrastructure/Funding, Programming Ecosystem, Sovereignty/Futures) \\
+Wave count & 4 (Foundation, Parallel Research, Synthesis, Publication) \\
+Parallel tracks & 2 (Wave 1) \\
+Estimated sessions & 3--4 \\
+Estimated token budget & $\sim$67K \\
+Primary sensitivity flag & Indigenous cultural sovereignty (HIGH) --- nation-specific attribution ABSOLUTE \\
+Safety-critical tests & 6 (all BLOCK-level) \\
+Total tests & 31 \\
+HITL gates & 3 (post-Wave 1, post-Wave 2, final) \\
+GSD integration targets & gsd-bbs-educational-pack-vision.md, gsd-foxfire-heritage-skills-vision.md \\
+Status & Ready for GSD Orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``We definitely play a critical role even in small things.''}
+
+\medskip
+\noindent\textbf{--- Sue Matters, Station Manager, KWSO 91.9 FM, Confederated Tribes of Warm Springs}
+
+\medskip
+\noindent The Amiga Principle holds that specialized execution paths outperform brute force. Tribal radio stations are the clearest proof of this outside of technology: 6 staff, 4,300 watts, three languages, 50,000 people, one frequency, no fat. The GSD ecosystem was built to give people their lives back. So was KWSO. The through-line runs straight.
+\end{quotebox}
+
+\end{document}
