@@ -1,0 +1,984 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% History domain color scheme
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{6A1B9A}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{East Asian Zodiac Variations}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={East Asian Zodiac Variations -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%%  TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{East Asian\\[0.3em]Zodiac Variations}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Japan, Korea, Vietnam --- Divergence from the Chinese Source}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026 $|$ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) $|$ Estimated: 4--5 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+%% ============================================================
+%%  TABLE OF CONTENTS
+%% ============================================================
+\tableofcontents
+\newpage
+
+%% ============================================================
+%%  STAGE 1 — VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{East Asian Zodiac Variations --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Cold-Start Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{GSD Educational Pack Architecture; Chinese Zodiac Foundations Reference}
+\metafield{Context:}{Cross-cultural extension of FDR Chinese zodiac coverage --- fills a noted gap in the cross-cultural analysis layer}
+
+\subsection{Vision}
+
+The Chinese zodiac is not one system. It is a root system --- a cosmological framework originating in Han Dynasty China that spread across East Asia over two millennia and took root differently in every soil it touched. Japan received it via Korean scholars in the 6th century CE and eventually swapped the wild boar for the domestic pig, honoring the untamed landscape of the Japanese archipelago. Vietnam received it under Han military occupation and, somewhere between the 10th and 14th centuries, traded the rabbit for the cat --- an animal that guarded rice paddies from the rats that threatened the harvest. Korea received it through the Three Kingdoms period and kept it closest to the source, using the system as a social grammar still consulted today for marriage compatibility, career timing, and birth planning.
+
+What is remarkable is not the differences but the mechanism that produced them. The Chinese zodiac is built on an abstract foundation: twelve Earthly Branches, each assigned an animal symbol as a mnemonic device. The animals were always proxies for the branches, not sacred in themselves. This structural looseness is what permitted each receiving culture to localize without breaking the system. Vietnam heard the word ``mao'' (the Earthly Branch of the fourth position) and mapped it to their word for cat rather than rabbit --- a phonetic drift that locked into place through centuries of oral tradition. Japan, abandoning the lunar calendar in 1872, continued the zodiac cycle on January 1st, creating a subtle temporal divergence from the Chinese system that trips up travelers to this day.
+
+The spaces between these national variations are the story. Each substitution --- Cat for Rabbit, Boar for Pig, Sheep for Goat, Buffalo for Ox --- is a fossil record of the agricultural relationship, linguistic history, and cosmological preferences of the receiving culture. This research mission documents those spaces: not to flatten them into a single comparative table, but to read them as distinct expressions of a shared inherited architecture.
+
+This mission complements the existing GSD educational ecosystem by adding the cross-cultural transmission layer to the zodiac's mathematical and philosophical foundations. Where the FDR Chinese coverage establishes the canonical system, this mission establishes the divergence map --- the graph of how the same root structure produces five distinct expressions across East Asia.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{The gap in cross-cultural analysis.} Existing GSD zodiac coverage focuses on the Chinese canonical system. The three major East Asian variants --- Vietnamese, Japanese, Korean --- are documented only in passing. The animal substitutions, narrative divergences, and calendrical adaptations that distinguish these traditions are not analyzed as a coherent cross-cultural phenomenon.
+
+  \item \textbf{The phonetic drift problem is misunderstood.} The Vietnamese Cat substitution is frequently attributed to a simple mistranslation (``mao'' sounding like ``meo''). Scholarly analysis reveals this is oversimplified: the Earthly Branch mao is an abstract symbol, not a word for rabbit. The cat substitution reflects a convergence of linguistic, agricultural, and mythological factors whose interaction has not been cleanly mapped.
+
+  \item \textbf{Animal substitutions are catalogued but not explained.} Comparative tables exist (Japan: Boar not Pig; Korea: Sheep not Goat; Vietnam: Cat not Rabbit, Buffalo not Ox) but the cultural logic behind each substitution --- what the receiving culture was saying about itself by choosing a different animal --- is underdocumented in the educational literature.
+
+  \item \textbf{Transmission chronology is scattered across sources.} The routes and timing of zodiac transmission to Korea (Three Kingdoms period, c.\ 57 BCE--668 CE), Japan (first transmitted 553 CE, officially adopted 604 CE), and Vietnam (Han occupation, 111 BCE onward) are documented in separate scholarly contexts but have never been assembled into a single transmission timeline.
+
+  \item \textbf{Living practice differences are invisible.} How each nation uses the zodiac today differs significantly: Korea's \textit{tti} compatibility (궁합) for marriage, Japan's \textit{nengaj\={o}} New Year card tradition, Vietnam's zodiac-linked birth booms during auspicious years. These living practice differences are as culturally revealing as the historical substitutions.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Drift Model:} Cultural transmission of a symbolic system produces predictable divergence patterns --- phonetic drift, agricultural localization, mythological renarration, and calendrical adaptation --- that function as archaeological evidence of each receiving culture's values and ecological context.
+
+\subsubsection{Transmission Geography}
+
+\begin{asciibox}
+CHINESE ZODIAC ORIGIN (Han Dynasty, c. 206 BCE -- 220 CE)
+            |
+            | ganzhi / sexagenary cycle established
+            |
+     +------+-------+----------+
+     |              |          |
+     v              v          v
+KOREA            VIETNAM    JAPAN
+Three Kingdoms   Han Occ.   Transmitted 553 CE
+57 BCE-668 CE    111 BCE    Adopted 604 CE (Empress Suiko)
+                            Kitora Tomb ~7th c.
+
+DRIFT OUTCOMES:
+  Korea:   Sheep (yang) instead of Goat; tti social grammar
+  Japan:   Boar (inoshishi) instead of Pig; solar New Year 1872
+  Vietnam: Cat (meo) instead of Rabbit; Buffalo instead of Ox
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 1: Origins & Transmission
+  - ganzhi cycle (Shang oracle bones c. 1100 BCE)
+  - Animal-branch assignment (Han Dynasty formalization)
+  - Transmission routes and dates
+
+MODULE 2: Animal Substitutions
+  - Vietnam: Cat/Rabbit + Buffalo/Ox
+  - Japan: Boar/Pig + Sheep/Goat
+  - Korea: Sheep/Goat ambiguity
+  - Broader East Asian survey (Cambodian Neak, Malay mousedeer)
+
+MODULE 3: Origin Myth Divergence
+  - The Great Race: Chinese canonical version
+  - Vietnamese version: cat CAN swim; no rabbit
+  - Japanese version: Boar overshoots the finish line
+  - Korean version: swimming competition variant
+
+MODULE 4: Five Elements & Calendrical Adaptation
+  - Wuxing (Five Elements) transmission
+  - Japan's 1872 Gregorian calendar shift
+  - Japanese Buddhist patron deity pairings (Edo period)
+  - Korean saju (Four Pillars) tradition
+
+MODULE 5: Living Traditions Today
+  - Korean tti compatibility (gunghap) for marriage
+  - Japanese nengajo and kanreki 60th birthday
+  - Vietnamese zodiac-linked birth booms (2011 Year of Cat)
+  - Contemporary astrological practice across three nations
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins and Transmission}
+
+Documents the ganzhi (Earthly Branches + Heavenly Stems) system from its Shang dynasty oracle bone origins through Han Dynasty formalization, tracing precise transmission routes and adoption dates for Korea, Japan, and Vietnam. This module establishes the authoritative chronological spine of the entire study.
+
+\subsubsection{Module 2: Animal Substitutions}
+
+Systematically catalogs every animal variation across the three nations, provides the cultural logic behind each substitution (agricultural, ecological, linguistic, mythological), and situates the East Asian variants within the broader global survey of zodiac adaptations (Cambodian, Malay, Turkish, Tibetan, Filipino).
+
+\subsubsection{Module 3: Origin Myth Divergence}
+
+Compares the canonical ``Great Race'' myth as told in China, Japan, Korea, and Vietnam, documenting where each national version diverges and what those divergences reveal about cultural values. Special focus on the cat's absence from the Chinese zodiac versus its victory in the Vietnamese version.
+
+\subsubsection{Module 4: Five Elements and Calendrical Adaptation}
+
+Documents how the wuxing (Five Elements / Five Phases) framework --- Wood, Fire, Earth, Metal, Water --- traveled alongside the zodiac and was adapted in each receiving culture. Includes Japan's 1872 switch to the Gregorian calendar and its effect on New Year timing, and the Buddhist patron deity pairings developed during Japan's Edo period.
+
+\subsubsection{Module 5: Living Traditions Today}
+
+Documents contemporary zodiac practice in Korea (tti identity, gunghap compatibility for marriage, birth year planning), Japan (nengaj\={o} New Year cards, kanreki 60th birthday, zodiac shrine visits at hatsumōde), and Vietnam (zodiac-linked birth booms, Tet celebrations with zodiac animal statuary, Buffalo vs.\ Ox symbolism in agricultural communities).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+gsd_chipset:
+  mission: "east-asian-zodiac-variations"
+  profile: squadron
+  model_allocation:
+    opus: 0.30    # Module 3 (myth synthesis), cross-module integration
+    sonnet: 0.60  # Modules 1,2,4,5 (survey, chronology, practice)
+    haiku: 0.10   # Schemas, source index, scaffolding
+  parallel_tracks:
+    track_a: [module_1, module_3]   # Historical spine + myth layer
+    track_b: [module_2, module_4, module_5]  # Cultural-comparative layer
+  cache_strategy:
+    ttl_window: 300  # 5-minute cache window
+    shared_context: ["ganzhi_reference", "transmission_timeline",
+                     "animal_substitution_table"]
+  safety_profile:
+    cultural_sensitivity: HIGH
+    attribution_rule: nation_specific_always  # Never "East Asian peoples"
+    indigenous_rule: CARE_principles_apply
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+  \item Chinese canonical zodiac system as reference baseline
+  \item Japanese, Korean, and Vietnamese zodiac variations in full depth
+  \item Animal substitutions with cultural logic explanations
+  \item Transmission chronology from oracle bones to Meiji era
+  \item Origin myth variants across the four nations
+  \item Five Elements (wuxing) transmission and local adaptation
+  \item Living practice comparisons: tti, nengaj\={o}, Tet, kanreki
+  \item Broader East Asian survey (Cambodian, Malay, Filipino, Turkish) at survey depth
+  \item Sexagenary cycle (ganzhi) structural explanation
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+  \item Western zodiac (astrological signs) comparison
+  \item Indian Vedic astrology connections
+  \item Tibetan zodiac (separate detailed treatment merits own mission)
+  \item Chinese regional variants (separate study)
+  \item Divination practice mechanics (saju, Ba Zi) beyond cultural context
+  \item Contemporary digital astrology app market analysis
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Transmission timeline documented with specific dates and sources for Korea, Japan, and Vietnam.
+  \item All animal substitutions catalogued with at least two competing explanations per substitution.
+  \item Cultural logic for each substitution explained with reference to ecology, agriculture, or linguistics.
+  \item Origin myth variants compared across all four nations with specific narrative divergences identified.
+  \item Five Elements transmission documented with at least one nation-specific adaptation described.
+  \item Japan's 1872 calendrical shift and its ongoing effect on New Year timing documented.
+  \item Korean tti social grammar documented with at least two contemporary usage contexts.
+  \item Living practice section covers at least three active traditions per nation.
+  \item All cultural references attributed to specific nations, never generic ``East Asian'' framing.
+  \item Source bibliography contains at least 12 professional-quality sources with no entertainment media.
+  \item Document is self-contained: a reader without prior zodiac knowledge can follow the full analysis.
+  \item Cross-module connections between transmission history (M1), substitutions (M2), and myths (M3) are explicitly traced.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{5cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+FDR Chinese Zodiac Coverage & This mission extends and complements & Downstream \\
+GSD Educational Pack Architecture & Fits the Foundation cross-cultural layer & Upstream \\
+Learn Kung Fu Pack & Shares cultural transmission framing & Parallel \\
+Philosophy Dissolved Pack & Shares cross-cultural symbol analysis approach & Parallel \\
+GSD Unit Circle Retrospective & Mathematical foundations that underpin the ganzhi cycle & Upstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The zodiac travels. It crosses the Yellow Sea and the Tonkin Gulf and the Tsushima Strait, and in each crossing it sheds something and gains something. It sheds the specific animal and gains a local one. The abstract Earthly Branch mao --- a symbol that never meant rabbit in any simple sense, only occupied the fourth position in a twelve-position cycle --- arrives in Vietnam and becomes a cat, because a cat guards the rice against the rats that are themselves the first animal of the cycle. The system swallows its own contradiction and keeps counting.
+
+This is the Amiga Principle made cosmological: a small, principled architecture (twelve branches, ten stems, sixty combinations) produces infinite local expression through faithful iteration by each receiving culture. The ganzhi cycle is not diminished by the Vietnamese cat or the Japanese boar --- it is demonstrated by them. The spaces between China's rabbit and Vietnam's cat, between Japan's boar and China's pig, are not errors in transmission. They are the living record of how an elegant system breathes through the cultures that carry it.
+
+\newpage
+
+%% ============================================================
+%%  STAGE 2 — RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{East Asian Zodiac Variations --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides module-by-module research findings compiled from authoritative sources. Agents should use it as the primary evidence base for document production. All claims requiring numerical precision should be traced back to the original sources listed in the bibliography.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item National Folk Museum of Korea (nfm.go.kr) --- primary source for Korean zodiac cultural documentation
+  \item Wikipedia ``Chinese zodiac,'' ``Vietnamese zodiac,'' ``Sexagenary cycle'' articles (academic-quality synthesis with citations)
+  \item Nihon Shoki (720 CE) --- primary historical record of Japanese calendar adoption
+  \item NPR, South China Morning Post, VOA News --- reportage on Vietnamese zodiac substitution
+  \item Fiveable / academic sources on Five Elements transmission
+  \item University of California (UCLA) scholars cited in primary reportage (Quyen Di)
+  \item Cotoacademy, MATCHA Japan --- Japanese zodiac cultural documentation
+\end{itemize}
+
+\subsection{Module 1: Origins and Transmission}
+
+\subsubsection{The Ganzhi System}
+
+The sexagenary cycle (ganzhi, \textit{g\={a}nzh\=i}) combines ten Heavenly Stems (ti\={a}ng\={a}n) with twelve Earthly Branches (d\`\i zh\=i) to produce sixty unique year designations. Its earliest documented use for recording days appears on Shang dynasty oracle bones, c.\ 1100 BCE. Use for recording years became widespread during the Western Han Dynasty (202 BCE -- 8 CE).
+
+Each Earthly Branch was assigned an animal as a mnemonic device. The assignment is documented as having occurred after the ganzhi cycle was established --- the animals were recruited to make the abstract cycle memorable, not to define it. This origin is critical: the Earthly Branches are the primary system; the animals are overlaid aides-m\'emoire. This structural subordination of the animals to the branches is precisely what permitted each receiving culture to substitute local animals without disrupting the system's arithmetic.
+
+\subsubsection{Transmission Chronology}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Nation} & \tableheader{Date / Period} & \tableheader{Mechanism} \\
+\midrule
+China (origin) & Shang oracle bones c.\ 1100 BCE (days); Han Dynasty c.\ 3rd century BCE (years) & Internal development \\
+Vietnam & Han occupation, 111 BCE onward & Military conquest; Chinese administrative apparatus \\
+Korea & Three Kingdoms period, c.\ 57 BCE--668 CE & Cultural exchange; Confucian scholarly transmission \\
+Japan (first) & 553 CE (per Nihon Shoki) & Korean scholars transmitted calendar to Japanese court \\
+Japan (official) & 604 CE, Empress Suiko & Formal adoption for imperial chronology \\
+Japan (Gregorian) & 1873 CE (Meiji era) & Official switch to solar calendar; zodiac cycle shifted to Jan.\ 1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Kitora Tomb in Nara Prefecture, built c.\ 7th century CE, is one of the oldest surviving structures depicting the twelve zodiac animals in Japan, confirming early adoption. The zodiac reached peak cultural integration during the Edo period (1603--1868), when each of the twelve animals was paired with one of eight Buddhist patron deities.
+
+In Vietnam, the ganzhi system became embedded in local calendrical traditions through the extended period of Han administrative control. The Vietnamese lunar calendar (the Vi\d\ectt luni-solar calendar) divides sixty-year cycles into \textit{h\`oi}, each consisting of five twelve-year animal cycles --- preserving the Chinese sexagenary structure while using Vietnamese animal names.
+
+\subsection{Module 2: Animal Substitutions}
+
+\subsubsection{Vietnam: Cat and Buffalo}
+
+Vietnam is the only nation where the Cat occupies a fixed position in the zodiac sequence, replacing the Rabbit in the fourth slot. Vietnam also uses the Water Buffalo (tr\^{a}u) in place of the Ox.
+
+\textbf{Proposed explanations for the Cat:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Phonetic drift:} The Chinese Earthly Branch ``mao'' (卯) sounds similar to the Vietnamese word for cat, ``m\`eo.'' However, cultural consultant Doan Thanh Loc of Vietnam's Southern Jade Pavilion Cultural Center has noted this explanation is oversimplified: mao is an abstract positional symbol, not literally the word for rabbit.
+  \item \textbf{Agricultural ecology:} Cats are essential to Vietnamese rice farming, hunting the field rats that threaten the harvest. UCLA lecturer Quyen Di suggests that Vietnamese agricultural landscape (lowland rice paddies) produced a different animal valorization than Chinese savanna culture.
+  \item \textbf{Rat/rabbit similarity:} Some scholars propose the Vietnamese saw the mouse (Rat, Year 1) and the rabbit as confusingly similar animals and substituted a clearly distinct creature.
+  \item \textbf{Historical note:} Vietnam has not always celebrated the Year of the Cat. Older Vietnamese texts mention the rabbit in the zodiac; the cat substitution's precise date of consolidation is uncertain, likely occurring between the 10th and 14th centuries during periods of increasing cultural autonomy from Chinese rule.
+\end{itemize}
+
+\textbf{Buffalo for Ox:} The Water Buffalo (tr\^{a}u) replaces the Ox (niu\'{u}) --- a substitution straightforwardly explained by agricultural ecology. The water buffalo was the primary draft animal of Vietnamese wet-rice agriculture, far more present in daily life than oxen.
+
+\subsubsection{Japan: Boar and Sheep}
+
+Japan replaces the Pig (zhu) with the Wild Boar (\textit{inoshishi}, 猪). The original Chinese fable has the pig finishing last because it stopped to eat and fell asleep. The Japanese version instead features the boar charging forward with great determination but overshooting the finish line and having to turn back --- a narrative that transforms the pig's laziness into the boar's impetuous energy, and in doing so defines the personality of those born in the twelfth year: straightforward, determined, warm-hearted, and occasionally impulsive.
+
+Japan also uses Sheep (\textit{hitsuji}) in place of Goat (y\'{a}ng). This substitution is shared with Korea and the Philippines, and reflects a translation ambiguity in the original Chinese character 羊 (y\'{a}ng), which refers to both goats and sheep without distinction.
+
+\subsubsection{Korea: Sheep and Pig}
+
+Korea keeps the Pig (dwaeji, 돼지) --- sharing this with China and Vietnam --- but uses Sheep (yang, 양) rather than Goat. The Korean zodiac is the closest of the three national variants to the Chinese canonical system. Cultural documentation from the National Folk Museum of Korea notes that sheep were not common in Korea historically, but records of their existence during the Three Kingdoms period confirm they were known. The character yang (未) appears in classical Chinese terms for ``good'' (善), ``beautiful'' (美), and ``righteous'' (義) --- a set of Confucian moral associations that reinforced the auspicious valence of the sheep year.
+
+\subsubsection{Broader East Asian Survey}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Nation} & \tableheader{Slot 4 (Rabbit)} & \tableheader{Slot 12 (Pig)} & \tableheader{Notable Substitution} \\
+\midrule
+China & Rabbit & Pig & Canonical baseline \\
+Korea & Rabbit & Pig & Sheep for Goat \\
+Japan & Rabbit & Boar & Sheep for Goat; solar New Year \\
+Vietnam & Cat & Pig & Buffalo for Ox \\
+Cambodia & Rabbit & Pig & Dragon $\leftrightarrow$ Neak (n\={a}ga) \\
+Malaysia & Mousedeer & Tortoise & Dragon = ``Big Snake'' \\
+Philippines & Rabbit & Pig & Ram/Sheep for Goat \\
+Turkey & Rabbit & Pig & Leopard for Tiger; Fish for Dragon \\
+Tibet & Rabbit & Pig & Fire Hare starts cycle (not Wood Rat) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3: Origin Myth Divergence}
+
+\subsubsection{The Chinese Canonical Race}
+
+The Jade Emperor (or, in some versions, the Buddha) convened a great race. The first twelve animals to cross a river would be honored with a year. The Rat --- small and clever --- hitched a ride on the diligent Ox's back and leaped off at the last moment, arriving first. The Ox came second. Then Tiger, Rabbit (who caught a floating log), Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, and Pig (who ate along the way and arrived last).
+
+Critically: in the Chinese version, the Cat and the Rat were once friends. The Cat asked the Rat to wake it in time for the race. The Rat did not, and the Cat slept through the event, arriving too late to be included. Some versions have the Rat pushing the Cat into the river as they crossed. This is the origin of the cats-chase-rats enmity --- and the explanation for why the Cat is absent from the Chinese zodiac.
+
+\subsubsection{The Vietnamese Version}
+
+In the Vietnamese origin story, there is no rabbit. The Cat is a capable animal who can swim, and it finishes the race in fourth place through its own effort. The Rat is still the villain --- tricking the Cat in some versions --- but the Vietnamese tradition insists the Cat ultimately prevailed. This narrative inversion is not merely charming variation; it is the cosmological ratification of the Cat substitution. The story was reshaped to justify the calendar, or the calendar was reshaped by a culture that told this kind of story. The direction of causation is uncertain and may be irrelevant.
+
+\subsubsection{The Japanese Version}
+
+The Japanese \textit{eto} tradition generally follows the Jade Emperor race narrative, but the Boar's finish is renarrated: rather than the pig's torpid last-place arrival from overindulgence, the boar charges with great energy, overshoots the finish line, and has to turn back --- arriving twelfth but through a surplus of determination rather than a failure of discipline. The personality attributes of the twelfth sign shift accordingly: from lazy and good-natured to brave, honest, and occasionally impulsive. This renarration transforms the moral valence of the last sign from mild self-indulgence to heroic overreach.
+
+\subsubsection{The Korean Version}
+
+The Korean version (documented by the National Folk Museum of Korea) uses a swimming competition rather than a land race. The rat wins by swimming first to the opposite bank. The pig comes last. The cat is excluded by the rat's treachery, exactly as in the Chinese version, maintaining Korea's rabbit-inclusive zodiac. The swimming variant is notable for its consistency with the agricultural and ecological context of the Korean peninsula.
+
+\subsection{Module 4: Five Elements and Calendrical Adaptation}
+
+\subsubsection{Five Elements Transmission}
+
+The wuxing (Five Phases / Five Elements) theory --- Wood, Fire, Earth, Metal, Water --- originated in the Warring States period (475--221 BCE), formalized by philosopher Zou Yan, and was integrated with the zodiac during the Han Dynasty to create a 60-year cycle. Each year carries both an animal sign and an elemental modifier (e.g., Metal Tiger, Water Dragon), creating sixty unique personality-destiny combinations.
+
+Transmission to Korea, Japan, and Vietnam followed the same Sinic cultural channels as the zodiac itself, arriving as part of the broader package of Confucian, Taoist, and Buddhist thought. In Japan, the wuxing was integrated with \textit{oomy\={o}d\={o}} (the Way of Yin and Yang), which combined Five Elements theory with yin-yang cosmology, directional associations, and divination --- a distinctly Japanese synthesis not found in the Chinese or Korean traditions.
+
+\subsubsection{Japan's 1872 Calendar Shift}
+
+In 1873, during the Meiji era, Japan officially abandoned the lunar calendar in favor of the Gregorian solar calendar. The twelve zodiac animals continue to cycle annually, but the year now changes on January 1st rather than at Lunar New Year. This creates a temporal divergence: a person born in late January in Japan is assigned the new year's zodiac sign, while the same birth date in China, Korea, or Vietnam would fall under the previous year's sign (Lunar New Year typically falls in late January or February). This divergence affects anyone born in the January--February window.
+
+\subsubsection{Japanese Buddhist Deity Pairings}
+
+During the Edo period (1603--1868), each of the twelve zodiac animals was paired with one of eight Buddhist patron deities (\textit{hachi shugo butsu}). This syncretic fusion of Chinese cosmology and Japanese Buddhism is unique to the Japanese tradition and has no parallel in Korean or Vietnamese practice. Temples and shrines associated with each animal's patron deity draw visitors in the corresponding zodiac year for special blessings.
+
+\subsubsection{Korean Saju (Four Pillars)}
+
+In Korea, the zodiac intersects with a deeper astrological tradition: saju (사주팔자, Four Pillars of Destiny). Saju uses the sexagenary cycle to assign stem-branch designations to year, month, day, and hour of birth --- creating an eight-character destiny map. This tradition is documented in Joseon-era medical and astrological texts and continues in contemporary practice. Saju practitioners integrate zodiac compatibility (궁합, gunghap) with the four-pillar analysis to assess romantic and business compatibility.
+
+\subsection{Module 5: Living Traditions Today}
+
+\subsubsection{Korea: Tti Identity and Gunghap}
+
+The Korean word \textit{tti} (띠) refers to the zodiac animal of one's birth year and functions as a social identifier. New acquaintances routinely ask ``what is your tti?'' as an indirect way to establish age and generational cohort. This social grammar is so embedded that zodiac sign and birth year are functionally synonymous in Korean social discourse.
+
+Zodiac compatibility (\textit{gunghap}) is consulted for marriage decisions, business partnerships, and birth planning. The tradition combines superficial compatibility (zodiac sign pairings) with inner compatibility (Five Elements analysis). While urban, educated Koreans may treat gunghap as entertainment rather than prescriptive guidance, it remains culturally legible across generational lines. The National Folk Museum of Korea identifies gunghap as one of the unique features of Korean zodiac culture that distinguishes it from Chinese and Japanese practice.
+
+\subsubsection{Japan: Nengaj\={o} and Kanreki}
+
+The dominant contemporary zodiac practice in Japan is the \textit{nengaj\={o}} (年賀状) New Year greeting card tradition. In the months leading up to the new year, artists, designers, and ordinary citizens produce cards featuring the incoming zodiac animal. The tradition is enormous in scale: hundreds of millions of nengaj\={o} are exchanged annually. Zodiac shrines (\textit{ema} plaques, omikuji fortunes) are central to \textit{hatsum\={o}de} (初詣), the first shrine visit of the year.
+
+The \textit{kanreki} (還暦) --- the 60th birthday celebration --- directly reflects the sexagenary cycle: at age sixty, one has completed one full ganzhi cycle and returns to the stem-branch combination of their birth year. The kanreki is marked with red clothing (symbolizing rebirth and the first year of a new cycle), family celebration, and recognition of a completed cosmological circuit.
+
+\subsubsection{Vietnam: Tet and Zodiac Birth Planning}
+
+The Vietnamese Tet (T\d\ectt Nguy\^en Ð\'{a}n) celebration features extensive zodiac animal decoration. In the Year of the Cat, cat statuary, textiles, and decorative objects fill the streets. A notable contemporary phenomenon: birth planning around auspicious zodiac years. In the 2011 Year of the Cat, a documented baby boom occurred in Vietnam as families planned births for a year associated with luck and smooth fortune. This reflects a live relationship between the zodiac and demographic behavior --- the system is not merely decorative but influences real-world decisions.
+
+The Vietnamese zodiac also distinguishes itself through performance: zodiac animals frequently appear as characters in traditional performing arts, especially water puppet theater and opera, giving the animals a dramatic presence not found in Japanese or Korean traditions.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Sensitivity Level} & \tableheader{Handling Requirement} \\
+\midrule
+Nation-specific attribution & HIGH & Always name specific nation; never ``East Asian'' as a monolithic category \\
+Vietnamese folklore & MODERATE & Distinguish living tradition from simplified narrative; cite cultural consultants \\
+Zodiac and life decisions & MODERATE & Present as cultural practice, not predictive science; no efficacy claims \\
+Historical Chinese occupation of Vietnam & MODERATE & Acknowledge without advocacy; factual transmission chronology only \\
+Contemporary practice variation & LOW & Acknowledge spectrum from deep belief to casual cultural reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Historical Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Nihon Shoki (720 CE) --- record of Japanese calendar adoption, cited via Wikipedia ``Sexagenary cycle''
+  \item National Folk Museum of Korea, \textit{The Story of the Twelve Animals of the Korean Zodiac} (nfm.go.kr) --- primary documentation of Korean zodiac cultural meanings
+  \item Mawangdui silk manuscripts (sealed 168 BCE) --- earliest dated record of sexagenary year-counting
+\end{itemize}
+
+\subsubsection{Scholarly and Professional Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Wikipedia, ``Chinese zodiac'' (extensive scholarly synthesis with citations)
+  \item Wikipedia, ``Vietnamese zodiac''
+  \item Wikipedia, ``Sexagenary cycle'' (includes transmission chronology)
+  \item Wikipedia, ``Cat (zodiac)''
+  \item Wikipedia, ``Goat (zodiac)'' --- on sheep/goat ambiguity across nations
+  \item Project MUSE, \textit{The Assimilation of the Yijing in Tibetan History and Culture} (muse.jhu.edu) --- Yijing and wuxing cross-cultural transmission
+  \item Fiveable, \textit{Religions of Asia: Five Elements} --- scholarly synthesis of wuxing transmission
+\end{itemize}
+
+\subsubsection{Cultural and Journalistic Sources}
+\begin{itemize}[leftmargin=2em]
+  \item NPR, ``While many ring in the Year of the Rabbit, Vietnam celebrates the cat'' (January 21, 2023) --- includes primary interviews with cultural consultants Doan Thanh Loc and Quyen Di (UCLA)
+  \item South China Morning Post, ``Why Vietnam is celebrating the Year of the Cat, not the Rabbit'' (January 19, 2023)
+  \item VOA News, ``Why Vietnam Is Celebrating the Year of the Cat, Not the Rabbit'' (January 21, 2023)
+  \item Coto Academy, ``12 Chinese Zodiac Signs in Japanese'' (cotoacademy.com)
+  \item MATCHA Japan, ``Year of the Horse 2026: The 12 Animals of the Zodiac in Japan''
+  \item Gwangju News, ``The Year of the Golden Pig'' (2019) --- Korean saju and tti social grammar
+  \item Hanoi Local Tour, \textit{Vietnamese Zodiac Elements, 12 Animals, Years} (hanoilocaltour.com)
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%%  STAGE 3 — MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality cross-cultural analysis of East Asian zodiac variations --- covering Japanese, Korean, and Vietnamese divergence from the Chinese canonical system --- suitable for integration into the GSD educational ecosystem as the cross-cultural complement to the existing FDR Chinese zodiac coverage. The deliverable is a structured research document deployable as a GSD educational knowledge pack.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation (Sequential)
+  [Haiku] Schema + Source Index + Shared Reference Table
+
+WAVE 1: Parallel Research Tracks
+  Track A (Opus/Sonnet):       Track B (Sonnet):
+  Module 1 - Origins           Module 2 - Substitutions
+  Module 3 - Myths             Module 4 - Five Elements
+                               Module 5 - Living Practice
+
+WAVE 2: Synthesis (Sequential)
+  [Opus] Cross-module integration + Cultural analysis layer
+
+WAVE 3: Publication + Verification (Sequential)
+  [Sonnet] Document assembly + Source verification
+  [Sonnet] Pack formatting + Test execution
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, animal substitution reference table
+  \item \textbf{Historical Layer} --- Transmission chronology, ganzhi structural explanation
+  \item \textbf{Cultural-Comparative Layer} --- Nation-by-nation substitution analysis, myth variants
+  \item \textbf{Living Practice Layer} --- Contemporary usage documentation, demographic evidence
+  \item \textbf{Synthesis Layer} --- Cross-module analysis, through-line construction
+  \item \textbf{Publication Layer} --- Final document assembly, source verification, test execution
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Transmission Timeline & All three nations with specific dates and sources & MODULE-1-CHRONOLOGY \\
+2 & Animal Substitution Atlas & All variations with dual explanations per substitution & MODULE-2-ATLAS \\
+3 & Myth Variant Comparison & All four nations' Great Race variants documented & MODULE-3-MYTHS \\
+4 & Five Elements Analysis & Wuxing transmission with at least one nation-specific adaptation & MODULE-4-ELEMENTS \\
+5 & Living Practice Guide & Three active traditions per nation documented & MODULE-5-PRACTICE \\
+6 & Cross-Cultural Synthesis & Drift Model applied; through-line written & SYNTH-INTEGRATION \\
+7 & Verified Bibliography & 12+ professional sources, zero entertainment media & VERIFY-SOURCES \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+WAVE-0-SCHEMA & None & Haiku & 2K \\
+WAVE-0-SOURCE-INDEX & None & Haiku & 3K \\
+MODULE-1-CHRONOLOGY & SCHEMA & Sonnet & 12K \\
+MODULE-2-ATLAS & SCHEMA, SOURCE-INDEX & Sonnet & 15K \\
+MODULE-3-MYTHS & SCHEMA, M1 & Opus & 18K \\
+MODULE-4-ELEMENTS & SCHEMA, M1 & Sonnet & 12K \\
+MODULE-5-PRACTICE & SCHEMA, M2 & Sonnet & 12K \\
+SYNTH-INTEGRATION & M1--M5 complete & Opus & 20K \\
+VERIFY-SOURCES & All modules & Sonnet & 8K \\
+PACK-ASSEMBLY & SYNTH, VERIFY & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Module 3 (myth synthesis requires nuanced cross-cultural narrative judgment); SYNTH-INTEGRATION (drift model application, through-line construction) \\
+Sonnet & 60\% & Modules 1, 2, 4, 5 (structured research synthesis from reference material); verification and assembly \\
+Haiku & 10\% & Wave 0 scaffolding: shared schemas, source index table templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 5K \\
+1A & Historical Track & Parallel & Opus + Sonnet & 30K \\
+1B & Cultural Track & Parallel & Sonnet & 39K \\
+2 & Synthesis & Sequential & Opus & 20K \\
+3 & Publication & Sequential & Sonnet & 18K \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total Estimated Tokens:}} & \textbf{112K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Initialize schemas & EXEC-1 (Haiku) & Shared JSON schema for animal entries, myth variants, practice records \\
+Build source index & EXEC-1 (Haiku) & Indexed bibliography with quality tier ratings \\
+Build substitution reference table & EXEC-1 (Haiku) & 9-nation animal comparison table (baseline for M2) \\
+CAPCOM gate & CAPCOM & Human approval before parallel tracks open \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Historical):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+MODULE-1-CHRONOLOGY & EXEC-1 (Sonnet) & Transmission timeline document \\
+MODULE-3-MYTHS & CRAFT-CONTEXT (Opus) & Four-nation myth comparison with narrative analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Cultural-Comparative):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+MODULE-2-ATLAS & EXEC-2 (Sonnet) & Animal substitution atlas with dual-explanation format \\
+MODULE-4-ELEMENTS & CRAFT-ANALYSIS (Sonnet) & Five Elements transmission analysis \\
+MODULE-5-PRACTICE & EXEC-2 (Sonnet) & Living traditions documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Apply Drift Model & INTEG (Opus) & Cross-module analysis document; explicit M1--M2--M3 cascade \\
+Write through-line & CRAFT-CONTEXT (Opus) & Closing synthesis paragraph in GSD philosophical voice \\
+Cultural sensitivity review & VERIFY (Sonnet) & Sensitivity check; nation-specific attribution audit \\
+CAPCOM gate & CAPCOM & Human review before publication \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+VERIFY-SOURCES & VERIFY (Sonnet) & Source quality audit; entertainment media flag check \\
+PACK-ASSEMBLY & EXEC-1 (Sonnet) & Final knowledge pack document \\
+Test execution & VERIFY (Sonnet) & Test plan results; verification matrix completion \\
+LOG milestone commit & LOG & Git commit message + milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item The WAVE-0 foundation (schema + source index + substitution table) is the primary cache anchor --- all subsequent agents should load this as their first context block.
+  \item Module 1 (chronology) and Module 2 (substitution atlas) are reference documents for all subsequent modules; they should be cached before launching Waves 1A and 1B.
+  \item The 5-minute TTL window supports launching Track A and Track B within the same context session if initiated close together.
+  \item Module 3 (myths) is the highest-value Opus call --- prime its context with Module 1 chronology and the substitution reference table to maximize cross-referencing quality.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Model} & \tableheader{Est.\ Tokens} & \tableheader{Cost Weight} \\
+\midrule
+Wave 0 scaffolding & Haiku & 5K & Low \\
+Track A modules & Sonnet + Opus & 30K & Medium-High \\
+Track B modules & Sonnet & 39K & Medium \\
+Synthesis & Opus & 20K & High \\
+Publication & Sonnet & 18K & Medium \\
+\midrule
+\textbf{Total} & Mixed & \textbf{112K} & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+WAVE-0-SCHEMA ──────┬──> MODULE-1-CHRONOLOGY ──> MODULE-3-MYTHS
+                    │                                    │
+WAVE-0-SOURCE-IDX ──┤                                    │
+                    │                                    ↓
+WAVE-0-SUBST-TABLE ─┴──> MODULE-2-ATLAS ──────> SYNTH-INTEGRATION
+                         MODULE-4-ELEMENTS ────>       │
+                         MODULE-5-PRACTICE ────>       │
+                                                        ↓
+                                                  VERIFY-SOURCES
+                                                        │
+                                                        ↓
+                                                  PACK-ASSEMBLY
+                                                  [MILESTONE COMPLETE]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 4 & Mandatory & BLOCK \\
+Core Functionality & 16 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge Cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{33} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to professional organizations, peer-reviewed journals, or museum archives. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every date, population statistic, or demographic claim (e.g., 2011 birth boom) attributed to specific source. \\
+SC-IND & Nation-specific attribution & Every cultural reference names specific nation (Korean, Vietnamese, Japanese). Zero uses of ``East Asian'' as a monolithic descriptor. \\
+SC-ADV & No advocacy & Document presents all zodiac traditions as cultural practices without endorsing or critiquing their predictive claims. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Transmission timeline completeness & Three nations documented with specific dates and transmission mechanisms \\
+CF-02 & Oracle bone origins cited & Shang dynasty c.\ 1100 BCE referenced with source \\
+CF-03 & Vietnamese cat substitution & At least two distinct explanations (phonetic, agricultural) documented \\
+CF-04 & Buffalo/Ox substitution explained & Agricultural ecology explanation present \\
+CF-05 & Japanese Boar explained & Narrative reinterpretation (determination not sloth) documented \\
+CF-06 & Sheep/Goat ambiguity addressed & Character 羊 (y\'{a}ng) ambiguity and regional variation documented \\
+CF-07 & Great Race: Chinese canonical & Core narrative with Rat's deception and Cat's exclusion documented \\
+CF-08 & Great Race: Vietnamese variant & Cat-can-swim version documented with cultural consultant citation \\
+CF-09 & Great Race: Japanese variant & Boar-overshoots variant documented \\
+CF-10 & Great Race: Korean variant & Swimming competition variant documented \\
+CF-11 & Wuxing transmission documented & Five Elements spread to at least two nations described \\
+CF-12 & Japan 1872 calendar shift & Gregorian adoption and Jan.\ 1 new year documented with date \\
+CF-13 & Korean tti social grammar & Two contemporary social uses documented \\
+CF-14 & Japanese nengaj\={o} tradition & Card-exchange tradition documented with cultural context \\
+CF-15 & Vietnam birth boom evidence & 2011 Year of Cat baby boom cited with source \\
+CF-16 & Broader East Asian survey & At least four additional nations covered (Cambodian, Malay, Filipino, Turkish) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M1 → M2 cascade & Transmission date explains animal substitution timing (e.g., Vietnamese autonomy period 10th--14th c.\ connects to cat consolidation) \\
+IN-02 & M2 → M3 cascade & Animal substitution choice (cat vs.\ rabbit) connects to myth variant (cat swims, rabbit absent) \\
+IN-03 & M1 → M4 cascade & Transmission chronology connects to Five Elements adoption dates \\
+IN-04 & M4 → M5 cascade & Five Elements / saju tradition connects to living practice (gunghap analysis uses element layer) \\
+IN-05 & Cross-module consistency & Animal names, dates, and attributions are consistent across all modules (no contradictions) \\
+IN-06 & Self-containment & A reader without prior zodiac knowledge can follow the full analysis without external reference \\
+IN-07 & Drift Model applied & SYNTH-INTEGRATION section explicitly applies the Drift Model to at least two national cases \\
+IN-08 & Bibliography completeness & Every factual claim in the document has a traceable source in the bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1.\ Transmission timeline documented with specific dates & CF-01, CF-02, IN-03 & Pending \\
+2.\ All substitutions with two explanations per substitution & CF-03, CF-04, CF-05, CF-06 & Pending \\
+3.\ Cultural logic for substitutions (ecology / linguistics) & CF-03, CF-04, CF-05 & Pending \\
+4.\ Origin myth variants for all four nations & CF-07, CF-08, CF-09, CF-10, IN-02 & Pending \\
+5.\ Five Elements transmission documented & CF-11, IN-03 & Pending \\
+6.\ Japan 1872 calendrical shift documented & CF-12 & Pending \\
+7.\ Korean tti social grammar with two contexts & CF-13, IN-04 & Pending \\
+8.\ Living practice covers three traditions per nation & CF-13, CF-14, CF-15 & Pending \\
+9.\ Nation-specific attribution throughout & SC-IND & Pending \\
+10.\ Bibliography 12+ professional sources & SC-SRC, IN-08 & Pending \\
+11.\ Document self-contained & IN-06 & Pending \\
+12.\ Cross-module connections explicitly traced & IN-01, IN-02, IN-07 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates between waves \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Additional source gathering if evidence gaps identified during execution \\
+EXEC-1 & Document Executor A & Wave 0 scaffolding; Module 1 (chronology); final pack assembly \\
+EXEC-2 & Document Executor B & Module 2 (atlas); Module 5 (living practice) \\
+CRAFT-CONTEXT & Cultural Context & Module 3 (myth variants); through-line synthesis (Opus) \\
+CRAFT-ANALYSIS & Cultural Analysis & Module 4 (Five Elements); cross-element analysis \\
+VERIFY & Verification Agent & Source quality audit; SC test execution; nation-attribution review \\
+INTEG & Integration Agent & Cross-module connection validation; Drift Model application \\
+CAPCOM & HITL Interface & Human approval gates at Wave 0 end and Wave 2 end \\
+BUDGET & Resource Manager & Token budget tracking; session planning (2--3 sessions target) \\
+LOG & Chronicle Agent & Commit messages; milestone summary; version tagging \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Track A: historical; Track B: cultural-comparative) \\
+Nations Covered (deep) & 3 (Japan, Korea, Vietnam) \\
+Nations Covered (survey) & 6+ (Cambodia, Malaysia, Philippines, Turkey, Tibet, Gurung) \\
+Total Tests & 33 (4 safety-critical, 16 core, 8 integration, 5 edge) \\
+Estimated Token Budget & 112K \\
+Estimated Sessions & 2--3 \\
+HITL Gates & 2 (post-Wave 0, post-Wave 2) \\
+Primary Opus Touchpoints & Module 3 (myths), SYNTH-INTEGRATION \\
+Cultural Sensitivity & HIGH --- nation-specific attribution mandatory throughout \\
+Relationship to FDR & Downstream complement to Chinese zodiac FDR coverage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{The zodiac's durability is not its animals. It is its architecture: twelve positions, ten stems, sixty combinations --- a grammar of time so elegant that every culture that received it could speak in it using its own vocabulary. Japan said ``boar.'' Vietnam said ``cat.'' Korea said ``sheep.'' The grammar held. The sentences meant something different in each language. That is what the spaces between are for.}
+
+\vspace{0.5em}
+\textcolor{subtlegray}{\small --- Through-line connecting East Asian Zodiac Variations to the GSD Amiga Principle: small, elegant architecture produces infinite expression through faithful local iteration.}
+\end{quotebox}
+
+\end{document}
