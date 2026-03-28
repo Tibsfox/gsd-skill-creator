@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 1&deg; &mdash; Pacific Wren &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.improv { background: #7B1FA2; }
+    .theory-icon.rhythm { background: var(--puget-mid); }
+    .theory-icon.fm { background: #1565C0; }
+    .theory-icon.theme { background: var(--earth-mid); }
+    .theory-icon.trill { background: #C62828; }
+    .theory-icon.poly { background: var(--puget-dark); }
+    .theory-icon.habitat { background: var(--forest-green); }
+    .theory-icon.culture { background: #E65100; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Bridge contrast card */
+    .bridge-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, var(--puget-light) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .bridge-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: var(--forest-green);
+    }
+    .bridge-table { margin: 0.75rem 0; width: 100%; }
+    .bridge-table th { font-size: 0.78rem; }
+    .bridge-table td { font-size: 0.85rem; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">1&deg;</div>
+      <div class="release-title-block">
+        <h2>Pacific Wren</h2>
+        <div class="scientific">Troglodytes pacificus &middot; Family Troglodytidae (Wrens)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Intricate Cascade Warble &middot; Old-Growth Understory &middot; Energy 2</div>
+
+    <blockquote>
+      The Great Blue Heron stood at the origin in silence. The Pacific Wren answers with a cascade &mdash;
+      100 notes in 10 seconds from a bird that weighs two nickels. From silence, the forest begins to sing.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Pacific Wren is one of the smallest songbirds in the Pacific Northwest: approximately
+          <strong>4 inches</strong> (10 cm) in length, <strong>5.5-inch</strong> wingspan, and a body
+          weight of <strong>8&ndash;12 grams</strong>. For scale: a U.S. nickel weighs 5 grams. The
+          bird weighs roughly two nickels. Yet from this body emerges one of the most complex acoustic
+          signals in the avian world.
+        </p>
+        <p>
+          Until 2010, the Pacific Wren was considered conspecific with the Winter Wren
+          (<em>T. hiemalis</em>) and the Eurasian Wren (<em>T. troglodytes</em>). The American
+          Ornithological Society split the complex based on genetic divergence (~4% cytochrome <em>b</em>
+          sequence divergence; Toews &amp; Irwin 2008), vocal differences confirmed by playback
+          experiments (Kroodsma 1980, 2005), and reproductive isolation at the contact zone in British
+          Columbia (Toews, Brelsford &amp; Irwin 2011). The split was vocal as much as genetic:
+          the birds <em>sound</em> different, and they know it.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Main Event</h2>
+        <h3>The Song: A 10-Second Symphony</h3>
+        <p>
+          A single song bout lasts <strong>5&ndash;10 seconds</strong>. Within that span, the bird
+          produces <strong>100+ distinct notes</strong> &mdash; individual acoustic elements with
+          measurable frequency, duration, and amplitude. Peak delivery exceeds <strong>36 notes per
+          second</strong> (Kroodsma 2005). A concert pianist at <em>Presto</em> produces 10&ndash;15
+          notes per second. The wren operates at roughly three times that rate, with each note
+          requiring independent syringeal muscle control.
+        </p>
+        <p>
+          The song spans approximately <strong>2&ndash;10 kHz</strong>, with peak energy in the
+          <strong>3&ndash;8 kHz</strong> band &mdash; the frequency window that propagates most
+          efficiently through dense old-growth understory. The bird sings in the key the forest
+          resonates.
+        </p>
+
+        <h3>Structural Complexity</h3>
+        <ul>
+          <li><strong>Musical intervals:</strong> Measurable pitch intervals &mdash; stepwise motion,
+          leaps of a third or more, descending cascades functioning as melodic phrases.</li>
+          <li><strong>Repetition with variation:</strong> Theme-and-variation form &mdash; core motifs
+          introduced, then repeated with modifications (pitch transposition, rhythmic alteration,
+          extension). The same structure underlying Beethoven&rsquo;s Fifth and Coltrane&rsquo;s
+          sheets of sound.</li>
+          <li><strong>Trills:</strong> Rapid alternation between adjacent pitches &mdash; acoustically
+          identical to Baroque keyboard ornamentation. Grace notes and mordent-like turns appear in
+          spectrograms.</li>
+          <li><strong>Micro-pauses:</strong> Silent intervals of 10&ndash;50 ms divide the cascade
+          into rhythmic groups of 3&ndash;8 notes. Bar lines for a biological composition.</li>
+          <li><strong>FM synthesis:</strong> Rapid pitch changes via syringeal muscle modulation at
+          millisecond timescales. Moog achieved this electronically in 1964. The wren achieves it
+          with muscle fibers smaller than a human hair.</li>
+        </ul>
+
+        <h3>Bilateral Polyphony: Two Voices, One Bird</h3>
+        <p>
+          The Pacific Wren sings with <strong>two independent sound sources simultaneously</strong>.
+          The avian syrinx is a bilateral organ: left and right halves produce different frequencies,
+          amplitudes, and temporal patterns at the same time (Suthers 1990, <em>Nature</em>).
+          Spectrograms show two simultaneous, non-harmonically-related frequency traces. This is
+          literal biological polyphony &mdash; the transition from the heron&rsquo;s monophonic
+          silence at degree 0&deg; to the first harmonic dimension on the circle.
+        </p>
+
+        <!-- Silence-to-Complexity Bridge -->
+        <div class="bridge-card">
+          <h3>The Silence-to-Complexity Bridge: Degree 0&deg; &rarr; 1&deg;</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The largest single jump in acoustic complexity on the entire circle. From structured silence
+            to cascading melodic elaboration. From the whole note to the sixty-fourth note cascade.
+          </p>
+          <table class="bridge-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Heron (0&deg;)</th>
+                <th>Wren (1&deg;)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Events / hour</td><td>0&ndash;1</td><td>3,600+</td></tr>
+              <tr><td>Notes / bout</td><td>1&ndash;6</td><td>100+</td></tr>
+              <tr><td>Frequency range</td><td>200&ndash;800 Hz</td><td>2,000&ndash;10,000 Hz</td></tr>
+              <tr><td>Body mass</td><td>2,100&ndash;2,500 g</td><td>8&ndash;12 g</td></tr>
+              <tr><td>Polyphony</td><td>Monophonic</td><td>Bilateral (two voices)</td></tr>
+              <tr><td>Temporal resolution</td><td>Minutes&ndash;hours</td><td>Milliseconds</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Old-Growth Dependency -->
+        <h2>Old-Growth Dependency</h2>
+        <h3>The Forest Is the Reverb Chamber</h3>
+        <p>
+          Pacific Wrens are <strong>old-growth understory obligates</strong>. They forage in root
+          tangles, fallen logs, deep moss mats, and the dense fern-and-salal layer of mature
+          forests. Their nesting requires decay-stage wood &mdash; upturned root plates, snag
+          hollows, bark gaps. These structures exist only in forests that have developed for
+          centuries.
+        </p>
+        <p>
+          The acoustic environment of old-growth is uniquely suited to the wren&rsquo;s song:
+          high canopy blocks wind noise, dense understory creates a buffered sound chamber,
+          and ambient noise levels are among the lowest of any terrestrial habitat (Habib,
+          Bayne &amp; Boutin 2007). The forest is not background. The forest is the reverb
+          chamber that makes the song possible.
+        </p>
+        <p>
+          Old-growth forests in the PNW have been reduced by approximately <strong>80&ndash;90%</strong>
+          from pre-European-contact extent. Pacific Wren populations are stable where old-growth
+          persists and reduced or absent where it has been harvested. The bird with the most complex
+          song in the PNW forest requires the forest that took the longest to grow.
+          <strong>Complexity depends on time.</strong>
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon improv">I</div>
+            <div class="theory-content">
+              <h4>Complex Melodic Improvisation <span class="theory-level advanced">Advanced</span></h4>
+              <p>Each rendition differs &mdash; improvisation over a structural template. Same principle as jazz soloing over chord changes.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon rhythm">R</div>
+            <div class="theory-content">
+              <h4>Micro-Phrase Structure <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Micro-pauses create groups of 3&ndash;8 notes. Hierarchical nesting: notes &rarr; motifs &rarr; phrases &rarr; bout. Bar lines for biology.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon fm">F</div>
+            <div class="theory-content">
+              <h4>Frequency Modulation (Biological FM Synthesis) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Rapid pitch changes via syringeal muscle tension modulation. Chowning (1973) FM synthesis enacted by a bilateral biological oscillator.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon theme">T</div>
+            <div class="theory-content">
+              <h4>Theme and Variation <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Motifs recur with pitch transposition, rhythmic alteration, extension. Bach&rsquo;s Goldberg Variations in 10-second form.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon trill">O</div>
+            <div class="theory-content">
+              <h4>The Trill as Ornament <span class="theory-level foundational">Foundational</span></h4>
+              <p>Rapid alternation between adjacent pitches. Grace notes, mordents &mdash; identical to Baroque keyboard ornamentation.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon poly">P</div>
+            <div class="theory-content">
+              <h4>Bilateral Polyphony <span class="theory-level advanced">Advanced</span></h4>
+              <p>Two independent voices from a single 10-gram source. The monophony-to-polyphony transition: Gregorian chant to organum.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon habitat">H</div>
+            <div class="theory-content">
+              <h4>Old-Growth as Acoustic Environment <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>3&ndash;8 kHz window optimized for understory propagation. The forest IS the reverb chamber.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon culture">L</div>
+            <div class="theory-content">
+              <h4>Song Learning as Cultural Transmission <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Learned from neighboring adults. Local dialects emerge. Master-apprentice tradition in 10-gram form.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          The Pacific Wren&rsquo;s song is <strong>improvisation over a structural template</strong>.
+          The species-typical song structure provides the framework; the individual selects and
+          sequences notes from its personal repertoire of 40&ndash;50+ note types in real time.
+          This is the same principle underlying jazz solo performance: chord changes as framework,
+          note choice as creative act.
+        </p>
+        <p>
+          The trill &mdash; rapid alternation between adjacent pitches &mdash; maps directly to
+          <strong>Baroque ornamentation</strong>. The wren&rsquo;s ornament vocabulary (trills,
+          grace notes, mordents) parallels the ornament tables of C.P.E. Bach, Quantz, and
+          Couperin. The bird did not study counterpoint. But the formal structures are identical
+          because both solve the same problem: how to add rhythmic and harmonic complexity to
+          a melodic line.
+        </p>
+        <p>
+          The bilateral syrinx introduces <strong>polyphony</strong> to the circle. Degree 0&deg;
+          was monophonic. Degree 1&deg; adds the second voice. In Western music history, this is
+          the transition from Gregorian chant to organum (9th&ndash;10th century) &mdash; the
+          single most important structural innovation in the history of harmony.
+        </p>
+        <p>
+          <strong>FM synthesis.</strong> The rapid pitch modulation in the wren&rsquo;s song is
+          frequency modulation in biological form. John Chowning&rsquo;s 1973 paper at Stanford
+          described the mathematics of FM audio synthesis. The wren&rsquo;s syringeal muscles
+          achieve the same result: complex spectral output from the modulation of a vibrating
+          membrane&rsquo;s tension. Two oscillators. Two bronchial halves. Independent modulation.
+          The bird IS an FM synthesizer.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Passerine taxonomy and distribution. This release adds bioacoustic depth and music-theory mapping.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Old-growth forest ecology, understory structure, decay-stage wood as critical habitat.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; Bio-Physics Sensing
+            <p>Bilateral syrinx mechanics, FM synthesis via muscle control, acoustic propagation in forests.</p>
+          </div>
+          <div class="xref-card">
+            <strong>COL</strong> &mdash; Columbia Valley
+            <p>Old-growth remnants along Columbia tributaries supporting wren populations.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Bill Frisell at degree 1&deg;. Chromatic elaboration. Textural layering. Complexity from simplicity.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>Direct predecessor. The silence-to-complexity bridge. Monophony &rarr; polyphony, bass &rarr; soprano.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Toews, D.P.L. &amp; Irwin, D.E. (2008). Cryptic speciation in a Holarctic passerine. <em>Molecular Ecology</em> 17(11).</li>
+          <li>Toews, D.P.L., Brelsford, A. &amp; Irwin, D.E. (2011). Hybridization at a contact zone. <em>BMC Evolutionary Biology</em> 11:304.</li>
+          <li>Kroodsma, D.E. (1980). Winter Wren singing behavior. <em>The Condor</em> 82(4).</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Suthers, R.A. (1990). Bilateral syrinx contributions. <em>Nature</em> 347.</li>
+          <li>Suthers, R.A., Goller, F. &amp; Pytte, C. (1999). Neuromuscular control of birdsong. <em>Phil. Trans. R. Soc. B</em> 354.</li>
+          <li>Cornell Lab of Ornithology. Birds of the World: Pacific Wren. birdsoftheworld.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Pacific Wren. birdweb.org</li>
+          <li>Manuwal, D.A. &amp; Huff, M.H. (1987). Douglas-fir forest bird populations. <em>The Condor</em> 89(3).</li>
+          <li>Huff, M.H. &amp; Raley, C.M. (1991). Regional breeding bird patterns. USDA GTR-PNW-285.</li>
+          <li>Chowning, J.M. (1973). FM synthesis of complex spectra. <em>JAES</em> 21(7).</li>
+          <li>Habib, L., Bayne, E.M. &amp; Boutin, S. (2007). Industrial noise and pairing success. <em>Conservation Biology</em> 21(4).</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Troglodytidae</div>
+          <div class="stat-detail">Wrens</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Split</div>
+          <div class="stat-value">2010 AOS</div>
+          <div class="stat-detail">From Winter Wren (<em>T. hiemalis</em>)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">~4 in</div>
+          <div class="stat-detail">10 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">8&ndash;12 g</div>
+          <div class="stat-detail">~2 nickels</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">5.5 in</div>
+          <div class="stat-detail">14 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Frequency Range</div>
+          <div class="stat-value">2&ndash;10 kHz</div>
+          <div class="stat-detail">Peak energy 3&ndash;8 kHz (soprano)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Song Duration</div>
+          <div class="stat-value">5&ndash;10 s</div>
+          <div class="stat-detail">Continuous cascade bout</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Notes per Bout</div>
+          <div class="stat-value">100+</div>
+          <div class="stat-detail">Peak: 36 notes/second</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Note Repertoire</div>
+          <div class="stat-value">40&ndash;50+</div>
+          <div class="stat-detail">Distinct note types per individual</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Polyphony</div>
+          <div class="stat-value">Bilateral</div>
+          <div class="stat-detail">Two independent voices (syrinx)</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">1&deg;</div>
+          <div class="stat-detail">First melodic complexity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">First rise above baseline</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Old-Growth</div>
+          <div class="stat-detail">Understory obligate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 1&deg; &mdash; S36</div>
+          <div class="parallel-name">Bill Frisell</div>
+          <div class="parallel-detail">Chromatic elaboration over foundational structure. Textural complexity from apparent simplicity. The cascade of notes over a bass pedal.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 001 of 360 &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

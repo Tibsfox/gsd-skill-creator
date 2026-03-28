@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 1&deg; &mdash; Bill Frisell &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .album-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+    }
+    .album-card .title {
+      font-weight: 600;
+      color: var(--seattle-navy);
+      font-size: 0.95rem;
+    }
+    .album-card .year-label {
+      font-size: 0.78rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+    }
+    .album-card .significance {
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+      color: #424242;
+    }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">1&deg;</div>
+      <div>
+        <h1>Bill Frisell</h1>
+        <div class="subtitle">Jazz &middot; Avant-Garde &middot; Americana &middot; Ambient Guitar &mdash; Seattle 1989 &rarr; Present</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          &ldquo;Seattle gave me space. In New York, everybody is looking over your shoulder. In Seattle,
+          nobody cared what I was doing, and that meant I could figure out what I actually wanted to play.&rdquo;
+          &mdash; Bill Frisell
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY & ORIGINS
+             ======================================== -->
+
+        <h2>Biography &amp; Origins</h2>
+
+        <p>William Richard Frisell was born March 18, 1951, in Baltimore, Maryland. He grew up in Denver,
+        Colorado, where the open landscape and big sky would later inform his sense of musical space.
+        He studied at the University of Northern Colorado before transferring to <strong>Berklee College
+        of Music</strong> in 1975, where he studied with <strong>Jim Hall</strong> and <strong>Pat Metheny</strong>
+        &mdash; two guitarists representing divergent approaches to the instrument that would define
+        Frisell&rsquo;s synthesis.</p>
+
+        <p>From <strong>Hall</strong>, Frisell inherited the principle that harmony could be implied rather
+        than stated &mdash; that open voicings with wide intervals created spaciousness that close-position
+        chords could not achieve. From <strong>Metheny</strong>, he absorbed the idea that the electric
+        guitar&rsquo;s signal chain was part of the instrument itself, not an accessory to it.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: JazzTimes (2004); DownBeat (2009);
+        Berklee College of Music alumni records</p>
+
+        <h3>The Downtown Decade (1979&ndash;1989)</h3>
+
+        <p>After brief studies in Belgium with Philip Catherine, Frisell settled in Hoboken, NJ, and became
+        enmeshed in the <strong>New York downtown improvised music scene</strong> &mdash; the Knitting Factory,
+        Roulette, and John Zorn&rsquo;s extended circle. His first ECM release as leader, <em>In Line</em> (1983),
+        established everything he would become: complex and simple juxtaposed, genre refused, space as structure.</p>
+
+        <p>Key downtown collaborations:</p>
+        <ul>
+          <li><strong>John Zorn</strong> &mdash; <em>Naked City</em>, <em>Spy vs Spy</em>. Radical stylistic
+          juxtaposition training Frisell&rsquo;s reflexes for instant genre-switching.</li>
+          <li><strong>Paul Motian Trio</strong> (with Joe Lovano, 1984&ndash;2011) &mdash; 27 years of rubato,
+          floating time, and the suspended-time quality that defines Frisell&rsquo;s mature style.</li>
+          <li><strong>Jan Garbarek</strong> &mdash; ECM recordings where Nordic folk-jazz met Frisell&rsquo;s
+          open voicings.</li>
+        </ul>
+
+        <!-- ========================================
+             THE MOVE TO SEATTLE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Move to Seattle (1989)</h2>
+
+        <p>In 1989, Frisell left the New York area and moved to Seattle, settling in
+        <strong>Fremont</strong> (later Queen Anne). The move was both personal and musical &mdash; an
+        escape from NYC&rsquo;s competitive intensity into geographic space that would become sonic space.</p>
+
+        <p>The timing placed Frisell in Seattle just as grunge was emerging. But his Seattle was different:
+        the improvised music community centered around <strong>Wayne Horvitz</strong>, <strong>Eyvind Kang</strong>,
+        <strong>Tucker Martine</strong>, the <strong>Earshot Jazz Festival</strong>, the OK Hotel, the
+        Rendezvous, and the Chapel Performance Space.</p>
+
+        <h3>Wayne Horvitz &amp; the Seattle Improvised Music Community</h3>
+
+        <p><strong>Wayne Horvitz</strong> arrived in Seattle in 1988, one year before Frisell. Both had been
+        part of John Zorn&rsquo;s NYC circle. Their shared migration was not coincidental &mdash; they were
+        part of a wave of downtown musicians who chose the Pacific Northwest. Together, they became the
+        <strong>gravitational center of Seattle&rsquo;s improvised music community</strong>, collaborating in
+        <strong>Pigpen</strong> (trio with Kenny Wollesen), <strong>Zony Mash</strong>, and various film-scoring
+        projects.</p>
+
+        <h3>Jackson Street Lineage</h3>
+
+        <p>Frisell&rsquo;s connection to Seattle&rsquo;s Jackson Street jazz legacy
+        (<a href="../000-quincy-jones/index.html">degree 0&deg;</a>) is indirect but genuine. He arrived four
+        decades after Quincy Jones left. But the infrastructure the Jackson Street era built &mdash; the
+        audience for jazz, the institutional memory, the Earshot Jazz Festival (founded 1988) &mdash; was the
+        substrate that made Seattle viable for a jazz musician choosing not to live in New York.</p>
+
+        <p>Jones&rsquo;s Central District was shaped by segregation and containment. Frisell&rsquo;s Seattle
+        was shaped by choice and expansion. <strong>The export pattern reverses:</strong> Jones was locally
+        cultivated, globally exported. Frisell was globally cultivated, locally settled. The artist who
+        arrives rather than the artist who departs.</p>
+
+        <!-- ========================================
+             CAREER ARC — TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1983&ndash;1988 &mdash; The ECM Years</div>
+          <p>First recordings as leader on ECM Records. <em>In Line</em> (1983), <em>Rambler</em> (1985),
+          <em>Lookout for Hope</em> (1988). Established the open-voicing, space-as-structure approach
+          under Manfred Eicher&rsquo;s meticulous production. Hank Roberts (cello), Kermit Driscoll (bass),
+          Joey Baron (drums) as core ensemble.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1993&ndash;1998 &mdash; The Americana Turn</div>
+          <p><strong>Have a Little Faith</strong> (1993) &mdash; the manifesto: Copland, Muddy Waters,
+          Madonna, and Dylan on one album. <strong>Nashville</strong> (1997) &mdash; country-jazz synthesis
+          with Jerry Douglas, Viktor Krauss. <strong>Gone, Just Like a Train</strong> (1998) &mdash; rock
+          dynamics added. Frisell proved that jazz improvisation could inhabit American vernacular traditions.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2000s &mdash; Film &amp; Collaborations</div>
+          <p>Scored films, expanded the collaborative web. Continued the Paul Motian Trio until Motian&rsquo;s
+          death in 2011. 300+ album credits as sideman/leader made him one of the most recorded guitarists
+          in jazz history.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2014&ndash;Present &mdash; Synthesis</div>
+          <p><strong>Guitar in the Space Age!</strong> (2014) &mdash; surf-rock reconnection to childhood.
+          <strong>Harmony</strong> (2019, Blue Note) &mdash; chamber music with voice and cello; consonance
+          as destination after decades of dissonance. The mature Frisell: every influence integrated, nothing
+          discarded.</p>
+        </div>
+
+        <!-- ========================================
+             KEY ALBUMS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Key Albums</h2>
+
+        <div class="album-grid">
+          <div class="album-card">
+            <div class="title">In Line</div>
+            <div class="year-label">1983 &middot; ECM</div>
+            <div class="significance">First leader recording. Solo electric &amp; acoustic guitar. Space as structure.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Lookout for Hope</div>
+            <div class="year-label">1988 &middot; ECM</div>
+            <div class="significance">Mature ECM statement. Roberts, Driscoll, Baron. The quartet sound.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Have a Little Faith</div>
+            <div class="year-label">1993 &middot; Nonesuch</div>
+            <div class="significance">Americana manifesto. Copland to Muddy Waters on one album.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Nashville</div>
+            <div class="year-label">1997 &middot; Nonesuch</div>
+            <div class="significance">Country-jazz synthesis with Nashville session musicians.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Guitar in the Space Age!</div>
+            <div class="year-label">2014 &middot; OKeh</div>
+            <div class="significance">Surf-rock reconnection. Childhood influences, mature technique.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Harmony</div>
+            <div class="year-label">2019 &middot; Blue Note</div>
+            <div class="significance">Chamber-music culmination. Consonance as destination.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Six theory nodes map Frisell&rsquo;s musical language. Each includes a <strong>genealogy link</strong>
+        to degree 0 (Quincy Jones), tracing how concepts evolve across the S36 engine.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Open Voicings &amp; Wide Intervals</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Voicings with intervals of a tenth or wider, spreading chord tones across three octaves.
+            Harmony implied rather than stated. Inverts Jones&rsquo;s dense big-band voicings while
+            serving the same architectural function.</p>
+            <div class="examples">In Line (1983), Lookout for Hope (1988), Harmony (2019)</div>
+            <div class="genealogy"><strong>From 0&deg;:</strong> Inversion of big-band density &mdash; same Amiga Principle</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Modal Ambiguity</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Neither major nor minor. Emphasizes modal common tones (root, 4th, 5th) while treating
+            the 3rd and 6th as passing colors. Tonal gravity without tonal identity &mdash; the
+            &ldquo;in between.&rdquo;</p>
+            <div class="examples">Harmony (2019), Motian Trio recordings (1984&ndash;2011)</div>
+            <div class="genealogy"><strong>From 0&deg;:</strong> Departs from functional ii-V-I toward suspended tonality</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Delay as Counterpoint</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Delay used as compositional technique, not effect. The echo operates as a second voice,
+            creating two-part counterpoint from a single performer. Rhythmic patterns emerge that
+            neither signal alone contains.</p>
+            <div class="examples">NPR Tiny Desk (2019), Guitar in the Space Age! (2014)</div>
+            <div class="genealogy"><strong>From 0&deg;:</strong> Jones achieved counterpoint through sections; Frisell through signal processing</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Silence as Structure</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Space between notes as building block. Not bebop punctuation but architectural silence.
+            Jim Hall lineage: fewer notes, more weight per note. The heron parallel &mdash; stillness
+            as action.</p>
+            <div class="examples">Paul Motian Trio, In Line (1983), Rambler (1985)</div>
+            <div class="genealogy"><strong>New at 1&deg;:</strong> First instance in S36 engine</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Upper-Register Chromaticism</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Chromatic neighbor tones in the upper register creating shimmering instability. The melody
+            is always almost arriving. Where Jones&rsquo;s bass-register chromaticism propels, Frisell&rsquo;s
+            upper-register chromaticism suspends.</p>
+            <div class="examples">Lookout for Hope (1988), Strange Meeting (1987), Harmony (2019)</div>
+            <div class="genealogy"><strong>From 0&deg;:</strong> Registral inversion &mdash; bass propulsion becomes upper suspension</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Counterpoint Through Loops</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Loop pedals creating genuine multi-voice counterpoint from a single performer. Bach-era
+            questions in real time: voice interaction, resolution against repeating patterns. The Amiga
+            Principle at its most literal.</p>
+            <div class="examples">Solo performances, Music IS (2018)</div>
+            <div class="genealogy"><strong>From 0&deg;:</strong> 15-piece ensemble reduced to one performer + technology</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             INFLUENCE & LEGACY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Influence &amp; Legacy</h2>
+
+        <p>Frisell bridged jazz and Americana before the category existed. His impact:</p>
+        <ul>
+          <li><strong>Nels Cline</strong> (Wilco) &mdash; signal-chain approach, noise/texture integration</li>
+          <li><strong>Mary Halvorson</strong> &mdash; post-2010 avant-garde guitar; effects as composition</li>
+          <li><strong>Julian Lage</strong> &mdash; Hall&rarr;Frisell&rarr;Lage three-generation lineage</li>
+          <li><strong>Ambient guitar movement</strong> &mdash; atmospheric, effects-laden guitar music from
+          post-rock to ambient owes a debt to Frisell&rsquo;s demonstration that the guitar could function
+          as an atmospheric instrument</li>
+        </ul>
+
+        <!-- ========================================
+             DEGREE 0→1 CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degree 0&deg; (Quincy Jones)</h4>
+          <ul>
+            <li><strong>Tritone substitution:</strong> Jones used functional bII7 replacing V7. Frisell uses tritone intervals as suspended color &mdash; same material, shifted from resolution to suspension.</li>
+            <li><strong>Chromatic harmony:</strong> Jones in the bass register (propulsion). Frisell in the upper register (suspension). Same vocabulary, opposite architecture.</li>
+            <li><strong>Cross-genre bridging:</strong> Jones bridged jazz&rarr;pop/R&amp;B/film. Frisell bridged jazz&rarr;Americana/folk/country. The bridge-building principle is constant.</li>
+            <li><strong>Export pattern reversal:</strong> Jones was exported from Seattle. Frisell was imported to Seattle. First inflection in the S36 cultural pattern.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a></li>
+            <li><a href="../../../GRV/index.html">GRV &mdash; Green River / Seattle Scene</a></li>
+            <li><a href="../../../DAA/index.html">DAA &mdash; Deep Audio Analysis</a></li>
+            <li><a href="../../../HFE/index.html">HFE &mdash; Audio Engineering</a></li>
+            <li><a href="../../../MDB/index.html">MDB &mdash; Moody Blues / Genre Bridging</a></li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Frisell, Bill. Official website: billfrisell.com.</li>
+          <li>Frisell, Bill. NPR Tiny Desk Concert, 2019.</li>
+          <li>ECM Records. <em>In Line</em> (1983), <em>Rambler</em> (1985), <em>Lookout for Hope</em> (1988).</li>
+          <li>Nonesuch Records. <em>Have a Little Faith</em> (1993), <em>Nashville</em> (1997).</li>
+          <li>Blue Note Records. <em>Harmony</em> (2019).</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="6">
+          <li>Philip, Radhika. &ldquo;Bill Frisell: A Portrait.&rdquo; JazzTimes, 2004.</li>
+          <li>Woodard, Josef. &ldquo;Bill Frisell: Beautiful Dreamer.&rdquo; DownBeat, 2009.</li>
+          <li>Watson, Philip. &ldquo;Bill Frisell and the Remaking of American Music.&rdquo; The Wire, 2014.</li>
+          <li>Cline, Nels. &ldquo;Learning from Frisell.&rdquo; Guitar Player, 2015.</li>
+          <li>de Barros, Paul. &ldquo;Seattle Jazz: A Quiet Revolution.&rdquo; DownBeat, 1998.</li>
+          <li>Zorn, John, ed. <em>Arcana: Musicians on Music</em>. Granary Books, 2000.</li>
+          <li>Premier Guitar. &ldquo;Bill Frisell&rsquo;s Signal Chain.&rdquo; 2017.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="13">
+          <li>Berklee College of Music. Alumni records.</li>
+          <li>Earshot Jazz Festival. Archives, 1988&ndash;present.</li>
+          <li>AllMusic. Editorial reviews and discography.</li>
+          <li>Hal Leonard. <em>Bill Frisell: An Anthology</em> (transcriptions). 2005.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR — STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">March 18, 1951</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Baltimore, MD</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Raised</span>
+            <span class="stat-value">Denver, CO</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle</span>
+            <span class="stat-value">Fremont / Queen Anne</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Since</span>
+            <span class="stat-value">1989</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">1&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz / Americana</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1980s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">ECM / Nonesuch</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label">Album Credits</span>
+            <span class="stat-value">300+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">As Leader</span>
+            <span class="stat-value">40+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">ECM Albums</span>
+            <span class="stat-value">7</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Nonesuch Albums</span>
+            <span class="stat-value">16+</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">With Genealogy</span>
+            <span class="stat-value">5 of 6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">6 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jim Hall</span>
+            <span class="stat-value">Teacher</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Paul Motian</span>
+            <span class="stat-value">27 years</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Wayne Horvitz</span>
+            <span class="stat-value">35+ years</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">John Zorn</span>
+            <span class="stat-value">Downtown era</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg; &rarr; 1&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Carry Items</span>
+            <span class="stat-value">4 resolved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Items</span>
+            <span class="stat-value">5 immediate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern Items</span>
+            <span class="stat-value">5 extended</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Next Degree</span>
+            <span class="stat-value">Wayne Horvitz</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 1&deg; / 360 &middot;
+      <a href="../000-quincy-jones/index.html">Prev: 0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

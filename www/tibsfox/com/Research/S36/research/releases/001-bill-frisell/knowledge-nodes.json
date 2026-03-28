@@ -1,0 +1,150 @@
+{
+  "degree": 1,
+  "artist": "Bill Frisell",
+  "slug": "001-bill-frisell",
+  "genre": "Jazz (avant-garde, Americana, ambient)",
+  "energy": 2,
+  "era": "1980s-present",
+  "location": {
+    "origin": "Baltimore, MD",
+    "formative": "Denver, CO — University of Northern Colorado; Boston, MA — Berklee College of Music",
+    "career": "Hoboken, NJ (NYC downtown scene) → Seattle, WA (Fremont/Queen Anne, 1989-present)"
+  },
+  "born": "1951-03-18",
+  "died": null,
+  "labels": ["ECM", "Nonesuch", "Blue Note", "OKeh/Sony"],
+  "theory_nodes": [
+    {
+      "concept": "Open voicings and wide intervals",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/open-voicings.md",
+      "examples": [
+        "In Line (1983, ECM) — solo guitar with compound-interval voicings",
+        "Lookout for Hope (1988, ECM) — trio voicings omitting 3rds and 5ths",
+        "Throughout from Harmony (2019, Blue Note) — implied polyphony across registral space"
+      ],
+      "description": "Voicings with intervals of a tenth or wider between adjacent notes, creating spaciousness through registral distribution. Chord is implied rather than stated. Inverts Jones's dense big-band voicings while serving the same architectural function — constrained resources producing harmonic complexity.",
+      "genealogy": {
+        "ancestor": "Big band orchestration (degree 0)",
+        "relationship": "inversion — density replaced by spaciousness, same Amiga Principle"
+      }
+    },
+    {
+      "concept": "Modal ambiguity",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/modal-ambiguity.md",
+      "examples": [
+        "Throughout (Harmony, 2019) — tonal center without tonal identity",
+        "Lookout for Hope (1988) — parallel mode common tones emphasized",
+        "Paul Motian Trio recordings (1984-2011) — rubato phrasing over suspended harmony"
+      ],
+      "description": "Deliberate avoidance of the major/minor binary by emphasizing modal common tones (root, 4th, 5th) while treating the 3rd and 6th as passing colors. Creates a tonal gravity that listeners feel without being able to name. Extends Miles Davis's modal jazz into a harmonic palette of ambiguity itself.",
+      "genealogy": {
+        "ancestor": "ii-V-I progression (degree 0)",
+        "relationship": "departure — Frisell moves away from functional progression toward suspended tonality"
+      }
+    },
+    {
+      "concept": "Delay as counterpoint",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/counterpoint/delay-as-counterpoint.md",
+      "examples": [
+        "Solo performances (NPR Tiny Desk, 2019) — two-part counterpoint from single performer",
+        "Shenandoah from Guitar in the Space Age! (2014) — delayed echo as second voice",
+        "Music IS (2018, OKeh) — layered delay trails as harmonic texture"
+      ],
+      "description": "Delay used not as effect but as compositional technique. The delayed signal operates as a second voice, creating genuine two-part counterpoint from a single performer. When delay time is musically meaningful (dotted quarter, half note), the interaction produces rhythmic patterns neither signal alone contains.",
+      "genealogy": {
+        "ancestor": "Orchestration as architecture (degree 0)",
+        "relationship": "technological extension — Jones achieved counterpoint through section writing; Frisell achieves it through signal processing"
+      }
+    },
+    {
+      "concept": "Silence as structure",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/composition/silence-as-structure.md",
+      "examples": [
+        "Paul Motian Trio recordings — silence carries equal weight to sounded notes",
+        "In Line (1983) — solo passages where space is the primary material",
+        "Rambler (1985, ECM) — phrases separated by structural silence"
+      ],
+      "description": "Space between notes as a building block, as present and deliberate as any sounded note. Not bebop punctuation but architectural silence — waiting as attention, stillness as action. Jim Hall lineage: fewer notes = more weight per note. Connects to the great blue heron parallel in the S36 vision.",
+      "genealogy": {
+        "ancestor": null,
+        "relationship": "new concept — first instance in the S36 engine"
+      }
+    },
+    {
+      "concept": "Chromaticism in the upper register",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/chromatic-melody.md",
+      "examples": [
+        "Lookout for Hope (1988) — melodic half-step neighbor tones creating shimmer",
+        "Strange Meeting (1987, Nonesuch) — upper-register instability through chromatic approach",
+        "Harmony (2019) — chromatic voice leading in the melody over open voicings"
+      ],
+      "description": "Chromatic neighbor tones in the upper register — notes a half-step above or below the target, approached and departed by step — creating shimmering instability. Where Jones's chromaticism operated in the bass register (propelling forward), Frisell's operates in the upper register (suspending in place). Same harmonic material, opposite architectural intent.",
+      "genealogy": {
+        "ancestor": "Chromatic bass lines (degree 0)",
+        "relationship": "registral inversion — bass propulsion becomes upper-register suspension"
+      }
+    },
+    {
+      "concept": "Counterpoint through loops",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/counterpoint/loop-counterpoint.md",
+      "examples": [
+        "Solo performances — loop pedal building multiple independent voices in real time",
+        "A Change Is Gonna Come (solo guitar arrangement) — three-voice counterpoint via loops",
+        "Music IS (2018, OKeh) — extended loop compositions"
+      ],
+      "description": "Loop pedals creating genuine counterpoint: multiple independent melodic and harmonic lines from a single performer. Raises Bach-era contrapuntal questions in real time: voice interaction, resolution against repeating patterns, independence vs. convergence. The Amiga Principle at its most literal — one performer, technology multiplying available voices.",
+      "genealogy": {
+        "ancestor": "Big band orchestration (degree 0)",
+        "relationship": "radical reduction — 15-piece ensemble complexity reduced to one performer plus technology"
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "GRV", "DAA", "HFE", "MDB", "WAH"],
+  "seattle_connection": "Fremont/Queen Anne (1989-present). Co-founder with Wayne Horvitz of Seattle's improvised music community. Reversed the talent-export pattern: globally cultivated, chose local settlement.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Open voicings — second instance (inversion of degree 0's density)",
+      "Modal ambiguity — first instance, new concept",
+      "Delay as counterpoint — first instance, technology-as-composition",
+      "Silence as structure — first instance, connects to heron parallel",
+      "Chromaticism — second instance (upper-register inversion of degree 0's bass-register chromaticism)",
+      "Counterpoint through loops — first instance, Amiga Principle in minimal form"
+    ],
+    "immediate_items": [
+      "Wayne Horvitz (degree 2) inherits: Seattle improvised music community co-founding, shared NYC downtown migration, Pigpen/Zony Mash collaboration details, keyboard-guitar harmonic dialogue",
+      "The jazz-to-Americana bridge Frisell built should be traced forward through every subsequent artist who works across genre boundaries",
+      "The reversed export pattern (global cultivation → local settlement) should be tracked alongside the original export pattern (local cultivation → global departure) as a second S36 cultural pattern",
+      "ECM Records aesthetic (space, silence, meticulous engineering) should be tracked as a production-philosophy thread alongside the production techniques from degree 0"
+    ],
+    "pattern_items": [
+      "Signal chain as instrument: track how subsequent artists treat amplification and processing as compositional tools vs. decorative effects",
+      "The Berklee pipeline appears at both degree 0 (Jones, 1951) and degree 1 (Frisell, 1975) — track all Berklee connections across the 360 degrees",
+      "Genre-bridging evolution: Jones (jazz→pop/R&B/film, 1950s-80s) → Frisell (jazz→Americana/folk/country, 1990s-present) — trace how each subsequent artist extends the territory of what jazz harmony can inhabit",
+      "The Jim Hall teaching lineage through Frisell to Julian Lage represents a three-generation pedagogical chain — track these chains across the engine"
+    ]
+  },
+  "key_albums": [
+    {"title": "In Line", "year": 1983, "label": "ECM", "significance": "First leader recording; established the open-voicing, space-as-structure approach"},
+    {"title": "Rambler", "year": 1985, "label": "ECM", "significance": "First band recording on ECM; introduced the Frisell ensemble sound"},
+    {"title": "Lookout for Hope", "year": 1988, "label": "ECM", "significance": "Mature ECM-era statement; Hank Roberts, Kermit Driscoll, Joey Baron"},
+    {"title": "Have a Little Faith", "year": 1993, "label": "Nonesuch", "significance": "Americana manifesto; Copland to Muddy Waters on one album"},
+    {"title": "Nashville", "year": 1997, "label": "Nonesuch", "significance": "Country-jazz synthesis with Nashville session musicians"},
+    {"title": "Guitar in the Space Age!", "year": 2014, "label": "OKeh/Sony", "significance": "Surf-rock reconnection; childhood influences filtered through mature technique"},
+    {"title": "Harmony", "year": 2019, "label": "Blue Note", "significance": "Chamber-music culmination; consonance as destination after decades of dissonance"}
+  ],
+  "sources_count": 17,
+  "word_count_research": 3200,
+  "release_date": "2026-03-28"
+}
