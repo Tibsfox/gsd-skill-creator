@@ -149,6 +149,8 @@
     { id: 'SAN', name: 'SANS Institute', path: 'SAN/index.html' },
     { id: 'SMB', name: 'SMBH Growth', path: 'SMB/index.html' },
     { id: 'SNX', name: 'Saturday Night Live', path: 'SNX/index.html' },
+    { id: 'S36', name: 'Seattle 360', path: 'S36/index.html' },
+    { id: 'SPS', name: 'Sound of Puget Sound', path: 'SPS/index.html' },
     { id: 'SRD', name: 'SSH & RDP', path: 'SRD/index.html' },
     { id: 'SRG', name: 'Susan Rogers', path: 'SRG/index.html' },
     { id: 'SSM', name: 'Street Music', path: 'SSM/index.html' },
@@ -194,7 +196,7 @@
     { name: 'Vision', color: '#AB47BC', ids: ['ROF','SPA','NWC','SMF','WCN','OTM'] },
     { name: 'Broadcasting', color: '#26A69A', ids: ['RBH','KPZ','KSM','KUB','WLF','C89','MIX','SGL','CBC','IBC','SVB','DFQ','AMR','TVH','ALV','SNX','LNT','CCT','CNA'] },
     { name: 'Science', color: '#5C6BC0', ids: ['BHK','LGW','SET','SGM','BNY','ABM','CHS'] },
-    { name: 'Music', color: '#EF5350', ids: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB'] },
+    { name: 'Music', color: '#EF5350', ids: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'] },
     { name: 'Space', color: '#1E88E5', ids: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'] },
     { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR'] },
     { name: 'Graphics', color: '#8E24AA', ids: ['NEH','VKD','VKS'] }
