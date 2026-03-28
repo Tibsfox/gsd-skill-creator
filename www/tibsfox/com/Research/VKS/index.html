@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vulkan Screensaver Engine &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-vks">
+  <header>
+    <h1>XScreenSaver &amp; Vulkan Screensaver Engine</h1>
+    <div class="subtitle">Hack Catalog &middot; Vulkan Architecture &middot; NeHe Translation &middot; Sascha Willems Gallery &middot; CUDA Generative &middot; AI Evolution</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-xscreensaver-catalog">XScreenSaver Catalog</a>
+      <a href="page.html?doc=02-vulkan-engine">Vulkan Engine</a>
+      <a href="page.html?doc=03-nehe-vulkan">NeHe Translation</a>
+      <a href="page.html?doc=04-sascha-willems">Sascha Willems</a>
+      <a href="page.html?doc=05-cuda-generative">CUDA Generative</a>
+      <a href="page.html?doc=06-ai-evolution">AI Evolution</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The screensaver is software that runs when nothing else needs to run. It occupies the spaces
+      between work &mdash; the pauses, the idle moments, the gaps in computation. In the GSD worldview,
+      those spaces between are precisely where meaning lives. A screensaver is not decorative noise.
+      It is the system dreaming.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">240+</span><span class="stat-label">XScreenSaver Hacks</span></div>
+      <div class="stat"><span class="stat-value">48</span><span class="stat-label">NeHe Lessons</span></div>
+      <div class="stat"><span class="stat-value">60+</span><span class="stat-label">Vulkan Examples</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">API Families</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">GPU Layers</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-xscreensaver-catalog" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: XScreenSaver Catalog</h3>
+        <div class="meta"><span class="tag tag-catalog">Catalog</span> Track A &middot; Hack inventory</div>
+        <p>Complete catalog of 240+ XScreenSaver hacks across four API families: X11/Xlib, OpenGL 1.3, GLSL/Shader, and Shadertoy ports. Technique taxonomy, category classification, and skill-creator upstream intelligence schema.</p>
+      </a>
+
+      <a href="page.html?doc=02-vulkan-engine" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Vulkan Engine Architecture</h3>
+        <div class="meta"><span class="tag tag-engine">Engine</span> Track B &middot; Core architecture</div>
+        <p>Native Vulkan 1.3+ screensaver engine for Linux. Wayland and X11 dual output, scene manager, plugin loader, transition system, and CUDA interop via VK_NV_external_memory. The architectural foundation.</p>
+      </a>
+
+      <a href="page.html?doc=03-nehe-vulkan" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: NeHe Vulkan Translation</h3>
+        <div class="meta"><span class="tag tag-nehe">NeHe</span> Track B &middot; Tutorial rebirth</div>
+        <p>All 48 NeHe OpenGL tutorial concepts translated to Vulkan/SPIR-V screensaver plugins. From texturing and lighting through fog, morphing, and particle systems &mdash; the lessons that taught a generation, reborn for modern hardware.</p>
+      </a>
+
+      <a href="page.html?doc=04-sascha-willems" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Sascha Willems Gallery</h3>
+        <div class="meta"><span class="tag tag-sascha">Gallery</span> Track A &middot; Technique catalog</div>
+        <p>60+ MIT-licensed Vulkan examples adapted as standalone screensaver plugins. PBR, SSAO, deferred rendering, ray tracing, compute shader particle systems, N-body simulations, and convolution filters.</p>
+      </a>
+
+      <a href="page.html?doc=05-cuda-generative" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: CUDA Generative Math</h3>
+        <div class="meta"><span class="tag tag-cuda">CUDA</span> Track C &middot; Mathematical substrate</div>
+        <p>cuRAND noise generation (Perlin, Simplex, Worley), cuFFT spectral analysis, reaction-diffusion systems, fluid simulation, N-body gravity, and evolutionary algorithm substrates. The GPU as mathematical laboratory.</p>
+      </a>
+
+      <a href="page.html?doc=06-ai-evolution" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: AI Evolution Engine</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> Synthesis &middot; Evolutionary art</div>
+        <p>Claude API integration for shader mutation and selection. Fitness function library (aesthetic, complexity, novelty), population manager evolving visual programs over time, upstream intelligence contribution back to skill-creator.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>XScreenSaver architecture</td><td>M1, M2</td><td>SYS, GRD</td></tr>
+        <tr><td>Vulkan pipeline / SPIR-V</td><td>M2, M3, M4</td><td>HLO, TSB</td></tr>
+        <tr><td>OpenGL legacy / NeHe</td><td>M1, M3</td><td>GRD, CMH</td></tr>
+        <tr><td>Compute shaders</td><td>M2, M4, M5</td><td>HLO, TSB</td></tr>
+        <tr><td>CUDA interop</td><td>M2, M5, M6</td><td>DAA, HLO</td></tr>
+        <tr><td>Procedural noise</td><td>M3, M5</td><td>ECO, GRD</td></tr>
+        <tr><td>Reaction-diffusion</td><td>M5, M6</td><td>HLO, TSB</td></tr>
+        <tr><td>Evolutionary algorithms</td><td>M5, M6</td><td>ECO, BRC</td></tr>
+        <tr><td>Shader fitness / aesthetics</td><td>M6</td><td>CHS, TSB</td></tr>
+        <tr><td>Plugin architecture</td><td>M1, M2, M3, M4</td><td>SYS, K8S</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+XSCREENSAVER / VULKAN ENGINE -- DOMAIN MAP
+===============================================================
+
+  XSCREENSAVER CATALOG              VULKAN SCREENSAVER ENGINE
+  +------------------+             +---------------------------+
+  | 240+ Hacks       |             | SCENE MANAGER             |
+  | X11/Xlib         |             | (select, schedule,        |
+  | OpenGL 1.3       |--------&gt;   |  transition)              |
+  | GLSL/Shader      |             +----+------+------+--------+
+  | Shadertoy        |                  |      |      |
+  +------------------+             VULKAN  CUDA    AI EVOLUTION
+                                   GRAPHICS COMPUTE  LAYER
+  UPSTREAM INTELLIGENCE            [Vertex] [cuRAND] [Mutation]
+  +------------------+             [Frag]   [cuFFT]  [Fitness]
+  | Skill-Creator    |             [Comp]   [cuBLAS] [Selection]
+  | Feed Schema      |             [RT]
+  | Pattern Library   |            +----+------+------+--------+
+  +------------------+             | SHADER GALLERY             |
+                                   | NeHe 48 | Sascha 60+      |
+                                   | Shadertoy | Custom         |
+                                   +---------------------------+
+                                          |
+                                   WAYLAND / X11 OUTPUT
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: XScreenSaver Catalog] -----------&gt; [M4: Sascha Willems]
+       |    (technique taxonomy)                |
+       |                                        |
+       v                                        v
+  [M2: Vulkan Engine] --------&gt; [M3: NeHe Translation]
+       |                              |
+       |                              |
+       +----------- + ---------------+
+                     |
+                     v
+          [M5: CUDA Generative Math]
+                     |
+                     v
+          [M6: AI Evolution Engine]
+
+  Parallel tracks:
+    Track A: M1 + M4 (catalog + gallery)
+    Track B: M2 + M3 (engine + NeHe)
+    Track C: M5 (CUDA math)
+    Synthesis: M6 (AI evolution + cross-module)
+    </pre>
+  </main>
+
+  <footer>
+    <p>XScreenSaver &amp; Vulkan Screensaver Engine &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
