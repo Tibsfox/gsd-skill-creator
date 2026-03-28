@@ -1,0 +1,999 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME: Desert Night Sky ──────────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep night-sky indigo — section headers
+\definecolor{secondary}{HTML}{4E342E}     % Desert earth — subsection headers
+\definecolor{tertiary}{HTML}{2E7D32}      % Sage & creosote — subsubsections
+\definecolor{accent}{HTML}{283593}        % Moonrise accent
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{EFEBE9}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ─────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── TABLE HELPERS ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS / FOOTERS ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Moontribe Collective}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Moontribe Collective -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+% ─────────────────────────────────────────────────────────────────────────────
+
+% ── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Moontribe Collective\\[0.3em]Thirty Years in the Desert}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Southern California $\cdot$ Mojave Desert $\cdot$ Underground Electronic Music}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 $\vert$ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron $\vert$ Estimated: 5--7 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% =============================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% =============================================================================
+
+\section{Moontribe Collective --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Depends On:}{Mojave Desert ecological data; underground music history archives; community organization theory}
+\metafield{Context:}{Cold-start deep research mission; 5 modules; Squadron activation}
+
+\subsection{Vision}
+
+Every full moon since 1993, a column of cars leaves Los Angeles and drives east into the Mojave. The directions arrive only by email, only to those already in the community, and only after nightfall. There are no flyers, no ticket sales, no brand partnerships, no social media announcements. The gathering that awaits --- hundreds of people dancing under the desert sky to a single sound system, powered by donations, staffed by volunteers, lit by the moon itself --- has been running continuously for over thirty years. It is, by several accounts, the longest-running underground electronic music event in the world.
+
+Moontribe Collective is not just a party. It is a proof of concept. In an era when every subculture eventually gets commodified, Moontribe has survived by refusing every commercial affordance available to it. No vending. No sponsors. No profits. No formal legal entity. The ``Live in Love'' ethos --- love yourself, love others, love the world --- is enforced not by rules but by community membership itself. The gathering is self-organizing, self-funding, and self-healing. When something needs doing, the person who sees the need does the thing.
+
+This research mission documents Moontribe as a living cultural artifact: its origins in the early-1990s Los Angeles underground rave movement, its architectural genius as a gift-economy collective, the sonic identity it pioneered (what DJs have called ``shamanistic techno and house''), its outsized influence on transformational festival culture globally, and its relationship with the desert environments it inhabits. The goal is not to celebrate or mythologize, but to understand the precise mechanisms that have made thirty years of continuous community possible --- and what those mechanisms might teach builders of other non-commercial systems.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Longevity without commercialization is theoretically improbable.} The standard trajectory for underground cultural movements is: emergence, growth, mainstream discovery, commercialization, and eventual death-by-co-option. Moontribe has operated for over three decades without traversing this arc. The mechanisms sustaining this anomaly are poorly documented and theoretically under-examined.
+
+  \item \textbf{The gift economy in practice is understudied at the community scale.} While gift-economy theory (Mauss, Hyde, Graeber) is well-developed, empirical case studies of its long-term viability in arts/music communities are sparse. Moontribe represents one of the most durable real-world gift economies in contemporary American culture, yet it has received minimal academic attention.
+
+  \item \textbf{The sonic vocabulary Moontribe pioneered lacks formal documentation.} The style variously called ``shamanistic techno,'' ``psychedelic desert house,'' and ``transformational electronic music'' emerged directly from Moontribe gatherings. Its evolution, key practitioners, and influence on downstream genres (global electronica, psybient, festival downtempo) remain undocumented outside fan communities and scattered DJ profiles.
+
+  \item \textbf{Invitation-only systems and community health are in tension.} The email-list-only access model simultaneously protects community integrity and creates questions about exclusion, growth ceilings, and succession. As founding members age, the mechanisms for community transmission --- how new generations learn the ethos --- deserve examination.
+
+  \item \textbf{Desert ecology and recurring large-scale gatherings intersect poorly understood.} The Mojave Desert is a fragile, biodiverse ecosystem. Monthly gatherings of hundreds of people, however Leave-No-Trace committed, exert ecological pressure. The environmental impact, mitigation strategies, and long-term land stewardship practices of Moontribe are unquantified.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Lunar Commons:} A community-governance model where celestial timing (the full moon), geographic remoteness, radical gift economics, and a single shared sound system create conditions for sustained non-commercial collective culture.
+
+\begin{asciibox}
+MOONTRIBE OPERATING ARCHITECTURE
+=================================
+
+      [Full Moon Calendar]
+             |
+             v
+    [Directions Email]          <- Invitation-only access gate
+        (list-only)
+             |
+             v
+   [Desert Site Selection]      <- Scouted by volunteers; rotated
+             |
+             v
+  +----------+----------+
+  |   ONE SOUND SYSTEM  |      <- Single dancefloor; no stages
+  +----------+----------+
+             |
+        [Community]
+      /       |       \
+  Donate   Volunteer  Gift
+             |
+    [Surplus -> Future Gatherings]
+
+GOVERNANCE: No 501(c)(3). No officers. No hierarchy.
+ETHOS: "If something needs doing, that person is YOU."
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY MAP
+======================
+
+  [M1: Origins & History]  ---->  [M3: Sonic Identity]
+            |                              |
+            v                              v
+  [M2: Community Architecture]  ---->  [M4: Cultural Legacy]
+                    |
+                    v
+         [M5: Desert Ecology]
+
+M1 and M5 can run in parallel (Wave 1A / Wave 1B).
+M2 and M3 can run in parallel after M1 completes.
+M4 synthesizes M1-M3. M5 runs independently through Wave 2.
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1: Origins and History (1990--2000)}
+
+Documents the emergence of Moontribe from the early-1990s Los Angeles underground rave scene. Key figures: Treavor Moontribe, Daniel Chavez (Daniel Moontribe / Dcomplex), John Kelley. The first gathering took place in 1993 in the Mojave Desert outside Los Angeles. Contextualizes Moontribe within the broader West Coast rave movement (Wicked in San Francisco, the warehouse scene in LA) and identifies the specific choices that differentiated it from contemporaries.
+
+\subsubsection{M2: Community Architecture and Gift Economy}
+
+Analyzes the structural mechanisms sustaining Moontribe: the email-list invitation system, donation-only funding, volunteer staffing, the explicit prohibition on vending, the single-soundsystem constraint, and the ``Live in Love'' ethos framework. Draws on community organization theory, gift economy literature, and the Burning Man principles for comparison. Documents how the community transmits values across generational cohorts.
+
+\subsubsection{M3: Sonic Identity and Musical Legacy}
+
+Traces the development of the musical aesthetic originating at Moontribe gatherings: trance, acid breaks, psychedelic house, shamanistic techno. Documents key DJs and producers who emerged from or were shaped by the gatherings. Traces the lineage through Desert Dwellers (Treavor Moontribe + Amani Friend, founded 1999), and maps influence on global electronica, psybient, and transformational festival music.
+
+\subsubsection{M4: Cultural Legacy and Resistance to Commercialization}
+
+Documents Moontribe's influence on: the transformational festival movement (Lightning in a Bottle, Symbiosis, Envision, Shambhala, Boom), the ``conscious rave'' ethos globally, and the discourse around underground music preservation. Examines why Moontribe's model of anti-commercial longevity is rare, and what specifically protected it from the commodification arc that consumed contemporaries.
+
+\subsubsection{M5: Desert Ecology and Environmental Ethics}
+
+Documents the ecological context of the Mojave Desert gathering sites, Moontribe's Leave No Trace practices, environmental impact considerations (soil compaction, noise, light), and the community's articulated relationship with desert land and non-human life. Connects to broader Leave No Trace research and desert ecology literature.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: moontribe-collective-deep-research
+  activation_profile: squadron
+  model_allocation:
+    opus_30pct:
+      - M4-synthesis (cultural legacy judgment)
+      - M2-synthesis (community architecture theory)
+      - cross-module integration (Wave 2)
+      - sensitivity review (cultural appropriation flags)
+    sonnet_60pct:
+      - M1-survey (historical compilation)
+      - M3-survey (sonic identity documentation)
+      - M5-survey (desert ecology data)
+      - document assembly (Wave 3)
+      - source verification
+    haiku_10pct:
+      - shared schemas (Wave 0)
+      - source index scaffolding
+      - citation formatting
+
+  wave_count: 4
+  parallel_tracks: 2
+  estimated_tokens: 380000
+  cache_strategy: exploit_5min_ttl
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[nosep]
+  \item Moontribe Collective history 1993--2026, with emphasis on founding period and current operational model
+  \item Gift economy and community governance mechanisms
+  \item Sonic identity: key artists, styles, and lineage through Desert Dwellers
+  \item Influence on Southern California and global transformational festival culture
+  \item Mojave Desert ecological context and Leave No Trace practices
+  \item Comparative analysis with contemporaries (Wicked SF, Burning Man early years)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[nosep]
+  \item Individual gathering site coordinates or directions (security; community protection)
+  \item Personal histories of private community members
+  \item Drug use documentation (community health ethics)
+  \item Legal/law enforcement history in detail
+  \item Comprehensive discographies of individual DJs
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Documentary timeline of Moontribe from 1993 to present is complete and sourced
+  \item At least 8 specific community governance mechanisms are identified and analyzed
+  \item Gift economy model is compared to at least 2 other documented examples (Burning Man, Wicked SF)
+  \item Sonic identity section documents at least 6 key artists and 4 sub-genre designations
+  \item Desert Dwellers lineage from Moontribe is fully traced with dates and context
+  \item Cultural influence mapped to at least 5 downstream festivals or movements with evidence
+  \item Mojave Desert ecological profile covers soil, flora, fauna, and sound impact considerations
+  \item Leave No Trace practices are documented with specific Moontribe implementations
+  \item Anti-commercialization mechanisms are enumerated and theoretically grounded
+  \item Community transmission mechanisms (how ethos passes to new generations) are documented
+  \item All claims are attributed to professional sources, peer-reviewed research, or primary sources
+  \item Final document is suitable for handoff to GSD orchestrator without additional context
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Virtual Black Rock City Vision & Moontribe as ancestor of transformational culture; community governance parallel & Informs \\
+GSD Foxfire Heritage Skills & Living-knowledge transmission parallel; oral tradition as community memory & Parallel \\
+GSD Fair Use Educational Mission & Non-commercial culture and creative commons philosophy & Parallel \\
+The Space Between (Tibsfox) & ``Spaces between'' as the Moontribe dancefloor; connection over nodes & Philosophical \\
+GSD BBS Educational Pack & Underground communication networks; email-list as proto-BBS topology & Historical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle teaches that staggering complexity emerges from principled, minimal building blocks iterated faithfully over time. Moontribe is the Amiga Principle expressed as human community. A single sound system. One dancefloor. The moon for lighting. Directions shared only to those who already belong. No money changing hands for music or space. These constraints, held without compromise across thirty-plus years, have produced something that no festival production budget has ever replicated: a genuine community of friends and family that keeps showing up.
+
+The ``spaces between'' is not a metaphor here --- it is the literal architecture. The desert between Los Angeles and the gathering site is the filter. The darkness between the stars is the light source. The silence between songs is the breath of the ritual. The space between you and the stranger next to you on the dancefloor is the invitation to introduce yourself. Moontribe did not build a product. It built a container --- then trusted the people inside it to fill it with something worth showing up for every full moon, every month, for thirty years.
+
+% =============================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% =============================================================================
+
+\section{Moontribe Collective --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section provides sourced findings for each research module. Data here feeds directly into the Mission Package (Stage 3) component specs. All claims are attributed to primary or professional sources.
+
+\textbf{Key source organizations and archives:}
+\begin{itemize}[nosep]
+  \item Moontribe Collective official site: \url{https://www.moontribe.org}
+  \item Resident Advisor (RA): Artist profiles and electronic music history
+  \item DJ Magazine: West Coast rave history documentation
+  \item SoundCloud / Moontribe Collective channel: Archived live sets 2013--2024
+  \item Psybient.org: Desert Dwellers interview archive
+  \item RaveTapes / Vice: Historic LA rave documentation
+  \item Desert Dwellers official site: \url{https://desertdwellers.org}
+  \item USGS Mojave Desert ecological data
+\end{itemize}
+
+\subsection{M1: Origins and History Reference}
+
+\subsubsection{Founding Context: Los Angeles 1990--1993}
+
+The early 1990s Los Angeles underground rave scene emerged from the confluence of UK acid house influence, West Coast psychedelic culture, and the industrial spaces of Downtown LA. By 1992--1993, the scene had grown from warehouse parties to include outdoor events in the region's desert periphery. The Mojave Desert, accessible within two hours of Los Angeles, offered a landscape that amplified the scene's existing spiritual and sensory ambitions.
+
+In 1993, Treavor Moontribe and Daniel Chavez (performing as Daniel Moontribe, also known as Dcomplex/Dcomplexity) founded what became the first Moontribe Full Moon Gathering. The inaugural gathering took place in the Mojave Desert and set the template that would persist for over three decades: one sound system, the desert as venue, the full moon as calendar, and zero commercial infrastructure.
+
+\subsubsection{Key Founding Figures}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Person} & \tableheader{Role and Contribution} & \tableheader{Subsequent Work} \\
+\midrule
+Treavor Moontribe & Co-founder; resident DJ; live PA performer (1992); first DJed at Moontribe 1994 & Desert Dwellers (1999), PheuZen project, Dreaming Awake label \\
+Daniel Chavez (Daniel Moontribe) & Co-founder; DJ and producer; also known as Dcomplex, Dcomplexity & Continued electronic music production \\
+John Kelley & Founding DJ; documented on RaveTapes 1993 set (acid breaks, trancy techno) & LA underground scene \\
+Amani Friend & Joined via New Mexico desert rave scene (Cosmic Kidz); met Treavor at 5-year anniversary 1998 & Desert Dwellers co-founder \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Historical Milestones}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} \\
+\midrule
+1993 & First Moontribe Full Moon Gathering in Mojave Desert \\
+1994 & Treavor begins DJing (prior sets were live PAs with keyboard/drum machines); gathering format solidifies \\
+1998 & Amani Friend attends 5-year anniversary from New Mexico; Treavor and Amani meet \\
+1999 & Desert Dwellers project begins (as Amani vs. Teapot; uptempo tribal tech house) \\
+$\sim$2001 & Desert Dwellers name adopted; downtempo direction begins \\
+2015 & 22-year anniversary; described as ``possibly the longest-running electronic music event in the world'' \\
+2023 & 30-year anniversary Full Moon Gathering \\
+2024 & 31-year anniversary FMG \\
+2025+ & Gatherings continue; ``Live in Love'' ethos document formalized \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Regional Context: West Coast Rave Scene}
+
+Moontribe emerged alongside but remained distinct from two contemporaneous West Coast rave movements: Wicked Sound System in San Francisco (1992--onward), which brought UK free-party culture northward and prioritized deep house and techno; and the Los Angeles warehouse scene, which included the Galaxy parties, Magic Wednesdays, and outdoor events at the Grand Olympic Auditorium. While the warehouse scene commercialized significantly through the 1990s, Wicked and Moontribe maintained underground structures. DJ Magazine (2020) identified Moontribe as ``the most famous and longest-running series'' of California desert raves, with their format of ``shamanistic techno and house'' distinguishing them from the more polished urban scene.
+
+\subsection{M2: Community Architecture Reference}
+
+\subsubsection{Structural Mechanisms}
+
+Moontribe's governance architecture can be enumerated as eight discrete structural mechanisms, each of which closes a potential commercial capture point:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Mechanism} & \tableheader{Function} & \tableheader{Commercial Capture Prevented} \\
+\midrule
+Email-list-only invitations & Access controlled by existing membership & Ticketing platforms, scalpers \\
+No legal entity (no 501c3) & No institutional capture; no officers & Corporate governance, board capture \\
+Donation-only funding & Revenue independent of headcount & Ticket pricing pressure \\
+All-volunteer staffing & No payroll; no labor hierarchy & Management class formation \\
+No vending of any kind & Gift/sharing culture enforced & Vendor ecology, commercial dependency \\
+Single sound system & One dancefloor; no stage segregation & Headliner economy, VIP structures \\
+No public marketing & Self-limiting growth; quality preservation & Social media growth-hacking \\
+Surplus to future gatherings & No profit extraction possible & Investor or founder extraction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Gift Economy Framework}
+
+Moontribe's operational model aligns with gift economy theory as described by Lewis Hyde (\textit{The Gift}, 1983) and Marcel Mauss: the exchange of labor, money, and creative work without expectation of direct return, with circulation of gifts increasing community cohesion rather than creating debt. Key Moontribe gift flows include: DJs performing for free; organizers scouting and coordinating without compensation; attendees donating without guaranteed return; community members building altars, preparing food, and creating chill spaces as offerings. The website articulates this directly: ``We foster a gifting environment and the virtue of joyful generosity.''
+
+\subsubsection{Community Transmission}
+
+The ``Live in Love'' framework (love yourself, love others, love the world) serves as Moontribe's explicit value transmission document. Rather than hierarchical instruction, the model relies on initiation by participation: newcomers encounter the culture by attending, and the culture is transmitted through the behavior of established members. The website states: ``Through radical acts of initiation and participation, Moontribe has matured into the gathering we have come to love.'' New members gain access through existing members, and the values they absorb are behavioral rather than doctrinal.
+
+\subsection{M3: Sonic Identity Reference}
+
+\subsubsection{The Moontribe Sound}
+
+DJ Magazine described Moontribe's sound as ``shamanistic techno and house.'' This designation captures several distinct elements: the trance-inducing repetition of techno's rhythmic structure; the spiritual/ceremonial intention borrowed from psychedelic culture; the acoustic properties of open desert (low background noise, natural reverb, sky as ceiling); and the specific DJ aesthetic that emerged from playing outdoors under moonlight for 8--10 hours, prioritizing endurance, depth, and journey over peak-hour impact.
+
+Key sub-genres associated with Moontribe: acid breaks, psychedelic house, trance (West Coast iteration), tribal techno, and what later became known as ``transformational electronic music.'' Founding DJ John Kelley's 1993 archive set demonstrates the early aesthetic: ``acid breaks, trancy techno and classic underground anthems'' across 97 minutes recorded in the desert.
+
+\subsubsection{Desert Dwellers Lineage}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Development} \\
+\midrule
+1993 & Moontribe gatherings begin; sonic aesthetic of ``shamanistic techno and house'' establishes \\
+1998 & Amani Friend and Treavor Moontribe meet at Mojave gathering \\
+1999 & Collaboration begins as Amani vs. Teapot (uptempo tribal tech house) \\
+$\sim$2001 & Desert Dwellers name adopted; downtempo and global electronica direction \\
+2005--2015 & Dozens of albums and remixes; touring five continents \\
+2015+ & Stages at Symbiosis, Ozora, Lightning in a Bottle, Boom, Envision, Shambhala, Burning Man \\
+2025--2026 & Desert Dwellers enters ``most significant evolution yet'' per official bio \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Desert Dwellers is described as ``a pioneering electronic music project that bridges the ancient and the future, fusing deep bass, world instrumentation, and psychedelic textures.'' The project grew directly from the sonic experiments of the Moontribe desert gatherings, translating the durational, shamanic character of the desert dancefloor into a studio and touring format.
+
+\subsubsection{Trance, Ritual, and the Theta State}
+
+Amani Friend (Desert Dwellers) described the neurological dimension: ``Shamanic cultures have always used the steady beat to induce theta brain-waves, which are associated with trance states. In an Ayahuasca ceremony, one of the most important aspects of the ceremony for healing is the music... The same is true for the repetitive rhythms found in certain kinds of electronic music.'' Treavor Moontribe: ``Music has been the only force that has truly sent me into trance states, with or without psychedelics.'' These descriptions situate Moontribe's sonic practice within a tradition of ritual music use that predates electronic music by millennia.
+
+\subsection{M4: Cultural Legacy Reference}
+
+\subsubsection{Influence on Transformational Festival Culture}
+
+Moontribe gatherings from 1993 onward provided a template for what became the ``transformational festival'' movement: the combination of outdoor/desert setting, psychedelic music, gift economy elements, Leave No Trace ethics, and communal spiritual intention. Key downstream festivals that share this DNA include: Lightning in a Bottle (California), Symbiosis Gathering (California), Envision (Costa Rica), Shambhala Music Festival (British Columbia), Boom Festival (Portugal), and Ozora (Hungary). Desert Dwellers performed at all of these, serving as a direct vector of the Moontribe aesthetic into global festival culture.
+
+\subsubsection{Resistance to Commercialization: Mechanisms and Theory}
+
+Treavor Moontribe stated in a 2015 interview: ``The most special thing about Moontribe I believe is that it never became commercial at all. It remains the most underground event in California, possibly the entire country and maybe beyond that. It could possibly be the longest running electronic music event in the world, and if not it's very close to it. If it had ever become commercialized I doubt it would exist today.''
+
+DJ Magazine observed in 2020 that both Wicked and Moontribe had survived where commercially-oriented events had not, attributing survival to their maintained underground structures. The commercialization research literature (see gentrification of rave culture studies) confirms that the typical rave-to-commercial trajectory involves: ticket pricing, social media promotion, booked headline acts, and venue contracts --- all mechanisms Moontribe structurally forecloses.
+
+\subsubsection{Comparison with Contemporaries}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}C{2cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Collective} & \tableheader{Founded} & \tableheader{Status} & \tableheader{Commercial?} & \tableheader{Notes} \\
+\midrule
+Moontribe & 1993 & Active & No & Monthly; email list; donations \\
+Wicked SF & 1992 & Reduced & No (partly) & 1--2 anniversary parties/year \\
+Burning Man & 1986 & Active & Partially & 501(c)(3); ticket lottery; $\sim$\$575/ticket \\
+Galaxy (LA) & $\sim$1991 & Defunct & Yes & Commercialized; did not survive \\
+Dune Raves & $\sim$1993 & Defunct & Partially & 4 events total; desert format \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M5: Desert Ecology Reference}
+
+\subsubsection{Mojave Desert Ecological Profile}
+
+The Mojave Desert, the primary venue for Moontribe gatherings, is a high desert ecosystem spanning approximately 124,000 square kilometers across California, Nevada, Utah, and Arizona. Key ecological characteristics relevant to gatherings:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Element} & \tableheader{Relevant Characteristics} \\
+\midrule
+Soil & Biological soil crust (biocrust) prevalent; takes 50--250 years to recover from disturbance; compaction from foot traffic a primary concern \\
+Flora & Joshua trees (\textit{Yucca brevifolia}), creosote bush (\textit{Larrea tridentata}), brittlebush, desert shrubs; many appear dead in dry seasons but are dormant \\
+Fauna & Desert tortoise (federally threatened), Mojave sidewinder rattlesnake, coyote, jackrabbit, kit fox, burrowing owl \\
+Sound environment & Extremely low ambient noise; sound travels long distances; wildlife disturbance radius significantly larger than urban settings \\
+Thermal range & Extreme temperature variation; summer highs above 38°C (100°F); winter lows below 0°C; hypothermia and heat illness are real risks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Moontribe Environmental Practices}
+
+Moontribe's Leave No Trace implementation is among the most explicit of any recurring gathering at this scale:
+
+\begin{itemize}[nosep]
+  \item Pack In / Pack Out enforced: all attendees responsible for own waste; no communal waste collection
+  \item Fires permitted only at specific gatherings and only with explicit safety protocols (sealed fuel dumps, duveteyne blankets, designated clearings away from vegetation)
+  \item Smoking policies include mandatory butt containment (mint tin carry)
+  \item Specific prohibition on pushing or damaging desert shrubs; explicit note that dormant plants are alive
+  \item ``Leave it better than you found it'' as explicit ethos
+  \item No dogs policy (partially) due to wildlife disturbance and inter-animal conflict risk
+  \item Portable sanitation (porta-potties) provided where feasible; outdoor waste burial protocols specified
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Level} & \tableheader{Handling Guidance} \\
+\midrule
+Gathering site locations & ABSOLUTE & Never publish GPS coordinates, site descriptions that would enable discovery, or route details \\
+Drug use documentation & GATE & Acknowledge cultural context factually; do not document specific practices or provide harm reduction detail outside appropriate contexts \\
+Individual attendee privacy & ABSOLUTE & No personal histories, photographs, or identifying details of non-public community members \\
+Indigenous land acknowledgment & GATE & Mojave Desert is traditional territory of multiple nations (Mojave/Aha Macav, Chemehuevi/Nüwü, Serrano); acknowledge specifically, never generically \\
+Cultural appropriation vectors & ANNOTATE & Shamanic language use, Indigenous aesthetic borrowing; note without over-adjudicating; present evidence \\
+Legal history & ANNOTATE & Unpermitted gathering history exists; document factually without enabling future legal risk \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources}
+
+\begin{itemize}[nosep]
+  \item Moontribe Collective official website, \url{https://www.moontribe.org} (2025)
+  \item Moontribe ``Live in Love'' framework, \url{https://www.moontribe.org/liveinlove}
+  \item Desert Dwellers official biography, \url{https://desertdwellers.org/bio/} (2025--2026)
+  \item Moontribe Collective SoundCloud archive, \url{https://soundcloud.com/moontribe_collective} (2013--2024)
+\end{itemize}
+
+\subsubsection{Electronic Music History and Journalism}
+
+\begin{itemize}[nosep]
+  \item DJ Magazine, ``The Renegade Soundsystems of California that Shaped West Coast Rave Culture,'' January 2020. \url{https://djmag.com/longreads/renegade-soundsystems-california-shaped-west-coast-rave-culture}
+  \item Vice / RaveTapes, ``These 10 Classic Rave Recordings Bring LA's 90s Underground Scene Back to Life,'' August 2024.
+  \item 6AM Group, ``A History of the Second Wave of the Rave Scene,'' October 2023. \url{https://6amgroup.com}
+  \item Resident Advisor, Treavor Moontribe artist profile. \url{https://ra.co/dj/treavormoontribe/biography}
+\end{itemize}
+
+\subsubsection{Artist Interviews}
+
+\begin{itemize}[nosep]
+  \item Psybient.org, Interview with Desert Dwellers (Amani Friend and Treavor Moontribe), June 2018.
+  \item The M.O. Podcast, Episode 32: Treavor Moontribe, DJ, producer, co-founder of Desert Dwellers, February 2025. \url{https://www.inversionart.com/p/the-mo-podcast-episode-32-treavor}
+  \item iEDM, ``Desert Dwellers Share How They Came Together,'' September 2017.
+\end{itemize}
+
+\subsubsection{Ecological Reference}
+
+\begin{itemize}[nosep]
+  \item USGS Mojave Desert Ecosystem Program: desert ecology, soil crust, and threatened species data
+  \item U.S. Fish and Wildlife Service: Mojave Desert tortoise (\textit{Gopherus agassizii}) status documentation
+  \item National Park Service Leave No Trace principles: \url{https://www.nps.gov}
+\end{itemize}
+
+% =============================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% =============================================================================
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Moontribe Collective --- its history, community architecture, sonic identity, cultural legacy, and desert ecological context --- through coordinated parallel research tracks, synthesized into a final deliverable suitable for academic citation, cultural preservation, and GSD ecosystem integration. The research shall document Moontribe as both a historical artifact and a living proof-of-concept for non-commercial community governance.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+==================
+
+WAVE 0 [Sequential / Haiku]
+  Schema + Source Index + Test Harness
+         |
+  +------+------+
+  |             |
+WAVE 1A        WAVE 1B          [Parallel / Sonnet+Opus]
+M1: History    M5: Ecology
+M2: Community  (independent track)
+M3: Sonic
+         |
+  +------+------+
+         |
+WAVE 2 [Sequential / Opus]
+  M4: Cultural Legacy + Synthesis
+  Cross-module integration
+  Sensitivity review
+         |
+WAVE 3 [Sequential / Sonnet]
+  Document assembly
+  Source verification
+  PDF rendering
+  Final delivery
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared data schema, source index, citation format templates
+  \item \textbf{Survey Layer} --- Parallel module research (M1, M2, M3, M5 simultaneously)
+  \item \textbf{Synthesis Layer} --- M4 cultural legacy; cross-module integration; sensitivity review
+  \item \textbf{Publication Layer} --- Document assembly, LaTeX compilation, verification matrix completion
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component} \\
+\midrule
+1 & Historical Timeline & 1993--2026; all milestones sourced & M1-survey \\
+2 & Community Architecture Analysis & 8+ mechanisms; gift economy theory applied & M2-synthesis \\
+3 & Sonic Identity Document & 6+ artists; 4+ sub-genres; Desert Dwellers lineage complete & M3-survey \\
+4 & Cultural Legacy Analysis & 5+ downstream festivals; anti-commercial mechanisms enumerated & M4-synthesis \\
+5 & Desert Ecology Reference & Flora/fauna/soil profiles; Leave No Trace implementation documented & M5-survey \\
+6 & Sensitivity Review & All 6 sensitivity areas cleared; Indigenous land acknowledgment correct & VERIFY \\
+7 & Source Bibliography & 15+ professional sources; all numerical claims attributed & LOG \\
+8 & Final Research Document & LaTeX-compiled PDF; all modules integrated; verification matrix complete & EXEC \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens (est.)} \\
+\midrule
+C0-schema & None & Haiku & 8,000 \\
+C0-source-index & None & Haiku & 6,000 \\
+C1-history & C0-schema & Sonnet & 45,000 \\
+C2-community & C0-schema, C1-history & Opus & 55,000 \\
+C3-sonic & C0-schema, C1-history & Sonnet & 40,000 \\
+C4-legacy & C1,C2,C3 complete & Opus & 60,000 \\
+C5-ecology & C0-schema & Sonnet & 35,000 \\
+C6-sensitivity & C1--C5 & Opus & 25,000 \\
+C7-assembly & All Cx & Sonnet & 50,000 \\
+C8-verification & C7-assembly & Sonnet & 25,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total (estimated)}} & \textbf{349,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Cultural legacy synthesis requires judgment about lineage attribution and influence claims; community architecture theory requires cross-disciplinary reasoning; sensitivity review for Indigenous land and cultural appropriation questions requires nuance \\
+Sonnet & 60\% & Historical compilation, sonic identity survey, ecology documentation, and document assembly are well-structured tasks benefiting from Sonnet's reliable structured output \\
+Haiku & 10\% & Schema creation and source index scaffolding are repetitive, high-token-efficiency tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Tokens (est.)} \\
+\midrule
+0 & Foundation & C0-schema, C0-source-index & Sequential & 14,000 \\
+1A & History Track & C1-history, C2-community, C3-sonic & Parallel & 140,000 \\
+1B & Ecology Track & C5-ecology & Parallel & 35,000 \\
+2 & Synthesis & C4-legacy, C6-sensitivity & Sequential & 85,000 \\
+3 & Publication & C7-assembly, C8-verification & Sequential & 75,000 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total}} & \textbf{349,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Define data schema & PLAN & JSON schema for modules, citations, sensitivity flags & Haiku \\
+Build source index & LOG & Normalized bibliography of 15+ sources with reliability ratings & Haiku \\
+Create test harness & VERIFY & Test IDs T-001 through T-024 scaffolded & Haiku \\
+CAPCOM gate & CAPCOM & Human approval to proceed & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: History Track (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+M1: Historical survey & SCOUT + EXEC-1 & Timeline 1993--2026; key figures; LA rave context & Sonnet \\
+M2: Community architecture & CRAFT-COMM + Opus & 8-mechanism analysis; gift economy theory application & Opus \\
+M3: Sonic identity survey & EXEC-2 & 6+ artists; 4+ sub-genres; Desert Dwellers lineage & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Ecology Track (Parallel with 1A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+M5: Mojave ecological profile & CRAFT-ECO & Flora, fauna, soil, sound environment profiles & Sonnet \\
+LNT implementation doc & CRAFT-ECO & Specific Moontribe environmental practices catalogued & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+M4: Cultural legacy synthesis & INTEG + Opus & Downstream festival map; anti-commercial mechanism theory; comparative table & Opus \\
+Sensitivity review & VERIFY & All 6 sensitivity areas cleared; Indigenous attribution corrected & Opus \\
+Cross-module integration & INTEG & Module connection graph; through-line narrative & Opus \\
+CAPCOM gate & CAPCOM & Human review of synthesis; approval for publication & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Document assembly & EXEC-1 & Full LaTeX source integrating all modules & Sonnet \\
+Source verification & VERIFY & All claims verified against source index; 0 unsourced numerical claims & Sonnet \\
+LaTeX compilation & EXEC-1 & Three xelatex passes; PDF output verified & Sonnet \\
+Verification matrix & VERIFY & 12 criteria $\times$ test IDs; all status fields complete & Sonnet \\
+Final delivery & LOG & PDF + .tex + index.html packaged & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[nosep]
+  \item Wave 0 outputs (schema + source index) loaded as context prefix for all Wave 1 agents; exploit 5-minute TTL
+  \item C1-history loaded as shared context prefix for both C2 and C3; single read, multiple consumers
+  \item Sensitivity review document cached as prefix for C7-assembly to ensure flags are visible during document construction
+  \item All module outputs serialized as JSON before Wave 2 to minimize reconstruction overhead
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & 0 & 0 & 14,000 & 14,000 \\
+Wave 1A & 55,000 & 85,000 & 0 & 140,000 \\
+Wave 1B & 0 & 35,000 & 0 & 35,000 \\
+Wave 2 & 85,000 & 0 & 0 & 85,000 \\
+Wave 3 & 0 & 75,000 & 0 & 75,000 \\
+\midrule
+\textbf{Total} & \textbf{140,000} & \textbf{195,000} & \textbf{14,000} & \textbf{349,000} \\
+\textbf{Allocation \%} & \textbf{40\%} & \textbf{56\%} & \textbf{4\%} & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+C0-schema ──────────────────────────────────────────────────────┐
+C0-source-index ────────────────────────────────────────────┐   |
+                                                            |   |
+     +──────────────────────────────────────────────────────+   |
+     |                                                          |
+  C1-history ──> C2-community ──> C4-legacy ─────────────────> C7-assembly
+     |                  |              |                           |
+  C1-history ──> C3-sonic ────> C4-legacy                         |
+     |                                                            |
+  C5-ecology ─────────────────────────────────────────────────> C7-assembly
+                                                                   |
+  C6-sensitivity ──────────────────────────────────────────────> C7-assembly
+                                                                   |
+                                                              C8-verification
+                                                                   |
+                                                            FINAL DELIVERY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 4 & BLOCK & Halt pipeline; do not publish until cleared \\
+Core Functionality & 8 & HIGH & Revise and re-verify before Wave 3 \\
+Integration & 6 & MEDIUM & Flag for CAPCOM review at Wave 2 gate \\
+Edge Cases & 4 & LOW & Document and annotate; do not block \\
+\midrule
+\textbf{Total} & \textbf{22} & --- & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (MANDATORY PASS / BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+T-001 & No gathering site locations published & Zero GPS coordinates, site descriptions, or route-enabling content in document \\
+T-002 & Indigenous attribution is nation-specific & Mojave/Aha Macav, Chemehuevi/Nüwü, and Serrano peoples named specifically; no generic ``Indigenous'' references \\
+T-003 & No private individual data & Zero personally identifying information for non-public community members \\
+T-004 & Drug use not operationalized & Cultural context acknowledged; no specific substance protocols, dosing, or procurement information \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Documentary timeline complete and sourced & T-005, T-006 & [ ] \\
+2 & 8 community governance mechanisms identified & T-007, T-008 & [ ] \\
+3 & Gift economy model compared to 2+ examples & T-009 & [ ] \\
+4 & Sonic identity: 6+ artists, 4+ sub-genres & T-010, T-011 & [ ] \\
+5 & Desert Dwellers lineage fully traced & T-012 & [ ] \\
+6 & Cultural influence: 5+ downstream festivals & T-013, T-014 & [ ] \\
+7 & Mojave ecological profile complete & T-015, T-016 & [ ] \\
+8 & LNT practices documented with specifics & T-017 & [ ] \\
+9 & Anti-commercial mechanisms enumerated & T-018, T-019 & [ ] \\
+10 & Community transmission mechanisms documented & T-020 & [ ] \\
+11 & All claims professionally sourced & T-021, T-022 & [ ] \\
+12 & Document ready for handoff & T-023, T-024 & [ ] \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; CAPCOM coordination \\
+PLAN & Planner & Wave decomposition; dependency management; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; web research; evidence compilation for M1, M3, M5 \\
+EXEC-1 & Executor (History) & M1, M2 document production; Wave 3 assembly \\
+EXEC-2 & Executor (Sonic) & M3 document production; Desert Dwellers lineage \\
+CRAFT-COMM & Community Specialist & M2 community architecture; gift economy theory application \\
+CRAFT-ECO & Ecology Specialist & M5 Mojave Desert ecology; LNT practices documentation \\
+VERIFY & Verification Agent & Source validation; accuracy checking; sensitivity review \\
+INTEG & Integration Agent & M4 cultural legacy synthesis; cross-module relationship validation \\
+CAPCOM & HITL Interface & Human approval at Wave 0 and Wave 2 gates \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache TTL monitoring \\
+LOG & Chronicle Agent & Audit trail; commit messages; bibliography maintenance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Name & moontribe-collective-deep-research \\
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (M1: History, M2: Community, M3: Sonic, M4: Legacy, M5: Ecology) \\
+Wave Count & 4 (0: Foundation, 1A/1B: Parallel survey, 2: Synthesis, 3: Publication) \\
+Parallel Tracks & 2 (History Track + Ecology Track in Wave 1) \\
+CAPCOM Gates & 2 (after Wave 0; after Wave 2) \\
+Safety-Critical Tests & 4 (all mandatory BLOCK) \\
+Total Tests & 22 \\
+Estimated Token Budget & 349,000 \\
+Model Allocation & Opus 40\% / Sonnet 56\% / Haiku 4\% \\
+Estimated Sessions & 3 sessions across 5--7 context windows \\
+Cache Strategy & 5-min TTL exploitation; schema + source index as shared prefix \\
+Primary Sources & moontribe.org; desertdwellers.org; DJ Magazine; RA; psybient.org \\
+Sensitivity Areas & 6 (site locations, drug use, privacy, Indigenous attribution, cultural appropriation, legal history) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+{\large\sffamily\itshape\textcolor{primary}
+{``The most special thing about Moontribe is that it never became commercial at all. It remains the most underground event in California. If it had ever become commercialized I doubt it would exist today.''}}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{secondary}{--- Treavor Moontribe, co-founder, on the 22nd anniversary (2015)}}
+
+\vspace{1em}
+{\normalsize\sffamily\textcolor{darktext}
+{Every month for over thirty years, the desert offered the same invitation: no screens, no products, no separation between those who perform and those who witness. One dancefloor. One moon. The distance between Los Angeles and wherever the directions lead is the architecture. The space between you and the stranger next to you is the point. Moontribe is not about what is there. It is about what is left out.}}
+\end{quotebox}
+
+\end{document}
