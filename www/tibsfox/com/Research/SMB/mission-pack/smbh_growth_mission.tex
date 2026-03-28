@@ -1,0 +1,1013 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Space/Physics ===
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue
+\definecolor{tertiary}{HTML}{E65100}      % Deep amber/star gold
+\definecolor{accent}{HTML}{7B1FA2}        % Vivid purple
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF3E0}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE COLUMN TYPES ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS & FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{SMBH Growth Slowdown}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={SMBH Growth Slowdown -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ================================================================
+\begin{document}
+
+% === TITLE PAGE ===
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Why Black Holes\\[0.3em]Hit the Brakes}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Supermassive Black Hole Growth Decline Since Cosmic Noon}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 5--7 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% === TABLE OF CONTENTS ===
+\tableofcontents
+\newpage
+
+% ================================================================
+%  STAGE 1 — VISION DOCUMENT
+% ================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{SMBH Growth Slowdown --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Primary Source:}{NASA Chandra X-ray Observatory Press Release, March 24, 2026}
+\metafield{DOI:}{10.3847/1538-4357/ae173d (Astrophysical Journal, December 2025)}
+\metafield{Depends On:}{None (standalone astrophysics research module)}
+
+\subsection{Vision}
+
+Ten billion years ago the universe was at its most ravenous. Supermassive black holes --- objects massing millions to billions of times our Sun --- were gorging on cold gas reserves, blazing as quasars that outshone entire galaxies, and expanding at rates we have not seen since. Astronomers call this era ``cosmic noon.'' Everything since has been a long, slow exhale.
+
+The mystery that has haunted astrophysics for decades is not \emph{that} growth slowed --- the X-ray telescopes have been recording the decline for years --- but \emph{why}. Three explanations competed: perhaps black holes became less efficient at consuming what they had; perhaps the typical masses shifted; perhaps fewer black holes were actively growing at any given moment. Each hypothesis had defenders. None had a decisive verdict.
+
+A 2025 paper by Zhibo Yu, Niel Brandt, Fan Zou, and collaborators at Penn State and the University of Michigan changed that. By marshaling data from 1.3 million galaxies and 8,000 growing supermassive black holes across three generations of X-ray telescopes --- NASA's Chandra, ESA's XMM-Newton, and the German/Russian eROSITA --- they built the most comprehensive portrait ever assembled of black hole growth across cosmic time. The verdict is clear: black holes are consuming material less rapidly because there is simply less cold gas available for them to consume.
+
+This mission packages that finding --- along with the broader landscape of AGN feedback, galaxy quenching, and the co-evolution of black holes with their host galaxies --- into a deep research study ready for GSD execution. The goal is a publication-quality reference that maps the full intellectual territory: from the observational architecture that made the discovery possible, to the physical mechanisms driving cold gas depletion, to the open questions that the next generation of X-ray observatories must answer.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[label=\textbf{P\arabic*.}]
+  \item \textbf{The growth slowdown was observed but not explained.} Decades of X-ray survey data showed a clear decline in supermassive black hole accretion rates since cosmic noon ($z \approx 2$), but the causal mechanism remained contested among three competing hypotheses.
+
+  \item \textbf{Disentangling mass from accretion rate is non-trivial.} Because both more massive black holes and faster-accreting black holes produce brighter X-ray emission, isolating the specific driver of observed luminosity changes required multi-wavelength data and careful statistical treatment.
+
+  \item \textbf{No single telescope could cover the full dynamic range.} Capturing black hole growth from cosmic noon to the present requires detecting objects from the extremely bright and nearby to the faint and distant --- a coverage range no individual observatory commands alone.
+
+  \item \textbf{The physical mechanism behind cold gas depletion remains open.} While the Yu et al.\ study identifies declining accretion rates as the driver, the upstream cause --- whether AGN feedback, declining galaxy merger frequency, cosmic web gas starvation, or some combination --- is not yet definitively resolved.
+
+  \item \textbf{Implications for galaxy co-evolution are incompletely mapped.} Supermassive black holes and their host galaxies grow together; the same processes quenching black hole growth also quench star formation, but the quantitative relationship and directionality across cosmic time need richer documentation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Black holes starve as the cosmic cold gas reservoir depletes --- a universe-scale transition from feast to fast.
+
+The central finding of the Yu et al.\ study is that declining accretion rates (not smaller masses or fewer active black holes) drive the post-cosmic-noon slowdown. This points upstream to the availability of cold gas --- the fuel that must spiral into an accretion disk and heat to X-ray-emitting temperatures before a black hole can grow. As the universe ages, that cold gas pool shrinks. The mechanisms include AGN feedback (prior black hole activity heating and expelling gas), declining galaxy merger frequency (mergers historically drive fresh gas inflow), and the cosmological ``green valley'' transition as galaxies migrate from blue star-forming systems to red quiescent ones.
+
+\subsubsection{Cosmic Timeline Architecture}
+
+\begin{asciibox}
+TIME (lookback, Gyr)     EPOCH                  SMBH GROWTH STATE
+─────────────────────────────────────────────────────────────────
+13.8 Gyr (z~1000)        Big Bang               [No SMBHs yet]
+  ↓
+ ~1 Gyr (z~6)            Quasar Dawn            Rapid seed growth
+                                                 Pop III remnants / direct collapse
+  ↓
+ 3-4 Gyr (z~2)      ──►  COSMIC NOON            PEAK ACCRETION
+                         Star formation peak     Hectic / quasar era
+  ↓
+ 4-7 Gyr (z~1)           Post-noon decline       Leisurely
+                         Green valley migration
+  ↓
+ 7-10 Gyr (z~0.5)        Galaxy quenching        Glacial
+                         Cold gas depletion
+  ↓
+ 0 Gyr (z=0)         ──► TODAY                  Near-dormant
+                         Most SMBHs inactive     Low accretion rates
+                         Yu et al. 2025: trend continues downward ───►
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+ ┌─────────────────────────────────────────────────────────────┐
+ │                    SMBH GROWTH SLOWDOWN                     │
+ │                    RESEARCH MISSION                         │
+ └──────────────────────┬──────────────────────────────────────┘
+                        │
+        ┌───────────────┼───────────────────┐
+        │               │                   │
+   [MOD-01]         [MOD-02]           [MOD-03]
+ Cosmic Noon     Observational      Accretion Mechanics
+ & Growth Arc    Architecture       & Cold Gas Depletion
+   (SCOUT)       (CRAFT-OBS)         (CRAFT-COSMO)
+        │               │                   │
+        └───────────────┼───────────────────┘
+                        │
+               ┌────────┴────────┐
+               │                 │
+           [MOD-04]          [MOD-05]
+         AGN Feedback      Cosmological
+         & Co-evolution     Implications
+           (EXEC-A)          (EXEC-B)
+               │                 │
+               └────────┬────────┘
+                        │
+                   [SYNTHESIS]
+                 Cross-Module Integration
+                       (INTEG)
+                        │
+                   [PUBLICATION]
+                    Final Document
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Cosmic Noon and the SMBH Growth Arc}
+
+Establish the historical arc of supermassive black hole growth from the first quasars (z $\sim$ 6) through cosmic noon (z $\sim$ 2) and the subsequent decline. Document the quasar era, peak accretion statistics, and the observational record that revealed the slowdown. Provide quantitative benchmarks for growth rates across redshift bins.
+
+\subsubsection{Module 02: Observational Architecture --- The Wedding-Cake Survey}
+
+Document the tiered multi-observatory strategy that enabled this result. Chandra's deep small-area observations form the top tier (faint, distant objects); XMM-Newton and eROSITA provide middle and lower tiers (wider but shallower). Explain why no single telescope covers the required dynamic range and how the 1.3 million galaxy / 8,000 AGN dataset was assembled and validated.
+
+\subsubsection{Module 03: Accretion Mechanics and Cold Gas Depletion}
+
+Examine the three hypotheses tested (lower accretion efficiency, smaller masses, fewer active black holes), document the methodology used to disentangle X-ray luminosity contributions, and present the evidence for declining accretion rates as the primary driver. Characterize the cold gas depletion phenomenon: what constitutes ``cold'' gas in this context, how its abundance has changed since cosmic noon, and what processes reduce it.
+
+\subsubsection{Module 04: AGN Feedback and Galaxy Co-evolution}
+
+Document the mechanisms by which AGN activity suppresses its own future growth --- the two feedback modes (quasar mode / radio mode), the ``preventative mode'' that inhibits fresh gas accretion, and the relationship between black hole mass (as a fossil record of past feedback) and galaxy quenching. Connect to the broader co-evolution of SMBHs and host galaxies from cosmic noon to the present.
+
+\subsubsection{Module 05: Cosmological Implications and Open Questions}
+
+Assess what the Yu et al.\ findings mean for our model of cosmic structure formation. What does continued slowdown imply for the ultimate fate of most SMBHs? What role do galaxy mergers, large-scale structure evolution, and dark energy play in future accretion availability? Document the observational gaps the next generation of X-ray telescopes (Lynx, AXIS, NewAthena) must fill.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset: SMBH Growth Mission
+# Activation Profile: Squadron
+
+agnus:                          # Orchestration / DMA / Context Management
+  model: claude-opus-4-6
+  role: FLIGHT + INTEG
+  responsibilities:
+    - Mission-level go/no-go gates
+    - Cross-module synthesis (Wave 2)
+    - Cosmological implications (Module 05)
+  context_windows: 2
+
+denise:                         # Display / Output Rendering
+  model: claude-sonnet-4-6
+  role: EXEC-A + EXEC-B
+  responsibilities:
+    - Document production (Modules 01-04)
+    - LaTeX formatting and assembly
+    - Table and diagram rendering
+  context_windows: 3-4
+
+paula:                          # Audio / I/O / Anticipatory
+  model: claude-haiku-4-5
+  role: SCOUT + BUDGET + LOG
+  responsibilities:
+    - Source gathering and validation
+    - Shared schema definitions (Wave 0)
+    - Token budget tracking
+    - Commit message generation
+  context_windows: 1
+
+# 68000 Gary: PLAN + VERIFY + CAPCOM + SURGEON + CRAFT agents
+# Allocated dynamically from Sonnet pool
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item The Yu et al.\ 2025 paper findings and methodology in full
+  \item Multi-observatory X-ray survey architecture (Chandra, XMM-Newton, eROSITA)
+  \item Cold gas depletion mechanisms from cosmic noon to present ($z < 2$)
+  \item AGN feedback physics (quasar mode, radio mode, preventative mode)
+  \item Galaxy co-evolution and quenching as connected phenomena
+  \item Next-generation X-ray observatory landscape
+  \item Statistical framework for disentangling mass and accretion rate contributions
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Stellar-mass black holes and X-ray binaries (different mass regime)
+  \item Black hole seeding mechanisms at $z > 6$ (pre-cosmic-noon formation physics)
+  \item Gravitational wave observations of SMBH mergers (separate observational channel)
+  \item Detailed eROSITA all-sky survey politics (German/Russian mission complications)
+  \item Specific galaxy morphological classification studies
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[label=\textbf{SC-\arabic*:}]
+  \item The cosmic noon epoch is defined with quantitative context (redshift, lookback time, peak accretion rates).
+  \item All three competing hypotheses for the slowdown are documented with their prior supporting evidence.
+  \item The wedding-cake survey methodology is explained with tier descriptions and source counts.
+  \item The accretion rate hypothesis is confirmed as the primary driver with supporting evidence from the Yu et al.\ dataset.
+  \item Cold gas depletion is characterized with at least three contributing mechanisms named and sourced.
+  \item AGN feedback modes (quasar, radio, preventative) are individually described with observational evidence.
+  \item The SMBH--galaxy co-evolution relationship is documented across at least three redshift regimes.
+  \item Open questions unresolved by Yu et al.\ are explicitly identified (galaxy merger frequency decline, direct cold gas measurement).
+  \item All quantitative claims (galaxy counts, redshift values, accretion rate comparisons) cite specific sources.
+  \item Next-generation observatories (Lynx, AXIS, or NewAthena) are described in relation to filling identified gaps.
+  \item Document is self-contained: a reader with astrophysics literacy but no prior familiarity with this specific study can follow the full argument.
+  \item All sources are peer-reviewed publications, NASA/ESA/SAO agency materials, or university research programs.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+The Space Between (Tibsfox) & Philosophical spine & Spaces-between framework applies: AGN feedback lives in the \emph{gap} between black hole and host galaxy \\
+GSD Upstream Intelligence Pack v1.43 & Parallel research track & Both study systems with feedback loops operating across vast timescales \\
+Fox Infrastructure Group Mission & Conceptual parallel & Large-scale infrastructure as attractor-state: cosmic gas depletion mirrors resource saturation in economic networks \\
+Deep Audio Analyzer Mission & Methodology analogy & Multi-source signal decomposition mirrors wedding-cake survey design \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The universe, it turns out, runs on a budget --- and black holes spent their allocation early. Cosmic noon was a golden era of excess: cold gas fell freely, accretion disks roared, quasars blazed. But every act of consumption changed the environment. AGN jets heated gas. Mergers grew rarer as the cosmic web stretched into filaments. The cold reservoir drained. And the universe moved from hectic to leisurely to glacial.
+
+This is the Amiga Principle expressed at cosmological scale. The early universe achieved staggering complexity not through brute force --- not by having more matter, more time, more resources --- but through a brief, privileged architectural window when cold gas was abundant, feedback loops were immature, and gravity could organize matter into luminous systems at extraordinary rates. Once that window closed, the same physical laws produced a profoundly quieter cosmos. The spaces between the active epochs are where most of cosmic time now lives. The black holes that shaped everything are, mostly, silent.
+
+% ================================================================
+%  STAGE 2 — RESEARCH REFERENCE
+% ================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{SMBH Growth Slowdown --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference compiles primary findings from the Yu et al.\ 2025 study and supporting literature across all five research modules. Each section includes quantitative data, source attributions, and contextual framing suitable for direct use by GSD executor agents. All sources are peer-reviewed publications or agency materials.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item NASA Chandra X-ray Center (SAO/CXC) --- \url{https://chandra.harvard.edu}
+  \item NASA Marshall Space Flight Center --- Chandra program management
+  \item ESA --- XMM-Newton observatory
+  \item MPE / IKI --- eROSITA mission
+  \item Penn State University Eberly College of Science --- Yu, Brandt et al.
+  \item University of Michigan --- Fan Zou (co-author)
+  \item Astrophysical Journal (IOP Publishing) --- DOI: 10.3847/1538-4357/ae173d
+\end{itemize}
+
+\subsection{Module 01: Cosmic Noon and the SMBH Growth Arc}
+
+\subsubsection{Defining Cosmic Noon}
+
+Cosmic noon refers to the epoch approximately 10 billion years ago (redshift $z \approx 2$, lookback time $\sim$10.3 Gyr) when the growth rate of supermassive black holes reached its peak across the entire observable history of the universe. During this period, black holes were growing at rates that powered luminous quasars --- quasi-stellar objects first identified in the late 1950s as anomalously bright radio sources with very small angular sizes in visible light (Chandra Blog, 2026).
+
+The term ``cosmic noon'' reflects a parallel with cosmic star formation history: star formation rate density also peaks near $z \approx 2$, suggesting the two phenomena --- black hole growth and star formation --- are coupled, sharing the same cold gas supply and responding to the same large-scale structural conditions.
+
+\subsubsection{The Decline Since Cosmic Noon}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Epoch} & \tableheader{Redshift / Age} & \tableheader{SMBH Growth Characterization} \\
+\midrule
+Quasar Dawn & $z \sim 6$ / 0.9 Gyr & Rapid seed growth; quasars lighting up \\
+Cosmic Noon & $z \sim 2$ / 3.3 Gyr & Peak accretion; universe-wide growth maximum \\
+Post-Noon & $z \sim 1$ / 7.8 Gyr & Significant decline; ``leisurely'' phase \\
+Recent & $z \sim 0.5$ / 10.6 Gyr & Major slowdown; ``glacial'' phase \\
+Today & $z = 0$ / 13.8 Gyr & Near-dormant; Yu et al.\ expect continued decline \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+X-ray observations have tracked this decline for decades by studying black holes at different distances from Earth --- each distance corresponding to a different epoch in cosmic history. Black holes that grow more quickly produce brighter X-ray emission; comparing X-ray brightness distributions across redshift bins reveals the growth rate history (NASA/CXC, 2026).
+
+\subsection{Module 02: Observational Architecture --- The Wedding-Cake Survey}
+
+\subsubsection{The Multi-Observatory Approach}
+
+The Yu et al.\ study relied on data from three X-ray observatories forming a tiered ``wedding-cake'' survey structure. This design is necessary because the dynamic range of black hole activity across cosmic time --- from bright quasars to dim, slowly accreting nearby objects --- exceeds the capability of any individual telescope.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Observatory} & \tableheader{Tier} & \tableheader{Coverage} & \tableheader{Role in Study} \\
+\midrule
+NASA Chandra & Top (deep) & Small area, very deep & Faint and distant growing black holes; high-redshift AGN near cosmic noon \\
+ESA XMM-Newton & Middle & Medium area, medium depth & Intermediate-luminosity AGN across multiple redshifts \\
+eROSITA (MPE/IKI) & Bottom (shallow) & Wide area, shallow & Large-scale statistical context; high-luminosity nearby objects \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The combined dataset encompasses approximately 1.3 million galaxies and 8,000 growing supermassive black holes (NASA/CXC, 2026). The team also used supporting optical and infrared data --- including Hubble Space Telescope and James Webb Space Telescope observations --- to estimate black hole masses and disentangle mass contributions from accretion rate contributions to observed X-ray luminosity.
+
+\subsubsection{The Disentanglement Problem}
+
+A key methodological challenge: both more massive black holes and faster-accreting black holes produce brighter X-ray emission. Without correcting for mass, a decline in observed X-ray brightness could be misattributed to slower accretion when it might reflect a shift in the typical mass of active black holes (or vice versa). The multi-wavelength approach --- optical/infrared for mass estimates, X-ray for accretion signatures --- allowed the team to isolate these contributions (Yu et al., ApJ 2025).
+
+\subsection{Module 03: Accretion Mechanics and Cold Gas Depletion}
+
+\subsubsection{The Three Hypotheses}
+
+Before the Yu et al.\ study, three mechanistic explanations competed to explain the post-noon decline:
+
+\begin{enumerate}
+  \item \textbf{Lower accretion efficiency} --- Black holes became less efficient at converting infalling material into radiation and growth, even if gas supply remained constant.
+  \item \textbf{Smaller typical black hole masses} --- The average mass of actively growing black holes declined over time, reducing their inherent X-ray output.
+  \item \textbf{Fewer actively growing black holes} --- The fraction of galaxies hosting an actively accreting SMBH (the ``AGN fraction'') declined, with fewer systems lit up at any given time.
+\end{enumerate}
+
+\subsubsection{The Verdict: Declining Accretion Rates}
+
+By analyzing how the brightness distribution and active fraction of black holes evolved across their full redshift range, the team concluded that \textbf{black holes are consuming material less rapidly} the later they are observed after the Big Bang. The researchers expect this trend of slower-growing black holes to continue into the future (NASA/CXC, 2026).
+
+The most probable upstream cause identified is the declining availability of cold gas. Niel Brandt (Penn State) stated: black holes' consumption of material has greatly slowed as the universe has aged, probably because the amount of cold gas available has decreased since cosmic noon (Penn State press release, 2026).
+
+\subsubsection{Cold Gas: Definition and Depletion Mechanisms}
+
+In this astrophysical context, ``cold gas'' refers to molecular and atomic hydrogen gas at temperatures low enough to spiral into an accretion disk and sustain black hole growth (distinguishing it from hot, virialized halo gas that cannot efficiently cool and infall). The depletion of this reservoir since cosmic noon operates through several reinforcing mechanisms:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Mechanism} & \tableheader{Description} \\
+\midrule
+AGN feedback (prior activity) & Past accretion events heat and expel gas from the galaxy; the black hole's own growth history impoverishes its future fuel supply \\
+Declining merger frequency & Galaxy mergers historically drive fresh cold gas inflow toward galactic centers; as the universe expands and voids grow, merger rates decline \\
+Cosmological structure evolution & Star formation consumed vast cold gas reserves at cosmic noon; remaining gas was heated or expelled \\
+Gravitational shock heating & Gas falling into massive dark matter halos above $10^{12}$ solar masses can shock-heat, preventing it from cooling into star-forming or accretion-feeding cold gas \\
+Cosmic expansion & Large-scale structure transitions from merger-rich filaments toward isolation; cold gas inflow to galaxies decreases \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 04: AGN Feedback and Galaxy Co-evolution}
+
+\subsubsection{AGN Feedback Modes}
+
+Active galactic nucleus (AGN) feedback --- the influence of a growing black hole on its host galaxy --- operates in two principal modes (Wikipedia: Quenching, 2026; Silk et al.):
+
+\textbf{Quasar mode (radiative/wind mode):} During rapid, high-rate accretion, an AGN can drive powerful outflows and winds that expel cold gas from the galaxy at velocities exceeding the escape speed. This represents a direct, violent mechanism for cold gas removal. The release of gravitational potential energy becomes comparable to the binding energy of the host galaxy (Silk \& Rees, 1998).
+
+\textbf{Radio mode (jet/kinetic mode):} During lower accretion rate phases, the AGN drives powerful jets that heat circumgalactic and halo gas, preventing it from cooling and condensing. This ``maintenance mode'' is responsible for keeping massive galaxies quenched over long timescales.
+
+\textbf{Preventative mode:} A subtler process in which ongoing AGN energy output prevents cold gas from accreting to the interstellar medium, gradually reducing the star formation rate without requiring a dramatic expulsion event (Wikipedia: Quenching, 2026).
+
+\subsubsection{The Black Hole Mass Connection}
+
+Counterintuitively, research using machine learning classification across multiple cosmological simulations (Eagle, Illustris, IllustrisTNG) finds that \textbf{black hole mass} --- not current accretion rate or AGN luminosity --- is the most predictive parameter for galaxy quenching across all redshifts from cosmic noon to the present (Bluck et al., ApJ 2023). The implication: the \emph{history} of AGN activity, encoded in black hole mass, determines quenching outcomes. Present-day AGN luminosity is nearly irrelevant as a quenching predictor. This places the fossil record of cosmic noon AGN activity at the center of understanding the quiet universe we inhabit today.
+
+\subsubsection{Galaxy Co-evolution Across Redshift}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Redshift} & \tableheader{Galaxy Phase} & \tableheader{SMBH / Cold Gas State} \\
+\midrule
+$z > 2$ & Gas-rich, high SFR, merger-active & Rapid accretion; cold gas abundant; feedback strengthening \\
+$z = 2$ (noon) & SFR peak; quasar era maximum & Peak SMBH growth; AGN feedback beginning to quench \\
+$z = 1$--$2$ & Green valley transition & Declining accretion; feedback-heated halos; SFR falling \\
+$z < 1$ & Red sequence migration & Cold gas depleted; low SFR; most SMBHs near-dormant \\
+$z = 0$ & ``Red and dead'' dominant & Minimal accretion; glacial growth; stable massive ellipticals \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05: Cosmological Implications and Open Questions}
+
+\subsubsection{What the Yu et al.\ Findings Imply}
+
+The confirmation that declining accretion rates (not mass or AGN-fraction changes) drive the post-noon slowdown carries several implications:
+
+\begin{itemize}
+  \item The trend is expected to \textbf{continue}: future surveys should find even lower average accretion rates as the universe ages further and cold gas continues to deplete.
+  \item The finding connects black hole physics to \textbf{galaxy evolution}: the same cold gas supply feeds both black hole accretion and star formation, linking these two fundamental processes.
+  \item The ``wedding-cake'' multi-observatory methodology is \textbf{validated} as the correct approach for studying evolution across wide dynamic ranges.
+\end{itemize}
+
+\subsubsection{Unresolved Questions}
+
+The Yu et al.\ paper explicitly identifies open questions in the blog post by lead author Zhibo Yu:
+
+\begin{enumerate}
+  \item \textbf{What precisely causes the decrease in accretion rates?} Is it primarily the declining supply of cold gas, or does reduced galaxy merger frequency play an important independent role?
+  \item \textbf{How do we directly measure cold gas availability} across cosmic time and link it quantitatively to SMBH accretion rate evolution?
+  \item \textbf{How does the picture extend beyond $z = 2$?} The current study covers $z < 2$; pushing back through cosmic noon into the quasar dawn requires next-generation X-ray sensitivity.
+\end{enumerate}
+
+\subsubsection{Next-Generation Observatories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Observatory} & \tableheader{Agency / Status} & \tableheader{Relevance to This Study} \\
+\midrule
+Lynx X-ray Observatory & NASA (concept study) & 100$\times$ Chandra sensitivity; would resolve individual X-ray sources at cosmic noon and beyond \\
+AXIS (Advanced X-ray Imaging Satellite) & NASA (Probe-class proposal) & High-resolution X-ray imaging across wide fields; optimized for AGN demographics \\
+NewAthena & ESA (in development) & Large collecting area; spectroscopic capability; cold gas characterization in galaxy halos \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Domain} & \tableheader{Risk Level} & \tableheader{Guidance} \\
+\midrule
+Source attribution & GATE & All quantitative claims (galaxy counts, redshifts, percentages) must cite Yu et al.\ 2025 or specific agency sources \\
+Policy advocacy & ANNOTATE & Present findings without advocating for specific NASA budget or observatory funding positions \\
+Speculative futures & ANNOTATE & Projections about future black hole growth trends should be framed as researcher expectations, not certainties \\
+eROSITA mission status & GATE & eROSITA's operational status is complicated by Russian co-ownership; verify current status before citing operational data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}
+  \item NASA Chandra X-ray Center. ``Chandra Resolves Why Black Holes Hit the Brakes on Growth.'' Press Release, March 24, 2026. \url{https://chandra.harvard.edu/press/26_releases/press_032426.html}
+  \item Penn State University, Eberly College of Science. ``Supermassive black holes are growing slower because they have less to consume.'' Press Release, 2026.
+  \item University of Michigan News. ``Why black holes hit the brakes on growth.'' March 2026.
+  \item NASA Chandra Blog. ``Chandra Explains Why Black Hole Growth Slowed Since Cosmic Noon.'' Guest post by Zhibo Yu, 2026. \url{https://chandra.si.edu/blog/node/954}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}
+  \item Yu, Z., Brandt, N., Zou, F., et al.\ ``The Drivers of the Decline in Supermassive Black Hole Growth at $z < 2$.'' \textit{The Astrophysical Journal} (December 2025). DOI: 10.3847/1538-4357/ae173d
+  \item Bluck, A.F.L., et al.\ ``The Fundamental Signature of Star Formation Quenching from AGN Feedback.'' \textit{The Astrophysical Journal} (2023). DOI: 10.3847/1538-4357/acac7c
+  \item Dubois, Y., et al.\ ``AGN-driven quenching of star formation.'' \textit{MNRAS} 433 (2013): 3297--3313. DOI: 10.1093/mnras/stt997
+  \item Kurinchi-Vendhan, S., et al.\ ``On the origin of star formation quenching in massive galaxies at $z \gtrsim 3$.'' \textit{MNRAS} 534 (2024): 3974--3988.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Encyclopedic References}
+
+\begin{itemize}
+  \item Wikipedia contributors. ``Quenching (astronomy).'' \textit{Wikipedia}, accessed March 2026.
+  \item Silk, J., et al.\ ``Galaxy Formation.'' NED Level 5 Knowledgebase. Caltech/IPAC. \url{https://ned.ipac.caltech.edu/level5/Sept13/Silk/Silk8.html}
+  \item Institute for Gravitation and the Cosmos, Penn State. Zhibo Yu researcher profile.
+\end{itemize}
+
+% ================================================================
+%  STAGE 3 — MISSION PACKAGE
+% ================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, self-contained research document on the post-cosmic-noon decline in supermassive black hole growth, anchored by the Yu et al.\ 2025 Astrophysical Journal findings. The document must trace the full causal chain from observational methodology through physical mechanism to cosmological implication, with all quantitative claims sourced and all open questions explicitly identified. The result must be ready for use as a standalone reference document and as input to further GSD missions on astrophysics, galaxy evolution, or infrastructure-scale systems thinking.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION PLAN
+════════════════════════════════════════════════════════════
+ Wave 0 │ FOUNDATION      │ Sequential │ Haiku    │ 0.5 CW
+────────┼─────────────────┼────────────┼──────────┼────────
+        │ Track A         │            │          │
+ Wave 1 │ MOD-01 + MOD-02 │ Parallel   │ Sonnet   │ 1.5 CW
+        │ Track B         │            │          │
+        │ MOD-03 + MOD-04 │ Parallel   │ Sonnet   │ 1.5 CW
+────────┼─────────────────┼────────────┼──────────┼────────
+ Wave 2 │ SYNTHESIS       │ Sequential │ Opus     │ 1.0 CW
+        │ MOD-05 + INTEG  │            │          │
+────────┼─────────────────┼────────────┼──────────┼────────
+ Wave 3 │ PUBLICATION     │ Sequential │ Sonnet   │ 0.5 CW
+════════════════════════════════════════════════════════════
+ TOTAL                                           5.0 CW
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Shared Schema Layer (Wave 0)} --- Redshift/time conventions, citation format, module boundary definitions
+  \item \textbf{Observational Layer (Wave 1A)} --- Historical arc and survey methodology (MOD-01, MOD-02)
+  \item \textbf{Physical Mechanism Layer (Wave 1B)} --- Accretion physics, cold gas, AGN feedback (MOD-03, MOD-04)
+  \item \textbf{Synthesis Layer (Wave 2)} --- Cosmological implications, cross-module integration (MOD-05 + INTEG)
+  \item \textbf{Publication Layer (Wave 3)} --- Final assembly, verification, LaTeX compilation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Specification} \\
+\midrule
+1 & Research document (PDF) & Compiles clean; all 12 SC criteria met & XeLaTeX three-pass; DejaVu fonts; Space/Physics color scheme \\
+2 & Module survey files & One .md per module; 800--1500 words each & Structured: findings, data, sources, open questions \\
+3 & Source validation report & 100\% of citations traceable to primary sources & VERIFY agent output; SC-SRC and SC-NUM gates \\
+4 & Integration summary & All cross-module relationships documented & INTEG agent; minimum 3 cross-references \\
+5 & Index page (HTML) & Links to PDF + .tex; usage instructions & Color-matched to LaTeX scheme \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0: Shared schema & None & Haiku & 2K \\
+MOD-01: Cosmic arc survey & Schema & Sonnet & 8K \\
+MOD-02: Observational arch & Schema & Sonnet & 8K \\
+MOD-03: Accretion mechanics & MOD-01 & Sonnet + Opus & 10K \\
+MOD-04: AGN feedback & MOD-03 & Sonnet & 10K \\
+MOD-05: Implications & MOD-01--04 & Opus & 8K \\
+Cross-module integration & All MODs & Opus & 6K \\
+Document assembly & All above & Sonnet & 5K \\
+Verification pass & Document & Sonnet & 3K \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$60K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Assignment} & \tableheader{Pct.} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & MOD-05 (cosmological implications requires judgment on speculative territory); cross-module synthesis; identifying what the findings \emph{don't} answer \\
+Sonnet & 60\% & MOD-01--04 survey compilation; table and diagram production; document assembly; verification \\
+Haiku & 10\% & Schema definitions; token tracking; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{HITL Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & No \\
+1 & Parallel Surveys & Parallel (2 tracks) & Sonnet & Yes (mid-wave) \\
+2 & Synthesis & Sequential & Opus & Yes (pre-wave) \\
+3 & Publication & Sequential & Sonnet & Yes (final) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Define shared redshift conventions & BUDGET (Haiku) & Redshift-to-lookback-time table; cosmological constant conventions \\
+Citation schema & LOG (Haiku) & Author-year format; DOI requirements; NASA/ESA attribution rules \\
+Module boundary memo & PLAN & One-page scope memo defining what each module owns \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (MOD-01 + MOD-02):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Cosmic noon history survey & SCOUT & Historical arc from quasar dawn to present; quantitative growth rate table \\
+MOD-01 document & EXEC-A & Module 01 survey; 800--1200 words; cited \\
+Wedding-cake survey analysis & CRAFT-OBS & Tier-by-tier capability analysis; Chandra/XMM/eROSITA dataset breakdown \\
+MOD-02 document & EXEC-A & Module 02 survey; 800--1200 words; cited \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (MOD-03 + MOD-04):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Three-hypothesis analysis & CRAFT-COSMO & Evidence matrix for each hypothesis; elimination logic \\
+Cold gas depletion mechanisms & CRAFT-COSMO & Mechanism inventory with sources \\
+MOD-03 document & EXEC-B & Module 03 survey; 1000--1500 words; cited \\
+AGN feedback modes survey & CRAFT-COSMO & Mode descriptions; observational evidence; simulation results \\
+Co-evolution table & EXEC-B & Redshift-stratified galaxy/SMBH state table \\
+MOD-04 document & EXEC-B & Module 04 survey; 1000--1500 words; cited \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\textbf{HITL Gate required before Wave 2: CAPCOM confirms scope, reviews Track A and B outputs, approves Opus engagement.}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+MOD-05: Implications & FLIGHT (Opus) & Cosmological implications; open questions inventory; next-gen observatory assessment \\
+Cross-module integration & INTEG (Opus) & Causal chain documentation; cross-references; consistency verification \\
+Through-line synthesis & FLIGHT (Opus) & Philosophical through-line connecting to Amiga Principle and spaces-between framework \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Document assembly & EXEC-A (Sonnet) & Full LaTeX draft \\
+Source verification & VERIFY & SC-SRC and SC-NUM gate passes \\
+Three-pass compilation & EXEC-A & Clean PDF with TOC and page refs \\
+Index page & EXEC-B & index.html color-matched to document \\
+Final CAPCOM review & CAPCOM & Human sign-off before delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item \textbf{Shared attribute layer:} Redshift-time table, citation schema, and module boundary memo computed once in Wave 0 and injected as shared context into all Wave 1 agents via cache.
+  \item \textbf{5-minute TTL exploitation:} Track A and Track B run concurrently within the same session to maximize cache reuse of the shared foundation.
+  \item \textbf{Source index:} All bibliography entries compiled to a single JSON structure in Wave 0; all agents reference this index rather than re-fetching source metadata.
+  \item \textbf{Synthesis from summaries:} Wave 2 Opus agents receive the module survey \emph{summaries} (not full documents) to conserve context window; full documents available via retrieval if needed.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave / Component} & \tableheader{Model} & \tableheader{Input (K)} & \tableheader{Output (K)} \\
+\midrule
+Wave 0: Foundation & Haiku & 2 & 2 \\
+Wave 1A: MOD-01--02 & Sonnet & 12 & 16 \\
+Wave 1B: MOD-03--04 & Sonnet & 14 & 20 \\
+Wave 2: Synthesis & Opus & 30 & 12 \\
+Wave 3: Publication & Sonnet & 20 & 10 \\
+\midrule
+\textbf{Total} & & \textbf{78K} & \textbf{60K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[WAVE 0: Foundation]
+  shared_schema.json
+  citation_format.md
+  module_boundaries.md
+         │
+         ├──────────────────────────────────────────┐
+         │                                          │
+  [TRACK A]                                 [TRACK B]
+  MOD-01 (cosmic arc)                       MOD-03 (accretion)
+         ↓                                         ↓
+  MOD-02 (observational arch)               MOD-04 (AGN feedback)
+         │                                         │
+         └────────────────┬─────────────────────────┘
+                          │
+                  [WAVE 2: SYNTHESIS]
+                  MOD-05 (implications)
+                  INTEG (cross-module)
+                          │
+                  [WAVE 3: PUBLICATION]
+                  Full document → PDF
+                  Verification → BLOCK gates
+                  Index page
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & Non-negotiable boundaries & 4 & BLOCK \\
+Core Functionality & Deliverable acceptance & 18 & BLOCK \\
+Integration & Cross-module validation & 5 & BLOCK \\
+Edge Cases & Robustness & 4 & LOG \\
+\midrule
+\textbf{Total} & & \textbf{31} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals, NASA/ESA/SAO, or university research programs; zero entertainment media \\
+SC-NUM & Numerical attribution & Every galaxy count, redshift value, accretion rate comparison, and percentage attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents evidence and findings; does not advocate for specific NASA observatory funding decisions \\
+SC-SPEC & Speculation flagging & All claims about future black hole growth are framed as researcher projections, not established facts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Cosmic noon definition (SC-1) & Redshift $z \approx 2$, lookback time $\sim$10 Gyr, and peak growth characterization all present \\
+CF-02 & Three-hypothesis documentation (SC-2) & All three competing hypotheses documented with prior supporting evidence \\
+CF-03 & Wedding-cake methodology (SC-3) & All three observatories with tier descriptions and combined dataset size (1.3M galaxies / 8K AGN) \\
+CF-04 & Accretion rate verdict (SC-4) & Declining accretion rates confirmed as primary driver with supporting evidence cited \\
+CF-05 & Cold gas mechanisms (SC-5) & At least three depletion mechanisms named and sourced \\
+CF-06 & Feedback mode coverage (SC-6) & Quasar, radio, and preventative modes individually described \\
+CF-07 & Co-evolution coverage (SC-7) & At least three redshift regimes in SMBH--galaxy co-evolution table \\
+CF-08 & Open questions (SC-8) & At least two explicitly unresolved questions identified \\
+CF-09 & Quantitative sourcing (SC-9) & Random sample of 5 quantitative claims; all traced to sources \\
+CF-10 & Next-gen observatories (SC-10) & At least one future observatory described with relevance to this study \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1: Cosmic noon defined quantitatively & CF-01, SC-NUM & Pending \\
+SC-2: Three hypotheses documented & CF-02 & Pending \\
+SC-3: Wedding-cake methodology explained & CF-03, SC-SRC & Pending \\
+SC-4: Accretion rate confirmed as primary driver & CF-04, SC-NUM & Pending \\
+SC-5: Cold gas depletion mechanisms (3+) & CF-05 & Pending \\
+SC-6: AGN feedback modes described & CF-06 & Pending \\
+SC-7: Co-evolution across 3+ redshift regimes & CF-07 & Pending \\
+SC-8: Open questions identified & CF-08 & Pending \\
+SC-9: Quantitative claims sourced & CF-09, SC-NUM & Pending \\
+SC-10: Next-gen observatories described & CF-10 & Pending \\
+SC-11: Document self-contained & IN-03 & Pending \\
+SC-12: All sources peer-reviewed / agency & SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go gates; Wave 2 synthesis \\
+PLAN & Planner (Sonnet) & Wave decomposition; dependency management; parallel track optimization \\
+SCOUT & Research Agent (Haiku) & Source gathering; citation validation; web research gap-fill \\
+EXEC-A & Executor-Alpha (Sonnet) & Track A document production (MOD-01, MOD-02, assembly) \\
+EXEC-B & Executor-Beta (Sonnet) & Track B document production (MOD-03, MOD-04, index.html) \\
+CRAFT-COSMO & Cosmology Specialist (Opus) & Cold gas physics; accretion mechanics; AGN feedback analysis \\
+CRAFT-OBS & Observation Specialist (Sonnet) & Survey methodology; multi-observatory architecture \\
+VERIFY & Verification Agent (Sonnet) & Source validation; SC-SRC and SC-NUM gate enforcement \\
+INTEG & Integration Agent (Opus) & Cross-module relationship validation; causal chain documentation \\
+CAPCOM & HITL Interface & Human approval at Wave 1 mid-point, Wave 2 pre-gate, and final delivery \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning \\
+LOG & Chronicle Agent (Haiku) & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 5 \\
+Parallel Tracks & 2 (Wave 1) \\
+HITL Gates & 3 (mid-Wave-1, pre-Wave-2, final) \\
+Estimated Context Windows & 5.0 \\
+Estimated Sessions & 2--3 \\
+Estimated Total Tokens & $\sim$138K (input + output) \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Safety-Critical Tests & 4 (all BLOCK) \\
+Total Tests & 31 \\
+Primary Source & Yu et al., ApJ, December 2025 \\
+Domain & Space/Physics (Cosmic Purple scheme) \\
+Handoff Target & gsd-skill-creator (dev branch) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\begin{center}
+{\large\sffamily\textcolor{primary}{\textbf{``Over 10 billion years the growth of supermassive black holes has gone from hectic to leisurely to glacial.''}}}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- Fan Zou, University of Michigan (co-author, Yu et al.\ 2025)}}
+\end{center}
+
+\vspace{1em}
+{\sffamily The universe's great black holes are not dying --- they are resting on what they consumed. Every era of peak activity reshapes the environment that follows: feedback heated the halo, mergers grew rare, the cold gas drained away. What remains is not absence but \emph{architecture} --- the structural legacy of cosmic noon written into the masses of a billion quiet giants at the centers of a billion galaxies. The spaces between the luminous epochs are where most of the universe now lives. The Amiga Principle, expressed in X-rays across 10 billion years.}
+\end{quotebox}
+
+\end{document}
