@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art Trail — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8a040; --accent-fire:#c75b3a; --border-forest:rgba(122,154,90,0.25); --panel-bg:rgba(26,42,30,0.5); }
+  body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; min-height:100vh; overflow-x:hidden; }
+  ::selection { background:rgba(122,154,90,0.35); color:var(--text); }
+  .nav-bar { background:#1a2a1f; padding:0.5rem 1.5rem; display:flex; gap:1rem; align-items:center; font-size:0.8rem; position:sticky; top:0; z-index:100; backdrop-filter:blur(8px); border-bottom:1px solid var(--border-forest); }
+  .nav-bar a { color:rgba(255,255,255,0.6); text-decoration:none; transition:color 0.2s; }
+  .nav-bar a:hover { color:white; }
+  .nav-bar .active { color:white; font-weight:600; }
+  .nav-bar .sep { color:rgba(255,255,255,0.2); }
+  .hero { text-align:center; padding:4rem 2rem 2.5rem; background:radial-gradient(ellipse at 50% 80%,rgba(122,154,90,0.06) 0%,transparent 60%),linear-gradient(180deg,var(--bg) 0%,#0f1e15 50%,var(--bg) 100%); }
+  .hero h1 { font-size:2.6rem; font-weight:300; letter-spacing:0.12em; margin-bottom:0.3rem; }
+  .hero .subtitle { font-size:0.95rem; color:var(--text-dim); font-style:italic; margin-bottom:1.8rem; }
+  .hero-text { max-width:36rem; margin:0 auto; font-size:0.9rem; line-height:1.85; color:var(--text-mid); }
+  .trail { max-width:700px; margin:0 auto; padding:0 1.25rem 4rem; }
+  .trail-divider { display:flex; align-items:center; gap:1rem; padding:2.5rem 0; color:var(--text-dim); font-size:0.78rem; font-style:italic; }
+  .trail-divider::before, .trail-divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(122,154,90,0.2),transparent); }
+  .trail-divider .leaf { font-size:1rem; opacity:0.4; display:inline-block; }
+  .art-piece { background:var(--panel-bg); border:1px solid var(--border-forest); border-radius:8px; overflow:hidden; transition:border-color 0.3s; }
+  .art-piece:hover { border-color:rgba(122,154,90,0.45); }
+  .art-header { padding:1.2rem 1.5rem 0.8rem; }
+  .art-header h2 { font-size:1.25rem; font-weight:400; letter-spacing:0.06em; margin-bottom:0.15rem; }
+  .art-header .muse-name { font-size:0.78rem; color:var(--accent-green); font-style:italic; }
+  .art-canvas-wrap { position:relative; width:100%; background:#080f0a; cursor:pointer; }
+  .art-canvas-wrap canvas { display:block; width:100%; height:auto; }
+  .art-controls { padding:0.6rem 1.2rem; display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap; font-size:0.75rem; color:var(--text-dim); background:rgba(0,0,0,0.15); border-top:1px solid rgba(122,154,90,0.1); }
+  .art-controls button { background:rgba(122,154,90,0.15); border:1px solid rgba(122,154,90,0.3); color:var(--text); padding:0.3rem 0.75rem; border-radius:4px; font-family:inherit; font-size:0.72rem; cursor:pointer; transition:all 0.2s; }
+  .art-controls button:hover { background:rgba(122,154,90,0.3); }
+  .art-controls button.active { background:rgba(122,154,90,0.35); border-color:var(--accent-green); }
+  .art-controls .stat { margin-left:auto; font-variant-numeric:tabular-nums; }
+  .art-controls input[type="range"] { width:100px; accent-color:var(--accent-green); height:3px; }
+  .art-teaching { padding:1rem 1.5rem 1.3rem; font-size:0.82rem; line-height:1.7; color:var(--text-mid); border-top:1px solid rgba(122,154,90,0.1); }
+  .art-teaching em { color:var(--text); font-style:italic; }
+  .trail-footer { text-align:center; padding:3rem 2rem 4rem; font-size:0.85rem; color:var(--text-dim); font-style:italic; }
+  @media (max-width:600px) { .hero h1{font-size:1.8rem;} .trail{padding:0 0.75rem 3rem;} .art-header{padding:1rem 1rem 0.6rem;} .art-teaching{padding:0.8rem 1rem 1rem;} }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="terrain.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research</a>
+  <span class="sep">/</span>
+  <span class="active">Art Trail</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>The Art Trail</h1>
+  <p class="subtitle">DIY installations made by the muses &mdash; walk the trail, play with each one</p>
+  <p class="hero-text">
+    The muses went into the forest and built things. Some are games. Some are puzzles.
+    Some are just beautiful. Walk the trail. Touch everything.
+    The forest was built to be played with.
+  </p>
+</div>
+
+<!-- THE TRAIL -->
+<div class="trail">
+
+  <!-- ══════════ 1. CEDAR'S GROWTH RINGS ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127793;</span> the trail begins here
+  </div>
+
+  <div class="art-piece" id="piece-rings">
+    <div class="art-header">
+      <h2>Growth Rings</h2>
+      <span class="muse-name">Cedar's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-rings" width="600" height="600"></canvas>
+    </div>
+    <div class="art-controls">
+      <button id="rings-reset">Start Over</button>
+      <span class="stat" id="rings-stat">Rings: 0 / 10</span>
+    </div>
+    <div class="art-teaching" id="rings-teaching">
+      Click the heartwood to add a growth ring. Each ring tells a year's story.
+      <br><em>The record is in the wood.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 2. CHANTERELLE'S NETWORK ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127810;</span> ~50 paces further...
+  </div>
+
+  <div class="art-piece" id="piece-network">
+    <div class="art-header">
+      <h2>The Mycelial Network</h2>
+      <span class="muse-name">Chanterelle's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-network" width="800" height="600"></canvas>
+    </div>
+    <div class="art-controls">
+      <button id="network-reset">Clear Forest</button>
+      <span class="stat" id="network-stat">Trees: 0 &middot; Connections: 0 &middot; Density: 0%</span>
+    </div>
+    <div class="art-teaching">
+      Click to plant trees. Watch the mycorrhizal threads find each other.
+      <br><em>The network becomes visible only when it reaches critical mass.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 3. FIRE'S SUCCESSION ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127794;</span> ~80 paces through old growth...
+  </div>
+
+  <div class="art-piece" id="piece-fire">
+    <div class="art-header">
+      <h2>Succession</h2>
+      <span class="muse-name">Fire's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-fire" width="800" height="400"></canvas>
+    </div>
+    <div class="art-controls">
+      <button id="fire-play">Pause</button>
+      <input type="range" id="fire-speed" min="1" max="10" value="4" title="Speed">
+      <span style="font-size:0.68rem;">slow &mdash; fast</span>
+      <span class="stat" id="fire-stat">Stage: Dense Forest</span>
+    </div>
+    <div class="art-teaching" id="fire-teaching">
+      Watch the forest burn and return. The cycle is 300 million years old.
+      <br><em>Suppression makes the fire bigger, not smaller.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 4. BEAVER'S DAM ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127795;</span> ~60 paces along the creek...
+  </div>
+
+  <div class="art-piece" id="piece-beaver">
+    <div class="art-header">
+      <h2>The Dam</h2>
+      <span class="muse-name">Beaver's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-beaver" width="800" height="500"></canvas>
+    </div>
+    <div class="art-controls">
+      <button id="beaver-reset">Remove Dam</button>
+      <span class="stat" id="beaver-stat">Logs: 0 &middot; Species: 0</span>
+    </div>
+    <div class="art-teaching">
+      Click in the river to place logs. Build a dam and watch the ecosystem respond.
+      <br><em>Your work creates habitat for others.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 5. ORCA'S ECHOLOCATION ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127796;</span> ~100 paces to the shore...
+  </div>
+
+  <div class="art-piece" id="piece-orca">
+    <div class="art-header">
+      <h2>Echolocation</h2>
+      <span class="muse-name">Orca's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-orca" width="800" height="600"></canvas>
+    </div>
+    <div class="art-controls">
+      <button id="orca-ping">Send Click</button>
+      <button id="orca-reset">Clear Water</button>
+      <span class="stat" id="orca-stat">Objects: 0 &middot; Revealed: 0</span>
+    </div>
+    <div class="art-teaching">
+      Click in the water to place hidden objects. Press "Send Click" to echolocate.
+      <br><em>Some things can only be seen with sound.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 6. PIKA'S HAYPILE ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127807;</span> ~70 paces uphill to the talus...
+  </div>
+
+  <div class="art-piece" id="piece-pika">
+    <div class="art-header">
+      <h2>The Haypile</h2>
+      <span class="muse-name">Pika's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-pika" width="600" height="600"></canvas>
+    </div>
+    <div class="art-controls">
+      <button id="pika-start">Start Foraging</button>
+      <button id="pika-reset">Reset</button>
+      <span class="stat" id="pika-stat">Haypile: 0 &middot; Temp: 12&deg;C</span>
+    </div>
+    <div class="art-teaching">
+      Click plants to harvest them before the temperature rises. Race the warming.
+      <br><em>The sentinel's urgency is real.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 7. WOLF'S TROPHIC CASCADE ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127811;</span> ~90 paces through a meadow...
+  </div>
+
+  <div class="art-piece" id="piece-wolf">
+    <div class="art-header">
+      <h2>Trophic Cascade</h2>
+      <span class="muse-name">Wolf's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-wolf" width="800" height="600"></canvas>
+    </div>
+    <div class="art-controls">
+      <span style="font-size:0.7rem;">Wolves:</span>
+      <input type="range" id="wolf-slider" min="0" max="30" value="8">
+      <span class="stat" id="wolf-stat">Wolves: 8 &middot; Elk: 120 &middot; Aspen height: 4m</span>
+    </div>
+    <div class="art-teaching">
+      Move the slider to add or remove wolves. Watch the cascade ripple through every level.
+      <br><em>The apex predator's absence is felt at every level.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 8. WREN'S FREQUENCY ANALYZER ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127809;</span> ~40 paces, listen carefully...
+  </div>
+
+  <div class="art-piece" id="piece-wren">
+    <div class="art-header">
+      <h2>Frequency Analyzer</h2>
+      <span class="muse-name">Wren's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-wren" width="800" height="400"></canvas>
+    </div>
+    <div class="art-controls">
+      <button id="wren-simple" class="active">Simple Song</button>
+      <button id="wren-full">Wren's Song</button>
+      <span class="stat" id="wren-stat">4 frequencies active</span>
+    </div>
+    <div class="art-teaching">
+      Compare a simple bird call to the Pacific Wren's 36-note-per-second cascade.
+      <br><em>Precision, not volume.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 9. COYOTE'S ADAPTATION ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127793;</span> ~55 paces, the habitat shifts...
+  </div>
+
+  <div class="art-piece" id="piece-coyote">
+    <div class="art-header">
+      <h2>Adaptation</h2>
+      <span class="muse-name">Coyote's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-coyote" width="700" height="700"></canvas>
+    </div>
+    <div class="art-controls">
+      <span class="stat" id="coyote-stat">Habitat: Forest &middot; Behavior: Hunting mice</span>
+    </div>
+    <div class="art-teaching">
+      Drag the coyote to any habitat. It adapts everywhere. Every landscape works.
+      <br><em>Flexibility beats strength.</em>
+    </div>
+  </div>
+
+  <!-- ══════════ 10. FOG'S DRIP ══════════ -->
+  <div class="trail-divider">
+    <span class="leaf">&#127812;</span> ~120 paces into the deep fog...
+  </div>
+
+  <div class="art-piece" id="piece-fog">
+    <div class="art-header">
+      <h2>The Drip</h2>
+      <span class="muse-name">Fog's Installation</span>
+    </div>
+    <div class="art-canvas-wrap">
+      <canvas id="canvas-fog" width="800" height="600"></canvas>
+    </div>
+    <div class="art-controls">
+      <span class="stat" id="fog-stat">Forest hydration: 0%</span>
+    </div>
+    <div class="art-teaching">
+      Just watch. The fog rolls in. The branches drip. The ground greens.
+      <br><em>The invisible sustains the visible.</em>
+    </div>
+  </div>
+
+</div><!-- .trail -->
+
+<!-- FOOTER -->
+<div class="trail-footer">
+  Ten art pieces. Ten teachings. One trail through the forest.
+</div>
+
+<script>
+/* THE ART TRAIL — 10 interactive canvas installations */
+function getCanvasCtx(id) {
+  const c = document.getElementById(id);
+  return { canvas: c, ctx: c.getContext('2d'), w: c.width, h: c.height };
+}
+
+function getPointer(canvas, e) {
+  const r = canvas.getBoundingClientRect();
+  const ev = e.touches ? e.touches[0] : e;
+  return {
+    x: (ev.clientX - r.left) * (canvas.width / r.width),
+    y: (ev.clientY - r.top) * (canvas.height / r.height)
+  };
+}
+
+// --- Lazy Init Registry ---
+const initialized = new Set();
+const animFrames = {};
+
+function lazyInit(pieceId, initFn) {
+  if (initialized.has(pieceId)) return;
+  initialized.add(pieceId);
+  initFn();
+}
+
+// IntersectionObserver for lazy loading
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      if (initMap[id]) lazyInit(id, initMap[id]);
+    }
+  });
+}, { rootMargin: '100px' });
+
+const initMap = {};
+
+function registerPiece(id, fn) {
+  initMap[id] = fn;
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+}
+
+/* --- 1. CEDAR'S GROWTH RINGS --- */
+registerPiece('piece-rings', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-rings');
+  const cx = w / 2, cy = h / 2;
+  const maxRings = 10;
+  let rings = [];
+
+  const events = [
+    { year: 2015, width: 18, note: 'a good year — deep rain', color: '#5a8a4a' },
+    { year: 2016, width: 10, note: 'the dry summer', color: '#8a7a3a' },
+    { year: 2017, width: 22, note: 'the flood year — so much water', color: '#4a7a6a' },
+    { year: 2018, width: 8,  note: 'drought gripped the roots', color: '#9a6a3a' },
+    { year: 2019, width: 14, note: 'fire scarred ring 4 — but I survived', color: '#8a4a2a' },
+    { year: 2020, width: 20, note: 'the quiet year — everything grew', color: '#5a9a5a' },
+    { year: 2021, width: 6,  note: 'the heat dome — I barely drank', color: '#aa6a2a' },
+    { year: 2022, width: 16, note: 'recovery — rain returned', color: '#4a8a5a' },
+    { year: 2023, width: 12, note: 'a steady year', color: '#6a8a4a' },
+    { year: 2024, width: 19, note: 'the rings say: I endure', color: '#4a9a4a' },
+  ];
+
+  function draw() {
+    ctx.fillStyle = '#080f0a';
+    ctx.fillRect(0, 0, w, h);
+
+    // Draw from outside in for proper layering
+    let totalR = 30; // heartwood
+    const radii = [totalR];
+    for (let i = 0; i < rings.length; i++) {
+      totalR += rings[i].width;
+      radii.push(totalR);
+    }
+
+    // Bark
+    if (rings.length > 0) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, totalR + 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#3a2a1a';
+      ctx.fill();
+    }
+
+    // Rings (outside in)
+    for (let i = rings.length - 1; i >= 0; i--) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, radii[i + 1], 0, Math.PI * 2);
+      ctx.fillStyle = rings[i].color;
+      ctx.globalAlpha = 0.35;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = 'rgba(60,40,20,0.5)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Year label
+      const labelR = (radii[i] + radii[i + 1]) / 2;
+      if (rings[i].width >= 8) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(-Math.PI / 4 + i * 0.15);
+        ctx.fillStyle = 'rgba(232,220,200,0.55)';
+        ctx.font = '10px Georgia';
+        ctx.textAlign = 'center';
+        ctx.fillText(rings[i].year, labelR, 3);
+        ctx.restore();
+      }
+    }
+
+    // Heartwood
+    ctx.beginPath();
+    ctx.arc(cx, cy, 30, 0, Math.PI * 2);
+    ctx.fillStyle = '#2a1a0a';
+    ctx.fill();
+
+    // Center dot
+    ctx.beginPath();
+    ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#5a3a1a';
+    ctx.fill();
+
+    // Prompt
+    if (rings.length === 0) {
+      ctx.fillStyle = 'rgba(232,220,200,0.3)';
+      ctx.font = 'italic 13px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('click the heartwood to begin', cx, cy + 60);
+    }
+
+    // Speech bubble after 10 rings
+    if (rings.length >= maxRings) {
+      const msg = `I remember the flood of ring 3, the fire of ring 5, the heat dome of ring 7.`;
+      ctx.fillStyle = 'rgba(13,26,18,0.85)';
+      const bw = 380, bh = 44;
+      const bx = cx - bw / 2, by = h - 65;
+      ctx.beginPath();
+      ctx.roundRect(bx, by, bw, bh, 6);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(122,154,90,0.3)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(232,220,200,0.75)';
+      ctx.font = 'italic 12px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText(msg, cx, by + 18);
+      ctx.fillText('The record is in the wood.', cx, by + 34);
+    }
+  }
+
+  function addRing() {
+    if (rings.length >= maxRings) return;
+    rings.push(events[rings.length]);
+    document.getElementById('rings-stat').textContent = `Rings: ${rings.length} / ${maxRings}`;
+    if (rings.length >= maxRings) {
+      document.getElementById('rings-teaching').innerHTML =
+        'The tree has spoken. Ten years of memory encoded in cellulose.<br><em>The record is in the wood.</em>';
+    }
+    draw();
+  }
+
+  canvas.addEventListener('click', addRing);
+  canvas.addEventListener('touchend', (e) => { e.preventDefault(); addRing(); });
+
+  document.getElementById('rings-reset').addEventListener('click', () => {
+    rings = [];
+    document.getElementById('rings-stat').textContent = 'Rings: 0 / 10';
+    document.getElementById('rings-teaching').innerHTML =
+      'Click the heartwood to add a growth ring. Each ring tells a year\'s story.<br><em>The record is in the wood.</em>';
+    draw();
+  });
+
+  draw();
+});
+
+/* --- 2. CHANTERELLE'S NETWORK --- */
+registerPiece('piece-network', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-network');
+  let trees = [];
+  let connections = [];
+  let chanterelles = [];
+  const CONNECT_DIST = 140;
+  let fruited = false;
+
+  function calcConnections() {
+    connections = [];
+    for (let i = 0; i < trees.length; i++) {
+      for (let j = i + 1; j < trees.length; j++) {
+        const dx = trees[i].x - trees[j].x;
+        const dy = trees[i].y - trees[j].y;
+        if (Math.sqrt(dx * dx + dy * dy) < CONNECT_DIST) {
+          connections.push([i, j]);
+        }
+      }
+    }
+    const maxConn = trees.length * (trees.length - 1) / 2;
+    const density = maxConn > 0 ? Math.round((connections.length / maxConn) * 100) : 0;
+
+    // Fruit when density > 60%
+    if (density > 60 && !fruited && trees.length >= 4) {
+      fruited = true;
+      chanterelles = [];
+      const fruitCount = Math.min(5, Math.floor(trees.length / 2));
+      const shuffled = [...trees].sort(() => Math.random() - 0.5);
+      for (let i = 0; i < fruitCount; i++) {
+        chanterelles.push({ x: shuffled[i].x, y: shuffled[i].y, scale: 0 });
+      }
+    }
+
+    document.getElementById('network-stat').textContent =
+      `Trees: ${trees.length} \u00b7 Connections: ${connections.length} \u00b7 Density: ${density}%`;
+  }
+
+  let time = 0;
+  function draw() {
+    time += 0.02;
+    ctx.fillStyle = '#060d08';
+    ctx.fillRect(0, 0, w, h);
+
+    // Connections (golden threads)
+    for (const [i, j] of connections) {
+      const a = trees[i], b = trees[j];
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      // Slight curve for organic feel
+      const mx = (a.x + b.x) / 2 + Math.sin(time + i) * 4;
+      const my = (a.y + b.y) / 2 + Math.cos(time + j) * 4;
+      ctx.quadraticCurveTo(mx, my, b.x, b.y);
+      ctx.strokeStyle = `rgba(200,160,64,${0.15 + 0.1 * Math.sin(time + i + j)})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    // Trees
+    for (const t of trees) {
+      // Root glow
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, 18, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(40,80,40,0.15)';
+      ctx.fill();
+      // Tree
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = '#3a7a3a';
+      ctx.fill();
+      ctx.strokeStyle = '#2a5a2a';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Chanterelles
+    for (const ch of chanterelles) {
+      if (ch.scale < 1) ch.scale += 0.02;
+      const s = ch.scale;
+      ctx.save();
+      ctx.translate(ch.x + 14, ch.y - 14);
+      ctx.scale(s, s);
+      // Simple chanterelle shape
+      ctx.beginPath();
+      ctx.moveTo(0, 10);
+      ctx.quadraticCurveTo(-8, 0, -10, -8);
+      ctx.quadraticCurveTo(-6, -12, 0, -10);
+      ctx.quadraticCurveTo(6, -12, 10, -8);
+      ctx.quadraticCurveTo(8, 0, 0, 10);
+      ctx.fillStyle = '#c8a040';
+      ctx.fill();
+      ctx.strokeStyle = '#a08030';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Prompt
+    if (trees.length === 0) {
+      ctx.fillStyle = 'rgba(232,220,200,0.3)';
+      ctx.font = 'italic 13px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('click to plant trees', w / 2, h / 2);
+    }
+
+    animFrames['network'] = requestAnimationFrame(draw);
+  }
+
+  function addTree(e) {
+    e.preventDefault();
+    const p = getPointer(canvas, e);
+    trees.push({ x: p.x, y: p.y });
+    calcConnections();
+  }
+
+  canvas.addEventListener('click', addTree);
+  canvas.addEventListener('touchend', addTree);
+
+  document.getElementById('network-reset').addEventListener('click', () => {
+    trees = []; connections = []; chanterelles = []; fruited = false;
+    document.getElementById('network-stat').textContent = 'Trees: 0 \u00b7 Connections: 0 \u00b7 Density: 0%';
+  });
+
+  draw();
+});
+
+/* --- 3. FIRE'S SUCCESSION --- */
+registerPiece('piece-fire', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-fire');
+  let frame = 0;
+  let playing = true;
+  let speed = 4;
+  let elapsed = 0;
+
+  const stages = [
+    { name: 'Dense Forest',  color: '#1a4a2a', detail: 'Fuel accumulates. Canopy closes.', trees: 40 },
+    { name: 'Ignition',      color: '#4a2a0a', detail: 'Lightning strikes. The understory catches.', trees: 35 },
+    { name: 'Crown Fire',    color: '#8a3a0a', detail: 'Fire reaches the canopy. Everything burns.', trees: 15 },
+    { name: 'Bare Ground',   color: '#1a1a15', detail: 'Ash. Silence. The soil is still alive.', trees: 0 },
+    { name: 'Fireweed',      color: '#2a1a1a', detail: 'First color returns. Fireweed is fearless.', trees: 0 },
+    { name: 'Alder Seedlings', color: '#1a2a1a', detail: 'Nitrogen fixers arrive. The soil rebuilds.', trees: 8 },
+    { name: 'Young Forest',  color: '#1a3a20', detail: 'Saplings race for light. Competition begins.', trees: 22 },
+    { name: 'Mature Forest', color: '#1a4528', detail: 'The cycle completes. Fuel accumulates again.', trees: 35 },
+  ];
+
+  function draw() {
+    const stage = stages[frame];
+    ctx.fillStyle = stage.color;
+    ctx.fillRect(0, 0, w, h);
+
+    // Ground
+    const gy = h * 0.7;
+    ctx.fillStyle = frame <= 3 ? '#1a1a10' : '#1a2a15';
+    ctx.fillRect(0, gy, w, h - gy);
+
+    // Trees/elements based on stage
+    if (stage.trees > 0) {
+      for (let i = 0; i < stage.trees; i++) {
+        const tx = 20 + (i / stage.trees) * (w - 40);
+        const th = 30 + Math.sin(i * 1.7) * 20 + (frame >= 5 ? (frame - 4) * 10 : 20);
+        // Trunk
+        ctx.fillStyle = frame >= 2 && frame <= 3 ? '#2a1a0a' : '#3a2a15';
+        ctx.fillRect(tx - 2, gy - th, 4, th);
+        // Canopy
+        if (frame < 2 || frame >= 5) {
+          ctx.beginPath();
+          ctx.arc(tx, gy - th - 8, 10 + frame * 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = frame >= 6 ? `rgba(40,${90 + frame * 8},40,0.7)` : 'rgba(30,70,30,0.6)';
+          ctx.fill();
+        }
+        // Fire on trees (stages 1-2)
+        if (frame >= 1 && frame <= 2) {
+          ctx.beginPath();
+          ctx.arc(tx, gy - th / 2, 6 + Math.random() * 8, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${200 + Math.random() * 55},${60 + Math.random() * 60},10,${0.4 + Math.random() * 0.3})`;
+          ctx.fill();
+        }
+      }
+    }
+
+    // Fireweed (stage 4)
+    if (frame === 4) {
+      for (let i = 0; i < 25; i++) {
+        const fx = 30 + Math.random() * (w - 60);
+        ctx.beginPath();
+        ctx.arc(fx, gy - 5 - Math.random() * 20, 3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${180 + Math.random() * 60},60,${100 + Math.random() * 60},0.7)`;
+        ctx.fill();
+        // Stem
+        ctx.beginPath();
+        ctx.moveTo(fx, gy);
+        ctx.lineTo(fx, gy - 5 - Math.random() * 20);
+        ctx.strokeStyle = 'rgba(80,120,60,0.5)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+
+    // Stage label
+    ctx.fillStyle = 'rgba(232,220,200,0.7)';
+    ctx.font = '16px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText(stage.name, w / 2, 35);
+    ctx.font = 'italic 11px Georgia';
+    ctx.fillStyle = 'rgba(232,220,200,0.45)';
+    ctx.fillText(stage.detail, w / 2, 55);
+
+    // Frame dots
+    for (let i = 0; i < stages.length; i++) {
+      ctx.beginPath();
+      ctx.arc(w / 2 - (stages.length * 8) + i * 16, h - 20, 4, 0, Math.PI * 2);
+      ctx.fillStyle = i === frame ? 'rgba(200,160,64,0.8)' : 'rgba(200,160,64,0.2)';
+      ctx.fill();
+    }
+
+    document.getElementById('fire-stat').textContent = `Stage: ${stage.name}`;
+  }
+
+  function tick() {
+    if (playing) {
+      elapsed += speed;
+      if (elapsed > 120) {
+        elapsed = 0;
+        frame = (frame + 1) % stages.length;
+      }
+    }
+    draw();
+    animFrames['fire'] = requestAnimationFrame(tick);
+  }
+
+  document.getElementById('fire-play').addEventListener('click', function() {
+    playing = !playing;
+    this.textContent = playing ? 'Pause' : 'Play';
+  });
+  document.getElementById('fire-speed').addEventListener('input', function() {
+    speed = parseInt(this.value);
+  });
+
+  tick();
+});
+
+/* --- 4. BEAVER'S DAM --- */
+registerPiece('piece-beaver', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-beaver');
+  let logs = [];
+  let particles = [];
+  let species = [];
+  const riverY = h * 0.55;
+  const riverH = h * 0.22;
+  let waterLevel = 0;
+  let time = 0;
+
+  // Water particles
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: riverY + Math.random() * riverH,
+      speed: 1.5 + Math.random() * 2,
+      size: 2 + Math.random() * 3
+    });
+  }
+
+  function getDamX() {
+    if (logs.length === 0) return null;
+    return logs.reduce((s, l) => s + l.x, 0) / logs.length;
+  }
+
+  function countSpecies() {
+    const n = logs.length;
+    species = [];
+    if (n >= 2) species.push('Dragonfly');
+    if (n >= 3) species.push('Frog');
+    if (n >= 4) species.push('Trout');
+    if (n >= 5) species.push('Heron');
+    if (n >= 6) species.push('Kingfisher');
+    if (n >= 7) species.push('Otter');
+    if (n >= 8) species.push('Salmon');
+    if (n >= 9) species.push('Mink');
+    waterLevel = Math.min(1, n / 6);
+    document.getElementById('beaver-stat').textContent =
+      `Logs: ${n} \u00b7 Species: ${species.length}`;
+  }
+
+  function draw() {
+    time += 0.03;
+    ctx.fillStyle = '#0a1510';
+    ctx.fillRect(0, 0, w, h);
+
+    // Sky
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, riverY - 20);
+    skyGrad.addColorStop(0, '#0a1510');
+    skyGrad.addColorStop(1, '#0f2018');
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, w, riverY - 20);
+
+    // Banks
+    ctx.fillStyle = '#1a3018';
+    ctx.fillRect(0, riverY - 20, w, 20);
+    ctx.fillRect(0, riverY + riverH, w, 20);
+
+    // Growing plants on banks if dam exists
+    if (logs.length >= 4) {
+      for (let i = 0; i < logs.length * 2; i++) {
+        const px = 50 + (i * 73) % (w - 100);
+        const ph = 8 + waterLevel * 15 + Math.sin(i * 2.3 + time) * 3;
+        ctx.beginPath();
+        ctx.moveTo(px, riverY - 20);
+        ctx.lineTo(px - 3, riverY - 20 - ph);
+        ctx.lineTo(px + 3, riverY - 20 - ph);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(60,${120 + i * 5},50,0.6)`;
+        ctx.fill();
+      }
+    }
+
+    // River
+    const damX = getDamX();
+    ctx.fillStyle = '#0a3a5a';
+    ctx.fillRect(0, riverY, w, riverH);
+
+    // Pool behind dam (raised water)
+    if (damX && waterLevel > 0) {
+      const poolH = waterLevel * 40;
+      ctx.fillStyle = 'rgba(20,80,120,0.4)';
+      ctx.fillRect(0, riverY - poolH, damX, riverH + poolH);
+    }
+
+    // Water particles
+    for (const p of particles) {
+      const blocked = damX && p.x > damX - 30 && p.x < damX + 30 && logs.length >= 3;
+      if (!blocked) {
+        p.x += p.speed;
+      } else {
+        p.x -= 0.5; // pool
+        p.y += Math.sin(time + p.x * 0.1) * 0.3;
+      }
+      if (p.x > w + 10) { p.x = -10; p.y = riverY + Math.random() * riverH; }
+      if (p.x < -20) { p.x = w + 10; }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(80,160,200,${0.2 + Math.sin(time + p.x * 0.05) * 0.1})`;
+      ctx.fill();
+    }
+
+    // Logs
+    for (const l of logs) {
+      ctx.save();
+      ctx.translate(l.x, l.y);
+      ctx.rotate(l.angle);
+      ctx.fillStyle = '#5a3a1a';
+      ctx.fillRect(-l.len / 2, -4, l.len, 8);
+      ctx.strokeStyle = '#3a2a0a';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(-l.len / 2, -4, l.len, 8);
+      ctx.restore();
+    }
+
+    // Fish in pool
+    if (species.length >= 3 && damX) {
+      for (let i = 0; i < Math.min(species.length, 5); i++) {
+        const fx = damX - 60 - i * 40 + Math.sin(time * 2 + i * 1.5) * 20;
+        const fy = riverY + 15 + i * 12 + Math.cos(time + i) * 5;
+        ctx.beginPath();
+        ctx.ellipse(fx, fy, 8, 4, 0, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200,${100 + i * 20},80,0.6)`;
+        ctx.fill();
+        // Tail
+        ctx.beginPath();
+        ctx.moveTo(fx + 8, fy);
+        ctx.lineTo(fx + 14, fy - 4);
+        ctx.lineTo(fx + 14, fy + 4);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    // Birds
+    if (species.length >= 4) {
+      for (let i = 0; i < 2; i++) {
+        const bx = (damX || w / 2) - 40 + i * 80 + Math.sin(time + i * 3) * 15;
+        const by = riverY - 40 - i * 20 + Math.cos(time * 1.5 + i) * 8;
+        ctx.beginPath();
+        ctx.moveTo(bx - 8, by);
+        ctx.quadraticCurveTo(bx - 4, by - 6, bx, by);
+        ctx.quadraticCurveTo(bx + 4, by - 6, bx + 8, by);
+        ctx.strokeStyle = 'rgba(200,200,180,0.5)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+
+    // Prompt
+    if (logs.length === 0) {
+      ctx.fillStyle = 'rgba(232,220,200,0.3)';
+      ctx.font = 'italic 13px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('click in the river to place logs', w / 2, riverY + riverH / 2);
+    }
+
+    animFrames['beaver'] = requestAnimationFrame(draw);
+  }
+
+  function addLog(e) {
+    e.preventDefault();
+    const p = getPointer(canvas, e);
+    // Only in river area +/- margin
+    if (p.y > riverY - 30 && p.y < riverY + riverH + 30) {
+      logs.push({
+        x: p.x, y: Math.max(riverY, Math.min(riverY + riverH, p.y)),
+        len: 25 + Math.random() * 30,
+        angle: (Math.random() - 0.5) * 0.6
+      });
+      countSpecies();
+    }
+  }
+
+  canvas.addEventListener('click', addLog);
+  canvas.addEventListener('touchend', addLog);
+
+  document.getElementById('beaver-reset').addEventListener('click', () => {
+    logs = []; species = []; waterLevel = 0;
+    document.getElementById('beaver-stat').textContent = 'Logs: 0 \u00b7 Species: 0';
+  });
+
+  draw();
+});
+
+/* --- 5. ORCA'S ECHOLOCATION --- */
+registerPiece('piece-orca', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-orca');
+  let objects = [];
+  let pulses = [];
+  let time = 0;
+  const orcaX = 80, orcaY = h / 2;
+
+  function draw() {
+    time += 0.02;
+    ctx.fillStyle = '#050a14';
+    ctx.fillRect(0, 0, w, h);
+
+    // Water depth gradient
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    grad.addColorStop(0, 'rgba(10,30,60,0.3)');
+    grad.addColorStop(1, 'rgba(5,10,20,0.5)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Subtle particles (plankton)
+    for (let i = 0; i < 30; i++) {
+      const px = (i * 127 + time * 20) % w;
+      const py = (i * 89 + Math.sin(time + i) * 30) % h;
+      ctx.beginPath();
+      ctx.arc(px, py, 1, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(80,120,160,0.15)';
+      ctx.fill();
+    }
+
+    // Orca silhouette
+    ctx.save();
+    ctx.translate(orcaX, orcaY + Math.sin(time) * 5);
+    // Body
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 40, 18, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a1a2a';
+    ctx.fill();
+    // White patch
+    ctx.beginPath();
+    ctx.ellipse(10, 4, 12, 6, 0.2, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(200,200,210,0.3)';
+    ctx.fill();
+    // Dorsal fin
+    ctx.beginPath();
+    ctx.moveTo(-5, -18);
+    ctx.lineTo(5, -30);
+    ctx.lineTo(12, -18);
+    ctx.fillStyle = '#1a1a2a';
+    ctx.fill();
+    // Eye
+    ctx.beginPath();
+    ctx.arc(22, -3, 3, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(200,200,220,0.5)';
+    ctx.fill();
+    // Tail
+    ctx.beginPath();
+    ctx.moveTo(-40, 0);
+    ctx.lineTo(-55, -12);
+    ctx.lineTo(-50, 0);
+    ctx.lineTo(-55, 12);
+    ctx.closePath();
+    ctx.fillStyle = '#1a1a2a';
+    ctx.fill();
+    ctx.restore();
+
+    // Pulses
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      const p = pulses[i];
+      p.r += 3;
+      p.alpha -= 0.008;
+
+      if (p.alpha <= 0) { pulses.splice(i, 1); continue; }
+
+      // Draw arc (directional)
+      ctx.beginPath();
+      ctx.arc(orcaX + 40, orcaY + Math.sin(time) * 5, p.r, -0.5, 0.5);
+      ctx.strokeStyle = `rgba(100,180,220,${p.alpha})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Check collisions with objects
+      for (const obj of objects) {
+        const dist = Math.sqrt((orcaX + 40 + p.r * Math.cos(0) - obj.x) ** 2 + (orcaY - obj.y) ** 2);
+        // Simple range check
+        if (Math.abs(p.r - Math.sqrt((obj.x - orcaX - 40) ** 2 + (obj.y - orcaY) ** 2)) < 15) {
+          if (!obj.revealed) {
+            obj.revealed = true;
+            obj.revealAlpha = 0;
+            updateOrcaStat();
+          }
+        }
+      }
+    }
+
+    // Objects
+    for (const obj of objects) {
+      if (obj.revealed) {
+        obj.revealAlpha = Math.min(1, (obj.revealAlpha || 0) + 0.03);
+        ctx.globalAlpha = obj.revealAlpha;
+      } else {
+        ctx.globalAlpha = 0.06; // barely visible hint
+      }
+
+      if (obj.type === 'fish') {
+        ctx.beginPath();
+        ctx.ellipse(obj.x, obj.y, 12, 6, 0, 0, Math.PI * 2);
+        ctx.fillStyle = obj.revealed ? '#4a9aaa' : '#1a3a4a';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(obj.x - 12, obj.y);
+        ctx.lineTo(obj.x - 20, obj.y - 6);
+        ctx.lineTo(obj.x - 20, obj.y + 6);
+        ctx.closePath();
+        ctx.fill();
+      } else {
+        // Rock
+        ctx.beginPath();
+        ctx.ellipse(obj.x, obj.y, 14, 10, 0.3, 0, Math.PI * 2);
+        ctx.fillStyle = obj.revealed ? '#4a5a5a' : '#1a2a2a';
+        ctx.fill();
+      }
+
+      if (obj.revealed) {
+        // Echo ring
+        ctx.beginPath();
+        ctx.arc(obj.x, obj.y, 18 + Math.sin(time * 3) * 3, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(100,180,220,${0.2 * obj.revealAlpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      ctx.globalAlpha = 1;
+    }
+
+    // Prompt
+    if (objects.length === 0) {
+      ctx.fillStyle = 'rgba(232,220,200,0.25)';
+      ctx.font = 'italic 13px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('click in the water to place hidden objects', w / 2, h / 2 + 80);
+    }
+
+    animFrames['orca'] = requestAnimationFrame(draw);
+  }
+
+  function updateOrcaStat() {
+    const revealed = objects.filter(o => o.revealed).length;
+    document.getElementById('orca-stat').textContent =
+      `Objects: ${objects.length} \u00b7 Revealed: ${revealed}`;
+  }
+
+  function addObject(e) {
+    e.preventDefault();
+    const p = getPointer(canvas, e);
+    if (p.x < 150) return; // not on orca
+    objects.push({
+      x: p.x, y: p.y,
+      type: Math.random() > 0.4 ? 'fish' : 'rock',
+      revealed: false, revealAlpha: 0
+    });
+    updateOrcaStat();
+  }
+
+  canvas.addEventListener('click', addObject);
+  canvas.addEventListener('touchend', addObject);
+
+  document.getElementById('orca-ping').addEventListener('click', () => {
+    pulses.push({ r: 0, alpha: 0.6 });
+  });
+
+  document.getElementById('orca-reset').addEventListener('click', () => {
+    objects = []; pulses = [];
+    document.getElementById('orca-stat').textContent = 'Objects: 0 \u00b7 Revealed: 0';
+  });
+
+  draw();
+});
+
+/* --- 6. PIKA'S HAYPILE --- */
+registerPiece('piece-pika', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-pika');
+  let plants = [];
+  let haypile = 0;
+  let temp = 12;
+  let gameState = 'idle'; // idle, playing, won, lost
+  let time = 0;
+  const PLANT_COUNT = 20;
+  const TEMP_THRESHOLD = 24;
+  const HAYPILE_GOAL = 12;
+
+  function initPlants() {
+    plants = [];
+    for (let i = 0; i < PLANT_COUNT; i++) {
+      plants.push({
+        x: 40 + Math.random() * (w - 80),
+        y: 80 + Math.random() * (h - 220),
+        size: 8 + Math.random() * 6,
+        maxSize: 8 + Math.random() * 6,
+        alive: true,
+        regrowing: false,
+        regrowTimer: 0
+      });
+    }
+  }
+
+  initPlants();
+
+  function draw() {
+    time += 0.02;
+    ctx.fillStyle = '#0f1a15';
+    ctx.fillRect(0, 0, w, h);
+
+    // Talus slope background
+    for (let i = 0; i < 40; i++) {
+      const rx = (i * 97 + 20) % w;
+      const ry = h - 30 - (i * 43) % 50;
+      ctx.beginPath();
+      ctx.ellipse(rx, ry, 8 + (i % 5) * 3, 5 + (i % 3) * 2, (i * 0.3), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(60,60,50,${0.3 + (i % 3) * 0.1})`;
+      ctx.fill();
+    }
+
+    // Temperature gradient overlay
+    if (gameState === 'playing' || gameState === 'lost') {
+      const warmth = Math.max(0, (temp - 12) / (TEMP_THRESHOLD - 8));
+      ctx.fillStyle = `rgba(120,40,10,${warmth * 0.1})`;
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    // Plants
+    for (const p of plants) {
+      if (!p.alive && !p.regrowing) continue;
+
+      if (p.regrowing && temp < TEMP_THRESHOLD) {
+        p.regrowTimer += 0.02;
+        if (p.regrowTimer > 3) {
+          p.alive = true;
+          p.regrowing = false;
+          p.size = p.maxSize * 0.5;
+        }
+      }
+
+      if (p.alive && p.size < p.maxSize && gameState === 'playing' && temp < TEMP_THRESHOLD) {
+        p.size += 0.01;
+      }
+
+      if (p.alive) {
+        // Stem
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y + p.size);
+        ctx.lineTo(p.x, p.y - p.size);
+        ctx.strokeStyle = 'rgba(80,140,60,0.6)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        // Leaves
+        ctx.beginPath();
+        ctx.arc(p.x, p.y - p.size, p.size * 0.6, 0, Math.PI * 2);
+        ctx.fillStyle = temp > 20 ? `rgba(${120 + (temp - 20) * 8},${140 - (temp - 20) * 5},40,0.7)` : 'rgba(60,140,50,0.7)';
+        ctx.fill();
+        // Flower
+        ctx.beginPath();
+        ctx.arc(p.x, p.y - p.size - 3, 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(180,140,200,0.6)';
+        ctx.fill();
+      }
+    }
+
+    // Pika
+    const pikaX = w - 80, pikaY = h - 70;
+    ctx.beginPath();
+    ctx.ellipse(pikaX, pikaY, 14, 10, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#8a7a6a';
+    ctx.fill();
+    // Ears
+    ctx.beginPath();
+    ctx.ellipse(pikaX - 8, pikaY - 12, 4, 7, -0.3, 0, Math.PI * 2);
+    ctx.fillStyle = '#8a7a6a';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(pikaX + 4, pikaY - 12, 4, 7, 0.3, 0, Math.PI * 2);
+    ctx.fill();
+    // Eye
+    ctx.beginPath();
+    ctx.arc(pikaX + 6, pikaY - 3, 2, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fill();
+
+    // Haypile
+    if (haypile > 0) {
+      const pileW = Math.min(60, haypile * 5);
+      const pileH = Math.min(30, haypile * 2.5);
+      ctx.beginPath();
+      ctx.ellipse(pikaX - 25, pikaY + 8, pileW / 2, pileH / 2, 0, Math.PI, 0);
+      ctx.fillStyle = '#7a8a3a';
+      ctx.fill();
+      ctx.fillStyle = 'rgba(232,220,200,0.5)';
+      ctx.font = '10px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText(`${haypile}`, pikaX - 25, pikaY + 2);
+    }
+
+    // Temperature gauge
+    const gaugeX = 30, gaugeY = 40, gaugeH = h - 120;
+    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    ctx.fillRect(gaugeX - 6, gaugeY, 12, gaugeH);
+    const tempFill = (temp - 5) / (TEMP_THRESHOLD + 5 - 5);
+    const fillH = gaugeH * Math.min(1, tempFill);
+    const tempColor = temp > 20 ? '#aa3a1a' : temp > 16 ? '#aa7a2a' : '#4a8a5a';
+    ctx.fillStyle = tempColor;
+    ctx.fillRect(gaugeX - 4, gaugeY + gaugeH - fillH, 8, fillH);
+    ctx.fillStyle = 'rgba(232,220,200,0.5)';
+    ctx.font = '10px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${Math.round(temp)}\u00b0C`, gaugeX, gaugeY - 8);
+    // Threshold line
+    const threshY = gaugeY + gaugeH - gaugeH * ((TEMP_THRESHOLD - 5) / (TEMP_THRESHOLD + 5 - 5));
+    ctx.beginPath();
+    ctx.moveTo(gaugeX - 10, threshY);
+    ctx.lineTo(gaugeX + 10, threshY);
+    ctx.strokeStyle = '#aa3a1a';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Game state messages
+    if (gameState === 'idle') {
+      ctx.fillStyle = 'rgba(232,220,200,0.35)';
+      ctx.font = 'italic 14px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('press "Start Foraging" to begin', w / 2, h / 2 + 30);
+    } else if (gameState === 'won') {
+      ctx.fillStyle = 'rgba(80,160,80,0.8)';
+      ctx.font = '16px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('You survived the winter.', w / 2, h - 30);
+    } else if (gameState === 'lost') {
+      ctx.fillStyle = 'rgba(180,60,40,0.8)';
+      ctx.font = '16px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('The warming came too fast.', w / 2, h - 30);
+    }
+
+    // Update temp during play
+    if (gameState === 'playing') {
+      temp += 0.012;
+      if (temp >= TEMP_THRESHOLD) {
+        // Stop plant regrowth at threshold
+        for (const p of plants) { p.regrowing = false; }
+        if (haypile >= HAYPILE_GOAL) {
+          gameState = 'won';
+        } else {
+          gameState = 'lost';
+        }
+      }
+      if (haypile >= HAYPILE_GOAL && gameState === 'playing') {
+        gameState = 'won';
+      }
+    }
+
+    document.getElementById('pika-stat').textContent =
+      `Haypile: ${haypile} / ${HAYPILE_GOAL} \u00b7 Temp: ${Math.round(temp)}\u00b0C`;
+
+    animFrames['pika'] = requestAnimationFrame(draw);
+  }
+
+  function harvest(e) {
+    if (gameState !== 'playing') return;
+    e.preventDefault();
+    const p = getPointer(canvas, e);
+    for (const plant of plants) {
+      if (!plant.alive) continue;
+      const dx = p.x - plant.x, dy = p.y - plant.y;
+      if (Math.sqrt(dx * dx + dy * dy) < plant.size + 10) {
+        plant.alive = false;
+        plant.regrowing = true;
+        plant.regrowTimer = 0;
+        plant.size = 0;
+        haypile++;
+        break;
+      }
+    }
+  }
+
+  canvas.addEventListener('click', harvest);
+  canvas.addEventListener('touchend', harvest);
+
+  document.getElementById('pika-start').addEventListener('click', () => {
+    gameState = 'playing';
+    temp = 12;
+    haypile = 0;
+    initPlants();
+  });
+
+  document.getElementById('pika-reset').addEventListener('click', () => {
+    gameState = 'idle';
+    temp = 12;
+    haypile = 0;
+    initPlants();
+  });
+
+  draw();
+});
+
+/* --- 7. WOLF'S TROPHIC CASCADE --- */
+registerPiece('piece-wolf', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-wolf');
+  let wolves = 8;
+  let time = 0;
+
+  // Smooth animated values
+  let animElk = 120, animAspen = 4;
+
+  function getEcology(wolfCount) {
+    // Wolves -> Elk inverse, Aspen from wolf presence
+    const elk = Math.max(20, Math.round(200 - wolfCount * 8));
+    const aspen = Math.max(0.5, Math.min(10, wolfCount * 0.5));
+    return { elk, aspen };
+  }
+
+  function draw() {
+    time += 0.015;
+    const { elk, aspen } = getEcology(wolves);
+
+    // Smooth approach
+    animElk += (elk - animElk) * 0.03;
+    animAspen += (aspen - animAspen) * 0.03;
+
+    ctx.fillStyle = '#0a0f0a';
+    ctx.fillRect(0, 0, w, h);
+
+    const rowH = h / 3;
+
+    // --- WOLF ROW ---
+    ctx.fillStyle = 'rgba(20,25,20,0.5)';
+    ctx.fillRect(0, 0, w, rowH);
+    ctx.fillStyle = 'rgba(232,220,200,0.25)';
+    ctx.font = '11px Georgia';
+    ctx.textAlign = 'left';
+    ctx.fillText('WOLVES', 15, 22);
+
+    const wolfCount = Math.round(wolves);
+    for (let i = 0; i < wolfCount; i++) {
+      const wx = 30 + (i % 15) * 48;
+      const wy = 45 + Math.floor(i / 15) * 50 + Math.sin(time * 2 + i) * 3;
+      // Wolf body
+      ctx.beginPath();
+      ctx.ellipse(wx, wy, 12, 7, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#5a5a5a';
+      ctx.fill();
+      // Head
+      ctx.beginPath();
+      ctx.arc(wx + 10, wy - 4, 5, 0, Math.PI * 2);
+      ctx.fill();
+      // Ears
+      ctx.beginPath();
+      ctx.moveTo(wx + 8, wy - 9);
+      ctx.lineTo(wx + 10, wy - 15);
+      ctx.lineTo(wx + 13, wy - 9);
+      ctx.fill();
+      // Tail
+      ctx.beginPath();
+      ctx.moveTo(wx - 12, wy);
+      ctx.quadraticCurveTo(wx - 18, wy - 10, wx - 14, wy - 6);
+      ctx.strokeStyle = '#5a5a5a';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // --- ELK ROW ---
+    ctx.fillStyle = 'rgba(25,20,15,0.5)';
+    ctx.fillRect(0, rowH, w, rowH);
+    ctx.fillStyle = 'rgba(232,220,200,0.25)';
+    ctx.font = '11px Georgia';
+    ctx.fillText('ELK', 15, rowH + 22);
+
+    const elkCount = Math.min(40, Math.round(animElk / 5));
+    for (let i = 0; i < elkCount; i++) {
+      const ex = 25 + (i % 20) * 38;
+      const ey = rowH + 45 + Math.floor(i / 20) * 50 + Math.sin(time + i * 0.7) * 2;
+      ctx.beginPath();
+      ctx.ellipse(ex, ey, 10, 6, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#8a6a4a';
+      ctx.fill();
+      // Head
+      ctx.beginPath();
+      ctx.arc(ex + 8, ey - 4, 4, 0, Math.PI * 2);
+      ctx.fill();
+      // Antlers (small)
+      if (i % 3 === 0) {
+        ctx.beginPath();
+        ctx.moveTo(ex + 7, ey - 8);
+        ctx.lineTo(ex + 5, ey - 14);
+        ctx.moveTo(ex + 9, ey - 8);
+        ctx.lineTo(ex + 11, ey - 14);
+        ctx.strokeStyle = '#8a6a4a';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+
+    // --- ASPEN ROW ---
+    ctx.fillStyle = 'rgba(15,25,15,0.5)';
+    ctx.fillRect(0, rowH * 2, w, rowH);
+    ctx.fillStyle = 'rgba(232,220,200,0.25)';
+    ctx.font = '11px Georgia';
+    ctx.fillText('ASPEN', 15, rowH * 2 + 22);
+
+    const treeCount = 15;
+    for (let i = 0; i < treeCount; i++) {
+      const tx = 40 + i * 48;
+      const maxH = animAspen * 14;
+      const th = Math.max(5, maxH + Math.sin(i * 1.3) * 8);
+      const baseY = h - 20;
+      // Trunk (white bark)
+      ctx.fillStyle = 'rgba(200,200,190,0.5)';
+      ctx.fillRect(tx - 2, baseY - th, 4, th);
+      // Canopy
+      if (th > 20) {
+        ctx.beginPath();
+        ctx.ellipse(tx, baseY - th - 8, 8 + th * 0.15, 10 + th * 0.2, 0, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(80,${140 + Math.round(th)},50,0.5)`;
+        ctx.fill();
+        // Leaf shimmer
+        if (animAspen > 3) {
+          ctx.beginPath();
+          ctx.arc(tx + Math.sin(time * 3 + i) * 5, baseY - th - 5 + Math.cos(time * 2 + i) * 4, 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200,200,100,${0.2 + Math.sin(time * 4 + i) * 0.15})`;
+          ctx.fill();
+        }
+      }
+      // Browsed stumps when aspen is low
+      if (th <= 20) {
+        ctx.fillStyle = 'rgba(120,100,60,0.4)';
+        ctx.fillRect(tx - 3, baseY - 6, 6, 6);
+      }
+    }
+
+    // Cascade math panel
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.fillRect(w - 180, 8, 170, 72);
+    ctx.fillStyle = 'rgba(232,220,200,0.55)';
+    ctx.font = '10px Georgia';
+    ctx.textAlign = 'left';
+    ctx.fillText(`Wolves: ${wolfCount}`, w - 170, 24);
+    ctx.fillText(`Elk: ${Math.round(animElk)}`, w - 170, 38);
+    ctx.fillText(`Aspen height: ${animAspen.toFixed(1)}m`, w - 170, 52);
+    ctx.fillText(`Browse pressure: ${animElk > 140 ? 'severe' : animElk > 100 ? 'moderate' : 'low'}`, w - 170, 66);
+
+    document.getElementById('wolf-stat').textContent =
+      `Wolves: ${wolfCount} \u00b7 Elk: ${Math.round(animElk)} \u00b7 Aspen height: ${animAspen.toFixed(1)}m`;
+
+    animFrames['wolf'] = requestAnimationFrame(draw);
+  }
+
+  document.getElementById('wolf-slider').addEventListener('input', function() {
+    wolves = parseInt(this.value);
+  });
+
+  draw();
+});
+
+/* --- 8. WREN'S FREQUENCY ANALYZER --- */
+registerPiece('piece-wren', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-wren');
+  let mode = 'simple'; // simple or wren
+  let time = 0;
+  const BAR_COUNT = 36;
+  const barW = (w - 80) / BAR_COUNT;
+  let barHeights = new Float32Array(BAR_COUNT);
+  let targetHeights = new Float32Array(BAR_COUNT);
+
+  function setSimple() {
+    mode = 'simple';
+    document.getElementById('wren-simple').classList.add('active');
+    document.getElementById('wren-full').classList.remove('active');
+    document.getElementById('wren-stat').textContent = '4 frequencies active';
+  }
+
+  function setWren() {
+    mode = 'wren';
+    document.getElementById('wren-full').classList.add('active');
+    document.getElementById('wren-simple').classList.remove('active');
+    document.getElementById('wren-stat').textContent = '36 frequencies active';
+  }
+
+  function draw() {
+    time += 0.04;
+    ctx.fillStyle = '#080a10';
+    ctx.fillRect(0, 0, w, h);
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(80,120,160,0.08)';
+    ctx.lineWidth = 1;
+    for (let y = 50; y < h - 30; y += 40) {
+      ctx.beginPath();
+      ctx.moveTo(40, y);
+      ctx.lineTo(w - 40, y);
+      ctx.stroke();
+    }
+
+    // Calculate targets
+    if (mode === 'simple') {
+      for (let i = 0; i < BAR_COUNT; i++) {
+        if (i === 4 || i === 12 || i === 20 || i === 28) {
+          targetHeights[i] = 0.4 + Math.sin(time * 2 + i * 0.5) * 0.3;
+        } else {
+          targetHeights[i] = 0.02;
+        }
+      }
+    } else {
+      // Wren's 36-frequency cascade
+      for (let i = 0; i < BAR_COUNT; i++) {
+        const phase = time * 3 + i * 0.4;
+        const cascade = Math.sin(phase) * 0.3 +
+                       Math.sin(phase * 1.7 + i * 0.2) * 0.2 +
+                       Math.sin(phase * 0.6 + i * 0.8) * 0.15;
+        targetHeights[i] = 0.35 + cascade + Math.sin(time * 5 + i * 1.1) * 0.1;
+      }
+    }
+
+    // Smooth approach
+    for (let i = 0; i < BAR_COUNT; i++) {
+      barHeights[i] += (targetHeights[i] - barHeights[i]) * 0.12;
+    }
+
+    // Draw bars
+    const baseY = h - 45;
+    const maxBarH = h - 90;
+
+    for (let i = 0; i < BAR_COUNT; i++) {
+      const bx = 40 + i * barW;
+      const bh = Math.max(2, barHeights[i] * maxBarH);
+
+      // Color gradient per bar
+      const hue = mode === 'wren'
+        ? 160 + i * 3 + Math.sin(time + i * 0.5) * 15
+        : 200;
+      const sat = mode === 'wren' ? 60 + barHeights[i] * 30 : 40;
+      const light = 30 + barHeights[i] * 25;
+
+      ctx.fillStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
+      ctx.fillRect(bx + 1, baseY - bh, barW - 2, bh);
+
+      // Glow on active bars
+      if (barHeights[i] > 0.3) {
+        ctx.fillStyle = `hsla(${hue}, ${sat}%, ${light + 20}%, 0.15)`;
+        ctx.fillRect(bx - 1, baseY - bh - 4, barW + 2, bh + 8);
+      }
+    }
+
+    // Frequency labels
+    ctx.fillStyle = 'rgba(232,220,200,0.3)';
+    ctx.font = '9px Georgia';
+    ctx.textAlign = 'center';
+    for (let i = 0; i < BAR_COUNT; i += 6) {
+      ctx.fillText(`${i + 1}`, 40 + i * barW + barW / 2, baseY + 14);
+    }
+
+    // Title
+    ctx.fillStyle = 'rgba(232,220,200,0.45)';
+    ctx.font = '11px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText(
+      mode === 'simple' ? 'Simple Bird Call — 4 frequencies' : 'Pacific Wren — 36 notes per second',
+      w / 2, 25
+    );
+
+    // dB scale
+    ctx.fillStyle = 'rgba(232,220,200,0.2)';
+    ctx.font = '8px Georgia';
+    ctx.textAlign = 'right';
+    ctx.fillText('0 dB', 35, baseY);
+    ctx.fillText('-20', 35, baseY - maxBarH / 2);
+    ctx.fillText('-40', 35, baseY - maxBarH + 5);
+
+    animFrames['wren'] = requestAnimationFrame(draw);
+  }
+
+  document.getElementById('wren-simple').addEventListener('click', setSimple);
+  document.getElementById('wren-full').addEventListener('click', setWren);
+
+  draw();
+});
+
+/* --- 9. COYOTE'S ADAPTATION --- */
+registerPiece('piece-coyote', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-coyote');
+  let time = 0;
+  let dragging = false;
+
+  const habitats = [
+    { name: 'Forest',   x: 0, y: 0,        color: '#1a3a1a', behavior: 'Hunting mice', fur: '#7a6a4a', detail: 'It moves silently through ferns, ears rotating.' },
+    { name: 'City',     x: w / 2, y: 0,     color: '#2a2a30', behavior: 'Scavenging at night', fur: '#6a6a6a', detail: 'It crosses parking lots at 3am, invisible.' },
+    { name: 'Desert',   x: 0, y: h / 2,     color: '#3a2a1a', behavior: 'Finding water', fur: '#b09a70', detail: 'It knows every seep within 10 miles.' },
+    { name: 'Farm',     x: w / 2, y: h / 2, color: '#1a2a10', behavior: 'Avoiding humans', fur: '#8a7a5a', detail: 'It watches the farmhouse lights and waits.' },
+    { name: 'Mountain', x: w / 4, y: h / 4, color: '#1a1a25', behavior: 'Hunting marmots', fur: '#6a5a4a', detail: 'Thick winter coat. Nothing wasted.' },
+  ];
+
+  // Layout: 2x2 grid + center
+  const cellW = w / 2, cellH = h / 2;
+  habitats[0].cx = cellW * 0.5;  habitats[0].cy = cellH * 0.5;
+  habitats[1].cx = cellW * 1.5;  habitats[1].cy = cellH * 0.5;
+  habitats[2].cx = cellW * 0.5;  habitats[2].cy = cellH * 1.5;
+  habitats[3].cx = cellW * 1.5;  habitats[3].cy = cellH * 1.5;
+  habitats[4].cx = w / 2;        habitats[4].cy = h / 2;
+
+  let coyoteX = w / 2, coyoteY = h / 2;
+  let currentHabitat = habitats[4]; // start at mountain (center)
+
+  function getHabitat(x, y) {
+    let closest = habitats[0], minD = Infinity;
+    for (const hab of habitats) {
+      const dx = x - hab.cx, dy = y - hab.cy;
+      const d = dx * dx + dy * dy;
+      if (d < minD) { minD = d; closest = hab; }
+    }
+    return closest;
+  }
+
+  function drawHabitatDetails() {
+    // Forest trees
+    for (let i = 0; i < 8; i++) {
+      const tx = 30 + i * 40, ty = cellH - 30;
+      ctx.fillStyle = 'rgba(30,70,30,0.4)';
+      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(tx - 12, ty + 25); ctx.lineTo(tx + 12, ty + 25); ctx.fill();
+    }
+    // City buildings
+    for (let i = 0; i < 6; i++) {
+      const bx = cellW + 20 + i * 55, bh = 40 + (i * 17) % 50;
+      ctx.fillStyle = 'rgba(40,40,50,0.5)';
+      ctx.fillRect(bx, cellH - 20 - bh, 30, bh);
+      for (let wy = 0; wy < bh - 10; wy += 12) {
+        ctx.fillStyle = `rgba(200,200,150,${Math.sin(time + i + wy * 0.1) > 0.3 ? 0.3 : 0.05})`;
+        ctx.fillRect(bx + 5, cellH - 15 - bh + wy, 6, 4); ctx.fillRect(bx + 18, cellH - 15 - bh + wy, 6, 4);
+      }
+    }
+    // Desert cacti
+    for (let i = 0; i < 5; i++) {
+      const cx = 40 + i * 60, cy = cellH * 2 - 40;
+      ctx.fillStyle = 'rgba(60,90,40,0.5)';
+      ctx.fillRect(cx - 3, cy - 25, 6, 25); ctx.fillRect(cx - 12, cy - 18, 9, 4); ctx.fillRect(cx + 3, cy - 12, 9, 4);
+    }
+    // Farm fences
+    for (let i = 0; i < 8; i++) { ctx.fillStyle = 'rgba(100,80,50,0.3)'; ctx.fillRect(cellW + 20 + i * 40, cellH * 2 - 50, 3, 20); }
+    ctx.strokeStyle = 'rgba(100,80,50,0.2)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cellW + 20, cellH * 2 - 38); ctx.lineTo(cellW * 2 - 20, cellH * 2 - 38); ctx.stroke();
+    // Mountain peaks + snow
+    ctx.beginPath(); ctx.moveTo(w/2-60,h/2+20); ctx.lineTo(w/2-20,h/2-40); ctx.lineTo(w/2+20,h/2-50); ctx.lineTo(w/2+60,h/2+20);
+    ctx.fillStyle = 'rgba(50,50,70,0.3)'; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(w/2+10,h/2-50); ctx.lineTo(w/2+25,h/2-35); ctx.lineTo(w/2-5,h/2-35);
+    ctx.fillStyle = 'rgba(200,200,220,0.15)'; ctx.fill();
+  }
+
+  function draw() {
+    time += 0.015;
+    // Habitat zones
+    ctx.fillStyle = '#0a1a0a'; ctx.fillRect(0, 0, cellW, cellH);
+    ctx.fillStyle = '#15151a'; ctx.fillRect(cellW, 0, cellW, cellH);
+    ctx.fillStyle = '#1a150a'; ctx.fillRect(0, cellH, cellW, cellH);
+    ctx.fillStyle = '#0a1a08'; ctx.fillRect(cellW, cellH, cellW, cellH);
+    // Mountain diamond
+    ctx.beginPath(); ctx.moveTo(w/2,h/2-100); ctx.lineTo(w/2+100,h/2); ctx.lineTo(w/2,h/2+100); ctx.lineTo(w/2-100,h/2);
+    ctx.closePath(); ctx.fillStyle = 'rgba(20,20,35,0.6)'; ctx.fill();
+    drawHabitatDetails();
+    // Labels
+    ctx.fillStyle = 'rgba(232,220,200,0.25)'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+    ctx.fillText('FOREST', cellW/2, 22); ctx.fillText('CITY', cellW+cellW/2, 22);
+    ctx.fillText('DESERT', cellW/2, cellH+22); ctx.fillText('FARM', cellW+cellW/2, cellH+22);
+    ctx.fillText('MOUNTAIN', w/2, h/2-65);
+    // Zone borders
+    ctx.strokeStyle = 'rgba(122,154,90,0.12)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cellW,0); ctx.lineTo(cellW,h); ctx.moveTo(0,cellH); ctx.lineTo(w,cellH); ctx.stroke();
+    currentHabitat = getHabitat(coyoteX, coyoteY);
+
+    // Coyote
+    ctx.save();
+    ctx.translate(coyoteX, coyoteY);
+
+    // Shadow
+    ctx.beginPath();
+    ctx.ellipse(0, 12, 16, 4, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,0,0,0.2)';
+    ctx.fill();
+
+    // Body
+    ctx.fillStyle = currentHabitat.fur;
+    ctx.beginPath(); ctx.ellipse(0, 0, 18, 11, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(14, -6, 8, 6, 0.2, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(22, -4, 5, 3, 0.1, 0, Math.PI * 2); ctx.fill();
+    // Ears
+    ctx.beginPath(); ctx.moveTo(10,-12); ctx.lineTo(8,-22); ctx.lineTo(14,-14); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(16,-12); ctx.lineTo(18,-22); ctx.lineTo(22,-12); ctx.fill();
+    // Eye
+    ctx.beginPath(); ctx.arc(17, -8, 2, 0, Math.PI * 2); ctx.fillStyle = '#e8c840'; ctx.fill();
+    ctx.beginPath(); ctx.arc(17, -8, 1, 0, Math.PI * 2); ctx.fillStyle = '#1a1a1a'; ctx.fill();
+
+    // Tail
+    ctx.beginPath();
+    ctx.moveTo(-18, 0);
+    ctx.quadraticCurveTo(-30 + Math.sin(time * 2) * 4, -15, -24, -8);
+    ctx.strokeStyle = currentHabitat.fur;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Legs
+    ctx.fillStyle = currentHabitat.fur;
+    const legY = 8;
+    ctx.fillRect(-8, legY, 3, 10);
+    ctx.fillRect(2, legY, 3, 10);
+    ctx.fillRect(8, legY, 3, 10);
+
+    ctx.restore();
+
+    // Behavior label
+    ctx.fillStyle = 'rgba(13,26,18,0.8)';
+    const labelW = 280, labelH = 38;
+    ctx.beginPath();
+    ctx.roundRect(w / 2 - labelW / 2, h - 55, labelW, labelH, 5);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(122,154,90,0.3)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(232,220,200,0.7)';
+    ctx.font = 'italic 11px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText(currentHabitat.detail, w / 2, h - 32);
+
+    document.getElementById('coyote-stat').textContent =
+      `Habitat: ${currentHabitat.name} \u00b7 Behavior: ${currentHabitat.behavior}`;
+
+    animFrames['coyote'] = requestAnimationFrame(draw);
+  }
+
+  function startDrag(e) {
+    e.preventDefault();
+    dragging = true;
+    moveCoyote(e);
+  }
+  function moveDrag(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    moveCoyote(e);
+  }
+  function endDrag() { dragging = false; }
+
+  function moveCoyote(e) {
+    const p = getPointer(canvas, e);
+    coyoteX = Math.max(20, Math.min(w - 20, p.x));
+    coyoteY = Math.max(20, Math.min(h - 20, p.y));
+  }
+
+  canvas.addEventListener('mousedown', startDrag);
+  canvas.addEventListener('mousemove', moveDrag);
+  canvas.addEventListener('mouseup', endDrag);
+  canvas.addEventListener('mouseleave', endDrag);
+  canvas.addEventListener('touchstart', startDrag, { passive: false });
+  canvas.addEventListener('touchmove', moveDrag, { passive: false });
+  canvas.addEventListener('touchend', endDrag);
+
+  draw();
+});
+
+/* --- 10. FOG'S DRIP --- */
+registerPiece('piece-fog', function() {
+  const { canvas, ctx, w, h } = getCanvasCtx('canvas-fog');
+  let time = 0;
+  let hydration = 0;
+  let drops = [];
+  let fogWisps = [];
+  let groundPixels = new Float32Array(w); // greenness per x column
+
+  // Fog wisps
+  for (let i = 0; i < 15; i++) {
+    fogWisps.push({
+      x: -100 - Math.random() * 200,
+      y: 50 + Math.random() * (h * 0.5),
+      speed: 0.3 + Math.random() * 0.4,
+      size: 40 + Math.random() * 60,
+      opacity: 0.08 + Math.random() * 0.08
+    });
+  }
+
+  // Spruce branch structure
+  const branches = [];
+  const trunkX = w * 0.45, trunkBase = h * 0.85;
+  const treeH = h * 0.7;
+  for (let i = 0; i < 14; i++) {
+    const t = i / 14;
+    const by = trunkBase - t * treeH;
+    const bLen = (1 - t * 0.7) * 120;
+    const side = i % 2 === 0 ? 1 : -1;
+    branches.push({
+      x: trunkX + side * 5,
+      y: by,
+      len: bLen * side,
+      angle: side > 0 ? -0.15 : Math.PI + 0.15,
+      dropSites: []
+    });
+    // Drop sites along branch
+    for (let j = 1; j <= 4; j++) {
+      branches[i].dropSites.push({
+        x: trunkX + side * 5 + (bLen * side * j / 4),
+        y: by + j * 3,
+        accum: 0
+      });
+    }
+  }
+
+  function draw() {
+    time += 0.008;
+
+    // Sky
+    ctx.fillStyle = '#0a0f0d';
+    ctx.fillRect(0, 0, w, h);
+
+    // Ground base
+    const groundY = h * 0.85;
+    for (let x = 0; x < w; x++) {
+      const green = Math.min(1, groundPixels[x]);
+      const r = 15 + green * 10;
+      const g = 20 + green * 40;
+      const b = 12 + green * 8;
+      ctx.fillStyle = `rgb(${r},${g},${b})`;
+      ctx.fillRect(x, groundY, 1, h - groundY);
+    }
+
+    // Trunk
+    ctx.fillStyle = '#1a1510';
+    ctx.fillRect(trunkX - 6, trunkBase - treeH + 20, 12, treeH - 20);
+
+    // Branches with needles
+    for (const br of branches) {
+      const endX = br.x + br.len;
+      // Branch line
+      ctx.beginPath();
+      ctx.moveTo(br.x, br.y);
+      ctx.lineTo(endX, br.y + Math.abs(br.len) * 0.05);
+      ctx.strokeStyle = '#1a1510';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Needles
+      const steps = Math.abs(br.len) / 8;
+      const dir = br.len > 0 ? 1 : -1;
+      for (let n = 1; n < steps; n++) {
+        const nx = br.x + (n / steps) * br.len;
+        const ny = br.y + (n / steps) * Math.abs(br.len) * 0.05;
+        ctx.beginPath();
+        ctx.moveTo(nx, ny);
+        ctx.lineTo(nx - 3 * dir, ny + 8);
+        ctx.lineTo(nx + 3 * dir, ny + 8);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(20,${50 + n * 2},25,0.6)`;
+        ctx.fill();
+      }
+    }
+
+    // Fog wisps
+    for (const fog of fogWisps) {
+      fog.x += fog.speed;
+      if (fog.x > w + fog.size) {
+        fog.x = -fog.size * 2;
+        fog.y = 50 + Math.random() * (h * 0.5);
+      }
+
+      // Check if fog touches a branch
+      for (const br of branches) {
+        for (const site of br.dropSites) {
+          const dx = fog.x - site.x, dy = fog.y - site.y;
+          if (Math.sqrt(dx * dx + dy * dy) < fog.size * 0.6) {
+            site.accum += 0.003;
+            if (site.accum > 1) {
+              site.accum = 0;
+              drops.push({
+                x: site.x + (Math.random() - 0.5) * 4,
+                y: site.y + 4,
+                vy: 0,
+                size: 1.5 + Math.random()
+              });
+            }
+          }
+        }
+      }
+
+      // Draw fog
+      const grad = ctx.createRadialGradient(fog.x, fog.y, 0, fog.x, fog.y, fog.size);
+      grad.addColorStop(0, `rgba(180,190,185,${fog.opacity})`);
+      grad.addColorStop(0.6, `rgba(150,160,155,${fog.opacity * 0.5})`);
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.ellipse(fog.x, fog.y, fog.size, fog.size * 0.4, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Drops
+    for (let i = drops.length - 1; i >= 0; i--) {
+      const d = drops[i];
+      d.vy += 0.08;
+      d.y += d.vy;
+
+      // Draw drop
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(150,180,200,0.5)';
+      ctx.fill();
+
+      // Hit ground
+      if (d.y >= groundY) {
+        const gx = Math.max(0, Math.min(w - 1, Math.round(d.x)));
+        // Spread greenness
+        for (let spread = -8; spread <= 8; spread++) {
+          const sx = gx + spread;
+          if (sx >= 0 && sx < w) {
+            groundPixels[sx] = Math.min(1, groundPixels[sx] + 0.008 * (1 - Math.abs(spread) / 10));
+          }
+        }
+        drops.splice(i, 1);
+        hydration = Math.min(100, hydration + 0.08);
+      }
+    }
+
+    // Small ferns growing from green ground
+    for (let x = 20; x < w - 20; x += 15) {
+      const green = groundPixels[x];
+      if (green > 0.3) {
+        const fernH = green * 15;
+        ctx.beginPath();
+        ctx.moveTo(x, groundY);
+        ctx.quadraticCurveTo(x - 4, groundY - fernH / 2, x - 6, groundY - fernH);
+        ctx.strokeStyle = `rgba(50,${100 + green * 60},40,${green * 0.5})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, groundY);
+        ctx.quadraticCurveTo(x + 4, groundY - fernH / 2, x + 6, groundY - fernH);
+        ctx.stroke();
+      }
+    }
+
+    // Moisture meter
+    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    ctx.fillRect(w - 30, 40, 14, h - 120);
+    const meterH = (h - 120) * (hydration / 100);
+    ctx.fillStyle = `rgba(60,${120 + hydration},80,0.5)`;
+    ctx.fillRect(w - 28, 40 + (h - 120) - meterH, 10, meterH);
+    ctx.fillStyle = 'rgba(232,220,200,0.4)';
+    ctx.font = '9px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${Math.round(hydration)}%`, w - 23, 32);
+
+    document.getElementById('fog-stat').textContent = `Forest hydration: ${Math.round(hydration)}%`;
+
+    animFrames['fog'] = requestAnimationFrame(draw);
+  }
+
+  draw();
+});
+
+</script>
+</body>
+</html>
