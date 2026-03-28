@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 8&deg; &mdash; Gary Peacock &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .zen-insight {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .zen-insight h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .zen-insight p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .foundation-echo {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .foundation-echo h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .foundation-echo table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .foundation-echo td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .foundation-echo td:first-child { font-weight: 600; width: 30%; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">8&deg;</div>
+      <div>
+        <h1>Gary Peacock</h1>
+        <div class="subtitle">Jazz &middot; Bass &middot; ECM &middot; Spiritual Jazz &mdash; Burley, Idaho 1935 &rarr; Seattle &mdash; d. 2020</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../007-julian-priester/index.html">Degree 7&deg; (Priester)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../001-bill-frisell/index.html">Degree 1&deg; (Frisell)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Bill Evans. Albert Ayler. Paul Bley. Miles Davis. Keith Jarrett.
+          Twenty albums over thirty years with the Standards Trio. Zen study in Japan.
+          The bass is the harmonic foundation &mdash; not by convention but by physics.
+          At degree 8, the foundation arrives in person.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Bass Arrives</h2>
+
+        <p>Gary Peacock was born on May 12, 1935, in <strong>Burley, Idaho</strong> &mdash;
+        a small agricultural town in the Magic Valley of south-central Idaho. He is the first
+        bassist in the S36 engine, the first artist born in Idaho, the first born in a rural
+        setting, and the first whose path to jazz passed through <strong>military service</strong>
+        (U.S. Army in Germany, where he switched from piano to bass). After discharge, he studied
+        at <strong>Westlake College of Music</strong> in Los Angeles.</p>
+
+        <p>In the 1960s, Peacock became one of the most sought-after bassists in New York, playing
+        with <strong>Bill Evans</strong> (the lyrical trio pianist), <strong>Albert Ayler</strong>
+        (the most radical free jazz saxophonist), <strong>Paul Bley</strong> (bridging lyrical and
+        free), <strong>Miles Davis</strong>, and <strong>Tony Williams</strong>. That Evans and
+        Ayler &mdash; near-opposite poles of the jazz spectrum &mdash; both chose Peacock tells you
+        something about the bass: the harmonic foundation must be flexible enough to support any
+        structure built above it.</p>
+
+        <p>Peacock is best known for the <strong>Keith Jarrett Standards Trio</strong> &mdash;
+        Jarrett (piano), Peacock (bass), Jack DeJohnette (drums) &mdash; active from 1983 to 2014,
+        recording <strong>20+ albums for ECM Records</strong>. The trio&rsquo;s approach: radical
+        reinterpretation of jazz standards through collective improvisation, no rehearsal, every
+        member co-creating in real time.</p>
+
+        <p>Peacock also spent years studying <strong>Zen Buddhism</strong> in Japan in the early
+        1970s &mdash; a withdrawal from the jazz scene at the height of his reputation that
+        fundamentally reshaped his approach to music. He died on September 4, 2020, in Olivebridge,
+        New York, at age 85.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: ECM Records catalog;
+        AllMusic; DownBeat; JazzTimes; New York Times obituary (September 2020); Westlake College
+        of Music history; Keith Jarrett Standards Trio discography; Ethan Iverson analysis</p>
+
+        <!-- ========================================
+             FOUNDATION ECHO
+             ======================================== -->
+
+        <div class="foundation-echo">
+          <h4>The Foundation Echo: Degree 0 &rarr; Degree 8</h4>
+          <table>
+            <tr>
+              <td>Jones (0&deg;)</td>
+              <td><strong>Foundational voice.</strong> The architect who defined the engine&rsquo;s
+              harmonic and structural context. Bass lines written into orchestral arrangements.
+              The foundation was composed.</td>
+            </tr>
+            <tr>
+              <td>Peacock (8&deg;)</td>
+              <td><strong>Foundational instrument.</strong> The literal bass &mdash; the instrument
+              whose physics (overtone series, root motion, psychoacoustic weight) make it the
+              harmonic foundation of all Western music. The foundation arrives in person.</td>
+            </tr>
+            <tr>
+              <td>The Echo</td>
+              <td><strong>The circle spirals back.</strong> Eight degrees of trumpets, trombones,
+              pianos, guitars, and voices &mdash; and now the actual bass arrives to make the
+              harmonic foundation explicit. The foundation that was implicit in every previous
+              degree becomes the dedicated subject.</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             ZEN INSIGHT
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Zen Buddhism &amp; The Withdrawal</h2>
+
+        <p>In the early 1970s, at the height of his reputation, Peacock withdrew from the jazz
+        scene and traveled to <strong>Japan</strong> to study Zen Buddhism, macrobiotics, and
+        Eastern philosophy. This is one of the most unusual career decisions in jazz history &mdash;
+        and it was not an escape but a prerequisite. The Standards Trio recordings that followed
+        would not have been possible without the years of silence and study that preceded them.</p>
+
+        <div class="zen-insight">
+          <h4>Zen Concepts in Peacock&rsquo;s Bass Practice</h4>
+          <p><strong>Emptiness (sunyata):</strong> The bass creates harmonic gravity through
+          implication rather than saturation. The spaces between notes are as important as the
+          notes themselves. The bass does not insist on its own presence.</p>
+          <p><strong>Presence (mindfulness):</strong> Each note played with complete attention.
+          No anticipation of the next, no memory of the last. The bass line unfolds in pure
+          present tense &mdash; breath-driven, not clock-driven.</p>
+          <p><strong>Ego dissolution:</strong> The bassist&rsquo;s conventional service role
+          becomes a philosophical position. The bass IS the music &mdash; not because it dominates
+          but because it holds the space that makes everything else possible. &ldquo;The music
+          plays itself through you.&rdquo;</p>
+        </div>
+
+        <p>The withdrawal introduces a new artist-institution category: <strong>The Seeker</strong>
+        &mdash; an artist who leaves the profession not because of erasure (Bown, 6&deg;), exile
+        (Anderson, 3&deg;), or economic failure, but because of a philosophical conviction that
+        something more fundamental must be understood before the music can continue.</p>
+
+        <!-- ========================================
+             THE STANDARDS TRIO
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Keith Jarrett Standards Trio (1983&ndash;2014)</h2>
+
+        <p>The Standards Trio &mdash; Jarrett (piano), Peacock (bass), DeJohnette (drums) &mdash;
+        is one of the most important and longest-running ensembles in jazz history.
+        <strong>20+ albums for ECM Records</strong>, all exploring the Great American Songbook
+        through radical collective reinterpretation.</p>
+
+        <p>The trio&rsquo;s methodology:</p>
+        <ul>
+          <li><strong>No rehearsal.</strong> Tune, key, tempo, arrangement &mdash; all decided in
+          real time on stage. Total preparation enables total spontaneity.</li>
+          <li><strong>Collective reinterpretation.</strong> Standards as raw material for
+          improvisation, not as fixed arrangements. The melody may appear or may not.</li>
+          <li><strong>Radical listening.</strong> Three voices operating as one organism.
+          Bass-piano relationship as continuous conversation &mdash; each reshaping the
+          other&rsquo;s statements measure by measure.</li>
+        </ul>
+
+        <p>Peacock&rsquo;s role in the trio was not merely foundational &mdash; it was
+        <strong>co-architectural</strong>. His bass lines were melodic (independent counterpoint
+        against Jarrett&rsquo;s piano), harmonically adventurous (inversions and substitutions that
+        redefined the chord beneath the soloist), and rhythmically free (moving between walking
+        bass, rubato, and silence as the music demanded).</p>
+
+        <!-- ========================================
+             THE BASS: HARMONIC FOUNDATION
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Bass: Harmonic Foundation by Physics</h2>
+
+        <p>The bass register is the harmonic foundation of all Western music &mdash;
+        <strong>not by convention but by physics</strong>. The overtone series (harmonics at
+        integer multiples of the fundamental frequency) is most clearly audible in the bass
+        register. The lowest-sounding note in a texture functions as the perceived root in the
+        listener&rsquo;s ear, regardless of what other instruments play.</p>
+
+        <p>The bassist has <strong>more harmonic power than any other ensemble member</strong>:
+        by choosing a single note, the bassist defines the harmonic context for everyone else.
+        A C major chord with C in the bass is stable. The same chord with E in the bass is lighter.
+        With G in the bass it floats. Peacock exploited this power continuously &mdash; redefining
+        harmony through bass-note choice while the upper instruments played unchanged.</p>
+
+        <table>
+          <thead>
+            <tr><th>Instrument</th><th>Harmonic Foundation Mode</th><th>S36 Artist</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Arrangement (scored)</td><td>Bass lines composed into orchestral charts</td><td>Jones (0&deg;)</td></tr>
+            <tr><td>Guitar (processed)</td><td>Atmospheric loops as harmonic backdrop</td><td>Frisell (1&deg;)</td></tr>
+            <tr><td>Voice</td><td>Melody implying chords</td><td>Anderson (3&deg;)</td></tr>
+            <tr><td>Piano (left hand)</td><td>Stride bass / hard bop comping</td><td>Berry (5&deg;), Bown (6&deg;)</td></tr>
+            <tr><td>Trombone</td><td>Electronic bass-register texture</td><td>Priester (7&deg;)</td></tr>
+            <tr><td><strong>Bass (actual)</strong></td><td><strong>The foundation in person</strong></td><td><strong>Peacock (8&deg;)</strong></td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1935 &mdash; Born in Burley, Idaho</div>
+          <p>Born May 12, 1935, in rural south-central Idaho. The most remote origin of any
+          S36 artist. No connection to any major jazz pipeline until the Army.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1950s &mdash; U.S. Army &amp; Westlake College</div>
+          <p>Switched from piano to bass during Army service in Germany. Studied at
+          Westlake College of Music in Los Angeles. The Army-to-music pipeline &mdash; the
+          contingency of an instrument available in a military band determining the rest of
+          a career.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1960s &mdash; New York: The Full Spectrum</div>
+          <p>Played with <strong>Bill Evans</strong> (lyrical trio), <strong>Albert Ayler</strong>
+          (radical free jazz), <strong>Paul Bley</strong> (open improvisation), <strong>Miles
+          Davis</strong>, and <strong>Tony Williams</strong>. Evans and Ayler are near-opposite
+          poles &mdash; yet both chose Peacock. The bass supports every structure.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Early 1970s &mdash; Japan: Zen Buddhism</div>
+          <p>Withdrew from jazz at the height of his reputation. Traveled to Japan for extended
+          study of Zen Buddhism, macrobiotics, and Eastern philosophy. The withdrawal was the
+          prerequisite for everything that followed. <strong>The Seeker.</strong></p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1977 &mdash; Tales of Another (ECM)</div>
+          <p>Trio with Keith Jarrett and Jack DeJohnette &mdash; the recording that established
+          the chemistry which would become the Standards Trio. Peacock&rsquo;s compositions as
+          structural basis. The proto-Standards Trio.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1983&ndash;2014 &mdash; The Standards Trio</div>
+          <p>Thirty-one years. Twenty-plus albums for ECM. No rehearsal. Collective reinterpretation
+          of standards. Radical listening. One of the most celebrated trios in jazz history.
+          Peacock&rsquo;s bass as co-architect, not mere accompaniment.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2020 &mdash; Death</div>
+          <p>Died September 4, 2020, in Olivebridge, New York, age 85. During the COVID-19
+          pandemic. The second deceased artist in S36 (after Anderson, degree 3).</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Five theory nodes &mdash; establishing the bass theory branch (three nodes: harmonic
+        foundation, walking bass, counterpoint) plus Zen-as-musical-practice and the eighth
+        blue note deployment.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Bass: Harmonic Foundation</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>The overtone series is physically strongest in the bass register. The lowest note
+            in a texture functions as the perceived harmonic root. The bassist defines the
+            harmonic context for the entire ensemble with a single note. Peacock exploited
+            this through inversions and substitutions &mdash; redefining harmony from below.</p>
+            <div class="examples">Peacock/Standards Trio; Scott LaFaro/Bill Evans; Ray Brown/Oscar Peterson; Charles Mingus</div>
+            <div class="genealogy"><strong>Thread:</strong> Jones (0&deg;, composed bass lines) &rarr; Berry/Bown (5&deg;-6&deg;, piano left hand) &rarr; Peacock (8&deg;, the actual bass). The foundation arrives in person.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Walking Bass: Quarter-Note Engine</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Continuous quarter-note line simultaneously outlining chords (harmonic), providing
+            swing momentum (rhythmic), and creating independent melody (the best walking lines
+            are phrases in their own right). Peacock transcended walking by moving in and out
+            of it &mdash; walking for propulsion, dissolving into rubato for space, re-establishing
+            as needed.</p>
+            <div class="examples">Standards Trio; Ray Brown/Peterson (canonical walk); Paul Chambers/<em>Kind of Blue</em>; Ron Carter/Davis quintet</div>
+            <div class="genealogy"><strong>Rhythmic cousin:</strong> Berry&rsquo;s steady stride pulse (5&deg;) provides metronomic quarter-note foundation too. Walking bass adds harmonic content; stride adds chordal voicings.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Counterpoint: Melodic Bass Independence</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Scott LaFaro revolutionized jazz bass by turning it into a contrapuntal voice
+            &mdash; a melody instrument in conversation with the piano, not merely supporting it.
+            Peacock played with Evans after LaFaro&rsquo;s death (1961) and carried the
+            contrapuntal tradition into the Standards Trio: thirty years of three-way counterpoint.
+            Real-time composition as the most demanding bass practice.</p>
+            <div class="examples">LaFaro/<em>Sunday at the Village Vanguard</em>; Peacock/Standards Trio; Mingus (bass as compositional voice)</div>
+            <div class="genealogy"><strong>Extends:</strong> Composition-improvisation spectrum. The contrapuntal bassist composes an independent melody in real time while serving harmonic and rhythmic function simultaneously.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Zen Buddhism &amp; Music</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>First non-Western philosophical framework in S36. Three Zen concepts map to bass
+            practice: <strong>emptiness</strong> (gravity through implication, not saturation),
+            <strong>presence</strong> (each note in pure present tense, breath-driven time),
+            <strong>ego dissolution</strong> (the bass IS the music because it holds the space).
+            Not metaphor &mdash; practice. The withdrawal to Japan was the prerequisite.</p>
+            <div class="examples">Peacock/Standards Trio (audible as presence quality); Jarrett solo concerts; Coltrane late period (spiritual jazz)</div>
+            <div class="genealogy"><strong>Parallel:</strong> Priester (7&deg;) brought Afrofuturism (expansive, cosmic). Peacock (8&deg;) brings Zen (contractive, ego-dissolving). Two non-Western frameworks, opposite directions.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Bass Register Fundamental</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Eighth deployment. The blue note returns to the bass register &mdash; where it
+            carries maximum harmonic weight. On the unfretted upright bass (like the trombone
+            slide and the human voice), pitch placement is continuous. The bassist&rsquo;s blue
+            note is not a bend but a choice of placement within the quarter-tone zone. Eight
+            deployments across nine degrees.</p>
+            <div class="examples">Peacock/Standards Trio blue-note inflections; Ray Brown walking-bass bends; Mingus (bass as blues voice)</div>
+            <div class="genealogy"><strong>Eight deployments:</strong> bass-line (0&deg;), guitar bend (1&deg;), vocal (3&deg;), trumpet (4&deg;), piano crush (5&deg;), altered voicings (6&deg;), trombone slide (7&deg;), bass fundamental (8&deg;). The thread spirals back to the bass register.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             ENERGY SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Energy 1: The First Quiet Voice</h2>
+
+        <p>Peacock is the <strong>first energy-1 artist</strong> in the engine. Energy 1 is the
+        quietest register &mdash; not passive or weak, but foundational, gravitational, present
+        without insisting on its presence. This is the bass energy: the instrument that shapes
+        everything by being underneath everything.</p>
+
+        <table>
+          <thead>
+            <tr><th>Energy</th><th>Artists</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td>Peacock (8&deg;)</td><td>Meditative, foundational, ego-dissolved</td></tr>
+            <tr><td>2</td><td>Frisell (1&deg;), Standifer (4&deg;), Berry (5&deg;), Priester (7&deg;)</td><td>Atmospheric, warm, textural</td></tr>
+            <tr><td>3</td><td>Jones (0&deg;), Horvitz (2&deg;), Anderson (3&deg;), Bown (6&deg;)</td><td>Commanding, intense, projective</td></tr>
+          </tbody>
+        </table>
+
+        <p>Distribution: 1:4:4. The engine skews high-energy. Peacock provides the counterweight &mdash;
+        documenting that quiet influence is influence nonetheless.</p>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Nine Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator</td></tr>
+            <tr><td>The Quiet Draw</td><td>Peacock (8&deg;)</td><td>Global cultivation &rarr; PNW settlement &rarr; gravitational presence without scene-building</td></tr>
+          </tbody>
+        </table>
+
+        <p>Peacock&rsquo;s <strong>Quiet Draw</strong> is the energy-1 version of The Draw.
+        Frisell and Horvitz drew to Seattle and built things (performance series, community
+        institutions). Peacock drew to the Pacific Northwest and was present &mdash; a gravitational
+        body that influenced by proximity rather than by construction.</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;7&deg;</h4>
+          <ul>
+            <li><strong>Bass theory branch:</strong> THREE new nodes (harmonic foundation, walking bass, counterpoint). First bass-specific branch in the engine.</li>
+            <li><strong>Zen thread:</strong> NEW. First non-Western philosophical framework. Ego dissolution, emptiness, presence as musical practice.</li>
+            <li><strong>Foundation echo:</strong> Degree 0 (Jones, foundational voice) &rarr; Degree 8 (Peacock, foundational instrument). The circle spirals back.</li>
+            <li><strong>ECM label thread:</strong> Three artists (Frisell 1&deg;, Priester 7&deg;, Peacock 8&deg;). Largest label cluster. Shared aesthetic: space, texture, contemplation.</li>
+            <li><strong>Blue note thread:</strong> Eight deployments across nine degrees. Bass register fundamental returns the thread to degree 0 territory.</li>
+            <li><strong>Energy spectrum:</strong> Complete range 1-2-3 now documented. Distribution 1:4:4.</li>
+            <li><strong>The Seeker:</strong> New artist-institution category. Withdraws for philosophical reasons, returns transformed.</li>
+            <li><strong>Genre rotation:</strong> STRONGLY RECOMMENDED for degree 9. Nine consecutive jazz artists.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a> &mdash; Foundation echo: orchestral bass voice (composed) to literal bass instrument (performed).</li>
+            <li><a href="../001-bill-frisell/index.html">S36-001 &mdash; Bill Frisell (Degree 1&deg;)</a> &mdash; ECM label. Processed guitar vs. acoustic bass: opposite timbral poles within the same aesthetic.</li>
+            <li><a href="../007-julian-priester/index.html">S36-007 &mdash; Julian Priester (Degree 7&deg;)</a> &mdash; ECM label. Electronic vs. acoustic ECM poles. Afrofuturism vs. Zen: two non-Western philosophical frameworks.</li>
+            <li><a href="../005-overton-berry/index.html">S36-005 &mdash; Overton Berry (Degree 5&deg;)</a> &mdash; Piano-bass pairing. Berry&rsquo;s left hand IS the bass line; Peacock&rsquo;s bass IS the left hand of the ensemble.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Peacock, Gary. <em>Tales of Another</em>. ECM Records, 1977.</li>
+          <li>Jarrett, Keith (with Peacock and DeJohnette). <em>Standards, Vol. 1</em>. ECM, 1983.</li>
+          <li>Jarrett, Keith (with Peacock and DeJohnette). <em>Standards, Vol. 2</em>. ECM, 1983.</li>
+          <li>Peacock, Gary. <em>Now This</em>. ECM, 2015.</li>
+          <li>DownBeat. Gary Peacock artist profiles, interviews, and reviews, 1960&ndash;2020.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="6">
+          <li>Gioia, Ted. <em>West Coast Jazz</em>. Oxford University Press, 1992.</li>
+          <li>Myers, Marc. <em>Why Jazz Happened</em>. University of California Press, 2012.</li>
+          <li>Iverson, Ethan. <em>Do the Math</em> blog. Standards Trio analysis.</li>
+          <li>New York Times. Gary Peacock obituary, September 7, 2020.</li>
+          <li>AllMusic. Gary Peacock artist biography and discography.</li>
+        </ol>
+
+        <h3>Institutional &amp; Philosophical</h3>
+        <ol start="11">
+          <li>ECM Records. Artist catalog, liner notes, and press releases.</li>
+          <li>Westlake College of Music (Los Angeles). Alumni records.</li>
+          <li>JazzTimes. Gary Peacock profiles and Standards Trio coverage.</li>
+          <li>Earshot Jazz. Seattle jazz community coverage.</li>
+          <li>KNKX (Seattle). Jazz programming.</li>
+          <li>Suzuki, Shunryu. <em>Zen Mind, Beginner&rsquo;s Mind</em>. Weatherhill, 1970.</li>
+          <li>Watts, Alan. <em>The Way of Zen</em>. Pantheon Books, 1957.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1935</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">2020</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Burley, Idaho</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Seattle (general / PNW)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">School</span>
+            <span class="stat-value">Westlake College (LA)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Bass</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">8&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">1 (first E1)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (bass)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1950s&ndash;2020</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">ECM</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">Leader</span>
+            <span class="stat-value">Tales of Another</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sideman</span>
+            <span class="stat-value">Standards Trio (20+)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">ECM</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Trio span</span>
+            <span class="stat-value">1983&ndash;2014</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bass Branch</span>
+            <span class="stat-value">3 (NEW)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">4 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Standards Trio</h4>
+          <div class="stat-row">
+            <span class="stat-label">Piano</span>
+            <span class="stat-value">Keith Jarrett</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bass</span>
+            <span class="stat-value">Gary Peacock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Drums</span>
+            <span class="stat-value">Jack DeJohnette</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Active</span>
+            <span class="stat-value">1983&ndash;2014</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums</span>
+            <span class="stat-value">20+ (ECM)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Zen Practice</h4>
+          <div class="stat-row">
+            <span class="stat-label">Study</span>
+            <span class="stat-value">Japan (early 1970s)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Framework</span>
+            <span class="stat-value">Zen Buddhism</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Category</span>
+            <span class="stat-value">The Seeker</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Philosophy</span>
+            <span class="stat-value">1st non-Western in S36</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Quiet Draw</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Energy-1 variant</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">ECM cluster</span>
+            <span class="stat-value">3 artists (largest)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Foundation pair</span>
+            <span class="stat-value">Jones (0&deg;)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Energy 1</span>
+            <span class="stat-value">Peacock (8&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 2</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 3</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">1:4:4</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;7&deg; &rarr; 8&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">New Branch</span>
+            <span class="stat-value">Bass (3 nodes)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Thread</span>
+            <span class="stat-value">Zen Buddhism</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">8th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">9 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">10 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 8&deg; / 360 &middot;
+      <a href="../007-julian-priester/index.html">Prev: 7&deg; Priester</a> &middot;
+      <a href="../005-overton-berry/index.html">5&deg; Berry</a> &middot;
+      <a href="../001-bill-frisell/index.html">1&deg; Frisell</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
