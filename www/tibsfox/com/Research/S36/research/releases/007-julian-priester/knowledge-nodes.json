@@ -1,0 +1,202 @@
+{
+  "degree": 7,
+  "artist": "Julian Priester",
+  "slug": "007-julian-priester",
+  "genre": "Jazz (trombone — post-bop, avant-garde, ECM)",
+  "energy": 2,
+  "era": "1970s-present",
+  "location": {
+    "origin": "Chicago, IL — South Side (DuSable High School)",
+    "formative": "Chicago, IL — Sun Ra's Arkestra (1953-56); New York City — Max Roach, Duke Ellington, Herbie Hancock Mwandishi sextet (late 1950s-1973)",
+    "career": "Seattle, WA — Cornish College of the Arts faculty (1979-present); ECM Records artist; Seattle experimental jazz scene (Horvitz, Frisell constellation)"
+  },
+  "born": "1935",
+  "died": null,
+  "labels": ["ECM", "Warner Bros.", "Columbia"],
+  "theory_nodes": [
+    {
+      "concept": "Trombone slide — continuous pitch (glissando, portamento, microtonal expression)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/brass/trombone-slide-continuous-pitch.md",
+      "examples": [
+        "Priester's Mwandishi recordings — trombone as continuous-pitch textural instrument, processed through electronics",
+        "J.J. Johnson's precise slide technique — demonstrating the trombone can also achieve 'discrete' pitch through player control",
+        "Classic New Orleans tailgate trombone (Kid Ory) — the slide as cry, smear, and glissando"
+      ],
+      "description": "The trombone is the only standard orchestral brass instrument that produces pitch through a continuous slide mechanism rather than valves or keys. Seven standard slide positions correspond to harmonic series, but the slide can stop anywhere between positions — producing any frequency within the instrument's range, including all microtonal intervals between Western twelve-tone pitches. This is the discrete-continuous distinction: trumpet (valved, discrete) vs. trombone (slide, continuous). The trombone is the most voice-like brass instrument because both produce pitch through continuous, analog mechanisms unconstrained to a fixed scale. Priester's Mwandishi-era use of the slide through electronic processing extended this capability further — the trombone's natural portamento matched the synthesizer's pitch-bending, the wah-wah's frequency sweep, and the Echoplex's time-stretching.",
+      "genealogy": {
+        "ancestors": ["Trumpet — valved discrete pitch, embouchure-controlled vibrato (degree 4)", "Vocal melisma — voice as continuous-pitch instrument (degree 3)"],
+        "relationship": "Standifer (degree 4) plays trumpet — valved, discrete pitch positions, bebop precision. Priester (degree 7) plays trombone — slide, continuous pitch, microtonal expression. The brass branch now spans the discrete-continuous spectrum. The trombone's continuous slide is architecturally analogous to the human voice's continuous vocal folds — both are unconstrained by fixed-pitch mechanisms."
+      }
+    },
+    {
+      "concept": "Microtonal blue note continuum (trombone slide as direct access to the blue note zone)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/brass/microtonal-blue-note-trombone.md",
+      "examples": [
+        "Priester's Mwandishi recordings — extended trombone techniques exploring microtonal pitch regions",
+        "J.J. Johnson The Eminent J.J. Johnson — blue note precision within hard bop trombone language",
+        "Classic New Orleans trombone tailgate style — the slide producing cries, bends, and smears between tempered pitches"
+      ],
+      "description": "The blue note is not a single frequency — it is a zone between the major and minor third (or fifth or seventh). The trombone is the only brass instrument that can access this microtonal zone directly through its slide mechanism rather than relying solely on lip-bending (embouchure technique). The trumpeter bends pitch with lip tension — limited range, difficult to sustain. The trombonist moves the slide — direct, physical, and sustainable. Priester's microtonal vocabulary, developed through the Arkestra (non-Western tunings, extended techniques) and Mwandishi (electronic pitch processing), represents the most sophisticated microtonal deployment in S36. The blue note thread now has seven deployments across eight degrees.",
+      "genealogy": {
+        "ancestors": ["Blue note — bass-line inflection (degree 0)", "Blue note — upper-register guitar ambiguity (degree 1)", "Blue note — vocal melisma (degree 3)", "Blue note — trumpet vibrato zone (degree 4)", "Blue note — pianistic crush/grace notes (degree 5)", "Blue note — hard-bop altered voicings (degree 6)"],
+        "relationship": "Seven deployments of the blue note across eight degrees. Each instrument accesses the microtonal blue note zone through a different mechanism: bass-line motion (Jones), string bending (Frisell), vocal fold control (Anderson), embouchure lip-bending (Standifer), grace note approximation (Berry), chromatic voicing extension (Bown), slide continuum (Priester). The trombone slide is the most literal embodiment because the mechanism itself is continuous — every other instrument must approximate continuous pitch through technique."
+      }
+    },
+    {
+      "concept": "Modal jazz — Dorian, Mixolydian, Lydian (static harmonic fields)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/modal-jazz-dorian-mixolydian-lydian.md",
+      "examples": [
+        "Miles Davis Kind of Blue (1959) — Dorian ('So What') and Mixolydian modes as structural foundations",
+        "Hancock Mwandishi (1971) — extended modal exploration over electronic textures, static harmonic fields sustained for long sections",
+        "George Russell Ezz-thetics — Lydian Chromatic Concept in practice, the theoretical foundation of modal jazz"
+      ],
+      "description": "Modal jazz replaces bebop's rapid harmonic movement (chords changing every 1-2 beats) with static harmonic fields where a single mode governs entire sections. Dorian (minor with raised 6th — bright minor quality), Mixolydian (major with flatted 7th — dominant/blues foundation), and Lydian (major with raised 4th — floating, ethereal, tritone tension). Priester encountered modal thinking from multiple sources: Sun Ra's Arkestra (pre-Kind of Blue modal/non-Western exploration), Max Roach (political hard bop engaging modal structures), Mwandishi (electronic extension of modal principles). The trombone is particularly effective in modal contexts because static harmonic fields reward sustained tones, long phrases, and gradual microtonal variation — exactly what the slide trombone produces most naturally.",
+      "genealogy": {
+        "ancestors": ["ii-V-I harmonic progression — bebop framework (degree 0)", "Quartal harmony — hard bop voicings built in fourths (degree 6)"],
+        "relationship": "Modal jazz is the harmonic philosophy that emerged after bebop's chord-change density reached its limit. Jones (degree 0) and Bown (degree 6) operate primarily within the ii-V-I chord-change framework. Priester (degree 7) spans both — hard bop chord changes (Roach, Ellington) and modal/post-modal static fields (Mwandishi, ECM). The trombone's sustained-tone capability makes it a natural modal instrument; the slide enables microtonal exploration within the static field."
+      }
+    },
+    {
+      "concept": "Electronic jazz texture — first wave (Fender Rhodes, wah-wah, Echoplex, ARP synthesizer)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/timbre/electronic-jazz-texture-first-wave.md",
+      "examples": [
+        "Hancock Mwandishi (1971) — Fender Rhodes through wah-wah and Echoplex; trombone as electroacoustic source",
+        "Hancock Crossings (1972) — deeper electronic integration, ARP synthesizer entering the ensemble palette",
+        "Hancock Sextant (1973) — most electronic Mwandishi recording, full commitment to processed timbre"
+      ],
+      "description": "The Mwandishi sextet (1970-73) represents the first systematic integration of electronic processing into a jazz ensemble. Fender Rhodes electric piano (percussive, bell-like, spatial), wah-wah pedal (voltage-controlled bandpass filter sweeping the frequency spectrum), Echoplex tape delay (rhythmic echoes, spatial depth, cascading feedback drones), ARP synthesizer (fully electronic timbres). Priester's trombone in this environment was both acoustic source and processing candidate — trombone signal fed through the same effects chain created sounds neither purely acoustic nor purely electronic. This is the first 'electroacoustic' jazz instance in S36. The trombone's natural portamento (slide) matched the synthesizer's pitch-bending, the wah-wah's frequency sweep, and the Echoplex's time-stretching — making it the ideal acoustic instrument for electronic jazz context.",
+      "genealogy": {
+        "ancestors": ["Sun Ra's Arkestra — proto-electronic instruments, unconventional timbres (1950s, pre-electronic jazz)", "Guitar processing — delays, loops, distortion as timbral expansion (degree 1)"],
+        "relationship": "Three waves of jazz electronics in S36: proto-electronic (Sun Ra's Arkestra, 1950s — Priester participated), first wave (Mwandishi, 1970-73 — Priester participated), second wave (Frisell/Horvitz processed instruments, 1980s-present — Priester's Seattle contemporaries). Priester is the bridge between all three. Sun Ra gave permission; Mwandishi gave method; Frisell/Horvitz gave continuation. The ECM aesthetic (shared by Frisell and Priester) carries the Mwandishi spaciousness forward."
+      }
+    },
+    {
+      "concept": "Pedagogy — expansion vs. preservation (Cornish vs. UW teaching philosophies)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/pedagogy/expansion-vs-preservation.md",
+      "examples": [
+        "Cornish College of the Arts — experimental, interdisciplinary, boundary-crossing pedagogy (Priester tradition)",
+        "UW Jazz Studies — repertoire-based, theory-grounded, tradition-preserving pedagogy (Standifer tradition)",
+        "DuSable High School under Captain Dyett — foundational pipeline pedagogy producing professional-ready musicians"
+      ],
+      "description": "The S36 engine now has three educator profiles: Standifer (degree 4, UW) — institutional, university-based, preservation-oriented, teaching the canon; Bown (degree 6, informal) — post-career, underdocumented, survival-based teaching; Priester (degree 7, Cornish) — arts-college-based, expansion-oriented, teaching boundary-crossing and experimentalism. The Standifer-Priester axis is the most important pedagogical contrast: both brass players, both Seattle educators, both shaped generations. But Standifer's pedagogy says 'learn this' and Priester's says 'go beyond this.' Preservation and expansion are not opponents — a tradition needs both — but they represent different answers to what jazz education is for.",
+      "genealogy": {
+        "ancestors": ["Formal university pedagogy — Standifer at UW (degree 4)", "Informal survival-based teaching — Bown (degree 6)", "DuSable High School pipeline — Captain Dyett's foundational training"],
+        "relationship": "Three pedagogical modes from three educational contexts. Standifer (4°, UW) preserves the tradition. Priester (7°, Cornish) expands the tradition. Bown (6°, informal) transmits despite institutional absence. The formal/informal axis now has a third dimension: the arts-college model, which is formal in structure but experimental in content. Priester's Cornish is neither the university's canon-focus nor the informal teacher's necessity — it is institutional experimentalism."
+      }
+    }
+  ],
+  "cross_references": ["S36-001", "S36-002", "S36-004", "S36-006", "CDS"],
+  "seattle_connection": "Moved to Seattle approximately 1979. Joined Cornish College of the Arts faculty. Became a pillar of Seattle's experimental jazz scene alongside Horvitz (2) and Frisell (1). First S36 artist associated with Seattle generally (not Central District specifically). First artist born outside the Pacific Northwest (Chicago). Brought Sun Ra's cosmic philosophy and Mwandishi's electronic vocabulary to Seattle's arts education. ECM Records artist, connecting to Frisell's ECM catalog. The advance party — arrived a decade before the Frisell/Horvitz wave.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Trombone slide — continuous pitch mechanism; discrete-continuous spectrum in brass (trumpet valved vs. trombone slide); most voice-like brass instrument",
+      "Microtonal blue note continuum — seventh deployment; trombone slide provides direct physical access to the blue note zone; the most literal continuous-pitch mechanism",
+      "Modal jazz — Dorian/Mixolydian/Lydian static harmonic fields; trombone as natural modal instrument rewarding sustained tones and microtonal variation",
+      "Electronic jazz texture — first wave; Mwandishi's Fender Rhodes + wah-wah + Echoplex + ARP; trombone as electroacoustic source; bridge between Sun Ra proto-electronic and Frisell/Horvitz second wave",
+      "Expansion vs. preservation pedagogy — Cornish (expansion) vs. UW (preservation); two brass educators, two institutions, two orientations; arts-college model as institutional experimentalism"
+    ],
+    "immediate_items": [
+      "Degree 8 should continue geographic diversification. Priester achieved the rotation away from Central District. The engine should continue exploring non-CD neighborhoods and non-jazz genres to demonstrate range.",
+      "ECM label thread now has two artists (Frisell 1, Priester 7). Track all subsequent ECM connections. ECM's aesthetic (space, texture, atmosphere) is a thematic thread worth monitoring.",
+      "The Priester-Horvitz-Frisell constellation is documented but their specific collaborative recordings/performances are not cataloged here. Cross-reference their shared concert and recording history.",
+      "DuSable High School pipeline (Chicago) parallels Garfield High School pipeline (Seattle). Track other DuSable alumni who connect to Seattle or to S36 artists.",
+      "Mwandishi personnel beyond Priester (Bennie Maupin, Eddie Henderson, Buster Williams, Billy Hart) — track any Seattle connections.",
+      "Priester's ECM recordings beyond Love, Love are not fully cataloged. Complete the ECM discography.",
+      "Gender dimension tracking: Priester is male. Three consecutive male artists (5, 6 was female, 7 male). The gender thread remains live."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: eight named patterns (Export, Draw, Exile, Stay, Teacher, Persistence, Erasure, Pedagogue-Draw). Priester adds the first compound pattern. Classify every degree.",
+      "Composition-improvisation spectrum: Priester maps to collective improvisation within structured frameworks (Arkestra = free collective, Mwandishi = structured electronic improvisation, Ellington = scored composition). Three positions in one artist.",
+      "Rhythmic spectrum: six positions now — regular (Berry), polymetric (Horvitz), rubato (Frisell), elastic swing (Anderson), hard bop drive (Bown), and now electronic-spatial (Priester/Mwandishi — rhythm dissolves into texture). Continue tracking.",
+      "Chromaticism thread: seven deployments. Priester adds Arkestra atonality and Mwandishi electronic chromaticism — the most boundary-dissolving deployment yet.",
+      "Blue note thread: seven deployments across eight degrees (trombone slide continuum is the seventh). Continue tracking.",
+      "Body-as-sound-source thread: five instruments now — voice (Anderson, 3), trumpet (Standifer, 4), piano-as-percussion (Berry, 5), piano-as-percussive-comping (Bown, 6), trombone-as-electroacoustic-source (Priester, 7).",
+      "Amiga Principle gradient: three scales stable (large ensemble/Jones, small group/Bown, solo/Berry). Priester does not add a new scale but confirms small-group mode (Mwandishi sextet — Hancock as leader, Priester as voice within the group).",
+      "Educational pipeline diversity: nine pipelines across eight degrees (Garfield, Berklee, UC Santa Cruz, UW, bandstand apprenticeship, self-taught, Seattle University, DuSable, Cornish). Priester connects to two (DuSable formative, Cornish professional).",
+      "ECM label thread: two artists (Frisell 1, Priester 7). Mercury thread: two artists (Jones 0, Anderson 3). Columbia thread: two artists (Bown 6, Sextant/Mwandishi/Hancock). Track all label connections.",
+      "Brass theory branch: three nodes across two degrees (Standifer trumpet discrete pitch + Priester trombone continuous pitch + microtonal blue note). The brass branch now spans the discrete-continuous spectrum.",
+      "Seattle experimental constellation documented: Priester (advance party, ~1979), Frisell (late 1980s), Horvitz (late 1980s). Three arrivals, three experimental traditions, one city.",
+      "Gender-barrier gradient: tracking continues. Priester is male. Two women in eight degrees (Anderson 3, Bown 6). Six men.",
+      "Formal/informal pedagogy axis: three modes (Standifer/formal-UW/preservation, Bown/informal/survival, Priester/formal-Cornish/expansion). The arts-college model is the new third position."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "Love, Love",
+      "year": 1974,
+      "label": "ECM",
+      "format": "LP",
+      "status": "available (ECM catalog)",
+      "significance": "Solo leader recording on ECM. Extends the electroacoustic trombone vocabulary developed in Mwandishi into a contemplative, spacious format aligned with ECM's aesthetic. The first ECM trombone leader date."
+    },
+    {
+      "title": "Mwandishi (as sideman — Herbie Hancock)",
+      "year": 1971,
+      "label": "Warner Bros.",
+      "format": "LP",
+      "status": "available (reissue)",
+      "significance": "First Mwandishi sextet album. Documents the first wave of electronic jazz. Priester (as Pepo Mtoto) provides trombone textures processed through electronic effects. Canonical recording in jazz electronics history."
+    },
+    {
+      "title": "Crossings (as sideman — Herbie Hancock)",
+      "year": 1972,
+      "label": "Warner Bros.",
+      "format": "LP",
+      "status": "available (reissue)",
+      "significance": "Second Mwandishi album. Deeper electronic integration — ARP synthesizer enters the palette. Priester's trombone increasingly functions as electroacoustic sound source rather than conventional melodic instrument."
+    },
+    {
+      "title": "Sextant (as sideman — Herbie Hancock)",
+      "year": 1973,
+      "label": "Columbia",
+      "format": "LP",
+      "status": "available (reissue)",
+      "significance": "Third and final Mwandishi album. Most electronically committed recording of the series. Priester's trombone fully integrated into the electronic texture. The endpoint of the first wave."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Floyd Standifer", "relationship": "Brass lineage — trumpet (discrete pitch, valves) to trombone (continuous pitch, slide). Both brass educators at Seattle institutions. Standifer at UW (preservation), Priester at Cornish (expansion). First brass pair in S36.", "future_degree": 4},
+    {"name": "Wayne Horvitz", "relationship": "Seattle experimental jazz constellation. Both arrived from elsewhere, both built Seattle's experimental scene. Horvitz: downtown NYC improv. Priester: Arkestra + Mwandishi electronic jazz. Overlapping creative circles.", "future_degree": 2},
+    {"name": "Bill Frisell", "relationship": "ECM label connection — both recorded extensively for ECM. Seattle experimental constellation. Both Draws from outside Seattle. Frisell: processed guitar (second wave electronics). Priester: processed trombone (first wave electronics).", "future_degree": 1},
+    {"name": "Patti Bown", "relationship": "Hard bop era overlap — both in the NYC jazz ecosystem in late 1950s-60s. Bown erased despite achievement; Priester survived through career transformation (Mwandishi, ECM, Cornish teaching). Different visibility outcomes from the same era.", "future_degree": 6}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones — attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson — attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer — Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry — Central District native, self-taught. No institutional music education. Autodidact path.",
+    "degree_6": "Patti Bown — Central District native, Seattle University (not Garfield). Seventh educational pipeline. Formal training via Jesuit university.",
+    "degree_7": "Julian Priester — NOT a Garfield product. DuSable High School (Chicago) under Captain Dyett. The DuSable-Garfield parallel: both segregation-era public schools that converted concentrated Black talent into professional musicians through exceptional individual music teachers.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": true,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": true,
+    "the_persistence": false,
+    "the_erasure": false,
+    "pedagogue_draw": true,
+    "native_born": false,
+    "self_taught": false,
+    "institution_type": "constellation — experimental scene pillar",
+    "amiga_principle": "voice_within_small_group",
+    "gender": "male",
+    "instrumentalist": true,
+    "gender_barrier": "not applicable (male)"
+  },
+  "sources_count": 17,
+  "word_count_research": 3400,
+  "release_date": "2026-03-28"
+}
