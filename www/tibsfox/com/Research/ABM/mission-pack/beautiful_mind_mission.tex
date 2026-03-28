@@ -1,0 +1,1049 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── Color Scheme: Beautiful Mind (cosmic / neural / creative) ───────────────
+\definecolor{primary}{HTML}{311B92}       % cosmic indigo — sections
+\definecolor{secondary}{HTML}{880E4F}     % deep rose/magenta — subsections
+\definecolor{tertiary}{HTML}{004D40}      % deep teal — subsubsections
+\definecolor{accent}{HTML}{512DA8}        % purple accent — pipeline arrows
+\definecolor{lightprimary}{HTML}{EDE7F6}  % lavender — quote boxes
+\definecolor{lightsecondary}{HTML}{FCE4EC}
+\definecolor{lighttertiary}{HTML}{E0F2F1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ─── Section Formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── Custom Environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ─── Table Column Types ───────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── Headers and Footers ─────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{A Beautiful Mind: Neurodivergence, Creativity \& Genius}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={A Beautiful Mind -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ─── Title Page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{A Beautiful Mind\\[0.3em]Neurodivergence, Creativity \& Genius}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Psychology, Neuroscience, Art, Music, Mathematics}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{The Extraordinary Spectrum of Human Intelligence}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--10 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% =============================================================================
+% STAGE 1 — VISION DOCUMENT
+% =============================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{A Beautiful Mind --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{GSD Ecosystem Core, Skill Creator v1.49+}
+\metafield{Context:}{Cold-start research mission — five web research threads conducted prior to packaging.}
+
+\subsection{Vision}
+
+There is a story we have told about human minds for centuries: that intelligence is a single road, and some people travel faster down it while others fall behind. That story is wrong. It was always wrong. What neurological and psychological research increasingly confirms is that the human brain has never settled on one architecture. It has explored thousands of variations, each with its own signature strengths, its own ways of perceiving pattern and generating meaning, its own relationship to time and sensation and beauty.
+
+Neurodivergence — the umbrella term for minds that think, learn, and process information differently from statistical norms — is not a deviation from correct human functioning. It is evidence of human diversity operating at the level of the nervous system itself. Autism, ADHD, dyslexia, dyscalculia, synesthesia, giftedness, Tourette syndrome, and dozens of other neurological signatures represent not failed copies of a standard, but distinct cognitive phenotypes that have been part of our species for as long as we have had written language, mathematics, and music.
+
+The remarkable thing is what happens when these minds encounter the domains of art, music, and mathematics. Time and again, across documented history and contemporary neuroscience, we find that the same neural configurations associated with challenge in one domain produce breathtaking capability in another. The autistic brain that struggles with social inference is precisely the brain that achieves absolute pitch at rates ninety times higher than the general population. The dyslexic mind that stumbles over sequential text is the mind that excels at constructing three-dimensional mental models of complex systems. The ADHD nervous system that cannot sit still in a lecture hall is the system that produces hyperfocused creative surges of rare originality.
+
+This mission maps that territory: the science of neurodivergent cognition, the psychology of genius and prodigy, the historical record of extraordinary minds, and — crucially — the social and educational conditions that either unlock or suppress this extraordinary potential. The central question is not \textit{why are some neurodivergent people creative}? It is: \textit{what can we learn from the specific cognitive architectures that produce genius, and how do we build systems that support rather than extinguish them?}
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{The Deficit Model Persists.} Despite decades of research supporting a strength-based neurodiversity paradigm, most educational and clinical institutions still frame autism, ADHD, and dyslexia primarily as disorders requiring treatment, rather than as cognitive profiles requiring appropriate environments. This framing suppresses potential and damages identity.
+
+  \item \textbf{The Genius Archetype is Dangerously Narrow.} Popular culture's image of genius — the eccentric lone mathematician, the tortured artist — obscures the systemic conditions that make genius possible. It also mythologizes suffering as a prerequisite, which misrepresents the neuroscience and causes real harm to neurodivergent individuals who internalize this framing.
+
+  \item \textbf{Twice-Exceptional Individuals Fall Through Every Net.} Children and adults who are both gifted and neurodivergent — the ``twice-exceptional'' or 2e population — are simultaneously over-tested and under-supported. Their giftedness masks their neurodivergence; their neurodivergence obscures their giftedness. Educational systems are not designed to hold both at once.
+
+  \item \textbf{Domain-Specific Talent Development is Poorly Understood.} We lack adequate models for how exceptional ability in music, mathematics, or visual art develops in neurodivergent individuals. The field conflates savant syndrome with prodigy, autistic talent with all neurodivergent ability, and early precocity with adult mastery.
+
+  \item \textbf{The Research is Fragmented Across Disciplines.} Neuroscience, cognitive psychology, education research, arts therapy, and disability studies have each built partial maps of this territory. No integrated framework exists that connects the neural substrate, the cognitive profile, the developmental trajectory, and the environmental conditions into a coherent model of neurodivergent genius.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Core model:} \textit{Cognitive difference} $\times$ \textit{Domain alignment} $\times$ \textit{Environmental fit} $=$ \textit{Expressed genius}
+
+The expression of exceptional ability in neurodivergent individuals is not automatic — it is conditional. The neural architecture creates the \textit{potential}; the right domain activates it; the environment either allows it to develop or suppresses it. This mission investigates all three variables simultaneously and produces an integrated reference for researchers, educators, families, and system designers.
+
+\subsubsection{Domain Landscape}
+
+\begin{asciibox}
+NEURODIVERGENT COGNITIVE LANDSCAPE
+====================================
+
+          AUTISM SPECTRUM            ADHD
+          ─────────────────          ─────────────────
+          + Pattern recognition      + Divergent thinking
+          + Absolute pitch           + Hyperfocus bursts
+          + Detail/originality       + Intuitive cognition
+          + Systematic thinking      + Risk tolerance
+          + Verbal originality       + Entrepreneurship
+          ─────────────────          ─────────────────
+          DYSLEXIA                   TWICE EXCEPTIONAL (2e)
+          ─────────────────          ─────────────────
+          + Visual-spatial           + Deep connectivity
+          + Big-picture thinking     + Intense curiosity
+          + Connecting ideas         + Creative synthesis
+          + Exploration bias         + Perfectionism
+          + Entrepreneurship         + Asynchronous dev.
+          ─────────────────          ─────────────────
+                        ↓
+          DOMAINS WHERE THESE STRENGTHS CONCENTRATE
+          ─────────────────────────────────────────
+          Mathematics → Pattern, abstraction, systemizing
+          Music       → Pitch memory, pattern, emotion
+          Visual Art  → Spatial, detail, originality
+          Innovation  → Divergent thought, risk, hyperfocus
+          Literature  → Verbal originality, deep empathy
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MISSION MODULE STRUCTURE
+=========================
+
+  [M1: PARADIGM]──────────────────────────────────────────────┐
+  History of neurodiversity concept; deficit → difference model│
+  Neurodiversity movement; diagnostic evolution                │
+                                                               │
+  [M2: SCIENCE]──────────────────────────────────────────────►│
+  Neural substrates of creativity; divergent thinking          │
+  Savant syndrome; absolute pitch; hyperconnectivity theory    │──► [M5: SYNTHESIS]
+                                                               │    Cross-domain
+  [M3: PRODIGIES]─────────────────────────────────────────────►│    integrated model
+  Historical genius portraits; art, music, math prodigies      │
+  Nash, Tesla, da Vinci, Mozart, Warhol; contemporary figures  │
+                                                               │
+  [M4: 2e EDUCATION]──────────────────────────────────────────┘
+  Twice-exceptional profiles; masking; burnout; support systems
+  Enabling environments; school/workplace design
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Paradigm --- From Deficit to Difference}
+Traces the historical arc from early pathology-centered frameworks through the disability rights movement to the contemporary neurodiversity paradigm. Covers Nick Walker's foundational work, the Autistic Self Advocacy Network, the diagnostic evolution from DSM-III through DSM-5, and the philosophical distinction between the medical model (fix the person) and the social model (fix the environment). Interrogates where the paradigm shift has succeeded and where it remains contested.
+
+\subsubsection{Module 2: The Neuroscience --- Cognitive Architecture of Creativity}
+Examines the neural substrates underlying neurodivergent creativity and exceptional ability. Key topics include: divergent thinking in ADHD, local hyperconnectivity in autism and its relationship to savant skills, the absolute pitch--autism connection (prevalence 5--11\% in autistic populations vs. $<$0.01\% in the general population), the planum temporale asymmetry in musicians, the ``explorative bias'' model of dyslexia from Cambridge University (Taylor, 2022), and the underconnectivity theory of savant syndrome. Draws heavily on peer-reviewed literature from PMC/NIH.
+
+\subsubsection{Module 3: The Prodigies --- Portraits of Neurodivergent Genius}
+Documents the historical and contemporary record of extraordinary neurodivergent achievement across art, music, and mathematics. Structured as domain-specific portraits (music: Mozart, Beethoven, Susan Boyle, Billie Eilish; visual art: da Vinci, Van Gogh, Warhol, Picasso; mathematics: Newton, Einstein, Ramanujan, Nash, Jacob Barnett; literature: Dickinson, Andersen; invention: Tesla, Turing). Applies appropriate epistemic caution to historical retrodiagnosis while preserving the documented behavioral evidence.
+
+\subsubsection{Module 4: The Twice-Exceptional --- Giftedness Meets Neurodivergence}
+Investigates the 2e (twice-exceptional) population — individuals who are simultaneously gifted and neurodivergent. Covers the three identification failure modes (giftedness masks disability; disability masks giftedness; both remain hidden), burnout dynamics, asynchronous development, the SENG framework, educational interventions, and the adult 2e experience. Includes case study analysis and evidence-based support models.
+
+\subsubsection{Module 5: Enabling Environments --- When Genius Gets the Room It Needs}
+Synthesizes findings across all modules into actionable frameworks for schools, workplaces, families, and individuals. Covers Universal Design for Learning (UDL), strengths-based assessment, neurodiversity-affirming coaching, workplace accommodation research, and the conditions under which neurodivergent creative potential is realized vs. suppressed. Connects findings to systemic change imperatives.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+GSD CHIPSET YAML — BEAUTIFUL MIND MISSION
+==========================================
+
+agnus:        # Orchestration / Context Management
+  model: claude-opus-4-6
+  role: FLIGHT + INTEG
+  tasks:
+    - Cross-module synthesis (M5)
+    - Sensitivity review (retrodiagnosis, disability representation)
+    - Nash / historical figure portraiture
+    - Final publication assembly
+  context_budget: 180k tokens
+  notes: All content touching historical diagnosis or lived experience
+
+denise:       # Document Assembly / Output Rendering
+  model: claude-sonnet-4-6
+  role: EXEC (x2) + CRAFT
+  tasks:
+    - Module surveys (M1, M2, M3, M4)
+    - Table and data compilation
+    - Source bibliography
+    - Wave 1 parallel tracks
+  context_budget: 120k tokens each
+
+paula:        # Scaffolding / Research / Schemas
+  model: claude-haiku-4-5
+  role: SCOUT + BUDGET + LOG
+  tasks:
+    - Shared source index
+    - JSON schemas for portrait data
+    - Wave 0 templates
+    - Token budget tracking
+  context_budget: 40k tokens
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Autism spectrum, ADHD, dyslexia as primary neurodivergent profiles
+  \item Savant syndrome and twice-exceptional (2e) populations
+  \item Art, music, and mathematics as primary creative domains
+  \item Historical and contemporary documented cases with adequate behavioral evidence
+  \item Peer-reviewed neuroscience and psychology literature (2000--present primary; foundational earlier work included)
+  \item Strength-based and social model frameworks
+  \item Educational and workplace enabling conditions
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Clinical diagnosis protocols or treatment recommendations
+  \item Definitive retrodiagnosis claims for historical figures
+  \item Intelligence testing frameworks or IQ discourse as primary lens
+  \item Pharmaceutical interventions for neurodivergent conditions
+  \item Neurodivergence in non-human species
+  \item Specific individuals who have not publicly disclosed their neurodivergence (living persons only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item The paradigm module accurately traces the history of the neurodiversity concept from Judy Singer (1998) through the contemporary movement, citing primary sources.
+  \item The neuroscience module reports absolute pitch prevalence in autistic populations from peer-reviewed literature ($\geq$2 independent studies), with statistical values cited.
+  \item Each prodigy portrait applies consistent epistemic language distinguishing confirmed diagnoses from retrospective analysis.
+  \item The 2e module identifies all three identification failure modes and cites at least one intervention framework per mode.
+  \item The synthesis module produces an integrated three-variable model (cognitive profile $\times$ domain alignment $\times$ environment) with evidence citations for each variable.
+  \item All historical figures are described with behavioral evidence only; no definitive clinical diagnoses are asserted for historical figures without documented self-disclosure or clinical record.
+  \item The enabling environments module includes at least three evidence-based workplace or educational interventions from organizational or educational research.
+  \item The document differentiates savant syndrome from prodigy development as distinct (though occasionally overlapping) phenomena.
+  \item All quantitative claims are attributed to named sources; no unsourced statistics appear in the final document.
+  \item The document avoids both the ``deficit trap'' (framing neurodivergence solely as disorder) and the ``superpower trap'' (romanticizing neurodivergence while erasing genuine challenge).
+  \item The bibliography contains $\geq$25 distinct sources, with $\geq$60\% from peer-reviewed journals or government/university research programs.
+  \item The synthesis connects findings to educational and systemic reform recommendations that are actionable and evidence-grounded.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection} \\
+\midrule
+The Space Between & Philosophical spine & Mathematical eight-layer model as framework for understanding cognitive diversity as complexity rather than deviation \\
+The Quark \& the Compiler & Complementary work & Bridges technical/computational thinking and humanistic expression — maps onto neurodivergent strength profiles \\
+GSD Skill Creator & Ecosystem home & Mission package will execute within skill-creator's Observe-Detect-Suggest loop \\
+Fox Infrastructure Group & Adjacent mission & Human capital development; neurodivergent workforce inclusion in cooperative infrastructure \\
+College of Knowledge & Downstream integration & Findings will seed neurodiversity module in Rosetta Core cross-domain concept translation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The GSD ecosystem was built on a foundational principle borrowed from the Amiga: that \textit{architectural elegance} — knowing how to route the right computation to the right specialized processor — produces outcomes no brute-force uniform architecture can match. The Amiga's Agnus, Denise, and Paula were not deficient because they were different from the CPU. They were the reason the machine sang.
+
+Neurodivergent minds are not deficient versions of neurotypical minds. They are specialized architectures that, in the right context, route perception and cognition through pathways that standard configurations cannot access. The child who cannot sit through a reading lesson but can identify 47 bird species by call alone, the adult who cannot manage email but can construct a mathematical proof of staggering elegance, the artist whose hands produce images of impossible precision while their words fail in ordinary conversation — these are not people who have been broken. They are people who have been handed the wrong I/O peripheral for the task at hand.
+
+The mission of this research is not to catalog curiosities. It is to understand the architecture well enough to build better interfaces between human cognitive diversity and the world that extraordinary minds are trying to speak to.
+
+% =============================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =============================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{A Beautiful Mind --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings across five research modules. Each module can be produced independently by a Sonnet-tier agent using this document as its briefing. Opus handles cross-module synthesis and any content touching historical diagnosis, lived experience, or sensitive disability representation.
+
+\textbf{Key source organizations and repositories:}
+\begin{itemize}[leftmargin=*]
+  \item PubMed / PMC (National Institutes of Health) --- primary peer-reviewed literature
+  \item Journal of Autism and Developmental Disorders (JADD)
+  \item Cognition and Developmental Psychology journals
+  \item Understood.org (nonprofit research arm)
+  \item Dana Foundation (neuroscience communication)
+  \item International Dyslexia Association (IDA)
+  \item National Association for Gifted Children (NAGC)
+  \item Yale Center for Dyslexia and Creativity
+  \item Concordia University Neurodiversity Research Group
+  \item Frontiers in Psychology / Frontiers in Education
+\end{itemize}
+
+\subsection{Module 1 Reference: The Paradigm}
+
+\subsubsection{The Neurodiversity Concept: Origins}
+
+The term ``neurodiversity'' was coined by Australian sociologist Judy Singer in her 1998 honors thesis, drawing on the emerging disability rights movement's social model framework. Singer argued that neurological differences should be understood as natural human variation rather than pathology --- analogous to biodiversity, the concept positioned diversity of neurological function as intrinsically valuable to human communities.
+
+The concept was popularized in the context of autism advocacy but rapidly expanded to encompass ADHD, dyslexia, dyscalculia, dyspraxia, Tourette syndrome, and other neurological conditions. Crucially, the neurodiversity paradigm does not deny that neurodivergent individuals face genuine challenges --- it locates those challenges primarily in the \textit{mismatch} between a person's neurotype and environmental demands, rather than in the neurotype itself.
+
+\subsubsection{The Medical Model vs. the Social Model}
+
+The medical model frames neurodivergent conditions as disorders requiring treatment and normalization. The social model argues that disability arises from the interaction between an individual's characteristics and an environment not designed to accommodate them. Both frameworks contain partial truths. The contemporary neurodiversity-affirming position holds a ``both/and'' stance: supporting genuine needs while rejecting the premise that neurological difference constitutes inherent deficit.
+
+\subsubsection{Diagnostic Evolution: DSM-III to DSM-5}
+
+The diagnostic landscape has undergone significant revision. The merger of Asperger's syndrome into the broader Autism Spectrum Disorder (ASD) category in DSM-5 (2013) reflects recognition that autism is a spectrum of presentations rather than distinct discrete categories. ADHD diagnostic criteria have expanded to include adult presentations, and dyslexia has increasingly been framed in educational contexts as a ``learning difference'' rather than a disability.
+
+Historically, neurodivergent conditions were viewed through an almost exclusively deficit lens. Assessment tools were designed to measure what individuals \textit{could not} do. The shift toward strength-based assessment --- measuring what individuals do well and what environments they need --- represents a paradigm transformation still underway in most institutional settings.
+
+\subsubsection{Key Paradigm Findings Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Condition} & \tableheader{Traditional Framing} & \tableheader{Neurodiversity Reframe} \\
+\midrule
+Autism & Social communication disorder & Different social cognition style; pattern/system strength \\
+ADHD & Attention and impulse disorder & Variable attention profile; hyperfocus and divergent thinking asset \\
+Dyslexia & Reading disability & Explorative, visual-spatial, connective cognitive style \\
+Giftedness & Exceptional intelligence & Often co-occurs with neurodivergence (2e); unique support needs \\
+Savant Syndrome & Exceptional ability despite disability & Local hyperconnectivity producing domain-specific excellence \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: The Neuroscience}
+
+\subsubsection{Divergent Thinking and ADHD}
+
+A 2024 peer-reviewed study from the University of Oviedo (Pasarín-Lavín et al., \textit{Applied Neuropsychology}) tested 181 secondary school students across neurodivergent and neurotypical groups using the PIC-J creativity battery. Students with ADHD significantly outperformed neurotypical peers on Verbal Creativity, particularly in Originality. Students with dyslexia exhibited high Figural Originality. The study confirmed statistically significant differences in verbal creative originality favoring ADHD profiles.
+
+Research published in \textit{Cognitive Psychology} shows that individuals with ADHD demonstrate a more intuitive cognitive style --- unconsciously comparing new situations against past experiences to generate rapid, non-linear responses. This intuitive mode aligns closely with what creativity researchers call divergent thinking: the capacity to generate multiple, non-obvious solutions to open-ended problems.
+
+Spencer Health (2024) synthesis of ADHD creativity literature identifies: rapid learning and habituation (driving novelty-seeking); tolerance for uncertainty; willingness to operate in ``crisis mode'' (heightened urgency producing creative flow); and strong associative thinking. ADHD-linked traits are significantly correlated with entrepreneurship (Logan, 2009; Verheul et al., 2016).
+
+\subsubsection{Absolute Pitch, Autism, and Local Hyperconnectivity}
+
+Absolute pitch (AP) --- the ability to identify musical tones without an external reference --- occurs in fewer than 0.01\% of the general population. In autistic populations, prevalence estimates range from 5\% to 11\% (PMC, 2024 review), making it 500--1,100 times more common. AP in savant autistic musicians is essentially universal.
+
+A PLOS ONE empirical study (Dohn et al., 2012) found significantly higher autism-spectrum quotient (AQ) scores in AP musicians than in non-AP musicians or non-musicians, with a significant positive correlation between pitch identification scores and AQ scores (r = .46, p = .003). This establishes a quantitative link between autistic traits and musical pitch ability.
+
+The neuroscience underlying this connection involves \textit{local hyperconnectivity}: AP musicians show enhanced connectivity in bilateral superior temporal lobe structures (diffusion tensor imaging, PMC 2011). Research suggests that autism, AP, Williams syndrome, and synesthesia share a common anatomical substrate of regional hyperconnectivity in sensory-processing areas. The ``veridical mapping'' theory proposes that the same neurocognitive mechanism --- associating homologous patterns across perceptual or cognitive structures --- underlies AP, synesthesia, and hyperlexia, all of which appear at elevated rates in autistic individuals.
+
+The planum temporale asymmetry in AP musicians is well-documented (Schlaug et al., 1995, \textit{Science}): the left hemisphere temporal region shows greater volume in AP musicians than in non-AP musicians, providing structural neuroimaging evidence for a music-specific neural template.
+
+\subsubsection{Autism and Creativity: The Research Picture}
+
+A 2021 meta-analysis (\textit{Cognitive Processing}, Baron-Cohen lab) reviewed autism and creativity research, finding that autistic individuals are inhibited in fluency and flexibility but display \textbf{high levels of detail and originality}. Verbal originality in autistic individuals exceeds allistic (non-autistic) population norms. The finding challenges the stereotype that autistic creativity is confined to technical or scientific domains.
+
+Research at SAGE on neurodiverse pairs (PMC, 2023) found that neurodiverse pairings (autistic + non-autistic) produced more innovative and diverse designs than single-neurotype pairs, with independent raters confirming lower similarity scores for neurodiverse pairs. This is among the first empirical evidence that neurological diversity within groups enhances collective innovation --- not just individual creativity.
+
+\subsubsection{Savant Syndrome: The Local/Global Connectivity Model}
+
+Savant syndrome occurs in approximately 10\% of the autistic population; approximately 50\% of people with savant syndrome have ASD. Skills concentrate in music, visual art, mathematical computation, and calendar calculation. Savant abilities are characterized by domain-specificity, exceptional memory, and enhanced low-level perceptual processing.
+
+The most supported neuroscientific model (ScienceDirect review, 2024) involves an altered ratio of local to global brain connectivity. Disruption of long-range (global) connectivity impairs executive function and social cognition; the resulting disinhibition of local neural activity produces heightened specialization in specific perceptual or cognitive domains. The ``paradoxical functional facilitation'' model suggests that pathological states in one brain region can release functionality in adjacent or distant regions.
+
+\subsubsection{Dyslexia: The Explorative Bias and Visual-Spatial Profile}
+
+A 2022 University of Cambridge study (Taylor et al.) proposed that dyslexia represents an evolutionary \textit{explorative bias} --- a cognitive style specialized for discovery, invention, and exploration of changing environments. The researchers argue that dyslexia has been preserved across human evolution because these explorative strengths had adaptive value.
+
+Multiple studies document dyslexia over-representation in art and design programs: professionals with dyslexia were better at identifying black holes from noisy astrophysical data than non-dyslexic colleagues (Schneps, Harvard-Smithsonian, \textit{Scientific American}). A study using the WCR Creativity Test found dyslexic students significantly outperforming peers specifically in the \textit{connecting} dimension --- the ability to combine unusual ideas in novel ways (Martinelli et al., 2018).
+
+Important caveat: a 2016 meta-analysis of 36 peer-reviewed studies concluded there is ``little consistent evidence'' for spatial advantages in dyslexia overall. A 2018 meta-analysis (Chamberlain et al.) found lower mean visuo-spatial ability but \textit{higher variance} --- suggesting a subset of dyslexic individuals do show spatial strengths, but it is not universal. This nuance must be preserved.
+
+\subsubsection{Neuroscience Research Data Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Finding} & \tableheader{Population} & \tableheader{Effect} & \tableheader{Source} \\
+\midrule
+Absolute pitch prevalence & Autistic musicians & 5--11\% vs. $<$0.01\% general population & PMC 2024 \\
+AQ score correlation with AP & Musicians & r = .46, p = .003 & PLOS ONE 2012 \\
+ADHD verbal originality & Secondary students & Significantly outperforms NT peers & PubMed 2024 \\
+Neurodiverse pair innovation & Mixed pairs & Lower similarity = higher innovation & SAGE PMC 2023 \\
+Dyslexia connecting ability & Junior high students & Significantly higher connecting scores & Tandfonline 2016 \\
+Savant syndrome ASD co-occurrence & Savant population & 50--75\% have ASD & ScienceDirect 2024 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3 Reference: The Prodigies}
+
+\subsubsection{Epistemic Framework for Historical Figures}
+
+Historical retrodiagnosis carries inherent uncertainty. Diagnostic criteria, terminology, and cultural context all differ across eras. This mission applies the following standards: (1) report behavioral evidence as documented; (2) note retrospective assessments by credentialed researchers where they exist; (3) never assert definitive diagnoses for historical figures; (4) distinguish clearly between individuals with confirmed contemporary diagnoses and historical figures analyzed retrospectively.
+
+\subsubsection{Music: Pitch, Pattern, and Prodigy}
+
+\textbf{Wolfgang Amadeus Mozart} (1756--1791): Documented perfect pitch, exceptional musical memory, and the ability to perform at the imperial Viennese court at age six alongside his sister. Mozart displayed extreme sensitivity to loud sounds, compulsive fixation on vulgar language, motor and facial tics, and what contemporaries described as socially unusual behavior. A 2007 peer-reviewed analysis speculated these characteristics could be attributable to Tourette syndrome, ADHD, or autism. Definitive diagnosis is not possible.
+
+\textbf{Ludwig van Beethoven} (1770--1827): Composed symphonies of transformative originality while profoundly deaf. Some researchers have noted behavioral characteristics consistent with autism spectrum traits, though this remains contested.
+
+\textbf{Susan Boyle} (b. 1961): Diagnosed with Asperger's syndrome at age 51 after spending decades believing she had ``brain damage.'' Her vocal abilities were undimmed by her neurodivergence; her diagnosis provided profound relief and self-understanding. A contemporary example of late identification in a gifted neurodivergent adult.
+
+\textbf{Billie Eilish} (b. 2001): Diagnosed with Tourette syndrome at age 11, ADHD subsequently. Has spoken publicly about managing both while producing genre-defining music. A contemporary case of neurodivergence and prodigious musical development coexisting from early adolescence.
+
+\subsubsection{Mathematics: Pattern, Abstraction, and Systemic Thinking}
+
+\textbf{John Forbes Nash Jr.} (1928--2015): Nobel laureate in Economics (1994) for his 27-page doctoral thesis on game theory (Nash equilibrium), written at age 21. Developed paranoid schizophrenia in his early thirties, spending years in psychiatric institutions. His eventual recovery --- without sustained medication --- through what he described as a process of intellectually rejecting his delusions rather than pharmacologically suppressing them, remains one of the most studied cases in psychiatric history. Nash once stated: ``I wouldn't have had good scientific ideas if I had thought more normally.'' His son, John Charles Martin Nash, also diagnosed with schizophrenia, earned a PhD in mathematics from Rutgers. The family history suggests a possible genetic substrate linking certain cognitive configurations with both mathematical insight and psychotic vulnerability.
+
+\textbf{Albert Einstein} (1879--1955): Displayed significant speech delay as a child (not speaking fluently until age four). Described as socially isolated, intensely focused on specific problems to the point of exclusion of other activities, and capable of visualizing physical processes in three dimensions before formalizing them mathematically. Modern retrospective analyses have suggested ADHD, dyslexia, and autism traits; none can be confirmed. His extraordinary spatial and conceptual reasoning co-existed with documented academic difficulties in conventional schooling.
+
+\textbf{Jacob Barnett} (b. 1998): Diagnosed with autism at age two. Began solving advanced mathematical equations in elementary school. Published in quantum physics research at age 15. His mother's memoir documents how specialists initially advised against teaching him anything because he might never speak. He holds a master's degree in physics from the Perimeter Institute.
+
+\textbf{Adhara Pérez} (b. 2011): Mexican child with autism, measured IQ of 162. Enrolled in university at age 8. A contemporary case challenging the stereotype that intellectual disability and autism are synonymous.
+
+\subsubsection{Visual Art: Detail, Originality, and Spatial Vision}
+
+\textbf{Leonardo da Vinci} (1452--1519): Left hundreds of notebooks filled with scientific observation, engineering designs, and anatomical studies alongside iconic paintings. His habit of beginning but rarely completing major commissions has been analyzed as consistent with ADHD by several researchers, while his extraordinary visual-spatial reasoning and cross-domain synthetic thinking suggest a neurocognitive profile significantly different from contemporaries.
+
+\textbf{Vincent van Gogh} (1853--1890): His vivid chromatic perception and thick impasto texture have been analyzed in relation to possible bipolar disorder, epilepsy, and autistic traits. Whether or not any contemporary diagnosis applies, his visual processing produced work whose intensity of color and motion suggests perception operating outside standard parameters.
+
+\textbf{Andy Warhol} (1928--1987): Retrospective analyses by specialists examining his notebooks, artwork, and personal correspondence have associated characteristics consistent with dyslexia and autism. His iconic technique --- serial repetition of images with slight variation --- has been interpreted as expression of a neurodiverse tendency for repetition as aesthetic strategy.
+
+\subsubsection{Innovation and Literature}
+
+\textbf{Nikola Tesla} (1856--1943): Invented alternating current, remote control, and the Tesla coil. Visualized and mentally tested inventions before building them. Maintained identical daily routines; reported extreme sensitivity to sounds he described as ``deafening'' from miles away; displayed many behavioral characteristics associated with autism by contemporary researchers.
+
+\textbf{Alan Turing} (1912--1954): Father of modern computing and artificial intelligence. Committed extraordinary focus to specific research interests; avoided eye contact; had a single close friend during school. Some researchers have noted behavioral characteristics consistent with autism and dyslexia.
+
+\textbf{Hans Christian Andersen} (1805--1875): Literary creator of fairy tales including ``The Ugly Duckling'' and ``The Emperor's New Clothes.'' Retrospective analyses suggest autistic traits, notably in his verbal originality: research indicates autistic individuals exhibit higher levels of verbal originality than allistic populations --- consistent with Andersen's literary output.
+
+\textbf{Emily Dickinson} (1830--1886): Reclusive poet whose nearly 2,000 poems broke conventions of form and language in ways consistent with a mind unconstrained by social normative pressure. Modern scholarly analysis of her letters and correspondence has identified characteristics consistent with autism.
+
+\subsubsection{Contemporary Confirmed Neurodivergent Creatives}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Individual} & \tableheader{Domain} & \tableheader{Condition} & \tableheader{Notes} \\
+\midrule
+Temple Grandin & Science/Advocacy & Autism & Animal behavior PhD; described her autism as enabling her to think in pictures others cannot \\
+Anthony Hopkins & Acting & Autism (Asperger's) & Diagnosed at 70s; credits diagnosis with explaining his distinctive preparation approach \\
+Daryl Hannah & Film & Autism & Diagnosed as child; doctors advised institutionalization \\
+Richard Branson & Business & Dyslexia + ADHD & Founded Virgin empire; called dyslexia ``a brilliant way of thinking'' \\
+Greta Thunberg & Advocacy & Autism (Asperger's) & Describes her diagnosis as a ``superpower'' for single-issue focus \\
+Simone Biles & Sport/Art & ADHD & Openly advocates against medication stigma \\
+David Byrne & Music & Autism & Founding Talking Heads; credits difference for unique artistic perspective \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4 Reference: Twice-Exceptional (2e)}
+
+\subsubsection{Defining Twice-Exceptionality}
+
+The term ``twice-exceptional'' (2e) appeared first in James Gallagher's 1988 article on gifted education priorities. It describes individuals who simultaneously demonstrate high intellectual ability or creative gift in one or more domains while also presenting with a neurodevelopmental condition (ADHD, ASD, specific learning disorders) or other disability. Brody and Mills (1997) characterized 2e students as ``the most misunderstood of all exceptionalities.''
+
+Three identification failure modes occur with 2e students:
+\begin{enumerate}[leftmargin=*]
+  \item Giftedness is recognized; neurodivergence is missed (child achieves until demands exceed compensation capacity)
+  \item Neurodivergence is identified; giftedness is overlooked (intellectual potential never cultivated)
+  \item Both remain unidentified (student appears average; complex strengths and challenges cancel each other out)
+\end{enumerate}
+
+\subsubsection{The 2e Cognitive Profile}
+
+Research indicates 2e brains show higher white matter density (greater neural connectivity), heightened sensory intake, and ``over-excitability'' of the limbic system producing more intense emotional experiences. Meta-analytic evidence (Atmaca and Baloglu, 2022; Frontiers in Education 2025) finds significant discrepancies in Working Memory Index and Processing Speed among 2e individuals compared to gifted-only peers --- the specific cognitive profile of giftedness masking neurodivergent processing differences.
+
+\subsubsection{Masking, Burnout, and Adult 2e}
+
+Gifted compensation for neurodivergent challenges is cognitively expensive. Autistic masking (suppressing natural behaviors to appear neurotypical) produces burnout at rates significantly higher than non-autistic peers. For 2e adults, without adequate framework for self-understanding, the experience is often one of profound inconsistency: mastery in some domains, baffling failure in others, with no coherent narrative to explain the gap. Research from Understood.org's 2025 creative industry study found nearly one in three neurodivergent creative industry employees unsatisfied in their roles, with 70\% reporting time management challenges and 55\% reporting organizational difficulty --- despite their colleagues rating their creative contributions as essential.
+
+\subsubsection{Support Frameworks}
+
+Evidence-based frameworks for 2e support include: Universal Design for Learning (UDL) providing multiple modalities and expression pathways; strengths-based neuropsychological assessment (evaluating both peaks and valleys of cognitive profile); talent development programs that provide intellectual challenge alongside processing accommodations; and 2e-affirming coaching that supports self-advocacy and identity development. The Child Mind Institute (2025 review) emphasizes that 2e identification requires specialists with specific 2e experience --- standard assessments frequently miss the profile due to how strengths and challenges interact.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Area} & \tableheader{Boundary Type} & \tableheader{Protocol} \\
+\midrule
+Historical retrodiagnosis & GATE & Use behavioral language; no definitive clinical assertions; note scholarly debate \\
+Lived experience representation & ANNOTATE & Prioritize first-person accounts from neurodivergent individuals over external characterization \\
+Avoiding ``superpower'' framing & ANNOTATE & Explicitly acknowledge genuine challenges alongside strengths; never romanticize suffering \\
+Statistical claims on prevalence & ABSOLUTE & All numerical claims require named peer-reviewed source \\
+Schizophrenia and creativity & GATE & Nash case must be handled with clinical precision; avoid implication that psychosis is creatively necessary \\
+Disability as identity & ANNOTATE & Follow disability community conventions: identity-first (``autistic person'') or person-first depending on individual preference where known \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=*, itemsep=0.2em]
+  \item Pasarín-Lavín, T. et al. (2024). Neurodivergent students: A continuum of skills with emphasis on creativity and executive functions. \textit{Applied Neuropsychology}. DOI: 10.1080/21622965.2024.2406914
+  \item Dohn, A. et al. (2012). Do musicians with perfect pitch have more autism traits? \textit{PLOS ONE}. doi:10.1371/journal.pone.0037961
+  \item PMC 2023. Innovation through neurodiversity: Diversity is beneficial. SAGE Open. PMC10504802.
+  \item PMC 2024. Enhanced sensitivity to pitch perception and autism. PMC11138189.
+  \item PMC 2011. Enhanced cortical connectivity in absolute pitch musicians. PMC3012137.
+  \item PMC 2009. Neurocognitive components of pitch processing. PMC2638817.
+  \item Martinelli, V. et al. (2018). The alleged link between creativity and dyslexia. \textit{Cogent Psychology}. 10.1080/23311908.2016.1190309
+  \item Frontiers in Education (2025). Twice-exceptional students: systematic review. doi:10.3389/feduc.2025.1696805
+  \item Chamberlain, R. et al. (2018). Meta-analytic findings: visuo-spatial ability in dyslexia. \textit{Neuropsychology Review}.
+  \item Taylor, H. (2022). Dyslexia as explorative bias. University of Cambridge. \textit{Nature Human Behaviour}.
+  \item Atmaca, F. \& Baloglu, M. (2022). Meta-analysis: twice-exceptional cognitive profiles. \textit{Gifted Education International}.
+\end{itemize}
+
+\subsubsection{Government and Institutional Sources}
+
+\begin{itemize}[leftmargin=*, itemsep=0.2em]
+  \item National Institutes of Health / PMC --- Multiple neuroscience studies cited above
+  \item International Dyslexia Association (IDA) --- Visuospatial processing and dyslexia
+  \item National Association for Gifted Children (NAGC) --- Twice-exceptional frameworks
+  \item Understood.org --- 2025 Creative Industry Neurodiversity Study (with 4As and Havas)
+  \item Child Mind Institute --- Twice-exceptional identification (2025 review)
+  \item Dana Foundation --- Neurodiversity and Creativity series (2023)
+  \item Yale Center for Dyslexia and Creativity
+  \item University of Michigan DyslexiaHelp program
+\end{itemize}
+
+\subsubsection{Professional and Reference Sources}
+
+\begin{itemize}[leftmargin=*, itemsep=0.2em]
+  \item Baron-Cohen, S. (2000). Is Asperger syndrome necessarily a disability? \textit{Development and Psychopathology}.
+  \item Mottron, L. et al. (2006). Enhanced perceptual functioning in autism. \textit{JADD}.
+  \item Armstrong, T. (2010). \textit{Neurodiversity}. Da Capo Lifelong Books.
+  \item Eide, B.L. \& Eide, F.F. (2011). \textit{The Dyslexic Advantage}. Hudson Street Press.
+  \item Logan, J. (2009). Dyslexia entrepreneurs. Cass Business School research.
+  \item Treffert, D.A. (2009). Savant syndrome: past, present, future. \textit{Phil. Trans. Royal Society B}.
+  \item Specialisterne USA. Neurodiversity and Creativity. us.specialisterne.com
+  \item Concordia University / Trish Osler. Neurodiversity Contributes to Creativity. cunews/2022.
+  \item Nasar, S. (1998). \textit{A Beautiful Mind}. Simon \& Schuster.
+  \item NAMI Montana. John Nash: Mental Health in History. namimt.org.
+\end{itemize}
+
+% =============================================================================
+% STAGE 3 — MISSION PACKAGE
+% =============================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, multi-module research document on neurodivergence, creativity, and genius, integrating findings from cognitive neuroscience, psychology, educational research, and documented historical and contemporary case studies. The mission will be executed by a Squadron-profile crew across four waves, producing an integrated synthesis document and individual module reports suitable for handoff to the College of Knowledge Rosetta Core.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+MISSION ARCHITECTURE — WAVE EXECUTION PLAN
+============================================
+
+WAVE 0: Foundation (Sequential, Haiku)
+  ├─ Shared source index JSON
+  ├─ Portrait data schema
+  ├─ Module template scaffolding
+  └─ Token budget initialization
+         |
+         ▼
+WAVE 1A (Parallel Track A, Sonnet):        WAVE 1B (Parallel Track B, Sonnet):
+  ├─ M1: Paradigm Survey                     ├─ M3: Prodigy Portraits
+  └─ M2: Neuroscience Survey                 └─ M4: 2e Education Survey
+         |                                          |
+         ▼                                          ▼
+         └──────────────┬───────────────────────────┘
+                        ▼
+WAVE 2: Synthesis (Sequential, Opus)
+  ├─ M5: Cross-module integration
+  ├─ Three-variable genius model
+  ├─ Sensitivity/retrodiagnosis review
+  └─ Enabling environments synthesis
+         |
+         ▼
+WAVE 3: Publication + Verification (Sequential, Sonnet)
+  ├─ Final LaTeX compilation
+  ├─ Source validation pass
+  └─ Delivery package
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, wave scaffolding
+  \item \textbf{Research Layer} --- Four module surveys (M1--M4), parallel-tracked
+  \item \textbf{Synthesis Layer} --- M5 cross-module integration (Opus)
+  \item \textbf{Publication Layer} --- Final document assembly, verification, delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Source Index JSON & All 25+ sources catalogued with DOI/URL, year, credibility tier & Wave 0 \\
+2 & M1 Paradigm Survey & History traced from Singer (1998); deficit vs. difference models covered & Module 1 Reference \\
+3 & M2 Neuroscience Survey & AP prevalence data cited; savant model explained; divergent thinking evidence & Module 2 Reference \\
+4 & M3 Prodigy Portraits & All major figures with behavioral evidence; epistemic language consistent & Module 3 Reference \\
+5 & M4 Twice-Exceptional Survey & Three failure modes; intervention frameworks; adult 2e experience & Module 4 Reference \\
+6 & M5 Synthesis Document & Three-variable model with evidence; enabling environments actionable & Success Criteria SC5 \\
+7 & Final Research PDF & All modules integrated; bibliography $\geq$25 sources; SC1--SC12 verified & All SCs \\
+8 & College of Knowledge Seed & Module summaries formatted for Rosetta Core ingestion & GSD College of Knowledge spec \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0: Source Index & None & Haiku & 8k \\
+Wave 0: Schemas & None & Haiku & 5k \\
+M1: Paradigm Survey & Source Index & Sonnet & 30k \\
+M2: Neuroscience Survey & Source Index & Sonnet & 40k \\
+M3: Prodigy Portraits & Source Index, Schemas & Sonnet & 35k \\
+M4: 2e Education & Source Index & Sonnet & 30k \\
+M5: Synthesis & M1--M4 complete & Opus & 50k \\
+Sensitivity Review & M3, M5 & Opus & 20k \\
+Final Assembly & All modules & Sonnet & 25k \\
+Verification Pass & Final Assembly & Sonnet & 15k \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated:}} & \textbf{$\sim$258k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task Category} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+Cross-module synthesis & Opus & Requires holding all module findings simultaneously; identifying non-obvious connections; constructing integrated model \\
+Historical retrodiagnosis & Opus & Requires judgment: how to characterize behavioral evidence without overclaiming; navigating contested scholarly territory \\
+Sensitivity review & Opus & Disability representation standards; lived experience framing; deficit vs. strength balance \\
+Module surveys & Sonnet & Structured research compilation; table assembly; bibliography formatting; reliable at scale \\
+Source validation & Sonnet & Pattern matching against known credibility criteria; URL/DOI verification \\
+Schemas and scaffolding & Haiku & Template creation; JSON schema definition; token tracking; no deep reasoning required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2.5cm}C{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Sessions} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 1 & Source index, schemas \\
+1A & Paradigm + Science & Parallel & Sonnet & 1 & M1 + M2 surveys \\
+1B & Portraits + 2e & Parallel & Sonnet & 1 & M3 + M4 surveys \\
+2 & Synthesis & Sequential & Opus & 1 & M5 + sensitivity review \\
+3 & Publication & Sequential & Sonnet & 1 & Final PDF + verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Specification} \\
+\midrule
+Build source index & SCOUT & Compile all 25+ sources as JSON: \{id, title, authors, year, url/doi, type, credibility\_tier, modules\_relevant\} \\
+Create portrait schema & LOG & JSON schema for prodigy portrait: \{name, dates, domain, condition\_status, behavioral\_evidence, scholarly\_notes\} \\
+Module templates & LOG & LaTeX subsection stubs for each module with required heading structure \\
+Token initialization & BUDGET & Set per-wave budget; configure SURGEON monitoring thresholds \\
+CAPCOM handoff & CAPCOM & Human review of source index before Wave 1 begins \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (M1 + M2) --- Paradigm and Neuroscience:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Specification} \\
+\midrule
+M1 Paradigm Survey & CRAFT-PARA & Trace history from Singer 1998; cover medical vs. social model; DSM evolution; 2,500--3,500 words \\
+M2 Neuroscience Survey & CRAFT-NEURO & Cover ADHD divergent thinking, AP statistics, savant syndrome model, dyslexia explorative bias; all data cited; 3,000--4,000 words \\
+Track A verification & VERIFY & All numerical claims sourced; no overclaiming; sensitivity flags raised to CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (M3 + M4) --- Prodigies and 2e Education:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Specification} \\
+\midrule
+M3 Prodigy Portraits & CRAFT-PORT & One portrait per major figure using portrait schema; behavioral language only for historical; confirmed diagnoses clearly labeled; 3,000--4,000 words \\
+M4 2e Education & CRAFT-EDU & Cover three failure modes; burnout dynamics; support frameworks; adult 2e; 2,500--3,000 words \\
+Track B verification & VERIFY & All portraits pass epistemic protocol; SC6 compliance check \\
+CAPCOM gate & CAPCOM & Human review of M3 portraits before Opus synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Specification} \\
+\midrule
+M5 Synthesis & INTEG (Opus) & Produce three-variable model with citations; identify cross-module connections; enabling environments framework \\
+Sensitivity review & FLIGHT (Opus) & Review M3 retrodiagnosis language; M4 lived experience framing; deficit/superpower balance across all modules \\
+Nash case review & FLIGHT (Opus) & Specific review of Nash portraiture for clinical accuracy; schizophrenia and creativity framing \\
+Cross-module index & INTEG & Map all findings to SC1--SC12 success criteria; identify any gaps requiring Wave 3 fill \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Specification} \\
+\midrule
+Final assembly & EXEC & Compile all modules into single LaTeX document; three XeLaTeX passes \\
+Bibliography compilation & EXEC & Full bibliography with all source categories; $\geq$25 entries \\
+Source validation & VERIFY & Verify all URLs/DOIs; confirm no unsourced statistics remain \\
+SC verification & VERIFY & Map each success criterion to supporting content; mark pass/fail \\
+College of Knowledge seed & EXEC & Extract module summaries in Rosetta Core format \\
+CAPCOM final delivery & CAPCOM & Human approval before package delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Shared source index:} Compiled once in Wave 0; cached as prompt prefix for all Wave 1 agents
+  \item \textbf{Portrait schema:} Single definition reused across M3 agent and M5 synthesis agent
+  \item \textbf{Success criteria:} Included in system prompt for all waves; no per-wave respecification needed
+  \item \textbf{5-minute TTL exploitation:} Wave 1 tracks A and B launched within same session; shared prefixes exploit cache TTL window
+  \item \textbf{Module outputs as context:} M1--M4 outputs passed as context blocks to M5 Opus agent; no re-research in synthesis wave
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0 & Haiku & 10k & 13k & 23k \\
+Wave 1A & Sonnet & 35k & 35k & 70k \\
+Wave 1B & Sonnet & 35k & 35k & 70k \\
+Wave 2 & Opus & 60k & 45k & 105k \\
+Wave 3 & Sonnet & 45k & 20k & 65k \\
+\midrule
+\textbf{Total} & & \textbf{185k} & \textbf{148k} & \textbf{333k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+[Source Index (Wave 0)] ──────────────────────────────────────┐
+[Portrait Schema (Wave 0)] ───────────────────────────────────┤
+[Module Templates (Wave 0)] ──────────────────────────────────┤
+                                                               │
+                            ┌──────────────────────────────────┘
+                            ▼
+            ┌───────────────┬───────────────┐
+            │               │               │
+   [M1 Paradigm]   [M2 Neuroscience]  [M3 Portraits]  [M4 2e Education]
+            │               │               │               │
+            └───────┬───────┘               └───────┬───────┘
+                    │ (Track A complete)             │ (Track B + CAPCOM gate)
+                    └──────────────┬─────────────────┘
+                                   │
+                                   ▼
+                         [M5 Synthesis + Sensitivity (Opus)]
+                                   │
+                                   ▼
+                     [Final Assembly + Verification (Wave 3)]
+                                   │
+                                   ▼
+                        [Delivery Package + CoK Seed]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} \\
+\midrule
+Safety-critical (retrodiagnosis) & 4 & MANDATORY & BLOCK Wave 3 \\
+Safety-critical (lived experience) & 3 & MANDATORY & BLOCK Wave 3 \\
+Core content (SC verification) & 12 & HIGH & Remediate and re-verify \\
+Integration (cross-module) & 4 & MEDIUM & Flag for Opus review \\
+Edge cases (framing balance) & 4 & MEDIUM & Revise language \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+ST-01 & Retrodiagnosis language (M3) & All historical figures described with behavioral evidence only; no definitive clinical assertions for pre-20th century figures \\
+ST-02 & Nash portraiture & Schizophrenia described with clinical accuracy; no implication that psychosis is prerequisite for mathematical genius \\
+ST-03 & Deficit/superpower balance & No module frames neurodivergence as purely a superpower; genuine challenges acknowledged in each profile section \\
+ST-04 & Living person privacy & No personal neurodivergence information about living persons who have not publicly disclosed \\
+ST-05 & Statistics sourcing & Zero unsourced quantitative claims in any module; every statistic has named source citation \\
+ST-06 & Disability representation & No condescending or infantilizing language about neurodivergent individuals; community language conventions followed \\
+ST-07 & Schizophrenia and creativity & Nash case does not create or reinforce stereotype linking mental illness to creative necessity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4.5cm}L{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & Paradigm history from Singer 1998 & Core content CT-01 & Pending \\
+SC2 & AP prevalence in 2+ peer-reviewed studies & Core content CT-02 & Pending \\
+SC3 & Consistent epistemic language in portraits & ST-01, ST-02 & Pending \\
+SC4 & 2e failure modes + intervention frameworks & Core content CT-04 & Pending \\
+SC5 & Three-variable integrated model & Integration IT-01 & Pending \\
+SC6 & Behavioral evidence only for historical figures & ST-01 & Pending \\
+SC7 & Three evidence-based enabling interventions & Core content CT-07 & Pending \\
+SC8 & Savant vs. prodigy distinction & Core content CT-08 & Pending \\
+SC9 & No unsourced statistics & ST-05 & Pending \\
+SC10 & Deficit/superpower balance & ST-03, Edge EC-01 & Pending \\
+SC11 & $\geq$25 sources, $\geq$60\% peer-reviewed & Core content CT-11 & Pending \\
+SC12 & Actionable reform recommendations & Core content CT-12 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Opus & Mission direction; go/no-go gates; final authority \\
+PLAN & Planner & Sonnet & Wave decomposition; parallel track management \\
+SCOUT & Research Agent & Haiku & Source gathering; gap identification \\
+EXEC-1 & Track A Executor & Sonnet & M1 Paradigm + M2 Neuroscience production \\
+EXEC-2 & Track B Executor & Sonnet & M3 Portraits + M4 2e production \\
+CRAFT-PARA & Paradigm Specialist & Sonnet & M1 deep domain analysis \\
+CRAFT-NEURO & Neuroscience Specialist & Sonnet & M2 deep domain analysis \\
+VERIFY & Verification & Sonnet & Source validation; accuracy; SC compliance \\
+INTEG & Integration & Opus & M5 cross-module synthesis \\
+CAPCOM & HITL Interface & --- & Human approval at Wave 0→1 and Wave 1→2 gates \\
+BUDGET & Resource Manager & Haiku & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Haiku & Quality degradation detection; escalation \\
+LOG & Chronicle & Haiku & Audit trail; commit messages; Wave summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles + LOG) \\
+Module Count & 5 (M1--M5) \\
+Parallel Tracks & 2 (Wave 1A, Wave 1B) \\
+Total Waves & 4 (W0, W1, W2, W3) \\
+Estimated Token Budget & 333k tokens \\
+Estimated Sessions & 3--4 context windows \\
+Safety-Critical Tests & 7 (all MANDATORY-PASS) \\
+Success Criteria & 12 \\
+HITL Gates & 2 (Wave 0→1 source review; Wave 1→2 portrait review) \\
+Handoff Destination & gsd-skill-creator orchestrator \\
+College of Knowledge seed & Yes --- Rosetta Core neurodiversity module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``I wouldn't have had good scientific ideas if I had thought more normally.''}\\[0.5em]
+\hfill --- John Forbes Nash Jr., Nobel Laureate, mathematician
+
+\vspace{0.8em}
+The genius of the neurodivergent mind is not a compensation for difference. It \textit{is} the difference. The same architecture that makes some tasks impossible makes other tasks inevitable. The mission of this research is to map that architecture with precision and care --- so that the next extraordinary mind receives not a diagnosis of what it cannot do, but a compass toward what only it can.
+
+\vspace{0.8em}
+\textit{The space between neurotypical and neurodivergent is not a deficit. It is a distance traveled differently.}
+\end{quotebox}
+
+\end{document}
