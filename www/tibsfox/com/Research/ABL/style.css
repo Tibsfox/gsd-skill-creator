@@ -1,0 +1,192 @@
+/* ABL — Warm Orange / Creative Gold / Studio Dark theme, Ableton Live
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --studio-orange: #E65100;
+  --studio-light: #FFF3E0;
+  --studio-mid: #EF6C00;
+  --studio-dark: #BF360C;
+  --creative-gold: #F9A825;
+  --creative-light: #FFF8E1;
+  --creative-mid: #F57F17;
+  --session-dark: #263238;
+  --session-mid: #37474F;
+  --session-light: #ECEFF1;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--studio-orange);
+  --link-hover: var(--studio-dark);
+  --accent: var(--studio-orange);
+  --accent-light: var(--studio-light);
+  --accent-dark: var(--studio-dark);
+  --card-bg: white;
+  --card-border: #BCAAA4;
+  --card-shadow: rgba(230,81,0,0.12);
+  --border: #BCAAA4;
+  --parchment: var(--session-light);
+}
+
+/* ===================================================
+   2. HEADER -- session-dark/studio-orange gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #1a1007 0%, #3e2723 35%, #4e2a0a 70%, #2c1a0a 100%);
+  border-bottom: 4px solid var(--creative-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(230,81,0,0.2) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(249,168,37,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #FFF3E0; }
+header .subtitle { color: #FFCC80; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--session-dark);
+  border-bottom-color: var(--session-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--studio-orange); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--studio-light);
+  border-left: 4px solid var(--studio-orange);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--session-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(230,81,0,0.04); }
+tr:hover { background: rgba(230,81,0,0.08); }
+
+pre {
+  background: #1a1007;
+  color: #FFCC80;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--creative-gold);
+}
+code {
+  background: var(--studio-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--studio-orange);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #BCAAA4;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(230,81,0,0.12); border-color: var(--studio-orange); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #BCAAA4;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--studio-orange);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-arch { background: var(--studio-light); color: var(--studio-orange); }
+.tag-synth { background: var(--creative-light); color: var(--creative-mid); }
+.tag-hw { background: #E8F5E9; color: #2E7D32; }
+.tag-ext { background: #E3F2FD; color: #1565C0; }
+.tag-edu { background: #F3E5F5; color: #7B1FA2; }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #BCAAA4;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--studio-orange); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--studio-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--studio-orange);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #FFCC80; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
