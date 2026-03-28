@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sound of Puget Sound — A·B·C·D·E Complete Release Matrix</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:     #004D40; --navy:    #1A237E; --green: #33691E;
+    --amber:    #E65100; --violet:  #4527A0; --dkgreen:#1B5E20;
+    --sky:      #0277BD; --light-t: #E0F2F1; --light-n:#E8EAF6;
+    --light-g:  #F1F8E9; --gray:    #F5F5F5; --border: #BDBDBD;
+    --subtle:   #757575; --dark:    #212121;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--dark); background: #FAFAFA; }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(150deg, var(--teal) 0%, #003330 40%, var(--navy) 100%);
+    color: white; padding: 3rem 2rem 2.5rem; position: relative; overflow: hidden;
+  }
+  header::before {
+    content: ''; position: absolute; top: -20%; right: -5%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+  }
+  .header-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+  .badge {
+    display: inline-block; background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.8);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif; font-size: 3rem;
+    font-weight: 700; line-height: 1.05; margin-bottom: 0.4rem;
+  }
+  header h2 { font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.7); margin-bottom: 1rem; }
+
+  /* Part badges row */
+  .part-badges { display: flex; gap: 0.6rem; margin: 1.2rem 0; flex-wrap: wrap; }
+  .part-badge {
+    padding: 6px 16px; border-radius: 4px; font-size: 0.8rem;
+    font-weight: 700; color: white; letter-spacing: 0.05em;
+  }
+  .pa { background: var(--navy); } .pb { background: var(--teal); }
+  .pc { background: var(--amber); } .pd { background: var(--violet); }
+  .pe { background: var(--dkgreen); }
+  .part-badge span { display: block; font-size: 0.68rem; font-weight: 400; opacity: 0.8; margin-top: 1px; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.2rem; }
+  .meta-chip {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px; padding: 5px 12px; font-size: 0.8rem;
+  }
+  .meta-chip strong { color: rgba(255,255,255,0.55); font-weight: 500; margin-right: 4px; }
+
+  /* ── Main ── */
+  main { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--subtle);
+    border-bottom: 2px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 1.2rem;
+  }
+
+  /* ── Downloads ── */
+  .dl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.2rem; margin-bottom: 2.5rem; }
+  .dl-card {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 1.4rem; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    transition: box-shadow .15s, transform .15s, border-color .15s;
+  }
+  .dl-card:hover { box-shadow: 0 6px 24px rgba(0,77,64,.12); transform: translateY(-2px); border-color: var(--teal); }
+  .dl-card.teal  { border-left: 4px solid var(--teal); background: var(--light-t); }
+  .dl-card.navy  { border-left: 4px solid var(--navy); background: var(--light-n); }
+  .dl-card.green { border-left: 4px solid var(--dkgreen); background: var(--light-g); }
+  .card-type { font-size: 0.7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .teal .card-type { color: var(--teal); } .navy .card-type { color: var(--navy); } .green .card-type { color: var(--dkgreen); }
+  .card-name { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; font-weight: 700; }
+  .card-desc { font-size: 0.84rem; color: var(--subtle); line-height: 1.45; }
+  .dl-btn { margin-top: auto; font-size: 0.78rem; font-weight: 600; color: var(--sky); }
+  .dl-btn::before { content: '↓ '; }
+
+  /* ── Part breakdown ── */
+  .parts-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem; margin-bottom: 2.5rem; }
+  @media (max-width:780px) { .parts-grid { grid-template-columns: 1fr 1fr; } }
+  .part-card { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .part-card-hdr { padding: 0.7rem 0.9rem; color: white; }
+  .part-card-hdr h3 { font-size: 0.9rem; font-weight: 700; }
+  .part-card-hdr p { font-size: 0.72rem; opacity: 0.8; margin-top: 2px; }
+  .part-card-body { padding: 0.8rem 0.9rem; background: white; }
+  .stat-row { display: flex; justify-content: space-between; font-size: 0.78rem; padding: 3px 0; border-bottom: 1px solid var(--gray); }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--subtle); }
+  .stat-val { font-weight: 600; }
+
+  /* ── Parallel table ── */
+  .par-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 2.5rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .par-table thead tr { background: var(--teal); color: white; }
+  .par-table th { padding: 10px 14px; text-align: left; font-size: 0.77rem; font-weight: 600; }
+  .par-table td { padding: 9px 14px; border-bottom: 1px solid var(--gray); vertical-align: top; }
+  .par-table tr:last-child td { border-bottom: none; }
+  .par-table tr:nth-child(even) td { background: var(--gray); }
+  .deg-badge { display: inline-block; background: var(--teal); color: white; font-size: 0.7rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+
+  /* ── Safety callout ── */
+  .safety { background: #FFF3E0; border-left: 4px solid #E65100; border-radius: 0 8px 8px 0; padding: 1rem 1.2rem; margin-bottom: 1.5rem; font-size: 0.87rem; line-height: 1.6; }
+  .safety strong { color: #BF360C; }
+
+  /* ── Execution order ── */
+  .exec-flow { display: flex; align-items: center; gap: 0.5rem; margin: 1.2rem 0 2rem; flex-wrap: wrap; }
+  .exec-phase { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 1.2rem; font-size: 0.82rem; }
+  .exec-phase strong { display: block; font-size: 0.72rem; color: var(--subtle); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .exec-arrow { color: var(--border); font-size: 1.4rem; }
+  .parallel-badge { background: var(--light-t); border: 1px solid var(--teal); border-radius: 4px; padding: 2px 8px; font-size: 0.72rem; color: var(--teal); font-weight: 600; display: inline-block; margin-top: 4px; }
+
+  /* ── Quote ── */
+  .through-line { background: var(--light-t); border-left: 4px solid var(--teal); border-radius: 0 8px 8px 0; padding: 1.2rem 1.5rem; margin-bottom: 2rem; }
+  .through-line p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.92rem; line-height: 1.75; color: var(--teal); }
+  .through-line cite { display: block; margin-top: 0.6rem; font-size: 0.76rem; color: var(--subtle); font-style: normal; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.35); text-align: center; padding: 1.5rem; font-size: 0.76rem; margin-top: 3rem; }
+  code { background: #EEF0F8; border: 1px solid #CDD0E8; border-radius: 3px; padding: 1px 5px; font-size: 0.81em; color: var(--navy); }
+  pre { background: #1E1E2E; color: #CDD6F4; border-radius: 6px; padding: 1rem; font-size: 0.77rem; overflow-x: auto; margin: 0.5rem 0; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">GSD Research Mission Package · Fleet+ · A–B–C–D–E Complete Matrix</div>
+    <h1>The Sound of Puget Sound</h1>
+    <h2>360 Musicians · 360 Wild Voices · One Unit Circle · Five Release Phases</h2>
+    <div class="part-badges">
+      <div class="part-badge pa">PART A<span>Seattle 360 Music</span></div>
+      <div class="part-badge pb">PART B<span>PNW 360 Species</span></div>
+      <div class="part-badge pc">PART C<span>Deep Mapping</span></div>
+      <div class="part-badge pd">PART D<span>Fractal Refine</span></div>
+      <div class="part-badge pe">PART E<span>Lessons Applied</span></div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-chip"><strong>Total Releases:</strong> 1,800 artifacts</div>
+      <div class="meta-chip"><strong>Components:</strong> 37 across Parts A–E</div>
+      <div class="meta-chip"><strong>Token Budget:</strong> ~75.5M</div>
+      <div class="meta-chip"><strong>Safety Gates:</strong> 570 tests · 91 mandatory-pass</div>
+      <div class="meta-chip"><strong>College Depts:</strong> 15+ new/seeded</div>
+      <div class="meta-chip"><strong>Date:</strong> 2026-03-28</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <p class="section-label">Downloads</p>
+  <div class="dl-grid">
+    <a href="sound-of-puget-sound-mission.pdf" download class="dl-card teal">
+      <span class="card-type">PDF · 18 pages · All 5 Parts</span>
+      <span class="card-name">Complete Mission Package</span>
+      <span class="card-desc">Full A–B–C–D–E mission document. Executive overview, parallel structure tables, all 5 part visions, complete component matrix, execution order, and through-line.</span>
+      <span class="dl-btn">Download PDF</span>
+    </a>
+    <a href="sound-of-puget-sound-mission.tex" download class="dl-card navy">
+      <span class="card-type">LaTeX · XeLaTeX Source</span>
+      <span class="card-name">Recompilable Source</span>
+      <span class="card-desc">Full .tex source with Puget Sound color scheme (deep teal/navy/fern green). Modify and recompile with three XeLaTeX passes. All five parts in one document.</span>
+      <span class="dl-btn">Download .tex</span>
+    </a>
+    <a href="pnw_360_species.csv" download class="dl-card green">
+      <span class="card-type">CSV · 360 rows · Part B Input</span>
+      <span class="card-name">PNW 360 Species Data</span>
+      <span class="card-desc">All 360 PNW species and soundscapes with degree, sound type, energy (1–10), ecosystem, season, family, and coordinates. Mirror structure of the Seattle 360 music CSV.</span>
+      <span class="dl-btn">Download CSV</span>
+    </a>
+  </div>
+
+  <p class="section-label">Five-Part Breakdown</p>
+  <div class="parts-grid">
+    <div class="part-card">
+      <div class="part-card-hdr" style="background:var(--navy)"><h3>Part A</h3><p>Seattle 360 Music</p></div>
+      <div class="part-card-body">
+        <div class="stat-row"><span class="stat-label">Releases</span><span class="stat-val">360</span></div>
+        <div class="stat-row"><span class="stat-label">Components</span><span class="stat-val">9</span></div>
+        <div class="stat-row"><span class="stat-label">Tests</span><span class="stat-val">148</span></div>
+        <div class="stat-row"><span class="stat-label">Tokens</span><span class="stat-val">~20.7M</span></div>
+        <div class="stat-row"><span class="stat-label">Status</span><span class="stat-val" style="color:var(--dkgreen)">Delivered</span></div>
+      </div>
+    </div>
+    <div class="part-card">
+      <div class="part-card-hdr" style="background:var(--teal)"><h3>Part B</h3><p>PNW 360 Species</p></div>
+      <div class="part-card-body">
+        <div class="stat-row"><span class="stat-label">Releases</span><span class="stat-val">360</span></div>
+        <div class="stat-row"><span class="stat-label">Components</span><span class="stat-val">9</span></div>
+        <div class="stat-row"><span class="stat-label">Tests</span><span class="stat-val">152</span></div>
+        <div class="stat-row"><span class="stat-label">Tokens</span><span class="stat-val">~22.3M</span></div>
+        <div class="stat-row"><span class="stat-label">Status</span><span class="stat-val" style="color:var(--amber)">This package</span></div>
+      </div>
+    </div>
+    <div class="part-card">
+      <div class="part-card-hdr" style="background:var(--amber)"><h3>Part C</h3><p>Deep Mapping</p></div>
+      <div class="part-card-body">
+        <div class="stat-row"><span class="stat-label">Releases</span><span class="stat-val">360 pairs</span></div>
+        <div class="stat-row"><span class="stat-label">Components</span><span class="stat-val">7</span></div>
+        <div class="stat-row"><span class="stat-label">Tests</span><span class="stat-val">120</span></div>
+        <div class="stat-row"><span class="stat-label">Tokens</span><span class="stat-val">~13.3M</span></div>
+        <div class="stat-row"><span class="stat-label">Requires</span><span class="stat-val">A+B done</span></div>
+      </div>
+    </div>
+    <div class="part-card">
+      <div class="part-card-hdr" style="background:var(--violet)"><h3>Part D</h3><p>Fractal Refine</p></div>
+      <div class="part-card-body">
+        <div class="stat-row"><span class="stat-label">Passes</span><span class="stat-val">720</span></div>
+        <div class="stat-row"><span class="stat-label">Components</span><span class="stat-val">6</span></div>
+        <div class="stat-row"><span class="stat-label">Tests</span><span class="stat-val">90</span></div>
+        <div class="stat-row"><span class="stat-label">Tokens</span><span class="stat-val">~14.4M</span></div>
+        <div class="stat-row"><span class="stat-label">Requires</span><span class="stat-val">C done</span></div>
+      </div>
+    </div>
+    <div class="part-card">
+      <div class="part-card-hdr" style="background:var(--dkgreen)"><h3>Part E</h3><p>Lessons Applied</p></div>
+      <div class="part-card-body">
+        <div class="stat-row"><span class="stat-label">Outputs</span><span class="stat-val">5 docs</span></div>
+        <div class="stat-row"><span class="stat-label">Components</span><span class="stat-val">6</span></div>
+        <div class="stat-row"><span class="stat-label">Tests</span><span class="stat-val">60</span></div>
+        <div class="stat-row"><span class="stat-label">Tokens</span><span class="stat-val">~4.8M</span></div>
+        <div class="stat-row"><span class="stat-label">Requires</span><span class="stat-val">D done</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label">A×B Parallel Structure — Selected Degrees</p>
+  <table class="par-table">
+    <thead><tr><th>Deg</th><th>Part A — Music</th><th>Part B — Species</th><th>Shared Principle (Part C)</th></tr></thead>
+    <tbody>
+      <tr><td><span class="deg-badge">0°</span></td><td>Quincy Jones · Jazz · E=1–3</td><td>Great Blue Heron · silence/croak · E=1</td><td>Structured silence; call-and-response form</td></tr>
+      <tr><td><span class="deg-badge">1°</span></td><td>Bill Frisell · chromaticism · E=2</td><td>Pacific Wren · two-voice syrinx cascade · E=2</td><td>Two-voice counterpoint in a single organism/instrument</td></tr>
+      <tr><td><span class="deg-badge">45°</span></td><td>Damien Jurado · folk unison · E=2</td><td>Pacific Chorus Frog · emergent chorus synchrony · E=2</td><td>Rhythmic entrainment without a conductor</td></tr>
+      <tr><td><span class="deg-badge">108°</span></td><td>Pileated Woodpecker drumming (A)</td><td>Pileated Woodpecker same species (B)</td><td>Degree 108 IS the woodpecker — A and B are one</td></tr>
+      <tr><td><span class="deg-badge">191°</span></td><td>Hovercraft · drone / noise · E=2</td><td>Humpback Whale song · 8-hour spiral · E=8</td><td>Drone as temporal architecture; sustained tone as form</td></tr>
+      <tr><td><span class="deg-badge">276°</span></td><td>Bikini Kill · riot grrrl / E=8</td><td>Orca female-led hunt sequence · E=8</td><td>Matriarchal coordination as acoustic/compositional structure</td></tr>
+      <tr><td><span class="deg-badge">311°</span></td><td>Nirvana · community convergence · E=9</td><td>Orca greeting ceremony · full pod · E=9</td><td>Mass convergence call; collective identity assertion</td></tr>
+      <tr><td><span class="deg-badge">332°</span></td><td>Botch · mathcore · prime meters · E=9</td><td>Woodpecker+River+Frog polyrhythm · E=9</td><td>Prime-number meters exist in nature; mathematics IS rhythm</td></tr>
+      <tr><td><span class="deg-badge">344°</span></td><td>Botch peak · mathcore apex · E=10</td><td>Multi-species polyrhythm apex · E=10</td><td>Mathematical complexity at maximum biological intensity</td></tr>
+      <tr><td><span class="deg-badge">359°</span></td><td>Unwound · silence as form · E=10</td><td>Puget Sound · one breath · E=10</td><td>Silence IS the most compositionally charged moment</td></tr>
+    </tbody>
+  </table>
+
+  <div class="safety">
+    <strong>SRKW — Southern Resident Killer Whale Mandatory Gate (Part B, BSC-01):</strong><br>
+    Every release at degrees 270–277, 311, 340, 348, 357 MUST include: current population (~73 individuals, 2025),
+    ESA Endangered listing, primary threats (prey depletion, vessel noise, contaminants), NOAA SRKW Recovery Plan citation,
+    and Lummi Nation's Qwe'lhol mechen kinship relationship. Non-compliance = BLOCK.
+    Additional Part B gates: no precise sensitive species coordinates (ABSOLUTE), sacred species nation-specific attribution (BLOCK),
+    SOUNDSCAPE_COMPOSITION entries framed as compositions not species records (BLOCK).
+  </div>
+
+  <p class="section-label">Execution Order</p>
+  <div class="exec-flow">
+    <div class="exec-phase">
+      <strong>Phase 1 — Concurrent</strong>
+      Part A engine (seattle-360) <br>Part B engine (pnw-360)
+      <div class="parallel-badge">Run simultaneously</div>
+    </div>
+    <span class="exec-arrow">→</span>
+    <div class="exec-phase">
+      <strong>Phase 2 — After A+B</strong>
+      Part C: Deep Mapping<br>A×B cross-reference
+    </div>
+    <span class="exec-arrow">→</span>
+    <div class="exec-phase">
+      <strong>Phase 3 — After C</strong>
+      Part D: Fractal<br>Refinement passes
+    </div>
+    <span class="exec-arrow">→</span>
+    <div class="exec-phase">
+      <strong>Phase 4 — After D</strong>
+      Part E: Lessons<br>+ Cycle 2 spec
+    </div>
+    <span class="exec-arrow">→</span>
+    <div class="exec-phase">
+      <strong>Complete</strong>
+      <code>CYCLE-COMPLETE</code><br><code>CYCLE-2-READY</code>
+    </div>
+  </div>
+
+  <p class="section-label">Launch Part B</p>
+  <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:1.4rem;margin-bottom:2rem;">
+    <p style="font-size:0.9rem;margin-bottom:0.8rem;">After ensuring Part A engine is running, launch Part B in a separate Claude Code session:</p>
+    <pre>claude --new-task "$(cat PART-B/01-vision-doc-partB.md)
+
+Begin Wave 0 for PNW 360 Species engine.
+Read PART-B/components/B00-shared-types.md
+     PART-B/components/B01-species-intake.md
+Input: pnw_360_species.csv
+Output root: releases/pnw-360/
+Run concurrently with releases/seattle-360/ — no shared state."</pre>
+    <p style="font-size:0.82rem;color:var(--subtle);margin-top:0.6rem;">Parts A and B share no state and can run simultaneously. Launch Part C only after both reach degree 359.</p>
+  </div>
+
+  <div class="through-line">
+    <p>"The 360° rotation is complete when a student can hear the Pacific Wren, understand the interval
+    ratios in its song, trace those ratios to <em>The Space Between</em>'s unit circle, find the parallel
+    in Quincy Jones's chord voicings, and feel the full circle close in their understanding. At that moment,
+    the Pacific Northwest has given back what it always had: the sound of everything, teaching everything,
+    to anyone willing to listen. One degree at a time. It's all about the journey."</p>
+    <cite>The Sound of Puget Sound · A–B–C–D–E Complete Release Matrix · GSD Ecosystem · 2026</cite>
+  </div>
+
+</main>
+
+<footer>
+  The Sound of Puget Sound — A·B·C·D·E Complete Release Matrix · GSD Mission Package · 2026-03-28<br>
+  Miles Tiberius Foxglove · github.com/Tibsfox · 360 Musicians · 360 Wild Voices · One Unit Circle
+</footer>
+</body>
+</html>

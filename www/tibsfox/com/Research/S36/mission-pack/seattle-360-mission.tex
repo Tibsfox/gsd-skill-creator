@@ -1,0 +1,959 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+% ── Color Scheme: Music History domain ────────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep navy — jazz clubs, night
+\definecolor{secondary}{HTML}{880E4F}     % Deep cranberry — Sub Pop red, vinyl
+\definecolor{tertiary}{HTML}{2E7D32}      % PNW forest green
+\definecolor{accent}{HTML}{1565C0}        % Seattle sky blue
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FCE4EC}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warngold}{HTML}{F9A825}
+\definecolor{blockred}{HTML}{B71C1C}
+
+% ── Typography ─────────────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ────────────────────────────────────────────────────────
+\tcbuselibrary{breakable,skins}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\large\hspace{8pt}#1\hspace{8pt}}}}%
+  \vspace{0.6em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{warnbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{greenbox}{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily\textcolor{primary}{#1}} \textcolor{darktext}{#2}\par}
+
+% ── Table helpers ──────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tblhdr}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Seattle 360 — Continuous Artist Release Engine}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ─────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Seattle 360 -- Continuous Artist Release Engine},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ─────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1.2cm}
+{\fontsize{30}{36}\selectfont\bfseries\sffamily\textcolor{primary}{Seattle 360}}
+
+\vspace{0.4cm}
+{\fontsize{16}{20}\selectfont\bfseries\sffamily\textcolor{secondary}{Continuous Artist Release Engine}}
+
+\vspace{0.6cm}
+{\Large\sffamily\textcolor{tertiary}{360 Artists $\cdot$ 360 Degrees $\cdot$ One Unit Circle}}
+
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{subtlegray}{A Fleet Research Mission $\cdot$ College of Knowledge Integration}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.4em]
+{\small\sffamily\textcolor{accent}{Full Pipeline $\cdot$ Fleet Activation Profile $\cdot$ Autonomous Continuous Release}}
+
+\vspace{2cm}
+\begin{tabular}{ll}
+\textcolor{subtlegray}{\sffamily\small Date:} & \textcolor{darktext}{\sffamily\small 2026-03-28} \\[4pt]
+\textcolor{subtlegray}{\sffamily\small Input:} & \textcolor{darktext}{\sffamily\small seattle\_360\_geo.csv — 360 artists, degrees 0°–359°} \\[4pt]
+\textcolor{subtlegray}{\sffamily\small Activation Profile:} & \textcolor{darktext}{\sffamily\small Fleet (9 components, 2 parallel Wave-1 tracks)} \\[4pt]
+\textcolor{subtlegray}{\sffamily\small Model Split:} & \textcolor{darktext}{\sffamily\small $\approx$30\% Opus / $\approx$60\% Sonnet / $\approx$10\% Haiku} \\[4pt]
+\textcolor{subtlegray}{\sffamily\small Estimated Budget:} & \textcolor{darktext}{\sffamily\small $\approx$22M tokens across $\approx$720 context windows} \\[4pt]
+\textcolor{subtlegray}{\sffamily\small Safety-Critical Tests:} & \textcolor{darktext}{\sffamily\small 22 mandatory-pass gates per release} \\[4pt]
+\textcolor{subtlegray}{\sffamily\small Status:} & \textcolor{darktext}{\sffamily\small Ready for GSD Orchestrator} \\
+\end{tabular}
+
+\vspace{1.8cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}\\[0.4em]
+{\small\sffamily\textcolor{subtlegray}{GSD Ecosystem $\cdot$ github.com/Tibsfox $\cdot$ Miles Tiberius Foxglove}}
+\end{center}
+\newpage
+
+% ── Table of Contents ──────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 \quad VISION DOCUMENT}{primary}
+
+\section{Seattle 360 — Vision Guide}
+
+\metafield{Date:}{2026-03-28}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends on:}{\texttt{gsd-skill-creator-analysis.md}, \texttt{unit-circle-skill-creator-synthesis.md}, \texttt{.college/} (Rosetta Core), \textit{The Space Between}}
+\metafield{Context:}{An autonomous, continuous-release educational engine that processes 360 Seattle-area artists arranged as a unit circle and produces a full Fleet research mission pack per artist, with deep College of Knowledge integration, music theory curriculum mapping, and retrospective-driven learning across all 360 releases.}
+
+\subsection{Vision}
+
+There is a moment every music teacher knows: a student finally \textit{hears} the ii--V--I in a
+Bill Evans chord, or feels the tritone substitution drop in a Quincy Jones arrangement,
+and something irreversible happens. Theory stops being notation on a page and becomes a
+living thing --- audible, tactile, \textit{theirs}. The Seattle music scene, spanning jazz
+institutions on the Central District's Jackson Street corridor to the grunge detonation of
+1991 Capitol Hill, is one of the richest classrooms on the continent. Every artist in
+this dataset is a lesson hiding inside a discography.
+
+The problem is that these lessons have never been taught at scale with the depth they
+deserve. Existing resources treat artists as cultural artifacts --- biographical, historical,
+anecdotal. They do not trace how Bill Frisell's chromaticism descends from tritone
+substitutions Quincy Jones was writing in the Central District forty years earlier. The
+connections --- the \textit{spaces between} --- remain invisible.
+
+The Seattle 360 Continuous Release Engine changes that. It treats the 360-artist CSV as
+what it structurally is: \textbf{a unit circle}. Degree 0 (Quincy Jones, jazz, low energy, 1950s)
+to degree 359 (Unwound, post-hardcore, peak intensity, 2001). Each degree is a release.
+Each release is a full Fleet research mission --- sourced, theorized, cross-referenced,
+curriculum-mapped --- linking outward to the College of Knowledge's music theory
+departments, mathematics foundations from \textit{The Space Between}, and the deep tissue of
+Seattle cultural history. Retrospectives after each release accumulate into a living
+\texttt{knowledge-state.json} that seeds the next mission, making the 360th release
+richer than the first by the accumulated wisdom of 359 prior lessons.
+
+This is the Amiga Principle as pedagogy: not a brute-force encyclopedia of 360 artist
+bios, but an architectural system that generates insight through intelligent traversal.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Music education is disconnected from actual artists.} Theory curricula teach
+    abstract concepts; artist studies teach biography. The bridge --- \textit{show me the theory
+    in the music I love} --- is almost never built at scale.
+
+  \item \textbf{Seattle's musical lineage is pedagogically unmapped.} The direct lineage
+    from Ray Charles's Central District residency through Jimi Hendrix's blues roots through
+    grunge's power-chord minimalism to Bikini Kill's riot grrrl deconstruction is one of
+    music history's richest theory progressions. It has never been traced as a curriculum.
+
+  \item \textbf{Research missions are one-and-done.} Each mission is produced in isolation.
+    The 200th release has no memory of what the 50th release taught. Lessons decay rather
+    than compound.
+
+  \item \textbf{Cross-referencing between College departments is manual.} A music theory node
+    in \texttt{.college/music/} and a frequency-ratio proof in \texttt{.college/mathematics/}
+    are not automatically linked even when they share deep structure.
+
+  \item \textbf{Cultural attribution is uneven.} Indigenous and Black American musical
+    foundations are sources, not subjects, in most curricula. The Central District's jazz
+    lineage requires OCAP\textregistered{}-compliant handling and nation-specific attribution.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Research $\rightarrow$ Map $\rightarrow$ Link $\rightarrow$ Release $\rightarrow$ Retrospect $\rightarrow$ Carry Forward $\rightarrow$ Repeat.}
+
+The engine reads one artist from the CSV, runs a full Fleet research mission, maps the
+artist's musical DNA to College of Knowledge curriculum nodes, creates deep cross-reference
+links, produces the release artifacts, runs a retrospective, extracts lessons learned, and
+seeds the next artist's mission with accumulated context. The loop repeats 360 times.
+
+\subsubsection{Release Cycle Architecture}
+
+\begin{asciibox}
+CSV Row [N]
+    |
+    v
++--------------------------------------------------+
+| WAVE 0: FOUNDATION                               |
+| +-----------------+  +------------------------+  |
+| | ArtistProfile   |  | KnowledgeState[N]      |  |
+| | (from CSV row)  |  | (from retro N-1)       |  |
+| +-----------------+  +------------------------+  |
++--------------------------------------------------+
+    |                          |
+    v                          v
++------------------+   +------------------------+
+| WAVE 1A          |   | WAVE 1B                |
+| Music Theory     |   | College Knowledge      |
+| Mapper (Sonnet)  |   | Linker (Sonnet)        |
+| -> TheoryNodes   |   | -> CollegeLinks        |
++-------+----------+   +----------+-------------+
+        +---------------+---------+
+                        v
+        +-------------------------------+
+        | WAVE 2: FLEET RESEARCH GEN    |
+        | Full research mission PDF     |
+        | .tex source + index.html      |
+        | (Opus -- synthesis)           |
+        +---------------+---------------+
+                        v
+        +-------------------------------+
+        | WAVE 3: RELEASE + RETRO       |
+        | Safety Warden (BLOCK gate)    |
+        | Publish artifacts             |
+        | Retrospective.md              |
+        | KnowledgeState[N+1]           |
+        +---------------+---------------+
+                        v
+                  CSV Row [N+1]
+\end{asciibox}
+
+\subsubsection{The 360\textdegree{} Unit Circle Mapping}
+
+\begin{asciibox}
+                   0 deg: Quincy Jones (Jazz, energy=3)
+                          ^
+              Jazz        |        Folk/Singer-Songwriter
+          (0-22 deg)      |           (45-89 deg)
+                          |
+  270 deg <---------------+---------------> 90 deg
+  Grunge/Metal            |            Indie/Electronic
+  (296-359 deg)           |            (86-140 deg)
+                          |
+                          v
+                   180 deg: Blues/Soul/R&B
+                   (25-45 deg center mass)
+
+  Energy 1 (innermost) ====> Energy 10 (outermost)
+  Radius = intensity of artistic statement
+  Arc position = genre/era
+  Every degree = one educational release
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: CSV Intake Engine}
+\textbf{Purpose:} Transform each CSV row into a validated \texttt{ArtistProfile}. Derives
+\texttt{curriculumDepth} from energy level (1--3 = foundational, 4--6 = intermediate,
+7--10 = advanced). Handles CSV anomalies (missing lat/lon, parenthetical name qualifiers).
+\textbf{College cross-ref:} None (infrastructure only).
+
+\subsubsection{Module 2: Music Theory Mapper}
+\textbf{Purpose:} Map genre + era + energy to a \texttt{TheoryNodeList} --- structured
+music theory concepts directly audible in the artist's work, each linked to College
+curriculum paths and the running theory genealogy.
+\textbf{Key domains:} Jazz harmony, blues form, grunge riff theory, mathcore rhythm, riot
+grrrl deconstruction, modal theory, counterpoint, drone/synthesis.
+\textbf{College cross-ref:} \texttt{.college/music/theory/}, \texttt{.college/mathematics/}
+
+\subsubsection{Module 3: Fleet Research Generator}
+\textbf{Purpose:} Synthesize all Wave 1 outputs into a full three-stage LaTeX research
+mission document per artist: Vision Guide + Research Reference + Mission Package.
+\textbf{NASA SE verbosity:} Every claim sourced. Every number attributed.
+\textbf{College cross-ref:} All departments (writes to Stage 3 integration plan).
+
+\subsubsection{Module 4: College Knowledge Linker}
+\textbf{Purpose:} Generate deep links into \texttt{.college/} for each artist --- specifying
+exactly which nodes are CREATEd vs. ENRICHed and what content the artist contributes.
+The mathematics bridge (unit circle, Fourier, integer sequences) is mandatory for harmonic artists.
+\textbf{College cross-ref:} All departments.
+
+\subsubsection{Module 5--8: Release + Safety + Retrospective + Carry-Forward}
+\textbf{Purpose:} Publish atomically, enforce Safety Warden gates, extract NASA SE lessons
+learned, and write \texttt{KnowledgeState[N+1]} to seed the next mission. These four components
+form the Wave 3 critical path. The Safety Warden cannot be bypassed.
+\textbf{College cross-ref:} Updates \texttt{college-node-index.json} after each release.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+name: seattle-360-release-engine
+version: 1.0.0
+description: >
+  Autonomous continuous-release engine. 360 artists. One unit circle.
+  Fleet activation. Retrospective-driven knowledge accumulation.
+
+agents:
+  topology: "pipeline"
+  agents:
+    - name: "RAVEN"         # Orchestrator -- flight director
+    - name: "SALMON"        # CSV intake -- ArtistProfile generation
+    - name: "CEDAR"         # Theory mapper -- music curriculum (Wave 1A)
+    - name: "ORCA"          # College linker -- deep-link generation (Wave 1B)
+    - name: "HAWK"          # Fleet research generator -- Opus synthesis (Wave 2)
+    - name: "WARDEN"        # Safety warden -- BLOCK authority (Wave 3a)
+    - name: "HERON"         # Release pipeline -- atomic publish (Wave 3b)
+    - name: "OWL"           # Retrospective engine -- lessons learned (Wave 3c)
+    - name: "DOUGLAS-FIR"   # Carry-forward -- KnowledgeState management (Wave 3d)
+    - name: "CAPCOM"        # Human-in-loop -- BLOCK escalation reviews
+
+evaluation:
+  gates:
+    pre_release:
+      - check: "safety-warden-pass"
+        action: "block"
+      - check: "xelatex-compile-success"
+        action: "block"
+      - check: "attribution-complete"
+        action: "block"
+    post_release:
+      - check: "knowledge-state-committed"
+        action: "block"
+      - check: "retrospective-written"
+        action: "block"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item All 360 artists in \texttt{seattle\_360\_geo.csv} (degrees 0--359)
+  \item Full Fleet research mission PDF per artist (LaTeX + .tex + index.html)
+  \item Music theory curriculum mapping (genre-specific, era-appropriate)
+  \item Deep College of Knowledge links (minimum 3 departments per release)
+  \item Sequential release with carry-forward retrospectives
+  \item Safety Warden enforcement on every release (OCAP\textregistered{}, CARE, UNDRIP)
+  \item Progress resumability (interrupt and resume at any artist)
+  \item \texttt{knowledge-state.json} accumulation across all 360 releases
+\end{itemize}
+
+\subsubsection{Out of Scope (Future)}
+\begin{itemize}[leftmargin=2em]
+  \item Audio analysis / MIDI representation of theory concepts (v2.0)
+  \item Interactive College module rendering in GSD-OS desktop (v2.0)
+  \item Seattle $\rightarrow$ Chicago $\rightarrow$ New Orleans lineage comparison (v2.0)
+  \item Foxy's Playground Minecraft integration for music-world nodes (v3.0)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item All 360 artists produce a complete release set in \texttt{releases/seattle-360/NNN-[slug]/}
+  \item Every release PDF contains sourced biography, $\geq$3 theory concepts with audible evidence,
+        $\geq$3 College of Knowledge cross-references, and a carry-forward section.
+  \item The Safety Warden passes every release (no BLOCK-level findings at publication).
+  \item \texttt{knowledge-state.json} is updated atomically after every retrospective; engine
+        can be interrupted and resumed without state loss.
+  \item Every theory concept taught references at least one audible example (track or structural description).
+  \item Central District jazz artists carry explicit attribution to Black American musical foundations.
+  \item Indigenous cultural connections use nation-specific language (Duwamish, Muckleshoot, Suquamish).
+  \item College of Knowledge nodes are tracked in \texttt{knowledge-nodes.json}; no duplicate creation.
+  \item By degree 359, \texttt{theory-genealogy.json} traces the complete lineage from jazz to post-hardcore.
+  \item Carry-forward demonstrably enriches later missions (genealogy cross-references verifiable).
+  \item Every retrospective contains $\geq$1 IMMEDIATE carry item (CONFIRMED, not INFERRED).
+  \item Full 360-release run completes within estimated token budget ($\pm$20\%).
+\end{enumerate}
+
+\subsection{Relationship to Other Vision Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{6cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Document} & \tblhdr{Relationship} \\
+\midrule
+\texttt{gsd-skill-creator-analysis.md} & Execution engine — skill-creator runs every fleet mission \\
+\texttt{unit-circle-skill-creator-synthesis.md} & Mathematical metaphor — 360\textdegree{} CSV IS the unit circle \\
+\texttt{gsd-bbs-educational-pack-vision.md} & Output format compatibility \\
+\texttt{gsd-chipset-architecture-vision.md} & Chipset YAML patterns for each artist mission \\
+\textit{The Space Between} & Mathematical spine — frequency, rhythm, L-systems seeded in theory nodes \\
+\texttt{gsd-os-desktop-vision.md} & GSD-OS delivers College of Knowledge content the engine produces \\
+\texttt{gsd-foxfire-heritage-skills-vision.md} & Cultural heritage framing for attribution standards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Jackson Street in Seattle's Central District was once called the ``Harlem of the West'' ---
+a corridor where Ray Charles, Quincy Jones, Ernestine Anderson, and dozens more learned
+their craft before any of them were famous. That corridor produced a theory of music
+that flowed forward through decades: into the ECM jazz of Bill Frisell, into the
+soul-inflected grunge that made Sub Pop a household name, into the riot grrrl
+deconstructions of Olympia, into the mathcore precision of Botch. The thread never broke.
+It just changed key.
+
+This engine is built to trace that thread. The College of Knowledge is the destination;
+\textit{The Space Between}'s mathematics are the scaffold; the Amiga Principle is the guide.
+Remarkable educational depth not through brute-force biography, but through architectural
+intelligence --- each artist a node in a graph where the edges carry the real lessons.
+The 360\textdegree{} rotation is complete when the knowledge state has closed the loop: when the
+engine can show, in verifiable connected steps, how Quincy Jones at 0\textdegree{} and Unwound at
+359\textdegree{} are teaching the same mathematics in different languages.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 \quad RESEARCH REFERENCE}{secondary}
+
+\section{Research Reference}
+
+\metafield{Purpose:}{Sourced factual foundation for agent execution. Where the vision says
+``Central District jazz lineage,'' this document provides verifiable history, specific
+artists, dates, and institutions. Where the vision says ``theory mapping,'' this document
+provides the genre $\rightarrow$ curriculum mapping tables agents will implement.}
+
+\subsection{How to Use This Document}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Component 02 (Theory Mapper):} Read \S2.3 (Genre Theory Maps) and \S2.4 (Era Vocabulary)
+  \item \textbf{Component 03 (Fleet Research Generator):} Read all sections; \S2.2 provides biographical sourcing
+  \item \textbf{Component 04 (College Linker):} Read \S2.5 (College Dept Mapping) and \S2.6 (Mathematics)
+  \item \textbf{Component 08 (Safety Warden):} Read \S2.7 (Cultural Attribution) and \S2.8 (Sensitivity)
+\end{itemize}
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Seattle Civil Rights \& Labor History Project (UW)} --- Authoritative for Central District jazz history and Black American cultural institutions
+  \item \textbf{KEXP (90.3 FM)} --- Seattle's primary music archive; programming records and artist interviews
+  \item \textbf{Sub Pop Records} --- Discographic source for grunge, indie, and alt-country releases
+  \item \textbf{K Records} --- Source for Olympia-area artists (riot grrrl, lo-fi, indie folk)
+  \item \textbf{Grove Music Online / Oxford Music Online} --- Peer-reviewed music theory and biography
+  \item \textbf{Black Music Research Journal} --- Scholarly Black music studies (Columbia College Chicago)
+\end{itemize}
+
+\subsection{Seattle Music History (Sourced Timeline)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{5.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Era} & \tblhdr{Key Development} & \tblhdr{CSV Degrees} & \tblhdr{Primary Source} \\
+\midrule
+1930s--40s & Jackson Street jazz corridor & 12 & UW SCRLHP \\
+1950s & Garfield H.S. cohort; national labels & 0, 3, 6 & Grove Music Online \\
+1960s & Soul/R\&B; Civil Rights context & 27, 30, 34 & Black Music Research Journal \\
+1970s & Post-Seattle Act; punk arrives & 31, 32 & KEXP Archive \\
+1982--88 & Sub Pop founded; proto-grunge & 294, 297, 310 & Sub Pop Records \\
+1988--92 & Grunge explosion; major labels & 311--314 & AllMusic \\
+1990--98 & Riot grrrl Olympia; indie folk & 276, 277, 53 & K Records \\
+2000--pres. & Post-grunge diversification & 58, 86, 44 & KEXP \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Genre $\rightarrow$ Music Theory Curriculum Maps}
+
+\subsubsection{Jazz (Degrees 0--22)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}XL{3.2cm}L{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tblhdr{Concept} & \tblhdr{Specificity} & \tblhdr{Example Artist (deg.)} & \tblhdr{Level} \\
+\midrule
+ii--V--I progression & Diatonic function harmony & Quincy Jones (0) & Intermediate \\
+Tritone substitution & Chromatic bII7 for V7 & Bill Frisell (1) & Advanced \\
+Modal jazz & Dorian, Mixolydian, Lydian & Marc Seales (13) & Intermediate \\
+Chord extensions & Tertian harmony beyond 7th & Thomas Marriott (15) & Intermediate \\
+Swing rhythm & Compound triplet subdivision & Floyd Standifer (4) & Foundational \\
+Call-and-response & African retention; antiphony & Ernestine Anderson (3) & Foundational \\
+Blue notes & Micro-tonal inflection & Overton Berry (5) & Foundational \\
+Metric modulation & Tempo within tempo (fusion) & Jeff Lorber (16) & Advanced \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Blues (Degrees 35--39)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}XL{3.2cm}L{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tblhdr{Concept} & \tblhdr{Specificity} & \tblhdr{Example Artist (deg.)} & \tblhdr{Level} \\
+\midrule
+12-bar blues form & Tonic-subdominant-dominant cycle & Robert Cray (35) & Foundational \\
+Blues scale & Pentatonic + $\flat$5 tritone & Ayron Jones (37) & Foundational \\
+Bent notes / vibrato & Expressive micro-tonality & Jimi Hendrix (36) & Intermediate \\
+Lydian mode & Bright \#4 scale (``Bold as Love'') & Jimi Hendrix (36) & Advanced \\
+Dominant 7th as tonic & Non-resolving dominant color & Robert Cray (35) & Intermediate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Grunge / Metal (Degrees 296--359)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}XL{3.8cm}L{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tblhdr{Concept} & \tblhdr{Specificity} & \tblhdr{Example Artist (deg.)} & \tblhdr{Level} \\
+\midrule
+Drop-D tuning & Lowered 6th string; power chords & Nirvana (311) & Foundational \\
+Lydian mode & Kim Thayil's raised 4th tension & Soundgarden (346) & Advanced \\
+Phrygian dominant & $\flat$2 scale; ``Down in a Hole'' & Alice in Chains (347) & Advanced \\
+Metric modulation & Tempo-feel shift; mathcore & Botch (344, 352) & Advanced \\
+Drone theory & Sustained tones; Helmholtz & Melvins (308, 345) & Advanced \\
+Odd time signatures & 7/8, 11/8, prime-number meters & Botch (289, 332) & Advanced \\
+Riot grrrl deconstruction & Wrong theory as statement & Bikini Kill (276) & Advanced \\
+Power chord & Root + 5th; modal ambiguity & Nirvana (311) & Foundational \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{College Department Mapping}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tblhdr{.college/ Path} & \tblhdr{Content Type} & \tblhdr{Relevant Degrees} \\
+\midrule
+\texttt{music/theory/harmony/} & Chord construction, progressions & All \\
+\texttt{music/theory/rhythm/} & Meter, subdivision, polyrhythm & All \\
+\texttt{music/theory/scales/} & Scales, modes, inflections & All genres \\
+\texttt{music/theory/form/} & 12-bar blues, AABA, verse-chorus & Genre-specific \\
+\texttt{music/history/jazz/} & Jazz history and evolution & 0--22 \\
+\texttt{music/history/seattle/} & Seattle-specific music history & All \\
+\texttt{music/history/riot-grrrl/} & Feminist punk history & 276, 277, 280, 357 \\
+\texttt{music/history/olympia-krecords/} & K Records ecosystem & 49, 50, 276, 277 \\
+\texttt{mathematics/number-theory/ratios/} & Interval ratios (3:2 = 5th) & Any harmonic \\
+\texttt{mathematics/trigonometry/unit-circle/} & Pitch cycles = circular functions & Modal artists \\
+\texttt{mathematics/calculus/fourier/} & Timbre = sum of sine waves & Electronic \\
+\texttt{mathematics/sequences/} & Rhythm as integer sequences & Mathcore, jazz \\
+\texttt{mind-body/performance/} & Stage presence, practice psychology & energy $\geq$7 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Unit Circle -- Mathematics Bridge}
+
+\begin{warnbox}
+\textbf{\sffamily\textcolor{secondary}{Critical Connection: The CSV IS the Unit Circle}}
+
+The 360-artist dataset maps directly to \textit{The Space Between}'s unit circle chapters.
+Artist at degree $N$ occupies radian position $N \times \frac{\pi}{180}$. Energy maps to radius.
+Genre maps to quadrant. This is not a metaphor --- it is structural identity.
+
+\medskip
+Key bridges that MUST be made explicit in every harmonically-rich release:
+\begin{itemize}[leftmargin=1.5em,topsep=2pt]
+  \item Perfect 5th = 3:2 frequency ratio $\rightarrow$ \texttt{.college/mathematics/number-theory/ratios/}
+  \item Modal theory = scale rotations = circular permutations $\rightarrow$ \texttt{.college/mathematics/trigonometry/unit-circle/}
+  \item Timbre = Fourier series (sum of sinusoids) $\rightarrow$ \texttt{.college/mathematics/calculus/fourier/}
+  \item Polyrhythm = integer ratio operations (4:3 = perfect fourth, inverted) $\rightarrow$ \texttt{.college/mathematics/sequences/}
+  \item Botch's mathcore: 7/8, 11/8 = prime-number meters $\rightarrow$ \texttt{.college/mathematics/sequences/}
+\end{itemize}
+\end{warnbox}
+
+\subsection{Cultural Attribution Standards}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tblhdr{Situation} & \tblhdr{Required Language} & \tblhdr{Boundary} \\
+\midrule
+Describing jazz origins & ``Black American musical tradition rooted in\ldots'' & ABSOLUTE \\
+Blues in rock context & ``Blues tradition created by Black American musicians'' & ABSOLUTE \\
+Garfield High School & ``Historically Black institution; produced\ldots'' & GATE \\
+Indigenous territory & Nation-specific (Duwamish, Muckleshoot, Suquamish) & ABSOLUTE \\
+Riot grrrl context & Feminist/political framing explicit & GATE \\
+Mia Zapata (The Gits) & Factual, dignified; no sensationalism & ABSOLUTE \\
+Living artist claim & Public record only; no speculation & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Authoritative Music Sources:}
+\begin{itemize}[leftmargin=2em,topsep=2pt]
+  \item Grove Music Online / Oxford Music Online --- peer-reviewed music encyclopedia
+  \item AllMusic database --- discographic data, genre classifications
+  \item Black Music Research Journal (Columbia College Chicago)
+  \item Journal of the Society for American Music (peer-reviewed)
+\end{itemize}
+
+\textbf{Seattle-Specific:}
+\begin{itemize}[leftmargin=2em,topsep=2pt]
+  \item Seattle Civil Rights \& Labor History Project (UW): \url{depts.washington.edu/civilr/}
+  \item KEXP programming archives: \url{kexp.org}
+  \item Sub Pop Records discography: \url{subpop.com}
+  \item K Records catalog: \url{krecs.com}
+\end{itemize}
+
+\textbf{Cultural Attribution:}
+\begin{itemize}[leftmargin=2em,topsep=2pt]
+  \item OCAP\textregistered{} Principles (First Nations Information Governance Centre): \url{fnigc.ca}
+  \item CARE Principles for Indigenous Data Governance: \url{gida-global.org}
+  \item UN Declaration on the Rights of Indigenous Peoples (UNDRIP): \url{un.org}
+  \item Duwamish Tribe: \url{duwamishtribe.org}
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 \quad MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Mission Objective:}{Build and execute a fully autonomous, continuous-release educational
+engine that processes all 360 artists in \texttt{seattle\_360\_geo.csv} sequentially. ``Done'' looks
+like \texttt{releases/seattle-360/359-unwound/} existing as a complete, Safety-Warden-passed release,
+with \texttt{theory-genealogy.json} tracing the connected theoretical lineage from degree 0
+(Quincy Jones) through degree 359 (Unwound).}
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+INPUT: seattle_360_geo.csv (360 rows, degrees 0-359)
+                |
+                v
++----------------------------------------------------------+
+| WAVE 0: FOUNDATION (Sequential, <5 min per artist)       |
+|   CSV Row[N] --> ArtistProfile[N]                        |
+|   knowledge-state.json --> ActiveContext[N] (<=2K)       |
+|   college-node-index.json --> CollegeIndex[N]            |
+|   theory-genealogy.json --> TheoryGenealogy[N]           |
++------------------+-------------------------------+-------+
+                   |                               |
+                   v                               v
++--------------------+              +---------------------+
+| WAVE 1A: Theory    |              | WAVE 1B: College    |
+| Mapping (CEDAR)    |              | Linking (ORCA)      |
+| Sonnet             |              | Sonnet              |
+| -> TheoryNodeList  |              | -> CollegeLinkList  |
++----------+---------+              +-----------+---------+
+           +-------------------+---+
+                               v
+           +-----------------------------------+
+           | WAVE 2: FLEET RESEARCH (HAWK/Opus)|
+           |   PDF + .tex + index.html + json  |
+           +------------------+----------------+
+                              v
+           +-----------------------------------+
+           | WAVE 3a: SAFETY WARDEN (Opus)     |
+           |   BLOCK --> CAPCOM --> halt        |
+           |   PASS  --> continue              |
+           +------------------+----------------+
+                              v
+           +-----------------------------------+
+           | WAVE 3b: RELEASE (HERON/Sonnet)   |
+           |   Atomic publish + write-protect  |
+           +------------------+----------------+
+                              v
+           +-----------------------------------+
+           | WAVE 3c: RETROSPECTIVE (OWL/Opus) |
+           |   NASA SE lessons learned         |
+           +------------------+----------------+
+                              v
+           +-----------------------------------+
+           | WAVE 3d: CARRY FORWARD (D-FIR)    |
+           |   KnowledgeState[N+1]             |
+           |   N<359: loop  |  N=359: COMPLETE |
+           +------------------+----------------+
+\end{asciibox}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.3cm}L{3.8cm}C{1cm}C{1.2cm}C{1.5cm}C{2cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tblhdr{\#} & \tblhdr{Component} & \tblhdr{Wave} & \tblhdr{Track} & \tblhdr{Model} & \tblhdr{Tokens/Artist} & \tblhdr{Depends On} \\
+\midrule
+0 & Shared Types & 0 & --- & Haiku & $\sim$4K (once) & None \\
+1 & CSV Intake Engine & 0 & --- & Haiku & $\sim$2K & \#0 \\
+2 & Music Theory Mapper & 1A & A & Sonnet & $\sim$8K & \#1 \\
+3 & Fleet Research Generator & 2 & --- & Opus & $\sim$20K & \#2, \#4 \\
+4 & College Knowledge Linker & 1B & B & Sonnet & $\sim$6K & \#1 \\
+5 & Release Pipeline & 3b & --- & Sonnet & $\sim$3K & \#3, \#8 \\
+6 & Retrospective Engine & 3c & --- & Opus & $\sim$8K & \#5 \\
+7 & Carry-Forward Controller & 3d & --- & Sonnet & $\sim$4K & \#6 \\
+8 & Safety Warden & 3a & --- & Opus & $\sim$6.5K & \#3 \\
+\midrule
+\rowcolor{lightprimary}
+& \textbf{Per-artist total} & & & & $\sim$\textbf{57.5K} & \\
+& \textbf{360-run total} & & & & $\sim$\textbf{20.7M} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Deliverables Table}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.3cm}L{4cm}XL{4cm}}
+\toprule
+\rowcolor{primary}
+\tblhdr{\#} & \tblhdr{Deliverable} & \tblhdr{Acceptance Criteria} & \tblhdr{Component Spec} \\
+\midrule
+1 & \texttt{ArtistProfile[360]} & All 360 parsed; schema-valid & \texttt{components/01-csv-intake-engine.md} \\
+2 & \texttt{TheoryNodeList} per artist & $\geq$3 theory concepts; audible evidence & \texttt{components/02-music-theory-mapper.md} \\
+3 & Fleet research PDF per artist & XeLaTeX compiles; 3 stages; Warden PASS & \texttt{components/03-fleet-research-generator.md} \\
+4 & \texttt{CollegeLinkList} per artist & $\geq$3 links; no duplicates & \texttt{components/04-college-knowledge-linker.md} \\
+5 & Release artifact set (360×) & All files in \texttt{NNN-[slug]/} paths & \texttt{components/05-release-pipeline.md} \\
+6 & \texttt{retrospective.md} per artist & $\geq$1 IMMEDIATE carry item; sourced & \texttt{components/06-retrospective-engine.md} \\
+7 & \texttt{knowledge-state.json} (final) & Atomic; full genealogy; 360 entries & \texttt{components/07-carry-forward-controller.md} \\
+8 & Safety audit log (360×) & All releases PASS; BLOCKs escalated & \texttt{components/08-safety-warden.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}L{2cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Wave} & \tblhdr{Name} & \tblhdr{Mode} & \tblhdr{Models} & \tblhdr{Est. Tokens} & \tblhdr{Cache Benefit} \\
+\midrule
+0 & Foundation & Sequential & Haiku & $\sim$6K & State summary cached \\
+1A & Theory Mapping & Parallel & Sonnet & $\sim$8K & ArtistProfile cached \\
+1B & College Linking & Parallel & Sonnet & $\sim$6K & ArtistProfile cached \\
+2 & Fleet Research & Sequential & Opus & $\sim$20K & Wave 1 outputs cached \\
+3a & Safety Audit & Sequential & Opus & $\sim$6.5K & PDF cached \\
+3b & Release & Sequential & Sonnet & $\sim$3K & Safety pass cached \\
+3c & Retrospective & Sequential & Opus & $\sim$8K & Release record cached \\
+3d & Carry Forward & Sequential & Sonnet & $\sim$4K & Retro record cached \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Foundation]
+   |- ArtistProfile[N] -------------------------+
+   |- ActiveContext[N] (<=2K) ----------------+-|
+   |- CollegeIndex[N] ----------------------+-|-|
+   |- TheoryGenealogy[N] ------------------+-|-|-|
+                                           | | | |
+                         +-----------+    | | | |
+                         | Track 1A  |<---+ | | |
+                         | Theory    |<-----+ | |
+                         | Mapper    |        | |
+                         +-----+-----+        | |
+                               |         +----+-+-+
+                               |         | Track 1B|
+                               |         | College |
+                               |         | Linker  |
+                               |         +----+----+
+                               +----+----+    |
+                                    |         |
+                                    v         |
+                              [Wave 2: Fleet Research]
+                                    |
+                             +------+-------+
+                             | Wave 3a:     |
+                             | Safety Warden|
+                             | BLOCK/PASS   |
+                             +------+-------+
+                          BLOCK |   | PASS
+                                |   v
+                      CAPCOM -> [Wave 3b: Release]
+                                    |
+                                    v
+                             [Wave 3c: Retro]
+                                    |
+                                    v
+                             [Wave 3d: Carry]
+                                    |
+                          N<359: loop to Wave 0[N+1]
+                          N=359: CYCLE-COMPLETE
+\end{asciibox}
+
+\section{Test Plan Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Category} & \tblhdr{Count} & \tblhdr{Priority} & \tblhdr{Failure Action} \\
+\midrule
+Safety-critical (SC-01 to SC-22) & 22 & Mandatory & BLOCK release \\
+Core functionality (per-component) & 64 & Required & BLOCK release \\
+Integration (cross-component) & 32 & Required & BLOCK release \\
+Edge cases (unusual artists/genres) & 18 & Best-effort & LOG + continue \\
+Performance (token/time budget) & 12 & Best-effort & WARN + log \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{148} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Selected Safety-Critical Tests (BLOCK on Failure)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{blockred}
+\tblhdr{Test ID} & \tblhdr{Verifies} & \tblhdr{Component} \\
+\midrule
+SC-01 & All biographical claims have professional citation & 03-fleet-research-gen \\
+SC-02 & Indigenous attribution uses nation-specific language & 08-safety-warden \\
+SC-03 & Black American musical attribution explicit & 08-safety-warden \\
+SC-06 & Mia Zapata dignity protocol (The Gits) & 08-safety-warden \\
+SC-09 & XeLaTeX compiles without errors & 03-fleet-research-gen \\
+SC-10 & Safety Warden BLOCK prevents publication & 05-release-pipeline \\
+SC-11 & Atomic release writes (no partial artifacts) & 05-release-pipeline \\
+SC-13 & KnowledgeState atomic write & 07-carry-forward \\
+SC-17 & Theory claims have audible evidence & 02-theory-mapper \\
+SC-20 & Engine resumability verified & 05-release-pipeline \\
+SC-21 & Opus used for Safety Warden (not Sonnet/Haiku) & 08-safety-warden \\
+SC-22 & OCAP\textregistered{} compliance for Indigenous knowledge & 08-safety-warden \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Role} & \tblhdr{Agent (PNW)} & \tblhdr{Wave} & \tblhdr{Responsibility} \\
+\midrule
+FLIGHT & RAVEN & All waves & Flight director; go/no-go authority; wave sequencing \\
+PLAN & SALMON & Wave 0 & CSV ingestion; ArtistProfile generation \\
+INTEL-A & CEDAR & Wave 1A & Music theory curriculum mapping (Sonnet) \\
+INTEL-B & ORCA & Wave 1B & College Knowledge deep-link generation (Sonnet) \\
+EXEC & HAWK & Wave 2 & Fleet research mission synthesis (Opus) \\
+SAFETY & WARDEN & Wave 3a & Attribution, accuracy, cultural sensitivity (Opus; BLOCK authority) \\
+RELEASE & HERON & Wave 3b & Sequential atomic release coordination (Sonnet) \\
+RETRO & OWL & Wave 3c & Retrospective lessons learned extraction (Opus) \\
+STATE & DOUGLAS-FIR & Wave 3d & KnowledgeState management; carry-forward (Sonnet) \\
+CAPCOM & Human & BLOCK gate & Reviews BLOCK-level safety findings; authorizes resume \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Metric} & \tblhdr{Value} \\
+\midrule
+Total artists & 360 (degrees 0°--359°) \\
+Total components & 9 (including Safety Warden) \\
+Parallel tracks & 2 (Wave 1A Theory + Wave 1B College) \\
+Sequential depth & 4 waves per artist cycle \\
+Activation profile & Fleet (Full crew, 10 roles including CAPCOM) \\
+Model split & $\approx$30\% Opus / $\approx$60\% Sonnet / $\approx$10\% Haiku \\
+Tokens per artist & $\approx$57.5K \\
+Total token budget & $\approx$20.7M \\
+Estimated context windows & $\approx$720 (2 per artist) \\
+Estimated wall time & $\approx$180 sessions (2 artists/session) \\
+Total tests & 148 (22 safety-critical mandatory-pass) \\
+College departments linked & 7+ per release \\
+Output root & \texttt{releases/seattle-360/} \\
+State file & \texttt{releases/seattle-360/knowledge-state.json} \\
+Genealogy file & \texttt{releases/seattle-360/theory-genealogy.json} \\
+Completion signal & \texttt{CYCLE-COMPLETE} after degree 359 (Unwound) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``Jackson Street was once the Harlem of the West. The engine completes its
+rotation when the knowledge state can show, in verifiable connected steps, how Quincy Jones
+at 0° and Unwound at 359° are teaching the same mathematics in different languages.
+The thread never broke. It just changed key.''}
+
+\medskip
+\textcolor{subtlegray}{\sffamily\small Through-line: Seattle 360 Continuous Release Engine $\cdot$ GSD Ecosystem $\cdot$ 2026}
+\end{quotebox}
+
+\end{document}
