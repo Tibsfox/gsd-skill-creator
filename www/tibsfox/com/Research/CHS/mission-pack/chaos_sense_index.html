@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Making Sense of Chaos — GSD Research Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary:   #1A237E;
+    --secondary: #006064;
+    --tertiary:  #4A148C;
+    --accent:    #0097A7;
+    --light-primary: #E8EAF6;
+    --light-secondary: #E0F7FA;
+    --light-tertiary: #F3E5F5;
+    --row-gray:  #F5F5F5;
+    --border:    #BDBDBD;
+    --subtle:    #757575;
+    --dark-text: #212121;
+    --white:     #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FAFAFA;
+    color: var(--dark-text);
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #283593 40%, var(--tertiary) 100%);
+    color: var(--white);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(0,151,167,0.15);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(74,20,140,0.2);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 14px;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  header h1 em {
+    font-style: italic;
+    color: #80DEEA;
+  }
+  .header-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.78);
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+  .header-pipeline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: #80DEEA;
+    letter-spacing: 1.5px;
+  }
+  .pipeline-arrow { color: rgba(255,255,255,0.5); }
+
+  /* ── MAIN LAYOUT ─────────────────────────────────────── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  /* ── FILE CARDS ──────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 640px) { .card-grid { grid-template-columns: 1fr; } }
+
+  .file-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .file-card:hover {
+    box-shadow: 0 8px 24px rgba(26,35,126,0.14);
+    transform: translateY(-2px);
+  }
+  .card-header {
+    padding: 18px 20px 14px;
+  }
+  .card-header.pdf { background: var(--light-primary); border-bottom: 2px solid var(--primary); }
+  .card-header.tex { background: var(--light-secondary); border-bottom: 2px solid var(--secondary); }
+  .card-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .card-type.pdf { color: var(--primary); }
+  .card-type.tex { color: var(--secondary); }
+  .card-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 4px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--subtle);
+  }
+  .card-body {
+    padding: 16px 20px 20px;
+  }
+  .card-meta {
+    font-size: 12px;
+    color: var(--subtle);
+    margin-bottom: 14px;
+    font-family: 'DM Mono', monospace;
+  }
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .download-btn.pdf {
+    background: var(--primary);
+    color: var(--white);
+  }
+  .download-btn.pdf:hover { background: #283593; }
+  .download-btn.tex {
+    background: var(--secondary);
+    color: var(--white);
+  }
+  .download-btn.tex:hover { background: #004D40; }
+
+  /* ── CONTENTS TABLE ──────────────────────────────────── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contents-block {
+    margin-bottom: 40px;
+  }
+
+  .stage-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .stage-badge {
+    flex-shrink: 0;
+    width: 100px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .stage-badge.s1 { background: var(--light-primary); color: var(--primary); border: 1px solid var(--primary); }
+  .stage-badge.s2 { background: var(--light-secondary); color: var(--secondary); border: 1px solid var(--secondary); }
+  .stage-badge.s3 { background: var(--light-tertiary); color: var(--tertiary); border: 1px solid var(--tertiary); }
+  .stage-content h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    color: var(--dark-text);
+    margin-bottom: 4px;
+  }
+  .stage-content p {
+    font-size: 13px;
+    color: var(--subtle);
+    line-height: 1.55;
+  }
+
+  /* ── MODULE GRID ─────────────────────────────────────── */
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0 32px;
+  }
+  @media (max-width: 640px) { .module-grid { grid-template-columns: 1fr 1fr; } }
+  .module-tile {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .module-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .module-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--dark-text);
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .module-model {
+    font-size: 11px;
+    color: var(--subtle);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── USAGE + RECOMPILE ───────────────────────────────── */
+  .usage-block, .recompile-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .usage-block h2, .recompile-block h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .usage-steps {
+    counter-reset: step;
+    list-style: none;
+  }
+  .usage-steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .usage-steps li::before {
+    content: counter(step);
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    background: var(--row-gray);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--tertiary);
+  }
+  pre {
+    background: #1A1A2E;
+    color: #A5D8FF;
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    padding: 18px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-top: 10px;
+  }
+
+  /* ── CLOSING QUOTE ───────────────────────────────────── */
+  .closing-quote {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-top: 40px;
+  }
+  .closing-quote p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--dark-text);
+    margin-bottom: 10px;
+  }
+  .closing-quote cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--subtle);
+    font-style: normal;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--subtle);
+    font-family: 'DM Mono', monospace;
+    border-top: 1px solid var(--border);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">GSD Research Mission Package</div>
+  <h1>Making Sense<br>of <em>Chaos</em></h1>
+  <p class="header-subtitle">
+    Color Theory · Information Theory · Category Theory · UI/UX Design · Modern Web for the Age of Agents
+  </p>
+  <div class="header-pipeline">
+    <span>VISION</span>
+    <span class="pipeline-arrow">→</span>
+    <span>RESEARCH</span>
+    <span class="pipeline-arrow">→</span>
+    <span>MISSION</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- FILE CARDS -->
+  <div class="card-grid">
+    <div class="file-card">
+      <div class="card-header pdf">
+        <div class="card-type pdf">PDF Document</div>
+        <div class="card-name">chaos_sense.pdf</div>
+        <div class="card-desc">Full three-stage pipeline · 31 pages</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">XeLaTeX · DejaVu fonts · March 27, 2026</div>
+        <a href="chaos_sense.pdf" download class="download-btn pdf">
+          ↓ Download PDF
+        </a>
+      </div>
+    </div>
+    <div class="file-card">
+      <div class="card-header tex">
+        <div class="card-type tex">LaTeX Source</div>
+        <div class="card-name">chaos_sense.tex</div>
+        <div class="card-desc">Recompilable · XeLaTeX · Fully commented</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">Requires XeLaTeX + DejaVu fonts</div>
+        <a href="chaos_sense.tex" download class="download-btn tex">
+          ↓ Download .tex
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENTS -->
+  <div class="contents-block">
+    <div class="section-label">Document Contents</div>
+
+    <div class="stage-row">
+      <div class="stage-badge s1">Stage 1</div>
+      <div class="stage-content">
+        <h3>Vision Document</h3>
+        <p>Problem statement (5 problems) · Core concept and domain map · Module architecture · Chipset configuration · Scope boundaries · 12 success criteria · Through-line connecting to GSD ecosystem and Amiga Principle</p>
+      </div>
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-badge s2">Stage 2</div>
+      <div class="stage-content">
+        <h3>Research Reference — Six Modules</h3>
+        <p>Full research survey across all six modules with citations, data tables, and cross-references. Safety and sensitivity considerations. Complete bibliography (peer-reviewed + professional sources).</p>
+      </div>
+    </div>
+
+    <div class="module-grid">
+      <div class="module-tile">
+        <div class="module-id">M1</div>
+        <div class="module-title">Chromatic Signal</div>
+        <div class="module-model">Sonnet · Color perception biology, quantum models, Gestalt</div>
+      </div>
+      <div class="module-tile">
+        <div class="module-id">M2</div>
+        <div class="module-title">Entropy & Perception</div>
+        <div class="module-model">Sonnet · Shannon formalism, cognitive load, complexity</div>
+      </div>
+      <div class="module-tile">
+        <div class="module-id">M3</div>
+        <div class="module-title">Categorical Structure</div>
+        <div class="module-model">Opus · ACT, functors, design tokens as typing system</div>
+      </div>
+      <div class="module-tile">
+        <div class="module-id">M4</div>
+        <div class="module-title">Order From Chaos</div>
+        <div class="module-model">Sonnet · Emergence, edge of chaos, Conway functor</div>
+      </div>
+      <div class="module-tile">
+        <div class="module-id">M5</div>
+        <div class="module-title">Agentic Interface</div>
+        <div class="module-model">Sonnet · H-ACD, GenUI, 8 design patterns, dual-audience</div>
+      </div>
+      <div class="module-tile">
+        <div class="module-id">M6</div>
+        <div class="module-title">Synthesis</div>
+        <div class="module-model">Opus · Formal channel model, 4 constraints, GSD implications</div>
+      </div>
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-badge s3">Stage 3</div>
+      <div class="stage-content">
+        <h3>Mission Package</h3>
+        <p>Fleet activation profile (18 roles) · Wave execution plan (W0–W3, 2 parallel tracks) · 2 HITL gates · Token budget ~155,000 · 36-test test plan (4 safety-critical) · Full crew manifest · Verification matrix</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- USAGE INSTRUCTIONS -->
+  <div class="usage-block">
+    <h2>How to Hand This to GSD / Skill-Creator</h2>
+    <ol class="usage-steps">
+      <li>Open Claude Code in your <code>gsd-skill-creator</code> dev branch environment.</li>
+      <li>Paste the contents of <code>chaos_sense.pdf</code> or feed the PDF as context, along with the instruction: <em>"Execute this research mission package. Begin at Wave 0."</em></li>
+      <li>GSD orchestrator will initialize the Fleet activation profile, assign CRAFT agents to modules, and begin Wave 0 foundation work.</li>
+      <li>Approve the first <strong>HITL CAPCOM gate</strong> after Wave 1B (agentic UX coverage review) before Wave 1C proceeds.</li>
+      <li>Approve the second <strong>HITL CAPCOM gate</strong> after Wave 2 (formal model review) before Wave 3 publication begins.</li>
+      <li>Receive final deliverables: the complete research document as a LaTeX PDF, source files, and index page.</li>
+    </ol>
+  </div>
+
+  <!-- RECOMPILE INSTRUCTIONS -->
+  <div class="recompile-block">
+    <h2>Recompile the LaTeX Source</h2>
+    <p style="font-size:13.5px; margin-bottom:8px;">Requires XeLaTeX with DejaVu fonts installed (<code>fonts-dejavu</code> on Ubuntu).</p>
+    <pre>xelatex -interaction=nonstopmode chaos_sense.tex
+xelatex -interaction=nonstopmode chaos_sense.tex
+xelatex -interaction=nonstopmode chaos_sense.tex</pre>
+    <p style="font-size:12px; color: var(--subtle); margin-top:10px;">Three passes are required to resolve the table of contents, cross-references, lastpage counter, and hyperlink destinations.</p>
+  </div>
+
+  <!-- CLOSING QUOTE -->
+  <div class="closing-quote">
+    <p>"Making sense of chaos is not the imposition of order upon disorder. It is the discovery of the latent morphisms that were always there. Color is not decoration — it is a compressed information channel subject to Shannon's laws. A design system is not a style guide — it is a category with objects, morphisms, and a composition law. An interface is not a screen — it is a functor from the space of intent to the space of perceivable state."</p>
+    <cite>— GSD Research Mission: Making Sense of Chaos, 2026</cite>
+  </div>
+
+</main>
+
+<footer>
+  GSD ECOSYSTEM &nbsp;·&nbsp; MILES TIBERIUS FOXGLOVE &nbsp;·&nbsp; MARCH 27, 2026 &nbsp;·&nbsp; FLEET PROFILE · 18 ROLES · 6 MODULES
+</footer>
+
+</body>
+</html>

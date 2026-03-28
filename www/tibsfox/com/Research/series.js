@@ -25,6 +25,7 @@
     { id: 'CAR', name: 'The Cars', path: 'CAR/index.html' },
     { id: 'CBC', name: 'CBC/Radio-Canada', path: 'CBC/index.html' },
     { id: 'CGI', name: 'Caliber Integration', path: 'CGI/index.html' },
+    { id: 'CHS', name: 'Chaos Sense', path: 'CHS/index.html' },
     { id: 'CDL', name: 'College Deep Linking', path: 'CDL/index.html' },
     { id: 'CDS', name: 'Central District', path: 'CDS/index.html' },
     { id: 'CDP', name: 'Coldplay', path: 'CDP/index.html' },
