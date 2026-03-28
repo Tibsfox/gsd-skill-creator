@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 8&deg; &mdash; Golden-crowned Kinglet &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.threshold { background: #880E4F; }
+    .theory-icon.silence-rhyme { background: #1A237E; }
+    .theory-icon.nyquist { background: #E65100; }
+    .theory-icon.shepard { background: #7B1FA2; }
+    .theory-icon.minimalism { background: #2E7D32; }
+    .theory-icon.canopy { background: var(--puget-dark); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Progression card */
+    .progression-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .progression-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .progression-table { margin: 0.75rem 0; width: 100%; }
+    .progression-table th { font-size: 0.72rem; }
+    .progression-table td { font-size: 0.8rem; }
+
+    /* Threshold card (unique to degree 8) */
+    .threshold-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F3E5F5 100%);
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .threshold-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #880E4F;
+    }
+    .hearing-bar {
+      display: flex;
+      margin: 0.75rem 0;
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .hearing-bar .band {
+      padding: 0.35rem 0.3rem;
+      text-align: center;
+      color: white;
+    }
+    .hearing-bar .bass { background: #1A237E; flex: 1; }
+    .hearing-bar .mid { background: #1565C0; flex: 2; }
+    .hearing-bar .treble { background: #7B1FA2; flex: 1.5; }
+    .hearing-bar .ultra { background: #880E4F; flex: 1; }
+    .hearing-bar .beyond { background: #424242; flex: 0.5; color: #999; }
+
+    /* Silence rhyme card */
+    .silence-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #E0F2F1 100%);
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .silence-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Network card */
+    .network-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #E0F2F1 100%);
+      border: 1px solid #A5D6A7;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .network-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #2E7D32;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">8&deg;</div>
+      <div class="release-title-block">
+        <h2>Golden-crowned Kinglet</h2>
+        <div class="scientific">Regulus satrapa &middot; Family Regulidae (Kinglets)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Ultra-high Ascending Zee-zee-zee &middot; Spruce-fir Canopy &middot; Resident &middot; Energy 1</div>
+
+    <blockquote>
+      The Golden-crowned Kinglet threads a rising zee-zee-zee through the highest branches
+      of the tallest conifers &mdash; 6 to 10 kilohertz, ultra-high, ascending, barely audible.
+      Many listeners over 40 cannot hear it at all. The sound exists. The air vibrates. But the
+      frequency exceeds the receiver&rsquo;s bandwidth. Degree 8 returns to silence &mdash; not
+      the silence of absence (degree 0) but the silence of the threshold. The first silence was
+      in the transmitter. This silence is in the receiver.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Golden-crowned Kinglet is one of the smallest birds in North America &mdash; a tiny
+          passerine of the family <strong>Regulidae</strong> (kinglets), order Passeriformes. At
+          <strong>3.1&ndash;4.3 inches</strong> and <strong>4&ndash;8 grams</strong>, it weighs
+          less than two nickels. The genus name <strong>Regulus</strong> means &ldquo;little king&rdquo;
+          in Latin &mdash; from the golden crown patch the bird raises during displays. The species
+          epithet <strong>satrapa</strong> means &ldquo;ruler&rdquo; (from Persian <em>satrap</em>).
+          Taxonomy crowns this bird: the little king, the governor of the highest branches.
+        </p>
+        <p>
+          <strong>Physical description.</strong> Olive-green above, pale grayish-white below, with
+          bold <strong>black-and-white wing bars</strong>. A distinctive facial pattern: pale face,
+          thin dark eyeline, and the diagnostic <strong>golden-yellow to orange crown patch</strong>
+          bordered by black lateral stripes. Males show brilliant orange within the yellow; females
+          are entirely yellow. The crown is usually concealed as a narrow yellow line &mdash; the
+          full golden blaze appears only during erection display. The overall impression: a flicker
+          of motion in the high canopy, olive-green against green needles, so small it barely
+          registers as a discrete object. Heard &mdash; if heard at all &mdash; as a thread of
+          sound at the edge of perception.
+        </p>
+        <p>
+          <strong>Size record.</strong> At 4&ndash;8 grams, the kinglet is the
+          <strong>smallest bird in the circle</strong> &mdash; less than half the mass of the
+          Pacific Wren (8&ndash;12 g), one-fifth the Hermit Thrush (23&ndash;37 g), roughly
+          1/300th the Great Blue Heron (2,100&ndash;2,500 g). This is survival at the smallest
+          possible scale.
+        </p>
+
+        <!-- Threshold Card -->
+        <div class="threshold-card">
+          <h3>The Ultrasonic Threshold &mdash; 6&ndash;10 kHz</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Golden-crowned Kinglet&rsquo;s song falls at <strong>6&ndash;10 kHz</strong> &mdash;
+            near or above the upper limit of adult human hearing. Age-related hearing loss
+            (presbycusis) preferentially degrades high-frequency sensitivity. By age 40, many
+            adults have lost significant sensitivity above 8 kHz. By age 50, many cannot detect
+            tones above 10 kHz. <strong>The bird sings. Many listeners hear silence.</strong>
+          </p>
+          <div class="hearing-bar">
+            <div class="band bass">20&ndash;250 Hz<br>Bass</div>
+            <div class="band mid">250 Hz&ndash;4 kHz<br>Mid</div>
+            <div class="band treble">4&ndash;8 kHz<br>Treble</div>
+            <div class="band ultra">8&ndash;12 kHz<br>Kinglet</div>
+            <div class="band beyond">&gt;12 kHz</div>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--page-text-light); margin-top: 0.5rem; font-family: system-ui, sans-serif;">
+            The boundary between audible and inaudible is not in the physics of the sound &mdash;
+            it is in the biology of the listener. A 20-year-old hears the song clearly. A 50-year-old
+            may hear nothing. The forest does not change. The song does not change. The boundary
+            moves inside the human ear. This is the biological Nyquist limit.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Ultra-high Ascending Series</h2>
+        <h3>Song Structure</h3>
+        <p>
+          The song is a series of <strong>3&ndash;7 ultra-thin, ascending notes</strong> &mdash;
+          <em>zee-zee-zee-zee</em> &mdash; each note higher than the last, climbing from
+          approximately 6 kHz toward 10 kHz over <strong>1.5&ndash;3.0 seconds</strong>. Each
+          note is a narrow-bandwidth, nearly pure tone &mdash; wispy, thread-like, with minimal
+          harmonic content. The amplitude is <strong>very low</strong>: this is one of the
+          quietest passerine songs in North America. Ultra-high frequency combined with low
+          amplitude means the signal is doubly disadvantaged for human perception &mdash; both
+          faint and above the hearing threshold.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Song frequency range</td><td>6&ndash;10 kHz (ultra-high; ascending)</td></tr>
+            <tr><td>Call frequency</td><td>8&ndash;10 kHz (thin <em>tsee</em>)</td></tr>
+            <tr><td>Notes per song</td><td>3&ndash;7 (ascending series)</td></tr>
+            <tr><td>Song duration</td><td>1.5&ndash;3.0 s</td></tr>
+            <tr><td>Amplitude</td><td>Very low &mdash; one of the quietest passerine songs</td></tr>
+            <tr><td>Timbre</td><td>Wispy, thread-like, minimal harmonic content</td></tr>
+            <tr><td>Contour</td><td>Ascending &mdash; each note higher, climbing toward inaudibility</td></tr>
+            <tr><td>Peak activity</td><td>Throughout the day, year-round (resident)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>The Ascending Series and the Shepard Tone</h3>
+        <p>
+          The zee-zee-zee <strong>ascends</strong>. Each note is higher than the last. The series
+          climbs toward the ceiling of human hearing and then &mdash; from the listener&rsquo;s
+          perspective &mdash; simply vanishes. It does not resolve. It does not descend. It climbs
+          into inaudibility. For a listener whose hearing is marginal at these frequencies, the
+          experience echoes the <strong>Shepard tone illusion</strong> (1964) &mdash; the auditory
+          illusion of a tone that perpetually ascends without resolving. The kinglet&rsquo;s ascent
+          is not a psychoacoustic trick &mdash; it is the physical reality of singing at frequencies
+          that cross the listener&rsquo;s hearing boundary. The resolution exists. It happens in
+          the ultrasonic. The cadence is real but inaudible.
+        </p>
+
+        <!-- Silence Rhyme Card -->
+        <div class="silence-card">
+          <h3>The Silence Rhyme &mdash; Degree 0&deg; and Degree 8&deg;</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>Degree 0 (Great Blue Heron):</strong> Silence because <strong>no signal</strong>.
+            The transmitter is silent. The bird does not sing.<br>
+            <strong>Degree 8 (Golden-crowned Kinglet):</strong> Silence because the
+            <strong>receiver cannot decode</strong>. The transmitter is active. The signal exists
+            at 8&ndash;10 kHz. But the listener&rsquo;s cochlea cannot transduce it.<br><br>
+            Between them: <strong>seven degrees of audible sound</strong>. The circle&rsquo;s
+            first structural rhyme &mdash; two kinds of silence framing the audible forest.
+          </p>
+          <p style="font-size: 0.82rem; color: var(--page-text-light); margin-top: 0.5rem; font-family: system-ui, sans-serif;">
+            The first silence is in the transmitter. The second silence is in the receiver.
+            Cage&rsquo;s <em>4&prime;33&Prime;</em> asked what silence sounds like. The kinglet answers:
+            silence sounds like a frequency your ears can no longer reach.
+          </p>
+        </div>
+
+        <!-- Network Card -->
+        <div class="network-card">
+          <h3>Interspecies Alarm Network &mdash; Extended to 3 Nodes</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Golden-crowned Kinglet is a <strong>known eavesdropper</strong> on the Black-capped
+            Chickadee alarm system (Templeton et al. 2007). The network grows:
+          </p>
+          <p style="font-size: 0.95rem; color: var(--page-text); font-weight: 600; margin: 0.75rem 0; font-family: system-ui, sans-serif;">
+            Chickadee (3&deg;) &rarr; Nuthatch (5&deg;) &nbsp; + &nbsp; Chickadee (3&deg;) &rarr; Kinglet (8&deg;)
+          </p>
+          <p style="font-size: 0.82rem; color: var(--page-text-light); margin-top: 0.5rem; font-family: system-ui, sans-serif;">
+            3 nodes, 2 directed edges. The alarm system now spans the vertical forest column &mdash;
+            from mixed woodland (chickadee) through conifer trunk (nuthatch) to canopy apex (kinglet).
+            First network extension since degree 5.
+          </p>
+        </div>
+
+        <!-- Spruce-Fir Canopy -->
+        <h2>Spruce-Fir Canopy &mdash; The Highest Perch</h2>
+        <p>
+          The Golden-crowned Kinglet forages and sings at the <strong>very top</strong> of the
+          tallest conifers &mdash; Sitka spruce, western hemlock, Douglas fir, subalpine fir. While
+          other species occupy the understory (wren), mid-canopy (chickadee, nuthatch), or mountain
+          slopes (Hermit Thrush), the kinglet lives at the <strong>absolute apex</strong> of the
+          vertical forest column.
+        </p>
+        <p>
+          <strong>Vertical progression through nine degrees:</strong> sea level / tidal flats (0&deg;)
+          &rarr; understory root tangles (1&deg;) &rarr; mid-canopy (2&deg;&ndash;6&deg;) &rarr;
+          mountain slope (7&deg;) &rarr; <strong>canopy apex (8&deg;)</strong>. The circle has
+          climbed from the water&rsquo;s edge to the top of the tallest tree.
+        </p>
+        <p>
+          <strong>Year-round resident at minimum body mass.</strong> The kinglet does not migrate.
+          It endures PNW winters at 4&ndash;8 grams &mdash; maintaining body temperature through
+          14-hour winter nights by near-continuous foraging during daylight and huddling in dense
+          conifer foliage at night. Metabolic rate among the highest per gram of any bird species.
+          The smallest possible package that can persist year-round in a PNW conifer canopy. Energy 1.
+        </p>
+
+        <!-- Progression Card -->
+        <div class="progression-card">
+          <h3>The Arc: Silence &rarr; Cascade &rarr; Drone &rarr; Language &rarr; Motif &rarr; Metronome &rarr; Question &rarr; Harmony &rarr; Threshold</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degree 8 adds the ULTRASONIC THRESHOLD &mdash; frequency at the boundary of human
+            perception. The ensemble gains its first voice that many listeners cannot hear at all.
+            The circle returns to silence, but for a different reason.
+          </p>
+          <table class="progression-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>0&deg;</th>
+                <th>1&deg;</th>
+                <th>2&deg;</th>
+                <th>3&deg;</th>
+                <th>4&deg;</th>
+                <th>5&deg;</th>
+                <th>6&deg;</th>
+                <th>7&deg;</th>
+                <th>8&deg;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Species</strong></td><td>Heron</td><td>Wren</td><td>V. Thrush</td><td>Chickadee</td><td>Owl</td><td>Nuthatch</td><td>Flycatcher</td><td>H. Thrush</td><td><strong>Kinglet</strong></td></tr>
+              <tr><td><strong>Sound</strong></td><td>Silence</td><td>Cascade</td><td>Tone</td><td>Named call</td><td>4-note</td><td>Steady beat</td><td>Upslur</td><td>Flute spiral</td><td><strong>Zee-zee-zee</strong></td></tr>
+              <tr><td><strong>Synthesis</strong></td><td>None</td><td>FM</td><td>AM</td><td>Combin.</td><td>Rhythm</td><td>Metron.</td><td>Sweep</td><td>Harmonic</td><td><strong>Ultra-high</strong></td></tr>
+              <tr><td><strong>Content</strong></td><td>Absence</td><td>Identity</td><td>Presence</td><td>Referential</td><td>Territory</td><td>Grid</td><td>Question</td><td>Consonance</td><td><strong>Threshold</strong></td></tr>
+              <tr><td><strong>Role</strong></td><td>Rest</td><td>Soloist</td><td>Drone</td><td>Vocalist</td><td>Ostinato</td><td>Click</td><td>Half cad.</td><td>Harmony</td><td><strong>Ultrasonic</strong></td></tr>
+              <tr><td><strong>Habitat</strong></td><td>Estuary</td><td>Old-growth</td><td>Conifer</td><td>Mixed</td><td>Old-growth</td><td>Conifer</td><td>Riparian</td><td>Mountain</td><td><strong>Canopy apex</strong></td></tr>
+              <tr><td><strong>Energy</strong></td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td><strong>1</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon threshold">T</div>
+            <div class="theory-content">
+              <h4>Ultrasonic Threshold (Hearing Boundary) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Song at 6&ndash;10 kHz &mdash; near or above the audiometric ceiling for many adults over 40. The boundary between audible and inaudible is in the listener&rsquo;s biology, not in the physics of the sound. The bird sings; many hear silence.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon silence-rhyme">S</div>
+            <div class="theory-content">
+              <h4>Silence Rhyme (Degrees 0&deg; and 8&deg;) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Two kinds of silence bracket seven audible degrees. Degree 0: no signal. Degree 8: signal above threshold. The first silence is in the transmitter. The second is in the receiver. Cage&rsquo;s <em>4&prime;33&Prime;</em> extended from philosophy to biology.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon nyquist">N</div>
+            <div class="theory-content">
+              <h4>Nyquist Limit as Biological Hearing Boundary <span class="theory-level advanced">Advanced</span></h4>
+              <p>Shannon&rsquo;s channel capacity theorem applies to any communication channel, including the cochlea. The aging ear has a decreasing biological Nyquist frequency. The kinglet is an aliased bird &mdash; information that exceeds the receiver&rsquo;s bandwidth.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon shepard">P</div>
+            <div class="theory-content">
+              <h4>Shepard Tone Illusion (Perpetual Ascent) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The ascending zee-zee-zee climbs toward the hearing ceiling and vanishes. The listener cannot tell if the sound ended or became inaudible &mdash; physics vs. perception. The cadence is real but occurs in the ultrasonic.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon minimalism">M</div>
+            <div class="theory-content">
+              <h4>Energy Minimalism (Amiga Principle) <span class="theory-level foundational">Foundational</span></h4>
+              <p>4&ndash;8 grams. Year-round resident. Energy 1. The smallest bird, the quietest song, the highest frequency. Maximum survival with minimum resources. Every gram accounted for. Every calorie critical.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon canopy">C</div>
+            <div class="theory-content">
+              <h4>Canopy Apex Habitat (Vertical Column Culmination) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The highest physical point in the forest architecture. Sea level (0&deg;) to understory (1&deg;) to mid-canopy (2&deg;&ndash;6&deg;) to mountain (7&deg;) to canopy apex (8&deg;). The circle has climbed from tidal flats to the top of the tallest tree.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Above the mixing threshold.</strong> In audio engineering, frequencies above
+          8&ndash;10 kHz are the &ldquo;air band&rdquo; &mdash; sparkle, presence, brilliance.
+          Above 12&ndash;15 kHz, mixing engineers typically apply a low-pass filter: sibilance,
+          cymbal shimmer, tape hiss. The Golden-crowned Kinglet sings in the zone that audio
+          professionals treat as the boundary between useful signal and inaudible artifact. The
+          bird IS the high-frequency content that gets cut.
+        </p>
+        <p>
+          <strong>The perpetual climb.</strong> The zee-zee-zee ascends and does not resolve
+          downward. An ascending passage without resolution creates tension without release &mdash;
+          an open-ended phrase. The Pacific-slope Flycatcher (6&deg;) introduced the upslurred
+          half cadence: ascending, then silence. The kinglet goes further: ascending, then
+          <strong>crossing the threshold of audibility</strong>. The resolution exists but is
+          inaudible. A cadence in the ultrasonic.
+        </p>
+        <p>
+          <strong>The Nyquist connection.</strong> Shannon proved in 1948 that any communication
+          channel has a capacity limit. The human auditory channel narrows with age &mdash; bandwidth
+          decreases, noise floor rises. The kinglet&rsquo;s song is the same signal at any age.
+          The channel capacity of the aging ear is what changes. The mathematics is the same whether
+          the channel is a copper wire or a cochlea.
+        </p>
+        <p>
+          <strong>The Peacock parallel.</strong> Gary Peacock and the kinglet are both energy=1 &mdash;
+          the quietest voices in their respective ensembles. Peacock&rsquo;s Zen-influenced bass
+          with the Jarrett trio: economical, spacious, present but almost subliminal. The kinglet&rsquo;s
+          ultra-high thread of sound: present but inaudible to many. Both require the listener to
+          lean in with full attention. Both live at the threshold where perception begins to fail.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; BPS Sensor Network
+            <p>Nyquist-Shannon theorem applied to biological hearing. The kinglet sings above the effective Nyquist limit for many listeners. Ultra-high frequency bioacoustic monitoring.</p>
+          </div>
+          <div class="xref-card">
+            <strong>HFE</strong> &mdash; High-Fidelity Engineering
+            <p>Audio threshold, low-pass filtering, the air band. The kinglet sings in the range engineers filter out. Where does useful signal end?</p>
+          </div>
+          <div class="xref-card">
+            <strong>LED</strong> &mdash; Signal Processing
+            <p>Nyquist sampling, aliasing, bandwidth limits. The kinglet is an aliased signal for the aging ear &mdash; information that exists but cannot be captured.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Gary Peacock at 8&deg;. Both energy=1. Both at the threshold of perception. Zen minimalism. The quietest voices.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-007</strong> &mdash; Hermit Thrush
+            <p>Direct predecessor. Thrush introduced mountain elevation; kinglet goes to the treetops. Thrush at 1.5&ndash;4 kHz; kinglet at 6&ndash;10 kHz. Frequency ascent continues beyond threshold.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-006</strong> &mdash; Pacific-slope Flycatcher
+            <p>Flycatcher&rsquo;s ascending upslur stops in the audible range. Kinglet&rsquo;s ascending series crosses the boundary. Both ascend &mdash; one resolves audibly, the other resolves in the ultrasonic.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005</strong> &mdash; Red-breasted Nuthatch
+            <p>Both receivers in the chickadee alarm network. Both conifer canopy species. Network: 3 nodes, 2 directed edges.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004</strong> &mdash; Northern Spotted Owl
+            <p>Maximum frequency separation: owl at 300&ndash;700 Hz, kinglet at 6&ndash;10 kHz. Both in mature conifer. The ensemble spans from deepest to highest voice.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003</strong> &mdash; Black-capped Chickadee
+            <p>Kinglet eavesdrops on the chickadee alarm system (Templeton et al. 2007). Network: chickadee broadcasts, nuthatch + kinglet receive. Three nodes. Two edges.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Thrush at alto (2.5&ndash;5 kHz) with complex timbre; kinglet at ultra-high (6&ndash;10 kHz) with threadlike timbre. The frequency gap spans an entire register.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Both among smallest PNW passerines. Wren in understory (temporal complexity). Kinglet at canopy apex (frequency complexity). Lowest and highest in the vertical column.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p><strong>THE SILENCE RHYME.</strong> Degree 0: silence (no signal). Degree 8: silence (signal above threshold). Two kinds of silence bracket seven degrees of sound.</p>
+          </div>
+        </div>
+
+        <!-- Spectrogram Reference -->
+        <h2>Spectrogram Reference</h2>
+        <p>
+          <strong>Macaulay Library:</strong>
+          <a href="https://www.macaulaylibrary.org/asset/29335" target="_blank" rel="noopener">
+            ML 29335 &mdash; Golden-crowned Kinglet song recording and spectrogram
+          </a> (Cornell Lab of Ornithology). The spectrogram clearly shows the ultra-high frequency
+          band at 6&ndash;10 kHz &mdash; thin, high traces near the top of the display, visually
+          demonstrating the kinglet&rsquo;s position at the audiometric boundary.
+        </p>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Swanson, D.L., Ingold, J.L. &amp; Wallace, G.E. (2008). &ldquo;Golden-crowned Kinglet.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Nocedal, J. &amp; Ficken, M.S. (1998). Golden-crowned Kinglet vocalizations. <em>Wilson Bulletin</em> 110(3): 396&ndash;405.</li>
+          <li>Templeton, C.N., Greene, E. &amp; Davis, K. (2005). Allometry of alarm calls. <em>Science</em> 308: 1934&ndash;1937.</li>
+          <li>Templeton, C.N. &amp; Greene, E. (2007). Nuthatches eavesdrop on chickadee alarm calls. <em>PNAS</em> 104(13): 5479&ndash;5482.</li>
+          <li>Heinrich, B. (2003). <em>Winter World</em>. Ecco/HarperCollins. [Kinglet winter survival physiology.]</li>
+          <li>Shannon, C.E. (1948). A mathematical theory of communication. <em>Bell System Technical Journal</em> 27: 379&ndash;423.</li>
+          <li>Shepard, R.N. (1964). Circularity in judgments of relative pitch. <em>JASA</em> 36(12): 2346&ndash;2353.</li>
+          <li>Cage, J. (1952). <em>4&prime;33&Prime;</em>. [Silence as whatever sound the listener has not intended.]</li>
+          <li>Macaulay Library. Golden-crowned Kinglet recordings. macaulaylibrary.org/asset/29335</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Golden-crowned Kinglet. allaboutbirds.org</li>
+          <li>BirdWeb (Seattle Audubon Society). Golden-crowned Kinglet. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>IUCN Red List. Golden-crowned Kinglet. iucnredlist.org</li>
+          <li>eBird. Golden-crowned Kinglet. ebird.org/species/gockin</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Regulidae</div>
+          <div class="stat-detail">Kinglets &mdash; &ldquo;little kings&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Regulus</div>
+          <div class="stat-detail">&ldquo;Little king&rdquo; (Latin)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">3.1&ndash;4.3 in</div>
+          <div class="stat-detail">8&ndash;11 cm &mdash; smallest in circle</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">4&ndash;8 g</div>
+          <div class="stat-detail">Less than two nickels</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">5.5&ndash;7.1 in</div>
+          <div class="stat-detail">14&ndash;18 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">Golden Crown</div>
+          <div class="stat-detail">Yellow-orange patch bordered by black</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Frequency</div>
+          <div class="stat-value">6&ndash;10 kHz</div>
+          <div class="stat-detail">Ultra-high &mdash; above threshold for many adults</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Song Duration</div>
+          <div class="stat-value">1.5&ndash;3.0 s</div>
+          <div class="stat-detail">3&ndash;7 ascending notes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Contour</div>
+          <div class="stat-value">Ascending</div>
+          <div class="stat-detail">Climbs toward / beyond audiometric ceiling</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Timbre</div>
+          <div class="stat-value">Thread-like</div>
+          <div class="stat-detail">Wispy, minimal harmonics &mdash; nearly pure tone</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Ultrasonic Threshold</div>
+          <div class="stat-detail">Many listeners over 40 cannot hear it</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">8&deg;</div>
+          <div class="stat-detail">Threshold &mdash; the ultrasonic boundary</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">1</div>
+          <div class="stat-detail">Minimum &mdash; quietest voice in the circle</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Spruce-fir Canopy</div>
+          <div class="stat-detail">Canopy apex &mdash; top of tallest trees</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round &mdash; survives PNW winter at 4&ndash;8 g</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">~100M &mdash; overall stable</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Silence Rhyme</div>
+          <div class="stat-value">0&deg; &harr; 8&deg;</div>
+          <div class="stat-detail">No signal &harr; signal above threshold</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Network Role</div>
+          <div class="stat-value">Receiver</div>
+          <div class="stat-detail">Chickadee alarm eavesdropper</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 8&deg; &mdash; S36</div>
+          <div class="parallel-name">Gary Peacock</div>
+          <div class="parallel-detail">Both energy=1 &mdash; the quietest voices in their ensembles. Peacock&rsquo;s Zen-influenced bass with the Jarrett trio: economical, spacious, present but subliminal. The kinglet&rsquo;s ultrasonic thread: present but inaudible to many. Both at the threshold of perception. Both year-round residents &mdash; steady, always there.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 008 of 360 &middot;
+      <a href="../007-hermit-thrush/index.html">Degree 7&deg;: Hermit Thrush</a> &middot;
+      <a href="../006-pacific-slope-flycatcher/index.html">Degree 6&deg;: Pacific-slope Flycatcher</a> &middot;
+      <a href="../005-red-breasted-nuthatch/index.html">Degree 5&deg;: Red-breasted Nuthatch</a> &middot;
+      <a href="../003-black-capped-chickadee/index.html">Degree 3&deg;: Black-capped Chickadee</a> &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
