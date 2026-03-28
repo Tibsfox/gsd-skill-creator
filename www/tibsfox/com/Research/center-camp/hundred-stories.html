@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hundred Stories — Center Camp</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1a12; color: #e8dcc8; font-family: 'Georgia','Times New Roman',serif; min-height: 100vh; }
+
+    /* Nav */
+    .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; }
+    .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .nav-bar a:hover { color: white; }
+    .nav-bar .active { color: white; font-weight: 600; }
+    .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 3rem 2rem 2rem; background: radial-gradient(ellipse at 50% 80%, rgba(212,160,23,0.06) 0%, rgba(155,89,182,0.04) 30%, transparent 60%), linear-gradient(180deg, #0d1a12 0%, #0f1e15 50%, #0d1a12 100%); }
+    .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+    .hero .subtitle { font-size: 0.95rem; color: rgba(232,220,200,0.5); font-style: italic; max-width: 36rem; margin: 0 auto 1.5rem; line-height: 1.6; }
+
+    /* Stats Bar */
+    .stats-bar { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 1rem 2rem; border-top: 1px solid rgba(122,154,90,0.1); border-bottom: 1px solid rgba(122,154,90,0.1); margin-bottom: 1.5rem; }
+    .stat { text-align: center; }
+    .stat-val { display: block; font-size: 1.4rem; color: #c8b890; font-weight: 300; }
+    .stat-label { font-size: 0.7rem; color: rgba(232,220,200,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Domain Filters */
+    .filters { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; padding: 0 1rem 0.8rem; align-items: center; }
+    .filter-btn { background: rgba(26,42,32,0.6); border: 1px solid rgba(200,184,144,0.15); color: rgba(232,220,200,0.6); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .filter-btn:hover { border-color: rgba(200,184,144,0.4); color: #e8dcc8; }
+    .filter-btn.active { background: rgba(200,184,144,0.15); border-color: rgba(200,184,144,0.5); color: #e8dcc8; }
+    .filter-btn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+
+    /* Search */
+    .search-wrap { max-width: 24rem; display: inline-flex; vertical-align: middle; }
+    .search-wrap input { width: 100%; background: rgba(26,42,32,0.6); border: 1px solid rgba(122,154,90,0.2); color: #e8dcc8; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-family: inherit; outline: none; }
+    .search-wrap input::placeholder { color: rgba(232,220,200,0.3); }
+    .search-wrap input:focus { border-color: rgba(200,184,144,0.4); }
+
+    /* Canvas Map */
+    .map-section { max-width: 750px; margin: 0 auto; padding: 0.5rem 1.5rem 1rem; }
+    .map-section h2 { text-align: center; font-size: 1.1rem; font-weight: 400; color: #c8b890; margin-bottom: 0.6rem; letter-spacing: 0.06em; }
+    .map-wrap { position: relative; background: rgba(6,13,9,0.9); border: 1px solid rgba(122,154,90,0.12); border-radius: 10px; overflow: hidden; }
+    canvas#storyMap { display: block; width: 100%; cursor: crosshair; }
+    .map-tooltip { position: absolute; background: rgba(20,35,25,0.95); border: 1px solid rgba(200,184,144,0.3); padding: 0.5rem 0.8rem; border-radius: 6px; font-size: 0.78rem; pointer-events: none; display: none; max-width: 240px; z-index: 10; }
+    .map-tooltip .tt-species { color: #c8b890; font-weight: 600; }
+    .map-tooltip .tt-dept { color: rgba(232,220,200,0.5); font-size: 0.72rem; margin-top: 2px; }
+
+    /* Clue Trail Mode */
+    .trail-controls { text-align: center; padding: 0.5rem 1rem 1rem; }
+    .trail-btn { background: rgba(199,91,58,0.15); border: 1px solid rgba(199,91,58,0.35); color: #e8dcc8; padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .trail-btn:hover { background: rgba(199,91,58,0.3); }
+    .trail-btn.active { background: rgba(199,91,58,0.35); border-color: rgba(199,91,58,0.7); }
+    .clue-panel { max-width: 52rem; margin: 0 auto; padding: 0 1.5rem; display: none; }
+    .clue-header { text-align: center; margin-bottom: 1rem; }
+    .clue-header .clue-num { font-size: 0.72rem; color: rgba(232,220,200,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+    .clue-header .clue-text { font-size: 1.05rem; font-style: italic; color: #c8b890; line-height: 1.6; padding: 1rem 1.5rem; background: rgba(199,91,58,0.06); border: 1px solid rgba(199,91,58,0.15); border-radius: 8px; max-width: 34rem; margin: 0 auto; }
+    .clue-header .trail-progress { font-size: 0.78rem; color: rgba(232,220,200,0.35); margin-top: 0.6rem; }
+    .clue-species-grid { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; margin-top: 0.8rem; padding-bottom: 2rem; }
+    .clue-species-btn { background: rgba(26,42,32,0.5); border: 1px solid rgba(122,154,90,0.15); color: rgba(232,220,200,0.55); padding: 0.25rem 0.55rem; border-radius: 12px; font-size: 0.68rem; cursor: pointer; font-family: inherit; transition: all 0.2s; white-space: nowrap; }
+    .clue-species-btn:hover { border-color: rgba(200,184,144,0.4); color: #e8dcc8; }
+    .clue-species-btn.found { background: rgba(122,154,90,0.25); border-color: rgba(122,154,90,0.5); color: #e8dcc8; pointer-events: none; }
+    .clue-species-btn.wrong { opacity: 0.35; }
+    .clue-species-btn.correct-flash { background: rgba(122,154,90,0.45); border-color: #7a9a5a; color: white; animation: correctGlow 0.6s ease; }
+    @keyframes correctGlow { 0% { box-shadow: 0 0 12px rgba(122,154,90,0.6); } 100% { box-shadow: none; } }
+    .clue-revealed { max-width: 34rem; margin: 1rem auto; padding: 1rem 1.2rem; background: rgba(26,42,32,0.5); border: 1px solid rgba(122,154,90,0.25); border-radius: 8px; text-align: center; display: none; }
+    .clue-revealed .cr-species { font-size: 1rem; color: #c8b890; margin-bottom: 0.2rem; }
+    .clue-revealed .cr-story { font-size: 0.82rem; font-style: italic; color: rgba(232,220,200,0.6); line-height: 1.6; }
+    .clue-complete { text-align: center; padding: 2rem; display: none; }
+    .clue-complete h3 { font-size: 1.2rem; color: #c8b890; font-weight: 400; margin-bottom: 0.5rem; }
+    .clue-complete p { font-size: 0.88rem; color: rgba(232,220,200,0.5); font-style: italic; }
+
+    /* Card Grid */
+    .card-grid { max-width: 68rem; margin: 0 auto; padding: 1rem 1.5rem 3rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+    .story-card { background: rgba(26,42,32,0.5); border: 1px solid rgba(122,154,90,0.12); border-radius: 10px; padding: 1.2rem 1.4rem; transition: all 0.3s; }
+    .story-card:hover { border-color: rgba(122,154,90,0.3); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
+    .card-species { font-size: 1.05rem; font-weight: 400; }
+    .card-sci { font-size: 0.75rem; color: rgba(232,220,200,0.4); font-style: italic; }
+    .card-id { font-size: 0.7rem; color: rgba(232,220,200,0.2); font-family: 'Courier New',monospace; }
+    .card-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .badge { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 10px; border: 1px solid; }
+    .badge-domain { text-transform: uppercase; letter-spacing: 0.06em; }
+    .badge-dept { color: rgba(232,220,200,0.5); border-color: rgba(232,220,200,0.15); }
+    .card-story { font-size: 0.85rem; font-style: italic; color: rgba(232,220,200,0.7); line-height: 1.7; margin-bottom: 0.8rem; }
+    .card-clue { font-size: 0.78rem; color: rgba(200,184,144,0.6); padding: 0.6rem 0.8rem; background: rgba(200,184,144,0.04); border: 1px solid rgba(200,184,144,0.1); border-radius: 6px; margin-bottom: 0.8rem; line-height: 1.5; }
+    .card-clue::before { content: 'Clue: '; font-weight: 600; color: rgba(200,184,144,0.8); }
+    .card-trails { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .card-trails span { font-size: 0.7rem; color: rgba(232,220,200,0.3); margin-right: 0.3rem; }
+    .trail-link { font-size: 0.7rem; color: rgba(122,154,90,0.6); cursor: pointer; text-decoration: none; background: rgba(122,154,90,0.08); padding: 0.1rem 0.4rem; border-radius: 8px; transition: all 0.2s; }
+    .trail-link:hover { color: #7a9a5a; background: rgba(122,154,90,0.15); }
+    .card-coords { font-size: 0.65rem; color: rgba(232,220,200,0.2); font-family: 'Courier New',monospace; margin-top: 0.5rem; }
+
+    /* Domain colors */
+    .domain-science { color: #2a8a96; border-color: rgba(42,138,150,0.4); }
+    .domain-math { color: #4a7c3f; border-color: rgba(74,124,63,0.4); }
+    .domain-art { color: #9b59b6; border-color: rgba(155,89,182,0.4); }
+    .domain-music { color: #e074a8; border-color: rgba(224,116,168,0.4); }
+    .domain-philosophy { color: #d4a017; border-color: rgba(212,160,23,0.4); }
+
+    /* Footer */
+    .camp-footer { text-align: center; padding: 2rem; max-width: 36rem; margin: 0 auto; }
+    .camp-footer .closing { font-size: 0.88rem; font-style: italic; color: rgba(232,220,200,0.45); line-height: 1.8; margin-bottom: 1.5rem; }
+    .camp-footer .links { font-size: 0.78rem; color: rgba(232,220,200,0.25); }
+    .camp-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+    .camp-footer a:hover { color: #7a9a5a; }
+
+    .no-results { text-align: center; padding: 3rem 2rem; color: rgba(232,220,200,0.3); font-style: italic; grid-column: 1 / -1; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .card-grid { grid-template-columns: 1fr; padding: 1rem; }
+      .stats-bar { gap: 1rem; }
+      .filters { gap: 0.4rem; }
+      .search-wrap { width: 100%; margin-top: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research</a>
+  <span class="sep">/</span>
+  <a href="hundred-stories.html" class="active">Hundred Stories</a>
+</div>
+
+<div class="hero">
+  <h1>The Hundred Stories</h1>
+  <div class="subtitle">Aspen's gift &mdash; one hundred species, one hundred lessons, one hundred paths through the forest of knowledge</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-val">100</span><span class="stat-label">Stories</span></div>
+  <div class="stat"><span class="stat-val">5</span><span class="stat-label">Domains</span></div>
+  <div class="stat"><span class="stat-val">40+</span><span class="stat-label">Departments</span></div>
+  <div class="stat"><span class="stat-val">300</span><span class="stat-label">Trail Connections</span></div>
+  <div class="stat"><span class="stat-val">100</span><span class="stat-label">PNW Species</span></div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn" data-domain="science"><span class="dot" style="background:#2a8a96"></span>Science</button>
+  <button class="filter-btn" data-domain="math"><span class="dot" style="background:#4a7c3f"></span>Math</button>
+  <button class="filter-btn" data-domain="art"><span class="dot" style="background:#9b59b6"></span>Art</button>
+  <button class="filter-btn" data-domain="music"><span class="dot" style="background:#e074a8"></span>Music</button>
+  <button class="filter-btn" data-domain="philosophy"><span class="dot" style="background:#d4a017"></span>Philosophy</button>
+  <button class="filter-btn active" data-domain="all">All</button>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search species, concepts, departments...">
+  </div>
+</div>
+
+<div class="map-section">
+  <h2>The Complex Plane</h2>
+  <div class="map-wrap">
+    <canvas id="storyMap" width="700" height="400"></canvas>
+    <div class="map-tooltip" id="mapTooltip">
+      <div class="tt-species"></div>
+      <div class="tt-dept"></div>
+    </div>
+  </div>
+</div>
+
+<div class="trail-controls">
+  <button class="trail-btn" id="trailToggle">Start Clue Trail</button>
+</div>
+
+<div class="clue-panel" id="cluePanel">
+  <div class="clue-header">
+    <div class="clue-num" id="clueNum"></div>
+    <div class="clue-text" id="clueText"></div>
+    <div class="trail-progress" id="trailProgress"></div>
+  </div>
+  <div class="clue-revealed" id="clueRevealed">
+    <div class="cr-species" id="crSpecies"></div>
+    <div class="cr-story" id="crStory"></div>
+  </div>
+  <div class="clue-complete" id="clueComplete">
+    <h3>Trail Complete</h3>
+    <p id="clueCompleteText"></p>
+  </div>
+  <div class="clue-species-grid" id="clueGrid"></div>
+</div>
+
+<div class="card-grid" id="cardGrid"></div>
+
+<div class="camp-footer">
+  <div class="closing">
+    Aspen wrote these stories in her notebook at the edge of the firelight.
+    Each story is a path. Each path crosses others.
+    The forest of knowledge has no boundaries &mdash; only deeper trails.
+  </div>
+  <div class="links">
+    <a href="../compass.html">The Compass</a> &middot;
+    <a href="bestiary.html">The Bestiary</a> &middot;
+    <a href="musical-forest.html">The Musical Forest</a>
+  </div>
+</div>
+
+<script src="hundred-stories.js"></script>
+<script>
+(function() {
+  var DC = { science:'#2a8a96', math:'#4a7c3f', art:'#9b59b6', music:'#e074a8', philosophy:'#d4a017' };
+  var stories = HUNDRED_STORIES;
+  var activeDomain = 'all';
+  var searchTerm = '';
+  var trailMode = false;
+  var trailOrder = [];
+  var trailIdx = 0;
+  var trailFound = new Set();
+
+  // ═══ Canvas ═══
+  var canvas = document.getElementById('storyMap');
+  var ctx = canvas.getContext('2d');
+  var tooltip = document.getElementById('mapTooltip');
+  var dpr = window.devicePixelRatio || 1;
+  var cw, ch, ox, oy, rMax;
+  var hoveredStory = null;
+  var animFrame = null;
+  var starField = [];
+
+  function initStars() {
+    starField = [];
+    for (var i = 0; i < 80; i++) {
+      starField.push({
+        x: Math.random(),
+        y: Math.random(),
+        s: Math.random() * 1.2 + 0.3,
+        a: Math.random() * 0.3 + 0.05,
+        p: Math.random() * Math.PI * 2,
+        sp: Math.random() * 0.005 + 0.002
+      });
+    }
+  }
+
+  function sizeCanvas() {
+    var rect = canvas.parentElement.getBoundingClientRect();
+    cw = rect.width; ch = Math.min(cw * 0.57, 400);
+    canvas.width = cw * dpr; canvas.height = ch * dpr;
+    canvas.style.width = cw + 'px'; canvas.style.height = ch + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ox = 55; oy = ch - 35; rMax = Math.min(cw - 95, ch - 65);
+  }
+
+  function toXY(theta, r) {
+    var rad = (theta / 90) * (Math.PI / 2);
+    var d = r * rMax;
+    return { x: ox + Math.cos(rad) * d, y: oy - Math.sin(rad) * d };
+  }
+
+  function drawMap(time) {
+    ctx.clearRect(0, 0, cw, ch);
+    var t = time || 0;
+
+    // Background stars (twinkling)
+    starField.forEach(function(s) {
+      var alpha = s.a + Math.sin(t * s.sp + s.p) * 0.03;
+      ctx.fillStyle = 'rgba(200,190,170,' + alpha + ')';
+      ctx.beginPath();
+      ctx.arc(s.x * cw, s.y * ch, s.s, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Grid arcs
+    ctx.strokeStyle = 'rgba(122,154,90,0.06)';
+    ctx.lineWidth = 1;
+    for (var i = 0.25; i <= 1; i += 0.25) {
+      ctx.beginPath(); ctx.arc(ox, oy, i * rMax, -Math.PI / 2, 0); ctx.stroke();
+    }
+    // Grid radials
+    for (var a = 0; a <= 90; a += 18) {
+      var rad = (a / 90) * (Math.PI / 2);
+      ctx.beginPath(); ctx.moveTo(ox, oy);
+      ctx.lineTo(ox + Math.cos(rad) * rMax, oy - Math.sin(rad) * rMax);
+      ctx.stroke();
+    }
+
+    // Axes
+    ctx.strokeStyle = 'rgba(200,184,144,0.12)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + rMax + 20, oy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - rMax - 20); ctx.stroke();
+
+    // Axis labels
+    ctx.fillStyle = 'rgba(232,220,200,0.2)'; ctx.font = '10px Georgia';
+    ctx.textAlign = 'center';
+    ctx.fillText('Science', ox + rMax / 2, oy + 25);
+    ctx.save(); ctx.translate(ox - 28, oy - rMax / 2); ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Philosophy', 0, 0); ctx.restore();
+
+    // Domain arc labels
+    ctx.font = '8px Georgia'; ctx.fillStyle = 'rgba(232,220,200,0.15)';
+    var arcs = [
+      { a: 9, t: 'SCIENCE', c: DC.science },
+      { a: 27, t: 'MATH', c: DC.math },
+      { a: 45, t: 'ART', c: DC.art },
+      { a: 63, t: 'MUSIC', c: DC.music },
+      { a: 81, t: 'PHILOSOPHY', c: DC.philosophy }
+    ];
+    arcs.forEach(function(l) {
+      var rad = (l.a / 90) * (Math.PI / 2);
+      var lx = ox + Math.cos(rad) * (rMax + 16);
+      var ly = oy - Math.sin(rad) * (rMax + 16);
+      ctx.save(); ctx.translate(lx, ly); ctx.rotate(-rad);
+      ctx.textAlign = 'center';
+      ctx.fillStyle = l.c + '44';
+      ctx.fillText(l.t, 0, 0);
+      ctx.restore();
+    });
+
+    // Story dots
+    var filtered = getFiltered();
+    var fSet = new Set(filtered);
+
+    // Draw dim dots first, bright dots on top
+    stories.forEach(function(s) {
+      if (fSet.has(s)) return;
+      var p = toXY(s.theta, s.r);
+      ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(80,80,70,0.2)';
+      ctx.fill();
+    });
+
+    filtered.forEach(function(s) {
+      var p = toXY(s.theta, s.r);
+      var isHov = hoveredStory && hoveredStory.id === s.id;
+      var sz = isHov ? 7 : 4.5;
+      var col = DC[s.domain];
+
+      // Glow
+      if (isHov) {
+        ctx.beginPath(); ctx.arc(p.x, p.y, 14, 0, Math.PI * 2);
+        ctx.fillStyle = col + '18';
+        ctx.fill();
+      }
+
+      // Twinkle
+      var twinkle = 0.7 + Math.sin(t * 0.003 + s.id * 0.7) * 0.3;
+      ctx.globalAlpha = twinkle;
+      ctx.beginPath(); ctx.arc(p.x, p.y, sz, 0, Math.PI * 2);
+      ctx.fillStyle = col;
+      ctx.fill();
+
+      // Cross sparkle on hover
+      if (isHov) {
+        ctx.strokeStyle = col + '60'; ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(p.x - 10, p.y); ctx.lineTo(p.x + 10, p.y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(p.x, p.y - 10); ctx.lineTo(p.x, p.y + 10); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    });
+
+    animFrame = requestAnimationFrame(drawMap);
+  }
+
+  function getFiltered() {
+    return stories.filter(function(s) {
+      if (activeDomain !== 'all' && s.domain !== activeDomain) return false;
+      if (searchTerm) {
+        var t = searchTerm.toLowerCase();
+        return (s.species.toLowerCase().indexOf(t) >= 0 ||
+                s.sci.toLowerCase().indexOf(t) >= 0 ||
+                s.concept.toLowerCase().indexOf(t) >= 0 ||
+                s.department.toLowerCase().indexOf(t) >= 0 ||
+                s.story.toLowerCase().indexOf(t) >= 0 ||
+                s.type.toLowerCase().indexOf(t) >= 0 ||
+                s.wing.toLowerCase().indexOf(t) >= 0);
+      }
+      return true;
+    });
+  }
+
+  // ═══ Cards ═══
+  function renderCards() {
+    var grid = document.getElementById('cardGrid');
+    if (trailMode) { grid.style.display = 'none'; return; }
+    grid.style.display = '';
+    var filtered = getFiltered();
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="no-results">No stories match your search.</div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(function(s) {
+      var dc = 'domain-' + s.domain;
+      var trails = s.trail.map(function(tid) {
+        var ts = stories.find(function(x) { return x.id === tid; });
+        return ts ? '<a class="trail-link" data-id="' + tid + '">#' + tid + ' ' + ts.species + '</a>' : '';
+      }).join(' ');
+      return '<div class="story-card" id="card-' + s.id + '">' +
+        '<div class="card-header"><div><div class="card-species ' + dc + '">' + s.species + '</div><div class="card-sci">' + s.sci + '</div></div><div class="card-id">#' + s.id + '</div></div>' +
+        '<div class="card-badges"><span class="badge badge-domain ' + dc + '">' + s.domain + '</span><span class="badge badge-dept">' + s.department + '</span></div>' +
+        '<div class="card-story">&ldquo;' + s.story + '&rdquo;</div>' +
+        '<div class="card-clue">' + s.clue + '</div>' +
+        '<div class="card-trails"><span>Trails:</span> ' + trails + '</div>' +
+        '<div class="card-coords">&theta;=' + s.theta + '&deg; r=' + s.r + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ═══ Filters ═══
+  document.querySelector('.filters').addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    activeDomain = btn.dataset.domain;
+    renderCards();
+  });
+
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    searchTerm = e.target.value;
+    renderCards();
+  });
+
+  // ═══ Map Hover ═══
+  canvas.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    var hit = null, minD = 18;
+    stories.forEach(function(s) {
+      var p = toXY(s.theta, s.r);
+      var d = Math.sqrt((mx - p.x) * (mx - p.x) + (my - p.y) * (my - p.y));
+      if (d < minD) { minD = d; hit = s; }
+    });
+    hoveredStory = hit;
+    if (hit) {
+      tooltip.style.display = 'block';
+      tooltip.querySelector('.tt-species').textContent = hit.species;
+      tooltip.querySelector('.tt-dept').textContent = hit.department + ' \u2014 ' + hit.concept;
+      var tx = Math.min(mx + 14, cw - 250), ty = Math.max(my - 40, 5);
+      tooltip.style.left = tx + 'px'; tooltip.style.top = ty + 'px';
+    } else {
+      tooltip.style.display = 'none';
+    }
+  });
+  canvas.addEventListener('mouseleave', function() {
+    hoveredStory = null;
+    tooltip.style.display = 'none';
+  });
+
+  // ═══ Map Click ═══
+  canvas.addEventListener('click', function(e) {
+    if (trailMode) return;
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    var hit = null, minD = 18;
+    stories.forEach(function(s) {
+      var p = toXY(s.theta, s.r);
+      var d = Math.sqrt((mx - p.x) * (mx - p.x) + (my - p.y) * (my - p.y));
+      if (d < minD) { minD = d; hit = s; }
+    });
+    if (hit) {
+      var card = document.getElementById('card-' + hit.id);
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  // ═══ Trail Links ═══
+  document.getElementById('cardGrid').addEventListener('click', function(e) {
+    var link = e.target.closest('.trail-link');
+    if (!link) return;
+    var id = parseInt(link.dataset.id);
+    var card = document.getElementById('card-' + id);
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // ═══ Clue Trail Mode ═══
+  function buildTrailOrder() {
+    var visited = new Set();
+    var order = [];
+    var start = stories[Math.floor(Math.random() * stories.length)];
+    order.push(start.id);
+    visited.add(start.id);
+    var current = start;
+    while (order.length < stories.length) {
+      var nexts = current.trail.filter(function(t) { return !visited.has(t); });
+      var next;
+      if (nexts.length) {
+        next = nexts[Math.floor(Math.random() * nexts.length)];
+      } else {
+        // Jump to an unvisited story
+        var unvisited = stories.filter(function(s) { return !visited.has(s.id); });
+        if (!unvisited.length) break;
+        next = unvisited[Math.floor(Math.random() * unvisited.length)].id;
+      }
+      order.push(next);
+      visited.add(next);
+      current = stories.find(function(s) { return s.id === next; });
+    }
+    return order;
+  }
+
+  function buildSpeciesGrid() {
+    var grid = document.getElementById('clueGrid');
+    var sorted = stories.slice().sort(function(a, b) { return a.species.localeCompare(b.species); });
+    grid.innerHTML = sorted.map(function(s) {
+      return '<button class="clue-species-btn" data-id="' + s.id + '">' + s.species + '</button>';
+    }).join('');
+  }
+
+  function showClue() {
+    var revealed = document.getElementById('clueRevealed');
+    var complete = document.getElementById('clueComplete');
+    revealed.style.display = 'none';
+    complete.style.display = 'none';
+
+    if (trailIdx >= trailOrder.length) {
+      document.getElementById('clueNum').textContent = '';
+      document.getElementById('clueText').style.display = 'none';
+      complete.style.display = 'block';
+      document.getElementById('clueCompleteText').textContent =
+        'You found ' + trailFound.size + ' of ' + stories.length + ' stories. The forest remembers every path you walked.';
+      document.getElementById('trailProgress').textContent = '';
+      return;
+    }
+    document.getElementById('clueText').style.display = '';
+    var targetId = trailOrder[trailIdx];
+    var target = stories.find(function(s) { return s.id === targetId; });
+    document.getElementById('clueNum').textContent = 'Clue ' + (trailIdx + 1) + ' of ' + trailOrder.length;
+    document.getElementById('clueText').textContent = target.clue;
+    document.getElementById('trailProgress').textContent = 'Stories found: ' + trailFound.size + ' / ' + stories.length;
+
+    // Reset wrong states on buttons (but keep found state)
+    document.querySelectorAll('.clue-species-btn').forEach(function(btn) {
+      btn.classList.remove('wrong', 'correct-flash');
+    });
+  }
+
+  function revealStory(s) {
+    var revealed = document.getElementById('clueRevealed');
+    var dc = 'domain-' + s.domain;
+    document.getElementById('crSpecies').innerHTML = '<span class="' + dc + '">' + s.species + '</span> <span style="font-size:0.78rem;color:rgba(232,220,200,0.4);font-style:italic">' + s.sci + '</span>';
+    document.getElementById('crStory').textContent = '\u201c' + s.story + '\u201d';
+    revealed.style.display = 'block';
+    revealed.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  document.getElementById('trailToggle').addEventListener('click', function() {
+    trailMode = !trailMode;
+    this.textContent = trailMode ? 'Exit Clue Trail' : 'Start Clue Trail';
+    this.classList.toggle('active', trailMode);
+    document.getElementById('cluePanel').style.display = trailMode ? 'block' : 'none';
+    if (trailMode) {
+      trailOrder = buildTrailOrder();
+      trailIdx = 0;
+      trailFound = new Set();
+      buildSpeciesGrid();
+      showClue();
+    }
+    renderCards();
+  });
+
+  document.getElementById('clueGrid').addEventListener('click', function(e) {
+    var btn = e.target.closest('.clue-species-btn');
+    if (!btn || btn.classList.contains('found') || btn.classList.contains('correct-flash')) return;
+    if (trailIdx >= trailOrder.length) return;
+
+    var targetId = trailOrder[trailIdx];
+    var chosenId = parseInt(btn.dataset.id);
+
+    if (chosenId === targetId) {
+      btn.classList.add('correct-flash');
+      trailFound.add(targetId);
+      var target = stories.find(function(s) { return s.id === targetId; });
+      revealStory(target);
+      setTimeout(function() {
+        btn.classList.remove('correct-flash');
+        btn.classList.add('found');
+        trailIdx++;
+        showClue();
+      }, 1800);
+    } else {
+      btn.classList.add('wrong');
+    }
+  });
+
+  // ═══ Init ═══
+  initStars();
+  sizeCanvas();
+  drawMap(0);
+  renderCards();
+  window.addEventListener('resize', function() {
+    sizeCanvas();
+  });
+})();
+</script>
+</body>
+</html>
