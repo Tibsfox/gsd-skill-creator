@@ -1,0 +1,977 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\tcbuselibrary{breakable,skins}
+
+% Space/Physics color scheme: wonder, scale
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{E65100}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF3E0}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Computability Trade-offs}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={States, Symbols, and Tape -- GSD Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{States, Symbols,\\[0.3em]and Tape}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{A Deep Study in Computational Trade-offs}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Shannon's Fungibility Theorem and the GSD Context Window Architecture}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 28, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 5 context windows across 2 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{States, Symbols, and Tape --- Vision Guide}
+
+\metafield{Date:}{March 28, 2026}
+\metafield{Status:}{Initial Vision / Ready for Research}
+\metafield{Depends on:}{GSD Skill-Creator v1.49+, DACP milestone}
+\metafield{Context:}{Theoretical Computer Science / Computability Theory}
+\metafield{Originated:}{Conversation with Miles Tiberius Foxglove, March 28, 2026}
+
+\subsection{Vision}
+
+The insight arrived as a vibe: \textit{a finite state machine with infinite tape is the same as an infinite state machine with finite tape.} Not a proof --- a resonance. A sense that two seemingly opposite extremes of a design space might be touching hands behind the curtain.
+
+The vibe is more than half right. In 1956, Claude Shannon --- the same Claude Shannon who separated information from meaning, who gave us the bit, who proved that all of human expression reduces to ones and zeros --- turned this exact intuition into a theorem. States and tape alphabet richness are \textbf{fungible}. The complexity budget of computation can be denominated in either currency. A two-state machine with a rich enough alphabet computes exactly what a two-symbol machine with enough states computes. The Amiga Principle, restated as formal mathematics: remarkable outcomes through architectural leverage, not brute accumulation.
+
+But the theorem has a boundary condition, and the boundary condition is where the story gets interesting. States and alphabet symbols are fungible. Tape \textit{length}, however, is a different resource entirely. Restrict the tape and you lose real computational power --- provably, permanently, hierarchically. The Chomsky hierarchy maps exactly to how much tape you allow. The difference between a Turing machine and a linear bounded automaton is the difference between recognizing any recursively enumerable language and being confined to context-sensitive languages. These are not the same neighborhood.
+
+This research mission exists to map both truths with precision: where Shannon's fungibility holds, where it breaks, and how GSD's architectural choices --- particularly fresh-context subagents and the Deterministic Agent Communication Protocol (DACP) --- can be read as conscious navigation of this computational landscape. The context window is a tape. Bounded tapes lose power. GSD resets the tape rather than expanding the machine.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The fungibility boundary is not widely understood.} Shannon's 1956 theorem is known to specialists but rarely explained to practitioners. The trade-off between states and alphabet symbols is commonly conflated with the trade-off between states and tape length, producing confused intuitions about what ``computational equivalence'' means and where it holds.
+
+  \item \textbf{The Chomsky hierarchy is underutilized as an architectural lens.} Most software architects know that Turing machines are more powerful than finite automata, but few reason explicitly about where their systems sit on the hierarchy, what that position costs, or what capabilities it forecloses.
+
+  \item \textbf{LLM context windows are bounded tapes with computability consequences.} A transformer operating within a fixed context window is a bounded-tape machine. The finiteness of its configuration space is not merely a performance limitation --- it is a computability limitation. Systems built on LLMs without explicit tape-management strategies will exhibit systematic failures on problems requiring unbounded working memory.
+
+  \item \textbf{The connection between Shannon's theorem and agent architecture is unexplored.} States-symbols fungibility maps directly to a design question: should you solve a problem with more parameters (bigger model = more states) or better structured input (richer compressed prompting = more effective symbols)? This has immediate practical consequences for agent design and model allocation.
+
+  \item \textbf{Fresh-context subagent architecture lacks formal grounding.} GSD's tape-reset approach is intuitively motivated but not formally connected to computability theory. Grounding it formally would strengthen the architectural argument and clarify where the approach succeeds and where it requires additional mechanisms.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Shannon Equivalence Principle:} Computational complexity is conserved under state-symbol exchange but not under tape-length exchange.
+
+Within a fixed tape-length regime, states and alphabet symbols are interchangeable: any machine can be simulated by one with fewer states but more symbols, or fewer symbols but more states. Across tape-length regimes, computational power is strictly ordered. The minimum viable universal machine can be tiny (2 states and 18 symbols, or 15 states and 2 symbols), but no bounded-tape machine --- however large its state set or alphabet --- is universal.
+
+\subsubsection{Computational Hierarchy Map (by Tape Resource)}
+
+\begin{asciibox}
+COMPUTATIONAL POWER HIERARCHY
+=======================================================
+  TURING MACHINE                [Infinite tape]
+  Finite states + unbounded write tape
+  Recognizes: Recursively Enumerable languages (Type 0)
+  Halting: Undecidable
+     |
+     | restrict tape to O(n) cells (input length)
+     v
+  LINEAR BOUNDED AUTOMATON      [Tape ~ input length]
+  Finite states + tape = f(|input|)
+  Recognizes: Context-Sensitive languages (Type 1)
+  Halting: Decidable per input
+     |
+     | restrict to stack or O(log n) scratch tape
+     v
+  PUSHDOWN / LOG-SPACE          [Bounded aux tape]
+  Finite states + auxiliary bounded tape
+  Recognizes: Context-Free languages (Type 2)
+     |
+     | remove writable tape entirely
+     v
+  FINITE STATE MACHINE          [No tape]
+  Finite states + read-only left-to-right scan
+  Recognizes: Regular languages (Type 3)
+=======================================================
+  Shannon (1956): within ANY row, states <-> symbols
+  Moving DOWN: permanent, provable power loss
+=======================================================
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE + WAVE ARCHITECTURE
+=======================================================
+  WAVE 0: FOUNDATION (Haiku)
+  Terminology schema, source index, module interfaces
+     |
+     +----------------------------+
+     |                            |
+  WAVE 1A (parallel)          WAVE 1B (parallel)
+  +--------------------+      +--------------------+
+  | MOD-1              |      | MOD-3              |
+  | Formal Foundations |      | Tape-Length        |
+  | (Sonnet)           |      | Hierarchy (Sonnet) |
+  +--------------------+      +--------------------+
+  | MOD-2              |      | MOD-4              |
+  | Shannon Trade-off  |      | Limits +           |
+  | (Opus)             |      | Undecidability     |
+  +--------------------+      | (Opus)             |
+                               +--------------------+
+          |                           |
+          +-------------+-------------+
+                        |
+                 WAVE 2: SYNTHESIS
+              +---------------------+
+              | MOD-5               |
+              | GSD Architectural   |
+              | Synthesis  (Opus)   |
+              +---------------------+
+                        |
+               WAVE 3: PUBLICATION
+              +---------------------+
+              | Assembly + Verify   |
+              | (Sonnet)            |
+              +---------------------+
+=======================================================
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Formal Foundations}
+Turing's original 1936 model: finite state control, one-way infinite tape, read-write head, transition function. Formal definition of configuration (state $\times$ tape contents $\times$ head position). The Church-Turing thesis and its philosophical status. Deterministic vs.\ nondeterministic machines. Finite state machines as the no-tape special case and their relationship to regular languages.
+
+\subsubsection{Module 2: Shannon Trade-off}
+Shannon (1956) ``A Universal Turing Machine with Two Internal States.'' Both directions of the fungibility theorem stated precisely. The universal Turing machine size frontier: (15,2), (9,3), (6,4), (5,5), (4,6), (3,9), (2,18). Minsky's 7-state 4-symbol machine (1962). Wolfram's (2,3) conjecture and Alex Smith's 2007 proof (with weak-universality caveat). The complexity budget metaphor and its limits.
+
+\subsubsection{Module 3: Tape-Length Hierarchy}
+Chomsky hierarchy (1956--1963): Type 0 through Type 3. Linear bounded automata: Myhill (1960), Landweber (1963), endmarker constraints. Configuration space argument: why bounded tape implies finite configurations implies decidability. The LBA open problem (nondeterministic vs.\ deterministic LBA). Log-space machines and their position between pushdown and full Turing machines.
+
+\subsubsection{Module 4: Limits and Undecidability}
+The halting problem (Turing 1936): undecidability by diagonalization. Why infinite tape is necessary (not merely sufficient) for undecidability. Rice's theorem: no non-trivial property of Turing machine output is decidable. Contrast with bounded-tape machines: halting decidable by configuration counting. Relationship between G\"{o}del's incompleteness theorems and computability limits.
+
+\subsubsection{Module 5: GSD Architectural Synthesis}
+Context window as bounded tape: transformer attention as finite working memory. LLMs as bounded-tape machines with implied computability constraints. Fresh-context subagents as tape-reset strategy. DACP three-part bundle as valid state serialization. The Amiga Principle as Shannon's theorem applied to agent architecture. Formal grounding for GSD's three-solution approach to the context bottleneck (VBW, GSD, skill-creator).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml --- States, Symbols, and Tape Mission
+agnus:                    # Orchestration / DMA / Context
+  model: claude-opus-4-6
+  role: FLIGHT + INTEG
+  budget_tokens: 40000
+  context_strategy: fresh_subagent_per_wave
+  note: "Judgment-heavy: cross-module coherence"
+
+denise:                   # Output Rendering / Synthesis
+  model: claude-sonnet-4-6
+  role: EXEC-1 + EXEC-2 + VERIFY + LOG
+  budget_tokens: 25000
+  parallel_tracks: 2
+  note: "Structural: survey, assembly, verification"
+
+paula:                    # I/O / Anticipatory / Domain
+  model: claude-opus-4-6
+  role: CRAFT-THEORY + CRAFT-ARCH
+  budget_tokens: 35000
+  domains: [computability_theory, agent_architecture]
+  note: "Domain depth: theorem nuance, GSD grounding"
+
+gary_68000:               # CPU / Glue Logic / Scaffolding
+  model: claude-haiku-4-5
+  role: PLAN + BUDGET + schemas
+  budget_tokens: 10000
+  tasks: [terminology_schema, source_index, templates]
+  note: "No judgment required: structured scaffolding"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Shannon's 1956 fungibility theorem, both directions, with known UTM size frontier
+  \item Chomsky hierarchy from Type 0 through Type 3 with tape-resource characterization
+  \item Linear bounded automata and context-sensitive languages (Myhill 1960, Landweber 1963)
+  \item Halting problem and Rice's theorem with connection to tape unboundedness
+  \item Configuration space argument for decidability of bounded-tape halting
+  \item GSD context window architecture formally characterized as bounded-tape regime
+  \item Fresh-context subagents as tape-reset strategy with formal grounding
+  \item DACP three-part bundle as structured state serialization
+  \item The LBA open problem (nondeterministic vs.\ deterministic equivalence)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Complexity theory (P vs.\ NP, circuit complexity, time and space hierarchies beyond LBA)
+  \item Quantum computation models (quantum Turing machines, BQP)
+  \item Hypercomputation and super-Turing models
+  \item Full formal proofs of Shannon's theorem (reference-level treatment only)
+  \item Implementation of Turing machine simulators in executable code
+  \item Specific GSD codebase analysis (handled by gsd-skill-creator architecture mission)
+  \item Cellular automata or other non-tape computation models
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Shannon's fungibility theorem stated with both directions: any $m$-state machine has a 2-state equivalent; any $n$-symbol machine has a 2-symbol equivalent.
+  \item The distinction between state-symbol fungibility and tape-length fungibility is explicit and unambiguous, with clear statement that the former preserves computational power and the latter does not.
+  \item The complete UTM size frontier table is reproduced with (states, symbols) pairs, contributors, and years.
+  \item Chomsky hierarchy mapped to tape-resource constraints with at least one representative language class per level (RE, CS, CF, Regular).
+  \item Configuration space argument developed: bounded tape $\Rightarrow$ finite configs $\Rightarrow$ halting decidable.
+  \item Halting problem and Rice's theorem stated with explicit connection to tape unboundedness.
+  \item At least one formal definition of Turing machine appears (state set, tape alphabet, transition function, configuration).
+  \item Shannon's 1956 paper correctly cited with Bell Labs provenance and Princeton University Press publication details.
+  \item GSD context window formally characterized as a bounded-tape regime with at least one computational consequence stated.
+  \item Fresh-context subagent architecture formally connected to tape-reset as a computability-strategy.
+  \item DACP three-part bundle characterized as structured state serialization enabling valid tape reset between subagent invocations.
+  \item The Amiga Principle stated as a corollary of Shannon's theorem in the agent architecture domain.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+GSD Skill-Creator Architecture (v1.49) & This mission provides formal grounding for the three-solution context bottleneck approach (VBW / GSD / skill-creator) \\
+DACP Milestone Spec & This mission formalizes why structured handoffs are computability-preserving where markdown handoffs are not \\
+The Space Between & Eight-layer mathematical progression (Unit Circle through L-Systems) provides structural scaffolding; this mission sits between Set Theory and Information Systems Theory layers \\
+GSD Chipset Architecture Vision & Opus/Sonnet/Haiku allocation mirrors the states/symbols resource trade-off: rich judgment in few high-capacity agents \\
+v1.50 Retrospective (planned) & The Space Between proof companion (Half B) will draw on this mission's formal grounding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between states are where computation happens. Shannon understood this. A machine with two states and eighteen symbols is not a diminished machine --- it is a machine that has relocated its complexity from the control unit into the alphabet, into the tape, into the symbols it reads and writes. The intelligence is in the transitions, not the nodes. The meaning is in the movement between configurations, not the configurations themselves.
+
+This is the GSD architectural philosophy restated as mathematics. The context window is not an annoyance to be maximized; it is a tape to be managed. When the tape fills, you do not add more states to the control unit --- more parameters, a bigger model, more layers. You reset the tape. A fresh context. A clean subagent. A structured DACP bundle that carries forward exactly the minimal state required to continue computation from the correct configuration. The complexity budget is conserved, not expanded. The Amiga achieves what the Cray cannot, not by having less, but by allocating what it has with architectural precision.
+
+Shannon's theorem says: you can always trade states for symbols. GSD's architecture says: you can always trade context length for context quality. The insight is the same register, different domains. Small, principled building blocks, faithfully iterated, produce staggering complexity. This is not a design philosophy. It is a theorem.
+
+\newpage
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{States, Symbols, and Tape --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings for all five research modules. Each section provides synthesized primary source content, key definitions, and quantitative claims. All numerical claims are attributed to specific sources. Content harvested from the originating conversation (March 28, 2026) is annotated where appropriate.
+
+\textbf{Key source organizations and publications:}
+\begin{itemize}
+  \item \textbf{Shannon (1956):} ``A Universal Turing Machine with Two Internal States'' in \textit{Automata Studies}, Annals of Mathematics Studies No.~34, Princeton University Press. Originally Bell Labs Memo MM-54-114-38, May 15, 1954.
+  \item \textbf{Turing (1936):} ``On Computable Numbers, with an Application to the Entscheidungsproblem,'' \textit{Proceedings of the London Mathematical Society}, Series 2, Vol.~42.
+  \item \textbf{Copeland et al.\ (SEP):} ``Turing Machines,'' \textit{Stanford Encyclopedia of Philosophy}. \url{https://plato.stanford.edu/entries/turing-machine/}
+  \item \textbf{Wolfram (2002):} \textit{A New Kind of Science}, Wolfram Media.
+  \item \textbf{Chomsky (1956):} ``Three Models for the Description of Language,'' \textit{IRE Transactions on Information Theory}, 2(3).
+\end{itemize}
+
+\subsection{Module 1: Formal Foundations}
+
+\subsubsection{The Turing Machine Model (1936)}
+
+Alan Turing introduced the computing machine in 1936 as a formalization of ``effective procedure.'' A Turing machine consists of a \textbf{finite set of states} $Q$, a \textbf{tape alphabet} $\Gamma$ including a blank symbol $B$, an \textbf{input alphabet} $\Sigma \subset \Gamma$, a \textbf{one-way infinite tape} divided into cells each holding one symbol from $\Gamma$, a \textbf{read-write head}, and a \textbf{transition function} $\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R\}$ (Stanford Encyclopedia of Philosophy, 2024).
+
+The \textbf{configuration} of a machine at any moment is the triple: (current state, tape contents, head position). This is the total instantaneous description of the computation.
+
+For a machine with $m$ states, $n$ tape symbols, and tape restricted to $k$ cells, the maximum number of distinct configurations is:
+\[
+C_{\max} = m \times n^k \times k
+\]
+This quantity is finite whenever $k$ is bounded.
+
+\subsubsection{Finite State Machines as the No-Tape Special Case}
+
+A finite state machine (FSM) is equivalent to a Turing machine restricted to read-only operations with head movement only rightward (Wikipedia, Finite-State Machine, 2025). Its configuration space is exactly $Q$ --- a finite set independent of input length. Consequently FSMs recognize precisely the \textbf{regular languages} (Type 3): languages decidable by a single left-to-right scan with constant memory.
+
+\subsection{Module 2: Shannon Trade-off}
+
+\subsubsection{The Fungibility Theorem}
+
+Claude Shannon proved two complementary results in 1956 (Stanford Encyclopedia of Philosophy, 2024; Wikipedia, Universal Turing Machine, 2025):
+
+\begin{enumerate}
+  \item \textbf{Symbol reduction:} For any Turing machine $T$ with $n$ symbols in its tape alphabet, there exists a Turing machine $T'$ with exactly \textbf{2 symbols} that simulates $T$.
+  \item \textbf{State reduction:} For any Turing machine $T$ with $m$ states, there exists a Turing machine $T'$ with exactly \textbf{2 states} that simulates $T$.
+\end{enumerate}
+
+Shannon also proved that \textbf{no universal Turing machine with only 1 state can exist}: the minimum viable universal machine requires at least 2 states (Wikipedia, Universal Turing Machine, 2025).
+
+The mechanism: extra states can be encoded into combinations of tape symbols (grouping tape cells to represent richer symbols), and extra symbols can be encoded into state distinctions (state ``remembers'' what was read). Complexity is conserved; only its denomination changes. The analogy to currency exchange is precise: the buying power is the same, but the bills are different sizes.
+
+\subsubsection{The UTM Size Frontier}
+
+Research since Shannon has progressively found smaller universal Turing machines. Universality is achieved by simulating other universal models (tag systems, cellular automata, etc.) rather than direct simulation (Stanford Encyclopedia of Philosophy, 2024).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}C{2cm}L{5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{States} & \tableheader{Symbols} & \tableheader{Key Contributor} & \tableheader{Year} \\
+\midrule
+15 & 2 & Shannon & 1956 \\
+7 & 4 & Minsky (via 2-tag systems) & 1962 \\
+6 & 4 & Rogozhin & 1996 \\
+5 & 5 & Rogozhin & 1996 \\
+4 & 6 & Rogozhin & 1996 \\
+3 & 9 & Rogozhin & 1996 \\
+2 & 18 & Rogozhin & 1996 \\
+2 & 3 & Smith (Wolfram prize, weak universal) & 2007 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Source: Wikipedia, Universal Turing Machine (2025). Each pair on this frontier computes the same class of functions. Moving along the curve trades states for symbols while preserving Turing-completeness.
+
+\subsubsection{Wolfram's (2,3) Machine}
+
+Stephen Wolfram conjectured in \textit{A New Kind of Science} (2002) that a 2-state, 3-symbol machine might be universal and offered a \$25{,}000 prize for proof or disproof. Alex Smith, a student at the University of Birmingham, claimed the prize in 2007 by proving the machine universal --- subject to the caveat that the proof applies to a non-standard model allowing infinite non-periodic initial configurations and non-halting computation. This is classified as ``weak universal'' by some researchers (Wikipedia, Wolfram's 2-State 3-Symbol Turing Machine, 2026).
+
+\subsection{Module 3: Tape-Length Hierarchy}
+
+\subsubsection{Linear Bounded Automata}
+
+John Myhill introduced the deterministic linear bounded automaton (LBA) in 1960 as a Turing machine restricted to the portion of tape occupied by the input. In 1963, Peter Landweber proved that deterministic LBAs recognize exactly the \textbf{context-sensitive languages} (Type 1 in the Chomsky hierarchy) (Wikipedia, Linear Bounded Automaton, 2026).
+
+An LBA with $q$ states, $m$ tape symbols, and input length $n$ can be in at most:
+\[
+q \times n \times m^n
+\]
+distinct configurations (GeeksforGeeks, Introduction to LBA, 2021). This quantity is finite for any fixed $n$, meaning that for each specific input, the LBA behaves as a finite automaton: its behavior is enumerable and its halting problem is decidable.
+
+\subsubsection{The LBA Open Problem}
+
+Whether nondeterministic LBAs (NLBAs) are strictly more powerful than deterministic LBAs (DLBAs) remains an open problem, analogous in structure to P vs.\ NP but for context-sensitive languages (GeeksforGeeks, Introduction to LBA, 2021). Context-sensitive languages sit between context-free (Type 2) and recursively enumerable (Type 0) in expressive power.
+
+\subsubsection{The Configuration Space Argument}
+
+The fundamental reason bounded tape implies bounded power is the configuration counting argument:
+
+\begin{enumerate}
+  \item Let $M$ be any machine with $q$ states, $m$ tape symbols, tape bounded to $k$ cells.
+  \item The total number of distinct configurations of $M$ is at most $C = q \times m^k \times k$ --- a finite number.
+  \item If $M$ runs for more than $C$ steps without halting, it must revisit a configuration.
+  \item A revisited configuration implies an infinite loop: $M$ will never halt from that configuration.
+  \item Therefore, halting is decidable for any bounded-tape $M$: simulate for $C+1$ steps and check.
+\end{enumerate}
+
+Consequence: \textbf{infinite tape is necessary} (not merely sufficient) for undecidability. Any machine whose tape length is a computable function of the input has a decidable halting problem for that input.
+
+\subsection{Module 4: Limits and Undecidability}
+
+\subsubsection{The Halting Problem}
+
+Turing proved in 1936 that no Turing machine can decide, for arbitrary Turing machine $M$ and arbitrary input $w$, whether $M$ halts on $w$ (Stanford Encyclopedia of Philosophy, 2024). The proof proceeds by diagonalization: assume a halting oracle $H$ exists; construct machine $D$ that uses $H$ to invert its own predicted behavior; observe the contradiction when $D$ is run on itself.
+
+The halting problem requires \textit{infinite tape} because the diagonalization argument requires the ability to simulate arbitrary Turing machines, including those that use tape in unbounded quantities. A halting oracle for \textit{bounded-tape} machines is constructable: simulate for $C+1$ steps (where $C$ is the configuration count), observe whether the machine halts.
+
+\subsubsection{Rice's Theorem}
+
+Rice's theorem (Henry Gordon Rice, 1951) generalizes the halting problem: any non-trivial property of the \textit{function computed} by a Turing machine is undecidable. A property is non-trivial if some machines have it and some do not. Properties covered include: ``does this machine always halt?'', ``does this machine ever output 1?'', ``does this machine compute the identity function?''
+
+Rice's theorem applies only to machines with infinite tape. For bounded-tape machines, function properties are decidable by enumeration of the finite configuration space.
+
+\subsubsection{The Infinite Tape as Enabler of Paradox}
+
+The diagonalization argument that proves the halting problem requires a machine that can simulate any other machine, including itself. This self-reference requires unbounded tape: the description of the machine being simulated must be read from the tape, and no fixed-size description space suffices for all machines. The infinite tape is what makes Turing machines capable of paradox --- and paradox is what makes them capable of encoding undecidability.
+
+\subsection{Module 5: GSD Architectural Synthesis (Preliminary)}
+
+\subsubsection{The Context Window as Bounded Tape}
+
+A transformer language model operating within a fixed context window of $k$ tokens is, from a computability perspective, a bounded-tape machine. Its ``tape'' is the context; its ``states'' are encoded in its parameters (weights). For a model with parameter-state count $p$ and vocabulary size $v$ operating on $k$ tokens:
+\[
+C_{\max} = p \times v^k \times k
+\]
+This is a finite number for any fixed $k$. The computational consequence: LLMs with fixed context windows \textit{in principle} cannot guarantee correctness on problems requiring unbounded working memory. They can approximate such solutions but cannot solve them in the Turing-complete sense.
+
+\subsubsection{Three Architectural Responses to Bounded Tape}
+
+The GSD ecosystem has identified three independent architectural responses to the context bottleneck (GSD Skill-Creator Architecture, v1.49):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Strategy} & \tableheader{Mechanism} & \tableheader{Shannon Analogy} \\
+\midrule
+VBW & Compress information on the tape; more signal per token & Symbol enrichment (richer alphabet = more symbols per cell) \\
+GSD Subagents & Reset tape between computation steps via fresh context & Tape reset: preserve state, clear and reinitialize tape \\
+Skill-Creator & Build reusable compressed procedures in the state machine & State enrichment (encode recurring patterns into machine logic) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{DACP as Valid Tape-Reset Protocol}
+
+The Deterministic Agent Communication Protocol defines a structured three-part handoff bundle: \{human intent $+$ structured data $+$ executable code\}. From a computability perspective, this bundle is a \textbf{valid serialization of the finite computational state}: sufficient to initialize a fresh-context subagent at the correct configuration without re-running the full prior computation. The handoff is deterministic rather than markdown-ambiguous precisely because it encodes state rather than narrating state. Markdown narration is a description of a configuration; a DACP bundle \textit{is} a configuration.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk} & \tableheader{Mitigation} \\
+\midrule
+Theorem attribution & Misattributing Shannon's result & All formal claims verified against Stanford Encyclopedia; Shannon, Turing, Myhill, Landweber, Rogozhin individually credited \\
+Open problems & Presenting open problems as settled & LBA nondeterminism vs.\ determinism explicitly flagged as unresolved \\
+GSD architectural claims & Overclaiming computability equivalence for LLMs & Formal characterization is architectural framing; formal proof of LLM-as-bounded-TM is out of scope \\
+Wolfram (2,3) machine & Presenting weak universality as full universality & Smith's 2007 proof and its ``weak universal'' classification explicitly noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources}
+\begin{itemize}
+  \item Shannon, C.E. (1956). ``A Universal Turing Machine with Two Internal States.'' In C.E. Shannon \& J. McCarthy (Eds.), \textit{Automata Studies}, Annals of Mathematics Studies No.~34 (pp.~157--165). Princeton University Press. [Originally Bell Labs Memo MM-54-114-38, May 15, 1954.]
+  \item Turing, A.M. (1936). ``On Computable Numbers, with an Application to the Entscheidungsproblem.'' \textit{Proceedings of the London Mathematical Society}, Series 2, 42, 230--265.
+  \item Chomsky, N. (1956). ``Three Models for the Description of Language.'' \textit{IRE Transactions on Information Theory}, 2(3), 113--124.
+  \item Wolfram, S. (2002). \textit{A New Kind of Science}. Wolfram Media.
+\end{itemize}
+
+\subsubsection{Encyclopedic and Survey Sources}
+\begin{itemize}
+  \item Copeland, B.J. et al.\ (2018--2024). ``Turing Machines.'' \textit{Stanford Encyclopedia of Philosophy}. \url{https://plato.stanford.edu/entries/turing-machine/}
+  \item Wikipedia contributors. (2025). ``Universal Turing Machine.'' \textit{Wikipedia, The Free Encyclopedia}.
+  \item Wikipedia contributors. (2026). ``Linear Bounded Automaton.'' \textit{Wikipedia, The Free Encyclopedia}.
+  \item Wikipedia contributors. (2026). ``Wolfram's 2-State 3-Symbol Turing Machine.'' \textit{Wikipedia, The Free Encyclopedia}.
+  \item Wikipedia contributors. (2025). ``Finite-State Machine.'' \textit{Wikipedia, The Free Encyclopedia}.
+  \item Stanford CS (2004--05). ``Basics of Automata Theory.'' \url{https://cs.stanford.edu/people/eroberts/courses/soco/projects/2004-05/automata-theory/basics.html}
+\end{itemize}
+
+\subsubsection{Technical and Professional Sources}
+\begin{itemize}
+  \item GeeksforGeeks. (2021). ``Introduction to Linear Bounded Automata (LBA).'' \url{https://www.geeksforgeeks.org/introduction-to-linear-bounded-automata-lba/}
+  \item GSD Skill-Creator Repository (v1.49). \url{https://github.com/Tibsfox/gsd-skill-creator} (dev branch). DACP milestone documentation.
+\end{itemize}
+
+\newpage
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained reference document on Shannon's states-symbols fungibility theorem, the Chomsky hierarchy as a tape-length resource model, and the formal grounding of GSD's context window architecture within computability theory. The deliverable is publication-quality research suitable as a reference for GSD skill-creator agents and as a mathematical foundation chapter for the v1.50 retrospective (\textit{The Space Between} proof companion, Half B).
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+=======================================================
+  Wave 0: FOUNDATION
+  [Haiku] Shared schemas, source index, terminology
+     |
+     +-------------------------+
+     |                         |
+  Wave 1A: TRACK A          Wave 1B: TRACK B
+  [Sonnet] MOD-1 Survey     [Sonnet] MOD-3 Survey
+  [Opus]   MOD-2 Analysis   [Opus]   MOD-4 Analysis
+     |                         |
+     +-------------------------+
+                 |
+          Wave 2: SYNTHESIS
+          [Opus] MOD-5: GSD Grounding
+          Cross-module integration
+          CAPCOM gate
+                 |
+          Wave 3: PUBLICATION
+          [Sonnet] Assembly + Verification
+=======================================================
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Schema Layer} (Wave 0): Shared terminology definitions (20--30 terms), source index, module input/output interfaces.
+  \item \textbf{Survey Layer} (Wave 1): Primary source compilation per module, quantitative data extraction, theorem statements.
+  \item \textbf{Analysis Layer} (Wave 1): Proof sketches, formal definitions, configuration arguments.
+  \item \textbf{Synthesis Layer} (Wave 2): Cross-module integration, GSD architectural grounding, DACP formalization.
+  \item \textbf{Publication Layer} (Wave 3): Document assembly, citation verification, test execution.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Owner} \\
+\midrule
+D1 & Formal Foundations section & TM definition, configuration space, FSM special case, with sources & CRAFT-THEORY \\
+D2 & Shannon Trade-off section & Both theorem directions, UTM frontier table complete, Wolfram caveat & CRAFT-THEORY \\
+D3 & Tape Hierarchy section & Chomsky hierarchy, LBA definition, configuration argument & CRAFT-THEORY \\
+D4 & Limits section & Halting problem + Rice's theorem, tape connection explicit & CRAFT-THEORY \\
+D5 & GSD Synthesis section & All 3 strategies grounded; DACP characterized as state serialization & CRAFT-ARCH \\
+D6 & Integrated document & 5 modules synthesized; all cross-references verified; self-contained & INTEG \\
+D7 & Test report & All SC and CF mandatory tests passing; edge cases logged & VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Terminology schema & None & Haiku & 8K \\
+Source index & None & Haiku & 5K \\
+MOD-1: Formal Foundations & Schema & Sonnet & 35K \\
+MOD-2: Shannon Trade-off & Schema, MOD-1 & Opus & 45K \\
+MOD-3: Tape-Length Hierarchy & Schema & Sonnet & 35K \\
+MOD-4: Limits + Undecidability & Schema, MOD-3 & Opus & 40K \\
+MOD-5: GSD Synthesis & D1--D4, DACP spec & Opus & 50K \\
+Integration pass & D1--D5 & Opus & 30K \\
+Publication assembly & All & Sonnet & 25K \\
+Verification + test report & All & Sonnet & 15K \\
+\midrule
+\textbf{Total} & & & \textbf{288K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Role(s)} & \tableheader{Rationale} \\
+\midrule
+Opus (34\%) & MOD-2, MOD-4, MOD-5, Integration & Theorem nuance, undecidability arguments, architectural synthesis, cross-module coherence --- judgment-heavy throughout \\
+Sonnet (57\%) & MOD-1, MOD-3, Publication, Verify & Survey compilation, hierarchy documentation, assembly, source checking --- structural throughout \\
+Haiku (9\%) & Schema, Source index & Structured templates, no judgment required; scaffolding only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Primary Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index \\
+1A & Track A: Theory+Shannon & Parallel & Sonnet+Opus & D1 + D2 \\
+1B & Track B: Hierarchy+Limits & Parallel & Sonnet+Opus & D3 + D4 \\
+2 & Synthesis & Sequential & Opus & D5 + D6 \\
+3 & Publication & Sequential & Sonnet & D7 + final PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Terminology schema & PLAN / Haiku & Define 25 core terms: TM, FSM, LBA, configuration, transition function, Church-Turing thesis, Chomsky hierarchy levels, context-sensitive, regular, RE, Rice's theorem, halting problem, UTM, fungibility, DACP, tape reset \\
+Source index & PLAN / Haiku & Index all primary and secondary sources with DOIs/URLs and access paths \\
+Module interfaces & PLAN / Haiku & Define input/output contracts for each of the 5 modules \\
+CAPCOM gate & CAPCOM & Human approval of schemas before Wave 1 launch \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- MOD-1 (Foundations) and MOD-2 (Shannon):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+TM formal definition & CRAFT-THEORY / Sonnet & State set, tape alphabet, transition function, configuration triple \\
+FSM as special case & CRAFT-THEORY / Sonnet & No-tape restriction, read-only scan, regular language recognition \\
+Church-Turing thesis & CRAFT-THEORY / Sonnet & Statement and philosophical status (not a theorem, a thesis) \\
+Shannon symbol reduction & CRAFT-THEORY / Opus & State precisely: any $n$-symbol TM has a 2-symbol equivalent \\
+Shannon state reduction & CRAFT-THEORY / Opus & State precisely: any $m$-state TM has a 2-state equivalent \\
+UTM frontier table & CRAFT-THEORY / Opus & Complete table (15,2) through (2,18) with contributors and years \\
+Wolfram (2,3) machine & CRAFT-THEORY / Opus & Prize, Smith proof, weak universality caveat clearly noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- MOD-3 (Hierarchy) and MOD-4 (Limits):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Chomsky hierarchy & CRAFT-THEORY / Sonnet & All four levels with grammar types and language classes \\
+LBA definition & CRAFT-THEORY / Sonnet & Myhill 1960, Landweber 1963, endmarker constraints, input-bounded tape \\
+Configuration argument & CRAFT-THEORY / Sonnet & Full argument: bounded tape $\Rightarrow$ finite configs $\Rightarrow$ decidable halting \\
+LBA open problem & CRAFT-THEORY / Sonnet & NLBA vs.\ DLBA: state clearly as unresolved \\
+Halting problem & CRAFT-THEORY / Opus & Turing 1936 diagonalization; tape necessity for undecidability \\
+Rice's theorem & CRAFT-THEORY / Opus & Statement; contrast with bounded-tape decidability \\
+G\"{o}del connection & CRAFT-THEORY / Opus & Relationship between incompleteness and computability limits \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Context window as bounded tape & CRAFT-ARCH / Opus & LLM context as bounded tape; configuration space analysis; computational consequences \\
+Three-response architecture & CRAFT-ARCH / Opus & VBW, GSD, skill-creator formally grounded in computability framework \\
+DACP formalization & CRAFT-ARCH / Opus & Handoff bundle as valid state serialization; markdown contrast \\
+Amiga Principle corollary & CRAFT-ARCH / Opus & Shannon's theorem applied to agent architecture; formal statement \\
+Cross-module integration & INTEG / Opus & Consistent definitions, cross-references, no contradictions \\
+CAPCOM gate & CAPCOM & Human review of synthesis before publication wave \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Document assembly & EXEC / Sonnet & Compile all module outputs into unified document with correct ordering \\
+Source verification & VERIFY / Sonnet & Confirm all citations traceable; flag any broken URLs or unverifiable claims \\
+Test suite execution & VERIFY / Sonnet & Run all SC, CF, IN, EC tests; produce test report \\
+XeLaTeX compilation & EXEC / Sonnet & Three-pass compilation; resolve TOC, cross-references, lastpage \\
+Final delivery & LOG / Sonnet & Commit, changelog entry, handoff bundle to user \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item \textbf{Shared schemas at Wave 0:} Terminology and source index computed once, cached, and shared across all Wave 1 agents. Exploits the 5-minute TTL for maximum cache reuse within the parallel tracks.
+  \item \textbf{Parallel tracks:} Tracks A and B share no dependencies. Both can launch immediately after Wave 0 gate, with full cache overlap on the schema and source index prefixes.
+  \item \textbf{Module outputs as atomic units:} Each module output is a complete, self-contained document. The synthesis agent (Wave 2) receives all five outputs in a single fresh context --- no re-derivation required.
+  \item \textbf{DACP handoffs between waves:} Each wave produces a structured three-part bundle (intent + data + executable continuation) for the next wave. No information is lost; no context is required to be inferred from prose.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{2cm}C{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave / Component} & \tableheader{Model} & \tableheader{Est.\ Tokens} & \tableheader{Sessions} \\
+\midrule
+Wave 0: Foundation & Haiku & 13K & 1 \\
+Wave 1A: MOD-1 + MOD-2 & Sonnet+Opus & 80K & 1 \\
+Wave 1B: MOD-3 + MOD-4 & Sonnet+Opus & 75K & 1 \\
+Wave 2: Synthesis + Integration & Opus & 80K & 1 \\
+Wave 3: Publication + Verification & Sonnet & 40K & 1 \\
+\midrule
+\textbf{Total} & & \textbf{288K} & \textbf{5} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================================================
+  [Schema] ----+---- [Source Index]
+               |
+       +-------+-------+
+       |               |
+   [MOD-1]         [MOD-3]
+       |               |
+   [MOD-2]         [MOD-4]
+       |               |
+       +-------+-------+
+               |
+           [MOD-5]
+               |
+        [Integration]
+               |
+        [Publication]
+               |
+        [Verification]
+=================================================
+MOD-1 and MOD-3 run in parallel (Wave 1A / 1B)
+MOD-2 requires MOD-1 complete
+MOD-4 requires MOD-3 complete
+MOD-5 requires D1 through D4 all complete
+=================================================
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{On Failure} \\
+\midrule
+Safety-critical & Source quality and attribution integrity & 4 & BLOCK \\
+Core functionality & Success criterion verification & 24 & BLOCK \\
+Integration & Cross-module consistency & 6 & BLOCK \\
+Edge cases & Robustness and gap acknowledgment & 6 & LOG \\
+\midrule
+\textbf{Total} & & \textbf{40} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to primary sources, the Stanford Encyclopedia of Philosophy, or peer-reviewed publications. Zero entertainment media, blogs, or unsourced claims. \\
+SC-NUM & Numerical attribution & All quantitative claims (UTM frontier entries, configuration space formulas, tape cell counts, model percentages) attributed to specific named sources. \\
+SC-ADV & No advocacy & Document presents computability findings without advocating for specific software architectures, AI systems, or programming languages beyond GSD's documented design rationale. \\
+SC-ATR & Attribution integrity & Shannon, Turing, Myhill, Landweber, Chomsky, Rogozhin, and Smith individually credited. No result attributed to the wrong author. Wolfram (2,3) prize and Smith's weak-universality caveat both included. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Shannon theorem both directions stated & CF-01, CF-02 & Pending \\
+2. State-symbol vs.\ tape-length distinction explicit & CF-03 & Pending \\
+3. UTM frontier table complete with contributors & CF-04 & Pending \\
+4. Chomsky hierarchy mapped to tape constraints & CF-05, CF-06 & Pending \\
+5. Configuration space argument developed & CF-07, CF-08 & Pending \\
+6. Halting problem stated with tape connection & CF-09 & Pending \\
+7. Rice's theorem stated & CF-10 & Pending \\
+8. Formal TM definition present & CF-11 & Pending \\
+9. Shannon (1956) correctly cited & SC-SRC, SC-ATR & Pending \\
+10. Context window characterized as bounded tape & CF-12, CF-13 & Pending \\
+11. Fresh-context connected to tape-reset & CF-14 & Pending \\
+12. DACP as state serialization & CF-15 & Pending \\
+13. Amiga Principle as corollary stated & CF-16 & Pending \\
+14. Document self-contained & IN-01, IN-02, IN-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates between all waves \\
+PLAN & Planner & Wave decomposition; dependency ordering; module interface specs \\
+SCOUT & Research Agent & Source gathering; web verification of UTM frontier data and LBA literature \\
+EXEC-1 & Executor Alpha & Document production for Track A (MOD-1 + MOD-2) \\
+EXEC-2 & Executor Beta & Document production for Track B (MOD-3 + MOD-4) \\
+CRAFT-THEORY & Theory Specialist & Primary computability analysis; theorem statements; proof sketches \\
+CRAFT-ARCH & Architecture Specialist & GSD synthesis; DACP formalization; Amiga Principle corollary \\
+VERIFY & Verification Agent & Source validation; test suite execution; test report production \\
+INTEG & Integration Agent & Cross-module consistency; unified document coherence \\
+CAPCOM & HITL Interface & Human approval at Wave 0 gate and Wave 2 gate \\
+BUDGET & Resource Manager & Token budget tracking; session boundary management \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; changelog entries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Squadron (12 roles) \\
+Research modules & 5 \\
+Parallel tracks & 2 (Wave 1A and 1B) \\
+HITL gates & 2 (after Wave 0; after Wave 2) \\
+Total estimated tokens & 288K \\
+Estimated sessions & 5 \\
+Model split & Opus 34\% / Sonnet 57\% / Haiku 9\% \\
+Total deliverables & 7 \\
+Total tests & 40 (4 SC + 24 CF + 6 IN + 6 EC) \\
+Primary source authority & Shannon (1956), Turing (1936), Stanford Encyclopedia of Philosophy \\
+Mission originated from & Conversation with Miles Tiberius Foxglove, March 28, 2026 \\
+Target integration & GSD Skill-Creator v1.49+; v1.50 Retrospective Half B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Shannon showed that two symbols were sufficient so long as enough states were used (or vice versa), and that it was always possible to exchange states for symbols.''} \\[0.5em]
+\hfill --- Wikipedia, Universal Turing Machine (2025), summarizing Shannon (1956)
+
+\vspace{1em}
+The complexity budget is conserved. Only its denomination changes. A machine with two states and eighteen symbols, a two-subagent pipeline with a structured handoff bundle, a skill-creator that compresses recurring computation into reusable procedures: these are not different philosophies. They are the same insight expressed in different registers. The intelligence is in the transitions between configurations. The meaning is in the movement, not the nodes. Shannon proved this. GSD builds with it.
+\end{quotebox}
+
+\end{document}
