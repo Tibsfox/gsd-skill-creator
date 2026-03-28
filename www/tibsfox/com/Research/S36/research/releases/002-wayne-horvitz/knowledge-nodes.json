@@ -1,0 +1,159 @@
+{
+  "degree": 2,
+  "artist": "Wayne Horvitz",
+  "slug": "002-wayne-horvitz",
+  "genre": "Jazz (avant-garde, experimental, chamber, film)",
+  "energy": 2,
+  "era": "1980s-present",
+  "location": {
+    "origin": "New York City, NY",
+    "formative": "University of California, Santa Cruz — composition, gamelan, electronic music",
+    "career": "New York City (downtown scene) → Seattle, WA (Capitol Hill, 1988-present)"
+  },
+  "born": "1955",
+  "died": null,
+  "labels": ["Intuition", "Songlines", "Sound Aspects", "Elektra/Nonesuch", "National Sawdust Tracks"],
+  "theory_nodes": [
+    {
+      "concept": "Composed improvisation",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/composition/composed-improvisation.md",
+      "examples": [
+        "Gravitas Quartet — Way Out East (2006, Songlines): structurally complete compositions with designated improvisational openings",
+        "Gravitas Quartet — Some Places Are Forever Afternoon (2015): extended composed-improvisation forms",
+        "Zony Mash — structured grooves with eruptive improvisational sections"
+      ],
+      "description": "Compositions that are structurally complete but contain designated spaces where improvisation is expected, invited, and bounded. The architectural plan specifies harmony, texture, dynamic arc, and timbral palette; the performers furnish the rooms. More detailed than a jazz lead sheet, less prescriptive than a full orchestral score.",
+      "genealogy": {
+        "ancestors": ["Big band orchestration (degree 0)", "Silence as structure (degree 1)"],
+        "relationship": "mediator — Jones composed everything (full scores), Frisell composes loosely (frameworks), Horvitz sits between: detailed structural plans with designated improvisational spaces"
+      }
+    },
+    {
+      "concept": "Polymetric structures",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/polymetric-structures.md",
+      "examples": [
+        "Zony Mash — Brand Spankin' New (1998): bass in 4/4 against guitar riffs in 7/8",
+        "Zony Mash — Upper Egypt (2001): layered rhythmic cycles",
+        "Gravitas Quartet cross-rhythm passages"
+      ],
+      "description": "Multiple simultaneous time signatures operating in parallel. Individual parts are internally consistent; complexity emerges from interaction. Rhythmic polyphony that mirrors harmonic polyphony. Extends the rhythmic vocabulary beyond Jones's swing (regular pulse + syncopation) and Frisell's rubato (dissolved pulse) to multiplied pulse.",
+      "genealogy": {
+        "ancestors": [],
+        "relationship": "new concept — first polymetric instance in S36 engine. Rhythmic spectrum: Jones (regular pulse) → Horvitz (multiplied pulse) → Frisell (dissolved pulse)"
+      }
+    },
+    {
+      "concept": "Cluster voicings",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/cluster-voicings.md",
+      "examples": [
+        "Gravitas Quartet — piano passages with adjacent-second stacking",
+        "Some Places Are Forever Afternoon (2015) — middle-register density as gravitational anchor",
+        "Chamber works where clusters anchor free improvisation above and below"
+      ],
+      "description": "Chords built from adjacent seconds (C-D-E or C-Db-D) creating dense harmonic texture. Bartok/Ligeti lineage deployed in jazz-adjacent contexts. Where Frisell leaves registers empty (implied polyphony), Horvitz fills the middle register with clusters (explicit density). Part of the density spectrum: Jones (maximum, all registers) → Horvitz (selective, middle register) → Frisell (minimum, registers empty).",
+      "genealogy": {
+        "ancestors": ["Big band orchestration (degree 0)", "Open voicings and wide intervals (degree 1)"],
+        "relationship": "density spectrum midpoint — Jones fills all registers, Frisell empties them, Horvitz selectively fills the middle register"
+      }
+    },
+    {
+      "concept": "Quartal voicings",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/quartal-voicings.md",
+      "examples": [
+        "Gravitas Quartet — Way Out East (2006): quartal piano voicings blending with cello and bassoon",
+        "Chamber works where stacked fourths produce open, ambiguous sonority"
+      ],
+      "description": "Chords stacked in fourths (C-F-Bb-Eb) rather than traditional tertian stacking of thirds. Open, ambiguous sound — neither major nor minor, neither tense nor resolved. McCoy Tyner lineage via Coltrane quartet. Complements Frisell's modal ambiguity (degree 1) — both seek territory outside the major/minor binary through different voicing techniques.",
+      "genealogy": {
+        "ancestors": ["Modal ambiguity (degree 1)"],
+        "relationship": "parallel approach — Frisell achieves ambiguity via wide intervals omitting the third; Horvitz achieves it via quartal stacking replacing the third with a fourth"
+      }
+    },
+    {
+      "concept": "Electronic-acoustic integration",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/production/electronic-acoustic-integration.md",
+      "examples": [
+        "Zony Mash — Cold Spell (2005): electronics alongside Hammond organ and guitar",
+        "Live performances with real-time piano/organ signal processing",
+        "Film scoring with chamber-electronic hybrid textures"
+      ],
+      "description": "Electronic processing as extension of acoustic instrument, not replacement. Piano or organ signal processed in real time — sampling, looping, effects — creating textures that blur the boundary between acoustic source and electronic transformation. Parallels Frisell's signal-chain-as-instrument approach from the keyboard rather than the guitar.",
+      "genealogy": {
+        "ancestors": ["Delay as counterpoint (degree 1)", "Cross-genre production (degree 0)"],
+        "relationship": "technology-as-instrument advances — Jones (studio production), Frisell (guitar signal chain), Horvitz (keyboard signal chain)"
+      }
+    },
+    {
+      "concept": "Through-composed form meets improvisation",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/composition/through-composed-improvisation.md",
+      "examples": [
+        "Gravitas Quartet extended compositions — continuous arc with improvisational eruptions",
+        "The Royal Room live performances — long-form structural arcs",
+        "Film scoring — dramatic narrative structure with performer freedom"
+      ],
+      "description": "Longer works that proceed as a continuous arc with improvisation erupting at specific structural moments — springs breaking through rock. The form is planned; the content of those specific moments is not. Synthesizes Jones's film-score narrative technique (degree 0) with Frisell's improvisational fluency (degree 1).",
+      "genealogy": {
+        "ancestors": ["Film score architecture (degree 0)", "Silence as structure (degree 1)"],
+        "relationship": "synthesis — Jones's through-composed narrative + Frisell's improvisational openness = Horvitz's through-composed form with designated improvisational eruptions"
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-001", "GRV", "DAA", "HFE", "MDB"],
+  "seattle_connection": "Capitol Hill (1988-present). Co-founder of The Royal Room (Columbia City, 2012). Built the institutional infrastructure of Seattle's improvised music community. Co-migration with Frisell from NYC downtown scene. Married to Robin Holcomb (singer/composer). The artist-as-institution pattern.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Composed improvisation — first instance, mediates between Jones (full score) and Frisell (loose frameworks)",
+      "Polymetric structures — first instance, extends rhythmic vocabulary beyond swing and rubato",
+      "Cluster voicings — first instance, midpoint on density spectrum",
+      "Quartal voicings — first instance, parallel to Frisell's modal ambiguity",
+      "Electronic-acoustic integration — third instance (Jones studio, Frisell guitar, Horvitz keyboard)",
+      "Through-composed improvisation — first instance, synthesizes degrees 0 and 1"
+    ],
+    "immediate_items": [
+      "Ernestine Anderson (degree 3) inherits: Garfield High School lineage from degree 0, Jackson Street corridor as direct personal context, Seattle vocal jazz tradition, the original export pattern (local cultivation → global departure)",
+      "Anderson bridges back to the Jackson Street era that Jones represents — degree 3 should close the loop on the original export pattern and contrast it with The Seattle Draw of degrees 1-2",
+      "The artist-as-institution pattern should be tracked at degree 3: did Anderson build infrastructure, or was she purely a performer? The spectrum: Jones (industry), Horvitz (community), Frisell (none — pure performer). Where does Anderson fall?",
+      "The Garfield High School pipeline (Jones, Anderson, Hendrix) needs expansion at degree 3 — Anderson attended in the late 1940s, overlapping with Jones's era",
+      "Robin Holcomb as degree neighbor: if she appears in the S36 engine, the Horvitz-Holcomb creative partnership should be treated as a shared context module"
+    ],
+    "pattern_items": [
+      "The composition-improvisation spectrum now has three data points — continue tracking at every subsequent degree",
+      "The density spectrum (Jones/Horvitz/Frisell) should be extended to subsequent keyboard and ensemble artists",
+      "The Seattle Draw pattern is confirmed (Horvitz 1988, Frisell 1989, Holcomb 1988) — track all NYC-to-Seattle migrations",
+      "Cross-genre bridge-building: Jones (jazz→pop/R&B/film), Frisell (jazz→Americana/folk), Horvitz (jazz→funk/rock/chamber) — track the expanding territory of what jazz harmony can inhabit",
+      "The artist-as-institution pattern (Jones=industry, Horvitz=community) should be tracked across all 360 degrees — who builds infrastructure vs. who performs within it?",
+      "UC Santa Cruz appears as Horvitz's formative institution, alongside Berklee (Jones, Frisell). Track all institutional lineages."
+    ]
+  },
+  "key_albums": [
+    {"title": "Some Order, Long Understood", "year": 1987, "label": "Sound Aspects", "significance": "Early statement of composed improvisation. NYC downtown aesthetic."},
+    {"title": "Brand Spankin' New", "year": 1998, "label": "Intuition", "significance": "Zony Mash debut. Hammond organ grooves meet improvisational eruptions."},
+    {"title": "Sweeter Than the Day", "year": 2001, "label": "Songlines", "significance": "Solo/small-group reflections. Lyrical keyboard voice."},
+    {"title": "Way Out East", "year": 2006, "label": "Songlines", "significance": "Gravitas Quartet. Chamber-scale composed improvisation."},
+    {"title": "Cold Spell", "year": 2005, "label": "Intuition", "significance": "Zony Mash: darker, slower, electronics-forward."},
+    {"title": "Some Places Are Forever Afternoon", "year": 2015, "label": "National Sawdust Tracks", "significance": "Late Gravitas statement. PNW landscape evoked through timbre and pacing."}
+  ],
+  "key_projects": [
+    {"name": "Zony Mash", "type": "band", "era": "1990s-2000s", "description": "Funk/rock/improv group. Hammond organ, guitar, bass, drums."},
+    {"name": "Gravitas Quartet", "type": "ensemble", "era": "2000s-2010s", "description": "Piano, cello, bassoon, cornet. Chamber-scale composed improvisation."},
+    {"name": "The President", "type": "band", "era": "1980s-1990s", "description": "Rock energy meets jazz harmony. NYC downtown formation."},
+    {"name": "Pigpen", "type": "trio", "era": "1980s-present", "description": "With Frisell and Wollesen. Country, free jazz, atmospheric electronics."},
+    {"name": "The Royal Room", "type": "venue", "era": "2012-present", "description": "Performance venue in Columbia City. Co-founded by Horvitz. Anchor institution for Seattle creative music."},
+    {"name": "New York Composers Orchestra", "type": "ensemble", "era": "1980s", "description": "Large ensemble for downtown composers. Co-founded by Horvitz. Institutional infrastructure for experimental music."}
+  ],
+  "sources_count": 22,
+  "word_count_research": 3500,
+  "release_date": "2026-03-28"
+}
