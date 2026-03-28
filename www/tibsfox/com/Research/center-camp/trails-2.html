@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Deep Trails Vol. II — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --bg-deep:#080e0a; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8b890; --border-forest:rgba(122,154,90,0.2); --panel-bg:rgba(26,42,30,0.4); }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; overflow-x: hidden; }
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-forest); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .active { color: white; font-weight: 600; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+  .hero { text-align: center; padding: 4rem 2rem 2.5rem; background: radial-gradient(ellipse at 50% 90%, rgba(122,154,90,0.05) 0%, transparent 50%), linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); font-style: italic; margin-bottom: 2rem; }
+  .hero-text { max-width: 38rem; margin: 0 auto; font-size: 0.9rem; line-height: 1.85; color: var(--text-mid); }
+  .stats-bar { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; padding: 1.5rem 2rem; border-top: 1px solid rgba(122,154,90,0.08); border-bottom: 1px solid rgba(122,154,90,0.08); margin: 1.5rem 0 1rem; }
+  .stat { text-align: center; }
+  .stat-val { display: block; font-size: 1.5rem; color: var(--accent-gold); font-weight: 300; }
+  .stat-label { font-size: 0.7rem; color: rgba(232,220,200,0.3); text-transform: uppercase; letter-spacing: 0.08em; }
+  .controls-bar { max-width: 52rem; margin: 1rem auto 0.5rem; padding: 0 1.5rem; display: flex; justify-content: center; gap: 1rem; }
+  .controls-bar button { background: rgba(122,154,90,0.12); border: 1px solid rgba(122,154,90,0.25); color: var(--text-mid); padding: 0.5rem 1.2rem; border-radius: 5px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.25s; }
+  .controls-bar button:hover { background: rgba(122,154,90,0.25); color: var(--text); border-color: rgba(122,154,90,0.45); }
+  .controls-bar button.active { background: rgba(122,154,90,0.3); border-color: var(--accent-green); color: var(--text); }
+  .trails-container { max-width: 52rem; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
+  .trail { margin-bottom: 0.5rem; border: 1px solid rgba(122,154,90,0.1); border-radius: 8px; overflow: hidden; transition: border-color 0.3s; }
+  .trail:hover { border-color: rgba(122,154,90,0.2); }
+  .trail.open { border-color: rgba(122,154,90,0.25); }
+  .trail-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; cursor: pointer; background: var(--panel-bg); transition: background 0.25s; user-select: none; }
+  .trail-header:hover { background: rgba(26,42,30,0.6); }
+  .trail.open .trail-header { background: rgba(26,42,30,0.65); }
+  .trail-marker { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px currentColor; }
+  .trail-header h2 { font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; flex: 1; }
+  .trail-muse { font-size: 0.75rem; color: var(--text-dim); font-style: italic; flex-shrink: 0; }
+  .trail-chevron { font-size: 0.7rem; color: var(--text-dim); transition: transform 0.3s; flex-shrink: 0; }
+  .trail.open .trail-chevron { transform: rotate(180deg); }
+  .trail-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+  .trail.open .trail-body { max-height: 3000px; }
+  .trail-inner { padding: 0.5rem 1.5rem 1.5rem; }
+  .trail-theme { font-size: 0.82rem; color: var(--text-mid); font-style: italic; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(122,154,90,0.08); }
+  .waypoints { position: relative; padding-left: 2rem; }
+  .waypoints::before { content: ''; position: absolute; left: 4px; top: 12px; bottom: 40px; width: 1px; opacity: 0.3; }
+  .waypoint { position: relative; padding: 1rem 0 1.5rem; transition: opacity 0.3s; }
+  .waypoint:last-child { padding-bottom: 0.5rem; }
+  .waypoint::before { content: ''; position: absolute; left: -2rem; top: 1.35rem; width: 9px; height: 9px; border-radius: 50%; border: 2px solid; background: var(--bg); z-index: 1; transition: all 0.3s; }
+  .waypoint:hover::before { transform: scale(1.3); }
+  .waypoint-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 0.03em; }
+  .waypoint-text { font-size: 0.85rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 0.6rem; }
+  .waypoint-link { display: inline-block; font-size: 0.78rem; text-decoration: none; transition: all 0.25s; opacity: 0.7; }
+  .waypoint-link:hover { opacity: 1; transform: translateX(3px); }
+  .waypoint:nth-child(1) { opacity: 1; }
+  .waypoint:nth-child(2) { opacity: 0.92; }
+  .waypoint:nth-child(3) { opacity: 0.85; }
+  .waypoint:nth-child(4) { opacity: 0.78; }
+  .waypoint:nth-child(5) { opacity: 0.72; }
+  .waypoint:nth-child(1) .waypoint-text { color: rgba(232,220,200,0.7); }
+  .waypoint:nth-child(2) .waypoint-text { color: rgba(232,220,200,0.62); }
+  .waypoint:nth-child(3) .waypoint-text { color: rgba(232,220,200,0.55); }
+  .waypoint:nth-child(4) .waypoint-text { color: rgba(232,220,200,0.48); }
+  .waypoint:nth-child(5) .waypoint-text { color: rgba(232,220,200,0.42); }
+  .waypoint:nth-child(3), .waypoint:nth-child(4), .waypoint:nth-child(5) { padding-left: 0.5rem; border-radius: 4px; }
+  .waypoint:nth-child(2) { background: rgba(0,0,0,0.03); }
+  .waypoint:nth-child(3) { background: rgba(0,0,0,0.06); }
+  .waypoint:nth-child(4) { background: rgba(0,0,0,0.09); }
+  .waypoint:nth-child(5) { background: rgba(0,0,0,0.12); }
+  .trail-end { margin-top: 1rem; padding: 0.8rem 1rem; border-top: 1px solid rgba(122,154,90,0.08); font-size: 0.78rem; color: rgba(232,220,200,0.3); font-style: italic; text-align: center; }
+  .page-footer { text-align: center; padding: 3rem 2rem 4rem; font-size: 0.85rem; color: rgba(232,220,200,0.3); font-style: italic; line-height: 1.8; }
+  .page-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .page-footer a:hover { color: var(--accent-green); }
+  @media (max-width: 600px) { .hero h1 { font-size: 1.8rem; } .trails-container { padding: 1rem 0.75rem 3rem; } .trail-header { padding: 0.8rem 1rem; gap: 0.6rem; } .trail-header h2 { font-size: 0.9rem; } .trail-inner { padding: 0.5rem 1rem 1.2rem; } .stats-bar { gap: 1.2rem; } }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</div>
+
+<div class="hero">
+  <h1>The Deep Trails</h1>
+  <div class="subtitle">Volume II &mdash; twenty-two more paths into the old growth</div>
+  <div class="hero-text">
+    The first ten trails mapped the core research threads. These twenty-two go further &mdash;
+    into pollinator collapse, urchin barrens, volcanic rings, acoustic ecology, and the roots
+    beneath the roots. Every waypoint links to real research. Walk deeper.
+  </div>
+</div>
+
+<div class="stats-bar" id="stats-bar"></div>
+
+<div class="controls-bar">
+  <button id="expand-all" onclick="toggleAll()">Expand All Trails</button>
+</div>
+
+<div class="trails-container" id="trails-container"></div>
+
+<div class="page-footer">
+  The old growth has stories that only reveal themselves to those who keep walking.<br><br>
+  <a href="deep-trails.html">&larr; Volume I</a> &nbsp;&middot;&nbsp;
+  <a href="index.html">Center Camp</a> &nbsp;&middot;&nbsp;
+  <a href="../index.html">Research Series</a>
+</div>
+
+<script src="new-trails.js"></script>
+<script>
+(function(){
+  // Compute stats
+  var totalWaypoints = 0;
+  var projectSet = {};
+  var guideSet = {};
+  NEW_TRAILS.forEach(function(t){
+    totalWaypoints += t.waypoints.length;
+    guideSet[t.guide] = true;
+    t.waypoints.forEach(function(w){ projectSet[w.project] = true; });
+  });
+
+  // Render stats
+  var statsBar = document.getElementById('stats-bar');
+  var stats = [
+    {val: NEW_TRAILS.length, label: 'Trails'},
+    {val: totalWaypoints, label: 'Waypoints'},
+    {val: Object.keys(projectSet).length, label: 'Research Projects'},
+    {val: Object.keys(guideSet).length, label: 'Muse Guides'}
+  ];
+  stats.forEach(function(s){
+    var d = document.createElement('div');
+    d.className = 'stat';
+    d.innerHTML = '<span class="stat-val">' + s.val + '</span><span class="stat-label">' + s.label + '</span>';
+    statsBar.appendChild(d);
+  });
+
+  // Build trails
+  var container = document.getElementById('trails-container');
+  NEW_TRAILS.forEach(function(trail){
+    var color = trail.color;
+    var el = document.createElement('div');
+    el.className = 'trail';
+    el.setAttribute('data-color', color);
+
+    // Inline scoped styles for this trail color
+    var colorHex = color;
+    var colorRgba = hexToRgba(color, 0.1);
+
+    var waypointsHTML = trail.waypoints.map(function(wp){
+      return '<div class="waypoint">' +
+        '<div class="waypoint-title">' + wp.title + '</div>' +
+        '<div class="waypoint-text">' + wp.text + '</div>' +
+        '<a href="../' + wp.project + '/index.html" class="waypoint-link" style="color:' + color + '">&rarr; Read more in ' + wp.project + '</a>' +
+      '</div>';
+    }).join('');
+
+    el.innerHTML =
+      '<div class="trail-header" onclick="toggleTrail(this.parentElement)">' +
+        '<div class="trail-marker" style="background:' + color + '; color:' + color + '"></div>' +
+        '<h2 style="color:' + color + '">' + trail.name + '</h2>' +
+        '<span class="trail-muse">led by ' + capitalize(trail.guide) + '</span>' +
+        '<span class="trail-chevron">&#9660;</span>' +
+      '</div>' +
+      '<div class="trail-body">' +
+        '<div class="trail-inner">' +
+          '<div class="trail-theme">' + trail.theme + '</div>' +
+          '<div class="waypoints" style="--trail-color:' + color + '">' +
+            waypointsHTML +
+          '</div>' +
+          '<div class="trail-end">You\'ve reached the old growth. The trail continues in the research.</div>' +
+        '</div>' +
+      '</div>';
+
+    // Apply dynamic waypoint line/dot styles
+    var style = document.createElement('style');
+    style.textContent =
+      '[data-color="' + color + '"] .waypoints::before { background: linear-gradient(180deg, ' + color + ', ' + colorRgba + '); }' +
+      '[data-color="' + color + '"] .waypoint::before { border-color: ' + color + '; }' +
+      '[data-color="' + color + '"] .waypoint:hover::before { background: ' + color + '; }';
+    el.querySelector('.waypoints').prepend(style);
+
+    container.appendChild(el);
+  });
+})();
+
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function hexToRgba(hex, a) {
+  var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+}
+
+function toggleTrail(el) {
+  el.classList.toggle('open');
+}
+
+var allExpanded = false;
+function toggleAll() {
+  var btn = document.getElementById('expand-all');
+  var trails = document.querySelectorAll('.trail');
+  allExpanded = !allExpanded;
+  if (allExpanded) {
+    trails.forEach(function(t){ t.classList.add('open'); });
+    btn.textContent = 'Collapse All Trails';
+    btn.classList.add('active');
+  } else {
+    trails.forEach(function(t){ t.classList.remove('open'); });
+    btn.textContent = 'Expand All Trails';
+    btn.classList.remove('active');
+  }
+}
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.trail.open').forEach(function(t){ t.classList.remove('open'); });
+    allExpanded = false;
+    var btn = document.getElementById('expand-all');
+    btn.textContent = 'Expand All Trails';
+    btn.classList.remove('active');
+  }
+});
+
+if (location.hash) {
+  var idx = parseInt(location.hash.replace('#trail-', ''), 10);
+  if (!isNaN(idx)) {
+    var trails = document.querySelectorAll('.trail');
+    if (trails[idx - 1]) {
+      trails[idx - 1].classList.add('open');
+      setTimeout(function(){ trails[idx - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    }
+  }
+}
+</script>
+
+</body>
+</html>

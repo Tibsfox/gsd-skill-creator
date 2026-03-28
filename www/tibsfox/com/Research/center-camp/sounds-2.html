@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Musical Forest Vol. II — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8a040; --accent-fire:#c75b3a; --border-forest:rgba(122,154,90,0.25); --panel-bg:rgba(26,42,30,0.5); }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; overflow-x: hidden; }
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-forest); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .active { color: white; font-weight: 600; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+  .hero { text-align: center; padding: 4rem 2rem 2.5rem; background: radial-gradient(ellipse at 50% 80%, rgba(199,91,58,0.06) 0%, rgba(42,138,150,0.04) 30%, transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); font-style: italic; margin-bottom: 1.8rem; }
+  .hero-text { max-width: 38rem; margin: 0 auto; font-size: 0.9rem; line-height: 1.85; color: var(--text-mid); }
+  .family-filters { max-width: 74rem; margin: 1.5rem auto 0.5rem; padding: 0 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+  .fam-pill { background: transparent; border: 1px solid rgba(122,154,90,0.2); color: var(--text-dim); padding: 0.3rem 0.85rem; border-radius: 12px; font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; }
+  .fam-pill:hover { border-color: rgba(122,154,90,0.4); color: var(--text); }
+  .fam-pill.active { border-color: var(--accent-green); color: var(--text); background: rgba(122,154,90,0.15); }
+  .fam-pill .fam-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  .station-count { text-align: center; font-size: 0.78rem; color: var(--text-dim); margin: 1rem 0 1.5rem; font-style: italic; }
+  .station-count .count-num { color: var(--accent-gold); font-style: normal; }
+  .forest-grid { max-width: 74rem; margin: 0 auto; padding: 0 1.25rem 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .station { background: var(--panel-bg); border: 1px solid var(--border-forest); border-radius: 8px; overflow: hidden; transition: all 0.3s; }
+  .station:hover { border-color: rgba(122,154,90,0.4); transform: translateY(-2px); }
+  .station.dimmed { opacity: 0.2; filter: grayscale(0.6); pointer-events: none; }
+  .station-header { padding: 0.7rem 0.9rem 0.3rem; display: flex; justify-content: space-between; align-items: flex-start; }
+  .station-muse { font-size: 0.82rem; font-weight: 400; }
+  .station-role { font-size: 0.68rem; color: var(--text-dim); display: block; font-style: italic; }
+  .station-badge { font-size: 0.62rem; padding: 0.15rem 0.45rem; border-radius: 3px; background: rgba(0,0,0,0.25); color: var(--text-dim); white-space: nowrap; flex-shrink: 0; margin-left: 0.3rem; margin-top: 0.1rem; }
+  .station-body { padding: 0.6rem 0.9rem; }
+  .station-instrument { font-size: 0.88rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 400; letter-spacing: 0.03em; }
+  .station-pattern { font-size: 0.78rem; line-height: 1.7; color: var(--text-mid); font-style: italic; margin-bottom: 0.6rem; }
+  .station-teaching { font-size: 0.75rem; line-height: 1.6; color: rgba(232,220,200,0.45); padding-top: 0.5rem; border-top: 1px solid rgba(122,154,90,0.08); }
+  .page-footer { text-align: center; padding: 3rem 2rem 4rem; font-size: 0.85rem; color: var(--text-dim); font-style: italic; line-height: 1.8; }
+  .page-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .page-footer a:hover { color: var(--accent-green); }
+  @media (max-width: 900px) { .forest-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .forest-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.8rem; } }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</div>
+
+<div class="hero">
+  <h1>The Musical Forest</h1>
+  <div class="subtitle">Second Movement &mdash; forty-eight new instruments found deeper in the trees</div>
+  <p class="hero-text">
+    The first movement mapped forty-eight stations with canvas visualizations. The second movement
+    goes deeper &mdash; describing the patterns each instrument would paint in the air if sound were visible.
+    Every teaching is grounded in real PNW ecology.
+  </p>
+</div>
+
+<div class="family-filters" id="family-filters"></div>
+<div class="station-count" id="station-count"></div>
+<div class="forest-grid" id="grid"></div>
+
+<div class="page-footer">
+  Forty-eight instruments. Forty-eight teachings. The forest never plays the same song twice.<br><br>
+  <a href="musical-forest.html">&larr; First Movement</a> &nbsp;&middot;&nbsp;
+  <a href="index.html">Center Camp</a> &nbsp;&middot;&nbsp;
+  <a href="../index.html">Research Series</a>
+</div>
+
+<script src="new-sounds.js"></script>
+<script>
+var MUSE_NAMES = {
+  cedar:{name:'Cedar',role:'the record',type:'tree'},
+  lex:{name:'Lex',role:'the specification',type:'concept'},
+  moss:{name:'Moss',role:'the carpet',type:'bryophyte'},
+  lichen:{name:'Lichen',role:'the breath',type:'symbiosis'},
+  sturgeon:{name:'Sturgeon',role:'the ancient',type:'fish'},
+  fern:{name:'Fern',role:'the foundation',type:'plant'},
+  chanterelle:{name:'Chanterelle',role:'the network',type:'fungus'},
+  star:{name:'Star',role:'the keystone',type:'echinoderm'},
+  crab:{name:'Crab',role:'the harvest',type:'crustacean'},
+  beaver:{name:'Beaver',role:'the maker',type:'mammal'},
+  salamander:{name:'Salamander',role:'the headwater',type:'amphibian'},
+  hemlock:{name:'Hemlock',role:'the standard',type:'tree'},
+  fire:{name:'Fire',role:'the renewal',type:'force'},
+  cougar:{name:'Cougar',role:'the ghost',type:'mammal'},
+  wolf:{name:'Wolf',role:'the return',type:'mammal'},
+  rain:{name:'Rain',role:'the cycle',type:'force'},
+  fog:{name:'Fog',role:'the invisible',type:'force'},
+  bear:{name:'Bear',role:'the season',type:'mammal'},
+  waterfall:{name:'Waterfall',role:'the descent',type:'force'},
+  foxy:{name:'Foxy',role:'the map',type:'animal'},
+  sitka:{name:'Sitka',role:'the root',type:'tree'},
+  steelhead:{name:'Steelhead',role:'the twice-born',type:'fish'},
+  eulachon:{name:'Eulachon',role:'the first gift',type:'fish'},
+  dipper:{name:'Dipper',role:'the water-walker',type:'bird'},
+  chinook:{name:'Chinook',role:'the current',type:'salmon'},
+  orca:{name:'Orca',role:'the elder',type:'marine'},
+  sam:{name:'Sam',role:'the question',type:'animal'},
+  coyote:{name:'Coyote',role:'the trickster',type:'canid'},
+  dragonfly:{name:'Dragonfly',role:'the iridescent',type:'insect'},
+  octopus:{name:'Octopus',role:'the reinventor',type:'marine'},
+  willow:{name:'Willow',role:'the welcome',type:'tree'},
+  bee:{name:'Bee',role:'the pollinator',type:'insect'},
+  otter:{name:'Otter',role:'the play',type:'mustelid'},
+  hawk:{name:'Hawk',role:'the formation',type:'bird'},
+  eagle:{name:'Eagle',role:'the guardian',type:'bird'},
+  madrone:{name:'Madrone',role:'the hearth',type:'tree'},
+  owl:{name:'Owl',role:'the clock',type:'bird'},
+  marten:{name:'Marten',role:'the signal',type:'mammal'},
+  bat:{name:'Bat',role:'the echolocator',type:'mammal'},
+  raven:{name:'Raven',role:'the pattern',type:'bird'},
+  thrush:{name:'Thrush',role:'the tone',type:'bird'},
+  nutcracker:{name:'Nutcracker',role:'the cache',type:'bird'},
+  wren:{name:'Wren',role:'the song',type:'bird'},
+  kelp:{name:'Kelp',role:'the tide forest',type:'alga'},
+  alder:{name:'Alder',role:'the resonance',type:'tree'},
+  osprey:{name:'Osprey',role:'the horizon',type:'bird'},
+  pika:{name:'Pika',role:'the sentinel',type:'mammal'},
+  glacier:{name:'Glacier',role:'the archive',type:'force'}
+};
+
+var FAMILY_COLORS = { drum:'#c75b3a', string:'#d4881a', wind:'#7a9a5a', water:'#2a8a96', electronic:'#4a6aaf', voice:'#c8a040' };
+var FAMILY_LABELS = { all:'All', drum:'Drum', string:'String', wind:'Wind', water:'Water', electronic:'Electronic', voice:'Voice' };
+var activeFamily = 'all';
+
+// Build filter pills
+(function(){
+  var bar = document.getElementById('family-filters');
+  Object.keys(FAMILY_LABELS).forEach(function(fam){
+    var btn = document.createElement('button');
+    btn.className = 'fam-pill' + (fam === 'all' ? ' active' : '');
+    if (fam !== 'all') {
+      btn.innerHTML = '<span class="fam-dot" style="background:' + FAMILY_COLORS[fam] + '"></span>' + FAMILY_LABELS[fam];
+    } else {
+      btn.textContent = 'All';
+    }
+    btn.onclick = function(){ filterFamily(fam, btn); };
+    bar.appendChild(btn);
+  });
+})();
+
+function updateCount() {
+  var visible = document.querySelectorAll('.station:not(.dimmed)').length;
+  document.getElementById('station-count').innerHTML = '<span class="count-num">' + visible + '</span> of <span class="count-num">48</span> instruments';
+}
+
+function filterFamily(fam, btn) {
+  activeFamily = fam;
+  document.querySelectorAll('.fam-pill').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.station').forEach(function(s){
+    if (fam === 'all' || s.getAttribute('data-family') === fam) {
+      s.classList.remove('dimmed');
+    } else {
+      s.classList.add('dimmed');
+    }
+  });
+  updateCount();
+}
+
+// Build grid
+(function(){
+  var grid = document.getElementById('grid');
+  NEW_SOUNDS.forEach(function(s){
+    var m = MUSE_NAMES[s.id] || {name:s.id, role:'', type:''};
+    var famColor = FAMILY_COLORS[s.family] || '#7a8a8a';
+    var card = document.createElement('div');
+    card.className = 'station';
+    card.setAttribute('data-family', s.family);
+    card.innerHTML =
+      '<div class="station-header">' +
+        '<div><span class="station-muse">' + m.name + '</span>' +
+        '<span class="station-role">' + m.role + '</span></div>' +
+        '<span class="station-badge" style="border:1px solid ' + famColor + '; color:' + famColor + '">' + s.family + '</span>' +
+      '</div>' +
+      '<div class="station-body">' +
+        '<div class="station-instrument">' + s.name + '</div>' +
+        '<div class="station-pattern">' + s.pattern + '</div>' +
+        '<div class="station-teaching">' + s.teaching + '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+  updateCount();
+})();
+</script>
+
+</body>
+</html>

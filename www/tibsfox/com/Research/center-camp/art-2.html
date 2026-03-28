@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art Trail Vol. II — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg:#0d1a12; --text:#e8dcc8; --text-dim:rgba(232,220,200,0.5); --text-mid:rgba(232,220,200,0.65); --accent-green:#7a9a5a; --accent-gold:#c8a040; --accent-fire:#c75b3a; --border-forest:rgba(122,154,90,0.25); --panel-bg:rgba(26,42,30,0.5); }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; overflow-x: hidden; }
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-forest); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .active { color: white; font-weight: 600; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+  .hero { text-align: center; padding: 4rem 2rem 2.5rem; background: radial-gradient(ellipse at 50% 80%, rgba(122,154,90,0.06) 0%, transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); font-style: italic; margin-bottom: 1.8rem; }
+  .hero-text { max-width: 36rem; margin: 0 auto; font-size: 0.9rem; line-height: 1.85; color: var(--text-mid); }
+  .trail { max-width: 700px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  .trail-divider { display: flex; align-items: center; gap: 1rem; padding: 2.5rem 0; color: var(--text-dim); font-size: 0.78rem; font-style: italic; }
+  .trail-divider::before, .trail-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(122,154,90,0.2), transparent); }
+  .trail-divider .leaf { font-size: 1rem; opacity: 0.4; display: inline-block; }
+  .art-piece { background: var(--panel-bg); border: 1px solid var(--border-forest); border-radius: 8px; overflow: hidden; transition: border-color 0.3s; }
+  .art-piece:hover { border-color: rgba(122,154,90,0.45); }
+  .art-header { padding: 1.2rem 1.5rem 0.8rem; display: flex; justify-content: space-between; align-items: flex-start; }
+  .art-header h2 { font-size: 1.25rem; font-weight: 400; letter-spacing: 0.06em; margin-bottom: 0.15rem; flex: 1; }
+  .art-header .muse-name { font-size: 0.78rem; color: var(--accent-green); font-style: italic; display: block; }
+  .art-type-badge { font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 3px; background: rgba(122,154,90,0.12); border: 1px solid rgba(122,154,90,0.25); color: var(--accent-green); text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0; margin-left: 1rem; margin-top: 0.15rem; }
+  .art-description { padding: 0.8rem 1.5rem 1rem; font-size: 0.85rem; line-height: 1.8; color: var(--text-mid); }
+  .art-teaching { padding: 0.8rem 1.5rem 1.2rem; font-size: 0.82rem; line-height: 1.7; color: rgba(232,220,200,0.45); border-top: 1px solid rgba(122,154,90,0.1); }
+  .art-teaching em { color: var(--text); font-style: italic; }
+  .trail-footer { text-align: center; padding: 3rem 2rem 4rem; font-size: 0.85rem; color: var(--text-dim); font-style: italic; line-height: 1.8; }
+  .trail-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .trail-footer a:hover { color: var(--accent-green); }
+  @media (max-width: 600px) { .hero h1 { font-size: 1.8rem; } .trail { padding: 0 0.75rem 3rem; } .art-header { padding: 1rem 1rem 0.6rem; } .art-description { padding: 0.6rem 1rem 0.8rem; } .art-teaching { padding: 0.6rem 1rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+</div>
+
+<div class="hero">
+  <h1>The Art Trail</h1>
+  <div class="subtitle">Volume II &mdash; twenty-two more installations hidden in the forest</div>
+  <p class="hero-text">
+    The muses went deeper into the old growth and built more things. Constellation finders,
+    echolocation games, tide clocks, bark peelers. Walk the trail. Touch everything.
+    The forest was built to be played with.
+  </p>
+</div>
+
+<div class="trail" id="trail"></div>
+
+<div class="trail-footer">
+  Twenty-two installations. Each one a lesson wearing a game's clothes.<br><br>
+  <a href="art-trail.html">&larr; Volume I</a> &nbsp;&middot;&nbsp;
+  <a href="index.html">Center Camp</a> &nbsp;&middot;&nbsp;
+  <a href="../index.html">Research Series</a>
+</div>
+
+<script src="new-art.js"></script>
+<script>
+var MUSE_NAMES = {
+  cedar:{name:'Cedar',role:'the record'},
+  lex:{name:'Lex',role:'the specification'},
+  moss:{name:'Moss',role:'the carpet'},
+  lichen:{name:'Lichen',role:'the breath'},
+  sturgeon:{name:'Sturgeon',role:'the ancient'},
+  fern:{name:'Fern',role:'the foundation'},
+  chanterelle:{name:'Chanterelle',role:'the network'},
+  star:{name:'Star',role:'the keystone'},
+  crab:{name:'Crab',role:'the harvest'},
+  beaver:{name:'Beaver',role:'the maker'},
+  salamander:{name:'Salamander',role:'the headwater'},
+  hemlock:{name:'Hemlock',role:'the standard'},
+  fire:{name:'Fire',role:'the renewal'},
+  cougar:{name:'Cougar',role:'the ghost'},
+  wolf:{name:'Wolf',role:'the return'},
+  rain:{name:'Rain',role:'the cycle'},
+  fog:{name:'Fog',role:'the invisible'},
+  bear:{name:'Bear',role:'the season'},
+  waterfall:{name:'Waterfall',role:'the descent'},
+  foxy:{name:'Foxy',role:'the map'},
+  sitka:{name:'Sitka',role:'the root'},
+  steelhead:{name:'Steelhead',role:'the twice-born'},
+  eulachon:{name:'Eulachon',role:'the first gift'},
+  dipper:{name:'Dipper',role:'the water-walker'},
+  chinook:{name:'Chinook',role:'the current'},
+  orca:{name:'Orca',role:'the elder'},
+  sam:{name:'Sam',role:'the question'},
+  coyote:{name:'Coyote',role:'the trickster'},
+  dragonfly:{name:'Dragonfly',role:'the iridescent'},
+  octopus:{name:'Octopus',role:'the reinventor'},
+  willow:{name:'Willow',role:'the welcome'},
+  bee:{name:'Bee',role:'the pollinator'},
+  otter:{name:'Otter',role:'the play'},
+  hawk:{name:'Hawk',role:'the formation'},
+  eagle:{name:'Eagle',role:'the guardian'},
+  madrone:{name:'Madrone',role:'the hearth'},
+  owl:{name:'Owl',role:'the clock'},
+  marten:{name:'Marten',role:'the signal'},
+  bat:{name:'Bat',role:'the echolocator'},
+  raven:{name:'Raven',role:'the pattern'},
+  thrush:{name:'Thrush',role:'the tone'},
+  nutcracker:{name:'Nutcracker',role:'the cache'},
+  wren:{name:'Wren',role:'the song'},
+  kelp:{name:'Kelp',role:'the tide forest'},
+  alder:{name:'Alder',role:'the resonance'},
+  osprey:{name:'Osprey',role:'the horizon'},
+  pika:{name:'Pika',role:'the sentinel'},
+  glacier:{name:'Glacier',role:'the archive'}
+};
+
+var TRAIL_PHRASES = [
+  '~50 paces further...',
+  '~80 paces through old growth...',
+  'the canopy thickens...',
+  'a clearing opens...',
+  'deeper into the understory...',
+  '~100 paces along the creek...',
+  'the trail narrows...',
+  'moss covers everything here...',
+  'the light changes...',
+  'ferns brush your knees...',
+  '~60 paces downhill...',
+  'a fallen log bridges the trail...',
+  'the sound of water grows...',
+  'the trees are older here...',
+  'lichen maps the bark...',
+  '~70 paces through salal...',
+  'the air smells of cedar...',
+  'a nurse log hosts seedlings...',
+  'woodpecker holes mark the way...',
+  'the trail bends east...',
+  'sword ferns line both sides...'
+];
+
+var LEAF_CODES = ['&#127793;','&#127810;','&#127794;','&#127795;','&#127807;','&#127811;'];
+
+(function(){
+  var trail = document.getElementById('trail');
+
+  // Opening divider
+  var opening = document.createElement('div');
+  opening.className = 'trail-divider';
+  opening.innerHTML = '<span class="leaf">&#127793;</span> the trail begins here';
+  trail.appendChild(opening);
+
+  NEW_ART.forEach(function(art, i){
+    var m = MUSE_NAMES[art.muse] || {name: art.muse, role: ''};
+
+    var piece = document.createElement('div');
+    piece.className = 'art-piece';
+    piece.id = 'piece-' + (i + 1);
+    piece.innerHTML =
+      '<div class="art-header">' +
+        '<div>' +
+          '<h2>' + art.name + '</h2>' +
+          '<span class="muse-name">' + m.name + '\'s Installation &mdash; ' + m.role + '</span>' +
+        '</div>' +
+        '<span class="art-type-badge">' + art.type + '</span>' +
+      '</div>' +
+      '<div class="art-description">' + art.description + '</div>' +
+      '<div class="art-teaching"><em>' + art.teaching + '</em></div>';
+    trail.appendChild(piece);
+
+    // Trail divider between pieces
+    if (i < NEW_ART.length - 1) {
+      var divider = document.createElement('div');
+      divider.className = 'trail-divider';
+      var leaf = LEAF_CODES[i % LEAF_CODES.length];
+      divider.innerHTML = '<span class="leaf">' + leaf + '</span> ' + TRAIL_PHRASES[i % TRAIL_PHRASES.length];
+      trail.appendChild(divider);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
