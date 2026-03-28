@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Caliber Integration</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cgi">
+  <header>
+    <h1>Caliber Integration</h1>
+    <div class="subtitle">Measurement Frameworks &middot; Skill Quality Scoring &middot; Calibration Loops &middot; Drift Detection &middot; Bridge Architecture</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-caliber-architecture-analysis">Caliber Architecture</a>
+      <a href="page.html?doc=02-gsd-skill-creator-architecture">GSD Architecture</a>
+      <a href="page.html?doc=03-integration-mapping">Integration Mapping</a>
+      <a href="page.html?doc=04-calibration-loops-quality-metrics">Calibration Loops</a>
+      <a href="page.html?doc=05-risk-compatibility-bridge">Risk &amp; Bridge</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Amiga shipped with a custom chipset because Motorola didn't make chips that could handle
+      video DMA, sprite multiplexing, and audio synthesis simultaneously. The Amiga team didn't wait
+      for a general-purpose solution &mdash; they built specialized silicon for the exact problem they
+      faced. Caliber and gsd-skill-creator each have specialized silicon. The integration lives in the
+      spaces between &mdash; not by merging the tools, but by connecting their specialized outputs.
+      Architecture as leverage. Specialization in service of capability.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~20K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/caliber-integration-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/caliber-integration-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared types, lock-manager, score-engine skeleton</td><td>Sequential</td><td>2,500</td></tr>
+        <tr><td>1A</td><td>Core Scoring</td><td>score-engine, score command, metrics JSONL, --compare</td><td>Parallel</td><td>4,500</td></tr>
+        <tr><td>1B</td><td>Learning Enrichment</td><td>FeedbackCategory, refinement gate, skill-backups</td><td>Parallel</td><td>4,000</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>refresh, insights, DACP payload, HITL gate</td><td>Sequential</td><td>5,000</td></tr>
+        <tr><td>3</td><td>Verification + Docs</td><td>--agent flag, test suite, CHANGELOG, CLAUDE.md</td><td>Sequential</td><td>4,000</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Deliverables</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Deliverable</th><th>Acceptance Criteria</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>score-engine.ts</code></td><td>LLM-free, 100-pt rubric, all 5 categories</td></tr>
+        <tr><td>2</td><td><code>skill-creator score</code> command</td><td>Outputs grade + failing checks + fix data</td></tr>
+        <tr><td>3</td><td><code>skill-creator score --compare</code></td><td>Per-skill delta vs git ref</td></tr>
+        <tr><td>4</td><td><code>FeedbackCategory</code> enum</td><td>6 categories, used in feedback-store.ts</td></tr>
+        <tr><td>5</td><td>Refinement score gate</td><td>Pre/post score; auto-revert on regression</td></tr>
+        <tr><td>6</td><td><code>skill-metrics.jsonl</code></td><td>Activation rate, correction rate, token ROI</td></tr>
+        <tr><td>7</td><td><code>skill-creator refresh</code></td><td>Git diff + trigger staleness detection</td></tr>
+        <tr><td>8</td><td><code>skill-creator insights</code></td><td>Trend arrows, ROI summary</td></tr>
+        <tr><td>9</td><td>DACP score payload</td><td><code>skillScorePayload</code> in data envelope</td></tr>
+        <tr><td>10</td><td><code>--agent</code> flag</td><td>Multi-platform output, extension field stripping</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Cross-module integration</td><td>Opus</td><td>Architecture decisions, scope boundary enforcement, HITL gates</td></tr>
+        <tr><td>Denise</td><td>Port implementation</td><td>Sonnet</td><td>Scoring engine port, learning enrichment, multi-platform output</td></tr>
+        <tr><td>Paula</td><td>Score computation</td><td>Haiku</td><td>LLM-free scoring, pattern matching, shared schemas</td></tr>
+        <tr><td>M68000</td><td>Wave planning</td><td>Sonnet</td><td>Dependency ordering, code review, quality monitoring</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>Score regression guard</td><td>Refinement producing lower score MUST be auto-reverted; no user action required to trigger revert</td></tr>
+        <tr><td>SC-02</td><td>No LLM calls in score-engine</td><td><code>score-engine.ts</code> completes with zero LLM API calls; filesystem-only</td></tr>
+        <tr><td>SC-03</td><td>Existing 202 tests pass</td><td>All pre-integration tests continue to pass after all integration changes</td></tr>
+        <tr><td>SC-04</td><td>DACP payload integrity</td><td>Adding <code>skillScorePayload</code> to DACP data envelope must not corrupt existing bundle consumers</td></tr>
+        <tr><td>SC-05</td><td>FeedbackEntry structural guard</td><td>Tripwire test passes before and after enum port; schema-flattening changes cause explicit test failure</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Test IDs</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>skill-creator score</code> produces 100-pt LLM-free quality score</td><td>SC-02, CF-01 to CF-05</td><td>Pending</td></tr>
+        <tr><td>2</td><td>Score categories cover all 5 dimensions</td><td>CF-01 to CF-04</td><td>Pending</td></tr>
+        <tr><td>3</td><td><code>score --compare</code> shows per-skill delta</td><td>CF-08</td><td>Pending</td></tr>
+        <tr><td>4</td><td><code>skill-creator refresh</code> detects stale triggers</td><td>CF-13, CF-14, IN-05</td><td>Pending</td></tr>
+        <tr><td>5</td><td>FeedbackStore uses 6-category taxonomy</td><td>CF-09, IN-02</td><td>Pending</td></tr>
+        <tr><td>6</td><td>Refinement auto-reverts on score regression</td><td>SC-01, CF-10, CF-11</td><td>Pending</td></tr>
+        <tr><td>7</td><td><code>skill-metrics.jsonl</code> tracks activation/correction/ROI</td><td>CF-12, IN-03</td><td>Pending</td></tr>
+        <tr><td>8</td><td><code>skill-creator insights</code> shows trend arrows</td><td>CF-15</td><td>Pending</td></tr>
+        <tr><td>9</td><td><code>--agent cursor</code> strips extension fields</td><td>IN-06</td><td>Pending</td></tr>
+        <tr><td>10</td><td>DACP bundles carry <code>skillScorePayload</code></td><td>SC-04, IN-04</td><td>Pending</td></tr>
+        <tr><td>11</td><td>New commands achieve 90%+ coverage</td><td>Composite</td><td>Pending</td></tr>
+        <tr><td>12</td><td>All 202 existing tests pass</td><td>SC-03</td><td>Pending</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Mission Crew Manifest</h2>
+
+    <table>
+      <thead><tr><th>Role</th><th>Agent</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>FLIGHT</td><td>Orchestrator (Opus)</td><td>Mission direction; architecture decisions; scope guard</td></tr>
+        <tr><td>PLAN</td><td>Planner (Sonnet)</td><td>Wave decomposition; dependency ordering</td></tr>
+        <tr><td>SCOUT</td><td>Research (Haiku)</td><td>Caliber source code pattern extraction</td></tr>
+        <tr><td>EXEC-1</td><td>Executor-Score (Sonnet)</td><td>score-engine.ts, score command, metrics JSONL</td></tr>
+        <tr><td>EXEC-2</td><td>Executor-Learn (Sonnet)</td><td>FeedbackCategory, refinement gate, backups</td></tr>
+        <tr><td>CRAFT-ARCH</td><td>Architecture (Opus)</td><td>DACP payload design; score regression architecture</td></tr>
+        <tr><td>CRAFT-LEARN</td><td>Learning (Sonnet)</td><td>Caliber taxonomy port; feedback-detector inference</td></tr>
+        <tr><td>VERIFY</td><td>Verification (Sonnet)</td><td>Source validation; test coverage audit</td></tr>
+        <tr><td>INTEG</td><td>Integration (Opus)</td><td>Cross-module validation; bundle consumer impact</td></tr>
+        <tr><td>CAPCOM</td><td>HITL Interface (Sonnet)</td><td>Human approval at Wave 2 gate</td></tr>
+        <tr><td>BUDGET</td><td>Resource Manager (Haiku)</td><td>Token budget tracking; model demotion enforcement</td></tr>
+        <tr><td>SURGEON</td><td>Health Monitor (Sonnet)</td><td>Test regression detection; LLM-free verification</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>Caliber provides the quality infrastructure; gsd-skill-creator provides the intelligence
+    infrastructure. Neither project needs to become the other. Caliber's deterministic scoring engine
+    is fast, LLM-free, and never hallucinates a path reference. gsd-skill-creator's bounded learning
+    loop is careful, human-supervised, and structurally safe &mdash; the 20% cap and 7-day cooldown are
+    structural, not policy-based. The integration is a bridge, not a merger. Port the scoring engine,
+    enrich the taxonomy, add the regression guard. The spaces between the two codebases are exactly
+    where the value lives.</p>
+  </main>
+
+  <footer>
+    <p>Caliber Integration &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
