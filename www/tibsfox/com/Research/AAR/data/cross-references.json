@@ -1,0 +1,4791 @@
+{
+  "generated": "2026-03-28",
+  "version": "v1.49.132",
+  "total_projects": 177,
+  "total_edges": 739,
+  "nodes": [
+    {
+      "id": "ABL",
+      "name": "Ableton Live",
+      "cluster": "Music"
+    },
+    {
+      "id": "ABM",
+      "name": "A Beautiful Mind",
+      "cluster": "Vision"
+    },
+    {
+      "id": "ACC",
+      "name": "Accounting",
+      "cluster": "Business"
+    },
+    {
+      "id": "ACE",
+      "name": "Compute Engine",
+      "cluster": "Vision"
+    },
+    {
+      "id": "AGR",
+      "name": "PNW Agriculture",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "AIH",
+      "name": "AI Horizon",
+      "cluster": "Vision"
+    },
+    {
+      "id": "ALV",
+      "name": "Almost Live!",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "AMR",
+      "name": "AM Radio",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "ANM",
+      "name": "90s Animation",
+      "cluster": "Creative"
+    },
+    {
+      "id": "APR",
+      "name": "So You Want To Be An Artist",
+      "cluster": "Creative"
+    },
+    {
+      "id": "ARC",
+      "name": "Shapes & Colors",
+      "cluster": "Creative"
+    },
+    {
+      "id": "ATC",
+      "name": "Aries-Taurus Cusp",
+      "cluster": "Science"
+    },
+    {
+      "id": "AVI",
+      "name": "Birds",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "AWF",
+      "name": "Air Water Food",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "B52",
+      "name": "The B-52s",
+      "cluster": "Music"
+    },
+    {
+      "id": "BCM",
+      "name": "Building",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "BHC",
+      "name": "Black Hole Catalog",
+      "cluster": "Science"
+    },
+    {
+      "id": "BHK",
+      "name": "Black Holes",
+      "cluster": "Science"
+    },
+    {
+      "id": "BHM",
+      "name": "Bellingham Market",
+      "cluster": "Business"
+    },
+    {
+      "id": "BLA",
+      "name": "Business Law",
+      "cluster": "Business"
+    },
+    {
+      "id": "BMR",
+      "name": "Bob Marley",
+      "cluster": "Music"
+    },
+    {
+      "id": "BNY",
+      "name": "Bill Nye",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "BPS",
+      "name": "Bio-Physics",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "BRC",
+      "name": "Black Rock City",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "C89",
+      "name": "C89.5 FM",
+      "cluster": "Music"
+    },
+    {
+      "id": "CAR",
+      "name": "The Cars",
+      "cluster": "Music"
+    },
+    {
+      "id": "CAS",
+      "name": "Cascade Range",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "CBC",
+      "name": "CBC/Radio-Canada",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "CCT",
+      "name": "Comedy Central",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "CDL",
+      "name": "College Deep Linking",
+      "cluster": "Vision"
+    },
+    {
+      "id": "CDP",
+      "name": "Coldplay",
+      "cluster": "Music"
+    },
+    {
+      "id": "CDS",
+      "name": "Central District",
+      "cluster": "Business"
+    },
+    {
+      "id": "CFU",
+      "name": "ComfyUI",
+      "cluster": "Creative"
+    },
+    {
+      "id": "CGI",
+      "name": "Caliber Integration",
+      "cluster": "Vision"
+    },
+    {
+      "id": "CHS",
+      "name": "Chaos Sense",
+      "cluster": "Creative"
+    },
+    {
+      "id": "CMH",
+      "name": "Comp. Mesh",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "CNA",
+      "name": "CN & Adult Swim",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "COI",
+      "name": "Coil",
+      "cluster": "Music"
+    },
+    {
+      "id": "COK",
+      "name": "College of Knowledge",
+      "cluster": "Vision"
+    },
+    {
+      "id": "COL",
+      "name": "Columbia Valley",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "CRV",
+      "name": "Corvid PNW",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "CRY",
+      "name": "Curren$y",
+      "cluster": "Music"
+    },
+    {
+      "id": "CWC",
+      "name": "Cooking with Claude",
+      "cluster": "Music"
+    },
+    {
+      "id": "CYG",
+      "name": "Cygnus X-3",
+      "cluster": "Science"
+    },
+    {
+      "id": "DAA",
+      "name": "Deep Audio",
+      "cluster": "Music"
+    },
+    {
+      "id": "DDA",
+      "name": "dada",
+      "cluster": "Creative"
+    },
+    {
+      "id": "DFQ",
+      "name": "Dead Frequencies",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "DHP",
+      "name": "DHCP Protocol",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "DNS",
+      "name": "DNS Protocol",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "DPM",
+      "name": "Depeche Mode",
+      "cluster": "Music"
+    },
+    {
+      "id": "DRN",
+      "name": "Duran Duran",
+      "cluster": "Music"
+    },
+    {
+      "id": "EAZ",
+      "name": "East Asian Zodiac",
+      "cluster": "Science"
+    },
+    {
+      "id": "ECO",
+      "name": "Living Systems",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "EMG",
+      "name": "Electric Motors",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "ENB",
+      "name": "Eskimo North BBS",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "FCC",
+      "name": "FCC Catalog",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "FDR",
+      "name": "Fire Dragon",
+      "cluster": "Science"
+    },
+    {
+      "id": "FEC",
+      "name": "Forward Error Correction",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "FEG",
+      "name": "FoxEdu Gap-Fill",
+      "cluster": "Vision"
+    },
+    {
+      "id": "FFA",
+      "name": "Fur & Feathers",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "FLS",
+      "name": "FL Studio",
+      "cluster": "Music"
+    },
+    {
+      "id": "FQC",
+      "name": "Freq. Continuum",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "GDN",
+      "name": "Gardening",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "GGT",
+      "name": "Geggy Tah",
+      "cluster": "Music"
+    },
+    {
+      "id": "GPG",
+      "name": "GPU Ecosystem",
+      "cluster": "Vision"
+    },
+    {
+      "id": "GPO",
+      "name": "GPU Orchestration",
+      "cluster": "Vision"
+    },
+    {
+      "id": "GRB",
+      "name": "GRB 230906A",
+      "cluster": "Science"
+    },
+    {
+      "id": "GRD",
+      "name": "Gradient Engine",
+      "cluster": "Creative"
+    },
+    {
+      "id": "GRV",
+      "name": "Green River",
+      "cluster": "Music"
+    },
+    {
+      "id": "GSA",
+      "name": "GSD Alignment",
+      "cluster": "Vision"
+    },
+    {
+      "id": "GSD2",
+      "name": "GSD-2 Arch.",
+      "cluster": "Vision"
+    },
+    {
+      "id": "GTP",
+      "name": "Geggy Tah Prod.",
+      "cluster": "Music"
+    },
+    {
+      "id": "HEN",
+      "name": "Jim Henson",
+      "cluster": "Creative"
+    },
+    {
+      "id": "HFE",
+      "name": "Audio Engineering",
+      "cluster": "Music"
+    },
+    {
+      "id": "HFR",
+      "name": "Hi-Fi Audio",
+      "cluster": "Music"
+    },
+    {
+      "id": "HGE",
+      "name": "Hydro-Geothermal",
+      "cluster": "Energy"
+    },
+    {
+      "id": "HJX",
+      "name": "Hendrix & Joplin",
+      "cluster": "Music"
+    },
+    {
+      "id": "IBC",
+      "name": "Indigenous Broadcasting",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "ICS",
+      "name": "Construction Set",
+      "cluster": "Vision"
+    },
+    {
+      "id": "INP",
+      "name": "Ink & Paint",
+      "cluster": "Creative"
+    },
+    {
+      "id": "JNS",
+      "name": "JanSport",
+      "cluster": "Business"
+    },
+    {
+      "id": "K8S",
+      "name": "Kubernetes",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "KFU",
+      "name": "Mind-Body Practice",
+      "cluster": "Science"
+    },
+    {
+      "id": "KGX",
+      "name": "King's X",
+      "cluster": "Music"
+    },
+    {
+      "id": "KPZ",
+      "name": "KPLZ Seattle",
+      "cluster": "Music"
+    },
+    {
+      "id": "KSM",
+      "name": "KISM 92.9",
+      "cluster": "Music"
+    },
+    {
+      "id": "KUB",
+      "name": "KUBE 93.3",
+      "cluster": "Music"
+    },
+    {
+      "id": "LED",
+      "name": "LED & Controllers",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "LFR",
+      "name": "Living Forest",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "LGW",
+      "name": "LIGO Waves",
+      "cluster": "Science"
+    },
+    {
+      "id": "LKR",
+      "name": "Lion King Roots",
+      "cluster": "Music"
+    },
+    {
+      "id": "LLM",
+      "name": "Local LLM",
+      "cluster": "Vision"
+    },
+    {
+      "id": "LNT",
+      "name": "Late Night Television",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "LNV",
+      "name": "Larry Niven",
+      "cluster": "Science"
+    },
+    {
+      "id": "LTS",
+      "name": "Listening to Space",
+      "cluster": "Science"
+    },
+    {
+      "id": "M05",
+      "name": "Module Split",
+      "cluster": "Vision"
+    },
+    {
+      "id": "MAM",
+      "name": "Mammals",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "MCF",
+      "name": "Multi-Cluster Fed.",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "MCM",
+      "name": "Maritime Compute",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "MCR",
+      "name": "Minecraft RAG",
+      "cluster": "Creative"
+    },
+    {
+      "id": "MCS",
+      "name": "Maritime Costs",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "MDS",
+      "name": "Markup & Data Systems",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "MGU",
+      "name": "Module Governance",
+      "cluster": "Vision"
+    },
+    {
+      "id": "MIX",
+      "name": "Sir Mix-A-Lot",
+      "cluster": "Music"
+    },
+    {
+      "id": "MPC",
+      "name": "Math Co-Proc.",
+      "cluster": "Vision"
+    },
+    {
+      "id": "MRW",
+      "name": "MC Weather",
+      "cluster": "Creative"
+    },
+    {
+      "id": "MST",
+      "name": "Mesh Telescope",
+      "cluster": "Science"
+    },
+    {
+      "id": "MTB",
+      "name": "Moontribe",
+      "cluster": "Music"
+    },
+    {
+      "id": "MWC",
+      "name": "Millwork Co-op",
+      "cluster": "Business"
+    },
+    {
+      "id": "NEH",
+      "name": "NeHe OpenGL",
+      "cluster": "Creative"
+    },
+    {
+      "id": "NND",
+      "name": "New New Deal",
+      "cluster": "Energy"
+    },
+    {
+      "id": "NWC",
+      "name": "Norwescon",
+      "cluster": "Science"
+    },
+    {
+      "id": "NWZ",
+      "name": "Non-Western Zodiac",
+      "cluster": "Science"
+    },
+    {
+      "id": "OCN",
+      "name": "Open Compute",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "OCT",
+      "name": "OctaMED & Trackers",
+      "cluster": "Music"
+    },
+    {
+      "id": "OPS",
+      "name": "OpenStack Cloud",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "OSC",
+      "name": "Orson Scott Card",
+      "cluster": "Science"
+    },
+    {
+      "id": "OTM",
+      "name": "Odyssey of the Mind",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "PGP",
+      "name": "Garbage Patch",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "PIN",
+      "name": "Post-Industrial",
+      "cluster": "Music"
+    },
+    {
+      "id": "PJM",
+      "name": "Pearl Jam",
+      "cluster": "Music"
+    },
+    {
+      "id": "PKD",
+      "name": "Philip K. Dick",
+      "cluster": "Science"
+    },
+    {
+      "id": "PLT",
+      "name": "PNW Planting",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "PMG",
+      "name": "Pi-Mono + GSD",
+      "cluster": "Vision"
+    },
+    {
+      "id": "PNP",
+      "name": "Ports & Pipes",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "PPM",
+      "name": "Pike Place Market",
+      "cluster": "Business"
+    },
+    {
+      "id": "PRS",
+      "name": "Polyrhythm Standard",
+      "cluster": "Music"
+    },
+    {
+      "id": "PSG",
+      "name": "Pacific Spine",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "PSS",
+      "name": "PNW Signal Stack",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "PTG",
+      "name": "Paper That Grows",
+      "cluster": "Business"
+    },
+    {
+      "id": "RBH",
+      "name": "Radio History",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "RFC",
+      "name": "RFC Archive",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "RLS",
+      "name": "Resonant Lands",
+      "cluster": "Music"
+    },
+    {
+      "id": "ROF",
+      "name": "Ring of Fire",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "SAL",
+      "name": "Salmon Heritage",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "SAN",
+      "name": "SANS Institute",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "SCR",
+      "name": "Source Code Review",
+      "cluster": "Vision"
+    },
+    {
+      "id": "SET",
+      "name": "SETI",
+      "cluster": "Science"
+    },
+    {
+      "id": "SFC",
+      "name": "Silicon Forest",
+      "cluster": "Business"
+    },
+    {
+      "id": "SFH",
+      "name": "SF House Music",
+      "cluster": "Music"
+    },
+    {
+      "id": "SGL",
+      "name": "Signal & Light",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "SGM",
+      "name": "Sacred Geometry",
+      "cluster": "Creative"
+    },
+    {
+      "id": "SHE",
+      "name": "Smart Home",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "SMB",
+      "name": "SMBH Growth",
+      "cluster": "Science"
+    },
+    {
+      "id": "SMF",
+      "name": "SMOFcon",
+      "cluster": "Science"
+    },
+    {
+      "id": "SMP",
+      "name": "Smashing Pumpkins",
+      "cluster": "Music"
+    },
+    {
+      "id": "SNL",
+      "name": "Sensing Layer",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "SNX",
+      "name": "Saturday Night Live",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "SNY",
+      "name": "Sonic Youth",
+      "cluster": "Music"
+    },
+    {
+      "id": "SOC",
+      "name": "Strait Out of Compton",
+      "cluster": "Music"
+    },
+    {
+      "id": "SPA",
+      "name": "Spatial Awareness",
+      "cluster": "Creative"
+    },
+    {
+      "id": "SRD",
+      "name": "SSH & RDP",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "SRG",
+      "name": "Susan Rogers",
+      "cluster": "Music"
+    },
+    {
+      "id": "SSM",
+      "name": "Street Music",
+      "cluster": "Music"
+    },
+    {
+      "id": "SST",
+      "name": "States & Tape",
+      "cluster": "Vision"
+    },
+    {
+      "id": "STA",
+      "name": "Steve Allen",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "STE",
+      "name": "Storage Forensics",
+      "cluster": "Science"
+    },
+    {
+      "id": "SVB",
+      "name": "Student Voice",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "SYN",
+      "name": "Synsor Corp",
+      "cluster": "Vision"
+    },
+    {
+      "id": "SYS",
+      "name": "Systems Admin",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "T55",
+      "name": "555 Timer",
+      "cluster": "Electronics"
+    },
+    {
+      "id": "TCP",
+      "name": "TCP/IP Protocol",
+      "cluster": "Infrastructure"
+    },
+    {
+      "id": "THE",
+      "name": "Thermal Energy",
+      "cluster": "Energy"
+    },
+    {
+      "id": "TIBS",
+      "name": "Animal Speak",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "TKH",
+      "name": "Talking Heads",
+      "cluster": "Music"
+    },
+    {
+      "id": "TSL",
+      "name": "Tessl Review",
+      "cluster": "Vision"
+    },
+    {
+      "id": "TVH",
+      "name": "Television Era",
+      "cluster": "Broadcasting"
+    },
+    {
+      "id": "VAV",
+      "name": "Voxel as Vessel",
+      "cluster": "Creative"
+    },
+    {
+      "id": "VKD",
+      "name": "Vulkan Desktop",
+      "cluster": "Creative"
+    },
+    {
+      "id": "VKS",
+      "name": "Vulkan Screensaver",
+      "cluster": "Creative"
+    },
+    {
+      "id": "WAL",
+      "name": "Weird Al",
+      "cluster": "Music"
+    },
+    {
+      "id": "WCN",
+      "name": "Westercon",
+      "cluster": "Science"
+    },
+    {
+      "id": "WLF",
+      "name": "The Wolf",
+      "cluster": "Music"
+    },
+    {
+      "id": "WPH",
+      "name": "Weekly Phone",
+      "cluster": "Business"
+    },
+    {
+      "id": "WSB",
+      "name": "Small Business",
+      "cluster": "Business"
+    },
+    {
+      "id": "WYR",
+      "name": "Weyerhaeuser",
+      "cluster": "Ecology"
+    },
+    {
+      "id": "YNT",
+      "name": "Yuri's Night",
+      "cluster": "Science"
+    }
+  ],
+  "edges": [
+    {
+      "source": "ABL",
+      "target": "FLS",
+      "type": "cites"
+    },
+    {
+      "source": "ABL",
+      "target": "OCT",
+      "type": "cites"
+    },
+    {
+      "source": "ABL",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "ABL",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "ABL",
+      "target": "SYN",
+      "type": "cites"
+    },
+    {
+      "source": "ABL",
+      "target": "NEH",
+      "type": "cites"
+    },
+    {
+      "source": "ABL",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "GPO",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "SFC",
+      "type": "cites"
+    },
+    {
+      "source": "ACE",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "AIH",
+      "target": "LLM",
+      "type": "cites"
+    },
+    {
+      "source": "AIH",
+      "target": "CFU",
+      "type": "cites"
+    },
+    {
+      "source": "AIH",
+      "target": "MST",
+      "type": "cites"
+    },
+    {
+      "source": "AIH",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "AIH",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "ALV",
+      "target": "SNX",
+      "type": "cites"
+    },
+    {
+      "source": "ALV",
+      "target": "TVH",
+      "type": "cites"
+    },
+    {
+      "source": "ALV",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "ALV",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "ALV",
+      "target": "COL",
+      "type": "cites"
+    },
+    {
+      "source": "ALV",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "HEN",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "ARC",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "INP",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "STA",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "GPG",
+      "type": "cites"
+    },
+    {
+      "source": "ANM",
+      "target": "BNY",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "COL",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "APR",
+      "target": "GDN",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "PJM",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "SNY",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "DRN",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "TKH",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "CAR",
+      "type": "cites"
+    },
+    {
+      "source": "B52",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "BHC",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "BHC",
+      "target": "GRB",
+      "type": "cites"
+    },
+    {
+      "source": "BHC",
+      "target": "LTS",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "LGW",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "SET",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "THE",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "BHK",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "BHM",
+      "target": "PPM",
+      "type": "cites"
+    },
+    {
+      "source": "BHM",
+      "target": "WSB",
+      "type": "cites"
+    },
+    {
+      "source": "BHM",
+      "target": "KSM",
+      "type": "cites"
+    },
+    {
+      "source": "BHM",
+      "target": "SAL",
+      "type": "cites"
+    },
+    {
+      "source": "BHM",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "BHM",
+      "target": "GDN",
+      "type": "cites"
+    },
+    {
+      "source": "BHM",
+      "target": "AGR",
+      "type": "cites"
+    },
+    {
+      "source": "BMR",
+      "target": "LKR",
+      "type": "cites"
+    },
+    {
+      "source": "BMR",
+      "target": "CDS",
+      "type": "cites"
+    },
+    {
+      "source": "BMR",
+      "target": "HJX",
+      "type": "cites"
+    },
+    {
+      "source": "BMR",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "BMR",
+      "target": "COI",
+      "type": "cites"
+    },
+    {
+      "source": "BMR",
+      "target": "PRS",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "SVB",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "SFC",
+      "type": "cites"
+    },
+    {
+      "source": "BNY",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "CBC",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "CBC",
+      "target": "FCC",
+      "type": "cites"
+    },
+    {
+      "source": "CBC",
+      "target": "C89",
+      "type": "cites"
+    },
+    {
+      "source": "CBC",
+      "target": "KPZ",
+      "type": "cites"
+    },
+    {
+      "source": "CBC",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "CBC",
+      "target": "IBC",
+      "type": "cites"
+    },
+    {
+      "source": "CBC",
+      "target": "BHM",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "COK",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "FEG",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "PMG",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "CDL",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "MIX",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "GRV",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "PJM",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "KUB",
+      "type": "cites"
+    },
+    {
+      "source": "CDS",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "LLM",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "AIH",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "MST",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "PNP",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "CFU",
+      "target": "DNS",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "PMG",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "GSA",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "MGU",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "CGI",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "VKS",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "WPH",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "CHS",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "COK",
+      "target": "BNY",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "MIX",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "SOC",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "WSB",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "ACC",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "KUB",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "CRY",
+      "target": "CDS",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "COK",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "SAL",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "PPM",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "BHM",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "AWF",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "GDN",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "AGR",
+      "type": "cites"
+    },
+    {
+      "source": "CWC",
+      "target": "ACC",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "KPZ",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "WLF",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "FCC",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "C89",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "CBC",
+      "type": "cites"
+    },
+    {
+      "source": "DFQ",
+      "target": "IBC",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "DNS",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "WPH",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "DHP",
+      "target": "SAN",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "WPH",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "FCC",
+      "type": "cites"
+    },
+    {
+      "source": "DNS",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "CAR",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "TKH",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "PIN",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "DRN",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "B52",
+      "type": "cites"
+    },
+    {
+      "source": "DPM",
+      "target": "COI",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "CAR",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "B52",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "TKH",
+      "type": "cites"
+    },
+    {
+      "source": "DRN",
+      "target": "CDP",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "ATC",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "FDR",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "LKR",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "NWZ",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "EAZ",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "WPH",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "SFC",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "CDS",
+      "type": "cites"
+    },
+    {
+      "source": "ENB",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "WPH",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "CBC",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "IBC",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "SVB",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "KPZ",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "C89",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "T55",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "SHE",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "NND",
+      "type": "cites"
+    },
+    {
+      "source": "FCC",
+      "target": "WSB",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "COK",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "BNY",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "SVB",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "HEN",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "FEG",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "FLS",
+      "target": "ABL",
+      "type": "cites"
+    },
+    {
+      "source": "FLS",
+      "target": "OCT",
+      "type": "cites"
+    },
+    {
+      "source": "FLS",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "FLS",
+      "target": "SYN",
+      "type": "cites"
+    },
+    {
+      "source": "FLS",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "GPO",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "GPG",
+      "target": "T55",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "GPO",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "GRB",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "GRB",
+      "target": "BHC",
+      "type": "cites"
+    },
+    {
+      "source": "GRB",
+      "target": "LTS",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "PMG",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "MGU",
+      "type": "cites"
+    },
+    {
+      "source": "GSA",
+      "target": "COK",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "ANM",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "ARC",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "INP",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "BNY",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "STA",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "HEN",
+      "target": "SVB",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "SRG",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "GTP",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "HFR",
+      "type": "cites"
+    },
+    {
+      "source": "HFE",
+      "target": "SNY",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "EMG",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "SNL",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "SNY",
+      "type": "cites"
+    },
+    {
+      "source": "HFR",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "GRV",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "MIX",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "HFR",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "SRG",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "SSM",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "PJM",
+      "type": "cites"
+    },
+    {
+      "source": "HJX",
+      "target": "SNY",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "C89",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "KSM",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "SAL",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "CDS",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "BHM",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "IBC",
+      "target": "CBC",
+      "type": "cites"
+    },
+    {
+      "source": "ICS",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "ICS",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "ICS",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "ICS",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "ICS",
+      "target": "BCM",
+      "type": "cites"
+    },
+    {
+      "source": "ICS",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "ICS",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "INP",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "INP",
+      "target": "ARC",
+      "type": "cites"
+    },
+    {
+      "source": "INP",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "INP",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "INP",
+      "target": "HEN",
+      "type": "cites"
+    },
+    {
+      "source": "INP",
+      "target": "ANM",
+      "type": "cites"
+    },
+    {
+      "source": "INP",
+      "target": "GPG",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "MTB",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "PRS",
+      "type": "cites"
+    },
+    {
+      "source": "KFU",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "LGW",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "LLM",
+      "target": "CFU",
+      "type": "cites"
+    },
+    {
+      "source": "LLM",
+      "target": "AIH",
+      "type": "cites"
+    },
+    {
+      "source": "LLM",
+      "target": "MST",
+      "type": "cites"
+    },
+    {
+      "source": "LLM",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "LLM",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "LLM",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "LTS",
+      "target": "BHC",
+      "type": "cites"
+    },
+    {
+      "source": "LTS",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "LTS",
+      "target": "GRB",
+      "type": "cites"
+    },
+    {
+      "source": "LTS",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "LTS",
+      "target": "APR",
+      "type": "cites"
+    },
+    {
+      "source": "LTS",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "LTS",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "COK",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "CDL",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "PMG",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "CDS",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "MIX",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "SAL",
+      "type": "cites"
+    },
+    {
+      "source": "M05",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "NND",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "MCF",
+      "target": "MCM",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "MCM",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "NND",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "HGE",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "ROF",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "THE",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "ACC",
+      "type": "cites"
+    },
+    {
+      "source": "MCS",
+      "target": "WSB",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "PMG",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "CDL",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "COK",
+      "type": "cites"
+    },
+    {
+      "source": "MGU",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "PLT",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "SNL",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "MCR",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "MRW",
+      "target": "VAV",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "PNP",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "DNS",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "AVI",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "CFU",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "LLM",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "AIH",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "COL",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "MST",
+      "target": "MAM",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "PRS",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "COL",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "PIN",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "COI",
+      "type": "cites"
+    },
+    {
+      "source": "MTB",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "ACC",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "WSB",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "WYR",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "BCM",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "COL",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "NND",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "BHM",
+      "type": "cites"
+    },
+    {
+      "source": "MWC",
+      "target": "PPM",
+      "type": "cites"
+    },
+    {
+      "source": "NEH",
+      "target": "VKD",
+      "type": "cites"
+    },
+    {
+      "source": "NEH",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "ATC",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "FDR",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "LKR",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "NWZ",
+      "target": "GDN",
+      "type": "cites"
+    },
+    {
+      "source": "OCT",
+      "target": "ABL",
+      "type": "cites"
+    },
+    {
+      "source": "OCT",
+      "target": "FLS",
+      "type": "cites"
+    },
+    {
+      "source": "OCT",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "OCT",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "OCT",
+      "target": "NEH",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "NND",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "OPS",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "PKD",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "LNV",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "BNY",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "SGM",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "OSC",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "NND",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "MCM",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "WYR",
+      "type": "cites"
+    },
+    {
+      "source": "PIN",
+      "target": "SFC",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "LNV",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "OSC",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "COI",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "MRW",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "STE",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "PKD",
+      "target": "PIN",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "DNS",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "PNP",
+      "target": "EMG",
+      "type": "cites"
+    },
+    {
+      "source": "PPM",
+      "target": "AGR",
+      "type": "cites"
+    },
+    {
+      "source": "PPM",
+      "target": "GDN",
+      "type": "cites"
+    },
+    {
+      "source": "PPM",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "PPM",
+      "target": "SAL",
+      "type": "cites"
+    },
+    {
+      "source": "PPM",
+      "target": "AWF",
+      "type": "cites"
+    },
+    {
+      "source": "PPM",
+      "target": "WSB",
+      "type": "cites"
+    },
+    {
+      "source": "PPM",
+      "target": "ACC",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "T55",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "TKH",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "HJX",
+      "type": "cites"
+    },
+    {
+      "source": "PRS",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "FCC",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "T55",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "PSS",
+      "target": "PSG",
+      "type": "cites"
+    },
+    {
+      "source": "PTG",
+      "target": "WYR",
+      "type": "cites"
+    },
+    {
+      "source": "PTG",
+      "target": "LFR",
+      "type": "cites"
+    },
+    {
+      "source": "PTG",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "PTG",
+      "target": "FFA",
+      "type": "cites"
+    },
+    {
+      "source": "PTG",
+      "target": "INP",
+      "type": "cites"
+    },
+    {
+      "source": "PTG",
+      "target": "ICS",
+      "type": "cites"
+    },
+    {
+      "source": "PTG",
+      "target": "COK",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "WPH",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "FCC",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "DNS",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "RFC",
+      "target": "ENB",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "SNL",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "SET",
+      "target": "LGW",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "SYN",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "NND",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "MCM",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "WYR",
+      "type": "cites"
+    },
+    {
+      "source": "SFC",
+      "target": "PIN",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "CDS",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "PRS",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "MIX",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "MTB",
+      "type": "cites"
+    },
+    {
+      "source": "SFH",
+      "target": "C89",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "T55",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "EMG",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "SGL",
+      "target": "ARC",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "ARC",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "PRS",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "SGM",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "GRV",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "SNY",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "PJM",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "HJX",
+      "type": "cites"
+    },
+    {
+      "source": "SMP",
+      "target": "CAR",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "BPS",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "T55",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "SHE",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "SPA",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "EMG",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "AWF",
+      "type": "cites"
+    },
+    {
+      "source": "SNL",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "SNX",
+      "target": "TVH",
+      "type": "cites"
+    },
+    {
+      "source": "SNX",
+      "target": "ALV",
+      "type": "cites"
+    },
+    {
+      "source": "SNX",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "SNX",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "SNX",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SNX",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "CDS",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "GRV",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "HJX",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "KUB",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "PJM",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "MIX",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "SOC",
+      "target": "CRY",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "PNP",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "FEC",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "MDS",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "SRD",
+      "target": "DNS",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "PRS",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "HFR",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "SRG",
+      "target": "CAR",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "PJM",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "GRV",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "PPM",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "SNY",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "KUB",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "MIX",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "COL",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "CAS",
+      "type": "cites"
+    },
+    {
+      "source": "SSM",
+      "target": "TIBS",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "MPC",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "GSA",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "FQC",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "HFR",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "MGU",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "ICS",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "M05",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "CGI",
+      "type": "cites"
+    },
+    {
+      "source": "SST",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "SAN",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "OCN",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "ACE",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "VAV",
+      "type": "cites"
+    },
+    {
+      "source": "STE",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "SVB",
+      "target": "C89",
+      "type": "cites"
+    },
+    {
+      "source": "SVB",
+      "target": "BNY",
+      "type": "cites"
+    },
+    {
+      "source": "SVB",
+      "target": "FCC",
+      "type": "cites"
+    },
+    {
+      "source": "SVB",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "SVB",
+      "target": "KSM",
+      "type": "cites"
+    },
+    {
+      "source": "SVB",
+      "target": "CBC",
+      "type": "cites"
+    },
+    {
+      "source": "SVB",
+      "target": "OTM",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "DNS",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "DHP",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "MCF",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "TCP",
+      "target": "WPH",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "DPM",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "CAR",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "B52",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "SNY",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "BMR",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "DRN",
+      "type": "cites"
+    },
+    {
+      "source": "TKH",
+      "target": "PIN",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "TCP",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "PNP",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "ALV",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "COL",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "DHP",
+      "type": "cites"
+    },
+    {
+      "source": "TVH",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "VKD",
+      "target": "NEH",
+      "type": "cites"
+    },
+    {
+      "source": "VKD",
+      "target": "WAL",
+      "type": "cites"
+    },
+    {
+      "source": "VKD",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "ECO",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "CHS",
+      "type": "cites"
+    },
+    {
+      "source": "VKS",
+      "target": "K8S",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "SHE",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "CMH",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "SGL",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "LED",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "FCC",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "PSS",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "GRD",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "EMG",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "RBH",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "BRC",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "DAA",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "HFE",
+      "type": "cites"
+    },
+    {
+      "source": "WPH",
+      "target": "GSD2",
+      "type": "cites"
+    },
+    {
+      "source": "YNT",
+      "target": "LTS",
+      "type": "cites"
+    },
+    {
+      "source": "YNT",
+      "target": "BHK",
+      "type": "cites"
+    },
+    {
+      "source": "YNT",
+      "target": "SYS",
+      "type": "cites"
+    },
+    {
+      "source": "YNT",
+      "target": "RFC",
+      "type": "cites"
+    },
+    {
+      "source": "YNT",
+      "target": "BRC",
+      "type": "cites"
+    }
+  ],
+  "clusters": {
+    "Ecology": [
+      "AGR",
+      "AVI",
+      "AWF",
+      "BCM",
+      "BPS",
+      "CAS",
+      "COL",
+      "CRV",
+      "ECO",
+      "FFA",
+      "GDN",
+      "LFR",
+      "MAM",
+      "PGP",
+      "PLT",
+      "ROF",
+      "SAL",
+      "TIBS",
+      "WYR"
+    ],
+    "Electronics": [
+      "BRC",
+      "EMG",
+      "FQC",
+      "LED",
+      "SGL",
+      "SHE",
+      "SNL",
+      "T55"
+    ],
+    "Infrastructure": [
+      "CMH",
+      "DHP",
+      "DNS",
+      "FEC",
+      "K8S",
+      "MCF",
+      "MCM",
+      "MCS",
+      "MDS",
+      "OCN",
+      "OPS",
+      "PNP",
+      "PSG",
+      "PSS",
+      "RFC",
+      "SAN",
+      "SRD",
+      "SYS",
+      "TCP"
+    ],
+    "Energy": [
+      "HGE",
+      "NND",
+      "THE"
+    ],
+    "Creative": [
+      "ANM",
+      "APR",
+      "ARC",
+      "CFU",
+      "CHS",
+      "DDA",
+      "FFA",
+      "GRD",
+      "HEN",
+      "INP",
+      "MCR",
+      "MRW",
+      "NEH",
+      "SGM",
+      "SPA",
+      "VAV",
+      "VKD",
+      "VKS"
+    ],
+    "Business": [
+      "ACC",
+      "BHM",
+      "BLA",
+      "CDS",
+      "JNS",
+      "MWC",
+      "PPM",
+      "PTG",
+      "SFC",
+      "WPH",
+      "WSB"
+    ],
+    "Vision": [
+      "ABM",
+      "ACE",
+      "AIH",
+      "CDL",
+      "CGI",
+      "COK",
+      "FEG",
+      "GPG",
+      "GPO",
+      "GSA",
+      "GSD2",
+      "ICS",
+      "LLM",
+      "M05",
+      "MGU",
+      "MPC",
+      "PMG",
+      "SCR",
+      "SST",
+      "SYN",
+      "TSL"
+    ],
+    "Broadcasting": [
+      "ALV",
+      "AMR",
+      "BNY",
+      "CBC",
+      "CCT",
+      "CNA",
+      "DFQ",
+      "ENB",
+      "FCC",
+      "IBC",
+      "LNT",
+      "OTM",
+      "RBH",
+      "SNX",
+      "STA",
+      "SVB",
+      "TVH"
+    ],
+    "Science": [
+      "ATC",
+      "BHC",
+      "BHK",
+      "BNY",
+      "CYG",
+      "EAZ",
+      "FDR",
+      "GRB",
+      "KFU",
+      "LGW",
+      "LNV",
+      "LTS",
+      "MST",
+      "NWC",
+      "NWZ",
+      "OSC",
+      "PKD",
+      "SET",
+      "SMB",
+      "SMF",
+      "STE",
+      "WCN",
+      "YNT"
+    ],
+    "Music": [
+      "ABL",
+      "B52",
+      "BMR",
+      "C89",
+      "CAR",
+      "CDP",
+      "COI",
+      "CRY",
+      "CWC",
+      "DAA",
+      "DPM",
+      "DRN",
+      "FLS",
+      "GGT",
+      "GRV",
+      "GTP",
+      "HFE",
+      "HFR",
+      "HJX",
+      "KGX",
+      "KPZ",
+      "KSM",
+      "KUB",
+      "LKR",
+      "MIX",
+      "MTB",
+      "OCT",
+      "PIN",
+      "PJM",
+      "PRS",
+      "RLS",
+      "SFH",
+      "SMP",
+      "SNY",
+      "SOC",
+      "SRG",
+      "SSM",
+      "TKH",
+      "WAL",
+      "WLF"
+    ]
+  }
+}
