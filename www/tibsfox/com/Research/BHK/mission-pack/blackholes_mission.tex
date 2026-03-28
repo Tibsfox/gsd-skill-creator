@@ -1,0 +1,1180 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+
+% Space/Physics color scheme
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple - Section headers
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue - Subsection headers
+\definecolor{tertiary}{HTML}{F9A825}      % Star gold - Subsubsection headers
+\definecolor{accent}{HTML}{4527A0}        % Deep purple - Highlights
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Light purple - Quote boxes
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{accent}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Black Holes, Spacetime \& Planetary Balance}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Black Holes, Spacetime and Planetary Balance -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Everything You Wanted to Know\\[0.3em]About Black Holes}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Space, Time, Relativity, Speed, Cooperation \& Planetary Balance}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{accent}{A 10-Layer Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18--24 context windows across 6--8 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Modules: 8  |  Wave Depth: 4  |  Parallel Tracks: 3}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Black Holes, Spacetime \& Planetary Balance --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Ready for Execution}
+\metafield{Depends On:}{gsd-skill-creator dev branch, GSD orchestrator}
+\metafield{Context:}{10-layer deep synthesis spanning physics, mathematics, global cooperation, and Earth stewardship}
+\metafield{Activation Profile:}{Fleet (8 modules, 3 parallel tracks)}
+
+\subsection{Vision}
+
+There is a question that sits at the edge of every curious mind, one that John Michell first formulated in a letter in 1783 and that humanity has been circling ever since: what happens when gravity wins completely? When a star's own weight overcomes every force that held it aloft, when the math produces a point of infinite density and a boundary from which nothing---not even light---returns? The answer is a black hole. But to understand what that answer means, you have to first understand what space is, what time is, and what the word \textit{fast} actually implies when physics takes the wheel.
+
+This mission is a journey across scales so vast they dissolve ordinary intuition. Einstein's field equations---ten coupled nonlinear partial differential equations---are not merely a description of gravity. They are a declaration that space and time are the same thing, and that matter tells spacetime how to curve while curved spacetime tells matter how to move. Every black hole is a proof of that declaration carried to its logical extreme. Every gravitational wave rippling outward at the speed of light is a message written in the fabric of existence itself, confirming that the universe is far stranger, and far more mathematically structured, than we built our everyday intuitions to handle.
+
+But the question of black holes does not stay in the cosmos. When we ask what ``fast'' really means---why a clock on the International Space Station ticks differently than one on your wrist, why GPS satellites require relativistic corrections to stay accurate, why a 19-year-old named Subrahmanyan Chandrasekhar could derive stellar collapse limits on a voyage from Madras in 1930---we are asking questions about cooperation too. About what it means for thousands of scientists across dozens of nations to point their telescopes simultaneously at a single galaxy and produce, together, the first-ever image of a black hole's silhouette. Science at its best is a structure of trust, a network of relationships that mirrors the mathematics it produces: the meaning lives not in any single node, but in the connections between them.
+
+And if we are asking what it means to cooperate across the cosmos, we cannot avoid asking what it means to cooperate on the one planet we actually inhabit. The same Stockholm Resilience Centre researchers who track Earth's nine planetary boundaries draw from the same systems-thinking tradition as the physicists who mapped spacetime's topology. Both are asking: what are the limits of stability? What are the thresholds beyond which the system tips into a new, less hospitable state? In 2025, seven of those nine boundaries have been crossed. The safe operating space that Holocene stability provided---the same stability that allowed civilizations to rise, write mathematics, and eventually launch telescopes into orbit---is narrowing. This mission holds both scales simultaneously: the cosmic and the terrestrial, the mathematical and the moral.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{The comprehension gap:} Black holes have been photographed, their mergers heard as gravitational waves, and a Nobel Prize awarded for their mathematics---yet the foundational concepts (spacetime curvature, event horizons, Hawking radiation, the information paradox) remain opaque to most educated adults, creating a gap between public understanding and scientific reality.
+
+\item \textbf{Velocity intuition failure:} The word ``fast'' is intuitive but misleading. Special relativity reveals that at velocities approaching $c$, time dilates, length contracts, and mass effectively increases without limit. The Lorentz factor $\gamma = 1/\sqrt{1-v^2/c^2}$ describes a universe where GPS satellites require 38-microsecond daily corrections and where muons created 15km above Earth's surface survive to reach us only because time passes differently in their reference frame. This counterintuitive reality is poorly communicated and rarely integrated.
+
+\item \textbf{The quantum-gravity frontier:} General relativity and quantum mechanics remain fundamentally incompatible. Near a black hole's singularity---where both become necessary---neither theory holds. The information paradox (Hawking radiation implies information is destroyed; quantum mechanics insists it cannot be) is an open wound in fundamental physics, and its resolution may require a theory of quantum gravity humanity does not yet possess.
+
+\item \textbf{Fragmented global scientific cooperation:} Despite the ISS representing 15 nations working in orbit for 25 years, geopolitical fragmentation increasingly threatens collaborative science. The Wolf Amendment blocks NASA-China cooperation. Russia's ISS participation is uncertain. COSPAR's 14,000 scientists operate in an environment where political boundaries compromise the open exchange of knowledge that science requires.
+
+\item \textbf{Planetary boundary transgression:} As of 2025, seven of nine planetary boundaries have been crossed. The biosphere integrity boundary was breached in the late 19th century; freshwater change in 2023; ocean acidification in 2025. Nature's own research (2025) projects that without urgent, universal action, current trends will transgress most remaining boundaries by 2050, entering regions of potentially irreversible Earth system change.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{The Spaces Between:} meaning lives not in the singularity but at the boundary---the event horizon where geometry meets thermodynamics; the interface between nations where cooperation transforms competition; the threshold between Holocene stability and Anthropocene instability. Understanding black holes is understanding what happens when those boundaries are crossed without return.
+\end{quotebox}
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+RESEARCH DOMAIN MAP: Everything You Wanted to Know About Black Holes
+=====================================================================
+
+  [COSMIC SCALE]                    [HUMAN SCALE]               [PLANETARY SCALE]
+       |                                 |                              |
+  +----+----+                      +-----+-----+               +-------+-------+
+  |         |                      |           |               |               |
+BLACK HOLES  SPACETIME          COOPERATION  VELOCITY       BOUNDARIES    STABILITY
+ History     GR Math            ISS/COSPAR   Special Rel.   9 Thresholds  Holocene
+ Hawking     Einstein Eqns.     Wolf Amend.  GPS/Muons      6 Breached    Tipping Pts
+ EHT Image   Gravitational      Science      Lorentz        Rockstrom     Anthropocene
+ Kerr/Schw.  Waves (LIGO)       Diplomacy    Factor         Framework     Safe Space
+  |         |                      |           |               |               |
+  +----+----+                      +-----+-----+               +-------+-------+
+       |                                 |                              |
+       +---------------+-----------------+              +---------------+
+                       |                                |
+              [QUANTUM FRONTIER]              [SYNTHESIS LAYER]
+              Information Paradox             The spaces between
+              Quantum Gravity                 Scale invariance
+              Hawking Radiation               Cooperation as physics
+              String Theory links             Stewardship as math
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+8 RESEARCH MODULES (Fleet Profile)
+===================================
+
+MODULE 1: Black Hole History & Taxonomy
+  John Michell (1783) --> Schwarzschild (1916) --> Chandrasekhar (1930)
+  --> Penrose/Hawking (1960s-70s) --> Cygnus X-1 --> EHT (2019/2022)
+  Types: Stellar / Intermediate / Supermassive / Primordial
+
+MODULE 2: Spacetime Mathematics & General Relativity
+  Einstein Field Equations (10 coupled nonlinear PDEs)
+  Schwarzschild Metric --> Kerr Solution --> No-Hair Theorem
+  Geodesics, Penrose diagrams, exact solutions
+
+MODULE 3: Special Relativity -- What "Fast" Really Means
+  Lorentz factor gamma, time dilation, length contraction
+  Twin paradox, muon survival, GPS corrections
+  E=mc^2 and mass-energy equivalence
+
+MODULE 4: Hawking Radiation & The Quantum Frontier
+  Black hole thermodynamics (Bekenstein-Hawking)
+  Information paradox, entropy, quantum gravity
+  String theory / holography / firewall paradox
+
+MODULE 5: Gravitational Waves -- Listening to Spacetime
+  LIGO/Virgo, GW150914 (2015), 100+ detections
+  Waveform templates, Einstein Telescope, Cosmic Explorer
+  String theory / amplituhedron connections
+
+MODULE 6: Global Scientific Cooperation
+  ISS: 15 nations, 25 years, science diplomacy
+  COSPAR: 14,000 scientists, Cold War origins
+  Barriers: Wolf Amendment, geopolitics, IP
+  Artemis Accords, UNOOSA equity framework
+
+MODULE 7: Planetary Boundaries & Earth System Stability
+  9 boundaries, Rockstrom (2009/2015/2023)
+  7 transgressed (as of 2025), safe operating space
+  Tipping points, Holocene baseline, Anthropocene
+  Doughnut economics, Nature (2025) projections
+
+MODULE 8: Synthesis -- The Spaces Between
+  Scale invariance: cosmic stability <--> planetary stability
+  Event horizon :: planetary boundary
+  Cooperation structures mirroring mathematical structures
+  Amiga Principle applied to Earth stewardship
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Black Hole History \& Taxonomy}
+From John Michell's 1783 ``dark stars'' thought experiment through Karl Schwarzschild's 1916 exact solution to Einstein's equations, to the 2019 Event Horizon Telescope image of M87*. Covers all four black hole types (stellar, intermediate, supermassive, primordial), formation pathways, and observational milestones including Cygnus X-1, the Hawking-Thorne bet, and the 2020 Nobel Prize.
+
+\subsubsection{Module 2: Spacetime Mathematics \& General Relativity}
+Einstein's field equations as ten coupled nonlinear partial differential equations. The Schwarzschild metric and radius $R_s = 2GM/c^2$. The Kerr solution (1963), the no-hair theorem, and what ``made only of space and time'' means physically. Geodesics, Penrose diagrams, and the ~20 known exact solutions.
+
+\subsubsection{Module 3: Special Relativity --- What ``Fast'' Really Means}
+The Lorentz factor $\gamma = 1/\sqrt{1-v^2/c^2}$ and its consequences: time dilation, length contraction, relativistic mass increase. Real-world verification: cosmic ray muon survival, atomic clock experiments, GPS corrections (38 microseconds per day). The twin paradox resolved. The LHC achieving 99.9999991\% of $c$.
+
+\subsubsection{Module 4: Hawking Radiation \& The Quantum Frontier}
+Hawking's 1974 discovery that black holes emit thermal radiation via virtual particle pair production at the event horizon. Black hole thermodynamics: temperature inversely proportional to mass. The information paradox: quantum mechanics forbids information destruction; general relativity predicts it. The firewall paradox, ER=EPR conjecture, and the state of quantum gravity.
+
+\subsubsection{Module 5: Gravitational Waves --- Listening to Spacetime}
+LIGO's September 14, 2015 detection of GW150914: two black holes 30 and 35 solar masses, 1.4 billion light-years away. The quadrupole formula, waveform templates, and the string theory / amplituhedron mathematical connections. Next-generation detectors: Einstein Telescope (Europe) and Cosmic Explorer (US), expected late 2030s.
+
+\subsubsection{Module 6: Global Scientific Cooperation}
+ISS as science diplomacy: 15 nations, 25 years of continuous human presence, microgravity research benefits on Earth. COSPAR: founded 1958 during the Cold War to ensure free exchange across geopolitical divisions. Tensions: Wolf Amendment, Russia/ISS uncertainty, China exclusion. Positive frameworks: Artemis Accords (20+ nations), UNOOSA equity programs.
+
+\subsubsection{Module 7: Planetary Boundaries \& Earth System Stability}
+Johan Rockstr{\"o}m's 2009 framework defining a ``safe operating space for humanity'' across 9 Earth system processes. Updated 2015 and 2023. As of 2025: 7 boundaries transgressed (biosphere integrity, climate change, land-system change, freshwater change, biogeochemical flows, novel entities, ocean acidification). The 2025 Nature paper projects full transgression by 2050 without urgent action.
+
+\subsubsection{Module 8: Synthesis --- The Spaces Between}
+The philosophical and mathematical synthesis: event horizons as planetary boundaries (both are thresholds of irreversibility), cooperation structures as mathematical structures (meaning lives in connections not nodes), the Amiga Principle as applied to Earth stewardship (architectural elegance producing resilience), and ``giving people their lives back'' as the ultimate motivation for understanding the cosmos we inhabit.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+CHIPSET: blackholes-spacetime-cooperation-v1.0
+==============================================
+name: blackholes-deep-research
+version: 1.0.0
+profile: fleet
+modules:
+  - id: MOD-BH-HIST    # Black hole history & taxonomy
+    model: sonnet
+    parallel_track: A
+  - id: MOD-GR-MATH    # Spacetime mathematics & GR
+    model: opus
+    parallel_track: A
+  - id: MOD-SR-FAST    # Special relativity & velocity
+    model: sonnet
+    parallel_track: B
+  - id: MOD-HAWKING    # Hawking radiation & quantum
+    model: opus
+    parallel_track: B
+  - id: MOD-GRAV-WAV   # Gravitational waves & LIGO
+    model: sonnet
+    parallel_track: C
+  - id: MOD-COOP       # Global scientific cooperation
+    model: sonnet
+    parallel_track: C
+  - id: MOD-PLANET     # Planetary boundaries
+    model: sonnet
+    parallel_track: B
+  - id: MOD-SYNTH      # Synthesis: the spaces between
+    model: opus
+    parallel_track: sequential-post-wave-1
+wave_structure: [foundation, parallel-3-track, synthesis, publication]
+model_split: {opus: 0.30, sonnet: 0.60, haiku: 0.10}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+\item Complete history of black hole theory and observation from 1783 to 2025
+\item Full mathematical treatment of GR at conceptual + intermediate level (EFE, Schwarzschild, Kerr)
+\item Special relativity mechanics: Lorentz factor, time dilation, length contraction, E=mc\textsuperscript{2}
+\item Hawking radiation, black hole thermodynamics, information paradox current state
+\item Gravitational wave detection: LIGO, Virgo, history, future detectors
+\item International space cooperation: ISS, COSPAR, Artemis Accords, Wolf Amendment
+\item Planetary boundaries framework: all 9 boundaries, 2023/2025 update
+\item Synthesis layer connecting cosmic and planetary scales
+\item Comprehensive source bibliography from NASA, peer-reviewed journals, ESA, Stockholm Resilience Centre
+\end{itemize}
+
+\subsubsection*{Out of Scope (v1.0)}
+\begin{itemize}[noitemsep]
+\item Full graduate-level tensor calculus derivations
+\item Complete quantum gravity theories (string theory, loop quantum gravity) in depth
+\item Individual planetary boundary mitigation policy analysis
+\item Commercial space sector economics in depth
+\item Specific national space budgets and geopolitical histories beyond cooperation context
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*]
+\item A reader with no physics background can explain what a black hole is, how it forms, and why it can't be ``seen'' after reading Module 1 output.
+\item The Lorentz factor equation $\gamma = 1/\sqrt{1-v^2/c^2}$ is explained with three real-world examples (GPS, muons, twin paradox) in Module 3 output.
+\item Einstein's field equations are represented conceptually (``spacetime curvature = mass-energy content'') with at least two exact solutions explained in Module 2 output.
+\item Hawking radiation is described with accurate physics, the information paradox stated clearly, and current open-question status acknowledged in Module 4 output.
+\item LIGO's 2015 detection is narrated with accurate parameters (masses, distance, detection method) and future detector timeline in Module 5 output.
+\item ISS cooperation model is described with specific nation counts, years of operation, and at least two named barriers to future cooperation in Module 6 output.
+\item All 9 planetary boundaries named, 7 transgressed ones identified, and Holocene baseline concept explained in Module 7 output.
+\item Synthesis module draws at least three structural parallels between cosmic and planetary scales using the ``spaces between'' framework.
+\item All numerical claims are sourced to NASA, peer-reviewed journals, Stockholm Resilience Centre, or equivalent authorities.
+\item Final document is readable at three speeds: glance (headers), scan (paragraph leads), read (full depth).
+\item No fabricated citations; all sources verifiable at publication time.
+\item Planetary boundaries section draws explicitly from Rockstr{\"o}m et al.\ (2009/2015/2023) and the 2025 Nature paper.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{5cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+The Space Between (TSB) & Philosophical spine; ``spaces between'' through-line originates here & Active \\
+Fox Infrastructure Group & Planetary stewardship context; Grand Coulee hydro thesis & Active \\
+GSD Amiga Vision & Architectural leverage as core epistemological method & Active \\
+GSD College Structure & Mathematics as Rosetta Core; this mission feeds curriculum & In Progress \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Black holes are, as physicist Pau Figueras noted, ``made of space and time alone.'' They need no nuclear physics, no plasma dynamics---only the pure geometry of existence, taken to its limit. There is something philosophically resonant about that simplicity: the most extreme objects in the universe are, at their core, the simplest. They are described entirely by three numbers: mass, spin, and charge. Everything else---the drama of the accretion disk, the violence of the jets, the thermodynamics of the event horizon---emerges from those three parameters interacting with curved spacetime.
+
+The Amiga Principle whispers the same thing. Remarkable outcomes from architectural elegance, not brute force. A few well-chosen parameters, faithfully iterated, producing staggering complexity. The GSD ecosystem and a Kerr black hole are, in this sense, cousins in epistemology.
+
+And when we ask about cooperation---about why 14,000 scientists in COSPAR, across 60+ years and every geopolitical season, keep choosing to share rather than silo their observations---we find the same pattern. The data alone is not the discovery. The discovery lives in the comparison, the cross-reference, the synthesis across different instruments and different latitudes and different frameworks. The Event Horizon Telescope image of M87* required synchronized radio telescopes on six continents, timed to atomic precision. The image did not exist in any single telescope. It existed in the space between them.
+
+That is also true of planetary boundaries. No single boundary captures Earth system health. It is the interaction between climate, biosphere, freshwater, ocean chemistry, and nutrient cycles that creates or destroys the Holocene stability that made human civilization possible. Cross enough of those boundaries and you don't just change one thing---you shift the attractor state of the entire system. The meaning lives in the connections. It always has.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Black Holes, Spacetime \& Planetary Balance --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference synthesizes findings from eight research domains. Each module section contains sourced findings organized by subtopic. Use it as the evidence base for Stage 3 mission execution.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+\item NASA (nasa.gov) --- space science, LIGO, ISS, gravitational waves
+\item Event Horizon Telescope Collaboration (eventhorizontelescope.org)
+\item LIGO Scientific Collaboration (ligo.org)
+\item Stockholm Resilience Centre (stockholmresilience.org) --- planetary boundaries
+\item Potsdam Institute for Climate Impact Research (PIK)
+\item International Science Council / COSPAR (council.science)
+\item Nature, Science, Science Advances (peer-reviewed journals)
+\item University of Chicago Cosmology Group; Yale Department of Astronomy
+\item Physics LibreTexts (OpenStax University Physics III)
+\item Aeon Essays / Plus Maths / Science News (high-quality science communication)
+\end{itemize}
+
+\subsection{Module 1: Black Hole History \& Taxonomy}
+
+\subsubsection{Origins: From Dark Stars to General Relativity}
+
+The concept predates Einstein by over a century. In 1783, British geologist and astronomer John Michell wrote to Henry Cavendish speculating about ``dark stars'' --- objects with gravity so intense that light could not escape. Pierre-Simon Laplace independently reached similar conclusions. These early formulations used Newtonian mechanics and were largely forgotten until the 20th century.
+
+The modern era begins with Einstein's general theory of relativity, published in November 1915. Within months, German physicist Karl Schwarzschild, writing from the Eastern Front during World War I, published the first exact solution to Einstein's equations. The Schwarzschild solution describes the gravitational field around a spherically symmetric, non-rotating mass. It contains a remarkable feature: a radius $R_s = 2GM/c^2$ at which the metric becomes singular --- what we now call the event horizon. Schwarzschild himself doubted such objects could physically exist, and he died of illness in May 1916 before the implications were worked out.
+
+For decades, black holes remained a mathematical curiosity. Arthur Eddington, who confirmed general relativity in 1919 by observing light bending around the Sun during a solar eclipse, actively argued against them, declaring no star could ``behave in such an absurd way.'' The tide turned in 1930 when a 19-year-old Subrahmanyan Chandrasekhar, sailing from Madras to Southampton, calculated that white dwarf stars above a critical mass (the Chandrasekhar limit, $\sim 1.4 M_\odot$) could not be supported against gravitational collapse. J.\ Robert Oppenheimer and George Volkoff extended this in 1939 to neutron stars: above $\sim 3 M_\odot$, complete collapse into what we now call a black hole becomes inevitable.
+
+\subsubsection{The Golden Age: 1960s--1970s}
+
+The theoretical picture crystallized in the 1960s--70s. Roger Penrose proved in 1965 that once a sufficiently massive star begins collapsing, general relativity guarantees singularity formation --- a result that earned him the 2020 Nobel Prize in Physics. Roy Kerr found the exact solution for a \textit{rotating} black hole in 1963. Ezra Newman extended this to rotating charged black holes in 1965. Werner Israel's 1967 theorem showed that a non-spinning, uncharged black hole is fully characterized by its mass alone.
+
+These findings converged into the \textbf{no-hair theorem}: a stationary black hole is completely described by only three parameters --- mass $M$, angular momentum $J$, and electric charge $Q$. John Wheeler, who coined the term ``black hole'' (reportedly offered to him by an audience member in 1967), popularized this with the phrase ``black holes have no hair.'' The discovery of pulsars in 1967 by Antony Hewish and Jocelyn Bell Burnell demonstrated that exotic compact objects actually existed, lending physical weight to the theoretical work.
+
+In 1971, Cygnus X-1 became the first object ``commonly accepted to be a black hole'' based on X-ray observations. Hawking famously bet Thorne in 1974 that it was \textit{not} a black hole --- and conceded in 1990 when observational evidence became overwhelming.
+
+\subsubsection{Black Hole Thermodynamics}
+
+Work by James Bardeen, Jacob Bekenstein, Brandon Carter, and Stephen Hawking in the early 1970s formulated the \textbf{four laws of black hole thermodynamics}, mapping black hole mechanics onto classical thermodynamics. Bekenstein proposed that a black hole's entropy is proportional to the area of its event horizon. Hawking then showed in 1974 that quantum effects cause black holes to emit thermal radiation (Hawking radiation), establishing a black hole temperature $T_H = \hbar c^3 / (8\pi G M k_B)$, inversely proportional to mass. This means larger black holes are colder.
+
+\subsubsection{Types of Black Holes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Mass Range} & \tableheader{Formation / Notes} \\
+\midrule
+Stellar mass & $3$--$100\, M_\odot$ & Collapse of massive stars ($>8$--$10\, M_\odot$ at birth); scattered throughout galaxies \\
+Intermediate & $10^2$--$10^5\, M_\odot$ & Formation unclear; possibly in globular clusters \\
+Supermassive & $10^6$--$10^{10}\, M_\odot$ & Centers of galaxies; role in galaxy formation; Sgr A* at Milky Way center \\
+Primordial & Sub-solar & Theorized to form from density fluctuations shortly after the Big Bang \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Observational Milestones}
+
+The Event Horizon Telescope (EHT) --- a global network of radio telescopes synchronized to atomic precision --- published the first image of a black hole on April 10, 2019: the shadow of the supermassive black hole in galaxy M87, with mass $6.5 \times 10^9\, M_\odot$. In 2022, the EHT released the image of Sagittarius A*, the $4 \times 10^6\, M_\odot$ black hole at the Milky Way's center, confirming what Andrea Ghez and Reinhard Genzel had demonstrated through stellar orbits (2020 Nobel Prize). The Milky Way is estimated to contain between 10 million and 1 billion stellar black holes.
+
+\subsection{Module 2: Spacetime Mathematics \& General Relativity}
+
+\subsubsection{Einstein's Field Equations}
+
+Einstein published the general theory of relativity in November 1915. At its core is a deceptively compact tensor equation:
+
+\[ G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4} T_{\mu\nu} \]
+
+This single line encodes ten coupled, nonlinear, hyperbolic-elliptic partial differential equations. John Archibald Wheeler's summary is the most intuitive: \textit{``Spacetime tells matter how to move; matter tells spacetime how to curve.''}
+
+The five terms carry distinct physical meanings:
+\begin{itemize}[noitemsep]
+\item $G_{\mu\nu}$ --- the Einstein tensor: encodes the curvature of spacetime
+\item $\Lambda g_{\mu\nu}$ --- the cosmological constant term: energy inherent to empty space (dark energy)
+\item $8\pi G/c^4$ --- Einstein's gravitational constant
+\item $T_{\mu\nu}$ --- the stress-energy tensor: local energy, momentum, and stress
+\end{itemize}
+
+Unlike Newtonian gravity or Maxwell's electromagnetism, the Einstein equations are \textbf{nonlinear}: you cannot simply add solutions together. If you know the spacetime curvature for one point mass, adding a second mass produces a system with no known exact solution. This is why only approximately 20 exact solutions to the EFE have ever been found.
+
+\subsubsection{The Schwarzschild Solution}
+
+Found in early 1916, the Schwarzschild solution describes spacetime around a spherically symmetric, non-rotating body. Its key prediction is the \textbf{Schwarzschild radius}:
+
+\[ R_s = \frac{2GM}{c^2} \]
+
+For the Sun, $R_s \approx 3$ km. For Earth, $R_s \approx 9$ mm. Any object compressed below its Schwarzschild radius becomes a black hole. The event horizon sits at $r = R_s$, where the metric coefficient goes to infinity --- not a physical singularity, but what we call a coordinate singularity. The true singularity, where curvature diverges and physics breaks down, sits at $r = 0$.
+
+\subsubsection{The Kerr Solution and No-Hair Theorem}
+
+Roy Kerr found the exact solution for a \textit{rotating} black hole in 1963 --- 47 years after Schwarzschild. A Kerr black hole is characterized entirely by two parameters: mass $M$ and angular momentum $J$. Since real astronomical objects rotate, the Kerr metric is the physically relevant solution for naturally occurring black holes. No-hair theorem: all stationary black holes in nature are fully characterized by $M$, $J$, and electric charge $Q$ alone. Everything else is radiated away during formation.
+
+\subsubsection{Penrose Diagrams and Global Structure}
+
+Penrose diagrams are conformal representations that map infinite spacetime onto a finite diagram while preserving causal structure (light cones always at 45 degrees). They reveal that a black hole's event horizon divides spacetime into causally disconnected regions: the interior is not just a ``place'' but a \textit{future} from which no past-directed causal curve escapes. This is the mathematical heart of why ``nothing escapes a black hole.''
+
+\subsection{Module 3: Special Relativity --- What ``Fast'' Really Means}
+
+\subsubsection{The Two Postulates}
+
+Einstein's 1905 special relativity rests on two postulates: (1) the laws of physics are identical in all inertial reference frames, and (2) the speed of light in vacuum $c = 299{,}792{,}458$ m/s is the same for all observers regardless of the motion of the source or observer. These two postulates, deceptively simple, demolish the Newtonian conception of absolute time and absolute space.
+
+\subsubsection{The Lorentz Factor and Time Dilation}
+
+If two observers are in relative motion at velocity $v$, their clocks run at different rates. The relationship is governed by the \textbf{Lorentz factor}:
+
+\[ \gamma = \frac{1}{\sqrt{1 - v^2/c^2}} \]
+
+The time measured by a stationary observer $\Delta t$ is related to the proper time $\Delta\tau$ (measured in the moving frame) by:
+
+\[ \Delta t = \gamma \cdot \Delta\tau \]
+
+At everyday speeds, $v^2/c^2 \approx 0$ and $\gamma \approx 1$ --- no observable dilation. At $v = 0.5c$, $\gamma \approx 1.15$. At $v = 0.99c$, $\gamma \approx 7.1$. At $v = 0.9999c$, $\gamma \approx 70.7$. Time dilation is not a clock error; it is a property of time itself. Biological processes slow down equally.
+
+\subsubsection{Real-World Verifications}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Phenomenon} & \tableheader{Description} & \tableheader{Source} \\
+\midrule
+Cosmic muon survival & Muons created 15 km up at $v\approx 0.99c$ have half-life $\sim$1.52 $\mu$s at rest; relativistic dilation lets them reach Earth's surface & Physics LibreTexts (OpenStax) \\
+GPS satellite correction & In-orbit clocks run 7 $\mu$s/day slower (special) and 45 $\mu$s/day faster (general); net correction of +38 $\mu$s/day required for accuracy & Britannica \\
+Scott/Mark Kelly twins & After 342 days on ISS at $\sim$7.7 km/s, Scott aged $\sim$5 ms less than twin Mark & Space.com / NASA \\
+LHC protons & Protons accelerated to 99.9999991\% of $c$; requires more energy from the grid than consumed by a city & West Texas A\&M University \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Length Contraction and Mass-Energy Equivalence}
+
+Alongside time dilation, moving objects \textit{contract} in the direction of motion by factor $1/\gamma$. A spacecraft traveling at $99\%\, c$ toward a star 100 light-years away arrives in only $\sim$14 years in the traveler's frame (though 101 years pass on Earth). At $99.9\%\, c$, only 4.5 years pass aboard. Einstein's $E = mc^2$ follows directly: mass and energy are interchangeable, with $c^2$ as the conversion factor. This explains why accelerating a massive object to exactly $c$ would require infinite energy --- the object's effective inertia increases without limit as $v \to c$.
+
+\subsection{Module 4: Hawking Radiation \& The Quantum Frontier}
+
+\subsubsection{Hawking's Discovery (1974)}
+
+Stephen Hawking combined quantum field theory with curved spacetime to show that black holes are not perfectly black. Virtual particle-antiparticle pairs are constantly produced throughout space. Near the event horizon, one particle can fall in while the other escapes as real radiation --- ``Hawking radiation.'' To distant observers, the black hole appears to emit thermal radiation with temperature $T_H \propto 1/M$. A black hole radiates, loses mass, and eventually evaporates. For stellar-mass black holes, $T_H$ is far below the cosmic microwave background ($\sim 2.7$ K), so evaporation is negligible on cosmic timescales.
+
+\subsubsection{The Information Paradox}
+
+Hawking radiation creates a profound conflict. Quantum mechanics requires that information is never destroyed: the quantum state of a system evolves unitarily, preserving all information. But if Hawking radiation is purely thermal (random), then when a black hole evaporates, the information about everything that fell in is apparently gone. This violates the fundamental principle of quantum unitarity. The tension has driven decades of theoretical work: the firewall paradox (2012, Almheiri-Marolf-Polchinski-Sully), the ER=EPR conjecture (Maldacena-Susskind 2013), and ongoing research. The information paradox remains open as of 2026.
+
+\subsubsection{Black Hole Thermodynamics: The Four Laws}
+
+Black holes obey laws perfectly analogous to the four laws of thermodynamics. The Bekenstein-Hawking entropy $S_{BH} = A/(4\ell_P^2)$ (where $A$ is horizon area and $\ell_P$ is the Planck length) represents an enormous amount of information --- the number of microstates compatible with a given $M$, $J$, $Q$. A 2021 discovery added that black holes also exert pressure on their surroundings, completing their thermodynamic picture in a surprising way.
+
+\subsection{Module 5: Gravitational Waves --- Listening to Spacetime}
+
+\subsubsection{Detection: GW150914 (September 14, 2015)}
+
+Einstein predicted gravitational waves in 1916 --- ripples in the metric of spacetime that propagate at $c$ --- but doubted they could ever be detected. On September 14, 2015, LIGO (Laser Interferometer Gravitational-Wave Observatory) detected the first gravitational wave signal, GW150914: a chirp lasting $\sim$0.2 seconds produced by two black holes of $\sim$30 and $\sim$35 solar masses merging 1.4 billion light-years away. The signal displaced LIGO's 4 km arms by a distance 1/1000th the diameter of a proton. Rainer Weiss, Kip Thorne, and Barry Barish received the 2017 Nobel Prize in Physics. Since then, hundreds more events have been detected.
+
+\subsubsection{Mathematics and String Theory Connections}
+
+Modeling gravitational waves requires ``waveform templates'' --- precise theoretical predictions of what different merger scenarios should look like. A 2025 paper in \textit{Nature} demonstrated that abstract geometric structures from string theory (amplituhedra and related mathematical objects) provide a new class of mathematical functions for modeling the energy radiated during black hole scattering events --- the first linkage between a core aspect of string theory mathematics and real-world astrophysics.
+
+\subsubsection{Next-Generation Detectors}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Facility} & \tableheader{Location / Timeline} & \tableheader{Capabilities} \\
+\midrule
+Einstein Telescope & Europe, late 2030s & 10 km triangular interferometer; 10$\times$ LIGO sensitivity \\
+Cosmic Explorer & USA (NSF), late 2030s & 40 km arm length; detects mergers to cosmic horizon \\
+LISA & Space (ESA/NASA), 2030s & MHz--mHz band; supermassive black hole mergers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 6: Global Scientific Cooperation}
+
+\subsubsection{The International Space Station: A Template}
+
+The ISS is the largest and longest-running example of international scientific cooperation in history: 15 partner nations (US, Russia, ESA 11 member states, Japan, Canada) operating a continuously crewed facility for over 25 years. It has served as ``science diplomacy'' at its most tangible --- democracies and Russia collaborating in orbit while geopolitical tensions played out below. Following Columbia (2003), the US was entirely dependent on Russia's Soyuz for ISS access. ESA astronaut Andreas Mogensen described the perspective from 250 miles up: ``As astronauts, we see ourselves first and foremost as humans. We are a team with a common set of goals.''
+
+\subsubsection{COSPAR: Science Without Borders}
+
+The Committee on Space Research was founded in 1958 --- during the Cold War --- with an explicit mandate to ensure free exchange of space science information regardless of geopolitical divisions. More than 60 years later, COSPAR brings together over 14,000 scientists worldwide. It publishes \textit{Advances in Space Research} and \textit{Life Sciences in Space Research}, maintains strict political neutrality, and ensures equitable participation from nations with varying space capabilities. The ISC (International Science Council) has described COSPAR's approach as the foundation for ``science without borders.''
+
+\subsubsection{Barriers to Cooperation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Barrier} & \tableheader{Description} \\
+\midrule
+Wolf Amendment (US) & Bars NASA/OSTP from bilateral projects with China without FBI/Congressional approval; limits world's two largest space programs from collaboration \\
+ISS/Russia uncertainty & Post-2022 geopolitical strain has raised questions about Russia's continued ISS participation \\
+China exclusion & China absent from ISS; operates its own Tiangong station; world's most scientifically productive bilateral pair cannot collaborate formally \\
+IP and data ownership & Multi-nation collaborations require complex agreements on intellectual property, data access, and publication rights \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{New Frameworks: Artemis Accords and UNOOSA}
+
+NASA's Artemis program includes contributions from ESA, JAXA, CSA, and 20+ Artemis Accord signatory nations. UNOOSA (UN Office for Outer Space Affairs) promotes equitable space access for developing nations through satellite applications in agriculture, disaster response, and education. Rwanda, Poland, UAE, and others are now active participants in global space science --- reflecting the post-ISS era's broader access model.
+
+\subsection{Module 7: Planetary Boundaries \& Earth System Stability}
+
+\subsubsection{The Framework}
+
+In 2009, Johan Rockstr{\"o}m and 28 colleagues at the Stockholm Resilience Centre proposed the \textbf{planetary boundaries} framework: nine Earth system processes for which quantified thresholds define a ``safe operating space for humanity.'' Updated in 2015 and 2023, the framework uses Holocene climatic and ecological stability as the baseline --- the stable conditions that allowed human civilization to develop. The nine boundaries are:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Boundary} & \tableheader{Status (2025)} & \tableheader{Notes} \\
+\midrule
+Climate change & \textbf{BREACHED} & CO$_2 > 350$ ppm (currently $\sim$425 ppm); radiative forcing \\
+Biosphere integrity & \textbf{BREACHED} & Crossed in late 19th century; accelerating since 1960s \\
+Land-system change & \textbf{BREACHED} & Agricultural expansion, deforestation \\
+Freshwater change & \textbf{BREACHED} & Crossed 2023; green and blue water flows disrupted \\
+Biogeochemical flows & \textbf{BREACHED} & Nitrogen and phosphorus cycles massively disrupted \\
+Novel entities & \textbf{BREACHED} & Crossed 2022; 350,000+ chemicals in production; plastics \\
+Ocean acidification & \textbf{BREACHED} & Crossed 2025; surface pH fallen 0.1 units (+30--40\% acidity) \\
+Stratospheric ozone & Safe & Montreal Protocol working; ozone recovering \\
+Atmospheric aerosols & Safe & Not yet transgressed; rising pressures \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tipping Points and System Interdependence}
+
+The boundaries are \textbf{interdependent}: crossing one increases risk across others. Climate change and biosphere integrity are designated ``core boundaries'' --- each has the potential alone to drive the Earth system into a new state. The 2024 Planetary Health Check (Potsdam Institute, annual since 2024) and the 2025 Nature paper by Rockstr{\"o}m et al.\ project that without ambitious universal action on climate and resource efficiency, most remaining safe boundaries will be breached by 2050. Ocean warming observed since 2023 has been described as ``never witnessed before'' and potentially signals coral reef system collapse. Coral reefs support at least 25\% of marine species and provide ecosystem services valued at up to \$9.9 trillion. Rockstr{\"o}m (2024 Tyler Prize): ``Planetary sustainability is a security issue because staying within planetary boundaries gives us stable societies, food security, water security and reduces conflicts.''
+
+\subsubsection{Framework Adoption and Policy Impact}
+
+PB science is now mainstream across business, finance, policy, and civil society. Amsterdam has operationalized doughnut economics (which builds on PB). New Zealand uses PB for national planning. The World Business Council for Sustainable Development (WBCSD) has adopted the framework. The Earth Commission embedded it in the UN Sustainable Development Goal ecosystem. As Nature Reviews Earth \& Environment (2024) notes, PB science has become ``widely recognized as crucial for advancing the global sustainability agenda.''
+
+\subsection{Module 8: Synthesis --- The Spaces Between}
+
+\subsubsection{Structural Parallels: Cosmic and Planetary Scales}
+
+The physicist and the Earth systems scientist are doing the same thing. Both are asking: \textit{what are the thresholds, and what happens when you cross them?}
+
+An event horizon is the boundary past which no information escapes. A planetary boundary is the threshold past which Earth system stability cannot be guaranteed. Both are defined not by what is inside or outside but by the \textit{properties of the boundary itself}. Both produce irreversible consequences when crossed. Both are more precisely understood through mathematics than through intuition.
+
+The no-hair theorem says a black hole radiates the complexity of its formation history. Once it forms, only $M$, $J$, and $Q$ remain. There is a melancholy parallel: once you have crossed a tipping point --- deforested the Amazon past its resilience threshold, acidified the ocean beyond carbonate saturation --- the complex web of cause and effect that produced that state is no longer accessible. What remains is the new state itself, described by far fewer degrees of freedom.
+
+\subsubsection{Cooperation as Mathematical Structure}
+
+John Wheeler's summary of general relativity applies equally to scientific cooperation: ``Spacetime tells matter how to move; matter tells spacetime how to curve.'' Replace ``spacetime'' with ``shared infrastructure'' and ``matter'' with ``knowledge'': shared infrastructure tells knowledge how to flow; knowledge tells shared infrastructure what to build. The EHT image of M87* did not exist in any single telescope. It existed in the interference pattern between six continents, synchronized by atomic clocks. The discovery lived in the spaces between.
+
+This is the Amiga Principle at cosmic scale. The 8-bit Amiga produced 4096 colors through HAM mode's clever use of the \textit{relationship} between adjacent pixels rather than storing each color independently. The EHT produced an image through the \textit{relationship} between distant antennas. The Holocene produced civilization through the \textit{relationship} between stable climate, functional biosphere, and human ingenuity. Scale invariance of the principle: elegant architecture over brute force, at every level.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Planetary boundaries data & GATE & Use only Rockstr{\"o}m et al.\ (peer-reviewed) and PIK annual Planetary Health Check; no advocacy framing \\
+Quantum gravity speculations & ANNOTATE & String theory / holography presented as active research areas, not confirmed physics \\
+Information paradox & ANNOTATE & Present as open problem; do not claim resolution \\
+Geopolitics of space cooperation & ANNOTATE & Present barriers factually; no policy advocacy \\
+Source attribution & ABSOLUTE & All numerical claims (boundary status, detection parameters, time dilation values) must be attributed to named sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Peer-Reviewed Research \& Institutions}
+
+\begin{itemize}[noitemsep]
+\item Rockstr{\"o}m et al.\ (2009). ``A safe operating space for humanity.'' \textit{Nature}, 461, 472--475.
+\item Rockstr{\"o}m et al.\ (2023). ``Planetary Boundaries guide humanity's future on Earth.'' \textit{Nature Reviews Earth \& Environment}, 5(11):773.
+\item Richardson et al.\ (2023). ``Earth beyond six of nine planetary boundaries.'' \textit{Science Advances}. doi:10.1126/sciadv.adh2458.
+\item Nature (2025). ``Exploring pathways for world development within planetary boundaries.''
+\item Elena Giorgi (Columbia University). Kerr black hole stability proofs. Under peer review, 2023.
+\item Mogull et al.\ (2025). Black hole merger scattering and string theory functions. \textit{Nature}.
+\item Bekenstein, J.D.\ (1973). Black hole entropy. \textit{Physical Review D}, 7(8):2333.
+\item Hawking, S.W.\ (1974). ``Black hole explosions.'' \textit{Nature}, 248:30.
+\item Penrose, R.\ (1965). ``Gravitational collapse and space-time singularities.'' \textit{Physical Review Letters}, 14:57.
+\item Kerr, R.P.\ (1963). ``Gravitational field of a spinning mass.'' \textit{Physical Review Letters}, 11:237.
+\end{itemize}
+
+\subsubsection*{Government \& Agency Sources}
+\begin{itemize}[noitemsep]
+\item NASA LIGO / Gravitational Wave Observatory --- ligo.caltech.edu
+\item NASA ISS Benefits of International Collaboration (NTRS 20170002607)
+\item Event Horizon Telescope Collaboration --- eventhorizontelescope.org (M87* 2019; Sgr A* 2022)
+\item ESA --- Copernicus Program, ISS Partnership, ESA-China Dragon Program
+\item International Science Council / COSPAR --- council.science
+\item UN Office for Outer Space Affairs (UNOOSA)
+\item Stockholm Resilience Centre Planetary Health Check
+\item Potsdam Institute for Climate Impact Research (PIK)
+\end{itemize}
+
+\subsubsection*{Professional Science Communication}
+\begin{itemize}[noitemsep]
+\item Aeon Essays: ``Mathematics is the only way we have of peering into a black hole'' (Oct 2024)
+\item Science News: ``Here's a peek into the mathematics of black holes'' (Mar 2023)
+\item Plus Maths / University of Cambridge: ``What is a black hole, mathematically?''
+\item Physics LibreTexts (OpenStax University Physics III) --- Time Dilation
+\item Big Think (Ethan Siegel): ``How to understand Einstein's equation for general relativity''
+\item University of Chicago News: ``Black holes explained''
+\item Britannica: ``Time dilation'' (updated 2026)
+\item Harvard International Review: ``A Shared Frontier?'' (2022)
+\item Johns Hopkins Science Diplomacy Hub (2024, 2025)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document spanning eight interconnected modules: black hole history and taxonomy, general relativity mathematics, special relativity and velocity, Hawking radiation and quantum frontiers, gravitational waves, global scientific cooperation, planetary boundaries, and a philosophical synthesis. The output should serve simultaneously as an educational resource, a GSD ecosystem knowledge base entry, and a philosophical anchor connecting cosmic-scale physics to Earth-scale stewardship.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE: blackholes-deep-research-v1.0
+==================================================
+
+  WAVE 0: Foundation [Sequential, Haiku]
+  ========================================
+  W0-A: Shared schema and taxonomy definitions
+  W0-B: Source index with 30+ verified citations
+  W0-C: Module interface contracts
+
+  WAVE 1: Parallel Research Tracks [Parallel, Sonnet+Opus]
+  ==========================================================
+  Track A (Opus):     MOD-GR-MATH + MOD-BH-HIST (deep physics)
+  Track B (Sonnet):   MOD-SR-FAST + MOD-PLANET   (accessible + boundary)
+  Track C (Sonnet):   MOD-GRAV-WAV + MOD-COOP    (detection + cooperation)
+  Track D (Opus):     MOD-HAWKING                 (quantum frontier, solo)
+
+  WAVE 2: Synthesis [Sequential, Opus]
+  =====================================
+  W2-A: Cross-module integration + contradiction resolution
+  W2-B: MOD-SYNTH: The Spaces Between
+  W2-C: Structural parallels, Amiga Principle application
+
+  WAVE 3: Publication + Verification [Sequential, Sonnet]
+  =========================================================
+  W3-A: Document assembly and LaTeX/HTML compilation
+  W3-B: Citation verification and numerical fact-check
+  W3-C: Readability pass (three reading speeds)
+  W3-D: Final delivery
+
+  DEPENDENCY GRAPH:
+  W0 --> {Track A, B, C, D} --> W2 --> W3
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Foundation Layer} --- Shared schemas, taxonomy, source index, module interface contracts
+\item \textbf{Physics Layer} --- Black hole history, GR mathematics, special relativity, gravitational waves
+\item \textbf{Quantum Layer} --- Hawking radiation, information paradox, thermodynamics, quantum gravity frontier
+\item \textbf{Human Layer} --- Global cooperation, ISS, COSPAR, barriers, Artemis Accords
+\item \textbf{Planetary Layer} --- Nine boundaries, Holocene baseline, tipping points, 2050 projections
+\item \textbf{Synthesis Layer} --- Structural parallels, scale invariance, philosophical integration
+\item \textbf{Publication Layer} --- LaTeX compilation, citation verification, accessibility pass
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 1 document & BH types, timeline, EHT, Nobel prizes covered & Sonnet/Opus, 1500--2500 words \\
+2 & Module 2 document & EFE explained, Schwarzschild/Kerr, exact solutions & Opus, 2000--3000 words \\
+3 & Module 3 document & Lorentz factor with 3 real-world examples & Sonnet, 1500--2000 words \\
+4 & Module 4 document & Hawking radiation, information paradox, open status & Opus, 1500--2500 words \\
+5 & Module 5 document & GW150914, 100+ detections, next-gen detectors & Sonnet, 1500--2000 words \\
+6 & Module 6 document & ISS history, COSPAR, Wolf Amend., Artemis & Sonnet, 1500--2000 words \\
+7 & Module 7 document & All 9 boundaries, 7 breached, tipping points & Sonnet, 2000--2500 words \\
+8 & Module 8 synthesis & 3+ structural parallels, Spaces Between narrative & Opus, 2000--3000 words \\
+9 & Integrated document & All modules woven into single coherent narrative & Sonnet, final pass \\
+10 & Citation index & 30+ sources verified, all numerics attributed & Sonnet, VERIFY gate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-Schema & None & Haiku & 2K \\
+W0-SourceIndex & Web research & Haiku & 3K \\
+MOD-BH-HIST & W0 & Sonnet & 15K \\
+MOD-GR-MATH & W0, BH-HIST & Opus & 20K \\
+MOD-SR-FAST & W0 & Sonnet & 12K \\
+MOD-HAWKING & W0, GR-MATH & Opus & 18K \\
+MOD-GRAV-WAV & W0, GR-MATH & Sonnet & 12K \\
+MOD-COOP & W0 & Sonnet & 12K \\
+MOD-PLANET & W0 & Sonnet & 15K \\
+MOD-SYNTH & All modules & Opus & 20K \\
+Integration & All modules & Sonnet & 15K \\
+Verification & All modules & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned To} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & GR mathematics, Hawking/quantum, synthesis & Judgment-heavy; requires holding multiple paradoxes simultaneously; synthesis across all 8 modules \\
+Sonnet & $\sim$60\% & All survey modules, integration, verification & Structured production; well-sourced content; readable output \\
+Haiku & $\sim$10\% & Schema, templates, scaffolding & Low-complexity, high-volume boilerplate work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Activities} & \tableheader{Mode} & \tableheader{Model} \\
+\midrule
+Wave 0 & Foundation & Schema, source index, contracts & Sequential & Haiku \\
+Wave 1 & Parallel Research & 4 parallel tracks (A/B/C/D) & Parallel & Sonnet+Opus \\
+Wave 2 & Synthesis & Cross-module integration, MOD-SYNTH & Sequential & Opus \\
+Wave 3 & Publication & Assembly, verification, delivery & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Blocker?} \\
+\midrule
+W0-01 & Define shared taxonomy (BH types, boundary names, relativity terms) & Haiku & Yes \\
+W0-02 & Build source index: 30+ citations with URLs and categories & Haiku & Yes \\
+W0-03 & Define module interface contract (input/output schema per module) & Haiku & Yes \\
+W0-04 & Validate source availability (spot-check 10 URLs) & Sonnet & No \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Deep Physics (Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+W1A-01 & BH history: Michell through Penrose, Nobel prizes, EHT images & Sonnet \\
+W1A-02 & BH taxonomy: all four types, formation pathways, observational IDs & Sonnet \\
+W1A-03 & GR mathematics: EFE conceptual + intermediate; exact solutions & Opus \\
+W1A-04 & Schwarzschild/Kerr metrics; no-hair theorem; Penrose diagrams & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Accessibility \& Planetary (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+W1B-01 & Special relativity: Lorentz factor, time dilation with worked examples & Sonnet \\
+W1B-02 & Verification: GPS, muons, LHC, twin paradox with citations & Sonnet \\
+W1B-03 & Planetary boundaries: all 9 boundaries, 7 breached, status table & Sonnet \\
+W1B-04 & Tipping points, Holocene baseline, 2050 projections from Nature 2025 & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Detection \& Cooperation (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+W1C-01 & Gravitational waves: GW150914, 100+ detections, LIGO mechanics & Sonnet \\
+W1C-02 & Future detectors: Einstein Telescope, Cosmic Explorer, LISA & Sonnet \\
+W1C-03 & ISS cooperation model: 15 nations, 25 years, science diplomacy examples & Sonnet \\
+W1C-04 & Barriers and frameworks: Wolf Amendment, COSPAR, Artemis Accords & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track D --- Quantum Frontier (Opus, solo)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Model} \\
+\midrule
+W1D-01 & Hawking radiation: derivation concept, virtual pairs, temperature formula & Opus \\
+W1D-02 & BH thermodynamics: four laws, Bekenstein entropy, 2021 pressure discovery & Opus \\
+W1D-03 & Information paradox: statement, firewall, ER=EPR, open status & Opus \\
+W1D-04 & Quantum gravity frontier: what's needed, what's been tried & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Blocker?} \\
+\midrule
+W2-01 & Cross-module integration: identify tensions and shared themes & Opus & Yes \\
+W2-02 & MOD-SYNTH: The Spaces Between (3+ structural parallels) & Opus & Yes \\
+W2-03 & Amiga Principle application to cosmic/planetary scales & Opus & No \\
+W2-04 & Resolve any factual contradictions between module outputs & Opus & Yes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Model} & \tableheader{Gate?} \\
+\midrule
+W3-01 & Document assembly: weave all modules into unified narrative & Sonnet & No \\
+W3-02 & Citation verification: confirm 30+ sources, all numerics attributed & Sonnet & BLOCK \\
+W3-03 & Readability pass: ensure three-speed reading (glance/scan/read) & Sonnet & No \\
+W3-04 & Final delivery: LaTeX PDF + HTML index & Sonnet & No \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+\item Wave 0 outputs (schema, source index) shared across all Wave 1 tracks via cache injection at session start
+\item Physics modules (GR-MATH, SR-FAST) run first as they feed into Hawking (W1D) which has the heaviest Opus load
+\item All module outputs prefixed with module ID and version for easy cache retrieval in Wave 2
+\item Wave 2 synthesis loads all 8 module summaries (2K tokens each) in a single context window, exploiting the 5-minute cache TTL between synthesis tasks
+\item Wave 3 assembly uses a pre-structured LaTeX skeleton to minimize reformatting overhead
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Estimated Input} & \tableheader{Estimated Output} & \tableheader{Model Mix} \\
+\midrule
+Wave 0 & 5K & 10K & Haiku (90\%), Sonnet (10\%) \\
+Wave 1 (4 tracks) & 60K & 120K & Sonnet (65\%), Opus (35\%) \\
+Wave 2 (synthesis) & 30K & 40K & Opus (100\%) \\
+Wave 3 (publication) & 50K & 30K & Sonnet (100\%) \\
+\midrule
+\textbf{Total Estimated} & \textbf{145K} & \textbf{200K} & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+W0-Schema ─────────┬──────────────────────────────────────────┐
+W0-SourceIndex ─────┤                                          │
+W0-Contracts ───────┤                                          │
+                    │                                          │
+        ┌───────────┼─────────────────┐              ┌────────┴────────┐
+        │           │                 │              │                 │
+   TRACK A      TRACK B          TRACK C          TRACK D             │
+  BH-HIST +    SR-FAST +        GRAV-WAV +        HAWKING             │
+  GR-MATH      PLANET           COOP         (Opus, sequential)       │
+        │           │                 │              │                 │
+        └───────────┼─────────────────┘              │                 │
+                    │◄──────────────────────────────┘                 │
+                    ▼                                                  │
+              WAVE 2 SYNTHESIS                                         │
+              (Opus: cross-module                                      │
+               + MOD-SYNTH)                                            │
+                    │◄─────────────────────────────────────────────────┘
+                    ▼
+              WAVE 3 PUBLICATION
+              (Sonnet: assembly +
+               verification + delivery)
+                    │
+                    ▼
+             [FINAL OUTPUT]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2.5cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical (factual accuracy) & 6 & P0 / BLOCK & Halt Wave 3; return to module for correction \\
+Core physics accuracy & 8 & P1 & Flag and correct before delivery \\
+Cooperation facts & 4 & P1 & Flag and correct before delivery \\
+Planetary boundary data & 4 & P1 & Flag and correct before delivery \\
+Integration coherence & 4 & P2 & Note and patch in final pass \\
+Readability & 3 & P3 & Advisory only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}L{5.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Schwarzschild radius formula & $R_s = 2GM/c^2$ appears correctly; Sun value $\approx 3$ km; Earth $\approx 9$ mm \\
+SC-02 & Lorentz factor formula & $\gamma = 1/\sqrt{1-v^2/c^2}$; GPS correction stated as +38 $\mu$s/day \\
+SC-03 & Planetary boundaries count & 9 total; 7 breached as of 2025; specific boundaries named \\
+SC-04 & GW150914 parameters & Two BHs $\sim$30 and $\sim$35 $M_\odot$; 1.4 billion ly; Sept 14, 2015 \\
+SC-05 & ISS nation count & 15 partner nations; 25+ years of continuous operation \\
+SC-06 & Information paradox status & Presented as open problem; no false claim of resolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Schwarzschild/Kerr explained with values & SC-01, CORE-02 & Pre-run \\
+Lorentz factor with 3 real-world examples & SC-02, CORE-03 & Pre-run \\
+7 of 9 boundaries identified and named & SC-03, PB-01 & Pre-run \\
+GW150914 narrated with accurate parameters & SC-04, CORE-05 & Pre-run \\
+ISS described with nation count and duration & SC-05, COOP-01 & Pre-run \\
+Information paradox stated as open & SC-06, CORE-04 & Pre-run \\
+3+ structural parallels in synthesis & INTEG-01 & Pre-run \\
+All numerics sourced to named authorities & SC-01--06, all CORE & Pre-run \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates \\
+PLAN & Planner & Wave decomposition; cache optimization; parallel track scheduling \\
+TOPO & Topology Manager & Agent team structure; Track A/B/C/D coordination \\
+ARCH & Architecture & Cross-cutting structural decisions; module interface integrity \\
+SCOUT & Research Agent & Source verification; gap-fill web research; citation audit \\
+EXEC-A & Physics Executor & Track A document production (BH-HIST, GR-MATH) \\
+EXEC-B & Accessibility Executor & Track B document production (SR-FAST, PLANET) \\
+EXEC-C & Society Executor & Track C document production (GRAV-WAV, COOP) \\
+CRAFT-PHYS & Physics Specialist & GR/SR mathematical accuracy; Opus review of core equations \\
+CRAFT-PLANET & Earth Systems Specialist & Planetary boundaries accuracy; Rockstr{\"o}m framework integrity \\
+VERIFY & Verification Agent & All SC-0x tests; numerical fact-check; citation completeness \\
+INTEG & Integration Agent & Cross-module relationship validation; no-contradiction check \\
+CAPCOM & HITL Interface & Human approval at wave boundaries (W0$\to$W1, W2$\to$W3) \\
+SURGEON & Health Monitor & Research quality degradation detection; hallucination flags \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; structural parallel identification \\
+RETRO & Retrospective Agent & Post-wave lessons; milestone summary \\
+LOG & Chronicle Agent & Commit messages; audit trail; final summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & blackholes-deep-research-v1.0 \\
+Activation profile & Fleet (8 modules, 3 parallel tracks + 1 solo Opus track) \\
+Research modules & 8 (BH-HIST, GR-MATH, SR-FAST, HAWKING, GRAV-WAV, COOP, PLANET, SYNTH) \\
+Wave depth & 4 waves (Foundation, Parallel, Synthesis, Publication) \\
+Model allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Estimated token budget & 345K total (145K input / 200K output) \\
+Estimated sessions & 6--8 (18--24 context windows) \\
+Human checkpoints & 2 (W0$\to$W1, W2$\to$W3) \\
+Safety-critical tests & 6 (all BLOCK on failure) \\
+Success criteria & 12 (all observable and testable) \\
+Primary sources & 30+ (NASA, peer-reviewed, Stockholm RC, ISC) \\
+Estimated final document & 25,000--35,000 words \\
+Ecosystem connection & The Space Between (TSB); GSD Amiga Vision; Fox Infrastructure Group \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ============================================================
+% CLOSING QUOTE BOX
+% ============================================================
+\vspace{2em}
+\begin{quotebox}
+\begin{center}
+{\large\sffamily\textcolor{primary}{\textbf{``Spacetime tells matter how to move;\\matter tells spacetime how to curve.''}}}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- John Archibald Wheeler, summarizing General Relativity}}
+\end{center}
+
+\vspace{1em}
+\textit{And so it is at every scale. The spaces between nodes carry the signal. The boundary between stability and collapse is not a wall but a threshold, mathematical and precise. Black holes are the cosmos reminding us that geometry has consequences. Planetary boundaries are the Earth reminding us that thresholds, once crossed without return, define a new and less hospitable geometry. We are, as Wheeler would say, matter living inside spacetime's curvature --- and we are responsible for the curvature we introduce. The question is not whether the math governs. It always has. The question is whether we choose to understand it before we reach the event horizon.}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{GSD Ecosystem | The Space Between | blackholes-deep-research-v1.0 | March 2026}}
+\end{quotebox}
+
+\end{document}
