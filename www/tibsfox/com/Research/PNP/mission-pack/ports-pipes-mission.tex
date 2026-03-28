@@ -1,0 +1,1407 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ── Technology domain: Steel/Electric/Graphite ──────────────────────────
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{E8EAF6}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{codeblue}{HTML}{01579B}
+\definecolor{codered}{HTML}{B71C1C}
+\definecolor{codegreen}{HTML}{1B5E20}
+
+%% ── Section formatting ───────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── Custom environments ──────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{codebox}{
+  colback=lighttertiary, colframe=secondary,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% ── Table helpers ────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── Headers / Footers ────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Ports \& Pipes Protocol Specification}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── Hyperlinks ───────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Ports and Pipes -- Full Protocol Specification Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ═══════════════════════════════════════════════════════════════════════
+\begin{document}
+
+%% ── Title Page ──────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Ports \& Pipes\\[0.3em]Full Protocol Specification}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Anonymous Pipes · FIFOs · Sockets · IANA Port Registry}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study --- Every Detail Mapped}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad | \quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad | \quad Estimated: 6--8 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+%% ── Table of Contents ───────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION DOCUMENT
+%% ═══════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Ports \& Pipes --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{gsd-bbs-educational-pack-vision.md, mcp-servers-research.md, gsd-chipset-architecture-vision.md}
+\metafield{Context:}{Deep research mission triggered from GSD project context. Cold-start research executed.}
+
+\subsection{Vision}
+
+Thompson and Ritchie gave us three words: \textit{file, process, pipe}. From these three atoms, every piece of software running today was assembled. The pipe is the connective tissue of computing --- the thing in the space between processes, carrying meaning from one conscious machine-fragment to another. The port is its network cousin: the numbered doorway that says \textit{this is where the outside comes in}.
+
+The Amiga Principle operates here at its most elemental level. The serial port ran at exactly 31,250 bps --- not because that was the fastest possible, but because it was the precise baud rate of MIDI. One wire. One number. Access to racks of synthesizers worth thousands of dollars. Architectural leverage over raw power. The pipe is the same bet: instead of building a monolithic system that knows how to do everything, you build a channel that knows how to do nothing except carry bytes --- and let the processes at each end be smart.
+
+Modern agent systems, including GSD's own architecture, are built on this same foundation. Every MCP stdio transport is an anonymous pipe dressed in JSON-RPC. Every planning-bridge Cloudflare tunnel is a named socket waiting for connection. Every subagent spawn is a fork-and-pipe. The protocol specifications governing these primitives are not academic; they are the load-bearing walls beneath every capability in the ecosystem.
+
+This mission maps every detail of the ports-and-pipes substrate: the exact syscall signatures, buffer constants, atomicity guarantees, IANA port ranges, socket lifecycle states, IPC performance matrices, and the GSD-specific implications of each. The result is a reference that can inform architectural decisions from subagent communication design to DACP bundle transport selection.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Undocumented atomicity assumptions:} GSD subagents writing to stdio pipes assume atomic delivery of structured DACP bundles. The PIPE\_BUF atomicity limit (4,096 bytes on Linux) means bundles larger than 4 KB may be non-atomically interleaved between concurrent writers --- a silent correctness failure with no error signal.
+  
+  \item \textbf{Port range confusion in deployment:} GSD-OS services and the planning-bridge server bind to ports without a documented policy on system vs.\ registered vs.\ ephemeral ranges. Port conflicts during GSD-OS boot and MCP server startup produce EADDRINUSE errors that are misdiagnosed as configuration failures.
+  
+  \item \textbf{IPC mechanism selection debt:} The GSD ecosystem uses TCP loopback, Unix domain sockets, anonymous pipes, and Cloudflare tunnels without a principled selection matrix. Each mechanism has materially different latency, throughput, and kernel overhead profiles that affect subagent pipeline performance.
+  
+  \item \textbf{Pipe capacity exhaustion in wave execution:} Wave-based parallel execution launches multiple subagents concurrently, each maintaining open pipe file descriptors. The per-user pipe-user-pages-soft limit (default: 0, meaning no soft limit unless set; hard limit also 0 by default) and per-process file descriptor limits (EMFILE/ENFILE) can produce silent hangs during high-parallelism waves.
+  
+  \item \textbf{Cross-platform IPC inconsistency:} GSD-OS's Tauri layer runs on macOS, Linux, and Windows. Named pipe semantics differ substantially: Unix FIFOs are persistent filesystem entries; Windows named pipes are volatile SMB-based constructs with message-mode framing. Shared GSD skill code that assumes Unix FIFO semantics silently misbehaves on Windows.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The IPC Spectrum:} Every inter-process communication mechanism is a point on a single spectrum trading kernel-crossing overhead against flexibility, locality, and naming scope. Pipes occupy the zero-configuration end; network sockets occupy the maximum-flexibility end; Unix domain sockets occupy the optimal local-IPC middle ground.
+
+\subsubsection{Pipe Anatomy Diagram}
+
+\begin{asciibox}
+ANONYMOUS PIPE (pipe(2) / pipe2(2))
+====================================
+
+ Process A                     Kernel                      Process B
+ (writer)                    Ring Buffer                   (reader)
+                           
+  fd[1]   ─────write()────>  [  65536 bytes  ]  ─read()──>  fd[0]
+ (write end)                                               (read end)
+                             |←── capacity ──→|
+                                 
+  Atomicity:  writes <= PIPE_BUF (4096 bytes) are atomic
+  Blocking:   write blocks when full; read blocks when empty
+  Direction:  UNIDIRECTIONAL (fd[1] → fd[0] only)
+  Lifetime:   until last file descriptor is closed (no filesystem entry)
+  Created by: pipe(pipefd[2])  or  pipe2(pipefd[2], flags)
+  
+NAMED PIPE / FIFO (mkfifo(3))
+==============================
+
+  Filesystem                   Kernel                  Any Process
+  /tmp/mypipe                Ring Buffer                 (reader)
+      p (special file)
+  
+  Any Process  ──open(O_WRONLY)──> [  65536 bytes  ] ──open(O_RDONLY)──>
+   (writer)                          
+                                 BOTH ends must open before I/O begins
+                             Persists until unlink() or system shutdown
+\end{asciibox}
+
+\subsubsection{Port Number Universe}
+
+\begin{asciibox}
+TCP/UDP PORT NUMBER SPACE (16-bit: 0 - 65535)
+===============================================
+
+ 0         1023        49151                    65535
+ |─────────|───────────|────────────────────────|
+ System    Registered  Dynamic / Ephemeral
+ Ports     Ports       Ports (never IANA-assigned)
+ (1,024)   (48,128)    (16,384)
+ 
+ IANA procedures: RFC 6335 (August 2011)
+ System:     IETF Review or IESG Approval required
+ Registered: Expert Review process
+ Dynamic:    No assignment; OS uses for client-side ephemeral ports
+ 
+ Linux ephemeral range: /proc/sys/net/ipv4/ip_local_port_range
+                        default: 32768 – 60999
+
+KEY SYSTEM PORTS (well-known assignments)
+==========================================
+  1   TCPMUX       22  SSH          80  HTTP        443  HTTPS
+  21  FTP          23  Telnet       110 POP3         587  SMTP (submit)
+  25  SMTP         53  DNS          119 NNTP        3306  MySQL (reg.)
+  70  Gopher       79  Finger       123 NTP          5432  PostgreSQL (reg.)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+PORTS & PIPES — MODULE ARCHITECTURE
+=====================================
+
+ ┌─────────────────────────────────────────────────────────────────────┐
+ │                   MODULE 01: PIPE MECHANICS                         │
+ │   pipe(2) syscall · pipe2(2) flags · PIPE_BUF · ring buffer ·      │
+ │   atomicity matrix · blocking semantics · O_DIRECT packet mode      │
+ └────────────────────┬────────────────────────────────────────────────┘
+                      │ shares buffer model
+ ┌────────────────────▼────────────────────────────────────────────────┐
+ │                  MODULE 02: NAMED PIPES & FIFOs                     │
+ │   mkfifo(3) · POSIX FIFO spec · filesystem presence · blocking on   │
+ │   open · Windows named pipes · SMB IPC share · cross-platform gaps  │
+ └────────────────────┬────────────────────────────────────────────────┘
+                      │ both surface as file descriptors
+ ┌────────────────────▼────────────────────────────────────────────────┐
+ │                   MODULE 03: PORT TAXONOMY                          │
+ │   IANA 3-range spec · RFC 6335 procedures · key well-known ports ·  │
+ │   ephemeral port kernel config · EADDRINUSE · TIME_WAIT reuse       │
+ └────────────────────┬────────────────────────────────────────────────┘
+                      │ ports consumed by socket API
+ ┌────────────────────▼────────────────────────────────────────────────┐
+ │                   MODULE 04: BSD SOCKET API                         │
+ │   socket()→bind()→listen()→accept()→connect() lifecycle ·           │
+ │   POSIX.1-2024 · sockaddr structs · blocking modes · error codes    │
+ └────────────────────┬────────────────────────────────────────────────┘
+                      │ unix sockets unify pipe + socket models
+ ┌────────────────────▼────────────────────────────────────────────────┐
+ │                  MODULE 05: IPC PERFORMANCE SPECTRUM                │
+ │   anon pipe vs FIFO vs UDS vs TCP loopback · throughput benchmarks  │
+ │   latency profiles · selection matrix · kernel zero-copy paths      │
+ └────────────────────┬────────────────────────────────────────────────┘
+                      │ applied to GSD
+ ┌────────────────────▼────────────────────────────────────────────────┐
+ │                  MODULE 06: GSD PROTOCOL SUBSTRATE                  │
+ │   MCP transports → pipe/socket mapping · DACP atomicity audit ·     │
+ │   planning-bridge port policy · subagent spawn IPC · wave FD budget │
+ └─────────────────────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# Ports & Pipes Mission — Chipset YAML
+# Activation Profile: Fleet (17 roles)
+# Model Allocation: ~30% Opus / ~60% Sonnet / ~10% Haiku
+
+chipset:
+  agnus:        # Orchestration / DMA / Context Management
+    model:      claude-opus-4-6
+    role:       FLIGHT + ARCH + TOPO
+    tasks:
+      - Mission direction and go/no-go gates
+      - Cross-module integration decisions
+      - GSD ecosystem connection synthesis (Module 06)
+      - Security sensitivity review for port binding specs
+
+  denise:       # Display / Output Rendering
+    model:      claude-sonnet-4-6
+    role:       EXEC (x3) + INTEG + VERIFY
+    tasks:
+      - Document assembly for Modules 01-05
+      - ASCII diagram rendering and table production
+      - Cross-module data consistency checks
+      - Source attribution verification
+
+  paula:        # Audio / I/O / Anticipatory
+    model:      claude-haiku-4-5
+    role:       BUDGET + LOG + PLAN (scaffolding)
+    tasks:
+      - Shared schema and template generation
+      - Token budget tracking across waves
+      - Commit messages and audit trail
+
+  68000:        # CPU / Glue Logic / Specialist Agents
+    model:      claude-sonnet-4-6
+    role:       CRAFT-PROTO (protocol) + CRAFT-OS (OS layer)
+             + CRAFT-PERF (performance) + SCOUT + SECURE
+             + ANALYST + RETRO + CAPCOM + SURGEON
+    tasks:
+      - Protocol deep-dives (Modules 01-04)
+      - Performance benchmarking synthesis (Module 05)
+      - GSD-specific implications analysis (Module 06)
+      - HITL approval at wave boundaries
+      - Post-wave retrospective and quality check
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Anonymous pipe syscall specification (pipe/pipe2): all flags, error codes, buffer constants, atomicity guarantees
+  \item Named pipe / FIFO: POSIX spec, mkfifo, mkfifo(1), filesystem semantics, blocking-on-open behavior
+  \item TCP/UDP port number taxonomy: all three IANA ranges, RFC 6335 procedures, key well-known and registered port assignments
+  \item BSD socket API lifecycle (POSIX.1-2024): socket/bind/listen/accept/connect/close and full error code catalog
+  \item Unix domain sockets (AF\_UNIX): SOCK\_STREAM, SOCK\_DGRAM, SOCK\_SEQPACKET types; comparison to named pipes
+  \item IPC performance matrix: anonymous pipe vs.\ named pipe vs.\ UDS vs.\ TCP loopback throughput and latency benchmarks
+  \item GSD-specific protocol substrate analysis: MCP transport selection, DACP atomicity audit, planning-bridge port policy, subagent FD budget
+  \item Linux kernel tuning parameters: /proc/sys/fs/pipe-max-size, pipe-user-pages-hard/soft, ip\_local\_port\_range
+  \item Windows named pipe contrast: CreateFile/ReadFile API, message mode vs.\ byte mode, SMB IPC share, volatility semantics
+  \item Advanced pipe operations: splice(2), tee(2), vmsplice(2), F\_GETPIPE\_SZ / F\_SETPIPE\_SZ
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Full TCP/IP protocol internals (SYN/ACK state machine, congestion control, window sizing) --- covered separately
+  \item SCTP and DCCP transport protocols
+  \item IPSec, TLS, and transport-layer security --- separate security mission
+  \item Shared memory (mmap, POSIX shm) and message queues (POSIX mq) --- adjacent IPC mechanisms
+  \item Windows I/O Completion Ports (IOCP) --- Windows-specific high-performance I/O
+  \item Distributed IPC (dbus, ZMQ, gRPC, NATS) --- higher-layer protocols
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Pipe syscall matrix complete: all pipe() and pipe2() flags, return values, and error codes catalogued with kernel version of introduction
+  \item PIPE\_BUF atomicity table complete: all combinations of O\_NONBLOCK $\times$ n\_bytes documented with exact kernel behavior per scenario
+  \item Pipe kernel tuning guide: all /proc/sys/fs/pipe-* parameters with default values, valid ranges, and GSD-specific recommended values
+  \item FIFO lifecycle documented: every state (unlinked, created, writer-only-open, reader-only-open, both-open, drained, closed) described with blocking behavior
+  \item Port taxonomy complete: all three IANA ranges documented with exact byte boundaries, RFC authority, and assignment procedure name
+  \item Well-known port reference: minimum 20 key service ports mapped with protocol, RFC, and GSD relevance note
+  \item Socket lifecycle state machine: all seven socket states (CLOSED, LISTEN, SYN\_SENT, etc.) with triggering syscall documented
+  \item Error code catalog: all POSIX-specified errno values for pipe(2), socket(2), bind(2), connect(2), accept(2) documented
+  \item IPC performance matrix: throughput and latency values for all four local IPC mechanisms (anon pipe, FIFO, UDS, TCP loopback) at three block sizes
+  \item GSD DACP atomicity audit: explicit ruling on whether current DACP bundle sizes are atomic across GSD's pipe-based transports
+  \item GSD port policy document: explicit recommended port ranges for each GSD-OS service and MCP server
+  \item Cross-platform gap analysis: at least five behavioral differences between Linux FIFO and Windows named pipe semantics documented
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+mcp-servers-research.md & Direct parent: MCP stdio/Streamable HTTP transports depend on this spec \\
+gsd-chipset-architecture-vision.md & Agnus/Denise/Paula inter-chip communication uses IPC primitives documented here \\
+gsd-bbs-educational-pack-vision.md & Module 8 (TCP/IP) and Module 9 (Security) use port taxonomy from this mission \\
+gsd-staging-layer-vision.md & Planning bridge deposit\_mission tool uses Unix socket or named pipe for file handoff \\
+gsd-amiga-new-workbench-vision.md & Serial/parallel port I/O model (31,250 baud MIDI) is the Amiga Principle instantiation \\
+gsd-instruction-set-architecture-vision.md & DACP structured bundles must respect PIPE\_BUF atomicity limits \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+\textit{The Quark and the Compiler} names the Unix insight in three words: file, process, pipe. Three things from which everything else composes. The pipe does not care what flows through it --- text, numbers, sound, structured JSON-RPC messages dressed in DACP bundles. It connects, and the connecting is the whole of its function. The function is sufficient.
+
+The port is the same idea applied outward: a numbered doorway in the membrane between a process and the network, specific enough to route to the right service, general enough to carry anything. The Amiga's serial port ran at exactly the MIDI baud rate because that precision --- that specificity of number --- unlocked an entire ecosystem of expression. Port 80 carries HTTP. Port 443 carries HTTPS. Port 22 carries SSH. These numbers are not arbitrary. They are the slots in the membrane, and the slots have names because the names are agreements, and agreements are what allow strangers to collaborate.
+
+GSD's architecture is built on this stack of agreements. The planning-bridge MCP server listens on a port. Subagents communicate through stdio pipes. The skill-creator observes its six-step loop through a series of connections --- each connection a pipe or socket, each byte flowing through a channel that neither process owns but both use. Understanding these primitives at their specification level --- the exact constants, the exact error codes, the exact atomicity guarantees --- is not pedantry. It is the difference between an architecture that holds and one that fails silently at 2 AM when wave parallelism exceeds a kernel limit nobody wrote down.
+
+%% ═══════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%% ═══════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Ports \& Pipes --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference covers six research modules. Each module is self-contained and can be consumed independently. Cross-module connections are marked with $\rightarrow$ references. All numerical values are sourced from official POSIX specifications, Linux kernel documentation, or peer-reviewed performance benchmarks. No values are inferred or approximated.
+
+\textbf{Key primary sources:}
+\begin{itemize}[leftmargin=1.5em]
+  \item POSIX.1-2024 (IEEE Std 1003.1-2024) --- pipe(), pipe2(), mkfifo(), socket(), bind(), listen(), accept(), connect()
+  \item Linux man-pages project (man7.org) --- pipe(2), pipe(7), pipe2(2), fifo(7), socket(2), bind(2), connect(2), unix(7)
+  \item RFC 6335 (IETF/IANA, August 2011) --- Service Name and Transport Protocol Port Number Registry procedures
+  \item IANA Service Name and Transport Protocol Port Number Registry (iana.org)
+  \item Linux kernel documentation: splice.html, /proc/sys/fs/ tuning parameters
+  \item GNU C Library manual: Pipe Atomicity section
+  \item Baeldung on Linux: IPC Performance Comparison (socat benchmarks, 2025)
+\end{itemize}
+
+\subsection{Module 01: Pipe Mechanics}
+
+\subsubsection{The pipe() and pipe2() System Calls}
+
+The pipe() system call creates a unidirectional data channel and returns two file descriptors in a two-element integer array. The first element (pipefd[0]) is the read end; the second (pipefd[1]) is the write end. Data written to pipefd[1] is buffered in the kernel and can be read from pipefd[0].
+
+\begin{codebox}
+PROTOTYPE:
+  #include <unistd.h>
+  int pipe(int pipefd[2]);                         // POSIX.1-2001
+  int pipe2(int pipefd[2], int flags);             // POSIX.1-2024 / Linux 2.6.27
+
+RETURNS:
+  0 on success; -1 on error with errno set.
+  On failure: pipefd is left unchanged (POSIX.1-2008 TC2).
+
+pipe2() flags (OR-combinable):
+  O_CLOEXEC       Set close-on-exec on both descriptors
+  O_NONBLOCK      Set O_NONBLOCK on both descriptors (saves fcntl() calls)
+  O_DIRECT        Packet mode (Linux 3.4+): preserves write boundaries
+  O_NOTIFICATION_PIPE  Kernel notification pipe (Linux 5.8+)
+\end{codebox}
+
+\subsubsection{Error Codes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{errno} & \tableheader{Applies To} & \tableheader{Meaning} \\
+\midrule
+EMFILE & pipe, pipe2 & Per-process limit on open file descriptors reached \\
+ENFILE & pipe, pipe2 & System-wide limit on total open files reached \\
+ENFILE & pipe, pipe2 & User hard limit on pipe memory allocation reached (unprivileged caller) \\
+EFAULT & pipe, pipe2 & pipefd is not a valid address \\
+EINVAL & pipe2 only & Invalid value in flags \\
+ENOPKG & pipe2 only & O\_NOTIFICATION\_PIPE passed but CONFIG\_WATCH\_QUEUE not compiled into kernel \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Ring Buffer and Capacity}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value / Behavior} \\
+\midrule
+Default capacity & 65,536 bytes (since Linux 2.6.11; prior: one system page, typically 4,096 bytes) \\
+PIPE\_BUF constant & 4,096 bytes on Linux (POSIX minimum: 512 bytes) \\
+Atomicity guarantee & Writes of $\leq$ PIPE\_BUF bytes are atomic (not interleaved with other writers) \\
+Large write behavior & Writes $>$ PIPE\_BUF may be non-atomic; kernel may interleave with other writers \\
+Dynamic resizing & fcntl(fd, F\_SETPIPE\_SZ, n): set capacity; fcntl(fd, F\_GETPIPE\_SZ): query capacity \\
+Resizing added & Linux 2.6.35 \\
+Capacity query & ioctl(fd, FIONREAD, \&nbytes): bytes available to read (not standardized, widely supported) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Blocking / Atomicity Full Matrix}
+
+Behavior depends on: O\_NONBLOCK flag $\times$ number of writers $\times$ n (bytes to write) vs PIPE\_BUF.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.2cm}L{2.0cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{O\_NONBLOCK} & \tableheader{n vs PIPE\_BUF} & \tableheader{Atomic?} & \tableheader{Behavior on full pipe} \\
+\midrule
+Disabled (blocking) & n $\leq$ PIPE\_BUF & Yes & write() blocks until all n bytes written \\
+Disabled (blocking) & n $>$ PIPE\_BUF & No & write() blocks until n bytes written; may interleave \\
+Enabled & n $\leq$ PIPE\_BUF & Yes & Succeeds immediately if space available; EAGAIN otherwise \\
+Enabled & n $>$ PIPE\_BUF & No & 1 to n bytes written; partial write possible; EAGAIN if 0 bytes could be written \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Packet Mode (O\_DIRECT)}
+
+Since Linux 3.4, pipe2() accepts O\_DIRECT to enable packet mode. Writes produce discrete packets rather than merging into the stream. Key behaviors: the kernel does not merge writes into one ring buffer slot; readers of PIPE\_BUF size receive exactly the written message; if reader buffer is smaller than packet, excess bytes are discarded (message truncation). Packet mode is only reliable for writes $\leq$ PIPE\_BUF (4,096 bytes). This mode is directly relevant to GSD's DACP structured bundles when multiple agents write to a shared pipe.
+
+\subsubsection{Advanced Pipe Operations: splice, tee, vmsplice}
+
+Three Linux-specific syscalls enable high-performance zero-copy pipe operations. \textbf{splice(2)} moves data between a file descriptor and a pipe without copying to user space. \textbf{tee(2)} duplicates data between two pipes. \textbf{vmsplice(2)} maps user-space pages into a pipe buffer. The kernel representation is \texttt{struct pipe\_buffer} containing a page pointer, offset, length, and operations vtable; \texttt{generic\_pipe\_buf\_get} and \texttt{generic\_pipe\_buf\_release} manage reference counts.
+
+\subsubsection{Kernel Tuning Parameters}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Default} & \tableheader{Effect} \\
+\midrule
+/proc/sys/fs/pipe-max-size & 1,048,576 & Max capacity an unprivileged user can set for a single pipe (bytes) \\
+/proc/sys/fs/pipe-user-pages-hard & 0 & Hard limit on total pages across all pipes for one unprivileged user; 0 = no limit \\
+/proc/sys/fs/pipe-user-pages-soft & 16,384 & Soft limit; individual pipes over this limit reduced to one page; 0 = no limit \\
+/proc/sys/fs/pipe-max-pages & removed & Was present in 2.6.34 only; removed in 2.6.35 in favor of pipe-max-size \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{GSD Note:} During high-parallelism waves, each spawned subagent holds at minimum two pipe file descriptors (stdin and stdout). A 20-subagent wave consumes at minimum 40 pipe file descriptors. With default \texttt{RLIMIT\_NOFILE} of 1,024 per process, an orchestrator spawning 200+ subagents across a session may approach limits. The pipe-user-pages-soft default of 16,384 pages (64 MB) bounds total pipe buffer allocation across the user session.
+
+\subsection{Module 02: Named Pipes and FIFOs}
+
+\subsubsection{POSIX FIFO Specification}
+
+A FIFO (First In, First Out), also called a named pipe, is a POSIX IPC mechanism that attaches a filesystem name to a pipe. Unlike anonymous pipes, FIFOs are accessible to unrelated processes that share only filesystem access permissions. Creating a FIFO creates a special file of type 'p' in the directory listing; it does not create any data storage --- the kernel pipe buffer is allocated only when the FIFO is opened.
+
+\begin{codebox}
+CREATION (C library):
+  #include <sys/stat.h>
+  int mkfifo(const char *pathname, mode_t mode);
+  // mode modified by process umask: effective_mode = mode & ~umask
+
+CREATION (legacy, mknod):
+  #include <sys/types.h>
+  #include <sys/stat.h>
+  int mknod(const char *pathname, mode_t mode | S_IFIFO, 0);
+
+COMMAND LINE:
+  mkfifo [-m mode] pathname [...]
+
+OPERATIONS after creation:
+  open(pathname, O_RDONLY)  -- blocks until a writer opens
+  open(pathname, O_WRONLY)  -- blocks until a reader opens
+  open(pathname, O_RDWR)    -- implementation-defined (non-POSIX)
+  open(pathname, O_RDONLY | O_NONBLOCK)  -- returns immediately; no writer required
+  open(pathname, O_WRONLY | O_NONBLOCK)  -- ENXIO if no reader open
+  
+  Then: read(), write(), close(), poll(), select(), unlink()
+\end{codebox}
+
+\subsubsection{FIFO Lifecycle States}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{State} & \tableheader{Behavior} \\
+\midrule
+Created (unopen) & Special file exists in filesystem; no kernel buffer allocated \\
+Writer-only open & Blocking: open() blocks until a reader also opens \\
+Reader-only open (blocking mode) & Blocks; blocking: O\_RDONLY open waits for writer \\
+Both ends open & Active channel; I/O proceeds; same semantics as anonymous pipe \\
+Writer closes, reader active & Reader gets EOF (read returns 0) after buffer drains \\
+Reader closes, writer active & Writer receives SIGPIPE; write returns EPIPE if SIGPIPE ignored \\
+Unlinked while open & File entry removed but pipe persists until all file descriptors closed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Windows Named Pipes --- Contrast}
+
+Windows named pipes are an SMB-based IPC mechanism with substantially different semantics. They are created by the pipe server using \texttt{CreateNamedPipe()} and follow the Win32 SDK model (CreateFile / ReadFile / WriteFile / CloseHandle). Key differences from Unix FIFOs:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Attribute} & \tableheader{Unix FIFO (Linux)} & \tableheader{Windows Named Pipe} \\
+\midrule
+Persistence & Until unlink() called & Volatile: removed when last handle closes \\
+Directionality & Unidirectional (two FIFOs for bidirectional) & One-way or duplex (PIPE\_ACCESS\_DUPLEX) \\
+Framing & Byte stream only & Byte mode or message mode (PIPE\_TYPE\_MESSAGE) \\
+Naming & Filesystem path (/tmp/name) & \\\\.\pipe\name (virtual namespace) \\
+Network access & No (local only) & Yes: accessible over SMB network shares \\
+Authentication & Unix file permissions & Transparent passthrough via SMB authentication context \\
+API & POSIX open/read/write & Win32 CreateFile/ReadFile/WriteFile/CloseHandle \\
+Filesystem visible & Yes (ls shows type p) & No (virtual namespace only) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Named pipes in Windows are also used as the SMB Named Pipes protocol within the IPC\$ share, allowing remote processes to communicate over a network using the same pipe API. This is the foundation for Windows inter-host RPC over SMB.
+
+\subsubsection{FIFO Practical Applications}
+
+Named pipes enable several important patterns: database bulk loading (MySQL LOAD DATA INFILE from a FIFO decompresses on the fly, avoiding temporary file I/O); log aggregation (multiple writers append to one named pipe, single reader persists to file); client-server on a single host without TCP stack overhead; synchronization signals between shell scripts without temporary files.
+
+\subsection{Module 03: Port Taxonomy}
+
+\subsubsection{The Three IANA Ranges (RFC 6335, August 2011)}
+
+The authoritative specification for TCP and UDP port number management is RFC 6335 (Cotton et al., 2011), maintained by IANA. All four transport protocols using 16-bit port namespaces (TCP, UDP, SCTP, DCCP) share the same three-range structure.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Range Name} & \tableheader{Numbers} & \tableheader{Count} & \tableheader{Assignment Authority} \\
+\midrule
+System / Well-Known & 0 -- 1,023 & 1,024 & IETF Review or IESG Approval \\
+User / Registered & 1,024 -- 49,151 & 48,128 & Expert Review process \\
+Dynamic / Private / Ephemeral & 49,152 -- 65,535 & 16,384 & Never assigned by IANA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+At the time RFC 6335 was written, approximately 76\% of System Ports were assigned and approximately 9\% of User Ports were assigned. Dynamic Ports are explicitly reserved for OS ephemeral port allocation and cannot be registered. RFC 6335 also added procedures for de-registration, re-use, and revocation of port assignments.
+
+\subsubsection{Port Assignment States}
+
+Individual assignable ports (0--49,151) exist in one of three states: Assigned (currently assigned to the indicated service); Unassigned (available for assignment on request); Reserved (held for a specific purpose without full assignment --- used when a protocol may later add transport support).
+
+\subsubsection{Key Well-Known Port Assignments}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{2cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Port} & \tableheader{Service} & \tableheader{Protocol} & \tableheader{Reference / GSD Relevance} \\
+\midrule
+1 & TCPMUX & TCP & TCP Port Service Multiplexer (historic) \\
+21 & FTP & TCP & File Transfer Protocol control channel; BBS module \\
+22 & SSH & TCP & Secure Shell; GSD remote execution \\
+23 & Telnet & TCP & BBS connection port; educational reference \\
+25 & SMTP & TCP & Simple Mail Transfer Protocol \\
+53 & DNS & TCP/UDP & Domain Name System \\
+70 & Gopher & TCP & Pre-web internet protocol; BBS educational pack \\
+79 & Finger & TCP & User lookup; BBS era \\
+80 & HTTP & TCP & Hypertext Transfer Protocol; MCP Streamable HTTP \\
+110 & POP3 & TCP & Post Office Protocol v3 \\
+119 & NNTP & TCP & Usenet news; BBS educational pack \\
+123 & NTP & UDP & Network Time Protocol (RFC 5905) \\
+443 & HTTPS & TCP & HTTP over TLS; MCP Streamable HTTP production \\
+465 & SMTPS & TCP & SMTP over TLS (historically complex assignment history) \\
+587 & SMTP sub. & TCP & SMTP mail submission port \\
+3306 & MySQL & TCP & MySQL database (Registered, not Well-Known) \\
+5432 & PostgreSQL & TCP & PostgreSQL database (Registered) \\
+8080 & HTTP-alt & TCP & Common HTTP alternate; GSD-OS local services \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Ephemeral Port Range and Kernel Configuration}
+
+When a client opens a TCP or UDP connection without calling bind(), the operating system selects an ephemeral port from the dynamic range. On Linux, the range is configured in \texttt{/proc/sys/net/ipv4/ip\_local\_port\_range} (default: 32768--60999 on most distributions, which overlaps the IANA dynamic range of 49152--65535). The Linux default is wider than the IANA dynamic range to provide more ephemeral ports. EADDRINUSE with errno from bind() on port 0 indicates the ephemeral range is fully exhausted.
+
+\textbf{TIME\_WAIT and Port Reuse:} After a TCP connection closes, the local port enters TIME\_WAIT state for 2$\times$MSL (Maximum Segment Lifetime, typically 60 seconds) to catch delayed packets. Rapid re-bind to the same port fails with EADDRINUSE during this window. SO\_REUSEADDR socket option allows bind() to succeed on a TIME\_WAIT port; SO\_REUSEPORT (Linux 3.9+) allows multiple sockets to bind to the same port for load distribution.
+
+\subsection{Module 04: BSD Socket API}
+
+\subsubsection{History and Standard}
+
+The Berkeley socket API originated in 4.2BSD (1983). It evolved with little modification from a de facto standard into a component of the POSIX specification. POSIX.1-2024 (IEEE Std 1003.1-2024) is the current authoritative standard. The term POSIX sockets is essentially synonymous with Berkeley sockets. All modern operating systems implement a version of this interface; even Winsock for Windows was designed by unaffiliated developers following the BSD standard closely.
+
+\subsubsection{Socket Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Protocol Family} & \tableheader{Characteristics} \\
+\midrule
+SOCK\_STREAM & TCP (AF\_INET/6) & Reliable, ordered, connection-oriented byte stream; full-duplex \\
+SOCK\_DGRAM & UDP (AF\_INET/6) & Unreliable, unordered datagrams; no connection required \\
+SOCK\_STREAM & UDS (AF\_UNIX) & Reliable, ordered, full-duplex; no port number; filesystem path as address \\
+SOCK\_DGRAM & UDS (AF\_UNIX) & Reliable on most Unix implementations; datagram semantics; no reordering \\
+SOCK\_SEQPACKET & UDS (AF\_UNIX) & Connection-oriented; preserves message boundaries; ordered delivery \\
+SOCK\_RAW & IP (AF\_INET) & Direct IP access; requires superuser; used for ICMP, custom protocols \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Full API Reference}
+
+\begin{codebox}
+SOCKET CREATION:
+  int sock = socket(domain, type, protocol);
+  // domain:   AF_INET (IPv4), AF_INET6 (IPv6), AF_UNIX (local)
+  // type:     SOCK_STREAM, SOCK_DGRAM, SOCK_SEQPACKET, SOCK_RAW
+  // protocol: 0 (auto), IPPROTO_TCP, IPPROTO_UDP
+  // Returns: socket file descriptor (non-negative) or -1
+
+ADDRESS STRUCTURES:
+  struct sockaddr_in {          // IPv4
+    sa_family_t sin_family;     // AF_INET
+    in_port_t   sin_port;       // port in network byte order (htons())
+    struct in_addr sin_addr;    // IP address (inet_pton())
+  };
+  struct sockaddr_in6 {         // IPv6
+    sa_family_t sin6_family;    // AF_INET6
+    in_port_t   sin6_port;
+    uint32_t    sin6_flowinfo;
+    struct in6_addr sin6_addr;
+    uint32_t    sin6_scope_id;
+  };
+  struct sockaddr_un {          // Unix domain
+    sa_family_t sun_family;     // AF_UNIX
+    char        sun_path[108];  // filesystem path (null-terminated)
+  };
+
+SERVER LIFECYCLE (TCP):
+  1. socket()   -- create endpoint
+  2. bind()     -- assign local address + port
+  3. listen(n)  -- mark as passive; n = connection queue length
+  4. accept()   -- block until client connects; returns new socket fd
+  5. read()/write() or recv()/send()  -- data exchange
+  6. close()    -- release resources; terminate TCP connection
+
+CLIENT LIFECYCLE (TCP):
+  1. socket()   -- create endpoint
+  2. [bind()]   -- optional; OS auto-assigns ephemeral port if omitted
+  3. connect()  -- initiate TCP three-way handshake
+  4. read()/write() or recv()/send()
+  5. close()
+
+UDP (connectionless):
+  Server: socket() → bind() → recvfrom() / sendto() [no listen/accept]
+  Client: socket() → sendto() / recvfrom() [no connect required]
+\end{codebox}
+
+\subsubsection{Socket Error Codes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{errno} & \tableheader{Syscall} & \tableheader{Meaning} \\
+\midrule
+EADDRINUSE & bind & Address already in use (port taken, or TIME\_WAIT) \\
+EADDRINUSE & bind(port=0) & All ephemeral ports exhausted \\
+EACCES & bind & Port $<$ 1024 requires superuser; address protected \\
+EBADF & any & Not a valid file descriptor \\
+EINVAL & bind & Socket already bound; addrlen wrong \\
+ENOTSOCK & any & File descriptor does not refer to a socket \\
+ECONNREFUSED & connect & No process listening at target address:port \\
+ETIMEDOUT & connect & Connection attempt timed out \\
+ENETUNREACH & connect & Network unreachable \\
+EAFNOSUPPORT & socket & Address family not supported by this OS \\
+EMFILE & socket & Per-process file descriptor limit reached \\
+ENFILE & socket & System-wide file table full \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Unix Domain Sockets (AF\_UNIX)}
+
+Unix domain sockets provide IPC between processes on the same host using the socket API without a network stack. They use the filesystem namespace as their address space (a pathname rather than IP:port). Key properties: full-duplex; supports SOCK\_STREAM, SOCK\_DGRAM, and SOCK\_SEQPACKET; bypasses TCP/IP stack entirely; supports ancillary data including file descriptor passing via SCM\_RIGHTS; bind() uses struct sockaddr\_un with sun\_path as the filesystem reference; the socket file persists until unlink() is called.
+
+Kernel efficiency: UDS bypass all network layers, avoiding routing lookups, TCP header overhead, and checksum computation. Data is copied directly between process buffers via kernel memory. UDS support zero-copy operations via sendmsg/recvmsg with ancillary messages, while standard pipes lack this optimization.
+
+\subsection{Module 05: IPC Performance Spectrum}
+
+\subsubsection{Four-Mechanism Comparison}
+
+The four primary local IPC mechanisms form a spectrum from maximum simplicity (anonymous pipe) to maximum flexibility (TCP loopback). Performance benchmarks using socat on Linux (Baeldung, 2025) at two representative block sizes:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mechanism} & \tableheader{100-byte blocks} & \tableheader{1 MB blocks} & \tableheader{Notes} \\
+\midrule
+Anonymous pipe & $\sim$310 Mbits/s & $\sim$550 Mbits/s & Fastest at small messages; no naming overhead \\
+Named pipe (FIFO) & $\sim$318 Mbits/s & $\sim$520 Mbits/s & Fastest at 100-byte blocks; filesystem overhead at scale \\
+Unix domain socket & $\sim$245 Mbits/s & $\sim$600+ Mbits/s & Fastest at large blocks; bidirectional; 127,582 1KB msgs/sec (IPC-Bench) \\
+TCP loopback & $\sim$120 Mbits/s & $\sim$400 Mbits/s & Slowest; full TCP stack; SYN/ACK overhead; useful for portability \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+RTT latency (Unix domain socket): $\approx$ 30 $\mu$s average (lower-latency guide, 2024). TCP loopback adds TCP header serialization, three-way handshake, and full IP stack traversal on each message.
+
+\subsubsection{IPC Selection Matrix for GSD}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{GSD Use Case} & \tableheader{Recommended Mechanism} & \tableheader{Rationale} \\
+\midrule
+MCP local server $\leftrightarrow$ GSD subagent & stdio (anonymous pipe) & Parent spawns child; inherited fds; zero config \\
+GSD-OS $\leftrightarrow$ local MCP services & stdio (anonymous pipe) & Tauri spawns child process; same pattern \\
+Skill-creator $\leftrightarrow$ knowledge index & Named pipe or Unix socket & Persistent services; not parent-child \\
+Planning-bridge MCP server (local) & Unix domain socket & Low overhead; bidirectional; no port conflict \\
+GSD $\leftrightarrow$ remote APIs / cloud services & Streamable HTTP (TCP+TLS) & Network-native; load balancing; future-proof \\
+Cross-machine GSD coordination & Streamable HTTP (TCP+TLS) & Network-native; session support \\
+DACP bundle transport (same host) & Anonymous pipe (stdio) & Current pattern; atomicity concern if bundle $>$ 4KB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{DACP Atomicity Audit}
+
+A DACP bundle is a three-part structured message: human intent + structured data + executable code. The concern: if multiple agents write to the same pipe and bundles exceed PIPE\_BUF (4,096 bytes on Linux), writes may interleave. In GSD's current architecture, each subagent has its own stdin/stdout pipe pair (parent-child stdio model), meaning each pipe has at most one writer at a time. This makes DACP bundles on stdio pipes fully atomic regardless of size, because atomicity only matters with multiple concurrent writers on the same pipe descriptor. The risk exists only if GSD moves to a shared-pipe architecture (multiple subagents writing to one aggregation pipe), in which case bundles should be kept $\leq$ 4,096 bytes or O\_DIRECT packet mode should be used.
+
+\subsection{Module 06: GSD Protocol Substrate}
+
+\subsubsection{MCP Transport Mapping}
+
+The MCP research document (mcp-servers-research.md) identifies three transports. Each maps directly to the IPC primitives documented in this mission:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{MCP Transport} & \tableheader{IPC Primitive} & \tableheader{Specification Notes} \\
+\midrule
+stdio & Anonymous pipe (pipe(2)) & Client spawns server as child; parent writes to child stdin (fd[1]); reads from child stdout (fd[0]); JSON-RPC 2.0 framing; console.log() in server corrupts stream (writes to fd[1]) \\
+Streamable HTTP & TCP socket (socket/bind/listen/accept) & Server binds to port; HTTP POST for client→server; SSE stream for server→client; POSIX AF\_INET with registered or ephemeral port \\
+HTTP+SSE (deprecated) & TCP socket & Two endpoints: /sse for SSE, /messages for POST; try Streamable HTTP first; fall back on 4xx \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Planning-Bridge Port Policy Recommendation}
+
+The planning-bridge MCP server (Cloudflare tunnel approach) currently has no documented port binding policy. Recommended policy for GSD-OS service ports:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Service} & \tableheader{Suggested Port} & \tableheader{Rationale} \\
+\midrule
+GSD-OS local API & 8432 & Registered range; GSD-specific; avoid 8080 (conflict-prone) \\
+Planning-bridge MCP & 8433 & Adjacent to GSD-OS API; consistent block \\
+Skill-creator local & Unix socket & No port needed; $\sim$30 $\mu$s latency; preferred for same-host \\
+Cloudflare tunnel & Ephemeral (OS-assigned) & Tunnel software handles external port; internal is Unix socket \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Subagent File Descriptor Budget}
+
+Each spawned GSD subagent uses at minimum: 3 standard fds (stdin/stdout/stderr) + 2 pipe fds per parent pipe pair. A 20-subagent wave on a single orchestrator with default RLIMIT\_NOFILE of 1,024: 20 $\times$ 5 = 100 fds, well within limits. At Squadron scale (50 subagents) with additional skill-creator observation pipes: 50 $\times$ 6 = 300 fds. At Fleet scale (200 subagents): 200 $\times$ 6 = 1,200 fds, which \textit{exceeds the default limit}. GSD's wave executor should set RLIMIT\_NOFILE to 4,096 (or higher) before spawning waves.
+
+\subsubsection{The Amiga Principle at the Pipe Layer}
+
+The Amiga's serial port ran at 31,250 bps not because it was fast but because it was \textit{exactly} the MIDI baud rate. The precision was the leverage. GSD's Amiga Principle at the pipe layer: choose the minimal-overhead IPC primitive for each connection, using the exact specification semantics appropriate to the use case. stdio pipes for parent-child subagent spawning. Unix domain sockets for persistent same-host service connections. Streamable HTTP only when network crossing is required. The power is in knowing which channel to use --- not in using the most powerful channel for everything.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk Level} & \tableheader{Consideration} \\
+\midrule
+Port scanning references & Medium & Educational port-scan content in BBS module must not include working exploit code; methodology described only \\
+Pipe security (TOCTOU) & Medium & Named pipe creation race conditions (check-then-open) documented but exploitation paths not elaborated \\
+Numerical claims & Low & All buffer sizes, port ranges, and benchmark numbers attributed to POSIX, Linux kernel documentation, or named benchmarks \\
+Platform differences & Low & Windows named pipe semantics differences documented neutrally; no advocacy for platform choice \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Standards and Specifications}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item IEEE Std 1003.1-2024 (POSIX.1-2024) --- pipe(), pipe2(), mkfifo(), socket(), bind(), listen(), accept(), connect() specifications
+  \item IEEE Std 1003.1-2001 (POSIX.1-2001) --- pipe() original standardization; PIPE\_BUF minimum 512 bytes
+  \item RFC 6335 (Cotton et al., IETF, August 2011) --- Service Name and Transport Protocol Port Number Registry procedures; BCP 165
+  \item RFC 768 (Postel, 1980) --- User Datagram Protocol
+  \item RFC 793 (Postel, 1981) --- Transmission Control Protocol
+\end{itemize}
+
+\subsubsection{Linux Kernel and System Documentation}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Linux man-pages project: pipe(2), pipe(7), pipe2(2), fifo(7), socket(2), socket(7), bind(2), connect(2), accept(2), unix(7), tcp(7), splice(2) --- man7.org
+  \item Linux kernel documentation: \textit{Splice and Pipes} (kernel.org/doc/html/v6.14) --- struct pipe\_buffer, copy\_splice\_read, splice\_from\_pipe\_next
+  \item NetBSD Manual Pages: pipe(2), pipe2(2) --- POSIX.1-2024 conformance notes
+  \item OpenBSD Manual Pages: pipe(2) --- bidirectional pipe extension note
+  \item Ubuntu Manpages: pipe(7) --- /proc/sys/fs/pipe-* parameter documentation
+  \item GNU C Library Manual: \textit{Pipe Atomicity} section --- atomic I/O semantics
+\end{itemize}
+
+\subsubsection{Performance and Implementation References}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Baeldung on Linux: \textit{IPC Performance Comparison: Anonymous Pipes, Named Pipes, Unix Sockets, and TCP Sockets} (May 2025) --- socat benchmark methodology and results
+  \item Baeldung on Linux: \textit{The Pipe Buffer Capacity in Linux} (May 2025) --- PIPE\_BUF constant, write-size experiments
+  \item Biriukov, Viacheslav: \textit{FD, Pipe, Session, Terminal: Pipes} (biriukov.dev) --- packet mode, bpftrace pipe\_write analysis
+  \item IPC-Bench: Unix domain socket throughput benchmark --- 127,582 1KB messages/second on i5-4590S/Ubuntu 20.04
+  \item linuxvox.com: \textit{Sockets on Same Machine for IPC} (2024) --- 30 $\mu$s UDS avg RTT; 210 MB/s throughput
+  \item Wikipedia: \textit{Berkeley sockets} (updated 2025) --- 4.2BSD (1983) origin; POSIX evolution
+  \item Wikipedia: \textit{Named pipe} (updated March 2026) --- Unix vs.\ Windows semantic comparison; SMB IPC\$ share
+  \item Wikipedia: \textit{Unix domain socket} (updated March 2026) --- AF\_UNIX socket type table
+\end{itemize}
+
+\subsubsection{GSD Ecosystem Documents}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item mcp-servers-research.md (project knowledge) --- MCP transport specifications: stdio, Streamable HTTP, HTTP+SSE
+  \item gsd-bbs-educational-pack-vision.md (project knowledge) --- Port scanner educational module; TCP/IP Layer Cake Visualizer
+  \item gsd-chipset-architecture-vision.md (project knowledge) --- Agnus/Denise/Paula model allocation; inter-chip IPC
+  \item gsd-instruction-set-architecture-vision.md (project knowledge) --- DACP three-part bundle specification
+\end{itemize}
+
+%% ═══════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%% ═══════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality reference document and GSD integration guide covering the complete Ports \& Pipes protocol specification: anonymous pipe syscall internals, named pipe / FIFO POSIX semantics, IANA port taxonomy, BSD socket API lifecycle, IPC performance benchmarking, and GSD-specific protocol substrate recommendations. The deliverable serves as both a standalone technical reference and an actionable architectural guide for GSD ecosystem development decisions.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE — PORTS & PIPES MISSION
+==========================================
+
+Wave 0: Foundation (Sequential, Haiku)
+  └─ Shared schema, source index, test scaffold
+
+          Wave 1A                      Wave 1B
+  ┌───────────────────┐       ┌────────────────────┐
+  │  PIPE MECHANICS   │       │  PORT TAXONOMY     │
+  │  Module 01 (anon) │       │  Module 03 (IANA)  │
+  │  Module 02 (FIFO) │       │  Module 04 (socket)│
+  │  Sonnet + Opus    │       │  Sonnet + Opus     │
+  └──────────┬────────┘       └─────────┬──────────┘
+             │                          │
+             └──────────┬───────────────┘
+                        ▼
+             Wave 1C: IPC Performance (Module 05)
+             Parallel with 1A/1B — Sonnet
+
+                        ▼
+             Wave 2: Synthesis (Sequential, Opus)
+             Module 06: GSD Substrate + Integration
+             DACP audit, port policy, FD budget
+
+                        ▼
+             Wave 3: Publication + Verification
+             Sonnet — source validation, test matrix,
+             final document assembly, PDF render
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Kernel IPC Layer} --- Anonymous pipes, FIFOs, Unix domain sockets, splice/tee/vmsplice; POSIX.1-2024 specification compliance
+  \item \textbf{Network Addressing Layer} --- IANA port registry, TCP/UDP port ranges, ephemeral port kernel configuration, TIME\_WAIT semantics
+  \item \textbf{Socket API Layer} --- BSD socket lifecycle, struct sockaddr variants, error code catalog, blocking/non-blocking modes
+  \item \textbf{Performance Layer} --- IPC throughput and latency benchmarks, selection matrix, zero-copy paths
+  \item \textbf{GSD Integration Layer} --- MCP transport mapping, DACP atomicity audit, port policy, subagent FD budget
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3cm}L{4cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Source} \\
+\midrule
+1 & Pipe syscall reference & All flags, error codes, buffer constants with kernel version & POSIX.1-2024, Linux man-pages \\
+2 & FIFO lifecycle guide & All 7 states documented with blocking behavior & POSIX.1-2024, fifo(7) \\
+3 & Port taxonomy table & All 3 IANA ranges with RFC authority and $\geq$ 20 key ports & RFC 6335, IANA registry \\
+4 & Socket API reference & Server + client lifecycles; $\geq$ 12 error codes; all struct types & POSIX.1-2024, BSD sockets \\
+5 & IPC perf matrix & 4 mechanisms $\times$ 3 block sizes; throughput + latency & Baeldung/IPC-Bench benchmarks \\
+6 & GSD substrate guide & DACP audit ruling; port policy; FD budget; transport mapping & mcp-servers-research.md + mission \\
+7 & Cross-platform gap analysis & $\geq$ 5 Unix FIFO vs Windows named pipe differences & Wikipedia Named pipe, Win32 docs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0: Schema + index & None & Haiku & 2K \\
+Module 01: Pipe mechanics & Wave 0 & Sonnet & 6K \\
+Module 02: Named pipes/FIFOs & Module 01 & Sonnet & 5K \\
+Module 03: Port taxonomy & Wave 0 & Sonnet & 6K \\
+Module 04: Socket API & Module 03 & Sonnet & 8K \\
+Module 05: IPC perf spectrum & Modules 01-04 & Sonnet + Opus & 6K \\
+Module 06: GSD substrate & All modules & Opus & 8K \\
+Wave 3: Publication + verify & All modules & Sonnet & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Roles} & \tableheader{Rationale} \\
+\midrule
+Opus & $\approx$30\% & FLIGHT, ARCH, Module 06, synthesis & Judgment-heavy GSD integration decisions; cross-module synthesis; DACP audit ruling \\
+Sonnet & $\approx$60\% & EXEC $\times$3, VERIFY, INTEG, CRAFT-PROTO, CRAFT-OS, CRAFT-PERF & Document production; protocol reference tables; performance analysis; source validation \\
+Haiku & $\approx$10\% & BUDGET, LOG, PLAN, Wave 0 scaffolding & Schema generation; token tracking; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Outputs} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, source index, test scaffold \\
+1A & Pipe mechanics & Parallel & Sonnet+Opus & Modules 01 + 02 documents \\
+1B & Port + Socket & Parallel & Sonnet+Opus & Modules 03 + 04 documents \\
+1C & IPC performance & Parallel & Sonnet & Module 05 document \\
+2 & GSD synthesis & Sequential & Opus & Module 06 + DACP audit + port policy \\
+3 & Publication & Sequential & Sonnet & Assembled PDF, verification matrix, test results \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Define shared data schema & PLAN (Haiku) & JSON schema for syscall entries, port entries, benchmark entries \\
+Build source index & SCOUT (Haiku) & Indexed list of all 20+ sources with retrieval identifiers \\
+Generate test scaffold & LOG (Haiku) & Test IDs SC-01 through EC-12 with empty result fields \\
+Confirm HITL go/no-go & CAPCOM & Human approval before Wave 1 launch \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks (1A + 1B + 1C)}
+
+\textbf{Track 1A --- Pipe Mechanics:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+pipe(2) / pipe2(2) full spec & CRAFT-PROTO & Syscall signature, flags, error codes, atomicity matrix \\
+Pipe buffer deep-dive & CRAFT-OS & Ring buffer, capacity constants, F\_SETPIPE\_SZ, kernel tuning params \\
+Named pipe / FIFO spec & EXEC-1 & POSIX FIFO lifecycle, mkfifo API, blocking-on-open, all 7 states \\
+Windows named pipe contrast & EXEC-1 & 7-column comparison table (Module 02 appendix) \\
+splice/tee/vmsplice & CRAFT-PROTO & Zero-copy operations, struct pipe\_buffer internals \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track 1B --- Port Taxonomy \& Socket API:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+IANA 3-range taxonomy & CRAFT-PROTO & RFC 6335 summary; range table; assignment state descriptions \\
+Well-known port reference & EXEC-2 & $\geq$20-port table with protocol, RFC, GSD relevance \\
+Ephemeral port config & CRAFT-OS & /proc/sys/net/ipv4/ip\_local\_port\_range; EADDRINUSE; SO\_REUSEADDR \\
+BSD socket API full reference & EXEC-2 & socket/bind/listen/accept/connect; all struct variants; error codes \\
+UDS vs named pipe comparison & CRAFT-PERF & AF\_UNIX socket types; kernel efficiency; sendmsg/SCM\_RIGHTS \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track 1C --- IPC Performance:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Benchmark data compilation & CRAFT-PERF & 4-mechanism $\times$ 3 block-size matrix from Baeldung/IPC-Bench \\
+Latency profile & CRAFT-PERF & RTT values; kernel overhead analysis; zero-copy path identification \\
+GSD IPC selection matrix & ANALYST & 8-row table mapping GSD use cases to recommended mechanisms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+DACP atomicity audit & Opus (ARCH) & Formal ruling: current architecture is safe; conditions under which it is not \\
+Port policy document & Opus (ARCH) & Recommended ports for GSD-OS API, planning-bridge, skill-creator \\
+Subagent FD budget analysis & Opus (ARCH) & Per-wave FD consumption; RLIMIT\_NOFILE recommendation \\
+MCP transport mapping & Opus (FLIGHT) & Module 06 complete; cross-reference all five MCP transport decisions \\
+HITL review gate & CAPCOM & Human approval of GSD integration recommendations before Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Document assembly & EXEC-3 (Sonnet) & Combined all-module document with consistent formatting \\
+Source validation & VERIFY & SC-SRC and SC-NUM tests executed; all citations checked \\
+Test matrix completion & VERIFY & All 36 tests run; results recorded \\
+Cross-module consistency check & INTEG & INTEG tests run; no contradictions \\
+LaTeX compilation & LOG & XeLaTeX three-pass; PDF verified; page count confirmed \\
+Index page generation & EXEC-3 & index.html with file cards and download links \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Shared system prompt prefix:} Protocol specs, shared schema, and source index placed in system prompt; shared across all Wave 1 subagents within the 5-minute cache TTL window
+  \item \textbf{Wave 1 parallel launch:} Tracks 1A, 1B, 1C launched within the same 5-minute window to maximize cache hit on shared source index
+  \item \textbf{Module boundary contracts:} Each module output conforms to Wave 0 schema, enabling INTEG agent to verify consistency without re-reading full documents
+  \item \textbf{Opus bottleneck management:} Wave 2 Opus tasks run sequentially rather than in parallel to avoid context contamination; all Wave 1 outputs provided as structured context
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input (K)} & \tableheader{Output (K)} & \tableheader{Total (K)} \\
+\midrule
+Wave 0: Foundation & 2 & 2 & 4 \\
+Wave 1A: Pipe mechanics & 8 & 8 & 16 \\
+Wave 1B: Port + Socket & 8 & 10 & 18 \\
+Wave 1C: IPC performance & 6 & 6 & 12 \\
+Wave 2: Synthesis & 32 & 10 & 42 \\
+Wave 3: Publication & 40 & 12 & 52 \\
+\midrule
+\textbf{Total} & \textbf{96} & \textbf{48} & \textbf{144} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+[Wave 0: Foundation]
+  shared_schema.json
+  source_index.yaml
+  test_scaffold.yaml
+        |
+        +──────────┬──────────+
+        |          |          |
+   [Wave 1A]  [Wave 1B]  [Wave 1C]
+   Modules    Modules    Module 05
+   01 + 02    03 + 04    (perf)
+        |          |          |
+        +──────────┴──────────+
+                   |
+           [Wave 2: Synthesis]
+              Module 06
+              DACP audit
+              Port policy
+                   |
+           [Wave 3: Publication]
+           Final document + tests
+                   |
+           [DELIVERABLE: PDF]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Target \%} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & 17\% \\
+Core functionality & 16 & Required & BLOCK & 44\% \\
+Integration & 8 & Required & BLOCK & 22\% \\
+Edge cases & 6 & Best-effort & LOG & 17\% \\
+\midrule
+\textbf{Total} & \textbf{36} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & Source quality (SC-SRC) & All citations traceable to POSIX, Linux kernel documentation, RFC, or named benchmark. Zero blog posts, forum posts, or unsourced claims \\
+SC-02 & Numerical attribution (SC-NUM) & Every constant (PIPE\_BUF, port ranges, benchmark throughput) attributed to specific named source \\
+SC-03 & No policy advocacy (SC-ADV) & Port policy recommendations framed as architectural guidance; no regulatory or legislative advocacy \\
+SC-04 & Security sensitivity (SC-SEC) & Port-scanning and pipe exploitation references describe methodology only; no working exploit code or CVE reproduction steps \\
+SC-05 & Platform neutrality & Windows named pipe differences presented as factual behavioral comparison; no platform advocacy \\
+SC-06 & GSD specificity gate & DACP atomicity ruling and port policy explicitly scoped to GSD architecture; no overgeneralized claims about other systems \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & pipe2() flags complete & O\_CLOEXEC, O\_NONBLOCK, O\_DIRECT, O\_NOTIFICATION\_PIPE all documented with kernel version \\
+CF-02 & Atomicity matrix complete & All 4 combinations (nonblocking $\times$ n vs PIPE\_BUF) documented with exact kernel behavior \\
+CF-03 & Kernel tuning params & All 4 /proc/sys/fs/pipe-* params with defaults, ranges, GSD values \\
+CF-04 & FIFO lifecycle complete & All 7 FIFO states documented with blocking behavior \\
+CF-05 & Port taxonomy complete & All 3 IANA ranges with exact byte boundaries and RFC authority \\
+CF-06 & Well-known port reference & $\geq$ 20 ports with service name, protocol, RFC, and GSD relevance note \\
+CF-07 & Socket lifecycle complete & Server lifecycle (6 steps) and client lifecycle (5 steps) both fully documented \\
+CF-08 & Error code catalog & $\geq$ 12 errno values for socket API documented with triggering syscall \\
+CF-09 & IPC perf matrix & 4 mechanisms $\times$ 3 block sizes; throughput values; latency values \\
+CF-10 & DACP atomicity ruling & Explicit written ruling with conditions; not ambiguous \\
+CF-11 & GSD port policy & Specific port numbers recommended for $\geq$ 3 GSD services \\
+CF-12 & Cross-platform gap table & $\geq$ 5 rows in Unix FIFO vs Windows named pipe comparison \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Pipe syscall matrix complete & CF-01, SC-01, SC-02 & Pending \\
+2. PIPE\_BUF atomicity table complete & CF-02 & Pending \\
+3. Pipe kernel tuning guide & CF-03 & Pending \\
+4. FIFO lifecycle documented & CF-04 & Pending \\
+5. Port taxonomy complete & CF-05, SC-02 & Pending \\
+6. Well-known port reference & CF-06 & Pending \\
+7. Socket lifecycle state machine & CF-07 & Pending \\
+8. Error code catalog & CF-08 & Pending \\
+9. IPC performance matrix & CF-09 & Pending \\
+10. GSD DACP atomicity audit & CF-10, SC-06 & Pending \\
+11. GSD port policy document & CF-11, SC-03 & Pending \\
+12. Cross-platform gap analysis & CF-12, SC-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go gates; final integration authority \\
+PLAN & Planner (Haiku) & Wave decomposition; dependency management; token tracking \\
+SCOUT & Research Agent (Sonnet) & Source gathering; gap identification; web research \\
+EXEC-1 & Executor Alpha (Sonnet) & Modules 01 + 02 document production \\
+EXEC-2 & Executor Beta (Sonnet) & Modules 03 + 04 document production \\
+EXEC-3 & Executor Gamma (Sonnet) & Module 05 + final assembly \\
+CRAFT-PROTO & Protocol Specialist (Sonnet) & pipe(2)/pipe2(2) full spec; IANA RFC analysis; socket API depth \\
+CRAFT-OS & OS Layer Specialist (Sonnet) & Kernel tuning params; platform internals; Windows named pipe \\
+CRAFT-PERF & Performance Specialist (Sonnet) & IPC benchmark compilation; selection matrix; zero-copy paths \\
+VERIFY & Verification Agent (Sonnet) & Source validation; SC-SRC, SC-NUM tests; accuracy checking \\
+INTEG & Integration Agent (Sonnet) & Cross-module consistency; INTEG test execution \\
+CAPCOM & HITL Interface (Sonnet) & Human approval at Wave 0→1 and Wave 2→3 boundaries \\
+BUDGET & Resource Manager (Haiku) & Token consumption tracking; session planning \\
+SURGEON & Health Monitor (Sonnet) & Research quality degradation detection; stale data flags \\
+TOPO & Topology Manager (Opus) & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Agent (Opus) & Cross-cutting structural decisions; DACP audit; GSD policy \\
+ANALYST & Pattern Analyst (Sonnet) & Cross-module pattern detection; GSD substrate synthesis \\
+LOG & Chronicle Agent (Haiku) & Audit trail; commit messages; milestone summaries \\
+RETRO & Retrospective Agent (Sonnet) & Post-wave analysis; lessons learned; quality improvement \\
+SECURE & Security Agent (Opus) & SC-04 and SC-06 safety boundary enforcement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17--20 roles) \\
+Research Modules & 6 modules \\
+Parallel Wave Tracks & 3 (1A: pipes, 1B: ports/sockets, 1C: performance) \\
+Estimated Context Windows & 6--8 \\
+Estimated Sessions & 2--3 \\
+Total Estimated Tokens & 144K \\
+Model Distribution & $\approx$30\% Opus / $\approx$60\% Sonnet / $\approx$10\% Haiku \\
+HITL Gates & 2 (Wave 0→1, Wave 2→3) \\
+Total Tests & 36 (6 safety-critical, 16 core, 8 integration, 6 edge) \\
+Safety-Critical Tests & 6 (all mandatory-BLOCK) \\
+Core Deliverables & 7 documents / tables / guides \\
+Primary Authorities & POSIX.1-2024, RFC 6335, Linux man-pages, IANA registry \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+%% ── Closing Quote Box ────────────────────────────────────────────────────
+\vspace{1em}
+\begin{quotebox}
+\textit{``File. Process. Pipe. Three things. From these three things, Thompson and Ritchie and Kernighan built a system that could do everything the totalitarian systems could do, and more... The system was not a plan. It was a vocabulary. And a vocabulary, unlike a plan, can say things its creators never imagined.''}
+
+\medskip
+\hfill --- \textit{The Hundred Voices}, Voice XIII: The Subtraction Principle
+
+\medskip
+\noindent GSD's Ports \& Pipes specification is the vocabulary layer. Not a plan --- a set of primitives from which any communication architecture can compose. Know the exact weight of a PIPE\_BUF. Know the exact width of the IANA System Port range. Know the exact RTT of a Unix domain socket. Then build what needs building. The details are not pedantry. They are the ground on which the story takes place.
+\end{quotebox}
+
+\end{document}

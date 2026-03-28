@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ports &amp; Pipes &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-pnp">
+  <header>
+    <h1>Ports &amp; Pipes</h1>
+    <div class="subtitle">Anonymous Pipes &middot; FIFOs &middot; IANA Ports &middot; BSD Sockets &middot; IPC Performance &middot; GSD Substrate</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-pipe-mechanics">Pipe Mechanics</a>
+      <a href="page.html?doc=02-named-pipes-fifos">Named Pipes</a>
+      <a href="page.html?doc=03-port-taxonomy">Port Taxonomy</a>
+      <a href="page.html?doc=04-bsd-socket-api">Socket API</a>
+      <a href="page.html?doc=05-ipc-performance-spectrum">IPC Performance</a>
+      <a href="page.html?doc=06-gsd-protocol-substrate">GSD Substrate</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Thompson and Ritchie gave us three words: file, process, pipe. From these three atoms,
+      every piece of software running today was assembled. The pipe is the connective tissue
+      of computing &mdash; the thing in the space between processes, carrying meaning from one
+      conscious machine-fragment to another. The port is its network cousin: the numbered
+      doorway that says <em>this is where the outside comes in</em>. Understanding these
+      primitives at their specification level &mdash; the exact constants, the exact error codes,
+      the exact atomicity guarantees &mdash; is not pedantry. It is the difference between an
+      architecture that holds and one that fails silently at 2&nbsp;AM when wave parallelism
+      exceeds a kernel limit nobody wrote down.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">36</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Protocol Layers</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-pipe-mechanics" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Pipe Mechanics</h3>
+        <div class="meta"><span class="tag tag-kernel">Kernel</span> Track A &middot; Anonymous pipes</div>
+        <p>pipe() and pipe2() syscall specification. Ring buffer internals, PIPE_BUF atomicity matrix, blocking/non-blocking behavior, O_DIRECT packet mode, splice/tee/vmsplice zero-copy operations, kernel tuning parameters.</p>
+      </a>
+
+      <a href="page.html?doc=02-named-pipes-fifos" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Named Pipes &amp; FIFOs</h3>
+        <div class="meta"><span class="tag tag-kernel">Kernel</span> Track A &middot; Filesystem IPC</div>
+        <p>POSIX FIFO specification, mkfifo API, 7-state lifecycle with blocking behavior, blocking-on-open asymmetry. Windows named pipes 11-point contrast. Security considerations and TOCTOU race prevention.</p>
+      </a>
+
+      <a href="page.html?doc=03-port-taxonomy" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Port Taxonomy</h3>
+        <div class="meta"><span class="tag tag-net">Network</span> Track B &middot; IANA registry</div>
+        <p>Three IANA port ranges (RFC 6335). 23+ well-known port assignments. Ephemeral port kernel configuration. TIME_WAIT and port reuse (SO_REUSEADDR, SO_REUSEPORT). Port scanning methodology. Firewall rules by port.</p>
+      </a>
+
+      <a href="page.html?doc=04-bsd-socket-api" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: BSD Socket API</h3>
+        <div class="meta"><span class="tag tag-net">Network</span> Track B &middot; Socket lifecycle</div>
+        <p>POSIX.1-2024 socket interface. Server lifecycle (6 steps), client lifecycle (5 steps). sockaddr structs for IPv4/IPv6/Unix. 24-entry error code catalog. Unix domain sockets and SCM_RIGHTS fd passing.</p>
+      </a>
+
+      <a href="page.html?doc=05-ipc-performance-spectrum" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: IPC Performance Spectrum</h3>
+        <div class="meta"><span class="tag tag-perf">Performance</span> Track C &middot; Benchmarks</div>
+        <p>Four-mechanism throughput comparison at three block sizes. RTT latency profiles. Kernel path analysis (pipe_write vs tcp_sendmsg). Zero-copy paths. GSD IPC selection matrix. DACP atomicity audit.</p>
+      </a>
+
+      <a href="page.html?doc=06-gsd-protocol-substrate" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: GSD Protocol Substrate</h3>
+        <div class="meta"><span class="tag tag-gsd">GSD</span> Track C &middot; Architecture</div>
+        <p>MCP transport mapping. Planning-bridge port policy. Subagent file descriptor budget. DACP bundle transport analysis. Cross-platform IPC strategy. Wave execution pipe architecture. The Amiga Principle at the pipe layer.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>pipe() / pipe2() syscalls</td><td>M1, M5, M6</td><td>TCP, SYS, CMH</td></tr>
+        <tr><td>PIPE_BUF atomicity</td><td>M1, M5, M6</td><td>GSD2, MCF</td></tr>
+        <tr><td>Named pipes / FIFOs</td><td>M2, M5, M6</td><td>SYS, CMH, K8S</td></tr>
+        <tr><td>IANA port ranges (RFC 6335)</td><td>M3, M6</td><td>TCP, DNS, RFC</td></tr>
+        <tr><td>BSD socket lifecycle</td><td>M4, M5, M6</td><td>TCP, SYS, K8S</td></tr>
+        <tr><td>Unix domain sockets</td><td>M4, M5, M6</td><td>SYS, CMH, MCF</td></tr>
+        <tr><td>IPC throughput benchmarks</td><td>M5, M6</td><td>TCP, SYS</td></tr>
+        <tr><td>DACP bundle atomicity</td><td>M1, M5, M6</td><td>GSD2, CMH</td></tr>
+        <tr><td>MCP transport mapping</td><td>M6</td><td>CMH, RFC</td></tr>
+        <tr><td>File descriptor limits</td><td>M1, M4, M6</td><td>K8S, SYS</td></tr>
+        <tr><td>Cross-platform IPC</td><td>M2, M6</td><td>CMH, SYS</td></tr>
+        <tr><td>Amiga Principle</td><td>M1, M6</td><td>SGL, EMG</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+PORTS &amp; PIPES -- DOMAIN MAP
+===============================================================
+
+  KERNEL IPC LAYER           NETWORK ADDRESSING       GSD INTEGRATION
+  +------------------+       +------------------+     +------------------+
+  | pipe() / pipe2() |       | IANA 3 Ranges    |     | MCP Transports   |
+  | Ring Buffer      |------&gt;| RFC 6335         |----&gt;| stdio / HTTP     |
+  | PIPE_BUF         |       | 65,536 Ports     |     | DACP Bundles     |
+  | splice / tee     |       | Ephemeral Config |     | Wave Execution   |
+  +------------------+       +------------------+     +------------------+
+        |                          |                        |
+        v                          v                        v
+  +------------------+       +------------------+     +------------------+
+  | Named Pipes      |       | BSD Socket API   |     | Port Policy      |
+  | FIFO Lifecycle   |       | POSIX.1-2024     |     | FD Budget        |
+  | Windows Contrast |       | Server/Client    |     | Cross-Platform   |
+  | TOCTOU Security  |       | UDS (AF_UNIX)    |     | Selection Matrix |
+  +------------------+       +------------------+     +------------------+
+        |                          |                        |
+        +------------- -----------+---------+---------------+
+                                  |
+                      +-----------+-----------+
+                      |   IPC PERFORMANCE     |
+                      |   SPECTRUM            |
+                      |                       |
+                      |  Throughput Benchmarks |
+                      |  Latency Profiles     |
+                      |  Zero-Copy Paths      |
+                      |  Kernel Path Analysis |
+                      +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Pipe Mechanics] -------------&gt; [M2: Named Pipes &amp; FIFOs]
+         |                                |
+         |                                |
+         v                                v
+  [M3: Port Taxonomy] --------&gt; [M4: BSD Socket API]
+                                          |
+                                          v
+                              [M5: IPC Performance Spectrum]
+                                          |
+                                          v
+                              [M6: GSD Protocol Substrate]
+
+  Parallel tracks:
+    Track A: M1 + M2 (pipe primitives)
+    Track B: M3 + M4 (network addressing + sockets)
+    Track C: M5 + M6 (performance + GSD integration)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Ports &amp; Pipes &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
