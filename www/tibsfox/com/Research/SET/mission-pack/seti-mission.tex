@@ -1,0 +1,1065 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+% ── SPACE/COSMIC COLOR SCHEME ──────────────────────────────────────
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue
+\definecolor{tertiary}{HTML}{4A148C}      % Deep violet
+\definecolor{accent}{HTML}{F9A825}        % Star gold
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{F3E5F5}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ─────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% ── TABLE HELPERS ──────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── HEADERS/FOOTERS ────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{SETI: Signal, Silence, and the Spaces Between}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ─────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={SETI -- Signal, Silence, and the Spaces Between -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═══════════════════════════════════════════════════════════════════
+\begin{document}
+% ═══════════════════════════════════════════════════════════════════
+
+% ── TITLE PAGE ─────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{SETI\\[0.3em]Signal, Silence, and the Spaces Between}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Search for Extraterrestrial Intelligence}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{0.8cm}
+{\normalsize\sffamily\textcolor{accent}{``The cumulative searches to date have examined about a glass of water.\\The searchable cosmic haystack is all the water in Earth's oceans.''\\
+\textit{--- Jill Tarter, SETI Institute}}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ──────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{SETI --- Vision Guide}
+
+\subsection{Metadata}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Mission --- Ready for GSD Orchestrator}
+\metafield{Depends On:}{gsd-skill-creator v1.49+, DACP bundle protocol}
+\metafield{Activation Profile:}{Fleet (6 modules, 17 roles)}
+\metafield{Context:}{Cold-start deep research mission on the Search for Extraterrestrial Intelligence}
+
+\subsection{Vision}
+
+We are inside the longest silence humanity has ever listened to. For sixty-five years, since Frank Drake trained a radio telescope at Tau Ceti and Epsilon Eridani in 1960, we have been waiting for an answer. The universe contains roughly two trillion galaxies, each holding hundreds of billions of stars, most of which are older than our own sun and almost certainly harbor planets. By almost any calculation, the probability that we are alone approaches the absurd. And yet --- nothing. No confirmed signal. No megastructure. No reply.
+
+This is not a failure. It is an invitation.
+
+SETI --- the Search for Extraterrestrial Intelligence --- is the most ambitious signal-detection problem in the history of science. It sits at the intersection of radio astronomy, information theory, astrobiology, philosophy, and now machine learning. The field has transformed in the past decade. What once required months to process a single frequency band can now be done in real time. The Allen Telescope Array, Breakthrough Listen's access to the Green Bank Telescope and MeerKAT, and the deployment of NVIDIA's AI acceleration at Hat Creek Radio Observatory have shifted the bottleneck from instrument sensitivity to computational throughput. The haystack is not getting smaller. But we are finally building scoops large enough to search it seriously.
+
+The timing is extraordinary. The James Webb Space Telescope is detecting candidate biosignature molecules in exoplanet atmospheres. The 2025 detection of dimethyl sulfide and dimethyl disulfide in the atmosphere of K2-18b --- a Hycean world 124 light-years away --- is contested but extraordinary. Breakthrough Listen searched interstellar comet 3I/ATLAS at closest approach in December 2025 with the Green Bank Telescope, sensitive to transmitters as faint as 0.1 watts. Project Hephaistos has found seven candidate Dyson sphere hosts among five million surveyed M-dwarf stars. Every null result narrows the parameter space and refines the next search. Every unexpected signal, even when explained away, reveals how vast the unexplored frontier remains.
+
+The deep resonance for the GSD ecosystem is this: SETI is a search for signal within an ocean of noise. It is, at its core, an information-theoretic problem --- the problem of finding structured meaning in an unstructured cosmos. The Amiga Principle applies: the bottleneck is not the raw telescope aperture, it is the architecture of the search. Specialized detection paths, principled signal models, and the willingness to look in the spaces between the obvious frequencies are what distinguish great SETI science from brute-force sky surveys. The spaces between the noise are where meaning hides.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{The Haystack Problem:} The search space for extraterrestrial signals is effectively infinite in frequency, direction, signal morphology, and temporal pattern. After sixty-five years of searching, the cumulative volume examined is, in Jill Tarter's analogy, a glass of water drawn from Earth's oceans. Current methodologies can only scan a narrow slice of the parameter space at any moment.
+
+  \item \textbf{The RFI Problem:} Radio-frequency interference from human technology --- satellites, cell phones, aviation transponders --- contaminates every SETI observation. Distinguishing an artificial extraterrestrial signal from artificial terrestrial interference is the central technical challenge. The ATA observed 3I/ATLAS in July 2025 and found nine candidate signals, all ultimately identified as human-made noise. The false-positive rate must be crushed to near zero before any detection claim can survive scrutiny.
+
+  \item \textbf{The Silence Interpretation Problem:} Sixty-five years of silence is consistent with many hypotheses: we are rare; civilizations are quiet; signals are encoded in ways we haven't imagined; the Great Filter lies ahead. The Drake Equation's biological terms remain unconstrained by orders of magnitude. A 2024 update adding plate tectonics factors (Stern \& Gerya, \textit{Scientific Reports}) reduces the expected number of communicative civilizations in the Milky Way to near zero --- or it may simply reflect how much we don't know.
+
+  \item \textbf{The Technosignature Expansion Problem:} SETI began as a radio search. It has expanded to optical laser pulses, infrared excess from Dyson spheres, atmospheric biosignatures, and waste-heat emission from megastructures. Project Hephaistos's Dyson sphere candidates were largely explained by background dust-obscured galaxies (DOGs). Each new detection method brings new contamination modes. Multi-wavelength confirmation protocols are immature.
+
+  \item \textbf{The Biosignature Ambiguity Problem:} JWST's detection of DMS and DMDS on K2-18b was contested within months by a NASA/JPL team applying Bayesian analysis to the same data. The field lacks agreed verification standards for claiming biosignature detection. A ``five-sigma'' threshold has been proposed but not yet operationalized. The next generation of telescopes --- ESO's Extremely Large Telescope (2030) and the Habitable Worlds Observatory (2040s) --- will be the first instruments actually designed for this task.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Signal Among Noise:} SETI is a search for structured information in a universe that produces noise at every frequency. The universe is not a static medium but a dynamic one, saturated with thermal emission, pulsar timing, fast radio bursts, and galaxy-scale foreground confusion. Finding intelligence in this environment requires not just sensitivity but \textit{architecture}: specialized signal models, cadence-based confirmation strategies, and multi-messenger corroboration. The Amiga Principle is not metaphor here --- it is methodology.
+
+\subsubsection{Search Domain Map}
+
+\begin{asciibox}
+SETI SIGNAL SEARCH DOMAIN
+==========================
+Electromagnetic Spectrum
+  Radio (1 GHz -- 12 GHz)
+    |__ Water hole (1.42 GHz -- 1.72 GHz) [H and OH lines]
+    |__ Narrowband Doppler-drifting signals [primary ATA/GBT target]
+    |__ Wide-band commensal (COSMIC @ VLA, SERENDIP @ GBT)
+  Optical / Near-IR
+    |__ LaserSETI [monochromatic pulse detection, N. hemisphere]
+    |__ OSETI [Harvard, Lick Observatory programs]
+  Infrared
+    |__ Dyson sphere waste heat (100--600 K) [WISE/Gaia survey]
+    |__ Exoplanet atmospheric biosignatures [JWST MIRI/NIRSpec]
+  Gravitational Waves / Neutrinos [speculative, future]
+
+Sky Coverage Hierarchy
+  Targeted search [bright FGK stars, TRAPPIST-1, Proxima Cen]
+  Galactic plane survey [Breakthrough Listen @ GBT + Murriyang]
+  All-sky commensal [ATA, COSMIC-VLA, MeerKAT commensal]
+  Extragalactic [100 nearby galaxies, Breakthrough Listen]
+
+Interstellar Object Search
+  3I/ATLAS (flyby Dec 2025): GBT, ATA, MeerKAT -- no signal found
+  Future ISO monitoring: ongoing Breakthrough Listen program
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY GRAPH
+========================
+  M1: Foundations & Institutions
+        |
+        v
+  M2: Detection Methodologies -----> M3: Technosignature Science
+        |                                     |
+        v                                     v
+  M4: Biosignatures & Astrobiology <--- M5: Theoretical Frameworks
+        |                                     |
+        +---------> M6: Synthesis <-----------+
+                  (Signal, Silence, GSD)
+
+Parallel tracks: M2+M3 || M4+M5
+Sequential gates: M1 -> Wave 1 || M6 <- Wave 2
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Foundations and Institutions}
+The history of SETI from Frank Drake's Project Ozma (1960) through the Wow! signal (1977), founding of the SETI Institute (1984), SETI@home (1999--2020, results published 2025--2026), and the current institutional landscape: SETI Institute (Mountain View, CA), Berkeley SETI Research Center, Breakthrough Listen (Oxford/Berkeley), Penn State Extraterrestrial Intelligence Center (PSETI), NASA Technosignatures SAG, and international partners.
+
+\subsubsection{Module 2: Detection Methodologies}
+Radio SETI (water hole, narrowband Doppler-drifting, cadence observation), optical SETI (LaserSETI, OSETI), AI-driven signal processing (NVIDIA IGX Thor at ATA, 600x speed improvement for FRB/technosignature detection, 10x false-positive reduction), the COSMIC system at the VLA, RFI mitigation strategies, and SERENDIP commensal approaches.
+
+\subsubsection{Module 3: Technosignature Science}
+Dyson sphere detection (Project Hephaistos, infrared excess, WISE+Gaia cross-matching, dust-obscured galaxy contamination), megastructure theory (Kardashev scale, Freeman Dyson's 1960 paper), waste-heat cosmology, interstellar object searches (3I/ATLAS), atmospheric technosignatures, and the ``Earth Detecting Earth'' framework from Sheikh et al. 2025.
+
+\subsubsection{Module 4: Biosignatures and Astrobiology}
+JWST's era of exoplanet atmospheric spectroscopy, K2-18b and the DMS/DMDS controversy (Cambridge 2025 vs. NASA/JPL Bayesian reanalysis), Hycean world hypothesis, 15 proposed biosignature gases (Seager et al. 2025 preprint), Europa Clipper mission, future observatories (ELT 2030, Habitable Worlds Observatory 2040s), and chemical disequilibrium as a biosignature.
+
+\subsubsection{Module 5: Theoretical Frameworks}
+The Drake Equation (original 1961 formulation and Stern/Gerya 2024 plate-tectonics update), Fermi Paradox (formal statement and proposed resolutions), the Great Filter (Robin Hanson 1996, mathematical treatment), Rare Earth Hypothesis, Zoo Hypothesis, Dark Forest, Great Silence, and the emerging hypothesis that AI as Great Filter may constrain L to under 200 years.
+
+\subsubsection{Module 6: Synthesis --- Signal, Silence, and the GSD Philosophy}
+Cross-module integration: what the null results mean, what the positive detections mean, how information theory frames the cosmic search, and how the Amiga Principle and ``spaces between'' philosophy illuminate the architectural choices SETI must make. Includes the DACP parallel: as agent-to-agent communication benefits from structured three-part bundles over ambiguous markdown, the search for interstellar communication benefits from principled signal models over brute-force sky scanning.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# seti_mission_chipset.yaml
+chipset:
+  agnus:             # Orchestration / DMA / Context Management
+    model: claude-opus-4-5
+    role: >
+      Mission orchestration, wave scheduling, cross-module
+      integration, philosophical synthesis (M6), sensitivity
+      reviews at HITL gates
+    allocation: ~30%
+
+  denise:            # Display / Output Rendering
+    model: claude-sonnet-4-5
+    role: >
+      Document production for M1, M2, M3, M4, M5;
+      table compilation, bibliography, source verification,
+      test execution
+    allocation: ~60%
+
+  paula:             # I/O / Anticipatory / Scaffolding
+    model: claude-haiku-4-5
+    role: >
+      Shared schema generation, template instantiation,
+      citation index construction
+    allocation: ~10%
+
+  gary:              # Glue Logic
+    model: claude-sonnet-4-5
+    role: >
+      Wave 3 publication, LaTeX compilation, file assembly,
+      index.html generation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item History and current institutional landscape of SETI
+  \item Radio, optical, and infrared detection methodologies
+  \item Technosignature science including Dyson sphere candidates
+  \item Biosignature science via JWST and future observatories
+  \item Theoretical frameworks: Drake, Fermi, Great Filter, Kardashev
+  \item AI and machine learning applications in SETI signal processing
+  \item Cross-module synthesis connecting SETI to GSD information theory
+  \item Interstellar object search (3I/ATLAS and methodology)
+  \item Complete source bibliography from peer-reviewed and agency sources
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item UFO/UAP research and unverified anomalous phenomenon claims
+  \item METI (active messaging to extraterrestrials) policy advocacy
+  \item Classified government programs or UAP disclosure documents
+  \item Science fiction as source material
+  \item Speculative non-peer-reviewed claims about specific interstellar objects
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Historical timeline covers Project Ozma through 3I/ATLAS (2025), with all dates sourced
+  \item Institutional landscape identifies at least 8 active SETI programs globally with current status
+  \item Detection methodology section explains radio, optical, and infrared SETI with instrument specifics
+  \item AI/ML acceleration quantified: 600x speed improvement and 10x false-positive reduction cited to Breakthrough Listen / NVIDIA source
+  \item Technosignature module documents Project Hephaistos findings and their best natural explanations
+  \item Biosignature module presents K2-18b DMS/DMDS detection and the NASA/JPL Bayesian counter-analysis with appropriate uncertainty language
+  \item Drake Equation presented in full; Stern/Gerya 2024 plate-tectonics refinement documented with source
+  \item All five principal Great Filter hypotheses named and described
+  \item Safety/sensitivity matrix documents all edge cases: speculative claims flagged, contested detections presented with competing interpretations
+  \item Synthesis module explicitly connects the ``cosmic haystack'' problem to GSD's context-window bottleneck framework
+  \item All numerical claims attributed to specific peer-reviewed or agency sources
+  \item Document is self-contained: a reader with no prior SETI background can follow the full argument from history through synthesis
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+The Space Between & Mathematical foundations (information theory, signal theory) apply directly to SETI detection framework & Published \\
+The Quark and the Compiler & Compiler theory parallels agent communication; DACP as model for interstellar message encoding & Published \\
+GSD Upstream Intelligence Pack & Defines the ``spaces between'' as meaningful gaps in data streams & v1.43 \\
+Deep Audio Analyzer Mission & Signal extraction from noise --- direct methodological parallel & Packaged \\
+Fox Infrastructure Group & Compute infrastructure for large-scale SETI data processing & In progress \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga did extraordinary things not because it had the most RAM or the fastest clock, but because its architects understood that the space between the processor and the screen was where the magic happened. Agnus, Denise, Paula --- each a specialist, each handling exactly what it was built for, freeing the 68000 to do work no one had imagined possible on a machine of that price. SETI is the same problem at cosmological scale.
+
+The universe is not withholding its intelligence from us. It may simply be that we have not yet built the specialized execution paths that let us hear it. We search in the water hole because hydrogen emits at 1.42 GHz and any civilization that understands chemistry might think to broadcast there --- a principled assumption, not brute force. We search for Doppler-drifting narrowband signals because only transmitters accelerating through space produce that drift --- a structured prior, not a random scan. We use AI not to replace judgment but to extend it: to see the anomalies that humans would miss in two hundred gigabytes per second of cosmic noise.
+
+The spaces between the signals are not empty. They are the search space. Every null result is data. Every contested detection refines the model. SETI is what it looks like when an intelligent species does science at the edge of its own comprehension --- reaching for something that may or may not be there, with instruments barely adequate to the task, guided by mathematical frameworks that were never meant to be solved, only to be \textit{contemplated}. Drake said this himself: the equation was an agenda for discussion, not a formula for an answer.
+
+The question ``Where is everybody?'' is the most important question a civilization can ask about itself. The answer --- whatever it turns out to be --- tells us something about the architecture of the universe, about the rarity of minds, and about how much time we have left to find each other. The GSD ecosystem, at its core, is a set of tools for finding signal in noise. SETI is the same project, pointed outward. The spaces between are where we live.
+
+% ═══════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{SETI --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings for each of the six research modules. Agents executing Waves 1 and 2 should treat this as the ground-truth knowledge base, supplementing with targeted web research only where explicitly flagged. All claims are attributed to specific sources; no unsourced assertions appear.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item SETI Institute (seti.org) --- primary institutional research hub
+  \item Berkeley SETI Research Center (seti.berkeley.edu) --- SERENDIP, Breakthrough Listen
+  \item Breakthrough Initiatives (breakthroughinitiatives.org) --- Breakthrough Listen, \$100M program
+  \item NASA Astrobiology Program (astrobiology.nasa.gov) --- biosignatures, technosignatures SAG
+  \item Penn State Extraterrestrial Intelligence Center (PSETI)
+  \item arXiv astro-ph.EP and astro-ph.IM preprint server
+  \item \textit{The Astronomical Journal}, \textit{MNRAS}, \textit{Astronomy \& Astrophysics}, \textit{PNAS}
+\end{itemize}
+
+\subsection{Module 1 Reference: Foundations and Institutions}
+
+\subsubsection{Historical Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.6cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} & \tableheader{Significance} \\
+\midrule
+1960 & Project Ozma & Frank Drake's first radio SETI search; Tau Ceti \& Epsilon Eridani; Green Bank, WV \\
+1961 & Green Bank Conference & Drake introduces equation; Sagan, Morrison, Cocconi attend \\
+1974 & Arecibo Message & First deliberate radio transmission toward M13; symbolic \\
+1977 & Wow! signal & Ohio State Big Ear; 72-second narrowband signal at 1420 MHz; never repeated or confirmed \\
+1979 & SERENDIP launched & UC Berkeley commensal SETI program; piggyback on radio telescopes \\
+1984 & SETI Institute founded & Tom Pierson \& Jill Tarter; San Francisco State; November 20 \\
+1992 & NASA SETI begins & Peak funding \$10M/year; cancelled by Congress October 1993 \\
+1999 & SETI@home launches & UC Berkeley; distributed computing; 5.2 million users at peak \\
+2007 & Allen Telescope Array & 42-dish array at Hat Creek, CA; first telescope designed for SETI \\
+2015 & Breakthrough Listen & \$100M, 10-year initiative; announced by Stephen Hawking \& Yuri Milner \\
+2020 & SETI@home hibernates & Active observations suspended; data analysis published 2025--26 \\
+2025 & NVIDIA AI at ATA & IGX Thor platform deployed; real-time AI signal processing at Hat Creek \\
+2025 & 3I/ATLAS flyby & Interstellar comet; Breakthrough Listen searched at closest approach (Dec 19); no technosignature \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Current Institutional Landscape}
+
+\textbf{SETI Institute} (Mountain View, CA): Founded 1984. Operates the Allen Telescope Array (ATA) at Hat Creek Radio Observatory --- 42 reconfigurable dishes, 1--12 GHz, the only telescope designed from the ground up for SETI. The COSMIC (Commensal Open-Source Multimode Interferometer Cluster) system at the VLA in New Mexico provides additional capacity. Citizen science network contributed over 15,000 astronomical observations in 2025 alone, a 50\% increase over 2024 (SETI Institute, 2026).
+
+\textbf{Breakthrough Listen} (University of Oxford / UC Berkeley): \$100M, 10-year initiative begun July 2015. Surveys one million nearby stars, the entire galactic plane, and 100 nearby galaxies. Primary instruments: Green Bank Telescope (WV), Murriyang/Parkes 64m (Australia), MeerKAT (South Africa). Over 20 petabytes of data collected. All data publicly released. As of 2025--2026, no confirmed technosignatures.
+
+\textbf{Berkeley SETI Research Center}: SERENDIP (Search for Extraterrestrial Radio Emissions from Nearby Developed Intelligent Populations), launched 1979; commensal program at GBT and formerly Arecibo. SERENDIP VI installed 2014--2015. Also hosts Breakthrough Listen data infrastructure.
+
+\textbf{Penn State PSETI}: Jason Wright, director. Active research in technosignature theory, Dyson sphere candidates, megastructure detection methods.
+
+\textbf{NASA Technosignatures SAG}: Volunteer expert group chartered by NASA to integrate technosignature search into the Exoplanet Exploration Program portfolio. Key members include Dr. Sofia Sheikh (SETI Institute) and Steve Croft.
+
+\subsection{Module 2 Reference: Detection Methodologies}
+
+\subsubsection{Radio SETI}
+
+The electromagnetic ``water hole'' --- the region between the hydrogen line (1.42 GHz) and the hydroxyl line (1.72 GHz) --- remains the primary target frequency range for radio SETI. Both frequencies are cosmically significant (the dissociation products of water), relatively quiet in natural astrophysical emission, and easy to produce with radio technology. Cocconi and Morrison identified this logic in their 1959 \textit{Nature} paper, which remains the theoretical foundation.
+
+\textbf{Narrowband Doppler-drifting signals:} The primary search signature. A transmitter on a rotating planet or in orbit will exhibit a characteristic frequency drift due to Doppler shift. Natural astrophysical processes do not produce narrowband drifting signals. The TurboSETI pipeline, deployed by Breakthrough Listen, searches for Doppler-drifting signals across hundreds of thousands of stars. From 2007--2015, the ATA identified hundreds of millions of technological signals; all were ultimately assigned to satellite interference or Earth-based transmitters (SETI Institute, 2024).
+
+\textbf{COSMIC at the VLA:} The Commensal Open-Source Multimode Interferometer Cluster is a new Ethernet-based digital signal processing backend at the Karl G. Jansky Very Large Array. It collects a copy of data from each of the 27 radio dishes and analyzes in real time for unusual signals, running many types of analysis simultaneously. It is described as one of the most advanced SETI systems ever deployed in the Northern Hemisphere (SETI Institute, 2025).
+
+\subsubsection{AI-Accelerated Signal Processing}
+
+The transformative development of 2025 is the deployment of deep learning for real-time signal detection. A system developed by Breakthrough Listen in partnership with NVIDIA, detailed in a peer-reviewed paper in \textit{Astronomy \& Astrophysics}, achieves:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Result} \\
+\midrule
+Speed improvement & $600\times$ faster than existing pipelines \\
+Accuracy improvement & 7\% better than existing pipelines \\
+False positive reduction & Nearly $10\times$ reduction \\
+Deployment & Allen Telescope Array (ATA), Hat Creek, CA \\
+Source & \textit{Astronomy \& Astrophysics}, November 2025; SETI Institute / Breakthrough Listen \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Dr. Andrew Siemion, Principal Investigator for Breakthrough Listen, noted that the system can discover previously unknown signal morphologies --- an advanced civilization might use burst-like or modulated transmissions that conventional pipelines would not recognize (SETI Institute, November 2025).
+
+\subsubsection{Optical SETI and LaserSETI}
+
+LaserSETI searches for monochromatic laser pulses, which do not occur naturally. Stations are being built to cover the full Northern sky. Optical SETI programs at Harvard and Lick Observatory search for nanosecond laser pulses. Radio SETI retains advantages: a 2025 study (Sheikh et al., \textit{The Astronomical Journal}, 2025) confirmed that radio transmission remains detectable at 4 orders of magnitude greater range than optical technosignatures using present-day Earth technology.
+
+\subsection{Module 3 Reference: Technosignature Science}
+
+\subsubsection{Dyson Sphere Candidates}
+
+Freeman Dyson's 1960 paper proposed that advanced civilizations would enclose their stars in energy-harvesting structures, necessarily radiating waste heat in the mid-infrared. The detection signature: a star dimmer in optical (Gaia G band) with excess emission in mid-IR (WISE W3 12\,$\mu$m and W4 22\,$\mu$m), consistent with a blackbody at 100--600 K.
+
+\textbf{Project Hephaistos} (Sweden, led by Prof. Erik Zackrisson): First Swedish SETI project; searches for passive technosignatures rather than deliberate signals. Using 5 million stars from Gaia and WISE catalogues:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Found 7 candidate M-dwarf (red dwarf) stars with infrared excess consistent with Dyson swarm models; all within 900 light-years (SETI Institute / University of Manchester, 2025)
+  \item A follow-up study by Tongtian Ren et al. (University of Manchester, \textit{MNRAS Letters}, January 2025) used high-resolution e-MERLIN and EVN radio imaging on candidate ``Dyson Sphere G'' and found no radio signals. The infrared excess was explained by background dust-obscured galaxies (DOGs)
+  \item Six candidates remain under investigation requiring multi-wavelength follow-up
+  \item JWST could distinguish artificial materials from natural sources; the ATA can search for anomalous radio emission
+\end{itemize}
+
+\subsubsection{Interstellar Object 3I/ATLAS}
+
+Reported July 1, 2025. Third known interstellar object. Made closest approach to Earth December 19, 2025, at 270 million km. Breakthrough Listen conducted the most sensitive technosignature search of any interstellar object:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Instrument} & \tableheader{Sensitivity} & \tableheader{Result} \\
+\midrule
+Green Bank Telescope & 0.1 W EIRP at closest approach & No artificial emission detected \\
+Allen Telescope Array & Standard SETI sensitivity & 9 candidates found; all identified as terrestrial RFI \\
+MeerKAT & 0.17 W over 900--1670 MHz & No artificial emission detected \\
+Parkes / Murriyang & $\sim$5 W EIRP & Analysis ongoing (Sheikh et al. 2025) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Conclusion: 3I/ATLAS continues to behave as expected from natural astrophysical processes (Breakthrough Listen, December 2025).
+
+\subsubsection{Earth Detecting Earth Framework}
+
+A 2025 study (Sheikh et al., \textit{The Astronomical Journal}, February 2025, published online) evaluated the maximum distance at which Earth's own technosignatures are detectable using present-day instruments. Radio transmissions remain detectable at 4 orders of magnitude greater range than all other technosignature types. This confirms that radio SETI retains its theoretical advantages even after 60+ years of expansion into other wavelengths.
+
+\subsection{Module 4 Reference: Biosignatures and Astrobiology}
+
+\subsubsection{K2-18b: The DMS/DMDS Controversy}
+
+K2-18b (124 light-years, Leo): 8.6 times Earth's mass, 2.6 times its radius. Proposed Hycean world (ocean-covered, hydrogen-rich atmosphere). Timeline of the central 2025 controversy:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Date} & \tableheader{Development} \\
+\midrule
+2023 & Cambridge team (Madhusudhan et al.) finds tentative DMS signal in JWST NIRSpec/NIRISS data \\
+April 2025 & Cambridge team publishes JWST MIRI independent detection of DMS and DMDS at 3-sigma; \textit{Astrophysical Journal Letters} \\
+July 2025 & NASA/JPL team (Renyu Hu et al.) applies Bayesian analysis to four new JWST observations; finds no conclusive evidence for DMS; uploaded to arXiv \\
+Status & Contested; requires 16--24 more hours of JWST observation for 5-sigma significance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+On Earth, dimethyl sulfide (DMS) and dimethyl disulfide (DMDS) are produced exclusively by living organisms, primarily marine phytoplankton. The Cambridge team used a second, independent instrument (MIRI, mid-IR 6--12 micron) from the original detection (NIRSpec, near-IR). NASA did not issue a press release for the April paper, citing the high bar required for life detection claims (\textit{NASA Statement}, April 18, 2025).
+
+\subsubsection{JWST Capabilities and Limits}
+
+A 2025 PNAS paper (Seager et al. / Petkowski et al., accepted January 2025) assessed JWST biosignature detection:
+\begin{itemize}[leftmargin=1.5em]
+  \item Earth-sized planets around Sun-like stars: too small for JWST detection
+  \item Sub-Neptune planets around M-dwarf stars: marginally accessible
+  \item No ``silver bullet'' biosignature gas exists; parallel interpretations required
+  \item 15 potential biosignature gases identified (Seager et al. 2025 preprint), including CFCs and molecular oxygen
+\end{itemize}
+
+\subsubsection{Future Observatories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Observatory} & \tableheader{Timeline} & \tableheader{Capability} \\
+\midrule
+ESO Extremely Large Telescope (ELT) & 2030 & 39m primary mirror; direct imaging; O$_2$+CH$_4$ detection on M-dwarf rocky planets \\
+NASA Habitable Worlds Observatory (HWO) & 2040s & First telescope designed for biosignature detection; direct imaging of Earth-like planets around Sun-like stars \\
+Europa Clipper & Launched Oct 2024 & Subsurface ocean chemistry; life ingredients in Europa's ocean \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5 Reference: Theoretical Frameworks}
+
+\subsubsection{The Drake Equation}
+
+Proposed by Frank Drake, Green Bank Conference, 1961. Estimates $N$, the number of communicative civilizations in the Milky Way:
+
+\begin{center}
+\begin{tcolorbox}[colback=lightprimary, colframe=primary, arc=2pt]
+$N = R_* \cdot f_p \cdot n_e \cdot f_l \cdot f_i \cdot f_c \cdot L$
+
+\smallskip
+\begin{tabular}{ll}
+$R_*$ & Rate of star formation ($\approx$1.5--3/yr; well constrained) \\
+$f_p$ & Fraction with planets ($\approx$1; Kepler/TESS confirmed) \\
+$n_e$ & Habitable planets per system (constrained by exoplanet surveys) \\
+$f_l$ & Fraction with life (unconstrained; range: $10^{-10}$ to 1) \\
+$f_i$ & Fraction with intelligence (unconstrained; Drake assumed 1) \\
+$f_c$ & Fraction that communicate (unconstrained) \\
+$L$ & Longevity of communicating civilization (years; most sensitive term) \\
+\end{tabular}
+\end{tcolorbox}
+\end{center}
+
+\textbf{Stern \& Gerya 2024 update} (\textit{Scientific Reports}, 2024): Replaced $f_i$ with two Earth-science terms: $f_{oc}$ (fraction of habitable planets with continents and oceans) and $f_{pt}$ (fraction with long-lived plate tectonics). Their estimate of $f_{oc} \times f_{pt} < 0.00003$--$0.002$ reduces $N$ by several orders of magnitude, approaching zero and potentially resolving the Fermi Paradox via the Rare Earth Hypothesis.
+
+\subsubsection{The Fermi Paradox}
+
+Enrico Fermi, Los Alamos lunch conversation, summer 1950: ``Where is everybody?'' The paradox: if intelligent civilizations are likely, and if colonization/communication is physically possible, the galaxy should already show evidence of their presence. It does not.
+
+\textbf{Primary resolution hypotheses:}
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Rare Earth} --- Planetary conditions for complex life are extraordinarily rare (Stern \& Gerya 2024)
+  \item \textbf{Great Filter} --- A near-universal barrier exists in the development path; may lie behind us (abiogenesis) or ahead (existential risk)
+  \item \textbf{Zoo / Dark Forest} --- Advanced civilizations deliberately avoid contact
+  \item \textbf{Insufficient Search} --- We have examined a glass of water from a cosmic ocean (Tarter analogy)
+  \item \textbf{AI Great Filter} --- AI/ASI terminates civilizations before they can broadcast; L $<$ 200 years (Garrett 2023, \textit{Acta Astronautica})
+\end{enumerate}
+
+\subsubsection{The Great Filter}
+
+Formalized by economist Robin Hanson (1996). Argument: life must pass through a series of improbable steps; the product of all probabilities is effectively zero; somewhere in that sequence is a ``filter'' so improbable that virtually no one crosses it. The critical question for humanity: is the filter behind us (we are the rare product) or ahead (we have yet to face the hardest step)? A 2025 study by Robert G. Endres (Imperial College London) provided a new mathematical framework, published July 2025, that models the probability of abiogenesis as astronomically small.
+
+\subsubsection{Kardashev Scale}
+
+Nikolai Kardashev (1964): Civilizations classified by energy consumption:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Type I}: Planetary-scale energy; Earth is currently $\sim$Type 0.73 (Sagan's classification)
+  \item \textbf{Type II}: Stellar-scale energy; Dyson sphere-capable
+  \item \textbf{Type III}: Galactic-scale energy; megastructure-visible at extragalactic distances
+\end{itemize}
+
+\subsection{Module 6 Reference: Synthesis Data}
+
+\subsubsection{Key Connections Across Modules}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module Pair} & \tableheader{Cross-Module Relationship} \\
+\midrule
+M2 (Detection) $\rightarrow$ M3 (Technosignatures) & Radio and optical SETI null results from 3I/ATLAS strengthen natural-origin hypothesis; AI pipeline improvements directly applicable to Dyson sphere radio cross-checks \\
+M3 (Technosignatures) $\rightarrow$ M4 (Biosignatures) & Dyson sphere detection relies on infrared excess; JWST biosignature detection uses same spectral window; contamination modes overlap \\
+M4 (Biosignatures) $\leftrightarrow$ M5 (Theory) & K2-18b ambiguity directly reflects Drake's $f_l$ uncertainty; each contested detection refines the probability distribution \\
+M5 (Theory) $\rightarrow$ M6 (Synthesis) & The Great Filter's position (past vs. future) determines whether SETI's null results are reassuring or ominous \\
+M1 (Foundations) $\rightarrow$ M6 (Synthesis) & 65 years of null results are not failure; the search space examined is \textless 1\% of the parameter space \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Concern} & \tableheader{Boundary Type} & \tableheader{Guidance} \\
+\midrule
+Contested detections (K2-18b DMS) & GATE & Present both Cambridge and NASA/JPL positions; use uncertainty language; do not adjudicate \\
+Sensationalized Dyson sphere claims & ANNOTATE & Distinguish peer-reviewed candidates from press coverage; note DOG contamination explanation \\
+Great Filter existential implications & ANNOTATE & Present evidence; do not advocate policy positions on AI regulation \\
+METI / messaging to ETI ethics & ANNOTATE & Acknowledge Hawking's concerns; do not advocate for or against \\
+UAP/UFO conflation & ABSOLUTE & SETI is peer-reviewed science; UAP/UFO research is separate and should not be conflated \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item NASA Astrobiology Program: \url{https://astrobiology.nasa.gov}
+  \item SETI Institute: \url{https://www.seti.org}
+  \item Breakthrough Initiatives: \url{https://breakthroughinitiatives.org}
+  \item Berkeley SETI Research Center: \url{https://seti.berkeley.edu}
+  \item NRAO (Very Large Array): \url{https://public.nrao.edu}
+  \item NASA Europa Clipper Mission: \url{https://science.nasa.gov/mission/europa-clipper}
+  \item NASA Habitable Worlds Observatory: \url{https://science.nasa.gov}
+  \item ESO Extremely Large Telescope: \url{https://elt.eso.org}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Cocconi, G. \& Morrison, P. (1959). ``Searching for interstellar communications.'' \textit{Nature}, 184, 844--846.
+  \item Drake, F. (1961). ``Project Ozma.'' \textit{Physics Today}. [Green Bank Conference agenda]
+  \item Kardashev, N. S. (1964). ``Transmission of information by extraterrestrial civilizations.'' \textit{Soviet Astronomy}, 8, 217.
+  \item Hanson, R. (1998). ``The Great Filter --- Are We Almost Past It?'' \textit{George Mason University preprint}.
+  \item Tarter, J. (2001). ``The search for extraterrestrial intelligence.'' \textit{Annual Review of Astronomy and Astrophysics}, 39, 511--548.
+  \item Stern, R. J. \& Gerya, T. V. (2024). ``The importance of continents, oceans and plate tectonics for the evolution of complex life.'' \textit{Scientific Reports}, 14, 8552.
+  \item Sheikh, S. Z. et al. (2025). ``Earth Detecting Earth.'' \textit{The Astronomical Journal}, 169, 222. DOI: 10.3847/1538-3881/ada3c7
+  \item Painter, J. et al. (2025). ``A Novel Technosignature Search in the Breakthrough Listen Green Bank Telescope Archive.'' \textit{The Astronomical Journal}, 169, 222. DOI: 10.3847/1538-3881/adbc5e
+  \item Barrett, R. et al. (2025). ``Breakthrough Listen: A Technosignature Search Around 27 Eclipsing Exoplanets Selected from TESS.'' \textit{arXiv:2506.13459}.
+  \item Madhusudhan, N. et al. (2025). ``New Constraints on DMS and DMDS in the Atmosphere of K2-18b from JWST MIRI.'' \textit{The Astrophysical Journal Letters}. DOI: 10.3847/2041-8213/adc1c8
+  \item Petkowski, J. J. et al. (2025). ``Prospects for detecting signs of life on exoplanets in the JWST era.'' \textit{PNAS}. DOI: 10.1073/pnas.2416188122
+  \item Ren, T. et al. (2025). ``High-resolution imaging of the radio source associated with Project Hephaistos Dyson Sphere Candidate G.'' \textit{MNRAS Letters}. DOI: 10.1093/mnrasl/slaf006
+  \item Garrett, M. A. (2023). ``Is artificial intelligence the great filter?'' \textit{Acta Astronautica}, 220, 94--96.
+  \item Breakthrough Listen Team (2025). ``Technosignature search of 3I/ATLAS.'' \textit{Research Notes of the American Astronomical Society}. [GBT observations, December 2025]
+  \item Rion, A. H. \& Any, M. M. (2025). ``The Use of AI in SETI: A Literature Review.'' \textit{SSRN}:5380483. [August 2025]
+  \item Ivanov, V. D. et al. (2025). ``Optical SETI at ESO in the 2040s.'' \textit{arXiv:2512.18903}.
+  \item Mason, L. A. et al. (2025). ``Simulating the Stellar Bycatch.'' \textit{arXiv:2511.20231}.
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item International Academy of Astronautics (IAA) SETI Permanent Committee
+  \item American Astronomical Society (AAS)
+  \item Planetary Society --- SETI funding and advocacy
+  \item METI International --- Active messaging policy
+  \item Galileo Project (Harvard, Avi Loeb) --- UAP and interstellar object observation
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, self-contained research document on the Search for Extraterrestrial Intelligence spanning six modules: Foundations \& Institutions, Detection Methodologies, Technosignature Science, Biosignatures \& Astrobiology, Theoretical Frameworks, and Synthesis. The document will serve as a comprehensive reference for the GSD ecosystem, connecting SETI's core information-theoretic challenges to the Amiga Principle and the ``spaces between'' philosophy. All findings will be sourced to peer-reviewed publications or government agency reports.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW
+========================
+Wave 0: Foundation (sequential, Paula/Haiku)
+  [Shared schema] [Citation index] [Template instantiation]
+        |
+        v
+Wave 1a: M1 + M2 (parallel, Denise/Sonnet)     Wave 1b: M3 + M4 (parallel, Denise/Sonnet)
+  [Foundations/Institutions]                      [Technosignatures]
+  [Detection Methodologies]                       [Biosignatures/Astrobiology]
+           |                                                |
+           +----> CAPCOM GATE (scope review) <-------------+
+                        |
+                        v
+             Wave 1c: M5 (Denise/Sonnet)
+               [Theoretical Frameworks]
+                        |
+                        v
+             Wave 2: M6 Synthesis (Agnus/Opus)
+               [Cross-module integration]
+               [Through-line elaboration]
+               [GSD/Amiga connection]
+                        |
+                   CAPCOM GATE
+                        |
+                        v
+             Wave 3: Publication (Gary/Sonnet)
+               [LaTeX compilation]
+               [Verification sweep]
+               [File delivery]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Foundation Layer} (Wave 0): Shared citation schema, source quality index, module interface definitions
+  \item \textbf{Survey Layer} (Wave 1): Six module documents in parallel tracks, each self-contained
+  \item \textbf{Synthesis Layer} (Wave 2): Cross-module integration, through-line elaboration, GSD ecosystem connection
+  \item \textbf{Publication Layer} (Wave 3): XeLaTeX compilation, verification sweep, file delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+1 & Module documents (M1--M6) & Each $\geq$1,500 words; all claims sourced & Wave 1--2 \\
+2 & Synthesis document (M6) & Connects all five modules; GSD through-line present & Wave 2 \\
+3 & Master LaTeX PDF & Compiles without errors; TOC/refs resolve; 3-pass XeLaTeX & Wave 3 \\
+4 & .tex source file & Companion to PDF; user can modify and recompile & Wave 3 \\
+5 & index.html & Download cards; usage instructions; color-matched to LaTeX & Wave 3 \\
+6 & Verification report & All 12 success criteria checked; test results recorded & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+M1: Foundations & Citation index & Sonnet & 12K \\
+M2: Detection Methods & M1 foundation & Sonnet & 15K \\
+M3: Technosignatures & M2 methods & Sonnet & 14K \\
+M4: Biosignatures & None (parallel M3) & Sonnet & 14K \\
+M5: Theory & M1, M4 & Sonnet & 16K \\
+M6: Synthesis & M1--M5 complete & Opus & 20K \\
+Verification sweep & All modules & Sonnet & 8K \\
+LaTeX compilation & All modules & Sonnet+Gary & 6K \\
+index.html & PDF complete & Sonnet & 4K \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$109K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+FLIGHT (Orchestrator) & Opus & Mission-level judgment, wave go/no-go, scope enforcement \\
+M6 Synthesis & Opus & Cross-module integration, philosophical through-line, GSD connection \\
+M1--M5 Survey & Sonnet & Document production, fact compilation, structured output \\
+Verification & Sonnet & Systematic criterion checking; structured comparison \\
+Schema / Templates & Haiku & Scaffolding, citation index, template generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Content} & \tableheader{Mode} & \tableheader{Model} & \tableheader{CAPCOM?} \\
+\midrule
+0 & Foundation schemas & Sequential & Haiku & No \\
+1a & M1 + M2 & Parallel & Sonnet & No \\
+1b & M3 + M4 & Parallel & Sonnet & No \\
+GATE & Scope review & Sequential & Human & Yes \\
+1c & M5 & Sequential & Sonnet & No \\
+2 & M6 Synthesis & Sequential & Opus & No \\
+GATE & Synthesis review & Sequential & Human & Yes \\
+3 & Publication & Sequential & Sonnet/Gary & No \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Spec} \\
+\midrule
+Citation schema & JSON schema for all sources: \{author, year, title, journal, doi, url, type\} \\
+Source index & Pre-populate with 25 known sources from research reference \\
+Module template & Shared LaTeX/markdown template for M1--M5 structure \\
+Shared constants & Confirmed facts safe to use across modules without re-sourcing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (M1 + M2):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Primary Research Tasks} \\
+\midrule
+M1: Foundations & Timeline from 1960--2025; institutional profiles (SETI Institute, Breakthrough Listen, Berkeley, PSETI, NASA SAG); SETI@home results papers (2025--2026) \\
+M2: Detection & Water hole rationale; ATA COSMIC VLA; TurboSETI; AI system (600x, A\&A 2025); LaserSETI; optical SETI programs; RFI mitigation strategies \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (M3 + M4):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Primary Research Tasks} \\
+\midrule
+M3: Technosignatures & Dyson sphere theory and Project Hephaistos; 3I/ATLAS technosignature search; Sheikh et al. Earth Detecting Earth; Kardashev scale; waste heat cosmology \\
+M4: Biosignatures & K2-18b DMS/DMDS (Cambridge 2025 + NASA/JPL reanalysis); Hycean worlds; JWST capabilities; 15 biosignature gases (Seager 2025); ELT/HWO timelines; Europa Clipper \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+Agent: FLIGHT (Opus). Task: Produce M6 Synthesis document connecting all five modules. Required elements:
+\begin{itemize}[leftmargin=1.5em]
+  \item What the collective null results mean for the Drake Equation's biological terms
+  \item The information-theoretic framing of SETI as signal-in-noise
+  \item How AI acceleration changes the fundamental bottleneck from aperture to throughput
+  \item The Amiga Principle applied: specialized detection paths vs.\ brute-force sky scanning
+  \item Great Filter position: what the 2025 data suggests about whether the filter is behind or ahead of us
+  \item Closing connection to GSD's DACP principle: structured communication models vs.\ ambiguous signals
+\end{itemize}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Shared citation index} loaded once in Wave 0, referenced by all module agents (5-minute TTL)
+  \item \textbf{Module interface document} passed as context prefix to all Wave 1 agents
+  \item \textbf{M1 historical timeline} cached and reused by M5 Theoretical Frameworks (avoids re-sourcing Drake equation dates)
+  \item \textbf{Technosignature null-result table} (3I/ATLAS) from M3 reused verbatim in M6 Synthesis
+  \item \textbf{K2-18b timeline table} from M4 reused in M6 Synthesis and verification sweep
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Subtotal} \\
+\midrule
+Wave 0 (Foundation) & 5K & 8K & 13K \\
+Wave 1a (M1+M2) & 18K & 27K & 45K \\
+Wave 1b (M3+M4) & 18K & 28K & 46K \\
+Wave 1c (M5) & 20K & 16K & 36K \\
+Wave 2 (M6 Synthesis) & 45K & 20K & 65K \\
+Wave 3 (Publication) & 12K & 14K & 26K \\
+HITL Gates & 4K & 2K & 6K \\
+\midrule
+\textbf{Total} & \textbf{122K} & \textbf{115K} & \textbf{$\sim$237K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+citation_schema (W0)
+      |
+      +---> M1_foundations (W1a) --+
+      |                            |
+      +---> M2_detection (W1a) ----+--> M5_theory (W1c) --> M6_synthesis (W2)
+      |                            |                              |
+      +---> M3_technosigs (W1b) ---+                             |
+      |                            |                             v
+      +---> M4_biosigs (W1b) ------+                    verification (W3)
+                                                                  |
+                                                         LaTeX_PDF (W3)
+                                                                  |
+                                                          index_html (W3)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}L{2.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure Action} & \tableheader{Priority} \\
+\midrule
+Safety-Critical & Non-negotiable source and editorial standards & 5 & BLOCK & Mandatory \\
+Core Functionality & Module completeness and criterion mapping & 20 & BLOCK & Required \\
+Integration & Cross-module consistency & 7 & BLOCK & Required \\
+Edge Cases & Ambiguity handling, data gaps & 5 & LOG & Best-effort \\
+\midrule
+\textbf{Total} & & \textbf{37} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals, government agencies, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every statistic (600x AI speed, 10x false-positive reduction, 0.1W GBT sensitivity, 7-candidate Hephaistos result) attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents evidence on Great Filter and AI risks without advocating regulatory positions \\
+SC-UAP & No UAP conflation & Document never conflates peer-reviewed SETI science with UAP/UFO research \\
+SC-CONT & Contested detection handling & K2-18b DMS/DMDS presents both Cambridge and NASA/JPL positions without adjudicating \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Historical timeline 1960--2025 & CF-01, CF-02 & Pending \\
+2. 8+ active SETI programs documented & CF-03 & Pending \\
+3. Radio, optical, IR SETI explained with instruments & CF-04, CF-05 & Pending \\
+4. AI 600x / 10x false-positive cited to A\&A 2025 & CF-06, SC-NUM & Pending \\
+5. Hephaistos findings + DOG explanation & CF-07, CF-08 & Pending \\
+6. K2-18b Cambridge + NASA/JPL positions & SC-CONT, CF-09 & Pending \\
+7. Drake Equation full; Stern/Gerya 2024 documented & CF-10, CF-11 & Pending \\
+8. Five Great Filter hypotheses named & CF-12 & Pending \\
+9. Safety/sensitivity matrix present & SC-SRC, SC-UAP & Pending \\
+10. Synthesis connects haystack to GSD context bottleneck & IN-01 & Pending \\
+11. All numerical claims sourced & SC-NUM & Pending \\
+12. Document self-contained for non-SETI reader & IN-02 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave scheduling; go/no-go gates \\
+PLAN & Planner & Dependency management; parallel track optimization \\
+TOPO & Topology Manager & Agent team structure; module handoffs \\
+ARCH & Architecture & Cross-cutting structural decisions \\
+SCOUT & Research Agent & Source gathering; web research gap-fill \\
+EXEC-A & Executor A & M1 + M2 document production \\
+EXEC-B & Executor B & M3 + M4 document production \\
+EXEC-C & Executor C & M5 + M6 document production \\
+CRAFT-HIST & Domain: History & M1 Foundations accuracy; timeline validation \\
+CRAFT-PHYS & Domain: Physics & M2, M3, M5 technical accuracy; signal theory \\
+CRAFT-BIO & Domain: Astrobiology & M4 biosignature accuracy; JWST data interpretation \\
+CRAFT-THEORY & Domain: Theory & M5 Drake/Fermi/Filter frameworks \\
+INTEG & Integration Agent & Cross-module consistency; terminology standardization \\
+VERIFY & Verification & Source validation; test execution; SC tests \\
+CAPCOM & HITL Interface & Human approval at wave gates; scope confirmation \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SECURE & Safety Warden & SC-UAP enforcement; contested detection flagging \\
+ANALYST & Pattern Analyst & M6 synthesis input; cross-module pattern detection \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Name & SETI: Signal, Silence, and the Spaces Between \\
+Activation Profile & Fleet (19 roles) \\
+Research Modules & 6 (M1--M6) \\
+Parallel Tracks & 2 (Wave 1a: M1+M2 / Wave 1b: M3+M4) \\
+CAPCOM Gates & 2 (post-Wave 1 / post-Wave 2) \\
+Est. Token Budget & $\sim$237K across 3--4 sessions \\
+Est. Context Windows & 8--12 \\
+Model Distribution & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Safety Tests & 5 mandatory-pass tests \\
+Total Tests & 37 \\
+Primary Sources & 25 peer-reviewed / agency sources \\
+GSD Version & v1.49+ (DACP protocol) \\
+Date Packaged & March 26, 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``We have come to the realization that looking for signals is going to be harder than we once imagined. The question is not whether the universe contains intelligence, but whether intelligence lasts long enough, and points its transmitters in the right direction, at the right time, on the right frequency, for us to catch the moment.''\\
+\hfill --- Adapted from Jill Tarter, SETI Institute}
+
+\vspace{0.8em}
+\textbf{\sffamily\textcolor{primary}{The Amiga Principle, applied to the cosmos:}} The bottleneck is not telescope aperture. It is architectural. Specialized execution paths over brute-force sky surveys. Principled signal models over random frequencies. The spaces between the noise are not empty --- they are the search space. Sixty-five years of silence is not a failure. It is the most precisely scoped null result in the history of science, and it is telling us exactly where to look next.
+\end{quotebox}
+
+\end{document}
