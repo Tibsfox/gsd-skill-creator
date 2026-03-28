@@ -1,0 +1,193 @@
+/* EAZ — Zodiac Red / Celestial Gold / Night Sky Navy theme
+   Brand foundation loaded from brand.css */
+
+/* ===========================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =========================================== */
+
+:root {
+  --zodiac-red: #B71C1C;
+  --zodiac-red-light: #FFEBEE;
+  --zodiac-red-mid: #C62828;
+  --zodiac-red-dark: #7f0000;
+  --celestial-gold: #F9A825;
+  --celestial-gold-light: #FFF8E1;
+  --celestial-gold-mid: #F57F17;
+  --night-navy: #1A237E;
+  --night-navy-light: #E8EAF6;
+  --night-navy-mid: #283593;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--zodiac-red);
+  --link-hover: var(--zodiac-red-dark);
+  --accent: var(--zodiac-red);
+  --accent-light: var(--zodiac-red-light);
+  --accent-dark: var(--zodiac-red-dark);
+  --card-bg: white;
+  --card-border: #E8D5B7;
+  --card-shadow: rgba(183,28,28,0.12);
+  --border: #E8D5B7;
+  --parchment: #F5F0E6;
+}
+
+/* ===========================================
+   2. HEADER — night sky / zodiac red gradient
+   =========================================== */
+
+header {
+  background: linear-gradient(135deg, #0d0f2e 0%, #1A237E 40%, #4A0E0E 75%, #7f0000 100%);
+  border-bottom: 4px solid var(--celestial-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 40%, rgba(249,168,37,0.15) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 60%, rgba(183,28,28,0.2) 0%, transparent 55%),
+              radial-gradient(circle at 50% 20%, rgba(255,255,255,0.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #FFF8E1; }
+header .subtitle { color: #FFCC80; }
+
+/* ===========================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =========================================== */
+
+h2 {
+  color: var(--night-navy);
+  border-bottom-color: var(--night-navy-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--zodiac-red); }
+
+/* ===========================================
+   4. THEMED COMPONENTS
+   =========================================== */
+
+blockquote {
+  background: var(--celestial-gold-light);
+  border-left: 4px solid var(--celestial-gold);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--night-navy); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(183,28,28,0.04); }
+tr:hover { background: rgba(183,28,28,0.08); }
+
+pre {
+  background: #0d0f2e;
+  color: #E8EAF6;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--celestial-gold-mid);
+}
+code {
+  background: var(--zodiac-red-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--zodiac-red);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===========================================
+   5. CARDS — border-color hover
+   =========================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #E8D5B7;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(183,28,28,0.12); border-color: var(--zodiac-red); }
+
+/* ===========================================
+   6. STATS — grid layout
+   =========================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #E8D5B7;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--zodiac-red);
+}
+
+/* ===========================================
+   7. TAGS
+   =========================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-hist { background: var(--night-navy-light); color: var(--night-navy); }
+.tag-cult { background: var(--zodiac-red-light); color: var(--zodiac-red); }
+.tag-myth { background: var(--celestial-gold-light); color: var(--celestial-gold-mid); }
+.tag-elem { background: #E8F5E9; color: #2E7D32; }
+.tag-live { background: #FFF3E0; color: #E65100; }
+
+/* ===========================================
+   8. SPECIAL COMPONENTS
+   =========================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #E8D5B7;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--zodiac-red); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--zodiac-red-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--zodiac-red);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #FFCDD2; text-decoration: none; }
+
+/* ===========================================
+   9. RESPONSIVE
+   =========================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
