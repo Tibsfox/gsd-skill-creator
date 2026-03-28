@@ -100,6 +100,7 @@
     { id: 'PKD', name: 'Philip K. Dick', path: 'PKD/index.html' },
     { id: 'PJM', name: 'Pearl Jam', path: 'PJM/index.html' },
     { id: 'PLT', name: 'PNW Planting', path: 'PLT/index.html' },
+    { id: 'PTG', name: 'Paper That Grows', path: 'PTG/index.html' },
     { id: 'PIN', name: 'Post-Industrial', path: 'PIN/index.html' },
     { id: 'PMG', name: 'Pi-Mono + GSD', path: 'PMG/index.html' },
     { id: 'PPM', name: 'Pike Place Market', path: 'PPM/index.html' },
