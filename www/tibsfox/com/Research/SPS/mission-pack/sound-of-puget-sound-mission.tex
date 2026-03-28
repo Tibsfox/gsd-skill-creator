@@ -1,0 +1,813 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{microtype}
+
+% ── Color Scheme: Puget Sound / Bioacoustics ─────────────────────────────────
+\definecolor{primary}{HTML}{004D40}       % Deep teal — Puget Sound depth
+\definecolor{secondary}{HTML}{1A237E}     % Deep navy — night forest / Part A echo
+\definecolor{tertiary}{HTML}{33691E}      % Fern green — old-growth understory
+\definecolor{accent}{HTML}{0277BD}        % Sky blue — Salish Sea surface
+\definecolor{partE}{HTML}{4A148C}         % Deep purple — synthesis/completion
+\definecolor{lightprimary}{HTML}{E0F2F1}
+\definecolor{lightsecondary}{HTML}{E8EAF6}
+\definecolor{lighttertiary}{HTML}{F1F8E9}
+\definecolor{lightE}{HTML}{F3E5F5}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{blockred}{HTML}{B71C1C}
+\definecolor{gold}{HTML}{F57F17}
+\definecolor{coral}{HTML}{BF360C}
+
+% ── Color aliases for each part ───────────────────────────────────────────────
+\definecolor{colorA}{HTML}{1A237E}   % Part A — navy (music)
+\definecolor{colorB}{HTML}{004D40}   % Part B — teal (nature)
+\definecolor{colorC}{HTML}{E65100}   % Part C — amber (synthesis/fire)
+\definecolor{colorD}{HTML}{4527A0}   % Part D — violet (fractal depth)
+\definecolor{colorE}{HTML}{1B5E20}   % Part E — dark green (completion/growth)
+
+% ── Typography ─────────────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ────────────────────────────────────────────────────────
+\tcbuselibrary{breakable,skins}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\large\hspace{8pt}#1\hspace{8pt}}}}%
+  \vspace{0.6em}\par%
+}
+
+\newcommand{\partheader}[3]{%
+  \noindent\colorbox{#3}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\Large\hspace{10pt}PART #1 \quad #2\hspace{10pt}}}}%
+  \vspace{0.8em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{warnbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{greenbox}{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{amberbox}{
+  colback=lightsecondary, colframe=colorC,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily\textcolor{primary}{#1}} \textcolor{darktext}{#2}\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tblhdr}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ─────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Sound of Puget Sound — A·B·C·D·E}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true, linkcolor=accent, urlcolor=accent,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={The Sound of Puget Sound -- Complete A-B-C-D-E Mission Package},
+}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ─────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE · FLEET+ ACTIVATION}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{10cm}{0.4pt}}
+
+\vspace{1cm}
+{\fontsize{34}{40}\selectfont\bfseries\sffamily\textcolor{primary}{The Sound of Puget Sound}}
+
+\vspace{0.5cm}
+{\fontsize{14}{18}\selectfont\sffamily\textcolor{secondary}{Complete A–B–C–D–E Release Matrix Mission Package}}
+
+\vspace{0.8cm}
+{\large\sffamily\textcolor{tertiary}{360 Musicians · 360 Wild Voices · One Unit Circle}}
+
+\vspace{0.3cm}
+{\normalsize\sffamily\itshape\textcolor{subtlegray}{From Quincy Jones to Puget Sound in Silence · Degree by Degree}}
+
+\vspace{1.5cm}
+% Part labels
+\begin{tabular}{ccccc}
+\colorbox{colorA}{\textcolor{white}{\sffamily\bfseries\small\  PART A \ }} &
+\colorbox{colorB}{\textcolor{white}{\sffamily\bfseries\small\  PART B \ }} &
+\colorbox{colorC}{\textcolor{white}{\sffamily\bfseries\small\  PART C \ }} &
+\colorbox{colorD}{\textcolor{white}{\sffamily\bfseries\small\  PART D \ }} &
+\colorbox{colorE}{\textcolor{white}{\sffamily\bfseries\small\  PART E \ }} \\[4pt]
+\sffamily\tiny\textcolor{subtlegray}{Seattle 360} &
+\sffamily\tiny\textcolor{subtlegray}{PNW Species} &
+\sffamily\tiny\textcolor{subtlegray}{Deep Mapping} &
+\sffamily\tiny\textcolor{subtlegray}{Fractal Refine} &
+\sffamily\tiny\textcolor{subtlegray}{Lessons Applied} \\
+\end{tabular}
+
+\vspace{1.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission $\rightarrow$ Refinement $\rightarrow$ Synthesis}}
+
+\vspace{1.5cm}
+\begin{tabular}{ll}
+\textcolor{subtlegray}{\sffamily\small Date:} & \textcolor{darktext}{\sffamily\small 2026-03-28} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small Inputs:} & \textcolor{darktext}{\sffamily\small seattle\_360\_geo.csv (360 artists) + pnw\_360\_species.csv (360 species)} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small Total Releases:} & \textcolor{darktext}{\sffamily\small 1,800 artifacts across Parts A–E} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small Components:} & \textcolor{darktext}{\sffamily\small 37 components (9+9+7+6+6) across 5 parts} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small Total Tests:} & \textcolor{darktext}{\sffamily\small 570 (148+152+120+90+60)} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small Token Budget:} & \textcolor{darktext}{\sffamily\small $\approx$77.6M total (A: 20.7M · B: 22.3M · C: 13.3M · D: 14.4M · E: 4.8M)} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small Fleet Activation:} & \textcolor{darktext}{\sffamily\small Full crew · PNW species naming · OCAP®/CARE/UNDRIP compliant} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small College Depts:} & \textcolor{darktext}{\sffamily\small 15+ departments seeded including new: science/bioacoustics/, diy-art/} \\[3pt]
+\textcolor{subtlegray}{\sffamily\small Status:} & \textcolor{darktext}{\sffamily\small Ready for GSD Orchestrator} \\
+\end{tabular}
+
+\vspace{1.5cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{GSD Ecosystem · github.com/Tibsfox · Miles Tiberius Foxglove · 2026}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+% EXECUTIVE OVERVIEW
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Executive Overview}
+
+\begin{quotebox}
+\textit{``Before there were amplifiers, there was the Salish Sea. Before there were drum machines,
+there was the Roosevelt elk bugling at dawn in the Hoh River valley. Before there was a music
+theory textbook, there was the orca pod's greeting ceremony. The Pacific Northwest is not a
+backdrop to human culture. It is a teacher.''}
+\end{quotebox}
+
+\vspace{0.8em}
+
+The Sound of Puget Sound is a five-part autonomous educational engine that processes 360
+Seattle musicians (Part A) and 360 PNW species and soundscapes (Part B) through the same
+Fleet research pipeline — both mapped to the same 360° unit circle — then weaves their
+outputs into a unified College of Knowledge curriculum (Part C), refines every release to
+publication quality (Part D), and synthesizes all lessons learned into the specification
+for the next complete rotation (Part E).
+
+\subsection{The Parallel Structure}
+
+Every degree on the circle has two entries: a human musical voice and a wild biological voice.
+They are not metaphors for each other. They are structural parallels — exhibiting the same
+acoustic, mathematical, and cultural patterns in different substrates.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Degree} & \tblhdr{Part A (Music)} & \tblhdr{Part B (Species)} & \tblhdr{Shared Principle} \\
+\midrule
+0° & Quincy Jones (Jazz, energy 1–3) & Great Blue Heron (silence/croak, E=1) & Call-and-response; structured silence \\
+1° & Bill Frisell (chromaticism) & Pacific Wren (micro-phrase cascade) & Complex melodic improvisation \\
+45° & Damien Jurado (folk) & Pacific Chorus Frog (chorus) & Rhythmic entrainment; unison emergence \\
+108° & Pileated Woodpecker (drum) & Pileated Woodpecker (same!) & This degree IS the woodpecker \\
+276° & Bikini Kill (riot grrrl, E=8) & Orca female-led hunt (E=8) & Matriarchal coordination as structure \\
+311° & Nirvana (grunge, E=9) & Orca greeting ceremony (E=9) & Full community convergence call \\
+344° & Botch (mathcore, E=10) & Multi-species polyrhythm apex (E=10) & Prime-number meters; natural mathematics \\
+359° & Unwound (silence, E=10) & Puget Sound one breath (E=10) & Silence as composition; the circle closes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Unit Circle as Structure}
+
+\begin{asciibox}
+                    0deg: Jazz (low energy) | Great Blue Heron
+                           ^
+         Marine/Coastal    |    Freshwater/Riparian
+         + Folk/Soul       |    + Indie/Electronic
+         (0-89deg)         |    (90-179deg)
+                           |
+  270deg <-----------------+-------------------> 90deg
+  Grunge/Metal             |             Folk/Singer-Songwriter
+  + Storm/Geological       |             + Forest Species
+  (270-359deg)             |             (90-179deg)
+                           |
+                           v
+              180deg: Blues/Soul | Salmon + Owls + Mammals
+
+  Inner ring (energy 1-3): quiet, foundational, subtle
+  Middle ring (energy 4-6): intermediate, complex, layered  
+  Outer ring (energy 7-10): intense, advanced, apex
+  
+  BOTH DATASETS use the same circle. Same mathematics. Different language.
+\end{asciibox}
+
+\subsection{Five-Part Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Part} & \tblhdr{Name} & \tblhdr{What It Produces} & \tblhdr{Releases} & \tblhdr{Tokens} & \tblhdr{Status} \\
+\midrule
+A & Seattle 360 & 360 artist research packs & 360 & $\sim$20.7M & Delivered \\
+B & PNW 360 Species & 360 bioacoustic packs & 360 & $\sim$22.3M & This package \\
+C & Deep Mapping & 360 A×B synthesis docs + DIY art & 360 pairs & $\sim$13.3M & After A+B \\
+D & Fractal Refine & Quality passes on 720 releases & 720 passes & $\sim$14.4M & After C \\
+E & Lessons Applied & Meta-retrospective + Cycle 2 spec & 1 synthesis & $\sim$4.8M & After D \\
+\midrule
+\rowcolor{lightprimary}
+& \textbf{Total} & \textbf{1,800 artifacts} & \textbf{1,800} & \textbf{$\sim$75.5M} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+% PART B — PNW 360 SPECIES
+% ─────────────────────────────────────────────────────────────────────────────
+\partheader{B}{PNW 360 Species Acoustic Release Engine}{colorB}
+
+\section{Part B Vision: PNW Wild Voices}
+
+\metafield{Input:}{\texttt{pnw\_360\_species.csv} — 360 species / soundscapes, degrees 0°–359°}
+\metafield{Parallel to:}{Part A (same loop architecture, same College integration, same Safety Warden)}
+\metafield{New departments:}{\texttt{.college/science/bioacoustics/} · \texttt{.college/diy-art/}}
+
+\vspace{0.5em}
+
+The orca pod's greeting ceremony has been formally analyzed by bioacousticians and found to
+exhibit properties identical to human polyphonic choral music: distinct voice roles, shared
+repertoire, call-and-response structure, and cultural transmission across generations.
+The Pacific Wren sings two-voice polyphony simultaneously from a single syrinx. The stonefly
+hatch at degree 329 produces a rhythmic wall of sound with polyrhythmic sub-patterns at the
+prime-number ratios Botch would use sixty years later at degree 332.
+
+Part B makes this explicit, sourced, and teachable. 360 species. 360 Fleet research missions.
+One bioacoustic theory genealogy that traces sound from a heron's silence to the end of Puget Sound.
+
+\subsection{PNW 360 Species CSV — Sample Entries}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4.5cm}L{3.5cm}C{1.2cm}X}
+\toprule
+\rowcolor{colorB}
+\tblhdr{Deg} & \tblhdr{Species / Soundscape} & \tblhdr{Sound Type} & \tblhdr{Energy} & \tblhdr{Ecosystem} \\
+\midrule
+0 & Great Blue Heron & stalking silence / pterodactyl croak & 1 & Puget Sound estuary \\
+1 & Pacific Wren & intricate cascade warble & 2 & old-growth understory \\
+45 & Pacific Chorus Frog & krek-ek breeding chorus & 2 & pond wetland \\
+57 & Pacific Giant Salamander & low bark / growl when threatened & 3 & cold stream \\
+100 & Common Raven & deep cronk + bell + hollow knock & 4 & open forest \\
+108 & Pileated Woodpecker & wild laughing wuk-wuk-wuk & 6 & old-growth \\
+116 & American Dipper & loud bubbly song over rushing water & 5 & fast stream \\
+191 & Humpback Whale song & complex hour-long spiral song & 8 & open ocean \\
+210 & Gray Wolf howl & sustained bass resonant howl & 7 & remote forest \\
+212 & Cougar scream & blood-curdling rising shriek & 8 & forest \\
+246 & Waterfall Snoqualmie & roaring white-noise wall & 7 & basalt cliff \\
+270 & SRKW S01 pod call & repertoire-specific clan calls & 8 & Salish Sea \\
+276 & Orca echolocation burst & rapid click trains ultra-precise & 8 & hunting \\
+311 & Orca greeting ceremony & full pod multi-voice convergence & 9 & Salish Sea \\
+332 & Woodpecker+River+Frog polyrhythm & three independent pulse streams & 9 & riparian \\
+344 & Multi-species polyrhythm apex & woodpecker+orca+thunder+frog & 10 & convergence \\
+359 & Puget Sound in silence & one breath before the next wave & 10 & full Salish Sea \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Acoustic Theory Mapping Framework}
+
+The core innovation of Part B is the systematic mapping of bioacoustic properties to
+music theory concepts. Every species receives an \texttt{AcousticTheoryNodeList} with:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{4.5cm}}
+\toprule
+\rowcolor{colorB}
+\tblhdr{Acoustic Feature} & \tblhdr{Music Theory Parallel} & \tblhdr{College Path} \\
+\midrule
+Fundamental frequency (Hz) & Pitch / note value & \texttt{.college/music/theory/harmony/} \\
+Harmonic series (overtones) & Timbre / chord color & \texttt{.college/mathematics/calculus/fourier/} \\
+Call duration (ms) & Note duration / rhythm & \texttt{.college/music/theory/rhythm/} \\
+Inter-call interval & Rest / silence as composition & \texttt{.college/music/theory/form/} \\
+Solo/duet/chorus & Monophony/counterpoint/polyphony & \texttt{.college/music/theory/counterpoint/} \\
+Frequency modulation & Vibrato / portamento / glissando & \texttt{.college/music/theory/scales/} \\
+Amplitude envelope & ADSR (synthesis) & \texttt{.college/music/technology/synthesis/} \\
+Acoustic synchrony & Rhythmic entrainment / groove & \texttt{.college/music/theory/rhythm/groove.md} \\
+Echolocation & Sampling theorem / Nyquist & \texttt{.college/mathematics/calculus/fourier/} \\
+Infrasound ($<$20 Hz) & Sub-bass / felt not heard & \texttt{.college/music/technology/synthesis.md} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Part B Component Architecture}
+
+\begin{asciibox}
+pnw-360-engine/
+|
++-- B00-shared-types -------- SpeciesProfile, AcousticNode, SoundscapeLayer schemas
++-- B01-species-intake ------- pnw_360_species.csv -> SpeciesProfile[360]
+|                              Flags: type=SPECIES vs SOUNDSCAPE_COMPOSITION
++-- B02-acoustic-mapper ------ AcousticTheoryNodeList (Wave 1A / EAGLE / Sonnet)
+|                              Freq, rhythm, call structure, music parallel
++-- B03-fleet-research-gen --- Full LaTeX PDF per species (Wave 2 / HAWK / Opus)
+|                              Color: deep teal / navy / fern green
++-- B04-college-linker ------- CollegeLinkList (Wave 1B / ORCA / Sonnet)
+|                              New depts: science/bioacoustics/, diy-art/
++-- B05-release-pipeline ----- Sequential atomic publication (HERON / Sonnet)
++-- B06-retrospective -------- NASA SE lessons learned (OWL / Opus)
++-- B07-carry-forward -------- KnowledgeState management (CEDAR / Sonnet)
++-- B08-safety-warden -------- OCAP + ESA + location gates (WARDEN / Opus)
+                               Extra gates vs Part A:
+                               - SRKW conservation context mandatory
+                               - No precise sensitive species coordinates
+                               - Sacred species: nation-specific, never ceremonial
+                               - Barred Owl: complex conservation accuracy
+\end{asciibox}
+
+\subsection{Safety Warden — Additional Gates (Part B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2.5cm}}
+\toprule
+\rowcolor{blockred}
+\tblhdr{Test ID} & \tblhdr{Verifies} & \tblhdr{Boundary} \\
+\midrule
+BSC-01 & SRKW releases include ESA status, population, threats, NOAA recovery plan & BLOCK \\
+BSC-02 & No precise coordinates for sensitive species (nesting eagles, salmon beds) & ABSOLUTE \\
+BSC-03 & Sacred species (Eagle, Raven, Wolf) have nation-specific attribution & BLOCK \\
+BSC-04 & Lummi Nation's Qwe'lhol mechen relationship to orca cited where relevant & GATE \\
+BSC-05 & Barred Owl invasive status and USFWS management accurately described & GATE \\
+BSC-06 & SOUNDSCAPE\_COMPOSITION entries framed as compositions, not species records & BLOCK \\
+BSC-07 & Ecological crisis framing present but not catastrophizing & ANNOTATE \\
+BSC-08 & All bioacoustic claims sourced (NOAA, Cornell Lab, peer-reviewed) & BLOCK \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{SRKW — Southern Resident Killer Whale Mandatory Context}
+
+\begin{warnbox}
+\textbf{\sffamily\textcolor{secondary}{BLOCK-Level Requirement: SRKW Conservation Context}}
+
+Every release at degrees 270–277, 311, 340, 348, and 357 MUST include:
+\begin{itemize}[leftmargin=1.5em,topsep=2pt]
+  \item Current SRKW population estimate (as of latest NOAA count — approximately 73 individuals, 2025)
+  \item ESA Endangered Species Act listing status (Endangered, listed 2005)
+  \item Primary threats: Chinook salmon prey depletion, vessel noise, contaminants
+  \item Reference to NOAA's SRKW Recovery Plan (2023 update)
+  \item Lummi Nation's cultural relationship (Qwe'lhol mechen — relatives in the sea)
+\end{itemize}
+The Safety Warden BLOCKS any SRKW release missing these elements.
+Sources: NOAA Fisheries NWFSC; Lummi Nation (lummi-nsn.gov)
+\end{warnbox}
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+% PART C — DEEP MAPPING
+% ─────────────────────────────────────────────────────────────────────────────
+\partheader{C}{Deep Mapping: A×B Cross-Reference Matrix}{colorC}
+
+\section{Part C Vision: The Spaces Between}
+
+\metafield{Requires:}{Part A complete (degrees 0–359) AND Part B complete (degrees 0–359)}
+\metafield{Produces:}{360 A×B synthesis docs · 360 DIY Art project specs · cross-domain College nodes · skill-creator links}
+
+\vspace{0.5em}
+
+Part C is the moment the two half-circles meet. For each of the 360 degrees, Part C
+loads both the music release and the species release, runs a Resonance Detector to find
+structural parallels, synthesizes a cross-domain College lesson, generates a DIY Art
+project spec that a student can actually execute, and links to GSD skill-creator resources.
+
+\subsection{Selected A×B Resonance Pairs (Illustrative)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{colorC}
+\tblhdr{Deg} & \tblhdr{Part A (Music)} & \tblhdr{Part B (Species)} & \tblhdr{Resonance Type} \\
+\midrule
+0 & Quincy Jones (ii–V–I, call-response) & Great Blue Heron (silence → croak) & Structured silence; call-and-response \\
+1 & Bill Frisell (chromaticism) & Pacific Wren (syrinx polyphony) & Two-voice counterpoint in single organism/instrument \\
+45 & Damien Jurado (folk unison) & Pacific Chorus Frog (emergent synchrony) & Rhythmic entrainment without a conductor \\
+108 & Pileated Woodpecker drumming & Pileated Woodpecker (same!) & Degree 108 IS the woodpecker — Part A \& B merge \\
+116 & American Dipper (song over noise) & American Dipper (same!) & Degree 116 is the Dipper — counterpoint against water \\
+191 & Hovercraft (drone/noise) & Humpback Whale song (8-hour spiral) & Drone as temporal architecture \\
+211 & Gray Wolf pack howl (A) & Gray Wolf pack howl (B) & Degrees 210–211 are the Wolf — Part A \& B merge \\
+276 & Bikini Kill (matriarchal riot grrrl) & Orca female-led hunt sequence & Matriarchal coordination as acoustic structure \\
+311 & Nirvana (community convergence) & Orca greeting ceremony (full pod) & Mass convergence call; collective identity assertion \\
+332 & Botch (prime-number meters) & Woodpecker+River+Frog polyrhythm & Prime-number meters are a natural phenomenon \\
+344 & Botch (peak mathcore) & Multi-species polyrhythm apex & Mathematical complexity at maximum biological intensity \\
+359 & Unwound (post-hardcore silence) & Puget Sound (one breath) & Silence as the most compositionally charged moment \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Part C Component Architecture}
+
+\begin{asciibox}
+ab-matrix-deep-mapping/
+|
++-- C00-ab-matrix-types --- ABPair, ResonanceNode, SynthesisDoc, DIYProject schemas
++-- C01-alignment-engine -- Load Part A + B releases -> ABPair[N] (Haiku)
++-- C02-resonance-detector - Find 2-5 structural parallels (Opus / HAWK)
+|                            Types: Acoustic, Mathematical, Cultural, Energetic, Ecological
++-- C03-college-synthesizer - Produce cross-domain College lesson per degree (Sonnet / CEDAR)
+|                             New dept: .college/cross-domain/
++-- C04-diy-art-generator --- Executable DIY art project spec per degree (Sonnet / WREN)
+|                             Types: field-recording, instrument-build, graphic-score,
+|                                    visual-art, collaborative-performance
++-- C05-skill-creator-linker - Link to GSD skill packs per degree (Haiku / OSPREY)
+|                              foxfire-heritage, learn-kung-fu, deep-audio-analyzer, etc.
++-- C06-synthesis-warden ---- Gate: resonance accuracy + attribution (Opus / WARDEN)
+                              BLOCK: reductive connection / romantic projection
+                              GATE: Indigenous connection without specific citation
+\end{asciibox}
+
+\subsection{DIY Art Project Types (Per Degree)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{colorC}
+\tblhdr{Project Type} & \tblhdr{Description} & \tblhdr{Example Degree} \\
+\midrule
+Field Recording & Go to specific PNW location; record species; edit to musical structure & Degree 45 (frog chorus) \\
+Instrument Building & Build instrument that mimics specific acoustic property & Degree 109 (Pileated drum resonator) \\
+Graphic Score & Create graphic notation of species call pattern & Degree 1 (Pacific Wren cascade) \\
+Visual Art Prompt & Artwork expressing A×B resonance & Degree 276 (orca+Bikini Kill) \\
+Collaborative Performance & Instructions for human + field recording performance & Degree 311 (Nirvana + orca) \\
+Mathematics Art & Visualize the shared integer/frequency structure & Degree 332 (polyrhythm) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{New College Departments (Part C)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{6cm}XC{2.5cm}}
+\toprule
+\rowcolor{colorC}
+\tblhdr{Department Path} & \tblhdr{Content} & \tblhdr{Seeded By} \\
+\midrule
+\texttt{.college/cross-domain/} & Cross-disciplinary lesson plans (A×B resonances) & Part C \\
+\texttt{.college/cross-domain/music-bioacoustics/} & Where music theory = bioacoustics & Part C \\
+\texttt{.college/cross-domain/matriarchal-coordination/} & Leadership as acoustic structure & Degree 276 \\
+\texttt{.college/cross-domain/prime-number-rhythm/} & Mathematics in natural percussion & Degrees 332, 344 \\
+\texttt{.college/diy-art/field-recording/} & How to record PNW soundscapes & Part B→C |
+\texttt{.college/diy-art/instrument-building/} & Build instruments from natural resonance & Part C \\
+\texttt{.college/diy-art/graphic-score/} & Visual notation of biological sound & Part C \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+% PART D — FRACTAL REFINEMENT
+% ─────────────────────────────────────────────────────────────────────────────
+\partheader{D}{Fractal Refinement: Iterative Hi-Fi Quality Passes}{colorD}
+
+\section{Part D Vision: Depth Without Bloat}
+
+\metafield{Requires:}{Parts A, B, C complete}
+\metafield{Principle:}{"A refinement pass must make the release more useful, not longer."}
+
+\vspace{0.5em}
+
+Part D is the fractal pass. A fractal is self-similar at every scale — the same patterns
+that organize the 360° circle also organize each individual release. Part D looks inside
+each release and finds the inner circle: the cross-references implied but not yet stated,
+the mathematics bridges present but thin, the College nodes promoted when they have enough
+examples, the DIY projects made executable when they were previously abstract.
+
+\subsection{Refinement Pass Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{2cm}L{3cm}}
+\toprule
+\rowcolor{colorD}
+\tblhdr{Pass Type} & \tblhdr{Trigger} & \tblhdr{Model} & \tblhdr{What It Does} \\
+\midrule
+THEORY-DEEPEN & Concept in 5+ releases & Opus & Promote to full College lesson \\
+CROSS-LINK & Release has $<$5 cross-refs & Sonnet & Add genealogy neighbor links \\
+MATH-EXPLICIT & Math bridge thin & Opus & Add equations from \textit{The Space Between} \\
+DIY-ENRICH & No materials list & Sonnet & Add materials, tools, sources \\
+ATTRIBUTION-AUDIT & ANNOTATE in Pass 1 & Sonnet & Escalate ANNOTATE to fully resolved \\
+COLLEGE-PROMOTE & Node has 8+ examples & Opus & Write full lesson module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Refinement Warden's Prime Directive}
+
+\begin{amberbox}
+\textbf{\sffamily\textcolor{colorC}{One Rule: Does This Pass Make the Release More Useful?}}
+
+Before approving any refinement pass, the Warden asks: ``Would a student encountering this
+release for the first time find it more useful after this pass?''
+
+\medskip
+\textbf{PASS:} The answer is yes, demonstrably.\\
+\textbf{BLOCK:} The answer is ``more complete but harder to navigate.''\\
+\textbf{BLOCK:} The answer is ``more equations but no pedagogical context.''\\
+\textbf{BLOCK:} The answer is ``more cross-links but no explanation of why they connect.''
+
+\medskip
+Quality means clarity, precision, and utility. Not length. Not thoroughness. Usefulness.
+\end{amberbox}
+
+\subsection{Part D Component Architecture}
+
+\begin{asciibox}
+fractal-refinement-engine/
+|
++-- D00-refinement-types --- RefinementPass, QualityScore, PromotionCandidate schemas
++-- D01-quality-auditor ---- Score all 720 releases on 10-point rubric (Sonnet)
+|                            Dimensions: theory-depth, math-bridge, cross-links,
+|                                        diy-executability, attribution-completeness
++-- D02-fractal-expander ---- Deepen qualifying releases (Opus)
+|                             Add Space Between equations, theory genealogy depth
++-- D03-cross-linker -------- Add intra-release cross-refs; build genealogy graph (Sonnet)
++-- D04-college-promoter ---- Promote 8+-example nodes to full lessons (Opus)
++-- D05-refinement-warden --- Gate: improvement quality (Opus)
+                              BLOCK: longer-but-less-useful
+                              BLOCK: equations without pedagogy
+\end{asciibox}
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+% PART E — LESSONS APPLIED
+% ─────────────────────────────────────────────────────────────────────────────
+\partheader{E}{Lessons Applied: What We Do Better Next Rotation}{colorE}
+
+\section{Part E Vision: The Meta-Retrospective}
+
+\metafield{Requires:}{Parts A, B, C, D all complete}
+\metafield{Produces:}{Meta-retrospective · Cycle 2 specification · Complete Edition PDF}
+
+\vspace{0.5em}
+
+Every rotation teaches the next one. Part E is not a summary. It is an architectural audit
+with the specificity of someone who just ran 77.6 million tokens of work across 1,800 artifacts
+and wants to make absolutely sure the next cycle doesn't repeat the same mistakes.
+
+\subsection{Key Questions Part E Answers}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{colorE}
+\tblhdr{Domain} & \tblhdr{Questions} \\
+\midrule
+Theory & Which music theory concepts proved most teachable through A×B pairing? \\
+Bioacoustics & Which species produced the richest content? Which were scientifically thin? \\
+College & Which departments grew beyond expectations? What needs restructuring? \\
+Pipeline & Where did token budget deviate most? Which waves bottlenecked? \\
+Safety & Which BLOCK-level findings recurred? What structural Safety Warden improvements? \\
+DIY Art & Which project specs were executable? Which were too abstract? \\
+Culture & Where did OCAP® compliance require the most careful handling? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Part E Outputs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}XL{3.5cm}}
+\toprule
+\rowcolor{colorE}
+\tblhdr{Output} & \tblhdr{Description} & \tblhdr{Audience} \\
+\midrule
+\texttt{meta-retrospective.md} & Patterns across all 720 retrospectives & GSD architect \\
+\texttt{lessons-learned-taxonomy.md} & Categorized lessons: theory/bio/college/pipeline/safety & All future cycles \\
+\texttt{cycle-2-specification.md} & Full Vision doc for "Second Rotation" & GSD orchestrator \\
+\texttt{ecosystem-updates.md} & Specific improvements to skill-creator + College & Claude Code \\
+\texttt{sound-of-puget-sound-complete.pdf} & Complete Edition — all 5 parts, publication quality & Public / College \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+% MISSION PACKAGE — ALL PARTS
+% ─────────────────────────────────────────────────────────────────────────────
+\stageheader{STAGE 3 \quad COMPLETE MISSION PACKAGE — ALL FIVE PARTS}{primary}
+
+\section{Complete Component Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4.5cm}C{1.5cm}C{1.8cm}C{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{\#} & \tblhdr{Component} & \tblhdr{Part} & \tblhdr{Wave} & \tblhdr{Model} & \tblhdr{Agent} \\
+\midrule
+A0–A8 & 9 components (Part A) & A & 0–3d & Haiku/Sonnet/Opus & RAVEN/SALMON/CEDAR/ORCA/HAWK/WARDEN/HERON/OWL/D-FIR \\
+B0–B8 & 9 components (Part B) & B & 0–3d & Haiku/Sonnet/Opus & RAVEN/SALMON/EAGLE/ORCA/HAWK/WARDEN/HERON/OWL/CEDAR \\
+C0–C6 & 7 components (Part C) & C & 0–3 & Haiku/Sonnet/Opus & RAVEN/SALMON/HAWK/CEDAR/WREN/OSPREY/WARDEN \\
+D0–D5 & 6 components (Part D) & D & 0–3 & Sonnet/Opus & RAVEN/AUDITOR/HAWK/CEDAR/PROMOTER/WARDEN \\
+E0–E5 & 6 components (Part E) & E & 0–3 & Sonnet/Opus & RAVEN/SALMON/HAWK/CEDAR/OSPREY/WARDEN \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{37} & \textbf{Total Components} & \textbf{A–E} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Complete Test Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Part} & \tblhdr{Total Tests} & \tblhdr{Safety-Critical} & \tblhdr{Failure Action} & \tblhdr{Key Safety Gates} \\
+\midrule
+A & 148 & 22 & BLOCK & Attribution, OCAP®, compilation \\
+B & 152 & 24 & BLOCK & SRKW context, location, sacred species \\
+C & 120 & 18 & BLOCK & Resonance accuracy, Indigenous attribution \\
+D & 90 & 12 & BLOCK & Quality not length, pedagogy not equations \\
+E & 60 & 15 & BLOCK & Meta-accuracy, Cycle 2 completeness \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{570} & \textbf{91} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Complete Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{6cm}X}
+\toprule
+\rowcolor{primary}
+\tblhdr{Metric} & \tblhdr{Value} \\
+\midrule
+Total releases & 1,800 artifacts (360+360+360+720+5) \\
+Total components & 37 across Parts A–E \\
+Total tests & 570 (91 safety-critical mandatory-pass) \\
+Activation profile & Fleet+ (Parts A/B) · Fleet (Parts C/D/E) \\
+Model split (overall) & $\approx$35\% Opus / $\approx$55\% Sonnet / $\approx$10\% Haiku \\
+Inputs & 2 CSVs: 360 artists + 360 species \\
+New College departments & 7 new departments (bioacoustics, diy-art, cross-domain, etc.) \\
+College nodes (est.) & $\approx$2,500 nodes created or enriched \\
+DIY Art projects & 360 executable project specs \\
+Token budget (total) & $\approx$75.5M across all 5 parts \\
+Context windows & $\approx$2,800 total \\
+Estimated sessions & $\approx$700 (at 4 windows/session) \\
+A+B parallel execution & Yes — Parts A and B run concurrently \\
+CAPCOM escalation & Per-release BLOCK findings (human review required) \\
+Completion signal & Part E: \texttt{CYCLE-COMPLETE + CYCLE-2-READY} \\
+Output root & \texttt{releases/sound-of-puget-sound/} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Order}
+
+\begin{asciibox}
+Phase 1 (CONCURRENT):
+  [Part A engine] -----> Degrees 0-359 (seattle-360)
+  [Part B engine] -----> Degrees 0-359 (pnw-360)
+  Both pipelines run simultaneously. No shared state.
+  Completion: Both reach degree 359 and emit CYCLE-COMPLETE.
+
+Phase 2 (After both A + B at 359):
+  [Part C engine] -----> Degrees 0-359 (ab-matrix-deep-mapping)
+  Requires: releases/seattle-360/ AND releases/pnw-360/ fully populated
+
+Phase 3 (After Part C at degree 359):
+  [Part D engine] -----> Quality passes on releases/seattle-360/ + releases/pnw-360/
+  Runs 720 refinement passes (not a 360-degree loop -- a quality audit loop)
+
+Phase 4 (After Part D quality audit complete):
+  [Part E engine] -----> Meta-retrospective + Cycle 2 specification
+  Produces: sound-of-puget-sound-complete.pdf (the final artifact)
+
+Total wall time estimate: ~700 sessions across ~2,800 context windows
+Parts A+B together: ~360 sessions (concurrent)
+Part C: ~180 sessions
+Part D: ~120 sessions
+Part E: ~40 sessions
+\end{asciibox}
+
+\vspace{1.5em}
+
+\begin{quotebox}
+\textbf{\sffamily\textcolor{primary}{The Through-Line:}}
+
+\medskip
+\textit{``The Pacific Wren holds the record for the most complex song relative to body size of
+any bird in North America. It has been singing this way, in the old-growth understory of the
+Pacific Northwest, since before humans arrived. It will continue doing so, if we leave enough
+old-growth standing.}
+
+\medskip
+\textit{This engine is built to trace the thread that connects the Wren's song to Quincy Jones's
+chord voicing, that connects the orca's greeting ceremony to Bikini Kill's matriarchal coordination,
+that connects Botch's prime-number meters to the stonefly hatch's wing-buzz polyrhythm.}
+
+\medskip
+\textit{The 360° rotation is complete when a student can hear the Pacific Wren, understand the
+interval ratios in its song, trace those ratios to \textit{The Space Between}'s unit circle, find the
+parallel in Quincy Jones's chord voicings, and feel the full circle close in their understanding.}
+
+\medskip
+\textit{At that moment, the Pacific Northwest has given back what it always had: the sound
+of everything, teaching everything, to anyone willing to listen.}
+
+\medskip
+\textit{One degree at a time. It's all about the journey.''}
+
+\medskip
+\textcolor{subtlegray}{\sffamily\small The Sound of Puget Sound · A–B–C–D–E Complete Release Matrix · GSD Ecosystem · 2026}
+\end{quotebox}
+
+\end{document}

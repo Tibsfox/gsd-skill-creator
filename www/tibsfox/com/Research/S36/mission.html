@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-s36">
+  <header>
+    <h1>Seattle 360</h1>
+    <div class="subtitle">360 Artists &middot; 360 Degrees &middot; One Unit Circle &mdash; Continuous Artist Release Engine</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-vision-doc">Vision</a>
+      <a href="page.html?doc=02-research-reference">Research</a>
+      <a href="page.html?doc=03-milestone-spec">Milestone</a>
+      <a href="page.html?doc=04-wave-execution-plan">Wave Plan</a>
+      <a href="page.html?doc=05-test-plan">Test Plan</a>
+      <a href="page.html?doc=components/00-shared-types">Components</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The CSV is not accidental &mdash; 360 artists mapped to 0&deg;&ndash;359&deg; of a unit circle.
+      Each artist occupies exactly one degree. Each release is one degree. The full run completes
+      the circle. The unit circle is the scheduling primitive, the progress metric, and the
+      mathematical spine that connects music theory (circle of fifths) to release engineering
+      (continuous deployment) to education (curriculum sequencing).
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">360</span><span class="stat-label">Artists</span></div>
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Components</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~22M</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">22</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/seattle-360-mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/seattle-360-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/README.md">README</a></td><td>Markdown</td><td>Mission pack overview and build instructions</td></tr>
+        <tr><td><a href="mission-pack/seattle_360_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared types, CSV schema, test scaffolding</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>Theory + College</td><td>Track A: CSV Intake + Music Theory Mapper + College Linker</td><td>Parallel</td><td>Sonnet/Opus</td></tr>
+        <tr><td>1B</td><td>Fleet Research</td><td>Track B: Fleet Research Generator + Release Pipeline</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>2</td><td>Release + Safety</td><td>Release Pipeline integration, Safety Warden gates</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Retrospective + Carry-Forward</td><td>Retrospective Engine, Carry-Forward Controller, full-cycle test</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Synthesis + judgment</td><td>Opus &middot; 30%</td><td>Cross-module synthesis, unit circle mathematics, genre-theory curriculum integration</td></tr>
+        <tr><td>Denise</td><td>Document production</td><td>Sonnet &middot; 60%</td><td>Fleet research documents, component specs, release pipeline assembly, retrospective reports</td></tr>
+        <tr><td>Paula</td><td>Scaffolding + schema</td><td>Haiku &middot; 10%</td><td>CSV parsing scaffolding, shared type definitions, test harness templates</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-ATT</td><td>Attribution accuracy</td><td>Every artist claim traceable to verified sources. Zero unattributed biographical or discographic assertions.</td></tr>
+        <tr><td>SC-GEN</td><td>Genre accuracy</td><td>Genre classifications match consensus music historiography. No genre misattribution or anachronistic labeling.</td></tr>
+        <tr><td>SC-DAT</td><td>Date verification</td><td>All dates (releases, events, formations) verified against at least two independent sources. No fabricated timelines.</td></tr>
+        <tr><td>SC-CUL</td><td>Cultural sensitivity</td><td>No cultural appropriation claims, stereotyping, or reductive framing of artists or genres. Respectful treatment of all traditions.</td></tr>
+        <tr><td>SC-THY</td><td>Music theory accuracy</td><td>All theory mappings (chord progressions, scales, harmonic analysis) verified against established musicological reference.</td></tr>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations traceable to official discographies, peer-reviewed sources, or established music journalism. Zero speculative claims.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The unit circle is the Amiga Principle applied to music education at scale: a single
+    mathematical structure (the circle) serving as the scheduling primitive, the progress
+    metric, and the curriculum spine simultaneously. Just as the Amiga's custom chipset let
+    Agnus, Denise, and Paula each address the same memory through different lenses &mdash;
+    DMA scheduling, pixel rendering, audio output &mdash; the Seattle 360 engine lets the
+    same 360-artist dataset be addressed through different lenses: intake (CSV parse),
+    theory (genre-to-curriculum mapping), research (fleet document generation), education
+    (College of Knowledge cross-linking), and operations (release pipeline state machine).</p>
+
+    <p>Each artist is one degree. Each release completes one degree of rotation. The full
+    360-release cycle completes the circle and returns to 0&deg; &mdash; but transformed,
+    like a helix, carrying forward the retrospective lessons from every previous release.
+    The carry-forward controller is the mechanism that turns a circle into a spiral: same
+    structure, accumulated wisdom. This is the continuous deployment model applied not to
+    software but to knowledge &mdash; each release ships understanding, each retrospective
+    refines the process, each carry-forward seeds the next mission with everything learned
+    so far.</p>
+  </main>
+
+  <footer>
+    <p>Seattle 360 &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
