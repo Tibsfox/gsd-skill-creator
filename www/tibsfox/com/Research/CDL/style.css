@@ -1,0 +1,205 @@
+/* CDL — Link Blue / Node Gold / Connected Green theme, College Deep Linking
+   Brand foundation loaded from brand.css */
+
+/* ═══════════════════════════════════════════
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   ═══════════════════════════════════════════ */
+
+:root {
+  --link-blue: #0D47A1;
+  --link-blue-light: #E3F2FD;
+  --link-blue-mid: #1565C0;
+  --link-blue-dark: #0a3578;
+  --node-gold: #F9A825;
+  --node-gold-light: #FFF8E1;
+  --node-gold-mid: #F9A825;
+  --connected-green: #2E7D32;
+  --connected-green-light: #E8F5E9;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--link-blue);
+  --link-hover: var(--link-blue-dark);
+  --accent: var(--link-blue);
+  --accent-light: var(--link-blue-light);
+  --accent-dark: var(--link-blue-dark);
+  --card-bg: white;
+  --card-border: #BBDEFB;
+  --card-shadow: rgba(13,71,161,0.12);
+  --border: #BBDEFB;
+  --parchment: var(--link-blue-light);
+}
+
+/* ═══════════════════════════════════════════
+   2. HEADER — deep blue gradient with gold accent
+   ═══════════════════════════════════════════ */
+
+header {
+  background: linear-gradient(135deg, #051b33 0%, #0a3578 40%, #1a4a8a 100%);
+  border-bottom: 4px solid var(--node-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(249,168,37,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(13,71,161,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #E3F2FD; }
+header .subtitle { color: #90CAF9; }
+
+/* ═══════════════════════════════════════════
+   3. TYPOGRAPHY COLOR OVERRIDES
+   ═══════════════════════════════════════════ */
+
+h2 {
+  color: var(--link-blue-dark);
+  border-bottom-color: var(--link-blue-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--link-blue); }
+
+/* ═══════════════════════════════════════════
+   4. THEMED COMPONENTS
+   ═══════════════════════════════════════════ */
+
+blockquote {
+  background: var(--link-blue-light);
+  border-left: 4px solid var(--link-blue);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--link-blue-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(13,71,161,0.04); }
+tr:hover { background: rgba(13,71,161,0.08); }
+
+pre {
+  background: #051b33;
+  color: #E2E8F0;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--node-gold);
+}
+code {
+  background: var(--link-blue-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--link-blue);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ═══════════════════════════════════════════
+   5. CARDS — gold-accent hover
+   ═══════════════════════════════════════════ */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #BBDEFB;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(13,71,161,0.12); border-color: var(--node-gold); }
+
+/* ═══════════════════════════════════════════
+   6. STATS — grid layout
+   ═══════════════════════════════════════════ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #BBDEFB;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--link-blue);
+}
+
+/* ═══════════════════════════════════════════
+   7. TAGS
+   ═══════════════════════════════════════════ */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-data { background: var(--link-blue-light); color: var(--link-blue); }
+.tag-path { background: var(--connected-green-light); color: var(--connected-green); }
+.tag-ped { background: var(--node-gold-light); color: #F57F17; }
+.tag-panel { background: #F3E5F5; color: #7B1FA2; }
+.tag-seed { background: #ECEFF1; color: #37474F; }
+
+/* ═══════════════════════════════════════════
+   8. SPECIAL COMPONENTS
+   ═══════════════════════════════════════════ */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.link-diagram {
+  background: #051b33;
+  color: #90CAF9;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+  border-left: 3px solid var(--node-gold);
+}
+
+.cross-links {
+  background: white;
+  border: 1px solid #BBDEFB;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--link-blue); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--link-blue-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--link-blue);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #BBDEFB; text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   9. RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
