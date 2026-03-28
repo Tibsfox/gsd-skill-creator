@@ -1,0 +1,1033 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage[most]{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ── SPACE / PHYSICS COLOR SCHEME ────────────────────────────────────────────
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple – section headers
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue   – subsection headers
+\definecolor{tertiary}{HTML}{E65100}      % Stellar orange – subsubsection headers
+\definecolor{accent}{HTML}{F9A825}        % Star gold      – highlights, arrows
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF3E0}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% ── SECTION FORMATTING ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── CUSTOM ENVIRONMENTS ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── HEADERS / FOOTERS ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{GRB 230906A --- A Merger Within a Merger}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── HYPERLINKS ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={GRB 230906A -- A Merger Within a Merger -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+%% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+%% ── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{A Merger Within a Merger}}
+
+\vspace{0.4cm}
+{\fontsize{16}{20}\selectfont\sffamily\textcolor{secondary}{GRB 230906A and the Peculiar Environments\\of Short Gamma-Ray Bursts}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{tertiary}{Neutron Star Mergers · Tidal Debris · r-Process Enrichment}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{subtlegray}{A Deep Research Study --- Dichiara et al. 2026, ApJL 999 L42}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 8--10 context windows across 3 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Primary Source: Dichiara et al. 2026, ApJL, 999, L42 (Chandra / HST / VLT / XMM)}}
+\end{center}
+\newpage
+
+%% ── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%%═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Research Complete --- Ready for Mission Execution}
+\metafield{Primary Source:}{Dichiara et al. 2026, ApJL, 999, L42}
+\metafield{Depends On:}{GW170817 / AT2017gfo literature; Swift short-GRB host catalog; NewAthena roadmap}
+\metafield{Context:}{Cold-start mission from uploaded peer-reviewed paper with supplementary web research}
+
+\subsection{Vision}
+
+On September 6, 2023, an event of extraordinary brevity lit up the universe for roughly 0.9 seconds. Designated GRB 230906A, this short gamma-ray burst carried no optical afterglow that ground telescopes could hold, and no radio echo. Without the Chandra X-ray Observatory's subarcsecond gaze, it would have dissolved anonymously into the noise of the sky. Chandra held it --- and what it found beneath was a story operating on two scales simultaneously.
+
+At the immediate scale: a faint galaxy ($G^*$, F160W $\approx$ 26 AB mag), barely above the detection limit of the Hubble Space Telescope, coincident with the X-ray position to within 0.24 arcseconds. At the galactic scale: a group of half a dozen galaxies at redshift $z \approx 0.453$, interacting and tearing at each other, trailing a 180~kpc tidal tail of stripped stars and gas. GRB 230906A, and its host $G^*$, fall precisely within that tidal tail.
+
+The title ``A Merger Within a Merger'' is not literary flourish. A galaxy merger created the gravitational stress that induced a burst of star formation in the tail. That star formation seeded the massive-star binary whose evolution, over roughly 700~Myr, produced the neutron star pair that finally collided and generated GRB 230906A --- the inner merger that announced itself to the cosmos. The outer merger, the galaxy-group collision, wrote the conditions. The inner merger, the neutron star collision, wrote the obituary.
+
+This cascade matters beyond its elegance. Neutron star mergers are the confirmed birthplace of r-process elements --- gold, platinum, lanthanides, and roughly half of all nuclei heavier than iron. When a merger happens inside a tidal tail, the sparse, low-gravity environment allows r-process ejecta to escape into the circumgalactic medium (CGM) rather than being retained within a host galaxy. This offers a mechanism for halo-phase enrichment in interacting systems --- a pathway to explain why some ancient halo stars contain unexpectedly large quantities of heavy elements far from any galactic center. GRB 230906A is not merely one event: it is a proof of concept for an enrichment channel that has been theorized but rarely witnessed in the act.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+
+  \item \textbf{Optical selection bias systematically undersamples the true short-GRB population.} Host identification almost always relies on optical afterglow detections, which preferentially find GRBs in low-redshift, low-extinction environments with dense circumburst media. High-redshift bursts and those in low-density halos are missed or misassigned, introducing unknown biases into delay-time distribution (DTD) measurements and r-process yield estimates calibrated on the observable sample.
+
+  \item \textbf{Redshift degeneracy in faint, compact host galaxies cannot be broken by position alone.} The putative host $G^*$ is simultaneously consistent with a dwarf satellite in the $z \approx 0.453$ group, a low-mass star-forming galaxy at $z \sim 1.2$, and a massive galaxy at $z \sim 3.2$. Each scenario implies a factor of $\sim$30$\times$ difference in isotropic gamma-ray energy. This degeneracy is currently resolvable only by JWST spectroscopy or future X-ray spectroscopy.
+
+  \item \textbf{Galaxy-group and tidal-tail environments are underrepresented in short-GRB host catalogs.} Standard host-association methods use field-galaxy number counts to compute chance-coincidence probabilities ($P_{cc}$), implicitly assuming the GRB lies in the field. When a burst lies in a group environment, $P_{cc}$ calculated against field counts systematically misassigns the host (as it would have here: a naive XRT localization with 2$''$ error would have favored G1, a factor $\sim$3 brighter galaxy at 130~kpc projected offset).
+
+  \item \textbf{r-Process enrichment in the circumgalactic medium and halo of interacting galaxy systems is poorly constrained observationally.} Models predict that NS mergers in tidal tails inject heavy elements into the CGM due to the low gas density and shallow gravitational potential of tidal debris. No direct observational link has been established between a confirmed short GRB in a tidal tail and CGM r-process abundance anomalies.
+
+  \item \textbf{The delay-time distribution of binary neutron star mergers at intermediate redshifts ($0.3 < z < 1$) lacks sufficient high-quality events.} GRB 230906A, regardless of its final redshift assignment, extends the sample of well-localized short GRBs in non-standard environments. The galaxy merger itself provides a natural timescale anchor ($\tau \approx 700$~Myr) for the DTD, a direct link that is otherwise inferred statistically.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Nested-merger enrichment:} Galaxy interactions accelerate binary star formation in tidal debris; the resulting neutron star mergers inject r-process material into the CGM rather than the interstellar medium, providing a halo-enrichment pathway visible through short GRBs in group environments.
+
+\subsubsection{Physical Architecture}
+
+\begin{asciibox}
+NESTED-MERGER CASCADE
+=====================
+[Galaxy Group at z=0.453]
+   |
+   |--- Galaxy G1 (central, z=0.453, M ~ 3e13 Msun group mass)
+   |--- Satellite galaxies (G2, G5, G6 at z~0.45)
+   |--- 180 kpc TIDAL TAIL (v_debris ~ 250 km/s, tau_formation ~ 700 Myr)
+              |
+              |--- G* (faint satellite, M ~ 6e7 Msun, Pcc < 4%)
+              |        |
+              |        |-- Enhanced star formation (merger-induced burst)
+              |        |-- Binary massive star progenitor forms t0
+              |        |-- NS merger after ~500-700 Myr
+              |        |-- GRB 230906A (T90=0.94s, Ep=440 keV)
+              |                |
+              |                +--- Kilonova / r-process ejecta
+              |                     (v_ej ~ 0.1-0.3c, Mej ~ 0.01 Msun)
+              |                     |
+              |                     +-- r_fade ~ 460 pc (low CGM density)
+              |                     +-- Heavy elements escape to CGM
+              |                         [Eu, Au, Pt, lanthanides]
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MISSION MODULES (Squadron -- 5 parallel tracks)
+================================================
+
+  Module 01: BURST PROPERTIES              Module 02: MULTIWAVELENGTH
+  [ Fermi/GBM prompt emission ]            [ Chandra X-ray localization ]
+  [ IPN triangulation / T90 ]             [ XMM-Newton spectral fit    ]
+  [ Spectral lag; Amati plot  ]            [ VLT FORS2/HAWK-I imaging   ]
+  [ Energetics at 3 redshifts ]           [ HST F160W deep imaging     ]
+         |                                          |
+         +------------------+-----------------------+
+                            |
+                   [WAVE 2: SYNTHESIS]
+                            |
+         +------------------+-----------------------+
+         |                                          |
+  Module 03: HOST ENVIRONMENT             Module 04: MERGER DEMOGRAPHICS
+  [ Galaxy group z=0.453      ]           [ Delay-time distribution     ]
+  [ MUSE spectroscopy / sigma ]           [ Short-GRB host population   ]
+  [ Tidal tail morphology     ]           [ Optical selection effects   ]
+  [ G* SED / redshift options ]           [ BNS offset distributions    ]
+         |                                          |
+         +------------------+-----------------------+
+                            |
+                   Module 05: r-PROCESS
+                   [ CGM enrichment model   ]
+                   [ Ejecta fade radius     ]
+                   [ Halo star implications ]
+                   [ NewAthena prospects    ]
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GRB 230906A Mission Chipset
+# Amiga Principle: specialized execution paths over brute force
+
+agnus:          # Orchestration / DMA / Context Management
+  model:        claude-opus-4-5
+  role:         FLIGHT + CRAFT-ASTRO
+  assignments:
+    - Cross-module synthesis (burst + host + enrichment)
+    - Redshift degeneracy analysis
+    - r-process CGM implications
+    - NewAthena future-capabilities section
+
+denise:         # Display / Output Rendering
+  model:        claude-sonnet-4-5
+  role:         EXEC-A + EXEC-B + INTEG
+  assignments:
+    - Module 01 and 02 document production (burst + afterglow)
+    - Module 03 and 04 document production (environment + demographics)
+    - Table assembly and figure description rendering
+
+paula:          # I/O / Anticipatory
+  model:        claude-haiku-3-5
+  role:         LOG + BUDGET + scaffolding
+  assignments:
+    - Shared source index (Wave 0)
+    - Schema templates for observation tables
+    - Token budget tracking across waves
+
+gary_68000:     # CPU / Glue Logic
+  model:        claude-sonnet-4-5
+  role:         VERIFY + CAPCOM
+  assignments:
+    - Source validation (all citations against paper reference list)
+    - HITL gates at wave boundaries
+    - Safety check: no unsourced numerical claims
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Complete characterization of GRB 230906A prompt emission properties
+  \item Multi-wavelength afterglow light curve analysis (Swift/XRT, Chandra, XMM-Newton)
+  \item Host galaxy identification methodology and $P_{cc}$ analysis
+  \item Galaxy group environment at $z \approx 0.453$ (MUSE spectroscopy)
+  \item Tidal tail morphology and merger timescale estimate
+  \item Three redshift scenarios and their energetic implications
+  \item r-Process ejecta dispersal in the CGM context
+  \item Short-GRB population demographics and optical selection effects
+  \item Future instrumentation prospects (NewAthena/X-IFU redshift recovery)
+  \item Comparison to analogous events: GRB 111020A, GRB 111117A, GRB 050509B
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Direct r-process abundance measurement (no spectroscopic detection)
+  \item Kilonova light curve (too faint at $z \gtrsim 0.45$ for ground detection)
+  \item Gravitational-wave counterpart (pre-LIGO O4 merger; no GW signal)
+  \item Detailed binary stellar evolution modeling of the progenitor system
+  \item Galaxy group dynamics beyond virial mass estimate from velocity dispersion
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item Document correctly states GRB 230906A burst duration $T_{90} = 0.94 \pm 0.35$~s and classifies it as short/hard.
+  \item Document correctly states Chandra localization precision of 0.24$''$ (68\% CL) and explains why this beats XRT by $\sim$25$\times$.
+  \item All three redshift scenarios ($z=0.45$, $z=1.2$, $z=3$) are presented with corresponding $E_{\gamma,\text{iso}}$ values and jet-opening-angle lower limits.
+  \item The galaxy group at $z = 0.453$ is characterized with velocity dispersion $\sigma_v \approx 400$~km~s$^{-1}$, dynamical mass $\sim 3 \times 10^{13}~M_\odot$, and number of spectroscopic members (6 confirmed).
+  \item Tidal tail length ($\approx 180$~kpc), formation timescale ($\tau \approx 700$~Myr), and its significance for the DTD is correctly articulated.
+  \item The $P_{cc}$ for $G^*$ ($\approx 4\%$) is correctly derived and compared to the $P_{cc}$ for random alignment with a galaxy group ($\approx 3$--$4\%$).
+  \item The r-process ejecta ``fade radius'' concept is explained with the correct scaling ($r_{\text{fade}} \approx 460$~pc for typical tidal tail parameters) and its CGM enrichment implication stated.
+  \item Document explains why GRB 230906A cannot be firmly assigned a redshift without deep JWST spectroscopy or future X-ray spectroscopy.
+  \item NewAthena/X-IFU simulated spectrum (50~ks, $5 \times 10^{-13}$~erg~cm$^{-2}$~s$^{-1}$) and its redshift-recovery capability are accurately described.
+  \item Document contrasts GRB 230906A with the ``hostless'' class (GRB 111020A) and high-$z$ class (GRB 111117A at $z \approx 2.21$).
+  \item Short-GRB host population context is provided: median $z = 0.64$, $\approx 84\%$ star-forming, $14\%$ of hosts have $M_* \lesssim 10^9~M_\odot$.
+  \item Mission package is self-contained and executable by GSD orchestrator without additional context.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Fox Infrastructure Group & r-process enrichment as long-timescale cosmic infrastructure analogy & Philosophical \\
+The Space Between (TSB) & Versine / exsecant: meaning in the ``space between'' nuclei; the gaps between galaxies where enrichment happens & Philosophical \\
+Deep Audio Analyzer Mission & Multi-instrument synthesis; IPN triangulation as multi-sensor fusion & Structural \\
+GSD Upstream Intelligence Pack & Detection of weak signals in noisy environments (GRB afterglow in poor seeing) & Methodological \\
+GSD Skill Creator (v1.49+) & DACP: structured data handoff analogous to multi-telescope data reduction pipeline & Architectural \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The ``spaces between'' is not merely a metaphor here --- it is the physical site of the discovery. GRB 230906A did not explode inside a galaxy. It exploded in the debris between galaxies: in a tidal tail, in the circumgalactic space, in the low-density halo where ejecta can travel further than it would inside a dense ISM. The r-process elements forged in that collision are not retained. They escape. They enrich the medium between structures.
+
+This is the Amiga Principle operating at cosmic scale. The neutron star binary did not need a dense host galaxy; it needed the right architectural conditions --- a galaxy merger, enhanced star formation in a transient tidal structure, and a gravitational environment loose enough to let the products of the collision propagate outward. Specialized execution paths, minimal overhead, maximum reach. The space between the galaxies is where the heavy elements go to seed the next generation of stars.
+
+The GSD ecosystem shares this geometry. Skills live not inside a monolithic agent, but in the connections between agents. Knowledge lives not in one context window, but in the handoffs between sessions. The tidal tail is a handoff channel. GRB 230906A is a packet successfully delivered into the CGM.
+
+%%═══════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference is the authoritative source for Module-level agents during Wave 1 execution. Each module section contains the structured findings an executor needs to produce its deliverable independently. All numerical claims are sourced to the primary paper (Dichiara et al. 2026) or supplementary peer-reviewed literature.
+
+\textbf{Key source organizations and authorities:}
+\begin{itemize}[leftmargin=*]
+  \item \textit{Dichiara et al. 2026, ApJL, 999, L42} --- Primary source for all GRB 230906A data
+  \item \textit{NASA Fermi Science Support Center} --- GBM data archive and tools
+  \item \textit{Chandra X-ray Center (CXC)} --- CIAO software and ACIS-S data
+  \item \textit{ESO Archive} --- VLT FORS2, HAWK-I, MUSE data (Programs 110.24CF, 114.27LW)
+  \item \textit{MAST (STScI)} --- HST WFC3 data (Program 17492; doi:10.17909/xded-jp95)
+  \item \textit{Fong et al. 2022, ApJ, 940, 56} --- Short GRB host galaxy catalog (I)
+  \item \textit{Nugent et al. 2022, arXiv:2206.01764} --- Short GRB host galaxies (II), 69-galaxy sample
+  \item \textit{O'Connor et al. 2022, MNRAS, 515, 4890} --- X-ray afterglow population
+  \item \textit{Beniamini \& Piran 2019, MNRAS, 487, 4847} --- Merger delay times
+\end{itemize}
+
+\subsection{Module 01: Burst Properties and Prompt Emission}
+
+\subsubsection{Classification and Detection}
+
+GRB 230906A was detected by the Fermi Gamma-ray Burst Monitor (GBM) on 2023 September 6 at 12:55:07.15 UT. The burst was simultaneously recorded by INTEGRAL SPI-ACS, Konus-Wind, and the Mars Odyssey High-Energy Neutron Detector (HEND). InterPlanetary Network (IPN) triangulation refined the Fermi localization from a circle of radius 2.8$^\circ$ down to a narrow error box of $12' \times 2'$, enabling the Swift/XRT follow-up that identified the X-ray counterpart.
+
+\subsubsection{Duration and Spectral Properties}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} & \tableheader{Notes} \\
+\midrule
+$T_{90}$ & $0.94 \pm 0.35$~s & 8--1000 keV, 16~ms bins \\
+Spectral lag ($\tau$) & $2.5 \pm 6.8$~ms & Consistent with zero; short-GRB typical \\
+Peak energy $E_{pk}$ (total) & $440 \pm 80$~keV & Band function fit \\
+$\alpha$ index (main peak) & $-0.9 \pm 0.1$ & \\
+$\beta$ index (main peak) & $-2.5 \pm 0.5$ & \\
+Total fluence & $2.60 \pm 0.10 \times 10^{-6}$~erg~cm$^{-2}$ & 10--1000 keV \\
+Light curve morphology & First soft peak + 0.3~s quiescence + main episode & Two-component structure \\
+Amati classification & Short-GRB region & Consistent at all plausible $z$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Energetics at Three Redshift Scenarios}
+
+The distance degeneracy requires presenting results at each plausible redshift. Assuming a Band function spectral model and standard $\eta_\gamma \sim 15\%$ efficiency:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}L{4cm}L{4cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{$z$} & \tableheader{$E_{\gamma,\text{iso}}$ (1--10000 keV)} & \tableheader{Jet angle lower limit} & \tableheader{Origin scenario} \\
+\midrule
+0.45 & $\approx 2 \times 10^{51}$~erg & $\theta_j \gtrsim 6.7^\circ$ & Galaxy group \\
+1.2 & $\approx 1.4 \times 10^{52}$~erg & $\theta_j \gtrsim 4.5^\circ$ & Typical host luminosity \\
+3.0 & $\approx 6.8 \times 10^{52}$~erg & $\theta_j \gtrsim 2.9^\circ$ & Flat SED / Balmer break \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Collimation-corrected total energy at all three redshifts falls in the range $(0.8$--$5) \times 10^{50}$~erg, well within the NS merger energy budget. The jet break time lower limit $t_j > 6$~days (90\% confidence) is derived from the absence of a break in XMM-Newton observations at $T_0 + 10.9$~days.
+
+\subsection{Module 02: Multi-wavelength Afterglow}
+
+\subsubsection{X-Ray Localization Chain}
+
+The localization chain demonstrates the critical value of Chandra over Swift/XRT for host-galaxy identification in faint-afterglow events:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Instrument} & \tableheader{Epoch ($T_0$+)} & \tableheader{Position \& Key Data} & \tableheader{Error radius} \\
+\midrule
+Swift/XRT & 1.8 days & R.A.=$5^h19^m01.79^s$, Dec=$-47^\circ53'34.9''$ & 6.4$''$ (90\%) \\
+Chandra/ACIS-S & 4.7 days & R.A.=$5^h19^m01.53^s$, Dec=$-47^\circ53'32.4''$; $6.7\sigma$ detection & 0.24$''$ (68\%) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The 27$\times$ improvement in positional accuracy between XRT and Chandra is decisive: a 2$''$ XRT error circle yields $P_{cc} > 50\%$ favoring the bright galaxy G1 at 130~kpc projected offset; the Chandra position yields $P_{cc} \approx 4\%$ for the faint $G^*$ at subarcsecond offset.
+
+\subsubsection{X-Ray Temporal and Spectral Analysis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} & \tableheader{Source} \\
+\midrule
+Photon index $\Gamma$ & $1.3 \pm 0.2$ & XMM pn spectrum \\
+Spectral slope $\beta_X$ & $0.3 \pm 0.2$ & Slow-cooling, $\nu_c > \nu_X$ \\
+Electron index $p$ & $\sim 2.1$--$2.2$ & Closure relations satisfied \\
+Temporal decay slope $\alpha$ & $1.13^{+0.35}_{-0.27}$ & MCMC, combined light curve \\
+Jet break lower limit & $t_j > 6$~days (90\% CL) & XMM-Newton constraint \\
+$\log(F_{X,11}/f_{\gamma,15-150})$ & $-6.5^{+0.3}_{-0.5}$ & Consistent with typical short GRBs \\
+Galactic $N_H$ & $2.45 \times 10^{20}$~cm$^{-2}$ & Fixed (Willingale et al. 2013) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Optical and NIR Non-detections}
+
+Optical afterglow was not detected to 3$\sigma$ limits at any epoch. The predicted afterglow flux at $T_0 + 1.15$~days ($\approx 25.9$~AB~mag in UVOT $w$h) falls below Swift/UVOT sensitivity. Ground-based VLT/FORS2 limits of $R > 24.1$--$25.0$~AB~mag at $T_0 + 6.8$--$10.8$~days are consistent with a faint afterglow in unfavorable observing conditions (seeing 2.6$''$ initial epoch).
+
+A faint source at the Chandra position is detected in late-time VLT ($R = 26.3 \pm 0.3$~AB~mag at $T_0 + 36.75$~days) and HST WFC3/F160W ($26.00 \pm 0.10$~AB~mag at $T_0 + 164.9$~days). Image subtraction reveals no significant transient residual, confirming these detections as the host $G^*$ rather than afterglow.
+
+\subsection{Module 03: Host Galaxy Environment}
+
+\subsubsection{Putative Host $G^*$: Characterization}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Value / Description} & \tableheader{Source} \\
+\midrule
+F160W magnitude & $26.00 \pm 0.10$~AB~mag & HST/WFC3 \\
+$R$-band magnitude & $26.3 \pm 0.3$~AB~mag & VLT/FORS2 \\
+$r - H$ color & $\approx 0.3$~mag & Relatively blue \\
+Morphology & Likely faint galaxy (HST $H$/FWHM plot) & \\
+$P_{cc}$ (Chandra position) & $\approx 4\%$ & Becerra et al. 2023 formulation \\
+Mass (if $z \approx 0.45$) & $\approx 6 \times 10^7~M_\odot$ & Consistent with tidal dwarf \\
+Mass (if $z \approx 1.2$) & $\approx 2 \times 10^8~M_\odot$ & Low-mass star-forming \\
+Mass (if $z \approx 3.2$) & $\approx 9 \times 10^9~M_\odot$ & Massive galaxy \\
+Spectroscopic redshift & Not yet measured & Requires JWST \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The absence of a detectable Balmer break within the F160W band supports either a young stellar population or $z \gtrsim 3$ where the break is redshifted out of coverage. The blue color and compact size are consistent with both a tidal dwarf satellite at $z \approx 0.45$ and a high-$z$ system.
+
+\subsubsection{Galaxy Group at $z = 0.453$}
+
+VLT/MUSE integral-field spectroscopy confirmed 18 spectroscopic redshifts in the GRB field. Six galaxies share $z \approx 0.45$, forming a confirmed group:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}C{2.2cm}C{2.2cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Galaxy} & \tableheader{Spec-$z$} & \tableheader{$P_{cc}$} & \tableheader{Angular off.} & \tableheader{Phys. off.} \\
+\midrule
+$G^*$ & --- & 0.04 & subarcsec & --- \\
+G1 & 0.453 & 0.14 & 21.7$''$ & 129~kpc \\
+G2 & 0.453 & 0.26 & 7.6$''$ & 44~kpc \\
+G5 & 0.438 & 0.59 & 12.2$''$ & 71~kpc \\
+G6 & 0.451 & 0.66 & 18.3$''$ & 109~kpc \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Group dynamical properties derived from MUSE spectroscopy: velocity dispersion $\sigma_v \approx 400$~km~s$^{-1}$; virial mass $\sim 3 \times 10^{13}~M_\odot$ within 400~kpc of G1; group classification (not rich cluster). The dominant central galaxy G1 has spectroscopic $z = 0.453$ (vs photometric $z = 0.58$, demonstrating photo-$z$ limitations in dense environments).
+
+\subsubsection{Tidal Tail Morphology and Merger Timescale}
+
+HST F160W isophotal analysis (1~DN above background $\approx 27.5$~mag~arcsec$^{-2}$) reveals a curved tidal feature extending $\approx 180$~kpc northeast and southwest of G1. The GRB position and $G^*$ both fall within this ``in-tail'' region. Secondary emission knots near $G^*$ are consistent in brightness and morphology with tidal dwarf galaxies. The tail morphology (long extent, slight curvature) suggests a spiral galaxy encounter. Formation timescale:
+
+$$\tau \approx L/v \approx \frac{180~\text{kpc}}{250~\text{km~s}^{-1}} \approx 700~\text{Myr}$$
+
+This timescale is typical of NS binary merger delay times, providing a direct physical link between the galaxy merger epoch and the stellar generation that formed the GRB progenitor.
+
+\subsection{Module 04: Merger Demographics and Selection Effects}
+
+\subsubsection{Short-GRB Host Galaxy Population Context}
+
+The 69-galaxy sample of Fong et al. 2022 / Nugent et al. 2022 provides the population context:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Population Parameter} & \tableheader{Value} & \tableheader{Reference} \\
+\midrule
+Median redshift & $z = 0.64^{+0.83}_{-0.32}$ & Nugent et al. 2022 \\
+Star-forming fraction & $\approx 84\%$ & Nugent et al. 2022 \\
+Quiescent fraction & $\approx 10\%$ & Nugent et al. 2022 \\
+Low-mass hosts ($M_* \lesssim 10^9~M_\odot$) & $\approx 14\%$ of prior sample & Nugent et al. 2024 \\
+Median stellar mass & $\log(M_*/M_\odot) = 9.69^{+0.75}_{-0.65}$ & Nugent et al. 2022 \\
+Redshifts from afterglow spectra & $< 10\%$ of events & O'Connor et al. 2022 \\
+``Hostless'' fraction & $\sim 20$--$30\%$ & Gaspari et al. 2025 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+$G^*$, if at $z \approx 0.45$, would be among the lowest-mass short-GRB hosts detected. The broader delay-time distribution implied by the host population shows a fast-merging channel at $z > 1$ and decreased BNS formation efficiency at lower redshifts, consistent with the galaxy-merger-induced star formation scenario here.
+
+\subsubsection{Optical Selection Effects}
+
+The optical-detection bias systematically misses: (1) high-$z$ bursts where Lyman blanketing suppresses observed-frame optical flux; (2) mergers in low-density, halo environments where afterglows are intrinsically fainter; (3) events like GRB 230906A where observing conditions precluded timely optical follow-up. Chandra imaging is currently the only tool that provides subarcsecond localizations independent of optical brightness. The handful of prior Chandra-localized short GRBs (GRB 111020A: hostless; GRB 111117A: $z \approx 2.21$) each revealed environments invisible to optically driven samples.
+
+\subsubsection{Galaxy-Group Occurrence Rate}
+
+The probability of random coincidence between a short GRB sightline and the central core of a galaxy group is estimated at $P_{cc} \approx 3$--$4\%$ from the Galaxy and Mass Assembly (G3Cv1) catalog, which lists 6391 groups in 48~deg$^2$ ($\approx 130$~groups~deg$^{-2}$). This is comparable to the $P_{cc} \approx 4\%$ of $G^*$ --- confirming both associations as statistically comparable, and the group environment as a legitimate alternate host hypothesis.
+
+\subsection{Module 05: r-Process Enrichment and CGM Implications}
+
+\subsubsection{Ejecta Dispersal in Tidal Tails}
+
+In typical tidal tails (Duc \& Renaud 2013), gas density is $n \sim 10^{-3}$~cm$^{-3}$ and velocity dispersion is low. The r-process ejecta ``fade radius'' before efficient mixing with ISM is (Beniamini et al. 2018):
+
+$$r_{\text{fade}} \approx 460 \left(\frac{\sigma_v}{20~\text{km~s}^{-1}}\right)^{-0.4} \left(\frac{E}{10^{51}~\text{erg}}\right)^{0.28} \left(\frac{n}{10^{-3}~\text{cm}^{-3}}\right)^{-0.365}~\text{pc}$$
+
+This distance can be a significant fraction of the tidal tail width, meaning a large fraction of the r-process-synthesized mass ($\sim 10^{-2}~M_\odot$: gold, platinum, lanthanides, europium) escapes to the CGM rather than being retained within the host.
+
+\subsubsection{Cosmic Context: r-Process in the CGM}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Evidence Type} & \tableheader{Key Finding} & \tableheader{Reference} \\
+\midrule
+Reticulum II UFD & 7 of 9 stars show strong r-process enhancement; single NS merger event & Ji et al. 2016, Nature \\
+AT2017gfo kilonova & $\sim 0.01~M_\odot$ wind ejecta; r-process confirmed (blue + red components) & Kasen et al. 2017 \\
+Milky Way halo stars & Europium at unexpectedly high abundances far from galactic centers & Côté et al. 2018 \\
+Sagittarius stream & $>50\%$ of stars show r-process signature; early NS merger enrichment & arXiv:2501.14061 \\
+BNS merger rate (LIGO) & Consistent with producing sufficient r-process for cosmic europium & Côté et al. 2025 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+A NS merger in a tidal tail provides a ``natural explanation for why we see an enhanced rate of production of heavy elements in the halo of interacting galaxies'' (Dichiara, quoted in Earth.com, March 2026). This pathway may account for metal-poor halo stars with disproportionate heavy-element abundances --- stars that formed from CGM gas enriched by earlier group-environment NS mergers.
+
+\subsubsection{Future Instrumentation: NewAthena/X-IFU}
+
+Redshift degeneracy of the type displayed by GRB 230906A can be broken in future events by the NewAthena mission (ESA, 2030s), specifically the X-IFU micro-calorimeter spectrometer ($\Delta E = 4$~eV resolution). At $z \sim 0.453$, the neutral oxygen K edge and iron L complex fall within the X-IFU bandpass. A simulated 50~ks spectrum at $5 \times 10^{-13}$~erg~cm$^{-2}$~s$^{-1}$ recovers the input redshift with 90\% confidence contours spanning $\Delta z \approx 0.05$--$0.1$ --- sufficient to distinguish between the three redshift scenarios.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk Level} & \tableheader{Mitigation} \\
+\midrule
+Numerical claims & MEDIUM & All values cited directly to Table 1, 2, 3, or 4 of primary paper \\
+Redshift assignments & HIGH & All three scenarios explicitly presented; no single scenario claimed as definitive \\
+r-process mass estimates & MEDIUM & Use ranges from AT2017gfo literature; do not overstate GRB 230906A specific yield \\
+NewAthena capabilities & LOW & Cite Cruise et al. 2025 and Barret et al. 2023; note ``next decade'' timeline \\
+Population statistics & MEDIUM & Cite specific surveys (Nugent 2022, Fong 2022); distinguish sample sizes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Research Paper}
+Dichiara, S., Troja, E., O'Connor, B., Yang, Y.-H., Beniamini, P., Galvan-Gamez, A., Sakamoto, T., Kawakubo, Y., \& Charlton, J.~C. 2026, ApJL, 999, L42. doi:10.3847/2041-8213/ae2a2f
+
+\subsubsection{Peer-Reviewed Research}
+
+Abbott, B.~P. et al. 2017a, ApJL, 848, L12 (GW170817 discovery) \\
+Beniamini, P. et al. 2018, MNRAS, 478, 1994 (r-process in tidal tails) \\
+Beniamini, P. \& Piran, T. 2019, MNRAS, 487, 4847 (merger delay times) \\
+Côté, B. et al. 2018, ApJ, 855, 99 (Eu abundances / NS mergers) \\
+Duc, P. \& Renaud, F. 2013, LNP, 861, 327 (tidal tail parameters) \\
+Fong, W.-f. et al. 2022, ApJ, 940, 56 (short GRB host catalog I) \\
+Ji, A.~P. et al. 2016, Nature, 531, 610 (r-process in Reticulum II) \\
+Kasen, D. et al. 2017, Nature, 551, 80 (kilonova AT2017gfo model) \\
+Nugent, A.~E. et al. 2022, arXiv:2206.01764 (short GRB host galaxies II, 69-sample) \\
+Nugent, A.~E. et al. 2024, ApJ (faintest short GRB host sample) \\
+O'Connor, B. et al. 2022, MNRAS, 515, 4890 (X-ray afterglow population) \\
+Perets, H.~B. \& Beniamini, P. 2021, MNRAS, 503, 5997 (extended stellar distributions) \\
+Sakamoto, T. et al. 2013, ApJ, 766, 41 (GRB 111117A Chandra localization) \\
+
+\subsubsection{Facility Documentation}
+Chandra Data Collection (CDC): doi:10.25574/cdc.510 \\
+HST Data Archive (MAST): doi:10.17909/xded-jp95 \\
+ESO Programs 110.24CF (PI: Tanvir) and 114.27LW (PI: Troja)
+
+%%═══════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research document on GRB 230906A (Dichiara et al. 2026) and its nested-merger environment, synthesizing prompt emission analysis, multi-wavelength afterglow characterization, host galaxy identification methodology, galaxy-group environment, delay-time distribution implications, and r-process CGM enrichment --- structured for handoff to a GSD skill-creator agent for execution in Claude Code.
+
+The mission advances the GSD ecosystem's astrophysics knowledge base and serves as a model for ``literature-to-mission'' packaging of peer-reviewed papers into executable research workflows.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+=================
+Wave 0: FOUNDATION (Sequential, Haiku)
+  +-- Shared schema: observation tables, module templates
+  +-- Source index (primary paper + 14 supporting references)
+  +-- Redshift scenario parameter set (z=0.45, z=1.2, z=3.0)
+
+Wave 1: PARALLEL RESEARCH TRACKS
+  Track A (Sonnet)              Track B (Sonnet)
+  +-- Module 01: Burst props    +-- Module 03: Host environment
+  +-- Module 02: Afterglow      +-- Module 04: Demographics
+
+                  CAPCOM GATE [human review]
+
+Wave 2: SYNTHESIS (Opus)
+  +-- Module 05: r-process enrichment
+  +-- Cross-module: energy-environment consistency
+  +-- Redshift degeneracy analysis
+  +-- NewAthena future-capabilities section
+
+Wave 3: PUBLICATION + VERIFICATION (Sonnet)
+  +-- LaTeX PDF compilation (3 passes XeLaTeX)
+  +-- Source validation against paper reference list
+  +-- Numerical consistency check (all values vs. Tables 1-4)
+  +-- index.html production
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Completion Criteria} & \tableheader{Format} \\
+\midrule
+D1 & Module 01 document & All 12 success criteria addressed; Tables 1-2 reproduced & Markdown \\
+D2 & Module 02 document & Chandra localization chain; X-ray light curve params & Markdown \\
+D3 & Module 03 document & $G^*$ characterization; group at $z=0.453$; tidal tail & Markdown \\
+D4 & Module 04 document & Host population context; selection effects; group rate & Markdown \\
+D5 & Module 05 document & r-process fade radius; CGM enrichment; NewAthena sim & Markdown \\
+D6 & Synthesis chapter & Cross-module consistency; nested-merger narrative & Markdown \\
+D7 & Final PDF & XeLaTeX 3-pass compile, no errors; all sections present & PDF \\
+D8 & .tex source & Human-editable, well-commented & .tex \\
+D9 & Index page & Download links, usage instructions, color-matched & HTML \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.8cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. tokens} & \tableheader{Key output} \\
+\midrule
+Wave 0 scaffold & None & Haiku & 8k & Source index, schemas \\
+Module 01 (Burst) & Wave 0 & Sonnet & 18k & Prompt emission analysis \\
+Module 02 (Afterglow) & Wave 0 & Sonnet & 22k & X-ray light curve, localization \\
+Module 03 (Environment) & Wave 0 & Sonnet & 25k & Group, tidal tail, $G^*$ \\
+Module 04 (Demographics) & Wave 0 & Sonnet & 20k & Host population context \\
+Module 05 (r-process) & Mod 01--04 & Opus & 28k & CGM enrichment synthesis \\
+Synthesis chapter & Mod 01--05 & Opus & 22k & Nested-merger narrative \\
+LaTeX PDF & All modules & Sonnet & 30k & Compiled 3-pass PDF \\
+Verification & PDF + sources & Sonnet & 12k & Checked, signed-off \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated tokens:} $\approx 185$k input + 50k output $= 235$k across 8--10 context windows.
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Profile} & \tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & claude-opus-4-5 & $\approx 30\%$ & r-process synthesis; nested-merger narrative judgment; redshift degeneracy reasoning; NewAthena future-capability framing \\
+Sonnet & claude-sonnet-4-5 & $\approx 60\%$ & Module document production; LaTeX assembly; host population tables; verification \\
+Haiku & claude-haiku-3-5 & $\approx 10\%$ & Scaffolding; source index; schema templates; token budget tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{2cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Key activities} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Source index, schemas, scenario params \\
+1A & Burst + Afterglow & Parallel & Sonnet & Mod 01 + 02 \\
+1B & Environment + Demo & Parallel & Sonnet & Mod 03 + 04 \\
+--- & CAPCOM Gate & --- & Human & Review scope; confirm redshift framing \\
+2 & Synthesis & Sequential & Opus & Mod 05 + cross-module integration \\
+3 & Publication & Sequential & Sonnet & LaTeX PDF + verification + HTML \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Source index & BUDGET/LOG & 15-entry bibliography with DOIs and roles \\
+Observation table schema & LOG & Standardized column headers for all telescope data \\
+Redshift scenario set & LOG & JSON: \{z\_group: 0.45, z\_lum: 1.2, z\_sed: 3.0\} with $E_{\gamma,\text{iso}}$ \\
+Module template & LOG & Section stubs for Mod 01--05 with expected subsections \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- Burst Properties and Afterglow (Modules 01--02)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Prompt emission section & EXEC-A & $T_{90}$, spectral analysis, Amati plot classification \\
+Energetics table & EXEC-A & $E_{\gamma,\text{iso}}$ and $\theta_j$ at three redshifts \\
+Localization chain & EXEC-A & XRT $\to$ Chandra; error radius comparison \\
+X-ray temporal fit & EXEC-A & Light curve; $\alpha$; jet break limit \\
+Optical/NIR non-detections & EXEC-A & Upper limit table; predicted vs observed flux \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Environment and Demographics (Modules 03--04)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+$G^*$ characterization & EXEC-B & SED, magnitudes, star-galaxy separation, $P_{cc}$ \\
+Galaxy group MUSE results & EXEC-B & $\sigma_v$, dynamical mass, 6-member table \\
+Tidal tail analysis & EXEC-B & 180~kpc extent, $\tau \approx 700$~Myr timescale, isophotes \\
+Host population context & EXEC-B & 69-galaxy sample statistics; optical selection effects \\
+Group occurrence rate & EXEC-B & G3Cv1 density; $P_{cc}$ comparison \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+r-process Module 05 & CRAFT-ASTRO & Fade radius; CGM escape fraction; halo enrichment \\
+Nested-merger narrative & CRAFT-ASTRO & 2-scale cascade: galaxy merger $\to$ NS merger $\to$ CGM \\
+Energy-environment consistency & INTEG & $F_{X,11}/f_\gamma$ ratio vs. environment type comparison \\
+SN exclusion argument & CRAFT-ASTRO & Optical limits vs SN 1998bw / SN 2006aj at $z=0.45$ \\
+NewAthena prospects & CRAFT-ASTRO & X-IFU simulation; redshift recovery; future pipeline \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+LaTeX assembly & EXEC-A & Full .tex source with all modules and references \\
+XeLaTeX compilation & EXEC-A & 3-pass; zero errors; correct page count \\
+Numerical verification & VERIFY & All values checked against Tables 1--4 of primary paper \\
+Source validation & VERIFY & All 15 bibliography entries verified against paper refs \\
+Success criteria check & VERIFY & SC1--SC12 all marked PASS \\
+index.html production & EXEC-B & Download cards, color-matched, usage instructions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item The primary paper (Dichiara et al. 2026) is the shared anchor document; pass it as the first context element in every wave to exploit the 5-minute TTL cache across parallel calls.
+  \item The redshift scenario parameter set (JSON from Wave 0) is embedded in the system prompt for Modules 01 and 05 --- any agent that touches energetics needs this upfront.
+  \item Observation Table schema (from Wave 0) is reused verbatim in Modules 01--03 to avoid redundant table reconstruction.
+  \item The MUSE spectroscopic redshift table (Table 4 of paper) is a high-reuse asset --- cache-pin it for Module 03 and the synthesis chapter.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input (k)} & \tableheader{Output (k)} & \tableheader{Cached (k)} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 15 & 8 & 0 & Scaffolding only \\
+Wave 1A & 45 & 12 & 20 & Paper + schema cached \\
+Wave 1B & 45 & 12 & 20 & Paper + schema cached \\
+Wave 2 & 55 & 15 & 25 & Mod 01--04 outputs \\
+Wave 3 & 35 & 10 & 15 & All modules assembled \\
+\midrule
+\textbf{Total} & \textbf{195} & \textbf{57} & \textbf{80} & $\approx$ 8--10 sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+[Wave 0: Source Index + Schemas + Scenario Params]
+          |              |
+          v              v
+   [Module 01]       [Module 03]
+   [Module 02]       [Module 04]
+   (Track A)         (Track B)
+          |              |
+          +------+--------+
+                 |
+          [CAPCOM GATE]
+                 |
+                 v
+          [Module 05: r-process + CGM synthesis]
+          [Nested-merger integration chapter]
+          [Energy-environment consistency check]
+                 |
+                 v
+          [LaTeX assembly + 3-pass XeLaTeX]
+          [Numerical verification (SC1-SC12)]
+          [index.html]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure action} \\
+\midrule
+Safety-critical (numerical accuracy) & 6 & BLOCK & Halt; re-verify against source tables \\
+Core (success criteria) & 12 & HIGH & Revision required before handoff \\
+Integration (cross-module) & 4 & MEDIUM & Flag; reconcile in synthesis chapter \\
+Edge case (redshift ambiguity) & 3 & MEDIUM & Ensure all three scenarios are present \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected outcome / BLOCK condition} \\
+\midrule
+T-SC1 & $T_{90}$ value & Must be $0.94 \pm 0.35$~s; any other value is BLOCK \\
+T-SC2 & Chandra error radius & Must be 0.24$''$ (68\%); any other value is BLOCK \\
+T-SC3 & $P_{cc}$ for $G^*$ & Must be $\approx 4\%$; must not be stated as $<1\%$ or $>10\%$ \\
+T-SC4 & Tidal tail length & Must be $\approx 180$~kpc; must not be stated as arcminutes without conversion \\
+T-SC5 & Group dynamical mass & Must be $\sim 3 \times 10^{13}~M_\odot$; galaxy-vs-cluster distinction required \\
+T-SC6 & $E_{\gamma,\text{iso}}$ at $z=0.45$ & Must be $\approx 2 \times 10^{51}$~erg; all three redshifts must be present \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{5cm}C{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & $T_{90}$ and short-GRB classification & T-SC1 & [ ] \\
+SC2 & Chandra 0.24$''$ localization; XRT comparison & T-SC2 & [ ] \\
+SC3 & Three redshift energetics & T-SC6 & [ ] \\
+SC4 & Galaxy group: $\sigma_v$, mass, 6 members & T-SC5 & [ ] \\
+SC5 & Tidal tail: 180~kpc, $\tau \approx 700$~Myr, DTD link & T-SC4 & [ ] \\
+SC6 & $P_{cc}$ for $G^*$ and group comparison & T-SC3 & [ ] \\
+SC7 & r-process fade radius; CGM enrichment & Integration & [ ] \\
+SC8 & JWST requirement for redshift resolution & Core & [ ] \\
+SC9 & NewAthena/X-IFU simulation description & Core & [ ] \\
+SC10 & Analogues: GRB 111020A, 111117A & Core & [ ] \\
+SC11 & Host population: median $z$, SF fraction, dwarf fraction & Core & [ ] \\
+SC12 & Self-contained, zero-context-needed handoff & Integration & [ ] \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track optimization; session budgeting \\
+SCOUT & Osprey & Source gathering; web research for population context gaps \\
+EXEC-A & Salmon-A & Module 01--02 production (burst + afterglow); LaTeX assembly \\
+EXEC-B & Salmon-B & Module 03--04 production (environment + demographics); HTML \\
+CRAFT-ASTRO & Raven & r-process synthesis (Module 05); nested-merger narrative \\
+CRAFT-INST & Tahoma & Instrumentation analysis (Chandra, XMM, NewAthena X-IFU) \\
+VERIFY & Orca & Source validation; numerical accuracy; 12 success criteria check \\
+INTEG & Cedar & Cross-module consistency; energy-environment reconciliation \\
+CAPCOM & HITL & Human approval at Wave 2 entry and Wave 3 entry \\
+BUDGET & Osprey-Budget & Token budget tracking; session planning; cache hit monitoring \\
+LOG & Chronicle & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{PNW species naming convention applied:} Raven (synthesis intelligence), Salmon (document production, returning to source), Orca (verification, pattern detection), Cedar (deep-rooted integration), Tahoma (precision instrumentation), Osprey (scouting/budget).
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Squadron (12 roles) \\
+Module count & 5 research modules + 1 synthesis chapter \\
+Parallel tracks in Wave 1 & 2 (Track A and Track B) \\
+Estimated context windows & 8--10 \\
+Estimated sessions & 3 \\
+Model split (Opus/Sonnet/Haiku) & 30\% / 60\% / 10\% \\
+Total estimated tokens & $\sim$250k (input + output) \\
+Safety-critical tests & 6 (all BLOCK-level) \\
+Success criteria & 12 \\
+Primary source & Dichiara et al. 2026, ApJL, 999, L42 \\
+Handoff format & LaTeX PDF + .tex + index.html \\
+HITL gates & 2 (Wave 1$\to$2; Wave 2$\to$3) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``A merger within a merger. At the galaxy scale: two stellar systems tearing at each other across 700 million years, weaving a tidal ribbon 180 kiloparsecs long. At the stellar scale: two neutron stars, born in the burst of new stars that ribbon provoked, spiraling inward until the universe lit up for 0.94 seconds. The elements forged in that second are now in the circumgalactic medium. In the spaces between galaxies. In the halo. Waiting to seed the next generation of stars, in a structure that no longer even exists as it was.}\\[0.8em]
+\textit{The spaces between are where the heavy elements go. The Amiga Principle holds at cosmic scale: small, principled structures produce staggering complexity through faithful iteration. Not by force, but by architecture.''}\\[0.5em]
+{\small\sffamily\textcolor{subtlegray}{--- GSD Research Mission Package, GRB 230906A, March 2026}}
+\end{quotebox}
+
+\end{document}

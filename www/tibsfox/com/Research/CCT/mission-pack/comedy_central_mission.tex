@@ -1,0 +1,1064 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── COLOR SCHEME: Broadcast / Media Domain ───────────────────────────────────
+\definecolor{primary}{HTML}{4A148C}       % Deep broadcast purple
+\definecolor{secondary}{HTML}{BF360C}     % Studio amber/red
+\definecolor{tertiary}{HTML}{1A237E}      % Deep institutional blue
+\definecolor{accent}{HTML}{7B1FA2}        % Mid-purple accent
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Lavender tint
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{E8EAF6}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ─── SECTION FORMATTING ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── CUSTOM ENVIRONMENTS ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ─── TABLE HELPERS ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── HEADERS / FOOTERS ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Comedy Central \& The Daily Show}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── HYPERLINKS ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Comedy Central \& The Daily Show -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ─── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Comedy Central\\[0.3em]\& The Daily Show}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Longest-Running Show in Cable Comedy}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 6--8 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Comedy Central \& The Daily Show --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Research-Complete / Mission-Ready}
+\metafield{Depends On:}{gsd-amiga-vision-architectural-leverage.md, ai\_agentic\_programming\_report.md}
+\metafield{Context:}{Cold-start research mission; web research conducted prior to packaging}
+
+\subsection{Vision}
+
+There is a kind of leverage that looks like foolishness from the outside. In 1989, HBO's head of original programming dismissed the idea of a 24-hour comedy channel with this verdict: ``There's so much comedy on television all over the dial, why would anyone need a 24-hour-a-day comedy channel?'' She was wrong. What she missed was the Amiga Principle at work --- the possibility that a specialized architecture, purpose-built for one thing and built \emph{well}, could outperform brute-force generalism at a fraction of the apparent resource requirement.
+
+Comedy Central was born not from abundance but from two near-failures. The Comedy Channel (HBO) and HA! (Viacom/MTV) launched separately in 1989 and 1990, each stumbling on the same problem: neither alone could attract enough cable system operators, because nobody needed two comedy channels. The merger on April 1, 1991 --- fitting, given the enterprise --- produced something neither had: a 24-hour slate, 12.5 million combined subscribers, and the shared programming library that made the channel viable. From that act of consolidation came one of the most culturally significant broadcast experiments in American television history.
+
+The Daily Show sits at the center of this story. What began in 1996 as a pop-culture parody show hosted by a former ESPN anchor became, under Jon Stewart's sixteen-year stewardship, something the industry had no category for: a comedy program that functioned as accountability journalism, a late-night show that U.S. senators took seriously, and a talent forge that launched the careers of Stephen Colbert, John Oliver, Steve Carell, Ed Helms, Samantha Bee, Hasan Minhaj, and dozens of others. The spaces between the jokes contained something structural --- a systematic commitment to showing the gap between what power says and what power does.
+
+This research mission documents the full arc: Comedy Central's founding architecture, The Daily Show's transformation under successive hosts, the talent ecosystem it seeded, the academic literature on its political effects, and its current position in the streaming era under Paramount Skydance.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Origin and architecture are underdocumented.} The founding story of Comedy Central --- the dual-network failure, the merger logic, the programming choices that created the channel's identity --- is poorly synthesized in one place. The role of specific shows (MST3K, Politically Incorrect, early TDS) in shaping the channel's institutional voice is scattered across oral histories, trade press, and academic accounts.
+
+  \item \textbf{The Daily Show's political function is contested.} Academic research has produced contradictory findings on whether TDS increased civic engagement or political cynicism, whether it constituted ``alternative journalism,'' and how its satirical strategies changed across hosts and eras. A unified synthesis of this scholarship does not exist in mission-ready form.
+
+  \item \textbf{The talent pipeline is undervalued as a structural contribution.} Comedy Central's most lasting output may not be programming hours but career trajectories: TDS functioned as the comedy industry's equivalent of a farm system, producing more late-night and political satire hosts than any other single program. This pipeline is rarely analyzed as a deliberate institutional function.
+
+  \item \textbf{The streaming transition threatens the linear identity.} Comedy Central's two remaining franchise anchors --- South Park and The Daily Show --- are now on a dual-distribution model: linear cable airing + Paramount+ streaming. As cord-cutting accelerates and Skydance restructures Paramount's cable portfolio, the long-term survival of Comedy Central as a distinct linear brand is genuinely uncertain.
+
+  \item \textbf{The Daily Show's current identity is unresolved.} After Trevor Noah's departure in 2022, Jon Stewart's return in February 2024 (Mondays only), and an extended contract into 2026, the show's format --- rotating correspondents on other weekdays, Stewart as weekly anchor --- represents a genuine structural experiment in late-night whose outcome is still being written.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Comedy Central / Daily Show nexus as a cultural infrastructure system:} a network that built its identity not through scale but through editorial specificity, and a show that became a carrier medium for democratic accountability precisely because it refused to call itself journalism.
+
+\begin{asciibox}
+COMEDY CENTRAL ARCHITECTURE OVERVIEW
+======================================
+
+[1989]  HBO launches The Comedy Channel      [1990]  Viacom launches HA!
+         12-hour/day, originals                      12-hour/day, SNL reruns
+         4.2M subscribers                            4.0M subscribers
+                    |                                       |
+                    +---------------+---------------+
+                                    |
+                             APRIL 1, 1991
+                        CTV: The Comedy Network
+                        (renamed Comedy Central, June 1991)
+                        12.5M combined subscribers
+                                    |
+              +---------------------+---------------------+
+              |                     |                     |
+         ORIGINALS              RERUNS                TOPICAL
+         (MST3K)             (SNL, sitcoms)       (Politically Incorrect)
+              |                                           |
+              v                                           v
+         1997: South Park                     1996: The Daily Show
+         (Parker/Stone)                       (Kilborn -> Stewart, 1999)
+              |                                           |
+         Still airing 2026                    26 Emmys, 30 years on air
+              |                                           |
+              +-------------------+-------------------+
+                                  |
+                    Skydance/Paramount (August 2025)
+                    Linear + Paramount+ hybrid model
+\end{asciibox}
+
+\begin{asciibox}
+THE DAILY SHOW LINEAGE
+========================
+
+  1996--1998       1999--2015          2015--2022          2022--2024
+  Craig Kilborn    Jon Stewart         Trevor Noah         Rotating hosts
+  Pop-culture      Political satire    Global perspective  Guest format
+  parody           Accountability J.   COVID era           Transition period
+       |                 |                  |                   |
+       |            [APEX ERA]              |                   |
+       |         26 Emmy Awards             |          Feb 2024: Stewart returns
+       |         Crossfire moment           |          (Mon. only, Tue-Thu
+       |         9/11 monologue             |           correspondents)
+       |         9/11 First Resp.           |
+       |         advocacy                   |
+       |         Indecision specials        |
+       v                 v                  v                   v
+  Replaceable      Culture-defining    Globalized           Contract
+  format           journalism          satire               extended 2026
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Origins \& Architecture (1989--1997)}
+The founding of Comedy Central from the dual failure of The Comedy Channel and HA!, including the merger logic, key programming decisions (MST3K, Politically Incorrect, convention coverage), early subscriber growth, and the institutional DNA that gave the channel its topical-comedy identity. Includes the 1996 launch of The Daily Show with Craig Kilborn as the direct descendant of the political comedy tradition.
+
+\subsubsection{Module 02: The Daily Show Lineage (1996--2026)}
+Comprehensive host-era analysis: Kilborn's pop-culture parody period; Stewart's transformative 1999--2015 tenure (9/11 monologue, Indecision specials, Crossfire confrontation, 9/11 First Responders advocacy, 26 Emmys); Noah's 2015--2022 era (globalized perspective, COVID adaptations, increased diversity); the 2022--2024 rotating-host experiment; and Stewart's 2024--present return under a hybrid format with correspondents anchoring non-Monday episodes.
+
+\subsubsection{Module 03: The Talent Forge}
+The Daily Show as the comedy industry's most productive career launchpad. Analysis of the correspondent-to-headliner pipeline: Stephen Colbert (Colbert Report, Late Show with Stephen Colbert); John Oliver (Last Week Tonight, HBO); Steve Carell (The Office, film career); Ed Helms (The Office, The Hangover); Samantha Bee (Full Frontal); Hasan Minhaj (Patriot Act, The Daily Show return); Ronny Chieng; Roy Wood Jr.; and dozens of writers who became showrunners. Includes analysis of Comedy Central's institutional failure to retain Oliver as a cautionary case study.
+
+\subsubsection{Module 04: Political Satire as Alternative Journalism}
+Synthesis of the academic literature on TDS's political and civic effects, including: Baumgartner and Morris (2006) ``The Daily Show Effect'' (increased political efficacy, decreased candidate trust); subsequent extensions of the Effect study (Becker et al.); Baym (2005) ``discursive integration'' model; the contested question of whether TDS constitutes alternative journalism; MCDA analysis of election coverage across the Noah (2020) and Stewart (2024) eras; and comparative work on satirical news as civic education.
+
+\subsubsection{Module 05: Streaming Era \& Future (2020--Present)}
+The structural transformation of Comedy Central under cord-cutting, streaming migration, and corporate consolidation. Covers: South Park's dual-distribution model (Comedy Central linear + Paramount+ streaming, 10 eps/year through 2029); The Daily Show's Comedy Central website shutdown (June 2024) and Paramount+ migration; Skydance's acquisition of Paramount Global (August 2025); Laurel Weir's appointment as programming lead for Comedy Central, MTV, Nickelodeon; Comedy Central's declining linear viewership; and the strategic question of whether The Daily Show and South Park can sustain a linear cable brand in the streaming era.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset YAML — Comedy Central Mission
+chipset:
+  agnus:          # Orchestration / DMA / Context Management
+    model: opus
+    role: FLIGHT + PLAN
+    focus: >
+      Cross-module synthesis; host-era narrative continuity;
+      academic literature integration; HITL gate management
+  denise:         # Display / Output Rendering
+    model: sonnet
+    role: EXEC (x2)
+    focus: >
+      Module document production; table assembly;
+      bibliography formatting; wave execution
+  paula:          # Audio / I-O / Anticipatory
+    model: haiku
+    role: LOG + BUDGET + scaffolding
+    focus: >
+      Shared schema generation; template rendering;
+      token budget tracking; commit messages
+  '68000':        # CPU / Glue Logic
+    model: sonnet
+    role: CRAFT-HIST + CRAFT-MEDIA
+    focus: >
+      Historical analysis (origins, host eras, spin-offs);
+      Media studies synthesis (TDS Effect, civic effects research)
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Comedy Central's founding history (1989--1996), including The Comedy Channel and HA! antecedents
+  \item The Daily Show across all host eras: Kilborn (1996--1998), Stewart (1999--2015), Noah (2015--2022), rotating hosts (2022--2024), Stewart return (2024--2026)
+  \item Correspondent/alumni pipeline: careers of all major TDS spin-off hosts and notable correspondents
+  \item Academic literature on TDS's political and civic effects (peer-reviewed, through 2025)
+  \item Comedy Central's business evolution: Viacom acquisition (2003), programming strategy shifts, streaming transition, Skydance/Paramount merger (2025)
+  \item South Park's role as Comedy Central's other anchor franchise, dual-distribution model
+  \item The Colbert Report as the most significant TDS spin-off (2005--2014)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Comedy Central international channels (UK, India, Latin America, etc.) beyond brief mention
+  \item Detailed analysis of Comedy Central shows not directly connected to TDS ecosystem (Chappelle's Show, Key \& Peele, Broad City) --- these may seed a separate mission
+  \item Stand-up special programming history
+  \item Financial modeling of Comedy Central's cable carriage fees
+  \item Detailed episode-level analysis of any individual TDS season
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Module 01 document traces the Comedy Central founding from The Comedy Channel launch (November 15, 1989) through The Daily Show premiere (July 22, 1996) with all key dates and programming decisions sourced.
+  \item Module 02 document covers all five host/format eras with at minimum three defining moments, audience figures, or critical milestones per era.
+  \item Module 03 document identifies and profiles at least 12 notable TDS correspondents or alumni with career outcomes, with the John Oliver retention failure explicitly analyzed.
+  \item Module 04 document synthesizes a minimum of six peer-reviewed or academic sources on TDS's political effects, including both ``positive'' (civic engagement) and ``negative'' (political cynicism) findings.
+  \item Module 05 document traces the Comedy Central linear-to-streaming transition with specific deal terms and dates for the South Park HBO Max / Paramount+ transitions and the Skydance merger.
+  \item All five module documents cross-reference each other: at least two explicit inter-module connections exist in the synthesis.
+  \item The Colbert Report spin-off is analyzed as both a talent-forge outcome (Module 03) and a cable scheduling architecture decision (Module 02).
+  \item Academic sources in Module 04 are peer-reviewed, published in journals or university press volumes; zero entertainment media sources used for empirical claims.
+  \item A complete talent pipeline diagram is produced, showing TDS's correspondence to downstream shows and networks.
+  \item The synthesis document addresses the central unresolved question: can Comedy Central survive as a distinct linear brand if both South Park and The Daily Show migrate primarily to Paramount+?
+  \item All numerical claims (Emmy count, subscriber figures, streaming deal valuations, viewership numbers) are attributed to named sources.
+  \item The mission package is self-contained: an executor with no prior knowledge can produce all five modules from the specs alone.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+gsd-amiga-vision-architectural-leverage.md & Comedy Central's founding embodies the Amiga Principle: two weak channels merging into one capable architecture & Philosophical parallel \\
+ai\_agentic\_programming\_report.md & TDS's talent-forge model mirrors agent specialization: correspondents as narrow-role specialists producing broad cultural output & Structural analogy \\
+gsd-upstream-intelligence-pack-v1\_43.md & Political satire as upstream intelligence: TDS identifies narrative failures in institutional media before they surface in policy discourse & Thematic overlap \\
+gsd-bbs-educational-pack-vision.md & TDS's classroom applications documented in academic literature; Comedy Central as unexpected educational vector & Module 04 crossover \\
+deepaudioanalyzermission.pdf & Audio/production analysis methodology applicable to TDS segment analysis (desk-piece sonic grammar, musical cues) & Methodological \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The story of Comedy Central and The Daily Show is the story of what happens when a medium finds its editorial voice by accident, then refuses to give it up. Comedy Central was not designed to matter politically. It was a cable channel born from the merger of two failures, intended to fill 24 hours a day with comedy. The Daily Show was not designed to matter politically either --- it launched as a pop-culture parody show, a budget replacement for a talk show that had defected to ABC.
+
+What changed was the same thing that changes all significant systems: not a plan, but a moment of authentic engagement. Jon Stewart, stepping into the anchor chair in 1999, asked his correspondents to have a political \emph{viewpoint} --- to let their passion carry through into the comedy. ``Indecision 2000'' and the Bush-Gore recount became the show's editorial crucible. September 11 became the moment the show's vulnerability and its resolve merged publicly. From then on, The Daily Show was not fake news in the dismissive sense but fake news in a more precise sense: it used the formal grammar of television news to interrogate and expose the substantive failures of television news.
+
+This is the spaces-between at work again. The authority of The Daily Show was not located in its assertions but in the juxtaposition it performed --- the clip of what the official said, placed next to the clip of what the official did, separated only by Stewart's pause and the audience's laugh. The meaning lived in the gap. The power was architectural. Thirty years on, as the linear cable model gives way to streaming and as Comedy Central's identity converges on two surviving franchises, the question is whether that architectural power survives the platform transition. The research mission exists to find out.
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Comedy Central \& The Daily Show --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference supplies the evidentiary foundation for all five modules. Module executors should read their assigned section before producing any document output. Sources marked [GATE] must be cited; sources marked [CONTEXT] may be paraphrased without citation.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Peer-reviewed journals:} \textit{Political Communication}, \textit{Journal of Communication}, \textit{Journalism}, \textit{Media, Culture \& Society}
+  \item \textbf{Academic books:} University press publications on political satire, television history, and media studies
+  \item \textbf{Trade press (context only):} \textit{The Hollywood Reporter}, \textit{Deadline Hollywood}, \textit{Variety} --- for deal terms and business history, not political analysis
+  \item \textbf{Primary oral histories:} Art Bell's account in \textit{Highbrow Magazine} and \textit{Constant Comedy} (memoir); Chris Smith's \textit{The Daily Show (The Book)} (oral history, 2016)
+  \item \textbf{Regulatory and corporate filings:} SEC filings from Paramount Skydance Corp (Form 8-K12B); Viacom/AOL Time Warner $\$1.23$B sale records (April 2003)
+\end{itemize}
+
+\subsection{Module 01: Origins \& Architecture Reference}
+
+\subsubsection{The Dual-Failure Origin Story (1989--1991)}
+
+On November 15, 1989, Time Warner --- through its HBO subsidiary --- launched The Comedy Channel as the first cable network dedicated exclusively to comedy. The channel aired twelve hours per day, with programming originating from HBO Downtown Studios at 120 East 23rd Street in Manhattan. Initial subscriber base was approximately 4.2 million. On April 1, 1990, Viacom (owner of MTV, VH1, and Nickelodeon) launched a rival channel, HA! TV Comedy Network, with approximately 4.0 million subscribers. HA!'s format relied heavily on licensed reruns --- including Saturday Night Live seasons 6--16 acquired from NBC --- plus some original sketch comedy.
+
+Both channels faced the same structural problem: cable system operators saw no reason to carry two comedy channels. Neither could achieve the subscriber base needed for advertising revenue viability. After initial outlays of close to \$50 million for both ventures, they were primarily operating at a loss.
+
+On April 1, 1991, the two networks merged in a 50/50 joint venture between Viacom and Time Warner, launching as CTV: The Comedy Network with 12.5 million combined subscribers. On June 1, 1991, the channel renamed itself Comedy Central to avoid confusion with Canadian broadcaster CTV. HBO's Art Bell, who had originally pitched the concept of an all-comedy channel internally at HBO, was involved in the early programming direction. The channel immediately had twice the programming inventory of either predecessor: The Comedy Channel contributed \textit{Mystery Science Theater 3000} (MST3K); HA! contributed the SNL library.
+
+In April 2003, Viacom bought out AOL Time Warner's 50\% stake for \$1.23 billion, making Comedy Central a wholly-owned Viacom property.
+
+\subsubsection{Early Programming Identity (1991--1996)}
+
+Comedy Central's early programming identity was shaped by three pillars: the low-budget originals legacy (MST3K), the topical/political comedy tradition (conventions coverage, \textit{Politically Incorrect}), and acquired reruns.
+
+\textit{Mystery Science Theater 3000}, which had begun on HBO's Comedy Channel in 1989 with a \$125,000 license fee, won a Peabody Award in 1994 and received two Emmy nominations and six CableACE nominations during its Comedy Central run. The show exemplified what would become the network's institutional voice: clever, self-aware, low-budget, and contemptuous of bad-faith sincerity.
+
+\textit{Politically Incorrect with Bill Maher} became Comedy Central's flagship topical show before defecting to ABC in fall 1996. Its move prompted the network to develop a dedicated replacement for daily political commentary --- a project that became \textit{The Daily Show}, which premiered on July 22, 1996 with Craig Kilborn as host. The show was co-created by Lizz Winstead and Madeleine Smithberg.
+
+In 1996, Comedy Central dispatched correspondents Al Franken and Arianna Huffington to provide satirical coverage of the Republican National Convention in San Diego --- a direct institutional precursor to The Daily Show's ``Indecision'' election specials.
+
+In 1997, Comedy Central premiered \textit{South Park} (creators Trey Parker and Matt Stone), which would become the channel's longest-running scripted series (still airing as of 2026, season 28).
+
+\subsection{Module 02: The Daily Show Lineage Reference}
+
+\subsubsection{Kilborn Era (1996--1998)}
+
+Craig Kilborn, a former ESPN SportsCenter anchor, hosted The Daily Show from its July 22, 1996 premiere through December 17, 1998. The Kilborn era established the show's foundational format elements: globe-spinning opening credits, the mock anchor desk, humorous field pieces, and a closing interview segment. The show's focus during this period was pop-culture parody rather than political satire --- Kilborn brought a sardonic sportscaster energy to celebrity and entertainment news. The show attracted a young cable audience but remained a minor network property.
+
+\subsubsection{Stewart Era (1999--2015)}
+
+Jon Stewart replaced Kilborn on January 11, 1999. Under Stewart and executive producer Ben Karlin, the show underwent a fundamental editorial reorientation. Stewart specifically asked correspondents to bring political viewpoints to their work --- to allow passion to carry through the comedy. The 2000 presidential election and the Bush-Gore recount became the show's editorial crucible: Stewart later identified the \textit{Indecision 2000} coverage as the moment the show ``found its editorial voice.''
+
+Key milestones during the Stewart era include:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{September 20, 2001:} Stewart's post-9/11 monologue, which blended vulnerability and resolve and drew millions of viewers. Widely cited as a defining moment in post-9/11 American media.
+  \item \textbf{October 15, 2004:} Stewart's appearance on CNN's \textit{Crossfire}, where he called co-hosts Tucker Carlson and Paul Begala ``partisan hacks'' and accused the show of ``hurting America.'' The clip became one of the most-circulated media moments of the decade; CNN cancelled \textit{Crossfire} three months later.
+  \item \textbf{Peabody Award, \textit{Indecision 2000}:} The election special's coverage of the Bush-Gore recount earned a Peabody Award for incisive political coverage.
+  \item \textbf{U.S. Sen. John Edwards, 2003:} Edwards declared his 2004 presidential candidacy on \textit{The Daily Show} --- a marker of the show's political legitimacy.
+  \item \textbf{2010, 9/11 First Responders:} Stewart dedicated multiple episodes to advocating for the James Zadroga 9/11 Health and Compensation Act, which had been blocked. The advocacy contributed to the bill's revival and passage.
+  \item \textbf{26 Primetime Emmy Awards}, including 10 consecutive wins for Outstanding Variety Series (2003--2012).
+  \item \textbf{Spin-off:} \textit{The Colbert Report} launched October 17, 2005, with Stephen Colbert. The two shows aired consecutively; Stewart ``tossed'' to Colbert at each episode's end. The Colbert Report ran for 1,447 episodes through December 18, 2014.
+\end{itemize}
+
+Stewart departed on August 6, 2015. Per a Brookings Institution study (2014), U.S. audiences trusted The Daily Show more than MSNBC. Surveys showed the overwhelming majority of Americans under 35 listed TDS as their primary source of television news during the Stewart peak years.
+
+\subsubsection{Noah Era (2015--2022)}
+
+Trevor Noah, a South African comedian, succeeded Stewart on September 28, 2015. Noah inherited a show whose cultural position was enormous and whose outgoing host was irreplaceable in the public imagination. His early tenure was marked by scrutiny over past tweets; his format evolved toward a more globally-informed perspective on American politics and social justice.
+
+During the COVID-19 pandemic (2020), Noah hosted ``The Daily Social Distancing Show'' from home, adapting to a remote format that emphasized monologue-driven commentary and digital satire in the absence of a live audience. Academic analysis (MCDA study, MDPI, 2025) identifies this period as characterized by heightened focus on voter suppression, social justice, and misinformation themes. Noah left The Daily Show at the end of 2022, after seven seasons.
+
+\subsubsection{Rotating Hosts and Stewart Return (2022--Present)}
+
+Following Noah's departure, the program engaged a series of guest hosts beginning January 2023, each hosting four episodes. On February 12, 2024, Stewart returned to host Monday episodes, with correspondents (including Ronny Chieng, Desi Lydic, Jordan Klepper, Michael Kosta) anchoring Tuesday through Thursday. Stewart originally signed on through the fall 2024 elections; his contract was subsequently extended into 2026. As of March 27, 2026, Stewart remains in the Monday anchor role.
+
+The Comedy Central website shut down in June 2024; full TDS episodes are now available on Paramount+, with clips on the show's YouTube channel.
+
+\subsection{Module 03: The Talent Forge Reference}
+
+\subsubsection{The Daily Show Alumni Network}
+
+The Daily Show has functioned as the most productive career launchpad in American late-night comedy. In 2006, \textit{The Onion} editor-in-chief Scott Dikkers described it as ``the best show you could put on your resume right now.''
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Correspondent} & \tableheader{TDS Tenure} & \tableheader{Career Outcome} \\
+\midrule
+Stephen Colbert & 1997--2005 & \textit{The Colbert Report} (CC, 2005--14), \textit{Late Show with Stephen Colbert} (CBS, 2015--present) \\
+Steve Carell & 1999--2005 & \textit{The Office} (NBC), Oscar-nominated film career (\textit{Foxcatcher}) \\
+Ed Helms & 2002--2006 & \textit{The Office} (NBC), \textit{The Hangover} franchise \\
+John Oliver & 2006--2013 & \textit{Last Week Tonight} (HBO, 2014--present) \\
+Samantha Bee & 2003--2015 & \textit{Full Frontal with Samantha Bee} (TBS, 2016--2022) \\
+Hasan Minhaj & 2014--2018 & \textit{Patriot Act} (Netflix), TDS correspondent return \\
+Jordan Klepper & 2013--2017 & \textit{The Opposition with Jordan Klepper} (CC), TDS correspondent \\
+Larry Wilmore & 2006--2014 & \textit{The Nightly Show with Larry Wilmore} (CC, 2015--2016) \\
+Ronny Chieng & 2015--present & \textit{Ronny Chieng: International Student} (ABC AU), stand-up specials, TDS anchor \\
+Roy Wood Jr. & 2015--2023 & Stand-up specials, Grammy Awards host (2023) \\
+Desi Lydic & 2015--present & TDS anchor, multiple Emmy nominations \\
+Michael Che & Guest appearances & \textit{Weekend Update} co-anchor, Saturday Night Live \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The John Oliver Retention Failure}
+
+In summer 2013, Jon Stewart took a twelve-week hiatus to direct \textit{Rosewater}. Correspondent John Oliver guest-hosted to critical acclaim, maintaining strong ratings. Comedy Central had not locked Oliver to a contract before this period. HBO observed Oliver's performance, offered him creative control and his own show. \textit{Last Week Tonight with John Oliver} premiered on HBO on April 27, 2014, and was immediately renewed for two additional seasons. Comedy Central lost its best succession candidate precisely because the guest-hosting period functioned as an HBO audition. This case is studied in business literature as a cautionary talent-management example.
+
+\subsubsection{The Colbert Report as Architecture}
+
+The Colbert Report (2005--2014) deserves separate analysis because it was not merely a spin-off but a scheduled architecture decision. Comedy Central placed The Colbert Report in the 11:30 PM slot immediately following The Daily Show, creating a two-hour satirical news block. Stewart produced The Colbert Report through his production company Busboy Productions. The two shows had overlapping writers, shared studio space, and explicit on-air interaction (Stewart ``tossed'' to Colbert). This programming block was Comedy Central's peak linear cable offering and drove the network's peak-era ratings.
+
+The Colbert Report ran 1,447 episodes; its final episode (December 18, 2014) drew 2.481 million viewers, the most-watched episode in the show's history and the most-watched cable program in its time slot that night, beating The Daily Show itself (2.032 million).
+
+\subsection{Module 04: Political Satire as Alternative Journalism Reference}
+
+\subsubsection{The Daily Show Effect (Baumgartner \& Morris, 2006)}
+
+The foundational empirical study of TDS's political effects was published by Jody Baumgartner and Jonathan Morris in \textit{Political Communication} (2006). The study found that participants exposed to TDS jokes about George W. Bush and John Kerry rated both candidates more negatively, even controlling for partisanship and demographics. Crucially, the study found two simultaneous effects: viewers exhibited more \textit{cynicism} toward the electoral system and news media, while also reporting increased \textit{confidence} in their ability to understand politics. The authors termed this combination ``The Daily Show Effect.'' The findings were interpreted as potentially detrimental to democratic participation despite the efficacy boost.
+
+\subsubsection{Extensions and Complications}
+
+Subsequent research extended and complicated the original findings:
+
+\begin{itemize}[leftmargin=*]
+  \item A survey of 650 participants aged 18--22 (published via Semantic Scholar, 2010s) found TDS/Colbert Report viewership correlated with \textit{increased political participation} but \textit{decreased political trust} --- suggesting the Effect is real but the interpretation (harmful vs. healthy skepticism) remains contested.
+  \item Staci L. Beavers (2011, survey of 31 introductory political science students) found 84\% reported TDS ``occasionally'' or ``often'' taught them something new about current events; 87\% felt it influenced their interest in keeping up with politics.
+  \item A 2014 Brookings Institution study showed American audiences trusted The Daily Show more than MSNBC.
+  \item Fox, Koloen, and Sahin (2007) conducted a content analysis finding that TDS's coverage of the 2004 presidential debate contained the same amount of substantive information as broadcast network newscasts.
+  \item Brewer and Marquardt (2007) analyzed 52 TDS episodes from 2005: over half of the 222 news stories focused on politics, with more than half of those concerning international politics.
+\end{itemize}
+
+\subsubsection{The Discursive Integration Model (Baym, 2005)}
+
+Geoffrey Baym's influential 2005 essay in \textit{Political Communication}, ``The Daily Show: Discursive Integration and the Reinvention of Political Journalism,'' argued that TDS constitutes not ``fake news'' but an alternative form of journalism. Baym identified three programmatic elements: the daily news segment, parody field reports, and studio interviews. His central argument was that TDS blends the genre conventions of news and fiction in a mode of ``discursive integration'' --- using the formal grammar of journalism to perform a systematic critique of journalism's failures.
+
+A 2021 study in \textit{Journalism} (Tandfonline) revisited Baym's model, finding that the genre has since evolved toward more information-rich, investigative programming (particularly in \textit{Last Week Tonight}'s format), raising the question of whether discursive integration remains the defining characteristic or whether satirical news has become a distinct opinion journalism format.
+
+\subsubsection{MCDA Analysis: 2020 vs. 2024 Election Coverage}
+
+A 2025 peer-reviewed study published in MDPI's \textit{Journalism and Media} journal conducted Multimodal Critical Discourse Analysis (MCDA) of four TDS episodes: two from Noah's 2020 pandemic-era coverage and two from Stewart's 2024 return. Key findings:
+
+\begin{itemize}[leftmargin=*]
+  \item Under Noah in 2020: intimate, monologue-driven format without live audience; heavy use of digital satire, irony, and impersonation; themes centered on voter suppression, misinformation, and democratic trust.
+  \item Under Stewart in 2024: live studio format restored; direct audience engagement; satirical voice shifted toward meta-commentary on the \textit{performative} nature of political debates and the spectacle of campaign media.
+  \item Both eras deployed irony, parody, and hyperbole; visual semiotics (patriotic color schemes used ironically) were consistent across eras.
+  \item The Trump era in both periods (as president and candidate) intensified TDS's role as a platform for critique of democratic dysfunction.
+\end{itemize}
+
+\subsubsection{Satire as Journalism: The Broader Debate}
+
+Jonathan Morris's political communication research (2008) noted that ``as the lines between news and entertainment become increasingly blurred, political comics have unwittingly become recognized by many observers as legitimate news providers and commentators.... Jon Stewart has inherited a power he did not seek and probably does not want.''
+
+The scholarly consensus in media studies is that TDS occupies a genuinely novel genre position: it contains substantive political information (equivalent to network news by content analysis), it exercises accountability journalism functions (Crossfire, 9/11 advocacy), and it operates simultaneously as entertainment --- a combination that traditional journalism frameworks cannot fully classify.
+
+\subsection{Module 05: Streaming Era \& Future Reference}
+
+\subsubsection{Comedy Central Viewership Decline}
+
+Comedy Central, like all linear cable channels, has experienced sustained viewership decline through the 2020s as cord-cutting accelerates. Analysis of animation-focused cable channel viewership (Diverse Tech Geek, January 2026) confirms Comedy Central viewership continued its downward trend through 2025, even as South Park's satirical relevance remained high. The network's linear identity has narrowed to its two remaining anchors: South Park and The Daily Show.
+
+\subsubsection{South Park Dual-Distribution}
+
+South Park's distribution history illustrates Comedy Central's broader streaming transition:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{Streaming Partner} & \tableheader{Terms/Notes} \\
+\midrule
+2020--2025 & HBO Max & Multi-year deal reportedly \$500M--\$550M; new episodes day-after on HBO Max \\
+2022 & Paramount+ (intl.) & Complete library of 310+ episodes launched internationally \\
+2024 (Season 27) & Paramount+ & New episodes premiere first on P+, same-day linear CC \\
+July 2025 & Paramount+ (global) & Five-year deal; 10 episodes/year on Comedy Central + P+ through at least Season 31 (2029) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Season 27 premiered July 23, 2025 (delayed from 2024); Season 28 wrapped December 10, 2025. The 2025 renegotiation replaced the ``exclusive hourlong event'' format (14 Paramount+ specials) with a return to 10 regular episodes per year.
+
+\subsubsection{Skydance/Paramount Acquisition}
+
+Skydance Media and Paramount Global completed their merger in August 2025, creating Paramount, a Skydance Corporation (NASDAQ: PSKY). CEO David Ellison announced plans to invest over \$1.5 billion in new programming, with a focus on streaming and studio operations. Comedy Central, along with MTV, BET, and Nickelodeon, was placed under the TV Media division led by George Cheeks. Laurel Weir was appointed to lead programming for Comedy Central and other cable networks, overseeing Global Programming Acquisitions.
+
+In November 2025, Skydance leadership outlined a strategy of leveraging established franchises (South Park, SpongeBob SquarePants) while reducing investment in less strategic linear cable assets. The Comedy Central website was shut down in June 2024, with streaming content migrating to Paramount+.
+
+\subsubsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Political characterizations & ANNOTATE & Present TDS political commentary as observed satirical content; do not editorialize about partisan balance \\
+Academic citation & GATE & All empirical claims about TDS's civic effects must cite peer-reviewed sources; no editorial media \\
+Charlie Kirk episode (SP S27) & ANNOTATE & S27 Episode 2 was pulled from reruns following Kirk's assassination (Sept. 2025); note factually \\
+Workforce/personnel & CONTEXT & Comedy Central staff reductions under Skydance; characterize as business restructuring \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Academic and Peer-Reviewed Sources}
+
+\begin{itemize}[leftmargin=*]
+  \item Baumgartner, J., \& Morris, J.S. (2006). The Daily Show Effect: Candidate Evaluations, Efficacy, and American Youth. \textit{American Politics Research} / \textit{Political Communication}. Sage Journals.
+  \item Baym, G. (2005). The Daily Show: Discursive Integration and the Reinvention of Political Journalism. \textit{Political Communication}, 22(3). Taylor \& Francis.
+  \item Beavers, S.L. (2011). \textit{Political Science as a Discipline Survey} (classroom study, 31 students). University research.
+  \item Fox, J.R., Koloen, G., \& Sahin, V. (2007). No Joke: A Comparison of Substance in The Daily Show with Jon Stewart and Broadcast Network Television Coverage of the 2004 Presidential Election Campaign. \textit{Journal of Broadcasting \& Electronic Media}.
+  \item MDPI Editorial Team. (2025). Election Satire: The Evolution of The Daily Show as a Cultural Artifact Reflecting Democratic Processes. \textit{Journalism and Media}, 6(1). MDPI. DOI: 10.3390/journalmedia6010018.
+  \item Smith, C. (2016). \textit{The Daily Show (The Book): An Oral History}. Grand Central Publishing / Hachette.
+  \item Tandfonline. (2021). From The Daily Show to Last Week Tonight: A Quantitative Analysis of Discursive Integration in Satirical Television News. \textit{Journalism}. Taylor \& Francis. DOI: 10.1080/1461670X.2021.1929416.
+  \item JSTOR Daily. (2017). ``The Daily Show as Political Influence.'' Review of Morris (2008) and related scholarship.
+  \item Semantic Scholar. (n.d.). ``The Daily Show Effect Revisited: How Satire Contributes to Political Participation and Trust in Young Audiences.'' Survey study, 650 participants.
+  \item Bryant University Digital Commons. (n.d.). ``Is The Daily Show Bad for Democracy?'' Undergraduate honors thesis synthesizing deliberation literature.
+\end{itemize}
+
+\subsubsection{Trade and Primary Sources}
+
+\begin{itemize}[leftmargin=*]
+  \item Bell, A. (2020). ``How I Started Comedy Central.'' \textit{Highbrow Magazine}. Memoir excerpt from \textit{Constant Comedy}.
+  \item Museum of Broadcast Communications (museum.tv). ``Comedy Central'' entry. Academic encyclopedia.
+  \item The Hollywood Reporter. (November 4, 2025). ``Paramount Skydance Reorganizes Linear TV Business Under George Cheeks.''
+  \item Hollywood Reporter. (August 7, 2025). ``Skydance Closes Paramount Global Deal.''
+  \item Wikipedia / Comedy Central. Continuously updated; cited for structural dates and ownership history.
+  \item Wikipedia / The Daily Show. Continuously updated; cited for host dates, Emmy records, and spin-off history.
+  \item Wikipedia / South Park (Season 27, Season 28). For current contract and distribution terms.
+  \item Diverse Tech Geek. (January 2026). ``Animation Cable Channels Viewership Continues to Decline in 2025.''
+  \item Brookings Institution. (2014). Trust study: Comedy Central/The Daily Show vs. cable news.
+\end{itemize}
+
+\newpage
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Comedy Central \& The Daily Show --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a five-module research publication documenting Comedy Central's founding architecture, The Daily Show's host-era lineage, its talent-forge function, the academic literature on its political effects, and Comedy Central's current streaming transition --- synthesized into a single cross-referenced research document suitable for academic citation, GSD ecosystem reference, and cultural analysis applications.
+
+\textbf{Codename:} INDECISION-COMPLETE
+
+\textbf{Architecture Overview:}
+
+\begin{asciibox}
+WAVE ARCHITECTURE — INDECISION-COMPLETE
+=========================================
+
+Wave 0 [Foundation]
+  HAIKU: Shared schema (host/date index, alumni table, source registry)
+  Output: schemas.json, source_index.yaml
+
+Wave 1A [History Track — parallel]         Wave 1B [Analysis Track — parallel]
+  CRAFT-HIST + EXEC-1                         CRAFT-MEDIA + EXEC-2
+  Module 01: Origins & Architecture           Module 04: Satire as Journalism
+  Module 02: Daily Show Lineage               (Academic lit synthesis)
+  Output: module01.md, module02.md            Output: module04.md
+
+Wave 1C [Pipeline Track — parallel with 1A+1B]
+  CRAFT-HIST + EXEC-1 (after M01 complete)
+  Module 03: Talent Forge
+  Output: module03.md
+
+Wave 2 [Streaming Era — sequential after Wave 1]
+  CRAFT-MEDIA + EXEC-2
+  Module 05: Streaming Era & Future
+  Output: module05.md
+
+Wave 3 [Synthesis + Publication]
+  OPUS (FLIGHT/AGNUS): Cross-module integration document
+  SONNET (EXEC): LaTeX/PDF compilation
+  SONNET (VERIFY): Source validation pass
+  Output: synthesis.pdf, module_cross_refs.yaml
+
+CAPCOM GATE: Between Wave 1 completion and Wave 2 start
+  Review: Module 01-04 accuracy, sensitive content check,
+           South Park S27 Kirk episode note confirmed
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, host/date canonical index. Single source of truth for all modules on dates, Emmy counts, subscriber figures.
+  \item \textbf{History Layer} --- Modules 01, 02, 03. Documentary research: founding events, host-era analysis, alumni pipeline.
+  \item \textbf{Analysis Layer} --- Module 04. Academic synthesis: peer-reviewed literature on civic effects, discursive integration, satire scholarship.
+  \item \textbf{Current Layer} --- Module 05. Business and distribution: streaming deals, Skydance, viewership trends.
+  \item \textbf{Synthesis Layer} --- Cross-module integration: the Comedy Central system as whole; unresolved questions about linear identity.
+  \item \textbf{Publication Layer} --- LaTeX PDF with full cross-references, bibliography, and appendices.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+1 & Foundation Schema & Host index complete; source registry has $\geq$15 entries & 0 \\
+2 & Module 01: Origins & 1989--1996 documented with all key dates sourced & 1A \\
+3 & Module 02: TDS Lineage & All five eras covered; $\geq$3 milestones per era & 1A \\
+4 & Module 03: Talent Forge & $\geq$12 alumni profiled; Oliver case analyzed & 1C \\
+5 & Module 04: Satire/Journalism & $\geq$6 peer-reviewed sources synthesized & 1B \\
+6 & Module 05: Streaming Era & SP deal terms and Skydance merger documented & 2 \\
+7 & Cross-Module Synthesis & $\geq$2 explicit inter-module connections per pair & 3 \\
+8 & Final PDF & LaTeX compiles, TOC complete, all sources cited & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Foundation Schema & None & Haiku & 2,000 \\
+Module 01: Origins & Schema & Sonnet & 8,000 \\
+Module 02: TDS Lineage & Schema, M01 & Sonnet & 12,000 \\
+Module 03: Talent Forge & Schema, M02 & Sonnet & 8,000 \\
+Module 04: Satire Analysis & Schema & Sonnet + Opus & 14,000 \\
+Module 05: Streaming Era & Schema, all M1 & Sonnet & 8,000 \\
+Cross-Module Synthesis & M01--M05 & Opus & 10,000 \\
+LaTeX Compilation & All modules & Sonnet & 6,000 \\
+Verification Pass & All modules & Sonnet & 4,000 \\
+\midrule
+\multicolumn{3}{l}{\textbf{\sffamily Total Estimated}} & \textbf{72,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assigned Tasks and Rationale} & \tableheader{Share} \\
+\midrule
+Opus & Cross-module synthesis (requires sustained narrative coherence across 30 years of history); Module 04 academic synthesis (requires genuine judgment about contested research findings; cannot be pattern-matched); sensitivity gate review & $\sim$30\% \\
+Sonnet & All five module documents (structured research writing, table population, source citation); LaTeX compilation; verification pass & $\sim$60\% \\
+Haiku & Foundation schema and canonical index; template scaffolding; token budget tracking; commit messages & $\sim$10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}L{3cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Outputs} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & schemas.json, source\_index.yaml & Auto-pass \\
+1A & History Track & Parallel & module01.md, module02.md & --- \\
+1B & Analysis Track & Parallel with 1A & module04.md & --- \\
+1C & Pipeline Track & After M01 complete & module03.md & --- \\
+2 & Streaming Era & After Wave 1 & module05.md & CAPCOM \\
+3 & Synthesis + Pub & Sequential & synthesis.pdf, final.pdf & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Canonical Host Index & Table of all TDS hosts with start/end dates, episode counts, Emmy years & Haiku \\
+Alumni Pipeline Table & All 12+ alumni with TDS tenure and career outcomes & Haiku \\
+Source Registry & $\geq$15 entries: peer-reviewed papers, trade sources, oral histories & Haiku \\
+Key Date Index & Comedy Central founding milestones, deal dates, merger dates & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1A: History Track (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Module 01 Draft & Origins \& Architecture (1989--1996): dual failure, merger, MST3K, Politically Incorrect, TDS launch & CRAFT-HIST / Sonnet \\
+Module 02 Draft & TDS Lineage: all five eras, key milestones, Colbert Report architecture & CRAFT-HIST / Sonnet \\
+Module 01 Review & Source citations verified; dates crosschecked against canonical index & VERIFY / Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1B: Analysis Track (Parallel with 1A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Module 04 Draft & Satire as Journalism: Baumgartner-Morris Effect, Baym discursive integration, MCDA 2025 study, pedagogy research & CRAFT-MEDIA / Opus \\
+Academic Source Pass & Verify all Module 04 citations are peer-reviewed; zero entertainment media & VERIFY / Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1C: Pipeline Track}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Module 03 Draft & Talent Forge: $\geq$12 alumni profiles, Oliver case, Colbert Report as architectural decision & CRAFT-HIST / Sonnet \\
+Cross-ref Pass & Confirm Module 03 cross-references Module 02 (host eras) and Module 04 (political effects context) & INTEG / Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Streaming Era (Post-CAPCOM Gate)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Module 05 Draft & Streaming Era: SP deal timeline, CC website shutdown, Skydance acquisition, viewership data & CRAFT-MEDIA / Sonnet \\
+Sensitivity Review & South Park S27 Kirk episode note; Skydance restructuring language review & SECURE / Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Synthesis + Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+Synthesis Document & Cross-module integration; unresolved questions; Comedy Central's linear identity; through-line essay & FLIGHT / Opus \\
+LaTeX Assembly & Full document compilation; TOC; bibliography; cross-refs & EXEC / Sonnet \\
+XeLaTeX Compile & Three-pass compilation; error resolution; PDF verification & EXEC / Sonnet \\
+Final Verification & All 12 success criteria checked; all SC tests passed & VERIFY / Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item The Foundation Schema (Wave 0) is computed once and reused as a shared context prefix for all subsequent agents --- host index, alumni table, and source registry are injected into every module executor's context, avoiding redundant lookups.
+  \item Waves 1A, 1B, and 1C exploit the 5-minute TTL: CRAFT-HIST and CRAFT-MEDIA run in parallel, sharing the Foundation Schema as a cached prefix. Neither needs to wait for the other.
+  \item The academic source registry (Module 04 bibliography, $\geq$10 entries) is pre-populated in Wave 0 and injected into CRAFT-MEDIA at Wave 1B start, avoiding mid-wave retrieval.
+  \item Module 05 is deliberately positioned in Wave 2 (not Wave 1) because its business/deal content depends on the historical context of Modules 01--02 being established first; an executor producing it without that context risks misattributing events.
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{3.5cm}C{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Estimated Tokens} & \tableheader{Cumulative} \\
+\midrule
+Wave 0: Foundation & 2,000 & 2,000 \\
+Wave 1A: History Track & 22,000 & 24,000 \\
+Wave 1B: Analysis Track & 16,000 & 40,000 \\
+Wave 1C: Pipeline Track & 10,000 & 50,000 \\
+Wave 2: Streaming Era & 10,000 & 60,000 \\
+Wave 3: Synthesis + Pub & 20,000 & 80,000 \\
+\midrule
+\textbf{Total Budget} & \textbf{80,000} & --- \\
+\textbf{Safety Margin (20\%)} & \textbf{16,000} & --- \\
+\textbf{Ceiling} & \textbf{96,000} & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH — INDECISION-COMPLETE
+========================================
+
+[Wave 0: Foundation Schema]
+         |
+         +---> [Wave 1A: Module 01 Origins]
+         |              |
+         |              v
+         |     [Wave 1A: Module 02 Lineage]
+         |              |
+         |              v
+         |     [Wave 1C: Module 03 Pipeline]
+         |
+         +---> [Wave 1B: Module 04 Satire/Journalism]
+         |
+         +---> [Wave 1A + 1B + 1C complete]
+                        |
+                  CAPCOM GATE #1
+                        |
+               [Wave 2: Module 05 Streaming]
+                        |
+                  CAPCOM GATE #2
+                        |
+              [Wave 3: Synthesis + Publication]
+                        |
+                  Final Verification
+                        |
+                  MISSION COMPLETE
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & Non-negotiable boundaries (source quality, political neutrality) & 5 & BLOCK \\
+Core Functionality & Module completeness, success criteria verification & 18 & BLOCK \\
+Integration & Cross-module consistency and connections & 7 & BLOCK \\
+Edge Cases & Robustness, data gaps, contested claims & 5 & LOG \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & \textbf{35} & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality across all modules & All empirical claims in Module 04 traceable to peer-reviewed journals or university press. Zero entertainment media (Variety, THR, etc.) used for political effect claims. \\
+SC-NUM & Numerical attribution & Every Emmy count, subscriber figure, deal valuation, and viewership number attributed to a named source with publication date. \\
+SC-ADV & Political neutrality & Module 04 presents research findings on TDS's effects without advocating for or against the show's political orientation. Both ``positive'' and ``negative'' Effect findings included. \\
+SC-POL & Sensitivity: SP S27 Kirk episode & Module 05 notes that South Park S27 Episode 2 was pulled from reruns following Charlie Kirk's assassination (September 10, 2025) and states this factually without editorializing. \\
+SC-BUS & Corporate restructuring neutrality & Module 05 characterizes Skydance layoffs and Comedy Central restructuring as business decisions without attributing intent. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Module 01 origin dates & Comedy Channel launch (Nov. 15, 1989), HA! launch (April 1, 1990), merger (April 1, 1991), name change (June 1, 1991), TDS premiere (July 22, 1996) all present and sourced \\
+CF-02 & Module 02 host-era coverage & Five eras (Kilborn, Stewart, Noah, rotating, Stewart return) each with $\geq$3 documented milestones \\
+CF-03 & Module 02 Emmy count & 26 Primetime Emmys total; 10 consecutive wins 2003--2012 documented \\
+CF-04 & Module 03 alumni count & $\geq$12 alumni profiles with TDS tenure dates and career outcomes \\
+CF-05 & Module 03 Oliver analysis & John Oliver retention failure analyzed as business/talent management case \\
+CF-06 & Module 04 Effect studies & Baumgartner-Morris (2006) and $\geq$5 subsequent studies synthesized \\
+CF-07 & Module 04 Baym model & Discursive integration model explained; 2021 extension study included \\
+CF-08 & Module 05 SP deal timeline & HBO Max deal (\$500--550M), Paramount+ transition (2024--2025), 5-year renewal (July 2025) documented \\
+CF-09 & Module 05 Skydance merger & August 2025 completion date; Laurel Weir appointment; David Ellison CEO role documented \\
+CF-10 & Synthesis unresolved question & Synthesis document explicitly addresses: can Comedy Central survive as a distinct linear brand? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Integration Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & M02 $\rightarrow$ M03 cascade & Colbert's correspondent tenure (Module 02) cross-referenced with Colbert Report architecture analysis (Module 03) \\
+IN-02 & M03 $\rightarrow$ M04 connection & Talent forge's political function (Module 03) connects to civic effects literature (Module 04): did TDS's correspondent diversity affect audience trust findings? \\
+IN-03 & M01 $\rightarrow$ M05 institutional arc & Comedy Central's founding as specialized architecture (Module 01) connects to streaming identity threat (Module 05): same question, 30 years later \\
+IN-04 & Cross-module data consistency & Emmy count, subscriber figures, and deal valuations are identical across all modules that reference them \\
+IN-05 & Self-containment test & A reader with no prior knowledge of Comedy Central or TDS can understand the complete arc from Module 01 through synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Module 01 origin dates complete and sourced & CF-01 & Pending \\
+2. Module 02 five eras documented with milestones & CF-02, CF-03 & Pending \\
+3. Module 03 $\geq$12 alumni + Oliver analysis & CF-04, CF-05, IN-01 & Pending \\
+4. Module 04 $\geq$6 peer-reviewed sources synthesized & CF-06, CF-07, SC-SRC & Pending \\
+5. Module 05 SP deals and Skydance documented & CF-08, CF-09, SC-BUS & Pending \\
+6. Cross-module connections present & IN-01, IN-02, IN-03 & Pending \\
+7. Colbert Report analyzed in two modules & CF-02, CF-04, IN-01 & Pending \\
+8. Academic sources peer-reviewed only & SC-SRC, SC-ADV & Pending \\
+9. Talent pipeline diagram produced & CF-04 & Pending \\
+10. Linear identity question addressed in synthesis & CF-10, IN-03 & Pending \\
+11. All numerical claims attributed & SC-NUM & Pending \\
+12. Package self-contained for executor & IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go at CAPCOM gates; synthesis authorship \\
+PLAN & Planner & Wave decomposition; dependency management; parallel track optimization \\
+SCOUT & Research Agent & Gap-fill web research; source validation; academic paper retrieval \\
+EXEC-1 & Executor Alpha & Modules 01, 02, 03 document production \\
+EXEC-2 & Executor Beta & Modules 04, 05 document production; LaTeX assembly \\
+CRAFT-HIST & History Specialist & Primary domain: Comedy Central founding, host-era analysis, talent pipeline \\
+CRAFT-MEDIA & Media Studies Spec. & Secondary domain: political satire scholarship, civic effects research, streaming business \\
+VERIFY & Verification Agent & Source validation; accuracy checking; SC test execution \\
+INTEG & Integration Agent & Cross-module relationship validation; IN test execution \\
+CAPCOM & HITL Interface & Human approval at Wave 2 start and Wave 3 start gates \\
+BUDGET & Resource Manager & Token budget tracking; session planning; ceiling enforcement \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Codename & INDECISION-COMPLETE \\
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 3 (Waves 1A, 1B, 1C) \\
+CAPCOM Gates & 2 \\
+Total Deliverables & 8 \\
+Estimated Token Budget & 80,000 (ceiling: 96,000) \\
+Estimated Sessions & 2--3 \\
+Context Windows & 6--8 \\
+Primary Model & Sonnet (60\%) \\
+Judgment Model & Opus (30\%) \\
+Scaffolding Model & Haiku (10\%) \\
+Success Criteria & 12 \\
+Safety-Critical Tests & 5 (all BLOCK) \\
+Total Tests & 35 \\
+Package Date & March 27, 2026 \\
+Status & Ready for GSD Orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Comedy Central is not a lifestyle channel.''} --- Comedy Central executive, c. 1999
+
+\vspace{0.8em}
+\noindent In the gap between what the network was designed to be and what it became, the spaces-between principle operated at broadcast scale. A channel built to show reruns of Saturday Night Live ended up shaping how a generation understood the failure of institutional journalism. The Daily Show did not set out to matter. It set out to be funny. The architecture did the rest. Thirty years on, the question the mission must answer is whether that architecture --- built for a cable era that is ending --- can survive the next compression.
+
+\vspace{0.6em}
+\noindent \textit{INDECISION-COMPLETE is the study of a system that worked by refusing to be what it looked like.}
+\end{quotebox}
+
+\end{document}

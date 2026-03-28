@@ -1,0 +1,83 @@
+/* AMR — Broadcast Red / Tube Amber / Dial Navy theme, AM Radio
+   Brand foundation loaded from brand.css */
+
+:root {
+  --broadcast-red: #B71C1C;
+  --broadcast-light: #FFEBEE;
+  --broadcast-mid: #C62828;
+  --broadcast-dark: #7F0000;
+  --tube-amber: #E65100;
+  --tube-light: #FFF3E0;
+  --tube-mid: #EF6C00;
+  --dial-navy: #1A237E;
+  --dial-mid: #283593;
+  --dial-light: #E8EAF6;
+
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--broadcast-red);
+  --link-hover: var(--broadcast-dark);
+  --accent: var(--broadcast-red);
+  --accent-light: var(--broadcast-light);
+  --accent-dark: var(--broadcast-dark);
+  --card-bg: white;
+  --card-border: #B0BEC5;
+  --card-shadow: rgba(183,28,28,0.12);
+  --border: #B0BEC5;
+  --parchment: var(--dial-light);
+}
+
+header {
+  background: linear-gradient(135deg, #0d1117 0%, #3e0d0d 35%, #1a0d17 70%, #2a1a1b 100%);
+  border-bottom: 4px solid var(--tube-amber);
+  position: relative; overflow: hidden;
+}
+header::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(183,28,28,0.2) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(230,81,0,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #FFCDD2; }
+header .subtitle { color: #EF9A9A; }
+
+h2 { color: var(--dial-navy); border-bottom-color: var(--dial-light); padding-bottom: 0.3rem; }
+h3 { color: var(--broadcast-red); }
+
+blockquote { background: var(--broadcast-light); border-left: 4px solid var(--broadcast-red); border-radius: 4px; padding: 1.25rem 1.5rem; color: #374151; }
+th { background: var(--dial-navy); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(183,28,28,0.04); }
+tr:hover { background: rgba(183,28,28,0.08); }
+
+pre { background: #0d1117; color: #E2E8F0; border-radius: 6px; padding: 1.25rem 1.5rem; font-family: 'Consolas', monospace; line-height: 1.6; border-left: 3px solid var(--tube-amber); }
+code { background: var(--broadcast-light); font-family: 'Consolas', monospace; color: var(--broadcast-red); }
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+main { max-width: 54rem; }
+.card { border-color: #B0BEC5; border-radius: 6px; padding: 1.2rem; position: relative; }
+.card:hover { box-shadow: 0 2px 12px rgba(183,28,28,0.12); border-color: var(--broadcast-red); }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; padding: 0; background: none; border: none; }
+.stat { background: white; border: 1px solid #B0BEC5; border-radius: 6px; padding: 0.8rem; }
+.stat-value { font-size: 1.5rem; color: var(--broadcast-red); }
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-am { background: var(--broadcast-light); color: var(--broadcast-red); }
+.tag-pnw { background: #E8F5E9; color: #2E7D32; }
+.tag-cal { background: var(--tube-light); color: var(--tube-amber); }
+.tag-fcc { background: var(--dial-light); color: var(--dial-navy); }
+.tag-spectrum { background: #F3E5F5; color: #7B1FA2; }
+.tag-future { background: #ECEFF1; color: #37474F; }
+
+.safety-callout { background: #FEF2F2; border: 1px solid #FECACA; border-left: 4px solid #DC2626; border-radius: 4px; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.92rem; }
+.safety-callout strong { color: #DC2626; }
+.cross-links { background: white; border: 1px solid #B0BEC5; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--broadcast-red); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a { display: inline-block; background: var(--broadcast-light); padding: 0.25rem 0.75rem; border-radius: 3px; font-size: 0.82rem; font-family: system-ui, sans-serif; color: var(--broadcast-red); transition: background 0.2s; }
+.cross-links li a:hover { background: #FFCDD2; text-decoration: none; }
+
+@media (max-width: 600px) { .stats { grid-template-columns: repeat(3, 1fr); } }

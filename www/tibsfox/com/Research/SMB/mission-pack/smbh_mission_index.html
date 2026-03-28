@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMBH Growth Slowdown — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #311B92;
+      --secondary: #0277BD;
+      --tertiary: #E65100;
+      --accent: #7B1FA2;
+      --light-primary: #EDE7F6;
+      --light-secondary: #E1F5FE;
+      --border: #BDBDBD;
+      --subtle: #757575;
+      --dark: #212121;
+      --card-bg: #1A0F5C;
+      --page-bg: #F8F7FE;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--page-bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1A0A6B 0%, #311B92 40%, #4A148C 100%);
+      color: white;
+      padding: 56px 40px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(123, 31, 162, 0.25);
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(2, 119, 189, 0.2);
+    }
+
+    .header-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 42px;
+      line-height: 1.15;
+      color: white;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 20px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pipeline {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(179, 157, 219, 0.9);
+      letter-spacing: 1px;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 16px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 28px;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(49, 27, 146, 0.35);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .card-pdf::before { background: linear-gradient(90deg, #7C4DFF, #00BCD4); }
+    .card-tex::before { background: linear-gradient(90deg, #E65100, #FF8F00); }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 16px;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    .card-badge {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .contents {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #E0D9F5;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .contents h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 20px;
+      color: var(--primary);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #E0D9F5;
+    }
+
+    .stage {
+      margin-bottom: 24px;
+    }
+
+    .stage-header {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 3px;
+      color: white;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .stage-1 { background: var(--primary); }
+    .stage-2 { background: var(--secondary); }
+    .stage-3 { background: var(--tertiary); }
+
+    .stage ul {
+      list-style: none;
+      padding-left: 12px;
+    }
+
+    .stage ul li {
+      font-size: 14px;
+      color: #444;
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .stage ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    .usage, .recompile {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #E0D9F5;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+
+    .usage h2, .recompile h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    ol, ul.usage-list {
+      padding-left: 20px;
+    }
+
+    ol li, .usage-list li {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+
+    code {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      background: #F0EBF8;
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    pre {
+      background: #1A1A2E;
+      color: #B3C5FF;
+      padding: 16px 20px;
+      border-radius: 6px;
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 600px) { .meta-grid { grid-template-columns: 1fr 1fr; } }
+
+    .meta-item {
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #E0D9F5;
+      padding: 14px 16px;
+      text-align: center;
+    }
+
+    .meta-value {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 20px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .meta-key {
+      font-size: 11px;
+      color: var(--subtle);
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+    }
+
+    footer a { color: rgba(179, 157, 219, 0.8); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">GSD Research Mission Package</div>
+  <h1>Why Black Holes<br>Hit the Brakes</h1>
+  <div class="header-subtitle">Supermassive Black Hole Growth Decline Since Cosmic Noon</div>
+  <div class="pipeline">Vision → Research → Mission &nbsp;|&nbsp; Full Pipeline Execution</div>
+  <div class="header-meta">
+    <span>📅 March 27, 2026</span>
+    <span>🔭 Source: NASA Chandra / Yu et al. 2025</span>
+    <span>⚡ Profile: Squadron (12 roles)</span>
+    <span>📄 25 pages</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="section-label" style="margin-top: 8px;">Mission Summary</div>
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="meta-value">5</div>
+      <div class="meta-key">Research Modules</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">12</div>
+      <div class="meta-key">Crew Roles</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">31</div>
+      <div class="meta-key">Test Cases</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">5.0</div>
+      <div class="meta-key">Context Windows</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">1.3M</div>
+      <div class="meta-key">Galaxies Studied</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">10 Gyr</div>
+      <div class="meta-key">Cosmic Timespan</div>
+    </div>
+  </div>
+
+  <div class="section-label">Files</div>
+  <div class="cards">
+    <a class="card card-pdf" href="smbh_growth_mission.pdf" download>
+      <div class="card-icon">📄</div>
+      <div class="card-title">Mission Package PDF</div>
+      <div class="card-desc">Complete 25-page document: Vision, Research Reference, and Mission Package. All three stages in one file.</div>
+      <div class="card-badge">PDF · 25 pages</div>
+    </a>
+    <a class="card card-tex" href="smbh_growth_mission.tex" download>
+      <div class="card-icon">📝</div>
+      <div class="card-title">LaTeX Source</div>
+      <div class="card-desc">Full XeLaTeX source. Modify and recompile to customize modules, adjust scope, or extend with new findings.</div>
+      <div class="card-badge">.tex · XeLaTeX</div>
+    </a>
+  </div>
+
+  <div class="contents">
+    <h2>Document Contents</h2>
+
+    <div class="stage">
+      <div class="stage-header stage-1">Stage 1 — Vision Document</div>
+      <ul>
+        <li>Vision narrative (4 paragraphs — from cosmic noon to the quiet universe)</li>
+        <li>Problem statement (5 concrete problems driving the research)</li>
+        <li>Cosmic timeline architecture diagram (ASCII)</li>
+        <li>Research module architecture diagram (5 modules, 2 parallel tracks)</li>
+        <li>Module descriptions (MOD-01 through MOD-05)</li>
+        <li>Chipset configuration (YAML — Agnus/Denise/Paula model allocation)</li>
+        <li>Scope boundaries (in scope / out of scope)</li>
+        <li>12 testable success criteria</li>
+        <li>Relationship to other GSD documents (table)</li>
+        <li>Through-line (Amiga Principle at cosmological scale)</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-header stage-2">Stage 2 — Research Reference</div>
+      <ul>
+        <li>MOD-01: Cosmic noon history — quantitative growth rate table across redshift</li>
+        <li>MOD-02: Wedding-cake survey architecture — Chandra / XMM-Newton / eROSITA tiers</li>
+        <li>MOD-03: Accretion mechanics — three-hypothesis matrix + cold gas depletion mechanisms</li>
+        <li>MOD-04: AGN feedback modes + black hole mass as galaxy quenching predictor</li>
+        <li>MOD-05: Cosmological implications + next-generation observatory landscape</li>
+        <li>Safety and sensitivity considerations (table)</li>
+        <li>Full source bibliography (peer-reviewed + agency + professional)</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-header stage-3">Stage 3 — Mission Package</div>
+      <ul>
+        <li>Milestone specification with mission objective</li>
+        <li>Wave execution architecture (ASCII diagram)</li>
+        <li>Wave 0–3 detailed task tables (Foundation → Parallel → Synthesis → Publication)</li>
+        <li>Component breakdown with model assignments and token estimates</li>
+        <li>Cache optimization strategy</li>
+        <li>Token budget table ($\sim$138K total)</li>
+        <li>Dependency graph (ASCII)</li>
+        <li>Test plan: 4 safety-critical + 18 core + 5 integration + 4 edge cases</li>
+        <li>Verification matrix (12 criteria × test IDs)</li>
+        <li>Squadron crew manifest (12 roles)</li>
+        <li>Execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="usage">
+    <h2>How to Hand This to gsd-skill-creator</h2>
+    <ol>
+      <li>Open Claude Code and navigate to your <code>gsd-skill-creator</code> dev branch.</li>
+      <li>Drop the PDF into <code>.planning/staging/inbox/</code> (or your MCP planning-bridge inbox once the deposit_mission tool is live).</li>
+      <li>The orchestrator reads the Stage 3 milestone spec and crew manifest as the execution brief.</li>
+      <li>Issue the activation prompt: <code>execute mission: smbh_growth_mission.pdf — Squadron profile</code></li>
+      <li>First HITL gate at Wave 1 midpoint: confirm Track A and B survey quality before proceeding to Opus synthesis.</li>
+      <li>Final CAPCOM review before PDF delivery — check SC-SRC and SC-NUM gate passes.</li>
+    </ol>
+  </div>
+
+  <div class="recompile">
+    <h2>Recompiling the LaTeX Source</h2>
+    <p style="font-size:14px; color:#444; margin-bottom:12px;">Three passes required to resolve TOC, cross-references, and page count:</p>
+    <pre>xelatex -interaction=nonstopmode smbh_growth_mission.tex
+xelatex -interaction=nonstopmode smbh_growth_mission.tex
+xelatex -interaction=nonstopmode smbh_growth_mission.tex</pre>
+    <p style="font-size:13px; color: var(--subtle); margin-top:12px;">Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu). Packages: fontspec, xcolor, tcolorbox, tabularx, booktabs, colortbl, lastpage, fancyhdr.</p>
+  </div>
+
+</main>
+
+<footer>
+  GSD Ecosystem &nbsp;|&nbsp; 
+  Primary source: <a href="https://chandra.harvard.edu/press/26_releases/press_032426.html">NASA Chandra, March 24, 2026</a> &nbsp;|&nbsp;
+  Paper DOI: <a href="https://doi.org/10.3847/1538-4357/ae173d">10.3847/1538-4357/ae173d</a>
+</footer>
+
+</body>
+</html>

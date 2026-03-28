@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Black Hole Catalog</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-bhc">
+  <header>
+    <h1>Black Hole Catalog &amp; Mapping</h1>
+    <div class="subtitle">Stellar-Mass &middot; Intermediate &middot; Supermassive &middot; Detection Methods &middot; Dynamics &amp; Phenomena</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-stellar-mass">Stellar</a>
+      <a href="page.html?doc=02-intermediate-mass">IMBH</a>
+      <a href="page.html?doc=03-supermassive">SMBH</a>
+      <a href="page.html?doc=04-detection-methods">Detection</a>
+      <a href="page.html?doc=05-dynamics-phenomena">Dynamics</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Mission Package</h2>
+    <blockquote>26 years of Chandra X-ray Observatory data. Over 90 gravitational wave events. Two directly imaged event horizons. This catalog maps the observed population of black holes across every mass class &mdash; the confirmed, the contested, the predicted. Where BHK maps the theoretical spacetime, BHC maps the territory.</blockquote>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~180K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+    <h2>Mission Pack Files</h2>
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/blackhole_mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/blackhole_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+    <h2>Wave Execution Plan</h2>
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Catalog schema (JSON), source index (100+ Chandra releases), mass taxonomy</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>Stellar + IMBH</td><td>Track A: M1 (Stellar-Mass) + M2 (Intermediate-Mass)</td><td>Parallel</td><td>Sonnet/Opus</td></tr>
+        <tr><td>1B</td><td>SMBH + Detection</td><td>Track B: M3 (Supermassive) + M4 (Detection Methods)</td><td>Parallel</td><td>Sonnet/Opus</td></tr>
+        <tr><td>2</td><td>Dynamics + Synthesis</td><td>M5 (Dynamics), cross-catalog integration, Chandra archive index</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>PDF compilation, JSON/CSV export, verification</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+    <h2>The Through-Line</h2>
+    <p>Black holes are the universe's most extreme objects, yet they are also among its most common. The Milky Way alone may host 100 million stellar-mass black holes. Only about 50 are confirmed via X-ray binaries, and fewer than a dozen intermediate-mass candidates exist. At the supermassive end, the Chandra Deep Field South revealed 5,000 AGN in a single pointing. This catalog maps what is known, what is contested, and what is predicted &mdash; across 26 years of Chandra press archive data, three LIGO observing runs, two EHT images, and the emerging Gaia astrometric series.</p>
+  </main>
+  <footer><p>Black Hole Catalog &amp; Mapping &middot; PNW Research Series &middot; gsd-skill-creator</p></footer>
+</body>
+</html>

@@ -1,0 +1,1049 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME — History / Cultural Studies
+\definecolor{primary}{HTML}{4A148C}        % Deep Burgundy — section headers
+\definecolor{secondary}{HTML}{E65100}      % Amber/Gold — subsections
+\definecolor{tertiary}{HTML}{4E342E}       % Dark Parchment — subsubsections
+\definecolor{accent}{HTML}{7B1FA2}         % Purple accent
+\definecolor{lightprimary}{HTML}{F3E5F5}   % Lavender — quote boxes
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Pale gold
+\definecolor{lighttertiary}{HTML}{EFEBE9}  % Cream
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% TABLE SETUP
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS / FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Late Night Talk Shows}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Late Night Talk Shows -- Complete History Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+
+%%==========================================================================
+%% TITLE PAGE
+%%==========================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Late Night\\[0.3em]A Complete History}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Origins, Golden Ages, Rivalries, Reinvention \& the Digital Reckoning}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study --- 1949 to the Present and Beyond}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad|\quad Estimated: 6 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+%%==========================================================================
+%% TABLE OF CONTENTS
+%%==========================================================================
+\tableofcontents
+\newpage
+
+%%==========================================================================
+%% STAGE 1 — VISION DOCUMENT
+%%==========================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Late Night: A Complete History --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Cold-Start Research Complete / Pre-Mission}
+\metafield{Depends On:}{None (standalone cultural history study)}
+\metafield{Context:}{Network television, broadcast history, cultural studies, media economics}
+
+\subsection{Vision}
+
+Every night, for more than seventy years, a version of the same ritual has played out across America and eventually the world: a host steps through a curtain, faces a live audience and an invisible nation of insomniacs, delivers jokes about the day's outrages, and invites remarkable people to sit in a chair beside a desk. It sounds almost too simple to have sustained an industry, launched careers, defined presidencies, and reflected a culture's evolving conscience back at itself. Yet the late night talk show did all of this and more.
+
+The format emerged from radio variety, found its bones in the experimental television of the early 1950s, and was codified into an institution by one man from Nebraska over thirty years on NBC. It endured network wars, personality feuds of nearly operatic scale, a civil rights reckoning about who was allowed to host, and the slow erosion of the broadcast audience by cable, satellite, and the internet. Now, in the mid-2020s, it faces something it cannot simply outlast: the structural collapse of the economic model that sustained it for generations.
+
+This mission documents the full arc. From Faye Emerson's couch in 1949 to Stephen Colbert's desk in 2026, from Johnny Carson's Carnac the Magnificent to Trevor Noah's South African lens on American absurdity, from the BBC's Parkinson to Graham Norton's sofa-as-salon --- late night is one of television's great long stories. Understanding it whole, in all its ambition and contradiction, illuminates how cultures process themselves in real time through the device of a host, a guest, and a laugh.
+
+The \textit{Amiga Principle} applies here: the format's endurance came not from raw budgetary power but from a deceptively simple architectural elegance --- desk, couch, monologue, band, curtain --- that could absorb almost any host personality, political era, or technological shift. Its current crisis is not a failure of that core architecture but of the economic scaffolding that surrounded it, which streaming has quietly dissolved.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Incomplete historiography:} Most accounts of late night history focus on the American Tonight Show lineage and neglect the rich parallel traditions of British chat shows, the early women pioneers, and the syndicated and cable innovators who built the format alongside the big networks.
+  \item \textbf{The diversity gap:} Late night has been dominated by white men for most of its history, with women and hosts of color facing structural barriers that are poorly documented in mainstream histories. The first late night host was arguably a woman (Faye Emerson, 1949), yet decades passed before another woman held a network slot.
+  \item \textbf{The economics are opaque:} Why is late night collapsing now rather than ten years ago? The interplay between production costs, ad revenue decline, streaming fragmentation, and political controversy (the Colbert cancellation) is under-analyzed as a systemic story.
+  \item \textbf{The transition is undocumented in real time:} The years 2020--2026 represent the most disruptive period in the genre's history. COVID-era home broadcasting, the Colbert cancellation, the Kimmel suspension, the podcast insurgency --- these events are happening now and require synthesis.
+  \item \textbf{The future is unstudied:} Video podcasts, YouTube-native shows, Netflix's talk format experiments, and the question of whether any format can replace late night's cultural function --- this is open territory with no authoritative framework.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Late night as cultural processing engine:} The genre's deepest function is not entertainment but cultural digestion --- converting the day's events, anxieties, and absurdities into laughter, providing a nightly emotional metabolizing ritual for the audience. Its history is therefore inseparable from the history of the cultures that produced it.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+LATE NIGHT HISTORY -- FULL DOMAIN MAP
+
+AMERICAN BROADCAST (1949-present)
+  |
+  +--- Origins Layer (1949-1954)
+  |     Faye Emerson / Broadway Open House / Radio variety roots
+  |
+  +--- Foundation Layer (1954-1962)
+  |     Steve Allen -> Jack Paar -> Format codification
+  |
+  +--- Golden Age (1962-1992)
+  |     Johnny Carson [THE TONIGHT SHOW -- 30 years]
+  |     Parallel: Tom Snyder, Dick Cavett, Merv Griffin
+  |
+  +--- The Wars (1982-2000)
+  |     Letterman / Leno / Arsenio Hall / Joan Rivers
+  |     The Leno-Conan crisis (1992-1993, reprise 2009-2010)
+  |
+  +--- Satire Revolution (1999-2015)
+  |     Daily Show / Colbert Report / political late night
+  |     Kimmel / Ferguson / Conan / Fallon
+  |
+  +--- Digital Reckoning (2015-2026)
+        Oliver / Meyers / Noah / Colbert #1 then canceled
+        COVID home shows / YouTube fragmentation / Podcasts
+
+BRITISH / INTERNATIONAL TRACK (1971-present)
+  Parkinson (BBC, 1971-2007) / Wogan (BBC, 1982-1992)
+  Ross (BBC, 2001-2010) / Norton (BBC, 2007-present)
+  International variants: Australia, Ireland, Canada
+
+DIVERSITY / INCLUSION TRACK (1949-present)
+  Faye Emerson (1949) -> Joan Rivers (1986)
+  Arsenio Hall (1989) -> Cynthia Garrett (2000)
+  Amber Ruffin / Lilly Singh / Mo'Nique / Trevor Noah
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY GRAPH
+
+[MOD-01: Origins]      [MOD-04: Diversity]
+       |                       |
+       v                       v
+[MOD-02: Golden Age] ----> [MOD-05: International]
+       |                       |
+       v                       v
+[MOD-03: Wars & Expansion] --> [MOD-06: Digital Reckoning]
+                                        |
+                                        v
+                              [SYNTHESIS: Future of Late Night]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Origins and the Golden Age (1949--1979)}
+Covers the pre-history in radio variety and early television variety shows; the foundational contributions of Steve Allen (1954), Jack Paar (1957), and Johnny Carson (1962); the codification of the desk-couch-monologue-band format; and the parallel early pioneers including the overlooked Faye Emerson. Emphasis on how Carson's thirty-year reign became the template against which all successors are measured.
+
+\subsubsection{Module 02: The Wars and the Leno-Letterman Schism (1980--1999)}
+Documents the emergence of David Letterman at NBC (1982) and the radical reinvention of late night comedy he introduced; the controversial succession battle after Carson's retirement (1992); Letterman's move to CBS; Arsenio Hall's syndicated revolution; and the proliferation of late night shows (Joan Rivers, Pat Sajak, Chevy Chase) most of which failed quickly. Includes the first Conan era and the cultural importance of The Arsenio Hall Show.
+
+\subsubsection{Module 03: The Satire Revolution (2000--2015)}
+Documents the rise of politically engaged late night through Jon Stewart's Daily Show reinvention, Stephen Colbert's Colbert Report, and their successors. Includes the careers of Craig Ferguson, Jimmy Kimmel, Conan O'Brien's TBS era, and Jimmy Fallon's digital-first Tonight Show strategy. The Conan-Leno handoff crisis of 2009--2010 as structural case study.
+
+\subsubsection{Module 04: Diversity, Gender, and the Fight for the Desk (1949--2026)}
+Reconstructs the parallel history of those excluded from or marginalized within the format: the first female host (Faye Emerson), Joan Rivers' pioneering 1986 network show, the Arsenio Hall Show's cultural significance for Black America, and successive breakthroughs including Amber Ruffin, Lilly Singh (first openly LGBTQ+ network host), and Trevor Noah. Includes structural analysis of why diversity gains remain fragile.
+
+\subsubsection{Module 05: The British and International Traditions (1971--Present)}
+Covers the distinct British chat show tradition: Michael Parkinson's interview mastery (1971--2007), Terry Wogan's warm populism (1982--1992), Jonathan Ross's Letterman-inspired irreverence (1987--present), and Graham Norton's ensemble sofa format that differentiates British from American practice. Brief survey of Australian, Irish, Canadian, and other national variants.
+
+\subsubsection{Module 06: The Digital Reckoning and the Future (2015--Beyond)}
+Synthesizes the forces dismantling the broadcast model: streaming fragmentation, the COVID-era home show adaptation, declining ad revenues, the $40M/year loss economics of The Late Show, the Colbert cancellation and its political dimensions, the Kimmel suspension, Seth Meyers' prognosis, and the emerging alternatives (video podcasts, YouTube-native formats, Netflix talk experiments, Joe Rogan-style long-form). Projects likely futures.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# late-night-history-mission.chipset.yaml
+# GSD Fleet Activation -- Cultural History Study
+
+agnus:
+  role: Orchestration / DMA / Context Management
+  model: claude-opus-4-6
+  allocation: 30%
+  responsibilities:
+    - Mission-level direction and go/no-go gates
+    - Cross-module synthesis coordination
+    - Cultural sensitivity review (race, gender, politics)
+    - Colbert cancellation political balance check
+
+denise:
+  role: Display / Output Rendering
+  model: claude-sonnet-4-6
+  allocation: 60%
+  responsibilities:
+    - Module document production (6 modules)
+    - Source verification and citation formatting
+    - Timeline construction and fact-checking
+    - Bibliography compilation
+
+paula:
+  role: Audio / I-O / Anticipatory
+  model: claude-haiku-4-5
+  allocation: 10%
+  responsibilities:
+    - Shared schema generation
+    - Template scaffolding
+    - Cross-reference index building
+
+cpu_68000:
+  role: Gary / Glue Logic
+  model: claude-haiku-4-5
+  note: Infrastructure tasks, file I/O, dependency tracking
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item American network late night talk shows (NBC, CBS, ABC, Fox, cable)
+  \item British chat show tradition (BBC One, ITV, Channel 4)
+  \item The history of diversity in the genre (gender, race, LGBTQ+)
+  \item The economic collapse of the broadcast model (2015--2026)
+  \item The Colbert cancellation as inflection point document
+  \item The emerging podcast/YouTube successor ecosystem
+  \item Key figures: Allen, Paar, Carson, Letterman, Leno, Conan, Hall, Stewart, Colbert, Kimmel, Fallon, Oliver, Meyers, Noah, Norton, Parkinson, Wogan, Ross
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Daytime talk shows (Oprah, Ellen, The View) --- separate research domain
+  \item Game shows and variety programs not structured as talk shows
+  \item Radio-only late night programming post-television era
+  \item International markets beyond US and UK at depth (survey only)
+  \item Individual episode-level analysis or specific joke catalogues
+  \item Salary negotiations and legal proceedings beyond structural relevance
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Complete chronological timeline from 1949 (Faye Emerson) to 2026 (Colbert final episode) with all major hosts and programs documented.
+  \item Origins module traces the format's lineage from radio variety through Steve Allen's Tonight Show with evidence.
+  \item Golden Age module gives a full account of Carson's thirty-year reign and its cultural significance, including key innovations.
+  \item Wars module documents the Letterman-Leno succession battle and its consequences with primary-source corroboration.
+  \item Diversity module names all significant firsts (first woman, first Black host, first LGBTQ+ host) with accurate dates and show names.
+  \item International module captures the distinct British format with Parkinson, Wogan, Ross, and Norton each profiled.
+  \item Digital Reckoning module provides quantitative economic data (viewership decline percentages, production costs, ad revenue figures) with sources.
+  \item Colbert cancellation analyzed in full political, financial, and structural context.
+  \item Future section maps at least three distinct possible successor formats with supporting evidence from 2025--2026 developments.
+  \item All claims sourced to professional journalism, academic media studies, or industry publications (Nielsen, Variety, Hollywood Reporter, PBS, Britannica).
+  \item Sensitivity considerations addressed for coverage of race, gender, and political content.
+  \item Document is self-contained: a reader with no prior knowledge of late night television can understand the full arc from beginning to present.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Deep Audio Analyzer Mission & Shares music industry context; performers on late night as cultural signal & Peer \\
+Fox Infrastructure Group & Media industry economics inform broadcasting infrastructure landscape & Tangential \\
+Seattle Hip-Hop Module 05 & Late night as platform for hip-hop artists (Arsenio Hall Show as key venue) & Cross-reference \\
+The Space Between (textbook) & ``Spaces between'' philosophy applies: late night's power lives in the pauses between jokes & Philosophical \\
+GSD-OS Cultural Layer & Late night history as seed content for College of Knowledge entertainment module & Downstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Late night talk shows are fundamentally exercises in the \textit{spaces between}. The joke itself is not where the meaning lives --- it lives in the pause after the joke, in the host's glance to the camera, in the guest's unguarded response before the trained smile returns. Johnny Carson was a master of the beat, the held silence that made the laugh arrive harder. David Letterman weaponized discomfort in the spaces between his questions, turning the interview gap into a form of art. Graham Norton fills his sofa with multiple guests precisely so the spaces between them --- the lateral glances, the competitive storytelling --- become the real show.
+
+The format's current crisis is, in a strange way, also about a space: the gap between 11:30pm and the morning, which the internet has filled with infinite alternatives. The ritual of \textit{together at this hour} has dissolved into \textit{whenever, wherever, alone}. What replaces it is not necessarily worse entertainment --- but it is categorically different cultural infrastructure. The mission of this research package is to document the full arc of what that shared nightly ritual was, what it accomplished, why it mattered, and what it might yet become in whatever form survives the economic reckoning underway.
+
+%%==========================================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%%==========================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Late Night Talk Shows --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings for all six research modules. Use it as the primary evidence base for document production. Agents should treat quantitative figures as requiring inline citation; all statistics below are attributed.
+
+\subsubsection{Key Source Organizations}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{PBS Pioneers of Television} --- archival interviews with hosts and producers
+  \item \textbf{Encyclopedia Britannica} --- Tonight Show official history
+  \item \textbf{Variety} --- industry economics, Colbert cancellation reporting
+  \item \textbf{The Wrap / Hollywood Reporter} --- late night future analysis (2025)
+  \item \textbf{Wikipedia (en)} --- Late-night talk show, Late Night (franchise), list of programs
+  \item \textbf{The Week / PBS NewsHour} --- diversity in late night history
+  \item \textbf{Nielsen} --- viewership data (cited via Variety and The Wrap)
+  \item \textbf{SiriusXM Media / Edison Research} --- podcast vs. late night audience data
+  \item \textbf{National Comedy Hall of Fame} --- David Letterman career documentation
+  \item \textbf{British Brief / Hello! Magazine / Anglotopia} --- UK chat show history
+\end{itemize}
+
+\subsection{Module 01 Reference: Origins and the Golden Age (1949--1979)}
+
+\subsubsection{The Pre-History: Radio Variety and Early Television}
+The late night talk show's ancestry lies in radio variety programming, particularly shows like The Pepsodent Show featuring Bob Hope, whose rapid-fire topical comedy established the template of a host addressing current events with humor. Early television variety shows including The Ed Sullivan Show (CBS, 1948--1971) and Texaco Star Theater with Milton Berle (NBC, 1948--1956) aired in prime time, not late night, but established the variety format that late night would adapt.
+
+The first claim to late night hosting belongs to actress Faye Emerson, whose \textit{The Faye Emerson Show} premiered on CBS in 1949, featuring celebrity interviews and political commentary from what was described as a living room couch. Media historian Maureen Mauk, cited in CNN's ``The Story of Late Night'' documentary series, identifies Emerson as the format's pioneer and documents how women were subsequently pushed out of late night entirely as advertising money began to concentrate there, redirected to daytime programming to reach stay-at-home consumers.
+
+NBC's \textit{Broadway Open House} (1950) is credited as the first dedicated late night programming block, though short-lived. It established that there was an audience for post-11pm television distinct from prime time.
+
+\subsubsection{Steve Allen and the Format's Invention}
+\textit{Tonight Starring Steve Allen} launched on NBC in 1954, marking the birth of the recognizable late night talk show format. Allen introduced the combination of comedic monologue, celebrity interviews, and musical guests that remains standard today. He also pioneered physical comedy and audience interaction, breaking the plane between stage and viewer by going into the audience and onto city streets. PBS's \textit{Pioneers of Television} series documents Allen's contributions directly, including his innovation of the show's desk-and-couch staging that comedian Keith Raywood, who later designed sets for O'Brien and Fallon, confirms has remained essentially unchanged: ``Every time you see a late night show, it seems like everybody starts with the same formula. They just dress it differently.''
+
+\subsubsection{Jack Paar and Johnny Carson}
+Jack Paar succeeded Allen in 1957, bringing an extemporaneous, emotionally open style that was radically different from Allen's physical comedy. Paar famously walked off the show in 1960 over a censored joke and returned a month later to a massive audience. His tenure (1957--1962) established that the host's authentic personality was the show's true content.
+
+Johnny Carson assumed The Tonight Show in 1962 and held it for thirty years, a tenure unmatched in American broadcasting. According to Britannica's official Tonight Show entry, Carson ``streamlined the format of the show, focusing more on entertainment personalities, tweaking the monologue to feature shorter jokes, and emphasizing sketch comedy.'' His ratings remain the highest in the history of late night television according to PBS's Pioneers of Television. Carson moved the show from New York to Burbank, California in 1972, a geographical shift that reoriented the show toward Hollywood entertainment culture. His recurring characters --- Carnac the Magnificent, Aunt Blabby --- and bits like Stump the Band became cultural touchstones.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Host} & \tableheader{Show} & \tableheader{Significance} & \tableheader{Years} \\
+\midrule
+Faye Emerson & The Faye Emerson Show & First late night host; political commentary & 1949--1951 \\
+Steve Allen & Tonight Starring Steve Allen & Invented the format; desk, guests, monologue, band & 1954--1957 \\
+Jack Paar & The Tonight Show & Emotional authenticity; host as content & 1957--1962 \\
+Johnny Carson & Tonight Show Starring Johnny Carson & Thirty-year institution; highest-rated in history & 1962--1992 \\
+Tom Snyder & The Tomorrow Show & Intellectual counterpoint; post-Carson hour & 1973--1981 \\
+Dick Cavett & The Dick Cavett Show & Literary/intellectual guests; cultural counterweight & 1968--1975 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 02 Reference: The Wars and the Leno-Letterman Schism (1982--1999)}
+
+\subsubsection{David Letterman Reinvents Late Night}
+David Letterman's \textit{Late Night with David Letterman} debuted February 1, 1982 on NBC, immediately following The Tonight Show. The National Comedy Hall of Fame documents that Letterman hosted a total of 6,028 episodes across his NBC and CBS careers, surpassing Carson as the longest-serving late night host in American television history. His NBC show developed a cult following, particularly among college students, for its ``quirky, genre-mocking'' format heavily influenced by Steve Allen. Regular features included the Top 10 List, Stupid Pet Tricks, and physical stunts.
+
+When Carson retired in 1992, most observers --- including Carson himself --- expected Letterman to inherit The Tonight Show. NBC instead chose Jay Leno. Letterman left for CBS, launching \textit{Late Show with David Letterman} in 1993. For the first time in the genre's history, the network late night slot had a genuine competitor of comparable stature.
+
+\subsubsection{The Arsenio Hall Moment}
+The Arsenio Hall Show (syndicated, 1989--1994) was arguably the most culturally significant departure from the Carson template. Hall brought a younger, Black-centered energy to late night, featuring hip-hop artists and Black comedians and cultural figures largely absent from mainstream late night. His audience was consistently younger than Carson's. In 1992, then-candidate Bill Clinton played saxophone on the show, an event widely credited with cementing Clinton's appeal among younger voters. The show was canceled in 1994 as it faced competition from a revived late night landscape.
+
+\subsubsection{Failed Challengers and the Proving Ground}
+The 1980s and early 1990s saw numerous failed attempts to challenge Carson and later Letterman/Leno: Joan Rivers' Fox show (1986, lasted one season), Pat Sajak (CBS, 1989--1990, sixteen months), Chevy Chase (Fox, 1993, six brutal weeks). These failures established that the format's success was almost entirely host-dependent, and that charisma and chemistry could not be manufactured.
+
+\subsubsection{Conan O'Brien's Unlikely Ascent}
+When Letterman vacated the NBC 12:30 slot, NBC chose comedy writer Conan O'Brien --- who had little on-screen experience --- over more established candidates including Drew Carey and Jon Stewart. PBS Pioneers of Television documents that Washington Post critic Tom Shales initially wrote: ``The young man is a living collage of annoying nervous habits.'' Late Night with Conan O'Brien ultimately drew critical praise and ran sixteen years, from 1993 to 2009.
+
+\subsection{Module 03 Reference: The Satire Revolution (2000--2015)}
+
+\subsubsection{The Daily Show Transformation}
+Jon Stewart took over \textit{The Daily Show} on Comedy Central in 1999 and transformed it from a general comedy program into a precision satirical instrument aimed at political hypocrisy and media failure. The show became essential viewing for millennials --- particularly after the September 11 attacks, when Letterman's emotional return to air and Stewart's subsequent political sharpening established that late night could carry genuine moral weight.
+
+\subsubsection{The Colbert Report and Satire's Peak}
+Stephen Colbert launched \textit{The Colbert Report} in 2005 as a spin-off of The Daily Show, playing a character --- a conservative pundit who was a parody of Fox News commentary --- with such sustained commitment that it occasionally confused its targets. The show ran until 2014 and established Colbert as one of the genre's major talents.
+
+\subsubsection{The Conan-Leno Crisis}
+NBC's 2009 handoff of The Tonight Show from Leno to O'Brien became one of the most-discussed succession crises in television history. After O'Brien's ratings disappointed, NBC proposed pushing The Tonight Show to midnight to accommodate a new Leno show at 11:35. O'Brien refused. Leno returned. The episode generated enormous public sympathy for O'Brien and lasting industry skepticism about NBC's management of talent.
+
+\subsubsection{The Fallon Digital Pivot}
+Jimmy Fallon's Tonight Show (2014--present) pioneered the strategy of producing shareable digital content --- celebrity games, lip sync battles, hashtag challenges --- that could go viral on YouTube and social media regardless of whether viewers watched live. By June 2025, The Tonight Show had 9.2 billion views across social media platforms from June 2024 to May 2025, a 55\% year-over-year rise, despite declining linear television ratings (The Wrap, July 2025).
+
+\subsection{Module 04 Reference: Diversity, Gender, and the Fight for the Desk}
+
+\subsubsection{The Exclusion of Women}
+The first late night host was a woman (Faye Emerson, 1949), yet the format became male-dominated as advertising money arrived and networks concentrated the genre. Joan Rivers, who had been Carson's permanent guest host since 1983, became the first woman given a network late night franchise when she launched \textit{The Late Show} on Fox in 1986. Her competition with Carson --- who reportedly never forgave her for going to a rival network --- led to a personal rift. The show lasted one season.
+
+After Rivers, the history of women in late night is largely a history of near-misses and short tenures: Whoopi Goldberg's syndicated show (1992, one season), Cynthia Garrett's \textit{Later} on NBC (2000, first Black woman on network late night), and Chelsea Handler's \textit{Chelsea Lately} on E! (2007--2014, seven years, the longest-running female late night show). According to PBS NewsHour, in 1986, Joan Rivers became the first woman given a shot at the late-night chair, and ``it took decades before another woman was given another chance, and since then, no woman has made it past a single season in late-night on any major network'' (as of the NewsHour report in 2019).
+
+Lilly Singh broke new ground in 2019 as host of \textit{A Little Late with Lilly Singh} on NBC --- the first openly bisexual person and first person of color to host a network late night show in the US. The show ran until June 2021.
+
+\subsubsection{Black Hosts and Cultural Impact}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Arsenio Hall} (1989--1994): First Black host of a major syndicated late night show; cultural importance as platform for Black artists and political figures.
+  \item \textbf{Cynthia Garrett} (2000): First Black woman to host a network late night show (NBC's \textit{Later}).
+  \item \textbf{Trevor Noah} (2015--2022): South African host of The Daily Show; brought international perspective to American political satire.
+  \item \textbf{Amber Ruffin}: First Black woman to write for a network late night show (Late Night with Seth Meyers); launched \textit{The Amber Ruffin Show} on Peacock in 2020.
+  \item \textbf{Mo'Nique}: Hosted \textit{The Mo'Nique Show} on BET; one of few Black women to host a late night program.
+\end{itemize}
+
+\subsubsection{Structural Persistence of Exclusion}
+Despite these milestones, the pattern identified by \textit{The Week} (2023) remains: women and hosts of color rarely survive past the first season in network late night. The Amber Ruffin Show, Lilly Singh's show, Desus \& Mero, and others demonstrate both progress and the structural fragility of diversity gains. As of 2025--2026, the surviving major late night franchises are hosted entirely by white men.
+
+\subsection{Module 05 Reference: The British and International Traditions}
+
+\subsubsection{Michael Parkinson and the Interview as Art}
+Michael Parkinson's \textit{Parkinson} ran on BBC One from 1971 to 1982 and again from 1998 to 2007, making him the longest-running chat show host in British history. Unlike the American model, Parkinson came from a journalism background and approached celebrity interviews with a reporter's rigor. Hello! Magazine describes him as ``often dubbed the greatest British talk show host.'' His four Muhammad Ali interviews and Tony Blair interview on the Iraq invasion became landmark television moments. The final episode of Parkinson in 2007 attracted over eight million viewers.
+
+\subsubsection{Terry Wogan's Warmth}
+Terry Wogan's BBC talk show (1982--1992) brought Irish warmth and gentle subversiveness to a mainstream BBC audience, regularly achieving audiences of 8--10 million. Wogan's style was deliberately ``anti-showbiz'' compared to American models.
+
+\subsubsection{Jonathan Ross's Letterman-Inspired Irreverence}
+Jonathan Ross, as documented by Anglotopia and his IMDB biography, deliberately modeled his approach on David Letterman rather than the polite British tradition established by Parkinson and Wogan. His BBC show \textit{Friday Night with Jonathan Ross} (2001--2010) earned him a reported £6 million annual salary and made him the BBC's most-valued broadcaster. His 2008 controversy with Russell Brand (leaving obscene messages for actor Andrew Sachs) led to his departure from the BBC and move to ITV's \textit{The Jonathan Ross Show}.
+
+\subsubsection{Graham Norton's Ensemble Revolution}
+Graham Norton's fundamental innovation is structural: rather than the American model of one guest at a time on a couch beside a desk, Norton brings all guests out simultaneously, places them on a single sofa, and facilitates lateral conversation between them. British Brief (2025) notes that Graham Stuart, Graham Norton Show producer, has revealed the precise ``hierarchy'' governing celebrity seating, with the sofa spot closest to Norton representing the primary aim for publicists. The show airs weekly (not nightly) --- a key structural difference from American models that allows for higher-profile guest lineups. Norton has been described as the ``reigning king of comedy chat shows'' in the UK.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Host} & \tableheader{Show/Network} & \tableheader{Innovation} & \tableheader{Years} \\
+\midrule
+Michael Parkinson & BBC One & Journalistic rigor; long-form single-topic interviews & 1971--2007 \\
+Terry Wogan & BBC One & Warm populism; anti-showbiz authenticity & 1982--1992 \\
+Jonathan Ross & BBC / ITV & Letterman-inspired irreverence; boundary-pushing & 1987--present \\
+Graham Norton & BBC One & Ensemble sofa; lateral guest conversation; weekly format & 2007--present \\
+Alan Carr & Channel 4 & Youth-oriented; followed Norton's ensemble approach & 2009--2016 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Key Structural Difference: American vs.\ British}
+The British weekly format allows bookings that the American five-nights-a-week model cannot sustain. British Brief (2025) notes that ``film junkets and premieres typically occur Wednesday or Thursday afternoons, with participants proceeding directly to Graham's recording afterward'' --- the Norton show benefits from proximity to London's premiere circuit. American shows, needing guests five nights a week, must rely on repeat bookings and lesser-profile guests to fill the schedule.
+
+\subsection{Module 06 Reference: The Digital Reckoning and the Future (2015--2026)}
+
+\subsubsection{Quantitative Decline Data}
+The Wrap's July 2025 analysis, citing Nielsen data, provides the clearest picture of late night's audience erosion:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textit{The Late Show with Stephen Colbert}: Average viewership fell from 3.81 million (2019) to 2.42 million (Q2 2025).
+  \item \textit{Jimmy Kimmel Live!}: Down 13\% over the same period.
+  \item \textit{The Tonight Show Starring Jimmy Fallon}: Down 51\% over the same period, averaging 1.19 million in Q2 2025.
+  \item Total late night ad revenue decline: The Late Show's ad revenue dropped approximately 25\% from 2022 to 2024. The Tonight Show fell 35\% over the same period (iSpot TV data, cited in The Wrap).
+  \item SiriusXM Media / Edison Research reports a 16\% decline in total late night viewers comparing Q2 2025 to Q2 2024.
+\end{itemize}
+
+\subsubsection{The Colbert Cancellation (July 2025)}
+CBS announced on July 17, 2025 that \textit{The Late Show with Stephen Colbert} would end in May 2026 when Colbert's contract expired. Key facts documented across Variety, Deadline, and Wikipedia's Late Show entry:
+\begin{itemize}[leftmargin=1.5em]
+  \item The show was reportedly losing approximately \$40 million per year.
+  \item The show's budget was approximately \$100 million per season.
+  \item CBS stated the decision was ``purely a financial decision against a challenging backdrop in late night.''
+  \item Colbert had called Paramount Global's \$16M settlement with President Trump a ``big fat bribe'' two days before cancellation, prompting political controversy.
+  \item Despite being canceled, The Late Show averaged 600,000 more viewers than its nearest competitor in Q2 2025.
+  \item Colbert described it in a GQ interview: ``I think we're the first number one show to ever get canceled.''
+  \item CBS retired the Late Show franchise entirely; no successor was named.
+\end{itemize}
+
+\subsubsection{The Kimmel Suspension (September 2025)}
+Jimmy Kimmel's \textit{Jimmy Kimmel Live!} was suspended by ABC following an FCC threat to revoke ABC affiliates' licenses over Kimmel's controversial remarks. This occurred approximately two months after the Colbert cancellation and compounded the industry's sense of crisis.
+
+\subsubsection{YouTube and Social Media as Successor Ecosystem}
+Despite declining linear audiences, late night content performs strongly on digital platforms:
+\begin{itemize}[leftmargin=1.5em]
+  \item The Tonight Show: 32.7M YouTube subscribers, 76.3M across YouTube/TikTok/Instagram combined (The Wrap, July 2025).
+  \item Jimmy Kimmel Live!: 20.7M YouTube subscribers.
+  \item The Late Show: 9.96M YouTube subscribers.
+  \item The Tonight Show saw 9.2 billion social media views June 2024 to May 2025, a 55\% year-over-year increase.
+\end{itemize}
+This pattern --- declining TV audiences but growing digital reach --- suggests the content retains value even as the broadcast distribution model fails.
+
+\subsubsection{The Podcast Insurgency}
+Netflix co-CEO Ted Sarandos stated in Q1 2025: ``The lines between podcast and talk shows are getting pretty blurry.'' Multiple data points document the shift:
+\begin{itemize}[leftmargin=1.5em]
+  \item YouTube passed 1 billion monthly active podcast viewers at the start of 2025.
+  \item Taylor Swift's appearance on the \textit{New Heights} podcast set a Guinness World Record for most concurrent views for a podcast on YouTube at 1.3 million live viewers.
+  \item Trevor Noah and Conan O'Brien, both former late night hosts, have found significant podcast audiences.
+  \item Netflix announced in October 2025 a deal with Spotify to bring video podcasts to its platform starting in early 2026, including shows from The Ringer, iHeartMedia, and Barstool.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Protocol} \\
+\midrule
+Political balance & Colbert cancellation has active partisan dimensions; document facts without advocacy & ANNOTATE \\
+Race and representation & Module 04 covers systemic exclusion; center documented facts not editorializing & GATE \\
+Gender history & Joan Rivers and other female pioneers; present evidence evenhandedly & GATE \\
+Source quality & Colbert cancellation = recent; use Variety, Deadline, Wikipedia (cited); no tabloids & ABSOLUTE \\
+Numerical claims & All viewership, ad revenue, and budget figures must be attributed to specific sources & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Professional Journalism and Industry Publications}
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item Variety (July 2025). ``CBS to Cancel `Late Show With Stephen Colbert' Citing Finances.'' variety.com
+  \item Deadline (July 2025). ``Stephen Colbert Ending Leaves Late-Night TV Future In Limbo.'' deadline.com
+  \item The Wrap (July 2025). ``The Future of Late Night Comedy: What's Lost When --- Not If --- It Goes Away.'' thewrap.com
+  \item Hollywood Reporter (July 2025). ``CBS' Colbert Cancellation and Late-Night's Profit Free Fall.'' hollywoodreporter.com
+  \item Deadline (November 2025). ``Stephen Colbert Talks `The Late Show' Ending \& Future Plans.'' deadline.com
+  \item SiriusXM Media / Edison Research (2025). ``From Late Night to Anytime: How Podcasts Are Replacing Talk Shows.'' siriusxmmedia.com
+\end{itemize}
+
+\subsubsection{Reference and Archival Sources}
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item Encyclopedia Britannica. ``The Tonight Show: History, Hosts, \& Facts.'' britannica.com
+  \item PBS, Pioneers of Television. ``Late Night TV.'' pbs.org
+  \item CNN Documentary. ``The Story of Late Night'' (Original Series, 2020). Referenced via CNN.com
+  \item Wikipedia. ``Late-night talk show''; ``Late Night (franchise)''; ``List of late-night American network TV programs''; ``The Late Show with Stephen Colbert.'' en.wikipedia.org
+  \item National Comedy Hall of Fame. ``David Letterman.'' nationalcomedyhalloffame.com
+\end{itemize}
+
+\subsubsection{Diversity and Representation Sources}
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item PBS NewsHour (2019). ``How Lilly Singh is making late-night TV history.'' pbs.org
+  \item The Week (2023). ``A brief, disheartening history of women in late night.'' theweek.com
+  \item Revolt TV. ``Black TV hosts who have delivered cutting-edge shows.'' revolt.tv
+\end{itemize}
+
+\subsubsection{British and International Sources}
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item British Brief (2025). ``Behind the Scenes of UK Chat Shows: Feuds, Riders and Production Secrets.'' britbrief.co.uk
+  \item Hello! Magazine (2025). ``The highest paid UK talk show hosts of the 80s.'' hellomagazine.com
+  \item Anglotopia. ``The Fiver: Five of the Best UK TV Talk Show Hosts.'' anglotopia.net
+\end{itemize}
+
+%%==========================================================================
+%% STAGE 3 — MISSION PACKAGE
+%%==========================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package: Late Night --- A Complete History}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality comprehensive history of the late night talk show genre from 1949 to 2026+, suitable as a reference work, cultural studies resource, and GSD College of Knowledge seed document. The mission delivers six module documents plus a synthesizing overview, all to professional journalism standards with full citations. Output is designed to be readable by a general audience while rigorous enough to serve as a research foundation.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+========================================
+
+[WAVE 0: Foundation]
+  Sequential -- Haiku
+  Shared schemas / source index / timeline scaffold
+  Output: schemas.yaml, source-index.md, timeline.json
+
+     |
+     v
+
+[WAVE 1: PARALLEL TRACKS]
+ Track A                        Track B
+ EXEC-AMERICA                   EXEC-INTL
+ MOD-01: Origins (1949-79)      MOD-05: British/International
+ MOD-02: Wars (1982-99)         MOD-04: Diversity
+                                         |
+              +------------------------+
+              |
+     v
+
+[WAVE 2: PARALLEL TRACKS]
+ Track A                        Track B
+ EXEC-SATIRE                    EXEC-FUTURE
+ MOD-03: Satire Revolution       MOD-06: Digital Reckoning
+ (2000-2015)                     (2015-2026+)
+              |
+              v
+
+[WAVE 3: Synthesis]
+  Sequential -- Opus
+  INTEG: Cross-module relationships, timeline validation
+  Overview document: "Late Night: A Complete History" (~15,000 words)
+  VERIFY: Fact-check all quantitative claims, source validation
+
+     |
+     v
+
+[WAVE 4: Publication]
+  Sequential -- Sonnet
+  Final LaTeX compilation, bibliography, index
+  QA pass / sensitivity review
+  Delivery package
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Foundation Layer}: Timeline scaffold, source index, shared terminology glossary, cross-reference schema
+  \item \textbf{Survey Layer}: Six parallel module documents, each 2,000--3,500 words
+  \item \textbf{Synthesis Layer}: Cross-module integration, timeline validation, relationship mapping
+  \item \textbf{Publication Layer}: Complete history document (12,000--18,000 words), bibliography, index
+  \item \textbf{Verification Layer}: Source validation, numerical claim attribution, sensitivity review
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Format} \\
+\midrule
+1 & Module 01: Origins \& Golden Age & Complete, sourced, 2,000+ words & Markdown \\
+2 & Module 02: Wars \& Leno-Letterman & Complete, sourced, 2,500+ words & Markdown \\
+3 & Module 03: Satire Revolution & Complete, sourced, 2,000+ words & Markdown \\
+4 & Module 04: Diversity \& Exclusion & Complete, sourced, 2,500+ words & Markdown \\
+5 & Module 05: British \& International & Complete, sourced, 2,000+ words & Markdown \\
+6 & Module 06: Digital Reckoning + Future & Complete, sourced, 3,000+ words & Markdown \\
+7 & Late Night: A Complete History & Synthesized overview, 12,000--18,000 words & LaTeX PDF \\
+8 & Timeline JSON & Chronological event index, machine-readable & JSON \\
+9 & Source Index & All sources with URLs, verified & YAML \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}XC{1.8cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Responsibility} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Foundation scaffold & None & Shared schemas, timeline, source index & Haiku & 4K \\
+MOD-01: Origins & Foundation & 1949--1979 survey with citations & Sonnet & 12K \\
+MOD-02: Wars & Foundation & 1982--1999 survey with citations & Sonnet & 14K \\
+MOD-03: Satire & Foundation & 2000--2015 survey with citations & Sonnet & 12K \\
+MOD-04: Diversity & Foundation & Diversity/exclusion history & Opus & 16K \\
+MOD-05: International & Foundation & UK and global chat show traditions & Sonnet & 12K \\
+MOD-06: Digital & Foundation + Research & 2015--future with quantitative data & Sonnet & 18K \\
+INTEG synthesis & All modules & Cross-module integration, timeline validation & Opus & 20K \\
+Complete History doc & INTEG & 12K--18K word overview document & Opus & 30K \\
+Final verification & Complete History & Source validation, sensitivity review & Sonnet & 8K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} & \tableheader{Components} \\
+\midrule
+Opus & $\sim$30\% & Diversity history (structural exclusion requires judgment); synthesis (pattern detection across 70+ years); complete history document (narrative quality) & MOD-04, INTEG, Final Doc \\
+Sonnet & $\sim$60\% & Structured survey work; well-sourced factual compilation; timeline construction; fact verification & MOD-01, 02, 03, 05, 06, Verification \\
+Haiku & $\sim$10\% & Schema generation; scaffolding; source index; template production & Foundation, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Activities} & \tableheader{Mode} & \tableheader{Model} \\
+\midrule
+0 & Foundation & Schemas, source index, timeline, glossary & Sequential & Haiku \\
+1 & Survey A+B & MOD-01 + MOD-02 (Track A) / MOD-04 + MOD-05 (Track B) & Parallel & Sonnet/Opus \\
+2 & Survey C+D & MOD-03 (Track A) / MOD-06 (Track B) & Parallel & Sonnet \\
+3 & Synthesis & INTEG: cross-module integration, full history draft & Sequential & Opus \\
+4 & Publication & Final document, bibliography, verification, delivery & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Timeline scaffold & JSON file: 1949--2026, all major shows and hosts & PLAN/Haiku \\
+Source index & YAML: all 30+ sources with URLs and verification status & LOG/Haiku \\
+Shared glossary & Terminology: monologue, house band, desk-and-couch format, etc. & PLAN/Haiku \\
+Module templates & Markdown templates for each of six module types & PLAN/Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Survey (Tracks A and B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Key Research Tasks} & \tableheader{Agent} \\
+\midrule
+A & MOD-01: Origins & Allen/Paar/Carson era; radio roots; Faye Emerson; format codification & EXEC-A/Sonnet \\
+A & MOD-02: Wars & Letterman/Leno/Hall/Rivers; succession battle; failed challengers & EXEC-A/Sonnet \\
+B & MOD-04: Diversity & Women hosts timeline; Black hosts; LGBTQ+ firsts; structural exclusion analysis & CRAFT-DIV/Opus \\
+B & MOD-05: International & Parkinson/Wogan/Ross/Norton; sofa format; weekly vs.\ daily; UK/global & EXEC-B/Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Parallel Survey (Tracks C and D)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Key Research Tasks} & \tableheader{Agent} \\
+\midrule
+C & MOD-03: Satire & Stewart/Colbert Report; Conan crisis; Fallon digital pivot; Ferguson & EXEC-C/Sonnet \\
+D & MOD-06: Digital & Viewership data; ad revenue; Colbert cancellation; podcasts; Netflix; future & EXEC-D/Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Synthesis}
+
+INTEG agent combines all six modules into the complete history document, resolves timeline inconsistencies, validates all cross-module claims, and produces the 12K--18K word synthesis narrative. CAPCOM presents draft to user for approval before Wave 4.
+
+\subsubsection{Wave 4: Publication and Verification}
+
+VERIFY agent checks all numerical claims against source index. EXEC-PUB produces final LaTeX PDF. SURGEON performs final sensitivity review (political balance, diversity framing). LOG produces commit messages and milestone summary.
+
+\subsubsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=1.5em]
+  \item Foundation (Wave 0) outputs are shared context for all Wave 1--2 agents; computed once, reused across 6 module agents.
+  \item Source index YAML is a shared attribute layer; no agent regenerates source citations from scratch.
+  \item Timeline JSON serves as the authoritative chronological anchor; all modules reference it rather than independently constructing chronologies.
+  \item 5-minute TTL exploited by launching Track A and Track B within the same session window.
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Model} \\
+\midrule
+Foundation (Wave 0) & 2K & 4K & Haiku \\
+MOD-01 + MOD-02 & 8K & 16K & Sonnet \\
+MOD-04 + MOD-05 & 10K & 20K & Opus/Sonnet \\
+MOD-03 + MOD-06 & 10K & 20K & Sonnet \\
+INTEG Synthesis & 60K & 30K & Opus \\
+Final Verification & 30K & 8K & Sonnet \\
+\midrule
+\textbf{Total Estimated} & \textbf{120K} & \textbf{98K} & \textbf{Mixed} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+
+[Wave 0: Foundation]
+  schemas.yaml, source-index.md, timeline.json, glossary.md
+        |
+   [SHARED CONTEXT -- all agents below receive foundation outputs]
+        |
+        +--------+--------+--------+--------+--------+
+        |        |        |        |        |        |
+    [MOD-01] [MOD-02] [MOD-03] [MOD-04] [MOD-05] [MOD-06]
+    Origins   Wars    Satire  Diversity Intl   Digital
+        |        |        |        |        |        |
+        +--------+--------+--------+--------+--------+
+                              |
+                    [INTEG: Cross-module synthesis]
+                    Complete History Document (draft)
+                              |
+                    [CAPCOM: Human approval gate]
+                              |
+                    [VERIFY + EXEC-PUB: Final PDF]
+                              |
+                         [DELIVERY]
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Target} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & 15\% \\
+Core functionality & 18 & Required & BLOCK & 50\% \\
+Integration & 8 & Required & BLOCK & 22\% \\
+Edge cases & 5 & Best-effort & LOG & 13\% \\
+\midrule
+\textbf{Total} & \textbf{36} & --- & --- & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to professional journalism, academic media studies, or industry publications. Zero entertainment blogs or unsourced claims. \\
+SC-NUM & Numerical attribution & Every viewership figure, ad revenue decline percentage, and production cost attributed to a specific named source (Nielsen, Variety, Hollywood Reporter, iSpot TV). \\
+SC-ADV & Political balance & Colbert cancellation section presents documented facts from all sides without advocating for or against any political position; CBS financial rationale and political controversy arguments both documented. \\
+SC-DIV & Diversity framing & Diversity module centers documented firsts and structural patterns; avoids unattributed claims about motivations for exclusion. \\
+SC-CONT & Temporal currency & Module 06 data primarily from 2024--2026 sources; no primary claims about the current state of late night based on pre-2023 data. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Timeline completeness & Chronological timeline covers every major show from 1949 to 2026; no gap exceeding 5 years without acknowledged coverage. \\
+CF-02 & Origins module & Faye Emerson (1949), Broadway Open House (1950), Steve Allen (1954), Jack Paar (1957), Johnny Carson (1962) all documented with correct dates. \\
+CF-03 & Golden Age depth & Carson's thirty-year tenure covered with at least four distinct aspects: innovations to format, key recurring characters/bits, cultural significance, and influence on successors. \\
+CF-04 & Wars module & Letterman-Leno succession battle of 1992--1993 covered from both sides; Conan crisis of 2009--2010 documented as structural reprise. \\
+CF-05 & Diversity firsts accuracy & Faye Emerson (1949), Joan Rivers (1986), Cynthia Garrett (2000, first Black woman on network), Lilly Singh (2019, first LGBTQ+ network host) all named with correct dates. \\
+CF-06 & Arsenio Hall significance & Hall's cultural impact documented with specifics: hip-hop platform, Bill Clinton saxophone appearance (1992), audience demographics. \\
+CF-07 & International module & Parkinson, Wogan, Ross, and Norton each profiled with at least one distinctive characteristic and accurate dates. \\
+CF-08 & UK format difference & Weekly vs.\ nightly schedule difference and its consequences for guest quality documented explicitly. \\
+CF-09 & Digital decline data & All four quantitative decline figures present with attributed sources: Colbert from 3.81M to 2.42M, Fallon 51\% decline, Kimmel 13\% decline, Colbert \$40M annual loss. \\
+CF-10 & Colbert cancellation & July 17, 2025 announcement documented with CBS statement, financial context, political controversy, and Colbert's response. \\
+CF-11 & Podcast insurgency & Netflix-Spotify deal, YouTube 1B podcast viewers milestone, and Joe Rogan / Conan O'Brien podcast success documented. \\
+CF-12 & Future section & At least three distinct possible successor formats identified with supporting evidence. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Origins $\to$ Wars cascade & Document traces how Carson's thirty-year dominance created the conditions for the post-Carson succession battles. \\
+IN-02 & Wars $\to$ Satire & Connection drawn between Letterman's satirical edge and the Daily Show/Colbert Report political satire tradition. \\
+IN-03 & Diversity $\to$ Digital & Module 06 acknowledges that the digital collapse disproportionately affects new diversity gains (recent hosts of color and women canceled first). \\
+IN-04 & International $\to$ Future & British weekly format discussed as one possible model for a sustainable post-broadcast late night. \\
+IN-05 & Self-containment & A reader with no prior knowledge of late night can understand the full arc from beginning to present without undefined terms. \\
+IN-06 & Timeline consistency & All dates consistent across modules (e.g., Carson's start year 1962 identical in MOD-01, MOD-02, MOD-03, and Complete History). \\
+IN-07 & Source consistency & Same viewership figures not contradicted between modules; single source-of-truth via source index. \\
+IN-08 & Cultural processing through-line & The concept of late night as cultural processing engine echoed across all six modules and reinforced in synthesis. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Complete chronological timeline 1949--2026 & CF-01, IN-06 & Pending \\
+2. Origins module with radio roots through Allen & CF-02, CF-03 & Pending \\
+3. Golden Age: Carson's thirty-year reign fully documented & CF-03 & Pending \\
+4. Wars module: Letterman/Leno succession battle & CF-04 & Pending \\
+5. Diversity module: all firsts accurately dated & CF-05, CF-06 & Pending \\
+6. International module: four key UK hosts profiled & CF-07, CF-08 & Pending \\
+7. Digital Reckoning: quantitative decline data present & CF-09, SC-NUM & Pending \\
+8. Colbert cancellation in full context & CF-10, SC-ADV & Pending \\
+9. Future section: three distinct scenarios & CF-11, CF-12 & Pending \\
+10. All claims sourced professionally & SC-SRC, SC-NUM & Pending \\
+11. Sensitivity considerations addressed & SC-ADV, SC-DIV & Pending \\
+12. Document self-contained for new readers & IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; resource allocation \\
+PLAN & Planner & Wave decomposition; dependency management; parallel track optimization \\
+SCOUT & Research Agent & Additional source gathering; gap-fill searches; verification queries \\
+EXEC-A & America Module & MOD-01: Origins; MOD-02: Wars and Expansion \\
+EXEC-B & Intl/Diversity & MOD-04: Diversity History; MOD-05: British/International \\
+EXEC-C & Satire Module & MOD-03: The Satire Revolution (2000--2015) \\
+EXEC-D & Future Module & MOD-06: Digital Reckoning and Future \\
+CRAFT-HIST & History Specialist & Primary domain analysis; timeline validation; Carson/Carson-era depth \\
+CRAFT-DIV & Diversity Specialist & Gender, race, LGBTQ+ history; sensitivity framing; structural analysis \\
+INTEG & Integration Agent & Synthesis of all six modules; cross-module relationship validation \\
+VERIFY & Verification & Source validation; numerical claim attribution; date accuracy \\
+CAPCOM & HITL Interface & Human approval at INTEG and Publication gates \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cost optimization \\
+SURGEON & Health Monitor & Research quality degradation detection; module coherence monitoring \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+SECURE & Safety Warden & SC test enforcement; political balance boundary enforcement \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 roles) \\
+Research Modules & 6 parallel, 2 sequential synthesis waves \\
+Estimated Context Windows & 6 (Foundation + 2x Survey + Synthesis + Verification + Publication) \\
+Estimated Sessions & 3 \\
+Total Token Budget & $\sim$218K (120K input + 98K output) \\
+Primary Model & Sonnet ($\sim$60\%) \\
+Judgment Model & Opus ($\sim$30\%, MOD-04 + Synthesis + Final) \\
+Scaffold Model & Haiku ($\sim$10\%) \\
+Safety-Critical Tests & 5 (all mandatory-pass / BLOCK) \\
+HITL Gates & 2 (post-INTEG approval; post-Verification approval) \\
+Estimated Output & $\sim$40,000 words across 9 deliverables \\
+Target Audience & General educated readers; media studies; cultural historians \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1.5em}
+
+\begin{quotebox}
+\textit{``Late night began as a way to kill time. It was the networks realizing: `Let's kick the football a little further down the road and see what happens at 11:30.'''}
+
+\medskip
+--- Conan O'Brien, \textit{The Story of Late Night} (CNN Original Series, 2020)
+
+\medskip
+\noindent From a test pattern filling dead air to a seventy-year institution capable of reflecting a nation's conscience, launching careers, and metabolizing presidential elections in real time --- the late night talk show grew from almost nothing into everything, and now faces the quiet dissolution of the model that made it possible. This mission documents the full arc: every host, every war, every reinvention, and every space between.
+\end{quotebox}
+
+\end{document}

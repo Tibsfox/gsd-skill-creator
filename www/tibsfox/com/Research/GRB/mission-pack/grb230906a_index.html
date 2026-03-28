@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GRB 230906A — A Merger Within a Merger — GSD Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary:    #311B92;
+      --secondary:  #0277BD;
+      --tertiary:   #E65100;
+      --accent:     #F9A825;
+      --light-bg:   #EDE7F6;
+      --surface:    #1A0E4A;
+      --text:       #212121;
+      --muted:      #616161;
+      --white:      #FFFFFF;
+      --card-bg:    #261670;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0D0B1A;
+      color: #E8E0F0;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ────────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, #1A0E4A 0%, #0D0B1A 50%, #0E1B2E 100%);
+      border-bottom: 3px solid var(--accent);
+      padding: 3.5rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(49,27,146,0.4), transparent);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.25rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      font-weight: 400;
+      color: #B0BEC5;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: #7986CB;
+    }
+
+    .hero-meta span strong {
+      color: var(--accent);
+    }
+
+    /* ── MAIN CONTENT ────────────────────────────────────────────────── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* ── FILE CARDS ──────────────────────────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 560px) { .cards { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(249,168,37,0.3);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .card p {
+      font-size: 0.82rem;
+      color: #B0BEC5;
+      line-height: 1.5;
+    }
+
+    .card .file-type {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      background: rgba(249,168,37,0.15);
+      color: var(--accent);
+      margin-top: 0.6rem;
+    }
+
+    /* ── SECTION HEADINGS ────────────────────────────────────────────── */
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--accent);
+      border-bottom: 1px solid rgba(249,168,37,0.3);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* ── STAGE BREAKDOWN ─────────────────────────────────────────────── */
+    .stage-list { list-style: none; }
+
+    .stage-list li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.88rem;
+    }
+
+    .stage-badge {
+      min-width: 4.5rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .badge-1 { background: rgba(49,27,146,0.5); color: #CE93D8; border: 1px solid #7B1FA2; }
+    .badge-2 { background: rgba(2,119,189,0.4); color: #81D4FA; border: 1px solid #0277BD; }
+    .badge-3 { background: rgba(230,81,0,0.4);  color: #FFAB91; border: 1px solid #E65100; }
+
+    .stage-list li span:last-child { color: #CFD8DC; line-height: 1.5; }
+
+    /* ── USAGE STEPS ─────────────────────────────────────────────────── */
+    .steps { counter-reset: step; list-style: none; }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.88rem;
+      color: #CFD8DC;
+      line-height: 1.6;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      min-width: 1.8rem;
+      height: 1.8rem;
+      background: var(--primary);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── COMPILE BOX ─────────────────────────────────────────────────── */
+    .compile-box {
+      background: #0D0B1A;
+      border: 1px solid rgba(249,168,37,0.2);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      font-family: 'DM Mono', 'DejaVu Sans Mono', monospace;
+      font-size: 0.78rem;
+      color: #A5D6A7;
+      line-height: 1.8;
+      margin-top: 0.75rem;
+    }
+
+    /* ── QUOTE ───────────────────────────────────────────────────────── */
+    .closing-quote {
+      background: rgba(49,27,146,0.25);
+      border-left: 3px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 4px 4px 0;
+      margin-top: 2.5rem;
+      font-style: italic;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.88rem;
+      color: #CE93D8;
+      line-height: 1.8;
+    }
+
+    .closing-quote cite {
+      display: block;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: #7986CB;
+      margin-top: 0.75rem;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: #455A64;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="hero-badge">GSD Research Mission Package</div>
+  <h1>A Merger Within a Merger</h1>
+  <h2>GRB 230906A · Chandra X-ray Localization · Galaxy Group z = 0.453<br>Tidal Tail Progenitor · r-Process CGM Enrichment</h2>
+  <div class="hero-meta">
+    <span><strong>Source:</strong> Dichiara et al. 2026, ApJL 999 L42</span>
+    <span><strong>Profile:</strong> Squadron (12 roles)</span>
+    <span><strong>Waves:</strong> 0 → 1A/1B → 2 → 3</span>
+    <span><strong>Date:</strong> March 27, 2026</span>
+  </div>
+</header>
+
+<!-- ── MAIN ───────────────────────────────────────────────────────────────── -->
+<main class="container">
+
+  <!-- Download Cards -->
+  <div class="cards">
+    <a href="grb230906a_mission.pdf" download class="card">
+      <div class="card-icon">🌌</div>
+      <h3>Mission Package PDF</h3>
+      <p>24-page publication-quality document. Vision · Research · Mission. All three stages compiled and ready for GSD execution.</p>
+      <span class="file-type">PDF — XeLaTeX 3-pass</span>
+    </a>
+    <a href="grb230906a_mission.tex" download class="card">
+      <div class="card-icon">📐</div>
+      <h3>LaTeX Source</h3>
+      <p>Fully editable .tex source. Recompile with XeLaTeX after modifications. Color scheme, tables, and all environments included.</p>
+      <span class="file-type">.tex — DejaVu / XeLaTeX</span>
+    </a>
+  </div>
+
+  <!-- Stage Contents -->
+  <h2 class="section-title">Document Contents</h2>
+  <ul class="stage-list">
+    <li>
+      <span class="stage-badge badge-1">Stage 1</span>
+      <span><strong>Vision Document</strong> — Problem statement (5 problems), nested-merger cascade architecture, chipset YAML configuration, scope boundaries, 12 success criteria, philosophical through-line connecting to the GSD "spaces between" framework.</span>
+    </li>
+    <li>
+      <span class="stage-badge badge-2">Stage 2</span>
+      <span><strong>Research Reference</strong> — Module-by-module findings from the primary paper. Prompt emission (T₉₀, spectral analysis, energetics at 3 redshifts), Chandra localization chain, host galaxy G* characterization, galaxy group MUSE spectroscopy, tidal tail morphology, short-GRB host population demographics, r-process CGM enrichment analysis, NewAthena/X-IFU simulation, complete bibliography.</span>
+    </li>
+    <li>
+      <span class="stage-badge badge-3">Stage 3</span>
+      <span><strong>Mission Package</strong> — Milestone spec, 9 deliverables table, component breakdown with model assignments, 4-wave execution plan, cache optimization strategy, 250k token budget, dependency graph, 25-test test plan with 6 BLOCK-level safety-critical checks, 12×SC verification matrix, 12-role Squadron crew manifest (PNW species naming).</span>
+    </li>
+  </ul>
+
+  <!-- Usage -->
+  <h2 class="section-title">How to Use This Package</h2>
+  <ol class="steps">
+    <li>Open the PDF for a full read-through. Verify the 12 success criteria (SC1–SC12) in Stage 1 match your research goals.</li>
+    <li>Hand Stage 3 to your GSD orchestrator in Claude Code. The milestone spec is self-contained — no additional context required.</li>
+    <li>Execute Wave 0 first (Haiku): build the source index, observation schemas, and redshift scenario parameter set.</li>
+    <li>Run Wave 1 in parallel: Track A (Modules 01–02: burst + afterglow) and Track B (Modules 03–04: environment + demographics) can execute simultaneously.</li>
+    <li>CAPCOM gate: review scope at Wave 1 → Wave 2 boundary. Confirm the redshift-scenario framing before the Opus synthesis agent proceeds.</li>
+    <li>Wave 2 (Opus): r-process Module 05 + nested-merger narrative + energy-environment consistency check. This is the judgment-heavy step.</li>
+    <li>Wave 3 (Sonnet): LaTeX assembly → 3-pass XeLaTeX compile → numerical verification against paper Tables 1–4 → index.html.</li>
+  </ol>
+
+  <!-- Recompile -->
+  <h2 class="section-title">Recompile Instructions</h2>
+  <p style="font-size:0.85rem; color:#B0BEC5; margin-bottom:0.5rem;">After editing the .tex source, run three XeLaTeX passes to resolve TOC, cross-references, and page counts:</p>
+  <div class="compile-box">
+    xelatex -interaction=nonstopmode grb230906a_mission.tex<br>
+    xelatex -interaction=nonstopmode grb230906a_mission.tex<br>
+    xelatex -interaction=nonstopmode grb230906a_mission.tex
+  </div>
+  <p style="font-size:0.78rem; color:#607D8B; margin-top:0.5rem;">Requires: XeLaTeX with fontspec, tcolorbox, tabularx, longtable, colortbl, lastpage, and DejaVu font family (pre-installed on Ubuntu 24).</p>
+
+  <!-- Closing Quote -->
+  <blockquote class="closing-quote">
+    "The space between the galaxies is where the heavy elements go. The Amiga Principle holds at cosmic scale: small, principled structures produce staggering complexity through faithful iteration. Not by force, but by architecture."
+    <cite>— GSD Research Mission Package, GRB 230906A, March 2026</cite>
+  </blockquote>
+
+</main>
+
+<footer>
+  GSD Ecosystem · Tibsfox · Miles Tiberius Foxglove · Research Mission Generator Skill ·
+  Primary Source: Dichiara et al. 2026, ApJL, 999, L42 · doi:10.3847/2041-8213/ae2a2f
+</footer>
+
+</body>
+</html>

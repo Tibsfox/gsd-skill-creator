@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesh Telescope &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mst">
+  <header>
+    <h1>Global Telescope Mesh Network</h1>
+    <div class="subtitle">Network Architecture &middot; Fleet Mapping &middot; Alert Systems &middot; Yuri's Night &middot; Citizen Science &middot; GSD Deployment</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-network-architecture">Network</a>
+      <a href="page.html?doc=02-telescope-fleet">Fleet</a>
+      <a href="page.html?doc=03-alert-systems">Alerts</a>
+      <a href="page.html?doc=04-yuris-night">Yuri's Night</a>
+      <a href="page.html?doc=05-citizen-science">Citizen Science</a>
+      <a href="page.html?doc=06-gsd-deployment">GSD Deploy</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      On April 12, 1961, Yuri Gagarin completed one orbit in 108 minutes. Sixty-five years later,
+      millions of people point telescopes at the sky in isolation. The network exists physically &mdash;
+      distributed across six continents, pointed at the same sky &mdash; but it has never been switched on.
+      This mission proposes to switch it on. The spaces between telescopes are where the science lives.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">15K+</span><span class="stat-label">Telescope Nodes</span></div>
+      <div class="stat"><span class="stat-value">7M</span><span class="stat-label">Alerts/Night</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Alert Brokers</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Continents</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-network-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Network Architecture</h3>
+        <div class="meta"><span class="tag tag-net">Network</span> Track A &middot; Infrastructure layer</div>
+        <p>Protocol comparison of ASCOM, INDI, and the Las Cumbres OCS. Bridge layer design connecting professional and amateur telescope networks. NASA meshNetwork assessment. FITS data format standardization across heterogeneous instruments.</p>
+      </a>
+
+      <a href="page.html?doc=02-telescope-fleet" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Telescope Fleet Mapping</h3>
+        <div class="meta"><span class="tag tag-fleet">Fleet</span> Track A &middot; Node census</div>
+        <p>Complete census of connected telescope networks: Unistellar (15,000+), Las Cumbres (25 robotic), ZTF, AAVSO, Globe at Night. Geographic coverage map with gap analysis. Protocol-per-network inventory. Equipment tier classification from visual-only to research-grade CCD.</p>
+      </a>
+
+      <a href="page.html?doc=03-alert-systems" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Alert &amp; Event Systems</h3>
+        <div class="meta"><span class="tag tag-alert">Alerts</span> Track B &middot; Event pipeline</div>
+        <p>Rubin Observatory LSST alert pipeline: 7 million transient alerts per night, 2-minute latency. All 9 community alert brokers documented (ALeRCE, ANTARES, Fink, Lasair, Pitt-Google, AMPEL, Babamul, SCiMMA, TOM Toolkit). End-to-end routing from professional detection to backyard follow-up.</p>
+      </a>
+
+      <a href="page.html?doc=04-yuris-night" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Yuri's Night Integration</h3>
+        <div class="meta"><span class="tag tag-event">Event</span> Track B &middot; Convergence event</div>
+        <p>Yuri's Night event ecosystem mapping: 567 events in 75 countries at 50th anniversary. Global Shutter protocol: 00:00 UTC April 12 simultaneous exposure across all connected telescopes. Participation tiers from casual observer to campaign-assigned target tracking. PNW anchor nodes at Museum of Flight and Burke Museum.</p>
+      </a>
+
+      <a href="page.html?doc=05-citizen-science" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Citizen Science Protocols</h3>
+        <div class="meta"><span class="tag tag-sci">Science</span> Track C &middot; Research methods</div>
+        <p>Scientific methods for distributed amateur networks: occultation timing, exoplanet transit photometry, nova monitoring, comet tracking, satellite brightness surveys. Unistellar documented output: 136 asteroids, 20 exoplanet orbits refined, DART debris in Nature. Data quality gates for GPS-timestamped FITS ingestion.</p>
+      </a>
+
+      <a href="page.html?doc=06-gsd-deployment" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: GSD Deployment Layer</h3>
+        <div class="meta"><span class="tag tag-deploy">Deploy</span> Synthesis &middot; Orchestration</div>
+        <p>DACP bundle structure for telescope observation requests. Skill-creator integration: observe-detect-suggest loop mapped to campaign assignment. HITL CAPCOM gates at wave boundaries. DoltHub federation for distributed observation data. Alert-to-backyard pathway specification.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Telescope protocols (ASCOM/INDI)</td><td>M1, M2, M5</td><td>PNP, SYS, TCP</td></tr>
+        <tr><td>Alert broker ecosystem</td><td>M3, M4, M6</td><td>TCP, DNS, K8S</td></tr>
+        <tr><td>FITS data format</td><td>M1, M2, M5</td><td>RFC, SYS</td></tr>
+        <tr><td>Yuri's Night events</td><td>M4, M6</td><td>BRC, PNW series</td></tr>
+        <tr><td>Occultation timing</td><td>M5, M3</td><td>AVI, ECO</td></tr>
+        <tr><td>DACP bundle integration</td><td>M6, M1</td><td>CFU, LLM, AIH</td></tr>
+        <tr><td>Mesh networking</td><td>M1, M6</td><td>PNP, TCP, SYS</td></tr>
+        <tr><td>Dark sky geography</td><td>M2, M4, M5</td><td>COL, ECO, BPS</td></tr>
+        <tr><td>Citizen science data quality</td><td>M5, M3</td><td>AVI, MAM, ECO</td></tr>
+        <tr><td>Federation / DoltHub</td><td>M6</td><td>BRC, SYS, K8S</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+GLOBAL TELESCOPE MESH NETWORK -- NODE TOPOLOGY
+===============================================================
+
+  TIER 1: Professional Networks
+  +------------------+     +------------------+     +------------------+
+  | Las Cumbres Obs  |     | Vera Rubin/LSST  |     | Zwicky Transient |
+  | 25 robotic tel.  |     | 7M alerts/night  |     | ZTF alert stream |
+  | Open-source OCS  |     | Broker ecosystem |     | Babamul / ALeRCE |
+  +------------------+     +------------------+     +------------------+
+           |                        |                        |
+           +------------------------+------------------------+
+                                    |
+                            [GTM BROKER LAYER]
+                            Apache Kafka topics
+                            VOEvent / JSON alerts
+                                    |
+           +------------------------+------------------------+
+           |                        |                        |
+  +------------------+     +------------------+     +------------------+
+  | Unistellar       |     | AAVSO Network    |     | Globe at Night   |
+  | 15,000+ Wi-Fi    |     | Variable star    |     | Light pollution  |
+  | eVscope / eQuinox|     | 40M+ obs/year    |     | Visual reports   |
+  +------------------+     +------------------+     +------------------+
+  TIER 2: Citizen Telescope Networks
+
+                            [YURI'S NIGHT]
+                         Global Shutter Event
+                         00:00 UTC April 12
+                         Simultaneous exposure
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Network Arch] --------&gt; [M2: Fleet Census]
+       |                              |
+       v                              v
+  [M3: Alert Systems] ------&gt; [M4: Yuri's Night]
+       |                              |
+       v                              |
+  [M5: Citizen Science] &lt;------------+
+       |
+       v
+  [M6: GSD Deployment Layer]
+  (Cross-module synthesis)
+
+  Parallel tracks:
+    Track A: M1 + M2 (network + fleet)
+    Track B: M3 + M4 (alerts + events)
+    Track C: M5 (citizen science protocols)
+    Synthesis: M6 (GSD deployment + cross-module)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Mesh Telescope &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OctaMED & Mod Trackers — GSD Research Mission</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #BF360C;
+      --tertiary: #37474F;
+      --accent: #283593;
+      --light-primary: #E8EAF6;
+      --light-secondary: #FBE9E7;
+      --gold: #F9A825;
+      --border: #BDBDBD;
+      --subtle: #757575;
+      --dark: #212121;
+      --bg: #FAFAFA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #1A237E 0%, #283593 40%, #0D47A1 100%);
+      opacity: 0.9;
+    }
+    header::after {
+      content: 'AGNUS · DENISE · PAULA · GARY';
+      position: absolute;
+      bottom: 1rem;
+      right: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.2em;
+    }
+    header > * { position: relative; z-index: 1; }
+    .header-badge {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 0.75rem;
+    }
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    header h1 span {
+      color: var(--gold);
+    }
+    header .subtitle {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      margin-bottom: 1.5rem;
+    }
+    .header-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .meta-pill {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.75rem;
+      font-family: 'DM Mono', monospace;
+      color: rgba(255,255,255,0.8);
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+    .files-section h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 1rem;
+    }
+    .file-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 600px) { .file-cards { grid-template-columns: 1fr; } }
+    .file-card {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      text-decoration: none;
+      display: block;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .file-card:hover {
+      background: #D5D8F0;
+      border-color: var(--primary);
+    }
+    .file-card.secondary {
+      background: #FBE9E7;
+      border-color: #FFAB91;
+    }
+    .file-card.secondary:hover {
+      background: #F5C5B5;
+      border-color: var(--secondary);
+    }
+    .file-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .file-card-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+    .file-card.secondary .file-card-name { color: var(--secondary); }
+    .file-card-desc {
+      font-size: 0.8rem;
+      color: var(--tertiary);
+    }
+    .contents h2, .usage h2, .recompile h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+    .stage-block {
+      border-left: 3px solid var(--border);
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.75rem;
+      background: white;
+      border-radius: 0 4px 4px 0;
+    }
+    .stage-block.s1 { border-color: var(--primary); }
+    .stage-block.s2 { border-color: var(--secondary); }
+    .stage-block.s3 { border-color: var(--tertiary); }
+    .stage-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .s1 .stage-label { color: var(--primary); }
+    .s2 .stage-label { color: var(--secondary); }
+    .s3 .stage-label { color: var(--tertiary); }
+    .stage-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+    .stage-items {
+      font-size: 0.8rem;
+      color: var(--subtle);
+    }
+    .usage ol {
+      padding-left: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--tertiary);
+    }
+    .usage ol li { margin-bottom: 0.4rem; }
+    .usage ol li code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      background: var(--light-primary);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      color: var(--primary);
+    }
+    .recompile pre {
+      background: #263238;
+      color: #B2DFDB;
+      padding: 1rem 1.25rem;
+      border-radius: 5px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      margin-bottom: 0.5rem;
+    }
+    .through-line {
+      background: var(--light-primary);
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--accent);
+      line-height: 1.7;
+    }
+    .through-line cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--subtle);
+      font-weight: 500;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 0.75rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">GSD Research Mission Package · Fleet Profile</div>
+  <h1>OctaMED <span>&</span> Mod Trackers</h1>
+  <p class="subtitle">Architecture, History, Paradigm, and Cultural Ecology — From Paula's four DMA channels to 64 virtual voices and a living global community.</p>
+  <div class="header-meta">
+    <span class="meta-pill">Date: March 27, 2026</span>
+    <span class="meta-pill">Status: Ready for GSD Orchestrator</span>
+    <span class="meta-pill">Modules: 6</span>
+    <span class="meta-pill">Pages: 30</span>
+    <span class="meta-pill">Profile: Fleet (20 roles)</span>
+  </div>
+</header>
+
+<main>
+
+  <section class="files-section">
+    <h2>Package Files</h2>
+    <div class="file-cards">
+      <a class="file-card" href="octamed_mission.pdf" download>
+        <div class="file-card-icon">📄</div>
+        <div class="file-card-name">octamed_mission.pdf</div>
+        <div class="file-card-desc">Compiled 30-page research document — all three stages, Amiga blue color scheme, ready to read or hand to GSD orchestrator.</div>
+      </a>
+      <a class="file-card secondary" href="octamed_mission.tex" download>
+        <div class="file-card-icon">🔧</div>
+        <div class="file-card-name">octamed_mission.tex</div>
+        <div class="file-card-desc">XeLaTeX source — modify and recompile. Edit module content, add findings, adjust scope without starting over.</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="contents">
+    <h2>Contents</h2>
+    <div class="stage-block s1">
+      <div class="stage-label">Stage 1 — Vision Document</div>
+      <div class="stage-title">OctaMED & Mod Trackers — Vision Guide</div>
+      <div class="stage-items">Vision narrative · Problem statement (5 problems) · Paula hardware diagram · Module architecture · Chipset YAML · Scope boundaries · 12 success criteria · GSD relationships · Through-line essay</div>
+    </div>
+    <div class="stage-block s2">
+      <div class="stage-label">Stage 2 — Research Reference</div>
+      <div class="stage-title">Deep Research Survey (6 Modules)</div>
+      <div class="stage-items">Module 01: Paula architecture &amp; OCS chipset · Module 02: MOD format specification &amp; effect vocabulary · Module 03: OctaMED full history, software mixing, MIDI, 10 artists · Module 04: Tracker family tree genealogy · Module 05: Demoscene &amp; cultural ecology · Module 06: Modern tracker ecosystem · Safety considerations · Full bibliography</div>
+    </div>
+    <div class="stage-block s3">
+      <div class="stage-label">Stage 3 — Mission Package</div>
+      <div class="stage-title">Fleet-Profile Execution Plan</div>
+      <div class="stage-items">Milestone spec · Deliverables table · Component breakdown · 5-wave execution plan · Parallel tracks A &amp; B · Cache optimization strategy · Token budget (~113K) · Dependency graph · Test plan (3 safety-critical) · Verification matrix · 20-role crew manifest</div>
+    </div>
+  </section>
+
+  <section class="usage">
+    <h2>How to Use</h2>
+    <ol>
+      <li>Open <code>octamed_mission.pdf</code> and review all three stages — especially the success criteria and wave plan.</li>
+      <li>Open a Claude Code session with access to the <code>gsd-skill-creator</code> dev branch.</li>
+      <li>Hand the PDF to the GSD orchestrator: <em>"Execute this research mission. Activation profile: Fleet. Begin at Wave 0."</em></li>
+      <li>Approve the HITL CAPCOM gates after Wave 1 (source quality), Wave 2A (OctaMED technical accuracy), and Wave 4 (final document review).</li>
+      <li>The output is a publication-quality deep research document covering all 6 modules — suitable for the College of Knowledge or as a GSD learning pack.</li>
+    </ol>
+  </section>
+
+  <section class="recompile">
+    <h2>Recompile Instructions</h2>
+    <pre>xelatex -interaction=nonstopmode octamed_mission.tex
+xelatex -interaction=nonstopmode octamed_mission.tex
+xelatex -interaction=nonstopmode octamed_mission.tex</pre>
+    <p style="font-size:0.8rem; color:var(--subtle);">Three passes required for TOC, cross-references, lastpage counter, and hyperlink destinations. Requires DejaVu fonts and XeLaTeX with standard TeX Live packages.</p>
+  </section>
+
+  <div class="through-line">
+    "Paula had four DMA channels. A Finnish programmer in 1989 saw those four channels and wrote a software mixing layer that gave composers eight voices — doubling the instrument's polyphony at the cost of forty percent of a 7.14 MHz processor's time. Every tracker effect command — the arpeggio, the portamento, the pattern jump — is an instruction written in the spaces between note triggers. The music lives there. The GSD ecosystem names its orchestration chip Agnus, its display chip Denise, its I/O chip Paula. These are not decorative names. They are a claim about architecture."
+    <cite>— Stage 1 Through-Line, OctaMED & Mod Trackers Mission Package</cite>
+  </div>
+
+</main>
+
+<footer>GSD Research Mission · octamed_mod_trackers · March 27, 2026 · Fleet Profile · Vision → Research → Mission</footer>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OctaMED &amp; Mod Trackers &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-oct">
+  <header>
+    <h1>OctaMED &amp; Mod Trackers</h1>
+    <div class="subtitle">Paula Architecture &middot; MOD Format &middot; OctaMED &middot; Tracker Family &middot; Demoscene &middot; Modern Trackers</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-paula-architecture">Paula</a>
+      <a href="page.html?doc=02-mod-format">MOD Format</a>
+      <a href="page.html?doc=03-octamed-deep-dive">OctaMED</a>
+      <a href="page.html?doc=04-tracker-family-tree">Family Tree</a>
+      <a href="page.html?doc=05-demoscene-culture">Demoscene</a>
+      <a href="page.html?doc=06-modern-trackers">Modern</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Commodore Amiga shipped in 1985 with a sound chip called Paula &mdash; four DMA-driven
+      8-bit PCM channels, two panned hard-left and two panned hard-right. That was it. The hardware
+      was defined, finite, and unchangeable. And yet from those four channels, an entire musical
+      culture emerged. Hardware constraint &times; software leverage = cultural explosion.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Paula Channels</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">OctaMED Voices</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">1987</span><span class="stat-label">First Tracker</span></div>
+      <div class="stat"><span class="stat-value">7+</span><span class="stat-label">Format Families</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-paula-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Paula Architecture</h3>
+        <div class="meta"><span class="tag tag-paula">Paula</span> Track A &middot; Hardware</div>
+        <p>MOS 8364 register-level architecture. Four DMA-driven 8-bit PCM channels with 6-bit volume. Hardware low-pass filter (~4.4 kHz at 3.58 MHz). The 14-bit hack: combining two channels for higher resolution audio. Agnus DMA timing and CPU zero-cost playback.</p>
+      </a>
+
+      <a href="page.html?doc=02-mod-format" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: MOD Format &amp; Tracker Paradigm</h3>
+        <div class="meta"><span class="tag tag-mod">MOD</span> Track A &middot; Format</div>
+        <p>The module file concept: samples + patterns + order list in a single portable object. Binary layout: header, sample definitions, pattern table, raw PCM. Effect vocabulary: arpeggio, portamento, volume slide, vibrato, pattern jump. VSync timing model. Zero-CPU playback design.</p>
+      </a>
+
+      <a href="page.html?doc=03-octamed-deep-dive" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: OctaMED Deep Dive</h3>
+        <div class="meta"><span class="tag tag-octamed">OctaMED</span> Focal &middot; Software mixing</div>
+        <p>Teijo Kinnunen's software mixing breakthrough: routing two virtual channels through each Paula channel to double polyphony to 8 voices at ~40% CPU. Native MIDI support, arbitrary-length patterns, MED/OctaMED version history from 1989 to OctaMED SoundStudio. The composition tool that transcended the demoscene.</p>
+      </a>
+
+      <a href="page.html?doc=04-tracker-family-tree" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Tracker Family Tree</h3>
+        <div class="meta"><span class="tag tag-tree">Genealogy</span> Track B &middot; Evolution</div>
+        <p>The complete genealogy: SoundMonitor (C64) to Ultimate Soundtracker to NoiseTracker to ProTracker (Amiga) to ScreamTracker 3/S3M to FastTracker 2/XM to Impulse Tracker/IT. What each format added and why. The MED/OctaMED branch as parallel evolution.</p>
+      </a>
+
+      <a href="page.html?doc=05-demoscene-culture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Demoscene &amp; Cultural Ecology</h3>
+        <div class="meta"><span class="tag tag-scene">Culture</span> Track B &middot; Community</div>
+        <p>BBS and FidoNet distribution networks. Demoparty competitive structure. MOD file sharing culture and modarchive.org. Keygen music as genre. UK rave/hardcore scene's adoption of Amiga trackers. Crossover artists: Calvin Harris, Venetian Snares, DJ Zinc. UNESCO intangible cultural heritage recognition.</p>
+      </a>
+
+      <a href="page.html?doc=06-modern-trackers" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Modern Tracker Ecosystem</h3>
+        <div class="meta"><span class="tag tag-modern">Modern</span> Synthesis &middot; Living culture</div>
+        <p>Renoise (professional VST-capable tracker DAW), OpenMPT (format museum and composition tool), MilkyTracker (FT2 clone), Furnace (multi-chip tracker), FamiTracker, SunVox (modular+tracker). Hardware: Polyend Tracker, Teenage Engineering PO series. Demoparties in 2026.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Paula / Amiga chipset</td><td>M1, M2, M3</td><td>ABL, FLS, WAL</td></tr>
+        <tr><td>Module file format</td><td>M2, M3, M4</td><td>WAL, FLS</td></tr>
+        <tr><td>Software mixing / polyphony</td><td>M3, M1</td><td>ABL, FLS, DAA</td></tr>
+        <tr><td>Tracker paradigm (vertical grid)</td><td>M2, M4, M6</td><td>FLS, ABL</td></tr>
+        <tr><td>Demoscene / demoparties</td><td>M5, M4, M6</td><td>WAL, NEH</td></tr>
+        <tr><td>Format genealogy (MOD/S3M/XM/IT)</td><td>M4, M2</td><td>WAL</td></tr>
+        <tr><td>MIDI integration</td><td>M3, M6</td><td>ABL, FLS</td></tr>
+        <tr><td>Hardware trackers (Polyend)</td><td>M6</td><td>ABL, FLS</td></tr>
+        <tr><td>Chiptune / retro audio</td><td>M5, M6</td><td>WAL, FLS</td></tr>
+        <tr><td>Renoise / modern production</td><td>M6, M4</td><td>ABL, FLS, WAL</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+OCTAMED &amp; MOD TRACKERS -- DOMAIN MAP
+===============================================================
+
+  PAULA HARDWARE            MOD FORMAT              OCTAMED ENGINE
+  +---------------+         +----------------+      +---------------+
+  | MOS 8364      |         | Samples + Score|      | 8 virtual ch  |
+  | 4 DMA channels|--------&gt;| Pattern grid   |-----&gt;| SW mixing     |
+  | 8-bit PCM     |         | Effect commands|      | MIDI support  |
+  | 6-bit volume  |         | Self-contained |      | ~40% CPU cost |
+  +---------------+         +----------------+      +---------------+
+        |                         |                       |
+        v                         v                       v
+  +---------------+         +----------------+      +---------------+
+  | TRACKER TREE  |         | DEMOSCENE      |      | MODERN ERA    |
+  | ST &gt; NT &gt; PT  |         | BBS / FidoNet  |      | Renoise       |
+  | S3M &gt; XM &gt; IT |         | Demoparties    |      | OpenMPT       |
+  | MED branch    |         | modarchive.org |      | Polyend HW    |
+  +---------------+         +----------------+      +---------------+
+        |                         |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   CULTURAL LEGACY     |
+                    |                       |
+                    |  UK Rave / Hardcore    |
+                    |  Calvin Harris roots  |
+                    |  UNESCO recognition   |
+                    |  Living demoparties   |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Paula Architecture] -------&gt; [M2: MOD Format]
+       |      (hardware foundation)        |
+       |                                   |
+       v                                   v
+  [M3: OctaMED Deep Dive] &lt;------- [M4: Tracker Family Tree]
+       |    (focal instrument)             |
+       |                                   |
+       +----------- + -------------------+
+                     |
+                     v
+  [M5: Demoscene Culture] -------&gt; [M6: Modern Trackers]
+
+  Parallel tracks:
+    Track A: M1 + M2 (hardware + format)
+    Track B: M4 + M5 (genealogy + culture)
+    Focal:   M3 (OctaMED -- Opus, requires M1+M2)
+    Synthesis: M6 (modern ecosystem -- requires all)
+    </pre>
+  </main>
+
+  <footer>
+    <p>OctaMED &amp; Mod Trackers &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

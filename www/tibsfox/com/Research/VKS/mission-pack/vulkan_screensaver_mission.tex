@@ -1,0 +1,1142 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\tcbuselibrary{breakable,skins}
+
+% ── COLOR SCHEME: Technology / Graphics Engineering ───────────────────────────
+\definecolor{primary}{HTML}{1A237E}        % Deep indigo — GPU depth
+\definecolor{secondary}{HTML}{0277BD}      % Electric blue — shader energy
+\definecolor{tertiary}{HTML}{37474F}       % Graphite — compute precision
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS AND FOOTERS ───────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{XScreenSaver / Vulkan Screensaver Engine}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={XScreenSaver Catalog + Vulkan Screensaver Engine -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── TITLE PAGE ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{XScreenSaver Catalog\\[0.3em]\& Vulkan Screensaver Engine}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Full Hack Inventory $\cdot$ Upstream Intelligence $\cdot$ Modern GPU Architecture}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Engineering Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 12--15 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\section{XScreenSaver / Vulkan Screensaver Engine --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{gsd-skill-creator dev branch (v1.49+); DACP protocol; skill-creator upstream intelligence pipeline}
+\metafield{Context:}{Cold-start deep research mission. This package covers two interlocked deliverables: (1) a complete catalog and skill-creator integration of all XScreenSaver hacks, and (2) a brand-new standalone Vulkan-based generative screensaver engine that brings NeHe, Sascha Willems, CUDA compute, and AI-backed evolutionary art into a single modern platform.}
+
+\subsection{Vision}
+
+There is something philosophically interesting about a screensaver: it is software that runs when nothing else needs to run. It occupies the spaces between work --- the pauses, the idle moments, the gaps in computation. In the GSD worldview, those spaces between are precisely where meaning lives. A screensaver is not decorative noise. It is the system dreaming.
+
+XScreenSaver, maintained by Jamie Zawinski (jwz) since 1992, is the definitive expression of this idea in the Unix world. At version 6.14 in early 2026 with 240+ individual ``hacks'', it spans a complete history of generative graphics: from the simplest Xlib line-drawing programs written when pixels were large enough to count, to fully procedural GLSL shader programs ported from Shadertoy. It is, as one observer noted, a kind of Rosetta Stone for OpenGL across four decades of incompatible API evolution. Every hack is a standalone program, sandboxed and independently executable, running against a window it did not create.
+
+The first deliverable of this mission is to fully map that archive into gsd-skill-creator. Every hack documented, categorized, and cross-referenced. Every API pattern extracted. Upstream intelligence feeds built so skill-creator can detect when a new screensaver pattern appears in the wild and suggest a corresponding XScreenSaver-compatible skill.
+
+The second deliverable is more ambitious: a brand-new Vulkan-first screensaver engine for Linux. Not a compatibility shim. Not OpenGL wrapped in Vulkan. A native Vulkan architecture that treats the screensaver as a compute and graphics platform --- one that can run NeHe's classic tutorials reborn as Vulkan pipelines, Sascha Willems' example gallery in standalone form, CUDA-interop generative math, and AI-backed evolutionary visual algorithms. The end state is a living, breathing visual machine that explores what screens can do when the human is away.
+
+The Amiga Principle applies here with particular force. The Amiga's custom chips --- Agnus, Denise, Paula --- achieved effects that machines with far more raw power could not, because each chip had a dedicated execution path precisely shaped to its purpose. A Vulkan screensaver engine should be the same: not a general-purpose rendering engine with screensaver bolted on, but an engine whose every subsystem is architected around the specific constraints and freedoms of the idle-screen context. No user input. Continuous execution. GPU as primary actor. CUDA as the mathematical substrate. The AI as the evolutionary pressure that keeps the visuals alive.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+\item \textbf{The XScreenSaver archive is undocumented in structured form.} Over 240 hacks exist across X11/Xlib and OpenGL API families, but there is no machine-readable catalog mapping each hack to its rendering technique, API, category, source file, and skill-creator equivalence class. This prevents skill-creator from treating the archive as upstream intelligence.
+
+\item \textbf{There is no modern Vulkan-native Linux screensaver framework.} Existing screensaver systems (XScreenSaver, GNOME, KDE) are built on legacy OpenGL or simple blank screens. There is no engine that treats Vulkan compute shaders, SPIR-V shaders, and CUDA interop as first-class citizens in the screensaver context.
+
+\item \textbf{NeHe's 48 tutorials have never been properly translated to Vulkan.} The NeHe OpenGL tutorial series by Jeff Molofee defined how a generation learned 3D graphics programming, but it is anchored to fixed-function OpenGL pipeline idioms. No authoritative Vulkan port of the full series exists. The tutorial concepts (texturing, lighting, fog, morphing, particle systems) remain valuable but inaccessible to developers learning on modern hardware.
+
+\item \textbf{CUDA compute and generative AI are disconnected from screensaver infrastructure.} GPU-accelerated evolutionary algorithms, procedural noise functions, reaction-diffusion systems, and neural generative models exist in research code but have never been integrated into a screensaver delivery context. The ``AI-backed screensaver'' concept has no reference implementation.
+
+\item \textbf{Skill-creator lacks a graphics/shader upstream intelligence layer.} The skill-creator ecosystem monitors software patterns and codebases, but has no structured intelligence feed for the GPU programming domain: no shader technique taxonomy, no Vulkan pattern library, no CUDA kernel pattern index. This is a gap in the ecosystem's coverage of creative engineering domains.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Idle Screen as a GPU Laboratory.}
+
+When the human is away, the GPU is free. A Vulkan screensaver engine treats that freedom as a resource: the full GPU compute pipeline available for generative art, evolutionary algorithms, and mathematical exploration, with Vulkan graphics delivering the result to the screen. The system is not ``running a screensaver''; it is conducting experiments, and the screen is the output of those experiments.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+XSCREENSAVER CATALOG LAYER
+  240+ hacks across 4 API families
+  [X11/Xlib] [OpenGL 1.3] [GLSL/Shader] [Shadertoy port]
+       |
+       v skill-creator upstream intelligence feed
+  HACK CATALOG DATABASE
+  [Category] [API] [Technique] [Source File] [Skill Equiv]
+       |
+       v
+  SKILL-CREATOR SKILL LIBRARY
+  (auto-suggests matching skills when screensaver patterns detected)
+
+VULKAN SCREENSAVER ENGINE
+  ┌─────────────────────────────────────────────────────────┐
+  │  SCENE MANAGER (selects, schedules, and transitions      │
+  │  between active screensaver modules)                     │
+  ├──────────────┬──────────────┬───────────────────────────┤
+  │ VULKAN       │ CUDA COMPUTE │ AI EVOLUTION LAYER        │
+  │ GRAPHICS     │ LAYER        │                           │
+  │ PIPELINE     │              │ [Evolutionary algorithms] │
+  │              │ [Math libs]  │ [Neural generators]       │
+  │ [Vertex]     │ [cuRAND]     │ [Fitness functions]       │
+  │ [Fragment]   │ [cuFFT]      │ [Mutation kernels]        │
+  │ [Compute]    │ [cuBLAS]     │                           │
+  │ [Raytracing] │              │                           │
+  ├──────────────┴──────────────┴───────────────────────────┤
+  │  SHADER GALLERY                                          │
+  │  [NeHe 48 lessons reborn] [Sascha Willems catalog]      │
+  │  [Shadertoy-compatible] [Custom generative shaders]     │
+  └─────────────────────────────────────────────────────────┘
+       |
+  WAYLAND / X11 OUTPUT  (xscreensaver window protocol)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 01: XScreenSaver Catalog + Documentation
+  -- Complete hack inventory (240+ entries)
+  -- API family classification (Xlib / OpenGL / GLSL / Shadertoy)
+  -- Technique taxonomy (cellular automata, attractors, geometry, physics...)
+  -- skill-creator upstream intelligence schema
+
+MODULE 02: Vulkan Engine Architecture
+  -- Native Vulkan 1.3+ engine
+  -- Wayland + X11 dual output via xscreensaver window protocol
+  -- Scene manager, plugin loader, transition system
+  -- CUDA interop via VK_NV_external_memory
+
+MODULE 03: NeHe Vulkan Translation
+  -- All 48 NeHe lesson concepts mapped to Vulkan equivalents
+  -- SPIR-V shaders for each lesson
+  -- Standalone screensaver plugin per lesson
+
+MODULE 04: Sascha Willems Vulkan Gallery Integration
+  -- 60+ Vulkan example techniques adapted as screensaver plugins
+  -- Compute shader examples as standalone visual modules
+  -- PBR, SSAO, deferred rendering, ray tracing modules
+
+MODULE 05: CUDA Generative Math Layer
+  -- cuRAND noise generation (Perlin, Simplex, Worley)
+  -- cuFFT spectral analysis for audio-reactive modes
+  -- Reaction-diffusion, fluid simulation, n-body gravity
+  -- Evolutionary algorithm substrates (genetic, PSO, cellular)
+
+MODULE 06: AI Evolution Engine
+  -- Claude API integration for shader mutation and selection
+  -- Fitness function library (aesthetic, complexity, novelty)
+  -- Population manager: evolves visual programs over time
+  -- Upstream intelligence contribution back to skill-creator
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset YAML -- Vulkan Screensaver Engine
+chipset:
+  agnus:                    # Orchestration / DMA / Context Management
+    model: claude-opus-4-6
+    role: >
+      Architecture decisions, AI evolution engine design,
+      cross-module integration, shader fitness evaluation logic,
+      skill-creator upstream intelligence schema design.
+    allocation: ~30%
+
+  denise:                   # Display / Output Rendering
+    model: claude-sonnet-4-6
+    role: >
+      Catalog documentation, Vulkan boilerplate, NeHe translation
+      documents, Sascha Willems adaptation specs, test generation,
+      plugin interface implementations, wave document assembly.
+    allocation: ~60%
+
+  paula:                    # Audio / I/O / Anticipatory
+    model: claude-haiku-4-5
+    role: >
+      Shared schemas, YAML configs, CMakeLists templates,
+      catalog database seed files, shader metadata stubs.
+    allocation: ~10%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+\item Complete catalog of all XScreenSaver hacks as of v6.14 (240+), with structured metadata
+\item skill-creator upstream intelligence schema and feed for the screensaver/shader domain
+\item Vulkan 1.3 engine on Linux: X11 and Wayland output, xscreensaver window protocol integration
+\item All 48 NeHe lesson concepts translated to Vulkan/SPIR-V screensaver plugins
+\item Sascha Willems compute shader examples (particle system, N-body, convolution) as standalone plugins
+\item CUDA interop layer: cuRAND noise, reaction-diffusion, basic n-body gravity
+\item AI evolution engine using Claude API: population manager, mutation, fitness selection
+\item CMake build system, CI pipeline, README, and full developer documentation
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}
+\item macOS, Windows, or Android ports (Linux-first; cross-platform is a v2.0 concern)
+\item Full physics engine integration (acceptable to use simple verlet/euler for particle systems)
+\item Real-time audio reactivity (future module; requires audio capture infrastructure)
+\item Machine learning model training inside the screensaver (inference only in v1.0)
+\item XScreenSaver daemon replacement (this engine runs as an xscreensaver-compatible plugin or standalone)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+\item All 240+ XScreenSaver hacks cataloged with name, API family, technique category, source file path, and representative description.
+\item Catalog exported in both JSON and YAML formats consumable by gsd-skill-creator upstream intelligence feed.
+\item Vulkan engine compiles and runs on Ubuntu 24 LTS with Mesa Vulkan or NVIDIA drivers.
+\item At least 48 screensaver plugins implemented (one per NeHe lesson), all rendering correctly at 60fps on target hardware.
+\item At least 10 Sascha Willems-derived compute plugins integrated and functional.
+\item CUDA layer produces at least 5 distinct generative effects (reaction-diffusion, perlin noise field, n-body gravity, fluid, flocking).
+\item AI evolution engine successfully mutates and selects shader programs over a 10-generation run without crashes.
+\item skill-creator upstream intelligence feed correctly identifies at least 3 new shader patterns from catalog input in integration test.
+\item All plugins integrate cleanly with xscreensaver window protocol (render to externally provided window ID).
+\item Build system produces single distributable archive with CMake, all dependencies documented.
+\item Developer documentation covers engine architecture, plugin API, shader authoring guide, and CUDA interop patterns.
+\item CI pipeline runs all compilation tests and at least one headless render test per plugin category.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+gsd-skill-creator dev (v1.49+) & Primary consumer of upstream intelligence output & Active \\
+Deep Audio Analyzer Mission & Shares CUDA/audio substrate design patterns & Complete \\
+GSD Chipset Architecture Vision & Agnus/Denise/Paula model allocation pattern & Reference \\
+GSD Upstream Intelligence Pack & Extends with GPU/shader domain intelligence & Reference \\
+gsd-amiga-vision-architectural-leverage & Amiga Principle governing engine design decisions & Reference \\
+GSD Mesh Prototype Spec & Potential integration: mesh rendering as screensaver plugin & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The screen saver as a concept is, in miniature, the same argument the GSD ecosystem makes at scale: that the time between intentional acts is not wasted time. It is the time when the system can think for itself, run experiments, and evolve. JWZ understood this in 1992 when he built a framework around the idea that any program capable of rendering to a foreign window could be a screensaver. He made no assumptions about what the program would do. The plugin architecture was the only rule. Everything else was freedom.
+
+The Vulkan Screensaver Engine extends that freedom into the present. When the human walks away, the GPU begins. Particle systems evolve under selection pressure. Reaction-diffusion fields bloom across the screen. Shaders mutate, reproduce, and die. Claude selects the beautiful ones. The screen is not blank. It is dreaming --- and the dream is architecturally sound.
+
+% ══════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\section{XScreenSaver / Vulkan Engine --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This section provides sourced technical reference for all six research modules. Agents should treat it as the authoritative pre-research layer; web research during mission execution fills gaps, does not repeat what is here.
+
+Key authoritative sources for this mission:
+\begin{itemize}
+\item \textbf{JWZ / XScreenSaver project:} \url{https://www.jwz.org/xscreensaver/} --- primary source for all hack documentation, FAQ, and developer README
+\item \textbf{GitHub mirror (read-only):} \url{https://github.com/Zygo/xscreensaver} --- closest available git mirror; changelog is authoritative for hack inventory
+\item \textbf{Sascha Willems Vulkan Examples:} \url{https://github.com/SaschaWillems/Vulkan} --- 60+ MIT-licensed C++ Vulkan examples, continuously maintained
+\item \textbf{NeHe Archive:} \url{https://github.com/gamedev-net/nehe-opengl} --- complete archive of all 48+ OpenGL lessons by Jeff Molofee
+\item \textbf{Khronos Group / Vulkan Specification:} \url{https://registry.khronos.org/vulkan/} --- normative Vulkan 1.4 specification and SPIR-V spec
+\item \textbf{NVIDIA CUDA Developer:} \url{https://developer.nvidia.com/cuda} --- CUDA toolkit, cuRAND, cuFFT, cuBLAS documentation
+\item \textbf{Mesa project / Phoronix:} Open-source Vulkan driver state tracking (Radeon RADV, Intel ANV, NVK)
+\end{itemize}
+
+\subsection{Module 01: XScreenSaver Catalog Reference}
+
+\subsubsection{Project Overview and Architecture}
+
+XScreenSaver was created by Jamie Zawinski in 1992 and reached version 6.14 in January 2026. It is a collection of 240+ screensavers (``hacks'') for Unix, macOS, iOS, and Android. Each hack is a sandboxed standalone program rendering onto a window provided by the daemon via the \texttt{\$XSCREENSAVER\_WINDOW} environment variable.
+
+\textbf{Key architectural properties:}
+\begin{itemize}
+\item Hacks written in ISO C99 (not C++); no nonstandard libraries
+\item About half use the X11/Xlib API; about half use OpenGL 1.3 (xlockmore API)
+\item Version 6.14 added Shadertoy shader import capability with GLSL compatibility shims across four GLSL profile targets: OpenGL ``compatibility profile'' 3.1--4.6, macOS Core Profile 4.1, iOS OpenGL ES 3.0, Android OpenGL ES 3.0--3.2
+\item Compatibility layers: \texttt{jwxyz} (X11 API on Cocoa), \texttt{jwzgles} (OpenGL 1.3 on OpenGL ES 1.0), plus X11-on-OpenGL-ES for iOS/Android
+\item Security model: display modes sandboxed into separate processes; crash in a hack cannot unlock the screen
+\end{itemize}
+
+\subsubsection{Hack Inventory by API Family}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{API Family} & \tableheader{Est. Count} & \tableheader{Examples} \\
+\midrule
+X11 / Xlib & $\sim$120 & greynetic, deluxe, barcode, flag, flow, maze, qix, interference, jigsaw, starfish, xmatrix \\
+OpenGL 1.3 (xlockmore) & $\sim$100 & dangerball, glmatrix, glplanet, gears, rubik, atlantis, molecule, endgame, sierpinski3d \\
+GLSL / Shader & $\sim$20 & alien\-beacon, battered\-planet, fluxcore, neon\-gravity, hex\-plasma, stardome, synth\-wave\-city \\
+Shadertoy ports (6.14+) & $\sim$18 & elementalring, gimbal\-harmonics, logarithmic\-circles, protophore, selfreflect, topologica, truchetzoom \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Technique Taxonomy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Representative Hacks} \\
+\midrule
+Cellular automata & xmatrix, life, binaryring, filmleader \\
+Strange attractors / chaos & flow, strange, julia \\
+3D geometry / topology & glplanet, hypertorus, klein, romanboy, projectiveplane, hopffibration, platonicfolding, cuboctaversion \\
+Particle systems & eruption, fireworkx, pyro, sparkle, starwars \\
+Fractal / L-systems & sierpinski3d, tree, moire2 \\
+Simulation / physics & fluidballs, flurry, gravitywell \\
+Image manipulation & glslideshow, distort, droste, skulloop, xlyap \\
+Text / terminal emulation & phosphor, apple2, starwars, fontglide \\
+Retro / nostalgia & bsod, headroom, flying-toasters, pong, xanalogtv \\
+3D models / characters & atlantis, molecule, rubik, endgame, gibson, etruscanvenus \\
+Math / topology & dangerball, superquadrics, sphereeversion, klondike \\
+Shader / procedural & synthwavecity, stardome, hexplasma, neongravity, stripeytorus \\
+Culture / humor & webcollage, bsod, dumpsterfire, kallisti, highvoltage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Developer API Reference}
+
+The xscreensaver hack API (``screenhack.h'') requires these entry points:
+
+\begin{itemize}
+\item \texttt{hackname\_init(Display *dpy, Window window)} --- allocate state
+\item \texttt{hackname\_draw(Display *dpy, Window window, void *closure)} --- render one frame; returns microsecond delay to next frame
+\item \texttt{hackname\_reshape(Display *dpy, Window window, void *closure, unsigned int w, unsigned int h)} --- handle resize
+\item \texttt{hackname\_event(Display *dpy, Window window, void *closure, XEvent *event)} --- handle events
+\item \texttt{hackname\_free(Display *dpy, Window window, void *closure)} --- free state
+\end{itemize}
+
+OpenGL hacks use the xlockmore API: \texttt{init\_hackname}, \texttt{draw\_hackname}, \texttt{reshape\_hackname}, \texttt{release\_hackname}, prefixed with \texttt{ENTRYPOINT}.
+
+\subsubsection{Upstream Intelligence Schema (skill-creator target)}
+
+Each catalog entry requires these structured fields for skill-creator consumption:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Description} \\
+\midrule
+\texttt{id} & Canonical lowercase hack name (e.g., \texttt{dangerball}) \\
+\texttt{display\_name} & Human-readable title \\
+\texttt{api\_family} & One of: \texttt{xlib}, \texttt{opengl\_1\_3}, \texttt{glsl}, \texttt{shadertoy} \\
+\texttt{technique} & Primary rendering technique from taxonomy \\
+\texttt{source\_file} & Path relative to xscreensaver source root \\
+\texttt{complexity} & Estimated LOC / complexity: \texttt{simple}, \texttt{medium}, \texttt{complex} \\
+\texttt{description} & 1--2 sentence description \\
+\texttt{skill\_equiv} & Closest gsd-skill-creator skill class (if any) \\
+\texttt{vulkan\_candidate} & Boolean: suitable for Vulkan port \\
+\texttt{tags} & Free-form list for search \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 02: Vulkan Engine Architecture Reference}
+
+\subsubsection{Vulkan 1.3+ as Screensaver Platform}
+
+Vulkan 1.4 was released December 2024. Mesa 25.0+ provides Vulkan 1.4 support across AMD (RADV), Intel (ANV), and NVIDIA (NVK) open-source drivers. All implementations support compute shaders (mandatory since Vulkan 1.0). Key features for screensaver use:
+
+\begin{itemize}
+\item \textbf{Explicit memory management} --- GPU memory allocated once at plugin load; zero allocation during render loop
+\item \textbf{Compute shaders} --- first-class citizens; no distinction between compute and graphics queues in modern usage
+\item \textbf{SPIR-V shaders} --- compiled offline; multiple front-ends (GLSL, HLSL, Slang); binary format stored in repository
+\item \textbf{Wayland integration} --- \texttt{VK\_KHR\_wayland\_surface} for Wayland compositors; \texttt{VK\_KHR\_xcb\_surface} for X11
+\item \textbf{Synchronization2} --- cleaner barrier model (VK\_KHR\_synchronization2, promoted to 1.3 core)
+\item \textbf{Dynamic rendering} --- eliminates render pass objects for simple single-pass screensaver effects (VK\_KHR\_dynamic\_rendering, promoted to 1.3 core)
+\end{itemize}
+
+\subsubsection{XScreenSaver Integration Approach}
+
+Any program rendering to the window ID in \texttt{\$XSCREENSAVER\_WINDOW} qualifies as a hack. The Vulkan engine creates its surface from this window ID using \texttt{VK\_KHR\_xcb\_surface} or \texttt{VK\_KHR\_wayland\_surface}. This is architecturally clean: the engine needs no xscreensaver source code dependencies.
+
+Standalone mode (no xscreensaver daemon) uses a standard \texttt{vkCreateSwapchainKHR} with an owned window.
+
+\subsubsection{CUDA Interop Architecture}
+
+CUDA-Vulkan interop uses:
+\begin{itemize}
+\item \texttt{VK\_KHR\_external\_memory} / \texttt{VK\_KHR\_external\_semaphore} extensions
+\item CUDA external memory import via \texttt{cudaImportExternalMemory} / \texttt{cudaImportExternalSemaphore}
+\item Ownership model: Vulkan owns the framebuffer; CUDA computes into a shared storage buffer; Vulkan consumes for display
+\end{itemize}
+
+\subsection{Module 03: NeHe Vulkan Translation Reference}
+
+The NeHe tutorials by Jeff Molofee (1997--2004, archived at \url{https://github.com/gamedev-net/nehe-opengl}) covered 48 lessons plus bonus topics. The first 20 lessons are foundational:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Lesson} & \tableheader{Concept} & \tableheader{Vulkan/SPIR-V Translation} \\
+\midrule
+01 & OpenGL window setup & Vulkan instance, device, swapchain boilerplate \\
+02 & Polygons (triangles, quads) & Vertex buffer, pipeline, draw call \\
+03 & Colors & Per-vertex color attributes in vertex buffer \\
+04 & Rotation & Push constants for transformation matrix \\
+05 & 3D shapes & Indexed geometry, depth buffer \\
+06 & Texture mapping & Descriptor sets, sampler, combined image sampler \\
+07 & Texture filters \& lighting & Sampler parameters, Phong fragment shader \\
+08 & Blending & Alpha blend pipeline state \\
+09 & Moving bitmaps in 3D & Instanced rendering with per-instance transforms \\
+10 & World loading & Vertex/index buffer from OBJ/PLY loader \\
+11 & Flag waving & Compute shader vertex displacement \\
+12 & Display lists & Secondary command buffers \\
+13 & Bitmap fonts & Text rendering via signed distance field atlas \\
+14 & Outline fonts & 3D extruded geometry from font outlines \\
+15 & Texture mapping \& blitting & Multi-layer texture array \\
+16 & Fog & Depth-based fog in fragment shader \\
+17 & 2D texture fonts & Texture atlas sampling fragment shader \\
+18 & Quadrics (spheres, cylinders) & Procedural mesh generation in compute shader \\
+19 & Particle systems & GPU particle system via compute shader + instancing \\
+20 & Masking / multi-texturing & Multiple descriptor set bindings, texture combine \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Lessons 21--48 cover: reflections, morphing, vertex programs, bump mapping, shadow volumes, multitexture, vertex arrays, quake map loading, fast font rendering, and more --- all translatable to modern Vulkan techniques.
+
+\subsection{Module 04: Sascha Willems Vulkan Gallery Reference}
+
+The Sascha Willems Vulkan examples repository (\url{https://github.com/SaschaWillems/Vulkan}, MIT license, 60+ examples) is the primary reference for this module. Key compute-suitable examples for screensaver adaptation:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Example} & \tableheader{Screensaver Adaptation} \\
+\midrule
+computeshader & Image filter pipeline: edge detect, emboss, sharpen cycling \\
+computeparticles & Attraction-based 2D GPU particle system \\
+computenbody & N-body gravity simulation, thousands of particles \\
+computecloth & Cloth simulation as dynamic geometric backdrop \\
+computeheadless & Headless render output --- useful for CI testing \\
+radialblur & Full-screen radial blur post-process \\
+bloom & HDR bloom and bright-pass filter chain \\
+shadowmapping & Dynamic shadow volumes with animated light \\
+pbrtexture & PBR material sphere gallery, rotating \\
+deferred & Deferred shading scene with multiple light sources \\
+ssao & Screen-space ambient occlusion pass \\
+vulkanscene & Complex multi-mesh scene with skybox \\
+fractal & GPU fractal (Mandelbrot/Julia) at arbitrary precision \\
+rayquery & Hardware ray tracing for reflective surfaces \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05: CUDA Generative Math Layer Reference}
+
+\subsubsection{CUDA-X Libraries}
+
+NVIDIA CUDA-X (\url{https://developer.nvidia.com/cuda/cuda-x-libraries}) provides GPU-accelerated math:
+\begin{itemize}
+\item \textbf{cuRAND} --- GPU random number generation; multiple PRNG algorithms (Philox, MTGP, XORWOW, Sobol); essential for noise fields and stochastic particle systems
+\item \textbf{cuFFT} --- Fast Fourier Transform on GPU; spectral analysis for audio-reactive modes; basis for frequency-domain shader effects
+\item \textbf{cuBLAS} --- BLAS for sparse/dense matrices; used in neural network inference for AI evolution engine
+\item \textbf{Thrust} --- parallel algorithm library (sort, scan, reduce) used in population management for evolutionary algorithms
+\end{itemize}
+
+\subsubsection{Generative Effects Inventory}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Effect} & \tableheader{CUDA Kernel Type} & \tableheader{Description} \\
+\midrule
+Reaction-diffusion (Gray-Scott) & 2D convolution & Two-chemical system producing spotted, striped, and maze patterns; iterative update kernel \\
+Perlin / Simplex noise field & Procedural & GPU noise octave stacking; drives terrain, clouds, fluid textures \\
+Flocking / Boids & N-body particle & Separation, alignment, cohesion rules per particle; spatial hash acceleration \\
+Fluid simulation & Eulerian grid & Velocity/pressure field on GPU grid; advection + projection kernels \\
+N-body gravity & Particle-particle & Barnes-Hut approximation or direct O(n\^{}2) for small N; visual particle trails \\
+Mandelbrot / Julia & Per-pixel compute & Arbitrary precision iteration count; GPU parallelism enables smooth 4K rendering \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{GPU Evolutionary Algorithms}
+
+Research literature (GECCO, IEEE CEC, ScienceDirect 2019--2025) demonstrates consistent 10--100x speedups for evolutionary algorithms on GPU vs.\ CPU for medium-to-large population sizes. Key patterns:
+\begin{itemize}
+\item \textbf{Island model} (Janssen et al., 2022, Wiley CEC): Subpopulations on separate GPU thread blocks; migration via shared memory
+\item \textbf{CUDA Genetic Programming} (EvoGP, arXiv 2025): Tensorized tree encoding enables batch parallel fitness evaluation
+\item \textbf{GPU-PSO} (ScienceDirect 2023): Particle swarm with GPU-parallel fitness kernel; heterogeneous CPU (control) + GPU (fitness) architecture
+\end{itemize}
+
+\subsection{Module 06: Skill-Creator Upstream Intelligence Reference}
+
+\subsubsection{Current Upstream Intelligence Architecture}
+
+The gsd-skill-creator upstream intelligence layer (v1.43 pack) monitors software patterns and detects recurring sequences. The GPU/shader domain is currently absent from this feed. Required additions:
+
+\begin{itemize}
+\item \textbf{Shader technique taxonomy YAML} --- maps GLSL/SPIR-V patterns to named technique categories (same taxonomy as hack catalog)
+\item \textbf{Vulkan pattern library} --- common Vulkan boilerplate sequences detectable as skill suggestions (render pass setup, descriptor set binding, compute dispatch)
+\item \textbf{CUDA kernel pattern index} --- maps CUDA kernel structure signatures to known algorithm families
+\item \textbf{XScreenSaver hack pattern index} --- maps screenhack.h API usage patterns to the catalog database
+\end{itemize}
+
+\subsubsection{ZFC Compliance and Wasteland Integration}
+
+The skill-creator is targeting Wasteland/DoltHub federation integration. The GPU/shader upstream intelligence feed is a candidate for ZFC compliance auditing (first stamp-worthy contribution identified in prior sessions). The catalog database schema should be designed for DoltHub-style versioned diff compatibility.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Risk Area} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+GPU resource exhaustion & Safety & Engine must cap frame rate and GPU utilization; screensaver context must not starve other system processes \\
+CUDA driver crash propagation & Safety & CUDA errors must be caught and degraded gracefully; engine continues without CUDA if driver unavailable \\
+AI-generated shader malicious code & Security & Claude API shader mutation operates only on GLSL fragment shaders; no filesystem access; output validated before compilation \\
+XScreenSaver license compatibility & Legal & New engine is independent project; xscreensaver window protocol is a runtime interface, not a code dependency. Engine licensed MIT. \\
+NeHe content licensing & Legal & NeHe tutorials are educational reference, not copied code. Vulkan translations are original implementations. \\
+Sascha Willems MIT license & Legal & Attribution required in source headers. MIT license is compatible with all target use cases. \\
+Power consumption & Environment & Default to 30fps cap; DPMS-aware: reduce activity when monitor enters low-power state \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Project Sources}
+
+\begin{itemize}
+\item Zawinski, J. (1992--2026). \textit{XScreenSaver} (v6.14). \url{https://www.jwz.org/xscreensaver/}. Retrieved March 2026.
+\item Zawinski, J. (2026). XScreenSaver 6.14 Release Notes. \url{https://www.jwz.org/blog/2026/01/xscreensaver-6-14/}. Retrieved March 2026.
+\item Zygo/xscreensaver mirror. \url{https://github.com/Zygo/xscreensaver}. Read-only mirror. Retrieved March 2026.
+\item Willems, S. (2016--2025). \textit{Vulkan C++ Examples} (MIT License). \url{https://github.com/SaschaWillems/Vulkan}. Retrieved March 2026.
+\item Molofee, J. (1997--2004). \textit{NeHe OpenGL Tutorials}. Archive: \url{https://github.com/gamedev-net/nehe-opengl}. Retrieved March 2026.
+\item Fossies. \textit{XScreenSaver README.hacking}. \url{https://fossies.org/linux/xscreensaver/README.hacking}. Retrieved March 2026.
+\end{itemize}
+
+\subsubsection{API Specifications and Driver References}
+
+\begin{itemize}
+\item Khronos Group. (2024, December 3). \textit{Vulkan 1.4 Specification}. \url{https://registry.khronos.org/vulkan/}
+\item NVIDIA Corporation. \textit{CUDA Toolkit Documentation}. \url{https://developer.nvidia.com/cuda}
+\item NVIDIA Corporation. \textit{CUDA-X Libraries}. \url{https://developer.nvidia.com/cuda/cuda-x-libraries}
+\item Larabel, M. (2025, December 30). The Open-Source OpenGL \& Vulkan Drivers Enjoyed A Rather Remarkable 2025. \textit{Phoronix}. \url{https://www.phoronix.com/news/Mesa-2025-Highlights}
+\item Mesa Project. \textit{Mesa 25.3 Release Notes}. \url{https://www.mesa3d.org/}
+\end{itemize}
+
+\subsubsection{Research and Academic Sources}
+
+\begin{itemize}
+\item Janssen, D.M., Liew, A.W.C. (2022). GPU acceleration of island model genetic algorithm using CUDA. \textit{Concurrency and Computation: Practice and Experience}. Wiley Online Library.
+\item EvoGP Team. (2025, January 21). EvoGP: A GPU-accelerated Framework for Tree-Based Genetic Programming. \textit{arXiv:2501.17168}.
+\item ScienceDirect. (2023). A parallel particle swarm optimization algorithm based on GPU/CUDA. Retrieved via ScienceDirect.
+\item Valkovič, P. GPU Parallelization of Evolutionary Algorithms. Master Thesis, Charles University. \url{https://dspace.cuni.cz/}
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ══════════════════════════════════════════════════════════════════════════════
+
+\section{Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Build a complete XScreenSaver hack catalog integrated with gsd-skill-creator upstream intelligence, and implement a brand-new Vulkan 1.3+ screensaver engine with NeHe translation, Sascha Willems compute gallery, CUDA generative math layer, and AI-backed evolutionary visual system. All six modules produced as publication-quality deliverables ready for handoff to Claude Code execution.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+                    MISSION ARCHITECTURE
+    ┌──────────────────────────────────────────────────┐
+    │  WAVE 0: FOUNDATION                              │
+    │  Shared schemas · Catalog DB seed · CMake base   │
+    │  Plugin API interface · CUDA interop header      │
+    └────────────────┬─────────────────────────────────┘
+                     │
+         ┌───────────┴──────────────────────────┐
+         ▼                                      ▼
+┌────────────────────┐              ┌───────────────────────┐
+│ WAVE 1A            │              │ WAVE 1B               │
+│ XScreenSaver       │  (parallel)  │ Vulkan Engine +       │
+│ Catalog + Skill    │◄────────────►│ NeHe Translation +    │
+│ Creator Feed       │              │ Willems Gallery       │
+└────────────────────┘              └───────────────────────┘
+         │                                      │
+         └──────────────┬───────────────────────┘
+                        ▼
+           ┌────────────────────────────┐
+           │ WAVE 1C (sequential after) │
+           │ CUDA Layer + AI Engine     │
+           └────────────────────────────┘
+                        │
+                        ▼
+           ┌────────────────────────────┐
+           │ WAVE 2: SYNTHESIS          │
+           │ Integration + Full pipeline│
+           │ test + skill-creator feed  │
+           └────────────────────────────┘
+                        │
+                        ▼
+           ┌────────────────────────────┐
+           │ WAVE 3: PUBLICATION        │
+           │ Docs + CI + Release bundle │
+           └────────────────────────────┘
+\end{asciibox}
+
+\subsubsection{System Layers}
+
+\begin{enumerate}
+\item \textbf{Catalog Layer} --- JSON/YAML structured database of all 240+ hacks; skill-creator upstream intelligence schema and feed
+\item \textbf{Engine Core} --- Vulkan 1.3 instance/device/swapchain/surface management; plugin loader; scene manager; X11+Wayland integration
+\item \textbf{Shader Gallery} --- 48 NeHe lesson plugins + 14 Sascha Willems compute plugins; SPIR-V compiled shaders; all standalone-testable
+\item \textbf{CUDA Substrate} --- cuRAND noise, reaction-diffusion, flocking, fluid, n-body; VK--CUDA interop memory bridge
+\item \textbf{AI Evolution Layer} --- Claude API integration; population manager; mutation/selection kernels; fitness function library
+\item \textbf{Skill-Creator Feed} --- Upstream intelligence YAML/JSON for GPU domain; DoltHub-compatible schema; ZFC-auditable
+\end{enumerate}
+
+\subsubsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Module} \\
+\midrule
+1 & Hack catalog (JSON + YAML) & All 240+ hacks with complete metadata fields; machine-parseable & M01 \\
+2 & skill-creator upstream feed & Schema documented; 3+ patterns detectable in integration test & M01 \\
+3 & Vulkan engine core & Compiles on Ubuntu 24; renders to xscreensaver window; 60fps & M02 \\
+4 & NeHe plugin set (48) & All 48 lesson concepts; standalone test passes; documented & M03 \\
+5 & Willems compute plugins (14) & All 14 examples running; GPU utilization $<$80\% at idle & M04 \\
+6 & CUDA generative layer & 5+ effects compiling with CUDA 12+; fallback without CUDA & M05 \\
+7 & AI evolution engine & 10-generation run succeeds; Claude API integration working & M06 \\
+8 & Developer documentation & Architecture, plugin API, shader guide, CUDA interop guide & All \\
+9 & CMake build system & Single \texttt{cmake ../ \&\& make} produces all targets & All \\
+10 & CI pipeline & GitHub Actions: compile + headless render test per category & All \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Catalog DB schema + seed & None & Haiku & 8K \\
+Hack metadata scrape (240+) & Catalog schema & Sonnet & 40K \\
+skill-creator feed YAML & Catalog DB & Sonnet & 12K \\
+Upstream intelligence docs & Feed schema & Sonnet & 10K \\
+Vulkan engine core (C++) & VulkanSDK, XCB, Wayland & Sonnet & 50K \\
+xscreensaver window bridge & Engine core & Sonnet & 8K \\
+Plugin loader + scene mgr & Engine core & Sonnet & 15K \\
+NeHe 01--20 plugins (SPIR-V) & Engine core & Sonnet & 60K \\
+NeHe 21--48 plugins (SPIR-V) & Engine core & Sonnet & 60K \\
+Willems compute plugins (14) & Engine core, CUDA & Sonnet & 45K \\
+CUDA interop bridge & VK ext, CUDA 12 & Opus & 20K \\
+cuRAND noise generators & CUDA bridge & Sonnet & 15K \\
+Reaction-diffusion kernel & CUDA bridge & Sonnet & 12K \\
+Flocking / boids kernel & CUDA bridge & Sonnet & 10K \\
+AI evolution engine & Claude API, CUDA & Opus & 30K \\
+Fitness function library & AI engine & Opus & 15K \\
+Developer docs (architecture) & All components & Sonnet & 20K \\
+CMakeLists.txt (root + sub) & All & Haiku & 6K \\
+CI pipeline (GitHub Actions) & Build system & Haiku & 4K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assignment} & \tableheader{Rationale} \\
+\midrule
+Opus & CUDA interop, AI engine, fitness functions & Requires architectural judgment: memory ownership model across Vulkan/CUDA boundary is subtle; AI fitness design requires aesthetic reasoning \\
+Sonnet & All implementation components & Structured code production, documentation, systematic NeHe and Willems translation work \\
+Haiku & Schemas, CMakeLists, CI YAML & Scaffolding and templated output; low judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Catalog schema, CMake base, plugin API header, shared types \\
+1A & Catalog + Feed & Parallel & Sonnet & Complete hack catalog, upstream intelligence YAML \\
+1B & Engine + Gallery & Parallel & Sonnet & Vulkan engine, NeHe plugins, Willems plugins \\
+1C & CUDA + AI & Sequential & Opus/Sonnet & CUDA layer, AI evolution engine (after 1A/1B) \\
+2 & Synthesis & Sequential & Opus & Integration, full pipeline test, cross-module validation \\
+3 & Publication & Sequential & Sonnet & Docs, CI, release bundle, upstream PR to skill-creator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Catalog DB schema & \texttt{catalog/schema.yaml} + \texttt{catalog/schema.json} & Haiku \\
+Plugin API header & \texttt{engine/include/vsaver\_plugin.h} & Haiku \\
+Shared type definitions & \texttt{engine/include/vsaver\_types.h} & Haiku \\
+CMakeLists.txt (root) & Top-level CMake with subproject structure & Haiku \\
+CI workflow skeleton & \texttt{.github/workflows/build.yml} stub & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1A: XScreenSaver Catalog (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Hack metadata: X11/Xlib hacks ($\sim$120) & \texttt{catalog/xlib\_hacks.yaml} & Sonnet \\
+Hack metadata: OpenGL hacks ($\sim$100) & \texttt{catalog/opengl\_hacks.yaml} & Sonnet \\
+Hack metadata: GLSL + Shadertoy ($\sim$38) & \texttt{catalog/shader\_hacks.yaml} & Sonnet \\
+Catalog merger + validation & \texttt{catalog/full\_catalog.json} & Sonnet \\
+Upstream intelligence schema & \texttt{skill-creator/gpu\_domain\_schema.yaml} & Sonnet \\
+Upstream intelligence feed (seed) & \texttt{skill-creator/gpu\_upstream\_feed.yaml} & Sonnet \\
+Technique taxonomy document & \texttt{docs/technique\_taxonomy.md} & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1B: Vulkan Engine + Gallery (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Vulkan engine core (instance/device/swapchain) & \texttt{engine/src/VsEngine.cpp/.h} & Sonnet \\
+Surface bridge (X11 + Wayland) & \texttt{engine/src/VsSurface.cpp/.h} & Sonnet \\
+Plugin loader + scene manager & \texttt{engine/src/VsPluginManager.cpp/.h} & Sonnet \\
+NeHe plugins 01--20 (GLSL + SPIR-V) & \texttt{plugins/nehe/01--20/} & Sonnet \\
+NeHe plugins 21--48 (GLSL + SPIR-V) & \texttt{plugins/nehe/21--48/} & Sonnet \\
+Willems compute plugins (14) & \texttt{plugins/willems/} & Sonnet \\
+Shader compile script & \texttt{tools/compile\_shaders.sh} & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1C: CUDA Layer + AI Engine (Sequential, after 1A+1B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+VK--CUDA interop bridge & \texttt{engine/src/VsCudaBridge.cpp/.h} & Opus \\
+cuRAND noise generators (5 types) & \texttt{cuda/noise/} & Sonnet \\
+Reaction-diffusion kernel (Gray-Scott) & \texttt{cuda/effects/grayscott.cu} & Sonnet \\
+Flocking / boids kernel & \texttt{cuda/effects/boids.cu} & Sonnet \\
+Fluid simulation kernel & \texttt{cuda/effects/fluid.cu} & Sonnet \\
+N-body gravity kernel & \texttt{cuda/effects/nbody.cu} & Sonnet \\
+Claude API integration module & \texttt{ai/VsClaudeClient.cpp/.h} & Opus \\
+Population manager (evolutionary) & \texttt{ai/VsPopulation.cpp/.h} & Opus \\
+Fitness function library & \texttt{ai/fitness/} & Opus \\
+Shader mutation engine & \texttt{ai/VsMutator.cpp/.h} & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Full integration test run & Test report in \texttt{tests/integration/report.md} & Opus \\
+Plugin compatibility audit & All 62+ plugins render headlessly without crash & Opus \\
+Catalog--engine round-trip test & Feed detects 3+ patterns; skill-creator confirms & Opus \\
+CUDA graceful-degradation test & Engine runs without CUDA on Mesa-only system & Opus \\
+AI evolution 10-generation run & Visual fitness progression documented & Opus \\
+Cross-module dependency graph & \texttt{docs/dependency\_graph.md} & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Architecture documentation & \texttt{docs/architecture.md} & Sonnet \\
+Plugin authoring guide & \texttt{docs/plugin\_guide.md} & Sonnet \\
+Shader authoring guide & \texttt{docs/shader\_guide.md} & Sonnet \\
+CUDA interop guide & \texttt{docs/cuda\_interop.md} & Sonnet \\
+CI pipeline completion & \texttt{.github/workflows/build.yml} (full) & Haiku \\
+Release bundle packaging & \texttt{dist/vulkan-screensaver-v1.0.tar.gz} & Sonnet \\
+skill-creator upstream PR & PR description + YAML diff for dev branch & Sonnet \\
+README.md (root) & Project overview, build, install, usage & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}
+\item \textbf{Shared attribute layer} (Wave 0): Catalog schema and plugin API header computed once; both Track A and Track B in Wave 1 load from these — zero re-computation
+\item \textbf{NeHe lesson batching}: Lessons 01--20 and 21--48 run as two batch tasks within Track B; each batch shares the same engine boilerplate context window prefix, exploiting 5-minute prompt cache TTL
+\item \textbf{CUDA kernel template}: All 5 CUDA effects share a common kernel template loaded once; per-effect tasks inherit context
+\item \textbf{Willems plugins}: All 14 share the same \texttt{vulkanexamplebase.h} context; loaded once at start of Track B Wave 1
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (K)} & \tableheader{Sonnet (K)} & \tableheader{Haiku (K)} \\
+\midrule
+Wave 0 & 0 & 0 & 28 \\
+Wave 1A & 0 & 120 & 0 \\
+Wave 1B & 0 & 180 & 0 \\
+Wave 1C & 65 & 37 & 0 \\
+Wave 2 & 50 & 20 & 0 \\
+Wave 3 & 0 & 70 & 10 \\
+\midrule
+\textbf{Totals} & \textbf{115K} & \textbf{427K} & \textbf{38K} \\
+\multicolumn{4}{l}{\small Total: $\sim$580K tokens. Est. 12--15 context windows. 30/74/7 Opus/Sonnet/Haiku split.} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+[W0: Schema] ──────────────────────────────────────────────┐
+     │                                                     │
+     ├──────────────────────────────────────────┐          │
+     ▼                                          ▼          ▼
+[W1A: Catalog]                           [W1B: Engine+Gallery]
+     │                                          │
+     └──────────────────────────────────────────┘
+                          │ CAPCOM GATE 1
+                          ▼
+                   [W1C: CUDA + AI]
+                          │
+                          │ CAPCOM GATE 2
+                          ▼
+                   [W2: Synthesis]
+                          │
+                          │ CAPCOM GATE 3
+                          ▼
+                   [W3: Publication]
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Scope} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & License, GPU safety, security \\
+Core functionality & 22 & Required & BLOCK & All 12 success criteria \\
+Integration & 8 & Required & BLOCK & Cross-module, catalog-to-feed, engine-to-plugin \\
+Edge cases & 8 & Best-effort & LOG & CUDA absent, malformed shader, resource limits \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-LIC & License compliance & No GPL code in engine; all dependencies MIT/BSD/Apache; NeHe translations are original code \\
+SC-GPU & GPU resource cap & Engine never exceeds 80\% GPU utilization at idle; frame time capped at 33ms (30fps floor) \\
+SC-CUDA & CUDA graceful degradation & Engine starts and renders all non-CUDA plugins if CUDA driver absent \\
+SC-AI & AI shader sandbox & Claude API shader output never reaches filesystem; compiled in-memory only; malformed output caught \\
+SC-SEC & Security: window ID isolation & Engine renders only to the window ID provided; never attempts to grab other windows or take screenshots without explicit flag \\
+SC-SRC & Source attribution & All NeHe-derived code includes original tutorial reference comment; all Willems-derived code includes MIT attribution header \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 240+ hacks cataloged & CF-01, CF-02, CF-03 & Pending \\
+2. Catalog in JSON + YAML, parseable & CF-04, IN-01 & Pending \\
+3. Engine compiles on Ubuntu 24 & CF-05, EC-01 & Pending \\
+4. 48 NeHe plugins at 60fps & CF-06, CF-07, IN-02 & Pending \\
+5. 10 Willems compute plugins running & CF-08, SC-GPU & Pending \\
+6. 5 CUDA effects functional & CF-09, SC-CUDA & Pending \\
+7. AI evolution 10-generation run & CF-10, SC-AI & Pending \\
+8. skill-creator detects 3+ patterns & CF-11, IN-03 & Pending \\
+9. All plugins use xscreensaver protocol & CF-12, SC-SEC & Pending \\
+10. Build produces distributable archive & IN-04, EC-02 & Pending \\
+11. Documentation complete & IN-05, EC-03 & Pending \\
+12. CI passes compile + render tests & IN-06, EC-04 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall direction; wave go/no-go gates; scope protection \\
+PLAN & Planner & Wave decomposition; dependency ordering; parallel track optimization \\
+TOPO & Topology Mgr & Track A/B handoff coordination; mid-mission restructuring if CUDA unavailable \\
+ARCH & Architecture & Vulkan engine design decisions; CUDA interop memory model; AI evolution architecture \\
+SCOUT & Research Agent & Source gathering; license verification; NeHe/Willems reference lookup \\
+CRAFT-CATALOG & Catalog Specialist & XScreenSaver hack metadata; technique taxonomy; skill-creator schema \\
+CRAFT-GPU & GPU Specialist & Vulkan pipeline architecture; SPIR-V shader authoring; CUDA kernel design \\
+EXEC-A & Track A Executor & Catalog documentation, metadata production, upstream feed YAML \\
+EXEC-B & Track B Executor & Engine code, NeHe plugins, Willems plugins, shader compilation \\
+VERIFY & Verification & Source license validation; headless render test; catalog completeness audit \\
+INTEG & Integration & Cross-module round-trip test; catalog-to-feed-to-skill-creator validation \\
+SECURE & Security Agent & AI shader sandbox enforcement; window isolation test; GPU cap enforcement \\
+CAPCOM & HITL Interface & Human approval at CAPCOM gates 1, 2, 3; scope change authorization \\
+BUDGET & Resource Manager & Token budget tracking; session boundary planning \\
+SURGEON & Health Monitor & Research quality degradation; plugin regression detection \\
+RETRO & Retrospective & Post-wave lessons learned; pattern documentation for skill-creator \\
+ANALYST & Pattern Analyst & Cross-module GPU pattern detection; upstream intelligence feed quality \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Profile: Fleet (18 roles). 6+ module mission with security-sensitive AI component.}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (18 roles) \\
+Total Modules & 6 \\
+Total Deliverables & 10 \\
+Estimated Token Budget & $\sim$580K total (115K Opus / 427K Sonnet / 38K Haiku) \\
+Estimated Context Windows & 12--15 \\
+Estimated Sessions & 3--4 \\
+Parallel Execution Waves & Wave 1A + 1B run simultaneously \\
+CAPCOM Gates & 3 (after 1B, after 1C, after synthesis) \\
+Safety-Critical Tests & 6 (all mandatory-pass / BLOCK) \\
+Total Test Cases & $\sim$44 \\
+Primary Languages & C++17, GLSL, CUDA C, SPIR-V, CMake, YAML, JSON \\
+Primary Dependencies & Vulkan SDK 1.3+, CUDA Toolkit 12+, Mesa/NVIDIA driver, libxcb, wayland-client \\
+License Target & MIT (engine) + BSD-compatible (catalog) \\
+Repository Target & New repo under gsd-build or tibsfox namespace \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textbf{\sffamily The Through-Line}
+
+\vspace{0.5em}
+``Any program that can be made to render on an X window created by another process can be used as a screen saver.''
+--- JWZ, \textit{README.hacking}, 1992
+
+\vspace{0.8em}
+Thirty-four years later, that sentence is still the specification. The Vulkan Screensaver Engine honors it: it renders to the window it is given, using the most powerful GPU pipeline available, with mathematics generated by CUDA and shaped by evolutionary selection. The Amiga chips did not know they were building a computer. They were doing their jobs. When all six chips run together --- Catalog, Engine, NeHe, Willems, CUDA, and AI --- the screen will dream things the original hacks never imagined. That is what the spaces between are for.
+\end{quotebox}
+
+\end{document}

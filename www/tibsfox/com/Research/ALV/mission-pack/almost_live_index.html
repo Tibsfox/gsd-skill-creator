@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Almost Live! & Seattle Sketch Comedy — GSD Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A148C;
+    --secondary: #BF6800;
+    --tertiary: #4E342E;
+    --accent: #7B1FA2;
+    --light-primary: #F3E5F5;
+    --light-secondary: #FFF8E1;
+    --bg: #FAFAFA;
+    --card-bg: #EDE7F6;
+    --card-border: #CE93D8;
+    --text: #212121;
+    --subtle: #757575;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #6A1B9A 60%, #BF6800 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  header .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  header h2 {
+    font-size: 1.05rem;
+    font-weight: 300;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.5;
+  }
+
+  .pills {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 0.25rem 0.85rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .section-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--card-border);
+  }
+
+  /* File Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 580px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.4rem 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74,20,140,0.15);
+  }
+
+  .card-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+
+  .card-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.35rem;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--subtle);
+    line-height: 1.5;
+  }
+
+  .card-badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Contents */
+  .contents {
+    background: white;
+    border: 1px solid #E0D0F0;
+    border-radius: 8px;
+    padding: 1.4rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stage {
+    margin-bottom: 1.25rem;
+  }
+
+  .stage-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+    background: var(--primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-label.s2 { background: var(--secondary); }
+  .stage-label.s3 { background: var(--tertiary); }
+
+  .stage ul {
+    list-style: none;
+    padding-left: 0.5rem;
+  }
+
+  .stage li {
+    font-size: 0.87rem;
+    padding: 0.2rem 0;
+    color: var(--subtle);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .stage li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Usage */
+  .usage {
+    background: var(--light-secondary);
+    border: 1px solid #FFD54F;
+    border-radius: 8px;
+    padding: 1.4rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .usage ol {
+    padding-left: 1.4rem;
+  }
+
+  .usage li {
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  /* LaTeX */
+  .latex-box {
+    background: #1E1E2E;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .latex-box .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #CE93D8;
+    margin-bottom: 0.75rem;
+  }
+
+  .latex-box code {
+    display: block;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 0.82rem;
+    color: #A9DC76;
+    line-height: 1.8;
+  }
+
+  .latex-box code .comment { color: #6272A4; }
+
+  /* Quote */
+  .quote-block {
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    background: var(--light-primary);
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .quote-block p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--primary);
+  }
+
+  .quote-block cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--subtle);
+    font-style: normal;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: var(--subtle);
+    border-top: 1px solid #E0D0F0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">GSD Research Mission Package</div>
+  <h1>Almost Live! &amp; Seattle<br>Sketch Comedy</h1>
+  <h2>Bill Nye, Bill Nye the Science Guy, and the PNW Comedy Ecosystem — 1984 to 1999</h2>
+  <div class="pills">
+    <span class="pill">Squadron Profile</span>
+    <span class="pill">5 Modules</span>
+    <span class="pill">12 Crew Roles</span>
+    <span class="pill">28 Pages</span>
+    <span class="pill">March 27, 2026</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- FILES -->
+  <div class="section-title">📦 Mission Files</div>
+  <div class="cards">
+    <a href="almost_live_mission.pdf" download class="card">
+      <div class="card-icon">📄</div>
+      <div class="card-title">Mission Package PDF</div>
+      <div class="card-desc">Complete three-stage document — Vision, Research Reference, and Mission Package. 28 pages, XeLaTeX compiled.</div>
+      <span class="card-badge">↓ DOWNLOAD PDF</span>
+    </a>
+    <a href="almost_live_mission.tex" download class="card">
+      <div class="card-icon">📝</div>
+      <div class="card-title">LaTeX Source (.tex)</div>
+      <div class="card-desc">Full XeLaTeX source for recompilation, modification, or integration into other GSD documents.</div>
+      <span class="card-badge">↓ DOWNLOAD .TEX</span>
+    </a>
+  </div>
+
+  <!-- CONTENTS -->
+  <div class="section-title">📋 Document Contents</div>
+  <div class="contents">
+
+    <div class="stage">
+      <div class="stage-label">Stage 1 — Vision</div>
+      <ul>
+        <li>Narrative vision — Almost Live! as Pacific Northwest identity laboratory</li>
+        <li>5-problem problem statement (underdocumented, origin conflicts, pipeline, improv ecosystem, cancellation)</li>
+        <li>Core concept: Local Fidelity as National Engine</li>
+        <li>ASCII domain map and module architecture diagrams</li>
+        <li>Chipset YAML configuration (Agnus/Denise/Paula model assignments)</li>
+        <li>12 testable success criteria</li>
+        <li>Through-line connecting to Amiga Principle and spaces between philosophy</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-label s2">Stage 2 — Research Reference</div>
+      <ul>
+        <li>Module 01: Founding (1984), Ross Shafer era, sketch transformation, Space Needle incident, cancellation</li>
+        <li>Module 02: Bill Nye at Boeing → stand-up → Almost Live! → Science Guy naming (Jan 8, 1987) → KCTS → Disney</li>
+        <li>Module 03: Full cast/writer table (15 people); 10+ recurring sketch formats; Unexpected Productions / Theatersports</li>
+        <li>Module 04: Seattle 1984–99 arc — Boeing, grunge, tech boom; corporate consolidation analysis</li>
+        <li>Module 05: Post-show careers for 11 cast/crew; MOHAI exhibit; Presidential Medal of Freedom</li>
+        <li>Safety and sensitivity considerations table</li>
+        <li>16-source bibliography (HistoryLink, MOHAI, KING-TV, Seattle Times, Seattle Met, etc.)</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-label s3">Stage 3 — Mission Package</div>
+      <ul>
+        <li>Milestone spec with 7 deliverables</li>
+        <li>Wave architecture: W0 Foundation → W1A/1B Parallel → CAPCOM gate → W2 Synthesis → W3 Publication</li>
+        <li>Component breakdown: 9 components, ~327,000 estimated tokens</li>
+        <li>2 CAPCOM human review gates</li>
+        <li>36-test test plan (5 SC / 18 CF / 8 IN / 5 EC)</li>
+        <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+        <li>Squadron crew manifest (12 roles)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- USAGE -->
+  <div class="section-title">🚀 How to Use This Package</div>
+  <div class="usage">
+    <ol>
+      <li>Open the PDF and review Stage 1 to confirm scope and success criteria match your intent.</li>
+      <li>Pass this package to the GSD Orchestrator (Claude Code, <code>gsd-skill-creator</code> dev branch, v1.49+).</li>
+      <li>The Orchestrator will run Wave 0 Foundation, then launch Wave 1A and 1B in parallel.</li>
+      <li>Review at the <strong>first CAPCOM gate</strong> (post-Wave 1): confirm Billy Quan cultural framing and Bill Nye naming origin handling.</li>
+      <li>Approve Wave 2 Synthesis (Opus model — cross-module integration, comedy→science pipeline).</li>
+      <li>Review at the <strong>second CAPCOM gate</strong> (post-Wave 2) before final publication.</li>
+      <li>Wave 3 assembles and verifies the full document. Source verification pass executes all SC tests before final PDF build.</li>
+    </ol>
+  </div>
+
+  <!-- LaTeX -->
+  <div class="section-title">🔧 Recompile LaTeX</div>
+  <div class="latex-box">
+    <div class="label">Three-pass XeLaTeX (required for TOC + lastpage)</div>
+    <code>
+      <span class="comment"># Requires xelatex + DejaVu fonts (pre-installed Ubuntu 24)</span><br>
+      xelatex -interaction=nonstopmode almost_live_mission.tex<br>
+      xelatex -interaction=nonstopmode almost_live_mission.tex<br>
+      xelatex -interaction=nonstopmode almost_live_mission.tex
+    </code>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-block">
+    <p>"It didn't feel like work and was a joyful experience with people I liked and admired. I got to write jokes and sketches and see them on TV a few days later!"</p>
+    <cite>— Bob Nelson, Almost Live! writer; Oscar-nominated screenwriter, Nebraska (2013)</cite>
+  </div>
+
+</main>
+
+<footer>
+  GSD Ecosystem · Research Mission Package · Almost Live! &amp; Seattle Sketch Comedy · March 27, 2026
+</footer>
+
+</body>
+</html>

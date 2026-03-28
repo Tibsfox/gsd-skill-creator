@@ -1,0 +1,1513 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Technology color scheme
+\definecolor{primary}{HTML}{1A237E}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{1976D2}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{successgreen}{HTML}{1B5E20}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{warnbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1:} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Forward Error Correction --- Deep Research}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Forward Error Correction --- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline --- FEC},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- FIVE-PASS DEEP RESEARCH}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{10cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Forward Error Correction\\[0.3em]Channel Coding \& Reliability Theory}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Shannon's 1948 Theorem to Quantum LDPC Codes and AI-Native Decoders}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Five-Pass Iterative Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Activation Profile}}
+
+\vspace{1.5cm}
+\begin{center}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+\end{center}
+\vspace{0.5cm}
+
+{\small\sffamily\textcolor{subtlegray}{
+\textbf{Research Passes:} Foundations $|$ Code Families $|$ Applications $|$ Distributed/Mesh Systems $|$ Emerging Frontiers\\[0.3em]
+\textbf{Modules:} 6 (Fleet Profile) $|$ \textbf{Estimated:} 18--24 context windows across 6--8 sessions\\[0.3em]
+\textbf{Date:} March 27, 2026 $|$ \textbf{Status:} Ready for GSD Orchestrator\\[0.3em]
+\textbf{Author:} Miles Tiberius Foxglove / Tibsfox $|$ \textbf{Build:} GSD v1.49+ / DACP milestone
+}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 --- VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Forward Error Correction --- Vision Guide}
+
+\subsection{Document Metadata}
+
+\metafield{Date}{March 27, 2026}
+\metafield{Status}{Research Complete --- Ready for GSD Orchestrator}
+\metafield{Depends On}{gsd-mesh-prototype-spec, gsd-silicon-layer-spec, fox-infrastructure-group vision docs}
+\metafield{Context}{Five-pass iterative deep research; six research modules; Fleet activation profile}
+\metafield{Ecosystem Role}{Foundation layer for GSD Mesh reliability architecture, Fox Infrastructure Group Pacific Spine communications resilience, and GSD-OS local-cloud data integrity guarantees}
+\metafield{GSD Build}{v1.49+ (DACP milestone branch)}
+
+\subsection{Vision}
+
+There is a geometry to noise. Every signal traveling through the physical world --- whether photons threading fiber at the speed of light under the Pacific Ocean, radio waves bouncing through the ionosphere, or bits crawling across a failing NAND flash cell --- carries within it an irreducible stochastic error. The channel does not care about your intentions. It corrupts impartially. The fundamental question of information theory is not whether noise exists, but whether meaning can survive it.
+
+Claude Shannon answered this question in 1948 in a paper so profound it retroactively made every communications system before it primitive. His noisy-channel coding theorem established a limit --- the channel capacity $C$ --- below which reliable communication is \textit{theoretically possible}, and above which it is \textit{provably impossible}. Not ``very hard.'' Not ``usually fails.'' Provably, mathematically impossible. The theorem was existence-only; it proved a reliable channel encoder existed without constructing one. For the next seventy-five years, the entire field of coding theory has been a single sustained engineering effort to approach Shannon's limit with real, implementable codes.
+
+Forward Error Correction (FEC) is the technology family born from this effort. Where the human instinct is to demand a second copy (retransmit), FEC does something more architectural: it weaves redundancy \textit{into} the original transmission so that any sufficiently large fragment of the received signal contains enough geometric information to reconstruct the whole. The receiver does not ask. The receiver \textit{computes}. The redundancy is not overhead to be minimized --- it is structural material, like rebar in concrete, giving the message the strength to survive.
+
+The Amiga Principle lurks here at cosmological scale. Nature's most reliable systems --- DNA replication with its redundant codon pairs, the human visual cortex with its massively parallel processing and cross-checking, the immune system with its overlapping pattern recognition --- all exploit structured redundancy not as waste but as architectural leverage. FEC is humanity's attempt to engineer this same leverage into silicon and photonics. And the best modern codes --- Low-Density Parity-Check (LDPC) codes, Polar codes, Raptor fountain codes --- are not brute-force solutions. They are exquisitely minimal: sparse graphs that propagate belief iteratively, polarization transforms that split a noisy channel into two cleaner ones, rateless codes that generate an unlimited stream of encoded symbols so any sufficiently large puddle of received data reconstructs the source. These are Amiga solutions to a Shannon problem.
+
+For the GSD ecosystem and Fox Infrastructure Group, this research mission is not abstract. The Pacific Spine communications backbone --- spanning fiber routes from British Columbia to Chile, ocean compute clusters off the Washington coast, mesh radio nodes at tribal sovereign sites, and satellite uplinks for CSZ emergency coordination --- will transmit many petabytes of data across channels with widely varying noise profiles, atmospheric turbulence, seismic disruption, and adversarial interference. Every design decision in that infrastructure is implicitly a FEC decision: which codes, what overhead ratios, what decoding latency, what error floor behavior, what behavior at the cliff edge. Getting these decisions right at the architectural level means the difference between a network that degrades gracefully under pressure and one that fails catastrophically at the moment of maximum need.
+
+This mission exists to produce the deepest possible reference package on FEC theory and practice --- from Shannon's foundational theorem through the current state of quantum LDPC codes and AI-native neural decoders --- so that every GSD infrastructure decision is grounded in rigorous information-theoretic bedrock.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+
+\item \textbf{The Reliability Gap at Infrastructure Scale.} Modern communication systems routinely operate at aggregate data rates measured in terabits per second across links spanning thousands of kilometers, through media with vastly different noise characteristics: optical fiber (extremely low BER baseline, catastrophic burst failure during earthquakes), free-space optical (atmospheric turbulence causing Poisson-distributed burst losses), 5G mmWave radio (rain fade, blockage fading), and satellite links (significant propagation delay, Doppler shift, ionospheric scintillation). A Pacific Spine network must select, configure, and dynamically adapt FEC schemes across all of these channel types simultaneously, yet the engineering literature is fragmented across standards bodies (ITU-T, IETF, 3GPP, DVB), application domains, and academic research that rarely cross-references. There is no unified reference tailored to the multi-modal, high-stakes infrastructure use case.
+
+\item \textbf{The Shannon Gap: Theory vs. Implementation.} Shannon proved in 1948 that codes achieving capacity exist. Gallager invented LDPC codes in 1960 that are now known to approach Shannon capacity. The gap between these theoretical results and deployed systems has been closing for 75 years, but the ``last mile'' of the Shannon gap --- the difference between the best known practical codes and the theoretical limit --- remains consequential in energy-constrained deployments, bandwidth-limited deep-space links, and latency-sensitive real-time systems. Understanding precisely how each code family performs relative to the Shannon limit, and what tradeoffs are incurred in approaching it, is essential for infrastructure design.
+
+\item \textbf{The Quantum Transition Problem.} Quantum computing, if it matures as trajectory suggests, will break RSA and elliptic-curve cryptography --- but it will also create a massive new demand for quantum error correction (QEC), which is the quantum analog of FEC. LDPC codes are already being adapted into quantum LDPC (qLDPC) codes for IBM's quantum processors. Google's Willow chip demonstrated practical QEC in December 2024. Meanwhile, classical FEC research is being cross-fertilized with quantum coding theory in ways that are advancing both fields. The Fox Infrastructure Group's FoxCompute ocean data centers will eventually need to service quantum workloads; understanding the FEC/QEC convergence now is architecturally critical.
+
+\item \textbf{The AI-Native Decoder Inflection.} Deep neural networks are now being applied to FEC decoding problems, in some cases approaching or exceeding maximum-likelihood decoder performance at reduced computational cost and with explicit hardware acceleration pathways. NASA's JPL has active research programs applying DNNs to quantum LDPC decoding. The 6G standards process (targeting 2030 deployment) is evaluating AI-native channel coding. For a GSD ecosystem built around AI-assisted execution, the convergence of FEC and neural networks is not a curiosity but a core architectural opportunity.
+
+\item \textbf{The Mesh Reliability Architecture Gap.} Traditional FEC is point-to-point: one encoder, one decoder, one channel model. The GSD Mesh prototype and Fox Infrastructure Group Pacific Spine require multi-hop, multi-path, multicast-capable FEC that maintains reliability semantics across complex network topologies. Distributed FEC (network coding, fountain codes in multi-hop topologies, cross-layer FEC adaptation in SD-WAN fabrics) is a distinct and underexplored engineering domain that existing single-link FEC literature does not address. The DACP agent communication protocol itself needs FEC-informed reliability semantics for its structured three-part bundles.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Shannon Machine:} FEC transforms unreliable channels into reliable ones by exploiting the geometry of code spaces --- adding structured redundancy such that the minimum distance between valid codewords exceeds the maximum expected noise magnitude, enabling the decoder to map any received word to its nearest valid codeword with high probability.
+
+Formally, for a discrete memoryless channel (DMC) with capacity $C$ bits per channel use, Shannon's second theorem states: for any rate $R < C$ and any $\epsilon > 0$, there exists a block code of sufficient length $n$ such that the block error probability $P_e < \epsilon$. Conversely, for $R > C$, reliable communication is impossible regardless of code complexity. The code rate is defined as $R = k/n$ where $k$ is the number of information bits and $n$ is the total codeword length. The redundancy overhead is $(n-k)/k$, and the minimum Hamming distance $d_{\min}$ of a code determines its error-correcting power: a code can correct up to $t = \lfloor(d_{\min}-1)/2\rfloor$ errors per codeword.
+
+\subsubsection{Domain Architecture Map}
+
+\begin{asciibox}
+FEC RESEARCH DOMAIN ARCHITECTURE
+===================================
+
+  INFORMATION THEORY FOUNDATIONS
+  +---------------------------------+
+  | Shannon (1948): C = B*log2(1+S/N)|
+  | Hamming (1950): distance metric  |
+  | Gallager (1960): sparse graphs   |
+  +---------------------------------+
+                  |
+        +---------+---------+
+        |                   |
+  CLASSICAL FEC          QUANTUM FEC
+  (Block & Conv.)        (Stabilizer)
+        |                   |
+  +--+--+--+--+   +--+--+--+--+
+  |Ha|RS|BC|Tu|   |Su|To|qL|Ne|
+  |mm|  |H |rb|   |rf|ri|DP|ur|
+  |in|  |  |o |   |ac|c |C |al|
+  +--+--+--+--+   +--+--+--+--+
+        |    |              |
+   LDPC/Polar  Fountain      |
+        |         |         |
+  +-----+---------+---------+
+  |   DECODING ALGORITHMS    |
+  | Viterbi / Belief Prop.   |
+  | Sum-Product / SC / MAP   |
+  | Neural / ML Decoders     |
+  +-----+---+----------------+
+        |   |
+  +-----+---+-----------+
+  |   APPLICATION LAYER |
+  | 5G NR | Optical     |
+  | Space | Storage     |
+  | IoT   | SD-WAN      |
+  | Mesh  | Streaming   |
+  +-------+-------------+
+        |
+  +-----+---------------------+
+  |  FOX INFRASTRUCTURE GROUP |
+  | Pacific Spine FEC Layer   |
+  | DACP Reliability Overlay  |
+  | CSZ Emergency Resilience  |
+  +---------------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+6-MODULE FLEET EXECUTION PLAN
+==============================
+
+Module 01: THEORETICAL FOUNDATIONS
+  - Shannon theorem, channel models, Hamming distance
+  - Code rate / capacity tradeoff mathematics
+  - Coding gain, BER curves, SNR relationships
+  [CRAFT-THEORY, Opus] [sequential, Wave 1A]
+
+Module 02: CODE FAMILIES TAXONOMY
+  - Block codes: Hamming, BCH, Reed-Solomon
+  - Convolutional codes: rate, constraint length, trellis
+  - Modern codes: Turbo, LDPC, Polar, Fountain/Raptor
+  [CRAFT-CODE, Sonnet] [parallel with 03, Wave 1A]
+
+Module 03: DECODING ALGORITHMS
+  - Hard vs. soft decision decoding
+  - Viterbi algorithm, MAP/BCJR
+  - Belief propagation, sum-product, min-sum
+  - Successive cancellation, SC-list decoding
+  - Neural network decoders (emerging)
+  [CRAFT-DECODE, Sonnet] [parallel with 02, Wave 1A]
+
+Module 04: APPLICATION DOMAINS
+  - Wireless: 5G NR (LDPC + Polar), WiFi, IoT
+  - Optical: submarine cables, coherent DWDM
+  - Space: Voyager Reed-Solomon, deep space turbo
+  - Storage: NAND Flash, QLC FEC requirements
+  - Streaming: Raptor/RaptorQ, IPTV, ATSC 3.0
+  - SD-WAN / mesh: distributed FEC topology
+  [CRAFT-APP, Sonnet] [Wave 1B, after Mod 02+03]
+
+Module 05: EMERGING FRONTIERS
+  - Quantum error correction: surface codes, QLDPC
+  - AI/ML decoders: neural FEC, DNN channel coding
+  - 6G channel coding research directions
+  - Information-theoretic security (wiretap channels)
+  [CRAFT-FRONTIER, Opus] [Wave 1B, parallel with 04]
+
+Module 06: GSD/FOX INFRASTRUCTURE INTEGRATION
+  - FEC selection guide for Pacific Spine segments
+  - DACP reliability layer design with FEC semantics
+  - GSD Mesh prototype FEC architecture
+  - CSZ emergency mesh: fountain codes for disrupted topology
+  [CRAFT-GSD, Opus] [Wave 2 synthesis, depends on 01-05]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Theoretical Foundations}
+
+This module establishes the bedrock mathematics of FEC. It begins with Shannon's 1948 noisy-channel coding theorem and the channel capacity formula $C = B \log_2(1 + S/N)$, proceeds through Hamming's 1950 formalization of error-correcting codes and the Hamming distance metric, and builds up the complete mathematical framework of code rate, minimum distance, coding gain, and the Shannon limit. The module also covers channel models: the binary symmetric channel (BSC), binary erasure channel (BEC), additive white Gaussian noise (AWGN) channel, and the burst-error channel. It defines net coding gain (NCG), bit error rate (BER) curves as a function of $E_b/N_0$, and establishes the cliff effect --- the all-or-nothing failure mode when the channel quality falls below the code's design operating point.
+
+\subsubsection{Module 02: Code Families Taxonomy}
+
+A comprehensive survey of every major FEC code family, organized chronologically and architecturally. Classic block codes: Hamming (7,4) through extended Hamming; BCH codes (Bose-Chaudhuri-Hocquenghem); Reed-Solomon codes as non-binary BCH codes operating on symbol alphabets. Classic convolutional codes: rate $k/n$ with constraint length $K$, trellis diagrams, punctured convolutional codes. The revolutionary codes of the 1990s--2000s: Turbo codes (Berrou et al., 1993) using recursive systematic convolution with interleaving; LDPC codes (Gallager 1960, rediscovered 1996) as sparse graph codes with belief-propagation decoding; Polar codes (Arikan, 2008) exploiting channel polarization to synthesize noiseless and pure-noise synthetic channels. Fountain/Rateless codes: LT codes (Luby, 2002), Raptor codes (Shokrollahi, 2001/2004), and RaptorQ (IETF RFC 6330). Concatenated and product codes: serially concatenated codes, turbo product codes (TPC), staircase codes for optical transport.
+
+\subsubsection{Module 03: Decoding Algorithms}
+
+The decoder is at least as important as the code itself. This module surveys the complete landscape of decoding strategies. Hard-decision decoding: syndrome computation, lookup tables, bounded-distance decoding. Soft-decision decoding and the \textasciitilde{}2--3 dB gain it provides. The Viterbi algorithm as maximum-likelihood sequence estimation on convolutional codes. The BCJR/MAP algorithm for turbo decoding. Belief propagation (sum-product algorithm) on Tanner graphs for LDPC decoding. The min-sum approximation and its hardware efficiency. Successive cancellation (SC) decoding for polar codes and the SC-list improvement. The error floor phenomenon in LDPC codes and trapping set analysis. Hardware implementations: pipeline parallelism, quasi-cyclic LDPC for VLSI efficiency. The emerging frontier of neural network decoders: hypernetworks, recurrent decoders, and learned belief propagation.
+
+\subsubsection{Module 04: Application Domains}
+
+FEC does not exist in a vacuum --- each application domain imposes unique constraints on code selection, code rate, overhead ratio, latency budget, hardware complexity, and decoding power consumption. This module traces FEC deployment across eight major application sectors. Wireless communications evolution: convolutional codes in 2G GSM, Turbo codes in 3G UMTS and 4G LTE, LDPC codes for data channels and Polar codes for control channels in 5G NR (3GPP TS 38.212). Optical fiber transport: ITU-T G.709 and G.975 Reed-Solomon GFEC at 7\% overhead, hard-decision staircase FEC at 20\% overhead, soft-decision LDPC at 25\% overhead for coherent 100G/400G/800G submarine and metro networks. Deep space: NASA JPL's concatenated RS + convolutional codes on Voyager, turbo codes on Mars Reconnaissance Orbiter, and the emerging CCSDS standards for the Lunar Gateway and Artemis communications backbone. Flash memory and SSDs: BCH then LDPC migration as NAND process nodes shrink and raw BER climbs. Streaming and broadcast: Raptor/RaptorQ in 3GPP MBMS and ATSC 3.0 Next Gen TV. SD-WAN and enterprise mesh: packet-layer FEC for VoIP, video conferencing, and real-time control over impaired WAN links.
+
+\subsubsection{Module 05: Emerging Frontiers}
+
+The frontier of FEC is being reshaped by three simultaneous forces: the emergence of viable quantum hardware requiring quantum error correction, the application of machine learning to decoder design, and the 6G standardization process that must decide what comes after LDPC+Polar. Quantum error correction (QEC): the stabilizer code formalism, surface codes (topological codes), quantum LDPC codes (qLDPC), and the 2024--2025 demonstration of practical QEC on IBM and Google hardware. Google's Willow chip and IBM's qLDPC transition. The 120+ peer-reviewed QEC papers published in 2025. AI-native FEC: neural network decoders for classical codes, reinforcement learning for adaptive code rate selection, and DNN-assisted channel estimation interleaved with FEC decoding. 6G research: polar-RS concatenation for ultra-reliability, semantic coding as a paradigm shift beyond the symbol level, and the 2025 Nature paper on concatenated RS + polar codes for 6G candidate evaluation.
+
+\subsubsection{Module 06: GSD / Fox Infrastructure Integration}
+
+The synthesis module that translates all five research tracks into actionable architecture for the GSD ecosystem and Fox Infrastructure Group. This module produces: (1) a FEC selection guide mapping Pacific Spine channel segments to recommended code families and overhead ratios; (2) a DACP reliability layer specification that incorporates FEC semantics into the three-part agent communication bundle (intent + data + executable code), enabling agent-to-agent messages to survive partial context window corruption; (3) a GSD Mesh prototype FEC architecture specification for the multi-hop mesh topology across Cascadia nodes; (4) a Cascadia Subduction Zone (CSZ) emergency mesh specification using fountain/Raptor codes to maintain communication reliability under partial topology disruption when conventional routing fails.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+CHIPSET YAML --- FEC DEEP RESEARCH MISSION
+==========================================
+chipset:
+  agnus:                           # Orchestration / DMA / context
+    model: claude-opus-4-6
+    role: >
+      Mission orchestration across 6 modules.
+      Manages wave transitions, cache policy,
+      cross-module consistency, GSD integration
+      synthesis (Module 06). Approves all
+      infrastructure recommendations before
+      publication wave.
+    token_budget: 80000
+    waves: [0, 2, 3]
+
+  denise:                          # Display / output rendering
+    model: claude-sonnet-4-6
+    role: >
+      Document assembly, LaTeX compilation,
+      table generation, figure composition,
+      index.html production, bibliography
+      formatting. Runs Wave 3 publication.
+    token_budget: 40000
+    waves: [3]
+
+  paula:                           # I/O / anticipatory processing
+    model: claude-haiku-4-5
+    role: >
+      Shared schema generation, template
+      scaffolding, bibliography validation,
+      cross-reference indexing. Wave 0 only.
+    token_budget: 8000
+    waves: [0]
+
+  craft_theory:                    # Module 01 specialist
+    model: claude-opus-4-6
+    role: Shannon theorem, channel capacity math,
+          Hamming distance, coding gain derivations.
+          Requires deep mathematical precision.
+    token_budget: 30000
+    wave: 1A
+
+  craft_code:                      # Module 02 specialist
+    model: claude-sonnet-4-6
+    role: Code families survey, parameter tables,
+          performance characterizations,
+          historical timeline construction.
+    token_budget: 30000
+    wave: 1A
+
+  craft_decode:                    # Module 03 specialist
+    model: claude-sonnet-4-6
+    role: Decoding algorithm survey, hardware
+          implementation patterns, error floor
+          analysis, neural decoder research.
+    token_budget: 30000
+    wave: 1A
+
+  craft_app:                       # Module 04 specialist
+    model: claude-sonnet-4-6
+    role: Application domain survey across 8
+          sectors, standards cross-reference,
+          deployment case studies.
+    token_budget: 35000
+    wave: 1B
+
+  craft_frontier:                  # Module 05 specialist
+    model: claude-opus-4-6
+    role: Quantum error correction, AI decoders,
+          6G research. Requires frontier research
+          synthesis with appropriate uncertainty.
+    token_budget: 35000
+    wave: 1B
+
+  craft_gsd:                       # Module 06 synthesis
+    model: claude-opus-4-6
+    role: GSD/Fox Infrastructure integration.
+          Translates FEC research into actionable
+          architecture for Pacific Spine, DACP,
+          GSD Mesh, and CSZ emergency systems.
+    token_budget: 40000
+    wave: 2
+
+  gary_68000:                      # CPU / glue logic
+    model: claude-haiku-4-5
+    role: Configuration management, tool calls,
+          file operations, compilation automation.
+    token_budget: 5000
+    waves: [0, 1A, 1B, 2, 3]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item Complete mathematical foundations of FEC from Shannon (1948) through current state of the art
+  \item All major classical code families: Hamming, BCH, Reed-Solomon, convolutional, turbo, LDPC, polar, fountain/Raptor
+  \item Core decoding algorithms: Viterbi, BCJR/MAP, belief propagation, sum-product, successive cancellation, SC-list
+  \item Eight major application domains with standards cross-references
+  \item Quantum error correction survey: stabilizer codes, surface codes, qLDPC, 2024--2025 hardware demonstrations
+  \item AI/neural decoder research and 6G coding research directions
+  \item FEC selection architecture for Fox Infrastructure Group Pacific Spine
+  \item DACP reliability overlay specification with FEC semantics
+  \item GSD Mesh prototype FEC architecture
+  \item CSZ emergency mesh fountain code specification
+  \item Complete bibliography with peer-reviewed and standards-body sources
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Cryptographic error correction and post-quantum cryptography (separate mission)
+  \item Full VLSI implementation blueprints for custom FEC silicon (requires TSMC/Intel Foundry engagement)
+  \item Proprietary code families under active patent protection without published technical specifications
+  \item ARQ (automatic repeat request) and HARQ in detail beyond their relationship to FEC and hybrid schemes
+  \item Non-binary LDPC codes beyond survey level
+  \item Specific procurement decisions for Fox Infrastructure Group hardware (pending vendor engagement)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*:}]
+  \item Shannon channel capacity theorem stated mathematically with all variables defined, and the tradeoff between code rate and BER explicitly characterized with quantitative examples.
+  \item All seven major code families (Hamming, BCH, RS, convolutional, turbo, LDPC, polar) characterized with: code parameters $(n, k, d_{\min})$, error-correcting capability $t$, code rate, typical overhead, and primary application domain.
+  \item Fountain/Raptor codes documented with: rateless property, LT vs.\ Raptor vs.\ RaptorQ performance, IETF RFC 6330 specification reference, and 3GPP/ATSC 3.0 deployment context.
+  \item Decoding algorithms table mapping each code family to its canonical decoder, decoder complexity class, and hard vs.\ soft decision behavior.
+  \item 5G NR channel coding standard documented: LDPC for data channels with base graph selection criteria, Polar for control channels with CA-polar construction, and KP4 FEC for PAM4 SerDes interfaces.
+  \item Deep space FEC timeline documented: Voyager/Pioneer concatenated codes, Galileo emergency repair, Mars missions turbo codes, and CCSDS current recommendations.
+  \item Optical transport FEC generations documented: G-FEC (RS 255,239), E-FEC (RS enhanced), EFEC (LDPC), and soft-decision FEC with NCG values in dB.
+  \item Quantum error correction documented: stabilizer formalism, surface code threshold, Google Willow result (December 2024), IBM qLDPC transition, and at least 3 QEC code families characterized.
+  \item AI/neural decoder research documented with at least 3 research results, including JPL NASA DNN decoder work and performance comparison to classical decoders.
+  \item Fox Infrastructure Group FEC selection guide produced with minimum 6 Pacific Spine segment types mapped to recommended code families, overhead ratios, and decoder latency budgets.
+  \item DACP reliability layer specification produced: at minimum a conceptual architecture showing how FEC semantics protect the three-part bundle (intent + data + executable code) across agent-to-agent hops.
+  \item CSZ emergency mesh fountain code specification produced: minimum topology failure scenarios, Raptor/RaptorQ configuration recommendation, and expected recovery time under partial mesh disruption.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Integration Point} \\
+\midrule
+GSD Mesh Prototype Spec & Downstream consumer & Module 06 FEC architecture feeds directly into mesh protocol spec \\
+GSD Silicon Layer Spec & Parallel / complementary & Silicon layer will implement FEC codecs; shares decoder hardware spec \\
+Fox Infrastructure Group Plan & Parent mission & Pacific Spine segment FEC selection (Module 06, SC-10) \\
+DACP Protocol Spec & Downstream consumer & DACP reliability overlay uses fountain code semantics for agent bundles \\
+GSD-OS Local Cloud Provisioning & Downstream consumer & Storage FEC selection for local-cloud data integrity \\
+CSZ Emergency Preparedness & Downstream consumer & Emergency mesh fountain code specification (SC-12) \\
+The Space Between (textbook) & Philosophical parent & L-systems, information theory layer (Ch.\ 7--8), Complex Plane of Experience \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The central insight of FEC is not mathematical --- it is ontological. In \textit{The Space Between}, the argument runs that meaning lives not in the nodes of a system but in the connections between them. Shannon's theorem says something similar, in the language of bits: the capacity of a channel is not a property of the transmitter, nor of the receiver, but of the relationship between them, mediated by noise. The code is not the data. The code is the structure that gives the data survivability in a world that does not care whether it arrives.
+
+Every modern code family is a different answer to the question: what geometric structure best exploits the space between valid messages? Turbo codes interleave two recursively-redundant representations of the same data and let them converge iteratively. LDPC codes create a sparse bipartite graph of constraints and propagate beliefs along the edges until the noisy word resolves into a valid codeword. Polar codes split the channel into its extremes --- the worst possible subchannel and the best --- and place data only on the good side. Raptor codes produce a digital fountain: an infinite stream of drops, any sufficiently large collection of which reconstructs the source. In each case, the architecture is the reliability. There is no brute force. There is only structure.
+
+This is the Amiga Principle at the most fundamental layer of communication: not more power, but better design. Not louder signal, but smarter redundancy. For the GSD ecosystem and Fox Infrastructure Group, this principle is not a design aspiration. It is an engineering specification.
+
+\newpage
+
+% ============================================================
+% STAGE 2 --- RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Forward Error Correction --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference contains detailed findings, quantitative data, and sourced citations for all six research modules. Agents executing research missions should treat this section as the primary factual authority; all claims in Stage 3 deliverables must be traceable to entries here or to the source bibliography.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{IEEE Xplore / IEEE Transactions on Information Theory} --- primary peer-reviewed venue for FEC research
+  \item \textbf{IETF (Internet Engineering Task Force)} --- application-layer FEC standards (RFC 5053, RFC 6330 RaptorQ)
+  \item \textbf{ITU-T (International Telecommunication Union)} --- optical transport FEC standards (G.709, G.975, G.709.2)
+  \item \textbf{3GPP (3rd Generation Partnership Project)} --- wireless FEC standards (TS 38.212 for 5G NR)
+  \item \textbf{DVB Project} --- broadcast FEC standards (DVB-S2 LDPC, DVB-H Raptor)
+  \item \textbf{NASA/CCSDS (Consultative Committee for Space Data Systems)} --- deep space FEC recommendations
+  \item \textbf{Bell System Technical Journal} --- Shannon (1948) and Hamming (1950) original papers
+  \item \textbf{MIT / Caltech} --- Gallager (1960) LDPC dissertation; Arikan (2008) polar codes
+  \item \textbf{National Institute of Information and Communications Technology (NICT)} --- ground-to-satellite FEC demonstrations (2025)
+  \item \textbf{Riverlane / IBM / Google} --- quantum error correction hardware results (2024--2025)
+\end{itemize}
+
+\subsection{Module 01 Reference: Theoretical Foundations}
+
+\subsubsection{Shannon's Foundational Theorem (1948)}
+
+Claude Shannon published ``A Mathematical Theory of Communication'' in the \textit{Bell System Technical Journal} in 1948. This single paper established the entire theoretical framework for digital communications and information theory. The core results relevant to FEC are:
+
+\textbf{The Noisy Channel Coding Theorem:} For a discrete memoryless channel (DMC) with capacity $C$, and for any rate $R < C$ and error probability target $\epsilon > 0$, there exists a block code of length $n$ (sufficiently large) such that the maximum probability of decoding error $P_e < \epsilon$. For rates $R > C$, no such code exists. The capacity of the AWGN channel (Additive White Gaussian Noise) is:
+$$C = B \log_2\!\left(1 + \frac{S}{N}\right) \text{ bits/second}$$
+where $B$ is the bandwidth in Hz, $S$ is signal power, and $N$ is noise power.
+
+\textbf{Key practical implication:} Shannon's theorem is an existence proof. It guarantees that reliable codes exist but does not construct them. The proof relies on random Gaussian codes, which are not computationally implementable. The entire subsequent history of coding theory is the engineering effort to find constructive, efficiently decodable codes that achieve Shannon capacity.
+
+\textbf{The Shannon limit for AWGN at capacity:} For a binary-input AWGN channel at $P_e \to 0$, the minimum required $E_b/N_0$ (energy per information bit to noise spectral density ratio) approaches $-1.59$ dB (the Shannon limit). In practice, LDPC codes and turbo codes achieve within 0.1--0.5 dB of this limit with modern decoder implementations.
+
+\subsubsection{The Hamming Distance and Code Design}
+
+Richard Hamming published ``Error Detecting and Error Correcting Codes'' in the \textit{Bell System Technical Journal} in 1950, inventing the first practical error-correcting code. The foundational concepts:
+
+\textbf{Hamming Distance:} $d_H(x, y) = $ number of positions in which bit vectors $x$ and $y$ differ.
+
+\textbf{Minimum Distance of a Code:} $d_{\min} = \min_{c_1 \neq c_2} d_H(c_1, c_2)$ over all pairs of distinct codewords $c_1, c_2$.
+
+\textbf{Error Detection and Correction Capacity:}
+\begin{itemize}[leftmargin=*]
+  \item A code with minimum distance $d_{\min}$ can \textbf{detect} up to $d_{\min} - 1$ errors per codeword
+  \item A code with minimum distance $d_{\min}$ can \textbf{correct} up to $t = \lfloor(d_{\min}-1)/2\rfloor$ errors per codeword
+  \item A code that maximizes $d_{\min}$ for given parameters $(n, k)$ is \textbf{optimal}; codes achieving the Hamming bound exactly are called \textbf{perfect codes}
+\end{itemize}
+
+\textbf{The Hamming (7,4) Code:} The first practical FEC code. Encodes 4 information bits into 7-bit codewords using 3 parity bits. Parameters: $n=7$, $k=4$, $d_{\min}=3$, $t=1$. Can correct any single-bit error. Code rate $R = 4/7 \approx 0.571$. The generator matrix $G$ and parity check matrix $H$ provide systematic encoding; syndrome computation at the decoder identifies and corrects the single error.
+
+\subsubsection{Code Rate and Overhead Tradeoffs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{1.8cm}C{2cm}C{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Code Rate} & \tableheader{Overhead} & \tableheader{NCG Range} & \tableheader{Complexity} & \tableheader{Typical Use} \\
+\midrule
+$R = 1$ (none) & 0\% & 0 dB & None & Perfect channel \\
+$R = 0.93$ (7\%) & 7\% & 5--6 dB & Low & Optical G-FEC \\
+$R = 0.87$ (15\%) & 15\% & 7--8 dB & Medium & Enhanced optical \\
+$R = 0.80$ (25\%) & 25\% & 9--11 dB & High & SD-FEC optical \\
+$R = 3/4$ & 33\% & 8--9 dB & Medium & 5G NR LDPC \\
+$R = 1/2$ & 100\% & 10--11 dB & High & Turbo / deep space \\
+$R = 1/3$ & 200\% & 11--12 dB & Very high & Deep space extreme \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Net Coding Gain (NCG)}
+
+NCG is defined as the improvement in received optical sensitivity (or effective SNR) provided by the FEC code, measured in dB at a target post-FEC BER (typically $10^{-13}$ to $10^{-15}$ for optical transport). NCG is calculated as:
+$$\text{NCG} = E_b/N_0\,\text{(uncoded)} - E_b/N_0\,\text{(coded)}$$
+at the target BER, after accounting for the bandwidth expansion due to the overhead. Shannon's NCG limit for a given overhead represents the theoretical maximum NCG achievable by any code. Modern soft-decision LDPC codes approach within 0.5--1.0 dB of this limit.
+
+\subsubsection{The Cliff Effect}
+
+FEC systems exhibit a threshold behavior called the ``cliff effect'': above the design pre-FEC BER threshold, the post-FEC BER improves exponentially (waterfall region). Below the threshold (worse channel), the decoder fails and the post-FEC BER approaches the uncoded BER (cliff edge). This threshold behavior becomes more pronounced as codes approach the Shannon limit (stronger codes have steeper waterfall slopes but also more abrupt cliff edges). The cliff effect has critical implications for infrastructure design: systems must be designed with enough link margin to remain above the pre-FEC BER threshold under worst-case channel conditions.
+
+\subsection{Module 02 Reference: Code Families Taxonomy}
+
+\subsubsection{Historical Timeline}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Code / Event} & \tableheader{Inventor(s)} & \tableheader{Significance} \\
+\midrule
+1948 & Channel capacity theorem & Claude Shannon & Theoretical foundation; proves reliable codes exist \\
+1950 & Hamming (7,4) code & Richard Hamming & First practical single-error-correcting code \\
+1955 & Binary Erasure Channel & Peter Elias (MIT) & Erasure channel model; Raptor code precursor \\
+1959 & BCH codes & Hocquenghem; Bose \& Ray-Chaudhuri & Multi-error-correcting binary block codes \\
+1960 & Reed-Solomon codes & Irving Reed, Gus Solomon & Non-binary, burst-error-correcting; MDS property \\
+1960 & LDPC codes & Robert Gallager (MIT) & Near-Shannon limit; ignored for 36 years \\
+1967 & Viterbi algorithm & Andrew Viterbi & Efficient ML decoding of convolutional codes \\
+1974 & BCJR / MAP algorithm & Bahl, Cocke, Jelinek, Raviv & Foundation of turbo decoder; soft-output decoding \\
+1993 & Turbo codes & Berrou, Glavieux, Thitimajshima & Near-Shannon limit; revitalized coding research \\
+1996 & LDPC rediscovery & MacKay, Neal & Belief propagation decoding; modern LDPC era begins \\
+2002 & LT codes & Michael Luby & First practical fountain codes \\
+2001/2004 & Raptor codes & Amin Shokrollahi & Fountain codes with linear-time encoding/decoding \\
+2008 & Polar codes & Erdal Arikan & First codes proven to achieve Shannon capacity; 5G NR adoption \\
+2011 & RaptorQ (RFC 6330) & IETF & Enhanced Raptor; ATSC 3.0 standard FEC \\
+2024/25 & Quantum LDPC (qLDPC) & IBM / Google / Riverlane & Practical QEC on real quantum hardware \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Block Code Family Parameters}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{1.8cm}C{1.8cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Code Family} & \tableheader{$(n, k)$ Example} & \tableheader{$d_{\min}$} & \tableheader{$t$ (correct)} & \tableheader{Rate} & \tableheader{Key Property} \\
+\midrule
+Hamming (7,4) & $(7, 4)$ & 3 & 1 & 0.571 & Single-error-correcting; SEC-DED with parity \\
+BCH (31,16) & $(31, 16)$ & 7 & 3 & 0.516 & Multi-error-correcting; binary GF construction \\
+Reed-Solomon RS(255,239) & $(255, 239)$ & 17 & 8 & 0.937 & Non-binary; MDS; burst-error immunity \\
+Reed-Solomon RS(255,223) & $(255, 223)$ & 33 & 16 & 0.875 & CD audio / NASA standard; 16-symbol correction \\
+Reed-Solomon KP4 RS(544,514) & $(544, 514)$ & 31 & 15 & 0.945 & PAM4 SerDes; 200/400GbE standard \\
+LDPC (1944, 1296) & $(1944, 1296)$ & $\gg$ & many & 0.667 & 802.11n WiFi LDPC; iterative BP decoding \\
+LDPC DVB-S2 & $(64800, k)$ & high & many & var & Satellite TV; 7--8 dB NCG; 0.5--9/10 rates \\
+Polar (1024, 512) & $(1024, 512)$ & -- & -- & 0.5 & 5G NR control channel; provably capacity-achieving \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Reed-Solomon Codes: The Workhorse of Reliability}
+
+Reed-Solomon (RS) codes are non-binary BCH codes that operate on $m$-bit symbols over a Galois field $\text{GF}(2^m)$. An RS$(n,k)$ code with symbol size $m$ bits has:
+\begin{itemize}[leftmargin=*]
+  \item Block length $n = 2^m - 1$ symbols (in GF($2^m$)); $n = 255$ for $m=8$ (most common)
+  \item Number of parity symbols $r = n - k$; capable of correcting $t = r/2$ symbol errors
+  \item Minimum distance $d_{\min} = r + 1 = n - k + 1$ (maximum possible for a linear code --- RS is MDS)
+  \item Exceptionally effective against burst errors: a $b$-bit burst corrupts at most $\lceil b/m \rceil$ symbols
+\end{itemize}
+
+RS codes have been the dominant industrial FEC workhorse for 40+ years: NASA's Voyager mission (RS(255,223)), CD/DVD/Blu-ray disc error correction, QR code recovery, optical transport (G-FEC RS(255,239)), and Ethernet KP4 FEC (RS(544,514) for PAM4 400GbE).
+
+\subsubsection{LDPC Codes: The Near-Shannon Standard}
+
+Low-Density Parity-Check (LDPC) codes, invented by Robert Gallager at MIT in 1960 and rediscovered by MacKay and Neal in 1996, are defined by a sparse parity-check matrix $H$ where the density of 1s is very low. This sparsity enables the sum-product (belief propagation) decoding algorithm to operate efficiently on the bipartite Tanner graph representation.
+
+Key properties:
+\begin{itemize}[leftmargin=*]
+  \item Can be designed to approach the Shannon capacity on AWGN channels to within 0.0045 dB (capacity-approaching sequences shown by Richardson, Shokrollahi, and Urbanke in 2001)
+  \item No inherent minimum distance limitations (unlike turbo codes); better performance at high code rates ($R \geq 3/4$) and lower error floors than turbo codes
+  \item Quasi-cyclic LDPC (QC-LDPC) structures enable highly parallel hardware implementation with low routing complexity
+  \item Used in: 5G NR data channels (3GPP TS 38.212 base graphs BG1 and BG2), 10GBase-T Ethernet, Wi-Fi 802.11n/ac/ax, DVB-S2 satellite, DOCSIS 3.1, and optical transport SD-FEC
+\end{itemize}
+
+\subsubsection{Polar Codes: Proven Capacity Achievement}
+
+Erdal Arikan published the polar code construction in 2008, proving for the first time that a constructive coding scheme with efficient (polynomial-time) encoding and decoding can achieve the symmetric capacity of any binary-input DMC. The key mechanism is \textit{channel polarization}: applying $n$ copies of a channel through a specific recursive butterfly transform splits the $n$ channels into two groups as $n \to \infty$ --- a fraction approaching $C$ of the channels become noiseless (``good channels''), and a fraction approaching $1-C$ become completely noisy (``bad channels''). Information bits are placed on good channels; frozen bits (known to the receiver) on bad channels.
+
+Practical polar codes use:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Successive Cancellation (SC) decoding:} $O(n \log n)$ complexity; relatively low performance at short block lengths
+  \item \textbf{SC-List (SCL) decoding with CRC (CA-Polar):} Significant performance improvement; used in 5G NR
+  \item 5G NR uses polar codes for control channels (PBCH, PDCCH, PUCCH) with CRC-aided list decoding; LDPC for data channels (PDSCH, PUSCH)
+\end{itemize}
+
+\subsubsection{Turbo Codes: The 1993 Revolution}
+
+Berrou, Glavieux, and Thitimajshima presented turbo codes at ICC 1993, demonstrating for the first time near-Shannon-limit error correction in a practical code --- achieving $10^{-5}$ BER at only 0.5 dB from the Shannon limit for a rate-1/2 code at that time. Turbo codes use:
+\begin{itemize}[leftmargin=*]
+  \item Two parallel recursive systematic convolutional (RSC) encoders separated by an interleaver
+  \item Iterative decoding using two soft-input/soft-output (SISO) MAP decoders exchanging extrinsic information (``turbo effect'')
+  \item BCJR/MAP or Log-MAP algorithm for each constituent decoder
+  \item Performance improves with more decoding iterations (typically 6--8 for good latency/performance tradeoff)
+  \item Primary weakness: error floor at high $E_b/N_0$ due to low-weight codewords; worse than LDPC at higher code rates
+  \item Used in 3G UMTS, 4G LTE, deep space (CCSDS), and satellite communications
+\end{itemize}
+
+\subsubsection{Fountain and Raptor Codes: Rateless Reliability}
+
+Fountain codes (rateless erasure codes) represent a fundamentally different design philosophy: rather than transmitting a fixed set of $n$ encoded symbols for $k$ source symbols, the encoder can produce an \textit{unlimited} stream of encoded symbols on demand. The receiver collects any $k' \approx k(1+\epsilon)$ symbols (from any subset of transmitted symbols) and can recover the original $k$ source symbols with high probability.
+
+\textbf{LT codes} (Luby Transform, Michael Luby, 2002): The first practical fountain codes. Each encoded symbol is the XOR of a pseudo-randomly chosen set of source symbols, with the degree (number of source symbols XORed) chosen from the Robust Soliton Distribution. Decoded by belief propagation (iterative message passing). Linear-time encoding and decoding achievable with properly tuned degree distributions.
+
+\textbf{Raptor codes} (Amin Shokrollahi, 2001/2004): Two-stage architecture: (1) a fixed-rate ``pre-code'' (typically LDPC or HDPC --- high-density parity-check) generates intermediate symbols from source symbols, providing a regularization that prevents decoding failure; (2) LT encoding of the intermediate symbols. Raptor codes achieve linear-time encoding/decoding with reception overhead approaching zero.
+
+\textbf{RaptorQ (IETF RFC 6330, 2011):} The most advanced standardized fountain code. Parameters:
+\begin{itemize}[leftmargin=*]
+  \item Supports up to 56,403 source symbols per source block
+  \item Up to 16,777,216 encoded symbols generable per source block
+  \item Recovery of source block from any $k$ received symbols with very high probability; typical reception overhead $\epsilon < 0.01$ (i.e., need at most 1\% more symbols than $k$)
+  \item Average overhead converges to approximately $2/k$ additional symbols (for large $k$, essentially zero overhead)
+  \item Specified in ATSC 3.0 (Next Gen TV) A/331 for broadcast video streaming and file delivery
+  \item Used in 3GPP eMBMS (enhanced Multimedia Broadcast Multicast Service) for mobile TV
+\end{itemize}
+
+\subsection{Module 03 Reference: Decoding Algorithms}
+
+\subsubsection{Decoder Taxonomy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2.5cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Algorithm} & \tableheader{Code Family} & \tableheader{Complexity} & \tableheader{Soft/Hard} & \tableheader{Key Property} \\
+\midrule
+Lookup table & Hamming, short codes & $O(1)$ & Hard & Syndrome lookup; negligible latency \\
+Berlekamp-Massey & Reed-Solomon & $O(n^2)$ & Hard & Berlekamp-Massey for error locator polynomial \\
+Viterbi & Convolutional & $O(n \cdot 2^K)$ & Soft & MLE for convolutional; exponential in constraint length $K$ \\
+BCJR / MAP & Turbo constituent & $O(n \cdot |\text{states}|)$ & Soft & Optimal soft-output; foundation of turbo decoder \\
+Log-MAP & Turbo & $O(n \cdot |\text{states}|)$ & Soft & Numerically stable Log-MAP; standard turbo impl. \\
+Max-Log-MAP & Turbo & $O(n \cdot |\text{states}|)$ & Soft & Approximation of Log-MAP; hardware-friendly \\
+Sum-Product (BP) & LDPC & $O(n \cdot d_c \cdot d_v)$ & Soft & Iterative message passing on Tanner graph \\
+Min-Sum & LDPC & $O(n \cdot d_c)$ & Soft & Approximation of sum-product; hardware-efficient \\
+Successive Cancel. & Polar & $O(n \log n)$ & Soft & Sequential; low complexity but poor short-block perf. \\
+SC-List (SCL) & Polar (CA-Polar) & $O(Ln \log n)$ & Soft & $L$ candidate paths; 5G NR uses $L=8$ \\
+Belief Prop. & LDPC / general & $O(\text{edges} \cdot I)$ & Soft & Converges in $I$ iterations; general-purpose \\
+Neural Decoder & Any & Learned & Soft & DNN-parameterized; can exceed ML in specific regimes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Hard vs. Soft Decision Decoding}
+
+A fundamental tradeoff in FEC implementation is between hard-decision and soft-decision decoding:
+
+\textbf{Hard-Decision FEC (HD-FEC):} The receiver first makes a binary decision (bit is 0 or 1) based on a threshold, then passes the binary sequence to the FEC decoder. The decoder operates on binary data. Advantage: simple, low power, low latency. Disadvantage: discards the analog information about \textit{how close} the received signal was to the threshold, losing approximately 2--3 dB of coding gain compared to soft-decision.
+
+\textbf{Soft-Decision FEC (SD-FEC):} The receiver passes reliability information (log-likelihood ratios, LLRs) directly to the FEC decoder without hard quantization. The decoder uses the probabilistic information in the LLRs to resolve ambiguous bits. Advantage: 2--3+ dB additional NCG; essential for approaching Shannon capacity. Disadvantage: greater hardware complexity, higher power consumption. Used in all modern coherent optical systems (100G and above), 5G NR, and deep-space communications.
+
+\subsubsection{Belief Propagation on Tanner Graphs}
+
+The Tanner graph is a bipartite graph $G = (V_n, V_m, E)$ representing an LDPC code, where:
+\begin{itemize}[leftmargin=*]
+  \item $V_n$ = set of $n$ variable nodes (one per code bit)
+  \item $V_m$ = set of $m$ check nodes (one per parity check equation)
+  \item Edge $(i,j) \in E$ iff column $i$ of $H$ has a 1 in row $j$
+\end{itemize}
+
+The sum-product algorithm passes messages along edges iteratively. At each check node, the message to variable node $i$ is the estimated log-likelihood that the parity constraint is satisfied given all other variable node messages. At each variable node, the message to check node $j$ is the sum of all incoming check node messages plus the channel LLR for that bit. After $I$ iterations, the decoder makes a hard decision on each bit. The algorithm converges quickly on cycle-free graphs (trees); short cycles in the Tanner graph degrade performance and create the error floor phenomenon.
+
+\subsubsection{The Error Floor Problem}
+
+All iterative FEC codes (LDPC, turbo) exhibit an ``error floor'' --- a flattening of the BER curve at high $E_b/N_0$ values where the BER decreases more slowly than the waterfall region. This is caused by:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{LDPC:} Trapping sets (small absorbing sets in the Tanner graph that cause iterative decoder failures) and near-codewords
+  \item \textbf{Turbo codes:} Low-weight codewords corresponding to specific input patterns that the constituent RSC encoders produce
+\end{itemize}
+
+Error floor behavior is critical for optical transport applications, where target BER is $10^{-13}$ to $10^{-15}$, which is well into the error floor regime for many LDPC designs. Staircase codes (a class of spatially coupled LDPC codes) were specifically designed to push the error floor below $10^{-15}$ and are standardized in ITU-T G.709.2 as the first coherent FEC providing 9.38 dB NCG.
+
+\subsubsection{Neural Network Decoders (Emerging)}
+
+Deep neural networks are being applied to FEC decoding in three distinct approaches:
+
+\textbf{1. Deep Learning Decoder (DLD):} Replace the belief propagation iterations with a deep unfolded network where each layer corresponds to one BP iteration with learned weights. Demonstrated to approach ML performance with learned weights at shorter block lengths where standard BP underperforms.
+
+\textbf{2. Model-Free Neural Decoder:} Treat the channel model as unknown; train a neural network end-to-end on channel observations and target codewords. Enables operation on channels for which no analytical model exists.
+
+\textbf{3. Neural-Assisted BP (NABP):} Augment the standard BP algorithm with a neural network that predicts and suppresses trapping set failures, improving the error floor without redesigning the code.
+
+NASA JPL's active research program (Divsalar, Cheng, Dolinar, 2022) applies DNNs specifically to quantum LDPC codes, targeting ML performance with 100\%+ throughput improvement and $\geq 2$ orders of magnitude reduction in decoding error probability vs. best existing classical decoders.
+
+\subsection{Module 04 Reference: Application Domains}
+
+\subsubsection{Wireless Communications: 2G through 5G NR}
+
+The evolution of wireless FEC tracks the progression from simple codes to near-Shannon-limit codes as processing power became available:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Gen.} & \tableheader{FEC Scheme} & \tableheader{Code Parameters} & \tableheader{Target BER / Use Case} \\
+\midrule
+2G & Convolutional (CC) & Rate 1/2, K=5 & $10^{-3}$ voice; GSM EDGE \\
+3G & Turbo codes (3GPP) & Rate 1/3 (UMTS) & $10^{-6}$ data; HSDPA \\
+4G & Turbo (LTE) + LDPC & Turbo: LTE-specific interleaver; LDPC: 802.11n & $10^{-6}$--$10^{-9}$; LTE-Advanced \\
+5G NR & LDPC (data) + Polar (ctrl) & LDPC: BG1 (high rate) / BG2 (low rate); CA-Polar L=8 & $10^{-5}$; eMBB + URLLC \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{5G NR (3GPP TS 38.212):} The 5G New Radio standard uses two distinct FEC schemes:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{LDPC (transport channels):} Two base graphs (BG1 for large blocks $k > 292$, code rates $R \geq 1/4$; BG2 for small blocks or very low rates). BG1 has maximum block size 8448 bits; BG2 has maximum block size 3840 bits. Quasi-cyclic structure with lift size $Z$ from 2 to 384. Rate matching via shortening and puncturing.
+  \item \textbf{Polar (control channels):} CRC-aided polar (CA-Polar) with list size $L=8$ for PBCH (broadcast), PDCCH (downlink control), and PUCCH (uplink control). Block lengths from 12 to 512 bits.
+  \item \textbf{KP4 FEC for PAM4 SerDes:} RS(544,514) with $t=15$ provides approximately 7 dB coding gain for 200/400GbE interfaces, compensating for the $\approx 9.54$ dB detection penalty of PAM4 vs. NRZ signaling.
+\end{itemize}
+
+\subsubsection{Optical Fiber Transport: Generations of FEC}
+
+Optical transport FEC has evolved through four standardized generations with dramatically increasing NCG:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{3.5cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Generation} & \tableheader{Code} & \tableheader{Overhead} & \tableheader{NCG (dB)} & \tableheader{Standard} \\
+\midrule
+G-FEC & RS(255,239) & 7\% & 5.6 & ITU-T G.709 / G.975 \\
+E-FEC & RS(255,223) enhanced & 7\% & 6.2 & ITU-T G.975.1 \\
+HG-FEC (Staircase) & Staircase HD & 20\% & 9.38 & ITU-T G.709.2 \\
+SD-FEC (oFEC) & Soft-decision LDPC & 20--25\% & 11.1 (QPSK) / 11.6 (16QAM) & Open ROADM / CableLabs P2P v2.0 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Staircase FEC (HG-FEC), defined in ITU-T G.709.2 and standardized by CableLabs for 100G coherent P2P, provides 9.38 dB NCG at a pre-FEC BER threshold of $4.5 \times 10^{-3}$. The openFEC (oFEC) for 200G P2P provides 11.1 dB NCG for QPSK and 11.6 dB for 16QAM at pre-FEC BER of $2 \times 10^{-2}$, using 3 soft-decision iterations. Selection between hard-decision and soft-decision FEC involves tradeoffs: SD-FEC provides 1+ dB additional NCG at the cost of higher ASIC complexity, power consumption, and latency.
+
+\subsubsection{Deep Space Communications: NASA and CCSDS}
+
+Deep space communication represents the most demanding FEC environment: extreme link distances ($10^{12}$ to $10^{13}$ km), negligible transmit power (a few watts for many probes), and one-way propagation delays of 20 minutes to many hours preventing retransmission. FEC is not optional; it is existential.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mission / Era} & \tableheader{FEC Scheme} & \tableheader{Performance} & \tableheader{Notes} \\
+\midrule
+Voyager 1\&2 (1977) & RS(255,223) concatenated with convolutional $R=1/2$ & Near state-of-art for era & Both spacecraft now $>20$ billion km distant; FEC still operational \\
+Pioneer 10/11 & Simple convolutional $R=1/2$ & Adequate for mission & Early deep-space benchmark \\
+Galileo (1989) & RS(255,223) + CC & Mission saved by FEC & High-gain antenna failed; FEC enabled data recovery at 10 bps \\
+Mars Reconn. Orbiter & Turbo code $R=1/6$ & Near-Shannon at era & CCSDS turbo code; 2--3 dB improvement over previous \\
+Lunar Gateway / LCRD & LDPC + advanced FEC & Approaching Shannon & NASA SCaN program; laser comm. + FEC \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{NICT/NITech/JAXA 2025 milestone:} The first successful demonstration of 5G NR LDPC codes and DVB-S2 LDPC codes on a ground-to-GEO satellite laser communication link (LUCAS satellite) was presented at ICSOS 2025. Using optimized interleaving parameters, both codes successfully corrected burst data errors caused by atmospheric turbulence fading on a 60 Mbps downlink. This result confirms the viability of terrestrial 5G FEC standards for space optical communication.
+
+\subsubsection{Flash Memory and Solid-State Storage}
+
+NAND flash memory is the dominant non-volatile storage technology, and its raw BER has been increasing as process nodes shrink and cell densities increase (SLC $\to$ MLC $\to$ TLC $\to$ QLC). FEC is essential to providing the storage-grade reliability ($<10^{-15}$ unrecoverable bit error rate) that enterprise applications require:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{NAND Type} & \tableheader{Raw BER} & \tableheader{FEC Scheme} & \tableheader{Notes} \\
+\midrule
+SLC (1 bit/cell) & $10^{-6}$--$10^{-5}$ & Hamming / BCH (weak) & Sufficient; simple decoder \\
+MLC (2 bits/cell) & $10^{-4}$--$10^{-3}$ & BCH $t=8$--$24$ & BCH standard; ECC controller \\
+TLC (3 bits/cell) & $10^{-3}$--$10^{-2}$ & LDPC (soft decision) & NVMe SSDs; LDPC transition \\
+QLC (4 bits/cell) & $10^{-2}$--$10^{-1}$ & Strong LDPC + RAID & Higher overhead; shorter P/E cycles \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Modern enterprise NVMe SSDs use soft-decision LDPC with dynamic code rate adaptation based on NAND health state. As cells wear out (P/E cycles increase raw BER), the FEC controller reduces the code rate (increases overhead) to maintain the target uncorrectable BER. QLC NAND may require 20--30\% ECC overhead in late life.
+
+\subsubsection{Video Streaming and Broadcast: Raptor in Production}
+
+RaptorQ is the dominant application-layer FEC for broadcast and multicast streaming:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{ATSC 3.0 (Next Gen TV):} RaptorQ specified in A/331 for both real-time streaming (ROUTE protocol) and file delivery (datacasting). Enables robust mobile TV reception under Rayleigh fading and partial signal blockage.
+  \item \textbf{3GPP eMBMS:} Raptor code standardized in 3GPP TS 26.346 for multimedia broadcast multicast service. Qualcomm's analysis (2009) demonstrated that for $k \geq 1000$ source symbols, average reception overhead converges to approximately 0.2\% --- essentially zero beyond the source symbols.
+  \item \textbf{DVB-H and DVB-IPTV:} Raptor codes standardized for handheld TV broadcasting and IP-based delivery.
+  \item \textbf{SD-WAN / Enterprise:} Packet-layer FEC (parity over UDP streams) is used for real-time VoIP, video conferencing, and RTP streams. Palo Alto Networks SD-WAN FEC supports branch-to-hub encoding/decoding with per-application error correction profiles. FEC is appropriate only for VPN tunnel links (not DIA links) and only for loss-sensitive applications (VoIP, video), as it introduces bandwidth overhead and CPU cost.
+\end{itemize}
+
+\subsection{Module 05 Reference: Emerging Frontiers}
+
+\subsubsection{Quantum Error Correction (QEC)}
+
+Quantum information is inherently fragile: qubits (quantum bits) can suffer bit-flip errors ($X$ errors), phase-flip errors ($Z$ errors), and combined errors ($Y = iXZ$ errors), and are further subject to decoherence and measurement disturbance. Unlike classical bits, quantum information cannot be cloned (no-cloning theorem), making direct redundancy impossible. QEC solves this through the \textit{stabilizer formalism}: encode one logical qubit into multiple physical qubits using entanglement, such that error syndromes (parity checks on the stabilizer generators) can be measured without disturbing the encoded logical information.
+
+\textbf{Surface Codes (topological codes):} The dominant near-term QEC approach. Logical qubits are encoded in a 2D grid of physical qubits. Error correction is achieved by repeated syndrome measurements; the minimum-weight perfect matching (MWPM) decoder decodes the syndrome pattern. The surface code threshold (minimum required physical qubit fidelity for fault-tolerant operation) is approximately 1\%, making it compatible with current hardware.
+
+\textbf{Quantum LDPC (qLDPC) codes:} Classical LDPC codes adapted to the quantum setting through the CSS (Calderbank-Shor-Steane) construction, producing codes where the parity check matrix $H$ satisfies the symplectic inner product condition $H_X H_Z^T = 0$. qLDPC codes offer better encoding rates (logical qubits per physical qubit) than surface codes, but have been harder to implement due to long-range qubit connectivity requirements.
+
+\textbf{2024--2025 Hardware Milestones:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Google Willow (December 2024):} First demonstration of QEC clearly bringing errors down in practice as the number of physical qubits increases --- the defining threshold behavior proving practical fault tolerance. This was the inflection point where QEC moved from theory to tangible hardware.
+  \item \textbf{IBM qLDPC transition (2024):} IBM transitioned production quantum processors to qLDPC codes, achieving better logical qubit fidelity per physical qubit than surface codes at equivalent distances.
+  \item \textbf{Oxford Ionics (2025):} Achieved 99.99\% fidelity for two-qubit gates using trapped-ion hardware --- a threshold result for practical QEC.
+  \item \textbf{Research explosion (2025):} 120+ peer-reviewed QEC papers published between January and October 2025, up from 36 in all of 2024 (Riverlane 2025 report). Breaking RSA encryption with quantum computers may require as few as 1 million qubits (down from earlier estimates of 20 million) with improved QEC efficiency.
+\end{itemize}
+
+\textbf{NASA JPL qLDPC Neural Decoder Research (2022):} Active research applying DNNs to decode quantum LDPC codes. Target metrics: approach maximum likelihood (ML) decoder performance with $\geq 100\%$ throughput improvement, $\geq 50\%$ reduction in hardware complexity and power, $\geq 2$ orders of magnitude reduction in decoding error probability vs. best existing classical decoders (Divsalar, Cheng, Dolinar et al., JPL Task 2022).
+
+\subsubsection{AI-Native and Neural FEC Decoders}
+
+The convergence of deep learning and FEC is producing a new class of ``learned'' decoders that can outperform hand-crafted algorithms in specific regimes:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Unfolded BP Networks:} Unfold the $I$ iterations of belief propagation into a $I$-layer deep network; learn per-layer weights to optimize performance. Particularly effective at short block lengths where standard BP underperforms.
+  \item \textbf{Reinforcement Learning for Code Rate Adaptation:} Use RL to dynamically select code rate and overhead in response to channel quality observations, approaching the optimal rate-agile policy.
+  \item \textbf{DNN Channel Estimators Interleaved with FEC:} Novel LDPC and polar decoders with integrated DNN channel estimators that iteratively improve channel estimates using soft LLR feedback from the FEC decoder. Demonstrated in the 2023 MDPI Sensors paper on AWGN + ISI channels.
+  \item \textbf{End-to-End Learned Coding:} Treat the encoder and decoder as a jointly trained autoencoder over the channel. Has produced near-optimal results for specific short block lengths but scaling to practical block sizes remains an open research problem.
+\end{itemize}
+
+\subsubsection{6G Channel Coding Research}
+
+The 6G standardization process (targeting commercial deployment $\approx 2030$) is evaluating FEC schemes beyond 5G's LDPC + Polar combination. Key directions include:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Concatenated RS + Polar codes:} A 2025 \textit{Scientific Reports} (Nature) paper evaluated concatenated RS + next-generation Polar codes for 6G use cases. Polar codes in 6G must address LDPC's limitation at control channels (short block lengths) and Polar's limitation at medium/long block lengths, where list size $L$ must grow large.
+  \item \textbf{Semantic coding:} A paradigm shift from Shannon's bit-level reliability toward coding that preserves \textit{meaning} at the application layer, allowing reconstruction of the semantic content of a message even if the precise bit pattern is not recovered. Relevant for AI-generated content, compressed scene representations, and neural radiance field transmission.
+  \item \textbf{Ultra-Reliability Low Latency (URLLC) requirements for 6G:} Target $10^{-7}$ BLER with 100 $\mu$s latency at short block lengths. Current polar + LDPC achieve $\approx 10^{-5}$ reliably; 6G targets require 2 orders of magnitude additional reliability improvement.
+  \item \textbf{AI-native channel coding:} 3GPP Study Item on AI/ML for NR physical layer (expected standard contributions 2026--2027) includes channel coding as a candidate AI application area.
+\end{itemize}
+
+\subsection{Module 06 Reference: GSD / Fox Infrastructure Integration}
+
+\subsubsection{Pacific Spine Segment FEC Selection}
+
+The Fox Infrastructure Group Pacific Spine spans multiple distinct communication segments, each with different noise models and requirements:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Segment Type} & \tableheader{Channel Model} & \tableheader{Recommended FEC} & \tableheader{Rationale} \\
+\midrule
+Terrestrial fiber (trunk) & AWGN, very low BER & SD-FEC LDPC (oFEC) 20\% OH & Best NCG; latency acceptable \\
+Submarine cable (Pacific) & AWGN + seismic risk & HD Staircase FEC or SD-FEC & Staircase for error floor; SD for long runs \\
+Free-space optical (FSO) & Burst fading (turbulence) & 5G NR LDPC + interleaver & NICT 2025 result; burst-error robust \\
+GEO satellite uplink & AWGN + Doppler & DVB-S2 LDPC or turbo $R=1/3$ & Long delay; strong FEC; CCSDS-aligned \\
+LEO constellation link & Fast fading, low latency & Raptor/RaptorQ (erasure) & Topology disruption; fountain robustness \\
+Mesh radio (tribal sites) & Rayleigh fading, burst & 5G NR LDPC or RS-based FEC & Short-range; low latency priority \\
+Emergency CSZ mesh & Partial disruption & RaptorQ fountain codes & Topology-agnostic; any-subset recovery \\
+FoxCompute ocean nodes & Storage (NAND) & Strong LDPC (SD, 20--25\% OH) & QLC-class raw BER; data integrity critical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{DACP Reliability Overlay with FEC Semantics}
+
+The GSD Deterministic Agent Communication Protocol (DACP) defines agent-to-agent messages as three-part structured bundles: (1) human intent specification, (2) structured data payload, and (3) executable code block. In multi-hop agent pipelines, these bundles traverse multiple context windows, tool calls, and serialization/deserialization operations, each of which introduces potential for corruption (JSON encoding errors, context truncation, tool call failures).
+
+A DACP reliability overlay informed by FEC principles would include:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Structured redundancy:} Bundle checksums (BLAKE3 hash) for integrity verification at each hop; Reed-Solomon or CRC encoding of critical numerical fields (context window IDs, agent addresses, milestone sequence numbers)
+  \item \textbf{Erasure-resilient bundle serialization:} Critical agent state encoded in a fountain-code-inspired format where any $k$-of-$n$ sub-fields contain enough information to reconstruct the full bundle
+  \item \textbf{Systematic code structure:} The original plaintext human intent is always present in the bundle (systematic code property), enabling human fallback even when automated decoding fails
+  \item \textbf{Interleaving:} For long agent execution chains, interleave bundle fields to distribute context window boundary corruption across multiple fields rather than catastrophically corrupting a single field
+  \item \textbf{Soft-decision handoff:} Rather than binary accept/reject of incoming bundles, DACP agents pass confidence-weighted soft assessments to the next agent, enabling turbo-style iterative refinement in multi-agent loops
+\end{itemize}
+
+\subsubsection{CSZ Emergency Mesh: Fountain Code Architecture}
+
+The Cascadia Subduction Zone (CSZ) emergency mesh must maintain communications when conventional routing fails: fiber cuts, power outages, base station damage, and topology fragmentation. RaptorQ fountain codes are the optimal FEC choice because:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Topology-agnostic:} Any receiver that accumulates $\approx k(1+\epsilon)$ packets from any transmission sources (not necessarily sequential or from the same transmitter) can reconstruct the original data. Perfect for disrupted mesh topologies.
+  \item \textbf{No coordination required:} The fountain encoding does not require the sender to know which packets the receiver has received. Broadcasting continues indefinitely; receivers decode when they have enough.
+  \item \textbf{Near-zero overhead:} Reception overhead $\epsilon \approx 0.002$ for $k \geq 1000$ --- only 0.2\% more data than the original needed for reconstruction.
+  \item \textbf{Linear-time decoding:} Raptor codes decode in $O(k)$ operations, enabling real-time operation on mesh nodes with limited processing power (e.g., Raspberry Pi-class hardware in emergency relay nodes).
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Boundary Type} & \tableheader{Specification} \\
+\midrule
+Source quality & ABSOLUTE & All quantitative claims traced to peer-reviewed papers, standards bodies (IEEE, IETF, ITU-T, 3GPP, CCSDS), or government/agency reports \\
+Numerical attribution & ABSOLUTE & Every NCG value, BER threshold, and overhead percentage attributed to specific standard or paper \\
+No policy advocacy & ABSOLUTE & FEC selection recommendations presented as engineering tradeoffs; no advocacy for specific vendors or proprietary implementations \\
+Security sensitivity & GATE & FEC-cryptography interactions (wiretap channel theory, physical layer security) addressed at survey level only; no operational detail that aids exploitation \\
+Quantum hardware claims & ANNOTATE & QEC hardware results represent state-of-art as of early 2026; quantum computing landscape changes rapidly; appropriate uncertainty language used for forward-looking claims \\
+Tribal/Indigenous site data & ABSOLUTE & Mesh node placement at tribal sovereign sites described architecturally; no specific geographic coordinates published in this document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Foundational Papers}
+
+\begin{itemize}[leftmargin=*]
+  \item Shannon, C.E. (1948). ``A Mathematical Theory of Communication.'' \textit{Bell System Technical Journal}, 27(3), 379--423; 27(4), 623--656.
+  \item Hamming, R.W. (1950). ``Error Detecting and Error Correcting Codes.'' \textit{Bell System Technical Journal}, 29(2), 147--160.
+  \item Gallager, R.G. (1960). \textit{Low-Density Parity-Check Codes} (Sc.D. thesis). MIT, Cambridge, MA.
+  \item Reed, I.S., and Solomon, G. (1960). ``Polynomial Codes over Certain Finite Fields.'' \textit{Journal of the Society for Industrial and Applied Mathematics}, 8(2), 300--304.
+  \item Viterbi, A.J. (1967). ``Error Bounds for Convolutional Codes and an Asymptotically Optimum Decoding Algorithm.'' \textit{IEEE Transactions on Information Theory}, 13(2), 260--269.
+  \item Bahl, L., Cocke, J., Jelinek, F., and Raviv, J. (1974). ``Optimal Decoding of Linear Codes for Minimizing Symbol Error Rate.'' \textit{IEEE Transactions on Information Theory}, 20(2), 284--287.
+  \item Berrou, C., Glavieux, A., and Thitimajshima, P. (1993). ``Near Shannon Limit Error-Correcting Coding and Decoding: Turbo-Codes.'' \textit{Proceedings of ICC'93}, IEEE, 2, 1064--1070.
+  \item MacKay, D.J.C. (1999). ``Good Error-Correcting Codes Based on Very Sparse Matrices.'' \textit{IEEE Transactions on Information Theory}, 45(2), 399--431.
+  \item Luby, M. (2002). ``LT Codes.'' \textit{43rd Annual IEEE Symposium on Foundations of Computer Science (FOCS)}, 271--280.
+  \item Shokrollahi, A. (2006). ``Raptor Codes.'' \textit{IEEE Transactions on Information Theory}, 52(6), 2551--2567.
+  \item Arikan, E. (2009). ``Channel Polarization: A Method for Constructing Capacity-Achieving Codes for Symmetric Binary-Input Memoryless Channels.'' \textit{IEEE Transactions on Information Theory}, 55(7), 3051--3073.
+\end{itemize}
+
+\subsubsection{Standards and Technical Specifications}
+
+\begin{itemize}[leftmargin=*]
+  \item 3GPP TS 38.212 v15.2.0: ``NR; Multiplexing and channel coding'' --- defines LDPC + Polar for 5G NR.
+  \item ITU-T Recommendation G.709 (2020): ``Interfaces for the Optical Transport Network'' --- defines G-FEC RS(255,239).
+  \item ITU-T Recommendation G.975.1 (2004): ``Forward error correction for high bit-rate DWDM submarine systems.''
+  \item ITU-T Recommendation G.709.2 (2017): ``OTU4 long-reach interface'' --- defines staircase FEC HG-FEC.
+  \item IETF RFC 6330 (2011): ``RaptorQ Forward Error Correction Scheme for Object Delivery.'' IETF.
+  \item IETF RFC 5053 (2007): ``Raptor Forward Error Correction Scheme for Object Delivery.'' IETF.
+  \item ATSC A/331 (2022): ``ATSC 3.0 Signaling, Delivery, Synchronization, and Error Protection.'' ATSC.
+  \item CCSDS 131.0-B-3 (2019): ``TM Synchronization and Channel Coding.'' CCSDS, Washington D.C.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research (2019--2025)}
+
+\begin{itemize}[leftmargin=*]
+  \item Hussain, G.A. et al. (2025). ``Performance analysis of concatenated Reed-Solomon and next generation polar codes for 6G communication systems.'' \textit{Scientific Reports (Nature)}, 15.
+  \item Frunza, M. et al. (2023). ``Performance Analysis of Turbo Codes, LDPC Codes, and Polar Codes over an AWGN Channel in the Presence of Inter Symbol Interference.'' \textit{Sensors (MDPI)}, 23(4), 1942.
+  \item Divsalar, D., Cheng, M., Dolinar, S. et al. (2022). ``Robust Neural Network Decoders for Quantum Error Correction.'' NASA JPL Research Poster SP22013p.
+  \item NICT/NITech/JAXA (2025). ``Ground-to-satellite laser communications applies next-generation error correction codes.'' Presented at ICSOS 2025.
+  \item Riverlane (2025). ``Quantum Error Correction: Our 2025 Trends and 2026 Predictions.'' Technical Report.
+  \item Koganei, Y. and Sugitani, K. (2024). ``Comparison of FEC Design Concepts for Higher Error Correction Performance with Utilizing Turbo Product Code.'' \textit{Optical Fiber Communication Conference (OFC) 2024}, Paper W2A.33.
+  \item Liang, J. et al. (2024). ``The Comparison of RS Codes, LDPC Codes, and Turbo Codes.'' \textit{Highlights in Science, Engineering and Technology (EMIS 2023)}, 81, 497.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 --- MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research corpus on Forward Error Correction theory and practice that serves as the foundational reliability engineering reference for the GSD ecosystem, Fox Infrastructure Group Pacific Spine architecture, and DACP protocol reliability layer. The mission will advance from theoretical foundations through cutting-edge quantum/AI frontiers and culminate in actionable FEC architecture specifications for six distinct Fox Infrastructure Group deployment contexts.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW --- FEC RESEARCH MISSION
+=================================================
+
+WAVE 0: FOUNDATION (Sequential, Haiku/Gary) [~30min]
+  [Paula] Schema + templates + bibliography validation
+  [Gary]  Source index + shared glossary definitions
+  Output: Shared context package for all Wave 1 agents
+
+WAVE 1A: PARALLEL RESEARCH TRACK A (3 agents) [~2hr]
+  [CRAFT-THEORY] Module 01: Theoretical Foundations
+  [CRAFT-CODE]   Module 02: Code Families Taxonomy
+  [CRAFT-DECODE] Module 03: Decoding Algorithms
+  All run simultaneously; share schema from Wave 0
+  Output: Three independent research documents
+
+WAVE 1B: PARALLEL RESEARCH TRACK B (2 agents) [~2hr]
+  [CRAFT-APP]      Module 04: Application Domains
+  [CRAFT-FRONTIER] Module 05: Emerging Frontiers
+  Requires Wave 1A completion for cross-references
+  Output: Two independent research documents
+
+CAPCOM GATE 1: Human review of Modules 01-05 [~20min]
+  Scope confirmation + sensitivity review
+
+WAVE 2: SYNTHESIS (Sequential, Opus) [~1.5hr]
+  [CRAFT-GSD]  Module 06: GSD/Fox Infrastructure Integration
+  [Agnus]      Cross-module integration + consistency check
+  Consumes all five Wave 1 outputs
+  Output: Integration document + consistency report
+
+CAPCOM GATE 2: FEC architecture approval [~15min]
+  Pacific Spine FEC selection + DACP reliability spec review
+
+WAVE 3: PUBLICATION (Sequential, Denise/Sonnet) [~1hr]
+  [Denise] Final LaTeX document assembly
+  [Denise] Three-pass XeLaTeX compilation
+  [Denise] index.html generation
+  [Gary]   Git commit + staging gate
+  Output: PDF + .tex + index.html
+
+TOTAL ESTIMATED: 7--8 hours across 6--8 context windows
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{Layer \arabic*:}]
+  \item \textbf{Schema and Glossary Layer (Wave 0):} Shared data structures, module output format specs, bibliography schema, and terminology index. Ensures all Wave 1 agents produce interoperable outputs.
+  \item \textbf{Theoretical Foundation Layer (Wave 1A):} Three parallel research documents covering the mathematical and algorithmic foundations of FEC. Pure research; no implementation or architecture specificity.
+  \item \textbf{Application Intelligence Layer (Wave 1B):} Two parallel documents mapping theoretical foundations to deployed systems and emerging research frontiers.
+  \item \textbf{Synthesis and Integration Layer (Wave 2):} Module 06 synthesizes all five prior modules into GSD-specific architecture decisions. The cross-module consistency check validates no contradictions between modules.
+  \item \textbf{Publication Layer (Wave 3):} LaTeX assembly, compilation, index generation, and delivery. Quality gate: document must compile without errors and all success criteria must be verified.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+D-01 & Module 01 Research Doc & Shannon theorem + all channel models mathematically defined; $\geq 8$ quantitative data points sourced & CRAFT-THEORY output; Opus-level precision \\
+D-02 & Module 02 Research Doc & All 7 major code families characterized with $(n,k,d_{\min})$; parameter comparison tables; historical timeline & CRAFT-CODE output; Sonnet-level survey \\
+D-03 & Module 03 Research Doc & All 6 decoding algorithms documented; hard vs. soft comparison with dB data; neural decoder section & CRAFT-DECODE output; Sonnet-level survey \\
+D-04 & Module 04 Research Doc & 8 application domains; standards cross-refs; $\geq 3$ case studies; deployment parameters & CRAFT-APP output; Sonnet-level survey \\
+D-05 & Module 05 Research Doc & QEC section with 2024--2025 hardware results; AI decoder research; 6G coding research & CRAFT-FRONTIER output; Opus-level judgment \\
+D-06 & Module 06 Integration Doc & Pacific Spine FEC table; DACP reliability overlay spec; CSZ emergency mesh spec & CRAFT-GSD + Agnus synthesis; Opus-level \\
+D-07 & Compiled PDF & Compiles cleanly; $\geq 40$ pages; all 12 success criteria verifiable in text & Denise + Gary (3-pass XeLaTeX) \\
+D-08 & LaTeX source (.tex) & Compilable; complete document source; all dependencies documented & Denise; provided alongside PDF \\
+D-09 & index.html & Matches color scheme; download links; usage instructions; LaTeX recompilation guide & Denise; domain-appropriate typography \\
+D-10 & Consistency Report & No contradictions across modules; all sources cross-validated & Agnus + VERIFY agent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2.8cm}C{1.8cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Wave} \\
+\midrule
+SC-00: Schema & None & Haiku & 8,000 & 0 \\
+SC-01: Mod 01 Theory & SC-00 & Opus & 30,000 & 1A \\
+SC-02: Mod 02 Codes & SC-00 & Sonnet & 30,000 & 1A \\
+SC-03: Mod 03 Decode & SC-00, SC-02 & Sonnet & 28,000 & 1A \\
+SC-04: Mod 04 Apps & SC-01, SC-02, SC-03 & Sonnet & 32,000 & 1B \\
+SC-05: Mod 05 Frontier & SC-01, SC-02, SC-03 & Opus & 35,000 & 1B \\
+SC-06: Mod 06 GSD Integ. & SC-01--SC-05 & Opus & 40,000 & 2 \\
+SC-07: Consistency & All SC & Agnus/Opus & 20,000 & 2 \\
+SC-08: LaTeX Assembly & All SC & Sonnet & 18,000 & 3 \\
+SC-09: HTML Index & SC-08 & Sonnet & 5,000 & 3 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total estimated:}} & \textbf{246,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2.2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent Role} & \tableheader{Model} & \tableheader{\% Budget} & \tableheader{Rationale} \\
+\midrule
+CRAFT-THEORY & Opus & 30\% & Foundational mathematics requires deep precision; Shannon theorem derivation; coding gain calculations; judgment about which results are seminal \\
+CRAFT-FRONTIER & Opus & 30\% & QEC frontier requires calibrated uncertainty; AI decoder research is rapidly evolving; inappropriate to use Sonnet-level pattern matching for frontier claims \\
+CRAFT-GSD (Mod 06) & Opus & 30\% & Architecture decisions for Fox Infrastructure affect multi-billion dollar infrastructure; conservative judgment required \\
+CRAFT-CODE, CRAFT-DECODE, CRAFT-APP & Sonnet & 60\% & Survey and synthesis of well-established technical literature; structured table generation; standards cross-reference; appropriate for Sonnet-level pattern matching and synthesis \\
+Paula, Gary (scaffolding) & Haiku & 10\% & Schema generation, file operations, template filling; low-complexity high-volume tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}C{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Execution} & \tableheader{Model Mix} & \tableheader{Output} \\
+\midrule
+0 & Foundation scaffolding & Sequential & Haiku & Shared schema, glossary, source index \\
+1A & 3-module parallel research & Parallel (3) & Opus + Sonnet & Modules 01, 02, 03 research docs \\
+1B & 2-module parallel research & Parallel (2) & Opus + Sonnet & Modules 04, 05 research docs \\
+2 & Synthesis + integration & Sequential & Opus & Module 06 + consistency report \\
+3 & Publication + delivery & Sequential & Sonnet & PDF, .tex, index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Task} & \tableheader{Output} & \tableheader{Spec} \\
+\midrule
+Paula (Haiku) & Generate shared schema & schema.json & Defines module output structure, bibliography format, cross-reference IDs \\
+Gary (Haiku) & Build source index & sources.bib & All 25+ sources validated; DOI/IETF RFC/ITU numbers confirmed \\
+Gary (Haiku) & Generate glossary & glossary.md & All FEC terms defined: BER, SNR, NCG, $d_{\min}$, LDPC, QEC, etc. \\
+Paula (Haiku) & LaTeX templates & module\_template.tex & Section headers, table structures, asciibox environments pre-configured \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Parallel Research Track A}
+
+All three agents run simultaneously. Each has access to Wave 0 outputs and the shared source index.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Model} & \tableheader{Module} & \tableheader{Deliverable Spec} \\
+\midrule
+CRAFT-THEORY & Opus & Mod 01: Theory & Shannon theorem with all math; channel capacity derivation; BER curves; cliff effect analysis; 30k tokens \\
+CRAFT-CODE & Sonnet & Mod 02: Codes & 7 code families; parameter tables; historical timeline; code comparison matrix; 30k tokens \\
+CRAFT-DECODE & Sonnet & Mod 03: Decoders & 8 decoder algorithms; complexity table; hard/soft comparison; error floor analysis; neural decoder section; 28k tokens \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Parallel Research Track B}
+
+Begins after CAPCOM confirmation that Wave 1A outputs are consistent with the schema. Two agents run simultaneously.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Model} & \tableheader{Module} & \tableheader{Deliverable Spec} \\
+\midrule
+CRAFT-APP & Sonnet & Mod 04: Apps & 8 application domains; deployment tables; 3 case studies; standards cross-refs; 32k tokens \\
+CRAFT-FRONTIER & Opus & Mod 05: Frontier & QEC + hardware milestones; neural decoders; 6G research; calibrated uncertainty on frontier claims; 35k tokens \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Model} & \tableheader{Task} & \tableheader{Deliverable Spec} \\
+\midrule
+CRAFT-GSD & Opus & Mod 06: GSD Integration & Pacific Spine FEC table (8 segment types); DACP reliability overlay spec; CSZ emergency Raptor spec; Fox Infrastructure rationale; 40k tokens \\
+Agnus & Opus & Consistency check & Cross-module validation; no contradictions in BER values, code parameters, or standards references; consistency report; 20k tokens \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Model} & \tableheader{Task} & \tableheader{Spec} \\
+\midrule
+Denise & Sonnet & LaTeX assembly & Merge all 6 module outputs into master .tex; apply color scheme and templates; 18k tokens \\
+Gary & Haiku & Three-pass compile & \texttt{xelatex} $\times 3$; verify no errors; check page count and TOC; fix any compilation issues \\
+Denise & Sonnet & index.html & Color-matched header; download cards for PDF + .tex; usage instructions; 5k tokens \\
+VERIFY & Sonnet & Success criteria check & Verify all 12 SC criteria satisfied; flag any gaps for remediation before delivery \\
+Gary & Haiku & Git staging & Copy to \texttt{.planning/staging/inbox/}; commit with DACP-format message \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Shared attribute prefix:} All Wave 1 agents receive the identical Wave 0 schema package at the start of their prompts. This prefix is identical and cacheable with 5-minute TTL, reducing token cost by approximately 8,000 tokens across 5 parallel agents.
+  \item \textbf{Module output compression:} Each Wave 1 module output is stored as a dense JSON-structured summary alongside the full prose. Wave 2 agents receive the JSON summary first (compressed context) and request full sections as needed.
+  \item \textbf{Source index reuse:} The sources.bib file is generated once in Wave 0 and referenced by all subsequent agents, not re-generated per module.
+  \item \textbf{LaTeX template prefix:} The LaTeX preamble and command definitions are pre-generated in Wave 0 and provided to Denise as a cached prefix in Wave 3.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}C{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Agents} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0 & 2 (Haiku) & 5,000 & 8,000 & 13,000 \\
+Wave 1A & 3 (Opus+Sonnet) & 45,000 & 88,000 & 133,000 \\
+Wave 1B & 2 (Opus+Sonnet) & 40,000 & 67,000 & 107,000 \\
+Wave 2 & 2 (Opus) & 60,000 & 60,000 & 120,000 \\
+Wave 3 & 3 (Sonnet+Haiku) & 25,000 & 23,000 & 48,000 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total (est.):}} & \textbf{421,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+FEC MISSION DEPENDENCY GRAPH
+==============================
+
+  [Wave 0: Schema + Source Index]
+          |
+    +-----+-----+
+    |     |     |
+  [01]  [02]  [03]         <-- Wave 1A (parallel)
+Theory Codes Decoders
+    |     |     |
+    +--+--+--+--+
+       |     |
+     [04]  [05]            <-- Wave 1B (parallel)
+    Apps  Frontier
+       |     |
+       +--+--+
+          |
+         [06]              <-- Wave 2: GSD Integration
+       GSD/Fox
+          |
+    [Consistency]          <-- Wave 2: Cross-check
+          |
+   [LaTeX Assembly]        <-- Wave 3
+          |
+    [PDF + HTML]           <-- Wave 3 Output
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Description} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK & Source quality, numerical attribution, no advocacy, security sensitivity \\
+Core functionality & 24 & Required & BLOCK & All 12 success criteria, 2 tests per criterion \\
+Integration & 8 & Required & BLOCK & Cross-module consistency, self-containment, bibliography integrity \\
+Edge cases & 6 & Best-effort & LOG & Data gaps, frontier uncertainty, temporal currency \\
+\midrule
+\textbf{Total} & \textbf{45} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality throughout & All numerical claims (NCG values, BER thresholds, overhead percentages, token budgets) traceable to IEEE, IETF, ITU-T, 3GPP, CCSDS, or peer-reviewed journal. Zero entertainment media or blog citations. \\
+SC-NUM & Numerical attribution & Every dB NCG value, BER threshold, and code parameter $(n, k, d_{\min}, t)$ attributed to a specific source document with year. \\
+SC-ADV & No vendor advocacy & Document presents FEC choices as engineering tradeoffs. No recommendation of specific vendor products (Qualcomm, Xilinx, Coherent, etc.) without technical justification. \\
+SC-SEC & Security sensitivity & Physical-layer security (wiretap channel theory) addressed at survey level only. No operational detail that aids interception, jamming, or exploitation. \\
+SC-GEO & Tribal site geography & Pacific Spine mesh node descriptions at tribal sovereign sites contain no specific GPS coordinates, site names, or infrastructure details that could compromise security or sovereignty. \\
+SC-QEC & QEC claims uncertainty & Forward-looking quantum claims (qubit counts, timeline projections, commercial viability) include explicit uncertainty language. Hardware results from 2024--2025 cited to named organizations. \\
+SC-DACP & DACP spec alignment & DACP reliability overlay specification consistent with GSD DACP milestone (v1.49+) three-part bundle structure. No changes to DACP core semantics proposed without explicit CAPCOM approval. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Success Criterion} & \tableheader{Verification Method} \\
+\midrule
+CF-01 & SC-1: Shannon theorem & Mathematical statement of channel capacity with all variables defined appears in Module 01; tradeoff quantitatively described \\
+CF-02 & SC-1: BER characterization & At least 3 BER data points (Shannon limit, turbo codes, LDPC) with sources cited \\
+CF-03 & SC-2: Code families complete & All 7 code families (Hamming, BCH, RS, Conv., Turbo, LDPC, Polar) appear in parameter table with $(n,k,d_{\min},t,R)$ \\
+CF-04 & SC-2: Historical timeline & Timeline in Module 02 covers 1948--2025 with no major omission \\
+CF-05 & SC-3: RaptorQ spec & RFC 6330 cited; 56,403 source symbol parameter documented; ATSC 3.0 deployment noted \\
+CF-06 & SC-3: Rateless property & Fountain/rateless property explained with reception overhead formula \\
+CF-07 & SC-4: Decoder taxonomy & Table maps each code family to canonical decoder with complexity class \\
+CF-08 & SC-4: Hard/soft comparison & 2--3 dB soft-decision gain documented with source \\
+CF-09 & SC-5: 5G NR coding & BG1/BG2 LDPC documented; CA-Polar $L=8$ documented; KP4 FEC documented \\
+CF-10 & SC-6: Deep space timeline & Voyager RS, Galileo rescue, Mars turbo, LCRD all documented \\
+CF-11 & SC-7: Optical FEC generations & G-FEC, E-FEC, HG-FEC, SD-FEC documented with NCG values in dB \\
+CF-12 & SC-8: QEC hardware results & Google Willow Dec 2024, IBM qLDPC, Oxford Ionics 2025 all cited \\
+CF-13 & SC-9: Neural decoder research & JPL DNN decoder, at least 2 other neural FEC results documented \\
+CF-14 & SC-10: Pacific Spine FEC table & 6+ segment types mapped to FEC recommendations in Module 06 \\
+CF-15 & SC-11: DACP reliability spec & Conceptual DACP reliability overlay architecture produced \\
+CF-16 & SC-12: CSZ emergency spec & Fountain code recommendation for CSZ mesh with technical justification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1: Shannon theorem + BER characterization & CF-01, CF-02 & Pending \\
+SC-2: 7 code families with parameters & CF-03, CF-04 & Pending \\
+SC-3: Fountain/Raptor/RaptorQ documentation & CF-05, CF-06 & Pending \\
+SC-4: Decoder taxonomy + hard/soft comparison & CF-07, CF-08 & Pending \\
+SC-5: 5G NR channel coding standard & CF-09 & Pending \\
+SC-6: Deep space FEC timeline & CF-10 & Pending \\
+SC-7: Optical transport FEC generations & CF-11 & Pending \\
+SC-8: Quantum error correction documentation & CF-12 & Pending \\
+SC-9: AI/neural decoder research & CF-13 & Pending \\
+SC-10: Pacific Spine FEC selection guide & CF-14 & Pending \\
+SC-11: DACP reliability layer specification & CF-15 & Pending \\
+SC-12: CSZ emergency mesh specification & CF-16 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Agnus & Opus & Overall mission direction; go/no-go gates; cross-module integration \\
+PLAN & Planner & Sonnet & Wave decomposition; parallel track optimization; token budget management \\
+SCOUT & Research Agent & Sonnet & Gap-fill web research; source validation; bibliography maintenance \\
+EXEC-A & Denise & Sonnet & Document assembly, LaTeX compilation, HTML generation \\
+EXEC-B & Gary (68000) & Haiku & File operations, compilation runs, git operations, schema generation \\
+CRAFT-THEORY & Module 01 Specialist & Opus & Shannon theorem, channel models, information theory mathematics \\
+CRAFT-CODE & Module 02 Specialist & Sonnet & Code families taxonomy, parameters, historical timeline \\
+CRAFT-DECODE & Module 03 Specialist & Sonnet & Decoding algorithms, complexity analysis, error floor, neural decoders \\
+CRAFT-APP & Module 04 Specialist & Sonnet & Application domains, standards, case studies, deployment parameters \\
+CRAFT-FRONTIER & Module 05 Specialist & Opus & QEC, AI/ML decoders, 6G research, frontier uncertainty management \\
+CRAFT-GSD & Module 06 Specialist & Opus & GSD/Fox Infrastructure integration, DACP spec, CSZ emergency spec \\
+VERIFY & Verification Agent & Sonnet & Source validation; accuracy checking; success criteria verification \\
+INTEG & Integration Agent & Sonnet & Cross-module relationship validation; consistency checks \\
+CAPCOM & HITL Interface & Human & Human approval at wave boundaries; scope confirmation; sensitivity review \\
+BUDGET & Resource Manager & Haiku & Token budget tracking; session planning; cache policy monitoring \\
+SURGEON & Health Monitor & Haiku & Research quality degradation detection; agent telemetry \\
+LOG & Chronicle Agent & Haiku & Audit trail; DACP-format commit messages; milestone summaries \\
+TOPO & Topology Manager & Sonnet & Agent team structure; mid-mission restructuring if scope changes \\
+ARCH & Architecture Specialist & Opus & Cross-cutting structural decisions; DACP spec review \\
+SECURE & Security Warden & Sonnet & Safety boundary enforcement; SC-SEC and SC-GEO compliance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (20 roles) \\
+Research Modules & 6 (Foundations, Codes, Decoders, Applications, Frontiers, GSD Integration) \\
+Research Passes Completed & 5 (Foundations, Code Families, Applications/Space, Distributed/Mesh, Fountain/Streaming) \\
+Wave Count & 4 (0: Foundation, 1A: 3-parallel, 1B: 2-parallel, 2: Synthesis, 3: Publication) \\
+Parallel Tracks & Wave 1A: 3 agents; Wave 1B: 2 agents \\
+Estimated Token Budget & 421,000 tokens total \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Estimated Context Windows & 18--24 across 6--8 sessions \\
+Safety-Critical Tests & 7 (all MANDATORY PASS / BLOCK) \\
+Total Tests & 45 (7 safety + 24 core + 8 integration + 6 edge) \\
+Success Criteria & 12 (all required for delivery acceptance) \\
+GSD Milestone Target & v1.50 research companion (Space Between Ch.\ 7--8: Information Theory) \\
+Key Deliverables & PDF + .tex + index.html + consistency report \\
+Fox Infrastructure Outputs & Pacific Spine FEC table; DACP reliability overlay; CSZ emergency spec \\
+Primary Domain Authorities & IEEE, IETF, ITU-T, 3GPP, CCSDS, NASA/JPL, Nature/Scientific Reports \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Closing}
+
+\begin{quotebox}
+\textbf{\sffamily\large\textcolor{primary}{On Reliability and Structure}}
+
+\vspace{0.5em}
+
+``The fundamental problem of communication is that of reproducing at one point either exactly or approximately a message selected at another point.''
+
+\vspace{0.3em}
+{\small\sffamily --- Claude Shannon, \textit{A Mathematical Theory of Communication}, 1948}
+
+\vspace{1em}
+
+Shannon's definition of ``the fundamental problem'' is deceptively simple. It took the entire field of coding theory 75 years to produce codes that solve it optimally. Hamming gave us the geometry. Reed-Solomon gave us polynomial resilience. Gallager gave us sparse graphs that nobody noticed for 36 years. Berrou gave us the turbo revolution. Gallager's codes came back as LDPC. Arikan polarized the channel and proved capacity was achievable constructively. Shokrollahi made codes rateless.
+
+Each breakthrough was not more redundancy --- it was better architecture. Not louder, but smarter. Not more bits, but better structure. The spaces between valid codewords carry more information about what was sent than the codewords themselves, because the geometry of those gaps is exactly what the channel has to distort to corrupt a message beyond recovery.
+
+For the GSD ecosystem, this is the deepest implementation of the Amiga Principle available: the entire field of reliable communication is a 75-year proof that architectural elegance, not raw power, is what closes the gap between theory and reality. The Pacific Spine will be built on this proof.
+
+\vspace{0.3em}
+{\small\sffamily\textcolor{subtlegray}{--- GSD Research Mission Package, FEC Deep Research, March 2026}}
+\end{quotebox}
+
+\end{document}

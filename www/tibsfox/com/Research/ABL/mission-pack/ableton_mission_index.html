@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ableton Live — GSD Research Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #004D5E;
+      --secondary: #0277BD;
+      --tertiary: #8B6914;
+      --accent: #00838F;
+      --light-primary: #E0F7FA;
+      --light-secondary: #E3F2FD;
+      --light-tertiary: #FFF8E1;
+      --border: #BDBDBD;
+      --subtle: #757575;
+      --dark: #212121;
+      --white: #FFFFFF;
+      --bg: #F8FAFB;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, #003344 60%, #001E28 100%);
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 131, 143, 0.25);
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 30%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      border: 1px solid rgba(2, 119, 189, 0.15);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 span {
+      color: #4DD0E1;
+    }
+
+    .header-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .meta-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+    }
+
+    /* ── Main ── */
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    /* ── File Cards ── */
+    .section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 1rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+
+    .card {
+      display: block;
+      background: #FFFFFF;
+      border: 1px solid #E0E7EC;
+      border-radius: 10px;
+      padding: 1.4rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0, 77, 94, 0.12);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--primary);
+      border-radius: 10px 0 0 10px;
+    }
+
+    .card.secondary::before { background: var(--secondary); }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge-pdf { background: var(--light-primary); color: var(--primary); }
+    .badge-tex { background: var(--light-secondary); color: var(--secondary); }
+
+    .card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .card p {
+      font-size: 0.82rem;
+      color: var(--subtle);
+      line-height: 1.5;
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 1.4rem; right: 1.2rem;
+      font-size: 1rem;
+      color: var(--border);
+      transition: color 0.2s;
+    }
+    .card:hover .card-arrow { color: var(--accent); }
+
+    /* ── Contents ── */
+    .contents-block {
+      background: #FFFFFF;
+      border: 1px solid #E0E7EC;
+      border-radius: 10px;
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contents-block h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+    }
+
+    .stage-group { margin-bottom: 1.2rem; }
+
+    .stage-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 0.25rem 0.7rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+
+    .stage-1 { background: var(--primary); }
+    .stage-2 { background: var(--secondary); }
+    .stage-3 { background: var(--tertiary); }
+
+    .contents-list {
+      list-style: none;
+      padding-left: 0.5rem;
+    }
+
+    .contents-list li {
+      font-size: 0.85rem;
+      color: #444;
+      padding: 0.22rem 0;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .contents-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── Usage ── */
+    .usage-block {
+      background: var(--light-primary);
+      border: 1px solid rgba(0, 77, 94, 0.15);
+      border-radius: 10px;
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .usage-block h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .usage-steps {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .usage-steps li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      color: #333;
+      border-bottom: 1px solid rgba(0,77,94,0.08);
+    }
+
+    .usage-steps li:last-child { border-bottom: none; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 1.5rem; height: 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 0.1rem;
+    }
+
+    /* ── Compile block ── */
+    .compile-block {
+      background: #1A2733;
+      border-radius: 10px;
+      padding: 1.3rem 1.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .compile-block h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #4DD0E1;
+      margin-bottom: 0.8rem;
+    }
+
+    .compile-block pre {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: #B2DFDB;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    /* ── Quote ── */
+    .quote-block {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.4rem;
+      margin-bottom: 2rem;
+      background: var(--white);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .quote-block p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 0.4rem;
+    }
+
+    .quote-block .attribution {
+      font-size: 0.75rem;
+      color: var(--subtle);
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--subtle);
+      border-top: 1px solid #E0E7EC;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <div class="eyebrow">GSD Research Mission Package</div>
+    <h1>Ableton Live<br><span>Architecture, Extensibility &amp; Ecosystem</span></h1>
+    <div class="header-sub">Digital Audio Workstation — Deep Research Study · From Clip Paradigm to Live Object Model</div>
+    <div class="meta-row">
+      <div class="meta-pill">March 27, 2026</div>
+      <div class="meta-pill">Squadron Profile (12 roles)</div>
+      <div class="meta-pill">5 Modules</div>
+      <div class="meta-pill">27 pages</div>
+      <div class="meta-pill">Ready for skill-creator</div>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- File Cards -->
+  <div class="section-title">Download Files</div>
+  <div class="cards">
+    <a class="card" href="ableton_live_mission.pdf" download>
+      <span class="card-arrow">↓</span>
+      <div class="card-badge badge-pdf">PDF</div>
+      <h3>Mission Package</h3>
+      <p>Complete 3-stage document: Vision → Research → Mission. 27 pages, XeLaTeX compiled.</p>
+    </a>
+    <a class="card secondary" href="ableton_mission.tex" download>
+      <span class="card-arrow">↓</span>
+      <div class="card-badge badge-tex">LaTeX Source</div>
+      <h3>ableton_mission.tex</h3>
+      <p>Full XeLaTeX source. Modify and recompile with <code>xelatex</code> (three passes).</p>
+    </a>
+  </div>
+
+  <!-- Contents -->
+  <div class="contents-block">
+    <h2>Document Contents</h2>
+
+    <div class="stage-group">
+      <div class="stage-label stage-1">Stage 1 — Vision Document</div>
+      <ul class="contents-list">
+        <li>Vision narrative — the Session/Arrangement duality as creative philosophy</li>
+        <li>Five-problem problem statement (dual-view cognition, synthesis depth, extensibility fragmentation, hardware complexity, education gap)</li>
+        <li>Dual-view architecture ASCII diagram</li>
+        <li>Five research module descriptions</li>
+        <li>Chipset YAML configuration (Agnus/Denise/Paula/68000 model allocation)</li>
+        <li>Scope boundaries, 12 testable success criteria</li>
+        <li>Relationship to GSD ecosystem documents</li>
+        <li>Through-line: Ableton Live as Amiga Principle in music</li>
+      </ul>
+    </div>
+
+    <div class="stage-group">
+      <div class="stage-label stage-2">Stage 2 — Research Reference</div>
+      <ul class="contents-list">
+        <li>Module 01: Core Architecture — Session View, Arrangement View, clip exclusivity, edition tiers</li>
+        <li>Module 02: Instruments — All 20 Suite instruments with synthesis taxonomy table; MPE capability matrix; Live 12 additions (Meld, Roar, Granulator III)</li>
+        <li>Module 03: Hardware Ecosystem — Push 3 (Controller + Standalone), Intel NUC specs, Move (Oct 2024), Ableton Link protocol</li>
+        <li>Module 04: Extensibility — Max for Live / LOM, Python MIDI Remote Scripts, AbletonOSC, decision tree</li>
+        <li>Module 05: Education — Certified Trainer program (360+ trainers, 50 countries), 343 Labs, Point Blank, free resources</li>
+        <li>Safety and sensitivity considerations; full source bibliography</li>
+      </ul>
+    </div>
+
+    <div class="stage-group">
+      <div class="stage-label stage-3">Stage 3 — Mission Package</div>
+      <ul class="contents-list">
+        <li>Milestone spec — mission objective, system layers, 8 deliverables table</li>
+        <li>Component breakdown with model assignments (Opus/Sonnet/Haiku)</li>
+        <li>Wave execution plan — 7 waves including 3 parallel tracks + CAPCOM gate</li>
+        <li>Cache optimization strategy; 240K token budget table</li>
+        <li>ASCII dependency graph</li>
+        <li>Test plan — 34 tests across 4 categories; 4 safety-critical BLOCK tests</li>
+        <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+        <li>14-role crew manifest with PNW species CRAFT agent naming</li>
+        <li>Execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <div class="usage-block">
+    <h2>How to Use This Package</h2>
+    <ol class="usage-steps">
+      <li>
+        <div class="step-num">1</div>
+        <div>Download the PDF. Read Stage 1 (Vision) to orient yourself to the research scope and GSD ecosystem connections. Review the five modules and success criteria.</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div>Open Stage 2 (Research Reference) for the compiled findings. All instrument tables, hardware specs, and extensibility documentation are ready to reference during execution.</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div>Hand Stage 3 to <code>gsd-skill-creator</code> via the planning bridge. Deposit to <code>.planning/staging/inbox/</code>. The Wave Execution Plan and Component Breakdown are the primary execution spec.</div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div>Start with Wave 0 (Foundation). Launch Waves 1-A, 1-B, and 1-C in parallel within the same session to exploit the 5-minute TTL cache window on the shared schema context.</div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div>At the CAPCOM gate (post Wave 1), review all five module documents before approving Wave 2 (Synthesis). The Opus-powered synthesis document will draw the GSD ecosystem connections.</div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Compile -->
+  <div class="compile-block">
+    <h2>Recompile LaTeX Source</h2>
+    <pre>
+# Requires XeLaTeX and DejaVu fonts (pre-installed on Ubuntu 24)
+# Three passes required for TOC, cross-references, and LastPage
+
+xelatex -interaction=nonstopmode ableton_mission.tex
+xelatex -interaction=nonstopmode ableton_mission.tex
+xelatex -interaction=nonstopmode ableton_mission.tex
+
+# Output: ableton_mission.pdf (27 pages)</pre>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-block">
+    <p>The space between the Session's open field and the Arrangement's committed timeline is not a limitation to be engineered away. It is the creative gap where music — and agents — find their most interesting decisions.</p>
+    <div class="attribution">— GSD Mission Package Through-Line, Stage 1</div>
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission · Ableton Live: Architecture, Extensibility &amp; Ecosystem · March 27, 2026 · Ready for skill-creator
+</footer>
+
+</body>
+</html>

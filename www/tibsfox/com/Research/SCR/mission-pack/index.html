@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Source Code Tells the Story — GSD Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #263238;
+      --secondary: #1565C0;
+      --accent: #0277BD;
+      --tertiary: #37474F;
+      --light-primary: #ECEFF1;
+      --light-secondary: #E3F2FD;
+      --border: #BDBDBD;
+      --subtle: #757575;
+      --text: #212121;
+      --row-gray: #F5F5F5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #F9FAFB;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    header .kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #90A4AE;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      line-height: 1.25;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    header h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: #90CAF9;
+      margin-bottom: 1.5rem;
+    }
+
+    header .pipeline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: #64B5F6;
+      letter-spacing: 0.05em;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .meta-bar {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 1rem 1.5rem;
+      background: var(--light-secondary);
+      border-left: 4px solid var(--secondary);
+      border-radius: 4px;
+      margin-bottom: 2.5rem;
+      font-size: 0.875rem;
+      color: var(--tertiary);
+    }
+
+    .meta-bar span strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* File cards */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.75rem; }
+    }
+
+    .card {
+      background: #DDE6EA;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: background 0.15s, transform 0.12s;
+      border: 1px solid var(--border);
+    }
+
+    .card:hover {
+      background: #B0BEC5;
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--subtle);
+      line-height: 1.4;
+    }
+
+    .card-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-top: auto;
+    }
+
+    /* Contents breakdown */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    section h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--subtle);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stage-block {
+      margin-bottom: 1rem;
+    }
+
+    .stage-label {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-bottom: 0.4rem;
+    }
+
+    .stage-1 { background: var(--primary); color: white; }
+    .stage-2 { background: var(--secondary); color: white; }
+    .stage-3 { background: var(--tertiary); color: white; }
+
+    .stage-block ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .stage-block ul li {
+      font-size: 0.875rem;
+      color: var(--tertiary);
+      padding: 0.2rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .stage-block ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    /* Usage */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      align-items: flex-start;
+      font-size: 0.875rem;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      min-width: 1.6rem;
+      height: 1.6rem;
+      background: var(--secondary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* Code block */
+    pre {
+      background: var(--light-primary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--primary);
+      overflow-x: auto;
+      margin-top: 0.75rem;
+    }
+
+    /* Quote */
+    .quote-block {
+      background: var(--light-primary);
+      border-left: 4px solid var(--primary);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 4px 4px 0;
+      margin-top: 2.5rem;
+    }
+
+    .quote-block p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--tertiary);
+      line-height: 1.65;
+    }
+
+    .quote-block cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--subtle);
+      font-style: normal;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="kicker">GSD Research Mission Package · Deep Code Review</p>
+  <h1>The Source Code<br>Tells the Story</h1>
+  <h2>gsd-skill-creator Full Documentation Web — v1.49.21 (DACP Milestone)</h2>
+  <p class="pipeline">Vision → Research → Mission &nbsp;·&nbsp; Fleet Activation · 17 Roles · 8 Modules</p>
+</header>
+
+<div class="container">
+
+  <div class="meta-bar">
+    <span><strong>Date:</strong> March 27, 2026</span>
+    <span><strong>Branch:</strong> dev @ v1.49.21</span>
+    <span><strong>Profile:</strong> Fleet (17+ roles)</span>
+    <span><strong>Budget:</strong> ~865K tokens · 8–10 sessions</span>
+  </div>
+
+  <!-- FILE CARDS -->
+  <div class="cards">
+    <a href="mission.pdf" download class="card">
+      <div class="card-icon">📄</div>
+      <div class="card-title">Mission Package PDF</div>
+      <div class="card-desc">34-page publication-quality document. All three stages: Vision, Research Reference, and Mission Package.</div>
+      <div class="card-type">mission.pdf · Download</div>
+    </a>
+    <a href="mission.tex" download class="card">
+      <div class="card-icon">🔧</div>
+      <div class="card-title">LaTeX Source</div>
+      <div class="card-desc">Full XeLaTeX source. Recompile with three xelatex passes to regenerate PDF after edits.</div>
+      <div class="card-type">mission.tex · Editable Source</div>
+    </a>
+  </div>
+
+  <!-- CONTENTS -->
+  <section>
+    <h3>Contents</h3>
+
+    <div class="stage-block">
+      <span class="stage-label stage-1">Stage 1 — Vision Document</span>
+      <ul>
+        <li>Vision narrative — the documentation web as architectural myelin sheath</li>
+        <li>5-problem statement — the 25-milestone documentation delta and its consequences</li>
+        <li>8-module architecture map with file paths and structural overview</li>
+        <li>Chipset configuration (Agnus/Denise/Paula/Gary model allocation)</li>
+        <li>12 testable success criteria</li>
+        <li>Through-line: Amiga Principle applied to epistemology</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <span class="stage-label stage-2">Stage 2 — Research Reference</span>
+      <ul>
+        <li>Module 01: Core Observer-Detective Loop (16 key files documented)</li>
+        <li>Module 02: DACP Protocol — fidelity 0–4 model, bus opcodes, bundle layout</li>
+        <li>Module 03: Chipset Architecture — Copper/Blitter/Gastown + AMIGA 5-team governance</li>
+        <li>Module 04: Application Pipeline and Complex Plane (z = r·e^iθ skill model)</li>
+        <li>Module 05: College of Knowledge — 42 departments, priority tiers, progressive disclosure</li>
+        <li>Module 06: Holomorphic Mathematics — DMD variants, Koopman operators, Julia sets</li>
+        <li>Module 07: Safety, Security, Cultural Sovereignty — OCAP/CARE/UNDRIP annotations</li>
+        <li>Module 08: CLI, Infrastructure, Research Web Layer</li>
+        <li>Safety and sensitivity table with ABSOLUTE / GATE / ANNOTATE classification</li>
+        <li>Complete bibliography with primary code inspection, mathematical, and protocol sources</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <span class="stage-label stage-3">Stage 3 — Mission Package</span>
+      <ul>
+        <li>11 numbered deliverables across 5 waves (0, 1A/1B/1C parallel, 2, 3)</li>
+        <li>Component breakdown: 19 components with model assignments and token estimates</li>
+        <li>35%/55%/10% Opus/Sonnet/Haiku allocation with rationale</li>
+        <li>Dependency graph with CAPCOM safety gate between Wave 1 and Wave 2</li>
+        <li>46 tests: 8 safety-critical (BLOCK), 22 core (BLOCK), 9 integration (BLOCK), 7 edge (LOG)</li>
+        <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+        <li>17-role Fleet crew manifest with agent names and model assignments</li>
+        <li>Execution summary: ~865K tokens, 8–10 sessions, ~2–3 hours wall time</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- USAGE -->
+  <section>
+    <h3>How to Use This Package</h3>
+    <ol class="steps">
+      <li>Open <strong>mission.pdf</strong> and read Stage 1 (Vision) to orient yourself to the mission scope and the eight modules.</li>
+      <li>Hand <strong>mission.pdf</strong> to a GSD Orchestrator Claude Code session as the primary spec document. The Stage 3 wave plan is self-contained — no additional context required.</li>
+      <li>Begin with <strong>Wave 0</strong>: have Haiku generate the tag schema (<code>docs/TAG-SCHEMA.md</code>), file inventory, and Navigator Index scaffold before launching parallel Wave 1 tracks.</li>
+      <li>Run <strong>Wave 1A, 1B, 1C in parallel</strong> across three sessions. Cache the file inventory and milestone map across all three agents.</li>
+      <li>Complete the <strong>CAPCOM Safety Gate</strong> — human review of all safety annotations — before allowing Wave 2 to begin. This is a hard architectural requirement.</li>
+      <li>After Wave 3 verification passes (<code>typedoc</code> clean, AJV validates, links resolve), merge to dev branch and update the docs site.</li>
+    </ol>
+  </section>
+
+  <!-- RECOMPILE -->
+  <section>
+    <h3>Recompile LaTeX</h3>
+    <p style="font-size: 0.875rem; color: var(--tertiary);">Three XeLaTeX passes required for TOC, cross-references, and LastPage counter. Requires XeLaTeX with DejaVu fonts (pre-installed on Ubuntu).</p>
+    <pre>xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex
+xelatex -interaction=nonstopmode mission.tex</pre>
+  </section>
+
+  <div class="quote-block">
+    <p>The Amiga did not win by having more. It won by knowing exactly what each part was for, and by making every bus between them a first-class design decision. The source code already knows what it is for. This mission makes that knowledge legible to everyone who enters it. Storage is cheap. Understanding is not. All paths should lead to further discovery.</p>
+    <cite>— gsd-skill-creator Documentation Web Vision · March 2026</cite>
+  </div>
+
+</div>
+
+<footer>
+  GSD Mission Package · gsd-skill-creator Deep Code Review · v1.49.21 (DACP Milestone) · March 27, 2026
+</footer>
+
+</body>
+</html>
