@@ -1,0 +1,191 @@
+/* APR — Deep Violet / Burnt Orange / Teal theme, So You Want To Be An Artist
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --violet-deep: #4A148C;
+  --violet-light: #F3E5F5;
+  --violet-mid: #7B1FA2;
+  --violet-dark: #311B92;
+  --orange-burnt: #E65100;
+  --orange-light: #FFF3E0;
+  --orange-mid: #EF6C00;
+  --teal-deep: #004D40;
+  --teal-mid: #00695C;
+  --teal-light: #E0F2F1;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--violet-deep);
+  --link-hover: var(--violet-dark);
+  --accent: var(--violet-deep);
+  --accent-light: var(--violet-light);
+  --accent-dark: var(--violet-dark);
+  --card-bg: white;
+  --card-border: #BDBDBD;
+  --card-shadow: rgba(74,20,140,0.12);
+  --border: #BDBDBD;
+  --parchment: #FFF3E0;
+}
+
+/* ===================================================
+   2. HEADER -- violet-dark/teal gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #1a0533 0%, #2d1052 35%, #1a2f3a 70%, #0d1a17 100%);
+  border-bottom: 4px solid var(--orange-burnt);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(74,20,140,0.25) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(230,81,0,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #F3E5F5; }
+header .subtitle { color: #CE93D8; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--violet-deep);
+  border-bottom-color: var(--violet-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--orange-burnt); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--violet-light);
+  border-left: 4px solid var(--violet-deep);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--violet-deep); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(74,20,140,0.04); }
+tr:hover { background: rgba(74,20,140,0.08); }
+
+pre {
+  background: #1a0533;
+  color: #E2E8F0;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--orange-burnt);
+}
+code {
+  background: var(--violet-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--violet-deep);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #BDBDBD;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(74,20,140,0.12); border-color: var(--violet-deep); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #BDBDBD;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--violet-deep);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-vis { background: var(--violet-light); color: var(--violet-deep); }
+.tag-mus { background: #FFF3E0; color: var(--orange-burnt); }
+.tag-biz { background: var(--teal-light); color: var(--teal-deep); }
+.tag-cok { background: #ECEFF1; color: #263238; }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #BDBDBD;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--violet-deep); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--violet-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--violet-deep);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #CE93D8; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
