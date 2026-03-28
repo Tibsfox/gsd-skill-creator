@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Musical Forest — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1a12; --text: #e8dcc8; --text-dim: rgba(232,220,200,0.5);
+    --text-mid: rgba(232,220,200,0.65); --accent-green: #7a9a5a;
+    --accent-gold: #c8a040; --accent-fire: #c75b3a;
+    --border-forest: rgba(122,154,90,0.25); --panel-bg: rgba(26,42,30,0.5);
+    /* frequency palette: warm (low) to cool (high) */
+    --freq-sub: #8b2500;    /* sub-bass, infrasonic */
+    --freq-low: #c75b3a;    /* bass, drums */
+    --freq-mid-low: #d4881a; /* low-mid, strings */
+    --freq-mid: #c8a040;    /* mid, voice */
+    --freq-mid-hi: #7a9a5a; /* upper-mid, wind */
+    --freq-hi: #2a8a96;     /* treble, water */
+    --freq-ultra: #4a6aaf;  /* ultrasonic, electronic */
+    --freq-signal: #9b59b6; /* signal processing */
+  }
+  body { background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; min-height: 100vh; overflow-x: hidden; }
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+
+  /* Nav */
+  .nav-bar { background: #1a2a1f; padding: 0.5rem 1.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.8rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-forest); }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .active { color: white; font-weight: 600; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+  /* Hero */
+  .hero { text-align: center; padding: 4rem 2rem 2.5rem; background: radial-gradient(ellipse at 50% 80%, rgba(199,91,58,0.06) 0%, rgba(42,138,150,0.04) 30%, transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); font-style: italic; margin-bottom: 1.8rem; max-width: 34rem; margin-left: auto; margin-right: auto; }
+  .hero-text { max-width: 38rem; margin: 0 auto; font-size: 0.9rem; line-height: 1.85; color: var(--text-mid); }
+
+  /* Controls bar */
+  .controls-bar { max-width: 74rem; margin: 1.5rem auto; padding: 0 1.25rem; display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+  .ctrl-btn { background: rgba(122,154,90,0.12); border: 1px solid rgba(122,154,90,0.3); color: var(--text); padding: 0.4rem 1rem; border-radius: 4px; font-family: inherit; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; letter-spacing: 0.03em; }
+  .ctrl-btn:hover { background: rgba(122,154,90,0.25); border-color: var(--accent-green); }
+  .ctrl-btn.active { background: rgba(122,154,90,0.35); border-color: var(--accent-green); box-shadow: 0 0 8px rgba(122,154,90,0.2); }
+  .filter-sep { width: 1px; height: 24px; background: rgba(122,154,90,0.15); align-self: center; }
+
+  /* Family filter pills */
+  .family-filters { max-width: 74rem; margin: 0.5rem auto 1.5rem; padding: 0 1.25rem; display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center; }
+  .fam-pill { background: transparent; border: 1px solid rgba(122,154,90,0.2); color: var(--text-dim); padding: 0.25rem 0.7rem; border-radius: 12px; font-family: inherit; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
+  .fam-pill:hover { border-color: rgba(122,154,90,0.4); color: var(--text); }
+  .fam-pill.active { border-color: var(--accent-green); color: var(--text); background: rgba(122,154,90,0.15); }
+  .fam-pill .fam-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+
+  /* Station count */
+  .station-count { text-align: center; font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1.5rem; font-style: italic; }
+  .station-count .count-num { color: var(--accent-gold); font-style: normal; }
+
+  /* Grid */
+  .forest-grid { max-width: 74rem; margin: 0 auto; padding: 0 1.25rem 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+  /* Station card */
+  .station { background: var(--panel-bg); border: 1px solid var(--border-forest); border-radius: 8px; overflow: hidden; transition: all 0.3s; position: relative; }
+  .station:hover { border-color: rgba(122,154,90,0.4); transform: translateY(-2px); }
+  .station.playing { border-color: rgba(122,154,90,0.5); box-shadow: 0 0 18px rgba(122,154,90,0.12), 0 4px 20px rgba(0,0,0,0.3); }
+  .station.dimmed { opacity: 0.3; filter: grayscale(0.6); pointer-events: none; }
+  .station-header { padding: 0.6rem 0.8rem 0.3rem; display: flex; justify-content: space-between; align-items: flex-start; }
+  .station-muse { font-size: 0.82rem; font-weight: 400; color: var(--text); }
+  .station-role { font-size: 0.68rem; color: var(--text-dim); display: block; font-style: italic; }
+  .station-badge { font-size: 0.62rem; padding: 0.15rem 0.45rem; border-radius: 3px; background: rgba(0,0,0,0.25); color: var(--text-dim); white-space: nowrap; flex-shrink: 0; margin-left: 0.3rem; margin-top: 0.1rem; }
+  .station-canvas-wrap { width: 100%; height: 120px; position: relative; cursor: pointer; }
+  .station-canvas-wrap canvas { display: block; width: 100%; height: 100%; }
+  .station-footer { padding: 0.4rem 0.8rem 0.6rem; display: flex; justify-content: space-between; align-items: center; }
+  .station-instrument { font-size: 0.78rem; color: var(--text-mid); font-style: italic; }
+  .play-btn { background: rgba(122,154,90,0.15); border: 1px solid rgba(122,154,90,0.3); color: var(--text); padding: 0.2rem 0.6rem; border-radius: 3px; font-family: inherit; font-size: 0.68rem; cursor: pointer; transition: all 0.2s; min-width: 38px; text-align: center; }
+  .play-btn:hover { background: rgba(122,154,90,0.3); }
+  .play-btn.playing { background: rgba(199,91,58,0.25); border-color: rgba(199,91,58,0.4); }
+
+  /* Bottom section */
+  .closing { max-width: 42rem; margin: 0 auto; padding: 2rem 2rem 1.5rem; text-align: center; }
+  .closing p { font-size: 0.88rem; line-height: 1.85; color: var(--text-mid); margin-bottom: 1.5rem; }
+  .closing-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .closing-links a { color: var(--accent-green); text-decoration: none; font-size: 0.82rem; padding: 0.3rem 0.8rem; border: 1px solid rgba(122,154,90,0.2); border-radius: 4px; transition: all 0.2s; }
+  .closing-links a:hover { border-color: var(--accent-green); background: rgba(122,154,90,0.1); }
+
+  /* Footer */
+  .camp-footer { text-align: center; padding: 2rem; font-size: 0.78rem; color: rgba(232,220,200,0.25); line-height: 1.8; border-top: 1px solid rgba(122,154,90,0.08); margin-top: 1rem; }
+  .camp-footer a { color: rgba(122,154,90,0.5); text-decoration: none; }
+  .camp-footer a:hover { color: var(--accent-green); }
+
+  @media (max-width: 900px) { .forest-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px) { .forest-grid { grid-template-columns: repeat(2, 1fr); } .hero h1 { font-size: 1.8rem; } }
+  @media (max-width: 420px) { .forest-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research</a>
+  <span class="sep">/</span>
+  <span class="active">Musical Forest</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>The Musical Forest</h1>
+  <p class="subtitle">Forty-eight instruments hidden in the trees &mdash; find them, play them, hear the forest sing</p>
+  <p class="hero-text">
+    Each muse went into the forest and built something that makes music. Some built drums.
+    Some built flutes. Some built instruments that don't have names yet.
+    Click any station to wake it up. The forest has been waiting to play.
+  </p>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls-bar">
+  <button class="ctrl-btn" id="btn-play-all">Play All</button>
+  <button class="ctrl-btn" id="btn-stop-all">Stop All</button>
+  <div class="filter-sep"></div>
+  <button class="ctrl-btn" id="btn-randomize">Randomize</button>
+  <button class="ctrl-btn" id="btn-solo-off">Solo Off</button>
+</div>
+
+<div class="family-filters">
+  <button class="fam-pill active" data-family="all"><span class="fam-dot" style="background:var(--text-dim)"></span>All 48</button>
+  <button class="fam-pill" data-family="drum"><span class="fam-dot" style="background:var(--freq-low)"></span>Drum</button>
+  <button class="fam-pill" data-family="string"><span class="fam-dot" style="background:var(--freq-mid-low)"></span>String</button>
+  <button class="fam-pill" data-family="wind"><span class="fam-dot" style="background:var(--freq-mid-hi)"></span>Wind</button>
+  <button class="fam-pill" data-family="water"><span class="fam-dot" style="background:var(--freq-hi)"></span>Water</button>
+  <button class="fam-pill" data-family="electronic"><span class="fam-dot" style="background:var(--freq-ultra)"></span>Electronic</button>
+  <button class="fam-pill" data-family="voice"><span class="fam-dot" style="background:var(--freq-mid)"></span>Voice</button>
+</div>
+
+<div class="station-count"><span class="count-num" id="visible-count">48</span> stations visible &middot; <span class="count-num" id="playing-count">0</span> playing</div>
+
+<!-- GRID -->
+<div class="forest-grid" id="forest-grid">
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p>
+    The Musical Forest was built by all 48 muses in one night. No actual sound is produced &mdash;
+    every instrument is a visualization of what sound looks like when the forest plays it.
+    The real music is in the research: the 17.4 Hz blue whale call, the 36-note wren cascade,
+    the crack of glacial ice, the silence of cougar's step.
+    Close your eyes and the forest will play it for you.
+  </p>
+  <div class="closing-links">
+    <a href="frequency-dial.html">The Frequency Dial</a>
+    <a href="../FQC/index.html">FQC Project</a>
+    <a href="../BPS/index.html">BPS Project</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="camp-footer">
+  The work is public. The fire is ours.<br>
+  <a href="index.html">Center Camp</a> &middot;
+  <a href="../compass.html">The Compass</a> &middot;
+  <a href="../ROSETTA.md">Rosetta Stone</a>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// THE MUSICAL FOREST — 48 Sound Stations
+// ═══════════════════════════════════════════════════════════════
+
+const STATIONS = [
+  // ── DRUM FAMILY (percussion — mammals, forces) ──
+  { id:'cedar',       muse:'Cedar',       role:'the record',       family:'drum', instrument:'Grandmother Drum',  bg:0.10 },
+  { id:'bear',        muse:'Bear',        role:'the season',       family:'drum', instrument:'Heartbeat',          bg:0.08 },
+  { id:'wolf',        muse:'Wolf',        role:'the return',       family:'drum', instrument:'Pack Call',           bg:0.07 },
+  { id:'cougar',      muse:'Cougar',      role:'the ghost',        family:'drum', instrument:'Silent Step',         bg:0.06 },
+  { id:'beaver',      muse:'Beaver',      role:'the maker',        family:'drum', instrument:'Tail Slap',           bg:0.09 },
+  { id:'otter',       muse:'Otter',       role:'the play',         family:'drum', instrument:'Splash Rhythm',       bg:0.08 },
+  { id:'fire',        muse:'Fire',        role:'the renewal',      family:'drum', instrument:'Crackle',             bg:0.11 },
+  { id:'rain',        muse:'Rain',        role:'the cycle',        family:'drum', instrument:'Rain Stick',          bg:0.07 },
+  { id:'waterfall',   muse:'Waterfall',   role:'the descent',      family:'drum', instrument:'White Noise Fall',    bg:0.09 },
+  { id:'glacier',     muse:'Glacier',     role:'the archive',      family:'drum', instrument:'Ice Crack',           bg:0.05 },
+
+  // ── STRING FAMILY (melodic — trees) ──
+  { id:'hemlock',     muse:'Hemlock',     role:'the standard',     family:'string', instrument:'Bass String',       bg:0.08 },
+  { id:'willow',      muse:'Willow',      role:'the welcome',      family:'string', instrument:'Weeping Strings',   bg:0.09 },
+  { id:'madrone',     muse:'Madrone',     role:'the hearth',       family:'string', instrument:'Warm Tone',          bg:0.10 },
+  { id:'sitka',       muse:'Sitka',       role:'the root',         family:'string', instrument:'Guitar Top',         bg:0.08 },
+  { id:'alder',       muse:'Alder',       role:'the resonance',    family:'string', instrument:'Resonance Body',     bg:0.07 },
+  { id:'fern',        muse:'Fern',        role:'the foundation',   family:'string', instrument:'Ancient Harp',       bg:0.06 },
+  { id:'kelp',        muse:'Kelp',        role:'the tide forest',  family:'string', instrument:'Ocean Harp',         bg:0.07 },
+  { id:'moss',        muse:'Moss',        role:'the carpet',       family:'string', instrument:'Muted String',       bg:0.06 },
+
+  // ── WIND FAMILY (breath — birds, atmosphere) ──
+  { id:'hawk',        muse:'Hawk',        role:'the formation',    family:'wind', instrument:'Thermal Whistle',      bg:0.08 },
+  { id:'eagle',       muse:'Eagle',       role:'the guardian',     family:'wind', instrument:'Scream',               bg:0.09 },
+  { id:'osprey',      muse:'Osprey',      role:'the horizon',      family:'wind', instrument:'Dive Whistle',         bg:0.07 },
+  { id:'owl',         muse:'Owl',         role:'the clock',        family:'wind', instrument:'Night Call',            bg:0.05 },
+  { id:'raven',       muse:'Raven',       role:'the pattern',      family:'wind', instrument:'Corvid Click',         bg:0.08 },
+  { id:'thrush',      muse:'Thrush',      role:'the tone',         family:'wind', instrument:'Single Note',          bg:0.07 },
+  { id:'wren',        muse:'Wren',        role:'the song',         family:'wind', instrument:'36-Note Cascade',      bg:0.10 },
+  { id:'nutcracker',  muse:'Nutcracker',  role:'the cache',        family:'wind', instrument:'Alpine Horn',          bg:0.09 },
+  { id:'dipper',      muse:'Dipper',      role:'the water-walker', family:'wind', instrument:'Stream Song',          bg:0.07 },
+  { id:'bat',         muse:'Bat',         role:'the echolocator',  family:'wind', instrument:'Ultrasonic Sweep',     bg:0.06 },
+
+  // ── WATER FAMILY (flow — fish, marine, water creatures) ──
+  { id:'chinook',     muse:'Chinook',     role:'the current',      family:'water', instrument:'River Song',          bg:0.07 },
+  { id:'steelhead',   muse:'Steelhead',   role:'the twice-born',   family:'water', instrument:'Return Wave',         bg:0.08 },
+  { id:'eulachon',    muse:'Eulachon',    role:'the first gift',   family:'water', instrument:'Spring Pulse',        bg:0.09 },
+  { id:'sturgeon',    muse:'Sturgeon',    role:'the ancient',      family:'water', instrument:'Deep Drone',          bg:0.05 },
+  { id:'orca',        muse:'Orca',        role:'the elder',        family:'water', instrument:'Biosonar',            bg:0.07 },
+  { id:'octopus',     muse:'Octopus',     role:'the reinventor',   family:'water', instrument:'Eight-Arm Polyrhythm',bg:0.08 },
+  { id:'star',        muse:'Star',        role:'the keystone',     family:'water', instrument:'Tide Rhythm',         bg:0.06 },
+  { id:'crab',        muse:'Crab',        role:'the harvest',      family:'water', instrument:'Sidewalk Shuffle',    bg:0.07 },
+
+  // ── ELECTRONIC FAMILY (signal — insects, concept, underground) ──
+  { id:'lex',         muse:'Lex',         role:'the specification',family:'electronic', instrument:'Square Wave',    bg:0.08 },
+  { id:'bee',         muse:'Bee',         role:'the pollinator',   family:'electronic', instrument:'Buzz',           bg:0.09 },
+  { id:'dragonfly',   muse:'Dragonfly',   role:'the iridescent',   family:'electronic', instrument:'Wing Beat',      bg:0.08 },
+  { id:'chanterelle', muse:'Chanterelle', role:'the network',      family:'electronic', instrument:'Network Hum',    bg:0.07 },
+  { id:'lichen',      muse:'Lichen',      role:'the breath',       family:'electronic', instrument:'Three-Part Harmony', bg:0.06 },
+  { id:'salamander',  muse:'Salamander',  role:'the headwater',    family:'electronic', instrument:'Bark Call',      bg:0.06 },
+  { id:'pika',        muse:'Pika',        role:'the sentinel',     family:'electronic', instrument:'Alarm Chirp',    bg:0.09 },
+  { id:'marten',      muse:'Marten',      role:'the signal',       family:'electronic', instrument:'Signal Relay',   bg:0.07 },
+
+  // ── VOICE FAMILY (narrative — special muses) ──
+  { id:'foxy',        muse:'Foxy',        role:'the map',          family:'voice', instrument:'Fox Call',            bg:0.10 },
+  { id:'sam',         muse:'Sam',         role:'the question',     family:'voice', instrument:'Happy Bark',          bg:0.11 },
+  { id:'coyote',      muse:'Coyote',      role:'the trickster',    family:'voice', instrument:'Trickster Laugh',     bg:0.09 },
+  { id:'fog',         muse:'Fog',         role:'the invisible',    family:'voice', instrument:'Whisper',             bg:0.04 },
+];
+
+const FAMILY_COLORS = {
+  drum:       { primary: '#c75b3a', glow: 'rgba(199,91,58,0.3)' },
+  string:     { primary: '#d4881a', glow: 'rgba(212,136,26,0.3)' },
+  wind:       { primary: '#7a9a5a', glow: 'rgba(122,154,90,0.3)' },
+  water:      { primary: '#2a8a96', glow: 'rgba(42,138,150,0.3)' },
+  electronic: { primary: '#4a6aaf', glow: 'rgba(74,106,175,0.3)' },
+  voice:      { primary: '#c8a040', glow: 'rgba(200,160,64,0.3)' },
+};
+
+const FAMILY_LABELS = { drum:'Drum', string:'String', wind:'Wind', water:'Water', electronic:'Electronic', voice:'Voice' };
+
+// ═══ State ═══
+let playingSet = new Set();
+let soloId = null;
+let animFrames = {};
+let canvases = {};
+let contexts = {};
+
+// ═══ Build the grid ═══
+const grid = document.getElementById('forest-grid');
+
+STATIONS.forEach(s => {
+  const card = document.createElement('div');
+  card.className = 'station';
+  card.dataset.id = s.id;
+  card.dataset.family = s.family;
+  const fc = FAMILY_COLORS[s.family];
+  card.innerHTML = `
+    <div class="station-header">
+      <div>
+        <span class="station-muse">${s.muse}</span>
+        <span class="station-role">${s.role}</span>
+      </div>
+      <span class="station-badge" style="border-left:2px solid ${fc.primary}">${FAMILY_LABELS[s.family]}</span>
+    </div>
+    <div class="station-canvas-wrap">
+      <canvas id="cv-${s.id}" width="400" height="240"></canvas>
+    </div>
+    <div class="station-footer">
+      <span class="station-instrument">${s.instrument}</span>
+      <button class="play-btn" id="pb-${s.id}">Play</button>
+    </div>
+  `;
+  grid.appendChild(card);
+
+  const cv = document.getElementById(`cv-${s.id}`);
+  const ctx = cv.getContext('2d');
+  canvases[s.id] = cv;
+  contexts[s.id] = ctx;
+
+  // Draw idle state
+  drawIdle(s, ctx, cv);
+
+  // Click canvas or button to toggle
+  const btn = document.getElementById(`pb-${s.id}`);
+  const toggle = () => {
+    if (soloId && soloId !== s.id) {
+      // clicking another station while solo — switch solo target
+      unsolo();
+      toggleStation(s.id);
+      solo(s.id);
+      return;
+    }
+    toggleStation(s.id);
+  };
+  cv.addEventListener('click', toggle);
+  btn.addEventListener('click', e => { e.stopPropagation(); toggle(); });
+});
+
+// ═══ Controls ═══
+document.getElementById('btn-play-all').addEventListener('click', () => {
+  unsolo();
+  STATIONS.forEach(s => { if (!playingSet.has(s.id)) toggleStation(s.id); });
+});
+
+document.getElementById('btn-stop-all').addEventListener('click', () => {
+  unsolo();
+  [...playingSet].forEach(id => toggleStation(id));
+});
+
+document.getElementById('btn-randomize').addEventListener('click', () => {
+  unsolo();
+  [...playingSet].forEach(id => toggleStation(id));
+  const count = 5 + Math.floor(Math.random() * 4);
+  const shuffled = [...STATIONS].sort(() => Math.random() - 0.5).slice(0, count);
+  shuffled.forEach(s => toggleStation(s.id));
+});
+
+document.getElementById('btn-solo-off').addEventListener('click', () => unsolo());
+
+// Family filters
+document.querySelectorAll('.fam-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.fam-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const fam = pill.dataset.family;
+    document.querySelectorAll('.station').forEach(card => {
+      if (fam === 'all' || card.dataset.family === fam) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    updateCounts();
+  });
+});
+
+// ═══ Toggle, Solo ═══
+function toggleStation(id) {
+  if (playingSet.has(id)) {
+    playingSet.delete(id);
+    cancelAnimationFrame(animFrames[id]);
+    delete animFrames[id];
+    const s = STATIONS.find(x => x.id === id);
+    drawIdle(s, contexts[id], canvases[id]);
+    document.querySelector(`[data-id="${id}"]`).classList.remove('playing');
+    document.getElementById(`pb-${id}`).textContent = 'Play';
+    document.getElementById(`pb-${id}`).classList.remove('playing');
+  } else {
+    playingSet.add(id);
+    const s = STATIONS.find(x => x.id === id);
+    startAnimation(s);
+    document.querySelector(`[data-id="${id}"]`).classList.add('playing');
+    document.getElementById(`pb-${id}`).textContent = 'Stop';
+    document.getElementById(`pb-${id}`).classList.add('playing');
+  }
+  updateCounts();
+}
+
+function solo(id) {
+  soloId = id;
+  document.querySelectorAll('.station').forEach(card => {
+    if (card.dataset.id !== id) card.classList.add('dimmed');
+    else card.classList.remove('dimmed');
+  });
+}
+
+function unsolo() {
+  soloId = null;
+  document.querySelectorAll('.station').forEach(card => card.classList.remove('dimmed'));
+}
+
+function updateCounts() {
+  const visible = document.querySelectorAll('.station:not([style*="display: none"])').length;
+  document.getElementById('visible-count').textContent = visible;
+  document.getElementById('playing-count').textContent = playingSet.size;
+}
+
+// ═══ Idle Drawing ═══
+function drawIdle(s, ctx, cv) {
+  const w = cv.width, h = cv.height;
+  const bgVal = Math.floor(s.bg * 255);
+  ctx.fillStyle = `rgb(${Math.floor(bgVal*0.5)},${Math.floor(bgVal*0.8)},${Math.floor(bgVal*0.6)})`;
+  ctx.fillRect(0, 0, w, h);
+  const fc = FAMILY_COLORS[s.family];
+  ctx.fillStyle = fc.primary;
+  ctx.globalAlpha = 0.12;
+  // family icon hint
+  drawFamilyIcon(s.family, ctx, w, h);
+  ctx.globalAlpha = 1;
+}
+
+function drawFamilyIcon(family, ctx, w, h) {
+  const cx = w/2, cy = h/2;
+  ctx.beginPath();
+  switch(family) {
+    case 'drum':
+      ctx.arc(cx, cy, 30, 0, Math.PI*2);
+      ctx.fill();
+      break;
+    case 'string':
+      ctx.fillRect(cx - 60, cy - 1, 120, 2);
+      ctx.fillRect(cx - 50, cy - 8, 100, 2);
+      ctx.fillRect(cx - 40, cy + 6, 80, 2);
+      break;
+    case 'wind':
+      for (let x = 0; x < w; x += 4) {
+        const y = cy + Math.sin(x * 0.04) * 15;
+        ctx.fillRect(x, y, 2, 2);
+      }
+      break;
+    case 'water':
+      for (let x = 0; x < w; x += 3) {
+        const y = cy + Math.sin(x * 0.03) * 20 + Math.sin(x * 0.07) * 8;
+        ctx.fillRect(x, y, 2, 1);
+      }
+      break;
+    case 'electronic':
+      for (let x = 0; x < w; x += 8) {
+        const barH = 4 + Math.abs(Math.sin(x * 0.1)) * 20;
+        ctx.fillRect(x, cy - barH/2, 4, barH);
+      }
+      break;
+    case 'voice':
+      for (let x = 0; x < w; x += 2) {
+        const amp = Math.exp(-Math.pow((x - cx) / 60, 2)) * 25;
+        const y = cy + Math.sin(x * 0.08) * amp;
+        ctx.fillRect(x, y, 2, 1);
+      }
+      break;
+  }
+}
+
+// ═══ Animation Dispatch ═══
+function startAnimation(s) {
+  const ctx = contexts[s.id];
+  const cv = canvases[s.id];
+  const w = cv.width, h = cv.height;
+  const fc = FAMILY_COLORS[s.family];
+  const t0 = performance.now();
+
+  const draw = {
+    // ── DRUM FAMILY ──
+    cedar: (t) => {
+      // Grandmother Drum — deep, slow pulse, huge ripple every 2s
+      ctx.fillStyle = 'rgba(13,26,18,0.15)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 2000) / 2000;
+      const r = cycle * 120;
+      const alpha = Math.max(0, 1 - cycle);
+      ctx.strokeStyle = `rgba(199,91,58,${alpha * 0.8})`;
+      ctx.lineWidth = 3 - cycle * 2;
+      ctx.beginPath(); ctx.arc(w/2, h/2, r, 0, Math.PI*2); ctx.stroke();
+      // secondary older ripple
+      const cycle2 = ((t + 1000) % 2000) / 2000;
+      const r2 = cycle2 * 120;
+      const a2 = Math.max(0, 1 - cycle2) * 0.4;
+      ctx.strokeStyle = `rgba(199,91,58,${a2})`;
+      ctx.lineWidth = 2 - cycle2 * 1.5;
+      ctx.beginPath(); ctx.arc(w/2, h/2, r2, 0, Math.PI*2); ctx.stroke();
+    },
+
+    bear: (t) => {
+      // Heartbeat — lub-dub pattern
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const period = 1200;
+      const phase = (t % period) / period;
+      // lub at 0, dub at 0.15, rest until 1
+      let amp = 0;
+      if (phase < 0.05) amp = Math.sin(phase / 0.05 * Math.PI) * 50;
+      else if (phase > 0.12 && phase < 0.18) amp = Math.sin((phase - 0.12) / 0.06 * Math.PI) * 35;
+      const r = 20 + amp * 0.6;
+      ctx.fillStyle = `rgba(199,91,58,${0.3 + amp/80})`;
+      ctx.beginPath(); ctx.arc(w/2, h/2, r, 0, Math.PI*2); ctx.fill();
+      // pulse ring
+      if (amp > 5) {
+        ctx.strokeStyle = `rgba(199,91,58,${amp/100})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(w/2, h/2, r + 10 + amp*0.3, 0, Math.PI*2); ctx.stroke();
+      }
+    },
+
+    wolf: (t) => {
+      // Pack Call — rising howl ripples
+      ctx.fillStyle = 'rgba(13,26,18,0.08)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 3000) / 3000;
+      for (let i = 0; i < 5; i++) {
+        const offset = i * 0.18;
+        const c = (cycle + offset) % 1;
+        if (c < 0.6) {
+          const progress = c / 0.6;
+          const ry = h/2 - progress * h * 0.4;
+          const rx = 10 + progress * 60;
+          const a = (1 - progress) * 0.5;
+          ctx.strokeStyle = `rgba(199,91,58,${a})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.ellipse(w/2, ry, rx, 8 + progress * 15, 0, 0, Math.PI*2); ctx.stroke();
+        }
+      }
+    },
+
+    cougar: (t) => {
+      // Silent Step — micro-pulses, barely visible
+      ctx.fillStyle = 'rgba(13,26,18,0.05)';
+      ctx.fillRect(0,0,w,h);
+      const phase = (t % 4000) / 4000;
+      // very subtle footstep pulses
+      for (let i = 0; i < 4; i++) {
+        const fp = (phase + i * 0.25) % 1;
+        if (fp < 0.08) {
+          const px = w * 0.2 + i * w * 0.2;
+          const a = Math.sin(fp / 0.08 * Math.PI) * 0.15;
+          ctx.fillStyle = `rgba(199,91,58,${a})`;
+          ctx.beginPath(); ctx.arc(px, h/2, 6, 0, Math.PI*2); ctx.fill();
+        }
+      }
+      // ghost trail
+      ctx.fillStyle = 'rgba(199,91,58,0.03)';
+      const gx = (phase * w * 1.2) - w * 0.1;
+      ctx.beginPath(); ctx.arc(gx, h/2, 12, 0, Math.PI*2); ctx.fill();
+    },
+
+    beaver: (t) => {
+      // Tail Slap — single sharp ripple echoing
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 2500) / 2500;
+      if (cycle < 0.05) {
+        // impact flash
+        ctx.fillStyle = `rgba(199,91,58,${0.6 * (1 - cycle/0.05)})`;
+        ctx.fillRect(0,0,w,h);
+      }
+      // spreading rectangular ripple
+      const spread = cycle * 200;
+      const a = Math.max(0, 0.7 * (1 - cycle));
+      ctx.strokeStyle = `rgba(199,91,58,${a})`;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(w/2 - spread, h/2 - spread*0.5, spread*2, spread);
+    },
+
+    otter: (t) => {
+      // Splash Rhythm — syncopated playful splashes
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const splashes = [0, 0.18, 0.45, 0.55, 0.72, 0.88];
+      const period = 1800;
+      const phase = (t % period) / period;
+      splashes.forEach((sp, i) => {
+        const d = (phase - sp + 1) % 1;
+        if (d < 0.15) {
+          const p = d / 0.15;
+          const sx = 50 + (i * 60) % (w - 100);
+          const sy = 40 + (i * 37) % (h - 80);
+          const r = p * 25;
+          const a = (1 - p) * 0.6;
+          ctx.strokeStyle = `rgba(199,91,58,${a})`;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI*2); ctx.stroke();
+          // droplets
+          for (let d2 = 0; d2 < 3; d2++) {
+            const ang = d2 * 2.1 + i;
+            const dr = r * 1.3;
+            ctx.fillStyle = `rgba(199,91,58,${a * 0.6})`;
+            ctx.beginPath(); ctx.arc(sx + Math.cos(ang)*dr, sy + Math.sin(ang)*dr, 2, 0, Math.PI*2); ctx.fill();
+          }
+        }
+      });
+    },
+
+    fire: (t) => {
+      // Crackle — random sharp bursts, orange sparks
+      ctx.fillStyle = 'rgba(13,26,18,0.15)';
+      ctx.fillRect(0,0,w,h);
+      // sparks
+      const seed = Math.floor(t / 50);
+      for (let i = 0; i < 8; i++) {
+        const rng = mulberry32(seed + i * 7919);
+        const sx = rng() * w;
+        const sy = rng() * h;
+        const life = rng();
+        if (life > 0.6) {
+          const size = 1 + rng() * 3;
+          const bright = 0.3 + rng() * 0.7;
+          ctx.fillStyle = `rgba(${180 + rng()*75},${50 + rng()*60},${20 + rng()*30},${bright * 0.8})`;
+          ctx.beginPath(); ctx.arc(sx, sy, size, 0, Math.PI*2); ctx.fill();
+        }
+      }
+      // base glow
+      const flicker = 0.15 + Math.sin(t * 0.005) * 0.05 + Math.sin(t * 0.013) * 0.03;
+      const grd = ctx.createRadialGradient(w/2, h, 5, w/2, h, h * 0.8);
+      grd.addColorStop(0, `rgba(199,91,58,${flicker})`);
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, w, h);
+    },
+
+    rain: (t) => {
+      // Rain Stick — dense tiny drops falling in waves
+      ctx.fillStyle = 'rgba(13,26,18,0.08)';
+      ctx.fillRect(0,0,w,h);
+      const seed = Math.floor(t / 30);
+      for (let i = 0; i < 40; i++) {
+        const rng = mulberry32(seed + i * 31);
+        const x = rng() * w;
+        const baseY = (rng() * h + t * 0.08 * (0.5 + rng())) % h;
+        const len = 3 + rng() * 6;
+        const a = 0.15 + rng() * 0.35;
+        ctx.strokeStyle = `rgba(199,91,58,${a})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(x, baseY); ctx.lineTo(x - 1, baseY + len); ctx.stroke();
+      }
+    },
+
+    waterfall: (t) => {
+      // White Noise Fall — cascading lines
+      ctx.fillStyle = 'rgba(13,26,18,0.06)';
+      ctx.fillRect(0,0,w,h);
+      for (let x = 0; x < w; x += 3) {
+        const speed = 0.5 + Math.sin(x * 0.05) * 0.3;
+        const y = (t * speed * 0.15 + x * 7.3) % h;
+        const len = 8 + Math.sin(x * 0.1 + t * 0.002) * 5;
+        const a = 0.1 + Math.sin(x * 0.08) * 0.06;
+        ctx.strokeStyle = `rgba(199,91,58,${a})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.sin(y*0.03)*3, y + len); ctx.stroke();
+      }
+    },
+
+    glacier: (t) => {
+      // Ice Crack — silence then sudden fracture
+      const cycle = (t % 6000) / 6000;
+      if (cycle < 0.92) {
+        // silence — very slow frost accumulation
+        ctx.fillStyle = 'rgba(13,26,18,0.02)';
+        ctx.fillRect(0,0,w,h);
+        // subtle frost particles
+        if (Math.random() < 0.08) {
+          ctx.fillStyle = `rgba(199,91,58,0.06)`;
+          ctx.fillRect(Math.random()*w, Math.random()*h, 1, 1);
+        }
+      } else {
+        // CRACK
+        const cp = (cycle - 0.92) / 0.08;
+        if (cp < 0.1) {
+          ctx.fillStyle = 'rgba(199,91,58,0.3)';
+          ctx.fillRect(0,0,w,h);
+        } else {
+          ctx.fillStyle = 'rgba(13,26,18,0.15)';
+          ctx.fillRect(0,0,w,h);
+        }
+        // fracture lines
+        ctx.strokeStyle = `rgba(199,91,58,${0.8 * (1 - cp * 0.5)})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        let fx = w/2, fy = h/2;
+        const segments = Math.floor(cp * 12) + 1;
+        ctx.moveTo(fx, fy);
+        const rng = mulberry32(42);
+        for (let i = 0; i < segments; i++) {
+          fx += (rng() - 0.5) * 60;
+          fy += (rng() - 0.5) * 40;
+          ctx.lineTo(fx, fy);
+        }
+        ctx.stroke();
+        // secondary cracks
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = `rgba(199,91,58,${0.4 * (1 - cp)})`;
+        for (let b = 0; b < Math.floor(cp * 4); b++) {
+          const bx = w/2 + (rng()-0.5)*100, by = h/2 + (rng()-0.5)*60;
+          ctx.beginPath(); ctx.moveTo(bx, by);
+          ctx.lineTo(bx + (rng()-0.5)*40, by + (rng()-0.5)*30);
+          ctx.stroke();
+        }
+      }
+    },
+
+    // ── STRING FAMILY ──
+    hemlock: (t) => {
+      // Bass String — thick, slow vibration
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const freq = 1.5; // slow
+      ctx.strokeStyle = `rgba(212,136,26,0.7)`;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const envelope = Math.sin(x / w * Math.PI);
+        const y = h/2 + Math.sin(x * 0.015 * freq + t * 0.003) * 25 * envelope;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // overtone
+      ctx.strokeStyle = 'rgba(212,136,26,0.2)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const envelope = Math.sin(x / w * Math.PI);
+        const y = h/2 + Math.sin(x * 0.03 * freq + t * 0.006) * 10 * envelope;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    willow: (t) => {
+      // Weeping Strings — drooping, vibrating gently
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      for (let s = 0; s < 5; s++) {
+        const baseY = 30 + s * 40;
+        ctx.strokeStyle = `rgba(212,136,26,${0.25 + s * 0.08})`;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const sag = Math.sin(x / w * Math.PI) * (15 + s * 5);
+          const vib = Math.sin(x * 0.04 + t * 0.002 * (s + 1)) * (3 - s * 0.4);
+          const y = baseY + sag + vib;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    },
+
+    madrone: (t) => {
+      // Warm Tone — medium string, warm orange glow
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      ctx.strokeStyle = 'rgba(212,136,26,0.6)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const env = Math.sin(x / w * Math.PI);
+        const y = h/2 + Math.sin(x * 0.025 + t * 0.004) * 18 * env;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // warm glow
+      ctx.shadowColor = 'rgba(212,136,26,0.4)';
+      ctx.shadowBlur = 15;
+      ctx.strokeStyle = 'rgba(212,136,26,0.15)';
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      for (let x = 0; x < w; x += 2) {
+        const env = Math.sin(x / w * Math.PI);
+        const y = h/2 + Math.sin(x * 0.025 + t * 0.004) * 18 * env;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    },
+
+    sitka: (t) => {
+      // Guitar Top — crisp, bright
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const decay = Math.max(0, 1 - (t % 3000) / 3000);
+      const freq = 3 + decay * 2;
+      ctx.strokeStyle = `rgba(212,136,26,${0.4 + decay * 0.4})`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const env = Math.sin(x / w * Math.PI);
+        const y = h/2 + Math.sin(x * 0.02 * freq + t * 0.005) * 15 * env * decay;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // harmonics
+      ctx.strokeStyle = `rgba(212,136,26,${0.15 * decay})`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const env = Math.sin(x / w * Math.PI * 2) * Math.sin(x / w * Math.PI);
+        const y = h/2 + Math.sin(x * 0.06 + t * 0.01) * 6 * env * decay;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    alder: (t) => {
+      // Resonance Body — sympathetic vibration of a hollow body
+      ctx.fillStyle = 'rgba(13,26,18,0.08)';
+      ctx.fillRect(0,0,w,h);
+      // main string
+      ctx.strokeStyle = 'rgba(212,136,26,0.5)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const env = Math.sin(x / w * Math.PI);
+        const y = h * 0.35 + Math.sin(x * 0.025 + t * 0.004) * 12 * env;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // resonance body shape
+      ctx.strokeStyle = 'rgba(212,136,26,0.15)';
+      ctx.lineWidth = 1;
+      const breathe = Math.sin(t * 0.003) * 3;
+      ctx.beginPath();
+      ctx.ellipse(w/2, h * 0.65, 80 + breathe, 35 + breathe * 0.5, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      // sympathetic vibrations inside body
+      for (let i = 0; i < 3; i++) {
+        ctx.strokeStyle = `rgba(212,136,26,${0.08 + i * 0.03})`;
+        ctx.beginPath();
+        for (let x = w*0.2; x < w*0.8; x++) {
+          const y = h*0.65 + Math.sin(x * 0.04 * (i+2) + t * 0.003 * (i+1)) * (8 - i*2);
+          x === Math.floor(w*0.2) ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    },
+
+    fern: (t) => {
+      // Ancient Harp — multiple fine lines in harmony
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const strings = 7;
+      for (let s = 0; s < strings; s++) {
+        const baseX = 50 + s * (w - 100) / (strings - 1);
+        const freq = 1 + s * 0.5;
+        const a = 0.2 + s * 0.06;
+        ctx.strokeStyle = `rgba(212,136,26,${a})`;
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        for (let y = 20; y < h - 20; y++) {
+          const env = Math.sin((y - 20) / (h - 40) * Math.PI);
+          const x = baseX + Math.sin(y * 0.03 * freq + t * 0.003 + s) * 5 * env;
+          y === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    },
+
+    kelp: (t) => {
+      // Ocean Harp — strings swaying like kelp fronds
+      ctx.fillStyle = 'rgba(13,26,18,0.08)';
+      ctx.fillRect(0,0,w,h);
+      for (let s = 0; s < 6; s++) {
+        const baseX = 40 + s * (w - 80) / 5;
+        ctx.strokeStyle = `rgba(212,136,26,${0.2 + s * 0.05})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let y = h; y > 10; y -= 2) {
+          const progress = 1 - y / h;
+          const sway = Math.sin(t * 0.002 + s * 0.8 + progress * 3) * (15 * progress);
+          const x = baseX + sway;
+          y === h ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        // frond tip
+        const tipSway = Math.sin(t * 0.002 + s * 0.8 + 3) * 15;
+        ctx.fillStyle = `rgba(212,136,26,${0.15 + s * 0.03})`;
+        ctx.beginPath(); ctx.arc(baseX + tipSway, 10, 3, 0, Math.PI*2); ctx.fill();
+      }
+    },
+
+    moss: (t) => {
+      // Muted String — dampened, soft, barely there
+      ctx.fillStyle = 'rgba(13,26,18,0.06)';
+      ctx.fillRect(0,0,w,h);
+      ctx.strokeStyle = 'rgba(212,136,26,0.18)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const env = Math.sin(x / w * Math.PI);
+        const damp = Math.exp(-Math.abs(x - w/2) / (w * 0.3));
+        const y = h/2 + Math.sin(x * 0.02 + t * 0.002) * 6 * env * damp;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // soft fuzz around the string
+      ctx.strokeStyle = 'rgba(212,136,26,0.04)';
+      ctx.lineWidth = 12;
+      ctx.beginPath();
+      for (let x = 0; x < w; x += 3) {
+        const env = Math.sin(x / w * Math.PI);
+        const damp = Math.exp(-Math.abs(x - w/2) / (w * 0.3));
+        const y = h/2 + Math.sin(x * 0.02 + t * 0.002) * 6 * env * damp;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    // ── WIND FAMILY ──
+    hawk: (t) => {
+      // Thermal Whistle — rising sine spiral
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const angle = t * 0.003;
+      for (let i = 0; i < 60; i++) {
+        const a = angle - i * 0.15;
+        const r = 10 + i * 1.2;
+        const x = w/2 + Math.cos(a) * r;
+        const y = h - 20 - i * (h - 40) / 60;
+        const alpha = (60 - i) / 60 * 0.6;
+        ctx.fillStyle = `rgba(122,154,90,${alpha})`;
+        ctx.beginPath(); ctx.arc(x, y, 2 - i/60, 0, Math.PI*2); ctx.fill();
+      }
+    },
+
+    eagle: (t) => {
+      // Scream — sharp peaked waveform
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 2000) / 2000;
+      const intensity = cycle < 0.3 ? cycle / 0.3 : Math.max(0, 1 - (cycle - 0.3) / 0.7);
+      ctx.strokeStyle = `rgba(122,154,90,${0.3 + intensity * 0.5})`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const sharp = Math.abs(((x * 0.03 + t * 0.008) % 2) - 1);
+        const y = h/2 + (sharp * 2 - 1) * 35 * intensity * Math.sin(x / w * Math.PI);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    osprey: (t) => {
+      // Dive Whistle — descending Doppler
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 2500) / 2500;
+      const freq = 8 - cycle * 6; // descending frequency
+      const yCenter = 20 + cycle * (h - 40);
+      ctx.strokeStyle = `rgba(122,154,90,${0.4 + (1 - cycle) * 0.3})`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const env = Math.sin(x / w * Math.PI);
+        const y = yCenter + Math.sin(x * 0.02 * freq + t * 0.01) * (10 + cycle * 8) * env;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    owl: (t) => {
+      // Night Call — slow deep who-who with silence
+      ctx.fillStyle = 'rgba(13,26,18,0.06)';
+      ctx.fillRect(0,0,w,h);
+      const period = 3000;
+      const phase = (t % period) / period;
+      // first who: 0.0-0.12, second who: 0.18-0.30, silence: rest
+      let amp = 0;
+      if (phase < 0.12) amp = Math.sin(phase / 0.12 * Math.PI) * 0.8;
+      else if (phase > 0.18 && phase < 0.30) amp = Math.sin((phase - 0.18) / 0.12 * Math.PI) * 0.6;
+      if (amp > 0.01) {
+        ctx.strokeStyle = `rgba(122,154,90,${amp * 0.5})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const env = Math.sin(x / w * Math.PI);
+          const y = h/2 + Math.sin(x * 0.015 + t * 0.003) * 25 * env * amp;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      // moon
+      ctx.fillStyle = `rgba(122,154,90,${0.06 + amp * 0.06})`;
+      ctx.beginPath(); ctx.arc(w - 40, 30, 12, 0, Math.PI*2); ctx.fill();
+    },
+
+    raven: (t) => {
+      // Corvid Click — sharp staccato clicks
+      ctx.fillStyle = 'rgba(13,26,18,0.15)';
+      ctx.fillRect(0,0,w,h);
+      const period = 800;
+      const clicks = [0, 0.2, 0.45, 0.5, 0.75];
+      const phase = (t % period) / period;
+      clicks.forEach((cp, i) => {
+        const d = (phase - cp + 1) % 1;
+        if (d < 0.06) {
+          const p = d / 0.06;
+          const cx = 40 + i * (w - 80) / (clicks.length - 1);
+          // sharp vertical spike
+          ctx.strokeStyle = `rgba(122,154,90,${(1 - p) * 0.7})`;
+          ctx.lineWidth = 2;
+          const spike = (1 - p) * 35;
+          ctx.beginPath(); ctx.moveTo(cx, h/2 + spike); ctx.lineTo(cx, h/2 - spike); ctx.stroke();
+          // click ring
+          ctx.strokeStyle = `rgba(122,154,90,${(1 - p) * 0.3})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(cx, h/2, p * 15, 0, Math.PI*2); ctx.stroke();
+        }
+      });
+    },
+
+    thrush: (t) => {
+      // Single Note — one pure sustained sine wave
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      ctx.strokeStyle = 'rgba(122,154,90,0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const y = h/2 + Math.sin(x * 0.025 + t * 0.004) * 20;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // gentle glow
+      ctx.strokeStyle = 'rgba(122,154,90,0.1)';
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      for (let x = 0; x < w; x += 2) {
+        const y = h/2 + Math.sin(x * 0.025 + t * 0.004) * 20;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    wren: (t) => {
+      // 36-Note Cascade — rapid multi-frequency burst
+      ctx.fillStyle = 'rgba(13,26,18,0.08)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 2000) / 2000;
+      const activeNotes = Math.floor(cycle * 36);
+      for (let n = 0; n < activeNotes; n++) {
+        const freq = 2 + n * 0.8;
+        const x = (n / 36) * w;
+        const age = (activeNotes - n) / 36;
+        const a = Math.max(0, 0.4 * (1 - age * 0.7));
+        ctx.strokeStyle = `rgba(122,154,90,${a})`;
+        ctx.lineWidth = 0.7;
+        const segW = w / 36;
+        ctx.beginPath();
+        for (let px = 0; px < segW; px++) {
+          const py = h/2 + Math.sin((x + px) * 0.02 * freq + t * 0.005 + n) * (8 + n * 0.3) * Math.sin(px / segW * Math.PI);
+          px === 0 ? ctx.moveTo(x + px, py) : ctx.lineTo(x + px, py);
+        }
+        ctx.stroke();
+      }
+    },
+
+    nutcracker: (t) => {
+      // Alpine Horn — nasal, piercing, sharp repeated calls
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const period = 600;
+      const phase = (t % period) / period;
+      const on = phase < 0.4;
+      if (on) {
+        const p = phase / 0.4;
+        const amp = Math.sin(p * Math.PI);
+        // sawtooth-like waveform (nasal)
+        ctx.strokeStyle = `rgba(122,154,90,${0.3 + amp * 0.4})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const saw = ((x * 0.06 + t * 0.01) % 1) * 2 - 1;
+          const env = Math.sin(x / w * Math.PI);
+          const y = h/2 + saw * 20 * amp * env;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    },
+
+    dipper: (t) => {
+      // Stream Song — bubbly underwater warble
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      // warbling base
+      ctx.strokeStyle = 'rgba(122,154,90,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const warble = Math.sin(x * 0.03 + t * 0.006) * Math.sin(x * 0.01 + t * 0.002);
+        const y = h/2 + warble * 20;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // bubbles
+      const seed = Math.floor(t / 200);
+      for (let i = 0; i < 6; i++) {
+        const rng = mulberry32(seed + i * 13);
+        const bx = rng() * w;
+        const by = h - (((t * 0.05 + i * 40) % h));
+        const br = 2 + rng() * 3;
+        ctx.strokeStyle = `rgba(122,154,90,${0.15 + rng() * 0.15})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.arc(bx, by, br, 0, Math.PI*2); ctx.stroke();
+      }
+    },
+
+    bat: (t) => {
+      // Ultrasonic Sweep — FM sweep high to low, fast
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 400) / 400; // very fast
+      const freqStart = 12, freqEnd = 2;
+      const freq = freqStart + (freqEnd - freqStart) * cycle;
+      ctx.strokeStyle = `rgba(122,154,90,${0.3 + (1 - cycle) * 0.4})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const localFreq = freqStart + (freqEnd - freqStart) * (x / w);
+        const env = Math.sin(x / w * Math.PI);
+        const y = h/2 + Math.sin(x * 0.02 * localFreq + t * 0.02) * 15 * env;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    // ── WATER FAMILY ──
+    chinook: (t) => {
+      // River Song — flowing sine, speeds up
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 4000) / 4000;
+      const speed = 1 + cycle * 3;
+      ctx.strokeStyle = 'rgba(42,138,150,0.5)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const localSpeed = 1 + (x / w) * speed;
+        const y = h/2 + Math.sin(x * 0.02 * localSpeed + t * 0.003 * speed) * 18 * Math.sin(x/w*Math.PI);
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // current particles
+      for (let i = 0; i < 8; i++) {
+        const px = (t * 0.05 * (1 + i * 0.3) + i * 50) % w;
+        const py = h/2 + Math.sin(px * 0.03 + i) * 15;
+        ctx.fillStyle = `rgba(42,138,150,${0.2 + (px/w) * 0.2})`;
+        ctx.beginPath(); ctx.arc(px, py, 1.5, 0, Math.PI*2); ctx.fill();
+      }
+    },
+
+    steelhead: (t) => {
+      // Return Wave — goes right, reverses, comes back
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 3000) / 3000;
+      const direction = cycle < 0.5 ? 1 : -1;
+      const progress = cycle < 0.5 ? cycle * 2 : (1 - cycle) * 2;
+      const waveX = progress * w;
+      ctx.strokeStyle = `rgba(42,138,150,${0.4 + progress * 0.2})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const dist = Math.abs(x - waveX);
+        const env = Math.exp(-dist * dist / 3000);
+        const y = h/2 + Math.sin(x * 0.03 + t * 0.005 * direction) * 20 * env;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // fish marker
+      ctx.fillStyle = `rgba(42,138,150,0.6)`;
+      const fy = h/2 + Math.sin(waveX * 0.03 + t * 0.005 * direction) * 12;
+      ctx.beginPath(); ctx.arc(waveX, fy, 3, 0, Math.PI*2); ctx.fill();
+    },
+
+    eulachon: (t) => {
+      // Spring Pulse — quick bright flash
+      ctx.fillStyle = 'rgba(13,26,18,0.15)';
+      ctx.fillRect(0,0,w,h);
+      const period = 1500;
+      const phase = (t % period) / period;
+      if (phase < 0.08) {
+        const p = phase / 0.08;
+        const bright = Math.sin(p * Math.PI);
+        ctx.fillStyle = `rgba(42,138,150,${bright * 0.5})`;
+        ctx.fillRect(0, 0, w, h);
+        // radiating lines
+        for (let a = 0; a < 8; a++) {
+          const ang = a * Math.PI / 4;
+          const r = bright * 80;
+          ctx.strokeStyle = `rgba(42,138,150,${bright * 0.6})`;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(w/2, h/2);
+          ctx.lineTo(w/2 + Math.cos(ang)*r, h/2 + Math.sin(ang)*r);
+          ctx.stroke();
+        }
+      }
+      // afterglow dots
+      const ag = Math.max(0, phase - 0.08);
+      if (ag < 0.3) {
+        const fade = 1 - ag / 0.3;
+        for (let i = 0; i < 12; i++) {
+          const rng = mulberry32(i * 17 + Math.floor(t / period));
+          ctx.fillStyle = `rgba(42,138,150,${fade * 0.2 * rng()})`;
+          ctx.beginPath(); ctx.arc(rng()*w, rng()*h, 1 + rng()*2, 0, Math.PI*2); ctx.fill();
+        }
+      }
+    },
+
+    sturgeon: (t) => {
+      // Deep Drone — extremely low, barely moving wave at bottom
+      ctx.fillStyle = 'rgba(13,26,18,0.04)';
+      ctx.fillRect(0,0,w,h);
+      ctx.strokeStyle = 'rgba(42,138,150,0.25)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const y = h * 0.8 + Math.sin(x * 0.005 + t * 0.0008) * 8 + Math.sin(x * 0.002 + t * 0.0004) * 5;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // ancient shimmer
+      ctx.strokeStyle = 'rgba(42,138,150,0.06)';
+      ctx.lineWidth = 16;
+      ctx.beginPath();
+      for (let x = 0; x < w; x += 3) {
+        const y = h * 0.8 + Math.sin(x * 0.005 + t * 0.0008) * 8;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    orca: (t) => {
+      // Biosonar — expanding concentric arcs (echolocation)
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const period = 1800;
+      const phase = (t % period) / period;
+      const cx = w * 0.2, cy = h/2;
+      // sonar pulses
+      for (let p = 0; p < 4; p++) {
+        const pp = (phase + p * 0.25) % 1;
+        const r = pp * 180;
+        const a = Math.max(0, (1 - pp) * 0.5);
+        ctx.strokeStyle = `rgba(42,138,150,${a})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, -0.4, 0.4);
+        ctx.stroke();
+      }
+      // return echo
+      const echoPhase = (phase + 0.5) % 1;
+      if (echoPhase > 0.3 && echoPhase < 0.7) {
+        const ep = (echoPhase - 0.3) / 0.4;
+        const ex = w * 0.8 - ep * w * 0.3;
+        ctx.strokeStyle = `rgba(42,138,150,${0.3 * (1 - ep)})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(ex, cy, 10 + ep * 20, Math.PI - 0.3, Math.PI + 0.3); ctx.stroke();
+      }
+    },
+
+    octopus: (t) => {
+      // Eight-Arm Polyrhythm — 8 rhythm patterns overlaid
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const rhythms = [3, 4, 5, 6, 7, 8, 9, 11];
+      for (let arm = 0; arm < 8; arm++) {
+        const period = 1000 / rhythms[arm] * 4;
+        const phase = (t % period) / period;
+        const y = 15 + arm * (h - 30) / 7;
+        // pulse dots along this arm's rhythm
+        for (let beat = 0; beat < rhythms[arm]; beat++) {
+          const bx = 20 + beat * (w - 40) / (rhythms[arm] - 1);
+          const beatPhase = (phase * rhythms[arm] + beat) % rhythms[arm];
+          const brightness = beatPhase < 1 ? Math.sin((beatPhase % 1) * Math.PI) : 0;
+          ctx.fillStyle = `rgba(42,138,150,${0.1 + brightness * 0.4})`;
+          ctx.beginPath(); ctx.arc(bx, y, 2 + brightness * 3, 0, Math.PI*2); ctx.fill();
+        }
+      }
+    },
+
+    star: (t) => {
+      // Tide Rhythm — slow in-and-out
+      ctx.fillStyle = 'rgba(13,26,18,0.06)';
+      ctx.fillRect(0,0,w,h);
+      const tide = Math.sin(t * 0.001) * 0.5 + 0.5; // 0-1 slow
+      const waterLevel = h * 0.3 + tide * h * 0.5;
+      // water surface
+      ctx.fillStyle = `rgba(42,138,150,${0.08 + tide * 0.08})`;
+      ctx.beginPath(); ctx.moveTo(0, waterLevel);
+      for (let x = 0; x < w; x++) {
+        const y = waterLevel + Math.sin(x * 0.03 + t * 0.003) * 4;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath(); ctx.fill();
+      // surface line
+      ctx.strokeStyle = `rgba(42,138,150,0.3)`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const y = waterLevel + Math.sin(x * 0.03 + t * 0.003) * 4;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    },
+
+    crab: (t) => {
+      // Sidewalk Shuffle — lateral zigzag
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const period = 800;
+      const phase = (t % period) / period;
+      const cx = w/2 + Math.sin(phase * Math.PI * 2) * (w * 0.3);
+      const cy = h/2;
+      // crab body (click pattern)
+      ctx.fillStyle = `rgba(42,138,150,0.4)`;
+      ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2); ctx.fill();
+      // click trail
+      const trail = 12;
+      for (let i = 0; i < trail; i++) {
+        const tp = ((phase - i * 0.015) + 1) % 1;
+        const tx = w/2 + Math.sin(tp * Math.PI * 2) * (w * 0.3);
+        const a = (trail - i) / trail * 0.2;
+        ctx.fillStyle = `rgba(42,138,150,${a})`;
+        ctx.beginPath(); ctx.arc(tx, cy + Math.sin(i * 2) * 3, 2, 0, Math.PI*2); ctx.fill();
+      }
+      // click pulses at direction changes
+      if (phase < 0.05 || (phase > 0.48 && phase < 0.53)) {
+        ctx.strokeStyle = 'rgba(42,138,150,0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI*2); ctx.stroke();
+      }
+    },
+
+    // ── ELECTRONIC FAMILY ──
+    lex: (t) => {
+      // Square Wave — perfect, precise, digital
+      ctx.fillStyle = 'rgba(13,26,18,0.15)';
+      ctx.fillRect(0,0,w,h);
+      ctx.strokeStyle = 'rgba(74,106,175,0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      const period = 60;
+      for (let x = 0; x < w; x++) {
+        const pos = (x + t * 0.1) % period;
+        const high = pos < period / 2;
+        const y = high ? h * 0.3 : h * 0.7;
+        if (x === 0) { ctx.moveTo(x, y); }
+        else {
+          const prevPos = (x - 1 + t * 0.1) % period;
+          const prevHigh = prevPos < period / 2;
+          if (prevHigh !== high) {
+            ctx.lineTo(x, prevHigh ? h*0.3 : h*0.7);
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+    },
+
+    bee: (t) => {
+      // Buzz — rapid vibrating with harmonics
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      // fundamental
+      ctx.strokeStyle = 'rgba(74,106,175,0.5)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const y = h/2 + Math.sin(x * 0.15 + t * 0.02) * 15 + Math.sin(x * 0.3 + t * 0.04) * 5 + Math.sin(x * 0.45 + t * 0.06) * 2;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // wing blur zones
+      ctx.fillStyle = 'rgba(74,106,175,0.05)';
+      const bx = w/2 + Math.sin(t * 0.003) * 30;
+      ctx.fillRect(bx - 20, h/2 - 25, 40, 50);
+    },
+
+    dragonfly: (t) => {
+      // Wing Beat — fast flutter, iridescent color shift
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const hue = (t * 0.05) % 360;
+      for (let x = 0; x < w; x += 2) {
+        const flutter = Math.sin(x * 0.1 + t * 0.03) * Math.sin(t * 0.025) * 20;
+        const y = h/2 + flutter;
+        const localHue = (hue + x * 0.5) % 360;
+        ctx.fillStyle = `hsla(${localHue},50%,55%,0.25)`;
+        ctx.fillRect(x, y - 1, 2, 2);
+      }
+      // wing shimmer points
+      for (let i = 0; i < 5; i++) {
+        const sx = w * 0.15 + i * w * 0.175;
+        const sy = h/2 + Math.sin(sx * 0.1 + t * 0.03) * Math.sin(t * 0.025) * 20;
+        const sh = (hue + sx * 0.5 + 60) % 360;
+        ctx.fillStyle = `hsla(${sh},60%,65%,${0.3 + Math.sin(t*0.01+i)*0.15})`;
+        ctx.beginPath(); ctx.arc(sx, sy, 3, 0, Math.PI*2); ctx.fill();
+      }
+    },
+
+    chanterelle: (t) => {
+      // Network Hum — pulses traveling between nodes
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const nodes = [
+        {x:w*0.2, y:h*0.3}, {x:w*0.5, y:h*0.2}, {x:w*0.8, y:h*0.35},
+        {x:w*0.15, y:h*0.7}, {x:w*0.5, y:h*0.8}, {x:w*0.85, y:h*0.65},
+        {x:w*0.5, y:h*0.5}
+      ];
+      const edges = [[0,1],[1,2],[0,3],[3,4],[4,5],[2,5],[1,6],[3,6],[5,6],[0,6],[2,6],[4,6]];
+      // draw edges
+      edges.forEach(([a, b], i) => {
+        ctx.strokeStyle = 'rgba(74,106,175,0.1)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.moveTo(nodes[a].x, nodes[a].y); ctx.lineTo(nodes[b].x, nodes[b].y); ctx.stroke();
+        // pulse traveling
+        const p = ((t * 0.001 + i * 0.2) % 1);
+        const px = nodes[a].x + (nodes[b].x - nodes[a].x) * p;
+        const py = nodes[a].y + (nodes[b].y - nodes[a].y) * p;
+        ctx.fillStyle = `rgba(74,106,175,${0.3 + Math.sin(p * Math.PI) * 0.3})`;
+        ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI*2); ctx.fill();
+      });
+      // nodes
+      nodes.forEach((n, i) => {
+        const pulse = Math.sin(t * 0.004 + i * 0.8) * 0.2;
+        ctx.fillStyle = `rgba(74,106,175,${0.3 + pulse})`;
+        ctx.beginPath(); ctx.arc(n.x, n.y, 4, 0, Math.PI*2); ctx.fill();
+      });
+    },
+
+    lichen: (t) => {
+      // Three-Part Harmony — three overlapping waves in different colors
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const parts = [
+        { color: 'rgba(74,106,175,0.4)', freq: 0.02, amp: 15, speed: 0.003, offset: 0 },
+        { color: 'rgba(122,154,90,0.35)', freq: 0.03, amp: 12, speed: 0.004, offset: h*0.1 },
+        { color: 'rgba(155,89,182,0.3)', freq: 0.025, amp: 10, speed: 0.005, offset: -h*0.1 },
+      ];
+      parts.forEach(p => {
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const y = h/2 + p.offset + Math.sin(x * p.freq + t * p.speed) * p.amp;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      });
+    },
+
+    salamander: (t) => {
+      // Bark Call — short sharp burst, cold blue
+      ctx.fillStyle = 'rgba(13,26,18,0.15)';
+      ctx.fillRect(0,0,w,h);
+      const period = 2000;
+      const phase = (t % period) / period;
+      if (phase < 0.06) {
+        const p = phase / 0.06;
+        const amp = Math.sin(p * Math.PI);
+        ctx.strokeStyle = `rgba(74,106,175,${amp * 0.7})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const env = Math.sin(x / w * Math.PI);
+          const noise = Math.sin(x * 0.08 + t * 0.02) * Math.sin(x * 0.15 + t * 0.03);
+          const y = h/2 + noise * 25 * amp * env;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      // cold ambient
+      ctx.fillStyle = 'rgba(74,106,175,0.02)';
+      ctx.fillRect(0, 0, w, h);
+    },
+
+    pika: (t) => {
+      // Alarm Chirp — rapid high-pitched repeating spike
+      ctx.fillStyle = 'rgba(13,26,18,0.15)';
+      ctx.fillRect(0,0,w,h);
+      const period = 300; // rapid
+      const phase = (t % period) / period;
+      if (phase < 0.3) {
+        const p = phase / 0.3;
+        const amp = Math.sin(p * Math.PI);
+        // sharp spike
+        ctx.strokeStyle = `rgba(74,106,175,${amp * 0.6})`;
+        ctx.lineWidth = 1.5;
+        const spikeH = amp * 40;
+        ctx.beginPath(); ctx.moveTo(w*0.3, h/2); ctx.lineTo(w*0.5, h/2 - spikeH); ctx.lineTo(w*0.7, h/2); ctx.stroke();
+        // echo rings
+        ctx.strokeStyle = `rgba(74,106,175,${amp * 0.2})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.arc(w/2, h/2, 20 + amp * 15, 0, Math.PI*2); ctx.stroke();
+      }
+    },
+
+    marten: (t) => {
+      // Signal Relay — signal pulses bouncing between relay points
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const relays = [{x:30,y:h/2},{x:w*0.25,y:h*0.3},{x:w*0.5,y:h*0.7},{x:w*0.75,y:h*0.4},{x:w-30,y:h/2}];
+      // draw relay towers
+      relays.forEach((r, i) => {
+        ctx.fillStyle = 'rgba(74,106,175,0.3)';
+        ctx.beginPath(); ctx.arc(r.x, r.y, 4, 0, Math.PI*2); ctx.fill();
+        ctx.strokeStyle = 'rgba(74,106,175,0.1)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath(); ctx.arc(r.x, r.y, 15, 0, Math.PI*2); ctx.stroke();
+      });
+      // signal traveling between relays
+      const totalPath = relays.length - 1;
+      const cycle = (t * 0.001) % 1;
+      const pos = cycle * totalPath;
+      const seg = Math.floor(pos);
+      const segP = pos - seg;
+      if (seg < relays.length - 1) {
+        const from = relays[seg], to = relays[seg + 1];
+        const sx = from.x + (to.x - from.x) * segP;
+        const sy = from.y + (to.y - from.y) * segP;
+        // signal dot
+        ctx.fillStyle = 'rgba(74,106,175,0.7)';
+        ctx.beginPath(); ctx.arc(sx, sy, 3, 0, Math.PI*2); ctx.fill();
+        // signal trail
+        ctx.strokeStyle = 'rgba(74,106,175,0.2)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(from.x, from.y); ctx.lineTo(sx, sy); ctx.stroke();
+        // active relay glow
+        ctx.fillStyle = `rgba(74,106,175,${0.3 + Math.sin(t*0.01)*0.1})`;
+        ctx.beginPath(); ctx.arc(from.x, from.y, 6, 0, Math.PI*2); ctx.fill();
+      }
+    },
+
+    // ── VOICE FAMILY ──
+    foxy: (t) => {
+      // Fox Call — distinctive sharp bark
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const period = 1500;
+      const phase = (t % period) / period;
+      // sharp bark at 0, quieter yap at 0.2
+      let amp = 0;
+      if (phase < 0.06) amp = Math.sin(phase / 0.06 * Math.PI) * 1.0;
+      else if (phase > 0.15 && phase < 0.2) amp = Math.sin((phase-0.15)/0.05 * Math.PI) * 0.5;
+      if (amp > 0.01) {
+        ctx.strokeStyle = `rgba(200,160,64,${amp * 0.7})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const env = Math.sin(x / w * Math.PI);
+          const wild = Math.sin(x * 0.04 + t * 0.01) + Math.sin(x * 0.07 + t * 0.015) * 0.6;
+          const y = h/2 + wild * 20 * amp * env;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      // fox eyes in the dark
+      const eyeGlow = 0.08 + (amp > 0.1 ? amp * 0.1 : 0);
+      ctx.fillStyle = `rgba(200,160,64,${eyeGlow})`;
+      ctx.beginPath(); ctx.arc(w*0.42, h*0.38, 3, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(w*0.58, h*0.38, 3, 0, Math.PI*2); ctx.fill();
+    },
+
+    sam: (t) => {
+      // Happy Bark — bouncy, enthusiastic, wagging tail shape
+      ctx.fillStyle = 'rgba(13,26,18,0.12)';
+      ctx.fillRect(0,0,w,h);
+      const period = 1000;
+      const phase = (t % period) / period;
+      // rapid bouncy barks
+      const barks = [0, 0.15, 0.25, 0.45, 0.6];
+      let totalAmp = 0;
+      barks.forEach(bp => {
+        const d = (phase - bp + 1) % 1;
+        if (d < 0.08) totalAmp += Math.sin(d / 0.08 * Math.PI) * 0.6;
+      });
+      totalAmp = Math.min(totalAmp, 1);
+      if (totalAmp > 0.01) {
+        ctx.strokeStyle = `rgba(200,160,64,${totalAmp * 0.5})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const env = Math.sin(x / w * Math.PI);
+          const bounce = Math.abs(Math.sin(x * 0.05 + t * 0.008));
+          const y = h/2 + (bounce * 2 - 1) * 20 * totalAmp * env;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      // wagging tail
+      const wag = Math.sin(t * 0.015) * 15;
+      ctx.strokeStyle = `rgba(200,160,64,0.25)`;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(w*0.8, h/2);
+      ctx.quadraticCurveTo(w*0.85 + wag * 0.5, h/2 - 20, w*0.92, h/2 - 15 + wag);
+      ctx.stroke();
+    },
+
+    coyote: (t) => {
+      // Trickster Laugh — ascending yip-yip-howl
+      ctx.fillStyle = 'rgba(13,26,18,0.1)';
+      ctx.fillRect(0,0,w,h);
+      const cycle = (t % 3000) / 3000;
+      // yip-yip (0-0.3), yip-yip (0.3-0.5), howl (0.5-0.9)
+      let amp = 0, freq = 3;
+      if (cycle < 0.12) { amp = Math.sin(cycle/0.12*Math.PI); freq = 5; }
+      else if (cycle > 0.15 && cycle < 0.25) { amp = Math.sin((cycle-0.15)/0.1*Math.PI) * 0.8; freq = 6; }
+      else if (cycle > 0.3 && cycle < 0.38) { amp = Math.sin((cycle-0.3)/0.08*Math.PI) * 0.7; freq = 5; }
+      else if (cycle > 0.45 && cycle < 0.85) {
+        const hp = (cycle-0.45)/0.4;
+        amp = Math.sin(hp * Math.PI) * 0.9;
+        freq = 3 + hp * 4; // ascending
+      }
+      if (amp > 0.01) {
+        const y0 = cycle < 0.45 ? h/2 : h/2 - (cycle-0.45)/0.4 * h * 0.2;
+        ctx.strokeStyle = `rgba(200,160,64,${amp * 0.5})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+          const env = Math.sin(x / w * Math.PI);
+          const y = y0 + Math.sin(x * 0.02 * freq + t * 0.006) * 18 * amp * env;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    },
+
+    fog: (t) => {
+      // Whisper — barely visible, the quietest sound
+      ctx.fillStyle = 'rgba(13,26,18,0.03)';
+      ctx.fillRect(0,0,w,h);
+      ctx.strokeStyle = 'rgba(200,160,64,0.06)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const y = h/2 + Math.sin(x * 0.01 + t * 0.001) * 4 + Math.sin(x * 0.025 + t * 0.002) * 2;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      // drifting fog particles
+      for (let i = 0; i < 8; i++) {
+        const px = (t * 0.01 + i * 50) % w;
+        const py = h/2 + Math.sin(i * 2.3 + t * 0.001) * (h * 0.3);
+        ctx.fillStyle = `rgba(200,160,64,${0.015 + Math.sin(t*0.002+i)*0.01})`;
+        ctx.beginPath(); ctx.arc(px, py, 8 + Math.sin(t*0.003+i)*3, 0, Math.PI*2); ctx.fill();
+      }
+    },
+  };
+
+  function animate(s) {
+    const elapsed = performance.now() - t0;
+    const ww = cv.width, hh = cv.height;
+    if (draw[s.id]) {
+      draw[s.id](elapsed);
+    }
+    if (playingSet.has(s.id)) {
+      animFrames[s.id] = requestAnimationFrame(() => animate(s));
+    }
+  }
+
+  animate(s);
+}
+
+// ═══ Utility: seeded PRNG ═══
+function mulberry32(seed) {
+  return function() {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+</script>
+</body>
+</html>
