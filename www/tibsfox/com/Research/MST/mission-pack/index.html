@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eye on the Sky — Global Telescope Mesh Network Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #311B92;
+      --secondary: #0277BD;
+      --tertiary: #F9A825;
+      --accent: #7B1FA2;
+      --light-primary: #EDE7F6;
+      --light-secondary: #E1F5FE;
+      --card-bg: #1a1040;
+      --body-bg: #0d0820;
+      --text: #F5F0FF;
+      --subtle: #9E9BC4;
+      --border: #3D2E7C;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--body-bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a0a5c 50%, #0a1a40 100%);
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--tertiary);
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '★ ✦ ✧ ✦ ★ ✦ ✧ ✦ ★ ✦ ✧ ✦ ★ ✦ ✧ ✦ ★';
+      position: absolute;
+      top: 1rem;
+      left: 0; right: 0;
+      text-align: center;
+      color: rgba(249,168,37,0.3);
+      font-size: 0.9rem;
+      letter-spacing: 0.5rem;
+    }
+
+    .header-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tertiary);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #B39DDB;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-tag {
+      display: inline-block;
+      background: var(--tertiary);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      padding: 0.3rem 1rem;
+      border-radius: 2px;
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      text-align: center;
+    }
+
+    .meta-value {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--tertiary);
+    }
+
+    .meta-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .pipeline-banner {
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--subtle);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      padding: 0.8rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pipeline-banner span {
+      color: var(--tertiary);
+      font-weight: 600;
+    }
+
+    h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.25rem;
+      color: #B39DDB;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .files-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      .files-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.8rem; }
+    }
+
+    .file-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .file-card:hover {
+      border-color: var(--secondary);
+      background: #221560;
+      transform: translateY(-2px);
+    }
+
+    .file-card .file-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .file-card .file-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .file-card .file-desc {
+      font-size: 0.8rem;
+      color: var(--subtle);
+      line-height: 1.5;
+    }
+
+    .file-card .download-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--primary);
+      color: var(--tertiary);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    .contents-section {
+      margin-bottom: 3rem;
+    }
+
+    .stage-block {
+      background: var(--card-bg);
+      border-left: 3px solid var(--primary);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .stage-block:nth-child(2) { border-left-color: var(--secondary); }
+    .stage-block:nth-child(3) { border-left-color: var(--tertiary); }
+
+    .stage-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 0.3rem;
+    }
+
+    .stage-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .stage-items {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--subtle);
+      line-height: 2;
+    }
+
+    .stage-items li::before {
+      content: '→  ';
+      color: var(--tertiary);
+      font-weight: 600;
+    }
+
+    .usage-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .usage-section h2 {
+      border-bottom-color: var(--border);
+      margin-bottom: 1rem;
+    }
+
+    ol {
+      padding-left: 1.5rem;
+      font-size: 0.85rem;
+      line-height: 2;
+      color: #C5B8F0;
+    }
+
+    code {
+      background: rgba(49,27,146,0.4);
+      color: var(--tertiary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 2px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8em;
+    }
+
+    .recompile-section {
+      background: rgba(49,27,146,0.2);
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      padding: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .recompile-section h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 0.8rem;
+    }
+
+    pre {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--tertiary);
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .closing-quote {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      text-align: center;
+    }
+
+    .closing-quote blockquote {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #B39DDB;
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 1rem;
+    }
+
+    .closing-quote cite {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.7rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">GSD Research Mission Package</div>
+  <h1>Eye on the Sky</h1>
+  <p class="subtitle">Global Telescope Mesh Network &amp; Yuri's Night</p>
+  <div class="event-tag">April 12 · World Space Party · Global Shutter Event</div>
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-value">27</span>
+      <span class="meta-label">Pages</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">6</span>
+      <span class="meta-label">Modules</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">Fleet</span>
+      <span class="meta-label">Profile</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">193K</span>
+      <span class="meta-label">Est. Tokens</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-value">15,000+</span>
+      <span class="meta-label">Connectable Nodes</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="pipeline-banner">
+    <span>Vision</span> &nbsp;→&nbsp; <span>Research</span> &nbsp;→&nbsp; <span>Mission</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp; Ready for GSD Orchestrator &nbsp;&nbsp;|&nbsp;&nbsp; March 27, 2026
+  </div>
+
+  <section>
+    <h2>Package Files</h2>
+    <div class="files-grid">
+      <a class="file-card" href="mesh_telescope_mission.pdf" download>
+        <div class="download-badge">↓ Download</div>
+        <div class="file-type">PDF Document</div>
+        <div class="file-name">mesh_telescope_mission.pdf</div>
+        <div class="file-desc">Full 27-page mission package — all three stages compiled.</div>
+      </a>
+      <a class="file-card" href="mesh_telescope_mission.tex" download>
+        <div class="download-badge">↓ Download</div>
+        <div class="file-type">LaTeX Source</div>
+        <div class="file-name">mesh_telescope_mission.tex</div>
+        <div class="file-desc">XeLaTeX source — modify and recompile as the mission evolves.</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="contents-section">
+    <h2>Document Contents</h2>
+
+    <div class="stage-block">
+      <div class="stage-label">Stage 1</div>
+      <div class="stage-title">Vision Document</div>
+      <ul class="stage-items">
+        <li>Vision narrative — the wire that was always missing</li>
+        <li>Five concrete problems (fragmentation, coordination, latency, geography, participation gap)</li>
+        <li>Domain map: Tier 1 professional networks → GTM broker layer → citizen science → GSD orchestrator</li>
+        <li>Six research module architecture with parallel execution plan</li>
+        <li>Chipset configuration (Agnus/Denise/Paula model assignments)</li>
+        <li>Scope boundaries, 12 success criteria, relationship to Fox Infrastructure Group</li>
+        <li>Through-line: Amiga Principle applied to the cosmos</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-label">Stage 2</div>
+      <div class="stage-title">Research Reference</div>
+      <ul class="stage-items">
+        <li>Network architecture: FITS, ASCOM/INDI, LCO OCS, NASA meshNetwork, SMA-X, NRAO open model</li>
+        <li>Fleet census: Unistellar (15,000+ nodes), LCO (25 robotic), SkyMapper, amateur base</li>
+        <li>Unistellar science output: DART tracking, 26-hr exoplanet transit, JWST monitoring</li>
+        <li>Vera Rubin Observatory LSST: 800K first-night alerts, 7M/night target, 2-min latency (Feb 2026)</li>
+        <li>Nine official Rubin broker ecosystem with specializations</li>
+        <li>Alert-to-backyard routing pathway (full ASCII diagram)</li>
+        <li>Yuri's Night history (567 events / 75 countries / 100K attendees in 2011)</li>
+        <li>Global Shutter event specification (00:00 UTC April 12, GPS-synchronized)</li>
+        <li>Citizen science protocols with data quality gates</li>
+        <li>DACP bundle structure for telescope command dispatch</li>
+        <li>Safety and sensitivity considerations including Indigenous sky knowledge protocol</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <div class="stage-label">Stage 3</div>
+      <div class="stage-title">Mission Package</div>
+      <ul class="stage-items">
+        <li>Fleet activation profile (17–18 roles)</li>
+        <li>Wave execution plan: Foundation → 3 parallel tracks → Synthesis → Publication</li>
+        <li>Three CAPCOM HITL gates with scope, cultural review, and release approval</li>
+        <li>Component breakdown with model assignments and token budget (193K total)</li>
+        <li>Dependency graph with CAPCOM gate positions</li>
+        <li>25-test test plan with 4 safety-critical BLOCK tests</li>
+        <li>Verification matrix mapping 12 success criteria to test IDs</li>
+        <li>Full crew manifest (FLIGHT, ARCH, CRAFT-NET, CRAFT-FLEET, CRAFT-ALERT, CRAFT-EVENT, CRAFT-SCI, INTEG, SECURE, CAPCOM + supporting roles)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="usage-section">
+    <h2>How to Use This Package</h2>
+    <ol>
+      <li>Open the PDF and read Stage 1 (Vision) to orient the orchestrator to the mission scope.</li>
+      <li>Paste the entire PDF or Stage 2 (Research Reference) as context for Wave 1 agents — it is the authoritative source for all module production.</li>
+      <li>Follow the Wave Execution Plan in Stage 3. Begin with Wave 0 Foundation schemas before launching parallel tracks.</li>
+      <li>Respect the three CAPCOM gates: <strong>CAPCOM-1</strong> (scope confirm after Wave 1), <strong>CAPCOM-2</strong> (cultural/sensitivity review after Wave 2), <strong>CAPCOM-3</strong> (release approval before publication).</li>
+      <li>Use the DACP bundle template in Module 06 for all telescope observation dispatch during campaign execution.</li>
+      <li>The GSD skill-creator planning-bridge MCP server is the integration point for Yuri's Night campaign coordination.</li>
+    </ol>
+  </section>
+
+  <section class="recompile-section">
+    <h3>Recompile the LaTeX Source</h3>
+    <pre>
+# Requires XeLaTeX + DejaVu fonts (pre-installed on Ubuntu 24)
+xelatex -interaction=nonstopmode mesh_telescope_mission.tex
+xelatex -interaction=nonstopmode mesh_telescope_mission.tex
+xelatex -interaction=nonstopmode mesh_telescope_mission.tex
+# Three passes required: TOC + cross-references + lastpage counter</pre>
+  </section>
+
+  <div class="closing-quote">
+    <blockquote>
+      "The spaces between the telescopes are not empty. They are the network. They are where the science lives."
+    </blockquote>
+    <cite>— Eye on the Sky, Through-Line · GSD Ecosystem · Amiga Principle</cite>
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · Eye on the Sky: Global Telescope Mesh Network · March 27, 2026 · Miles Tiberius Foxglove
+</footer>
+
+</body>
+</html>
