@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS Protocol &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-dns">
+  <header>
+    <h1>DNS Protocol</h1>
+    <div class="subtitle">Wire Format &middot; Record Types &middot; Resolution &middot; DNSSEC &middot; Zone Management &middot; Privacy Stack</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-wire-protocol-message-format">Wire Protocol</a>
+      <a href="page.html?doc=02-resource-record-taxonomy">Record Types</a>
+      <a href="page.html?doc=03-resolution-architecture">Resolution</a>
+      <a href="page.html?doc=04-zone-management">Zone Management</a>
+      <a href="page.html?doc=05-dnssec">DNSSEC</a>
+      <a href="page.html?doc=06-modern-extensions-privacy">Extensions &amp; Privacy</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every time a human types a URL, every time a microservice calls another microservice, every time
+      an email routes across the planet &mdash; the Domain Name System is doing something that looks simple
+      but is, at its bones, a distributed, hierarchical, cryptographically-extensible database operating
+      at planetary scale. DNS was designed in 1983 by Paul Mockapetris to replace the brittle, centrally-maintained
+      HOSTS.TXT file with something that could survive the exponential growth of the ARPANET. It did not
+      merely survive. It became the connective tissue of the internet itself.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">42</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">29+</span><span class="stat-label">RFCs Cited</span></div>
+      <div class="stat"><span class="stat-value">40+</span><span class="stat-label">Years of Protocol</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-wire-protocol-message-format" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Wire Protocol &amp; Message Format</h3>
+        <div class="meta"><span class="tag tag-wire">Wire</span> Track A &middot; Binary specification</div>
+        <p>The 12-byte header with all flag bits (QR, OPCODE, AA, TC, RD, RA, AD, CD, RCODE). Label encoding and compression pointers. Five message sections. UDP/TCP transport rules including EDNS0 expansion. The complete binary specification of every DNS message.</p>
+      </a>
+
+      <a href="page.html?doc=02-resource-record-taxonomy" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Resource Record Taxonomy</h3>
+        <div class="meta"><span class="tag tag-rr">Records</span> Track A &middot; Type catalog</div>
+        <p>Every IANA-assigned RR type: type code, RDATA wire format, zone file syntax, and operational semantics. From the original RFC 1035 types (A, NS, CNAME, SOA, MX, TXT) through DNSSEC types (DNSKEY, RRSIG, NSEC3) and modern service binding (SVCB, HTTPS).</p>
+      </a>
+
+      <a href="page.html?doc=03-resolution-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Resolution Architecture</h3>
+        <div class="meta"><span class="tag tag-arch">Architecture</span> Track B &middot; Resolver hierarchy</div>
+        <p>The full resolution stack: stub resolver through recursive resolver through the root-to-authoritative chain. Referral mechanics, glue records and the bailiwick rule, negative caching, the 13 root server logical addresses and their anycast deployment.</p>
+      </a>
+
+      <a href="page.html?doc=04-zone-management" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Zone Management</h3>
+        <div class="meta"><span class="tag tag-zone">Zones</span> Track B &middot; Zone operations</div>
+        <p>Zone files ($ORIGIN, $TTL, $INCLUDE, $GENERATE directives). SOA record fields. Zone transfer protocols (AXFR, IXFR). NOTIFY mechanism. Dynamic updates (RFC 2136). TSIG transaction signatures for authenticated zone transfers.</p>
+      </a>
+
+      <a href="page.html?doc=05-dnssec" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: DNSSEC</h3>
+        <div class="meta"><span class="tag tag-sec">Security</span> Track C &middot; Cryptographic chain of trust</div>
+        <p>Zone signing procedure, DNSKEY (KSK vs ZSK), RRSIG structure, DS delegation signer, NSEC chain vs NSEC3 hashed denial. The chain of trust from root trust anchor through TLD to authoritative zone. Validation algorithm and key rollover procedures.</p>
+      </a>
+
+      <a href="page.html?doc=06-modern-extensions-privacy" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Modern Extensions &amp; Privacy Stack</h3>
+        <div class="meta"><span class="tag tag-ext">Extensions</span> Track C &middot; Privacy and transport</div>
+        <p>EDNS0 (RFC 6891) OPT pseudo-RR and extension mechanism. DNS over TLS (DoT), DNS over HTTPS (DoH), DNS over QUIC (DoQ). QNAME minimization. Oblivious DoH. Client Subnet (ECS). The privacy trade-off matrix across all approaches.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Wire format / binary encoding</td><td>M1, M2, M5</td><td>RFC, CMH, SYS</td></tr>
+        <tr><td>Resource record types (A/AAAA/MX/SRV)</td><td>M1, M2, M4</td><td>K8S, WPH, MCF</td></tr>
+        <tr><td>DNSSEC chain of trust</td><td>M2, M5, M6</td><td>FCC, PSS, CMH</td></tr>
+        <tr><td>Recursive resolution</td><td>M1, M3</td><td>SYS, K8S, RFC</td></tr>
+        <tr><td>Zone transfers (AXFR/IXFR)</td><td>M3, M4</td><td>SYS, MCF, CMH</td></tr>
+        <tr><td>DNS over HTTPS/TLS</td><td>M5, M6</td><td>PSS, FCC, WPH</td></tr>
+        <tr><td>Caching and TTL</td><td>M1, M3, M4</td><td>K8S, SYS, CMH</td></tr>
+        <tr><td>Root server infrastructure</td><td>M3, M5</td><td>RFC, PSS, SYS</td></tr>
+        <tr><td>DNS security attacks</td><td>M3, M5, M6</td><td>FCC, PSS, SYS</td></tr>
+        <tr><td>EDNS0 extension mechanism</td><td>M1, M5, M6</td><td>RFC, CMH</td></tr>
+        <tr><td>Service discovery (SRV/NAPTR)</td><td>M2, M4</td><td>K8S, MCF, WPH</td></tr>
+        <tr><td>Privacy and QNAME minimization</td><td>M6</td><td>PSS, FCC</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+DNS PROTOCOL -- DOMAIN MAP
+===============================================================
+
+  WIRE DOMAIN              NAMING DOMAIN          SECURITY DOMAIN
+  +---------------+       +----------------+     +---------------+
+  | 12-byte Header|       | Namespace Tree |     | DNSKEY/RRSIG  |
+  | Label Encoding|------&gt;| Delegation     |----&gt;| DS Records    |
+  | Message Sects |       | Zone Cuts      |     | NSEC/NSEC3    |
+  | UDP/TCP Xport |       | Glue Records   |     | Trust Anchors |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        v                       v                       v
+  +---------------+       +----------------+     +---------------+
+  | EDNS0 / OPT  |       | Stub Resolver  |     | Chain of Trust|
+  | Compression   |       | Recursive Res. |     | Validation    |
+  | Truncation    |       | Authoritative  |     | Key Rollover  |
+  | TCP Fallback  |       | Caching/TTL    |     | Root KSK      |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |    OPERATIONS LAYER   |
+                    |                       |
+                    |  Zone Files           |
+                    |  AXFR / IXFR          |
+                    |  NOTIFY / Dyn. Update |
+                    |  TSIG Authentication  |
+                    |  DoT / DoH / DoQ      |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Wire Protocol] -----------&gt; [M2: Record Types]
+         |                                |
+         |                                |
+         v                                v
+  [M3: Resolution Architecture] ---&gt; [M4: Zone Management]
+                                          |
+                                          v
+                              [M5: DNSSEC]
+                                          |
+                                          v
+                              [M6: Extensions &amp; Privacy]
+
+  Parallel tracks:
+    Track A: M1 + M2 (wire format + record taxonomy)
+    Track B: M3 + M4 (resolution + zone operations)
+    Track C: M5 + M6 (security + privacy extensions)
+    </pre>
+  </main>
+
+  <footer>
+    <p>DNS Protocol &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

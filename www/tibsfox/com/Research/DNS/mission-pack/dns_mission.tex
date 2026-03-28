@@ -1,0 +1,1305 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology color scheme
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0D47A1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{highlight}{HTML}{1976D2}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{DNS Full Protocol Specification}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={DNS Full Protocol Specification -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─── TITLE PAGE ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{DNS\\[0.3em]Full Protocol Specification}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Every Detail Mapped --- RFC 1034 to RFC 9499}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles)  |  Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\section{DNS Full Protocol Specification --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{GSD Ecosystem Baseline; \textit{The Space Between} mathematical foundations}
+\metafield{Context:}{Cold-start deep research mission. Six modules. Fleet activation.}
+
+\subsection{Vision}
+
+Every time a human types a URL, every time a microservice calls another microservice, every time an email routes across the planet --- the Domain Name System is doing something that looks simple but is, at its bones, a distributed, hierarchical, cryptographically-extensible database operating at planetary scale. DNS was designed in 1983 by Paul Mockapetris to replace the brittle, centrally-maintained \texttt{HOSTS.TXT} file with something that could survive the exponential growth of the ARPANET. It did not merely survive. It became the connective tissue of the internet itself.
+
+The protocol is deceptively small in its original specification --- RFC 1034 and RFC 1035, published November 1987, are together under 100 pages. But what those pages specify is a wire format with extraordinary elegance: a 12-byte fixed header, variable-length label-encoded names, a five-section message structure, and an extensibility hook (the record type field) that has allowed DNS to carry IPv6 addresses, cryptographic keys, email routing tables, service discovery metadata, geographic coordinates, and TLS certificate policies --- none of which existed when Mockapetris wrote the original RFC.
+
+This mission maps DNS completely: every bit in the wire format, every resource record type with its RDATA layout, the full resolution architecture from stub resolver through recursive resolver through the root-to-authoritative chain, the zone management protocols (AXFR, IXFR, NOTIFY, dynamic updates), the DNSSEC cryptographic chain of trust (RFCs 4033--4035), and the modern privacy extension stack (EDNS0, DoT, DoH, DoQ). The goal is a document so complete that a developer could implement a compliant DNS resolver, a network engineer could architect a resilient DNS infrastructure, and a security researcher could understand every attack surface --- all from a single reference.
+
+The Amiga Principle applies here as it does everywhere in the GSD ecosystem: DNS achieves planetary-scale name resolution not through brute force but through architectural leverage --- delegation, caching, and the zone cut. A single root zone holds only 13 logical name server addresses. From those 13 addresses, every domain name on the internet is resolvable. That is the spaces-between principle in production: meaning --- in this case, reachability --- lives not in any single node but in the delegation relationships connecting them.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Protocol fragmentation:} DNS knowledge is scattered across 50+ RFCs spanning 40 years. No single document maps the complete protocol from wire format through modern extensions in a developer-actionable form.
+  \item \textbf{Security surface opacity:} DNS has four distinct attack classes (cache poisoning, amplification DDoS, zone enumeration, DNS hijacking) each exploiting different layers of the protocol. Most practitioners understand one; few understand all four and their mitigations.
+  \item \textbf{Extension stack complexity:} The relationship between DNSSEC (origin authentication), DoT (transport privacy), DoH (application-layer privacy), EDNS0 (protocol extension mechanism), and QNAME minimization (query privacy) is poorly documented as an integrated stack.
+  \item \textbf{Implementation traps:} Label compression, glue records, CNAME chains, negative caching, NSEC vs.\ NSEC3 zone enumeration, and the 512-byte UDP limit are each individually documented but their interactions create implementation traps that break resolvers in subtle ways.
+  \item \textbf{Operational gaps:} Zone management (SOA serial conventions, AXFR security, NOTIFY mechanics, dynamic update prerequisites) is critical infrastructure knowledge that lacks a consolidated reference.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} DNS is a distributed, hierarchical, delegated, extensible read-mostly database operating over UDP/TCP, with cryptographic integrity extensions layered above and encrypted transport extensions layered below.
+
+The protocol resolves a query by traversing a tree: the root zone delegates to TLD zones, TLD zones delegate to second-level domains, second-level domains may delegate further. Each delegation boundary is marked by an NS record in the parent and a corresponding zone on the child. Answers travel back up the resolution path and are cached at each hop according to their TTL.
+
+\subsubsection{DNS Namespace Architecture}
+
+\begin{asciibox}
+                         . (root)
+                    /    |    \    \
+                 .com  .org  .net  .uk  ...
+                /   \    \
+         example   google  ietf
+         /     \
+        www    mail
+\end{asciibox}
+
+\begin{asciibox}
+DNS Message Structure (wire format):
++-----------------------+ 
+| HEADER (12 bytes)     |  ID (16) + FLAGS (16) + QDCOUNT + ANCOUNT + NSCOUNT + ARCOUNT
++-----------------------+
+| QUESTION SECTION      |  QNAME (variable) + QTYPE (16) + QCLASS (16)
++-----------------------+
+| ANSWER SECTION        |  0..ANCOUNT Resource Records
++-----------------------+
+| AUTHORITY SECTION     |  0..NSCOUNT Resource Records (NS/SOA referrals)
++-----------------------+
+| ADDITIONAL SECTION    |  0..ARCOUNT Resource Records (glue A/AAAA for NS)
++-----------------------+
+
+Resource Record wire format:
+NAME (variable) | TYPE (16) | CLASS (16) | TTL (32) | RDLENGTH (16) | RDATA (variable)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Wire Protocol and Message Format}
+The binary specification of DNS messages: the 12-byte header with all flag bits (QR, OPCODE, AA, TC, RD, RA, Z, AD, CD, RCODE), the four section counts, label encoding (length-prefixed octets), label compression pointers (two-bit prefix \texttt{0b11}), the five message sections, UDP/TCP transport rules (512-byte legacy limit, EDNS0 expansion to 4096+, TCP fallback on truncation), and the complete flag field bit-by-bit specification.
+
+\subsubsection{Module 02: Resource Record Taxonomy}
+Every defined RR type: type code, RDATA wire format, zone file textual syntax, and operational semantics. Covers the original RFC 1035 types (A, NS, CNAME, SOA, PTR, MX, TXT, HINFO), the modern core types (AAAA, SRV, NAPTR, CAA, DS, TLSA, SSHFP), the DNSSEC types (DNSKEY, RRSIG, NSEC, NSEC3, NSEC3PARAM), and the pseudo-RR types (OPT for EDNS0). Includes CLASS values (IN, CH, HS, ANY) and QTYPE values (AXFR, IXFR, ANY, \texttt{*}).
+
+\subsubsection{Module 03: Resolution Architecture}
+The full resolution stack: stub resolver (OS getaddrinfo), recursive resolver (full-service, forwarding, caching behaviors), iterative queries to the DNS hierarchy (root $\to$ TLD $\to$ authoritative), referral mechanics (NXDOMAIN, NOERROR/empty, referral responses), glue records and the bailiwick rule, negative caching (RFC 2308, SOA-derived TTL), and the 13 root server logical addresses and their anycast deployment.
+
+\subsubsection{Module 04: Zone Management}
+Zone files (\$ORIGIN, \$TTL, \$INCLUDE, \$GENERATE directives), SOA record fields (MNAME, RNAME, SERIAL, REFRESH, RETRY, EXPIRE, MINIMUM), zone transfer protocols (AXFR via RFC 5936, IXFR via RFC 1995), NOTIFY mechanism (RFC 1996), dynamic updates (RFC 2136: ADD, DELETE, PREREQ), TSIG transaction signatures (RFC 2845) for authenticated zone transfers, and multi-primary zone architectures.
+
+\subsubsection{Module 05: DNSSEC}
+The complete DNSSEC stack: zone signing procedure, DNSKEY record types (KSK vs.\ ZSK), RRSIG record structure (algorithm, key tag, validity window, signature bytes), DS record and parent-child delegation of trust, NSEC chain (zone enumeration vulnerability), NSEC3 with opt-out flag and salt/iteration parameters, the EDNS0 DO bit for signaling DNSSEC support, the AD bit in responses, chain of trust validation algorithm, key rollover procedures, and the root DNSKEY trust anchor.
+
+\subsubsection{Module 06: Modern Extensions and Privacy Stack}
+EDNS0 (RFC 6891): OPT pseudo-RR, UDP payload size advertisement, extended RCODE, EDNS options (ECS RFC 7871, PADDING RFC 7830, EXPIRE RFC 7314); DNS over TLS (DoT, RFC 7858, port 853); DNS over HTTPS (DoH, RFC 8484, port 443, \texttt{application/dns-message} MIME type, GET/POST methods); DNS over QUIC (DoQ, RFC 9250); QNAME minimization (RFC 7816); Oblivious DoH (ODoH, RFC 9230); and the privacy trade-off matrix between these approaches.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# dns_mission_chipset.yaml
+# GSD Amiga Chipset Configuration
+
+agnus:          # Orchestration / DMA / Context Management
+  model: opus
+  role: FLIGHT + INTEG + DNSSEC synthesis
+  responsibilities:
+    - Cross-module dependency management
+    - DNSSEC chain-of-trust analysis
+    - Security surface synthesis
+    - Go/no-go gates
+
+denise:         # Display / Output Rendering
+  model: sonnet
+  role: EXEC (x3) + CRAFT-WIRE + CRAFT-RR + CRAFT-ZONE
+  responsibilities:
+    - Wire protocol document production
+    - Resource record taxonomy compilation
+    - Zone management reference assembly
+    - ASCII diagram rendering
+
+paula:          # Audio / I/O / Anticipatory
+  model: haiku
+  role: LOG + BUDGET + SCOUT (parallel fetch)
+  responsibilities:
+    - RFC source fetching and indexing
+    - Token budget tracking
+    - Commit message generation
+    - Schema scaffolding
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+  \item Complete RFC 1034 and RFC 1035 wire format specification
+  \item All IANA-assigned resource record types through 2025
+  \item Full DNS resolution algorithm (recursive and iterative)
+  \item Zone file format and all directives
+  \item AXFR and IXFR zone transfer protocols
+  \item NOTIFY (RFC 1996) and dynamic updates (RFC 2136)
+  \item TSIG transaction signatures (RFC 2845)
+  \item DNSSEC complete suite (RFC 4033, 4034, 4035, 5155, 6840)
+  \item EDNS0 complete specification (RFC 6891)
+  \item DoT (RFC 7858), DoH (RFC 8484), DoQ (RFC 9250)
+  \item QNAME minimization (RFC 7816)
+  \item Negative caching (RFC 2308)
+  \item DNS clarifications (RFC 2181)
+  \item DNS Terminology (RFC 9499)
+  \item Security attack taxonomy and mitigations
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}
+  \item mDNS (Multicast DNS, RFC 6762) --- separate mission
+  \item DNS-SD (Service Discovery, RFC 6763) --- separate mission
+  \item Private DNS (RFC 8499 split-horizon) --- operational guide only
+  \item BIND, Unbound, PowerDNS implementation specifics --- implementation guide
+  \item Registrar/registry operational procedures --- separate domain
+  \item DNSSEC key ceremony procedures --- operational SOP
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Every bit in the 12-byte DNS header documented with field name, width, valid values, and behavioral semantics
+  \item Label encoding fully specified including length-prefix octets, compression pointer detection, and maximum label/name lengths
+  \item All five message sections (header, question, answer, authority, additional) documented with wire layout
+  \item Every IANA-assigned RR type documented with: type code, RDATA binary format diagram, zone file syntax example, and operational purpose
+  \item Complete resolution algorithm from stub resolver through root/TLD/authoritative chain, including glue record mechanics and bailiwick enforcement
+  \item All six SOA field values (MNAME, RNAME, SERIAL, REFRESH, RETRY, EXPIRE, MINIMUM) specified with semantics and recommended values
+  \item AXFR and IXFR protocols specified including TCP requirement, SOA bookending, and incremental change format
+  \item DNSSEC signing procedure documented including DNSKEY, RRSIG, DS, NSEC, and NSEC3 record construction
+  \item DNSSEC validation algorithm documented including chain of trust traversal from root trust anchor
+  \item EDNS0 OPT record structure fully specified including all currently-assigned option codes
+  \item DoT/DoH/DoQ transport differences tabulated including port, encryption layer, privacy/visibility trade-offs
+  \item Security attack taxonomy covers cache poisoning, amplification, zone enumeration, and DNS hijacking with protocol-level mitigations
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Mesh Prototype Spec & DNS is the discovery layer for mesh node addressing & Feeds into \\
+Fox Infrastructure Group & DNS infrastructure for Pacific Spine corridor & Foundation for \\
+GSD-OS Network Layer & DNS resolver integration in Tauri app & Referenced by \\
+The Space Between & Information Systems Theory layer maps to DNS distributed DB & Philosophical basis \\
+DACP Protocol & DNS message format as reference for deterministic agent comms & Analogy source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+DNS is the internet's implementation of the ``spaces between'' principle at scale. No single server holds the answer to every query. The answer lives in the delegation relationships between zones --- in the NS records that say ``I don't know, but they do.'' The 13 root server addresses are not the internet's phone book; they are the index of indexes. The authority lives at the edges: in the zone files maintained by millions of individual organizations. The distributed nature is not a weakness to be engineered around; it is the load-bearing architecture.
+
+The Amiga Principle is present in the original protocol design. Mockapetris did not build a system that required a supercomputer at the center. He built a system where each participant does one small thing reliably --- answer queries about its zone, delegate everything else --- and the emergent behavior is global name resolution. Four decades later, that architecture has absorbed IPv6 addresses a thousand times longer than IPv4, cryptographic signatures orders of magnitude larger than any original record, and transport encryption that did not exist in 1987. The protocol extended because it was designed with the right abstraction: a type field that says ``here is what kind of data follows'' and a length field that says ``skip this many bytes if you don't understand it.'' That is elegant protocol design. That is the spaces between made operational.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\section{DNS Full Protocol Specification --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This stage contains the full research findings organized by module. Each module maps directly to a deliverable component in Stage 3. Agents executing this mission should treat each module section as the authoritative source for that component's content.
+
+\subsubsection{Key Source Organizations}
+\begin{itemize}
+  \item \textbf{IETF} (Internet Engineering Task Force) --- primary RFC publisher; \url{https://datatracker.ietf.org}
+  \item \textbf{IANA} (Internet Assigned Numbers Authority) --- DNS parameter registries; \url{https://www.iana.org/assignments/dns-parameters}
+  \item \textbf{ISC} (Internet Systems Consortium) --- BIND documentation; \url{https://bind9.readthedocs.io}
+  \item \textbf{ICANN} --- Root zone management; \url{https://www.icann.org/resources/pages/dns-resolvers}
+  \item \textbf{DNSSEC.net} --- DNSSEC operational reference
+  \item \textbf{RFC Editor} --- canonical RFC text; \url{https://www.rfc-editor.org}
+\end{itemize}
+
+\subsection{Module 01 Reference: Wire Protocol and Message Format}
+
+\subsubsection{Transport Layer}
+
+DNS operates over both UDP and TCP on port 53. The original design (RFC 1035) used UDP for queries and TCP only for zone transfers. The rules are:
+
+\begin{itemize}
+  \item UDP is used for queries where the response fits in 512 bytes (the original DNS specification limit)
+  \item If a response is truncated (TC bit set in header), the client \emph{must} retry over TCP
+  \item With EDNS0, clients may advertise larger UDP payload sizes (commonly 4096 bytes), reducing TCP fallback
+  \item AXFR zone transfers \emph{must} use TCP
+  \item RFC 7766 (2016) requires all DNS implementations to support TCP
+  \item DNS over TLS (DoT) uses TCP port 853; DNS over HTTPS uses TCP port 443
+\end{itemize}
+
+\subsubsection{Header Format (12 bytes fixed)}
+
+The DNS message header occupies exactly 12 bytes in all messages (queries and responses share the same structure). The layout is six 16-bit fields:
+
+\begin{asciibox}
+ 0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F   (bit position)
++--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+|                      ID                         |  [0-1]  16-bit transaction ID
++--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+|QR|  OPCODE   |AA|TC|RD|RA| Z|AD|CD|   RCODE    |  [2-3]  16-bit flags
++--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+|                    QDCOUNT                      |  [4-5]  question count
++--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+|                    ANCOUNT                      |  [6-7]  answer RR count
++--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+|                    NSCOUNT                      |  [8-9]  authority RR count
++--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+|                    ARCOUNT                      | [10-11] additional RR count
++--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+\end{asciibox}
+
+\textbf{Flag field bit assignments (bits 0--15 of the second 16-bit word):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}C{1.2cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Bits} & \tableheader{Description} & \tableheader{Values} \\
+\midrule
+QR & 1 & Query (0) or Response (1) & 0=query, 1=response \\
+OPCODE & 4 & Query type & 0=QUERY, 1=IQUERY (obsolete), 2=STATUS, 5=UPDATE \\
+AA & 1 & Authoritative Answer & Set if server owns the zone \\
+TC & 1 & Truncated & Response was truncated; retry over TCP \\
+RD & 1 & Recursion Desired & Client requests recursive resolution \\
+RA & 1 & Recursion Available & Server supports recursion \\
+Z & 1 & Reserved & Must be zero \\
+AD & 1 & Authenticated Data & DNSSEC: data has been verified (RFC 4035) \\
+CD & 1 & Checking Disabled & DNSSEC: client accepts unverified data \\
+RCODE & 4 & Response Code & 0=NOERROR, 1=FORMERR, 2=SERVFAIL, 3=NXDOMAIN, 4=NOTIMP, 5=REFUSED \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Extended RCODE values} (added by EDNS0, 8 additional bits in OPT record): 6=YXDOMAIN, 7=YXRRSET, 8=NXRRSET, 9=NOTAUTH, 10=NOTZONE, 16=BADSIG, 17=BADKEY, 18=BADTIME, 19=BADMODE, 20=BADNAME, 21=BADALG, 22=BADTRUNC.
+
+\subsubsection{Label Encoding}
+
+DNS names are encoded as a sequence of \emph{labels}. Each label consists of a 1-byte length field followed by that many octets of label data. The name is terminated by a zero-length label (the root). Constraints from RFC 1035 and RFC 2181:
+
+\begin{itemize}
+  \item Maximum label length: 63 octets (length field uses only the lower 6 bits)
+  \item Maximum full name length: 253 characters in textual representation; 255 octets in wire format (includes length bytes and root null byte)
+  \item Characters: letters, digits, hyphen (hostname convention); DNS protocol allows any octet in a label
+  \item Case: comparisons are case-insensitive for standard ASCII letters
+\end{itemize}
+
+\textbf{Label compression} (RFC 1035 Section 4.1.4): A pointer replaces the remaining labels of a name. A pointer is identified by the two high-order bits of a label-length byte being \texttt{11}. The 14 remaining bits form an unsigned offset from the start of the message to the compressed name. This allows responses to reference names already present in the message without repeating them.
+
+\begin{asciibox}
+Normal label:    0 0 L L L L L L  (bits: 00 = label, LLLLLL = length 0-63)
+Compression ptr: 1 1 O O O O O O  O O O O O O O O
+                 (bits: 11 = pointer, 14-bit offset into message)
+\end{asciibox}
+
+\subsubsection{Question Section Format}
+
+Each question record contains:
+\begin{itemize}
+  \item \textbf{QNAME}: Variable-length label sequence (encoded name)
+  \item \textbf{QTYPE}: 16-bit record type (1=A, 28=AAAA, 15=MX, etc.; 255=ANY, 252=AXFR)
+  \item \textbf{QCLASS}: 16-bit class (1=IN for Internet, 3=CH Chaosnet, 255=ANY)
+\end{itemize}
+
+\subsubsection{Resource Record Wire Format}
+
+All records in answer, authority, and additional sections share this format:
+
+\begin{asciibox}
+NAME      : variable-length label sequence (may use compression)
+TYPE      : 16-bit record type
+CLASS     : 16-bit class
+TTL       : 32-bit signed integer (seconds); negative = expired
+RDLENGTH  : 16-bit unsigned, length of RDATA in octets
+RDATA     : type-specific data
+\end{asciibox}
+
+\subsection{Module 02 Reference: Resource Record Taxonomy}
+
+\subsubsection{Core Record Types (RFC 1035)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}C{1cm}XL{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Code} & \tableheader{RDATA Format} & \tableheader{Purpose} \\
+\midrule
+A & 1 & 32-bit IPv4 address & Host-to-IPv4 mapping \\
+NS & 2 & Domain name (NSDNAME) & Authoritative name server for zone \\
+CNAME & 5 & Domain name (canonical name) & Alias to another name \\
+SOA & 6 & MNAME + RNAME + SERIAL + REFRESH + RETRY + EXPIRE + MINIMUM & Zone authority record \\
+PTR & 12 & Domain name & Reverse DNS (IP to name) \\
+MX & 15 & 16-bit preference + domain name & Mail exchange routing \\
+TXT & 16 & One or more character strings & Arbitrary text; SPF, DKIM, verification \\
+HINFO & 13 & CPU string + OS string & Host info (rarely used) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Extended and Modern Record Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.4cm}C{1cm}XL{3.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Code} & \tableheader{RDATA Format} & \tableheader{Purpose} \\
+\midrule
+AAAA & 28 & 128-bit IPv6 address & Host-to-IPv6 mapping (RFC 3596) \\
+SRV & 33 & Priority + Weight + Port + Target & Service location (RFC 2782) \\
+NAPTR & 35 & Order + Pref + Flags + Service + Regexp + Replacement & DDDS / VoIP ENUM (RFC 3403) \\
+DS & 43 & Key Tag + Algorithm + Digest Type + Digest & DNSSEC delegation signer (RFC 4034) \\
+SSHFP & 44 & Algorithm + Fp Type + Fingerprint & SSH key fingerprint (RFC 4255) \\
+RRSIG & 46 & Type + Alg + Labels + Orig TTL + Sig Exp + Sig Inc + Key Tag + Signer + Sig & DNSSEC RR signature (RFC 4034) \\
+NSEC & 47 & Next Domain Name + Type Bit Maps & DNSSEC next secure (RFC 4034) \\
+DNSKEY & 48 & Flags + Protocol + Algorithm + Public Key & DNSSEC public key (RFC 4034) \\
+NSEC3 & 50 & Hash Alg + Flags + Iterations + Salt + Hash + Type Bit Maps & DNSSEC hashed denial (RFC 5155) \\
+NSEC3PARAM & 51 & Hash Alg + Flags + Iterations + Salt & NSEC3 zone parameters \\
+TLSA & 52 & Cert Usage + Selector + Matching Type + Cert Assoc Data & DANE TLS cert binding (RFC 6698) \\
+CDS & 59 & (same as DS) & Child DS for key rollover (RFC 7344) \\
+CDNSKEY & 60 & (same as DNSKEY) & Child DNSKEY for rollover \\
+HTTPS & 65 & Priority + TargetName + SvcParams & HTTPS service binding (RFC 9460) \\
+SVCB & 64 & Priority + TargetName + SvcParams & Service binding (RFC 9460) \\
+CAA & 257 & Flags + Tag + Value & CA authorization (RFC 8659) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Pseudo-RR Types}
+
+\textbf{OPT (Type 41)}: Not a real RR; exists only in the additional section. Used by EDNS0 to carry extension information. Its NAME field is the root domain (\texttt{0x00}); its CLASS field carries the UDP payload size; its TTL field encodes the extended RCODE and EDNS version; its RDATA carries option code/length/data tuples.
+
+\begin{asciibox}
+OPT wire format:
+NAME      : 0x00 (root)
+TYPE      : 41
+CLASS     : Sender's UDP payload size (e.g., 0x1000 = 4096 bytes)
+TTL       : Extended RCODE (8 bits) | EDNS Version (8 bits) | EDNS Flags (16 bits)
+            -- DO bit at position 15 of flags = DNSSEC OK
+RDLENGTH  : Length of options
+RDATA     : {OPTION-CODE (16) | OPTION-LENGTH (16) | OPTION-DATA (variable)} ...
+\end{asciibox}
+
+\subsubsection{SOA Record Field Semantics}
+
+The SOA record is required at every zone apex. Its seven fields control zone replication behavior:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Field} & \tableheader{Recommended} & \tableheader{Semantics} \\
+\midrule
+MNAME & --- & Primary master name server FQDN \\
+RNAME & --- & Admin email (@ replaced with .) \\
+SERIAL & YYYYMMDDnn & Zone version; secondary fetches if serial increases \\
+REFRESH & 86400 & Seconds between secondary SOA checks \\
+RETRY & 7200 & Seconds between retries if primary unreachable \\
+EXPIRE & 3600000 & Seconds before secondary stops serving if primary absent \\
+MINIMUM & 3600 & Negative caching TTL (RFC 2308; min of this and SOA TTL) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 03 Reference: Resolution Architecture}
+
+\subsubsection{Resolver Taxonomy}
+
+\begin{itemize}
+  \item \textbf{Stub resolver}: OS library (e.g., \texttt{getaddrinfo()}). Cannot follow referrals. Forwards all queries to a configured recursive resolver.
+  \item \textbf{Recursive resolver (full-service)}: Follows the delegation chain from root to authoritative. Caches results. Also called ``caching resolver.'' Examples: Unbound, BIND recursive, 8.8.8.8, 1.1.1.1.
+  \item \textbf{Forwarding resolver}: Passes queries to another recursive resolver. Used for internal DNS policies or caching at network edge.
+  \item \textbf{Authoritative server}: Holds the zone file. Answers queries for its zone authoritatively. Does not recurse. Examples: BIND authoritative, PowerDNS, Route 53, Cloudflare DNS.
+\end{itemize}
+
+\subsubsection{Full Resolution Walk}
+
+\begin{asciibox}
+1. Browser calls getaddrinfo("www.example.com")
+2. Stub resolver checks /etc/hosts, local cache
+3. If miss: stub sends recursive query to configured resolver (e.g., 8.8.8.8)
+   Query: www.example.com IN A, RD=1
+
+4. Recursive resolver cache miss; begins iterative resolution:
+
+5. Resolver -> Root server (one of 13 logical addresses, anycast)
+   Query: www.example.com IN A (iterative)
+   Response: REFER -> .com TLD NS records + glue A records
+
+6. Resolver -> .com TLD server
+   Query: www.example.com IN A (iterative)
+   Response: REFER -> example.com NS records + glue A records
+
+7. Resolver -> example.com authoritative server
+   Query: www.example.com IN A (iterative)
+   Response: ANSWER -> www.example.com A 93.184.216.34 TTL 86400
+
+8. Resolver caches answer with TTL countdown
+9. Resolver returns answer to stub resolver
+10. Browser connects to 93.184.216.34
+\end{asciibox}
+
+\subsubsection{Caching and TTL Mechanics}
+
+\begin{itemize}
+  \item Each cached RR has a TTL countdown. When TTL reaches 0, the entry is expired and re-queried.
+  \item TTL range: 0 (no caching) to 2,147,483,647 seconds. RFC 2181 clarifies that TTL is unsigned 32-bit.
+  \item \textbf{Negative caching} (RFC 2308): NXDOMAIN and NODATA responses are cached. The negative TTL is the minimum of the SOA MINIMUM field and the SOA record's own TTL, with a recommended cap of 3 hours (10800s).
+  \item \textbf{Minimum TTL recommendation}: RFC 1035 suggests days for typical records. Modern CDN operators use TTLs of 30--300 seconds for rapid propagation.
+\end{itemize}
+
+\subsubsection{Glue Records and the Bailiwick Rule}
+
+When a zone delegates to name servers that are \emph{within} the delegated zone (e.g., \texttt{ns1.example.com} for zone \texttt{example.com}), a chicken-and-egg problem arises: resolving the NS name requires the zone that the NS serves. The solution is \emph{glue records}: A/AAAA records for the name servers placed in the \emph{parent} zone's additional section.
+
+The \emph{bailiwick rule} prevents cache poisoning via glue: a resolver must not cache additional-section records for names outside the zone being queried. If a response for \texttt{example.com} includes a glue A record for \texttt{attacker.com}, that glue must be discarded.
+
+\subsubsection{Root Server Infrastructure}
+
+The root zone is served by 13 logical name server addresses (A--M root servers), maintained by 12 organizations including ICANN, Verisign, Cogent, NASA, ISC, and others. Each logical address is served by many physical servers worldwide via IP anycast, resulting in over 1,600 physical root server instances globally. The root zone itself contains only the NS and A/AAAA records for TLD name servers.
+
+\subsection{Module 04 Reference: Zone Management}
+
+\subsubsection{Zone File Directives}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Directive} & \tableheader{Function} \\
+\midrule
+\$ORIGIN domain & Sets default origin for relative names; appended to unqualified names \\
+\$TTL seconds & Sets default TTL for subsequent records \\
+\$INCLUDE file & Includes another file in the zone \\
+\$GENERATE range owner type rdata & Generates a series of similar records (BIND extension) \\
+@ & Shorthand for current \$ORIGIN value \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Zone Transfer: AXFR (RFC 5936)}
+
+AXFR is the full zone transfer protocol. Key mechanics:
+\begin{itemize}
+  \item \textbf{Transport}: Must use TCP (UDP AXFR is explicitly not acceptable per RFC 5936)
+  \item \textbf{Initiation}: Secondary server sends AXFR query (QTYPE 252) after determining zone serial has changed via SOA poll or NOTIFY
+  \item \textbf{Response format}: Server sends a stream of DNS messages over the TCP connection; first and last message each contain the SOA record (SOA bookending)
+  \item \textbf{Security}: No built-in authentication; TSIG (RFC 2845) provides HMAC-based authentication; access control by IP address as baseline
+  \item \textbf{Security risk}: Open AXFR exposes all zone records; a 2017 incident exposed 5.6 million Russian TLD records via accidental open AXFR
+\end{itemize}
+
+\subsubsection{Incremental Zone Transfer: IXFR (RFC 1995)}
+
+IXFR transfers only the changes since the last-known serial number:
+\begin{itemize}
+  \item Client sends IXFR query (QTYPE 251) including its current SOA in the authority section
+  \item Server responds with pairs of (old SOA + deleted RRs + new SOA + added RRs) for each serial increment
+  \item If the server cannot compute the delta, it falls back to a full AXFR response
+\end{itemize}
+
+\subsubsection{NOTIFY Mechanism (RFC 1996)}
+
+When the primary zone data changes, it sends NOTIFY messages (OPCODE 4) to known secondary servers to trigger an early SOA check rather than waiting for the refresh interval. Secondaries acknowledge with a NOTIFY response and then initiate an SOA check followed by IXFR or AXFR if needed.
+
+\subsubsection{Dynamic Updates (RFC 2136)}
+
+DNS UPDATE messages (OPCODE 5) allow authorized clients to add or delete resource records from a zone without manual zone file editing. The UPDATE message structure uses the four-section format differently:
+\begin{itemize}
+  \item \textbf{Zone section}: The zone being updated
+  \item \textbf{Prerequisite section}: Conditions that must hold before the update is applied
+  \item \textbf{Update section}: RRs to add or delete
+  \item \textbf{Additional section}: Optional TSIG or SIG(0) authentication
+\end{itemize}
+
+\subsection{Module 05 Reference: DNSSEC}
+
+\subsubsection{DNSSEC Overview (RFC 4033)}
+
+DNSSEC provides origin authentication and integrity for DNS data. It does \emph{not} provide confidentiality (use DoT/DoH for that) and does not prevent denial of service. As of March 2026, the root zone and all generic TLDs are DNSSEC-signed; 45\% of ccTLDs are signed; second-level domain adoption exceeds 50\% in NL, CZ, NO, SE, and NU.
+
+\subsubsection{DNSSEC Record Types}
+
+\textbf{DNSKEY (Type 48)}: Public key record. Contains:
+\begin{itemize}
+  \item Flags (16-bit): Bit 7 = Zone Key flag (must be set); Bit 8 = SEP (Secure Entry Point; marks KSK)
+  \item Protocol (8-bit): Must be 3
+  \item Algorithm (8-bit): 5=RSA/SHA-1, 7=RSASHA1-NSEC3, 8=RSA/SHA-256, 13=ECDSA/P-256/SHA-256, 14=ECDSA/P-384/SHA-384
+  \item Public Key: Base64-encoded key material
+\end{itemize}
+
+\textbf{Key types}: Zone Signing Key (ZSK) signs all RRsets; Key Signing Key (KSK) signs only the DNSKEY RRset. Separating these allows frequent ZSK rollover without requiring the parent DS record to change.
+
+\textbf{RRSIG (Type 46)}: Digital signature over an RRset. Contains:
+\begin{itemize}
+  \item Type Covered, Algorithm, Labels (count for wildcard detection), Original TTL
+  \item Signature Expiration and Inception (UTC timestamps)
+  \item Key Tag (16-bit checksum to identify signing DNSKEY)
+  \item Signer's Name, Signature bytes
+\end{itemize}
+
+\textbf{DS (Type 43)}: Delegation Signer. Placed in the parent zone to authenticate the child's KSK. Contains Key Tag, Algorithm, Digest Type (1=SHA-1, 2=SHA-256, 4=SHA-384), and Digest of the child's DNSKEY.
+
+\textbf{NSEC (Type 47)}: Proves non-existence of a name or type. Contains the next name in canonical zone order and a bitmap of existing types at the current name. Vulnerability: allows zone enumeration by walking the NSEC chain.
+
+\textbf{NSEC3 (Type 50, RFC 5155)}: Hashed version of NSEC. Uses SHA-1 hash of owner name to prevent zone enumeration. Parameters: hash algorithm, flags (Opt-Out for unsigned delegations), iterations, salt, and next hashed owner name.
+
+\subsubsection{Chain of Trust}
+
+\begin{asciibox}
+Root KSK (trust anchor, hardcoded in resolvers)
+  |
+  | DS record in root zone -> validates child TLD DNSKEY
+  v
+.com KSK (signed by root)
+  |
+  | DS record in .com zone -> validates child SLD DNSKEY
+  v
+example.com KSK (signed by .com)
+  |
+  v
+example.com ZSK (signed by example.com KSK)
+  |
+  v
+www.example.com A record (signed by example.com ZSK)
+  -> RRSIG verifiable with ZSK
+  -> ZSK verifiable with KSK
+  -> KSK verifiable with parent DS
+  -> ... up to root trust anchor
+\end{asciibox}
+
+\subsubsection{Resolver Validation Algorithm}
+
+A DNSSEC-validating resolver receiving a signed response:
+\begin{enumerate}
+  \item Sends query with DO bit set (via OPT RR) to request DNSSEC records
+  \item Receives answer with RRSIG records alongside the requested RRset
+  \item Locates the correct DNSKEY by matching Key Tag and Signer Name fields
+  \item Verifies the DNSKEY's DS record in the parent zone
+  \item Follows the chain upward until reaching a configured trust anchor (root KSK)
+  \item If validation succeeds, sets AD bit in response to stub resolver
+  \item If validation fails, returns SERVFAIL
+\end{enumerate}
+
+\subsection{Module 06 Reference: Modern Extensions and Privacy Stack}
+
+\subsubsection{EDNS0 (RFC 6891)}
+
+EDNS0 (Extension Mechanisms for DNS, version 0) extends the DNS protocol through the OPT pseudo-RR. Key capabilities:
+
+\begin{itemize}
+  \item \textbf{Larger UDP messages}: Clients advertise their maximum UDP payload size (typically 4096 bytes); removes the 512-byte legacy constraint for DNSSEC responses
+  \item \textbf{Extended RCODE}: 8 additional bits beyond the 4-bit header RCODE field
+  \item \textbf{EDNS version}: Currently only version 0 is defined
+  \item \textbf{DO bit}: ``DNSSEC OK'' --- client is requesting DNSSEC records in the response
+\end{itemize}
+
+\textbf{Defined EDNS options}:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Code} & \tableheader{Option} & \tableheader{RFC} \\
+\midrule
+3 & NSID (Name Server Identifier) & RFC 5001 \\
+8 & ECS (Client Subnet) & RFC 7871 \\
+9 & EXPIRE & RFC 7314 \\
+10 & COOKIE & RFC 7873 \\
+11 & TCP Keepalive & RFC 7828 \\
+12 & Padding & RFC 7830 \\
+15 & EDE (Extended DNS Errors) & RFC 8914 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{DNS Privacy Extension Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.8cm}C{2cm}C{2cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Protocol} & \tableheader{Port} & \tableheader{Transport} & \tableheader{Encryption} & \tableheader{Key Trade-off} & \tableheader{RFC} \\
+\midrule
+UDP DNS & 53 & UDP & None & Plaintext; fast & 1035 \\
+TCP DNS & 53 & TCP & None & Plaintext; reliable & 7766 \\
+DoT & 853 & TCP+TLS & TLS 1.3 & Visible to network admins; controllable & 7858 \\
+DoH & 443 & TCP+TLS & TLS 1.3 & Hidden in HTTPS traffic; centralization risk & 8484 \\
+DoQ & 853 & QUIC & TLS 1.3 & 0-RTT resumption; lower latency & 9250 \\
+ODoH & 443 & TCP+TLS+Proxy & TLS 1.3 & Neither resolver nor proxy sees both IP and query & 9230 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{QNAME Minimization (RFC 7816)}
+
+Traditional DNS resolution sends the full query name (\texttt{www.example.com}) to every server in the chain, including the root and TLD servers. This leaks the full query to servers that don't need it. QNAME minimization sends only the minimum necessary labels to each server: the root server receives only \texttt{.com}; the TLD server receives only \texttt{example.com}; only the authoritative server receives the full \texttt{www.example.com}. This substantially reduces information disclosure to infrastructure operators.
+
+\subsubsection{DNS Client Subnet (ECS, RFC 7871)}
+
+ECS allows a recursive resolver to include a truncated version of the client's IP (e.g., a /24 or /56 prefix) in the EDNS0 OPT option. This enables CDN-style geolocation from authoritative servers that otherwise only see the resolver's IP. Privacy-focused resolvers (Cloudflare 1.1.1.1, NextDNS configured for privacy) disable ECS to prevent location leakage.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Risk} & \tableheader{Mitigation in Document} \\
+\midrule
+Security attack details & Enabling exploitation & Attack taxonomy includes mitigations; no novel attack enablement \\
+AXFR zone enumeration & Exposing zone data & Documented as risk; mitigation via IP ACL and TSIG described \\
+DNSSEC key material & Operational key exposure & No private key handling; public key formats only \\
+Root trust anchor & Infrastructure sensitivity & Public ICANN KSK data only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{IETF Standards (Primary)}
+
+\begin{itemize}
+  \item RFC 1034 --- Domain Names: Concepts and Facilities (Mockapetris, 1987)
+  \item RFC 1035 --- Domain Names: Implementation and Specification (Mockapetris, 1987)
+  \item RFC 1995 --- Incremental Zone Transfer in DNS (Ohta, 1996)
+  \item RFC 1996 --- A Mechanism for Prompt Notification of Zone Changes (Vixie, 1996)
+  \item RFC 2136 --- Dynamic Updates in the Domain Name System (Vixie et al., 1997)
+  \item RFC 2181 --- Clarifications to the DNS Specification (Elz and Bush, 1997)
+  \item RFC 2308 --- Negative Caching of DNS Queries (Andrews, 1998)
+  \item RFC 2782 --- A DNS RR for Specifying the Location of Services (SRV) (Gulbrandsen et al., 2000)
+  \item RFC 2845 --- Secret Key Transaction Authentication for DNS (TSIG) (Vixie et al., 2000)
+  \item RFC 3596 --- DNS Extensions to Support IP Version 6 (Thomson et al., 2003)
+  \item RFC 4033 --- DNS Security Introduction and Requirements (Arends et al., 2005)
+  \item RFC 4034 --- Resource Records for the DNS Security Extensions (Arends et al., 2005)
+  \item RFC 4035 --- Protocol Modifications for the DNS Security Extensions (Arends et al., 2005)
+  \item RFC 5155 --- DNSSEC Hashed Authenticated Denial of Existence (Laurie et al., 2008)
+  \item RFC 5936 --- DNS Zone Transfer Protocol (AXFR) (Lewis and Hoenes, 2010)
+  \item RFC 6840 --- Clarifications and Implementation Notes for DNSSEC (Weiler and Blacka, 2013)
+  \item RFC 6891 --- Extension Mechanisms for DNS (EDNS(0)) (Damas et al., 2013)
+  \item RFC 7344 --- Automating DNSSEC Delegation Trust Maintenance (Kumari et al., 2014)
+  \item RFC 7766 --- DNS Transport over TCP (Dickinson et al., 2016)
+  \item RFC 7816 --- DNS Query Name Minimisation (Bortzmeyer, 2016)
+  \item RFC 7858 --- Specification for DNS over TLS (Hu et al., 2016)
+  \item RFC 7871 --- Client Subnet in DNS Queries (Contavalli et al., 2016)
+  \item RFC 8484 --- DNS Queries over HTTPS (DoH) (Hoffman and McManus, 2018)
+  \item RFC 8659 --- DNS Certification Authority Authorization (CAA) Resource Record (Hallam-Baker et al., 2019)
+  \item RFC 8914 --- Extended DNS Errors (Kumari et al., 2020)
+  \item RFC 9230 --- Oblivious DNS over HTTPS (Kinnear et al., 2022)
+  \item RFC 9250 --- DNS over Dedicated QUIC Connections (Huitema et al., 2022)
+  \item RFC 9364 --- DNS Security Extensions (DNSSEC) Best Current Practice (Hoffman, 2023)
+  \item RFC 9460 --- Service Binding and Parameter Specification via the DNS (SVCB and HTTPS) (Schwartz et al., 2023)
+  \item RFC 9499 --- DNS Terminology (Hoffman et al., 2024)
+\end{itemize}
+
+\subsubsection{Implementation References}
+
+\begin{itemize}
+  \item ISC BIND 9 Administrator Reference Manual, v9.21, \url{https://bind9.readthedocs.io}
+  \item IANA DNS Parameters Registry, \url{https://www.iana.org/assignments/dns-parameters}
+  \item IANA Root Zone Database, \url{https://www.iana.org/domains/root/db}
+  \item Microsoft Learn: DNS Message Formats in Windows Server, \url{https://learn.microsoft.com/en-us/windows-server/networking/dns/message-formats}
+  \item Cloudflare DNS Documentation, \url{https://developers.cloudflare.com/dns}
+  \item Google Public DNS DoH API, \url{https://developers.google.com/speed/public-dns/docs/doh}
+  \item DNSSEC.net Operational Reference, \url{https://dnssec.net}
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═══════════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality reference document mapping the DNS protocol in its entirety: wire format, resource record taxonomy, resolution architecture, zone management, DNSSEC, and the modern privacy extension stack. The document must be immediately actionable for implementation, operations, and security analysis. It should serve as the definitive internal reference for all GSD ecosystem components that interact with DNS, including the Fox Infrastructure Group's Pacific Spine network, the GSD mesh prototype, and the GSD-OS networking layer.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave 0 (Foundation)
+  [HAIKU] Schema generation: shared RR type registry, RFC index, terminology glossary
+  [HAIKU] Shared ASCII diagram templates for wire format layouts
+       |
+       v
+Wave 1 (Parallel Research Tracks -- 3 simultaneous)
+  Track A:  [SONNET] Module 01 Wire Protocol + Module 02 RR Taxonomy
+  Track B:  [SONNET] Module 03 Resolution Architecture + Module 04 Zone Management
+  Track C:  [OPUS]   Module 05 DNSSEC + Module 06 Modern Extensions
+       |
+       v    [CAPCOM GATE: scope confirmation, security sensitivity review]
+       v
+Wave 2 (Synthesis)
+  [OPUS] Cross-module integration: attack surface synthesis, privacy stack matrix,
+         implementation trap catalog, protocol interaction diagram
+  [SONNET] Full document assembly; consistency check; bibliography normalization
+       |
+       v    [CAPCOM GATE: document review, factual verification]
+       v
+Wave 3 (Publication)
+  [SONNET] LaTeX compilation (3 passes); PDF generation
+  [SONNET] Index page generation
+  [HAIKU] Commit messages; delivery manifest
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer}: Shared schemas, RFC source index, terminology glossary (Wave 0)
+  \item \textbf{Protocol Layer}: Wire format and RR taxonomy (Track A)
+  \item \textbf{Architecture Layer}: Resolution and zone management (Track B)
+  \item \textbf{Security Layer}: DNSSEC and attack taxonomy (Track C, partial)
+  \item \textbf{Extension Layer}: Modern privacy stack (Track C, partial)
+  \item \textbf{Synthesis Layer}: Cross-module integration and interaction analysis (Wave 2)
+  \item \textbf{Publication Layer}: Compiled PDF and delivery artifacts (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Wire Protocol Reference & All header bits documented; label encoding complete; five sections specified & Module 01 \\
+2 & RR Type Taxonomy & All IANA types catalogued with type code, RDATA format, and operational purpose & Module 02 \\
+3 & Resolution Architecture & Full resolution walk documented; resolver taxonomy defined; caching and glue specified & Module 03 \\
+4 & Zone Management Reference & SOA fields, AXFR, IXFR, NOTIFY, dynamic update fully specified & Module 04 \\
+5 & DNSSEC Reference & All four new RR types specified; chain of trust documented; validation algorithm given & Module 05 \\
+6 & Modern Extensions Reference & EDNS0, DoT, DoH, DoQ, QNAME minimization, ECS documented with trade-off matrix & Module 06 \\
+7 & Attack Taxonomy & Cache poisoning, amplification DDoS, zone enumeration, DNS hijacking with mitigations & Synthesis \\
+8 & Protocol Interaction Diagram & ASCII diagram showing how all six modules interact and depend on each other & Synthesis \\
+9 & Implementation Trap Catalog & Documented gotchas: label compression bugs, CNAME chain loops, TTL 0, NSEC walking & Synthesis \\
+10 & Compiled PDF + .tex source & Compiles clean with XeLaTeX; 3 passes; no errors; all cross-references resolve & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Schema + RFC index & None & Haiku & 5K \\
+Wire Protocol doc & Schema & Sonnet & 25K \\
+RR Taxonomy doc & Schema + Wire & Sonnet & 35K \\
+Resolution Architecture & Schema & Sonnet & 20K \\
+Zone Management & Resolution & Sonnet & 20K \\
+DNSSEC doc & Schema + Wire + Zone & Opus & 30K \\
+Extensions doc & Wire + DNSSEC & Opus & 25K \\
+Attack taxonomy & All modules & Opus & 15K \\
+Protocol interaction diagram & All modules & Opus & 10K \\
+Implementation traps & All modules & Sonnet & 15K \\
+Full document assembly & All components & Sonnet & 40K \\
+PDF compilation & Full document & Sonnet & 5K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+DNSSEC synthesis & Opus & Cryptographic chain-of-trust reasoning requires judgment; NSEC vs.\ NSEC3 trade-off analysis \\
+Attack taxonomy & Opus & Security surface synthesis; balancing disclosure with enablement \\
+Extension interaction & Opus & Non-obvious interactions (EDNS0 + DNSSEC + DoH layering) require careful analysis \\
+Wire protocol doc & Sonnet & Structured binary specification; directly transcribable from RFCs \\
+RR taxonomy & Sonnet & Enumeration task with clear structure from IANA registry \\
+Zone management & Sonnet & Well-specified protocol; structured document production \\
+Schema + scaffolding & Haiku & Template and index generation; fast, parallelizable \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model Mix} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, RFC index, glossary stubs \\
+1 & Research Tracks & Parallel (3) & Sonnet+Opus & Six module reference documents \\
+2 & Synthesis & Sequential & Opus+Sonnet & Attack taxonomy, interaction diagram, full assembly \\
+3 & Publication & Sequential & Sonnet+Haiku & Compiled PDF, index.html, delivery manifest \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+Build RR type registry schema & YAML/JSON with type code, name, RFC, format & Haiku \\
+Build RFC source index & Numbered index: RFC number, title, date, URL & Haiku \\
+Build terminology glossary stub & 50-term glossary with placeholders & Haiku \\
+Generate ASCII diagram templates & Wire format, message sections, resolution walk & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A: Wire Protocol + RR Taxonomy (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+Header field specification & Complete 12-byte header map with all flag bits & Sonnet \\
+Label encoding + compression & Length-prefix encoding, pointer format, limits & Sonnet \\
+Five-section message structure & Section layout with wire format for each & Sonnet \\
+UDP/TCP transport rules & Port, size limits, truncation, TCP fallback & Sonnet \\
+Complete RR type catalog & All 80+ IANA types with codes and formats & Sonnet \\
+OPT pseudo-RR specification & EDNS0 OPT wire format with all option codes & Sonnet \\
+SOA field semantics & Seven fields with recommended values & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Resolution Architecture + Zone Management (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+Resolver taxonomy & Stub, recursive, forwarding, authoritative -- definitions & Sonnet \\
+Full resolution walk & 10-step example: stub to root to TLD to authoritative & Sonnet \\
+Glue records + bailiwick & Glue placement, bailiwick rule, cache poisoning prevention & Sonnet \\
+Negative caching & RFC 2308 negative TTL calculation, NXDOMAIN vs.\ NODATA & Sonnet \\
+Root infrastructure & 13 logical addresses, anycast, 1600+ physical instances & Sonnet \\
+Zone file directives & \$ORIGIN, \$TTL, \$INCLUDE, \$GENERATE with examples & Sonnet \\
+AXFR protocol & TCP requirement, SOA bookending, security and TSIG & Sonnet \\
+IXFR protocol & Incremental change format, fallback to AXFR & Sonnet \\
+NOTIFY + Dynamic Update & RFC 1996 NOTIFY mechanics; RFC 2136 UPDATE message & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C: DNSSEC + Modern Extensions (Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+DNSKEY record analysis & Flags, algorithm codes, KSK vs.\ ZSK separation & Opus \\
+RRSIG record analysis & All fields, signing procedure, validity window & Opus \\
+DS chain analysis & Parent-child trust delegation; SHA-256 digest construction & Opus \\
+NSEC vs.\ NSEC3 trade-off & Zone enumeration risk; opt-out; operational complexity & Opus \\
+Validation algorithm & Step-by-step DNSSEC validation procedure & Opus \\
+Deployment status analysis & Current adoption rates; island-of-security issues & Opus \\
+EDNS0 complete spec & OPT RR construction; all option codes; DO bit & Opus \\
+DoT specification & RFC 7858; port 853; TLS session lifecycle & Opus \\
+DoH specification & RFC 8484; GET/POST; MIME types; HTTP/2 server push & Opus \\
+DoQ specification & RFC 9250; QUIC connection lifecycle; 0-RTT behavior & Opus \\
+QNAME minimization & RFC 7816; label disclosure reduction; compatibility issues & Opus \\
+ODoH + ECS analysis & Privacy partitioning; location leakage trade-offs & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+Attack taxonomy synthesis & Cache poisoning, amplification, enumeration, hijacking & Opus \\
+Protocol interaction diagram & How all six modules connect and depend on each other & Opus \\
+Implementation trap catalog & Label compression, CNAME loops, TTL 0, NSEC walking & Sonnet \\
+Consistency pass & Cross-check RR type codes, RFC numbers, field values & Sonnet \\
+Bibliography normalization & All citations in consistent format, URLs verified & Sonnet \\
+Full document assembly & Merge all modules into single LaTeX document & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+XeLaTeX compilation (3 passes) & Clean PDF, no errors, all refs resolved & Sonnet \\
+Index page generation & index.html with download links and usage guide & Sonnet \\
+.tex source delivery & Source file for user modification and recompilation & Sonnet \\
+Delivery manifest & Commit message; milestone summary for skill-creator & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item RFC index (Wave 0 output) is shared across all three Wave 1 tracks --- compute once, reference many
+  \item RR type registry (Wave 0) feeds both Track A (RDATA formats) and Track C (DNSSEC types) without duplication
+  \item Terminology glossary built once in Wave 0; all tracks reference it rather than defining terms inline
+  \item Wave 1 tracks run in parallel within the 5-minute TTL window; orchestrator pre-fetches RFC text before wave starts
+  \item Sonnet handles high-volume structured content (RR catalog 80+ types) efficiently; Opus reserved for synthesis tasks requiring judgment
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (K)} & \tableheader{Sonnet (K)} & \tableheader{Haiku (K)} \\
+\midrule
+Wave 0 & --- & --- & 15 \\
+Wave 1 Track A & --- & 65 & --- \\
+Wave 1 Track B & --- & 50 & --- \\
+Wave 1 Track C & 80 & --- & --- \\
+Wave 2 & 35 & 55 & --- \\
+Wave 3 & --- & 50 & 5 \\
+\midrule
+\textbf{Total} & \textbf{115K} & \textbf{220K} & \textbf{20K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated tokens:} 355,000 (approximately 30\% Opus / 62\% Sonnet / 8\% Haiku).
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Foundation]
+   RFC Index -----> [Track A] Wire Protocol
+   RR Schema -----> [Track A] RR Taxonomy
+   Terminology ---> [Track B] Resolution
+   Diagrams ------> [Track B] Zone Management
+                    [Track C] DNSSEC
+                    [Track C] Extensions
+                          |
+         [CAPCOM GATE]    |
+                          v
+               [Wave 2: Synthesis]
+               All 6 modules --> Attack Taxonomy
+               All 6 modules --> Interaction Diagram
+               All 6 modules --> Full Assembly
+                          |
+         [CAPCOM GATE]    |
+                          v
+               [Wave 3: Publication]
+               Full doc --> LaTeX PDF
+                        --> index.html
+                        --> .tex source
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK: do not publish \\
+Core functionality & 20 & Required & BLOCK: return to executor \\
+Integration & 8 & Required & BLOCK: return to integration agent \\
+Edge cases & 10 & Best-effort & LOG: note gap, proceed \\
+\midrule
+\textbf{Total} & \textbf{42} & --- & --- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to IETF RFCs, IANA registries, ISC docs, or peer-reviewed publications. Zero blog posts or unsourced claims. \\
+SC-NUM & Numerical attribution & Every field width, type code, and protocol constant attributed to specific RFC and section. \\
+SC-SEC & Security sensitivity & Attack taxonomy describes attack mechanisms and mitigations at conceptual level. No novel exploitation techniques. No PoC code for cache poisoning or amplification. \\
+SC-ADV & No advocacy & Document presents protocol trade-offs (e.g., DoT vs.\ DoH visibility) factually without advocating for specific deployment choices. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 12-byte header fields documented & CF-01, CF-02 & Pending \\
+2. Label encoding and compression specified & CF-03, CF-04 & Pending \\
+3. Five message sections documented & CF-05 & Pending \\
+4. All IANA RR types catalogued & CF-06, CF-07 & Pending \\
+5. Full resolution algorithm documented & CF-08, CF-09 & Pending \\
+6. SOA fields specified with values & CF-10, CF-11 & Pending \\
+7. AXFR and IXFR protocols specified & CF-12, CF-13 & Pending \\
+8. DNSSEC signing procedure documented & CF-14, CF-15 & Pending \\
+9. DNSSEC validation algorithm documented & CF-16 & Pending \\
+10. EDNS0 OPT record fully specified & CF-17, CF-18 & Pending \\
+11. DoT/DoH/DoQ differences tabulated & CF-19 & Pending \\
+12. Security attack taxonomy with mitigations & CF-20, SC-SEC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go; cross-module dependency \\
+PLAN & Planner & Wave decomposition; parallel track scheduling \\
+TOPO & Topology Mgr & Agent team structure; mid-mission restructuring \\
+ARCH & Architecture & Cross-cutting structural decisions for full document \\
+SCOUT & Research Agent & RFC source gathering; IANA registry scraping \\
+EXEC-A & Executor Alpha & Track A document production (wire + RR taxonomy) \\
+EXEC-B & Executor Beta & Track B document production (resolution + zone mgmt) \\
+EXEC-C & Executor Gamma & Wave 2 full document assembly \\
+CRAFT-WIRE & Wire Specialist & RFC 1035 wire format deep dive \\
+CRAFT-SEC & Security Specialist & DNSSEC and attack taxonomy \\
+CRAFT-EXT & Extensions Specialist & EDNS0, DoT, DoH, DoQ analysis \\
+CRAFT-ZONE & Zone Specialist & Zone management protocols \\
+VERIFY & Verification & RFC cross-check; type code accuracy; bibliography \\
+INTEG & Integration & Cross-module relationship validation; consistency \\
+SECURE & Security Warden & Safety boundary enforcement; SC tests \\
+CAPCOM & HITL Interface & Human approval at both wave boundary gates \\
+BUDGET & Resource Mgr & Token budget tracking; model allocation monitoring \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+ANALYST & Pattern Analyst & Cross-module pattern detection for synthesis \\
+RETRO & Retrospective & Post-wave analysis and lessons for skill-creator \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (21 roles) \\
+Research Modules & 6 \\
+Wave Count & 4 (0, 1, 2, 3) \\
+Parallel Tracks & 3 (Wave 1) \\
+CAPCOM Gates & 2 (post Wave 1, post Wave 2) \\
+Deliverables & 10 \\
+Total Tests & 42 \\
+Safety-Critical Tests & 4 (all mandatory-pass) \\
+Estimated Tokens & 355,000 \\
+Model Split & 32\% Opus / 62\% Sonnet / 6\% Haiku \\
+Estimated Sessions & 3--4 context windows \\
+RFC Sources & 29 primary RFCs \\
+Key Organizations & IETF, IANA, ISC, ICANN \\
+Domain & Internet Protocol / Computer Networking \\
+Color Scheme & Technology (Steel Blue / Electric Blue / Graphite) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily Through-Line}
+
+\vspace{0.5em}
+{\itshape The DNS protocol is a 40-year demonstration of the Amiga Principle: that a small, principled architecture --- a delegation tree, a 12-byte header, a type field, a TTL --- can carry the weight of a planet's worth of naming. The ``spaces between'' are not empty. The NS record pointing away from itself, the glue record placed in a parent it doesn't own, the DS record anchoring a child's trust in its parent's zone --- these are the connective tissue of the internet. Every domain name resolved is a traversal of those connections. Every DNSSEC validation is a cryptographic proof that the connections are trustworthy. DNS is not a phone book. It is a proof system, disguised as a lookup table.}
+
+\vspace{0.8em}
+\noindent\textbf{\sffamily Handoff to gsd-skill-creator:} Feed this PDF to the GSD orchestrator. Activate Fleet profile. Execute Wave 0 first (Foundation) before starting parallel Wave 1 tracks. Both CAPCOM gates require human review. The security warden (SECURE) must approve the attack taxonomy before Wave 3 compilation.
+\end{quotebox}
+
+\end{document}

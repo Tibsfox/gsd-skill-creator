@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNS Full Protocol Specification — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --accent: #0D47A1;
+    --light: #E3F2FD;
+    --bg: #FAFAFA;
+    --card-bg: #ECEFF1;
+    --card-border: #B0BEC5;
+    --text: #212121;
+    --muted: #546E7A;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --serif: 'IBM Plex Serif', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    border-bottom: 4px solid var(--secondary);
+  }
+
+  .header-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #90CAF9;
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 span {
+    color: #90CAF9;
+  }
+
+  .header-sub {
+    font-size: 1.05rem;
+    color: #B0BEC5;
+    margin-bottom: 1.5rem;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: #78909C;
+  }
+
+  .meta-item strong {
+    color: #90CAF9;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .pipeline-strip {
+    background: var(--light);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--secondary);
+    border-radius: 4px;
+    padding: 0.9rem 1.2rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #CFD8DC;
+  }
+
+  .file-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 620px) {
+    .file-cards { grid-template-columns: 1fr; }
+  }
+
+  .file-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 1.4rem 1.3rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .file-card:hover {
+    border-color: var(--secondary);
+    box-shadow: 0 2px 12px rgba(21, 101, 192, 0.15);
+  }
+
+  .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .card-size {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: #90A4AE;
+    margin-top: 0.5rem;
+  }
+
+  .contents-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 680px) {
+    .contents-grid { grid-template-columns: 1fr; }
+  }
+
+  .stage-block {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-top: 3px solid var(--secondary);
+    border-radius: 4px;
+    padding: 1rem 1.1rem;
+  }
+
+  .stage-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-block h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.6rem;
+  }
+
+  .stage-block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .stage-block li {
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 0.2rem 0;
+    border-bottom: 1px dotted #CFD8DC;
+  }
+
+  .stage-block li:last-child { border-bottom: none; }
+
+  .usage-steps {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .usage-steps ol {
+    padding-left: 1.3rem;
+  }
+
+  .usage-steps li {
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .usage-steps code {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    background: var(--card-bg);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+
+  .compile-block {
+    background: var(--primary);
+    color: #B0BEC5;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.9;
+  }
+
+  .compile-block .comment { color: #546E7A; }
+  .compile-block .cmd { color: #90CAF9; }
+
+  .quote-block {
+    background: var(--light);
+    border-left: 3px solid var(--secondary);
+    padding: 1.2rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .modules-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 680px) {
+    .modules-list { grid-template-columns: 1fr 1fr; }
+  }
+
+  .module-chip {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  .module-chip .num {
+    font-family: var(--mono);
+    color: var(--secondary);
+    font-weight: 600;
+    display: block;
+    font-size: 0.7rem;
+    margin-bottom: 0.2rem;
+  }
+
+  footer {
+    background: var(--primary);
+    color: #546E7A;
+    font-family: var(--mono);
+    font-size: 0.73rem;
+    text-align: center;
+    padding: 1.2rem;
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">GSD Research Mission Package</div>
+  <h1>DNS <span>Full Protocol Specification</span></h1>
+  <div class="header-sub">Every Detail Mapped — RFC 1034 to RFC 9499</div>
+  <div class="header-meta">
+    <span class="meta-item"><strong>DATE</strong> March 27, 2026</span>
+    <span class="meta-item"><strong>PROFILE</strong> Fleet · 21 roles</span>
+    <span class="meta-item"><strong>MODULES</strong> 6</span>
+    <span class="meta-item"><strong>PAGES</strong> 33</span>
+    <span class="meta-item"><strong>STATUS</strong> Ready for GSD Orchestrator</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="pipeline-strip">
+    Vision → Research → Mission &nbsp;·&nbsp; Full Pipeline &nbsp;·&nbsp; 29 RFC Sources &nbsp;·&nbsp; Fleet Activation
+  </div>
+
+  <h2>Downloads</h2>
+  <div class="file-cards">
+    <a href="dns_mission.pdf" download class="file-card">
+      <div class="card-icon">📄</div>
+      <div class="card-title">dns_mission.pdf</div>
+      <div class="card-desc">Full three-stage mission package. Vision guide, research reference, and mission package in one document.</div>
+      <div class="card-size">33 pages · XeLaTeX compiled</div>
+    </a>
+    <a href="dns_mission.tex" download class="file-card">
+      <div class="card-icon">📝</div>
+      <div class="card-title">dns_mission.tex</div>
+      <div class="card-desc">LaTeX source file. Modify and recompile to customise sections, expand modules, or update RFC references.</div>
+      <div class="card-size">XeLaTeX · DejaVu fonts</div>
+    </a>
+  </div>
+
+  <h2>Research Modules</h2>
+  <div class="modules-list">
+    <div class="module-chip"><span class="num">MODULE 01</span>Wire Protocol &amp; Message Format</div>
+    <div class="module-chip"><span class="num">MODULE 02</span>Resource Record Taxonomy</div>
+    <div class="module-chip"><span class="num">MODULE 03</span>Resolution Architecture</div>
+    <div class="module-chip"><span class="num">MODULE 04</span>Zone Management</div>
+    <div class="module-chip"><span class="num">MODULE 05</span>DNSSEC</div>
+    <div class="module-chip"><span class="num">MODULE 06</span>Modern Extensions &amp; Privacy</div>
+  </div>
+
+  <h2>Document Contents</h2>
+  <div class="contents-grid">
+    <div class="stage-block">
+      <div class="stage-label">Stage 1</div>
+      <h3>Vision Document</h3>
+      <ul>
+        <li>Vision narrative</li>
+        <li>5 problem statements</li>
+        <li>Core concept + ASCII diagrams</li>
+        <li>6 module descriptions</li>
+        <li>Chipset YAML config</li>
+        <li>12 success criteria</li>
+        <li>Through-line</li>
+      </ul>
+    </div>
+    <div class="stage-block">
+      <div class="stage-label">Stage 2</div>
+      <h3>Research Reference</h3>
+      <ul>
+        <li>Header bit-map (wire format)</li>
+        <li>Label encoding rules</li>
+        <li>80+ RR type catalog</li>
+        <li>OPT pseudo-RR (EDNS0)</li>
+        <li>SOA field semantics</li>
+        <li>Full resolution walk</li>
+        <li>AXFR/IXFR/NOTIFY/UPDATE</li>
+        <li>DNSSEC chain of trust</li>
+        <li>DoT/DoH/DoQ comparison</li>
+        <li>29-RFC bibliography</li>
+      </ul>
+    </div>
+    <div class="stage-block">
+      <div class="stage-label">Stage 3</div>
+      <h3>Mission Package</h3>
+      <ul>
+        <li>10 deliverables spec</li>
+        <li>4-wave execution plan</li>
+        <li>3 parallel tracks</li>
+        <li>Token budget table</li>
+        <li>Dependency graph (ASCII)</li>
+        <li>42-test test plan</li>
+        <li>Verification matrix</li>
+        <li>21-role crew manifest</li>
+        <li>Execution summary</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How to Use with GSD</h2>
+  <div class="usage-steps">
+    <ol>
+      <li>Open the PDF and review <strong>Stage 1 Vision</strong> — confirm scope and module boundaries match your intent.</li>
+      <li>Hand the PDF to your GSD orchestrator: <code>gsd run --mission dns_mission.pdf --profile fleet</code></li>
+      <li>Orchestrator begins at <strong>Wave 0 (Foundation)</strong> — RFC index, RR schema, glossary stubs.</li>
+      <li>Wave 1 runs <strong>three parallel tracks</strong> simultaneously (Wire+RR, Resolution+Zone, DNSSEC+Extensions).</li>
+      <li>Approve the first <strong>CAPCOM gate</strong> after Wave 1 — review module drafts and scope before synthesis.</li>
+      <li>Wave 2 synthesizes the attack taxonomy, interaction diagrams, and assembles the full document.</li>
+      <li>Approve the second <strong>CAPCOM gate</strong> — security warden (SECURE) must sign off before publication.</li>
+      <li>Wave 3 compiles the final PDF and delivers the complete reference document.</li>
+    </ol>
+  </div>
+
+  <h2>Recompile LaTeX Source</h2>
+  <div class="compile-block">
+    <span class="comment"># Three-pass XeLaTeX compilation (required for TOC + lastpage)</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode dns_mission.tex</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode dns_mission.tex</span><br>
+    <span class="cmd">xelatex -interaction=nonstopmode dns_mission.tex</span><br>
+    <br>
+    <span class="comment"># Prerequisites: XeLaTeX + DejaVu fonts (pre-installed on Ubuntu 24)</span><br>
+    <span class="comment"># Packages: fontspec, tcolorbox, tabularx, longtable, colortbl, lastpage</span>
+  </div>
+
+  <h2>Through-Line</h2>
+  <div class="quote-block">
+    DNS is not a phone book. It is a proof system, disguised as a lookup table. The NS record pointing away from itself, the glue record placed in a parent it doesn't own, the DS record anchoring a child's trust in its parent's zone — these are the connective tissue of the internet. Every domain name resolved is a traversal of those connections. Every DNSSEC validation is a cryptographic proof that the connections are trustworthy. The Amiga Principle, running at planetary scale since 1987.
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · DNS Full Protocol Specification · March 27, 2026 · Tibsfox / GSD Ecosystem
+</footer>
+
+</body>
+</html>
