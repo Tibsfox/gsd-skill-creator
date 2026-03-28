@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Deep Trails — Center Camp</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0d1a12;
+    --bg-deep: #080e0a;
+    --bg-deepest: #050907;
+    --text: #e8dcc8;
+    --text-dim: rgba(232,220,200,0.5);
+    --text-mid: rgba(232,220,200,0.65);
+    --accent-green: #7a9a5a;
+    --accent-gold: #c8b890;
+    --border-forest: rgba(122,154,90,0.2);
+    --panel-bg: rgba(26,42,30,0.4);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: rgba(122,154,90,0.35); color: var(--text); }
+
+  /* ═══ Nav ═══ */
+  .nav-bar {
+    background: #1a2a1f;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.8rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-forest);
+  }
+  .nav-bar a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-bar a:hover { color: white; }
+  .nav-bar .active { color: white; font-weight: 600; }
+  .nav-bar .sep { color: rgba(255,255,255,0.2); }
+
+  /* ═══ Hero ═══ */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem 2.5rem;
+    background:
+      radial-gradient(ellipse at 50% 90%, rgba(122,154,90,0.05) 0%, transparent 50%),
+      linear-gradient(180deg, var(--bg) 0%, #0f1e15 50%, var(--bg) 100%);
+  }
+  .hero h1 {
+    font-size: 2.6rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.3rem;
+  }
+  .hero .subtitle {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+  .hero-text {
+    max-width: 38rem;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: var(--text-mid);
+  }
+
+  /* ═══ Controls Bar ═══ */
+  .controls-bar {
+    max-width: 52rem;
+    margin: 2rem auto 0.5rem;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .controls-bar button {
+    background: rgba(122,154,90,0.12);
+    border: 1px solid rgba(122,154,90,0.25);
+    color: var(--text-mid);
+    padding: 0.5rem 1.2rem;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .controls-bar button:hover {
+    background: rgba(122,154,90,0.25);
+    color: var(--text);
+    border-color: rgba(122,154,90,0.45);
+  }
+  .controls-bar button.active {
+    background: rgba(122,154,90,0.3);
+    border-color: var(--accent-green);
+    color: var(--text);
+  }
+
+  /* ═══ Stats ═══ */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(122,154,90,0.08);
+    border-bottom: 1px solid rgba(122,154,90,0.08);
+    margin: 1.5rem 0 1rem;
+  }
+  .stat { text-align: center; }
+  .stat-val {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    font-weight: 300;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: rgba(232,220,200,0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ═══ Trail Container ═══ */
+  .trails-container {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 4rem;
+  }
+
+  /* ═══ Trail ═══ */
+  .trail {
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(122,154,90,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .trail:hover { border-color: rgba(122,154,90,0.2); }
+  .trail.open { border-color: rgba(122,154,90,0.25); }
+
+  /* ═══ Trail Header ═══ */
+  .trail-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    background: var(--panel-bg);
+    transition: background 0.25s;
+    user-select: none;
+  }
+  .trail-header:hover { background: rgba(26,42,30,0.6); }
+  .trail.open .trail-header { background: rgba(26,42,30,0.65); }
+
+  .trail-marker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  .trail-header h2 {
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    flex: 1;
+  }
+
+  .trail-muse {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-style: italic;
+    flex-shrink: 0;
+  }
+
+  .trail-chevron {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .trail.open .trail-chevron { transform: rotate(180deg); }
+
+  /* ═══ Trail Body ═══ */
+  .trail-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .trail.open .trail-body {
+    max-height: 3000px;
+  }
+
+  .trail-inner {
+    padding: 0.5rem 1.5rem 1.5rem;
+  }
+
+  /* ═══ Waypoint Timeline ═══ */
+  .waypoints {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  /* The connecting line */
+  .waypoints::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 12px;
+    bottom: 40px;
+    width: 1px;
+    opacity: 0.3;
+  }
+
+  .waypoint {
+    position: relative;
+    padding: 1rem 0 1.5rem;
+    transition: opacity 0.3s;
+  }
+  .waypoint:last-child { padding-bottom: 0.5rem; }
+
+  /* Waypoint dot on the timeline */
+  .waypoint::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 1.35rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg);
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  .waypoint:hover::before {
+    transform: scale(1.3);
+  }
+
+  .waypoint-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .waypoint-text {
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: var(--text-mid);
+    margin-bottom: 0.6rem;
+  }
+
+  .waypoint-link {
+    display: inline-block;
+    font-size: 0.78rem;
+    text-decoration: none;
+    transition: all 0.25s;
+    opacity: 0.7;
+  }
+  .waypoint-link:hover {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  /* Progressive depth: each waypoint gets darker */
+  .waypoint:nth-child(1) { opacity: 1; }
+  .waypoint:nth-child(2) { opacity: 0.92; }
+  .waypoint:nth-child(3) { opacity: 0.85; }
+  .waypoint:nth-child(4) { opacity: 0.78; }
+  .waypoint:nth-child(5) { opacity: 0.72; }
+
+  .waypoint:nth-child(1) .waypoint-text { color: rgba(232,220,200,0.7); }
+  .waypoint:nth-child(2) .waypoint-text { color: rgba(232,220,200,0.62); }
+  .waypoint:nth-child(3) .waypoint-text { color: rgba(232,220,200,0.55); }
+  .waypoint:nth-child(4) .waypoint-text { color: rgba(232,220,200,0.48); }
+  .waypoint:nth-child(5) .waypoint-text { color: rgba(232,220,200,0.42); }
+
+  /* Progressive background darkening */
+  .waypoint:nth-child(1) { background: transparent; }
+  .waypoint:nth-child(2) { background: rgba(0,0,0,0.03); }
+  .waypoint:nth-child(3) { background: rgba(0,0,0,0.06); padding-left: 0.5rem; border-radius: 4px; }
+  .waypoint:nth-child(4) { background: rgba(0,0,0,0.09); padding-left: 0.5rem; border-radius: 4px; }
+  .waypoint:nth-child(5) { background: rgba(0,0,0,0.12); padding-left: 0.5rem; border-radius: 4px; }
+
+  /* Trail end message */
+  .trail-end {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    border-top: 1px solid rgba(122,154,90,0.08);
+    font-size: 0.78rem;
+    color: rgba(232,220,200,0.3);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* ═══ Footer ═══ */
+  .page-footer {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    font-size: 0.85rem;
+    color: rgba(232,220,200,0.3);
+    font-style: italic;
+    line-height: 1.8;
+  }
+  .page-footer .count {
+    color: var(--accent-gold);
+    font-style: normal;
+  }
+  .page-footer a {
+    color: rgba(122,154,90,0.5);
+    text-decoration: none;
+  }
+  .page-footer a:hover { color: var(--accent-green); }
+  .page-footer .nav-links {
+    margin-top: 1.5rem;
+    font-style: normal;
+    font-size: 0.78rem;
+  }
+
+  /* ═══ Responsive ═══ */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.8rem; }
+    .trails-container { padding: 1rem 0.75rem 3rem; }
+    .trail-header { padding: 0.8rem 1rem; gap: 0.6rem; }
+    .trail-header h2 { font-size: 0.9rem; }
+    .trail-inner { padding: 0.5rem 1rem 1.2rem; }
+    .stats-bar { gap: 1.2rem; }
+    .controls-bar { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">Compass</a>
+  <span class="sep">/</span>
+  <a href="deep-trails.html" class="active">Deep Trails</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>The Deep Trails</h1>
+  <div class="subtitle">Walk further from camp. The old-growth has stories.</div>
+  <div class="hero-text">
+    Center Camp is the clearing. The installations are the art. But the real forest starts
+    where the trails go deep &mdash; into the research itself. Each trail leads further from the fire,
+    into darker, taller, older wood. The knowledge gets deeper at every waypoint.
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-val">10</span><span class="stat-label">Trails</span></div>
+  <div class="stat"><span class="stat-val">45</span><span class="stat-label">Waypoints</span></div>
+  <div class="stat"><span class="stat-val">23</span><span class="stat-label">Research Projects</span></div>
+  <div class="stat"><span class="stat-val">10</span><span class="stat-label">Muse Guides</span></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls-bar">
+  <button id="expand-all" onclick="toggleAll()">Expand All Trails</button>
+</div>
+
+<!-- TRAILS -->
+<div class="trails-container">
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 1: THE SALMON THREAD -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#2a8a96">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#2a8a96; color:#2a8a96;"></div>
+      <h2 style="color:#2a8a96;">The Salmon Thread</h2>
+      <span class="trail-muse">led by Chinook</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints" style="--trail-color:#2a8a96;">
+          <style>
+            [data-color="#2a8a96"] .waypoints::before { background: linear-gradient(180deg, #2a8a96, rgba(42,138,150,0.1)); }
+            [data-color="#2a8a96"] .waypoint::before { border-color: #2a8a96; }
+            [data-color="#2a8a96"] .waypoint:hover::before { background: #2a8a96; }
+            [data-color="#2a8a96"] .waypoint-link { color: #2a8a96; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Journey</div>
+            <div class="waypoint-text">A Chinook salmon spends 1&ndash;5 years in the Pacific Ocean, accumulating marine-derived nitrogen (N-15). It can travel 900 miles upriver to spawn. The entire journey is a one-way delivery of ocean nutrients to the interior of the continent.</div>
+            <a href="../SAL/index.html" class="waypoint-link">&rarr; Read more in SAL &mdash; Pacific Salmon</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Bear</div>
+            <div class="waypoint-text">Grizzly bears carry salmon carcasses up to 500 meters into the forest. A single bear distributes 40+ carcasses per season across the riparian zone. The predator is the delivery system. The kill is the gift.</div>
+            <a href="../MAM/index.html" class="waypoint-link">&rarr; Read more in MAM &mdash; Fur, Fin &amp; Fang</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Tree Ring</div>
+            <div class="waypoint-text">Marine-derived nitrogen appears in the growth rings of trees growing near salmon streams. N-15 isotope tracing proves the ocean is feeding the forest through the fish. You can read the salmon runs in the wood.</div>
+            <a href="../COL/index.html" class="waypoint-link">&rarr; Read more in COL &mdash; Rainforest Canopy</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Network</div>
+            <div class="waypoint-text">Mycorrhizal fungi distribute salmon-derived nitrogen through underground networks to trees kilometers from any stream. The entire forest is fed by the ocean. The network beneath the soil moves nutrients that the rivers carried from the sea.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Orca</div>
+            <div class="waypoint-text">Southern Resident orca eat 80% Chinook. 73 individuals left. When salmon decline, the matriarch's knowledge of where to find fish becomes the pod's survival. The oldest memory is the last defense against starvation.</div>
+            <a href="../BPS/index.html" class="waypoint-link">&rarr; Read more in BPS &mdash; Bioacoustic Pulse Survey</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 2: THE SOUND TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#d4881a">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#d4881a; color:#d4881a;"></div>
+      <h2 style="color:#d4881a;">The Sound Trail</h2>
+      <span class="trail-muse">led by Alder</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#d4881a"] .waypoints::before { background: linear-gradient(180deg, #d4881a, rgba(212,136,26,0.1)); }
+            [data-color="#d4881a"] .waypoint::before { border-color: #d4881a; }
+            [data-color="#d4881a"] .waypoint:hover::before { background: #d4881a; }
+            [data-color="#d4881a"] .waypoint-link { color: #d4881a; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">Ancestral Sounds</div>
+            <div class="waypoint-text">Coast Salish instruments were carved from cedar because cedar was everywhere. The material was local; the music was local; the two were inseparable. You cannot separate the sound from the wood it comes from.</div>
+            <a href="../GRV/index.html" class="waypoint-link">&rarr; Read more in GRV &mdash; The Groove</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">Jackson Street</div>
+            <div class="waypoint-text">Between 1918 and 1950, 34 jazz venues operated on Jackson Street in Seattle. Ray Charles arrived in 1948. Quincy Jones attended Garfield High. The neighborhood was the instrument, and everybody played.</div>
+            <a href="../RBH/index.html" class="waypoint-link">&rarr; Read more in RBH &mdash; Rhythm &amp; Blues History</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The $10 Studio</div>
+            <div class="waypoint-text">Reciprocal Recording charged $10/hour. Jack Endino engineered. Nirvana's Bleach was recorded here for $606.17. The constraint produced the sound. When you can't afford to be precious, you play what's real.</div>
+            <a href="../GRV/index.html" class="waypoint-link">&rarr; Read more in GRV &mdash; The Groove</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">50 Tunings</div>
+            <div class="waypoint-text">Sonic Youth maintained 50+ alternate tunings. Prepared guitars with screwdrivers and Allen wrenches jammed between the strings. The default is a choice. Choosing differently unlocks new music that standard tuning cannot reach.</div>
+            <a href="../SNY/index.html" class="waypoint-link">&rarr; Read more in SNY &mdash; Sonic Youth</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Wood</div>
+            <div class="waypoint-text">Fender Stratocasters are made from PNW red alder. The Seattle Sound was literally carved from a local tree. The material IS the message. The forest grew the tonewood. The tonewood shaped the music. The music named the place.</div>
+            <a href="../GRV/index.html" class="waypoint-link">&rarr; Read more in GRV &mdash; The Groove</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 3: THE DEEP TIME TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#7a6040">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#7a6040; color:#7a6040;"></div>
+      <h2 style="color:#9a7a52;">The Deep Time Trail</h2>
+      <span class="trail-muse">led by Sturgeon</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#7a6040"] .waypoints::before { background: linear-gradient(180deg, #7a6040, rgba(122,96,64,0.1)); }
+            [data-color="#7a6040"] .waypoint::before { border-color: #7a6040; }
+            [data-color="#7a6040"] .waypoint:hover::before { background: #7a6040; }
+            [data-color="#7a6040"] .waypoint-link { color: #9a7a52; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Sturgeon</div>
+            <div class="waypoint-text">White sturgeon can live 100+ years and weigh 600 kg. The largest freshwater fish in North America, unchanged since the dinosaurs. They were here before the Cascades rose. They will be here after we are gone.</div>
+            <a href="../ECO/index.html" class="waypoint-link">&rarr; Read more in ECO &mdash; Ecosystem Dynamics</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Lamprey</div>
+            <div class="waypoint-text">Pacific lamprey have been swimming PNW rivers for 450 million years. They predate the salmon by 350 million years. Their body plan has not changed because it did not need to. The jawless mouth is the original design.</div>
+            <a href="../SAL/index.html" class="waypoint-link">&rarr; Read more in SAL &mdash; Pacific Salmon</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Fern</div>
+            <div class="waypoint-text">Sword ferns reproduce by spores, not seeds. Their lineage is 200 million years old &mdash; they were here before flowering plants existed. Every fern you walk past in the understory is older than every flower on the planet.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Subduction</div>
+            <div class="waypoint-text">The Cascadia Subduction Zone last ruptured on January 26, 1700 (magnitude 9.0+). Recurrence interval: 243 years mean. Current elapsed time: 326 years. The tectonic clock does not negotiate. The Juan de Fuca plate slides beneath North America at 40 mm/year.</div>
+            <a href="../ROF/index.html" class="waypoint-link">&rarr; Read more in ROF &mdash; Ring of Fire</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Carboniferous</div>
+            <div class="waypoint-text">Before fungi learned to decompose lignin, dead trees became coal. The Carboniferous period: 300 million years of trees piling up because the chemistry didn't know what else to do. Fungi closed the cycle. Without decomposition, there is no forest &mdash; only accumulation.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 4: THE KEYSTONE TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#c75b3a">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#c75b3a; color:#c75b3a;"></div>
+      <h2 style="color:#c75b3a;">The Keystone Trail</h2>
+      <span class="trail-muse">led by Star</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#c75b3a"] .waypoints::before { background: linear-gradient(180deg, #c75b3a, rgba(199,91,58,0.1)); }
+            [data-color="#c75b3a"] .waypoint::before { border-color: #c75b3a; }
+            [data-color="#c75b3a"] .waypoint:hover::before { background: #c75b3a; }
+            [data-color="#c75b3a"] .waypoint-link { color: #c75b3a; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">Paine's Experiment</div>
+            <div class="waypoint-text">In 1966, Robert Paine removed ochre sea stars from Tatoosh Island. Mussels spread to cover 80% of the rock. Diversity collapsed from 15 species to 8. He coined the word "keystone." The experiment that named the concept happened here, on a rock in the Pacific Northwest.</div>
+            <a href="../ECO/index.html" class="waypoint-link">&rarr; Read more in ECO &mdash; Ecosystem Dynamics</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Urchin Barren</div>
+            <div class="waypoint-text">Sea star wasting disease (2013&ndash;present) killed 90&ndash;95% of sunflower stars. Without predation, purple urchins exploded. They ate the kelp forests bare. The barren is what remains when the keystone dissolves &mdash; rock, urchins, nothing else.</div>
+            <a href="../ECO/index.html" class="waypoint-link">&rarr; Read more in ECO &mdash; Ecosystem Dynamics</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Owl Cascade</div>
+            <div class="waypoint-text">The spotted owl depends on flying squirrels, which depend on truffles, which depend on old-growth mycorrhizal networks. Remove the old growth and the cascade collapses from the bottom. The owl is not the keystone &mdash; the fungus is.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Wolf Return</div>
+            <div class="waypoint-text">When wolves returned to Yellowstone, elk stopped browsing riverbanks. Willows grew back. Songbirds returned. Beavers returned. The rivers literally changed course. One predator reshaped the hydrology of an entire valley.</div>
+            <a href="../MAM/index.html" class="waypoint-link">&rarr; Read more in MAM &mdash; Fur, Fin &amp; Fang</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 5: THE FREQUENCY TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#9b59b6">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#9b59b6; color:#9b59b6;"></div>
+      <h2 style="color:#9b59b6;">The Frequency Trail</h2>
+      <span class="trail-muse">led by Bat</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#9b59b6"] .waypoints::before { background: linear-gradient(180deg, #9b59b6, rgba(155,89,182,0.1)); }
+            [data-color="#9b59b6"] .waypoint::before { border-color: #9b59b6; }
+            [data-color="#9b59b6"] .waypoint:hover::before { background: #9b59b6; }
+            [data-color="#9b59b6"] .waypoint-link { color: #9b59b6; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Black Hole</div>
+            <div class="waypoint-text">Perseus cluster: a B-flat 57 octaves below middle C. Period: 9.6 million years. The deepest note in the universe. A pressure wave rippling through 11 million light-years of intergalactic gas. Sound, at the scale of creation.</div>
+            <a href="../FQC/index.html" class="waypoint-link">&rarr; Read more in FQC &mdash; Frequency Continuum</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Earth</div>
+            <div class="waypoint-text">Schumann resonance: 7.83 Hz. The space between Earth's surface and its ionosphere forms a resonant cavity of precisely the right geometry. The planet hums at a frequency determined by its own circumference. Lightning strikes are the excitation.</div>
+            <a href="../FQC/index.html" class="waypoint-link">&rarr; Read more in FQC &mdash; Frequency Continuum</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Whale</div>
+            <div class="waypoint-text">Blue whale calls at 17.4 Hz travel the entire Pacific Ocean. The largest animal produces the lowest biological frequency. The ocean is the waveguide. The whale is the transmitter. The message crosses hemispheres.</div>
+            <a href="../DAA/index.html" class="waypoint-link">&rarr; Read more in DAA &mdash; Deep Audio Analysis</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Bat</div>
+            <div class="waypoint-text">Little brown bats sweep 20&ndash;80 kHz in FM chirps, catching 600 insects per night. Each echo returns a 3D map of the cluttered old-growth canopy. Echolocation is sonar built from breath. The darkness is not dark to them.</div>
+            <a href="../BPS/index.html" class="waypoint-link">&rarr; Read more in BPS &mdash; Bioacoustic Pulse Survey</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Wren</div>
+            <div class="waypoint-text">Pacific wren: 36 notes per second from 10 grams of bird. The most complex song relative to body size in North America. The voice IS the territory. Invisible in the understory, deafening in the canopy. Frequency as sovereignty.</div>
+            <a href="../AVI/index.html" class="waypoint-link">&rarr; Read more in AVI &mdash; Wings of the Pacific Northwest</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 6: THE FIRE TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#e04a2f">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#e04a2f; color:#e04a2f;"></div>
+      <h2 style="color:#e04a2f;">The Fire Trail</h2>
+      <span class="trail-muse">led by Fire</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#e04a2f"] .waypoints::before { background: linear-gradient(180deg, #e04a2f, rgba(224,74,47,0.1)); }
+            [data-color="#e04a2f"] .waypoint::before { border-color: #e04a2f; }
+            [data-color="#e04a2f"] .waypoint:hover::before { background: #e04a2f; }
+            [data-color="#e04a2f"] .waypoint-link { color: #e04a2f; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Burn</div>
+            <div class="waypoint-text">For millennia, Kalapuya peoples burned the Willamette Valley to maintain camas prairies. Less than 5% of pre-contact prairie remains because fire was removed. The absence of fire is not the absence of change &mdash; it is a different kind of destruction.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Debt</div>
+            <div class="waypoint-text">A century of fire suppression turned PNW forests into tinderboxes. When the 2020 Oregon Labor Day fires came, a million acres burned in three days. The debt was ecological. The interest was catastrophic. Suppression deferred the bill; it did not cancel it.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Fir</div>
+            <div class="waypoint-text">Douglas fir is a fire-dependent species. It cannot regenerate in shade. Without fire, shade-tolerant hemlock replaces it. The old-growth cathedral exists BECAUSE of fire. The tallest trees in the forest owe their existence to the thing that could kill them.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Pioneer</div>
+            <div class="waypoint-text">Red alder is the first tree after disturbance. It fixes nitrogen, enriching soil for everything that follows. The first colonizer is the most generous. It arrives in the ashes, builds the ground, and makes room for the forest that will replace it.</div>
+            <a href="../COL/index.html" class="waypoint-link">&rarr; Read more in COL &mdash; Rainforest Canopy</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 7: THE RADIO SIGNAL TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#a07ae0">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#a07ae0; color:#a07ae0;"></div>
+      <h2 style="color:#a07ae0;">The Radio Signal Trail</h2>
+      <span class="trail-muse">led by Marten</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#a07ae0"] .waypoints::before { background: linear-gradient(180deg, #a07ae0, rgba(160,122,224,0.1)); }
+            [data-color="#a07ae0"] .waypoint::before { border-color: #a07ae0; }
+            [data-color="#a07ae0"] .waypoint:hover::before { background: #a07ae0; }
+            [data-color="#a07ae0"] .waypoint-link { color: #a07ae0; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Mountain</div>
+            <div class="waypoint-text">Cougar Mountain (1,220 ft): three stations broadcast from here &mdash; C89.5, KUBE, KPLZ. One mountain, the entire Puget Sound basin. Geography decides who speaks loudest. The transmitter needs line-of-sight. The mountain provides it.</div>
+            <a href="../C89/index.html" class="waypoint-link">&rarr; Read more in C89 &mdash; C89.5 FM</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Island</div>
+            <div class="waypoint-text">Mount Constitution on Orcas Island: KISM 92.9 broadcasts from a CCC-built stone tower at the peak of the San Juans. Cross-border signal bleeds into British Columbia. The radio does not respect the 49th parallel.</div>
+            <a href="../KSM/index.html" class="waypoint-link">&rarr; Read more in KSM &mdash; KISM 92.9</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Culture</div>
+            <div class="waypoint-text">KUBE 93.3: Nasty Nes Rodriguez, Filipino immigrant, godfather of Northwest hip-hop. He put Sir Mix-A-Lot on the air. Clear Channel killed the station in 2003. The culture scattered &mdash; but it didn't disappear. It went underground.</div>
+            <a href="../KUB/index.html" class="waypoint-link">&rarr; Read more in KUB &mdash; KUBE 93.3</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The School</div>
+            <div class="waypoint-text">C89.5 FM: run by teenagers at Nathan Hale High School since 1971. Fifty-six years of student broadcasting. Lady Gaga played on a high school stage in 2008. The license belongs to the school district. The signal belongs to the kids.</div>
+            <a href="../C89/index.html" class="waypoint-link">&rarr; Read more in C89 &mdash; C89.5 FM</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Signal</div>
+            <div class="waypoint-text">The Wolf 100.7: nine format changes in 78 years. Country, rock, talk, urban, adult contemporary, classic rock &mdash; the format dies, the frequency endures. The signal is more important than the format. The carrier outlives every message.</div>
+            <a href="../WLF/index.html" class="waypoint-link">&rarr; Read more in WLF &mdash; The Wolf 100.7</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 8: THE MYCORRHIZAL TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#7a9a5a">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#7a9a5a; color:#7a9a5a;"></div>
+      <h2 style="color:#7a9a5a;">The Mycorrhizal Trail</h2>
+      <span class="trail-muse">led by Chanterelle</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#7a9a5a"] .waypoints::before { background: linear-gradient(180deg, #7a9a5a, rgba(122,154,90,0.1)); }
+            [data-color="#7a9a5a"] .waypoint::before { border-color: #7a9a5a; }
+            [data-color="#7a9a5a"] .waypoint:hover::before { background: #7a9a5a; }
+            [data-color="#7a9a5a"] .waypoint-link { color: #7a9a5a; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Web</div>
+            <div class="waypoint-text">Ectomycorrhizal fungi connect Douglas fir to western hemlock to Sitka spruce through common mycorrhizal networks. One network, many species. The roots of competing trees are joined underground by organisms that predate either tree's lineage.</div>
+            <a href="../COL/index.html" class="waypoint-link">&rarr; Read more in COL &mdash; Rainforest Canopy</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Mother</div>
+            <div class="waypoint-text">Suzanne Simard's research: mother trees connect to 47 other trees. They send carbon to kin seedlings preferentially. The forest is one organism. The individual tree is an illusion of above-ground perspective. Below the soil, there are no boundaries.</div>
+            <a href="../LFR/index.html" class="waypoint-link">&rarr; Read more in LFR &mdash; Living Forest</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Truffle</div>
+            <div class="waypoint-text">Flying squirrels eat truffle fruiting bodies and deposit spores across the forest. Spotted owls eat flying squirrels. The truffle-mammal-raptor cascade: three kingdoms bound by appetite. The fungus feeds the rodent that feeds the raptor that protects the forest.</div>
+            <a href="../MAM/index.html" class="waypoint-link">&rarr; Read more in MAM &mdash; Fur, Fin &amp; Fang</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Chanterelle</div>
+            <div class="waypoint-text">Pacific golden chanterelle cannot be cultivated. Every commercial attempt has failed. It fruits only in mature forests with intact mycorrhizal networks. You cannot manufacture what requires centuries of relationship. The chanterelle is proof that some things only grow from trust.</div>
+            <a href="../COL/index.html" class="waypoint-link">&rarr; Read more in COL &mdash; Rainforest Canopy</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 9: THE CONVENTION TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#e0a07a">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#e0a07a; color:#e0a07a;"></div>
+      <h2 style="color:#e0a07a;">The Convention Trail</h2>
+      <span class="trail-muse">led by Madrone</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#e0a07a"] .waypoints::before { background: linear-gradient(180deg, #e0a07a, rgba(224,160,122,0.1)); }
+            [data-color="#e0a07a"] .waypoint::before { border-color: #e0a07a; }
+            [data-color="#e0a07a"] .waypoint:hover::before { background: #e0a07a; }
+            [data-color="#e0a07a"] .waypoint-link { color: #e0a07a; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">48 Years</div>
+            <div class="waypoint-text">Norwescon started in 1978 when PNW fans needed practice for a Worldcon bid. "The practice was the thing." Theodore Sturgeon was first Guest of Honor. Forty-eight years later, the practice convention is the real convention. The rehearsal became the show.</div>
+            <a href="../NWC/index.html" class="waypoint-link">&rarr; Read more in NWC &mdash; Norwescon</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">78 Years</div>
+            <div class="waypoint-text">Westercon since 1948. The traveling convention that built West Coast fandom. A different city each year, the same community. Seventy-eight years of people showing up. The gathering migrates, but the web of trust stays fixed.</div>
+            <a href="../WCN/index.html" class="waypoint-link">&rarr; Read more in WCN &mdash; Westercon</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Secret Masters</div>
+            <div class="waypoint-text">SMOFcon exists solely to preserve the knowledge of how to run conventions. "Secret Masters of Fandom." The meta-convention. A gathering whose only purpose is to ensure that gatherings keep happening. Infrastructure maintaining infrastructure.</div>
+            <a href="../SMF/index.html" class="waypoint-link">&rarr; Read more in SMF &mdash; SMOFcon</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Pack</div>
+            <div class="waypoint-text">JanSport: Seattle 1967. Murray Pletz and Skip Yowell built the first pack in a garage. From Cascade trails to every campus on earth. The external frame pack was designed for the mountains above the city where it was sewn. It carried everything.</div>
+            <a href="../JNS/index.html" class="waypoint-link">&rarr; Read more in JNS &mdash; JanSport</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- TRAIL 10: THE CLIMATE WITNESS TRAIL -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="trail" data-color="#8ab4d0">
+    <div class="trail-header" onclick="toggleTrail(this.parentElement)">
+      <div class="trail-marker" style="background:#d4dce8; color:#d4dce8;"></div>
+      <h2 style="color:#d4dce8;">The Climate Witness Trail</h2>
+      <span class="trail-muse">led by Glacier</span>
+      <span class="trail-chevron">&#9660;</span>
+    </div>
+    <div class="trail-body">
+      <div class="trail-inner">
+        <div class="waypoints">
+          <style>
+            [data-color="#8ab4d0"] .waypoints::before { background: linear-gradient(180deg, #8ab4d0, rgba(138,180,208,0.1)); }
+            [data-color="#8ab4d0"] .waypoint::before { border-color: #8ab4d0; }
+            [data-color="#8ab4d0"] .waypoint:hover::before { background: #8ab4d0; }
+            [data-color="#8ab4d0"] .waypoint-link { color: #8ab4d0; }
+          </style>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Archive</div>
+            <div class="waypoint-text">Cascade glaciers have lost 50%+ of volume since the 1960s. Each layer of ice contains centuries of atmospheric chemistry &mdash; pollen, volcanic ash, isotope ratios. When they melt, the archive is gone. The record of what the sky was like is locked in frozen water, and the water is running downhill.</div>
+            <a href="../HGE/index.html" class="waypoint-link">&rarr; Read more in HGE &mdash; High-Gradient Environments</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Pika</div>
+            <div class="waypoint-text">American pika cannot tolerate warmth. Populations are disappearing from lower elevations across the Cascades. The smallest voice from the highest place carries the most urgent message. When the pika retreats upslope, there is nowhere higher to go.</div>
+            <a href="../MAM/index.html" class="waypoint-link">&rarr; Read more in MAM &mdash; Fur, Fin &amp; Fang</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Salmon</div>
+            <div class="waypoint-text">10 of 17 studied PNW rivers show declining flow since 1975. Less snow, more rain. The shift from snowpack to rainfall changes everything &mdash; timing, temperature, volume. Salmon evolved to run when the melt comes. When the melt shifts, the run fails.</div>
+            <a href="../AWF/index.html" class="waypoint-link">&rarr; Read more in AWF &mdash; Atmospheric Water &amp; Flow</a>
+          </div>
+
+          <div class="waypoint">
+            <div class="waypoint-title">The Star</div>
+            <div class="waypoint-text">Sea star wasting disease: linked to marine heat waves. 90&ndash;95% of sunflower stars gone. When keystone species fall to climate, cascades accelerate. The urchin barren, the kelp collapse, the fish desert &mdash; each step follows the one before. The ocean remembers heat in the bodies of its animals.</div>
+            <a href="../ECO/index.html" class="waypoint-link">&rarr; Read more in ECO &mdash; Ecosystem Dynamics</a>
+          </div>
+        </div>
+        <div class="trail-end">You've reached the old growth. The trail continues in the research.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <span class="count">Ten</span> trails. <span class="count">Forty-five</span> waypoints.
+  Each one a real discovery from the research corpus.<br>
+  The forest is deeper than any map.
+  <div class="nav-links">
+    <a href="index.html">Center Camp</a> &middot;
+    <a href="../compass.html">The Compass</a> &middot;
+    <a href="../ROSETTA.md">Rosetta Stone</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  let allExpanded = false;
+
+  // Toggle a single trail (accordion: close others unless allExpanded)
+  window.toggleTrail = function(trailEl) {
+    if (allExpanded) {
+      // In expand-all mode, just toggle this one
+      trailEl.classList.toggle('open');
+      return;
+    }
+
+    const wasOpen = trailEl.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.trail.open').forEach(t => t.classList.remove('open'));
+
+    // Open this one (unless it was already open)
+    if (!wasOpen) {
+      trailEl.classList.add('open');
+      // Smooth scroll to trail header
+      setTimeout(() => {
+        trailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  };
+
+  // Expand / Collapse all
+  window.toggleAll = function() {
+    const btn = document.getElementById('expand-all');
+    const trails = document.querySelectorAll('.trail');
+
+    allExpanded = !allExpanded;
+
+    if (allExpanded) {
+      trails.forEach(t => t.classList.add('open'));
+      btn.textContent = 'Collapse All Trails';
+      btn.classList.add('active');
+    } else {
+      trails.forEach(t => t.classList.remove('open'));
+      btn.textContent = 'Expand All Trails';
+      btn.classList.remove('active');
+    }
+  };
+
+  // Keyboard: Escape closes all
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.trail.open').forEach(t => t.classList.remove('open'));
+      allExpanded = false;
+      const btn = document.getElementById('expand-all');
+      btn.textContent = 'Expand All Trails';
+      btn.classList.remove('active');
+    }
+  });
+
+  // If URL has hash, open that trail
+  if (location.hash) {
+    const idx = parseInt(location.hash.replace('#trail-', ''), 10);
+    if (!isNaN(idx)) {
+      const trails = document.querySelectorAll('.trail');
+      if (trails[idx - 1]) {
+        trails[idx - 1].classList.add('open');
+        setTimeout(() => trails[idx - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
