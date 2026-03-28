@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 6&deg; &mdash; Patti Bown &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .concentration-alert {
+      background: #FCE4EC;
+      border: 1px solid #EF9A9A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .concentration-alert h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #C62828;
+      font-family: system-ui, sans-serif;
+    }
+    .concentration-alert p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .gender-dimension {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .gender-dimension h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .gender-dimension table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .gender-dimension td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #E1BEE7;
+    }
+    .gender-dimension td:first-child { font-weight: 600; width: 30%; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">6&deg;</div>
+      <div>
+        <h1>Patti Bown</h1>
+        <div class="subtitle">Jazz &middot; Piano &middot; Hard Bop &middot; Avant-Garde &mdash; Central District 1931 &rarr; 2008</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Columbia debut. DownBeat reviews. Quincy Jones connections.
+          Motown sessions. Trio leader in the hard bop era. Then: erased.
+          The engine documents what the industry dropped.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Central District&rsquo;s Forgotten Pianist</h2>
+
+        <p>Patti Bown was born on June 26, 1931, in Seattle, Washington, and raised in the
+        <strong>Central District</strong> &mdash; the seventh consecutive degree connected to
+        that neighborhood. Bown studied music at <strong>Seattle University</strong>, adding a
+        seventh educational pipeline to the engine&rsquo;s taxonomy. She moved to
+        <strong>New York City</strong> in the mid-1950s and became one of the first Black women to
+        lead a jazz piano trio in the hard bop era.</p>
+
+        <p>Her debut album, <strong><em>Patti Bown Plays Big Piano</em></strong> (1958, Columbia Records),
+        placed her on the most prestigious jazz label of the era &mdash; home to Miles Davis, Dave Brubeck,
+        and Thelonious Monk. She worked with
+        <a href="../000-quincy-jones/index.html">Quincy Jones</a> (0&deg;),
+        Oliver Nelson, and Duke Pearson. She performed session work for Motown. She was reviewed
+        favorably in DownBeat. And then she was forgotten.</p>
+
+        <p>Bown died on March 21, 2008, in Philadelphia, at age 76. No NEA Jazz Master designation.
+        No Grammy nominations. Her Columbia debut is out of print. The city that produced her had
+        largely forgotten her. She is degree 6 because the engine documents what the industry dropped.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Columbia Records discography;
+        AllMusic; DownBeat reviews 1958&ndash;1965; Paul de Barros, <em>Jackson Street After Hours</em>
+        (1993); Seattle Times archives; jazz biography databases</p>
+
+        <!-- ========================================
+             GENDER DIMENSION
+             ======================================== -->
+
+        <div class="gender-dimension">
+          <h4>Gender Dimension: Instrumentalist vs. Vocalist</h4>
+          <table>
+            <tr>
+              <td>3&deg; Ernestine Anderson</td>
+              <td><strong>Vocalist.</strong> The female jazz vocalist was a recognized position &mdash; Holiday,
+              Fitzgerald, Vaughan. The barrier was real but permeable. Anderson was heard, recorded, celebrated.</td>
+            </tr>
+            <tr>
+              <td>6&deg; Patti Bown</td>
+              <td><strong>Instrumentalist.</strong> The female jazz pianist was exceptional, not expected.
+              Bown competed directly with male pianists for the same bandstand. Three barriers:
+              Black, female, pianist. The gender barrier was higher for instrumentalists than vocalists.</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Two women in seven degrees. Anderson (vocalist)
+          was recognized despite discrimination. Bown (instrumentalist) was erased despite achievement.
+          The variable is the role, not the talent.</p>
+        </div>
+
+        <!-- ========================================
+             CENTRAL DISTRICT THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>The Central District Thread: Degrees 0&deg; through 6&deg;</h4>
+          <table>
+            <tr>
+              <td>0&deg; Quincy Jones</td>
+              <td>Arrived Central District age 10. Garfield. Jackson Street. Left for the world. <strong>The Export.</strong></td>
+            </tr>
+            <tr>
+              <td>1&deg; Bill Frisell</td>
+              <td>Arrived Seattle 1989. No CD connection. Inherited infrastructure. <strong>The Draw.</strong></td>
+            </tr>
+            <tr>
+              <td>2&deg; Wayne Horvitz</td>
+              <td>Arrived Seattle 1988. No CD connection. Built new infrastructure. <strong>The Builder.</strong></td>
+            </tr>
+            <tr>
+              <td>3&deg; Ernestine Anderson</td>
+              <td>Arrived Central District age 16. Garfield. Jackson Street. Left, returned, stayed. <strong>The Stay.</strong></td>
+            </tr>
+            <tr>
+              <td>4&deg; Floyd Standifer</td>
+              <td>Arrived Central District post-WWII. Jackson Street. Never left. UW faculty. <strong>The Teacher.</strong></td>
+            </tr>
+            <tr>
+              <td>5&deg; Overton Berry</td>
+              <td>Born in Central District. Self-taught. Never left. Still performing. <strong>The Persistence.</strong></td>
+            </tr>
+            <tr>
+              <td>6&deg; Patti Bown</td>
+              <td>Born in Central District. Seattle University. Left for NYC. Significant success, then erased. <strong>The Erasure.</strong></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="concentration-alert">
+          <h4>Geographic Concentration: 6 of 7 Degrees = Central District</h4>
+          <p>Six of seven degrees are Central District artists. The concentration is historically valid &mdash;
+          the CD was Seattle&rsquo;s Black cultural center for most of the twentieth century. But seven
+          consecutive degrees in one neighborhood has exhausted the cluster.
+          <strong>The engine&rsquo;s next degrees must diversify &mdash; different neighborhoods, different
+          genres, or both.</strong> The Central District thread is not closed; it can always be revisited.
+          But the rotation must begin.</p>
+        </div>
+
+        <!-- ========================================
+             THE ERASURE PATTERN
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Erasure Pattern</h2>
+
+        <p>Degrees 0&ndash;5 established six artist-city patterns. Bown introduces the seventh:
+        <strong>The Erasure</strong> &mdash; the dark twin of The Export. Same departure, same destination,
+        opposite outcome. Jones was exported and succeeded globally. Bown was exported, succeeded
+        significantly, and was forgotten. The success was real (Columbia recording, DownBeat reviews,
+        arranger connections, session work). The memory system failed.</p>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+          </tbody>
+        </table>
+
+        <p>The Erasure pattern matters because it identifies a failure mode in the industry&rsquo;s
+        memory system. Bown&rsquo;s career had all the markers of lasting recognition &mdash; a major-label
+        debut, critical acclaim, connections to the era&rsquo;s leading arrangers &mdash; and the memory
+        system still failed. The engine documents what the canon dropped.</p>
+
+        <!-- ========================================
+             PIANO LINEAGE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Piano Lineage: Berry &rarr; Bown</h2>
+
+        <p>Degrees 5 and 6 form the S36 engine&rsquo;s first instrument-specific consecutive pair.
+        Two pianists from the Central District &mdash; every dimension inverts:</p>
+
+        <table>
+          <thead>
+            <tr><th></th><th>Berry (5&deg;)</th><th>Bown (6&deg;)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Style</strong></td><td>Stride, swing, cocktail</td><td>Hard bop, avant-garde</td></tr>
+            <tr><td><strong>Voicings</strong></td><td>Rooted, full, self-sufficient</td><td>Rootless, compact, collaborative</td></tr>
+            <tr><td><strong>Context</strong></td><td>Solo pianist</td><td>Trio leader</td></tr>
+            <tr><td><strong>Left hand</strong></td><td>Continuous stride alternation</td><td>Episodic comping</td></tr>
+            <tr><td><strong>Training</strong></td><td>Self-taught</td><td>Seattle University (formal)</td></tr>
+            <tr><td><strong>City pattern</strong></td><td>The Persistence (stayed)</td><td>The Erasure (left)</td></tr>
+            <tr><td><strong>Visibility</strong></td><td>Local recognition, continuous</td><td>National achievement, erased</td></tr>
+            <tr><td><strong>Gender</strong></td><td>Male</td><td>Female</td></tr>
+          </tbody>
+        </table>
+
+        <p>The piano lineage is not a progression &mdash; it is a conversation between opposites.
+        Stride to hard bop. Rooted to rootless. Solo to trio. Stayed to left. Recognized to forgotten.
+        Male to female. Every dimension inverts.</p>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1931 &mdash; Born in the Central District</div>
+          <p>Born June 26, 1931, in Seattle. Raised in the Central District. Studied music
+          at Seattle University &mdash; the first S36 artist connected to that institution.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Mid-1950s &mdash; Departure for New York City</div>
+          <p>Moved to NYC during the hard bop era. Entered the most competitive piano
+          scene in jazz &mdash; Silver, Timmons, Clark, Kelly. Became one of the first
+          Black women to lead a hard bop piano trio.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1958 &mdash; <em>Patti Bown Plays Big Piano</em> (Columbia)</div>
+          <p>Debut album on Columbia Records. Favorably reviewed in DownBeat. &ldquo;Big Piano&rdquo;
+          declared scope: the player commands the instrument&rsquo;s full range. A Columbia debut
+          by a Black woman from Seattle during the hard bop era &mdash; two barriers broken simultaneously.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1960s &mdash; Peak: Sessions, Arrangers, Motown</div>
+          <p>Worked with Quincy Jones, Oliver Nelson, Duke Pearson. Session pianist for Motown
+          and pop/R&amp;B recordings. At the center of hard bop&rsquo;s creative infrastructure.
+          The peak was real. What followed was silence.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970s&ndash;2000s &mdash; Educator &amp; Obscurity</div>
+          <p>Shifted toward music education. Teaching was real and valuable; documentation is sparse.
+          No sustained national profile. No reissues. No retrospectives. The industry moved on.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2008 &mdash; Died in Philadelphia, age 76</div>
+          <p>Died March 21, 2008. No NEA Jazz Master. No Grammy nominations. Columbia debut
+          out of print. The Central District did not mourn publicly. The city that produced
+          her had forgotten her.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Four theory nodes &mdash; all extending the piano branch established at degree 5.
+        The piano branch now holds seven nodes across two degrees (Berry: 3, Bown: 4).</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Hard Bop Piano Voicings</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Rootless voicings &mdash; omit the root (leave it to the bassist), voice the 3rd,
+            7th, and extensions (9th, 13th, altered tones) in close position. Compact, harmonically
+            rich, collaborative. Quartal voicings add open, modern sound connecting to modal jazz.
+            Berry&rsquo;s stride voicings are rooted and self-sufficient; Bown&rsquo;s are rootless
+            and assume a rhythm section.</p>
+            <div class="examples"><em>Patti Bown Plays Big Piano</em> (Columbia, 1958); Horace Silver; Bobby Timmons</div>
+            <div class="genealogy"><strong>Thread:</strong> Berry (rooted stride, 5&deg;) &rarr; Bown (rootless hard bop, 6&deg;). The voicing tells you whether the pianist is alone or in a band.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Call-and-Response (Gospel in Hard Bop)</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Right-hand melodic phrase (call) answered by left-hand chordal punctuation (response).
+            Episodic, not continuous &mdash; the left hand speaks when the right pauses, creating
+            a conversation between two hands. The gospel dimension connects Bown to the Central
+            District&rsquo;s church tradition &mdash; gospel piano and jazz piano shared the same
+            cultural infrastructure.</p>
+            <div class="examples">Bown&rsquo;s hard bop trio recordings; Bobby Timmons &ldquo;Moanin&rsquo;&rdquo;; Horace Silver &ldquo;The Preacher&rdquo;</div>
+            <div class="genealogy"><strong>Contrast:</strong> Berry (continuous stride alternation, 5&deg;) vs. Bown (episodic call-response, 6&deg;). Two left-hand philosophies from one neighborhood.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Hard Bop Rhythmic Drive</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Heavier, more insistent than cool jazz. Blues shuffle and gospel backbeat roots.
+            The pianist&rsquo;s chords are rhythmic events &mdash; each voicing lands on a specific
+            beat with a specific attack, contributing to groove as much as harmony. The piano as
+            percussive instrument. Bown&rsquo;s authority was partly rhythmic &mdash; driving a trio
+            from the piano bench.</p>
+            <div class="examples"><em>Patti Bown Plays Big Piano</em>; Art Blakey and the Jazz Messengers; Horace Silver Quintet</div>
+            <div class="genealogy"><strong>New position:</strong> Rhythmic spectrum now 5 positions &mdash; regular (Berry), polymetric (Horvitz), rubato (Frisell), elastic swing (Anderson), hard bop drive (Bown).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Pianist as Bandleader</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Leading a trio = choosing repertoire, setting tempo, determining form, signaling
+            transitions, controlling dynamics. The pianist is not one voice among three &mdash;
+            she is the leader. For a Black woman in 1958 to exercise that authority over typically
+            male sidemen was to claim a position the industry did not expect her to occupy.
+            <strong>Amiga Principle at small-group scale.</strong></p>
+            <div class="examples"><em>Patti Bown Plays Big Piano</em> (trio); Ahmad Jamal trio; Bill Evans Trio</div>
+            <div class="genealogy"><strong>Amiga spectrum:</strong> Jones (0&deg;, large ensemble) &rarr; Bown (6&deg;, small group) &rarr; Berry (5&deg;, solo). Three scales of pianistic authority.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;5&deg;</h4>
+          <ul>
+            <li><strong>Central District thread:</strong> Seventh degree, sixth directly connected artist. The cluster is exhaustively documented. Rotation is now mandatory.</li>
+            <li><strong>Gender dimension:</strong> RESOLVED. Two women in seven degrees &mdash; Anderson (vocalist, 3&deg;) and Bown (instrumentalist, 6&deg;). The instrumentalist barrier was higher. The gender thread is now live and must be tracked at every subsequent degree.</li>
+            <li><strong>Piano lineage:</strong> Seven nodes across two degrees (Berry: stride, blue notes, cocktail harmony; Bown: hard bop voicings, call-response, rhythmic drive, pianist-as-bandleader). Two consecutive pianists from one neighborhood, every dimension inverted.</li>
+            <li><strong>Artist-city taxonomy:</strong> Seven named patterns &mdash; Export, Draw, Exile, Stay, Teacher, Persistence, Erasure. Bown adds the exported-and-forgotten.</li>
+            <li><strong>Amiga Principle:</strong> Three scales &mdash; large ensemble (Jones, 0&deg;), solo (Berry, 5&deg;), small group (Bown, 6&deg;). The spectrum is no longer a bracket; it is a gradient.</li>
+            <li><strong>Erasure as engine responsibility:</strong> The engine must document artists the canon dropped. This is not advocacy; it is inventory.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a></li>
+            <li><a href="../003-ernestine-anderson/index.html">S36-003 &mdash; Ernestine Anderson (Degree 3&deg;)</a></li>
+            <li><a href="../005-overton-berry/index.html">S36-005 &mdash; Overton Berry (Degree 5&deg;)</a></li>
+            <li><a href="../../../CDS/index.html">CDS &mdash; Central District</a></li>
+            <li><a href="../../../MUS/index.html">MUS &mdash; Music Research</a></li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Bown, Patti. <em>Patti Bown Plays Big Piano</em>. Columbia Records, 1958.</li>
+          <li>DownBeat. Album reviews and artist profiles, Patti Bown, 1958&ndash;1965.</li>
+          <li>Columbia Records. Artist catalog and discography archives.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="4">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>Dahl, Linda. <em>Stormy Weather: The Music and Lives of a Century of Jazzwomen</em>. Pantheon Books, 1984.</li>
+          <li>Tucker, Sherrie. <em>Swing Shift: &ldquo;All-Girl&rdquo; Bands of the 1940s</em>. Duke University Press, 2000.</li>
+          <li>AllMusic. Patti Bown artist biography and session credits.</li>
+          <li>Seattle Times. Seattle jazz community profiles and obituaries.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="9">
+          <li>Seattle University. Alumni and music program records.</li>
+          <li>Motown Records. Session discography and personnel archives.</li>
+          <li>Earshot Jazz. Seattle jazz community coverage.</li>
+          <li>HistoryLink.org. Central District cultural history.</li>
+          <li>Seattle Civil Rights &amp; Labor History Project, University of Washington.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1931</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">2008</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Training</span>
+            <span class="stat-value">Seattle University</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Piano</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">6&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (piano)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1950s&ndash;1970s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Columbia</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recording</h4>
+          <div class="stat-row">
+            <span class="stat-label">Album</span>
+            <span class="stat-value">Big Piano</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Columbia</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Year</span>
+            <span class="stat-value">1958</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Out of print</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano Branch</span>
+            <span class="stat-value">7 total (3+4)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">5 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gender Dimension</h4>
+          <div class="stat-row">
+            <span class="stat-label">Women in S36</span>
+            <span class="stat-value">2 of 7</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Role</span>
+            <span class="stat-value">Instrumentalist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Prior woman</span>
+            <span class="stat-value">Anderson (3&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Barrier</span>
+            <span class="stat-value">Triple (race/gender/role)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Central District Thread</h4>
+          <div class="stat-row">
+            <span class="stat-label">Depth</span>
+            <span class="stat-value">7 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Artists</span>
+            <span class="stat-value">6 of 7</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">7 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Rotation</span>
+            <span class="stat-value">Mandatory</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Patterns</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">The Erasure</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Export twin</span>
+            <span class="stat-value">Jones (0&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano twin</span>
+            <span class="stat-value">Berry (5&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gender twin</span>
+            <span class="stat-value">Anderson (3&deg;)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Amiga Principle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Scale</span>
+            <span class="stat-value">Small group (trio)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Spectrum</span>
+            <span class="stat-value">3 positions</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Large</span>
+            <span class="stat-value">Jones (0&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Small</span>
+            <span class="stat-value">Bown (6&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Solo</span>
+            <span class="stat-value">Berry (5&deg;)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;5&deg; &rarr; 6&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Carry Items</span>
+            <span class="stat-value">6 resolved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Items</span>
+            <span class="stat-value">6 immediate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Patterns</span>
+            <span class="stat-value">Erasure, Gender</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano Nodes</span>
+            <span class="stat-value">4 new (7 total)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Next Degree</span>
+            <span class="stat-value">Must rotate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 6&deg; / 360 &middot;
+      <a href="../005-overton-berry/index.html">Prev: 5&deg; Berry</a> &middot;
+      <a href="../003-ernestine-anderson/index.html">3&deg; Anderson</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
