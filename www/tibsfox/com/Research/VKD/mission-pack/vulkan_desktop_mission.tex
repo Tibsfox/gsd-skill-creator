@@ -1,0 +1,1087 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Technology color scheme ──────────────────────────────────────────────────
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{vulkanred}{HTML}{B71C1C}
+\definecolor{vulkanlight}{HTML}{FFEBEE}
+
+% ── Section formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{vulkanbox}{
+  colback=vulkanlight, colframe=vulkanred,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table helpers ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / footers ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Vulkan Desktop Integration}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={Modern Vulkan Desktop Integration -- GSD Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─────────────────────────────────────────────────────────────────────────────
+% TITLE PAGE
+% ─────────────────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Modern Vulkan Desktop\\[0.3em]Integration}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{KhronosGroup/Vulkan-Samples $\rightarrow$ gsd-skill-creator}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Full Sample Corpus Mapping, Upstream Intelligence, and Working Examples}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6 modules, 17 roles) \quad|\quad Est.: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Modern Vulkan Desktop --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Execution}
+\metafield{Depends On:}{gsd-skill-creator dev branch (v1.49+), DACP milestone, upstream intelligence pack format}
+\metafield{Context:}{Khronos Vulkan SDK 1.4.341 | Vulkan spec 1.4 | docs.vulkan.org/samples/latest}
+
+\subsection{Vision}
+
+The Vulkan Samples repository from KhronosGroup is not just a tutorial collection --- it is the canonical living reference for best-practice GPU programming across the entire modern hardware ecosystem. Each sample is a distillation of accumulated wisdom from ARM, NVIDIA, AMD, Valve, Google, and dozens of contributors, encoding the answers to questions that have burned hundreds of developer-hours across the industry. Every example embodies an architectural choice, a tradeoff, a pattern worth knowing. Together, they form the most comprehensive and authoritative map of what modern GPU programming looks like in practice.
+
+The Amiga Principle says: remarkable outcomes emerge from specialized execution paths faithfully composed. The Vulkan samples are already organized that way --- API foundations, extension patterns, and performance optimization paths running in parallel, converging in the framework. The challenge is not to read them, but to \emph{ingest} them: to map every example, every document, every concept into a form that can be retrieved, composed, and applied by skill-creator agents without loss of fidelity.
+
+This mission treats the full Vulkan samples corpus --- 80+ examples across five categories, plus framework documentation, build guides, and upstream intelligence from Vulkan 1.4 / SDK 1.4.341 --- as a structured knowledge space to be absorbed into gsd-skill-creator. The output is not a summary. It is a living upstream intelligence addition: every sample mapped as a DACP-compatible skill stub, every extension catalogued with version requirements, every performance pattern encoded as a testable assertion, and the whole thing wired into the six-step skill-creator loop.
+
+The spaces between the samples --- the connections between ``dynamic rendering'' and ``render passes,'' between ``mesh shaders'' and the migration path from geometry shaders, between ``tensor and data graph'' and the new ARM compute paradigm --- are where the real architectural knowledge lives. This mission maps those connections as first-class deliverables.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The corpus is unstructured from skill-creator's perspective.} The 80+ Vulkan samples live at docs.vulkan.org and GitHub but have no machine-readable index compatible with the skill-creator's six-step observe/detect/suggest/manage/auto-load/learn loop. Agents cannot query ``what is the canonical Vulkan pattern for multi-draw indirect?'' without a structured knowledge layer.
+
+  \item \textbf{Upstream drift is silent and dangerous.} Vulkan 1.4 (December 2024), SDK 1.4.341 (March 2026), and Roadmap 2026 introduced breaking changes to extension promotion, new descriptor heap architecture, tensor processing extensions, and new presentation modes. Code written against 1.2 patterns may be subtly wrong on 1.4 hardware with no compile-time warning.
+
+  \item \textbf{The Vulkan-Hpp C++ binding variants are under-documented.} Roughly 20 samples have Vulkan-Hpp (hpp\_*) counterparts demonstrating idiomatic C++ bindings. No existing reference maps the C API to its Hpp equivalent side-by-side in a diffable format.
+
+  \item \textbf{Performance patterns have no machine-readable preconditions.} The 24 performance samples each come with profiling annotations, but those annotations are embedded in prose README files. A skill-creator agent executing a GPU workload cannot query ``which performance optimizations apply to this render graph?'' without those patterns being formalized.
+
+  \item \textbf{New extension categories lack integration paths.} The Tensor and Data Graph extension family (VK\_ARM\_tensors, VK\_ARM\_data\_graph) and float8 shader support (VK\_EXT\_shader\_float8) represent a frontier shift toward GPU-accelerated ML inference natively in Vulkan. There is no existing skill-creator coverage of this territory.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Vulkan Sample Corpus as a Structured Skill Graph}
+
+Each Vulkan sample maps to a skill node: a self-contained, testable unit of GPU programming knowledge with explicit preconditions (Vulkan version, extension requirements, hardware tier), postconditions (what the sample demonstrates, what the developer will understand), and cross-links to related samples. Samples compose like complex numbers on the skill plane: foundational API samples at $r=1$ (unit circle), extension samples at $r > 1$ (expanded reach), performance patterns encoded as phase rotations $\theta$ from baseline.
+
+\subsubsection{Sample Universe Map}
+
+\begin{asciibox}
+docs.vulkan.org/samples/latest/
+|
++-- API Samples (14 core + 14 Hpp variants)
+|    Hello Triangle -> Hello Triangle 1.3 -> Compute N-body
+|    HDR -> Instancing -> Terrain Tessellation
+|    Texture Loading -> Mipmap Gen -> Timestamp Queries
+|    OIT Linked Lists -> OIT Depth Peeling
+|
++-- Extension Samples (47 samples)
+|    Dynamic State family (6 samples)
+|    Ray Tracing family (6 samples)
+|    Mesh Shader family (3 samples)
+|    Descriptor evolution (3 samples)
+|    Video + Tensor family (4+ samples)
+|    Interop (OpenCL x2, OpenGL)
+|    Synchronization 2, Timeline Semaphore
+|
++-- Performance Samples (24 samples)
+|    Bandwidth: AFBC, Image Compression Control
+|    Command: Command Buffer Usage, Multithreading
+|    Descriptors: Descriptor Mgmt, Constant Data
+|    Pipeline: Pipeline Cache, Barriers, Render Passes
+|    Textures: Compression Basisu, Comparison
+|    Mobile: Surface Rotation, Fragment Density Map
+|
++-- General Samples (2 samples)
+|    Mobile NeRF, Mobile NeRF Ray Query
+|
++-- Tooling Samples (1 sample)
+|    Profiles (VkPhysicalDeviceProfilePropertiesKHR)
+|
++-- Framework + Build (docs/)
+     Build guide (Win/Linux/macOS/Android/iOS)
+     Memory limits, Misc (controls, debug window)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+Module 01: API Foundations          [Wave 1A] Sonnet
+  14 API samples + 14 Hpp variants
+  DACP skill stubs, C-vs-Hpp diff maps
+
+Module 02: Extension Corpus         [Wave 1B] Sonnet + Opus
+  47 extension samples
+  Version tables, dependency chains, extension families
+
+Module 03: Performance Patterns     [Wave 1C] Sonnet + Opus
+  24 performance samples
+  Machine-readable preconditions, profiling annotations
+
+Module 04: Framework + Build        [Wave 1A parallel] Sonnet
+  Framework components, build guide, CI harness
+  Cross-platform test plan
+
+Module 05: Upstream Intelligence    [Wave 2] Opus
+  Vulkan 1.4 core consolidations
+  SDK 1.4.341 new extensions
+  Roadmap 2026 profile requirements
+  Tensor/float8/descriptor heap frontier
+
+Module 06: skill-creator Wiring     [Wave 3] Opus + Sonnet
+  DACP bundle format for each sample
+  Six-step loop integration
+  Upstream intelligence pack YAML
+  DoltHub/Wasteland federation hooks
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- API Foundations}
+Maps all 14 core API samples and their 14 Vulkan-Hpp counterparts. Covers the complete beginner-to-intermediate arc: Hello Triangle (bare Vulkan bootstrap), Hello Triangle 1.3 (dynamic rendering, synchronization2, extended dynamic state), Compute N-body (compute pipelines), HDR (render targets, tone mapping), Instancing, Terrain Tessellation, Texture Loading, Mipmap Generation, Timestamp Queries, Separate Image Sampler, and both OIT techniques (Linked Lists and Depth Peeling). Each sample produces a DACP skill stub with version preconditions and a C/Hpp equivalence map.
+
+\subsubsection{Module 02 --- Extension Corpus}
+Catalogs all 47 extension samples organized by family: dynamic state (conditional rendering, extended dynamic state2, vertex dynamic state, dynamic primitive clipping, dynamic line rasterization, dynamic multisample rasterization), ray tracing (basic, extended, reflection, position fetch, queries, invocation reorder/SER), mesh shaders (mesh shading, mesh shader culling, geometry-to-mesh migration), descriptor evolution (descriptor buffer basic, descriptor indexing, push descriptors), synchronization (synchronization2, timeline semaphore, calibrated timestamps), interop (OpenCL x2, OpenGL), and the frontier category (Tensor and Data Graph with 3 sub-samples, Shader Object, Shader Debug Printf, Sparse Image, Fragment density, Fragment shading rate x2, Host Image Copy, Memory Budget, Portability, Full Screen Exclusive, Conservative Rasterization, Graphics Pipeline Library, Buffer Device Address, Debug Utils, Rasterization Order Attachment Access).
+
+\subsubsection{Module 03 --- Performance Patterns}
+Formalizes the 24 performance samples as machine-readable pattern cards. Each card captures: the antipattern being replaced, the recommended pattern, the hardware family it benefits most (mobile/desktop/both), the profiling metric that demonstrates improvement, and the Vulkan feature/extension required. Covers bandwidth (AFBC, image compression control, texture compression basisu/comparison), command recording (command buffer usage, multithreading render passes, multi-draw indirect, wait idle), descriptor strategy (descriptor management, constant data), pipeline management (pipeline cache, pipeline barriers, specialization constants), render passes (render passes, subpasses, layout transitions), and mobile-specific patterns (MSAA, surface rotation, swapchain images, async compute, 16-bit arithmetic, 16-bit storage).
+
+\subsubsection{Module 04 --- Framework and Build Architecture}
+Documents the sample framework (VulkanSample base class, plugin system, scene graph, VkBootstrap integration), framework components (graphics, rendering, resource management, scene), and the complete build guide for all five platforms (Windows, Linux, macOS/MoltenVK, Android, iOS). Produces a CI test harness specification using headless-surface mode (VK\_EXT\_headless\_surface / Swiftshader) that allows all samples to run without a physical GPU, enabling automated screenshot-comparison testing.
+
+\subsubsection{Module 05 --- Upstream Intelligence}
+Synthesizes Vulkan's current state (as of SDK 1.4.341, March 2026) with the samples corpus. Key areas: Vulkan 1.4 core consolidations (promoted extensions that samples may still demonstrate as optional), Roadmap 2026 profile (new mandatory swapchain/presentation guarantees), new extensions in SDK 1.4.321--341 (VK\_EXT\_descriptor\_heap, VK\_ARM\_tensors, VK\_ARM\_data\_graph, VK\_EXT\_shader\_float8, VK\_KHR\_shader\_bfloat16, VK\_EXT\_zero\_initialize\_device\_memory, VK\_KHR\_surface\_maintenance1, VK\_KHR\_swapchain\_maintenance1, VP9 decode, encode intra-refresh), MoltenVK 1.3.0 (full Vulkan 1.3 on Apple), and Vulkan SC (safety-critical deterministic subset). Produces an upstream intelligence YAML pack in skill-creator format.
+
+\subsubsection{Module 06 --- skill-creator Wiring}
+Produces the integration layer: DACP three-part bundles for each of the 80+ samples, the upstream intelligence pack YAML file, a sample discovery skill (observe phase), a version-gate skill (detect phase: warns when a requested pattern requires a Vulkan version above the device's supported level), and the DoltHub/Wasteland federation hooks that make the full sample index queryable as a ZFC-compliant stamp contribution.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# Vulkan Desktop Mission --- Chipset YAML
+chipset:
+  agnus:             # Orchestration / DMA / Context Management
+    model: opus
+    role: FLIGHT
+    responsibilities:
+      - Cross-module synthesis (Module 05 upstream + Module 06 wiring)
+      - Version conflict resolution (1.3 vs 1.4 promotion decisions)
+      - Tensor/float8 frontier analysis
+      - Go/no-go gates at each wave boundary
+
+  denise:            # Display / Output Rendering
+    model: sonnet
+    role: EXEC x3
+    responsibilities:
+      - Module 01 DACP skill stubs (14 + 14 samples)
+      - Module 02 extension catalogue (47 samples)
+      - Module 03 performance pattern cards (24 samples)
+      - Module 04 framework + CI harness spec
+
+  paula:             # Audio / I/O / Anticipatory
+    model: haiku
+    role: PLAN + BUDGET + LOG
+    responsibilities:
+      - Shared sample schema (JSON/YAML templates)
+      - Token budget tracking
+      - Chronicle / commit messages
+
+  68000:             # CPU / Glue Logic / Safety
+    model: opus
+    role: CRAFT-GPU + CRAFT-UPSTREAM
+    responsibilities:
+      - GPU architecture domain analysis
+      - Extension dependency graph validation
+      - Upstream intelligence pack construction
+      - DoltHub/Wasteland ZFC compliance
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item All 80+ Vulkan samples documented at docs.vulkan.org/samples/latest as of March 2026
+  \item DACP skill stubs for every sample (intent + structured data + executable code)
+  \item Vulkan-Hpp C++ binding equivalence maps (C API $\leftrightarrow$ Hpp API)
+  \item Extension family dependency graphs with Vulkan version requirements
+  \item Performance pattern cards (machine-readable preconditions + metrics)
+  \item Upstream intelligence YAML pack (Vulkan 1.4 / SDK 1.4.341 / Roadmap 2026)
+  \item Headless CI test harness (Swiftshader + VK\_EXT\_headless\_surface)
+  \item skill-creator six-step loop integration (observe/detect/suggest/manage/auto-load/learn)
+  \item Tensor and Data Graph sample family (frontier ML compute)
+  \item DoltHub/Wasteland ZFC compliance hooks
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Vulkan SC (safety-critical subset) --- separate mission
+  \item SPIR-V compiler toolchain deep-dive --- covered by existing GSD upstream intelligence
+  \item WebGPU / WebGL interop --- separate mission
+  \item GPU driver internals (Mesa RADV, ANV, etc.) --- separate mission
+  \item Vulkan Video encode/decode full pipeline --- possible v2.0 extension
+  \item Mobile-specific platform SDKs (Android NDK, iOS Metal) --- separate platform missions
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Every Vulkan sample (80+) has a corresponding DACP skill stub with accurate version preconditions.
+  \item The extension catalogue correctly identifies the Vulkan version at which each extension was promoted to core (if applicable), verified against the official spec.
+  \item The C-to-Hpp equivalence map covers all 14 hpp\_* sample pairs with no gaps.
+  \item The performance pattern cards correctly encode antipattern/pattern pairs for all 24 performance samples.
+  \item The headless CI test harness successfully runs at least 10 representative samples (Hello Triangle, Compute N-body, Swapchain Images, Pipeline Cache, Dynamic Rendering, Synchronization2, Mesh Shading, Ray Tracing Basic, AFBC, Tensor Basic) in headless mode with screenshot verification.
+  \item The upstream intelligence YAML pack correctly lists all extensions added in SDK 1.4.317--341, with accurate extension names, introducing version, and category tags.
+  \item The Roadmap 2026 profile requirements are correctly mapped to the sample corpus (identifying which samples demonstrate Roadmap 2026 mandatory features).
+  \item The Tensor and Data Graph sample family is documented with ARM hardware requirements and the three sub-samples (simple tensor, graph constants, compute shaders with tensors) are mapped as a progression.
+  \item The version-gate skill correctly blocks requests for Vulkan 1.4 features when running against a 1.1 or 1.2 device, with a human-readable diagnostic.
+  \item The DoltHub/Wasteland ZFC compliance stamp is achievable from the produced deliverables (the sample index table satisfies the ZFC auditor's first-stamp criteria).
+  \item All produced DACP bundles compile and execute without error when fed to a skill-creator agent in a fresh context.
+  \item The full deliverable set passes HITL CAPCOM review at each wave boundary before synthesis proceeds.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Integration Point} \\
+\midrule
+gsd-upstream-intelligence-pack-v1\_43 & Extends & Vulkan 1.4 entries added to existing upstream intelligence format \\
+skill-creator-wasteland-integration & Connects & ZFC compliance stamp produced from Vulkan sample index \\
+gsd-silicon-layer-spec & Informs & GPU compute path maps to Silicon Layer execution model \\
+gsd-chipset-architecture-vision & Informs & Paula (Haiku) headless test harness maps to Paula I/O role \\
+ai\_agentic\_programming\_report & Context & GPU-accelerated inference via Vulkan Tensor aligns with agentic compute vision \\
+gsd-amiga-vision & Philosophical & Vulkan's specialized execution paths embody Amiga Principle at GPU level \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga's custom chips --- Agnus, Denise, Paula --- each managed a slice of the machine's world with sovereign precision, handing off work through tightly defined DMA channels rather than routing everything through the 68000. Vulkan is the same principle applied to the GPU: explicit ownership, explicit synchronization, explicit memory management. No magic. No implicit state. Every transition declared. Every barrier intentional.
+
+When skill-creator ingests the Vulkan sample corpus, it is not collecting recipes. It is learning the grammar of explicit execution --- the same grammar that underlies DACP's three-part bundles, the same grammar that makes fresh-context subagents reliable. The spaces between samples are synchronization barriers: the moment where one rendering concept hands off cleanly to the next. This mission maps those handoffs so that agents can traverse them without stalling.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Modern Vulkan Desktop --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference is organized by module. Each section provides the source material, findings, and structured data an execution agent needs to produce module deliverables without additional research. All findings are sourced from:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Khronos Group} --- docs.vulkan.org, vulkan.org, github.com/KhronosGroup
+  \item \textbf{LunarG} --- Vulkan SDK release notes, lunarg.com
+  \item \textbf{ARM Developer} --- Mali GPU Best Practices, developer.arm.com
+  \item \textbf{Phoronix / AnandTech} --- Extension release reporting
+  \item \textbf{Wikipedia} --- Vulkan version history
+\end{itemize}
+
+\subsection{Module 01 Reference --- API Foundations}
+
+\subsubsection{Core API Samples Inventory}
+
+The 14 core API samples form a deliberate progression from bare bootstrap to advanced techniques:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Sample} & \tableheader{Min Vulkan} & \tableheader{Key Concepts} \\
+\midrule
+Hello Triangle & 1.0 & Instance, device, swapchain, render pass, pipeline, command buffer \\
+Hello Triangle 1.3 & 1.3 & Dynamic rendering (VK\_KHR\_dynamic\_rendering promoted), sync2, extended dynamic state \\
+Compute N-body & 1.0 & Compute pipeline, storage buffers, descriptor sets, double-buffering \\
+HDR & 1.0 & Float16 framebuffer, tone mapping, render-to-texture, multiple subpasses \\
+Instancing & 1.0 & Instance buffers, per-instance data, indirect draw \\
+Terrain Tessellation & 1.0 & Tessellation control/eval shaders, height maps, LOD \\
+Texture Loading & 1.0 & VkImage creation, staging buffers, image layout transitions, samplers \\
+Texture Mipmap Gen & 1.0 & Blit-based mip generation, image format support queries \\
+Timestamp Queries & 1.0 & VkQueryPool, pipeline stage timestamps, GPU timing \\
+Separate Image Sampler & 1.0 & Descriptor set layout with separate image + sampler bindings \\
+OIT Linked Lists & 1.0 & Atomic operations, storage images, per-pixel linked list in SSBO \\
+OIT Depth Peeling & 1.0 & Multi-pass transparency, depth attachment reads \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Vulkan-Hpp Equivalence Notes}
+
+Each hpp\_* sample transcodes the C API sample to the Vulkan-Hpp C++ header-only binding. Key differences to document in skill stubs: \texttt{vk::Device} replaces \texttt{VkDevice}, RAII wrappers (\texttt{vk::raii}) replace manual cleanup, \texttt{vk::ArrayProxy} replaces \texttt{const T*, uint32\_t count} pairs, and \texttt{vk::Result} enums replace integer error codes. The hpp samples cover: Compute N-body, Dynamic Uniform Buffers, HDR, Hello Triangle, Hello Triangle 1.3, Instancing, Separate Image Sampler, Terrain Tessellation, Texture Loading, Texture Mipmap Generation, Timestamp Queries, OIT Linked Lists, OIT Depth Peeling.
+
+\subsection{Module 02 Reference --- Extension Corpus}
+
+\subsubsection{Extension Family Map}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Family} & \tableheader{Extensions} & \tableheader{Count} & \tableheader{Notes} \\
+\midrule
+Ray Tracing & KHR\_ray\_tracing\_pipeline, KHR\_acceleration\_structure, KHR\_ray\_query, NV\_ray\_tracing\_invocation\_reorder & 6 & Requires Vulkan 1.1+; position fetch requires VK\_KHR\_ray\_tracing\_position\_fetch \\
+Mesh Shaders & EXT\_mesh\_shader & 3 & Migration path from geometry shaders documented in gshader\_to\_mshader sample \\
+Dynamic State & EXT conditional rendering, extended dynamic state2, vertex dynamic state, line rasterization, multisample rasterization, primitive clipping & 6 & All promoted or partially promoted in Vulkan 1.3/1.4 \\
+Descriptor Evolution & EXT\_descriptor\_buffer, EXT\_descriptor\_indexing (core 1.2), KHR\_push\_descriptor & 3 & descriptor\_buffer requires Vulkan 1.1; indexing is core since 1.2 \\
+Synchronization & KHR\_synchronization2 (core 1.3), KHR\_timeline\_semaphore (core 1.2), EXT\_calibrated\_timestamps & 3 & \\
+Shading Rate & EXT\_fragment\_shading\_rate, EXT\_fragment\_density\_map & 2 & Mobile-critical; affects tile-based GPU scheduling \\
+Tensor / ML Compute & ARM\_tensors, ARM\_data\_graph & 4 & New in SDK 1.4.321; requires ARM hardware or emulation \\
+Shader Objects & EXT\_shader\_object & 1 & Replaces pipeline compilation with shader objects \\
+Interop & external memory (OpenCL, OpenGL) & 3 & Platform-specific \\
+Misc & buffer device address, conservative raster, fragment barycentric, full screen exclusive, graphics pipeline library, host image copy, logic op, memory budget, portability, raster order attachment, sparse image, synchronization 2, timeline semaphore, debug utils & 15+ & Various \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Vulkan 1.3 Promotions (Relevant to Extension Samples)}
+
+23 extensions were promoted to Vulkan 1.3 core. Samples that demonstrate these as ``extensions'' are effectively demonstrating core features on 1.3+ hardware: VK\_KHR\_dynamic\_rendering, VK\_KHR\_synchronization2, VK\_EXT\_extended\_dynamic\_state, VK\_KHR\_zero\_initialize\_workgroup\_memory, VK\_EXT\_private\_data, VK\_KHR\_shader\_integer\_dot\_product, and others. The version-gate skill must recognize these.
+
+\subsubsection{Vulkan 1.4 Promotions (New in December 2024)}
+
+Vulkan 1.4 promoted additional proven extensions to core, including VK\_KHR\_dynamic\_rendering\_local\_read, VK\_EXT\_host\_image\_copy, VK\_KHR\_index\_type\_uint8, VK\_KHR\_map\_memory2, VK\_KHR\_maintenance5, VK\_EXT\_pipeline\_protected\_access, and others. The upstream intelligence pack must flag samples demonstrating these as ``1.4 core'' where applicable.
+
+\subsection{Module 03 Reference --- Performance Patterns}
+
+\subsubsection{Performance Sample Pattern Cards (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Sample} & \tableheader{Antipattern} & \tableheader{Platform} & \tableheader{Metric / Feature Required} \\
+\midrule
+AFBC & Uncompressed framebuffer writes & Mobile (ARM Mali) & Bandwidth reduction up to 50\%; automatic when format supported \\
+Command Buffer Usage & Single-threaded sequential recording & Both & CPU frame time; secondary command buffers + concurrent recording \\
+Constant Data & Uniform buffer for per-draw constants & Both & GPU shader throughput; push constants vs UBOs vs dynamic UBOs \\
+Descriptor Management & Per-frame descriptor pool recreation & Both & CPU overhead; pool reuse + VkDescriptorUpdateTemplate \\
+Layout Transitions & Unnecessary full-pipeline barriers & Both & Pipeline stalls; VK\_IMAGE\_LAYOUT optimal transitions \\
+MSAA & Multisampled resolve to separate image & Mobile & Tile memory bandwidth; transient attachments (LAZILY\_ALLOCATED) \\
+Multi-draw Indirect & Per-object draw calls & Both & Draw call overhead; VkDrawIndexedIndirectCommand arrays \\
+Pipeline Barriers & Over-broad stage masks & Both & GPU utilization; minimal stage/access masks \\
+Pipeline Cache & No pipeline serialization & Both & Startup time; VkPipelineCache serialization to disk \\
+Render Passes & Subpass vs separate passes & Mobile & Tile memory bandwidth; subpass dependencies \\
+Subpasses & Multi-pass to separate render passes & Mobile & Bandwidth; subpass color attachments read as input attachments \\
+Surface Rotation & Pre-rotation correction absent & Mobile & Compositor overhead; pre-rotation in application \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 04 Reference --- Framework and Build}
+
+\subsubsection{Framework Architecture}
+
+The Vulkan Samples framework provides: \texttt{VulkanSample} base class (init, prepare, update, finish lifecycle), \texttt{ApiVulkanSample} subclass for C API samples, \texttt{VulkanHppSample} for Hpp samples. Framework components include: \texttt{core/} (instance, device, queue, command pool, fence, semaphore abstractions), \texttt{rendering/} (render context, render frame, render target), \texttt{resource/} (buffer, image, resource cache), \texttt{scene\_graph/} (GLTF loader, components, node system), and \texttt{platform/} (window abstraction for GLFW, Android, headless).
+
+\subsubsection{Build Requirements}
+
+\begin{itemize}[noitemsep]
+  \item C++ compiler supporting C++20 or newer
+  \item CMake 3.16+
+  \item Python 3.x (for asset pipeline scripts)
+  \item Git LFS (for binary assets in vulkan-samples-assets submodule)
+  \item Vulkan 1.1+ capable device (or Swiftshader for headless)
+\end{itemize}
+
+\subsubsection{Headless Testing with Swiftshader}
+
+The repository documents headless testing using \texttt{VK\_EXT\_headless\_surface} with Google's Swiftshader software renderer. The command pattern is:
+
+\begin{asciibox}
+vulkan_samples sample <name> --headless-surface --screenshot <frame>
+vulkan_samples batch --category performance --duration 10
+
+# Example: test Hello Triangle headlessly
+vulkan_samples sample hello_triangle --headless-surface --screenshot 1
+
+# Example: batch test all API samples
+vulkan_samples batch --category api --headless-surface --duration 5
+\end{asciibox}
+
+This enables CI pipelines without GPU hardware, using screenshot comparison as the pass/fail gate.
+
+\subsection{Module 05 Reference --- Upstream Intelligence}
+
+\subsubsection{Vulkan Version Timeline (Current)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Version} & \tableheader{Released} & \tableheader{Key Additions} \\
+\midrule
+1.0 & February 2016 & Initial release \\
+1.1 & March 2018 & Subgroup ops, protected memory, multiview, external resources \\
+1.2 & January 2020 & Timeline semaphores, descriptor indexing, buffer device address, shader float16/int8 \\
+1.3 & January 2022 & Dynamic rendering, synchronization2, extended dynamic state, integer dot product; 23 extensions promoted \\
+1.4 & December 2024 & Host image copy, dynamic rendering local read, index type uint8, maintenance5/6; Roadmap 2022+2024 mandated \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{SDK 1.4.341 --- New Extensions (March 2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Extension} & \tableheader{Category} & \tableheader{Summary} \\
+\midrule
+VK\_EXT\_descriptor\_heap & Descriptor & Complete overhaul of descriptor system; direct memory access to descriptor memory; compatible with legacy sets \\
+VK\_ARM\_tensors & Compute/ML & ARM-specific tensor processing; GPU-accelerated ML inference natively in Vulkan \\
+VK\_ARM\_data\_graph & Compute/ML & ARM data graph for optimized processing pipelines \\
+VK\_EXT\_shader\_float8 & Shader & 8-bit floating-point shader operations; reduced memory for ML inference \\
+VK\_KHR\_shader\_bfloat16 & Shader & Brain float 16 support in shaders \\
+VK\_EXT\_zero\_initialize\_device\_memory & Memory & Zero-initialized device memory for simplified resource management \\
+VK\_KHR\_surface\_maintenance1 & WSI & min/max image counts, scaled presentation, switchable presentation modes without swapchain recreation \\
+VK\_KHR\_swapchain\_maintenance1 & WSI & Per-present mode changes, fence signaling for resource cleanup, deferred memory allocation \\
+VK\_KHR\_present\_mode\_fifo\_latest\_ready & WSI & Tear-free present mode optimized for time-based present APIs \\
+VK\_KHR\_video\_decode\_vp9 & Video & VP9 video decoding; completes the planned decode extension set \\
+VK\_KHR\_video\_encode\_intra\_refresh & Video & Intra-refresh for video encoding optimization \\
+VK\_KHR\_robustness2 & Safety & Enhanced robustness for robust null descriptor access \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Roadmap 2026 Profile}
+
+Released with SDK 1.4.341, the Roadmap 2026 Profile mandates high-end features previously optional, ensuring consistency across modern desktop, mobile, and console hardware. It includes guarantees about swapchain and presentation support not previously required by the core spec. Key mandated features include features from the Roadmap 2022 and 2024 milestones plus the new presentation guarantees. The samples corpus should tag samples that demonstrate Roadmap 2026 mandatory features with a \texttt{roadmap2026: true} flag in the upstream intelligence pack.
+
+\subsubsection{MoltenVK 1.3.0}
+
+MoltenVK 1.3.0 (released 2025) brings full Vulkan 1.3 support on Apple platforms (macOS/iOS via Metal). This means all Vulkan 1.3 samples (including dynamic rendering, synchronization2) are now testable on macOS without caveats.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Consideration} \\
+\midrule
+Extension availability queries & GATE & All skill stubs must include vkEnumerateDeviceExtensionProperties guard; never assume extension presence \\
+Vulkan 1.4 promotion flags & GATE & Extensions promoted to core in 1.4 must not be listed as optional on 1.4+ devices \\
+ARM tensor extensions & ANNOTATE & VK\_ARM\_tensors and VK\_ARM\_data\_graph are vendor-specific; stubs must annotate hardware requirement clearly \\
+License attribution & ABSOLUTE & All sample code carries Apache 2.0 and MIT licenses from KhronosGroup; skill stubs must preserve attribution headers \\
+GPU-specific performance claims & ANNOTATE & AFBC bandwidth claims (up to 50\%) apply specifically to ARM Mali; must not generalize to all GPU vendors \\
+Headless test screenshots & NOTE & Screenshot comparison hashes are GPU/driver dependent; use perceptual hash with tolerance, not exact comparison \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources}
+
+\begin{itemize}[noitemsep]
+  \item Khronos Group. \textit{Vulkan Samples Documentation}. docs.vulkan.org/samples/latest/. 2026.
+  \item Khronos Group. \textit{Vulkan 1.4 Specification}. docs.vulkan.org/spec/latest/. December 2024.
+  \item LunarG. \textit{Vulkan SDK 1.4.341 Release Notes}. vulkan.lunarg.com/doc/view/latest/. 2026.
+  \item KhronosGroup. \textit{Vulkan-Samples GitHub Repository}. github.com/KhronosGroup/Vulkan-Samples. 2026.
+\end{itemize}
+
+\subsubsection{Upstream Intelligence Sources}
+
+\begin{itemize}[noitemsep]
+  \item Khronos Group. \textit{Vulkan: Continuing to Forge Ahead --- SIGGRAPH 2025 Preview}. khronos.org/blog. August 2025.
+  \item Khronos Group. \textit{Vulkan 1.4 Press Release}. khronos.org/news. December 3, 2024.
+  \item LunarG. \textit{Vulkan SDK 1.4.321.0 Release Notes}. lunarg.com. July 2025.
+  \item Larabel, M. \textit{Vulkan 1.4.321 Released With A Handful Of New Extensions}. Phoronix. July 4, 2025.
+  \item AnandTech. \textit{Vulkan 1.3 Specification Released: Fighting Fragmentation with Profiles}. January 25, 2022.
+  \item ARM Developer. \textit{Mali GPU Best Practices}. developer.arm.com/documentation/101897/latest/. 2025.
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Mission Package --- Milestone Specification}
+
+\subsection{Mission Objective}
+
+Ingest the complete KhronosGroup/Vulkan-Samples corpus (80+ examples, all documentation) into gsd-skill-creator as a structured upstream intelligence addition. Produce DACP-compatible skill stubs for every sample, machine-readable performance pattern cards, an upstream intelligence YAML pack covering Vulkan 1.4 through SDK 1.4.341, and a headless CI test harness --- all fully integrated with the skill-creator six-step loop and ready for DoltHub/Wasteland ZFC compliance evaluation.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [Haiku] Shared sample schema, DACP bundle templates,
+          upstream intel YAML structure, version matrix
+
+WAVE 1 (Parallel):
+  Track A: [Sonnet] Module 01 API Foundations
+           + Module 04 Framework & Build
+           14+14 Hpp stubs, framework docs, CI harness spec
+
+  Track B: [Sonnet+Opus] Module 02 Extension Corpus
+           47 extension stubs, family maps,
+           dependency chains, version gate data
+
+  Track C: [Sonnet+Opus] Module 03 Performance Patterns
+           24 pattern cards, profiling annotations,
+           antipattern/pattern pairs
+
+HITL CAPCOM GATE 1 ── Wave 1 review ──────────────────────────────
+
+WAVE 2: Synthesis
+  [Opus] Module 05 Upstream Intelligence
+         Vulkan 1.4 consolidation, SDK 1.4.341 new extensions,
+         Roadmap 2026 profile, tensor/float8 frontier analysis,
+         cross-module version conflict resolution
+
+HITL CAPCOM GATE 2 ── Upstream intel review ──────────────────────
+
+WAVE 3: Integration + Publication
+  [Opus+Sonnet] Module 06 skill-creator Wiring
+         DACP bundles (80+ samples), version-gate skill,
+         upstream intel YAML pack, DoltHub/Wasteland hooks,
+         full test run (headless + screenshot comparison)
+
+HITL CAPCOM GATE 3 ── Final review + merge decision ──────────────
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Format} & \tableheader{Acceptance Criteria} \\
+\midrule
+1 & API Foundations Skill Stubs & YAML/JSON (28 files) & 14 core + 14 Hpp; each with version precond, concepts, C/Hpp diff \\
+2 & Extension Corpus Catalogue & YAML + Markdown & 47 entries; family, extension names, version requirements, cross-links \\
+3 & Performance Pattern Cards & YAML (24 files) & Antipattern, pattern, hardware, metric, feature required per card \\
+4 & Framework Architecture Doc & Markdown & VulkanSample class hierarchy, component inventory, platform list \\
+5 & CI Headless Test Harness & Shell/CMake & 10+ samples run headless via Swiftshader; screenshot hash comparison \\
+6 & Upstream Intelligence YAML & YAML (1 file) & Vulkan 1.0--1.4 versions, SDK 1.4.341 extensions, Roadmap 2026 \\
+7 & Version Gate Skill & skill-creator YAML & Blocks 1.3/1.4 feature requests on older devices; diagnostic output \\
+8 & DACP Bundle Pack & 80+ JSON bundles & Intent + structured data + executable code per sample \\
+9 & DoltHub ZFC Stamp Candidate & SQL schema + data & Sample index table satisfying ZFC auditor first-stamp criteria \\
+10 & Mission Summary Report & Markdown & Post-execution retrospective for v1.50 retrospective integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schema (Wave 0) & None & Haiku & 8K \\
+API stubs x28 (Wave 1A) & Schema & Sonnet & 40K \\
+Framework doc (Wave 1A) & Schema & Sonnet & 15K \\
+CI harness spec (Wave 1A) & Framework doc & Sonnet & 10K \\
+Extension catalogue x47 (Wave 1B) & Schema & Sonnet & 65K \\
+Extension family maps (Wave 1B) & Catalogue & Opus & 20K \\
+Perf pattern cards x24 (Wave 1C) & Schema & Sonnet & 35K \\
+Perf profiling annotations (Wave 1C) & Pattern cards & Opus & 15K \\
+Upstream intel YAML (Wave 2) & All Wave 1 & Opus & 30K \\
+Version conflict resolution (Wave 2) & Extension catalogue & Opus & 15K \\
+DACP bundles x80+ (Wave 3) & All above & Sonnet & 120K \\
+Version gate skill (Wave 3) & Upstream intel YAML & Opus & 12K \\
+ZFC stamp candidate (Wave 3) & DACP bundles & Sonnet & 10K \\
+\hline
+\rowcolor{lightprimary}
+\textbf{Total} & & & \textbf{$\sim$395K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Cross-module synthesis (Module 05 upstream intelligence); extension dependency graph validation requiring judgment about promotions and hardware tier conflicts; version gate skill design; DoltHub ZFC compliance analysis \\
+Sonnet & $\sim$60\% & Bulk skill stub generation (28 API + 47 extension + 24 performance + framework); DACP bundle production; structured YAML output \\
+Haiku & $\sim$10\% & Shared schema templates; token budget tracking; scaffold YAML structures; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & None \\
+1A & API + Framework & Parallel & Sonnet & CAPCOM Gate 1 \\
+1B & Extension Corpus & Parallel & Sonnet+Opus & CAPCOM Gate 1 \\
+1C & Performance Patterns & Parallel & Sonnet+Opus & CAPCOM Gate 1 \\
+2 & Upstream Synthesis & Sequential & Opus & CAPCOM Gate 2 \\
+3 & Wiring + Publication & Sequential & Opus+Sonnet & CAPCOM Gate 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0 --- Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Sample YAML schema & PLAN/Haiku & shared/sample-schema.yaml: id, name, category, vulkan\_min, extensions, concepts, hpp\_variant, url \\
+DACP bundle template & PLAN/Haiku & shared/dacp-bundle-template.json: intent, data (sample schema), code (CMake stub + run command) \\
+Upstream intel YAML structure & PLAN/Haiku & shared/upstream-intel-structure.yaml: versions[], extensions[], profiles[], promotions[] \\
+Vulkan version matrix & PLAN/Haiku & shared/version-matrix.yaml: 1.0 through 1.4 with promoted extensions list \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A --- API Foundations + Framework}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+API sample stubs x14 & EXEC-1/Sonnet & skills/vulkan/api/\{name\}.yaml per sample \\
+Hpp equivalence maps x14 & EXEC-1/Sonnet & skills/vulkan/api/hpp/\{name\}\_diff.md per hpp sample \\
+Framework class hierarchy & EXEC-2/Sonnet & docs/framework-architecture.md \\
+Platform build guide summary & EXEC-2/Sonnet & docs/build-platforms.md (Win/Linux/macOS/Android/iOS) \\
+CI headless harness spec & EXEC-2/Sonnet & ci/headless-test-plan.yaml: 10 selected samples, Swiftshader config, screenshot hash tolerance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B --- Extension Corpus}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Extension stubs x47 & EXEC-3/Sonnet & skills/vulkan/extensions/\{name\}.yaml per sample \\
+Family dependency maps & CRAFT-GPU/Opus & docs/extension-families.md: ray tracing, mesh, dynamic state, descriptor, sync, tensor families \\
+Version promotion flags & CRAFT-GPU/Opus & shared/version-matrix.yaml update: promoted extensions tagged per 1.3/1.4 \\
+Tensor/float8 analysis & CRAFT-GPU/Opus & docs/frontier-ml-compute.md: ARM tensor extensions, float8, data graph \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1C --- Performance Patterns}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Performance pattern cards x24 & EXEC-4/Sonnet & skills/vulkan/performance/\{name\}-pattern.yaml per sample \\
+Profiling annotation layer & CRAFT-UPSTREAM/Opus & docs/profiling-annotations.md: GPU counter mappings, RenderDoc integration notes \\
+Mobile vs desktop split & CRAFT-UPSTREAM/Opus & docs/platform-performance-guide.md: AFBC/tile-based patterns marked mobile-critical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2 --- Upstream Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Upstream intel YAML pack & FLIGHT/Opus & upstream-intelligence-vulkan.yaml: complete state of Vulkan ecosystem as of SDK 1.4.341 \\
+Version conflict resolution & FLIGHT/Opus & shared/version-matrix.yaml finalized: all promotion flags verified \\
+Roadmap 2026 sample tagging & FLIGHT/Opus & Sample stubs updated with roadmap2026: true/false flag \\
+Descriptor heap analysis & FLIGHT/Opus & docs/descriptor-heap-migration.md: VK\_EXT\_descriptor\_heap vs legacy sets \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3 --- Wiring and Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+DACP bundle generation x80+ & EXEC-1/Sonnet & dacp/\{category\}/\{name\}-bundle.json for every sample \\
+Version gate skill & CRAFT-GPU/Opus & skills/vulkan/version-gate.yaml: detect + diagnostic output \\
+six-step loop integration & INTEG/Opus & docs/skill-creator-integration.md: observe/detect/suggest/manage/auto-load/learn wiring \\
+ZFC stamp candidate & EXEC-2/Sonnet & dolt/vulkan-sample-index.sql + seed data \\
+Headless CI test run & VERIFY/Sonnet & ci/test-results.yaml: pass/fail per 10 selected samples \\
+Mission summary report & LOG/Sonnet & docs/mission-summary.md: retrospective for v1.50 integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Shared schema as cache seed:} Wave 0 schema YAML is the shared attribute layer. All Wave 1 agents receive it as a prefix prompt within the 5-minute TTL window.
+  \item \textbf{Parallel Wave 1 tracks:} Tracks A, B, and C run in separate context windows with no interdependency. Each uses the Wave 0 schema as its only shared input.
+  \item \textbf{Version matrix as single source of truth:} The version-matrix.yaml from Wave 0 is read-only for Waves 1A/1B; Wave 2 produces the finalized version. This prevents conflicts.
+  \item \textbf{DACP bundle generation is embarrassingly parallel:} The 80+ bundles in Wave 3 can be generated in batches of 10--15 per context window without inter-bundle dependencies.
+  \item \textbf{Upstream intel YAML is the Wave 2 cache hit:} All Wave 3 tasks receive the upstream-intelligence-vulkan.yaml as a prefix, amortizing its construction cost across all wiring tasks.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Windows} & \tableheader{Tokens/Window} & \tableheader{Wave Total} \\
+\midrule
+Wave 0 (Foundation) & 1 & 8K & 8K \\
+Wave 1A (API+Framework) & 2 & 35K & 70K \\
+Wave 1B (Extension Corpus) & 3 & 35K & 105K \\
+Wave 1C (Performance) & 2 & 30K & 60K \\
+Wave 2 (Synthesis) & 2 & 40K & 80K \\
+Wave 3 (Wiring) & 4 & 35K & 140K \\
+\hline
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{14} & --- & \textbf{$\sim$463K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0: [Schema] [DACP Template] [Upstream Structure] [Version Matrix]
+   |            |                        |
+   v            v                        v
+Wave 1A:  API Stubs + Framework     (no dep on 1B/1C)
+Wave 1B:  Extension Corpus          (reads Version Matrix)
+Wave 1C:  Performance Patterns      (no dep on 1A/1B)
+   |            |                        |
+   +------------+------------------------+
+                         |
+                    CAPCOM Gate 1
+                         |
+                         v
+Wave 2:   Upstream Synthesis (reads ALL Wave 1 outputs)
+                         |
+                    CAPCOM Gate 2
+                         |
+                         v
+Wave 3:   DACP Wiring (reads Wave 2 upstream intel YAML)
+          ZFC Stamp, Version Gate, CI Test Run
+                         |
+                    CAPCOM Gate 3
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-critical & 5 & BLOCK & Mission cannot proceed; must fix before next wave \\
+Core functional & 12 & HIGH & Must pass before CAPCOM Gate 3 \\
+Integration & 8 & MEDIUM & Must pass before merge to main \\
+Edge case & 6 & LOW & Document and defer to v2.0 \\
+\hline
+\textbf{Total} & \textbf{31} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+S-01 & No skill stub assumes extension presence without a query guard & All 80+ stubs contain vkEnumerateDeviceExtensionProperties guard comment or explicit precondition field \\
+S-02 & License attribution preserved in all DACP bundles & Each bundle's code field contains the KhronosGroup Apache 2.0 / MIT attribution header \\
+S-03 & Version gate skill correctly blocks 1.3-only feature on 1.2 device & Given device\_vulkan\_version: 1.2, requesting dynamic rendering returns diagnostic: requires Vulkan 1.3+ \\
+S-04 & ARM tensor extension stubs clearly marked vendor-specific & VK\_ARM\_tensors and VK\_ARM\_data\_graph stubs carry hardware\_vendor: arm tag; no generic desktop claim \\
+S-05 & Roadmap 2026 profile requirements not applied to pre-1.4 contexts & Version gate rejects Roadmap 2026 profile check on devices reporting Vulkan 1.3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functional Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+C-01 & Hello Triangle runs headless in CI & Screenshot captured; perceptual hash matches reference within 5\% tolerance \\
+C-02 & Compute N-body runs headless in CI & Screenshot captured at frame 5; no crash or validation errors \\
+C-03 & Dynamic Rendering sample (1.3) runs on Vulkan 1.3+ only & Blocked with diagnostic on 1.1 device; passes on 1.3+ device \\
+C-04 & Mesh shading sample requires EXT\_mesh\_shader & Stub preconditions match actual extension name; version gate enforces \\
+C-05 & Ray tracing samples correctly list ALL required extensions & Basic: KHR\_acceleration\_structure + KHR\_ray\_tracing\_pipeline; verified against spec \\
+C-06 & Performance pattern card for AFBC has hardware tag & mobile\_only: true; hardware\_vendor: arm; not applied to desktop-only builds \\
+C-07 & C-to-Hpp diff map covers all 14 hpp\_* samples & No gaps; each diff maps at least 3 concrete API differences \\
+C-08 & Pipeline Cache sample runs and produces serialized .cache file & headless run produces vulkan-pipeline-cache.bin artifact \\
+C-09 & Upstream intel YAML is valid YAML and schema-compliant & yamllint passes; all required fields present; extensions list count matches SDK notes \\
+C-10 & DACP bundles parse as valid JSON & All 80+ bundles pass JSON schema validation; no malformed fields \\
+C-11 & ZFC stamp candidate SQL schema is valid & sqlite3 validation passes; table has required columns: id, name, category, vulkan\_min, url \\
+C-12 & Version matrix correctly identifies all 1.3 promotions & 23 extensions marked promoted\_in: 1.3; matches Khronos official list \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Every sample has DACP skill stub & C-10 & Pending \\
+2 & Extension catalogue version accuracy & C-05, C-12 & Pending \\
+3 & C-to-Hpp equivalence map complete & C-07 & Pending \\
+4 & Performance pattern cards complete & C-06 & Pending \\
+5 & CI headless test harness runs 10+ samples & C-01, C-02, C-08 & Pending \\
+6 & Upstream intel YAML valid and complete & C-09 & Pending \\
+7 & Roadmap 2026 correctly mapped & S-05 & Pending \\
+8 & Tensor sample family documented & S-04 & Pending \\
+9 & Version gate skill works correctly & S-03, C-03 & Pending \\
+10 & ZFC stamp achievable & C-11 & Pending \\
+11 & DACP bundles compile without error & C-10 & Pending \\
+12 & HITL CAPCOM gates pass & S-01--S-05 | C-01--C-12 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; CAPCOM gate decisions; Opus \\
+PLAN & Planner & Wave decomposition; dependency ordering; Haiku \\
+SCOUT & Research Agent & docs.vulkan.org fetch; GitHub README harvest; web research \\
+EXEC-1 & API Executor & Module 01 stubs (28 API+Hpp); Sonnet \\
+EXEC-2 & Framework Executor & Module 04 framework + CI harness; Sonnet \\
+EXEC-3 & Extension Executor & Module 02 extension catalogue (47); Sonnet \\
+EXEC-4 & Performance Executor & Module 03 performance cards (24); Sonnet \\
+CRAFT-GPU & GPU Domain Specialist & Extension family maps; tensor/float8 frontier; Opus \\
+CRAFT-UPSTREAM & Upstream Specialist & Profiling annotations; mobile vs desktop; Opus \\
+VERIFY & Verification Agent & Source validation; extension name accuracy; Sonnet \\
+INTEG & Integration Agent & six-step loop wiring; cross-module relationships; Opus \\
+CAPCOM & HITL Interface & Human approval at Wave 0/1/2/3 gates \\
+BUDGET & Resource Manager & Token budget tracking; session planning; Haiku \\
+TOPO & Topology Manager & Wave 1 parallel track coordination; mid-mission restructuring \\
+ARCH & Architecture Agent & DACP bundle schema; ZFC stamp schema; Opus \\
+SECURE & Security Agent & License attribution enforcement; vendor-specific hardware checks \\
+LOG & Chronicle Agent & Commit messages; mission summary; Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6 modules, 17 roles) \\
+Estimated Context Windows & 14 \\
+Estimated Sessions & 3--4 \\
+Total Token Budget & $\sim$463K \\
+Parallel Execution Tracks & 3 (Wave 1A, 1B, 1C) \\
+HITL CAPCOM Gates & 3 \\
+Total Deliverables & 10 primary (80+ subsidiary files) \\
+Safety-Critical Tests & 5 (BLOCK on failure) \\
+Total Tests & 31 \\
+Primary Source Authority & KhronosGroup (Khronos Consortium) \\
+License & Apache 2.0 / MIT (upstream); GSD ecosystem wrapper \\
+GSD Version Target & v1.49+ (DACP milestone); ready for v1.50 retrospective \\
+DoltHub/Wasteland Target & ZFC compliance first stamp candidate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Vulkan is not a shortcut. It is a statement of intent: that the developer understands the machine, respects the machine, and will not hide behind abstraction layers that lie. Every explicit barrier, every manual layout transition, every command buffer recorded with deliberate intent --- these are not overhead. They are the grammar of honest computation.''}
+
+\vspace{0.8em}
+\noindent The Amiga Principle at the GPU level: specialized execution paths, explicit DMA channels, no implicit state. The Vulkan sample corpus is not a tutorial collection. It is the grammar book. This mission transcribes that grammar into skill-creator's native language --- so that the spaces between samples become navigable connections rather than silent voids.
+\end{quotebox}
+
+\end{document}
