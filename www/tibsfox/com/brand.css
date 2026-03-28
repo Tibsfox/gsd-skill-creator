@@ -218,6 +218,18 @@
   --awf-accent-light:#4CAF50;
   --awf-accent-dark: #0D3B0F;
   --awf-gradient:    linear-gradient(135deg, #0D3B0F 0%, #1B5E20 40%, #1565C0 100%);
+
+  /* PKD — reality purple, Philip K. Dick */
+  --pkd-accent:      #311B92;
+  --pkd-accent-light:#7C4DFF;
+  --pkd-accent-dark: #1A0E52;
+  --pkd-gradient:    linear-gradient(135deg, #1A0E52 0%, #311B92 40%, #B71C1C 100%);
+
+  /* EAZ — zodiac red, East Asian Zodiac Variations */
+  --eaz-accent:      #B71C1C;
+  --eaz-accent-light:#FFCDD2;
+  --eaz-accent-dark: #7f0000;
+  --eaz-gradient:    linear-gradient(135deg, #1A237E 0%, #B71C1C 50%, #F9A825 100%);
 }
 
 /* ═══════════════════════════════════════════
@@ -241,6 +253,8 @@
 .project-art  { --accent: var(--art-accent); --accent-light: var(--art-accent-light); --accent-dark: var(--art-accent-dark); }
 .project-uni  { --accent: var(--uni-accent); --accent-light: var(--uni-accent-light); --accent-dark: var(--uni-accent-dark); }
 .project-awf  { --accent: var(--awf-accent); --accent-light: var(--awf-accent-light); --accent-dark: var(--awf-accent-dark); }
+.project-eaz  { --accent: var(--eaz-accent); --accent-light: var(--eaz-accent-light); --accent-dark: var(--eaz-accent-dark); }
+.project-pkd  { --accent: var(--pkd-accent); --accent-light: var(--pkd-accent-light); --accent-dark: var(--pkd-accent-dark); }
 
 /* ═══════════════════════════════════════════
    6. SHARED BASE STYLES
@@ -477,3 +491,5 @@ footer a { margin-right: 0.8rem; }
 .tag-uni  { background: #e8eaf6; color: #37474f; }
 .tag-awf  { background: #e8f5e9; color: #1B5E20; }
 .tag-rel  { background: #fff3e0; color: #bf360c; }
+.tag-eaz  { background: #FFEBEE; color: #B71C1C; }
+.tag-pkd  { background: #ede7f6; color: #311b92; }
