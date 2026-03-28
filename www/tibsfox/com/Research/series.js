@@ -85,6 +85,7 @@
     { id: 'MCF', name: 'Multi-Cluster Fed.', path: 'MCF/index.html' },
     { id: 'MCS', name: 'Maritime Costs', path: 'MCS/index.html' },
     { id: 'MCR', name: 'Minecraft RAG', path: 'MCR/index.html' },
+    { id: 'MDS', name: 'Markup & Data Systems', path: 'MDS/index.html' },
     { id: 'MGU', name: 'Module Governance', path: 'MGU/index.html' },
     { id: 'MRW', name: 'MC Weather', path: 'MRW/index.html' },
     { id: 'MTB', name: 'Moontribe', path: 'MTB/index.html' },

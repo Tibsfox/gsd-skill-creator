@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markup Languages, Data Flow & Real-Time Systems — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --accent: #0277BD;
+    --light-primary: #ECEFF1;
+    --light-secondary: #E3F2FD;
+    --border: #BDBDBD;
+    --subtle: #607D8B;
+    --text: #212121;
+    --bg: #FAFAFA;
+    --card-bg: #ECEFF1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    border-bottom: 4px solid var(--accent);
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #90CAF9;
+    margin-bottom: 0.8rem;
+  }
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    font-size: 0.95rem;
+    color: #B0BEC5;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+  }
+  .pipeline {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #80DEEA;
+    letter-spacing: 0.05em;
+  }
+  .pipeline span { color: #546E7A; }
+
+  /* ── Main ── */
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem; }
+
+  /* ── File Cards ── */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--secondary);
+    border-radius: 4px;
+    padding: 1.4rem 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(21,101,192,0.15);
+  }
+  .card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+  .card-desc { font-size: 0.82rem; color: var(--subtle); line-height: 1.5; }
+  .card-meta {
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Sections ── */
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Contents ── */
+  .contents { margin-bottom: 2.5rem; }
+  .stage {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+  }
+  .stage-head {
+    background: var(--primary);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+  }
+  .stage-head.s2 { background: var(--secondary); }
+  .stage-head.s3 { background: var(--subtle); }
+  .stage-items { padding: 0.8rem 1rem; }
+  .stage-items li {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.8;
+    list-style: none;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .stage-items li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ── Module Grid ── */
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 600px) { .modules { grid-template-columns: 1fr 1fr; } }
+  .module {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 3px;
+    padding: 0.8rem 1rem;
+  }
+  .module-num {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .module-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.3;
+  }
+
+  /* ── Usage + Recompile ── */
+  .usage, .recompile {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  ol.steps { padding-left: 1.4rem; }
+  ol.steps li {
+    font-size: 0.87rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  code, pre {
+    font-family: 'DM Mono', 'Courier New', monospace;
+    background: var(--light-primary);
+    border-radius: 3px;
+    font-size: 0.82rem;
+    color: var(--primary);
+  }
+  code { padding: 0.1em 0.4em; }
+  pre {
+    padding: 0.9rem 1rem;
+    margin-top: 0.6rem;
+    border: 1px solid var(--border);
+    white-space: pre-wrap;
+    line-height: 1.7;
+  }
+
+  /* ── Quote ── */
+  .quote {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 4px 4px 0;
+    padding: 1.2rem 1.5rem;
+    margin-top: 2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--primary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .quote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--subtle);
+    font-weight: 600;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--subtle);
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="tag">GSD Research Mission Package</div>
+    <h1>Markup Languages, Data Flow<br>&amp; Real-Time Systems</h1>
+    <p class="subtitle">
+      HTML · CSS · XML · UML · SGML · Hyperlinking · Semantic Web<br>
+      Data-Driven Architecture · Telemetry · RRDB · Time-Series Databases<br>
+      Six-Module Deep Research Study · 5-Pass Refinement · Fleet Activation
+    </p>
+    <div class="pipeline">
+      Vision <span>→</span> Research <span>→</span> Mission
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- File Cards -->
+  <div class="cards">
+    <a class="card" href="markup_data_systems_mission.pdf" download>
+      <div class="card-icon">📄</div>
+      <div class="card-title">Mission Package PDF</div>
+      <div class="card-desc">Complete three-stage document: Vision Guide, Research Reference, and Mission Package. Compiled via XeLaTeX, publication-quality.</div>
+      <div class="card-meta">↓ DOWNLOAD PDF · ~207KB</div>
+    </a>
+    <a class="card" href="markup_data_systems_mission.tex" download>
+      <div class="card-icon">📝</div>
+      <div class="card-title">LaTeX Source (.tex)</div>
+      <div class="card-desc">Full XeLaTeX source for the mission package. Modify and recompile to update any section. Technology color scheme (steel/electric/graphite).</div>
+      <div class="card-meta">↓ DOWNLOAD .TEX SOURCE</div>
+    </a>
+  </div>
+
+  <!-- Research Modules -->
+  <h2>Six Research Modules</h2>
+  <div class="modules">
+    <div class="module">
+      <div class="module-num">Module 01</div>
+      <div class="module-name">Markup Standards Genealogy</div>
+    </div>
+    <div class="module">
+      <div class="module-num">Module 02</div>
+      <div class="module-name">Hyperlinking &amp; Semantic Deep-Mapping</div>
+    </div>
+    <div class="module">
+      <div class="module-num">Module 03</div>
+      <div class="module-name">Data-Driven Software Architecture</div>
+    </div>
+    <div class="module">
+      <div class="module-num">Module 04</div>
+      <div class="module-name">Real-Time &amp; HF Display Systems</div>
+    </div>
+    <div class="module">
+      <div class="module-num">Module 05</div>
+      <div class="module-name">Telemetry Systems &amp; Protocols</div>
+    </div>
+    <div class="module">
+      <div class="module-num">Module 06</div>
+      <div class="module-name">Time-Series Databases: RRD &amp; Modern Stack</div>
+    </div>
+  </div>
+
+  <!-- Contents Breakdown -->
+  <h2>Document Contents</h2>
+  <div class="contents">
+    <div class="stage">
+      <div class="stage-head">Stage 1 — Vision Document</div>
+      <ul class="stage-items">
+        <li>Problem statement: 6 identified problems across the markup-to-display stack</li>
+        <li>Core concept: 7-layer syntax-to-pixel architecture diagram</li>
+        <li>Six module architecture with ASCII diagrams</li>
+        <li>Chipset YAML configuration (Agnus/Denise/Paula/68000 model allocation)</li>
+        <li>12 testable success criteria</li>
+        <li>Relationship table to 7 other GSD documents</li>
+        <li>Through-line: the Amiga Principle at civilizational scale</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-head s2">Stage 2 — Research Reference</div>
+      <ul class="stage-items">
+        <li>Module 01: SGML ISO 8879, HTML 2.0→HTML5 table, XML genealogy, CSS history, UML version timeline</li>
+        <li>Module 02: Bush/Nelson/Engelbart lineage, XLink 1.1 arc model, RDF triple examples, knowledge graphs</li>
+        <li>Module 03: Lambda/Kappa/CQRS/Data Mesh/Data Fabric pattern comparison table</li>
+        <li>Module 04: SVG/Canvas/WebGL performance hierarchy, WebSocket pipeline diagram, library survey</li>
+        <li>Module 05: CCSDS full protocol stack table, NASA ASIST/ITOS, industrial protocols (SNMP/OPC-UA/MQTT)</li>
+        <li>Module 06: RRDtool DS types + CFs, 8-system TSDB comparison table, Prometheus vs InfluxDB architecture</li>
+        <li>Safety &amp; sensitivity considerations table</li>
+        <li>Full source bibliography: W3C, OMG, ISO, CCSDS, NASA, ACM, IEEE, Khronos</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="stage-head s3">Stage 3 — Mission Package</div>
+      <ul class="stage-items">
+        <li>Milestone specification with ASCII wave architecture diagram</li>
+        <li>8 deliverables table with acceptance criteria</li>
+        <li>Component breakdown: model assignments, 83K estimated token budget</li>
+        <li>Wave execution plan: Foundation → 3 Parallel Tracks → CAPCOM gate → Synthesis → Publication</li>
+        <li>Cache optimization strategy (5-minute TTL exploitation)</li>
+        <li>44-test test plan: 6 safety-critical, 22 core functionality, 9 integration, 7 edge cases</li>
+        <li>Verification matrix mapping 12 success criteria to test IDs</li>
+        <li>22-role Fleet crew manifest</li>
+        <li>Execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <h2>How to Use This Package</h2>
+  <div class="usage">
+    <ol class="steps">
+      <li><strong>Open the PDF</strong> — read Stage 1 Vision to understand scope and the six-module architecture.</li>
+      <li><strong>Hand to GSD Orchestrator</strong> — provide the PDF as context for the skill-creator agent. The mission package is self-contained; zero additional context is required.</li>
+      <li><strong>Launch Wave 0</strong> — instruct Haiku agents to generate shared schemas and LaTeX template from the Chipset YAML spec.</li>
+      <li><strong>Launch Wave 1 (3 parallel tracks)</strong> — Track A (Modules 01+02), Track B (Modules 03+05), Track C (Modules 04+06). All three tracks can run simultaneously within the 5-minute cache TTL window.</li>
+      <li><strong>CAPCOM gate after Wave 1</strong> — human review of six draft module documents before synthesis proceeds.</li>
+      <li><strong>Wave 2 Synthesis → Wave 3 Publication</strong> — Integration agent produces cross-module document; Verify agent runs 44-test suite; Pub agent compiles final PDFs.</li>
+    </ol>
+  </div>
+
+  <!-- Recompile -->
+  <h2>Recompile Instructions</h2>
+  <div class="recompile">
+    <p style="font-size:0.87rem;margin-bottom:0.6rem;">Three XeLaTeX passes required to resolve TOC, cross-references, and <code>lastpage</code> counter:</p>
+    <pre>xelatex -interaction=nonstopmode markup_data_systems_mission.tex
+xelatex -interaction=nonstopmode markup_data_systems_mission.tex
+xelatex -interaction=nonstopmode markup_data_systems_mission.tex</pre>
+    <p style="font-size:0.8rem;color:var(--subtle);margin-top:0.6rem;">Requires XeLaTeX with DejaVu fonts and packages: fontspec, tcolorbox (with breakable), tabularx, colortbl, booktabs, lastpage, fancyhdr, hyperref.</p>
+  </div>
+
+  <!-- Quote -->
+  <blockquote class="quote">
+    "The through-line from SGML's atom to WebGL's pixel is not a list of standards. It is a single design decision made seven times: put the meaning in the connection, not the container. The spaces between carry the signal."
+    <cite>— Stage 1 Through-Line, Markup Languages, Data Flow &amp; Real-Time Systems Mission Package, March 2026</cite>
+  </blockquote>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · Markup Languages, Data Flow &amp; Real-Time Systems · Fleet Profile · March 27, 2026<br>
+  Generated by GSD Skill: research-mission-generator · Tibsfox / Fox Infrastructure Group
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markup, Data Flow &amp; Real-Time Systems &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mds">
+  <header>
+    <h1>Markup, Data Flow &amp; Real-Time Systems</h1>
+    <div class="subtitle">Markup Standards &middot; Hyperlinking &middot; Data Architecture &middot; Display Systems &middot; Telemetry &middot; Time-Series</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-markup-standards">Markup</a>
+      <a href="page.html?doc=02-hyperlinking">Hyperlinking</a>
+      <a href="page.html?doc=03-data-architecture">Data Arch</a>
+      <a href="page.html?doc=04-display-systems">Display</a>
+      <a href="page.html?doc=05-telemetry">Telemetry</a>
+      <a href="page.html?doc=06-time-series-db">Time-Series</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+  <main>
+    <blockquote>
+      The through-line from SGML's atom to WebGL's pixel is not a list of standards. It is a single
+      design decision made seven times: put the meaning in the connection, not the container. The
+      spaces between carry the signal.
+    </blockquote>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">44</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">22</span><span class="stat-label">Fleet Roles</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Layers</span></div>
+    </div>
+    <h2>Research Modules</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-markup-standards" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Markup Standards Genealogy</h3>
+        <div class="meta"><span class="tag tag-markup">Markup</span> Track A &middot; Syntax layer</div>
+        <p>SGML (ISO 8879:1986) through HTML5 Living Standard, XML 1.0, XHTML, CSS cascade model, UML specification history. DTDs, XML Schema, RELAX NG. The separation of structure from presentation as design principle.</p>
+      </a>
+      <a href="page.html?doc=02-hyperlinking" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Hyperlinking &amp; Semantic Deep-Mapping</h3>
+        <div class="meta"><span class="tag tag-link">Link</span> Track A &middot; Linking layer</div>
+        <p>Bush/Nelson/Engelbart lineage. HTML &lt;a&gt; mechanics. XLink 1.1 arc model. RDF triple format, SPARQL, OWL. Knowledge graphs (DBpedia, Wikidata). Deep linking, transclusion, JSON-LD.</p>
+      </a>
+      <a href="page.html?doc=03-data-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Data-Driven Architecture</h3>
+        <div class="meta"><span class="tag tag-data">Data</span> Track B &middot; Architecture layer</div>
+        <p>MVC, CQRS/Event Sourcing, Lambda architecture (batch + speed), Kappa (stream-only), Data Mesh (domain ownership), Data Fabric (automated integration). RDF as universal data model thesis.</p>
+      </a>
+      <a href="page.html?doc=04-display-systems" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Real-Time Display Systems</h3>
+        <div class="meta"><span class="tag tag-display">Display</span> Track C &middot; Rendering layer</div>
+        <p>SVG/Canvas/WebGL performance hierarchy (1K/10K/1M+ data points). WebSocket streaming, requestAnimationFrame, GPU buffer management. Libraries: D3.js, deck.gl, ECharts, webgl-plot.</p>
+      </a>
+      <a href="page.html?doc=05-telemetry" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Telemetry Systems</h3>
+        <div class="meta"><span class="tag tag-telemetry">Telemetry</span> Track B &middot; Transport layer</div>
+        <p>CCSDS protocol stack (Space Packet, TM/AOS, Proximity-1). NASA ASIST/ITOS. Industrial telemetry: SNMP, OPC-UA, MQTT, Modbus, DNP3. Edge-to-cloud integration.</p>
+      </a>
+      <a href="page.html?doc=06-time-series-db" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Time-Series Databases</h3>
+        <div class="meta"><span class="tag tag-tsdb">TSDB</span> Synthesis &middot; Storage layer</div>
+        <p>RRDtool circular buffer mechanics, DS types, consolidation functions. Modern stack: InfluxDB (TSM-Tree), Prometheus (pull/PromQL), TimescaleDB (PostgreSQL), QuestDB. Benchmark data and GSD mapping.</p>
+      </a>
+    </div>
+    <h2>Domain Architecture</h2>
+    <pre>
+SYNTAX-TO-PIXEL ARCHITECTURE -- SEVEN LAYERS
+===============================================================
+
+  SYNTAX LAYER      SGML / XML / HTML / CSS / UML
+                         |
+  LINKING LAYER     XLink / XPointer / RDF / Knowledge Graphs
+                         |
+  ARCHITECTURE      Lambda / Kappa / Mesh / Fabric / EDA
+  LAYER                  |
+  TRANSPORT         CCSDS / SNMP / MQTT / OPC-UA
+  LAYER                  |
+  STORAGE LAYER     RRD / InfluxDB / Prometheus / TimescaleDB
+                         |
+  DISPLAY LAYER     WebGL / WebSocket / Canvas / D3 / deck.gl
+    </pre>
+  </main>
+  <footer>
+    <p>Markup, Data Flow &amp; Real-Time Systems &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
