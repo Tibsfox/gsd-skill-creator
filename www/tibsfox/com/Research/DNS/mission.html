@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; DNS Protocol</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-dns">
+  <header>
+    <h1>DNS Protocol</h1>
+    <div class="subtitle">Wire Format &middot; Record Types &middot; Resolution &middot; DNSSEC &middot; Zone Management &middot; Privacy Stack</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-wire-protocol-message-format">Wire Protocol</a>
+      <a href="page.html?doc=02-resource-record-taxonomy">Record Types</a>
+      <a href="page.html?doc=03-resolution-architecture">Resolution</a>
+      <a href="page.html?doc=04-zone-management">Zone Management</a>
+      <a href="page.html?doc=05-dnssec">DNSSEC</a>
+      <a href="page.html?doc=06-modern-extensions-privacy">Extensions &amp; Privacy</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      DNS is the internet's implementation of the "spaces between" principle at scale. No single server
+      holds the answer to every query. The answer lives in the delegation relationships between zones &mdash;
+      in the NS records that say "I don't know, but they do." The 13 root server addresses are not the
+      internet's phone book; they are the index of indexes. The authority lives at the edges: in the zone
+      files maintained by millions of individual organizations. DNS is not a phone book. It is a proof
+      system, disguised as a lookup table.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~355K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/dns_mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/dns_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/dns_mission_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schemas, RFC index, glossary stubs</td><td>Sequential</td><td>15K</td></tr>
+        <tr><td>1</td><td>Parallel Research</td><td>Track A (M1+M2) &middot; Track B (M3+M4) &middot; Track C (M5+M6)</td><td>Parallel</td><td>195K</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Attack taxonomy, protocol interaction diagram, full assembly</td><td>Sequential</td><td>90K</td></tr>
+        <tr><td>3</td><td>Publication</td><td>LaTeX compilation, index page, delivery manifest</td><td>Sequential</td><td>55K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Orchestration / DMA</td><td>Opus</td><td>Cross-module dependency, DNSSEC synthesis, security surface analysis, go/no-go gates</td></tr>
+        <tr><td>Denise</td><td>Display / Output</td><td>Sonnet</td><td>Wire protocol docs, RR taxonomy, zone management, ASCII diagram rendering</td></tr>
+        <tr><td>Paula</td><td>Audio / I/O</td><td>Haiku</td><td>RFC source fetching, token budget tracking, schema scaffolding, commit messages</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations traceable to IETF RFCs, IANA registries, ISC docs, or peer-reviewed publications. Zero blog posts or unsourced claims.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every field width, type code, and protocol constant attributed to specific RFC and section.</td></tr>
+        <tr><td>SC-SEC</td><td>Security sensitivity</td><td>Attack taxonomy describes mechanisms and mitigations at conceptual level. No novel exploitation techniques. No PoC code for cache poisoning or amplification.</td></tr>
+        <tr><td>SC-ADV</td><td>No advocacy</td><td>Document presents protocol trade-offs (DoT vs DoH visibility) factually without advocating for specific deployment choices.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix: The Zone File</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>All 12-byte header fields documented with bit positions, widths, and behavioral semantics</td><td>PASS</td></tr>
+        <tr><td>2</td><td>Label encoding and compression fully specified including pointer format and limits</td><td>PASS</td></tr>
+        <tr><td>3</td><td>All five message sections documented with wire layout</td><td>PASS</td></tr>
+        <tr><td>4</td><td>All IANA-assigned RR types catalogued with type code, RDATA format, and operational purpose</td><td>PASS</td></tr>
+        <tr><td>5</td><td>Full resolution algorithm from stub through root/TLD/authoritative chain documented</td><td>PASS</td></tr>
+        <tr><td>6</td><td>All SOA field values specified with semantics and recommended values</td><td>PASS</td></tr>
+        <tr><td>7</td><td>AXFR and IXFR protocols specified including TCP requirement and SOA bookending</td><td>PASS</td></tr>
+        <tr><td>8</td><td>DNSSEC signing procedure documented including DNSKEY, RRSIG, DS, NSEC, NSEC3</td><td>PASS</td></tr>
+        <tr><td>9</td><td>DNSSEC validation algorithm documented including chain of trust traversal</td><td>PASS</td></tr>
+        <tr><td>10</td><td>EDNS0 OPT record fully specified including all currently-assigned option codes</td><td>PASS</td></tr>
+        <tr><td>11</td><td>DoT/DoH/DoQ transport differences tabulated with trade-off analysis</td><td>PASS</td></tr>
+        <tr><td>12</td><td>Security attack taxonomy covers cache poisoning, amplification, zone enumeration, DNS hijacking</td><td>PASS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Every bit in the 12-byte DNS header documented with field name, width, and values</td><td>PASS</td></tr>
+        <tr><td>2</td><td>Label encoding fully specified including compression pointer detection and max lengths</td><td>PASS</td></tr>
+        <tr><td>3</td><td>Complete RR type catalog with type codes, RDATA binary format, and zone file syntax</td><td>PASS</td></tr>
+        <tr><td>4</td><td>Full resolution walk from stub to root to TLD to authoritative with example</td><td>PASS</td></tr>
+        <tr><td>5</td><td>Zone file format documented with all directives and complete example</td><td>PASS</td></tr>
+        <tr><td>6</td><td>AXFR, IXFR, NOTIFY, and dynamic update protocols fully specified</td><td>PASS</td></tr>
+        <tr><td>7</td><td>DNSSEC chain of trust documented from root KSK to zone-level RRSIG</td><td>PASS</td></tr>
+        <tr><td>8</td><td>EDNS0, DoT, DoH, DoQ, QNAME minimization documented with privacy trade-off matrix</td><td>PASS</td></tr>
+        <tr><td>9</td><td>All numerical claims attributed to specific RFC sources</td><td>PASS</td></tr>
+        <tr><td>10</td><td>Document is self-contained: a reader with networking fundamentals can follow every module</td><td>PASS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The DNS protocol is a 40-year demonstration of the Amiga Principle: that a small, principled
+    architecture &mdash; a delegation tree, a 12-byte header, a type field, a TTL &mdash; can carry the weight
+    of a planet's worth of naming. The "spaces between" are not empty. The NS record pointing away from
+    itself, the glue record placed in a parent it doesn't own, the DS record anchoring a child's trust
+    in its parent's zone &mdash; these are the connective tissue of the internet. Every domain name resolved
+    is a traversal of those connections. Every DNSSEC validation is a cryptographic proof that the
+    connections are trustworthy. DNS is not a phone book. It is a proof system, disguised as a lookup table.</p>
+  </main>
+
+  <footer>
+    <p>DNS Protocol &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
