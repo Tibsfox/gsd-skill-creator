@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartoon Network &amp; Adult Swim — GSD Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4A148C;
+      --secondary: #1565C0;
+      --tertiary: #4E342E;
+      --accent: #7B1FA2;
+      --light-primary: #F3E5F5;
+      --light-secondary: #E3F2FD;
+      --row-gray: #F5F5F5;
+      --border: #BDBDBD;
+      --subtle: #757575;
+      --dark: #212121;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FAFAFA;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #311B92 50%, var(--secondary) 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    header .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      opacity: 0.85;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    header .pipeline {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      padding: 1rem 1.5rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .meta-item strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--light-primary);
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 600px) { .file-grid { grid-template-columns: 1fr; } }
+
+    .file-card {
+      background: #EDE7F6;
+      border: 1px solid #CE93D8;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .file-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(74,20,140,0.15);
+    }
+
+    .file-card .file-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .file-card .file-type {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .file-card .file-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .file-card .file-desc {
+      font-size: 0.85rem;
+      color: var(--subtle);
+    }
+
+    .stage-list {
+      margin-bottom: 2.5rem;
+    }
+
+    .stage {
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.2rem;
+      background: white;
+      margin-bottom: 0.8rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .stage-number {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .stage-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .stage-modules {
+      font-size: 0.85rem;
+      color: var(--subtle);
+    }
+
+    .stage-modules span {
+      display: inline-block;
+      background: var(--light-primary);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin: 0.1rem 0.2rem 0.1rem 0;
+      font-size: 0.78rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .usage-box {
+      background: var(--light-secondary);
+      border: 1px solid #90CAF9;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .usage-box ol {
+      padding-left: 1.3rem;
+      font-size: 0.9rem;
+    }
+
+    .usage-box ol li {
+      margin-bottom: 0.5rem;
+    }
+
+    .compile-box {
+      background: #212121;
+      color: #E0E0E0;
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+      font-family: 'DM Sans Mono', 'DejaVu Sans Mono', monospace;
+      font-size: 0.82rem;
+    }
+
+    .compile-box .comment { color: #757575; }
+    .compile-box .cmd { color: #A5D6A7; }
+
+    .quote-block {
+      background: var(--light-primary);
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      margin-top: 2rem;
+      border-radius: 0 6px 6px 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      color: var(--tertiary);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">GSD Research Mission Package</div>
+  <h1>Cartoon Network &amp; Adult Swim</h1>
+  <div class="subtitle">History, Creative Eras, Cultural Impact &amp; Current Crisis — A Deep Research Study</div>
+  <div class="pipeline">Vision → Research → Mission</div>
+</header>
+
+<div class="container">
+
+  <div class="meta-bar">
+    <div class="meta-item"><strong>Date:</strong> March 27, 2026</div>
+    <div class="meta-item"><strong>Profile:</strong> Squadron (12 roles)</div>
+    <div class="meta-item"><strong>Modules:</strong> 5</div>
+    <div class="meta-item"><strong>Waves:</strong> 4</div>
+    <div class="meta-item"><strong>Est. Tokens:</strong> 138k</div>
+    <div class="meta-item"><strong>Status:</strong> Ready for GSD Orchestrator</div>
+  </div>
+
+  <!-- File Downloads -->
+  <h2 class="section-title">Package Files</h2>
+  <div class="file-grid">
+    <a class="file-card" href="cn_adult_swim_mission.pdf" download>
+      <div class="file-icon">📄</div>
+      <div class="file-type">PDF Document</div>
+      <div class="file-name">cn_adult_swim_mission.pdf</div>
+      <div class="file-desc">Compiled mission package — 31 pages, three-stage pipeline, fully formatted with tables, ASCII diagrams, and bibliography</div>
+    </a>
+    <a class="file-card" href="cn_adult_swim_mission.tex" download>
+      <div class="file-icon">⌨️</div>
+      <div class="file-type">LaTeX Source</div>
+      <div class="file-name">cn_adult_swim_mission.tex</div>
+      <div class="file-desc">Full XeLaTeX source — modify and recompile as needed; all three stages in a single file</div>
+    </a>
+  </div>
+
+  <!-- Contents -->
+  <h2 class="section-title">Document Contents</h2>
+  <div class="stage-list">
+    <div class="stage">
+      <div class="stage-number">Stage 1</div>
+      <div class="stage-title">Vision Document</div>
+      <div class="stage-modules">
+        <span>Narrative Vision</span>
+        <span>5 Problem Statements</span>
+        <span>Domain Architecture Map</span>
+        <span>Module Architecture</span>
+        <span>Chipset YAML</span>
+        <span>12 Success Criteria</span>
+        <span>Through-Line Essay</span>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="stage-number">Stage 2</div>
+      <div class="stage-title">Research Reference</div>
+      <div class="stage-modules">
+        <span>M1: Corporate Genealogy 1986–2026</span>
+        <span>M2: Kids' Eras (Classic→Golden→Dark→Renaissance)</span>
+        <span>M3: Adult Swim Culture</span>
+        <span>M4: Toonami &amp; Anime Bridge</span>
+        <span>M5: WBD Dissolution</span>
+        <span>Sensitivity Table</span>
+        <span>Source Bibliography</span>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="stage-number">Stage 3</div>
+      <div class="stage-title">Mission Package</div>
+      <div class="stage-modules">
+        <span>Milestone Spec</span>
+        <span>7 Deliverables</span>
+        <span>Wave Plan (W0–W3)</span>
+        <span>Component Breakdown</span>
+        <span>Cache Optimization</span>
+        <span>Dependency Graph</span>
+        <span>40 Tests</span>
+        <span>Verification Matrix</span>
+        <span>12-Role Crew Manifest</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <h2 class="section-title">How to Use This Package</h2>
+  <div class="usage-box">
+    <ol>
+      <li>Open the PDF to review the full three-stage pipeline and verify scope before execution</li>
+      <li>Hand the <strong>Stage 3 Mission Package</strong> to your GSD orchestrator (Claude Code) as the primary execution spec</li>
+      <li>Use the <strong>Wave 0 Foundation</strong> tasks as the first GSD session — schema initialization and source index take ~5 minutes</li>
+      <li>Schedule <strong>Wave 1A and 1B</strong> within the same 5-minute window to exploit shared attribute caching (see Cache Optimization section)</li>
+      <li>Trigger <strong>CAPCOM HITL gates</strong> after each wave for human approval before proceeding to synthesis and publication</li>
+      <li>Final output is a 50–70 page research document suitable for GSD College of Knowledge seeding</li>
+    </ol>
+  </div>
+
+  <!-- Recompilation -->
+  <h2 class="section-title">Recompile from Source</h2>
+  <div class="compile-box">
+    <div class="comment"># Requires XeLaTeX and DejaVu fonts (pre-installed on Ubuntu)</div>
+    <div class="cmd">xelatex -interaction=nonstopmode cn_adult_swim_mission.tex</div>
+    <div class="cmd">xelatex -interaction=nonstopmode cn_adult_swim_mission.tex</div>
+    <div class="cmd">xelatex -interaction=nonstopmode cn_adult_swim_mission.tex</div>
+    <div class="comment"># Three passes required for TOC, cross-refs, and lastpage</div>
+  </div>
+
+  <div class="quote-block">
+    "The dissolution under Warner Bros. Discovery is a study in what happens when you remove the spaces and keep the nodes. The shows remain — some of them. The channels remain — reduced. But the institutional architecture that generated Dexter's Laboratory from a volunteer executive's side project, that produced Cowboy Bebop's uncensored midnight US premiere, that let a young non-binary CalArts graduate invent the most emotionally radical children's animated series in American history — that architecture is being systematically eliminated in service of a $9 billion quarterly write-down."
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package · Cartoon Network &amp; Adult Swim · March 27, 2026 · Built with the GSD Ecosystem
+</footer>
+
+</body>
+</html>

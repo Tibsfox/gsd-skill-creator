@@ -22,6 +22,7 @@
     { id: 'C89', name: 'C89.5 FM', path: 'C89/index.html' },
     { id: 'CAS', name: 'Cascade Range', path: 'CAS/index.html' },
     { id: 'CMH', name: 'Comp. Mesh', path: 'CMH/index.html' },
+    { id: 'CNA', name: 'CN & Adult Swim', path: 'CNA/index.html' },
     { id: 'CAR', name: 'The Cars', path: 'CAR/index.html' },
     { id: 'CBC', name: 'CBC/Radio-Canada', path: 'CBC/index.html' },
     { id: 'CCT', name: 'Comedy Central', path: 'CCT/index.html' },

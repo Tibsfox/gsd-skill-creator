@@ -1,0 +1,60 @@
+/* CNA — Adult Swim Teal / Cartoon Black / Bumper White theme
+   Brand foundation loaded from brand.css */
+:root {
+  --swim-teal: #00897B;
+  --swim-light: #E0F2F1;
+  --swim-mid: #00695C;
+  --swim-dark: #004D40;
+  --cartoon-black: #121212;
+  --cartoon-mid: #2C2C2C;
+  --cartoon-light: #E0E0E0;
+  --bumper-white: #FAFAFA;
+  --page-bg: #FAFAFA; --page-text: #212121; --page-text-light: #757575;
+  --link: var(--swim-teal); --link-hover: var(--swim-dark);
+  --accent: var(--swim-teal); --accent-light: var(--swim-light); --accent-dark: var(--swim-dark);
+  --card-bg: white; --card-border: #80CBC4; --card-shadow: rgba(0,137,123,0.12);
+  --border: #80CBC4; --parchment: var(--cartoon-light);
+}
+header {
+  background: linear-gradient(135deg, #121212 0%, #1A2F2B 35%, #004D40 70%, #121212 100%);
+  border-bottom: 4px solid var(--swim-teal); position: relative; overflow: hidden;
+}
+header::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(0,137,123,0.2) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #E0F2F1; }
+header .subtitle { color: #80CBC4; }
+h2 { color: var(--cartoon-black); border-bottom-color: var(--cartoon-light); padding-bottom: 0.3rem; }
+h3 { color: var(--swim-teal); }
+blockquote { background: var(--swim-light); border-left: 4px solid var(--swim-teal); border-radius: 4px; padding: 1.25rem 1.5rem; color: #374151; }
+th { background: var(--cartoon-black); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(0,137,123,0.04); }
+tr:hover { background: rgba(0,137,123,0.08); }
+pre { background: #121212; color: #E2E8F0; border-radius: 6px; padding: 1.25rem 1.5rem; font-family: 'Consolas','Monaco','Courier New',monospace; line-height: 1.6; border-left: 3px solid var(--swim-teal); }
+code { background: var(--swim-light); font-family: 'Consolas','Monaco','Courier New',monospace; color: var(--swim-teal); }
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+main { max-width: 54rem; }
+.card { border-color: #80CBC4; border-radius: 6px; padding: 1.2rem; position: relative; }
+.card:hover { box-shadow: 0 2px 12px rgba(0,137,123,0.12); border-color: var(--swim-teal); }
+.stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; padding: 0; background: none; border: none; }
+.stat { background: white; border: 1px solid #80CBC4; border-radius: 6px; padding: 0.8rem; }
+.stat-value { font-size: 1.5rem; color: var(--swim-teal); }
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-corp { background: var(--swim-light); color: var(--swim-teal); }
+.tag-kids { background: #FFF3E0; color: #E65100; }
+.tag-adult { background: #212121; color: #E0E0E0; }
+.tag-anime { background: #E8EAF6; color: #1A237E; }
+.tag-crisis { background: #FEF2F2; color: #DC2626; }
+.safety-callout { background: #FEF2F2; border: 1px solid #FECACA; border-left: 4px solid #DC2626; border-radius: 4px; padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.92rem; }
+.safety-callout strong { color: #DC2626; }
+.cross-links { background: white; border: 1px solid #80CBC4; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--swim-teal); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a { display: inline-block; background: var(--swim-light); padding: 0.25rem 0.75rem; border-radius: 3px; font-size: 0.82rem; font-family: system-ui, sans-serif; color: var(--swim-teal); transition: background 0.2s; }
+.cross-links li a:hover { background: #B2DFDB; text-decoration: none; }
+@media (max-width: 600px) { .stats { grid-template-columns: repeat(3, 1fr); } }
