@@ -86,6 +86,7 @@
     { id: 'LED', name: 'LED & Controllers', path: 'LED/index.html' },
     { id: 'LFR', name: 'Living Forest', path: 'LFR/index.html' },
     { id: 'LKR', name: 'Lion King Roots', path: 'LKR/index.html' },
+    { id: 'LLM', name: 'Local LLM', path: 'LLM/index.html' },
     { id: 'LGW', name: 'LIGO Waves', path: 'LGW/index.html' },
     { id: 'LNV', name: 'Larry Niven', path: 'LNV/index.html' },
     { id: 'M05', name: 'Module Split', path: 'M05/index.html' },

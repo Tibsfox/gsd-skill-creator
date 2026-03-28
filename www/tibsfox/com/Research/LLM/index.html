@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local LLM &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-llm">
+  <header>
+    <h1>Local LLM Ecosystem</h1>
+    <div class="subtitle">Inference Runtimes &middot; GPU Architecture &middot; LoRA Training &middot; Production Pipeline &middot; Claude Code Integration</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-inference-runtimes">Runtimes</a>
+      <a href="page.html?doc=02-gpu-quantization">GPU &amp; Quant</a>
+      <a href="page.html?doc=03-lora-training">LoRA</a>
+      <a href="page.html?doc=04-production-pipeline">Pipeline</a>
+      <a href="page.html?doc=05-claude-code-integration">Claude Code</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Amiga did not replace the 68000 with a faster chip. It gave the 68000 partners.
+      A local model sitting on a 24GB RTX 4090 running Qwen3.5-35B-A3B at 213 tokens/second
+      is a context window that costs nothing. Route the deterministic work through hardware you own,
+      and reserve the Opus-class reasoning for judgment-heavy synthesis. That is the vision here.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Runtime Engines</span></div>
+      <div class="stat"><span class="stat-value">213</span><span class="stat-label">tok/s (35B-A3B)</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~174K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Agent Roles</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-inference-runtimes" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Inference Runtime Landscape</h3>
+        <div class="meta"><span class="tag tag-runtime">Runtime</span> Track A &middot; Serving layer</div>
+        <p>Three major runtimes compared: Ollama (developer-first CLI), vLLM (production throughput), LM Studio (GUI + API). OpenAI/Anthropic-compatible API endpoints. PagedAttention for memory efficiency. Speculative decoding for latency reduction. Model format support: GGUF, SafeTensors, AWQ, GPTQ.</p>
+      </a>
+
+      <a href="page.html?doc=02-gpu-quantization" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: GPU Architecture &amp; Quantization</h3>
+        <div class="meta"><span class="tag tag-gpu">GPU</span> Track A &middot; Hardware layer</div>
+        <p>VRAM math for consumer GPUs: RTX 3090 (24GB), RTX 4090 (24GB), RTX 5090 (32GB), RTX 4060 Ti (8/16GB). Quantization landscape: GGUF Q4_K_M, Q5_K_M, Q8_0, FP16. Memory formula: parameters x bytes-per-weight + KV cache + overhead. Throughput benchmarks per model size and quantization level.</p>
+      </a>
+
+      <a href="page.html?doc=03-lora-training" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: LoRA &amp; Fine-Tuning Frameworks</h3>
+        <div class="meta"><span class="tag tag-lora">LoRA</span> Track B &middot; Training layer</div>
+        <p>LoRA mechanics: low-rank decomposition of weight update matrices. Framework comparison: Unsloth (2-5x faster, 80% less VRAM), Axolotl, Hugging Face PEFT. Dataset preparation for GSD-dialect training: DACP bundles, YAML schemas, mission pack structures. GGUF export pipeline from fine-tuned checkpoint to servable model.</p>
+      </a>
+
+      <a href="page.html?doc=04-production-pipeline" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Model-to-Production Pipeline</h3>
+        <div class="meta"><span class="tag tag-pipeline">Pipeline</span> Synthesis &middot; Operations layer</div>
+        <p>End-to-end pipeline: model selection, quantization, serving, monitoring. Eval harness for GSD-specific tasks: DACP bundle generation, YAML validation, mission pack authoring. A/B testing between base model and LoRA adapter. Continuous improvement loop with regression detection. Deployment patterns for always-on inference.</p>
+      </a>
+
+      <a href="page.html?doc=05-claude-code-integration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Claude Code Integration</h3>
+        <div class="meta"><span class="tag tag-claude">Claude</span> Synthesis &middot; Routing layer</div>
+        <p>ANTHROPIC_BASE_URL redirection to local inference endpoint. Task routing strategy: scaffolding and YAML validation to local model, synthesis and judgment to Anthropic API. LM Studio 0.4.1+ and Ollama Anthropic Messages API support. GSD-dialect fine-tuned model as lightweight subagent in wave execution. Cost analysis: local vs. API per task category.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>GPU VRAM architecture</td><td>M1, M2, M3</td><td>CFU, AIH</td></tr>
+        <tr><td>Quantization (GGUF/AWQ/GPTQ)</td><td>M2, M1, M4</td><td>CFU, AIH</td></tr>
+        <tr><td>DACP bundle protocol</td><td>M3, M5</td><td>CFU, MST, AIH</td></tr>
+        <tr><td>Claude Code configuration</td><td>M5, M4</td><td>AIH, CFU</td></tr>
+        <tr><td>LoRA / fine-tuning</td><td>M3, M4</td><td>AIH, CFU</td></tr>
+        <tr><td>Inference serving APIs</td><td>M1, M5</td><td>TCP, SYS, CFU</td></tr>
+        <tr><td>Model eval and benchmarks</td><td>M4, M2</td><td>AIH</td></tr>
+        <tr><td>Task routing / Amiga Principle</td><td>M5, M4</td><td>AIH, CFU, MST</td></tr>
+        <tr><td>GSD wave execution</td><td>M5, M3</td><td>MST, CFU, AIH</td></tr>
+        <tr><td>Docker / container deployment</td><td>M4</td><td>K8S, SYS, CFU</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+LOCAL INTELLIGENCE STACK -- THE AMIGA PRINCIPLE
+===============================================================
+
+  SHELL LAYER (Claude Code)
+  +-----------------------------------------------------------+
+  |  ANTHROPIC_BASE_URL routing                                |
+  |  Task complexity classifier                                |
+  |  High-judgment --&gt; Anthropic API (Opus/Sonnet)             |
+  |  Deterministic --&gt; Local inference endpoint                |
+  +-----------------------------------------------------------+
+        |                                    |
+        v                                    v
+  +------------------+              +------------------+
+  | Anthropic API    |              | Local Inference  |
+  | Opus / Sonnet    |              | Ollama / vLLM    |
+  | Synthesis tasks  |              | LM Studio        |
+  | Cross-module     |              | Scaffolding      |
+  | Judgment calls   |              | YAML validation  |
+  +------------------+              +------------------+
+                                           |
+                                    +------+------+
+                                    |             |
+                              +-----------+ +-----------+
+                              | Base Model| | LoRA      |
+                              | Qwen/Dev  | | Adapter   |
+                              | General   | | GSD-tuned |
+                              +-----------+ +-----------+
+                                           |
+                                    +------+------+
+                                    | GPU Hardware |
+                                    | RTX 4060 Ti  |
+                                    | 8GB VRAM     |
+                                    +-------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Inference Runtimes] ------&gt; [M2: GPU &amp; Quantization]
+       |                                   |
+       v                                   v
+  [M4: Production Pipeline] &lt;----- [M3: LoRA Training]
+       |
+       v
+  [M5: Claude Code Integration]
+
+  Parallel tracks:
+    Track A: M1 + M2 (inference + hardware)
+    Track B: M3 (LoRA + training)
+    Synthesis: M4 + M5 (pipeline + Claude Code)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Local LLM &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1189 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Technology / Systems Engineering ──────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo  - section headers
+\definecolor{secondary}{HTML}{0277BD}     % Electric blue - subsection headers
+\definecolor{tertiary}{HTML}{00695C}      % Teal          - subsubsection headers
+\definecolor{accent}{HTML}{1565C0}        % Bright blue   - highlights
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Indigo tint   - quote boxes
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{E0F2F1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{gpugreen}{HTML}{2E7D32}
+
+% ── Section Formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{warnbox}{
+  colback=white, colframe=warnred,
+  arc=2pt, boxrule=0.8pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Local LLM + Claude Code}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem --- Tibsfox},
+  pdftitle={Local Inference, LoRA Training, and Claude Code Supercharging -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Local Inference, LoRA Training,\\[0.3em]and Claude Code Supercharging}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{vLLM · Ollama · LM Studio · GPU Kernels · Fine-Tuning Pipelines}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Running Your Own Intelligence on Your Own Hardware}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Local LLM Ecosystem --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Execution}
+\metafield{Depends On:}{GSD Skill Creator v1.49+, DACP milestone, Claude Code}
+\metafield{Context:}{Deep Research Mission --- cold start from directive}
+
+\subsection{Vision}
+
+There is a principle baked into the GSD ecosystem that could have been written for this exact moment in AI hardware history: the Amiga Principle. When Commodore shipped the Amiga in 1985, they did something radical --- they offloaded the OS's heavy lifting onto three specialized chips (Agnus, Denise, Paula) rather than burdening the single 68000 CPU. The result was a machine that punched a decade ahead of its clock speed. Today, that same logic applies to a developer running Claude Code on consumer hardware. You have a GPU sitting in your workstation. It is not just a rendering card anymore --- it is a dedicated inference engine waiting to be configured, trained, and wired into your workflow.
+
+This mission addresses a specific architectural question: what does it look like when a developer stops paying per-token to run scaffolding tasks, and instead routes the deterministic, repetitive, or domain-specific work through a local model they own and have shaped? The answer is a layered stack: an inference runtime (Ollama, vLLM, or LM Studio serving models over an OpenAI-compatible API), a local model trained or fine-tuned via LoRA on domain-specific data, and Claude Code redirected via \texttt{ANTHROPIC\_BASE\_URL} to treat the local model as its backend.
+
+The GSD architecture already thinks this way. Wave-based parallel execution, fresh-context subagents, the DACP three-part bundle --- all of these are architectural responses to the context window as bottleneck. A local model sitting on a 24GB RTX 4090 running \texttt{Qwen3.5-35B-A3B} at 213 tokens/second is a \emph{context window that costs nothing}. You can run it continuously, route entire sub-tasks through it, and reserve the Opus-class reasoning for the judgment-heavy synthesis work. The Amiga did not replace the 68000 with a faster chip. It gave the 68000 partners. That is the vision here.
+
+The deeper insight --- the one that makes this worth executing as a full mission rather than just a quick tutorial --- is the LoRA layer. A quantized base model (say, Qwen3-Coder or Devstral) is excellent general-purpose infrastructure. But a model fine-tuned on your GSD YAML schemas, your DACP bundle patterns, your mission pack structures, your PNW bioregion taxonomy --- that model becomes a collaborator that speaks your dialect. This mission packages the full pipeline from hardware selection through inference runtime through training framework through Claude Code integration, so the GSD ecosystem can build and operate its own intelligent infrastructure rather than renting someone else's.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+
+\item \textbf{Per-token costs at scale compound painfully.} Running Claude Code daily for real development work --- not vibe coding, but genuine multi-session agentic work across the GSD skill creator, mission packs, and research pipeline --- can reach \$100--\$200/month on a MAX subscription. Tasks like scaffolding generation, YAML validation, boilerplate synthesis, and schema consistency checking are high-frequency but not high-judgment; they are poor candidates for Opus-class compute yet currently run there by default.
+
+\item \textbf{The inference tooling landscape is fragmented and poorly documented at the integration seam.} Three major local inference runtimes exist (vLLM, Ollama, LM Studio), each optimized for different deployment contexts. The critical step of wiring any of them to Claude Code via \texttt{ANTHROPIC\_BASE\_URL} has only been stabilized since LM Studio 0.4.1 (January 2026) and Ollama's Anthropic Messages API support. Most existing tutorials target either inference \emph{or} Claude Code integration, not the full stack from hardware to workflow.
+
+\item \textbf{Training and LoRA are perceived as expert-only territory.} Frameworks like Unsloth (2--5$\times$ faster, 80\% less VRAM) and Axolotl have radically democratized fine-tuning, yet developers still perceive the training pipeline as prohibitively complex. The GGUF export step --- converting a fine-tuned checkpoint to a format Ollama or LM Studio can serve --- remains underdocumented in the context of workflow integration.
+
+\item \textbf{GPU hardware selection guidance is inconsistent or hardware-vendor-biased.} A developer choosing between an RTX 4090 (24GB VRAM), RTX 5090 (32GB), or a used RTX 3090 (24GB) for this specific workload --- running 8B--35B models with LoRA fine-tuning and serving them to Claude Code --- needs quantized VRAM math, not benchmark theater.
+
+\item \textbf{Custom fine-tuned models degrade silently without eval infrastructure.} Once a developer trains a LoRA adapter on their domain data, there is no standard pipeline for evaluating whether the adapter actually improves task performance on GSD-specific workflows (DACP bundle generation, YAML schema synthesis, mission pack authoring) versus the base model. Without evals, the fine-tuning loop has no feedback signal.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Local Intelligence Stack:} A three-layer architecture where inference runtimes serve as the operating system, LoRA adapters serve as the application layer, and Claude Code serves as the shell that routes work to the right layer based on task complexity.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+┌─────────────────────────────────────────────────────────────────┐
+│                    LOCAL INTELLIGENCE STACK                      │
+│                     (The Amiga Principle)                        │
+└─────────────────────────────────────────────────────────────────┘
+
+  ┌──────────────────────────────────────────────────────────────┐
+  │  CLAUDE CODE (shell / orchestrator)                          │
+  │  Sets ANTHROPIC_BASE_URL → routes to local or Anthropic API  │
+  └───────────────────────┬──────────────────────────────────────┘
+                          │ OpenAI-compatible /v1/messages
+          ┌───────────────┼───────────────┐
+          │               │               │
+  ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼───────────┐
+  │    Ollama    │ │    vLLM     │ │   LM Studio      │
+  │  (CLI/API)   │ │ (high-thru- │ │   (GUI+API)      │
+  │  port 11434  │ │  put serve) │ │  port 1234       │
+  └───────┬──────┘ └──────┬──────┘ └─────┬────────────┘
+          │               │               │
+  ┌───────▼───────────────▼───────────────▼────────────┐
+  │              MODEL LAYER                            │
+  │  Base Models: Qwen3-Coder, Devstral, Llama4,       │
+  │               GLM-4.7-Flash, Phi-4                  │
+  │  + LoRA Adapters: GSD-dialect, DACP-tuned,         │
+  │                   domain-specific fine-tunes        │
+  └───────────────────────┬────────────────────────────┘
+                          │
+  ┌───────────────────────▼────────────────────────────┐
+  │              GPU LAYER                              │
+  │  CUDA kernels · PagedAttention · FlashAttention2   │
+  │  GGUF / GPTQ / AWQ / FP8 quantization              │
+  │  RTX 3090/4090/5090 · Apple Metal · AMD ROCm       │
+  └────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE 1           MODULE 2           MODULE 3
+  Inference          GPU + Quant        LoRA Training
+  Runtime Land-      Architecture       Frameworks
+  scape                                 
+  (Ollama, vLLM,     (VRAM math,        (Unsloth, Axolotl,
+  LM Studio,         quantization       Torchtune, PEFT)
+  llama.cpp)         formats, GPU
+                     selection)
+       │                  │                  │
+       └──────────┬───────┘                  │
+                  │                          │
+  MODULE 4        │              MODULE 5    │
+  Model-to-       │              Claude Code │
+  Production      │              Integration │
+  Pipeline        │              & GSD-      │
+  (GGUF export,   │              Dialect     │
+  merge, deploy)  │              Fine-Tuning │
+                  └─────────────────────────┘
+                         SYNTHESIS:
+                     Local Intelligence
+                       Stack for GSD
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Inference Runtime Landscape}
+Survey and compare vLLM, Ollama, LM Studio, and llama.cpp across dimensions of throughput, API compatibility, ease of use, hardware support, and Claude Code integration readiness. Include PagedAttention mechanics, continuous batching, OpenAI-compatible endpoint behavior, and practical deployment patterns.
+
+\subsubsection{Module 2: GPU Architecture and Quantization}
+Map VRAM requirements across model sizes and quantization levels (Q4, Q8, FP8, FP4, GGUF). Establish hardware selection guidance for the GSD use case (single developer, 8B--35B models, LoRA training). Cover the KV cache growth problem, context length VRAM math, and the performance envelope of consumer versus prosumer GPU tiers.
+
+\subsubsection{Module 3: LoRA and Fine-Tuning Frameworks}
+Deep survey of Unsloth, Axolotl, Torchtune, and the Hugging Face PEFT stack. Cover LoRA vs QLoRA vs full fine-tuning decision criteria, dataset preparation patterns, training configuration, checkpoint export, and the GGUF conversion pipeline. Include practical framework selection guidance based on VRAM budget and multi-GPU requirements.
+
+\subsubsection{Module 4: Model-to-Production Pipeline}
+The critical \emph{last mile}: converting a fine-tuned checkpoint (or base model) to a deployable GGUF, loading it into Ollama/LM Studio/vLLM, validating inference quality, and serving it with a stable OpenAI-compatible API. Covers llama.cpp as the GGUF runtime backbone, Modelfile construction in Ollama, and quantization tradeoff decisions at export time.
+
+\subsubsection{Module 5: Claude Code Integration and GSD-Dialect Fine-Tuning}
+The integration seam: redirecting Claude Code via \texttt{ANTHROPIC\_BASE\_URL}, configuring the five model slots Claude Code expects, managing context size settings (25K+ tokens recommended), and task routing strategies (local for scaffolding, Anthropic API for synthesis). Include the GSD-dialect dataset design pattern --- training on DACP bundles, YAML schemas, and mission pack structures to create a collaborator that speaks the GSD vocabulary.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset YAML -- Local LLM Mission
+# Activation Profile: Squadron (12 roles)
+
+chipset:
+  agnus:          # Orchestration / DMA / Context Management
+    model: claude-opus-4-6
+    budget: 30%
+    tasks:
+      - cross-module synthesis
+      - GSD-dialect dataset design
+      - Claude Code integration architecture
+      - fine-tuning eval framework design
+
+  denise:         # Display / Output Rendering
+    model: claude-sonnet-4-6
+    budget: 60%
+    tasks:
+      - runtime comparison tables
+      - VRAM reference documentation
+      - framework comparison writeups
+      - training configuration examples
+      - Modelfile and config templates
+
+  paula:          # Audio / I/O / Anticipatory
+    model: claude-haiku-4-5-20251001
+    budget: 10%
+    tasks:
+      - shared schemas and templates
+      - YAML config scaffolding
+      - document structure generation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item vLLM, Ollama, LM Studio, and llama.cpp inference runtime comparison
+  \item GPU hardware selection for 8B--70B models on consumer/prosumer hardware
+  \item VRAM requirements table across quantization levels and context lengths
+  \item Unsloth, Axolotl, and Torchtune fine-tuning framework comparison
+  \item LoRA and QLoRA training pipeline from dataset to GGUF export
+  \item Claude Code integration via \texttt{ANTHROPIC\_BASE\_URL}
+  \item GSD-dialect dataset design pattern for domain-specific fine-tuning
+  \item Task routing architecture (local vs.\ Anthropic API by task type)
+  \item Eval framework for validating fine-tuned adapter quality on GSD tasks
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Multi-node distributed training at cluster scale (beyond single workstation)
+  \item Cloud GPU services (Colab, Lambda, Vast.ai) --- local-first focus only
+  \item Reinforcement learning / RLHF beyond basic GRPO introductions
+  \item Model architecture internals (transformer math, attention derivations)
+  \item Windows-specific deployment quirks (WSL2, CUDA in Docker on Windows)
+  \item Mobile or edge device inference (iOS, Android, Raspberry Pi)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item A clear runtime selection decision tree is produced matching use case to tool (developer scripting, GUI exploration, high-throughput serving, Claude Code integration)
+  \item VRAM requirement tables are accurate and cover all four primary quantization formats (Q4\_K\_M, Q8\_0, FP8, full FP16) across 7B, 13B, 35B, and 70B model sizes
+  \item A working Claude Code integration recipe is validated: set \texttt{ANTHROPIC\_BASE\_URL}, configure model slots, test with a real coding task
+  \item LoRA training framework selection guidance is concrete: given a VRAM budget and multi-GPU status, a clear recommendation is produced
+  \item The GGUF export pipeline is documented end-to-end: Unsloth training → checkpoint merge → llama.cpp conversion → Ollama Modelfile → serving
+  \item A GSD-dialect dataset schema is defined: what examples to collect, what format to use, what tasks to optimize for (DACP bundles, YAML schemas, mission packs)
+  \item A minimum viable eval harness is specified: 5--10 benchmark tasks that measure whether the LoRA adapter improves GSD-specific output quality vs.\ base model
+  \item Task routing guidance covers at least four task categories: scaffolding (local), synthesis (Anthropic API), YAML validation (local), cross-module integration (Anthropic API)
+  \item Hardware selection guidance is unambiguous for three developer tiers: budget (\$250--\$500), serious (\$500--\$1000), cutting-edge (\$1000--\$2000)
+  \item The mission package is self-contained: a GSD orchestrator can begin execution from Stage 3 alone without returning to this document for clarification
+  \item All inference runtime configurations include working command-line examples with ports, model names, and API endpoint verification
+  \item The through-line connecting local inference to the Amiga Principle and GSD ecosystem philosophy is explicitly drawn in the synthesis module
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection Point} \\
+\midrule
+GSD Skill Creator v1.49+ & Upstream & Local models serve as lightweight subagents in skill wave execution \\
+DACP Milestone & Data Source & DACP three-part bundles are primary training examples for GSD-dialect LoRA \\
+Chipset Architecture Vision & Parallel & Paula/Denise model assignments map to local model tier selection \\
+GSD-OS Desktop Vision & Downstream & Local inference server is infrastructure for on-device GSD-OS intelligence \\
+Wasteland/DoltHub Federation & Parallel & Local models enable offline-capable ZFC auditors and Wasteland agents \\
+College of Knowledge & Downstream & Local models tuned on The Space Between content for math tutoring \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The deepest lesson of the Amiga was not about chips. It was about the \emph{spaces between} --- the architecture that let three specialized chips communicate without collisions, passing tokens of work between them in a way that felt, from the outside, like one unified intelligence. The local inference stack described in this mission is the same structure applied to a modern developer workstation. The GPU is not a replacement for Claude. It is a partner --- cheap, fast, domain-tunable, and always available.
+
+The GSD principle that markdown is non-deterministic while code is deterministic finds its hardware analog here. A prompt sent to a remote API is a bet on network latency, pricing tiers, and rate limits. An inference call to a local llama-server is a function call --- deterministic in availability, bounded in cost, and increasingly competitive in quality as model compression research matures. Building the GSD-dialect LoRA adapter is the act of writing that function in your own language. It does not replace the judgment of Opus-class reasoning; it fills the spaces between those judgments with fluent, contextually-aware scaffolding that speaks the vocabulary of the ecosystem it was trained on.
+
+% ════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Local LLM Ecosystem --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from primary sources verified as of March 2026. Each module section corresponds to a research module in Stage 1. Agents executing Stage 3 waves should load the relevant module section into context before beginning their component.
+
+\textbf{Key source organizations and repositories:}
+\begin{itemize}[leftmargin=*]
+  \item vLLM project: \url{https://github.com/vllm-project/vllm} and \url{https://blog.vllm.ai}
+  \item Ollama documentation: \url{https://docs.ollama.com}
+  \item LM Studio blog: \url{https://lmstudio.ai/blog}
+  \item Unsloth documentation: \url{https://unsloth.ai/docs}
+  \item Axolotl project: \url{https://github.com/axolotl-ai-cloud/axolotl}
+  \item PyTorch Torchtune: \url{https://github.com/pytorch/torchtune}
+  \item Hugging Face PEFT: \url{https://huggingface.co/docs/peft}
+  \item NVIDIA developer documentation: \url{https://docs.nvidia.com}
+  \item LocalLLM.in hardware benchmarks: \url{https://localllm.in}
+  \item Unsloth Claude Code integration guide: \url{https://unsloth.ai/docs/basics/claude-code}
+  \item LM Studio Claude Code guide: \url{https://lmstudio.ai/blog/claudecode}
+\end{itemize}
+
+\subsection{Module 1: Inference Runtime Landscape}
+
+\subsubsection{vLLM --- High-Throughput Production Inference}
+
+vLLM originated in the Sky Computing Lab at UC Berkeley and has evolved into the de facto standard for production LLM serving. Its core innovation is \textbf{PagedAttention}, which manages key-value caches using operating-system-style virtual memory --- treating GPU memory in pages rather than monolithic allocations. This enables near-zero memory waste on KV cache and dramatically larger effective batch sizes.
+
+Key technical features: continuous batching (inference requests are processed in a dynamic stream rather than static batches, maximizing GPU utilization), tensor and pipeline parallelism for multi-GPU setups, chunked prefill, prefix caching, guided decoding, and speculative decoding via a smaller draft model. As of late 2025, vLLM has integrated NVIDIA's FlashInfer library for high-performance FP8 attention and FP4 GEMMs on Blackwell architecture, achieving up to 4$\times$ higher throughput compared to Hopper GPUs.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Attribute} & \tableheader{vLLM Detail} \\
+\midrule
+Primary use case & Production serving, high concurrency, multi-user API \\
+Interface & Python API + OpenAI-compatible REST (port 8000) \\
+Model format & Hugging Face SafeTensors, GPTQ, AWQ, FP8 \\
+Multi-GPU & Yes --- tensor parallel, pipeline parallel, data parallel \\
+GPU support & NVIDIA (primary), AMD ROCm, Intel XPU, TPU \\
+API compatibility & OpenAI /v1/chat/completions, full streaming \\
+Claude Code integration & Via \texttt{ANTHROPIC\_BASE\_URL} with LiteLLM proxy \\
+Strengths & Highest throughput, best MoE optimization, production-grade \\
+Weaknesses & Complex setup, higher VRAM pre-allocation, overkill for solo dev \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Ollama --- Developer-First CLI Runtime}
+
+Ollama is built on llama.cpp and exposes an OpenAI-compatible REST API at \texttt{localhost:11434} by default. Its design philosophy is minimal and composable: \texttt{ollama run llama3.2} pulls, quantizes, and serves a model in one command. The Modelfile system allows custom model configurations (system prompts, temperature, context length) as version-controllable files.
+
+In 2025, Ollama shipped major capability upgrades: a native desktop client for macOS and Windows (July 2025), a multimodal vision engine for VLMs (May 2025), streaming tool calling compatible with Qwen3, Llama 4, and Devstral (May 2025), and Anthropic Messages API compatibility enabling direct Claude Code integration. As of early 2026, \texttt{ollama pull} exposes cloud-backed variants (e.g., \texttt{kimi-k2.5:cloud}) using the same interface as local models.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Attribute} & \tableheader{Ollama Detail} \\
+\midrule
+Primary use case & Developer scripting, application integration, always-on backend \\
+Interface & CLI (\texttt{ollama run}) + OpenAI-compatible REST + Anthropic Messages API \\
+Model format & GGUF (primary), all quantization levels Q2\_K through Q8\_0 \\
+Multi-GPU & Limited (single-GPU primary, experimental multi-GPU) \\
+GPU support & NVIDIA CUDA, Apple Silicon Metal, AMD ROCm \\
+Claude Code integration & Native: set \texttt{ANTHROPIC\_BASE\_URL=http://localhost:11434} \\
+Strengths & Simplest DX, best for scripting/CI/CD, Docker-friendly, free/OSS \\
+Weaknesses & No streaming tool calls (as of 2024), lower raw throughput than vLLM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{LM Studio --- GUI-First Exploration and Serving}
+
+LM Studio is built on an Electron/React frontend with a Python inference backend. It targets non-technical users with drag-and-drop model installation and a built-in chat interface, but also ships an OpenAI-compatible local server for programmatic use. LM Studio 0.4.1 (January 2026) added an Anthropic-compatible \texttt{/v1/messages} endpoint, enabling direct Claude Code integration by setting \texttt{ANTHROPIC\_BASE\_URL=http://localhost:1234}.
+
+The model library integrates with Hugging Face, offering 1000+ pre-configured models with built-in quantization selection. LM Studio excels on integrated GPUs and Apple Silicon unified memory architectures. Its 2025 updates include team collaboration workspaces, mobile companion apps, and advanced performance monitoring.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Attribute} & \tableheader{LM Studio Detail} \\
+\midrule
+Primary use case & Model exploration, non-technical users, visual parameter tuning \\
+Interface & GUI + OpenAI API (port 1234) + Anthropic Messages API \\
+Model format & GGUF primary, MLX for Apple Silicon \\
+Multi-GPU & Limited \\
+GPU support & NVIDIA, Apple Silicon (optimized), integrated GPUs \\
+Claude Code integration & \texttt{ANTHROPIC\_BASE\_URL=http://localhost:1234}, token \texttt{lmstudio} \\
+Strengths & Best UX for beginners, visual monitoring, iGPU optimization \\
+Weaknesses & Proprietary, no Docker, limited CLI scripting support \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Runtime Selection Decision Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Use Case} & \tableheader{Primary Tool} & \tableheader{Secondary} & \tableheader{Notes} \\
+\midrule
+Claude Code scripting & Ollama & LM Studio & Set \texttt{ANTHROPIC\_BASE\_URL}, simplest path \\
+Multi-user API serving & vLLM & Ollama & PagedAttention essential for concurrency \\
+Model exploration & LM Studio & Ollama & GUI model browser invaluable \\
+CI/CD + Docker & Ollama & vLLM & Container-native, headless-ready \\
+Apple Silicon & LM Studio & Ollama & MLX format gives 30--40\% Metal speedup \\
+Training + serving same box & Ollama & vLLM & Run Unsloth training, export GGUF, serve via Ollama \\
+GSD subagent infrastructure & Ollama & vLLM & Always-on API, scriptable Modelfiles \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: GPU Architecture and Quantization}
+
+\subsubsection{VRAM Requirements by Model Size and Quantization}
+
+VRAM usage during inference has two components: (1) \textbf{fixed cost} --- model weights, CUDA overhead, and system buffers, and (2) \textbf{variable cost} --- KV cache that grows linearly with context length. For a 7B model, each 1,000 tokens consumes approximately 0.11 GB additional VRAM. This means a 32K context session can consume 3.5 GB in KV cache alone, on top of the model weights.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model Size} & \tableheader{Q4\_K\_M} & \tableheader{Q8\_0} & \tableheader{FP16} & \tableheader{Min GPU} & \tableheader{Notes} \\
+\midrule
+3B params & 2.0 GB & 3.5 GB & 6 GB & 4 GB VRAM & Phi-4, Gemma 3 \\
+7--8B params & 4.5 GB & 8.5 GB & 16 GB & 8 GB VRAM & Llama 3.1 8B, Qwen2.5 7B \\
+13B params & 7.5 GB & 14 GB & 26 GB & 16 GB VRAM & Llama 2 13B \\
+27--35B params & 15--18 GB & 28--32 GB & 54+ GB & 24 GB VRAM & Qwen3.5 35B A3B (MoE) \\
+70B params & 38 GB & 70 GB & 140 GB & Multi-GPU & Llama 3.3 70B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{GPU Hardware Selection Guide}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{GPU} & \tableheader{VRAM} & \tableheader{Price} & \tableheader{GSD Recommendation} \\
+\midrule
+Budget & Intel Arc B580 & 12 GB & \$249 & Experimentation only; max 7B Q4 \\
+Budget & RTX 4060 Ti 16GB & 16 GB & \$499 & Serious development; 13B Q4 \\
+Value & RTX 3090 (used) & 24 GB & \$800--900 & Strong sweet spot; 35B MoE Q4, LoRA training \\
+Serious & RTX 4090 & 24 GB & \$1,999 & 213 tok/s on 8B; best single-card LoRA training \\
+Cutting-edge & RTX 5090 & 32 GB & \$1,999 & 35B dense Q4 with room for KV cache \\
+Prosumer & Used A100 80GB & 80 GB & \$3,000--5,000 & 70B Q4, multi-session concurrency \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The RTX 3090 and RTX 4090 (both 24 GB VRAM) represent the practical sweet spot for the GSD use case. The MoE architecture of Qwen3.5-35B-A3B activates only a fraction of parameters at inference time, making it runnable at 24 GB with Q4 quantization while delivering capability competitive with 70B dense models. The RTX 5090's GDDR7 memory provides significant advantages for MoE expert routing efficiency.
+
+\subsubsection{Quantization Format Guide}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Format} & \tableheader{Bits} & \tableheader{Quality} & \tableheader{Use When} \\
+\midrule
+FP16 & 16 & Baseline & Maximum quality, have the VRAM \\
+Q8\_0 & 8 & $\approx$FP16 & Near-lossless, 50\% VRAM savings \\
+Q4\_K\_M & 4 & Very good & Best speed/quality tradeoff; recommended default \\
+Q3\_K\_M & 3 & Acceptable & Tight VRAM budgets; noticeable quality drop \\
+Q2\_K & 2 & Degraded & Last resort only \\
+FP8 & 8 & Near FP16 & vLLM production serving on H100/B200 \\
+NVFP4 & 4 & Good (NVIDIA) & Blackwell GPUs only; vLLM auto-selects \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3: LoRA and Fine-Tuning Frameworks}
+
+\subsubsection{LoRA and QLoRA --- The Core Technique}
+
+Low-Rank Adaptation (LoRA) works by adding pairs of trainable low-rank matrices to the frozen base model weights, optimizing only those additions rather than the full parameter set. This reduces trainable parameters by approximately 100$\times$ compared to full fine-tuning. Instead of updating all 70 billion numbers in a 70B model, LoRA optimizes matrices A and B representing approximately 1\% of the weight space.
+
+QLoRA (Quantized LoRA) extends this by quantizing the base model to 4-bit precision during training, reducing VRAM requirements by 75\% compared to FP16 LoRA, with minimal accuracy degradation when dynamic quantization is used (Unsloth's approach recovers most of the QLoRA accuracy gap).
+
+\textbf{Decision rule:} Use LoRA when VRAM allows loading the model in 16-bit. Use QLoRA when VRAM is tight. Only use full fine-tuning (FFT) when LoRA demonstrably fails to reach required quality --- which is rare. Research confirms that when done correctly, LoRA can match FFT quality.
+
+\subsubsection{Framework Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Framework} & \tableheader{Speed} & \tableheader{VRAM} & \tableheader{Multi-GPU} & \tableheader{Best For} \\
+\midrule
+Unsloth & 2--5$\times$ faster & 80\% less & OSS: 1 GPU only; Pro: 8+ GPUs & Solo dev, tight hardware, fast iteration \\
+Axolotl & Moderate & Standard & Yes (FSDP, DeepSpeed) & Production multi-GPU, full RLHF pipeline \\
+Torchtune & Fast (PyTorch compile) & Efficient & Yes (FSDP2, multi-node) & PyTorch devs wanting low-level control \\
+HF PEFT & Standard & Standard & Via Accelerate & Existing Transformers users \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{GSD recommendation}: For a solo developer on a single RTX 3090/4090, \textbf{Unsloth} is the correct choice. Its 2--5$\times$ speed advantage and 80\% VRAM savings on single-GPU LoRA are decisive at this scale. Unsloth's custom Triton kernels achieve these gains without approximation or quantization accuracy degradation. When the GSD ecosystem needs multi-GPU training (e.g., training on the full Space Between textbook corpus), migrate to Axolotl.
+
+\subsubsection{Axolotl 2025 Capabilities}
+
+Axolotl v0.8.x (2025) added Quantization-Aware Training (QAT), sequence parallelism via Ring FlashAttention for long-context fine-tuning, GRPO for reasoning training, and full RLHF support. QAT allows simultaneous fine-tuning and quantization, resulting in quantized models with perplexity within 0.015 of the unquantized baseline (vs.\ 0.08 gap for post-training quantization alone --- a 5$\times$ improvement).
+
+\subsubsection{GSD-Dialect Dataset Design}
+
+To train a LoRA adapter that speaks the GSD vocabulary, the following training data categories are recommended:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Data Category} & \tableheader{Description and Source} \\
+\midrule
+DACP bundles & Completed three-part bundles (intent + structured data + executable code) from v1.49+ sessions \\
+Mission pack YAML & Complete mission package YAML files from skill-creator executions \\
+Milestone/Slice/Task hierarchies & Spec-to-implementation examples across GSD build history \\
+Chipset configuration YAML & Agnus/Denise/Paula role assignment examples with rationale \\
+Wave execution plans & Wave 0--3 task decompositions with parallel track mappings \\
+CRAFT agent communications & Cross-module specialist agent message patterns \\
+Amiga Principle explanations & Passages from vision docs applying the Amiga metaphor to technical decisions \\
+Space Between excerpts & Key mathematical passages with LaTeX formatting intact \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Format: ShareGPT/ChatML conversational format. Target: 500--2,000 high-quality examples. Quality over quantity --- curate for correctness, not volume. Recommended base model: \texttt{Qwen3-Coder} or \texttt{Devstral} (both trained specifically for agentic coding and tool-calling workflows).
+
+\subsection{Module 4: Model-to-Production Pipeline}
+
+\subsubsection{The GGUF Export Pipeline}
+
+After training a LoRA adapter with Unsloth, the deployment path to Ollama or LM Studio is:
+
+\begin{asciibox}
+1. TRAIN (Unsloth)
+   trainer.train()
+   model.save_pretrained("gsd-dialect-lora")
+
+2. MERGE adapter into base model weights
+   model.save_pretrained_merged("gsd-dialect-full",
+     tokenizer, save_method="merged_16bit")
+
+3. CONVERT to GGUF (Unsloth handles via llama.cpp)
+   model.save_pretrained_gguf("gsd-dialect-gguf",
+     tokenizer, quantization_method="q4_k_m")
+   # Produces: gsd-dialect-gguf/model-Q4_K_M.gguf
+
+4. CREATE Modelfile (Ollama)
+   FROM ./model-Q4_K_M.gguf
+   SYSTEM "You are a GSD ecosystem assistant..."
+   PARAMETER num_ctx 32768
+
+5. BUILD and SERVE (Ollama)
+   ollama create gsd-dialect -f Modelfile
+   ollama run gsd-dialect
+   # API available at localhost:11434/v1/chat/completions
+
+6. VERIFY (health check)
+   curl http://localhost:11434/v1/chat/completions \
+     -H "Content-Type: application/json" \
+     -d '{"model":"gsd-dialect","messages":[...]}'
+\end{asciibox}
+
+For LM Studio: place the GGUF file in the LM Studio models directory (typically \texttt{\textasciitilde/.lmstudio/models/}), then load via the GUI or CLI.
+
+\subsubsection{Quantization Decision at Export Time}
+
+Research shows that training and serving in the same precision preserves accuracy. If planning to serve at Q4, train with QLoRA (4-bit). If serving at Q8 or FP16, train with standard LoRA (16-bit). Unsloth's dynamic 4-bit quantization has largely closed the accuracy gap between LoRA and QLoRA, making Q4\_K\_M a safe default for the GSD use case.
+
+\subsection{Module 5: Claude Code Integration and Task Routing}
+
+\subsubsection{Integration Mechanics}
+
+Claude Code supports custom API endpoints via the \texttt{ANTHROPIC\_BASE\_URL} environment variable. Both Ollama's Anthropic Messages API and LM Studio 0.4.1's \texttt{/v1/messages} endpoint provide compatible interfaces. A context size of at least 25,000 tokens is recommended, as Claude Code's tool-calling and file-editing patterns are context-heavy.
+
+\begin{asciibox}
+# OLLAMA INTEGRATION (persistent)
+export ANTHROPIC_BASE_URL="http://localhost:11434"
+export ANTHROPIC_API_KEY="ollama"  # dummy value, required
+# Add to ~/.bashrc or ~/.zshrc for persistence
+
+# Verify Ollama is serving the right model:
+ollama list                          # see available models
+ollama run gsd-dialect               # test the model
+claude                               # launch Claude Code
+
+# LM STUDIO INTEGRATION
+export ANTHROPIC_BASE_URL="http://localhost:1234"
+export ANTHROPIC_AUTH_TOKEN="lmstudio"
+# Or in VS Code settings.json:
+# "claudeCode.environmentVariables": [
+#   {"name": "ANTHROPIC_BASE_URL", "value": "http://localhost:1234"},
+#   {"name": "ANTHROPIC_AUTH_TOKEN", "value": "lmstudio"}
+# ]
+
+# LLAMA.CPP DIRECT (for production serving without Ollama)
+./llama-server --model gsd-dialect-Q4_K_M.gguf \
+  --port 8001 --ctx-size 32768 --n-gpu-layers 99
+export ANTHROPIC_BASE_URL="http://localhost:8001"
+\end{asciibox}
+
+\subsubsection{Task Routing Architecture}
+
+Not all Claude Code tasks benefit equally from local inference. The following routing guide maximizes quality while minimizing API costs:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task Type} & \tableheader{Route To} & \tableheader{Model Tier} & \tableheader{Rationale} \\
+\midrule
+YAML/JSON schema generation & Local & Haiku/Small & Deterministic, pattern-matching \\
+DACP bundle scaffolding & Local (fine-tuned) & GSD-dialect & Domain-specific, high frequency \\
+Boilerplate code generation & Local & 8B--13B Q4 & Routine, low judgment required \\
+Mission pack structure & Local (fine-tuned) & GSD-dialect & Uses trained vocabulary \\
+Cross-module synthesis & Anthropic API & Opus & High judgment, rare, worth the cost \\
+Architecture decisions & Anthropic API & Sonnet/Opus & Nuanced reasoning required \\
+Security review & Anthropic API & Sonnet & Safety-critical, no compromise \\
+Mathematical proofs & Anthropic API & Opus & Space Between companion content \\
+Test generation & Local & 8B--13B Q4 & Pattern-matching, high frequency \\
+Commit message drafting & Local & 3B--8B Q4 & Trivially local \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Recommended Models for GSD Workflows (March 2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Params} & \tableheader{Architecture} & \tableheader{Recommended For} \\
+\midrule
+Qwen3.5-35B-A3B & 35B MoE & MoE (3B active) & Primary GSD model; agentic coding, 24GB VRAM \\
+Devstral & 24B & Dense & Strong tool calling, Claude Code workflows \\
+Qwen3-Coder & 8B--32B & Dense & Base model for GSD-dialect LoRA training \\
+GLM-4.7-Flash & 6B MoE & MoE & Fast, cheap scaffolding tasks \\
+Phi-4 & 14B & Dense & Good quality/VRAM ratio for mid-tier GPU \\
+Llama 4 Scout & 17B MoE & MoE & Meta ecosystem; good multi-task \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Concern} & \tableheader{Severity} & \tableheader{Mitigation} \\
+\midrule
+Training data leakage & HIGH & Never include raw API keys, credentials, or PII in training datasets \\
+Model evaluation before deployment & HIGH & Run the eval harness before replacing Claude API calls with local model \\
+GSD-dialect hallucination risk & MEDIUM & Fine-tuned models may confidently hallucinate GSD-specific YAML schemas; evals catch this \\
+VRAM exhaustion during training & MEDIUM & Use Unsloth's \texttt{max\_seq\_length} parameter; monitor with \texttt{nvidia-smi dmon} \\
+License compliance & MEDIUM & Verify model licenses (Llama 4 has commercial use restrictions above certain monthly users) \\
+Thermal management & LOW & Sustained GPU training generates significant heat; ensure adequate airflow \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Technical Sources}
+\begin{itemize}[leftmargin=*]
+  \item vLLM project documentation. \textit{vLLM: A High-Throughput and Memory-Efficient Inference and Serving Engine for LLMs}. UC Berkeley / vLLM community, 2023--2026. \url{https://github.com/vllm-project/vllm}
+  \item Kwon, W.\ et al.\ \textit{Efficient Memory Management for Large Language Model Serving with PagedAttention}. UC Berkeley, SOSP 2023.
+  \item vLLM Blog. \textit{SemiAnalysis InferenceMAX: vLLM and NVIDIA Accelerate Blackwell Inference}. October 2025. \url{https://blog.vllm.ai/2025/10/09/blackwell-inferencemax.html}
+  \item NVIDIA Developer Documentation. \textit{vLLM Overview}. \url{https://docs.nvidia.com/deeplearning/frameworks/vllm-release-notes/overview.html}
+  \item Gordić, A. \textit{Inside vLLM: Anatomy of a High-Throughput LLM Inference System}. August 2025. \url{https://www.aleksagordic.com/blog/vllm}
+\end{itemize}
+
+\subsubsection{Inference Tooling}
+\begin{itemize}[leftmargin=*]
+  \item Ollama Documentation. \textit{Claude Code Integration}. \url{https://docs.ollama.com/integrations/claude-code}
+  \item LM Studio Blog. \textit{Use your LM Studio Models in Claude Code}. January 2026. \url{https://lmstudio.ai/blog/claudecode}
+  \item Glukhov, R. \textit{Ollama vs vLLM vs LM Studio: Best Way to Run LLMs Locally in 2026?} \url{https://www.glukhov.org/post/2025/11/hosting-llms-ollama-localai-jan-lmstudio-vllm-comparison/}
+  \item LocalLLM.in. \textit{The Best GPUs for Local LLM Inference in 2025}. August 2025. \url{https://localllm.in/blog/best-gpus-llm-inference-2025}
+  \item Docker Blog. \textit{Claude Code with Docker: Local Models, MCP, Sandboxes}. March 2026. \url{https://www.docker.com/blog/run-claude-code-with-docker/}
+  \item marcomprado. \textit{local-claude-code}. GitHub. \url{https://github.com/marcomprado/local-claude-code}
+\end{itemize}
+
+\subsubsection{Fine-Tuning Frameworks}
+\begin{itemize}[leftmargin=*]
+  \item Unsloth Documentation. \textit{Fine-tuning LLMs Guide}. \url{https://unsloth.ai/docs/get-started/fine-tuning-llms-guide}
+  \item Unsloth Documentation. \textit{How to Run Local LLMs with Claude Code}. \url{https://unsloth.ai/docs/basics/claude-code}
+  \item Spheron Blog. \textit{Comparing LLM Fine-Tuning Frameworks: Axolotl, Unsloth, and Torchtune}. April 2025. \url{https://blog.spheron.network/comparing-llm-fine-tuning-frameworks-axolotl-unsloth-and-torchtune-in-2025}
+  \item Spheron Blog. \textit{Axolotl vs Unsloth vs TorchTune: Best LLM Fine-Tuning Frameworks in 2026}. \url{https://www.spheron.network/blog/axolotl-vs-unsloth-vs-torchtune/}
+  \item Modal.com. \textit{Best frameworks for fine-tuning LLMs in 2025}. \url{https://modal.com/blog/fine-tuning-llms}
+  \item Meta AI / Llama.com. \textit{Fine-tuning How-to Guides}. \url{https://www.llama.com/docs/how-to-guides/fine-tuning/}
+  \item BentoML. \textit{LLM Inference Handbook: Fine-Tuning}. \url{https://bentoml.com/llm/getting-started/llm-fine-tuning}
+  \item Hyperbolic Labs. \textit{Comparing Fine Tuning Frameworks}. \url{https://www.hyperbolic.ai/blog/comparing-finetuning-frameworks}
+\end{itemize}
+
+% ════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Build a complete, operational Local Intelligence Stack for the GSD ecosystem: an inference runtime (Ollama as primary) serving local models via an OpenAI/Anthropic-compatible API, a GSD-dialect LoRA adapter trained on ecosystem-specific data, and Claude Code configured to route appropriate tasks to the local model while reserving Anthropic API calls for high-judgment synthesis. Deliver all five research modules as a cohesive reference document and executable implementation guide.
+
+\begin{asciibox}
+ARCHITECTURE OVERVIEW -- Wave Execution
+
+  [Wave 0: Foundation]
+  Shared schemas, hardware detection script, VRAM calculator,
+  dataset template, eval harness spec          (Haiku, Sequential)
+
+  [Wave 1A: Inference Track]       [Wave 1B: Training Track]
+  Module 1: Runtime Survey         Module 3: LoRA Frameworks
+  Module 2: GPU/Quant Reference    Module 3b: Dataset Design
+                   (Sonnet, Parallel)
+
+  [Wave 2: Synthesis]
+  Module 4: Production Pipeline
+  Module 5: Claude Code Integration
+  Task Routing Architecture
+  GSD-Dialect Adapter Specification        (Opus, Sequential)
+
+  [Wave 3: Publication + Verification]
+  Final Document Assembly
+  Code Recipe Validation
+  Eval Harness Specification              (Sonnet, Sequential)
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Hardware Layer} --- GPU selection, VRAM budget, thermal considerations
+  \item \textbf{Runtime Layer} --- Ollama, vLLM, LM Studio, llama.cpp serving infrastructure
+  \item \textbf{Model Layer} --- Base model selection, quantization format, GGUF packaging
+  \item \textbf{Adapter Layer} --- LoRA training pipeline, GSD-dialect fine-tuning, GGUF export
+  \item \textbf{Integration Layer} --- Claude Code configuration, ANTHROPIC\_BASE\_URL, Modelfiles
+  \item \textbf{Routing Layer} --- Task classification, local vs.\ API decision, cost optimization
+  \item \textbf{Eval Layer} --- Quality validation harness, GSD-task benchmarks, regression tracking
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criterion} & \tableheader{Component Spec} \\
+\midrule
+1 & Runtime Comparison Guide & All three runtimes compared across 8 dimensions; decision matrix included & M1-RUNTIME-GUIDE \\
+2 & VRAM Reference Table & Accurate VRAM numbers for 4 model sizes × 5 quant formats & M2-VRAM-TABLE \\
+3 & GPU Selection Guide & Clear recommendation for 3 developer budget tiers & M2-GPU-GUIDE \\
+4 & Training Framework Guide & Unsloth vs Axolotl decision tree; QLoRA pipeline steps & M3-TRAINING-GUIDE \\
+5 & GSD-Dialect Dataset Schema & Training data categories, format spec, curation criteria & M3-DATASET-SCHEMA \\
+6 & GGUF Export Recipe & End-to-end commands from Unsloth checkpoint to Ollama serving & M4-EXPORT-RECIPE \\
+7 & Claude Code Integration Recipe & Working env vars, model slot config, context size settings & M5-INTEGRATION-RECIPE \\
+8 & Task Routing Table & 10+ task types classified by local vs API with rationale & M5-ROUTING-TABLE \\
+9 & Eval Harness Spec & 5--10 GSD-specific benchmark tasks with success metrics & M5-EVAL-SPEC \\
+10 & Final Reference PDF & All deliverables assembled, indexed, cross-referenced & FINAL-PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+M0-SCHEMA & None & Haiku & 4K \\
+M0-HARDWARE-PROBE & None & Haiku & 3K \\
+M1-RUNTIME-GUIDE & M0-SCHEMA & Sonnet & 20K \\
+M2-VRAM-TABLE & M0-SCHEMA & Sonnet & 10K \\
+M2-GPU-GUIDE & M2-VRAM-TABLE & Sonnet & 8K \\
+M3-TRAINING-GUIDE & M0-SCHEMA & Sonnet & 20K \\
+M3-DATASET-SCHEMA & M0-SCHEMA, GSD docs & Opus & 15K \\
+M4-EXPORT-RECIPE & M3-TRAINING-GUIDE & Sonnet & 12K \\
+M5-INTEGRATION-RECIPE & M1-RUNTIME-GUIDE & Sonnet & 12K \\
+M5-ROUTING-TABLE & M3-DATASET-SCHEMA, M1 & Opus & 10K \\
+M5-EVAL-SPEC & M5-ROUTING-TABLE & Opus & 15K \\
+SYNTHESIS-ARCH & All modules & Opus & 20K \\
+FINAL-PDF & All components & Sonnet & 25K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated: $\approx$174K tokens across 3--4 sessions}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Budget} & \tableheader{Rationale} \\
+\midrule
+Opus (Agnus) & 30\% & GSD-dialect dataset design requires deep ecosystem understanding; routing architecture is a judgment-heavy synthesis task; eval spec needs careful task selection to avoid trivially easy or impossibly hard benchmarks \\
+Sonnet (Denise) & 60\% & Runtime comparison, VRAM tables, export recipes, integration configs, and document assembly are structured production tasks with clear success criteria; benefit from Sonnet's accuracy and speed \\
+Haiku (Paula) & 10\% & Shared schemas, YAML templates, hardware probe scripts, and document scaffolding are low-complexity generation tasks that benefit from Haiku's speed and low token cost \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, VRAM calculator script, dataset template \\
+1A & Inference Track & Parallel & Sonnet & Modules 1 and 2 \\
+1B & Training Track & Parallel & Sonnet + Opus & Module 3 + Dataset Schema \\
+--- & HITL CAPCOM Gate & --- & Human & Scope confirmation, dataset schema review \\
+2 & Synthesis & Sequential & Opus & Modules 4, 5, architecture, routing table, eval spec \\
+3 & Publication & Sequential & Sonnet & Final assembly, LaTeX PDF, verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Define document schema & Paula (Haiku) & Shared YAML schema for all module outputs \\
+VRAM calculator script & Paula (Haiku) & Python script: given model size + quant format, output VRAM requirement \\
+Dataset template & Paula (Haiku) & ShareGPT format JSON template for GSD-dialect training examples \\
+Hardware probe script & Paula (Haiku) & Bash script: detect GPU, VRAM, CUDA version, output recommendation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A --- Inference Runtime:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M1-RUNTIME-GUIDE & CRAFT-INFRA (Sonnet) & vLLM, Ollama, LM Studio, llama.cpp comparison; decision matrix; working config examples \\
+M2-VRAM-TABLE & CRAFT-HW (Sonnet) & VRAM reference table (model × quant); KV cache growth formula; format comparison \\
+M2-GPU-GUIDE & CRAFT-HW (Sonnet) & Budget tier recommendations; MoE vs dense guidance; thermal notes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Training:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M3-TRAINING-GUIDE & CRAFT-TRAIN (Sonnet) & Framework comparison; LoRA vs QLoRA decision tree; Unsloth training config example \\
+M3-DATASET-SCHEMA & Agnus (Opus) & GSD-dialect dataset design; training data categories; curation criteria; size targets \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{HITL CAPCOM Gate:} Human reviews dataset schema (sensitive: contains GSD ecosystem internal vocabulary), confirms scope for synthesis wave, approves routing table criteria.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M4-EXPORT-RECIPE & Agnus (Opus) & End-to-end GGUF pipeline; Modelfile patterns; quantization decision at export \\
+M5-INTEGRATION-RECIPE & Agnus (Opus) & Working Claude Code config; all three runtime variants; VS Code settings \\
+M5-ROUTING-TABLE & Agnus (Opus) & 10+ task types with local/API routing; rationale; cost estimate \\
+M5-EVAL-SPEC & Agnus (Opus) & 5--10 GSD-task benchmarks; success metrics; regression protocol \\
+SYNTHESIS-ARCH & Agnus (Opus) & Unified architecture diagram; through-line text; Amiga Principle connection \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Document assembly & Denise (Sonnet) & All components merged into final reference document \\
+Code recipe validation & VERIFY (Sonnet) & All CLI commands tested or cross-validated against official docs \\
+Eval harness draft & Denise (Sonnet) & Draft eval harness as executable Python script \\
+Final PDF render & LOG (Sonnet) & LaTeX compilation, three XeLaTeX passes, index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Shared document schema and VRAM calculator (Wave 0 outputs) are loaded at the start of each Wave 1 context and reused without regeneration
+  \item The GSD ecosystem vocabulary reference (Chipset YAML, DACP patterns, PNW taxonomy) is compiled once in Wave 0 and cached as a shared attribute layer
+  \item Wave 1 tracks A and B share the same base context (schema + vocabulary) but diverge on technical domain; this enables the 5-minute TTL cache to benefit both tracks
+  \item Wave 2 loads all Wave 1 outputs as compressed summaries (not raw text) to preserve Opus context budget for synthesis reasoning
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model} & \tableheader{Sessions} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0 & Haiku & 1 & 10K \\
+Wave 1A & Sonnet & 1 & 38K \\
+Wave 1B & Sonnet + Opus & 1 & 35K \\
+Wave 2 & Opus & 1--2 & 65K \\
+Wave 3 & Sonnet & 1 & 26K \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{Mixed} & \textbf{3--4} & \textbf{$\approx$174K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  M0-SCHEMA ──────────────────────────────────┐
+  M0-CALCULATOR ──────────────────────────┐   │
+  M0-DATASET-TMPL ────────────────────┐   │   │
+                                      │   │   │
+  M1-RUNTIME-GUIDE ◄──────────────────┘   │   │
+  M2-VRAM-TABLE ◄─────────────────────────┘   │
+  M2-GPU-GUIDE ◄── M2-VRAM-TABLE             │
+  M3-TRAINING-GUIDE ◄─────────────────────────┘
+  M3-DATASET-SCHEMA ◄── M0-SCHEMA + GSD docs
+           │
+           └──────── CAPCOM GATE ──────────────┐
+                                               │
+  M4-EXPORT-RECIPE ◄── M3-TRAINING-GUIDE      │
+  M5-INTEGRATION-RECIPE ◄── M1-RUNTIME-GUIDE  │
+  M5-ROUTING-TABLE ◄── M3-DATASET-SCHEMA + M1 │
+  M5-EVAL-SPEC ◄── M5-ROUTING-TABLE           │
+  SYNTHESIS ◄── ALL MODULES                   │
+           │                                  │
+           └──────────────────────────────────┘
+           │
+  FINAL-PDF ◄── SYNTHESIS + ALL MODULES
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Tests} & \tableheader{Priority} & \tableheader{Fail Action} \\
+\midrule
+Integration correctness & 4 & BLOCK & Halt wave; fix before synthesis \\
+Data safety & 2 & BLOCK & Halt; review dataset schema \\
+Core functionality & 12 & HIGH & Flag; continue with annotation \\
+Performance validation & 4 & MEDIUM & Document; proceed \\
+Edge cases & 6 & LOW & Document; scope to v2.0 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK on Failure)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{warnred}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+T-SC-01 & Claude Code routes correctly with ANTHROPIC\_BASE\_URL & Claude Code responds using the local model; confirmed via model name in API response header \\
+T-SC-02 & GGUF export produces valid, loadable model & Ollama successfully loads the exported GGUF and responds to a test prompt without errors \\
+T-SC-03 & Training dataset contains no credentials or PII & Automated grep scan of dataset JSON finds no tokens matching API key patterns or email addresses \\
+T-SC-04 & LoRA adapter does not degrade base model capability & Eval harness shows local model $\geq$ 85\% of base model score on general coding tasks after fine-tuning \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{4cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC-1 & Runtime decision tree produced & T-RT-01, T-RT-02 & Open \\
+SC-2 & VRAM table accurate & T-VRAM-01, T-VRAM-02 & Open \\
+SC-3 & Claude Code integration working & T-SC-01, T-INT-01 & Open \\
+SC-4 & Training framework guidance concrete & T-TRAIN-01, T-TRAIN-02 & Open \\
+SC-5 & GGUF export pipeline documented & T-SC-02, T-EXPORT-01 & Open \\
+SC-6 & Dataset schema defined & T-SC-03, T-DATA-01 & Open \\
+SC-7 & Eval harness specified & T-SC-04, T-EVAL-01 & Open \\
+SC-8 & Task routing covers 4+ categories & T-ROUTE-01, T-ROUTE-02 & Open \\
+SC-9 & Hardware guidance for 3 tiers & T-HW-01, T-HW-02 & Open \\
+SC-10 & Mission is self-contained & T-COMPLETE-01 & Open \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; scope management \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency tracking \\
+SCOUT & Research Agent & Source validation; additional web research for coverage gaps \\
+EXEC-A & Executor Alpha & Inference runtime and GPU/quant documentation (Wave 1A) \\
+EXEC-B & Executor Beta & Training framework and dataset documentation (Wave 1B) \\
+CRAFT-INFRA & Infrastructure Specialist & vLLM, Ollama, LM Studio technical deep dives \\
+CRAFT-TRAIN & Training Specialist & Unsloth, Axolotl, Torchtune; LoRA/QLoRA mechanics \\
+VERIFY & Verification Agent & CLI command validation; cross-reference against official docs \\
+INTEG & Integration Agent & Claude Code integration seam; ANTHROPIC\_BASE\_URL config \\
+CAPCOM & HITL Interface & Human approval at dataset schema gate; scope confirmation \\
+BUDGET & Resource Manager & Token budget tracking; wave context optimization \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (Inference, GPU/Quant, Training, Pipeline, Integration) \\
+Deliverables & 10 components \\
+Estimated Token Budget & $\approx$174K tokens \\
+Estimated Sessions & 3--4 context windows \\
+Parallel Tracks & 2 (Wave 1A: Inference, Wave 1B: Training) \\
+HITL Gates & 1 (post-Wave 1, before synthesis) \\
+BLOCK-class Safety Tests & 4 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Infrastructure & Ollama + llama.cpp + Unsloth \\
+Target Hardware & RTX 3090/4090/5090 (24--32 GB VRAM) \\
+Claude Code Routing & ANTHROPIC\_BASE\_URL to localhost:11434 \\
+GSD-Dialect Base Model & Qwen3-Coder or Devstral (to be confirmed at execution) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{\large The Amiga's designers understood something that the industry forgot for twenty years: raw clock speed is less interesting than architectural leverage. When you train a local model on your own data, you are not trying to beat Claude. You are giving Claude a partner --- one that speaks your language, knows your schemas, and costs nothing per token. The spaces between the API calls are where your productivity actually lives.}
+
+\vspace{0.8em}
+\textit{--- GSD Ecosystem, Local Intelligence Stack Vision, March 2026}
+\end{quotebox}
+
+\end{document}
