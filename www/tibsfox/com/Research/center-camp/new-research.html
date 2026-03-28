@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Expanding Forest — Center Camp</title>
+<style>
+  *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0d1a12; color:#e8dcc8; font-family:Georgia,'Times New Roman',serif; min-height:100vh; }
+  ::selection { background:rgba(122,154,90,0.35); }
+
+  /* Nav */
+  .nav-bar { background:#1a2a1f; padding:0.5rem 1.5rem; display:flex; gap:1rem; align-items:center; font-size:0.8rem; position:sticky; top:0; z-index:100; backdrop-filter:blur(8px); border-bottom:1px solid rgba(122,154,90,0.15); }
+  .nav-bar a { color:rgba(255,255,255,0.6); text-decoration:none; transition:color 0.2s; }
+  .nav-bar a:hover { color:white; }
+  .nav-bar .active { color:white; font-weight:600; }
+  .nav-bar .sep { color:rgba(255,255,255,0.2); }
+
+  /* Hero */
+  .hero { text-align:center; padding:4rem 2rem 2.5rem; background:radial-gradient(ellipse at 50% 80%,rgba(122,154,90,0.06) 0%,transparent 60%),linear-gradient(180deg,#0d1a12 0%,#0f1e15 50%,#0d1a12 100%); }
+  .hero h1 { font-size:2.6rem; font-weight:300; letter-spacing:0.12em; margin-bottom:0.3rem; }
+  .hero .subtitle { font-size:0.95rem; color:rgba(232,220,200,0.5); font-style:italic; margin-bottom:2rem; max-width:38rem; margin-left:auto; margin-right:auto; line-height:1.6; }
+
+  /* Stats */
+  .stats-bar { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; padding:1.2rem 2rem; border-top:1px solid rgba(122,154,90,0.1); border-bottom:1px solid rgba(122,154,90,0.1); margin-bottom:2rem; }
+  .stat { text-align:center; }
+  .stat-val { display:block; font-size:1.5rem; color:#c8b890; font-weight:300; }
+  .stat-label { font-size:0.7rem; color:rgba(232,220,200,0.35); text-transform:uppercase; letter-spacing:0.08em; }
+
+  /* Filters */
+  .filter-bar { display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap; padding:0 1.5rem 1.5rem; }
+  .filter-btn { background:rgba(26,42,32,0.6); border:1px solid rgba(200,184,144,0.15); color:rgba(232,220,200,0.6); padding:0.35rem 0.9rem; border-radius:20px; font-size:0.78rem; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+  .filter-btn:hover { border-color:rgba(200,184,144,0.4); color:#e8dcc8; }
+  .filter-btn.active { background:rgba(200,184,144,0.15); border-color:rgba(200,184,144,0.5); color:#e8dcc8; }
+  .filter-btn .dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+
+  /* Section */
+  .section { max-width:68rem; margin:0 auto; padding:0 1.5rem 2rem; }
+  .section h2 { font-size:1.2rem; font-weight:400; color:#c8b890; letter-spacing:0.06em; margin-bottom:0.3rem; }
+  .section .section-sub { font-size:0.8rem; color:rgba(232,220,200,0.35); margin-bottom:1.2rem; }
+
+  /* Cluster Header */
+  .cluster-header { font-size:1rem; font-weight:400; margin:1.5rem 0 0.8rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(122,154,90,0.1); display:flex; align-items:center; gap:0.5rem; }
+  .cluster-header .cdot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .cluster-header .ccount { font-size:0.72rem; color:rgba(232,220,200,0.35); margin-left:auto; }
+
+  /* Project Cards */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0.7rem; margin-bottom:1rem; }
+  .proj-card { background:rgba(26,42,32,0.45); border:1px solid rgba(122,154,90,0.1); border-radius:8px; padding:0.7rem 0.9rem; text-decoration:none; color:#e8dcc8; transition:all 0.25s; display:block; }
+  .proj-card:hover { border-color:rgba(122,154,90,0.35); transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,0.25); }
+  .proj-card .badge { display:inline-block; font-size:0.65rem; padding:0.15rem 0.45rem; border-radius:3px; font-weight:600; letter-spacing:0.04em; margin-bottom:0.3rem; }
+  .proj-card .pname { font-size:0.88rem; margin-bottom:0.15rem; }
+  .proj-card .pdesc { font-size:0.72rem; color:rgba(232,220,200,0.45); line-height:1.4; }
+
+  /* Accordion */
+  .accordion { margin-bottom:0.6rem; }
+  .acc-header { background:rgba(26,42,32,0.45); border:1px solid rgba(122,154,90,0.1); border-radius:8px; padding:0.7rem 1rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all 0.2s; }
+  .acc-header:hover { border-color:rgba(122,154,90,0.3); }
+  .acc-header .trail-name { font-size:0.9rem; }
+  .acc-header .trail-guide { font-size:0.72rem; color:rgba(232,220,200,0.4); }
+  .acc-header .arrow { color:rgba(232,220,200,0.3); transition:transform 0.2s; font-size:0.8rem; }
+  .accordion.open .acc-header { border-radius:8px 8px 0 0; border-color:rgba(122,154,90,0.3); }
+  .accordion.open .arrow { transform:rotate(90deg); }
+  .acc-body { display:none; background:rgba(20,35,25,0.5); border:1px solid rgba(122,154,90,0.15); border-top:none; border-radius:0 0 8px 8px; padding:0.8rem 1rem; }
+  .accordion.open .acc-body { display:block; }
+  .acc-body .theme { font-style:italic; color:rgba(232,220,200,0.5); font-size:0.82rem; margin-bottom:0.6rem; }
+  .waypoint-list { display:flex; flex-wrap:wrap; gap:0.4rem; }
+  .waypoint-list a { background:rgba(122,154,90,0.1); border:1px solid rgba(122,154,90,0.2); color:#c8b890; padding:0.2rem 0.6rem; border-radius:12px; font-size:0.72rem; text-decoration:none; transition:all 0.2s; }
+  .waypoint-list a:hover { background:rgba(122,154,90,0.25); border-color:rgba(122,154,90,0.45); }
+
+  /* Story Cards */
+  .story-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:0.8rem; }
+  .story-card { background:rgba(26,42,32,0.45); border:1px solid rgba(122,154,90,0.1); border-radius:8px; padding:0.9rem 1.1rem; transition:all 0.25s; }
+  .story-card:hover { border-color:rgba(122,154,90,0.3); }
+  .story-card .s-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.4rem; }
+  .story-card .s-species { font-size:0.9rem; color:#c8b890; }
+  .story-card .s-badge { font-size:0.62rem; padding:0.12rem 0.4rem; border-radius:3px; }
+  .story-card .s-text { font-size:0.78rem; color:rgba(232,220,200,0.55); line-height:1.6; font-style:italic; }
+
+  /* Connections */
+  .conn-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:0.5rem; }
+  .conn-row { background:rgba(26,42,32,0.35); border:1px solid rgba(122,154,90,0.08); border-radius:6px; padding:0.5rem 0.8rem; font-size:0.78rem; display:flex; align-items:baseline; gap:0.5rem; }
+  .conn-row .conn-id { font-weight:600; color:#c8b890; min-width:2.5rem; }
+  .conn-row a { color:rgba(122,154,90,0.7); text-decoration:none; }
+  .conn-row a:hover { color:#7a9a5a; text-decoration:underline; }
+
+  /* Footer */
+  .camp-footer { text-align:center; padding:3rem 2rem; font-size:0.85rem; color:rgba(232,220,200,0.4); line-height:1.8; font-style:italic; max-width:38rem; margin:0 auto; }
+
+  @media (max-width:600px) {
+    .hero h1 { font-size:1.8rem; }
+    .card-grid { grid-template-columns:1fr 1fr; }
+    .story-grid { grid-template-columns:1fr; }
+    .conn-grid { grid-template-columns:1fr; }
+    .stats-bar { gap:1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="index.html">Center Camp</a>
+  <span class="sep">/</span>
+  <a href="../compass.html">The Compass</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Research Series</a>
+  <span class="sep">/</span>
+  <a href="new-research.html" class="active">The Expanding Forest</a>
+</div>
+
+<div class="hero">
+  <h1>The Expanding Forest</h1>
+  <div class="subtitle">67 new research projects joined the forest &mdash; the canopy has doubled</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-val">142</span><span class="stat-label">Total Projects</span></div>
+  <div class="stat"><span class="stat-val">67</span><span class="stat-label">New Clearings</span></div>
+  <div class="stat"><span class="stat-val">12</span><span class="stat-label">New Trails</span></div>
+  <div class="stat"><span class="stat-val">67</span><span class="stat-label">Species Stories</span></div>
+</div>
+
+<!-- ═══ Cluster Filter ═══ -->
+<div class="filter-bar" id="clusterFilters"></div>
+
+<!-- ═══ Cluster View ═══ -->
+<div class="section" id="clusterView">
+  <h2>New Clearings by Cluster</h2>
+  <div class="section-sub">67 projects, grouped by the trail they grow beside</div>
+  <div id="clusterCards"></div>
+</div>
+
+<!-- ═══ Trails ═══ -->
+<div class="section">
+  <h2>New Deep Trails</h2>
+  <div class="section-sub">12 knowledge trails through the new growth, each led by a muse guide</div>
+  <div id="trailAccordions"></div>
+</div>
+
+<!-- ═══ Species Stories ═══ -->
+<div class="section">
+  <h2>Species Stories</h2>
+  <div class="section-sub">67 first-person voices &mdash; every new project has a species that embodies it</div>
+  <div id="storyGrid" class="story-grid"></div>
+</div>
+
+<!-- ═══ Connections ═══ -->
+<div class="section">
+  <h2>Connections to the Existing Forest</h2>
+  <div class="section-sub">How each new project links to the original 75</div>
+  <div id="connGrid" class="conn-grid"></div>
+</div>
+
+<div class="camp-footer">
+  The forest doubled overnight. Every new project is a clearing.
+  Every clearing has a story. Every story has a trail. Walk in.
+</div>
+
+<script src="new-research.js"></script>
+<script>
+(function() {
+  var D = NEW_RESEARCH;
+  var clusters = [
+    { key:'music', name:'Music', color:'#e074a8' },
+    { key:'radio', name:'Radio', color:'#a07ae0' },
+    { key:'infrastructure', name:'Infrastructure', color:'#2a8a96' },
+    { key:'science', name:'Science', color:'#5eb8c4' },
+    { key:'creative', name:'Creative', color:'#9b59b6' },
+    { key:'community', name:'Community', color:'#e0a07a' },
+    { key:'knowledge', name:'Knowledge', color:'#d4a017' },
+    { key:'ecology', name:'Ecology', color:'#4a7c3f' },
+    { key:'vision', name:'Vision', color:'#d4a017' }
+  ];
+  var activeCluster = 'all';
+
+  // ── Filters ──
+  var fbar = document.getElementById('clusterFilters');
+  var allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.textContent = 'All';
+  allBtn.dataset.cluster = 'all';
+  fbar.appendChild(allBtn);
+  clusters.forEach(function(c) {
+    var b = document.createElement('button');
+    b.className = 'filter-btn';
+    b.innerHTML = '<span class="dot" style="background:' + c.color + '"></span>' + c.name;
+    b.dataset.cluster = c.key;
+    fbar.appendChild(b);
+  });
+  fbar.addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    activeCluster = btn.dataset.cluster;
+    fbar.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    renderClusters();
+    renderStories();
+  });
+
+  // ── Cluster Cards ──
+  function renderClusters() {
+    var wrap = document.getElementById('clusterCards');
+    wrap.innerHTML = '';
+    clusters.forEach(function(c) {
+      if (activeCluster !== 'all' && activeCluster !== c.key) return;
+      var projs = D.projects.filter(function(p) { return p.cluster === c.key; });
+      if (projs.length === 0) return;
+      var hdr = document.createElement('div');
+      hdr.className = 'cluster-header';
+      hdr.innerHTML = '<span class="cdot" style="background:' + c.color + '"></span>' + c.name + '<span class="ccount">' + projs.length + ' projects</span>';
+      wrap.appendChild(hdr);
+      var grid = document.createElement('div');
+      grid.className = 'card-grid';
+      projs.forEach(function(p) {
+        var a = document.createElement('a');
+        a.className = 'proj-card';
+        a.href = '../' + p.id + '/index.html';
+        a.innerHTML = '<span class="badge" style="background:' + p.color + '22;color:' + p.color + '">' + p.id + '</span>' +
+          '<div class="pname">' + p.name + '</div>' +
+          '<div class="pdesc">' + p.desc + '</div>';
+        grid.appendChild(a);
+      });
+      wrap.appendChild(grid);
+    });
+  }
+
+  // ── Trails ──
+  var tWrap = document.getElementById('trailAccordions');
+  D.trails.forEach(function(t) {
+    var acc = document.createElement('div');
+    acc.className = 'accordion';
+    var hdr = document.createElement('div');
+    hdr.className = 'acc-header';
+    hdr.innerHTML = '<div><span class="trail-name" style="color:' + t.color + '">' + t.name + '</span><br><span class="trail-guide">Guide: ' + t.guide + '</span></div><span class="arrow">&#9654;</span>';
+    hdr.addEventListener('click', function() { acc.classList.toggle('open'); });
+    var body = document.createElement('div');
+    body.className = 'acc-body';
+    var wayHtml = '<div class="theme">' + t.theme + '</div><div class="waypoint-list">';
+    t.waypoints.forEach(function(w) {
+      wayHtml += '<a href="../' + w + '/index.html">' + w + '</a>';
+    });
+    wayHtml += '</div>';
+    body.innerHTML = wayHtml;
+    acc.appendChild(hdr);
+    acc.appendChild(body);
+    tWrap.appendChild(acc);
+  });
+
+  // ── Stories ──
+  function renderStories() {
+    var wrap = document.getElementById('storyGrid');
+    wrap.innerHTML = '';
+    D.stories.forEach(function(s) {
+      var proj = D.projects.filter(function(p) { return p.id === s.id; })[0];
+      if (!proj) return;
+      if (activeCluster !== 'all' && proj.cluster !== activeCluster) return;
+      var card = document.createElement('div');
+      card.className = 'story-card';
+      card.innerHTML = '<div class="s-header"><span class="s-species">' + s.species + '</span>' +
+        '<span class="s-badge" style="background:' + proj.color + '22;color:' + proj.color + '">' + s.id + '</span></div>' +
+        '<div class="s-text">' + s.text + '</div>';
+      wrap.appendChild(card);
+    });
+  }
+
+  // ── Connections ──
+  var cWrap = document.getElementById('connGrid');
+  D.connections.forEach(function(c) {
+    var row = document.createElement('div');
+    row.className = 'conn-row';
+    var links = c.connects.map(function(id) {
+      return '<a href="../' + id + '/index.html">' + id + '</a>';
+    }).join(', ');
+    row.innerHTML = '<span class="conn-id">' + c.id + '</span> connects to ' + links;
+    cWrap.appendChild(row);
+  });
+
+  // Initial render
+  renderClusters();
+  renderStories();
+})();
+</script>
+</body>
+</html>
