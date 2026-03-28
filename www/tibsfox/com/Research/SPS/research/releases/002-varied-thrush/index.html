@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 2&deg; &mdash; Varied Thrush &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.drone { background: var(--puget-dark); }
+    .theory-icon.am { background: #1565C0; }
+    .theory-icon.minimal { background: #7B1FA2; }
+    .theory-icon.rest { background: var(--puget-mid); }
+    .theory-icon.register { background: #C62828; }
+    .theory-icon.habitat { background: var(--forest-green); }
+    .theory-icon.cultural { background: var(--earth-mid); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Progression arc card */
+    .arc-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, var(--puget-light) 50%, #F3E5F5 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .arc-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: var(--forest-green);
+    }
+    .arc-table { margin: 0.75rem 0; width: 100%; }
+    .arc-table th { font-size: 0.78rem; }
+    .arc-table td { font-size: 0.85rem; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">2&deg;</div>
+      <div class="release-title-block">
+        <h2>Varied Thrush</h2>
+        <div class="scientific">Ixoreus naevius &middot; Family Turdidae (Thrushes) &middot; Monotypic genus</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Single Haunting Minor Whistle &middot; Mature Conifer Forest &middot; Winter-Resident &middot; Energy 2</div>
+
+    <blockquote>
+      The most haunting sound in the Pacific Northwest forest is one note. A single sustained
+      buzzy whistle, held until it dissolves into the rain-wet air. The Varied Thrush does not
+      cascade, does not trill, does not ornament. It delivers one frequency and lets the silence
+      do the rest.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Varied Thrush is the <strong>sole living member of the genus <em>Ixoreus</em></strong>
+          &mdash; a monotypic genus within the family <strong>Turdidae</strong> (thrushes). Related to
+          the American Robin but occupying a distinct ecological and acoustic niche. The genus name
+          derives from Greek <em>ixos</em> (mistletoe) and <em>oreos</em> (mountain).
+        </p>
+        <p>
+          <strong>Plumage.</strong> Adult males are among the most visually striking birds in the PNW:
+          orange breast with bold <strong>black breastband</strong>, blue-gray back and wings,
+          <strong>orange wing bars</strong>, and a prominent <strong>orange eyebrow stripe</strong>.
+          Length: <strong>7.5&ndash;10 inches</strong> (19&ndash;26 cm). Weight:
+          <strong>65&ndash;100 g</strong>. Roughly robin-sized &mdash; between the heron (2,100+ g)
+          and the wren (8&ndash;12 g). The circle does not progress linearly in body size. It moves
+          where the sound demands.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Defining Sound</h2>
+        <h3>One Note at a Time</h3>
+        <p>
+          The Varied Thrush&rsquo;s song consists of a <strong>single, long, buzzy whistled note
+          on one pitch</strong>, sustained for <strong>1&ndash;2 seconds</strong>, followed by a
+          <strong>pause of 3&ndash;8 seconds</strong>, then another single note at a
+          <strong>different pitch</strong>. Each note is held on a single fundamental frequency.
+          No melodic contour within the note &mdash; no rising, falling, or sweep. The pitch is
+          set at onset and sustained.
+        </p>
+        <p>
+          This is the polar opposite of the Pacific Wren. Where the wren delivers 100+ notes in
+          10 seconds, the thrush delivers <strong>one note every 4&ndash;10 seconds</strong>. Where
+          the wren is Coltrane&rsquo;s sheets of sound, the thrush is Miles Davis playing one note
+          and letting it ring. In music theory terms: the wren is a virtuosic <em>Presto</em>
+          passage of sixty-fourth notes; the thrush is a <em>Largo</em> of whole notes.
+        </p>
+
+        <h3>Amplitude Modulation: The Buzzy Quality</h3>
+        <p>
+          The distinctive buzzy, ethereal quality is produced by <strong>amplitude modulation
+          (AM)</strong>. The syrinx generates a carrier tone (2.5&ndash;5 kHz) and superimposes
+          rapid amplitude fluctuations at 20&ndash;50 Hz. This is <strong>AM synthesis in biological
+          form</strong> &mdash; the same mathematical operation underlying AM radio transmission:
+          carrier wave &times; modulation signal = complex output with spectral sidebands.
+        </p>
+        <p>
+          The contrast with degree 1&deg; is illuminating. The Pacific Wren&rsquo;s song is
+          <strong>FM</strong> (frequency modulation) &mdash; rapid pitch changes producing spectral
+          complexity. The Varied Thrush is <strong>AM</strong> (amplitude modulation) &mdash; rapid
+          volume changes producing spectral complexity. FM and AM: the two fundamental modulation
+          types in both radio engineering and biological acoustics, both delivered within the
+          circle&rsquo;s first three degrees.
+        </p>
+
+        <h3>The Silence Between the Notes</h3>
+        <p>
+          The inter-note pause of 3&ndash;8 seconds is not dead air. It allows the preceding note
+          to decay naturally through the forest&rsquo;s reverberant field, creates anticipation for
+          the next note, and provides the negative space that gives each tone its weight. In Japanese
+          aesthetics, this is <strong>ma</strong> &mdash; the interval, the pregnant pause that gives
+          meaning to what surrounds it. In recording engineering, it is <strong>pre-delay</strong>:
+          allowing the direct sound to be heard before the reverberant field builds.
+        </p>
+
+        <!-- Progression Arc -->
+        <div class="arc-card">
+          <h3>The Arc: Degrees 0&deg; &rarr; 1&deg; &rarr; 2&deg;</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Silence &rarr; cascade complexity &rarr; single sustained tone. Not linear. Not
+            monotonic. The first evidence that the circle proceeds by contrast, not by escalation.
+          </p>
+          <table class="arc-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Heron (0&deg;)</th>
+                <th>Wren (1&deg;)</th>
+                <th>Thrush (2&deg;)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Notes / bout</td><td>0&ndash;1</td><td>100+</td><td>1</td></tr>
+              <tr><td>Frequency</td><td>200&ndash;800 Hz</td><td>2&ndash;10 kHz</td><td>2.5&ndash;5 kHz</td></tr>
+              <tr><td>Register</td><td>Bass</td><td>Soprano</td><td>Alto</td></tr>
+              <tr><td>Synthesis</td><td>None (silence)</td><td>FM</td><td>AM</td></tr>
+              <tr><td>Texture</td><td>Monophonic rest</td><td>Bilateral polyphony</td><td>Monophonic sustain</td></tr>
+              <tr><td>Tempo</td><td>Geological</td><td>Millisecond</td><td>Hypometric (~6&ndash;15 BPM)</td></tr>
+              <tr><td>Body mass</td><td>2,100&ndash;2,500 g</td><td>8&ndash;12 g</td><td>65&ndash;100 g</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Habitat -->
+        <h2>Mature Conifer Forest &amp; Winter Descent</h2>
+        <p>
+          The Varied Thrush breeds in <strong>dense, mature conifer forest</strong> &mdash; Douglas
+          fir, western red cedar, western hemlock, Sitka spruce &mdash; from sea level to ~6,000 ft.
+          Unlike the year-round residents at degrees 0&deg; and 1&deg;, the thrush undertakes
+          <strong>altitudinal migration</strong>: breeding in montane forest, descending to lowland
+          parks and residential areas in winter.
+        </p>
+        <p>
+          In Seattle, the Varied Thrush is a <strong>winter visitor</strong> (October&ndash;April),
+          present in Discovery Park, Washington Park Arboretum, Seward Park, Interlaken Park,
+          and Capitol Hill residential areas with mature conifers. The song of a Varied Thrush on
+          a rainy January morning in Capitol Hill is one of the most distinctive sensory experiences
+          of living in Seattle.
+        </p>
+        <p>
+          The 2.5&ndash;5 kHz frequency range is acoustically optimized for conifer forest
+          propagation. The sustained note duration (1&ndash;2 s) provides resistance to masking
+          by transient environmental noise &mdash; the same principle used in sonar: a longer
+          ping carries further.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon drone">D</div>
+            <div class="theory-content">
+              <h4>Sustained Tone as Drone / Pedal Point <span class="theory-level foundational">Foundational</span></h4>
+              <p>A single frequency held for maximum duration. The pedal point beneath changing harmony. Tanpura, bagpipe drone, Bach&rsquo;s Passacaglia, La Monte Young.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon am">A</div>
+            <div class="theory-content">
+              <h4>Amplitude Modulation (Biological AM Synthesis) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Carrier tone &times; modulation signal = spectral sidebands. AM radio in biological form. Connects to AMR research project.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon minimal">M</div>
+            <div class="theory-content">
+              <h4>Minimal Melody: One Note at a Time <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Melody stripped to theoretical minimum. Webern&rsquo;s pointillism, Young&rsquo;s sustained tones, Eno&rsquo;s ambient. Fewer notes, more weight per note.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon rest">R</div>
+            <div class="theory-content">
+              <h4>Inter-Note Silence as Compositional Element <span class="theory-level foundational">Foundational</span></h4>
+              <p>The 3&ndash;8 s pause IS the rhythm. Negative space as structural element. <em>Ma</em> (Japanese) &mdash; the pregnant pause.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon register">F</div>
+            <div class="theory-content">
+              <h4>Frequency as Emotional Register <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>2.5&ndash;5 kHz at peak human sensitivity. AM roughness perceived as darkness. Descending tendency read as melancholy. The haunting quality is acoustic physics.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon habitat">H</div>
+            <div class="theory-content">
+              <h4>Conifer Forest as Acoustic Architecture <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Frequency optimized for forest propagation. Sustained duration resists transient masking. Silence as pre-delay for natural reverb.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cultural">V</div>
+            <div class="theory-content">
+              <h4>The Voice of the Rain Forest <span class="theory-level foundational">Foundational</span></h4>
+              <p>Widely cited as the defining sound of PNW old-growth. Used in documentaries and soundscape ecology as the acoustic signature of the region.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          The thrush&rsquo;s sustained note is a <strong>pedal point</strong> &mdash; a held tone
+          that serves as an anchor while time passes around it. In Baroque counterpoint, Indian
+          classical music (tanpura), bagpipe tradition, and minimalist composition, the drone is
+          the harmonic reference from which all other motion derives meaning.
+        </p>
+        <p>
+          The <strong>AM synthesis</strong> parallel is technically precise. The syrinx performs
+          amplitude modulation &mdash; carrier &times; modulator &mdash; producing spectral
+          sidebands identical in mathematical structure to AM radio transmission. Where the wren
+          at degree 1&deg; is an FM synthesizer, the thrush at degree 2&deg; is an AM transmitter.
+          Two fundamental modulation types, two adjacent degrees.
+        </p>
+        <p>
+          The <strong>minimal melody</strong> (one pitch per event) maps to Webern&rsquo;s
+          pointillism, where each note is isolated and given maximum weight by surrounding silence.
+          It maps to La Monte Young&rsquo;s sustained-tone works and to Brian Eno&rsquo;s ambient
+          music. The common principle: <strong>fewer notes, more weight per note</strong>.
+        </p>
+        <p>
+          The effective tempo of <strong>~6&ndash;15 BPM</strong> is below any standard Western
+          musical tempo marking. The thrush operates in a temporal domain that is hypometric &mdash;
+          slower than slow. And yet the listener perceives rhythm through subjective rhythmization:
+          the brain imposes pattern on approximately periodic events. The bird does not sing in
+          strict time, but the listener hears something like time.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Thrush taxonomy and distribution. This release adds the AM synthesis mapping and sustained-tone theory.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Mature conifer forest ecology, altitudinal migration, understory foraging.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; Bio-Physics Sensing
+            <p>Syringeal AM production, amplitude modulation mechanics, acoustic propagation in conifer forest.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AMR</strong> &mdash; AM Radio
+            <p>Direct parallel: biological AM synthesis = AM radio transmission. Same mathematics, different medium.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Wayne Horvitz at degree 2&deg;. Sustained tone, atmospheric space, notes that hang in the air.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>Silence at degree 0&deg; returns as the frame around each note. Same principle, new application.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Direct predecessor and polar opposite. FM cascade vs. AM sustain. 100 notes vs. 1 note.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>George, T.L. (2020). &ldquo;Varied Thrush (<em>Ixoreus naevius</em>).&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Varied Thrush. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Varied Thrush. birdweb.org</li>
+          <li>Sibley, D.A. (2000). <em>The Sibley Guide to Birds</em>. Alfred A. Knopf.</li>
+          <li>Wahl, T.R., Tweit, B. &amp; Mlodinow, S.G. (2005). <em>Birds of Washington</em>. OSU Press.</li>
+          <li>Klicka, J., Voelker, G. &amp; Spellman, G.M. (2005). Molecular phylogenetics of true thrushes. <em>MPE</em> 34(3).</li>
+          <li>Pyle, P. (1997). <em>Identification Guide to North American Birds, Part I</em>. Slate Creek Press.</li>
+          <li>Haskell, D.G. (2017). <em>The Songs of Trees</em>. Viking.</li>
+          <li>Armstrong, E.H. (1936). FM radio system. <em>Proc. IRE</em> 24(5). [FM vs. AM contrast.]</li>
+          <li>Fourier, J.B.J. (1822). <em>Th&eacute;orie analytique de la chaleur</em>. [Spectral decomposition.]</li>
+          <li>Marzluff, J.M. &amp; Ewing, K. (2001). Forest fragmentation and bird conservation. <em>Restoration Ecology</em> 9(3).</li>
+          <li>Washington Department of Fish and Wildlife. Varied Thrush species account. wdfw.wa.gov</li>
+          <li>Macaulay Library. Varied Thrush recordings and spectrograms. macaulaylibrary.org</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Turdidae</div>
+          <div class="stat-detail">Thrushes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Ixoreus</em></div>
+          <div class="stat-detail">Monotypic &mdash; sole living member</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">7.5&ndash;10 in</div>
+          <div class="stat-detail">19&ndash;26 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">65&ndash;100 g</div>
+          <div class="stat-detail">~2.3&ndash;3.5 oz</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">13&ndash;15 in</div>
+          <div class="stat-detail">33&ndash;38 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Frequency Range</div>
+          <div class="stat-value">2.5&ndash;5 kHz</div>
+          <div class="stat-detail">Alto register</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Note Duration</div>
+          <div class="stat-value">1&ndash;2 s</div>
+          <div class="stat-detail">Single sustained tone</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Inter-Note Silence</div>
+          <div class="stat-value">3&ndash;8 s</div>
+          <div class="stat-detail">Silence IS the rhythm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Modulation</div>
+          <div class="stat-value">AM</div>
+          <div class="stat-detail">Amplitude modulation (20&ndash;50 Hz)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Notes / Bout</div>
+          <div class="stat-value">1</div>
+          <div class="stat-detail">One note at a time &mdash; the minimum</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">2&deg;</div>
+          <div class="stat-detail">Sustained tone &mdash; the drone</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Same as degree 1&deg; (not escalating)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Conifer Forest</div>
+          <div class="stat-detail">Mature canopy / winter lowland</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Winter-Resident</div>
+          <div class="stat-detail">Altitudinal migrant (Oct&ndash;Apr in Seattle)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 2&deg; &mdash; S36</div>
+          <div class="parallel-name">Wayne Horvitz</div>
+          <div class="parallel-detail">Sustained tone, atmospheric space, the note that hangs in the air. Avant-jazz / chamber music at the boundary of composed and ambient. One note is enough when it is the right note.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 002 of 360 &middot;
+      <a href="../001-pacific-wren/index.html">Degree 1&deg;: Pacific Wren</a> &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

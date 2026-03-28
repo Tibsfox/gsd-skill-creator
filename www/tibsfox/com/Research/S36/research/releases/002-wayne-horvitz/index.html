@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 2&deg; &mdash; Wayne Horvitz &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .album-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+    }
+    .album-card .title {
+      font-weight: 600;
+      color: var(--seattle-navy);
+      font-size: 0.95rem;
+    }
+    .album-card .year-label {
+      font-size: 0.78rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+    }
+    .album-card .significance {
+      font-size: 0.82rem;
+      margin-top: 0.3rem;
+      color: #424242;
+    }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .spectrum-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      font-size: 0.82rem;
+      font-family: system-ui, sans-serif;
+    }
+    .spectrum-track {
+      flex: 1;
+      height: 8px;
+      background: linear-gradient(90deg, #1A237E 0%, #9FA8DA 50%, #E8EAF6 100%);
+      border-radius: 4px;
+      position: relative;
+    }
+    .spectrum-marker {
+      position: absolute;
+      top: -4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transform: translateX(-50%);
+    }
+    .spectrum-label { color: #757575; white-space: nowrap; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">2&deg;</div>
+      <div>
+        <h1>Wayne Horvitz</h1>
+        <div class="subtitle">Jazz &middot; Avant-Garde &middot; Chamber &middot; Film &mdash; Seattle 1988 &rarr; Present</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../001-bill-frisell/index.html">Degree 1&deg; (Frisell)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The border between composition and improvisation dissolves when the architecture is
+          strong enough to hold both. Wayne Horvitz builds the rooms; his musicians furnish them.
+          The walls are fixed; the interiors are free.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY & ORIGINS
+             ======================================== -->
+
+        <h2>Biography &amp; Origins</h2>
+
+        <p>Wayne Horvitz was born in 1955 in New York City. He studied composition at the
+        <strong>University of California, Santa Cruz</strong>, where gamelan, electronic music,
+        free improvisation, and composition coexisted without the hierarchies that separated them
+        at East Coast conservatories. This permissive environment planted the seed of Horvitz&rsquo;s
+        lifelong method: treating genre boundaries as administrative fictions.</p>
+
+        <p>After Santa Cruz, Horvitz returned to New York and became a central figure in the
+        <strong>downtown improvised music scene</strong> &mdash; the same ecosystem that nurtured
+        <a href="../001-bill-frisell/index.html">Bill Frisell</a> (degree 1&deg;). The Knitting Factory,
+        Roulette, ABC No Rio, and John Zorn&rsquo;s extended circle. Jazz musicians played with noise
+        artists; classical composers sat in with punk bands. The interesting music happened at the
+        borders between traditions.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: The Wire (2003); Zorn,
+        <em>Arcana</em> (2000); JazzTimes (1999)</p>
+
+        <h3>Downtown Formations</h3>
+
+        <ul>
+          <li><strong>John Zorn&rsquo;s game pieces</strong> (<em>Cobra</em>, <em>Archery</em>,
+          <em>Lacrosse</em>) &mdash; File-card compositions as improvisational systems. Instant
+          compositional decision-making. The direct ancestor of Horvitz&rsquo;s composed-improvisation
+          methodology.</li>
+          <li><strong>The President</strong> &mdash; Horvitz&rsquo;s band bringing rock energy to
+          jazz-derived harmony. Not fusion but cohabitation &mdash; jazz structures and rock textures
+          without either subordinating the other.</li>
+          <li><strong>Pigpen</strong> &mdash; Trio with Frisell and Kenny Wollesen. Country, free jazz,
+          atmospheric electronics. Bridged the New York and Seattle chapters of Horvitz&rsquo;s career.</li>
+          <li><strong>New York Composers Orchestra</strong> &mdash; Large ensemble for downtown composers.
+          Created institutional infrastructure for music that otherwise existed only in clubs. The
+          institution-building impulse that would define Horvitz in Seattle.</li>
+        </ul>
+
+        <h3>Robin Holcomb: The Degree Neighbor</h3>
+
+        <p><strong>Robin Holcomb</strong> &mdash; singer, pianist, composer, Horvitz&rsquo;s wife &mdash;
+        operates at the intersection of Appalachian folk, art song, minimalist composition, and jazz
+        harmony. The Horvitz-Holcomb household on Capitol Hill: his dense, cluster-voiced chords beneath
+        her clear, folk-inflected melodies. Two approaches to the same question of how jazz harmony meets
+        American vernacular melody.</p>
+
+        <!-- ========================================
+             THE MOVE TO SEATTLE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Move to Seattle (1988)</h2>
+
+        <p>Horvitz moved from New York to Seattle in <strong>1988</strong> &mdash; one year before
+        Frisell. He settled on <strong>Capitol Hill</strong> and has remained there since. He was not
+        joining an existing community; he was <strong>building one</strong>.</p>
+
+        <p>The co-migration of Horvitz (1988) and Frisell (1989) constitutes the third data point for
+        the <strong>&ldquo;reversed export&rdquo; pattern</strong> identified at
+        <a href="../000-quincy-jones/index.html">degree 0&deg;</a>. Jones was exported from Seattle.
+        Horvitz and Frisell chose Seattle. Three downtown-scene musicians within a two-year window,
+        forming the nucleus of Seattle&rsquo;s improvised music community. The pattern now has a name:
+        <strong>The Seattle Draw</strong>.</p>
+
+        <p>Where Frisell was content to perform and record, Horvitz took on the organizational labor:
+        booking venues, curating series, mentoring younger musicians, and eventually co-founding
+        <strong>The Royal Room</strong>. This is the <strong>artist-as-institution</strong> pattern &mdash;
+        a musician who builds the infrastructure within which other musicians can work.</p>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1980s &mdash; Downtown NYC</div>
+          <p>Core participant in Zorn&rsquo;s game pieces. The President. Pigpen with Frisell and
+          Wollesen. Co-founded the New York Composers Orchestra. Built a reputation for genre-crossing
+          composition and keyboard versatility.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1988 &mdash; Seattle Migration</div>
+          <p>Moved to Capitol Hill with Robin Holcomb. One year before Frisell. Began building the
+          institutional infrastructure of Seattle&rsquo;s improvised music community.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Mid-1990s&ndash;2000s &mdash; Zony Mash &amp; Gravitas</div>
+          <p><strong>Zony Mash</strong>: funk/rock/improv on Intuition Records. <strong>Gravitas
+          Quartet</strong>: chamber-music compositions with cello, bassoon, and cornet. Two poles of
+          Horvitz&rsquo;s musical personality, operating simultaneously. Film scoring for independents
+          and documentaries.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2012&ndash;Present &mdash; The Royal Room</div>
+          <p>Co-founded <strong>The Royal Room</strong> in Columbia City. The venue became the anchor
+          institution for Seattle&rsquo;s creative music community. Horvitz as curator, programmer,
+          and scene architect. Continued composition for chamber ensembles and large-scale projects.</p>
+        </div>
+
+        <!-- ========================================
+             KEY ALBUMS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Key Albums &amp; Projects</h2>
+
+        <div class="album-grid">
+          <div class="album-card">
+            <div class="title">Some Order, Long Understood</div>
+            <div class="year-label">1987 &middot; Sound Aspects</div>
+            <div class="significance">Early statement of composed improvisation. NYC downtown aesthetic.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Brand Spankin&rsquo; New</div>
+            <div class="year-label">1998 &middot; Intuition</div>
+            <div class="significance">Zony Mash debut. Hammond organ grooves meet improvisational eruptions.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Sweeter Than the Day</div>
+            <div class="year-label">2001 &middot; Songlines</div>
+            <div class="significance">Solo/small-group reflections. Lyrical keyboard voice.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Way Out East</div>
+            <div class="year-label">2006 &middot; Songlines</div>
+            <div class="significance">Gravitas Quartet. Chamber-scale composed improvisation.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Some Places Are Forever Afternoon</div>
+            <div class="year-label">2015 &middot; National Sawdust Tracks</div>
+            <div class="significance">Late Gravitas statement. PNW landscape evoked through timbre and pacing.</div>
+          </div>
+          <div class="album-card">
+            <div class="title">Cold Spell</div>
+            <div class="year-label">2005 &middot; Intuition</div>
+            <div class="significance">Zony Mash: darker, slower, electronics-forward.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             THE ROYAL ROOM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Royal Room &amp; Scene-Building</h2>
+
+        <p>In 2012, Horvitz co-founded <strong>The Royal Room</strong> in Columbia City. The venue is
+        dedicated to creative music &mdash; jazz, improvised music, new composition, folk, experimental
+        performance &mdash; without privileging any one tradition.</p>
+
+        <table>
+          <thead>
+            <tr><th>Dimension</th><th>Significance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Venue as infrastructure</td><td>Consolidated Seattle&rsquo;s scattered experimental music community into a visible, permanent space</td></tr>
+            <tr><td>Curation as composition</td><td>Weekly programming reflects compositional sensibility: juxtaposing genres, pairing unlikely artists</td></tr>
+            <tr><td>Columbia City location</td><td>Deliberately outside traditional entertainment districts &mdash; decentralizing the cultural map</td></tr>
+            <tr><td>Artist-as-institution</td><td>Parallels Jones&rsquo;s Mercury VP role (degree 0&deg;) &mdash; making the conditions under which music is made</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             COMPOSITION-IMPROVISATION SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Composition&ndash;Improvisation Spectrum</h2>
+
+        <p>Three degrees, three positions. Horvitz mediates between Jones&rsquo;s fully composed
+        arrangements and Frisell&rsquo;s loose improvisational frameworks.</p>
+
+        <div class="spectrum-bar">
+          <span class="spectrum-label">Fully Composed</span>
+          <div class="spectrum-track">
+            <div class="spectrum-marker" style="left:15%;background:#1A237E" title="Jones (0&deg;)"></div>
+            <div class="spectrum-marker" style="left:50%;background:#1565C0" title="Horvitz (2&deg;)"></div>
+            <div class="spectrum-marker" style="left:82%;background:#9FA8DA" title="Frisell (1&deg;)"></div>
+          </div>
+          <span class="spectrum-label">Free Improvisation</span>
+        </div>
+        <p style="font-size:0.78rem;color:#757575;text-align:center">
+          0&deg; Jones (full score) &mdash; 2&deg; Horvitz (composed improvisation) &mdash; 1&deg; Frisell (loose frameworks)
+        </p>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Six theory nodes map Horvitz&rsquo;s musical language. Each includes <strong>genealogy
+        links</strong> to degrees 0&deg; and 1&deg;, tracing how concepts evolve across the engine.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Composed Improvisation</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Compositions that are structurally complete but contain designated spaces for bounded
+            improvisation. The architecture is planned; certain rooms are left unfurnished for the
+            performers to fill.</p>
+            <div class="examples">Gravitas Quartet &mdash; Way Out East (2006), Some Places (2015)</div>
+            <div class="genealogy"><strong>Spectrum:</strong> Jones (full score) &rarr; Horvitz (composed improv) &rarr; Frisell (loose frameworks)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Polymetric Structures</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Multiple simultaneous time signatures. Individual parts internally consistent; complexity
+            from interaction. Jones&rsquo;s swing = pulse + syncopation. Frisell&rsquo;s rubato =
+            dissolved pulse. Horvitz = multiplied pulse.</p>
+            <div class="examples">Zony Mash &mdash; Brand Spankin&rsquo; New (1998), Upper Egypt (2001)</div>
+            <div class="genealogy"><strong>New at 2&deg;:</strong> First polymetric instance in S36 engine</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Cluster Voicings</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Chords built from adjacent seconds. Dense harmonic texture in the middle register.
+            Bartok/Ligeti lineage deployed in jazz-adjacent contexts as gravitational anchors
+            for improvisation.</p>
+            <div class="examples">Gravitas Quartet piano passages, Some Places (2015)</div>
+            <div class="genealogy"><strong>Density spectrum:</strong> Jones (all registers) &rarr; Horvitz (middle) &rarr; Frisell (registers empty)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Quartal Voicings</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Chords stacked in fourths. Open, ambiguous &mdash; neither major nor minor. McCoy Tyner
+            lineage. Blends with cello and bassoon natural resonance. Complements Frisell&rsquo;s
+            modal ambiguity through different technique.</p>
+            <div class="examples">Gravitas Quartet &mdash; Way Out East (2006), chamber works</div>
+            <div class="genealogy"><strong>From 1&deg;:</strong> Both seek territory outside major/minor binary &mdash; Frisell via wide intervals, Horvitz via quartal stacking</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Electronic-Acoustic Integration</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Electronic processing as extension of acoustic instrument, not replacement. Piano and
+            organ signals processed in real time. Boundary between acoustic source and electronic
+            transformation dissolves.</p>
+            <div class="examples">Zony Mash electronics, Cold Spell (2005), live performances</div>
+            <div class="genealogy"><strong>From 1&deg;:</strong> Frisell&rsquo;s guitar signal chain &rarr; Horvitz&rsquo;s keyboard signal chain &mdash; technology-as-instrument advances</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Through-Composed Form + Improvisation</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Continuous arc from beginning to end with improvisation erupting at structural moments.
+            The form is planned; the content of specific moments is not. Film-scoring principle
+            from degree 0&deg; combined with improvisational fluency from degree 1&deg;.</p>
+            <div class="examples">Gravitas extended works, Royal Room live performances</div>
+            <div class="genealogy"><strong>Synthesis:</strong> Jones&rsquo;s film-score narrative (0&deg;) + Frisell&rsquo;s improvisational fluency (1&deg;)</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD BOXES
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degree 0&deg; (Quincy Jones)</h4>
+          <ul>
+            <li><strong>Artist-as-institution:</strong> Jones as Mercury VP and Qwest founder (industry scale). Horvitz as Royal Room co-founder and community curator (local scale). Same impulse: making the conditions under which music is made.</li>
+            <li><strong>Film scoring methodology:</strong> Jones used leitmotif and through-composed technique at blockbuster scale. Horvitz uses chamber textures and composed improvisation at indie scale. Analogous architecture, radically different resources.</li>
+            <li><strong>Cross-genre bridging:</strong> Jones (jazz&rarr;pop/R&amp;B/film). Horvitz (jazz&rarr;funk/rock/chamber). The bridge-building principle persists across all three degrees.</li>
+          </ul>
+        </div>
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degree 1&deg; (Bill Frisell)</h4>
+          <ul>
+            <li><strong>Co-migration confirmed:</strong> Horvitz (1988) and Frisell (1989) from NYC downtown to Seattle. The Seattle Draw pattern now has three data points.</li>
+            <li><strong>Signal chain parallel:</strong> Frisell&rsquo;s guitar signal chain becomes Horvitz&rsquo;s keyboard signal chain. Technology-as-instrument is the constant; the source instrument changes.</li>
+            <li><strong>Density-sparsity spectrum:</strong> Jones (maximum density) &rarr; Horvitz (selective density) &rarr; Frisell (maximum sparsity). Horvitz mediates.</li>
+            <li><strong>Composition-improvisation spectrum:</strong> Jones (full score) &rarr; Horvitz (composed improvisation) &rarr; Frisell (loose frameworks). Again, Horvitz mediates.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a></li>
+            <li><a href="../001-bill-frisell/index.html">S36-001 &mdash; Bill Frisell (Degree 1&deg;)</a></li>
+            <li><a href="../../../GRV/index.html">GRV &mdash; Green River / Seattle Scene</a></li>
+            <li><a href="../../../DAA/index.html">DAA &mdash; Deep Audio Analysis</a></li>
+            <li><a href="../../../HFE/index.html">HFE &mdash; Audio Engineering</a></li>
+            <li><a href="../../../MDB/index.html">MDB &mdash; Moody Blues / Genre Bridging</a></li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Horvitz, Wayne. Personal website and discography.</li>
+          <li>The Royal Room. theroyalroomseattle.com.</li>
+          <li>Intuition Records. Zony Mash discography.</li>
+          <li>Songlines Records. <em>Way Out East</em> (2006), <em>Sweeter Than the Day</em> (2001).</li>
+          <li>National Sawdust Tracks. <em>Some Places Are Forever Afternoon</em> (2015).</li>
+          <li>Elektra/Nonesuch Records. The President and Robin Holcomb discography.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="7">
+          <li>Horvitz, Wayne. Interview. The Wire, 2003.</li>
+          <li>de Barros, Paul. &ldquo;Seattle Jazz: A Quiet Revolution.&rdquo; DownBeat, 1998.</li>
+          <li>Holcomb, Robin. Interview. Signal to Noise, 2001.</li>
+          <li>DownBeat. &ldquo;Wayne Horvitz: The Quiet Architect.&rdquo; 2004.</li>
+          <li>JazzTimes. &ldquo;Wayne Horvitz: Gravitas Quartet.&rdquo; 2007.</li>
+          <li>The Wire. &ldquo;The Architecture of Improvisation.&rdquo; 2008.</li>
+          <li>The Stranger. &ldquo;The Royal Room Finds Its Groove.&rdquo; 2013.</li>
+          <li>Zorn, John, ed. <em>Arcana: Musicians on Music</em>. Granary Books, 2000.</li>
+        </ol>
+
+        <h3>Institutional</h3>
+        <ol start="15">
+          <li>Earshot Jazz Festival. Archives, 1988&ndash;present.</li>
+          <li>AllMusic. Editorial reviews and discography.</li>
+          <li>NPR Music. Wayne Horvitz features and archives.</li>
+          <li>Seattle Met. &ldquo;Best of Seattle: The Royal Room.&rdquo; 2014.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1955, NYC</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">UC Santa Cruz</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle</span>
+            <span class="stat-value">Capitol Hill</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Since</span>
+            <span class="stat-value">1988</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Married to</span>
+            <span class="stat-value">Robin Holcomb</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">2&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2 (low)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz / Chamber / Film</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1980s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Intuition</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Projects</h4>
+          <div class="stat-row">
+            <span class="stat-label">Zony Mash</span>
+            <span class="stat-value">Funk/Improv</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gravitas Quartet</span>
+            <span class="stat-value">Chamber</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The President</span>
+            <span class="stat-value">Rock/Jazz</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pigpen</span>
+            <span class="stat-value">Trio w/ Frisell</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Royal Room</span>
+            <span class="stat-value">Venue (2012)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">With Genealogy</span>
+            <span class="stat-value">6 of 6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">7 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Bill Frisell</span>
+            <span class="stat-value">35+ years</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">John Zorn</span>
+            <span class="stat-value">Downtown era</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Robin Holcomb</span>
+            <span class="stat-value">Life partner</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ron Miles</span>
+            <span class="stat-value">Gravitas</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kenny Wollesen</span>
+            <span class="stat-value">Pigpen</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degrees 0&deg;&rarr;1&deg;&rarr;2&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">From 0&deg;</span>
+            <span class="stat-value">3 resolved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">From 1&deg;</span>
+            <span class="stat-value">5 resolved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">New Items</span>
+            <span class="stat-value">5 immediate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern Items</span>
+            <span class="stat-value">6 extended</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Next Degree</span>
+            <span class="stat-value">Ernestine Anderson</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 2&deg; / 360 &middot;
+      <a href="../001-bill-frisell/index.html">Prev: 1&deg; Frisell</a> &middot;
+      <a href="../000-quincy-jones/index.html">Origin: 0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

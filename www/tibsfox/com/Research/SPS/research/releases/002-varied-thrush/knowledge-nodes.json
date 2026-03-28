@@ -1,0 +1,272 @@
+{
+  "degree": 2,
+  "species": "Varied Thrush",
+  "scientific_name": "Ixoreus naevius",
+  "sound_type": "single haunting minor whistle",
+  "energy": 2,
+  "ecosystem": "mature conifer forest",
+  "season": "winter-resident",
+  "family": "Turdidae",
+  "order": "Passeriformes",
+  "genus_note": "Monotypic genus Ixoreus — sole living member",
+  "coordinates": {
+    "lat": 47.623,
+    "lon": -122.315,
+    "description": "Capitol Hill area, Seattle"
+  },
+  "physical": {
+    "length_in": "7.5-10",
+    "wingspan_in": "13-15",
+    "weight_g": "65-100"
+  },
+  "plumage": {
+    "breast": "Orange with bold black breastband",
+    "back": "Blue-gray",
+    "wing_bars": "Orange-tipped secondary coverts",
+    "supercilium": "Bold orange eyebrow stripe",
+    "auricular": "Dark ear patch connecting to breastband"
+  },
+  "frequency_range": {
+    "fundamental_hz_low": 2500,
+    "fundamental_hz_high": 5000,
+    "am_modulation_hz_low": 20,
+    "am_modulation_hz_high": 50,
+    "register": "alto"
+  },
+  "song_metrics": {
+    "note_duration_s": "1-2",
+    "inter_note_silence_s": "3-8",
+    "notes_per_bout": 1,
+    "modulation_type": "AM (amplitude modulation)",
+    "effective_tempo_bpm": "6-15",
+    "polyphony": "monophonic sustain"
+  },
+  "theory_nodes": [
+    {
+      "concept": "Sustained tone as drone / pedal point",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/",
+      "examples": [
+        "Single frequency held for maximum duration — the whole note tied to another whole note",
+        "Tanpura drone in Indian classical music — the harmonic reference",
+        "Bagpipe drones — continuous tone while melody plays above",
+        "Bach Passacaglia in C minor — sustained bass pedal",
+        "La Monte Young sustained-tone compositions — drone as primary material"
+      ],
+      "music_theory_parallel": "Pedal point — a held note that serves as harmonic anchor while time passes around it. The drone beneath all other motion."
+    },
+    {
+      "concept": "Amplitude modulation (biological AM synthesis)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/synthesis/",
+      "examples": [
+        "Carrier tone (2.5-5 kHz) modulated by rapid amplitude fluctuations (20-50 Hz)",
+        "AM radio transmission: carrier × modulation signal = complex output with sidebands",
+        "Ring modulation in analog synthesizers (Moog, EMS VCS3, ARP 2600)",
+        "FM (wren, degree 1) vs. AM (thrush, degree 2) — both fundamental modulation types"
+      ],
+      "music_theory_parallel": "AM synthesis — amplitude modulation producing timbral complexity from a single carrier tone. The biological AM transmitter.",
+      "cross_reference": "AMR (AM Radio research project) — same mathematics, different medium"
+    },
+    {
+      "concept": "Minimal melody — one note at a time",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/melody/",
+      "examples": [
+        "Vocalization stripped to theoretical minimum: one pitch, sustained, then silence, then one different pitch",
+        "Webern's pointillism — each note isolated, given maximum weight by surrounding silence",
+        "La Monte Young — sustained tones as complete compositions",
+        "Brian Eno — Music for Airports (1978) — ambient sustained-tone music",
+        "Miles Davis — one note, perfectly placed, allowed to ring"
+      ],
+      "music_theory_parallel": "Reductive melody — fewer notes, more weight per note. The opposite of complexity through density. Simplicity as aesthetic principle."
+    },
+    {
+      "concept": "Inter-note silence as compositional element",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/",
+      "examples": [
+        "3-8 seconds of silence between notes — the pause IS the rhythm",
+        "Japanese aesthetic of ma (間) — the interval, the pregnant pause",
+        "Negative space in visual art — emptiness defines form",
+        "Pre-delay in recording engineering — silence before reverb builds",
+        "Degree 0 silence returns here as frame around each tone (same principle, new application)"
+      ],
+      "music_theory_parallel": "Rest as structural rhythm. The silence is not absence — it is the compositional element that gives each note its weight."
+    },
+    {
+      "concept": "Frequency as emotional register",
+      "level": "intermediate",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/psychoacoustics/",
+      "examples": [
+        "2.5-5 kHz falls at peak human auditory sensitivity (ear canal resonance ~3 kHz)",
+        "Descending pitch tendency perceived as melancholy in Western music tradition",
+        "AM-produced roughness perceived as darker, more complex, more 'felt'",
+        "Sustained duration allows listener to inhabit the frequency — emotional weight through time"
+      ],
+      "music_theory_parallel": "The haunting quality is acoustic physics: peak sensitivity frequency + AM roughness + sustained duration + descending tendency = perceived melancholy."
+    },
+    {
+      "concept": "Conifer forest as acoustic architecture",
+      "level": "intermediate",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/conifer/",
+      "examples": [
+        "2.5-5 kHz optimized for conifer forest propagation (below atmospheric absorption, above trunk scattering)",
+        "Sustained note duration resists transient masking (sonar principle — longer ping carries further)",
+        "Inter-note silence as pre-delay — allows reverberant tail to decay before next note",
+        "Dense canopy + mature conifers = the acoustic environment the song is designed for"
+      ],
+      "music_theory_parallel": "Acoustic architecture — the performance space shapes the music. The forest is the reverb chamber, the concert hall, the studio."
+    },
+    {
+      "concept": "The voice of the rain forest — cultural acoustic identity",
+      "level": "foundational",
+      "department": "science/ecology",
+      "college_path": ".college/science/ecology/pnw/soundscape/",
+      "examples": [
+        "Independently described as 'the most haunting sound in the PNW forest' by multiple sources",
+        "Used in nature documentaries and soundscape ecology as PNW acoustic signature",
+        "Haskell (2017) cites as defining voice of Pacific Northwest forest ecology",
+        "Simplicity more evocative than complexity — one note can do what a hundred cannot"
+      ],
+      "music_theory_parallel": "Acoustic identity — a single sound that defines a place. The melodic signature of the Pacific Northwest, reduced to one note."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Thrush taxonomy, Turdidae placement, distributional context; this release adds AM synthesis mapping and sustained-tone theory"
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mature conifer forest ecology, altitudinal migration, forest-floor foraging ecology"
+    },
+    {
+      "project": "BPS",
+      "title": "Bio-Physics Sensing",
+      "connection": "Syringeal AM production, amplitude modulation mechanics, acoustic propagation modeling in conifer forest"
+    },
+    {
+      "project": "AMR",
+      "title": "AM Radio",
+      "connection": "Direct parallel: biological AM synthesis = AM radio transmission. Carrier × modulation = complex signal. Same mathematics, different medium."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Wayne Horvitz at degree 2 — sustained tone, atmospheric space, avant-jazz/chamber at the boundary of composed and ambient"
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "Silence at degree 0 returns as the frame around each note. Same principle (structured silence), new application (negative space around sustained tone)."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Direct predecessor and polar opposite. FM cascade vs. AM sustain. 100 notes/bout vs. 1 note/bout. Complexity through density vs. complexity through sustained presence."
+    }
+  ],
+  "part_a_parallel": {
+    "artist": "Wayne Horvitz",
+    "degree": 2,
+    "genre": "Avant-Jazz / Chamber",
+    "shared_principle": "Sustained tone, atmospheric space, the note that hangs in the air. Music at the boundary of composed and ambient. One note is enough when it is the right note.",
+    "resonance_points": [
+      "Sustained atmosphere: Horvitz's compositions create spaces where single notes and chords hang in the air — the thrush's song IS that hanging note in the forest",
+      "The composed-ambient boundary: Horvitz works where composition meets improvisation meets environment — the thrush sings where biology meets acoustics meets ecology",
+      "Seattle specificity: Horvitz is a Seattle musician; the Varied Thrush is heard singing in Seattle's Capitol Hill neighborhood — both are voices of the same winter city",
+      "Fewer notes, more weight: Horvitz's chamber works use space and restraint — the thrush's one-note-at-a-time approach is the ultimate expression of this aesthetic"
+    ]
+  },
+  "degree_arc": {
+    "position": "Third vertex of the opening triangle",
+    "progression": "Silence (0°) → cascade complexity (1°) → single sustained tone (2°)",
+    "key_insight": "The circle is non-monotonic. Complexity does not increase linearly. Degree 2 is LESS complex than degree 1 in note density but introduces new dimensions (AM synthesis, sustained tone, drone aesthetics) that degree 1 does not contain.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)"
+    }
+  },
+  "conservation": {
+    "federal_status": "Not listed (ESA)",
+    "state_status": "Common but habitat-dependent; population tied to mature conifer forest extent",
+    "protection": "Migratory Bird Treaty Act (16 U.S.C. 703-712)",
+    "primary_threats": [
+      "Loss of mature and old-growth conifer forest (breeding habitat)",
+      "Climate-driven shifts in montane forest distribution",
+      "Forest fragmentation reducing contiguous breeding habitat",
+      "Window strikes during winter urban residency"
+    ],
+    "migration_note": "Altitudinal migrant — breeds in montane forest, winters in lowland forest and urban areas with mature conifers"
+  },
+  "key_sites": [
+    {
+      "name": "Capitol Hill residential areas",
+      "type": "winter foraging/singing",
+      "description": "Mature conifers and berry-producing shrubs in residential yards; documented winter singing",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Discovery Park",
+      "type": "winter foraging/singing",
+      "description": "Mature second-growth forest with dense canopy",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Washington Park Arboretum",
+      "type": "winter foraging",
+      "description": "Mixed conifer and deciduous plantings",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Seward Park",
+      "type": "winter foraging",
+      "description": "Old-growth forest remnant within city limits",
+      "city": "Seattle, WA"
+    },
+    {
+      "name": "Olympic National Park (montane forest)",
+      "type": "core breeding habitat",
+      "description": "Mature conifer forest from 2,000-5,000 ft; high breeding density",
+      "county": "Multiple counties, WA"
+    }
+  ],
+  "sources": [
+    "George, T.L. (2020). Birds of the World. Cornell Lab of Ornithology. [Varied Thrush species account.]",
+    "Cornell Lab of Ornithology. All About Birds: Varied Thrush.",
+    "Seattle Audubon Society. BirdWeb: Varied Thrush.",
+    "Sibley, D.A. (2000). The Sibley Guide to Birds. Alfred A. Knopf.",
+    "Wahl, T.R., Tweit, B. & Mlodinow, S.G. (2005). Birds of Washington. OSU Press.",
+    "Klicka, Voelker & Spellman (2005). MPE 34(3). [Turdidae phylogenetics.]",
+    "Pyle, P. (1997). Identification Guide to North American Birds, Part I. Slate Creek Press.",
+    "Haskell, D.G. (2017). The Songs of Trees. Viking.",
+    "Armstrong, E.H. (1936). Proc. IRE 24(5). [FM radio — AM contrast.]",
+    "Fourier, J.B.J. (1822). Théorie analytique de la chaleur. [Spectral decomposition.]",
+    "Marzluff & Ewing (2001). Restoration Ecology 9(3). [Forest fragmentation.]",
+    "Washington Department of Fish and Wildlife. Species account.",
+    "Macaulay Library. Varied Thrush recordings. Cornell Lab of Ornithology."
+  ],
+  "release_metadata": {
+    "release_number": "002",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
