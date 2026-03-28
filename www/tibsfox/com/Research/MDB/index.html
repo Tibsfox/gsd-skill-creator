@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Moody Blues — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A237E;
+    --secondary: #880E4F;
+    --tertiary: #4E342E;
+    --accent: #283593;
+    --light-primary: #E8EAF6;
+    --light-secondary: #FCE4EC;
+    --border: #BDBDBD;
+    --subtle: #757575;
+    --bg: #FAFAFA;
+    --card-bg: #F0F2FC;
+    --card-bg-2: #F9E4EE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: #212121;
+    line-height: 1.65;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────────── */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #283593 50%, var(--secondary) 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.02) 2px,
+      transparent 2px,
+      transparent 12px
+    );
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 0.4rem;
+  }
+
+  .header-tagline {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 1rem;
+  }
+
+  .pipeline-badge {
+    display: inline-block;
+    margin-top: 1.25rem;
+    padding: 0.35rem 1.2rem;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* ── Main ────────────────────────────────────────────────────────── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* ── File Cards ──────────────────────────────────────────────────── */
+  .cards-section h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 1rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid rgba(26,35,126,0.15);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    display: block;
+  }
+
+  .card:nth-child(2) {
+    background: var(--card-bg-2);
+    border-color: rgba(136,14,79,0.15);
+  }
+
+  .card:nth-child(3) {
+    background: #F5F1EF;
+    border-color: rgba(78,52,46,0.15);
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,35,126,0.12);
+    border-color: var(--primary);
+  }
+
+  .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: var(--primary);
+  }
+
+  .card:nth-child(2) .card-title { color: var(--secondary); }
+  .card:nth-child(3) .card-title { color: var(--tertiary); }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--subtle);
+    line-height: 1.5;
+  }
+
+  .card-meta {
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* ── Contents Breakdown ──────────────────────────────────────────── */
+  .contents-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 1rem;
+  }
+
+  .stage {
+    border-left: 3px solid var(--primary);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    background: white;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .stage:nth-child(2) { border-left-color: var(--secondary); }
+  .stage:nth-child(3) { border-left-color: var(--tertiary); }
+
+  .stage-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .stage:nth-child(2) .stage-label { color: var(--secondary); }
+  .stage:nth-child(3) .stage-label { color: var(--tertiary); }
+
+  .stage-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .stage ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .stage ul li {
+    font-size: 0.875rem;
+    color: #424242;
+    padding: 0.18rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .stage ul li::before {
+    content: '→';
+    color: var(--border);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  /* ── Module Grid ─────────────────────────────────────────────────── */
+  .modules-section {
+    margin-bottom: 3rem;
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .module-chip {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .module-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    text-transform: uppercase;
+  }
+
+  .module-name {
+    font-weight: 600;
+    margin: 0.15rem 0 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .module-desc {
+    font-size: 0.78rem;
+    color: var(--subtle);
+    line-height: 1.4;
+  }
+
+  /* ── Usage ───────────────────────────────────────────────────────── */
+  .usage-section {
+    margin-bottom: 3rem;
+  }
+
+  .steps {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .step:nth-child(2) .step-num { background: var(--secondary); }
+  .step:nth-child(3) .step-num { background: var(--tertiary); }
+  .step:nth-child(4) .step-num { background: var(--accent); }
+
+  .step-content strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    font-size: 0.9rem;
+  }
+
+  .step-content p {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* ── Recompile ───────────────────────────────────────────────────── */
+  .recompile-section {
+    margin-bottom: 3rem;
+  }
+
+  .code-block {
+    background: #1A237E;
+    color: #C5CAE9;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+    font-size: 0.825rem;
+    line-height: 1.8;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .code-comment { color: #7986CB; }
+
+  /* ── Meta strip ──────────────────────────────────────────────────── */
+  .meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 3rem;
+    font-size: 0.82rem;
+  }
+
+  .meta-item strong {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 0.15rem;
+  }
+
+  /* ── Quote ───────────────────────────────────────────────────────── */
+  blockquote {
+    border-left: 4px solid var(--primary);
+    background: var(--light-primary);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+    color: #2c2c2c;
+  }
+
+  .quote-attr {
+    font-size: 0.8rem;
+    color: var(--subtle);
+    padding-left: 1.5rem;
+    font-style: normal;
+    margin-bottom: 3rem;
+  }
+
+  /* ── Footer ──────────────────────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--subtle);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">GSD Research Mission Package</div>
+  <h1>The Moody Blues<br>Origins, Architecture, Legacy</h1>
+  <div class="header-subtitle">Birmingham 1964 → Rock Hall of Fame 2018</div>
+  <div class="header-tagline">A Deep Research Study — Vision · Research · Mission</div>
+  <div class="pipeline-badge">Fleet Profile · 17 Roles · 6 Modules · 30 Pages</div>
+</header>
+
+<main>
+
+  <!-- Meta -->
+  <div class="meta-strip">
+    <div class="meta-item"><strong>Date</strong>March 28, 2026</div>
+    <div class="meta-item"><strong>Status</strong>Ready for GSD Orchestrator</div>
+    <div class="meta-item"><strong>Activation</strong>Fleet (17 roles)</div>
+    <div class="meta-item"><strong>Est. Tokens</strong>~91,000</div>
+    <div class="meta-item"><strong>Sessions</strong>4–5 context windows</div>
+    <div class="meta-item"><strong>Parallel Tracks</strong>3 (Waves 1A, 1B, 1C)</div>
+  </div>
+
+  <!-- File Cards -->
+  <div class="cards-section">
+    <h2>Downloads</h2>
+    <div class="cards">
+      <a class="card" href="moody_blues_mission.pdf" download>
+        <div class="card-icon">📄</div>
+        <div class="card-title">Mission Package PDF</div>
+        <div class="card-desc">Full 30-page publication-quality document. All three stages: Vision, Research Reference, and Mission Package.</div>
+        <div class="card-meta">↓ moody_blues_mission.pdf</div>
+      </a>
+      <a class="card" href="moody_blues_mission.tex" download>
+        <div class="card-icon">📝</div>
+        <div class="card-title">LaTeX Source (.tex)</div>
+        <div class="card-desc">Full XeLaTeX source. Modify and recompile with three passes. Mood Indigo color scheme; DejaVu fonts.</div>
+        <div class="card-meta">↓ moody_blues_mission.tex</div>
+      </a>
+      <a class="card" href="index.html" download>
+        <div class="card-icon">🌐</div>
+        <div class="card-title">This Index Page</div>
+        <div class="card-desc">HTML landing page with download cards, usage instructions, and compilation guide. Self-contained.</div>
+        <div class="card-meta">↓ index.html</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Contents -->
+  <div class="contents-section">
+    <div class="section-title">Contents</div>
+
+    <div class="stage">
+      <div class="stage-label">Stage 1</div>
+      <div class="stage-title">Vision Document</div>
+      <ul>
+        <li>Vision narrative — the Moody Blues as Amiga Principle in music history</li>
+        <li>Five-problem problem statement (genre documentation, transformation, Mellotron, philosophy, influence)</li>
+        <li>Domain map and module architecture (ASCII diagrams)</li>
+        <li>Six research modules defined with scope and rationale</li>
+        <li>Chipset YAML configuration (Fleet profile)</li>
+        <li>12 testable success criteria</li>
+        <li>Through-line: "The threshold is not a problem to be solved. It is where the work happens."</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-label">Stage 2</div>
+      <div class="stage-title">Research Reference</div>
+      <ul>
+        <li>Module 1: Birmingham origins — El Riot &amp; the Rebels, M&amp;B5 formation, naming, Go Now #1</li>
+        <li>Module 2: The Great Transformation — 1966 pivot, Decca commission subverted, Mellotron engineering</li>
+        <li>Module 3: Classic era discography — all 7 LPs with charts, philosophy taxonomy, Apollo 15</li>
+        <li>Module 4: Threshold Records — formation, Apple Records parallel, label roster, retail shops</li>
+        <li>Module 5: Signature songs — Nights in White Satin three chart lives, Seattle FM breakout</li>
+        <li>Module 6: Legacy — Yes/Genesis/ELO/Deep Purple influence genealogy, RRHOF 2018</li>
+        <li>Safety and sensitivity considerations table</li>
+        <li>Full source bibliography (20+ named sources)</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-label">Stage 3</div>
+      <div class="stage-title">Mission Package</div>
+      <ul>
+        <li>Milestone specification with three-wave architecture overview</li>
+        <li>10 named deliverables with acceptance criteria and agent assignments</li>
+        <li>Component breakdown with model allocations (~91,000 token budget)</li>
+        <li>Full wave execution plan: Waves 0, 1A, 1B, 1C, 2, 3 with CAPCOM gates</li>
+        <li>Cache optimization strategy (5-minute TTL window exploitation)</li>
+        <li>38-test test plan with 6 safety-critical BLOCK tests</li>
+        <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+        <li>17-role crew manifest (Fleet profile)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Modules Grid -->
+  <div class="modules-section">
+    <div class="section-title">Research Modules</div>
+    <div class="modules-grid">
+      <div class="module-chip">
+        <div class="module-num">Module 01</div>
+        <div class="module-name">Birmingham Origins</div>
+        <div class="module-desc">El Riot &amp; the Rebels, M&amp;B5 formation, Marquee Club, Decca deal, Go Now #1 (1958–1966)</div>
+      </div>
+      <div class="module-chip">
+        <div class="module-num">Module 02</div>
+        <div class="module-name">The Great Transformation</div>
+        <div class="module-desc">1966 pivot, Hayward/Lodge join, Dvorak commission subverted, Mellotron engineering, Days of Future Passed</div>
+      </div>
+      <div class="module-chip">
+        <div class="module-num">Module 03</div>
+        <div class="module-name">Classic Era</div>
+        <div class="module-desc">7 albums 1968–1972, Descartes/Leary/Tolkien/Lewis philosophy, Apollo 15, 1974 hiatus and reunion</div>
+      </div>
+      <div class="module-chip">
+        <div class="module-num">Module 04</div>
+        <div class="module-name">Threshold Records</div>
+        <div class="module-desc">Artist-owned label (1969), Apple Records parallel, gatefold aesthetics, Cobham retail shop</div>
+      </div>
+      <div class="module-chip">
+        <div class="module-num">Module 05</div>
+        <div class="module-name">Signature Songs &amp; FM</div>
+        <div class="module-desc">Nights in White Satin three chart lives, Seattle regional FM breakout, Deramic Stereo / FM alignment</div>
+      </div>
+      <div class="module-chip">
+        <div class="module-num">Module 06</div>
+        <div class="module-name">Legacy &amp; Influence</div>
+        <div class="module-desc">Yes / Genesis / ELO / Deep Purple lineage, Mellotron proliferation, RRHOF 2018, critical arc reversal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <div class="usage-section">
+    <div class="section-title">How to Use This Package</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Download the PDF</strong>
+          <p>Read Stage 1 (Vision) to understand scope and philosophy. Read Stage 2 (Research Reference) as your primary evidential baseline before executing any research tasks.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Hand to GSD Orchestrator</strong>
+          <p>Feed the PDF to Claude Code via gsd-skill-creator. The Stage 3 Mission Package is a complete flight plan: wave structure, crew manifest, token budget, and test plan are ready to execute.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Execute Waves with CAPCOM Gates</strong>
+          <p>Run Wave 0 (Foundation) first, then parallel Waves 1A/1B/1C. Pause at each CAPCOM gate for human review — particularly the LSD/Leary philosophical content calibration before Wave 2.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Target: College of Knowledge</strong>
+          <p>Final deliverable slots into the GSD College of Knowledge music history curriculum under "Progressive Rock Origins." GSD ecosystem through-line (Amiga Principle / Spaces Between) is pre-written in the synthesis passages.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recompile -->
+  <div class="recompile-section">
+    <div class="section-title">LaTeX Recompilation</div>
+    <div class="code-block"><span class="code-comment"># Three-pass XeLaTeX compilation (required for TOC + lastpage + cross-refs)</span>
+xelatex -interaction=nonstopmode moody_blues_mission.tex
+xelatex -interaction=nonstopmode moody_blues_mission.tex
+xelatex -interaction=nonstopmode moody_blues_mission.tex
+
+<span class="code-comment"># Prerequisites: xelatex + DejaVu fonts</span>
+<span class="code-comment"># Ubuntu: sudo apt install texlive-xetex fonts-dejavu</span>
+<span class="code-comment"># Color scheme: Mood Indigo (#1A237E) / Deep Crimson (#880E4F) / Earth (#4E342E)</span></div>
+  </div>
+
+  <!-- Closing Quote -->
+  <blockquote>
+    "We were lower middle class English boys singing about life in the deep south of the USA and it wasn't honest. As soon as we began to express our own feelings and to create our own music our fortunes changed."
+  </blockquote>
+  <div class="quote-attr">— Justin Hayward, Los Angeles Times, 1990</div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · The Moody Blues · March 28, 2026 · Vision → Research → Mission
+</footer>
+
+</body>
+</html>
