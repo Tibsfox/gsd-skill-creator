@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 5&deg; &mdash; Red-breasted Nuthatch &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.metronome { background: #E65100; }
+    .theory-icon.timbre { background: #7B1FA2; }
+    .theory-icon.repetition { background: var(--puget-dark); }
+    .theory-icon.retrograde { background: #1565C0; }
+    .theory-icon.eavesdrop { background: #C62828; }
+    .theory-icon.ostinato { background: var(--earth-mid); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Progression card */
+    .progression-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .progression-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #7B1FA2;
+    }
+    .progression-table { margin: 0.75rem 0; width: 100%; }
+    .progression-table th { font-size: 0.78rem; }
+    .progression-table td { font-size: 0.85rem; }
+
+    /* Network card */
+    .network-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #E3F2FD 100%);
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .network-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #2E7D32;
+    }
+    .network-edge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+    }
+    .network-edge .arrow {
+      color: #2E7D32;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .network-node {
+      background: white;
+      border: 1px solid #81C784;
+      border-radius: 4px;
+      padding: 0.25rem 0.6rem;
+      font-weight: 600;
+      color: #1B5E20;
+    }
+    .network-label {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">5&deg;</div>
+      <div class="release-title-block">
+        <h2>Red-breasted Nuthatch</h2>
+        <div class="scientific">Sitta canadensis &middot; Family Sittidae (Nuthatches)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Nasal Yank-Yank Tin Horn &middot; Conifer Canopy &middot; Resident &middot; Energy 2</div>
+
+    <blockquote>
+      The Red-breasted Nuthatch walks head-first down a conifer trunk, calling yank-yank-yank at a
+      steady, unwavering tempo &mdash; the metronome of the canopy, the click track against which
+      every other rhythm is heard. Degree 5 adds the steady beat. The ensemble now has pulse.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Red-breasted Nuthatch is a small passerine of the family <strong>Sittidae</strong>
+          (nuthatches), order Passeriformes. A monotypic species &mdash; no subspecies recognized.
+          The <strong>only nuthatch in the PNW with red breast coloring</strong>.
+          At <strong>4.3 inches</strong> and <strong>9&ndash;11 grams</strong>, it is among the
+          smallest species in the first six degrees, comparable in mass to the Pacific Wren.
+          Blue-gray upperparts, rusty-orange underparts, bold black eye-line, white supercilium.
+        </p>
+        <p>
+          The defining behavior: descending tree trunks <strong>head-first</strong>. This is unique
+          among North American bark-foraging birds. Woodpeckers ascend with tail-bracing. Creepers spiral
+          upward. The nuthatch moves in <strong>all directions</strong> &mdash; up, down, sideways,
+          inverted &mdash; with the head-first downward descent as the signature locomotion. The inverted
+          perspective gives access to food in bark crevices that right-side-up foragers miss: the same
+          tree, the same bark, but a different viewing angle reveals what others cannot see.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Nasal Yank-Yank</h2>
+        <h3>The Metronome of the Conifer Canopy</h3>
+        <p>
+          The primary vocalization is a <strong>nasal, tin-horn-like &ldquo;yank-yank-yank&rdquo;</strong>
+          &mdash; a series of identical notes at a remarkably steady rate. Each note is approximately
+          0.1&ndash;0.15 seconds, repeated at <strong>2&ndash;3 per second</strong> with highly
+          regular inter-note intervals. Fundamental frequency at <strong>1.5&ndash;3.5 kHz</strong>
+          with strong harmonic content extending to 4+ kHz. The nasal, buzzy quality results from a
+          broad overtone series &mdash; a brass-like harmonic stack that cuts through canopy noise.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Fundamental frequency</td><td>1.5&ndash;3.5 kHz</td></tr>
+            <tr><td>Harmonic content</td><td>Extends to 4+ kHz (rich overtone series)</td></tr>
+            <tr><td>Note duration</td><td>0.1&ndash;0.15 s per note</td></tr>
+            <tr><td>Repetition rate</td><td>2&ndash;3 notes/second (metronomic)</td></tr>
+            <tr><td>Bout length</td><td>3&ndash;15 notes per calling bout</td></tr>
+            <tr><td>Timbre</td><td>Nasal, tin-horn, brass-like</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Secondary Vocalizations</h3>
+        <ul>
+          <li><strong>&ldquo;Ank&rdquo; contact call:</strong> Softer, shorter single-note version between mates during foraging. Pair coordination signal &mdash; the metronome at lower volume.</li>
+          <li><strong>Agitation call:</strong> More rapid, higher-pitched &ldquo;nyeh-nyeh-nyeh.&rdquo; Increased rate signals heightened alert &mdash; the metronome speeds up under threat.</li>
+        </ul>
+
+        <!-- Interspecies Network -->
+        <div class="network-card">
+          <h3>Interspecies Eavesdropping Network</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Red-breasted Nuthatch is a <strong>confirmed client</strong> of the chickadee alarm broadcast system.
+            Templeton &amp; Greene (2007) demonstrated experimentally that nuthatches extract threat-level
+            information from chickadee D-note alarm calls, modulating their anti-predator behavior based
+            on the number of D notes (more D notes = higher-threat predator).
+          </p>
+          <div class="network-edge">
+            <span class="network-node">Chickadee (3&deg;)</span>
+            <span class="arrow">&rarr;</span>
+            <span class="network-node">Nuthatch (5&deg;)</span>
+            <span class="network-label">&nbsp;Broadcaster &rarr; Client (D-note threat encoding)</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--page-text-light); margin-top: 0.75rem; font-family: system-ui, sans-serif;">
+            First directed edge in the interspecies network graph. The signal has both a sender
+            and a documented receiver within the first six species of the engine.
+          </p>
+        </div>
+
+        <!-- Progression Card -->
+        <div class="progression-card">
+          <h3>The Arc: Silence &rarr; Cascade &rarr; Drone &rarr; Language &rarr; Motif &rarr; Metronome</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degree 5 adds the STEADY BEAT. The first five degrees established silence, melody, harmony,
+            language, and motif. The nuthatch provides the temporal grid &mdash; the click track against
+            which all other rhythms are located.
+          </p>
+          <table class="progression-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>0&deg; Heron</th>
+                <th>1&deg; Wren</th>
+                <th>2&deg; Thrush</th>
+                <th>3&deg; Chickadee</th>
+                <th>4&deg; Owl</th>
+                <th>5&deg; Nuthatch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Sound</strong></td><td>Silence</td><td>Cascade</td><td>Sustained tone</td><td>Named call</td><td>4-note motif</td><td><strong>Steady beat</strong></td></tr>
+              <tr><td><strong>Synthesis</strong></td><td>None</td><td>FM</td><td>AM</td><td>Combinatorial</td><td>Rhythmic cell</td><td><strong>Metronomic pulse</strong></td></tr>
+              <tr><td><strong>Content</strong></td><td>Absence</td><td>Identity</td><td>Presence</td><td>Referential info</td><td>Territory</td><td><strong>Temporal grid</strong></td></tr>
+              <tr><td><strong>Role</strong></td><td>Rest</td><td>Soloist</td><td>Drone</td><td>Vocalist</td><td>Ostinato</td><td><strong>Click track</strong></td></tr>
+              <tr><td><strong>Theory</strong></td><td>Cage/rests</td><td>FM/Baroque</td><td>AM/pedal</td><td>Syntax</td><td>Motif</td><td><strong>Metronome</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Head-First Descent -->
+        <h2>Inverted Perspective &mdash; Head-First Descent</h2>
+        <p>
+          The nuthatch descends tree trunks <strong>head-first</strong> using an alternating foot-hold
+          system: one foot grips above the body as an anchor while the other reaches below. The long
+          hind claw hooks into bark irregularities above the bird&rsquo;s center of gravity. This is
+          <strong>perspective as competitive advantage</strong> &mdash; insects and seeds lodged in
+          crevices that are invisible from below become visible from above. The same substrate,
+          a different viewing angle, hidden resources revealed.
+        </p>
+        <p>
+          In music theory, this maps to <strong>retrograde</strong> &mdash; playing a sequence in
+          reverse order. The same notes, the same intervals, but read from right to left. Retrograde
+          reveals hidden structures in a melody, just as the inverted descent reveals hidden resources
+          in bark. Both are <strong>inversions of approach direction</strong> that expose what the
+          forward pass misses.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon metronome">M</div>
+            <div class="theory-content">
+              <h4>Metronomic Pulse (Steady Beat) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Identical notes at a steady rate. The temporal grid against which all other rhythms are perceived. The click track of the conifer canopy &mdash; pure temporal reference.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon timbre">T</div>
+            <div class="theory-content">
+              <h4>Nasal Timbre (Tin-Horn Overtone Structure) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Rich harmonic stack: fundamental + strong overtones = brass-like, penetrating quality. Cuts through canopy noise the way a muted trumpet cuts through an orchestral texture.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon repetition">R</div>
+            <div class="theory-content">
+              <h4>Repetition as Identity (Invariance) <span class="theory-level foundational">Foundational</span></h4>
+              <p>Instantly recognizable through consistency, not complexity. The same note, same tempo, same timbre. Identity through never changing &mdash; the groove that holds.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon retrograde">I</div>
+            <div class="theory-content">
+              <h4>Inverted Perspective as Retrograde <span class="theory-level advanced">Advanced</span></h4>
+              <p>Head-first descent = same sequence, opposite direction. Retrograde in music reveals hidden structures. Inverted foraging reveals hidden resources. Both are direction-reversal as discovery technique.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon eavesdrop">E</div>
+            <div class="theory-content">
+              <h4>Interspecies Eavesdropping (Network Client) <span class="theory-level advanced">Advanced</span></h4>
+              <p>Confirmed receiver of chickadee alarm broadcasts. Extracts threat-level information from D-note encoding. Second node in the interspecies information network &mdash; the first cross-degree dependency.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon ostinato">O</div>
+            <div class="theory-content">
+              <h4>Ostinato Bass (Pure Single-Note Repetition) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The simplest form of ostinato &mdash; one note, repeated. Pachelbel&rsquo;s Canon, Purcell&rsquo;s Dido. A repeated bass pulse that anchors while upper voices elaborate.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Metronomic pulse as temporal foundation.</strong> The yank-yank-yank is a steady
+          beat &mdash; identical notes at a regular rate. In a studio, the click track is the first
+          thing laid down. Every instrument synchronizes to it. The nuthatch&rsquo;s call functions
+          identically in the canopy: a reliable temporal reference that other species&rsquo;
+          vocalizations are perceived against.
+        </p>
+        <p>
+          <strong>Nasal timbre as spectral identity.</strong> The tin-horn quality results from a
+          broad harmonic spectrum &mdash; strong overtones creating a brass-like, penetrating tone.
+          In an orchestra, this is the oboe, the muted trumpet, the French horn. Instruments whose
+          overtone structure occupies a wide spectral band, cutting through ambient texture. The
+          nuthatch&rsquo;s call cuts through canopy noise for the same physical reason.
+        </p>
+        <p>
+          <strong>Repetition as identity.</strong> The call is recognizable not through complexity
+          or meaning but through <strong>consistency</strong>. The same note, same tempo, same timbre.
+          In music, the most memorable hooks are often the simplest &mdash; a repeated riff, a
+          persistent bass line, a groove that locks. The nuthatch is the groove.
+        </p>
+        <p>
+          <strong>Inverted perspective as retrograde.</strong> Head-first descent on a trunk is the
+          same path read backward &mdash; retrograde. In counterpoint, retrograde reveals hidden
+          structures in a subject. In ecology, inverted foraging reveals hidden food in bark. Both
+          are direction-reversal as a technique for discovering what the forward pass misses.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the Pacific Northwest
+            <p>Passerine taxonomy. This release adds metronome analysis, eavesdropping network node, and inverted-perspective ecology.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Conifer forest ecology, seed caching/dispersal, insect pest regulation, mixed-species flock dynamics.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; BPS Sensor Network
+            <p>Steady temporal signal maps to clock synchronization. A metronomic natural pulse as reference clock for acoustic monitoring.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Overton Berry at degree 5&deg;. Both are persistent, reliable presences. Consistency as defining trait.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003</strong> &mdash; Black-capped Chickadee
+            <p>Interspecies eavesdropping network. Nuthatch is confirmed client of chickadee alarm broadcast (Templeton &amp; Greene 2007). First directed edge: chickadee &rarr; nuthatch.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>Heron&rsquo;s silence is the blank canvas. Nuthatch&rsquo;s steady beat is the temporal grid drawn on that canvas. Six degrees: both silence and pulse.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Both are small conifer forest residents. Wren&rsquo;s 100+ note cascade vs. nuthatch&rsquo;s single-note repetition: maximum variety vs. maximum consistency.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Both occupy conifer canopy. Thrush sustains one tone; nuthatch repeats one note. Sustain vs. pulse. AM vs. metronomic.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004</strong> &mdash; Northern Spotted Owl
+            <p>Direct predecessor. Owl introduced rhythm (4-note motif). Nuthatch reduces rhythm to essence: one note, steady beat. The motif has complexity; the metronome has purity.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Ghalambor, C.K. &amp; Martin, T.E. (1999). &ldquo;Red-breasted Nuthatch.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Templeton, C.N. &amp; Greene, E. (2007). Nuthatches eavesdrop on chickadee alarm calls. <em>PNAS</em> 104(13): 5479&ndash;5482.</li>
+          <li>Templeton, C.N., Greene, E. &amp; Davis, K. (2005). Chickadee alarm call encoding. <em>Science</em> 308(5730): 1934&ndash;1937.</li>
+          <li>Matthysen, E. (1998). <em>The Nuthatches</em>. T &amp; AD Poyser, London.</li>
+          <li>Kilham, L. (1968). Reproductive behavior of Red-breasted Nuthatches. <em>Auk</em> 85(1): 135&ndash;145.</li>
+          <li>Bock, C.E. &amp; Lepthien, L.W. (1972). Winter eruptions of Red-breasted Nuthatches. <em>American Birds</em> 26: 558&ndash;561.</li>
+          <li>Koenig, W.D. &amp; Knops, J.M.H. (2001). Seed-crop size and eruptions. <em>J Animal Ecology</em> 70(4): 609&ndash;620.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Red-breasted Nuthatch. allaboutbirds.org</li>
+          <li>BirdWeb (Seattle Audubon Society). Red-breasted Nuthatch. birdweb.org</li>
+          <li>Macaulay Library. Red-breasted Nuthatch recordings. Cornell Lab of Ornithology.</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>USGS Breeding Bird Survey. Population trend data. mbr-pwrc.usgs.gov</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Sittidae</div>
+          <div class="stat-detail">Nuthatches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Monotypic</div>
+          <div class="stat-detail">No subspecies recognized</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.3 in</div>
+          <div class="stat-detail">11 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">9&ndash;11 g</div>
+          <div class="stat-detail">Comparable to Pacific Wren</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingspan</div>
+          <div class="stat-value">7.1&ndash;7.9 in</div>
+          <div class="stat-detail">18&ndash;20 cm</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Primary Vocalization</div>
+          <div class="stat-value">1.5&ndash;3.5 kHz</div>
+          <div class="stat-detail">Nasal yank-yank tin horn</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Note Duration</div>
+          <div class="stat-value">0.1&ndash;0.15 s</div>
+          <div class="stat-detail">Per note, 3&ndash;15 per bout</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Repetition Rate</div>
+          <div class="stat-value">2&ndash;3/sec</div>
+          <div class="stat-detail">Metronomic tempo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Timbre</div>
+          <div class="stat-value">Brass-like</div>
+          <div class="stat-detail">Rich harmonic stack, penetrating</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Temporal Regularity</div>
+          <div class="stat-detail">Steady beat &mdash; the metronome</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">5&deg;</div>
+          <div class="stat-detail">The metronome &mdash; steady beat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Low-energy persistent pulse</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Conifer Canopy</div>
+          <div class="stat-detail">Douglas fir, hemlock, spruce, cedar</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round (irruptive in poor cone years)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">~20 million (Partners in Flight 2020)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Network Role</div>
+          <div class="stat-value">Client</div>
+          <div class="stat-detail">Receives chickadee alarm broadcasts</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 5&deg; &mdash; S36</div>
+          <div class="parallel-name">Overton Berry</div>
+          <div class="parallel-detail">Both are persistent, reliable presences. Berry played the piano in Seattle&rsquo;s jazz clubs for decades &mdash; steady, dependable, always there. The nuthatch calls yank-yank-yank from the conifers year after year. Consistency as defining trait. Neither is the flashiest voice in the room, but both are the pulse that holds the ensemble together.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 005 of 360 &middot;
+      <a href="../004-spotted-owl/index.html">Degree 4&deg;: Northern Spotted Owl</a> &middot;
+      <a href="../003-black-capped-chickadee/index.html">Degree 3&deg;: Black-capped Chickadee</a> &middot;
+      <a href="../000-great-blue-heron/index.html">Degree 0&deg;: Great Blue Heron</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
