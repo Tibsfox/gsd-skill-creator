@@ -6,6 +6,7 @@
     { id: 'ACE', name: 'Compute Engine', path: 'ACE/index.html' },
     { id: 'ANM', name: '90s Animation', path: 'ANM/index.html' },
     { id: 'AGR', name: 'PNW Agriculture', path: 'AGR/index.html' },
+    { id: 'AIH', name: 'AI Horizon', path: 'AIH/index.html' },
     { id: 'ARC', name: 'Shapes & Colors', path: 'ARC/index.html' },
     { id: 'ATC', name: 'Aries-Taurus Cusp', path: 'ATC/index.html' },
     { id: 'AVI', name: 'Birds', path: 'AVI/index.html' },
