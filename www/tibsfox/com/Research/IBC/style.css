@@ -1,0 +1,209 @@
+/* IBC — Cedar Brown / Forest Green / Salmon Orange theme, Indigenous Broadcasting PNW
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --cedar: #4E342E;
+  --cedar-light: #EFEBE9;
+  --cedar-mid: #5D4037;
+  --cedar-dark: #3E2723;
+  --forest: #1B5E20;
+  --forest-light: #E8F5E9;
+  --forest-mid: #2E7D32;
+  --salmon: #E65100;
+  --salmon-light: #FFF3E0;
+  --salmon-mid: #F57C00;
+  --mist: #EFEBE9;
+
+  /* Semantic overrides */
+  --page-bg: #FAF8F5;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--forest);
+  --link-hover: var(--cedar-dark);
+  --accent: var(--cedar);
+  --accent-light: var(--cedar-light);
+  --accent-dark: var(--cedar-dark);
+  --card-bg: white;
+  --card-border: #D7CCC8;
+  --card-shadow: rgba(78, 52, 46, 0.12);
+  --border: #D7CCC8;
+  --parchment: var(--cedar-light);
+  --text: #212121;
+  --text-light: #757575;
+  --electric: var(--forest);
+  --electric-light: var(--forest-light);
+  --electric-mid: var(--forest-mid);
+}
+
+/* ===================================================
+   2. HEADER -- cedar/forest gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #2a1a14 0%, #3E2723 30%, #1B3520 70%, #0d2b12 100%);
+  border-bottom: 4px solid var(--salmon);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(230, 81, 0, 0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(27, 94, 32, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #EFEBE9; }
+header .subtitle { color: #BCAAA4; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--cedar);
+  border-bottom-color: var(--cedar-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--forest); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--cedar-light);
+  border-left: 4px solid var(--salmon);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--cedar); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(78, 52, 46, 0.04); }
+tr:hover { background: rgba(78, 52, 46, 0.08); }
+
+pre {
+  background: #2a1a14;
+  color: #EFEBE9;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--salmon-mid);
+}
+code {
+  background: var(--cedar-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--cedar);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #D7CCC8;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(78, 52, 46, 0.12); border-color: var(--salmon); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #D7CCC8;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--salmon);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-station { background: var(--cedar-light); color: var(--cedar); }
+.tag-language { background: var(--forest-light); color: var(--forest); }
+.tag-infra { background: var(--salmon-light); color: var(--salmon); }
+.tag-program { background: #E3F2FD; color: #1565C0; }
+.tag-sovereign { background: #FBE9E7; color: #BF360C; }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FFF3E0;
+  border: 1px solid #FFE0B2;
+  border-left: 4px solid var(--salmon);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: var(--salmon); }
+
+.sovereignty-note {
+  background: var(--forest-light);
+  border: 1px solid #A5D6A7;
+  border-left: 4px solid var(--forest);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.sovereignty-note strong { color: var(--forest); }
+
+.cross-links {
+  background: white;
+  border: 1px solid #D7CCC8;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--forest); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--cedar-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--cedar);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #D7CCC8; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
