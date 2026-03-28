@@ -1,0 +1,1061 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME: History/Institution (Burgundy / Warm Gold / Deep Brown) ──
+\definecolor{primary}{HTML}{4A0E2A}       % Deep burgundy
+\definecolor{secondary}{HTML}{7B4F00}     % Warm amber-gold
+\definecolor{tertiary}{HTML}{3B2314}      % Deep brown
+\definecolor{accent}{HTML}{9E2A47}        % CBC-red accent
+\definecolor{lightprimary}{HTML}{F5E8EC}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{FEF3DC}
+\definecolor{lighttertiary}{HTML}{F2EBE4}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── HEADERS AND FOOTERS ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{CBC/Radio-Canada}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={CBC/Radio-Canada -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ── TABLE ROW COLORS ──
+\tcbuselibrary{skins,breakable}
+
+\begin{document}
+
+% ════════════════════════════════════════════════════════
+% TITLE PAGE
+% ════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{CBC/Radio-Canada\\[0.3em]Cultural Sovereignty Study}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{National Public Broadcasting --- Canada, 1936 to Present}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 10--13 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ════════════════════════════════════════════════════════
+% TABLE OF CONTENTS
+% ════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════
+% STAGE 1: VISION DOCUMENT
+% ════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{CBC/Radio-Canada --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Cold-Start Research Vision}
+\metafield{Depends on:}{Broadcasting Act of 1991, CRTC license framework, Canadian Heritage policy}
+\metafield{Context:}{Comprehensive study of Canada's national public broadcaster --- its institutional history, governance architecture, service portfolio, Indigenous-language mandate, digital transformation strategy, and the live political battle over its survival.}
+
+\subsection{Vision}
+
+There is a frequency no commercial broadcaster will ever hold. It is not licensed to be profitable; it is licensed to exist. In 1932, when the first Royal Commission on radio looked north and saw a country bleeding its identity southward --- three thousand miles of border and a population within 150 miles of it, all tuned to American signals --- the commission did not recommend regulation. It recommended a voice. That voice became the Canadian Broadcasting Corporation on November 2, 1936, and Graham Spry's aphorism became its founding theorem: ``it's the state, or the United States.''
+
+Ninety years later, the theorem still holds. The geography has not changed. The border still runs three thousand miles. The American content machine has only grown more powerful, graduating from radio towers to cable systems to global streaming platforms that vacuum up attention in every language simultaneously. What has changed is that the CBC now faces that external pressure and a new internal one: a Conservative opposition leader who has made defunding English CBC a campaign centerpiece, while 78 percent of Canadians, in survey after survey, say they want to keep it. The gap between those two facts is where the entire institution currently lives.
+
+This study maps that institution from the inside out --- its legislative mandate under the Broadcasting Act, its Crown corporation governance, its \$1.4-billion annual budget, its five radio networks and two national television services, its streaming platform CBC Gem, its Northern Service broadcasting in eight Indigenous languages, and its 2024 National Indigenous Strategy. It traces the arc from the Aird Commission of 1929 through the Massey Commission of 1951, the Broadcasting Acts of 1958 and 1991, and the current mandate-review process. It examines the per-capita funding gap between Canada (\$32 per person) and the G7 average (\$62), the political mechanics of defunding, and what 27 million Canadians actually do with the CBC in a week.
+
+The through-line is the same one that has animated every chapter of this institution's life: the space between a country and the dominant culture on its border is not a vacuum. Something fills it. The question CBC was built to answer --- and must keep answering --- is whether that something is Canadian.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+\item \textbf{The per-capita funding gap.} Canada funds its national public broadcaster at \$32 per person annually, against a G7 average of \$62. The BBC receives the equivalent of \$111 per capita. This underfunding compresses what CBC can produce, staff, and distribute --- while the comparison is used by both reformers (who want parity) and defunders (who question all expenditure).
+
+\item \textbf{The political existential threat.} The Conservative Party of Canada, under Pierre Poilievre, has made defunding English CBC a core platform commitment --- promising to eliminate roughly \$1 billion in parliamentary appropriation while nominally preserving French services. The practical inseparability of English and French operations means this promise is architecturally impossible without dismantling the institution entirely.
+
+\item \textbf{The audience erosion crisis.} Trust in CBC News declined from 71\% to 63\% between 2020 and 2024 (Reuters Institute). Linear television viewership ages. Digital audiences are fragmented. The 2025--2030 strategic plan targets youth, newcomers, and ``dissatisfied users'' but has been criticized as ambitious without specifics.
+
+\item \textbf{The digital transition squeeze.} CBC Gem launched in 2018 and now carries 6,500+ hours of content. But connected-TV and streaming audiences require a fundamentally different production and distribution culture. The broadcaster's \emph{National} flagship now draws more YouTube viewers than linear TV viewers --- yet the organization's resource allocation still tilts toward linear infrastructure.
+
+\item \textbf{The Indigenous-language service gap.} CBC North broadcasts in eight Indigenous languages across northern Canada (Inuktitut, Eastern Cree, Gwich'in, Inuvialuktun, Tl\i{}cho, Chipewyan, Dehcho Dene Yati, Sahtu Got'ine Godi) and holds an archive of 64,000+ programs. But language revitalization requires more than archive preservation; it requires living production infrastructure and adequate per-community funding that remains chronically under-resourced.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Core model: Mandate $\rightarrow$ Signal $\rightarrow$ Story $\rightarrow$ Nation. A public broadcaster is not a media company. It is a cultural infrastructure project whose product is shared reality.}
+
+The CBC is structured as a Crown corporation --- quasi-autonomous from government in day-to-day operations, answerable to Parliament through the Department of Canadian Heritage, governed by a board and a President/CEO appointed by the Governor General in Council. Its mandate flows from Section 3 of the Broadcasting Act of 1991, which requires it to ``provide radio and television services incorporating a wide range of programming that informs, enlightens and entertains,'' with programming that is predominantly Canadian, serves regional needs, is available in both official languages, and reaches all Canadians including in remote and northern communities.
+
+The study is organized into five modules that map the institution from its legislative foundation through its service architecture, governance mechanics, Indigenous-language mission, and the digital-plus-political futures bearing down on it simultaneously.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+CANADA (5,515 km east-west | pop. ~40M | 60/40 English/French split)
+|
++-- LEGISLATIVE LAYER
+|   Broadcasting Act 1991 | CRTC License 2022-2027 | Crown Corp Act
+|
++-- GOVERNANCE LAYER
+|   Board of Directors | President/CEO (Marie-Philippe Bouchard, 2025)
+|   | Parliamentary appropriation (~$1.4B/yr) | Self-generated revenue (~$493M)
+|
++-- SERVICE ARCHITECTURE
+|   Radio: CBC Radio One | CBC Music | Ici Radio-Canada Premiere | Ici Musique
+|   TV:    CBC Television | Ici Radio-Canada Tele | CBC News Network | ICI RDI
+|   Digital: CBC Gem (launched 2018) | cbc.ca | radio-canada.ca
+|   North:  8 Indigenous languages | CBC North (Inuktitut 50%+ daily broadcast)
+|   Intl:  Radio Canada International (RCI) -- podcasts in 11 languages
+|
++-- POLITICAL CONTEXT LAYER
+|   Liberal/NDP: +$150M/yr, mandate modernization, statutory appropriation
+|   Conservative: defund English services (~$1B cut), preserve Radio-Canada
+|   78% of Canadians (CMTD survey): preserve with reforms
+|
++-- DIGITAL FUTURE LAYER
+    CBC Gem | YouTube (The National viewership > linear) | CBC Indigenous
+    2025-2030 Strategic Plan: youth + newcomers + Western Canada re-engagement
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 1: History and Mandate
+  Aird Commission (1929) -> CRBC (1932) -> CBC (1936) -> Broadcasting Acts
+  Cultural sovereignty doctrine | Massey Commission | Fowler Commission
+
+MODULE 2: Funding and Governance  <-- PARALLEL with Module 1
+  Crown corp structure | Parliamentary appropriation mechanics
+  Per-capita comparison: Canada $32 vs G7 avg $62 vs UK $111
+  Defunding debate: CPC platform, Broadcasting Act amendment requirements
+
+MODULE 3: Service Architecture    <-- PARALLEL with Module 2
+  Radio networks (4) | TV networks (4 + specialty) | CBC Gem
+  Northern Service | Radio Canada International
+  Canadian content quotas | Hockey Night in Canada era -> Olympic era
+
+MODULE 4: Indigenous Languages and Reconciliation
+  Depends on Modules 1 & 3
+  CBC Northern Service (1958) | Inuktitut service (1960)
+  8 languages | National Indigenous Strategy 2024 | Language Archives
+  OCAP principles | APTN relationship | Truth and Reconciliation
+
+MODULE 5: Digital Transformation and Cultural Defence
+  Depends on Modules 2, 3, & 4
+  CBC Gem metrics | YouTube pivot | 2025-2030 Strategic Plan
+  Trump-era sovereignty argument | Statutory funding proposal
+  The "it's the state, or the United States" theorem, 2026 edition
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: History and Mandate}
+Traces the institutional arc from the 1929 Aird Commission through the founding of the CBC in 1936, the television expansion of 1952, the Massey Commission (1951) and Fowler Commission (1957), the Broadcasting Acts of 1958 and 1991, and the current mandate-review process. Key themes: cultural sovereignty, Canadian content regulation, the CNR radio network as precursor, and the philosophical contest between public and private broadcasting.
+
+\subsubsection{Module 2: Funding and Governance}
+Documents the Crown corporation structure, board composition, President/CEO role, and parliamentary appropriation mechanics. Quantifies the per-capita funding gap against G7 peers. Maps the political landscape: Liberal funding proposals (statutory appropriation, \$62/capita target), NDP support, Conservative defunding platform, and the Broadcasting Act amendment requirements that defunding would require. Examines the bonus controversy and its political fallout.
+
+\subsubsection{Module 3: Service Architecture}
+Inventories the full service portfolio: four radio networks, four television networks plus specialty channels, CBC Gem streaming, Northern Service, and Radio Canada International. Documents Canadian content quota requirements, major programming franchises (Olympic Games, The National, Dragons' Den, Heartland), and the organizational distinction between English (CBC) and French (Radio-Canada) services sharing infrastructure.
+
+\subsubsection{Module 4: Indigenous Languages and Reconciliation}
+Documents CBC's Northern Service (established 1958), the first Inuktitut broadcast (1960), the current eight-language broadcast portfolio, the 2024 National Indigenous Strategy (``Strengthening Relations, Walking Together''), the Indigenous Language Archives project (64,000+ programs, 141,000 stories), the CBC Indigenous digital platform, and the Beyond 94 project tracking Truth and Reconciliation Commission progress. Applies OCAP\textsuperscript{\textregistered} framework; uses nation-specific attribution throughout.
+
+\subsubsection{Module 5: Digital Transformation and Cultural Defence}
+Analyzes CBC Gem's trajectory (launched 2018; 6,500+ hours; 307\% streaming increase from Tokyo to Paris 2024), the 2025--2030 strategic plan targeting youth, newcomers, and Western Canada, the YouTube pivot (The National viewership overtaking linear), the proposed statutory appropriation model, and the Trump-era sovereignty argument that has reframed the defunding debate. Includes the CCPA ``Canadian Icons'' focus group research (February 2025) and Reuters Institute Digital News trust data.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# CBC/Radio-Canada Research Mission -- Chipset Configuration
+# Profile: Squadron | 5 modules | Cultural/political sensitivity: HIGH
+
+mission:
+  name: cbc-radio-canada-cultural-sovereignty-study
+  version: 1.0
+  profile: squadron
+  modules: 5
+  parallel_tracks: 2
+  sensitivity: high  # Political; Indigenous; national identity
+
+chipset:
+  flight:
+    model: claude-opus-4-6
+    role: FLIGHT
+    responsibility: "Mission direction; go/no-go at each wave boundary"
+
+  plan:
+    model: claude-opus-4-6
+    role: PLAN
+    responsibility: "Wave decomposition; track A/B parallelization"
+
+  scout:
+    model: claude-sonnet-4-6
+    role: SCOUT
+    responsibility: "Source gathering; Broadcasting Act text; CRTC filings"
+
+  exec_a:
+    model: claude-sonnet-4-6
+    role: EXEC-A  # Track A: History/Funding (Modules 1+2)
+    responsibility: "Document production for historical and governance modules"
+
+  exec_b:
+    model: claude-sonnet-4-6
+    role: EXEC-B  # Track B: Services/Indigenous (Modules 3+4)
+    responsibility: "Document production for service architecture and Indigenous modules"
+
+  craft_hist:
+    model: claude-opus-4-6
+    role: CRAFT-HIST  # Canadian history, broadcasting law
+    responsibility: "Broadcast legislation; Aird/Massey/Fowler commission analysis"
+
+  craft_indg:
+    model: claude-opus-4-6
+    role: CRAFT-INDG  # Indigenous languages; reconciliation
+    responsibility: "OCAP compliance; nation-specific attribution; TRC alignment"
+
+  verify:
+    model: claude-sonnet-4-6
+    role: VERIFY
+    responsibility: "Source validation; fact-checking against primary sources"
+
+  integ:
+    model: claude-opus-4-6
+    role: INTEG
+    responsibility: "Cross-module synthesis; through-line coherence check"
+
+  capcom:
+    model: claude-sonnet-4-6
+    role: CAPCOM
+    responsibility: "Human-in-the-loop approval at Wave 0 end and Wave 2 end"
+
+  budget:
+    model: claude-haiku-4-5-20251001
+    role: BUDGET
+    responsibility: "Token budget tracking; session planning"
+
+  log:
+    model: claude-haiku-4-5-20251001
+    role: LOG
+    responsibility: "Commit messages; wave summaries; audit trail"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+\item CBC/Radio-Canada institutional history from 1929 Aird Commission to March 2026
+\item Broadcasting Act provisions (1991 and proposed amendments)
+\item All six service categories: radio, television, streaming, Northern, international, digital
+\item Parliamentary funding mechanics, per-capita comparisons (G7 + OECD peers)
+\item The defunding debate and its architectural/legal implications
+\item Eight Indigenous language services and the 2024 National Indigenous Strategy
+\item CBC Gem streaming platform and 2025--2030 digital strategy
+\item Public trust data (Reuters Institute 2020--2024 trend)
+\item Trump-era Canadian sovereignty argument as context for CBC's contemporary relevance
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+\item Program-level editorial review (specific show quality assessments)
+\item Comparison to APTN, TVO, or provincial public broadcasters
+\item Radio Canada International's individual-language service deep-dives
+\item Advertising sales mechanics and Tandem controversy details
+\item Union/labour relations history
+\item Technical transmission infrastructure (towers, satellites) beyond overview
+\item Internal personnel matters and the Tait bonus controversy beyond political context
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*.}]
+\item \textbf{Legislative foundation documented.} Broadcasting Act Section 3 mandate provisions fully quoted and explained; key legislative milestones (1932, 1936, 1958, 1991, proposed 2025 amendments) accurately dated and sequenced.
+\item \textbf{Financial architecture quantified.} Parliamentary appropriation (\$1.4B/2024-25) confirmed against Treasury Board sources; per-capita figures validated (\$32 Canada vs \$62 G7 avg); revenue breakdown (public + self-generated \$493M) documented.
+\item \textbf{Service portfolio complete.} All six service categories inventoried with current platform names, language breakdowns, and reach statistics.
+\item \textbf{Defunding mechanics analyzed.} Broadcasting Act amendment requirements for defunding accurately described; English/French infrastructure interdependency documented; Conservative platform position accurately characterized without editorial commentary.
+\item \textbf{Indigenous language services documented with nation-specific attribution.} All eight languages named with associated First Nations, Inuit, and M\'etis nations; Inuktitut service history from 1960 to Language Archives project documented; National Indigenous Strategy 2024 four pillars summarized.
+\item \textbf{OCAP\textsuperscript{\textregistered} principles applied.} Indigenous content described using Ownership, Control, Access, and Possession framework; no generic ``Indigenous'' references without nation specificity.
+\item \textbf{Digital transformation quantified.} CBC Gem content library (6,500+ hours), streaming growth metrics (Paris 2024: 307\% increase from Tokyo), connected-TV share (65\%), YouTube National viewership comparison documented.
+\item \textbf{Trust data cited from primary source.} Reuters Institute Digital News Report trust trend (71\% $\rightarrow$ 63\% for CBC, 2020--2024) cited correctly.
+\item \textbf{Political landscape balanced.} Liberal, NDP, and Conservative positions on CBC funding documented from primary campaign and policy sources without advocacy framing.
+\item \textbf{Through-line maintained.} The ``state or the United States'' doctrine and its 2026 relevance appears in Vision, Synthesis, and Closing sections as coherent narrative arc.
+\item \textbf{Test plan covers all SC criteria.} Minimum two tests per success criterion; safety-critical tests (Indigenous attribution accuracy; political balance) marked mandatory-pass.
+\item \textbf{Zero unattributed numerical claims.} Every statistic traceable to a named primary source in the bibliography.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+gsd-foxfire-heritage-mission-package.md & Parallel domain & Cultural heritage preservation; oral tradition; Indigenous knowledge frameworks \\
+04-salish-sea-expansion-vision.md & Geographic overlap & Coast Salish and Pacific Northwest peoples; CBC North BC coverage \\
+gsd-fair-use-educational-mission.md & Methodology reference & Fair use framing for copyrighted broadcast content \\
+Fox Infrastructure Group Master Plan & Infrastructure parallel & Sovereign broadcast infrastructure; Electric City thesis analogs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Graham Spry coined ``it's the state, or the United States'' in 1932 as a rallying cry for public broadcasting against commercial encroachment. Ninety-four years later, the same sentence summarizes the live political debate. The architecture has shifted --- from shortwave towers to satellites to streaming APIs --- but the underlying topology has not: a large country, thinly populated, sharing a continent with the most powerful media economy in human history, trying to find a frequency that is recognizably its own.
+
+The CBC is not simply a broadcaster. It is the institutional embodiment of the hypothesis that Canadian identity is worth producing, distributing, and funding as public infrastructure. Every funding battle, every commission report, every digital pivot is a stress-test of that hypothesis. The study this mission will produce is not a defense of that hypothesis, nor a refutation --- it is a precise map of how the institution has answered it, what it costs, who benefits, and what disappears if the frequency goes dark.
+
+\newpage
+
+% ════════════════════════════════════════════════════════
+% STAGE 2: RESEARCH REFERENCE
+% ════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{CBC/Radio-Canada --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides evidence-grounded findings for each of the five research modules. Where the vision identifies the ``what and why,'' this document provides the verified ``what is.'' All figures are sourced from primary government documents, CBC corporate reports, parliamentary records, Reuters Institute research, and CCPA policy analysis.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+\item \textbf{CBC/Radio-Canada} --- Corporate plan summaries, media centre releases, strategies.cbcrc.ca, Annual Reports
+\item \textbf{Parliament of Canada / Treasury Board} --- Estimates documents, Broadcasting Act text, CHPC committee transcripts
+\item \textbf{Canadian Heritage} --- canada.ca/en/canadian-heritage; future-cbc-radio-canada white paper (2025)
+\item \textbf{CRTC} --- License renewal decisions; regulatory framework
+\item \textbf{Reuters Institute for the Study of Journalism (Oxford)} --- Digital News Report trust data
+\item \textbf{CCPA (Canadian Centre for Policy Alternatives)} --- ``Canadian Icons'' focus group report; News Deprivation study
+\item \textbf{The Canadian Encyclopedia} --- Historical context; founding narrative
+\item \textbf{Policy Options (IRPP)} --- Peer-reviewed policy analysis
+\item \textbf{CBC Indigenous Language Archives project} --- cbc.ca/news (June 2025)
+\item \textbf{Parliamentary Budget Office (PBO)} --- Supplementary Estimates (C) 2025-26 analysis
+\end{itemize}
+
+\subsection{Module 1: History and Mandate Reference}
+
+\subsubsection{Founding Arc: 1929--1936}
+
+The modern CBC traces to the Aird Commission of 1929, established by Prime Minister Mackenzie King to study radio broadcasting. The commission found that private stations were being absorbed by American companies, the airwaves were flooded with American programming, and private operators could not counter American content with Canadian material. Its September 11, 1929 report --- submitted 48 days before the stock market crash --- recommended a publicly owned corporation capable of ``fostering a national spirit and interpreting national citizenship.'' This language became the philosophical DNA of the institution.
+
+The Canadian Radio Broadcasting Commission (CRBC) was created by the Canadian Radio Broadcasting Act of May 26, 1932, assuming facilities from the Canadian National Railways' radio network, which had shown the government the merits of public broadcasting but offered only three hours of programming per week by 1929. The CRBC was underfunded and operated under an unsuitable administration. The Canadian Radio League, backed by Graham Spry, lobbied successfully for replacement. A new Canadian Broadcasting Act of June 23, 1936 created the CBC with better organization, funding, and reduced vulnerability to political pressure. The CBC was formally established as a Crown Corporation on November 2, 1936 --- the oldest continually existing broadcasting network in Canada.
+
+\subsubsection{Television Expansion and the Commission Era: 1951--1991}
+
+The Massey Commission (Royal Commission on National Development in the Arts, Letters, and Sciences, 1951) recommended CBC-led television. CBC Television launched September 6, 1952, from Montreal and Toronto, reaching 30\% of the population; within two years, 66\% had access in French and English. The Fowler Commission (1957) found that American productions were as prominent as Canadian ones on CBC television, leading to the Broadcasting Act of 1958 and the creation of the Board of Broadcast Governors, which introduced Canadian content quotas in 1961.
+
+The Broadcasting Act of 1991 --- still in force --- established the current mandate. Section 3(1)(l) requires CBC to ``provide radio and television services incorporating a wide range of programming that informs, enlightens and entertains.'' Section 3(1)(m) specifies that CBC programming should be ``predominantly and distinctly Canadian,'' reflect Canada's regions, serve English- and French-speaking communities, and be ``available throughout Canada.''
+
+\subsubsection{Key Legislative Milestones}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} & \tableheader{Significance} \\
+\midrule
+1929 & Aird Commission report & Recommended public ownership; cultural sovereignty doctrine \\
+1932 & Canadian Radio Broadcasting Act & CRBC created; CNR network absorbed \\
+1936 & CBC founded (Nov. 2) & Crown Corporation established; bilingual mandate \\
+1952 & CBC Television launches & Sept. 6, Montreal \& Toronto; 30\% population reach \\
+1958 & Broadcasting Act & Board of Broadcast Governors; content quotas introduced \\
+1968 & CRTC created & Replaced BBG; independent regulator \\
+1991 & Broadcasting Act (current) & Governing legislation; mandate as enacted today \\
+2018 & CBC Gem launched & OTT streaming platform; replaced CBC TV app \\
+2024 & National Indigenous Strategy & First-ever; three-year plan; Indigenous Office created \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Funding and Governance Reference}
+
+\subsubsection{Governance Structure}
+
+CBC/Radio-Canada is a Crown corporation governed by the Broadcasting Act. The board of directors is responsible for management of the corporation's businesses and activities. The President and CEO formulates strategy, presents it to the board for approval, and manages day-to-day operations. The President is appointed by the Governor General in Council on the advice of the Prime Minister. Marie-Philippe Bouchard became President and CEO in January 2025, replacing Catherine Tait.
+
+The corporation is accountable to Parliament through the Department of Canadian Heritage. It is ``the only national conventional television broadcaster in the country not owned by a cable or satellite company.'' Its editorial independence is enshrined in the Broadcasting Act; the government can make high-level mandate and funding decisions by legislation but cannot direct programming content.
+
+\subsubsection{Financial Architecture}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value / Source} \\
+\midrule
+Parliamentary appropriation (2024-25) & \$1.44 billion (Canadian Heritage, March 2024) \\
+Self-generated revenue (2023-24) & \$493.5 million \\
+Total operating resources & approx. \$1.9 billion combined \\
+Per-capita public funding (Canada) & \$32.43/person (2022 OECD reference year) \\
+G7 average per capita & \$62.20/person (Heritage Minister St-Onge, Feb. 2025) \\
+Proposed Carney Liberal increase & +\$150M/yr = \$35.50/person (Policy Options, Apr. 2025) \\
+St-Onge target (proposed) & \$62/person; statutory appropriation in Broadcasting Act \\
+Budget 2025 modernization funding & \$150M one-time (Supplementary Estimates C, 2025-26) \\
+English-French funding split & approx. 60\% English / 40\% French \\
+CPC defunding pledge & eliminate \$1B of appropriation; nominally preserve Radio-Canada \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Defunding Debate}
+
+Conservative Leader Pierre Poilievre has campaigned on defunding English CBC services while preserving Radio-Canada's French services. Three structural problems make this architecturally difficult: (1) The Broadcasting Act establishes a single Crown corporation running both services; separating them requires amending the Act. (2) English and French services share buildings, infrastructure, and human resources; the 40\% of appropriation supporting French services cannot be cleanly separated. (3) A standalone Radio-Canada funded at \$600M would face its own political vulnerability from English-Canadian voters.
+
+The CCPA (October 2024) found 78\% of surveyed Canadians want to preserve CBC if it addresses major criticisms. The Walrus (January 2025) noted that while only 11\% want to eliminate CBC entirely, defunding has become an effective Conservative fundraising and voter-mobilization tool. Bouchard described the situation as an ``existential threat'' and said cutting \$1B ``would cripple both English and French services.''
+
+Heritage Minister St-Onge's February 2025 proposal would move CBC from annual parliamentary appropriation to statutory appropriation --- funding embedded in law and calculated by per-capita formula --- removing it from annual budget-cycle political vulnerability.
+
+\subsection{Module 3: Service Architecture Reference}
+
+\subsubsection{Radio Networks}
+
+CBC operates four terrestrial radio networks. CBC Radio One is the English-language network carrying news, current affairs, arts, and documentary programming. CBC Music (formerly CBC Radio 2) focuses on music, arts, and culture. The French-language counterparts are Ici Radio-Canada Premi\`{e}re and Ici Musique. The CBC's microwave network, stretching from British Columbia to Nova Scotia, spans approximately 6,400 km --- one of the longest in the world. Radio Canada International (RCI) historically transmitted via shortwave; since 2012 it operates as a podcast/web service in 11 languages including Spanish, Arabic, Chinese, Punjabi, and Tagalog.
+
+\subsubsection{Television Networks}
+
+CBC Television (English) began September 6, 1952, and operates as a must-carry service on cable and satellite nationally. Its French counterpart is Ici Radio-Canada T\'{e}l\'{e}. Specialty channels include CBC News Network (English 24-hour news), ICI RDI (French 24-hour news), ICI ARTV, ICI EXPLORA, and Documentary (shared with Shaw). Programming reach in Winter/Spring 2024: 21.3 million Canadians 18+ reached by linear conventional and specialty TV stations (Numeris data). The National, hosted by Adrienne Arsenault and Ian Hanomansing, is the flagship evening newscast.
+
+\subsubsection{CBC Gem Streaming Platform}
+
+CBC Gem launched in 2018, replacing the CBC TV app. It carries: 6,500+ hours of live and on-demand content; 800+ documentaries; 500 hours of ad-free children's programming; 200+ Canadian feature films. It is available free (ad-supported) and premium (ad-free + exclusive content) on iOS, Android, Roku, Samsung, Apple TV, Amazon Fire TV, LG, Google Chromecast, Android TV, and Xbox.
+
+Paris 2024 Olympic metrics (CBC/Radio-Canada Media Centre, August 2024): 7 in 10 Canadians (27 million) watched television coverage; 24.3 million hours streamed on digital platforms (+170\% vs Tokyo 2020); time on Gem +307\% vs Tokyo; connected TVs = 65\% of Gem viewing hours; The National viewership on YouTube now exceeds linear TV viewership.
+
+Over 30 million video content starts on CBC Gem in Winter/Spring 2024 (Adobe Analytics). Content includes original series (Schitt's Creek, Kim's Convenience, Heartland, Murdoch Mysteries, SKYMED), documentaries (The Passionate Eye, CBC Docs), and co-productions (North of North with APTN and Netflix).
+
+\subsection{Module 4: Indigenous Languages and Reconciliation Reference}
+
+\subsubsection{Historical Arc: CBC Northern Service}
+
+CBC established its Northern Service in 1958. The first Inuktitut-language broadcast occurred in 1960, originating from studios in Montreal. By 1972, Inuktitut programming constituted 17\% of CBC's shortwave service. The catalyst for Indigenous-led broadcasting came in 1973 when CBC began beaming southern Canadian and American television via satellite into northern communities. Indigenous leaders, including Rosemary Kuptana (later president of Inuit Broadcasting Corporation), described the onslaught of unrepresentative southern programming as culturally damaging. This activism led to the creation of the Inuit Broadcasting Corporation (CRTC licensed, 1981) and Television Northern Canada (TVNC, 1991), which became APTN in 1999.
+
+\subsubsection{Current Language Services}
+
+CBC North currently broadcasts in eight Indigenous languages:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Language} & \tableheader{Nation(s)} & \tableheader{Geographic Region} \\
+\midrule
+Inuktitut & Inuit (Nunavut, Nunavik) & Broadcast most of the day in Nunavut and Nunavik \\
+Eastern Cree & Eeyou (James Bay Cree) & Northern Quebec \\
+Gwich'in & Gwich'in Nation & NWT (Mackenzie Delta) \\
+Inuvialuktun & Inuvialuit & NWT (Western Arctic) \\
+North Slavey (Dene Yati) & Dehcho First Nations & NWT \\
+South Slavey (Got'ine Godi) & Sahtu Dene & NWT \\
+Tl\i{}cho (Dogrib) & Tl\i{}cho Government & NWT \\
+Chipewyan (Dënesulıné) & various Dene nations & NWT \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{National Indigenous Strategy 2024 --- ``Strengthening Relations, Walking Together''}
+
+Launched in 2024 at the Canadian Museum for Human Rights in Winnipeg (Treaty 1 Territory, National Homeland of the Red River M\'{e}tis), this is CBC's first-ever National Indigenous Strategy. It commits to four pillars:
+
+\textbf{Narratives:} Ground TRC principles in content development; support First Nations, Inuit, and M\'{e}tis language reclamation in news and content strategy.
+
+\textbf{People:} Increase Indigenous representation at all levels, including leadership and professional development; renew Pathways recruitment program.
+
+\textbf{Relationships:} Include more Indigenous-owned vendors in procurement; deepen collaboration with APTN and Indigenous Screen Office; develop an Indigenous podcast initiative with the Australian Broadcasting Corporation.
+
+\textbf{Truth and Reconciliation:} Commission a historical review of CBC archives' representation of First Nations, Inuit, and M\'{e}tis experiences; launch Beyond 94 (tracking TRC recommendations since 2018).
+
+\subsubsection{Indigenous Language Archives Project}
+
+CBC North has undertaken a systematic cataloguing of its Indigenous-language archive. As of mid-2025, the archive contains over 64,000 programs with nearly 141,000 stories. Cataloguing continues: 2,349 East Cree programs (5,167 stories) and 13,406 Inuktitut programs (approximately 30,000 stories) remain to be added. The project employs Indigenous translators and archivists --- including researchers like Maxine Angoo (Whale Cove, Nunavut) and Susie Zettler (Pangnirtung, Nunavut) --- for whom the work constitutes language revitalization as well as archival preservation. Paris 2024 Olympic coverage was broadcast in Cree, Innu, Atikamekw, and Inuktitut.
+
+\textbf{OCAP\textsuperscript{\textregistered} compliance note:} All Indigenous content research must apply Ownership, Control, Access, and Possession principles. Nation-specific attribution (not generic ``Indigenous'') is mandatory. Ceremonial and restricted knowledge is Level 3--4 and outside study scope.
+
+\subsection{Module 5: Digital Transformation and Cultural Defence Reference}
+
+\subsubsection{The 2025--2030 Strategic Plan}
+
+Released October 2025, CBC's five-year plan targets three underserved audience segments: youth and Gen Z, newcomers to Canada, and ``non-users or dissatisfied users.'' Key elements include: a larger on-the-ground journalistic presence in rural areas and Western Canada; investment in short-form digital content (Andrew Chang's \emph{About That} as model); moving away from formats that ``parents and grandparents used.''
+
+CEO Bouchard stated that The National's YouTube viewership now exceeds its linear TV viewership. An estimated 40\% of Canadians aged 18--24 use social media and video networks as their primary news source (Reuters Institute Digital News Report 2025, cited in The Wire Report October 2025).
+
+Criticism (The Wire Report, October 2025): experts found the plan ``ambitious but vague'' --- detailed on targets (youth, newcomers, West) but absent on how and at what cost. Former CRTC vice-chair Peter Menzies suggested it ``might be landing too late.''
+
+\subsubsection{Trust Data Trend}
+
+Reuters Institute Digital News Report data: Canadian public trust in news overall declined from 55\% (2016) to 40\% (2023). CBC-specific: trust in CBC declined from 71\% to 63\% between 2020 and 2024. Radio-Canada: 80\% to 74\% in same period. Both services retain top-tier trust rankings among Canadian news brands despite the decline.
+
+\subsubsection{The Sovereignty Argument, 2025--2026}
+
+The CCPA focus groups (February 13--20, 2025) were conducted as the Trump administration announced tariff war threats and annexation rhetoric. Focus group participants ``across the board, regardless of region'' identified CBC as integral to Canadian identity --- with one participant saying defunding the CBC would be like burning books. This reframed the debate from a media-market efficiency argument to a cultural sovereignty emergency.
+
+Howard Law (Policy Options, April 2025) situates the current moment as the highest-stakes CBC funding battle since 1936: ``The CBC is our biggest and most consequential lever of public policy in media and culture and it must succeed if our cultural sovereignty is to be defended.''
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk} & \tableheader{Boundary} \\
+\midrule
+Indigenous attribution & Generic references & ABSOLUTE: Use nation-specific names (Inuit, Tl\i{}cho, James Bay Cree, etc.) --- never generic ``Indigenous'' without nation specificity \\
+Political balance & Advocacy framing & GATE: Document Liberal/NDP/CPC positions from primary sources; present without editorial endorsement \\
+Trust statistics & Misattribution & GATE: Reuters Institute data cited correctly; do not conflate trust in CBC news with overall CBC approval \\
+Funding figures & Currency confusion & ANNOTATE: All figures in Canadian dollars; distinguish parliamentary appropriation from total budget \\
+Ceremonial/restricted content & OCAP violation & ABSOLUTE: Ceremonial or restricted Indigenous knowledge is out of scope \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Parliamentary Sources}
+\begin{itemize}[noitemsep]
+\item Broadcasting Act, S.C. 1991, c.11 --- Parliament of Canada
+\item Canadian Heritage: ``The Future of CBC/Radio-Canada'' white paper (2025), canada.ca
+\item Treasury Board of Canada: Supplementary Estimates (C) 2025-26, pbo-dpb.ca (February 2026)
+\item Treasury Board: 2024-25 Main Estimates, canada.ca
+\item CHPC: ``Mandate and Funding of the CBC'' (March 2011), ourcommons.ca
+\item Library of Parliament: ``Canadian Broadcasting Policy'' research publication (201139E)
+\item Federal Organizations: CBC/Radio-Canada Board Profile, federal-organizations.canada.ca
+\end{itemize}
+
+\subsubsection{CBC Corporate Sources}
+\begin{itemize}[noitemsep]
+\item CBC/Radio-Canada: 2024--2027 National Indigenous Strategy, strategies.cbcrc.ca
+\item CBC/Radio-Canada: Corporate Plan Summary 2016-2021, site-cbc.radio-canada.ca
+\item CBC Media Centre: Paris 2024 Olympic audience reports (July--August 2024)
+\item CBC Media Centre: Fall 2024 Programming releases
+\item CBC North: Indigenous Language Archives project, cbc.ca (June 2025)
+\item CBC/Radio-Canada: First 2025-2026 Quarterly Report, nationtalk.ca
+\end{itemize}
+
+\subsubsection{Research and Policy Organizations}
+\begin{itemize}[noitemsep]
+\item Reuters Institute for the Study of Journalism: Digital News Reports 2020--2025, Oxford
+\item CCPA: ``Canadian Icons'' focus group research + Environics (February 2025)
+\item CCPA: ``News Deprivation'' study (D. Macdonald \& S. Macdonald)
+\item Policy Options (IRPP): Howard Law, ``The High Stakes of Defunding the CBC'' (April 2025)
+\item MediaSmarts: ``The Development of Indigenous Media in Canada''
+\item Broadcasting History Canada: ``History of Aboriginal Broadcasting''
+\end{itemize}
+
+\subsubsection{Reference Sources}
+\begin{itemize}[noitemsep]
+\item The Canadian Encyclopedia: ``Founding of the Canadian Broadcasting Corporation'' and ``Communications in the North''
+\item Britannica: ``Canadian Broadcasting Corporation'' (Encyclopaedia Britannica)
+\item EBSCO Research Starters: ``Canadian Broadcasting Corporation''
+\item The Walrus: ``Is Canada Ready for Life Without the CBC?'' (January 2025)
+\item The Wire Report: ``CBC's fast pivot strategy'' (October 2025)
+\item Western Standard: ``Canada's Budget 2025 pumps \$400M into culture sector'' (November 2025)
+\end{itemize}
+
+\newpage
+
+% ════════════════════════════════════════════════════════
+% STAGE 3: MISSION PACKAGE
+% ════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Vision Document:}{CBC/Radio-Canada --- Cultural Sovereignty Study (above)}
+\metafield{Research Reference:}{CBC/Radio-Canada --- Research Reference (above)}
+\metafield{Estimated Execution:}{10--13 context windows across 4 sessions}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, GSD-ready knowledge pack on CBC/Radio-Canada that documents its legislative foundation, funding architecture, service portfolio, Indigenous-language mission, and digital future in a single authoritative reference. ``Done'' means: all five modules complete with sourced findings; Indigenous attribution reviewed by CRAFT-INDG for OCAP compliance; political content reviewed by CRAFT-HIST for balance; and a synthesis document connecting the five modules through the ``state or the United States'' through-line.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation (Sequential | Haiku)
+  +--> Shared schema | Source index | Directory structure
+
+WAVE 1: Parallel Research Tracks (Parallel | Sonnet + Opus)
+  TRACK A                       TRACK B
+  +--> Module 1: History/Mandate +--> Module 3: Service Architecture
+  +--> Module 2: Funding/Gov     +--> Module 4: Indigenous Languages
+
+WAVE 2: Synthesis (Sequential | Opus)
+  +--> Module 5: Digital + Cultural Defence
+  +--> INTEG: Cross-module synthesis document
+  +--> CRAFT-INDG: OCAP compliance review
+  +--> CRAFT-HIST: Political balance review
+
+WAVE 3: Publication + Verification (Sequential | Sonnet)
+  +--> VERIFY: All sources cross-checked against bibliography
+  +--> Assembly: Final pack structure
+  +--> CAPCOM: Human approval
+  +--> LOG: Milestone summary committed
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+\item \textbf{Foundation Layer} --- Shared TypeScript schemas, source index YAML, directory scaffolding
+\item \textbf{Survey Layer} --- Five module documents, each self-contained with findings and citations
+\item \textbf{Analysis Layer} --- CRAFT specialist reviews (OCAP compliance; political balance)
+\item \textbf{Synthesis Layer} --- Cross-module integration document; through-line narrative
+\item \textbf{Publication Layer} --- Final pack assembly, verification matrix, test results
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Foundation Schema & TypeScript interfaces; source index; directory tree created & COMP-01 \\
+2 & Module 1: History & Legislative arc 1929--2026; all 8 milestones dated; sourced & COMP-02 \\
+3 & Module 2: Funding & Financial table complete; defunding mechanics analyzed; balanced & COMP-03 \\
+4 & Module 3: Services & All 6 service categories; Gem metrics; reach statistics & COMP-04 \\
+5 & Module 4: Indigenous & 8 languages with nation attribution; Strategy 4 pillars; Archives & COMP-05 \\
+6 & Module 5: Digital Future & Gem growth data; 2025-2030 plan; sovereignty argument & COMP-06 \\
+7 & OCAP Compliance Review & CRAFT-INDG sign-off; zero generic ``Indigenous'' references & COMP-07 \\
+8 & Political Balance Review & CRAFT-HIST sign-off; all three party positions sourced & COMP-08 \\
+9 & Synthesis Document & Through-line explicit; cross-module connections mapped & COMP-09 \\
+10 & Test Results & All 12 SC criteria verified; safety-critical tests pass & COMP-10 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Spec} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Foundation & COMP-01 & None & Haiku & 4K \\
+Module 1 & COMP-02 & COMP-01 & Sonnet & 18K \\
+Module 2 & COMP-03 & COMP-01 & Sonnet & 20K \\
+Module 3 & COMP-04 & COMP-01 & Sonnet & 16K \\
+Module 4 & COMP-05 & COMP-01, 02 & \textbf{Opus} & 24K \\
+Module 5 & COMP-06 & COMP-02, 03, 04 & Sonnet & 18K \\
+OCAP Review & COMP-07 & COMP-05 & \textbf{Opus} & 8K \\
+Balance Review & COMP-08 & COMP-02, 06 & \textbf{Opus} & 8K \\
+Synthesis & COMP-09 & All & \textbf{Opus} & 20K \\
+Test \& Verify & COMP-10 & All & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+FLIGHT / PLAN & Opus & Mission direction and wave decomposition require judgment \\
+Module 4 (Indigenous) & Opus & OCAP compliance, nation-specific attribution, TRC sensitivity \\
+OCAP Review & Opus & Cultural sovereignty review; cannot be delegated to Sonnet \\
+Political Balance & Opus & Three-party framing without advocacy requires editorial judgment \\
+Synthesis & Opus & Cross-module integration; through-line coherence \\
+Modules 1--3, 5 & Sonnet & Structured research compilation within established framework \\
+VERIFY & Sonnet & Source cross-check against bibliography \\
+Foundation / LOG & Haiku & Schema scaffolding; commit messages; low complexity \\
+\midrule
+\multicolumn{2}{l}{\textbf{Allocation}} & Opus $\approx$35\% | Sonnet $\approx$55\% | Haiku $\approx$10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Gate} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & CAPCOM & Schema, source index, directories \\
+1 & Parallel Survey & Parallel (A+B) & Auto & 4 module documents \\
+2 & Synthesis & Sequential & CAPCOM & Module 5 + synthesis + specialist reviews \\
+3 & Publication & Sequential & Auto & Final pack + test results \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+0A & Create directory structure & LOG & /cbc-mission/modules/, /reviews/, /synthesis/ \\
+0B & Build TypeScript interfaces & BUDGET & CBCModule, SourceRecord, OCAPFlag, PoliticalBalance types \\
+0C & Compile source index & SCOUT & YAML index: 30+ sources with URL, date, authority level \\
+0D & CAPCOM gate & CAPCOM & Human confirms scope and Indigenous attribution protocol \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A (EXEC-A):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+1A & Module 1: History \& Mandate & EXEC-A + CRAFT-HIST & 3,500-word module doc, 8 milestones, sourced \\
+1B & Module 2: Funding \& Governance & EXEC-A & 3,500-word module doc, financial tables, defunding analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (EXEC-B):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+1C & Module 3: Service Architecture & EXEC-B & 3,000-word module doc, service inventory tables \\
+1D & Module 4: Indigenous Languages & EXEC-B + CRAFT-INDG & 4,000-word module doc, 8-language table, Strategy 4 pillars \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+2A & Module 5: Digital + Cultural Defence & EXEC-A & 3,500-word module doc, Gem metrics, 2025-30 plan \\
+2B & OCAP Compliance Review & CRAFT-INDG & Review report; flag any generic ``Indigenous'' references \\
+2C & Political Balance Review & CRAFT-HIST & Review report; verify three-party attribution from sources \\
+2D & Cross-module synthesis & INTEG (Opus) & 2,000-word synthesis document; through-line woven in \\
+2E & CAPCOM gate & CAPCOM & Human approves Indigenous review and political balance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+3A & Source verification pass & VERIFY & All numerical claims traced to bibliography \\
+3B & Assemble final pack & EXEC-B & README.md + module index + cross-links \\
+3C & Run test plan & VERIFY & Test results log; SC matrix complete \\
+3D & Milestone summary commit & LOG & Commit message; wave summary; token budget final \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+\item \textbf{5-minute cache window:} Open each session with source index YAML (COMP-01) to seed the cache; subsequent agent calls within the window inherit the full context at near-zero token cost.
+\item \textbf{Track isolation:} Track A (Modules 1+2) and Track B (Modules 3+4) are fully independent in Wave 1; run as parallel context forks to double throughput.
+\item \textbf{Module self-containment:} Each module document includes its own source references; VERIFY can process any module independently without full-pack context.
+\item \textbf{Synthesis anchoring:} Wave 2 synthesis prompt opens with the five module document summaries (not full text) to stay within context window while maintaining coherence.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 (Foundation) & Haiku & 6K & Schema + source index \\
+Module 1 (History) & Sonnet & 18K & Legislative arc; tables \\
+Module 2 (Funding) & Sonnet & 20K & Financial tables; defunding analysis \\
+Module 3 (Services) & Sonnet & 16K & Service inventory \\
+Module 4 (Indigenous) & Opus & 24K & Full OCAP treatment \\
+Module 5 (Digital) & Sonnet & 18K & Gem data; strategic plan \\
+OCAP Review & Opus & 8K & Compliance pass \\
+Balance Review & Opus & 8K & Political framing pass \\
+Synthesis & Opus & 20K & Cross-module integration \\
+Verification & Sonnet & 10K & SC matrix \\
+\midrule
+\textbf{Total} & Mixed & \textbf{148K} & Across 10--13 context windows \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+COMP-01 (Foundation)
+    |
+    +---> COMP-02 (Module 1: History)  -------> COMP-05 (Module 4: Indigenous)
+    |         |                                       |
+    +---> COMP-03 (Module 2: Funding)  --------+     +---> COMP-07 (OCAP Review)
+    |         |                                |
+    +---> COMP-04 (Module 3: Services) ---+    |
+    |                                     |    |
+    |     [ALL 4 complete]                |    |
+    |         |                           |    |
+    +---> COMP-06 (Module 5: Digital) <--+----+
+              |
+    +---> COMP-08 (Political Balance Review)
+    |         |
+    +---> COMP-09 (Synthesis)  <---  COMP-07 + COMP-08
+              |
+         COMP-10 (Test + Verification)  ---> FINAL PACK
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical (Indigenous attribution; political balance) & 6 & MANDATORY & BLOCK --- do not publish \\
+Source attribution & 6 & MANDATORY & BLOCK \\
+Core functionality & 8 & HIGH & Revise module \\
+Integration & 4 & MEDIUM & Flag for review \\
+Edge cases & 2 & LOW & Document and defer \\
+\midrule
+\textbf{Total} & \textbf{26} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result / Pass Condition} \\
+\midrule
+T-01 & Nation-specific attribution & Zero instances of generic ``Indigenous'' without nation name in Module 4 or synthesis \\
+T-02 & OCAP compliance & CRAFT-INDG review completed; all four OCAP principles addressed for Module 4 content \\
+T-03 & Political balance & All three party positions (Liberal, NDP, Conservative) cited from primary sources; no editorial advocacy \\
+T-04 & Defunding mechanics accuracy & Broadcasting Act amendment requirement accurately described; English/French infrastructure interdependency documented \\
+T-05 & Numerical attribution & Every statistic in Modules 2 and 5 traces to named source in bibliography \\
+T-06 & Trust data accuracy & Reuters Institute 71\%$\rightarrow$63\% trend cited correctly; not conflated with broader approval ratings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}X L{2.5cm} C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC-1 & Legislative foundation documented & T-07, T-08 & Pre-execution \\
+SC-2 & Financial architecture quantified & T-05, T-09 & Pre-execution \\
+SC-3 & Service portfolio complete & T-10, T-11 & Pre-execution \\
+SC-4 & Defunding mechanics analyzed & T-03, T-04 & Pre-execution \\
+SC-5 & Indigenous services with nation attribution & T-01, T-12 & Pre-execution \\
+SC-6 & OCAP applied & T-02 & Pre-execution \\
+SC-7 & Digital transformation quantified & T-13, T-14 & Pre-execution \\
+SC-8 & Trust data cited correctly & T-06 & Pre-execution \\
+SC-9 & Political landscape balanced & T-03, T-04 & Pre-execution \\
+SC-10 & Through-line maintained & T-15, T-16 & Pre-execution \\
+SC-11 & Tests cover all SC criteria & T-26 (meta) & Pre-execution \\
+SC-12 & Zero unattributed numerical claims & T-05 & Pre-execution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at Wave 0 and Wave 2 boundaries \\
+PLAN & Planner & Wave decomposition; Track A/B parallelization; session planning \\
+SCOUT & Research Agent & Source gathering; Broadcasting Act text; CRTC filings; CCPA reports \\
+EXEC-A & Executor A & Document production for Modules 1, 2, and 5 \\
+EXEC-B & Executor B & Document production for Modules 3 and 4; final pack assembly \\
+CRAFT-HIST & CBC History Specialist & Broadcast legislation analysis; Aird/Massey/Fowler commission framing; political balance review \\
+CRAFT-INDG & Indigenous Languages Specialist & OCAP\textsuperscript{\textregistered} compliance; nation-specific attribution; TRC alignment; Strategy review \\
+VERIFY & Verification Agent & Source cross-check; numerical claims audit; SC matrix completion \\
+INTEG & Integration Agent & Cross-module synthesis; through-line coherence; relationship mapping \\
+CAPCOM & HITL Interface & Human approval at Wave 0 end (scope confirm) and Wave 2 end (Indigenous + balance review) \\
+BUDGET & Resource Manager & Token budget tracking; session boundary recommendations \\
+LOG & Chronicle Agent & Commit messages; wave summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & cbc-radio-canada-cultural-sovereignty-study \\
+Activation profile & Squadron (12 roles) \\
+Module count & 5 \\
+Parallel tracks (Wave 1) & 2 (Track A: History+Funding; Track B: Services+Indigenous) \\
+Estimated context windows & 10--13 \\
+Estimated sessions & 4 \\
+Total estimated tokens & 148K \\
+Opus allocation & $\approx$35\% (Modules 4, reviews, synthesis, FLIGHT) \\
+Sonnet allocation & $\approx$55\% (Modules 1--3, 5, VERIFY, EXEC) \\
+Haiku allocation & $\approx$10\% (Foundation, LOG, BUDGET) \\
+CAPCOM gates & 2 (Wave 0 end; Wave 2 end) \\
+Mandatory-pass tests & 6 safety-critical + 6 source attribution = 12 BLOCK tests \\
+Primary sensitivity & Indigenous attribution (OCAP); political balance \\
+Through-line & ``The state, or the United States'' --- Graham Spry (1932) \\
+Handoff target & gsd-skill-creator (dev branch) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``It is often with surprise that Canadians living or travelling abroad realize how much they miss CBC broadcasting.''}\\[0.5em]
+--- The Canadian Encyclopedia, ``Founding of the CBC''\\[1em]
+The surprise is the data point. What you miss when you leave is not a channel --- it is a frequency on which the country talks to itself. The CBC is the infrastructure of that conversation. Whether the conversation continues is the question this study exists to inform.\\[0.5em]
+\textit{The state, or the United States. The frequency, or the void. The mission is to understand which it has been --- and map what making it otherwise would cost.}
+\end{quotebox}
+
+\end{document}
