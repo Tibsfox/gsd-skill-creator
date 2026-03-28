@@ -105,6 +105,7 @@
     { id: 'PTG', name: 'Paper That Grows', path: 'PTG/index.html' },
     { id: 'PIN', name: 'Post-Industrial', path: 'PIN/index.html' },
     { id: 'PMG', name: 'Pi-Mono + GSD', path: 'PMG/index.html' },
+    { id: 'PNP', name: 'Ports & Pipes', path: 'PNP/index.html' },
     { id: 'PPM', name: 'Pike Place Market', path: 'PPM/index.html' },
     { id: 'PRS', name: 'Polyrhythm Standard', path: 'PRS/index.html' },
     { id: 'PSG', name: 'Pacific Spine', path: 'PSG/index.html' },
