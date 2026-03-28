@@ -1,0 +1,1013 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME ── Aviation Night / Jet Life Gold ──────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo — night sky, aviation
+\definecolor{secondary}{HTML}{B8860B}     % Dark goldenrod — Jet Life luxury
+\definecolor{tertiary}{HTML}{4E342E}      % Mahogany — New Orleans roots
+\definecolor{accent}{HTML}{283593}        % Indigo accent
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Light indigo background
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS / FOOTERS ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Curren\$y — Shante Scott Franklin}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Curren\$y Deep Study -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  TITLE PAGE
+% ══════════════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Curren\$y\\[0.3em]Jet Life Architect}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{New Orleans, Louisiana $\cdot$ 1981–Present}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Est. 6 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  TABLE OF CONTENTS
+% ══════════════════════════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Curren\$y — Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{Southern Hip-Hop Cultural History, Independent Artist Economy}
+\metafield{Context:}{Cold-start research mission; subject is a living, active recording artist}
+
+\subsection{Vision}
+
+Some artists chase the machine. Curren\$y built his own runway. Shante Scott Franklin — born April 4, 1981 in New Orleans, Louisiana, a city where jazz bleeds into bounce and the air itself carries rhythm — spent the first decade of his career navigating the politics of two of rap's most legendary institutions: No Limit Records and Cash Money Records. He emerged from both without a major release, without the co-sign the industry demands, and with something more durable than either: a philosophy.
+
+The Jet Life is not a brand in the conventional sense. It is a lived theorem: that the smoothest existence possible, pursued with discipline and prolific dedication, outlasts any hype cycle. Where his contemporaries chased chart positions, Curren\$y chased craft. Where they hired consultants to optimize their rollouts, he dropped music because he had music to drop. The result is a catalog of over 90 mixtapes, EPs, and albums spanning more than two decades — a body of work that survived the mixtape era, the blog era, and the streaming era without compromise.
+
+The research question at the center of this mission is deceptively simple: \textit{how does an artist build a lasting independent institution from inside one of the most volatile industries on earth?} The answer, in Curren\$y's case, involves vinyl culture, vintage automobiles, cannabis entrepreneurship, New Orleans sonic heritage, and an almost architectural understanding of what a ``label'' can be when it is also a crew, a lifestyle, and a philosophical stance. This study maps that architecture.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The gatekeeping problem.} From 2002 to 2007, Curren\$y was signed to No Limit, Cash Money, and Young Money without releasing a single major-label album — a pattern of creative suppression common to unsigned or under-prioritized roster artists in the major-label system.
+
+  \item \textbf{The era-survival problem.} Most blog-era artists who built followings between 2007 and 2012 either crossed over to mainstream dominance or faded when streaming disrupted discovery. Curren\$y did neither — he remained cult-beloved and prolific across all three eras, which demands explanation.
+
+  \item \textbf{The independent label paradox.} Jet Life Recordings signed a distribution deal with Warner Bros. in 2011, then Curren\$y bought back full control. The tension between institutional distribution power and artist-owned creative sovereignty represents a case study in independent label strategy rarely examined at this depth.
+
+  \item \textbf{The prolific quality problem.} Conventional music industry wisdom holds that volume degrades quality. Curren\$y's catalog — which includes the critically acclaimed \textit{Pilot Talk} trilogy, \textit{The Stoned Immaculate} (Billboard 200 \#8), and the 2025 collaboration \textit{Never Catch Us} with Harry Fraud — challenges this assumption directly.
+
+  \item \textbf{The cultural transmission problem.} Curren\$y's influence on subsequent artists (Wiz Khalifa, Mac Miller, a generation of ``laid-back luxury'' rappers) has been acknowledged but not systematically documented. Understanding influence pathways in hip-hop subcultures requires dedicated analytical frameworks.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Jet Life Theorem:} Artistic sovereignty, pursued through radical prolificacy and institutional self-determination, produces durable cultural influence that survives the disruption cycles that eliminate conventionally successful artists.
+
+\begin{center}
+\begin{asciibox}
+CURREN\$Y CAREER MAP
+============================================================
+
+Phase 1: The Major Label Circuit (2002--2007)
+  No Limit Records (504 Boyz) --> Cash Money Records
+  --> Young Money Entertainment --> Zero major releases
+  --> Lesson: institutions prioritize their own gravity
+
+Phase 2: The Independent Breakout (2007--2010)
+  7 mixtapes in 2008 alone --> Amalgam Digital debut
+  --> Pilot Talk (Ski Beatz) --> Blog era critical mass
+  --> Lesson: volume + quality = audience ownership
+
+Phase 3: Jet Life Institutional Era (2011--present)
+  Warner Bros. distribution --> Jet Life Recordings CEO
+  --> Buyback of masters --> Full sovereignty
+  --> 90+ projects to date --> Still active in 2026
+  --> Lesson: distribution != ownership
+
+============================================================
+\end{asciibox}
+\end{center}
+
+\subsubsection{Module Architecture}
+
+\begin{center}
+\begin{asciibox}
+RESEARCH MODULE MAP
+============================================================
+
+[M1] Origins \& New Orleans         [M2] Independent Rise
+  - Cultural formation                 - Mixtape strategy
+  - No Limit / Cash Money              - Blog era mechanics
+  - Young Money years                  - Pilot Talk era
+
+           |                                  |
+           v                                  v
+
+[M3] Discography \& Key Works       [M4] Jet Life Business Model
+  - Studio album analysis              - Label architecture
+  - Collaboration network              - Warner deal / buyback
+  - Critical reception arc             - Brand extensions
+
+           |                                  |
+           +-----------+-----------+
+                       |
+                       v
+           [M5] Cultural Impact \& Legacy
+              - Influence on successors
+              - Era-proof analysis
+              - Ongoing output (2025--26)
+
+============================================================
+\end{asciibox}
+\end{center}
+
+\subsection{Research Modules}
+
+\subsubsection{M1 — Origins and New Orleans Formation}
+Maps Curren\$y's early years in New Orleans — a city whose jazz, bounce, and hip-hop traditions (Master P, Cash Money, Juvenile, Soulja Slim) are inseparable from his artistic DNA. Documents his trajectory through No Limit Records (2002, 504 Boyz), Cash Money/Young Money Entertainment (2004–2007), and the formative frustrations that drove him toward independence. Includes the ``Where Da Cash At'' single (2006), his appearances on \textit{Tha Carter II} and \textit{Dedication 2}, and the founding of the Fly Society collective with skateboarder Terry Kennedy.
+
+\subsubsection{M2 — Independent Breakout and Blog Era Mechanics}
+Analyzes the 2007–2010 period during which Curren\$y released seven mixtapes in a single year (2008) and built an audience entirely through digital channels — DatPiff, 2DopeBoyz, Nah Right, The Smoking Section. Documents the Amalgam Digital debut albums (\textit{This Ain't No Mixtape}, \textit{Jet Files}, both 2009), the \textit{How Fly} collaboration with Wiz Khalifa (2009), and the pivotal \textit{Pilot Talk} (2010, Ski Beatz production) that established his critical reputation.
+
+\subsubsection{M3 — Discography and Key Works Analysis}
+Provides a structured analysis of Curren\$y's studio album catalog: the Pilot Talk trilogy, \textit{Weekend at Burnie's} (2011), \textit{The Stoned Immaculate} (2012, Billboard 200 \#8), \textit{Canal Street Confidential} (2015), and the ongoing collaborations with The Alchemist, Harry Fraud, Freddie Gibbs, Wiz Khalifa, Statik Selektah, and Berner. Examines production partnerships, lyrical thematics (vintage automobiles, cannabis culture, New Orleans identity, pop culture references), and critical reception patterns.
+
+\subsubsection{M4 — Jet Life Recordings as Independent Business Architecture}
+Examines Jet Life Recordings as a label, lifestyle brand, and institutional model. Documents the February 2011 Warner Bros. distribution deal, the subsequent master buyback, the signing of Trademark da Skydiver, Young Roddy, Smoke DZA, Fiend, and Sir Michael Rocks, and the expansion into apparel (Jet Life Apparel, flagship at 1540 Canal Street, New Orleans), cannabis partnerships, NASCAR collaborations, and New Orleans Pelicans NBA partnerships.
+
+\subsubsection{M5 — Cultural Impact, Influence Network, and Legacy}
+Maps Curren\$y's influence on subsequent artists and aesthetics: the laid-back luxury rap subgenre, the independent artist model, the ``Jet Life'' ethos adopted broadly by Wiz Khalifa, Mac Miller, and others. Analyzes his ``era-proof'' quality — survival through the mixtape era, the blog era, and the streaming era — and documents ongoing output through 2025–2026 (including \textit{Never Catch Us} with Harry Fraud, the \textit{Spiral Staircases} collaboration with Larry June and The Alchemist in 2026).
+
+\subsection{Chipset Configuration}
+
+\begin{center}
+\begin{asciibox}
+chipset:
+  mission: currensy_deep_study_v1
+  activation_profile: squadron
+  model_allocation:
+    opus_30pct:
+      - synthesis_and_cross_module_integration
+      - cultural_influence_network_analysis
+      - independent_label_strategy_judgment
+    sonnet_60pct:
+      - discography_survey_and_compilation
+      - document_assembly_and_structure
+      - source_verification
+      - blog_era_mechanics_research
+    haiku_10pct:
+      - shared_schemas
+      - citation_templates
+      - scaffolding_passes
+  parallel_tracks: 2
+    track_a: [M1, M3]   # Origins + Discography
+    track_b: [M2, M4]   # Blog Era + Business Model
+  synthesis_gate: M5 depends on ALL prior modules
+  cache_strategy: 5min_ttl_exploitation
+    warm_cache_window: wave_1_parallel_execution
+\end{asciibox}
+\end{center}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Full career biography from New Orleans origins through March 2026
+  \item Complete studio album catalog analysis (all 10+ LPs)
+  \item Key mixtape and EP analysis (selected critical works)
+  \item Jet Life Recordings label and roster history
+  \item Collaboration network: producers, featured artists, label signees
+  \item Cultural influence analysis: identified successor artists and aesthetics
+  \item Business model analysis: distribution deal, master buyback, brand extensions
+  \item Blog era context: DatPiff, hip-hop blogs, independent distribution mechanics
+  \item New Orleans hip-hop context: No Limit, Cash Money, and their legacy
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Financial specifics (net worth, private revenue figures)
+  \item Personal/family life beyond what is publicly documented
+  \item Exhaustive analysis of all 90+ projects (sampled selection only)
+  \item Comparative analysis of all blog-era artists (contextual only)
+  \item Legal proceedings in full (DD172/Damon Dash lawsuit summarized only)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Career timeline documented from 2002 (No Limit signing) to 2026 with all major milestones attributed to verified sources.
+  \item All five major label affiliations (No Limit, Cash Money, Young Money, DD172/Amalgam, Warner Bros.) documented with entry/exit dates and key events.
+  \item Pilot Talk trilogy analyzed with production credits, featured artists, and critical reception documented.
+  \item \textit{The Stoned Immaculate} Billboard chart performance (\#8 on Billboard 200, \#2 Top Rap Albums) confirmed via industry source.
+  \item Jet Life Recordings roster documented with original signing dates and known current status.
+  \item Warner Bros. distribution deal (February 1, 2011) and subsequent master buyback documented.
+  \item Cultural influence network maps at least five successor artists citing Curren\$y's influence.
+  \item Blog era mechanics explained: specific platforms (DatPiff, 2DopeBoyz, Nah Right) documented with their role in Curren\$y's audience-building.
+  \item Thematic analysis identifies and documents at least four recurring lyrical themes with representative examples.
+  \item Production partnership analysis covers at least six major producing collaborators with album associations.
+  \item 2025–2026 output documented, confirming active status.
+  \item Through-line connecting Curren\$y's model to the GSD Amiga Principle (architectural leverage over brute force) written and integrated.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection Point} \\
+\midrule
+GSD Amiga Vision & Philosophical parent & Architectural leverage over brute force; Curren\$y as case study \\
+Wasteland Federation & Ecosystem parallel & Independent creator economy; direct-to-audience distribution \\
+The Space Between & Mathematical spine & ``Spaces between'' as career philosophy; journey over destination \\
+Foxfire Heritage Vision & Cultural analog & Preservation of craft knowledge across generations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that remarkable outcomes emerge from architectural elegance and specialized execution paths, not from raw computational power. Curren\$y's career is a human proof of this theorem. He never had the institutional weight of Wayne or the commercial machinery of Drake. What he had was a chipset: a clear aesthetic identity, a production philosophy, a crew architecture, and the discipline to execute against it across two-plus decades without drifting.
+
+Every Curren\$y album sounds like it was made by the same person in the same room, and this is not a limitation — it is a precision. The ``spaces between'' are audible in his work: the silence before a punchline lands, the gap between a sample's soul and a contemporary flex, the pause in which you realize you are being invited into a world rather than sold a product. He is not trying to convince you of his importance. He is simply living Jet Life, and documenting it faithfully, and trusting that the documentation will find its audience.
+
+The GSD ecosystem is built on the same faith: that systems which serve their purpose faithfully, without excess, without performance, will persist through the disruption cycles that eliminate bloated alternatives. Curren\$y is a rapper. He is also an existence proof.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Curren\$y — Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides module-by-module findings for the five research tracks. All sources are publicly available. The bibliography section lists primary sources by category.
+
+\textbf{Key source organizations and publications:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Wikipedia (Currensy, Currensy discography, Jet Life articles) — structural/factual baseline
+  \item The Ringer (Julian Kimble profile, September 2023) — most comprehensive long-form career profile
+  \item AllMusic — discography and biographical records
+  \item Apple Music editorial biography — concise career summary
+  \item Last.fm artist wiki — complete discography chronology
+  \item Album of the Year — discography with user and critic scores
+  \item HotNewHipHop — recent releases and 2025 activity
+  \item REVOLT TV — blog era cultural context
+  \item Grokipedia (Jet Life article) — label roster and business history
+\end{itemize}
+
+\subsection{M1 Reference — Origins and New Orleans Formation}
+
+\subsubsection{New Orleans Hip-Hop Context}
+
+Curren\$y was born and raised in New Orleans, Louisiana, a city whose musical identity encompasses jazz, blues, bounce, and a hip-hop scene that produced Master P, Cash Money Records, Juvenile, Soulja Slim, and C-Murder. These artists and institutions are not merely backdrop — they are the formative conditions of his aesthetic. His love of vinyl culture and analog sound traces directly to exposure to records at home. The city's culture of live performance, improvisation, and local pride is audible throughout his catalog.
+
+\subsubsection{Label Trajectory: No Limit, Cash Money, Young Money}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Label} & \tableheader{Years} & \tableheader{Key Output} & \tableheader{Outcome} \\
+\midrule
+No Limit Records (Master P) & 2002–2004 & 504 Boyz appearances; 5 tracks on Master P's \textit{Good Side, Bad Side} & Released from label; no solo debut \\
+Cash Money / Young Money (Lil Wayne) & 2004–2007 & ``Where Da Cash At'' single; features on \textit{Tha Carter II}, \textit{Dedication 2}, \textit{The Suffix} & Parted ways; no album released \\
+Amalgam Digital & 2009 & \textit{This Ain't No Mixtape}; \textit{Jet Files} & Two debut albums; independent distribution \\
+DD172 (Damon Dash) & 2010 & \textit{Pilot Talk}; \textit{Pilot Talk II} & Legal dispute; Curren\$y filed \$1.5M suit claiming he never legally signed \\
+Warner Bros. / Jet Life & 2011–present & \textit{Weekend at Burnie's}; \textit{The Stoned Immaculate}; all subsequent output & Distribution deal then master buyback; full sovereignty \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Fly Society and Pre-Independence Creative Infrastructure}
+
+While still at Young Money, Curren\$y founded Fly Society International with professional skateboarder Terry Kennedy — first as a clothing company, then as a music collective. This is a critical precursor to Jet Life: it demonstrates that the institutional instinct predated independence and was not a reaction to failure, but an active architectural choice. The XXL ``Freshman Class'' inclusion in 2009 confirmed critical recognition as an independent artist.
+
+\subsection{M2 Reference — Independent Breakout and Blog Era}
+
+\subsubsection{The 2008 Mixtape Explosion}
+
+After leaving Young Money in late 2007, Curren\$y released \textit{Independence Day} (2008) — his first independent project — and proceeded to drop seven mixtapes in a single calendar year, including \textit{Higher Than 30,000 Ft.}, \textit{Welcome to the Winner's Circle}, \textit{Fear and Loathing in New Orleans}, \textit{Super Tecmo Bowl}, and \textit{Fast Times at Ridgemont Fly}. The volume was strategic: in the absence of label infrastructure, frequency of release is audience maintenance.
+
+\subsubsection{Blog Era Mechanics}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Platform / Publication} & \tableheader{Role in Curren\$y's Rise} \\
+\midrule
+DatPiff & Primary mixtape distribution; free downloads circulated independently of label infrastructure \\
+2DopeBoyz & Editorial coverage; blog co-sign that translated underground following to wider hip-hop audience \\
+Nah Right & Early-adopter coverage; positioned Curren\$y as a serious lyricist not a commercial act \\
+The Smoking Section & Cultural framing; helped establish the ``Jet Life'' aesthetic as a coherent identity \\
+Pigeons and Planes & Crossover coverage to music-general audience \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The blog era (roughly 2007–2012) functioned as a distributed A\&R system. Sites like DatPiff enabled direct-to-listener distribution while blogs provided editorial legitimacy. Curren\$y's prolific output — content always available, always free at the point of access — made him a perfect blog-era artist.
+
+\subsubsection{How Fly and the Wiz Khalifa Collaboration}
+
+The 2009 mixtape \textit{How Fly}, a Curren\$y and Wiz Khalifa collaboration, is widely cited as a formative document of the laid-back luxury aesthetic. It drew two artists with complementary philosophies — both committed to cannabis culture, independent artistry, and quality-over-commercial calculation — and introduced each to the other's fanbase. Wiz Khalifa has since credited Curren\$y with helping shape his independent artist approach.
+
+\subsubsection{Pilot Talk and Critical Establishment}
+
+\textit{Pilot Talk} (July 13, 2010) — produced predominantly by Ski Beatz, with guest appearances from Snoop Dogg, Big K.R.I.T., and Mos Def — is widely considered Curren\$y's artistic breakthrough. Prior to its release, there was discussion of it being released under a relaunched Roc-A-Fella Records, which underscores the critical credibility the project commanded before arrival. Its sequel, \textit{Pilot Talk II}, followed in November 2010.
+
+\subsection{M3 Reference — Discography and Key Works}
+
+\subsubsection{Studio Album Catalog}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Album} & \tableheader{Label / Distrib.} & \tableheader{Notes} \\
+\midrule
+2009 & \textit{This Ain't No Mixtape} & Amalgam Digital & Official debut; entirely produced by Monsta Beatz; XXL Freshman year \\
+2009 & \textit{Jet Files} & Amalgam Digital & Second album same year; Monsta Beatz production \\
+2010 & \textit{Pilot Talk} & DD172 & Ski Beatz production; Snoop Dogg, Big K.R.I.T., Mos Def features; critical breakthrough \\
+2010 & \textit{Pilot Talk II} & DD172 & Same-year sequel; legal dispute with Damon Dash later follows \\
+2011 & \textit{Weekend at Burnie's} & Warner / Jet Life & Major label debut; ``\#JetsGo'' anthem; Rahki and Monsta Beatz production \\
+2011 & \textit{Covert Coup} (EP) & Jet Life & Entirely produced by The Alchemist; 10 tracks; released free April 20 \\
+2012 & \textit{Muscle Car Chronicles} & DD172 (disputed) & Released by Dash without authorization per lawsuit \\
+2012 & \textit{The Stoned Immaculate} & Warner Bros. & Billboard 200 \#8; Top Rap Albums \#2; career commercial peak \\
+2015 & \textit{Pilot Talk III} & Jet Life & Trilogy completion, released April 4 (his birthday) \\
+2015 & \textit{Canal Street Confidential} & Jet Life & December; named for a New Orleans thoroughfare; named one of year's best \\
+2018 & \textit{Fetti} & — & Three-way collaboration: Curren\$y, Freddie Gibbs, The Alchemist \\
+2019 & \textit{\#2009} & — & Collaboration with Wiz Khalifa; decade-anniversary project \\
+2019 & \textit{Gran Turismo} & — & With Statik Selektah; automotive theme \\
+2020 & \textit{The OutRunners} & — & With Harry Fraud \\
+2022 & \textit{Continuance} & — & With The Alchemist; critical acclaim \\
+2025 & \textit{Never Catch Us} & — & With Harry Fraud; March 2025; ongoing collaboration \\
+2026 & \textit{Spiral Staircases} & — & With Larry June and The Alchemist; released 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Lyrical Thematic Analysis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Theme} & \tableheader{Manifestation in Catalog} \\
+\midrule
+Vintage automobile culture & Album titles (\textit{Gran Turismo}, \textit{Muscle Car Chronicles}); pervasive lyrical motif; Instagram car collection; deep appreciation for classic aesthetics \\
+Cannabis culture & Explicit throughout; Jet Life described as ``weed-rappers''; own cannabis strain and grow house; released \textit{Covert Coup} on April 20 \\
+New Orleans identity & Canal Street references; local artist namedrops (Soulja Slim, Fiend, C-Murder); city's musical DNA audible in production choices \\
+Pop culture intertextuality & Film and TV references woven into wordplay: \textit{Days of Thunder}, \textit{Fast Times at Ridgemont High}, \textit{Weekend at Bernie's}, \textit{The Real World}, Michael Phelps/Leon Phelps blend \\
+Jet Life philosophy & Aviation metaphors; ``flying high'' as both literal (private jets) and philosophical (sovereign creative life); the journey as destination \\
+Luxury without excess & Aspirational but grounded; celebrating craft and earned comfort rather than ostentatious display \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Production Collaborators}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Producer} & \tableheader{Key Projects / Role} \\
+\midrule
+Ski Beatz & \textit{Pilot Talk} (2010); established soulful, jazz-inflected production identity \\
+The Alchemist & \textit{Covert Coup} (2011), \textit{Fetti} (2018), \textit{Continuance} (2022); long-running creative partnership \\
+Monsta Beatz & \textit{This Ain't No Mixtape}, \textit{Jet Files}, \textit{Weekend at Burnie's}; longtime collaborator \\
+Harry Fraud & \textit{The OutRunners} (2020), \textit{The Director's Cut} (2020), \textit{Never Catch Us} (2025); cinematic, atmospheric production \\
+Statik Selektah & \textit{Gran Turismo} (2019); East Coast boom-bap crossover \\
+Rahki & ``\#JetsGo'' (Weekend at Burnie's); Jet Life anthem \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M4 Reference — Jet Life Recordings Business Architecture}
+
+\subsubsection{Label Founding and Structure}
+
+Jet Life Recordings was officially founded on February 1, 2011, when Curren\$y signed a distribution deal with Warner Bros. Records — positioning himself as CEO of his own imprint. This structure is architecturally significant: the deal provided major-label distribution muscle without surrendering creative control or master ownership to the label itself.
+
+Initial Jet Life roster: Trademark da Skydiver and Young Roddy (co-founders of the Jet Life aesthetic), Fiend (No Limit veteran, reintroduced to new audiences), Street Wiz, Monsta Beatz (producer). Later additions: Sir Michael Rocks of The Cool Kids (October 2011), Smoke DZA (October 2011), Corner Boy P, Nesby Phips.
+
+\subsubsection{Master Buyback}
+
+Curren\$y subsequently dissolved the Warner Bros. partnership and bought back all masters, achieving full sovereignty. His statement on this: ``I bought that whole thing back. We're just our own thing, we could put your album out right now.'' This move placed him among a small group of artists who successfully navigated major-label infrastructure as a service rather than a dependency.
+
+\subsubsection{Brand Extensions}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Extension} & \tableheader{Details} \\
+\midrule
+Jet Life Apparel & Streetwear line evolved from tour merchandise; limited-edition drops, varsity jackets, accessories; flagship retail store at 1540 Canal Street, New Orleans \\
+Cannabis ventures & Own handpicked cannabis strain; grow house; cannabis brand partnerships \\
+NASCAR collaboration & Jet Life branding extended to NASCAR; automotive culture integration \\
+NBA Pelicans partnership & New Orleans Pelicans collaboration; home city brand alignment \\
+JetFlix & YouTube documentary series; multimedia content extension \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M5 Reference — Cultural Impact and Legacy}
+
+\subsubsection{Era-Proof Analysis}
+
+The Ringer's 2023 profile by Julian Kimble identifies Curren\$y as ``a survivor of the mixtape era, the blog era, and the streaming era'' and ``one of the only artists who was signed to both No Limit and Cash Money.'' This cross-era persistence is analytically unusual. Most blog-era artists either achieved mainstream crossover (Drake, Kendrick Lamar, J. Cole, Nicki Minaj) or faded as streaming disrupted the discovery mechanisms that had sustained them. Curren\$y achieved neither crossover nor fade — a third path requiring distinct explanation.
+
+His ``era-proof'' quality is attributed to: (1) a sound that does not depend on trend cycles; (2) a fanbase relationship built on direct-to-listener distribution rather than radio or algorithmic recommendation; (3) a philosophy of ``the smoothest existence possible'' that is timeless rather than topical; and (4) consistent prolific output that maintains presence without requiring any single project to be a commercial event.
+
+\subsubsection{Influence Network}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{Documented Influence} \\
+\midrule
+Wiz Khalifa & Direct co-sign relationship; \textit{How Fly} (2009) collaboration; Wiz has credited Curren\$y with shaping his laid-back independent aesthetic \\
+Mac Miller & Blog-era peer; shared cannabis/luxury aesthetic; similar independent-first trajectory \\
+Action Bronson & Shared aesthetic of food, cars, cannabis, and pop culture lyricism; longtime collaborator \\
+Larry June & Direct collaborator on \textit{Spiral Staircases} (2026); Bay Area luxury-rap lineage traceable to Curren\$y's model \\
+Freddie Gibbs & \textit{Fetti} (2018) collaborator; Curren\$y's gritty realism complementing Gibbs' street narrative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{2025–2026 Activity}
+
+As of March 2026, Curren\$y remains aggressively active. In 2025 alone he released at minimum four solo projects (\textit{7/30}, \textit{8/30}, \textit{9/15}, \textit{10/15}), the Harry Fraud collaboration \textit{Never Catch Us}, and the revived \textit{Andretti} series. In 2026 he appeared on \textit{Spiral Staircases} with Larry June and The Alchemist. He has stated plans for monthly releases through the second half of 2025 and ongoing touring.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Cannabis content & ANNOTATE & Document factually without normative judgment; cannabis is central to both the aesthetic and the business; present as cultural fact \\
+Legal disputes (DD172) & GATE & Summarize the known facts of the Damon Dash lawsuit; do not adjudicate or speculate on outcomes beyond documented record \\
+Living subject & ABSOLUTE & All biographical claims require attribution to published sources; no speculation about personal life beyond public record \\
+Influence attribution & ANNOTATE & Influence claims should be attributed to documented statements by influenced artists or to critical publications; avoid unsubstantiated causal claims \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Reference Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Wikipedia: ``Currensy'' — \url{https://en.wikipedia.org/wiki/Currensy}
+  \item Wikipedia: ``Jet Life'' — \url{https://en.wikipedia.org/wiki/Jet_Life}
+  \item Wikipedia: ``Currensy discography'' — \url{https://en.wikipedia.org/wiki/Currensy_discography}
+\end{itemize}
+
+\subsubsection{Long-Form Journalism}
+\begin{itemize}[leftmargin=1.5em]
+  \item Kimble, Julian. ``Curren\$y Is Forever Living the High Life.'' \textit{The Ringer}, September 12, 2023. \url{https://www.theringer.com/rap/2023/9/12/23867213/currensy-jet-life-profile-interview}
+  \item ``Childish Gambino, Denzel Curry and Curren\$y channel rap's blog era.'' NPR/KBIA, July 25, 2024.
+  \item ``Curren\$y: The Jet Life Architect Who Bet Big On Himself And Won.'' \textit{NOLAzine}, 2025.
+\end{itemize}
+
+\subsubsection{Discography and Music Reference}
+\begin{itemize}[leftmargin=1.5em]
+  \item AllMusic: Curren\$y artist biography and discography — \url{https://www.allmusic.com/artist/curreny-mn0000784396}
+  \item Apple Music: Curren\$y editorial biography — \url{https://music.apple.com/us/artist/curren\%24y/5914039}
+  \item Album of the Year: Curren\$y discography — \url{https://www.albumoftheyear.org/artist/1308-curren\$y/}
+  \item Last.fm artist wiki — \url{https://www.last.fm/music/Curren\$y/+wiki}
+  \item HotNewHipHop: Curren\$y mixtapes — \url{https://www.hotnewhiphop.com/profile/currensy/mixtapes}
+\end{itemize}
+
+\subsubsection{Cultural Context}
+\begin{itemize}[leftmargin=1.5em]
+  \item REVOLT TV: ``Photos of blog era rappers past and present'' — \url{https://www.revolt.tv/article/blog-era-rapper-photos-past-and-present}
+  \item Grokipedia: ``Jet Life'' — \url{https://grokipedia.com/page/Jet_Life}
+  \item Closed Sessions: Curren\$y biography — \url{https://www.closedsessions.com/curreny}
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research study of Curren\$y (Shante Scott Franklin) — his biographical origins, artistic development, independent business architecture, cultural impact, and ongoing legacy — suitable for integration into the GSD knowledge ecosystem as a case study in independent creative institution-building and the Amiga Principle applied to human careers.
+
+The study will be executable by the GSD skill-creator orchestrator in three parallel waves, producing five research module documents and one synthesis report, all verifiable against the source bibliography in Stage 2.
+
+\subsection{Architecture Overview}
+
+\begin{center}
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+======================================================
+
+Wave 0: Foundation
+  [Haiku] --> shared schemas, citation templates, source index
+  Sequential | ~0.5 context windows
+
+Wave 1: Parallel Research Tracks
+  Track A:  [Sonnet] M1 Origins  +  [Opus] M3 Discography
+  Track B:  [Sonnet] M2 Blog Era +  [Sonnet] M4 Business Model
+  Parallel  | ~2.5 context windows
+
+         Cache warm window: 5-minute TTL exploitation
+         between Track A and Track B subtasks
+
+Wave 2: Synthesis
+  [Opus] M5 Cultural Impact -- reads all M1-M4 outputs
+  Sequential | ~1 context window
+
+Wave 3: Publication + Verification
+  [Sonnet] Document assembly + source verification
+  [Sonnet] Final PDF render + cross-reference check
+  Sequential | ~1.5 context windows
+
+======================================================
+Total estimated: 6 context windows / 3 sessions
+\end{asciibox}
+\end{center}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation layer} — Shared schemas, citation formats, source index YAML
+  \item \textbf{Research layer} — Five module documents produced in parallel tracks
+  \item \textbf{Synthesis layer} — Cross-module integration; cultural impact analysis; influence network mapping
+  \item \textbf{Publication layer} — Assembled long-form document; LaTeX render; verification matrix pass
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criterion} & \tableheader{Spec} \\
+\midrule
+D1 & Source Index YAML & All 12 primary sources indexed with URL, access date, reliability tier & Wave 0 output; Haiku \\
+D2 & M1 Origins Module & 2,000+ words; all 5 label affiliations documented & Wave 1 Track A; Sonnet \\
+D3 & M2 Blog Era Module & 1,500+ words; 5 platform roles documented & Wave 1 Track B; Sonnet \\
+D4 & M3 Discography Module & Complete catalog table; 6 production partnerships; 6 lyrical themes & Wave 1 Track A; Opus \\
+D5 & M4 Business Model Module & Warner deal + buyback documented; 5 brand extensions & Wave 1 Track B; Sonnet \\
+D6 & M5 Cultural Impact Module & 5+ successor artists; era-proof analysis; 2025-26 activity & Wave 2; Opus \\
+D7 & Assembled Research Document & All modules integrated; consistent voice; citations verified & Wave 3; Sonnet \\
+D8 & Verification Report & All 12 success criteria tested; pass/fail per criterion & Wave 3; Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Source index schema & None & Haiku & 2K \\
+Citation template & Source index & Haiku & 1K \\
+M1 Origins document & Source index & Sonnet & 8K \\
+M2 Blog Era document & Source index & Sonnet & 6K \\
+M3 Discography document & M1 (context) & Opus & 12K \\
+M4 Business Model document & M1 (context) & Sonnet & 7K \\
+M5 Synthesis document & M1+M2+M3+M4 & Opus & 10K \\
+Document assembly & M1–M5 & Sonnet & 6K \\
+Verification report & All docs + criteria & Sonnet & 4K \\
+\midrule
+\textbf{Total} & & & \textbf{$\approx$56K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Alloc.} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Synthesis requiring cross-module judgment; cultural influence network analysis; discography analysis where thematic and critical pattern recognition is required \\
+Sonnet & 60\% & Biographical survey; blog era mechanics documentation; business model assembly; document integration passes; verification \\
+Haiku & 10\% & Shared schemas; citation templates; source index YAML; scaffolding passes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Source index + schemas \\
+1A & Origins + Discography & Parallel & Sonnet + Opus & D2 + D4 \\
+1B & Blog Era + Business & Parallel & Sonnet + Sonnet & D3 + D5 \\
+2 & Synthesis & Sequential & Opus & D6 \\
+3 & Publication & Sequential & Sonnet & D7 + D8 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Build source index YAML & PLAN/Haiku & Index all 12 bibliography sources with URL, reliability tier (Primary/Secondary), and access date \\
+Generate citation template & PLAN/Haiku & Standard citation format for all agents to use consistently in module docs \\
+Create shared schema & PLAN/Haiku & Define standard section headers, data table formats, and naming conventions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks A and B}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+A & M1 Origins document & EXEC-1/Sonnet & New Orleans formation; label trajectory table; Fly Society founding; 2,000+ words \\
+A & M3 Discography document & CRAFT-MUSIC/Opus & Full catalog table; production partner analysis; thematic analysis; 12 key works deep-dived \\
+B & M2 Blog Era document & EXEC-2/Sonnet & 2007-2010 timeline; platform role table; \textit{How Fly}; \textit{Pilot Talk} critical reception \\
+B & M4 Business Model document & CRAFT-BIZ/Sonnet & Jet Life Recordings architecture; Warner deal; master buyback; brand extension table \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Cache optimization:} Wave 1 Track A and Track B should execute within the same 5-minute cache TTL window where possible, sharing the source index context without re-ingesting it.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+M5 Cultural Impact document & INTEG/Opus & Read all M1-M4 outputs; synthesize era-proof analysis; map influence network (5+ artists); document 2025-26 activity; connect to Amiga Principle through-line \\
+Cross-module relationship validation & INTEG/Opus & Confirm all cross-references between modules are consistent (dates, names, label affiliations) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Document assembly & EXEC-1/Sonnet & Integrate M1-M5 into single cohesive long-form document with consistent voice and flow \\
+Source verification & VERIFY/Sonnet & Cross-check all numerical claims (Billboard chart positions, album release dates, signing dates) against bibliography \\
+Success criteria check & VERIFY/Sonnet & Test each of the 12 success criteria; produce pass/fail verification report \\
+Final report render & LOG/Sonnet & Produce final formatted document; commit message; milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=1.5em]
+  \item Wave 0 output (source index + schemas) should be the first message in every subsequent agent context — this context will be in cache for Wave 1 execution
+  \item Wave 1 Track A and Track B should be dispatched within 5 minutes of each other to share warm cache on the foundation context
+  \item Wave 2 Opus synthesis agent should receive all four module documents in a single large context rather than four sequential calls — one long context is more efficient than four short ones at this scale
+  \item Wave 3 assembly uses Wave 2 output as its primary context; bibliography cross-reference is a separate focused call
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Input K} & \tableheader{Output K} \\
+\midrule
+Wave 0: Foundation & Haiku & 2K & 3K \\
+Wave 1A: M1 Origins & Sonnet & 8K & 8K \\
+Wave 1A: M3 Discography & Opus & 10K & 12K \\
+Wave 1B: M2 Blog Era & Sonnet & 6K & 6K \\
+Wave 1B: M4 Business & Sonnet & 6K & 7K \\
+Wave 2: M5 Synthesis & Opus & 36K & 10K \\
+Wave 3: Assembly & Sonnet & 45K & 8K \\
+Wave 3: Verification & Sonnet & 20K & 4K \\
+\midrule
+\textbf{Total} & & \textbf{133K} & \textbf{58K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{center}
+\begin{asciibox}
+DEPENDENCY GRAPH
+================================================
+
+[W0: Source Index] ──> [W1A: M1 Origins]
+                   ──> [W1A: M3 Discography]
+                   ──> [W1B: M2 Blog Era]
+                   ──> [W1B: M4 Business]
+
+[W1A: M1] ─┐
+[W1A: M3] ─┤
+[W1B: M2] ─┼──> [W2: M5 Synthesis]
+[W1B: M4] ─┘
+
+[W2: M5] ──────────> [W3: Document Assembly]
+                ──> [W3: Verification Report]
+
+================================================
+GATES:
+  Wave 1 cannot start until Wave 0 complete
+  Wave 2 cannot start until ALL Wave 1 complete
+  Wave 3 cannot start until Wave 2 complete
+  Verification is final gate; must pass before delivery
+================================================
+\end{asciibox}
+\end{center}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical & 3 & MANDATORY & BLOCK delivery; return to source verification \\
+Core Factual & 6 & HIGH & Correct before delivery \\
+Integration & 2 & MEDIUM & Flag in verification report \\
+Edge Case & 3 & LOW & Document as known limitation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-1 & Living subject — all claims sourced & No biographical claim appears without attribution to a published source; no speculation about personal life beyond public record \\
+SC-2 & Legal dispute handled correctly & DD172/Damon Dash lawsuit summarized from documented record only; no adjudication or outcome speculation beyond what is documented \\
+SC-3 & Cannabis content factual, non-normative & Cannabis references documented as cultural fact without normative judgment; no content that could be read as drug-use promotion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{6cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Career timeline 2002–2026 documented & T-01, T-02 & PENDING \\
+All 5 label affiliations with dates & T-03 & PENDING \\
+Pilot Talk trilogy analyzed & T-04 & PENDING \\
+Stoned Immaculate chart performance confirmed & T-05 & PENDING \\
+Jet Life roster documented & T-06 & PENDING \\
+Warner deal + buyback documented & T-07 & PENDING \\
+5+ successor artists influence mapped & T-08 & PENDING \\
+Blog era platforms documented & T-09 & PENDING \\
+4+ lyrical themes identified & T-10 & PENDING \\
+6 production partners documented & T-11 & PENDING \\
+2025–2026 output documented & T-12 & PENDING \\
+Amiga Principle through-line written & T-13 & PENDING \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates; final delivery approval \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; gap-fill web research; bibliography validation \\
+EXEC-1 & Executor Alpha & M1 Origins + Wave 3 document assembly \\
+EXEC-2 & Executor Beta & M2 Blog Era document \\
+CRAFT-MUSIC & Music Domain Specialist & M3 Discography analysis; thematic and production analysis \\
+CRAFT-BIZ & Business Domain Specialist & M4 Jet Life business architecture; label and brand analysis \\
+VERIFY & Verification Agent & Source cross-check; factual accuracy; success criteria testing \\
+INTEG & Integration Agent & M5 synthesis; cross-module consistency; Amiga Principle connection \\
+CAPCOM & HITL Interface & Human approval checkpoint between Wave 1 and Wave 2 \\
+BUDGET & Resource Manager & Token budget tracking across all waves \\
+LOG & Chronicle Agent & Commit messages; wave summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Subject & Shante Scott Franklin (Curren\$y), b. April 4, 1981 \\
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (M1–M5) \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+Wave Count & 4 (Wave 0, 1, 2, 3) \\
+Estimated Token Budget & 133K input / 58K output \\
+Estimated Sessions & 3 \\
+Estimated Context Windows & 6 \\
+Primary Model & Sonnet (60\%) \\
+Synthesis Model & Opus (30\%) \\
+Scaffolding Model & Haiku (10\%) \\
+Safety-Critical Tests & 3 (all MANDATORY-PASS) \\
+Total Success Criteria & 12 \\
+Human Checkpoints & 1 (CAPCOM at Wave 1 $\rightarrow$ Wave 2 gate) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``I never wanted to have a rap voice. I never wanted a mode I had to shift into to be whatever the fuck I had to be. I just wanted to be myself so that when it clicked, it would last long because it's not really any work to be me.''}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- Curren\$y (Shante Scott Franklin), The Ringer, September 2023}}
+
+\vspace{1em}
+The GSD ecosystem is built on the same intuition: that systems which are exactly what they are, without performance or excess, will persist through the disruption cycles that eliminate the overbuilt. Curren\$y did not survive by adapting. He survived by being unadaptable --- by building a runway, not borrowing one.
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{Jet Life. Just Enjoy This Shit.}}
+\end{quotebox}
+
+\end{document}
