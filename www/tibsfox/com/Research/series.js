@@ -135,6 +135,7 @@
     { id: 'STA', name: 'Steve Allen', path: 'STA/index.html' },
     { id: 'SYS', name: 'Systems Admin', path: 'SYS/index.html' },
     { id: 'T55', name: '555 Timer', path: 'T55/index.html' },
+    { id: 'TCP', name: 'TCP/IP Protocol', path: 'TCP/index.html' },
     { id: 'THE', name: 'Thermal Energy', path: 'THE/index.html' },
     { id: 'TSL', name: 'Tessl Review', path: 'TSL/index.html' },
     { id: 'TIBS', name: 'Animal Speak', path: 'TIBS/index.html' },
