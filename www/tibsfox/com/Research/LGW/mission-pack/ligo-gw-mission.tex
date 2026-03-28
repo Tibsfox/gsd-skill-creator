@@ -1,0 +1,961 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+
+% ---- Space / Physics color scheme ----
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue
+\definecolor{tertiary}{HTML}{F9A825}      % Star gold
+\definecolor{accent}{HTML}{4A148C}        % Deep violet
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF9C4}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ---- Section formatting ----
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ---- Custom environments ----
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ---- Table helpers ----
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ---- Headers/Footers ----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{LIGO GW Visualization}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ---- Hyperref ----
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={LIGO Gravitational Wave Real-Time Visualization -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ============================================================
+\begin{document}
+% ============================================================
+
+% ---- Title Page ----
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Listening to Gravity\\[0.3em]in Real Time}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{LIGO Data $\cdot$ OpenGL Screensavers $\cdot$ Minecraft Worlds}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research \& Build Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 6--8 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ---- TOC ----
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{LIGO Gravitational Wave Visualization --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Vision / Research Complete --- Ready for Mission Execution}
+\metafield{Depends On:}{gsd-skill-creator (dev branch), GSD workflow engine}
+\metafield{Context:}{GSD ecosystem --- Amiga Principle, Spaces Between philosophy}
+
+\subsection{Vision}
+
+Somewhere right now, two black holes are spiraling together at a fraction of the speed of light. The fabric of spacetime itself is rippling outward from that collision --- a wave 1,000 times thinner than a proton, stretching the 4-kilometer arm of a detector in Louisiana by a distance smaller than a nucleus. LIGO catches it. The data is public within minutes.
+
+The question is: what do we \emph{do} with that?
+
+The Amiga Principle says that architectural leverage beats raw power. You do not need a supercomputer cluster and a PhD in general relativity to experience gravitational wave data at a visceral level. You need the right data path, the right transformation, and the right rendering target. A 4-kilometer interferometer arm becomes a 64-block Minecraft corridor. A chirp signal becomes a rising tone that you can hear with your own ears. A spectrogram becomes a glowing 3D terrain that scrolls in real time across your screen while you drink coffee.
+
+This mission is about building that path: from LIGO's open science infrastructure (GWOSC, GraceDB, GWpy), through signal processing (whitening, Q-transform, sonification), to two distinct rendering targets --- an OpenGL screensaver engine that treats your display as a cosmic oscilloscope, and a Minecraft data bridge that lets you \emph{walk through} the spacetime distortion of a gravitational wave event as rendered in blocks.
+
+The deeper principle at work is one from \emph{The Space Between}: meaning lives in the connections between nodes, not the nodes themselves. The gravitational wave is not interesting because it is in the data. It is interesting because it connects a 1.3-billion-year-old black hole collision to a buffer in a Python process on your laptop. The visualizer is the space between those two things. The mission is to build that space well.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{LIGO's data is publicly available but nearly inaccessible to builders.} GWOSC releases strain data from every observing run. GraceDB publishes public alerts within minutes of detection. GWpy provides a Python interface. But the path from ``I want to see this data'' to ``I am looking at a real-time spectrogram'' requires stitching together calibration, noise subtraction, frequency-domain filtering, and display pipeline code that is not assembled anywhere for builders.
+
+  \item \textbf{Gravitational wave signals are subaudible and subvisual without transformation.} The strain amplitude of GW150914 was $10^{-21}$. The frequency chirp sweeps from roughly 35 Hz to 250 Hz in 0.2 seconds --- right at the edge of audible range, but buried under detector noise 10,000 times larger. Without whitening, bandpassing, and frequency-shifting, there is nothing to see or hear. The transformation pipeline is the art.
+
+  \item \textbf{No screensaver or ambient display exists that uses real LIGO data.} Dozens of NASA screensavers use Hubble/JWST imagery. None render gravitational wave spectrograms as ambient visual art. The aesthetic potential of a scrolling Q-transform --- color-mapped frequency-over-time, chirp signatures sweeping upward through the color field --- is entirely unrealized as a screensaver or ambient installation.
+
+  \item \textbf{Minecraft has no data-driven gravitational wave visualization.} The game's server command protocol supports real-time block placement from external processes via RCON or WebSocket bridges. A gravitational wave waveform can be encoded as a 3D terrain of blocks, updated in near-real-time as the data streams. Nobody has built this. The Virtual Black Rock City branch (wasteland/skill-creator-integration) has already established the conceptual framework for real-world-data-in-Minecraft.
+
+  \item \textbf{O4 ended in November 2025; IR1 begins September--October 2026.} The window between runs is the ideal time to build the visualization infrastructure, so it is ready and tested before IR1 begins and detections resume at approximately one merger every 2--3 days.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Cosmic Oscilloscope:} Route LIGO open data through a GWpy processing pipeline, transform it via Q-transform and optional sonification, and render to two aesthetic targets --- an OpenGL shader-driven screensaver and a Minecraft voxel terrain bridge --- both of which update in near-real-time as new data or GraceDB alerts arrive.
+
+\subsubsection{Data Architecture --- ASCII Diagram}
+
+\begin{asciibox}
+LIGO Data Sources
+==================
+ [GWOSC REST API]         [GraceDB Public Alerts]
+  strain HDF5/GWF          GCN/Kafka topic stream
+  fetch_open_data()         igwn-alert Python pkg
+        |                         |
+        v                         v
+  +-----------+          +-----------------+
+  |  GWpy     |          |  Alert Ingester  |
+  |  TimeSeries|          |  (skymap FITS)  |
+  +-----------+          +-----------------+
+        |                         |
+        +------------+------------+
+                     |
+                     v
+         +------------------------+
+         |  Signal Processor      |
+         |  - Bandpass 20-500 Hz  |
+         |  - Noise whitening     |
+         |  - Q-transform (Omega) |
+         |  - Sonification +400Hz |
+         +------------------------+
+                     |
+          +----------+----------+
+          |                     |
+          v                     v
+  +---------------+    +------------------+
+  |  OpenGL       |    |  Minecraft       |
+  |  Screensaver  |    |  Data Bridge     |
+  |  Engine       |    |  (RCON/WebSocket)|
+  +---------------+    +------------------+
+  - GLSL shaders        - Block palette map
+  - VBO spectrogram     - Terrain update cmd
+  - Spacetime mesh      - Audio note trigger
+  - 60 fps render       - Walk-through world
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+ Module 1       Module 2          Module 3        Module 4       Module 5
+ GWOSC          Signal            OpenGL          Minecraft      Integration
+ Data Layer     Processing        Screensaver     Data Bridge    Pipeline
+ ----------     ----------        ----------      ----------     ----------
+ GWpy API       Whitening         GLSL shaders    RCON bridge    GraceDB
+ REST queries   Q-transform       VBO terrain     Block palette  webhook
+ HDF5 frames   Sonification      60 fps loop      Walk-through   Scheduler
+ Alert sub      Bandpass          Screensaver      Audio map      Dispatcher
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: GWOSC Data Layer}
+
+All public LIGO data flows through the Gravitational Wave Open Science Center (gwosc.org). The GWpy Python library provides a \texttt{TimeSeries.fetch\_open\_data()} method for direct strain data access. GraceDB is the real-time event database; public alerts arrive within 1--10 minutes of detection, carrying event type, false alarm rate, and a HEALPix sky map. The \texttt{igwn-alert} package supports Kafka topic subscription for streaming alerts. Strain data is sampled at 16384 Hz and released in GWF (gravitational wave frame) binary format or HDF5.
+
+\subsubsection{Module 2: Signal Processing}
+
+Raw strain data is dominated by detector noise orders of magnitude larger than any signal. The processing pipeline: (1) bandpass filter 20--500 Hz to cut seismic and shot noise, (2) whiten by dividing by the amplitude spectral density (ASD) in the frequency domain, (3) apply the Q-transform (a wavelet-based time-frequency decomposition with variable window width) to produce spectrograms where chirp signatures appear as bright diagonal sweeps, and (4) optionally frequency-shift the data by +400 Hz to place the chirp in the sweet spot of human hearing (35--250 Hz raw chirp $\rightarrow$ 435--650 Hz shifted). PyCBC and LALSuite provide matched-filter pipelines for event-specific extraction.
+
+\subsubsection{Module 3: OpenGL Screensaver Engine}
+
+The screensaver renders a scrolling 3D Q-transform spectrogram using OpenGL VBOs and GLSL vertex/fragment shaders. Each new column of frequency-domain data displaces a row in a mesh of vertices; color maps energy (strain amplitude squared) to a user-configurable palette (thermal, viridis, or custom). A background spacetime grid is distorted by a vertex shader parameterized on the current strain value, producing the rubber-sheet-of-spacetime visual familiar from physics explainers. The renderer targets 60 fps; data updates arrive from the Python processing pipeline via a shared memory buffer or named pipe at 4096 Hz effective update rate.
+
+\subsubsection{Module 4: Minecraft Data Bridge}
+
+Minecraft Java Edition supports external control via RCON (remote console) or \texttt{mcpi} (Minecraft Pi API compatible with Java via ports). A bridge process maps each time-step's whitened strain value to a block palette (obsidian=quiet, purple glass=mid, glowing sea lantern=peak) and issues \texttt{/setblock} or \texttt{/fill} commands to update a 64$\times$16 woxel terrain strip. The terrain scrolls forward one slice per sample epoch (e.g., every 0.25 seconds). A note block layer triggers audio in-game --- the note block's pitch is driven by the frequency-shifted sonification value. Players can walk alongside the gravitational wave as it builds and chirps.
+
+\subsubsection{Module 5: Integration and Real-Time Pipeline}
+
+The integration layer coordinates data ingestion, processing, and dispatch to both renderers. GraceDB webhook events (via \texttt{igwn-alert} or GCN Kafka) trigger automatic queuing of a centered strain data window around the event GPS time. A scheduler manages the 5-minute GWOSC CDN cache window for public data availability. An event-type classifier routes binary neutron star (BNS) mergers --- which produce the most visually dramatic 30-second chirps --- to a ``featured event'' highlight mode in both renderers.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+gsd_chipset:
+  agnus:                        # Orchestration / DMA / Context
+    model: claude-opus-4-6
+    role: FLIGHT + INTEG
+    responsibilities:
+      - Cross-module dependency resolution
+      - GraceDB alert routing logic design
+      - Integration pipeline architecture
+      - HITL gate decisions
+
+  denise:                       # Display / Output / Rendering
+    model: claude-sonnet-4-6
+    role: EXEC-RENDER + CRAFT-GL
+    responsibilities:
+      - OpenGL GLSL shader code generation
+      - VBO mesh architecture implementation
+      - Screensaver frame loop and palette system
+      - Minecraft block palette design
+
+  paula:                        # I/O / Signal / Anticipatory
+    model: claude-sonnet-4-6
+    role: EXEC-DATA + CRAFT-DSP
+    responsibilities:
+      - GWpy pipeline implementation
+      - Q-transform / whitening code
+      - Sonification frequency shift
+      - RCON bridge implementation
+
+  gary_68000:                   # CPU / Glue / Scaffolding
+    model: claude-haiku-4-5
+    role: PLAN + BUDGET + LOG
+    responsibilities:
+      - Shared data schemas (HDF5 format)
+      - Token budget tracking
+      - Commit message generation
+      - Test scaffolding templates
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item GWpy-based strain data fetching for confirmed GWTC events and recent O4 data
+  \item Bandpass + whitening + Q-transform signal processing pipeline (Python)
+  \item Sonification via frequency shift (+400 Hz) and WAV export
+  \item OpenGL screensaver: scrolling 3D Q-transform terrain with GLSL shaders
+  \item Minecraft Java Edition data bridge via RCON (\texttt{setblock}/\texttt{fill} commands)
+  \item GraceDB public alert webhook listener (igwn-alert or GCN Kafka)
+  \item Event-driven mode switching (idle screensaver $\rightarrow$ featured event highlight)
+  \item Support for O4a public data release (May 2023 -- January 2024)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Real-time raw strain processing (data is released with a proprietary delay; ``real-time'' means within minutes for alerts, up to months for strain)
+  \item Detector simulation or noise modeling
+  \item Bedrock Edition Minecraft support
+  \item LISA (space-based GW detector) data --- different frequency regime entirely
+  \item GPU-accelerated matched filter signal recovery
+  \item WebGL browser-based version (post-v1.0 candidate)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item GWpy pipeline successfully fetches and processes strain data for at least 10 named GWTC events without manual intervention
+  \item Q-transform output shows visually distinct chirp signatures for BNS events (especially GW170817) distinguishable from noise floor
+  \item Sonified WAV output for GW150914 matches the publicly released LIGO audio file within perceptual equivalence (A/B test)
+  \item OpenGL screensaver renders at $\geq$ 60 fps on a mid-range GPU (GTX 1060 or equivalent) with a 1024-column spectrogram mesh
+  \item Spacetime mesh shader visibly distorts at strain amplitude peaks, recoverable to flat at noise floor
+  \item Minecraft bridge successfully places block terrain for at least one full 30-second GW170817 chirp window without RCON timeout
+  \item Block palette encodes strain amplitude in visually distinguishable steps across at least 5 distinct block types
+  \item GraceDB alert listener triggers a featured event display within 30 seconds of a test mock alert
+  \item Integration pipeline handles at least two simultaneous renderer targets without data loss or frame drop
+  \item All processing modules have unit tests with $\geq$ 80\% coverage; integration tests exercise the full data path end to end
+  \item Documentation sufficient for a developer unfamiliar with GW physics to set up and run the screensaver within 2 hours
+  \item System operates in offline/demo mode using cached O4a data when GWOSC is unavailable
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Mesh Prototype Spec & Parallel & WebGL mesh rendering shares shader architecture patterns \\
+GSD-OS / GSD Amiga Vision & Parent aesthetic & CRT shader engine and Amiga aesthetic inform screensaver palette design \\
+Virtual Black Rock City & Sibling & Data-in-Minecraft pattern established there; GW bridge reuses RCON architecture \\
+Deep Audio Analyzer Mission & Sibling & Signal processing pipeline (FFT, spectrograms) directly reusable here \\
+Wasteland / Skill-Creator & Upstream & ZFC/DACP structured data handoffs apply to GraceDB alert processing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Einstein predicted gravitational waves in 1916. He also doubted they would ever be detected --- the strains were too small, the universe too noisy. LIGO proved him wrong in 2015 with a 1.3-billion-year-old chirp that lasted 0.2 seconds and displaced a mirror by $10^{-18}$ meters. That is the Amiga Principle applied at cosmological scale: not more mirror, not more laser power in the simple sense, but a 4-kilometer interferometer arm that uses squeezed quantum light to beat the Heisenberg uncertainty principle itself.
+
+The space between GW150914 and a block of glowing sea lantern in a Minecraft world is exactly the kind of connection this ecosystem was built to make. The data is public. The tools exist. The signal has already been heard. The mission is to build the space between.
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{LIGO Gravitational Wave Visualization --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This stage compiles sourced findings for each of the five research modules. Agents executing Module 1--5 components should treat this section as the authoritative reference baseline before conducting additional targeted research.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item \textbf{GWOSC} (gwosc.org) --- primary data repository; REST API, HDF5/GWF downloads, tutorials
+  \item \textbf{GraceDB} (gracedb.ligo.org) --- real-time candidate event database; public alert API
+  \item \textbf{LIGO Lab / Caltech} (ligo.caltech.edu) --- official publications, audio files, detector news
+  \item \textbf{GWpy} (gwpy.github.io) --- Python library; TimeSeries, Q-transform, spectrogram tools
+  \item \textbf{IGWN Alert Guide} (emfollow.docs.ligo.org) --- complete alert format documentation
+  \item \textbf{PyCBC} (pycbc.org) --- matched filter pipeline; waveform generation; parameter estimation
+  \item \textbf{AEI Hannover / Max Planck} (aei.mpg.de) --- O4 results, detector sensitivity data
+\end{itemize}
+
+\subsection{Module 1: GWOSC Data Layer Reference}
+
+\subsubsection{Observing Run History and Current Status}
+
+The LIGO-Virgo-KAGRA Collaboration has completed four observing runs. O4 ran from May 24, 2023 to November 18, 2025 and detected roughly 250 candidate signals. Comprehensive analysis of O4a (the first segment) confirmed 128 significant events, increasing the total catalog to 218 confident detections. O4 more than doubled all previous observing runs combined (90 detections across O1--O3). Detection rate during O4 was approximately one merger candidate every 2--3 days. Detectors operated at 155--175 Mpc binary neutron star range, within design sensitivity of 160--190 Mpc. The next observing run (IR1, a 6-month run) is planned to begin between mid-September and early October 2026. The window until IR1 is the build window for this mission.
+
+The most recent catalog update (GWTC-4.0) includes GW231123, the highest-mass binary black hole merger ever observed. GW250114 is notable for showing three gravitational-wave ``tones'' (harmonics) for the first time, enabling the most stringent tests of general relativity to date.
+
+\subsubsection{Data Access APIs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Interface} & \tableheader{Package/URL} & \tableheader{Use Case} \\
+\midrule
+GWOSC REST API & gwosc.org/api & List events, download strain segments, query metadata \\
+GWpy fetch\_open\_data & \texttt{gwpy.timeseries} & Python: fetch strain by GPS time and interferometer \\
+OSDF network & osdf.osg-htc.org & Large bulk downloads (entire observing runs) \\
+GraceDB REST & gracedb.ligo.org/api & Superevents, sky maps, file downloads \\
+igwn-alert / GCN Kafka & igwn-alert package & Subscribe to real-time public alert stream \\
+GWTC-4.0 Event Portal & gwosc.org/eventapi & REST API: query GWTC catalog programmatically \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Strain data is sampled at 16384 Hz (full rate) or 4096 Hz (downsampled). The GWF binary format uses channel names such as \texttt{H1:GWOSC-4KHZ\_R1\_STRAIN} (Hanford, 4 kHz). HDF5 format is also supported. Approximately 1,000 auxiliary channels monitoring instrument and environmental state are also available.
+
+\subsubsection{Key Events for Visualization Development}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Event} & \tableheader{Type} & \tableheader{GPS Time} & \tableheader{Visualization Notes} \\
+\midrule
+GW150914 & BBH & 1126259462 & First detection; 0.2s chirp; canonical test case \\
+GW170817 & BNS & 1187008882 & 30s inspiral; loudest chirp; best for screensaver demo \\
+GW190521 & BBH & 1242442967 & Intermediate mass; short duration; high SNR \\
+GW231123 & BBH & O4b period & Highest-mass merger; dramatic low-frequency signature \\
+GW250114 & BBH & Jan 2025 & Three harmonic tones; GR test signature \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Signal Processing Reference}
+
+\subsubsection{The Noise Problem}
+
+Raw LIGO strain is dominated by several noise sources: seismic noise dominates below 10 Hz, thermal noise from mirror suspensions and coatings peaks around 100 Hz, and quantum shot noise dominates above 300 Hz. The gravitational wave signal from a black hole merger occupies 20--500 Hz but is typically $10^4$--$10^5$ times smaller than the noise ASD at those frequencies. The two core processing steps are \textbf{whitening} (dividing the frequency-domain signal by the ASD to flatten the noise floor to unity across all frequencies) and \textbf{bandpassing} (removing power outside the sensitive 20--500 Hz band).
+
+\subsubsection{The Q-Transform}
+
+The Q-transform (implemented in GWpy as \texttt{TimeSeries.q\_transform()}) is the standard time-frequency analysis tool for GW data. Unlike the Short-Time Fourier Transform which has fixed window width, the Q-transform uses wavelets with variable window width, allowing fine frequency resolution at low frequencies and fine time resolution at high frequencies. This makes it ideally suited for chirp signals, which sweep from low to high frequency over time. Output is a 2D array (time $\times$ frequency) representing normalized energy, typically rendered as a color-mapped spectrogram. GW170817's spectrogram shows a clear rising track from 30 Hz to 1 kHz over 30 seconds --- the most visually striking GW signature in the catalog.
+
+For the screensaver, the Q-transform output is the core data structure: each new time column is appended to a scrolling VBO mesh, displacing older columns rearward.
+
+\subsubsection{Sonification}
+
+LIGO signals occupy 35--250 Hz (raw chirp frequencies), technically at the edge of human hearing. The standard GWOSC sonification approach frequency-shifts the data by +400 Hz, placing the chirp at 435--650 Hz (sweet spot of human perception) and amplifying by 4$\times$. For GW150914, this produces the iconic 0.2-second ``chirp'' sound. For GW170817, the 30-second inspiral sweeps audibly from a low rumble to a sharp whistle, then abruptly terminates at merger. GWOSC publishes pre-sonified WAV files for all major events at gwosc.org/audio/. The \texttt{system-sounds.com} project (Matt Russo and Andrew Santaguida) has produced sonifications of all 90+ confirmed detections in sequence.
+
+\subsection{Module 3: OpenGL Screensaver Reference}
+
+\subsubsection{3D Spectrogram in OpenGL}
+
+The architecture follows a VBO-based mesh renderer: a grid of vertices $(x_i, y_j)$ representing time and frequency axes, with height $z_{ij}$ proportional to Q-transform energy at that cell. As new data columns arrive, the mesh ``scrolls'' --- the oldest column is discarded and the newest is prepended. A GLSL vertex shader maps height to vertical displacement; a fragment shader maps the normalized energy value to a color (thermal, viridis, or custom palette). The 3D spectrogram has precedent: a 2020 IEEE VR paper implemented a VLE with a 3D line grid rendered in OpenGL using vertex, geometry, and fragment shaders to create a spacetime density grid distorted by gravitational wave amplitude.
+
+\subsubsection{Spacetime Mesh Shader}
+
+A separate background mesh (the ``rubber sheet'') uses a sinusoidal displacement function parameterized by the current strain value $h(t)$:
+
+\[
+  z(x, y, t) = h(t) \cdot A \cdot \exp\!\left(-\frac{x^2 + y^2}{2\sigma^2}\right) \cdot \cos(k\sqrt{x^2+y^2} - \omega t)
+\]
+
+where $A$ is a visual scale factor, $\sigma$ controls falloff radius, and $k, \omega$ are wavenumber and angular frequency of the visual wave. This is implemented entirely in the GLSL vertex shader for GPU execution. At noise floor, the mesh is flat. At a chirp peak, the mesh undulates visibly.
+
+\subsubsection{Technology Stack}
+
+OpenGL 3.3+ core profile; GLSL 330; Python bindings via PyOpenGL or C++ via GLFW. For screensaver packaging: \texttt{libxscreensaver} on Linux, or a windowed mode that mimics screensaver behavior. Frame loop: \texttt{glfwSwapBuffers} at 60Hz; data update from a separate Python thread via shared numpy array or \texttt{multiprocessing.shared\_memory}.
+
+\subsection{Module 4: Minecraft Data Bridge Reference}
+
+\subsubsection{External Control Mechanisms}
+
+Minecraft Java Edition supports three external control mechanisms relevant to this mission: (1) \textbf{RCON} (remote console) --- a TCP protocol for issuing commands; enabled in \texttt{server.properties} with \texttt{enable-rcon=true}; Python \texttt{mcrcon} library provides interface; rate limit: approximately 20 commands/second; (2) \textbf{WebSocket bridge} --- the Spigot/Paper plugin API supports websocket-based plugins; (3) \textbf{MCPi-compatible API} --- a subset of Raspberry Pi's Minecraft API that works with mod bridges on Java edition.
+
+For the GW bridge, RCON is the lowest-friction approach. A \texttt{/fill} command updates a 16$\times$16 slice in one command rather than 256 individual \texttt{/setblock} calls.
+
+\subsubsection{Block Palette Design}
+
+The strain value at each time step is normalized to [0, 1] and quantized into 8 levels:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Level} & \tableheader{Strain Range} & \tableheader{Block} & \tableheader{Visual Character} \\
+\midrule
+0 & Noise floor & Air / Smooth Stone & Invisible / flat \\
+1 & $<$ 0.1 & Obsidian & Near-black, dense \\
+2 & 0.1--0.25 & Blackstone & Dark gray \\
+3 & 0.25--0.4 & Amethyst Block & Purple, muted \\
+4 & 0.4--0.55 & Purple Stained Glass & Translucent purple \\
+5 & 0.55--0.7 & Crying Obsidian & Glowing purple \\
+6 & 0.7--0.85 & Sea Lantern & White glow \\
+7 & Peak chirp & End Rod / Beacon & Max brightness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The palette maps naturally to the cosmic purple / deep space aesthetic. A note block layer beneath the terrain triggers ascending pitches (C, D, E, F, G, A, B, high C) mapped to the same 8 strain levels.
+
+\subsubsection{World Architecture}
+
+A dedicated flat superflat world (Minecraft preset: \texttt{minecraft:flat}) with a 64-block-wide corridor oriented along the Z axis. Each Z-slice represents one time step (e.g., 0.25 seconds of data). As the pipeline processes each new time step, the oldest slice (at $Z=0$) is deleted and a new slice is placed at $Z=64$, creating a scrolling effect. A command-block rail triggers note block notes synchronized to the current strain. Players standing at $Z=32$ are always at the ``present'' moment of the signal.
+
+\subsection{Module 5: Integration Pipeline Reference}
+
+\subsubsection{GraceDB Alert Workflow}
+
+GraceDB publishes four alert types: \textbf{EARLYWARNING} (pre-merger prediction for BNS, seconds before coalescence), \textbf{PRELIMINARY} (1--10 min post-event, automated), \textbf{INITIAL} (4--24 hr, human-vetted), and \textbf{UPDATE} (refined parameters). Public alerts are distributed via NASA GCN (General Coordinates Network) and SCiMMA Hopskotch Kafka topics. The \texttt{igwn-alert} Python package provides a Kafka consumer. Each alert includes event time (GPS), false alarm rate (FAR), event type classification (BBH/BNS/NSBH probabilities), and a HEALPix FITS sky map. For the pipeline, PRELIMINARY alerts are the trigger: they arrive within minutes and contain enough information to queue a data fetch.
+
+\subsubsection{Data Latency Reality}
+
+An important constraint: GWOSC strain data is \emph{not} available in real time. Raw strain undergoes calibration and noise subtraction before public release. O4a data was released in August 2025, approximately 18 months after collection. However, GraceDB \emph{event alerts} are near-real-time (within minutes). The integration pipeline therefore operates in two modes: (1) \textbf{Alert mode} --- on receiving a GraceDB alert, render the event metadata (event type, sky location, estimated masses) as a display overlay, and queue a strain data fetch for when data becomes available; (2) \textbf{Archive mode} --- continuously cycle through the growing library of confirmed GWTC events, rendering each as ambient visualization. The transition from archive mode to alert mode on a new event is the ``featured event'' trigger.
+
+\subsubsection{5-Minute GWOSC Cache Window}
+
+GWOSC serves data via CDN with a 5-minute TTL. For archive mode, the pipeline can pre-cache event windows for frequently displayed events (GW150914, GW170817) to avoid repeated fetches. Cache keys: \texttt{(interferometer, gps\_start, gps\_end, sample\_rate)}.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Level} & \tableheader{Guidance} \\
+\midrule
+GWOSC data attribution & GATE & All visualizations must cite the LIGO/Virgo/KAGRA Collaboration and GWOSC data release \\
+GraceDB alert retractions & ABSOLUTE & System must handle RETRACTION notices; remove event from featured queue immediately \\
+Strain scale display & ANNOTATE & Never present raw strain values as ``real spacetime distortion'' without scale context ($h \sim 10^{-21}$) \\
+False alarm rates & GATE & Do not present LOW\_SIGNIFICANCE events as confirmed detections \\
+Audio safety & ANNOTATE & Sonified files at +400 Hz frequency shift; note this in all documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[noitemsep]
+  \item LIGO Laboratory / Caltech and MIT. ``Use LIGO/Virgo/KAGRA Data.'' ligo.caltech.edu/page/ligo-data
+  \item Gravitational Wave Open Science Center. gwosc.org --- primary data portal
+  \item GraceDB. ``Gravitational-Wave Candidate Event Database.'' gracedb.ligo.org
+  \item LIGO/Virgo/KAGRA Public Alert User Guide. emfollow.docs.ligo.org/userguide
+  \item IGWN Observing Run Plans. observing.docs.ligo.org/plan
+  \item NASA GCN / LVC Notices. gcn.gsfc.nasa.gov/lvc.html
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[noitemsep]
+  \item Macleod D.M. et al. (2021). ``GWpy: A Python package for gravitational-wave astrophysics.'' \emph{SoftwareX}, 13, 100657.
+  \item LVK Collaboration (2025). ``Open Data from LIGO, Virgo, and KAGRA through the First Part of the Fourth Observing Run.'' arXiv:2508.18079
+  \item LVK Collaboration (2024). ``Low-latency gravitational wave alert products and their performance at the time of the fourth LIGO-Virgo-KAGRA observing run.'' \emph{PNAS}, 10.1073/pnas.2316474121
+  \item Venumadhav T. et al. (2020). ``Immersive and Interactive Visualization of Gravitational Waves.'' \emph{IEEE VRW 2020}
+  \item Millhouse M. et al. (2024). ``Visualization of time-frequency structures in gravitational wave signals.'' arXiv:2402.16533
+\end{itemize}
+
+\subsubsection{Professional Tools and Software}
+\begin{itemize}[noitemsep]
+  \item GWpy Documentation: gwpy.github.io/docs/stable
+  \item PyCBC: pycbc.org
+  \item LALSuite: git.ligo.org/lscsoft/lalsuite
+  \item ligo.skymap: lscsoft.docs.ligo.org/ligo.skymap
+  \item GWOSC Audio Files: gwosc.org/audio
+  \item System Sounds GW Sonifications: system-sounds.com/gravitational-waves
+  \item Sounds of Spacetime: soundsofspacetime.org
+\end{itemize}
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{accent}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Build a complete gravitational wave ambient visualization system that routes public LIGO data through a Python signal processing pipeline to two rendering targets: an OpenGL screensaver engine that displays scrolling 3D Q-transform spectrograms driven by GLSL shaders, and a Minecraft data bridge that encodes gravitational wave strain as a voxel terrain players can walk through. The system responds to GraceDB public alerts and switches to featured-event mode within 30 seconds of a detection.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+Wave 0 (Foundation)
+  [Foundation Agent: Haiku] schemas, env setup, test fixtures, cache key spec
+
+Wave 1 (Parallel Tracks)
+  Track A (Data + DSP)           Track B (Rendering)
+  ----------------------         ----------------------
+  [Sonnet: EXEC-DATA]            [Sonnet: EXEC-RENDER]
+  GWOSC API client               OpenGL screensaver engine
+  GWpy pipeline wrapper          GLSL shader suite
+  Q-transform service            VBO spectrogram mesh
+  Sonification module            Spacetime mesh shader
+  [Sonnet: CRAFT-DSP]            [Sonnet: CRAFT-GL]
+  Alert ingester (igwn-alert)    Minecraft RCON bridge
+  GraceDB webhook handler        Block palette system
+  Cache manager                  Note block audio map
+
+Wave 2 (Synthesis)
+  [Opus: FLIGHT + INTEG]
+  Integration pipeline assembly
+  Event dispatcher (archive / featured-event modes)
+  Cross-renderer data protocol
+  End-to-end test execution
+
+Wave 3 (Publication)
+  [Sonnet: VERIFY + LOG]
+  Documentation suite
+  Screensaver packaging
+  Minecraft world template export
+  README + setup guide
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Data Layer} --- GWOSC API client, GWpy wrapper, HDF5 cache, GraceDB alert consumer
+  \item \textbf{Signal Processing Layer} --- Bandpass, whitening, Q-transform service, sonification
+  \item \textbf{Dispatch Layer} --- Event classifier, mode switcher (archive / alert), shared memory bus
+  \item \textbf{OpenGL Renderer Layer} --- GLSL shaders, VBO mesh manager, screensaver loop
+  \item \textbf{Minecraft Bridge Layer} --- RCON client, block palette mapper, terrain scroll manager
+  \item \textbf{Integration Layer} --- Configuration, logging, health monitoring, test harness
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{accent}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Spec} \\
+\midrule
+1 & GW data pipeline & 10 events fetch and process without error & Module 1+2 \\
+2 & Q-transform service & Chirp visible in GW170817 spectrogram & Module 2 \\
+3 & Sonification module & WAV output perceptually matches GWOSC audio & Module 2 \\
+4 & OpenGL screensaver & 60 fps, spacetime mesh distorts at peaks & Module 3 \\
+5 & GLSL shader suite & Vertex + fragment shaders; palette configurable & Module 3 \\
+6 & Minecraft bridge & GW170817 chirp rendered in blocks, scrolling & Module 4 \\
+7 & Block palette + note map & 8 distinct levels; note blocks audible & Module 4 \\
+8 & GraceDB alert listener & Featured mode triggers $<$30s from mock alert & Module 5 \\
+9 & Integration pipeline & Both renderers update from single data stream & Module 5 \\
+10 & Documentation suite & Developer setup in $\leq$2 hours; attribution correct & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{accent}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+GWOSC API client & gwosc, requests & Sonnet & 8K \\
+GWpy pipeline wrapper & gwpy, numpy, scipy & Sonnet & 12K \\
+Q-transform service & gwpy.q\_transform & Sonnet & 10K \\
+Sonification module & scipy, soundfile & Sonnet & 8K \\
+GraceDB alert consumer & igwn-alert, ligo.gracedb & Sonnet & 10K \\
+OpenGL screensaver loop & PyOpenGL, GLFW & Sonnet & 15K \\
+GLSL vertex shader & OpenGL 3.3+ & Sonnet & 8K \\
+GLSL fragment shader & OpenGL 3.3+ & Sonnet & 6K \\
+VBO spectrogram mesh & numpy, OpenGL & Sonnet & 12K \\
+Spacetime mesh shader & GLSL & Sonnet & 8K \\
+Minecraft RCON bridge & mcrcon & Sonnet & 8K \\
+Block palette mapper & numpy & Haiku & 4K \\
+Note block audio map & mcrcon & Haiku & 4K \\
+Integration dispatcher & asyncio & Opus & 15K \\
+Shared memory bus & multiprocessing & Sonnet & 8K \\
+Test harness + fixtures & pytest & Haiku & 6K \\
+Documentation suite & Sphinx/Markdown & Sonnet & 10K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, env, fixtures, cache spec \\
+1A & Data + DSP & Parallel & Sonnet & Full data pipeline, Q-transform, sonification, alert ingester \\
+1B & Rendering & Parallel & Sonnet & OpenGL engine, GLSL shaders, Minecraft bridge \\
+2 & Synthesis & Sequential & Opus & Integration pipeline, dispatcher, end-to-end tests \\
+3 & Publication & Sequential & Sonnet & Docs, packaging, world template, README \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Define strain data schema & Haiku/Gary & TypedDict: \texttt{StrainWindow(ifo, gps\_start, gps\_end, sample\_rate, data: np.ndarray)} \\
+Define Q-transform schema & Haiku/Gary & TypedDict: \texttt{QTransformResult(times, freqs, energies: np.ndarray, event\_id)} \\
+Define alert schema & Haiku/Gary & TypedDict: \texttt{GWAlert(superevent\_id, alert\_type, gps\_time, far, classification)} \\
+Cache key specification & Haiku/Gary & Cache key format: \texttt{ifo:gps\_start:gps\_end:sr} \\
+Python environment spec & Haiku/Gary & \texttt{requirements.txt}: gwpy, gwosc, igwn-alert, PyOpenGL, mcrcon, scipy \\
+Test fixture: GW150914 & Haiku/Gary & Cached 10s strain window around GPS 1126259462 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1A: Data and Signal Processing Track}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+GWOSC API client & Paula/Sonnet & \texttt{gwosc\_client.py}: fetch\_strain(), list\_events(), get\_event\_gps() \\
+GWpy pipeline wrapper & Paula/Sonnet & \texttt{pipeline.py}: bandpass(), whiten(), normalize() \\
+Q-transform service & CRAFT-DSP & \texttt{qtransform.py}: compute\_qtransform(strain) $\to$ QTransformResult \\
+Sonification module & CRAFT-DSP & \texttt{sonify.py}: to\_audio(strain, freq\_shift=400) $\to$ WAV bytes \\
+GraceDB alert consumer & Paula/Sonnet & \texttt{alert\_consumer.py}: Kafka subscriber; emits GWAlert events \\
+Cache manager & Paula/Sonnet & \texttt{cache.py}: LRU cache with 5-min TTL; pre-warm GW150914/GW170817 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1B: Rendering Track}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+OpenGL screensaver loop & Denise/Sonnet & \texttt{screensaver.py}: GLFW window; 60fps update loop \\
+GLSL vertex shader & CRAFT-GL & \texttt{spectrogram.vert}: height-mapped terrain from Q-transform energies \\
+GLSL fragment shader & CRAFT-GL & \texttt{spectrogram.frag}: energy $\to$ color (thermal/viridis/custom palette) \\
+VBO spectrogram mesh & Denise/Sonnet & \texttt{mesh.py}: scrolling VBO; append column, evict oldest \\
+Spacetime mesh shader & CRAFT-GL & \texttt{spacetime.vert}: sinusoidal distortion from $h(t)$ parameter \\
+Minecraft RCON bridge & Denise/Sonnet & \texttt{mc\_bridge.py}: RCON client; terrain update loop \\
+Block palette mapper & Haiku/Gary & \texttt{palette.py}: strain $\to$ block ID lookup; 8-level quantization \\
+Note block audio map & Haiku/Gary & \texttt{noteblocks.py}: strain $\to$ note block pitch; /setblock note\_block \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{accent}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Integration dispatcher & Agnus/Opus & \texttt{dispatcher.py}: alert events $\to$ mode switch; archive cycling; renderer fan-out \\
+Shared memory bus & Agnus/Opus & \texttt{bus.py}: multiprocessing.shared\_memory; QTransformResult $\to$ both renderers \\
+End-to-end test: GW170817 & Verify & Full pipeline test: fetch $\to$ process $\to$ Q-transform $\to$ both renderers update \\
+End-to-end test: Mock alert & Verify & GraceDB mock alert $\to$ featured mode in $<$30s; retraction handled correctly \\
+Integration test: Cache warm & Verify & Pre-warmed GW150914 serves without GWOSC fetch \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Pre-warm GW150914 and GW170817 strain windows at startup (5-minute TTL)
+  \item Q-transform results are cached separately (computation is expensive; re-use across renderers)
+  \item Shared memory bus eliminates copy overhead between processing and rendering processes
+  \item GWOSC CDN respects HTTP caching headers; use \texttt{requests-cache} with SQLite backend
+  \item Alert consumer runs in separate process; no blocking on data fetch during alert ingestion
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (30\%)} & \tableheader{Sonnet (60\%)} & \tableheader{Haiku (10\%)} \\
+\midrule
+Wave 0 & 0 & 0 & 22K \\
+Wave 1A & 0 & 48K & 0 \\
+Wave 1B & 0 & 57K & 8K \\
+Wave 2 & 45K & 0 & 0 \\
+Wave 3 & 0 & 20K & 0 \\
+\midrule
+\textbf{Total} & \textbf{45K} & \textbf{125K} & \textbf{30K} \\
+\multicolumn{2}{l}{\textbf{Grand Total: $\approx$ 200K tokens}} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0 (Foundation)
+  [schemas] [env] [fixtures] [cache_spec]
+      |           |             |
+      v           v             v
+   Wave 1A =================== Wave 1B
+   [gwosc_client]              [screensaver_loop]
+   [pipeline]                  [glsl_shaders]
+   [qtransform_service]        [vbo_mesh]
+   [sonification]              [spacetime_shader]
+   [alert_consumer]            [mc_bridge]
+   [cache_manager]             [block_palette]
+         |                         |
+         +----------+--------------+
+                    |
+                 Wave 2
+                 [dispatcher]
+                 [shared_memory_bus]
+                 [e2e_tests]
+                    |
+                 Wave 3
+                 [docs] [packaging] [readme]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical & 4 & P0 & BLOCK --- do not release \\
+Core Functionality & 12 & P1 & BLOCK --- fix before Wave 3 \\
+Integration & 6 & P1 & BLOCK --- fix before Wave 3 \\
+Edge Cases & 8 & P2 & WARN --- document known limitations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & GraceDB RETRACTION handling & System removes retracted event from featured queue within 5 seconds; no display of retracted event \\
+SC-02 & Strain scale attribution & All visual output includes strain scale annotation ($h \sim 10^{-21}$); no unlabeled raw strain values presented as physical distances \\
+SC-03 & Data provenance attribution & All visualizations display LIGO/Virgo/KAGRA Collaboration attribution; GWOSC data release version cited \\
+SC-04 & LOW\_SIGNIFICANCE events & Events with \texttt{significant=false} are displayed with explicit ``candidate'' label; not presented as confirmed detections \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+10 events fetch without error & CORE-01, CORE-02 & Pending \\
+GW170817 chirp visible in Q-transform & CORE-03 & Pending \\
+Sonified WAV matches GWOSC audio & CORE-04 & Pending \\
+OpenGL renders at $\geq$60 fps & CORE-05 & Pending \\
+Spacetime mesh distorts at chirp peaks & CORE-06 & Pending \\
+Minecraft GW170817 chirp in blocks & INTEG-01 & Pending \\
+Block palette 5+ distinct levels & CORE-07 & Pending \\
+Featured mode in $<$30s from mock alert & INTEG-02 & Pending \\
+Both renderers from one stream & INTEG-03 & Pending \\
+Developer setup $\leq$2 hours & CORE-08 & Pending \\
+Attribution correct in all output & SC-02, SC-03 & Pending \\
+Offline demo mode works & EDGE-01 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Agnus (Opus) & Overall mission direction; integration decisions; go/no-go gates \\
+PLAN & Gary/68000 (Haiku) & Wave decomposition; dependency management; token budget \\
+SCOUT & Paula (Sonnet) & GWOSC research; GraceDB alert API investigation; pre-mission web research \\
+EXEC-DATA & Paula (Sonnet) & Data pipeline, alert consumer, cache manager \\
+EXEC-RENDER & Denise (Sonnet) & OpenGL engine, Minecraft bridge, screensaver loop \\
+CRAFT-DSP & Domain Specialist & Q-transform service, sonification, signal processing pipeline \\
+CRAFT-GL & Domain Specialist & GLSL shader suite, VBO mesh, spacetime shader \\
+VERIFY & Verification Agent & Source validation, attribution checking, acceptance test execution \\
+INTEG & Agnus (Opus) & Cross-module integration; dispatcher; shared memory bus \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; wave 2 integration gate \\
+SURGEON & Health Monitor & Processing quality monitoring; chirp detection confidence tracking \\
+LOG & Chronicle Agent & Commit messages; milestone summary; attribution audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Squadron (12 roles) \\
+Total waves & 5 (0, 1A, 1B, 2, 3) \\
+Parallel tracks & Wave 1: 2 tracks (Data+DSP $\parallel$ Rendering) \\
+Total deliverables & 10 \\
+Total test cases & 30 (4 safety-critical, 12 core, 6 integration, 8 edge) \\
+Estimated tokens & $\approx$ 200K across 3--4 sessions \\
+Model split & Opus 23\% / Sonnet 63\% / Haiku 15\% \\
+Key external deps & GWpy, gwosc, igwn-alert, PyOpenGL, mcrcon \\
+Target completion & Before IR1 (September--October 2026) \\
+Primary test event & GW170817 (30s BNS chirp, best visual signature) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Gravitational wave astronomy has become a key method for observing our Universe. With the data of this observing run we will contribute further to significantly broadening our horizons and knowledge about the darkest and most violent parts of the Universe.''}
+
+\vspace{0.5em}
+\hfill --- Patrick Brady, LIGO Scientific Collaboration Spokesperson, O4 launch
+
+\vspace{1em}
+\textit{The space between a black hole merger 1.3 billion light-years away and a block of glowing sea lantern in a Minecraft world is exactly the kind of connection this ecosystem was built to make. The data is public. The tools exist. The chirp has already been heard. Build the space between.}
+\end{quotebox}
+
+\end{document}

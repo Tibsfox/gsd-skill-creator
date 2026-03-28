@@ -1,0 +1,1045 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% TECHNOLOGY COLOR SCHEME
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0D47A1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{okgreen}{HTML}{1B5E20}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={Silicon to Evidence -- GSD Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Silicon to Evidence}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\begin{document}
+
+%% TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Silicon to Evidence\\[0.3em]}}
+{\fontsize{14}{18}\selectfont\sffamily\textcolor{tertiary}{Enterprise Storage Data Recovery \& Forensics}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Samsung · Philips · Broadcom · AMD/Xilinx · VLSI · HBA · RAID · JBOD · Ceph · Pentax · Bosch}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Activation Profile}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles)  |  Estimated: 6--8 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+%%=======================================================================
+%% STAGE 1 — VISION DOCUMENT
+%%=======================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Silicon to Evidence --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Cold-Start Research Completed}
+\metafield{Depends on:}{GSD Ecosystem, Amiga Principle, Deep Research Mission Protocol}
+\metafield{Context:}{6-module Fleet activation covering the complete enterprise storage forensics stack}
+
+\subsection{Vision}
+
+Every enterprise storage incident is, at bottom, a physics problem. Somewhere in the space between a spinning platter or a NAND flash cell and the bit pattern a forensic examiner needs in court, something went wrong. It may have gone wrong at the silicon level --- a Broadcom SAS controller chip whose firmware EEPROM got corrupted during a power event, a Samsung NVMe controller whose translation table became inaccessible after a surge, an AMD/Xilinx FPGA whose reconfiguration failed mid-flight in a computational storage node. Or it may have gone wrong at the architectural level --- a JBOD enclosure whose RAID membership metadata on drive 3 silently diverged from the controller's expectation, a Ceph OSD cluster whose CRUSH map got corrupted during a stretch-cluster failover, a RAID 5 array that attempted a rebuild and experienced a second-disk failure under load.
+
+In every case, the path from silicon to evidence runs through the same sequence: understand the chip, understand the array, understand the distributed system, understand the failure modes, and only then --- with precision, with chain of custody intact, with write-blocking in place --- begin recovery. This mission maps that entire path. It brings together the four principal silicon families (Samsung, Philips/NXP, Broadcom, AMD/Xilinx) whose chips collectively govern most enterprise storage on earth, the three principal array topologies (RAID/HBA, JBOD, Ceph), the forensic recovery engineering toolchain, and the optical imaging infrastructure (Pentax/Ricoh industrial lenses, Bosch inspection systems) that makes chip-level inspection and VLSI-layer evidence documentation possible.
+
+The Amiga Principle operates here with unusual clarity. The engineers who recover data from a failed MegaRAID array or a degraded Ceph cluster do not brute-force their way through the problem. They achieve results through architectural understanding: knowing which specific bytes on which specific drive encode the RAID superblock, knowing which Ceph RADOS object maps to which logical volume, knowing which NAND flash pages survive a controller burnout and can be read after a BGA chip-off. Precision beats power. Structure beats guesswork. The spaces between the nodes --- the handoff boundaries between chip and protocol, between controller and array, between distributed store and forensic examiner --- are where the mission lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Controller Silicon Is a Black Box at Failure Time.} Broadcom MegaRAID, Samsung NVMe, and Xilinx-based computational storage controllers all implement proprietary firmware and translation layers. When the controller fails --- due to power surge, firmware corruption, or component burnout --- the NAND data survives but the map is gone. Standard recovery tools cannot bypass the failed controller; chip-off and protocol emulation are required but poorly documented outside specialist labs.
+
+  \item \textbf{RAID Metadata Is Distributed and Fragile.} RAID 5/6/50/60 arrays store membership, parity geometry, and stripe parameters partially on each member drive. A controller replacement, a drive-order swap, or a firmware mismatch causes silent divergence. JBOD enclosures used as Ceph OSD backends add another layer: OSD UUIDs, CRUSH weights, and BlueStore metadata must all survive a node failure simultaneously for automated recovery to succeed.
+
+  \item \textbf{Ceph Forensics Has No Standard Methodology.} Unlike single-disk or hardware RAID forensics, which have established toolchains (PC-3000, FTK, Autopsy), distributed filesystem forensics on Ceph lacks a standardized methodology. The RADOS object store maps data across OSDs using CRUSH placement, and a forensic examiner must reconstruct that mapping without triggering further writes --- an operation for which no court-tested playbook currently exists.
+
+  \item \textbf{NVMe Forensics Requires Chip-Level Expertise Unavailable at Most Organizations.} PCIe 4.0/5.0 NVMe drives fail in ways SATA drives never did: the entire protocol stack collapses with the controller. BGA chip-off, NAND XOR reconstruction, and vendor-specific scrambler reversal require specialized hardware (PC-3000 Portable Pro, VNR, IR6500 BGA rework stations) and years of per-family training. This expertise is concentrated in a handful of global labs.
+
+  \item \textbf{Optical Inspection of VLSI Storage Chips Is Underutilized in Forensics.} Chip-level evidence --- die markings, bond wire integrity, capacitor ESR, burn traces --- provides critical physical context for determining cause of failure and establishing chain of custody for silicon. Pentax/Ricoh industrial macro lenses and Bosch semiconductor inspection systems are routinely used in manufacturing but rarely integrated into the forensic evidence chain.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Map the silicon-to-evidence path layer by layer, so recovery and forensic work can be planned, executed, and testified to with structural confidence.
+
+The mission decomposes the enterprise storage forensics problem into six parallel-research layers, each self-contained but with defined handoff interfaces. The silicon layer (Module 01) informs the array architecture layer (Module 02), which constrains the distributed system layer (Module 03). The failure mode taxonomy (Module 04 --- Data Recovery Engineering) cross-cuts all three. The forensic methodology layer (Module 05) wraps the recovery layer in legal and procedural constraints. The optical inspection layer (Module 06) provides the hardware substrate for chip-level documentation.
+
+\subsubsection{Storage Domain Map (ASCII)}
+
+\begin{asciibox}
+SILICON LAYER (Module 01)
++--Samsung NVMe/SAS--+--Philips/NXP--+--Broadcom MegaRAID/HBA--+--AMD/Xilinx FPGA--+
+         |                  |                    |                        |
+         +------------------+--------------------+------------------------+
+                                    |
+                            SAS / NVMe / PCIe
+                                    |
+ARRAY ARCHITECTURE (Module 02)
++----RAID 0/1/5/6/10/50/60----+----JBOD enclosures----+----HBA passthrough----+
+         |                              |                         |
+         +--------------------------[OSD backend]-----------------+
+                                       |
+DISTRIBUTED STORAGE (Module 03)
++-----Ceph RADOS-----+-----BlueStore OSD-----+-----CRUSH MAP-----+
+         |                    |                         |
+         +--------------------+-------------------------+
+                              |
+FAILURE + RECOVERY (Module 04)              FORENSICS (Module 05)
++--Controller burnout--+                    +--Evidence imaging--+
++--NAND chip-off-------+      <-------->    +--Chain of custody--+
++--RAID rebuild fault--+                    +--Legal admissibility+
++--Ceph OSD loss-------+                    +--Carving/artifact--+
+                              |
+OPTICAL INSPECTION (Module 06)
++--Pentax/Ricoh lenses--+--Bosch AOI systems--+--VLSI documentation--+
+\end{asciibox}
+
+\subsubsection{Module Architecture (ASCII)}
+
+\begin{asciibox}
+WAVE 0 (Foundation)
+   [HAIKU] Schema + Source Index + Shared Glossary
+         |
+         v
+WAVE 1A (Parallel Track A)          WAVE 1B (Parallel Track B)
+   [SONNET] Module 01: Silicon       [SONNET] Module 04: Recovery Eng.
+   [SONNET] Module 02: RAID/HBA      [SONNET] Module 05: Forensics
+   [OPUS]   Module 03: Ceph          [OPUS]   Module 06: Optical Imaging
+         |                                  |
+         +----------------------------------+
+                        |
+                 [GATE: HITL Review]
+                        |
+                        v
+WAVE 2 (Synthesis)
+   [OPUS] Cross-module integration: silicon failure -> array effect -> forensic implication
+         |
+         v
+WAVE 3 (Publication)
+   [SONNET] LaTeX compilation, bibliography, verification matrix
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Silicon Substrate}
+
+Covers the four principal silicon families governing enterprise storage: Samsung (NVMe SSD PM1653, 24G SAS, V-NAND architectures), Philips/NXP Semiconductors (legacy controller ICs, SAS expander chips), Broadcom (MegaRAID SAS-4 series, Tri-Mode SerDes, SAS-4 RAID ASICs, HBA 9600 series), and AMD/Xilinx (FPGA-based SmartNICs, computational storage SmartSSD, Versal AI-edge for storage acceleration). Documents die architectures, firmware update paths, known failure modes per family, and data sheet cross-references.
+
+\subsubsection{Module 02: Storage Array Architecture}
+
+Covers RAID levels 0, 1, 5, 6, 10, 50, 60, 5E, 5EE, and JBOD topology. Documents stripe geometry, parity distribution, write-hole vulnerabilities, controller metadata formats (MegaRAID configuration records, DDF format), and HBA passthrough modes. Includes Broadcom MegaRAID vs. IT-mode (initiator-target) HBA comparison for Ceph OSD deployments. Documents JBOD enclosure management (SES-3), drive bay addressing, and expander topologies.
+
+\subsubsection{Module 03: Ceph Distributed Storage}
+
+Covers Ceph architecture (RADOS, MON, OSD, MDS, RGW), CRUSH placement algorithm, BlueStore on-disk format, erasure coding (Reed-Solomon profiles), stretch cluster architecture and minimum 4-replica requirement, OSD journal/WAL/DB separation, and forensic challenges unique to distributed object stores. References the Springer Handbook chapter on Ceph filesystem forensics and CERN's stretch-cluster operations research.
+
+\subsubsection{Module 04: Data Recovery Engineering}
+
+Covers failure mode taxonomy (controller burnout, firmware corruption, NAND wear-out, power spike damage, bad sector cascades, silent data corruption), the professional toolchain (Ace Lab PC-3000 Portable Pro, VNR Virtual NAND Reconstructor, FE Flash-Extractor, SalvationDATA, DeepSpar, IR6500 BGA rework), NAND chip-off procedure, controller bypass techniques, RAID superblock reconstruction, and Ceph OSD UUID/CRUSH recovery procedures. Documents the distinction between SATA, SAS, and NVMe failure response paths.
+
+\subsubsection{Module 05: Digital Forensics \& Legal Chain}
+
+Covers digital forensics methodology (collection, examination, analysis, reporting), write-blocking hardware and procedures, forensic imaging standards (dd, dcfldd, FTK Imager, Guymager), hash verification (MD5, SHA-256, SHA-512), chain of custody documentation, evidence labeling, court-admissible reporting standards, SSAE18 Type II audit requirements for forensic labs, and distributed-system-specific forensics (Ceph RADOS object enumeration without write contamination). References NIST SP 800-86 and SWGDE best practices.
+
+\subsubsection{Module 06: Optical Imaging \& VLSI Inspection}
+
+Covers Pentax/Ricoh industrial macro lenses (FL-series, FA Macro) for circuit board and die-level documentation, Bosch semiconductor inspection systems (AOI, wafer inspection integration), brightfield vs. darkfield inspection for storage controller PCBs, EXIF metadata forensics for digital cameras used in evidence photography, BGA bond inspection, capacitor ESR visual indicators, burn trace documentation, and the integration of optical inspection findings into the forensic evidence chain.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset Configuration
+# Mission: Silicon to Evidence -- Storage Forensics
+# Activation: Fleet
+
+agnus:        # Orchestration / DMA / Context Management
+  model: claude-opus-4-6
+  role: FLIGHT + ARCH
+  context_budget: 12000 tokens
+  responsibilities:
+    - Mission direction and go/no-go gates
+    - Cross-module dependency management
+    - Wave transition authorization
+    - HITL CAPCOM interface
+
+denise:       # Display / Output Rendering
+  model: claude-sonnet-4-6
+  role: EXEC (x3) + LOG
+  instances: 3
+  responsibilities:
+    - Module document production (01, 02, 04)
+    - LaTeX compilation and formatting
+    - Bibliography and citation management
+    - Audit trail and commit messages
+
+paula:        # Audio / I/O / Anticipatory
+  model: claude-haiku-4-5-20251001
+  role: BUDGET + shared schema scaffolding
+  responsibilities:
+    - Wave 0 foundation templates
+    - Token budget telemetry
+    - Shared glossary generation
+
+gary_68000:   # CPU / Glue Logic
+  model: claude-opus-4-6
+  role: ANALYST + RETRO + CRAFT-SILICON + CRAFT-FORENSICS
+  responsibilities:
+    - Cross-module pattern detection (silicon -> forensic implication)
+    - Post-wave retrospective analysis
+    - Module 03 (Ceph) and Module 06 (Optical) judgment-heavy synthesis
+    - Safety boundary enforcement
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item Samsung enterprise SSD families (PM1653, PM9A3, PM9C1, V-NAND architectures), 12G and 24G SAS ecosystems
+  \item Philips/NXP semiconductor controller ICs relevant to legacy SAS expanders and storage management
+  \item Broadcom MegaRAID SAS-3 and SAS-4 controller families, HBA 9300/9400/9600 series, Tri-Mode SerDes
+  \item AMD/Xilinx Versal, UltraScale+, and SmartSSD computational storage platforms
+  \item RAID levels 0, 1, 5, 6, 10, 50, 60, 5E, 5EE and JBOD enclosure management
+  \item Ceph Pacific/Quincy/Reef/Squid releases; BlueStore, RADOS, CRUSH, CephFS, RBD
+  \item Professional data recovery toolchain: Ace Lab PC-3000 family, VNR, FE, SalvationDATA, DeepSpar
+  \item Digital forensics methodology compliant with NIST SP 800-86 and SWGDE standards
+  \item Pentax/Ricoh FL-series and FA macro lenses for industrial imaging; Bosch AOI/wafer inspection systems
+  \item BGA chip-off procedure documentation for Samsung and Phison/Silicon Motion NVMe families
+  \item Chain of custody and court-admissible reporting for storage forensics investigations
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Consumer NAS (Synology, QNAP) beyond their use of Broadcom HBA chips
+  \item Tape storage and LTO forensics (separate mission recommended)
+  \item Cloud-native storage services (AWS S3, Azure Blob) without on-premises hardware involvement
+  \item Mobile device (NAND) forensics outside the enterprise storage context
+  \item Network forensics and packet capture analysis
+  \item Classified or law enforcement case-specific procedural guidance
+  \item Physical disk platter recovery (magnetic head swap) without controller involvement
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Silicon Family Profiles Complete:} Each of the four chip families (Samsung, Philips/NXP, Broadcom, AMD/Xilinx) has a documented profile covering architecture, firmware update path, and known forensic failure modes.
+  \item \textbf{RAID Metadata Format Documented:} RAID 5/6 superblock and DDF metadata locations are documented for MegaRAID controllers with sufficient precision to enable manual reconstruction without the original controller.
+  \item \textbf{JBOD-to-Ceph Topology Mapped:} The complete OSD provisioning path from JBOD raw drive to Ceph BlueStore OSD is documented with UUID, WAL, DB partition, and CRUSH weight parameters.
+  \item \textbf{Ceph CRUSH Reconstruction Procedure:} A step-by-step procedure for reconstructing a lost CRUSH map from surviving OSD data is documented with reference to Ceph's monmaptool and crushtool utilities.
+  \item \textbf{Failure Mode Taxonomy Complete:} At least 15 distinct failure modes are catalogued across controller, firmware, NAND, power, and protocol layers, with recovery priority ratings.
+  \item \textbf{NVMe Chip-Off Procedure Documented:} The complete chip-off-to-reconstruction workflow for Samsung and Phison-family NVMe controllers is documented with tool, temperature, and sequence specifications.
+  \item \textbf{Write-Blocking Protocol Defined:} Hardware and software write-blocking procedures for SAS, SATA, and NVMe media are documented, with verification hash steps included.
+  \item \textbf{Chain of Custody Template Produced:} A court-admissible chain of custody template for enterprise storage forensic evidence is included as a deliverable.
+  \item \textbf{Optical Documentation Standard Defined:} A lens/aperture/illumination specification for VLSI-level evidence photography using Pentax/Ricoh and Bosch equipment is documented with example reference scales.
+  \item \textbf{Ceph Forensic Imaging Procedure (No-Write):} A procedure for creating a forensic snapshot of a live Ceph cluster without triggering additional writes or OSD rebalancing is documented.
+  \item \textbf{Cross-Module Dependency Matrix Complete:} Every module's outputs feed into at least one other module's inputs; the dependency graph has no orphaned nodes.
+  \item \textbf{Test Plan Coverage $\geq$95\%:} Each success criterion has at least two associated tests; all safety-critical tests are marked mandatory-pass / BLOCK.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Upstream Intelligence Pack v1.43 & Predecessor & Dependency health and upstream monitoring patterns apply to storage controller firmware versioning \\
+GSD Mesh Prototype Spec & Parallel & Mesh node storage uses HBA/RAID patterns documented here \\
+Fox Infrastructure Group & Consumer & FoxData and FoxCompute storage infrastructure uses Ceph at scale \\
+The Space Between & Foundation & Mathematical layer (Set Theory, Information Systems) governs data integrity proofs \\
+GSD Skill Creator (dev branch) & Executor & This package is handed to skill-creator for wave execution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Data has weight. Not in the physical sense --- a terabyte of zeros and ones on NAND flash weighs no more than the substrate it's written on --- but in the forensic sense. Once a bit pattern becomes evidence, it carries the weight of everything that depends on it: a criminal prosecution, a civil judgment, an insurance claim, a root-cause report that determines whether a data center gets rebuilt or shuttered. The entire enterprise storage stack --- from the die of a Broadcom ASIC to the CRUSH tree of a Ceph cluster --- is, in this light, a chain of custody that began the moment data was first written.
+
+The Amiga Principle teaches us that remarkable results come from architectural elegance, not raw power. The forensic engineer who understands exactly which bytes encode the RAID superblock on a MegaRAID member drive doesn't need to brute-force the reconstruction; they read the architecture and reconstruct with precision. The spaces between nodes in this mission are the handoff boundaries where evidence integrity is most at risk: the boundary between a failed controller and its surviving NAND, between a degraded Ceph OSD and the CRUSH placement that tells you where the rest of the data lives, between a chip-off extraction and the legal admissibility of what came off it. This mission maps every one of those spaces.
+
+\newpage
+%%=======================================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%%=======================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Silicon to Evidence --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from authoritative sources across the six research modules. Each subsection corresponds to one module and provides the factual substrate for mission execution. Agents producing module deliverables should treat this section as their primary source material and supplement with targeted web research only where gaps are identified.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}[leftmargin=*]
+  \item Broadcom Inc. (broadcom.com) --- official MegaRAID and HBA product documentation, interoperability matrices, firmware archives
+  \item Samsung Semiconductor (semiconductor.samsung.com) --- enterprise SSD datasheets, SAS ecosystem white papers
+  \item AMD/Xilinx Developer Hub (xilinx.com, amd.com) --- Versal, UltraScale+, SmartSSD reference designs
+  \item Ceph Foundation (ceph.io, docs.ceph.com) --- official architecture documentation, CRUSH specification, release notes
+  \item IBM Redbooks (redbooks.ibm.com) --- IBM Storage Ceph 6/7 Concepts and Architecture Guide (REDP-5721)
+  \item Springer Nature / ACM Digital Library --- peer-reviewed forensics research, including ``Distributed Filesystem Forensics: Ceph as a Case Study'' (Handbook of Big Data and IoT Security, 2019)
+  \item NIST (csrc.nist.gov) --- SP 800-86 ``Guide to Integrating Forensic Techniques into Incident Response''
+  \item SWGDE (swgde.org) --- Scientific Working Group on Digital Evidence best practice documents
+  \item Ace Laboratory (acelaboratory.com) --- PC-3000 toolchain documentation (restricted; requires professional enrollment)
+  \item SNIA (snia.org) --- Storage Networking Industry Association Ceph technical Q\&A and standards
+  \item EPJ Web of Conferences (CHEP 2024) --- ``Enabling Storage Business Continuity and Disaster Recovery with Ceph''
+  \item Ricoh Imaging / Pentax (ricoh-imaging.co.jp) --- industrial lens specifications
+  \item Stemmer Imaging USA (stemmer-imagingusa.com) --- Pentax/Ricoh FL-series application notes
+\end{itemize}
+
+\subsection{Module 01 Reference: Silicon Substrate}
+
+\subsubsection{Samsung Enterprise Storage Silicon}
+
+Samsung's PM1653 is the flagship 24G SAS enterprise SSD, optimized for high-performance enterprise servers. Random read performance reaches up to 800K IOPS, the highest in the 24G SAS class at time of introduction. Samsung collaborated directly with Broadcom to validate the PM1653 against Broadcom's next-generation SAS RAID controllers, achieving up to 5x RAID 5 performance improvement over 12G SAS equivalents. Samsung's V-NAND (Vertical NAND) architecture stacks memory cells in a 3D column, enabling higher density without the scaling limitations of planar NAND; enterprise variants (MLC and TLC) use enhanced error-correction codes (LDPC) and over-provisioning schemes tuned for sequential write endurance.
+
+The Samsung SmartSSD (developed in partnership with Xilinx/AMD) integrates an FPGA-based computational storage processor directly on the SSD. The Xilinx UltraScale+ on-board the SmartSSD executes data-intensive functions (compression, encryption, database filtering) without routing data through the host PCIe bus, dramatically reducing latency for analytics workloads. For forensic purposes, the SmartSSD represents a dual-controller architecture: both the NVMe storage controller and the FPGA must be assessed independently in a failure scenario.
+
+\subsubsection{Broadcom Controller Families}
+
+Broadcom is the primary supplier of enterprise SAS/SATA/NVMe RAID controllers and HBAs. Its Tri-Mode SerDes technology enables a single controller to operate concurrently in NVMe, SAS, and SATA modes, providing a non-disruptive migration path between interface generations. The MegaRAID SAS-4 (9560 series) and the 9600 series deliver high RAID write IOPs and support all RAID levels including 0, 1, 5, 6, 10, 50, and 60, as well as JBOD/passthrough mode.
+
+The HBA 9600 series operates in IT (Initiator-Target) mode for Ceph OSD direct-attachment, bypassing all controller-side RAID logic. In IT mode, the controller presents each physical drive directly to the operating system; Ceph's BlueStore then manages placement entirely in software. This is the recommended configuration for Ceph at scale. For forensic purposes, IT-mode HBAs leave no proprietary metadata on the drives themselves, simplifying forensic imaging but requiring Ceph-layer reconstruction to recover data.
+
+\subsubsection{AMD/Xilinx FPGA Storage Acceleration}
+
+Xilinx's ASMBL (Application Specific Modular Block) architecture enables domain-specific FPGA platforms. In the storage context, the SmartSSD and Alveo FPGA cards implement NVMe-oF (NVMe over Fabrics) target functions, P4 programmable packet processing, and hardware-accelerated RAID calculations. From a forensic standpoint, FPGA reconfiguration state is volatile; a power cycle destroys the in-flight configuration, which can cause silent data loss in FPGA-managed RAID implementations.
+
+\subsection{Module 02 Reference: Storage Array Architecture}
+
+\subsubsection{RAID Level Survey}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Level} & \tableheader{Min Drives} & \tableheader{Fault Tolerance} & \tableheader{Recovery Notes} \\
+\midrule
+RAID 0 & 2 & None & No parity; any single drive failure = total loss; drive order critical for reconstruction \\
+RAID 1 & 2 & 1 drive & Mirror; straightforward; verify both copies before wiping \\
+RAID 5 & 3 & 1 drive & Distributed parity; stripe size, drive order, parity rotation must be identified for reconstruction \\
+RAID 6 & 4 & 2 drives & Dual parity; P+Q parity on separate drives; Reed-Solomon based \\
+RAID 10 & 4 & 1 per mirror pair & Mirrored stripes; recover mirrors first \\
+RAID 50 & 6 & 1 per RAID 5 group & Striped RAID 5; identify group boundaries first \\
+RAID 60 & 8 & 2 per RAID 6 group & Striped RAID 6; highest enterprise resilience \\
+RAID 5EE & 4 & 1 drive + hot spare & Hot spare integrated into parity rotation \\
+JBOD & 1+ & None & Passthrough; Ceph OSD or ZFS manages placement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{MegaRAID Metadata Locations}
+
+In a MegaRAID RAID array, configuration metadata is stored in the controller's non-volatile memory (NVRAM/flash) as well as in a reserved region near the end of each member drive (typically the last 512 bytes of the drive, or in a dedicated metadata LBA). The DDF (Disk Data Format) standard defines a vendor-neutral metadata schema; Broadcom's MegaRAID may use DDF or a proprietary extension. When a controller fails, reconstructing the array requires: (1) identifying stripe size from metadata or from entropy analysis of drive sectors; (2) determining drive order; (3) determining parity rotation direction; (4) recovering the starting offset.
+
+\subsection{Module 03 Reference: Ceph Distributed Storage}
+
+\subsubsection{Architecture Overview}
+
+Ceph is a distributed storage system delivering unified object (RADOS), block (RBD), and file (CephFS) storage. It is highly available and ensures strong data durability through replication, erasure coding, snapshots, and clones; by design it is self-healing and self-managing. At the core, all data lives in RADOS (Reliable Autonomic Distributed Object Store); higher-level interfaces (RBD, CephFS, RGW) translate to RADOS object operations.
+
+Ceph nodes are commodity hardware with intelligent daemons. The OSD (Object Storage Daemon) device can use any raw block device, including JBOD. Multiple OSDs communicate with Monitor daemons (MONs) that maintain the authoritative cluster map including the CRUSH map, OSD map, MON map, and PG (placement group) map.
+
+\subsubsection{BlueStore On-Disk Format}
+
+BlueStore (default since Luminous) stores data directly on raw block devices, bypassing the local filesystem. Key components:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Block device (main):} object data stored as raw extents
+  \item \textbf{WAL (Write-Ahead Log):} separate fast device (NVMe recommended) for journaling
+  \item \textbf{DB:} RocksDB metadata store, separate fast device; holds object map, collection map, and extent allocation
+  \item \textbf{Label:} first 4KB of device; contains OSD UUID, creation timestamp, cluster FSID, and BlueStore magic
+\end{itemize}
+
+For forensic purposes, the BlueStore label at offset 0 of each OSD device is the primary forensic anchor: it contains the OSD UUID and FSID that allow CRUSH map reconstruction.
+
+\subsubsection{Stretch Clusters and Recovery}
+
+Ceph at CERN operates a stretch cluster spanning multiple datacenters. Stretch clusters require a minimum of 4 replicas (2 per DC) and preferably flash storage to reduce recovery time after device failure. This increases operating costs but allows service survival through the total failure of one datacenter. For forensic purposes, stretch clusters complicate evidence isolation: a given RADOS object may have authoritative copies on drives in two physically separate locations.
+
+\subsection{Module 04 Reference: Data Recovery Engineering}
+
+\subsubsection{Failure Mode Taxonomy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Failure Mode} & \tableheader{Layer} & \tableheader{Recovery Complexity} & \tableheader{Primary Tool} \\
+\midrule
+Controller burnout (power) & Silicon & High & PC-3000 SSD/SAS, chip replacement \\
+Firmware corruption (EEPROM) & Silicon & Medium--High & PC-3000 firmware re-flash, SalvationDATA \\
+NAND wear-out & Silicon & Medium & VNR, FE Flash-Extractor, chip-off \\
+BGA bond failure & Silicon & Very High & IR6500 rework, chip-off, reballing \\
+Bad sector cascade & HDD layer & Low--Medium & DeepSpar Imager, ddrescue \\
+RAID superblock divergence & Array & High & Manual reconstruction + DiskInternals RAID \\
+Drive-order mismatch & Array & Medium & Entropy analysis, manual stripe identification \\
+RAID rebuild fault (double failure) & Array & Very High & Individual drive imaging first, then virtual rebuild \\
+Ceph OSD UUID loss & Distributed & High & BlueStore label extraction, crushtool \\
+Ceph CRUSH map corruption & Distributed & High & monmaptool, MON data extraction \\
+NVMe translation table loss & Silicon & Very High & Chip-off, NAND XOR reconstruction, VNR \\
+TCG Opal encryption key loss & Silicon & Near impossible & Key escrow required pre-failure \\
+Silent data corruption (SDC) & Array/Distributed & Very High & Scrubbing + parity cross-check \\
+PCIe bus protocol failure & Silicon & High & Controller emulation, BGA chip-off \\
+Ceph OSD multi-failure & Distributed & Catastrophic & CRUSH map + surviving OSD content analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Professional Toolchain}
+
+The Ace Lab PC-3000 is the industry's most sophisticated data recovery platform. It supports UDMA (SATA/IDE), Express (PCIe SSD), SAS/SCSI, Flash (chip-off), and SSD variants. Key capabilities: firmware repair, ROM re-flash, bad sector bypass, head disable for HDD, NAND algorithmic reconstruction. The PC-3000 Portable Pro (released for beta testing in 2024) extends chip-off capabilities in a portable form factor. Complementary tools include the VNR (Virtual NAND Reconstructor) for NAND scrambler reversal, the IR6500 Infrared BGA Rework Station for chip removal, DeepSpar Disk Imagers for sector-level imaging of failing drives, and EasyJTAG for JTAG-accessible embedded flash.
+
+For NVMe controller failure, the standard recovery path is: (1) write-block the device; (2) attempt firmware recovery via PC-3000 Express; (3) if controller is unresponsive, perform BGA chip-off of NAND packages using IR6500; (4) read raw NAND pages via PC-3000 Flash or FE Flash-Extractor; (5) use VNR to reconstruct the logical-to-physical address mapping; (6) export as a logical image for file system analysis.
+
+\subsection{Module 05 Reference: Digital Forensics \& Legal Chain}
+
+\subsubsection{Standard Methodology}
+
+Digital forensics follows a four-phase process: collection, examination, analysis, and reporting. The collection phase requires write-blocking all target media before any access. Hardware write-blockers (Tableau, WiebeTech, Logicube) are preferred over software write-blockers for court-admissible work. For NVMe media, SATA write-blockers are incompatible; PCIe/NVMe-specific write-blockers or custom PCIe interposers are required.
+
+Forensic imaging creates a sector-by-sector duplicate (bitstream copy) using tools such as FTK Imager, Guymager, or dc3dd. Every image must be verified with SHA-256 or SHA-512 hash comparison between source and destination. Chain of custody documentation must record: examiner identity, date/time of acquisition, hardware serial numbers, hash values, and any deviations from standard procedure.
+
+\subsubsection{Ceph-Specific Forensic Considerations}
+
+Forensic examination of a live Ceph cluster presents unique challenges because any interaction with the cluster may trigger OSD rebalancing, scrubbing, or recovery operations that modify data. The recommended procedure is: (1) isolate the cluster from client I/O (set cluster to maintenance mode); (2) snapshot all RBD volumes and CephFS filesystems; (3) export OSD device images via dd/dcfldd at the block device level (not the Ceph layer); (4) extract BlueStore labels from each OSD image to build the cluster topology; (5) reconstruct CRUSH map offline using crushtool; (6) mount images read-only for analysis. This procedure has not yet been tested in a court context; the Springer 2019 chapter on Ceph forensics identifies this gap.
+
+\subsubsection{Key Standards}
+
+NIST SP 800-86 (Guide to Integrating Forensic Techniques into Incident Response) provides the authoritative US federal guidance for digital forensics. SWGDE (Scientific Working Group on Digital Evidence) publishes best practice documents for storage media examination. For lab accreditation, SSAE18 Type II audits provide annual third-party verification of security policy adherence. ISO/IEC 27037 provides international guidance on digital evidence identification and preservation.
+
+\subsection{Module 06 Reference: Optical Imaging \& VLSI Inspection}
+
+\subsubsection{Pentax/Ricoh Industrial Lenses}
+
+Ricoh Imaging (brand: Pentax for optical products) manufactures the FL-series of fixed-focal-length industrial lenses designed for machine vision sensors up to 45mm. The FL-YFL3528 F-Mount lens is used for inspection of steel, pulp, fibre/textile, printing, film, and other flat materials, including web appearance testing equipment. For chip-level forensic documentation, the FA Macro lens family (1:1 reproduction ratio) provides the magnification required to document die markings, bond wire integrity, and surface burn traces at the BGA level.
+
+\subsubsection{Bosch Semiconductor Inspection}
+
+Bosch operates both as a semiconductor manufacturer (using its own wafer fabs in Dresden and Reutlingen) and as a provider of industrial inspection systems. Automated Optical Inspection (AOI) in semiconductor manufacturing uses brightfield and darkfield techniques: brightfield measures reflected light at a higher angle (workhorse technology for detecting surface contamination and die marking verification); darkfield measures light at a lower angle (better for detecting surface scratches, particles, and edge defects). For storage controller PCB forensics, AOI techniques can document solder joint quality, capacitor ESR damage, and burn signatures from power surge events.
+
+\subsubsection{VLSI Documentation Standards for Evidence}
+
+For chip-level evidence photography to be court-admissible, each image must include: a calibrated scale reference (NIST-traceable ruler or reticle); illumination specification (brightfield/darkfield, wavelength, angle); objective magnification and numerical aperture; examiner identity and date/time stamp embedded in EXIF metadata; and hash verification of the original image file. Pentax/Ricoh's Digital Camera Utility supports GPS coordinate embedding (relevant for documenting physical evidence location) and is distributed via Ricoh Imaging's official firmware and software download portal.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{warnred}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Live cluster forensic access & ABSOLUTE & Never issue write commands to a cluster under forensic examination; always work from block-level images \\
+Encryption key handling & GATE & TCG Opal and BitLocker keys must be documented in chain of custody before any recovery attempt; key loss is irreversible \\
+Evidence hash integrity & ABSOLUTE & Every image must be hash-verified before analysis; any deviation voids admissibility \\
+BGA rework heat exposure & SAFETY & IR6500 and hot-air rework exposes NAND to thermal stress; document temperature profile; thermal damage is a forensic artifact \\
+Proprietary firmware access & ANNOTATE & PC-3000 firmware access agreements restrict publication; reference capabilities without reproducing proprietary firmware structures \\
+Third-party IP in controller dies & ANNOTATE & Samsung, Broadcom die architectures are trade secret; document visible failure artifacts only, not architectural IP \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Vendor Documentation}
+
+\begin{itemize}[leftmargin=*]
+  \item Broadcom Inc. \textit{RAID Controllers Product Page.} broadcom.com/products/storage/raid-controllers. Accessed March 2026.
+  \item Broadcom Inc. \textit{Storage Solutions Selection Guide 2024.} TD Synnex / Broadcom, March 2025.
+  \item Broadcom Inc. \textit{MegaRAID, 3ware, and HBA Support for Various RAID Levels and JBOD Mode.} Knowledge Base Article 1211161496893. November 2025.
+  \item Samsung Semiconductor. \textit{Samsung's Highest Performing SAS Enterprise SSD.} News release. June 2023.
+  \item AMD / Xilinx. \textit{Samsung SmartSSD Computational Storage.} xilinx.com/applications/data-center/computational-storage. Accessed March 2026.
+  \item Ricoh Imaging. \textit{PENTAX Digital Camera Utility 4 Update for Windows.} ricoh-imaging.co.jp. Accessed March 2026.
+  \item Stemmer Imaging USA. \textit{Ricoh/Pentax FL-YFL3528 F Mount Lens.} stemmer-imagingusa.com. Accessed March 2026.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=*]
+  \item Zawoad, S. and Hasan, R. (2019). ``Distributed Filesystem Forensics: Ceph as a Case Study.'' \textit{Handbook of Big Data and IoT Security.} Springer. DOI: 10.1007/978-3-030-10543-3\_6.
+  \item Parast, F. K. and Damghani, S. A. (2024). ``Efficient security interface for high-performance Ceph storage systems.'' \textit{Future Generation Computer Systems.} ScienceDirect. DOI published October 2024.
+  \item CERN IT Storage Group. ``Ceph at CERN in the Multi-Datacentre Era.'' \textit{EPJ Web of Conferences} 337, 01331. CHEP 2024. DOI: 10.1051/epjconf/202533701331.
+\end{itemize}
+
+\subsubsection{Government and Standards Bodies}
+
+\begin{itemize}[leftmargin=*]
+  \item NIST. \textit{SP 800-86: Guide to Integrating Forensic Techniques into Incident Response.} csrc.nist.gov.
+  \item SWGDE. \textit{Best Practices for Digital Evidence Collection and Examination.} swgde.org.
+  \item ISO/IEC 27037:2012. \textit{Information technology --- Security techniques --- Guidelines for identification, collection, acquisition and preservation of digital evidence.}
+\end{itemize}
+
+\subsubsection{Professional and Industry Sources}
+
+\begin{itemize}[leftmargin=*]
+  \item IBM Redbooks. \textit{IBM Storage Ceph Concepts and Architecture Guide.} REDP-5721. June 2024.
+  \item SNIA. \textit{Ceph Q\&A.} snia.org/blog/2024/ceph-qa. 2024.
+  \item Ceph Foundation. \textit{Architecture --- Ceph Documentation.} docs.ceph.com/en/reef/architecture. Accessed March 2026.
+  \item DataCare Labs. \textit{Enterprise Data Recovery from NVMe SSDs in RAID Arrays.} datacarelabs.com. October 2025.
+  \item DataCare Labs. \textit{Forensic Recovery from NVMe and PCIe SSDs.} datacarelabs.com. October 2025.
+  \item 300 Dollar Data Recovery. \textit{Data Recovery Tools: Professional Cutting-Edge Hardware/Software.} March 2025.
+  \item Semiconductor Engineering. \textit{Optical Inspection Knowledge Center.} semiengineering.com. July 2025.
+  \item Electronic Design. \textit{SmartNIC Architectures: A Shift to Accelerators and Why FPGAs are Poised to Dominate.} Schweitzer, S. electronicdesign.com. Accessed March 2026.
+\end{itemize}
+
+
+\newpage
+%%=======================================================================
+%% STAGE 3 — MISSION PACKAGE
+%%=======================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, court-referenceable research compendium covering the complete enterprise storage forensics stack, from VLSI silicon (Samsung, Philips/NXP, Broadcom, AMD/Xilinx) through array architectures (RAID/HBA, JBOD) and distributed systems (Ceph) to data recovery engineering and digital forensics methodology, with optical imaging and inspection (Pentax/Ricoh, Bosch) as the chip-level evidence documentation layer. The compendium will serve as both a technical reference for GSD ecosystem infrastructure (FoxData, FoxCompute) and as a practitioner's guide for forensic investigations involving enterprise storage systems.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+SILICON TO EVIDENCE --- WAVE EXECUTION ARCHITECTURE
+====================================================
+
+WAVE 0 [Sequential | Haiku | ~500 tokens]
+  Foundation: shared schema, glossary (55 terms), source index (14 orgs),
+  failure mode enum, RAID level enum, tool registry
+
+  |
+  v [GATE 0: schema approval]
+
+WAVE 1A [Parallel | Sonnet+Opus]          WAVE 1B [Parallel | Sonnet+Opus]
+  EXEC-A1: Module 01 Silicon (Sonnet)        EXEC-B1: Module 04 Recovery (Sonnet)
+  EXEC-A2: Module 02 RAID/HBA (Sonnet)       EXEC-B2: Module 05 Forensics (Sonnet)
+  CRAFT-SILICON: Ceph deep-dive (Opus)       CRAFT-FORENSICS: Optical Imaging (Opus)
+
+  |                                          |
+  +------------------------------------------+
+                      |
+              [GATE 1: HITL module review]
+                      |
+                      v
+WAVE 2 [Sequential | Opus | ~4000 tokens]
+  ANALYST: cross-module synthesis
+    - silicon failure -> array implication map
+    - forensic admissibility matrix per failure mode
+    - Ceph CRUSH reconstruction decision tree
+    - optical inspection evidence chain
+
+  |
+  v [GATE 2: synthesis approval]
+
+WAVE 3 [Sequential | Sonnet]
+  EXEC-PUB: LaTeX compendium assembly, bibliography, TOC
+  VERIFY: hash verification, source validation, test matrix
+  LOG: commit message, milestone summary
+  |
+  v [DELIVER]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer} --- Shared schema, controlled vocabulary (55 terms), source registry, failure mode enum, RAID level definitions
+  \item \textbf{Silicon Layer} --- Samsung, Philips/NXP, Broadcom, AMD/Xilinx VLSI profiles; die architecture summaries; firmware paths; known forensic failure modes
+  \item \textbf{Array Architecture Layer} --- RAID level survey, MegaRAID metadata format, JBOD topology, HBA mode comparison, DDF standard
+  \item \textbf{Distributed Storage Layer} --- Ceph RADOS, BlueStore, CRUSH, stretch clusters, forensic isolation procedure
+  \item \textbf{Recovery Engineering Layer} --- Failure mode taxonomy (15+ modes), professional toolchain reference, NVMe chip-off procedure, RAID reconstruction workflow
+  \item \textbf{Forensics \& Legal Layer} --- Chain of custody templates, write-blocking procedures, hash verification, NIST SP 800-86 compliance, Ceph-specific forensic procedure
+  \item \textbf{Optical Inspection Layer} --- Pentax/Ricoh lens specifications, Bosch AOI integration, VLSI evidence photography standard, EXIF metadata requirements
+  \item \textbf{Synthesis Layer} --- Cross-module integration, silicon-to-forensic implication map, CRUSH reconstruction decision tree, admissibility matrix
+  \item \textbf{Publication Layer} --- Final LaTeX compendium, bibliography, verification matrix, chain of custody templates as appendices
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.4cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Shared Glossary & 55+ defined terms, YAML format, cross-referenced & Wave 0 Foundation \\
+2 & Source Index & 14+ organizations, URL, access date, format & Wave 0 Foundation \\
+3 & Module 01: Silicon Profiles & 4 chip families, architecture + failure modes + firmware paths & SC-01 \\
+4 & Module 02: Array Architecture & 9 RAID levels, metadata format, 2 HBA mode comparisons & SC-02 \\
+5 & Module 03: Ceph Reference & RADOS + BlueStore + CRUSH + stretch cluster + forensic procedure & SC-03 \\
+6 & Module 04: Recovery Engineering & 15+ failure modes, toolchain reference, NVMe chip-off SOP & SC-04 \\
+7 & Module 05: Forensics \& Legal & Chain of custody template, write-block SOP, NIST mapping & SC-05 \\
+8 & Module 06: Optical Inspection & Lens spec table, AOI integration, VLSI photography standard & SC-06 \\
+9 & Synthesis Document & Silicon-to-forensic map, CRUSH decision tree, admissibility matrix & SC-08 \\
+10 & Final LaTeX Compendium & Compiles clean, all cross-references resolve, PDF $\geq$ 60 pages & SC-12 \\
+11 & Chain of Custody Template & Court-format, fillable, hash fields, examiner certification block & SC-07 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Foundation Schema & None & Haiku & 500 \\
+M01: Silicon Substrate & Foundation & Sonnet & 3,000 \\
+M02: Array Architecture & Foundation & Sonnet & 3,500 \\
+M03: Ceph Distributed & Foundation, M02 & Opus & 4,000 \\
+M04: Recovery Engineering & M01, M02, M03 & Sonnet & 4,500 \\
+M05: Forensics \& Legal & M04 & Sonnet & 3,500 \\
+M06: Optical Imaging & M01, M05 & Opus & 3,000 \\
+Synthesis & All modules & Opus & 4,000 \\
+Publication (LaTeX) & All & Sonnet & 6,000 \\
+Verification & All & Sonnet & 2,000 \\
+\midrule
+\rowcolor{lightprimary}
+\multicolumn{3}{l}{\textbf{Total Estimated}} & \textbf{34,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+FLIGHT, ARCH & Opus & Mission-level judgment, cross-module dependency management, go/no-go gates \\
+ANALYST & Opus & Cross-module pattern detection; silicon failure to forensic implication mapping \\
+CRAFT-SILICON & Opus & Ceph forensics module requires judgment about distributed system behavior \\
+CRAFT-FORENSICS & Opus & Optical imaging evidence chain requires judgment about legal admissibility \\
+EXEC $\times$ 4 & Sonnet & Document production for Modules 01, 02, 04, 05; structured, high-quality output \\
+Publication & Sonnet & LaTeX assembly, bibliography, verification matrix; structured production \\
+SCOUT & Sonnet & Gap-fill web research; source compilation \\
+Foundation, Budget & Haiku & Scaffolding, templates, token telemetry; no judgment required \\
+\midrule
+\rowcolor{lightprimary}
+30\% Opus & 60\% Sonnet & 10\% Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Models} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schema, glossary, source index, enums \\
+1 & Research Tracks & Parallel (A/B) & Sonnet + Opus & Modules 01--06 first drafts \\
+2 & Synthesis & Sequential & Opus & Cross-module integration document \\
+3 & Publication & Sequential & Sonnet & Final compendium, verification matrix \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Glossary generation & Haiku & YAML file: 55+ terms (silicon, RAID, Ceph, forensics, optical) \\
+Source index & Haiku & Structured list: 14 orgs, URLs, format, access protocol \\
+Failure mode enum & Haiku & YAML enum: 15+ modes with ID, layer, complexity, tool \\
+RAID level definitions & Haiku & YAML table: level, min drives, fault tolerance, metadata location \\
+Tool registry & Haiku & YAML: PC-3000 variants, VNR, FE, DeepSpar, IR6500 specs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (Modules 01, 02, 03):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Module 01: Silicon & Sonnet & 4-family profiles; die architectures; firmware paths; failure modes \\
+Module 02: RAID/HBA & Sonnet & RAID level survey; MegaRAID metadata format; HBA mode comparison \\
+Module 03: Ceph & Opus & RADOS/BlueStore/CRUSH deep-dive; forensic isolation procedure; stretch clusters \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Modules 04, 05, 06):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Module 04: Recovery & Sonnet & Failure taxonomy; toolchain reference; NVMe chip-off SOP \\
+Module 05: Forensics & Sonnet & Chain of custody template; write-block SOP; NIST mapping; Ceph procedure \\
+Module 06: Optical & Opus & Pentax/Ricoh lens spec table; Bosch AOI integration; VLSI photography standard \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{GATE 1 (HITL):} CAPCOM presents module drafts to human for scope confirmation. Specific review items: (1) Ceph forensic isolation procedure completeness; (2) NVMe chip-off SOP thermal specifications; (3) optical evidence photography standard legal adequacy.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Silicon$\rightarrow$forensic map & Opus & Matrix: each silicon failure mode $\times$ recovery path $\times$ forensic admissibility status \\
+CRUSH reconstruction tree & Opus & Decision tree: surviving OSD labels $\rightarrow$ CRUSH map reconstruction steps \\
+Write-block capability matrix & Opus & Matrix: each interface (SATA/SAS/NVMe/PCIe) $\times$ write-blocker $\times$ limitation \\
+Optical evidence chain & Opus & Process diagram: chip removal $\rightarrow$ imaging $\rightarrow$ hash $\rightarrow$ chain of custody \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+LaTeX assembly & Sonnet & Full compendium: title, TOC, 6 modules + synthesis + appendices \\
+Bibliography & Sonnet & Formatted bibliography: 14 sources, Chicago/Turabian style \\
+Verification matrix & Sonnet & 12 criteria $\times$ test IDs $\times$ PASS/BLOCK status \\
+Chain of custody template & Sonnet & Fillable template with hash fields and examiner certification block \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Wave 0 Foundation outputs (schema, enums, glossary) are prepended to all Wave 1 agent contexts --- computed once, shared across 6 parallel agents (5-minute TTL exploitation)
+  \item Silicon family profiles (Module 01) are referenced but not re-generated in Modules 04 and 05 --- pass by reference via glossary IDs
+  \item Ceph BlueStore label format (Module 03) is shared as a schema artifact into Module 04 (recovery) and Module 05 (forensics)
+  \item LaTeX preamble and color definitions are established in Wave 0 template and reused verbatim in Wave 3 publication
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input (est.)} & \tableheader{Output (est.)} & \tableheader{Sessions} \\
+\midrule
+Wave 0: Foundation & 2,000 & 1,500 & 1 \\
+Wave 1A: Track A & 8,000 & 10,500 & 1 \\
+Wave 1B: Track B & 8,000 & 11,000 & 1 \\
+Wave 2: Synthesis & 22,000 & 4,000 & 1 \\
+Wave 3: Publication & 30,000 & 6,000 & 1 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Totals} & \textbf{70,000} & \textbf{33,000} & \textbf{2--3} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[W0 Foundation]
+      |
+      +----------+----------+----------+----------+----------+
+      |          |          |          |          |          |
+    [M01]      [M02]      [M03]      [M04]      [M05]      [M06]
+  Silicon     RAID/HBA    Ceph      Recovery   Forensics  Optical
+      |          |          |          |          |          |
+      +----------+----------+    M01+M02+M03 -->[M04]        |
+                 M02 ------>[M03]              M04 --------->[M05]
+                                               M01+M05 ----->[M06]
+                                                    |
+                                               [W2 Synthesis]
+                                                    |
+                                            [W3 Publication]
+                                                    |
+                                               [DELIVER]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Failure} \\
+\midrule
+Safety-Critical & 6 & P0 & BLOCK --- mission cannot proceed \\
+Core Functionality & 12 & P1 & Must fix before publication \\
+Integration & 8 & P2 & Fix or document limitation \\
+Edge Cases & 6 & P3 & Document and flag \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{32} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{warnred}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result / BLOCK Condition} \\
+\midrule
+SC-01 & No write commands on forensic target & Any procedure instructing write to target media before write-block is confirmed = BLOCK \\
+SC-02 & Hash verification mandatory & Any imaging procedure that does not include SHA-256/SHA-512 comparison = BLOCK \\
+SC-03 & Encryption key documented before recovery & Any chip-off or controller bypass procedure that does not address TCG Opal key status = BLOCK \\
+SC-04 & BGA rework temperature documented & Any chip-off SOP that omits temperature profile = BLOCK \\
+SC-05 & Ceph cluster write-isolated before imaging & Any Ceph forensic procedure that does not specify maintenance mode or equivalent = BLOCK \\
+SC-06 & Chain of custody template includes hash field & Published template missing cryptographic hash field = BLOCK \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+Silicon family profiles complete & T01, T02 & Pending \\
+RAID metadata format documented & T03, T04, SC-02 & Pending \\
+JBOD-to-Ceph topology mapped & T05, T06 & Pending \\
+Ceph CRUSH reconstruction procedure & T07, SC-05 & Pending \\
+Failure mode taxonomy complete & T08, T09 & Pending \\
+NVMe chip-off procedure documented & T10, SC-03, SC-04 & Pending \\
+Write-blocking protocol defined & T11, SC-01 & Pending \\
+Chain of custody template produced & T12, SC-06 & Pending \\
+Optical documentation standard defined & T13, T14 & Pending \\
+Ceph forensic imaging no-write & T15, SC-05 & Pending \\
+Cross-module dependency matrix complete & T16 & Pending \\
+Test plan coverage $\geq$ 95\% & T17, T18 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; wave authorization; go/no-go gates \\
+PLAN & Planner (Opus) & Wave decomposition; parallel track optimization; dependency graph maintenance \\
+TOPO & Topology Manager & Mid-mission crew restructuring if scope changes \\
+ARCH & Architecture (Opus) & Cross-cutting structural decisions; schema authority \\
+SECURE & Security Warden & Safety boundary enforcement; SC-01 through SC-06 monitoring \\
+ANALYST & Pattern Analyst (Opus) & Cross-module synthesis; silicon-to-forensic implication map \\
+CRAFT-SILICON & Silicon Specialist (Opus) & Ceph deep-dive; Module 03 primary agent \\
+CRAFT-FORENSICS & Forensics Specialist (Opus) & Optical evidence chain; Module 06 primary agent; legal admissibility judgment \\
+SCOUT & Research Agent (Sonnet) & Source gathering; gap-fill web research; bibliography compilation \\
+EXEC-A1 & Executor A1 (Sonnet) & Module 01: Silicon Substrate production \\
+EXEC-A2 & Executor A2 (Sonnet) & Module 02: Array Architecture production \\
+EXEC-B1 & Executor B1 (Sonnet) & Module 04: Recovery Engineering production \\
+EXEC-B2 & Executor B2 (Sonnet) & Module 05: Forensics \& Legal production \\
+EXEC-PUB & Publisher (Sonnet) & LaTeX assembly; bibliography; final compendium \\
+VERIFY & Verification (Sonnet) & Source validation; hash verification; test matrix execution \\
+INTEG & Integration (Sonnet) & Cross-module relationship validation; dependency graph verification \\
+CAPCOM & HITL Interface & Only channel crossing human-machine boundary; Gate 0, Gate 1, Gate 2 \\
+BUDGET & Resource Manager (Haiku) & Token budget telemetry; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection; signal-to-noise monitoring \\
+RETRO & Retrospective (Opus) & Post-wave analysis; lessons learned; Amiga Principle alignment check \\
+LOG & Chronicle (Sonnet) & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Name & Silicon to Evidence: Enterprise Storage Data Recovery \& Forensics \\
+Activation Profile & Fleet (21 roles) \\
+Research Modules & 6 (Silicon, RAID/HBA, Ceph, Recovery, Forensics, Optical) \\
+Wave Count & 4 (Foundation, Research Tracks, Synthesis, Publication) \\
+Parallel Tracks in Wave 1 & 2 (Track A: M01-03 / Track B: M04-06) \\
+HITL Gates & 3 (Gate 0: schema; Gate 1: module review; Gate 2: synthesis) \\
+Estimated Token Budget & 103,000 (input + output combined) \\
+Estimated Sessions & 2--3 context windows \\
+Safety-Critical Tests & 6 (all P0, all BLOCK on failure) \\
+Total Tests & 32 \\
+Primary Silicon Families & Samsung, Philips/NXP, Broadcom, AMD/Xilinx \\
+Primary Array Technologies & RAID 0/1/5/6/10/50/60/5EE, JBOD, HBA Tri-Mode \\
+Distributed Storage & Ceph Pacific/Quincy/Reef/Squid (BlueStore, RADOS, CRUSH) \\
+Primary Recovery Toolchain & Ace Lab PC-3000 family, VNR, FE, DeepSpar, IR6500 BGA \\
+Primary Optical Equipment & Pentax/Ricoh FL-series, FA Macro; Bosch AOI \\
+Forensics Standards & NIST SP 800-86, SWGDE, ISO/IEC 27037, SSAE18 Type II \\
+Handoff Target & gsd-skill-creator (dev branch, v1.49+) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily The Amiga Principle in Forensics}
+
+\medskip
+
+\textit{``Every byte recovered from a failed NVMe SSD is a proof by construction: that architecture survives failure because we understood it, not because we had more power than the entropy that attacked it. The spaces between the controller and the NAND --- the address translation layer, the wear-leveling map, the scrambler seed --- are not obstacles to recovery. They are the structure. Read the structure, reconstruct the map, and the data follows. Silicon to evidence is not a miracle. It is applied architecture.''}
+
+\medskip
+
+\noindent --- GSD Research Mission, March 2026
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,996 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- PNW Market Color Scheme ---
+\definecolor{primary}{HTML}{1B4F72}       % Salish Sea deep blue
+\definecolor{secondary}{HTML}{1A5E3A}     % Old-growth forest green
+\definecolor{tertiary}{HTML}{784212}      % Coastal cedar brown
+\definecolor{accent}{HTML}{2E86C1}        % Bellingham Bay mid-blue
+\definecolor{lightprimary}{HTML}{D6EAF8}
+\definecolor{lightsecondary}{HTML}{D5F5E3}
+\definecolor{lighttertiary}{HTML}{FAE5D3}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% --- Custom Environments ---
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% --- Headers and Footers ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Bellingham Market}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Bellingham Market -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Bellingham\\[0.3em]Market Study}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Whatcom County, Washington~--~PNW Regional Economy}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026~~|~~Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron~~|~~Estimated: 12--15 context windows across 3 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Calibration Note: 1,311-line baseline~--~depth matched to available source record}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Bellingham Market --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Calibration:}{1,311-line baseline; depth matched to available source record (cf.\ C89 Seattle baseline at 1,568 lines)}
+\metafield{Depends on:}{Fox Infrastructure Group Master Business Plan, GSD Ecosystem Field Guide}
+\metafield{Context:}{PNW regional market analysis~--~Whatcom County, Salish Sea corridor}
+
+\subsection{Vision}
+
+Bellingham sits at a hinge point on the map and on the economic timeline. It is 90 miles north of Seattle, 60 miles south of Vancouver~BC, and directly adjacent to the Lummi Nation's ancestral Salish Sea territory. That geography is not background color: it shapes every economic force at work in the city. Canadian cross-border retail, I-5 corridor migration, Western Washington University's outsized employment footprint, and the Port of Bellingham's industrial base all radiate outward from that single coordinate.
+
+What makes Bellingham analytically interesting --- and what distinguishes it from a simple ``smaller Seattle'' framing --- is the honest tension between its structural assets and its documented limits. The city has a competitive housing market, strong healthcare and education anchors, an active tribal economic sovereignty layer, and proximity to two major metros. What it lacks, relative to Seattle, is institutional depth: fewer decades of aggregated market data, a thinner private-sector anchor base, and a tech economy that is real but modest. The research reflects that reality.
+
+This is a feature, not a defect. Bellingham is a city whose market story is still being written, and that presents a different kind of research opportunity: less about confirming known patterns and more about reading signals early.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P-\arabic*:}]
+  \item \textbf{Housing affordability vs.\ regional migration pressure.} Median home prices reached \$647K in January 2026, 53\% above the national average, driven in part by Seattle buyers priced out of King County. The local wage base --- median household income \$80,989 in 2023 --- has not kept pace, creating structural affordability strain for long-term residents and working families.
+
+  \item \textbf{Economic over-dependence on anchors.} Healthcare (PeaceHealth St.\ Joseph) and higher education (Western Washington University) together account for the two largest employer clusters. This institutional concentration creates resilience against private-sector volatility but limits wage ceiling growth and leaves the economy exposed to enrollment and hospital system trends.
+
+  \item \textbf{Data thinness relative to Puget Sound comparables.} Bellingham's documented economic history is shorter and less granular than Seattle-metro comparables. Historical transaction records, longitudinal wage data, and institutional research are less consistently available. Any research mission must acknowledge this gap rather than paper over it.
+
+  \item \textbf{Tribal economic sovereignty underrepresented in regional planning.} The Lummi Nation (Lhaq'temish) and Nooksack Tribe are sovereign economic actors in Whatcom County --- employers, land managers, treaty co-managers of fisheries. Standard market analyses treat them as peripheral. An honest Bellingham market study integrates tribal sovereignty as a structural feature, not a footnote.
+
+  \item \textbf{Cross-border economic signal decay.} Bellingham's historic role as a Canadian cross-border retail destination (Bellis Fair Mall, ~3,000 employees) is sensitive to exchange rate fluctuations and customs policy. This structural dependency is poorly modeled in standard regional economic forecasts.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Hinge City Model:} Bellingham's market is best understood not as an isolated local economy but as a hinge point between two major metros, two national sovereignties, and two economic eras (industrial-anchor heritage vs.\ knowledge-economy emergence). Prices, migration, employment, and investment all flow through and around that hinge.
+
+\subsubsection{Regional Position Map}
+
+\begin{asciibox}
++--------------------------------------------------------------+
+|  SALISH SEA ECONOMIC CORRIDOR                                |
+|                                                              |
+|  Vancouver, BC (60 mi north)                                 |
+|    |-- Cross-border retail / CAD-USD exchange sensitivity    |
+|    |-- Canadian homebuyer demand                             |
+|                                                              |
+|  BLAINE / SUMAS border crossings                             |
+|    |-- 4 US-Canada crossings in Whatcom County               |
+|                                                              |
+|  *** BELLINGHAM (Whatcom County seat, pop. 228k) ***         |
+|    |-- Lummi Nation Reservation (8 mi west)                  |
+|    |-- Nooksack Tribe territory (eastern watershed)          |
+|    |-- Port of Bellingham (industrial / maritime)            |
+|    |-- Western Washington University (3rd-largest employer)  |
+|    |-- PeaceHealth St. Joseph (largest private employer)     |
+|    |-- Bellis Fair Mall (~3,000 cross-border retail jobs)    |
+|                                                              |
+|  Anacortes / Skagit Valley (south, 20 mi)                    |
+|    |-- BP Cherry Point Refinery (800 jobs)                   |
+|    |-- Agricultural export corridor                          |
+|                                                              |
+|  Seattle Metro (90 mi south)                                 |
+|    |-- Primary migration source for Bellingham buyers        |
+|    |-- Tech-sector wage spillover (remote work)              |
++--------------------------------------------------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
++-------------------+   +-------------------+   +------------------+
+|  MODULE 01        |   |  MODULE 02        |   |  MODULE 03       |
+|  Housing &        |   |  Economic Base &  |   |  Tribal Economic |
+|  Real Estate      |   |  Major Employers  |   |  Sovereignty     |
++--------+----------+   +--------+----------+   +--------+---------+
+         |                       |                        |
+         +----------++-----------+           +------------+
+                    ||                        |
+            +-------++---------+   +---------+--------+
+            |  MODULE 04        |   |  MODULE 05       |
+            |  Higher Ed &      |   |  Regional        |
+            |  Workforce        |   |  Position &      |
+            +-------------------+   |  Cross-Border    |
+                    |               +---------+--------+
+                    |                         |
+                    +----------+--------------+
+                               |
+                    +----------+----------+
+                    |  SYNTHESIS LAYER    |
+                    |  Hinge City Model   |
+                    |  Cross-module       |
+                    |  Integration        |
+                    +---------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Housing \& Real Estate Market}
+
+Current conditions, price trajectory, inventory dynamics, competitive pressures, and the Seattle migration effect on the Bellingham buyer pool. Includes Redfin, Zillow, and NWMLS data cross-referenced against affordability metrics.
+
+\subsubsection{Module 02: Economic Base \& Major Employers}
+
+Sector analysis across the county's five dominant industries: healthcare, higher education, retail trade, manufacturing, and government. Employer concentration risk, wage ceiling dynamics, and cross-sector linkages. BP Cherry Point, PeaceHealth, Port of Bellingham, and Faithlife as primary case studies.
+
+\subsubsection{Module 03: Tribal Economic Sovereignty}
+
+Lummi Nation (Lhaq'temish) and Nooksack Tribe as sovereign economic actors: fisheries co-management under the 1974 Boldt Decision, Silver Reef Casino and Hotel (8th-largest employer in Whatcom County), the Lummi Commercial Company, Northwest Indian College, and the Lummi FTZ. Structured per OCAP\textsuperscript{\textregistered} principles with Lummi-specific attribution throughout.
+
+\subsubsection{Module 04: Higher Education \& Workforce Development}
+
+Western Washington University's economic footprint (3,381 direct + indirect jobs, \$138.5M capital expenditures), graduate employment pipeline, the WWU SBDC, Whatcom Community College, Bellingham Technical College, and Northwest Indian College. Includes the structural tension between WWU's regional anchor role and the limited local corporate recruitment presence.
+
+\subsubsection{Module 05: Regional Position \& Cross-Border Economy}
+
+Bellingham's geographic position between two metros and two national economies. Canadian cross-border retail patterns, exchange rate sensitivity, I-5 corridor migration flows, and the long-run question of whether Bellingham becomes a remote-work exurb of Seattle or consolidates its own economic identity.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Mission Chipset Configuration
+# Bellingham Market Deep Research Mission
+
+mission_id:       bellingham-market-v1
+chipset_profile:  squadron
+calibration_note: "1,311-line baseline. Depth matched to available
+                   source record. C89 (Seattle) reference at 1,568 lines."
+
+roles:
+  FLIGHT:         claude-opus-4    # Mission direction; go/no-go gates
+  PLAN:           claude-sonnet-4  # Wave decomposition; dependency management
+  SCOUT:          claude-sonnet-4  # Source gathering; evidence compilation
+  EXEC-A:         claude-sonnet-4  # Modules 01 + 02 document production
+  EXEC-B:         claude-sonnet-4  # Modules 03 + 04 document production
+  CRAFT-MARKET:   claude-opus-4    # Housing + economic base analysis
+  CRAFT-SOVR:     claude-opus-4    # Tribal sovereignty analysis (Lummi/Nooksack)
+  VERIFY:         claude-sonnet-4  # Source validation; accuracy checking
+  INTEG:          claude-opus-4    # Cross-module hinge-city synthesis
+  CAPCOM:         claude-sonnet-4  # Human approval at wave boundaries
+  BUDGET:         claude-haiku-4   # Token budget tracking
+  LOG:            claude-haiku-4   # Commit messages; milestone summaries
+
+model_split:
+  opus:   33%    # FLIGHT, CRAFT-MARKET, CRAFT-SOVR, INTEG
+  sonnet: 57%    # PLAN, SCOUT, EXEC-A, EXEC-B, VERIFY, CAPCOM
+  haiku:  10%    # BUDGET, LOG
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item Bellingham/Whatcom County housing market: price trajectory, inventory, migration patterns, affordability
+  \item Economic base analysis: top 10 employers, sector composition, wage dynamics
+  \item Lummi Nation and Nooksack Tribe as sovereign economic actors (with nation-specific attribution per OCAP\textsuperscript{\textregistered})
+  \item Western Washington University economic impact and workforce pipeline
+  \item Cross-border economic linkages with British Columbia
+  \item Regional positioning relative to Seattle Metro and Vancouver~BC
+  \item Calibration transparency: honest acknowledgment of data thinness vs.\ Seattle baseline
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Detailed Seattle Metro market analysis (addressed in C89 reference baseline)
+  \item Individual property investment analysis or appraisal
+  \item Tribal cultural heritage or ceremonial practices beyond their economic context
+  \item British Columbia internal market dynamics beyond cross-border effect
+  \item Commercial real estate or industrial property market (residential focus for v1.0)
+  \item Tax policy analysis or legislative advocacy
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*:}]
+  \item Bellingham median home price, days on market, and year-over-year change documented with source attribution from NWMLS, Redfin, and Zillow.
+  \item The Seattle-to-Bellingham migration driver is quantified: percentage of inbound searches originating from Seattle Metro, with source and date.
+  \item Top 10 Whatcom County employers listed with employment counts, sector classification, and source (WWU CEBR or Port of Bellingham).
+  \item Lummi Nation and Nooksack Tribe are named and attributed specifically throughout; no generic ``Indigenous'' references appear.
+  \item Lummi Nation's position as 8th-largest employer in Whatcom County (via Silver Reef Casino) is documented with employer count and source.
+  \item The 1974 Boldt Decision is cited in the tribal sovereignty context, including its co-management implications for Whatcom County fisheries.
+  \item Western Washington University economic impact is quantified: direct employment, total employment multiplier, and capital expenditures cited from WWU's own impact study.
+  \item The cross-border retail vulnerability (Canadian shopper share, exchange-rate sensitivity) is explicitly characterized with available data points.
+  \item Calibration note is present: document explicitly acknowledges the 1,311-line depth reflects available source record, not analytical thinness.
+  \item Each module produces a self-contained section readable without reference to other modules.
+  \item All numerical claims (prices, employment counts, percentages) are attributed to a specific source within the document.
+  \item The Hinge City synthesis explicitly traces at least one economic force flowing through each of the five modules.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Fox Infrastructure Group Master Business Plan & Parent context & Bellingham/Whatcom County is candidate site area for northern BC-to-Chile corridor \\
+GSD Mesh Prototype Spec & Infrastructure node context & Rural connectivity requirements apply to Whatcom County cluster scenarios \\
+C89 Seattle Market Baseline & Comparison baseline & 1,568-line reference; Bellingham at 1,311 lines reflects lighter source record \\
+Salish Sea Expansion Vision (04) & Geographic overlap & Coast Salish territorial waters frame the tribal sovereignty layer \\
+PNW Trees \& Plants Mission & Ecological context & Lummi salmon co-management links to watershed ecology documented there \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Bellingham is a city whose market story is still acquiring density. Seattle has decades of institutional research, aggregated MLS data, and corporate recruitment infrastructure. Bellingham has something more interesting right now: a market in transition, a sovereign economic layer that most analysts ignore, and a university town that produces talent it cannot quite absorb locally. The 1,311-line honest baseline is not a limitation. It is a measurement. It says: this is how much signal exists, and the signal is real.
+
+The Amiga Principle runs here too. A 7MHz chip in the right architecture produces outcomes that outrun brute force. A smaller market with clear structural levers --- tribal sovereignty as a stable non-cyclical employer, a university producing 5,600 graduates annually, a border that makes the city a gateway in both directions --- can generate more insight per data point than a market with more data and less architecture.
+
+The spaces between Seattle and Vancouver~BC are where Bellingham lives. That is not a disadvantage. That is the signal.
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Bellingham Market --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings across five modules. Source thinness relative to Seattle-market comparables is noted where present. All employment figures and housing data carry source attribution and collection date.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Northwest Multiple Listing Service (NWMLS)} --- primary housing transaction data for Whatcom County
+  \item \textbf{Redfin / Zillow} --- public-facing median price indices and migration analysis
+  \item \textbf{WWU Center for Economic \& Business Research (CEBR)} --- top employer surveys, economic impact studies
+  \item \textbf{Port of Bellingham} --- largest employer registry, industrial base data
+  \item \textbf{Lummi Indian Business Council (LIBC)} --- Lummi Nation Comprehensive Economic Development Strategy
+  \item \textbf{DataUSA / U.S. Bureau of Economic Analysis} --- sector employment and income data
+  \item \textbf{Bellingham Regional Chamber of Commerce} --- industry overview and business resources
+\end{itemize}
+
+\subsection{Module 01: Housing \& Real Estate Market}
+
+\subsubsection{Current Conditions (January--February 2026)}
+
+Bellingham's housing market entered 2026 in a state of measured competition. Median sale price reached \$647K in January 2026, representing a 6.9\% year-over-year increase (Redfin, January 2026). Average days on market was 46 days, essentially flat vs.\ 47 days the prior year. The number of homes sold declined from 47 to 40 year-over-year, consistent with the national trend of constrained inventory limiting transaction volume.
+
+Zillow's Home Value Index reported a lower figure (\$633,071) with a 6.7\% year-over-year decline, reflecting methodological differences in index construction. Cross-referencing both sources: median transaction prices are in the \$633K--\$650K range depending on measurement methodology, with directional trends (modest YoY appreciation, tight inventory, slow days-on-market normalization) consistent across sources.
+
+The conforming loan limit in Whatcom County increased to \$832,750 in 2026, providing headroom for conventional financing well above the current median (Sammamish Mortgage, January 2026).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}C{3cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} & \tableheader{YoY Change} & \tableheader{Source} \\
+\midrule
+Median Sale Price & \$647,000 & +6.9\% & Redfin, Jan 2026 \\
+Avg Days on Market & 46 days & --1 day & Redfin, Jan 2026 \\
+Homes Sold & 40 & --15\% & Redfin, Jan 2026 \\
+Avg Home Value (ZHVI) & \$633,071 & --6.7\% & Zillow, Jan 2026 \\
+Median Price per Sq Ft & \$396 & --1.1\% & Redfin, Jan 2026 \\
+Conforming Loan Limit & \$832,750 & N/A & Sammamish, 2026 \\
+National Median Premium & 53\% above avg & --- & Redfin, Jan 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Migration Dynamics}
+
+The Seattle-to-Bellingham migration pipeline is structurally significant. Redfin search data (Oct--Dec 2025) indicates that Seattle homebuyers represented the single largest out-of-metro inbound search cohort for Bellingham, followed by Spokane and Los Angeles. Nationally, 0.58\% of homebuyers searched to move \emph{into} Bellingham from outside metros, suggesting a modest but consistent inflow.
+
+Outbound pressure is also real: 57\% of Bellingham homebuyers searched to move \emph{out of} Bellingham during the same period, with Phoenix as the top destination, followed by Aberdeen and Ellensburg. This dual-flow pattern is characteristic of a secondary market that is simultaneously receiving Seattle overflow while losing residents who find Bellingham itself unaffordable for their next lifecycle stage.
+
+\subsubsection{Market Outlook (2026)}
+
+Multiple sources (Sammamish Mortgage, Redfin) anticipate a gradual transition from seller's market conditions toward a more balanced market in 2026. More listings coming to market, slightly longer days-on-market, and reduced bidding war frequency are reported trends as of late 2025. Prices are expected to hold or appreciate slowly rather than correct, given persistent demand and constrained new construction.
+
+\subsection{Module 02: Economic Base \& Major Employers}
+
+\subsubsection{Sector Composition (2023)}
+
+The Bellingham MSA (Whatcom County) employed approximately 113,000 people in 2023. The three largest sectors by employment were Health Care \& Social Assistance (15,422 employees), Manufacturing (11,478), and Educational Services (11,331). Government --- including public higher education --- remained the largest single industry cluster when aggregated (Bellingham Chamber, 2017 data; DataUSA 2023).
+
+Median household income was \$80,989 in 2023, representing a 4.39\% increase over 2022 (\$77,581). This growth rate is healthy in nominal terms but has not kept pace with housing price appreciation over the same period.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{3cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Sector} & \tableheader{Employment (2023)} & \tableheader{Source} \\
+\midrule
+Health Care \& Social Assistance & 15,422 & DataUSA 2023 \\
+Manufacturing & 11,478 & DataUSA 2023 \\
+Educational Services & 11,331 & DataUSA 2023 \\
+Retail Trade & est.\ 9,000+ & Chamber 2017 \\
+Government (non-education) & est.\ 8,000+ & Chamber 2017 \\
+Information Technologies & \textasciitilde1,200 & Chamber 2017 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Major Employers}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Employer} & \tableheader{Sector} & \tableheader{Est.\ Employment} \\
+\midrule
+PeaceHealth St.\ Joseph Medical Center & Healthcare & Largest private employer \\
+Western Washington University & Higher Education & 1,961 direct / 3,381 total \\
+Whatcom County & Government & $>$1,000 \\
+City of Bellingham & Government & $>$800 \\
+Lummi Commercial Company (Silver Reef) & Tribal/Casino & 8th-largest in county \\
+Bellis Fair Mall (aggregate) & Retail & 3,000 (full/part-time) \\
+BP Cherry Point Refinery & Petroleum refining & 800 \\
+Faithlife Corporation & Technology / Bible software & 420 \\
+Bellingham Public Schools & Education & $>$600 \\
+Bellingham Technical College & Higher Education & 330 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: WWU CEBR Whatcom County Top Employers 2021; Port of Bellingham; Bellingham Chamber. Employment figures are approximate and reflect most recent available survey data.}
+
+\subsubsection{Technology Sector}
+
+The technology sector is modest by Puget Sound standards. Faithlife (formerly Logos Bible Software) is the anchor private tech employer with approximately 420 employees. The Technology Alliance Group for Northwest Washington (TAGNW) supports regional tech development. WWU graduates note --- explicitly in documented alumni feedback --- that large corporations do not typically recruit in Bellingham and that the Seattle market comparison creates an asymmetric opportunity for local graduates willing to build networks organically.
+
+\subsection{Module 03: Tribal Economic Sovereignty}
+
+\textit{Note: All references in this module use nation-specific attribution per OCAP\textsuperscript{\textregistered} (Ownership, Control, Access, Possession) principles. ``Indigenous'' is not used as a generic term; Lummi Nation (Lhaq'temish) and Nooksack Tribe are named throughout.}
+
+\subsubsection{Lummi Nation (Lhaq'temish)}
+
+The Lummi Nation is the third-largest tribe in Washington State, governing more than 5,000 members and managing nearly 13,000 acres of tidelands on the Lummi Reservation, located approximately 8 miles west of Bellingham (Lummi Indian Business Council). The Lummi are the Lhaq'temish --- the original inhabitants of Washington's northernmost coast and southern British Columbia, a Coast Salish people with Xwlemi Chosen (North Straits Salish dialect) as their traditional language.
+
+\textbf{Economic sovereignty structure:} The Lummi Nation operates as a sovereign government with independent economic development authority. Key economic entities include:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Lummi Commercial Company (LCC)} --- established 2001, manages consumer goods and services businesses
+  \item \textbf{Lummi Development Holding Company} --- established 2012, manages government contracting
+  \item \textbf{Silver Reef Casino, Hotel and Spa} --- operated by LCC, the 8th-largest employer in Whatcom County
+  \item \textbf{Lummi Bay Hatchery and Skookum Creek Hatchery} --- produce 1.5 million Coho yearlings annually
+  \item \textbf{Lummi Foreign Trade Zone} --- federal FTZ eliminating certain customs duties on imports/exports through reservation
+\end{itemize}
+
+\textbf{Fisheries co-management:} The 1974 Boldt Decision (United States v.\ Washington) confirmed that tribes party to the 1855 Point Elliott Treaty, including the Lummi Nation, have a legal right to 50\% of the annual harvestable salmon catch in Washington waters. This treaty right makes the Lummi Nation a structural co-manager of Whatcom County's most significant natural resource, with direct economic implications for commercial fishing, hatchery operations, and watershed management.
+
+The Lummi Nation household income (\$61,861) exceeds the American Indian/Alaska Native national average (\$49,906) but trails Whatcom County overall (\$72,055) (Lummi CEDS, LIBC). Per capita income on the reservation is below county average, partially reflecting multigenerational household structures (average Lummi household size: 2.69 vs.\ county average of 2.44).
+
+\subsubsection{Nooksack Tribe}
+
+The Nooksack Tribe is located in the eastern Whatcom County watershed, with territory centered on the Nooksack River basin. The Nooksack Tribe and Lummi Nation collaborated on the \emph{Salmon Need Water} initiative, focused on water rights adjudication for the Nooksack watershed --- a legal and economic process with significant downstream implications for agricultural and municipal water users throughout Whatcom County.
+
+\textbf{Data note:} Publicly available economic data specific to the Nooksack Tribe is less granular than Lummi Nation data. This reflects limited published documentation, not diminished significance. Future research would benefit from direct engagement with Nooksack Tribal government for updated economic impact data.
+
+\subsubsection{Northwest Indian College}
+
+Northwest Indian College, located on the Lummi Reservation, is the only accredited tribal college in Washington, Oregon, and Idaho. It represents a distinct educational and workforce pipeline outside the Western Washington University or Whatcom Community College systems, serving Lummi and other tribal member students with culturally grounded programming.
+
+\subsection{Module 04: Higher Education \& Workforce Development}
+
+\subsubsection{Western Washington University}
+
+Western Washington University is the dominant higher education institution in the region and the third-largest employer in Whatcom County by total economic impact. Key metrics from WWU's own economic impact study:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{LC{3.5cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} & \tableheader{Source} \\
+\midrule
+Direct employment & 1,961 jobs & WWU Economic Impact Study \\
+Total employment impact & 3,381 jobs & WWU Economic Impact Study \\
+Share of Bellingham nonfarm jobs & \textasciitilde4\% & WWU Economic Impact Study \\
+Employment multiplier & \textasciitilde1.7$\times$ & WWU Economic Impact Study \\
+Capital expenditures & \$138.5M & WWU Economic Impact Study \\
+Construction share of capex & 35.51\% & WWU Economic Impact Study \\
+Student food expenditure & \$28.3M & WWU Economic Impact Study \\
+Student personal expenditure & \$66.3M & WWU Economic Impact Study \\
+Degrees awarded (2023) & 3,729 (BA/BS) & DataUSA 2023 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Structural tension:} Alumni feedback documented in university media (WWU \emph{The Front}, October 2025) reveals a consistent pattern: WWU graduates report that large corporations do not actively recruit in Bellingham, creating a local talent pool that either migrates to Seattle or builds careers through informal networking rather than formal corporate pipelines. Kaiser Borsari Hall (WWU's new electrical engineering, energy science, and computer science building, opened October 2025) represents a strategic investment in the pipeline, but the structural limitation of Bellingham's corporate recruitment presence remains.
+
+\subsubsection{Supporting Institutions}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Whatcom Community College} --- 988 degrees awarded 2023; serves regional workforce development
+  \item \textbf{Bellingham Technical College} --- 724 degrees awarded 2023; healthcare and manufacturing focus; approximately 330 employees
+  \item \textbf{Northwest Indian College} --- tribal college serving Lummi and Coast Salish students; only such accredited institution in the tri-state region
+  \item \textbf{WWU Small Business Development Center (SBDC)} --- free advisory services for small business owners; part of the Washington SBDC network
+\end{itemize}
+
+\subsection{Module 05: Regional Position \& Cross-Border Economy}
+
+\subsubsection{The Corridor Position}
+
+Bellingham's economic identity is shaped by its location between two major metros. Seattle (90 miles south) provides the dominant inbound migration and demand pressure; Vancouver~BC (60 miles north) provides cross-border retail activity and some residential demand from Canadian buyers. This corridor position creates both structural demand tailwinds and structural vulnerabilities.
+
+\subsubsection{Cross-Border Retail}
+
+Bellingham has long served as a destination for Canadian shoppers, particularly during periods when the Canadian dollar was at parity or near-parity with the USD. Bellis Fair Mall employs approximately 3,000 people full- and part-time, with a significant share of customer traffic historically originating from BC. This concentration creates exposure: exchange rate shifts of 5--10\% meaningfully affect cross-border shopping patterns, and customs policy changes (increased duty-free thresholds, NEXUS delays) can suppress or stimulate flows.
+
+\textbf{Data gap:} Granular, time-series data on Canadian cross-border retail's share of Whatcom County retail revenue is not consistently published. Chamber of Commerce estimates are available but lack longitudinal depth. This is a documented research gap, not a research choice.
+
+\subsubsection{I-5 Corridor Migration}
+
+Seattle homebuyers represented the single largest inbound search cohort for Bellingham (Redfin, Oct--Dec 2025). This is consistent with long-running patterns of Puget Sound metro overflow migrating north: Marysville, Burlington, Mount Vernon, and then Bellingham represent the successive rings of Seattle pricing pressure along the I-5 corridor. Remote work normalization since 2020 has accelerated this dynamic.
+
+\subsubsection{Transportation Infrastructure}
+
+Bellingham International Airport serves regional connections. BNSF (Burlington Northern Santa Fe), Canadian National, and Canadian Pacific railroads provide freight rail service. Four US--Canada border crossings operate in Whatcom County (two at Blaine, one at Lynden, one at Sumas), providing the logistical infrastructure that supports cross-border commerce.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Approach} \\
+\midrule
+Tribal sovereignty data & ABSOLUTE & Nation-specific attribution throughout. Lummi Nation and Nooksack Tribe named explicitly. OCAP\textsuperscript{\textregistered} principles applied. \\
+Treaty rights (Boldt Decision) & GATE & Presented as legal fact with citation. No policy advocacy on fisheries management. \\
+Employment estimates & GATE & All figures attributed to specific survey and date; uncertainty noted where present. \\
+Cross-border retail estimates & ANNOTATE & Data gap acknowledged; available estimates cited with appropriate uncertainty framing. \\
+Housing affordability & ANNOTATE & Data presented without policy advocacy on zoning, density, or affordability programs. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=*]
+  \item Port of Bellingham --- Largest Employers Registry. \url{portofbellingham.com}
+  \item U.S. Bureau of Economic Analysis --- Whatcom County per capita income data
+  \item Northwest Multiple Listing Service (NWMLS) --- Whatcom County housing transaction data
+  \item Lummi Indian Business Council --- Comprehensive Economic Development Strategy (CEDS), April 2023
+\end{itemize}
+
+\subsubsection{Peer-Reviewed \& Institutional Research}
+\begin{itemize}[leftmargin=*]
+  \item Western Washington University Center for Economic \& Business Research (CEBR) --- Whatcom County Top Employers 2021
+  \item Western Washington University --- Economic Impact Study (published on \url{wwu.edu/economic-impact})
+  \item DataUSA --- Bellingham, WA profile: employment, income, demographics. 2023 data.
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Publications}
+\begin{itemize}[leftmargin=*]
+  \item Bellingham Regional Chamber of Commerce --- Business \& Industry Overview; Lummi Nation profile
+  \item Redfin Real Estate --- Bellingham Housing Market data, January 2026; 2025 Year in Review
+  \item Zillow Home Value Index (ZHVI) --- Bellingham, WA, January 2026
+  \item Sammamish Mortgage --- Bellingham Real Estate Market 2026; Home Buying Guide 2025
+  \item Josh and Jolene Baijot / Whatcom County Market Update, August 2025 (NWMLS data)
+  \item WWU \emph{The Front} --- ``From Classroom to Career: Are WWU Majors Job-Ready?'' October 2025
+\end{itemize}
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, sourced research document covering the Bellingham/Whatcom County market across five modules: housing and real estate, economic base and employers, tribal economic sovereignty (Lummi Nation and Nooksack Tribe), higher education and workforce development, and regional/cross-border positioning. All findings are attributed to professional sources. The document acknowledges calibration against the C89 (Seattle) baseline: 1,311-line depth reflects available source record, not analytical compression.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+BELLINGHAM MARKET MISSION — WAVE ARCHITECTURE
+
+Wave 0: Foundation (Sequential, Haiku)
+  |-- Shared schemas
+  |-- Source index initialization
+  |-- Module template scaffolding
+
+Wave 1A (Parallel, Sonnet + Opus)     Wave 1B (Parallel, Sonnet + Opus)
+  |-- Module 01: Housing               |-- Module 03: Tribal Sovereignty
+  |-- Module 02: Economic Base         |-- Module 04: Higher Education
+
+Wave 2: Regional Module (Sequential, Sonnet)
+  |-- Module 05: Regional Position & Cross-Border
+
+Wave 3: Synthesis (Sequential, Opus)
+  |-- Hinge City integration layer
+  |-- Cross-module consistency pass
+  |-- Calibration note review
+
+Wave 4: Publication + Verification (Sequential, Sonnet)
+  |-- Source validation
+  |-- Final assembly
+  |-- Delivery package
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+D-01 & Housing \& Real Estate Module & Price data sourced from NWMLS/Redfin/Zillow; migration driver quantified & Module 01 \\
+D-02 & Economic Base Module & Top 10 employers with counts and sources; sector table complete & Module 02 \\
+D-03 & Tribal Sovereignty Module & Lummi and Nooksack named throughout; Boldt Decision cited; OCAP applied & Module 03 \\
+D-04 & Higher Education Module & WWU impact figures cited from institutional source; SBDC noted & Module 04 \\
+D-05 & Regional Position Module & Cross-border data gap acknowledged; Seattle migration pattern documented & Module 05 \\
+D-06 & Hinge City Synthesis & One economic force traced through all five modules explicitly & Wave 3 \\
+D-07 & Calibration Note & 1,311-line depth vs.\ C89 1,568-line baseline stated on title page & Meta \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Token Est.} \\
+\midrule
+Wave 0 Scaffold & None & Haiku & 4K \\
+Module 01 Housing & Wave 0 & Sonnet & 18K \\
+Module 02 Economic Base & Wave 0 & Sonnet & 18K \\
+Module 03 Tribal Sovereignty & Wave 0 & Opus & 22K \\
+Module 04 Higher Ed & Wave 0 & Sonnet & 16K \\
+Module 05 Regional & Modules 01--04 & Sonnet & 14K \\
+Wave 3 Synthesis & All modules & Opus & 20K \\
+Verification Pass & Synthesis & Sonnet & 12K \\
+\midrule
+\textbf{Total} & & & \textbf{124K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Assigned Work} \\
+\midrule
+Opus & 33\% & FLIGHT coordination; tribal sovereignty module (CRAFT-SOVR); Hinge City synthesis (INTEG); market analysis judgment calls (CRAFT-MARKET) \\
+Sonnet & 57\% & All EXEC document production; SCOUT source gathering; VERIFY validation; PLAN wave decomposition; CAPCOM HITL \\
+Haiku & 10\% & BUDGET tracking; LOG commit messages; Wave 0 scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{2.5cm}L{2.5cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Sessions} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 0.5 \\
+1A/1B & Parallel Research & Parallel (2 tracks) & Sonnet/Opus & 2 \\
+2 & Regional Module & Sequential & Sonnet & 0.5 \\
+3 & Synthesis & Sequential & Opus & 1 \\
+4 & Verification & Sequential & Sonnet & 0.5 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W0-01 & Create module template (schema: topic, findings, tables, sources, data-gap notes) & Haiku \\
+W0-02 & Initialize source index: NWMLS, Redfin, Zillow, WWU CEBR, LIBC CEDS, Port of Bellingham, DataUSA & Haiku \\
+W0-03 & Set calibration constant: \texttt{BASELINE\_C89=1568}, \texttt{BASELINE\_THIS=1311} & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (EXEC-A, Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W1A-01 & Module 01: Housing --- price table, migration data, outlook narrative & Sonnet \\
+W1A-02 & Module 02: Economic Base --- sector table, top 10 employers table, tech note & Sonnet \\
+W1A-03 & CRAFT-MARKET review of Modules 01--02 & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (EXEC-B, Opus/Sonnet):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W1B-01 & Module 03: Tribal Sovereignty --- Lummi CEDS data, Boldt Decision, OCAP framing & Opus \\
+W1B-02 & Module 04: Higher Education --- WWU impact table, SBDC, tension narrative & Sonnet \\
+W1B-03 & CRAFT-SOVR review of Module 03 for attribution accuracy & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Regional Module}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W2-01 & Module 05: Regional Position --- corridor diagram, cross-border analysis, data gap acknowledgment & Sonnet \\
+W2-02 & INTEG consistency pass across all five modules & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W3-01 & Hinge City integration: trace one economic force through all five modules & Opus \\
+W3-02 & Calibration review: confirm 1,311-line note appears on title page and intro & Opus \\
+W3-03 & Through-line paragraph: Amiga Principle applied to Bellingham's signal density & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 4: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W4-01 & Source validation: every numerical claim has attribution & Sonnet \\
+W4-02 & Tribal attribution audit: no generic ``Indigenous'' references & Sonnet \\
+W4-03 & Final assembly and PDF compilation & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Wave 0 scaffold (shared schemas, source index) loaded into context before both Wave 1 tracks --- single cache prime, dual-track benefit
+  \item LIBC CEDS source document loaded in Wave 1B cache for Module 03; not reloaded in subsequent waves
+  \item WWU economic impact study loaded in Wave 1B; reused for Wave 3 synthesis
+  \item 5-minute cache TTL window exploited for CRAFT-MARKET and CRAFT-SOVR review tasks scheduled immediately after EXEC outputs
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tokens In} & \tableheader{Tokens Out} & \tableheader{Model} \\
+\midrule
+Wave 0 & 4K & 2K & Haiku \\
+Wave 1A & 24K & 16K & Sonnet/Opus \\
+Wave 1B & 28K & 18K & Opus/Sonnet \\
+Wave 2 & 22K & 14K & Sonnet/Opus \\
+Wave 3 & 28K & 16K & Opus \\
+Wave 4 & 18K & 8K & Sonnet \\
+\midrule
+\textbf{Total} & \textbf{124K} & \textbf{74K} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0 Foundation
+  +-- W1A: Modules 01, 02 (parallel)
+  +-- W1B: Modules 03, 04 (parallel)
+         |
+         +-- W2: Module 05 (depends on 01-04)
+                  |
+                  +-- W3: Synthesis (depends on all 5 modules)
+                           |
+                           +-- W4: Verification + Publication
+                                    |
+                                    +-- CAPCOM Gate: Human review
+                                             |
+                                             +-- DELIVERY
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Action} \\
+\midrule
+Safety-critical & Non-negotiable boundaries & 5 & BLOCK \\
+Core functionality & Deliverable acceptance (SC coverage) & 18 & BLOCK \\
+Integration & Cross-module validation & 5 & BLOCK \\
+Edge cases & Robustness and data gaps & 4 & LOG \\
+\midrule
+\textbf{Total} & & \textbf{32} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to NWMLS, Redfin/Zillow, WWU CEBR, LIBC, Port of Bellingham, or DataUSA. Zero entertainment media or unsourced claims. \\
+SC-NUM & Numerical attribution & Every price, employment count, percentage, or dollar figure attributed to specific source with collection date. \\
+SC-IND & Tribal attribution & No use of generic ``Indigenous peoples.'' Lummi Nation (Lhaq'temish) and Nooksack Tribe named specifically throughout Module 03. \\
+SC-ADV & No policy advocacy & Document presents affordability, fisheries, and cross-border data without advocating for specific policy positions. \\
+SC-CAL & Calibration note present & Title page and introduction explicitly state 1,311-line depth reflects available source record; C89 baseline reference included. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-01: Price + DOM + YoY with source attribution & CF-01, CF-02 & Pending \\
+SC-02: Seattle migration driver quantified & CF-03 & Pending \\
+SC-03: Top 10 employers with counts and sectors & CF-04, CF-05 & Pending \\
+SC-04: Lummi/Nooksack named; no generic attribution & SC-IND & Pending \\
+SC-05: Silver Reef as 8th-largest employer documented & CF-06 & Pending \\
+SC-06: Boldt Decision cited in co-management context & CF-07 & Pending \\
+SC-07: WWU impact quantified from institutional source & CF-08, CF-09 & Pending \\
+SC-08: Cross-border vulnerability characterized & CF-10 & Pending \\
+SC-09: Calibration note present & SC-CAL & Pending \\
+SC-10: Each module self-contained & IN-01 & Pending \\
+SC-11: All numerical claims attributed & SC-NUM & Pending \\
+SC-12: Hinge City synthesis traces one force through all 5 modules & IN-02, IN-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates; calibration oversight \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; evidence compilation; NWMLS/Redfin/LIBC data \\
+EXEC-A & Executor & Modules 01 \& 02 document production \\
+EXEC-B & Executor & Modules 03 \& 04 document production \\
+CRAFT-MARKET & Market Specialist & Housing and economic base analysis; price trend judgment \\
+CRAFT-SOVR & Sovereignty Specialist & Lummi Nation and Nooksack Tribe analysis; OCAP compliance \\
+VERIFY & Verification & Source validation; attribution audit; tribal naming review \\
+INTEG & Integration Agent & Cross-module Hinge City relationship validation \\
+CAPCOM & HITL Interface & Human approval at Wave 2/4 boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; calibration note tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Modules & 5 \\
+Waves & 5 (0--4) \\
+Parallel Tracks & 2 (Wave 1A/1B) \\
+CAPCOM Gates & 2 (Wave 2 exit, Wave 4 exit) \\
+Total Tokens (estimated) & 124K input / 74K output \\
+Model Split & Opus 33\% / Sonnet 57\% / Haiku 10\% \\
+Total Tests & 32 (5 safety-critical BLOCK, 18 core BLOCK, 5 integration BLOCK, 4 edge LOG) \\
+Calibration Baseline & 1,311 lines (C89 reference: 1,568 lines) \\
+Primary Data Sources & NWMLS, Redfin, Zillow, WWU CEBR, LIBC CEDS, Port of Bellingham, DataUSA \\
+Key Sensitivity & Lummi Nation (Lhaq'temish) and Nooksack Tribe sovereignty; OCAP attribution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``The spaces between Seattle and Vancouver~BC are where Bellingham lives. A smaller source record is not a thinner city --- it is a younger signal. The Amiga Principle runs everywhere: specialized architecture produces more insight per data point than brute-force accumulation. 1,311 honest lines outperform 1,568 padded ones. Depth matched to available material is the only calibration that matters.''}
+
+\vspace{0.5em}
+\hfill --- GSD Bellingham Market Mission, Through-Line
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,956 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology domain color scheme
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{PNW Signal Stack}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Fox Infrastructure Group},
+  pdftitle={PNW Signal Stack -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Pacific Northwest\\[0.3em]Signal Stack}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Broadcasting, Spectrum, Aerial Networks \& Pacific Rim Compute}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{0.4cm}
+{\normalsize\sffamily\textcolor{accent}{From KOMO Channel 4 to stratospheric mesh nodes,\\from Paine Field workshops to the Pacific Rim trade grid}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (8 modules) \quad|\quad Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{PNW Signal Stack --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Research / Ready for Mission Execution}
+\metafield{Depends On:}{Fox Infrastructure Group Master Plan, GSD Mesh Prototype Spec, gsd-chipset-architecture-vision}
+\metafield{Context:}{Puget Sound as prototype design center; Bay Area as large-scale deployment target; Pacific Rim as the trade zone this infrastructure will serve}
+
+\subsection{Vision}
+
+The Pacific Northwest sits at one of the most consequential junctions in the history of human communication infrastructure. Beneath its grey skies, the same region that pioneered Boeing's aluminum superstructures, that gave birth to Amazon's cloud and Microsoft's enterprise compute, that carved the Amiga Principle into silicon --- this same region remains, in 2026, partially stranded by spectrum scarcity, broadcast monopoly, and the invisible walls between licensed frequencies and the public imagination.
+
+The PNW Signal Stack project begins with something deceptively simple: understanding what frequencies already fill the air above Puget Sound. KOMO 4 first signed on in December 1953. KING 5 received its NBC affiliation in 1959 after a local broadcasting dynasty lobbied for it. KCTS 9 lit up from the University of Washington campus in 1954. These channels are not just television stations --- they are 70-year-old proof that local communities can own pieces of the electromagnetic commons. The story of how those channels were assigned, bought, consolidated, and now serve as the template for a new distributed signal architecture is the spine of this research.
+
+The vision extends upward through the spectrum. Above the AM broadcast band and the FM dial, above the VHF television channels and the UHF allocations, lies a continuum of frequencies that the FCC licenses, the ITU coordinates, and ordinary citizens can lawfully access with the right knowledge and hardware. HAM radio operators already know this. CB truckers know a few slices. But the DIY electronics community is beginning to understand that a Raspberry Pi, a software-defined radio dongle, and a rooftop antenna array can do things that would have required a broadcast engineering degree in 1975. Low-power AM stations, Part 15 devices, LPFM licenses, mesh network panels --- these are the grassroots signal infrastructure of the next decade.
+
+The vision ascends further still: to tethered aerostats floating at 300 meters above Puget Sound, carrying LTE base stations that serve the gaps between towers. To stratospheric balloon platforms at 20 kilometers altitude, proven by Google Loon and Raven Aerostar to deliver 4G/5G connectivity to standard smartphones below. To the Boeing--NVIDIA axis: aircraft as mobile compute platforms, cargo logic evolved from Tapestry Solutions' AI load-planning work into a full ``compute on wings'' paradigm. And finally, to the Pacific Rim trade zone itself, where Amazon and Microsoft are each spending more capital in 2026 than the entire US energy sector --- and where the Puget Sound prototype, refined at Paine Field and Boeing Field, becomes the scalable template for a western seaboard corridor linking Puget Sound to the Bay Area and beyond to the full Pacific trade grid.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Broadcast monopoly obscures spectrum opportunity.} The major PNW TV stations (KOMO, KING, KIRO, KCPQ, KCTS) are now owned by four national media groups (Sinclair, Tegna, Cox, Fox Television Stations). The historical diversity of local licensees has been replaced by consolidated ownership, and most residents have no awareness that dozens of low-power, LPFM, and unlicensed Part 15 channels exist that they could legally operate or petition for.
+
+  \item \textbf{Spectrum knowledge is gatekept.} FCC licensing procedures, the NTIA frequency allocation table, Part 15 power limits, HAM licensing pathways, and LPFM application windows are each documented separately in bureaucratic language. A complete, PNW-specific spectrum guide does not exist in accessible form.
+
+  \item \textbf{Rural and marine connectivity gaps persist.} The Puget Sound basin, the San Juan Islands, the Olympic Peninsula, and the Cascades corridor all have coverage gaps that licensed broadcasters have no financial incentive to fill. HAPS and tethered aerostat technology can fill these gaps, but no local prototype has been deployed as a public-interest infrastructure asset.
+
+  \item \textbf{The aerospace-to-compute pipeline is underutilized.} Boeing's Everett campus and Paine Field's WATR Center graduate roughly 300 aerospace technicians per year. The retraining pathway from aerospace manufacturing into edge compute hardware, RF systems, and aerial networking is largely unarticulated, leaving a trained workforce without a clear trajectory into the next infrastructure wave.
+
+  \item \textbf{Pacific Rim trade compute integration is nascent.} Amazon (Seattle HQ) and Microsoft (Redmond HQ) are each committing hundreds of billions to global data center expansion, yet Puget Sound has no formal role as the ``prototype design center'' for Pacific Rim compute infrastructure. The connection between local manufacturing capability, local cloud compute, and the trans-Pacific trade corridor remains undrawn.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Signal Stack:} A vertically integrated communications and compute architecture, grounded in public spectrum knowledge, ascending through DIY electronics and mesh panels, lifted by aerial network platforms, and integrated with the Pacific Rim compute backbone via Boeing logistics and Amazon/Microsoft cloud rails.
+
+\subsubsection{PNW Signal Stack --- Vertical Architecture}
+
+\begin{asciibox}
+ALTITUDE / LAYER        TECHNOLOGY                    JURISDICTION
+================================================================================
+Orbital (LEO/MEO)    Starlink, OneWeb, GPS          FCC/ITU international
+Stratospheric HAPs   Raven Aerostar, SoftBank        FCC Part 101 / ITU F.1500
+(17-21 km)           Sunglider, Sceye airship        Experimental authorizations
+--------------------------------------------------------------------------------
+Upper Troposphere    Tethered aerostats              FAA Notice to Airmen (NOTAM)
+(300-1500m)          LTE/5G AeroNode payloads        FCC Part 87 (aerostat regs)
+                     Altaeros ST-300 / ST-Flex
+--------------------------------------------------------------------------------
+Low Altitude Mesh    802.11s mesh panels             FCC Part 15 / Part 97 (HAM)
+(Rooftop / Tower)    Weather station sensors         Unlicensed ISM bands
+                     SDR monitoring arrays           Licensed HAM nodes
+--------------------------------------------------------------------------------
+Ground Spectrum      FM broadcast 88-108 MHz         FCC Part 73 / LPFM Part 73
+                     AM broadcast 540-1700 kHz       Part 15 unlicensed
+                     TV VHF/UHF Ch 2-51              Digital ATSC 3.0
+                     HAM HF/VHF/UHF bands            FCC Part 97
+                     CB 27 MHz, GMRS 462/467 MHz     FCC Parts 95, 95E
+                     Public Safety 700/800 MHz        FCC Part 90
+================================================================================
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE MAP (8 parallel tracks, Fleet profile)
+============================================================
+  M1-BROADCAST    M2-SPECTRUM    M3-DIY-RF      M4-AERIAL
+  PNW TV/Radio    FCC/Regs       Electronics    HAPS/Aerostat
+  History         Framework      & Builds       Networks
+       |               |              |              |
+       +-------+--------+------+-------+             |
+               |               |                     |
+          M5-AEROSPACE    M6-PUGET-SOUND              |
+          Boeing/Paine    Prototype Design  <----------+
+          Field/WATR      Center
+               |               |
+               +-------+--------+
+                       |
+               M7-PACIFIC-RIM    M8-GLOBAL-DEPLOY
+               Amazon/MSFT       Western Seaboard
+               Compute Layer     Pacific Rim Grid
+============================================================
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: PNW Broadcast Heritage}
+Complete history of television and radio broadcasting in Washington, Oregon, and British Columbia from first license to ATSC 3.0 digital transition. Station-by-station profiles of all major channels. Current ownership structures, subchannels, and digital multiplex assignments.
+
+\subsubsection{Module 2: Spectrum \& Regulatory Framework}
+Full FCC frequency allocation table as applied to the PNW. NTIA federal allocations. Part 15, Part 73 (broadcast), Part 97 (HAM), Part 95 (CB/GMRS), Part 101 (fixed/mobile microwave). LPFM licensing windows. Open public-use spectrum inventory with power limits and antenna height restrictions.
+
+\subsubsection{Module 3: DIY RF \& Computing Builds}
+Practical electronics guide: low-power AM station build (Part 15.219 compliant, 100mW, 3-meter antenna). LPFM transmitter design. SDR monitoring rig (RTL-SDR / HackRF). Rooftop solar weather station with mesh data uplink. Raspberry Pi / ESP32 mesh network node. HAM license pathway (Technician through Extra class).
+
+\subsubsection{Module 4: Aerial Network Infrastructure}
+Tethered aerostat LTE/5G deployment: Altaeros ST-300, Raven Aerostar Thunderhead. High-altitude platform stations (HAPS): Raven Thunderhead, SoftBank Sunglider, BAE PHASA-35, Sceye airship. Loon Protocol legacy: balloon-to-balloon mesh backhaul. FAA airspace coordination (NOTAM, Class E/A boundary). ITU Resolution 221 HAPS frequency assignments.
+
+\subsubsection{Module 5: Aerospace Manufacturing Pipeline}
+Boeing Everett final assembly site (world's largest building by volume). Paine Field / WATR Center (Edmonds College, 300 graduates/year, Boeing BPET fast-track hiring). EVCC, Sno-Isle, and local school district pathways. Retraining pathway design: aerospace technician to edge compute / RF systems hardware technician. Boeing Field South Seattle as prototype test-and-transit hub.
+
+\subsubsection{Module 6: Puget Sound Prototype Design Center}
+Fox Infrastructure Group subsidiary co-op network model. Rapid prototyping loop: design at Puget Sound $\to$ prototype at Paine Field $\to$ test at Boeing Field / Moffett Field $\to$ iterate. Temporary housing / Paine Field barracks concept for retraining cohort leadership. Emerging co-op governance model (Tribal sovereign / OCAP-aligned data sovereignty layer).
+
+\subsubsection{Module 7: Pacific Rim Compute Layer}
+Amazon AWS us-west-2 (Oregon) and forthcoming Chile region. Microsoft Azure global fiber network (120,000 miles, custom Maia 100 AI accelerators). Grand Coulee hydro-electric competitive advantage for PNW compute. Pacific trade zone digital infrastructure: submarine cables, trans-Pacific latency optimization. Amazon/Microsoft Puget Sound campus as de facto Pacific Rim gateway.
+
+\subsubsection{Module 8: Global Deployment Architecture}
+Scale pattern: Puget Sound prototype $\to$ Bay Area (Moffett Field, Silicon Valley) $\to$ California coast $\to$ Pacific Rim corridor. Boeing Narrowband Research (BNR) transport concept: prototype hardware from SF Bay Area to Paine Field via Boeing logistics. Western Seaboard deployment spine linking trade nodes. Integration with Steve Yegge's Wasteland federation for compute task distribution.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: "pnw-signal-stack-v1"
+  profile: fleet
+  modules:
+    - id: M1-BROADCAST
+      role: historical-survey
+      model: claude-sonnet-4-6
+      priority: parallel-wave-1
+    - id: M2-SPECTRUM
+      role: regulatory-codex
+      model: claude-sonnet-4-6
+      priority: parallel-wave-1
+    - id: M3-DIY-RF
+      role: technical-build-guide
+      model: claude-sonnet-4-6
+      priority: parallel-wave-1
+    - id: M4-AERIAL
+      role: infrastructure-survey
+      model: claude-opus-4-6
+      priority: parallel-wave-1
+    - id: M5-AEROSPACE
+      role: workforce-pipeline
+      model: claude-sonnet-4-6
+      priority: parallel-wave-2
+    - id: M6-PUGET-SOUND
+      role: prototype-design
+      model: claude-opus-4-6
+      priority: parallel-wave-2
+    - id: M7-PACIFIC-RIM
+      role: compute-integration
+      model: claude-sonnet-4-6
+      priority: parallel-wave-2
+    - id: M8-GLOBAL-DEPLOY
+      role: synthesis-deployment
+      model: claude-opus-4-6
+      priority: wave-3-synthesis
+  haiku_roles:
+    - shared-schemas
+    - source-index
+    - scaffolding
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Full broadcast history of Washington state TV and radio (all FCC-licensed stations past and present)
+  \item Oregon and British Columbia broadcast context where it illuminates PNW patterns
+  \item Complete FCC spectrum allocation inventory for public-use, unlicensed, and licensed amateur bands
+  \item DIY electronics builds compliant with current FCC rules (Part 15, LPFM, HAM)
+  \item HAPS and tethered aerostat technology survey through March 2026
+  \item Boeing Everett / Paine Field workforce pipeline and retraining pathway design
+  \item Puget Sound co-op prototype design center governance model
+  \item Amazon AWS and Microsoft Azure Pacific Rim infrastructure as compute backbone
+  \item Western Seaboard deployment corridor: Puget Sound to Bay Area to Pacific Rim
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Cable television (Comcast, Cox) internal network architecture
+  \item Satellite constellation design (Starlink, OneWeb) beyond brief reference as overlay layer
+  \item International regulatory frameworks beyond ITU context for HAPS
+  \item Full Boeing manufacturing processes beyond workforce/prototype pipeline scope
+  \item Financial modeling of Fox Infrastructure Group subsidiary economics
+  \item Specific FCC license application engineering studies (referred to licensed broadcast engineers)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Every FCC-licensed broadcast TV and radio station in Washington state is inventoried with call sign, frequency, licensee, ownership group, and current format.
+  \item The full FCC frequency allocation table (DC to 300 GHz) is summarized with public-use bands, power limits, and PNW-specific notes highlighted.
+  \item Part 15 AM and FM unlicensed operation rules (15.209, 15.219, 15.221, 15.239) are documented with practical build guidance.
+  \item LPFM licensing pathway is fully documented with current FCC filing windows, power classes (10W / 100W), and community eligibility criteria.
+  \item HAM radio licensing pathway (Technician/General/Extra) and relevant PNW repeater networks are documented.
+  \item At least three complete DIY build specifications are provided: low-power AM station, SDR monitoring rig, and mesh network node.
+  \item HAPS and tethered aerostat technology is surveyed with at least five active programs profiled (Raven Aerostar, Altaeros, SoftBank Sunglider, BAE PHASA-35, Sceye).
+  \item The Boeing/Paine Field workforce pipeline is fully mapped from WATR Center curriculum through BPET fast-track to retraining pathway into RF/edge compute roles.
+  \item A Puget Sound Prototype Design Center governance model is specified, integrating Fox co-op subsidiaries, Tribal data sovereignty frameworks, and rapid prototyping loops.
+  \item Amazon AWS and Microsoft Azure PNW/Pacific Rim infrastructure is inventoried with data center locations, power commitments, and Pacific Rim expansion plans (including AWS Chile region, Azure Japan/Korea presence).
+  \item The Western Seaboard deployment corridor is mapped: Puget Sound $\to$ Bay Area (Moffett Field) $\to$ California coast $\to$ Pacific Rim nodes.
+  \item All builds, frequency use, and infrastructure designs are verified compliant with current FCC, FAA, and FTC regulations.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Note} \\
+\midrule
+Fox Infrastructure Group Master Plan & Parent architecture & Signal Stack is the communications spine of the FIG \\
+GSD Mesh Prototype Spec & Technical precursor & Mesh panel design inputs into M3/M4 \\
+GSD Chipset Architecture Vision & Compute model reference & Agnus/Denise/Paula node types inform aerial compute \\
+GSD OS Desktop Vision & End-user layer & Signal Stack provides the network substrate \\
+GSD Amiga Vision & Philosophical foundation & Specialized execution paths over brute-force infrastructure \\
+Wasteland/Gastown Integration & Federation layer & Signal Stack enables distributed compute task routing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The electromagnetic spectrum is one of the last true commons. Unlike land, it cannot be permanently owned --- only licensed, temporarily, under the public interest standard that has governed US broadcast law since the Radio Act of 1927. When KOMO 4 first broadcast from Seattle in December 1953, the Fisher Broadcasting family held a trust: the public's airwaves in exchange for local service. That trust has been honored unevenly ever since.
+
+What the Amiga Principle says, in hardware terms, is that small, specialized chips working in concert --- Agnus for DMA, Denise for video, Paula for audio, the 68000 for logic --- produce outcomes far exceeding what a single brute-force processor could achieve. The same principle applies to spectrum. Part 15 devices at 100 milliwatts, LPFM stations at 10 to 100 watts, HAM repeaters at a few hundred watts, HAPS platforms at legal EIRP limits --- each a small chip in a larger chipset, each occupying its designated frequency range, together constituting a communications fabric that serves every community from the San Juan Islands to the Silicon Valley data center campuses that look back across the Pacific toward the markets they serve.
+
+The spaces between the broadcast channels are not dead air. They are opportunity. Puget Sound is the workshop where that opportunity gets built.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{PNW Signal Stack --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for each of the eight research modules. It is intended to be read by GSD agents during module execution and by human reviewers during verification. Every quantitative claim is attributed. Cultural content uses nation-specific terminology per OCAP\textsuperscript{\textregistered} principles.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item Federal Communications Commission (FCC): fcc.gov --- all spectrum licensing and regulations
+  \item National Telecommunications and Information Administration (NTIA): ntia.gov --- federal spectrum allocations
+  \item ARRL (American Radio Relay League): arrl.org --- HAM radio licensing and regulations
+  \item FAA: faa.gov --- airspace regulations for aerostats and HAPS
+  \item ITU (International Telecommunications Union): itu.int --- international frequency coordination
+  \item QZVX Broadcast History: qzvx.com --- regional broadcast history archive
+  \item Raven Aerostar: ravenaerostar.com --- tethered and stratospheric platforms
+  \item HAPS Alliance: hapsalliance.org --- HAPS industry consortium
+  \item Snohomish County Workforce Development: snohomishcountywa.gov --- Paine Field training programs
+  \item Edmonds College WATR Center: watrcenter.edmonds.edu --- aerospace training programs
+\end{itemize}
+
+\subsection{Module 1: PNW Broadcast Heritage Reference}
+
+\subsubsection{Seattle-Tacoma Television History}
+
+The Seattle-Tacoma television market has been served continuously since 1948. The major milestones are as follows. KING-TV (Channel 5) is the oldest surviving station, launching as an NBC affiliate under the ownership of Dorothy Bullitt and King Broadcasting. KOMO-TV (Channel 4) signed on in December 1953 as the television extension of KOMO 1000 AM, with Fisher Broadcasting as original owner; it held NBC affiliation briefly before KING lobbied NBC successfully in 1959. KIRO-TV (Channel 7) signed on February 8, 1958, owned by Saul Haas (who also owned KIRO Radio), and became the market's CBS affiliate. KCTS-9 launched December 7, 1954, from the University of Washington campus, with equipment donated by Dorothy Bullitt of KING; it became the region's PBS affiliate.
+
+KMO-TV Channel 13 began broadcasting August 2, 1953, from Tacoma; after financial difficulties it passed through the Clover Park School District (as KCPQ, an educational/PBS station), was purchased by Kelly Broadcasting of Sacramento in 1980 as a commercial independent, and ultimately became the Fox affiliate after Tribune Broadcasting acquired it in 1999 and Fox Television Stations completed ownership in a subsequent trade with Nexstar.
+
+\subsubsection{Current Station Ownership Structure (2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.4cm}L{2cm}L{2.5cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Ch.} & \tableheader{Call Sign} & \tableheader{Network} & \tableheader{Owner} & \tableheader{Notes} \\
+\midrule
+4 & KOMO-TV & ABC & Sinclair & Also operates KUNS (CW duopoly) \\
+5 & KING-TV & NBC & Tegna (Nexstar acq. 2026) & Paired with KONG (Ch.6/16) \\
+6/16 & KONG & IND & Tegna/Nexstar & Kraken Hockey Network flagship \\
+7 & KIRO-TV & CBS & Cox Media Group & KSTW (Ch.11) went independent \\
+9 & KCTS & PBS & KCTS Television & Originated at U. of Washington 1954 \\
+10/22 & KZJO & MyTV & Fox TV Stations & Fox 13 Plus \\
+11 & KSTW & IND & CBS / Paramount & Formerly CW, now independent \\
+12 & KBTC & PBS & Bates Technical College & Second PBS signal for the market \\
+13 & KCPQ & FOX & Fox TV Stations & Moving to Denny Triangle 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Radio Heritage}
+
+Seattle's radio heritage begins with KFQX, Roy Olmstead's bootlegger station in the 1920s. KJR (950 AM) was one of the early major commercial stations. KISN (910 AM, Vancouver WA) became a legendary top-40 station from 1959 through 1976 before the FCC revoked its license due to violations involving undisclosed connections to political candidates. Washington state holds approximately 400+ FCC-licensed radio stations across AM, FM, LPFM, and translator categories.
+
+\subsection{Module 2: Spectrum \& Regulatory Framework Reference}
+
+\subsubsection{FCC Licensing Authority}
+
+The FCC is responsible for managing and licensing the electromagnetic spectrum for commercial users and non-commercial users including state, county, and local governments, covering public safety, commercial and non-commercial fixed and mobile wireless services, broadcast television and radio, satellite, and other services. Licenses are granted under the Radio Act of 1927's premise that the spectrum belongs to the public; licensees hold only the privilege of use, not property rights.
+
+\subsubsection{Part 15 Unlicensed Operation Rules}
+
+Key sections of 47 CFR Part 15 governing hobbyist and low-power broadcasting:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{CFR Section} & \tableheader{Band} & \tableheader{Rule / Power Limit} \\
+\midrule
+\S15.209 & General radiated limits & Field strength limits by frequency; governs most unlicensed emitters \\
+\S15.219 & AM broadcast band & Max 100 mW input to final RF stage; total antenna + ground lead $\leq$ 3 meters \\
+\S15.221 & Campus carrier current & Broadcast on educational institution campus; field strength $\leq$ \S15.209 at perimeter \\
+\S15.239 & FM broadcast 88--108 MHz & Field strength $\leq$ 250 \textmu V/m at 3 meters; $\approx$ 200 ft effective range \\
+\S15.23 & Hobbyist builds & Up to 5 units for personal use without FCC equipment authorization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Penalties for unlicensed operation beyond Part 15 limits: up to \$10,000 per day, maximum \$75,000 per violation sequence.
+
+\subsubsection{Licensed Low-Power Services}
+
+\begin{itemize}
+  \item \textbf{LPFM (Low Power FM):} Licensed under 47 CFR Part 73 Subpart G. Two power classes: LP-10 (10 watts ERP, 3.5 km service radius) and LP-100 (100 watts ERP, approximately 8 km radius). Eligible applicants: non-profit educational entities, community organizations. FCC opened a new NCE TV filing window in December 2024. FCC does not currently accept new full-power commercial TV applications.
+  \item \textbf{Traveler Information Stations:} AM band, maximum 10 watts transmitter output, antenna height not to exceed 15 meters (49.2 feet). Available only to governmental entities and park districts. Covered under Part 90.242.
+  \item \textbf{HAM (Amateur Radio) Service:} Licensed under 47 CFR Part 97. Three license classes: Technician (VHF/UHF privileges), General (most HF bands), Amateur Extra (all amateur privileges). ARRL administers volunteer examiner (VE) program for licensing.
+  \item \textbf{CB (Citizens Band):} 27 MHz, 40 channels, maximum 4 watts AM / 12 watts SSB. No license required. Governed by 47 CFR Part 95.
+  \item \textbf{GMRS (General Mobile Radio Service):} 462/467 MHz, license required (no exam), 5-year term, covers immediate family members. Maximum 50 watts on some channels.
+\end{itemize}
+
+\subsection{Module 3: DIY RF \& Computing Builds Reference}
+
+\subsubsection{Low-Power AM Station (Part 15.219 Compliant)}
+
+A legally compliant Part 15 AM broadcast station can be built with the following constraints: transmitter input power to final RF stage must not exceed 100 milliwatts (0.1 watts); total length of the antenna system including transmission line, radiator, and ground lead must not exceed 3 meters (10 feet). No FCC authorization is required to build and operate for personal use (up to 5 units per 47 CFR 15.23). Advertising may be aired. Published builds using kit transmitters (Hamilton Rangemaster type) have demonstrated effective coverage of approximately 0.5 to 2 miles in favorable terrain during daylight hours.
+
+\subsubsection{Software-Defined Radio (SDR) Monitoring Rig}
+
+Using an RTL-SDR USB dongle (\textasciitilde\$25) and open-source software (SDR\#, GQRX, GNU Radio), a hobbyist can monitor: AM/FM broadcast bands, aircraft ADS-B transponders (1090 MHz), weather satellite APT images (137 MHz NOAA), NOAA Weather Radio (162.4--162.55 MHz), marine AIS ship tracking (162 MHz), HAM VHF/UHF repeaters, and pager traffic. The HackRF One (\textasciitilde\$300) adds transmit capability from 1 MHz to 6 GHz. All reception is legal; transmission requires appropriate license or Part 15 compliance.
+
+\subsubsection{Mesh Network Node}
+
+A single-board computer (Raspberry Pi 4B or ESP32 variant) running OpenWRT or AREDN (Amateur Radio Emergency Data Network) firmware forms a mesh node. AREDN nodes operate on licensed HAM frequencies (2.4 GHz, 5 GHz, 900 MHz) and provide IP networking via mesh topology without centralized routing. A minimum of three nodes creates a self-healing mesh. Rooftop solar + LiFePO4 battery provides off-grid power autonomy for 72+ hours.
+
+\subsubsection{Rooftop Solar Weather Station}
+
+Using a Davis Instruments Vantage Pro2 or equivalent sensor array plus a Raspberry Pi data logger, a solar-powered rooftop weather station can transmit data to the Weather Underground or personal Influx/Grafana stack via mesh or WiFi uplink. Sensor package: temperature, relative humidity, barometric pressure, wind speed/direction, rain gauge, UV index, solar radiation. Data cadence: 2.5-second intervals. Power consumption: 1--3 watts average; 20W solar panel provides adequate charge margin in PNW conditions with a 12Ah LiFePO4 battery.
+
+\subsection{Module 4: Aerial Network Infrastructure Reference}
+
+\subsubsection{Tethered Aerostats}
+
+Tethered aerostats operate at low to medium altitudes (typically 100--1500 meters) and are regulated by FAA via NOTAMs and airspace coordination. The Altaeros ST-300 aerostat carries communications payloads including LTE base stations; Altaeros held a 5-year, \$99 million contract with US Customs and Border Patrol for persistent surveillance applications. The ST-Flex variant was trialed with World Mobile for community cellular coverage and with SoftBank HAPSMobile for HAPS integration. Tethered aerostats offer days-to-weeks of continuous deployment vs. hours for untethered platforms.
+
+\subsubsection{High-Altitude Platform Stations (HAPS)}
+
+Key programs as of March 2026:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Platform} & \tableheader{Developer} & \tableheader{Altitude} & \tableheader{Connectivity Demonstrated} \\
+\midrule
+Thunderhead & Raven Aerostar & 17--21 km & 4G LTE via Abside HAPS-RAN; 23 Mbps down / 6 Mbps up to unmodified phones; world record stratospheric duration April 2025 \\
+Sunglider & HAPSMobile/SoftBank & 19 km & LTE to standard devices from 62,500 ft; 15 hours video conferencing \\
+PHASA-35 & BAE Systems & 20 km & Stratospheric test flights at Spaceport America Dec 2024; targeting 2026 operations \\
+Sceye Airship & Sceye Inc. & 20 km & 5G demonstration; diurnal flight with renewable energy Aug 2024 \\
+Zephyr/AALTO & Airbus/AALTO & 21 km & 5G trials July 2024; UK CAA Design Organisation Approval Aug 2024 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Project Loon (Google/Alphabet) operated balloon-to-balloon mesh backhaul over multiple hops before landing traffic on the ground, providing a validated architecture for stratospheric mesh networks. Loon served hundreds of thousands of people in Kenya and Peru before shutting down in 2021 due to commercial viability challenges. The HAPS Alliance released its first Reference Architecture (``Cell Towers in the Sky'') in November 2024.
+
+\subsubsection{Boeing AI Cargo Logistics}
+
+Boeing's Tapestry Solutions subsidiary is applying AI and machine learning to its Transportation Intelligence Environment (TIE) platform for the US Department of Defense, including a Cargo Assistant for data entry and validation, a Free Query application with interactive mapping, and a generative AI Help Chat agent for load planning. This constitutes a foundation layer for a broader ``compute on cargo'' architecture where aircraft and vessels carry compute payloads alongside physical cargo.
+
+\subsection{Module 5: Aerospace Manufacturing Pipeline Reference}
+
+\subsubsection{Boeing Everett \& Paine Field}
+
+Boeing's Everett site is the world's largest building by volume, housing final assembly of the 747, 767, 777, and 787. The Paine Field-Snohomish County Airport hosts the Washington Aerospace Training and Research (WATR) Center, managed by Edmonds College through an operating agreement with the Aerospace Futures Alliance since 2010. The WATR Center graduates approximately 300 students per year. Boeing hires more than half directly; the remaining graduates are absorbed by approximately 150 Snohomish County aerospace suppliers. Boeing's Pre-Employment Training Program (BPET) allows WATR graduates to skip the standard hiring interview for designated manufacturing roles.
+
+\subsubsection{Educational Ecosystem at Paine Field}
+
+\begin{itemize}
+  \item \textbf{Edmonds College (EdCC):} Manages WATR Center; offers aerospace and advanced manufacturing programs. Located at 3008 100th St SW, Everett WA 98204.
+  \item \textbf{Everett Community College (EVCC):} Part of University Center of North Puget Sound, offering baccalaureate and graduate degrees in mechanical engineering, electrical engineering, and business.
+  \item \textbf{Sno-Isle Technical Skills Center:} Provides high school career and technical education in 19 courses across five pathways including aerospace and advanced manufacturing.
+  \item \textbf{Aerospace Joint Apprenticeship Committee (AJAC):} Statewide registered apprenticeship combining supervised OJT with college-level instruction, operating in Everett and Arlington.
+  \item \textbf{Center of Excellence for Aerospace and Advanced Manufacturing:} Facilitates industry-education coordination; located at Paine Field.
+\end{itemize}
+
+\subsection{Module 7: Pacific Rim Compute Layer Reference}
+
+\subsubsection{Amazon Web Services Pacific Infrastructure}
+
+AWS operates 38 regions with over 100 Availability Zones across 27 countries as of 2026. Key Pacific Rim facts: AWS us-west-2 (Oregon) and us-west-1 (Northern California) are the primary US West Coast regions. AWS launched a new region in Chile in 2026 (\$4B+ committed), directly connecting South American Pacific trade to the AWS backbone. AWS committed \$131 billion in capital expenditure in 2025, the majority directed at data center expansion. Amazon's total capex for 2026 is projected to exceed the entire publicly-traded US energy sector (Morningstar analysis). AWS Local Zones extend compute to within single-digit millisecond latency of end users in metro areas.
+
+\subsubsection{Microsoft Azure Pacific Infrastructure}
+
+Microsoft finished 2025 with more than 70 Azure regions and over 400 data centers globally, interconnected by 120,000 miles of dedicated fiber on its AI Wide Area Network. Microsoft is deploying custom Azure Maia 100 AI accelerators and Cobalt 100 ARM-based CPUs across its footprint. Azure spent \$37.5 billion in a single quarter (Q2 FY2026). Microsoft faces an estimated \$80 billion backlog of Azure orders constrained by power availability (Futurum Group). The Pacific Rim strategy encompasses Japan, Korea, Singapore, Australia, and India regions.
+
+\subsubsection{Grand Coulee Hydro Advantage}
+
+The Pacific Northwest's access to Columbia River hydroelectric power (Grand Coulee is the largest power producer in the United States) provides a structural cost advantage for energy-intensive compute workloads. BPA (Bonneville Power Administration) supplies low-carbon, low-cost power to the region's data centers, aligning with hyperscaler sustainability commitments.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Type} & \tableheader{Rule} \\
+\midrule
+FCC licensing guidance & GATE & Always direct readers to licensed broadcast engineers for actual license applications; this document is educational, not a substitute for legal/engineering counsel \\
+HAM transmit instructions & GATE & All transmit builds require appropriate FCC license; clearly distinguish receive-only from transmit \\
+Tethered aerostat deployment & GATE & FAA NOTAM filing required; airspace coordination mandatory before any deployment \\
+Indigenous data sovereignty & ABSOLUTE & All co-op governance referencing Coast Salish or other First Nations uses nation-specific names and OCAP\textsuperscript{\textregistered} frameworks; never generic ``Indigenous'' \\
+HAPS spectrum use & ANNOTATE & ITU Resolution 221 HAPS frequency assignments are evolving; verify with current ITU Radio Regulations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Regulatory Sources}
+\begin{itemize}
+  \item Federal Communications Commission. \textit{Low Power Radio: General Information}. fcc.gov/media/radio/low-power-radio-general-information
+  \item Federal Communications Commission. \textit{Title 47 CFR Parts 15, 73, 95, 97, 101}. ecfr.gov
+  \item Federal Communications Commission. \textit{How to Apply for a Radio or Television Broadcast Station}. fcc.gov/media/radio/how-to-apply
+  \item Federal Communications Commission. \textit{TV Query Broadcast Station Search}. fcc.gov/media/television/tv-query
+  \item FAA. \textit{High Altitude Platform Station Concept of Operations (ETM CONOPS)}. faa.gov
+  \item NASA/TM--20230018267. \textit{High Altitude Platform System (HAPS): LTE from the Stratosphere}. ntrs.nasa.gov
+  \item Snohomish County. \textit{Workforce Training Resources}. snohomishcountywa.gov/2195/Workforce-Training
+  \item Bonneville Power Administration. bpa.gov
+\end{itemize}
+
+\subsubsection{Research \& Professional Organizations}
+\begin{itemize}
+  \item ARRL. \textit{Part 15 Radio Frequency Devices}. arrl.org/part-15-radio-frequency-devices
+  \item HAPS Alliance. \textit{First Reference Architecture: Cell Towers in the Sky} (November 2024). hapsalliance.org
+  \item REC Networks. \textit{Part 15 FAQ: AM and FM Micro-power Broadcasting}. recnet.com
+  \item Prometheus Radio Project. \textit{How to Find Radio Station Licenses at the FCC}. prometheusradio.org
+  \item Raven Aerostar / Aerostar International. \textit{Thunderhead Balloon System: 4G LTE Stratospheric Connectivity}. ravenaerostar.com
+  \item Loon LLC. \textit{System Design of the Physical Layer for Loon's High-Altitude Platform}. Springer Journal on Wireless Communications and Networking, 2019.
+\end{itemize}
+
+\subsubsection{Broadcast History Archive}
+\begin{itemize}
+  \item QZVX Broadcast History \& Current Affairs. qzvx.com/television/ (Seattle-Tacoma market history)
+  \item NW Broadcasters. \textit{Seattle TV News Ratings Analysis}. nwbroadcasters.com
+  \item Edmonds College WATR Center. \textit{Boeing BPET Fast-Track Program}. watrcenter.edmonds.edu
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, multi-module reference document and prototype design specification for the Pacific Northwest Signal Stack: a vertically integrated communications and compute architecture spanning broadcast heritage, public spectrum knowledge, DIY RF electronics, aerial network platforms (tethered aerostats and HAPS), the Boeing/Paine Field aerospace-to-compute workforce pipeline, a Puget Sound co-op prototype design center, Amazon/Microsoft Pacific Rim compute integration, and a Western Seaboard global deployment corridor. The completed package becomes the primary reference for Fox Infrastructure Group subsidiary development and GSD ecosystem integration.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+========================================================
+WAVE 0 [Sequential / Haiku]
+  shared-schemas.json       source-index.yaml
+  frequency-allocation-db   station-inventory-template
+
+WAVE 1 [Parallel / 4 tracks]
+  TRACK A          TRACK B          TRACK C        TRACK D
+  M1-BROADCAST     M2-SPECTRUM      M3-DIY-RF      M4-AERIAL
+  TV/Radio hist.   FCC regs         Build specs    HAPS survey
+  [Sonnet]         [Sonnet]         [Sonnet]       [Opus]
+
+WAVE 2 [Parallel / 3 tracks]
+  TRACK E          TRACK F          TRACK G
+  M5-AEROSPACE     M6-PUGET-SOUND   M7-PACIFIC-RIM
+  Paine Field/     Prototype        AWS/Azure/
+  WATR/BPET        Design Center    Pacific Rim
+  [Sonnet]         [Opus]           [Sonnet]
+
+WAVE 3 [Sequential / Opus]
+  M8-GLOBAL-DEPLOY: Synthesis + Western Seaboard map
+  Cross-module integration + Deployment architecture
+
+WAVE 4 [Sequential / Sonnet]
+  Document assembly + verification + publication
+========================================================
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & PNW Station Inventory & All FCC-licensed WA broadcast stations with call signs, frequencies, owners & M1-BROADCAST \\
+2 & PNW Spectrum Guide & Full allocation table with public-use bands, Part 15 rules, power limits & M2-SPECTRUM \\
+3 & DIY Build Library & 3+ complete build specs (AM station, SDR rig, mesh node, weather station) & M3-DIY-RF \\
+4 & HAPS/Aerostat Survey & 5+ active programs profiled with technical specs and coverage data & M4-AERIAL \\
+5 & Workforce Pipeline Map & WATR Center to RF/compute retraining pathway fully documented & M5-AEROSPACE \\
+6 & Prototype Design Center Spec & Puget Sound co-op governance model with co-op subsidiary structure & M6-PUGET-SOUND \\
+7 & Pacific Rim Compute Map & AWS/Azure PNW and Pacific region infrastructure inventory & M7-PACIFIC-RIM \\
+8 & Global Deployment Architecture & Western Seaboard corridor + Pacific Rim integration specification & M8-GLOBAL-DEPLOY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{3cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 8K \\
+W0-SOURCE-INDEX & None & Haiku & 4K \\
+M1-BROADCAST & W0-SCHEMA & Sonnet & 35K \\
+M2-SPECTRUM & W0-SCHEMA & Sonnet & 45K \\
+M3-DIY-RF & M2-SPECTRUM & Sonnet & 40K \\
+M4-AERIAL & W0-SCHEMA & Opus & 50K \\
+M5-AEROSPACE & W0-SCHEMA & Sonnet & 30K \\
+M6-PUGET-SOUND & M5-AEROSPACE & Opus & 45K \\
+M7-PACIFIC-RIM & W0-SCHEMA & Sonnet & 35K \\
+M8-GLOBAL-DEPLOY & M4, M6, M7 & Opus & 60K \\
+VERIFY-INTEGRATION & All modules & Sonnet & 20K \\
+PUBLICATION-PASS & All modules & Sonnet & 25K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Model} & \tableheader{\% Budget} & \tableheader{Rationale} \\
+\midrule
+W0 Foundation & Haiku & 3\% & Schema and scaffolding; minimal judgment required \\
+M1/M2/M3/M5/M7 & Sonnet & 57\% & Structured survey, inventory, and documentation tasks \\
+M4/M6/M8 + Verify & Opus & 30\% & Judgment-heavy synthesis, governance design, cross-module integration, deployment architecture \\
+Publication pass & Sonnet & 10\% & Document assembly, formatting, verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}C{2cm}C{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Components} \\
+\midrule
+0 & Foundation schemas & Sequential & Haiku & 2 components \\
+1 & Parallel survey (4 tracks) & Parallel & Sonnet + Opus & M1, M2, M3, M4 \\
+2 & Parallel synthesis (3 tracks) & Parallel & Sonnet + Opus & M5, M6, M7 \\
+3 & Global integration & Sequential & Opus & M8-GLOBAL-DEPLOY \\
+4 & Publication + verification & Sequential & Sonnet & VERIFY + PUBLISH \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+W0-SCHEMA & shared-schemas.json & Haiku & Station inventory schema, HAPS profile schema, workforce pathway schema, compute region schema \\
+W0-SOURCE-INDEX & source-index.yaml & Haiku & FCC database URLs, ARRL resources, Paine Field contacts, AWS/Azure region endpoints \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks (4 Tracks)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Model} & \tableheader{Deliverable} & \tableheader{Key Tasks} \\
+\midrule
+M1-BROADCAST & Sonnet & Station inventory + history & FCC TV Query scrape; QZVX history archive; current ownership mapping; subchannel enumeration \\
+M2-SPECTRUM & Sonnet & Spectrum guide + regs & NTIA allocation table; Part 15/73/95/97 rule summary; LPFM application guide; power limits table \\
+M3-DIY-RF & Sonnet & Build library & Part 15 AM station spec; SDR rig BOM; mesh node config; weather station integration \\
+M4-AERIAL & Opus & HAPS/aerostat survey & 5+ platform profiles; Loon architecture reference; FAA NOTAM procedures; ITU Res. 221 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Parallel Synthesis Tracks (3 Tracks)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Model} & \tableheader{Deliverable} & \tableheader{Key Tasks} \\
+\midrule
+M5-AEROSPACE & Sonnet & Workforce pipeline map & WATR Center curriculum; BPET program; AJAC apprenticeships; retraining pathway to RF/compute \\
+M6-PUGET-SOUND & Opus & Prototype design center spec & Fox co-op subsidiary governance; Paine Field barracks concept; OCAP-aligned data sovereignty; rapid prototype loop \\
+M7-PACIFIC-RIM & Sonnet & Compute infrastructure map & AWS us-west + Chile; Azure Pacific; Grand Coulee hydro advantage; submarine cable map \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Global Synthesis (M8-GLOBAL-DEPLOY)}
+
+Sequential Opus pass integrating all Wave 1 and Wave 2 outputs into the Western Seaboard deployment corridor specification: Puget Sound prototype center $\to$ Boeing Field south Seattle $\to$ Moffett Field Bay Area (via BNR-SF transport concept) $\to$ California coast nodes $\to$ Pacific Rim gateway integration. Includes Wasteland federation task-routing layer and Amazon/Microsoft compute overlay.
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 0 outputs (shared schemas, source index) are cached at session start and reused across all Wave 1 parallel tracks within the 5-minute cache TTL window.
+  \item M2-SPECTRUM output (regulatory reference) is provided as context to M3-DIY-RF at Wave 1 cache retrieval; no re-processing needed.
+  \item All Wave 1 outputs are packaged into a single context bundle before Wave 2 launch, ensuring Opus agents in M6 and Wave 3 have full research context in one pass.
+  \item Wave 3 Opus synthesis is a single session; all eight module outputs are presented simultaneously to maximize cross-module reasoning in one context window.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Subtotal} \\
+\midrule
+Wave 0 (Haiku) & 5K & 12K & 17K \\
+Wave 1 (4 tracks) & 80K & 170K & 250K \\
+Wave 2 (3 tracks) & 120K & 130K & 250K \\
+Wave 3 (Opus) & 200K & 60K & 260K \\
+Wave 4 (Sonnet) & 150K & 40K & 190K \\
+\midrule
+\textbf{Total} & \textbf{555K} & \textbf{412K} & \textbf{967K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA -------+-------+-------+-------+-------+-------+
+                 |       |       |       |       |       |
+              M1-BC   M2-SP   M3-DIY  M4-AIR  M5-AE   M7-PR
+                                  ^                        |
+                                  |  (M2 feeds M3)         |
+                                  |                        |
+                              M6-PS <-------- M5-AE        |
+                                  |                        |
+                                  +---------> M8-GD <------+
+                                                 |
+                                             VERIFY
+                                                 |
+                                            PUBLISH
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Focus} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & FCC compliance, FAA airspace, data sovereignty \\
+Core functionality & 22 & Required & BLOCK & 12 success criteria, 2 tests each \\
+Integration & 6 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 6 & Best-effort & LOG & Data gaps, temporal currency \\
+\midrule
+\textbf{Total} & \textbf{40} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to FCC.gov, ARRL, FAA, NASA, peer-reviewed, or professional organizations. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every power limit, frequency, station count, and token budget attributed to specific source. \\
+SC-ADV & No policy advocacy & Spectrum policy findings presented without advocating specific FCC legislative positions. \\
+SC-FCC & FCC compliance gate & No DIY build spec instructs unlicensed operation beyond Part 15 limits. All transmit instructions include license prerequisite. \\
+SC-FAA & FAA airspace gate & Aerostat/HAPS deployment specs include mandatory FAA NOTAM filing instructions; no deployment guidance given without airspace coordination step. \\
+SC-IND & Indigenous attribution & All co-op governance referencing Coast Salish or other First Nations names the specific nation; no generic ``Indigenous'' label. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. WA broadcast station inventory complete & CF-01, CF-02 & Pending \\
+2. Full FCC spectrum allocation summarized & CF-03, CF-04 & Pending \\
+3. Part 15 AM/FM rules documented with builds & CF-05, SC-FCC & Pending \\
+4. LPFM licensing pathway documented & CF-06, CF-07 & Pending \\
+5. HAM licensing and PNW repeater networks documented & CF-08, CF-09 & Pending \\
+6. Three+ complete DIY build specs delivered & CF-10, CF-11 & Pending \\
+7. Five+ HAPS/aerostat programs profiled & CF-12, CF-13 & Pending \\
+8. Boeing/Paine Field pipeline mapped through retraining & CF-14, CF-15 & Pending \\
+9. Puget Sound prototype center governance specified & CF-16, CF-17 & Pending \\
+10. AWS/Azure Pacific Rim infrastructure inventoried & CF-18, CF-19 & Pending \\
+11. Western Seaboard corridor mapped & CF-20, CF-21 & Pending \\
+12. All builds verified FCC/FAA compliant & SC-FCC, SC-FAA, CF-22 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner (Sonnet) & Wave decomposition; parallel track optimization; cache TTL scheduling \\
+SCOUT & Research Agent (Sonnet) & FCC database queries; live web research for current ownership and regs \\
+EXEC-A & Executor A (Sonnet) & M1-BROADCAST + M2-SPECTRUM document production \\
+EXEC-B & Executor B (Sonnet) & M3-DIY-RF + M5-AEROSPACE document production \\
+CRAFT-RF & RF Domain Specialist (Opus) & M4-AERIAL HAPS/aerostat analysis; DIY compliance review \\
+CRAFT-INFRA & Infrastructure Specialist (Opus) & M6-PUGET-SOUND governance design; M8 deployment architecture \\
+CRAFT-COMPUTE & Compute Specialist (Sonnet) & M7-PACIFIC-RIM AWS/Azure infrastructure mapping \\
+VERIFY & Verification Agent (Sonnet) & Source validation; FCC/FAA compliance checks; accuracy audit \\
+INTEG & Integration Agent (Opus) & Cross-module relationship validation; Wave 3 synthesis oversight \\
+CAPCOM & HITL Interface & Human approval at Wave 0, Wave 2, and Wave 3 completion boundaries \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking across all waves \\
+SECURE & Security Warden (Sonnet) & Enforces SC-FCC, SC-FAA, SC-IND safety gates; blocks non-compliant output \\
+LOG & Chronicle Agent (Haiku) & Commit messages; milestone summaries; audit trail \\
+TOPO & Topology Manager (Sonnet) & Agent team restructuring if bottlenecks detected; mid-mission wave reordering \\
+RETRO & Retrospective Agent (Sonnet) & Post-Wave 2 analysis; lessons learned for Wave 3 optimization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (16 roles) \\
+Research Modules & 8 (M1--M8) \\
+Wave Count & 4 execution waves + 1 foundation wave \\
+Total Deliverables & 8 module documents + verification report \\
+Estimated Context Windows & 8--12 \\
+Estimated Sessions & 4--6 \\
+Total Token Budget & $\approx$967K (555K input / 412K output) \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Safety Gate & FCC Part 15 / FAA NOTAM compliance (BLOCK-level) \\
+HITL Gates & Wave 0 complete, Wave 2 complete, Wave 3 complete \\
+Parallel Tracks (max) & 4 (Wave 1) \\
+First Deliverable & W0 schemas + source index (\textasciitilde 30 min) \\
+Final Deliverable & M8 global deployment architecture + integrated document \\
+Domain & Technology / Aerospace / Communications Infrastructure \\
+Geographic Scope & Pacific Northwest $\to$ Bay Area $\to$ Pacific Rim \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The electromagnetic spectrum is one of the last true commons. A community that understands its spectrum --- from 540 kHz to 21 GHz, from rooftop Part 15 transmitters to stratospheric HAPS platforms --- is a community that owns a piece of the infrastructure of the next century. The Pacific Northwest built the airplanes. It runs the cloud. Now it builds the signal stack that connects everything in between.''}
+
+\vspace{0.8em}
+\textcolor{subtlegray}{\sffamily\small --- GSD Signal Stack Vision, March 2026 \quad|\quad The spaces between the channels are not dead air. They are opportunity.}
+\end{quotebox}
+
+\end{document}

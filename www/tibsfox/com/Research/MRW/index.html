@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Real-Time Weather &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mrw">
+  <header>
+    <h1>Minecraft Real-Time Weather</h1>
+    <div class="subtitle">NOAA &middot; Open-Meteo &middot; GOES-19 SDR &middot; Fabric Modding &middot; PNW Microclimates &middot; Voxel Atmosphere</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-global-weather-data-sources">Data Sources</a>
+      <a href="page.html?doc=02-diy-satellite-reception">Satellite</a>
+      <a href="page.html?doc=03-minecraft-weather-api">MC Weather API</a>
+      <a href="page.html?doc=04-microclimate-simulation">Microclimate</a>
+      <a href="page.html?doc=05-gsd-mesh-integration">Mesh Integration</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The sky above any Minecraft world is a lie. It rains when a random number generator says so,
+      clears when a timer expires, and the thunderstorm over your base has no relationship whatsoever
+      to the thunderstorm rolling across the actual mountains outside your window. For a platform that
+      has taught generations of players about geology, agriculture, ecology, and architecture, this is
+      a staggering missed opportunity. This mission closes that gap &mdash; replacing Minecraft's
+      stochastic weather engine with a living atmosphere derived from the real world.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">38</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">75+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Data Sources</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-global-weather-data-sources" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Global Weather Data Sources</h3>
+        <div class="meta"><span class="tag tag-data">Data</span> Track A &middot; API survey</div>
+        <p>Open-Meteo, NOAA HRRR, NASA GEOS-5, and GFS. API endpoints, rate limits, response schemas, and normalization to WeatherState. WMO code standard. PNW-specific data considerations including convergence zones and atmospheric rivers.</p>
+      </a>
+
+      <a href="page.html?doc=02-diy-satellite-reception" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: DIY Satellite Reception Pipeline</h3>
+        <div class="meta"><span class="tag tag-sat">Satellite</span> Track A &middot; SDR hardware</div>
+        <p>GOES-19 HRIT direct reception via RTL-SDR. Hardware BOM ($95-$200), RF link budget, SatDump decode pipeline, ABI channel products, cloud cover extraction, fog detection via channel differencing, and continuous automation.</p>
+      </a>
+
+      <a href="page.html?doc=03-minecraft-weather-api" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Minecraft Weather API &amp; Mod Architecture</h3>
+        <div class="meta"><span class="tag tag-mc">Minecraft</span> Track B &middot; Game internals</div>
+        <p>Vanilla weather state model, biome temperature/precipitation mechanics, existing mod survey (6 mods analyzed), Fabric/Forge API surfaces, per-player weather packets, RCON bridge, Paper plugin API, and shader integration for enhanced effects.</p>
+      </a>
+
+      <a href="page.html?doc=04-microclimate-simulation" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Microclimate Simulation &amp; Variable Mapping</h3>
+        <div class="meta"><span class="tag tag-sim">Simulation</span> Track B &middot; Translation layer</div>
+        <p>WMO code to Minecraft state translation (complete mapping table), snow level determination, cloud cover thresholds, precipitation intensity scaling, wind escalation, fog/visibility mapping, coordinate transforms, weather front propagation, and hysteresis.</p>
+      </a>
+
+      <a href="page.html?doc=05-gsd-mesh-integration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: GSD Mesh Integration &amp; Deployment</h3>
+        <div class="meta"><span class="tag tag-mesh">Mesh</span> Synthesis &middot; Sidecar service</div>
+        <p>Python sidecar architecture (&lt;200 MB), data broker pipeline, cache design, RCON and Fabric mod bridges, YAML configuration schema, systemd deployment, Foxy's Playground reference config (4 PNW zones), monitoring, and security hardening.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Open-Meteo / NOAA HRRR APIs</td><td>M1, M5</td><td>PLT, CMH</td></tr>
+        <tr><td>GOES-19 / satellite imagery</td><td>M2, M1</td><td>SPA, SNL</td></tr>
+        <tr><td>WMO weather codes</td><td>M1, M4</td><td>CMH, BPS</td></tr>
+        <tr><td>Minecraft weather state model</td><td>M3, M4</td><td>MCR</td></tr>
+        <tr><td>Biome temperature / precipitation</td><td>M3, M4</td><td>ECO, PLT</td></tr>
+        <tr><td>Per-player weather packets</td><td>M3, M5</td><td>VAV</td></tr>
+        <tr><td>PNW microclimate zones</td><td>M1, M4, M5</td><td>ECO, BPS, CMH</td></tr>
+        <tr><td>Snow level / rain-snow threshold</td><td>M4, M1</td><td>PLT, ECO</td></tr>
+        <tr><td>Sidecar pattern / deployment</td><td>M5</td><td>MCR, SPA</td></tr>
+        <tr><td>RCON / Fabric mod bridge</td><td>M3, M5</td><td>VAV</td></tr>
+        <tr><td>Shader weather effects</td><td>M3, M4</td><td>SNL, SPA</td></tr>
+        <tr><td>Coordinate mapping (lat/lon to X/Z)</td><td>M4, M5</td><td>ECO, BPS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+MINECRAFT REAL-TIME WEATHER -- DOMAIN MAP
+===============================================================
+
+  DATA DOMAIN               TRANSLATION DOMAIN      GAME DOMAIN
+  +---------------+        +------------------+    +---------------+
+  | Open-Meteo    |        | WMO Code Map     |    | /weather cmd  |
+  | NOAA HRRR     |------->| Snow Level Calc  |--->| Biome Zones   |
+  | NASA GEOS-5   |        | Cloud Threshold  |    | Per-Player Pkt|
+  | GOES-19 SDR   |        | Intensity Scale  |    | Shader Uniform|
+  +---------------+        +------------------+    +---------------+
+        |                         |                       |
+        v                         v                       v
+  +---------------+        +------------------+    +---------------+
+  | JSON / GRIB2  |        | WeatherState     |    | Rain/Snow     |
+  | HTTP / S3     |        | Hysteresis       |    | Thunder/Light |
+  | Satellite IMG |        | Front Propagation|    | Fog / Vis     |
+  | 15-min cadence|        | Transition Smooth|    | Sky Color     |
+  +---------------+        +------------------+    +---------------+
+        |                         |                       |
+        +----- SIDECAR SERVICE ---+----- MC BRIDGE -------+
+                    |
+         +--------------------+
+         |  Python Sidecar    |
+         |                    |
+         |  Fetch + Cache     |
+         |  Normalize         |
+         |  Translate         |
+         |  Push (RCON/HTTP)  |
+         |  &lt;200 MB RSS      |
+         +--------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Data Sources] ------------> [M2: Satellite Reception]
+         |                                |
+         |                                |
+         v                                v
+  [M4: Microclimate Simulation] <---------+
+         |
+         v
+  [M3: MC Weather API] ---------> [M5: Mesh Integration]
+                                          |
+                                          v
+                                  [Deployment: Foxy's Playground]
+
+  Parallel tracks:
+    Track A: M1 + M2 (data sources + satellite)
+    Track B: M3 + M4 (game API + translation)
+    Synthesis: M5 (sidecar assembly + deployment)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Minecraft Real-Time Weather &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

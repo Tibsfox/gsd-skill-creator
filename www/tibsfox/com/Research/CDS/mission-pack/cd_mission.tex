@@ -1,0 +1,1023 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME — History / Urban Culture domain
+\definecolor{primary}{HTML}{4A148C}       % Deep burgundy — Section headers
+\definecolor{secondary}{HTML}{F57F17}     % Amber gold — Subsection headers
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown — Subsubsection
+\definecolor{accent}{HTML}{7B1FA2}        % Medium purple — Highlights
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Pale lavender — Quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% TABLE HELPERS
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS / FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Central District — Seattle Hip-Hop Ecosystem}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Central District Hip-Hop Ecosystem -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+%% ============================================================
+%% TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Central District\\[0.3em]Cultural Ecosystem}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Seattle Hip-Hop Origins, Radio, Cassette Economy \& Displacement}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study — Radio Sub-Cluster Module 03 Companion}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 6--8 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+%% ============================================================
+%% TABLE OF CONTENTS
+%% ============================================================
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1 — VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Central District Cultural Ecosystem --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Initial Vision / Ready for Research Execution}
+\metafield{Depends On:}{Radio Sub-Cluster Module 03 (partial coverage)}
+\metafield{Context:}{Companion study strengthening the GSD radio sub-cluster; standalone deliverable}
+\metafield{Scope:}{Seattle Central District, 1940s--present; primary focus 1975--1995}
+
+\subsection{Vision}
+
+There is a neighborhood four square miles wide at the geographic center of Seattle that spent most of the twentieth century holding a Black community together against forces that wanted it dispersed. Restrictive covenants barred African Americans from buying north of the ship canal. Real estate agents steered them away from suburbs. Boeing hired them, then the city told them where they were allowed to live. The Central District absorbed all of this --- and built something extraordinary inside the constraint.
+
+By the late 1970s, the CD was the closest thing Seattle had to a Black cultural commons. Garfield High School. Mount Zion Baptist. Liberty Bank. Washington Hall, where Duke Ellington and Billie Holiday had performed because no other venue would book them. Boys and Girls Clubs on Yesler and Rainier Vista. It was a four-square-mile pressure vessel, and when hip-hop arrived from the South Bronx via scratchy radio signals and mail-order vinyl, it found the CD already primed.
+
+What emerged was not a derivative of New York or Los Angeles. Geographic isolation --- the sheer distance from both coasts --- forced something more interesting. A Filipino-American DJ named Nes Rodriguez listened to tapes of New York radio shows and reverse-engineered them for a Sunday night slot on a small AM station. A kid named Anthony Ray built a studio out of a Commodore 64 and a Roland 808 in his Bryant Manor apartment and recorded songs onto cassette tapes. The cassette was passed to the DJ. The DJ played it on air. The phone lines lit up more than for Michael Jackson or Prince. An independent label was born over dinner in Chinatown. Two platinum records followed.
+
+The Central District is only partially mapped in Module 03 of the radio sub-cluster. This study fills that gap --- documenting not just the music but the full ecosystem: the geography that concentrated creative energy, the radio infrastructure that amplified it, the bedroom technology that made production accessible, the community spaces that served as first venues, the military pipeline that seeded the fan base, and the gentrification that has been dismantling the physical neighborhood while the culture it produced echoes globally.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Incomplete cultural geography:} The radio sub-cluster's Module 03 treats Seattle hip-hop as a music history without adequately mapping the specific physical geography of the Central District --- the apartment buildings, Boys \& Girls Clubs, record stores, restaurants, and street corners that served as the infrastructure of the scene.
+
+  \item \textbf{Cassette economy underdocumented:} The role of cassette tape distribution as the primary pre-label distribution mechanism for Seattle hip-hop --- specifically the Sir Mix-A-Lot bedroom studio to KFOX pipeline --- is mentioned but not studied as a distinct economic and technological system.
+
+  \item \textbf{Military fan base origin obscured:} The soldiers stationed at Fort Lewis and McChord Air Force Base in the early 1980s are documented as foundational to the Northwest hip-hop fan base, but the mechanism of this influence (radio reception, base culture, transfer of vinyl) is not analyzed.
+
+  \item \textbf{Multiethnic collaboration undertheorized:} Seattle hip-hop's distinctive characteristic --- multiethnic collaboration that was unusual for the era --- grew directly from the CD's compressed demographics. This is noted but not explained as a structural product of the neighborhood's formation under segregation.
+
+  \item \textbf{Displacement narrative incomplete:} The CD's population drop from over 70\% Black in the 1960s to under 20\% today is documented in demographic terms, but its effect on the hip-hop ecosystem --- which institutions survived, which dissolved, and what cultural preservation efforts emerged --- is not synthesized.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Pressure Vessel Model:} Cultural innovation intensifies under geographic constraint. When communities are forced into concentrated space by discriminatory housing policy, they create dense webs of institutions, relationships, and informal economies that produce disproportionate cultural output. The Central District was not a hip-hop scene despite segregation --- it was a hip-hop scene because of how segregation concentrated resources, talent, and creative pressure into four square miles.
+
+\subsubsection{Study Region}
+
+\begin{asciibox}
+SEATTLE CENTRAL DISTRICT — STUDY GEOGRAPHY
+============================================
+
+     NORTH
+       |
+  Capitol Hill
+       |
+  [23rd Ave Corridor] <-- primary cultural spine
+       |
+  [Yesler Way] <-- Sir Mix-A-Lot's Bryant Manor Apt
+       |
+  [MLK Jr Way] <-- The Facts newspaper building
+       |
+  [Cherry / Union] <-- Washington Hall (1908)
+       |
+  [Jackson St] <-- CD-Chinatown boundary
+       |
+  [Rainier Ave] <-- Lateef's Restaurant (rap battles, 1981)
+       |
+  Rainier Valley
+
+  KEY VENUES:
+  [A] Rotary Boys & Girls Club (Yesler Way) — Sir Mix-A-Lot parties
+  [B] Rainier Vista Boys & Girls Club — early Mix-A-Lot shows
+  [C] Washington Hall (14th Ave) — concerts, community events
+  [D] Lateef's Restaurant (8124 Rainier) — All City Rap Off 1981
+  [E] Liberty Bank (23rd Ave) — first Black-owned bank in WA
+  [F] Northwest African American Museum (S. Massachusetts)
+
+  RADIO SIGNAL REACH:
+  KFOX 1250 AM (FreshTracks) ------> Fort Lewis / McChord (60 mi S)
+  KCMU 90.3 FM (Rap Attack) -------> University District / citywide
+  KUBE 93 FM (Hotmix) ------------> Commercial citywide reach
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+==============================
+
+  MOD-01: Neighborhood Foundation
+    - Restrictive covenants & forced concentration
+    - WWII migration (3,789 -> 15,666 Black residents 1940-1950)
+    - Community institutions: Liberty Bank, Garfield HS, Washington Hall
+    - Four-square-mile cultural commons
+
+  MOD-02: Radio as Infrastructure
+    - KFOX/KKFX FreshTracks (Nasty Nes, 1980/1981)
+    - First all-rap radio show west of the Mississippi
+    - NY vinyl pipeline: Nes's summer visits, tape recordings
+    - KCMU Rap Attack -> KEXP Street Sounds lineage
+
+  MOD-03: The Cassette Economy
+    - Sir Mix-A-Lot's Commodore 64 / Roland 808 bedroom studio
+    - Cassette as distribution: apartment -> DJ -> airwaves
+    - Nastymix Records origin: cassette -> label -> platinum
+    - Vitamin D / The Pharmacy: basement studio evolution
+
+  MOD-04: Community Spaces & Artists
+    - Emerald Street Boys (first CD hip-hop crew, 1981)
+    - Boys & Girls Club circuit as first venue infrastructure
+    - Lateef's All City Rap Off (1981) competitive formation
+    - Washington Hall multiuse community space lineage
+
+  MOD-05: Military Pipeline & Isolation Effect
+    - Fort Lewis / McChord soldiers as early fan base
+    - B-Mello: Whidbey Island military brat -> FreshTracks listener
+    - Geographic isolation forcing sonic innovation
+    - "We were free to do whatever we wanted" — Sir Mix-A-Lot
+
+  MOD-06: Displacement & Preservation
+    - Population collapse: >70% (1960s) -> <20% (2020) Black
+    - Crack epidemic 1980s-90s; tech boom 2000s-2010s
+    - MOHAI Legacy of Seattle Hip-Hop exhibit (2015-16)
+    - NW African American Museum; 206 Zulu cultural continuity
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Neighborhood Foundation}
+Maps the structural conditions that made the CD a creative incubator: the history of restrictive covenants that concentrated Black Seattle into four square miles, the WWII migration surge, the resulting density of Black-owned institutions (Liberty Bank, The Facts newspaper, Garfield High School, Mount Zion Baptist), and the paradoxical stability this concentration provided. Includes demographic data from UW Civil Rights project mapping and Quintard Taylor's foundational scholarship.
+
+\subsubsection{Module 02 --- Radio as Infrastructure}
+Documents the KFOX/KKFX FreshTracks ecosystem as the connective tissue of the CD hip-hop scene. Traces Nasty Nes Rodriguez's origin (Philippines, 1970 immigration), his summer visits to New York radio stations (WBLS, WKTU), the tape-listening practice that informed FreshTracks, and the show's evolution into the first all-rap program west of the Mississippi (1981). Follows the lineage through KCMU Rap Attack and KUBE 93 Hotmix to KEXP Street Sounds.
+
+\subsubsection{Module 03 --- The Cassette Economy}
+Examines the pre-label distribution system that made Sir Mix-A-Lot's early career possible: recording on a Commodore 64 computer, Roland 808, and Korg/Moog synthesizers in a Bryant Manor apartment bedroom, pressing onto cassettes, hand-delivering them to Nasty Nes, receiving radio airplay, and generating demand that created the market for Nastymix Records. This cassette-to-label pipeline is a model of the democratized music economy that preceded the internet.
+
+\subsubsection{Module 04 --- Community Spaces and Artists}
+Catalogs the physical venues that served as the CD's hip-hop infrastructure before commercial venues would book the genre. The Boys and Girls Club circuit, Lateef's restaurant rap competitions (All City Rap Off, 1981), Washington Hall's history as a space for Black culture when other venues refused, and the Emerald Street Boys as the first documented hip-hop crew to build a consistent CD fan base.
+
+\subsubsection{Module 05 --- Military Pipeline and Isolation Effect}
+Analyzes the underappreciated role of Fort Lewis and McChord Air Force Base in building a Northwest hip-hop audience and the paradoxical creative advantage of Seattle's geographic isolation. Includes B-Mello's military brat origin story as a listener, the mechanism by which KFOX reached bases 60 miles south, and Sir Mix-A-Lot's explicit articulation of isolation as creative freedom.
+
+\subsubsection{Module 06 --- Displacement and Preservation}
+Traces the dismantling of the physical CD ecosystem from the crack epidemic through the tech boom to present, quantifying the Black population collapse. Documents surviving cultural institutions (Northwest African American Museum, Washington Hall, 206 Zulu), MOHAI's Legacy of Seattle Hip-Hop exhibit as archival intervention, and the ongoing community preservation work that attempts to hold the ecosystem's memory while the geography transforms.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: cd-ecosystem-fleet
+  profile: Fleet
+  modules: 6
+  sensitivity: HIGH (cultural history, community displacement)
+
+  crew:
+    FLIGHT:   claude-opus-4-6      # Mission direction, cultural sensitivity
+    PLAN:     claude-opus-4-6      # Wave decomposition
+    SCOUT:    claude-sonnet-4-6    # Source gathering (HistoryLink, JSTOR, UW)
+    EXEC-A:   claude-sonnet-4-6    # Modules 01-03 production
+    EXEC-B:   claude-sonnet-4-6    # Modules 04-06 production
+    CRAFT-GEO:  claude-opus-4-6    # Geographic / demographic analysis
+    CRAFT-CULT: claude-opus-4-6    # Cultural / musical analysis
+    VERIFY:   claude-sonnet-4-6    # Source validation
+    INTEG:    claude-opus-4-6      # Cross-module synthesis
+    TOPO:     claude-sonnet-4-6    # Team structure management
+    CAPCOM:   claude-sonnet-4-6    # Human interface
+    BUDGET:   claude-haiku-4-5     # Token tracking
+    SECURE:   claude-haiku-4-5     # Safety boundary enforcement
+    LOG:      claude-haiku-4-5     # Audit trail
+
+  model_split:
+    opus:   ~35%    # Higher due to cultural sensitivity
+    sonnet: ~55%
+    haiku:  ~10%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Central District geography as bounded study region (4 sq mi)
+  \item Timeline: 1940s demographic foundation through 2020s preservation work
+  \item Hip-hop as primary cultural lens; R\&B/soul as contextual predecessor
+  \item Nasty Nes Rodriguez / KFOX radio ecosystem and direct lineages
+  \item Sir Mix-A-Lot / Nastymix Records origin and early career
+  \item Emerald Street Boys and first-generation CD hip-hop community
+  \item Fort Lewis / McChord military fan base connection
+  \item Gentrification arc and cultural preservation institutions
+  \item Cassette distribution as pre-digital economic model
+  \item Multiethnic collaboration as structural product of neighborhood demographics
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item National hip-hop history (referenced only as context)
+  \item Macklemore / post-2000 Seattle hip-hop (covered in other modules)
+  \item Rainier Valley and South Seattle as primary focus (referenced as extensions)
+  \item Pacific Northwest hip-hop outside Seattle (covered in Module 03 parent)
+  \item Grunge scene (referenced only in relation to simultaneous coexistence)
+  \item Post-1992 label economics (Sir Mix-A-Lot's Def American period)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Geographic mapping of at least 8 named CD venues with documented hip-hop significance, addresses, and operational dates.
+  \item Demographic timeline covering Black population percentages in the CD across at least 5 census points from 1940 to 2020 with attributed sources.
+  \item KFOX FreshTracks documented with broadcast dates, format evolution, and station lineage (KYAC $\rightarrow$ KFOX $\rightarrow$ KKFX) fully traced.
+  \item Sir Mix-A-Lot's cassette-to-label pipeline documented with specific technologies (hardware, software), key cassette titles, and radio-to-label causation chain.
+  \item Fort Lewis / McChord military connection quantified or qualitatively sourced to at least 2 independent references.
+  \item Emerald Street Boys history documented from 1981 formation through 1984 Exhibition Hall show with key members and venues named.
+  \item Nastymix Records commercial trajectory documented: founding (1985), platinum certification timeline, and label closure (1992).
+  \item All 6 modules have primary-source backing from at least 2 professional organizations, peer-reviewed publications, or government/university archives.
+  \item Gentrification narrative quantified: specific population percentages, at least one identified structural cause (covenants, crack epidemic, tech boom), and at least 3 named surviving cultural institutions.
+  \item Cultural preservation efforts documented: MOHAI exhibit, Northwest African American Museum, 206 Zulu --- with dates, scope, and stated missions.
+  \item Cross-module synthesis identifies at least 2 causal chains linking structural conditions (Module 01) to cultural outputs (Modules 02--04).
+  \item Sensitivity review confirms no generic Indigenous references, no unattributed numerical claims, and no policy advocacy.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency Direction} \\
+\midrule
+Radio Sub-Cluster Module 03 & Parent module & This study extends Module 03; findings feed back into radio sub-cluster synthesis \\
+GSD BBS Educational Pack Vision & Sibling & Both address pre-internet underground information economies \\
+Upstream Intelligence Pack v1.43 & Sibling & Shared interest in distributed, community-owned information networks \\
+GSD Foxfire Heritage Skills Vision & Thematic cousin & Both document knowledge economies outside mainstream infrastructure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Central District story is a story about what the spaces between produce. Not the institutions themselves --- not Garfield High School or Mount Zion Baptist or KFOX --- but the informal network that connected them. The backyard parties. The cassette passed through a car window. The Sunday night radio show that a kid heard from a military base 60 miles south. The gym at the Boys and Girls Club where a dollar at the door filled the room shoulder-to-shoulder. These connections, these relays between nodes, were the actual ecosystem.
+
+This is the Amiga Principle operating at a neighborhood scale. Not raw power but architectural leverage: a Commodore 64 and a Roland 808 wired together in a way that produced sounds the major labels couldn't anticipate. Isolation not as disadvantage but as design space. When you can't reach New York for permission, you invent something Seattle-shaped. The cassette economy was not a workaround. It was the first version of what the internet would later make universal: anyone with a machine and an idea could distribute directly to the people who mattered.
+
+What makes this study urgent is that the geography is dissolving. The pressure vessel is being depressurized. Tech wealth has moved into the CD and the Black population that created the ecosystem has moved south to Kent and Skyway. The music echoes globally while the neighborhood that produced it becomes unrecognizable. Preserving the map of what was there --- the exact addresses, the cassette titles, the radio lineages, the demographic arcs --- is itself an act of architectural fidelity. The spaces between are real. They happened. This study renders them in detail before they become legend.
+
+%% ============================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Central District Ecosystem --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for each research module. Agents assigned to specific modules should read only their module section plus the Safety and Sensitivity Considerations section before beginning work.
+
+\textbf{Key source organizations and archives:}
+\begin{itemize}[noitemsep]
+  \item \textbf{HistoryLink.org} --- Washington State encyclopedia; primary source for CD/hip-hop chronology
+  \item \textbf{University of Washington Press} --- Publisher of Daudi Abe's \textit{Emerald Street} (2020), the definitive scholarly history
+  \item \textbf{UW Seattle Civil Rights \& Labor History Project} --- Demographic mapping, segregation history
+  \item \textbf{Museum of History and Industry (MOHAI)} --- Curated ``Legacy of Seattle Hip-Hop'' exhibit (2015--16)
+  \item \textbf{Northwest African American Museum (NAAM)} --- Institutional memory of CD Black community
+  \item \textbf{National Endowment for the Humanities / Humanities Washington} --- Published key CD hip-hop scholarship
+  \item \textbf{AASLH (American Association for State and Local History)} --- Documented MOHAI exhibit methodology
+  \item \textbf{206 Zulu} --- Seattle chapter of Universal Zulu Nation; active preservation organization
+\end{itemize}
+
+\subsection{Module 01: Neighborhood Foundation}
+
+\subsubsection{Demographic Formation Under Segregation}
+
+The Central District's role as Seattle's Black cultural center was structurally imposed. Before the WWII migration, Seattle's African American population was small --- approximately 3,789 in 1940. The war transformed this: Boeing began hiring Black workers, and African Americans moved into the CD specifically because restrictive covenants barred them from purchasing property north of the ship canal or in the suburbs. By 1950 the Black population had grown to 15,666; by 1970, to approximately 37,868 with the vast majority in the CD. At peak concentration in the mid-1960s, eight of every ten Black Seattle residents lived within the CD's four square miles (Quintard Taylor, \textit{The Forging of a Black Community}, University of Washington Press).
+
+The forced concentration had a paradoxical effect. Civic, religious, and economic institutions that might otherwise have been distributed across a city were compressed into a small area, producing an unusually dense institutional infrastructure: Liberty Bank (1960, first Black-owned bank in Washington State), The Facts newspaper (founded 1961 by Fitzgerald Beaver, corner of MLK Jr. Way and Cherry Street), Garfield High School, Mount Zion Baptist Church, Washington Hall (153 14th Avenue, built 1908; one of the few venues historically willing to rent to African Americans for concerts and civil gatherings), and the Boys and Girls Club system.
+
+\subsubsection{Multiethnic Composition}
+
+The CD was never exclusively Black. Before and during the WWII years, it was shared by Japanese, Chinese, Filipino, and Jewish communities, all similarly excluded from other Seattle neighborhoods. Former Black Panther leader Aaron Dixon described the experience: ``We had friends of all ethnicities. It was like a cocoon.'' This multiethnic baseline is the structural explanation for Seattle hip-hop's unusual characteristic --- its openness to multiracial collaboration at a time when most regional hip-hop scenes were more homogeneous. The scene's founding DJ, Nasty Nes Rodriguez, was Filipino-American. Its first prominent rapper, Sir Mix-A-Lot, was Black. The multiethnic collaboration was not ideological; it was geographical.
+
+\subsubsection{Key Institutions (Chronological)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Institution} & \tableheader{Est.} & \tableheader{Hip-Hop Significance} \\
+\midrule
+Washington Hall & 1908 & One of few CD venues renting to Black artists; hosted Ellington, Holiday; later B-boy events \\
+Liberty Bank & 1960 & First Black-owned bank in WA; CD economic anchor enabling homeownership \\
+The Facts newspaper & 1961 & CD Black press; building later converted to dog daycare (gentrification symbol in Draze's ``The Hood Ain't The Same'') \\
+Rotary Boys \& Girls Club & 1970s & Sir Mix-A-Lot's primary party venue; site of Nasty Nes / Mix-A-Lot first meeting \\
+Rainier Vista Boys \& Girls Club & 1970s & Mix-A-Lot's early regular Saturday shows (1983) \\
+Lateef's Restaurant & 1981 & Site of first All City Rap Off; Emerald Street Boys second-place finish, formation catalyst \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 02: Radio as Infrastructure}
+
+\subsubsection{Nasty Nes Rodriguez and FreshTracks}
+
+Ernesto ``Nasty Nes'' Rodriguez immigrated from the Philippines to the United States in 1970. During summer visits to his sister in New York, he listened to WBLS and WKTU and recorded tapes of Mr. Magic's ``Rap Attack'' show --- the first rap radio program in the United States. He modeled his approach on these recordings.
+
+By 1980, Rodriguez was hosting a Sunday night show called \textit{FreshTracks} on KYAC (later KFOX, 1250 AM). Initially formatted as a new music showcase covering R\&B and rap, the volume of rap requests rapidly dominated, and by 1981 FreshTracks had become the first all-rap radio show west of the Mississippi River (Humanities Washington; 206 Zulu). Rodriguez introduced live mixing and scratching on two turntables --- a practice unknown on Seattle radio --- and developed a ``Mastermix'' format: 30-minute nonstop blends spanning Kraftwerk, Hall and Oates, Egyptian Lover, and New York rap. The show created a diverse cross-section of listeners across race, class, and geography.
+
+Rodriguez made regular trips to New York, returning with the latest vinyl. Source Magazine (October 1996) would later characterize him as ``the West Coast equivalent to NY's DJ Red Alert.'' In 1988, Rodriguez expanded to KCMU (90.3 FM) with ``Rap Attack'' (co-hosted with ``Shockmaster'' Glen Boyd) and KUBE 93 with ``Hotmix.'' The KCMU relationship directly preceded KEXP's ``Street Sounds,'' establishing a radio lineage that persists today. Rodriguez hosted Seattle radio for 17 years before relocating to California in 1997.
+
+\subsubsection{Station Lineage}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Station} & \tableheader{Years} & \tableheader{Show / DJ} & \tableheader{Significance} \\
+\midrule
+KYAC $\rightarrow$ KFOX (1250 AM) & 1980--1988 & FreshTracks / Nasty Nes & First West Coast all-rap radio; first to play ``Rapper's Delight'' in Seattle \\
+KCMU (90.3 FM) & 1988--1997 & Rap Attack / Nes + Boyd & University of Washington station; became KEXP \\
+KUBE 93 FM & 1988--1997 & Hotmix / Nasty Nes & Commercial FM; citywide reach \\
+KEXP 90.3 FM & 2001--present & Street Sounds / B-Mello + others & Successor to KCMU; national reputation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 03: The Cassette Economy}
+
+\subsubsection{Sir Mix-A-Lot's Bedroom Studio}
+
+Anthony Ray grew up at Bryant Manor Apartments, 19th Avenue and East Yesler Way, in the CD. After graduating from Roosevelt High School in 1981 (bused there under the Seattle desegregation program), he began building a home studio without formal musical training. His equipment: a Commodore 64 computer, Roland 808 drum machine, and Korg and Moog synthesizers. All compositions were self-produced. Mix did not relate to the violent imagery dominant in national hip-hop from New York; instead, he drew from the synthesizer-driven new wave of Kraftwerk, Devo, and Gary Numan, creating a regionally specific sound.
+
+He pressed his songs onto cassettes and hand-delivered them to Nasty Nes, whose FreshTracks show was the only credible hip-hop platform in the city. Nes played tracks including ``7 Rainier,'' ``Let's G,'' and ``Square Dance Rap'' on-air. Mix-A-Lot became the most requested artist on KFOX --- more than Michael Jackson or Prince (Humanities Washington). This cassette-to-airplay pipeline, with zero label infrastructure, generated demand that made a label possible.
+
+\subsubsection{Nastymix Records}
+
+The label was conceived over a table at a restaurant in Seattle's Chinatown-International District. Co-founders: Nasty Nes Rodriguez, Anthony ``Sir Mix-A-Lot'' Ray, Sheila Locke, and Greg Jones (later joined by Ed Locke). Founded 1985. The label name was a portmanteau of ``Nasty Nes'' and ``Sir Mix-A-Lot.''
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Release} & \tableheader{Certification} & \tableheader{Year} & \tableheader{Notes} \\
+\midrule
+\textit{Swass} (Sir Mix-A-Lot) & Platinum (1M units) & 1988/1990 & Debut album; ``Posse on Broadway'' CD identity track \\
+\textit{Seminar} (Sir Mix-A-Lot) & Gold (500K units) & 1989 & Follow-up; ``My Hooptie,'' ``Beepers'' \\
+Kid Sensation & Regional success & 1990 & Nastymix second breakout act \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Nastymix was staffed by approximately 10 people and operated out of Seattle. Its two-platinum-record run as a fully independent label represents one of the most successful independent hip-hop stories of the 1980s. The label closed in 1992 following Mix-A-Lot's departure. Vitamin D later established The Pharmacy, a basement recording studio in the CD, as the next generation of community-based production infrastructure.
+
+\subsubsection{Technology Democratization}
+
+The Mix-A-Lot cassette pathway anticipates the internet-era model of direct distribution by approximately 15 years. The specific equipment (Commodore 64, Roland 808) was available at consumer electronics prices. The cassette was a zero-marginal-cost distribution unit. The radio show was the discovery layer. The label was the scaling mechanism. Each stage was accessible without major capital. This is the cassette economy: a pre-digital, community-embedded music distribution system that required no gatekeepers between creation and audience.
+
+\subsection{Module 04: Community Spaces and Artists}
+
+\subsubsection{The Emerald Street Boys}
+
+The first documented hip-hop crew to build a sustained CD fan base. Originally formed as ``Terrible 2'' by James ``Captain Crunch'' Croone and Michael Wells; added Robbie Jamerson after a second-place finish at the inaugural All City Rap Off at Lateef's Restaurant (8124 Rainier Avenue S) in 1981. DJ: Nasty Nes Rodriguez. The crew performed at neighborhood house parties, talent shows, CAMP (Central Area Motivation Program) events, and the Black Community Festival. They opened for the Gap Band at Seattle Center Arena in 1982 and 1983. Their August 17, 1984 show at the Seattle Center Exhibition Hall (120 Mercer Way) --- the first hip-hop show to receive mainstream media coverage from The Seattle Times --- is a documented turning point in the scene's visibility (HistoryLink.org).
+
+\subsubsection{Community Venue Circuit}
+
+The CD hip-hop scene used community spaces because commercial venues would not book hip-hop. The Boys and Girls Club circuit was primary: the Rainier Vista location hosted Mix-A-Lot's early Saturday shows (1983), the Rotary location hosted his later parties where he charged a dollar at the door and packed the gym. Washington Hall at 153 14th Avenue served as a more formal venue for Black cultural events and later B-boy events; it is one of the few spaces with documented continuity from the Jimi Hendrix / Duke Ellington era through the hip-hop era.
+
+\subsection{Module 05: Military Pipeline and Isolation Effect}
+
+\subsubsection{Fort Lewis and McChord Air Force Base}
+
+Wikipedia's entry on Northwestern hip-hop states: ``In the early 1980s, soldiers stationed at Tacoma's military bases provided the foundation for a growing hip-hop fan base in the Northwest.'' The mechanism is not fully documented in available scholarship but is consistent with the geographic reach of KFOX's 1250 AM signal (approximately 60 miles south, sufficient to reach the Fort Lewis / McChord complex south of Tacoma). Military culture in the early 1980s included cassette sharing and radio listening as primary music distribution methods, consistent with the cassette economy model. This module requires primary source development: oral histories from veterans of the period, KFOX signal range documentation, and military base cultural programming records.
+
+DJ B-Mello, who became a major figure in Seattle hip-hop radio in the 1990s and 2000s (KUBE 93, KEXP Street Sounds), describes starting as a FreshTracks listener while living on Whidbey Island as a military brat --- an explicit example of the military-base to scene-participant pipeline.
+
+\subsubsection{The Isolation Advantage}
+
+Sir Mix-A-Lot articulated the creative implication of Seattle's geographic distance from hip-hop's centers directly: ``This was Seattle's big gift to black America. People remembered it was good to have fun now and then. And it could only happen in Seattle because we were so isolated. We were free to do whatever we wanted.'' (Humanities Washington, citing Daudi Abe's \textit{Emerald Street}).
+
+Seattle's physical distance from New York and Los Angeles --- approximately 2,800 miles from the South Bronx --- meant that influence arrived via cassette tapes and radio recordings rather than in real time. This lag created space for local sonic identity to develop without constant pressure to conform to East or West Coast norms. The result was hip-hop that sounded like Seattle: synthesizer-heavy, technologically experimental, regionally specific in lyrical reference (``7 Rainier,'' ``Posse on Broadway''), and notably less concerned with the competitive hierarchies dominant on both coasts.
+
+\subsection{Module 06: Displacement and Preservation}
+
+\subsubsection{Gentrification Arc}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{CD Black Population} & \tableheader{Primary Driver} \\
+\midrule
+1960s (peak) & $\sim$75\% & Restrictive covenants in rest of city \\
+1980 & Declining & First-wave gentrification signs; Black ministers warned congregations \\
+1990s & $\sim$50\% & Crack epidemic; drug arrests; displacement pressure \\
+2018 & $<$20\% & Tech boom; property value surge; fixed-income homeowners priced out \\
+2020 & $\sim$15--20\% & Continued displacement; some cultural recovery efforts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Sources: Seattle Times (2018, 2020); KUOW oral history with Ron Sims, former King County Executive and former HUD Deputy Secretary; UW Civil Rights and Labor History Project demographic maps.
+
+The structural cause of the population concentration (racially restricted covenants) became the structural cause of displacement: once the CD's exclusivity ended and property values rose, Black homeowners who had been forced to buy there were the first to sell or be priced out. The same market that had made the CD affordable as a forced ghetto made it expensive as a desirable urban neighborhood.
+
+\subsubsection{Cultural Preservation Institutions}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Institution} & \tableheader{Est.} & \tableheader{Preservation Function} \\
+\midrule
+Northwest African American Museum (NAAM) & 2008 & CD community history; housed in former Colman School (occupied by activists 1985--1993) \\
+MOHAI Legacy of Seattle Hip-Hop exhibit & 2015--16 & First major museum documentation; 64+ artists participated; oral histories, artifacts \\
+206 Zulu (Seattle Chapter, Universal Zulu Nation) & 2000s & Active hip-hop education and preservation; cultural programming; Washington Hall operator \\
+Washington Hall & 1908 (restored) & Historic venue restored as community arts space; hip-hop lineage continued \\
+4Culture Heritage Program & Ongoing & Grant source for \textit{Emerald Street} publication and hip-hop documentation work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Protocol} \\
+\midrule
+Living community members & GATE & Oral histories and quotations must use published sources; no speculation about private individuals \\
+Gentrification narrative & ANNOTATE & Present demographic data and structural causes; avoid policy advocacy \\
+African American community characterization & ANNOTATE & Use specific community names and specific sources; avoid generalizations \\
+Indigenous / Coast Salish context & ABSOLUTE & If any references to Indigenous peoples arise, use nation-specific names; never generic \\
+Military installation details & ANNOTATE & Use only publicly documented information about base culture \\
+Crack epidemic references & GATE & Use documented public health and demographic sources; no sensationalism \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Peer-Reviewed and Academic Sources}
+\begin{itemize}[noitemsep]
+  \item Abe, Daudi. \textit{Emerald Street: A History of Hip Hop in Seattle}. University of Washington Press, 2020. (Definitive scholarly history; foreword by Sir Mix-A-Lot)
+  \item Taylor, Quintard. \textit{The Forging of a Black Community: Seattle's Central District from 1870 through the Civil Rights Era}. University of Washington Press, 1994.
+  \item Western Historical Quarterly review of \textit{Emerald Street}: ``makes an invaluable contribution to hip-hop studies, urban studies, and Seattle racial politics.''
+\end{itemize}
+
+\subsubsection{Government and University Archives}
+\begin{itemize}[noitemsep]
+  \item UW Seattle Civil Rights and Labor History Project. \textit{Seattle's Race and Segregation Story in Maps 1920--2020}. University of Washington Department of History.
+  \item HistoryLink.org (Washington State History Encyclopedia). Multiple entries including: ``Seattle's underground hip-hop scene breaks out'' (File 9778); ``Nastymix Records party celebrates Gold Record'' (File 9793).
+\end{itemize}
+
+\subsubsection{Professional Organizations and Cultural Institutions}
+\begin{itemize}[noitemsep]
+  \item 206 Zulu Seattle. ``Rap Attack Lives: The Legacy of Nasty Nes.'' \url{https://www.206zulu.org}
+  \item AASLH. ``The Legacy of Seattle Hip-Hop.'' American Association for State and Local History, August 2018.
+  \item Humanities Washington (National Endowment for the Humanities affiliate). ``How the Northwest Shocked the Hip-Hop World.'' \url{https://www.humanities.org/spark/northwest-hip-hop/}
+  \item Museum of History and Industry (MOHAI). \textit{Legacy of Seattle Hip-Hop} exhibit. September 2015 -- May 2016.
+  \item Northwest African American Museum. Daudi Abe book launch documentation. \url{https://www.naamnw.org}
+  \item Port of Seattle. ``Central District Neighborhood Travel Guide.'' (Cultural landmark documentation)
+\end{itemize}
+
+\subsubsection{Journalism (Established Outlets)}
+\begin{itemize}[noitemsep]
+  \item NPR Music. ``50 Years of Hip-Hop: Seattle.'' August 7, 2023.
+  \item Seattle Times. ``Central District's Shrinking Black Community Wonders What's Next.'' July 2020.
+  \item Seattle Times. ``Community Rallies Around Seattle Rap Producer Who Shaped Local Scene.'' November 2024. (Nasty Nes obituary coverage)
+  \item KUOW. ``Race Matters: Understanding How the Central Area Was Gentrified.'' (Ron Sims oral history)
+  \item Wikipedia. ``Hip Hop Music in the Pacific Northwest.'' (Aggregate reference; cross-check all claims)
+\end{itemize}
+
+%% ============================================================
+%% STAGE 3 — MISSION PACKAGE
+%% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete, publication-quality cultural study of Seattle's Central District as the geographic and institutional origin of Pacific Northwest hip-hop, suitable for integration into the GSD radio sub-cluster as Module 03's companion document. The study must document the full ecosystem --- demographic foundation, radio infrastructure, cassette economy, community spaces, military fan base, and displacement arc --- with primary-source backing for all claims.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+==============================
+
+  WAVE 0: Foundation (Sequential)
+  --------------------------------
+  [HAIKU]  Shared schemas, source index, module templates
+  [HAIKU]  Agent briefing packages per module
+            |
+            v
+  WAVE 1: Parallel Research Tracks (Parallel)
+  ------------------------------------------
+  Track A [SONNET+OPUS]        Track B [SONNET+OPUS]
+  MOD-01: Neighborhood         MOD-04: Community Spaces
+  MOD-02: Radio Ecosystem      MOD-05: Military Pipeline
+  MOD-03: Cassette Economy     MOD-06: Displacement + Preservation
+            |                         |
+            v                         v
+  WAVE 2: Synthesis (Sequential)
+  --------------------------------
+  [OPUS]   Cross-module integration
+  [OPUS]   Geographic-to-cultural causal chain analysis
+  [OPUS]   Cultural sensitivity review
+            |
+            v
+  WAVE 3: Publication + Verification (Sequential)
+  -------------------------------------------------
+  [SONNET] Document assembly + formatting
+  [SONNET] Source verification (SC-SRC, SC-NUM passes)
+  [SONNET] Integration into radio sub-cluster
+  [HAIKU]  Commit, changelog, milestone close
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Source Layer} --- Validated bibliography from UW Press, HistoryLink, UW Civil Rights Project, MOHAI, 206 Zulu, Humanities Washington
+  \item \textbf{Module Layer} --- 6 self-contained research modules with standardized schema
+  \item \textbf{Synthesis Layer} --- Cross-module causal chain analysis; geographic to cultural mapping
+  \item \textbf{Integration Layer} --- Radio sub-cluster Module 03 handoff; shared schema alignment
+  \item \textbf{Publication Layer} --- Final formatted document + index page
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 01 Reference & 5+ named institutions, demographic data table, 3+ sources & 600--900 words \\
+2 & Module 02 Reference & Station lineage table, Rodriguez biography, KFOX-to-KEXP chain & 700--1000 words \\
+3 & Module 03 Reference & Hardware specs documented, cassette pipeline traced, Nastymix table & 700--1000 words \\
+4 & Module 04 Reference & 8+ venues mapped, Emerald Street Boys history, 1984 show documented & 600--900 words \\
+5 & Module 05 Reference & Military connection 2+ sources, isolation effect quoted \& analyzed & 500--800 words \\
+6 & Module 06 Reference & Demographic table with 5+ data points, 5+ institutions documented & 700--1000 words \\
+7 & Cross-Module Synthesis & 2+ causal chains; geographic/cultural integration narrative & 800--1200 words \\
+8 & Verification Report & All 12 success criteria checked; safety review passed & Structured report \\
+9 & Radio Sub-Cluster Handoff & Schema-aligned for Module 03 integration & Compatible format \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Source index schema (W0) & None & Haiku & 2K \\
+Module templates (W0) & Source index & Haiku & 3K \\
+MOD-01 research (W1A) & Templates & Sonnet & 15K \\
+MOD-02 research (W1A) & Templates & Sonnet & 18K \\
+MOD-03 research (W1A) & Templates & Sonnet & 16K \\
+MOD-04 research (W1B) & Templates & Sonnet & 14K \\
+MOD-05 research (W1B) & Templates & Sonnet+Opus & 12K \\
+MOD-06 research (W1B) & Templates & Sonnet & 15K \\
+Causal chain synthesis (W2) & All MOD outputs & Opus & 20K \\
+Sensitivity review (W2) & All MOD outputs & Opus & 8K \\
+Document assembly (W3) & Synthesis & Sonnet & 12K \\
+Verification pass (W3) & All outputs & Sonnet & 10K \\
+Module 03 handoff (W3) & Final doc & Sonnet & 6K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+claude-opus-4-6 & $\sim$35\% & Synthesis, causal chain analysis, cultural sensitivity review, Mission direction; elevated from standard 30\% due to community displacement sensitivity \\
+claude-sonnet-4-6 & $\sim$55\% & Module research production, document assembly, verification, source validation \\
+claude-haiku-4-5 & $\sim$10\% & Schema templates, scaffolding, commit messages, budget tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, templates, source index \\
+1 & Parallel Research & Parallel (2 tracks) & Sonnet + Opus & 6 module research documents \\
+2 & Synthesis & Sequential & Opus & Cross-module synthesis + sensitivity review \\
+3 & Publication & Sequential & Sonnet & Final document, verification, handoff \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Build source index & SCOUT / Haiku & Bibliography with quality ratings (A/B/C) per source \\
+Create module schema & PLAN / Haiku & Standardized JSON schema for all 6 modules \\
+Generate agent briefings & PLAN / Haiku & Per-module briefing packets (scope, sources, schema, dependencies) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Research Track A (Modules 01--03)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Agent} & \tableheader{Key Research Tasks} \\
+\midrule
+MOD-01 Neighborhood & EXEC-A + CRAFT-GEO & Demographic data from UW Civil Rights Project; Taylor \textit{Forging a Black Community}; institution timeline \\
+MOD-02 Radio & EXEC-A + CRAFT-CULT & HistoryLink Files 9778/9793; 206 Zulu Nasty Nes tribute; Humanities WA article; station lineage verification \\
+MOD-03 Cassette & EXEC-A + CRAFT-CULT & HistoryLink Nastymix file; Micro-Chop (Medium) Nastymix analysis; hardware spec documentation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Research Track B (Modules 04--06)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Agent} & \tableheader{Key Research Tasks} \\
+\midrule
+MOD-04 Spaces & EXEC-B + CRAFT-CULT & HistoryLink Exhibition Hall show; venue address research; Emerald Street Boys formation \\
+MOD-05 Military & EXEC-B + CRAFT-GEO & Wikipedia NW hip-hop; B-Mello oral history; KFOX signal range; gap-fill research required \\
+MOD-06 Displacement & EXEC-B + CRAFT-GEO & Seattle Times demographic reporting; KUOW Ron Sims interview; MOHAI exhibit documentation; 206 Zulu current activity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Notes} \\
+\midrule
+Causal chain analysis & INTEG / Opus & Map: covenant concentration (MOD-01) $\rightarrow$ multiethnic collaboration $\rightarrow$ CD scene character (MOD-04) \\
+Radio-to-label chain & INTEG / Opus & Map: FreshTracks (MOD-02) $\rightarrow$ cassette pathway (MOD-03) $\rightarrow$ Nastymix $\rightarrow$ platform \\
+Displacement paradox & CRAFT-GEO / Opus & Map: forced concentration (MOD-01) $\rightarrow$ property value dynamics (MOD-06) \\
+Cultural sensitivity review & SECURE / Opus & Verify: no generic identifiers, no advocacy, all communities named specifically \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Notes} \\
+\midrule
+Document assembly & EXEC-A / Sonnet & Integrate all module outputs + synthesis into final formatted document \\
+Source verification (SC-SRC) & VERIFY / Sonnet & All citations traceable; zero entertainment media \\
+Numerical attribution (SC-NUM) & VERIFY / Sonnet & Every percentage, date, count attributed to named source \\
+Advocacy check (SC-ADV) & VERIFY / Sonnet & Present evidence only; no policy positions \\
+Radio sub-cluster handoff & INTEG / Sonnet & Schema alignment with Module 03 parent; index update \\
+CAPCOM review & CAPCOM / Human & Human approval of cultural framing before final commit \\
+Milestone close & LOG / Haiku & Commit message, changelog, version tag \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 1 parallel tracks exploit the 5-minute cache window: Track A and Track B can share the Wave 0 foundation schemas without re-loading if initiated within a single session.
+  \item Module templates (Wave 0) should be cached at session start and re-used across all 6 module agents.
+  \item The source bibliography (Wave 0) serves as a shared reference loaded once and re-used by VERIFY in Wave 3 without re-fetching.
+  \item Wave 2 synthesis loads all 6 module outputs as a single context pass rather than per-module queries.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Sessions} \\
+\midrule
+Wave 0: Foundation & Haiku & 5K & 1 \\
+Wave 1A: Track A & Sonnet + Opus & 50K & 1--2 \\
+Wave 1B: Track B & Sonnet + Opus & 42K & 1--2 \\
+Wave 2: Synthesis & Opus & 28K & 1 \\
+Wave 3: Publication & Sonnet + Haiku & 28K & 1 \\
+\midrule
+\textbf{Total} & Mixed & \textbf{$\sim$153K} & \textbf{3--4} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+  [Wave 0: Source Index + Schemas]
+         |
+    _____|_____
+   |           |
+[W1A: Track A] [W1B: Track B]  <-- Parallel, independent
+[MOD-01,02,03] [MOD-04,05,06]
+   |           |
+    \         /
+     [W2: Synthesis]           <-- Sequential; requires all W1 outputs
+           |
+    [W3: Publication]          <-- Sequential; requires W2 complete
+           |
+    [HANDOFF to Module 03]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 6 & Mandatory & BLOCK \\
+Core Functionality & 18 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge Cases & 6 & Best-Effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{36} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to HistoryLink, UW Press, UW Civil Rights Project, NPR, established journalism. Zero entertainment blogs. \\
+SC-NUM & Numerical attribution & Every population percentage, certification count, founding date, and address attributed to a named source \\
+SC-ADV & No policy advocacy & Document presents gentrification data and structural causes without advocating for specific legislative remedies \\
+SC-IND & No generic Indigenous refs & If Coast Salish or other Indigenous context arises, use nation-specific names only \\
+SC-COM & Community dignity & Living community members (artists, activists) referenced only via published sources; no speculation about private individuals \\
+SC-GEN & No generalizations & African American community characterized through specific named people, institutions, and documented events; not as a monolith \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Geographic mapping: 8+ venues with addresses and dates & CF-01, CF-02 & Pending \\
+2. Demographic timeline: 5+ census points, 1940--2020 & CF-03, SC-NUM & Pending \\
+3. KFOX FreshTracks fully documented, station lineage traced & CF-04, CF-05 & Pending \\
+4. Cassette pipeline documented: hardware, titles, causation & CF-06, CF-07 & Pending \\
+5. Military connection: 2+ independent sources & CF-08, EC-01 & Pending \\
+6. Emerald Street Boys: 1981--1984 history documented & CF-09, CF-10 & Pending \\
+7. Nastymix commercial trajectory: founding to closure & CF-11, SC-NUM & Pending \\
+8. All 6 modules: 2+ professional sources each & CF-12, SC-SRC & Pending \\
+9. Gentrification: percentages, 1+ structural cause, 3+ institutions & CF-13, SC-NUM & Pending \\
+10. Preservation: MOHAI, NAAM, 206 Zulu documented with dates & CF-14 & Pending \\
+11. Cross-module synthesis: 2+ causal chains & IN-01, IN-02 & Pending \\
+12. Sensitivity review: no generic refs, no advocacy & SC-ADV, SC-IND, SC-GEN & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Overall mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner (Opus) & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent (Sonnet) & Source gathering; HistoryLink, UW archives, 206 Zulu; web research \\
+EXEC-A & Executor A (Sonnet) & Module 01--03 document production \\
+EXEC-B & Executor B (Sonnet) & Module 04--06 document production \\
+CRAFT-GEO & Geographic Specialist (Opus) & Demographic analysis; geographic mapping; displacement causation \\
+CRAFT-CULT & Cultural Specialist (Opus) & Musical / radio / cassette economy analysis; artist history \\
+VERIFY & Verification Agent (Sonnet) & Source validation; SC-SRC and SC-NUM passes \\
+INTEG & Integration Agent (Opus) & Cross-module synthesis; radio sub-cluster handoff alignment \\
+TOPO & Topology Manager (Sonnet) & Team structure; mid-mission agent re-assignment if needed \\
+CAPCOM & HITL Interface (Sonnet) & Human approval at wave boundaries; only channel crossing human-machine boundary \\
+BUDGET & Resource Manager (Haiku) & Token tracking; session planning; cache TTL monitoring \\
+SECURE & Safety Warden (Haiku) & SC-ADV, SC-IND, SC-GEN boundary enforcement \\
+LOG & Chronicle Agent (Haiku) & Commit messages; audit trail; milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & CD-HH-ECOSYSTEM-v1.0 \\
+Activation profile & Fleet (6 modules, high cultural sensitivity) \\
+Research modules & 6 \\
+Crew size & 14 roles \\
+Parallel tracks & 2 (Wave 1) \\
+Estimated token budget & $\sim$153K tokens \\
+Estimated sessions & 3--4 context windows \\
+Primary authority source & Daudi Abe, \textit{Emerald Street} (UW Press, 2020) \\
+Safety-critical tests & 6 (all mandatory-pass) \\
+CAPCOM checkpoints & Wave 2 complete; Wave 3 final review \\
+Radio sub-cluster handoff & Module 03 companion; schema alignment required \\
+Success criteria count & 12 \\
+Total tests & 36 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``This was Seattle's big gift to black America. People remembered it was good to have fun now and then. And it could only happen in Seattle because we were so isolated. We were free to do whatever we wanted.''}\\[0.5em]
+\hfill --- Sir Mix-A-Lot, quoted in Daudi Abe's \textit{Emerald Street} (University of Washington Press, 2020)\\[1em]
+The Central District was not an unlikely place for hip-hop to emerge. It was the only place in Seattle it could have emerged. Four square miles of concentrated creative pressure, a radio antenna pointing west on a Sunday night, a Commodore 64 in a Bryant Manor bedroom, and a cassette passed through a car window. The spaces between these nodes were the ecosystem. This study renders them in the detail they deserve.
+\end{quotebox}
+
+\end{document}

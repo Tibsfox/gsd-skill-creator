@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; GPU Ecosystem</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gpg">
+  <header>
+    <h1>GPU Ecosystem</h1>
+    <div class="subtitle">Graphics Pipeline &middot; Vulkan/OpenGL &middot; Ray Tracing &middot; Shaders &middot; WebGPU &middot; Observability</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-gpu-graphics-pipeline">Graphics Pipeline</a>
+      <a href="page.html?doc=02-vulkan-modern-apis">Vulkan &amp; APIs</a>
+      <a href="page.html?doc=03-ray-tracing-architecture">Ray Tracing</a>
+      <a href="page.html?doc=04-xscreensaver-shadertoy">XScreenSaver</a>
+      <a href="page.html?doc=05-shader-programming">Shaders</a>
+      <a href="page.html?doc=06-gpu-observability">Observability</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Amiga did not win by being the most powerful machine of 1985. It won by being the most
+      architecturally honest machine of 1985 &mdash; each coprocessor doing exactly the one thing it was
+      built to do, exactly when it was supposed to do it, without interrupting the others. The spaces
+      between their DMA cycles were where the music played.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~308K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/gpu-gsd-mission.pdf">Mission Package</a></td><td>PDF &middot; 38 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/gpu-gsd-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/gpu-gsd-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Source index, shared schemas, taxonomy shell</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1</td><td>Parallel Research</td><td>Track A (M1+M2) &middot; Track B (M3+M4) &middot; Track C (M5+M6)</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-module integration, unit circle taxonomy</td><td>Sequential</td><td>1.5 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Final assembly, verification, dashboard specs</td><td>Sequential</td><td>1 hour</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Orchestration / DMA</td><td>Opus</td><td>Cross-module synthesis, Amiga mapping, wave gates</td></tr>
+        <tr><td>Denise</td><td>Display / Rendering</td><td>Sonnet</td><td>GL/VK examples, XScreenSaver catalog, GSD-OS WebGL</td></tr>
+        <tr><td>Paula</td><td>I/O / Telemetry</td><td>Haiku</td><td>Source index, token budget, session health</td></tr>
+        <tr><td>68000</td><td>General Computation</td><td>Opus</td><td>Architecture decisions, DACP mapping, taxonomy</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Render Report &mdash; Verification Matrix</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations from Khronos, Raspberry Pi Foundation, Grafana Labs, NVIDIA, or peer-reviewed sources. Zero forum posts as primary sources.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every GFLOPS, latency, temperature, and bandwidth figure attributed to a specific benchmark or datasheet.</td></tr>
+        <tr><td>SC-LIC</td><td>Open-source licensing</td><td>All Shadertoy-derived examples verified CC0/MIT/BSD/CC-BY only. No CC-BY-NC-SA content.</td></tr>
+        <tr><td>SC-SEC</td><td>No hardcoded credentials</td><td>OTel config YAML uses environment variable references for all API tokens. Zero literal secrets.</td></tr>
+        <tr><td>SC-HW</td><td>Hardware safety: QPU DMA</td><td>VC4CL section documents root privilege requirement and memory management unit absence on VideoCore IV.</td></tr>
+        <tr><td>SC-ADV</td><td>No vendor advocacy</td><td>GPU architecture comparisons presented as technical trade-off analysis, not vendor promotion.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Graphics pipeline documented from vertex to framebuffer with GLSL/SPIR-V shader examples</td><td>PASS</td></tr>
+        <tr><td>2</td><td>Vulkan 1.3 object model fully documented: instance through pipeline state objects</td><td>PASS</td></tr>
+        <tr><td>3</td><td>Ray tracing architecture: BVH, RT Cores (3 generations), VK_KHR_ray_tracing_pipeline</td><td>PASS</td></tr>
+        <tr><td>4</td><td>XScreenSaver 6.14 hack framework, Shadertoy API, GLSL portability matrix documented</td><td>PASS</td></tr>
+        <tr><td>5</td><td>Shader techniques: SDFs, ray marching, noise, post-processing with code examples</td><td>PASS</td></tr>
+        <tr><td>6</td><td>GPU observability: NVML, DCGM, OTel, Prometheus 3.0, Grafana Alloy pipeline complete</td><td>PASS</td></tr>
+        <tr><td>7</td><td>5 Grafana dashboard specifications produced with PromQL queries</td><td>PASS</td></tr>
+        <tr><td>8</td><td>WebGPU/WGSL documented as next-generation shader platform</td><td>PASS</td></tr>
+        <tr><td>9</td><td>GPGPU history from pixel shaders through CUDA to compute shaders</td><td>PASS</td></tr>
+        <tr><td>10</td><td>GSD-OS CRT shader engine specification with parameter table</td><td>PASS</td></tr>
+        <tr><td>11</td><td>50-hack curated XScreenSaver catalog with license verification</td><td>PASS</td></tr>
+        <tr><td>12</td><td>Cross-references to GPO, ACE, MPC, K8S, SYS, GSD2, CMH, SGL in every module</td><td>PASS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The GPU is the modern Denise chip. It owns the framebuffer. It executes shader programs
+    without asking the CPU for permission. The observability stack is Paula &mdash; listening to every
+    sensor, reporting I/O health, knowing when a channel is saturated before the system notices.
+    The skill-creator is Agnus &mdash; orchestrating DMA, pre-staging the next wave before the current
+    one lands. This mission documents the complete wiring harness connecting these layers: from the
+    sub-pixel OpenGL fragment shader to the Prometheus scrape interval, from the Shadertoy uniform
+    to the Grafana dashboard alert that fires when GPU temperature exceeds the ambient thermal
+    envelope. The spaces between shader invocations are where the rendering happens.</p>
+  </main>
+
+  <footer>
+    <p>GPU Ecosystem &middot; PNW Research Series &middot; gsd-skill-creator &middot; Project #100</p>
+  </footer>
+</body>
+</html>

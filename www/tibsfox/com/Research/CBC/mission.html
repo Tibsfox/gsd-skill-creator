@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; CBC/Radio-Canada</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cbc">
+  <header>
+    <h1>CBC/Radio-Canada</h1>
+    <div class="subtitle">Cultural Sovereignty &middot; Public Broadcasting &middot; Indigenous Languages &middot; Digital Transformation &middot; CanCon</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-history-and-mandate">History &amp; Mandate</a>
+      <a href="page.html?doc=02-funding-and-governance">Funding &amp; Governance</a>
+      <a href="page.html?doc=03-service-architecture">Service Architecture</a>
+      <a href="page.html?doc=04-indigenous-languages">Indigenous Languages</a>
+      <a href="page.html?doc=05-digital-transformation">Digital Transformation</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      &ldquo;It is often with surprise that Canadians living or travelling abroad realize how much they
+      miss CBC broadcasting.&rdquo; The surprise is the data point. What you miss when you leave is not
+      a channel &mdash; it is a frequency on which the country talks to itself. The CBC is the infrastructure
+      of that conversation. Whether the conversation continues is the question this study exists to inform.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~148K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/cbc-radio-canada-mission.pdf">Mission Package</a></td><td>PDF &middot; 30 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/cbc-radio-canada-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/cbc-radio-canada-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schema, source index, directory structure</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1</td><td>Parallel Survey</td><td>Track A (M1+M2) &middot; Track B (M3+M4)</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>M5 + OCAP review + political balance review + cross-module synthesis</td><td>Sequential</td><td>2 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Source verification, final assembly, test plan execution</td><td>Sequential</td><td>1 hour</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Role</th><th>Agent</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>FLIGHT</td><td>Orchestrator</td><td>Opus</td><td>Mission direction; go/no-go at wave boundaries</td></tr>
+        <tr><td>PLAN</td><td>Planner</td><td>Opus</td><td>Wave decomposition; Track A/B parallelization</td></tr>
+        <tr><td>EXEC-A</td><td>Executor A</td><td>Sonnet</td><td>Modules 1, 2, and 5 document production</td></tr>
+        <tr><td>EXEC-B</td><td>Executor B</td><td>Sonnet</td><td>Modules 3, 4 and final pack assembly</td></tr>
+        <tr><td>CRAFT-HIST</td><td>History Specialist</td><td>Opus</td><td>Broadcast legislation; commission analysis; political balance</td></tr>
+        <tr><td>CRAFT-INDG</td><td>Indigenous Specialist</td><td>Opus</td><td>OCAP compliance; nation-specific attribution; TRC alignment</td></tr>
+        <tr><td>SCOUT</td><td>Research Agent</td><td>Sonnet</td><td>Source gathering; Broadcasting Act text; CRTC filings</td></tr>
+        <tr><td>VERIFY</td><td>Verification</td><td>Sonnet</td><td>Source cross-check; numerical claims audit</td></tr>
+        <tr><td>INTEG</td><td>Integration</td><td>Opus</td><td>Cross-module synthesis; through-line coherence</td></tr>
+        <tr><td>CAPCOM</td><td>HITL Interface</td><td>Sonnet</td><td>Human approval at Wave 0 and Wave 2 boundaries</td></tr>
+        <tr><td>BUDGET</td><td>Resource Manager</td><td>Haiku</td><td>Token budget tracking; session planning</td></tr>
+        <tr><td>LOG</td><td>Chronicle</td><td>Haiku</td><td>Commit messages; wave summaries; audit trail</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>T-01</td><td>Nation-specific attribution</td><td>Zero instances of generic &ldquo;Indigenous&rdquo; without nation name in Module 4 or synthesis</td></tr>
+        <tr><td>T-02</td><td>OCAP compliance</td><td>CRAFT-INDG review completed; all four OCAP principles addressed for Module 4 content</td></tr>
+        <tr><td>T-03</td><td>Political balance</td><td>All three party positions (Liberal, NDP, Conservative) cited from primary sources; no editorial advocacy</td></tr>
+        <tr><td>T-04</td><td>Defunding mechanics accuracy</td><td>Broadcasting Act amendment requirement accurately described; English/French infrastructure interdependency documented</td></tr>
+        <tr><td>T-05</td><td>Numerical attribution</td><td>Every statistic in Modules 2 and 5 traces to named source in bibliography</td></tr>
+        <tr><td>T-06</td><td>Trust data accuracy</td><td>Reuters Institute 71%&rarr;63% trend cited correctly; not conflated with broader approval ratings</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix: &ldquo;The Broadcast Standard&rdquo;</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Success Criterion</th><th>Test IDs</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>SC-1</td><td>Legislative foundation documented</td><td>T-07, T-08</td><td>Pre-execution</td></tr>
+        <tr><td>SC-2</td><td>Financial architecture quantified</td><td>T-05, T-09</td><td>Pre-execution</td></tr>
+        <tr><td>SC-3</td><td>Service portfolio complete</td><td>T-10, T-11</td><td>Pre-execution</td></tr>
+        <tr><td>SC-4</td><td>Defunding mechanics analyzed</td><td>T-03, T-04</td><td>Pre-execution</td></tr>
+        <tr><td>SC-5</td><td>Indigenous services with nation attribution</td><td>T-01, T-12</td><td>Pre-execution</td></tr>
+        <tr><td>SC-6</td><td>OCAP principles applied</td><td>T-02</td><td>Pre-execution</td></tr>
+        <tr><td>SC-7</td><td>Digital transformation quantified</td><td>T-13, T-14</td><td>Pre-execution</td></tr>
+        <tr><td>SC-8</td><td>Trust data cited correctly</td><td>T-06</td><td>Pre-execution</td></tr>
+        <tr><td>SC-9</td><td>Political landscape balanced</td><td>T-03, T-04</td><td>Pre-execution</td></tr>
+        <tr><td>SC-10</td><td>Through-line maintained</td><td>T-15, T-16</td><td>Pre-execution</td></tr>
+        <tr><td>SC-11</td><td>Tests cover all SC criteria</td><td>T-26 (meta)</td><td>Pre-execution</td></tr>
+        <tr><td>SC-12</td><td>Zero unattributed numerical claims</td><td>T-05</td><td>Pre-execution</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>Graham Spry coined &ldquo;it&rsquo;s the state, or the United States&rdquo; in 1932 as a rallying
+    cry for public broadcasting against commercial encroachment. Ninety-four years later, the same sentence
+    summarizes the live political debate. The architecture has shifted &mdash; from shortwave towers to
+    satellites to streaming APIs &mdash; but the underlying topology has not: a large country, thinly
+    populated, sharing a continent with the most powerful media economy in human history, trying to find
+    a frequency that is recognizably its own. The CBC is not simply a broadcaster. It is the institutional
+    embodiment of the hypothesis that Canadian identity is worth producing, distributing, and funding as
+    public infrastructure. The study this mission produces is not a defense of that hypothesis, nor a
+    refutation &mdash; it is a precise map of how the institution has answered it, what it costs, who
+    benefits, and what disappears if the frequency goes dark.</p>
+  </main>
+
+  <footer>
+    <p>CBC/Radio-Canada &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

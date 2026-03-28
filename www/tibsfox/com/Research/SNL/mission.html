@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; The Sensing Layer</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-snl">
+  <header>
+    <h1>The Sensing Layer</h1>
+    <div class="subtitle">IoT Sensors &middot; Environmental Monitoring &middot; Edge Computing &middot; Data Pipelines &middot; Open Science Mesh</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-microcontroller-substrate">MCU Substrate</a>
+      <a href="page.html?doc=02-light-systems-art">Light Systems</a>
+      <a href="page.html?doc=03-remote-sensing-fog">Remote Sensing</a>
+      <a href="page.html?doc=04-signal-processing-adc-dac">Signal Processing</a>
+      <a href="page.html?doc=05-mesh-weather-networks">Mesh Weather</a>
+      <a href="page.html?doc=06-open-science-coop">Open Science</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Amiga shipped with a graphics chip, a sound chip, and a DMA chip, each whispering to
+      memory in turn while the CPU got on with thinking. Nobody expected a home computer to also be
+      a sampler, a video editor, and a music workstation. It was all those things because the
+      architecture trusted specialized hardware to do specialized work. The sensing layer built in
+      this mission is the same bet at a different scale and a different era.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">11</span><span class="stat-label">Components</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~124K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/sensing-layer-mission.pdf">Mission Package</a></td><td>PDF &middot; 31 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/sensing-layer-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/sensing-layer-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Schema, source index, safety spec, test scaffold</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1</td><td>Parallel Survey</td><td>Track A (M1+M2) &middot; Track B (M3+M4) &middot; Track C (M5+M6)</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-module integration, zero-trust protocol, safety review</td><td>Sequential</td><td>2 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Final assembly, source validation, pricing check, PDF</td><td>Sequential</td><td>1 hour</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Resource orchestration</td><td>Haiku</td><td>Token budget, wave scheduling, cache TTL</td></tr>
+        <tr><td>Denise</td><td>Display + visualization</td><td>Sonnet</td><td>Architecture diagrams, sensor matrices, waveforms</td></tr>
+        <tr><td>Paula</td><td>Signal + I/O</td><td>Opus</td><td>Sensor fusion specs, zero-trust protocol, mesh design</td></tr>
+        <tr><td>M68000</td><td>General computation</td><td>Opus</td><td>Cross-module synthesis, integration patterns</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations from standards bodies, peer-reviewed journals, or professional organizations. Zero entertainment media.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every voltage, resolution, range, FLOPS count, and protocol parameter attributed to a specific source.</td></tr>
+        <tr><td>SC-ADV</td><td>No policy advocacy</td><td>Document presents technical analysis without advocating for specific product purchases or policy positions.</td></tr>
+        <tr><td>SC-LASER</td><td>Eye-safe laser guidance</td><td>Any lidar/laser recommendation includes wavelength, power class, and appropriate safety language.</td></tr>
+        <tr><td>SC-RF</td><td>RF regulatory compliance</td><td>Any LoRa, radar, or SDR recommendation notes applicable FCC/ISED regulatory context.</td></tr>
+        <tr><td>SC-LED</td><td>LED current safety</td><td>All LED array designs specify maximum current, fuse sizing, and MOSFET thermal requirements.</td></tr>
+        <tr><td>SC-BOINC</td><td>Volunteer compute safety</td><td>BOINC/F@h guidance includes sandbox verification, official project list only, no mining instructions.</td></tr>
+        <tr><td>SC-ZTRUST</td><td>Zero-trust integrity</td><td>Signed packet spec reviewed to ensure no single-point-of-failure in node reputation system.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Sensor Array -- Verification Matrix</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Test ID(s)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Component catalog: 8+ items per module with specs and sourcing</td><td>CF-01, CF-02</td><td>PASS</td></tr>
+        <tr><td>2</td><td>POV reference design: timing math, sync hardware, power budget</td><td>CF-03, CF-04</td><td>PASS</td></tr>
+        <tr><td>3</td><td>Fog penetration matrix: 4+ modalities with attenuation data</td><td>CF-05, SC-LASER</td><td>PASS</td></tr>
+        <tr><td>4</td><td>ADC/DAC comparison: 6 devices with resolution, rate, linearity</td><td>CF-06</td><td>PASS</td></tr>
+        <tr><td>5</td><td>Mesh weather node reference design: full sensor suite + stack</td><td>CF-07, CF-08</td><td>PASS</td></tr>
+        <tr><td>6</td><td>NOAA/NWS API integration: endpoint, format, calibration workflow</td><td>CF-09</td><td>PASS</td></tr>
+        <tr><td>7</td><td>Zero-trust data signing: key management, packet format, co-op registry</td><td>CF-10, SC-ZTRUST</td><td>PASS</td></tr>
+        <tr><td>8</td><td>BOINC/F@h integration: ARM64 install, GPU config, project selection</td><td>CF-11, SC-BOINC</td><td>PASS</td></tr>
+        <tr><td>9</td><td>Screensaver-science architecture: live data viz + compute contribution</td><td>CF-12</td><td>PASS</td></tr>
+        <tr><td>10</td><td>Phase synchronization: Hall, IR, GPS PPS methods documented</td><td>CF-13</td><td>PASS</td></tr>
+        <tr><td>11</td><td>Real-time edge processing: DMA ADC, FIFO buffering, MQTT publish</td><td>CF-14</td><td>PASS</td></tr>
+        <tr><td>12</td><td>Cross-module integration: single node weather+POV+BOINC example</td><td>IN-01, IN-02</td><td>PASS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>A BME280 whispering pressure readings over I2C while a PIO state machine blasts LED pixels at
+    150 million samples per second while a LoRa packet makes its way twenty kilometers to a mesh
+    gateway while the screensaver renders a live pressure gradient and the idle GPU cores crunch
+    protein folding work units &mdash; none of this fights the others. Each runs in its specialized lane.
+    The spaces between the lanes are where the architecture lives, and that architecture is what this
+    mission documents. The fog is always there. Sometimes it is literal Pacific fog rolling in from the
+    Sound, and sometimes it is the uncertainty in a distributed measurement, and sometimes it is the gap
+    between what the sensor can see and what the model needs to know. This mission is about learning to
+    see through all of it: with radio waves when light fails, with mesh consensus when a single node
+    fails, with open science when a single institution fails.</p>
+  </main>
+
+  <footer>
+    <p>The Sensing Layer &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

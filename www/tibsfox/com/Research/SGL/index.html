@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal &amp; Light &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-sgl">
+  <header>
+    <h1>Signal &amp; Light</h1>
+    <div class="subtitle">Real-Time DSP &middot; ASIC/FPGA &middot; LED/POV &middot; DMX512 &middot; MIDI &middot; Stage Intelligence</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-real-time-dsp-algorithms">DSP Algorithms</a>
+      <a href="page.html?doc=02-asic-fpga-dsp">ASIC/FPGA</a>
+      <a href="page.html?doc=03-sound-filtering-audio">Audio Filtering</a>
+      <a href="page.html?doc=04-led-persistence-of-vision">LED &amp; POV</a>
+      <a href="page.html?doc=05-dmx512-stage-lighting">DMX512</a>
+      <a href="page.html?doc=06-midi-control-protocols">MIDI</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every live performance is a conversation between signal and light. The bass player's fingers
+      generate acoustic pressure waves that a microphone converts to voltage, that an ADC quantizes
+      into samples, that a DSP chain shapes and sculpts in real time &mdash; and somewhere downstream,
+      those same samples trigger LED arrays that paint the air with color timed to the beat.
+      The entire path from vibrating string to photon hitting retina is one continuous signal chain.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">42</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">30+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Protocol Stacks</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-real-time-dsp-algorithms" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Real-Time DSP Algorithms</h3>
+        <div class="meta"><span class="tag tag-dsp">DSP</span> Track A &middot; Adaptive filters</div>
+        <p>LMS, NLMS, FxLMS, and RLS adaptive noise cancellation. Spectral subtraction, Wiener filtering, STFT analysis. AI-enhanced noise suppression (DTLN). Convergence analysis and step-size bounds. The z-transform framework.</p>
+      </a>
+
+      <a href="page.html?doc=02-asic-fpga-dsp" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: ASIC &amp; FPGA DSP Implementation</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> Track A &middot; Custom silicon</div>
+        <p>FPGA-to-ASIC design pipeline. FIR/IIR filter implementation in VHDL/Verilog. Fixed-point coefficient quantization and stability. DSP slice architectures, Chisel/FIRRTL agile design. Hearing aid ASIC case study.</p>
+      </a>
+
+      <a href="page.html?doc=03-sound-filtering-audio" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Sound Filtering &amp; Audio Processing</h3>
+        <div class="meta"><span class="tag tag-dsp">DSP</span> Track B &middot; Audio applications</div>
+        <p>Parametric EQ, crossover networks, dynamic range compression. Filter bank architectures. Psychoacoustic foundations: critical bands, masking, loudness. Real-time latency budgets and buffer sizing.</p>
+      </a>
+
+      <a href="page.html?doc=04-led-persistence-of-vision" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: LED Persistence of Vision</h3>
+        <div class="meta"><span class="tag tag-vis">Visual</span> Track B &middot; Display technology</div>
+        <p>Psychophysics of afterimage and flicker fusion. POV display architectures: rotary, reciprocating, flexible-PCB. APA102/WS2812 driver protocols. RP2040 PIO timing. Inductive power transfer for rotating assemblies.</p>
+      </a>
+
+      <a href="page.html?doc=05-dmx512-stage-lighting" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: DMX512 &amp; Stage Lighting</h3>
+        <div class="meta"><span class="tag tag-proto">Protocol</span> Track C &middot; Lighting control</div>
+        <p>DMX512 protocol: RS-485, packet structure, timing. RDM bidirectional extension. Art-Net and sACN Ethernet bridging. Pixel mapping, universe planning, network design for 1000+ pixel installations.</p>
+      </a>
+
+      <a href="page.html?doc=06-midi-control-protocols" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: MIDI &amp; Control Protocols</h3>
+        <div class="meta"><span class="tag tag-proto">Protocol</span> Track C &middot; Control integration</div>
+        <p>MIDI 1.0 serial protocol and channel messages. MIDI 2.0 UMP format, MIDI-CI, Profile Configuration, Property Exchange, Jitter Reduction. MIDI Show Control. OSC. MIDI-to-DMX bridges and timecode sync.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Adaptive filters (LMS/RLS)</td><td>M1, M2, M3</td><td>DAA, FQC</td></tr>
+        <tr><td>FIR/IIR implementation</td><td>M1, M2, M3</td><td>T55, GRD</td></tr>
+        <tr><td>Fixed-point quantization</td><td>M2, M3</td><td>EMG, GRD</td></tr>
+        <tr><td>APA102 / WS2812 protocols</td><td>M4, M5</td><td>LED, T55</td></tr>
+        <tr><td>Persistence of vision</td><td>M4</td><td>LED, SPA</td></tr>
+        <tr><td>DMX512 / RS-485</td><td>M5, M6</td><td>LED, EMG</td></tr>
+        <tr><td>Art-Net / sACN</td><td>M5</td><td>ARC, SPA</td></tr>
+        <tr><td>MIDI 1.0 / 2.0</td><td>M6</td><td>DAA, FQC</td></tr>
+        <tr><td>SMPTE / timecode</td><td>M5, M6</td><td>DAA</td></tr>
+        <tr><td>Fourier analysis</td><td>M1, M3</td><td>DAA, FQC, GRD</td></tr>
+        <tr><td>Psychoacoustics</td><td>M3, M4</td><td>DAA, SPA</td></tr>
+        <tr><td>RP2040 PIO</td><td>M2, M4</td><td>LED, T55</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+SIGNAL &amp; LIGHT -- DOMAIN MAP
+===============================================================
+
+  ACOUSTIC DOMAIN          SILICON DOMAIN         VISUAL DOMAIN
+  +---------------+       +----------------+     +---------------+
+  | Microphone    |       | FPGA/ASIC      |     | LED Array     |
+  | ADC/DAC       |------&gt;| Filter Engine  |----&gt;| POV Display   |
+  | Codec         |       | MAC Units      |     | Stage Wash    |
+  | Preamp        |       | DMA Engine     |     | Pixel Map     |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        v                       v                       v
+  +---------------+       +----------------+     +---------------+
+  | ANC / NR      |       | HDL Design     |     | Art-Net       |
+  | FIR / IIR     |       | Fixed-Point    |     | sACN / E1.31  |
+  | FFT / STFT    |       | Pipelining     |     | DMX512        |
+  | LMS / FxLMS   |       | Timing Close   |     | SPI / I2S     |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   CONTROL PROTOCOLS   |
+                    |                       |
+                    |  MIDI 1.0 / 2.0       |
+                    |  DMX512 / RDM         |
+                    |  Art-Net / sACN       |
+                    |  OSC / MSC            |
+                    |  USB / Bluetooth      |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: DSP Algorithms] -----------&gt; [M2: ASIC/FPGA Silicon]
+         |                                |
+         |                                |
+         v                                v
+  [M3: Sound Filtering] ---&gt; [M4: LED &amp; POV Display]
+                                          |
+                                          v
+                              [M5: DMX &amp; Stage Lighting]
+                                          |
+                                          v
+                              [M6: MIDI &amp; Control Protocols]
+
+  Parallel tracks:
+    Track A: M1 + M2 (signal processing + silicon)
+    Track B: M3 + M4 (filtering applications + visual output)
+    Track C: M5 + M6 (control protocols)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Signal &amp; Light &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

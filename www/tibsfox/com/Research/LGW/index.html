@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGO Gravitational Waves &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-lgw">
+  <header>
+    <h1>LIGO Gravitational Waves</h1>
+    <div class="subtitle">Interferometry &middot; Strain Measurement &middot; Chirp Analysis &middot; Multi-Messenger Astronomy &middot; Sonification</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-ligo-hanford-interferometry">Interferometry</a>
+      <a href="page.html?doc=02-first-detection-gw150914">GW150914</a>
+      <a href="page.html?doc=03-chirp-signal-analysis">Chirp Analysis</a>
+      <a href="page.html?doc=04-multi-messenger-astronomy">Multi-Messenger</a>
+      <a href="page.html?doc=05-visualization-and-sonification">Visualization</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      On September 14, 2015, at 09:50:45 UTC, the twin LIGO detectors &mdash; one in Hanford, Washington,
+      deep in the Pacific Northwest &mdash; recorded a transient gravitational-wave signal. The strain
+      amplitude was 10<sup>&minus;21</sup>: a displacement one-thousandth the diameter of a proton across
+      a 4-kilometer arm. Two black holes, 1.3 billion light-years away, had spiraled together and merged
+      in 0.2 seconds. Einstein predicted the wave in 1916. It took a century of engineering to hear it.
+      The space between prediction and detection is where this story lives.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">30</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">System Layers</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-ligo-hanford-interferometry" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: LIGO Hanford &amp; Interferometer Design</h3>
+        <div class="meta"><span class="tag tag-data">Detector</span> Track A &middot; PNW connection</div>
+        <p>LIGO Hanford Observatory on the DOE Hanford Site in Washington state. Michelson interferometer with 4-km Fabry-P&eacute;rot arms. Quantum squeezing, seismic isolation, mirror suspension. O1&ndash;O4 observing runs. KAGRA and Virgo network. The 10<sup>&minus;21</sup> strain sensitivity that required reinventing precision measurement.</p>
+      </a>
+
+      <a href="page.html?doc=02-first-detection-gw150914" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: First Detection &mdash; GW150914</h3>
+        <div class="meta"><span class="tag tag-data">Discovery</span> Track A &middot; Nobel 2017</div>
+        <p>The first direct observation of gravitational waves. Binary black hole merger at z=0.09, 36+29 solar masses. Weiss, Thorne, and Barish Nobel Prize 2017. Matched-filter detection, parameter estimation, statistical significance. From Einstein&rsquo;s 1916 prediction through Weber bars to the LIGO breakthrough.</p>
+      </a>
+
+      <a href="page.html?doc=03-chirp-signal-analysis" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Chirp Signal Analysis &amp; Processing</h3>
+        <div class="meta"><span class="tag tag-dsp">DSP</span> Track A &middot; Signal recovery</div>
+        <p>Matched filtering against compact binary coalescence templates. Whitening, bandpassing, Q-transform spectrograms. PyCBC and GWpy pipelines. Waveform approximants (IMRPhenom, EOB). Noise characterization: seismic, thermal, quantum shot noise. The signal buried 10,000&times; below the noise floor.</p>
+      </a>
+
+      <a href="page.html?doc=04-multi-messenger-astronomy" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Multi-Messenger Astronomy</h3>
+        <div class="meta"><span class="tag tag-integ">Astrophysics</span> Track B &middot; GW170817</div>
+        <p>GW170817: the binary neutron star merger that launched multi-messenger astronomy. Electromagnetic counterpart GRB 170817A detected 1.7 seconds later. Kilonova AT 2017gfo. r-process nucleosynthesis confirmed. 70+ observatories across the spectrum. GraceDB alerts, sky localization, O4 detection rates.</p>
+      </a>
+
+      <a href="page.html?doc=05-visualization-and-sonification" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Data Visualization &amp; Sonification</h3>
+        <div class="meta"><span class="tag tag-gl">Rendering</span> Track B &middot; The cosmic oscilloscope</div>
+        <p>GWOSC open data pipelines. Q-transform spectrograms as 3D terrain. OpenGL screensaver architecture with GLSL shaders. Sonification: frequency-shifting chirps into audible range (+400 Hz). Minecraft data bridge via RCON. The entire path from 10<sup>&minus;21</sup> strain to photon and sound wave.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Interferometry / optical cavities</td><td>M1, M2</td><td>BHK, FQC, SGL</td></tr>
+        <tr><td>Strain measurement (10<sup>&minus;21</sup>)</td><td>M1, M2, M3</td><td>BPS, GRD, MPC</td></tr>
+        <tr><td>Matched filtering / templates</td><td>M2, M3</td><td>DAA, SGL, GRD</td></tr>
+        <tr><td>Q-transform / spectrograms</td><td>M3, M5</td><td>DAA, SGL</td></tr>
+        <tr><td>Noise characterization</td><td>M1, M3</td><td>DAA, SGL, BPS</td></tr>
+        <tr><td>General relativity / spacetime</td><td>M1, M2, M4</td><td>BHK, FQC</td></tr>
+        <tr><td>Multi-messenger / EM counterparts</td><td>M4</td><td>PSS, BHK</td></tr>
+        <tr><td>Sonification / auditory display</td><td>M5</td><td>DAA, SGL</td></tr>
+        <tr><td>OpenGL / GLSL shaders</td><td>M5</td><td>SGL, MPC</td></tr>
+        <tr><td>GraceDB / real-time alerts</td><td>M4, M5</td><td>BPS, GRD</td></tr>
+        <tr><td>Quantum squeezing</td><td>M1</td><td>FQC, BHK</td></tr>
+        <tr><td>PNW infrastructure (Hanford)</td><td>M1</td><td>BPS, PSS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+LIGO GRAVITATIONAL WAVES -- DOMAIN MAP
+===============================================================
+
+  DETECTOR DOMAIN           SIGNAL DOMAIN          OUTPUT DOMAIN
+  +---------------+       +----------------+     +---------------+
+  | Interferometer|       | Matched Filter |     | Spectrogram   |
+  | Fabry-Perot   |------&gt;| Q-Transform    |----&gt;| 3D Terrain    |
+  | Seismic Iso.  |       | Whitening      |     | Sonification  |
+  | Squeezing     |       | Bandpass       |     | Block Palette |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        v                       v                       v
+  +---------------+       +----------------+     +---------------+
+  | GWOSC / GWpy  |       | PyCBC / LAL    |     | OpenGL / GLSL |
+  | HDF5 / GWF    |       | IMRPhenom      |     | RCON Bridge   |
+  | 16384 Hz      |       | EOB Waveforms  |     | VBO Mesh      |
+  | O4 Data       |       | Template Bank  |     | Screensaver   |
+  +---------------+       +----------------+     +---------------+
+        |                       |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |  INTEGRATION LAYER    |
+                    |                       |
+                    |  GraceDB Alerts       |
+                    |  Event Dispatcher     |
+                    |  Shared Memory Bus    |
+                    |  Cache Manager        |
+                    |  Archive / Live Mode  |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Interferometry] -----------&gt; [M2: GW150914 Detection]
+         |                                |
+         |                                |
+         v                                v
+  [M3: Chirp Analysis] ------&gt; [M4: Multi-Messenger]
+                                          |
+                                          v
+                              [M5: Visualization &amp; Sonification]
+
+  Parallel tracks:
+    Track A: M1 + M2 + M3 (detector, discovery, signal processing)
+    Track B: M4 + M5 (astrophysics, rendering and output)
+    </pre>
+  </main>
+
+  <footer>
+    <p>LIGO Gravitational Waves &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

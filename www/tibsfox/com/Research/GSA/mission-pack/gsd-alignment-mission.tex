@@ -1,0 +1,1114 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology color scheme
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{1976D2}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EEEEEE}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{highlight}{HTML}{0D47A1}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{GSD Alignment: Yegge / Control Surface / GPU Logic}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={GSD Alignment: Yegge Ecosystem, Control Surface Bus Architecture, Prompts to Silicon},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─── TITLE PAGE ─────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{24}{30}\selectfont\bfseries\sffamily\textcolor{primary}{GSD Alignment:\\[0.3em]Yegge Ecosystem, Control Surface\\[0.3em]Bus Architecture \& Prompts to Silicon}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Full-Stack: gastownhall.ai → GSD-OS → RTX 4060 Ti GPU Logic}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study Across Three Convergent Fronts}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad | \quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad | \quad Estimated: 6 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ──────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+%═════════════════════════════════════════════════════════════════════════════
+
+\section{GSD Alignment --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{gsd-skill-creator-analysis.md, gsd-chipset-architecture-vision.md, gsd-silicon-layer-spec.md, gsd-instruction-set-architecture-vision.md, gsd-os-desktop-vision.md, skill-creator-wasteland-integration-analysis.md}
+\metafield{Context:}{This mission spans three convergent research fronts: the current state of the Yegge ecosystem (Gastown/Wasteland/Gas City), the GSD-OS control surface wire harness and bus architecture, and the full-stack mapping from natural language prompts through LoRA adapter routing to GPU silicon execution.}
+
+\subsection{Vision}
+
+The Amiga had copper lists. The copper processor ran against the beam --- not waiting for the CPU, not asking permission, but executing its own instruction stream at the precise moment the electron gun crossed the right scanline. The CPU composed the list; the hardware consumed it. The intelligence was in the list, and the list was cheap.
+
+The GSD Silicon Layer is the copper list for the age of AI agents. The natural language prompt is the developer writing a demo; the skill-creator is the assembler that compiles intent into copper list form; the GPU is the coprocessor that runs it autonomously while the CPU (Claude) moves on to the next creative decision. Between the moment a human types a sentence and the moment a tensor materializes on a GPU tile, there is a complete instruction pipeline --- and every stage of that pipeline maps exactly to hardware concepts that have existed since 1985.
+
+Three research fronts converge here. First: the Yegge ecosystem has matured rapidly. Gastown is now at v0.10.0 with a Trust Tier Escalation Engine live in production, the Wasteland Phase 1 federation is operational, and Gas City --- the declarative LEGO deconstruction of Gas Town into composable orchestrator primitives --- is in early demo. These are not peripheral developments; they define the external interface that GSD skill-creator must speak to. Second: the GSD-OS control surface --- the Blueprint Editor, the boot sequence, the ISA abstraction stack, the bus architecture --- represents the most ambitious internal architecture vision in the GSD ecosystem, and it needs a complete wire harness: a specification of what connects to what, at what bandwidth, with what priority. Third: the GPU silicon layer has matured in precisely the directions GSD predicted. Multi-LoRA serving (LoRAX, NVIDIA NIM, LoRAFusion, LoRA-Switch, vLLM dynamic loading) is production-ready in 2026, and the hardware envelope (RTX 4060 Ti 8GB, Blackwell consumer cards) has expanded to meet GSD's reference target.
+
+All three fronts are about the same thing: the spaces between. Between a prompt and an adapter. Between a Gas Town polecat and a GSD wave plan. Between a natural language intent and a compiled copper list running on silicon. The connections are the architecture.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Yegge ecosystem drift:} The Gastown/Wasteland/Gas City ecosystem has advanced significantly since the last GSD alignment analysis (March 6, 2026), including Trust Tier Escalation Engine, v0.10.0 release, and Gas City early demo. GSD skill-creator's integration roadmap (ZFC compliance auditor, work decomposition, rig-to-task matching) needs to be re-evaluated against the current protocol state.
+  
+  \item \textbf{Unspecified wire harness:} The GSD-OS vision documents describe the control surface architecture (bus, ISA, Blueprint Editor, copper lists, FPGA synthesis pipeline) in conceptual terms, but no complete wire harness document exists that specifies: what signals flow on which bus, at what priority, with what latency budget, and how the five ISA abstraction layers connect to each other and to the hardware.
+  
+  \item \textbf{Missing prompt-to-silicon bridge specification:} The path from a natural language prompt to a CUDA kernel executing on a GPU tile has been described in fragments across the silicon layer spec and ISA vision, but never as a complete end-to-end specification with timing, failure modes, fallback paths, and silicon-level semantics.
+  
+  \item \textbf{Adapter routing is GPU-bound, not intent-bound:} Current multi-LoRA serving systems (vLLM, LoRAX, NVIDIA NIM) route requests by adapter ID --- but GSD's architecture calls for intent-based routing (the chipset's FPGA synthesis pipeline classifies intent and selects adapters). The integration between intent classification and adapter scheduling has no concrete design.
+  
+  \item \textbf{Gas City presents a structural alignment opportunity:} Gas City's declarative LEGO decomposition of Gas Town is converging on GSD's chipset YAML architecture from a different direction. If Gas City's component model can be expressed in chipset YAML, GSD skill-creator becomes a configuration layer for Gas City topologies --- a contribution with ecosystem-level leverage.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Copper List Principle:} Every layer of the stack is a list of instructions that runs autonomously once composed. The CPU (Claude) writes the list; the coprocessors (skills, adapters, GPU kernels) execute it. The intelligence is in the composition, not the execution. This applies at five scales simultaneously: the prompt (intent), the GSD workflow (orchestration), the ISA (assembly), the LoRA router (silicon selection), and the CUDA kernel (computation).
+
+\subsubsection{The Full-Stack Abstraction Diagram}
+
+\begin{asciibox}
+LEVEL 5: Human Intent
+  "Build me a React dashboard with WebSocket updates"
+  (Natural language --- the developer's creative act)
+        |
+        v
+LEVEL 4: GSD Workflow Orchestration
+  new-project -> research -> requirements -> plan -> execute
+  (Spec-driven decomposition, wave execution, HITL gates)
+        |
+        v
+LEVEL 3: GSD Assembly Language (ISA)
+  LOAD SK, #react-patterns
+  EXEC PC, #execute-phase
+  ROUTE GPU, #frontend-adapter
+  (The wire harness: structured intent bundles, DACP protocol)
+        =====THE BRIDGE=====
+        v
+LEVEL 2: Adapter Routing Layer
+  Intent Classifier -> Skill Registry lookup
+  -> LoRA adapter hot-swap (<100ms) or cold-load (~500ms)
+  -> vLLM / NVIDIA NIM dynamic routing
+  (The chipset's FPGA synthesis: intent -> silicon config)
+        |
+        v
+LEVEL 1: GPU Silicon Execution
+  QLoRA adapter resident in VRAM
+  CUDA kernel: batched GEMM + LoRA branch fused
+  RTX 4060 Ti: 40-53 tok/s, 8GB VRAM, 3-4 hot adapters
+  (The copper list executing on the beam)
+\end{asciibox}
+
+\subsubsection{Yegge Ecosystem Current State (March 26, 2026)}
+
+\begin{asciibox}
+GASTOWN v0.10.0
+  Mayor -> Polecat (parallel workers, Git worktrees)
+  Witness / Deacon / Refinery / Convoy
+  Trust Tier Escalation Engine [NEW - PRODUCTION]
+  Escalation severity levels, routing, tracking
+  OTEL telemetry: VictoriaMetrics/VictoriaLogs
+  Multi-model: Claude, Codex, Gemini, Copilot, Amp
+
+WASTELAND (Phase 1 - LIVE)
+  Federation: DoltHub fork/merge protocol
+  Wanted board: open -> claimed -> review -> completed
+  Trust levels: registered -> contributor -> maintainer
+  Character sheets: ~10,000 pre-seeded from GitHub
+  gastownhall.ai: leaderboards, profile pages, Discord
+  Anti-collusion: NOT YET BUILT (known gap)
+
+GAS CITY (Early Demo - IN DEVELOPMENT)
+  Declarative LEGO deconstruction of Gas Town
+  Composable orchestrator topology builder
+  Julian Knutsen + Chris Sells collaboration
+  Goal: pure-declarative Gas Town replacement
+  Commons board: work items posted for contributors
+
+SKILL-CREATOR ALIGNMENT OPPORTUNITIES
+  Phase 1: ZFC Compliance Auditor (stamp-worthy)
+  Phase 2: Work Decomposition (GSD wave plans for wanted items)
+  Phase 3: Rig-to-Task Matching (unit circle framework)
+  Phase 4: Trust Tier Bounded Reputation module
+  Phase 5: Wasteland Protocol upstream intelligence
+  CRITICAL NEW: Gas City YAML topology <- chipset.yaml bridge
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Yegge Ecosystem Current State and Delta Analysis}
+What has changed in Gastown/Wasteland/Gas City since the March 6 integration analysis? Documents current state of v0.10.0 CHANGELOG, Trust Tier Escalation Engine architecture, Gas City declarative component model, Wasteland schema evolution, and commons board activity. Evaluates which of the five skill-creator integration phases remain valid and identifies new opportunities created by recent releases.
+
+\subsubsection{Module 2: Gas City / Chipset YAML Alignment}
+Deep analysis of Gas City's declarative component model versus GSD's chipset YAML architecture. Maps Gas City topology primitives (Mayor, Polecat, Witness, Deacon, Refinery, Convoy) to GSD chipset roles (Agnus, Denise, Paula, 68000/Gary). Produces a proposed bridge specification: how chipset.yaml can express Gas City topologies, enabling GSD skill-creator to become a configuration generator for Gas City orchestrators.
+
+\subsubsection{Module 3: GSD-OS Control Surface Wire Harness}
+Specifies the complete wire harness of the GSD-OS control surface: the Blueprint Editor (workbench), the boot sequence, the Dashboard (oscilloscope), and the tmux/session layer (Paula I/O). Defines bus signal types, priorities, bandwidth allocations, latency budgets, and interrupt vectors for each control surface component. Produces the hardware reference manual for the GSD-OS backplane.
+
+\subsubsection{Module 4: ISA and Bus Architecture Specification}
+Completes the GSD Instruction Set Architecture specification with full bus protocol: the five abstraction layers, register assignments, instruction encoding, copper list execution model, the FPGA synthesis pipeline (ELABORATION -> SYNTHESIS -> TECHNOLOGY MAPPING -> PLACE AND ROUTE -> BITSTREAM -> SIMULATION), and the safety validation layer. Maps GSD ISA registers to ARM A64, RISC-V, x86-64, and 68000 equivalents.
+
+\subsubsection{Module 5: Intent Classification to LoRA Adapter Routing}
+Specifies the bridge between GSD's FPGA mode intent classification and production multi-LoRA serving systems (vLLM, NVIDIA NIM, LoRAX, LoRA-Switch). Defines the intent classifier architecture, the skill registry's adapter lookup table, hot/cold adapter swap protocols, the VRAM residency policy for the RTX 4060 Ti 8GB envelope, and failure-mode handling when adapter confidence falls below threshold.
+
+\subsubsection{Module 6: GPU Silicon Execution Layer}
+Documents the GPU silicon execution layer from QLoRA training data generation through adapter distillation to CUDA kernel execution. Covers: LoRAFusion tile-level routing, vLLM dynamic in-place loading for async RL, LoRA-Switch token-wise routing, QVAC cross-platform inference for heterogeneous hardware, NVIDIA NIM mixed-batch GEMM with splitK, and performance benchmarks on the RTX 4060 Ti reference platform.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: gsd-alignment-mission
+  version: "1.0.0"
+  mode: fleet
+  description: >
+    Full-stack alignment: Yegge ecosystem, GSD-OS bus,
+    prompts-to-silicon GPU logic mapping
+
+  agnus:                    # Orchestration / DMA
+    model: claude-opus-4-6
+    role: FLIGHT
+    responsibilities:
+      - Cross-module synthesis and integration
+      - Go/no-go gate decisions
+      - Gas City / chipset YAML bridge design
+      - Module 5+6 architecture judgment
+
+  denise:                   # Display / output rendering
+    model: claude-sonnet-4-6
+    role: EXEC (x3 parallel)
+    responsibilities:
+      - Module document assembly
+      - Source verification and citation
+      - LaTeX production
+
+  paula:                    # I/O / anticipatory
+    model: claude-haiku-4-5
+    role: LOG + BUDGET
+    responsibilities:
+      - Shared schema generation
+      - Token budget tracking
+      - Commit messages and audit trail
+
+  cpu_68000:                # Judgment / glue logic
+    model: claude-opus-4-6
+    role: ARCH + SECURE
+    responsibilities:
+      - Wire harness specification review
+      - Safety boundary enforcement
+      - ISA completeness validation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Gastown v0.10.0 state, Trust Tier Escalation Engine architecture
+  \item Wasteland Phase 1 protocol, Gas City declarative component model
+  \item ZFC Compliance Auditor and Work Decomposition contributions (Phases 1--2)
+  \item Gas City / chipset YAML bridge specification
+  \item GSD-OS bus architecture: Blueprint Editor, Dashboard, Paula I/O
+  \item ISA five-layer stack with full bus protocol specification
+  \item FPGA synthesis pipeline: ELABORATION through SIMULATION
+  \item RTX 4060 Ti 8GB VRAM budget: hot/cold LoRA adapter policy
+  \item Intent classifier to adapter router bridge specification
+  \item vLLM, NVIDIA NIM, LoRAX, LoRA-Switch, LoRAFusion integration patterns
+  \item QLoRA training pipeline on reference hardware
+  \item Performance benchmarks: 40--53 tok/s baseline, LoRAFusion 1.47x speedup
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Phase 3--5 Wasteland contributions (rig-to-task matching, bounded reputation, upstream intel extension) --- separate mission
+  \item Physical FPGA or ASIC fabrication
+  \item Multi-GPU cluster configurations (beyond dual-RTX 5090 reference)
+  \item Gas Town Mayor/Polecat implementation details not relevant to bridge spec
+  \item Training data acquisition and labeling methodology
+  \item GSD-OS Tauri application implementation code
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Gastown v0.10.0 delta analysis is complete, covering Trust Tier Escalation Engine, Gas City current state, and Wasteland Phase 1 protocol changes since March 6
+  \item Each of the five skill-creator integration phases is re-evaluated against current Yegge ecosystem state, with ``valid,'' ``modified,'' or ``superseded'' classification
+  \item A Gas City / chipset YAML bridge specification exists, mapping Gas Town operational roles to GSD chipset component types with concrete YAML examples
+  \item The GSD-OS control surface wire harness is fully specified: all bus signal types defined, bandwidth allocations stated, interrupt priority table complete
+  \item The ISA five-layer stack is fully specified with encoding tables, register maps, and bus protocol for each layer boundary
+  \item The FPGA synthesis pipeline is specified as an executable six-step process with input/output contracts at each stage boundary
+  \item The VRAM residency policy for the RTX 4060 Ti 8GB reference platform is specified: which adapters are hot-resident, which are cold-paged, eviction policy, and budget arithmetic
+  \item The intent classifier to adapter router bridge is specified: classifier architecture, confidence threshold, adapter lookup mechanism, hot-swap protocol, and fallback to cloud API
+  \item Multi-LoRA serving integration patterns are documented for vLLM, NVIDIA NIM, LoRAX, and LoRA-Switch, with GSD-specific configuration examples
+  \item Performance expectations are documented with sources: inference throughput, LoRAFusion speedup, adapter swap latency, QLoRA training throughput
+  \item All numerical claims are attributed to specific sources (arXiv, NVIDIA, EuroSys 2026)
+  \item A dependency graph shows the construction order: which modules must complete before the bridge specifications can be written
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+skill-creator-wasteland-integration-analysis.md & Foundation for Module 1--2; this mission updates and extends it \\
+gsd-chipset-architecture-vision.md & Module 2 bridge target; Gas City mapping source \\
+gsd-silicon-layer-spec.md & Module 5--6 foundation; reference hardware spec \\
+gsd-instruction-set-architecture-vision.md & Module 3--4 source material; ISA and bus architecture \\
+gsd-os-desktop-vision.md & Module 3 control surface source; shader architecture \\
+unit-circle-skill-creator-synthesis.md & Mathematical framework for Phase 3 rig-to-task (out of scope v1.0) \\
+gsd-upstream-intelligence-pack-v1\_43.md & Extension target for Wasteland protocol monitoring \\
+gsd-vision-to-mission-skill.md & This document was produced using the vision-to-mission pipeline \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga's secret was that the hardware was honest. The register maps were in the manual. The copper list was a list anyone could write. The architecture was visible all the way down, and that visibility was what made the platform generative. You couldn't hide complexity behind a black box because there was no black box. Every scanline was an opportunity; every blitter operation was documented.
+
+The GSD ecosystem is building the same kind of honest architecture for the age of AI agents. The chipset YAML is the register map. The ISA is the instruction reference. The silicon layer spec is the schematic. The bus protocol is the backplane diagram. And Gas City --- if the chipset.yaml bridge holds --- will allow GSD to become the Amiga Hardware Reference Manual for a federation of a thousand agent orchestrators.
+
+The spaces between --- between a prompt and a silicon tile, between a Gas Town polecat and a GSD wave plan, between the bus signal and the CUDA kernel --- are not gaps. They are the architecture.
+
+\newpage
+
+%═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+%═════════════════════════════════════════════════════════════════════════════
+
+\section{GSD Alignment --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for all six research modules. The mission spans three distinct technical domains; each module's findings are self-contained and can be read independently by specialist agents. Modules 1--2 draw from live GitHub data; Modules 3--4 from GSD project knowledge; Modules 5--6 from peer-reviewed GPU research and production serving system documentation.
+
+Key source organizations:
+\begin{itemize}
+  \item GitHub: steveyegge/gastown, steveyegge/wasteland, gsd-build/get-shit-done, Tibsfox/gsd-skill-creator
+  \item GSD project knowledge documents (see depends-on list above)
+  \item EuroSys 2026 (LoRAFusion paper, arXiv 2510.00206)
+  \item NVIDIA Technical Blog (NIM multi-LoRA serving)
+  \item arXiv 2511.22880 (LoRAServe heterogeneous adapter placement)
+  \item Predibase/LoRAX (GitHub: predibase/lorax)
+  \item OpenReview: LoRA-Switch token-wise routing
+  \item vLLM documentation (dynamic LoRA loading, inplace replacement)
+\end{itemize}
+
+\subsection{Module 1: Yegge Ecosystem Current State}
+
+\subsubsection{Gastown v0.10.0 --- Key Changes Since March 6, 2026}
+
+The most architecturally significant addition in recent releases is the Trust Tier Escalation Engine. Gastown now implements full escalation with severity levels, routing, and tracking --- including preservation of escalation metadata in mayor mail copies and escalation urgency in nudges. This directly intersects with GSD skill-creator's Phase 4 contribution (bounded reputation); the escalation engine provides the enforcement layer that bounded reputation would feed.
+
+Other significant v0.10.0 changes: polecats now check CLAUDE.md and AGENTS.md for project-specific test gates, prior attempt context is injected when re-dispatching to polecats (improving recovery from failure), and repo-sourced rig settings via \texttt{.gastown/settings.json} enable per-project configuration without committing Gas Town state.
+
+The branch-per-polecat infrastructure was removed --- server mode now eliminates branch isolation requirements, simplifying the write architecture. The JSONL fallback was removed, with Dolt as the sole backend. This completes the architectural cleanup that the March 6 analysis described as ``in progress.''
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Feature} & \tableheader{Status March 6} & \tableheader{Status March 26} \\
+\midrule
+Trust Tier Escalation & Not present & PRODUCTION (v0.10.0) \\
+Branch-per-polecat & Live (deprecated) & REMOVED (server mode) \\
+JSONL fallback & Removed in cleanup & FULLY REMOVED \\
+CLAUDE.md/AGENTS.md test gates & Not present & LIVE (polecats) \\
+Prior attempt context injection & Not present & LIVE (PR \#2739) \\
+Repo-sourced rig settings & Not present & LIVE (.gastown/settings.json) \\
+Gas City declarative builder & ``early demo'' mentioned & IN DEVELOPMENT (Knutsen+Sells) \\
+Wasteland Phase 1 & Launched March 4 & OPERATIONAL (CLI suite complete) \\
+gastownhall.ai & Building & LIVE (leaderboards, profiles) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wasteland Phase 1 --- Current Protocol State}
+
+The \texttt{gt wl} command suite is complete (join, post, claim, done, browse, sync) using Dolt server for write operations and clone-then-discard for read operations. The \texttt{wasteland/} package handles DoltHub API and configuration; \texttt{doltserver/wl\_commons.go} handles server-side writes; each subcommand has a dedicated file. The architecture is explicitly forward-compatible, with Yegge noting schema migration on Dolt is ``a dream.''
+
+The Trust Tier escalation engine integrates with the Wasteland: rigs accumulate trust through validated completions, and the escalation system enforces tier transitions. The anti-collusion detection system is still unbuilt --- the stamp graph topology analysis described in the March 6 analysis remains an open contribution.
+
+\subsubsection{Gas City --- Declarative Component Model}
+
+Gas City is in active development by Julian Knutsen and Chris Sells. The design goal is to deconstruct Gas Town into composable LEGO primitives that can be assembled into custom orchestrator topologies. Yegge describes it as enabling ``a pure-declarative version of itself'' --- Gas Town as configuration rather than binary. There is work on the Commons board for contributors.
+
+This is the most significant new development for GSD alignment. If Gas City's component model is YAML-based or expressible in YAML, GSD's chipset.yaml architecture represents an existing implementation of exactly what Gas City is building toward.
+
+\subsection{Module 2: Gas City / Chipset YAML Bridge Analysis}
+
+\subsubsection{Gas Town Operational Roles as Chipset Components}
+
+Gas Town's seven operational roles map directly to GSD chipset chip designations:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Gas Town Role} & \tableheader{GSD Chipset} & \tableheader{Function Mapping} \\
+\midrule
+Mayor & Agnus & Orchestration, DMA --- directs work across all polecats \\
+Polecat & Denise (x N) & Parallel execution workers --- render output \\
+Witness & Paula (monitoring) & I/O health monitoring, observes all sessions \\
+Deacon & Paula (patrol) & Daemon patrol, zombie detection, escalation routing \\
+Refinery & 68000 (merge logic) & Merge queue management, convoy landing \\
+Convoy & Gary (glue) & Work item grouping, parallel polecat coordination \\
+Dog (various) & Custom chips & JSONL Dog, Compactor Dog, Doctor Dog (coprocessors) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Proposed Bridge: chipset.yaml Expressing Gas City Topologies}
+
+A Gas City topology expressed in GSD chipset YAML would look like:
+
+\begin{asciibox}
+chipset:
+  name: gas-city-standard
+  version: "1.0.0"
+  mode: asic         # pre-built Gas Town topology
+  source: gascity
+
+  agnus:             # Mayor
+    model: claude-sonnet-4-6
+    role: mayor
+    mail_inject: true
+    hooks: [sessionStart, userPromptSubmitted, preToolUse]
+    patrol_interval: 30s
+
+  denise:            # Polecats (parallel workers)
+    model: claude-sonnet-4-6
+    role: polecat
+    count: 4
+    worktree: true
+    formula: mol-polecat-work
+    test_gates: [CLAUDE.md, AGENTS.md]
+
+  paula:             # Witness + Deacon
+    monitor: witness
+    patrol: deacon
+    escalation:
+      enabled: true
+      severity: [warn, critical, block]
+    dogs:
+      - compactor-dog
+      - doctor-dog
+
+  cpu_68000:         # Refinery
+    role: refinery
+    merge_queue: true
+    convoy_landing: true
+\end{asciibox}
+
+This bridge has two-way value: GSD skill-creator can generate Gas City configurations from declarative intent, and Gas City users can use chipset.yaml tooling (validation, simulation, dry-run) for their Gas Town topologies.
+
+\subsection{Module 3: GSD-OS Control Surface Wire Harness}
+
+\subsubsection{Control Surface Components}
+
+The GSD-OS control surface has three primary surfaces and one runtime layer:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Surface} & \tableheader{Chipset Role} & \tableheader{Bus Interface} \\
+\midrule
+Blueprint Editor (Workbench) & Denise & Output bus: WebGL render pipeline; Input bus: user manipulation events \\
+Dashboard (Oscilloscope) & Denise + Paula & Read-only telemetry bus; 200ms refresh cycle \\
+Paula I/O (tmux session) & Paula & Bidirectional: stdin/stdout to Claude sessions, gpio interrupt bus \\
+Boot Sequence (CRT shader) & Denise & One-time initialization bus; reads chipset.yaml, emits CHIPSET INIT events \\
+Skill Registry & Agnus & Read bus: pattern queries; Write bus: skill updates; Cache bus: 5-min TTL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Bus Signal Types and Priority}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Signal Type} & \tableheader{Priority} & \tableheader{Latency Budget} & \tableheader{Description} \\
+\midrule
+INTERRUPT (HITL gate) & 0 (highest) & immediate & Human-in-the-loop gate; suspends all bus activity \\
+SAFETY\_BLOCK & 1 & 10ms & Safety warden halt; staging layer gate triggered \\
+CONTEXT\_CRITICAL & 2 & 50ms & Context window at CRITICAL threshold (>90\%) \\
+ADAPTER\_SWAP & 3 & 100ms hot / 500ms cold & LoRA hot-swap or cold-load from VRAM/RAM \\
+CONTEXT\_WARNING & 4 & 200ms & Context window at WARNING threshold (>80\%) \\
+SKILL\_UPDATE & 5 & 1s & New skill applied to registry \\
+TELEMETRY & 6 (lowest) & 200ms cycle & Dashboard refresh, OTEL metrics emit \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{VRAM Budget Architecture (RTX 4060 Ti 8GB)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Resource} & \tableheader{Budget} & \tableheader{Notes} \\
+\midrule
+Base model (Q4\_K\_M 7B) & 4,500 MB & Qwen3-8B or Llama 3.1-8B; persistent \\
+KV cache (quantized fp8) & 2,000 MB & 128k+ context via Ollama/llama.cpp \\
+Hot LoRA adapters (3--4) & 200 MB & Resident in VRAM; sub-100ms swap \\
+CUDA overhead / buffers & 500 MB & Runtime headroom \\
+Cold LoRA adapters (20--30) & 1,000 MB & System RAM; ~500ms cold-load \\
+QLoRA training workspace & 8,000 MB & System RAM; distillation buffer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: ISA and Bus Architecture}
+
+\subsubsection{The Five-Layer Stack}
+
+GSD's ISA vision document (gsd-instruction-set-architecture-vision.md) defines a five-layer abstraction stack with the ISA as the bridge between AI orchestration and real hardware. The key insight is that the same instruction set serves both directions:
+
+\begin{asciibox}
+UPWARD (AI orchestration):
+  Level 5: Natural language intent
+  Level 4: GSD workflow (new-project -> execute)
+  Level 3: GSD Assembly (LOAD SK, #react-patterns)
+  ===== THE ISA BRIDGE =====
+  Level 2: GSD Machine Language (0x2A01 0x4003)
+  Level 1: Bus Protocol (filesystem ops, DMA, interrupts)
+
+DOWNWARD (real hardware):
+  Level 1: Physical bus (I2C, SPI, UART, GPIO)
+  Level 2: Machine language (ARM/RISC-V/x86-64/68000)
+  Level 3: Assembly language (ISA mnemonics)
+  Level 4: High-level language (C, Rust, Python)
+  Level 5: Application (the program)
+\end{asciibox}
+
+\subsubsection{Register Mapping Across Architectures}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{2cm}C{2cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{GSD} & \tableheader{ARM A64} & \tableheader{RISC-V} & \tableheader{x86-64} & \tableheader{68000} \\
+\midrule
+R0--R7 & X0--X7 & x10--x17 & RAX--R15 & D0--D7 \\
+SK (skill) & X8 (IP) & x8 (s0) & RBX & A0 \\
+BG (budget) & X9 & x9 (s1) & RCX & A1 \\
+PC & PC & pc & RIP & PC \\
+SP & SP & sp (x2) & RSP & SP (A7) \\
+FL (flags) & NZCV & (no flags) & RFLAGS & SR \\
+IO & MMIO & MMIO & I/O ports & Custom \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{FPGA Synthesis Pipeline}
+
+The six-step synthesis pipeline converts natural language intent to chipset configuration:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Step} & \tableheader{Stage} & \tableheader{Output Contract} \\
+\midrule
+1 & ELABORATION & Parsed intent; identified functional blocks; CLB pattern matches \\
+2 & SYNTHESIS & Skill LUT selection; agent CLB instances; routing equations \\
+3 & TECHNOLOGY MAPPING & Available skill list; registry vs. cloud routing; constraint targets \\
+4 & PLACE AND ROUTE & Agent slot assignments; bus routing table; timing verification \\
+5 & BITSTREAM GENERATION & chipset.yaml; chipset.lock; bus routing tables; simulation config \\
+6 & SIMULATION & Dry-run results; routing verification; budget utilization estimate; timing report \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5: Intent Classification to LoRA Adapter Routing}
+
+\subsubsection{The Intent Classifier Architecture}
+
+The GSD chipset's FPGA mode performs intent classification as step 1 of the synthesis pipeline. For the silicon layer, this classification must produce an adapter ID (or set of candidate IDs) that the LoRA router can act on. The classifier operates in three tiers:
+
+\begin{asciibox}
+TIER 1: Keyword/pattern matching (< 1ms)
+  - Known skill triggers from SKILL.md descriptions
+  - Exact phrase matching against activated skill registry
+  - Outputs: skill_id or NULL
+
+TIER 2: Semantic clustering (DBSCAN, < 50ms)
+  - PromptClusterer from skill-creator observation pipeline
+  - Compares intent embedding against cluster centroids
+  - Outputs: cluster_id -> adapter_candidates[]
+
+TIER 3: Model inference (cloud API fallback)
+  - Only when Tier 1+2 confidence < threshold
+  - Claude classifies intent and returns structured adapter spec
+  - Outputs: chipset.yaml fragment with adapter_id
+\end{asciibox}
+
+\subsubsection{Adapter Routing Integration: vLLM, LoRAX, NVIDIA NIM}
+
+Three production serving systems support dynamic LoRA loading in 2026:
+
+\textbf{vLLM} supports dynamic adapter loading with in-place replacement for async RL workflows (\texttt{load\_inplace=True}). The \texttt{/v1/load\_lora\_adapter} endpoint enables hot-swap without interrupting concurrent inference. This maps directly to GSD's ``hot-swap < 100ms'' target: vLLM can replace a resident adapter while other requests continue batching.
+
+\textbf{LoRAX} (Predibase) serves thousands of adapters from a single GPU using heterogeneous continuous batching and asynchronous prefetch/offload between VRAM and CPU RAM. The adapter exchange scheduler optimizes aggregate throughput. For GSD: LoRAX is the appropriate serving layer when the skill registry has many low-frequency adapters.
+
+\textbf{NVIDIA NIM} implements mixed-batch inference for LoRA swarms using batched GEMM and splitK. Supports dynamic loading from HuggingFace, Predibase, or local filesystem. The NIM approach is highest-performance for a small number of hot adapters --- matching GSD's ``3--4 hot adapters in VRAM'' architecture.
+
+\subsection{Module 6: GPU Silicon Execution Layer}
+
+\subsubsection{LoRAFusion: Tile-Level Kernel Architecture (EuroSys 2026)}
+
+LoRAFusion (Zhu et al., EuroSys 2026) achieves 1.47x average end-to-end speedup for multi-LoRA training by fusing the LoRA branch operations with base GEMM at the tile level. The key insight: LoRA's memory-bound path (the low-rank matrices A and B) can be fused with the frozen base model's compute-bound path, eliminating redundant reads of the partial output gradient. FusedMultiLoRA routes adapters at the tile level rather than the layer level, enabling fine-grained VRAM utilization.
+
+For GSD's reference hardware (RTX 4060 Ti, 8GB VRAM), tile-level routing means the VRAM residency policy operates at finer granularity than whole-adapter loading: hot tiles of frequently-used adapters can stay resident while less-accessed tiles are paged.
+
+\subsubsection{LoRA-Switch: Token-Wise Routing}
+
+LoRA-Switch (OpenReview, 2024) addresses the MoE-style dynamic adapter problem: layer-wise or block-wise routing incurs 2.5x+ latency overhead due to fragmented CUDA kernel calls. Token-wise routing merges the selected adapter weights into the backbone for each token, eliminating the CUDA fragmentation. For GSD: when a single inference request spans multiple skill domains (frontend + testing + deployment), token-wise routing can blend adapter activations without sequential kernel invocations.
+
+\subsubsection{Performance Benchmarks: RTX 4060 Ti Reference Platform}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} & \tableheader{Source} \\
+\midrule
+Local inference (Q4\_K\_M 7B) & 40--53 tok/s & Ollama RTX 4060 benchmarks \\
+LoRAFusion training speedup & 1.47x average & EuroSys 2026, arXiv 2510.00206 \\
+LoRA hot-swap latency & < 100ms & vLLM in-place load docs \\
+LoRA cold-swap latency & ~500ms & GSD silicon layer spec (VRAM page) \\
+QLoRA training throughput & 500--628 tok/s & IBM aLoRA research \\
+Training run (500 examples) & Minutes, not hours & GSD silicon layer spec \\
+KV cache overhead (128k ctx) & 39GB (70B model) & Fluence GPU guide 2026 \\
+Consumer peak (RTX 5090) & 5,841 tok/s (7B) & Fluence GPU guide 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Boundary Type} & \tableheader{Specification} \\
+\midrule
+Adapter training data quality & GATE & No adapters promoted without minimum 50 training pairs and held-out eval \\
+ZFC compliance & GATE & Intent classifier must not embed heuristic reasoning in orchestration code \\
+Staging layer gate & ABSOLUTE & All adapter deployments must pass through staging; push.default=nothing enforced \\
+VRAM budget ceiling & ABSOLUTE & Base model + hot adapters + KV cache must not exceed 7,700MB; headroom reserved \\
+Wasteland reputation anti-collusion & ANNOTATE & Bounded reputation changes flagged but detection not yet architectural \\
+Gas City bridge compatibility & ANNOTATE & Bridge spec is proposal; requires Knutsen/Sells review before implementation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Repositories and Live Sources}
+\begin{itemize}
+  \item steveyegge/gastown v0.10.0 CHANGELOG and releases, github.com/steveyegge/gastown
+  \item Yegge, Steve. ``Welcome to the Wasteland: A Thousand Gas Towns.'' Medium, March 2026
+  \item Yegge, Steve. ``Welcome to Gas Town.'' Medium, January 14, 2026
+  \item Yegge, Steve. ``The Future of Coding Agents.'' Medium, January 2026
+  \item Wasteland CLI PR \#1552, steveyegge/gastown, February 16, 2026
+  \item predibase/lorax --- Multi-LoRA inference server, github.com/predibase/lorax
+  \item vLLM LoRA Adapters documentation, docs.vllm.ai
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}
+  \item Zhu, Z. et al. ``LoRAFusion: Efficient LoRA Fine-Tuning for LLMs.'' EuroSys 2026, Edinburgh. arXiv 2510.00206
+  \item LoRAServe: ``Serving Heterogeneous LoRA Adapters in Distributed LLM Inference Systems.'' arXiv 2511.22880v1, November 2025
+  \item LoRA-Switch: ``Boosting the Efficiency of Dynamic LLM Adapters via System-Algorithm Co-design.'' OpenReview, 2024
+  \item Wen et al. ``FlexLoRA: Entropy-Guided Dynamic Rank Allocation.'' ICLR 2026
+  \item Kim \& Choi. ``Learning Rate Tuning Accounts for Most LoRA Performance Variance.'' February 2026
+\end{itemize}
+
+\subsubsection{Technical Documentation and Industry Sources}
+\begin{itemize}
+  \item NVIDIA Technical Blog. ``Seamlessly Deploying a Swarm of LoRA Adapters with NVIDIA NIM.'' June 2024
+  \item Fluence. ``7 Best GPU for LLM in 2026.'' fluence.network, February 2026
+  \item Tether/QVAC. ``Cross-Platform BitNet LoRA Framework.'' tether.io, March 17, 2026
+  \item GSD Project Knowledge: gsd-silicon-layer-spec.md, gsd-instruction-set-architecture-vision.md, gsd-os-desktop-vision.md, gsd-chipset-architecture-vision.md, skill-creator-wasteland-integration-analysis.md
+\end{itemize}
+
+\newpage
+
+%═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+%═════════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce six specification documents covering: (1) Yegge ecosystem delta analysis with updated integration phase assessments, (2) Gas City/chipset YAML bridge specification, (3) GSD-OS control surface wire harness, (4) ISA and bus architecture complete specification, (5) intent classifier to LoRA router bridge, and (6) GPU silicon execution layer reference. Together these documents complete the full-stack specification from natural language prompt to CUDA kernel on the RTX 4060 Ti reference platform.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION
+  Schema Agent (Haiku) -- shared schema, source index, adapter format spec
+
+WAVE 1A: YEGGE TRACK (parallel)            WAVE 1B: ARCHITECTURE TRACK (parallel)
+  CRAFT-YEGGE: Module 1 -- delta analysis    CRAFT-ISA: Module 4 -- ISA + bus spec
+  CRAFT-BRIDGE: Module 2 -- Gas City YAML    CRAFT-GPU: Module 6 -- silicon execution
+
+WAVE 1C: CONTROL SURFACE TRACK (parallel)
+  CRAFT-BUS: Module 3 -- wire harness
+  CRAFT-ROUTER: Module 5 -- intent->adapter bridge
+
+WAVE 2: SYNTHESIS
+  Opus Synthesizer -- cross-module integration
+  INTEG Agent -- dependency graph, bridge validation
+  ARCH Agent -- full-stack completeness review
+
+WAVE 3: PUBLICATION + VERIFICATION
+  Publication Agent (Sonnet) -- document assembly
+  Verification Agent (Sonnet) -- source validation
+  CAPCOM -- human review before final publish
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Module} \\
+\midrule
+1 & Yegge delta analysis document & All 5 phases re-evaluated; Trust Escalation Engine mapped & Module 1 \\
+2 & Gas City / chipset.yaml bridge spec & YAML examples for all 7 Gas Town roles; two-way mapping & Module 2 \\
+3 & GSD-OS wire harness document & All bus signals defined; bandwidth table complete & Module 3 \\
+4 & ISA complete specification & Encoding tables, register maps, bus protocol at each layer & Module 4 \\
+5 & Intent-to-adapter bridge spec & Classifier architecture; hot-swap protocol; fallback path & Module 5 \\
+6 & GPU silicon execution reference & Performance table sourced; vLLM/NIM/LoRAX config examples & Module 6 \\
+7 & Full-stack integration diagram & One ASCII diagram spanning all 5 abstraction levels with timing & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Foundation Schema & None & Haiku & 8K \\
+Module 1: Yegge Delta & Schema & Sonnet & 25K \\
+Module 2: Gas City Bridge & Module 1 + Schema & Opus & 30K \\
+Module 3: Wire Harness & Schema + ISA vision & Sonnet & 20K \\
+Module 4: ISA + Bus Spec & Schema + ISA vision & Sonnet & 35K \\
+Module 5: Intent Router & Modules 3+4 + Schema & Opus & 30K \\
+Module 6: GPU Silicon & Schema + silicon spec & Sonnet & 25K \\
+Synthesis & Modules 1--6 & Opus & 20K \\
+Verification & All modules & Sonnet & 15K \\
+Publication & All modules + Synthesis & Sonnet & 10K \\
+\midrule
+\textbf{Total} & & & \textbf{218K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+FLIGHT & Opus & Cross-module judgment; ecosystem-level decisions; Gas City bridge architecture \\
+CRAFT-BRIDGE & Opus & Gas City/chipset.yaml mapping requires deep ecosystem understanding \\
+CRAFT-ROUTER & Opus & Intent classifier architecture requires reasoning about failure modes \\
+INTEG & Opus & Full-stack integration requires holding six module outputs in synthesis \\
+ARCH & Opus & Completeness and correctness review of ISA and bus specs \\
+CRAFT-YEGGE & Sonnet & Delta analysis is structured survey: CHANGELOG + GitHub source \\
+CRAFT-ISA & Sonnet & ISA spec has clear structure; tables and encoding are mechanical once researched \\
+CRAFT-BUS & Sonnet & Wire harness tables are structured production \\
+CRAFT-GPU & Sonnet & GPU performance reference is well-sourced; table assembly \\
+Publication & Sonnet & Document assembly from completed modules \\
+Verification & Sonnet & Source citation checking is structured \\
+Foundation & Haiku & Schema generation; scaffolding only \\
+LOG + BUDGET & Haiku & Audit trail; token consumption tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model Mix} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schema, source index, adapter format spec \\
+1A & Yegge Track & Parallel & Sonnet+Opus & Modules 1+2 complete \\
+1B & Architecture Track & Parallel & Sonnet+Opus & Modules 4+6 complete \\
+1C & Control Surface Track & Parallel & Sonnet+Opus & Modules 3+5 complete \\
+2 & Synthesis & Sequential & Opus & Cross-module integration, full-stack diagram \\
+3 & Publication & Sequential & Sonnet & Final documents, verification, CAPCOM gate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Specification} \\
+\midrule
+Shared schema & Define data types for: bus signal, ISA register, adapter spec, Gas Town role, performance metric \\
+Source index & Catalog all sources with last-verified dates; flag any sources requiring live fetch \\
+Adapter format spec & Define the canonical adapter specification format used across Modules 2, 5, 6 \\
+Chipset.yaml base template & Produce the base template for Gas City topology expression \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Three Parallel Tracks}
+
+\textbf{Track A (Yegge):} CRAFT-YEGGE produces Module 1 (delta analysis, 5-phase re-evaluation) while CRAFT-BRIDGE simultaneously produces Module 2 (Gas City/chipset.yaml bridge with YAML examples for all 7 roles).
+
+\textbf{Track B (Architecture):} CRAFT-ISA produces Module 4 (ISA encoding tables, register maps, FPGA synthesis pipeline, copper list spec) while CRAFT-GPU produces Module 6 (GPU silicon execution reference, LoRAFusion/LoRA-Switch/vLLM/NIM configuration examples, performance benchmark table).
+
+\textbf{Track C (Control Surface):} CRAFT-BUS produces Module 3 (GSD-OS wire harness: all bus signals, bandwidth table, interrupt priority) while CRAFT-ROUTER produces Module 5 (intent classifier architecture, hot-swap protocol, adapter routing decision tree, fallback to cloud API).
+
+Tracks A, B, and C run fully in parallel. INTEG monitors for cross-track dependencies and flags if Module 5 needs ISA definitions from Module 4 before completion.
+
+\subsection{Wave 2: Synthesis}
+
+The Opus synthesizer receives all six module outputs and produces: the full-stack integration diagram (Level 5 to Level 1 with timing annotations at each layer boundary), the cross-module dependency graph, the bridge validation (does the Gas City YAML spec in Module 2 correctly reference bus signals defined in Module 3?), and the architectural gap analysis.
+
+\textbf{HITL Gate (CAPCOM):} After Wave 2, Tibsfox reviews the Gas City bridge specification (Module 2) before Wave 3 proceeds. This is the highest-stakes deliverable --- it proposes integration with an external ecosystem --- and requires human judgment on whether the bridge is architecturally sound enough to contribute to the Gas City Commons board.
+
+\subsection{Wave 3: Publication and Verification}
+
+Sonnet publication agent assembles final documents. Sonnet verification agent validates: all numerical claims traced to sources (SC-NUM), no ZFC violations in intent classifier spec (SC-ZFC), VRAM arithmetic correct (SC-VRAM), Gas City role mapping is complete (SC-BRIDGE). Final documents presented.
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 0 schema and source index cached at session start; all three parallel Wave 1 tracks share the cache hit
+  \item GSD project knowledge documents (ISA vision, silicon spec, chipset vision) loaded once in Wave 0 and referenced by all tracks
+  \item Gastown CHANGELOG and Yegge Medium articles fetched once and shared between Module 1 and Module 2 agents
+  \item Performance benchmark table (Module 6) is cached after first construction; Module 5 adapter routing latency specs pull from cache
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Estimated Tokens} & \tableheader{Cumulative} & \tableheader{Notes} \\
+\midrule
+Wave 0: Foundation & 8K & 8K & Haiku; schema only \\
+Wave 1A: Yegge Track & 55K & 63K & Modules 1+2; Sonnet+Opus parallel \\
+Wave 1B: Architecture Track & 60K & 123K & Modules 4+6; Sonnet parallel \\
+Wave 1C: Control Surface Track & 50K & 173K & Modules 3+5; Sonnet+Opus parallel \\
+Wave 2: Synthesis & 20K & 193K & Opus; cross-module integration \\
+Wave 3: Publication & 25K & 218K & Sonnet; verification + assembly \\
+\midrule
+\textbf{Total Estimated} & \textbf{218K} & & 6 context windows across 3--4 sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Foundation]
+        |
+   +----+----+----+
+   |    |         |
+[Track A]  [Track B]  [Track C]
+ M1  M2    M4  M6    M3  M5
+   |    |    |    |    |    |
+   |    +----+    +----+    |
+   |         |         |   |
+   +----+----+---------+---+
+        |
+   [Wave 2: Synthesis]
+   Full-stack diagram + gap analysis
+        |
+   [CAPCOM GATE: Gas City Bridge Review]
+        |
+   [Wave 3: Publication + Verification]
+        |
+   [DELIVERABLES x7]
+
+Cross-track dependencies (handled by INTEG):
+  M5 (Router) requires register definitions from M4 (ISA)
+  M2 (Gas City bridge) requires bus signal types from M3 (Wire Harness)
+  M6 (GPU silicon) can proceed fully independently
+  M1 (Yegge delta) can proceed fully independently
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Target} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & 100\% pass \\
+Core functionality & 18 & Required & BLOCK & 100\% pass \\
+Integration & 8 & Required & BLOCK & 100\% pass \\
+Edge cases & 6 & Best-effort & LOG & ≥80\% pass \\
+\midrule
+\textbf{Total} & \textbf{37} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations are peer-reviewed, official documentation, or GitHub repositories. Zero Medium article claims without corroborating source \\
+SC-NUM & Numerical attribution & Every performance figure (tok/s, MB, latency, speedup) attributed to specific paper or benchmark \\
+SC-ZFC & ZFC compliance & Intent classifier specification contains no heuristic reasoning in orchestration code; compliant with Yegge ZFC principle \\
+SC-VRAM & VRAM arithmetic & Budget table sums to $\leq$ 7,700MB; base model + hot adapters + KV cache leaves 500MB headroom \\
+SC-BRIDGE & Bridge proposal scope & Gas City bridge spec is clearly labeled as proposal requiring external review; does not claim implementation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+CF-01 through CF-18 verify: Module 1 covers all 5 integration phases with current status; Module 2 has YAML examples for all 7 Gas Town roles; Module 3 defines all bus signal types with priority and latency budget; Module 4 has complete register mapping table across all 4 architectures; Module 4 FPGA synthesis pipeline has input/output contracts at all 6 steps; Module 5 intent classifier covers all 3 tiers with latency targets; Module 5 specifies hot-swap and cold-load protocols with latency values; Module 6 performance table has entries for all 8 defined metrics with sources; vLLM, LoRAX, and NVIDIA NIM configurations are documented with GSD-specific examples; LoRAFusion and LoRA-Switch are contrasted with use-case guidance.
+
+\subsection{Integration Tests}
+
+IN-01: Gas City bridge (M2) correctly references bus signal types defined in M3. IN-02: Intent router (M5) correctly references ISA register definitions from M4. IN-03: Full-stack diagram spans all 5 abstraction levels with at least one timing annotation per layer boundary. IN-04: Module 1 phase re-evaluations reference Trust Tier Escalation Engine architecture documented in M2 bridge. IN-05: GPU performance table (M6) VRAM values are consistent with wire harness VRAM budget in M3. IN-06: FPGA synthesis pipeline (M4) output contracts are consistent with intent classifier inputs (M5). IN-07: Yegge delta phases 1--5 status column is consistent with Gas City bridge feasibility in M2. IN-08: Full-stack document is self-contained for a reader with no prior GSD knowledge.
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Gastown v0.10.0 delta complete & CF-01, SC-SRC & Pending \\
+2. Five integration phases re-evaluated & CF-02, IN-04 & Pending \\
+3. Gas City YAML bridge specified & CF-03, SC-BRIDGE, IN-01 & Pending \\
+4. Wire harness fully specified & CF-04, IN-05 & Pending \\
+5. ISA five-layer stack specified & CF-05, IN-02 & Pending \\
+6. FPGA synthesis pipeline specified & CF-06, IN-06 & Pending \\
+7. VRAM residency policy specified & CF-07, SC-VRAM & Pending \\
+8. Intent classifier to router bridge & CF-08, CF-09, IN-06 & Pending \\
+9. Multi-LoRA serving patterns & CF-10, CF-11 & Pending \\
+10. Performance benchmarks sourced & CF-12, SC-NUM & Pending \\
+11. All numerical claims attributed & SC-NUM & Pending \\
+12. Dependency graph complete & IN-07, IN-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; CAPCOM gate; Gas City bridge judgment \\
+PLAN & Planner (Sonnet) & Wave decomposition; cross-track dependency tracking \\
+SCOUT & Research (Sonnet) & Gastown CHANGELOG fetch; arXiv paper verification \\
+EXEC-A & Executor A (Sonnet) & Module 1 document assembly \\
+EXEC-B & Executor B (Sonnet) & Module 6 document assembly \\
+EXEC-C & Executor C (Sonnet) & Module 3 document assembly \\
+CRAFT-YEGGE & Domain Spec. (Sonnet) & Yegge ecosystem analysis; delta mapping \\
+CRAFT-BRIDGE & Domain Spec. (Opus) & Gas City / chipset.yaml bridge design \\
+CRAFT-ISA & Domain Spec. (Sonnet) & ISA encoding, register tables, FPGA pipeline \\
+CRAFT-GPU & Domain Spec. (Sonnet) & GPU silicon reference; serving system configs \\
+CRAFT-BUS & Domain Spec. (Sonnet) & Wire harness signals, bandwidth, interrupt table \\
+CRAFT-ROUTER & Domain Spec. (Opus) & Intent classifier architecture; adapter routing \\
+VERIFY & Verification (Sonnet) & Source validation; SC tests \\
+INTEG & Integration (Opus) & Cross-module bridge validation; IN tests \\
+CAPCOM & HITL Interface & Gas City bridge review before Wave 3 \\
+BUDGET & Resource (Haiku) & Token budget tracking across three parallel tracks \\
+LOG & Chronicle (Haiku) & Audit trail; commit messages; milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 roles) \\
+Research Modules & 6 (+ 1 synthesis) \\
+Parallel Tracks (Wave 1) & 3 simultaneous \\
+Estimated Tokens & 218K \\
+Estimated Sessions & 3--4 \\
+HITL Gates & 1 (Gas City bridge review, post-Wave 2) \\
+Safety-Critical Tests & 5 (all mandatory BLOCK) \\
+Total Tests & 37 \\
+Model Split & Opus 35\% / Sonnet 55\% / Haiku 10\% \\
+Primary CAPCOM Risk & Gas City bridge spec: external ecosystem impact \\
+Key Dependency & Module 5 waits on Module 4 ISA register definitions \\
+Primary Output & 7 specification documents + full-stack integration diagram \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The copper list is cheap. The CPU is the scarce resource. The architecture that understands this builds a system where the copper processor runs against the beam while the CPU composes the next frame. Every stage of the prompt-to-silicon pipeline is a copper list waiting to be written. The wire harness is the backplane. The ISA is the instruction reference. The silicon is the coprocessor. And the spaces between --- between a prompt and a tile, between a polecat and a wave plan, between a gas town and a thousand of them --- are where the architecture lives.''}
+
+\vspace{0.8em}
+{\small\sffamily\textcolor{primary}{--- Through-line: The Amiga Principle applied to the full prompt-to-silicon stack}}
+\end{quotebox}
+
+\end{document}

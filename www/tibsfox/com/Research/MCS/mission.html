@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Maritime Platform Cost Model</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mcs">
+  <header>
+    <h1>Maritime Platform Cost Model</h1>
+    <div class="subtitle">Vessel OPEX/CAPEX &middot; Port Infrastructure &middot; Subsea Cable &middot; PNW Ports &middot; Fuel Transition &middot; Platform Economics</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-compute-cost-analysis">Compute Costs</a>
+      <a href="page.html?doc=02-energy-infrastructure">Energy Infrastructure</a>
+      <a href="page.html?doc=03-maritime-transport-economics">Transport Economics</a>
+      <a href="page.html?doc=04-convergence-credits">Convergence Credits</a>
+      <a href="page.html?doc=05-scenario-comparison">Scenario Comparison</a>
+      <a href="page.html?doc=06-sensitivity-risk-analysis">Risk Analysis</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Amiga Principle does not stop at software architecture. The same insight that built
+      the Amiga &mdash; that specialized, purpose-built components working in concert produce outcomes
+      impossible for generalized brute-force systems &mdash; applies to physical infrastructure at
+      maritime scale. A shore-based data center optimized for compute but paying $0.12/kWh and
+      running chiller plants is a generalized system. A maritime platform where the ocean provides
+      cooling, the cable provides both power and backhaul, the vessels provide both compute and
+      logistics, and the BPA dam provides baseload at $0.02/kWh is an Amiga. The question this
+      mission answers is not whether the architecture is elegant. That was settled in the vision.
+      The question is what it costs to build the Amiga at sea &mdash; and whether the convergence
+      credits are large enough to close the gap.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~198K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/maritime-cost-mission.pdf">Mission Package</a></td><td>PDF &middot; 31 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/maritime-cost-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/maritime-cost-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Cost taxonomy, source index, unit definitions</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1</td><td>Parallel Research</td><td>Track A (M1+M2) &middot; Track B (M3+M4)</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>M5 Scenario Comparison &middot; M6 Sensitivity Analysis</td><td>Sequential</td><td>2 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Final assembly, verification, source audit</td><td>Sequential</td><td>1 hour</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Resource orchestration</td><td>Haiku</td><td>Token budget, wave scheduling, cost taxonomy foundation</td></tr>
+        <tr><td>Denise</td><td>Display + visualization</td><td>Sonnet</td><td>Cost tables, architecture diagrams, scenario comparisons</td></tr>
+        <tr><td>Paula</td><td>Precision economics</td><td>Opus</td><td>NPV calculations, sensitivity analysis, convergence credits</td></tr>
+        <tr><td>M68000</td><td>General computation</td><td>Opus</td><td>Scenario integration, cross-module consistency, risk modeling</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All cost figures traceable to IRENA, NREL, Wood Mackenzie, CBRE, named industry reports, or peer-reviewed research. Zero blog-only sources.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every dollar figure, percentage, and energy metric attributed to a specific named organization and report with year.</td></tr>
+        <tr><td>SC-IND</td><td>Indigenous sovereignty</td><td>Any reference to cable routes or platform siting in tribal territorial waters names specific nation (Colville, Yakama, etc.), never generic "Indigenous."</td></tr>
+        <tr><td>SC-ADV</td><td>No policy advocacy</td><td>Document presents cost evidence neutrally; no advocacy for specific subsidy, policy, or regulatory position.</td></tr>
+        <tr><td>SC-PRJ</td><td>Projection labeling</td><td>All forward-looking cost projections (2030, 2035 wind cost targets) explicitly labeled as projections with source scenario name.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Cargo Manifest &mdash; Verification Matrix</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Integrated CAPEX for 3 scales (5 MW, 100 MW, 500 MW) with component-level breakdown and source citation</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Integrated OPEX (annual) for 3 scales with maintenance, fuel/power, crew, and cable repair itemized</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Convergence credit total quantified for each scale as % reduction from standalone sum</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Cost per MW-hour of compute delivered calculated for each scenario</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Offshore wind CAPEX trajectory modeled 2024-2035 with DOE $45/MWh LCOE target year</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Subsea cable cost/km by voltage class, depth band, and seabed condition with 5+ sourced benchmarks</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Vessel economics compared between manned and autonomous operation at platform scale</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Ocean cooling credit quantified in $/MW saved vs. shore-based chiller plant</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>20-year NPV analysis at three discount rates (5%, 8%, 12%) for 100 MW regional scenario</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Sensitivity tornado chart identifying top 5 cost drivers and percentage impact</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>All numerical claims attributed to specific sources (government agencies, journals, named firms)</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>Document is self-contained: reader with no prior context can reconstruct the cost model</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Compute cost module covers shore-based benchmarks, marine premium, and ocean cooling credit with sourced derivation</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Energy module includes fixed and floating wind CAPEX/LCOE, subsea cable costs by class, and BPA hydro baseline</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Transport module covers vessel acquisition by scale, annual OPEX breakdown, and autonomous vs. manned comparison</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Convergence credit model quantifies all 5 credit types (C1-C5) with engineering basis documented</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Scenario comparison produces full CAPEX/OPEX/NPV table for all 3 deployment scales</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Sensitivity analysis identifies top-5 cost drivers with percentage impact ranges</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>PNW port infrastructure (Seattle, Tacoma, Portland) assessed for platform support capability</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>LNG/hydrogen fuel transition economics modeled for vessel fleet operating costs</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Insurance and regulatory compliance costs estimated for maritime infrastructure deployment</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Every numerical claim attributed to a specific source</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>Document is self-contained: a reader with infrastructure economics background can follow every module</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>&ge;3 cross-references to other research projects validated and bidirectional</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The space between the components is where the economics live. Individual cost sheets
+    for data centers, subsea cables, offshore wind farms, and container vessels are available
+    from IRENA, NREL, CBRE, and a dozen industry reports. What nobody has assembled is the
+    integrated cost model &mdash; the one that treats convergence credits as first-class cost items,
+    that quantifies what happens when the ocean provides free cooling, when one cable trench
+    carries both power and data, when vessel hulls serve double duty as compute chassis and
+    cargo platforms. The Amiga Principle, applied to maritime infrastructure: specialized
+    components sharing physical media produce total system economics that general-purpose
+    standalone deployment cannot match. This mission produces the number that proves it &mdash;
+    or reveals the gap that remains.</p>
+  </main>
+
+  <footer>
+    <p>Maritime Platform Cost Model &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

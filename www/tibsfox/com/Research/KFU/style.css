@@ -1,0 +1,202 @@
+/* KFU — Dojo Red/Belt Gold/Gi Black theme, Learn Kung Fu
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --dojo: #B71C1C;
+  --dojo-light: #FFEBEE;
+  --dojo-mid: #C62828;
+  --dojo-dark: #7F0000;
+  --gold: #F9A825;
+  --gold-light: #FFF8E1;
+  --gold-mid: #F57F17;
+  --gi: #212121;
+  --gi-light: #EEEEEE;
+  --gi-mid: #424242;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--dojo);
+  --link-hover: var(--dojo-dark);
+  --accent: var(--dojo);
+  --accent-light: var(--dojo-light);
+  --accent-dark: var(--dojo-dark);
+  --card-bg: white;
+  --card-border: #E0E0E0;
+  --card-shadow: rgba(183,28,28,0.12);
+  --border: #E0E0E0;
+  --parchment: var(--gi-light);
+}
+
+/* ===================================================
+   2. HEADER — dojo/gi gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #1a0808 0%, #2d0a0a 40%, #3e1010 100%);
+  border-bottom: 4px solid var(--dojo);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(183,28,28,0.2) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(249,168,37,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #FFCDD2; }
+header .subtitle { color: #EF9A9A; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--gi);
+  border-bottom-color: var(--gi-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--dojo); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--dojo-light);
+  border-left: 4px solid var(--dojo);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--gi); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(183,28,28,0.04); }
+tr:hover { background: rgba(183,28,28,0.08); }
+
+pre {
+  background: #1a0808;
+  color: #E2E8F0;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--gold);
+}
+code {
+  background: var(--dojo-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--dojo);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS — border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #E0E0E0;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(183,28,28,0.12); border-color: var(--dojo); }
+
+/* ===================================================
+   6. STATS — grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--dojo);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-body { background: var(--dojo-light); color: var(--dojo); }
+.tag-mind { background: #E8EAF6; color: #283593; }
+.tag-phil { background: var(--gold-light); color: var(--gold-mid); }
+.tag-move { background: #E8F5E9; color: #2E7D32; }
+.tag-rest { background: #F3E5F5; color: #7B1FA2; }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.practice-note {
+  background: var(--gold-light);
+  color: #5D4037;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  border-left: 3px solid var(--gold);
+}
+
+.cross-links {
+  background: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--dojo); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--dojo-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--dojo);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #FFCDD2; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}

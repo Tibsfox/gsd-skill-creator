@@ -1,0 +1,1094 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Premium Artisan Tech ───────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo — premium, durable
+\definecolor{secondary}{HTML}{00695C}     % Teal — circular economy, renewal
+\definecolor{tertiary}{HTML}{4E342E}      % Warm brown — artisan craft
+\definecolor{accent}{HTML}{283593}        % Accent indigo
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Headers / Footers ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Weekly Phone}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={The Weekly Phone -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Weekly Phone\\[0.3em]Artisan Hardware,\\[0.3em]Longevity Economy}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{JIT Manufacturing · Art Drops · Circular Equity}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Weekly Phone --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{gsd-ecosystem-core, GSD-2 orchestration layer}
+\metafield{Context:}{GSD Skill-Creator ecosystem --- hardware business model design study}
+
+\subsection{Vision}
+
+There is a moment, right before you understand something, when the pieces hover in the air just out of reach. A new phone drops. Everyone scrambles. Within eighteen months it is obsolete, discarded, replaced by another scramble. The cycle is designed to make you forget that you ever held the last one. The industry profits not from the device but from the forgetting.
+
+The Weekly Phone is a refusal to forget.
+
+The concept begins with a simple structural inversion: instead of one blockbuster device per year, one artisan design drops every Monday --- small batch, just-in-time manufactured, each bearing the fingerprint of a specific artist, finisher, or craftsperson. The phone beneath the finish is excellent hardware, durable by design, modular by intention. But the finish is the story. Each Monday a new story. And for those who choose to hold --- who care for their device, carry it faithfully, let the finish weather into something personal --- the reward compounds. Four years earns a very nice phone in return. Eight years earns a flagship. The longer you hold, the greater the return value, inverting the depreciation curve that the industry has long accepted as gravity.
+
+And when a device moves on --- either through the loyalty upgrade path or through voluntary return --- it does not die. It downcycles: refurbished, re-finished, gifted into the hands of people who need connectivity but cannot afford the market rate. Component to community. The most durable expression of care is not keeping a thing forever but knowing when to pass it on.
+
+This is the Amiga Principle applied to the pocket computer. The Amiga did not win by having more resources than the competition. It won, for those who knew how to use it, by understanding that specialized paths --- custom chips doing exactly what they were built for --- produce staggering output through faithful iteration. The Weekly Phone is that. A phone worth holding. A reward for holding it. A community waiting at the end of every upgrade path.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Engineered obsolescence destroys hardware value.} The smartphone industry operates on an 18--22 month replacement cycle driven by planned software discontinuation, increasingly glued components, and annual design refreshes calibrated not to improve lives but to induce replacement anxiety. The average smartphone lifespan is approximately 21.6 months, despite the underlying hardware being capable of much longer service.
+
+  \item \textbf{Loyalty is penalized, not rewarded.} Current carrier and manufacturer upgrade programs reward new customers with the best deals while long-term customers receive inferior treatment. Twenty-five-year Verizon subscribers report receiving worse promotional terms than new sign-ups. There is no structural mechanism in the industry that converts faithful device ownership into compounding return value.
+
+  \item \textbf{Electronic waste is an unpriced externality.} Manufacturing more than 1.2 billion new smartphones in 2024 generated over 60 million tonnes of CO2 emissions. An estimated 5--10 billion dormant phones sit in drawers globally, containing roughly 100,000 tonnes of copper, 7 million ounces of gold, and 1 million ounces of palladium --- worth approximately \$20 billion. Recycling rates across electronics stood at only 17\% as of 2019.
+
+  \item \textbf{Design is commoditized and artless.} The smartphone has converged on a single form: a glass rectangle with minor dimensional variation. The aesthetic layer --- finish, texture, material, color --- is decided by committee and deployed at scale. No weekly drop, no artist signature, no sense that the object in your hand was made with intention for a specific moment.
+
+  \item \textbf{The digital divide is reproduced by the hardware market.} Premium phones remain financially inaccessible to large populations. The refurbished market, valued at \$49.9 billion in 2020 and projected to grow to \$65 billion by 2024, exists but lacks a structured moral chain connecting it to longevity reward programs and community equity goals. Good phones reach communities not as gifts of care but as market leftovers.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One model sentence:} A hardware subscription-not-subscription --- you own your phone outright, but the longer you hold it in good condition, the more the system owes you when you eventually trade it in, with all retired devices downcycled into an equity distribution network.
+
+The Weekly Phone model rests on five interlocking mechanisms: (1) a Monday drop cadence for artisan-finished, JIT-manufactured devices; (2) a longevity ledger that tracks ownership duration and device condition, compounding return value over time; (3) a modular hardware platform designed for ten-year serviceability; (4) an artist and craftsperson marketplace generating the weekly finish drops; and (5) a downcycling pipeline routing retired devices to underserved communities at subsidized or zero cost.
+
+\subsubsection{Business Model Architecture Diagram}
+
+\begin{asciibox}
+THE WEEKLY PHONE --- SYSTEM ARCHITECTURE
+=========================================
+
+PRODUCTION LAYER (Monday Drop Cadence)
+  Artist/Craftsperson Marketplace
+         |
+         v
+  Finish Design Submitted (Mon - Wed)
+         |
+         v
+  JIT Manufacturing Trigger (Thu - Fri)  <-- demand-pull, zero overstock
+         |
+         v
+  Artisan Drop Ships (Monday)
+         |
+         v
+  Owner receives unique phygital collectible cert
+
+LONGEVITY LEDGER (Reward Engine)
+  Device Registered at Purchase
+         |
+         v
+  Condition Check-ins (annual, opt-in)
+         |
+         v
+  Longevity Score compounds:
+    2 years  -->  +10% return credit
+    4 years  -->  Very Nice Phone (tier 2 device)
+    6 years  -->  Premium Phone (tier 3 device)
+    8 years  -->  Flagship / Top-of-Line device
+   12 years  -->  Flagship + Artist Edition + community gift match
+
+DOWNCYCLING PIPELINE
+  Retired Device Arrives
+         |
+         v
+  Triage: repair / refurbish / component recovery
+         |
+         v
+  Re-finish (artist community, new story)
+         |
+         v
+  Equity Distribution Network
+    --> NGO partners / school programs / co-op workers
+    --> subsidized or zero-cost to recipient
+    --> recipient optionally joins longevity ledger
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE MAP
+==========
+
+  [M1] Business Model Architecture
+         |
+         +---> [M2] Circular Hardware Economy
+         |           |
+         |           +---> [M3] Art & Finish Platform
+         |
+         +---> [M4] Longevity Loyalty Engine
+                     |
+                     +---> [M5] Community & Equity Layer
+
+Cross-cutting: phygital provenance tracking (M1 <--> M3 <--> M4 <--> M5)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{M1 --- Business Model Architecture}
+Survey and synthesize existing circular economy business models in consumer electronics. Analyze JIT manufacturing as applied to weekly small-batch drops. Model the financial mechanics of a longevity compounding return-value program. Identify regulatory environments (EU Right to Repair, Extended Producer Responsibility) that support or constrain the model.
+
+\subsubsection{M2 --- Circular Hardware Economy}
+Investigate modular and repairable smartphone design (Fairphone, Project Ara precedents). Quantify material recovery economics: gold, copper, cobalt, palladium recovery costs and market values. Analyze component re-use supply chain requirements. Survey reversible bonding and Design for Disassembly literature. Estimate lifecycle carbon footprint reduction curves from extended device ownership.
+
+\subsubsection{M3 --- Art \& Finish Platform}
+Survey the market for artisan and limited-edition hardware finishes (luxury NFT phygital precedents: Tiffany NFTiff, Nike/RTFKT Cryptokicks, Gucci Vault Art Space). Analyze the drop-cadence model as applied to hardware (streetwear drops, sneaker releases). Design the artist marketplace economics: royalties, attribution, secondary market behavior. Model the phygital collectible certificate layer (provenance on-chain).
+
+\subsubsection{M4 --- Longevity Loyalty Engine}
+Analyze existing loyalty and upgrade programs and identify their failure modes (carriers punishing long-term customers, annual upgrade treadmill design). Construct a mathematical model for longevity compounding return value at 2, 4, 6, 8, and 12-year ownership horizons. Define condition-assessment methodology (automated, fair, tamper-resistant). Survey tiered loyalty program design from adjacent industries (airlines, premium retail).
+
+\subsubsection{M5 --- Community \& Equity Layer}
+Map the global refurbished and downcycled device distribution landscape. Identify NGO, school, and co-operative partnership models for equity device distribution. Analyze the digital divide literature: connectivity access as economic multiplier. Design the re-finishing layer that gives downcycled devices a new artistic identity rather than a hand-me-down stigma. Model the community longevity ledger: recipients who enter the loyalty engine on downcycled devices.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: weekly-phone-research
+  profile: squadron
+  models:
+    opus:
+      allocation: 30%
+      assignments:
+        - M1 synthesis: business model architecture cross-analysis
+        - M4 synthesis: longevity math model construction
+        - M5 synthesis: equity pipeline design + cultural sensitivity
+        - Wave 2 integration: cross-module coherence review
+    sonnet:
+      allocation: 60%
+      assignments:
+        - M1 survey: circular economy literature compilation
+        - M2 survey: hardware circularity + material recovery data
+        - M3 survey: art drop market + phygital precedent research
+        - M4 survey: loyalty program failure mode analysis
+        - M5 survey: downcycling landscape mapping
+        - Wave 3: document assembly + verification
+    haiku:
+      allocation: 10%
+      assignments:
+        - Wave 0: shared schemas + source index scaffolding
+        - Template generation for module deliverables
+        - Terminology glossary
+  cache_strategy:
+    window: 5min
+    shared_context: [source-index, terminology, module-schemas]
+    wave_handoff: structured DACP bundles (intent + data + code)
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Business model design: JIT weekly drop cadence, longevity reward tiers, downcycling pipeline
+  \item Hardware circularity: modular design precedents, material recovery economics, lifecycle analysis
+  \item Art and finish marketplace: artist economics, drop cadence model, phygital provenance
+  \item Longevity loyalty engine: mathematical compounding model, condition-assessment methodology
+  \item Community equity layer: distribution network design, re-finishing for dignity, recipient loyalty ledger
+  \item Regulatory landscape: EU eco-design, Right to Repair, Extended Producer Responsibility
+  \item Financial model: unit economics at each tier, manufacturer-vs-platform operating models
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Specific semiconductor or SoC selection for the hardware platform
+  \item Detailed industrial design engineering (that is the product design phase, post-mission)
+  \item Carrier or MVNO partnership negotiation specifics
+  \item Full software/OS ecosystem design
+  \item Individual artist contracts or IP agreements
+  \item Specific blockchain protocol selection for provenance layer
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Business model architecture documented with unit economics at base, 4-year, and 8-year ownership horizons.
+  \item JIT manufacturing trigger-to-ship cycle time modeled at weekly cadence with demand uncertainty quantified.
+  \item At least five modular / repairable hardware design precedents catalogued with repairability scores and lifecycle data.
+  \item Material recovery economics quantified: recovery cost vs.\ market value for gold, copper, cobalt, and palladium per device.
+  \item Artist marketplace economics modeled: royalty structures, attribution mechanics, drop-cadence revenue curves.
+  \item At least five phygital / artisan hardware precedents analyzed for community-building and resale behavior.
+  \item Longevity compounding return-value curve mathematically specified at 2, 4, 6, 8, and 12-year horizons.
+  \item Condition-assessment methodology defined: criteria, scoring, tamper-resistance design.
+  \item Downcycling pipeline fully mapped: intake triage, refurbishment, re-finishing, distribution partner typology.
+  \item At least three equity distribution partner models identified with volume and cost-per-device estimates.
+  \item Regulatory landscape summarized: EU eco-design directive, Right to Repair legislation status (US and EU), Extended Producer Responsibility frameworks.
+  \item Cross-module coherence: longevity engine, art platform, and equity layer form a closed-loop system with no orphaned flows.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Vision Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Fox Infrastructure Group Master Plan & Hardware ownership + community equity aligns with co-op subsidiary model and tribal sovereign commerce & Parallel \\
+GSD Local Cloud Provisioning Vision & Device longevity + local compute parallels: both resist disposability in favor of durable infrastructure & Complementary \\
+GSD BBS Educational Pack & Downcycled devices as educational compute endpoints; recipients become learners in GSD ecosystem & Downstream \\
+GSD Wasteland Integration & Weekly drop cadence as Wasteland work economy pattern: artisans earning stamps for design contributions & Complementary \\
+The Space Between (textbook) & Mathematical foundations for longevity compounding model; Shannon information entropy applied to device condition scoring & Foundation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga did not outlast the PC because it had more transistors. It outlasted it in the hearts of those who understood it because every chip knew exactly what it was for, and the harmony between them produced something no single more-powerful chip could replicate alone. The Weekly Phone is that argument made physical in the pocket.
+
+The spaces between transactions --- between Monday drops, between ownership years, between device generations --- are where the value lives. A phone worth holding is not defined by its specs at purchase. It is defined by the story it accumulates: the finish that weathers into something personal, the longevity score that compounds quietly in the background, the moment the old device passes to someone for whom it is not a hand-me-down but a fresh chapter with a new finish and a place in the ledger. That moment --- component to community --- is the moral architecture of the entire system. The hardware is the vehicle. The care is the product.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Weekly Phone --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference synthesizes findings from peer-reviewed literature, industry reports, and professional organization publications. All quantitative claims are attributed. Module agents should draw on their designated sections; the Integration Agent (INTEG) should read all sections before Wave 2.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item GSMA (Global System for Mobile Communications) --- industry body, circularity reports
+  \item Ellen MacArthur Foundation --- circular economy frameworks
+  \item World Economic Forum --- e-waste and circular economy policy
+  \item European Commission (JRC) --- circular economy impact studies on mobile phones
+  \item MDPI (peer-reviewed open access) --- circular supply chain management research
+  \item ScienceDirect --- reversible bonding, lifecycle assessment research
+  \item Ingram Micro Lifecycle --- refurbished market data
+\end{itemize}
+
+\subsection{M1 Reference --- Business Model Architecture}
+
+\subsubsection{JIT Manufacturing Fundamentals}
+
+Just-in-Time (JIT) manufacturing, formalized by Taiichi Ohno at Toyota in the 1950s--60s as part of the Toyota Production System, operates on a pull principle: production is triggered by actual downstream demand, not forecast-driven push schedules. The Five Zeros principle --- zero inventory, zero defects, zero delays, zero waste, zero paperwork --- defines the waste-reduction aspiration. Samsung Electronics already implements JIT to manage component supplies for its electronics manufacturing, reducing lead times and inventory costs. For a weekly drop model, JIT is structurally apt: demand is known (pre-orders placed during the prior week), production is triggered by confirmed demand, and finished goods ship immediately with no warehouse dwell time.
+
+\textbf{JIT in electronics for weekly cadences:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{JIT Principle} & \tableheader{Application to Weekly Phone Drop} & \tableheader{Risk Level} \\
+\midrule
+Pull-based production & Pre-orders placed Mon--Wed trigger Thu--Fri manufacturing run & Low \\
+Zero inventory & Artisan finish panels produced to confirmed order count & Low \\
+Supplier coordination & Core hardware platform components kept in buffer; finish components JIT & Medium \\
+Quality at source & Each artisan finish batch inspected before ship; defects do not proceed & Low \\
+Kanban signaling & Digital order board drives production authorization in real time & Low \\
+Supply chain resilience & Core hardware buffer (JIC hybrid) protects against disruption; finish layer is pure JIT & Medium \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key risk:} JIT manufacturing faces vulnerability to supply chain disruptions. A hybrid JIT/JIC (Just-in-Case) approach is recommended: the durable hardware platform core maintains a modest component buffer, while the artisan finish layer operates pure JIT against confirmed orders.
+
+\subsubsection{Circular Economy Business Model Landscape}
+
+The circular economy for mobile phones is rapidly becoming a significant commercial opportunity. According to a GSMA report released at Mobile World Congress 2025, market projections exceed \$150 billion by 2027, surveying over 10,000 mobile phone users across 26 countries. Key findings:
+
+\begin{itemize}[noitemsep]
+  \item 90\% of mobile operators surveyed offered refurbishment programs
+  \item 84\% had trade-in and buyback programs in place
+  \item 87\% maintained formal e-waste collection programs
+  \item 52\% provided device-as-a-service and leasing models
+  \item Repaired and refurbished phones typically generate 80--90\% lower carbon emissions than new devices
+\end{itemize}
+
+Manufacturing accounts for 70--90\% of a typical smartphone's lifecycle carbon footprint (GSMA, 2025). In 2024, producing more than 1.2 billion new smartphones generated over 60 million tonnes of CO2 emissions. The case for extending device lifespans is both environmental and commercial.
+
+\subsubsection{Regulatory Tailwinds}
+
+The regulatory environment is shifting to support longevity-first models. In the European Union, eco-design requirements entered into force in June 2025, requiring manufacturers to provide spare parts and repair information for at least seven years and ensuring devices meet durability standards. In North America, Right to Repair legislation has passed in New York, Minnesota, California, Oregon, and Colorado as of 2025.
+
+\subsection{M2 Reference --- Circular Hardware Economy}
+
+\subsubsection{Modular Design Precedents}
+
+Fairphone, the pioneering repairable smartphone manufacturer, has demonstrated that modular design --- facilitating easy disassembly, component upgradeability, and the use of recyclable materials --- is commercially viable. The World Economic Forum identifies Fairphone as leading the shift toward modular design in smartphones, with the model of swapping out malfunctioning parts individually and refurbishing them for usage in new or refurbished phones.
+
+The average smartphone lifespan is approximately 21.6 months (Cordella et al., 2021, via Taylor \& Francis circular economy research). A PC's lifecycle is significantly longer, attributed primarily to its design for extended use. This gap between actual and possible device longevity is the primary opportunity for The Weekly Phone's longevity model.
+
+\subsubsection{Material Recovery Economics}
+
+Smartphones contain aluminum, gold, silver, tungsten, copper, tin, cobalt, and steel (Hazelwood and Pecht, 2021). Estimates of dormant global phone stock suggest 5--10 billion devices (GSMA, 2025), containing:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{3cm}C{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Material} & \tableheader{Estimated Quantity} & \tableheader{Market Value} & \tableheader{Recovery Notes} \\
+\midrule
+Copper & $\sim$100,000 tonnes & High commodity value & Readily recyclable via smelting \\
+Gold & $\sim$7 million oz & $\sim$\$14 billion (est.) & High recovery priority; low volume per device \\
+Palladium & $\sim$1 million oz & Significant & Catalytic converter crossover market \\
+Cobalt & Substantial & Battery-critical material & Supply chain sovereignty concern \\
+Total dormant stock & --- & $\sim$\$20 billion (GSMA est.) & 17\% recycling rate as of 2019 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CO2 distribution per smartphone lifecycle:} 81\% manufacturing, 5\% transportation, 10\% disposal (MDPI, 2024). Extending device life directly attacks the largest emissions bucket.
+
+\subsubsection{Reversible Bonding and Design for Disassembly}
+
+Research published in ScienceDirect (2023) finds that reversible bonding of smartphones --- using debondable-on-demand adhesives --- can be an enabler for circular strategies with considerable positive impact on preserving higher functionality at product, component, and material level. The study notes that while firms may not voluntarily adopt reversible bonding due to cost optics, mandatory policies on repairability and public procurement standards can shift incentives. This aligns with the EU eco-design directive now in force.
+
+\subsection{M3 Reference --- Art \& Finish Platform}
+
+\subsubsection{Phygital Collectible Precedents}
+
+The luxury and fashion industries have pioneered the ``phygital'' model --- digital ownership certificates linked to physical objects --- providing directly applicable precedents for The Weekly Phone's artisan finish certification layer.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Precedent} & \tableheader{Mechanism} & \tableheader{Relevance} \\
+\midrule
+Tiffany NFTiff & 250 passes; CryptoPunk holders received custom physical pendant + blockchain cert & Phygital scarcity, premium craft \\
+Nike / RTFKT Cryptokicks & NFT sneakers with ``Skin Vials'' --- physical drops linked to digital ownership & Drop cadence, community belonging \\
+Gucci Vault Art Space & Rotating digital gallery; limited-edition NFT artworks auctioned & Artist marketplace, brand story \\
+Lamborghini World Tour & Limited drops, 24-hour windows; design as status + collectible & Scarcity window mechanics \\
+Lululemon Like New & Trade-in for store credit; pre-owned items + early access perks & Longevity trade-in loop \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Drop Cadence Economics}
+
+The streetwear and sneaker drop model demonstrates that weekly or periodic limited-release products create anticipation, community, and secondary market value that significantly exceeds comparable products sold at volume. The mechanisms are: time-limited availability, visible scarcity (serial numbering), community membership around ownership, and resale market that validates original purchase price.
+
+For The Weekly Phone: each Monday's finish drop carries a unique artist cert, a serial number within its batch size, and secondary market transferability. Long-term holders who have held a device through multiple Monday drops effectively accumulate a provenance story --- a device whose finish was chosen, held, and cared for --- that has higher intrinsic resale value than a pristine-but-generic device.
+
+\subsubsection{Artist Marketplace Economics}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Revenue Element} & \tableheader{Description} & \tableheader{Artist Share} \\
+\midrule
+Primary sale royalty & Artist receives percentage of each device sold with their finish & 15--20\% \\
+Secondary market royalty & Smart contract encodes royalty on every resale of artisan cert & 5--10\% \\
+Platform visibility & Artist profile, story, and gallery embedded in device software & Non-monetary \\
+Community commission & Long-term holders can commission custom finishes directly & Negotiated \\
+Equity match & For every downcycled device re-finished by an artist, platform covers re-finishing cost & N/A \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{M4 Reference --- Longevity Loyalty Engine}
+
+\subsubsection{Current Loyalty Program Failure Modes}
+
+Existing carrier and manufacturer upgrade programs systematically fail long-term customers. Apple's iPhone Upgrade Program allows upgrade after 12 payments (annually), incentivizing the minimum hold time, not maximum. Carrier programs routinely offer better terms to new customers than to multi-decade subscribers --- a structurally perverse design that punishes loyalty.
+
+According to Breezy research on trade-in program dynamics, approximately 21\% of consumers have traded in a mobile device, up from 16\% the prior year, and nearly 80\% would consider trading in at next purchase. The demand exists. The failure is in reward design: programs maximize churn rather than rewarding hold.
+
+KPMG data (via loyalty program research) finds 75\% of consumers are more likely to purchase if a loyalty program offers rewards they find relevant. Tiered systems geared towards longevity and nurturing customer lifetime value represent the optimal design for long-term hardware retention.
+
+\subsubsection{Longevity Compounding Return-Value Model}
+
+The Weekly Phone's loyalty engine inverts the depreciation curve. Rather than a device losing value over time, the \textit{relationship} between owner and platform gains value. The mathematical structure is a tiered step function with condition multipliers:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}XC{3cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Hold Years} & \tableheader{Return Value Tier} & \tableheader{Device Received} & \tableheader{Condition Req.} \\
+\midrule
+1 year & Base market rate & Standard trade credit & Any \\
+2 years & +10\% compounding bonus & Enhanced credit & Good \\
+4 years & Tier 2 Loyalty Return & Very Nice Phone & Good \\
+6 years & Tier 3 Loyalty Return & Premium Phone & Good \\
+8 years & Tier 4 Loyalty Return & Flagship / Top-of-Line & Good \\
+12 years & Elite Longevity Return & Flagship + Artist Edition + community gift match & Excellent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Condition-assessment methodology:} Annual opt-in check-ins using device self-diagnostic tools (battery health, screen integrity, camera function, structural sensors). Tamper-resistant design: assessment performed locally on-device with signed attestation; results cannot be manipulated by either party. Third-party hardware assessment at upgrade time confirms claimed tier.
+
+\subsubsection{Tiered Loyalty Design Principles}
+
+From adjacent industry analysis (Telstra Plus, Delta SkyMiles, Sephora Beauty Insider), the highest-performing tiered loyalty programs share: clear tier thresholds known in advance, meaningful and differentiated rewards at each tier, psychological reward at intermediate milestones (not just the endpoint), and community belonging at upper tiers. The 12-year Elite tier's ``community gift match'' --- the platform matches the returner's device with a downcycled gift to a community partner --- converts the personal achievement into a social act, which research consistently shows is a high-satisfaction reward mechanism.
+
+\subsection{M5 Reference --- Community \& Equity Layer}
+
+\subsubsection{Refurbished and Downcycling Market Landscape}
+
+The global refurbished smartphone market was valued at \$49.9 billion in 2020, projected to reach \$65 billion by 2024 (Ingram Micro Lifecycle / Taylor \& Francis research). The market grows because: premium smartphones are prohibitively priced for large population segments; refurbished devices offer comparable functionality at 40--70\% lower cost; and consumer attitudes toward pre-owned electronics are rapidly destigmatizing.
+
+The circular economy research published by the European Commission identifies three circular approaches: recycling, refurbishment, and lifetime extension. Refurbishment --- returning a device to functional working condition with cosmetic restoration --- is the highest-value recovery path before recycling. For The Weekly Phone, the artisan re-finishing layer elevates refurbishment from utilitarian restoration to aesthetic renewal: a downcycled device receives a fresh finish and a new story, not a label reading ``certified pre-owned.''
+
+\subsubsection{Digital Divide and Connectivity as Economic Multiplier}
+
+Roughly four in ten people globally owned a smartphone in 2018 (World Economic Forum, 2021), with that number growing. Smartphones drive financial inclusion, agricultural productivity, education access, and communications infrastructure. The cost barrier to device ownership is therefore an economic barrier, not merely a consumer preference issue. Structured downcycling pipelines that route quality devices --- not end-of-life e-waste --- to underserved communities directly address this multiplier effect.
+
+\subsubsection{Re-Finishing for Dignity}
+
+The Weekly Phone's equity layer distinguishes itself from conventional device donation programs through the re-finishing layer: every device entering the downcycling pipeline receives a fresh artisan finish before distribution. This is not cosmetic decoration. It is a structural statement that the device is not charity --- it is a product, carried with care, passed forward with intention. Recipients who enter the longevity ledger on a downcycled device participate fully in the loyalty economy; their 4-year and 8-year horizons accrue exactly as any original purchaser's.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Type} \\
+\midrule
+Financial model claims & All unit economics projections must be clearly marked as model outputs, not actuals & GATE \\
+Community equity framing & Downcycling narrative must not infantilize recipients; equity layer is a transaction of dignity, not charity & ANNOTATE \\
+Artisan labor & Artist marketplace must include fair compensation analysis; no gig-economy extraction framing & ANNOTATE \\
+Supply chain sourcing & Cobalt and rare earth sourcing in circular model must address conflict mineral concerns & GATE \\
+Condition assessment privacy & Device self-diagnostic data must not be used for surveillance; privacy architecture required & ABSOLUTE \\
+Environmental claims & CO2 and material recovery figures must cite specific sources; no unsupported greenwashing & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[noitemsep]
+  \item European Commission Joint Research Centre. \textit{Impact of the Circular Economy on FMCG: Mobile Phones Case Study.} Circular Economy Platform, circulareconomy.europa.eu.
+  \item US Environmental Protection Agency. \textit{Greenhouse Gas Emissions from Manufacturing.} EPA, 2022.
+  \item EU Eco-Design Regulation for Smartphones. In force June 2025.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[noitemsep]
+  \item Cordella et al. (2021). Smartphone lifecycle analysis. Cited in Taylor \& Francis circular economy study, 2024.
+  \item Hazelwood and Pecht (2021). Material reuse potential in mobile devices. Cited in Taylor \& Francis study.
+  \item Han et al. (2023). Digital technology impacts on sustainable design. Cited in Taylor \& Francis study.
+  \item Geissdoerfer, Vladimirova, and Evans (2018). Circular economy business model strategies. Taylor \& Francis.
+  \item ScienceDirect (2023). \textit{The circular economy potential of reversible bonding in smartphones.} \url{https://doi.org/10.1016/j.susmat.2023.e00204x}
+  \item MDPI Engineering Proceedings (2024). \textit{Advancing Circular Supply Chain Management for Mobile Phones.} ICIMP-2024 Proceedings. \url{https://doi.org/10.3390/engproc2024076035}
+  \item Taylor \& Francis (2024). \textit{Circular economy strategy based on digital technologies and the S4 framework: a case study on smartphones.} \url{https://doi.org/10.1080/19397038.2024.2336008}
+\end{itemize}
+
+\subsubsection{Professional Organizations and Industry Reports}
+\begin{itemize}[noitemsep]
+  \item GSMA. \textit{Rethinking Mobile Phones: The Business Case for Circularity.} Mobile World Congress 2025. sustainability-news.net/climate-nature/circular-economy/mwc-2025.
+  \item Ingram Micro Lifecycle. \textit{Circular Economy in the Smartphone Market: Assessing Maturity and Driving Progress.} October 2024. ingrammicrolifecycle.com.
+  \item World Economic Forum. \textit{Repairing -- not recycling -- is the first step to tackling smartphone e-waste.} July 2021. weforum.org.
+  \item Breezy. \textit{How Trade-In Programs Build Loyalty.} April 2025. breezy.band.
+  \item Antavo. \textit{Telecommunication Loyalty Programs: A Full Guide.} antavo.com.
+  \item Operations Council. \textit{The Evolution of Just-in-Time Manufacturing.} October 2024.
+  \item Global Trade Magazine. \textit{The Evolution of Just-in-Time Manufacturing in the Modern Era.} January 2024.
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Design and document the complete business, hardware, artisan, loyalty, and equity architecture for The Weekly Phone: a demand-pull artisan hardware platform that releases one finished device design every Monday (JIT manufactured), rewards device owners with compounding return value for long-term care and ownership, and routes all retired devices through an artisan re-finishing pipeline to underserved communities. The mission produces a fully integrated research document ready for product design phase handoff.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW
+========================
+
+Wave 0  [Sequential / Haiku]
+  Foundation: source index, shared schemas, glossary, module templates
+
+Wave 1A [Parallel / Sonnet + Opus]
+  M1: Business Model + JIT Architecture
+  M2: Circular Hardware + Material Economy
+
+Wave 1B [Parallel / Sonnet + Opus]
+  M3: Art + Finish Platform
+  M4: Longevity Loyalty Engine
+
+Wave 1C [Sequential / Sonnet]
+  M5: Community + Equity Layer
+  (depends on M4 loyalty model output)
+
+Wave 2  [Sequential / Opus]
+  Synthesis: closed-loop coherence review
+  Cross-module integration: provenance chain, longevity math, equity pipeline
+  Sensitivity review: equity framing, financial claim gating
+
+Wave 3  [Sequential / Sonnet]
+  Publication: document assembly, final formatting
+  Verification: source audit, test plan execution
+  Delivery: complete research reference + mission package
+\end{asciibox}
+
+\subsection{System Layers}
+\begin{enumerate}[noitemsep]
+  \item \textbf{Source Index Layer} --- authoritative bibliography and source quality registry (Wave 0)
+  \item \textbf{Business Model Layer} --- JIT mechanics, unit economics, regulatory landscape (Wave 1A)
+  \item \textbf{Hardware Circularity Layer} --- modular design, material recovery, lifecycle data (Wave 1A)
+  \item \textbf{Art Platform Layer} --- artist marketplace, drop cadence, phygital provenance (Wave 1B)
+  \item \textbf{Loyalty Engine Layer} --- compounding return model, condition assessment, tier design (Wave 1B)
+  \item \textbf{Equity Layer} --- downcycling pipeline, re-finishing, distribution network (Wave 1C)
+  \item \textbf{Integration Layer} --- closed-loop coherence, cross-module verification, sensitivity review (Wave 2)
+  \item \textbf{Publication Layer} --- assembled document, test plan, verification matrix (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Location} \\
+\midrule
+D1 & Business model document & Unit economics at 1/2/4/6/8/12-year horizons; JIT cadence model & M1 spec \\
+D2 & Hardware circularity survey & 5+ modular design precedents; material recovery table with sources & M2 spec \\
+D3 & Art platform design & Artist economics model; 5+ phygital precedents; drop cadence analysis & M3 spec \\
+D4 & Longevity math model & Compounding return curve; condition assessment methodology & M4 spec \\
+D5 & Equity pipeline design & Downcycling map; 3+ distribution partner models; dignity framing & M5 spec \\
+D6 & Integration synthesis & Closed-loop coherence confirmed; no orphaned flows; cross-references validated & Wave 2 \\
+D7 & Complete research document & All 12 success criteria met; test plan passes; source audit clean & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Source index + schemas & None & Haiku & 8K \\
+M1: Business model & Source index & Sonnet & 30K \\
+M2: Hardware circularity & Source index & Sonnet & 25K \\
+M1 synthesis & M1 survey & Opus & 15K \\
+M2 synthesis & M2 survey & Opus & 15K \\
+M3: Art platform & Source index & Sonnet & 25K \\
+M4: Loyalty engine & Source index & Sonnet & 25K \\
+M3 synthesis & M3 survey & Opus & 12K \\
+M4 synthesis & M4 survey & Opus & 20K \\
+M5: Equity layer & M4 model & Sonnet & 20K \\
+M5 synthesis & M5 survey, M4 model & Opus & 15K \\
+Wave 2 integration & All modules & Opus & 25K \\
+Document assembly & Wave 2 output & Sonnet & 20K \\
+Verification + audit & Assembled doc & Sonnet & 10K \\
+\hline
+\textbf{Total} & & & \textbf{$\sim$265K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Cross-module synthesis; longevity math model construction (judgment-heavy); equity framing sensitivity; cultural dignity review; Wave 2 integration coherence \\
+Sonnet & $\sim$60\% & All survey compilation; document assembly; source verification; structured content generation across five modules \\
+Haiku & $\sim$10\% & Wave 0 scaffolding; shared schemas; glossary generation; module templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XC{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Models} & \tableheader{Est.\ Tokens} \\
+\midrule
+0 & Foundation scaffolding & Sequential & Haiku & 8K \\
+1A & M1 + M2 parallel survey & Parallel & Sonnet + Opus & 85K \\
+1B & M3 + M4 parallel survey & Parallel & Sonnet + Opus & 82K \\
+1C & M5 survey & Sequential & Sonnet + Opus & 35K \\
+2 & Integration synthesis & Sequential & Opus & 25K \\
+3 & Publication + verification & Sequential & Sonnet & 30K \\
+\hline
+Total & & & & $\sim$265K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Source index & Structured bibliography with quality classification & Haiku & 3K \\
+Shared schemas & Module deliverable templates (JSON structure) & Haiku & 2K \\
+Terminology glossary & 30--40 term definitions for cross-module consistency & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Parallel Track --- Business Model + Hardware}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M1 survey & JIT model analysis, circular economy landscape, regulatory summary & Sonnet & 30K \\
+M1 synthesis & Unit economics model, JIT cadence spec & Opus & 15K \\
+M2 survey & Modular design precedents, material recovery table, lifecycle data & Sonnet & 25K \\
+M2 synthesis & Disassembly design spec, CO2 curve model & Opus & 15K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Parallel Track --- Art Platform + Loyalty Engine}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M3 survey & Phygital precedent analysis, drop cadence economics, artist marketplace & Sonnet & 25K \\
+M3 synthesis & Artist economics model, provenance cert design & Opus & 12K \\
+M4 survey & Loyalty program failure analysis, tiered program design survey & Sonnet & 25K \\
+M4 synthesis & Compounding return-value model, condition assessment spec & Opus & 20K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1C: Community + Equity Layer}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M5 survey & Downcycling market map, distribution partner typology, digital divide data & Sonnet & 20K \\
+M5 synthesis & Equity pipeline spec, re-finishing model, recipient loyalty integration & Opus & 15K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Integration Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Closed-loop coherence review & Confirm all flows connect: JIT $\to$ finish $\to$ longevity $\to$ downcycle $\to$ equity & Opus \\
+Provenance chain validation & Phygital cert layer connects M3 $\leftrightarrow$ M4 $\leftrightarrow$ M5 without gaps & Opus \\
+Financial sensitivity review & All economic projections gated as model outputs, not actuals & Opus \\
+Equity framing review & Dignity framing confirmed throughout; no charity language & Opus \\
+Cross-module data consistency & Same material recovery figures, lifecycle data used uniformly & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Document assembly & Full integrated research document from all module outputs & Sonnet \\
+Source audit & All citations traced; source quality verified against SC-SRC criteria & Sonnet \\
+Test plan execution & Run all core, integration, and edge case tests; mark safety-critical & Sonnet \\
+Verification matrix & Map all 12 success criteria to test IDs; confirm no gaps & Sonnet \\
+Final delivery & Complete document + mission package ready for product design handoff & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{5-minute cache window:} Wave 0 outputs (source index, schemas, glossary) loaded into shared context at session start; all Wave 1 agents read from cache, not re-generate.
+  \item \textbf{DACP handoff bundles:} Each wave produces a three-part DACP bundle (intent + data + code) for the next wave. Markdown remains the human-readable source; structured bundles carry agent-to-agent handoffs.
+  \item \textbf{Session boundaries:} Wave 1A + 1B in one session (parallel, same cache); Wave 1C + Wave 2 in second session; Wave 3 in third session.
+  \item \textbf{Haiku scaffolding reuse:} Module templates produced in Wave 0 reused by all Sonnet survey agents verbatim --- no re-generation.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Est.\ Tokens} & \tableheader{Primary Tasks} \\
+\midrule
+Opus & 30\% & $\sim$80K & Syntheses, integration, equity framing \\
+Sonnet & 60\% & $\sim$160K & Surveys, assembly, verification \\
+Haiku & 10\% & $\sim$25K & Scaffolding, schemas, glossary \\
+\hline
+Total & 100\% & $\sim$265K & 3--4 sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+[W0: Foundation] ──────────────────────────────────────┐
+      |                                                 |
+      v                                                 v
+[W1A: M1 Survey] ──> [W1A: M1 Synthesis]    [W1B: M3 Survey] ──> [W1B: M3 Synthesis]
+[W1A: M2 Survey] ──> [W1A: M2 Synthesis]    [W1B: M4 Survey] ──> [W1B: M4 Synthesis]
+                                                        |
+                                                        v (M4 model required)
+                                             [W1C: M5 Survey] ──> [W1C: M5 Synthesis]
+                                                        |
+      |                                                 |
+      v                                                 v
+      └──────────────────────────────────────────────> [W2: Integration Synthesis]
+                                                        |
+                                                        v
+                                             [W3: Publication + Verification]
+                                                        |
+                                                        v
+                                             [DELIVERY: Product Design Handoff]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Description} & \tableheader{Failure} \\
+\midrule
+Safety-critical & 6 & Mandatory & Source quality, financial gating, privacy, equity framing, greenwashing & BLOCK \\
+Core functionality & 18 & Required & Deliverable acceptance per success criterion & BLOCK \\
+Integration & 8 & Required & Cross-module coherence, closed-loop validation & BLOCK \\
+Edge cases & 6 & Best-effort & Data gaps, model uncertainty, temporal currency & LOG \\
+\hline
+Total & 38 & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XL{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality throughout & All citations traceable to peer-reviewed journals, government agencies, or professional organizations. Zero entertainment media or unsourced blogs. & BLOCK \\
+SC-NUM & Numerical attribution & Every quantitative claim (CO2 figures, market values, recycling rates, device counts) attributed to a specific named source. & BLOCK \\
+SC-ADV & No policy advocacy & Document presents regulatory landscape and findings without advocating for specific legislative positions. & BLOCK \\
+SC-FIN & Financial claim gating & All unit economics and market projections clearly labeled as model outputs or industry estimates, never presented as actuals. & BLOCK \\
+SC-PRI & Privacy architecture & Condition-assessment methodology explicitly addresses data sovereignty; device self-diagnostic data used only for loyalty scoring, not surveillance. & ABSOLUTE \\
+SC-EQU & Equity framing integrity & No language in M5 or elsewhere frames downcycling recipients as charity cases; all language reflects dignified transaction and community participation. & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XL{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Unit economics at all horizons & Document contains modeled cost/return at 1, 2, 4, 6, 8, and 12-year hold periods \\
+CF-02 & JIT weekly cadence model & Mon--Wed order window, Thu--Fri production trigger, Monday ship documented with demand uncertainty estimate \\
+CF-03 & Modular design precedents & At least 5 precedents catalogued with repairability scores and lifecycle data \\
+CF-04 & Material recovery table & Gold, copper, cobalt, palladium: recovery cost vs.\ market value per device with citations \\
+CF-05 & CO2 lifecycle model & Manufacturing, transport, disposal percentages cited; extended ownership reduction curve specified \\
+CF-06 & Artist marketplace economics & Primary royalty, secondary royalty, and equity match structures fully defined with percentage ranges \\
+CF-07 & Phygital precedent analysis & At least 5 phygital/artisan hardware precedents with community-building and resale behavior notes \\
+CF-08 & Drop cadence economics & Scarcity mechanics, secondary market behavior, and serial numbering design documented \\
+CF-09 & Longevity compounding model & Mathematical specification of return-value curve at all tier thresholds (2/4/6/8/12 years) \\
+CF-10 & Condition assessment spec & Criteria, scoring rubric, tamper-resistance design, and third-party confirmation process defined \\
+CF-11 & Loyalty failure mode analysis & At least 3 current program failure modes documented with structural explanation \\
+CF-12 & Tier design principles & Psychological reward at intermediate milestones; community belonging at upper tier documented \\
+CF-13 & Downcycling pipeline map & Complete intake $\to$ triage $\to$ refurbish $\to$ re-finish $\to$ distribute flow documented \\
+CF-14 & Distribution partner typology & At least 3 partner model types with volume and cost-per-device estimates \\
+CF-15 & Digital divide data & Connectivity as economic multiplier quantified with sourced evidence \\
+CF-16 & Re-finishing dignity layer & Re-finishing not framed as cosmetic; structural role in equity narrative documented \\
+CF-17 & Recipient loyalty integration & Downcycled device recipients' path through longevity ledger fully specified \\
+CF-18 & Regulatory landscape & EU eco-design, Right to Repair (US + EU), Extended Producer Responsibility summarized \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}XL{4.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & JIT $\to$ Art Platform cascade & Document traces how weekly drop cadence connects to artist marketplace economics without contradiction \\
+IN-02 & Art Platform $\to$ Longevity cascade & Phygital cert issued at purchase connects to longevity ledger without architectural gap \\
+IN-03 & Longevity $\to$ Equity cascade & Upgrade return path connects to downcycling pipeline intake; no device orphaned \\
+IN-04 & Equity $\to$ Loyalty re-entry & Recipient longevity ledger entry point fully specified and consistent with original purchaser model \\
+IN-05 & Material recovery closed-loop & Retired device material recovery economics connect back to manufacturing cost model (M2 $\to$ M1) \\
+IN-06 & Cross-module data consistency & CO2 figures, market values, and device lifecycle data cited uniformly across all five modules \\
+IN-07 & Document self-containment & A reader with no prior knowledge can understand the complete system; no undefined terms; complete bibliography \\
+IN-08 & Closed-loop confirmation & No orphaned flows exist in the full system diagram; all inputs and outputs accounted for \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Unit economics at 1/2/4/6/8/12-year horizons & CF-01, SC-FIN & Pending \\
+2. JIT cadence model with demand uncertainty & CF-02 & Pending \\
+3. 5+ modular design precedents with lifecycle data & CF-03, CF-05 & Pending \\
+4. Material recovery economics quantified & CF-04, SC-NUM & Pending \\
+5. Artist marketplace economics modeled & CF-06, CF-08 & Pending \\
+6. 5+ phygital precedents analyzed & CF-07 & Pending \\
+7. Longevity compounding curve specified & CF-09, CF-10 & Pending \\
+8. Condition-assessment methodology defined & CF-10, SC-PRI & Pending \\
+9. Downcycling pipeline fully mapped & CF-13, CF-14 & Pending \\
+10. 3+ equity distribution partner models & CF-14, CF-15 & Pending \\
+11. Regulatory landscape summarized & CF-18 & Pending \\
+12. Closed-loop system coherence confirmed & IN-07, IN-08, SC-EQU & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at each wave boundary \\
+PLAN & Planner & Wave decomposition; dependency management; session planning \\
+SCOUT & Research Agent & Source gathering; industry report acquisition; web research for gaps \\
+EXEC-A & Executor Alpha & Document production: M1 + M2 modules \\
+EXEC-B & Executor Beta & Document production: M3 + M4 modules \\
+CRAFT-BIZ & Business Model Specialist & JIT manufacturing analysis; circular economy business model synthesis \\
+CRAFT-ART & Art Platform Specialist & Phygital precedent analysis; artist marketplace design; drop cadence modeling \\
+VERIFY & Verification Agent & Source audit; numerical attribution check; safety-critical test execution \\
+INTEG & Integration Agent & Cross-module coherence; closed-loop validation; provenance chain integrity \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; equity framing review gate \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache strategy enforcement \\
+LOG & Chronicle Agent & Commit messages; wave summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & The Weekly Phone --- Artisan Hardware + Longevity Economy \\
+Activation profile & Squadron (12 roles) \\
+Research modules & 5 (Business Model, Hardware Circularity, Art Platform, Loyalty Engine, Equity Layer) \\
+Estimated token budget & $\sim$265K across 3--4 sessions \\
+Model allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Wave structure & W0 + W1A + W1B + W1C + W2 + W3 (6 waves) \\
+Critical path & W0 $\to$ W1B (M4) $\to$ W1C (M5) $\to$ W2 $\to$ W3 \\
+Safety-critical tests & 6 (all BLOCK) \\
+Total tests & 38 \\
+Success criteria & 12 \\
+Human approval gates & 3 (post-W1, post-W2, pre-delivery) \\
+Key risk & JIT supply chain resilience; mitigated by JIT/JIC hybrid model \\
+Primary output & Complete research document ready for product design phase handoff \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``The Amiga achieved remarkable outputs not by being faster than everything else, but by understanding what each chip was for and letting the harmony between them do the work. The Weekly Phone is that argument made physical in the pocket --- a device worth holding, a reward for holding it, and a community waiting at every upgrade horizon. The spaces between the Monday drops are where care accumulates. The spaces between the transactions are where the equity lives.''}
+
+\vspace{0.5em}
+\noindent{\small\sffamily\textcolor{subtlegray}{--- The Weekly Phone Vision Through-Line, GSD Ecosystem / March 2026}}
+\end{quotebox}
+
+\end{document}

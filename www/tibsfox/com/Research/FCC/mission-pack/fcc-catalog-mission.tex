@@ -1,0 +1,1287 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME — Technology / Regulatory domain
+\definecolor{primary}{HTML}{1B3A5C}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0288D1}
+\definecolor{lightprimary}{HTML}{E8EFF7}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F6F8}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{okgreen}{HTML}{1B5E20}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{FCC Rules \& Regulations Catalog}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={FCC Catalog of Rules and Regulations -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\begin{document}
+
+%% =========================================================
+%% TITLE PAGE
+%% =========================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The FCC Catalog\\[0.3em]of Rules \& Regulations}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Title 47, Code of Federal Regulations --- Complete Survey}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 6--8 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+%% =========================================================
+%% TABLE OF CONTENTS
+%% =========================================================
+\tableofcontents
+\newpage
+
+%% =========================================================
+%% STAGE 1 — VISION DOCUMENT
+%% =========================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{FCC Catalog of Rules and Regulations --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Ready for Execution}
+\metafield{Depends On:}{GSD Ecosystem Context, Fox Infrastructure Group Plans}
+\metafield{Context:}{The GSD mesh cluster build, rural internet connectivity, amateur radio infrastructure, Part 15 IoT devices, and satellite connectivity all live inside this regulatory space.}
+
+\subsection{Vision}
+
+Every radio wave transmitted in the United States passes through a legal membrane. Every WiFi chip in a laptop, every Starlink terminal bolted to a barn roof, every FM station transmitting across a valley, every ship calling the Coast Guard on Channel 16 --- all of it operates under the authority of a single, massive regulatory document: Title 47 of the Code of Federal Regulations. The FCC's catalog is not just bureaucratic paper. It is the architectural specification of American telecommunications, written in the same layered, modular logic that defines good software: a general subchapter first, then specialized domains, then the details of each service. The Amiga Principle lives here too, in the spaces between Parts --- each regulation a discrete, specialized execution path for a specific kind of signal.
+
+For a builder deploying mesh infrastructure in the PNW, the catalog is the terrain. Which bands are unlicensed? Which require a license? What power limits apply at 5.8 GHz versus 900 MHz? When does a home lab WiFi node become a Part 15 device and when does it become something that needs a license? What are the rules for amateur radio mesh protocols like AREDN? What does the FCC's 2025 deregulatory surge mean for new deployments, for rural broadband, for satellite ground stations? These are not abstract questions. They are the engineering constraints of every wire and antenna in the Fox Infrastructure Group's build plan.
+
+The FCC catalog is also a living document in a period of remarkable flux. The Sixth Circuit's January 2025 ruling effectively ended federal net neutrality as a legal matter. Chairman Carr's ``Delete, Delete, Delete'' initiative wiped more than a thousand rules from the books in 2025. Spectrum auction authority was reauthorized by Congress. The Upper C-band, AWS-3, and 6 GHz unlicensed expansions are reshaping the wireless landscape in real time. Understanding the catalog means understanding both the stable architecture and the current churning surface. This mission maps both.
+
+The through-line connecting this work to the GSD ecosystem: the FCC catalog is a dependency graph. Every build decision --- mesh node hardware, rural backhaul technology, emergency communication redundancy, satellite ground station placement --- resolves to a specific Part number and a set of constraints. This mission produces the navigator's chart. Future work can follow the headings.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Catalog inaccessibility:} Title 47 CFR spans five printed volumes, hundreds of active Parts, and thousands of sections updated continuously. No single accessible reference maps its full scope, active status, and mutual dependencies. Builders making compliance decisions navigate this without a chart.
+
+  \item \textbf{Regulatory churn obscuring the stable floor:} The 2025--2026 deregulatory surge (1,000+ rules deleted, net neutrality resolved, spectrum auction reauthorization) creates ambiguity between what is stable law, what has been eliminated, and what is actively changing. Mission planners need a snapshot of the current state.
+
+  \item \textbf{Infrastructure builders lack a Part-to-use-case map:} Engineers deploying mesh nodes, amateur radio infrastructure, satellite ground stations, or rural broadband installations must navigate four subchapters, five volumes, and dozens of overlapping Parts to determine their compliance obligations. No unified cross-reference index exists in a GSD-executable format.
+
+  \item \textbf{Unlicensed spectrum architecture under-documented:} Part 15 (radio frequency devices) and related unlicensed bands are foundational to modern IoT, WiFi, and mesh deployments, yet the precise band-by-band power limits, device authorization requirements, and interference rules are scattered across subparts and rarely synthesized.
+
+  \item \textbf{Non-FCC co-occupants of Title 47 overlooked:} NTIA (Chapter III), the Office of Science and Technology Policy (Chapter II), and FirstNet (Chapter V) occupy Title 47 alongside the FCC. Their authority over federal spectrum, broadband deployment programs (BEAD), and public safety communications is frequently missed in FCC-focused analyses.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Title 47 CFR as a Layered Protocol Stack} --- The FCC catalog mirrors the OSI model: general administrative procedures at the foundation (Subchapter A), service-specific protocols in the middle layers (Subchapters B, C, D), and real-time amendments propagating from the Federal Register downward. Each Part is a module with a defined interface (the section numbering scheme) and a defined scope (the subject matter). Compliance is a matter of identifying which modules apply to a given use case and reading their specifications.
+
+\subsubsection{Title 47 Architecture Diagram}
+
+\begin{asciibox}
+TITLE 47 --- TELECOMMUNICATION
+Code of Federal Regulations
+Last amended: March 19, 2026
+|
++-- CHAPTER I: Federal Communications Commission (Parts 0--199)
+|   |
+|   +-- SUBCHAPTER A: General (Parts 0--19)
+|   |   Parts 0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,17,18,19
+|   |   [Organization, Procedure, Spectrum Allocation, EAS, Part 15, ISM]
+|   |
+|   +-- SUBCHAPTER B: Common Carrier Services (Parts 20--69)
+|   |   Parts 20,22,24,25,26,27,32,33,34,35,36,42,43,51,52,54,
+|   |          61,63,64,65,68,69
+|   |   [Mobile, Satellite, PCS, Broadband, Interconnection,
+|   |    Universal Service, Telephone Equipment]
+|   |
+|   +-- SUBCHAPTER C: Broadcast Radio Services (Parts 70--79)
+|   |   Parts 73,74,76,78,79
+|   |   [AM/FM/TV, Auxiliary, Cable, Relay, Access]
+|   |
+|   +-- SUBCHAPTER D: Private Radio Services (Parts 80--199)
+|       Parts 80,87,90,95,97,101
+|       [Maritime, Aviation, Land Mobile, GMRS/FRS,
+|        Amateur Radio, Fixed Microwave]
+|
++-- CHAPTER II: OSTP / NSC (Parts 200--217)
+|
++-- CHAPTER III: NTIA, Dept. of Commerce (Parts 300--303)
+|   [Federal spectrum management, BEAD broadband program]
+|
++-- CHAPTER IV: NTIA + NHTSA (Parts 400--401)
+|
++-- CHAPTER V: First Responder Network Authority (Parts 500+)
+    [FirstNet -- nationwide public safety broadband]
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE MAP
+===================
+MODULE 1: STRUCTURAL ANATOMY
+  --> Title 47 architecture, volumes, subchapter logic, numbering system
+  --> FCC organizational structure mapped to Part coverage
+  --> eCFR vs. GPO published edition; Federal Register amendment flow
+  [PARALLEL WITH MODULE 2]
+
+MODULE 2: SPECTRUM \& UNLICENSED OPERATIONS (Part 15 Deep Dive)
+  --> Part 2 (Frequency Allocations), Part 5 (Experimental)
+  --> Part 15 (Unlicensed RF Devices) -- full band-by-band catalog
+  --> Part 18 (ISM Equipment), 6 GHz expansion (2026)
+  [PARALLEL WITH MODULE 1]
+
+MODULE 3: COMMON CARRIER \& WIRELESS (Subchapter B)
+  --> Parts 20-27: Mobile, PCS, Satellite, WCS
+  --> Parts 51-69: Interconnection, Universal Service, Telephone
+  --> Net neutrality collapse (Jan 2025), broadband Title I status
+  [PARALLEL WITH MODULE 4]
+
+MODULE 4: BROADCAST SERVICES (Subchapter C)
+  --> Part 73: AM/FM/TV broadcast rules
+  --> Part 74: Auxiliary, LPTV, translators
+  --> Part 76: Cable TV, Part 78: Cable relay
+  [PARALLEL WITH MODULE 3]
+
+MODULE 5: PRIVATE RADIO (Subchapter D)
+  --> Part 80: Maritime services
+  --> Part 87: Aviation radio
+  --> Part 90: Land mobile / private radio
+  --> Part 95: GMRS/FRS/CB, Part 97: Amateur radio (AREDN mesh)
+  --> Part 101: Fixed microwave
+  [DEPENDS ON MODULE 2 for spectrum context]
+
+MODULE 6: REGULATORY FLUX \& COMPLIANCE WORKFLOW
+  --> 2025-2026 changes: Carr agenda, deleted rules, spectrum auction pipeline
+  --> Device authorization: FCC ID, TCB process, Part 15 compliance path
+  --> NTIA/FirstNet/BEAD context
+  --> GSD infrastructure compliance map
+  [DEPENDS ON ALL MODULES; FINAL SYNTHESIS]
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Structural Anatomy}
+Maps the architecture of Title 47 CFR in full: its chapter/subchapter/part hierarchy, the five printed volumes, the relationship between the eCFR (continuously updated) and the GPO published edition (updated annually), the Federal Register amendment pipeline, and the FCC's own organizational structure (bureaus and offices) mapped to their corresponding Part coverage.
+
+\subsubsection{Module 2: Spectrum and Unlicensed Operations}
+Deep survey of Part 2 (frequency allocations table), Part 5 (experimental licensing), Part 15 (the unlicensed RF device ruleset that governs every WiFi chip, IoT sensor, and mesh node sold in the US), Part 18 (Industrial, Scientific, Medical equipment), and the 2026 6 GHz band expansion for unlicensed operations. Includes power limits, band-by-band breakdown, and Class A/B device distinction.
+
+\subsubsection{Module 3: Common Carrier and Wireless Services}
+Covers Subchapter B in full: commercial mobile services (Part 20), public mobile (Part 22), PCS (Part 24), satellite (Part 25), miscellaneous wireless (Part 27), telephone company accounting and access rules (Parts 32--69), Universal Service (Part 54), and interconnection (Part 51). Maps the current Title I/Title II net neutrality resolution and its regulatory implications.
+
+\subsubsection{Module 4: Broadcast Radio Services}
+Covers Subchapter C: AM, FM, TV broadcast regulations (Part 73), auxiliary and low-power services (Part 74), multichannel video and cable TV (Part 76), cable television relay service (Part 78), and accessibility requirements (Part 79). Documents the allotment table structure for FM and TV channels.
+
+\subsubsection{Module 5: Private Radio Services}
+Covers Subchapter D: maritime radio (Part 80), aviation radio (Part 87), land mobile and public safety radio (Part 90), personal radio services including GMRS, FRS, CB, and MURS (Part 95), amateur radio including digital mesh protocols (Part 97), and fixed point-to-point microwave (Part 101).
+
+\subsubsection{Module 6: Regulatory Flux and Compliance Workflow}
+Synthesizes the 2025--2026 regulatory change landscape, maps the FCC device authorization workflow (TCB process, FCC ID system, Supplier's Declaration of Conformity), documents pending NPRMs and active proceedings, and produces the GSD-specific infrastructure compliance cross-reference linking mesh/amateur/satellite build scenarios to applicable Parts.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: fcc-catalog-research-v1
+  profile: fleet
+  primary_model: claude-opus-4-5       # synthesis, integration, flux analysis
+  secondary_model: claude-sonnet-4-5   # module surveys, document assembly
+  tertiary_model: claude-haiku-4-5     # scaffolding, shared schemas
+
+  allocation:
+    opus:   30%   # Modules 1 synthesis, Module 6 integration, flux analysis
+    sonnet: 60%   # Modules 2-5 surveys, bibliography, table assembly
+    haiku:  10%   # Schemas, templates, index structure
+
+  cache_strategy:
+    wave_0: "shared Part index schema cached for all agents"
+    wave_1: "eCFR source material fetched once, shared across tracks"
+    wave_2: "module outputs cached before synthesis pass"
+    ttl: 300s   # 5-minute window exploited for parallel track sharing
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item All active Parts in Title 47, Chapters I--V
+  \item Current eCFR state as of March 2026
+  \item 2025--2026 regulatory changes: deletions, new rules, pending NPRMs
+  \item Part 15 device categories and unlicensed band power limits
+  \item Amateur radio (Part 97) digital and mesh provisions
+  \item FCC device authorization workflow (FCC ID / TCB / SDoC)
+  \item NTIA BEAD program structure and current status
+  \item FirstNet (Chapter V) public safety broadband framework
+  \item Cross-reference index: GSD/Fox Infrastructure use cases to Parts
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item International telecommunications law (ITU Radio Regulations)
+  \item State-level telecommunications regulations (California SB 822, etc.)
+  \item FCC enforcement case history and precedent (ECFS docket analysis)
+  \item Accounting regulations (Parts 32--35) at section-level detail
+  \item Pre-2020 regulatory history (historical arc only, not full docket review)
+  \item Equipment-specific compliance testing procedures
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Title 47 structural map covering all active chapters, subchapters, and Parts with current status documented
+  \item Part 15 device categories fully cataloged with band, power limit, and authorization method for each
+  \item Subchapter B (Common Carrier) regulatory scope including 5G, satellite, and broadband services mapped with current Title I/II status
+  \item Broadcast service regulation structure (AM/FM/TV/cable) documented with key Part 73/74/76 provisions
+  \item Private radio services (maritime, aviation, amateur, land mobile) cataloged with Part cross-references and frequency allocations
+  \item 2025--2026 regulatory changes quantified: rules deleted, new rules adopted, active NPRMs documented
+  \item Device authorization compliance workflow (TCB, FCC ID, SDoC paths) diagrammed
+  \item FCC bureau/office structure mapped to corresponding Part coverage areas
+  \item Non-FCC Title 47 occupants (NTIA, OSTP, FirstNet) documented with program scope and authority
+  \item GSD-relevant provisions (Parts 15, 97, 25, 90) deep-dived with specific compliance thresholds
+  \item Cross-reference table linking 8+ real-world deployment scenarios to applicable Parts and key sections
+  \item Regulatory change pipeline (pending NPRMs, planned auctions) documented through 2027 horizon
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Mesh Prototype Spec & Part 15, Part 97, Part 90 constraints define allowable hardware and RF parameters & Informs \\
+Fox Infrastructure Group Plan & Spectrum licensing requirements, satellite ground station rules, rural broadband regulations & Informs \\
+GSD Local Cloud Provisioning Vision & RF emissions from server hardware (Part 15 Class A/B), facility-to-facility links (Part 101) & Informs \\
+GSD OS Desktop Vision & Consumer device FCC ID requirements, wireless certification for embedded radios & Adjacent \\
+DACP Protocol Architecture & FCC CALEA obligations (Part 1, Subpart Z) for communications platform operators & Adjacent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The FCC catalog is a spectrum of constraints --- and constraints, as every hacker since the Amiga era has understood, are not limitations. They are the grid on which creative architecture becomes possible. The 900 MHz band that powers a rural IoT mesh node and the 2.4 GHz channel that carried the first 802.11b packets and the 6 GHz expanse just opened for unlicensed operations in 2026: all of them exist because the FCC drew boundaries. Within those boundaries, extraordinary things have been built.
+
+The spaces between the Parts are where builders live. Part 15 says you can transmit without a license as long as you accept interference and don't cause harm to others. Amateur radio's Part 97 says licensed operators can experiment freely in their bands, including running digital mesh networks that function like the internet itself. Satellite services under Part 25 can now share spectrum with ground stations whose permits are processed in weeks instead of years. The FCC catalog is not the ceiling --- it is the floor plan. GSD builds on it.
+
+The 2025--2026 deregulatory surge makes this a critical moment to map the floor plan. The rules deleted under ``Delete, Delete, Delete'' are gone. The net neutrality architecture that governed broadband for a decade has been legally resolved. New spectrum is being auctioned. If the Fox Infrastructure Group is going to build its mesh, its rural internet backhaul, its amateur radio emergency spine, and its satellite ground stations --- it needs to know exactly which sections of the floor plan to build on, which ones have been removed, and which ones are being poured fresh.
+
+\newpage
+
+%% =========================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% =========================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{FCC Catalog --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings organized by module. Each module corresponds to a distinct research track in Stage 3's wave execution plan. Use this section as the authoritative evidence base for document assembly agents. All numerical claims are attributed to specific authoritative sources.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{FCC} --- Federal Communications Commission (fcc.gov): primary rulemaking authority, published eCFR, ECFS docket filings
+  \item \textbf{GPO / eCFR} --- Government Publishing Office (govinfo.gov) and ecfr.gov: official CFR text, continuously updated
+  \item \textbf{NTIA} --- National Telecommunications and Information Administration (ntia.gov): federal spectrum management, BEAD program
+  \item \textbf{FirstNet Authority} --- First Responder Network Authority: public safety broadband, AT\&T FirstNet contract
+  \item \textbf{Cornell LII} --- Legal Information Institute (law.cornell.edu/cfr/text/47): annotated cross-referenced CFR mirror
+  \item \textbf{Federal Register} --- federalregister.gov: proposed and final rules, rulemaking dockets
+\end{itemize}
+
+\subsection{Module 1: Structural Anatomy Reference}
+
+\subsubsection{Title 47 Volumes and Organization}
+
+Title 47 is published as five printed volumes by the GPO (eCFR source: govinfo.gov, law.cornell.edu). The five-volume structure organizes Chapter I as follows:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Volume} & \tableheader{Parts} & \tableheader{Coverage} \\
+\midrule
+Vol. 1 & Parts 0--19 & Subchapter A: General (org, procedure, spectrum allocation, EAS, Part 15) \\
+Vol. 2 & Parts 20--39 & Subchapter B: Common Carrier (mobile, satellite, telephone accounting) \\
+Vol. 3 & Parts 40--69 & Subchapter B (continued): Telco access, Universal Service, equipment \\
+Vol. 4 & Parts 70--79 & Subchapter C: Broadcast Radio Services \\
+Vol. 5 & Parts 80--199 & Subchapter D: Private Radio; plus Chapters II, III, IV \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{FCC Bureau Structure Mapped to Parts}
+
+The FCC is organized into bureaus and offices that administer corresponding Parts (FCC.gov organizational charts, March 2026):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Bureau / Office} & \tableheader{Primary Parts Administered} \\
+\midrule
+Wireline Competition Bureau & Parts 51, 52, 54, 61, 63, 64, 65, 68, 69 \\
+Wireless Telecommunications Bureau & Parts 20, 22, 24, 27, 90, 95, 101 \\
+Media Bureau & Parts 73, 74, 76, 78, 79 \\
+International Bureau & Parts 23, 25, 43; ITU coordination (Part 2) \\
+Public Safety and Homeland Security & Parts 4, 10, 11, 90 (public safety), 97 (emergency) \\
+Office of Engineering \& Technology & Parts 2, 5, 15, 18 \\
+Consumer \& Governmental Affairs & Parts 6, 7, 9, 14 \\
+Space Bureau (est. 2023) & Part 25 (satellite); new space economy rules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{eCFR vs. Published Edition}
+
+The eCFR (ecfr.gov) is continuously updated and reflects current rules including recent amendments. Title 47 was last amended March 19, 2026 per the eCFR. The GPO published edition is revised annually (typically October 1) and may lag by months. For compliance purposes, the Federal Register is the authoritative publication; the eCFR is the most current working reference.
+
+\subsection{Module 2: Spectrum and Unlicensed Operations Reference}
+
+\subsubsection{Part 2: Frequency Allocations}
+
+Part 2 (Sections 2.1--2.1207) contains the Master Frequency Allocation Table, which governs all radio spectrum use in the United States. It codifies the ITU Radio Regulations as applied domestically. Key structural elements:
+\begin{itemize}[leftmargin=1.5em]
+  \item The US Table of Frequency Allocations spans 3 kHz to 300 GHz
+  \item Bands are designated as Primary, Secondary, or Non-Interference allocations
+  \item Federal (NTIA) and non-federal (FCC) allocations are shown in separate columns
+  \item Footnotes (US and international) number in the hundreds and carry significant operational weight
+\end{itemize}
+
+\subsubsection{Part 15: Radio Frequency Devices (Unlicensed)}
+
+Part 15 is among the most practically impactful regulations in Title 47. It governs devices that radiate RF energy without a license. Nearly every consumer electronics device sold in the United States must comply with Part 15 before sale or advertisement (FCC, ecfr.gov/current/title-47/.../part-15).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Subpart} & \tableheader{Coverage} & \tableheader{Sections} \\
+\midrule
+Subpart A & General provisions, definitions, authorization methods & 15.1--15.38 \\
+Subpart B & Unintentional radiators (digital devices, computers) & 15.101--15.125 \\
+Subpart C & Intentional radiators (transmitters) & 15.201--15.259 \\
+Subpart D & Unlicensed personal communications services & 15.301--15.323 \\
+Subpart E & Unlicensed National Information Infrastructure (U-NII) bands & 15.401--15.407 \\
+Subpart F & Ultra-wideband (UWB) operation & 15.501--15.525 \\
+Subpart G & Access broadband over power line (Access BPL) & 15.601--15.615 \\
+Subpart H & Television band devices (white space) & 15.701--15.717 \\
+Subpart I & Dedicated short-range communications (DSRC) & 15.801--15.809 \\
+Subpart J & Medical body area networks (MBANs) & 15.901--15.909 \\
+Subpart K & Received signal strength indicators & 15.1000--15.1009 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key unlicensed bands under Part 15 (OET, FCC):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Band} & \tableheader{Frequency Range} & \tableheader{Common Use / Notes} \\
+\midrule
+ISM 900 MHz & 902--928 MHz & LoRa, Zigbee, FHSS devices; Part 15 Subpart C \\
+2.4 GHz ISM & 2400--2483.5 MHz & WiFi 802.11b/g/n, Bluetooth, microwave ovens \\
+5 GHz U-NII-1 & 5150--5250 MHz & Indoor WiFi (802.11a/ac/ax); 50 mW EIRP \\
+5 GHz U-NII-2A & 5250--5350 MHz & DFS required; radar avoidance \\
+5 GHz U-NII-2C & 5470--5725 MHz & DFS required; 250 mW EIRP \\
+5 GHz U-NII-3 & 5725--5850 MHz & Outdoor WiFi; 1 W EIRP \\
+6 GHz U-NII-5/6/7/8 & 5925--7125 MHz & WiFi 6E / WiFi 7; 2026 GVP expansion \\
+60 GHz & 57--71 GHz & WiGig (802.11ad/ay); short-range high-throughput \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Device authorization paths under Part 15:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Certification} --- Required for intentional radiators (WiFi chips, Bluetooth modules). Must be performed by an FCC-accredited Telecommunications Certification Body (TCB). Results in an FCC ID.
+  \item \textbf{Supplier's Declaration of Conformity (SDoC)} --- Self-certification for most unintentional radiators (computers, peripherals). No FCC ID required; manufacturer maintains test records.
+  \item \textbf{Verification} --- Older category, largely superseded by SDoC.
+\end{itemize}
+
+\textbf{Class A vs. Class B:} Class B is the more stringent standard, applies to devices marketed for home use. Class A applies to commercial/industrial environments. A Class A device used in a residential setting can create interference liability for the operator.
+
+\subsubsection{Part 18: Industrial, Scientific, Medical (ISM) Equipment}
+
+Part 18 covers equipment that uses RF energy for purposes other than communication: microwave ovens, RF welders, medical diathermy. ISM bands (902 MHz, 2.4 GHz, 5.8 GHz, 24 GHz) are shared with licensed and Part 15 unlicensed services; ISM equipment operates on a non-interference basis from licensed users.
+
+\subsubsection{6 GHz Expansion (2026)}
+
+At the FCC's January 29, 2026 Open Meeting, the Commission voted on a Fourth Report and Order expanding unlicensed operations in the 6 GHz band. The order permits a new class of \textit{geofenced variable power (GVP)} unlicensed devices that operate outdoors at higher power levels than previously authorized. This enables higher-throughput outdoor WiFi 6E / WiFi 7 deployments without individual licenses (FCC News, January 2026).
+
+\subsection{Module 3: Common Carrier and Wireless Services Reference}
+
+\subsubsection{Subchapter B Overview}
+
+Subchapter B (Parts 20--69) governs ``common carriers'' --- entities that offer communications services to the public. This includes cellular providers, satellite operators, telephone companies, and broadband providers.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Part} & \tableheader{Title} & \tableheader{Scope} \\
+\midrule
+20 & Commercial Mobile Services & Defines CMRS/PMRS distinction; signal booster rules \\
+22 & Public Mobile Services & Cellular carriers, paging, rural radio \\
+24 & Personal Communications Services & Licensed PCS bands (1900 MHz) \\
+25 & Satellite Communications & Geostationary and non-geostationary orbit; Space Bureau \\
+27 & Miscellaneous Wireless Communications & 700 MHz, AWS, BRS/EBS, 900 MHz broadband, 3.45 GHz \\
+32--36 & Telephone Accounting \& Separations & GAAP-based telco accounting; rate regulation artifacts \\
+43 & Reports of Communication Common Carriers & Annual carrier reporting requirements \\
+51 & Interconnection & Local loop unbundling; UNE obligations \\
+52 & Numbering & NANP administration; number portability \\
+54 & Universal Service & E-rate, Lifeline, Connect America Fund, Rural Health Care \\
+64 & Miscellaneous Rules Relating to Common Carriers & CPNI, PIRATE Act, subscriber protections \\
+68 & Connection of Terminal Equipment & Customer premises equipment standards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Net Neutrality Resolution (2025)}
+
+On January 2, 2025, the U.S. Court of Appeals for the Sixth Circuit struck down the FCC's 2024 Safeguarding and Securing the Open Internet Order. The court held that broadband internet access is an ``information service'' under the Communications Act, not a ``telecommunications service,'' and that the FCC therefore lacks statutory authority to impose net neutrality rules under Title II (Sixth Circuit, Case No. 24-3450, January 2025).
+
+Key legal consequences:
+\begin{itemize}[leftmargin=1.5em]
+  \item Broadband providers are no longer classified as common carriers
+  \item No federal rules against throttling, blocking, or paid prioritization
+  \item State-level rules (California SB 822, Washington, Oregon) remain enforceable
+  \item Future federal net neutrality requires Congressional action, not FCC rulemaking
+  \item Part 8 (Internet Transparency) requirements under review; broadband label elimination proposed
+\end{itemize}
+
+\subsubsection{Part 25: Satellite Communications}
+
+Part 25 governs earth station and space station licensing. The FCC's Space Bureau (established 2023) now administers this part. Key developments relevant to rural infrastructure:
+\begin{itemize}[leftmargin=1.5em]
+  \item Non-geostationary orbit (NGSO) systems (including Starlink) operate under streamlined Part 25 rules
+  \item Ground station licensing has been accelerated; barrier-to-entry rules reduced under the Carr agenda
+  \item Spectrum sharing between NGSO systems is governed by ITU coordination procedures codified in Part 25
+\end{itemize}
+
+\subsection{Module 4: Broadcast Radio Services Reference}
+
+\subsubsection{Part 73: Radio Broadcast Services}
+
+Part 73 is the foundational broadcast regulation. It contains allotment tables and technical standards for:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Subpart} & \tableheader{Service} & \tableheader{Key Provisions} \\
+\midrule
+A & AM Broadcast & Clear, regional, and local channel designations; 535--1705 kHz \\
+B & FM Broadcast & 88--108 MHz allotment table (Section 73.202); IBOC digital \\
+C & Noncommercial Educational FM & Reserved spectrum 88--92 MHz; licensing priority \\
+E & Television Broadcast & Channel allotment table (Section 73.603); ATSC 3.0 rules \\
+F & International Broadcast & Shortwave; ITU coordination \\
+G & Emergency Broadcast System & Predecessor rules superseded by Part 11 (EAS) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Part 76: Cable Television}
+
+Part 76 governs multichannel video programming distributors (MVPDs) including cable systems. Covers must-carry and retransmission consent obligations, technical standards, and consumer protection rules. The Carr FCC has moved to streamline and deregulate several Part 76 provisions.
+
+\subsection{Module 5: Private Radio Services Reference}
+
+\subsubsection{Part 97: Amateur Radio Service}
+
+Part 97 is uniquely builder-friendly: it explicitly permits experimentation, including ``one-way transmission of codes and ciphers'' for telemetry and ``spread spectrum'' operation. Sections of direct relevance to GSD infrastructure:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Section 97.113(b):} Prohibits pecuniary interest in transmission (critical for any commercial use consideration)
+  \item \textbf{Section 97.215:} Permits spread spectrum transmissions for amateur stations
+  \item \textbf{Section 97.307:} Emission standards; Part 97 allows digital modes not explicitly listed if they comply with bandwidth limits
+  \item \textbf{AREDN (Amateur Radio Emergency Data Network):} Operates under Part 97 using 802.11 hardware modified for amateur bands (2.4, 3.4, 5.8 GHz). Offers multi-megabit mesh networking under amateur license authority with no commercial traffic restriction on emergency communications.
+\end{itemize}
+
+\textbf{Key amateur frequency allocations:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Band} & \tableheader{Frequency} & \tableheader{Digital / Data Relevance} \\
+\midrule
+40 meters & 7.000--7.300 MHz & HF digital modes (FT8, JS8); long-range data \\
+2 meters & 144--148 MHz & Packet radio; APRS (Automatic Packet Reporting System) \\
+70 cm & 420--450 MHz & Packet radio; D-STAR; broadband amateur \\
+33 cm & 902--928 MHz & Overlaps ISM band; AREDN mesh-capable \\
+23 cm & 1240--1300 MHz & Microwave data links; AREDN \\
+13 cm & 2300--2450 MHz & Overlaps 2.4 GHz ISM; AREDN WiFi mesh \\
+6 cm & 5650--5925 MHz & AREDN; 5.8 GHz WiFi hardware \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Part 90: Land Mobile Radio Services}
+
+Part 90 covers private and public safety land mobile radio, including the 700/800 MHz public safety broadband spectrum, P25 digital trunked radio, and narrowband mandates. First responder interoperability is coordinated between Part 90 and Part 22 (commercial mobile). The ``800 MHz rebanding'' program completed relocation of public safety channels away from commercial spectrum.
+
+\subsubsection{Part 95: Personal Radio Services}
+
+Part 95 covers consumer radio services that do not require an individual license (FRS, MURS) or require only a simple license (GMRS, CB):
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{FRS (Family Radio Service):} 462/467 MHz; no license; limited to integrated, non-removable antennas; max 2 W
+  \item \textbf{GMRS (General Mobile Radio Service):} 462/467 MHz; ULS license required; up to 50 W; repeaters allowed; shares channels with FRS
+  \item \textbf{MURS (Multi-Use Radio Service):} 151/154 MHz VHF; no license; 2 W max; useful for rural property communications
+  \item \textbf{CB (Citizens Band):} 27 MHz; no license; 4 W AM / 12 W SSB; 40 channels
+\end{itemize}
+
+\subsubsection{Part 80: Maritime and Part 87: Aviation}
+
+Part 80 governs all maritime radio services including coastal, ship, and survival craft stations. VHF Channel 16 (156.800 MHz) is the international distress and calling frequency mandated under SOLAS. Part 87 governs aeronautical radio services, coordinated with FAA. Both parts heavily reference ITU Radio Regulations.
+
+\subsection{Module 6: Regulatory Flux and Compliance Reference}
+
+\subsubsection{2025 Carr ``Delete, Delete, Delete'' Initiative}
+
+Under Chairman Brendan Carr (confirmed January 2025), the FCC launched an aggressive deregulatory agenda. Key outcomes by end of 2025 (FCC.gov, December 2025):
+\begin{itemize}[leftmargin=1.5em]
+  \item More than 1,000 obsolete rules deleted from the CFR
+  \item Pending application backlog cut by half
+  \item Legacy copper network (TDM/PSTN) transition rules streamlined
+  \item Unnecessary network change disclosure notice requirements waived
+  \item Environmental regulatory burdens on tower builds axed (Biden-era proposal)
+  \item Broadband label requirements proposed for elimination
+  \item ``Digital discrimination'' disparate impact standard under legal challenge (8th Circuit pending)
+\end{itemize}
+
+\subsubsection{Spectrum Auction Pipeline (2026--2027)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Auction} & \tableheader{Band} & \tableheader{Description} & \tableheader{Timeline} \\
+\midrule
+Upper C-band & 3.98--4.0 GHz & Up to 180 MHz; mid-band 5G; exceeds 100 MHz Congressional minimum & By July 2027 \\
+AWS-3 & 1755--1780 / 2155--2180 MHz & Low-band; covers 200 markets, 100s of millions & 2026 \\
+37 GHz sharing & 37--37.6 GHz & 600 MHz; FWA and IoT sharing rules adopted & Active \\
+6 GHz GVP & 5925--7125 MHz & Expanded unlicensed operations (outdoor) & Jan 2026 order \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Spectrum auction authority was reauthorized as part of the ``Big Beautiful Bill'' (2025). The FCC acted immediately upon reauthorization to initiate proceedings for the Upper C-band and AWS-3 auctions (Truth on the Market, December 2025; FCC.gov, December 2025).
+
+\subsubsection{Device Authorization Compliance Workflow}
+
+\begin{asciibox}
+FCC DEVICE AUTHORIZATION DECISION TREE
+=======================================
+
+Does the device intentionally transmit radio energy?
+|
++-- YES --> Does it use a licensed band under Parts 22/27/90/97?
+|               +-- YES: Apply for license; device still needs Part-specific authorization
+|               +-- NO (unlicensed, Part 15): Proceed to authorization path below
+|
++-- NO  --> Does it generate unintentional emissions?
+                +-- YES: SDoC path (Subpart B digital devices, computers, peripherals)
+                +-- NO: Exempt (no authorization needed; still must not cause interference)
+
+PART 15 AUTHORIZATION PATHS:
+=============================
+CERTIFICATION (required):
+  - Intentional radiators (WiFi, Bluetooth, cellular modules)
+  - Must be tested by FCC-accredited TCB (Telecom Certification Body)
+  - Grants FCC ID (format: GRANTEE CODE + EQUIPMENT CODE)
+  - Database searchable at fccid.io and FCC public database
+
+SUPPLIER'S DECLARATION OF CONFORMITY (SDoC):
+  - Most unintentional radiators (computers, monitors, printers)
+  - Self-certification; manufacturer retains test records
+  - No FCC ID; uses "responsible party" designation
+  - Labeling required (varies by device class)
+
+VERIFICATION (legacy):
+  - Largely superseded; some specific equipment categories
+  - Self-certification without formal test record requirement
+
+CAUTION: Class A vs. Class B
+  - Class B: Home-use devices; stricter emissions limits
+  - Class A: Commercial/industrial; looser limits; cannot legally use in residential
+  - Most consumer devices must meet Class B
+\end{asciibox}
+
+\subsubsection{NTIA and Non-FCC Title 47 Occupants}
+
+\textbf{Chapter III: NTIA (National Telecommunications and Information Administration)}
+
+The NTIA manages federal government use of the radio spectrum (shared authority with FCC under the National Telecommunications and Information Administration Organization Act of 1992). Key NTIA authorities in Title 47:
+\begin{itemize}[leftmargin=1.5em]
+  \item Federal spectrum management (agencies coordinate with NTIA, not FCC)
+  \item BEAD (Broadband Equity, Access, and Deployment) program: \$42.5 billion in broadband infrastructure grants. As of March 2026, 26 states have NTIA-approved BEAD proposals. Program reformed in 2025 to technology-neutral approach (fiber no longer mandated).
+  \item NTIA's June 2025 BEAD modification eliminated requirements for: fiber prioritization, specific labor/employment conditions, climate-resilience mandates, and local-coordination conditions.
+\end{itemize}
+
+\textbf{Chapter V: First Responder Network Authority (FirstNet)}
+
+Established by the Middle Class Tax Relief and Job Creation Act of 2012. FirstNet administers the Nationwide Public Safety Broadband Network (NPSBN) built by AT\&T under a 25-year contract. Operates in the 700 MHz Band 14 spectrum (758--768 / 788--798 MHz). As of 2025, FirstNet covers 99\%+ of the US population and has prioritized traffic for law enforcement, fire, and emergency medical services.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Sensitivity} & \tableheader{Boundary} \\
+\midrule
+Emergency frequencies & Part 15 interference with Part 90 public safety and Part 11 EAS is a federal violation and public safety risk & ABSOLUTE \\
+Amateur radio third-party traffic & Part 97.115 strictly limits third-party (non-amateur) messages; business use prohibited & GATE \\
+Satellite ground station placement & Part 25 coordination zones around federal installations; some areas exclude unlicensed operation & GATE \\
+5 GHz DFS channels & Dynamic Frequency Selection mandatory in U-NII-2A/2C; WiFi must detect and avoid radar & GATE \\
+Part 15 power limits & Exceeding authorized power levels creates federal interference liability regardless of intent & ABSOLUTE \\
+CALEA obligations & Part 1, Subpart Z: Communications platforms may have CALEA obligations; seek legal counsel & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Federal Communications Commission. \textit{Rules and Regulations for Title 47}. \url{https://www.fcc.gov/wireless/bureau-divisions/technologies-systems-and-innovation-division/rules-regulations-title-47}
+  \item Electronic Code of Federal Regulations. \textit{Title 47 --- Telecommunication}. \url{https://www.ecfr.gov/current/title-47} (last amended March 19, 2026)
+  \item FCC Chairman Brendan Carr. \textit{Chairman Carr Highlights Wins Delivered in 2025}. FCC.gov, December 23, 2025.
+  \item FCC Chairman Brendan Carr. \textit{New Year, New Wins}. FCC.gov Blog, January 7, 2026.
+  \item NTIA. \textit{BEAD Program}. \url{https://www.ntia.gov/programs-and-initiatives/broadband-usa/internet-for-all/bead-program}
+  \item U.S. Government Printing Office. \textit{CFR Title 47 Volumes 1--5}. \url{https://www.govinfo.gov/app/collection/cfr/2026}
+\end{itemize}
+
+\subsubsection{Legal Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Cornell Legal Information Institute. \textit{47 CFR Chapter I, Subchapters A--D}. \url{https://www.law.cornell.edu/cfr/text/47}
+  \item Sixth Circuit Court of Appeals. \textit{In re: Safeguarding and Securing the Open Internet Order}. Case No. 24-3450, January 2, 2025. (Net neutrality struck down; broadband classified as ``information service.'')
+  \item Inside Global Tech. \textit{Sixth Circuit Strikes Down FCC Net Neutrality Rules}. January 6, 2025.
+  \item Inside Global Tech. \textit{FCC Proposes Rule Changes to Accelerate Transition to IP Networks}. December 4, 2025.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Analysis}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item BroadbandSearch. \textit{The Latest on Net Neutrality --- Where Are We in 2026}. February 2026.
+  \item Truth on the Market. \textit{Rules Down, Rockets Up: The Year Telecom Policy Hit Reset}. Jeffrey Westling, December 9, 2025.
+  \item Nelson Mullins. \textit{FCC Download: Monthly Updates --- January 2026}. January 15, 2026.
+  \item American Planning Association. \textit{FCC Updates Regulations on Wireless Telecommunication Infrastructure}. Planning.org, 2025.
+  \item Wikipedia. \textit{Title 47 of the Code of Federal Regulations}. (Cross-reference and historical context only) November 2025.
+\end{itemize}
+
+\newpage
+
+%% =========================================================
+%% STAGE 3 — MISSION PACKAGE
+%% =========================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, GSD-executable reference catalog of the FCC's complete ruleset: Title 47 CFR in full, with structured cross-references, current regulatory status (March 2026), device compliance pathways, and a builder-ready use-case navigation index. The mission generates six module documents, a master synthesis, and a compliance workflow artifact --- all organized for handoff to the Fox Infrastructure Group and GSD ecosystem builds that depend on spectrum compliance.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+WAVE 0: Foundation [Sequential, Haiku]
+  [SCHEMA] --> [PART INDEX] --> [SOURCE CATALOG]
+  Output: Shared data schema + Part inventory JSON
+
+WAVE 1: Parallel Survey Tracks [Parallel, Sonnet]
+  TRACK A: Mod 1 (Structural) + Mod 2 (Spectrum/Part 15)
+  TRACK B: Mod 3 (Common Carrier) + Mod 4 (Broadcast)
+  Output: Four module reference documents
+
+WAVE 2: Parallel Deep-Dive Tracks [Parallel, Opus/Sonnet]
+  TRACK C: Mod 5 (Private Radio) + GSD compliance map
+  TRACK D: Mod 6 (Regulatory Flux) + change pipeline
+  Output: Two deep-dive documents + compliance index
+
+WAVE 3: Synthesis + Verification [Sequential, Opus]
+  [INTEGRATE] --> [CROSS-REF INDEX] --> [VERIFY] --> [PUBLISH]
+  Output: Master catalog document + verification report
+
+WAVE 4: Publication [Sequential, Sonnet]
+  [FORMAT] --> [BIBLIOGRAPHY] --> [DELIVERY]
+  Output: Final PDF package + index.html
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Schema Layer} --- Shared Part inventory schema (JSON), source index, module boundaries
+  \item \textbf{Survey Layer} --- Six module reference documents, each self-contained
+  \item \textbf{Analysis Layer} --- Regulatory flux synthesis, net neutrality implications, spectrum pipeline
+  \item \textbf{Compliance Layer} --- Use-case to Part cross-reference, device authorization workflow, safety boundaries
+  \item \textbf{Publication Layer} --- Formatted master catalog, bibliography, executive summary
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+D1 & Part Inventory JSON & All active Parts listed with subchapter, title, section range, current status & Wave 0 \\
+D2 & Module 1: Structural Anatomy & FCC bureau map, volume structure, eCFR guidance & Wave 1A \\
+D3 & Module 2: Spectrum \& Part 15 & All Part 15 subparts, band table, auth paths & Wave 1A \\
+D4 & Module 3: Common Carrier & Subchapter B full survey, net neutrality status & Wave 1B \\
+D5 & Module 4: Broadcast & Part 73/74/76 summary, allotment table structure & Wave 1B \\
+D6 & Module 5: Private Radio & Parts 80/87/90/95/97/101 with AREDN deep-dive & Wave 2C \\
+D7 & Module 6: Regulatory Flux & Change log, auction pipeline, compliance workflow & Wave 2D \\
+D8 & GSD Compliance Index & 10+ use cases mapped to Parts + key sections & Wave 2C \\
+D9 & Master Synthesis & All modules integrated; cross-reference index & Wave 3 \\
+D10 & Verification Report & All success criteria checked; test results logged & Wave 3 \\
+D11 & Final PDF Package & Formatted catalog; bibliography; index.html & Wave 4 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Part Inventory Schema & None & Haiku & 8k \\
+Source Index & Schema & Haiku & 6k \\
+Mod 1: Structural Anatomy & Schema, eCFR & Sonnet & 40k \\
+Mod 2: Spectrum / Part 15 & Schema, Part 2, Part 15 & Sonnet & 60k \\
+Mod 3: Common Carrier & Schema, Subchap B & Sonnet & 50k \\
+Mod 4: Broadcast & Schema, Subchap C & Sonnet & 40k \\
+Mod 5: Private Radio & Mod 2 (spectrum), Subchap D & Sonnet+Opus & 55k \\
+Mod 6: Regulatory Flux & All modules & Opus & 45k \\
+GSD Compliance Index & Mods 2, 5, Fox Infra Plan & Opus & 30k \\
+Master Synthesis & All modules & Opus & 50k \\
+Verification Report & All modules, test plan & Sonnet & 20k \\
+Final Publication & All above & Sonnet & 25k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component Type} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+Schemas, templates & Haiku & Low-complexity scaffolding; maximize token efficiency \\
+Module surveys (M1--M4) & Sonnet & Structured content assembly; eCFR parsing; table generation \\
+Private radio + compliance & Sonnet + Opus & Technical depth + judgment about builder implications \\
+Regulatory flux synthesis & Opus & Requires legal interpretation, trend extrapolation, causal analysis \\
+GSD compliance index & Opus & Judgment-heavy mapping between legal text and engineering constraints \\
+Master synthesis & Opus & Cross-module integration; maintaining coherence across 6 research tracks \\
+Verification & Sonnet & Systematic checking against criteria; structured output \\
+Publication formatting & Sonnet & Template-following; bibliography assembly; index generation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 14k \\
+1 & Parallel Survey & Parallel (2 tracks) & Sonnet & 190k \\
+2 & Parallel Deep-Dive & Parallel (2 tracks) & Opus/Sonnet & 130k \\
+3 & Synthesis + Verify & Sequential & Opus & 70k \\
+4 & Publication & Sequential & Sonnet & 25k \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total estimated}} & \textbf{429k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W0-01 & Part Inventory Schema & JSON schema for Part records: number, subchapter, title, section range, active/reserved, last amended & Haiku \\
+W0-02 & Source Index & Catalog authoritative URLs: eCFR, FCC.gov, Cornell LII, GPO & Haiku \\
+W0-03 & Module Boundary Spec & Define input/output contracts for each module & PLAN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A: Structural + Spectrum (Modules 1 \& 2)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W1A-01 & Module 1: Title 47 Map & Complete Part inventory with status; bureau-to-Part mapping & Sonnet \\
+W1A-02 & Module 1: Volume Guide & Five-volume structure; eCFR/GPO relationship; amendment pipeline & Sonnet \\
+W1A-03 & Module 2: Part 2 Summary & Frequency allocation table overview; primary/secondary distinctions & Sonnet \\
+W1A-04 & Module 2: Part 15 Full Survey & All subparts, device categories, auth paths, band/power table & Sonnet \\
+W1A-05 & Module 2: 6 GHz Expansion & 2026 GVP order; updated unlicensed outdoor power levels & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Common Carrier + Broadcast (Modules 3 \& 4)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W1B-01 & Module 3: Subchap B Survey & All active Parts 20--69; scope and key provisions & Sonnet \\
+W1B-02 & Module 3: Net Neutrality Status & Sixth Circuit ruling; Title I/II implications; state law landscape & Sonnet \\
+W1B-03 & Module 3: Part 25 Satellite & NGSO rules; Space Bureau; Starlink compliance context & Sonnet \\
+W1B-04 & Module 4: Subchap C Survey & Parts 73/74/76/78/79 full survey & Sonnet \\
+W1B-05 & Module 4: Part 73 Allotments & FM and TV channel allotment table structure; Section 73.202/73.603 & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Parallel Deep-Dive Tracks}
+
+\textbf{Track C: Private Radio + Compliance Index (Module 5 + D8)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W2C-01 & Module 5: Part 97 Deep-Dive & AREDN mesh provisions; spread spectrum; emergency ops & Opus \\
+W2C-02 & Module 5: Parts 80/87/90/95/101 & Maritime, aviation, land mobile, personal, microwave & Sonnet \\
+W2C-03 & GSD Compliance Index & 10+ use cases to Part cross-reference; Fox Infra map & Opus \\
+W2C-04 & Device Auth Workflow & TCB/FCC ID/SDoC decision tree; Class A/B guide & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track D: Regulatory Flux + NTIA (Module 6)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W2D-01 & Module 6: Deleted Rules Log & Catalogue rules deleted under Carr agenda through Q1 2026 & Sonnet \\
+W2D-02 & Module 6: Spectrum Pipeline & Auction timeline; band-by-band 2026--2027 horizon & Sonnet \\
+W2D-03 & Module 6: NTIA/FirstNet & Chapter III/V scope; BEAD status; federal spectrum co-occupancy & Opus \\
+W2D-04 & Module 6: Pending NPRMs & Active proceedings; comment periods; key decisions expected 2026 & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W3-01 & Cross-Reference Index & Unified index: topic to Part/section; builder navigation & Opus \\
+W3-02 & Master Synthesis & Integrate all modules into cohesive catalog narrative & Opus \\
+W3-03 & SC-SRC verification & All citations traceable to FCC/GPO/NTIA/court sources & VERIFY \\
+W3-04 & SC-NUM verification & All power limits, section numbers, dates sourced & VERIFY \\
+W3-05 & Integration tests & Cross-module consistency; no contradictions & INTEG \\
+W3-06 & Verification Report & Final test log; PASS/FAIL per success criterion & VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 4: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Component} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W4-01 & Final bibliography & Formatted source list; government/legal/professional org categories & Sonnet \\
+W4-02 & LaTeX/PDF formatting & Final formatted catalog document & Sonnet \\
+W4-03 & Index HTML & Download page with usage instructions & Sonnet \\
+W4-04 & Executive Summary & 1-page navigator for quick reference & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Wave 0 outputs cached first:} Part inventory schema and source index are loaded into context before any module agent starts; prevents redundant eCFR fetching
+  \item \textbf{Parallel track isolation:} Tracks A/B in Wave 1 and C/D in Wave 2 do not depend on each other; no cache conflicts
+  \item \textbf{5-minute TTL window:} Wave 2 agents started within 5-minute window after Wave 1 completes can share Wave 1 output from context cache
+  \item \textbf{Module documents as context:} Wave 3 synthesis agent receives all six module documents in a single context; full 200k token window utilized
+  \item \textbf{eCFR source fetched once:} SCOUT agent fetches key eCFR pages once in Wave 0; all module agents work from cached text rather than re-fetching live URLs
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 Foundation & 5k & 14k & Schema + index creation \\
+Wave 1 Track A & 40k & 100k & Structural + Part 15 surveys \\
+Wave 1 Track B & 40k & 90k & Common carrier + broadcast \\
+Wave 2 Track C & 80k & 85k & Private radio + compliance index \\
+Wave 2 Track D & 70k & 75k & Regulatory flux + NTIA \\
+Wave 3 Synthesis & 150k & 70k & Requires full module context \\
+Wave 4 Publication & 80k & 25k & Formatting and delivery \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total estimated}} & \textbf{459k} & Across 3 sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+W0: [SCHEMA] --> [PART-INDEX] --> [SOURCE-CATALOG]
+                          |               |
+             +------------+               +-------------+
+             |                                          |
+W1A: [MOD-1-STRUCT] [MOD-2-SPECTRUM]    W1B: [MOD-3-CC] [MOD-4-BROADCAST]
+             |               |                    |              |
+             +-------+-------+                    +------+-------+
+                     |                                   |
+W2C:     [MOD-5-PRIVATE-RADIO] [GSD-COMPLIANCE]  W2D: [MOD-6-FLUX] [NTIA-FIRSTNET]
+                     |               |                   |
+                     +-------+-------+-------------------+
+                             |
+W3:              [CROSS-REF-INDEX] --> [MASTER-SYNTHESIS] --> [VERIFY]
+                             |
+W4:              [BIBLIOGRAPHY] --> [FORMAT] --> [PUBLISH]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Target \%} \\
+\midrule
+Safety-Critical & 6 & Mandatory & BLOCK & 15\% \\
+Core Functionality & 20 & Required & BLOCK & 48\% \\
+Integration & 9 & Required & BLOCK & 22\% \\
+Edge Cases & 7 & Best-effort & LOG & 17\% \\
+\midrule
+\textbf{Total} & \textbf{42} & & & 100\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to FCC, GPO, NTIA, Cornell LII, or federal courts; zero entertainment media \\
+SC-NUM & Numerical attribution & Every power limit, section number, auction date, and frequency range attributed to specific source \\
+SC-ADV & No policy advocacy & Document presents regulatory landscape factually; no advocacy for or against any FCC policy position \\
+SC-SEC & Safety frequency accuracy & Emergency frequencies (Channel 16, EAS, public safety bands) documented accurately; no operational details enabling interference \\
+SC-LGL & Legal accuracy & Net neutrality ruling, Title I/II classification, and FCC authority limitations stated with court citation \\
+SC-CFR & Part status accuracy & No Parts marked ``active'' that are reserved or removed; no reserved Parts presented as active \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Criterion Tested} & \tableheader{Expected Result} \\
+\midrule
+CF-01 & SC\#1: Title 47 structural map & All 5 chapters, 4 FCC subchapters, and minimum 30 active Parts documented with current status \\
+CF-02 & SC\#2: Part 15 device catalog & All 11 subparts documented; minimum 8 unlicensed bands in power table \\
+CF-03 & SC\#2: Auth path completeness & Certification, SDoC, and Verification paths documented with triggers \\
+CF-04 & SC\#3: Subchapter B survey & Minimum 15 active Parts in Subchapter B documented \\
+CF-05 & SC\#3: Net neutrality status & Sixth Circuit ruling documented with date, case number, and legal basis \\
+CF-06 & SC\#4: Broadcast survey & Parts 73, 74, 76, 78, 79 all documented with subpart structure \\
+CF-07 & SC\#5: Private radio survey & Parts 80, 87, 90, 95, 97, 101 documented \\
+CF-08 & SC\#5: Part 97 AREDN provisions & Spread spectrum authority, digital mode flexibility, AREDN applicability documented with section citations \\
+CF-09 & SC\#6: Regulatory changes & Minimum 5 specific 2025--2026 regulatory actions documented with dates \\
+CF-10 & SC\#6: Spectrum auction pipeline & Upper C-band, AWS-3, 6 GHz GVP documented with timelines \\
+CF-11 & SC\#7: Device auth workflow & Decision tree covers intentional/unintentional radiator branches; Class A/B distinction included \\
+CF-12 & SC\#8: Bureau mapping & All 8 FCC bureaus/offices mapped to corresponding Parts \\
+CF-13 & SC\#9: Non-FCC Title 47 & NTIA, OSTP, FirstNet documented with authority scope \\
+CF-14 & SC\#9: BEAD program status & State approval count and 2025 reform provisions documented \\
+CF-15 & SC\#10: Part 15 power limits & Power limits for minimum 6 unlicensed bands documented \\
+CF-16 & SC\#10: Amateur mesh (AREDN) & AREDN operating bands and Part 97 authority documented \\
+CF-17 & SC\#11: GSD compliance index & Minimum 10 deployment scenarios mapped to Parts with section citations \\
+CF-18 & SC\#11: Fox Infra use cases & Mesh node, amateur radio, satellite, rural backhaul scenarios all present \\
+CF-19 & SC\#12: Pending NPRMs & Minimum 5 active proceedings documented with docket numbers \\
+CF-20 & SC\#12: 2027 spectrum horizon & Auction timeline extends to 2027; Upper C-band deadline documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Title 47 structural map complete & CF-01, SC-CFR & Pending \\
+2. Part 15 device categories cataloged & CF-02, CF-03, CF-15 & Pending \\
+3. Common Carrier scope mapped & CF-04, CF-05 & Pending \\
+4. Broadcast services documented & CF-06 & Pending \\
+5. Private radio cataloged & CF-07, CF-08 & Pending \\
+6. 2025--2026 changes documented & CF-09, CF-10 & Pending \\
+7. Device auth workflow diagrammed & CF-11 & Pending \\
+8. Bureau structure mapped to Parts & CF-12 & Pending \\
+9. Non-FCC Title 47 documented & CF-13, CF-14 & Pending \\
+10. GSD provisions deep-dived & CF-15, CF-16 & Pending \\
+11. Use-case cross-reference built & CF-17, CF-18 & Pending \\
+12. Regulatory change pipeline documented & CF-19, CF-20 & Pending \\
+\midrule
+Source quality & SC-SRC & Pending \\
+Numerical attribution & SC-NUM & Pending \\
+No policy advocacy & SC-ADV & Pending \\
+Emergency freq accuracy & SC-SEC & Pending \\
+Legal accuracy & SC-LGL & Pending \\
+Part status accuracy & SC-CFR & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave gates; go/no-go decisions \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & eCFR source fetching; Federal Register monitoring; live rule verification \\
+EXEC-A & Executor Alpha & Module 1 + 2 document production (structural + spectrum) \\
+EXEC-B & Executor Bravo & Module 3 + 4 document production (common carrier + broadcast) \\
+CRAFT-REG & Regulatory Specialist & Module 6 flux analysis; net neutrality legal interpretation; NTIA \\
+CRAFT-RF & RF/Spectrum Specialist & Module 2 Part 15 deep-dive; band allocations; interference rules \\
+CRAFT-HAM & Amateur Radio Specialist & Module 5 Part 97; AREDN mesh; spread spectrum authority \\
+VERIFY & Verification Agent & Source validation; numerical accuracy; legal citation checking \\
+INTEG & Integration Agent & Cross-module consistency; use-case index coherence \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; ambiguity escalation \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache TTL monitoring \\
+SURGEON & Health Monitor & Research quality degradation detection; source drift alerts \\
+LOG & Chronicle Agent & Audit trail; wave summaries; commit messages \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Agent & Cross-cutting structural decisions; schema governance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (16 agents) \\
+Research Modules & 6 \\
+Parallel Tracks & 2 per wave (Waves 1 and 2) \\
+Estimated Total Tokens & $\sim$460k \\
+Estimated Sessions & 2--3 \\
+Primary Model & Claude Opus 4.5 (synthesis, legal, compliance) \\
+Secondary Model & Claude Sonnet 4.5 (surveys, formatting, bibliography) \\
+Tertiary Model & Claude Haiku 4.5 (schemas, scaffolding) \\
+Opus/Sonnet/Haiku Split & 30\% / 60\% / 10\% \\
+Critical Safety Tests & 6 (all BLOCK on fail) \\
+Total Tests & 42 \\
+Success Criteria & 12 \\
+eCFR Last Amended & March 19, 2026 \\
+Primary Sources & FCC.gov, ecfr.gov, govinfo.gov, law.cornell.edu \\
+Legal Boundary & Sixth Circuit (Jan 2, 2025) on net neutrality \\
+GSD Ecosystem Touchpoints & Fox Infrastructure Group, GSD Mesh Spec, DACP, Amateur Radio Emergency Spine \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The FCC's rules are not the ceiling of what's possible --- they are the floor on which everything is built. Know the floor plan before you pour the foundation.''}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{The spaces between the Parts are where builders live. Part 15 opens 1.2 GHz of unlicensed spectrum. Part 97 unlocks the entire amateur allocation for licensed experimenters. Part 25 lets you point a dish at the sky and pull down gigabits from orbit. The FCC catalog is a map of freedom --- bounded, structured, and navigable. This mission produces the navigator's chart.}}
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,1172 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% --- Ocean/Maritime Color Scheme ---
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{00695C}
+\definecolor{tertiary}{HTML}{5D4037}
+\definecolor{accent}{HTML}{1565C0}
+\definecolor{lightprimary}{HTML}{E3F2FD}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Maritime Platform Cost Model}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Maritime Compute + Energy + Transport Platform -- Integrated Cost Model},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% --- TITLE PAGE ---
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Maritime Platform\\[0.3em]Integrated Cost Model}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Compute + Energy + Transport --- Full Platform Economics}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (16 roles)  |  Estimated: 6--8 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% --- TABLE OF CONTENTS ---
+\tableofcontents
+\newpage
+
+% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Maritime Platform Cost Model --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research-Ready / Pre-Execution}
+\metafield{Depends On:}{Fox Infrastructure Group Master Business Plan, GSD Mesh Prototype Spec, Deep Audio Analyzer Mission}
+\metafield{Context:}{Fox Infrastructure Group, GSD Skill-Creator v1.50 Research Track}
+
+\subsection{Vision}
+
+The spaces between nodes are where the money lives. Individual cost data for a maritime compute platform
+exists in scattered form: Norway's Submerged Floating Tunnel concept runs \$25 billion for 3.7
+kilometers, subsea power cables span \$0.5--5 million per kilometer depending on voltage and depth,
+shore-based data centers average \$10--12 million per megawatt, and a 6,000-TEU container vessel
+runs \$80--100 million off the Korean yards. What does not yet exist is a model that shows what
+these numbers become when they converge --- when the same cable serves both power delivery and
+data transport, when the same vessel hull doubles as a compute chassis chassis and a coolant heat
+exchanger, when the port infrastructure serves both cargo and maintenance operations.
+
+This mission answers the gap stated directly: cost analysis across the full platform is absent.
+The research module has hit its ceiling on individual component data. The integrated cost of a
+maritime compute plus energy plus transport platform requires system-level modeling that treats
+convergence credits as first-class cost items. The Amiga Principle, applied to infrastructure
+economics, asks the same question it always asks: what does architectural leverage save you?
+A platform where compute cooling is provided for free by the surrounding ocean, where power
+delivery cables double as data backhaul, where vessels en route between nodes also serve as
+mobile compute edge --- that platform's cost is not the sum of its parts. The gap this mission
+closes is the model that proves it.
+
+The Fox Infrastructure Group vision spans BC to Chile, with FoxCompute anchored at Electric City
+(Grand Coulee / BPA hydro at \$0.02/kWh) and FoxFiber running submarine cable down the coast.
+The maritime question is: what does it cost to extend that compute and energy spine offshore and
+make it mobile? The answer requires a six-module integrated model --- compute, energy, transport,
+convergence credits, scenario comparison, and sensitivity --- executed by a Fleet crew with enough
+depth to produce actionable numbers, not ranges.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+\item \textbf{No integrated platform cost model exists.} Individual component costs are documented
+  separately for data centers (\$10--12M/MW), subsea cable (\$0.5--5M/km), offshore wind (\$2,852/kW
+  installed), and container vessels (\$15--200M). No published model computes their convergence
+  into a single maritime platform CAPEX/OPEX envelope.
+
+\item \textbf{Convergence credits are unmeasured.} A maritime platform shares infrastructure across
+  compute, energy, and transport functions (ocean cooling, cable dual-use, vessel co-location).
+  These shared-infrastructure savings --- potentially 20--40\% on individual component costs ---
+  have not been quantified for the platform as a whole.
+
+\item \textbf{Scenario range is undefined.} The platform could be deployed at prototype scale (1--5 MW),
+  regional scale (50--150 MW), or full-corridor scale (500 MW+). The cost structure changes
+  dramatically across these scales, but no comparison framework exists.
+
+\item \textbf{Operating cost dominates lifetime economics.} Subsea maintenance, vessel day rates,
+  cable repair costs, and offshore power opex can dwarf initial CAPEX over a 20-year platform
+  life. Current planning has focused on CAPEX without an opex model.
+
+\item \textbf{Risk-adjusted returns are unmodeled.} Offshore infrastructure faces weather, geopolitical,
+  and regulatory risks not present in land-based systems. No risk-adjusted NPV analysis has
+  been produced for the platform at any deployment scale.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} A maritime compute-energy-transport platform is an infrastructure stack
+where shared physical media (cables, hulls, ocean) reduces integrated system cost below the
+arithmetic sum of standalone components, and the correct unit of analysis is the platform
+CAPEX/OPEX envelope, not the component cost sheet.
+
+\subsubsection{Platform Architecture Map}
+
+\begin{asciibox}
+MARITIME PLATFORM COST ARCHITECTURE
+
+     OFFSHORE GENERATION         SUBSEA SPINE          SHORE ANCHOR
+     +-----------------+     +---------------+     +----------------+
+     | Floating Wind   |-----| Power + Data  |-----| Electric City  |
+     | $2,852/kW (fix) |     | Cable Bundle  |     | $0.02/kWh BPA  |
+     | $4,000+/kW (flt)|     | $0.5-5M/km    |     | Grand Coulee   |
+     |                 |     |               |     |                |
+     | Tidal/Wave      |     | Dual-use:     |     | Columbia River |
+     | (emerging)      |     |  - Power HVDC |     | Free cooling   |
+     +-----------------+     |  - Data fiber |     +----------------+
+                             +-------+-------+
+                                     |
+              +-----------------+    |    +-----------------+
+              | Compute Node A  |----+----| Compute Node B  |
+              | Container DC    |         | Vessel-mounted  |
+              | $10-12M/MW land |         | (marine premium |
+              | +30-50% marine  |         |  offset by      |
+              |                 |         |  free cooling)  |
+              +-----------------+         +-----------------+
+                                     |
+                             +-------+-------+
+                             | Mobile Edge   |
+                             | Cargo vessels |
+                             | en-route      |
+                             | compute nodes |
+                             +---------------+
+
+CONVERGENCE CREDIT OPPORTUNITIES:
+  C1: Ocean cooling eliminates chiller CAPEX (~$1-2M/MW saved)
+  C2: Cable bundle dual-use (power + data) vs. separate runs
+  C3: Vessel hull compute: CapEx shared with cargo function
+  C4: Port infrastructure: maintenance + logistics shared
+  C5: BPA hydro anchor: $0.02/kWh vs $0.12 US average
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+WAVE STRUCTURE --- 6 RESEARCH MODULES
+
+Wave 0 (Foundation):
+  F-0: Shared schemas, cost taxonomy, source index
+
+Wave 1A (Parallel Track):              Wave 1B (Parallel Track):
+  MOD-A: Compute Cost Analysis           MOD-B: Energy Infrastructure Costs
+  - Offshore DC economics                - Floating wind: CAPEX + LCOE
+  - Marine premium vs. cooling credit    - Subsea cable: cost per km
+  - Container DC benchmarks              - BPA hydro anchor economics
+  - AI facility requirements             - Grid interconnect costs
+
+Wave 1C (Parallel Track):              Wave 1D (Parallel Track):
+  MOD-C: Maritime Transport Economics    MOD-D: Shared Infrastructure Credits
+  - Vessel acquisition/operating         - Convergence credit model
+  - Autonomous shipping economics        - Dual-use infrastructure savings
+  - Port infrastructure costs            - Ocean cooling quantification
+  - Maintenance vessel day rates         - Shared opex reduction
+
+Wave 2 (Synthesis):
+  MOD-E: Scenario Comparison (3 scales: 5MW / 100MW / 500MW)
+  MOD-F: Sensitivity & Risk Analysis (NPV, risk-adjusted returns)
+
+Wave 3 (Publication + Verification):
+  Integration audit, source validation, PDF assembly
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{MOD-A: Compute Cost Analysis}
+Offshore and marine-deployed data center economics. Baseline shore-based construction cost
+(\$10--12M/MW general, \$20M+/MW AI-optimized), marine deployment premium (estimated 30--50\%
+structural and weatherproofing uplift), offset by ocean cooling savings (elimination of
+chiller plant, estimated \$1--2M/MW). Container DC construction benchmarks. AI vs.\ standard
+compute density implications for the platform.
+
+\subsubsection{MOD-B: Energy Infrastructure Costs}
+Floating offshore wind CAPEX (\$4,000+/kW 2024, targeting \$45/MWh LCOE by 2035 per DOE),
+fixed offshore wind (\$2,852/kW IRENA 2024), subsea power cable costs (\$0.5--5M/km depending
+on voltage, depth, and seabed conditions), HVAC vs.\ HVDC break-even distance (\textasciitilde{}80km),
+BPA hydro baseline (\$0.02/kWh Grand Coulee), grid interconnect infrastructure costs.
+
+\subsubsection{MOD-C: Maritime Transport Economics}
+Vessel acquisition cost by scale (\$15--50M small, \$80--200M large), annual operating costs
+(crew \$2--5M/yr, fuel \$3--10M/yr), autonomous vessel economics (3.4\% freight rate reduction
+per ScienceDirect 2017, shore control center amortization), port infrastructure investment,
+maintenance vessel day rates (\$15,000--50,000/day offshore), lifecycle and drydock costs.
+
+\subsubsection{MOD-D: Shared Infrastructure Credit Model}
+Quantification of convergence credits: (C1) ocean cooling CAPEX elimination, (C2) cable
+bundle dual-use savings vs.\ separate power and fiber runs, (C3) vessel hull compute
+co-location economics, (C4) shared port maintenance and logistics infrastructure,
+(C5) BPA hydro power cost advantage over grid average. Net convergence credit as
+percentage reduction on integrated platform cost vs.\ standalone components.
+
+\subsubsection{MOD-E: Scenario Comparison}
+Three deployment scales with full CAPEX/OPEX/NPV analysis: (1) Prototype --- 5 MW compute,
+1 vessel, 50km cable run; (2) Regional --- 100 MW compute, 5 vessels, 300km spine;
+(3) Full Corridor --- 500 MW compute, 20+ vessels, BC-to-Chile spine integration
+with FoxFiber. Cost per MW-hour of compute delivered as primary comparison metric.
+
+\subsubsection{MOD-F: Sensitivity and Risk Analysis}
+Key cost drivers and their sensitivity ranges: steel prices (20--30\% swing on vessel/structure
+costs), cable installation vessel day rates (\$150,000--300,000/day), offshore wind capex
+trajectory (40--60\% projected decline by 2035 per IRENA), regulatory and permitting risk
+premiums, weather event downtime modeling. Risk-adjusted NPV across three scenarios.
+Insurance and bond cost requirements for maritime infrastructure.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission_id: "maritime-cost-model-v1.0"
+  profile: "fleet"
+  modules:
+    - id: "MOD-A"
+      name: "Compute Cost Analysis"
+      model: "opus"
+      role: "CRAFT-COMPUTE"
+      parallel_group: "wave_1a"
+    - id: "MOD-B"
+      name: "Energy Infrastructure Costs"
+      model: "sonnet"
+      role: "CRAFT-ENERGY"
+      parallel_group: "wave_1a"
+    - id: "MOD-C"
+      name: "Maritime Transport Economics"
+      model: "sonnet"
+      role: "CRAFT-MARITIME"
+      parallel_group: "wave_1b"
+    - id: "MOD-D"
+      name: "Shared Infrastructure Credits"
+      model: "opus"
+      role: "CRAFT-CONVERGENCE"
+      parallel_group: "wave_1b"
+    - id: "MOD-E"
+      name: "Scenario Comparison"
+      model: "opus"
+      role: "ANALYST"
+      parallel_group: "wave_2"
+      depends_on: ["MOD-A", "MOD-B", "MOD-C", "MOD-D"]
+    - id: "MOD-F"
+      name: "Sensitivity and Risk"
+      model: "opus"
+      role: "ANALYST"
+      parallel_group: "wave_2"
+      depends_on: ["MOD-A", "MOD-B", "MOD-C", "MOD-D"]
+  foundation:
+    - id: "F-0"
+      name: "Cost Taxonomy and Source Index"
+      model: "haiku"
+      role: "LOG"
+      parallel_group: "wave_0"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[itemsep=2pt]
+  \item CAPEX and OPEX modeling for offshore compute, subsea power/data cable, maritime vessels
+  \item Three deployment scales: 5 MW prototype, 100 MW regional, 500 MW corridor
+  \item Convergence credit quantification for shared infrastructure
+  \item 20-year NPV analysis with risk adjustment
+  \item BPA hydro power anchor as cost baseline reference
+  \item Autonomous vs.\ manned vessel economics comparison
+  \item Floating vs.\ fixed offshore wind cost comparison at the platform scale
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[itemsep=2pt]
+  \item Specific site permitting costs (jurisdiction-dependent, treated as risk range)
+  \item Detailed naval architecture or hull engineering specifications
+  \item Customs, duties, and cross-border regulatory costs by individual country
+  \item Satellite-based data transport costs (assumed fiber cable primary)
+  \item Carbon credit or environmental offset revenue modeling
+  \item Full financial model (investment structure, equity/debt splits, tax treatment)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Integrated platform CAPEX produced for all three scales (5 MW, 100 MW, 500 MW)
+    with component-level breakdown and source citation for every line item.
+  \item Integrated platform OPEX (annual) produced for all three scales with
+    maintenance, fuel/power, crew, and cable repair costs itemized.
+  \item Convergence credit total quantified for each scale as a percentage reduction
+    from standalone component sum, with methodology documented.
+  \item Cost per MW-hour of compute delivered calculated for each scenario as the
+    primary platform economics comparison metric.
+  \item Offshore wind CAPEX trajectory modeled from 2024 to 2035, with DOE \$45/MWh
+    LCOE target year and implied platform cost reduction documented.
+  \item Subsea cable cost per km compiled across voltage class, depth band, and
+    seabed condition with at least five sourced real-project benchmarks.
+  \item Vessel economics compared between manned and autonomous operation at
+    platform scale with sourced operating cost assumptions.
+  \item Ocean cooling credit quantified in \$/MW saved vs.\ shore-based chiller plant,
+    with engineering basis documented.
+  \item 20-year NPV analysis produced for the 100 MW regional scenario at three
+    discount rates (5\%, 8\%, 12\%).
+  \item Sensitivity tornado chart produced identifying the top five cost drivers
+    and their percentage impact on integrated platform cost.
+  \item All numerical claims attributed to specific sources (government agencies,
+    peer-reviewed journals, industry reports from named firms).
+  \item Research Reference document is self-contained --- a reader with no prior
+    context can reconstruct the cost model from the document alone.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency} \\
+\midrule
+Fox Infrastructure Group Master Plan & Parent & Electric City BPA anchor, 21-company structure, corridor geography \\
+GSD Mesh Prototype Spec & Sibling & 10-node white-box cluster; land-based compute cost baseline \\
+Fox Legal Staffing Analysis & Sibling & Regulatory and permitting cost inputs for maritime operations \\
+Deep Audio Analyzer Mission & Sibling & Example platform mission structure; execution model reference \\
+GSD Skill-Creator v1.50 & Consumer & Cost model outputs feed infrastructure planning wave \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle does not stop at software architecture. The same insight that built
+the Amiga --- that specialized, purpose-built components working in concert produce outcomes
+impossible for generalized brute-force systems --- applies to physical infrastructure at
+maritime scale. A shore-based data center optimized for compute but paying \$0.12/kWh and
+running chiller plants is a generalized system. A maritime platform where the ocean provides
+cooling, the cable provides both power and backhaul, the vessels provide both compute and
+logistics, and the BPA dam provides baseload at \$0.02/kWh is an Amiga. The question this
+mission answers is not whether the architecture is elegant. That was settled in the vision.
+The question is what it costs to build the Amiga at sea --- and whether the convergence
+credits are large enough to close the gap between the marine deployment premium and the
+infrastructure savings. That is not a philosophical question. That is a number. This mission
+produces it.
+
+% =====================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Maritime Platform Cost Model --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced cost data organized by module. All monetary values are
+2024 USD unless otherwise noted. All claims are attributed to specific sources. Use
+this document as the primary data input for the mission execution wave plan.
+
+\textbf{Key source organizations:}
+\begin{itemize}[itemsep=2pt]
+  \item International Renewable Energy Agency (IRENA) --- offshore wind cost database
+  \item U.S. Department of Energy / NREL --- Annual Technology Baseline (ATB), Cost of Wind Energy Review
+  \item Wood Mackenzie --- global LCOE reports (2024)
+  \item Cushman \& Wakefield --- Data Center Development Cost Guide (2025)
+  \item Norwegian Public Roads Administration (NPRA) --- subsea tunnel and cable infrastructure
+  \item SINTEF / NorthWind --- floating wind cost analysis (Norway, 2024)
+  \item OilPrice.com / IEEE Spectrum --- subsea cable cost benchmarks
+  \item IMO / MDPI Applied Sciences --- autonomous vessel economics
+  \item CBRE / Dgtl Infra --- data center cost benchmarks
+\end{itemize}
+
+\subsection{MOD-A Reference: Compute Cost Analysis}
+
+\subsubsection{Shore-Based Data Center Benchmarks (2024--2025)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{2.5cm}C{2.5cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Facility Type} & \tableheader{CAPEX/MW} & \tableheader{CAPEX/sqft} & \tableheader{Source} \\
+\midrule
+General purpose (Tier III) & \$10--12M & \$600--1,100 & CBRE / Cushman 2025 \\
+AI-optimized (liquid cool) & \$20M+ & \$1,200--2,200 & CBRE 2025 \\
+Hyperscale campus & \$12M avg & \$1,050 & Digital Realty 2024 \\
+Brownfield redevelopment & \$7--8M & \$525--700 & QTS / Dgtl Infra 2024 \\
+Prime market (NYC/SV) & \$18--25M & \$2,200 & Cushman 2024 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key cost components:} MEP systems consume 40--50\% of total data center budget. Electrical
+systems alone represent 40--45\% of expenditures. Land represents 15--20\% of total cost at
+\$5.59/sqft average in 2024, with large-parcel land costs up 23\% year-over-year (Cushman
+\& Wakefield 2025).
+
+\subsubsection{Marine Deployment Premium and Ocean Cooling Credit}
+
+Shore-based data centers do not apply to maritime deployment without three adjustments:
+
+\textbf{Marine Structural Premium (estimated +30--50\% on shell):}
+\begin{itemize}[itemsep=2pt]
+  \item Corrosion-resistant materials and coatings for saltwater environments
+  \item Structural reinforcement for wave loading and vessel motion (if vessel-mounted)
+  \item Weatherproofing and pressure-rated enclosures for subsurface installations
+  \item Marine electrical standards (IEC 60092) vs.\ land-based codes
+\end{itemize}
+
+\textbf{Ocean Cooling Credit (estimated --\$1--2M/MW CAPEX, --\$0.5--1M/MW annual OPEX):}
+\begin{itemize}[itemsep=2pt]
+  \item Shore-based chiller plant accounts for \$1--2M/MW of MEP CAPEX (derived: MEP = 50\% of
+    \$10M/MW = \$5M/MW; cooling = 20--40\% of MEP = \$1--2M/MW)
+  \item North Atlantic and North Pacific surface water temperatures 8--15°C provide
+    direct cooling without mechanical refrigeration
+  \item Seawater cooling eliminates 15--20\% of ongoing electricity consumption
+    attributable to cooling systems in shore-based facilities
+  \item Water availability concern (shore-based facilities consume \textasciitilde{}2M liters/day per
+    100 MW per IEA 2024) is eliminated: ocean provides free, unlimited supply
+\end{itemize}
+
+\textbf{Net marine compute CAPEX estimate:} \$10M/MW base $\times$ 1.35 marine premium $-$ \$1.5M/MW
+cooling credit $=$ \$12M/MW. Comparable to AI-optimized shore-based at equivalent compute
+density, with superior cooling headroom for future density growth.
+
+\subsection{MOD-B Reference: Energy Infrastructure Costs}
+
+\subsubsection{Offshore Wind: CAPEX and LCOE (2024)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Technology} & \tableheader{CAPEX/kW} & \tableheader{LCOE} & \tableheader{Source} \\
+\midrule
+Fixed-bottom offshore wind & \$2,852/kW & \$79/MWh & IRENA 2024 \\
+Fixed offshore (Wood Mac) & --- & \$230/MWh & Wood Mackenzie 2024 \\
+Floating offshore (current) & \$4,000+/kW & \$320/MWh & Wood Mackenzie 2024 \\
+Floating (WindFloat pilot) & --- & \$112/MWh & MDPI FOW Review 2024 \\
+DOE Floating Wind Shot target & --- & \$45/MWh & DOE NREL 2024 (by 2035) \\
+ETIPWind target at 20 GW & --- & €40--80/MWh & SINTEF/NorthWind 2024 \\
+Onshore wind (benchmark) & --- & \$75/MWh & Wood Mackenzie 2024 \\
+BPA Grand Coulee hydro & --- & \$0.02/kWh & Fox Infrastructure Group \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Capacity factors:} Modern fixed-bottom offshore reaches 40--60\% capacity factor
+(IRENA 2024). Floating offshore currently lower due to immaturity; projected to converge
+with fixed-bottom by 2030--2035 as supply chains mature.
+
+\textbf{CAPEX trajectory:} Global weighted average installed cost for offshore wind has fallen
+62\% between 2010 and 2024 (IRENA 2024). Total installed offshore wind capacity grew from
+3.1 GW in 2010 to 82.9 GW in 2024. Chinese suppliers offering turbines at \$300,000/MW (SINTEF
+Oct.\ 2024) vs.\ European land-based at \$1,400/MW --- demonstrating the scale of supply chain
+maturity impact.
+
+\subsubsection{Subsea Power Cable Costs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Cable Type} & \tableheader{Installed Cost/km} & \tableheader{Notes / Source} \\
+\midrule
+HVAC medium voltage (\textless{}150 kV) & \$0.5--2.0M/km & Short, shallow, protected routes (Quora industry 2024) \\
+HVDC (\textpm{}100--300 kV) & \$1.0--4.0M/km & Standard interconnectors (Quora 2024) \\
+Complex / erratic seabed & \$3.0--5.0M/km & Deep water, rocky terrain (Thunder Said Energy) \\
+Offshore wind inter-array & \$0.5M/km & Within-farm cabling (Thunder Said Energy) \\
+Subsea power cable (general) & \$2.5M+/km & OilPrice.com 2023 \\
+EuroAsia Interconnector & \$0.74M/km & 1,208 km at \$900M (Submarine Networks 2021) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{AC vs.\ HVDC:} AC cables are economical for distances under \textasciitilde{}80--100 km; beyond
+that, HVDC becomes cost-effective despite higher converter station costs (ESRU/Strathclyde).
+For a BC-to-Chile corridor spanning 10,000+ km, HVDC is the only viable technology.
+
+\textbf{Installation vessels:} Cable installation vessels cost \$150,000--300,000/day to charter.
+State-of-the-art vessels such as Prysmian's Leonardo da Vinci cost \$200M to build and can
+lay 2.1 km/hour in depths up to 3,000 m (Thunder Said Energy). Installation is often the
+cost-controlling factor in complex routes.
+
+\textbf{Communication fiber context:} Submarine communication cables cost \$30,000--50,000/km
+(OilPrice.com 2023 / Thematica) --- two orders of magnitude cheaper than power cables.
+Bundling power and fiber in the same cable trench provides installation cost savings even
+if the cables themselves are separate systems.
+
+\subsection{MOD-C Reference: Maritime Transport Economics}
+
+\subsubsection{Vessel Acquisition Costs (2024--2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Vessel Type / Size} & \tableheader{New Build Cost} & \tableheader{Source} \\
+\midrule
+Small cargo (1,000--5,000 TEU) & \$15--50M & FreightAmigo / Bearcat 2026 \\
+Standard freight (5,000--10,000 TEU) & \$30--100M & FreightAmigo 2024 \\
+Large container (10,000+ TEU) & \$100--200M & FreightAmigo / Wikipedia 2024 \\
+Ultra-large (20,000+ TEU) & \$200--267M & Accio.com market data 2024 \\
+4,000--6,000 TEU (Korean yards) & \$80--100M & Industry operator quoted 2024 \\
+Used vessel (5-year-old) & 60--70\% of new & Bearcat Express 2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Annual Operating Costs (Large Vessel, indicative)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Cost Item} & \tableheader{Annual Range} & \tableheader{Notes} \\
+\midrule
+Crew wages + related & \$2--5M & Route and flag-state dependent \\
+Fuel (large vessel) & \$3--10M & Route-dependent; dominant variable cost \\
+IMO 2020 sulfur surcharge & \$150--300/container & \textasciitilde{}\$500K--1.5M/yr at 3,000 TEU \\
+EU ETS (European ports) & \$50--150/container & From 2024 phase-in \\
+Annual maintenance/drydock & \$1--3M (amortized) & Drydock every 3--5 years \\
+Insurance & 0.5--1.5\% of vessel value & \\
+Port fees (per voyage) & Variable & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Autonomous Vessel Economics}
+
+Research from ScienceDirect (2017, Gdynia Maritime University literature review) and
+follow-on MUNIN / ReVolt / Yara Birkeland program data shows:
+\begin{itemize}[itemsep=2pt]
+  \item Autonomous operation expected present value savings of \$4.3M over a 25-year bulk carrier lifecycle
+  \item Required freight rate 3.4\% lower for equivalent autonomous bulker vs.\ conventional manned ship
+  \item Shore Control Centre can monitor approximately 90 vessels simultaneously (amortizes SCC cost)
+  \item Communication costs increase \textasciitilde{}10$\times$ vs.\ conventional vessel (significant for data-heavy compute payloads)
+  \item Yara Birkeland: 120 TEU, fully electric, fully autonomous coastal feeder --- production unit economics pending 2025--2026 operational data
+\end{itemize}
+
+\textbf{Platform implication:} For compute-carrying vessels that are also running
+workloads en route, the 10$\times$ communication cost premium is offset by the compute
+revenue those workloads generate. This is the central economic argument for vessel-mounted
+edge compute as a maritime platform component.
+
+\subsection{MOD-D Reference: Shared Infrastructure Credit Model}
+
+\textbf{Convergence Credits --- Quantification Basis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Credit Type} & \tableheader{Estimated Value} & \tableheader{Basis} \\
+\midrule
+C1 & Ocean cooling eliminates chiller CAPEX & \$1--2M/MW & Cooling = 20--40\% of MEP = 20--40\% of 50\% of \$10M/MW \\
+C2 & Cable bundle installation: power + fiber in same trench & 20--30\% on cable install & Single mobilization of \$150K--300K/day vessel serves both \\
+C3 & Vessel hull compute co-location vs.\ standalone platform & 40--60\% on float structure & Hull already amortized by cargo function \\
+C4 & Shared port logistics (cargo + maintenance) & 15--25\% on port OPEX & Berth, crane, and service infrastructure shared \\
+C5 & BPA hydro power vs.\ grid average (\$0.02 vs.\ \$0.12/kWh) & \$438M/yr at 500 MW & Fox Infrastructure Group electric city model \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Net convergence credit estimate:} At 100 MW regional scale, credits C1--C4 are
+estimated to reduce integrated CAPEX by 18--28\% vs.\ standalone component sum. Credit C5
+(BPA power) applies only to shore-anchored compute and reduces annual OPEX by \$87M vs.\
+US average at 500 MW scale. The largest single credit (C5) is therefore a land-side
+advantage that makes the maritime platform's power economics depend heavily on the cable
+cost and loss profile connecting to the BPA anchor.
+
+\subsection{MOD-E Reference: Scenario Comparison Data}
+
+\subsubsection{Prototype Scale (5 MW Compute, 1 Vessel, 50 km Cable)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Cost Item} & \tableheader{Estimate} & \tableheader{Basis} \\
+\midrule
+Compute infrastructure & \$60M & 5 MW $\times$ \$12M/MW (marine premium net of cooling) \\
+Offshore wind generation & \$14M & 5 MW $\times$ \$2,852/kW (fixed) or \$20M floating \\
+Subsea cable (50 km) & \$50--100M & \$1--2M/km HVAC; low end for protected route \\
+Platform vessel & \$20--50M & Small modified cargo/industrial vessel \\
+Shore interconnect & \$5--10M & Grid tie and converter infrastructure \\
+\textbf{CAPEX Total (est.)} & \textbf{\$149--244M} & \\
+Annual OPEX & \$8--15M & Cable maintenance, vessel ops, power, staffing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Regional Scale (100 MW Compute, 5 Vessels, 300 km Spine)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Cost Item} & \tableheader{Estimate} & \tableheader{Basis} \\
+\midrule
+Compute infrastructure & \$1.2B & 100 MW $\times$ \$12M/MW \\
+Offshore wind (100 MW) & \$285M & 100 MW $\times$ \$2,852/kW \\
+Subsea power cable (300 km) & \$300--600M & \$1--2M/km HVDC + converter stations \\
+Subsea fiber bundle & \$10--15M & \$30--50K/km co-installed \\
+Platform vessels (5) & \$100--500M & \$20M--100M each depending on type \\
+Port infrastructure & \$50--100M & Dedicated berth and maintenance facility \\
+Shore interconnect + BPA tie & \$30--50M & Grid upgrade and converter \\
+\textbf{CAPEX Total (est.)} & \textbf{\$1.97--2.75B} & \\
+Annual OPEX & \$80--150M & Power (\$17.5M at \$0.02/kWh), cable, vessels, staff \\
+Convergence credit (18--28\%) & --\$355--770M & Applied to CAPEX total \\
+\textbf{Net CAPEX after credits} & \textbf{\$1.2--2.4B} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Full Corridor Scale (500 MW Compute, 20+ Vessels, BC--Chile Spine)}
+
+At full corridor scale, the platform integrates with the Fox Infrastructure Group
+BC-to-Chile spine. Cable runs span 10,000+ km (HVDC required), compute nodes are
+distributed at major port intervals, and vessel fleet provides both logistics and
+mobile edge compute. Full corridor CAPEX is estimated at \$8--15B, with BPA hydro
+power economics (\$0.02/kWh) providing \$438M/yr in power cost savings vs.\ US
+grid average at 500 MW scale. This scale requires the detailed NPV analysis
+(MOD-F) to assess viability against a 20-year investment horizon.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Consideration} \\
+\midrule
+Indigenous sovereignty & ABSOLUTE & All cable and platform routes through tribal territorial waters require nation-specific consent and revenue sharing per UNDRIP Article 31 and OCAP® principles. Never generic ``Indigenous'' reference. \\
+Source quality & ABSOLUTE & All cost data from named organizations (IRENA, NREL, Wood Mackenzie, CBRE). No blog aggregator data as primary source. \\
+Numerical attribution & ABSOLUTE & Every dollar figure attributed to specific named source with date. \\
+Marine environment & GATE & Cable and platform installation environmental impact assessments required; no cost data interpreted as environmental clearance. \\
+Cost projection uncertainty & ANNOTATE & All forward-looking cost data (especially floating wind 2035 projections) explicitly labeled as projections with named source and scenario. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Government and Agency Sources}
+\begin{itemize}[itemsep=2pt]
+  \item International Renewable Energy Agency (IRENA). \textit{Renewable Power Generation Costs in 2024.} IRENA, Abu Dhabi, 2024.
+  \item U.S. Department of Energy / NREL. \textit{Cost of Wind Energy Review: 2024 Edition.} NREL/TP-5000-91775. 2025.
+  \item NREL. \textit{Annual Technology Baseline (ATB): Offshore Wind 2024.} atb.nrel.gov, 2024.
+  \item Norwegian Public Roads Administration (NPRA). \textit{E39 Coastal Highway Project --- Subsea Infrastructure Studies.} 2019--2024.
+  \item IEA. \textit{Energy and AI.} International Energy Agency, April 2025.
+\end{itemize}
+
+\textbf{Industry and Research Sources}
+\begin{itemize}[itemsep=2pt]
+  \item Wood Mackenzie. \textit{Global LCOE Reports: Wind and Solar 2024.} WoodMac, October 2024.
+  \item Cushman \& Wakefield. \textit{U.S. Data Center Development Cost Guide 2025.} C\&W Research, 2025.
+  \item CBRE. \textit{Data Center Construction Cost Benchmarks 2025.} CBRE Research.
+  \item Dgtl Infra. ``How Much Does It Cost to Build a Data Center?'' dgtlinfra.com, June 2024.
+  \item Thunder Said Energy. \textit{Database of Cable Installation Vessels, Costs.} TSE, 2023.
+  \item OilPrice.com. ``Subsea Power Cables: The Future of Global Energy Transport.'' December 2023.
+  \item SINTEF / NorthWind. ``Floating Wind Can Be Cheaper Than Expected.'' SINTEF Blog, January 2025.
+  \item ENR. ``Norway Sets \$900M Awards for World Record Subsea Road Tunnel.'' January 2023.
+\end{itemize}
+
+\textbf{Peer-Reviewed Research}
+\begin{itemize}[itemsep=2pt]
+  \item Kretschmann et al.\ (2017). ``Analyzing the Economic Benefit of Unmanned Autonomous Ships.'' \textit{Transportation Research Part D.} ScienceDirect.
+  \item MDPI. ``Costs and Benefits of Autonomous Shipping --- A Literature Review.'' \textit{Applied Sciences} 11(10), 2021.
+  \item MDPI. ``Development and Analysis of a Global Floating Wind Levelised Cost of Energy Map.'' \textit{Clean Technologies} 6(3), September 2024.
+\end{itemize}
+
+% =====================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce an integrated CAPEX/OPEX cost model for a maritime compute-energy-transport
+platform at three deployment scales (5 MW, 100 MW, 500 MW), quantifying convergence
+credits from shared infrastructure and producing a 20-year NPV analysis with sensitivity
+analysis for the regional (100 MW) scenario. All outputs sourced to professional
+organizations or peer-reviewed research; all cost claims numerically attributed.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE --- MARITIME COST MODEL MISSION
+
+  Session 1                Session 2                Session 3
+  +------------------+     +------------------+     +------------------+
+  | Wave 0           |     | Wave 1 (Parallel)|     | Wave 2 + 3       |
+  | F-0: Taxonomy    |---> | MOD-A Compute    |     | MOD-E Scenarios  |
+  | Cost schema      |     | MOD-B Energy     |---> | MOD-F Sensitivity|
+  | Source index     |     | (Track A)        |     | Integration audit|
+  | [Haiku]          |     |                  |     | Publication PDF  |
+  +------------------+     | MOD-C Transport  |     | [Opus]           |
+                           | MOD-D Convergence|     +------------------+
+                           | (Track B)        |
+                           | [Sonnet+Opus]    |
+                           +------------------+
+
+  Cache TTL: Wave 0 output shared across Wave 1 (5-min window)
+  Parallel tracks: MOD-A/B and MOD-C/D run simultaneously
+  Gate: CAPCOM approval between Wave 1 and Wave 2
+\end{asciibox}
+
+\subsection{System Layers}
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared cost taxonomy, unit definitions, source index
+  \item \textbf{Component Survey Layer} --- Four parallel modules covering compute, energy, transport, and convergence
+  \item \textbf{Integration Layer} --- Scenario comparison and sensitivity analysis
+  \item \textbf{Publication Layer} --- Research Reference document, verification, final PDF
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4.5cm}L{4cm}L{4cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Cost Taxonomy Schema & All units defined, currency/year baseline set, 6 modules covered & F-0 output, Haiku \\
+2 & Compute Cost Analysis (MOD-A) & CAPEX/OPEX table, marine premium, cooling credit quantified & MOD-A document, Opus \\
+3 & Energy Infrastructure Report (MOD-B) & Wind CAPEX/LCOE, cable cost/km by class, BPA baseline & MOD-B document, Sonnet \\
+4 & Transport Economics Report (MOD-C) & Vessel costs, autonomous economics, port infrastructure & MOD-C document, Sonnet \\
+5 & Convergence Credit Model (MOD-D) & 5 credit types quantified, net \% reduction calculated & MOD-D model, Opus \\
+6 & Scenario Comparison (MOD-E) & 3-scale CAPEX/OPEX/NPV table, cost/MW-hr metric & MOD-E analysis, Opus \\
+7 & Sensitivity Analysis (MOD-F) & Tornado chart top-5 drivers, 20-yr NPV at 3 rates & MOD-F analysis, Opus \\
+8 & Research Reference PDF & Complete sourced document, self-contained & Final PDF, Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Output} \\
+\midrule
+F-0 Foundation & None & Haiku & 8K & Cost schema, source index \\
+MOD-A Compute & F-0 & Opus & 25K & Marine DC cost analysis \\
+MOD-B Energy & F-0 & Sonnet & 30K & Wind, cable, hydro data \\
+MOD-C Transport & F-0 & Sonnet & 20K & Vessel, port economics \\
+MOD-D Convergence & F-0 & Opus & 20K & Credit quantification \\
+MOD-E Scenarios & A,B,C,D & Opus & 35K & 3-scale CAPEX/OPEX/NPV \\
+MOD-F Sensitivity & A,B,C,D & Opus & 25K & Tornado, risk-adj NPV \\
+Integration Audit & E,F & Sonnet & 15K & Cross-check report \\
+Publication & All & Sonnet & 20K & Final Research Reference \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Key Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Cost schema, source index \\
+1A & Compute + Energy & Parallel & Sonnet+Opus & MOD-A, MOD-B \\
+1B & Transport + Conv. & Parallel & Sonnet+Opus & MOD-C, MOD-D \\
+2 & Synthesis & Sequential & Opus & MOD-E scenarios, MOD-F sensitivity \\
+3 & Publication & Sequential & Sonnet & Research Reference, verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+F-0.1 & Define cost taxonomy: CAPEX, OPEX, LCOE, NPV units & LOG (Haiku) & Shared schema \\
+F-0.2 & Set currency/year baseline (2024 USD) & LOG (Haiku) & Baseline note \\
+F-0.3 & Index all sourced data from Research Reference & SCOUT (Haiku) & Source map \\
+F-0.4 & Define convergence credit accounting rules & LOG (Haiku) & Credit rules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Parallel Track --- Compute + Energy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+A-1 & Shore-based DC cost benchmarks and marine premium & CRAFT-COMPUTE & Opus \\
+A-2 & Ocean cooling credit calculation and methodology & CRAFT-COMPUTE & Opus \\
+A-3 & AI vs.\ standard compute density cost implications & CRAFT-COMPUTE & Opus \\
+B-1 & Offshore wind CAPEX/LCOE table (fixed+floating) & CRAFT-ENERGY & Sonnet \\
+B-2 & Subsea cable cost-per-km by voltage/depth class & CRAFT-ENERGY & Sonnet \\
+B-3 & BPA hydro economics and grid interconnect costs & CRAFT-ENERGY & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Parallel Track --- Transport + Convergence}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}C{1.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+C-1 & Vessel acquisition cost by type and size & CRAFT-MARITIME & Sonnet \\
+C-2 & Annual operating cost model (crew, fuel, maintenance) & CRAFT-MARITIME & Sonnet \\
+C-3 & Autonomous vs.\ manned economics comparison & CRAFT-MARITIME & Sonnet \\
+C-4 & Port infrastructure investment estimates & CRAFT-MARITIME & Sonnet \\
+D-1 & Quantify C1--C5 convergence credits & CRAFT-CONVERGENCE & Opus \\
+D-2 & Net convergence credit as \% CAPEX reduction & CRAFT-CONVERGENCE & Opus \\
+D-3 & BPA power cost advantage sensitivity (cable losses) & CRAFT-CONVERGENCE & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate:} Human review of Wave 1 outputs before proceeding to synthesis.
+Verify that convergence credit methodology is defensible and scenario assumptions are
+set correctly before MOD-E consumes all four module outputs.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}C{1.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+E-1 & Prototype scenario (5 MW) CAPEX/OPEX/NPV & ANALYST & Opus \\
+E-2 & Regional scenario (100 MW) CAPEX/OPEX/NPV & ANALYST & Opus \\
+E-3 & Corridor scenario (500 MW) CAPEX/OPEX/NPV & ANALYST & Opus \\
+E-4 & Cost per MW-hr comparison table across scenarios & ANALYST & Opus \\
+F-1 & Identify top-5 cost drivers from all modules & ANALYST & Opus \\
+F-2 & Sensitivity ranges for each driver & ANALYST & Opus \\
+F-3 & 20-yr NPV at 5\%, 8\%, 12\% for regional scenario & ANALYST & Opus \\
+F-4 & Risk-adjusted NPV (weather, regulatory, market) & ANALYST & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} & \tableheader{Model} \\
+\midrule
+V-1 & Cross-module consistency check (costs, units, data) & VERIFY & Sonnet \\
+V-2 & Source quality audit (all citations traceable) & VERIFY & Sonnet \\
+V-3 & Integration test: MOD-E assumptions match MOD-A--D & INTEG & Sonnet \\
+P-1 & Assemble Research Reference document & EXEC & Sonnet \\
+P-2 & Final review and delivery & CAPCOM & Human \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[itemsep=2pt]
+  \item Wave 0 schema output is the highest-priority cache target: shared by all Wave 1 agents within a 5-minute TTL window
+  \item MOD-A--D outputs are cached and passed as context prefix to MOD-E and MOD-F synthesis
+  \item Research Reference data (Stage 2 of this document) should be included as context prefix at Wave 1 start
+  \item Model assignments minimize Opus use to synthesis and judgment tasks (\textasciitilde{}30\% of total tokens)
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Sessions} \\
+\midrule
+F-0 Foundation & Haiku & 8K & 1 \\
+MOD-A Compute & Opus & 25K & 1 \\
+MOD-B Energy & Sonnet & 30K & 1 \\
+MOD-C Transport & Sonnet & 20K & 1 \\
+MOD-D Convergence & Opus & 20K & 1 \\
+MOD-E Scenarios & Opus & 35K & 2 \\
+MOD-F Sensitivity & Opus & 25K & 2 \\
+Verification + Pub & Sonnet & 35K & 3 \\
+\midrule
+\textbf{Total} & \textbf{Mixed} & \textbf{\textasciitilde{}198K} & \textbf{3} \\
+Opus share & \textasciitilde{}30\% & \textasciitilde{}60K & \\
+Sonnet share & \textasciitilde{}60\% & \textasciitilde{}120K & \\
+Haiku share & \textasciitilde{}10\% & \textasciitilde{}18K & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+F-0 (Haiku)
+ |
+ +---> MOD-A (Opus)   --\
+ |                       \
+ +---> MOD-B (Sonnet) ----> MOD-E Scenarios (Opus) ---> Publication
+ |                       /                               (Sonnet)
+ +---> MOD-C (Sonnet) --/    \
+ |                            +-> MOD-F Sensitivity
+ +---> MOD-D (Opus) ----------/   (Opus)
+
+CAPCOM Gate: between Wave 1 outputs and Wave 2 start
+Parallel tracks: [MOD-A, MOD-B] || [MOD-C, MOD-D]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Focus} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Source quality, attribution, sovereignty \\
+Core functionality & 22 & Required & BLOCK & Deliverable completeness and accuracy \\
+Integration & 8 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 7 & Best-effort & LOG & Uncertainty, outliers, projections \\
+\midrule
+\textbf{Total} & \textbf{42} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior --- BLOCK on Fail} \\
+\midrule
+SC-SRC & Source quality & All cost figures traceable to IRENA, NREL, Wood Mac, CBRE, named industry reports, or peer-reviewed research. Zero blog-only sources. \\
+SC-NUM & Numerical attribution & Every dollar figure, percentage, and energy metric attributed to a specific named organization and report with year. \\
+SC-IND & Indigenous sovereignty & Any reference to cable routes or platform siting in tribal territorial waters names specific nation (Colville, Yakama, etc.), never generic ``Indigenous.'' \\
+SC-ADV & No policy advocacy & Document presents cost evidence neutrally; no advocacy for specific subsidy, policy, or regulatory position. \\
+SC-PRJ & Projection labeling & All forward-looking cost projections (2030, 2035 wind cost targets) explicitly labeled as projections with source scenario name. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{7cm}L{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Integrated CAPEX for 3 scales with component breakdown & CF-01, CF-02, CF-03 & Pending \\
+2. Integrated OPEX for 3 scales & CF-04, CF-05, CF-06 & Pending \\
+3. Convergence credit total quantified & CF-07, CF-08 & Pending \\
+4. Cost per MW-hr metric calculated & CF-09 & Pending \\
+5. Wind CAPEX trajectory 2024--2035 modeled & CF-10, CF-11 & Pending \\
+6. Subsea cable cost/km by class (5 benchmarks) & CF-12, CF-13 & Pending \\
+7. Vessel economics manned vs.\ autonomous & CF-14, CF-15 & Pending \\
+8. Ocean cooling credit quantified in \$/MW & CF-16 & Pending \\
+9. 20-yr NPV at 3 discount rates & CF-17, CF-18, CF-19 & Pending \\
+10. Sensitivity tornado chart (top-5 drivers) & CF-20, CF-21 & Pending \\
+11. All numerical claims attributed & SC-NUM & Pending \\
+12. Document self-contained & IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction, go/no-go gates, session management \\
+PLAN & Planner & Wave decomposition, dependency management, parallel track optimization \\
+SCOUT & Research Agent & Source gathering, gap-fill web research, citation verification \\
+EXEC-1 & Document Executor A & MOD-A and MOD-E document production \\
+EXEC-2 & Document Executor B & MOD-B and MOD-F document production \\
+CRAFT-COMPUTE & Compute Specialist & Marine DC economics, cooling credit, AI density analysis \\
+CRAFT-ENERGY & Energy Specialist & Wind LCOE, cable costs, BPA hydro, grid interconnect \\
+CRAFT-MARITIME & Maritime Specialist & Vessel economics, port costs, autonomous shipping \\
+CRAFT-CONVERGENCE & Integration Economist & Convergence credit model, dual-use quantification \\
+VERIFY & Verification Agent & Source validation, cross-module consistency, accuracy \\
+INTEG & Integration Agent & MOD-E/F assumption consistency with MOD-A--D \\
+CAPCOM & HITL Interface & Human approval at Wave 0 end and Wave 1/2 gate \\
+BUDGET & Resource Manager & Token budget tracking, session planning \\
+SURGEON & Health Monitor & Research quality degradation detection, source drift \\
+TOPO & Topology Manager & Agent team restructuring if parallel tracks diverge \\
+LOG & Chronicle Agent & Audit trail, commit messages, source index maintenance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & maritime-cost-model-v1.0 \\
+Activation Profile & Fleet (16 roles) \\
+Research Modules & 6 (MOD-A through MOD-F) \\
+Deployment Scenarios & 3 (5 MW, 100 MW, 500 MW) \\
+Primary Source Organizations & IRENA, NREL/DOE, Wood Mackenzie, CBRE, Cushman \& Wakefield \\
+Estimated Total Tokens & \textasciitilde{}198K \\
+Estimated Sessions & 3 \\
+Context Windows & 6--8 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Parallel Tracks & 2 (Wave 1A: Compute+Energy; Wave 1B: Transport+Convergence) \\
+CAPCOM Gates & 2 (post-Wave-0, post-Wave-1) \\
+Primary Deliverable & Integrated cost model with CAPEX/OPEX/NPV at 3 scales \\
+Handoff Target & GSD Skill-Creator / Fox Infrastructure Group planning team \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The question is not whether a platform where the ocean provides cooling, the cable
+carries both power and data, and the vessel serves compute and cargo is architecturally
+elegant. That part is obvious. The question this mission answers is what number comes out
+when you apply the Amiga Principle to maritime infrastructure economics --- and whether
+it closes the gap. Cost is not the enemy of architecture. Cost is where architecture
+proves itself.''}
+
+\vspace{0.5em}
+\textit{--- Maritime Platform Cost Model, March 2026}
+\end{quotebox}
+
+\end{document}

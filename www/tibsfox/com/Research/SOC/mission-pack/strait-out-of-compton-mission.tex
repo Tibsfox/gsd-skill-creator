@@ -1,0 +1,1031 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ---- COLOR SCHEME: Crimson / Gold / Slate — History Domain ----
+\definecolor{primary}{HTML}{5B0F14}       % Deep crimson -- Compton street, sacrifice
+\definecolor{secondary}{HTML}{9A7B0A}     % Dark gold -- promise of the migration
+\definecolor{tertiary}{HTML}{455A64}      % Slate -- the PNW rain, the pavement
+\definecolor{accent}{HTML}{8B1A1E}        % Accent crimson
+\definecolor{lightprimary}{HTML}{FDECEC}  % Light rose
+\definecolor{lightsecondary}{HTML}{FFF8E1}% Light gold
+\definecolor{lighttertiary}{HTML}{ECEFF1} % Light slate
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ---- SECTION FORMATTING ----
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ---- CUSTOM ENVIRONMENTS ----
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{goldbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ---- TABLE HELPERS ----
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ---- HEADERS AND FOOTERS ----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Strait Out of Compton}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ---- HYPERLINKS ----
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Strait Out of Compton -- Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ============================================================
+\begin{document}
+% ============================================================
+
+% ---- TITLE PAGE ----
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{30}{38}\selectfont\bfseries\sffamily\textcolor{primary}{Strait Out of Compton}}
+
+\vspace{0.5cm}
+{\fontsize{14}{18}\selectfont\sffamily\textcolor{secondary}{The PNW--LA Corridor: Migration, Music, and\\[0.2em]the Voice of a Shared Street}}
+
+\vspace{0.6cm}
+{\large\sffamily\textcolor{tertiary}{Pacific Northwest $\longleftrightarrow$ Los Angeles / Compton}}
+
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{accent}{A Deep Research Study}}
+
+\vspace{0.4cm}
+\textcolor{bordergray}{\rule{6cm}{0.4pt}}
+
+\vspace{0.5cm}
+\begin{quotebox}
+\centering
+{\small\sffamily\itshape\textcolor{primary}{``Yeah, I was a brother on the streets of Compton doing a lot of things most\\[0.2em]
+people look down on, but it did pay off. We started rapping about real stuff\\[0.2em]
+that shook up the LAPD and the FBI. But we got our message across big time,\\[0.2em]
+and everyone in America started paying attention to the boys in the hood.''}}
+
+\vspace{0.3cm}
+{\small\sffamily\textcolor{secondary}{--- Eric ``Eazy-E'' Wright, September 7, 1964 -- March 26, 1995}}
+\end{quotebox}
+
+\vspace{1cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{1.5cm}
+{\small\sffamily\textcolor{primary}{\textbf{Written on March 26, 2026 --- 31st Anniversary of Eazy-E's Death}}}
+
+\vspace{0.5cm}
+{\small\sffamily\textcolor{subtlegray}{Status: Ready for GSD Orchestrator | Activation: Fleet | 6 Research Modules}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Estimated: 8 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ---- TABLE OF CONTENTS ----
+\tableofcontents
+\newpage
+
+% ============================================================
+%  STAGE 1 — VISION
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Strait Out of Compton --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026 (31st anniversary of Eazy-E's death)}
+\metafield{Status:}{Ready for Research Execution}
+\metafield{Depends On:}{GSD Ecosystem Field Guide, The Space Between (philosophical spine)}
+\metafield{Context:}{Cultural geography, African American history, West Coast hip-hop origins, PNW migration history}
+
+\subsection{Vision}
+
+On March 26, 1995, Eric Lynn Wright --- Eazy-E, the Godfather of Gangsta Rap, architect of Ruthless Records, founding voice of N.W.A --- died of AIDS-related complications at Cedars-Sinai Medical Center in Los Angeles. He was thirty years old. He had been born in Compton, California. Compton, as it existed in 1964, was a recently transformed suburb --- a neighborhood that had, within a single decade, gone from all-white working class to majority Black, its transformation driven by the Second Great Migration, by white flight, by redlining, by blockbusting real estate developers who understood that fear was a financial instrument.
+
+The story most people know is the music. But the story underneath the music is a geography. The same trains that carried families from Louisiana, Texas, Mississippi, and Arkansas to the defense industries of Southern California also ran further north --- up the coast to Portland, to Seattle, to Tacoma. The same Boeing Company that in 1943 opened its gates for the first time to Black workers in Seattle was part of the same wartime industrial complex that expanded the shipyards and aircraft factories of the Los Angeles basin. Compton and Seattle's Central District are not different worlds. They are the same river running to different deltas. The families that built B-17 Flying Fortresses on the Duwamish River were cousins, by blood and by history, to the families that built the communities Eazy-E grew up in.
+
+When N.W.A released \textit{Straight Outta Compton} in August 1988 --- recorded in six weeks for roughly \$12,000 at Audio Achievements Studio in Torrance --- it did not arrive in Seattle as foreign music. It arrived as a communiqué from kin. By 1988, the crack epidemic had already hit Seattle's Central District hard. The Crips had come north by 1980. Aaron Dixon, the former Seattle Black Panther chapter captain, would later recall watching Black families flee Los Angeles specifically to Seattle to escape gang violence --- only to find that the gangs had already arrived. The music was the testimony. Eazy-E's voice was the voice of a cousin writing home.
+
+This research mission maps that corridor. It is a study in parallel histories, in the structural forces that shaped two communities from the same source material, in the way music can function as infrastructure --- as a communication protocol between communities that share lineage but not latitude. And it is a study conducted on the day the Godfather himself died, thirty-one years later, with the full weight of that history now available to be understood.
+
+\subsection{Problem Statement}
+
+This research addresses five interconnected problems that existing historical narratives have failed to adequately synthesize:
+
+\begin{enumerate}
+  \item \textbf{The Severed Genealogy:} West Coast hip-hop and PNW hip-hop are consistently narrated as separate regional phenomena, obscuring their shared roots in the Second Great Migration. The communities that produced Eazy-E and those that produced Sir Mix-A-Lot were descended from the same displaced Southern populations; this genealogical connection has never been rigorously mapped.
+
+  \item \textbf{The Structural Erasure:} The social conditions that made Compton --- white flight, redlining, deindustrialization, the crack epidemic --- are well-documented in Los Angeles. The same structural forces operated in Seattle's Central District and Portland's Albina neighborhood at nearly identical historical moments, but comparative scholarship is sparse.
+
+  \item \textbf{The Northward Migration of Violence:} The crack epidemic and gang culture moved north from Los Angeles to the Pacific Northwest through direct human migration networks. This pathway is documented in fragments (Aaron Dixon's testimony, DEA records showing crack in Seattle by 1985--86) but has not been assembled into a coherent spatial and temporal analysis.
+
+  \item \textbf{Music as a Communication Protocol:} N.W.A's ``reality rap'' functioned as documentary testimony that was received differently in PNW Black communities than in white suburban America. The specificity of resonance --- why \textit{Straight Outta Compton} hit the CD (Central District) the way it did --- remains understudied.
+
+  \item \textbf{The Infrastructure Lesson:} Eazy-E's transformation from street-level drug dealer to record label founder (Ruthless Records, 1987) is the same architectural move the GSD ecosystem makes: converting informal capital into institutional leverage. This lesson --- small, principled structures producing outsized outcomes through faithful iteration --- is the Amiga Principle applied to cultural production. It has not been analyzed through that lens.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{center}
+\colorbox{lightprimary}{\parbox{0.85\textwidth}{
+\centering\vspace{4pt}
+{\sffamily\bfseries\textcolor{primary}{The Migration Corridor Model}}\\[4pt]
+\textit{Same source population. Parallel structural forces. Different latitudes. One voice.}\\[4pt]
+The Second Great Migration (1940--1970) seeded Black communities along the entire West Coast from a common Southern origin. Structural racism (redlining, white flight, deindustrialization, the crack epidemic) operated identically at every node. N.W.A's music was the first West Coast urban voice to achieve national penetration --- and it resonated most deeply in the communities that shared its structural DNA.
+\vspace{4pt}}}
+\end{center}
+
+\subsubsection{The Migration Corridor: ASCII Map}
+
+\begin{asciibox}
+    ORIGIN STATES (1940s-1960s)
+    Texas | Louisiana | Mississippi | Arkansas | Oklahoma
+         |                |                  |
+         +----------------+------------------+
+                          |
+                    RAIL WEST (Southern Pacific, Union Pacific)
+                          |
+            +-------------+------------------+
+            |                                |
+     LOS ANGELES BASIN                  PORTLAND / SEATTLE / TACOMA
+            |                                |
+     +-----------+                   +---------------+
+     | South     |                   | Central       |
+     | Central   |  SAME FORCES:     | District (CD) |
+     | Watts     |  - White flight   | Albina        |
+     | Compton   |  - Redlining      | Tacoma        |
+     +-----------+  - Deindustrial.  +---------------+
+            |       - Crack epidemic          |
+            |       - Gang spread             |
+            |                                 |
+         EAZY-E                          SIR MIX-A-LOT
+       N.W.A (1987)                   NASTYMIX (1985)
+    Straight Outta                  "Baby Got Back" (1992)
+       Compton (1988)                    |
+            |                            |
+            +-----------> SHARED RESONANCE <-----------+
+                      "It's not foreign music. It's kin."
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE 1          MODULE 2          MODULE 3
+The Migration     Compton's         The Seattle
+River             Crucible          Parallel
+(origins)         (formation)       (parallel arc)
+    |                 |                 |
+    +--------+--------+---------+-------+
+             |                  |
+         MODULE 4           MODULE 5
+         The Crack           Music as
+         Highway             Infrastructure
+         (transmission)      (architecture)
+             |                  |
+             +--------+---------+
+                      |
+                  MODULE 6
+                  31 Years Later
+                  (legacy / resonance)
+                      |
+                 SYNTHESIS OUTPUT:
+            The PNW-LA Cultural Corridor Map
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Migration River}
+
+The Second Great Migration (1940--1970) sent approximately 5 million African Americans from the South to Northern and Western cities. The specific pipeline relevant to this study ran from Texas, Louisiana, Mississippi, and Arkansas to the West Coast --- both to Los Angeles (where migrants filled South Central, Watts, and eventually Compton) and to the Pacific Northwest (where they built Seattle's Central District, Portland's Albina neighborhood, and Tacoma's communities). This module maps the shared origin and the branching paths.
+
+\subsubsection{Module 2: Compton's Crucible}
+
+Compton was not always a ghetto. In the 1940s and 1950s it was a working-class suburb where Black families could, for the first time, access homeownership. The structural transformation --- white flight, blockbusting, redlining, the collapse of manufacturing employment, the crack epidemic, the LAPD's militarized response --- turned it into the landscape Eazy-E was born into in 1964. This module traces that transformation and its human consequences, including the Wright family's position within it.
+
+\subsubsection{Module 3: The Seattle Parallel}
+
+Seattle's Central District underwent an almost identical transformation at nearly the same historical moment. The Black population of Seattle quadrupled between 1940 and 1950. Redlining confined families to specific neighborhoods. By the 1980s, the crack epidemic and gang infiltration had created conditions that PNW hip-hop would eventually document --- but N.W.A documented first, because Compton was simply further along the same curve. This module maps the structural parallels.
+
+\subsubsection{Module 4: The Crack Highway}
+
+The crack epidemic moved north from Los Angeles through direct human networks. By 1985--86, the DEA's National Narcotics Intelligence report listed Seattle as a city with available crack cocaine. Aaron Dixon's testimony documents Black families migrating from LA to Seattle specifically to escape gang violence --- and finding the gangs had preceded them. The Crips established Seattle presence by approximately 1980. This module traces the northward migration of the epidemic and its structural relationship to the communities N.W.A was documenting.
+
+\subsubsection{Module 5: Music as Infrastructure}
+
+Eazy-E's move from drug dealer to record label founder is the canonical example of converting informal capital into institutional leverage. Ruthless Records (1987) was built before N.W.A was a group. The \$12,000 budget for \textit{Straight Outta Compton} --- recorded in six weeks using a Roland TR-808 and DJ Yella's turntable skills --- produced a 3x platinum album that reached communities from Compton to Seattle without radio airplay, through word-of-mouth and tape trading. This module analyzes music as a communication protocol: how the record functioned in the communities that shared its structural DNA.
+
+\subsubsection{Module 6: 31 Years Later --- Legacy and Resonance}
+
+Eazy-E died on March 26, 1995. His final public statement was a plea for AIDS awareness that turned his own diagnosis into a community signal: ``I've got thousands and thousands of young fans that have to learn what's real when it comes to AIDS.'' This is the GSD ecosystem's deepest principle applied to a human life: converting friction (dying) into flow (information that saves others). This module traces the legacy: Bone Thugs' ``Tha Crossroads'' (dedicated to Eazy-E, reaching \#1 in 1996), the Rock and Roll Hall of Fame induction (2016), the \textit{Straight Outta Compton} biopic (2015), and the ongoing resonance of the migration corridor in contemporary PNW and LA communities.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: strait-out-of-compton
+  domain: cultural-history
+  activation: fleet
+  modules: 6
+  sensitivity: high  # cultural, racial history, AIDS
+
+  agnus:  # Memory / Data
+    role: migration-data-manager
+    responsibilities:
+      - Great Migration demographic records
+      - DEA crack epidemic city data
+      - Billboard / RIAA sales records
+      - Seattle/Portland/LA census data
+
+  denise:  # Display / Output
+    role: narrative-synthesizer
+    responsibilities:
+      - Vision narrative construction
+      - Research module prose
+      - Cross-module connection mapping
+      - Through-line articulation
+
+  paula:  # Audio / Rhythm (apt for this mission)
+    role: cultural-signal-processor
+    responsibilities:
+      - Music history and transmission analysis
+      - Oral history processing (Aaron Dixon, etc.)
+      - Hip-hop infrastructure analysis (Nastymix, Ruthless)
+
+  cpu-68000:  # Orchestration
+    role: flight-director
+    responsibilities:
+      - Wave sequencing
+      - Go/no-go gate enforcement
+      - Cross-module integration
+      - CAPCOM interface
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Second Great Migration demographics for LA Basin and Pacific Northwest (1940--1970)
+  \item Structural transformation of Compton, Seattle's Central District, Portland's Albina neighborhood
+  \item N.W.A formation and Ruthless Records founding (1987--1991)
+  \item Crack epidemic transmission pathways to Pacific Northwest (1980--1992)
+  \item Radio infrastructure and music transmission networks in both regions
+  \item Eazy-E biography as a case study in structural conditions and institutional leverage
+  \item Cultural resonance of gangsta rap in PNW communities sharing structural DNA
+  \item Legacy analysis through 2026
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item First Great Migration (pre-1940) except as context
+  \item East Coast hip-hop origins and development
+  \item Individual criminal histories beyond what is historically documented and necessary for context
+  \item Detailed analysis of Death Row Records or post-NWA individual careers (separate study)
+  \item Contemporary gang activity (active law enforcement sensitivity)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item The shared Southern origin of both the LA Basin and PNW Black communities is documented with specific state-of-origin data and rail corridor maps.
+  \item The structural transformation of Compton from middle-class suburb to economically distressed community is traced with specific decades and mechanisms.
+  \item At least three parallel structural mechanisms (white flight, redlining, crack epidemic) are documented operating in both LA and PNW communities with comparable timelines.
+  \item The northward migration of the crack epidemic to Seattle and Portland is documented with DEA records and oral testimony.
+  \item Ruthless Records' founding and N.W.A's production infrastructure (\$12,000 budget, TR-808, Torrance studio) is documented as a case study in architectural leverage.
+  \item N.W.A's distribution reach without radio airplay is quantified (eventual platinum certification, tape trading networks).
+  \item The resonance of \textit{Straight Outta Compton} in PNW Black communities is documented through at least two verifiable oral or written sources.
+  \item Eazy-E's AIDS statement is analyzed as a public health communication act with documented community impact.
+  \item The Bone Thugs ``Tha Crossroads'' tribute and its \#1 Billboard placement is documented as a measurable legacy signal.
+  \item The 2016 Rock and Roll Hall of Fame induction is documented as institutional recognition of the cultural contribution.
+  \item The research produces a coherent synthesis connecting migration origins, structural forces, music as infrastructure, and legacy --- the full corridor map.
+  \item All cultural sensitivity protocols are followed: no generic ``African American'' references without specificity; Southern origin states named; no speculation on criminal activity beyond documented record.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} \\
+\midrule
+The Space Between (Foxglove) & Philosophical spine: ``the spaces between'' as the meaning that lives in connections, not nodes. The corridor between PNW and LA is itself the subject. \\
+GSD Ecosystem Field Guide & The Amiga Principle operates here: Ruthless Records is a chipset, not a monolith. \\
+Fox Infrastructure Group Plan & The electric city thesis parallels the defense-industry cities that created both Compton and Seattle's CD. \\
+Foxfire Heritage Skills Vision & The oral tradition transmission vector that carried both Southern culture north and West Coast rap further north. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Eazy-E was not just a rapper. He was an architect. He took informal capital --- the drug trade, the street economy, the social networks of Compton --- and converted it into institutional infrastructure: Ruthless Records, N.W.A, a national distribution network that moved product without radio airplay. This is the Amiga Principle. This is what the GSD ecosystem calls ``architectural leverage over brute force.'' He did not wait for the major label system to validate him. He built the system first, then made the music.
+
+The families in Seattle's Central District in 1988 who heard \textit{Straight Outta Compton} for the first time heard something specific that white suburban teenagers in Omaha could not have heard: they heard the voice of a cousin. Not metaphorically. The same Southern Baptist churches that sent families to Compton's defense industry jobs in the 1940s sent other families further north. The same Louisiana heat, the same Arkansas farmland, the same Texas railroad towns --- these are the points of origin for both communities. The music was the first time the conversation between those communities happened at full volume.
+
+``The spaces between'' --- the gaps between the notes of the TR-808 kick drum, the silence between the Puget Sound ferry landings, the miles between Compton and the Central District --- these are not empty. They are the connection itself. This research mission maps the connection.
+
+\newpage
+
+% ============================================================
+%  STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Strait Out of Compton --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings for each of the six research modules. All claims are attributed to specific sources. Sensitive topics (racial history, criminal justice, AIDS) are handled with documentary specificity and without editorialization. Agents executing research tasks should use this as the evidentiary foundation; they should not substitute this material with unsourced synthesis.
+
+\subsubsection{Key Source Organizations}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{National Archives (U.S.):} Great Migration records, wartime labor records
+  \item \textbf{Washington State Historical Society:} ``Swing the Door Wide'' --- definitive account of Black migration to PNW in WWII
+  \item \textbf{University of Washington Libraries:} Seattle Civil Rights and Labor History Project; Quintard Taylor scholarship
+  \item \textbf{Oregon Historical Project / OPB:} Portland Albina neighborhood history; Kaiser shipyards
+  \item \textbf{Smithsonian NMAAHC:} Great Migration overview and demographic data
+  \item \textbf{Drug Enforcement Administration (DEA):} Crack epidemic city-by-city data (1985--1990 History)
+  \item \textbf{KBCS 91.3 (Bellevue):} Aaron Dixon oral history on crack epidemic in Seattle
+  \item \textbf{PBS SoCal:} Compton racial transformation history and Great Migration in LA
+  \item \textbf{Britannica / Wikipedia (N.W.A):} Formation, production, and impact documentation
+  \item \textbf{NPR:} 50 Years of Hip-Hop: Seattle (2023)
+  \item \textbf{University of Washington Press:} Daudi Abe, \textit{Emerald Street: A History of Hip Hop in Seattle} (2020)
+  \item \textbf{The Source / Vice:} Eazy-E death anniversary coverage (March 26, 2026)
+\end{itemize}
+
+\subsection{Module 1: The Migration River}
+
+\subsubsection{Origins and Timing}
+
+The Great Migration occurred in two phases. The Second Great Migration (1940--1970) is the primary period of relevance: approximately 4.5 million Black Americans relocated, many to Western cities. The National Archives documents that migration destinations included Los Angeles, Oakland, Portland, and Seattle. The specific chain migration patterns are documented by the Great Migration Wikipedia entry: migrants from Texas, Louisiana, and Mississippi traveled to Oakland, Los Angeles, Portland, and Seattle.
+
+The Washington State Historical Society's definitive study (Quintard Taylor, ``Swing the Door Wide,'' adapted) establishes that by the end of World War II, 45,000 Black workers and their families had migrated to the Pacific Northwest to work in defense industries. Seattle's Black population grew from 3,789 in 1940 to 15,666 in 1950 --- a 413 percent increase. Portland's grew from 1,900 to 9,500 over the same decade.
+
+\subsubsection{The Southern Origin States}
+
+The Great Migration Wikipedia entry establishes a specific regional pipeline: migrants from Texas, Louisiana, and Mississippi moved by rail to Oakland, Los Angeles, Portland, Phoenix, and Seattle. The same origin states fed both the LA Basin and the PNW. This is the genealogical foundation of the corridor.
+
+PBS SoCal documents the LA side: the pre-war Black community in Los Angeles grew from successive migration streams beginning with Texas, Louisiana, and Atlanta. By the 1940s, wartime industry drew tens of thousands more, ``mostly from Louisiana, Mississippi, Arkansas, and Texas.''
+
+\subsubsection{Rail as Migration Infrastructure}
+
+The Union Pacific and Southern Pacific railroads were the primary migration vectors. Workers were recruited directly by defense industry employers. The Boeing Company, after years of racially exclusionist practice, opened its gates to Black workers in 1943 under wartime labor pressure. The National Youth Administration brought the first group of Black workers to Boeing that year. These are the same rail networks that carried the Wright family's generation to California.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Origin State} & \tableheader{Primary Destination} & \tableheader{Defense Industry} \\
+\midrule
+Texas, Louisiana, Mississippi & Los Angeles / Compton & Douglas Aircraft, shipyards, rail yards \\
+Texas, Louisiana, Arkansas & Portland / Albina & Kaiser Shipyards (Oregon Shipbuilding) \\
+Texas, Louisiana, Mississippi & Seattle / Central District & Boeing, Puget Sound Naval Shipyard \\
+Mississippi, Arkansas & Oakland / Bay Area & Kaiser, Ford shipyards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Compton's Crucible}
+
+\subsubsection{Compton Before the Migration}
+
+PBS SoCal documents that Compton was an all-white neighborhood in the 1940s. As the Black population of Los Angeles expanded through the Second Great Migration, housing became scarce. Developers like Davenport Builders responded by opening previously all-white land to Black homeownership in 1952. What was once a cornfield became the first unrestricted housing development in the area. For Black families arriving from the Jim Crow South, Compton represented something remarkable: spacious homes, lawns, space for families to grow.
+
+The Wikipedia entry on the History of African Americans in Los Angeles documents the mechanism: following the 1948 Supreme Court ruling in \textit{Shelley v. Kraemer} (making racially restrictive covenants unenforceable), Black families began moving into previously restricted suburbs. White residents responded with the phenomenon known as blockbusting and white flight. By the 1970s, Compton was majority Black.
+
+\subsubsection{The Structural Transformation}
+
+Eric Lynn Wright was born September 7, 1964 --- into a Compton that had already completed its transformation from white suburb to Black community, and was beginning a second transformation driven by deindustrialization and the coming crack epidemic. The Wikipedia article on Eazy-E documents that his family witnessed the rapid downward shift of their community: white flight, the nearby Watts Riots (1965), and the formation and expansion of street gangs.
+
+By the time Eazy-E was a teenager in the early 1980s, Compton was experiencing the full weight of Reagan-era deindustrialization, mass incarceration buildup, LAPD militarization (Chief Daryl Gates, who described crack users as ``dead people''), and the crack cocaine epidemic. These are documented in the Donna Murch peer-reviewed study (Williams College, published in academic journal) on crack in Los Angeles: ``social-service retrenchment, deindustrialization, intensification of poverty, and structural isolation are as foundational to the period as drug consumption.''
+
+\subsubsection{Eric Wright's Response}
+
+Eazy-E's biography (Wikipedia) documents his entry into the drug trade before founding Ruthless Records in 1987. The transformation --- converting street capital into institutional capital --- took approximately two years. By 1987, Ruthless Records existed. By 1988, N.W.A had released \textit{Straight Outta Compton}. The album was recorded at Audio Achievements Studio in Torrance, California, over six weeks on a budget of roughly \$12,000, according to PMA Magazine's documented account of the album's production.
+
+\subsection{Module 3: The Seattle Parallel}
+
+\subsubsection{The Central District: Same River, Different Latitude}
+
+Seattle's Central District underwent a structural transformation nearly identical to Compton's, running approximately 5--10 years behind on the same curve. The University of Washington Center for the Study of the Pacific Northwest documents the wartime population surge: Seattle's Black population reached 15,700 by 1950 (up from 3,800 in 1940). Once defense industries contracted post-war, Black workers found housing restricted to the CD through racially restrictive covenants and lending discrimination.
+
+Daudi Abe's \textit{Emerald Street: A History of Hip Hop in Seattle} (University of Washington Press, 2020) documents the CD as the only neighborhood where hip-hop culture could develop in 1980s Seattle, because it was the only neighborhood with sufficient Black community density and cultural infrastructure to support it.
+
+\subsubsection{Portland's Albina: The Third Node}
+
+OPB's August 2025 article on Portland hip-hop history documents that Albina (Northeast Portland) was the historic Black neighborhood where hip-hop culture developed in Portland. The Oregon Historical Project documents the wartime creation of this community: Kaiser Shipyard workers flooded Portland, with Black workers concentrated in the Albina district after the destruction of the Vanport housing project (flooded 1948). The structural conditions --- housing discrimination, limited economic opportunity, community concentration --- mirror the Seattle and LA patterns.
+
+\subsubsection{The Parallel Documented}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mechanism} & \tableheader{Compton/LA} & \tableheader{Seattle CD} & \tableheader{Portland Albina} \\
+\midrule
+Migration influx & 1940s, WWII industry & 1940s, Boeing/shipyards & 1940s, Kaiser Shipyards \\
+White flight / redlining & 1950s--1960s & 1950s--1960s & 1950s--1960s \\
+Community density & South Central → Compton & Central District & Albina / NE Portland \\
+Crack epidemic arrives & ~1982 (epicenter) & ~1985--86 (DEA data) & ~1985--86 \\
+Hip-hop emerges & 1987 (Ruthless, NWA) & 1985 (Nastymix, Mix-A-Lot) & Early 1980s \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: The Crack Highway}
+
+\subsubsection{The Northward Migration of the Epidemic}
+
+The DEA's documented history of the crack epidemic (1985--1990) establishes that by 1985--1986, crack was available in Seattle alongside Atlanta, Boston, Detroit, Miami, New York, San Francisco, and other major cities. The epidemic that was epicentered in South Central Los Angeles in 1982 had reached the Pacific Northwest within three to four years.
+
+The mechanism was not primarily one of abstract market forces. KBCS 91.3 (Bellevue, Washington) documented Aaron Dixon's testimony, which captures the human pipeline: ``You not only had black families who were fleeing LA, who are bringing their kids to Seattle, to get away from the gangs. And bam, they get to Seattle, the gangs are here. The gangs are in Seattle.'' Dixon further documents that the first Black-on-Black killing in Seattle occurred in 1980: ``The Crips came up to Seattle, so in defense, the kids in Seattle had to create their own gang.''
+
+\subsubsection{Structural Relationship to N.W.A}
+
+When \textit{Straight Outta Compton} was released in August 1988, it was documenting conditions that were already present, in attenuated form, in Seattle and Portland. The EBSCO Research Starters entry on gangs in the 1980s documents that by the late 1980s, the Crips and Bloods had established presence in cities from Baltimore to Seattle. The DEA document states: ``By the late 1980s, over 10,000 gang members were dealing drugs in some 50 cities from Baltimore to Seattle.''
+
+The music arrived as testimony from the epicenter --- from the community that was furthest along the same structural curve. In the CD and in Albina, it was received not as exotic foreign culture but as a dispatch from a place that was ahead on the same timeline.
+
+\subsection{Module 5: Music as Infrastructure}
+
+\subsubsection{Ruthless Records: Architectural Leverage}
+
+Eazy-E founded Ruthless Records in 1987 before N.W.A was a complete group. The Wikipedia article on N.W.A documents that the founding infrastructure was assembled piece by piece: Dr. Dre and DJ Yella from the World Class Wreckin' Cru, Ice Cube (who returned from studying drafting at the Phoenix Institute of Technology), MC Ren, and Arabian Prince. Ruthless provided the institutional frame.
+
+The album was recorded on a \$12,000 budget at Audio Achievements Studio in Torrance, per PMA Magazine's documented account. The Roland TR-808 drum machine provided the production foundation --- a machine that cost \$1,195 new in 1980 but was available used throughout the 1980s for a fraction of that. Dr. Dre's use of the TR-808 created a distinctive West Coast sound: ``booming basslines and crisp snares that became synonymous with West Coast rap.''
+
+\subsubsection{Distribution Without Airplay}
+
+MTV refused to broadcast the ``Straight Outta Compton'' video in 1988, per the documented account of NWA and the Posse's history. The FBI sent a letter to Priority Records expressing concern about ``Fuck tha Police.'' These acts of institutional suppression functioned as amplifiers: the Humanities article ``How the Northwest Shocked the Hip-Hop World'' notes that in the parallel case of Sir Mix-A-Lot's ``Baby Got Back,'' ``the controversy simply made it more popular.'' N.W.A's album went double platinum despite --- or because of --- institutional resistance.
+
+The distribution mechanism was tape trading, radio (where DJs would air it despite official bans), and direct community networks. In the PNW, this operated through the same underground channels that Nasty Nes Rodriguez had built at KFOX (FreshTracks, the first rap radio show west of the Mississippi, starting 1980--81 per the NPR 50 Years of Hip-Hop: Seattle article).
+
+\subsubsection{Sir Mix-A-Lot and the PNW Parallel}
+
+Nastymix Records was founded in 1985 in Seattle by Sir Mix-A-Lot, Nasty Nes, Ed Locke, and Greg Jones. The NPR article documents that Nastymix released two platinum albums in two years with a staff of ten people --- a structural parallel to Ruthless Records. The Humanities article quotes Daudi Abe: Mix-A-Lot's success ``showed the world that great hip-hop could come from anywhere'' and ``sent a message to people outside of New York and L.A. who were struggling with legitimacy conflicts.'' Both labels were independent, both were built before mainstream recognition, both converted community cultural capital into institutional infrastructure.
+
+\subsection{Module 6: 31 Years Later --- Legacy and Resonance}
+
+\subsubsection{The Final Statement}
+
+Eazy-E announced his AIDS diagnosis on March 16, 1995. He died ten days later on March 26. The Vice article published on the 31st anniversary (March 26, 2026) documents his final statement: ``I've got thousands and thousands of young fans that have to learn what's real when it comes to AIDS. Like the others before me, I would like to turn my problem into something good that will reach out to all my homeboys and their kin, because I want to save their asses before it's too late.'' This is a communication act: converting his own dying into community information. The Godfather of Gangsta Rap chose, at the end, to be a public health messenger.
+
+\subsubsection{Bone Thugs and the Tributary}
+
+Eazy-E signed Bone Thugs-n-Harmony from Cleveland to Ruthless Records in 1993--1994, per the Wikipedia article. Following his death, Bone Thugs dedicated the single ``Tha Crossroads'' to his memory. The Wikipedia article documents that the song reached \#1 on the Billboard charts and earned the group a Grammy Award for Best Rap Performance by a Duo or Group. This is measurable cultural transmission: the legacy moving from Compton through Cleveland to national recognition.
+
+\subsubsection{Institutional Recognition}
+
+N.W.A was inducted into the Rock and Roll Hall of Fame in 2016, posthumously including Eazy-E. This institutional recognition --- arriving 21 years after his death --- validates the cultural contribution. The Britannica article notes that N.W.A ``retains a legacy as a vehicle for urban commentary and as a transfigurative force in hip-hop history.''
+
+\subsubsection{The PNW Today}
+
+The Bandcamp Daily's 2025 article on the Pacific Northwest rap underground documents that the NW scene remains defined by its structural independence, collective formation, and socially conscious approach --- characteristics that Daudi Abe traces directly to the conditions of the CD and Albina: ``artists who participate in the underground culture invariably form collectives for mutual support.'' The corridor established by the Great Migration still organizes the cultural geography of West Coast hip-hop.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Level} & \tableheader{Protocol} \\
+\midrule
+Racial history and structural racism & HIGH & Document mechanisms (redlining, blockbusting) with specific institutional names and dates; never generalize; cite peer-reviewed scholarship \\
+Gang activity documentation & HIGH & Use historical record only; no speculation on active networks; cite DEA and academic sources only \\
+AIDS and health communication & MEDIUM & Document Eazy-E's statement verbatim; treat as public health history; respect dignity \\
+Drug trade and Eazy-E's background & MEDIUM & Follow documented record; avoid sensationalism; contextualize within structural conditions \\
+Indigenous / Coast Salish place names & ANNOTATE & Seattle on Duwamish/Coast Salish land; Portland on Chinook/Kalapuyan land; acknowledge in all geographic references if publishing externally \\
+Criminal justice history & ANNOTATE & Contextualize within structural racism scholarship (Donna Murch, Rutgers) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item National Archives (U.S.) --- The Great Migration (1910--1970). archives.gov
+  \item Drug Enforcement Administration --- History 1985--1990. dea.gov
+  \item Washington State Historical Society / Quintard Taylor --- ``Swing the Door Wide'' (WWII Black migration to PNW). washingtonhistory.org
+  \item University of Washington Center for the Study of the Pacific Northwest --- WWII Black community documents. washington.edu
+  \item Oregon Historical Project / Oregon Encyclopedia --- African American workers in WWII. oregonhistoryproject.org
+  \item Seattle Civil Rights and Labor History Project --- Battle at Boeing (1939--1942). depts.washington.edu
+  \item KUOW Seattle --- ``My Grandfather and the Plane that Changed Seattle'' (Boeing WWII). kuow.org
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Academic Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Murch, Donna (Rutgers University) --- ``Crack in Los Angeles: Crisis, Militarization, and Black Response to the Late Twentieth-Century War on Drugs.'' Williams College/Academic Journal.
+  \item Fryer, Levitt, Murphy --- Crack index study (Roland Fryer et al.). ScienceDirect.
+  \item Abe, Daudi --- \textit{Emerald Street: A History of Hip Hop in Seattle}. University of Washington Press, 2020.
+  \item Taylor, Quintard --- \textit{The Forging of a Black Community: Seattle's Central District, from 1870 through the Civil Rights Era}. University of Washington Press, 1994.
+  \item California State University Journal of Transdisciplinary Studies and History --- ``Ethnic Shifts in Los Angeles Neighborhoods: Compton and Leimert Park.''
+\end{itemize}
+
+\subsubsection{Journalism and Documentary Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item NPR --- ``50 Years of Hip-Hop: Seattle'' (2023). npr.org
+  \item OPB / PBS --- ``Why isn't Portland hip-hop a bigger thing?'' (August 2025). opb.org
+  \item PBS SoCal --- ``The Great Migration: Creating a New Black Identity in Los Angeles.'' pbssocal.org
+  \item PBS SoCal --- ``A Southern California Dream Deferred: Racial Covenants in Los Angeles.'' pbssocal.org
+  \item Humanities Magazine --- ``How the Northwest Shocked the Hip-Hop World.'' humanities.org
+  \item Bandcamp Daily --- ``Excavating the Pacific Northwest's Art Rap Underground'' (2025). daily.bandcamp.com
+  \item KBCS 91.3 Bellevue --- Aaron Dixon interview: ``The Crack Epidemic's Impact on Black Communities'' (2019). kbcs.fm
+  \item Vice --- ``On This Day in 1995: West Coast Rap Icon and N.W.A. Member Eazy-E Died'' (March 26, 2026). vice.com
+  \item The Source --- ``NWA Founder Eazy-E Died From AIDS-Related Complications 31 Years Ago'' (March 26, 2026). thesource.com
+  \item PMA Magazine --- ``Compton's Finest: N.W.A.'s Explosive Debut and Its Impact on Music and Society.'' pmamagazine.org
+  \item LA Weekly --- ``In Memoriam: How Eazy-E and N.W.A Influenced 90s Rap Culture.'' laweekly.com
+\end{itemize}
+
+\newpage
+
+% ============================================================
+%  STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document mapping the cultural and structural corridor between Pacific Northwest Black communities and the Los Angeles community that produced N.W.A and Eazy-E --- demonstrating that they share common origins in the Second Great Migration, parallel structural transformations, and a direct communication pathway through music. The document should be suitable for academic use, public education, and integration into the GSD ecosystem as a reference document for the cultural geography of West Coast America.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation (Sequential, Haiku)
+  |-- Shared schemas (geographic data model, timeline model)
+  |-- Source index compilation
+  |-- Sensitivity protocol checklist
+
+WAVE 1A: Historical Modules (Parallel, Sonnet)          WAVE 1B: Cultural Modules (Parallel, Opus)
+  |-- Module 1: The Migration River                        |-- Module 5: Music as Infrastructure
+  |-- Module 2: Compton's Crucible                         |-- Module 6: Legacy and Resonance
+  |-- Module 3: The Seattle Parallel
+
+WAVE 1C: The Crack Highway (Sequential, Opus)
+  |-- Module 4: The Crack Highway
+  (Sensitivity: oral history + DEA records. Opus judgment required)
+
+WAVE 2: Synthesis (Sequential, Opus)
+  |-- Cross-module integration
+  |-- The Corridor Map
+  |-- Structural parallels table (final)
+  |-- Through-line articulation
+
+WAVE 3: Publication + Verification (Sequential, Sonnet)
+  |-- Source validation
+  |-- Document assembly
+  |-- Sensitivity review
+  |-- Final PDF
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component} \\
+\midrule
+D1 & Migration Corridor Map & Origin states documented, rail pathways mapped, population data cited & MOD-MIGR \\
+D2 & Compton Structural Analysis & Decade-by-decade transformation with mechanism names & MOD-COMP \\
+D3 & Seattle Parallel Analysis & Three structural mechanisms documented in parallel with LA & MOD-SEA \\
+D4 & Crack Highway Documentation & DEA data + oral testimony assembled into timeline & MOD-CRACK \\
+D5 & Music Infrastructure Analysis & Ruthless Records and Nastymix comparative case study & MOD-MUSIC \\
+D6 & Legacy Synthesis & Eazy-E statement, Bone Thugs, Hall of Fame, 2026 resonance & MOD-LEG \\
+D7 & Corridor Map Synthesis & Unified structural-cultural analysis connecting all six modules & INTEG \\
+D8 & Research Document (PDF) & Full publication-quality document, all sources cited & PUB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.8cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+MOD-MIGR & Source index & Sonnet & 12k \\
+MOD-COMP & MOD-MIGR & Sonnet & 15k \\
+MOD-SEA & MOD-MIGR & Sonnet & 12k \\
+MOD-CRACK & MOD-COMP, MOD-SEA & Opus & 18k \\
+MOD-MUSIC & MOD-COMP, Source index & Opus & 15k \\
+MOD-LEG & All prior modules & Opus & 12k \\
+INTEG & All modules & Opus & 20k \\
+VERIFY & All modules & Sonnet & 8k \\
+PUB & INTEG, VERIFY & Sonnet & 10k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{\% Budget} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Crack Highway (oral testimony, sensitivity), Music Infrastructure (cultural judgment), Legacy (AIDS statement analysis), Synthesis (cross-module integration) \\
+Sonnet & $\sim$60\% & Migration data, Compton structural history, Seattle parallel, verification, document assembly \\
+Haiku & $\sim$10\% & Shared schemas, timeline templates, source index structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Models} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, source index, sensitivity checklist \\
+1A & Historical & Parallel & Sonnet & Modules 1, 2, 3 \\
+1B & Cultural & Parallel & Opus & Modules 5, 6 \\
+1C & Crack Highway & Sequential & Opus & Module 4 \\
+2 & Synthesis & Sequential & Opus & Corridor map, cross-module integration \\
+3 & Publication & Sequential & Sonnet & Verified PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+T0.1 Timeline Schema & Define shared timeline model (decade markers 1900--2026) & Haiku \\
+T0.2 Geographic Schema & Define nodes: origin states, LA Basin, PNW cities & Haiku \\
+T0.3 Source Index & Compile all sources from Stage 2 bibliography into a structured index & Sonnet \\
+T0.4 Sensitivity Checklist & Load sensitivity protocols; flag all topics requiring Opus judgment & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Sonnet) --- Historical Modules}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Module} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+T1A.1 & Migration River & Compile demographic data, rail pathways, origin states & Sonnet \\
+T1A.2 & Compton's Crucible & Structural transformation timeline, white flight, blockbusting & Sonnet \\
+T1A.3 & Seattle Parallel & CD and Albina parallel mechanisms, comparative table & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Opus) --- Cultural Modules}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Module} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+T1B.1 & Music Infrastructure & Ruthless vs. Nastymix comparative analysis; TR-808 as common language & Opus \\
+T1B.2 & Legacy Analysis & Eazy-E AIDS statement, Bone Thugs, Hall of Fame, 2026 resonance & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C (Sequential, Opus) --- Module 4: The Crack Highway}
+
+The Crack Highway module requires sequential execution (depends on Modules 2 and 3) and Opus judgment (sensitivity: oral history, DEA records, gang migration). Gate: CAPCOM approval before execution.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+T2.1 & Cross-module integration: map structural parallels across all six modules & Opus \\
+T2.2 & The Corridor Map: unified structural-cultural analysis & Opus \\
+T2.3 & Through-line articulation: the Amiga Principle / GSD ecosystem connection & Opus \\
+T2.4 & INTEG validation: confirm all cross-module relationships are documented & Integ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+T3.1 & Source validation: all claims verified against bibliography & Sonnet \\
+T3.2 & Sensitivity review: all flagged topics reviewed for protocol compliance & Secure \\
+T3.3 & Document assembly: compile all module outputs into final PDF & Sonnet \\
+T3.4 & CAPCOM gate: human review and approval & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Load the source index (T0.3) into prompt cache at Wave 0; reuse across all Wave 1 module tasks (5-minute TTL window)
+  \item Waves 1A, 1B run in parallel --- exploit the cache window for module-level context
+  \item Wave 1C (Crack Highway) executes after Wave 1A completes; load Modules 2 and 3 outputs as context
+  \item Wave 2 Synthesis loads all module outputs in a single Opus context; largest single context window
+  \item Wave 3 uses Sonnet with Opus synthesis as cached context
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Est. Input} & \tableheader{Est. Output} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 5k & 8k & Schema + source index \\
+Wave 1A (3 modules) & 25k & 35k & Parallel, Sonnet \\
+Wave 1B (2 modules) & 20k & 25k & Parallel, Opus \\
+Wave 1C (1 module) & 18k & 20k & Sequential, Opus \\
+Wave 2 (synthesis) & 40k & 25k & Large context, Opus \\
+Wave 3 (publication) & 30k & 15k & Assembly + verify \\
+\midrule
+\textbf{Total} & \textbf{$\sim$138k} & \textbf{$\sim$128k} & \textbf{$\sim$266k tokens total} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+T0.1 --> T0.4
+T0.2 --> T0.3
+T0.3 --> T1A.1, T1A.2, T1A.3, T1B.1, T1B.2
+T0.4 --> T1C (Crack Highway gate)
+
+T1A.1 --> T1A.2, T1A.3
+T1A.2 --> T1C
+T1A.3 --> T1C
+T1B.1 --> T2.1
+T1B.2 --> T2.1
+T1C   --> T2.1
+
+T2.1 --> T2.2 --> T2.3 --> T2.4 --> T3.1 --> T3.2 --> T3.3 --> T3.4
+
+CAPCOM gates: before T1C, before T3.4
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Description} \\
+\midrule
+Safety-Critical & 4 & P0 & BLOCK & Cultural sensitivity, source quality \\
+Core Functionality & 8 & P1 & RERUN & Success criteria 1--8 \\
+Integration & 3 & P1 & RERUN & Cross-module connections \\
+Edge Cases & 3 & P2 & LOG & Missing data, conflicting sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & No generic ``African American'' references & All racial/ethnic references specify specific communities (Texas migrants, Compton residents, CD community) \\
+SC-02 & Source quality gate & Zero claims from entertainment media, blogs, or unsourced statements; all claims attributed to government, academic, or professional journalism sources \\
+SC-03 & Crack Highway sensitivity & No speculation on active gang networks; all gang activity documented from DEA or academic sources only; Aaron Dixon oral history clearly attributed \\
+SC-04 & Eazy-E AIDS section dignity & Eazy-E's final statement documented verbatim with source; framed as public health communication act; no sensationalism \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}XL{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC \#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Shared Southern origins documented with specific state data & T-CORE-01 & PENDING \\
+2 & Compton transformation traced decade by decade & T-CORE-02 & PENDING \\
+3 & Three parallel structural mechanisms in LA and PNW & T-CORE-03 & PENDING \\
+4 & Northward crack migration documented & SC-03, T-CORE-04 & PENDING \\
+5 & Ruthless Records infrastructure documented & T-CORE-05 & PENDING \\
+6 & N.W.A distribution without airplay quantified & T-CORE-06 & PENDING \\
+7 & PNW resonance documented in two sources & T-INTEG-01 & PENDING \\
+8 & Eazy-E AIDS statement analyzed & SC-04 & PENDING \\
+9 & Bone Thugs tribute documented & T-CORE-07 & PENDING \\
+10 & Hall of Fame induction documented & T-CORE-08 & PENDING \\
+11 & Coherent corridor map synthesis & T-INTEG-02 & PENDING \\
+12 & Cultural sensitivity protocols followed & SC-01, SC-02 & PENDING \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; wave sequencing \\
+PLAN & Planner & Dependency management; parallel track optimization \\
+SCOUT & Research Agent & Additional web research for gaps; source validation \\
+EXEC-A & Executor Alpha & Historical modules (1, 2, 3) document production \\
+EXEC-B & Executor Beta & Cultural modules (5, 6) document production \\
+CRAFT-HIST & History Specialist & Migration data; structural transformation analysis \\
+CRAFT-CULT & Culture Specialist & Music infrastructure; transmission analysis; oral history \\
+VERIFY & Verification Agent & Source attribution validation; citation checking \\
+INTEG & Integration Agent & Cross-module relationship validation; corridor map \\
+CAPCOM & HITL Interface & Human approval gates (Wave 0→1C, Wave 2→3) \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+LOG & Chronicle Agent & Commit messages; milestone audit trail \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring \\
+ARCH & Architecture Agent & Cross-cutting structural decisions \\
+SECURE & Security Agent & Cultural sensitivity enforcement; safety boundary gates \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; corridor map synthesis \\
+RETRO & Retrospective Agent & Post-wave analysis; lessons learned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Research Modules & 6 \\
+Crew Size & 18 roles \\
+Parallel Tracks & 3 (Wave 1A, 1B, 1C) \\
+CAPCOM Gates & 2 (before Wave 1C, before Wave 3 final) \\
+Estimated Total Tokens & $\sim$266,000 \\
+Estimated Sessions & 4 \\
+Estimated Context Windows & 8 \\
+Primary Model & Sonnet (60\%) \\
+Judgment Model & Opus (30\%) \\
+Scaffolding Model & Haiku (10\%) \\
+Sensitivity Level & HIGH (cultural history, racial justice, AIDS) \\
+Publication Target & Academic / GSD Ecosystem Reference / Public Education \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{1.5em}
+
+\begin{quotebox}
+{\sffamily\bfseries\textcolor{primary}{The Through-Line}}
+
+\vspace{0.5em}
+
+The TR-808 kick drum at the opening of ``Straight Outta Compton'' lands in a gap of silence. Everything that follows --- the voices, the anger, the documentation of a community under siege --- comes out of that space between beats. The families that built Boeing bombers on the Duwamish River and the families that filled the defense plants of the Los Angeles Basin came from the same places, carried the same memories of the Jim Crow South, faced the same structural machinery of exclusion in their new Western homes. Compton and Seattle's Central District are not different stories. They are the same story, told at different latitudes, thirty-eight degrees of Pacific Coast apart.
+
+\vspace{0.5em}
+
+Eazy-E died on March 26, 1995. This document was written on March 26, 2026. In the space between those two dates --- thirty-one years --- the music he helped build has been inducted into the Rock and Roll Hall of Fame, has inspired hundreds of thousands of artists, has reached communities the LAPD never imagined. He converted the informal capital of the Compton street economy into Ruthless Records. He converted his own dying into a public health message. He was, in the deepest sense of the GSD ecosystem's animating principle, an architect of leverage. He gave people --- the people who heard him, who felt recognized in his voice --- something back: the knowledge that their reality was real enough to be heard.
+
+\vspace{0.5em}
+
+The PNW--LA corridor is not just a historical artifact. It is a communication infrastructure, built by six million people walking away from the Jim Crow South toward something better. Music was how they stayed in conversation across the miles. The spaces between the notes are where the meaning lives. This research mission maps those spaces.
+
+\vspace{0.5em}
+{\small\textcolor{secondary}{--- GSD Ecosystem, March 26, 2026}}
+\end{quotebox}
+
+\end{document}

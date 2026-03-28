@@ -1,0 +1,1059 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color Scheme: Space/Physics — cosmic depth fitting deep analog physics
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple — section headers
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue — subsection headers
+\definecolor{tertiary}{HTML}{6A1B9A}      % Deep violet — subsubsection headers
+\definecolor{accent}{HTML}{F9A825}        % Star gold — highlights
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Pale violet — quote boxes
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{F3E5F5}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Hi-Fidelity Audio Reproduction -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Hi-Fidelity Audio \& Analog Physics}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\begin{document}
+
+%% ─── TITLE PAGE ────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Wave and the Wire\\[0.3em]Hi-Fidelity Audio Reproduction}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Analog Electronics Physics $\cdot$ Analog Computing $\cdot$ Modular Synthesis $\cdot$ Minecraft Simulation}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Physics Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+%% ─── TABLE OF CONTENTS ──────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Hi-Fidelity Audio Reproduction --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{gsd-amiga-vision-architectural-leverage.md, gsd-silicon-layer-spec.md}
+\metafield{Context:}{GSD Ecosystem / The Space Between philosophical spine}
+
+\subsection{Vision}
+
+Sound is physics made audible. A pressure wave --- a disturbance in air molecules, propagating outward at 343 meters per second at sea level --- becomes a voltage through a transducer, travels along a conductor shaped by the physics of resistance, capacitance, and inductance, is amplified by circuits whose behavior is governed by quantum mechanics at the junction level, filtered by networks whose transfer functions are solutions to differential equations, and finally reconverted to pressure through a driver pushing a cone against the resistance of air. Every step in that journey is a physical transformation. Every transformation introduces constraints. High fidelity is the art and science of minimizing those constraints until the reproduction and the original are indistinguishable to the most demanding instrument we possess: the human auditory system.
+
+What makes this study remarkable is the thread of analogy that runs through it. The physics of sound reproduction is the same physics of analog computing. An RC integrator in an audio crossover network is the same circuit that Vannevar Bush used to solve differential equations at MIT in 1931. The voltage-controlled filter in a modular synthesizer is governed by the same transfer function as the Moog ladder filter, which is itself a cascade of RC stages whose cutoff frequency responds exponentially to a control voltage --- implementing, in hardware, a continuous-domain computation. Patching a Eurorack modular is programming an analog computer. The patch is the algorithm; the cable is the bus; the knob position is the initial condition.
+
+The Amiga Principle lives here too. The Amiga's specialized coprocessors --- Agnus handling DMA, Paula handling audio and I/O, Denise managing display --- achieved results that raw clock speed could not. A modular synthesizer is the same architecture: specialized analog cores, each performing one operation exquisitely, interconnected by a voltage bus. The VCO is Paula. The VCF is Agnus. The exponential converter that makes 1V/octave pitch tracking work is the system's BLITTER --- a purpose-built computation engine that no general-purpose circuit could match for speed and precision in its narrow domain.
+
+The Minecraft layer is where this knowledge becomes tactile and spatial. Redstone implements digital logic in three-dimensional space. Note blocks implement frequency synthesis. A Minecraft world becomes a physics laboratory where students can walk through the inside of a signal chain, stand inside an oscillator, trace a clock signal by following redstone dust through repeaters. The simulation is not just educational metaphor --- it is a rigorous model of the computational structures that underpin the whole domain.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Physics-to-Electronics Gap.} Most audio education treats electronics as black boxes (``the op-amp amplifies''). The deep physics --- Johnson noise as thermal electron fluctuation, THD as nonlinear junction behavior, the Barkhausen criterion for oscillation --- is rarely taught alongside the listening experience it produces.
+
+  \item \textbf{Analog Computing as a Lost Language.} The op-amp integrator as ODE solver, the RC network as physical model of mechanical systems, the summing amplifier as superposition of forces --- these were the computational lingua franca of 1950s--1970s engineering. Modern engineers have largely lost this vocabulary, and with it a powerful intuition for continuous-domain computation.
+
+  \item \textbf{Synthesis as Computation Obscured.} Modular synthesis is typically taught aesthetically (``it sounds like this'') rather than computationally (``the VCF is a state-variable filter whose cutoff frequency is an exponential function of the control voltage, implementing a form of nonlinear computation with memory''). The isomorphism between a Eurorack patch and an analog computer program is invisible in most synthesis literature.
+
+  \item \textbf{Simulation Substrate Fragmentation.} Physics educators who want to simulate analog circuits in accessible environments must choose between SPICE (steep learning curve), LTspice (desktop-bound), or hand-waving. Minecraft's Redstone system --- peer-reviewed in the \textit{American Journal of Physics} as a valid digital electronics teaching platform --- is underutilized for audio and analog physics education.
+
+  \item \textbf{The Missing Unification.} No existing resource traces the full arc from acoustic wave physics $\rightarrow$ transducer physics $\rightarrow$ analog circuit physics $\rightarrow$ analog computation theory $\rightarrow$ modular synthesis as compute engine $\rightarrow$ Minecraft simulation of the entire chain. This research mission builds that arc.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Wave and the Wire:} physical waves, electrical analogues, analog computation, and interactive simulation are four representations of the same underlying mathematical structure --- the differential equation.
+
+\begin{asciibox}
+ACOUSTIC DOMAIN          ELECTRICAL DOMAIN         COMPUTATION DOMAIN
+ Pressure wave    <-->   Voltage signal    <-->   Differential equation
+ Air mass              Capacitor (C)             Integrator stage
+ Air spring            Inductor (L)              Energy storage
+ Air damping           Resistor (R)              Dissipation term
+ Speaker cone          Current source            Forcing function
+ Microphone diaphragm  Voltage source            Boundary condition
+\end{asciibox}
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+                    THE WAVE AND THE WIRE
+                    Domain Architecture
+
+  [ACOUSTIC PHYSICS]     [ANALOG ELECTRONICS]    [ANALOG COMPUTING]
+    Wave propagation  ->   Signal chain          ->  ODE solvers
+    Room acoustics        Op-amp circuits            Integrators
+    Transduction          Filter theory              Summing amps
+    Psychoacoustics       Noise physics              Analog memory
+         |                      |                        |
+         +----------[MODULAR SYNTHESIS AS COMPUTE ENGINE]-+
+                    VCO / VCF / VCA / CV bus
+                    1V/oct exponential conversion
+                    Patching as algorithm
+                    Chaos and generative systems
+                             |
+                    [MINECRAFT SIMULATION]
+                    Redstone as digital logic
+                    Note blocks as frequency synthesis
+                    3D circuit visualization
+                    Physics education platform
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE 01: Acoustic and Transducer Physics
+MODULE 02: Analog Electronics Deep Physics
+MODULE 03: Analog Computing Theory and Practice
+MODULE 04: Analog Modular Synthesis as Compute Engine
+MODULE 05: Minecraft as Audio-Physics Simulation Platform
+MODULE 06: Cross-Domain Synthesis and Unification
+
+Parallel execution: Modules 01+02 || Modules 03+04 in Wave 1
+Module 05 bridges Modules 01-04 with simulation layer
+Module 06 synthesizes all five into unified reference
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Acoustic and Transducer Physics}
+
+The physics of sound: longitudinal wave propagation in elastic media, the wave equation $\partial^2 p / \partial t^2 = c^2 \nabla^2 p$, acoustic impedance, room acoustics (absorption, reflection, diffusion, modal resonance), the psychoacoustic basis of fidelity (Fletcher-Munson curves, the auditory hair cell as biological VCA), and transducer physics (moving-coil drivers, ribbon microphones, phono cartridge mechanics, and the RIAA equalization curve as a designed frequency response).
+
+\subsubsection{Module 02: Analog Electronics Deep Physics}
+
+The semiconductor physics underlying every circuit: p-n junctions, the Ebers-Moll transistor model, JFET operation in the saturation region (the basis of most audio op-amps), thermal noise as Johnson-Nyquist electron fluctuation ($v_n^2 = 4kTR\Delta f$), total harmonic distortion as Volterra series expansion of nonlinear junction I-V curves, the physics of magnetic tape saturation and hysteresis, and the complete hi-fi signal chain from phono stage through preamp, tone control, power amplifier, and loudspeaker crossover network.
+
+\subsubsection{Module 03: Analog Computing Theory and Practice}
+
+The historical arc from Lord Kelvin's tide-predicting machine (1872) through Vannevar Bush's differential analyzer at MIT (1928--1931) to the electronic analog computer using op-amps as integrators and summers. The mathematical foundation: op-amp integrators as implementations of $V_{out} = -\frac{1}{RC}\int V_{in}\, dt$, solving second-order ODEs using string-of-integrators topology, magnitude and time scaling, initial conditions as capacitor charge states, and the direct isomorphism between mechanical systems (mass-spring-damper) and analog computer circuit diagrams.
+
+\subsubsection{Module 04: Analog Modular Synthesis as Compute Engine}
+
+The Eurorack modular synthesizer as an analog computer in which the patch cable is the program. VCO design (temperature-compensated exponential converter, the 1V/oct standard as logarithmic-to-linear mapping), VCF topology (Moog ladder filter as 4-pole Butterworth with voltage-controlled resonance), VCA as two-quadrant multiplier (ring modulator as four-quadrant), LFO as sub-audio oscillator providing time-varying control voltage, envelope generators as piecewise-linear function generators, and shift register modules (the Turing Machine sequencer) as analog stochastic computing with controllable entropy. The West Coast (Buchla) tradition: complex oscillators, low-pass gates, function generators --- a more overtly computational architecture.
+
+\subsubsection{Module 05: Minecraft as Audio-Physics Simulation Platform}
+
+The Minecraft/Redstone system as a validated physics education environment (peer-reviewed in \textit{American Journal of Physics}, 2024). Redstone dust as wire, torches as inverters, repeaters as buffers with quantized delay (timing circuits), comparators as signal-level detectors, note blocks as 16-instrument $\times$ 25-pitch frequency synthesizers, and the Minecraft Note Block Studio (MNBS) as a DAW-equivalent for this system. Redstone computers as working models of von Neumann and Harvard architectures. The educational use case: building an analog signal chain spatially, where students walk through the circuit, observe signal propagation as redstone lighting up, and tune the note block pitch as frequency synthesis.
+
+\subsubsection{Module 06: Cross-Domain Synthesis and Unification}
+
+The unifying mathematical thread: the differential equation as the common language of acoustic systems, electrical circuits, analog computers, modular synthesis patches, and Minecraft redstone timing circuits. Building the Rosetta Core for this domain: a translation table mapping acoustic concepts $\leftrightarrow$ electrical equivalents $\leftrightarrow$ analog computer notation $\leftrightarrow$ modular synthesis vocabulary $\leftrightarrow$ Minecraft implementation. Design of a GSD educational knowledge pack covering this full arc.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:   # DMA / Data Orchestration
+    role: "Wave execution coordination; source index management"
+    model: claude-opus-4-6
+    tokens_per_session: 8000
+
+  paula:   # Audio / Synthesis (primary domain processor)
+    role: "Modules 01-04; deep physics and synthesis content"
+    model: claude-sonnet-4-6
+    tokens_per_session: 12000
+
+  denise:  # Display / Visualization
+    role: "Module 05 Minecraft simulation; diagrams; ASCII art"
+    model: claude-sonnet-4-6
+    tokens_per_session: 8000
+
+  68000:   # CPU / Synthesis and Integration
+    role: "Module 06 cross-domain unification; Opus judgment"
+    model: claude-opus-4-6
+    tokens_per_session: 10000
+
+  blitter: # Background DMA / Scaffolding
+    role: "Shared schemas; bibliography; Wave 0 templates"
+    model: claude-haiku-4-5-20251001
+    tokens_per_session: 3000
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item Acoustic wave physics and room acoustics fundamentals
+  \item Transducer physics (moving coil, ribbon, phono)
+  \item Complete analog hi-fi signal chain (phono to speaker)
+  \item Semiconductor physics underlying audio op-amps and transistors
+  \item Noise physics: Johnson-Nyquist, shot noise, flicker noise
+  \item Harmonic distortion as nonlinear physics (Volterra series)
+  \item Analog computer theory: integrators, summers, Vannevar Bush lineage
+  \item Op-amp ODE solver design and scaling techniques
+  \item Eurorack/Moog modular synthesis as analog computation
+  \item VCO, VCF, VCA, LFO, envelope generator physics and mathematics
+  \item 1V/oct exponential conversion physics
+  \item Shift register stochastic sequencers as analog computing
+  \item Buchla West Coast tradition as computational architecture contrast
+  \item Minecraft Redstone as digital logic teaching platform (AIP-validated)
+  \item Note block synthesis and Minecraft Note Block Studio
+  \item Cross-domain translation table (acoustic/electrical/computing/synthesis/Minecraft)
+  \item GSD educational knowledge pack design specification
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Digital signal processing (DSP) beyond introductory Nyquist/Shannon framing
+  \item Specific commercial product reviews or endorsements
+  \item Room treatment installation procedures
+  \item DAW software operation
+  \item MIDI protocol (beyond brief contrast with CV)
+  \item Quantum computing or quantum audio effects
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Wave Equation Derivation.} The acoustic wave equation is derived from first principles (Newton's second law + continuity equation) and mapped to its electrical circuit dual, with all variables explicitly cross-referenced.
+  \item \textbf{Signal Chain Physics Traced.} Every stage of a hi-fi signal chain (phono cartridge $\to$ RIAA EQ $\to$ preamp $\to$ tone control $\to$ power amp $\to$ crossover $\to$ driver) is documented with the governing physics equation, key parameters, and failure modes.
+  \item \textbf{Noise Budget Quantified.} Johnson-Nyquist, shot, and flicker noise sources are quantified with formulas and typical values for an audio-grade op-amp signal chain (targeting $<$-110 dB THD+N).
+  \item \textbf{ODE Solver Circuit Documented.} At least one complete op-amp analog computer circuit for a second-order ODE is documented with: schematic topology, transfer function derivation, scaling equations, and initial condition setup.
+  \item \textbf{Synthesis-Computing Isomorphism Proven.} A specific Eurorack patch is documented as the exact equivalent of a specific analog computer program, with all modules mapped to computing elements and patch cables mapped to signal buses.
+  \item \textbf{1V/Oct Physics Explained.} The exponential converter circuit (tempco resistor or matched transistor pair) is documented with the physics of the Boltzmann relationship that makes it work.
+  \item \textbf{VCF Transfer Function Derived.} The Moog ladder filter transfer function is derived, with resonance (self-oscillation at the Barkhausen criterion) explained in physical terms.
+  \item \textbf{Stochastic Computing Documented.} The shift register sequencer (Turing Machine module) is documented as a stochastic analog computing element, including its entropy parameter (the randomness knob as a probability weighting of bit injection).
+  \item \textbf{Minecraft Redstone Validated.} The AIP-published Minecraft digital electronics curriculum is cited and extended to the audio domain, with at least three specific circuit architectures (logic gates, clock, note block sequencer) documented.
+  \item \textbf{Rosetta Core Translation Table Complete.} The cross-domain translation table covers all five layers (acoustic / electrical / analog computer / modular synthesis / Minecraft) for at least 20 fundamental concepts.
+  \item \textbf{Source Quality Gate.} All physics claims cite peer-reviewed journals, university course materials, IEEE/AES publications, or Minecraft Wiki. Zero entertainment media citations.
+  \item \textbf{Knowledge Pack Spec Ready.} The GSD educational knowledge pack design specification is complete, with module boundaries, learning objectives, and integration with the GSD college curriculum (.college/ directory).
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+gsd-amiga-vision-architectural-leverage.md & Amiga Principle as architectural metaphor for analog computing specialization & Inherits \\
+gsd-silicon-layer-spec.md & Physical hardware substrate for running synthesis and simulation & Feeds into \\
+gsd-chipset-architecture-vision.md & Chipset naming (Agnus/Denise/Paula/68000) as processing tier model & Inherits \\
+gsd-bbs-educational-pack-vision.md & Educational packaging framework for knowledge packs & Sibling \\
+gsd-learn-kung-fu-pack-vision.md & Skill-based learning pack architecture & Sibling \\
+unit-circle-skill-creator-synthesis.md & Mathematical foundations shared with v1.50 unit-circle curriculum & Peer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between. Not the notes but the silence between them; not the electrons but the field between the conductors; not the bits in the shift register but the probability function governing the next bit's injection. Sound reproduction is fundamentally the problem of maintaining fidelity through transformation after transformation --- acoustic to electrical, electrical to magnetic, magnetic to acoustic again --- each transformation living in the space between physical domains.
+
+Analog computing discovered that the space between physical domains is where the mathematics lives. A mass-spring system and an LC oscillator share the same differential equation not because they are the same, but because they are both inhabitants of the same mathematical space, connected through the bridge of analogy. The modular synthesizer took this bridge and made it an instrument. The patch cable is a declaration: ``these two spaces are now connected.'' The CV bus is the language in which voltage carries meaning across domain boundaries.
+
+Minecraft makes the spaces physical and walkable. When a student stands inside a redstone circuit and watches the signal propagate, they are inhabiting the diagram. The space between the schematic and the breadboard --- the conceptual gap that defeats most electronics students --- collapses into three-dimensional space they can navigate. This is the deepest pedagogical gift of the simulation substrate.
+
+The GSD ecosystem is built on this same principle. The skill-creator is not a collection of features; it is a Rosetta Core, a translation engine that inhabits the spaces between programming languages, natural languages, and computational domains. This research mission is, in its deepest form, a study of what the ecosystem already is --- examined through the lens of the physics that gave it its metaphors.
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Hi-Fidelity Audio Reproduction --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides findings organized by module, sourced exclusively from peer-reviewed research, university course materials, IEEE and AES publications, government physics resources, and the Minecraft Wiki. It is designed for direct consumption by GSD execution agents and for human review at module boundaries.
+
+\textbf{Key source organizations and reference standards:}
+\begin{itemize}[leftmargin=2em]
+  \item Audio Engineering Society (AES) --- professional audio standards and publications
+  \item Institute of Electrical and Electronics Engineers (IEEE) --- circuit theory and analog electronics
+  \item Texas Instruments (TI) Application Notes --- semiconductor physics and hi-fi circuit design
+  \item Analog Devices (ADI) --- mixed-signal and audio IC physics
+  \item Massachusetts Institute of Technology (MIT) OpenCourseWare --- electronics and analog computing
+  \item University of Illinois ECE486 --- analog computing laboratory manual
+  \item Rice University ELEC301 --- op-amp and analog computer projects
+  \item \textit{American Journal of Physics} (AIP Publishing) --- Minecraft physics education (peer-reviewed 2024)
+  \item Minecraft Wiki (minecraft.wiki) --- canonical game mechanics reference
+  \item Engineering LibreTexts / LibreTexts Physics --- open-access physics and EE fundamentals
+  \item \textit{Sound on Sound} --- professional audio physics and circuit analysis
+  \item Chalkdust Magazine (Cambridge University) --- analog computing mathematics
+\end{itemize}
+
+\subsection{Module 01: Acoustic and Transducer Physics}
+
+\subsubsection{Wave Physics Fundamentals}
+
+Sound propagates as a longitudinal pressure wave in elastic media. The governing wave equation in one dimension is:
+
+\begin{center}
+$\dfrac{\partial^2 p}{\partial t^2} = c^2 \dfrac{\partial^2 p}{\partial x^2}$
+\end{center}
+
+where $p$ is acoustic pressure and $c$ is the speed of sound (343 m/s in air at 20°C). This equation is structurally identical to the equation governing voltage in a transmission line, establishing the first cross-domain analogy of this study. The acoustic impedance $Z_a = \rho c$ (density $\times$ wave speed) is the acoustic equivalent of characteristic impedance in electromagnetics.
+
+\subsubsection{Hi-Fi Signal Chain Overview}
+
+According to Texas Instruments application literature, a hi-fi audio reproduction system converts a digital audio source to a voltage signal that drives a headphone or loudspeaker. The canonical signal chain is: \textbf{Source $\to$ DAC $\to$ Pre-amplifier $\to$ Power amplifier $\to$ Speaker/headphone}. For analog sources: \textbf{Phono cartridge $\to$ RIAA phono preamp $\to$ Line preamp $\to$ Power amplifier $\to$ Crossover $\to$ Drivers}.
+
+The Open University describes the fundamental transducer principle: a microphone converts air pressure oscillations into voltage oscillations at the same frequency, while a loudspeaker performs the inverse conversion. In a perfect system, the output would be an exact replica of the input. In practice, every stage introduces distortion, noise, and frequency response non-flatness.
+
+\subsubsection{Fidelity Parameters}
+
+TI defines the key hi-fi performance parameters as: \textbf{THD+N} (Total Harmonic Distortion plus Noise) as the primary signal quality metric --- hi-fi requires THD+N $<$ -110 dB; \textbf{SNR} (Signal-to-Noise Ratio) targeting dynamic ranges of 120--129 dB for reference-grade systems; \textbf{Frequency Response} required to be flat ($\pm$0.5 dB or better) from 20 Hz to 20 kHz; and \textbf{Crosstalk} between stereo channels. The DAC is identified as the performance bottleneck in a digital source chain, with the best available DACs (such as the TI PCM1794A) achieving 129 dB dynamic range.
+
+\subsubsection{Analog Warmth Physics}
+
+According to \textit{Sound on Sound}'s technical analysis, ``analog warmth'' is not a single phenomenon but a combination of: even-order harmonic distortion from triode valve circuits (which increases at lower signal levels), magnetic hysteresis nonlinearity from transformer saturation, tape saturation with characteristic soft-clipping at the magnetic particle saturation limit, and the complex modulation effects of scrape flutter in tape transport. These are all instances of controlled nonlinearity --- Volterra series distortion products that happen to be musically consonant. This explains why analog circuits ``sound warm'': they add even harmonics that relate harmonically to the fundamental.
+
+\subsection{Module 02: Analog Electronics Deep Physics}
+
+\subsubsection{Semiconductor Physics Foundations}
+
+The audio operational amplifier operates on the physics of the p-n junction. At the most fundamental level, the I-V characteristic of a junction is the Shockley diode equation: $I = I_S(e^{V/V_T} - 1)$, where $V_T = kT/q$ is the thermal voltage (approximately 26 mV at room temperature). This exponential relationship is the source of both THD in audio stages (deviation from ideal linear behavior) and the 1V/octave exponential converter in modular synthesis (exploited intentionally).
+
+\subsubsection{Noise Physics}
+
+According to AGS Devices (citing standard electronic physics), over 90\% of real-world signals are analog by nature. The primary noise sources in analog audio circuits are:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Noise Type} & \tableheader{Physical Origin} & \tableheader{Formula} \\
+\midrule
+Johnson-Nyquist & Thermal agitation of electrons in resistor & $v_n^2 = 4kTR\Delta f$ \\
+Shot noise & Discrete quantized electron flow across junction & $i_n^2 = 2qI_{DC}\Delta f$ \\
+Flicker (1/f) & Carrier trapping at oxide interfaces in FETs & $S_v \propto 1/f$ \\
+Partition & Current division in multi-electrode devices & Device-dependent \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For a reference-grade audio op-amp signal chain, the total integrated noise voltage should be below the equivalent of -110 dB THD+N (TI specification). This requires careful PCB layout, ultra-low noise power supplies, and selection of op-amps with input noise density below 1 nV/$\sqrt{\text{Hz}}$.
+
+\subsubsection{Distortion as Nonlinear Physics}
+
+Audio fidelity measurements are signal measurements that quantify the change in a signal as it passes through a component (Tonestack.net, citing fundamental audio science). Harmonic distortion arises from the nonlinear transfer characteristic of active devices. Poor frequency response changes timbre by emphasizing certain harmonics; distortion generates new harmonics; noise masks low-level signals. The Wikipedia comparison of analog and digital recording notes that both techniques introduce errors --- the debate between advocates of each system ultimately reduces to which error mechanisms are more or less audible.
+
+\subsubsection{The Hi-Fi Signal Chain}
+
+\textit{Audio Advisor} describes signal flow as ``the linear, all-encompassing progression of the audio signal from one stage to another in a single series of sequential steps.'' The signal levels at each stage are:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Stage} & \tableheader{Signal Level} & \tableheader{Key Physics} \\
+\midrule
+Phono cartridge & $\sim$2--5 mV & Moving coil/magnet transduction \\
+RIAA phono preamp & $\sim$150--200 mV & 75$\mu$s / 318$\mu$s / 3180$\mu$s time constants \\
+Line preamp & $\sim$1--2 V (line) & Buffering, tone control, gain \\
+Power amplifier & Tens of volts & Current drive into loudspeaker load \\
+Loudspeaker & Pressure (Pa) & Electromechanical transduction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 03: Analog Computing Theory and Practice}
+
+\subsubsection{Historical Arc}
+
+Chalkdust Magazine (Cambridge University) traces analog computing from the Antikythera mechanism (ancient Greece) as the earliest known working analog computer, through Lord Kelvin's tide-predicting machine (1872), to Vannevar Bush and Harold Locke Hazen's differential analyzer at MIT (1928--1931), comprising six mechanical integrators. Wikipedia's differential analyser article documents that the MIT machine was then replicated at Manchester University (1934, notably using Meccano parts), Cambridge, Belfast, Oslo, and elsewhere. The ENIAC digital computer was modeled in many ways on the differential analyzer --- a direct lineage from analog to digital.
+
+\subsubsection{The Op-Amp as Computing Element}
+
+According to the University of Illinois ECE486 Analog Computing manual, active electrical networks consisting of resistors, capacitors, and op-amps connected together are capable of simulating any linear system. The fundamental building blocks are:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Integrator:} $V_{out} = -\frac{1}{RC}\int V_{in}\,dt$ --- one resistor, one capacitor, one op-amp
+  \item \textbf{Differentiator:} $V_{out} = -RC\,\frac{dV_{in}}{dt}$ --- positions of R and C swapped (note: limited use due to noise amplification)
+  \item \textbf{Inverting summer:} $V_{out} = -(V_1/R_1 + V_2/R_2 + \cdots) \times R_f$ --- implements weighted addition
+  \item \textbf{Coefficient potentiometer:} A voltage divider providing gains from 0 to 1
+  \item \textbf{Multiplier:} Nonlinear element enabling product of two signals
+\end{itemize}
+
+\subsubsection{Solving ODEs in Analog}
+
+Rice University's ELEC301 project demonstrates that to solve a second-order ODE of the form $M\ddot{y} + B\dot{y} + Ky = f(t)$ (mass-spring-damper system), one rearranges to isolate the highest derivative: $\ddot{y} = [f(t) - B\dot{y} - Ky]/M$, then constructs a ``string of integrators'' circuit. The output of the first integrator is $\dot{y}$; the output of the second is $y$. These are fed back to the input summing amplifier with appropriate sign inversions (one inverter per feedback path). Two integrators suffice for any second-order system; $n$ integrators for an $n$-th order system.
+
+The Engineering LibreTexts Analog Computer section notes that this approach would be used to test the suspension of an automobile or a loudspeaker system --- and that to change the spring constant, only a potentiometer needs to be adjusted. This is architectural leverage: parameter sweeps that would require recompilation on a digital computer require only knob-turning on an analog computer.
+
+\subsubsection{Memristors and Modern Analog Computing}
+
+A 2019 paper in \textit{Nature Scientific Reports} (PMC6736973) demonstrates that by adding classical memristors to analog computer networks, the system can simulate a large variety of linear and nonlinear integro-differential equations beyond the capability of purely resistor-capacitor-op-amp networks. This represents a frontier extension of classical analog computing theory.
+
+\subsection{Module 04: Analog Modular Synthesis as Compute Engine}
+
+\subsubsection{The VCO as Oscillator Circuit}
+
+North Coast Synthesis Ltd. documents that the analog VCO produces a repeating waveform whose frequency is a function of control voltage. The fundamental design constraint is accurate 1V/octave tracking: a 1.000V increase in control voltage must double the frequency exactly. Because human ears detect certain frequency ratios to very high accuracy, precise exponential conversion is essential. The circuit implements this using the exponential I-V characteristic of a bipolar transistor base-emitter junction ($I_C \propto e^{V_{BE}/V_T}$), deliberately exploiting the Shockley equation rather than compensating for it.
+
+\subsubsection{Control Voltage as Computing Bus}
+
+The modular synthesizer uses voltage as a universal data representation. Wikipedia's modular synthesizer article describes CV (Control Voltage) as the primary means by which information is sent between modules. A rectangular wave from an LFO can serve as a logic output for timing or trigger functions on other modules. An envelope generator can modulate any voltage-controlled parameter in the system --- not just VCA gain and VCF cutoff, but VCO pitch, pulse width, filter resonance, or the FM input of another VCO. This generality of voltage as data type is the same architecture as an analog computer's signal bus.
+
+\subsubsection{The VCF as Filter and Resonator}
+
+Wikipedia documents the core module types: VCF (Voltage-Controlled Filter) attenuates frequencies above (low-pass), below (high-pass), or both above and below (band-pass) a cutoff frequency. Most VCFs have variable resonance, sometimes voltage-controlled. When resonance is set to maximum, the filter self-oscillates at the cutoff frequency --- an instance of the Barkhausen oscillation criterion being met in the feedback loop. This makes the VCF a voltage-controlled oscillator with sine wave output, exploiting the same physics as an RF carrier generator. The ring modulator (four-quadrant multiplier) creates sum and difference frequencies by multiplying two audio signals, implementing an analog multiplication operation.
+
+\subsubsection{Stochastic Computing: The Turing Machine Module}
+
+Music Thing Modular's Turing Machine (launched 2012, documented on GitHub as open-source) is a shift register-based random sequence generator. It generates clocked random voltages that can be locked into looping sequences, with the ``randomness knob'' controlling the probability that each new bit differs from the feedback of the shift register. This is a form of stochastic analog computing: the entropy of the output sequence is a continuous function of a single analog control voltage. According to the designer's documentation, when clocked at audio rates, it creates random wavetables --- the same module operating as a stochastic waveform generator or a melodic sequencer depending only on clock rate. Music Thing Modular's Workshop Computer (2025) extends this to a hot-swappable programmable music computer module, bridging analog and digital computation.
+
+\subsubsection{West Coast vs. East Coast Architectures}
+
+According to Sound on Sound's Turing Machine review, two schools of modular synthesis emerged in the 1960s: the East Coast tradition (Moog) emphasizing deterministic step sequencers and keyboard control, and the West Coast tradition (Buchla) emphasizing generative, stochastic, and complex oscillator approaches. The Buchla Source of Uncertainty is a direct implementation of probabilistic analog computing. The West Coast approach is architecturally closer to an analog computer than to a conventional instrument.
+
+\subsection{Module 05: Minecraft as Audio-Physics Simulation Platform}
+
+\subsubsection{Redstone as Electronics Teaching Platform}
+
+A 2024 peer-reviewed paper in \textit{American Journal of Physics} (AIP Publishing, vol.\ 92, no.\ 4, p.\ 317) directly validates Minecraft as a digital electronics teaching platform. The study implemented logic gate construction activities in a Digital and Analog Electronics course and a high school engineering camp. Key finding: the Minecraft environment enables broader student collaboration and an easy way for instructors to distribute, collect, and review circuits. Redstone dust acts as connecting wire; torches, levers, and buttons provide ON/OFF binary signals; repeaters act as signal buffers with quantized delay; and comparators detect signal level differences.
+
+\subsubsection{Note Block Frequency Synthesis}
+
+The Minecraft Wiki documents that note blocks produce musical notes when hit or powered by redstone. There are 16 different instruments and 25 different pitches per instrument, spanning two full octaves (24 semitones) per instrument, from F\#3 to F\#5 for the harp instrument. The instrument timbre is determined by the block type directly beneath the note block (wood $\to$ bass; gold block $\to$ bell; bone block $\to$ xylophone; packed ice $\to$ chime; etc.). This is a crude but functional analog of subtractive synthesis by material selection.
+
+\subsubsection{Circuit Architecture in 3D Space}
+
+According to the Minecraft Wiki tutorial on Redstone music, redstone repeaters implement signal timing: the number of ticks of delay maps to musical note duration, and combination of repeaters can implement tempo and rhythm. A redstone clock (four repeaters in a loop) creates an oscillator with quantized period. Multiple note blocks powered by different branches of a clock circuit implement polyphony. A Minecraft Note Block Studio (MNBS) external tool provides a DAW-like interface for composing note block pieces and exporting them as Minecraft world schematics.
+
+\subsubsection{Educational Scope}
+
+According to Hackaday's analysis, Minecraft doesn't teach electronics in the literal sense --- redstone dust doesn't behave like wires, and comparators work in unexpected ways. But it teaches engineering: logic, making the best of a limited component palette, planning circuits from start to finish, and optimizing for elegance. The physical visualization of signal propagation (watching redstone dust light up as power flows through a circuit) provides spatial intuition that schematics alone cannot.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Concern Level} & \tableheader{Protocol} \\
+\midrule
+Semiconductor physics formulas & None & Present equations with standard attribution \\
+Minecraft educational use & None & Cite AIP peer-reviewed paper \\
+Audio equipment recommendations & Medium & Present physics parameters, not product endorsements \\
+High-voltage audio amplifier circuits & Low & Note standard safety practices; no construction instructions \\
+DIY synthesizer construction (Eurorack) & Low & Reference standard Eurorack $\pm$12V/+5V spec; note soldering safety \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wheeler, C.\ (2024). Using a Minecraft virtual workspace for learning digital electronics. \textit{American Journal of Physics}, 92(4), 317. AIP Publishing.
+  \item Carbajal, J.P.\ et al.\ (2019). Analog simulator of integro-differential equations with classical memristors. \textit{Scientific Reports}. PMC6736973.
+\end{itemize}
+
+\subsubsection{University Course Materials}
+
+\begin{itemize}[leftmargin=2em]
+  \item University of Illinois ECE486 Analog Computing Manual (Paz, R.). \url{https://courses.grainger.illinois.edu/ECE486/sp2025/}
+  \item Rice University ELEC301 Project: Building an Analog Computer. \url{https://www.clear.rice.edu/elec301/Projects99/anlgcomp/}
+  \item Engineering LibreTexts: Operational Amplifiers and Linear Integrated Circuits (Fiore). Section 10.4.
+  \item Chalkdust Magazine (Cambridge University): Analogue Computing --- Fun with Differential Equations. October 2016.
+\end{itemize}
+
+\subsubsection{Professional and Industry Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item Texas Instruments. \textit{HiFi Audio Circuit Design} (SBOA237). Application note.
+  \item Open University. \textit{An Introduction to Electronics, Section 4.1: High-Fidelity Sound Reproduction}. OpenLearn.
+  \item Analog Devices (ADI). Audio products documentation. \url{https://www.analog.com}
+  \item AGS Devices. Analog Electronics: Core Functions, Applications, and Benefits. 2025.
+  \item North Coast Synthesis Ltd. Modular Synthesis Intro, Part 10: Analog Oscillators.
+  \item Smith, J. (dspguide.com). \textit{The Scientist and Engineer's Guide to Digital Signal Processing}, Chapter 22: Audio Processing / High Fidelity Audio.
+  \item Tonestack.net. Audio Measurements and Fidelity: The 10 Basic Rules.
+  \item Audio Advisor Learning Center. Signal Flow Guide.
+  \item Sound on Sound. Analogue Warmth. Technical analysis.
+  \item Sound on Sound. Music Thing Modular Turing Machine MkII. Review/analysis.
+\end{itemize}
+
+\subsubsection{Reference Documentation}
+
+\begin{itemize}[leftmargin=2em]
+  \item Minecraft Wiki. Note Block. \url{https://minecraft.wiki/w/Note_Block}
+  \item Minecraft Wiki. Tutorial: Redstone Music. \url{https://minecraft.wiki/w/Tutorial:Redstone_music}
+  \item Minecraft Wiki. Tutorials: Redstone Computers.
+  \item Wikipedia. Comparison of Analog and Digital Recording.
+  \item Wikipedia. Differential Analyser. (Covering Thomson/Kelvin/Bush/Hartree lineage.)
+  \item Wikipedia. Modular Synthesizer. (VCO/VCF/VCA/LFO/EG module taxonomy.)
+  \item TomWhitwell/TuringMachine. GitHub repository (open source). Music Thing Modular.
+  \item VCV Rack Free Modules Documentation. \url{https://vcvrack.com/Free}
+  \item Learning Modular. Glossary of Modular Synthesis Terms.
+\end{itemize}
+
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%% ═══════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, peer-source-grounded research document covering the complete arc from acoustic wave physics through analog electronics, analog computing theory, modular synthesis as compute engine, and Minecraft simulation as physics education platform --- unified by the common mathematical structure of the differential equation. The deliverable is a GSD educational knowledge pack ready for integration into the .college/ curriculum architecture.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0 (Foundation)
+  [BLITTER]: Shared schemas, bibliography index, module templates
+       |
+WAVE 1A (Parallel Track A)          WAVE 1B (Parallel Track B)
+  [PAULA]: Module 01 — Acoustic      [PAULA]: Module 02 — Analog Electronics
+  [PAULA]: Module 03 — Analog        [DENISE]: Module 04 — Modular Synthesis
+           Computing
+       |                                    |
+       +------------------------------------+
+                        |
+WAVE 1C (Parallel)
+  [DENISE]: Module 05 — Minecraft Simulation
+       |
+WAVE 2 (Synthesis)
+  [68000/Opus]: Module 06 — Cross-Domain Unification
+  [68000/Opus]: Rosetta Core translation table
+  [68000/Opus]: Knowledge pack specification
+       |
+WAVE 3 (Publication + Verification)
+  [AGNUS]: Document assembly, formatting, citations
+  [VERIFY]: Source validation, accuracy checking
+  [LOG]: Commit messages, milestone summary
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Physics Layer} --- Wave equations, semiconductor physics, noise theory
+  \item \textbf{Circuit Layer} --- Op-amp topologies, signal chain stages, filter theory
+  \item \textbf{Computing Layer} --- Analog ODE solvers, integrator strings, scaling
+  \item \textbf{Synthesis Layer} --- VCO/VCF/VCA/CV architecture as analog computation
+  \item \textbf{Simulation Layer} --- Minecraft Redstone/note blocks as physics education
+  \item \textbf{Unification Layer} --- Cross-domain translation, knowledge pack design
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 01: Acoustic Physics & Wave equation derivation; transducer physics; RIAA curve & 4000--6000 tokens \\
+2 & Module 02: Analog Electronics & Noise budget; distortion physics; complete signal chain & 4000--6000 tokens \\
+3 & Module 03: Analog Computing & ODE solver circuit; Vannevar Bush lineage; scaling equations & 3000--5000 tokens \\
+4 & Module 04: Synthesis as Compute & Patch-to-program mapping; 1V/oct physics; VCF derivation & 4000--6000 tokens \\
+5 & Module 05: Minecraft Simulation & AIP citation; note block synthesis; Redstone architecture & 3000--4000 tokens \\
+6 & Module 06: Unification & Rosetta Core table; 20+ concept translations; knowledge pack spec & 4000--6000 tokens \\
+7 & Verification Report & All 12 success criteria tested; source quality gate passed & 1000--2000 tokens \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Bibliography schema & None & Haiku & 1,500 \\
+W0: Module template set & None & Haiku & 1,000 \\
+W1A: Module 01 (Acoustic) & W0 & Sonnet & 6,000 \\
+W1A: Module 03 (Analog Comp.) & W0 & Sonnet & 5,000 \\
+W1B: Module 02 (Electronics) & W0 & Sonnet & 6,000 \\
+W1B: Module 04 (Synthesis) & W0 & Sonnet & 6,000 \\
+W1C: Module 05 (Minecraft) & W0 & Sonnet & 4,000 \\
+W2: Module 06 (Unification) & W1A, W1B, W1C & Opus & 8,000 \\
+W2: Rosetta Core table & W1A, W1B, W1C & Opus & 4,000 \\
+W2: Knowledge pack spec & W2 Module 06 & Opus & 3,000 \\
+W3: Document assembly & W2 & Sonnet & 4,000 \\
+W3: Verification report & All & Sonnet & 2,000 \\
+\hline
+\textbf{Total} & & & \textbf{$\sim$50,500} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} & \tableheader{Waves} \\
+\midrule
+Opus & $\sim$30\% & Cross-domain synthesis; judgment calls on physics accuracy; Rosetta Core construction requiring analogical reasoning across five domains & W2 \\
+Sonnet & $\sim$60\% & Module research content; structured documentation; bibliography; verification & W1A, W1B, W1C, W3 \\
+Haiku & $\sim$10\% & Scaffolding templates; shared schemas; index structure & W0 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas, templates, bibliography stub \\
+1A & Physics \& Computing & Parallel & Sonnet & Modules 01, 03 \\
+1B & Electronics \& Synthesis & Parallel & Sonnet & Modules 02, 04 \\
+1C & Minecraft Simulation & Parallel & Sonnet & Module 05 \\
+2 & Synthesis & Sequential & Opus & Module 06, Rosetta Core, knowledge pack \\
+3 & Publication & Sequential & Sonnet & Final assembly, verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Agent} \\
+\midrule
+W0-T01 & Create shared bibliography schema (JSON) & BLITTER/Haiku \\
+W0-T02 & Create module document template (markdown) & BLITTER/Haiku \\
+W0-T03 & Initialize source index from Stage 2 bibliography & BLITTER/Haiku \\
+W0-T04 & Create cross-domain concept stub table (20 rows) & BLITTER/Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A} (Modules 01 + 03 --- Physics foundation and analog computing):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Agent} \\
+\midrule
+W1A-T01 & Write Module 01: wave equation derivation from first principles & CRAFT-PHYS/Sonnet \\
+W1A-T02 & Write Module 01: transducer physics and RIAA curve & CRAFT-PHYS/Sonnet \\
+W1A-T03 & Write Module 01: room acoustics and psychoacoustics & CRAFT-PHYS/Sonnet \\
+W1A-T04 & Write Module 03: analog computing history (Kelvin to Bush) & CRAFT-HIST/Sonnet \\
+W1A-T05 & Write Module 03: op-amp integrator as ODE solver (with circuit) & CRAFT-HIST/Sonnet \\
+W1A-T06 & Write Module 03: magnitude/time scaling techniques & CRAFT-HIST/Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B} (Modules 02 + 04 --- Electronics physics and synthesis computation):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Agent} \\
+\midrule
+W1B-T01 & Write Module 02: semiconductor physics and noise theory & CRAFT-EE/Sonnet \\
+W1B-T02 & Write Module 02: complete hi-fi signal chain stages & CRAFT-EE/Sonnet \\
+W1B-T03 & Write Module 02: distortion physics; Volterra series & CRAFT-EE/Sonnet \\
+W1B-T04 & Write Module 04: VCO physics and 1V/oct exponential converter & CRAFT-SYNTH/Sonnet \\
+W1B-T05 & Write Module 04: VCF transfer function; ladder filter; self-oscillation & CRAFT-SYNTH/Sonnet \\
+W1B-T06 & Write Module 04: shift register stochastic computing; West Coast architecture & CRAFT-SYNTH/Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C} (Module 05 --- Minecraft simulation layer):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Agent} \\
+\midrule
+W1C-T01 & Write Module 05: Redstone as digital logic (AIP paper findings) & DENISE/Sonnet \\
+W1C-T02 & Write Module 05: note block synthesis; instruments; pitch table & DENISE/Sonnet \\
+W1C-T03 & Write Module 05: redstone clock; timing; polyphonic circuit design & DENISE/Sonnet \\
+W1C-T04 & Write Module 05: Minecraft as analog-computer metaphor; limitations & DENISE/Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Agent} \\
+\midrule
+W2-T01 & Write Module 06: cross-domain unification; ODE as common language & 68000/Opus \\
+W2-T02 & Complete Rosetta Core table (20+ concept translations) & 68000/Opus \\
+W2-T03 & Write knowledge pack design specification for .college/ integration & 68000/Opus \\
+W2-T04 & Validate consistency: module-to-module cross-references & INTEG/Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task ID} & \tableheader{Task} & \tableheader{Agent} \\
+\midrule
+W3-T01 & Assemble all modules into final research document & AGNUS/Sonnet \\
+W3-T02 & Run source quality check (SC-SRC, SC-NUM tests) & VERIFY/Sonnet \\
+W3-T03 & Run 12-criterion verification matrix & VERIFY/Sonnet \\
+W3-T04 & Produce milestone summary and commit message & LOG/Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{5-minute cache window:} All Wave 1 parallel tasks should be issued within the same session where possible, with module outlines loaded first to exploit context reuse
+  \item \textbf{Shared prompt prefix:} Load bibliography schema + module template at session open; all agents in the same session inherit this context
+  \item \textbf{Wave boundaries as cache flush points:} Each wave transition starts a fresh session; Wave 2 receives condensed summaries of Wave 1 modules rather than full text
+  \item \textbf{Rosetta Core as anchor:} The cross-domain table established in Wave 0-T04 persists as the primary inter-wave anchor; all modules reference it by row index
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tasks} & \tableheader{Tokens/Task} & \tableheader{Wave Total} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 4 & 700 & 2,800 & Haiku tier \\
+Wave 1A & 6 & 1,800 & 10,800 & Sonnet tier \\
+Wave 1B & 6 & 1,800 & 10,800 & Sonnet tier \\
+Wave 1C & 4 & 1,500 & 6,000 & Sonnet tier \\
+Wave 2 & 4 & 4,000 & 16,000 & Opus tier \\
+Wave 3 & 4 & 1,500 & 6,000 & Sonnet tier \\
+\hline
+\textbf{Total} & \textbf{28} & --- & \textbf{$\sim$52,400} & ---\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[W0: Foundation] ──────────────────────────────────────+
+    |                                                   |
+    +──[W1A: Acoustic + Analog Computing]              |
+    |       Mod01 ─────────────────────\               |
+    |       Mod03 ─────────────────────--> [W2: Synth] |
+    |                                  |               |
+    +──[W1B: Electronics + Synthesis]  |               |
+    |       Mod02 ─────────────────────+               |
+    |       Mod04 ──────────────────────────────────── |
+    |                                                   |
+    +──[W1C: Minecraft]                                |
+            Mod05 ─────────────────────────────────── |
+                                                        |
+                               [W2: Synthesis] ─────>>[W3: Publish]
+                               Mod06 (Unification)
+                               Rosetta Core Table
+                               Knowledge Pack Spec
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Priority} & \tableheader{Failure} \\
+\midrule
+Safety-critical & Non-negotiable boundaries (source quality, attribution) & Mandatory & BLOCK \\
+Core functionality & Deliverable acceptance against 12 success criteria & Required & BLOCK \\
+Integration & Cross-module consistency and completeness & Required & BLOCK \\
+Edge cases & Robustness; minority data; temporal currency & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality gate & All citations traceable to peer-reviewed journals, university materials, IEEE/AES, TI/ADI app notes, or Minecraft Wiki. Zero entertainment media \\
+SC-NUM & Numerical attribution & Every equation, dB figure, frequency, and noise voltage attributed to a specific named source \\
+SC-ADV & No product advocacy & Document describes physics and circuit topologies; does not recommend specific commercial products \\
+SC-SEC & No exploitation details & Audio circuit details do not include power supply hacking or RF emission guidance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies SC} & \tableheader{Expected} \\
+\midrule
+CF-01 & SC-1: Wave equation derivation & Module 01 contains derivation showing $\partial^2 p/\partial t^2 = c^2 \nabla^2 p$ from Newton + continuity \\
+CF-02 & SC-2: Signal chain traced & All 5 stages (phono$\to$RIAA$\to$preamp$\to$amp$\to$speaker) documented with governing equation \\
+CF-03 & SC-3: Noise budget quantified & Johnson-Nyquist formula $v_n^2 = 4kTR\Delta f$ present with numeric example \\
+CF-04 & SC-4: ODE solver circuit & Complete integrator string circuit for 2nd-order ODE with scaling equations \\
+CF-05 & SC-5: Synthesis-computing isomorphism & At least one complete patch documented as equivalent analog computer program \\
+CF-06 & SC-6: 1V/oct physics & Shockley equation exploitation in exponential converter documented \\
+CF-07 & SC-7: VCF transfer function & Moog ladder filter poles derived; Barkhausen criterion at self-oscillation explained \\
+CF-08 & SC-8: Stochastic computing & Turing Machine shift register documented with entropy parameter \\
+CF-09 & SC-9: Minecraft validated & AIP 2024 paper cited; at least three Redstone architectures documented \\
+CF-10 & SC-10: Rosetta Core complete & Table has $\geq$20 rows spanning all five domains \\
+CF-11 & SC-11: Source quality & All modules pass SC-SRC \\
+CF-12 & SC-12: Knowledge pack spec & .college/ integration spec includes module boundaries and learning objectives \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Mod01 $\to$ Mod02 cascade & Acoustic wave equation explicitly connected to its electrical circuit dual in at least one cross-reference \\
+IN-02 & Mod02 $\to$ Mod03 cascade & Shockley exponential I-V curve connected to its exploitation in the analog computer's nonlinear elements \\
+IN-03 & Mod03 $\to$ Mod04 cascade & Op-amp integrator topology (Module 03) explicitly identified as the same circuit as the VCO integrator core (Module 04) \\
+IN-04 & Mod04 $\to$ Mod05 cascade & VCO/VCF/VCA signal chain mapped to its Minecraft note block + clock + repeater equivalent \\
+IN-05 & Cross-module consistency & Same formula or equation appearing in multiple modules uses identical notation and attribution \\
+IN-06 & Self-containment & A reader with no prior background can follow from Module 01 through Module 06 with no undefined terms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Wave equation derived from first principles & CF-01, IN-01 & Pending \\
+2. Signal chain physics traced (all stages) & CF-02 & Pending \\
+3. Noise budget quantified & CF-03 & Pending \\
+4. ODE solver circuit documented & CF-04, IN-03 & Pending \\
+5. Synthesis-computing isomorphism proven & CF-05, IN-03 & Pending \\
+6. 1V/oct physics explained & CF-06 & Pending \\
+7. VCF transfer function derived & CF-07 & Pending \\
+8. Stochastic computing documented & CF-08 & Pending \\
+9. Minecraft platform validated & CF-09, IN-04 & Pending \\
+10. Rosetta Core table complete & CF-10, IN-05, IN-06 & Pending \\
+11. Source quality gate & CF-11, SC-SRC, SC-NUM & Pending \\
+12. Knowledge pack spec ready & CF-12 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave-level go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track management; cache window optimization \\
+SCOUT & Research Agent & Additional web research for gap-fill during W1 \\
+EXEC-1 & Executor A & Track A document production (Modules 01, 03) \\
+EXEC-2 & Executor B & Track B document production (Modules 02, 04) \\
+EXEC-3 & Executor C & Track C document production (Module 05) \\
+CRAFT-PHYS & Domain Specialist & Acoustic and semiconductor physics domain authority \\
+CRAFT-EE & Domain Specialist & Analog electronics circuit theory domain authority \\
+CRAFT-SYNTH & Domain Specialist & Modular synthesis and analog computing isomorphism \\
+CRAFT-HIST & Domain Specialist & History of analog computing; Vannevar Bush lineage \\
+VERIFY & Verification Agent & Source quality; accuracy; SC-SRC and SC-NUM enforcement \\
+INTEG & Integration Agent & Cross-module consistency; Rosetta Core coherence \\
+CAPCOM & HITL Interface & Human review gates at W1/W2 and W2/W3 boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection; hallucination risk \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summary \\
+TOPO & Topology Manager & Fleet crew structure; mid-mission restructuring authority \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6 modules, 17 crew roles) \\
+Total Modules & 6 \\
+Parallel Tracks (Wave 1) & 3 (A, B, C) \\
+Estimated Token Budget & $\sim$52,400 tokens \\
+Opus allocation & $\sim$30\% (Wave 2 synthesis + judgment) \\
+Sonnet allocation & $\sim$60\% (Wave 1 research + Wave 3 publication) \\
+Haiku allocation & $\sim$10\% (Wave 0 scaffolding) \\
+Estimated Sessions & 4--6 context windows \\
+Human Review Gates & 2 (W1/W2 boundary; W2/W3 boundary) \\
+Primary Deliverable & GSD educational knowledge pack + Rosetta Core translation table \\
+College Integration & .college/departments/mathematics + mind-body (physics+music) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The analog computer is programmed not in an algorithmic fashion but by actually interconnecting its individual computing elements in a suitable way. Thus they do not need any program memory; in fact, there is no `memory' in the traditional sense at all. What makes an analogue computer `analogue' is the fact that it is set up to be an analogy of some problem readily described by differential equations.''} \\[0.5em]
+--- Chalkdust Magazine, Cambridge University, 2016 \\[0.8em]
+\textit{This is the insight at the center of this mission. The patch cable is the program. The knob position is the initial condition. The VCF is a four-pole integrator. Every modular synthesist who has ever tuned a filter to self-oscillation has, without knowing it, satisfied the Barkhausen criterion in an analog computer of their own design. The Wave and the Wire is the study of what they built, and why it sounds the way it does.}
+\end{quotebox}
+
+\end{document}

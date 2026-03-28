@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Multi-Cluster Federation</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mcf">
+  <header>
+    <h1>Multi-Cluster Federation</h1>
+    <div class="subtitle">Service Mesh &middot; Istio/Linkerd/Cilium &middot; Multi-Cluster Networking &middot; Federation Patterns</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-federation-control-planes">Federation</a>
+      <a href="page.html?doc=02-service-mesh-cross-cluster">Service Mesh</a>
+      <a href="page.html?doc=03-network-fabric-cni">Network Fabric</a>
+      <a href="page.html?doc=04-day2-operations-observability">Day-2 Ops</a>
+      <a href="page.html?doc=05-foxcompute-integration">FoxCompute</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The spaces between the chips are where the magic happens. Agnus doesn't need to know what
+      Denise is rendering. Paula doesn't need to know what Agnus is managing. The bus speaks.
+      The chips listen. Complexity emerges from faithfully simple interfaces faithfully honored.
+      The federated cluster topology this mission specifies is the Amiga Principle at infrastructure
+      scale &mdash; specialized nodes with dedicated roles, producing a system whose capability exceeds
+      what any single cluster could achieve.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~103K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/multicluster-federation-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schemas, YAML scaffolding</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1</td><td>Parallel Survey</td><td>Track A (M1+M3) &middot; Track B (M2+M4)</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>M5 integration, Federation ADR, Mesh ADR</td><td>Sequential</td><td>2 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>YAML templates, Day-2 runbook, verification</td><td>Sequential</td><td>1.5 hours</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Control plane orchestration</td><td>Haiku</td><td>Token budget, wave scheduling, schema scaffolding</td></tr>
+        <tr><td>Denise</td><td>Survey &amp; visualization</td><td>Sonnet</td><td>M1&ndash;M4 survey compilation, YAML templates, Day-2 runbook</td></tr>
+        <tr><td>Paula</td><td>Synthesis &amp; architecture</td><td>Opus</td><td>M5 integration, ADRs, sovereignty constraints, cross-module analysis</td></tr>
+        <tr><td>M68000</td><td>Verification</td><td>Sonnet</td><td>YAML validation, success criteria checking, cross-reference audit</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>Data sovereignty enforcement</td><td>PropagationPolicy for OCAP-governed namespaces uses clusterAffinity hard constraint, not soft preference</td></tr>
+        <tr><td>SC-02</td><td>Blast-radius isolation</td><td>Matrix covers etcd failure, apiserver failure, network partition, cluster compromise with containment boundaries</td></tr>
+        <tr><td>SC-03</td><td>mTLS certificate rotation</td><td>ClusterMesh Helm values include automated cert rotation; no manual cert steps in Phase-1 runbook</td></tr>
+        <tr><td>SC-04</td><td>Source quality</td><td>All citations from CNCF projects, peer-reviewed research, or professional engineering publications. Zero entertainment media.</td></tr>
+        <tr><td>SC-05</td><td>Cross-cluster RBAC isolation</td><td>OIDC federation does not allow privilege escalation across cluster boundaries. Separate service accounts per cluster.</td></tr>
+        <tr><td>SC-06</td><td>No operational vulnerability disclosure</td><td>No specific CVE exploitation details or attack playbooks for multi-cluster attack surfaces</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Federation ADR comparing Karmada vs. Liqo for FoxCompute Phase 1, with explicit recommendation and rationale</td><td>PASS</td></tr>
+        <tr><td>2</td><td>Service mesh selection matrix covering Istio, Linkerd, Cilium with performance benchmarks cited</td><td>PASS</td></tr>
+        <tr><td>3</td><td>Cilium ClusterMesh setup reference: shared CA, cluster IDs, global service annotation pattern</td><td>PASS</td></tr>
+        <tr><td>4</td><td>Amiga-principle node roles mapped to specific cluster boundaries</td><td>PASS</td></tr>
+        <tr><td>5</td><td>PropagationPolicy template set for workload classes: GPU-affinity, storage-locality, cluster-local</td><td>PASS</td></tr>
+        <tr><td>6</td><td>Blast-radius isolation matrix: failure modes contained by cluster boundaries vs. requiring additional controls</td><td>PASS</td></tr>
+        <tr><td>7</td><td>Data sovereignty control map: workload classes requiring cluster-local enforcement and federation-layer controls</td><td>PASS</td></tr>
+        <tr><td>8</td><td>Day-2 observability stack spec: metrics aggregation, Hubble relay, distributed tracing, alerting</td><td>PASS</td></tr>
+        <tr><td>9</td><td>Carbon-aware scheduling pattern documented for solar-intermittent power profiles</td><td>PASS</td></tr>
+        <tr><td>10</td><td>All findings executable: mission output includes working YAML templates, not just narrative</td><td>PASS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Mesh Report: Verification Matrix</h2>
+
+    <table>
+      <thead><tr><th>SC</th><th>Criterion</th><th>Verified By</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>Federation ADR delivered with recommendation</td><td>M1, M5</td><td>PASS</td></tr>
+        <tr><td>SC-02</td><td>Mesh selection matrix with benchmarks</td><td>M2</td><td>PASS</td></tr>
+        <tr><td>SC-03</td><td>ClusterMesh setup reference complete</td><td>M3</td><td>PASS</td></tr>
+        <tr><td>SC-04</td><td>Node-cluster mapping documented</td><td>M5</td><td>PASS</td></tr>
+        <tr><td>SC-05</td><td>PropagationPolicy templates valid</td><td>M5</td><td>PASS</td></tr>
+        <tr><td>SC-06</td><td>Blast-radius matrix complete</td><td>M4, M5</td><td>PASS</td></tr>
+        <tr><td>SC-07</td><td>Sovereignty control map complete</td><td>M4, M5</td><td>PASS</td></tr>
+        <tr><td>SC-08</td><td>Observability stack spec delivered</td><td>M4</td><td>PASS</td></tr>
+        <tr><td>SC-09</td><td>Carbon-aware scheduling documented</td><td>M5</td><td>PASS</td></tr>
+        <tr><td>SC-10</td><td>YAML templates tested and valid</td><td>M3, M5</td><td>PASS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Mission Crew Manifest</h2>
+
+    <table>
+      <thead><tr><th>Role</th><th>Agent</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>FLIGHT</td><td>Orchestrator</td><td>Overall mission direction; go/no-go gates between waves; synthesis review</td></tr>
+        <tr><td>PLAN</td><td>Planner</td><td>Wave decomposition; parallel track timing; dependency enforcement</td></tr>
+        <tr><td>SCOUT</td><td>Research Agent</td><td>Source gathering; validating CNCF project status; confirming benchmark data</td></tr>
+        <tr><td>EXEC-1</td><td>Document Agent A</td><td>Track A: M1 federation survey, M3 network fabric</td></tr>
+        <tr><td>EXEC-2</td><td>Document Agent B</td><td>Track B: M2 mesh survey, M4 Day-2 operations</td></tr>
+        <tr><td>CRAFT-ARCH</td><td>Architecture Specialist</td><td>Federation architecture, K8s control plane topology</td></tr>
+        <tr><td>CRAFT-PERF</td><td>Performance Specialist</td><td>Service mesh benchmarks, eBPF performance data</td></tr>
+        <tr><td>VERIFY</td><td>Verification Agent</td><td>YAML schema validation, success criteria, cross-reference audit</td></tr>
+        <tr><td>INTEG</td><td>Integration Agent</td><td>Cross-module synthesis, FoxCompute node-cluster mapping</td></tr>
+        <tr><td>CAPCOM</td><td>HITL Interface</td><td>Human approval at Wave 1 review, Wave 2 ADR approval</td></tr>
+        <tr><td>BUDGET</td><td>Resource Manager</td><td>Token budget tracking; cache window enforcement</td></tr>
+        <tr><td>LOG</td><td>Chronicle Agent</td><td>Commit messages, milestone summaries, audit trail</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>Kubernetes was designed to be remarkable at one thing: orchestrating containers inside a single
+    administrative domain. But the FoxCompute architecture is not a single administrative domain. It
+    is a federation of islands &mdash; BC coast nodes, valley compute clusters, edge inference boxes,
+    a future spine stretching south &mdash; each with different ownership, different connectivity, different
+    regulatory context, different thermal and power profiles. The right model is what the internet
+    itself figured out decades ago: peers who speak a common protocol, maintain their own sovereignty,
+    and cooperate on terms they negotiate. The federation layer is the chip bus. The service mesh is
+    the DMA channel. The result, like the Amiga, is something that punches far above its weight.</p>
+  </main>
+
+  <footer>
+    <p>Multi-Cluster Federation &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
