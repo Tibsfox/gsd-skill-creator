@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; OctaMED &amp; Mod Trackers</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-oct">
+  <header>
+    <h1>OctaMED &amp; Mod Trackers</h1>
+    <div class="subtitle">Paula Architecture &middot; MOD Format &middot; OctaMED &middot; Tracker Family &middot; Demoscene &middot; Modern Trackers</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-paula-architecture">Paula</a>
+      <a href="page.html?doc=02-mod-format">MOD Format</a>
+      <a href="page.html?doc=03-octamed-deep-dive">OctaMED</a>
+      <a href="page.html?doc=04-tracker-family-tree">Family Tree</a>
+      <a href="page.html?doc=05-demoscene-culture">Demoscene</a>
+      <a href="page.html?doc=06-modern-trackers">Modern</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      This is the Amiga Principle in its purest form: the hardware is fixed; the software is
+      leverage. Four channels become eight not by adding hardware but by being smarter about
+      what the hardware does. The module file is self-contained because portability matters.
+      The effect commands are hex codes because the machine is the notation system. The pattern
+      grid scrolls vertically because time is explicit, not implied.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~140K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/octamed_mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/octamed_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Schema, source index, format specification templates</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>Hardware + Format</td><td>Track A: M1 (Paula) + M2 (MOD Format)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1B</td><td>Genealogy + Culture</td><td>Track B: M4 (Family Tree) + M5 (Demoscene)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1C</td><td>OctaMED Focal</td><td>M3 (OctaMED Deep Dive) &mdash; requires M1+M2</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>M6 (Modern Trackers) + cross-module integration</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Assembly, bibliography, source validation, PDF</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Synthesis + judgment</td><td>Opus</td><td>OctaMED deep dive (M3), cross-module synthesis, format genealogy analysis</td></tr>
+        <tr><td>Denise</td><td>Document production</td><td>Sonnet</td><td>M1, M2, M4, M5, M6 module surveys, register tables, format comparisons</td></tr>
+        <tr><td>Paula</td><td>Scaffolding + schema</td><td>Haiku</td><td>Shared schemas, format specification templates, source index</td></tr>
+        <tr><td>M68000</td><td>Logic / glue / routing</td><td>30% Opus / 60% Sonnet / 10% Haiku</td><td>Safety warden, register-level accuracy verification</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-HW</td><td>Hardware accuracy</td><td>Paula register addresses, DMA timing, and channel specifications match Amiga Hardware Reference Manual.</td></tr>
+        <tr><td>SC-FMT</td><td>Format accuracy</td><td>MOD binary layout matches documented format specification. Effect commands verified against OpenMPT Wiki.</td></tr>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All claims traceable to Amiga HRM, OpenMPT Wiki, Wikipedia with primary citations, or verified interviews.</td></tr>
+        <tr><td>SC-GEN</td><td>Genealogy accuracy</td><td>Tracker family tree dates and author attributions verified against multiple independent sources.</td></tr>
+        <tr><td>SC-CUL</td><td>Cultural claims</td><td>Artist attributions documented with verifiable sources. No unverifiable claims about tracker usage.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The tracker paradigm is the original proof of the Amiga Principle: four hardware channels,
+    one Finnish programmer, a generation of electronic musicians. OctaMED did not succeed by
+    having more resources &mdash; it succeeded by being architecturally smarter about the
+    resources it had. Software mixing doubled polyphony at the cost of CPU time that musicians
+    were glad to spend because OctaMED was for composition, not games.</p>
+
+    <p>The module file is the original self-contained bundle: samples and score in a single
+    distributable object. Small, portable, trivially shareable over BBS networks. The DACP
+    bundle inherits this design principle &mdash; everything the receiver needs, nothing they
+    don't, in a format that travels without dependencies.</p>
+
+    <p><em>&ldquo;The hardware is fixed; the software is leverage.&rdquo;</em></p>
+  </main>
+
+  <footer>
+    <p>OctaMED &amp; Mod Trackers &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

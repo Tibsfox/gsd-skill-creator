@@ -97,6 +97,7 @@
     { id: 'NND', name: 'New New Deal', path: 'NND/index.html' },
     { id: 'NWC', name: 'Norwescon', path: 'NWC/index.html' },
     { id: 'NWZ', name: 'Non-Western Zodiac', path: 'NWZ/index.html' },
+    { id: 'OCT', name: 'OctaMED & Trackers', path: 'OCT/index.html' },
     { id: 'OCN', name: 'Open Compute', path: 'OCN/index.html' },
     { id: 'OPS', name: 'OpenStack Cloud', path: 'OPS/index.html' },
     { id: 'OSC', name: 'Orson Scott Card', path: 'OSC/index.html' },
