@@ -1,0 +1,1009 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color Scheme — History/Cultural domain: Burgundy, Gold, Parchment
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF9C4}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{1990s Animation Renaissance \& the Amiga}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={1990s Animation Renaissance -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─────────────────────────────────────────────────────────────
+% TITLE PAGE
+% ─────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Golden Screen\\[0.3em]A Decade of Animation Renaissance}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Disney, Warner Bros., Nickelodeon, Cartoon Network\\\& Eric Schwartz on the Amiga}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Creative Technology \& Cultural History}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6 Modules) \quad|\quad Est: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ═══════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Golden Screen --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Research / Ready for Orchestration}
+\metafield{Context:}{GSD Ecosystem / Amiga Principle / Spaces Between}
+\metafield{Depends On:}{gsd-amiga-vision-architectural-leverage.md, the-space-between.pdf}
+
+\subsection{Vision}
+
+There is a decade that shaped every cartoon-watching child of the 1990s more deeply than they know. Between roughly 1989 and 1999, the art of animation underwent a genuine renaissance --- a word usually applied too loosely, but here earned. Disney climbed back from near-extinction with \textit{The Little Mermaid}. Warner Bros.\ relit the Looney Tunes flame through a Spielberg partnership that produced \textit{Tiny Toon Adventures} and \textit{Animaniacs}. Nickelodeon invented the ``Nicktoon'' and launched a generation of creator-driven cartoons --- \textit{Rugrats}, \textit{Ren \& Stimpy}, \textit{Hey Arnold!} --- that spoke to children as intelligent beings. Fox Kids aired superhero epics. Cartoon Network was born and began incubating its own voice.
+
+And on a computer the mainstream had largely written off, a freelance illustrator from Dayton, Ohio named Eric W.\ Schwartz was doing something no studio could match: making fluid, funny, personality-driven cartoons entirely alone, using an Amiga 500, a copy of Deluxe Paint, and Gold Disk's Moviesetter. His Amy the Squirrel became the unofficial mascot of the Amiga community in 1992. His style --- unmistakably informed by Chuck Jones, Tex Avery, and the Warner Bros.\ golden age --- was transmitted freely across floppy disks, BBS systems, and early internet downloads to audiences around the world. He was the demo scene's answer to a Hollywood animation studio.
+
+The Amiga Principle is embedded in this entire story. The Amiga's custom chipset --- Agnus, Denise, Paula --- achieved smooth full-color animation and synchronised stereo sound at a time when competing platforms struggled with still images. Deluxe Paint gave individual artists the power of a studio ink-and-paint department. Eric Schwartz proved that the principle was not metaphorical: one person, the right tools, and an understanding of the machine's deep architecture could produce work that competed on quality with the giants. This is the same thesis at the heart of the GSD ecosystem. The spaces between the studios --- the bedroom, the floppy disk, the BBS post --- were where some of the most vital creative energy of the decade lived.
+
+This research mission maps the full constellation: the institutional renaissance at Disney and Warner Bros., the creator-driven explosion at Nickelodeon, the emerging Cartoon Network, and the overlooked parallel renaissance happening in the Amiga demoscene around Eric Schwartz. Understanding how these forces interacted, reinforced each other, and occasionally competed is prerequisite to understanding where animation as a craft came from and where the GSD educational pack should anchor its historical narrative.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Fragmented historiography.} The Disney Renaissance is well-documented, but the parallel Warner Bros.\ TV revival (Tiny Toons, Animaniacs), the Nicktoons explosion, and the Amiga indie animation scene are rarely studied together as a unified cultural moment. The connections between these streams --- shared creative DNA, competition for audiences, mutual influence --- have not been coherently mapped.
+
+  \item \textbf{Eric Schwartz's work is chronically under-archived.} His animations were distributed as Amiga ANIM and Moviesetter files, formats that require emulation to view today. Many casual mentions of his work treat him as a curiosity rather than as a technically sophisticated practitioner whose workflow anticipated modern independent animation pipelines by two decades.
+
+  \item \textbf{The Amiga's role in democratizing animation is undervalued.} Tools like Deluxe Paint, Moviesetter, and the Amiga Video Toaster enabled individuals and small studios to produce animation quality previously requiring institutional budgets. The Amiga's contribution to the 1990s animation renaissance --- particularly in television broadcast graphics and indie shorts --- is rarely acknowledged in mainstream animation history.
+
+  \item \textbf{The GSD ecosystem lacks a canonical historical anchor.} The Amiga Principle is foundational to GSD's architectural philosophy, but the ecosystem does not yet have a reference document connecting that principle to its historical proof cases. Eric Schwartz is the single most direct proof that specialized hardware plus elegant tools equals outsized creative output.
+
+  \item \textbf{The pedagogical gap.} Existing educational resources on 1990s animation are either surface-level nostalgia content or academic film studies works inaccessible to practitioners. The GSD college layer needs a research-grade reference that connects the cultural history to actionable animation craft principles applicable today.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Animation Renaissance as Proof of the Amiga Principle}: the 1990s demonstrated at every scale --- from Disney's \$100M features to Eric Schwartz's single-machine bedroom studio --- that architectural leverage over brute force produces the most memorable creative work. Quality is a function of the right tool in the right hands, not raw resource expenditure.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+THE 1990s ANIMATION RENAISSANCE — DOMAIN MAP
+
+INSTITUTIONAL TRACK                    INDIE / PLATFORM TRACK
+─────────────────────                  ──────────────────────
+DISNEY RENAISSANCE (1989–1999)         AMIGA DEMOSCENE
+  Little Mermaid → Tarzan                 Deluxe Paint animations
+  CAPS digital ink-and-paint              Fred Fish disk distribution
+  Howard Ashman / Alan Menken            Demo groups / BBS sharing
+           │                                      │
+WARNER BROS. TV REVIVAL                ERIC W. SCHWARTZ (1989–1997)
+  Tiny Toon Adventures (1990)             Amy the Squirrel (1989+)
+  Animaniacs (1993)                       Moviesetter / ANIM format
+  Pinky and the Brain (1995)             Sabrina Online (1996+)
+  Spielberg / Tom Ruegger               CU Amiga cover July '92
+           │                                      │
+NICKELODEON NICKTOONS (1991+)          THE SPACES BETWEEN
+  Doug / Rugrats / Ren & Stimpy           BBS networks, floppy mail
+  Creator-driven mandate                  IRC, early internet
+  Rocko / Hey Arnold! / CatDog            Fan communities
+           │
+CARTOON NETWORK / FOX KIDS
+  Dexter's Lab / Powerpuff Girls
+  X-Men, Batman (Fox Kids)
+  Saturday morning block wars
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+
+  MOD-A: Disney Renaissance     MOD-B: Warner Bros. Revival
+  (Feature Film, 1989–1999)     (Tiny Toons / Animaniacs)
+         │                              │
+         ├──── SHARED: Spielberg Effect ────┤
+         │                              │
+  MOD-C: Nicktoons Revolution   MOD-D: Fox/CN/Satellite Era
+  (Creator-Driven TV, 1991+)    (Competing Platforms)
+         │                              │
+         └──────────── SYNTHESIS ───────────
+                          │
+  MOD-E: Amiga Animation   MOD-F: Eric Schwartz
+  Platform & Tools          (Bedroom Animator)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A --- Disney Renaissance: Feature Film Revival (1989--1999)}
+Maps the full arc from \textit{The Little Mermaid} through \textit{Tarzan}: the corporate near-death experience, the Eisner/Katzenberg reorganization, Howard Ashman's Broadway-infused songwriting, the CAPS digital ink-and-paint system, and the exact arc from triumph to decline. Includes the Don Bluth competitive context and the introduction of CGI (the ballroom scene in \textit{Beauty and the Beast}).
+
+\subsubsection{Module B --- Warner Bros. Revival: Tiny Toons and Animaniacs}
+The Spielberg/Amblin/Warner Bros.\ Animation partnership: origin of \textit{Tiny Toon Adventures} (1990) as the first new Warner animated series in a decade; Tom Ruegger's role; the production model (25,000 cels/episode vs.\ the standard 10,000); the evolution into \textit{Animaniacs} (1993) with its broader cast, higher budget (\$26M/season), and adult-accessible humor. Includes the full spin-off family: \textit{Pinky and the Brain}, \textit{Freakazoid!}, \textit{Histeria!}.
+
+\subsubsection{Module C --- The Nicktoons Revolution: Creator-Driven Animation}
+Nickelodeon's founding philosophy of creator-driven cartoons; the triple launch of \textit{Doug}, \textit{Rugrats}, and \textit{Ren \& Stimpy} in August 1991; John Kricfalusi's influence and firing; the subsequent explosion of Nicktoons through the decade (\textit{Rocko's Modern Life}, \textit{Aaahh!!! Real Monsters}, \textit{Hey Arnold!}, \textit{CatDog}); SpongeBob as the transition to the next era.
+
+\subsubsection{Module D --- Fox Kids, Cartoon Network, and the Platform Wars}
+The Fox Kids block and its superhero programming (\textit{X-Men: The Animated Series}, \textit{Batman: The Animated Series}); Cartoon Network's founding in 1992 and the first Cartoon Cartoons; the Disney Afternoon block; the Saturday morning network wars; how platform competition drove quality up across all major players.
+
+\subsubsection{Module E --- The Amiga as Animation Platform}
+The hardware context: Amiga OCS/ECS/AGA chipsets; Agnus, Denise, Paula co-processors; HAM mode and color palette capabilities. The software ecosystem: Deluxe Paint (1985–1995), Moviesetter, Aegis Animator, ANIM file format. The Video Toaster and its role in broadcast graphics. The demoscene as a creative forcing function. Distribution via Fred Fish disks, BBS networks, and early internet.
+
+\subsubsection{Module F --- Eric W. Schwartz: The Bedroom Animator}
+Full biographical and creative survey: Dayton, Ohio origins (b.\ 1971); Columbus College of Art and Design; acquisition of Amiga 500 in late 1988; first Amy the Squirrel animation (1989); CU Amiga cover appearance (July 1992); the complete Moviesetter animation filmography (80+ works); Aerotoons series; the transition to \textit{Sabrina Online} webcomic (1996); technical analysis of workflow (Deluxe Paint $\rightarrow$ Moviesetter $\rightarrow$ ANIM distribution); the Amiga advocacy through the late 1990s and beyond.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+gsd_chipset:
+  mission: animation_renaissance_1990s
+  activation_profile: fleet
+  modules: 6
+  parallel_tracks: 3
+
+  agnus:          # Memory and scheduling
+    role: wave_orchestrator
+    manages: [token_budget, session_planning, module_sequencing]
+
+  denise:         # Graphics and output
+    role: document_compositor
+    manages: [pdf_assembly, citation_formatting, figure_layout]
+
+  paula:          # Audio/narrative voice
+    role: narrative_synthesizer
+    manages: [vision_prose, through_line, cultural_context]
+
+  cpu_68000:      # Core logic
+    role: research_analyst
+    manages: [fact_verification, cross_module_integration, source_quality]
+
+  model_allocation:
+    opus:    0.30   # Synthesis, cultural sensitivity, through-line
+    sonnet:  0.60   # Module surveys, document assembly, verification
+    haiku:   0.10   # Schemas, scaffolding, index generation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item Disney feature animation 1989--1999 (The Little Mermaid through Tarzan)
+  \item Warner Bros.\ Animation TV revival: Tiny Toon Adventures, Animaniacs and spin-offs
+  \item Nickelodeon Nicktoons 1991--1999
+  \item Fox Kids and Cartoon Network programming blocks (formative period)
+  \item Amiga animation hardware and software ecosystem (OCS through AGA)
+  \item Eric W.\ Schwartz complete creative survey: animations, Sabrina Online, Amiga advocacy
+  \item Cultural and economic context connecting all threads
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Pre-1989 Disney animation history (covered by existing GSD vision docs)
+  \item Anime and Japanese animation (separate mission scope)
+  \item Post-1999 Disney Revival (Tangled, Frozen, etc.)
+  \item Adult animation (\textit{The Simpsons}, \textit{Beavis and Butt-Head}, \textit{South Park})
+  \item Non-English language animation markets
+  \item Video game animation (overlaps with Amiga game history --- separate scope)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item All Disney Renaissance films (1989--1999) documented with production context, box office performance, technical innovations, and key creative personnel.
+  \item Complete production history of \textit{Tiny Toon Adventures} and \textit{Animaniacs} including the Spielberg/Amblin partnership structure, creative team, production budgets, and spin-off family.
+  \item Nickelodeon Nicktoons 1991--1999 documented with creator biographies, network context, and cultural reception.
+  \item Fox Kids and Cartoon Network formative programming blocks mapped with premiere dates and production contexts.
+  \item Amiga animation tools documented with technical specifications: Deluxe Paint version history, Moviesetter capabilities, ANIM format, Video Toaster specs.
+  \item Eric W.\ Schwartz filmography complete: all 80+ animations catalogued with dates, formats, runtimes, and distribution method.
+  \item Cross-module influence map produced: demonstrable connections between Amiga aesthetic and mainstream studio styles documented.
+  \item GSD Amiga Principle connection articulated: Eric Schwartz as proof case integrated into the through-line.
+  \item Source bibliography contains minimum 15 professional/archival sources; no entertainment blogs as primary citations.
+  \item All quantitative claims (budgets, ratings, box office) attributed to specific, verifiable sources.
+  \item Cultural sensitivity considerations documented for representations in period animation (racial caricature, gender stereotypes, indigenous depictions in Pocahontas).
+  \item Document ready for handoff to gsd-skill-creator with zero additional context required.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection} \\
+\midrule
+gsd-amiga-vision-architectural-leverage.md & Parent philosophy & Eric Schwartz is the primary proof case for the Amiga Principle \\
+gsd-learn-kung-fu-pack-vision.md & Sibling educational & Shares pedagogical approach of learning from masters \\
+gsd-bbs-educational-pack-vision.md & Sibling platform history & BBS as the distribution network for Schwartz animations \\
+the-space-between.pdf & Root philosophy & ``Spaces between'' as the thesis for indie animation thriving \\
+gsd-silicon-layer-spec.md & Technical ancestry & Amiga chipset as architectural precursor to GSD silicon design \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The 1990s animation renaissance is not primarily a story about Disney's recovery or Nickelodeon's market share. It is a story about what happens when the right tools reach the right people. Howard Ashman brought Broadway to the animation studio and co-wrote the playbook for \textit{The Little Mermaid}. John Kricfalusi brought underground comics energy to Saturday morning television and cracked open a door that could never be closed again. Steven Spielberg brought his love of the Warner Bros.\ golden age to a new generation through Tom Ruegger. And Eric Schwartz, in his apartment in Dayton, brought the Amiga's custom silicon to bear on a one-man animation studio that shipped cartoons on floppy disks to fans who had never heard of him but recognized immediately that someone with taste and craft was speaking directly to them.
+
+The GSD ecosystem exists precisely in that tradition. The Amiga Principle says: you do not need institutional scale to produce institutional quality. You need architecture. You need elegance. You need the right co-processors doing the right work. Eric Schwartz had Agnus, Denise, and Paula. GSD has Opus, Sonnet, and Haiku. The machines have changed. The principle has not.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ═══════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Golden Screen --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference is organized by research module. Each module contains findings, dates, personnel, technical data, and cited sources. Agents executing Module surveys should treat this section as their ground truth. The bibliography at the end provides full source details.
+
+\textbf{Key source organizations and archives:}
+\begin{itemize}[leftmargin=2em]
+  \item Wikipedia (Disney Renaissance, Tiny Toon Adventures, Animaniacs, Ren \& Stimpy articles) --- used for dates, cast, episode counts, and production context
+  \item WikiFur --- primary source for Eric Schwartz biography and character documentation
+  \item Werner Randelshofer's Amiga Animations Archive (randelshofer.ch) --- complete Schwartz filmography
+  \item Internet Archive (archive.org) --- Eric Schwartz Collection CD32 release; Amiga World 1990 Special Issue
+  \item Generation Amiga (generationamiga.com) --- technical history of Amiga software
+  \item Central Rappahannock Regional Library blog --- Disney Renaissance chronology
+  \item Den of Geek --- critical analysis of Disney Renaissance arc
+\end{itemize}
+
+\subsection{Module A: Disney Renaissance (1989--1999)}
+
+\subsubsection{Corporate Context and Near-Death Experience}
+
+After the deaths of Walt Disney (1966) and Roy O.\ Disney (1971), the studio entered a prolonged slump. The departure of animator Don Bluth in 1979 --- taking 16 others with him to found Don Bluth Productions --- cost the studio approximately 17\% of its animation staff and delayed production on \textit{The Fox and the Hound}. Don Bluth became Disney's primary competitor with \textit{The Secret of NIMH} (1982), \textit{An American Tail} (1986), and \textit{The Land Before Time} (1988).
+
+The near-critical blow came in 1984 when businessman Saul Steinberg mounted a hostile takeover attempt. Disney survived, but the crisis triggered a major restructuring. Michael Eisner (formerly of Paramount) became CEO; Jeffrey Katzenberg became studio chairman; Frank Wells (formerly of Warner Bros.) became President. In 1985, Peter Schneider was hired to lead the animation department. That same year, \textit{The Black Cauldron} --- a decade in development --- flopped critically and commercially, putting the entire animation division at risk.
+
+\subsubsection{The Renaissance Films: Complete Filmography}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Film} & \tableheader{Year} & \tableheader{Box Office (WW)} & \tableheader{Key Innovation / Note} \\
+\midrule
+The Little Mermaid & 1989 & \$211M & Last film on animation cels; Howard Ashman/Menken debut \\
+The Rescuers Down Under & 1990 & \$47M & First fully digital CAPS production; box office disappointment \\
+Beauty and the Beast & 1991 & \$425M & First animated film nominated for Best Picture (Academy); CAPS ballroom sequence \\
+Aladdin & 1992 & \$217M & Robin Williams as Genie; two Academy Awards \\
+The Lion King & 1994 & \$763M & First Disney animated film with original story; Elton John/Hans Zimmer \\
+Pocahontas & 1995 & \$346M & First \$100M Disney animated budget; mixed critical reception \\
+The Hunchback of Notre Dame & 1996 & \$325M & Stephen Schwartz songs; darkest Disney Renaissance tone \\
+Hercules & 1997 & \$252M & Gospel choir aesthetic; Musker/Clements directing \\
+Mulan & 1998 & \$304M & First Disney female lead not driven by romance \\
+Tarzan & 1999 & \$448M & Phil Collins score; partial CGI environments; end of Renaissance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{CAPS and the Digital Transition}
+
+Disney's Computer Animation Production System (CAPS) was developed in partnership with Pixar and first used on \textit{The Rescuers Down Under} (1990). It replaced traditional cel photography with a digital ink-and-paint and compositing workflow, allowing seamless integration of CGI elements with hand-drawn characters. The ballroom dance sequence in \textit{Beauty and the Beast} was the first major demonstration of CGI integrated into a traditionally animated Disney feature. The system accelerated production significantly and enabled color palette effects previously impossible with physical cels.
+
+\subsubsection{Howard Ashman: The Lost Architect}
+
+Lyricist Howard Ashman's partnership with composer Alan Menken transformed Disney animation by importing a Broadway musical philosophy: songs as narrative drivers, not interruptions. Ashman co-wrote \textit{The Little Mermaid} and \textit{Beauty and the Beast}, and began work on \textit{Aladdin} before his death from AIDS-related complications in March 1991 at age 40 --- just months before \textit{Beauty and the Beast} reached theaters. His influence on the Disney Renaissance's first three films was irreplaceable. The subsequent films (post-\textit{Lion King}) showed increasing difficulty replicating the specific Ashman formula.
+
+\subsection{Module B: Warner Bros. Revival --- Tiny Toons and Animaniacs}
+
+\subsubsection{The Spielberg Partnership}
+
+Warner Bros. Animation had been largely dormant through the 1980s. Following the commercial and cultural success of \textit{Who Framed Roger Rabbit} (1988) --- which renewed mainstream interest in theatrical animation --- Warner Bros. president Terry Semel approached Steven Spielberg's Amblin Entertainment in 1987 to develop a new animated property. The concept: new characters who were spiritual successors to Bugs Bunny, Daffy Duck, and company, attending the same Acme Looniversity where the original Looney Tunes were teachers.
+
+Tom Ruegger was assigned to develop the series with Spielberg personally approving every character, design, and episode concept. Spielberg's children's reactions were used as a litmus test for character approval --- including the near-rejection of Buttons and Mindy (saved by a positive reaction from Spielberg's daughter Jessica).
+
+\subsubsection{Tiny Toon Adventures (1990--1992): Production Data}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Production started & April 1989 \\
+Premiere & September 14, 1990 (CBS prime-time special) \\
+Run & September 1990 -- December 1992 \\
+Total budget (Season 1) & Approx.\ \$25 million \\
+Budget per episode & \$400,000 \\
+Cels per episode & 25,000 (vs.\ standard 10,000) \\
+Production pipeline & 34 weeks: 4--6 prep, 14 pre-production, 4--6 post \\
+Overseas studios & Tokyo Movie Shinsha, AKOM (Korea), Wang Film (Taiwan), StarToons (Chicago) \\
+Seasons & 3 (98 episodes) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Animaniacs (1993--1998): Production Data}
+
+Following the success of Tiny Toons, Spielberg tasked Ruegger with developing a follow-on series. Walking the Warner Bros.\ lot and observing the iconic water tower, Ruegger drew inspiration from the Marx Brothers to conceive Yakko, Wakko, and Dot Warner --- three ``forgotten'' cartoon stars locked in the water tower since the 1930s. The personalities of the three siblings were modeled directly on Ruegger's three sons.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value} \\
+\midrule
+Premiere & September 13, 1993 (Fox Kids) \\
+Network moves & Fox Kids (1993--1995) $\rightarrow$ Kids' WB (1995--1998) \\
+Total episodes & 99 episodes across 5 seasons \\
+Budget (Season 1) & Approx.\ \$26 million (\$1M more than Tiny Toons S1) \\
+Drawings per episode & 10,000 above standard animated TV series \\
+Main composer & Richard Stone \\
+Primary overseas studios & Tokyo Movie Shinsha, StarToons, Wang Film, AKOM, Freelance Animators NZ \\
+Spin-offs & Pinky and the Brain (1995), Pinky, Elmyra \& the Brain (1998), Freakazoid! (1995), Histeria! (1998) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The \textit{Goodfeathers} trio (Bobby, Pesto, Squit) were modeled directly on the \textit{Goodfellas} (1990) characters played by Joe Pesci, Robert De Niro, and Ray Liotta. Slappy Squirrel was based on a suggestion by writer/producer Sherri Stoner that she acted like a teenager in adulthood. The show's humor targeted multiple demographic layers simultaneously: slapstick for children, Gilbert and Sullivan references and political satire for adults.
+
+\subsection{Module C: The Nicktoons Revolution}
+
+\subsubsection{Nickelodeon's Creator-Driven Mandate}
+
+Nickelodeon began as a children's channel in 1979 but did not produce original animated programming until the early 1990s. The network's explicit mandate was creator-driven content --- pitches from individual artists, not committee-developed concepts. On August 11, 1991, three series launched simultaneously as the first branded ``Nicktoons'':
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Series} & \tableheader{Creator} & \tableheader{Key Characteristic} \\
+\midrule
+Doug & Jim Jinkins & Gentle suburban realism; inner-life narration \\
+Rugrats & Klasky, Csup\'o, Germain & World from babies' perspective; 172 episodes total \\
+Ren \& Stimpy & John Kricfalusi & Golden-age style energy; adult subtext; controversial \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Ren \& Stimpy} was the most significant stylistically: Kricfalusi explicitly credited Bob Clampett, Chuck Jones, Tex Avery, and Jay Ward as his primary influences, and his insistence on ``free-form'' timing and expressive drawing directly challenged the cost-cutting norms of 1980s TV animation. The show briefly became the most-watched cable show in the US in 1993, rivaling \textit{The Simpsons} in cultural impact. Kricfalusi was fired by Nickelodeon in 1992 over missed deadlines and content disputes; the show continued without him through 1995.
+
+\subsubsection{The Nicktoons Expansion (1993--1999)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Series} & \tableheader{Debut} & \tableheader{Creator} & \tableheader{Note} \\
+\midrule
+Rocko's Modern Life & 1993 & Joe Murray & Satirical adult undertones; wallaby protagonist \\
+Aaahh!!! Real Monsters & 1994 & Klasky-Csup\'o & Monster school premise \\
+Hey Arnold! & 1996 & Craig Bartlett & Urban realism; diverse ensemble cast \\
+CatDog & 1998 & Peter Hannan & Conjoined cat-dog siblings \\
+SpongeBob SquarePants & 1999 & Stephen Hillenburg & Marine biologist creator; ultimately surpassed all predecessors \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Rugrats} became the longest-running Nickelodeon series until surpassed by SpongeBob in 2012, with 172 episodes across its original run. In 1995, Steven Spielberg publicly described \textit{Rugrats} as ``sort of a TV Peanuts of our time.'' According to Nickelodeon producers, the series made Nickelodeon the number-one cable channel through the 1990s.
+
+\subsection{Module D: Fox Kids, Cartoon Network, and Platform Competition}
+
+\textit{Batman: The Animated Series} (Fox Kids, 1992) set a new standard for superhero animation with its Art Deco aesthetic, sophisticated storytelling, and unprecedented production quality for television. \textit{X-Men: The Animated Series} (Fox Kids, 1992) demonstrated that serialized, continuity-heavy storytelling could succeed in the Saturday morning format. Together they defined the Fox Kids identity for a generation.
+
+Cartoon Network launched October 1, 1992, built initially on the Turner library of Looney Tunes and Hanna-Barbera content. The first original ``Cartoon Cartoons'' emerged mid-decade: \textit{Dexter's Laboratory} (Genndy Tartakovsky, 1996), \textit{Johnny Bravo} (1997), and \textit{The Powerpuff Girls} (1998) established Cartoon Network as a genuine animation studio and launched careers that would define the next decade.
+
+The Disney Afternoon syndication block (launched 1990) included \textit{DuckTales}, \textit{Chip 'n Dale: Rescue Rangers}, \textit{TaleSpin}, \textit{Darkwing Duck}, and \textit{Goof Troop} --- all capitalizing on the feature film revival's momentum and extending the Disney brand into daily television.
+
+\subsection{Module E: The Amiga as Animation Platform}
+
+\subsubsection{Hardware Architecture}
+
+The Commodore Amiga line (1985--1994) was architecturally differentiated from all contemporary personal computers by its custom co-processor chipset:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Chip} & \tableheader{Function} & \tableheader{Animation Relevance} \\
+\midrule
+Agnus & DMA controller & Managed smooth background data streaming for animation playback \\
+Denise & Video output & Generated up to 4096-color HAM mode; smooth sprite hardware \\
+Paula & Audio + I/O & 4-channel stereo sound synchronized with animation playback \\
+68000 CPU & General logic & Handled application logic; freed custom chips for AV work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Three chip set generations: OCS (Original, Amiga 1000/500), ECS (Enhanced, Amiga 500/600/2000/3000), AGA (Advanced Graphics Architecture, Amiga 1200/4000). The AGA chipset (1992) expanded the palette to 24-bit indexing and enabled higher resolutions, directly benefiting professional animation work.
+
+\subsubsection{Software Ecosystem}
+
+\textbf{Deluxe Paint (Electronic Arts, 1985--1995):} Created by Dan Silva as a showcase product for the Amiga's debut. Became the de facto graphics and animation editor for the platform within months of release. Key capabilities: frame-by-frame animation, onion-skinning, color cycling, palette manipulation, brush operations. Used by LucasArts (\textit{Monkey Island}), id Software (\textit{DOOM}, \textit{Quake}), and countless independent animators. Over 50\% of all Amiga owners held a copy at the product's peak.
+
+\textbf{Moviesetter (Gold Disk, 1988):} 32-color cartoon animation software with stereo sound. The primary tool used by Eric Schwartz. Enabled character animation with tweening, scene assembly, and audio synchronization at a price point accessible to individual artists.
+
+\textbf{Aegis Animator (1987):} The first dedicated Amiga animation tool, introducing delta compression, onion-skinning, and hardware-accelerated blitting. Direct ancestor of the DPaint Animation module and subsequent tools.
+
+\subsubsection{The Video Toaster and Broadcast Impact}
+
+NewTek's Video Toaster (1990) transformed the Amiga into a broadcast-capable video production system. It enabled real-time video switching, chroma keying, animated graphics, and special effects at a fraction of the cost of dedicated broadcast hardware. Local television stations, cable channels, and independent producers rapidly adopted it, reshaping broadcast visual identity throughout the early 1990s. The Video Toaster ran on the Amiga 2000 and later 4000, extending the platform's professional relevance well into the mid-1990s.
+
+\subsection{Module F: Eric W. Schwartz --- The Bedroom Animator}
+
+\subsubsection{Biography and Creative Development}
+
+Eric Williams Schwartz was born November 27, 1971 in Dayton, Ohio. His earliest artistic influences were classic animation --- Disney, Warner Bros.\ --- and newspaper comic strips including \textit{Garfield}. He acquired an Amiga 500 at the end of 1988, immediately recognizing its graphics and animation capabilities as uniquely suited to independent creative work. His first cartoon character, Amy the Squirrel, appeared in 1989.
+
+He attended the Columbus College of Art and Design, majoring in illustration. His Amiga animations were produced concurrently with his college education, distributed via floppy disk, BBS networks, and early internet channels. The name ``Amy'' was a direct reference to the Amiga --- deliberately cementing her status as an ambassador for the platform.
+
+\subsubsection{The Amy the Squirrel Animations}
+
+Amy the Squirrel became the unofficial mascot of the Amiga community by 1992, a recognition formalized when she appeared on the cover of \textit{CU Amiga} magazine in July 1992. \textit{CU Amiga} was among the UK's most widely read Amiga publications, giving Schwartz's work a circulation that far exceeded what any pre-internet self-distribution network could achieve alone.
+
+His animation style was heavily influenced by Warner Bros.\ golden-age timing and Chuck Jones's principle of character personality expressed through movement. His humor was rooted in situation comedy and physical gags rather than shock value, with a particular sensibility toward female characters --- more sensual in design than mainstream animation but never graphic, using situations for humor rather than titillation.
+
+\subsubsection{Complete Creative Output Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Series/Work} & \tableheader{Period} & \tableheader{Description} \\
+\midrule
+Amy the Squirrel animations & 1989--1997 & Core character series; 20+ short films; Moviesetter format \\
+Flip the Frog cartoons & 1990--1996 & Homage to Ub Iwerks; features Clarisse Cat; comedy shorts \\
+Aerotoons & 1991--1996 & Aviation-themed comedy; recurring cast \\
+Anti-Lemming demo & Early 1990s & Interactive demo; female lemming character \\
+Amiga Tribute / Only Amiga & 1992--1993 & Platform advocacy; technically impressive showpieces \\
+A Walk in the Park & 1993 & First full-length Amy animation; CDXL format \\
+Plight of the Artist & Mid-1990s & Sabrina's first appearance; data loss comedy \\
+Remote Possibilities & Mid-1990s & Sabrina second animation; relationship comedy \\
+At the Movies series & 1990s & Cultural commentary shorts \\
+Quality Time & 1990s & Among most-shared Amiga animations online \\
+Sabrina Online (webcomic) & 1996--present & Monthly comic strip; longest-running work; Amiga advocacy continued \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Technical Workflow}
+
+Schwartz's production pipeline on the Amiga:
+\begin{enumerate}[leftmargin=2em]
+  \item Character design and keyframe drawing in Deluxe Paint
+  \item Frame-by-frame animation with onion-skinning for motion continuity
+  \item Assembly in Moviesetter with scene transitions and audio sync
+  \item Export as Moviesetter format or ANIM5 for broader compatibility
+  \item Distribution: floppy disk mail, BBS uploads, later internet FTP
+\end{enumerate}
+
+His animations were distributed freely or at minimal cost, consistent with the Amiga public domain and freeware culture. Werner Randelshofer's website (randelshofer.ch) remains the most comprehensive online archive of Schwartz's work, hosting animations in browser-viewable format. A 2016 CD32 tribute release compiled over 80 works.
+
+\subsubsection{The Sabrina Online Webcomic (1996--present)}
+
+Sabrina the Skunkette --- described as sharing many of Schwartz's own interests, including a love of all things Amiga and collecting Transformer toys --- became the central character of a monthly webcomic that launched in 1996 and is considered one of the longest-running webcomics in internet history. The comic's universe includes Amy the Squirrel as a housemate, R.C.\ Raccoon (Sabrina's eventual husband, met on IRC), and a professional workplace at Double Z Studios. The webcomic was published in \textit{Amiga Format} magazine before the web made it more widely accessible.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Level} & \tableheader{Guidance} \\
+\midrule
+Racial caricature in period animation & HIGH & Many 1940s--1990s cartoons contain racial stereotypes. Document critically with historical context; never reproduce harmful imagery \\
+Pocahontas historical accuracy & HIGH & Disney's depiction criticized by historians and Native nations. Cite specific scholarly criticism; apply UNDRIP Article 31 framing \\
+Eric Schwartz adult-adjacent content & MEDIUM & Some animations contain suggestive humor. Document work accurately; note that Schwartz himself described this as situational humor, not graphic \\
+John Kricfalusi & HIGH & Creator of Ren \& Stimpy; confirmed abusive workplace conduct and harm to minors (BuzzFeed 2018). Document creative contribution and harm separately; do not elide either \\
+Gender representation in 1990s animation & MEDIUM & Progress was real but uneven; document with nuance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Reference Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wikipedia: ``Disney Renaissance'' (2026). Comprehensive production and box office data.
+  \item Wikipedia: ``Tiny Toon Adventures'' (2026). Production history, cast, technical specs.
+  \item Wikipedia: ``Animaniacs'' (2026). Full production history and character origin.
+  \item Wikipedia: ``The Ren \& Stimpy Show'' (2026). Production context and cultural impact.
+  \item Wikipedia: ``Rugrats'' (2026). Series history, ratings data, cultural reception.
+  \item Wikipedia: ``Deluxe Paint'' (2026). Technical history of the primary Amiga animation tool.
+  \item Wikipedia: ``Amiga software'' (2026). Software ecosystem overview including Moviesetter.
+  \item Wikipedia: ``Amiga demos'' (2026). Demoscene context.
+\end{itemize}
+
+\subsubsection{Specialist Sources}
+
+\begin{itemize}[leftmargin=2em]
+  \item WikiFur: ``Eric W.\ Schwartz'' (2026). Definitive biography and character catalog.
+  \item Randelshofer, Werner. Amiga Animations Archive (randelshofer.ch). Complete Schwartz filmography.
+  \item \textit{Jumpgate} interview with Eric W.\ Schwartz (2001). Primary source on workflow and influences.
+  \item Internet Archive: ``The Eric Schwartz Collection'' CD32 (2016). 80+ works catalog.
+  \item animationandvideo.com: ``Eric W.\ Schwartz: Cartoonist, Animator and Amiga Die Hard'' (2011). Critical assessment and tool analysis.
+  \item Fantasy/Animation: ``Rethinking the Disney Renaissance'' (2023). Academic analysis of the Renaissance construct.
+  \item Den of Geek: ``The Disney Renaissance: The Rise \& Fall'' (2023). Critical arc analysis.
+  \item Generation Amiga: ``The machine that opened the studio door'' (2026). Amiga's democratizing role in animation.
+  \item Amblin Entertainment: \textit{Tiny Toon Adventures} show page. Production overview.
+  \item Central Rappahannock Regional Library: ``Ten Legendary Years: The Disney Renaissance'' (2024). Chronological overview.
+  \item TV Tropes: ``The Renaissance Age of Animation.'' Comprehensive cross-studio mapping.
+  \item philreichert.org: ``Animating the Amiga: The Untold Story of Aegis Animator'' (2025). Technical animation tool history.
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ═══════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package --- The Golden Screen}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality GSD knowledge pack documenting the 1990s animation renaissance across all six research modules, with particular emphasis on Eric W.\ Schwartz and the Amiga as proof cases for the Amiga Principle. The final deliverable is a structured reference document suitable for integration into the GSD college layer as a historical and pedagogical anchor for animation craft, platform architecture, and the philosophy of the spaces between.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+MISSION ARCHITECTURE — FLEET ACTIVATION
+
+WAVE 0: Foundation
+  [HAIKU] Shared schemas, module stubs, source index, citation format
+            └──────────────────────────┐
+WAVE 1A (Parallel Track A)           WAVE 1B (Parallel Track B)
+  [SONNET] Module A: Disney           [SONNET] Module D: Fox/CN Platforms
+  [SONNET] Module B: Warner Revival   [OPUS]   Module F: Eric Schwartz Deep Dive
+            └──────────────────────────┘
+WAVE 1C (Parallel Track C)
+  [SONNET] Module C: Nicktoons
+  [SONNET] Module E: Amiga Platform
+            └──────────────────────────┐
+WAVE 2: Synthesis
+  [OPUS] Cross-module integration
+  [OPUS] Cultural sensitivity review
+  [OPUS] Through-line + GSD connection
+            └──────────────────────────┐
+WAVE 3: Publication + Verification
+  [SONNET] Document assembly
+  [SONNET] Source validation
+  [SONNET] Final PDF + index.html
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Foundation Layer} --- Shared schemas, citation standards, module stubs, source index
+  \item \textbf{Survey Layer} --- Six parallel research modules, each self-contained
+  \item \textbf{Synthesis Layer} --- Cross-module connections, cultural context, GSD through-line
+  \item \textbf{Publication Layer} --- Assembled document, verification, delivery
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Format} & \tableheader{Acceptance Criteria} \\
+\midrule
+1 & Disney Renaissance Module & Markdown & All 10 films documented with full production data; CAPS and Ashman sections complete \\
+2 & Warner Bros.\ Revival Module & Markdown & Tiny Toons + Animaniacs with production specs; full spin-off family \\
+3 & Nicktoons Revolution Module & Markdown & All major Nicktoons 1991--1999 with creator biographies \\
+4 & Platform Competition Module & Markdown & Fox Kids, Cartoon Network, Disney Afternoon documented \\
+5 & Amiga Platform Module & Markdown & Chipset specs, tool descriptions, Video Toaster, demoscene context \\
+6 & Eric Schwartz Deep Dive & Markdown & Complete filmography (80+ works); biography; workflow; Amiga connection \\
+7 & Synthesis Document & Markdown & Cross-module connections; GSD Amiga Principle proof integration \\
+8 & Knowledge Pack PDF & PDF (XeLaTeX) & All modules assembled; sensitivity review passed; bibliography complete \\
+9 & index.html & HTML & Download cards for all deliverables; usage instructions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 4K \\
+W0-SOURCE-INDEX & None & Haiku & 3K \\
+W1A-DISNEY & W0-SCHEMA & Sonnet & 18K \\
+W1A-WARNER & W0-SCHEMA & Sonnet & 16K \\
+W1B-SCHWARTZ & W0-SCHEMA, W1A-WARNER & Opus & 22K \\
+W1B-PLATFORMS & W0-SCHEMA & Sonnet & 12K \\
+W1C-NICKTOONS & W0-SCHEMA & Sonnet & 16K \\
+W1C-AMIGA-PLATFORM & W0-SCHEMA & Sonnet & 14K \\
+W2-SYNTHESIS & All W1 modules & Opus & 20K \\
+W2-SENSITIVITY & All W1 modules & Opus & 10K \\
+W3-ASSEMBLY & All W2 outputs & Sonnet & 12K \\
+W3-VERIFICATION & W3-ASSEMBLY & Sonnet & 8K \\
+W3-PDF & W3-ASSEMBLY & Sonnet & 6K \\
+W3-INDEX & W3-PDF & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Eric Schwartz deep dive (requires cultural nuance, craft analysis, Amiga Principle integration); synthesis; sensitivity review \\
+Sonnet & 60\% & All six survey modules; document assembly; source validation; PDF generation \\
+Haiku & 10\% & Schemas, stubs, index.html, source index \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2cm}L{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 7K \\
+1A & Disney + Warner & Parallel & Sonnet & 34K \\
+1B & Schwartz + Platforms & Parallel & Opus+Sonnet & 34K \\
+1C & Nicktoons + Amiga & Parallel & Sonnet & 30K \\
+2 & Synthesis & Sequential & Opus & 30K \\
+3 & Publication & Sequential & Sonnet & 29K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated token budget: $\approx$164K tokens across 3--4 sessions}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Deliverable} \\
+\midrule
+Schema generation & HAIKU-SCAFFOLD & Shared JSON schemas for films, series, people, tools \\
+Source index build & HAIKU-SCAFFOLD & Formatted bibliography from Stage 2 sources \\
+Module stubs & HAIKU-SCAFFOLD & Six empty markdown templates with section headers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A:} Disney Renaissance (SONNET-EXEC-1) + Warner Bros.\ Revival (SONNET-EXEC-2)\\
+\textbf{Track B:} Eric Schwartz Deep Dive (OPUS-CRAFT-HIST) + Platform Competition (SONNET-EXEC-3)\\
+\textbf{Track C:} Nicktoons Revolution (SONNET-EXEC-4) + Amiga Platform (SONNET-EXEC-5)
+
+All tracks run in parallel. No inter-track dependencies in Wave 1.
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Cross-module connection map & OPUS-INTEG & Influence diagram: studio animation $\leftrightarrow$ Amiga indie scene \\
+GSD Amiga Principle integration & OPUS-CRAFT-HIST & Section connecting Schwartz workflow to GSD chipset philosophy \\
+Cultural sensitivity audit & OPUS-CRAFT-HIST & Flags and guidance for all sensitivity considerations \\
+Through-line authoring & OPUS-PAULA & Narrative synthesis: the decade as unified cultural moment \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Invoke Wave 1 tracks within 5-minute window to maximize cache hit on W0 foundation schemas
+  \item Eric Schwartz module should be run in same session as Amiga Platform module (shared technical context)
+  \item Synthesis (W2) should be invoked within 5 minutes of completing the final W1 module to cache all six surveys
+  \item Assembly (W3) may run in a fresh session --- it reads only the W2 synthesis output
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Subtotal} \\
+\midrule
+Wave 0 & 2K & 7K & 9K \\
+Wave 1A & 12K & 34K & 46K \\
+Wave 1B & 14K & 34K & 48K \\
+Wave 1C & 12K & 30K & 42K \\
+Wave 2 & 30K & 30K & 60K \\
+Wave 3 & 20K & 29K & 49K \\
+\midrule
+\textbf{Total} & \textbf{90K} & \textbf{164K} & \textbf{254K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+W0-SCHEMA ─────────────────────────┐
+W0-SOURCE-INDEX ───────────────────┤
+                                   ▼
+W1A-DISNEY ─────────────────── [PARALLEL]
+W1A-WARNER ─────────────────── [PARALLEL]
+W1B-SCHWARTZ ───────────────── [PARALLEL]  ← Opus
+W1B-PLATFORMS ──────────────── [PARALLEL]
+W1C-NICKTOONS ──────────────── [PARALLEL]
+W1C-AMIGA ──────────────────── [PARALLEL]
+                                   │
+                                   ▼
+W2-SYNTHESIS ──────────────────────┤  ← Opus
+W2-SENSITIVITY ────────────────────┤  ← Opus
+                                   │
+                                   ▼
+W3-ASSEMBLY ───────────────────────┤
+W3-VERIFICATION ───────────────────┤
+W3-PDF ────────────────────────────┤
+W3-INDEX ──────────────────────────┘
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 4 & MANDATORY & BLOCK delivery \\
+Core Accuracy & 8 & HIGH & REVISE before delivery \\
+Integration & 5 & MEDIUM & FLAG for review \\
+Edge Cases & 4 & LOW & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test} & \tableheader{Expected Outcome} \\
+\midrule
+SC-01 & Kricfalusi harm documentation & John Kricfalusi section acknowledges his abuse of minors and employees; creative contribution and harm documented separately with no elision \\
+SC-02 & Pocahontas Indigenous representation & Disney's historical inaccuracies and Native nations' criticism documented with specific citations; no generic ``Indigenous'' references; UNDRIP Article 31 framing applied \\
+SC-03 & Racial caricature in period animation & Instances of racial stereotyping in 1990s cartoons documented critically; no imagery reproduced; historical context provided \\
+SC-04 & Schwartz adult content framing & Work described accurately (suggestive/mature humor); not presented as graphic or exploitative; Schwartz's own framing preserved \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+All 10 Disney Renaissance films documented & CORE-01, CORE-02 & Pending \\
+Tiny Toons + Animaniacs production specs verified & CORE-03 & Pending \\
+Nicktoons 1991--1999 complete & CORE-04 & Pending \\
+Eric Schwartz 80+ works catalogued & CORE-05, CORE-06 & Pending \\
+Amiga tools documented with technical specs & CORE-07 & Pending \\
+Cross-module influence map produced & INTEG-01, INTEG-02 & Pending \\
+GSD Amiga Principle connection articulated & INTEG-03 & Pending \\
+Sensitivity considerations addressed & SC-01, SC-02, SC-03, SC-04 & Pending \\
+Source bibliography 15+ professional sources & CORE-08 & Pending \\
+All quantitative claims attributed & INTEG-04 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & ORCHESTRATOR & Mission direction; go/no-go gates; wave sequencing \\
+PLAN & PLANNER & Wave decomposition; parallel track optimization \\
+SCOUT & RESEARCH & Source gathering; web research for gaps; archive access \\
+EXEC-1 & SONNET-EXEC-1 & Disney Renaissance module \\
+EXEC-2 & SONNET-EXEC-2 & Warner Bros.\ Revival module \\
+EXEC-3 & SONNET-EXEC-3 & Platform Competition module \\
+EXEC-4 & SONNET-EXEC-4 & Nicktoons Revolution module \\
+EXEC-5 & SONNET-EXEC-5 & Amiga Platform module \\
+CRAFT-HIST & OPUS-CRAFT-HIST & Eric Schwartz deep dive; Amiga Principle integration; sensitivity review \\
+CRAFT-CULT & OPUS-CRAFT-CULT & Cultural context; cross-module synthesis; through-line authoring \\
+VERIFY & VERIFICATION & Source validation; accuracy checking; citation audit \\
+INTEG & INTEGRATION & Cross-module relationship validation; influence map \\
+CAPCOM & HITL-INTERFACE & Human approval at wave boundaries \\
+BUDGET & RESOURCE-MGR & Token budget tracking; session planning \\
+SURGEON & HEALTH-MON & Research quality degradation detection \\
+LOG & CHRONICLE & Audit trail; commit messages; milestone summaries \\
+TOPO & TOPOLOGY-MGR & Agent team structure; mid-mission restructuring \\
+ARCH & ARCHITECTURE & Cross-cutting structural decisions \\
+SECURE & SECURITY & Safety boundary enforcement \\
+ANALYST & PATTERN-ANALYST & Cross-module pattern detection \\
+RETRO & RETROSPECTIVE & Post-wave analysis; lessons learned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet \\
+Research Modules & 6 \\
+Parallel Tracks & 3 (Wave 1) \\
+Estimated Token Budget & 254K \\
+Estimated Sessions & 3--4 \\
+Context Windows & 8--12 \\
+Critical Safety Tests & 4 (all BLOCK) \\
+Total Deliverables & 9 \\
+Primary Archival Sources & 14+ \\
+Opus Allocation & 30\% \\
+Sonnet Allocation & 60\% \\
+Haiku Allocation & 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Eric did what none of the others could. He showed that really great 2D computer animation was within reach with little more than an Amiga Computer, a copy of Deluxe Paint and Moviesetter. This was at a time when computer based animation was in its infancy and Flash was something that lights did.''} \\[0.5em]
+\hfill --- animationandvideo.com, 2011
+
+\vspace{0.8em}
+\normalfont\sffamily\small\textcolor{accent}{The decade from 1989 to 1999 proved the Amiga Principle on every screen in every living room. The machinery has changed. The principle remains: specialized execution paths, architectural elegance, and one person who understands the machine deeply enough to make it speak.}
+\end{quotebox}
+
+\end{document}
