@@ -1,0 +1,955 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Space/Physics color scheme: Cosmic purple / Nebula blue / Star gold
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{F9A825}
+\definecolor{accent}{HTML}{4527A0}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFFDE7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Black Hole Catalog \& Mapping Mission}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Black Hole Catalog and Mapping -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Black Hole\\[0.3em]Catalog \& Mapping}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Known Black Holes Across the Observable Universe}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad | \quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad | \quad Estimated: 8--12 context windows across 3--4 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Primary Source: NASA Chandra X-ray Observatory Press Archive (1997--2026)}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Black Hole Catalog \& Mapping --- Vision Guide}
+
+\subsection{Metadata}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Mission}
+\metafield{Depends On:}{NASA/CXC Chandra Press Archive, LIGO-Virgo-KAGRA GW Catalog, EHT Image Archive, NASA Imagine the Universe}
+\metafield{Context:}{Deep research mission seeded from Chandra X-ray Observatory black hole press archive. Covers stellar-mass, intermediate-mass, supermassive, and candidate primordial black holes.}
+
+\subsection{Vision}
+
+Black holes are the universe's most extreme punctuation marks --- places where spacetime grammar breaks down, where matter disappears into a singularity, and where the surrounding universe is shaped by what can never be seen. Yet they are not silent. They announce themselves through X-ray flares, gravitational waves, relativistic jets that span millions of light-years, and the violent deaths of stars caught in their gravity. The Chandra X-ray Observatory, operating since 1999, has accumulated over a quarter-century of detections, capturing every class of black hole behavior from our galactic center's snacking habits to supermassive black holes colliding in distant galaxies.
+
+This mission builds a living catalog: not a static list, but a structured, cross-classified map of all known and strongly candidate black holes across three mass classes --- stellar-mass ($\sim$3--100 $M_\odot$), intermediate-mass ($\sim$100--$10^5$ $M_\odot$), and supermassive ($10^5$--$10^{10}$ $M_\odot$). The catalog integrates detection method, observational confidence, host environment, key measured parameters (mass, spin, distance), and Chandra discovery index where applicable.
+
+The \textit{spaces between} matter here too. The mass gap between stellar and supermassive black holes is not empty --- it is the least-understood regime, populated by elusive intermediate-mass objects that likely serve as the seeds from which cosmic giants grew. Understanding the gap is understanding the origin story of every galaxy in the observable universe.
+
+The Amiga Principle applies at cosmological scale: remarkable complexity --- the full hierarchy of structure from dwarf galaxy to galaxy cluster --- emerges from a single elegant object type, iterated across cosmic time through accretion and merger. A well-structured catalog, executed with architectural precision, becomes a reference instrument for every subsequent astrophysics research mission in this ecosystem.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{No unified, publicly executable catalog exists.} Despite decades of discoveries from Chandra, LIGO, EHT, Hubble, JWST, XMM-Newton, and NICER, there is no single cross-classified, machine-readable catalog spanning all three mass classes with consistent schema.
+  \item \textbf{The intermediate-mass gap remains observationally under-sampled.} Fewer than 20 credible IMBH candidates have been confirmed in the entire observable universe. The formation pathway from stellar to supermassive remains contested, with the ``missing link'' problem unsolved.
+  \item \textbf{Detection confidence varies enormously across catalog entries.} Some black holes are confirmed via direct imaging (M87*, Sgr A*); others are inferred from stellar orbits; still others are gravitational wave signals. Without a confidence taxonomy, catalog users cannot distinguish established fact from candidate.
+  \item \textbf{Chandra's 26-year press archive has never been structurally indexed.} Over 100 press releases on black holes (1997--2026) represent a rich, underutilized research index. The catalog should ingest and cross-reference this archive systematically.
+  \item \textbf{Multi-messenger astronomy demands cross-instrument reconciliation.} The same black hole may appear in X-ray (Chandra), gravitational wave (LIGO), radio (EHT), optical (Hubble/JWST), and gamma-ray (Fermi) datasets under different designations, complicating unified study.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} \textit{Three-tier mass taxonomy $\times$ five-axis detection schema $\rightarrow$ confidence-weighted living catalog}
+
+The catalog organizes every known black hole across three mass tiers (stellar, intermediate, supermassive), five detection axes (X-ray binary dynamics, gravitational waves, stellar orbital mechanics, direct imaging, accretion spectroscopy), and a four-level confidence rating (confirmed, strong candidate, candidate, speculative). This structure supports both human navigation and machine-readable export for downstream GSD research missions.
+
+\subsubsection{Taxonomy Map}
+
+\begin{asciibox}
+MASS TAXONOMY
+=============
+Stellar-Mass (3 -- 100 M_sun)
+  |- X-ray Binaries (XRBs): ~50 confirmed in Milky Way
+  |- Gravitational Wave Mergers: 90+ events (LIGO O1-O4)
+  |- Isolated BHs: rare; Gaia BH1, BH2, BH3 (2022-2024)
+  |- Estimated total in MW: ~100 million
+
+Intermediate-Mass (100 -- 100,000 M_sun)  [THE GAP]
+  |- Globular Clusters: Omega Cen IMBH (~8,200 M_sun), IRS 13E
+  |- GW Events: GW190521 (142 M_sun), GW231123
+  |- Dwarf Galaxies: DESI early data (2025), ~hundreds new
+  |- Total confirmed: <20 worldwide
+
+Supermassive (>100,000 M_sun -- billions)
+  |- Galactic Centers: Sgr A* (4.3e6 M_sun), M87* (6.5e9 M_sun)
+  |- Active Galactic Nuclei (AGN) / Quasars
+  |- Ultramassive: TON 618 (~66e9 M_sun), NGC 1600
+  |- EHT imaged: 2 (M87* 2019, Sgr A* 2022)
+  |- Total known/candidate: >1 billion (deep surveys)
+
+Primordial [SPECULATIVE / UNCONFIRMED]
+  |- Formed at Big Bang: mass range uncertain
+  |- No confirmed detections; dark matter candidates
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULES
+================
+Module 01: STELLAR       -- X-ray binaries, LIGO mergers, isolated BHs
+Module 02: INTERMEDIATE  -- IMBHs, globular clusters, dwarf galaxies
+Module 03: SUPERMASSIVE  -- Galactic centers, AGN, EHT imaging, quasars
+Module 04: DETECTION     -- Instrumentation taxonomy, multi-messenger methods
+Module 05: DYNAMICS      -- Accretion, jets, TDEs, mergers, feedback
+
+Wave 0 (Foundation) -----> Schema + source index
+Wave 1A (Parallel) -------> Module 01 + Module 02
+Wave 1B (Parallel) -------> Module 03 + Module 04
+Wave 2 (Synthesis) -------> Module 05 + cross-catalog integration
+Wave 3 (Publication) -----> Catalog PDF + machine-readable export
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Stellar-Mass Black Holes}
+
+Catalog all confirmed and strong-candidate stellar-mass black holes from X-ray binary dynamical studies, gravitational wave merger events (LIGO-Virgo-KAGRA O1--O4 catalog), and astrometric detections (Gaia BH series). Key parameters: mass, spin, distance, companion type, detection method, discovery year.
+
+\subsubsection{Module 02: Intermediate-Mass Black Holes}
+
+Survey all known IMBH candidates with particular attention to globular cluster hosts (Omega Centauri, IRS 13E near Sgr A*), gravitational wave IMBH products (GW190521, GW231123), and the DESI 2025 dwarf galaxy sample. Assess the mass gap problem and formation pathway evidence.
+
+\subsubsection{Module 03: Supermassive Black Holes}
+
+Catalog all well-characterized SMBHs: galactic center measurements, EHT direct images, quasar host measurements, ultramassive objects ($>10^{10}$ $M_\odot$). Cross-reference with Chandra AGN / quasar press archive. Include Chandra's 2017 Chandra Deep Field South detection of $\sim$5,000 AGN.
+
+\subsubsection{Module 04: Detection Methods \& Instrumentation}
+
+Taxonomy of all detection methodologies with confidence hierarchy: direct imaging (EHT), stellar orbital mechanics (GRAVITY/VLT, Keck), X-ray spectroscopy (Chandra, XMM-Newton, NICER, NuSTAR), gravitational waves (LIGO-Virgo-KAGRA), optical transients (tidal disruption events), astrometry (Gaia), radio (VLBI). Map which instruments discovered which catalog entries.
+
+\subsubsection{Module 05: Black Hole Dynamics \& Phenomena}
+
+Synthesize recurring phenomena observed across the Chandra archive: accretion disk physics, relativistic jet production, tidal disruption events (TDEs), black hole growth regulation (Chandra March 2026 finding on growth braking), binary merger sequences, feedback effects on host galaxy star formation.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:
+    model: claude-opus-4
+    role: orchestration / synthesis
+    assignments:
+      - Wave 2 synthesis (cross-catalog integration)
+      - Module 05 dynamics analysis
+      - Confidence taxonomy design
+      - Final verification pass
+
+  denise:
+    model: claude-sonnet-4-6
+    role: document production / structured content
+    assignments:
+      - Module 01 catalog compilation
+      - Module 02 IMBH survey
+      - Module 03 SMBH catalog
+      - Module 04 detection taxonomy
+      - Wave 3 publication assembly
+
+  paula:
+    model: claude-haiku-4-5
+    role: scaffolding / schema
+    assignments:
+      - Wave 0 shared schema generation
+      - Source index compilation
+      - Template scaffolding
+
+  68000:
+    role: glue logic / cache routing
+    cache_ttl: 300s
+    shared_context: source_index + mass_taxonomy_schema
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item All named and designated confirmed stellar-mass black holes in X-ray binary systems (Milky Way and Magellanic Clouds)
+  \item LIGO-Virgo-KAGRA O1--O4 gravitational wave catalog (black hole mergers and remnants)
+  \item Gaia astrometric black hole detections (BH1, BH2, BH3)
+  \item All credible IMBH candidates with published dynamical evidence
+  \item All well-characterized SMBHs with published mass measurements ($>50$ nearby galaxies)
+  \item EHT direct imaging targets (M87*, Sgr A*)
+  \item Chandra press archive 1997--2026 as cross-reference index (100+ releases)
+  \item Detection method taxonomy and confidence classification schema
+  \item Chandra Deep Field South AGN population statistics
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Primordial black holes (no confirmed detections; theoretical only)
+  \item Statistical AGN/quasar population models (retain only individually characterized objects)
+  \item Black hole interior physics / quantum gravity (Hawking radiation, information paradox theory)
+  \item Gravitational wave parameter estimation methodology (cite results only)
+  \item New physics beyond Standard Model associated with black holes
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Catalog contains all confirmed stellar-mass black holes with dynamical mass measurements published through 2025, with $\geq90\%$ completeness vs.\ published reviews.
+  \item All IMBH candidates include confidence rating, host environment, mass estimate, and primary evidence citation.
+  \item SMBH section includes $\geq50$ galaxies with published central black hole mass measurements.
+  \item EHT imaging targets (M87*, Sgr A*) fully parameterized (mass, spin constraint, shadow diameter, distance).
+  \item Chandra press archive cross-referenced: every catalog entry traceable to at least one Chandra press release where applicable.
+  \item Detection taxonomy table covers $\geq7$ distinct methods with accuracy/limitation summary per method.
+  \item Module 05 dynamics survey covers $\geq5$ distinct phenomena with quantitative examples.
+  \item Machine-readable catalog export produced (JSON or CSV) alongside the PDF document.
+  \item All mass values consistent with primary literature (not secondary summaries) and cited to source.
+  \item Confidence classification applied consistently to every catalog entry (4-level schema: confirmed / strong candidate / candidate / speculative).
+  \item The intermediate-mass gap section explicitly addresses the formation pathway debate with evidence from both IMBH and SMBH formation models.
+  \item Final document passes three-pass XeLaTeX compilation without errors; all cross-references resolve.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Deep Audio Analyzer Mission & Parallel GSD mission & Shares wave-execution and crew manifest patterns \\
+Fox Infrastructure Group Plan & Unrelated & No dependency \\
+The Space Between & Mathematical spine & Category theory and set theory directly model classification hierarchies used in this catalog \\
+GSD Skill Creator & Execution environment & This package is designed for handoff to gsd-skill-creator \\
+GSD Mission Crew Manifest & Template source & Squadron activation profile drawn from standard manifest \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Black holes are the universe's most faithful practitioners of the Amiga Principle: through elegant structural simplicity --- three parameters only (mass, charge, spin), as the no-hair theorem demands --- they generate staggering complexity in every environment they inhabit. A stellar-mass black hole pulls gas from a companion star and paints the X-ray sky. A supermassive one ignites a quasar visible across 13 billion light-years. The \textit{space between} these extremes, the mass gap where intermediate-mass objects hide, is not absence --- it is the region where the story of how small things become enormous waits to be read.
+
+This catalog is not merely an inventory. It is a structural map of punctuation in the cosmic narrative: every black hole a place where matter crosses a threshold it cannot cross back, where information (perhaps) transforms rather than vanishes, where gravity wins. The mission's job is to be as faithful to that structure as the objects themselves are to the three parameters that define them.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Black Hole Catalog \& Mapping --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference section contains sourced findings for each module, extracted from the Chandra X-ray Observatory press archive and peer-reviewed literature. Use it as the evidentiary foundation when producing catalog entries. All numerical claims are attributed to specific sources; do not paraphrase without citation.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item NASA/CXC --- Chandra X-ray Center (primary: chandra.harvard.edu/press)
+  \item NASA/STScI --- Space Telescope Science Institute (Hubble)
+  \item LIGO-Virgo-KAGRA Collaboration (gravitational wave catalog)
+  \item Event Horizon Telescope (EHT) Collaboration
+  \item European Southern Observatory (ESO/GRAVITY/VLT)
+  \item NASA Imagine the Universe (imagine.gsfc.nasa.gov)
+  \item NASA Science (science.nasa.gov)
+  \item Max Planck Institute for Astronomy (MPIA)
+\end{itemize}
+
+\subsection{Module 01: Stellar-Mass Black Holes}
+
+\subsubsection{Confirmed X-ray Binary Catalog (Selected)}
+
+Stellar-mass black holes form when stars with more than eight times the Sun's mass exhaust their fuel, triggering core collapse and supernova. The remnant black hole mass depends on pre-explosion mass. Nearly all stellar-mass black holes found to date were identified in X-ray binary systems (NASA Science, science.nasa.gov). Binary systems reveal approximately 50 confirmed or suspected stellar-mass black holes in the Milky Way, but scientists estimate the galaxy may host as many as 100 million (NASA Science, 2020).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{1.8cm}C{1.8cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Object} & \tableheader{Mass ($M_\odot$)} & \tableheader{Distance (ly)} & \tableheader{Discovery} & \tableheader{Notes} \\
+\midrule
+Cygnus X-1 & 21.2 $\pm$ 2.2 & 7,200 & 1964 & First strong BH candidate; near-maximal spin $a \approx 0.998$; HDE 226868 companion \\
+V616 Mon (A0620-00) & 6.6 & 3,300 & 1975 & Closest confirmed BH; K5V companion; 7.75 hr orbit \\
+V404 Cygni & $\geq$10 & 7,800 & 1989 & ``Best case'' BH per NASA; recurrent outbursts \\
+GRS 1915+105 & $\sim$14 & 36,000 & 1992 & First microquasar; erratic luminosity; near-maximal spin \\
+LMC X-3 & $\sim$7 & 160,000 & 1971 & Large Magellanic Cloud; high-mass X-ray binary \\
+XTE J1550-564 & $\sim$9.1 & 17,000 & 1998 & Spectral and QPO studies of spin \\
+GW150914 remnant & $\sim$62 & $1.4 \times 10^9$ & 2015 & First LIGO detection; merger of 29+36 $M_\odot$ BHs \\
+Gaia BH1 & $\sim$9.6 & 1,560 & 2022 & Nearest known BH; no X-ray emission; astrometric \\
+Gaia BH3 & $\sim$32.7 & 1,926 & 2024 & Most massive stellar BH in MW from Gaia; dormant \\
+MAXI J1820+070 & $\sim$7--8 & 9,800 & 2018 & Bright 2018 outburst; high-quality spin constraints \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Chandra X-ray Observatory has contributed to stellar-mass BH studies across multiple press releases, including: fastest wind from a stellar-mass black hole (Feb 2012; 20 million mph outflow from IGR J17091-3624), black hole birth announcement (Nov 2011; supernova SN 1979C), and Chandra's finding of the youngest nearby black hole (Nov 2010; SN 1979C in M100, age $\sim$31 years at time of detection).
+
+\subsubsection{LIGO-Virgo-KAGRA Gravitational Wave Detections (Selected)}
+
+The LIGO-Virgo-KAGRA Collaboration has cataloged over 90 gravitational wave events through Observing Run O4. Black hole--black hole (BBH) mergers dominate the sample. The remnant black hole from GW150914 had a mass of approximately 62 $M_\odot$, directly measured via gravitational waves for the first time (LIGO, 2016). The gravitational wave signal GW190521 resulted from merging black holes of 85 and 65 $M_\odot$, producing a 142 $M_\odot$ remnant --- the first confirmed intermediate-mass black hole product from a gravitational wave event (Wikipedia / LIGO-Virgo, 2020). GW231123, observed November 23, 2023, provided an additional IMBH-range merger signal (LIGO-Virgo-KAGRA, announced 2024--2025).
+
+\subsection{Module 02: Intermediate-Mass Black Holes}
+
+\subsubsection{The Missing Link Problem}
+
+Most known black holes are either extremely massive, at galactic cores, or relatively lightweight below 100 $M_\odot$. Intermediate-mass black holes (IMBHs) occupying the range $\sim$100--$10^5$ $M_\odot$ are scarce and considered rare missing links in black hole evolution (ScienceDaily / NASA Goddard, 2024). The fundamental questions are: (1) do IMBHs exist as a distinct population? (2) do they form the seeds that become supermassive? (3) are globular clusters their primary formation environment?
+
+\subsubsection{Known and Candidate IMBHs}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}L{3.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Object} & \tableheader{Mass ($M_\odot$)} & \tableheader{Host} & \tableheader{Evidence \& Status} \\
+\midrule
+GW190521 remnant & 142 & N/A (merger) & Confirmed via gravitational waves; first GW-confirmed IMBH \\
+Omega Cen IMBH & $\geq$8,200 & Omega Centauri, 17,700 ly & 7 fast-moving stars; Hubble; strong evidence (Häberle et al. 2024, Nature) \\
+GCIRS 13E & $\sim$1,300 & Milky Way GC, 0.1 ly from Sgr A* & First reported IMBH in MW (2004); debated; cluster of $\sim$7 stars \\
+3XMM J215022.4 & $\sim$50,000 & Distant galaxy & Hubble X-ray; tidal disruption event (Lin et al., UNH) \\
+IRS 13 cluster & Candidate & 0.1 ly from Sgr A* & Florian Peißker et al. 2024, ApJ; kinematic evidence \\
+GW231123 remnant & IMBH-range & N/A (merger) & Announced LIGO-Virgo-KAGRA 2024--25 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+As of 2024, only approximately 10 intermediate-mass black holes had been found in the entire universe (ScienceDaily, 2024). By early 2025, DESI (Dark Energy Spectroscopic Instrument) early data uncovered the largest samples ever of IMBHs and dwarf galaxies hosting active black holes (ScienceDaily, Feb 2025), substantially expanding the known candidate pool.
+
+Chandra contributions to IMBH research include: ``Finding the Happy Medium of Black Holes'' (Aug 2018) examining mid-mass candidates; ``X-rays Signal Presence of Elusive Intermediate-Mass Black Hole'' (Mar 2005); ``Chandra Clinches Case for Missing Link Black Hole'' (Sep 2000); and ``Survivor Black Holes May Be Mid-Sized'' (Apr 2010).
+
+\subsection{Module 03: Supermassive Black Holes}
+
+\subsubsection{The Two Imaged Black Holes}
+
+As of March 2026, two black holes have been directly imaged by the Event Horizon Telescope (EHT): M87* (2019) and Sgr A* (2022).
+
+\textbf{Sagittarius A* (Sgr A*):} The supermassive black hole at the Milky Way's center. Mass: $4.3 \times 10^6$ $M_\odot$. Distance: $\sim$26,000 light-years. EHT imaged its event horizon shadow in 2022. Chandra has monitored Sgr A* since 2000, publishing over 20 press releases including: record-breaking outburst (Jan 2015); evidence of jet (Nov 2013); the galaxy's giant black hole ``waking up'' 200 years ago (Jun 2023, IXPE); and galactic center venting detection (May 2024). Sgr A* last had a major active phase roughly 200 years ago and was confirmed dormant at extreme levels relative to active galactic nuclei.
+
+\textbf{M87*:} Supermassive black hole in galaxy Messier 87, $\sim$53 million light-years away. Mass: $6.5 \times 10^9$ $M_\odot$. Spin parameter $a_* \approx 0.9$ from jet modeling. First EHT image: April 2019. Chandra has contributed to M87* study including: ``Telescopes Unite in Unprecedented Observations of Famous Black Hole'' (Apr 2021) and numerous jet studies spanning 2000--2025.
+
+\subsubsection{Selected SMBH Catalog}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{2.2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Object} & \tableheader{Mass ($M_\odot$)} & \tableheader{Galaxy / Distance} & \tableheader{Notes} \\
+\midrule
+Sgr A* & $4.3 \times 10^6$ & Milky Way, 26 kly & EHT imaged 2022; Chandra primary target \\
+M87* & $6.5 \times 10^9$ & M87, 53 Mly & EHT imaged 2019; relativistic jet \\
+NGC 4258 & $3.9 \times 10^7$ & NGC 4258, 23 Mly & Maser disk; precise mass \\
+TON 618 & $\sim$$6.6 \times 10^{10}$ & Quasar, 10.4 Gly & Among most massive known \\
+NGC 1277 & $\sim$$17 \times 10^9$ & Perseus Cluster & Ultramassive; Chandra: ``From Super to Ultra'' (Dec 2012) \\
+NGC 1600 & $\sim$$17 \times 10^9$ & NGC 1600 Group & Isolated elliptical; unexpectedly massive \\
+J0529-4351 & $\sim$$17$--$19 \times 10^9$ & Quasar, 12 Gly & Brightest/fastest-growing quasar known (Feb 2024) \\
+Andromeda (M31) & $\sim$$1.4 \times 10^8$ & M31, 2.5 Mly & Chandra: ``Not As Cool As Believed'' (Oct 2001) \\
+NGC 4889 & $\sim$$21 \times 10^9$ & Coma Cluster, 308 Mly & One of most massive known \\
+LMC* (candidate) & $\sim$$6 \times 10^5$ & Large Magellanic Cloud & Inferred from hypervelocity stars (Han et al. 2025) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Population Statistics from Deep Surveys}
+
+The Chandra Deep Field South (CDFS) 7-megasecond exposure released January 2017 revealed approximately 5,000 supermassive black holes (AGN) in the deepest X-ray image ever obtained, confirming that the cosmic background X-ray glow is predominantly produced by accreting black holes across cosmic history. This single image constitutes the largest treasure trove of black holes ever found from a single pointing.
+
+\subsection{Module 04: Detection Methods}
+
+\subsubsection{Detection Method Taxonomy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{Instrument} & \tableheader{BH Class} & \tableheader{Confidence \& Limitations} \\
+\midrule
+X-ray binary dynamics & Chandra, XMM-Newton, NICER, RXTE & Stellar & High confidence with mass function; requires companion star; $\sim$50 confirmed \\
+Gravitational waves & LIGO, Virgo, KAGRA & Stellar, IMBH & Direct detection; mass/spin from waveform; 90+ events O1--O4 \\
+Stellar orbital mechanics & VLT/GRAVITY, Keck & SMBH & Highest precision for Sgr A*; resolves individual star orbits \\
+Direct imaging (EHT) & Event Horizon Telescope & SMBH & Gold standard; requires angular resolution; only 2 imaged \\
+Reverberation mapping & Optical spectrographs & SMBH/AGN & Broad-line region; moderate accuracy; hundreds of AGN \\
+Megamaser disk & VLBI & SMBH & Keplerian disk rotation; sub-percent mass accuracy \\
+Astrometric displacement & Gaia & Stellar (dormant) & No X-ray required; Gaia BH series; growing sample \\
+Tidal disruption events & Chandra, Swift, Hubble & Stellar, IMBH, SMBH & Flare luminosity; indirect mass estimate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05: Dynamics Phenomena (Preview for Synthesis)}
+
+The Chandra press archive documents recurring dynamical phenomena across all black hole classes:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Tidal Disruption Events (TDEs):} Stars disrupted by tidal forces of SMBHs. Chandra documented: ``Black Hole Caught Red-Handed in a Stellar Homicide'' (May 2012); ``A Giant Black Hole Destroys a Massive Star'' (Aug 2023); a black hole that destroyed one star then targeted another (Oct 2024).
+  \item \textbf{Relativistic Jets:} ``Black-Hole-Powered Jets Forge Fuel for Star Formation'' (Feb 2017, NRAO); ``Gigantic Jet Spied From Black Hole in Early Universe'' (Mar 2021); ``Surprisingly Strong Black Hole Jet at Cosmic Noon'' (Jun 2025, at peak of cosmic star formation).
+  \item \textbf{Growth Regulation:} Chandra's most recent black hole press release (Mar 24, 2026) resolves why black holes hit the brakes on growth, providing new evidence for the self-limiting feedback mechanism by which SMBHs regulate their own accretion.
+  \item \textbf{Mergers and Pairs:} Chandra discovered giant black holes on collision course (Feb 2023); a supermassive black hole pair (Sep 2024 with Hubble); and three black holes on collision course (Sep 2019).
+  \item \textbf{Accretion Modes:} Sgr A* feeds at an extremely low rate relative to its mass, primarily on gas from nearby stellar winds (Chandra, Aug 2013). Accretion efficiency varies from sub-Eddington (quiescent) to super-Eddington (hyperluminous AGN, e.g., J0529-4351).
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+All numerical values & GATE & Cite primary literature (not secondary summaries); mass values vary with method \\
+Gravitational wave events & GATE & Use LIGO-Virgo-KAGRA catalog designations; report parameter uncertainties \\
+IMBH candidates & ANNOTATE & Many are contested; mark confidence level per entry; do not overstate \\
+Sgr A* activity history & ANNOTATE & Distinguish ancient activity (200 yr, 300 yr ago per Chandra) from current state \\
+Indigenous sky knowledge & N/A & No Indigenous knowledge content in this domain; not applicable \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item NASA Chandra X-ray Center. \textit{Press Releases by Category: Black Holes (1997--2026).} chandra.harvard.edu/press/category/blackholes.html
+  \item NASA Science. \textit{Black Hole Types.} science.nasa.gov/universe/black-holes/types/ (Oct 2020)
+  \item NASA Imagine the Universe. \textit{Black Holes.} imagine.gsfc.nasa.gov/science/objects/black\_holes2.html
+  \item NASA/CXC. \textit{Chandra Deep Field South: Deepest X-ray Image.} Jan 2017 press release.
+  \item LIGO-Virgo-KAGRA Collaboration. \textit{Gravitational Wave Transient Catalog (GWTC-1, -2, -3, O4).} gw-openscience.org
+  \item Event Horizon Telescope Collaboration. \textit{First M87 Event Horizon Telescope Results.} ApJL, Apr 2019.
+  \item Event Horizon Telescope Collaboration. \textit{First Sagittarius A* Event Horizon Telescope Results.} ApJL, May 2022.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Miller-Jones, J.C.A. et al. ``Cygnus X-1 contains a 21-solar mass black hole.'' \textit{Science} 371, 1046 (2021).
+  \item Häberle, M. et al. ``Fast-moving stars around an intermediate-mass black hole in Omega Centauri.'' \textit{Nature} (Jul 2024).
+  \item Abbott, B.P. et al. ``Properties of the Binary Black Hole Merger GW150914.'' \textit{Phys. Rev. Lett.} 116, 241102 (2016).
+  \item Peißker, F. et al. ``The Evaporating Massive Embedded Stellar Cluster IRS 13 Close to Sgr A*.'' \textit{ApJ} (2024).
+  \item Han, C.H. et al. ``Hypervelocity stars from the Large Magellanic Cloud imply LMC*.'' (2025).
+  \item LIGO-Virgo-KAGRA. ``GW190521: A Binary Black Hole Merger with a Total Mass of 150 Solar Masses.'' \textit{Phys. Rev. Lett.} 125, 101102 (2020).
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Harvard--Smithsonian Center for Astrophysics (CfA)
+  \item Max Planck Institute for Astronomy (MPIA), Heidelberg
+  \item European Southern Observatory (ESO)
+  \item NSF NOIRLab
+  \item Dark Energy Spectroscopic Instrument (DESI) Collaboration
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, cross-classified catalog of all known and strongly candidate black holes across three mass classes (stellar, intermediate, supermassive), integrating 26 years of NASA Chandra X-ray Observatory press archive data with gravitational wave detections, EHT imaging, and astrometric surveys. Deliver both a human-readable PDF reference and a machine-readable catalog export suitable for downstream GSD research missions.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+BLACK HOLE CATALOG MISSION -- WAVE ARCHITECTURE
+================================================
+
+                    [CAPCOM GATE]
+                         |
+  Wave 0: Foundation (Sequential, Haiku)
+    |- Shared catalog schema (JSON)
+    |- Source index (Chandra 100+ releases indexed)
+    |- Mass taxonomy YAML
+                         |
+            [CAPCOM GATE: schema review]
+            /                           \
+  Wave 1A (Parallel)            Wave 1B (Parallel)
+  Module 01: Stellar            Module 03: SMBH
+  Module 02: IMBH               Module 04: Detection
+  [Sonnet + Opus]               [Sonnet + Opus]
+            \                           /
+                    [CAPCOM GATE]
+                         |
+  Wave 2: Synthesis (Sequential, Opus)
+    |- Module 05: Dynamics cross-analysis
+    |- Cross-catalog integration
+    |- Confidence taxonomy application
+    |- Chandra archive cross-reference
+                         |
+                    [CAPCOM GATE]
+                         |
+  Wave 3: Publication (Sequential, Sonnet)
+    |- PDF compilation (XeLaTeX 3 passes)
+    |- Machine-readable export (JSON/CSV)
+    |- Verification pass
+    |- Final delivery
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Canonical schema, source index, mass taxonomy constants
+  \item \textbf{Stellar Survey Layer} --- X-ray binary catalog, LIGO event catalog, Gaia BH series
+  \item \textbf{IMBH Survey Layer} --- Globular cluster candidates, GW IMBH products, DESI sample
+  \item \textbf{SMBH Survey Layer} --- Galactic centers, EHT targets, AGN/quasar characterized sample
+  \item \textbf{Detection Taxonomy Layer} --- Method classification, instrument mapping, confidence hierarchy
+  \item \textbf{Synthesis Layer} --- Dynamics analysis, cross-catalog reconciliation, Chandra index
+  \item \textbf{Publication Layer} --- LaTeX document, JSON/CSV export, verification
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Stellar BH Catalog & $\geq$50 entries; mass, spin, distance, method, year & Module 01 output \\
+2 & IMBH Candidate Survey & All credible candidates; confidence rated; gap analysis included & Module 02 output \\
+3 & SMBH Catalog & $\geq$50 galaxies; EHT targets fully parameterized & Module 03 output \\
+4 & Detection Method Taxonomy & $\geq$7 methods; accuracy/limitation per method & Module 04 output \\
+5 & Dynamics Survey & $\geq$5 phenomena; quantitative examples from Chandra archive & Module 05 output \\
+6 & PDF Mission Document & XeLaTeX; TOC; all cross-refs resolved & Wave 3 output \\
+7 & Machine-Readable Export & JSON or CSV; schema consistent; importable & Wave 3 output \\
+8 & Chandra Archive Index & All 100+ BH press releases indexed to catalog entries & Wave 2 output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.8cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens (est.)} & \tableheader{Output} \\
+\midrule
+Schema + Index (W0) & None & Haiku & 8K & catalog\_schema.json, source\_index.yaml \\
+Stellar BH Module & Schema & Sonnet & 40K & stellar\_catalog.md \\
+IMBH Module & Schema & Sonnet+Opus & 30K & imbh\_survey.md \\
+SMBH Module & Schema & Sonnet & 45K & smbh\_catalog.md \\
+Detection Taxonomy & Schema & Sonnet & 20K & detection\_methods.md \\
+Dynamics Synthesis & All modules & Opus & 35K & dynamics\_analysis.md \\
+Cross-Index & All modules & Opus & 25K & chandra\_cross\_index.md \\
+Publication & All above & Sonnet & 30K & blackhole\_catalog.pdf + .json \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Synthesis, confidence taxonomy judgment, cross-catalog reconciliation, IMBH gap analysis, dynamics cross-analysis \\
+Sonnet & $\sim$60\% & Catalog compilation, document assembly, structured table production, PDF LaTeX generation \\
+Haiku & $\sim$10\% & Schema generation, source index scaffolding, template setup \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Outputs} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schema, source index, taxonomy YAML \\
+1A & Stellar + IMBH & Parallel & Sonnet/Opus & stellar\_catalog.md, imbh\_survey.md \\
+1B & SMBH + Detection & Parallel & Sonnet/Opus & smbh\_catalog.md, detection\_methods.md \\
+2 & Synthesis & Sequential & Opus & dynamics\_analysis.md, cross\_index.md \\
+3 & Publication & Sequential & Sonnet & PDF + JSON export \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Catalog schema & PAULA (Haiku) & JSON schema: id, name, class, mass\_solar, mass\_err, spin, distance\_ly, discovery\_year, method, confidence, host, chandra\_refs \\
+Source index & PAULA (Haiku) & Index all 100+ Chandra BH press releases: date, title, object(s) referenced \\
+Taxonomy constants & PAULA (Haiku) & Mass boundary definitions; confidence level definitions; method enum values \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (Wave 1A):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Stellar BH compilation & CRAFT-STELLAR (Sonnet) & All confirmed XRBs with dynamical masses; LIGO BBH catalog summary; Gaia BH series \\
+IMBH survey & CRAFT-IMBH (Opus) & All credible candidates; confidence assessment; gap analysis narrative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Wave 1B):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+SMBH catalog & CRAFT-SMBH (Sonnet) & $\geq$50 characterized SMBHs; EHT entries fully expanded; Chandra AGN stats \\
+Detection taxonomy & CRAFT-DETECT (Sonnet) & 7+ methods; instrument table; confidence hierarchy table \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+Dynamics analysis & AGNUS (Opus) & Synthesize TDE, jet, accretion, merger, feedback phenomena from Chandra archive \\
+Chandra cross-index & AGNUS (Opus) & Map all 100+ BH press releases to catalog entries; identify gaps \\
+Confidence taxonomy & AGNUS (Opus) & Apply 4-level confidence rating to every catalog entry consistently \\
+Cross-catalog reconciliation & INTEG & Resolve multi-instrument naming conflicts; unified ID scheme \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Spec} \\
+\midrule
+LaTeX document assembly & DENISE (Sonnet) & Full catalog PDF; XeLaTeX 3 passes; all tables rendered \\
+Machine-readable export & DENISE (Sonnet) & JSON array of all catalog entries; CSV variant \\
+Verification pass & VERIFY & Source validation; mass values vs. primary literature; confidence ratings audit \\
+Final delivery & LOG & Commit; milestone summary; handoff note \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Wave 0 outputs (schema, source index) cached as shared context for all Wave 1 agents
+  \item Chandra press archive index cached once; reused across all synthesis tasks
+  \item Mass taxonomy constants cached as a single YAML block; referenced by pointer in all component prompts
+  \item 5-minute TTL window exploited: Waves 1A and 1B launched within same cache window where possible
+  \item Confidence taxonomy definitions cached and applied uniformly in Wave 2 without re-derivation
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input (est.)} & \tableheader{Output (est.)} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 5K & 8K & Schema + index \\
+Wave 1A & 20K & 35K & Stellar + IMBH \\
+Wave 1B & 20K & 40K & SMBH + Detection \\
+Wave 2 & 80K (cached) & 40K & Synthesis \\
+Wave 3 & 120K (cached) & 30K & Publication \\
+\midrule
+\textbf{Total} & \textbf{$\sim$245K} & \textbf{$\sim$153K} & \textbf{8--12 context windows} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+catalog_schema.json ──────────────────────────────┐
+source_index.yaml ────────────────────────────────┤
+mass_taxonomy.yaml ───────────────────────────────┤
+                                                   │
+    ┌──────────────────────────────────────────────┘
+    │
+    ├─── stellar_catalog.md ──────────────┐
+    │                                     │
+    ├─── imbh_survey.md ─────────────────►├── dynamics_analysis.md ──┐
+    │                                     │                           │
+    ├─── smbh_catalog.md ────────────────►│                           │
+    │                                     │                           ├──► PDF
+    └─── detection_methods.md ──────────►│                           │   + JSON
+                                          └── chandra_cross_index ──►│
+                                                                       │
+                                               VERIFY ────────────────┘
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Failure} \\
+\midrule
+Safety-Critical & 4 & Mandatory & BLOCK wave; human review required \\
+Core Functionality & 8 & High & Fail wave; regenerate component \\
+Integration & 4 & Medium & Flag; continue with annotation \\
+Edge Cases & 4 & Low & Log; annotate entry \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & All mass values cite primary literature & No mass value without specific journal citation; secondary summaries flagged \\
+SC-02 & IMBH candidates correctly rated as candidate/strong-candidate & No IMBH marked ``confirmed'' without direct dynamical or GW detection evidence \\
+SC-03 & No primordial BH entries in confirmed section & Primordial BHs isolated in speculative section only \\
+SC-04 & GW event designations match LIGO-Virgo-KAGRA official catalog & All GW IDs cross-checked against gw-openscience.org \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{5cm}L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC \#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Stellar catalog $\geq$50 entries, complete params & CORE-01, CORE-02 & Pending \\
+2 & All IMBHs confidence-rated & SC-02, CORE-03 & Pending \\
+3 & SMBH $\geq$50 entries, EHT parameterized & CORE-04 & Pending \\
+4 & Detection taxonomy $\geq$7 methods & CORE-05 & Pending \\
+5 & Chandra cross-reference present & INTEG-01 & Pending \\
+6 & $\geq$7 detection methods with limits & CORE-05, INTEG-02 & Pending \\
+7 & $\geq$5 dynamics phenomena, quantitative & CORE-06 & Pending \\
+8 & Machine-readable export valid & CORE-07, EDGE-01 & Pending \\
+9 & Mass values vs. primary literature & SC-01, CORE-08 & Pending \\
+10 & Confidence taxonomy consistent & SC-02, SC-03 & Pending \\
+11 & IMBH gap analysis present & SC-02, CORE-03 & Pending \\
+12 & LaTeX compiles cleanly & CORE-09 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go at each CAPCOM gate \\
+PLAN & Planner (Sonnet) & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent (Sonnet) & Web research gap-fill; source validation; Chandra archive access \\
+CRAFT-STELLAR & Stellar Specialist (Sonnet) & XRB catalog; LIGO BBH summary; Gaia BH series \\
+CRAFT-IMBH & IMBH Analyst (Opus) & IMBH survey; mass gap analysis; confidence adjudication \\
+CRAFT-SMBH & SMBH Specialist (Sonnet) & SMBH catalog; EHT entries; AGN population stats \\
+CRAFT-DETECT & Detection Analyst (Sonnet) & Detection method taxonomy; instrument mapping \\
+VERIFY & Verification (Sonnet) & Source validation; mass value audit; confidence consistency \\
+INTEG & Integration Agent (Opus) & Cross-instrument naming; unified ID scheme; cross-catalog reconciliation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; scope change routing \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning; cache TTL monitoring \\
+LOG & Chronicle (Haiku) & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Waves & 5 (0, 1A, 1B, 2, 3) \\
+Parallel Tracks & 2 (Wave 1A / 1B) \\
+CAPCOM Gates & 4 \\
+Estimated Context Windows & 8--12 \\
+Estimated Sessions & 3--4 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Source & NASA/CXC Chandra Press Archive (100+ releases) \\
+Primary Domain & Space/Physics / Astrophysics \\
+Deliverables & 2 files (PDF catalog + machine-readable export) + Chandra index \\
+Safety-Critical Tests & 4 (all BLOCK level) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The no-hair theorem tells us that a black hole, regardless of how it formed, is described entirely by three numbers: mass, charge, and spin. From this minimal description, the universe generates everything --- accretion disks painting the X-ray sky, jets spanning millions of light-years, gravitational waves rippling across the cosmos, tidal disruptions flaring briefly in the dark. This catalog is an act of faithful listening: recording every signature these minimal objects leave in the instruments we have aimed at them. The spaces between the catalog entries --- the mass gap, the missing IMBHs, the silent majority of 100 million dormant black holes in the Milky Way --- are where the next questions wait.''}
+
+\vspace{0.5em}
+\hfill --- GSD Black Hole Catalog Mission, Vision Through-Line
+\end{quotebox}
+
+\end{document}
