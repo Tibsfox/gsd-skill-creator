@@ -96,6 +96,7 @@
     { id: 'MDS', name: 'Markup & Data Systems', path: 'MDS/index.html' },
     { id: 'MGU', name: 'Module Governance', path: 'MGU/index.html' },
     { id: 'MRW', name: 'MC Weather', path: 'MRW/index.html' },
+    { id: 'MST', name: 'Mesh Telescope', path: 'MST/index.html' },
     { id: 'MTB', name: 'Moontribe', path: 'MTB/index.html' },
     { id: 'MWC', name: 'Millwork Co-op', path: 'MWC/index.html' },
     { id: 'NEH', name: 'NeHe OpenGL', path: 'NEH/index.html' },
