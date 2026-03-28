@@ -1,0 +1,1037 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: History / Cultural Legacy ──────────────────────────────────
+\definecolor{primary}{HTML}{4A148C}       % Deep purple — gravitas
+\definecolor{secondary}{HTML}{BF6800}     % Amber gold — warmth, legacy
+\definecolor{tertiary}{HTML}{4E342E}      % Parchment brown — depth
+\definecolor{accent}{HTML}{7B1FA2}        % Mid-purple — highlights
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Lavender tint — quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Almost Live! \& Seattle Sketch Comedy}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Almost Live! and Seattle Sketch Comedy -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+\thispagestyle{empty}
+
+% ── Title Page ───────────────────────────────────────────────────────────────
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Almost Live! \&\\[0.3em]Seattle Sketch Comedy}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Bill Nye, Bill Nye the Science Guy, and the\\[0.2em]PNW Comedy Ecosystem, 1984--1999}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 3 sessions}}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% =============================================================================
+%  STAGE 1 — VISION DOCUMENT
+% =============================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Almost Live! and Seattle Sketch Comedy --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Research Complete / Ready for Execution}
+\metafield{Depends on:}{gsd-skill-creator v1.49+ (DACP-compatible)}
+\metafield{Context:}{GSD Cultural Heritage Research Track}
+
+\subsection{Vision}
+
+There is a short stretch of time in Seattle's history --- roughly 1984 to 1999 --- when a local sketch comedy show on KING-TV, NBC's Seattle affiliate, became something far stranger and more remarkable than its budget or geography had any right to produce. \textit{Almost Live!} was, on paper, a low-budget regional variety show filling air time on Sunday evenings. In practice, it became a laboratory for Pacific Northwest identity, a national comedy farm team, and the unlikely birthplace of one of the most beloved science communicators of the 20th century.
+
+The show's fifteen seasons track exactly with Seattle's own transformation: from a rain-soaked regional city defined by Boeing, fishing, and Scandinavian neighborhoods to the epicenter of grunge, the home of Microsoft and Starbucks, and a place the rest of the country suddenly wanted to understand. \textit{Almost Live!} was there for every beat --- not as a passive mirror, but as an active shaper of what Seattle thought it was and what it could laugh about. It sent up Ballard's Scandinavian retirees, Bellevue's affluence, Mercer Island's pretensions, and the U-District's peculiarities with the specificity of a city that knew exactly where its own bodies were buried.
+
+The Bill Nye story sits at the center of this. A Boeing mechanical engineer who moonlighted at comedy clubs, who won a Steve Martin lookalike contest, who corrected a host's pronunciation of ``gigawatt'' and thereby received a nickname that became a global brand --- it is precisely the kind of improbable trajectory that could only happen at the intersection of a city in transformation and a show agile enough to catch talent wherever it appeared. The \textit{Bill Nye the Science Guy} franchise, with its nineteen Emmy Awards and its enduring classroom presence, has a direct root in an improv moment on a Saturday night Seattle sketch show. The spaces between those institutions --- Boeing engineering lab, comedy club, local TV writers' room, PBS flagship children's program --- are where something new came into being.
+
+This research mission documents \textit{Almost Live!} as a cultural ecosystem: its origins, its cast and writing community, its intersection with Seattle's grunge-era rise, and the national careers it seeded. It is a study in what happens when a regional platform serves its audience with genuine fidelity, and how deep specificity --- the kind that says ``Qwik Fishin''' and means something by it --- turns out to be universally legible.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Underdocumented cultural infrastructure:} \textit{Almost Live!} is recognized by Seattleites but largely absent from national comedy scholarship, despite having launched careers now considered significant to American entertainment (Nye, McHale, Weedman, Nelson). A research deficit exists.
+
+  \item \textbf{Fragmented origin records for Bill Nye:} Accounts of how Nye's ``Science Guy'' persona developed --- and whether it was Ross Shafer, John Keister, or a writers'-room accident that named him --- remain inconsistent across sources. Authoritative synthesis is needed.
+
+  \item \textbf{Missing analysis of comedy--science pipeline:} The pathway from \textit{Almost Live!} sketch comedy to \textit{Bill Nye the Science Guy} (via KCTS-TV, producers James McKenna and Erren Gottlieb, and Disney/Buena Vista) represents an underanalyzed case study in how regional entertainment infrastructure produced nationally significant educational media.
+
+  \item \textbf{Improv ecosystem underexamined:} The role of Unexpected Productions' Theatersports at Pike Place Market as a complementary comedy training ground --- which incubated Joel McHale concurrently with his \textit{Almost Live!} tenure --- has not been documented in relation to the show's ensemble quality.
+
+  \item \textbf{Cancellation as urban transformation signal:} \textit{Almost Live!}'s cancellation in 1999, driven not by ratings (it was still number one in its slot) but by the corporate acquisition logic of Belo Corporation, reflects a broader pattern in which media consolidation ends locally-rooted cultural production. This dynamic deserves systematic documentation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Local Fidelity as National Engine:} A regional comedy show succeeds precisely \textit{because} of its hyperlocal specificity, not despite it --- and in doing so, builds a talent pipeline, a format vocabulary, and a cultural identity that radiates nationally.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+SEATTLE COMEDY ECOSYSTEM, 1984-1999
+====================================
+
+  [Boeing Engineering]          [Seattle Comedy Clubs]
+       |                               |
+       |     Bill Nye (1977-1986)      |
+       +----------> wins Steve Martin  |
+                    lookalike contest  |
+                         |             |
+                         v             v
+                    [KING-TV / REV music show]
+                              |
+                              v
+               +------[ALMOST LIVE!]------+
+               |    KING-TV, 1984-1999    |
+               |  Ross Shafer (1984-88)   |
+               |  John Keister (1988-99)  |
+               +----------+---------------+
+                          |
+          +---------------+----------------+
+          |               |                |
+          v               v                v
+  [Bill Nye          [Joel McHale    [Jim Sharp /
+  the Science        -> The Soup,    Comedy Central;
+  Guy, 1993]         Community]     Bob Nelson ->
+     |                              Nebraska, Oscar]
+     v
+  [KCTS Seattle PBS + Disney/BV]
+     |
+     v
+  [19 Emmy Awards / classroom standard]
+
+  Parallel Track:
+  [Unexpected Productions / Theatersports]
+  [Pike Place Market, 1985-present]
+         |
+         +--> McHale (1993-97) + broader improv community
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+===================
+
+  M01: ORIGINS & FORMAT
+    Almost Live! founding (1984), Ross Shafer era,
+    evolution from talk show to sketch comedy
+
+  M02: BILL NYE'S SEATTLE ORIGIN STORY
+    Boeing -> stand-up -> Almost Live! -> Science Guy
+    persona genesis, KCTS pitch, Disney distribution
+
+  M03: THE SKETCH COMEDY ECOSYSTEM
+    Cast roster, recurring sketches, Unexpected
+    Productions / Theatersports, stand-up club circuit
+
+  M04: SEATTLE CULTURAL CONTEXT
+    Grunge era, tech boom, Almost Live! as mirror
+    and shaper of regional identity
+
+  M05: CAST TRAJECTORIES & NATIONAL LEGACY
+    Post-show careers: McHale, Weedman, Nelson,
+    Sharp, Cashman, Stainton, Keister; MOHAI exhibit;
+    cancellation analysis
+
+  CROSS-MODULE CONNECTIONS:
+  M01 <-> M02: Science Guy persona born from format
+  M02 <-> M03: Science/comedy hybrid as sketch form
+  M03 <-> M04: Sketches as cultural diagnosis
+  M04 <-> M05: City transformation mirrors show arc
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Origins and Format}
+Documents the founding of \textit{Almost Live!} in 1984 as a Letterman-inspired talk show under Ross Shafer, its early Emmy success and audience-building through local stunts (the ``Louie Louie'' campaign, Seahawks cameos), John Keister's 1988 assumption of the host role, the pivotal 1990 transition to Saturday 11:30 p.m. sketch format, and the Comedy Central syndication deal (65 episodes, 1992--93).
+
+\subsubsection{Module 02 --- Bill Nye's Seattle Origin Story}
+Traces Nye's biography from his 1977 arrival in Seattle to work at Boeing (inventing a hydraulic resonance suppressor tube for the 747), his entry into the stand-up comedy circuit, his recruitment to \textit{Almost Live!} as writer/performer, the accidental January 8, 1987 on-air debut of the Science Guy persona (liquid nitrogen demonstration filling a guest cancellation), the naming incident, the Fabulous Wetlands PBS segment as prototype, and the path through KCTS, McKenna/Gottlieb, and Disney/Buena Vista to the nationally syndicated series.
+
+\subsubsection{Module 03 --- The Sketch Comedy Ecosystem}
+Catalogs the ensemble: Ross Shafer, John Keister, Pat Cashman, Tracey Conway, Nancy and Joe Guppy, Bill Stainton, Bob Nelson, Joel McHale, Lauren Weedman, Steve Wilson, Ed Wyatt, Darrell Suto (Billy Quan), Scott Schaefer (head writer, 3 Emmy Awards on \textit{Science Guy}), Jim Sharp (original head writer, Comedy Central SVP). Documents recurring sketch formats (\textit{Speed Walker}, \textit{High-Fivin' White Guys}, \textit{Cops in...}, \textit{Mind Your Manners with Billy Quan}, \textit{The Worst Girlfriend in the World}) and Unexpected Productions' Theatersports at Pike Place Market.
+
+\subsubsection{Module 04 --- Seattle Cultural Context}
+Situates \textit{Almost Live!} within Seattle's 1984--1999 cultural arc: the pre-grunge regional identity, the rise of Sub Pop and the grunge scene (Kim Thayil of Soundgarden appeared in the ``Lame List'' sketch), the simultaneous Microsoft/Starbucks expansion, the show's self-conscious role as a city's comedy consciousness, and how the show's end in 1999 coincided with corporate consolidation (Belo Corporation) displacing local media.
+
+\subsubsection{Module 05 --- Cast Trajectories and National Legacy}
+Documents post-show careers and the legacy arc: Joel McHale (The Soup, Community), Lauren Weedman (The Daily Show, Hung, 11 solo plays), Bob Nelson (Oscar-nominated for \textit{Nebraska}), Jim Sharp (Comedy Central SVP), Bill Stainton and Ross Shafer (keynote speakers), Pat Cashman (voice work, radio), the 2013 sequel show The (206), the 2024 MOHAI exhibit ``Almost Live! (Almost an Exhibit),'' and Bill Nye's Presidential Medal of Freedom (2024).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+GSD CHIPSET CONFIGURATION
+==========================
+Mission: Almost Live! and Seattle Sketch Comedy Research
+
+AGNUS (Orchestration / Context Management):
+  model: claude-opus-4-5
+  role: Flight Director, synthesis, cultural sensitivity
+  focus: Cross-module integration; M04 cultural context;
+         ensuring Nye origin account is consistent
+
+DENISE (Display / Output Rendering):
+  model: claude-sonnet-4-5
+  role: Document assembly, survey compilation
+  focus: M01, M02, M03, M05 document production
+
+PAULA (I/O / Anticipatory):
+  model: claude-haiku-4-5
+  role: Scaffolding, shared schemas, template population
+  focus: Wave 0 foundation; source index; test scaffolding
+
+Model Split: ~30% Opus / ~60% Sonnet / ~10% Haiku
+Profile: Squadron (12 roles)
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item \textit{Almost Live!} broadcast history, 1984--1999 (KING-TV + Comedy Central)
+  \item Bill Nye's full Seattle career arc through the \textit{Bill Nye the Science Guy} launch (1993)
+  \item Core cast and writing ensemble; recurring sketch formats
+  \item Seattle cultural context (grunge, tech boom, local identity)
+  \item Post-show career trajectories through 2026
+  \item Unexpected Productions / Theatersports as complementary ecosystem
+  \item Cancellation analysis and corporate acquisition context
+  \item 2024 MOHAI exhibit as legacy documentation event
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item \textit{Bill Nye the Science Guy} full series analysis (separate mission warranted)
+  \item \textit{Community}, \textit{The Soup}, or Joel McHale's post-Seattle career in depth
+  \item The (206) and Up Late NW successor shows in detail
+  \item Seattle comedy clubs pre-1980 (founding context only)
+  \item National SNL comparative analysis
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textit{Almost Live!} founding story documented with consistent primary source accounts (Bob Jones, Ross Shafer, Jim Sharp perspectives reconciled)
+  \item Bill Nye naming incident reconstructed with date, context, and primary source attribution (January 8, 1987 liquid nitrogen demonstration)
+  \item Full cast/writing ensemble roster documented with roles and years active
+  \item Recurring sketches cataloged (at least 15 sketches) with format descriptions and cultural context
+  \item Unexpected Productions / Theatersports role documented as complementary training ground
+  \item Seattle 1984--1999 cultural arc mapped with at least four major contextual forces (Boeing, grunge, tech, coffee)
+  \item Cancellation context documented: Belo Corporation acquisition; ratings vs. profitability tension
+  \item Post-show careers documented for at least eight key cast/crew members
+  \item Science Guy genesis pathway traced from Boeing lab through KCTS to Disney/Buena Vista distribution
+  \item Quantitative legacy data captured: Emmy totals, syndication reach, MOHAI exhibit metrics
+  \item Cross-module relationships between comedy ecosystem and science communication documented
+  \item Source bibliography includes at least eight professional/archival sources (HistoryLink.org, MOHAI, KING-TV, Seattle Times, etc.)
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Seattle Hip-Hop Cultural Module Series & Parallel track & Both document Seattle 1980s--90s cultural production; comedy and hip-hop scenes intersect in neighborhood identity work \\
+GSD Foxfire Heritage Skills Vision & Thematic sibling & Regional oral history methodology; interview-based documentation of local creative ecosystems \\
+Deep Audio Analyzer Mission & Tangential & Grunge-era Seattle music scene overlaps with Almost Live! cultural context (Module 04) \\
+The Space Between & Philosophical foundation & Comedy as ``spaces between'' --- meaning in the connection between engineer and stand-up, sketch and science, local and national \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that architectural leverage matters more than brute force --- that a modest machine with principled design can outperform titans operating without elegance. \textit{Almost Live!} is a perfect embodiment of this principle applied to cultural production. With a fraction of the budget of \textit{Saturday Night Live}, operating in a city that national media barely acknowledged, with a cast of teachers, engineers, improv comedians, and human-resources secretaries, the show won over a hundred Northwest Emmy Awards and produced an internationally recognized science communicator, a \textit{Community} star, a Daily Show correspondent, and an Oscar-nominated screenwriter.
+
+The spaces between mattered. The connection between Boeing's engineering rigor and the comedy writers' room. The gap filled by a liquid-nitrogen demonstration when a guest canceled. The moment a host blurted an alliterative nickname in a panic. These are not accidents --- they are what happens when a platform is genuinely present for its community, when the specificity of ``Qwik Fishin' on Lake Washington'' turns out to be universally legible because truth always is.
+
+\newpage
+
+% =============================================================================
+%  STAGE 2 — RESEARCH REFERENCE
+% =============================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Almost Live! and Seattle Sketch Comedy --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified findings from web research and primary source accounts for use in document production. Each module section corresponds to a Mission Package component. Agents should cite findings to the source organizations listed below, never to entertainment media or unsourced claims.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item \textbf{HistoryLink.org} --- Washington State history encyclopedia; peer-reviewed entries
+  \item \textbf{MOHAI} (Museum of History \& Industry) --- Primary artifact repository for the 2024 exhibit
+  \item \textbf{KING-TV / KING 5} --- Broadcasting archive; oral history interviews
+  \item \textbf{Seattle Times} --- Primary regional journalism record
+  \item \textbf{Seattle Met} --- Oral history of \textit{Almost Live!} (2013, Laura Dannen)
+  \item \textbf{Wikipedia} (as secondary synthesis) --- For cast/crew lists and broadcast data
+  \item \textbf{Almost Live!: Still Alive podcast} --- Direct cast interview audio record
+  \item \textbf{Paul Dorpat / Clay Eals} --- 2024 Seattle Times ``Where Are They Now'' feature based on Zoom interviews
+\end{itemize}
+
+\subsection{Module 01 --- Origins and Format}
+
+\subsubsection{Founding and Talk Show Era (1984--1989)}
+
+The pilot episode of \textit{Almost Live!} (initially called ``Take 5'') aired September 23, 1984, on KING-TV. The show was created by KING VP of Programming Bob Jones; the title ``Almost Live!'' was coined by original head writer Jim Sharp --- who later described it as ``subtle, really easy, humorous if you think about it.'' The show was initially patterned after \textit{Late Night with David Letterman} at the suggestion of director Steve Wilson, and hosted by Ross Shafer, who had been running a Puyallup stereo store and pet shop while doing stand-up comedy.
+
+The early show featured local celebrity guests, a live band, and video pieces. It became so popular in its first seasons --- winning nearly 40 Northwest Emmys --- that KING-TV expanded it to one hour and aired it twice a week. Shafer's tenure produced several notable publicity stunts: a campaign to make ``Louie Louie'' the Washington State song drew an estimated 5,000 people to the State Capitol on April 12, 1985. When Shafer left in 1988 to host the Fox Network's \textit{The Late Show}, John Keister --- a Franklin High School alumnus who had covered music for \textit{The Rocket} and KING's music video program REV --- assumed the host role.
+
+\subsubsection{Sketch Comedy Transformation (1989--1993)}
+
+Keister's first season (1988--89) attempted to maintain the talk show format, with results he later described as falling flat. Realizing his comedy sensibility was incompatible with interview hosting, he gradually converted the show to its definitive sketch format, drawing on the video pieces he had been producing from the beginning. The guest interviews and live band segments were dropped; the show was shaved to a half hour.
+
+In April 1990, the show moved from Sunday 6 p.m. to Saturday 11:30 p.m. --- a slot requiring special permission from NBC, since it delayed \textit{Saturday Night Live} by half an hour in the Seattle market. The trial was meant to last six months; \textit{Almost Live!} won a national award from the National Association of Television Programming Executives (best local show in America) while \textit{SNL} ``tanked'' in local ratings. The trial was extended indefinitely.
+
+In summer 1992, the show taped 65 special episodes for Comedy Central, bringing \textit{Almost Live!} to a national cable audience. The same year, Microsoft, Starbucks, and the national grunge explosion were all amplifying Seattle's profile, and the show's comedy was hitting its stride.
+
+\subsubsection{The Space Needle April Fool's Incident (1989)}
+
+Among the most notorious \textit{Almost Live!} moments was an April Fool's Day 1989 sketch in which a ``live news report'' declared the Space Needle had collapsed. Despite a caption identifying it as a prank, viewers flooded KING-TV, the 911 line, the Seattle Police Department, and the Space Needle itself with panicked calls, shutting down several emergency switchboards. Keister had left for another comedy show immediately after taping and was unaware of the chaos until afterward. The sketch introduced Tracey Conway --- a KING-TV human-resources secretary with master's-level drama training --- to the cast.
+
+\subsubsection{Cancellation (1999)}
+
+Dorothy Bullitt, KING-TV matriarch and champion of local programming, died at age 97. The station eventually passed through Providence Journal (Rhode Island) ownership to Belo Corporation (Dallas, Texas), which purchased King Broadcasting's parent company in 1997. Despite being the top-rated show in its Saturday 11:30 p.m. time slot, \textit{Almost Live!} was canceled in September 1999 as ``a line item on a budget'' --- executive producer Bill Stainton's phrase. The series finale aired May 22, 1999.
+
+\subsection{Module 02 --- Bill Nye's Seattle Origin Story}
+
+\subsubsection{Boeing Years (1977--1986)}
+
+William Sanford Nye was born November 27, 1955, in Washington, D.C. He attended Cornell University, where a class with astronomer Carl Sagan shaped his conviction that pure science --- not technology --- was what resonated with general audiences. After earning his mechanical engineering degree, Nye moved to Seattle in 1977 to work at Boeing, where he invented a hydraulic resonance suppressor tube used in the 747 jumbo jet --- an engineering contribution still in service. He applied to NASA's astronaut program multiple times without success.
+
+Nye began moonlighting as a stand-up comedian while at Boeing. He won a Steve Martin lookalike contest at a Seattle comedy club, which drew him into the local circuit and introduced him to Ross Shafer and John Keister.
+
+\subsubsection{Entry into Almost Live! (1986)}
+
+Nye quit his Boeing position on October 3, 1986, to pursue comedy full-time. Keister encountered him at an open mic night; Shafer brought him into the \textit{Almost Live!} writers' room. Per Shafer's own account, Nye attended his first writers' meeting with science magazines falling out of his backpack, pitching sketches like ``Speed Walker'' (a crime-fighting pedestrian who fights crime while maintaining strict adherence to international speedwalking regulations). Initial writing contributions were, by Nye's own admission, ``not especially good.''
+
+\subsubsection{The Science Guy Persona (January 8, 1987)}
+
+The \textit{Bill Nye the Science Guy} persona emerged by accident on January 8, 1987. A celebrity guest canceled 15 minutes before airtime; Shafer, scrambling for content, suggested Nye do ``that science stuff.'' Nye performed a liquid nitrogen demonstration --- submerging an onion and shattering it --- to audience acclaim. This became a regular segment. The nickname came shortly afterward: during an on-air or writing-room exchange (accounts differ in detail but converge on the substance), Nye corrected Keister's pronunciation of ``gigawatt'' as ``jigowatt,'' and Keister responded: ``Who do you think you are --- Bill Nye the Science Guy?'' The name stuck. Nye won a talent Emmy from the local chapter of the National Academy of Television Arts and Sciences for one of his segments.
+
+Alongside the Science Guy segments, Nye was also beloved as ``Speed Walker,'' the superhero character. The Science Guy persona appeared concurrently with his work on \textit{Almost Live!}, which he left in 1995.
+
+\subsubsection{The Wetlands Prototype and KCTS Pitch}
+
+In 1989, the Washington Department of Ecology commissioned Nye to host \textit{Fabulous Wetlands}, explaining the importance of preserving estuaries at the Billy Frank Jr. Nisqually National Wildlife Refuge while wearing his signature bow tie and lab coat. Nye described this as the direct model for his future show: ``zany camera cuts paired with Nye's humor'' that distinguished it from conventional science broadcasting.
+
+KING-TV declined Nye's pitch for a Science Guy series. He then connected with James McKenna and Erren Gottlieb --- both \textit{Almost Live!} alumni --- and together they pitched \textit{Bill Nye the Science Guy} to KCTS-TV (Seattle PBS affiliate) as \textit{Mr. Wizard meets Pee-wee's Playhouse} (later updated to \textit{Mr. Wizard meets MTV} after Paul Reubens' 1991 arrest).
+
+\subsubsection{Bill Nye the Science Guy (1993--1999)}
+
+\textit{Bill Nye the Science Guy} launched in first-run syndication on September 10, 1993, with a concurrent PBS run beginning October 10, 1994. The show was produced by McKenna/Gottlieb Producers, Inc. in partnership with KCTS, with distribution through Buena Vista Television (Disney subsidiary). Nye Labs was located in a converted clothing warehouse in Seattle's Pioneer Square neighborhood. The series ran six seasons, 100 episodes, won 19 Emmy Awards, and was nominated for 23. Research studies documented that regular viewers outperformed non-viewers on science explanation tasks. The show remained a classroom standard for decades. The announcer was Pat Cashman, Nye's \textit{Almost Live!} colleague. Several \textit{Almost Live!} sketch characters (Billy Quan, Uncle Fran) carried over into the \textit{Science Guy} series. Nye received the Presidential Medal of Freedom on January 4, 2025.
+
+\subsection{Module 03 --- The Sketch Comedy Ecosystem}
+
+\subsubsection{Core Cast and Writers}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Name} & \tableheader{Role / Years} & \tableheader{Background / Notes} \\
+\midrule
+Ross Shafer & Host, 1984--88 & Stand-up comedian; patterned show on Letterman; later Fox \textit{Late Show} host \\
+John Keister & Host, 1988--99 & Music journalist (\textit{The Rocket}); transformed show to sketch format \\
+Pat Cashman & Cast, 1984--99 & KING-TV commercials producer; radio personality; voice-over career \\
+Bill Stainton & Cast / Exec Prod. & Came from Portland's KGW-TV; later wrote for \textit{The Tonight Show} \\
+Bill Nye & Cast, 1986--95 & Boeing engineer; ``Science Guy'' and ``Speed Walker'' characters \\
+Tracey Conway & Cast, 1989--99 & KING-TV HR secretary recruited via Space Needle sketch \\
+Nancy Guppy & Cast, 1988--99 & Journalist/improv comedian; later hosted Arts Zone on KING \\
+Joe Guppy & Cast, 1985--99 & Founding member, Off the Wall Players improv troupe \\
+Bob Nelson & Writer / Cast & Social studies teacher background; Oscar nomination, \textit{Nebraska} \\
+Joel McHale & Cast, 1993--97 & UW intern; simultaneously at Unexpected Productions improv \\
+Lauren Weedman & Cast, late 1990s & Later The Daily Show, Hung, Euphoria; 11 solo plays \\
+Jim Sharp & Head Writer, 1984--88 & Later Comedy Central SVP; coined ``Almost Live!'' title \\
+Scott Schaefer & Writer & Won 3 national Emmys for writing on \textit{Bill Nye the Science Guy} \\
+Darrell Suto & Cameraman / Cast & Played Billy Quan (``Mind Your Manners''); non-actor cast from crew \\
+Steve Wilson & Director, 1984--99 & ``The hollering guy'' both behind and in front of camera \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Recurring Sketch Formats}
+
+\textit{Almost Live!} developed a rich vocabulary of recurring sketches, many of which became definitional for Seattle identity. Key formats included:
+
+\textbf{Speed Walker:} Bill Nye as a Seattle superhero who fights crime while adhering to competitive speed-walking regulations. Combined Nye's physical comedy with absurdist heroism.
+
+\textbf{Mind Your Manners with Billy Quan:} Cameraman Darrell Suto in a Bruce Lee martial arts parody; the etiquette-enforcing master delivers flying kicks to the rude. Carried over directly into \textit{Bill Nye the Science Guy}.
+
+\textbf{Cops in\ldots:} A parody of the television show \textit{Cops} set in Seattle neighborhoods (Ballard, Issaquah, Renton, Mercer Island, etc.), satirizing neighborhood stereotypes with precision.
+
+\textbf{The High-Fivin' White Guys:} A group of excessively exuberant young Caucasian males with low self-awareness going out around greater Seattle --- eventually including a Vancouver, BC episode.
+
+\textbf{Urban Wildlife:} Nature documentary narration applied to Seattle hipsters and professionals; described by insiders as one of the show's most conceptually consistent recurring ideas.
+
+\textbf{Ballard Vice:} A parody of \textit{Miami Vice} shot in Ballard; included Jim Zorn and Michael Jackson of the Seahawks as guest performers. Credited by Keister as the sketch that proved video comedy could carry the show.
+
+\textbf{The Lame List:} Members of ``Seattle's heavy metal community'' react to mundane modern situations with ``LAME!'' Participants included Kim Thayil of Soundgarden, members of Bitter End and Forced Entry, and Alice in Chains head roadie Jeff Hubbard --- documenting the comedy-grunge scene crossover.
+
+\textbf{The Worst Girlfriend in the World:} Tracey Conway as a comedy horror character; one of the show's most beloved recurring bits.
+
+\textbf{Subtitle Theater:} A couple speaks to each other; subtitles reveal what they are actually thinking.
+
+\subsubsection{Unexpected Productions and the Improv Ecosystem}
+
+\textbf{Unexpected Productions} at Pike Place Market has operated continuously for over four decades as Seattle's cornerstone improv venue. Its Theatersports format --- a competitive improv structure originally developed by Keith Johnstone --- provided a complementary training and performance context for \textit{Almost Live!} personnel.
+
+Joel McHale participated in Unexpected Productions' Theatersports from 1993 to 1997, running concurrently with his \textit{Almost Live!} tenure. Joe Guppy had been a founding member of Off the Wall Players, another local improv group, before Keister recruited him. The dual track --- sketch comedy television combined with live improv performance --- produced an unusual depth of performance craft in the \textit{Almost Live!} ensemble.
+
+\subsection{Module 04 --- Seattle Cultural Context}
+
+\subsubsection{Seattle's 1984--1999 Transformation Arc}
+
+\textit{Almost Live!} debuted in September 1984, at a moment when Seattle was still primarily defined by Boeing (aviation manufacturing), shipping, and the Scandinavian working-class neighborhoods it had satirized from day one. By the time the show ended in May 1999, Seattle had produced the world's most watched band (Nirvana), the world's wealthiest company founder (Bill Gates/Microsoft), the world's most recognized coffee brand (Starbucks), and the world's most recognizable science communicator for children (Bill Nye). \textit{Almost Live!} operated as the city's internal comedy consciousness across this entire arc.
+
+The grunge scene had direct \textit{Almost Live!} intersections beyond the ``Lame List'' sketch. Keister had covered the Seattle music scene for \textit{The Rocket} before the show, and the REV music program on KING-TV that preceded \textit{Almost Live!} was one of the early venues for local alternative music. The show's hyperlocal neighborhood geography --- Ballard, Kent, Mercer Island, the U-District, Capitol Hill --- mapped directly onto the neighborhood-specific social identity that the grunge scene was simultaneously processing.
+
+\subsubsection{The Corporate Transition}
+
+The cancellation of \textit{Almost Live!} in 1999 is inseparable from the story of media consolidation. Dorothy Bullitt, the KING Broadcasting matriarch who had championed local production, died at 97. The station was sold to Providence Journal Company (Rhode Island), then to Belo Corporation (Dallas). Despite winning its time slot, the show was canceled because the new ownership operated on national efficiency metrics rather than local community investment. Bill Stainton's phrase --- ``we were a line item on a budget'' --- captures the mechanism precisely.
+
+\subsection{Module 05 --- Cast Trajectories and Legacy}
+
+\subsubsection{National Career Trajectories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Person} & \tableheader{Post-Show Career} \\
+\midrule
+Bill Nye & Bill Nye the Science Guy (19 Emmy Awards); The Eyes of Nye; Bill Nye Saves the World (Netflix); Presidential Medal of Freedom, January 2025 \\
+Joel McHale & The Soup (E!, 2004--2015); Community (NBC, 2009--2015); White House Correspondents' Dinner host (2014); Card Sharks (ABC, 2019--2021) \\
+Lauren Weedman & The Daily Show; Hung (HBO); Euphoria (HBO); 11 solo plays; author of two books; Moth Storytelling Slam host \\
+Bob Nelson & Oscar nomination for \textit{Nebraska} (dir. Alexander Payne, 2013); continues as screenwriter \\
+Jim Sharp & Senior VP, Original Programming and Development, Comedy Central; 14 years in LA/NY \\
+Bill Stainton & Wrote for The Tonight Show; keynote speaker on innovation; author (\textit{The 5 Best Decisions the Beatles Ever Made}) \\
+Ross Shafer & Fox Late Show; game show/network hosting; business keynote speaker; currently in Denver \\
+Pat Cashman & Voice-over work; KOMO-AM radio; Taco Time ads; keynote speaker; currently in Bend, OR \\
+Scott Schaefer & Three national Emmys for writing on Bill Nye the Science Guy \\
+John Keister & Retired in South Seattle; worked with Nye on The (206) sequel show (2013--14) \\
+Nancy Guppy & Art Zone with Nancy Guppy (KING); Seattle arts journalism \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The 2024 MOHAI Exhibit}
+
+``Almost Live! (Almost an Exhibit)'' opened at the Museum of History \& Industry on August 31, 2024, and ran through February 23, 2025. The exhibit featured costumes, props, production materials, and clips from the show, organized in collaboration with KING 5 and featuring objects contributed by Tracey Conway, Jeff Gilbert, John Keister, Bill Nye, Bill Stainton, Darrell Suto, Steve Wilson, and Ed Wyatt. A cast reunion photograph was taken at the Space Needle on July 12, 2024. The \textit{Almost Live!: Still Alive} podcast was created as an audio companion, featuring direct interviews with creators, cast, and writers.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Billy Quan character & Cultural sensitivity & Darrell Suto is a Japanese American performing a Bruce Lee parody; document factually with cast member identity, noting the character was carried into Bill Nye with full cast continuity \\
+Lame List grunge cameos & Accuracy gate & Source participant names to Wikipedia/contemporaneous records; several named participants have since died \\
+Bill Nye naming origin & Source conflict & Multiple accounts (Shafer vs. Keister versions differ); document both, note the consensus on date and outcome \\
+Corporate cancellation & Balance & Document factually; do not editorialize beyond what sources state \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary and Archival Sources}
+\begin{itemize}[noitemsep]
+  \item HistoryLink.org, ``Television History: Almost Live!'' (File \#22621). Washington State history encyclopedia.
+  \item MOHAI, ``Almost Live! (Almost an Exhibit),'' exhibit documentation, August 31, 2024 -- February 23, 2025.
+  \item KING 5 / KING-TV, broadcast archive and oral history interviews.
+  \item Paul Dorpat / Clay Eals, ``Seattle's `Almost Live!' cast: Where are they now,'' \textit{Seattle Times} Pacific NW Magazine, August 24--25, 2024.
+  \item Laura Dannen, ``An Oral History of Almost Live,'' \textit{Seattle Met}, May/June 2013.
+  \item Ross Shafer, ``How Did Bill Nye the Science Guy Get Famous?'' rossshafer.com (personal memoir account, 2025).
+  \item \textit{Almost Live!: Still Alive} podcast (Dave Tavres, producer; Pat Cashman, host). almostlivestillalive.com, 2021--2024.
+  \item Nancy Guppy, personal site ``About --- Almost Live!,'' nancyguppy.org.
+\end{itemize}
+
+\subsubsection{Reference Works}
+\begin{itemize}[noitemsep]
+  \item Wikipedia, ``Almost Live!'' (accessed March 2026). Used for cast/crew list and broadcast dates.
+  \item Wikipedia, ``Bill Nye'' (accessed March 2026). For biographical timeline cross-reference.
+  \item Wikipedia, ``Bill Nye the Science Guy'' (accessed March 2026). For production details.
+  \item IMDb, ``Almost Live!'' (tt0149413). For cast/crew credits.
+  \item \textit{Seattle Times}, ``Bill Nye, Seattle's science guy, awarded Presidential Medal of Freedom,'' January 5, 2025.
+  \item Unexpected Productions, ``About,'' unexpectedproductions.org and pikeplacemarket.org vendor listing.
+\end{itemize}
+
+\newpage
+
+% =============================================================================
+%  STAGE 3 — MISSION PACKAGE
+% =============================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on \textit{Almost Live!} and the Seattle sketch comedy ecosystem (1984--1999), with particular emphasis on Bill Nye's emergence from Boeing engineer to national science communicator, the cultural context of Seattle's grunge-era transformation, and the national careers seeded by the show's talent pipeline. The document should serve as both a stand-alone cultural history and a reference suitable for integration into the GSD Cultural Heritage Research Track.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+=================
+
+  Wave 0: Foundation (Sequential, Haiku)
+  +--> Shared schemas: cast database, sketch catalog, timeline
+  +--> Source index: 16 sources indexed and pre-loaded
+  +--> Test scaffold: SC/CF/IN/EC test stubs generated
+
+  Wave 1A: Historical Survey (Parallel, Sonnet)
+  +--> M01: Origins and Format document
+  +--> M02: Bill Nye Origin Story document
+  +--> [Cache hit: shared timeline, source index]
+
+  Wave 1B: Ecosystem Survey (Parallel, Sonnet)
+  +--> M03: Sketch Comedy Ecosystem document
+  +--> M04: Seattle Cultural Context document
+  +--> [Cache hit: cast database, grunge context]
+
+  CAPCOM GATE: Human review of M01-M04 scope
+  and sensitive content (Billy Quan, Lame List)
+
+  Wave 2: Synthesis (Sequential, Opus)
+  +--> M05: Cast Trajectories + National Legacy
+  +--> Cross-module integration (comedy-science pipeline)
+  +--> Through-line synthesis
+
+  Wave 3: Publication + Verification (Sequential, Sonnet)
+  +--> Full document assembly
+  +--> Source verification pass
+  +--> Test plan execution
+  +--> Final PDF compilation
+
+  CAPCOM GATE: Final human review before publish
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Source Intelligence Layer} --- Pre-indexed bibliography; HistoryLink.org, MOHAI, KING-TV, Seattle Times, oral history sources
+  \item \textbf{Cast/Crew Registry} --- Structured database of all personnel with roles, years, and post-show trajectories
+  \item \textbf{Sketch Catalog} --- Named, dated, described collection of recurring formats and notable one-off pieces
+  \item \textbf{Timeline Layer} --- Date-anchored event sequence from 1977 (Nye arrives in Seattle) through 2025 (Presidential Medal of Freedom)
+  \item \textbf{Cultural Context Layer} --- Seattle 1984--1999 arc: Boeing, grunge, tech, coffee, neighborhood identity
+  \item \textbf{Legacy Analysis Layer} --- Post-show career trajectories, exhibit record, cancellation analysis
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{5cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Owner} \\
+\midrule
+1 & Origins \& Format document & 1,500+ words; dates sourced; Space Needle incident documented & EXEC-1 \\
+2 & Bill Nye Origin Story document & Full biography arc; January 8, 1987 naming incident; KCTS/Disney pathway & EXEC-1 \\
+3 & Sketch Comedy Ecosystem document & 15+ sketches cataloged; full cast table; Unexpected Productions documented & EXEC-2 \\
+4 & Seattle Cultural Context document & 4+ contextual forces; grunge crossover documented; cancellation analysis & EXEC-2 \\
+5 & Cast Trajectories document & 10+ careers documented; MOHAI exhibit; legacy quantitative data & CRAFT-HIST \\
+6 & Integrated final document & All modules assembled; cross-references valid; bibliography complete & INTEG \\
+7 & Test verification report & All SC tests pass; 80\%+ CF tests pass; 3+ IN tests pass & VERIFY \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Shared schemas / source index & None & Haiku & 4,000 \\
+M01: Origins \& Format & Source index & Sonnet & 12,000 \\
+M02: Nye Origin Story & Source index, timeline & Sonnet & 14,000 \\
+M03: Sketch Ecosystem & Cast registry, sketch catalog & Sonnet & 16,000 \\
+M04: Cultural Context & Timeline, source index & Sonnet & 12,000 \\
+M05: Cast Trajectories & M01--04, cast registry & Opus & 18,000 \\
+Cross-module integration & M01--05 & Opus & 10,000 \\
+Document assembly & M01--05 + integration & Sonnet & 8,000 \\
+Verification pass & Full document & Sonnet & 6,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{\sffamily Total Estimated}} & \textbf{100,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+Foundation & Haiku & Schema generation, source indexing; no judgment required \\
+Survey docs & Sonnet & Structured content production from well-defined source material \\
+Synthesis & Opus & Cross-module integration, Bill Nye naming discrepancy resolution, cultural analysis \\
+Verification & Sonnet & Source tracing, numerical attribution, consistency checking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+0 & Foundation schemas & Sequential & Haiku & 4,000 \\
+1A & Historical survey (M01, M02) & Parallel & Sonnet & 26,000 \\
+1B & Ecosystem survey (M03, M04) & Parallel & Sonnet & 28,000 \\
+2 & Synthesis (M05 + integration) & Sequential & Opus & 28,000 \\
+3 & Publication + verification & Sequential & Sonnet & 14,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Cast registry schema & YAML: all personnel with role/years/notes & BUDGET \\
+Sketch catalog schema & YAML: 20+ sketches named/described & BUDGET \\
+Timeline schema & YAML: 1977--2025 key events & BUDGET \\
+Source index & 16 sources, type/authority/URL & LOG \\
+Test stubs & SC/CF/IN/EC test IDs pre-generated & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Historical Survey (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+M01: Origins \& Format & 1,500-word document; founding through cancellation & EXEC-1 \\
+M02: Nye Origin Story & 2,000-word document; Boeing through Presidential Medal & EXEC-1 \\
+Cache: shared timeline & Pre-loaded for both tasks & PLAN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Ecosystem Survey (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+M03: Sketch Ecosystem & 2,000-word document; cast table; sketch catalog; improv ecosystem & EXEC-2 \\
+M04: Cultural Context & 1,500-word document; Seattle arc; cancellation analysis & EXEC-2 \\
+Cache: cast registry & Pre-loaded for M03 & PLAN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM GATE:} Review M01--M04 for (1) Billy Quan cultural sensitivity framing, (2) Lame List participant accuracy (some deceased), (3) Bill Nye naming origin discrepancy between Shafer and Keister accounts.
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+M05: Cast Trajectories & 2,000-word document; careers; MOHAI exhibit; legacy data & CRAFT-HIST \\
+Naming origin reconciliation & Authoritative synthesis of Shafer vs. Keister accounts & FLIGHT \\
+Cross-module integration & Comedy-science pipeline; cultural arc connections & INTEG \\
+Through-line synthesis & Amiga Principle application; ``spaces between'' narrative & FLIGHT \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+Full document assembly & All modules integrated; cross-references valid & EXEC-1 \\
+Source verification pass & All citations traced; numerical data attributed & VERIFY \\
+Test plan execution & SC/CF/IN/EC results recorded & VERIFY \\
+Final PDF compilation & XeLaTeX three-pass build; review PDF & EXEC-2 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM GATE:} Final human review before publishing. Verify through-line integrity and sensitive content handling.
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Cast registry YAML computed once in Wave 0 and shared by M03, M05 (cache hit)
+  \item Source index computed once and shared by all five module agents
+  \item Timeline YAML shared by M01 and M02 (cache hit on 5-minute TTL if launched within window)
+  \item Seattle cultural context from M04 pre-loaded into M05 synthesis context (avoid re-research)
+  \item Exploit parallel tracks 1A and 1B: both load shared attributes (source index, timeline) from Wave 0 output
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0: Foundation & 5,000 & 4,000 & 9,000 \\
+Wave 1A: Historical & 20,000 & 26,000 & 46,000 \\
+Wave 1B: Ecosystem & 22,000 & 28,000 & 50,000 \\
+Wave 2: Synthesis & 80,000 & 28,000 & 108,000 \\
+Wave 3: Publication & 100,000 & 14,000 & 114,000 \\
+\midrule
+\textbf{Total} & & & \textbf{327,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+  [W0: Foundation]
+       |
+       +------> [W1A: M01 Origins] --> [W2: M05 Synthesis]
+       |                                       ^
+       +------> [W1A: M02 Nye]  ------------>  |
+       |                                       |
+       +------> [W1B: M03 Ecosystem] -------->  |
+       |                                       |
+       +------> [W1B: M04 Cultural] --------->  |
+                                               |
+                            [CAPCOM GATE] -----+
+                                               |
+                                    [W3: Assembly + Verify]
+                                               |
+                                    [CAPCOM GATE: Final]
+                                               |
+                                    [PUBLISHED DOCUMENT]
+
+  Cache sharing:
+  W0 source-index -------> W1A, W1B, W2, W3 (all)
+  W0 cast-registry ------> W1B-M03, W2-M05
+  W0 timeline -----------> W1A-M01, W1A-M02
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{Coverage Target} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & $\geq$15\% \\
+Core functionality & 18 & Required & BLOCK & $\sim$50\% \\
+Integration & 8 & Required & BLOCK & $\sim$22\% \\
+Edge cases & 5 & Best-effort & LOG & $\sim$13\% \\
+\midrule
+\textbf{Total} & \textbf{36} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to HistoryLink.org, MOHAI, KING-TV archive, Seattle Times, IMDB, or the cast's own oral history accounts. Zero entertainment gossip or unsourced claims. \\
+SC-NUM & Numerical attribution & Every quantitative claim (Emmy count, episode count, dates, age) attributed to a specific source \\
+SC-ADV & No policy advocacy & Document presents corporate consolidation story factually without editorializing beyond sourced quotes \\
+SC-ACC & Deceased persons accuracy & All grunge-era Lame List participants identified with accurate current status; living/deceased noted \\
+SC-NYE & Nye naming origin consistency & Both Shafer and Keister account versions documented; no single version presented as definitive fact without attribution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Founding date accuracy & Pilot date confirmed as September 23, 1984, sourced to HistoryLink.org \\
+CF-02 & Sketch format transformation date & 1990 Saturday 11:30 time slot confirmed with permission-from-NBC context \\
+CF-03 & Science Guy persona date & January 8, 1987 documented as first liquid nitrogen demonstration \\
+CF-04 & Cast roster completeness & At least 14 named cast members in structured table \\
+CF-05 & Sketch catalog depth & At least 15 recurring sketches named and described \\
+CF-06 & Unexpected Productions documented & Theatersports at Pike Place Market; McHale 1993--97 tenure confirmed \\
+CF-07 & Nye Boeing contribution documented & Hydraulic resonance suppressor tube for 747 named with source \\
+CF-08 & Science Guy Emmy total & 19 Emmy Awards documented with source \\
+CF-09 & Cancellation mechanism & Belo Corporation, profitability over ratings, Stainton quote \\
+CF-10 & MOHAI exhibit documented & Dates, contributors, and exhibit content described \\
+CF-11 & Grunge crossover documented & Kim Thayil + Lame List; REV music program connection \\
+CF-12 & Nye Presidential Medal documented & January 2025 date; ceremony context \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & M01 $\rightarrow$ M02 cascade & Document traces Nye's Science Guy emergence as product of sketch format, not talk show era \\
+IN-02 & M03 $\rightarrow$ M05 consistency & Post-show career table consistent with cast roles listed in Module 03 \\
+IN-03 & M04 $\rightarrow$ M05 cultural arc & Show cancellation (M05) explicitly connected to corporate consolidation dynamic (M04) \\
+IN-04 & Science Guy pipeline integrity & Full pathway Boeing $\rightarrow$ comedy club $\rightarrow$ Almost Live! $\rightarrow$ Fabulous Wetlands $\rightarrow$ KCTS $\rightarrow$ Disney traced in one continuous narrative \\
+IN-05 & Document self-containment & Reader with no prior Seattle knowledge can follow the full arc; no undefined references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Founding story documented with consistent primary source accounts & CF-01, SC-SRC & Pending \\
+2. Bill Nye naming incident reconstructed with date and attribution & CF-03, SC-NYE & Pending \\
+3. Full cast/writing ensemble roster documented & CF-04, IN-02 & Pending \\
+4. Recurring sketches cataloged (15+) & CF-05 & Pending \\
+5. Unexpected Productions role documented & CF-06 & Pending \\
+6. Seattle 1984--1999 arc mapped (4+ forces) & CF-11, IN-03 & Pending \\
+7. Cancellation context documented & CF-09, IN-03 & Pending \\
+8. Post-show careers documented (8+ people) & CF-12, IN-02 & Pending \\
+9. Science Guy genesis pathway traced & CF-03, CF-07, IN-04 & Pending \\
+10. Quantitative legacy data captured & CF-08, SC-NUM & Pending \\
+11. Cross-module comedy--science pipeline documented & IN-01, IN-04 & Pending \\
+12. Bibliography includes 8+ professional sources & SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; Bill Nye origin discrepancy resolution; go/no-go gates \\
+PLAN & Planner & Wave decomposition; cache optimization; parallel track timing \\
+SCOUT & Research Agent & Source gathering; HistoryLink.org / MOHAI data retrieval \\
+EXEC-1 & Executor (Historical) & M01 Origins + M02 Nye Origin Story production \\
+EXEC-2 & Executor (Ecosystem) & M03 Sketch Ecosystem + M04 Cultural Context production \\
+CRAFT-HIST & Cultural History Specialist & M05 Cast Trajectories; legacy analysis; cultural arc synthesis \\
+CRAFT-COMEDY & Comedy Domain Specialist & Sketch format analysis; improv ecosystem documentation \\
+VERIFY & Verification Agent & Source validation; numerical attribution; SC test execution \\
+INTEG & Integration Agent & Cross-module consistency; comedy--science pipeline validation \\
+CAPCOM & HITL Interface & Human approval gates (post-Wave 1 and post-Wave 2) \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Audit trail; commit messages; wave summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (M01--M05) \\
+Parallel Tracks & 2 (Wave 1A + 1B) \\
+CAPCOM Gates & 2 (post-Wave 1, post-Wave 2) \\
+Estimated Context Windows & 8--12 \\
+Estimated Sessions & 3 \\
+Total Estimated Tokens & 327,000 \\
+Success Criteria & 12 \\
+Total Tests & 36 (5 SC + 18 CF + 8 IN + 5 EC) \\
+Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Primary Sources & 16 (HistoryLink, MOHAI, KING-TV, Seattle Times, etc.) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``It was like the swinging 1960s in London. I couldn't have invented a better job for myself in the greatest city in the 1990s, Seattle.''}
+
+\medskip
+\hfill --- Bill Stainton, Executive Producer, \textit{Almost Live!}
+
+\medskip
+\noindent The spaces between --- Boeing and the comedy club, the writers' room and the science lab, the local time slot and the national classroom --- are not empty. They are where Bill Nye the Science Guy was named on a panicked Saturday night, where Joel McHale learned to dissect popular culture with surgical precision, where Bob Nelson found the material that would become an Oscar-nominated screenplay. \textit{Almost Live!} was not a stepping stone. It was the ground.
+\end{quotebox}
+
+\end{document}
