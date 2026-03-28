@@ -1,0 +1,1454 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage[breakable,skins,listings]{tcolorbox}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Broadcast Heritage (History domain) ─────────────────────────
+\definecolor{primary}{HTML}{B71C1C}       % Deep broadcast red
+\definecolor{secondary}{HTML}{E65100}     % Vacuum-tube amber
+\definecolor{tertiary}{HTML}{1A237E}      % FCC regulatory navy
+\definecolor{accent}{HTML}{C62828}        % Active accent
+\definecolor{lightprimary}{HTML}{FFEBEE}  % Red tint bg
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{E8EAF6}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ─────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ────────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\lstdefinestyle{asciiStyle}{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+}
+\newtcblisting{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  breakable,
+  listing only,
+  listing style=asciiStyle,
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ──────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers & Footers ──────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{AM Radio: West Coast \& PNW Deep History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Fox Infrastructure Group},
+  pdftitle={AM Radio -- West Coast \& PNW Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ──────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── TITLE PAGE ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The AM Radio Dial\\[0.3em]A Broadcast Heritage Study}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{West Coast · Pacific Northwest · California\\History, Licensing, Spectrum \& Future}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 18--24 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{AM Radio: West Coast \& PNW --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research Phase}
+\metafield{Depends On:}{None (foundational research mission)}
+\metafield{Context:}{Fox Infrastructure Group / GSD Ecosystem Research Pipeline}
+
+\subsection{Vision}
+
+Before the internet, before satellite, before the smartphone---there was a voice in the darkness,
+carrying itself over hundreds of miles of ocean, mountain, and forest on invisible waves.
+AM radio was not merely a technology; it was the central nervous system of the American West.
+It connected loggers in the Cascades to Portland markets, fishermen off the Washington coast to
+Seattle weather reports, and ranch hands in the Central Valley to the baseball games of the Giants.
+The Pacific Northwest and California were, from the earliest days of licensed broadcasting, a
+laboratory for the entire medium.
+
+This research mission traces that arc from the first licensed experimental transmissions in 1920
+San Jose to the all-digital AM frontier of 2026. It maps the ecosystem of the AM dial as it
+developed along the West Coast---the network affiliations, the format wars, the clear-channel
+titans and the daytimer underdogs---with particular focus on the stations of Washington, Oregon,
+and California that shaped an entire region's sonic identity. The same curiosity that asks
+``what was broadcasting before'' also asks ``what is broadcasting becoming,'' and this mission
+addresses both with equal rigor.
+
+The practical thread runs alongside the historical: the mechanics of obtaining a broadcast
+license today, the open spectrum that remains available, the rules and regulations under which
+all broadcasters must operate, and the pathways---full-power AM, full-power FM, Low Power FM,
+FM translators, and Part~15 unlicensed devices---that a new voice can use to reach the air in
+2026. The AM dial is not a closed museum; it is a living infrastructure with legal on-ramps
+still accessible to those who understand the system.
+
+For the builder who hears frequencies as possibility, this document is a flight manual.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+  \item \textbf{Fragmented institutional memory.} The history of West Coast AM radio exists in
+        scattered archives, fan sites, local historical societies, and FCC dockets. No single
+        authoritative synthesis covers the full arc from experimental licenses in 1920 to the
+        digital transition of the 2020s with geographic specificity to Washington and California.
+
+  \item \textbf{Licensing opacity for prospective broadcasters.} The FCC licensing process for
+        AM, FM, LPFM, and FM translator stations involves multiple forms, filing windows, engineering
+        studies, and regulatory conditions that are individually documented but difficult to navigate
+        as an integrated pathway. The spectrum scarcity situation, particularly in urban West Coast
+        markets, is poorly understood by most non-industry applicants.
+
+  \item \textbf{Unclear open-spectrum inventory.} As of 2026, the actual availability of AM
+        frequencies in specific PNW and California markets---accounting for Class A clear-channel
+        protections, daytimer restrictions, and NARBA international agreements---is unknown to
+        most prospective licensees and not synthesized in accessible form.
+
+  \item \textbf{Regulatory landscape complexity.} Broadcast regulations under 47 CFR Part~73
+        span content obligations (obscenity, indecency, EAS), technical standards (power limits,
+        antenna systems, modulation), ownership rules (local market caps, cross-ownership), and
+        public interest requirements---a body of law that has changed substantially since the
+        Telecommunications Act of 1996 and continues to evolve under AM Revitalization proceedings.
+
+  \item \textbf{Uncertainty about AM's future viability.} The EV interference problem, declining
+        automotive AM reception, streaming competition, and the HD Radio digital transition create
+        genuine uncertainty about the investment value of AM broadcasting infrastructure in 2026
+        and beyond---uncertainty that requires evidence-based analysis, not speculation.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Broadcast Archaeology Model:} Treat the AM dial as a stratigraphic record---each
+layer of regulation, technology, and format revealing the social and technical forces that shaped
+it. Map both the deep past and the navigable present on the same coordinate system.
+
+\subsubsection{West Coast Broadcast Geography}
+
+\begin{asciibox}
+WEST COAST AM BROADCAST GEOGRAPHY
+══════════════════════════════════════════════════════════
+
+  PACIFIC NORTHWEST ZONE                 CALIFORNIA ZONE
+  ┌──────────────────────┐              ┌────────────────────────┐
+  │  SEATTLE             │              │  SAN FRANCISCO BAY     │
+  │  KJR (950) est.1921  │              │  KGO/KSFO (810) 1924   │
+  │  KNWN/KOMO (1000)    │              │  KNBR (680) 1922       │
+  │  KIRO (710)          │              │  KYA (1260) 1926       │
+  │  KVI (570)           │              │  KCBS (740) 1909*      │
+  │  KLAY/KOL            │              │                        │
+  │                      │              │  LOS ANGELES           │
+  │  TACOMA              │              │  KFI (640) 1922        │
+  │  KMO  KTCL           │              │  KNX (1070) 1920       │
+  │                      │              │  KABC (790) 1925       │
+  │  PORTLAND            │              │  KMPC (710) 1922       │
+  │  KGW (620) 1922      │              │                        │
+  │  KOIN (940)          │              │  SAN DIEGO             │
+  │  KEX (1190)          │              │  KFSD/KOGO (600)       │
+  │                      │              │  KCBQ (1170)           │
+  │  SPOKANE             │              └────────────────────────┘
+  │  KHQ  KGA  KXLY      │
+  └──────────────────────┘
+
+  FREQUENCY CLASSES (FCC AM)
+  Class A (Clear Channel) — 50 kW, nationwide nighttime reach
+  Class B (Regional)      — Up to 50 kW, regional protection
+  Class C (Local)         — Up to 1 kW
+  Class D (Daytimer)      — Daytime only, sunset-to-sunrise silent
+
+  * KCBS traces origins to experimental station FN in 1909
+\end{asciibox}
+
+\subsubsection{Six-Module Research Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE ARCHITECTURE
+══════════════════════════════════════════════════════════════
+
+  M1: AM BAND          M2: PNW HISTORY       M3: CALIFORNIA
+  FOUNDATIONS     ──►  STATIONS         ──►  STATIONS
+  (Regulation,         (1920s–present,        (1920s–present,
+  Technology,          WA/OR/ID focus)        Bay Area + LA)
+  Band Structure)
+       │                    │                     │
+       ▼                    ▼                     ▼
+  M4: SPECTRUM &      M5: FCC RULES &       M6: DIGITAL
+  LICENSING      ──►  REGULATIONS      ──►  FUTURE
+  PATHWAYS             (47 CFR Pt 73,         (HD Radio,
+  (AM/FM/LPFM,         Ownership, EAS,        AM Revival,
+  Translators)         Content)               Streaming)
+
+  DEPENDENCY CHAIN: M1 → M2 → M3 → M4 → M5 → M6
+  PARALLEL TRACKS:  M2 ‖ M3,  M4 ‖ M5
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 --- AM Band Foundations}
+The physics of amplitude modulation, the history of the AM band (535--1705~kHz), the Federal
+Radio Commission of 1927 and its successor the FCC, the Radio Act of 1927, the Communications
+Act of 1934, the NARBA international frequency assignment treaty, and the AM station classification
+system (Class A through D). This module establishes the technical and regulatory substrate on
+which all other modules rest.
+
+\subsubsection{Module 2 --- Pacific Northwest Historical Stations}
+A comprehensive station-by-station chronicle of AM broadcasting in Washington, Oregon, and Idaho
+from the earliest experimental licenses (KJR 1921, KGW Portland 1922) through the Golden Age of
+network radio, the format revolution of Top~40, the news-talk pivot, and the consolidation era
+following the Telecommunications Act of 1996. Key stations: KJR, KOMO, KIRO, KVI, KGW, KOIN,
+KEX, KHQ, KGA, KOL, and regional stations in Tacoma, Bellingham, Everett, Spokane, and Eugene.
+
+\subsubsection{Module 3 --- California Historical Stations}
+The parallel chronicle for California, with emphasis on the Bay Area (KGO/KSFO, KNBR, KYA, KCBS)
+and Los Angeles (KFI, KNX, KABC, KMPC, KFWB). The Don Lee Network, the NBC Pacific Coast
+network, the NBC Orange Chain, and their West Coast infrastructure. California-specific AM
+demographics: as of the AM Revitalization NPRM, 34\% of California AM stations serve specific
+minority communities, including 33 Spanish-language, 13 Asian-format, and 4 Korean-format outlets.
+
+\subsubsection{Module 4 --- Spectrum Availability and Licensing Pathways}
+The practical guide to entering broadcasting in 2026. Available pathways: (1)~Full-power AM
+station---Class A through D, minimum 250~W, requires construction permit; (2)~Full-power FM
+station---minimum 100~W, requires open allotment and engineering study; (3)~Low Power FM
+(LPFM)---up to 100~W, nonprofit/educational only, 3.5-mile radius, filed during FCC windows;
+(4)~FM Translator---rebroadcasts AM or other content on FM; (5)~Part~15 unlicensed---200-foot
+radius only. Current spectrum scarcity in Seattle, Portland, San Francisco, and Los Angeles
+makes new full-power stations difficult but not impossible.
+
+\subsubsection{Module 5 --- FCC Rules, Regulations, and Broadcaster Obligations}
+The regulatory framework governing all licensees under 47 CFR Part~73. Topics: public interest
+obligations, the FCC's eight-year license term, Equal Employment Opportunity requirements,
+political broadcasting obligations (equal time, lowest unit rate), Emergency Alert System (EAS)
+participation, indecency and obscenity restrictions under 18~U.S.C.~\S~1464, ownership caps
+(Telecommunications Act of 1996), construction permit requirements, and operational
+logs/record-keeping. Recent 2025 FCC rulemaking updating Part~73 references and LPFM separation
+requirements.
+
+\subsubsection{Module 6 --- The Digital Future of AM}
+The trajectory of AM broadcasting: HD Radio (IBOC hybrid digital), the FCC's 2020 approval of
+all-digital AM in the MA3 mode (FCC 20-154), the AM Revitalization proceeding (Docket 13-249),
+FM translator access granted to AM stations, the EV radio interference controversy (2023--2024),
+and the competitive landscape with streaming audio (AM/FM share fell to 36\% of audio listening
+by 2023 per Edison Research). The 95 million vehicles already equipped with HD Radio technology
+as a counterweight.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: am_radio_west_coast_fleet
+  version: "1.0.0"
+  profile: fleet
+  modules:
+    - id: M1
+      name: am_band_foundations
+      model: sonnet
+      parallel_group: null
+      depends_on: []
+    - id: M2
+      name: pnw_historical_stations
+      model: sonnet
+      parallel_group: alpha
+      depends_on: [M1]
+    - id: M3
+      name: california_historical_stations
+      model: sonnet
+      parallel_group: alpha
+      depends_on: [M1]
+    - id: M4
+      name: spectrum_and_licensing
+      model: sonnet
+      parallel_group: beta
+      depends_on: [M1]
+    - id: M5
+      name: fcc_rules_and_regulations
+      model: sonnet
+      parallel_group: beta
+      depends_on: [M1]
+    - id: M6
+      name: digital_future_am
+      model: opus
+      parallel_group: null
+      depends_on: [M2, M3, M4, M5]
+  synthesis:
+    model: opus
+    depends_on: [M2, M3, M4, M5, M6]
+  publication:
+    model: sonnet
+    depends_on: [synthesis]
+  token_budget_k: 280
+  parallel_efficiency: 0.72
+</asciibox>
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item AM band history on the West Coast (Washington, Oregon, Idaho, California) from 1920 to 2026
+  \item Station histories for all Class~A and major Class~B AM stations in the PNW and California
+  \item Complete FCC licensing pathways for AM, FM, LPFM, and FM translator stations
+  \item Spectrum availability analysis for West Coast markets with emphasis on Seattle, Portland, San Francisco, and Los Angeles metro areas
+  \item 47 CFR Part~73 rules applicable to new and existing broadcast licensees
+  \item AM digital transition (HD Radio, all-digital MA3) and future viability assessment
+  \item Open band frequencies and regulatory context for prospective broadcasters
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item FM station history (except where directly relevant to AM simulcast or translator context)
+  \item Television broadcasting history
+  \item Stations east of the Rockies except as context for clear-channel frequency assignments
+  \item Amateur (ham) radio licensing and operations
+  \item International broadcasting or shortwave operations
+  \item Satellite radio (SiriusXM) except as competitive context
+  \item Podcast and streaming platform analysis beyond AM competitive landscape framing
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic{enumi}.}]
+  \item All major West Coast AM stations (Class~A and Class~B, PNW and California) individually documented with founding date, founding licensee, call sign history, frequency assignment history, network affiliations, and format evolution.
+  \item AM band structure fully explained: frequency range, channel classification (clear/regional/local), station classes (A through D), power limits, and daytime vs.\ nighttime propagation physics.
+  \item FCC licensing pathways for AM, FM, LPFM, FM translator, and Part~15 operation described with step-by-step process, required forms, filing fees, and eligibility requirements.
+  \item Spectrum scarcity context for Seattle, Portland, San Francisco, and Los Angeles markets quantitatively documented with reference to current FCC allotment tables.
+  \item 47 CFR Part~73 regulatory obligations summarized for new licensees: EAS, indecency rules, political broadcasting obligations, EEO requirements, and public inspection file requirements.
+  \item Ownership restriction framework documented: local market numerical caps, cross-ownership rules, and changes since the Telecommunications Act of 1996.
+  \item AM digital transition options (HD Radio hybrid, all-digital MA3, FM translator) described with current adoption statistics and regulatory status.
+  \item EV radio interference problem documented with technical basis and industry response (NAB, automakers, congressional action through the AM Radio for Every Vehicle Act).
+  \item Don Lee Network and NBC Pacific Coast network organizational structure and West Coast station affiliations mapped with dates.
+  \item Historical format evolution documented per era: network radio (1920s--1940s), Top~40 (1950s--60s), news-talk pivot (1970s--80s), consolidation era (1990s--present).
+  \item All numerical claims (wattage, frequencies, station counts, audience shares) attributed to specific FCC documents, FCC databases, NAB, or peer-reviewed sources.
+  \item Practical broadcaster entry guide synthesizes licensing, spectrum, and regulatory information into an actionable road map for a prospective West Coast broadcaster in 2026.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+FCC Part 73 Regulatory Reference & Informational dependency & Primary source for Modules 4 and 5 \\
+Fox Infrastructure Group SPC Formation & Business context & Broadcasting license applicant entity context \\
+GSD Ecosystem Core & Platform & Mission executed via gsd-skill-creator framework \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+There is a reason the word ``broadcast'' means both a way of transmitting radio signals and the
+act of scattering seed widely across a field. AM radio was the original broadcast medium---a
+single transmitter flinging its signal across thousands of square miles, trusting that whoever
+needed it would find it. It required nothing of its listeners but a receiver and attention.
+
+The West Coast, always a place where the frontier impulse found new expression, took to radio
+with particular intensity. The Pacific Northwest's geography---deep fjords, mountain ranges,
+vast distances between settlements---made radio not a luxury but a necessity. The same topography
+that makes the Cascades beautiful makes line-of-sight communication impossible. AM's ability to
+follow the curve of the earth, to refract off the ionosphere at night and reach Nome or Nome
+reach Seattle, was not just technically useful; it was democratically profound.
+
+The builder who picks up this document in 2026 inherits that infrastructure. The frequencies
+are still there, allocated and waiting. The regulations are complex but navigable. The question
+is not whether the dial has room for new voices---it always has---but whether those voices know
+how to find their way onto it.
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{AM Radio: West Coast \& PNW --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles primary and secondary research across all six modules. Each section
+provides substantive findings with source attribution. Agents should treat this as the ground
+truth for the module they are producing; supplement with additional research only where
+specifically noted as incomplete.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item Federal Communications Commission (FCC) --- fcc.gov (primary regulatory authority)
+  \item eCFR / Code of Federal Regulations --- Title 47, Part 73
+  \item California Historical Radio Society --- californiahistoricalradio.com
+  \item HistoryLink.org --- Washington State history archive
+  \item Bay Area Radio Museum \& Hall of Fame --- bayarearadio.org
+  \item National Association of Broadcasters (NAB)
+  \item Prometheus Radio Project / Common Frequency (LPFM advocacy)
+  \item Radio Survivor --- radiosurvivor.com
+  \item World Radio History Archive --- worldradiohistory.com
+\end{itemize}
+
+% ── MODULE 1: AM BAND FOUNDATIONS ─────────────────────────────────────────────
+\subsection{Module 1 Reference: AM Band Foundations}
+
+\subsubsection{The Physics of AM and Band Boundaries}
+
+The AM broadcast band occupies 535 to 1,705~kHz (formerly 535--1,600~kHz, expanded in the 1990s
+after years of international negotiation). AM channels are spaced 10~kHz apart, yielding
+approximately 117 usable channels. The band was expanded upward to 1,700~kHz by the FCC in the
+1990s, with frequencies above 1,600~kHz (the ``expanded band'') reserved for existing stations
+that caused significant interference lower in the band.
+
+AM propagation differs fundamentally between day and night. During daylight hours, the signal
+travels primarily by ground wave, with a reliable range of up to 200 miles depending on power.
+At night, the ionosphere's D layer dissipates, allowing the signal to reflect off the E and F
+layers and skip hundreds to thousands of miles. This ``skywave'' propagation is why nighttime AM
+can be heard across continents---and why stations sharing a frequency must coordinate power and
+antenna directionality to prevent interference.
+
+\subsubsection{Regulatory History: FRC, FCC, and the Radio Acts}
+
+Before 1927, the AM dial was chaos. Hundreds of stations operated at overlapping frequencies
+with no mandatory coordination. The Federal Radio Commission (FRC) was established by the Radio
+Act of 1927, which for the first time required stations to operate in the public interest,
+convenience, and necessity. The FRC implemented General Order 40 in November 1928, introducing
+the ``clear channel'' concept and reassigning stations to rationalized frequencies.
+
+The Communications Act of 1934 replaced the FRC with the Federal Communications Commission
+(FCC), which has regulated broadcast spectrum ever since. The North American Regional Broadcasting
+Agreement (NARBA) of 1941 coordinated AM frequency assignments between the United States, Canada,
+and Mexico, shifting many West Coast stations to new dial positions (e.g., KOMO shifted from
+950 to 1000~kHz under NARBA).
+
+\subsubsection{AM Station Classification System}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Class} & \tableheader{Old Class} & \tableheader{Power / Coverage} & \tableheader{Key Protection} \\
+\midrule
+Class A & Class I-A / I-B & Up to 50,000 W; nationwide nighttime & Highest; clear-channel domination \\
+Class B & Class II & Up to 50,000 W; regional & Protected from Class A interference \\
+Class C & Class III & Up to 1,000 W; local & Local market only \\
+Class D & Class IV & Daytime only; up to 1,000 W at night conditionally & Sunset-to-sunrise silent or power reduction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Class~A stations dominate the AM dial at night. The FCC currently estimates 4,400 licensed
+commercial AM stations in the United States as of September 2024 (Federal Register, March 2025).
+
+% ── MODULE 2: PNW HISTORICAL STATIONS ─────────────────────────────────────────
+\subsection{Module 2 Reference: Pacific Northwest Historical Stations}
+
+\subsubsection{The First Wave: Experimental Stations, 1920--1925}
+
+Radio came to the Pacific Northwest almost simultaneously with its commercial emergence nationwide.
+The first convention of the Northwestern Radio Association was held in Portland on June 25, 1921,
+attended by 125 members from amateur radio clubs across Washington, Oregon, Idaho, and Northern
+California---at a time when only KDKA in Pittsburgh held a commercial license. Portland's Charles
+L.~Austin (call sign 7XF) had been broadcasting phonograph music to ships in the Portland Harbor
+from his home laboratory on Mount Tabor, and West Coast inventors were already frustrated that
+eastern interests received more regulatory recognition.
+
+KJR Seattle, begun by amateur radio operator Vincent~I.~Kraft, was the first radio station
+licensed in the Pacific Northwest. It went on the air as an experimental station in 1921 and was
+one of the first commercial licenses in the region. In October 1926, Kraft co-founded the Pacific
+Broadcasting Corporation with Frederick~C.~Clift of San Francisco, which created KYA in San
+Francisco using the call letters and a new transmitter---a direct business connection between
+Seattle and Bay Area broadcasting from the earliest days.
+
+KGB in Tacoma went on the air on April 4, 1922, operated by the Tacoma Daily Ledger and the
+William~A.~Mullins Electric Company. Notably, its radio editor was Winifred Dow, one of the few
+women in the Pacific Northwest to hold an amateur radio license in that era.
+
+\subsubsection{Key PNW AM Stations: Profiles}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Station} & \tableheader{Freq.} & \tableheader{Founded} & \tableheader{Key History} \\
+\midrule
+KJR Seattle & 950 & 1921 & First PNW license; NBC Blue; ESPN Radio; Classic Rock 1988 \\
+KNWN/KOMO & 1000 & 1926 & 50 kW Class A; NBC; Fisher family; Mariners; now Lotus Communications \\
+KIRO Seattle & 710 & 1927 & CBS affiliate; all-news; Bonneville; 50 kW Class B \\
+KVI Seattle & 570 & 1926 & Sports; personality radio; news 1980; Mariners pre-KOMO \\
+KGW Portland & 620 & 1922 & NBC affiliate; Orange Chain; first PNW TV 1952 \\
+KOIN Portland & 940 & 1928 & Don Lee/CBS affiliate; longtime Portland institution \\
+KEX Portland & 1190 & 1927 & NBC Gold Network; Pacific Gold Chain station \\
+KHQ Spokane & 590 & 1922 & Spokane dominant; NBC; one of earliest 50 kW outlets \\
+KGA Spokane & 1510 & 1927 & NBC Gold; regional powerhouse \\
+KFAE Pullman & --- & 1922 & Educational; Washington State College; first edu. station in WA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Adolph Linden Empire and Early Consolidation}
+
+Adolph Linden and Edmund Campbell, directors of Puget Sound Savings \& Loan, founded Northwest
+Radio Service in 1926 and acquired KJR from Vincent Kraft. Linden then created the American
+Broadcasting Company (ABC)---not the later national network---which by 1929 included stations
+in Portland, Spokane, San Francisco, and ``a half-dozen others from here to Chicago.''
+
+This early consolidation foreshadowed the industry's later corporate concentration, and Linden's
+story ended badly: he was convicted of embezzlement from Puget Sound Savings \& Loan in 1932
+and served five years in the Walla Walla state penitentiary.
+
+\subsubsection{NBC Comes to Seattle: The Network Era, 1926--1950}
+
+In 1926, special AT\&T wires reached Seattle from New York, and KOMO became an affiliate of NBC,
+the National Broadcasting Company. Local listeners could now hear the same programs---and the
+same national commercials---as people across the country. NBC organized its West Coast operations
+into the ``Pacific Coast Network'' with Red and Blue designations. In 1931, NBC reorganized into
+the Pacific Gold Network (KEX Portland; KJR Seattle) and the Pacific Orange Network (KFI Los
+Angeles; KGO Oakland; KGW Portland; KOMO Seattle; KHQ Spokane).
+
+On September 26, 1937, the Mutual Broadcasting System made its Northwest debut with a 90-minute
+inaugural program. The Don Lee Network, which produced programming for Mutual's West Coast
+affiliates, included: KOL Seattle, KALE Portland (KPOJ), KMO Tacoma, KORE Eugene, KSLM Salem,
+KIT Yakima, KVOS Bellingham, KGY Olympia, KIEM Eureka, KPQ Wenatchee, KRNR Roseburg, and KXRO
+Aberdeen---described at the time as the largest regional network in the United States.
+
+\subsubsection{Format Evolution: Top 40, News-Talk, and the FM Defection}
+
+Top~40 radio arrived in the Pacific Northwest in the 1950s, and KJR Seattle became one of the
+most dominant personality stations in the region through the 1960s and 1970s. KVI (570~AM)
+carried the pre-Mariners Seattle Rainiers baseball and was a powerhouse personality station.
+When music fans migrated to FM's superior sound in the 1970s, AM pivoted to news and talk.
+KIRO became an all-news powerhouse; KOMO followed with news-talk by 1995.
+
+KJR moved to Classic Rock in 1988, then Sports/ESPN in 1992---a format it held for decades.
+KOMO's call letters migrated to KNWN (Northwest News Radio) in February 2022 after Lotus
+Communications acquired the Fisher/Sinclair radio properties.
+
+% ── MODULE 3: CALIFORNIA HISTORICAL STATIONS ──────────────────────────────────
+\subsection{Module 3 Reference: California Historical Stations}
+
+\subsubsection{Origins: The World's First Broadcaster?}
+
+Charles Herrold of San Jose was broadcasting music and talk on a regular schedule between 1912
+and 1917, to a growing audience and to receiving stations at the 1915 Panama-Pacific International
+Exhibition. His station, which became KCBS (740~AM), is one of the strongest candidates for the
+title of the world's first continuously operating broadcast station---a claim that predates
+KDKA Pittsburgh's November 1920 commercial debut. Following World War~I's radio silence, it
+reemerged and eventually became a CBS-owned-and-operated news powerhouse.
+
+In April 1920, the Western Radio Electric Company received a license for experimental station
+6XD in Los Angeles (920~kHz), described by Pacific Radio News in 1921 as broadcasting on 325
+meters two nights a week. This was the first broadcasting station in Southern California, active
+approximately five months before KNX's predecessor, 6ADZ.
+
+\subsubsection{Key California AM Stations: Profiles}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Station} & \tableheader{Freq.} & \tableheader{Founded} & \tableheader{Key History} \\
+\midrule
+KGO/KSFO SF & 810 & Jan 8, 1924 & GE/RCA/NBC Blue/ABC; Jack LaLanne; 50 kW Class A; call changed to KSFO in 2024 \\
+KNBR SF & 680 & 1922 & NBC Red flagship SF; sports powerhouse; Giants/Warriors \\
+KYA SF & 1260 & Dec 17, 1926 & Pacific Broadcasting Corp; CBS affiliate 1928 \\
+KCBS SF & 740 & 1909* & World's first continuous broadcaster (Herrold); CBS O\&O; news \\
+KFI Los Angeles & 640 & Apr 16, 1922 & First 50 kW west of Chicago (1931); Class A; Earle C. Anthony/NBC \\
+KNX Los Angeles & 1070 & 1920 & Westinghouse/CBS O\&O; AP/UPI; Breaking News Murrow Award 2017 \\
+KABC Los Angeles & 790 & 1925 & NBC Blue/ABC; news-talk; iHeartMedia \\
+KMPC Los Angeles & 710 & 1922 & Music of Your Life; sports; later KSPN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{KGO/KSFO: The West Coast Clear-Channel Giant}
+
+KGO signed on January 8, 1924, from General Electric's Oakland transformer plant as part of a
+planned three-station GE network (with WGY Schenectady and KOA Denver). It was known as the
+``Sunset Station.'' Due to GE's involvement with RCA, KGO was soon operated under NBC management.
+The 1928 Federal Radio Commission reallocation designated clear-channel status on 810~kHz
+originally at 790~kHz; NARBA in 1941 moved it to 810.
+
+In 1943, the FCC forced NBC to sell one of its two networks; the Blue Network became ABC, and
+KGO became ABC's West Coast flagship. In the postwar period, KGO produced live Western Swing
+music and hosted the first radio exercise show by Jack LaLanne.
+
+By the 1960s KGO had reinvented itself as one of America's first news-talk stations under Program
+Director Jim Dunbar, who broadcast live from local restaurants and nightclubs. It held Arbitron's
+\#1 Bay Area ranking for over 27 consecutive years. In 2024, the ``KGO'' call letters were retired
+and the station became KSFO---a notable end to a century-long call sign history.
+
+\subsubsection{KFI: The First 50,000-Watt Station West of Chicago}
+
+KFI (640~AM) was first licensed March 31, 1922, by Earle~C.~Anthony, owner of a Packard
+automobile dealership who had trained as an electrical engineer. It made its debut broadcast
+on April 16, 1922, with vaudeville performers Eugene and Willie Howard.
+
+In July 1931, KFI increased its transmitter power to 50,000 watts---the first station west of
+Chicago to broadcast at that power. A special four-hour program marked the occasion, with
+congratulatory speeches joined by NBC entertainers on a coast-to-coast hookup. KFI was part
+of the NBC Pacific Orange Network alongside KGO, KGW, KOMO, and KHQ.
+
+Today KFI (owned by iHeartMedia) remains one of the highest-rated talk stations on the West
+Coast, with Bill Handel's morning show running since 1993. Its signal covers Southern California
+by day and reaches much of western North America at night.
+
+\subsubsection{The Don Lee Network and California Infrastructure}
+
+Don Lee, a Cadillac dealer turned broadcaster, built the West Coast's most extensive broadcast
+infrastructure in the 1930s. The Don Lee Network produced programming for the Mutual Broadcasting
+System and served as its West Coast backbone. Don Lee stations included KFRC San Francisco,
+KHJ Los Angeles, and affiliates throughout California and into the Pacific Northwest. Don Lee
+became a stockholder in Mutual in 1940.
+
+% ── MODULE 4: SPECTRUM AND LICENSING ─────────────────────────────────────────
+\subsection{Module 4 Reference: Spectrum Availability and Licensing Pathways}
+
+\subsubsection{The Spectrum Scarcity Reality}
+
+The FCC states explicitly: ``In many areas of the country, no frequencies may be available on
+which a new station could begin operating without causing interference to existing stations.''
+This is especially acute in the top 50 markets---Seattle, Portland, San Francisco, Los Angeles,
+and San Diego---where the FM dial is heavily occupied and AM frequencies are constrained by
+Class~A clear-channel protections and NARBA international obligations.
+
+The FM band (88.1--107.9~MHz) cannot be expanded: aeronautical navigation operations occupy
+108--136~MHz above, and Channel~6 TV operations (82.0--88.0~MHz) constrain the lower edge.
+The AM band was last expanded in the 1990s from 1600 to 1705~kHz, and further expansion is
+described by the FCC as unlikely.
+
+\subsubsection{Licensing Pathway Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}XL{2.5cm}L{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Key Requirements} & \tableheader{Power / Range} & \tableheader{Availability} \\
+\midrule
+Full-Power AM & Citizenship, character, technical engineering study, construction permit, FCC Form~301 & 250 W minimum; Class A up to 50 kW & Very limited in major markets \\
+Full-Power FM & Engineering study, open allotment, FCC Form~301, application fee & 100 W minimum (Class A) to 100 kW (Class C) & Very limited in major markets \\
+LPFM & Nonprofit/educational entity; community-based (10-mile rule); FCC Form 318 during filing window & Up to 100 W; 3.5 mile radius & Filing windows \textasciitilde{}every 10 years; last window Nov--Dec 2023 \\
+FM Translator & Rebroadcasts another station; FCC Form 349 & Typically 1--250 W & Limited; AM Revitalization opened access \\
+Part 15 Unlicensed & No license required; must accept all interference & 200-foot effective radius & Always available; minimal coverage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{LPFM: The Community Broadcaster's Pathway}
+
+The LPFM service was created by the FCC in January 2000. LPFM stations are authorized for
+noncommercial educational broadcasting only (no commercial operation) and operate with up to
+100 watts ERP at 30 meters antenna height, with an approximate service radius of 3.5 miles
+(5.6~km). LPFM stations are not protected from interference from full-power stations.
+
+Eligibility is restricted to nonprofits and governmental/educational entities that are
+community-based (physically headquartered or 75\% of board members within 10 miles of the
+proposed transmitter; 20 miles outside the top 50 markets). Individuals and commercial entities
+are ineligible. Current broadcasters, cable operators, and newspaper publishers are also ineligible.
+
+Applications are only accepted during FCC-announced filing windows. As of early 2026, the FCC
+is NOT accepting new LPFM applications. The most recent window opened November 1, 2023, and
+closed (revised) December 13, 2023---the third window ever, following 2000--2001 and 2013.
+As of March 2023, there were 1,999 licensed LPFM stations in the United States. The next
+window is expected approximately 10 years hence.
+
+There is no filing fee for LPFM construction permit applications. Station construction and
+operating costs vary; a basic LPFM setup can range from a few thousand to tens of thousands
+of dollars depending on transmitter, antenna, tower, and studio requirements.
+
+\subsubsection{Full-Power AM and FM: The Long Road}
+
+For a commercial full-power AM station, applicants must: (1) identify an available frequency
+using FCC AM Query tools; (2) commission a broadcast engineering study demonstrating no
+interference to existing stations; (3) file FCC Form~301 (construction permit) electronically
+via the Licensing and Management System (LMS) during an application window; (4) pay the
+applicable filing fee; and (5) await FCC processing, which may involve comparative hearings
+if competing applications are filed.
+
+FCC licenses are issued for eight-year terms. The minimum AM power is 250 watts. Applications
+must be filed electronically---paper forms are not accepted, though printed forms may be used
+to prepare data. All applicants must be registered in the FCC's COmmission REgistration System
+(CORES) with a valid FCC Registration Number (FRN).
+
+\subsubsection{AM Revitalization: FM Translators for AM Stations}
+
+As part of the ongoing AM Revitalization proceeding (Docket 13-249), the FCC has allowed AM
+stations to obtain FM translator licenses to rebroadcast their programming on the FM band.
+More than 2,100 FM translators were on the air rebroadcasting AM signals by 2020, with
+approximately 700 more pending. This effectively allows daytime-only AM stations to maintain
+a 24-hour presence on FM.
+
+% ── MODULE 5: FCC RULES AND REGULATIONS ───────────────────────────────────────
+\subsection{Module 5 Reference: FCC Rules and Regulations}
+
+\subsubsection{The Regulatory Framework: 47 CFR Part 73}
+
+All broadcast station rules are contained in 47 CFR Part~73, divided into subparts:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Subpart A} --- AM Broadcast Stations (\S\S~73.1--73.190)
+  \item \textbf{Subpart B} --- FM Broadcast Stations (\S\S~73.201--73.333)
+  \item \textbf{Subpart C} --- Digital Audio Broadcasting (\S\S~73.401--73.406)
+  \item \textbf{Subpart D} --- Noncommercial Educational FM (\S\S~73.501--73.599)
+  \item \textbf{Subpart G} --- Low Power FM Broadcast Stations (\S\S~73.801 et seq.)
+  \item \textbf{Subpart H} --- Rules Applicable to All Broadcast Stations (\S\S~73.1001 et seq.)
+\end{itemize}
+
+Subpart~H is the licensee's primary compliance reference, covering political broadcasting,
+EEO, EAS, indecency, and public file requirements.
+
+\subsubsection{Public Interest Obligations}
+
+The spectrum belongs to the public. Under the Radio Act of 1927 and the Communications Act
+of 1934, licensees hold no property rights to the spectrum---only the privilege of using it
+so long as they serve the public interest, convenience, and necessity. The FCC may revoke a
+license before its term expires with notice and opportunity to be heard.
+
+Key obligations for all broadcast licensees:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Equal Employment Opportunity (EEO):} Stations with five or more full-time employees
+        must maintain outreach programs for employment and file FCC Form~396 (EEO Report) at
+        license renewal.
+  \item \textbf{Political Broadcasting:} During candidate elections, stations must provide equal
+        time (``equal opportunity'') to legally qualified candidates for the same office under
+        47 U.S.C.~\S~315; must offer lowest unit rate during campaign windows.
+  \item \textbf{Emergency Alert System (EAS):} All AM and FM stations must participate in the EAS,
+        which requires FCC-compliant EAS decoders/encoders. KFI and KNX serve as primary EAS
+        entry points for the Southern California Emergency Alert System.
+  \item \textbf{Indecency and Obscenity:} 18 U.S.C.~\S~1464 prohibits obscene, indecent, and
+        profane broadcasts. Indecent content (material that depicts or describes sexual or
+        excretory organs in a patently offensive manner) is prohibited between 6:00~a.m.\ and
+        10:00~p.m. local time. Obscene content is prohibited at all times.
+  \item \textbf{Public Inspection File:} Stations must maintain a publicly accessible online
+        file (OPIF) through the FCC containing the license, applications, EEO records, political
+        file, and other documents. LPFM stations are exempt from the local public file requirement
+        but must maintain a political file.
+  \item \textbf{On-Air Announcements:} During license renewal, stations must make on-air
+        announcements about their renewal application within five business days of FCC public
+        notice that the application has been accepted for filing.
+\end{itemize}
+
+\subsubsection{License Terms and Renewal}
+
+FCC broadcast licenses are issued for eight-year terms. All radio station licenses are scheduled
+to expire between 2027 and 2030, on a state-by-state schedule. Renewal applications (FCC
+Form~303-S) must be filed four months before the expiration date. The FCC may not automatically
+renew a license; the public may file Petitions to Deny or informal objections.
+
+\subsubsection{Ownership Rules}
+
+The Telecommunications Act of 1996 eliminated national radio station ownership caps. Local
+ownership is governed by numerical market tiers based on total commercial stations in a market:
+\begin{itemize}[leftmargin=*]
+  \item In markets with 45+ stations: one entity may own up to 8 stations (no more than 5 in one service, AM or FM)
+  \item In markets with 30--44 stations: up to 7 (4 per service)
+  \item In markets with 15--29 stations: up to 6 (4 per service)
+  \item In markets with 14 or fewer: up to 5 (3 per service)
+\end{itemize}
+
+The FCC's cross-ownership rules and the dual-network rule (\S~73.658) further constrain media
+consolidation. The dual-network rule prohibits common ownership of two of the ``top four''
+networks (ABC, CBS, Fox, NBC).
+
+\subsubsection{Technical Standards}
+
+AM stations must use FCC-approved transmitting equipment and must operate during hours
+appropriate to their frequency class. Class~D (daytime) stations must cease or reduce power
+at local sunset. Directional antenna arrays require FCC approval of the antenna system.
+The minimum AM power for a construction permit is 250 watts.
+
+The March 2025 FCC rulemaking (MB Docket 24-626) proposed updates to Part~73 rules to
+reflect current application processing requirements, update form names, remove CDBS references
+in favor of the LMS system, and eliminate certain AM power increase restrictions.
+
+% ── MODULE 6: DIGITAL FUTURE ──────────────────────────────────────────────────
+\subsection{Module 6 Reference: The Digital Future of AM Radio}
+
+\subsubsection{The AM Revitalization Proceeding (Docket 13-249)}
+
+In October 2013, the FCC issued a Notice of Proposed Rulemaking titled ``Revitalization of the
+AM Radio Service.'' The proceeding has produced multiple Report and Orders, including:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{First R\&O (2015):} Changes to daytime/nighttime community coverage standards;
+        elimination of the AM ``ratchet'' rule; easier MDCL (Modulation Dependent Carrier Level)
+        requirements; relaxation of minimum antenna efficiency standards.
+  \item \textbf{Second R\&O:} FM translator access for AM stations.
+  \item \textbf{Third R\&O (2017):} Relaxation of directional antenna array requirements.
+  \item \textbf{Auction 99 (2018):} FM translator auction specifically for AM stations.
+  \item \textbf{All-Digital R\&O (2020):} Authorized voluntary all-digital AM operation.
+\end{itemize}
+
+\subsubsection{HD Radio and All-Digital AM}
+
+HD Radio (In-Band On-Channel, or IBOC digital) operates as a hybrid system, adding digital
+sidebands to the existing analog AM carrier. The FM digital power increase order approved
+by the FCC in 2010 and the asymmetric digital sideband order of September 2024 have expanded
+HD Radio capabilities on FM. On AM, the HD Radio hybrid has faced adoption challenges.
+
+In December 2020, the FCC approved voluntary all-digital AM operation using the MA3 mode
+(the HD Radio standard for all-digital). This allows AM stations to cease analog transmission
+and broadcast entirely in digital, improving audio quality and signal robustness. Hubbard
+Broadcasting's WWFD in Frederick, Maryland, conducted the landmark experiments; testing showed
+reliable daytime coverage to the 0.5~mV predicted contour and nighttime coverage to the NIF
+contour. As of 2020, approximately 95 million vehicles on U.S. roads were equipped with HD
+Radio receivers.
+
+\subsubsection{The EV Interference Crisis}
+
+Electric vehicles generate electromagnetic interference that degrades AM reception. Automakers
+including Ford, BMW, and Volkswagen began removing AM radio from some EV models in 2023.
+Ford initially announced removal from 2024 models; after consumer, broadcaster, and congressional
+backlash, Ford CEO Jim Farley reversed the decision. The National Association of Broadcasters
+urged all automakers to maintain AM capability. Congressional activity produced the AM Radio
+for Every Vehicle Act, advancing through committee in 2023--2024.
+
+GM and Stellantis announced no plans to remove AM from their vehicles, while keeping product
+planning details confidential. The underlying technical problem---EV motor and charging
+system emissions in the AM frequency range---remains unresolved.
+
+\subsubsection{The Competitive Landscape}
+
+As of March 2024, there were 17,370 licensed terrestrial stations in the United States (FCC,
+Communications Marketplace Report 2024). AM/FM radio's combined share of total audio listening
+fell to 36\% in 2023 (Edison Research), while online audio platforms gained ground. Terrestrial
+radio revenue reached \$15.2 billion in 2023, down from \$17.8 billion in 2019.
+
+In-car listening remains AM/FM radio's primary stronghold. Monthly podcast listenership rose
+to 47\% of the U.S. population in 2024, with podcast ad revenue reaching \$1.9 billion in 2023.
+Spotify leads audio streaming with 35\% of U.S. listeners aged 12+. SiriusXM had 33.9 million
+subscribers in 2023 (\$6.8 billion revenue).
+
+Despite these pressures, AM broadcasting serves critical roles that streaming cannot replicate:
+emergency alert infrastructure, hyperlocal community service in remote areas, and minority-language
+programming. In California alone, 34\% of AM stations serve specific minority communities (as
+documented in the AM Revitalization proceeding comments).
+
+\subsubsection{The Path Forward: Practical Options for AM Stations}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+  \item \textbf{All-digital conversion:} File FCC Form~335-AM Digital Notification; commence
+        all-digital operation 30 days after FCC public notice. Requires transmitter capable of MA3.
+  \item \textbf{FM translator acquisition:} File for an FM translator to simulcast AM content on FM,
+        providing 24/7 coverage even for daytimer stations.
+  \item \textbf{HD Radio hybrid:} Deploy IBOC digital sidebands on existing AM analog authorization.
+  \item \textbf{Internet simulcast:} Stream AM programming online at no additional FCC licensing cost.
+  \item \textbf{Emergency infrastructure positioning:} Emphasize EAS role and community resilience
+        value to justify ongoing public interest obligations.
+\end{enumerate}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Boundary Type} \\
+\midrule
+Source quality & All claims must cite FCC documents, peer-reviewed research, or professional broadcast organizations. No entertainment media, blogs, or unsourced claims. & ABSOLUTE \\
+Numerical attribution & Every wattage, frequency, station count, or audience share attributed to specific source. & ABSOLUTE \\
+No policy advocacy & Document presents regulatory information and findings without advocating for specific FCC policy outcomes. & ABSOLUTE \\
+Legal advice boundary & Regulatory summaries are informational only; applicants must consult a broadcast attorney for specific licensing advice. & ANNOTATE \\
+Minority programming & Statistics on minority-language and minority-community AM stations presented factually and without characterization. & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+\begin{itemize}[leftmargin=*]
+  \item Federal Communications Commission. \textit{How to Apply for a Radio or Television Broadcast Station.} fcc.gov/media/radio/how-to-apply
+  \item Federal Communications Commission. \textit{Low Power FM (LPFM) Broadcast Radio Stations.} fcc.gov/media/radio/lpfm
+  \item Federal Communications Commission. \textit{AM Revitalization.} fcc.gov/media/radio/am-revitalization
+  \item Federal Communications Commission. \textit{Digital Radio.} fcc.gov/media/radio/digital-radio
+  \item Federal Communications Commission. \textit{AM Station Classes, and Clear, Regional, and Local Channels.} fcc.gov/media/radio/am-clear-regional-local-channels
+  \item Federal Communications Commission. \textit{All-Digital AM Broadcasting, Revitalization of the AM Radio Service.} FCC 20-154 (Report and Order, Dec.\ 2020). Federal Register, Dec.\ 3, 2020.
+  \item Federal Communications Commission. \textit{Broadcast Station Rule Updates.} MB Docket 24-626. Federal Register, Mar.\ 24, 2025.
+  \item eCFR. \textit{47 CFR Part 73 --- Radio Broadcast Services.} ecfr.gov/current/title-47/chapter-I/subchapter-C/part-73
+  \item FCC. \textit{Communications Marketplace Report 2024.} (Cited in Radio Ink, Jan.\ 7, 2025)
+\end{itemize}
+
+\subsubsection{Professional Organizations and Research}
+\begin{itemize}[leftmargin=*]
+  \item California Historical Radio Society. \textit{100 Years of Radio.} californiahistoricalradio.com (2011, updated 2024)
+  \item HistoryLink.org. Banel, Feliks. \textit{Radio in Washington.} historylink.org/File/22494
+  \item Bay Area Radio Museum \& Hall of Fame. \textit{KYA/KOIT Historical Timeline.} bayarearadio.org
+  \item Radio Survivor. \textit{Radio Recollections: The San Francisco Bay Area in the 1950s.} radiosurvivor.com (June 2016)
+  \item Common Frequency. \textit{Overview on Applying for Low Power FM in 2023.} commonfrequency.org
+  \item Xperi. \textit{Is AM Radio Dying? Not Any Time Soon.} xperi.com/blog (2023)
+  \item Radio Ink. \textit{FCC Captures Radio's Struggle Against Digital in Biennial Report.} radioink.com (Jan.\ 7, 2025)
+  \item Radio World. \textit{FCC Approves All-Digital Option for AM.} radioworld.com (Oct.\ 27, 2020)
+\end{itemize}
+
+\subsubsection{Station Histories and Archives}
+\begin{itemize}[leftmargin=*]
+  \item Wikipedia contributors. \textit{KFI.} en.wikipedia.org/wiki/KFI (updated Feb.\ 2026)
+  \item Wikipedia contributors. \textit{KSFO.} en.wikipedia.org/wiki/KSFO (updated 2026)
+  \item Wikipedia contributors. \textit{KNWN (AM).} en.wikipedia.org/wiki/KNWN\_(AM) (updated Jan.\ 2026)
+  \item QZVX.com. \textit{AM Radio Stations: PNW History.} qzvx.com/am-radio-stations/
+  \item Swingin' West. \textit{Oldest Radio Stations / American / Radio History.} swinginwest.com
+  \item Tripod / Jeff560. \textit{A Chronology of AM Radio Broadcasting 1900--1960.} jeff560.tripod.com/chrono1.html
+  \item Oregon Radio / KGW / NBC History. ke7ggv.tripod.com/nwradiohistory.html
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on the history, present state,
+and future of AM radio broadcasting on the West Coast of the United States, with deep focus on
+the Pacific Northwest and California. The document will serve both as an authoritative historical
+reference and as a practical licensing and regulatory guide for prospective broadcasters in 2026.
+All claims will be sourced to FCC documents, professional broadcast organizations, or peer-reviewed
+research.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+══════════════════════════════════════════════════════════════════
+
+  WAVE 0: FOUNDATION
+  ┌──────────────────────────────────────────────────────────┐
+  │  W0-A: Shared Schema (Haiku)   W0-B: Source Index (Sonnet)│
+  └──────────────────────────────────────────────────────────┘
+                              │
+  WAVE 1: PARALLEL RESEARCH TRACKS
+  ┌──────────────────────────────────────────────────────────┐
+  │  TRACK ALPHA                 │  TRACK BETA               │
+  │  W1-A: AM Band Foundations   │  W1-D: Spectrum & Licensing│
+  │  W1-B: PNW Station History   │  W1-E: FCC Regulations    │
+  │  W1-C: California Stations   │                           │
+  └──────────────────────────────────────────────────────────┘
+                              │
+  WAVE 2: SYNTHESIS
+  ┌──────────────────────────────────────────────────────────┐
+  │  W2-A: Cross-Module Integration (Opus)                   │
+  │  W2-B: Digital Future Analysis (Opus)                    │
+  └──────────────────────────────────────────────────────────┘
+                              │
+  WAVE 3: PUBLICATION + VERIFICATION
+  ┌──────────────────────────────────────────────────────────┐
+  │  W3-A: Document Assembly (Sonnet)                        │
+  │  W3-B: Source Verification (Sonnet)                      │
+  │  W3-C: CAPCOM Review Gate (Human)                        │
+  └──────────────────────────────────────────────────────────┘
+                              │
+                    FINAL DELIVERABLE PDF
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+  \item \textbf{Foundation Layer} --- Shared data schemas, source index, station database structure
+  \item \textbf{Historical Research Layer} --- Station-by-station profiles, network chronologies, format evolution
+  \item \textbf{Regulatory Research Layer} --- FCC rule summaries, licensing pathways, spectrum analysis
+  \item \textbf{Synthesis Layer} --- Cross-module integration, digital future analysis, practical broadcaster guide
+  \item \textbf{Publication Layer} --- Document assembly, formatting, source verification, final PDF
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Primary Spec} \\
+\midrule
+1 & Station History Compendium & All Class A/B PNW and CA stations profiled; dates, frequencies, affiliations verified & W1-B, W1-C \\
+2 & AM Band Technical Reference & Band structure, propagation physics, station classes, NARBA explained & W1-A \\
+3 & Licensing Pathway Guide & All five pathways documented; step-by-step; current as of 2026 & W1-D \\
+4 & FCC Regulatory Summary & 47 CFR Part 73 obligations for new licensees; ownership rules; EAS & W1-E \\
+5 & Digital Transition Analysis & HD Radio, all-digital AM, FM translators, EV interference, market data & W2-B \\
+6 & Practical Broadcaster Road Map & Synthesized entry guide for prospective 2026 West Coast broadcaster & W2-A \\
+7 & Verified Source Bibliography & All sources traceable; no entertainment media & W3-B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Token Budget (K)} \\
+\midrule
+W0-A: Schema & None & Haiku & 4 \\
+W0-B: Source Index & None & Sonnet & 8 \\
+W1-A: AM Foundations & W0 & Sonnet & 18 \\
+W1-B: PNW Stations & W0, W1-A & Sonnet & 28 \\
+W1-C: CA Stations & W0, W1-A & Sonnet & 28 \\
+W1-D: Licensing & W0, W1-A & Sonnet & 22 \\
+W1-E: FCC Rules & W0, W1-A & Sonnet & 22 \\
+W2-A: Cross-Module Integration & W1-B, W1-C, W1-D, W1-E & Opus & 35 \\
+W2-B: Digital Future & W1-A, W2-A & Opus & 25 \\
+W3-A: Document Assembly & W2-A, W2-B & Sonnet & 40 \\
+W3-B: Source Verification & W3-A & Sonnet & 16 \\
+\textbf{Total} & & & \textbf{246} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Assignment} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+Schema, scaffolding & Haiku & Mechanical, low-judgment template generation \\
+Survey, compilation, verification & Sonnet & Standard research and document production \\
+Cross-module synthesis, digital future analysis, broadcaster road map & Opus & Requires judgment, synthesis across 5+ modules, trend analysis and extrapolation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Model allocation:} Opus $\approx$24\% (60K tokens), Sonnet $\approx$72\% (178K tokens), Haiku $\approx$4\% (8K tokens).
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & W0-A, W0-B & Sequential & Auto \\
+1 & Parallel Research & W1-A through W1-E & Parallel (2 tracks) & CAPCOM \\
+2 & Synthesis & W2-A, W2-B & Sequential & CAPCOM \\
+3 & Publication & W3-A, W3-B, W3-C & Sequential & Human \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+W0-A & PLAN + Haiku & Station database schema (JSON): call sign, frequency, city, class, founded, network affiliations, format history, current status & Haiku \\
+W0-B & SCOUT + Sonnet & Annotated source index: URL, document type, reliability tier, module assignments for each of the 30+ sources gathered in cold-start research & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track Alpha --- History}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+W1-A & CRAFT-TECH & AM band foundations document: physics, FRC/FCC history, NARBA, station classification table, band expansion history & Sonnet \\
+W1-B & CRAFT-HIST + EXEC-1 & PNW station compendium: full profiles for all Class A/B stations in WA/OR/ID; network chronology; format evolution by decade & Sonnet \\
+W1-C & CRAFT-HIST + EXEC-2 & California station compendium: full profiles for Bay Area and LA Class A/B stations; Don Lee Network; NBC Pacific structures & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track Beta --- Regulatory \& Licensing}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+W1-D & CRAFT-REG & Licensing pathway guide: all five pathways with step-by-step, forms, fees, LPFM window schedule, spectrum scarcity context for 4 major West Coast markets & Sonnet \\
+W1-E & CRAFT-REG & FCC regulatory summary: Part 73 subpart-by-subpart; public interest obligations; ownership rules; EAS; indecency; license terms; 2025 rule updates & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+W2-A & INTEG + Opus & Cross-module integration: consistent station data; practical broadcaster road map synthesizing history + licensing + regulations; editorial through-line & Opus \\
+W2-B & ANALYST + Opus & Digital future analysis: HD Radio adoption trajectory; all-digital AM viability; EV interference technical analysis; competitive streaming landscape; 5-year AM outlook & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Deliverable} & \tableheader{Model} \\
+\midrule
+W3-A & EXEC-1 + Sonnet & Full document assembly: LaTeX or structured markdown of all modules; tables, diagrams, bibliography formatted to publication standard & Sonnet \\
+W3-B & VERIFY + Sonnet & Source verification report: every factual claim traced to source; SC-SRC and SC-NUM safety tests run; flagged items returned to producing agent & Sonnet \\
+W3-C & CAPCOM & Human review gate: final HITL approval before PDF generation & Human \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Cache the annotated source index (W0-B) at session start for all Wave~1 agents---avoids 30+ URL lookups per agent
+  \item Cache the AM band foundations document (W1-A) as shared context for all history and regulatory agents
+  \item Maintain the station database schema (W0-A) in shared context throughout Wave~1 to ensure consistent data structure
+  \item Batch all FCC LMS queries within a single SCOUT agent session in Wave~0 rather than distributing across agents
+  \item Use prompt caching for the 47 CFR Part~73 regulatory text---accessed by both W1-D and W1-E
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (K)} & \tableheader{Sonnet (K)} & \tableheader{Haiku (K)} & \tableheader{Wave Total (K)} \\
+\midrule
+Wave 0 & 0 & 8 & 4 & 12 \\
+Wave 1 (Alpha) & 0 & 74 & 0 & 74 \\
+Wave 1 (Beta) & 0 & 44 & 0 & 44 \\
+Wave 2 & 60 & 0 & 0 & 60 \\
+Wave 3 & 0 & 56 & 0 & 56 \\
+\textbf{Total} & \textbf{60} & \textbf{182} & \textbf{4} & \textbf{246} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+══════════════════════════════════════════════════════
+
+  [W0-A Schema] ─────────────────────────────────────┐
+  [W0-B Source Index] ──┬───────────────────────────────┤
+                        │                               │
+            ┌───────────┼──────────┬──────────┐        │
+            ▼           ▼          ▼          ▼        ▼
+         [W1-A]     [W1-B]     [W1-C]    [W1-D]   [W1-E]
+         Foundations PNW Hist  CA Hist  Licensing  FCC Rules
+            │           │          │          │        │
+            └───────────┴──────────┴──────────┴────────┘
+                                  │
+                    ┌─────────────┴──────────────┐
+                    ▼                            ▼
+                 [W2-A]                       [W2-B]
+                Cross-Module               Digital Future
+                Integration                  Analysis
+                    │                            │
+                    └─────────────┬──────────────┘
+                                  │
+                    ┌─────────────┴──────────────┐
+                    ▼                            ▼
+                 [W3-A]                       [W3-B]
+                Document                     Source
+                Assembly                  Verification
+                    │                            │
+                    └─────────────┬──────────────┘
+                                  │
+                              [W3-C]
+                           CAPCOM GATE
+                                  │
+                        FINAL DELIVERABLE
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}L{2cm}C{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Target \%} \\
+\midrule
+Safety-critical & 7 & Mandatory & BLOCK & 16\% \\
+Core functionality & 22 & Required & BLOCK & 49\% \\
+Integration & 10 & Required & BLOCK & 22\% \\
+Edge cases & 6 & Best-effort & LOG & 13\% \\
+\textbf{Total} & \textbf{45} & & & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to FCC documents, peer-reviewed sources, or professional broadcast organizations. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every wattage, frequency, station count, audience share, and date attributed to a specific named source. \\
+SC-ADV & No policy advocacy & Document presents regulatory information without advocating for specific FCC policy changes or positions. \\
+SC-LEG & Legal advice boundary & All regulatory summaries include disclaimer that content is informational and applicants must consult a broadcast attorney. \\
+SC-MIN & Minority community data & Statistics on minority-language/community AM stations presented factually; no characterization or editorial framing. \\
+SC-CUR & Temporal currency & Document correctly reflects 2026 regulatory status; no outdated CDBS references; LMS system referenced for filings. \\
+SC-ELI & LPFM eligibility accuracy & LPFM eligibility restrictions (nonprofits only; no individuals; no commercial entities) stated accurately with CFR citation. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & PNW station coverage completeness & All Class A and major Class B AM stations in WA/OR profiled with founding date, frequency, and ownership history \\
+CF-02 & California station completeness & All Class A AM stations in CA (KFI, KNX, KGO/KSFO, KNBR, KCBS, KABC) individually profiled \\
+CF-03 & Network chronology accuracy & NBC Pacific networks (Orange, Gold), Don Lee/Mutual, CBS, and ABC West Coast structures mapped with station affiliations and dates \\
+CF-04 & AM band structure documentation & 535--1705~kHz range, 10~kHz channel spacing, Class A--D power limits, and daytime/nighttime propagation differences explained \\
+CF-05 & LPFM pathway accuracy & Filing window schedule, Form 318, eligibility requirements, 100~W power limit, 3.5-mile radius, and community-based requirement all documented \\
+CF-06 & Full-power AM pathway & Form 301, engineering study requirement, 250~W minimum, construction permit process, and FRN registration requirement documented \\
+CF-07 & FM translator pathway & AM Revitalization translator access, 2,100+ on-air translators statistic sourced to FCC, Form 349 referenced \\
+CF-08 & Part 15 unlicensed operation & 200-foot effective radius, FCC Part 15 rules, absence of licensing requirement, and interference acceptance noted \\
+CF-09 & License term and renewal & Eight-year term, Form 303-S, four-month pre-filing deadline, 2027--2030 expiration schedule documented \\
+CF-10 & Ownership rules & 1996 Telecom Act changes, local numerical market tiers, cross-ownership rules referenced \\
+CF-11 & EAS obligations & EAS decoder/encoder requirement, KFI/KNX roles documented, CFR citation included \\
+CF-12 & Indecency rules & 18 U.S.C.\ \S~1464, 6~a.m.--10~p.m.\ safe harbor, obscenity prohibition, and 47 CFR \S~73.3999 all referenced \\
+CF-13 & All-digital AM authorization & FCC 20-154, MA3 mode, Form 335-AM Digital Notification, 30-day public notice window documented \\
+CF-14 & HD Radio adoption data & 95 million vehicles with HD Radio sourced to Xperi/DTS 2023 data \\
+CF-15 & EV interference documented & Automaker removal decisions (Ford, BMW, VW), Ford reversal, congressional response, NAB position documented \\
+CF-16 & Audience share data & 36\% AM/FM share of audio listening in 2023 sourced to Edison Research via FCC 2024 report \\
+CF-17 & AM revitalization history & Docket 13-249 milestones (2013 NPRM through 2020 digital R\&O) documented with dates \\
+CF-18 & NARBA frequency shifts & KOMO 950$\to$1000, KGO 790$\to$810 and other NARBA-driven reassignments documented \\
+CF-19 & KJR founding history & 1921 founding by Vincent Kraft, first PNW license, KYA San Francisco connection documented \\
+CF-20 & KFI 50 kW milestone & July 1931 power increase, first west of Chicago, NBC Orange network affiliation documented \\
+CF-21 & KGO/KSFO history & January 8, 1924 sign-on; GE/NBC/ABC lineage; Jack LaLanne first radio exercise show; KSFO call change 2024 \\
+CF-22 & Spectrum expansion limitation & FM band constraints (aeronautical above, CH6 TV below), AM expanded band history documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1. All Class A/B PNW and CA stations profiled & CF-01, CF-02, CF-03 & Pending \\
+SC-2. AM band structure fully explained & CF-04, CF-22 & Pending \\
+SC-3. FCC licensing pathways documented & CF-05, CF-06, CF-07, CF-08 & Pending \\
+SC-4. Spectrum scarcity context documented & CF-22, IN-01 & Pending \\
+SC-5. 47 CFR Part 73 obligations summarized & CF-09, CF-11, CF-12 & Pending \\
+SC-6. Ownership restrictions documented & CF-10 & Pending \\
+SC-7. AM digital transition options described & CF-13, CF-14 & Pending \\
+SC-8. EV interference documented & CF-15 & Pending \\
+SC-9. Don Lee / NBC Pacific networks mapped & CF-03, CF-21 & Pending \\
+SC-10. Historical format evolution documented & CF-17, CF-18, CF-19, CF-20 & Pending \\
+SC-11. All numerical claims attributed & SC-NUM, CF-16 & Pending \\
+SC-12. Practical broadcaster road map synthesized & IN-02, W2-A & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go at each wave boundary \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; FCC database queries; web research; evidence compilation \\
+EXEC-1 & Executor Alpha & Document production for Track Alpha (PNW history, California history) \\
+EXEC-2 & Executor Beta & Document production for Track Beta (licensing, FCC rules) \\
+CRAFT-HIST & History Specialist & Station-by-station chronicle; network affiliate research; archival sourcing \\
+CRAFT-TECH & Technical Specialist & AM band physics; antenna systems; propagation; HD Radio technical standards \\
+CRAFT-REG & Regulatory Specialist & 47 CFR Part 73 analysis; FCC LMS procedures; ownership rules; EAS \\
+VERIFY & Verification Agent & Source validation; SC-SRC and SC-NUM safety tests; accuracy checking \\
+INTEG & Integration Agent & Cross-module consistency; broadcaster road map synthesis; data reconciliation \\
+ANALYST & Pattern Analyst & Digital future trend analysis; competitive landscape; 5-year outlook \\
+CAPCOM & HITL Interface & Human approval at Wave 1 and Wave 2 boundaries; only H-M channel \\
+BUDGET & Resource Manager & Token budget tracking; wave completion reporting; model allocation monitoring \\
+SURGEON & Health Monitor & Research quality degradation detection; factual consistency monitoring \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Agent & Cross-cutting structural decisions; document template enforcement \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6 modules, 17 roles) \\
+Total Estimated Tokens & 246,000 \\
+Model Split & Opus 24\% / Sonnet 72\% / Haiku 4\% \\
+Wave Count & 4 waves \\
+Parallel Efficiency & 2 simultaneous tracks in Wave 1 (72\% efficiency vs.\ sequential) \\
+Estimated Sessions & 4--6 Claude Code sessions \\
+Estimated Context Windows & 18--24 \\
+Human Gate Points & 3 (Wave 1 start, Wave 2 start, final delivery) \\
+Safety-Critical Tests & 7 (all mandatory-pass / BLOCK) \\
+Total Tests & 45 \\
+Primary Regulatory Authority & FCC / 47 CFR Part 73 \\
+Research Domain & Broadcast history, regulatory law, spectrum engineering \\
+Geographic Focus & Washington, Oregon, Idaho, California (West Coast primary) \\
+Temporal Scope & 1909--2026 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Before the internet, the radio dial was the only place where a single voice could
+reach the entire Pacific Northwest at once---in the dark, in the mountains, across the
+water. The frequency was free. The license was granted by the public. The obligation was
+to serve. That architecture still exists. The builder who learns to navigate it inherits
+something older and stranger than any streaming platform: the right to speak to a whole
+geography, and the responsibility to make that speech worth hearing.''}
+
+\vspace{0.5em}
+\hfill--- GSD Research Mission Vision, 2026 | Fox Infrastructure Group
+\end{quotebox}
+
+\end{document}
