@@ -37,6 +37,7 @@
     { id: 'CRV', name: 'Corvid PNW', path: 'CRV/index.html' },
     { id: 'CRY', name: "Curren$y", path: 'CRY/index.html' },
     { id: 'CWC', name: 'Cooking with Claude', path: 'CWC/index.html' },
+    { id: 'CYG', name: 'Cygnus X-3', path: 'CYG/index.html' },
     { id: 'DAA', name: 'Deep Audio', path: 'DAA/index.html' },
     { id: 'DFQ', name: 'Dead Frequencies', path: 'DFQ/index.html' },
     { id: 'DHP', name: 'DHCP Protocol', path: 'DHP/index.html' },

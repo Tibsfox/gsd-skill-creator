@@ -1,0 +1,1043 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Space/Physics (Cosmic) ===
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{C77800}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS & FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Cygnus X-3 PeVatron}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={Cygnus X-3 Variable PeVatron -- GSD Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% =====================================================================
+\begin{document}
+% =====================================================================
+
+% === TITLE PAGE ===
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{CYGNUS X-3\\[0.3em]VARIABLE PeVATRON}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{LHAASO Discovery: arXiv 2512.16638}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Ultra-High-Energy Astrophysics}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--10 context windows across 3 sessions}}
+
+\end{center}
+\newpage
+
+% === TABLE OF CONTENTS ===
+\tableofcontents
+\newpage
+
+% =====================================================================
+% STAGE 1 — VISION DOCUMENT
+% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Cygnus X-3 Variable PeVatron --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Source Paper:}{LHAASO Collaboration, arXiv:2512.16638 (submitted NSR, January 2026)}
+\metafield{Depends On:}{LHAASO Observatory Data, IceCube Archive, Fermi-LAT / AGILE multiwavelength catalog}
+\metafield{Context:}{Cold-start deep research mission triggered by URL submission}
+
+\subsection{Vision}
+
+There is a binary star system 9,670 light-years away in the direction of the Cygnus constellation that has haunted astrophysicists for forty years. Cygnus X-3 was among the first X-ray binaries ever identified, and in the 1980s, multiple air-shower experiments reported possible detections of gamma rays at extraordinary energies from its direction --- energies so extreme that the instruments of the era could barely trust their own measurements. When better-calibrated detectors came online in the 1990s, they found nothing. The mystery was shelved.
+
+In December 2025, the LHAASO collaboration --- operating the world's most sensitive ultra-high-energy gamma-ray observatory at 4,400 meters elevation in Sichuan Province --- changed that story permanently. They reported a 10-sigma detection of gamma rays from Cygnus X-3 extending to 3.7 petaelectronvolts (PeV), with unmistakable month-scale variability and evidence of a 4.8-hour orbital modulation tied to the binary's known period. This is not a diffuse background or a supernova remnant slowly grinding out particles over millennia. This is a compact binary system --- a Wolf-Rayet star orbiting a probable black hole, separated by a distance smaller than the Sun's radius --- producing the most energetic radiation of any resolved point source in the LHAASO catalog. It is, in the language of the field, a \emph{super-PeVatron}: an object accelerating protons to energies tens of times beyond a petaelectronvolt within a physical volume scarcely larger than a country.
+
+The implications cut to the oldest unsolved problem in astroparticle physics: where do Galactic cosmic rays come from? The ``knee'' in the cosmic-ray energy spectrum at roughly 3 PeV --- a kink that has been measured for decades without clear explanation --- now has a plausible architect. Cygnus X-3 sits inside the Cygnus superbubble, a vast stellar-wind-carved cavity that has long been suspected as a cosmic-ray factory. This LHAASO detection places a working, transient PeVatron \emph{inside} that bubble. The through-line from a 4.8-hour binary orbit to the large-scale structure of Galactic cosmic rays is one of the most remarkable scaling relationships in modern astrophysics.
+
+The GSD research mission structured here exists to synthesize this discovery from four complementary angles: the astrophysical system itself, the observational evidence, the particle acceleration physics, and the multi-messenger implications for neutrino astronomy and cosmic-ray origin. It is designed to produce a publication-quality reference document suitable for handoff to gsd-skill-creator and archival in the GSD College of Knowledge alongside \emph{The Space Between}'s mathematical foundations.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Cosmic-Ray Origin Unresolved:} Despite decades of measurement, the sources of Galactic cosmic rays at and above the ``knee'' ($\sim$3 PeV) remain unidentified. Supernova remnants (traditional candidates) struggle to reach PeV in contemporary models. A definitive PeVatron identification is outstanding.
+
+  \item \textbf{Microquasar Acceleration Mechanism Ambiguous:} Whether X-ray binaries with relativistic jets can accelerate hadrons to tens of PeV --- and through which mechanism (magnetic reconnection, diffusive shock acceleration, or second-order Fermi) --- has been debated without compelling observational constraint.
+
+  \item \textbf{Hadronic vs.\ Leptonic Emission Undecided:} UHE gamma-ray emission could in principle arise from inverse Compton (leptonic) or pion-decay (hadronic) processes. Leptonic sources do not produce neutrinos; hadronic sources do. Without a correlated neutrino signal, the emission channel of most UHE sources remains ambiguous.
+
+  \item \textbf{Neutrino Flux Below Detection Threshold:} Even with strong theoretical predictions linking Cygnus X-3 to hadronic cosmic-ray production, IceCube has not achieved a definitive neutrino detection from this source. Muon and pion cooling suppress expected fluxes. IceCube-Gen2's role in resolving this is undefined.
+
+  \item \textbf{Variability and Flaring State Physics Unexplained:} The order-of-magnitude flux variability between flaring and quiescent states, and the possible 40-year history of bright-phase/dark-phase cycling, has no consensus physical model explaining what triggers the PeV emission on and off.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} A compact microquasar acting as a transient super-PeVatron through photomeson production in its innermost relativistic jet.
+
+The dense stellar wind of the Wolf-Rayet companion star provides both a photon target field (UV and X-ray photons) and a gas target. Protons accelerated to $\geq$10 PeV within the inner jet interact with these photon fields via the photomeson process ($p + \gamma \rightarrow \pi^{\pm,0} + ...$), producing neutral pions that decay into the observed gamma rays, and charged pions that decay into neutrinos. The 4.8-hour orbital modulation arises because the photon target density and the angle between jet and WR star vary as the compact object circles its companion. Variability at month timescales reflects changes in accretion state driving jet power.
+
+\subsubsection{System Architecture (ASCII Diagram)}
+
+\begin{asciibox}
+CYGNUS X-3 BINARY SYSTEM
+=========================
+
+     [Wolf-Rayet Donor Star]
+      Strong stellar wind
+      UV + X-ray photon field       Orbital period: 4.8 hrs
+              |                     Separation: < 1 solar radius
+              |  <-- 9.67 kpc -->   Distance: ~9,670 ly
+              v
+   [Relativistic Jet] <-- [Compact Object: BH or NS]
+        |                  (Accreting at super-Eddington rates)
+        | Protons accelerated
+        | to >= 10 PeV
+        |
+    p + gamma --> pi0 --> GAMMA RAYS (0.06 - 3.7 PeV)
+                  pi+/- --> NEUTRINOS (predicted, undetected)
+
+   [Cygnus X Superbubble] -- host environment, ~150 pc
+        |
+        v
+   [Galactic Cosmic Ray Pool] -- CR knee at ~3 PeV
+\end{asciibox}
+
+\subsubsection{Module Architecture (ASCII Diagram)}
+
+\begin{asciibox}
+RESEARCH MODULE DEPENDENCY GRAPH
+==================================
+
+  [MOD-01: Binary System]   [MOD-02: LHAASO Observations]
+        |                           |
+        +----------+----------------+
+                   |
+           [MOD-03: Particle Physics]
+                   |
+         +---------+-----------+
+         |                     |
+  [MOD-04: Multi-Messenger] [MOD-05: PeVatron Landscape]
+         |                     |
+         +---------+-----------+
+                   |
+           [Synthesis Module]
+           (Cross-cutting implications)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Binary System Architecture}
+Survey the Cygnus X-3 system: orbital parameters, Wolf-Rayet star properties, compact object identity (black hole vs.\ neutron star), accretion geometry (super-Eddington ULX-class), stellar wind density and structure, historical multi-wavelength observations, and the IXPE X-ray polarimetry result revealing inner accretion geometry.
+
+\subsubsection{Module 02 --- LHAASO Observations and Spectral Analysis}
+Document the LHAASO detection in full: instrument configuration (KM2A, WCDA, WFCTA), analysis methodology, spectral energy distribution (0.06--3.7 PeV), power-law index ($\Gamma = 2.18 \pm 0.14$), spectral hardening above 1 PeV, CMB absorption corrections, month-scale variability measurements, orbital modulation evidence (3.2$\sigma$), flux comparison between flaring and quiescent states, and comparison to other LHAASO UHE sources.
+
+\subsubsection{Module 03 --- Particle Acceleration and Photomeson Physics}
+Analyze the physical mechanisms: photomeson process threshold kinematics, proton energy requirements ($\geq$10 PeV), acceleration mechanisms in the jet (magnetic reconnection, diffusive shock, second-order Fermi), CR acceleration efficiency ($10^{-3}$--$10^{-2}$), role of UV photons vs.\ wind gas as interaction targets, spectral pileup near 1 PeV explained by interaction cross-section, and why the spectrum is hard enough to qualify as the hardest UHE LHAASO source.
+
+\subsubsection{Module 04 --- Multi-Messenger Implications}
+Examine neutrino predictions from pion decay, IceCube correlation studies (Koljonen et al.\ 2023), muon/pion cooling suppression of neutrino flux, orbital-modulation templates to enhance IceCube-Gen2 sensitivity, relationship between Cygnus X-3 PeV photon flux and the Galactic IceCube neutrino signal, and design of future multi-messenger search strategies.
+
+\subsubsection{Module 05 --- Galactic PeVatron Landscape and CR Knee}
+Place Cygnus X-3 in the broader context of Galactic PeVatrons: LHAASO's catalog of $>$100 UHE sources and 12 confirmed PeVatrons, the role of microquasars (SS433, V4641 Sgr, Cygnus X-1), the Cygnus superbubble as a cosmic-ray accelerator, concordance multi-messenger picture linking the Cygnus PeVatron to the CR knee at $\sim$3 PeV, and the 40-year arc from 1980s air-shower claims to 2025 confirmed detection.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset YAML --- Cygnus X-3 PeVatron Mission
+chipset:
+  agnus:            # Orchestration / DMA / context
+    model: opus
+    role: FLIGHT + PLAN
+    notes: "Wave decomposition, synthesis integration, cross-module QA"
+
+  denise:           # Display / output rendering
+    model: sonnet
+    role: EXEC x2 + CRAFT-OBS + CRAFT-THEORY
+    notes: "Survey docs, spectral analysis write-up, SED tables"
+
+  paula:            # I/O / anticipatory
+    model: sonnet
+    role: SCOUT + VERIFY + INTEG
+    notes: "Source gathering, citation validation, cross-module consistency"
+
+  haiku_core:       # Scaffolding / glue
+    model: haiku
+    role: BUDGET + LOG + CAPCOM scaffolding
+    notes: "Shared schemas, source index, token tracking"
+
+model_allocation:
+  opus:   30%   # Synthesis, physics judgment, multi-messenger analysis
+  sonnet: 60%   # Surveys, spectral tables, wave documentation
+  haiku:  10%   # Shared schemas, boilerplate, templates
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item LHAASO arXiv:2512.16638 findings in full
+  \item Cygnus X-3 binary system properties as of 2025
+  \item Hadronic emission model and photomeson physics
+  \item Multi-messenger context: neutrino predictions and IceCube constraints
+  \item Galactic PeVatron landscape including microquasar candidates
+  \item Historical gamma-ray observation timeline (AGILE, Fermi-LAT, 1980s claims)
+  \item Cygnus superbubble and cosmic-ray knee connection
+  \item Response papers (arXiv:2512.18786, arXiv:2503.11448) as cross-validation
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Extragalactic PeVatrons (blazars, GRBs, AGN jets)
+  \item Detailed LHAASO instrument engineering and construction
+  \item Quantum field theory derivations of pion production cross-sections
+  \item General cosmic-ray transport and diffusion in the ISM
+  \item Leptonic emission model (inverse Compton) detailed treatment
+  \item Gravitational wave or optical follow-up of Cygnus X-3
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item \textbf{System Survey Complete:} Binary system parameters documented with cited values for orbital period, distance, WR star type, and compact object candidates.
+  \item \textbf{LHAASO Detection Characterized:} SED documented over full range (0.06--3.7 PeV), spectral index, CMB correction methodology, and detection significance stated with sources.
+  \item \textbf{Variability and Modulation Documented:} Month-scale variability amplitude and orbital modulation evidence (3.2$\sigma$) quantified with LHAASO data.
+  \item \textbf{Photomeson Physics Explained:} Proton energy requirements, interaction kinematics, and the 1 PeV spectral pileup explained in non-specialist terms with precise physical grounding.
+  \item \textbf{Acceleration Mechanisms Compared:} All three CR acceleration scenarios (reconnection, DSA, second-order Fermi) evaluated with efficiency estimates cited from Kachelrieß et al.
+  \item \textbf{Neutrino Predictions Documented:} Predicted neutrino flux from pion decay quantified with cooling suppression factors noted; IceCube correlation studies summarized.
+  \item \textbf{IceCube Constraints Included:} Upper limits on neutrino flux and IceCube-Gen2 sensitivity projections cited from published analyses.
+  \item \textbf{Cygnus Superbubble Context Established:} Spatial relationship between Cygnus X-3, the superbubble, and the LHAASO diffuse emission characterized with published data.
+  \item \textbf{CR Knee Concordance Evaluated:} Multi-messenger concordance picture (Cygnus PeVatron $\rightarrow$ CR knee) assessed with reference to concordance papers.
+  \item \textbf{Historical Arc Complete:} Timeline from 1980s air-shower claims through AGILE/Fermi detections to 2025 LHAASO confirmed PeV detection documented.
+  \item \textbf{Microquasar PeVatron Landscape Mapped:} At least four microquasar/XRB PeVatron candidates characterized (SS433, V4641 Sgr, Cygnus X-1, Cygnus X-3) with comparative data.
+  \item \textbf{All Claims Sourced:} Every quantitative statement (flux, significance, energy, distance) attributed to specific peer-reviewed papers or observatory publications.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection Point} \\
+\midrule
+\emph{The Space Between} & Mathematical spine & Unit circle metaphor maps to orbital modulation; Category Theory frames the PeVatron classification system \\
+Deep Audio Analyzer Mission & Parallel GSD mission & Both involve spectral analysis of signal-in-noise; SED analysis parallels frequency decomposition \\
+Fox Infrastructure Group & Thematic parallel & Ocean compute and energy infrastructure both involve large-scale distributed sensor networks (LHAASO is 1.36 km²) \\
+GSD v1.50 Retrospective & Timeline context & This mission may serve as College of Knowledge seed material for astrophysics module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The GSD ecosystem's Amiga Principle holds that staggering complexity emerges from small, principled building blocks operating faithfully within elegant architectural constraints. Cygnus X-3 is perhaps the most literal astronomical instantiation of this principle: a binary system smaller than Earth's orbit around the Sun, cycling every 4.8 hours, quietly accelerating protons to energies that exceed what humanity's most powerful particle colliders can produce --- by a factor of a thousand.
+
+The ``spaces between'' philosophy applies here with unusual precision. The petaelectronvolt photons do not come from the Wolf-Rayet star. They do not come from the black hole's accretion disk. They come from the \emph{relationship} between those two objects --- from the dense stellar wind crossing the gap, from the orbital geometry that modulates the photon target density, from the jet that threads the space between them and uses it as raw material. The most energetic photons measured by any observatory on Earth emerge from an interaction region smaller than a city block, mediated by photons that last existed in a stellar atmosphere before being consumed by a relativistic proton that was itself born in an accretion flow that no human has directly observed. The spaces between are doing all the work.
+
+This is why Cygnus X-3 belongs in the College of Knowledge alongside the mathematical structures in \emph{The Space Between}. The cosmic-ray knee --- that kink in the energy spectrum at $\sim$3 PeV that has resisted explanation for sixty years --- may be the signature of this one compact system's current bright phase, radiating into the Galactic medium with an efficiency requiring barely one part in a thousand of its available jet power. Architecture, not brute force.
+
+% =====================================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =====================================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Cygnus X-3 Variable PeVatron --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from the primary LHAASO discovery paper (arXiv:2512.16638), response papers, and peer-reviewed literature. All claims are attributed to specific sources. Use Module sections to feed individual GSD subagents; use the Bibliography for source validation.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}[noitemsep]
+  \item LHAASO Collaboration (Chinese Academy of Sciences / IHEP) --- primary discovery instrument
+  \item IceCube Neutrino Observatory (UW-Madison / NSF) --- neutrino constraint data
+  \item Fermi-LAT Collaboration (NASA/DOE) --- GeV gamma-ray monitoring
+  \item AGILE Collaboration (Italian Space Agency / ASI) --- historical GeV detections
+  \item NASA Marshall Space Flight Center --- IXPE X-ray polarimetry
+  \item Astronomy \& Astrophysics (A\&A), Monthly Notices of the Royal Astronomical Society (MNRAS), Nature Astronomy --- peer-reviewed publication venues
+\end{itemize}
+
+\subsection{Module 01 Reference --- Binary System Architecture}
+
+\subsubsection{Orbital Parameters and System Geometry}
+
+Cygnus X-3 is one of the first X-ray binaries identified in astronomical history. It consists of a Wolf-Rayet (WR) donor star and a compact object --- either a stellar-mass black hole or neutron star --- in an extraordinarily tight orbit.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Parameter} & \tableheader{Value / Notes} \\
+\midrule
+Orbital period & 4.8 hours (among the shortest known X-ray binaries) \\
+Distance from Earth & 9.67$^{+0.53}_{-0.48}$ kpc (VLBA trigonometric parallax; Miller-Jones et al.) \\
+Compact object type & Black hole or neutron star (unconfirmed; super-Eddington accretion suggests BH) \\
+Companion star & Wolf-Rayet star; dense ionized stellar wind \\
+Accretion mode & Super-Eddington / ULX-class (IXPE 2024: hidden ULX geometry) \\
+Radio behavior & Intense flares (tens of Jy); quenching before major outbursts; minor flares (100s mJy) \\
+Location & Cygnus X superbubble direction, Cygnus OB association \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wolf-Rayet Companion and Stellar Wind}
+
+The WR companion's dense, line-driven stellar wind is central to all hadronic emission models. The wind provides two interaction channels: a gas target for CR proton--proton collisions, and a UV photon field for photomeson production. The short orbital separation means the inner jet is immersed in this wind at all orbital phases, creating a permanent interaction zone.
+
+Recent (2024) IXPE X-ray polarimetry revealed the geometry of the accretion puzzle: Cygnus X-3 is confirmed as a ``hidden'' ultraluminous X-ray source whose apparent luminosity is lower than intrinsic because the accretion column is oriented away from line-of-sight. This super-Eddington luminosity implies jet kinetic power exceeding $10^{39}$ erg s$^{-1}$, sufficient by a factor of $\sim$100 to meet CR acceleration requirements.
+
+\subsection{Module 02 Reference --- LHAASO Observations}
+
+\subsubsection{The LHAASO Observatory}
+
+LHAASO (Large High Altitude Air Shower Observatory) operates at 4,400 m elevation in Sichuan Province, China. It comprises three detector components:
+\begin{itemize}[noitemsep]
+  \item \textbf{KM2A} (Kilometer Square Array): Surface + underground detectors for the electromagnetic and muon components of extensive air showers. Energy range: 10 TeV -- 10 PeV. This is the primary detector for the Cygnus X-3 discovery.
+  \item \textbf{WCDA} (Water Cherenkov Detector Array): Sensitive to 100 GeV -- 20 TeV; provided complementary data and upper limits for the quiescent state.
+  \item \textbf{WFCTA} (Wide Field-of-View Cherenkov Telescope Array): Complementary stereo imaging of air showers.
+\end{itemize}
+
+\subsubsection{Detection Significance and Spectral Properties}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Observable} & \tableheader{Measured Value} \\
+\midrule
+Detection significance & $\sim$10$\sigma$ (KM2A) \\
+SED energy range & 0.06 -- 3.7 PeV \\
+Power-law spectral index & $\Gamma = 2.18 \pm 0.14$ \\
+Spectral character & Hardest UHE source in LHAASO catalog; spectral hardening above 1 PeV \\
+Low-energy behavior & No significant excess below 20 TeV in WCDA data \\
+High-energy signal & $\sim$3.5$\sigma$ detection between 63 and 100 TeV \\
+Quiescent flux suppression & Nearly one order of magnitude below flaring state \\
+CMB absorption & Accounted for in intrinsic SED reconstruction \\
+Orbital modulation & 3.2$\sigma$ evidence for 4.8-hr period modulation \\
+Variability timescale & Month-scale \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Spectral Pileup Near 1 PeV}
+
+The SED shows a pronounced rise toward 1 PeV even after CMB absorption correction. This ``pileup'' feature is characteristic of photomeson production near the $\Delta^+$ resonance threshold ($\sim$145 MeV pion rest mass). In the photomeson process, the interaction cross-section peaks at the $\Delta(1232)$ resonance, producing a bump in the secondary gamma-ray spectrum whose energy position reflects the target photon energy and the proton energy at resonance. The UV photon field of the WR star naturally places this resonance in the observed energy range, providing strong circumstantial support for the hadronic photomeson interpretation.
+
+\subsection{Module 03 Reference --- Particle Acceleration Physics}
+
+\subsubsection{Photomeson Production Mechanism}
+
+The photomeson process proceeds via:
+\begin{center}
+$p + \gamma \rightarrow \Delta^+ \rightarrow \pi^0 + p$ \\[0.3em]
+$\pi^0 \rightarrow \gamma + \gamma$ (observed UHE gamma rays) \\[0.3em]
+$p + \gamma \rightarrow \Delta^+ \rightarrow \pi^+ + n$ \\[0.3em]
+$\pi^+ \rightarrow \mu^+ + \nu_\mu \rightarrow e^+ + \nu_e + \bar{\nu}_\mu + \nu_\mu$ (neutrinos)
+\end{center}
+
+For UV photons ($\sim$10 eV) from the WR star, the $\Delta^+$ resonance condition requires proton energies of $\sim$10--100 PeV, consistent with the observed SED. The gamma-ray photon from $\pi^0$ decay carries roughly 10\% of the parent proton energy, placing the observed 1--3.7 PeV gamma rays as secondaries from protons at 10--40 PeV.
+
+\subsubsection{Acceleration Mechanisms and Efficiency}
+
+Using test-particle Monte Carlo frameworks (Kachelrieß \& Lammert 2025; Kachelrieß et al.\ 2025), three acceleration scenarios were evaluated:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Mechanism} & \tableheader{Description} & \tableheader{PeV Capable?} \\
+\midrule
+Magnetic reconnection & Reconnection in relativistic jet; efficient at compact scales & Yes \\
+Diffusive shock acceleration (DSA) & Fermi-I; protons scattered across shocks in jet & Yes \\
+Second-order Fermi (stochastic) & Particle-wave scattering; slower but persistent & Yes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+All three scenarios can accelerate protons beyond 1 PeV. The required CR acceleration efficiency to reproduce the observed flux is $10^{-3}$--$10^{-2}$ --- extremely modest given the jet kinetic luminosity exceeding $10^{39}$ erg s$^{-1}$. This means the source does not need to be operating at maximum capacity; the PeV emission could represent a persistent low-level hadronic output with occasional bright-phase enhancements.
+
+\subsubsection{Target Photon Fields}
+
+Two photon interaction channels are modeled:
+\begin{itemize}
+  \item \textbf{UV photons from WR star:} Dominant channel at PeV energies; produces the orbital modulation because target density varies with orbital phase. The spectral contribution peaks near 1 PeV. A possible enhancement of UV photon density near the WR star surface (multiple scattering in the ionized wind) may explain the rapid spectral rise.
+  \item \textbf{Stellar wind gas (hadronic pp):} Produces a harder secondary spectrum following the proton spectral slope shifted by factor $\sim$20. Contributes more at energies below 1 PeV; minimal orbital modulation.
+\end{itemize}
+
+X-ray photons from the compact object are a potential third target, but if they originate isotropically in the acceleration zone, they predict no orbital modulation, which is disfavored by the LHAASO evidence.
+
+\subsection{Module 04 Reference --- Multi-Messenger Implications}
+
+\subsubsection{Neutrino Predictions and IceCube Constraints}
+
+The hadronic photomeson channel inevitably produces neutrinos from charged pion decay. Key findings:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Aspect} & \tableheader{Status} \\
+\midrule
+Theoretical prediction & Neutrino flux at 10\% of gamma-ray flux level, suppressed by muon/pion cooling in dense WR wind \\
+IceCube spatial correlation & Koljonen et al.\ (2023): 10-yr sample events with highest spatial association occur during HE gamma-ray flaring states \\
+IceCube definitive detection & Not achieved; flux below current threshold \\
+Time-template strategy & Orbital modulation template predicted for neutrino flux; would significantly enhance IceCube / Gen2 sensitivity \\
+IceCube-Gen2 outlook & Next-generation instrument expected to probe neutrino flux at required sensitivity level \\
+Neutrino suppression factor & Muon and pion cooling in the dense WR wind reduces expected flux below naive pion-decay estimates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cygnus Region Multi-Messenger Concordance}
+
+Multiple independent analyses (Multimessenger Concordance, arXiv:2603.21665) link the Cygnus PeVatron to the cosmic-ray knee:
+\begin{itemize}
+  \item The Cygnus superbubble PeVatron (of which Cygnus X-3 is a likely contributor) can account for the ``concordance'' between LHAASO diffuse gamma-ray emission and IceCube Galactic neutrino flux at energies $\sim$1--100 TeV.
+  \item The Cygnus contribution dominates over Galactic diffuse emission above a few tens of TeV in the direction of the inner Galaxy.
+  \item The characteristic CR knee energy ($\sim$3 PeV) is consistent with the maximum energy reachable by the Cygnus PeVatron operating at inferred CR acceleration efficiency.
+\end{itemize}
+
+\subsection{Module 05 Reference --- Galactic PeVatron Landscape}
+
+\subsubsection{LHAASO PeVatron Catalog}
+
+LHAASO has transformed UHE gamma-ray astronomy since first light in 2019. Key milestones:
+\begin{itemize}[noitemsep]
+  \item Detection of $>$100 UHE ($>$100 TeV) gamma-ray sources across the northern sky
+  \item Identification of 12 confirmed PeVatrons (sources with emission above 1 PeV)
+  \item Cygnus X-3 is notable as the \emph{first resolved compact binary system} among confirmed PeVatrons --- most others are extended structures (nebulae, remnants, diffuse regions)
+  \item Cygnus X-3 has the hardest spectrum ($\Gamma = 2.18$) of any LHAASO UHE source
+\end{itemize}
+
+\subsubsection{Microquasar PeVatron Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2.8cm}L{2.8cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{System} & \tableheader{Type} & \tableheader{Max Energy} & \tableheader{Key Feature} \\
+\midrule
+Cygnus X-3 & HMXB + WR & 3.7 PeV (direct) & Variable; orbital modulation; photomeson in jet \\
+SS433 & HMXB + jets & $\sim$25 TeV (halo) & Extended gamma-ray halo; jet termination shocks \\
+V4641 Sgr & LMXB & $>$100 TeV (halo) & Diffuse halo structure \\
+Cygnus X-1 & HMXB + BH & Candidate & PeVatron candidate via superbubble flux analysis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Historical Timeline of Cygnus X-3 Gamma-Ray Observations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2.2cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Era} & \tableheader{Instrument} & \tableheader{Result} \\
+\midrule
+1970s--1980s & Kiel air-shower array; multiple & Initial claims of UHE gamma-ray detection; flux factor $\sim$100 higher than later average \\
+1990s--2000s & Second-generation air-shower arrays & Non-detection; initial claims attributed to possible bright flaring phase that ended \\
+2007--2009 & AGILE-GRID & Seven transient GeV events; soft X-ray state correlation; leptonic and hadronic models both viable \\
+2009 & Fermi-LAT & Confirmed orbitally modulated GeV gamma-ray emission; first definitive $>$100 MeV detection \\
+2019--2024 & LHAASO (construction phase) & Precursor observations; Cygnus superbubble UHE emission \\
+2024--2025 & LHAASO (full KM2A) & Discovery: 10$\sigma$ PeV detection; SED 0.06--3.7 PeV; orbital modulation; flaring state (arXiv:2512.16638) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Unconfirmed compact object identity & Scientific uncertainty & Present as open question with both BH and NS scenarios noted \\
+Orbital modulation evidence (3.2$\sigma$) & Statistical threshold & Label as ``evidence'' not ``detection''; note that confirmation requires more data \\
+1980s air-shower claims & Historical ambiguity & Present as plausible bright-phase detection without asserting definitiveness \\
+Neutrino flux predictions & Model-dependent & Clearly attribute predictions to specific theoretical frameworks with stated assumptions \\
+All numerical claims & Attribution gate & Every flux, significance, energy value attributed to LHAASO Collaboration 2025 or cited co-papers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Discovery Paper}
+\begin{itemize}[noitemsep]
+  \item LHAASO Collaboration (Cao, Z., Aharonian, F., et al.): ``Cygnus X-3: A variable petaelectronvolt gamma-ray source.'' arXiv:2512.16638 (submitted to National Science Review, January 2026).
+\end{itemize}
+
+\subsubsection{Response and Analysis Papers}
+\begin{itemize}[noitemsep]
+  \item Kachelrieß, M., Lammert, E.: ``Cygnus X-3 as a PeVatron and the LHAASO 2025 data.'' arXiv:2512.18786 (February 2026).
+  \item Kachelrieß, M., et al.: ``Cygnus X-3 as a semi-hidden PeVatron.'' Astronomy \& Astrophysics (September 2025), arXiv:2503.11448.
+  \item Multi-author: ``Multimessenger Concordance for the Cygnus Region as the Source of the Cosmic-Ray Knee.'' arXiv:2603.21665 (March 2026).
+\end{itemize}
+
+\subsubsection{Neutrino and Multi-Messenger}
+\begin{itemize}[noitemsep]
+  \item Koljonen, K.I.I., et al.: ``Microquasar Cyg X-3 --- a unique jet-wind neutrino factory?'' Monthly Notices of the Royal Astronomical Society: Letters, 524(1), L89 (2023). arXiv:2306.11804.
+  \item IceCube Collaboration: ``Comprehensive search for high-energy neutrino emission from high- and low-mass X-ray binaries.'' Multiple publications (2013--2024).
+\end{itemize}
+
+\subsubsection{System Properties and Multiwavelength}
+\begin{itemize}[noitemsep]
+  \item Miller-Jones, J.C.A., et al.: ``On the Distances to the X-Ray Binaries Cygnus X-3 and GRS 1915+105.'' (VLBA parallax; distance = 9.67 kpc).
+  \item Veledina, A., et al.: ``Ultrasoft state of microquasar Cygnus X-3: X-ray polarimetry reveals the geometry of the astronomical puzzle.'' Astronomy \& Astrophysics, 688, L27 (2024). arXiv:2407.02655.
+  \item Mikušincová, R., et al.: ``Super-Eddington Accretion Geometry: a Remarkable Stability of the Hidden Ultraluminous X-Ray Source Cygnus X-3.'' arXiv:2512.12879 (2025).
+  \item Piano, G., et al.: ``The AGILE monitoring of Cygnus X-3.'' Astronomy \& Astrophysics (2012). DOI:10.1051/0004-6361/201219145.
+\end{itemize}
+
+\subsubsection{LHAASO Observatory}
+\begin{itemize}[noitemsep]
+  \item LHAASO Collaboration: ``Detection of $>$100 TeV gamma-ray sources.'' Nature (2021).
+  \item LHAASO Collaboration: ``Optimization of performance of the KM2A full array using the Crab Nebula.'' arXiv:2401.01038 (2024).
+\end{itemize}
+
+% =====================================================================
+% STAGE 3 — MISSION PACKAGE
+% =====================================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality reference document on Cygnus X-3's confirmed status as a variable Galactic PeVatron, synthesizing the LHAASO discovery (arXiv:2512.16638) across five research modules: binary system architecture, observational data, particle acceleration physics, multi-messenger implications, and the Galactic PeVatron landscape. The final deliverable shall be archival-quality, suitable for inclusion in the GSD College of Knowledge, and shall be verifiable against primary peer-reviewed sources.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+MISSION WAVE ARCHITECTURE
+===========================
+
+Wave 0: Foundation [Sequential, Haiku]
+  Shared schemas + source index + token templates
+
+Wave 1a: Survey Track A [Parallel, Sonnet]      Wave 1b: Survey Track B [Parallel, Sonnet+Opus]
+  MOD-01: Binary System                              MOD-03: Particle Physics
+  MOD-02: LHAASO Observations                        MOD-04: Multi-Messenger
+
+       [CAPCOM Gate: Scope review before synthesis]
+
+Wave 2: Synthesis [Sequential, Opus]
+  MOD-05: PeVatron Landscape
+  Cross-module integration
+  Through-line validation
+
+Wave 3: Publication + Verification [Sequential, Sonnet]
+  Document assembly + source audit + test pass
+  Final PDF compilation
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Data Layer:} Published LHAASO, Fermi-LAT, AGILE, IceCube, IXPE data as cited in referenced papers
+  \item \textbf{Survey Layer:} Per-module survey documents (Waves 1a + 1b)
+  \item \textbf{Physics Layer:} Photomeson kinematics, acceleration mechanism comparisons (Wave 1b)
+  \item \textbf{Context Layer:} PeVatron landscape, historical timeline, Cygnus superbubble (Wave 2)
+  \item \textbf{Synthesis Layer:} Cross-module relationships, multi-messenger concordance, CR knee (Wave 2)
+  \item \textbf{Publication Layer:} Assembled document, bibliography, verified citations (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Component Spec} \\
+\midrule
+1 & Binary System Survey & Orbital params, WR star, compact object, IXPE result cited & MOD-01-SURVEY \\
+2 & LHAASO Observation Report & SED table, significance, modulation evidence, quiescent limits & MOD-02-OBS \\
+3 & Particle Physics Reference & Photomeson kinematics, 3 acceleration mechanisms, efficiency table & MOD-03-PHYS \\
+4 & Multi-Messenger Analysis & Neutrino predictions, IceCube constraints, Gen2 outlook & MOD-04-MM \\
+5 & PeVatron Landscape Survey & LHAASO catalog, 4 microquasar systems, CR knee concordance & MOD-05-LAND \\
+6 & Synthesis Document & Cross-module integration, 12 success criteria verified & SYNTH-FINAL \\
+7 & Verified Reference PDF & All claims sourced, no policy advocacy, bibliography complete & VERIFY-PASS \\
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+MOD-01-SURVEY & Source index & Sonnet & 8K \\
+MOD-02-OBS & Source index & Sonnet & 10K \\
+MOD-03-PHYS & MOD-01, MOD-02 & Opus & 12K \\
+MOD-04-MM & MOD-03 & Opus & 10K \\
+MOD-05-LAND & MOD-01 thru 04 & Opus & 12K \\
+SYNTH-FINAL & All modules & Opus & 15K \\
+VERIFY-PASS & SYNTH-FINAL & Sonnet & 8K \\
+SOURCE-INDEX & None & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Physics judgment (hadronic vs.\ leptonic evaluation), multi-messenger synthesis, PeVatron landscape cross-analysis, through-line construction \\
+Sonnet & 60\% & Binary system survey, observational data tables, bibliography compilation, document assembly, source verification \\
+Haiku & 10\% & Source index schema, shared templates, token budget tracking, commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Models} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, source index \\
+1a & Survey A & Parallel & Sonnet & MOD-01, MOD-02 \\
+1b & Survey B & Parallel & Opus+Sonnet & MOD-03, MOD-04 \\
+CAPCOM & Scope Gate & Sequential & Human & Approval \\
+2 & Synthesis & Sequential & Opus & MOD-05, SYNTH \\
+3 & Publication & Sequential & Sonnet & Final PDF, bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Schema generation & BUDGET/Haiku & Define shared JSON schemas for: source entry, module finding, test result \\
+Source index build & LOG/Haiku & Index all 14 cited papers with DOI, venue, date, type \\
+Module template init & PLAN/Haiku & Initialize 5 module document shells with consistent section headings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1a: Survey Track A (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Binary system survey & EXEC-A/Sonnet & Orbital params, WR star, compact object, IXPE result, distance \\
+LHAASO observation report & EXEC-B/Sonnet & Full SED table, significance, spectral index, modulation, quiescent limits \\
+Historical timeline & CRAFT-OBS/Sonnet & 1980s through 2025; AGILE/Fermi/LHAASO progression \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1b: Survey Track B (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Photomeson physics & CRAFT-THEORY/Opus & Process kinematics, proton energy requirements, pileup explanation \\
+Acceleration mechanisms & CRAFT-THEORY/Opus & Three mechanism comparison; efficiency analysis; jet power calculation \\
+Neutrino predictions & CRAFT-MM/Opus & Flux predictions, cooling suppression, IceCube constraints, Gen2 outlook \\
+Multi-messenger concordance & CRAFT-MM/Opus & Cygnus superbubble, CR knee, IceCube diffuse Galactic signal \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+PeVatron landscape & INTEG/Opus & LHAASO catalog; microquasar comparison table; historical context \\
+Cross-module integration & FLIGHT/Opus & Orbital modulation threading through OBS $\to$ PHYS $\to$ MM modules \\
+Through-line construction & FLIGHT/Opus & Amiga Principle connection; ``spaces between'' narrative; CR knee synthesis \\
+Success criteria audit & VERIFY/Sonnet & Verify all 12 criteria have document coverage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Document assembly & EXEC-A/Sonnet & Merge all modules into unified document structure \\
+Bibliography compilation & VERIFY/Sonnet & Source index $\to$ formatted bibliography; verify 14+ citations \\
+Source attribution audit & VERIFY/Sonnet & SC-SRC, SC-NUM, SC-ADV safety-critical test pass \\
+LaTeX compilation & LOG/Sonnet & Three-pass XeLaTeX; resolve TOC, cross-references, lastpage \\
+Final delivery & CAPCOM & Present PDF, .tex, index.html to user \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item The source index (Wave 0) is a shared attribute layer computed once and reused across all 5 module agents
+  \item Binary system parameters (MOD-01) cached and injected into MOD-03 context without re-research
+  \item LHAASO spectral data table (MOD-02) cached and injected into MOD-03 and MOD-05 contexts
+  \item Wave 1a and 1b run within the LHAASO 5-minute context TTL window where possible to exploit cache hits on shared parameter blocks
+  \item Synthesis wave (Wave 2) receives pre-assembled module outputs, not raw research prompts
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0 (Foundation) & 2K & 3K & 5K \\
+Wave 1a (Survey A) & 12K & 18K & 30K \\
+Wave 1b (Survey B) & 15K & 22K & 37K \\
+Wave 2 (Synthesis) & 40K & 15K & 55K \\
+Wave 3 (Publication) & 50K & 8K & 58K \\
+\midrule
+\textbf{Total estimated} & & & \textbf{$\sim$185K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+SOURCE-INDEX (Haiku)
+      |
+      +--------+--------+--------+--------+
+      |        |        |        |        |
+   MOD-01   MOD-02   MOD-03   MOD-04   MOD-05
+  (Sonnet) (Sonnet) (Opus)   (Opus)   (Opus)
+      |        |        ^        ^        ^
+      |        +--------+        |        |
+      +---------------------------+--------+
+                    |
+               SYNTH-FINAL (Opus)
+                    |
+               VERIFY-PASS (Sonnet)
+                    |
+               FINAL-PDF (Sonnet)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Purpose} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK & Source quality, attribution, advocacy boundaries \\
+Core functionality & 18 & Required & BLOCK & Deliverable acceptance against 12 success criteria \\
+Integration & 5 & Required & BLOCK & Cross-module consistency and self-containment \\
+Edge cases & 4 & Best-effort & LOG & Data gaps, uncertainty language, temporal currency \\
+\midrule
+\textbf{Total} & \textbf{31} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to peer-reviewed journals (A\&A, MNRAS, Nature), observatory publications, or arXiv preprints with institutional affiliation. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every value (SED range, spectral index, significance, distance, efficiency) attributed to LHAASO Collaboration 2025 or a cited co-paper by author name and year. \\
+SC-ADV & No policy advocacy & Document presents astrophysical findings without advocating for specific observatory funding, research program priorities, or energy policy positions. \\
+SC-UNC & Uncertainty language & Statistical thresholds clearly labeled: ``3.2$\sigma$ evidence'' vs.\ ``10$\sigma$ detection'' vs.\ ``candidate.'' Unconfirmed orbital modulation and compact object identity clearly flagged. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Binary system completeness & Orbital period, distance, WR companion, compact object identity, and IXPE result all present with citations \\
+CF-02 & SED documentation & Energy range (0.06--3.7 PeV), spectral index ($\Gamma=2.18\pm0.14$), CMB correction noted, quiescent suppression quantified \\
+CF-03 & Detection significance stated & 10$\sigma$ (KM2A) documented; 3.5$\sigma$ secondary signal (63--100 TeV) noted \\
+CF-04 & Variability and modulation & Month-scale variability and 3.2$\sigma$ orbital modulation documented with LHAASO source \\
+CF-05 & Photomeson kinematics & $\Delta^+$ resonance mechanism explained; proton energy requirement ($\geq$10 PeV) derived from UV photon field \\
+CF-06 & Three acceleration mechanisms & All three (reconnection, DSA, stochastic Fermi) evaluated; efficiency range $10^{-3}$--$10^{-2}$ cited \\
+CF-07 & Neutrino predictions present & Flux predictions, pion cooling suppression, and IceCube spatial correlation documented \\
+CF-08 & IceCube constraints included & Upper limits and Gen2 sensitivity outlook cited from published IceCube analyses \\
+CF-09 & CR knee concordance & Multi-messenger concordance paper cited; Cygnus contribution to CR knee energy range explained \\
+CF-10 & Microquasar comparison table & At least four systems compared (Cyg X-3, SS433, V4641 Sgr, Cyg X-1) \\
+CF-11 & Historical timeline complete & Six observable eras from 1970s to 2025 documented with instruments and outcomes \\
+CF-12 & LHAASO catalog context & ``Hardest UHE source,'' 12 confirmed PeVatrons, and Cyg X-3's uniqueness as compact binary PeVatron noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Orbital modulation cascade & Document explicitly traces 4.8-hr modulation from binary geometry (MOD-01) through LHAASO detection (MOD-02) to UV photon target physics (MOD-03) \\
+IN-02 & Neutrino--gamma-ray coupling & Hadronic channel producing both gamma rays (observed) and neutrinos (predicted) explicitly linked across MOD-03 and MOD-04 \\
+IN-03 & PeVatron context consistency & Spectral index and energy range values identical between MOD-02 and MOD-05 comparison table \\
+IN-04 & CR knee energy match & 3 PeV CR knee and 3.7 PeV LHAASO upper bound explicitly compared in MOD-05 synthesis \\
+IN-05 & Document self-containment & A reader unfamiliar with UHE astrophysics can understand the full argument; no undefined acronyms; complete bibliography \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Binary system survey complete & CF-01 & Pending \\
+2. LHAASO detection characterized & CF-02, CF-03 & Pending \\
+3. Variability and modulation documented & CF-04, IN-01 & Pending \\
+4. Photomeson physics explained & CF-05 & Pending \\
+5. Acceleration mechanisms compared & CF-06 & Pending \\
+6. Neutrino predictions documented & CF-07, IN-02 & Pending \\
+7. IceCube constraints included & CF-08 & Pending \\
+8. Cygnus superbubble context established & CF-09, IN-04 & Pending \\
+9. CR knee concordance evaluated & CF-09, IN-04 & Pending \\
+10. Historical arc complete & CF-11 & Pending \\
+11. PeVatron landscape mapped & CF-10, CF-12 & Pending \\
+12. All claims sourced & SC-SRC, SC-NUM & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go gates; through-line integrity \\
+PLAN & Planner (Opus) & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent (Sonnet) & Source gathering; evidence compilation; web research gap-fill \\
+EXEC-A & Executor Alpha (Sonnet) & MOD-01 (Binary System) + MOD-02 (Observations) \\
+EXEC-B & Executor Beta (Sonnet) & MOD-05 (Landscape) + document assembly \\
+CRAFT-OBS & Observation Specialist (Sonnet) & Historical timeline; LHAASO methodology; spectral analysis \\
+CRAFT-THEORY & Theory Specialist (Opus) & Photomeson physics; acceleration mechanisms; proton energy budget \\
+CRAFT-MM & Multi-Messenger Agent (Opus) & Neutrino predictions; IceCube analysis; CR concordance \\
+VERIFY & Verification Agent (Sonnet) & Source validation; SC-SRC/SC-NUM tests; bibliography completeness \\
+INTEG & Integration Agent (Opus) & Cross-module consistency; cascade tests IN-01 through IN-05 \\
+CAPCOM & HITL Interface & Human approval at CAPCOM gate; scope confirmation \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning; cache TTL management \\
+LOG & Chronicle Agent (Haiku) & Shared schemas; source index; commit messages; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation profile & Squadron (12 roles) \\
+Research modules & 5 \\
+Parallel tracks & 2 (Wave 1a + 1b) \\
+HITL gates & 1 (between Wave 1 and Wave 2) \\
+Total deliverables & 7 \\
+Success criteria & 12 \\
+Total tests & 31 (4 safety-critical, 18 core, 5 integration, 4 edge) \\
+Estimated token budget & $\sim$185K \\
+Estimated context windows & 8--10 \\
+Estimated sessions & 3 \\
+Model allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary source & LHAASO Collaboration, arXiv:2512.16638 \\
+Supporting sources & 13 additional peer-reviewed / observatory papers \\
+Safety-critical tests & Mandatory-pass / BLOCK \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The detected month-scale variability, together with a 3.2$\sigma$ evidence for orbital modulation, suggests that the PeV $\gamma$-rays originate within, or in close proximity to, the binary system itself.''}
+
+\vspace{0.5em}
+\small\sffamily\textcolor{subtlegray}{--- LHAASO Collaboration, arXiv:2512.16638 (2025)}
+
+\vspace{1em}
+The spaces between a Wolf-Rayet star and its invisible companion --- a gap smaller than the diameter of the Sun, cycling in less time than a working day --- produce the most energetic sustained photon emission ever measured from a resolved point source in our Galaxy. Small system. Principled physics. Staggering output. The Amiga Principle holds at cosmic scale.
+\end{quotebox}
+
+\end{document}
