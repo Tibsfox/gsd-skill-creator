@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Local LLM</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-llm">
+  <header>
+    <h1>Local LLM Ecosystem</h1>
+    <div class="subtitle">Inference Runtimes &middot; GPU Architecture &middot; LoRA Training &middot; Production Pipeline &middot; Claude Code Integration</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-inference-runtimes">Runtimes</a>
+      <a href="page.html?doc=02-gpu-quantization">GPU &amp; Quant</a>
+      <a href="page.html?doc=03-lora-training">LoRA</a>
+      <a href="page.html?doc=04-production-pipeline">Pipeline</a>
+      <a href="page.html?doc=05-claude-code-integration">Claude Code</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      When Commodore shipped the Amiga in 1985, they offloaded the OS's heavy lifting onto three
+      specialized chips rather than burdening the single 68000 CPU. Today, that same logic applies
+      to a developer running Claude Code on consumer hardware. You have a GPU sitting in your
+      workstation. It is not just a rendering card anymore &mdash; it is a dedicated inference engine
+      waiting to be configured, trained, and wired into your workflow.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~174K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Agent Roles</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/local_llm_mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/local_llm_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/local_llm_mission_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Document schema, VRAM calculator, GSD vocabulary reference</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>Inference Track</td><td>Track A: M1 (Runtime Landscape) + M2 (GPU &amp; Quantization)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1B</td><td>Training Track</td><td>Track B: M3 (LoRA Frameworks) + Dataset Schema Design</td><td>Parallel</td><td>Sonnet + Opus</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>M4 (Production Pipeline) + M5 (Claude Code Integration) + routing table + eval spec</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Document assembly, verification, bibliography</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Synthesis + judgment</td><td>Opus</td><td>Cross-module integration, task routing architecture, eval framework design, GSD-dialect LoRA specification</td></tr>
+        <tr><td>Denise</td><td>Document production</td><td>Sonnet</td><td>Runtime comparisons, GPU benchmarks, LoRA tutorial, pipeline documentation</td></tr>
+        <tr><td>Paula</td><td>Scaffolding + schema</td><td>Haiku</td><td>Document schema, VRAM calculator template, GSD vocabulary index</td></tr>
+        <tr><td>M68000</td><td>Logic / glue / routing</td><td>Mixed</td><td>Safety warden, integration correctness, push gating</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All runtime specs, VRAM figures, and benchmark data traceable to official documentation or peer-reviewed benchmarks.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every throughput figure, VRAM requirement, and cost estimate traces to specific hardware documentation or measured benchmark.</td></tr>
+        <tr><td>SC-SEC</td><td>Security boundary</td><td>Local model deployment patterns do not expose API endpoints to network. ANTHROPIC_BASE_URL configuration validated as localhost-only.</td></tr>
+        <tr><td>SC-COST</td><td>Cost accuracy</td><td>Per-token cost comparisons between local and API inference are based on documented pricing and measured local throughput.</td></tr>
+        <tr><td>SC-EVAL</td><td>Eval integrity</td><td>GSD-specific eval benchmarks have clear pass/fail criteria and are reproducible on stated hardware.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The Amiga did not replace the 68000 with a faster chip. It gave the 68000 partners. Three
+    specialized chips &mdash; Agnus, Denise, Paula &mdash; each handling what they did best, orchestrated
+    through a shared bus. The Local Intelligence Stack follows the same principle: a local model
+    for the deterministic work, the Anthropic API for judgment-heavy synthesis, and Claude Code
+    as the shell that routes to the right engine. A model fine-tuned on your GSD schemas speaks
+    your dialect. The partner speaks your language because you taught it.</p>
+
+    <p><em>&ldquo;A local model sitting on a 24GB RTX 4090 is a context window that costs nothing.
+    Route the deterministic work through hardware you own, and reserve the Opus-class reasoning
+    for the work that deserves it.&rdquo;</em></p>
+  </main>
+
+  <footer>
+    <p>Local LLM &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
