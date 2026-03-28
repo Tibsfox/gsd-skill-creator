@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading... &mdash; DNS Protocol</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+  <style>
+    .loading { text-align: center; padding: 4rem; color: var(--text-light); }
+    .md-content img { max-width: 100%; }
+    .md-content hr { border: none; border-top: 2px solid var(--mist); margin: 2rem 0; }
+    .toc { background: white; border: 1px solid #CFD8DC; border-radius: 6px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+    .toc h3 { margin: 0 0 0.5rem; font-size: 0.95rem; color: var(--resolver); }
+    .toc ul { list-style: none; padding-left: 0; margin: 0; }
+    .toc li { margin: 0.2rem 0; font-size: 0.88rem; font-family: system-ui, sans-serif; }
+    .toc li a { color: var(--page-text); text-decoration: none; display: block; padding: 0.1rem 0.4rem; border-radius: 3px; transition: background 0.2s, color 0.2s; }
+    .toc li a:hover { color: var(--resolver); background: rgba(21,101,192,0.06); text-decoration: none; }
+    .toc li a.active { color: var(--resolver); background: rgba(21,101,192,0.1); font-weight: 600; }
+    .toc .depth-3 { padding-left: 1.2rem; }
+    .toc .depth-4 { padding-left: 2.4rem; font-size: 0.82rem; }
+    .back-link { display: inline-block; margin-bottom: 1rem; font-family: system-ui, sans-serif; font-size: 0.88rem; }
+    .toc-search { width: 100%; padding: 0.35rem 0.5rem; margin-bottom: 0.5rem; border: 1px solid #CFD8DC; border-radius: 4px; font-size: 0.82rem; font-family: system-ui, sans-serif; outline: none; background: var(--cream, #FAFAFA); }
+    .toc-search:focus { border-color: var(--resolver-mid); }
+    h2:hover .anchor, h3:hover .anchor { opacity: 1; }
+    .anchor { opacity: 0; margin-left: 0.3em; text-decoration: none; color: var(--text-light); transition: opacity 0.2s; font-weight: 400; font-size: 0.85em; }
+    .anchor:hover { color: var(--resolver); text-decoration: none; }
+    @media (min-width: 1024px) {
+      .page-grid { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: start; }
+      .page-grid .toc { position: sticky; top: 0; max-height: 100vh; overflow-y: auto; margin: 0; scrollbar-width: thin; }
+      .page-grid .toc::-webkit-scrollbar { width: 4px; }
+      .page-grid .toc::-webkit-scrollbar-thumb { background: #CFD8DC; border-radius: 2px; }
+      .page-grid .md-body { min-width: 0; scroll-behavior: smooth; }
+    }
+  </style>
+</head>
+<body class="project-dns">
+  <header>
+    <h1>DNS Protocol</h1>
+    <div class="subtitle">Wire Format &middot; Record Types &middot; Resolution &middot; DNSSEC &middot; Zone Management &middot; Privacy Stack</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-wire-protocol-message-format">Wire Protocol</a>
+      <a href="page.html?doc=02-resource-record-taxonomy">Record Types</a>
+      <a href="page.html?doc=03-resolution-architecture">Resolution</a>
+      <a href="page.html?doc=04-zone-management">Zone Management</a>
+      <a href="page.html?doc=05-dnssec">DNSSEC</a>
+      <a href="page.html?doc=06-modern-extensions-privacy">Extensions &amp; Privacy</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="index.html" class="back-link">&larr; Back to overview</a>
+    <div id="content" class="md-content">
+      <div class="loading">Loading document...</div>
+    </div>
+  </main>
+
+  <footer>
+    <p>DNS Protocol &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+
+  <script>
+    function mdToHtml(md) {
+      var html = '';
+      var lines = md.split('\n');
+      var inTable = false, inList = false, inCode = false, listType = '', tableRows = [];
+
+      function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      function inlineFormat(text) {
+        text = text.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+        text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, t, u) {
+          if (u.endsWith('.md')) { return '<a href="page.html?doc=' + u.replace('.md','').replace(/.*\//,'') + '">' + t + '</a>'; }
+          return '<a href="' + u + '" target="_blank" rel="noopener">' + t + '</a>';
+        });
+        text = text.replace(/ -- /g, ' &mdash; ');
+        return text;
+      }
+
+      function flushTable() {
+        if (!tableRows.length) return;
+        html += '<table>';
+        tableRows.forEach(function(row, i) {
+          var cells = row.split('|').filter(function(c) { return c.trim() !== ''; });
+          if (i === 0) html += '<thead><tr>' + cells.map(function(c) { return '<th>' + inlineFormat(c.trim()) + '</th>'; }).join('') + '</tr></thead><tbody>';
+          else if (i > 1) html += '<tr>' + cells.map(function(c) { return '<td>' + inlineFormat(c.trim()) + '</td>'; }).join('') + '</tr>';
+        });
+        html += '</tbody></table>';
+        tableRows = [];
+      }
+
+      function closeList() { if (inList) { html += listType === 'ul' ? '</ul>' : '</ol>'; inList = false; } }
+
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        if (line.trim().startsWith('```')) { if (inCode) { html += '</pre>'; inCode = false; } else { closeList(); flushTable(); inCode = true; html += '<pre>'; } continue; }
+        if (inCode) { html += escHtml(line) + '\n'; continue; }
+        if (line.trim().startsWith('|') && line.trim().endsWith('|')) { closeList(); tableRows.push(line.trim()); if (i+1 >= lines.length || !(lines[i+1].trim().startsWith('|') && lines[i+1].trim().endsWith('|'))) flushTable(); continue; }
+        else if (tableRows.length) flushTable();
+        if (line.trim() === '') { closeList(); continue; }
+
+        // Safety callout blocks
+        if (line.trim().startsWith('> **SAFETY') || line.trim().startsWith('> **WARNING') || line.trim().startsWith('> **DANGER') || line.trim().startsWith('> **CAUTION')) {
+          closeList();
+          var callout = line.trim().substring(2);
+          html += '<div class="safety-callout">' + inlineFormat(callout) + '</div>';
+          continue;
+        }
+        // Cross-links block
+        if (line.trim().startsWith('> **Related:')) {
+          closeList();
+          html += '<div class="cross-links"><h4>Related Topics</h4>' + inlineFormat(line.trim().substring(2).replace('**Related:** ','').replace('**Related:**','')) + '</div>';
+          continue;
+        }
+
+        var hm = line.match(/^(#{1,6})\s+(.*)/);
+        if (hm) { closeList(); var lv = hm[1].length; var id = hm[2].toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); html += '<h'+lv+' id="'+id+'">'+inlineFormat(hm[2])+'</h'+lv+'>'; continue; }
+        if (line.trim().match(/^[-*_]{3,}$/)) { closeList(); html += '<hr>'; continue; }
+        if (line.trim().startsWith('> ')) { closeList(); html += '<blockquote>'+inlineFormat(line.trim().substring(2))+'</blockquote>'; continue; }
+        if (line.trim().match(/^[-*]\s/)) { if (!inList||listType!=='ul'){closeList();html+='<ul>';inList=true;listType='ul';} html+='<li>'+inlineFormat(line.trim().replace(/^[-*]\s/,''))+'</li>'; continue; }
+        if (line.trim().match(/^\d+\.\s/)) { if (!inList||listType!=='ol'){closeList();html+='<ol>';inList=true;listType='ol';} html+='<li>'+inlineFormat(line.trim().replace(/^\d+\.\s/,''))+'</li>'; continue; }
+        closeList();
+        html += '<p>' + inlineFormat(line) + '</p>';
+      }
+      closeList(); flushTable(); if (inCode) html += '</pre>';
+      return html;
+    }
+
+    function buildToc(html) {
+      var headings = [], re = /<h([23])\s+id="([^"]*)">(.*?)<\/h[23]>/g;
+      var m; while ((m = re.exec(html)) !== null) headings.push({level:parseInt(m[1]),id:m[2],text:m[3].replace(/<[^>]+>/g,'')});
+      if (headings.length < 3) return '';
+      var toc = '<div class="toc"><h3>Contents</h3>';
+      toc += '<input type="text" class="toc-search" placeholder="Filter sections...">';
+      toc += '<ul>';
+      headings.forEach(function(h) { toc += '<li class="depth-'+h.level+'"><a href="#'+h.id+'">'+h.text+'</a></li>'; });
+      return toc + '</ul></div>';
+    }
+
+    function enhanceNavigation() {
+      var toc = document.querySelector('.toc');
+      var content = document.getElementById('content');
+      if (!toc || !content) return;
+      var grid = document.createElement('div');
+      grid.className = 'page-grid';
+      content.parentNode.insertBefore(grid, content);
+      grid.appendChild(toc);
+      var body = document.createElement('div');
+      body.className = 'md-body';
+      while (content.firstChild) body.appendChild(content.firstChild);
+      content.appendChild(grid);
+      grid.appendChild(body);
+      body.querySelectorAll('h2[id], h3[id]').forEach(function(h) {
+        var a = document.createElement('a');
+        a.className = 'anchor';
+        a.href = '#' + h.id;
+        a.textContent = '#';
+        a.setAttribute('aria-label', 'Link to this section');
+        h.appendChild(a);
+      });
+      var tocLinks = toc.querySelectorAll('a[href^="#"]');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(function(a) { a.classList.remove('active'); });
+            var link = toc.querySelector('a[href="#' + entry.target.id + '"]');
+            if (link) link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -80% 0px' });
+      body.querySelectorAll('h2[id], h3[id]').forEach(function(h) { observer.observe(h); });
+      tocLinks.forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var target = document.getElementById(a.getAttribute('href').slice(1));
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); history.replaceState(null, '', a.getAttribute('href')); }
+        });
+      });
+      var searchInput = toc.querySelector('.toc-search');
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          var query = this.value.toLowerCase();
+          toc.querySelectorAll('li').forEach(function(li) {
+            var text = li.textContent.toLowerCase();
+            li.style.display = (!query || text.indexOf(query) !== -1) ? '' : 'none';
+          });
+        });
+      }
+    }
+
+    var titles = {
+      '01-wire-protocol-message-format':'Wire Protocol & Message Format',
+      '02-resource-record-taxonomy':'Resource Record Taxonomy',
+      '03-resolution-architecture':'Resolution Architecture',
+      '04-zone-management':'Zone Management',
+      '05-dnssec':'DNSSEC -- DNS Security Extensions',
+      '06-modern-extensions-privacy':'Modern Extensions & Privacy Stack'
+    };
+
+    var params = new URLSearchParams(window.location.search);
+    var doc = params.get('doc') || '01-wire-protocol-message-format';
+    document.title = (titles[doc] || doc) + ' \u2014 DNS Protocol';
+    document.querySelectorAll('header nav a').forEach(function(a) { if (a.href.includes('doc='+doc)) a.classList.add('active'); });
+
+    fetch('research/' + doc + '.md')
+      .then(function(r) { if (!r.ok) throw new Error('Document not found'); return r.text(); })
+      .then(function(md) { var html = mdToHtml(md); document.getElementById('content').innerHTML = buildToc(html) + html; enhanceNavigation(); })
+      .catch(function(err) { document.getElementById('content').innerHTML = '<p style="color:#DC2626">Error: '+err.message+'</p>'; });
+  </script>
+</body>
+</html>
