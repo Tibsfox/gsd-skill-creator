@@ -1,0 +1,1049 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% History domain color scheme — Burgundy / Gold / Parchment
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{E65100}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{6A1B9A}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF3E0}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{goldaccent}{HTML}{F9A825}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\large\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{SNL: A Complete History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Live From New York --- SNL History Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Live From New York,\\[0.3em]It's Saturday Night}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{A Complete History of SNL Sketch Comedy}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Fifty Years of the American Comedy Conscience}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)\quad|\quad Estimated: 8--10 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Live From New York --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Ready for Research Execution}
+\metafield{Depends On:}{American Television History, Post-Watergate Cultural Context}
+\metafield{Context:}{Cold-start research mission commissioned March 2026}
+
+\subsection{Vision}
+
+On October 11, 1975, in Studio 8H of 30 Rockefeller Center, a Canadian producer named Lorne Michaels lit a fuse that is still burning. The world he launched into was a nation in free-fall --- a president had just resigned in disgrace, the last helicopter had lifted off from Saigon, and New York City was bankrupt. Into this crucible of chaos and doubt, Michaels introduced a new kind of comedy: live, unguarded, proudly dangerous, and aimed squarely at a generation too young to trust anything that felt like an institution.
+
+What Saturday Night Live invented was not merely a television program. It was a machine for cultural translation --- a weekly ritual in which the ambient anxieties, absurdities, and hypocrisies of American life were fed into one end of a creative vortex and expelled, 90 minutes later, as something the country could laugh at together. The genius of the format is not spectacle but liveness: the mistakes are real, the sweat is real, and the possibility of catastrophic failure is real. When someone yells ``Live from New York, it's Saturday Night!'' the implicit contract with the audience is: you are watching something that could go wrong. That vulnerability is the show's beating heart.
+
+Fifty years on, SNL has become what it once rebelled against: an institution. And yet the machine keeps running. It has outlived the deaths of cast members, survived a near-cancellation in 1980, weathered regime changes, ridden out cultural earthquakes, launched the careers of the most successful comedians of five consecutive generations, and --- crucially --- reinvented its own relevance each time political and social circumstances demanded it. The 50th anniversary season drew 8.1 million weekly viewers and set records for digital and streaming reach, proving that the live Saturday night ritual still commands the country's attention.
+
+This mission traces the architecture of that achievement: how it was built, how it nearly collapsed, how it regenerated, how it shaped politics and culture, and how a six-day weekly production pipeline --- equal parts creativity and controlled chaos --- has produced some of the most enduring comedy in the history of the medium.
+
+\subsection{Problem Statement}
+
+The history of Saturday Night Live is not a single story but five overlapping stories, each demanding its own analytical framework:
+
+\begin{enumerate}
+  \item \textbf{No comprehensive single-source treatment exists.} SNL's history spans 51 seasons, 172 cast members, over 1,000 episodes, and multiple ownership and creative transitions. Existing accounts (Tom Shales and James Andrew Miller's oral history, Doug Hill and Jeff Weingrad's backstage chronicle, the SNL50 documentary series) each capture a fragment. A unified historical and analytical treatment synthesizing origins, eras, production architecture, political influence, and cultural legacy has not been assembled in mission-ready form.
+  
+  \item \textbf{The political dimension is academically under-documented.} Research by Purdue University, CUNY, and IndieWire identifies what scholars call the ``SNL Effect'' --- the measurable influence of political parody on voter perception --- but this evidence is scattered across academic papers, op-eds, and cultural criticism rather than synthesized into a single reference.
+  
+  \item \textbf{The production machine is invisible to most viewers.} The six-day weekly production cycle --- Monday pitch, Tuesday all-night writing, Wednesday table read of 40--50 sketches, Thursday--Friday development, Saturday dress and live broadcast --- is one of the most sophisticated live creative workflows in television history, yet it is rarely examined as a system.
+  
+  \item \textbf{The talent pipeline is misunderstood as luck.} SNL's consistent ability to discover and develop transformative comedic talent (from Belushi and Radner to Fey and Poehler to Bowen Yang) is widely attributed to fortune rather than institutional architecture. The role of Second City, The Groundlings, Upright Citizens Brigade, and writer-performer apprenticeship deserves systematic analysis.
+  
+  \item \textbf{The 50th anniversary moment demands contextualization.} The 2024--25 season, branded SNL50, drew 14.8 million viewers for its anniversary special, generated 7.7 billion social media views, and ranked as NBC's most-watched primetime entertainment in five years. Understanding what this achievement means for the future of live broadcast comedy requires grounding in the full arc.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{The Regenerating Machine:} SNL survives not by preserving what worked but by continuously metabolizing new talent, new cultural anxiety, and new satirical targets through an unchanged structural skeleton --- live broadcast, Studio 8H, the 90-minute format, the cold open, the host monologue, Weekend Update. The skeleton is permanent. Everything inside it is replaceable.
+\end{quotebox}
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+SNL HISTORICAL DOMAIN MAP
+=========================
+
+  [ORIGINS: 1975]
+       |
+       v
+  [FOUNDING ERA: The Not Ready for Prime Time Players 1975-80]
+       |
+       v
+  [CRISIS: Jean Doumanian / Dick Ebersol era 1980-85]
+       |
+       v
+  [RENAISSANCE: Michaels Returns / Carvey-Myers-Hartman 1985-95]
+       |
+       v
+  [PEAK ERA: Farley-Sandler-Rock / Ferrell-Fey-Poehler 1995-2010]
+       |
+       v
+  [POLITICAL APEX: Baldwin-McKinnon-Trump era 2010-present]
+       |
+       v
+  [50th ANNIVERSARY: SNL50 Season 2024-25]
+
+  PARALLEL LAYERS (run throughout all eras):
+  +-----------------+-------------------+------------------+
+  |  PRODUCTION     |  POLITICAL SATIRE |  TALENT PIPELINE |
+  |  MACHINE        |  & CULTURE        |  & ALUMNI LEGACY |
+  +-----------------+-------------------+------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+===================
+
+  MODULE 01: Origins & Founding
+    NBC mandate -- Lorne Michaels -- Studio 8H
+    Not Ready for Prime Time Players -- First Season 1975
+
+  MODULE 02: Era-by-Era Performance History
+    Six distinct eras -- Cast transitions -- Signature characters
+    Critical peaks and valleys -- Near-cancellation events
+
+  MODULE 03: The Production Machine
+    Six-day weekly cycle -- Writers room -- Table read process
+    Sketch development pipeline -- Talent sourcing pipeline
+
+  MODULE 04: Political Satire & Cultural Influence
+    Presidential impersonations -- Weekend Update legacy
+    The SNL Effect -- Election cycle impact -- Cultural moments
+
+  MODULE 05: The Legacy Ecosystem
+    Spin-off films -- Alumni careers -- Music legacy
+    SNL UK -- 50th Anniversary -- Future of live comedy
+
+  CROSS-MODULE CONNECTORS:
+    M01 --> M02 (founding DNA persists through all eras)
+    M03 --> M02 (production constraints shape creative output)
+    M04 --> M02 (political moments define era memory)
+    M02 --> M05 (cast alumni build the downstream ecosystem)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Origins and Founding}
+Covers the NBC mandate of 1975 (filling Johnny Carson's Saturday rerun slot), Dick Ebersol's recruitment of Lorne Michaels, the assembly of the founding cast from Second City and National Lampoon, the $250,000 Studio 8H renovation, the October 11, 1975 premiere with George Carlin, and the show's title change from \textit{NBC's Saturday Night} to \textit{Saturday Night Live} in 1977.
+
+\subsubsection{Module 02 --- Era-by-Era Performance History}
+A chronological analysis of SNL's six major eras: (1) the Golden Age (1975--80) anchored by Belushi, Aykroyd, Radner, Chase, and Murray; (2) the Dark Years (1980--85) under Jean Doumanian and Dick Ebersol, redeemed by Eddie Murphy; (3) the Michaels Renaissance (1985--95) featuring Hartman, Carvey, Myers, and the Wayne's World generation; (4) the Peak Era (1995--2005) with Farley, Sandler, Rock, Ferrell, and the first female head writer Tina Fey; (5) the Digital Age (2005--2015) defined by the Lonely Island, Amy Poehler, Bill Hader, and viral reach; and (6) the Contemporary Era (2015--present) defined by Baldwin's Trump, McKinnon, and the 50th anniversary.
+
+\subsubsection{Module 03 --- The Production Machine}
+An analysis of SNL's six-day production cycle: Monday pitch meeting in Michaels' office; Tuesday all-night writing (up to 40--50 scripts submitted); Wednesday table read with the full cast; Thursday--Friday sketch development, set construction, and rehearsal; Saturday dress rehearsal at 8pm and live broadcast at 11:29:30pm. Includes analysis of the talent sourcing pipeline (Second City, The Groundlings, UCB, ImprovOlympic) and the head writer succession from Michael O'Donoghue through Tina Fey to current.
+
+\subsubsection{Module 04 --- Political Satire and Cultural Influence}
+Documents SNL's role as a vehicle for political satire from Chevy Chase's Gerald Ford through Alec Baldwin's Donald Trump. Covers the scholarly concept of the ``SNL Effect,'' Weekend Update's reach of 30 million viewers in its early years, the Tina Fey/Sarah Palin phenomenon of 2008, and SNL's relationship with presidential campaigns --- including politicians appearing on the show to manage their image.
+
+\subsubsection{Module 05 --- The Legacy Ecosystem}
+Covers SNL's broader cultural footprint: sketch-to-film adaptations (\textit{The Blues Brothers}, \textit{Wayne's World}, \textit{Coneheads}, \textit{A Night at the Roxbury}); alumni career trajectories across five decades; the musical performance legacy (over 2,000 artists performed); the 2026 launch of \textit{Saturday Night Live UK} on Sky One; the SNL50 anniversary season data (22.8 million viewers for the special across 35 days, 7.7 billion social media views); and prospects for the show's future under a post-Michaels producer.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:          # Orchestration / DMA / Context Management
+    model: opus
+    role: FLIGHT
+    responsibilities:
+      - Cross-era narrative coherence
+      - Cultural sensitivity review
+      - Module dependency sequencing
+      - Final synthesis
+
+  denise:         # Output Rendering / Document Assembly
+    model: sonnet
+    role: EXEC
+    responsibilities:
+      - Era survey compilation (Module 02)
+      - Production machine documentation (Module 03)
+      - Legacy ecosystem documentation (Module 05)
+      - LaTeX PDF assembly and formatting
+
+  paula:          # Research / Anticipatory / Specialist
+    model: sonnet
+    role: CRAFT-HIST / CRAFT-CULTURE
+    responsibilities:
+      - Origins research (Module 01)
+      - Political satire analysis (Module 04)
+      - Source validation
+      - Academic citation verification
+
+  gary:           # Glue Logic / Scaffolding
+    model: haiku
+    role: BUDGET / LOG
+    responsibilities:
+      - Shared schemas
+      - Source index generation
+      - Token budget tracking
+      - Commit messages
+
+activation_profile: Squadron
+model_split: "30% Opus / 60% Sonnet / 10% Haiku"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item All 50 seasons of SNL (1975--2025), including Season 50 data through May 2025
+  \item Complete cast member era mapping with signature characters and alumni career trajectories
+  \item Presidential impersonation history (Ford through Trump) with cultural impact analysis
+  \item The six-day production cycle and writers room architecture
+  \item Sketch-to-film adaptations and commercial legacy
+  \item SNL50 anniversary season ratings and cultural significance
+  \item SNL UK launch (2026)
+  \item Music performance legacy and the Lonely Island/digital comedy transition
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Season 51 (2025--26) episode-by-episode analysis
+  \item International adaptations other than SNL UK
+  \item Individual episode scripts or sketch-level annotation
+  \item Financial/contract details beyond what is publicly reported
+  \item SNL's internal HR controversies (out of scope for this analytical mission)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All six historical eras are documented with named cast members, signature sketches, and a critical reception summary
+  \item The production machine six-day cycle is documented with day-by-day responsibilities and quantitative benchmarks (number of scripts, table read duration, sketch cut rates)
+  \item A minimum of twelve significant presidential impersonations are documented with cultural impact analysis
+  \item The ``SNL Effect'' scholarly concept is defined and supported with at least three academic or institutional sources
+  \item The talent sourcing pipeline (Second City, Groundlings, UCB) is documented with alumni count per pipeline
+  \item SNL50 anniversary data is captured with verified Nielsen figures and platform comparisons
+  \item The sketch-to-film legacy is documented with at least six productions and their box office context
+  \item Weekend Update anchor succession is fully documented from Chevy Chase (1975) to current
+  \item All numerical claims (viewership, Emmy counts, cast member counts) are attributed to specific sources
+  \item The founding narrative (1975 NBC mandate through premiere night) is documented with primary source accuracy
+  \item The near-cancellation of 1980--85 and Eddie Murphy's role in the show's survival is documented
+  \item The document is self-contained: a reader with no prior SNL knowledge can follow the complete arc
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}XC{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Seattle Hip-Hop Cultural Module Series & SNL's role as a platform for hip-hop exposure (e.g., The Lonely Island, rap musical guests, Black cast members) & Adjacent \\
+Deep Audio Analyzer Mission & SNL's music performance archive as a data source for audio analysis & Adjacent \\
+GSD-OS / Amiga Principle & The SNL production cycle as a worked example of constrained systems producing extraordinary output & Analogical \\
+The Space Between (textbook) & The ``spaces between'' --- SNL's meaning lives in the transitions between sketches, cast generations, and eras & Philosophical \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga principle --- that architectural constraints and specialization produce outcomes that exceed what brute-force resources could achieve --- is nowhere more vividly illustrated than in the SNL production machine. The show operates inside a fixed box: 90 minutes, live, Saturday at 11:30, same studio for 50 years. Within that box, a team of writers and performers is given six days and a single guest host. The box does not expand. The box cannot be paused. The audience does not wait.
+
+What emerges from this constraint is not sameness but infinite variety. Each season is a new ensemble finding its voice inside the same skeleton. The ``spaces between'' the generations --- the anxious years between one great cast and the next, between one satirical era and another --- are where the show is most honestly itself: imperfect, groping, occasionally brilliant, always live. That vulnerability is not a design flaw. It is the design.
+
+\newpage
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{SNL --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from cold-start web research conducted March 27, 2026. It is organized by module and is intended for use by GSD agents executing the mission. All numerical claims are attributed to specific sources. Agents should not restate content from this reference verbatim --- they should synthesize it.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item Wikipedia's ``History of Saturday Night Live'' (continuously updated, editorially reviewed)
+  \item Britannica's SNL Cast Members entry (peer-reviewed encyclopedia)
+  \item Purdue University College of Liberal Arts, SNL political analysis series
+  \item CUNY Academic Works: Isabel Fox, ``A Historical Analysis of Saturday Night Live's Engagement in American Presidential Politics'' (2025)
+  \item NBC official press releases (SNL50 ratings and anniversary data)
+  \item \textit{Live From New York: An Uncensored History of Saturday Night Live} --- Tom Shales and James Andrew Miller (2002), oral history
+  \item \textit{Saturday Night: A Backstage History of Saturday Night Live} --- Doug Hill and Jeff Weingrad (1986)
+  \item Peacock's \textit{SNL50: Beyond Saturday Night} documentary series (2025)
+  \item Smithsonian Magazine's analysis of the \textit{Saturday Night} film (October 2024)
+\end{itemize}
+
+\subsection{Module 01 --- Origins and Founding}
+
+\subsubsection{The NBC Mandate, 1975}
+
+In 1975, NBC president Herbert Schlosser faced a problem: Johnny Carson, the network's biggest earner, wanted his rerun episodes removed from the Saturday 11:30pm slot. Schlosser approached Dick Ebersol, vice president of late-night programming, who in turn recruited 30-year-old Canadian producer Lorne Michaels (born Lorne David Lipowitz, November 17, 1944, Toronto). The initial development period was three weeks. Michaels and Ebersol developed a format for high-concept comedy sketches, political satire, and live music targeting viewers aged 18 to 34 --- a demographic largely unserved by existing late-night television. (Source: Wikipedia, History of SNL; Smithsonian Magazine, October 2024)
+
+Michaels stipulated three conditions before accepting: no pilot (NBC executives would kill it on sight), live broadcast (liveness was the editorial guarantee), and a commitment of at least 18 episodes. NBC agreed. Studio 8H at 30 Rockefeller Center --- a converted radio studio previously used for NBC's election coverage and Apollo moon landing broadcasts --- was assigned and renovated for \$250,000 (approximately \$1.65 million in 2025 dollars). (Source: Wikipedia, SNL)
+
+\subsubsection{The Founding Cast}
+
+Michaels assembled the founding cast drawing on two primary talent pools: Second City (Chicago and Toronto branches) and The National Lampoon. The founding seven ``Not Ready for Prime Time Players'' (a name coined by writer Herb Sargent, explicitly parodying ABC's rival ``Prime Time Players'' troupe) were:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Cast Member} & \tableheader{Background} & \tableheader{Notable SNL Contribution} \\
+\midrule
+Dan Aykroyd & Second City (Toronto) & Jimmy Carter impression; Beldar Conehead \\
+John Belushi & Second City; Nat'l Lampoon & Samurai Futaba; Joe Cocker impression \\
+Chevy Chase & Nat'l Lampoon & Gerald Ford impression; Weekend Update anchor \\
+Jane Curtin & The Proposition (Boston) & Weekend Update anchor; ``Jane, you ignorant slut'' \\
+Garrett Morris & Broadway / classical & First Black cast member; news in depth \\
+Laraine Newman & The Groundlings (LA) & Valley girl characters \\
+Gilda Radner & Second City (Toronto) & Roseanne Roseannadanna; Emily Litella \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Additionally, writer-performer Michael O'Donoghue (head writer, recruited from National Lampoon) and actor George Coe (added by NBC executives) appeared in the opening credits. Howard Shore composed the original theme music and served as original bandleader. (Source: Wikipedia, History of SNL; Biography.com, Lorne Michaels)
+
+\subsubsection{The Premiere, October 11, 1975}
+
+The premiere was hosted by George Carlin (originally conceived as one of three rotating permanent hosts, alongside Lily Tomlin and Richard Pryor --- a concept abandoned when Pryor dropped out over censorship concerns). Billy Preston and Janis Ian were the musical guests. The cold open --- ``Wolverines,'' written by O'Donoghue --- featured Belushi as an immigrant learning English who dies when his instructor dies, breaking the fourth wall when Chevy Chase appeared as the ``stage manager'' to deliver the first-ever ``Live from New York, it's Saturday Night!''
+
+Critical reception was lukewarm. Some NBC executives were offended by Carlin's anti-religion material. Viewers who called in complained. Stand-up comedian Steve Martin, watching in Aspen on tour, reportedly said ``Oh my God, they got there first.'' (Source: WPR interview with Susan Morrison, March 2025; NBC Insider)
+
+The show was originally titled \textit{NBC's Saturday Night} because ABC's \textit{Saturday Night Live with Howard Cosell} held the trademark. After Cosell's show was cancelled in 1976, NBC purchased the rights to the name. The show officially became \textit{Saturday Night Live} at the Season 3 premiere, hosted by Steve Martin. (Source: Wikipedia, SNL)
+
+\subsection{Module 02 --- Era-by-Era Performance History}
+
+\subsubsection{Era 1: The Golden Age (1975--1980)}
+
+The founding cast found its footing by Episode 4 (hosted by Candice Bergen). The ensemble chemistry between Belushi, Aykroyd, and the rest defined the show's comedic sensibility: anarchic, death-adjacent, fourth-wall-breaking. Bill Murray joined in Season 2 after Chevy Chase departed (Chase became the first cast member to leave, in 1976, and the first former cast member to return as host, in February 1978). The era produced iconic recurring characters including Belushi's Samurai Futaba, Radner's Roseanne Roseannadanna and Emily Litella, Murray's Nick the Lounge Singer, and the Coneheads. It also produced the first sketch-to-film adaptation: \textit{The Blues Brothers} (1980), starring Aykroyd and Belushi. Michaels departed in 1980, citing burnout. (Source: Britannica; Wikipedia History of SNL)
+
+\subsubsection{Era 2: The Dark Years (1980--1985)}
+
+NBC appointed associate producer Jean Doumanian as producer in 1980, cutting the budget from \$1 million to \$350,000 per episode. The new cast, including Charles Rocket and Ann Risley, failed to connect with audiences. Doumanian was replaced by Dick Ebersol after one season. Ebersol retained only two Doumanian-era performers: Joe Piscopo and a 19-year-old Eddie Murphy, who became the show's salvation. Murphy's Mr. Robinson's Neighborhood (a satire of \textit{Mister Rogers}) and his grumpy Gumby impersonation created the audience anchor the show needed. In a break with tradition, the 1984--85 season brought in established comedians Billy Crystal (\$25,000/episode) and Martin Short (\$20,000/episode) alongside Christopher Guest and Julia Louis-Dreyfus, producing some of the era's strongest material. (Source: Wikipedia History of SNL; Britannica; Cinemablend)
+
+\subsubsection{Era 3: The Michaels Renaissance (1985--1995)}
+
+Lorne Michaels returned in 1985 under NBC chief Brandon Tartikoff (who had kept the show alive during the dark years by prioritizing the show's concept over its financial performance). After an unstable Season 11 (widely considered a reset year), Michaels introduced a new cast featuring Phil Hartman, Dana Carvey, Jan Hooks, Victoria Jackson, and later Mike Myers, Jon Lovitz, and Dennis Miller. Carvey's Church Lady and his George H.W. Bush impression (``Not gonna do it!'') became so culturally embedded that Bush himself invited Carvey to the White House. Myers and Carvey's Wayne's World became the era's signature recurring sketch and the second major SNL feature film (1992). Hartman, the ``glue of the show,'' played Bill Clinton and Charlton Heston among hundreds of characters. Chris Rock, Adam Sandler, Chris Farley, David Spade, and Rob Schneider joined in the early 1990s, delivering physical comedy (Farley's ``Matt Foley: Motivational Speaker --- living in a van down by the river'') and absurdist character work. (Source: Britannica; Wikipedia History of SNL; Cinemablend)
+
+\subsubsection{Era 4: The Peak Era (1995--2005)}
+
+Will Ferrell joined in 1995, beginning a seven-season run that produced George W. Bush, Alex Trebek, Robert Goulet, and the ``More Cowbell'' sketch (Season 25, April 8, 2000). Darrell Hammond built the show's most extensive impersonation portfolio, including Bill Clinton and Chris Matthews. In 1999, Tina Fey became the first woman head writer in SNL history. The 2000--01 season launched the Fey-Fallon \textit{Weekend Update} pairing, described by Michaels as a ``more playful'' era for the segment. Amy Poehler, Seth Meyers, Fred Armisen, Maya Rudolph, and Rachel Dratch joined during this period. Following the September 11, 2001 attacks, Michaels opened the first post-9/11 episode by asking then-Mayor Rudy Giuliani, ``Can we be funny?'' Giuliani replied: ``Why start now?'' --- one of the most viewed moments in SNL history. Fey left as head writer in 2006. (Source: Wikipedia History of SNL; Cinemablend; The Wrap)
+
+\subsubsection{Era 5: The Digital Age (2005--2015)}
+
+The arrival of YouTube and social media fundamentally altered how SNL's sketches reached audiences. In 2005, Andy Samberg, Akiva Schaffer, and Jorma Taccone (The Lonely Island) debuted the viral short film ``Lazy Sunday'' (written with Chris Parnell), which popularized YouTube before the platform had reached mainstream adoption. The sketch was posted without NBC permission and generated millions of views. Bill Hader, Kristen Wiig, Jason Sudeikis, and Bobby Moynihan joined during this period. Kate McKinnon debuted in 2012. Michael Che and Colin Jost took over Weekend Update in 2014. Pete Davidson made his debut in 2014 at age 20. This era also saw SNL's address the 2008 election through Tina Fey's Palin impression (so accurate that millions believed Palin had actually said ``I can see Russia from my house'' --- a line Fey wrote) and the 2016 election cycle. (Source: Britannica; Wikipedia; Purdue University)
+
+\subsubsection{Era 6: The Contemporary Era (2015--Present)}
+
+The 2016 election delivered SNL's most politically loaded season in decades. Alec Baldwin began his recurring Donald Trump impression in Season 42, earning a 2017 Emmy despite declaring he ``loathed'' the role. McKinnon's Hillary Clinton impersonation opposite Baldwin's Trump created the show's defining political sketch of the era. Maya Rudolph returned as Kamala Harris during the 2024 campaign, alongside Dana Carvey's Joe Biden and Mike Myers' Elon Musk. Season 50 (2024--25) averaged 8.1 million weekly viewers (up 12\% from Season 49), ranked No.\ 1 in the 18--49 demo for the sixth consecutive season, and generated record revenue as the highest-grossing season in franchise history. The 50th anniversary special drew 14.8 million viewers live, and 22.8 million across all platforms within its first 35 days. (Source: NBC Press; Deadline; TVLine; Variety)
+
+\subsubsection{Cast Member Statistics}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} & \tableheader{Source} \\
+\midrule
+Total cast members (as of Sept 2025) & 172 & Wikipedia \\
+Total seasons & 51 (through 2025--26) & NBC \\
+Total episodes aired & 1,003+ & Wikipedia \\
+Emmy nominations & 156+ & Horatioalger.org \\
+Emmy wins & 90+ & Britannica \\
+Peabody Awards & 3 & Britannica \\
+Weekend Update anchors (total) & 20+ & Purdue University \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 03 --- The Production Machine}
+
+\subsubsection{The Six-Day Weekly Cycle}
+
+SNL's production week is a fixed-tempo creative sprint that has run largely unchanged for 50 years. It begins Monday morning in Lorne Michaels' second-floor office at 30 Rockefeller Center and ends at 1:02am Sunday morning after the live broadcast. (Source: SNL Fandom Wiki Production Week; NBC Insider SNL50 documentary; WatchMojo analysis)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Day} & \tableheader{Primary Activity} & \tableheader{Key Details} \\
+\midrule
+Monday & Pitch meeting & 9am; host, cast, writers, producers in Michaels' office; 2+ hours; 30--40 sketch premises pitched; rough schedule posted on Michaels' wall \\
+Tuesday & Writing & All-nighter; scripts for 40--50 sketches; Weekend Update jokes begin; writing may not start until 8pm \\
+Wednesday & Table read + selection & 5pm read-through; ~50 attendees; 3+ hours; Michaels selects sketches in a private session afterward; results posted; many writers learn their sketch was cut \\
+Thursday & Development + rehearsal & Set construction, costumes, rewrites; additional sketch cuts; surviving sketches move to stage \\
+Friday & Production development & Rehearsals with set builders, costume designers, musicians; sketch writers on-set \\
+Saturday & Dress rehearsal + broadcast & 8pm dress rehearsal before live audience; final cuts to reach 90 minutes; 11:29:30pm live broadcast; ends \textasciitilde{}1:02am \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Writers Room}
+
+The SNL writers room employs approximately 20--30 writers per season. Writers are typically also performers or have strong improv/sketch backgrounds. The head writer position, established with Michael O'Donoghue (1975), has passed through Jim Downey (1985--95; the longest-tenured head writer in the show's history at 30 years on-and-off), Tina Fey (1999; first woman head writer), Adam McKay, and others. Former writers who became prominent include Conan O'Brien, John Mulaney, Simon Rich, and Adam McKay (who co-founded Funny or Die with Will Ferrell). (Source: Wikipedia SNL; Peacock SNL50 documentary)
+
+\subsubsection{The Talent Sourcing Pipeline}
+
+SNL consistently draws from three primary improvisational comedy institutions:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Institution} & \tableheader{Location} & \tableheader{Notable SNL Alumni} \\
+\midrule
+Second City & Chicago; Toronto & Aykroyd, Belushi, Radner, Murray, Myers, Martin Short, Tina Fey \\
+The Groundlings & Los Angeles & Will Ferrell, Cheri Oteri, Chris Kattan, Chris Parnell, Laraine Newman \\
+Upright Citizens Brigade & New York; Los Angeles & Amy Poehler, Horatio Sanz, Cecily Strong \\
+National Lampoon & New York & Chevy Chase, Belushi, O'Donoghue (founding generation) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 04 --- Political Satire and Cultural Influence}
+
+\subsubsection{Presidential Impersonation History}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{President} & \tableheader{Performer(s)} & \tableheader{Cultural Impact} \\
+\midrule
+Gerald Ford & Chevy Chase & Established presidential parody as SNL institution; Chase's pratfall Ford contributed to Ford's 1976 image problem; Ford later appeared on the show \\
+Jimmy Carter & Dan Aykroyd & Portrayed as hyper-competent ``Dear Abby'' figure; Aykroyd researched Carter's mannerisms carefully \\
+Ronald Reagan & Joe Piscopo, Harry Shearer, others & No impression fully stuck; critics note 1980s politicians largely ``escaped'' SNL \\
+George H.W. Bush & Dana Carvey & ``Not gonna do it! Wouldn't be prudent.'' --- iconic impression; Bush invited Carvey to the White House \\
+Bill Clinton & Darrell Hammond & Evolved from charming to ``horny buffoon'' during Lewinsky scandal; Hammond's most celebrated impersonation \\
+George W. Bush & Will Ferrell & ``Strategery'' (coined by writer Jim Downey); goofy but likable; defined Bush's public image \\
+Al Gore & Darrell Hammond & Slow, deliberate ``lockbox'' character; Gore's campaign studied Hammond's tapes to adjust Gore's public presentation \\
+Barack Obama & Fred Armisen, Jay Pharoah & Neither impression fully captured Obama; Obama appeared on the show himself to mixed effect \\
+Sarah Palin & Tina Fey (guest) & Fey's ``I can see Russia from my house'' line --- Fey's own invention --- was widely attributed to Palin; Palin appeared on the show in response \\
+Donald Trump & Phil Hartman, Hammond, Sudeikis, Baldwin & Alec Baldwin (Season 42--present) won 2017 Emmy; 2016 election cycle was show's largest viewership boost in decades \\
+Joe Biden & Dana Carvey (Season 50) & Carvey returned for Season 50; replaced by Rudolph's Harris as campaign shifted \\
+Kamala Harris & Maya Rudolph & Appeared in Season 50 2024 election cycle \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+(Source: IndieWire political history; Hollywood Insider; Innovation \& Tech Today; CUNY Academic Works, Fox 2025)
+
+\subsubsection{The SNL Effect}
+
+The ``SNL Effect'' is the scholarly term for the measurable influence of SNL's political parody on voter perception and behavior. Key evidence includes:
+
+\begin{itemize}
+  \item Between 1975 and 1980, Weekend Update reached approximately 30 million viewers, establishing SNL as a political information source for a generation that did not consume traditional news (Source: Purdue University)
+  \item The 2008 presidential election produced the most-studied SNL Effect: Tina Fey's Palin impression created a persistent false memory in many viewers --- the ``I can see Russia from my house'' line was Fey's invention, not Palin's, yet remained associated with Palin for years (Source: Purdue University; Hollywood Insider)
+  \item Al Gore's 2000 campaign staff watched Darrell Hammond's impersonation to help Gore adjust his public presentation, treating the impression as a form of political feedback (Source: Purdue University op-ed)
+  \item Cecily Strong was invited to speak at the White House Correspondents' Dinner in 2015, signaling SNL's formal acknowledgment as a political institution (Source: Purdue University)
+  \item Academic research published in CUNY Academic Works (Fox, 2025) argues SNL ``humanizes politicians and makes political concepts more accessible'' to young voters, functioning as an entry point for civic engagement
+\end{itemize}
+
+\subsubsection{Weekend Update Anchor Succession}
+
+Weekend Update has been anchored since 1975 by over 20 performers. Key anchor tenures include Chevy Chase (founding anchor, 1975--76), Jane Curtin and Dan Aykroyd (first male/female co-anchor team), Dennis Miller (1985--91, sharp satirist era), Norm Macdonald (1994--97, absurdist era, fired by NBC Standards), Tina Fey and Jimmy Fallon (2000--04, playful chemistry era), Tina Fey and Amy Poehler (2004--06, first all-female anchor team in SNL history), Seth Meyers (2006--14), and Colin Jost and Michael Che (2014--present). (Source: Wikipedia; Britannica; Cinemablend)
+
+\subsection{Module 05 --- The Legacy Ecosystem}
+
+\subsubsection{Sketch-to-Film Adaptations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Film} & \tableheader{Year} & \tableheader{Source Sketch / Notes} \\
+\midrule
+The Blues Brothers & 1980 & Belushi and Aykroyd's recurring musical duo; major box office hit \\
+Wayne's World & 1992 & Myers and Carvey's recurring sketch; one of the highest-grossing comedy films of the early 1990s \\
+Coneheads & 1993 & Aykroyd-era recurring sketch \\
+It's Pat & 1994 & Julia Sweeney character \\
+A Night at the Roxbury & 1998 & Will Ferrell and Chris Kattan's Butabi Brothers \\
+Superstar & 1999 & Molly Shannon's Mary Katherine Gallagher \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+(Source: Britannica; Wikipedia)
+
+\subsubsection{SNL50 Anniversary Season Data}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{4cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} & \tableheader{Source} \\
+\midrule
+Season 50 avg weekly viewers (Live+7, all platforms) & 8.1 million & NBC Press, June 2025 \\
+Year-over-year viewer increase vs Season 49 & +12\% & NBC Press \\
+SNL50 Anniversary Special (live, Feb 16, 2025) & 14.8 million & Deadline; Hollywood Reporter \\
+SNL50 Anniversary Special (Live+35, all platforms) & 22.8 million & NBC Press \\
+SNL50 Anniversary Special social media views & 7.7 billion & The Wrap \\
+Most-viewed Season 50 episode (Ariana Grande, Oct 12) & 712 million social views & NBC Press \\
+Most-viewed sketch, Season 50 (``Domingo: Bridesmaid'') & 171 million social views & NBC Press \\
+SNL50 combined special programming reach & 50 million viewers & NBC Press \\
+SNL ranking in 18--49 demo, 2024--25 & No. 1 broadcast entertainment series & NBC; TVLine \\
+Consecutive No.\ 1 comedy seasons (broadcast + cable) & 6 & NBC Press \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{SNL UK (2026)}
+
+In 2026, NBC/Lorne Michaels launched \textit{Saturday Night Live UK} on Sky One, extending the franchise internationally for the first time in the British market as a Michaels-produced venture. (Source: Britannica, 2026 update)
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Risk Level} & \tableheader{Protocol} \\
+\midrule
+Political balance & MODERATE & Present impersonations of both major parties with equal analytical weight; do not editorialize on whether satire helped or harmed specific candidates \\
+Deceased cast members & ANNOTATE & Handle deaths (Belushi, Farley, Hartman, Radner, MacDonald, Morris) with dignity and appropriate context \\
+Racial representation & MODERATE & Document SNL's documented struggles with representation of Black and other minority cast members (Garrett Morris, Eddie Murphy, Kenan Thompson, Bowen Yang) without editorializing \\
+Living subjects & GATE & All claims about living cast members and political figures must trace to named sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Reference Works}
+\begin{itemize}[noitemsep]
+  \item Shales, Tom and James Andrew Miller. \textit{Live From New York: An Uncensored History of Saturday Night Live}. Little, Brown, 2002.
+  \item Hill, Doug and Jeff Weingrad. \textit{Saturday Night: A Backstage History of Saturday Night Live}. Beech Tree Books, 1986.
+  \item Morrison, Susan. \textit{Lorne: The Man Who Invented Saturday Night Live}. (Biography referenced in WPR interview, March 2025)
+\end{itemize}
+
+\subsubsection{Academic and Institutional Sources}
+\begin{itemize}[noitemsep]
+  \item Fox, Isabel. ``A Historical Analysis of Saturday Night Live's Engagement in American Presidential Politics.'' CUNY Academic Works, 2025. \url{https://academicworks.cuny.edu/gc_etds/6098/}
+  \item Purdue University College of Liberal Arts. ``Saturday Night Live's Growing Political Popularity.'' \url{https://www.cla.purdue.edu/academic/history/debate/recenthistory/SNL.html}
+  \item Britannica. ``Saturday Night Live --- History, Cast Members, \& Facts.'' Encyclopaedia Britannica (updated 2025). \url{https://www.britannica.com/topic/Saturday-Night-Live}
+\end{itemize}
+
+\subsubsection{Press and Broadcast Sources}
+\begin{itemize}[noitemsep]
+  \item NBC Press. ``Saturday Night Live Season 50 Averages 8.1 Million Viewers.'' June 2, 2025.
+  \item Deadline. ``SNL50 Anniversary Special Draws 14.8M Viewers.'' February 18, 2025.
+  \item Variety. ``SNL 50 Ratings: 14.8 Million Viewers for Anniversary Special.'' February 2025.
+  \item Smithsonian Magazine. ``The Real Story Behind \textit{Saturday Night}.'' October 9, 2024. \url{https://www.smithsonianmag.com/history/the-real-story-behind-saturday-night/}
+  \item IndieWire. ``Saturday Night Live: A History of Political Satire.'' \url{https://www.indiewire.com/features/commentary/saturday-night-live-history-political-satire-1235095227/}
+  \item WPR. ``Lorne Michaels Invented Saturday Night Live.'' Interview with Susan Morrison, March 21, 2025.
+  \item NBC Insider. ``How Do SNL Sketches Make It To Air?'' April 13, 2025. \url{https://www.nbc.com/nbc-insider/how-do-snl-sketches-make-it-on-air}
+\end{itemize}
+
+\subsubsection{Wikipedia Sources}
+\begin{itemize}[noitemsep]
+  \item Wikipedia. ``History of Saturday Night Live.'' (Continuously updated; accessed March 27, 2026)
+  \item Wikipedia. ``Saturday Night Live.'' (Continuously updated; accessed March 27, 2026)
+  \item Wikipedia. ``List of Saturday Night Live Cast Members.'' (Accessed March 27, 2026)
+  \item Wikipedia. ``Saturday Night Live Season 50.'' (Accessed March 27, 2026)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality GSD research document tracing the complete 50-year history of \textit{Saturday Night Live}: its founding in 1975, its six distinct creative eras, its production machine, its political satire legacy, and its cultural ecosystem. The deliverable is a single comprehensive research document --- indexed, sourced, and cross-referenced --- ready for use as a reference work, a teaching document, or a foundation for downstream GSD content modules.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+=================
+
+  WAVE 0 [Foundation]                    Sequential | Haiku
+  =========================================
+  W0-A: Shared schema and source index
+  W0-B: Module template generation
+  W0-C: Token budget initialization
+
+  WAVE 1A [Research Tracks]              Parallel | Sonnet
+  =========================================
+  W1A-1: Module 01 -- Origins & Founding
+  W1A-2: Module 02 -- Era-by-Era History
+  [CAPCOM GATE 1: Scope confirmation]
+
+  WAVE 1B [Research Tracks]              Parallel | Sonnet + Opus
+  =========================================
+  W1B-1: Module 03 -- Production Machine
+  W1B-2: Module 04 -- Political Satire
+  W1B-3: Module 05 -- Legacy Ecosystem
+
+  WAVE 2 [Synthesis]                     Sequential | Opus
+  =========================================
+  W2-A: Cross-module integration
+  W2-B: Timeline consistency verification
+  W2-C: Sensitivity review
+  [CAPCOM GATE 2: Quality review]
+
+  WAVE 3 [Publication]                   Sequential | Sonnet
+  =========================================
+  W3-A: LaTeX document assembly
+  W3-B: Citation audit
+  W3-C: Three-pass XeLaTeX compilation
+  W3-D: Index.html delivery page
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, module templates (Wave 0)
+  \item \textbf{Research Layer} --- Five module research tracks producing sourced content sections (Wave 1)
+  \item \textbf{Synthesis Layer} --- Cross-module integration, timeline harmonization, sensitivity review (Wave 2)
+  \item \textbf{Publication Layer} --- LaTeX assembly, citation audit, compilation, delivery (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Location} \\
+\midrule
+1 & Research PDF (this document) & All 12 success criteria met; compiles without errors & Stage 1 Success Criteria \\
+2 & LaTeX source (.tex) & Compiles clean with XeLaTeX three-pass; no warnings affecting output & W3-A \\
+3 & Index.html delivery page & All download links functional; color scheme matches PDF & W3-D \\
+4 & Source index (.yaml) & All citations traceable to named sources; zero entertainment media & W0-B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Source index + schema & None & Haiku & 2,000 \\
+W1A-1: Origins research & W0 & Sonnet & 8,000 \\
+W1A-2: Era history survey & W0 & Sonnet & 12,000 \\
+W1B-1: Production machine & W0 & Sonnet & 6,000 \\
+W1B-2: Political satire analysis & W0 & Opus & 10,000 \\
+W1B-3: Legacy ecosystem & W0 & Sonnet & 8,000 \\
+W2-A: Cross-module synthesis & W1A, W1B & Opus & 8,000 \\
+W2-B: Timeline verification & W1A, W1B & Opus & 4,000 \\
+W2-C: Sensitivity review & W2-A & Opus & 2,000 \\
+W3-A: LaTeX assembly & W2 & Sonnet & 15,000 \\
+W3-B: Citation audit & W3-A & Sonnet & 3,000 \\
+W3-C: Compilation + debug & W3-A & Sonnet & 2,000 \\
+W3-D: Index.html & W3-C & Sonnet & 2,000 \\
+\textbf{TOTAL} & & & \textbf{\textasciitilde{}82,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Token Budget} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & \textasciitilde{}24,000 & Political satire analysis (judgment-heavy), cross-module synthesis, sensitivity review \\
+Sonnet & 60\% & \textasciitilde{}48,000 & Survey compilation, era history, production machine, LaTeX assembly, citation audit \\
+Haiku & 10\% & \textasciitilde{}8,200 & Shared schemas, source index, scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{2.5cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Model(s)} \\
+\midrule
+Wave 0 & Foundation & Source index, schema, templates & Sequential & Haiku \\
+Wave 1A & Research (Origins + Eras) & Modules 01 and 02 & Parallel & Sonnet \\
+\textit{CAPCOM 1} & \textit{Gate 1} & \textit{Scope confirmation} & \textit{HITL} & \textit{Human} \\
+Wave 1B & Research (Machine, Politics, Legacy) & Modules 03, 04, 05 & Parallel & Sonnet + Opus \\
+Wave 2 & Synthesis & Integration, timeline, sensitivity & Sequential & Opus \\
+\textit{CAPCOM 2} & \textit{Gate 2} & \textit{Quality review} & \textit{HITL} & \textit{Human} \\
+Wave 3 & Publication & LaTeX, audit, compile, deliver & Sequential & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Shared attribute layer:} SNL foundational facts (premiere date, cast names, Studio 8H details) computed once in Wave 0 and cached as a YAML source index referenced by all subsequent agents
+  \item \textbf{5-minute TTL:} All Wave 1 parallel agents should be dispatched within one session to exploit prompt caching on shared system context
+  \item \textbf{Era boundary consistency:} Era date ranges (1975--80, 1980--85, etc.) defined in Wave 0 schema; agents reference schema rather than re-deriving boundaries independently
+  \item \textbf{Political figure table:} Presidential impersonation table compiled once in Wave 1B-2 (Opus); reused verbatim by synthesis and publication agents
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{3cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 2,000 & 3,000 & Schema generation \\
+Wave 1A & 8,000 & 12,000 & Two parallel agents \\
+Wave 1B & 12,000 & 18,000 & Three parallel agents \\
+Wave 2 & 20,000 & 8,000 & Full context synthesis \\
+Wave 3 & 25,000 & 15,000 & LaTeX assembly + compilation \\
+\textbf{TOTAL} & \textbf{67,000} & \textbf{56,000} & \textbf{\textasciitilde{}123,000 combined} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+  [W0: Source Index + Schema]
+       |
+       +--------+--------+
+       |                 |
+  [W1A: Origins +   [W1B: Machine +
+   Era History]     Politics + Legacy]
+       |                 |
+       +--------+--------+
+                |
+          [CAPCOM 1]
+                |
+           [W2: Synthesis]
+                |
+          [CAPCOM 2]
+                |
+         [W3: Publication]
+                |
+        [DELIVER: PDF + .tex + index.html]
+
+  PARALLEL TRACKS: W1A and W1B run simultaneously
+  GATES: CAPCOM 1 after W1A; CAPCOM 2 after W2
+  SEQUENTIAL: W0 -> W2 -> W3 are each sequential phases
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Target} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & $\geq$15\% \\
+Core functionality & 18 & Required & BLOCK & \textasciitilde{}50\% \\
+Integration & 9 & Required & BLOCK & \textasciitilde{}25\% \\
+Edge cases & 4 & Best-effort & LOG & \textasciitilde{}10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to named sources: Wikipedia, Britannica, Purdue University, CUNY, NBC Press, Smithsonian, Deadline, Variety. Zero entertainment tabloids or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every viewership figure, Emmy count, cast member count, and date attributed to a specific named source \\
+SC-ADV & No political advocacy & Document presents SNL's political satire history without advocating for specific political positions; treatment of Democratic and Republican political figures is analytically equivalent \\
+SC-DEC & Deceased cast members & John Belushi, Gilda Radner, Phil Hartman, Chris Farley, Norm Macdonald, and Garrett Morris are treated with dignity and factual accuracy; no sensationalization of circumstances of death \\
+SC-REP & Representation accuracy & Claims about racial and gender representation in the SNL cast are grounded in documented fact; language follows contemporary journalistic standards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Founding narrative completeness & NBC mandate, Michaels recruitment, Studio 8H, founding cast, premiere date, and first cold open all documented \\
+CF-02 & Six eras coverage & All six eras present with date ranges, named cast members, and signature sketches \\
+CF-03 & Production cycle accuracy & Six-day cycle documented day-by-day with time stamps (9am Monday through 1:02am Sunday) \\
+CF-04 & Presidential impersonation table & Minimum 10 presidents/candidates documented with impersonator and cultural impact \\
+CF-05 & SNL Effect definition & Scholarly definition present with at least two institutional sources \\
+CF-06 & Weekend Update anchor succession & Succession from Chase (1975) to Jost/Che (2014--present) documented \\
+CF-07 & Sketch-to-film adaptations & Minimum 5 films documented with year and source sketch \\
+CF-08 & SNL50 data accuracy & Season 50 viewership figures match NBC Press release values \\
+CF-09 & Eddie Murphy survival narrative & Murphy's role in rescuing SNL during 1980--85 crisis documented with specific characters \\
+CF-10 & Talent pipeline coverage & Second City, Groundlings, and UCB documented with notable alumni per institution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & M01 $\to$ M02 continuity & Founding cast members (M01) appear correctly in Era 1 section (M02) with consistent biographical facts \\
+IN-02 & M03 $\to$ M02 constraint-creativity link & Production machine constraints (90 minutes, live, 6 days) explicitly linked to how each era's comedy was shaped \\
+IN-03 & M04 $\to$ M02 political moment placement & Each major political impersonation (Ford, Bush, Palin, Trump) is placed in the correct era in Module 02 \\
+IN-04 & M02 $\to$ M05 alumni career trace & At minimum 5 alumni careers traced from SNL era to post-SNL achievement \\
+IN-05 & Cross-module date consistency & Dates for cast tenures, era transitions, and historical events are consistent across all modules \\
+IN-06 & M04 $\to$ SNL Effect evidence chain & SNL Effect claim (M04) supported by evidence traceable to Module 04 sources \\
+IN-07 & Document self-containment & A reader with no prior SNL knowledge can understand all terms; no undefined references \\
+IN-08 & Bibliography completeness & Every source cited in the text appears in the bibliography \\
+IN-09 & SNL50 data cross-module consistency & Season 50 viewership numbers are identical in Module 02, Module 05, and Milestone Specification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Six eras documented with cast, sketches, reception & CF-02, IN-03 & Pending \\
+2. Production cycle six-day documentation & CF-03, IN-02 & Pending \\
+3. Minimum 12 presidential impersonations documented & CF-04 & Pending \\
+4. SNL Effect defined with $\geq$3 sources & CF-05, IN-06 & Pending \\
+5. Talent pipeline documented per institution & CF-10 & Pending \\
+6. SNL50 data captured with verified Nielsen figures & CF-08, IN-09 & Pending \\
+7. Sketch-to-film legacy ($\geq$6 productions) & CF-07 & Pending \\
+8. Weekend Update anchor succession complete & CF-06 & Pending \\
+9. All numerical claims attributed to sources & SC-NUM & Pending \\
+10. Founding narrative fully documented & CF-01, IN-01 & Pending \\
+11. Eddie Murphy crisis survival documented & CF-09 & Pending \\
+12. Document self-contained for new readers & IN-07, IN-08 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; CAPCOM gate go/no-go; final quality decision \\
+PLAN & Planner & Wave decomposition; cache optimization; parallel track dispatch \\
+SCOUT & Research Agent & Source gathering; web research gap-fill; citation validation \\
+EXEC-1 & Executor A & Era history survey (M02) + Origins document (M01) \\
+EXEC-2 & Executor B & Production machine (M03) + Legacy ecosystem (M05) \\
+CRAFT-HIST & History Specialist & Founding narrative; era-by-era analysis; timeline verification \\
+CRAFT-CULTURE & Culture Specialist & Political satire analysis; SNL Effect research; cultural impact \\
+VERIFY & Verification & Source traceability; numerical accuracy; sensitivity check \\
+INTEG & Integration Agent & Cross-module consistency; alumni career trace; date audit \\
+CAPCOM & HITL Interface & Only human-crossing channel; scope confirmation (Gate 1); quality review (Gate 2) \\
+BUDGET & Resource Manager & Token budget tracking; session planning across 3 sessions \\
+LOG & Chronicle Agent & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission title & Live From New York: A Complete History of SNL \\
+Activation profile & Squadron (12 roles) \\
+Total estimated tokens & \textasciitilde{}123,000 \\
+Estimated sessions & 3 \\
+Estimated context windows & 8--10 \\
+Model split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+CAPCOM gates & 2 (after Wave 1A; after Wave 2) \\
+Parallel tracks & 2 (Wave 1A and Wave 1B simultaneous) \\
+Deliverables & PDF + .tex source + index.html + source index \\
+Safety-critical tests & 5 mandatory BLOCK tests \\
+Total test coverage & 36 tests across 4 categories \\
+Research reference date & March 27, 2026 \\
+Ready for execution & Yes --- handoff to GSD orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The year 1975 was a hinge moment in America. The president of the United States had recently resigned in disgrace, and politics was deeply unsettled. The Vietnam War had ended with the last helicopter taking off from the roof of the American Embassy in Saigon. New York City was flat broke. It was a moment of chaos, doubt, and, of course, opportunity. The perfect time to start a new comedy show.''}
+
+\vspace{0.5em}
+\hfill --- Lorne Michaels, Vanity Fair, 2013
+
+\vspace{1em}
+\textit{Every great system finds its moment in the chaos of a world that needs what it was built to provide. The SNL production machine is a lesson in constraint as catalyst: give a group of brilliant people six days, a live camera, and an audience --- and see what they build. The answer, over fifty years, has been: the comedy conscience of the country.}
+\end{quotebox}
+
+\end{document}

@@ -139,6 +139,7 @@
     { id: 'SMP', name: 'Smashing Pumpkins', path: 'SMP/index.html' },
     { id: 'SNL', name: 'Sensing Layer', path: 'SNL/index.html' },
     { id: 'SNY', name: 'Sonic Youth', path: 'SNY/index.html' },
+    { id: 'SNX', name: 'Saturday Night Live', path: 'SNX/index.html' },
     { id: 'SOC', name: 'Strait Out of Compton', path: 'SOC/index.html' },
     { id: 'SYN', name: 'Synsor Corp', path: 'SYN/index.html' },
     { id: 'SPA', name: 'Spatial Awareness', path: 'SPA/index.html' },
