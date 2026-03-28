@@ -1,0 +1,983 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology color scheme
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\titleformat{\section}{\Large\bfseries\sffamily\color{primary}}{\thesection}{1em}{}[\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}{\large\bfseries\sffamily\color{secondary}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\sffamily\color{tertiary}}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{GSD v1.49.x Module Governance}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Module Governance and Upstream Intelligence -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%% TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Module Governance\\[0.3em]\& Upstream Intelligence}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Bridge Spec Promotion + Version Currency --- v1.49.x}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Targeted Patch Study for gsd-skill-creator}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 $|$ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron $|$ Estimated: 4--6 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1 --- VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Module Governance \& Upstream Intelligence --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Conversation-Harvested / Ready for Execution}
+\metafield{Depends On:}{gsd-skill-creator v1.49.x; Deep Audio Analyzer research mission pack}
+\metafield{Context:}{Post-mission retrospective on Module 05 (Bridge Architecture) overshoot and frozen version numbers}
+
+\subsection{Vision}
+
+The first mission retrospective surfaced two clean signals that belong in v1.49.x before the series closes. Module 05 (Bridge Architecture) earned its 706 lines --- TypeScript interfaces, ASCII diagrams, token budget analysis, and cross-agent handoff specifications are all there, all correct --- but they exceeded the research module container by a factor of two. The 300--400 line target exists for a reason: research modules are survey documents, orientations for agents who will execute. A 706-line spec is a \emph{deliverable}, not an orientation.
+
+The second signal is quieter but consequential. Version numbers v0.62.0, v1.28.0, and v2.43.0 are frozen at mission pack compilation date. In a fast-moving ecosystem, dependency drift is silent until it isn't. A small Haiku-tier upstream monitor --- checking the relevant GitHub release pages, diffing against locked versions, surfacing drift to the orchestrator --- costs almost nothing and catches the category of failures that only become visible at integration time.
+
+Together these two patches define what a v1.49.x series close looks like: promote the oversized spec to a first-class standalone deliverable, wire up a lightweight version sentinel, and establish the size contracts that will prevent the same overshoot pattern in future missions.
+
+This mission is an act of architectural hygiene in the Amiga spirit: not more power, but better boundaries. A research module that knows it is a research module, and a standalone spec that knows it is a spec, will compose more cleanly than a research module straining under the weight of something it was never meant to carry.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Container mismatch.} Module 05 at 706 lines carries TypeScript interfaces, multi-level ASCII diagrams, and a full token budget analysis inside a research module container sized for 300--400 lines. The content is correct; the container is wrong. Agents consuming the module as a research survey receive a spec-level document without the framing that a standalone spec would provide.
+
+  \item \textbf{Pointer absence.} When Module 05 is promoted, the research module container must carry a well-structured pointer reference so agents can find the standalone spec without additional orchestrator intervention. Without this pointer, the promotion creates a navigation gap.
+
+  \item \textbf{Frozen version numbers.} v0.62.0, v1.28.0, and v2.43.0 are static in the mission pack. Dependency drift accumulates silently; there is no automated mechanism to surface version gaps between mission pack compilation and execution.
+
+  \item \textbf{Absent size governance.} No explicit line-count contract exists for research modules vs.\ standalone spec deliverables. The overshoot was detectable only in retrospective. Future missions need an explicit size boundary that triggers promotion before overshoot occurs.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Separation of survey from specification, monitored by a lightweight version sentinel.}
+
+Research modules orient agents: context, findings, source evidence, architectural awareness. Specification deliverables instruct agents: interfaces, diagrams, token budgets, integration contracts. When a research module accumulates spec-level content, the correct response is promotion, not compression. The version sentinel is a Haiku-tier observer that runs on a schedule, compares live release tags against pinned versions, and reports drift without blocking execution (except on major semver delta).
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+gsd-skill-creator v1.49.x
+├── Mission Pack (compiled research)
+│   ├── Module 01: [survey, ~350 lines]
+│   ├── Module 02: [survey, ~320 lines]
+│   ├── Module 03: [survey, ~290 lines]
+│   ├── Module 04: [survey, ~340 lines]
+│   ├── Module 05: Bridge Architecture [706 lines -- OVERSHOOT]
+│   │   └── --> PROMOTE to standalone deliverable
+│   └── Module 05 (replacement): Bridge Architecture Pointer [~80 lines]
+│       └── --> References standalone spec by path + digest
+│
+└── Standalone Deliverables
+    ├── [existing docs...]
+    └── bridge-architecture-spec.pdf  [NEW -- promoted from Module 05]
+
+Version Sentinel (Haiku cron skill)
+├── Checks:  GitHub release pages for 3 pinned packages
+├── Compares: live tag vs pinned version in mission pack manifest
+├── Reports: drift events to orchestrator log
+└── Schedule: on-demand + pre-execution gate
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+                    MODULE ARCHITECTURE
+    +--------------------------------------------------+
+    |  M01: Bridge Spec Promotion                      |
+    |  Extract + reframe Module 05 as standalone PDF   |
+    |  Output: bridge-architecture-spec.pdf            |
+    +---------------------+----------------------------+
+                          | depends on
+    +---------------------v----------------------------+
+    |  M02: Pointer Reference Module                   |
+    |  Replace Module 05 content with structured ptr   |
+    |  Output: module-05-pointer.md                    |
+    +--------------------------------------------------+
+
+    +--------------------------------------------------+
+    |  M03: Upstream Version Monitor                   |
+    |  Haiku cron skill -- GitHub release diff         |
+    |  Output: upstream-monitor skill + test harness   |
+    +--------------------------------------------------+
+
+    +--------------------------------------------------+
+    |  M04: Module Size Governance                     |
+    |  Establish contracts; audit existing modules     |
+    |  Output: GOVERNANCE.md + audit-report.md         |
+    +--------------------------------------------------+
+
+    M01 -> M02 sequential
+    M03 || M04 parallel with M01/M02 (Track B)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Bridge Spec Promotion}
+
+Extract the full content of Mission Pack Module 05 and reframe it as a standalone specification deliverable. Apply the standard GSD spec document structure: purpose statement, scope, versioning header, TypeScript interface catalogue, ASCII architecture diagrams, token budget analysis, and integration contracts. Produce as a LaTeX PDF using the technology color scheme. The standalone spec becomes a first-class ecosystem document, registered in the GSD document index alongside the philosophical essays and mission packs.
+
+\subsubsection{Module 02 --- Pointer Reference Module}
+
+Replace the current Module 05 content in the research mission pack with a compact pointer document (target: 60--100 lines). The pointer must include: document title, path to standalone spec, SHA-256 content digest, summary of what the spec covers (3--5 sentences), and a structured reference table mapping spec sections to research module concerns. Agents consuming the mission pack as a survey receive orientation; agents needing spec-level detail follow the pointer without orchestrator intervention.
+
+\subsubsection{Module 03 --- Upstream Version Monitor}
+
+Design and implement a Haiku-tier cron skill that checks the GitHub release pages for the three pinned packages, compares live tags against locked versions in the mission pack manifest, and emits a structured drift report. Operates on-demand and as a pre-execution gate. Drift severity is classified by semver delta: major version change blocks execution, minor version change emits advisory, patch version change logs silently. The skill is self-contained and carries zero external state beyond the version manifest.
+
+\subsubsection{Module 04 --- Module Size Governance}
+
+Define explicit size contracts for the two primary document classes: research module (150--400 lines; survey orientation) and standalone spec (no upper bound; full technical specification). Audit all existing mission pack modules against the contract. Flag any module exhibiting spec-level content markers (TypeScript interfaces, full ASCII diagrams spanning 15+ lines, token budget tables, integration contract definitions) as a candidate for promotion. Deliver GOVERNANCE.md committed to the gsd-skill-creator dev branch with the audit report as a companion file.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: "module-governance-upstream-intelligence"
+  version: "v1.49.x-patch"
+  profile: squadron
+  models:
+    opus:   0.30  # Spec framing judgment; governance policy; integration review
+    sonnet: 0.60  # Document assembly; LaTeX compile; monitor implementation; audit
+    haiku:  0.10  # Schema scaffolding; cron skill runtime; manifest templates
+  parallel_tracks: 2
+  waves: 4
+  estimated_tokens: 56000
+  estimated_windows: 5
+  cache_strategy: "5-minute TTL; Module 05 content as shared context anchor"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.49.x)}
+\begin{itemize}[noitemsep]
+  \item Promotion of Mission Pack Module 05 to standalone spec deliverable (PDF + .tex source)
+  \item Replacement pointer module in the research mission pack container
+  \item Upstream version monitor skill (GitHub release page polling, drift reporting)
+  \item Module size governance document and existing-module audit
+  \item Integration of all four outputs into the gsd-skill-creator dev branch
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item v1.50 unit-circle retrospective (separate milestone)
+  \item Modifications to Module 05 technical content (promote as-is; edits are v1.50 work)
+  \item Automated PR creation or CI/CD integration for the version monitor
+  \item Governance audit of documents outside the current mission pack
+  \item Live GitHub API calls during execution (release page fetches only, no auth tokens)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Bridge Architecture Spec PDF compiles without errors from three XeLaTeX passes
+  \item Standalone spec follows GSD spec structure (purpose, scope, version header, interfaces, diagrams, token budget, integration contracts)
+  \item Standalone spec is registered in the GSD ecosystem document index
+  \item Pointer module replaces Module 05 in the mission pack at 60--100 lines
+  \item Pointer module contains path, SHA-256 digest, summary, and reference table
+  \item Upstream monitor skill detects simulated version drift correctly in test harness
+  \item Version monitor classifies semver delta severity correctly (major=BLOCK, minor=ADVISORY, patch=LOG)
+  \item Governance document defines explicit size contracts with line ranges for all document classes
+  \item Module audit completes with flagged promotion candidates documented
+  \item All four outputs committed to gsd-skill-creator dev branch
+  \item No regression in existing mission pack structure or cross-references
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Original Mission Pack & Source material & Module 05 content extracted; pack updated with pointer \\
+bridge-architecture-spec.pdf & Produces & Standalone spec; first-class ecosystem document \\
+module-05-pointer.md & Produces & Replaces Module 05 in the pack; navigation artifact \\
+upstream-monitor skill & Produces & New Haiku-tier skill in gsd-skill-creator \\
+GOVERNANCE.md & Produces & Committed to dev branch; governs future missions \\
+v1.50 Retrospective & Precedes & This mission closes 1.49.x before v1.50 opens \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga didn't achieve its reputation by cramming everything into one chip. The magic was in the boundaries: Agnus knew its job, Denise knew its job, Paula knew its job. When one chip tried to do another chip's work, the system degraded --- not catastrophically, but in ways that accumulated. A research module that grows to 706 lines has become a chip trying to do two jobs simultaneously.
+
+This mission applies that same principle at the document layer. A research module is an orientation device: \emph{here is what exists, here is the evidence, here is enough context to act}. A specification is a construction document: \emph{here are the interfaces, here are the contracts, here is the budget}. Mixing these two creates documents that do both jobs poorly. Separating them creates documents that each do one job beautifully, and a pointer that bridges the two without confusion.
+
+The version monitor is the same principle applied to time. A mission pack is a snapshot; the ecosystem is a river. Building a lightweight sentinel that reports on the gap between snapshot and present is not an admission of failure --- it is honest architecture. The spaces between compilation and execution are where silent failures live. This mission makes those spaces visible.
+
+%% ============================================================
+%% STAGE 2 --- RESEARCH REFERENCE
+%% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Module Governance \& Upstream Intelligence --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference is sourced entirely from internal GSD ecosystem artifacts. The domain is the ecosystem itself: no external peer-reviewed literature is required. Agents should treat the internal sources listed below as authoritative for all findings in this reference.
+
+\textbf{Key internal sources:}
+\begin{itemize}[noitemsep]
+  \item gsd-skill-creator dev branch (\texttt{github.com/Tibsfox/gsd-skill-creator}) --- live codebase, 65+ milestones
+  \item Deep Audio Analyzer mission pack --- origin document for Module 05 content and overshoot data
+  \item GSD Research Mission Generator skill (\texttt{/mnt/skills/user/research-mission-generator/SKILL.md}) --- defines 300--400 line module target
+  \item DACP v1.49 specification --- defines agent communication structure; context for bridge architecture
+  \item Conversation retrospective, March 26, 2026 --- primary feedback source; 706-line overshoot confirmed
+\end{itemize}
+
+\subsection{Module 01 Reference --- Bridge Spec Promotion}
+
+\subsubsection{Current Module 05 Content Inventory}
+
+Module 05 (Bridge Architecture) contains spec-level content in each of the following categories, confirmed from the mission retrospective:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Content Type} & \tableheader{Spec Level?} & \tableheader{Disposition} \\
+\midrule
+TypeScript interfaces & Yes & Migrate to standalone spec \\
+ASCII architecture diagrams & Yes & Migrate to standalone spec \\
+Token budget analysis & Yes & Migrate to standalone spec \\
+Agent handoff contracts & Yes & Migrate to standalone spec \\
+13 named sections & Mixed & Retain structure in spec; summary in pointer \\
+Architectural context prose & No & Distill to pointer summary (3--5 sentences) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Promotion Transformation Map}
+
+The promotion process does not alter technical content. It reframes the container:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Before (Module 05)} & \tableheader{After (Standalone Spec)} & \tableheader{Change} \\
+\midrule
+Research module section & Standalone LaTeX PDF & Document class change \\
+No purpose statement & Purpose statement added & Standard spec header \\
+No versioning header & Version header present & \texttt{v1.49.0, promoted Mar 2026} \\
+No scope statement & Scope section added & Explicit boundary declaration \\
+No document index entry & Registered in index & Ecosystem navigation \\
+706 lines in pack & Pointer (60--100 lines) & Space reclaimed in pack \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 02 Reference --- Pointer Reference Module}
+
+\subsubsection{Pointer Document Canonical Structure}
+
+A pointer module is a navigational artifact, not a summary. It tells an agent exactly where to go, why, and how to verify the destination. The canonical structure for this mission's pointer:
+
+\begin{asciibox}
+# Bridge Architecture Specification [POINTER]
+## Status: Active pointer to standalone spec
+
+## Document Reference
+- Title:   GSD Bridge Architecture Specification
+- Path:    docs/specs/bridge-architecture-spec.pdf
+- Version: v1.49.0
+- Digest:  sha256:<computed-at-wave-1a>
+- Origin:  Promoted from Mission Pack Module 05, March 2026
+
+## Coverage Summary
+[3-5 sentences: what the spec covers, written for agent orientation]
+
+## When to Follow This Pointer
+- You are implementing the bridge layer
+- You need TypeScript interface definitions
+- You need the token budget for bridge operations
+- You need agent handoff integration contracts
+- You need multi-level architecture diagrams
+
+## Reference Map
+| Spec Section        | Research Concern                  |
+|---------------------|-----------------------------------|
+| Purpose & Scope     | Why this layer exists             |
+| TypeScript Ifaces   | Agent communication contracts     |
+| Architecture        | System topology and data flow     |
+| Token Budget        | Execution cost modeling           |
+| Integration Ctrs    | Cross-module dependency surface   |
+\end{asciibox}
+
+\subsubsection{Digest Computation}
+
+The SHA-256 digest is computed from the compiled PDF (not the .tex source) to ensure the pointer describes exactly what agents will receive. Digest is computed in Wave 1A immediately after the third XeLaTeX pass, before the pointer is authored.
+
+\subsection{Module 03 Reference --- Upstream Version Monitor}
+
+\subsubsection{Pinned Versions Subject to Monitor}
+
+Three package versions are frozen in the mission pack at compilation date:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{3cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Identifier} & \tableheader{Pinned Version} & \tableheader{Check Location} & \tableheader{Drift Severity Rule} \\
+\midrule
+Package A & v0.62.0 & GitHub releases page & Semver-classified \\
+Package B & v1.28.0 & GitHub releases page & Semver-classified \\
+Package C & v2.43.0 & GitHub releases page & Semver-classified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\emph{Note: Exact package identities are confirmed from the original mission pack manifest during Wave 0. The version numbers above are confirmed from the retrospective feedback.}
+
+\subsubsection{Drift Classification Logic}
+
+\begin{asciibox}
+// Semver delta severity classification
+function classifyDrift(pinned: string, live: string): DriftEvent {
+  const [pMaj, pMin, pPat] = pinned.split('.').map(Number);
+  const [lMaj, lMin, lPat] = live.split('.').map(Number);
+
+  if (lMaj > pMaj) return { severity: 'BLOCK',    label: 'major' };
+  if (lMin > pMin) return { severity: 'ADVISORY',  label: 'minor' };
+  if (lPat > pPat) return { severity: 'LOG',       label: 'patch' };
+  return              { severity: 'CURRENT',   label: 'none'  };
+}
+
+// Drift event schema
+interface DriftEvent {
+  package:  string;
+  pinned:   string;
+  live:     string;
+  severity: 'BLOCK' | 'ADVISORY' | 'LOG' | 'CURRENT';
+  label:    'major' | 'minor' | 'patch' | 'none';
+  checked:  string;  // ISO timestamp
+}
+\end{asciibox}
+
+\subsubsection{Monitor Skill Architecture}
+
+The upstream monitor is a Haiku-tier skill: deterministic logic, low token cost, no judgment required. Execution modes:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{On-demand:} triggered by orchestrator before mission execution begins
+  \item \textbf{Scheduled:} periodic check run by cron, frequency in skill manifest
+  \item \textbf{Gate:} BLOCK-severity events halt execution, emit to orchestrator event stream, and require CAPCOM approval before proceeding
+\end{itemize}
+
+The skill reads a version manifest (YAML, committed to dev branch) and fetches release tags from GitHub release pages using standard HTTP. No authentication tokens. No write access to any repository.
+
+\subsection{Module 04 Reference --- Module Size Governance}
+
+\subsubsection{Size Contract Definitions}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document Class} & \tableheader{Min Lines} & \tableheader{Max Lines} & \tableheader{Promotion Trigger} \\
+\midrule
+Research module & 150 & 400 & Exceeds 400 lines \textbf{or} contains spec-level markers (see below) \\
+Standalone spec & 200 & unbounded & N/A --- no upper limit \\
+Vision document & 100 & 300 & N/A \\
+Pointer module & 40 & 120 & N/A \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Spec-Level Content Markers}
+
+A research module exhibiting any of these markers is a candidate for promotion regardless of line count:
+
+\begin{itemize}[noitemsep]
+  \item TypeScript or Rust interface or type definitions
+  \item Token budget tables with per-operation cost modeling
+  \item ASCII diagrams spanning more than 15 lines
+  \item Integration contracts specifying exact API signatures
+  \item Versioning headers or changelog sections
+  \item More than 3 named subsections with independent technical scope
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+Version monitor GitHub access & GATE & Public release pages only; zero authentication tokens in skill manifest or codebase \\
+Content digest integrity & ANNOTATE & SHA-256 digest in pointer ensures content identity; pointer must be regenerated if spec is revised \\
+BLOCK event handling & GATE & Major version drift halts execution; requires CAPCOM human approval before proceeding \\
+Dev branch commits & ANNOTATE & All outputs to dev branch only; main branch remains frozen per ecosystem policy \\
+No content loss in promotion & BLOCK & SC-CONTENT test is mandatory-pass; any content loss in Module 05 promotion blocks publication \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Internal GSD Ecosystem Sources}
+
+\begin{itemize}[noitemsep]
+  \item GSD Research Mission Generator Skill, \texttt{/mnt/skills/user/research-mission-generator/SKILL.md} --- defines 300--400 line research module target
+  \item Deep Audio Analyzer Mission Pack --- origin of Module 05 (Bridge Architecture) content; 706-line overshoot confirmed in retrospective
+  \item DACP v1.49 Specification --- Deterministic Agent Communication Protocol; bridge architecture context
+  \item gsd-skill-creator dev branch, \texttt{github.com/Tibsfox/gsd-skill-creator} --- live codebase, 65+ milestones, 500k+ LOC
+  \item Conversation retrospective, March 26, 2026 --- primary feedback source for both action items in this mission
+\end{itemize}
+
+\subsubsection{External Technical References}
+
+\begin{itemize}[noitemsep]
+  \item Semantic Versioning 2.0.0 specification, \texttt{semver.org} --- basis for major/minor/patch drift classification logic
+  \item GitHub REST API documentation --- release page polling pattern for version monitor implementation
+\end{itemize}
+
+%% ============================================================
+%% STAGE 3 --- MISSION PACKAGE
+%% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Milestone:}{v1.49.x-patch-module-governance}
+\metafield{Series:}{gsd-skill-creator v1.49.x (closes series; precedes v1.50)}
+\metafield{Branch:}{dev (main frozen)}
+
+\subsection{Mission Objective}
+
+Promote the oversized Module 05 (Bridge Architecture) to a standalone specification deliverable and replace it with a structured pointer module. Implement a Haiku-tier upstream version monitor skill for the three frozen package versions. Establish explicit size governance contracts for the research module document class. All four outputs are committed to the gsd-skill-creator dev branch, closing the v1.49.x series cleanly before v1.50 opens.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation              [Sequential, Haiku]
+  +-- Manifest, schemas, content inventory, version confirmation
+
+WAVE 1A: Spec + Pointer         [Parallel Track A, Sonnet/Opus]  -+
+  +-- M01: Extract + reframe bridge spec                           |
+  +-- M02: Author pointer module                                   | Parallel
+                                                                   |
+WAVE 1B: Monitor + Governance   [Parallel Track B, Sonnet/Haiku] -+
+  +-- M03: Upstream version monitor skill + test harness
+  +-- M04: Governance doc + module audit
+
+WAVE 2: Integration             [Sequential, Opus]
+  +-- Cross-validate pointer <-> spec
+  +-- Run monitor test harness
+  +-- Review governance audit
+  +-- HITL approval (CAPCOM)
+
+WAVE 3: Publication             [Sequential, Sonnet]
+  +-- Compile PDFs, commit to dev, update index, milestone summary
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[noitemsep]
+  \item \textbf{Foundation layer} --- Mission manifest, confirmed package identities, shared TypeScript schemas
+  \item \textbf{Specification layer} --- Bridge Architecture Spec PDF (promoted from Module 05; LaTeX + PDF)
+  \item \textbf{Navigation layer} --- Pointer module replacing Module 05 in mission pack
+  \item \textbf{Sentinel layer} --- Upstream version monitor Haiku skill with test harness
+  \item \textbf{Governance layer} --- GOVERNANCE.md + module audit report
+  \item \textbf{Integration layer} --- Cross-validation, branch commits, document index update
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4.5cm}L{3.5cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & bridge-architecture-spec.pdf & Compiles; GSD spec structure present; registered in index; all Module 05 content preserved & Module 01 \\
+2 & module-05-pointer.md & 60--100 lines; path, digest, summary, reference table all present & Module 02 \\
+3 & upstream-monitor skill & Detects simulated drift; correct BLOCK/ADVISORY/LOG/CURRENT classification & Module 03 \\
+4 & GOVERNANCE.md + audit-report.md & Size contracts defined; all existing modules audited with flag status & Module 04 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Mission manifest + schema & None & Haiku & 2k \\
+Module 05 content inventory & Mission pack & Haiku & 1k \\
+Spec purpose/scope/version header & Inventory & Opus & 4k \\
+Bridge spec LaTeX assembly + compile & Module 05 content & Sonnet & 15k \\
+SHA-256 digest computation & Compiled PDF & Haiku & 0.5k \\
+Pointer module authoring & Spec path + digest & Sonnet & 3k \\
+Monitor skill (TypeScript) & Package manifest & Sonnet & 8k \\
+Monitor test harness & Monitor skill & Sonnet & 4k \\
+Governance contracts (GOVERNANCE.md) & Skill reference & Opus & 5k \\
+Module audit report & All modules & Sonnet & 6k \\
+Integration validation & All deliverables & Opus & 6k \\
+Branch commits + index update & All deliverables & Sonnet & 3k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Spec framing judgment (what belongs in a spec vs.\ survey); governance policy decisions; integration validation across all deliverables \\
+Sonnet & $\sim$60\% & Document assembly; LaTeX compilation; monitor skill implementation; pointer authoring; module audit; branch commits \\
+Haiku & $\sim$10\% & Shared schema generation; manifest scaffolding; digest computation; cron skill runtime logic \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3.5cm}L{2cm}L{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Objective} & \tableheader{Mode} & \tableheader{Primary Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 3.5k \\
+1A & Spec + Pointer & Parallel & Sonnet + Opus & 22k \\
+1B & Monitor + Governance & Parallel & Sonnet + Haiku & 18k \\
+2 & Integration & Sequential & Opus & 6k \\
+3 & Publication & Sequential & Sonnet & 6.5k \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total (estimated)}} & \textbf{56k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Confirm package identities from mission pack manifest & PLAN & Haiku & Verified package list with pinned versions \\
+Generate shared TypeScript schemas (DriftEvent, PointerDoc) & EXEC-1 & Haiku & Shared type definitions \\
+Inventory Module 05 content (line count, content categories) & SCOUT & Haiku & Content inventory table \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Spec Promotion \& Pointer (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Author spec purpose, scope, and versioning header & CRAFT-SPEC & Opus & Spec preamble sections \\
+Assemble bridge-architecture-spec.tex from Module 05 & EXEC-1 & Sonnet & .tex source file \\
+Compile bridge-architecture-spec.pdf (3 XeLaTeX passes) & EXEC-1 & Sonnet & Compiled PDF \\
+Compute SHA-256 digest of compiled PDF & EXEC-1 & Haiku & Digest string \\
+Author pointer module (60--100 lines) & EXEC-1 & Sonnet & module-05-pointer.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Monitor \& Governance (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Implement upstream monitor skill (TypeScript) & EXEC-2 & Sonnet & upstream-monitor/index.ts \\
+Implement monitor test harness with simulated drift events & EXEC-2 & Sonnet & upstream-monitor/test.ts \\
+Author GOVERNANCE.md with size contracts + markers & CRAFT-GOV & Opus & GOVERNANCE.md \\
+Audit all existing mission pack modules & EXEC-2 & Sonnet & audit-report.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Integration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Validate pointer $\leftrightarrow$ spec consistency (path, digest, ref table) & INTEG & Opus & Validation report \\
+Run monitor test harness against all four drift scenarios & VERIFY & Opus & Test results \\
+Review governance audit for completeness and accuracy & CRAFT-GOV & Opus & Reviewed and signed-off audit \\
+HITL review: human approval of all four deliverables & CAPCOM & Human & Go/no-go decision \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Commit all four deliverables to dev branch & EXEC-1 & Sonnet & Git commits with descriptive messages \\
+Update GSD ecosystem document index & EXEC-1 & Sonnet & Updated index entry for bridge spec \\
+Replace Module 05 in mission pack with pointer module & EXEC-1 & Sonnet & Updated mission pack \\
+Emit v1.49.x series close summary to LOG & LOG & Sonnet & Milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Hold Module 05 content (706 lines) as shared context anchor across all Wave 1A tasks --- all spec assembly reads from this anchor without re-fetching
+  \item Launch both Track A and Track B within the same session to exploit the 5-minute TTL window on Wave 0 foundation schemas
+  \item Monitor skill implementation is self-contained with no shared context with spec track --- launch independently within the TTL window
+  \item Integration validation (Wave 2) loads all four deliverables as a single context batch
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0: manifest + shared-schemas + content-inventory
+          |
+          +-------------------------------+
+          v                               v
+Wave 1A: spec-header                  Wave 1B: monitor-skill
+         |                                     |
+         v                                     v
+         spec-tex                         test-harness
+         |                                     |
+         v                             governance-contracts
+         spec-pdf                              |
+         |                                     v
+         v                               audit-report
+         sha256-digest
+         |
+         v
+         pointer-module
+         |
+         +-------------------------------+
+                         v
+              Wave 2: pointer<->spec validation
+                       monitor test run
+                       governance audit review
+                       HITL approval (CAPCOM)
+                         |
+                         v
+              Wave 3: dev branch commits
+                       document index update
+                       mission pack replacement
+                       milestone summary (LOG)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}C{2.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} & \tableheader{\%} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & 18\% \\
+Core functionality & 14 & Required & BLOCK & 50\% \\
+Integration & 6 & Required & BLOCK & 21\% \\
+Edge cases & 3 & Best-effort & LOG & 11\% \\
+\midrule
+\textbf{Total} & \textbf{28} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-BRANCH & Dev-only commits & All deliverables committed to dev branch only; main branch remains unchanged throughout execution \\
+SC-CONTENT & No content loss & Bridge spec contains all content from original Module 05; line count is $\geq$706; zero information dropped in promotion \\
+SC-BLOCK & Major drift halts & Monitor emits BLOCK event and execution halts on major semver delta in all simulated test cases \\
+SC-DIGEST & Pointer integrity & SHA-256 digest in pointer module matches independently computed digest of spec PDF \\
+SC-SRC & Source traceability & All version numbers and package identities are traceable to the original mission pack manifest \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Spec PDF compiles & bridge-architecture-spec.pdf produced without errors from three XeLaTeX passes \\
+CF-02 & Spec structure completeness & Doc contains all required sections: purpose, scope, version header, TypeScript interfaces, ASCII diagrams, token budget, integration contracts \\
+CF-03 & Spec content preservation & Promoted spec line count $\geq$706; all 13 original sections present \\
+CF-04 & Spec registered in index & GSD ecosystem document index updated with spec entry (title, path, version, date) \\
+CF-05 & Pointer line count & module-05-pointer.md is 60--100 lines \\
+CF-06 & Pointer required fields & Path, digest, 3--5 sentence summary, and reference table all present in pointer \\
+CF-07 & Monitor detects all drift & Skill correctly identifies all three packages as drifted in simulated test scenario \\
+CF-08 & Monitor: major severity & Major version delta (e.g., v0.62.0 $\rightarrow$ v1.0.0) returns BLOCK \\
+CF-09 & Monitor: minor severity & Minor version delta (e.g., v1.28.0 $\rightarrow$ v1.29.0) returns ADVISORY \\
+CF-10 & Monitor: patch severity & Patch version delta (e.g., v2.43.0 $\rightarrow$ v2.43.1) returns LOG \\
+CF-11 & Monitor: current case & No-drift scenario returns CURRENT; no event emitted \\
+CF-12 & Governance contracts defined & GOVERNANCE.md contains explicit line ranges for all four document classes \\
+CF-13 & Promotion markers documented & GOVERNANCE.md lists all six qualitative spec-level content markers \\
+CF-14 & Module audit complete & audit-report.md covers all mission pack modules with line count and flag status \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Pointer $\rightarrow$ spec navigation & Path in pointer resolves to spec PDF in dev branch checkout \\
+IN-02 & Digest cross-check & Digest in pointer matches live computed digest; mismatch triggers BLOCK \\
+IN-03 & Monitor $\rightarrow$ orchestrator emission & BLOCK event from monitor reaches orchestrator event stream in simulated integration test \\
+IN-04 & Governance $\rightarrow$ audit consistency & Audit report classification rules match the contracts defined in GOVERNANCE.md \\
+IN-05 & Mission pack self-containment & Mission pack with pointer is fully navigable; no undefined references after Module 05 replacement \\
+IN-06 & Cross-module version consistency & Version numbers cited in bridge spec match the versions in the upstream monitor manifest \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Bridge spec PDF compiles without errors & CF-01 & Pending \\
+2. Spec follows GSD spec structure & CF-02 & Pending \\
+3. Spec registered in document index & CF-04 & Pending \\
+4. Pointer module at 60--100 lines & CF-05 & Pending \\
+5. Pointer contains all required fields & CF-06 & Pending \\
+6. Monitor detects simulated drift & CF-07 & Pending \\
+7. Monitor classifies severity correctly & CF-08, CF-09, CF-10, CF-11 & Pending \\
+8. Governance contracts defined & CF-12, CF-13 & Pending \\
+9. Module audit complete & CF-14 & Pending \\
+10. All outputs committed to dev branch & SC-BRANCH & Pending \\
+11. No content lost in promotion & SC-CONTENT, CF-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates at all wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency graph management \\
+SCOUT & Research Agent & Module 05 content inventory; package identity confirmation from manifest \\
+EXEC-1 & Spec Executor & Bridge spec LaTeX assembly and compilation; pointer authoring; branch commits \\
+EXEC-2 & Monitor Executor & Upstream monitor implementation; test harness authoring; audit report \\
+CRAFT-SPEC & Spec Specialist & Spec document framing judgment; purpose, scope, and version header authoring \\
+CRAFT-GOV & Governance Specialist & Size contract policy design; GOVERNANCE.md authoring and audit review \\
+VERIFY & Verification & Content-loss verification; digest cross-check; monitor test result validation \\
+INTEG & Integration Agent & Pointer$\leftrightarrow$spec consistency; version number cross-module check \\
+CAPCOM & HITL Interface & Human approval at Wave 2 boundary; only channel crossing the human/machine boundary \\
+BUDGET & Resource Manager & Token budget tracking against 56k estimate; session planning \\
+LOG & Chronicle Agent & Commit messages; v1.49.x series close milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & v1.49.x-patch-module-governance \\
+Activation Profile & Squadron (12 roles) \\
+Module Count & 4 (M01: Bridge Spec, M02: Pointer, M03: Monitor, M04: Governance) \\
+Wave Count & 4 (Wave 0: Foundation; Wave 1A/B: Parallel; Wave 2: Integration; Wave 3: Publication) \\
+Parallel Tracks & 2 (Track A: Spec+Pointer / Track B: Monitor+Governance) \\
+Estimated Tokens & 56k total \\
+Estimated Sessions & 2--3 sessions \\
+Estimated Windows & 4--6 context windows \\
+Safety Gates & 5 BLOCK-level (SC-BRANCH, SC-CONTENT, SC-BLOCK, SC-DIGEST, SC-SRC) \\
+HITL Checkpoints & 1 (Wave 2 boundary, before publication) \\
+Branch Target & dev (main frozen per ecosystem policy) \\
+Series Position & Closes v1.49.x; immediately precedes v1.50 unit-circle retrospective \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textit{``The Amiga didn't achieve its reputation by cramming everything into one chip. The magic was in the boundaries.''}
+
+\medskip
+\noindent This mission draws the same boundary at the document layer. A research module that knows what it is, and a specification that knows what it is, will compose more cleanly than either alone. The version sentinel acknowledges something simpler: the ecosystem is a river, and any snapshot taken of a river is already historical. Building a lightweight watcher that reports on the gap between snapshot and present is not an admission of failure --- it is honest architecture.
+
+\medskip
+\noindent The v1.49.x series closes with four artifacts: a promoted spec, a navigation pointer, a version sentinel, and a governance contract. Small, principled, composable. The Amiga would approve.
+\end{quotebox}
+
+\end{document}
