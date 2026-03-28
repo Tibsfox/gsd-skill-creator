@@ -1,0 +1,113 @@
+{
+  "degree": 0,
+  "artist": "Quincy Jones",
+  "slug": "000-quincy-jones",
+  "genre": "Jazz/R&B/Pop/Film",
+  "energy": 2,
+  "era": "1950s-2024",
+  "location": {
+    "origin": "Chicago, IL",
+    "formative": "Seattle, WA — Central District, Garfield High School",
+    "career": "New York, NY → Los Angeles, CA"
+  },
+  "born": "1933-03-14",
+  "died": "2024-11-03",
+  "theory_nodes": [
+    {
+      "concept": "ii-V-I progression",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/ii-V-I-progression.md",
+      "examples": [
+        "Count Basie arrangements (1958-1964)",
+        "Sinatra at the Sands live album (1966)",
+        "Thriller-era harmonic language"
+      ],
+      "description": "Foundational cadential motion in Western tonal harmony. Jones built his entire arranging vocabulary on ii-V-I progressions decorated with chromatic approach chords and inner-voice leading."
+    },
+    {
+      "concept": "Tritone substitution",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/tritone-substitution.md",
+      "examples": [
+        "Sinatra arrangements — brass voicings with bII7 replacing V7",
+        "Walking bass reharmonization in Basie charts",
+        "Fly Me to the Moon harmonic decoration"
+      ],
+      "description": "Replacing a dominant seventh chord with the dominant seventh a tritone away, exploiting the shared tritone interval between the 3rd and 7th of both chords. Jones used this as a signature reharmonization technique in big-band arranging."
+    },
+    {
+      "concept": "Big band orchestration",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/orchestration/big-band-section-writing.md",
+      "examples": [
+        "Section writing: brass/reed/rhythm as architectural modules",
+        "Voicing techniques: close-position sax soli, open brass voicings",
+        "Hampton band arrangements (1951-1953)",
+        "Basie modernization charts"
+      ],
+      "description": "Treating each instrument section as a module in a system. The arrangement defines interfaces between modules. Jones produced orchestral complexity from 13-17 musicians through intelligent voicing, doubling, and dynamic orchestration — the Amiga Principle in musical form."
+    },
+    {
+      "concept": "Cross-genre production",
+      "level": "advanced",
+      "department": "creative-arts",
+      "college_path": ".college/creative-arts/production/cross-genre-synthesis.md",
+      "examples": [
+        "Off the Wall — jazz-disco fusion via Mixolydian mode and horn arrangements",
+        "Thriller — pop-R&B-rock synthesis across 9 tracks in distinct genres",
+        "Bad — R&B-hip-hop bridge with jazz-inflected production"
+      ],
+      "description": "Jones demonstrated that jazz harmony could function inside pop and R&B production without losing theoretical depth or commercial accessibility. This is architectural translation, not fusion — theory made invisible while remaining structurally essential."
+    },
+    {
+      "concept": "Film score architecture",
+      "level": "advanced",
+      "department": "creative-arts",
+      "college_path": ".college/creative-arts/film/score-architecture.md",
+      "examples": [
+        "In the Heat of the Night (1967) — leitmotif and through-composed narrative scoring",
+        "Roots (1977) — longitudinal musical history spanning centuries",
+        "The Color Purple (1985) — dramatic arc mapping"
+      ],
+      "description": "Through-composed film scoring as continuous musical narrative synchronized to dramatic arc. Leitmotif technique organizes the score as a system of relationships. Requires understanding the whole before writing any part — same architectural thinking as system design."
+    },
+    {
+      "concept": "Chromatic bass lines",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/chromatic-bass-lines.md",
+      "examples": [
+        "Billie Jean — F#m chromatic descent creating hypnotic forward momentum",
+        "Don't Stop 'Til You Get Enough — chromatic neighbor tones in bass register",
+        "Walking bass in Count Basie arrangements"
+      ],
+      "description": "Bass parts moving by half-steps through a progression, creating smooth voice-leading in the lowest register. A reharmonization technique from jazz arranging that Jones deployed in pop production contexts where the theoretical apparatus is invisible to the listener but structurally essential."
+    }
+  ],
+  "cross_references": ["GRV", "PJM", "CDS", "RBH", "DAA", "HFE", "MDB"],
+  "seattle_connection": "Garfield High School, Central District, Jackson Street jazz corridor",
+  "carry_forward": {
+    "theory_genealogy": [
+      "ii-V-I progression — first instance, foundational",
+      "Tritone substitution — first instance, advanced",
+      "Chromatic bass lines — first instance, signature technique",
+      "Cross-genre synthesis — first instance, defining methodology"
+    ],
+    "immediate_items": [
+      "Bill Frisell (degree 1) inherits: tritone substitution lineage, Central District jazz legacy, chromatic harmony vocabulary",
+      "The jazz-to-all-genres bridge Jones built should be traced forward through every subsequent artist",
+      "Jackson Street corridor context carries to all Central District degrees (0-22)"
+    ],
+    "pattern_items": [
+      "Seattle talent export pattern: local cultivation, global career — track this across all 360 degrees",
+      "Arranging-as-architecture principle: connect to Amiga Principle in every release where production methodology is discussed",
+      "Pedagogical chain: Jones learned from Jackson Street, taught through recordings — trace how each artist's learning lineage connects to institutional and informal education"
+    ]
+  },
+  "sources_count": 16,
+  "word_count_research": 2800,
+  "release_date": "2026-03-28"
+}
