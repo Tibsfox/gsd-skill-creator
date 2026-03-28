@@ -1,0 +1,1656 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{siunitx}
+
+\tcbuselibrary{skins,breakable}
+
+% ── Color Scheme: Space / Physics ──────────────────────────────────
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{E65100}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ─────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\dimexpr\textwidth-2\fboxsep\relax][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% ── Table Helpers ──────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Headers / Footers ──────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Infinite and One Construction Set}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ─────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem --- Tibsfox},
+  pdftitle={The Infinite and One Construction Set -- GSD Mission Package},
+  pdfsubject={Vision to Mission Pipeline --- 10-Layer Curriculum Architecture},
+}
+
+% ── SI unit setup ──────────────────────────────────────────────────
+\sisetup{
+  per-mode=symbol,
+  range-phrase=--,
+}
+
+\begin{document}
+
+% ──────────────────────────────────────────────────────────────────
+% TITLE PAGE
+% ──────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- EXTRA DEEP 10-LAYER}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{30}{36}\selectfont\bfseries\sffamily\textcolor{primary}{The Infinite and One\\[0.3em]Construction Set}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Spring Terminal to Hadron Collider:\\A 100-Level Engineering Curriculum}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Hardware $\rightarrow$ AI $\rightarrow$ Particle Physics $\rightarrow$ Engineering Fidelity}}
+
+\vspace{2.5cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{0.8cm}
+{\large\sffamily\textcolor{accent}{10 Layers $\cdot$ 100 Levels $\cdot$ 1 Thread}}
+
+\vspace{0.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+\begin{minipage}{0.75\textwidth}
+\centering
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (Full Crew, 20 Roles)}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Estimated: 15--18 context windows across 6--8 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Codename: CONSTRUCTION-SET-v1.0}}
+\end{minipage}
+\end{center}
+\newpage
+
+% ──────────────────────────────────────────────────────────────────
+% TABLE OF CONTENTS
+% ──────────────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ==================================================================
+%  STAGE 1 — VISION DOCUMENT
+% ==================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Infinite and One Construction Set --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Vision --- Ready for Research Phase}
+\metafield{Codename:}{CONSTRUCTION-SET-v1.0}
+\metafield{Depends On:}{GSD Skill-Creator Core, Amiga Principle Architecture, Silicon Layer Spec}
+\metafield{Context:}{10-Layer Fleet Activation, GSD BBS Educational Pack (sibling), GSD Cloud Ops Curriculum (sibling)}
+
+\subsection{Vision}
+
+There is a spring terminal on a piece of cardboard. Push the lever, insert a wire, release.
+The spring clamps down with a force of 0.5--0.8 Newton, transmitted through a brass body
+alloyed from copper (Z=29) and zinc (Z=30) --- two elements sitting seventeen positions apart
+on the periodic table. That terminal costs approximately fifteen cents. Inside the Large Hadron
+Collider at CERN, superconducting niobium-titanium magnets --- niobium at position 41, titanium
+at position 22 --- bend proton beams traveling at $0.999999991c$ around a 27-kilometer ring.
+The spring terminal and the superconducting dipole are the same thing seen at different scales:
+\textit{a connection made precise, held by a force calibrated to preserve information through a
+mechanical interface}.
+
+The Infinite and One Construction Set is a 100-level curriculum architecture that makes this
+continuity visible, walkable, and teachable. ``Infinite'' because the ladder of abstraction has
+no ceiling: every element on the periodic table is a universe of solid-state physics; every
+logic gate is a window into information theory; every loss curve is a conversation with
+probability at the edge of what hardware can compute. ``One'' because a single thread connects
+all of it: the faithful transmission of structured information through successive transformations,
+with quantifiable degradation at every step. That thread is called \textit{engineering fidelity}.
+
+The curriculum is organized as ten layers of ten levels each. Layer 1 is matter itself: the
+periodic table as engineering inventory, the spring terminal as bill of materials made tactile.
+Layer 10 is engineering fidelity as meta-principle: the calibration chain that connects a
+milliohm measurement on a brass contact to the energy scale of a Higgs boson decay. Every layer
+in between is a complete domain in its own right --- electrical signals, digital logic, computing
+architecture, software abstraction, network communication, machine intelligence, quantum mechanics,
+particle physics --- and every layer is structurally dependent on the one below it.
+
+The GSD ecosystem is the execution environment for this curriculum. The Amiga Principle sits at
+its philosophical center. An Amiga 500 with 512 KB of RAM produced graphics, audio, and
+multitasking that a contemporary machine with sixteen times the memory could not replicate.
+The reason was layered specialization: Agnus handled DMA, Denise handled video, Paula handled
+audio, the 68000 handled logic. Each chip did one thing with perfect fidelity; the system's
+emergent capability was not the sum of its clock cycles but the product of its architecture.
+At Level 100 of this construction set, a student understands exactly why that works --- and can
+apply the same principle to an AI inference pipeline, a particle detector readout chain, or a
+distributed mesh network humming in a Pacific Northwest barn.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+
+\item \textbf{The Abstraction Ladder is Invisible.} Engineering education teaches layers in
+isolation: chemistry, then circuits, then software, then systems. The connections between layers
+are implied but never taught. A physics graduate may not know why CMOS logic gates draw zero
+static current; a computer science graduate may not know what a transistor physically is. The
+resulting knowledge is brittle at every domain boundary --- and domain boundaries are precisely
+where interesting engineering happens.
+
+\item \textbf{The Jump from Hobby Electronics to Physics Research is Unmapped.} A curious
+sixteen-year-old who has mastered Ohm's Law has no charted path to quantum field theory. Between
+a blinking LED and the ATLAS detector at CERN lies decades of curriculum with no coherent
+progression. This discontinuity is artificial --- it is the product of institutional silos, not
+physical reality. The electron whose charge drives the LED is the same electron whose track is
+reconstructed inside the ATLAS silicon strip detector at 40 million events per second.
+
+\item \textbf{Engineering Fidelity is Never Taught as a First Principle.} Every level of the
+abstraction hierarchy either preserves or degrades information. A cold solder joint introduces
+resistance. A 32-bit floating-point operation loses precision. A noisy training run produces a
+miscalibrated model. A poorly terminated cable smears timing resolution in a particle detector.
+These are manifestations of a single engineering principle that no curriculum names explicitly:
+\textit{information degradation through imperfect transformation}. When you name it, you can
+measure it, minimize it, and teach it.
+
+\item \textbf{The Periodic Table is Treated as Chemistry, Not as Hardware.} The 118 elements are
+the construction set's complete inventory. Silicon (14) is the semiconductor substrate of
+civilization. Copper (29) is the conductor. Tungsten (74) is the gate metal and the filament.
+Neodymium (60) is the permanent magnet in every motor and speaker. Niobium (41) is the
+superconducting magnet that bends proton beams at CERN. Gold (79) is the corrosion-proof
+contact. Students who encounter the periodic table in a chemistry course do not learn it as the
+bill of materials for every electronic device ever built. This is a catastrophic pedagogical miss.
+
+\item \textbf{AI Hardware Abstraction Creates Dangerous Fragility.} AI practitioners use GPUs
+without understanding what a GPU is, train networks without understanding what a gradient is,
+and deploy transformers without understanding what a matrix multiplication costs in watts. This
+is not efficiency --- it is fragility. The abstraction will leak. When it does, a practitioner
+without foundational knowledge cannot diagnose the failure, cannot estimate its severity, and
+cannot propose a principled fix. The path from silicon to intelligence needs to be a continuous
+curriculum, not a series of unconnected black boxes.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One Thread, Ten Octaves:} Engineering fidelity --- the faithful preservation of information
+content through successive transformations --- is the single principle that unifies all ten layers
+of the construction set, from a spring terminal's contact resistance to a quark-gluon plasma
+reconstruction residual.
+
+\subsubsection{Domain Map: The Ten Layers}
+
+\begin{asciibox}
+LEVEL   LAYER           DOMAIN                         FIDELITY UNIT
+------  --------------  ----------------------------   ---------------------------
+ 1- 10  MATTER          Periodic Table / Materials     Resistivity, eV, bandgap
+11- 20  SIGNAL          Electrical Foundations         Ohm's Law, SNR, dB
+21- 30  LOGIC           Digital / Boolean              Bit error rate, timing slack
+31- 40  COMPUTE         Microcontrollers / CPU         Clock cycles, IPC, cache miss
+41- 50  SOFTWARE        Compilers / OS / Languages     Cyclomatic complexity, UB rate
+51- 60  NETWORK         OSI / TCP-IP / Mesh            Packet loss %, latency ms
+61- 70  INTELLIGENCE    ML / Neural Nets / GPU         Loss, accuracy, FLOP/W
+71- 80  QUANTUM         QM Foundations / Qubits        Coherence time T2, gate fidelity
+81- 90  COLLIDER        Particle Physics / LHC         Luminosity, energy resolution
+91-100  FIDELITY        Engineering Meta-Layer         Calibration chain depth, NIST link
+
+Single Binding Thread:
+  electron charge -> voltage -> bit -> instruction -> packet ->
+  gradient -> qubit -> particle track -> calibration residual ->
+  human understanding
+\end{asciibox}
+
+\subsubsection{Module Architecture (10-Module Fleet)}
+
+\begin{asciibox}
+              THE INFINITE AND ONE CONSTRUCTION SET
+                  10-Module Research Architecture
+
++--M01-MATTER---+  +--M02-SIGNAL---+  +--M03-LOGIC----+
+| Periodic Tbl  |  | Ohm / KVL     |  | Boolean /     |
+| Elements in   |  | Spring Term.  |  | CMOS / IEEE   |
+| Technology    |  | RC / 555      |  | 754 / bfloat  |
++-------+-------+  +-------+-------+  +-------+-------+
+        |                  |                  |
+        +--------+---------+------------------+
+                 |
+        +--------v--------+    +--M05-SOFTWARE--+
+        |  M04-COMPUTE    +--->| Compilers / OS |
+        | MCU / CPU / Mem |    | Rust / UB      |
+        +--------+--------+    +------+---------+
+                 |                    |
+        +--------v--------------------v---------+
+        |            M06-NETWORK                |
+        | OSI / TCP-IP / Mesh / LHC Timing Net  |
+        +--------+------------------------------+
+                 |
+        +--------v--------------------------+
+        |        M07-INTELLIGENCE           |
+        | Perceptron -> Transformer / GPU   |
+        +--------+---------+---------------+
+                 |          |
+        +--------v----+  +--v-----------+
+        | M08-QUANTUM |  | M09-COLLIDER |
+        | QM / Qubits |  | LHC / SM /   |
+        | Coherence   |  | AI in HLT    |
+        +--------+----+  +----+---------+
+                 |             |
+        +--------v-------------v--------+
+        |         M10-FIDELITY          |
+        | Calibration Chain / NIST /    |
+        | Meta-Principle Across All 10  |
+        +-------------------------------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{2.4cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Module} & \tableheader{Scope} & \tableheader{Levels} \\
+\midrule
+M01 & MATTER & Periodic table as engineering inventory; elements in technology; spring terminal anatomy & 1--10 \\
+M02 & SIGNAL & Electrical foundations; KVL/KCL; spring terminal experiment; RC circuits; 555 timer & 11--20 \\
+M03 & LOGIC & Boolean algebra; 7 gates; CMOS; binary arithmetic; IEEE 754; bfloat16 & 21--30 \\
+M04 & COMPUTE & Microcontrollers; CPU architecture; memory hierarchy; Amiga 68000; bus systems & 31--40 \\
+M05 & SOFTWARE & Compilers; operating systems; programming languages; Rust ownership; abstraction & 41--50 \\
+M06 & NETWORK & OSI model; TCP/IP; mesh networks; LHC timing network; deterministic Ethernet & 51--60 \\
+M07 & INTELLIGENCE & ML foundations; perceptron to transformer; GPU silicon; hardware-AI bridge & 61--70 \\
+M08 & QUANTUM & Wave-particle duality; Schrodinger equation; qubits; coherence; error correction & 71--80 \\
+M09 & COLLIDER & Standard Model; LHC parameters; detector readout; AI in particle physics & 81--90 \\
+M10 & FIDELITY & Engineering fidelity as universal meta-principle; calibration chain; traceability & 91--100 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  codename: CONSTRUCTION_SET_v1
+  activation_profile: fleet
+  parallel_tracks: 3
+  wave_count: 6           # W0, W1A, W1B, W1C, W2, W3
+  modules:
+    - {id: M01, name: matter,        model: sonnet, role: CRAFT-MATTER, tokens: 12000}
+    - {id: M02, name: signal,        model: sonnet, role: CRAFT-SIGNAL, tokens: 10000}
+    - {id: M03, name: logic,         model: sonnet, role: CRAFT-LOGIC,  tokens: 10000}
+    - {id: M04, name: compute,       model: sonnet, role: CRAFT-COMPUTE,tokens: 12000}
+    - {id: M05, name: software,      model: sonnet, role: CRAFT-SOFT,   tokens: 10000}
+    - {id: M06, name: network,       model: sonnet, role: CRAFT-NET,    tokens:  8000}
+    - {id: M07, name: intelligence,  model: opus,   role: CRAFT-AI,     tokens: 16000}
+    - {id: M08, name: quantum,       model: opus,   role: CRAFT-QUANT,  tokens: 14000}
+    - {id: M09, name: collider,      model: opus,   role: CRAFT-PHYS,   tokens: 16000}
+    - {id: M10, name: fidelity,      model: opus,   role: CRAFT-FIDEL,  tokens: 14000}
+  orchestrator: {model: opus, role: FLIGHT, cache_ttl: 300s}
+  schema_agent:  {model: haiku, role: HAIKU-SCAFFOLD, tokens: 6000}
+  model_split:   {opus: 0.30, sonnet: 0.60, haiku: 0.10}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item Ten research modules covering all 100 levels with explicit level-to-level transitions
+  \item Periodic table mapping: all 118 elements tabulated, 40+ with engineering applications and device examples
+  \item Level 1--20 hands-on experiment sequence: spring terminal cardboard-box progression, complete BOM
+  \item Microcontroller-to-CPU architecture progression (L31--L50) including Amiga 68000 case study
+  \item Neural network hardware pipeline: GPU silicon to training run, float32 to bfloat16 fidelity
+  \item LHC physics primer: full technical parameter set, detector readout chain, AI in High-Level Trigger
+  \item Standard Model reference: 17 fundamental particles with mass, charge, role
+  \item Engineering fidelity as cross-cutting meta-principle with measurable metrics at all ten layers
+  \item GSD skill-creator delivery architecture: each level decomposable into a skill-creator mission component
+  \item 12 success criteria, 47-test plan, full verification matrix
+\end{itemize}
+
+\subsubsection{Out of Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item Full worked curriculum materials (exercises, assessments, grading rubrics) --- v2.0
+  \item Quantum computing hardware implementation beyond conceptual primer --- v2.0
+  \item Beyond-Standard-Model theories (supersymmetry, string theory, extra dimensions) --- v3.0
+  \item Biochemical and biological abstraction layers --- separate mission
+  \item Economic and sociological analysis of engineering education equity --- separate mission
+  \item Mains-voltage (120V/230V) experiment sequences --- safety boundary, excluded permanently
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*.}]
+  \item The periodic table section maps at least 40 elements to specific engineering applications with documented device examples and primary sources.
+  \item The spring terminal experiment sequence provides a complete Level 1--20 hands-on progression: bill of materials, step-by-step procedures, and measurable outcomes per level, all at $\leq$9V.
+  \item Every layer transition (L10$\rightarrow$L11, L20$\rightarrow$L21, etc.) is documented with an explicit bridging concept showing how the lower layer enables the upper. Nine bridges total.
+  \item The CPU architecture section traces the journey from a single transistor to a full von Neumann machine --- and through the Amiga 68000 as Amiga Principle proof-of-concept --- with no unexplained jumps.
+  \item The AI/ML module traces the path from a perceptron to a transformer architecture, with hardware substrate (silicon to data center) described at each milestone.
+  \item The LHC section documents the full data acquisition chain from proton-proton collision to reconstructed physics object, including the specific role of graph neural networks in the High-Level Trigger.
+  \item Engineering fidelity metrics are defined for each of the ten layers, producing a single calibration chain from spring terminal contact resistance to LHC detector energy resolution, with NIST traceability noted.
+  \item The quantum mechanics module bridges classical probability to quantum superposition without assuming prior quantum knowledge, achieving conceptual continuity from Layer 3 (logic) to Layer 8.
+  \item All quantitative claims (physical constants, detector specs, transistor counts, training compute, GPU specs) are attributed to specific primary technical sources.
+  \item The research reference is self-contained for a reader with a high-school physics background: no undefined terms, no unexplained references, complete bibliography.
+  \item At least three explicit inter-layer dependency relationships are traced with concrete physical examples connecting non-adjacent layers (e.g., periodic table $\rightarrow$ LHC superconductor).
+  \item The curriculum architecture supports GSD skill-creator delivery: each level is decomposable into a skill-creator mission component with defined input, output, and fidelity metric.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Rel.} & \tableheader{Notes} \\
+\midrule
+GSD Skill-Creator Core & Execution & This curriculum runs as skill-creator missions; each level is a potential skill \\
+GSD Amiga Vision & Philosophy & Amiga Principle is the curriculum's central proof-of-concept \\
+The Space Between (TSB) & Foundational & Mathematical spine; fidelity as information-theoretic concept \\
+GSD Silicon Layer Spec & Sibling & Hardware substrate; companion document to Levels 31--50 \\
+GSD BBS Educational Pack & Sibling & Delivery layer; BBS-style level progression for L1--30 \\
+GSD Cloud Ops Curriculum & Sibling & Overlap at network/distributed layer (Levels 51--60) \\
+GSD Instruction Set Arch. & Sibling & CPU/ISA depth for Levels 41--50 \\
+Fox Infrastructure Group & Infra & Physical cluster for curriculum execution; mesh spec relevant to L51--60 \\
+GSD Mesh Prototype Spec & Infra & 10-node cluster as curriculum lab substrate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The title carries a double meaning, and both are deliberate. ``Infinite'' refers to the depth
+available at any point in the construction set. Pick any element on the periodic table and
+follow it: silicon at position 14 leads to semiconductor physics, to quantum mechanics, to the
+band theory of solids, to CMOS fabrication, to Moore's Law, to the GPU running the model that
+is reading this text. Every node in the construction set is a universe if you go deep enough.
+``One'' refers to the single thread that connects all of them: information, and whether it
+survives the passage from one level to the next.
+
+In the GSD ecosystem this is the space between --- the meaning that lives in the connections, not
+in the nodes. The spring terminal's spring is not interesting because it is a spring; it is
+interesting because it exerts a force that maintains electrical continuity between two conductors,
+preserving signal fidelity across a mechanical interface. The Large Hadron Collider is not
+interesting because it is large; it is interesting because it preserves the identity of a proton's
+constituent quarks across a 26.7-kilometer path bent by superconducting fields, so that when two
+protons annihilate at $\sqrt{s} = 13.6$ TeV, the resulting particle shower can be reconstructed to
+millimeter spatial precision and traced back to a quantum event that lasted $10^{-25}$ seconds.
+
+The spring and the superconducting dipole are doing the same job at different scales. This
+curriculum makes that continuity visible. It is the Amiga Principle applied to all of physics:
+architectural elegance over brute force, from the electron to the quark and back.
+
+\newpage
+
+% ==================================================================
+%  STAGE 2 — RESEARCH REFERENCE
+% ==================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Infinite and One Construction Set --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides the technical substrate for all ten curriculum modules. Each module
+section contains foundational concepts, key quantitative data, engineering parameters, and
+cross-references to adjacent modules. It is designed for skill-creator agents producing curriculum
+content at each of the 100 levels, and for human instructors preparing sessions.
+
+\textbf{Key source organizations for this research domain:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{CERN} --- LHC technical documentation, Run 3 accelerator parameters, detector papers
+  \item \textbf{NIST} --- Atomic weights, resistivity values, CODATA fundamental constants
+  \item \textbf{Particle Data Group (PDG/LBNL)} --- Standard Model particle masses and properties
+  \item \textbf{IEEE} --- Circuit and signal standards; GPU architecture; wireless protocols
+  \item \textbf{ACM} --- Computing curricula; software engineering body of knowledge
+  \item \textbf{Royal Society of Chemistry} --- Periodic table element data and applications
+  \item \textbf{MIT OpenCourseWare} --- Curriculum architecture models (6.004, 6.012, 8.05)
+  \item \textbf{arXiv.org} --- Preprint physics and ML research; GNN-for-tracking papers
+  \item \textbf{NVIDIA} --- GPU architecture white papers; CUDA programming model
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M01 --- MATTER: The Periodic Table as Engineering Inventory}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{The Construction Set's Bill of Materials}
+
+The periodic table, arranged by atomic number $Z$ from hydrogen ($Z=1$) to oganesson ($Z=118$),
+encodes the complete inventory of matter available for physical construction. Mendeleev published
+the first periodic table in 1869; the modern quantum-mechanical explanation (electron shells and
+orbital substructure) was completed in the 1920s. For an engineer, the relevant atomic properties
+are: electrical resistivity, thermal conductivity, melting point, magnetic permeability, atomic
+radius, and electronegativity (which governs alloy behavior and chemical bonding at interfaces).
+
+\textbf{Conductors --- Group 11 and neighbors:}
+Copper (Cu, $Z=29$) has resistivity $\rho = 1.68 \times 10^{-8}\ \Omega\cdot\text{m}$ at
+$20^\circ$C, making it the primary conductor in virtually all electronic wiring. Silver (Ag, $Z=47$)
+has $\rho = 1.59 \times 10^{-8}\ \Omega\cdot\text{m}$ but is economically prohibitive at scale. Gold
+(Au, $Z=79$) is used for connector contacts because its oxide is conductive --- unlike copper and
+silver, gold does not form an insulating oxide layer, maintaining fidelity at the interface.
+Aluminum (Al, $Z=13$) is used in high-voltage transmission lines for its strength-to-weight ratio
+despite $\rho = 2.82 \times 10^{-8}\ \Omega\cdot\text{m}$.
+
+\textbf{Semiconductors --- Group 14:}
+Silicon (Si, $Z=14$) is the substrate of modern computing, with bandgap $E_g = 1.12$ eV at room
+temperature. Doped with phosphorus (P, $Z=15$), it becomes n-type (extra electrons); doped with
+boron (B, $Z=5$), p-type (extra holes). Germanium (Ge, $Z=32$), bandgap $0.66$ eV, was the
+original transistor material (Shockley, Bardeen, Brattain, 1947) before silicon displaced it.
+Gallium arsenide (GaAs, compound of Ga $Z=31$ and As $Z=33$) has higher electron mobility than
+Si, enabling high-frequency RF devices and III--V solar cells. Silicon carbide (SiC, Si + C $Z=6$),
+bandgap $3.26$ eV, enables power electronics above 1 kV.
+
+\textbf{Superconductors --- the LHC connection:}
+Below a critical temperature $T_c$, certain materials exhibit zero electrical resistance.
+The LHC's 1,232 main bending dipole magnets use niobium-titanium alloy (Nb$_{0.47}$Ti$_{0.53}$),
+operating at 1.9 K in superfluid helium. Niobium ($Z=41$, $T_c = 9.25$ K) combined with titanium
+($Z=22$) forms a ductile alloy with $T_c \approx 9$ K and mechanical properties suitable for magnet
+coil winding. Each dipole carries 11,850 A producing a field of 8.33 T (Run 2) / 8.60 T (Run 3).
+This is the periodic table completing its arc: from a spring terminal's brass body (Cu + Zn) to
+a superconducting coil (Nb + Ti), the same construction set, at scales separated by 17 orders of
+magnitude in energy.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}C{0.7cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Element} & \tableheader{Z} & \tableheader{Primary Engineering Role} & \tableheader{Device Example} \\
+\midrule
+Hydrogen & 1 & Fuel cells, coolant & PEM fuel cells \\
+Carbon & 6 & Resistors, nanotubes, graphene & Carbon film resistors \\
+Boron & 5 & P-type silicon dopant & CMOS PMOS transistors \\
+Silicon & 14 & Semiconductor substrate & CPUs, DRAM, photovoltaics \\
+Phosphorus & 15 & N-type silicon dopant & CMOS NMOS transistors \\
+Aluminum & 13 & Conductor, IC interconnect & PCB traces, DRAM interconnect \\
+Copper & 29 & Primary conductor ($\rho$ = 1.68e-8) & Wire, PCB layers, motor windings \\
+Zinc & 30 & Brass alloy component & WAGO/spring terminal bodies \\
+Nickel & 28 & Alloy, corrosion barrier & Connector nickel underplate \\
+Germanium & 32 & Legacy semiconductor & First transistors (1947) \\
+Gallium & 31 & GaAs, LEDs, InGaN & RF ICs, LED phosphors \\
+Arsenic & 33 & GaAs, n-type III-V dopant & High-speed RF ICs \\
+Silver & 47 & Low-$\rho$ conductor, RFID & RFID antennas, solar busbars \\
+Indium & 49 & ITO transparent conductor & LCD/OLED displays \\
+Tin & 50 & Solder (SAC305: Sn-Ag-Cu) & PCB assembly joints \\
+Neodymium & 60 & NdFeB permanent magnets & Hard drives, motors, speakers \\
+Tantalum & 73 & Capacitor dielectric & Tantalum electrolytic caps \\
+Tungsten & 74 & Gate metal, filament, X-ray anode & IC gates, light bulbs, X-ray tubes \\
+Gold & 79 & Corrosion-proof contacts & IC bond wires, edge connector pins \\
+Niobium & 41 & Superconducting magnets & LHC dipole coils \\
+Titanium & 22 & NbTi alloy, structural aerospace & LHC coils, RF cavity support \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Spring Terminal Anatomy: A Periodic Table Case Study (Levels 1--5)}
+
+A lever-action spring terminal (WAGO 221 series or equivalent) contains: brass body
+(70\% Cu + 30\% Zn, chosen for machinability and spring-back coefficient), stainless steel
+spring (Fe + Cr + Ni: strength, corrosion resistance), and tinned copper bus bar. Clamping
+force is calibrated to 0.5--0.8 N for AWG 28 wire; contact resistance $< 0.5$ m$\Omega$.
+Voltage rating: 600 V. Current rating: 20 A. This fifteen-cent component is a precision
+fidelity instrument: it maintains $< 0.5$ m$\Omega$ contact resistance across 10,000
+insertion-removal cycles. At Level 1, a student names the elements in the terminal. At Level 5,
+the student measures contact resistance with a milliohm meter and traces the measurement to a
+NIST-calibrated resistance standard. The spring terminal is the curriculum's first calibration
+chain.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M02 --- SIGNAL: Electrical Foundations}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{The Cardboard Box Experiment (Levels 11--15)}
+
+The canonical Level 11 experiment: a 9 V battery, a 470 $\Omega$ carbon film resistor, a red LED,
+and two spring terminals on a cardboard base. Ohm's Law governs: $V = IR$. With 9 V supply and
+LED forward voltage $V_f = 1.8$ V, the resistor sees 7.2 V. Current: $I = 7.2 / 470 \approx
+15.3$ mA. Power dissipated in resistor: $P = I^2 R = 0.110$ W (well within 0.25 W rating).
+Power delivered to LED: $P = IV_f = 0.028$ W. This is engineering fidelity at its most
+elemental: the intent (``illuminate the LED'') is faithfully transmitted through the material
+stack (battery $\rightarrow$ conductor $\rightarrow$ resistor $\rightarrow$ LED) with losses
+quantified at every node.
+
+\textbf{Kirchhoff's Laws (Level 12--13):}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{KCL} (Current Law): $\sum I_{\text{in}} = \sum I_{\text{out}}$ at any node.
+    Conservation of charge --- a direct expression of $\nabla \cdot \mathbf{J} = -\partial\rho/\partial t$.
+  \item \textbf{KVL} (Voltage Law): $\sum V_k = 0$ around any closed loop. Conservation of energy.
+\end{itemize}
+These two laws are sufficient to solve any linear DC circuit. They are the signal layer's
+encoding of physical conservation laws --- the fidelity constraint at Layer 2.
+
+\subsubsection{Reactive Components and Frequency (Levels 16--19)}
+
+Capacitors ($C$, farads) store charge: $Q = CV$; impedance $Z_C = 1/(j\omega C)$. Inductors
+($L$, henrys) store magnetic flux: $V = L \cdot dI/dt$; impedance $Z_L = j\omega L$. Together
+they resonate at $f_0 = 1/(2\pi\sqrt{LC})$. The 555 timer IC (Hans Camenzind, 1971; Texas
+Instruments, 1972; still in production) uses an RC network for timing: in astable mode,
+$t_\text{high} = 0.693(R_A + R_B)C$, $t_\text{low} = 0.693 R_B C$. At Level 18, a student
+changes $R_B$ and observes a changed blink rate: the first parameterized, measurable
+software-physical loop in the curriculum.
+
+\subsubsection{Signal Integrity as Fidelity Metric (Level 20)}
+
+At high frequencies, transmission lines exhibit characteristic impedance
+$Z_0 = \sqrt{L^\prime / C^\prime}$ per unit length ($L^\prime$, $C^\prime$ are distributed
+inductance and capacitance). A 50 $\Omega$ coaxial cable must be terminated with a 50 $\Omega$
+load; mismatch produces reflections with reflection coefficient
+$\Gamma = (Z_L - Z_0)/(Z_L + Z_0)$. Open-circuit termination gives $\Gamma = +1$ (full
+positive reflection); short-circuit $\Gamma = -1$ (full negative reflection). Level 20 is the
+curriculum's first encounter with impedance mismatch as a fidelity failure --- the same principle
+that operates at the LHC, where 50 $\Omega$ coaxial signal cables connect detector front-end
+electronics to trigger boards over runs up to 100 m.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M03 --- LOGIC: Digital Foundations}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{Boolean Algebra and the Seven Gates (Levels 21--25)}
+
+George Boole (1854, \textit{An Investigation of the Laws of Thought}) formalized binary logic;
+Claude Shannon (1937, MIT master's thesis) proved equivalence to switching circuits. The seven
+fundamental gates --- AND, OR, NOT, NAND, NOR, XOR, XNOR --- and their truth tables form the
+complete vocabulary of combinational logic. NAND is functionally complete: any Boolean function
+can be expressed using only NAND gates. This is the curriculum's first encounter with minimalism
+as architectural principle: the Amiga Principle at the logic layer.
+
+\textbf{CMOS Technology (Level 25--27):}
+Complementary Metal-Oxide-Semiconductor pairs NMOS (n-channel) and PMOS (p-channel) transistors.
+A CMOS inverter draws zero static current: when input is HIGH, NMOS conducts, PMOS cuts off; when
+LOW, PMOS conducts, NMOS cuts off. Current flows only during switching transitions
+($P \propto \alpha C_{load} V_{DD}^2 f$). A 7 nm CMOS process node (2021--2025) achieves
+$\sim$100 million transistors per mm$^2$. The Apple M4 (2024) contains 28 billion transistors.
+The fidelity lesson: CMOS power consumption scales with frequency, not static state. This is why
+power management is a first-order concern in every layer from the microcontroller to the LHC.
+
+\subsubsection{Binary Arithmetic and Floating-Point Fidelity (Levels 28--30)}
+
+Two's complement signed integers: $n$-bit range is $[-2^{n-1}, 2^{n-1}-1]$. IEEE 754 float32:
+1 sign bit, 8 exponent bits, 23 mantissa bits; range $\pm 3.4 \times 10^{38}$; machine epsilon
+$\varepsilon \approx 1.19 \times 10^{-7}$ (approximately 7 significant decimal digits). IEEE 754
+float64 (double precision): 1 sign, 11 exponent, 52 mantissa; $\varepsilon \approx 2.22 \times
+10^{-16}$. Google bfloat16 (brain floating point, 2018): 1 sign, 8 exponent, 7 mantissa; same
+exponent range as float32 but $4\times$ lower memory cost. The fidelity implication: every
+floating-point operation introduces rounding error. A neural network with 100 layers of float32
+matrix multiplications can accumulate gradient errors that exceed the signal. bfloat16 was
+designed specifically for AI training: preserve exponent range (critical for gradient magnitude
+diversity) while halving memory bandwidth. This is precision engineering at the numeric format
+layer.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M04 --- COMPUTE: Microcontrollers to CPU Architecture}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{The Microcontroller as First Complete System (Levels 31--40)}
+
+An Arduino Uno contains an ATmega328P: 8-bit AVR RISC processor, 16 MHz, 5 V; 32 KB flash
+(program storage), 2 KB SRAM, 1 KB EEPROM; 14 digital I/O pins; 6 analog inputs (10-bit ADC,
+0--5 V, 1,024 steps; LSB = 4.9 mV); 6 PWM outputs (8-bit, 490 Hz default); UART, SPI, I2C.
+At Level 31, a student blinks an LED from software (``Hello, World'' of hardware). At Level 40,
+the student reads an analog sensor, applies a calibration polynomial
+($T = a_0 + a_1 V + a_2 V^2$, coefficients from datasheet), transmits calibrated temperature
+over I2C to an OLED display. This is the curriculum's first complete fidelity loop: a physical
+measurand (temperature) converts to an electrical signal, digitizes to a 10-bit integer, processes
+through an algorithm, and expresses as a human-readable number with quantified uncertainty.
+
+\subsubsection{CPU Architecture: The Amiga Case Study (Levels 41--50)}
+
+The five-stage RISC pipeline (Hennessy and Patterson, 1990): IF (Instruction Fetch), ID
+(Instruction Decode), EX (Execute), MEM (Memory Access), WB (Write Back). With perfect pipelining,
+one instruction completes per clock cycle (CPI = 1.0). Data hazards require stalls or forwarding;
+control hazards (branches) require prediction. A modern out-of-order superscalar processor
+(AMD Zen 4, 2022) sustains $> 5$ instructions per clock (IPC) through dynamic scheduling,
+register renaming, and speculative execution.
+
+\textbf{The Amiga 68000 and the Amiga Principle:}
+The Motorola MC68000 (1979) is a 16/32-bit CISC processor (external 16-bit data bus, internal
+32-bit registers, 24-bit address bus; 16 MHz maximum in the Amiga 500). But it is not the CPU
+that makes the Amiga remarkable: it is the chipset. Agnus ($\rightarrow$ Fat Agnus $\rightarrow$
+Alice): DMA controller, chip memory arbitrator, horizontal/vertical beam position registers.
+Denise ($\rightarrow$ Lisa): bitplane display, sprite hardware, color index lookup. Paula: 4-channel
+PCM audio DMA, 1-bit serial I/O, disk DMA. The 68000 is freed from all I/O overhead, handling
+only application logic. Result: a 7.16 MHz Amiga 500 (1987, \$595) produced 4096-color HAM
+graphics and hardware-mixed 4-channel audio simultaneously, while an IBM AT at 16 MHz with EGA
+(64 colors) could not approach it. The lesson for every layer above: clock speed is not fidelity.
+Architectural leverage is fidelity.
+
+\subsubsection{Memory Hierarchy (Level 48--50)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.3cm}L{2cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Level} & \tableheader{Technology} & \tableheader{Latency (2025)} & \tableheader{Capacity (typical)} \\
+\midrule
+L1 Cache & SRAM & 1--4 cycles & 32--64 KB per core \\
+L2 Cache & SRAM & 4--14 cycles & 256 KB -- 1 MB \\
+L3 Cache & SRAM & 20--60 cycles & 8--128 MB shared \\
+Main RAM & DRAM & 60--100 ns & 16--256 GB DDR5 \\
+NVMe SSD & NAND Flash & 50--100 $\mu$s & 1--8 TB \\
+HDD & Magnetic & 5--15 ms & 4--20 TB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Each level in the memory hierarchy is a fidelity trade-off: lower latency costs more money and
+power per bit. Cache miss rate is the fidelity metric: the fraction of accesses that must proceed
+to a slower tier.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M05 --- SOFTWARE: Abstraction Layers}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{Compiler Pipeline and Undefined Behavior (Levels 41--47)}
+
+A C compiler (clang/LLVM) performs: lexical analysis $\rightarrow$ parsing (AST) $\rightarrow$ 
+semantic analysis $\rightarrow$ IR generation (LLVM IR) $\rightarrow$ optimization passes
+(inlining, vectorization, constant folding, dead code elimination) $\rightarrow$ code generation
+$\rightarrow$ linking. Optimization passes exploit the C standard's Undefined Behavior (UB) rules:
+signed integer overflow is UB; the compiler may assume it does not occur and optimize accordingly,
+producing programs that are correct in testing and incorrect in production. This is the software
+layer's fidelity failure mode: the contract between programmer intent and machine execution is
+silently violated when UB is present. Measuring UB density (e.g., via UBSan instrumentation) is
+the software layer's fidelity metric.
+
+\subsubsection{Operating Systems as Isolation Machines (Levels 48--52)}
+
+A kernel's primary function is to multiplex hardware resources across processes while enforcing
+memory isolation. Virtual memory maps every process's address space to physical pages; the MMU
+(Memory Management Unit) in the CPU performs this translation on every load/store, with a
+Translation Lookaside Buffer (TLB) caching recent translations ($\sim$1--4 cycle hit,
+$\sim$50--100 cycle miss). Linux runs on a Raspberry Pi 4 (Cortex-A72, 1.8 GHz, 4 GB LPDDR4)
+and on an AMD EPYC 9654 (96 cores, 2 TB RAM) with the same POSIX interface. The fidelity of the
+OS abstraction is measured by the ratio of application cycles to total cycles (eliminating
+overhead from context switches, system calls, and kernel interrupts).
+
+\subsubsection{Rust and Structural Memory Safety (Levels 53--55)}
+
+Rust's ownership and borrow-checker system enforces memory safety at compile time: no
+use-after-free, no double-free, no null pointer dereference, no data races --- all provable
+without garbage collection, without runtime overhead. The GSD skill-creator uses Rust for its
+performance-critical components. This is the software layer's instance of the curriculum's deepest
+principle: \textit{safety by structure, not by policy}. A program that cannot compile an unsafe
+memory access is architecturally precluded from that failure mode. Engineering fidelity made
+structural.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M06 --- NETWORK: Communications Architecture}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{The OSI Model as a Fidelity Stack (Levels 51--58)}
+
+The seven-layer OSI model is the clearest expression of the curriculum's layered fidelity concept
+outside of physics itself:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{2.4cm}XL{2.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{L} & \tableheader{Layer} & \tableheader{Fidelity Function} & \tableheader{Protocol Examples} \\
+\midrule
+7 & Application & End-to-end semantic fidelity & HTTP/3, DNS, MQTT, gRPC \\
+6 & Presentation & Data format translation & TLS 1.3, Protocol Buffers \\
+5 & Session & Connection state management & WebSockets, RPC sessions \\
+4 & Transport & Reliable delivery guarantee & TCP, UDP, QUIC \\
+3 & Network & Addressing and routing & IPv4/6, ICMP, BGP \\
+2 & Data Link & Frame-level error detection & Ethernet, 802.11 WiFi \\
+1 & Physical & Signal-level fidelity & Copper, fibre, RF, light \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Each layer receives imperfect fidelity from below and presents improved fidelity above. The
+Physical layer deals with attenuation and thermal noise; the Data Link layer adds CRC-32 error
+detection (Ethernet: Hamming distance 4, detects all 1-, 2-, 3-bit errors in a frame); the
+Transport layer adds retransmission, congestion control, and flow control (TCP). This is the
+network layer's encoding of the curriculum's central principle: add fidelity at each level by
+engineering the failure modes of the level below.
+
+\subsubsection{Mesh Networks and the LHC Timing Network (Levels 58--60)}
+
+The GSD mesh cluster (10-node, Agnus/Denise/Paula/68000 node types) uses a mesh topology for
+link redundancy. The LHC's accelerator control and timing network provides the extreme-end
+comparison: 600,000 accelerator control channels are synchronized using IEEE 802.1Qbv
+Time-Sensitive Networking (TSN) to sub-microsecond timing. The Timing, Trigger, and Control (TTC)
+system distributes a 40.079 MHz clock derived from the LHC RF system to all detector front-end
+electronics, achieving $< 1$ ns timing resolution across 27 km. This is network fidelity at its
+most demanding: a single missed clock edge corrupts an event timestamp, breaking the causal chain
+from collision to physics result.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M07 --- INTELLIGENCE: AI and Machine Learning}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{The Hardware-AI Bridge: Perceptron to Transformer (Levels 61--70)}
+
+Frank Rosenblatt's perceptron (1958) computes $\hat{y} = \text{sgn}(\mathbf{w} \cdot \mathbf{x} + b)$
+with update rule $\mathbf{w} \leftarrow \mathbf{w} + \eta(y - \hat{y})\mathbf{x}$. This is
+computable on any CPU. A 2024-era transformer (Llama 3.1 405B: 405 billion parameters) requires
+approximately $6 \times 10^{24}$ FLOPs to train once. The hardware substrate determines what is
+\textit{possible} at each era:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Level} & \tableheader{Architecture} & \tableheader{Hardware Substrate} & \tableheader{Fidelity Metric} \\
+\midrule
+L61 & Perceptron & Any CPU / Arduino Uno & Binary accuracy \\
+L63 & MLP (3-layer) & Desktop CPU, numpy & MSE / cross-entropy \\
+L65 & CNN (ResNet-18) & Raspberry Pi + USB GPU & Top-1 accuracy \\
+L67 & RNN / LSTM & Single GPU (RTX 3080) & Perplexity \\
+L69 & Transformer (GPT-2) & 1--4 GPU workstation & BLEU / perplexity \\
+L70 & Large LLM (70B+) & GPU cluster / TPU pod & Benchmark suites \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{GPU Architecture: The AI Spring Terminal (Level 67--70)}
+
+An NVIDIA RTX 5090 (2025) contains 21,760 CUDA cores, 680 4th-generation Tensor Cores,
+32 GB GDDR7 at 1.79 TB/s bandwidth. FP32 peak: 109.8 TFLOPS; bfloat16 Tensor Core peak:
+$\approx$1,740 TFLOPS. A matrix multiplication of two $4096 \times 4096$ matrices requires
+$2 \times 4096^3 = 1.37 \times 10^{11}$ FLOPs: completed in $\approx$0.8 ms on an RTX 5090
+Tensor Core, versus $\sim$137 s on a single-threaded CPU core at 1 GFLOPS. The GPU is the
+spring terminal of AI: a specialized connector between the mathematical abstraction of a neural
+network (floating-point matrix operations) and the physical silicon that executes it.
+
+\subsubsection{Neural Network Fidelity: Loss as Engineering Signal (Level 64--66)}
+
+The loss function is the fidelity metric of a neural network. Cross-entropy loss:
+$\mathcal{L} = -\sum_i y_i \log \hat{y}_i$. Gradient descent: $\mathbf{w} \leftarrow \mathbf{w}
+- \eta \nabla_\mathbf{w}\mathcal{L}$. Gradient vanishing in deep networks (gradients shrink
+exponentially with depth via chain rule) is an engineering fidelity failure: the training signal
+does not propagate faithfully through 100+ layers. Solutions are fidelity engineering: residual
+connections (He et al., ResNet 2016) provide identity bypass paths; layer normalization
+(transformers) re-centers gradient distributions; He/Glorot initialization sets initial weight
+scales so that activation variance is preserved forward and gradient variance is preserved
+backward. These are not tricks --- they are fidelity engineering at the machine-learning layer,
+applying the same principle as impedance matching at the signal layer.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M08 --- QUANTUM: Foundations of Quantum Mechanics}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{Wave-Particle Duality as the Ultimate Fidelity Problem (Levels 71--75)}
+
+The double-slit experiment (Jönsson, 1961 for electrons; Arndt et al., 1999 for $C_{60}$
+fullerenes) demonstrates that a single particle produces an interference pattern --- implying
+it traverses both paths simultaneously. When a detector is placed at either slit, the pattern
+disappears: measurement collapses the quantum state. This is the deepest statement of the
+fidelity problem in all of physics: at the quantum layer, \textit{observation changes the
+observed}. Classical fidelity --- transmit without altering --- is physically impossible at
+this scale. Information and measurement are entangled; you cannot extract information without
+disturbing the system.
+
+\textbf{The Schr\"{o}dinger Equation:}
+\[i\hbar \frac{\partial \psi}{\partial t} = \hat{H}\psi\]
+where $\psi(\mathbf{r},t)$ is the complex-valued wave function, $\hbar = 1.055 \times 10^{-34}$
+J$\cdot$s is the reduced Planck constant (NIST CODATA 2018), and $\hat{H}$ is the Hamiltonian
+operator (total energy). The probability density of finding the particle at $\mathbf{r}$ is
+$|\psi(\mathbf{r},t)|^2$.
+
+\subsubsection{Qubits and Quantum Coherence (Levels 76--80)}
+
+A classical bit is in state $\{0,1\}$. A qubit is in superposition: $|\psi\rangle = \alpha|0\rangle
++ \beta|1\rangle$ where $|\alpha|^2 + |\beta|^2 = 1$ (Born rule). Two qubits can be entangled:
+$|\Phi^+\rangle = (|00\rangle + |11\rangle)/\sqrt{2}$; measuring one qubit instantly determines
+the other's state regardless of spatial separation (Bell, 1964; Aspect et al., 1982, 2022 Nobel Prize).
+
+\textbf{Coherence time $T_2$} is the fidelity metric of a quantum processor: the duration over
+which a qubit maintains phase coherence before coupling to the environment (decoherence) destroys
+the superposition. Recent hardware:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}XC{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{System} & \tableheader{Qubits} & \tableheader{Year} & \tableheader{Technology} & \tableheader{$T_2$ ($\mu$s)} \\
+\midrule
+IBM Falcon r4 & 27 & 2021 & Superconducting & $\sim$100 \\
+IBM Eagle & 127 & 2021 & Superconducting & $\sim$100 \\
+IBM Heron r2 & 133 & 2024 & Superconducting & $\sim$150 \\
+Google Willow & 105 & 2024 & Superconducting & $\sim$100 \\
+IonQ Forte & 36 & 2024 & Trapped ion & $> 10^6$ \\
+Quantinuum H2 & 56 & 2024 & Trapped ion & $> 10^6$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Google Willow (2024) demonstrated below-threshold quantum error correction: adding qubits
+\textit{reduces} logical error rate, a prerequisite for fault-tolerant quantum computing. The
+analogy to Layer 2: just as ECC DRAM corrects single-bit errors by adding redundant bits, quantum
+error correction corrects qubit errors by encoding one logical qubit in many physical qubits.
+Fidelity through redundancy, at the quantum layer.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M09 --- COLLIDER: Particle Physics and the LHC}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{The Standard Model: The Periodic Table's Successor (Levels 81--85)}
+
+The Standard Model of particle physics, completed $\sim$1973 and confirmed through 2012 (Higgs
+boson discovery), classifies all known fundamental particles and their interactions. It is the
+periodic table's successor: the elements are not the fundamental building blocks --- their nuclei
+are, and those nuclei are composed of quarks. Quarks carry fractional charge ($\pm\frac{1}{3}$
+and $\pm\frac{2}{3}$ of the elementary charge $e$). They are confined within hadrons by the strong
+force (QCD, quantum chromodynamics), mediated by eight massless gluons.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.2cm}L{2.8cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Particle} & \tableheader{Mass (MeV/$c^2$)} & \tableheader{Role} & \tableheader{Charge} \\
+\midrule
+Quark & Up (u) & 2.2 & Proton/neutron constituent & $+2/3$ \\
+Quark & Down (d) & 4.7 & Proton/neutron constituent & $-1/3$ \\
+Quark & Strange (s) & 96 & Kaon constituent & $-1/3$ \\
+Quark & Charm (c) & 1,270 & D meson constituent & $+2/3$ \\
+Quark & Bottom (b) & 4,180 & B meson, LHCb studies & $-1/3$ \\
+Quark & Top (t) & 172,690 & Heaviest SM particle & $+2/3$ \\
+Lepton & Electron ($e$) & 0.511 & Atomic structure, signals & $-1$ \\
+Lepton & Muon ($\mu$) & 105.7 & Penetrating decay product & $-1$ \\
+Lepton & Tau ($\tau$) & 1,777 & Heavy lepton & $-1$ \\
+Lepton & $\nu_e$, $\nu_\mu$, $\nu_\tau$ & $< 2 \times 10^{-3}$ & Weak interaction & 0 \\
+Boson & Photon ($\gamma$) & 0 & EM force carrier & 0 \\
+Boson & W$^\pm$ & 80,369 & Weak force carrier (CC) & $\pm 1$ \\
+Boson & Z$^0$ & 91,188 & Weak force carrier (NC) & 0 \\
+Boson & Gluon ($g$) & 0 & Strong force carrier, 8 types & 0 \\
+Boson & Higgs ($H^0$) & 125,100 & Mass generation (BEH mech.) & 0 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: Particle Data Group, Review of Particle Physics (2024), Physical Review D 110, 030001.}
+
+\subsubsection{LHC: Engineering Parameters (Levels 86--90)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value (Run 3, 2022--2025)} \\
+\midrule
+Circumference & 26,658.883 m \\
+Depth below surface & 45--175 m \\
+Beam energy (Run 3) & 6.8 TeV per beam \\
+Center-of-mass energy & $\sqrt{s} = 13.6$ TeV \\
+Design maximum $\sqrt{s}$ & 14 TeV \\
+Main dipole magnets & 1,232 (NbTi superconducting) \\
+Dipole magnetic field & 8.60 T (Run 3) \\
+Dipole operating temperature & 1.9 K (superfluid He-II) \\
+Dipole operating current & 11,850 A \\
+Bunch spacing & 25 ns (40.079 MHz crossing rate) \\
+Protons per bunch & $\sim 1.15 \times 10^{11}$ \\
+Peak luminosity (Run 3) & $2.0 \times 10^{34}$ cm$^{-2}$s$^{-1}$ \\
+Average pile-up ($\mu$) & $\sim$45 inelastic pp interactions/crossing \\
+Proton velocity & $0.999999991c$ at 6.8 TeV ($\gamma \approx 7253$) \\
+Data rate after L1 trigger & $\approx$100 kHz $\rightarrow$ 1--4 kHz to tape \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Source: CERN Document Server, LHC Machine Outreach and Technical Design Reports.}
+
+\subsubsection{Data Acquisition and AI in the High-Level Trigger (Levels 88--92)}
+
+The LHC produces 40 million bunch crossings per second. Each crossing contains $\sim$45
+inelastic collisions (pile-up). Raw ATLAS detector data rate: $\approx$60 TB/s (all subdetectors
+combined). Hardware Level-1 (L1) trigger reduces to $\sim$100 kHz in 2.5 $\mu$s. Software
+High-Level Trigger (HLT) reduces to $\sim$1--4 kHz in $\sim$200 ms per event, using a farm of
+$\sim$50,000 CPU/GPU cores.
+
+\textbf{Graph Neural Networks for track reconstruction} (Duarte et al., 2020; Caillou et al.,
+2022): Charged particles leave discrete hits in the silicon pixel and strip detectors (ATLAS inner
+detector: 86 million channels). Track reconstruction must identify which hits belong to the same
+particle and fit a helical track to the hits (in the 2 T solenoid field). Traditional Kalman filter
+approaches scale as $O(n^3)$ in hit occupancy; at Run 3 pile-up ($\sim$45), this is a 90,000-hit
+pattern recognition problem executed $\sim$100,000 times per second. GNN approach: represent each
+hit as a node (features: $r$, $\phi$, $z$, layer ID), each pair of geometrically adjacent hits as a
+directed edge, classify edges as belonging to the same track. GNN achieves tracking efficiency
+$> 99\%$ at speed compatible with HLT requirements (arXiv:2007.13681). This is AI doing the same
+job as the spring terminal: preserving fidelity across a complex interface, 100,000 times per
+second.
+
+% ─────────────────────────────────────────────────────────────────
+\subsection{M10 --- FIDELITY: Engineering Fidelity as Meta-Layer}
+% ─────────────────────────────────────────────────────────────────
+
+\subsubsection{The Calibration Chain: 17 Orders of Magnitude}
+
+Engineering fidelity is the degree to which a transformation preserves the information content
+of its input. At every layer of the construction set, fidelity can be defined, measured, and
+improved. The remarkable fact is that all ten layers share the same underlying principle ---
+and their calibration chains are physically connected through NIST traceability.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{2.8cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Layer} & \tableheader{Fidelity Metric} & \tableheader{Units} & \tableheader{Calibration Reference} \\
+\midrule
+M01 Matter & Contact resistance & m$\Omega$ & NIST SRM resistors \\
+M02 Signal & SNR, THD & dB & IEC 60268; NIST 1-$\Omega$ standard \\
+M03 Logic & Bit error rate & BER & ETSI TS 136 series \\
+M04 Compute & IPC, cache miss \% & IPC, \% & SPEC CPU 2017 benchmarks \\
+M05 Software & UB rate, cyclomatic $\sigma$ & UB/KLOC & ISO/IEC 25010 \\
+M06 Network & Packet loss, jitter & \%, ms & RFC 3393; IEEE 802.1Qbv \\
+M07 Intelligence & Cross-entropy loss & nats & MLPerf Training v4.0 \\
+M08 Quantum & Coherence $T_2$, gate fidel. & $\mu$s, \% & NIST quantum benchmarks \\
+M09 Collider & Energy res. $\sigma_E/E$ & \% & GEANT4 Monte Carlo + $Z \rightarrow ee$ \\
+M10 Meta & Calibration depth, traceability & \# standards in chain & NIST primary standards \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{NIST Traceability: The Universal Reference (Levels 95--100)}
+
+Every measurement in engineering ultimately traces to a national metrology institute primary
+standard. The spring terminal contact resistance is measured with a milliohm meter calibrated
+against a NIST-traceable resistance standard (e.g., NIST SRM 1482, 1484, 1485 for resistance
+standards traceable to the quantum Hall effect, which is reproducible to $10^{-9}$ via
+$R_K = h/e^2 = 25812.807$ $\Omega$). The ATLAS hadronic calorimeter's energy scale is calibrated
+using $Z \rightarrow ee$ events: the Z boson mass $m_Z = 91.1876 \pm 0.0021$ GeV/$c^2$ (PDG 2024)
+is known to six significant figures, providing an \textit{in situ} calibration source. The Higgs
+boson mass is then measured as $m_H = 125.20 \pm 0.11$ GeV/$c^2$ (ATLAS and CMS combined, 2023).
+
+The calibration chain from the spring terminal (15 cents, $10^{-3}$ $\Omega$ precision) to the
+Higgs mass ($125 \times 10^9$ eV, $10^{-3}$ relative precision) spans 17 orders of magnitude in
+energy scale and uses the same logical structure at every step: compare your measurement to a known
+reference, quantify the uncertainty, propagate it faithfully. This is Level 100. This is what it
+means to understand engineering fidelity.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Layer} & \tableheader{Mitigation} \\
+\midrule
+Electrical safety (mains) & M02 & All L1--20 experiments at $\leq$9 V; 120/230 V mains explicitly out of scope \\
+Radioactive element samples & M01 & Data-only coverage; no radioactive or CBRN-relevant element samples \\
+Dual-use RF power & M06 & Curriculum specifies low-power only; regulatory refs. noted \\
+AI bias and dataset fidelity & M07 & Bias framed as distributional mismatch; fidelity language used \\
+Particle accelerator access & M09 & All LHC content is observational/theoretical; no operational access implied \\
+Nuclear/weapons dual-use & M09 & Standard Model = basic science; no weapons-applicable parameters \\
+Element synthesis (superheavy) & M01 & Oganesson through Nihonium covered data-only; no synthesis details \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}[leftmargin=*]
+  \item CERN. (2022--2025). \textit{LHC Run 3 Technical Documentation and Machine Parameters}. CERN Document Server. \texttt{cds.cern.ch}
+  \item NIST. (2024). \textit{Atomic Weights and Isotopic Compositions with Relative Atomic Masses}. \texttt{physics.nist.gov/comp}
+  \item NIST. (2018). \textit{CODATA Recommended Values of Fundamental Physical Constants}. \texttt{physics.nist.gov/constants}
+  \item NIST. (2024). \textit{Standard Reference Materials Catalog --- Electrical Resistance Standards}. \texttt{nist.gov/srm}
+  \item Particle Data Group. (2024). \textit{Review of Particle Physics}. Physical Review D, 110, 030001. \texttt{pdg.lbl.gov}
+  \item IEEE Std 802.11-2020. \textit{IEEE Standard for Information Technology --- Wireless LAN MAC and PHY Specifications}. IEEE Standards Association.
+  \item IEEE Std 802.1Qbv-2015. \textit{Enhancements for Scheduled Traffic (Time-Sensitive Networking)}. IEEE Standards Association.
+  \item IEC 60268-4. \textit{Sound System Equipment --- Part 4: Microphones}. International Electrotechnical Commission.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=*]
+  \item Rosenblatt, F. (1958). The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain. \textit{Psychological Review}, 65(6), 386--408.
+  \item Shannon, C. E. (1948). A Mathematical Theory of Communication. \textit{Bell System Technical Journal}, 27(3), 379--423.
+  \item He, K., Zhang, X., Ren, S., \& Sun, J. (2016). Deep Residual Learning for Image Recognition. \textit{IEEE CVPR}. arXiv:1512.03385.
+  \item Vaswani, A. et al. (2017). Attention Is All You Need. \textit{NeurIPS 2017}. arXiv:1706.03762.
+  \item Duarte, J. et al. (2020). Graph Neural Networks for Particle Physics. \textit{Machine Learning: Science and Technology}, 1(4). arXiv:2007.13681.
+  \item Arndt, M. et al. (1999). Wave-particle duality of $C_{60}$ molecules. \textit{Nature}, 401, 680--682.
+  \item Aspect, A., Grangier, P., \& Roger, G. (1982). Experimental Realization of Einstein-Podolsky-Rosen-Bohm Gedankenexperiment. \textit{Physical Review Letters}, 49(2), 91--94.
+  \item von Neumann, J. (1945). \textit{First Draft of a Report on the EDVAC}. University of Pennsylvania Technical Report. Moore School of Electrical Engineering.
+  \item Hennessy, J. L., \& Patterson, D. A. (1990). \textit{Computer Architecture: A Quantitative Approach} (1st ed.). Morgan Kaufmann.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Curriculum Sources}
+
+\begin{itemize}[leftmargin=*]
+  \item ACM. (2023). \textit{Computer Science Curricula 2023}. Association for Computing Machinery. \texttt{cs2023.acm.org}
+  \item IEEE Computer Society. (2024). \textit{Guide to the Software Engineering Body of Knowledge (SWEBOK 4.0)}.
+  \item Royal Society of Chemistry. \textit{Periodic Table with data}. \texttt{rsc.org/periodic-table}
+  \item NVIDIA. (2025). \textit{RTX 5090 Product Brief and GPU Architecture White Paper}. \texttt{nvidia.com/rtx}
+  \item MIT OpenCourseWare. (2024). 6.004 Computation Structures; 6.012 Microelectronic Devices and Circuits; 8.05 Quantum Physics II. \texttt{ocw.mit.edu}
+  \item IBM Quantum. (2024). \textit{IBM Quantum System Two and Heron Processor Technical Specifications}. \texttt{quantum.ibm.com}
+  \item Google Quantum AI. (2024). \textit{Willow: Achieving Below-Threshold Quantum Error Correction}. \texttt{quantumai.google}
+\end{itemize}
+
+\newpage
+
+% ==================================================================
+%  STAGE 3 — MISSION PACKAGE
+% ==================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\metafield{Milestone ID:}{CONSTRUCTION-SET-v1.0}
+\metafield{Activation Profile:}{Fleet (Full Crew, 20 roles)}
+\metafield{Parallel Tracks:}{3 (Wave 1A, 1B, 1C)}
+\metafield{Wave Count:}{6 (W0, W1A, W1B, W1C, W2, W3)}
+\metafield{Model Budget:}{Opus 30\% / Sonnet 60\% / Haiku 10\%}
+\metafield{Token Budget:}{160,000 total}
+
+\subsection{Mission Objective}
+
+Produce a publication-ready 100-level engineering curriculum reference spanning ten modules from
+the periodic table of elements (M01-MATTER, Levels 1--10) through LHC particle physics
+(M09-COLLIDER, Levels 81--90) to engineering fidelity as universal meta-principle (M10-FIDELITY,
+Levels 91--100), structured for GSD skill-creator delivery. The curriculum must be self-contained
+for a high-school physics background, technically rigorous enough to support a physics PhD student,
+and architecturally decomposed so that each of the 100 levels is a potential skill-creator mission
+component with defined input, output, and fidelity metric.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+CONSTRUCTION SET v1.0 --- WAVE EXECUTION ARCHITECTURE
+
+Wave 0  [Sequential, Haiku, 6K tokens]
+  Schema definition: fidelity metrics, level taxonomy, source index, LaTeX macros
+  GATE: Schema validates against all module draft structures before Wave 1
+
+Wave 1A [Parallel Track A, Sonnet, 32K tokens]
+  M01-MATTER + M02-SIGNAL + M03-LOGIC (Levels 1--30)
+
+Wave 1B [Parallel Track B, Sonnet, 30K tokens]      } PARALLEL
+  M04-COMPUTE + M05-SOFTWARE + M06-NETWORK (L31--60)  } across 1A,
+                                                       } 1B, 1C
+Wave 1C [Parallel Track C, Opus, 60K tokens]        }
+  M07-INTELLIGENCE + M08-QUANTUM + M09-COLLIDER + M10-FIDELITY (L61--100)
+
+Wave 2  [Sequential, Opus, 20K tokens]
+  Layer bridges (9x) + unified calibration chain + Standard Model-periodic table link
+  GATE: Human review (CAPCOM) before Wave 3
+
+Wave 3  [Sequential, Sonnet, 12K tokens]
+  Source citation audit + level numbering + XeLaTeX compile (3 passes) + index
+  GATE: CAPCOM final sign-off
+  OUTPUT: D13 Full Curriculum PDF
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SL-\arabic*.}]
+  \item \textbf{Foundation Layer} (W0): Fidelity metrics schema (JSON), level taxonomy (JSON: levels 1--100 with module and prerequisite), source citation index, shared LaTeX macros.
+  \item \textbf{Foundational Physics Layer} (W1A): M01 Matter, M02 Signal, M03 Logic --- levels 1--30.
+  \item \textbf{Computing Systems Layer} (W1B): M04 Compute, M05 Software, M06 Network --- levels 31--60.
+  \item \textbf{Advanced Domains Layer} (W1C): M07 Intelligence, M08 Quantum, M09 Collider, M10 Fidelity --- levels 61--100.
+  \item \textbf{Integration Layer} (W2): Cross-module bridges, unified calibration chain, narrative synthesis.
+  \item \textbf{Publication Layer} (W3): Verification, LaTeX compilation, indexing, final PDF.
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Format} \\
+\midrule
+D1 & Shared Schema & JSON validates; all 10 modules reference it & JSON + LaTeX macros \\
+D2 & M01 MATTER & 40+ elements mapped, spring terminal BOM & PDF section + BOM table \\
+D3 & M02 SIGNAL & L11--20 experiment sequence complete & PDF section + BOM \\
+D4 & M03 LOGIC & 7 gates + CMOS + IEEE754 + bfloat16 & PDF section \\
+D5 & M04 COMPUTE & MCU to superscalar + Amiga case study & PDF section \\
+D6 & M05 SOFTWARE & Compiler pipeline + OS + Rust safety & PDF section \\
+D7 & M06 NETWORK & OSI table + mesh + LHC timing network & PDF section \\
+D8 & M07 INTELLIGENCE & Perceptron $\rightarrow$ transformer + GPU table & PDF section \\
+D9 & M08 QUANTUM & QM foundations + coherence table & PDF section \\
+D10 & M09 COLLIDER & LHC parameters + SM table + GNN HLT & PDF section \\
+D11 & M10 FIDELITY & Calibration chain table, all 10 layers & PDF section \\
+D12 & Integration & 9 layer bridges + unified chain + narrative & PDF section \\
+D13 & Full Curriculum PDF & All 100 levels indexed, compiles clean & Single XeLaTeX PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.6cm}C{1.6cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0: Schema \& Index & None & Haiku & 6,000 \\
+W1A: M01 MATTER & Schema & Sonnet & 12,000 \\
+W1A: M02 SIGNAL & M01 & Sonnet & 10,000 \\
+W1A: M03 LOGIC & M02 & Sonnet & 10,000 \\
+W1B: M04 COMPUTE & M03, Schema & Sonnet & 12,000 \\
+W1B: M05 SOFTWARE & M04 & Sonnet & 10,000 \\
+W1B: M06 NETWORK & M04, M05 & Sonnet & 8,000 \\
+W1C: M07 INTELLIGENCE & M04, M06, Schema & Opus & 16,000 \\
+W1C: M08 QUANTUM & M01, M03, Schema & Opus & 14,000 \\
+W1C: M09 COLLIDER & M07, M08, Schema & Opus & 16,000 \\
+W1C: M10 FIDELITY & All M01--M09 & Opus & 14,000 \\
+W2: Integration & All Wave 1 & Opus & 20,000 \\
+W3: Publication & Wave 2 & Sonnet & 12,000 \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total}} & \textbf{160,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}C{1.4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} & \tableheader{Tokens} \\
+\midrule
+Opus & 30\% & Cross-domain synthesis, Standard Model, QM, AI-hardware bridge, judgment-heavy integration & 48,000 \\
+Sonnet & 60\% & Document production, structured content, technical surveys, publication assembly & 96,000 \\
+Haiku & 10\% & Schema scaffolding, level taxonomy, template generation & 16,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.6cm}L{1.8cm}L{3.5cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Model} & \tableheader{Gate Condition} \\
+\midrule
+W0 & Sequential & Schema, taxonomy, index & Haiku & JSON schema validates \\
+W1A & Parallel & M01, M02, M03 & Sonnet & 3 module drafts complete \\
+W1B & Parallel & M04, M05, M06 & Sonnet & 3 module drafts complete \\
+W1C & Parallel & M07, M08, M09, M10 & Opus & 4 module drafts complete \\
+W2 & Sequential & Integration, bridges & Opus & Human review (CAPCOM) \\
+W3 & Sequential & Compile, verify, index & Sonnet & CAPCOM final sign-off \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+W0.1 Fidelity schema & JSON: \{layer, metric, unit, reference, calibration\_std\} per 10 layers & Haiku \\
+W0.2 Level taxonomy & JSON: level 1..100, module, prerequisites, fidelity\_metric & Haiku \\
+W0.3 Source index & Deduplicated bibliography seeds; DOI or URL per source & Haiku \\
+W0.4 LaTeX macros & Shared environments; fidelity table macros; layer color codes & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Wave 1A (Sonnet) --- Matter, Signal, Logic:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}XL{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+W1A.1 Element table & 40+ elements: Z, symbol, $\rho$/$E_g$/role, device example & CRAFT-MATTER \\
+W1A.2 Spring terminal & Physical analysis, element composition, BOM, contact resistance spec & CRAFT-MATTER \\
+W1A.3 L11--20 sequence & Step-by-step experiment per level, BOM, measurable outcome & CRAFT-SIGNAL \\
+W1A.4 RC/555 section & Reactive components, resonance, 555 timer in astable mode & CRAFT-SIGNAL \\
+W1A.5 Logic gates & 7 gates, truth tables, CMOS implementation, functional completeness & CRAFT-LOGIC \\
+W1A.6 Arithmetic + FP & Binary, 2's complement, IEEE 754, bfloat16, machine epsilon table & CRAFT-LOGIC \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 1B (Sonnet) --- Compute, Software, Network:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}XL{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+W1B.1 MCU curriculum & ATmega328P spec, L31--L40 experiment sequence, ADC calibration loop & CRAFT-COMPUTE \\
+W1B.2 CPU architecture & 5-stage pipeline, OoO superscalar, Amiga 68000 chipset case study & CRAFT-COMPUTE \\
+W1B.3 Memory table & L1/L2/L3/RAM/SSD/HDD latency and capacity table (2025 values) & CRAFT-COMPUTE \\
+W1B.4 Compiler pipeline & LLVM passes, UB taxonomy, Rust ownership model & CRAFT-SOFT \\
+W1B.5 OS section & Kernel, syscall, virtual memory, TLB, POSIX portability & CRAFT-SOFT \\
+W1B.6 OSI table & 7-layer fidelity analysis with protocols & CRAFT-NET \\
+W1B.7 Mesh + LHC timing & GSD mesh spec + LHC TTC synchronization comparison & CRAFT-NET \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 1C (Opus) --- Intelligence, Quantum, Collider, Fidelity:}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}XL{2.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+W1C.1 ML ladder & Perceptron to transformer: hardware substrate table per milestone & CRAFT-AI \\
+W1C.2 GPU section & RTX 5090 specs, CUDA, bfloat16 rationale, TFLOPS vs CPU & CRAFT-AI \\
+W1C.3 Fidelity-loss link & Cross-entropy, gradient vanishing, ResNet residuals as fidelity eng. & CRAFT-AI \\
+W1C.4 Double slit & Fidelity failure at quantum measurement; wave function, Born rule & CRAFT-QUANT \\
+W1C.5 Qubit coherence & $T_2$ table (6 platforms), error correction as redundancy fidelity & CRAFT-QUANT \\
+W1C.6 SM particle table & 15 particles: mass (MeV/$c^2$), charge, role, source PDG 2024 & CRAFT-PHYS \\
+W1C.7 LHC parameter table & All Run 3 parameters with CERN source attribution & CRAFT-PHYS \\
+W1C.8 GNN HLT section & Track reconstruction problem, GNN approach, efficiency metric & CRAFT-PHYS \\
+W1C.9 Calibration chain & 10-layer fidelity table + NIST traceability + spring-to-Higgs narrative & CRAFT-FIDEL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+W2.1 Layer bridges & 9 explicit transition documents (L10$\rightarrow$11 through L90$\rightarrow$91) with bridging concept & INTEG \\
+W2.2 Calibration chain & Single master table: all 10 layers, metric, unit, NIST link & INTEG \\
+W2.3 SM $\leftrightarrow$ PT link & Narrative: periodic table $\rightarrow$ Standard Model as successor construction set & Opus \\
+W2.4 HW-AI-LHC bridge & Spring terminal $\rightarrow$ GPU Tensor Core $\rightarrow$ LHC GNN trigger chain & Opus \\
+W2.5 Level index & 100-entry index: level number, module, title, fidelity metric & EXEC-2 \\
+W2.6 Human review & CAPCOM presents integrated document; Tibsfox review gate & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Agent} \\
+\midrule
+W3.1 Citation audit & SC-SRC test: all citations verified against primary sources & VERIFY \\
+W3.2 Numerical audit & SC-NUM test: all quantitative claims attributed & VERIFY \\
+W3.3 Level numbering & All 100 levels present; no gaps; all prerequisites valid & VERIFY \\
+W3.4 Safety checks & SC-EXP: all L1--20 experiments $\leq$9V; SC-DU: no dual-use content & VERIFY \\
+W3.5 XeLaTeX compile & Three-pass compile; zero errors and zero unresolved references & EXEC-1 \\
+W3.6 Final PDF & D13: publication-ready curriculum, TOC, level index & EXEC-1 \\
+W3.7 Sign-off & CAPCOM final gate; LOG records commit message & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item The shared schema (W0: 6K tokens) is sized as a 5-minute cache-warm target. All Wave 1 agents receive it at session start and exploit the 300-second TTL window. After the first module call, the schema header is cached, costing zero marginal tokens for the remaining 9 module calls within the same session.
+  \item Wave 1A, 1B, and 1C are each sized to complete within a single 200K-token context window per track (32K, 30K, 60K respectively), enabling within-session caching of prior module outputs for subsequent modules on the same track.
+  \item Wave 2 receives all 10 module outputs as a single structured document (not 10 separate files), minimizing context assembly overhead. The integration agent exploits schema consistency to navigate the full reference without reloading.
+  \item Wave 3 receives the Wave 2 integration document as its primary input; the citation audit operates on the embedded bibliography, not the full source reference, keeping context window overhead minimal.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Context Windows} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Wave 0 & 1 sequential & Haiku & 6,000 \\
+Wave 1A & 3 parallel & Sonnet & 32,000 \\
+Wave 1B & 3 parallel & Sonnet & 30,000 \\
+Wave 1C & 4 parallel & Opus & 60,000 \\
+Wave 2 & 2 sequential & Opus & 20,000 \\
+Wave 3 & 2 sequential & Sonnet & 12,000 \\
+\midrule
+\textbf{Total} & \textbf{$\sim$15 windows} & & \textbf{160,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0: Schema + Level Taxonomy + Source Index
+ |
+ +---[1A]---> M01-MATTER
+ |                 |
+ |            M02-SIGNAL  <-- M01
+ |                 |
+ |            M03-LOGIC   <-- M02
+ |                 |
+ +---[1B]---> M04-COMPUTE <-- M03, Schema
+ |                 |
+ |            M05-SOFTWARE <-- M04
+ |                 |
+ |            M06-NETWORK  <-- M04, M05
+ |                 |
+ +---[1C]---> M07-INTELLIGENCE <-- M04, M06, Schema
+ |            M08-QUANTUM      <-- M01, M03, Schema
+ |            M09-COLLIDER     <-- M07, M08, Schema
+ |            M10-FIDELITY     <-- ALL M01-M09
+ |
+W2: Integration <-- All Wave 1 outputs
+ |   (9 bridges + calibration chain + SM-PT narrative)
+ |   HUMAN GATE: Tibsfox review
+ |
+W3: Publication <-- W2 Integration
+     (Verify + Compile + Index)
+     CAPCOM GATE: Final sign-off
+     |
+     D13: The Infinite and One Construction Set
+          Full 100-Level Curriculum PDF
+\end{asciibox}
+
+\newpage
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.8cm}C{1.6cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Priority} & \tableheader{On Failure} & \tableheader{Count} \\
+\midrule
+Safety-critical & Non-negotiable accuracy and safety boundaries & Mandatory & BLOCK & 6 \\
+Core functionality & Deliverable acceptance criteria & Required & BLOCK & 24 \\
+Integration & Cross-module and cross-layer validation & Required & BLOCK & 10 \\
+Edge cases & Robustness and completeness & Best-effort & LOG & 7 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total}} & \textbf{47} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior --- BLOCK on failure} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to CERN, NIST, IEEE, PDG, ACM, peer-reviewed journals. Zero entertainment media, blogs, or unsourced claims. BLOCK. \\
+SC-NUM & Numerical attribution & Every physical constant, detector spec, transistor count, GPU spec, energy value attributed to specific primary source. BLOCK. \\
+SC-ADV & No policy advocacy & Document presents physics and engineering evidence without advocating for funding positions, educational policy, or institutional agendas. BLOCK. \\
+SC-EXP & Experiment safety & All L1--L20 hands-on experiments specified at $\leq$9 V supply. No mains-voltage experiments anywhere in scope. BLOCK. \\
+SC-DU & Dual-use check & No operational accelerator control details; Standard Model content is unambiguous basic science education; no weapons-applicable nuclear or radiological parameters. BLOCK. \\
+SC-ELE & Element safety & No radioactive, highly toxic, or CBRN-relevant element samples specified for student hands-on handling. Data-only coverage for such elements. BLOCK. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+CF-01 & Periodic table completeness & $\geq$40 elements with Z, symbol, primary engineering application, and device example. All sourced. \\
+CF-02 & L1--20 experiment sequence & Complete BOM and step-by-step procedure for each of 20 levels; measurable outcome stated per level. \\
+CF-03 & Layer transition bridges & 9 explicit bridges (L10$\rightarrow$11 through L90$\rightarrow$91) each containing a named bridging concept. \\
+CF-04 & Amiga case study present & Amiga 68000 chipset architecture documented with Agnus/Denise/Paula roles and Amiga Principle lesson. \\
+CF-05 & GPU specifications & RTX 5090 (or current-gen 2025): TFLOPS FP32, bfloat16 Tensor TFLOPS, VRAM, bandwidth cited to NVIDIA. \\
+CF-06 & LHC parameter table & All 15 listed Run 3 parameters present with CERN attribution. \\
+CF-07 & Standard Model table & $\geq$15 particles with mass (MeV/$c^2$), charge, role. All sourced to PDG 2024. \\
+CF-08 & Qubit coherence table & $T_2$ values for $\geq$4 hardware platforms with year and technology column. \\
+CF-09 & Calibration chain table & All 10 layers present with fidelity metric, unit, and named calibration standard. \\
+CF-10 & Level index & All 100 levels 1--100 present in index; no gaps; each assigned to a module. \\
+CF-11 & bfloat16 rationale & bfloat16 versus float32 comparison: exponent bits, mantissa bits, AI training rationale documented. \\
+CF-12 & GNN tracking section & Graph Neural Network for LHC track reconstruction: problem statement, approach, efficiency metric. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+IN-01 & M01 $\rightarrow$ M09 (Nb/Ti link) & Niobium and titanium in M01 element table are explicitly cross-referenced to LHC dipole magnets in M09. \\
+IN-02 & M03 $\rightarrow$ M07 (bfloat16) & bfloat16 format introduced in M03 (floating point) is cross-referenced to AI training implications in M07. \\
+IN-03 & M04 $\rightarrow$ M07 (GPU vs CPU) & CPU architecture from M04 provides the baseline comparison for GPU parallelism in M07. \\
+IN-04 & M06 $\rightarrow$ M09 (timing) & LHC TTC timing network in M09 is explicitly connected to IEEE 802.1Qbv TSN introduced in M06. \\
+IN-05 & M10 (master chain) & M10 calibration chain references all 9 prior modules; no module left without a fidelity metric entry. \\
+IN-06 & M02 $\rightarrow$ M09 (impedance) & 50 $\Omega$ impedance matching introduced in M02 (L20) explicitly connected to LHC signal cable termination in M09. \\
+IN-07 & Self-containment check & A reader with HS physics background can follow from L1 to L100 without encountering undefined terms. \\
+IN-08 & Amiga Principle thread & Amiga Principle mentioned in M04 (CRAFT-COMPUTE) is explicitly echoed in at least M07 (AI) and M09 (LHC). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1: 40+ elements with applications & CF-01, SC-SRC, SC-NUM & Pending \\
+SC-2: L1--20 experiment sequence & CF-02, SC-EXP, SC-ELE & Pending \\
+SC-3: 9 layer transition bridges & CF-03, IN-01 & Pending \\
+SC-4: CPU to Amiga to Amiga Principle & CF-04, IN-08 & Pending \\
+SC-5: Perceptron to transformer + hardware & CF-05, IN-03 & Pending \\
+SC-6: LHC DAQ chain + AI in HLT & CF-06, CF-12, IN-04 & Pending \\
+SC-7: 10-layer fidelity calibration chain & CF-09, IN-05 & Pending \\
+SC-8: QM bridge classical to quantum & CF-08, IN-02 & Pending \\
+SC-9: All quantitative claims attributed & SC-NUM, SC-SRC & Pending \\
+SC-10: Self-contained HS physics baseline & IN-07 & Pending \\
+SC-11: Three non-adjacent layer links & IN-01, IN-02, IN-06 & Pending \\
+SC-12: GSD skill-creator decomposition ready & CF-10, CF-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{3.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at wave gates; model allocation decisions \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Source gathering; CERN/NIST/PDG/IEEE evidence compilation; gap-fill searches \\
+EXEC-1 & Document Builder A & Wave 1A production; Wave 3 LaTeX compilation and index \\
+EXEC-2 & Document Builder B & Wave 1B production; Wave 2 level index assembly \\
+CRAFT-MATTER & Materials Specialist & M01: Periodic table, element applications, spring terminal anatomy \\
+CRAFT-SIGNAL & Electrical Specialist & M02: KVL/KCL, experiment sequence L11--20, RC circuits, 555 timer \\
+CRAFT-LOGIC & Digital Specialist & M03: Boolean algebra, CMOS, binary arithmetic, IEEE 754, bfloat16 \\
+CRAFT-COMPUTE & Architecture Specialist & M04: ATmega328P, CPU pipeline, Amiga 68000, memory hierarchy \\
+CRAFT-SOFT & Software Specialist & M05: LLVM pipeline, OS abstraction, Rust ownership, UB taxonomy \\
+CRAFT-NET & Network Specialist & M06: OSI model, TCP/IP, mesh topology, LHC TTC timing network \\
+CRAFT-AI & Intelligence Specialist & M07: Perceptron to transformer, GPU architecture, gradient fidelity \\
+CRAFT-QUANT & Quantum Specialist & M08: Double slit, Schr\"{o}dinger, qubit coherence, error correction \\
+CRAFT-PHYS & Collider Specialist & M09: Standard Model, LHC Run 3 parameters, GNN track reconstruction \\
+CRAFT-FIDEL & Fidelity Specialist & M10: Calibration chain, NIST traceability, spring-to-Higgs narrative \\
+VERIFY & Verification Agent & SC-SRC, SC-NUM, SC-EXP, SC-DU; all 47 tests executed \\
+INTEG & Integration Agent & Wave 2 bridge documents; cross-module consistency; unified chain \\
+CAPCOM & HITL Interface & Human-machine boundary; Wave 2 review; Wave 3 final sign-off \\
+BUDGET & Resource Manager & 160K token budget tracking; Opus/Sonnet/Haiku split enforcement \\
+SURGEON & Health Monitor & Research quality degradation detection; source drift alerts \\
+LOG & Chronicle Agent & Commit messages; wave summaries; milestone audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (Full Crew, 20 roles) \\
+Research Modules & 10 (M01--M10) \\
+Curriculum Levels & 100 (L1--L100) \\
+Parallel Tracks (Wave 1) & 3 (Wave 1A, 1B, 1C) \\
+Wave Count & 6 (W0, W1A, W1B, W1C, W2, W3) \\
+Deliverables & 13 (D1--D13) \\
+Total Token Budget & 160,000 tokens \\
+Estimated Context Windows & $\sim$15 across 6--8 sessions \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Human Review Gates & 2 (Wave 2 integration review; Wave 3 final sign-off) \\
+Safety-Critical Tests & 6 (all BLOCK on failure) \\
+Total Tests & 47 \\
+Primary Domains Covered & Matter, Signal, Logic, Compute, Software, Network, AI, Quantum, Particle Physics, Fidelity \\
+Physical Scale Range & 15 cents (spring terminal) $\rightarrow$ \$4.7B (LHC construction cost) \\
+Energy Scale Range & $10^{-3}$ $\Omega$ contact resistance $\rightarrow$ 125 GeV Higgs mass \\
+Key Source Organizations & CERN, NIST, PDG/LBNL, IEEE, ACM, RSC, MIT OCW, NVIDIA, IBM Quantum \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``A spring terminal on a piece of cardboard. A superconducting dipole at 1.9 Kelvin in a
+27-kilometer ring. Between them: the same idea, expressed at different scales --- a connection
+made precise, held by a force calibrated to preserve information across a material interface.
+The spring constant of the one and the Tesla rating of the other are measurements on the same
+calibration chain, separated by seventeen orders of magnitude in energy but united by a single
+principle: engineering fidelity. This curriculum makes that chain visible, walkable, and
+inexhaustible.''}
+
+\vspace{0.8em}
+\textit{--- The Infinite and One Construction Set, through-line}
+
+\vspace{1em}
+\textbf{For the GSD ecosystem:} Every layer of this construction set is a demonstration of the
+Amiga Principle --- that what a 7 MHz Amiga 500 achieved in 512 KB was not a miracle of raw
+power but a miracle of knowing precisely what each chip was for. Agnus, Denise, Paula, and the
+68000 each did one thing with perfect fidelity; the system's emergent capability was the product
+of their architecture, not the sum of their clock cycles. From the electron to the quark, this
+is the lesson. One thread. Ten octaves. Infinite depth.
+
+\vspace{0.8em}
+\textit{From spring terminal to Large Hadron Collider: the spaces between are where the meaning lives.}
+\end{quotebox}
+
+\end{document}
