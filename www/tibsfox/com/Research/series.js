@@ -63,6 +63,7 @@
     { id: 'GSA', name: 'GSD Alignment', path: 'GSA/index.html' },
     { id: 'GPG', name: 'GPU Ecosystem', path: 'GPG/index.html' },
     { id: 'GPO', name: 'GPU Orchestration', path: 'GPO/index.html' },
+    { id: 'GRB', name: 'GRB 230906A', path: 'GRB/index.html' },
     { id: 'GRV', name: 'Green River', path: 'GRV/index.html' },
     { id: 'GSD2', name: 'GSD-2 Arch.', path: 'GSD2/index.html' },
     { id: 'HFE', name: 'Audio Engineering', path: 'HFE/index.html' },
