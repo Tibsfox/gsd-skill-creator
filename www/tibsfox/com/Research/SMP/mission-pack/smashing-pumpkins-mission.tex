@@ -1,0 +1,1035 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% === COLOR SCHEME: Arts / Music Domain ===
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{283593}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{6A1B9A}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{E8EAF6}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% === TABLE HELPERS ===
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% === HEADERS AND FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Smashing Pumpkins}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Smashing Pumpkins -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ========================================================
+%% TITLE PAGE
+%% ========================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Smashing Pumpkins\\[0.3em]Deep Research Study}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Chicago, Illinois / Alternative Rock / 1988--Present}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Sound, Fury, and the Architecture of Infinite Sadness}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 8--12 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+%% ========================================================
+%% TABLE OF CONTENTS
+%% ========================================================
+\tableofcontents
+\newpage
+
+%% ========================================================
+%% STAGE 1 — VISION DOCUMENT
+%% ========================================================
+
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Smashing Pumpkins --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Cold-Start Research Complete --- Ready for Deep Expansion}
+\metafield{Depends On:}{None (standalone music/cultural research mission)}
+\metafield{Context:}{Arts, Music History, Cultural Studies, Production Technique}
+
+\subsection{Vision}
+
+There is a specific kind of architecture at work in the Smashing Pumpkins' best recordings --- one that would feel deeply familiar to any student of the Amiga Principle. Billy Corgan did not simply play guitar; he stacked sixty, seventy, sometimes over a hundred tracks of it, each layer a specialized execution path contributing to a composite that no single instrument could achieve alone. The result was not loudness for its own sake, but a density of intention --- the sonic equivalent of an elegantly overclocked chipset, every cycle directed.
+
+This research mission treats the Smashing Pumpkins not merely as a successful 1990s rock band, but as a case study in architectural ambition applied to popular music. From the basement rehearsals at Chicago's Metro through the cathedral-sized production of \textit{Mellon Collie and the Infinite Sadness}, to the thirty-three-track rock opera \textit{ATUM} completed in 2023, the band's trajectory describes a consistent philosophical stance: when you are making a permanent recorded representation of a song, endow it with the grandest possible vision. That is a builder's disposition, not merely an artist's.
+
+The GSD mission frames this study across five research modules that mirror the band's own architectural layers. Just as Corgan would begin with a live drum take at \textit{deafening} volume to anchor Jimmy Chamberlin's performance in real energy before erasing everything else and rebuilding the structure above it, this mission begins with the foundational layer --- Chicago origins, early formation, the underground from which everything grew --- and builds outward through the peak era, the sonic philosophy, the cultural legacy, and finally the long arc of dissolution, reinvention, and continuity that extends to the present day.
+
+The deeper question animating this study is not ``what did they sound like?'' but rather: \textit{how did a band from a Midwestern record store erect something that thirty years later still shapes the emotional vocabulary of guitar-driven music?} The answer lives, as always, in the spaces between --- between the guitar layers, between the ego and the vision, between the music that was released and the music that might have been.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The production paradox.} Corgan's multilayered studio approach produced some of the decade's most sonically rich recordings, but it also hollowed out the live band's identity --- an ongoing tension between the recorded artifact and the living ensemble that the mission must trace.
+  \item \textbf{The ego-artistry dialectic.} Corgan's singular creative control was simultaneously the band's greatest strength and the fracture point that drove off original members, created internal resentment, and ultimately ended the classic lineup. Documenting this tension without advocacy or reduction is a research challenge.
+  \item \textbf{The legacy gap.} Despite 30 million albums sold and near-universal critical recognition for the 1991--1998 run, the band's post-2000 output remains critically undercharted and fan-divided. The mission must map the full arc, not only the golden decade.
+  \item \textbf{The influence attribution problem.} The Pumpkins' sonic fingerprint is identifiable in artists from My Chemical Romance to Radiohead to the new shoegaze wave, but the causal chains are loosely documented. A rigorous influence survey is needed.
+  \item \textbf{Contextual placement within the Chicago scene.} The band emerged from --- and transcended --- a specific Midwestern music ecosystem. That origin shaped everything, yet is rarely treated with the precision it deserves.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} \textit{Layered Architectural Ambition applied to Popular Song}
+
+Five specialized research modules, each independently executable, assemble into a composite understanding that no single document could achieve. Modules share schemas and cross-reference at synthesis, producing integrated output greater than their sum --- the Amiga Principle operating in the humanities domain.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+SMASHING PUMPKINS RESEARCH DOMAIN
+===========================================
+
+  TEMPORAL AXIS
+  1988    1991    1993    1995    2000    2006    2023
+    |       |       |       |       |       |       |
+    *       *       *       *       *       *       *
+  Form.   Gish  Siamese  Mellon  Mach.  Zeitgst  ATUM
+                 Dream   Collie  Break  Reunion  Opera
+
+  GEOGRAPHIC AXIS
+  Chicago (origin) --> National (Lollapalooza) --> Global (30M albums)
+
+  THEMATIC LAYERS
+  +---------+----------+-----------+-----------+----------+
+  | Origins |   Peak   |  Sonic    | Cultural  |Reinventi-|
+  | Ascent  |  Years   |   Arch.   |  Legacy   |   on     |
+  +---------+----------+-----------+-----------+----------+
+       |          |          |           |           |
+       v          v          v           v           v
+    MODULE 1  MODULE 2   MODULE 3    MODULE 4    MODULE 5
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE DEPENDENCY GRAPH
+==========================================
+
+  M1: ORIGINS & ASCENT (1988-1993)
+      |
+      +---> M2: PEAK YEARS (1993-1998)
+      |         |
+      |         +---> M3: SONIC ARCHITECTURE (cross-cutting)
+      |         |         |
+      |         v         v
+      |     M4: CULTURAL LEGACY & INFLUENCE
+      |         |
+      v         v
+      M5: REINVENTION & CONTINUITY (1999-2026)
+
+  Cross-module integration required at Wave 2 synthesis.
+  M3 (Sonic Architecture) feeds all other modules.
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins and Ascent (1988--1993)}
+
+Formation of the classic lineup in Chicago: Corgan, Iha, Wretzky, Chamberlin. The band's emergence from the Chicago underground scene (Polish bars, small clubs, the Metro). Early singles on Limited Potential and Sub Pop. The debut album \textit{Gish} (1991), produced by Butch Vig at Smart Studios for \$20,000. The influence of The Cure, New Order, and Jane's Addiction on early sound. The post-Nirvana identity crisis and the consequent forging of \textit{Siamese Dream} (1993) as a statement of defiance and ambition --- 98\% recorded by Corgan and Chamberlin, 100+ guitar tracks, a near-breakdown in a Marietta, Georgia studio.
+
+\subsubsection{Module 2: The Peak Years (1993--1998)}
+
+The commercial and artistic summit: \textit{Siamese Dream} to \textit{Adore}. Headlining Lollapalooza 1994. The conception and execution of \textit{Mellon Collie and the Infinite Sadness} (1995) as ``The Wall for Generation X'' --- a 28-track double album described as a cycle of life and death for a 15-year-old, debuting at No.\ 1 on the Billboard 200, certified diamond (10 million US units), earning seven Grammy nominations. The firing of Jimmy Chamberlin following keyboardist Jonathan Melvoin's heroin overdose in 1996. The electronica pivot of \textit{Adore} (1998). Internal fractures, drug use, and the conditions leading to dissolution.
+
+\subsubsection{Module 3: Sonic Architecture (Cross-Cutting)}
+
+The production philosophy: multilayered guitar stacking, the live-drum-then-erase-and-rebuild methodology, the role of shoegaze (My Bloody Valentine, Ride, Slowdive) and 1970s arena rock (Queen, Bowie, Cheap Trick, ELO) in Corgan's layering vision. Key collaborators: Butch Vig (\textit{Gish}, \textit{Siamese Dream}), Flood and Alan Moulder (\textit{Mellon Collie}). The ``cybermetal'' self-description. Chamberlin's jazz-influenced drumming centered on the snare rather than the kick. The heavy-quiet dynamic borrowed from indie rock and amplified into stadium scale. The musical question: ``When you are faced with making a permanent recorded representation of a song, why not endow it with the grandest possible vision?''
+
+\subsubsection{Module 4: Cultural Legacy and Influence}
+
+The Pumpkins' role in mainstreaming alternative rock; their Lollapalooza appearances as festival-culture catalysts; MTV's 2001 acknowledgment that the band (alongside Nine Inch Nails) treated music videos as an art form during the 1990s; the band's influence on subsequent artists (My Chemical Romance, Deftones, Muse, Radiohead, Paramore, the new shoegaze wave including Wednesday, Hotline TNT, They Are Gutting a Body of Water); Chicago's music economy and the Midwestern alternative rock legacy; Gen X emotional vocabulary shaped by Corgan's confessional lyricism.
+
+\subsubsection{Module 5: Reinvention and Continuity (1999--2026)}
+
+Dissolution (2000), Corgan's solo work and Zwan. The 2006 reunion with Chamberlin for \textit{Zeitgeist}. The Teargarden by Kaleidyscope digital-release experiment (2009--2011). \textit{Oceania} (2012), \textit{Monuments to an Elegy} (2014), \textit{Shiny and Oh So Bright Vol.\ 1} (2018), \textit{CYR} (2020). The partial classic reunion (Corgan, Iha, Chamberlin). \textit{ATUM: A Rock Opera in Three Acts} (2022--2023) --- the 33-track concept album announced as a sequel to \textit{Mellon Collie} and \textit{Machina}, released across three acts, distributed via Corgan's \textit{Thirty-Three} podcast, representing the culmination of an ongoing narrative arc spanning 28 years. Chamberlin's second departure (2009), second return, and the band's current status.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# smashing-pumpkins-research-chipset.yaml
+model: smashing-pumpkins-research
+version: "1.0"
+activation: squadron
+mission_type: music_cultural_history
+sensitivity: medium  # biographical claims, controversy coverage
+
+modules:
+  - id: origins-ascent
+    era: "1988-1993"
+    key_albums: [Gish, Siamese_Dream]
+    primary_agent: CRAFT-HIST
+  - id: peak-years
+    era: "1993-1998"
+    key_albums: [Mellon_Collie, Pisces_Iscariot, Adore]
+    primary_agent: CRAFT-HIST
+  - id: sonic-architecture
+    type: cross-cutting
+    focuses: [production, multilayering, influences, technique]
+    primary_agent: CRAFT-SONIC
+  - id: cultural-legacy
+    focuses: [influence, MTV, Gen_X, subsequent_artists]
+    primary_agent: CRAFT-SONIC
+  - id: reinvention-continuity
+    era: "1999-2026"
+    key_albums: [Zeitgeist, Oceania, CYR, ATUM]
+    primary_agent: CRAFT-HIST
+
+cluster:
+  opus: 30%     # Synthesis, cultural analysis, cross-module integration
+  sonnet: 60%   # Survey compilation, discography, production docs
+  haiku: 10%    # Schemas, templates, bibliographic scaffolding
+
+wave_structure: [foundation, parallel_survey, synthesis, publication]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+  \item Full discography survey: all 12 studio albums, key B-sides and compilations
+  \item Recording and production methodology for the classic era (1991--1998)
+  \item Band formation, lineup history, key member biographies
+  \item Critical reception and commercial performance data
+  \item Cultural and genre influence mapping
+  \item Post-reunion output through \textit{ATUM} (2023)
+  \item Chicago music scene context
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}
+  \item Detailed solo projects (Zwan, Corgan solo, Iha solo) beyond contextual reference
+  \item Lyric reproduction or extended quotation (copyright boundary)
+  \item Fan community ethnography or social media analysis
+  \item Financial/contractual details beyond publicly available record sales data
+  \item Comprehensive live setlist archiving (spfc.org scope, not this mission)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Full discography documented: all 12 studio albums with release dates, production credits, chart positions, and certification status
+  \item Recording methodology for \textit{Siamese Dream} and \textit{Mellon Collie} documented with specific production techniques, equipment, and collaboration roles
+  \item Classic lineup member profiles (Corgan, Iha, Wretzky, Chamberlin) individually documented with roles and tenure
+  \item Sonic influence map traces at least eight source influences and eight influenced subsequent artists with evidence
+  \item \textit{ATUM} (2022--2023) documented as the culmination of the Machina narrative arc, with act structure, concept synopsis, and critical reception
+  \item Chicago music scene context established: specific venues, labels, and peer bands from 1988--1993
+  \item Cultural impact quantified: Grammy nominations, Billboard chart peaks, certification data, MTV recognition, Lollapalooza appearances
+  \item At least five cross-module connections explicitly traced (e.g., production philosophy in Module 3 causally linked to commercial success in Module 2)
+  \item Post-2000 output covered without privileging or dismissing relative to classic era
+  \item Every numerical claim (sales figures, chart positions, certifications) attributed to a specific source
+  \item Controversy coverage is balanced, accurate, and evidence-based without advocacy
+  \item Document is self-contained: a reader with no prior knowledge of the band can understand the full arc
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+Deep Audio Analyzer Mission & Parallel & Complementary sonic analysis tooling; audio analysis techniques applicable \\
+GSD Amiga Creative Suite Vision & Philosophical & Amiga Principle of layered specialization mirrors Pumpkins' production philosophy \\
+The Space Between (Tibsfox) & Thematic & The ``spaces between'' motif resonates with the Pumpkins' heavy/quiet dynamic architecture \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Smashing Pumpkins occupy a peculiar position in the GSD ecosystem's philosophy --- not because of who they are, but because of \textit{how they built things}. Corgan's obsessive stacking of guitar layers is the direct sonic equivalent of specialized execution paths: each track doing one thing with precision, the whole greater than the sum. The Amiga Principle did not originate in rock music, but it operates there with beautiful clarity. ``Soma'' on \textit{Siamese Dream} reportedly features so many guitar tracks that producer Butch Vig needed to draw a literal map of the song with arrows connecting each layer to its destination in the mix.
+
+The spaces between those layers --- the silence, the dynamic contrast, the moment before the wall of sound erupts --- are not empty. They are load-bearing. Every heavy-quiet shift in the Pumpkins' catalog is a lesson in information architecture: meaning does not live in the nodes, it lives in the transitions. This research mission is not just documentation of a band. It is a case study in what happens when a builder's disposition is applied to the most inefficient medium imaginable --- four human beings trying to agree on something true.
+
+%% ========================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% ========================================================
+
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Smashing Pumpkins --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings for each of the five research modules. Agents executing Wave 1 parallel tracks should ingest their designated module sections before beginning document production. Module 3 (Sonic Architecture) is cross-cutting and should be read by all agents.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item Wikipedia (The Smashing Pumpkins, discography, individual album pages) --- general reference, verify numerical claims
+  \item RIAA (Recording Industry Association of America) --- certification data
+  \item Billboard (archive) --- chart positions and sales data
+  \item Rolling Stone, Guitar World, Tape Op Magazine --- primary Corgan interviews
+  \item spfc.org --- The Smashing Pumpkins Fan Collaborative (comprehensive unofficial archive)
+  \item AllMusic / Pitchfork / NME --- critical reception and review record
+\end{itemize}
+
+\subsection{Module 1 Reference: Origins and Ascent (1988--1993)}
+
+\subsubsection{Formation and Early History}
+
+The Smashing Pumpkins were formed in Chicago in 1988 by Billy Corgan (vocals, guitar) after he returned from a failed stint in St.\ Petersburg, Florida with his gothic rock band The Marked. Working at a record store, Corgan met guitarist James Iha and the two began writing together using a drum machine, drawing on the influences of The Cure and New Order. The first live performance was on July 9, 1988, at the Polish bar Chicago 21. Bassist D'arcy Wretzky joined after a chance meeting following a Dan Reed Network show. Drummer Jimmy Chamberlin completed the lineup, bringing a jazz big-band background that would prove decisive in shaping the band's sound.
+
+The band's first recorded appearance was on the 1989 compilation \textit{Light Into Dark}, featuring Chicago alternative acts. Their first single ``I Am One'' was released in 1990 on Limited Potential. They subsequently appeared on Sub Pop with ``Tristessa'' before signing to Caroline Records.
+
+\subsubsection{Gish (1991)}
+
+\textit{Gish} was recorded with producer Butch Vig at Smart Studios in Madison, Wisconsin for \$20,000. The album fused heavy metal guitars, psychedelia, and dream pop in a manner that drew comparisons to Jane's Addiction. As with most subsequent records, Corgan played nearly all guitar and bass parts himself, creating early tension within the band but achieving the sonic consistency he sought. The album received the ``Best Local Album'' award from the Chicago Musician Awards in 1992. Key track: ``Rhinoceros'' received modern rock radio airplay.
+
+\subsubsection{Siamese Dream (1993)}
+
+Recorded in Marietta, Georgia, with Butch Vig returning as producer. The recording environment was deliberately chosen to isolate the band from Chicago distractions and to cut Chamberlin off from known drug connections. Despite the attempt at control, the sessions were marked by Chamberlin's disappearance (drug-related), severe depression in Corgan, and near-dissolution of the project. Corgan and Vig worked 14--15 hour days in a constant production battle.
+
+The album is approximately 98\% performed by Corgan and Chamberlin. Iha and Wretzky contributed minimally to the recorded tracks. ``Soma'' alone reportedly featured upwards of 100 guitar overdubs, requiring Vig to maintain a diagrammed map of the song's guitar tracks with arrows indicating each layer's channel destination.
+
+The album debuted at No.\ 10 on the Billboard 200 and achieved multi-platinum status in the United States. Key singles: ``Cherub Rock,'' ``Today,'' ``Disarm,'' ``Rocket.''
+
+\subsection{Module 2 Reference: The Peak Years (1993--1998)}
+
+\subsubsection{Lollapalooza and Commercial Expansion}
+
+Following \textit{Siamese Dream}, the band headlined Lollapalooza 1994, cementing their status as one of the definitive acts of the US alternative rock boom. The B-sides compilation \textit{Pisces Iscariot} (1994, Virgin Records) charted at No.\ 4 on the Billboard 200 --- higher than \textit{Siamese Dream} itself. The VHS release \textit{Vieuphoria} documented live performance footage. Corgan privately distributed a 5-CD box set, \textit{Mashed Potatoes}, to close friends; it contained demos and recordings from 1988--1993 and was later called ``the holy grail of Smashing Pumpkins collectibles.''
+
+\subsubsection{Mellon Collie and the Infinite Sadness (1995)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Attribute} & \tableheader{Data} \\
+\midrule
+Release date & October 23--24, 1995 (UK/US) \\
+Label & Virgin Records \\
+Producers & Billy Corgan, Flood, Alan Moulder \\
+Format & Double album; 28 tracks, 2+ hours \\
+First-week sales & 246,500 units (US) \\
+Billboard 200 debut & No.\ 1 (band's only chart-topper) \\
+RIAA certification & Diamond (10 million US units) \\
+Grammy nominations & 7 at 39th Grammy Awards \\
+Grammy wins & 1 (Best Hard Rock Performance: ``Bullet with Butterfly Wings'') \\
+Singles & ``Bullet with Butterfly Wings,'' ``1979,'' ``Zero,'' ``Tonight, Tonight,'' ``Thirty-Three'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Corgan described the album to the press as ``The Wall for Generation X.'' He wrote approximately 56 songs in 1995, from which the 28-track final selection was drawn. The sessions began at the band's Chicago rehearsal space ``Pumpkinland'' in March 1995. Flood's overriding directive was to capture the live band energy rather than the studio-constructed sound of \textit{Siamese Dream} --- this led to recording at ``deafening volumes'' with the full band playing live to push Chamberlin's drumming to its performance ceiling before rebuilding tracks. Some songs (e.g., ``Thru the Eyes of Ruby'') still featured approximately 70 guitar tracks; others used simpler double-tracking. The process ran 10+ months with 12--16 hour daily sessions.
+
+Corgan stated: ``We finally managed to manifest everything I always thought we could do.''
+
+\subsubsection{The Melvoin Incident and Chamberlin's Firing (1996)}
+
+During the \textit{Mellon Collie} tour, touring keyboardist Jonathan Melvoin (son of Wrecking Crew musician Mike Melvoin; brother of Prince associates Wendy and Susannah) died of a heroin overdose at age 34 in a New York hotel room on July 11, 1996. Chamberlin was present and was subsequently charged with drug possession. The band fired Chamberlin immediately following the incident. This represented the effective end of the classic lineup's creative partnership.
+
+\subsubsection{Adore (1998) and Dissolution}
+
+\textit{Adore} represented a radical pivot toward electronica and programmed drums, partly born of necessity following Chamberlin's firing. The album received mixed commercial reception relative to \textit{Mellon Collie}. Internal tensions, remaining drug use, and diminishing sales contributed to the band's dissolution at the end of 2000 following the two-part \textit{Machina} release.
+
+\subsection{Module 3 Reference: Sonic Architecture}
+
+\subsubsection{The Multilayering Philosophy}
+
+Corgan articulated his production philosophy directly: ``When you are faced with making a permanent recorded representation of a song, why not endow it with the grandest possible vision?'' This disposition drove a studio practice of stacking guitar overdubs to a degree unusual even in the heavily-produced 1990s rock landscape.
+
+The approach drew explicitly from:
+\begin{itemize}
+  \item \textbf{1970s arena rock:} David Bowie, Cheap Trick, Queen, Boston, Electric Light Orchestra --- artists who used the studio as a compositional instrument
+  \item \textbf{Shoegaze:} My Bloody Valentine, Ride, Slowdive --- swirling, effects-laden guitar walls; Alan Moulder (who mixed \textit{Siamese Dream}) was originally hired for his shoegaze production work
+  \item \textbf{Heavy metal:} Black Sabbath, Judas Priest, Pantera --- Corgan openly cited these as influences during a period when metal appreciation was unfashionable in alternative circles; the band was credited with ``relegitimizing'' heavy metal within alternative rock
+  \item \textbf{Post-punk and gothic rock:} Joy Division/New Order, The Cure, Bauhaus, Depeche Mode --- foundational to the Gish-era sound
+\end{itemize}
+
+\subsubsection{Jimmy Chamberlin's Role}
+
+Chamberlin's jazz big-band background produced a drumming style centered on the snare rather than the kick drum --- atypical for rock, particularly effective at cutting through dense guitar arrangements. His equipment during the \textit{Mellon Collie} era included a Yamaha Maple Custom kit with Zildjian A Custom crashes and a Ludwig Supraphonic 5.5'' x 14'' snare (audibly the lead element on ``Tonight, Tonight''). Flood's methodology of driving the band to push Chamberlin to his performance ceiling at deafening SPL before rebuilding the track above him was designed to preserve this quality.
+
+Corgan described Chamberlin as his ``only musical soulmate'' and noted: ``We played like we were on fire, we broke each other, we broke everything near us.''
+
+\subsubsection{The Heavy-Quiet Dynamic}
+
+Like many contemporary alternative bands, the Pumpkins utilized dynamic shifts between heavy and quiet passages as a structural device, amplified to an extreme that their production resources made possible. Corgan explicitly modeled this approach in part on Jane's Addiction's ``ability to shift gears'' and the Beatles' versatility. By \textit{Mellon Collie}, however, Corgan was moving away from pure technical virtuosity: ``I'm thinking much more in terms of the song than the guitar technique\ldots I want to hear power. I want the f***ing hammer of the gods.''
+
+\subsection{Module 4 Reference: Cultural Legacy and Influence}
+
+\subsubsection{Commercial Footprint}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Data (Source)} \\
+\midrule
+Worldwide album sales & 30 million (EMI, as of 2012) \\
+US album sales & 20 million (industry reports) \\
+Mellon Collie US certification & Diamond --- 10$\times$ platinum (RIAA) \\
+Pisces Iscariot peak & No.\ 4, Billboard 200 \\
+Grammy nominations & 7 nominations, 1 win (39th Grammys) \\
+MTV recognition & Credited alongside NIN for treating videos as art form (MTV 20th anniversary special, 2001) \\
+Lollapalooza appearances & Headlined 1994 \\
+Billboard No.\ 1 albums & 1 (Mellon Collie) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Influence on Subsequent Artists}
+
+Documented citations and acknowledged influences include:
+\begin{itemize}
+  \item \textbf{My Chemical Romance} --- \textit{Disarm}'s acoustic rawness as a template for emo's introspective strand
+  \item \textbf{Deftones} --- heavy-quiet dynamics and multilayered guitar texture
+  \item \textbf{Radiohead} --- grandiose album-as-statement ambition
+  \item \textbf{Muse} --- orchestral/arena rock ambition in an alternative context
+  \item \textbf{Paramore} --- pop sensibility within heavy guitar framework
+  \item \textbf{New shoegaze wave} (Wednesday, Hotline TNT, They Are Gutting a Body of Water) --- layered guitar aesthetic and dynamic architecture directly cited
+  \item \textbf{Nu-metal broadly} --- the Pumpkins' heavy-quiet shifts are widely credited as prefiguring the genre
+\end{itemize}
+
+\subsubsection{Chicago Identity and Midwestern Alternative Rock}
+
+The Pumpkins emerged from and transformed Chicago's music economy. Performing at the Metro (a key venue in their early career), they proved that world-class alternative rock could come from the Midwest rather than Seattle or New York. Their success created economic and cultural opportunities for other Midwestern acts and boosted Chicago's international profile as a music city.
+
+\subsubsection{Gen X Emotional Vocabulary}
+
+Corgan's confessional lyricism --- dealing in isolation, existential anxiety, nostalgia, and a particular flavor of alienated romanticism --- provided a language for a generation navigating post-Cold War America. Tracks like ``1979'' (nostalgia for a pre-adult world), ``Today'' (ironic euphoria masking despair), and ``Bullet with Butterfly Wings'' (the rat-in-a-cage anthem for disenfranchised youth) entered the cultural vocabulary of the 1990s in ways that persist in contemporary discourse. Streaming data suggests renewed discovery among Gen Z listeners, particularly through vinyl reissue channels.
+
+\subsection{Module 5 Reference: Reinvention and Continuity (1999--2026)}
+
+\subsubsection{Post-Dissolution Output}
+
+Following the 2000 breakup, Corgan formed Zwan (2001--2003, one album: \textit{Mary Star of the Sea}), released a solo album \textit{TheFutureEmbrace} (2005), and maintained a LiveJournal that became both confessional medium and controversy generator.
+
+\subsubsection{Reunion Era (2006--Present)}
+
+In 2006, Corgan and Chamberlin reconvened for \textit{Zeitgeist}, recorded with a cleaner, more direct metallic sound. Corgan described the album as a reset: ``the language seemed to want to steer itself towards the primal and the elementary.'' The album received a mixed reception from critics who measured it primarily against \textit{Siamese Dream} --- a comparison Corgan found reductive. Chamberlin departed again in 2009. The subsequent decade saw rotating lineups and a series of albums exploring different facets of the Pumpkins catalog's implied possibilities: the synth-folk of \textit{Oceania} (2012), the concise hard rock of \textit{Monuments to an Elegy} (2014), the doubled-down synth-pop of \textit{CYR} (2020).
+
+\subsubsection{ATUM: A Rock Opera in Three Acts (2022--2023)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Attribute} & \tableheader{Data} \\
+\midrule
+Release structure & Three acts of 11 songs each; Act 1: Nov 15 2022; Act 2: Jan 31 2023; Act 3: May 5 2023 \\
+Total tracks & 33 (plus 10 exclusive box set tracks) \\
+Total runtime & Approx.\ 2 hours 20 minutes \\
+Concept & Sequel to \textit{Mellon Collie} (1995) and \textit{Machina} (2000); continues the story of ``Shiny'' (formerly Zero/Glass) \\
+Production & Written and produced by Corgan over four years \\
+Singles & ``Beguiled,'' ``Spellbinding,'' ``Empires'' \\
+Podcast & \textit{Thirty-Three with William Patrick Corgan} --- weekly track-by-track breakdown \\
+Lineup & Corgan, Iha, Chamberlin, Schroeder (Schroeder departed Oct.\ 2023) \\
+Reception & Mixed; praised for ambition, critiqued for length and lack of ``arcane glow'' of earlier work \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{ATUM} was pronounced ``Autumn'' and represents Corgan's most explicit attempt to close the narrative loop begun with \textit{Mellon Collie}'s Zero character in 1995. The album's podcast-accompanied release format was a deliberate attempt to rebuild direct artist-to-audience communication channels, bypassing traditional critical gatekeeping. It marked the final studio appearance of guitarist Jeff Schroeder.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guideline} \\
+\midrule
+Lyric reproduction & ABSOLUTE & No lyrics reproduced verbatim; discuss themes and imagery only \\
+Biographical claims & GATE & All claims about personal conduct attributed to documented sources \\
+Controversy coverage & ANNOTATE & Cover accurately without advocacy; present evidence, not verdict \\
+Drug-related content & GATE & Report factual record without graphic detail \\
+Copyright material & ABSOLUTE & No album artwork, lyrics, or extended quotations reproduced \\
+Corgan's public statements & GATE & Quote only from documented interviews; note context of each quote \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Reference Sources}
+
+\begin{itemize}
+  \item Wikipedia: ``The Smashing Pumpkins'' (main article, accessed March 2026)
+  \item Wikipedia: ``Mellon Collie and the Infinite Sadness'' (accessed March 2026)
+  \item Wikipedia: ``Siamese Dream'' (accessed March 2026)
+  \item Wikipedia: ``Atum: A Rock Opera in Three Acts'' (accessed March 2026)
+  \item Wikipedia: ``The Smashing Pumpkins discography'' (accessed March 2026)
+\end{itemize}
+
+\subsubsection{Interviews and Production Documentation}
+
+\begin{itemize}
+  \item Tape Op Magazine: ``Smashing Pumpkins: A Studio History'' (Corgan and Vig interview; tapeop.com)
+  \item Guitar World: ``Billy Corgan on the making of Mellon Collie and the Infinite Sadness'' (September 2025)
+  \item Uncut Magazine: ``From Gish to Oceania --- Billy Corgan reveals all'' (October 2013, archived)
+  \item happymag.tv: ``Engineering the Sound: Mellon Collie and the Infinite Sadness'' (May 2021)
+  \item Rolling Stone: ``Smashing Pumpkins' Siamese Dream: 10 Things You Didn't Know'' (July 2023)
+  \item Loudwire: ``Smashing Pumpkins: Mellon Collie 30th Anniversary'' (October 2025)
+\end{itemize}
+
+\subsubsection{Cultural and Historical Sources}
+
+\begin{itemize}
+  \item RIAA: Official certification records (riaa.com) --- Diamond certification data
+  \item Billboard: Chart archive --- chart debut and peak positions
+  \item spfc.org: The Smashing Pumpkins Fan Collaborative --- comprehensive release archive
+  \item AllMusic: Artist overview and discography (allmusic.com)
+  \item ilikeillinois.com: ``From Chicago Clubs to Global Stages: The Smashing Pumpkins' Illinois Legacy'' (October 2025)
+  \item digmeoutpodcast.com: ``The Smashing Pumpkins: History of the Band'' (October 2024)
+\end{itemize}
+
+%% ========================================================
+%% STAGE 3 — MISSION PACKAGE
+%% ========================================================
+
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality deep research document covering the Smashing Pumpkins across five modules: Origins \& Ascent, Peak Years, Sonic Architecture, Cultural Legacy, and Reinvention \& Continuity. The output will meet the twelve success criteria defined in Stage 1, with every numerical claim sourced and all safety boundaries observed. The deliverable is a self-contained reference suitable for GSD ecosystem integration, educational deployment, or standalone archival use.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+SMASHING PUMPKINS DEEP RESEARCH --- WAVE ARCHITECTURE
+======================================================
+
+    +--------------------------------------------------+
+    | WAVE 0: FOUNDATION (Sequential, Haiku)           |
+    | Shared schemas, source index, data tables        |
+    +------------------+-------------------------------+
+                       |
+         +-------------+-------------+
+         |                           |
+    +----+-----+               +-----+----+
+    | WAVE 1A  |               | WAVE 1B  |
+    | M1+M2    |               | M3+M4+M5 |
+    | CRAFT-   |               | CRAFT-   |
+    | HIST     |               | SONIC    |
+    | Sonnet   |               | Sonnet+  |
+    |          |               | Opus mix |
+    +----+-----+               +-----+----+
+         |                           |
+         +-------------+-------------+
+                       |
+    +------------------+-------------------------------+
+    | WAVE 2: SYNTHESIS (Sequential, Opus)             |
+    | Cross-module integration, through-lines,         |
+    | influence mapping, legacy assessment             |
+    +------------------+-------------------------------+
+                       |
+    +------------------+-------------------------------+
+    | WAVE 3: PUBLICATION + VERIFICATION (Sonnet)      |
+    | Final document assembly, source verification,    |
+    | success criteria audit, output formatting        |
+    +--------------------------------------------------+
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer:} Shared schema definitions, source index, discography tables, certification data tables
+  \item \textbf{Survey Layer:} Module-level research documents produced by CRAFT agents in parallel
+  \item \textbf{Synthesis Layer:} Cross-module integration; influence map; cultural impact assessment; through-line narrative
+  \item \textbf{Publication Layer:} Assembled and formatted final document; bibliography; success criteria verification
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Wave} \\
+\midrule
+1 & Source Index & All sources catalogued with URL, date accessed, type, and reliability tier & 0 \\
+2 & Discography Table & All 12 studio albums with full metadata (date, label, chart, certification) & 0 \\
+3 & Module 1 Document & Origins \& Ascent (1988--1993) fully documented to spec & 1A \\
+4 & Module 2 Document & Peak Years (1993--1998) with all commercial data sourced & 1A \\
+5 & Module 3 Document & Sonic Architecture cross-cutting reference complete & 1B \\
+6 & Module 4 Document & Cultural legacy with influence map, 8+ influenced artists & 1B \\
+7 & Module 5 Document & Reinvention arc through ATUM documented & 1B \\
+8 & Synthesis Report & Cross-module connections, influence map, thematic through-line & 2 \\
+9 & Final Assembled Doc & All modules integrated, formatted, bibliography complete & 3 \\
+10 & Verification Report & All 12 success criteria checked with pass/fail status & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Source schema \& index & None & Haiku & 2K \\
+Discography tables & Source index & Haiku & 3K \\
+M1: Origins survey & Discography & Sonnet & 8K \\
+M2: Peak Years survey & Discography & Sonnet & 10K \\
+M3: Sonic Architecture & M1, M2 & Sonnet+Opus & 10K \\
+M4: Cultural Legacy & M2, M3 & Sonnet & 8K \\
+M5: Reinvention & Discography & Sonnet & 8K \\
+Cross-module synthesis & M1--M5 & Opus & 12K \\
+Final assembly & All & Sonnet & 6K \\
+Verification audit & All + criteria & Sonnet & 4K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated tokens:}} & \textbf{$\sim$71K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & 30\% & Synthesis (Wave 2): cultural legacy assessment, cross-module influence mapping, thematic through-line; any judgment-heavy cultural analysis \\
+Sonnet & 60\% & All survey documents (M1--M5); discography tables; final assembly; verification audit; bibliography formatting \\
+Haiku & 10\% & Schema definitions; source index scaffolding; template generation; Wave 0 utility tasks \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Source index, schemas, discography tables \\
+1A & Historical Survey & Parallel & Sonnet & Modules 1 + 2 documents \\
+1B & Sonic/Cultural Survey & Parallel & Sonnet+Opus & Modules 3 + 4 + 5 documents \\
+2 & Synthesis & Sequential & Opus & Cross-module integration report \\
+3 & Publication & Sequential & Sonnet & Assembled document + verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Define shared schemas & PLAN/Haiku & JSON schemas for album records, member records, chart data, influence citations \\
+Build source index & SCOUT/Haiku & Catalogued source list with access dates, types, reliability tiers \\
+Compile discography tables & EXEC-1/Haiku & 12-album table with release date, label, chart positions, certifications \\
+Define member timeline & EXEC-1/Haiku & Lineup history table: member, instrument, tenure (joined/departed) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Historical Survey (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M1: Origins \& Ascent & CRAFT-HIST/Sonnet & Chicago formation, early singles, Gish production notes, Siamese Dream crisis and construction \\
+M2: Peak Years & CRAFT-HIST/Sonnet & Mellon Collie production, Lollapalooza, Chamberlin firing, Adore pivot, dissolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Sonic and Cultural Survey (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+M3: Sonic Architecture & CRAFT-SONIC/Sonnet & Multilayering methodology, influences, production collaborators, Chamberlin drum profile \\
+M4: Cultural Legacy & CRAFT-SONIC/Opus & Influence map (8+ sources, 8+ influenced artists), commercial footprint, Gen X vocabulary \\
+M5: Reinvention & CRAFT-HIST/Sonnet & Post-2000 discography, ATUM concept analysis, current band status \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Cross-module integration & INTEG/Opus & At least 5 explicit cross-module connections documented \\
+Production $\to$ legacy trace & INTEG/Opus & Causal chain: sonic architecture choices $\to$ commercial success $\to$ influence on subsequent artists \\
+The Corgan arc & INTEG/Opus & Biographical through-line: builder's disposition, cost of control, the Chamberlin soulmate dynamic \\
+ATUM as narrative closure & INTEG/Opus & Position ATUM as culmination of the Machina/Mellon Collie conceptual arc begun in 1995 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Final document assembly & EXEC-1/Sonnet & Integrated document: all modules + synthesis + bibliography \\
+Source verification & VERIFY/Sonnet & Every numerical claim traced to source; zero entertainment-only citations \\
+Success criteria audit & VERIFY/Sonnet & 12-criterion checklist with pass/fail + evidence \\
+Sensitivity check & SURGEON/Sonnet & Lyric/copyright compliance; biographical claim review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 0 outputs (schemas, source index, discography) should be the first content in each Wave 1 context window --- maximizing cache hit rate for the shared foundation
+  \item The Stage 1 Vision Guide and Stage 2 Module Reference sections of this document should be prepended to each agent context at session start (estimated 5-minute TTL)
+  \item Module 3 (Sonic Architecture) should be cached as a shared document accessed by all Wave 1B and Wave 2 tasks
+  \item Wave 2 synthesis should run in a single session to maintain cross-module coherence without context window boundary artifacts
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input} & \tableheader{Output} & \tableheader{Total} \\
+\midrule
+Wave 0 & 5K & 5K & 10K \\
+Wave 1A & 15K & 18K & 33K \\
+Wave 1B & 20K & 20K & 40K \\
+Wave 2 & 60K & 12K & 72K \\
+Wave 3 & 75K & 10K & 85K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Estimated total:}} & \textbf{240K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH --- SMASHING PUMPKINS DEEP RESEARCH
+=====================================================
+
+  [Source Schema]----+
+  [Discography Tbl]--+--->[M1: Origins]----+
+                     |                     |
+                     +--->[M2: Peak Years]-+-->[Wave 2 Synthesis]
+                     |                     |         |
+                     +--->[M3: Sonic Arch]-+         |
+                     |         |           |         v
+                     +--->[M4: Legacy]-----+   [Final Assembled
+                     |                     |    Document]
+                     +--->[M5: Reinvention]+         |
+                                                      v
+                                              [Verification Report]
+
+  LEGEND:
+  [ ] = deliverable   ----> = dependency
+  All Wave 1 tasks depend on Wave 0. Wave 2 depends on all Wave 1.
+  Wave 3 depends on Wave 2.
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{1.5cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Description} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Copyright, source quality, biographical accuracy \\
+Core functionality & 18 & Required & BLOCK & Deliverable acceptance per success criteria \\
+Integration & 8 & Required & BLOCK & Cross-module connection validation \\
+Edge cases & 5 & Best-effort & LOG & Outliers, data gaps, temporal currency \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & & & \textbf{36 tests} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to music journalism (documented interviews), official data sources (RIAA, Billboard), or Wikipedia with cited sources. Zero entertainment gossip or unsourced claims. \\
+SC-NUM & Numerical attribution & Every chart position, sales figure, certification, Grammy nomination count, and track count attributed to a specific source with access date. \\
+SC-ADV & No advocacy & Document presents factual record without editorializing on Corgan's personal conduct or the relative merit of post-reunion albums versus the classic era. \\
+SC-CPY & Copyright compliance & No song lyrics reproduced verbatim, even in part. No extended album artwork descriptions that would substitute for original. Themes and imagery discussed, not quoted. \\
+SC-BIO & Biographical accuracy & All claims about personal conduct (drug use, relationships, dismissals) attributed to documented sources; no speculation presented as fact. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Full discography coverage & All 12 studio albums documented with release date, label, chart position, certification \\
+CF-02 & Production methodology depth & M3 documents multilayering technique with at least 3 specific examples (track names, layer counts) sourced from production interviews \\
+CF-03 & Classic lineup profiles & All 4 members (Corgan, Iha, Wretzky, Chamberlin) individually documented with instrument, role, tenure \\
+CF-04 & Influence map completeness & M4 lists 8+ source influences and 8+ influenced artists, each with at least one evidentiary citation \\
+CF-05 & ATUM concept documented & Act structure, narrative synopsis, release mechanism (podcast), and critical reception all present \\
+CF-06 & Chicago scene context & At least 3 specific venues, 1 label, and 2 peer bands from 1988--1993 Chicago scene documented \\
+CF-07 & Commercial data completeness & Grammy count, Billboard peaks, RIAA certifications, Lollapalooza appearances all present with sources \\
+CF-08 & Post-2000 arc completeness & At least 6 post-dissolution albums documented; no decade-long gaps in coverage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & M3 $\to$ M2 production cascade & Document explicitly traces multilayering philosophy (M3) to commercial success of \textit{Mellon Collie} (M2) \\
+IN-02 & M2 $\to$ M4 legacy cascade & Document traces peak-era output (M2) to identifiable influence on specific subsequent acts (M4) \\
+IN-03 & M1 $\to$ M5 continuity arc & Document explicitly connects Chicago origins (M1) to the ATUM narrative closure (M5) as a coherent career arc \\
+IN-04 & Cross-module data consistency & Chamberlin's role described consistently across M1, M2, M3, and M5; no contradictions \\
+IN-05 & Self-containment & A reader with no prior knowledge of the band can understand the full arc from document alone; no undefined terms \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Full discography documented & CF-01 & Pending \\
+2. Recording methodology documented & CF-02 & Pending \\
+3. Classic lineup profiles & CF-03 & Pending \\
+4. Sonic influence map (8+8) & CF-04 & Pending \\
+5. ATUM documented as arc culmination & CF-05, IN-03 & Pending \\
+6. Chicago scene context & CF-06 & Pending \\
+7. Cultural impact quantified & CF-07 & Pending \\
+8. Cross-module connections ($\geq$5) & IN-01, IN-02, IN-03, IN-04, IN-05 & Pending \\
+9. Post-2000 output covered & CF-08 & Pending \\
+10. Numerical claims sourced & SC-NUM & Pending \\
+11. Controversy coverage balanced & SC-ADV, SC-BIO & Pending \\
+12. Document self-contained & IN-05 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at wave boundaries; scope enforcement \\
+PLAN & Planner & Wave decomposition; parallel track coordination; dependency management \\
+SCOUT & Research Agent & Source gathering; web research for gap-fill; discography verification \\
+EXEC-1 & Executor & Wave 0 + Wave 3 document production; foundation and final assembly \\
+EXEC-2 & Executor & Wave 2 synthesis support; INTEG agent's production counterpart \\
+CRAFT-HIST & History Specialist & Modules 1, 2, 5: formation, peak era, reinvention arc \\
+CRAFT-SONIC & Sonic Specialist & Modules 3, 4: production philosophy, cultural impact, influence mapping \\
+VERIFY & Verification Agent & Source validation; numerical accuracy; SC tests execution \\
+INTEG & Integration Agent & Wave 2 cross-module relationship validation; consistency audit \\
+CAPCOM & HITL Interface & Human approval channel at Wave 0$\to$1, Wave 1$\to$2, Wave 2$\to$3 gates \\
+SURGEON & Health Monitor & Research quality degradation detection; scope drift alerts \\
+LOG & Chronicle Agent & Audit trail; commit messages; verification report compilation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & SP-DEEP-001 \\
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Deliverables & 10 \\
+Total Tests & 36 (5 safety-critical) \\
+Estimated Token Budget & $\sim$240K \\
+Context Windows & 8--12 across 4--5 sessions \\
+Wave Structure & 0 (Foundation) $\to$ 1A/1B (Parallel) $\to$ 2 (Synthesis) $\to$ 3 (Publication) \\
+HITL Gates & 3 (Wave 0$\to$1, Wave 1$\to$2, Wave 2$\to$3) \\
+Primary Model & Sonnet (60\%) \\
+Synthesis Model & Opus (30\%) \\
+Status & Ready for Orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``When you are faced with making a permanent recorded representation of a song, why not endow it with the grandest possible vision?''}
+
+\vspace{0.5em}
+\hfill --- Billy Corgan
+
+\vspace{0.8em}
+\noindent The Smashing Pumpkins built their catalog the way a master architect builds a cathedral: not by adding ornamentation to a structure, but by making the structure itself the ornament. Every guitar layer in ``Soma,'' every deafening live take at Pumpkinland that Flood insisted on to push Chamberlin to his limit, every 28th track on a double album that ``needed'' to be there --- these were not excesses. They were the load-bearing walls. The GSD ecosystem recognizes this disposition immediately. The Amiga Principle does not require power; it requires intention. Smashing Pumpkins had intention in spectacular, sometimes self-destructive, always architecturally rigorous abundance. This research mission is a fair witness to what that looks like across a 35-year arc.
+\end{quotebox}
+
+\end{document}

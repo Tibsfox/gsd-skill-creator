@@ -24,6 +24,8 @@ When a milestone completes:
 4. Delete REQUIREMENTS.md (fresh one for next milestone)
 5. Perform full PROJECT.md evolution review
 6. Offer to create next milestone inline
+7. Archive UI artifacts (`*-UI-SPEC.md`, `*-UI-REVIEW.md`) alongside other phase documents
+8. Clean up `.planning/ui-reviews/` screenshot files (binary assets, never archived)
 
 **Context Efficiency:** Archives keep ROADMAP.md constant-size and REQUIREMENTS.md milestone-scoped.
 
@@ -40,7 +42,7 @@ When a milestone completes:
 **Use `roadmap analyze` for comprehensive readiness check:**
 
 ```bash
-ROADMAP=$(node "./.claude/get-shit-done/bin/gsd-tools.cjs" roadmap analyze)
+ROADMAP=$(node "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/.claude/get-shit-done/bin/gsd-tools.cjs" roadmap analyze)
 ```
 
 This returns all phases with plan/summary counts and disk status. Use this to verify:
@@ -88,7 +90,7 @@ If user selects "Proceed anyway": note incomplete requirements in MILESTONES.md 
 <config-check>
 
 ```bash
-cat .planning/config.json 2>/dev/null
+cat .planning/config.json 2>/dev/null || true
 ```
 
 </config-check>
@@ -127,7 +129,7 @@ Calculate milestone statistics:
 ```bash
 git log --oneline --grep="feat(" | head -20
 git diff --stat FIRST_COMMIT..LAST_COMMIT | tail -1
-find . -name "*.swift" -o -name "*.ts" -o -name "*.py" | xargs wc -l 2>/dev/null
+find . -name "*.swift" -o -name "*.ts" -o -name "*.py" | xargs wc -l 2>/dev/null || true
 git log --format="%ai" FIRST_COMMIT | tail -1
 git log --format="%ai" LAST_COMMIT | head -1
 ```
@@ -154,7 +156,8 @@ Extract one-liners from SUMMARY.md files using summary-extract:
 ```bash
 # For each phase in milestone, extract one-liner
 for summary in .planning/phases/*-*/*-SUMMARY.md; do
-  node "./.claude/get-shit-done/bin/gsd-tools.cjs" summary-extract "$summary" --fields one_liner | jq -r '.one_liner'
+  [ -e "$summary" ] || continue
+  node "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/.claude/get-shit-done/bin/gsd-tools.cjs" summary-extract "$summary" --fields one_liner --pick one_liner
 done
 ```
 
@@ -367,7 +370,7 @@ Update `.planning/ROADMAP.md` — group completed milestone phases:
 **Delegate archival to gsd-tools:**
 
 ```bash
-ARCHIVE=$(node "./.claude/get-shit-done/bin/gsd-tools.cjs" milestone complete "v[X.Y]" --name "[Milestone Name]")
+ARCHIVE=$(node "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/.claude/get-shit-done/bin/gsd-tools.cjs" milestone complete "v[X.Y]" --name "[Milestone Name]")
 ```
 
 The CLI handles:
@@ -444,12 +447,12 @@ rm .planning/REQUIREMENTS.md
 
 Check for existing retrospective:
 ```bash
-ls .planning/RETROSPECTIVE.md 2>/dev/null
+ls .planning/RETROSPECTIVE.md 2>/dev/null || true
 ```
 
 **If exists:** Read the file, append new milestone section before the "## Cross-Milestone Trends" section.
 
-**If doesn't exist:** Create from template at `./.claude/get-shit-done/templates/retrospective.md`.
+**If doesn't exist:** Create from template at `/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/.claude/get-shit-done/templates/retrospective.md`.
 
 **Gather retrospective data:**
 
@@ -494,83 +497,7 @@ If the "## Cross-Milestone Trends" section exists, update the tables with new da
 
 **Commit:**
 ```bash
-node "./.claude/get-shit-done/bin/gsd-tools.cjs" commit "docs: update retrospective for v${VERSION}" --files .planning/RETROSPECTIVE.md
-```
-
-</step>
-
-<step name="write_release_notes">
-
-**Generate public release notes:**
-
-Create `docs/release-notes/v${VERSION}/README.md` with all required sections.
-
-```bash
-mkdir -p "docs/release-notes/v${VERSION}"
-```
-
-**Gather data from:**
-1. `.planning/RETROSPECTIVE.md` — latest milestone section (What Worked, What Was Inefficient, Key Lessons)
-2. `.planning/MILESTONES.md` — stats, accomplishments, phase count
-3. Git log — commit count, file changes, LOC
-4. SUMMARY.md / VERIFICATION.md files — key deliverables, test counts
-
-**Required sections (ALL mandatory):**
-
-```markdown
-# v{VERSION} — {Milestone Name}
-
-**Shipped:** {date}
-**Commits:** {count} | **Files:** {count} changed | **New Code:** ~{LOC} LOC
-**Tests:** {count}
-
-## Summary
-
-{1-3 sentence overview of what shipped and why it matters}
-
-## Key Features
-
-{Feature sections with specific stats, line counts, and architecture details}
-
-## Retrospective
-
-### What Worked
-- **{Specific aspect}.** {Why it worked}
-- {2-4 bullets total}
-
-### What Could Be Better
-- **{Specific concern}.** {What the gap is}
-- {1-3 bullets total}
-
-## Lessons Learned
-
-1. **{Insight title}.** {Specific, actionable takeaway}
-2. {2-4 items total, grounded in actual work}
-```
-
-**Validation — verify ALL sections exist before committing:**
-
-```bash
-FILE="docs/release-notes/v${VERSION}/README.md"
-MISSING=""
-grep -q "## Summary" "$FILE" || MISSING="${MISSING} Summary"
-grep -q "## Key Features" "$FILE" || MISSING="${MISSING} Key-Features"
-grep -q "## Retrospective" "$FILE" || MISSING="${MISSING} Retrospective"
-grep -q "### What Worked" "$FILE" || MISSING="${MISSING} What-Worked"
-grep -q "### What Could Be Better" "$FILE" || MISSING="${MISSING} What-Could-Be-Better"
-grep -q "## Lessons Learned" "$FILE" || MISSING="${MISSING} Lessons-Learned"
-if [ -n "$MISSING" ]; then
-  echo "RELEASE NOTES INCOMPLETE — missing sections:${MISSING}"
-  echo "Fix before proceeding."
-  exit 1
-else
-  echo "Release notes validated — all required sections present."
-fi
-```
-
-**Commit:**
-```bash
-node "./.claude/get-shit-done/bin/gsd-tools.cjs" commit "docs(release-notes): add v${VERSION} release notes" --files "docs/release-notes/v${VERSION}/README.md"
+node "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/.claude/get-shit-done/bin/gsd-tools.cjs" commit "docs: update retrospective for v${VERSION}" --files .planning/RETROSPECTIVE.md
 ```
 
 </step>
@@ -604,7 +531,7 @@ Check branching strategy and offer merge options.
 Use `init milestone-op` for context, or load config directly:
 
 ```bash
-INIT=$(node "./.claude/get-shit-done/bin/gsd-tools.cjs" init execute-phase "1")
+INIT=$(node "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/.claude/get-shit-done/bin/gsd-tools.cjs" init execute-phase "1")
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 
@@ -753,7 +680,7 @@ git push origin v[X.Y]
 Commit milestone completion.
 
 ```bash
-node "./.claude/get-shit-done/bin/gsd-tools.cjs" commit "chore: complete v[X.Y] milestone" --files .planning/milestones/v[X.Y]-ROADMAP.md .planning/milestones/v[X.Y]-REQUIREMENTS.md .planning/milestones/v[X.Y]-MILESTONE-AUDIT.md .planning/MILESTONES.md .planning/PROJECT.md .planning/STATE.md
+node "/media/foxy/ai/GSD/dev-tools/gsd-skill-creator/.claude/get-shit-done/bin/gsd-tools.cjs" commit "chore: complete v[X.Y] milestone" --files .planning/milestones/v[X.Y]-ROADMAP.md .planning/milestones/v[X.Y]-REQUIREMENTS.md .planning/milestones/v[X.Y]-MILESTONE-AUDIT.md .planning/MILESTONES.md .planning/PROJECT.md .planning/STATE.md
 ```
 ```
 
@@ -835,8 +762,6 @@ Milestone completion is successful when:
 - [ ] Known gaps recorded in MILESTONES.md if user proceeded with incomplete requirements
 - [ ] RETROSPECTIVE.md updated with milestone section
 - [ ] Cross-milestone trends updated
-- [ ] Release notes created at docs/release-notes/v[X.Y]/README.md with all required sections (Summary, Key Features, Retrospective, Lessons Learned)
-- [ ] Release notes validated — all 6 mandatory sections present
 - [ ] User knows next step (/gsd:new-milestone)
 
 </success_criteria>

@@ -1,0 +1,1031 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Color Scheme — Music/History: Deep Purple, Gold, Crimson
+\definecolor{primary}{HTML}{4A148C}       % Deep purple — section headers
+\definecolor{secondary}{HTML}{F57F17}     % Gold — subsection headers
+\definecolor{tertiary}{HTML}{B71C1C}      % Crimson — subsubsection headers
+\definecolor{accent}{HTML}{7B1FA2}        % Medium purple — highlights
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Light lavender — quote boxes
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{FFEBEE}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Susan Rogers Research Mission}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Susan Rogers -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ─────────────────────────────────────────────────────────────────────────────
+% TITLE PAGE
+% ─────────────────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Susan Rogers Arc\\[0.3em]Engineer, Producer, Scientist}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Paisley Park to the Auditory Cortex}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 4--6 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+% TABLE OF CONTENTS
+% ─────────────────────────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{The Susan Rogers Arc --- Vision Guide}
+
+\metafield{Date:}{March 2026}
+\metafield{Status:}{Research Complete / Mission Ready}
+\metafield{Depends On:}{GSD Deep Audio Analyzer Mission (see deepaudioanalyzermission.pdf)}
+\metafield{Context:}{Companion study to the Geggy Tah Track Genealogy initiative (GGT)}
+
+\subsection{Vision}
+
+There is a specific shape to Susan Rogers' life that does not occur in nature very often: a self-taught audio technician from Orange County, a high-school dropout who repaired MCI consoles in Los Angeles, who was hired sight-unseen by the most demanding recording artist of the 1980s, spent four years sleeping a few hours a night capturing what would become the most celebrated pop catalog of that era, then left to produce experimental records on a genre-defying label, then produced the record that would finance her own reinvention, then went back to school at age 44 with no diploma, emerged a decade later with a doctorate in cognitive psychology from one of the finest music science programs in the world, and is now the director of a laboratory studying why human beings respond to music the way they do.
+
+What makes this arc genuinely unusual is that each phase is not a departure from the previous one but a deepening of it. The technician who learned to hear Prince's kick drum preferences is the same scientist who studies how auditory processing differences emerge from musical training. The producer who made records for David Byrne's label and felt the weight of working with Greg Kurstin before the world knew who Kurstin was is the same professor who teaches that every listener has a ``profile'' --- a cortically shaped fingerprint --- that determines which music feels like home. The spaces between these phases, the transitions Rogers made that everyone around her likely thought were irrational, are exactly where the meaning lives.
+
+The GSD Deep Audio Analyzer (GGT) captures Rogers' involvement with Geggy Tah but can only gesture at the full story. This mission produces the full story: a structured, sourced, modular deep study of Rogers' arc across five phases, designed for agent execution and synthesis into a comprehensive reference document. This is not a biography; it is a research mission into what each phase of Rogers' career reveals about the nature of sound, craft, and knowledge transfer.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{The Geggy Tah chapter is incompletely documented.} Rogers produced both the 1994 debut \textit{Grand Opening} and the 1996 breakthrough \textit{Sacred Cow} (home-recorded, Luaka Bop) and co-produced the hit single ``Whoever You Are'' with Greg Kurstin and Tommy Jordan. Why she took those sessions, what she brought technically, and what Kurstin later became are not assembled in a single reference.
+
+  \item \textbf{The Prince engineering methodology has never been systematically described.} Rogers' decision-making at the console --- the sonic signature she developed, the Vault cataloguing she initiated, the workflow she sustained across four consecutive years of 20-hour daily sessions --- exists scattered across interviews with no synthesized technical analysis.
+
+  \item \textbf{The mechanism of the career exit is misunderstood.} The Stunt album (Barenaked Ladies, 1998) was not a capstone; it was a funding mechanism. Understanding the deliberateness of this decision --- Rogers left not because she burned out but because she had saved enough to buy eight years of formal education --- reframes every analysis of her career.
+
+  \item \textbf{The McGill dissertation is rarely cited in music production literature.} Rogers' 2010 doctoral thesis on consonance/dissonance, roughness perception, and short-term memory for musical intervals, supervised by Daniel Levitin and Stephen McAdams, contains findings directly applicable to record production. This gap between the laboratory and the studio is the exact gap Rogers has spent her Berklee years bridging.
+
+  \item \textbf{The ``listener profile'' model deserves rigorous sourcing.} Rogers' seven-dimension listener profile (authenticity, realism, novelty, melody, lyrics, rhythm, timbre) --- published in \textit{This Is What It Sounds Like} (W.W. Norton, 2022, co-authored with Ogi Ogas) --- synthesizes decades of psychoacoustics research. Its academic underpinnings and practical applications for record-making have not been assembled as a production reference.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Translative Engineer:} Rogers' arc is best understood as a single continuous act of translation --- between sound and structure, between intuition and mechanism, between the studio and the skull.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+SUSAN ROGERS ARC --- DOMAIN MAP
+================================
+
+Phase I          Phase II         Phase III        Phase IV         Phase V
+1978-1983        1983-1988        1988-1999        2000-2010        2010-present
+-----------      -----------      -----------      -----------      -----------
+LA Tech          Prince/          Indie Prod.      McGill           Berklee
+Formation        Minneapolis      Arc              PhD              Laboratory
+
+Rudy Records --> Paisley Park --> Luaka Bop --> U of Minnesota --> Music Perception
+(Crosby/Nash)    Purple Rain      Geggy Tah       (neurosci.)       & Cognition Lab
+                 Sign o' Times    Stunt (BNL)     McGill (psych)    "Listener Profile"
+                 The Black Album  David Byrne      Levitin/McAdams   Tinnitus research
+                 [THE VAULT]      Tricky           C/D dissertation  GRAMMY Foundation
+                                                                     Grant recipient
+CONNECTIVE TISSUE: Autodidact pattern, engineering mind, pattern recognition across scales
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE STRUCTURE
+================
+
+  [MOD-1: TECHNICIAN]     [MOD-2: PRINCE STUDIO]
+  LA formation, 1978-83   Methodology, Vault, sonic
+  Self-taught electronics identity, 1983-1988
+         |                        |
+         v                        v
+  [MOD-3: PRODUCTION ARC] --------+
+  Geggy Tah focus, full            |
+  indie discography,               |
+  1988-1999                        |
+         |                        |
+         v                        v
+  [MOD-4: ACADEMIC PIVOT] [MOD-5: BERKLEE SCIENCE]
+  McGill PhD, 2000-2010   Cognition lab, listener
+  C/D dissertation,       profile, tinnitus, 2010+
+  Levitin / McAdams
+
+  Cross-module: All five phases share one question:
+  "What does a sound DO to a listener?"
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Technician Formation (1978--1983)}
+Covers Rogers' entry into audio via self-taught electronics, her time at Audio Industries Corporation repairing MCI consoles and tape machines, her role at Rudy Records (Graham Nash/David Crosby's studio), and the professional grapevine encounter that led to her being hired by Prince. Special focus on what her technician's training gave her that a formally trained engineer would not have had.
+
+\subsubsection{Module 2: The Prince Studio (1983--1988)}
+Systematic analysis of Rogers' five-year tenure as Prince's staff engineer. Covers the albums (\textit{Purple Rain}, \textit{Around the World in a Day}, \textit{Parade}, \textit{Sign o' the Times}, \textit{The Black Album}), the engineering methodology, the Vault creation, Jesse Johnson's mentorship, the Paisley Park opening and Rogers' departure, and Rogers' characterization of Prince's working method and its implications for audio technique.
+
+\subsubsection{Module 3: The Production Arc (1988--1999) with Geggy Tah Focus}
+Traces Rogers' independent career with particular depth on the Geggy Tah collaboration: both albums (\textit{Grand Opening}, 1994; \textit{Sacred Cow}, 1996, both on Luaka Bop), co-production of ``Whoever You Are'' (Billboard Modern Rock \#16), and what Rogers brought to Greg Kurstin's early work before Kurstin became one of the most decorated producers of the 21st century. Secondary coverage of Barenaked Ladies (\textit{Stunt}, 1998, Arlyn Studios, Austin), David Byrne, Tricky, Michael Penn, Edie Brickell, and the deliberate exit strategy.
+
+\subsubsection{Module 4: The Academic Pivot (2000--2010)}
+Documents Rogers' decision to leave the music industry at 44, earn her GED, enter the University of Minnesota as a freshman, complete four years of neuroscience/psychology, gain admission to McGill's graduate program, and complete her doctoral dissertation under Daniel Levitin and Stephen McAdams. Dissertation focus: consonance/dissonance roughness perception, short-term memory for musical intervals, and their implications for auditory processing theory.
+
+\subsubsection{Module 5: The Berklee Laboratory (2010--Present)}
+Documents Rogers' appointment at Berklee College of Music (2008 onwards), directorship of the Music Perception and Cognition Laboratory, research on auditory memory and the influence of musical training, tinnitus/hyperacusis research in musician populations, the Grammy Foundation Research Grant, the \textit{This Is What It Sounds Like} book (2022, W.W. Norton, co-authored with Ogi Ogas), and the seven-dimension listener profile model.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  name: susan-rogers-arc
+  mission_id: gsd-rogers-arc-v1
+  activation_profile: squadron
+  module_count: 5
+
+  crew:
+    FLIGHT: claude-opus-4-5   # Mission direction, synthesis judgment
+    PLAN: claude-sonnet-4-5   # Wave decomposition
+    SCOUT: claude-sonnet-4-5  # Source gathering, interview research
+    EXEC-A: claude-sonnet-4-5 # Modules 1-2 (Technician + Prince)
+    EXEC-B: claude-sonnet-4-5 # Modules 3-4 (Production Arc + Academic)
+    CRAFT-ENG: claude-opus-4-5   # Engineering methodology analysis
+    CRAFT-SCI: claude-opus-4-5   # Psychoacoustics science synthesis
+    VERIFY: claude-sonnet-4-5    # Source validation
+    INTEG: claude-sonnet-4-5     # Cross-module integration
+    CAPCOM: claude-sonnet-4-5    # HITL interface
+    BUDGET: claude-haiku-4-5     # Token tracking
+    LOG: claude-haiku-4-5        # Chronicle, commit messages
+
+  model_allocation:
+    opus: 30%    # FLIGHT, CRAFT-ENG, CRAFT-SCI
+    sonnet: 60%  # PLAN, SCOUT, EXEC-A, EXEC-B, VERIFY, INTEG, CAPCOM
+    haiku: 10%   # BUDGET, LOG, scaffolding
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=2em]
+  \item All five career phases with document-quality sourcing from published interviews and academic records
+  \item Geggy Tah collaboration: both albums, production methodology, Greg Kurstin's subsequent trajectory
+  \item Prince engineering methodology: technical decisions, sonic signature, Vault creation
+  \item Barenaked Ladies \textit{Stunt} production: recording context, deliberate exit strategy
+  \item McGill dissertation: consonance/dissonance research, key findings, advisors
+  \item Berklee lab: listener profile model, tinnitus research, teaching curriculum
+  \item Cross-phase through-line: the technician's ear becoming the scientist's question
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=2em]
+  \item Detailed Prince biography (covered elsewhere in GSD ecosystem)
+  \item Greg Kurstin's post-Rogers career as a standalone subject
+  \item Complete discography analysis (reference the Discogs entry directly)
+  \item Barenaked Ladies discography outside \textit{Stunt}
+  \item Detailed clinical protocols for tinnitus treatment (medical scope boundary)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item All five career phases documented with at minimum three independently verifiable sources each.
+  \item Geggy Tah module documents both albums, co-production credit on ``Whoever You Are,'' and Rogers' stated reasons for taking the project.
+  \item Prince engineering module identifies at least five specific technical decisions Rogers made (mic placement, kick drum treatment, vocal routing protocol, Vault cataloguing method, console preference).
+  \item Production arc module traces Rogers' transition from pure engineering to co-production and identifies the mentors she credits (Tony Berg, Michael Penn, Jesse Johnson).
+  \item Academic pivot module cites the McGill dissertation by chapter and summarizes the C/D roughness and short-term memory findings.
+  \item Berklee module accurately represents the seven listener profile dimensions with citations to the W.W. Norton book and supporting neuroscience literature.
+  \item Cross-module synthesis identifies at least three explicit through-lines connecting Rogers' engineering practice to her scientific questions.
+  \item All numerical claims (chart positions, album sales, dissertation year, Berklee appointment date) attributed to specific sources.
+  \item No policy or career advice advocacy --- document presents findings and lets the research speak.
+  \item Complete source bibliography with no entertainment media; all sources are professional organizations, academic publications, or professional interviews (Tape Op, Grammy.com, Red Bull Music Academy, Berklee official faculty pages).
+  \item Tinnitus/hyperacusis section cites Rogers' own published statements and does not make clinical claims.
+  \item Document is self-contained: a reader with no prior knowledge of Rogers can follow the full arc from Orange County to Berklee without external reference.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+deepaudioanalyzermission.pdf & Parent mission & GGT (Geggy Tah Genealogy Tool) --- this mission provides the Rogers chapter that GGT gestures at \\
+gsd-skill-creator (dev branch) & Execution platform & Mission package handed to GSD orchestrator \\
+The Space Between (this project) & Philosophical spine & ``Spaces between'' as life navigation applies directly to Rogers' inter-phase transitions \\
+Fox Infrastructure Group Plan & Institutional parallel & Both represent deliberate, phased reinvention using accumulated capital \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Susan Rogers left Prince's employ when Paisley Park opened because the job she had been doing --- one person sustaining an entire recording infrastructure for the most prolific recording artist in the world --- was no longer structurally necessary. She had not been fired; she had been superseded by the building. That is not a sad story; it is a systems story. The node had become a network, and she was free.
+
+What Rogers did with that freedom, across fifteen years of independent production, was quietly develop a question that she did not yet have the language for: why does this sound land differently than that one, in the same room, for the same listener, on a different Tuesday? The engineering ear kept asking the question that only the scientist's vocabulary could eventually answer. Geggy Tah, in this reading, is not an interlude between Prince and academia. It is the experimental site where Rogers, freed from commercial pressure, worked with two musicians who were themselves asking what music could sound like if it answered to no genre. ``Whoever You Are'' --- a Top 20 modern rock hit written by Tommy Jordan as a child to thank polite drivers --- is as good a candidate as any for the kind of record that teaches you something about your own listener profile.
+
+The Amiga Principle echoes here. Rogers built no empire. She accumulated no band, no label, no legend machine. She moved laterally, stayed curious, and when she had saved enough money to buy eight years of her own attention, she spent it. The ``spaces between'' apply at life scale, not just at architectural scale. The gaps Rogers left in each phase of her career are where everything that came next grew.
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Susan Rogers --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles sourced findings for all five research modules. Primary sources are professional interviews, academic faculty pages, and Rogers' own published and peer-reviewed work. All chart positions, dates, and production credits are verified against industry databases (Discogs, AllMusic, Wikipedia with cross-validation).
+
+\textbf{Key source organizations and venues:}
+\begin{itemize}[leftmargin=2em]
+  \item Tape Op Magazine (extended interview, issue 117) --- most technically detailed source on her engineering methodology
+  \item Berklee College of Music official faculty pages (college.berklee.edu and berklee.edu/berklee-online)
+  \item McGill University Reporter archive (2006 profile during doctoral candidacy)
+  \item Grammy.com Producers and Engineers Wing interview
+  \item Red Bull Music Academy Daily (2017)
+  \item PRN Alumni Foundation (Prince-focused oral history)
+  \item Grokipedia (comprehensive career summary with dissertation citations)
+  \item W.W. Norton / \textit{This Is What It Sounds Like} (2022)
+  \item Rogers' 2010 McGill doctoral thesis (available: mcgill.ca/mpcl/)
+\end{itemize}
+
+\subsection{Module 1: The Technician Formation (1978--1983)}
+
+\subsubsection{Early Life and Entry}
+
+Rogers was born August 3, 1956 and grew up in Southern California. She dropped out of high school and moved to Hollywood in the 1970s, driven by a deep attachment to recorded music she traced to early exposure to Sly Stone and James Brown rather than the Beatles-centric mainstream of her peers. This divergence in listening identity would later become a key data point in her own listener-profile research.
+
+Her entry into audio was characteristically self-directed: after overhearing a conversation about maintenance technician training at the University of Sound Arts (where she was working as a receptionist), she began studying electronics, acoustics, and magnetism independently. She sourced materials from the Los Angeles Opamp technical bookstore and US Army electronics manuals. In 1978 she was hired by Audio Industries Corporation in Los Angeles, training as an MCI console and tape-machine technician.
+
+\subsubsection{Rudy Records and the Professional Grapevine}
+
+By 1981 Rogers had advanced to a maintenance technician role at Rudy Records, the studio operated by Graham Nash and David Crosby, where she had her first experience as an assistant engineer. It was through the Los Angeles professional audio technician network that she learned Prince was seeking a tech after the 1999 tour. She pursued the posting aggressively, telling colleagues: the search was over.
+
+\subsubsection{The Technician Advantage}
+
+Rogers has noted in multiple interviews that being hired as a technician rather than an engineer conferred a specific advantage: Prince did not know what he was getting. When she sat in the engineer's chair for the first time to help finish overdubs for ``Darling Nikki,'' the role simply expanded into place. The technician's mindset --- understand the mechanism before operating it --- would later characterize her scientific approach at McGill.
+
+\subsection{Module 2: The Prince Studio (1983--1988)}
+
+\subsubsection{Discography}
+
+Rogers served as staff engineer across the following principal works:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Notes} \\
+\midrule
+Purple Rain & 1984 & First official task: recording guitar solo for ``Let's Go Crazy''; recorded at home studio and Sunset Sound \\
+Around the World in a Day & 1985 & Recorded largely at warehouse studio in Eden Prairie, MN \\
+Parade & 1986 & Film soundtrack for \textit{Under the Cherry Moon} \\
+Sign o' the Times & 1987 & Later subject of Rogers-assisted deluxe reissue with 63 unreleased tracks \\
+The Black Album & 1987 & Withdrawn by Prince before release; Rogers' cataloguing later aided posthumous handling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Engineering Methodology and Sonic Identity}
+
+Rogers describes Prince's recording process as a closed loop: in any single session, Prince would record the track, do lead vocals alone in the room (Rogers would route the vocal signal, mark the patch cord with white tape, arm the tape machine, then leave), add backing vocals with Wendy, Lisa, Jill Jones, or Susannah Melvoin, add horns with Eric Leeds, and mix --- then begin again the same day. Rogers would dial in sounds while musicians played, so the mix was largely set by performance time. She characterized the Sunset Sound sessions as the most technically sophisticated; the Eden Prairie warehouse sessions (including most of \textit{Around the World in a Day}) were technically compromised but produced iconic material due to Prince's extraordinary volume of creative output.
+
+Jesse Johnson of The Time functioned as Rogers' technical mentor, teaching her Prince's specific preferences for kick drum and snare sound while Prince was briefly in Los Angeles during the Purple Rain film logistics. Rogers credits Johnson with allowing her to keep her job.
+
+\subsubsection{The Vault}
+
+Rogers initiated the process of collecting and cataloguing Prince's studio and live recordings, beginning as a practical response to Prince's frequent requests for reference tapes. Working with Prince's office staff, she began building a database --- challenging given 1983 technology. This cataloguing work directly enabled the posthumous archival releases, including the 2020 deluxe edition of \textit{Sign o' the Times}.
+
+\subsubsection{The Paisley Park Transition}
+
+When Paisley Park opened as a multi-studio complex, Rogers' singular role became structurally redundant: the facility required a staff of engineers, not one person. Rogers characterizes her departure not as a break but as the natural conclusion of a ``tour of duty.'' She returned to Los Angeles as an independent engineer.
+
+\subsection{Module 3: The Production Arc with Geggy Tah Focus (1988--1999)}
+
+\subsubsection{The Transition to Production}
+
+Rogers credits two mentors for her transition from engineering/mixing to production: Tony Berg and Michael Penn. Berg guided her into the Los Angeles alternative/indie production world; Penn's sessions showed her how to make production decisions at the creative level. She worked on Edie Brickell \& New Bohemians, Public Image Ltd. (one song for a greatest-hits record with John Lydon), The Odds, Toad the Wet Sprocket, and others before being approached for the Geggy Tah project.
+
+\subsubsection{Geggy Tah: The Complete Chapter}
+
+\textbf{Band context:} Geggy Tah was formed by Tommy Jordan (vocals, bass, songwriter) and Greg Kurstin (keyboards, guitar, multi-instrumentalist --- a jazz piano student under Jaki Byard, himself a Charles Mingus sideman). The name derives from the baby mispronunciations of each man's sister: ``Geggy'' for Greg, ``Tah'' for Tommy. They were signed to David Byrne's Luaka Bop label after Byrne encountered their demo tape and described it as crossing Ween and Prince with deeper and more articulate lyrics.
+
+\textbf{Rogers' involvement:} Rogers co-produced both released Luaka Bop albums:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.8cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Label} & \tableheader{Notes} \\
+\midrule
+Grand Opening & 1994 & Luaka Bop & 15-track debut; recorded on 16-track Stephens tape machine at G-Son Studios; lo-fi avant-garde aesthetic \\
+Sacred Cow & 1996 & Luaka Bop & Home-recorded; expanded to three-piece with drummer Daren Hahn; punk/funk/prog blend \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{``Whoever You Are'' (1996):} Co-produced by Rogers, Kurstin, and Jordan. The melody and refrain were written by Jordan as a child, intended to thank courteous drivers and calm his father's road frustration. The track peaked at \#16 on the Billboard Modern Rock Tracks chart and later appeared in a Mercedes-Benz commercial (circa 2001). The production credit placed Rogers alongside Kurstin at an early moment in what would become one of the most prolific production careers in popular music: Kurstin went on to win multiple Grammy Awards as producer for Adele, Foo Fighters, Beck, and Paul McCartney, among others.
+
+\textbf{Rogers on why she took the project:} Rogers has described Geggy Tah as the band she felt never received the recognition it deserved, citing the project on the \textit{Unsung} podcast (Crack Magazine/Sonos Radio, 2021) as her clearest example of a record she was proud of that the market underweighted.
+
+\subsubsection{Barenaked Ladies: Stunt (1998)}
+
+Rogers co-produced \textit{Stunt} with the band and David Leonard at Arlyn Studios in Austin, Texas, over approximately three weeks in January--February 1998. The album was completed by Leonard (Phase One, Scarborough, Ontario), mixed at East Iris Studios and South Beach Studios, and mastered at Precision Mastering in Los Angeles. Key tracks: ``One Week'' and ``It's All Been Done.'' The album sold over four million copies worldwide. Rogers has described the Stunt royalties as the financial mechanism that bought her eight years of education.
+
+\subsubsection{Additional Production Credits (Selected)}
+
+David Byrne self-titled album (1994); Tricky \textit{Angels with Dirty Faces} (mixing, 1998); Michael Penn; Rusted Root; Robben Ford; Jeff Black; Tevin Campbell; Toad the Wet Sprocket; India Arie and Laurie Anderson (early 2000, final sessions before her academic exit).
+
+\subsection{Module 4: The Academic Pivot (2000--2010)}
+
+\subsubsection{The Decision and Its Logic}
+
+Rogers has been consistent in her account of the academic pivot: she did not burn out; she aged out of cultural connection with her audience. At mid-40s, producing records for a college-age alternative rock audience while no longer listening to alternative rock herself, she recognized a structural incompatibility. The royalties from \textit{Stunt} provided the window. She left the industry in 2000.
+
+Rogers earned her high school diploma (GED) at age 44, then enrolled as a freshman at the University of Minnesota, studying neuroscience and psychology for four years. She subsequently gained admission to McGill University's graduate program in Montreal.
+
+\subsubsection{McGill and the Dissertation}
+
+Rogers completed her doctorate in psychology at McGill in 2010, with a specialization in music cognition and psychoacoustics. Her thesis advisors were Daniel Levitin (author of \textit{This Is Your Brain on Music}, who was writing that book during Rogers' studies) and Stephen McAdams (one of the world's leading researchers in timbre perception).
+
+\textbf{Dissertation topic:} The thesis investigates consonance/dissonance (C/D) perception, specifically: (a) roughness evaluations of just- and micro-tuned dyads from expert and nonexpert listeners (co-authored with McAdams); (b) short-term memory for consonant and dissonant pure-tone dyads (co-authored with Levitin and McAdams); and (c) the implications of these memory differences for theories of nonlinguistic auditory memory and the centuries-old C/D debate. The research used a novel/familiar memory paradigm to test whether some musical intervals are mentally more robust than others, finding differences in memory strength and fragility that provide evidence about the original signal processing of musical dyads.
+
+\textbf{Key mentors and intellectual lineage:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Scholar} & \tableheader{Contribution to Rogers' Formation} \\
+\midrule
+Daniel Levitin & Co-advisor; author of \textit{This Is Your Brain on Music}; earlier work on memory for musical pieces provided direct inspiration for Rogers' dissertation \\
+Stephen McAdams & Co-advisor; directed statistical analysis; leading researcher in timbre perception \\
+Georg von Bekesy & Nobel laureate; inner ear studies foundational to Rogers' psychoacoustics framework \\
+Nina Kraus & Research on musician brain processing cited by Rogers in her teaching \\
+Carol Krumhansl & Tonality perception work; foundational to music cognition coursework \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5: The Berklee Laboratory (2010--Present)}
+
+\subsubsection{Appointment and Teaching}
+
+Rogers was hired by Berklee College of Music in 2008 (before completing the McGill doctorate) to teach in the Music Production \& Engineering and Liberal Arts departments. She was awarded the Distinguished Faculty Award in 2012. She designed Berklee's courses in music cognition and psychoacoustics and wrote the Berklee Online Psychoacoustics in Music Production course, part of the Master of Music in Music Production program.
+
+\subsubsection{Berklee Music Perception and Cognition Laboratory}
+
+Rogers directs the laboratory, which studies auditory processing in musicians using auditory brainstem response (ABR) measurement. Research areas:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Auditory memory:} How listeners store and retrieve musical signals; genuine auditory memory (excluding nonauditory coding such as visual or linguistic association)
+  \item \textbf{Musical training effects:} Rogers studies intra-musician comparisons rather than the standard musician/non-musician binary; Berklee's diverse international student body enables comparisons across training style and cultural background
+  \item \textbf{Tinnitus and hyperacusis:} Rogers has estimated that roughly 47--49\% of audio professionals develop tinnitus; the lab investigates which musician populations (drummers, horn players, electric guitarists, vocalists) are at greatest risk
+  \item \textbf{Grammy Foundation Research Grant:} Rogers received grant funding from the Grammy Foundation to support music cognition research
+\end{itemize}
+
+\subsubsection{The Listener Profile Model}
+
+Rogers' primary public-facing scientific contribution is the listener profile framework, synthesized in \textit{This Is What It Sounds Like: What the Music You Love Says About You} (W.W. Norton, 2022), co-authored with Ogi Ogas.
+
+The model proposes that every listener possesses a unique profile shaped across a lifetime of listening, structured around seven key dimensions of a record:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Dimension} & \tableheader{Description} \\
+\midrule
+Authenticity & Emotional genuineness; the sense that the creator's motive is expressive rather than commercial \\
+Realism & The degree to which the record sounds like live acoustic performance vs. studio construction \\
+Novelty & Preference for unfamiliar sonic territory vs. the comfort of the familiar \\
+Melody & The role of melodic contour and memorability in the listener's emotional response \\
+Lyrics & The weight the listener gives to linguistic content vs. purely sonic elements \\
+Rhythm & The degree to which groove, pulse, and rhythmic variation drive the listener's engagement \\
+Timbre & Preference for specific sonic textures; what Rogers calls ``the street you live on'' (citing Prince) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The model's neuroscientific basis: pleasurable listening releases dopamine; endorphins hone the auditory system toward the listener's existing profile; the auditory cortex is literally shaped by repeated exposure to preferred music. Neuroimaging studies cited by Rogers show that listeners can dismiss a record based on timbre processing alone in under one second.
+
+Rogers also distinguishes between ``above the neck'' (intellectual engagement with melody, lyrics, novelty) and ``below the neck'' (embodied response to rhythm, timbre, groove) listener orientations.
+
+\subsubsection{Selected Publications and Presentations}
+
+\begin{itemize}[leftmargin=2em]
+  \item Rogers, S.E. (2010). \textit{Doctoral dissertation}, McGill University Department of Psychology / CIRMMT
+  \item Rogers, S.E. \& McAdams, S. Roughness evaluations of just- and micro-tuned dyads from expert and nonexpert listeners. \textit{Journal of the Audio Engineering Society} (2007)
+  \item Rogers, S.E. \& Ogas, O. (2022). \textit{This Is What It Sounds Like: What the Music You Love Says About You}. W.W. Norton \& Company
+  \item AES 147th Convention panelist (2019), New York: Engineering Prince's Records
+  \item CIRMMT Distinguished Lecture: ``Music Psychology for Record Makers''
+  \item Rutgers University Center for Cognitive Archeology seminar (2024--25)
+  \item University of Rochester talk (2025)
+  \item Berklee Onsite 2023 Keynote Address
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+Tinnitus/hyperacusis data & Medical & Cite Rogers' own published estimates only; no clinical claims beyond her stated research scope \\
+Prince estate materials & IP/Legal & Reference only publicly released archival work; do not speculate on Vault contents \\
+Income/financial details & Privacy & Rogers herself has disclosed the Stunt royalties story; use her own framing only \\
+High school dropout status & Personal & Rogers has discussed this openly; use her own language \\
+Gender in audio & Sensitive & Rogers is consistently cited as among ``the world's few women'' in the field; present factually without over-framing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Professional Interviews and Primary Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Tape Op Magazine, Issue 117. ``Susan Rogers: Prince's Engineer on Studio Psychology.''
+  \item Grammy.com Producers \& Engineers Wing. ``Producer \& Engineer Susan Rogers Worked With Prince and Barenaked Ladies.''
+  \item Red Bull Music Academy Daily (June 2017). ``Susan Rogers on Working with Prince.''
+  \item PRN Alumni Foundation. ``Spotlight: Susan Rogers.'' prnalumni.org, October 2019.
+  \item McGill University Reporter Archive (2006). ``Susan Rogers: The grad student formerly known as...''
+  \item Audio Media International. ``In the Studio with Prince: Susan Rogers.''
+  \item Crack Magazine / Unsung Podcast. ``Dr. Susan Rogers on Geggy Tah.'' March 2021.
+  \item Designing Sound. ``Music Cognition and Psychoacoustic Research: An Interview with Dr. Susan Rogers.'' May 2016.
+  \item Sound on Sound. ``The Listener Profile: How We Perceive Music.'' (Rogers bylined article)
+  \item Berklee Onsite 2023 Keynote Address (video). Berklee Online Take Note.
+\end{itemize}
+
+\subsubsection{Academic and Institutional Sources}
+\begin{itemize}[leftmargin=2em]
+  \item Berklee College of Music, Faculty Page: college.berklee.edu/people/susan-rogers
+  \item Berklee Online, Instructor Page: online.berklee.edu/instructors/susan-rogers
+  \item McGill University MPCL, Dissertation: mcgill.ca/mpcl/files/mpcl/rogers\_2010\_phdthesis.pdf
+  \item Berklee Online, Psychoacoustics in Music Production course page
+\end{itemize}
+
+\subsubsection{Discography and Release Data}
+\begin{itemize}[leftmargin=2em]
+  \item Wikipedia: Susan Rogers (crossvalidated against professional interviews)
+  \item Wikipedia: Geggy Tah; Stunt (album)
+  \item Discogs: Geggy Tah Sacred Cow; Stunt (Barenaked Ladies); Whoever You Are (Geggy Tah single)
+  \item Grokipedia: Susan Rogers (synthesized career summary with dissertation citations)
+  \item WhoSampled: ``Whoever You Are'' production credits
+\end{itemize}
+
+\subsubsection{Published Book}
+\begin{itemize}[leftmargin=2em]
+  \item Rogers, S.E. \& Ogas, O. (2022). \textit{This Is What It Sounds Like: What the Music You Love Says About You}. W.W. Norton \& Company. ISBN available via W.W. Norton.
+\end{itemize}
+
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, sourced, publication-quality reference document covering all five phases of Susan Rogers' career arc, with particular depth on the Geggy Tah production chapter and the science-to-studio translation work at the Berklee Music Perception and Cognition Laboratory. The document is designed to serve as the Rogers chapter for the GSD Deep Audio Analyzer ecosystem and as a standalone reference for music production history and psychoacoustics education.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+  WAVE 0 (Foundation)
+  -------------------
+  Schema + source index + chapter templates
+  [HAIKU, sequential, ~1 session]
+
+         |
+         v
+
+  WAVE 1A (Tech + Prince)       WAVE 1B (Production + Academic)
+  ----------------------        -------------------------------
+  Module 1: Technician          Module 3: Production Arc
+  Module 2: Prince Studio       Module 4: Academic Pivot
+  [SONNET+OPUS, parallel]       [SONNET+OPUS, parallel]
+
+         |                             |
+         +----------+------------------+
+                    |
+                    v
+
+  WAVE 2 (Synthesis)
+  ------------------
+  Cross-module through-line assembly
+  Module 5: Berklee Lab integration
+  Listener profile science chapter
+  [OPUS, sequential]
+
+                    |
+                    v
+
+  WAVE 3 (Publication + Verification)
+  ------------------------------------
+  Source validation, numerical audit
+  Document assembly + formatting
+  [SONNET, sequential]
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Source Layer} --- All primary interviews and academic sources indexed and validated
+  \item \textbf{Module Layer} --- Five research modules independently produced and internally consistent
+  \item \textbf{Synthesis Layer} --- Cross-module through-lines and narrative connective tissue
+  \item \textbf{Science Layer} --- Psychoacoustics findings translated for production practitioner audience
+  \item \textbf{Publication Layer} --- Final assembled document with citations, tables, and bibliography
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Source index & All sources validated, URL/page confirmed & Wave 0 output \\
+2 & Module 1--2 document & Tech formation + Prince methodology, 5 technical decisions documented & Wave 1A \\
+3 & Module 3--4 document & Geggy Tah complete chapter + McGill dissertation summary & Wave 1B \\
+4 & Module 5 + Synthesis & Listener profile sourced, three through-lines identified & Wave 2 \\
+5 & Final compiled reference & All modules integrated, bibliography complete, no unsourced numerical claims & Wave 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Source index + schema & None & Haiku & 2,000 \\
+Module 1: Technician & Source index & Sonnet & 8,000 \\
+Module 2: Prince Studio & Source index & Sonnet + Opus & 14,000 \\
+Module 3: Production Arc (Geggy Tah focus) & Source index & Sonnet + Opus & 16,000 \\
+Module 4: Academic Pivot & Source index & Sonnet & 10,000 \\
+Module 5: Berklee Lab & Modules 1--4 + source index & Opus & 12,000 \\
+Cross-module synthesis & All modules & Opus & 8,000 \\
+Source verification & All modules & Sonnet & 6,000 \\
+Document assembly & All components & Sonnet & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+FLIGHT & Opus & Mission direction; cross-phase judgment \\
+CRAFT-ENG & Opus & Engineering methodology analysis requires domain judgment \\
+CRAFT-SCI & Opus & Psychoacoustics synthesis requires scientific rigor \\
+EXEC-A/B & Sonnet & Structured document production \\
+SCOUT & Sonnet & Source gathering; iterative web research \\
+VERIFY & Sonnet & Systematic numerical and citation audit \\
+INTEG & Sonnet & Cross-module reference validation \\
+BUDGET/LOG & Haiku & Scaffolding, tracking, commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Primary Model} & \tableheader{Est. Windows} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 0.5 \\
+1A & Tech + Prince & Parallel & Sonnet / Opus & 1.5 \\
+1B & Production + Academic & Parallel & Sonnet / Opus & 1.5 \\
+2 & Synthesis + Science & Sequential & Opus & 1.5 \\
+3 & Publication + Verify & Sequential & Sonnet & 1.0 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Source index & SCOUT & Validated URL list, source quality tier assessment \\
+Chapter schema & LOG & Shared template for all five module documents \\
+Numerical claim registry & BUDGET & Pre-populated table of all key numbers to verify \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Modules 1--2):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Technician formation narrative & EXEC-A & Module 1 draft with Rudy Records, Audio Industries, grapevine story \\
+Prince engineering methodology & CRAFT-ENG & Five specific technical decisions with evidence \\
+Vault creation sequence & EXEC-A & Cataloguing timeline with sources \\
+Jesse Johnson mentorship & EXEC-A & Cited account from Rogers' interviews \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Modules 3--4):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Geggy Tah complete chapter & EXEC-B & Both albums + ``Whoever You Are'' production detail + Kurstin trajectory \\
+Full production arc discography & EXEC-B & Table with all artists, years, roles \\
+Stunt session detail & EXEC-B & Arlyn Studios context, deliberate exit narrative \\
+McGill dissertation chapter & CRAFT-SCI & C/D roughness findings, memory paradigm, key implications \\
+Academic pivot timeline & EXEC-B & GED at 44, U of Minnesota, McGill admission \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Module 5: Berklee Laboratory & CRAFT-SCI & Lab research, tinnitus study, Grammy grant \\
+Listener profile model & CRAFT-SCI & Seven dimensions, neuroscience basis, production implications \\
+Cross-module through-lines & FLIGHT & Three explicit connections between engineering practice and scientific questions \\
+Narrative connective tissue & FLIGHT & Section transitions and the overarching arc \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Numerical audit & VERIFY & All chart positions, dates, sales figures confirmed \\
+Source quality audit & VERIFY & No entertainment media; all sources at required tier \\
+Document assembly & EXEC-A & Final integrated document \\
+Bibliography compilation & LOG & Complete bibliography in required format \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=2em]
+  \item Load full source index at start of each Wave 1 track; cache for duration of that track
+  \item Rogers' own interview statements (Tape Op, Grammy.com, Berklee pages) are the most reliable; cache these as primary context
+  \item Geggy Tah module is the most research-intensive; keep Discogs and Wikipedia data in wave context
+  \item Dissertation findings are low-token, high-precision; include in CRAFT-SCI context from Wave 1 forward
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0 & 5,000 & 4,000 & 9,000 \\
+Wave 1A & 20,000 & 22,000 & 42,000 \\
+Wave 1B & 22,000 & 26,000 & 48,000 \\
+Wave 2 & 50,000 & 20,000 & 70,000 \\
+Wave 3 & 60,000 & 14,000 & 74,000 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{157,000} & \textbf{86,000} & \textbf{243,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+[W0: Source Index] ──────────────────────────────┐
+        |                                         |
+        +──────────────┬──────────────────+       |
+        |              |                  |       |
+        v              v                  v       |
+  [W1A: Tech]    [W1B: GeggyTah]   [W1B: McGill] |
+  [W1A: Prince]  [W1B: Stunt]                     |
+        |              |                          |
+        +──────────────+                          |
+                       |                          |
+                       v                          |
+               [W2: Berklee Lab] <────────────────+
+               [W2: Synthesis]
+                       |
+                       v
+               [W3: Verify + Publish]
+                       |
+                       v
+               [FINAL DOCUMENT]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Notes} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Source quality, numerical attribution, no medical claims \\
+Core functionality & 18 & Required & BLOCK & Module completeness, Geggy Tah depth, dissertation accuracy \\
+Integration & 6 & Required & BLOCK & Cross-module consistency, through-lines present \\
+Edge cases & 5 & Best-effort & LOG & Kurstin trajectory, Vault legal notes, tinnitus data gaps \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality throughout & All citations traceable to professional organizations, peer-reviewed journals, or professional interviews (Tape Op, Grammy.com, Red Bull, Berklee official). Zero entertainment media \\
+SC-NUM & Numerical attribution & Every chart position, sales figure, date, and percentage attributed to specific source \\
+SC-ADV & No advocacy & Document presents Rogers' choices as her own, without prescribing them as models for others \\
+SC-MED & Tinnitus claims & Tinnitus and hyperacusis data cite Rogers' own published statements only; no clinical claims or treatment guidance \\
+SC-IP & Prince Vault & No speculation about unreleased Vault contents; reference only publicly released archival material \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Module 1 formation completeness & Audio Industries, Rudy Records, grapevine story all present with sources \\
+CF-02 & Prince discography accuracy & Five album credits confirmed against Discogs and Wikipedia cross-validation \\
+CF-03 & Five technical decisions documented & Kick drum preference, vocal routing, Vault cataloguing, Sunset Sound vs. home studio distinction, Jesse Johnson role \\
+CF-04 & Geggy Tah both albums documented & Grand Opening (1994) and Sacred Cow (1996) both covered with production roles \\
+CF-05 & ``Whoever You Are'' production detail & Co-production credit (Rogers/Kurstin/Jordan), chart position (\#16 Modern Rock), Rogers' stated motivation \\
+CF-06 & Kurstin trajectory noted & Greg Kurstin's subsequent Grammy-winning career mentioned as context for why the project matters \\
+CF-07 & Stunt session specifics & Arlyn Studios, Austin, February 1998; three weeks; co-production with band and David Leonard \\
+CF-08 & Academic pivot timeline accurate & GED at 44, U of Minnesota (4 years), McGill admission, doctorate 2010 \\
+CF-09 & Dissertation topic accurately summarized & C/D roughness, short-term memory for intervals, Levitin/McAdams co-authors cited \\
+CF-10 & Berklee appointment date & 2008 (hired before dissertation completion) confirmed against Berklee source \\
+CF-11 & Listener profile seven dimensions & All seven present (authenticity, realism, novelty, melody, lyrics, rhythm, timbre) with neuroscience basis \\
+CF-12 & Tinnitus research scope & Lab research, musician populations, 47--49\% estimate cited to Rogers' own published statements \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Five phases documented, 3+ sources each & CF-01, CF-02, CF-08, CF-10, SC-SRC & Pending \\
+2. Geggy Tah both albums, co-production credit, Rogers' stated motivation & CF-04, CF-05 & Pending \\
+3. Five specific technical decisions (Prince module) & CF-02, CF-03 & Pending \\
+4. Production arc mentors identified & CF-01 (extended) & Pending \\
+5. McGill dissertation chapter with findings & CF-08, CF-09 & Pending \\
+6. Listener profile seven dimensions with citations & CF-11, SC-SRC & Pending \\
+7. Three explicit through-lines engineering to science & IN-01, IN-02, IN-03 & Pending \\
+8. All numerical claims attributed & SC-NUM & Pending \\
+9. No policy/career advocacy & SC-ADV & Pending \\
+10. Complete bibliography, professional sources only & SC-SRC, CF-01 & Pending \\
+11. Tinnitus section within cited scope & SC-MED, CF-12 & Pending \\
+12. Document self-contained & IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; cross-phase synthesis judgment; go/no-go gates \\
+PLAN & Planner & Wave decomposition; parallel track coordination \\
+SCOUT & Research Agent & Source gathering; interview material compilation; web research \\
+EXEC-A & Executor A & Modules 1--2 (Technician Formation + Prince Studio) \\
+EXEC-B & Executor B & Modules 3--4 (Production Arc + Academic Pivot) \\
+CRAFT-ENG & Engineering Analyst & Prince methodology deep analysis; technical decision documentation \\
+CRAFT-SCI & Science Analyst & Dissertation findings; listener profile model; psychoacoustics bridge \\
+VERIFY & Verification Agent & Source validation; numerical audit; citation completeness \\
+INTEG & Integration Agent & Cross-module through-line identification; consistency checking \\
+CAPCOM & HITL Interface & Human approval at wave boundaries (W0 $\to$ W1, W1 $\to$ W2, W2 $\to$ W3) \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+LOG & Chronicle Agent & Commit messages; audit trail; bibliography compilation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+Total Estimated Tokens & 243,000 \\
+Context Windows (estimated) & 4--6 \\
+Primary Sources & 18 (professional interviews + academic pages + discography databases) \\
+Safety-Critical Tests & 5 (all BLOCK) \\
+Core Functionality Tests & 18 (all BLOCK) \\
+Integration Tests & 6 (all BLOCK) \\
+Edge Case Tests & 5 (LOG) \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+HITL Checkpoints & 3 (between waves) \\
+Primary Deliverable & Comprehensive five-phase reference document \\
+Secondary Deliverable & Geggy Tah chapter for GGT (Deep Audio Analyzer) integration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Making music was Prince's way of being in the world. If he was awake, we were making music.''} --- Susan Rogers, Tape Op Magazine
+
+\vspace{0.8em}
+Rogers' observation about Prince is also the best description of her own relationship to sound: if she was awake, she was listening. The engineer who tracked every guitar solo for one man's waking life became the scientist who wanted to know why those guitar solos land differently in different skulls. The spaces between the phases of her career are not gaps --- they are the mechanism. The question was always the same question. The tools just changed.
+\end{quotebox}
+
+\end{document}

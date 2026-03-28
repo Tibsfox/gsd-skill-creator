@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Sensing Layer &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-snl">
+  <header>
+    <h1>The Sensing Layer</h1>
+    <div class="subtitle">IoT Sensors &middot; Environmental Monitoring &middot; Edge Computing &middot; Data Pipelines &middot; Open Science Mesh</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-microcontroller-substrate">MCU Substrate</a>
+      <a href="page.html?doc=02-light-systems-art">Light Systems</a>
+      <a href="page.html?doc=03-remote-sensing-fog">Remote Sensing</a>
+      <a href="page.html?doc=04-signal-processing-adc-dac">Signal Processing</a>
+      <a href="page.html?doc=05-mesh-weather-networks">Mesh Weather</a>
+      <a href="page.html?doc=06-open-science-coop">Open Science</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      There is a layer between the world and the computer that most people never think about &mdash;
+      the sensing layer. It is where the physics of our atmosphere, the photons bouncing off fog
+      droplets, the pressure waves of a foghorn, and the Doppler shift of a passing rainstorm get
+      translated into bits. That translation is not neutral. How we design it determines what we can
+      know, what we can share, and ultimately what kind of intelligence we can build together.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">38</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Sensing Domains</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-microcontroller-substrate" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Microcontroller Substrate</h3>
+        <div class="meta"><span class="tag tag-mcu">MCU</span> Track A &middot; Field node platforms</div>
+        <p>Arduino, ESP8266, ESP32, Raspberry Pi Pico / Pico 2 comparison. ADC linearity characterization, PIO-DAC at 150 MS/s, low-power amplifier selection for sensor conditioning, solar power budgets for field deployment.</p>
+      </a>
+
+      <a href="page.html?doc=02-light-systems-art" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Light Systems &amp; Light Art</h3>
+        <div class="meta"><span class="tag tag-light">Light</span> Track A &middot; LED and POV</div>
+        <p>WS2812B, DotStar/APA102, SK6812 RGBW protocols. Persistence of vision timing mathematics, Hall effect synchronization, shift register cascades, holographic POV on PTFE PCBs, inductive wireless power.</p>
+      </a>
+
+      <a href="page.html?doc=03-remote-sensing-fog" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Remote Sensing &amp; Fog Vision</h3>
+        <div class="meta"><span class="tag tag-sense">Sensing</span> Track B &middot; Multi-modal perception</div>
+        <p>Lidar time-of-flight at 905nm vs 1550nm. Millimeter-wave and X-band radar fog penetration. Ultrasonic sonar ranging. RTL-SDR Doppler weather sensing. Coherent Doppler lidar. Sensor fusion architectures for atmospheric opacity.</p>
+      </a>
+
+      <a href="page.html?doc=04-signal-processing-adc-dac" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Signal Processing, ADC/DAC &amp; Timekeeping</h3>
+        <div class="meta"><span class="tag tag-signal">Signal</span> Track B &middot; Conversion and time</div>
+        <p>SAR vs delta-sigma ADC architectures. ESP32 nonlinearity, ADS1115 16-bit precision. MCP4725 DAC, PiWave PIO-DAC 150 MS/s. I2S audio interfaces. DS3231 RTC, GPS PPS microsecond timing, SMPTE timecodes.</p>
+      </a>
+
+      <a href="page.html?doc=05-mesh-weather-networks" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: DIY Mesh Weather Networks</h3>
+        <div class="meta"><span class="tag tag-mesh">Mesh</span> Track C &middot; Distributed sensing</div>
+        <p>BME280/AHT20/GUVA-S12SD sensor suites. LoRa/Meshtastic telemetry protocol. MQTT to Home Assistant. NOAA NWS API calibration. 696-hour ESP8266 validation study. MeshBot weather alerts. Zero-trust observation signing.</p>
+      </a>
+
+      <a href="page.html?doc=06-open-science-coop" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Open Science Co-op Mesh</h3>
+        <div class="meta"><span class="tag tag-coop">Co-op</span> Track C &middot; Volunteer computing</div>
+        <p>BOINC 8.2.8 at 20+ PetaFLOPS daily. Folding@home 12.9 native PetaFLOPS. ARM64 Raspberry Pi participation. GPU-first CUDA/OpenCL leverage. Screensaver-as-science architecture. Zero-trust work unit validation. DoltHub federation.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Microcontroller platforms (ESP32, Pico)</td><td>M1, M4, M5</td><td>BPS, T55, SYS</td></tr>
+        <tr><td>LED addressable protocols</td><td>M2, M1</td><td>LED, SGL, SHE</td></tr>
+        <tr><td>Persistence of vision</td><td>M2</td><td>LED, SGL, SPA</td></tr>
+        <tr><td>Lidar / radar / sonar</td><td>M3</td><td>BPS, ECO, EMG</td></tr>
+        <tr><td>Fog penetration &amp; sensor fusion</td><td>M3, M5</td><td>ECO, PSS, K8S</td></tr>
+        <tr><td>ADC/DAC conversion</td><td>M4, M1</td><td>SGL, T55, DAA</td></tr>
+        <tr><td>GPS PPS / timekeeping</td><td>M4, M5</td><td>SYS, T55, SGL</td></tr>
+        <tr><td>LoRa / Meshtastic mesh</td><td>M5, M1, M6</td><td>BPS, SYS, EMG</td></tr>
+        <tr><td>NOAA / NWS API</td><td>M5, M6</td><td>ECO, PSS, AWF</td></tr>
+        <tr><td>BOINC / volunteer computing</td><td>M6</td><td>SYS, K8S, GSD2</td></tr>
+        <tr><td>Zero-trust data sharing</td><td>M5, M6</td><td>BPS, SYS, K8S</td></tr>
+        <tr><td>Phase synchronization</td><td>M2, M4</td><td>SGL, LED, T55</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+THE SENSING LAYER -- DOMAIN MAP
+===============================================================
+
+PHYSICAL WORLD
+    |
+    v
+[SENSING SUBSTRATE]
+  |-- Microcontrollers (Arduino, ESP32, RPi Pico 2, ESP8266)
+  |-- Atmospheric Sensors (BME280, GUVA-S12SD, Anemometer, Rain gauge)
+  |-- Light Systems (WS2812, DotStar, NeoPixel, POV arrays)
+  |-- Remote Sensing (LiDAR ToF, SONAR, RTL-SDR Doppler, Ultrasonic)
+    |
+    v
+[SIGNAL PROCESSING LAYER]
+  |-- ADC/DAC (12-bit SAR, PCF8591, MCP4725, I2S audio, PIO-DAC)
+  |-- Timekeeping (GPS PPS, NTP, SMPTE timecodes, RTC modules)
+  |-- Phase Synchronization (Hall sensors, IR interrupt, PLL)
+    |
+    v
+[MESH TRANSPORT LAYER]
+  |-- LoRa / Meshtastic (long-range, low-power telemetry)
+  |-- WiFi (ESP8266/ESP32 to Home Assistant, MQTT)
+  |-- Zero-Trust Data Sharing (signed packets, DoltHub co-op)
+    |
+    v
+[CO-OP COMPUTE LAYER]
+  |-- DIY Mesh Weather Nodes (Meshtastic WX, MeshBot)
+  |-- Screensaver Science (BOINC, Folding@home, GPU mesh)
+  |-- Global Atmospheric Co-op (NOAA NWS API, open data feeds)
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+MODULE A               MODULE B               MODULE C
+Microcontroller        Light Systems          Remote Sensing
+Substrate              &amp; Light Art            &amp; Fog Vision
+    |                      |                      |
+    +--------+-------------+-------------+--------+
+             |                           |
+         MODULE D                    MODULE E
+         Signal Proc.                DIY Mesh
+         ADC/DAC/Time                Weather
+             |                           |
+             +-----------+---------------+
+                         |
+                     MODULE F
+                   Open Science
+                   Co-op Mesh
+
+Cross-cutting: Zero-Trust Data Sharing (all modules)
+               Phase Sync &amp; Timecoding (B, C, D)
+               LoRa/Meshtastic transport (A, D, E)
+
+Parallel tracks:
+  Track A: M1 + M2 (MCU substrate + light systems)
+  Track B: M3 + M4 (remote sensing + signal processing)
+  Track C: M5 + M6 (mesh weather + open science)
+    </pre>
+  </main>
+
+  <footer>
+    <p>The Sensing Layer &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

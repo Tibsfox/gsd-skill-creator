@@ -1,0 +1,206 @@
+/* PIN — Steel Gray / Rust Ember / Reclamation Green theme, The Post-Industrial Network
+   Brand foundation loaded from brand.css */
+
+/* ===============================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =============================================== */
+
+:root {
+  --steel: #37474F;
+  --steel-light: #ECEFF1;
+  --steel-mid: #455A64;
+  --steel-dark: #263238;
+  --rust: #BF360C;
+  --rust-light: #FBE9E7;
+  --rust-mid: #D84315;
+  --reclaim: #1B5E20;
+  --reclaim-light: #E8F5E9;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--rust);
+  --link-hover: var(--reclaim);
+  --accent: var(--rust);
+  --accent-light: var(--rust-light);
+  --accent-dark: var(--steel-dark);
+  --card-bg: white;
+  --card-border: #CFD8DC;
+  --card-shadow: rgba(191,54,12,0.12);
+  --border: #CFD8DC;
+  --parchment: var(--steel-light);
+}
+
+/* ===============================================
+   2. HEADER — steel-to-rust industrial gradient
+   =============================================== */
+
+header {
+  background: linear-gradient(135deg, #1a1f24 0%, #2e3a42 40%, #3e2015 100%);
+  border-bottom: 4px solid var(--rust);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(191,54,12,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(27,94,32,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #ECEFF1; }
+header .subtitle { color: #FFAB91; }
+
+/* ===============================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =============================================== */
+
+h2 {
+  color: var(--steel-dark);
+  border-bottom-color: var(--steel-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--rust); }
+
+/* ===============================================
+   4. THEMED COMPONENTS
+   =============================================== */
+
+blockquote {
+  background: var(--rust-light);
+  border-left: 4px solid var(--rust);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--steel-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(191,54,12,0.04); }
+tr:hover { background: rgba(191,54,12,0.08); }
+
+pre {
+  background: #1a1f24;
+  color: #E2E8F0;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--rust-mid);
+}
+code {
+  background: var(--rust-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--rust);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===============================================
+   5. CARDS — border-color hover
+   =============================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #CFD8DC;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(191,54,12,0.12); border-color: var(--rust); }
+
+/* ===============================================
+   6. STATS — grid layout
+   =============================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #CFD8DC;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--rust);
+}
+
+/* ===============================================
+   7. TAGS
+   =============================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-hist { background: var(--rust-light); color: var(--rust); }
+.tag-topo { background: #E3F2FD; color: #1565C0; }
+.tag-ethi { background: #FFF3E0; color: #E65100; }
+.tag-synth { background: var(--reclaim-light); color: var(--reclaim); }
+.tag-nexus { background: #F3E5F5; color: #7B1FA2; }
+.tag-outlier { background: #ECEFF1; color: var(--steel); }
+
+/* ===============================================
+   8. SPECIAL COMPONENTS
+   =============================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.network-diagram {
+  background: #1a1f24;
+  color: #FFAB91;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+  border-left: 3px solid var(--rust);
+}
+
+.cross-links {
+  background: white;
+  border: 1px solid #CFD8DC;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--rust); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--rust-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--rust);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #FFCCBC; text-decoration: none; }
+
+/* ===============================================
+   9. RESPONSIVE
+   =============================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}

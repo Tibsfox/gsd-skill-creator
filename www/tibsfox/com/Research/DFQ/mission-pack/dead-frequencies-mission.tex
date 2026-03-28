@@ -1,0 +1,1044 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Vintage Radio / Broadcast History ──────────────────────────
+\definecolor{primary}{HTML}{5D1A1A}       % Deep broadcast maroon
+\definecolor{secondary}{HTML}{7A5000}     % Dark gold, vintage dial
+\definecolor{tertiary}{HTML}{37474F}      % Slate
+\definecolor{accent}{HTML}{8B3A3A}        % Mid-broadcast red
+\definecolor{lightprimary}{HTML}{FBF0F0}  % Parchment blush
+\definecolor{lightsecondary}{HTML}{FDF5E0} % Warm cream
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Headers/Footers ───────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{100.7 FM Seattle --- Pre-Wolf Era History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Custom Environments ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={KKWF 100.7 FM Pre-Wolf Era -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ═════════════════════════════════════════════════════════════════════════════
+
+% ── Title Page ────────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Dead Frequencies\\[0.3em]\& Living History}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{The Pre-Wolf Era of 100.7 FM Seattle (1948--2005)}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study into Nine Call Signs, Seven Format Eras,\\and 57 Years of Radio Evolution on a Single Frequency}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 9 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Dead Frequencies \& Living History --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Ready for GSD Orchestrator}
+\metafield{Depends on:}{None (foundational research mission)}
+\metafield{Context:}{Cold-start research mission commissioned to deepen the historical foundation of the KKWF 100.7 frequency record, specifically the pre-Wolf era (1948--2005) identified as underserved in prior documentation.}
+
+\subsection{Vision}
+
+The frequency 100.7 MHz has been broadcasting continuously into Puget Sound airspace since 1948---78 years of unbroken signal from a transmitter on Tiger Mountain in Issaquah. That signal has carried CBS soap operas and big-band dramas, automated beautiful music, progressive rock, adult contemporary, talk radio edged with testosterone, and finally, country music. The station has held at least six distinct FCC call signs, gone through at least seven format identities, and changed corporate ownership four times. It has been owned by a Pacific Northwest newspaper family, a religious broadcasting conglomerate, and two successive national radio corporations. Today it is \textit{The Wolf}. But 57 years before The Wolf, it was something else entirely---in fact, it was many things.
+
+The prior documentation of this frequency compressed the 1948--2005 arc into a short summary: nine call signs and seven format eras in roughly 267 lines. Some eras received only a paragraph. The founding CBS simulcast period (1948--mid 1960s), the Drake-Chenault automation experiments (1967--1972), the Bonneville beautiful music dynasty (1973--1991), and the complex talk-radio interregnum (1991--2005) each deserve their own architectural investigation. These are not merely radio formats---they are maps of who Seattle was, decade by decade, and what it wanted to hear.
+
+The GSD ecosystem approaches this as it approaches every complex system: with the Amiga Principle. Architectural leverage over brute force. Rather than treating 57 years of radio history as a flat timeline to be serialized, this mission decomposes the arc into five parallel research modules that can be executed simultaneously, then synthesized into a single authoritative document. The frequency is the unit circle---every call sign a point on the circumference, every format shift an arc connecting them. The mission is to walk the entire circle and understand each arc fully before trusting the map.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{The founding era is structurally absent.} The 1948--1963 period---Queen City Broadcasting Company, Saul Haas, the CBS network affiliation, the KIRO AM simulcast, and the Golden Age of Radio context---is documented only in passing. The corporate and cultural architecture that gave birth to this frequency is not understood.
+
+  \item \textbf{The automation and format experimentation window is poorly mapped.} The 1963--1974 period included Bonneville's acquisition, the FCC mandate forcing FM independence, the ``Young Sound'' automated AC format (originating at WCBS New York), Drake-Chenault's ``Hit Parade'' top-40 automation, a brief progressive rock era, and the pivot toward Beautiful Music. This decade of experimentation is historically significant and currently under-documented.
+
+  \item \textbf{The KSEA Beautiful Music dynasty deserves a full profile.} From 1973 to 1991, the frequency operated as KSEA and dominated Seattle ratings as the flagship outlet of Bonneville Program Services. The format evolution from instrumental-heavy beautiful music to ``Easy 101'' to soft adult contemporary tracks the precise demographic aging of the Baby Boom cohort in real time. This is a unique archival resource.
+
+  \item \textbf{The talk radio years are narratively fragmented.} The 1991--2005 window includes four distinct phases and five overlapping call sign identities: KWMX, KIRO-FM (second instance), the Buzz, KQBZ. The Howard Stern / satellite radio cascade that ultimately triggered the Wolf flip deserves explicit causal documentation.
+
+  \item \textbf{The call sign count discrepancy is unresolved.} Prior documentation notes ``nine call signs'' while primary FCC records show only six distinct call sign designations (with KIRO-FM appearing twice in sequence). Whether the count of nine reflects sub-branding, HD subchannel identities, or a source discrepancy in the FCC archive is unverified.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Frequency as Stratigraphic Record.} A single FM frequency is a geological column---each format era a stratum laid down by distinct cultural and economic pressures. This mission applies stratigraphic logic to broadcast history: core samples of each era, with attention to the boundaries (flip events) as much as the layers themselves.
+
+\subsubsection{Domain Map: 100.7 FM Ownership Lineage}
+
+\begin{asciibox}
+100.7 MHz OWNERSHIP AND CALL SIGN LINEAGE
+Tiger Mountain Transmitter / Puget Sound Broadcast Area
+
+1948 ──────────────────────────────────────────────────────
+  QUEEN CITY BROADCASTING CO. (Saul Haas)
+  Call: KIRO-FM
+  Format: CBS Network simulcast (AM 710)
+  Context: Golden Age of Radio -- dramas, comedy, big band
+
+1958  KIRO-TV signs on as CBS television affiliate
+      FM begins transitioning away from full simulcast
+
+1963 ──────────────────────────────────────────────────────
+  BONNEVILLE INTERNATIONAL CORP. (LDS Church acquires)
+  Call: KIRO-FM (retained)
+  Format: MOR pop / "Young Sound" automated AC (WCBS origin)
+  FCC mandate: FM independence from AM (late 1960s)
+
+1967-1973  Progressive Rock brief experiment
+           Drake-Chenault "Hit Parade" Top-40 automation
+           Pivot to Beautiful Music (WRFM/Bonneville Program Services)
+
+1974/1975 ────────────────────────────────────────────────
+  BONNEVILLE INTERNATIONAL CORP. (continued)
+  Call: KSEA (new identity, separate from AM)
+  Format: Beautiful Music (instrumental) -> "Easy 101" -> Soft AC -> AC
+
+1991 ──────────────────────────────────────────────────────
+  BONNEVILLE INTERNATIONAL CORP. (continued)
+  Call: KWMX "Mix 101"
+  Format: Hot Adult Contemporary (brief -- under 1 year)
+
+1992 ──────────────────────────────────────────────────────
+  BONNEVILLE INTERNATIONAL CORP. (continued)
+  Call: KIRO-FM (reinstated -- "Triple Play" simulcast of 710)
+  1994: Independent talk format
+  Jan 1995: "100.7 The Buzz" branding / Tom Leykis
+
+1997 ──────────────────────────────────────────────────────
+  ENTERCOM COMMUNICATIONS (acquires from Bonneville)
+  Call: KIRO-FM / KQBZ (May 1999)
+  Format: Hot Talk "Radio for Guys"
+  Talent: Tom Leykis, BJ Shea, Men's Room, Robin & Maynard
+
+2005 ──────────────────────────────────────────────────────
+  ENTERCOM COMMUNICATIONS (continued)
+  Call: KKWF (Nov 30, 2005 noon flip)
+  Format: Country "100.7 The Wolf"
+  First song: "How Do You Like Me Now?!" -- Toby Keith
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
++──────────────────────+     +──────────────────────+
+|  MODULE 1            |     |  MODULE 2            |
+|  THE FOUNDING ERA    |<--->|  AUTOMATION &        |
+|  1948-1963           |     |  EXPERIMENTATION     |
+|  Queen City / CBS    |     |  1963-1974           |
+|  Network, Saul Haas  |     |  Bonneville acq.     |
++──────────────────────+     |  Drake-Chenault      |
+           |                 +──────────────────────+
+           v                            |
++──────────────────────+                v
+|  MODULE 3            |     +──────────────────────+
+|  THE KSEA DYNASTY    |     |  MODULE 4            |
+|  1974-1991           |<--->|  THE TALK YEARS      |
+|  Beautiful Music     |     |  1991-2005           |
+|  "Easy 101"          |     |  KWMX/KIRO/KQBZ      |
+|  Soft AC evolution   |     |  Buzz / Leykis era   |
++──────────────────────+     +──────────────────────+
+           |                            |
+           +────────────+───────────────+
+                        |
+                        v
+           +──────────────────────+
+           |  MODULE 5            |
+           |  THE WOLF LAUNCH &   |
+           |  COUNTRY WARS        |
+           |  2005-present        |
+           |  Howard Stern        |
+           |  cascade, KMPS       |
+           |  rivalry, Audacy     |
+           +──────────────────────+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: The Founding Era (1948--1963)}
+The Queen City Broadcasting Company, owner Saul Haas, and the original KIRO-FM as a CBS network simulcast. Covers the Golden Age of Radio context, the CBS affiliation structure (KIRO AM 710), the technical sign-on (100.7 MHz, 1948), programming genres of the era (drama, comedy, big band, news), and the seismic shift as television began absorbing network radio audiences. Ends with the Bonneville International acquisition in 1963.
+
+\subsubsection{Module 2: Automation and Format Experimentation (1963--1974)}
+Bonneville's programming philosophy, the FCC mandate requiring independent FM programming in major markets (late 1960s), and the subsequent rapid format experiments: ``The Young Sound'' (automated AC originating at WCBS New York), Drake-Chenault's ``Hit Parade'' top-40 automation (1968--1969), a progressive rock window, and the final pivot to Beautiful Music using the WRFM New York program service (later renamed Bonneville Program Services), beginning approximately 1971--1973.
+
+\subsubsection{Module 3: The KSEA Beautiful Music Dynasty (1974--1991)}
+The rebranding as KSEA (1974/1975) to decouple the FM station's identity from the AM. The Bonneville Program Services beautiful music format, its competitive position against KEUT, KEZX, KBIQ, and KIXI. The gradual evolution from purely instrumental beautiful music to the mixed-vocal ``Easy 101'' format (early 1980s), to soft adult contemporary (mid-1980s), to mainstream adult contemporary (February 17, 1989). Includes the extraordinary detail of KSEA simulcasting its audio on KIRO-TV during sign-off overnight periods in the late 1980s and early 1990s.
+
+\subsubsection{Module 4: The Talk Radio Interregnum (1991--2005)}
+The hot AC pivot as KWMX ``Mix 101'' (April 1991), its brief lifespan (under one year), the September 21, 1992 return to KIRO-FM call letters as part of the ``Triple Play'' simulcast of KIRO 710, the ``News Outside the Box'' experiment (February--September 1993), the independent talk launch on July 5, 1994, the ``100.7 The Buzz'' rebrand (January 6, 1995), the Entercom acquisition (March 1997), the KQBZ call letters (May 1999), and the ``Radio for Guys'' hot talk era featuring Tom Leykis, BJ Shea, The Men's Room, and Robin \& Maynard.
+
+\subsubsection{Module 5: The Wolf Launch and the Country Wars (2005--Present)}
+The November 30, 2005 noon flip triggered by Howard Stern's departure to satellite radio. The first song (Toby Keith), the 15,000+ commercial-free country songs opening run, the direct competitive strategy against Infinity/CBS Radio's KMPS. The 12-year KKWF vs.\ KMPS duopoly, the November 2017 Entercom-CBS merger, the December 4, 2017 ``Battle in Seattle'' (KMPS flipped to soft AC, Hubbard's KVRQ flipped to country 90 minutes later), and KKWF's current identity under Audacy including military philanthropy focus and CMA recognition.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+kkwf_pre_wolf_research:
+  mission: "78-year frequency history -- full stratigraphic audit"
+  chipset:
+    agnus: "source_harvester"        # FCC archives, Broadcasting Yearbooks
+    denise: "narrative_renderer"     # Era profiles, format evolution stories
+    paula: "synthesis_engine"        # Cross-era patterns, call sign audit
+    68000: "integration_validator"   # Cross-module consistency, gap detection
+  activation_profile: "squadron"
+  model_split:
+    opus: "30%"                      # Synthesis, cross-era pattern detection
+    sonnet: "60%"                    # Era profiles, source compilation
+    haiku: "10%"                     # Schema scaffolding, index building
+  safety_warden:
+    sc_src: "BLOCK on entertainment media citations"
+    sc_num: "BLOCK on unsourced numerical claims"
+    sc_adv: "ANNOTATE on format-war advocacy framing"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=2em]
+  \item Full timeline of 100.7 MHz from sign-on (1948) through the Wolf launch (2005) and present status
+  \item All FCC call sign transitions with documented dates, verified against primary FCC records
+  \item All format eras with programming content detail where records exist
+  \item Ownership chain: Queen City Broadcasting $\rightarrow$ Bonneville International $\rightarrow$ Entercom $\rightarrow$ Audacy
+  \item Competitive context: other Seattle FM stations occupying adjacent formats in each era
+  \item Key on-air personalities and programming landmarks in each era
+  \item The call sign count discrepancy (``nine'' vs.\ six confirmed) resolved via FCC archive research
+  \item Technical infrastructure: transmitter location, power, HAAT history
+  \item The Drake-Chenault automation era with specific program service identification
+  \item The Bonneville Program Services beautiful music architecture
+  \item The Howard Stern departure cascade and its direct causal role in the Wolf flip
+  \item The KMPS rivalry arc from 1978 to 2017
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=2em]
+  \item Financial/ratings data (Arbitron/Nielsen) unless directly cited in primary sources
+  \item Biographical profiles of individual on-air talent beyond their role in format history
+  \item Other Seattle FM stations except as direct competitive context
+  \item HD Radio subchannel programming history (v2.0 candidate)
+  \item National radio industry economics except where they directly drove format decisions
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Complete call sign timeline:} All FCC call sign transitions documented with verified start/end dates; the nine-vs.-six discrepancy resolved with primary source citation.
+  \item \textbf{Format era completeness:} All seven format eras individually profiled with programming content, competitive context, and transition trigger documented.
+  \item \textbf{Founding era depth:} The 1948--1963 Queen City / CBS network period documented with at least three primary source references.
+  \item \textbf{Automation era specificity:} Drake-Chenault program services (``Young Sound,'' ``Hit Parade'') identified with their originating stations and syndication architecture.
+  \item \textbf{KSEA dynasty profile:} Bonneville Program Services architecture documented; ``Easy 101'' branding era dated; KSEA-on-KIRO-TV overnight simulcast documented.
+  \item \textbf{Talk era completeness:} All five phases of the talk interregnum (KWMX, KIRO-FM simulcast, independent talk, The Buzz, KQBZ) individually documented with transition dates.
+  \item \textbf{Wolf launch precision:} The November 30, 2005 flip fully documented including the Howard Stern cascade, the specific stunting mechanism (Microsoft Sam countdown), the first song, and the immediate talent redistribution to KISW.
+  \item \textbf{Country wars resolution:} The KMPS rivalry arc traced from 1978 to the December 4, 2017 Battle in Seattle, including Entercom acquisition and KVRQ counter-flip.
+  \item \textbf{Source quality:} All claims attributed to Broadcasting Yearbooks, FCC records, contemporary newspaper reporting, or RadioDiscussions.com primary archive threads.
+  \item \textbf{Competitive landscape per era:} At least three concurrent competitor stations identified for each major format era.
+  \item \textbf{Ownership transitions dated:} Each of the four ownership transitions documented with year and acquiring entity.
+  \item \textbf{Document self-containment:} A reader with no prior Seattle radio knowledge can follow the full 78-year arc without external reference.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+Prior 267-line frequency summary & Predecessor; this mission expands what was compressed & Archived \\
+KMPS/KSWD history & Parallel research needed for country wars module & Not started \\
+Seattle FM competitive landscape & Required context for Modules 1--4 & Not started \\
+Bonneville International broadcast history & Provides corporate context for 1963--1997 & Not started \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Every format flip in the history of 100.7 FM was, in the language of the ecosystem, an interrupt. A signal from the environment that the current process no longer matched the needs of the system. The CBS simulcast ended because television had claimed the network audience. The ``Young Sound'' automation arrived because Bonneville needed to hold FM listeners who were no longer satisfied with network programming. The beautiful music era arrived because a demographic was aging into the living room. The talk era arrived because that same demographic wanted to argue. And The Wolf arrived because a satellite radio company stole morning radio's most valuable node, and the cascading vacancies had to be filled.
+
+This is the Amiga Principle applied to radio economics: every transition was a specialized execution path chosen under constraint. Not brute-force format chasing, but architectural response to real signals. The history of this frequency is a 78-year log of how a single broadcast system adapted, one interrupt at a time, to the changing nervous system of a city.
+
+The spaces between the call signs are where the history lives.
+
+% ═════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Dead Frequencies \& Living History --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference synthesizes primary and secondary sources across the five research modules. Sources are ranked by authority: FCC archival records $>$ Broadcasting Yearbooks $>$ contemporary newspaper reporting $>$ Wikipedia (FCC-verified sections) $>$ RadioDiscussions.com community archival threads (treated as oral history, requiring corroboration).
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{FCC CDBS / LMS} --- Licensing and Management System, Facility ID 6367 (KKWF). Primary authority for call sign history.
+  \item \textbf{Broadcasting Yearbooks} (American Radio History archive) --- Annual reference volumes 1950, 1964, 1998 confirm ownership and technical data.
+  \item \textbf{Radio \& Records} --- Contemporary trade weekly; January 13, 1995 (Buzz launch); February 17, 1989 (KSEA AC flip); December 9, 2005 (Wolf launch).
+  \item \textbf{The Seattle Times / The News Tribune} --- Contemporary newspaper coverage of format flips.
+  \item \textbf{RadioDiscussions.com} --- Community archive threads; ``Seattle FM stations in the 1970s'' (2006); ``Some old Seattle sounds from the 60s and 70s'' (2013); ``Early FM Top 40 in Seattle'' (2013).
+  \item \textbf{QZVX.com / Puget Sound Radio Broadcasters Association} --- Regional broadcast history database with call sign spectrum records.
+  \item \textbf{Format Change Archive (formatchangearchive.com)} --- Documented the November 30, 2005 Wolf launch.
+  \item \textbf{Inside Radio / RadioInsight} --- Trade reporting on 2017 KMPS flip.
+\end{itemize}
+
+\subsection{Module 1 Reference: The Founding Era (1948--1963)}
+
+\subsubsection{Sign-On and Corporate Context}
+
+The station first signed on in 1948 at 100.7 MHz as KIRO-FM, owned by the Queen City Broadcasting Company, which was controlled by Saul Haas. The station was co-owned with AM 710 KIRO, which had been broadcasting since 1927 (originally as KPCB on 650 kHz, founded by Moritz Thomsen of the Pacific Coast Biscuit Company). KIRO-FM was licensed as a CBS Radio Network affiliate, simulcasting the full AM schedule: dramas, comedies, news, sports, soap operas, game shows, and big-band broadcasts.
+
+The station's transmitter was located on Queen Anne Hill, co-located with KING-TV's transmitter, which would soon also become the site for KOMO-TV. This antenna co-location reflects the geography of early Seattle broadcasting infrastructure.
+
+\subsubsection{CBS Network Era Programming}
+
+The simulcast programming of 1948--approximately 1960 represented what historians call the ``Golden Age of Radio.'' KIRO AM's schedule---carried identically on the FM---included the full CBS lineup: the CBS Radio Mystery Theater precursors, news, sports play-by-play, and the big-band music that dominated the era. KIRO-AM was a 50,000-watt Class A clear-channel station, the most powerful AM configuration available, establishing the signal's reach from the moment KIRO-FM joined it.
+
+\subsubsection{Television Disruption and MOR Transition}
+
+In 1958, Queen City Broadcasting was awarded Seattle's last remaining VHF television license and signed on as CBS affiliate KIRO-TV on February 8, 1958. The arrival of television in the same corporate family marked the beginning of network radio's collapse as a mass entertainment platform. As network programming migrated to television, KIRO-AM-FM transitioned to a ``full service'' middle-of-the-road (MOR) format: pop music, news, and sports. This is consistent with the national pattern across CBS and NBC radio affiliates in the late 1950s and early 1960s.
+
+\subsubsection{The Bonneville Acquisition (1963)}
+
+Saul Haas sold Queen City Broadcasting to The Deseret News Publishing Company, part of the Church of Jesus Christ of Latter-day Saints (LDS Church), in 1963. When the LDS Church reorganized its broadcasting properties as Bonneville International Corporation, Haas joined Bonneville's board. The Broadcasting Yearbook for 1964 (page B-172) confirms the ownership transfer. Bonneville executives Lloyd Cooney and Ken Hatch arrived in Seattle in 1964 to lead KIRO-AM-FM-TV.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{Owner} & \tableheader{Format} & \tableheader{Key Event} \\
+\midrule
+1948--1963 & Queen City Broadcasting (Haas) & CBS Network simulcast & KIRO-TV sign-on 1958 \\
+1963 & Bonneville International & MOR pop/news transition & LDS acquisition \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2 Reference: Automation and Experimentation (1963--1974)}
+
+\subsubsection{The FCC Independence Mandate}
+
+In the late 1960s, the Federal Communications Commission began requiring FM stations in large markets to stop full-time simulcasts of their co-owned AM stations. This mandate forced Bonneville to program KIRO-FM independently, creating the laboratory conditions for a decade of format experimentation.
+
+\subsubsection{``The Young Sound'' Automated AC (Mid-1960s)}
+
+KIRO-FM's first independent programming identity was ``The Young Sound,'' an automated adult contemporary format that originated at WCBS-FM in New York City. This is documented in RadioDiscussions.com community archives, where a poster with first-hand knowledge identifies the format specifically. The ``Young Sound'' was part of a national wave of FM automation in the mid-1960s, when stations discovered that a tight, clean automated music format could attract FM listeners without the cost of live programming. The automation technology at this period used sequential mechanical playback systems; one participant in the RadioDiscussions thread recalls that the Queen Anne Hill transmitter site used ``some kind of punched paper roll for its program.''
+
+\subsubsection{Drake-Chenault ``Hit Parade'' (1968--1969)}
+
+By 1968, KIRO-FM had switched to Drake-Chenault's ``Hit Parade'' top-40 automation format. Bill Drake and Gene Chenault had built the most successful radio format consulting operation in the country from their base at KHJ Los Angeles (RKO). The ``Hit Parade'' format was distinct from their flagship ``Boss Radio''---it was a syndicated reel-to-reel tape service providing a tight, fast-paced top-40 sound suitable for automation. In 1969, KIRO-FM was one of only two Seattle stations to air Drake-Chenault's landmark ``History of Rock and Roll'' documentary production (along with KFKF-FM 92.5), specifically because both already carried Drake-Chenault services. This is documented in the QZVX.com archive.
+
+\subsubsection{Progressive Rock Window (c.\ 1967--1973)}
+
+Wikipedia's KKWF article records a brief progressive rock format beginning in 1967, preceding or concurrent with the Drake-Chenault period. Community archival sources on RadioDiscussions note that KIRO-FM was involved in format experimentation in this window, with the exact boundaries difficult to pin without direct Broadcasting Yearbook verification. Some sources date the Beautiful Music pivot to 1971, others to 1973; the Wikipedia article uses 1973 with the WRFM program service.
+
+\subsubsection{The Bonneville Beautiful Music Pivot (1971--1973)}
+
+The station transitioned to the ``Beautiful Music'' format utilizing the WRFM (New York City) program service, which Bonneville subsequently renamed the Bonneville Program Services. By this period, Bonneville had moved its Seattle radio and TV stations to the newly constructed ``Broadcast House'' at Third and Broad Streets (1968). The beautiful music pivot was the dominant FM strategy of the early 1970s nationally: in the mid-1970s Seattle market, RadioDiscussions participants confirm that the beautiful music format was the \#1 billing format in the market, and KSEA ``owned the ratings.''
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Format} & \tableheader{Service / Origin} & \tableheader{Notes} \\
+\midrule
+MOR / ``Young Sound'' & WCBS-FM New York & Automated AC; paper-roll automation \\
+Drake-Chenault ``Hit Parade'' & Drake-Chenault, KHJ LA & Syndicated reel-to-reel top-40; aired HRR '69 \\
+Progressive Rock & Local/national & Brief; exact dates uncertain \\
+Beautiful Music & WRFM / Bonneville Program Services & Full pivot, rating dominance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3 Reference: The KSEA Beautiful Music Dynasty (1974--1991)}
+
+\subsubsection{The KSEA Rebrand}
+
+In 1974 (some sources say 1975; FCC PSRBA records list ``1975--1991 KSEA''), the KIRO-FM call sign was changed to KSEA to create a distinct identity separate from the AM. The name ``KSEA'' evoked the geography of Puget Sound and positioned the station as a premium easy-listening destination. At this time, KSEA competed directly with KEUT (94.1, beautiful music), KEZX (98.9), KBIQ (105.3), and KIXI (95.7)---an extraordinarily crowded easy-music market. Despite the competition, KSEA's Bonneville Program Services affiliation gave it the most polished and well-resourced product.
+
+\subsubsection{Beautiful Music Architecture}
+
+The Bonneville Program Services format was highly standardized: mostly instrumental recordings (orchestral arrangements of pop standards and light classical pieces), minimal DJ intrusion, smooth segues, and a relaxed pace. A poster on the 70s Kid Memories blog who worked at KSEA during college weekends describes it as ``audio Valium,'' with background music ``by the Dentist's Office Singers.'' This is the format as listeners experienced it. The format was broadcast at the time without New Age, satellite radio, or internet radio alternatives; it occupied a genuine social function for listeners who needed a low-stimulation audio environment.
+
+\subsubsection{``Easy 101'' and the Vocal Evolution (Early 1980s)}
+
+The KSEA format gradually evolved from mostly instrumental beautiful music to a mix of instrumentals and vocals, branded as ``Easy 101.'' A 1981 KSEA Radio Seattle TV spot (archived on YouTube) confirms this branding. The addition of vocals tracked the aging of the beautiful music audience: as Baby Boomers entered their thirties, they sought a slightly more contemporary sound while retaining the relaxed, undemanding character of the format.
+
+\subsubsection{Soft AC and Mainstream AC Transitions (Mid-to-Late 1980s)}
+
+As the easy listening audience continued aging through the mid-1980s, KSEA moved to soft adult contemporary music---a category with more contemporary artists and a slightly more energetic presentation. The \textit{Radio \& Records} trade weekly, in its February 17, 1989 issue, confirmed the final pivot: KSEA shifted to a mainstream adult contemporary format on that date. This is the sharpest documented transition in the station's pre-talk era.
+
+The KSEA era also includes one remarkable technical artifact: the station simulcast its audio on KIRO-TV throughout the late 1980s and into the early 1990s during the television station's sign-off overnight periods. This cross-platform use of FM audio as television overnight fill predates modern digital integration concepts by decades.
+
+\subsubsection{Competitive Landscape, 1975--1991}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Call} & \tableheader{Freq.} & \tableheader{Format} & \tableheader{Notes} \\
+\midrule
+KSEA & 100.7 & Beautiful Music $\rightarrow$ Easy $\rightarrow$ AC & \#1 billing in market mid-70s \\
+KEUT & 94.1 & Beautiful Music 1975--78 & Later became KMPS country \\
+KEZX & 98.9 & Beautiful Music 1972--82 & Later KWJZ smooth jazz \\
+KIXI & 95.7 & Beautiful Music to 1980 & Later KJR-FM \\
+KBRD & 103.7 & Beautiful Music 1976--90 & Tacoma co-owned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4 Reference: The Talk Radio Interregnum (1991--2005)}
+
+\subsubsection{KWMX ``Mix 101'' Hot AC (April 1991 -- September 1992)}
+
+The station shifted to hot adult contemporary as KWMX (``Mix 101'') in April 1991. This was one of the shortest-lived format eras in the frequency's history---under 18 months. A 1991 KWMX promo and a 1992 ``Mix 100.7 FM WA TV Ad Commercial'' are both archived on YouTube, providing audio-visual documentation of this brief identity. The move was consistent with a national wave of easy-listening stations pivoting toward more contemporary sounds as the beautiful music audience aged beyond radio advertising demographics.
+
+\subsubsection{KIRO-FM Reinstated: The Triple Play Simulcast (September 1992 -- July 1994)}
+
+On September 21, 1992 (confirmed by \textit{Radio \& Records} September 11, 1992), the station returned to a simulcast of KIRO 710 and reinstated the KIRO-FM call letters. This was part of Bonneville's ``Triple Play'' convergence strategy: KIRO 7 (television), KIRO 710 (AM), and KIRO 100.7 (FM) operating as a unified brand. From February to September 1993, the bundle was promoted as the ``KIRO News Network.'' The FM broke the simulcast (except mornings) on July 5, 1994, launching an independently programmed talk format.
+
+\subsubsection{The Independent Talk Launch and The Buzz (1994--1999)}
+
+The 1994 independent talk lineup included Dr.\ Laura Schlessinger, Gil Gross (syndicated from San Francisco), Leslie Marshall, and local comedian Pat Cashman in morning drive. On January 6, 1995 (\textit{Radio \& Records} January 13, 1995), the station rebranded as ``100.7 The Buzz'' and added the syndicated Tom Leykis Show. KIRO-FM was sold by Bonneville to Entercom Communications of Bala Cynwyd, Pennsylvania, in March 1997 (\textit{Broadcasting \& Cable Yearbook 1998}, page D-442).
+
+\subsubsection{KQBZ: ``Radio for Guys'' (May 1999 -- November 2005)}
+
+The station changed its call letters to KQBZ in May 1999 and shifted to ``hot talk'' with the promotional slogan ``Radio for Guys.'' Stephanie Simons reported in \textit{The News Tribune} on April 8, 1999: ``KIRO-FM adds, drops on-air personalities'' around the transition. The KQBZ era assembled one of the most distinctive local talk radio lineups in Seattle history:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Robin \& Maynard} (Robin Erickson and Maynard) --- mornings (previously on KZOK-FM)
+  \item \textbf{BJ Shea} --- middays (``The BJ Shea Experience'' launching 1999 as two-hour midday show)
+  \item \textbf{Tom Leykis} --- afternoons (syndicated from KLSX Los Angeles; ``Blow Me Up Tom'' catchphrase)
+  \item \textbf{The Men's Room} (Miles Montgomery and Steve ``The Thrill'' Hill) --- evenings
+  \item \textbf{John and Jeff / All-Comedy Radio} --- late nights
+\end{itemize}
+
+In May 2005, Entercom Seattle was sued by Robin Erickson on charges of gender discrimination. The promotional slogan ``Radio for Guys'' was cited as evidence of a hostile work environment. BJ Shea was named in the suit's allegations but not as a direct defendant.
+
+\subsubsection{The Howard Stern Cascade and the Wolf Flip}
+
+Howard Stern announced his departure from terrestrial radio to Sirius Satellite Radio, effective January 1, 2006. He had been broadcasting mornings on Entercom's KISW (99.9 FM) in Seattle. When the KISW morning slot opened, Entercom moved BJ Shea from KQBZ middays to KISW mornings---but this created a cascade vacancy at KQBZ that the station's economics could not sustain by simply promoting another midday host.
+
+Entercom's parallel strategy, modeled on the success of sister station KWJJ in Portland, was to launch a country station designed to challenge Infinity/CBS Radio's KMPS (94.1), which had been the dominant country outlet in Seattle since 1978. At 8 a.m.\ on November 30, 2005, in the middle of the Robin \& Maynard show, KQBZ began stunting with a Microsoft Sam countdown clock to noon. At noon, the station flipped to country as KKWF, ``100.7 The Wolf.'' Ernest A.\ Jasmin reported in \textit{The News Tribune} on December 3, 2005: ``KQBZ-FM radio drops talky Buzz format to become country Wolf.''
+
+The first song played was ``How Do You Like Me Now?!'' by Toby Keith.
+
+\subsection{Module 5 Reference: The Wolf Era and Country Wars (2005--Present)}
+
+\subsubsection{The Launch and the Commercial-Free Opening}
+
+Immediately following the noon flip, The Wolf played more than 15,000 country songs commercial-free over the following weeks. This opening stunt was documented in Country Insider's 20th anniversary profile (November 2025). The station was explicitly patterned after Entercom sister station KWJJ in Portland.
+
+\subsubsection{The KMPS Rivalry (2005--2017)}
+
+KMPS (94.1 FM) had been a country outlet in the Seattle market since February 1, 1978, when it launched as KMPS-FM simulcasting its AM sister station. It was the dominant and sometimes only full-market country station in Seattle for 27 years before The Wolf arrived. Throughout the Wolf's first decade, KMPS consistently outrated KKWF. In the November 2017 Nielsen Audio PPM ratings, KMPS posted a 3.8 (persons 6+) vs.\ KKWF's 2.9. RadioInsight estimates that KMPS outbilled KKWF by approximately 2:1 in 2016.
+
+\subsubsection{The 2017 Battle in Seattle}
+
+On February 2, 2017, CBS Radio announced its merger with Entercom. KMPS would become an Entercom sister station to KKWF. On November 17, 2017, Entercom closed the merger. The same day, KMPS began playing Christmas music, sparking format-flip rumors. On December 4, 2017, at 9:12 a.m., KMPS flipped to soft adult contemporary as ``94.1 The Sound,'' launching with Lionel Richie's ``Hello.'' KMPS air personality Deanna Lee transferred to KKWF middays. This briefly made KKWF the only country station in Seattle---for approximately 90 minutes. Hubbard Broadcasting's KVRQ (98.9) immediately flipped from rock to ``Country 98.9.''
+
+\subsubsection{Military Philanthropy Identity}
+
+Under Audacy (renamed from Entercom in 2021), KKWF has built a distinctive military-focus philanthropy program: ``Operation K9 Companion'' (benefitting Northwest Battle Buddies, service dogs for veterans with PTSD); ``10,000 for the Troops'' (Valentine's Day card drive); ``Front Row for the Front Line.'' The station's morning host Matt McAllister joined in October 2017 and subsequently earned a CMA Broadcast Award for Major Market Personality of the Year.
+
+\subsection{The Call Sign Count Discrepancy}
+
+A prior document characterized the frequency as having had ``nine call signs.'' Primary FCC records (confirmed via the PSRBA spectrum history database and the Wikipedia KKWF article citing FCC call sign history for Facility ID 6367) identify the following official call sign sequence:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Call Sign} & \tableheader{Period} & \tableheader{Notes} \\
+\midrule
+KIRO-FM & 1948--1974/75 & Queen City Bdcstg, then Bonneville; first instance \\
+KSEA & 1975--1991 & Beautiful Music brand identity \\
+KWMX & 1991--1992 & Hot AC ``Mix 101''; brief \\
+KIRO-FM & 1992--1999 & Second instance; Bonneville ``Triple Play'' then Entercom \\
+KQBZ & 1999--2005 & Hot Talk ``Radio for Guys'' \\
+KKWF & 2005--present & Country ``100.7 The Wolf'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+This yields six call sign designations (five distinct letter combinations, with KIRO-FM appearing twice) or seven if KIRO-FM's two instances are counted separately. The reconciliation to ``nine'' likely requires one of the following explanations, each constituting a research task for the mission executor:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{FCC construction permit call signs} --- Early FM stations sometimes operated under construction permit call signs before receiving their final license call sign; the 1946 vs.\ 1948 sign-on discrepancy in sources suggests possible CP-era call sign variants.
+  \item \textbf{Sub-brand/HD subchannel counting} --- Branding identities (``Easy 101,'' ``The Buzz,'' ``Mix 101'') counted as distinct ``call signs'' in popular usage.
+  \item \textbf{Source error in prior document} --- The count may have been generated from a source that conflated brand names with licensed call signs.
+\end{enumerate}
+
+\textbf{Resolution task:} The mission executor should pull the full FCC CDBS call sign history for Facility ID 6367 and enumerate every licensed call sign, including construction permits, to produce a definitive count.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Sensitivity Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Robin \& Maynard lawsuit (2005) & Legal & Cite only what was publicly reported; do not editorialize on outcome \\
+KMPS flip deception (2017) & Ethical & Document as reported fact; RadioInsight primary source \\
+Format-era value judgments & Framing & Present all eras as historically valid; avoid ``golden age'' framing that marginalizes any era \\
+Drake-Chenault automation & Labor & Note that automation displaced live DJs; document factually \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{FCC and Government Records}
+\begin{enumerate}[leftmargin=2em]
+  \item FCC Licensing and Management System, Facility ID 6367 (KKWF). \url{https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=6367}
+  \item FCC CDBS Call Sign History for KKWF, Facility ID 6367. \url{https://cdbs.recnet.com/corres/?doc=77249}
+  \item FCC Call Sign History query: \url{http://licensing.fcc.gov/cgi-bin/ws.exe/prod/cdbs/pubacc/prod/call_hist.pl?Facility_id=6367\&Callsign=KKWF6367}
+\end{enumerate}
+
+\subsubsection{Broadcasting Reference Publications}
+\begin{enumerate}[leftmargin=2em, start=4]
+  \item \textit{Broadcasting Yearbook 1950}, page 314. American Radio History archive.
+  \item \textit{Broadcasting Yearbook 1964}, page B-172. American Radio History archive.
+  \item \textit{Broadcasting \& Cable Yearbook 1998}, page D-442. American Radio History archive.
+  \item \textit{Radio \& Records}, February 17, 1989 (KSEA AC flip announcement), pp. 3, 26.
+  \item \textit{Radio \& Records}, September 11, 1992 (KIRO-FM call sign reinstatement).
+  \item \textit{Radio \& Records}, January 13, 1995 (Buzz launch).
+  \item \textit{Radio \& Records}, December 9, 2005 (Wolf launch).
+\end{enumerate}
+
+\subsubsection{Newspaper and Trade Reporting}
+\begin{enumerate}[leftmargin=2em, start=11]
+  \item Jasmin, Ernest A. ``KQBZ-FM radio drops talky Buzz format to become country Wolf.'' \textit{The News Tribune}, December 3, 2005.
+  \item Simons, Stephanie. ``KIRO-FM adds, drops on-air personalities.'' \textit{The News Tribune}, April 8, 1999.
+  \item Beck, Andee. ```Dinosaurs' should stay in cave.'' \textit{The News Tribune}, April 26, 1991. (KWMX launch reference)
+  \item ``Tom Leykis out, Gretchen Wilson in at 100.7 FM.'' \textit{The Seattle Times}, December 1, 2005.
+  \item ``100.7 KQBZ becomes `The Wolf' KKWF.'' Format Change Archive, December 2, 2005.
+  \item Venta, Lance. ``Entercom Flips KMPS Seattle to Soft AC.'' \textit{RadioInsight}, December 4, 2017.
+  \item ``Audacy `100.7 The Wolf' KKWF Seattle Celebrates 20 Years of Music and Military Focus.'' \textit{Country Insider}, November 2025.
+\end{enumerate}
+
+\subsubsection{Community Archive and Oral History}
+\begin{enumerate}[leftmargin=2em, start=18]
+  \item RadioDiscussions.com, ``Seattle FM stations in the 1970s'' thread (2006). \url{https://radiodiscussions.com/threads/seattle-fm-stations-in-the-1970s.476264/}
+  \item RadioDiscussions.com, ``Some old Seattle sounds from the 60s and 70s'' thread (2013). \url{https://radiodiscussions.com/threads/some-old-seattle-sounds-from-the-60s-and-70s.652350/}
+  \item RadioDiscussions.com, ``Early FM Top 40 in Seattle'' thread (2013). \url{https://radiodiscussions.com/threads/early-fm-top-40-in-seattle.648691/}
+  \item RadioDiscussions.com, ``KQBZ Seattle currently stunting'' thread (2005). \url{https://radiodiscussions.com/threads/kqbz-seattle-currently-stunting.455183/}
+  \item QZVX.com, ``AM Radio -- QZVX Broadcast History \& Current Affairs.'' PSRBA spectrum history database.
+  \item 70s Kid Memories blog, ``Old Seattle Radio: KSEA'' (2012). Worker memoir; first-person account of the beautiful music era.
+\end{enumerate}
+
+% ═════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Dead Frequencies \& Living History --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a comprehensive, fully sourced historical reference document covering all seven format eras and all confirmed call signs of 100.7 FM Seattle from 1948 to the present, with particular depth in the pre-Wolf era (1948--2005). The document must resolve the call sign count discrepancy, profile each era with competitive context and primary source citations, and stand as the definitive archival reference for this frequency.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0    [Foundation]
+  ├── W0-A: Shared schema (era profile template, source index)
+  └── W0-B: FCC call sign pull (Facility ID 6367 -- definitive count)
+
+WAVE 1    [Parallel Survey]
+  ├── Track A: Module 1 (Founding Era) + Module 2 (Automation)
+  └── Track B: Module 3 (KSEA Dynasty) + Module 4 (Talk Years)
+
+WAVE 2    [Synthesis]
+  ├── Module 5 (Wolf Era + Country Wars)
+  ├── Cross-module integration (ownership chain, signal continuity)
+  └── Call sign discrepancy resolution
+
+WAVE 3    [Publication + Verification]
+  ├── Full document assembly
+  ├── Source validation pass
+  └── Test plan execution
+\end{asciibox}
+
+\subsubsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & FCC Call Sign Audit & All call signs confirmed with dates from FCC LMS; count discrepancy resolved & W0-B \\
+2 & Era Profile: Founding (1948--63) & $\geq$3 primary sources; CBS network context documented & W1-A \\
+3 & Era Profile: Automation (1963--74) & Drake-Chenault services named; FCC mandate dated & W1-A \\
+4 & Era Profile: KSEA Dynasty (1974--91) & Bonneville Program Services documented; TV simulcast confirmed & W1-B \\
+5 & Era Profile: Talk Years (1991--2005) & All 5 phases with transition dates; full KQBZ talent roster & W1-B \\
+6 & Era Profile: Wolf Era (2005--present) & Stern cascade documented; KMPS rivalry arc to 2017 & W2 \\
+7 & Full Reference Document (PDF) & 12 success criteria passed; 85\%+ test coverage & W3 \\
+8 & Source Index & All 23+ sources indexed, verified, accessible & W3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0-A: Shared schema & None & Haiku & 8K \\
+W0-B: FCC call sign pull & None & Sonnet & 12K \\
+W1-A: Modules 1--2 survey & W0-A, W0-B & Sonnet & 45K \\
+W1-B: Modules 3--4 survey & W0-A, W0-B & Sonnet & 48K \\
+W2-A: Module 5 + Wolf era & W1-A, W1-B & Sonnet & 35K \\
+W2-B: Cross-module synthesis & W1-A, W1-B & Opus & 40K \\
+W2-C: Call sign resolution & W0-B, W2-B & Opus & 15K \\
+W3-A: Document assembly & W2-A, W2-B, W2-C & Sonnet & 30K \\
+W3-B: Source validation & W3-A & Sonnet & 20K \\
+W3-C: Test execution & W3-B & Sonnet & 18K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Cross-era pattern detection, call sign discrepancy judgment, format-war framing ethics \\
+Sonnet & 60\% & Era profile production, source compilation, document assembly \\
+Haiku & 10\% & Schema templates, source index scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}C{2cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Objective} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Tasks} \\
+\midrule
+0 & Foundation + FCC audit & Sequential & Haiku/Sonnet & 2 \\
+1 & Parallel era surveys & Parallel (2 tracks) & Sonnet & 4 \\
+2 & Synthesis + gap fill & Sequential & Opus+Sonnet & 3 \\
+3 & Publication + verification & Sequential & Sonnet & 3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W0-A & Shared schema & Era profile template; source index template; call sign audit template & Haiku \\
+W0-B & FCC call sign pull & Fetch Facility ID 6367 from FCC LMS; enumerate all call signs with dates; compare to prior ``nine call signs'' claim & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A --- Early History}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W1-A1 & Founding Era profile & Queen City Bdcstg, Saul Haas, CBS simulcast, MOR pivot, Bonneville acquisition; $\geq$3 primary sources & Sonnet \\
+W1-A2 & Automation era profile & FCC mandate, ``Young Sound,'' Drake-Chenault ``Hit Parade,'' progressive rock, Beautiful Music pivot; Drake-Chenault syndication architecture & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Middle and Talk History}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W1-B1 & KSEA dynasty profile & Bonneville Program Services architecture, ``Easy 101'' branding, soft AC/mainstream AC dates, TV simulcast, competitive landscape & Sonnet \\
+W1-B2 & Talk era profile & KWMX, KIRO-FM simulcast, ``News Outside the Box,'' independent talk, The Buzz, KQBZ; full talent roster; Robin \& Maynard lawsuit & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W2-A & Wolf era profile & Stern cascade, Wolf launch, KMPS rivalry arc, 2017 Battle in Seattle, Audacy identity, CMA recognition & Sonnet \\
+W2-B & Cross-module synthesis & Ownership chain continuity; format-era patterns (demographic tracking, automation waves, format war cycles); through-line narrative & Opus \\
+W2-C & Call sign resolution & Reconcile FCC W0-B results with ``nine call signs'' claim; document all possible explanations; produce definitive count with confidence level & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Name} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+W3-A & Document assembly & Compile all module outputs into single reference document with full bibliography & Sonnet \\
+W3-B & Source validation & Verify every citation is traceable; flag any entertainment media sources; confirm numerical attributions & Sonnet \\
+W3-C & Test execution & Run full test plan; log results; produce verification matrix; go/no-go report & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+  \item Wave 0 outputs (schema + FCC call sign list) are small and should be included in full in every subsequent wave's context to enable consistent referencing
+  \item Track A and Track B in Wave 1 share no dependency and can execute in parallel; budget two simultaneous context windows
+  \item Wave 2-C (call sign resolution) should be the final task before document assembly; the FCC W0-B output and all W1 outputs should be present in context
+  \item Source index from W3-B should be cached as a lookup table; do not re-verify already-confirmed sources in W3-C
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XC{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave / Task} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+W0 (foundation + FCC) & 5K & 15K & 20K \\
+W1 Track A (2 modules) & 25K & 45K & 70K \\
+W1 Track B (2 modules) & 25K & 48K & 73K \\
+W2 (synthesis, 3 tasks) & 80K & 60K & 140K \\
+W3 (assembly + verify) & 90K & 38K & 128K \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$431K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+W0-A (schema) ─────────────┐
+                           ├──> W1-A1 (founding)
+W0-B (FCC audit) ──────────┤──> W1-A2 (automation)
+                           ├──> W1-B1 (KSEA)
+                           └──> W1-B2 (talk)
+
+W1-A1 + W1-A2 ─────────────┐
+                           ├──> W2-A (Wolf era)
+W1-B1 + W1-B2 ─────────────┤──> W2-B (synthesis)
+                           └──> W2-C (call sign resolution)
+W0-B ──────────────────────┘
+
+W2-A + W2-B + W2-C ────────> W3-A (assembly)
+                              └──> W3-B (validation)
+                                   └──> W3-C (tests)
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK \\
+Core functionality & 17 & Required & BLOCK \\
+Integration & 8 & Required & BLOCK \\
+Edge cases & 5 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{35} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to FCC records, Broadcasting Yearbooks, newspaper archives, or RadioDiscussions primary threads; zero entertainment media or unsourced blogs \\
+SC-NUM & Numerical attribution & Every date, rating figure, power spec, and format-change year attributed to a specific named source \\
+SC-ADV & No format-era advocacy & Document presents all format eras with equal historical legitimacy; no implicit ``golden age'' framing that dismisses any era \\
+SC-LEG & Legal matter handling & Robin \& Maynard lawsuit (2005) documented as reported public fact only; no editorial characterization of parties \\
+SC-DIS & Discrepancy disclosure & Call sign count discrepancy explicitly flagged; confidence levels stated for any contested date or attribution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Functionality Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Call sign timeline completeness & All FCC-confirmed call signs with verified start/end dates; discrepancy documented \\
+CF-02 & Founding era depth & $\geq$3 primary sources for 1948--1963 period; CBS network context explicit \\
+CF-03 & Automation era specificity & ``Young Sound'' origin (WCBS), Drake-Chenault ``Hit Parade'' both named with syndication context \\
+CF-04 & KSEA brand dates & KSEA sign-on year confirmed via FCC; KSEA-on-KIRO-TV overnight simulcast documented \\
+CF-05 & ``Easy 101'' branding dated & Branding transition from beautiful music to ``Easy 101'' supported by $\geq$1 dated source \\
+CF-06 & Soft AC pivot documented & February 17, 1989 KSEA mainstream AC flip cited from Radio \& Records \\
+CF-07 & KWMX era documented & April 1991 launch and September 1992 end dated; both YouTube archive references cited \\
+CF-08 & ``Triple Play'' documented & September 21, 1992 KIRO-FM reinstatement with source \\
+CF-09 & Talk launch dated & July 5, 1994 independent talk format launch with source \\
+CF-10 & Buzz launch dated & January 6, 1995 ``100.7 The Buzz'' rebrand with Radio \& Records citation \\
+CF-11 & Entercom acquisition dated & March 1997 Bonneville-to-Entercom sale; Broadcasting \& Cable Yearbook cited \\
+CF-12 & KQBZ transition documented & May 1999 call letter change; full talent roster present \\
+CF-13 & Wolf flip precision & November 30, 2005 noon; Microsoft Sam countdown; ``How Do You Like Me Now?!'' first song \\
+CF-14 & Stern cascade explicit & Howard Stern departure to Sirius documented as proximate cause of Wolf flip \\
+CF-15 & KMPS rivalry arc & 1978 KMPS-FM launch through December 4, 2017 format flip documented \\
+CF-16 & Battle in Seattle dated & December 4, 2017 9:12 a.m.\ KMPS flip; Hubbard KVRQ counter-flip same morning \\
+CF-17 & Ownership chain complete & All four ownership transitions dated with corporate entities named \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Complete call sign timeline & CF-01, SC-DIS & Pending \\
+2. Format era completeness & CF-02 through CF-17 & Pending \\
+3. Founding era depth & CF-02, SC-SRC & Pending \\
+4. Automation era specificity & CF-03, SC-NUM & Pending \\
+5. KSEA dynasty profile & CF-04, CF-05, CF-06 & Pending \\
+6. Talk era completeness & CF-07 through CF-12 & Pending \\
+7. Wolf launch precision & CF-13, CF-14 & Pending \\
+8. Country wars resolution & CF-15, CF-16 & Pending \\
+9. Source quality & SC-SRC, SC-NUM & Pending \\
+10. Competitive landscape per era & IN-03 & Pending \\
+11. Ownership transitions dated & CF-17, SC-NUM & Pending \\
+12. Document self-containment & IN-04 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates between waves \\
+PLAN & Planner & Wave decomposition; parallel track synchronization \\
+SCOUT & Research Agent & FCC archive retrieval; Broadcasting Yearbook fetches; newspaper archive search \\
+EXEC-1 & Executor Track A & Era profiles for Modules 1--2 (founding, automation) \\
+EXEC-2 & Executor Track B & Era profiles for Modules 3--4 (KSEA, talk) \\
+CRAFT-HIST & Historical Specialist & Period-accurate context for CBS network era, Bonneville philosophy, FM format economics \\
+CRAFT-BCST & Broadcast Specialist & Drake-Chenault syndication architecture, Bonneville Program Services, hot talk format economics \\
+VERIFY & Verification Agent & Source traceability; numerical attribution checks \\
+INTEG & Integration Agent & Cross-module consistency; call sign timeline continuity \\
+CAPCOM & HITL Interface & Human approval gates between waves; discrepancy escalation \\
+BUDGET & Resource Manager & Token budget tracking across 9 context windows \\
+LOG & Chronicle Agent & Commit messages; call sign audit trail; session handoff notes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{6cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Total tasks & 12 \\
+Parallel tracks & 2 (Wave 1 max) \\
+Sequential depth & 4 waves \\
+Opus / Sonnet / Haiku & 30\% / 60\% / 10\% \\
+Estimated context windows & 9 \\
+Estimated sessions & 4 \\
+Estimated wall time & $\sim$3.5 hours \\
+Total tests & 35 (5 safety-critical) \\
+Target coverage & 85\%+ \\
+Primary sources identified & 23 \\
+Research modules & 5 \\
+Activation profile & Squadron (12 roles) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ── Closing Quote ─────────────────────────────────────────────────────────────
+\vspace{1.5em}
+\begin{quotebox}
+\textit{``I even remember when 100.7 FM was KSEA, which was an easy-listening station. It also used to be the original KIRO-FM.''}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- Comment posted on Format Change Archive, December 2005, the day The Wolf launched. Seven format eras in two sentences. The mission is to fill in what was compressed.}}
+\end{quotebox}
+
+\end{document}

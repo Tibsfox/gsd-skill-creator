@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Silicon to Evidence</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-ste">
+  <header>
+    <h1>Silicon to Evidence</h1>
+    <div class="subtitle">Storage Silicon &middot; RAID/HBA &middot; Ceph &middot; Data Recovery &middot; Digital Forensics &middot; Optical Inspection</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-storage-silicon-substrate">Silicon</a>
+      <a href="page.html?doc=02-storage-array-architecture">Arrays</a>
+      <a href="page.html?doc=03-ceph-distributed-storage">Ceph</a>
+      <a href="page.html?doc=04-data-recovery-engineering">Recovery</a>
+      <a href="page.html?doc=05-digital-forensics-legal-chain">Forensics</a>
+      <a href="page.html?doc=06-optical-imaging-vlsi-inspection">Optical</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      Every byte recovered from a failed NVMe SSD is a proof by construction: that architecture
+      survives failure because we understood it, not because we had more power than the entropy that
+      attacked it. The spaces between the controller and the NAND &mdash; the address translation layer,
+      the wear-leveling map, the scrambler seed &mdash; are not obstacles to recovery. They are the
+      structure. Read the structure, reconstruct the map, and the data follows. Silicon to evidence
+      is not a miracle. It is applied architecture.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">11</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~103K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/storage-forensics-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/storage-forensics-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Time</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared glossary, source index, failure mode enum, RAID level defs</td><td>Sequential</td><td>30 min</td></tr>
+        <tr><td>1</td><td>Research Tracks</td><td>Track A (M1+M2+M3) &middot; Track B (M4+M5+M6)</td><td>Parallel</td><td>3 hours</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Silicon-to-forensic map, CRUSH decision tree, admissibility matrix</td><td>Sequential</td><td>1.5 hours</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Final assembly, verification matrix, chain of custody template</td><td>Sequential</td><td>1 hour</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Orchestration + ARCH</td><td>Opus</td><td>Mission direction, cross-module dependency, wave authorization</td></tr>
+        <tr><td>Denise</td><td>EXEC (x3) + LOG</td><td>Sonnet</td><td>Module production (01, 02, 04), LaTeX compilation, audit trail</td></tr>
+        <tr><td>Paula</td><td>BUDGET + scaffolding</td><td>Haiku</td><td>Wave 0 foundation templates, token budget telemetry</td></tr>
+        <tr><td>Gary/68000</td><td>ANALYST + CRAFT</td><td>Opus</td><td>Cross-module pattern detection, Module 03 (Ceph) and 06 (Optical)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>No write commands on forensic target</td><td>Any procedure instructing write to target media before write-block is confirmed = BLOCK</td></tr>
+        <tr><td>SC-02</td><td>Hash verification mandatory</td><td>Any imaging procedure without SHA-256/SHA-512 comparison = BLOCK</td></tr>
+        <tr><td>SC-03</td><td>Encryption key documented</td><td>Any chip-off procedure that does not address TCG Opal key status = BLOCK</td></tr>
+        <tr><td>SC-04</td><td>BGA rework temperature documented</td><td>Any chip-off SOP that omits temperature profile = BLOCK</td></tr>
+        <tr><td>SC-05</td><td>Ceph cluster write-isolated</td><td>Any Ceph forensic procedure without maintenance mode specification = BLOCK</td></tr>
+        <tr><td>SC-06</td><td>Chain of custody hash field</td><td>Published template missing cryptographic hash field = BLOCK</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Evidence Chain &mdash; Verification Matrix</h2>
+
+    <table>
+      <thead><tr><th>Success Criterion</th><th>Test IDs</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Silicon family profiles complete</td><td>T01, T02</td><td>Pre-mission</td></tr>
+        <tr><td>RAID metadata format documented</td><td>T03, T04, SC-02</td><td>Pre-mission</td></tr>
+        <tr><td>JBOD-to-Ceph topology mapped</td><td>T05, T06</td><td>Pre-mission</td></tr>
+        <tr><td>Ceph CRUSH reconstruction procedure</td><td>T07, SC-05</td><td>Pre-mission</td></tr>
+        <tr><td>Failure mode taxonomy complete</td><td>T08, T09</td><td>Pre-mission</td></tr>
+        <tr><td>NVMe chip-off procedure documented</td><td>T10, SC-03, SC-04</td><td>Pre-mission</td></tr>
+        <tr><td>Write-blocking protocol defined</td><td>T11, SC-01</td><td>Pre-mission</td></tr>
+        <tr><td>Chain of custody template produced</td><td>T12, SC-06</td><td>Pre-mission</td></tr>
+        <tr><td>Optical documentation standard defined</td><td>T13, T14</td><td>Pre-mission</td></tr>
+        <tr><td>Ceph forensic imaging no-write</td><td>T15, SC-05</td><td>Pre-mission</td></tr>
+        <tr><td>Cross-module dependency matrix complete</td><td>T16</td><td>Pre-mission</td></tr>
+        <tr><td>Test plan coverage &ge;95%</td><td>T17, T18</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Each of the four chip families (Samsung, Philips/NXP, Broadcom, AMD/Xilinx) has a documented profile covering architecture, firmware path, and forensic failure modes</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>RAID 5/6 superblock and DDF metadata locations documented for MegaRAID with sufficient precision for manual reconstruction</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Complete OSD provisioning path from JBOD raw drive to Ceph BlueStore OSD documented with UUID, WAL, DB, CRUSH weight</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Step-by-step CRUSH map reconstruction from surviving OSD data documented with monmaptool and crushtool</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>&ge;15 distinct failure modes catalogued across controller, firmware, NAND, power, and protocol layers</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Complete chip-off-to-reconstruction workflow for Samsung and Phison NVMe controllers with tool, temperature, sequence specs</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Hardware and software write-blocking procedures for SAS, SATA, and NVMe with hash verification steps</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Court-admissible chain of custody template for enterprise storage forensic evidence</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Lens/aperture/illumination spec for VLSI-level evidence photography using Pentax/Ricoh and Bosch equipment</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>Forensic snapshot procedure for live Ceph cluster without triggering writes or OSD rebalancing</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>Every module's outputs feed into at least one other module; no orphaned nodes in dependency graph</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>Each success criterion has at least two associated tests; all safety-critical tests marked mandatory-pass / BLOCK</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>Data has weight. Not in the physical sense &mdash; a terabyte of zeros and ones on NAND flash weighs
+    no more than the substrate it's written on &mdash; but in the forensic sense. Once a bit pattern becomes
+    evidence, it carries the weight of everything that depends on it: a criminal prosecution, a civil
+    judgment, an insurance claim, a root-cause report that determines whether a data center gets rebuilt
+    or shuttered. The entire enterprise storage stack &mdash; from the die of a Broadcom ASIC to the CRUSH
+    tree of a Ceph cluster &mdash; is, in this light, a chain of custody that began the moment data was
+    first written.</p>
+
+    <p>The Amiga Principle teaches us that remarkable results come from architectural elegance, not raw
+    power. The forensic engineer who understands exactly which bytes encode the RAID superblock on a
+    MegaRAID member drive doesn't need to brute-force the reconstruction; they read the architecture
+    and reconstruct with precision. The spaces between nodes in this mission are the handoff boundaries
+    where evidence integrity is most at risk: the boundary between a failed controller and its surviving
+    NAND, between a degraded Ceph OSD and the CRUSH placement that tells you where the rest of the data
+    lives, between a chip-off extraction and the legal admissibility of what came off it. This mission
+    maps every one of those spaces.</p>
+  </main>
+
+  <footer>
+    <p>Silicon to Evidence &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

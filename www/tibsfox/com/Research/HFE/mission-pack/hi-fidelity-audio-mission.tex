@@ -1,0 +1,1044 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── AUDIO DOMAIN COLOUR SCHEME ─────────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep acoustic navy
+\definecolor{secondary}{HTML}{0277BD}     % Wavefront blue
+\definecolor{tertiary}{HTML}{BF360C}      % Signal orange
+\definecolor{accent}{HTML}{1565C0}        % Electric blue
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ─────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS / FOOTERS ──────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Hi-Fidelity Audio Engineering}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ─────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Hi-Fidelity Audio Engineering -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═══════════════════════════════════════════════════════════════════════
+\begin{document}
+% ═══════════════════════════════════════════════════════════════════════
+
+% ── TITLE PAGE ─────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Hi-Fidelity Audio Engineering\\[0.3em]From Capsule to Cabinet}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Capture, Amplification, Mixing, Enclosure Design \& Measurement}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2.8cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.8cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 8--12 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ──────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Hi-Fidelity Audio Engineering --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Vision Complete / Research Referenced / Mission Ready}
+\metafield{Depends On:}{GSD Core Skills, DSP libraries, Acoustic measurement toolchain}
+\metafield{Context:}{Six-module Fleet-profile mission covering the complete signal chain from microphone capsule physics to extreme low-frequency enclosure design, with case studies in world-class systems.}
+
+\subsection{Vision}
+
+Sound is the original information carrier. Before electricity, before silicon, before code, there were pressure waves in air --- vibrations that encoded meaning, emotion, and presence across distance. Every technology in this mission exists for one purpose: to capture those waves, transmit them without corruption, and reconstruct them as faithfully as possible at the listening end.
+
+The tragedy of most audio chains is not ignorance --- it is accumulated compromise. Each stage in the signal path from capsule to cabinet introduces some small inaccuracy: a preamp that adds noise below the noise floor, an amplifier that clips asymmetrically, a cabinet that stores and re-releases energy at the wrong moment, a multi-speaker array whose members arrive at the listener nanoseconds apart and cancel each other. The result is not what the microphone heard. It is a degraded copy, and the degradation compounds.
+
+This mission is the antidote to that compounding. It traces the complete signal chain as a unified system --- not a collection of boxes, but an architectural whole governed by physics, mathematics, and deliberate engineering choices. The Amiga Principle applies here exactly as it does in software: leverage through design beats brute force through budget. A well-chosen Class A preamp stage, a correctly time-aligned array, and a quarter-wave tuned enclosure will outperform an expensive system that ignores the physics of what it is doing.
+
+The two case studies that anchor this mission --- Funktion-One and Klipsch --- represent complementary philosophies. Tony Andrews at Funktion-One built systems that sound better than they measure by obsessively avoiding corrective EQ and designing around acoustically flat enclosures. Paul W. Klipsch spent his career on one insight: horn loading transforms a loudspeaker's efficiency relationship with the air, allowing smaller amplifiers to produce greater acoustic output with lower distortion. Both men understood that the space between the driver and the listener is not empty --- it is the instrument.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Gain staging is misunderstood.} Most recording chains apply gain at the wrong stage, compressing headroom early or adding noise that propagates through every downstream process. The signal-to-noise ratio established at the preamp is the ceiling for the entire chain.
+  \item \textbf{Amplifier class selection is driven by marketing, not physics.} Class A, AB, C, D, G, and H represent fundamentally different topologies with measurable tradeoffs in distortion signature, efficiency, and thermal behavior --- yet most practitioners select by brand familiarity rather than specification.
+  \item \textbf{Multi-driver systems create destructive interference.} Arrays of speakers --- whether line arrays in a venue or multi-way cabinets in a studio --- produce comb filtering and phase cancellation when their individual outputs are not precisely time-aligned. The result is audible coloration that no EQ can cure after the fact.
+  \item \textbf{Subwoofer enclosure design is treated as a box dimension problem.} The physics of full-wave, half-wave, and quarter-wave resonance, transmission line loading, horn flare rates, and sealed-box compliance are frequently ignored in favor of published ``recommended enclosure'' specifications that optimize for simplicity, not performance.
+  \item \textbf{THD and SNR are cited without context.} Total harmonic distortion and signal-to-noise ratio figures appear on every datasheet but are rarely understood as functions of frequency, level, load, topology, and measurement method. The difference between THD and THD+N, even-order versus odd-order harmonic profiles, and the audibility implications of each is critical knowledge that is almost universally absent from practitioner education.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Coherent Chain Principle:} Every stage in the audio signal path must preserve phase relationships, minimize non-linear distortion, and deliver the signal to the next stage with sufficient level to dominate the noise floor of that stage. A system's ultimate fidelity is set by its weakest link --- but unlike most engineering chains, audio chains also require that all links arrive at the listener simultaneously.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+ACOUSTIC DOMAIN              ELECTRICAL DOMAIN             ACOUSTIC DOMAIN
+                                                           
+[Sound Source]               CAPTURE CHAIN                 RECONSTRUCTION
+      |                           |                              |
+   Pressure          [Capsule: Condenser/Dynamic/Ribbon]    [Driver Array]
+    Waves        -->  [Preamp: Class A, transformer/JFET] --> [Enclosure]
+      |               [Gain: 40-70 dB, Phantom 48V]        [Time Alignment]
+      |               [ADC: 24-bit/192kHz]                 [DSP/Crossover]
+      |                           |                              |
+      |               PROCESSING CHAIN                  [Listening Position]
+      |                           |
+      |          [DAW: Mixing, EQ, Compression]
+      |          [Stereo Field: Width/Depth/Height]
+      |          [Space: Reverb, Delay, M/S]
+      |                           |
+      |               AMPLIFICATION CHAIN
+      |                           |
+      |          [Class A: 25% eff, lowest THD]
+      |          [Class AB: 50-70% eff, trade]
+      |          [Class D: 90%+ eff, PWM/switching]
+      |          [Class G/H: rail-switching variants]
+      |                           |
+      +---------------------------+
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 1: SIGNAL CAPTURE          MODULE 2: AMPLIFICATION THEORY
+  Microphone types & polar           Class A/B/C/D/G/H topologies
+  Phantom power & impedance          Conduction angle & efficiency
+  Preamp design (JFET, transformer)  THD signature by class
+  Gain staging & noise floor         Modern Class D vs. analog
+         |                                    |
+         +------ feeds -----+------- feeds ---+
+                            |
+MODULE 3: MIXING & SPACE    |    MODULE 4: DRIVER ALIGNMENT
+  Stereo imaging (L/R/C)    |      Time alignment theory
+  Width: panning, M/S       |      Acoustic center calculation
+  Depth: reverb/delay       |      Wavefront delay maps
+  EQ, compression, bus      |      DSP / FIR vs IIR
+         |                  |              |
+         +------ feeds -----+------ feeds -+
+                            |
+MODULE 5: ENCLOSURE DESIGN  |    MODULE 6: SYSTEM FIDELITY
+  Sealed / bass reflex      |      THD & THD+N measurement
+  Transmission lines        |      SNR / SINAD / SFDR
+  Quarter / half / full wave|      Even vs odd harmonic profiles
+  Folded horn & Klipsch     |      Funktion-One case study
+  Tapped horn & Bandpass    |      Klipsch heritage case study
+         |                  |              |
+         +------+-----------+--------------+
+                |
+         SYNTHESIS LAYER
+         Cross-module coherence verification
+         Complete signal chain documentation
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 --- Signal Capture}
+Covers the physics of microphone transduction (condenser, dynamic, ribbon), polar patterns and their acoustic implications, phantom power standards (IEC EN 61938, 48V ±4V), preamplifier topologies (JFET, transformer-coupled, op-amp INA/SSM families), gain staging principles, common-mode rejection ratio (CMRR), and the critical relationship between gain at the preamp stage and the achievable SNR of the entire downstream chain.
+
+\subsubsection{Module 2 --- Amplification Theory}
+Covers the complete taxonomy of power amplifier classes: Class A (conduction angle 360°, maximum linearity, ~25\% efficiency), Class B (180°, crossover distortion, ~78.5\% theoretical max), Class AB (181--200°, practical compromise), Class C (RF applications, high efficiency with tuned loading), Class D (PWM switching, 90\%+ efficiency, modern high-fidelity designs), Class G and H (rail-switching and rail-modulation variants). Includes the current audiophile debate on whether modern Class D designs equal or surpass traditional Class AB for subjective listening quality.
+
+\subsubsection{Module 3 --- Mixing and Space}
+Covers the three-dimensional model of the stereo field (width, depth, height), panning as the fundamental spatial tool, Mid/Side (M/S) processing from Alan Bluemlein's 1934 patent through modern mastering applications, stereo imaging techniques (XY, AB, ORTF, M/S microphone arrays), reverb and delay as depth cues, subtractive EQ for frequency separation, mono compatibility checking, bus processing, and the philosophical question of building the mix versus correcting it.
+
+\subsubsection{Module 4 --- Driver Alignment and Array Science}
+Covers time-alignment theory (Ed Long and Ronald Wickersham, AES 1976), acoustic center calculation, loudspeaker lobing behavior at crossover frequencies, delay calculation formulae (distance/343 × 1000 = ms), LR2 and LR4 crossover advantages for time-aligned systems, DSP-based alignment using FIR (linear phase, adds latency) vs.\ IIR (minimum phase, low latency) filters, line array coherent coupling mathematics, cardioid subwoofer configurations, and the wavefront summation principles that enable ``many speakers into one.''
+
+\subsubsection{Module 5 --- Enclosure Engineering}
+Covers the full taxonomy of subwoofer enclosure designs: sealed (infinite baffle, acoustic suspension), bass reflex (Helmholtz resonator, port tuning), transmission line (quarter-wave, MLTL, Bailey TL), full-wave resonators, tapped horn, bandpass, and folded exponential horn designs. Special attention to the Klipsch folded-horn lineage (Klipschorn, La Scala, Belle, Jubilee), Paul Klipsch's four core design principles (high efficiency/low distortion, controlled directivity, wide dynamic range, flat frequency response), and engineering calculations for horn flare rates, driver Thiele-Small parameters, and quarter-wavelength tuning (1130/Fs = full wave; /4 = quarter wave line length).
+
+\subsubsection{Module 6 --- System Fidelity and Case Studies}
+Covers Total Harmonic Distortion (THD) measurement methodology (fundamental notching, RSS summation of harmonics), THD vs.\ THD+N distinction, even-order vs.\ odd-order harmonic psychoacoustics, signal-to-noise ratio (SNR), SINAD (signal-to-noise and distortion), SFDR (spurious free dynamic range), intermodulation distortion (IMD). Case Study A: Funktion-One --- Tony Andrews and John Newsham's acoustically flat philosophy, horn-loaded point-source design, zero corrective EQ approach, Berghain installation, and the proprietary Coherent System Technology. Case Study B: Klipsch Heritage --- Paul W. Klipsch's exponential horn mathematics, the Klipschorn as ``bifurcated trihedral exponential wave transmission line,'' corner loading, and the Jubilee as PWK's ultimate refinement.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+mission:
+  id: gsd-audio-engineering-deep-research
+  profile: fleet
+  models:
+    opus: 0.30    # Synthesis, cross-module integration, case study analysis
+    sonnet: 0.60  # Survey compilation, module documents, verification
+    haiku: 0.10   # Shared schemas, templates, scaffolding
+
+  modules:
+    - id: M1_signal_capture
+      domain: microphone_preamp_physics
+      model: sonnet
+    - id: M2_amplification_theory
+      domain: power_amplifier_classes_topology
+      model: sonnet
+    - id: M3_mixing_space
+      domain: stereo_imaging_mix_craft
+      model: sonnet
+    - id: M4_driver_alignment
+      domain: time_alignment_wavefront_dsp
+      model: sonnet
+    - id: M5_enclosure_engineering
+      domain: subwoofer_cabinet_horn_design
+      model: sonnet
+    - id: M6_system_fidelity
+      domain: THD_SNR_case_studies
+      model: opus
+
+  synthesis:
+    model: opus
+    task: cross_module_coherence + complete_chain_documentation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Complete microphone preamplifier design: JFET, transformer-coupled, IC-based (INA217, THAT1510, SSM2019)
+  \item All power amplifier classes A through H including modern Class D audiophile designs
+  \item Stereo mixing fundamentals: panning, M/S processing, reverb/delay, EQ, compression, bus routing
+  \item Multi-speaker time alignment: delay calculation, acoustic center, FIR/IIR DSP, line arrays
+  \item Subwoofer enclosure physics: sealed, ported, transmission line, folded horn, tapped horn, bandpass
+  \item Klipsch folded-horn lineage: Klipschorn, La Scala, Belle, Jubilee with engineering analysis
+  \item Funktion-One design philosophy: acoustically flat, horn-loaded, no corrective EQ
+  \item THD, THD+N, SNR, SINAD measurement methodology and audiophile interpretation
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item Room acoustics treatment (separate mission scope)
+  \item Digital audio workstation software comparison
+  \item Streaming and lossy codec analysis
+  \item Headphone/IEM engineering (separate module recommended)
+  \item Power conditioning and mains power supply design beyond preamp context
+  \item Spatial audio / Dolby Atmos / ambisonics (future v2.0 extension)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Microphone preamplifier design documented with gain range (40--70 dB), phantom power spec (48V ±4V per IEC EN 61938), and CMRR requirements, with at least two topology comparisons (transformer vs.\ JFET vs.\ IC).
+  \item All six amplifier classes (A, B, AB, C, D, G/H) documented with conduction angle, theoretical efficiency ceiling, typical THD signature, and primary application domain.
+  \item Class D audiophile debate documented with positions from at least three professional audio engineers (Ralph Karsten/Atma-Sphere, Greg Stidsen/NAD, Paul McGowan/PS Audio cited).
+  \item Mixing spatial field model documented in three dimensions (width/depth/height) with at least five distinct techniques per dimension.
+  \item Time alignment formula documented (distance/343ms) and wavefront delay map methodology described with at least one worked multi-speaker example.
+  \item Quarter-wave transmission line calculation documented (1130/Fs = full wave; /4 = quarter wave) with practical enclosure design implications.
+  \item Folded-horn physics documented: exponential flare rate, mouth area, throat impedance transformation, and corner-loading behavior.
+  \item Funktion-One case study includes: founding philosophy (no corrective EQ), horn-loaded point-source architecture, Berghain system specification, and Coherent System Technology description.
+  \item Klipsch case study covers: PWK biographical context, Klipschorn corner-loading mechanics, Jubilee evolution (dual 12\textquotedbl{} drivers, 340 Hz crossover), and four core design principles.
+  \item THD measurement methodology documented: fundamental notch, harmonic RSS summation, THD vs.\ THD+N distinction, and even/odd harmonic psychoacoustic differences.
+  \item SNR / SINAD / SFDR defined with example figures (a good preamp: >120 dB SNR; Class A amp: <0.025\% THD at 1 kHz).
+  \item All six modules produce self-contained reference documents with a minimum of three authoritative sources each.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Deep Audio Analyzer Mission & Extends analysis into computational tools & Downstream \\
+GSD Skill Creator Codebase & Audio analysis as potential skill module & Integration \\
+GSD Local Cloud Spec & Physical hardware for audio DSP processing & Infrastructure \\
+Fox Infrastructure Group & Studio/venue infrastructure planning & Context \\
+The Space Between (textbook) & Mathematical foundations for wave physics & Upstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between are where audio lives. Between the positive and negative half-cycles of a Class A amplifier --- both transistors conducting simultaneously, always --- lies the absence of crossover distortion. Between the individual speakers in a time-aligned array --- each arriving at precisely the same millisecond --- lies the coherent wavefront that sounds like a single instrument rather than a crowd. Between the folded walls of a Klipschorn's bass horn --- 350 screws, hand-cut boards, corner-loaded against two room surfaces --- lies the acoustic impedance transformation that lets a 15-inch driver move enough air to shake a room.
+
+Paul Klipsch spent his career chasing one insight: the horn is an acoustic transformer. Tony Andrews at Funktion-One spent his career on a different but complementary one: the ear is the only instrument that matters, and the best way to serve it is to stay out of its way. Neither insight is achievable through brute force. Both require architectural elegance.
+
+This is the Amiga Principle expressed in air pressure: remarkable outcomes through specialized execution paths, not raw power.
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Hi-Fidelity Audio Engineering --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings for each of the six research modules. Each subsection synthesizes peer-reviewed, professional-organization, and manufacturer engineering documentation to support the deliverables in Stage 3. Key source organizations include:
+
+\begin{itemize}
+  \item Audio Engineering Society (AES) --- peer-reviewed journal and convention proceedings
+  \item Audio Precision (AP) --- industry standard for THD/SNR measurement methodology
+  \item THAT Corporation, Texas Instruments, Analog Devices --- IC design documentation
+  \item Klipsch Audio and Funktion-One --- manufacturer engineering publications
+  \item Wikipedia (technical articles with cited academic sources)
+  \item Purifi Audio, Neurochrome, Quarter-wave.com --- specialist independent research
+\end{itemize}
+
+\subsection{Module 1 Reference: Signal Capture}
+
+\subsubsection{Microphone Physics and Preamplifier Requirements}
+
+A dynamic microphone produces output voltages typically in the 1--100 microvolt range. A condenser microphone, which requires phantom power (standardized at 48V ±4V at up to 10 mA per IEC EN 61938), produces slightly higher output due to its active internal circuit. In either case, the microphone preamplifier must amplify this capsule-level signal to line level (approximately 1.23 Vrms), requiring up to 70 dB of gain.
+
+Key design requirements for a professional preamp (per AES 129th Convention, THAT Corporation, 2010):
+\begin{itemize}
+  \item Gain range: 40 dB covers the majority of close-mic applications; some ribbon microphones require 70+ dB
+  \item Phantom power: 48V ±4V per IEC EN 61938, switchable on/off
+  \item Input pad: typically 20 dB, to accommodate high-output sources
+  \item High CMRR: resistive noise and RFI rejection from balanced XLR inputs
+\end{itemize}
+
+\subsubsection{Preamplifier Topologies}
+
+\textbf{JFET-based Class A:} The N-channel JFET (e.g., 2N5457) behaves analogously to a triode vacuum tube: both are voltage-controlled current sources with high input impedance. The JFET gate requires virtually no drive current, maintaining low loading on the capsule. A class A JFET stage followed by a Darlington NPN output follower provides gain with very low third-harmonic distortion (a 50-ohm unbypassed emitter resistor can reduce the third harmonic by approximately 20 dB per Tape Op Magazine analysis).
+
+\textbf{IC-based designs:} The THAT1510 (and compatible INA217, SSM2019) provides an instrumentation-amplifier topology optimized for microphone preamplification. The THAT1510 features excellent frequency response, low harmonic distortion, and low noise, with gain set by a single external resistor. These ICs are the basis of many professional DIY and commercial designs.
+
+\textbf{Transformer-coupled:} The Neve 1073 and 1084 designs use input transformers (Carnhill/St. Ives) for true differential balanced input, followed by a Class A discrete transistor gain stage. Measured performance: >80 dB gain, <-100 dBu noise floor, <0.025\% THD at 1 kHz, switchable input impedance (300$\Omega$ / 1200$\Omega$).
+
+\subsubsection{SNR at the Preamp Stage}
+
+The Signal-to-Noise Ratio established at the preamplifier is the ceiling for the entire downstream chain. Applying gain correctly at the preamp stage is the most important step in achieving high SNR. The A-weighted THD+N for a well-designed electret preamp circuit (TI TIDU765) measures -93.5 dB for a 600 mVrms output signal, with no harmonics above the noise floor. For a reference preamp IC (OP-275, Analog Devices): THD+N = 0.0008\% (-102 dBc), input voltage noise 6 nV/$\sqrt{\text{Hz}}$ @ 1 kHz, SNR = 125 dB at 3 Vrms signal level.
+
+\subsection{Module 2 Reference: Amplification Theory}
+
+\subsubsection{Amplifier Class Taxonomy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Class} & \tableheader{Conduction Angle} & \tableheader{Key Characteristics} & \tableheader{Efficiency} \\
+\midrule
+A & 360° (full) & Both halves of waveform; transistor always on; zero crossover distortion; lowest THD; highest heat & $\leq$25\% \\
+B & 180° & Push-pull; crossover distortion at zero-crossing; rarely used pure & $\leq$78.5\% \\
+AB & 181--200° & Practical standard; low crossover distortion; dominant in consumer market & 50--70\% \\
+C & $<$180° & RF/radar; extreme efficiency with tuned load; not suitable for audio & $>$78.5\% \\
+D & Switching & PWM; output transistors on/off; requires output filter; 90\%+ efficiency & $\geq$90\% \\
+G & Rail-switch & AB with multiple supply rails; switches to higher rail as signal demands & 70--85\% \\
+H & Rail-modulate & AB with continuously modulated supply rail tracking signal & 75--88\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Class D Audiophile Evolution}
+
+The historical criticism of Class D amplifiers --- that their PWM switching introduced audible artifacts --- has been substantially resolved by modern designs. Per Atma-Sphere's Ralph Karsten (2024): ``Class D can be better [than the other classes]... Right now, Class D can sound as good as Class A or Class AB, whether tube or solid state. It all has to do with distortion. Class D allows the designer to build an amp where the distortion versus frequency is a ruler-flat line across the audio band.'' NAD's Director of Technology Greg Stidsen notes Class D's advantage over linear designs: ``In a linear amplifier such as Class A or AB, parts-matching and very close tolerances are required to get the best results, and even then, there is a limit to performance since the linearity of semiconductors varies considerably with temperature.'' Major Class D audiophile products (Atma-Sphere Class D monoblocks, PS Audio M1200, NAD C 298, Fosi Audio) have received favorable reviews comparing them to multi-thousand-dollar Class AB references.
+
+\subsubsection{Distortion Signatures by Class}
+
+A critical psychoacoustic distinction: even-order harmonics (2nd, 4th, 6th) are generally perceived as more musically pleasant than odd-order harmonics (3rd, 5th, 7th). Class A amplifiers tend to produce predominantly even-order harmonic distortion at low levels. Class AB produces odd-order crossover distortion, which is perceived as harsher. The audibility threshold for higher-order harmonics is lower (they are more annoying at the same level). This explains why a tube Class A amplifier measuring 0.5\% THD can sound more musical than a transistor Class AB measuring 0.05\% THD --- the harmonic profile matters more than the total number.
+
+\subsection{Module 3 Reference: Mixing and Space}
+
+\subsubsection{The Three-Dimensional Stereo Field}
+
+The stereo field has three perceptual dimensions:
+\begin{itemize}
+  \item \textbf{Width:} Perceived left-right placement. Controlled by panning. Bass frequencies ($<$80 Hz) are effectively non-directional --- keep them centered. Lead elements (kick, snare, bass, lead vocal) stay near center. Supporting elements (rhythm guitars, percussion, backing vocals) spread outward.
+  \item \textbf{Depth:} Front-to-back distance. Controlled by reverb send level, pre-delay time, and high-frequency rolloff (closer = brighter, more direct). A mono reverb placed strategically can add depth without the phase complexity of stereo reverb.
+  \item \textbf{Height:} Frequency-based vertical perception. Bass frequencies are perceived lower; high frequencies higher. EQ affects perceived vertical placement.
+\end{itemize}
+
+\subsubsection{Mid/Side Processing}
+
+Mid/Side (M/S) processing, patented by Alan Bluemlein in 1934 and widely used in modern mastering, separates a stereo signal into Mid (L+R sum, the center image) and Side (L-R difference, the stereo width content). Boosting Side increases perceived stereo width without changing the center image. Applying low-frequency cuts to the Side channel keeps bass energy centered and mono-compatible. Over-boosting Side creates hollow, phasey sound in mono playback --- a critical quality check.
+
+\subsubsection{Key Mixing Principles}
+
+Subtractive EQ before additive: carve space for each element by removing competing frequencies rather than boosting desired ones. Use a spectrum analyzer to identify frequency clashes (e.g., kick drum and bass guitar often conflict in the 60--120 Hz region; cut the bass instrument slightly in this range to create space for the kick's attack). Check mono compatibility throughout the mix --- if an element disappears or thins when summed to mono, its width is phase-based rather than spatial and will cause problems on smaller playback systems.
+
+\subsection{Module 4 Reference: Driver Alignment and Array Science}
+
+\subsubsection{Time Alignment Theory}
+
+Time-alignment in multi-driver loudspeakers was formally developed by Ed Long and Ronald Wickersham in 1975, presented at the 54th AES Convention in 1976. The core insight: in a multi-way speaker, the acoustic centers of the woofer and tweeter are physically offset. At the crossover frequency, both drivers are active; if their outputs do not arrive simultaneously at the listening position, destructive interference (lobing) occurs. The main lobe tilts away from the desired axis, producing a coloration that cannot be corrected by EQ.
+
+\subsubsection{Delay Calculation}
+
+The fundamental formula for speaker delay alignment:
+
+\begin{center}
+\textit{Delay (ms)} = \textit{Distance (m)} $\div$ 343 $\times$ 1000
+\end{center}
+
+Or in imperial: \textit{Delay (ms)} = \textit{Distance (ft)} $\div$ 1125 $\times$ 1000
+
+For a multi-subwoofer system: measure the distance from each sub to the listening position; identify the farthest; add delay to all closer subs equal to the difference in distance. For example, if Sub A is at 4 m and Sub B is at 3 m, delay Sub B by $(4-3)/343 \times 1000 = 2.915$ ms.
+
+\subsubsection{DSP Tools: FIR vs. IIR}
+
+\textbf{FIR filters} (Finite Impulse Response, linear phase): Can correct phase and linearize frequency response without introducing group-delay distortion. However, they introduce latency (proportional to filter length) and require more processing power. Best for phase-critical studio work and installed sound where latency is acceptable.
+
+\textbf{IIR filters} (Infinite Impulse Response, minimum phase): Low-latency, computationally efficient, but alter phase when applied. Used in live FOH situations where latency is critical (lip-sync, musician monitoring). Phase rotation from IIR crossovers is the primary reason time-alignment effort is required in live systems.
+
+\subsubsection{Line Array Coherent Coupling}
+
+Multiple drivers mounted in a vertical column interact acoustically. When driver spacing is small relative to the wavelength of a given frequency, outputs add coherently (couple) to form a near-cylindrical wavefront. Cylindrical propagation loses SPL at 3 dB per distance doubling (vs. 6 dB for a point source) --- a significant practical advantage for large venues. The coherent coupling frequency band is determined by driver spacing: common 0.2--0.4 m spacing produces coupling in the 500--1500 Hz range.
+
+\subsection{Module 5 Reference: Enclosure Engineering}
+
+\subsubsection{Sealed Box (Acoustic Suspension)}
+
+The simplest enclosure: the driver mounts in a sealed box; the air volume inside acts as an additional mechanical spring. Benefits: maximum cone control (lowest THD), flat group delay (no stored energy), compact design. Trade-off: 12 dB/octave roll-off below tuning frequency (vs. 24 dB for other designs), requiring more amplifier power for equivalent bass extension. Best for accuracy-critical studio monitoring applications.
+
+\subsubsection{Bass Reflex (Ported / Helmholtz Resonator)}
+
+A port (tuned pipe) is added to the box. Below the box's resonant frequency, the port output is in phase with the driver and reinforces bass output, producing a flatter response with greater extension than a sealed box of the same volume. Trade-off: above the port frequency, the driver loses back-pressure loading and can over-excur --- active protection (high-pass filter below tuning frequency) is essential. Typical port distortion at resonance is high; some designs exceed 10\% THD at the tuning frequency.
+
+\subsubsection{Transmission Line: Quarter-Wave Physics}
+
+A transmission line (TL) speaker directs the back-wave energy from the driver into a long (typically folded) pathway within the cabinet. The key calculation:
+
+\begin{center}
+Full wavelength (ft) = 1130 $\div$ Fs \quad;\quad Quarter-wave length = Full wave $\div$ 4
+\end{center}
+
+The line length is set equal to the quarter wavelength of the driver's resonant frequency (Fs). The phase of the back-wave is inverted by the quarter-wave resonance and exits the open end in phase with the front of the driver, reinforcing bass output while significantly reducing cone excursion (and therefore distortion) at Fs. Properly designed TL speakers routinely achieve under 1\% THD versus 10\%+ for some bass-reflex designs at the tuning frequency.
+
+\subsubsection{Full-Wave and Half-Wave Subwoofer Resonators}
+
+A full-wave resonator uses a pipe or channel equal to the full acoustic wavelength of the target frequency. A half-wave resonator uses half that length. Both produce reinforcement at the target frequency but with different phase relationships at the termination. The Wisdom Audio RTL (Reciprocal Transmission Line) system uses both quarter-wave and half-wave modes simultaneously, achieving 6--9 dB of gain over the operating bandwidth while reducing cone excursion by a factor of 10 compared to direct radiating designs.
+
+\subsubsection{Folded Horn: Klipsch Engineering}
+
+A horn is an acoustic transformer: it transforms the high-pressure, low-velocity motion at the driver cone into low-pressure, high-velocity output at the horn mouth. This greatly increases the acoustic coupling efficiency between the driver and the air --- the horn-loaded driver works far less hard than a direct radiator. Benefits:
+\begin{itemize}
+  \item Efficiency: horns can be 10--20 dB more efficient than direct-radiating designs
+  \item Lower cone excursion at target SPL → reduced nonlinear distortion
+  \item Lower voice coil temperature → reduced power compression
+\end{itemize}
+
+Paul W.\ Klipsch's Klipschorn (patents 1942--1945) uses a folded exponential horn with the room corner completing the horn geometry --- Klipsch termed this a ``bifurcated trihedral exponential wave transmission line.'' The design uses a 15-inch driver in a folded W-section bass horn producing usable output to 40 Hz with remarkably low distortion. The Jubilee (2022 production release, designed by Klipsch and Roy Delgado) improves on the original with dual 12-inch drivers in a patented vented enclosure, a 340 Hz crossover to a K-402 exponential midrange horn, and DSP-based time and phase alignment. It eliminates the original Klipschorn's requirement to be placed in room corners.
+
+\subsubsection{Funktion-One Horn Loading Philosophy}
+
+Funktion-One (founded 1992, Tony Andrews and John Newsham) is among the world's most respected professional audio manufacturers, known for installations at Berghain (Berlin), Fabric (London), and Sonar (Barcelona). Their design philosophy, as stated by founder Tony Andrews: ``We have always designed acoustically flat loudspeaker systems, requiring only crossover filters, relative delays and gains.'' This is in direct contrast to most commercial PA systems, which require significant EQ correction.
+
+Funktion-One uses horn-loaded point-source configurations: all drivers (bass, mid, high frequency) aligned around a single acoustic center, minimizing phase distortion and delivering consistent tonal balance at all listening positions. The horn loading reduces driver cone excursion, lowers distortion, and prevents voice coil thermal compression. The Berghain system, described as one of the world's most powerful club installations, operates at only 10--20\% of its full capacity during normal use.
+
+\subsection{Module 6 Reference: System Fidelity}
+
+\subsubsection{Total Harmonic Distortion (THD)}
+
+THD is the ratio of the RMS sum of all harmonic components (2nd through nth) to the RMS level of the fundamental. Mathematically:
+
+\begin{center}
+$\text{THD} = \frac{\sqrt{V_2^2 + V_3^2 + V_4^2 + \cdots + V_n^2}}{V_1}$
+\end{center}
+
+THD measurement procedure: apply a spectrally pure sine wave to the device under test; measure amplitudes of harmonics in the output using FFT analysis or a fundamental-notch filter. THD is typically expressed in percent for values $\geq$0.01\% and in dB for very low values (e.g., -120 dB = 0.0001\%).
+
+\subsubsection{THD vs. THD+N}
+
+THD+N (Total Harmonic Distortion plus Noise) measures all signal energy in the output after removing the fundamental, including both harmonics and broadband noise. THD+N is easier to measure (requires only a notch filter) and is the more common specification. However, in noisy acoustic environments (microphone and loudspeaker measurements), THD+N is preferred over THD because high ambient noise makes separating noise from harmonic distortion impractical. In a very low-noise system, THD $\approx$ THD+N.
+
+\subsubsection{Psychoacoustics of Distortion}
+
+Research shows that even-order harmonics (2nd, 4th) are perceptually less objectionable than odd-order (3rd, 5th). Higher-order harmonics are disproportionately audible --- the 10th harmonic is far more annoying at equivalent level than the 2nd. This is why the spectrum profile of an amplifier's distortion matters more than the total THD figure alone. Crossover distortion in Class B amplifiers produces high odd-order content, which is perceived as harshness or grit even at numerically modest THD levels.
+
+\subsubsection{Signal-to-Noise Ratio}
+
+SNR is the ratio of the desired signal to the noise floor, expressed in dB. A professional preamp should achieve $>$120 dB SNR (A-weighted). SINAD (Signal-to-Noise and Distortion) combines SNR and THD+N into a single figure of merit. SFDR (Spurious Free Dynamic Range) measures the ratio of the fundamental to the largest spurious spur, important in ADC applications.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Definition} & \tableheader{Typical Good Value} \\
+\midrule
+THD & RSS sum of harmonics / fundamental & $<$0.01\% (-80 dB) \\
+THD+N & All non-fundamental energy / signal & $<$0.001\% (-100 dB) \\
+SNR & Signal power / noise power & $>$120 dB \\
+SINAD & Signal / (noise + distortion) & $>$110 dB \\
+SFDR & Fundamental / worst spur & $>$100 dBc \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Rule Type} \\
+\midrule
+Phantom power voltages & 48V DC can cause equipment damage if applied to unrated microphones & GATE \\
+High-SPL exposure & Extended exposure to levels above 85 dB SPL causes hearing damage; Funktion-One-class systems routinely exceed 110 dB & ANNOTATE \\
+Amplifier thermal management & Class A amplifiers operate at 75\% power dissipation as heat; thermal runaway is a real risk without proper design & GATE \\
+DIY high-voltage tube circuits & Some preamp designs (vacuum tube) require 200--400V rails; appropriate safety warnings required & ABSOLUTE \\
+Quantitative specs & All THD, SNR, frequency response figures must cite specific test conditions (level, frequency, load) & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Professional Organizations and Standards Bodies}
+\begin{itemize}
+  \item Audio Engineering Society (AES) --- aes.org, journal and convention proceedings
+  \item IEC EN 61938 --- International phantom power standard
+  \item Audio Precision Inc.\ --- ap.com, THD/SNR measurement methodology documentation
+\end{itemize}
+
+\subsubsection{Manufacturer Engineering Documentation}
+\begin{itemize}
+  \item THAT Corporation, ``Designing Microphone Preamplifiers,'' 129th AES Convention, Nov 2010
+  \item Texas Instruments, TIDU765: ``Single-Supply Electret Microphone Pre-Amplifier''
+  \item Analog Devices, MT-053: ``Op Amp Distortion: HD, THD, THD+N, IMD, SFDR''
+  \item Analog Devices, ``Confused About Amplifier Distortion Specs?'' Analog Dialogue
+  \item Funktion-One Research Ltd., F1201 User Guide v1.41
+  \item Klipsch Audio, Klipschorn AK7 Specification Sheet; Jubilee Technical Documentation
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Technical References}
+\begin{itemize}
+  \item Delgado, R.\ \& Klipsch, P.W., JAES 2000 --- Jubilee bass bin comparison with Klipschorn
+  \item Ed Long and Ronald Wickersham, ``A Time-Align Technique for Loudspeaker System Design,'' 54th AES Convention, 1976
+  \item Martin J.\ King, ``Quarter Wavelength Loudspeaker Design'' --- quarter-wave.com
+  \item Wisdom Audio, RTL Subwoofer Technical Documentation --- wisdomaudio.com
+  \item Purifi Audio, ``Time/Phase Alignment, Acoustic Center, Lobing'' --- purifi-audio.com
+  \item Tape Op Magazine, ``DIY JFET Mic Pre'' --- JFET preamplifier circuit analysis
+\end{itemize}
+
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, cross-referenced knowledge base covering the complete hi-fidelity audio signal chain: from the physics of microphone capsules and preamplifier design through amplifier class topologies, stereo mixing technique, multi-driver time alignment, subwoofer enclosure engineering, and quantitative fidelity measurement. The output serves as a practitioner reference, educational curriculum foundation, and architectural specification for audio-related GSD skill modules.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION (Sequential, Haiku)
+  [Shared schemas] [Source index] [Thiele-Small parameter tables]
+                        |
+        +---------------+-----------------+
+        |                                 |
+WAVE 1A: SIGNAL CHAIN            WAVE 1B: ENCLOSURE & FIDELITY
+  (Parallel, Sonnet)               (Parallel, Sonnet)
+  M1: Signal Capture               M5: Enclosure Engineering
+  M2: Amplification Theory         M6: System Fidelity + Case Studies
+  M3: Mixing and Space
+  M4: Driver Alignment
+        |                                 |
+        +-----------+---------------------+
+                    |
+         WAVE 2: SYNTHESIS (Opus)
+           Cross-module integration
+           Complete chain walkthrough
+           Glossary + worked examples
+                    |
+         WAVE 3: PUBLICATION (Sonnet)
+           PDF compilation + verification
+           HITL review at wave boundary
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer:} Shared schemas (Thiele-Small parameter definitions, amplifier class taxonomy table, frequency/wavelength conversion tables), source index, terminology glossary
+  \item \textbf{Signal Chain Layer:} Modules 1--4 covering the electrical path from capsule to multi-speaker output
+  \item \textbf{Enclosure and Measurement Layer:} Modules 5--6 covering acoustic engineering and quantitative fidelity
+  \item \textbf{Synthesis Layer:} Cross-module coherence, complete walkthrough documents, worked design examples
+  \item \textbf{Publication Layer:} Final PDF, verification matrix, HITL gate
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Signal Capture Reference & Preamp topologies, gain staging, phantom power, SNR tables & M1 doc \\
+2 & Amplification Theory Reference & All 7 classes documented; Class D debate section & M2 doc \\
+3 & Mixing and Space Guide & 3D field model, 5+ techniques per dimension, mono check & M3 doc \\
+4 & Driver Alignment Manual & Delay formula, worked example, FIR/IIR comparison & M4 doc \\
+5 & Enclosure Engineering Reference & All enclosure types; Klipsch folded-horn calcs & M5 doc \\
+6 & System Fidelity + Case Studies & THD/SNR methodology; Funktion-One + Klipsch profiles & M6 doc \\
+7 & Synthesis Document & Chain walkthrough; cross-module index; glossary & Opus \\
+8 & Verification Report & All 12 success criteria checked; test results & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Foundation schemas & None & Haiku & 8K \\
+W0: Source index & None & Haiku & 5K \\
+M1: Signal Capture & W0 & Sonnet & 25K \\
+M2: Amplification Theory & W0 & Sonnet & 28K \\
+M3: Mixing and Space & W0 & Sonnet & 22K \\
+M4: Driver Alignment & W0 & Sonnet & 26K \\
+M5: Enclosure Engineering & W0, M4 & Sonnet & 32K \\
+M6: Fidelity + Case Studies & W0, M1--M5 & Opus & 35K \\
+W2: Synthesis Document & All modules & Opus & 40K \\
+W3: Verification Report & All & Sonnet & 18K \\
+\midrule
+\textbf{Total} & & & \textbf{\textasciitilde239K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Assignment} & \tableheader{Rationale} \\
+\midrule
+Opus & M6 (Case Studies), W2 Synthesis & Cross-module coherence; judgment on audiophile disputes; nuanced psychoacoustic analysis \\
+Sonnet & M1--M5, W3 Verification & Structured technical documentation; formula derivation; spec table assembly \\
+Haiku & W0 Foundation & Schema generation, lookup tables, terminology scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Components} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Schemas, source index, tables & Auto \\
+1A & Signal Chain & Parallel & M1, M2, M3, M4 & HITL \\
+1B & Enclosure \& Fidelity & Parallel (with 1A) & M5, M6 & HITL \\
+2 & Synthesis & Sequential & Integration doc, glossary & HITL \\
+3 & Publication & Sequential & PDF compile, verification & Human \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Thiele-Small parameter schema & JSON schema for driver specs (Fs, Qts, Vas, Xmax) & Haiku & 3K \\
+Amplifier class taxonomy table & Markdown reference table, all 7 classes & Haiku & 2K \\
+Frequency/wavelength conversion & Pre-computed table 20--200 Hz & Haiku & 1K \\
+Source index & All 20+ sources with URLs and authority tier & Haiku & 4K \\
+Terminology glossary scaffold & 80+ audio terms, definitions & Haiku & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Signal Chain (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Key Outputs} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M1 & Preamp topology comparison; phantom power spec; gain staging guide; SNR calculator & Sonnet & 25K \\
+M2 & Class A--H reference; conduction angle diagrams; efficiency/THD tradeoff tables; Class D evolution section & Sonnet & 28K \\
+M3 & 3D stereo field model; M/S processing guide; panning convention table; mono compatibility checklist & Sonnet & 22K \\
+M4 & Delay formula derivation; worked 4-speaker example; FIR vs.\ IIR decision matrix; cardioid sub configuration & Sonnet & 26K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Enclosure and Fidelity (Parallel with 1A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{Key Outputs} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+M5 & Enclosure taxonomy; Klipschorn corner-load derivation; quarter-wave TL calculator; Jubilee dual-driver analysis; Funktion-One horn geometry & Sonnet & 32K \\
+M6 & THD/THD+N measurement guide; harmonic psychoacoustics table; SNR/SINAD/SFDR reference; Funktion-One case study; Klipsch heritage case study & Opus & 35K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Complete chain walkthrough & Document tracing a signal from capsule to listener ear, referencing all six modules & Opus & 18K \\
+Cross-module index & All technical terms linked to their primary module & Opus & 8K \\
+Worked design example & Full design exercise: preamp selection → amplifier class → cabinet for a 30 Hz subwoofer & Opus & 14K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+Source verification pass & All citations verified traceable to professional/peer-reviewed sources & Sonnet & 10K \\
+Success criteria verification & All 12 criteria checked against deliverables & Sonnet & 5K \\
+Final PDF compilation & Compiled knowledge base document & Sonnet & 3K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 0 outputs (schemas, source index, tables) are loaded as shared context for all Wave 1 agents; cache TTL of 5 minutes exploited for Wave 1A and 1B running concurrently.
+  \item The Thiele-Small parameter schema and amplifier class taxonomy table are used by both M5 and M2; generate once in Wave 0 and reference in both.
+  \item M6 (Opus) loads all five prior module outputs; schedule as the last module in Wave 1B to maximize cache availability of Wave 1A outputs.
+  \item Synthesis (Wave 2) runs after all Wave 1 outputs are committed; load all six module documents as shared context for the Opus synthesis pass.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Components} & \tableheader{Model Mix} & \tableheader{Est. Tokens} \\
+\midrule
+Wave 0 & 5 scaffolding tasks & Haiku 100\% & 13K \\
+Wave 1A & 4 signal chain modules & Sonnet 100\% & 101K \\
+Wave 1B & 2 enclosure/fidelity modules & Sonnet 45\%, Opus 55\% & 67K \\
+Wave 2 & 3 synthesis tasks & Opus 100\% & 40K \\
+Wave 3 & 3 publication tasks & Sonnet 100\% & 18K \\
+\midrule
+\textbf{Total} & & & \textbf{\textasciitilde239K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0-schemas --+--> M1 (Sonnet) ------+
+             +--> M2 (Sonnet) ------|
+             +--> M3 (Sonnet) ------|---> W2-Synthesis (Opus)
+             +--> M4 (Sonnet) ------|         |
+             +--> M5 (Sonnet) ------|         |
+             +--> M6 (Opus) --------+         |
+                  [M6 depends on M1-M5]        |
+                                               |
+                                          W3-Publish (Sonnet)
+                                               |
+                                          HITL Review Gate
+                                               |
+                                          DELIVER
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Coverage} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & Source quality, spec attribution, safety warnings \\
+Core functionality & 22 & Required & BLOCK & All 12 success criteria, 2 tests each \\
+Integration & 6 & Required & BLOCK & Cross-module consistency \\
+Edge cases & 5 & Best-effort & LOG & Anomalous data, disputed claims \\
+\midrule
+\textbf{Total} & \textbf{38} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality gate & All citations traceable to AES, AP, manufacturer engineering docs, peer-reviewed journals, or IEEE/IEC standards. Zero blog/entertainment media. \\
+SC-NUM & Numerical attribution & Every THD \%, SNR figure, efficiency rating, and frequency specification attributed to specific source with test conditions stated. \\
+SC-SPL & SPL safety annotation & Any discussion of high-SPL systems (Funktion-One, subwoofer stacks) includes note on hearing damage risk above 85 dB SPL. \\
+SC-HV & High-voltage warning & Any preamp topology involving tube circuits (200--400V rails) includes appropriate safety warnings. \\
+SC-ADV & No advocacy & Document presents engineering tradeoffs and measured data without advocating for specific product purchases or ideological positions (e.g., ``tubes are superior to transistors''). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Selected Core Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Preamp topology coverage & At least 3 topologies (JFET, transformer-coupled, IC) compared on noise, gain, impedance, cost \\
+CF-02 & Phantom power spec cited & 48V ±4V per IEC EN 61938, with microphone compatibility notes \\
+CF-03 & All 7 amplifier classes documented & Class A, B, AB, C, D, G, H each have conduction angle, efficiency ceiling, distortion signature \\
+CF-04 & Class D evolution documented & At least 3 expert opinions on Class D vs.\ Class AB cited \\
+CF-05 & 3D stereo field model & Width/depth/height dimensions each have $\geq$4 distinct control techniques \\
+CF-06 & Delay formula present & Distance/343$\times$1000 = delay (ms) formula with worked numerical example \\
+CF-07 & Quarter-wave formula present & 1130/Fs = full wave; /4 = quarter-wave length, with Fs example \\
+CF-08 & Klipsch Jubilee documented & Dual 12-inch drivers, 340 Hz crossover, patented vented enclosure confirmed \\
+CF-09 & Funktion-One philosophy documented & Acoustically flat, no corrective EQ, Berghain installation cited \\
+CF-10 & THD/THD+N distinction clear & THD (harmonics only, FFT method) vs.\ THD+N (harmonics + noise, notch method) clearly differentiated \\
+CF-11 & SNR targets stated & Professional preamp $>$120 dB SNR; Class A amp $<$0.025\% THD at 1 kHz \\
+CF-12 & Even/odd harmonic psychoacoustics & Even-order vs.\ odd-order audibility difference explained with implications for Class A vs.\ AB \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & M1 $\to$ M6 chain & Preamp SNR floor established in M1 is referenced as system SNR ceiling in M6 fidelity discussion \\
+IN-02 & M2 $\to$ M6 chain & Amplifier class distortion signatures in M2 are referenced in M6 harmonic psychoacoustics section \\
+IN-03 & M4 $\to$ M5 consistency & Time-alignment principles from M4 referenced in M5's horn-system crossover point discussion \\
+IN-04 & M5 $\to$ M6 Klipsch consistency & Jubilee driver/crossover specs in M5 match specs cited in M6 case study \\
+IN-05 & Cross-module data consistency & Same values (e.g., speed of sound 343 m/s, 1130 ft/s) used consistently across all modules \\
+IN-06 & Document self-containment & Reader with no prior audio knowledge can trace a signal from capsule to listener using only this document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Preamp topologies with gain range, phantom spec, CMRR & CF-01, CF-02 & Pending \\
+2. All 6 amplifier classes documented & CF-03 & Pending \\
+3. Class D debate with 3 expert opinions & CF-04 & Pending \\
+4. 3D stereo field model & CF-05 & Pending \\
+5. Time alignment formula + worked example & CF-06 & Pending \\
+6. Quarter-wave TL formula & CF-07 & Pending \\
+7. Folded-horn physics documented & CF-08 & Pending \\
+8. Funktion-One case study & CF-09 & Pending \\
+9. Klipsch case study & CF-08, IN-04 & Pending \\
+10. THD measurement methodology & CF-10 & Pending \\
+11. SNR/SINAD with example figures & CF-11 & Pending \\
+12. All 6 modules with $\geq$3 sources each & SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go gates; HITL coordination \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache schedule \\
+SCOUT & Research Agent & Source gathering; AES paper retrieval; manufacturer doc mining \\
+EXEC-A & Executor Alpha & M1 Signal Capture and M3 Mixing and Space documents \\
+EXEC-B & Executor Beta & M2 Amplification Theory and M4 Driver Alignment documents \\
+CRAFT-ACOUSTIC & Acoustic Specialist & M5 Enclosure Engineering; horn math; TL calculations \\
+CRAFT-MEASURE & Measurement Specialist & M6 Fidelity; THD/SNR methodology; case studies \\
+VERIFY & Verification Agent & Source validation; numerical attribution checking \\
+INTEG & Integration Agent & Cross-module consistency; chain walkthrough validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; ambiguity resolution \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Agent & Cross-cutting structural decisions \\
+RETRO & Retrospective & Post-wave lessons; quality degradation detection \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (15 roles) \\
+Module Count & 6 (Signal Capture, Amplification, Mixing, Alignment, Enclosure, Fidelity) \\
+Case Studies & 2 (Funktion-One, Klipsch Heritage) \\
+Wave Count & 4 (Foundation, Signal Chain + Enclosure in parallel, Synthesis, Publication) \\
+Total Estimated Tokens & $\sim$239K \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Estimated Sessions & 4--6 context windows \\
+HITL Gates & 3 (post Wave 1A, post Wave 1B, final review) \\
+Success Criteria & 12 \\
+Total Tests & 38 \\
+Parallelizable Waves & Waves 1A and 1B run simultaneously \\
+Primary Authorities & AES, Audio Precision, IEC EN 61938, Klipsch, Funktion-One, Analog Devices \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Almost all modern loudspeakers require significant pre-set or controller EQ. In contrast, we have always designed acoustically flat loudspeaker systems, requiring only crossover filters, relative delays and gains. The advantages of this approach are headroom preservation and system linearity, as well as a clearer, more natural audio presentation.''}
+
+\medskip
+\textbf{--- Tony Andrews, Founder, Funktion-One}
+
+\medskip
+\textit{The spaces between the waveforms are not empty. They are the instrument. Design for coherence, and the music will speak for itself.}
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,1076 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% Color Scheme — Cosmic/Astronomical
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{E65100}
+\definecolor{accent}{HTML}{4527A0}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF3E0}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% Headers and Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Non-Western Zodiac Traditions}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Non-Western Zodiac Traditions -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%% TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Spaces Between the Stars\\[0.3em]Zodiac Traditions Beyond the Western Sky}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Jyotish · Arabic Manzil · Mesoamerican Calendar Systems}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study in Comparative Astronomical Cosmology}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+%% ============================================================
+%% TABLE OF CONTENTS
+%% ============================================================
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1 — VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Non-Western Zodiac Traditions --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research (Cold Start)}
+\metafield{Depends On:}{ATC Zodiac Foundations Reference (Assumed)}
+\metafield{Context:}{Companion study to any Western-facing zodiac research; fills the geographic and philosophical gaps that standard Western/Mesopotamian treatments leave entirely silent.}
+
+\subsection{Vision}
+
+Every zodiac is a theory about where meaning lives in the sky. The Western tradition placed it in the Sun's annual journey, carved into twelve equal seasonal arcs. But three of Earth's most mathematically sophisticated astronomical cultures drew the boundary lines somewhere else entirely --- and their choices reveal fundamentally different cosmological commitments.
+
+The Vedic tradition of India (Jyotish) rejected the seasonal year as the anchor and instead pinned the sky to the fixed stars themselves, measuring the slow wobble of Earth's axis --- the \textit{ayanamsa} --- as a correction factor. In doing so, it developed a 27-fold lunar subdivision (the nakshatras) that predates the twelve-sign zodiac, giving the Moon's monthly path equal standing with the Sun's annual one. The Arabic manzil tradition did something related but distinct: it built 28 ``resting places of the moon'' tied to specific star groups that camel caravans and farmers had watched for millennia before any Greek text arrived in Baghdad. The Mesoamerican traditions --- Maya Tzolk'in and Aztec Tonalpohualli --- went further still, abandoning the ecliptic as the organizing principle altogether and building time not around any celestial path but around the intersection of a 260-day ritual cycle with a 365-day solar count, their Calendar Round meshing like two gears to produce 18,980 unique days before repetition.
+
+What unites these three traditions is what the Western system overlooked: the idea that the \textit{spaces between} the standard twelve signs are not empty. They contain information. The nakshatras find 27 meanings where the tropical system finds twelve. The manzil find 28 resting places in the moon's orbit where medieval European astrology barely acknowledged the moon's monthly sweep. The Mesoamerican Paris Codex identified 13 ecliptic constellations --- not twelve --- each spanning only 27--28 degrees, a different geometry entirely.
+
+This mission documents all three traditions at research depth: their boundary definitions, their mathematical structures, their cultural functions, and crucially, how each system answers the question ``where does one sign end and the next begin?'' differently.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The ayanamsa gap is practically invisible in popular discourse.} Western astrology and Vedic astrology use the same twelve sign names but place every planet in a different sign. The ~24-degree offset (the Lahiri ayanamsa, officially adopted by the Indian government in 1956) means that a person with the Sun in early Aries in Western astrology has the Sun in Pisces in Jyotish --- yet this fundamental divergence is rarely explained at the level of its mathematical origin.
+
+  \item \textbf{The nakshatra system has no functional analog in Western literature.} Twenty-seven divisions of 13°20' each, each subdivided into four padas of 3°20', totaling 108 padas that correspond directly to the beads of a japa mala --- this is a complete, internally consistent lunar zodiac that Western studies almost universally collapse into a footnote. Its boundary logic (anchored to the star Spica/Chitra) and its precedence (predating Hellenistic influence by centuries) deserve independent treatment.
+
+  \item \textbf{The Arabic manzil system has two incompatible boundary frameworks that are routinely conflated.} The original constellational mansions were sidereal --- defined by specific indicator stars (e.g., the Pleiades for Al-Thurayya). The later regularized system in the \textit{Picatrix} fixed each mansion at 12°51' starting from 0° Aries (tropical). These are not the same system, and using one to interpret the other produces systematic errors.
+
+  \item \textbf{Mesoamerican astronomy is routinely mistranslated as ``zodiac.''} The Paris Codex pages 23--24 do depict 13 ecliptic constellations (scorpion, turtle, rattlesnake, peccary, birds), but they function not as natal sign assignments but as eclipse prediction tools and catastrophe markers. The Tzolk'in's 260-day count is not an ecliptic system at all --- calling it a zodiac imposes Western epistemic categories on a fundamentally different cosmological architecture.
+
+  \item \textbf{No comparative cross-traditional boundary map exists in accessible research literature.} The scholarly work comparing Indian, Arabic, and Chinese lunar mansions (Kelley's comparative tables, Yampolsky's origin studies) is dispersed across mid-20th-century academic journals. A synthesized, GSD-structured reference would make these comparisons immediately actionable for the skill-creator ecosystem.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Core Model:} Each tradition solves the same astronomical problem --- how to divide the sky into meaningful units --- using a different anchor point, a different primary luminary, and a different conception of what ``boundary'' means.
+
+\begin{asciibox}
+ANCHOR POINT COMPARISON
+========================
+
+Western Tropical   : Vernal equinox (0 Aries = March equinox)
+                     Sky drifts; anchor stays seasonal
+
+Jyotish Sidereal   : Fixed star Spica (Chitra) at 0 Libra
+                     Sky stays fixed; equinox drifts away (~24 deg now)
+
+Arabic Manzil      : Originally indicator stars (sidereal)
+                     Later regularized at 0 Aries tropical (Picatrix)
+
+Mesoamerican       : No ecliptic anchor for the 260-day cycle
+                     Paris Codex: 13 ecliptic animals (28-day periods)
+                     Venus cycle: synodic 584 days
+
+KEY TENSION: "Fixed stars" vs "seasonal point" vs "ritual cycle"
+             All three answer: where does one period end and the next begin?
+\end{asciibox}
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+NON-WESTERN ZODIAC TRADITIONS — DOMAIN MAP
+==========================================
+
+        INDIA                    ARABIA                MESOAMERICA
+          |                        |                        |
+     Jyotish/Vedic            Manzil al-Qamar         Maya / Aztec
+          |                        |                        |
+   +------+------+          +------+------+          +------+------+
+   |             |          |             |          |             |
+ Rashi        Nakshatra   Sidereal     Tropical    Tzolk'in    Paris Codex
+ (12 signs)   (27 lunar    Constell.   Equal Div.  (260-day)   (13 ecliptic
+  sidereal)    mansions)   (indicator  (Picatrix)  ritual)     constellations)
+                           stars)
+                |
+             Pada system
+             (108 units)
+
+CONNECTING THREAD: The lunar path (sidereal month ~27.3 days)
+  India: 27 nakshatras | Arabia: 28 manzil | China: 28 xiu (not in scope)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE STRUCTURE
+==========================
+
+MODULE A: Jyotish Sidereal Zodiac
+  - Rashi (12 signs) vs nakshatra (27 mansions)
+  - Ayanamsa mathematics (Lahiri, precession formula)
+  - Pada subdivision and the 108-unit cosmology
+  - Dasha system (timing mechanism unique to Jyotish)
+
+MODULE B: Arabic Manzil System
+  - Pre-Islamic Arabian star lore origins
+  - Islamic Golden Age systematization (al-Biruni, Abu Ma'shar)
+  - Sidereal constellational vs tropical Picatrix framework
+  - Agricultural, navigational, and magical functions
+
+MODULE C: Mesoamerican Calendar Systems
+  - Tzolk'in (260-day) and Haab (365-day) structure
+  - Calendar Round (52-year cycle) and Long Count
+  - Paris Codex zodiac: 13 ecliptic animals (scholarship debate)
+  - Venus cycle and Dresden Codex tables
+
+MODULE D: Comparative Boundary Analysis
+  - Cross-traditional indicator star mapping (Kelley tables)
+  - Boundary definition: equal division vs constellational vs ritual
+  - Epistemic gap: imposing Western categories on non-Western systems
+
+MODULE E: Living Traditions and Contemporary Practice
+  - Current use of Jyotish in South Asian culture
+  - Survival of manzil in Islamic traditional astronomy
+  - Living Tzolk'in practitioners (K'iche' Maya, Guatemala highlands)
+  - Cultural sovereignty considerations
+
+WAVE STRUCTURE: A+B parallel || C+D parallel -> E synthesis
+\end{asciibox}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  mission: non-western-zodiac-traditions
+  profile: squadron
+  primary_luminary: jyotish-module     # deepest technical content
+  secondary_luminary: manzil-module    # dual-framework complexity
+  tertiary_luminary: mesoamerica-module # epistemic sensitivity highest
+  synthesis: comparative-analysis
+  living_traditions: cultural-context
+  wave_parallelism: 2-track
+  model_allocation:
+    opus: 30%      # synthesis, cultural sensitivity, boundary analysis
+    sonnet: 60%    # module surveys, structured content, verification
+    haiku: 10%     # shared schemas, templates, scaffolding
+  cache_ttl_strategy: exploit_5min_window
+  sensitivity_flags:
+    - indigenous_attribution_required   # K'iche', Yucatec Maya specifically
+    - no_generic_indigenous_references
+    - living_practice_respect_protocol
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Jyotish/Vedic: full rashi and nakshatra system, ayanamsa mathematics, Lahiri standard
+  \item Arabic: 28 manzil, both sidereal constellational and Picatrix tropical frameworks
+  \item Mesoamerican: Maya Tzolk'in, Haab, Calendar Round, Long Count; Aztec Tonalpohualli and Xiuhpohualli; Paris Codex zodiac analysis
+  \item Comparative boundary mapping across all three traditions plus Western reference
+  \item Living practice documentation for currently active traditions
+  \item Venus cycle tracking as Mesoamerican astronomical parallel to zodiacal systems
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Chinese 28 xiu (lunar mansions) --- a fourth major tradition; separate mission warranted
+  \item Egyptian 36 decans --- Mesopotamian-adjacent; covered by Western origin treatments
+  \item Detailed interpretation of individual natal charts in any tradition
+  \item Modern New Age adaptations (Dreamspell, ``Mayan astrology'' pop culture)
+  \item Policy positions on astronomy vs astrology debate
+  \item Detailed Aztec Sun Stone iconographic analysis (separate mission scope)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Ayanamsa calculation explained at mathematical level: sidereal position = tropical position minus Lahiri ayanamsa (~24°12' in mid-2020s), with the precession formula and the 285 CE coincidence date documented.
+  \item All 27 nakshatras catalogued by name, asterism anchor star, pada count, and ecliptic range (13°20' per nakshatra, 3°20' per pada).
+  \item The 28 Arabic manzil documented in both frameworks: indicator star names, sidereal position, and Picatrix tropical position (12°51' per mansion from 0° Aries).
+  \item Discrepancy between sidereal constellational manzil and tropical equal-division manzil quantified and explained.
+  \item Tzolk'in structure fully described: 20 day signs × 13 numbers = 260-day cycle; Haab: 18×20 + 5 = 365-day cycle; Calendar Round = 18,980 days.
+  \item Paris Codex 13-constellation zodiac documented with scholarly debate: animal identifications (turtle = Orion, peccary = Gemini area), 28-day period structure, eclipse-prediction function.
+  \item Comparative boundary table produced: for each tradition, the number of divisions, each division's arc width, the anchor point used, and the primary luminary tracked.
+  \item Epistemic boundary clearly marked: where Western zodiac categories cannot map onto Mesoamerican systems without distortion.
+  \item Living tradition practitioners identified by specific group name (K'iche' Maya, Yucatec Maya, specific South Asian Jyotish lineages) --- no generic ``Indigenous peoples'' language.
+  \item Cultural sovereignty considerations addressed for all living traditions; OCAP principles applied where applicable.
+  \item All numerical claims (day counts, degree measurements, period lengths) attributed to specific sources (Wikipedia/academic sources for structural facts; al-Biruni, Vedanga Jyotisha, Paris Codex as primary sources cited).
+  \item Document is self-contained: a reader without prior knowledge of any tradition can understand all three systems and how they compare to Western astrology.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+ATC Zodiac Foundations & Parent research; this doc fills gaps identified there & Assumed existing \\
+GSD Mathematical Foundations & Unit circle / angular measurement framework applies here & Active \\
+The Space Between (textbook) & Philosophical spine: meaning in the spaces between nodes & Reference \\
+GSD BBS Educational Pack & Potential delivery vehicle for comparative zodiac content & Downstream \\
+GSD Foxfire Heritage Skills & Cultural transmission model; applicable to living traditions & Parallel \\
+Chinese Xiu Mission (future) & Fourth lunar mansion tradition; out of scope here & Planned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga Principle holds that remarkable complexity emerges from faithful iteration on small, principled building blocks. Each of these zodiac traditions is an existence proof of that claim applied to the sky. The nakshatra system divides the sky into 27 equal arcs of 13°20', then divides those into four padas of 3°20', and 27 × 4 = 108 --- the number of beads in a japa mala, representing all aspects of Vishnu. An entire cosmology encoded in a single arithmetic fact about lunar orbital geometry. The manzil system started as a practical almanac --- the noonday halt of camel and rider in the desert, one station per night of the Moon's journey --- and accumulated two millennia of agricultural lore, magical practice, and astronomical precision on top of that functional skeleton. The Mesoamerican Calendar Round produced 18,980 unique days by interlocking two prime-related cycles; it reset approximately once per human lifetime, so a person's 52nd year was cosmologically significant. No brute force. No overfitting. Just the resonance of small cycles faithfully interlocked.
+
+The deeper through-line is about what the spaces between the standard twelve mean. Western astrology drew twelve arcs and said: this is the sky. These three traditions said: there is more. The Moon passes through 27 stations in a month --- why collapse that to twelve? The camel halts 28 times before the circuit is complete. The ecliptic holds 13 animals, not twelve. The ritual calendar counts 260, not 365. Meaning lives in the precision of the count, not in the round number. The GSD ecosystem was built on the same intuition: the spaces between components are where the architecture lives. This mission makes that architectural principle visible in the oldest sky-maps humanity ever drew.
+
+\newpage
+
+%% ============================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Non-Western Zodiac Traditions --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference was compiled from authoritative academic and primary sources. All numerical claims are attributed. The cultural sections on living traditions treat each group by specific nation or community name (never generic ``Indigenous''). Key source organizations and texts include:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Wikipedia (structural/mathematical facts on Nakshatra, Lunar station, Maya calendar, Aztec calendar --- used for structural facts only, cross-referenced with primary source citations within those articles)
+  \item Al-Biruni, \textit{Book of Instructions in the Elements of Astrology} (Ghaznah, 1029) --- primary Arabic source
+  \item \textit{Picatrix} (10th century Arabic grimoire) --- primary source for equal-division manzil system
+  \item \textit{Vedanga Jyotisha} (final centuries BCE) --- first textual list of nakshatras
+  \item Paris Codex (Postclassic Maya, c.~1185--1450 CE) --- primary Mesoamerican source for ecliptic constellations
+  \item Dresden Codex (Classic Maya) --- Venus almanac primary source
+  \item National Museum of the American Indian (NMAI) / Smithsonian Living Maya Time project
+  \item \textit{Journal for the History of Astronomy} --- peer-reviewed secondary source for ayanamsa scholarship
+  \item SPICA (Society for the Preservation of Intellectual and Cultural Artefacts) --- peer-reviewed analysis of Paris Codex zodiac
+\end{itemize}
+
+\subsection{Module A: Jyotish/Vedic Sidereal Zodiac}
+
+\subsubsection{Foundational Architecture}
+
+Jyotish (Sanskrit: ``science of light'') is the Hindu system of astrology rooted in the Vedas, particularly the Vedanga Jyotisha, a text dated to the final centuries BCE. It operates on two interlocking frameworks: the twelve rashis (zodiac signs) and the twenty-seven nakshatras (lunar mansions). Both use the sidereal zodiac --- aligned to fixed stars rather than to the vernal equinox.
+
+The twelve rashis carry the same names as Western signs (Mesha/Aries through Meena/Pisces) but occupy different positions in the sky. As of the mid-2020s, every planet in a Jyotish chart appears approximately 24 degrees earlier than its Western tropical equivalent.
+
+\subsubsection{The Ayanamsa}
+
+The \textit{ayanamsa} (Sanskrit: ayana = movement; amsa = portion) is the angular difference between the tropical and sidereal zodiacs at any given moment. Because the Earth's axis precesses at approximately 50.3 arcseconds per year (completing a full 26,000-year cycle), the vernal equinox drifts slowly backward through the fixed star background.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Ayanamsa} & \tableheader{Anchor Star} & \tableheader{Notes} \\
+\midrule
+Lahiri (Chitrapaksha) & Spica (Chitra) at 0° Libra & Official Indian government standard (1956); most widely used in Jyotish \\
+KP (Krishnamurti) & Very close to Lahiri & Used in Krishnamurti Paddhati predictive system \\
+Raman & Slightly different from Lahiri & Used by B.V. Raman school \\
+Fagan-Bradley & Aldebaran/Antares at 15° Taurus/Scorpio & Western sidereal tradition only; not used in Jyotish \\
+Suryasiddhanta & Revati (zeta Piscium) at 29°50' Pisces & Ancient text-based; less common in practice \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The formula for conversion is: \textit{Sidereal position = Tropical position $-$ Ayanamsa}. Using Lahiri, the ayanamsa was approximately 23° in 1950 and approximately 24°12' in the mid-2020s --- increasing by roughly 1° every 72 years. The two zodiacs last coincided around 285 CE.
+
+\subsubsection{The Nakshatra System}
+
+The nakshatra system predates Hellenistic influence on India by centuries. It divides the 360° ecliptic into 27 equal arcs of 13°20' (or in the older 28-nakshatra system, 28 unequal arcs). The starting point in modern compilations is the point directly opposite Spica (Chitra in Sanskrit) --- placing the first nakshatra, Ashwini, at the beginning of sidereal Aries.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{2.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Nakshatra} & \tableheader{Anchor Star} & \tableheader{Range} & \tableheader{Symbol/Power} \\
+\midrule
+1 & Ashwini & Beta Arietis & 0°--13°20' Aries & Healer; power to heal quickly \\
+2 & Bharani & 35 Arietis & 13°20'--26°40' Aries & Restraint; power of purification \\
+3 & Krittika & Pleiades & 26°40' Aries--10° Taurus & Fire; power to cut through problems \\
+4 & Rohini & Aldebaran & 10°--23°20' Taurus & Moon's favorite; growth, fertility \\
+5 & Mrigashira & Lambda Orionis & 23°20' Taurus--6°40' Gemini & Searching; wandering, seeking \\
+6 & Ardra & Betelgeuse & 6°40'--20° Gemini & Storm; power to feel and act \\
+7 & Punarvasu & Pollux & 20° Gemini--3°20' Cancer & Renewal; spiritual energy \\
+8 & Pushya & Delta Cancri & 3°20'--16°40' Cancer & Nourishment; accumulating security \\
+9 & Ashlesha & Epsilon Hydrae & 16°40'--30° Cancer & Serpent; poison and medicine \\
+10 & Magha & Regulus & 0°--13°20' Leo & Ancestors; throne and power \\
+... & ... & ... & ... & (27 nakshatras total; each 13°20') \\
+14 & Chitra & Spica & 23°20' Virgo--6°40' Libra & \textbf{Ayanamsa anchor: Spica at 0° Libra} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Each nakshatra is subdivided into four \textit{padas} (``steps'') of 3°20'. The 27 nakshatras × 4 padas = 108 padas --- the same as the number of beads in a japa mala, representing all aspects of Vishnu according to Hindu cosmology.
+
+\subsubsection{Key Distinctions from Western Practice}
+
+In Jyotish, the Moon sign (Chandra Rashi) is primary --- not the Sun sign. This reflects a fundamentally different cosmological emphasis: where Western astrology built its popular identity around solar symbolism, Jyotish centers the Moon's position in both the natal chart and the nakshatra at birth. The Dasha system --- a sequence of planetary periods whose timing is determined by the Moon's nakshatra at birth --- has no equivalent in Western practice and is considered Jyotish's most distinctive predictive tool.
+
+\subsection{Module B: Arabic Manzil System}
+
+\subsubsection{Origins and Development}
+
+The Arabic manzil (``resting place of the Moon''; plural: manazil al-qamar) drew on pre-Islamic Arabian star lore in which the Moon's 28-station monthly circuit served as a practical almanac for pastoral and agricultural communities. The appearance of specific mansion stars predicted rainfall, seasonal changes, and optimal planting times. As Richard Hinckley Allen records, the word \textit{manzil} referred to the noonday halt of camel and rider in the desert --- each mansion is a roadside stop, not a grand house.
+
+During the Islamic Golden Age (8th--13th centuries), scholars including al-Biruni (973--1048), Abu Ma'shar (787--886), and Ibn Arabi (1165--1240) mathematized and systematized the tradition. Al-Biruni's \textit{Book of Instructions} (1029) provides the clearest early formulation: ``As the zodiac, the course of the Sun in a year, is divided into twelve signs, so also the path of the Moon among the fixed stars is divided into twenty-eight daily stations, the Mansions of the Moon.''
+
+\subsubsection{Two Competing Boundary Frameworks}
+
+A critical distinction that is often collapsed in secondary literature:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Framework} & \tableheader{Boundary Definition} & \tableheader{Source / Era} \\
+\midrule
+Constellational (Sidereal) & Each mansion defined by indicator star(s); irregular widths; sidereal positions & Pre-Islamic and early Islamic practice; still technically accurate to the stars \\
+Equal-Division Tropical & 28 mansions of exactly 12°51' each, starting from 0° Aries tropical & \textit{Picatrix} (c.~950 CE); adopted by medieval European astrological magic \\
+Astro.com / Modern Sidereal & Indicator star positions precessed to current epoch & Modern computational practice \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The \textit{Picatrix} explicitly cites ``unnamed Indian Sages'' as the source for its 12°51' regularization starting at 0° Aries. This suggests the equal-division Arabic system may derive from Indian nakshatra methodology applied to a 28-division count rather than 27.
+
+\subsubsection{Selected Manzil with Indicator Stars}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.7cm}L{2.5cm}L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Arabic Name} & \tableheader{Indicator Star} & \tableheader{Tropical Position (Picatrix)} & \tableheader{Primary Indication} \\
+\midrule
+1 & Al-Sharatain & Beta Arietis & 0°--12°51' Aries & Initiating actions; starting journeys \\
+2 & Al-Butain & Delta Arietis & 12°51'--25°42' Aries & Buying cattle; planting; voyages \\
+3 & Al-Thurayya & Pleiades & 25°42' Aries--8°34' Taurus & Very auspicious; treasure finding \\
+4 & Al-Dabaran & Aldebaran & 8°34'--21°25' Taurus & Discord and journeys \\
+7 & Al-Dhira & Castor/Pollux & 12°51'--25°42' Gemini & Good for gains; love and friendship \\
+14 & Al-Simak & Spica & 17°8'--0° Scorpio & Overlaps with Jyotish Chitra nakshatra \\
+28 & Al-Risha & Zeta Piscium & 25°42' Pisces--8°34' Aries & Completion; return to beginning \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Practical Functions}
+
+The manzil system served multiple overlapping functions in Islamic civilization: agricultural timing (Moon's mansion determined optimal planting/pruning/harvesting); weather prediction (mansion star risings correlated with rainfall and temperature patterns); desert navigation (mansion stars provided directional guidance at night); and electional astrology and talismanic magic (the \textit{Picatrix} and \textit{Shams al-Ma'arif} systematized mansion elections for creating astrological talismans).
+
+\subsection{Module C: Mesoamerican Calendar Systems}
+
+\subsubsection{Structural Overview}
+
+The Mesoamerican calendar tradition is shared --- with variations in language and detail --- across Maya, Aztec (Mexica), Zapotec, and other cultures, with origins potentially traceable to the Olmec period (first millennium BCE). The earliest unequivocal evidence for the 260-day cycle appears in murals at San Bartolo, Guatemala, dated to the 3rd century BCE.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Maya Name} & \tableheader{Aztec Name} & \tableheader{Structure} \\
+\midrule
+Ritual calendar & Tzolk'in & Tonalpohualli & 20 day signs × 13 numbers = 260 unique days \\
+Solar calendar & Haab & Xiuhpohualli & 18 months × 20 days + 5 (Wayeb/Nemontemi) = 365 days \\
+Combined cycle & Calendar Round & Xiuhmolpilli & LCM(260, 365) = 18,980 days $\approx$ 52 years \\
+Long-span dating & Long Count & --- & Baktun/Katun/Tun/Uinal/Kin hierarchy; absolute dating \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Tzolk'in/Tonalpohualli: A 260-Day Ritual Cycle}
+
+The 260-day sacred calendar combines two independently cycling sequences: 20 named day signs (running continuously) and 13 numbers (also cycling). Since 20 and 13 share no common factors, all 260 combinations are unique before the cycle repeats. The 20 day signs are largely animal/natural phenomenon based --- Cipactli (crocodile), Ehecatl (wind), Calli (house), Cuetzpalin (lizard), Coatl (serpent), Miquiztli (death), Mazatl (deer), Tochtli (rabbit), Atl (water), Itzcuintli (dog), Ozomatli (monkey), Malinalli (grass), Acatl (reed), Ocelotl (jaguar), Cuauhtli (eagle), Cozcacuauhtli (vulture), Ollin (movement), Tecpatl (flint), Quiahuitl (rain), Xochitl (flower).
+
+Anthony Aveni (University of Texas, \textit{Skywatchers of Ancient Mexico}) notes that 260 encodes multiple significant cycles: human gestation ($\sim$266 days), the Venus morning star appearance interval ($\sim$263 days), the highland Guatemala agricultural season ($\sim$260 days), and eclipse season relationships (3:2 ratio with 173.5-day eclipse half-year).
+
+Crucially, the Tzolk'in is \textbf{not an ecliptic-based zodiac}. It does not track the Moon against star groups. It is a ritual time-structure that maps meaning onto individual days through the intersection of two sacred sequences.
+
+\subsubsection{The Paris Codex: A Genuine Mesoamerican Sky Map}
+
+Pages 23--24 of the Paris Codex (Postclassic Maya, c.~1185--1450 CE) contain what scholars have called a ``Maya zodiac'' --- thirteen animal constellations depicted hanging from a skyband (the bicephalic dragon representing the ecliptic) against a background of solar eclipse glyphs. The structure is a 364-day almanac divided into 13 periods of 28 days each.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Codex Animal} & \tableheader{Probable Identification} & \tableheader{Western Equiv.} & \tableheader{Scholarly Source} \\
+\midrule
+Turtle (Ak-Ek') & Stars of Orion & Orion belt area & Bricker \& Bricker; ethnoastronomical studies \\
+Peccary & Stars of Gemini & Gemini & Iwaniszewski (2022), SPICA \\
+Scorpion & Scorpius & Scorpius & Paris Codex pages 23--24 iconography \\
+Rattlesnake & Near Libra/Virgo & Virgo/Libra & Partial identification \\
+Birds (multiple) & Various ecliptic regions & Various & Partially effaced; debate ongoing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+A critical scholarly caveat: Stanislaw Iwaniszewski (Escuela Nacional de Antropología e Historia, ENAH, Mexico) warns that ``this almost automatic identification of the Paris Codex figures with the Western zodiac creates an epistemic barrier in understanding what celestial beasts could mean for the Maya.'' The thirteen Paris Codex constellations were not natal sign-assigning tools --- they appear to have been \textit{eclipse prediction devices}. The animals are depicted in the act of devouring the Sun, reflecting the Mesoamerican metaphor of solar eclipses as bites.
+
+The 13-constellation geometry (each spanning ~27--28° rather than 30°) and the 28-day periods suggest an observational system independent of --- but overlapping with --- both Western zodiac and Indian nakshatra traditions.
+
+\subsubsection{Venus in Mesoamerican Astronomy}
+
+The Dresden Codex contains detailed Venus tables tracking the 584-day synodic cycle of Venus with remarkable precision. Five Venus cycles of 584 days = 2,920 days = eight Haab years. The Aztec Tonalpohualli period of 260 days × 2 = 520 = Venus inferior conjunction interval. Venus as the morning star (Tlahuizcalpantecuhtli) was associated with Quetzalcoatl and was among the most cosmologically significant celestial objects in Mesoamerican thought --- arguably more zodiacally central than any ecliptic constellation.
+
+\subsection{Module D: Comparative Boundary Analysis}
+
+\subsubsection{Cross-Traditional Division Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.8cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tradition} & \tableheader{Divisions} & \tableheader{Arc Width} & \tableheader{Anchor} & \tableheader{Primary Body} & \tableheader{Boundary Type} \\
+\midrule
+Western Tropical & 12 & 30° equal & Vernal equinox & Sun & Seasonal/equal \\
+Jyotish Sidereal & 12 rashis + 27 nakshatras & 30° / 13°20' & Spica (Chitra) & Moon (primary) & Stellar/equal \\
+Arabic Manzil (constellational) & 28 & Irregular & Indicator stars & Moon & Stellar/unequal \\
+Arabic Manzil (Picatrix) & 28 & 12°51' equal & 0° Aries tropical & Moon & Tropical/equal \\
+Mesoamerican (Paris Codex) & 13 & ~27--28° & Ecliptic animals & Sun (eclipse context) & Observational/unequal \\
+Tzolk'in/Tonalpohualli & 20 day signs & N/A (ritual) & None (ritual cycle) & None (temporal) & Ritual/non-ecliptic \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Indicator Star Overlap Problem}
+
+Several indicator stars appear in multiple traditions, but at different positions relative to each tradition's starting point. Aldebaran (Al-Dabaran in Arabic, associated with Rohini nakshatra in Jyotish) and Spica (Chitra/Al-Simak) are particularly interesting because the Lahiri ayanamsa specifically anchors to Spica, while the Arabic manzil tradition names Spica-adjacent Mansion 14 after Al-Simak (the unarmed/unweaponed one). The Fagan-Bradley Western sidereal ayanamsa instead anchors to Aldebaran and Antares at 15° Taurus and 15° Scorpio --- reflecting different historical traditions about which stars ``define'' the middle of key zodiacal arcs.
+
+As the \textit{Medieval Astrology Guide} notes in a 2021 comparative analysis: ``Between the Chinese xiu, Indian nakshatras, and Arabic manzil, what becomes obvious when you start to explore them individually and then compare them is that they are simply each a different way to interface with the night sky. They are not three systems vying for supremacy with one another, but just three separate lenses to gaze at the stars above.''
+
+\subsubsection{The Mesoamerican Epistemic Boundary}
+
+Unlike the Indian, Arabic, and Western traditions (which all divide the ecliptic into segments and assign meaning to the position of celestial bodies within those segments), the Mesoamerican 260-day ritual calendar does not track any celestial body against a zodiacal band. It is a pure time-structure. Calling it a ``zodiac'' is a category error that has produced significant misinterpretation in popular literature.
+
+The 13-constellation Paris Codex system \textit{is} an ecliptic system, but its scholarly status remains contested (partially damaged codex; ongoing debate about which animals correspond to which star groups). It should be treated as a parallel astronomical tradition --- not a ``Mesoamerican zodiac'' in the Western sense, but a distinct system for tracking ecliptic-zone celestial events with specific practical purposes (eclipse prediction, ritual timing).
+
+\subsection{Module E: Living Traditions and Contemporary Practice}
+
+\subsubsection{Jyotish Today}
+
+Jyotish remains a living, hereditary practice transmitted through guru-disciple lineages in South Asian communities worldwide. The Lahiri ayanamsa is officially recognized by the Government of India (1956) and used in Hindu Panchang (almanac) calculations that determine festival dates, auspicious timings (muhurta), and religious ceremonies for hundreds of millions of people. Newborns in many Hindu families receive names based on their nakshatra at birth. The tradition is actively practiced by an estimated tens of millions globally.
+
+\subsubsection{Arabic Manzil Tradition}
+
+The manzil system is preserved in traditional Islamic astronomical texts and continues to appear in traditional Islamic calendars and agricultural almanacs in parts of the Arabic-speaking world. The 28 Quran-referenced constellations (Manazil al-Qamar) maintain cultural and religious significance. Academic study has seen a revival through the work of medieval astrology historians and the magical practice community studying the \textit{Picatrix}.
+
+\subsubsection{Living Tzolk'in Practice}
+
+The Tzolk'in calendar has been maintained without interruption in certain K'iche' Maya communities in the Guatemalan highlands for over 500 years. Contemporary K'iche' practitioners use the term \textit{Aj Ilabal Q'ij} (``the sense of the day'') rather than the Westernized ``Tzolk'in.'' The Kaqchikel Maya use the term \textit{Chol Q'ij} (``the organization of time''). The Smithsonian National Museum of the American Indian's Living Maya Time project documents and preserves these practices in consultation with Yucatec and Tzetzel Maya cultural astronomers including Alonso Méndez.
+
+\textbf{Cultural sovereignty note:} The popularity of New Age ``Mayan astrology'' and the Dreamspell calendar (invented by José Argüelles in 1987, a syncretic non-traditional adaptation) is distinct from --- and frequently misrepresents --- authentic Maya calendrical practice. Research output from this mission must clearly distinguish between (a) pre-Columbian Maya and Aztec astronomers, (b) contemporary K'iche', Yucatec, Tzetzel and other Maya communities who maintain living practice, and (c) New Age adaptations.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Protocol} \\
+\midrule
+Indigenous knowledge attribution & ABSOLUTE & Name specific nations: K'iche' Maya, Yucatec Maya, Tzetzel Maya, specific South Asian Jyotish lineages. Never ``Indigenous peoples'' generically \\
+Living vs historical practice & GATE & Clearly distinguish pre-Columbian astronomy, living community practice, and New Age adaptation \\
+New Age misrepresentation & ANNOTATE & Dreamspell calendar explicitly noted as non-traditional; Argüelles acknowledged it as syncretic \\
+No predictive health claims & GATE & Astrological timing systems discussed in cultural/historical context only; no medical claims \\
+No policy advocacy & ANNOTATE & Present evidence and findings without advocating positions on science vs astrology debate \\
+All numerical claims sourced & ABSOLUTE & Every day count, degree measurement, historical date attributed to specific named source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Primary Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Al-Biruni. \textit{Book of Instructions in the Elements of Astrology}. Ghaznah, 1029. Trans. R. Wright. London: Luzac, 1934.
+  \item Paris Codex (Codex Peresianus). Postclassic Maya, c.~1185--1450 CE. Bibliothèque nationale de France.
+  \item Dresden Codex. Classic Maya. Sächsische Landesbibliothek, Dresden.
+  \item \textit{Picatrix} (Ghāyat al-ḥakīm). Arabic, c.~950 CE.
+  \item Vedanga Jyotisha. Final centuries BCE.
+\end{itemize}
+
+\subsubsection*{Peer-Reviewed Research and Government Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Aveni, Anthony F. \textit{Skywatchers of Ancient Mexico}. Austin: University of Texas Press, 1980.
+  \item Iwaniszewski, Stanislaw. ``Ah ch'ibal canob: rethinking celestial animals in the Paris Codex 23--24.'' SPICA (Society for the Preservation of Intellectual and Cultural Artefacts), 2022.
+  \item Pingree, David. ``Precession and Trepidation in Indian Astronomy.'' \textit{Journal for the History of Astronomy}, vol.~iii (1972).
+  \item Yampolsky, Philip. ``The Origin of the Twenty-eight Lunar Mansions.'' \textit{Osiris} IX. Lisse: Swets \& Zeitlinger, 1950.
+  \item Bricker, Harvey M. and Victoria R. Bricker. Research on Paris Codex zodiacal almanac. Multiple publications, 1980s--1990s.
+  \item Government of India. Lahiri Ayanamsa official adoption for national calendar. 1956.
+\end{itemize}
+
+\subsubsection*{Professional Organizations and Projects}
+\begin{itemize}[leftmargin=1.5em]
+  \item Smithsonian National Museum of the American Indian (NMAI). \textit{Living Maya Time} project. \url{https://maya.nmai.si.edu}
+  \item Wikipedia (Nakshatra; Lunar station; Maya calendar; Aztec calendar; Tzolk'in; Paris Codex; Sidereal and tropical astrology). Structural/mathematical facts cross-referenced with cited primary sources within articles. Retrieved March 2026.
+  \item Astro.com. ``Ayanamshas in Sidereal Astrology.'' Technical reference. \url{https://www.astro.com/astrology/in\_ayanamsha\_e.htm}
+  \item Medieval Astrology Guide. ``Outposts in the Sky.'' Comparative analysis of Indian, Arabic, and Chinese lunar mansion systems. 2021.
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%% STAGE 3 — MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on the zodiac boundary definitions and cosmological architectures of Jyotish/Vedic astrology, Arabic manzil, and Mesoamerican calendar systems. The document will function as both a standalone scholarly reference and a GSD educational pack module, with full cross-traditional comparative analysis and living tradition cultural context. All content must meet the safety-critical standards specified in Stage 2.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+MISSION WAVE ARCHITECTURE
+==========================
+
+WAVE 0 (Sequential — Haiku)
+  shared-schemas: boundary-definition-ontology, source-index
+  templates: module-template, comparison-table-schema
+
+WAVE 1A (Parallel — Sonnet+Opus)      WAVE 1B (Parallel — Sonnet)
+  MODULE-A: Jyotish/Vedic              MODULE-C: Mesoamerican Systems
+    - Rashi survey                       - Tzolk'in / Tonalpohualli
+    - Nakshatra catalogue (27 entries)   - Haab / Xiuhpohualli
+    - Ayanamsa mathematics               - Calendar Round / Long Count
+    - Dasha system overview              - Paris Codex zodiac analysis
+  MODULE-B: Arabic Manzil              MODULE-E: Living Traditions
+    - 28 manzil catalogue                - K'iche' Maya practice
+    - Sidereal vs tropical framework     - Jyotish contemporary
+    - al-Biruni / Picatrix comparison    - Cultural sovereignty protocol
+
+WAVE 2 (Sequential — Opus)
+  MODULE-D: Comparative Boundary Analysis
+    - Cross-traditional division table
+    - Indicator star mapping (Kelley comparison)
+    - Epistemic boundary documentation
+    - Synthesis: what each tradition's choice reveals
+
+WAVE 3 (Sequential — Sonnet)
+  Publication + Verification
+    - Document assembly
+    - Source attribution audit (SC-SRC, SC-NUM, SC-IND)
+    - Cultural sensitivity review
+    - Final LaTeX compilation
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Boundary Definition Ontology} --- shared schema defining what constitutes a ``zodiacal boundary'' across traditions (anchor point, arc width, indicator object, primary luminary tracked)
+  \item \textbf{Tradition Modules (A, B, C)} --- parallel research tracks producing self-contained documented sections per tradition
+  \item \textbf{Comparative Synthesis (D)} --- cross-module analysis layer requiring all three tradition modules as input
+  \item \textbf{Living Traditions Layer (E)} --- cultural context layer with elevated sensitivity protocols
+  \item \textbf{Publication Layer} --- document assembly, verification, and output formatting
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Specification} \\
+\midrule
+D1 & Nakshatra Catalogue & All 27 entries with anchor star, arc range, symbol & Module A output \\
+D2 & Manzil Catalogue & All 28 entries, both sidereal and tropical positions & Module B output \\
+D3 & Mesoamerican Systems Doc & Tzolk'in, Haab, Calendar Round, Paris Codex analysis & Module C output \\
+D4 & Cross-Tradition Comparison Table & 6-row table per SC-2 format & Module D output \\
+D5 & Living Traditions Section & Named communities only; sovereignty review passed & Module E output \\
+D6 & Compiled Research Document & LaTeX PDF; all sources cited; passes all SC tests & Publication layer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}L{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-schemas & None & Haiku & 2K \\
+W0-source-index & None & Haiku & 1K \\
+W1A-jyotish & W0 schemas & Sonnet & 12K \\
+W1A-manzil & W0 schemas & Sonnet & 10K \\
+W1B-mesoamerica & W0 schemas & Sonnet+Opus & 14K \\
+W1B-living-traditions & W0 schemas & Opus & 8K \\
+W2-comparison & W1A, W1B complete & Opus & 10K \\
+W3-assembly & W2 complete & Sonnet & 6K \\
+W3-verification & W3-assembly & Sonnet & 4K \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total estimate}} & \textbf{$\sim$67K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Tasks} \\
+\midrule
+Opus & $\sim$30\% & Comparative boundary analysis (D); living traditions cultural sensitivity (E); Mesoamerican epistemic boundary handling; synthesis narrative \\
+Sonnet & $\sim$60\% & Module surveys (A, B, C); catalogue production; document assembly; verification; structured content \\
+Haiku & $\sim$10\% & Shared schemas; source index templates; scaffolding \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, source index \\
+1A & Indian + Arabic & Parallel & Sonnet & Modules A + B \\
+1B & Mesoamerican + Living & Parallel & Sonnet/Opus & Modules C + E \\
+2 & Synthesis & Sequential & Opus & Module D; integrated analysis \\
+3 & Publication & Sequential & Sonnet & Compiled document + verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+boundary-ontology-schema & PLAN & Haiku & JSON schema: \{anchor\_point, arc\_width, indicator, primary\_luminary, division\_count\} \\
+source-index & SCOUT & Haiku & Structured bibliography; all primary + secondary sources pre-indexed \\
+module-template & EXEC & Haiku & Standard section template for A/B/C modules \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Jyotish + Manzil):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+jyotish-rashi-survey & EXEC-1 & Sonnet & 12 sidereal signs; ayanamsa math; 285 CE coincidence; Lahiri standard \\
+nakshatra-catalogue & EXEC-1 & Sonnet & All 27 nakshatras; anchor star; arc range 13°20'; pada subdivision \\
+manzil-sidereal-survey & EXEC-1 & Sonnet & 28 mansions; indicator stars; al-Biruni citation; irregular widths \\
+manzil-picatrix-survey & EXEC-1 & Sonnet & 28 mansions; 12°51' equal; tropical; Picatrix citation \\
+framework-comparison & CRAFT-JYOTISH & Sonnet & Side-by-side: sidereal constellational vs tropical equal-division \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Mesoamerican + Living Traditions):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+tzolkin-tonalpohualli & EXEC-2 & Sonnet & 260-day structure; 20 signs; 13 numbers; astronomical basis \\
+haab-xiuhpohualli & EXEC-2 & Sonnet & 365-day structure; 18×20+5; Wayeb/Nemontemi \\
+calendar-round-longcount & EXEC-2 & Sonnet & 52-year cycle; LCM math; Long Count hierarchy \\
+paris-codex-analysis & CRAFT-MESO & Opus & 13 ecliptic constellations; eclipse function; Iwaniszewski citation; epistemic boundary \\
+living-traditions & CRAFT-MESO & Opus & K'iche' Maya; Yucatec; Tzetzel; Jyotish lineages; sovereignty protocol \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+cross-tradition-table & INTEG & Opus & 6-tradition comparison table; all divisions, arc widths, anchors \\
+indicator-star-overlap & INTEG & Opus & Aldebaran/Rohini, Spica/Chitra/Al-Simak overlap analysis \\
+epistemic-boundary & FLIGHT & Opus & Formal statement: where Western zodiac categories fail Mesoamerican systems \\
+synthesis-narrative & FLIGHT & Opus & Through-line: what each tradition's choice reveals about cosmological values \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Spec} \\
+\midrule
+document-assembly & EXEC & Sonnet & LaTeX compilation; all modules integrated; headers/footers \\
+source-audit & VERIFY & Sonnet & SC-SRC: all citations traceable to primary/peer-reviewed sources \\
+numerical-audit & VERIFY & Sonnet & SC-NUM: every count, measurement, date attributed \\
+indigenous-audit & VERIFY & Sonnet & SC-IND: zero generic ``Indigenous'' language; all communities named \\
+final-pdf & LOG & Sonnet & Three-pass xelatex compile; deliver PDF + .tex \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Front-load the boundary-definition ontology schema into context at session start; all module agents inherit it without re-generation
+  \item Wave 0 source index passed as context to all Wave 1 agents within 5-minute cache TTL window
+  \item Module A (Jyotish) and Module B (Manzil) share the ``sidereal boundary'' conceptual framework --- prime cache target
+  \item Modules C and D share Paris Codex source material --- second cache target
+  \item Living Traditions section (E) re-uses community names from Module C --- embed early, reference late
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input (K)} & \tableheader{Output (K)} & \tableheader{Sessions} \\
+\midrule
+Wave 0 & 5K & 3K & 1 \\
+Wave 1A & 15K & 22K & 2 \\
+Wave 1B & 18K & 22K & 2 \\
+Wave 2 & 25K & 10K & 1 \\
+Wave 3 & 30K & 8K & 1 \\
+\midrule
+\textbf{Total} & \textbf{$\sim$93K} & \textbf{$\sim$65K} & \textbf{7} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+W0-schemas ──────────────────────────────────┐
+W0-source-index ─────────────────────────────┤
+                                             ↓
+W1A-jyotish  ──────────────────────────────→ W2-comparison ──→ W3-assembly
+W1A-manzil   ──────────────────────────────↗                ↗
+                                           ↗               ↗
+W1B-mesoamerica ───────────────────────────             ↗
+W1B-living-traditions ─────────────────────→ W2-synthesis ─→
+
+                                         W3-verification ──→ DELIVER
+                                         (blocks on W3-assembly)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Purpose} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK & Non-negotiable boundaries \\
+Core functionality & 18 & Required & BLOCK & Deliverable acceptance \\
+Integration & 6 & Required & BLOCK & Cross-module validation \\
+Edge cases & 6 & Best-effort & LOG & Robustness \\
+\midrule
+\textbf{Total} & \textbf{36} & & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to primary texts, peer-reviewed journals, government sources, or NMAI/Smithsonian. Zero entertainment blogs as sole source. \\
+SC-NUM & Numerical attribution & Every day count, degree measurement, period length, and historical date attributed to a specific named source \\
+SC-ADV & No policy advocacy & Document presents astronomical and cultural evidence without taking positions on astrology vs astronomy debate \\
+SC-IND & Indigenous attribution & Zero uses of generic ``Indigenous peoples'' or ``Indigenous communities'' without specific nation/group name. All Maya communities named by specific group: K'iche', Yucatec, Tzetzel, Kaqchikel. \\
+SC-MESO & Mesoamerican sovereignty & Living practice clearly distinguished from (a) pre-Columbian astronomy, (b) colonial-era descriptions, (c) New Age adaptations such as Dreamspell \\
+SC-CAT & Category error prevention & Tzolk'in explicitly noted as non-ecliptic ritual system; Paris Codex explicitly noted as distinct from Western zodiac assignment; no document section treats any Mesoamerican system as functionally equivalent to the twelve-sign zodiac \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Nakshatra completeness & All 27 nakshatras catalogued with anchor star, arc range, symbol \\
+CF-02 & Ayanamsa math documented & Formula: sidereal = tropical $-$ ayanamsa; Lahiri value in mid-2020s; 285 CE coincidence date \\
+CF-03 & Nakshatra subdivision & 4 padas per nakshatra; 3°20' each; 108 total padas noted \\
+CF-04 & Manzil sidereal catalogue & 28 mansions with indicator stars and irregular widths documented \\
+CF-05 & Manzil tropical catalogue & 28 mansions with 12°51' each from 0° Aries; Picatrix cited \\
+CF-06 & Framework discrepancy quantified & The difference between sidereal constellational and tropical Picatrix positions calculated or described \\
+CF-07 & Tzolk'in structure complete & 20 day signs named; 13-number cycle; 260-day LCM explained \\
+CF-08 & Haab structure complete & 18 months × 20 days + 5 Wayeb = 365 days documented \\
+CF-09 & Calendar Round math & LCM(260, 365) = 18,980 days = 52 years; formula documented \\
+CF-10 & Paris Codex 13 constellations & At least 5 identified with probable star group; eclipse function noted \\
+CF-11 & Cross-tradition table & 6-tradition comparison table per SC-2 criteria \\
+CF-12 & Comparative arc widths & All traditions' arc widths in degrees documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Ayanamsa calculation at mathematical level & CF-02 & Pending \\
+2. All 27 nakshatras catalogued & CF-01, CF-03 & Pending \\
+3. 28 manzil in both frameworks & CF-04, CF-05 & Pending \\
+4. Discrepancy between manzil frameworks quantified & CF-06 & Pending \\
+5. Tzolk'in/Haab/Calendar Round complete & CF-07, CF-08, CF-09 & Pending \\
+6. Paris Codex 13 constellations documented & CF-10 & Pending \\
+7. Comparative boundary table produced & CF-11, CF-12 & Pending \\
+8. Epistemic boundary marked for Mesoamerica & SC-CAT & Pending \\
+9. Living traditions named specifically & SC-IND, SC-MESO & Pending \\
+10. Cultural sovereignty addressed & SC-MESO & Pending \\
+11. All numerical claims attributed & SC-NUM & Pending \\
+12. Document self-contained & IN-03 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at wave boundaries; synthesis oversight \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Source gathering; primary text location; web research for gap-fill \\
+EXEC-1 & Executor Alpha & Module A (Jyotish) and Module B (Manzil) production \\
+EXEC-2 & Executor Beta & Module C (Mesoamerican) production \\
+CRAFT-JYOTISH & Domain Specialist & Vedic sidereal mathematics; ayanamsa calculation; nakshatra precision \\
+CRAFT-MESO & Domain Specialist & Mesoamerican calendar systems; epistemic boundary handling; cultural protocol \\
+VERIFY & Verification Agent & Source validation; SC-SRC, SC-NUM, SC-IND audit \\
+INTEG & Integration Agent & Cross-module relationship validation; comparative table production \\
+CAPCOM & HITL Interface & Human approval at wave 0$\to$1, wave 2$\to$3 boundaries \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Cultural sensitivity degradation detection; epistemic drift alerts \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission title & Non-Western Zodiac Traditions: Jyotish, Arabic Manzil, Mesoamerican Systems \\
+Activation profile & Squadron (12 roles) \\
+Research modules & 5 (A: Jyotish, B: Manzil, C: Mesoamerican, D: Comparative, E: Living Traditions) \\
+Parallel tracks & 2 (Wave 1A and 1B) \\
+Total deliverables & 6 \\
+Total tests & 36 (6 safety-critical, 18 core, 6 integration, 6 edge) \\
+Token estimate & $\sim$158K (input + output combined) \\
+Sessions estimate & 7 sessions across 4--5 days \\
+HITL gates & 2 (post-Wave 0; post-Wave 2) \\
+Highest sensitivity flag & SC-IND (Indigenous attribution), SC-CAT (category error prevention) \\
+Primary sources & 5 (al-Biruni, Paris Codex, Dresden Codex, Picatrix, Vedanga Jyotisha) \\
+Living communities documented & K'iche' Maya, Yucatec Maya, Tzetzel Maya, Kaqchikel Maya, South Asian Jyotish lineages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The twenty-eight Mansions of the Moon divide the Zodiac in the same way as the twelve Signs of the Zodiac, marking out sectors of the circle of the sky --- though, since the number of degrees in a circle is not neatly divisible by 28, their span is an awkward 12°51'25.7\ldots It is thought that the lunar system of division may predate the solar Zodiac at least as rough sectors, since the stars remain largely visible, and the Moon's apparent motion against the background is clearly noticeable from night to night.''}
+
+\medskip
+\hfill --- Yeats Vision Project, \textit{The Arab Mansions of the Moon}, citing ancient astronomical tradition
+
+\medskip
+The spaces between the twelve signs were never empty. They held twenty-seven nakshatras, twenty-eight manzil, thirteen ecliptic animals, and 18,980 days of a 52-year wheel. The GSD ecosystem was built on this same intuition: that what most frameworks leave as ``between'' is precisely where the architecture lives. This mission makes the sky's hidden grammar legible.
+\end{quotebox}
+
+\end{document}

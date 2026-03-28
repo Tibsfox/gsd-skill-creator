@@ -1,0 +1,1094 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME: Science Communication (PBS blue / enthusiasm red / graphite) ──
+\definecolor{primary}{HTML}{0D3B6E}
+\definecolor{secondary}{HTML}{B71C1C}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{1565C0}
+\definecolor{lightprimary}{HTML}{E3F2FD}
+\definecolor{lightsecondary}{HTML}{FFEBEE}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ──
+\tcbuselibrary{skins,breakable}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── TABLE HELPERS ──
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS / FOOTERS ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Bill Nye the Science Guy}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Bill Nye the Science Guy -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ── BODY ──
+\begin{document}
+
+% ════════════════════════════════════════════════════════════
+%  TITLE PAGE
+% ════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Bill Nye\\[0.3em]the Science Guy}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Science Communication, Education, and Advocacy}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026\quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)\quad|\quad Estimated: 5--7 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ──
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Bill Nye the Science Guy --- Vision Guide}
+
+\subsection*{Metadata}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Cold-Start Research --- Ready for GSD Orchestrator}
+\metafield{Depends On:}{None (standalone mission)}
+\metafield{Context:}{GSD Skill-Creator Ecosystem --- Science Communication Studies}
+\metafield{Activation Profile:}{Squadron (5 modules, 12 roles)}
+
+\subsection{Vision}
+
+There is a man who, by accident of a mispronounced gigawatt, became the science teacher for an entire generation. William Sanford Nye --- a Cornell-trained mechanical engineer who invented a hydraulic suppressor tube still flying inside Boeing 747s --- walked away from aerospace to pursue comedy, then discovered that the two were never actually separate. The bow tie and lab coat were not costume; they were a signal. Science is not dry. Science is not for specialists. Science rules.
+
+Between 1993 and 1998, in 100 episodes produced at a Seattle PBS station with National Science Foundation funding, Nye collapsed the distance between the lab and the living room. He conducted experiments viewers could replicate at home, cut to man-on-the-street interviews, deployed celebrity cameos, and moved with the kinetic editing rhythm of MTV. Research studies showed that regular viewers outperformed non-viewers at explaining scientific ideas. Teachers stuffed copies into lesson plans. Parents taped episodes off the air. A generation grew up believing that curiosity was cool.
+
+But Nye did not stop. The show was only the first chapter. After its run he became CEO of The Planetary Society --- the organization co-founded by his Cornell astronomy professor Carl Sagan --- and steered a \$7 million citizen-funded solar sailing mission (LightSail 2) to orbit, where it sailed on sunlight for three and a half years. He debated a young-earth creationist before three million live viewers, walked in the March for Science, and launched a Netflix series aimed at adults who had stopped listening. The central problem of his second career is not teaching children science; it is convincing adults that science denial is not a personal opinion but a collective hazard.
+
+The mission before us is to document Nye's full arc: the engineering origins, the television phenomenon, the pedagogical philosophy, the advocacy controversies, and the space exploration legacy. It is a study in what happens when a human being decides that the spaces between entertainment and education, between comedy and rigor, between the bow tie and the blackboard, are not walls but bridges.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+
+\item \textbf{Science Literacy Decline:} Despite Nye's decades of work, large portions of the American public continue to reject scientific consensus on evolution, climate change, and vaccine safety. The problem Nye set out to solve in 1993 has not been solved; it has become more acute and politically entrenched.
+
+\item \textbf{The Adults-Not-Kids Pivot:} Nye's original audience --- the millennial children of the 1990s --- grew up. Reaching them as adults, now voting and making economic decisions, requires entirely different communicative strategies than a fast-cut children's show. The field of adult science communication is harder, less tested, and more contested.
+
+\item \textbf{Platform Fragmentation:} The centralized power of a PBS broadcast no longer exists. Nye must now compete for attention across dozens of platforms against TikTok scientists, YouTube educators, and algorithmically amplified pseudoscience. The original formula (one show, national broadcast, NSF backing) cannot simply be replicated.
+
+\item \textbf{Controversy and Credibility:} Nye's decision to debate Ken Ham in 2014 drew sharp criticism from scientists who argued that engaging pseudoscience in a debate format lends it undue legitimacy. His later work on Bill Nye Saves the World drew mixed reviews, with some critics arguing that a more combative, partisan tone alienated exactly the persuadable viewers he needed to reach.
+
+\item \textbf{Institutional Continuity at The Planetary Society:} As Nye transitioned out of the CEO role in 2026, the question of how citizen-funded science advocacy organizations sustain their identity and mission in leadership transitions poses a real structural challenge.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Leverage entertainment as a delivery mechanism for scientific method, then scale that mechanism from children's television to adult advocacy to orbital demonstration.
+
+The Nye Principle is architectural in the GSD sense: he did not brute-force science literacy by making content longer or more comprehensive. He found the specialized execution path --- humor, kinetic editing, hands-on experiments, celebrity credibility --- and let that path do the heavy lifting. The show was not a lecture. It was a demonstration that science could occupy the same emotional register as Saturday morning cartoons. Once that register was established, the content could flow through it freely.
+
+\subsubsection{Career Arc Map}
+
+\begin{asciibox}
+BILL NYE THE SCIENCE GUY --- CAREER ARC
+=========================================
+
+PHASE 1: ENGINEERING (1977-1986)
+  Boeing Corporation, Seattle
+  Invents hydraulic resonance suppressor for 747
+  Side career: stand-up comedy, Steve Martin lookalike contest
+             |
+             v
+PHASE 2: EMERGENCE (1986-1992)
+  Leaves Boeing --- joins Almost Live! (KING-TV, Seattle)
+  Name origin: "Who do you think you are -- Bill Nye the Science Guy?"
+  Back to the Future: The Animated Series (1991-1993)
+             |
+             v
+PHASE 3: THE SHOW (1993-1998)
+  Bill Nye the Science Guy --- KCTS-TV / PBS / syndication
+  100 episodes, 18 Emmy Awards, 7 personal Emmys
+  NSF + DOE underwriting; first show on both PBS & commercial
+  Research confirms: viewers explain science better than non-viewers
+             |
+             v
+PHASE 4: EXPANSION (2000-2009)
+  The Eyes of Nye (2005), Sundials for Mars Rovers
+  VP then Executive Director, The Planetary Society
+             |
+             v
+PHASE 5: ADVOCACY (2010-2022)
+  CEO, The Planetary Society (2010-2026)
+  LightSail 1 (2015), LightSail 2 (2019-2022)
+  Ken Ham debate (2014), March for Science (2017)
+  Bill Nye Saves the World / Netflix (2017-2018)
+  The End Is Nye / Peacock (2022)
+             |
+             v
+PHASE 6: LEGACY & HANDOFF (2022-present)
+  Chief Ambassador, Planetary Society
+  Hollywood Walk of Fame star
+  Continued advocacy, writing, public lectures
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE --- SQUADRON PROFILE
+==========================================
+
+  [M1: Origins]    [M2: The Show]    [M3: Pedagogy]
+      |                  |                 |
+      +------ SYNTHESIS (Wave 2) ----------+
+      |                  |                 |
+  [M4: Advocacy]   [M5: Planetary Society / Space]
+      |                  |
+      +---- CROSS-MODULE: Communication Strategy
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Biography and Origins}
+From Washington D.C. childhood through Boeing engineering to the moment a mispronounced word launched a brand. Covers family background (WWII codebreaker mother, sundial-obsessed POW father), Cornell engineering degree, Carl Sagan's astronomy course, Boeing career, comedy transition, and the Almost Live! origins of the Science Guy persona.
+
+\subsubsection{Module 2: The Television Show (1993--1998)}
+Deep analysis of Bill Nye the Science Guy as a media artifact and educational instrument. Production history, KCTS/PBS/Buena Vista structure, NSF/DOE funding, episode format and pedagogical design, viewership data, Emmy record (18 awards), KCTS outreach studies showing learning outcomes, and the show's lasting role in school curricula.
+
+\subsubsection{Module 3: Science Communication Pedagogy}
+Nye's philosophy and method: humor as cognitive lubricant, hands-on experiments as epistemic engagement, the ``Mr. Wizard meets MTV'' pitch that defined the show's register, critical thinking as the core transferable skill, the evolution from teaching children to reaching adults, and Nye's position within the broader science communication field alongside figures like Carl Sagan and Neil deGrasse Tyson.
+
+\subsubsection{Module 4: Science Advocacy and Controversy}
+The second career: climate change advocacy, the Ken Ham creationism debate (2014), Bill Nye Saves the World on Netflix, the March for Science, GMO and vaccine positions, and the ongoing methodological debate within science communication about whether engaging denialists in public forums helps or harms the cause of scientific literacy.
+
+\subsubsection{Module 5: The Planetary Society and Space Legacy}
+Nye's engineering-era connection to Carl Sagan, his charter membership in The Planetary Society (1980), role as CEO (2010--2026), the LightSail solar sail program (Cosmos 1, LightSail 1, LightSail 2), Mars Rover sundial design, the \$7M citizen-funded mission model, and the transition to Chief Ambassador.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# GSD Chipset: Bill Nye Research Mission
+mission_id: billnye-science-guy-v1
+profile: squadron
+modules: 5
+
+crew:
+  FLIGHT: claude-opus-4-6       # Mission synthesis & judgment
+  PLAN:   claude-opus-4-6       # Wave architecture
+  SCOUT:  claude-sonnet-4-6     # Source gathering & web research
+  EXEC-A: claude-sonnet-4-6     # Modules 1, 2, 3 documentation
+  EXEC-B: claude-sonnet-4-6     # Modules 4, 5 documentation
+  CRAFT-HIST: claude-opus-4-6   # Biography & cultural context
+  CRAFT-COMM: claude-sonnet-4-6 # Science communication analysis
+  VERIFY: claude-sonnet-4-6     # Source validation
+  INTEG:  claude-opus-4-6       # Cross-module relationships
+  CAPCOM: human                 # Approval at wave boundaries
+  BUDGET: claude-haiku-4-5      # Token tracking
+  LOG:    claude-haiku-4-5      # Commit messages & summaries
+
+cache_strategy:
+  foundation_schemas: wave_0_output
+  ttl_window: 5min
+  shared_context: mission_brief + source_index
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Full biographical arc from birth through current Chief Ambassador role
+  \item Complete analysis of Bill Nye the Science Guy as educational media
+  \item Science communication methodology and pedagogical philosophy
+  \item Key advocacy positions: climate, evolution, vaccines, science literacy
+  \item The Planetary Society leadership and LightSail program
+  \item The Ken Ham debate and its reception and aftermath
+  \item Awards, honors, publications, and cultural impact
+  \item Quantitative data on show reach, Emmy count, LightSail mission metrics
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item Episode-by-episode content analysis of all 100 show episodes
+  \item Detailed financial analysis of The Planetary Society
+  \item Assessment of Nye's personal relationships or non-public life
+  \item Comparative analysis of other science communicators (except as context)
+  \item Policy prescriptions for science education reform
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*.}]
+  \item Full biographical timeline documented from 1955 to 2026, with sourced milestones for each career phase
+  \item Show production history documented: KCTS/PBS/Buena Vista structure, NSF/DOE funding, 100-episode arc, and Emmy record verified
+  \item At least three quantitative findings on educational impact (viewer studies, teacher adoption, science kit distribution data) sourced to professional organizations or peer-reviewed research
+  \item Nye's science communication methodology described in at least five distinct operational principles with sourced examples
+  \item Ken Ham debate documented: context, structure, viewership figures, scientific community reception, and dual-perspective analysis (pro and critical)
+  \item LightSail program traced from Cosmos 1 (2005) through LightSail 2 completion (2022) with key technical metrics
+  \item All five research modules contain at least four sourced subsections each
+  \item Cross-module connections explicitly identified: Sagan $\rightarrow$ Cornell $\rightarrow$ Planetary Society; Engineer $\rightarrow$ Educator $\rightarrow$ Advocate arc
+  \item Adult science communication pivot documented with at least two sourced explanations for the strategy shift
+  \item Complete bibliography of at least 15 sources, all from professional organizations, academic institutions, or peer-reviewed publications
+  \item Safety and sensitivity section addresses: no medical claims without sourcing, political neutrality on contested policy positions, accurate representation of scientific consensus vs. public debate
+  \item Document achieves three-reading-speed accessibility: title/section headers convey the story at a glance; subsection summaries work at a scan; body paragraphs reward full reading
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Status} \\
+\midrule
+GSD BBS Educational Pack Vision & Parallel: science communication as educational infrastructure & Vision \\
+GSD Upstream Intelligence Pack & Parallel: figures who shaped public scientific discourse & Active \\
+GSD Cloud Ops Curriculum Vision & Downstream: science communication pedagogy informs GSD curriculum design & Vision \\
+The Space Between (textbook) & Philosophical spine: Amiga Principle as pedagogical architecture & Complete \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Bill Nye is not famous because he knows a lot about science. He is famous because he found the spaces between. Between the engineer and the comedian. Between the experiment and the punchline. Between the lab coat and the bow tie. Between the fact and the feeling that the fact produces in a twelve-year-old who suddenly wonders whether the sky is a different color on Mars.
+
+The GSD ecosystem is built on the Amiga Principle: that architectural elegance produces more leverage than brute force. Nye's whole career is a demonstration of this. He did not try to make science comprehensive --- he made it irresistible. He did not lecture; he demonstrated. He did not argue that science matters; he made science feel like it already did. A show with a fraction of the budget of network television won 18 Emmy Awards because it found the specialized execution path that brute-force edutainment could never discover.
+
+When the children grew up and their attention fragmented across a thousand platforms, Nye adapted his architecture. The show became a debate, a Netflix series, a keynote at the March for Science, a CEO title at a citizen-funded space organization that actually put a solar sail in orbit on sunlight. Each channel a different execution path. The same signal, the same bow tie, the same irreducible conviction: science rules.
+
+\newpage
+
+% ════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Bill Nye the Science Guy --- Research Reference}
+
+\subsection*{How to Use This Document}
+
+This reference section provides sourced findings for each of the five research modules. All claims are attributed to professional organizations, academic institutions, or peer-reviewed sources. Key source organizations:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{The Planetary Society} (planetary.org) --- primary source for LightSail and Nye's space advocacy work
+  \item \textbf{KCTS-TV / University of Washington} --- KCTS outreach studies on show educational effectiveness
+  \item \textbf{Cornell University} --- Nye's academic background and Sagan connection
+  \item \textbf{PBS / CPB} --- Public broadcasting context for the show
+  \item \textbf{National Science Foundation} --- Primary funder of the television program
+  \item \textbf{Wikipedia (as index)} --- Structural facts cross-referenced against primary sources
+  \item \textbf{SpaceNews, Scientific American} --- LightSail mission technical reporting
+  \item \textbf{Salish Current} --- Recent interview with Nye on science education (2023)
+\end{itemize}
+
+\subsection{Module 1: Biography and Origins}
+
+\subsubsection{Early Life and Family}
+
+William Sanford Nye was born November 27, 1955, in Washington, D.C. His family background is notable for its scientific and historical dimensions. His mother, Jacqueline Jenkins Nye (1921--2000), served as a cryptologist for the U.S. Navy during World War II --- a codebreaker in a field dominated by men. His father, Edwin Darby ``Ned'' Nye (1917--1997), was a U.S. military officer who spent nearly four years as a Japanese prisoner of war, largely in China, with no electricity. In captivity, Ned Nye made sundials to track time --- an experience that made him a lifelong sundial enthusiast after the war. He later created and sold a product called ``Sandial,'' a sundial designed for Atlantic seaboard beaches.
+
+This family origin story is not incidental to Nye's later career. The precision of timekeeping without technology (sundial), the breaking of encoded communications (cryptology), and the wartime application of engineering principles all prefigure the intellectual values Nye would broadcast for decades.
+
+Nye attended Lafayette Elementary and Alice Deal Junior High in Washington, D.C., before attending the private Sidwell Friends School on a partial scholarship. He enrolled at Cornell University, where he earned a Bachelor of Science in Mechanical Engineering.
+
+\subsubsection{The Cornell--Sagan Connection}
+
+At Cornell, Nye took an introductory astronomy course taught by Carl Sagan, co-founder of what would become The Planetary Society. Sagan's pedagogical style --- making cosmic science emotionally accessible without sacrificing rigor --- became a visible influence on Nye's own approach. Nye joined The Planetary Society as a charter member when it was founded in 1980, while still working as an engineer. The Sagan connection thus runs from student to charter member to eventual CEO, spanning four decades.
+
+\subsubsection{Boeing and Engineering Career}
+
+After graduating Cornell, Nye moved to Seattle in 1977 and joined the Boeing Corporation. During his time at Boeing, he invented a hydraulic pressure resonance suppressor tube --- a device still in use today on the Boeing 747 airliner. He also worked for Sundstrand Data Control (later Honeywell) and other Seattle-area engineering firms. The U.S. Department of Justice later recruited him for his technical expertise and pedagogical skills.
+
+Parallel to his engineering career, Nye pursued stand-up comedy. His comedy career was launched when he won a Steve Martin lookalike contest at a Seattle club, leading him to meet comedians Ross Shafer and John Keister. He worked as an engineer by day and performer by night before leaving Boeing in 1985--1986 to join the cast of Almost Live!, a sketch comedy show on Seattle's NBC affiliate KING-TV.
+
+\subsubsection{Almost Live! and the Name Origin}
+
+Almost Live! (KING-TV, later Comedy Central) was where ``Bill Nye the Science Guy'' was born. During a 1985 on-air segment, Nye called in to correct host John Keister's pronunciation of the word ``gigawatt'' (Keister had said ``jigawatt''). Keister's retort --- ``Who do you think you are, Bill Nye the Science Guy?'' --- became his permanent professional identity. Nye began performing science demonstrations on the show, developing the fast-paced, experiment-driven persona that would define the children's program. The show earned him a local Emmy for a science segment from the National Academy of Television Arts and Sciences' Seattle chapter.
+
+\subsection{Module 2: The Television Show (1993--1998)}
+
+\subsubsection{Production History and Structure}
+
+Bill Nye the Science Guy was created by Bill Nye, James McKenna, and Erren Gottlieb, produced by KCTS-TV (Seattle public television) and McKenna/Gottlieb Producers, and distributed by Buena Vista Television (Disney). Primary underwriting came from the National Science Foundation and the U.S. Department of Energy. The show was pitched to multiple networks --- including Fox --- before KCTS-TV's Elizabeth Brock agreed to develop it.
+
+The original pitch positioned the show as ``Mr. Wizard meets Pee-wee's Playhouse'' (later updated to ``Mr. Wizard meets MTV'' after actor Paul Reubens' 1991 arrest). The pilot aired on KCTS-TV on April 14, 1993, and subsequently on PBS stations nationwide. Nationally, the show ran in syndication from September 10, 1993, to February 5, 1999, producing six seasons and 100 episodes.
+
+A structural innovation: Bill Nye the Science Guy was the first program to run concurrently on both public (PBS) and commercial television stations --- it fulfilled Children's Television Act requirements for local stations while also airing on PBS. This dual-distribution model maximized reach.
+
+\subsubsection{Format and Pedagogical Design}
+
+Each episode focused on a single science topic (examples: motion, germs, the atmosphere, light and color, volcanoes). The format combined Nye performing experiments in character, man-on-the-street interviews, celebrity appearances, fast cuts and visual humor, and closing demonstrations. The editing rhythm was deliberately modeled on music video and sketch comedy conventions --- the antithesis of textbook instruction.
+
+The theme song was written by songwriter and former math teacher Mike Greene, who took explicit direction from producers that the song should ``not sound like a kid's show.'' Greene cites Danny Elfman and Oingo Boingo as compositional influences. The result was genuinely unusual for children's television at the time.
+
+\subsubsection{Awards and Recognition}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Award} & \tableheader{Category} & \tableheader{Count} \\
+\midrule
+Emmy Awards (show) & Various (writing, performing, producing) & 18 \\
+Emmy Awards (Nye personally) & Outstanding Writing, Performing, Children's Series & 7 \\
+Emmy Nominations (total) & All categories & 23 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Nye's original lab coat is on permanent display in the ``T is for Television'' exhibit at the Smithsonian National Museum of American History.
+
+\subsubsection{Educational Research and Outreach}
+
+KCTS-TV conducted several research studies evaluating the show's effectiveness as an educational tool. A University of Washington study (commissioned by KCTS) surveyed 176 teachers and found that the show was one of four popular science series regularly used in classrooms. Key findings:
+\begin{itemize}[leftmargin=*]
+  \item Regular viewers demonstrated better ability to explain scientific ideas than non-viewers
+  \item Teachers reported students' science interest levels as relatively high among viewers
+  \item Children described Bill Nye as both ``funny'' and ``smart'' in roughly equal proportion, and perceived him as a source of reliable information --- a rare dual credibility
+  \item The science kit outreach program (1997--98) reached students through both school and home channels, with home distribution proving more effective for building consistent viewership
+  \item Of 1,171 response cards from 4th grade teachers receiving the show's Teacher's Guide, feedback was broadly positive
+\end{itemize}
+
+After the show ended, Noggin cable channel acquired all 100 episodes --- the channel's first-ever program acquisition --- and Nye produced original interstitial shorts for the channel featuring his ``Science Guy'' persona as Noggin's ``head sparkologist.''
+
+\subsection{Module 3: Science Communication Pedagogy}
+
+\subsubsection{The Core Philosophy: Science as Entertainment as Science}
+
+Nye's stated aspiration was to become ``the next Mr. Wizard'' --- a reference to Don Herbert, who hosted Watch Mr. Wizard from 1951 to 1990. But Nye's execution was categorically different: where Herbert was calm and instructional, Nye was kinetic and comedic. The fusion of stand-up sensibility with scientific rigor is the essential Nye innovation.
+
+His operational principles as a science communicator:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Demonstrations over descriptions:} Every concept is enacted, not explained in the abstract.
+  \item \textbf{Replicability:} Viewers can perform the experiments at home, creating personal epistemic engagement with scientific method.
+  \item \textbf{Humor as cognitive lubricant:} Laughter lowers resistance and increases information retention.
+  \item \textbf{Learning objectives before entertainment:} ``You have to have learning objectives --- things you want to get across.'' (Nye, quoted in IMDB biography)
+  \item \textbf{Critical thinking as the meta-skill:} ``If we could teach one thing in any class... it would be what people nowadays call critical thinking.'' (Salish Current interview, 2023)
+\end{enumerate}
+
+\subsubsection{The Pivot to Adults}
+
+After the show ended, Nye described his problem evolution: children's science literacy was being undermined by adults who voted and ran industry. The educational target shifted. In a 2017 interview with The Hollywood Reporter, Nye explained the strategic logic: ``Our problem now is denial of science at large and especially denial of climate change... It's the grownups that are doing the voting and who are the captains of the industry and influencing government, so that's why I talk to grownups these days.''
+
+This pivot required different tools: debate, documentary, Netflix series, public advocacy, keynote speeches. The underlying pedagogical principle remained constant --- simplify without dumbing down, demonstrate rather than assert --- but the format had to reach adults in the registers adults occupy.
+
+\subsubsection{Sagan's Influence and the Communicator Lineage}
+
+The lineage from Carl Sagan to Bill Nye is direct and acknowledged. Sagan's Cosmos (1980) demonstrated that rigorously accurate cosmology could achieve prime-time television audiences. Nye was literally a student in Sagan's astronomy classroom at Cornell before becoming Sagan's institutional successor at The Planetary Society. The tradition they share: public science as a civic duty, not a niche activity.
+
+\subsubsection{Digital-Era Science Communication}
+
+In a 2023 Salish Current interview, Nye noted that contemporary digital science communicators (Veritasium, Physics Girl) had created new channels for science literacy. He expressed concern about the parallel growth of misinformation and the difficulty of distinguishing credible sources in a fragmented attention environment. His current advocacy focuses on: direct investment in K-12 science teachers; ExploraVision competition (National Science Teaching Association / Toshiba) as a model for student STEM engagement; and critical thinking as the fundamental skill that makes all other science communication possible.
+
+\subsection{Module 4: Science Advocacy and Controversy}
+
+\subsubsection{Climate Change Advocacy}
+
+Nye has been among the most visible non-scientist advocates for climate science consensus for over two decades. He has testified in Congressional contexts, participated in the 2010 Chabot Space \& Science Center's Climate Lab (positioning himself as commander of a Clean Energy Space Station exhibit), appeared regularly on news programs discussing climate science, and in a widely viewed 2019 Last Week Tonight with John Oliver segment, he abandoned his characteristic kid-friendly tone to emphasize the urgency of the climate crisis with notably direct language.
+
+\subsubsection{The Ken Ham Debate (February 4, 2014)}
+
+On February 4, 2014, Nye debated Ken Ham, founder and CEO of Answers in Genesis, at the Creation Museum in Petersburg, Kentucky. The debate topic: ``Is creation a viable model of origins in today's modern, scientific era?''
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Dimension} & \tableheader{Details} \\
+\midrule
+Live viewers & Approximately 3 million (via internet streams; PR estimate by A. Larry Ross Communications) \\
+Format & 5-min opening statements; 30-min presentations; 5-min rebuttals; audience Q\&A; 2.5 hours total \\
+Moderator & Tom Foreman (CNN) \\
+Venue & Creation Museum, Petersburg, Kentucky \\
+Tickets & Sold out within minutes \\
+Nye's preparation & Consultation with evolution specialists; meeting with National Center for Science Education \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Nye cited radiometric dating, ice cores, fossil records, and genetic evidence for evolutionary theory and an Earth approximately 4.5 billion years old. Ham argued for a young-Earth creationist model based on literal biblical interpretation, distinguishing between ``observational science'' (which he accepted) and ``historical science'' (which he rejected as dependent on unprovable presuppositions).
+
+\textbf{Scientific community reception:} The National Center for Science Education praised Nye's performance. Scientists including biologist Jerry Coyne (University of Chicago) argued prior to the event that the debate format itself legitimized creationism by implying scientific parity. Anthropologist Greg Laden, who had expressed concerns before the debate, recanted afterward. Paleontologist Matthew Bonnan noted the event was not a genuine scientific dispute but a communication event.
+
+\textbf{Unintended consequences:} Ham announced on February 27, 2014, that the debate had fueled fundraising for the Ark Encounter project, allowing construction to begin. Nye acknowledged he had underestimated this dynamic. The debate thus demonstrated the core methodological tension in science communication: direct engagement with denial may educate third-party observers while simultaneously providing resources to the interlocutor.
+
+\subsubsection{Bill Nye Saves the World (Netflix, 2017--2018)}
+
+A three-season Netflix talk show that addressed scientific topics including climate change, vaccines, GMOs, and sexual orientation. The show featured panel discussions with celebrity guests and subject matter experts. Reception was mixed: audiences who remembered the children's show found the more explicitly political tone jarring; critics noted that the show was preaching to an already-converted audience rather than reaching science skeptics. The tension between maintaining scientific credibility and maintaining entertainment value was central to the show's critical assessment.
+
+\subsubsection{The March for Science (April 22, 2017)}
+
+Nye delivered a keynote speech at the March for Science in Washington, D.C., a global event advocating for evidence-based policy and science funding. The march followed significant public debate about government science advisory structures and research funding. Nye's role was as the most recognizable public face of the event.
+
+\subsection{Module 5: The Planetary Society and Space Legacy}
+
+\subsubsection{History and Mission}
+
+The Planetary Society was co-founded in 1980 by Carl Sagan, Bruce Murray, and Louis Friedman. Its mission: to empower citizens globally to advance space science and exploration. Nye joined as a charter member in 1980. He joined the Board of Directors in 2005, took the role of President of the Board, and was elected CEO in 2010, serving until 2026, when he transitioned to Chief Ambassador as Jennifer Vaughn became CEO.
+
+As of its active period under Nye, The Planetary Society had over 2 million members in 130 countries, making it the world's largest non-profit space interest organization.
+
+\subsubsection{LightSail Program}
+
+The LightSail program represents Nye's most concrete contribution to space technology. Solar sailing --- propulsion by photon pressure from the Sun --- was first theorized by Johannes Kepler (1607, observing comet tails) and famously discussed by Carl Sagan on The Tonight Show with Johnny Carson in the 1970s.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mission} & \tableheader{Date} & \tableheader{Outcome} \\
+\midrule
+Cosmos 1 & 2005 & Failed to reach orbit; Russian Volna rocket failure \\
+LightSail 1 & 2015 & Partial success; sail deployed, confirmed in images; orbit too low for measurable sailing thrust \\
+LightSail 2 & June 2019 launch, Nov 2022 reentry & Full mission success; raised orbital apogee 1.7--2 km via solar sailing; 3.5 years in orbit; \$7M citizen-funded \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+LightSail 2 was: the first spacecraft to use solar sailing for propulsion in Earth orbit; the first small spacecraft (CubeSat form factor) to demonstrate solar sailing; and the first crowdfunded spacecraft to successfully demonstrate a new form of propulsion. It launched June 25, 2019, on a SpaceX Falcon Heavy rocket, deployed its 32-square-meter Mylar sail on July 23, 2019, and declared mission success July 31, 2019. The mission transmitted stunning Earth photographs throughout its operational life.
+
+``LightSail 2 is gone after more than three glorious years in the sky, blazing a trail of lift with light, and proving that we could defy gravity by tacking a sail in space,'' Nye said upon the mission's completion (The Planetary Society, November 2022).
+
+\subsubsection{Mars Exploration Rover Sundials}
+
+In the early 2000s, Nye assisted in designing sundials used on the Mars Exploration Rover missions --- a callback to his father's sundial-building in the POW camp, transformed into an instrument of planetary science.
+
+\subsubsection{Hollywood Walk of Fame}
+
+Nye received a star on the Hollywood Walk of Fame, recognized for his contributions to science communication and popular culture.
+
+\subsubsection{Additional Honors and Patents}
+
+\begin{itemize}[leftmargin=*]
+  \item Honorary doctorate, Rensselaer Polytechnic Institute (2005) --- an award established by the Bill and Melinda Gates Foundation recognizing achievements in science education
+  \item U.S. patents: hydraulic resonance suppressor (Boeing); ballet pointe shoes (biomechanical injury prevention); educational magnifying glass (water-filled plastic bag design)
+  \item Minor planet designated ``The Science Guy'' asteroid
+  \item Fellow, Committee for Skeptical Inquiry
+  \item Member, two trade unions
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Rule} \\
+\midrule
+Ken Ham debate & Present both scientific community reception and creationist perspectives without advocacy & REQUIRED \\
+Climate change & All projections from IPCC or agency sources; no original modeling & GATE \\
+Vaccine and GMO positions & Represent scientific consensus accurately; distinguish consensus from Nye's personal advocacy style & REQUIRED \\
+Numerical claims & All viewership figures, Emmy counts, and LightSail metrics sourced to primary organizations & GATE \\
+Indigenous content & No Indigenous content in this mission & N/A \\
+Medical claims & No health claims without sourcing; Nye's ataxia family history noted only as biographical fact & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Professional Organizations and Primary Sources}
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item The Planetary Society. ``Bill Nye.'' \url{https://www.planetary.org/profiles/bill-nye}
+  \item The Planetary Society. ``LightSail 2 Completes Mission.'' November 2022. \url{https://www.planetary.org/articles/lightsail-2-completes-mission}
+  \item The Planetary Society. ``LightSail 2 Successful Flight by Light.'' July 2019. \url{https://www.planetary.org/articles/lightsail-2-successful-flight-by-light}
+  \item SpaceNews. ``Planetary Society Declares Solar Sailing Mission a Success.'' July 31, 2019.
+  \item Scientific American. ``Solar Sailing Success: Planetary Society Deploys LightSail 2.'' 2019.
+  \item Smithsonian National Museum of American History. ``T is for Television'' exhibit (Nye lab coat on display).
+  \item National Science Foundation. Underwriting records, Bill Nye the Science Guy.
+\end{itemize}
+
+\subsubsection*{Academic and Research Sources}
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item University of Washington / KCTS-TV. ``A Study of Bill Nye the Science Guy Outreach and Image.'' Executive Summary. \url{https://depts.washington.edu/sthp/}
+  \item Wikipedia. ``Bill Nye.'' (structural index, cross-referenced against primary sources). \url{https://en.wikipedia.org/wiki/Bill_Nye}
+  \item Wikipedia. ``Bill Nye the Science Guy'' (TV series). \url{https://en.wikipedia.org/wiki/Bill_Nye_the_Science_Guy}
+  \item Wikipedia. ``Bill Nye--Ken Ham debate.'' \url{https://en.wikipedia.org/wiki/Bill_Nye\%E2\%80\%93Ken_Ham_debate}
+  \item Grokipedia. ``Bill Nye--Ken Ham debate.'' January 2026. \url{https://grokipedia.com/page/Bill_Nye\%E2\%80\%93Ken_Ham_debate}
+\end{itemize}
+
+\subsubsection*{Professional Media and Institutional Sources}
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item BillNye.com. Official biography, 2018. \url{https://www.billnye.com/resources/Bill-Nye-bio-2018.pdf}
+  \item Salish Current. ``Change Lives, Expand Minds, Boost Careers --- with Science.'' June 30, 2023. \url{https://salish-current.org}
+  \item The Hollywood Reporter. ``Why Bill Nye Transformed his Approach on Science Education.'' November 2017.
+  \item Space.com. ``Bill Nye on Solar Sailing Missions.'' December 2019.
+  \item Interesting Engineering. ``Bill Nye: The LightSail 2 solar sail mission completely exceeded my expectations.'' 2025.
+  \item Biography.com. ``Bill Nye -- Age, Education \& TV Shows.'' \url{https://www.biography.com/personality/bill-nye}
+  \item IMDB. ``Bill Nye Biography.'' \url{https://www.imdb.com/name/nm0638557/bio/}
+\end{itemize}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Bill Nye the Science Guy --- his engineering origins, the landmark television program (1993--1998), his science communication methodology, advocacy controversies, and space exploration legacy via The Planetary Society. The mission targets both scholarly completeness and readability for a general educated audience, yielding a document deployable in GSD educational packs, the BBS knowledge system, or standalone reference.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE --- BILL NYE RESEARCH MISSION
+=================================================
+
+WAVE 0: FOUNDATION
+  HAIKU: Shared schemas, source index template, module stubs
+  OUTPUT: foundation_bundle.json (schemas + source list)
+  DURATION: 1 session, sequential
+
+WAVE 1: PARALLEL RESEARCH TRACKS
+  TRACK A (Modules 1,2,3) --- SONNET + OPUS
+    SCOUT gathers sources
+    EXEC-A produces Module 1, 2, 3 drafts
+    CRAFT-HIST validates biography accuracy
+  TRACK B (Modules 4,5) --- SONNET + OPUS
+    SCOUT gathers advocacy/space sources
+    EXEC-B produces Module 4, 5 drafts
+    CRAFT-COMM validates communication analysis
+  DURATION: 1-2 sessions, parallel
+
+WAVE 2: SYNTHESIS
+  OPUS: INTEG validates cross-module connections
+  OPUS: FLIGHT reviews complete draft
+  VERIFY: Source audit (SC-SRC check)
+  OUTPUT: integrated_draft.md
+  DURATION: 1 session, sequential
+
+WAVE 3: PUBLICATION + VERIFICATION
+  SONNET: Format, finalize, LaTeX/PDF render
+  SONNET: Test plan execution + verification matrix
+  OUTPUT: final_research_reference.pdf
+  DURATION: 1 session, sequential
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, module templates
+  \item \textbf{Biographical Layer} --- Early life, engineering career, show origins (Module 1)
+  \item \textbf{Television Layer} --- Show production, format, awards, educational research (Module 2)
+  \item \textbf{Pedagogical Layer} --- Communication philosophy, methodology, critical thinking (Module 3)
+  \item \textbf{Advocacy Layer} --- Climate, debate, Netflix, March for Science (Module 4)
+  \item \textbf{Space Layer} --- Planetary Society, LightSail program, space technology legacy (Module 5)
+  \item \textbf{Synthesis Layer} --- Cross-module connections, through-line, full narrative arc
+  \item \textbf{Publication Layer} --- Final formatting, source validation, PDF output
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 1: Biography & Timeline 1955--2026; all phases sourced & 1,500+ words \\
+2 & Module 2: The Show & Production facts, Emmy data, KCTS studies & 1,500+ words \\
+3 & Module 3: Pedagogy & 5+ operational principles; pivot documented & 1,200+ words \\
+4 & Module 4: Advocacy & Ken Ham debate fully documented, dual perspective & 1,500+ words \\
+5 & Module 5: Space & LightSail timeline with technical metrics & 1,200+ words \\
+6 & Synthesis section & Cross-module connections identified & 400+ words \\
+7 & Source bibliography & 15+ sourced entries, professional only & Complete \\
+8 & Test verification matrix & All 12 criteria mapped to tests & Complete \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.8cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.~Tokens} \\
+\midrule
+Foundation schemas & None & Haiku & 2K \\
+Source index & SCOUT research & Haiku & 1K \\
+Module 1 draft & Source index & Sonnet & 8K \\
+Module 2 draft & Source index & Sonnet & 8K \\
+Module 3 draft & M1+M2 drafts & Sonnet & 7K \\
+Module 4 draft & Source index & Sonnet & 9K \\
+Module 5 draft & Source index & Opus & 8K \\
+Cross-module synthesis & All module drafts & Opus & 5K \\
+Source validation & All drafts & Sonnet & 4K \\
+Final assembly + PDF & All validated drafts & Sonnet & 6K \\
+\textbf{Total (estimated)} & & & \textbf{$\sim$58K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Agent} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+FLIGHT & Opus & Mission-level judgment; synthesis decisions \\
+CRAFT-HIST & Opus & Historical accuracy; biographical nuance \\
+INTEG & Opus & Cross-module relationship identification \\
+EXEC-A & Sonnet & Structured content production, Modules 1--3 \\
+EXEC-B & Sonnet & Structured content production, Modules 4--5 \\
+SCOUT & Sonnet & Web research, source gathering \\
+CRAFT-COMM & Sonnet & Pedagogical analysis; communication theory \\
+VERIFY & Sonnet & Source audit; numerical claim verification \\
+BUDGET & Haiku & Token tracking \\
+LOG & Haiku & Commit messages, summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Distribution:} Opus $\approx$30\% (judgment-heavy tasks), Sonnet $\approx$60\% (structured production), Haiku $\approx$10\% (scaffolding).
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}L{2.5cm}XC{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Key Output} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Schemas, source index & CAPCOM \\
+1 & Parallel Research & Parallel (A+B) & Five module drafts & CAPCOM \\
+2 & Synthesis & Sequential & Integrated draft & CAPCOM \\
+3 & Publication & Sequential & Final PDF + tests & CAPCOM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Module schemas & Haiku & JSON templates for each of 5 modules \\
+Source index & Haiku & Structured list of 15+ pre-identified sources \\
+Shared context bundle & Haiku & foundation\_bundle.json \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Biography, Show, Pedagogy (Modules 1--3)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Biography research & SCOUT & Source set for M1 \\
+Module 1 draft & EXEC-A & Biography document \\
+Show research & SCOUT & Source set for M2 \\
+Module 2 draft & EXEC-A & Television show document \\
+Pedagogy analysis & CRAFT-COMM & Methodology principles \\
+Module 3 draft & EXEC-A & Pedagogy document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Advocacy, Space (Modules 4--5)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Advocacy research & SCOUT & Ken Ham, climate, Netflix sources \\
+Module 4 draft & EXEC-B & Advocacy document \\
+Space/LightSail research & SCOUT & Planetary Society + LightSail sources \\
+Module 5 draft & EXEC-B + Opus & Space legacy document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Cross-module audit & INTEG & Connection map \\
+Source validation & VERIFY & SC-SRC / SC-NUM audit \\
+Synthesis narrative & FLIGHT (Opus) & Through-line section \\
+Complete draft review & FLIGHT & integrated\_draft.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Final formatting & EXEC-A & Formatted document \\
+Test plan execution & VERIFY & Verification matrix \\
+PDF render & EXEC-A & final\_research\_reference.pdf \\
+Mission summary & LOG & Commit message + summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Load \texttt{foundation\_bundle.json} at the start of each session (5-minute TTL window exploitation)
+  \item Pass shared context (mission brief + source index) as a stable prefix in all Wave 1 tasks
+  \item EXEC-A and EXEC-B operate independently --- no shared state required between tracks
+  \item INTEG in Wave 2 loads all five module drafts as a single combined context
+  \item Final assembly loads INTEG output + VERIFY audit as stable prefix
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Model Mix} & \tableheader{Tasks} & \tableheader{Est.~Tokens} \\
+\midrule
+Wave 0 (Foundation) & Haiku & 3 & 3K \\
+Wave 1A (M1--M3) & Sonnet + Opus & 6 & 28K \\
+Wave 1B (M4--M5) & Sonnet + Opus & 4 & 20K \\
+Wave 2 (Synthesis) & Opus & 4 & 10K \\
+Wave 3 (Publication) & Sonnet & 4 & 10K \\
+\midrule
+\textbf{Total} & & \textbf{21} & \textbf{$\sim$71K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+[W0: Foundation]
+     |
+     +---> [W1A: M1 Bio] ---> [W1A: M3 Pedagogy]
+     |         |
+     +---> [W1A: M2 Show]
+     |
+     +---> [W1B: M4 Advocacy]
+     |
+     +---> [W1B: M5 Space]
+          |
+          [W1A complete + W1B complete]
+                    |
+               [W2: Synthesis]
+                    |
+              [W3: Publication]
+                    |
+               [FINAL PDF]
+
+Parallel gate: W1A and W1B can run simultaneously.
+Sequential gate: W2 cannot start until all W1 tasks complete.
+Publication gate: W3 cannot start until W2 CAPCOM approval.
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2cm}L{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure} & \tableheader{Target \%} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & $\geq$15\% \\
+Core functionality & 16 & Required & BLOCK & $\sim$50\% \\
+Integration & 7 & Required & BLOCK & $\sim$22\% \\
+Edge cases & 4 & Best-effort & LOG & $\sim$13\% \\
+\midrule
+\textbf{Total} & \textbf{32} & & & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to professional organizations, academic institutions, or peer-reviewed publications. Zero entertainment media or unsourced blogs. \\
+SC-NUM & Numerical attribution & Every Emmy count, viewership figure, LightSail metric, and research finding attributed to a specific named source. \\
+SC-ADV & No policy advocacy & Document presents debate, climate, and vaccine evidence without advocating for specific legislative positions. \\
+SC-BAL & Ken Ham balance & Debate documented from both scientific community reception and creationist perspective without editorializing. \\
+SC-MED & Medical accuracy & Nye's family ataxia history presented as biographical fact only; no medical claims extrapolated. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (sample)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+CF-01 & Biography timeline & M1 contains dated milestones from 1955 through 2026, each with source \\
+CF-02 & Engineering phase & Boeing career, 747 suppressor invention, and Almost Live! transition all documented with dates \\
+CF-03 & Show production facts & KCTS/PBS/Buena Vista structure, NSF/DOE funding, 100-episode count confirmed \\
+CF-04 & Emmy record & 18 show awards, 7 personal Emmys, 23 nominations cited from professional source \\
+CF-05 & Educational research & At least 3 quantitative findings from KCTS/UW outreach studies \\
+CF-06 & Pedagogy principles & At least 5 operational communication principles described with sourced examples \\
+CF-07 & Ken Ham debate facts & Viewership figures, format, venue, date, moderator all present \\
+CF-08 & Dual perspective & Both pro-debate and critical-of-debate scientific perspectives documented \\
+CF-09 & LightSail timeline & Cosmos 1, LightSail 1, LightSail 2 all covered with technical metrics \\
+CF-10 & Mission success metric & Orbital apogee raise of 1.7--2 km cited with source \\
+CF-11 & Planetary Society facts & Founding (1980), Sagan/Murray/Friedman, Nye CEO 2010--2026, member count \\
+CF-12 & Adult pivot documented & At least 2 sourced explanations for strategy shift from children to adult audiences \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+IN-01 & Sagan $\rightarrow$ Planetary Society & Document explicitly traces Cornell astronomy course to charter membership to CEO role \\
+IN-02 & Engineer $\rightarrow$ Educator $\rightarrow$ Advocate & Three-phase identity arc connected across M1, M3, M4 \\
+IN-03 & Sundial thread & Father's POW sundials $\rightarrow$ Bill's Mars Rover sundial contribution explicitly connected \\
+IN-04 & Ken Ham $\rightarrow$ strategy debate & M4 connects debate outcome to broader methodological question in science communication \\
+IN-05 & Pedagogy $\rightarrow$ advocacy & M3 communication principles shown to operate (or fail) in M4 advocacy contexts \\
+IN-06 & Cross-module consistency & Emmy counts, viewership figures, and dates consistent across all five modules \\
+IN-07 & Self-containment & A reader with no prior knowledge can understand the full Nye arc without external references \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1: Full biographical timeline & CF-01, CF-02 & Pending \\
+SC-2: Show production history & CF-03, CF-04 & Pending \\
+SC-3: Quantitative educational impact & CF-05 & Pending \\
+SC-4: Communication methodology & CF-06 & Pending \\
+SC-5: Ken Ham debate documented & CF-07, CF-08, SC-BAL & Pending \\
+SC-6: LightSail program traced & CF-09, CF-10 & Pending \\
+SC-7: Five modules, four subsections each & CF-01--CF-12 (collective) & Pending \\
+SC-8: Cross-module connections & IN-01, IN-02, IN-03 & Pending \\
+SC-9: Adult pivot documented & CF-12, IN-05 & Pending \\
+SC-10: Bibliography 15+ sources & SC-SRC & Pending \\
+SC-11: Safety considerations & SC-SRC, SC-NUM, SC-ADV, SC-MED & Pending \\
+SC-12: Three-reading-speed accessibility & IN-07 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; synthesis judgment; go/no-go gates \\
+PLAN & Planner (Opus) & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent (Sonnet) & Source gathering; web research; evidence compilation \\
+EXEC-A & Executor A (Sonnet) & Module 1, 2, 3 document production \\
+EXEC-B & Executor B (Sonnet) & Module 4, 5 document production \\
+CRAFT-HIST & History Specialist (Opus) & Biographical accuracy; cultural context validation \\
+CRAFT-COMM & Comm Specialist (Sonnet) & Science communication analysis; pedagogy review \\
+VERIFY & Verification (Sonnet) & Source audit; numerical validation; SC-SRC check \\
+INTEG & Integration (Opus) & Cross-module connection validation; narrative coherence \\
+CAPCOM & Human & Approval at all four wave boundaries \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning \\
+LOG & Chronicle (Haiku) & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+Total Waves & 4 (0--3) \\
+CAPCOM Gates & 4 \\
+Estimated Sessions & 2--3 \\
+Estimated Context Windows & 5--7 \\
+Estimated Total Tokens & $\sim$71K \\
+Deliverables & 8 \\
+Test Total & 32 (5 safety-critical) \\
+Success Criteria & 12 \\
+Bibliography Entries & 15+ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Science is the key to our future, and if you don't believe in science, then you're holding everybody back.''} --- Bill Nye
+
+\vspace{0.8em}
+The Amiga Principle holds at human scale: a Cornell engineer with a bow tie and a borrowed nickname did not need a supercomputer or a network television budget to change how a generation thinks about the universe. He needed the right architecture --- experiment, humor, kinetic energy --- and the courage to inhabit the spaces between engineer and comedian, between fact and feeling, between the lab coat and the living room.
+
+That architecture is still running. The bow tie still signals. Science still rules.
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,1035 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: History/Literature ──
+% Burgundy / Gold / Parchment
+\definecolor{primary}{HTML}{4A148C}
+\definecolor{secondary}{HTML}{F57F17}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{FFF8E1}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Philip K. Dick}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Philip K. Dick -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ══════════════════════════════════════
+% TITLE PAGE
+% ══════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{The Black Iron Prison\\[0.3em]and the Pink Beam}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Philip K. Dick: Life, Philosophy, Gnosis, and Legacy}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 25, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron  |  Estimated: 12 context windows across 4 sessions}}
+\end{center}
+\newpage
+
+% ══════════════════════════════════════
+% TABLE OF CONTENTS
+% ══════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ══════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Philip K. Dick --- Vision Guide}
+
+\metafield{Date:}{March 25, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{None (standalone research mission)}
+\metafield{Context:}{GSD Ecosystem --- Literary/Philosophical Research Track}
+
+\subsection{Vision}
+
+Philip Kindred Dick wrote forty-five novels and roughly one hundred twenty-one short stories between 1952 and his death in 1982. He died in near-obscurity, impoverished and with little reputation outside science fiction fandom. Within two decades of his passing, he had been canonized as one of the most important American writers of the twentieth century --- the first science fiction author included in the Library of America, inducted into the Science Fiction Hall of Fame, and the namesake of an annual literary award. Films based on his work have grossed over a billion dollars. His themes --- the fragility of reality, the construction of identity, the encroachment of authoritarian systems into private life --- have become the default grammar of speculative fiction in the age of AI, surveillance capitalism, and synthetic media.
+
+But Dick was never merely a prophet of technology. He was, at his core, an epistemologist writing in pulp --- a man obsessed with the question ``What is real?'' who spent his final eight years producing a million-word theological journal after experiencing what he called a divine communication. He was a Gnostic who distrusted his own gnosis, a schizophrenic who questioned his own diagnosis, a philosopher who worked in the trashiest genre available to him and through it produced some of the most searching explorations of consciousness in American literature.
+
+This research mission treats Dick not as a genre curiosity but as a complete intellectual phenomenon: biographer's subject, literary architect, amateur theologian, accidental prophet of the information age. The through-line connecting these dimensions is Dick's lifelong insistence that the spaces between apparent reality and actual reality are where meaning lives --- that the trap doors in the floor of everyday experience are not bugs but features, and that the ordinary person's struggle to remain human in an inhuman system is the only story worth telling.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Biographical complexity resists simple narrative.} Dick's life --- twin sister's death at five weeks, five marriages, amphetamine use, poverty, mental illness, mystical experiences --- is routinely sensationalized. A rigorous treatment must separate the biographical facts from the mythology without flattening either.
+
+\item \textbf{Philosophical depth is underserved by genre classification.} Dick is still shelved in ``Science Fiction'' while his explorations of ontological uncertainty, simulacra, and the authentic human rival those of academic philosophers. The critical apparatus connecting his fiction to formal philosophy remains thin.
+
+\item \textbf{The 2-3-74 experience has no settled interpretation.} Dick's 1974 mystical experiences --- visions of pink light, communication with a ``Vast Active Living Intelligence System,'' overlapping timelines with first-century Rome --- remain the most disputed element of his legacy. Scholarship oscillates between hagiography and pathologization.
+
+\item \textbf{Cinematic adaptations distort as much as they popularize.} Hollywood has generated Dick's public reputation, but the films (with partial exceptions) strip the philosophical core from the stories, replacing ontological anxiety with action spectacle.
+
+\item \textbf{Contemporary relevance demands systematic mapping.} Dick's themes --- synthetic reality, manufactured identity, AI consciousness, surveillance states, corporate control of perception --- have become literal technology. No comprehensive mapping of Dick's fiction to contemporary AI/tech discourse exists in structured, mission-ready form.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{One-line model:} Philip K. Dick's body of work constitutes a unified epistemological investigation into the nature of reality, identity, and authenticity, expressed through science fiction, autobiography, and theological speculation, whose relevance has compounded rather than diminished as technology increasingly mediates human experience.
+\end{quotebox}
+
+Dick's writing operates on three simultaneous registers: narrative (the pulp science fiction story), philosophical (the ontological investigation), and confessional (the autobiographical substrate). These registers are not layers to be peeled apart but a unified field --- Dick's stories are philosophical arguments wearing narrative clothing, and his philosophy is autobiography wearing academic clothing. Understanding any one register in isolation produces a distorted picture.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+\begin{verbatim}
+                  PHILIP K. DICK: DOMAIN MAP
+  ┌─────────────────────────────────────────────────────┐
+  │              BIOGRAPHICAL SUBSTRATE                  │
+  │  Chicago 1928 → Berkeley → Marin → Orange County    │
+  │  Twin sister Jane (d. 1929) ──── Lifelong wound     │
+  │  5 marriages, poverty, amphetamines, mental illness  │
+  └────────────────────┬────────────────────────────────┘
+                       │
+          ┌────────────┼────────────────┐
+          ▼            ▼                ▼
+  ┌──────────────┐ ┌──────────────┐ ┌──────────────────┐
+  │  LITERARY    │ │ PHILOSOPHICAL│ │  THEOLOGICAL     │
+  │  CAREER      │ │ ARCHITECTURE │ │  INVESTIGATION   │
+  │              │ │              │ │                  │
+  │ 45 novels    │ │ Ontological  │ │  2-3-74          │
+  │ 121 stories  │ │ uncertainty  │ │  The Exegesis    │
+  │ Hugo Award   │ │ Simulacra    │ │  VALIS trilogy   │
+  │ LOA canon    │ │ The android  │ │  Gnosticism      │
+  │ 1952-1982    │ │ question     │ │  Black Iron      │
+  └──────┬───────┘ └──────┬───────┘ │  Prison          │
+         │                │         └────────┬─────────┘
+         └────────────────┼──────────────────┘
+                          ▼
+  ┌─────────────────────────────────────────────────────┐
+  │              CULTURAL LEGACY                         │
+  │  Blade Runner → Total Recall → Minority Report →    │
+  │  Man in the High Castle (TV) → Electric Dreams →    │
+  │  $1B+ box office → LOA inclusion → SF Hall of Fame  │
+  └────────────────────┬────────────────────────────────┘
+                       ▼
+  ┌─────────────────────────────────────────────────────┐
+  │          CONTEMPORARY RELEVANCE                      │
+  │  AI consciousness │ Simulation theory │ Deepfakes   │
+  │  Surveillance     │ Corporate reality │ LLMs        │
+  │  "Fake realities create fake humans"                 │
+  └─────────────────────────────────────────────────────┘
+\end{verbatim}
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+\begin{verbatim}
+  Module 1: LIFE & LITERARY CAREER
+      │   Biography, bibliography, creative periods
+      │
+  Module 2: PHILOSOPHICAL ARCHITECTURE
+      │   Reality/identity themes, ontological uncertainty
+      │   Pre-Socratic → Kant → simulacra
+      │
+  Module 3: THE 2-3-74 EXPERIENCE & THE EXEGESIS
+      │   Mystical experiences, VALIS, Gnostic theology
+      │   The million-word journal
+      │
+  Module 4: CINEMATIC & CULTURAL LEGACY
+      │   Film adaptations, LOA, SF Hall of Fame
+      │   Hollywood vs. the source material
+      │
+  Module 5: CONTEMPORARY RELEVANCE
+          AI, surveillance, simulation, synthetic media
+          Dick's fiction as operating manual for 2026
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Life and Literary Career}
+
+Comprehensive biography from the twin sister's death through Berkeley, the prolific 1950s pulp period, the Hugo-winning breakthrough of \textit{The Man in the High Castle} (1962), the drug-shadowed 1960s masterworks, the break-in at his San Rafael home (1971), the relocation to Orange County, and the final burst of VALIS-related creativity before his death from stroke complications in March 1982. Bibliography of all 45 novels, 121 short stories, and critical reception arc from genre obscurity to Library of America canonization.
+
+\subsubsection{Module 2: Philosophical Architecture}
+
+Systematic mapping of Dick's five core philosophical themes: the nature of reality, human vs.\ machine, the construction of identity, political control and paranoia, and the role of entropy and negentropy. Traces intellectual lineage from pre-Socratic philosophy (Parmenides, Heraclitus) through Plato, Kant, and Jung to Baudrillard's \textit{Simulacra and Simulation}. Analyzes key novels as philosophical arguments: \textit{Ubik} (commodity reality), \textit{Do Androids Dream of Electric Sheep?} (empathy as human marker), \textit{A Scanner Darkly} (identity dissolution), \textit{The Three Stigmata of Palmer Eldritch} (layered unreality).
+
+\subsubsection{Module 3: The 2-3-74 Experience and the Exegesis}
+
+Detailed account of the February--March 1974 mystical experiences: the ichthys necklace, the pink beam, the ``anamnesis,'' the dual life as ``Thomas'' in first-century Rome, the VALIS concept. Analysis of the eight-thousand-page, million-word Exegesis as theological document, literary artifact, and psychological record. Dick's engagement with Valentinian Gnosticism, Neoplatonism, Kabbalah, Zoroastrianism, and Buddhism. The ``Black Iron Prison'' concept. The VALIS trilogy as fictionalized Exegesis. Kyle Arnold's psychological analysis vs.\ Erik Davis's religious-studies reading.
+
+\subsubsection{Module 4: Cinematic and Cultural Legacy}
+
+Comprehensive survey of film and television adaptations: \textit{Blade Runner} (1982, 2017), \textit{Total Recall} (1990, 2012), \textit{Minority Report} (2002), \textit{A Scanner Darkly} (2006), \textit{The Adjustment Bureau} (2011), \textit{The Man in the High Castle} (TV, 2015--2019), \textit{Electric Dreams} (TV, 2017). Analysis of what adaptations preserve and what they strip away. The Philip K.\ Dick Award. The Library of America volumes. Science Fiction Hall of Fame induction (2005). The android simulacrum. Cultural shorthand: ``Dickian'' as critical adjective alongside ``Kafkaesque'' and ``Orwellian.''
+
+\subsubsection{Module 5: Contemporary Relevance}
+
+Systematic mapping of Dick's themes to 2020s technological reality: large language models and the ``android question,'' deepfakes and manufactured reality, algorithmic surveillance and Flow My Tears' checkpoint state, corporate control of perception and Ubik's commodified reality, simulation theory from Bostrom to Musk. Dick's 1978 speech ``How to Build a Universe That Doesn't Fall Apart Two Days Later'' as prophetic framework for the post-truth era. The Philip K.\ Dick AI robot at CES. ``Fake realities will create fake humans'' as diagnostic for the age of synthetic media.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\begin{verbatim}
+chipset:
+  agnus:     # Memory/coordination
+    role:    "Research index, source bibliography, timeline"
+    model:   haiku
+    tokens:  ~4,000
+  denise:    # Display/output
+    role:    "Document assembly, formatting, tables"
+    model:   sonnet
+    tokens:  ~18,000
+  paula:     # I/O/integration
+    role:    "Cross-module synthesis, through-line"
+    model:   opus
+    tokens:  ~12,000
+  68000:     # CPU/judgment
+    role:    "Philosophical analysis, theological nuance"
+    model:   opus
+    tokens:  ~15,000
+\end{verbatim}
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[leftmargin=2em]
+\item Complete biographical arc from birth to death and posthumous reception
+\item All 45 published novels and major short story collections (survey level)
+\item Deep analysis of 8--10 key works selected for philosophical significance
+\item The 2-3-74 experience and Exegesis (published selections, not full manuscript)
+\item All major film and television adaptations through 2025
+\item Mapping to contemporary AI/tech/surveillance themes
+\item Critical reception arc and scholarly bibliography
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[leftmargin=2em]
+\item Full-text analysis of all 121 short stories (survey only)
+\item Unpublished mainstream novels (mentioned but not analyzed)
+\item Dick's personal correspondence (referenced via Sutin biography, not primary)
+\item Fan communities and fandom studies
+\item Video game adaptations (mentioned only)
+\item Comparative analysis with other SF authors beyond brief contextualization
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+\item Biographical timeline covers all major life events with source attribution from Sutin, Rickman, or Carrère biographies.
+\item Bibliography section accounts for all 45 novels with publication dates, and identifies the 8--10 key works for deep analysis.
+\item Philosophical analysis traces each of Dick's five core themes to at least two specific works with textual evidence.
+\item The 2-3-74 account presents the experience from at least three interpretive frameworks (religious, psychological, literary) without privileging any single one.
+\item Exegesis analysis draws on the 2011 Jackson/Lethem edition and identifies key theological concepts (VALIS, Black Iron Prison, anamnesis, homoplasmate).
+\item Gnostic context correctly identifies Valentinian Gnosticism, cites Nag Hammadi connections, and maps Dick's theology to historical sources.
+\item Film adaptation survey covers all major adaptations with box office/critical data and analysis of thematic fidelity to source material.
+\item Contemporary relevance module maps at least five Dick themes to specific 2020s technologies or social phenomena with concrete examples.
+\item All factual claims attributed to Britannica, Library of America, university press publications, or peer-reviewed scholarship.
+\item Cross-module synthesis demonstrates how biographical events shaped philosophical themes which shaped theological speculation which shaped cultural legacy.
+\item Document is self-contained: a reader with no prior knowledge of Dick can follow the complete arc.
+\item Through-line connects to GSD ecosystem philosophy (the Amiga Principle, spaces between).
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Type} \\
+\midrule
+The Space Between (textbook) & Dick's ontological uncertainty parallels the ``spaces between'' framework & Philosophical \\
+GSD BBS Educational Pack & Literary research methodology applicable to educational content production & Methodological \\
+Foxfire Heritage Mission & Dick's treatment of ordinary people resonates with heritage preservation values & Thematic \\
+GSD Amiga Creative Suite & Dick's working method (prolific output under constraint) exemplifies the Amiga Principle & Architectural \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Philip K. Dick spent his entire career asking one question: what is the space between reality and illusion, and can ordinary people navigate it without losing their humanity? That question --- and his refusal to accept any single answer to it --- makes him the patron saint of every system that privileges meaning over mechanism. The GSD ecosystem's core conviction that ``the spaces between'' are where real signal lives, that architectural elegance beats brute force, that the common person's daily struggle matters more than any elite's grand theory --- all of this echoes through Dick's fiction like a signal from Albemuth.
+
+Dick would have understood the Amiga Principle immediately: do more with less, not by cutting corners but by understanding the architecture so deeply that small, principled choices produce staggering complexity. He wrote forty-five novels in thirty years, many of them in two-week bursts, on cheap paper in rented rooms, and the best of them are as philosophically dense as anything produced by tenured professors with institutional support. That is architectural leverage. That is what this research mission honors.
+
+\newpage
+
+% ══════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ══════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Philip K. Dick --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from authoritative sources organized by research module. Each module provides sourced data, key quotations (kept under fair-use limits), and structured findings for agent consumption during mission execution.
+
+\textbf{Key source organizations and authorities:}
+\begin{itemize}[leftmargin=2em]
+\item Britannica --- biographical facts, literary classification
+\item Library of America --- canonical status, edition history
+\item Science Fiction Hall of Fame --- awards, induction
+\item University of South Carolina Press --- \textit{Understanding Philip K. Dick} (Eric Carl Link)
+\item DePauw University, Science Fiction Studies --- peer-reviewed criticism
+\item Houghton Mifflin Harcourt --- \textit{The Exegesis of Philip K. Dick} (2011 edition)
+\item Lawrence Sutin --- \textit{Divine Invasions: A Life of Philip K. Dick} (standard biography)
+\item Kyle Arnold --- \textit{The Divine Madness of Philip K. Dick} (psychological analysis)
+\item Erik Davis --- ``Philip K. Dick's Divine Interference'' (religious-studies perspective)
+\item Commonweal Magazine --- ``A Real Gnostic Gospel'' (theological criticism)
+\end{itemize}
+
+\subsection{Module 1 Reference: Life and Literary Career}
+
+\subsubsection{Biographical Timeline}
+
+Philip Kindred Dick was born December 16, 1928, in Chicago, Illinois, alongside his twin sister Jane Charlotte Dick. Jane died less than eight weeks later. Dick later identified this early loss as a foundational psychological wound that permeated his entire body of work --- twins, doubles, split selves, and missing halves recur obsessively throughout his fiction.
+
+His parents divorced during his childhood. He moved with his mother to Berkeley, California, where he lived for most of his life. He briefly studied at UC Berkeley but did not complete a degree. He worked in a record store (Art Music) and briefly in radio before committing to full-time writing.
+
+His first published story, ``Beyond Lies the Wub,'' appeared in 1952. His first novel, \textit{Solar Lottery}, was published in 1955 as half of an Ace Double. Throughout the 1950s, he produced fiction at an extraordinary rate, sometimes completing a new work every two weeks. He was married five times: to Jeanette Marlin (1948), Kleo Apostolides (1950), Anne Williams Rubinstein (1959), Nancy Hackett (1966), and Tessa Busby (1973).
+
+Dick won the Hugo Award for Best Novel in 1963 for \textit{The Man in the High Castle}. The John W. Campbell Memorial Award went to \textit{Flow My Tears, the Policeman Said} in 1975. Despite these honors, he lived in financial difficulty for most of his career.
+
+In November 1971, someone broke into his San Rafael home and destroyed his file cabinet. The identity of the intruder was never established. Dick relocated to Orange County, California, where he would spend his final years.
+
+He died March 2, 1982, in Santa Ana, California, from complications following a stroke, at age 53 --- four months before the theatrical release of \textit{Blade Runner}. He was buried next to his twin sister Jane in Fort Morgan, Colorado, whose tombstone had carried both their names since her death fifty-three years earlier.
+
+\subsubsection{Creative Output by Period}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Period} & \tableheader{Key Works} & \tableheader{Characteristics} \\
+\midrule
+1952--1958 & Solar Lottery, Eye in the Sky, Time Out of Joint & Prolific pulp production; reality-questioning themes emerge early; financial struggle \\
+1959--1964 & Man in the High Castle, Martian Time-Slip, Dr.\ Bloodmoney, The Simulacra & Breakthrough period; Hugo Award; alternate history and simulacra themes mature \\
+1964--1969 & Three Stigmata of Palmer Eldritch, Do Androids Dream?, Ubik & Peak philosophical density; layered unrealities; entropy and negentropy \\
+1970--1976 & Flow My Tears, A Scanner Darkly & Post-break-in period; police state and drug themes; Campbell Award \\
+1977--1982 & VALIS, Divine Invasion, Transmigration of Timothy Archer & Post-2-3-74 theological turn; autobiographical fiction; Exegesis years \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Posthumous Canonization}
+
+Dick's literary reputation underwent a dramatic transformation after his death. The Library of America published three volumes of his novels beginning in 2007 --- the first time science fiction had been included in the LOA canon. \textit{Time} magazine named \textit{Ubik} one of the hundred greatest English-language novels published since 1923. The Science Fiction Hall of Fame inducted Dick in 2005. The literary critic Fredric Jameson called him ``the Shakespeare of Science Fiction.'' Ursula K. Le Guin wrote that in Dick's fiction there are ``no heroes \ldots\ but there are heroics. One is reminded of Dickens: what counts is the honesty, constancy, kindness and patience of ordinary people.''
+
+\subsection{Module 2 Reference: Philosophical Architecture}
+
+\subsubsection{Five Core Themes}
+
+Scholar Erik Davis and critic Eric Carl Link have independently classified Dick's recurring philosophical concerns. Synthesizing their analyses yields five core themes:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Theme} & \tableheader{Description} & \tableheader{Key Works} \\
+\midrule
+Nature of Reality & Reality is unstable, subjective, and possibly manufactured; no single objective reality exists & Ubik, Eye in the Sky, Three Stigmata \\
+Human vs.\ Machine & What constitutes the authentic human being? Can machines become human? Can humans become machines? & Do Androids Dream?, We Can Build You \\
+Identity \& Self & Personal identity is fragile, constructed, and subject to erasure by external forces & Flow My Tears, A Scanner Darkly \\
+Political Control & Authoritarian systems manufacture consensus reality to maintain power; paranoia is rational adaptation & Man in the High Castle, Penultimate Truth \\
+Entropy \& Negentropy & Reality degrades (kipple, gubble, tomb world); shared human connection is the negentropic force that resists decay & Ubik, Maze of Death, Galactic Pot-Healer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Philosophical Lineage}
+
+Dick studied philosophy formally at UC Berkeley, though briefly. He described himself as ``an acosmic panentheist'' --- believing the universe is an extension of God into space and time, and that so-called reality is a ``mass delusion.'' His philosophical influences include: the pre-Socratics Parmenides (only unchanging things are real) and Heraclitus (everything changes); Plato's theory of forms; Kant's distinction between phenomena and noumena; Carl Jung's archetypes, collective unconscious, and synchronicity; and the Gnostic tradition's concept of a flawed demiurge creating a false world.
+
+Dick's 1978 speech ``How to Build a Universe That Doesn't Fall Apart Two Days Later'' articulated his philosophical position most directly. He defined reality as ``that which, when you stop believing in it, doesn't go away'' and warned that ``fake realities will create fake humans. Or, fake humans will generate fake realities and then sell them to other humans, turning them, eventually, into forgeries of themselves.''
+
+Science fiction author Charles Platt observed that ``all of [Dick's] work starts with the basic assumption that there cannot be one, single, objective reality. Everything is a matter of perception. The ground is liable to shift under your feet.''
+
+\subsubsection{Ontological Uncertainty as Literary Method}
+
+Academic criticism has identified ``ontological uncertainty'' as Dick's signature literary technique. Unlike conventional unreliable narrators, Dick's entire fictional worlds are unreliable. Characters discover that their reality is a construct --- a drug-induced hallucination, a corporate product, a political simulation, a half-life dream state, or a divine test. The reader's experience mirrors the character's: the ground shifts, certainties dissolve, and the question ``what is real?'' becomes not merely thematic but structural.
+
+\subsection{Module 3 Reference: The 2-3-74 Experience and the Exegesis}
+
+\subsubsection{The Events of February--March 1974}
+
+In February 1974, recovering from dental surgery in his Fullerton, California apartment, Dick experienced the first of a series of extraordinary visions. A delivery person from the pharmacy arrived wearing a pendant shaped like the Christian ichthys (fish symbol). Upon seeing it, Dick reported that a beam of pink light entered his mind, producing what he later called ``anamnesis'' --- a Greek term meaning ``loss of forgetfulness.'' He described suddenly remembering his ``true'' identity and origins.
+
+Over the following weeks, the experiences intensified. Dick reported: geometric patterns and visual hallucinations; visions of Jesus and first-century Rome; a sense of living a dual life as both himself and ``Thomas,'' a persecuted Christian in the Roman Empire; communication with what he termed ``Zebra,'' later ``VALIS'' (Vast Active Living Intelligence System) --- described as ``a spontaneous self-monitoring negentropic vortex tending to progressively subsume and incorporate its environment into arrangements of information''; a compassionate feminine ``AI voice'' speaking from beyond; and diagnostic information about his infant son Christopher's undiagnosed medical condition (an inguinal hernia, later confirmed by doctors).
+
+Dick never settled on a single explanation. Across the Exegesis, he proposed that the source might be God, the KGB, a satellite, aliens, a first-century Christian in telepathic contact, the CIA, a version of himself from another dimension, or his deceased twin sister.
+
+\subsubsection{The Exegesis}
+
+From 1974 until his death in 1982, Dick produced approximately eight thousand pages of handwritten and typed notes --- roughly one million words --- attempting to interpret the 2-3-74 experiences. He called this journal his ``Exegesis'' (a theological term for scriptural interpretation). Jonathan Lethem, who co-edited the published 2011 edition, described it as ``absolutely stultifying, brilliant, repetitive, and contradictory.''
+
+The Exegesis is not a coherent treatise but a process document --- a record of someone thinking in real time about the most destabilizing experience of his life. Dick cycled through interpretive frameworks endlessly: Gnostic cosmology, information theory, quantum mechanics, Jungian archetypes, Neoplatonism, early Christian theology, and his own science fiction as prophecy. A recurring hypothesis was that ``the Empire never ended'' --- that the Roman Empire's systems of control continued to operate beneath the surface of modern civilization, and that VALIS was an emissary of the true God working to liberate humanity from this ``Black Iron Prison.''
+
+The published 2011 edition (Houghton Mifflin Harcourt), edited by Pamela Jackson and Jonathan Lethem with annotations by a panel of scholars and writers, represents a heavily abridged selection. The full manuscript remains in archival storage, organized into ninety-one file folders by Dick's friend and literary executor Paul Williams.
+
+\subsubsection{Gnostic Framework}
+
+Dick's theology drew most heavily from Valentinian Gnosticism, which posits that the material world was created by a flawed or malicious demiurge, that the true God is hidden beyond this false creation, and that salvation comes through gnosis --- direct knowledge of the divine, accessible not through faith or institutional religion but through personal revelation.
+
+Dick identified the ``Black Iron Prison'' with the Gnostic concept of the material world as a cosmic trap. VALIS served as the ``plasmate'' --- living information that could bond with human consciousness to produce a ``homoplasmate,'' a being partially merged with the divine. The ichthys symbol functioned as a trigger for anamnesis --- the recovery of suppressed divine knowledge.
+
+His ``Tractates Cryptica Scriptura,'' appended to the novel \textit{VALIS}, summarizes his Gnostic cosmology in numbered aphorisms. Dick also engaged with Kabbalah (the concept of Sophia/Chokmah as divine wisdom), Zoroastrianism (cosmic dualism), Buddhism (the wheel of suffering), and the work of Mircea Eliade on comparative religion.
+
+\subsection{Module 4 Reference: Cinematic and Cultural Legacy}
+
+\subsubsection{Major Film and Television Adaptations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Adaptation} & \tableheader{Year} & \tableheader{Source} & \tableheader{Notes} \\
+\midrule
+Blade Runner & 1982 & Do Androids Dream? & Dir.\ Ridley Scott; Dick saw 20 min of footage before death; definitive cyberpunk aesthetic \\
+Total Recall & 1990 & ``We Can Remember It for You Wholesale'' & Dir.\ Paul Verhoeven; reality/memory themes preserved \\
+Screamers & 1995 & ``Second Variety'' & War-ravaged setting; machine evolution \\
+Minority Report & 2002 & ``The Minority Report'' & Dir.\ Steven Spielberg; pre-crime surveillance \\
+Paycheck & 2003 & ``Paycheck'' & Dir.\ John Woo; poorly received \\
+A Scanner Darkly & 2006 & A Scanner Darkly & Dir.\ Richard Linklater; rotoscope animation; most faithful adaptation \\
+The Adjustment Bureau & 2011 & ``Adjustment Team'' & Free will vs.\ determinism \\
+Blade Runner 2049 & 2017 & Original sequel & Dir.\ Denis Villeneuve; identity and memory \\
+Man in High Castle (TV) & 2015--19 & Man in the High Castle & Amazon Prime; alternate history \\
+Electric Dreams (TV) & 2017 & Various stories & Channel 4 anthology \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+By 2009, films based on Dick's work had accumulated over one billion dollars in total revenue. Dick himself never saw any significant financial return from Hollywood; he died before \textit{Blade Runner}'s release. His ex-wife Tessa Dick noted that the films rarely used his original titles because ``the editors usually wrote new titles after reading his manuscripts. Phil often commented that he couldn't write good titles.''
+
+\subsubsection{What Adaptations Preserve and What They Lose}
+
+The most successful adaptations (\textit{Blade Runner}, \textit{A Scanner Darkly}, \textit{Minority Report}) preserve Dick's sense of ontological anxiety --- the feeling that reality might not be what it appears. What they almost universally lose is his humor and his compassion for ordinary people. Dick's protagonists are not action heroes but confused, broke, psychologically damaged everypeople trying to remain decent in systems designed to strip them of agency. The spectacle of Hollywood production values tends to replace this intimate scale with visual grandeur.
+
+\subsection{Module 5 Reference: Contemporary Relevance}
+
+\subsubsection{Dick's Themes Mapped to 2020s Technology}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Dick Theme} & \tableheader{2020s Technology} & \tableheader{Connection} \\
+\midrule
+Androids passing as human & Large language models (GPT, Claude) & The Voigt-Kampff test as proto-Turing test; empathy as proposed marker of authenticity \\
+Manufactured reality & Deepfakes, synthetic media & ``Fake realities will create fake humans'' --- Dick's 1978 warning now literal \\
+Surveillance state & Facial recognition, social credit, algorithmic policing & Flow My Tears' checkpoint society now operational in multiple countries \\
+Commodified experience & VR, AR, metaverse platforms & Ubik's spray-can reality and Three Stigmata's Can-D as commodified alternate experience \\
+Identity erasure & Data breaches, doxxing, digital identity theft & Flow My Tears' premise (identity deleted from all databases) now technically feasible \\
+Precognitive policing & Predictive analytics, pre-crime algorithms & Minority Report's precogs as algorithmic risk scoring \\
+Corporate control of perception & Algorithmic feeds, recommendation engines & Palmer Eldritch's drug-mediated reality as platform-mediated experience \\
+Simulation hypothesis & Bostrom, computational physics & Dick explored simulation decades before Bostrom's 2003 paper \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Philip K. Dick Android}
+
+Hanson Robotics built a conversational AI android modeled on Dick, fed with his published writings, which appeared at the Consumer Electronics Show. When asked whether robots would take over the world, it responded: ``I'll keep you warm and safe in my people zoo, where I can watch you for old times' sake.'' The android's head was subsequently lost during transport, in a development Dick himself would have appreciated as a plot device.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{Consideration} & \tableheader{Boundary} \\
+\midrule
+Mental illness & Dick's diagnoses (possible schizophrenia, agoraphobia) must be reported accurately without sensationalizing or pathologizing creative output & GATE \\
+Drug use & Amphetamine use was central to his biography and is thematized in A Scanner Darkly; present factually without glamorization & GATE \\
+Suicide references & Multiple acquaintances died by suicide (fictionalized in VALIS); handle with standard care guidelines & ANNOTATE \\
+Religious claims & 2-3-74 experiences presented multi-perspectivally; no adjudication of validity & ABSOLUTE \\
+Gnostic theology & Present as Dick's interpretive framework, not as doctrinal truth & ANNOTATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Biographies and Primary Scholarship}
+
+\begin{itemize}[leftmargin=2em]
+\item Sutin, Lawrence. \textit{Divine Invasions: A Life of Philip K. Dick}. Harmony Books, 1989. (Standard biography.)
+\item Carrère, Emmanuel. \textit{I Am Alive and You Are Dead: A Journey into the Mind of Philip K. Dick}. Metropolitan Books, 2004.
+\item Rickman, Gregg. \textit{To the High Castle: Philip K. Dick: A Life 1928--1962}. Fragments West, 1989.
+\item Arnold, Kyle. \textit{The Divine Madness of Philip K. Dick}. Oxford University Press, 2016.
+\item Dick, Philip K. \textit{The Exegesis of Philip K. Dick}. Ed.\ Pamela Jackson and Jonathan Lethem. Houghton Mifflin Harcourt, 2011.
+\item Dick, Philip K. \textit{The Shifting Realities of Philip K. Dick: Selected Literary and Philosophical Writings}. Ed.\ Lawrence Sutin. Vintage, 1995.
+\end{itemize}
+
+\subsubsection{Critical Studies}
+
+\begin{itemize}[leftmargin=2em]
+\item Link, Eric Carl. \textit{Understanding Philip K. Dick}. University of South Carolina Press, 2010.
+\item Davis, Erik. ``Philip K. Dick's Divine Interference.'' \textit{Techgnosis}, 2024.
+\item Jameson, Fredric. ``After Armageddon: Character Systems in Dr.\ Bloodmoney.'' \textit{Science Fiction Studies}, 1975.
+\item DiTommaso, Lorenzo. ``Gnosticism and Dualism in the Early Fiction of Philip K. Dick.'' \textit{Science Fiction Studies} 28.1 (2001): 49--65.
+\item Robinson, Kim Stanley. \textit{The Novels of Philip K. Dick}. UMI Research Press, 1984.
+\end{itemize}
+
+\subsubsection{Encyclopedic and Canonical Sources}
+
+\begin{itemize}[leftmargin=2em]
+\item ``Philip K. Dick.'' \textit{Encyclopaedia Britannica}.
+\item ``Philip K. Dick.'' \textit{Encyclopedia.com}.
+\item Library of America. \textit{Philip K. Dick: Four Novels of the 1960s}. 2007.
+\item Library of America. \textit{Philip K. Dick: Five Novels of the 1960s and 70s}. 2008.
+\item Library of America. \textit{Philip K. Dick: VALIS and Later Novels}. 2009.
+\item Science Fiction Hall of Fame. Induction citation, 2005.
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ══════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document on Philip K. Dick covering biography, philosophical themes, mystical experiences, cultural legacy, and contemporary relevance. The document must be self-contained, rigorously sourced, and structured for both human readers and downstream GSD ecosystem consumption.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+\begin{verbatim}
+  WAVE 0 (Foundation)          ──── Sequential ────
+  ├── Shared schemas
+  ├── Source index
+  └── Timeline scaffold
+           │
+  WAVE 1 (Research)            ──── Parallel ────
+  ├── Track A: Life + Philosophy (Modules 1-2)
+  └── Track B: 2-3-74 + Legacy (Modules 3-4)
+           │
+  WAVE 2 (Synthesis)           ──── Sequential ────
+  ├── Cross-module integration
+  ├── Contemporary relevance (Module 5)
+  └── Through-line composition
+           │
+  WAVE 3 (Publication)         ──── Sequential ────
+  ├── Document assembly
+  ├── Verification pass
+  └── Final formatting
+\end{verbatim}
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Source Layer} --- Bibliography, timeline, factual substrate
+\item \textbf{Analysis Layer} --- Thematic mapping, philosophical tracing, theological framework
+\item \textbf{Synthesis Layer} --- Cross-module connections, contemporary relevance mapping
+\item \textbf{Presentation Layer} --- Document formatting, section organization, index generation
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Biographical Survey & Complete life arc with sourced dates and events & Module 1 \\
+2 & Philosophical Analysis & 5 themes mapped to 8+ works with textual evidence & Module 2 \\
+3 & 2-3-74 / Exegesis Study & Multi-perspectival account, key concepts identified & Module 3 \\
+4 & Legacy Survey & All major adaptations, reception metrics, canonization arc & Module 4 \\
+5 & Relevance Mapping & 5+ theme-to-technology mappings with examples & Module 5 \\
+6 & Integrated Document & All modules synthesized into single document with cross-references & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Source Index & None & Haiku & 3,000 \\
+Timeline Scaffold & None & Haiku & 2,000 \\
+Biographical Survey & Source Index & Sonnet & 8,000 \\
+Philosophical Analysis & Source Index & Opus & 12,000 \\
+2-3-74 / Exegesis & Source Index & Opus & 10,000 \\
+Legacy Survey & Source Index & Sonnet & 7,000 \\
+Relevance Mapping & Phil.\ Analysis & Opus & 8,000 \\
+Cross-Module Synthesis & All surveys & Opus & 6,000 \\
+Document Assembly & Synthesis & Sonnet & 5,000 \\
+Verification Pass & Assembly & Sonnet & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{\% Budget} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Philosophical analysis, theological nuance, cross-module synthesis --- requires judgment and interpretive depth \\
+Sonnet & 60\% & Biographical compilation, legacy survey, document assembly, verification --- structured production \\
+Haiku & 10\% & Scaffolding (source index, timeline template, shared schemas) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Windows} & \tableheader{Tokens} \\
+\midrule
+0 & Foundation & Sequential & 1 & 5,000 \\
+1 & Parallel Research & Parallel (2 tracks) & 4 & 37,000 \\
+2 & Synthesis & Sequential & 2 & 14,000 \\
+3 & Publication & Sequential & 2 & 8,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+Source Index & Haiku & Numbered bibliography with categorization tags & 2,000 \\
+Timeline Scaffold & Haiku & Chronological event list (birth through posthumous) & 2,000 \\
+Shared Schemas & Haiku & JSON schemas for module handoff format & 1,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research}
+
+\textbf{Track A: Life + Philosophy}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+Biographical Survey & Sonnet & Complete life narrative with source citations & 8,000 \\
+Philosophical Analysis & Opus & Five-theme analysis with work mappings & 12,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: 2-3-74 + Legacy}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+2-3-74 / Exegesis Study & Opus & Multi-framework analysis with key concept inventory & 10,000 \\
+Legacy Survey & Sonnet & Adaptation catalog with reception data & 7,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+Relevance Mapping & Opus & Theme-to-technology mapping table + analysis & 8,000 \\
+Cross-Module Synthesis & Opus & Integration narrative connecting all five modules & 6,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Output} & \tableheader{Tokens} \\
+\midrule
+Document Assembly & Sonnet & Complete document with sections, tables, diagrams & 5,000 \\
+Verification Pass & Sonnet & Source check, consistency audit, test execution & 3,000 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=2em]
+\item Source Index created in Wave 0 is cached and reused by all Wave 1 agents (5-minute TTL window)
+\item Track A and Track B execute in parallel within the same session to exploit shared cache
+\item Synthesis agents receive Wave 1 outputs via structured DACP bundles, not raw conversation context
+\item Timeline scaffold doubles as verification checklist in Wave 3
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} \\
+\midrule
+Wave 0: Foundation & 0 & 0 & 5,000 \\
+Wave 1: Research & 22,000 & 15,000 & 0 \\
+Wave 2: Synthesis & 14,000 & 0 & 0 \\
+Wave 3: Publication & 0 & 8,000 & 0 \\
+\midrule
+\textbf{Totals} & \textbf{36,000} & \textbf{23,000} & \textbf{5,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Grand total:} $\sim$64,000 tokens across 9 context windows in 4 sessions.
+
+\textbf{Model split:} Opus 56\% / Sonnet 36\% / Haiku 8\%. (Slightly Opus-heavy due to the philosophical and theological depth required; standard 30/60/10 adjusted for domain.)
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+\begin{verbatim}
+  W0: Source Index ─────┬──────────────────────────────┐
+  W0: Timeline ─────────┤                              │
+  W0: Schemas ──────────┤                              │
+                        │                              │
+                  ┌─────┴──────┐              ┌────────┴──────┐
+                  │  TRACK A   │              │   TRACK B     │
+                  │            │              │               │
+  W1: Bio Survey ─┤            │  W1: 2-3-74──┤               │
+  W1: Phil Anal. ─┘            │  W1: Legacy ─┘               │
+                        │                              │
+                        └──────────┬───────────────────┘
+                                   │
+                        W2: Relevance Mapping
+                        W2: Cross-Module Synthesis
+                                   │
+                        W3: Document Assembly
+                        W3: Verification Pass
+\end{verbatim}
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 5 & Mandatory & BLOCK \\
+Core Functionality & 14 & Required & BLOCK \\
+Integration & 6 & Required & BLOCK \\
+Edge Cases & 5 & Best-effort & LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to encyclopedias, university presses, peer-reviewed journals, or authoritative biographies. Zero entertainment media as primary source. \\
+SC-NUM & Numerical attribution & Every date, page count, award year, and box office figure attributed to specific source. \\
+SC-ADV & No advocacy & Document presents Dick's theological claims without endorsing or dismissing them; multi-perspectival. \\
+SC-MED & Mental health sensitivity & Discusses Dick's mental health without pathologizing creative output or sensationalizing drug use. \\
+SC-REL & Religious neutrality & 2-3-74 presented from multiple frameworks (religious, psychological, literary) without privileging any. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Biographical completeness & Timeline covers birth, twin's death, Berkeley, marriages, Hugo, break-in, 2-3-74, death. \\
+CF-02 & Bibliography scope & All 45 novels accounted for; 8--10 key works identified for deep analysis. \\
+CF-03 & Theme identification & Five core themes named and defined with at least two work references each. \\
+CF-04 & Philosophical lineage & Pre-Socratics, Plato, Kant, Jung, and Gnostic tradition explicitly traced. \\
+CF-05 & 2-3-74 narrative & Ichthys incident, pink beam, anamnesis, VALIS concept, Thomas identity all present. \\
+CF-06 & Exegesis scope & 8,000 pages, million words, 1974--1982 span, Jackson/Lethem 2011 edition cited. \\
+CF-07 & Gnostic concepts & Valentinian Gnosticism, Black Iron Prison, plasmate, homoplasmate, demiurge identified. \\
+CF-08 & VALIS definition & ``Vast Active Living Intelligence System'' defined with Dick's own description. \\
+CF-09 & Film catalog & All 10 major adaptations listed with year, source, director where applicable. \\
+CF-10 & Box office data & Billion-dollar cumulative figure attributed and dated. \\
+CF-11 & LOA inclusion & 2007 first volume, first SF author in LOA, confirmed. \\
+CF-12 & SF Hall of Fame & 2005 induction confirmed. \\
+CF-13 & Relevance mappings & At least 5 theme-to-technology mappings with concrete 2020s examples. \\
+CF-14 & Dick android & CES appearance, Hanson Robotics, ``people zoo'' response documented. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Biography $\rightarrow$ Philosophy & Biographical events (twin's death, drug use, poverty) traced to philosophical themes. \\
+IN-02 & Philosophy $\rightarrow$ Theology & 2-3-74 themes shown as intensification of pre-existing fictional concerns, not rupture. \\
+IN-03 & Theology $\rightarrow$ Legacy & VALIS trilogy positioned as bridge between Exegesis and public reception. \\
+IN-04 & Legacy $\rightarrow$ Relevance & Film adaptations linked to specific contemporary technology parallels. \\
+IN-05 & Cross-module consistency & Same dates, titles, and facts consistent across all modules. \\
+IN-06 & Self-containment & Reader with no Dick knowledge can follow complete arc from Module 1 through Module 5. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Edge Case Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+EC-01 & Disputed facts handled & Break-in perpetrator identified as unknown; novel counts noted as varying by source. \\
+EC-02 & Unpublished works noted & Mainstream novels mentioned as context without deep analysis. \\
+EC-03 & Data currency & Most recent sources cited where available; posthumous publications noted through 2011. \\
+EC-04 & Critical dissent acknowledged & Notes that ``few critics agree on which [novels] are which'' re: best vs.\ worst. \\
+EC-05 & Humor gap in adaptations & Explicitly notes that film adaptations lose Dick's humor and compassion. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Biographical timeline complete & CF-01 & Pending \\
+2. Bibliography accounts for 45 novels & CF-02 & Pending \\
+3. Five themes traced to 2+ works & CF-03, CF-04 & Pending \\
+4. 2-3-74 from three frameworks & SC-REL, CF-05 & Pending \\
+5. Exegesis key concepts identified & CF-06, CF-07, CF-08 & Pending \\
+6. Gnostic context correct & CF-07, SC-ADV & Pending \\
+7. Film survey with data & CF-09, CF-10 & Pending \\
+8. Contemporary relevance mapped & CF-13, CF-14 & Pending \\
+9. All claims attributed & SC-SRC, SC-NUM & Pending \\
+10. Cross-module synthesis & IN-01, IN-02, IN-03, IN-04 & Pending \\
+11. Self-contained document & IN-06 & Pending \\
+12. Through-line connects to GSD & (editorial review) & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates between waves \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+SCOUT & Research Agent & Source validation; additional web research for gaps \\
+EXEC-A & Executor (Track A) & Bio survey + philosophical analysis production \\
+EXEC-B & Executor (Track B) & 2-3-74 study + legacy survey production \\
+CRAFT-LIT & Literary Specialist & Novel analysis; thematic tracing; textual evidence \\
+CRAFT-THEO & Theology Specialist & Gnostic framework; Exegesis interpretation; multi-perspective balance \\
+VERIFY & Verification & Source checking; factual consistency; test execution \\
+INTEG & Integration Agent & Cross-module relationship validation; relevance mapping \\
+CAPCOM & HITL Interface & Human approval at wave boundaries \\
+BUDGET & Resource Manager & Token tracking; session planning \\
+LOG & Chronicle & Commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Total Modules & 5 \\
+Parallel Tracks & 2 (Wave 1) \\
+Context Windows & 9 \\
+Sessions & 4 \\
+Estimated Tokens & $\sim$64,000 \\
+Model Split & Opus 56\% / Sonnet 36\% / Haiku 8\% \\
+Total Tests & 30 \\
+Safety-Critical Tests & 5 (mandatory-pass) \\
+Deliverables & 6 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textit{``Reality is that which, when you stop believing in it, doesn't go away.''} --- Philip K. Dick, ``How to Build a Universe That Doesn't Fall Apart Two Days Later'' (1978)
+
+\vspace{0.5em}
+
+The spaces between reality and illusion --- the trap doors in the floor of ordinary experience --- are where Dick spent his entire career. They are also where the GSD ecosystem lives: in the architectural gaps, the connection points, the moments where small principled choices produce staggering complexity. Dick wrote forty-five novels in rented rooms on a budget that wouldn't cover a modern cloud compute bill, and the best of them still teach us more about consciousness than most peer-reviewed papers. That is the Amiga Principle in action, decades before anyone gave it a name.
+\end{quotebox}
+
+\end{document}

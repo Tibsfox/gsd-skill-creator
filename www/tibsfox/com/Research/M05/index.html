@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Split Analysis &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-m05">
+  <header>
+    <h1>Module Split Analysis</h1>
+    <div class="subtitle">Module Sizing &middot; Cohesion Metrics &middot; Split Frameworks &middot; Cross-Reference Contracts &middot; Structural Remediation</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-when-and-why-to-split">When &amp; Why</a>
+      <a href="page.html?doc=02-module-sizing-principles">Sizing</a>
+      <a href="page.html?doc=03-cohesion-analysis">Cohesion</a>
+      <a href="page.html?doc=04-maintaining-coherence-after-splitting">Coherence</a>
+      <a href="page.html?doc=05-split-decision-framework">Framework</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      A module that tries to tell two stories tells neither one well. NastyMix Records was born in the
+      Central District, but the label's logic and the neighborhood's story diverged the moment
+      &ldquo;Square Dance Rap&rdquo; broke in Flint, Michigan. Module 05's 613 lines were overloaded
+      because they fused music industry economics with cultural geography &mdash; a category error that
+      the split resolves by giving each story its own container, its own sources, and its own analytical frame.
+      The architecture was telling us what it needed. The framework's job was to listen.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">20</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">44+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Diagnostic Stages</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-when-and-why-to-split" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: When and Why to Split</h3>
+        <div class="meta"><span class="tag tag-analysis">Analysis</span> Recognition &middot; Category errors</div>
+        <p>Signal detection for module decomposition. Category errors, divergent analytical frames, the NastyMix/Central District case study. The Amiga Principle applied to research: one module, one chip, one job.</p>
+      </a>
+
+      <a href="page.html?doc=02-module-sizing-principles" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Module Sizing Principles</h3>
+        <div class="meta"><span class="tag tag-split">Sizing</span> Metrics &middot; Series median</div>
+        <p>Quantitative foundations for module scope. Series median as structural signal, the Scope Triangle, cohesion density scoring, the 1.8x overshoot rule, the Goldilocks Zone, and domain-specific sizing benchmarks.</p>
+      </a>
+
+      <a href="page.html?doc=03-cohesion-analysis" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Cohesion &amp; Coupling Analysis</h3>
+        <div class="meta"><span class="tag tag-merge">Metrics</span> Measurement &middot; LCOM adaptation</div>
+        <p>Seven types of cohesion ranked worst to best. The Section-Question Matrix and dominance test. Coupling types from content to data. LCOM metric adapted for research modules. Architectural smell catalog.</p>
+      </a>
+
+      <a href="page.html?doc=04-maintaining-coherence-after-splitting" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Maintaining Coherence After Splitting</h3>
+        <div class="meta"><span class="tag tag-merge">Integration</span> Contracts &middot; Navigation</div>
+        <p>Cross-reference contracts, series wave plan integration, cluster navigation design. Shared origin documentation, reader path analysis, post-split validation checklists. The refactoring step-by-step.</p>
+      </a>
+
+      <a href="page.html?doc=05-split-decision-framework" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: The Split Decision Framework</h3>
+        <div class="meta"><span class="tag tag-verify">Framework</span> Verification &middot; Case study</div>
+        <p>The complete five-stage diagnostic. The Split Report verification matrix with 20 tests across 4 categories. Module 05 case study walkthrough. Edge cases, domain portability, and framework override protocols.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Module decomposition criteria</td><td>M1, M2, M5</td><td>GSD2, ACE</td></tr>
+        <tr><td>Category errors / divergent frames</td><td>M1, M3</td><td>GSD2, COK</td></tr>
+        <tr><td>Cohesion types (Yourdon-Constantine)</td><td>M3</td><td>GSD2, CDL</td></tr>
+        <tr><td>Coupling types and metrics</td><td>M3, M4</td><td>CMH, MPC</td></tr>
+        <tr><td>LCOM metric adaptation</td><td>M3</td><td>GSD2, MPC</td></tr>
+        <tr><td>Series median / Goldilocks Zone</td><td>M2, M5</td><td>GSD2, CMH</td></tr>
+        <tr><td>Cross-reference contracts</td><td>M1, M4</td><td>CMH, PMG</td></tr>
+        <tr><td>Wave plan integration</td><td>M2, M4, M5</td><td>GSD2, MPC</td></tr>
+        <tr><td>NastyMix label ecosystem</td><td>M1, M4, M5</td><td>CDS, MIX</td></tr>
+        <tr><td>Central District geography</td><td>M1, M4, M5</td><td>CDS, SAL</td></tr>
+        <tr><td>Amiga Principle</td><td>M1, M2, M5</td><td>GSD2, SGL</td></tr>
+        <tr><td>Architectural smells</td><td>M3</td><td>GSD2, COK</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+MODULE SPLIT ANALYSIS -- DOMAIN MAP
+===============================================================
+
+  RECOGNITION DOMAIN        MEASUREMENT DOMAIN       INTEGRATION DOMAIN
+  +---------------+       +----------------+       +------------------+
+  | Frame Count   |       | Series Median  |       | Cross-Ref        |
+  | Category      |------&gt;| Cohesion       |------&gt;| Contracts        |
+  | Errors        |       | Density        |       | Wave Plan        |
+  | Signal        |       | LCOM           |       | Cluster Nav      |
+  | Detection     |       | Source Density  |       | Reader Paths     |
+  +---------------+       +----------------+       +------------------+
+        |                       |                        |
+        v                       v                        v
+  +---------------+       +----------------+       +------------------+
+  | Divergent     |       | Overshoot      |       | Post-Split       |
+  | Analytical    |       | Diagnostic     |       | Validation       |
+  | Frames        |       | Goldilocks     |       | Maintenance      |
+  | Shared Origin |       | Zone           |       | Drift Prevention |
+  +---------------+       +----------------+       +------------------+
+        |                       |                        |
+        +-----------------------+------------------------+
+                                |
+                    +-----------+-----------+
+                    | SPLIT DECISION        |
+                    | FRAMEWORK             |
+                    |                       |
+                    | 5-Stage Diagnostic    |
+                    | The Split Report      |
+                    | 20 Verification Tests |
+                    | Edge Cases            |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module 05 Split Architecture</h2>
+
+    <pre>
+MODULE 05 DECOMPOSITION
+===============================================================
+
+BEFORE SPLIT
+  Module 05 (613 lines, 2.08x median)
+  |-- NastyMix roster (label economics)    [INDUSTRY FRAME]
+  |-- Central District mapping (geography) [GEOGRAPHY FRAME]
+  |-- MOHAI documentation (archives)       [GEOGRAPHY FRAME]
+  `-- Gentrification analysis              [GEOGRAPHY FRAME]
+  COHESION: Temporal (level 3/7)
+  LCOM: +3 (lacks cohesion)
+  DOMINANCE: 0.67/0.48 (dual, neither dominant)
+
+AFTER SPLIT
+  Module 05a: NastyMix Label Ecosystem     (~300 lines)
+  |-- Founding: 4 co-founders, $900 budget
+  |-- Roster: Mix, Kid Sensation, High Performance, Criminal Nation
+  |-- Business arc: startup -&gt; platinum -&gt; collapse
+  `-- Cross-ref: 05b at Rotary Boys &amp; Girls Club
+  COHESION: Functional (level 7/7)  |  LCOM: 0
+
+  Module 05b: Central District Place Memory (~300 lines)
+  |-- Spatial mapping: key sites with addresses
+  |-- MOHAI Legacy exhibit (2015-16, AASLH award)
+  |-- Gentrification: 65%+ Black -&gt; under 20% (1970-2020)
+  `-- Cross-ref: 05a at Rotary Boys &amp; Girls Club
+  COHESION: Functional (level 7/7)  |  LCOM: 0
+
+  CROSS-REFERENCE CONTRACT:
+    Shared origin: Rotary Boys &amp; Girls Club, 1985
+    Direction refs: 2 (one per module)
+    Complexity: Simple
+    </pre>
+  </main>
+
+  <footer>
+    <p>Module Split Analysis &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

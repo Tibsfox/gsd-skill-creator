@@ -1,0 +1,972 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME — Music / Arts: Electric Indigo + Burnt Amber + Deep Teal
+\definecolor{primary}{HTML}{1A237E}       % Deep indigo — section headers
+\definecolor{secondary}{HTML}{BF360C}     % Burnt amber — subsection headers
+\definecolor{tertiary}{HTML}{004D40}      % Deep teal — subsubsection headers
+\definecolor{accent}{HTML}{283593}        % Mid-indigo — highlights
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Indigo tint — quote boxes
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{E0F2F1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% TABLE HELPERS
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS / FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Talking Heads}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Talking Heads -- Deep Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%%  TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD DEEP RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Talking Heads\\[0.3em]Architecture of a Revolution}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{CBGB to the Rock Hall: 1975--2002}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad | \quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad | \quad Est.: 5 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+%% ============================================================
+%%  TABLE OF CONTENTS
+%% ============================================================
+\tableofcontents
+\newpage
+
+%% ============================================================
+%%  STAGE 1 — VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Talking Heads --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Research Complete / Ready for Execution}
+\metafield{Depends On:}{CBGB historical archives, Library of Congress National Recording Registry, Rock and Roll Hall of Fame}
+\metafield{Context:}{Cold-start deep research mission. No prior conversation on this topic.}
+
+\subsection{Vision}
+
+There is a television production term for a shot that shows only a person's head and shoulders talking: all content, no action. The band chose this as their name as a self-aware joke --- and then spent the next sixteen years proving the joke wrong. Talking Heads were among the most kinetic, most globally promiscuous, most architecturally adventurous musical acts of the twentieth century, and yet they began as three art students in a loft who could barely find a bassist.
+
+That paradox is the whole story. David Byrne, Chris Frantz, and Tina Weymouth arrived in New York City in 1974 carrying Rhode Island School of Design diplomas, minimal musical credentials, and an inexhaustible appetite for structure. They joined the punk scene at CBGB not because they sounded like the Ramones --- they did not --- but because CBGB was a place that did not ask you to sound like anyone. It was the right ecology: a petri dish that rewarded differentiation. In that space, with Jerry Harrison's eventual arrival and Brian Eno's catalytic influence, they assembled one of the most improbable trajectories in rock history: from three-chord nervousness to Nigerian polyrhythms, from Bowery lofts to the Bahamas, from anxious art-school doodles to one of the most celebrated concert films ever made.
+
+The Amiga Principle finds a mirror in the Talking Heads story. Like the Amiga computer's specialized chips --- Agnus for memory, Denise for graphics, Paula for audio, the 68000 for coordination --- each Talking Heads member brought an irreducible functional identity: Weymouth's interlocking bass, Frantz's irresistible drumming, Harrison's harmonic intelligence, Byrne's fractal anxiety. No single node could generate what the whole system produced. And when Brian Eno entered as a kind of external co-processor, introducing them to Fela Kuti and the philosophy of communal groove, the architecture unlocked something entirely new --- art-punk and Afrobeat merged into a single signal, and pop music has never fully recovered.
+
+This research mission documents that architecture: where the nodes came from, how they connected, what they built together, why it lasted, and what it means for any system that prizes elegant specialization over brute force.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The genre-classification problem.} Talking Heads do not fit cleanly into punk, new wave, art rock, funk, or world music. Standard genre frameworks flatten them into one category at the expense of the others. A comprehensive study must map the actual multi-genre architecture without false reduction.
+
+  \item \textbf{The Byrne-centrism problem.} Most coverage gravitates toward David Byrne as singular auteur, obscuring the irreplaceable contributions of Weymouth, Frantz, and Harrison. The ensemble architecture --- including the expanded live bands of 1980--1984 --- must be documented on its own terms.
+
+  \item \textbf{The Eno-attribution problem.} Brian Eno's role in the three-album arc (1978--1980) is frequently either overstated or understated. The actual mechanics of the collaboration, including the introduction of Fela Kuti's Afrobeat framework, require careful sourcing.
+
+  \item \textbf{The \textit{Stop Making Sense} gap.} The 1984 concert film is widely recognized as a landmark yet insufficiently analyzed as an architectural achievement --- staging design, cinematographic philosophy, the progressive accumulation of performers, the big-suit iconography. It deserves its own module.
+
+  \item \textbf{The legacy-measurement problem.} Talking Heads' influence extends across genres, decades, and media, but is rarely mapped systematically. Which artists explicitly cite the influence? Which albums? Which specific techniques were transmitted?
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model:} Architectural specialization + deliberate cross-cultural contamination = transcendent pop.
+
+Talking Heads operated as a system of distinct specialists who deliberately exposed themselves to external musical systems --- Afrobeat, funk, hip-hop embryonics, No Wave --- and integrated those systems without assimilation. They did not become an African band; they became a new kind of band that had listened deeply to African music and brought back what physics called a ``return trip with post-punk in tow.'' The architecture was open, not closed. The channels between nodes were the whole point.
+
+\subsubsection{Formation and CBGB Ecosystem Map}
+
+\begin{asciibox}
+  RISD Providence (1973-74)
+  |
+  [Byrne + Frantz] -- The Artistics
+  |         \
+  |          Weymouth (learns bass on request)
+  |
+  NYC Loft (1974-75)
+  |
+  [Trio: Byrne / Frantz / Weymouth]
+  |
+  CBGB (1975) -- First gig: opening for the Ramones
+  |
+  Jerry Harrison (ex-Modern Lovers) added 1976
+  |
+  Sire Records -- signed November 1976
+  |
+  Brian Eno introduced via John Cale / Ramones concert (May 1977)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  MODULE 1: ORIGINS          MODULE 2: ENO ARC          MODULE 3: STOP MAKING SENSE
+  RISD -> CBGB -> Sire        More Songs (1978)          Concert film (1983-84)
+  Formation dynamics          Fear of Music (1979)        Staging architecture
+  Band-within-a-band          Remain in Light (1980)      Big Suit / Noh theater
+                              Fela Kuti / Afrobeat        Demme's camera philosophy
+         |                           |                              |
+         +------- MODULE 4: DISCOGRAPHY --------+         MODULE 5: LEGACY
+                  Full album arc 1977-1988                Radiohead / Arcade Fire
+                  Commercial arc + reception              LCD Soundsystem etc.
+                  Rolling Stone / Rock Hall                Long-tail cultural echo
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins and Formation}
+
+Covers the RISD years, the formation of the Artistics, the move to New York, CBGB immersion, Jerry Harrison's recruitment, and the signing to Sire Records. Documents the specific mechanics of how an art-school sensibility collided with the punk ecosystem. Includes the origin of the name ``Talking Heads'' (from a TV Guide article about head-and-shoulder TV shots: ``all content, no action.'')
+
+\subsubsection{Module 2: The Eno Arc and Afrobeat Synthesis}
+
+Documents the three-album collaboration with Brian Eno: \textit{More Songs About Buildings and Food} (1978), \textit{Fear of Music} (1979), \textit{Remain in Light} (1980). Traces the introduction of Fela Kuti's \textit{Afrodisiac} as compositional framework, the shift from writer-centered to groove-centered recording methodology, the expanded touring band, and Byrne's stream-of-consciousness lyrical adaptation. Includes the parallel Byrne/Eno project \textit{My Life in the Bush of Ghosts} (1981) as adjacent context.
+
+\subsubsection{Module 3: \textit{Stop Making Sense} and Visual Architecture}
+
+A dedicated analysis of the 1984 Jonathan Demme concert film. Documents the progressive stage-building format (Byrne alone with drum machine $\to$ nine musicians), the big suit's origin in Japanese Noh and Kabuki theater, Demme's minimal-cut cinematographic philosophy, the National Society of Film Critics win, the 100\% Rotten Tomatoes rating, and the 2023 4K IMAX restoration. Includes analysis of how the film functions as its own artistic statement beyond documentation.
+
+\subsubsection{Module 4: Full Discography and Commercial Reception}
+
+Systematic coverage of all eight studio albums (1977--1988), charting history, gold/platinum certifications, the \textit{Rolling Stone} 500 Greatest Albums appearances, and the Rock and Roll Hall of Fame induction (2002). Documents the band's unusual arc: avant-garde critical favorites who also became commercially successful without fundamentally changing their approach.
+
+\subsubsection{Module 5: Legacy and Measured Influence}
+
+Maps explicit citations of influence: Radiohead (took band name from 1986 song ``Radio Head''; cited \textit{Remain in Light} as a critical influence on \textit{Kid A}), LCD Soundsystem, Arcade Fire, St.\ Vincent, the Weeknd, Franz Ferdinand, Trent Reznor, Danny Brown, Nelly Furtado. Covers broader cultural legacy: fashion (the big suit), MTV video art, filmmaking influence (Spike Jonze, Michel Gondry), and Byrne's post-Heads multimedia career.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+  chipset:
+    mission: talking-heads-deep-research
+    activation_profile: squadron
+    model_allocation:
+      opus_30pct:
+        - synthesis-module        # Cross-module integration
+        - legacy-map              # Cultural impact analysis
+        - eno-arc-analysis        # Nuanced collaboration history
+      sonnet_60pct:
+        - origins-survey          # Formation documentation
+        - discography-module      # Album-by-album coverage
+        - stop-making-sense-mod   # Film analysis
+        - verification-pass       # Source checking
+        - publication-assembly    # Final document build
+      haiku_10pct:
+        - shared-schemas          # Data templates
+        - bibliography-scaffold   # Citation framework
+        - timeline-scaffolding    # Chronological structure
+    cache_strategy:
+      window_target: 5
+      ttl_exploitation: true
+      source_index_position: wave_0
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item Band history: formation (1974) through dissolution (1991) and Hall of Fame induction (2002)
+  \item All eight studio albums, one live album (\textit{The Name of This Band Is Talking Heads}), concert film (\textit{Stop Making Sense})
+  \item Brian Eno collaboration in full (1978--1980)
+  \item Extended touring band members (Belew, Worrell, Scales, Weir, Mabry, Holt, Jones)
+  \item Adjacent projects directly relevant: Tom Tom Club, \textit{My Life in the Bush of Ghosts} (Byrne/Eno), The Heads (1996)
+  \item Confirmed influence citations from named artists with specific attributions
+  \item \textit{Stop Making Sense} as a standalone artistic object
+  \item Critical reception chronology and institutional recognition (Rolling Stone, Library of Congress, Rock Hall)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+  \item David Byrne's solo career after 1991 (except as legacy context)
+  \item Tom Tom Club discography in full
+  \item Individual band member solo discographies in full
+  \item Comprehensive coverage of every artist who has covered Talking Heads songs
+  \item Analysis of bootleg recordings and unreleased material
+  \item Financial/business details of Sire Records relationship
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Formation timeline documented from RISD (1973) through CBGB debut (June 5, 1975) with all key events dated and sourced.
+  \item Each of the four core members profiled individually, with distinct roles and contributions articulated beyond their instrumental function.
+  \item All three Eno collaboration albums analyzed with specific production techniques identified and attributed.
+  \item Fela Kuti / Afrobeat influence traced from first introduction (Eno to Byrne, May 1977) through \textit{Remain in Light} (1980) with primary source support.
+  \item \textit{Stop Making Sense} analyzed as architectural achievement: staging progression, cinematographic philosophy, and specific elements documented with sources.
+  \item Complete discography table (8 studio albums): release date, producer, key singles, chart positions, certification.
+  \item Minimum 8 specific, named artists documented citing Talking Heads influence, with specific albums or techniques noted.
+  \item Rolling Stone, Library of Congress, and Rock Hall recognition documented with specific list positions and categories.
+  \item The Byrne/Weymouth/Frantz/Harrison interpersonal dynamics covered with appropriate sourcing (Frantz memoir, published interviews).
+  \item Internal band tensions documented evenhandedly: Byrne's controlling tendencies, Frantz and Weymouth considering departure during \textit{Remain in Light} sessions, and the acrimonious 1991 dissolution.
+  \item Library of Congress National Recording Registry addition for \textit{Remain in Light} (2017) cited and contextualized.
+  \item The GSD through-line (architectural specialization, spaces between, communal groove) made explicit in synthesis module.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Amiga Vision & Philosophical parallel & Amiga's specialized chips mirror the band's functional architecture \\
+The Space Between (Foxglove) & Thematic resonance & ``Spaces between'' as the site of meaning applies directly to Talking Heads' ensemble dynamics \\
+GSD Cloud-Ops Curriculum & Production methods & Wave-based parallel execution mirrors the band's studio methodology \\
+Deep Audio Analyzer Mission & Adjacent domain & Audio analysis tools applicable to Talking Heads' polyrhythmic structures \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Talking Heads understood something the Amiga engineers also understood: the gap between nodes is not empty. When Weymouth's bass locks with Frantz's kick drum, the groove lives in the intersection --- not in either instrument alone. When Eno played Byrne \textit{Afrodisiac} for the first time in a New York apartment in 1977, what he was offering was not a template but a philosophy: that music made communally, made ecstatically, made with the understanding that the individual voice matters less than the space it creates for other voices, produces something no single virtuoso can replicate.
+
+This is the GSD Amiga Principle rendered in sound. Small, specialized, principled building blocks, faithfully iterated, produce staggering complexity. The ``spaces between'' --- between nodes in a chipset, between musicians in a groove, between punk's raw energy and Afrobeat's ancient rhythm --- is where the actual work gets done. Talking Heads did not transcend their origins; they honored the spaces those origins opened up. That is the lesson worth keeping.
+
+\newpage
+
+%% ============================================================
+%%  STAGE 2 — RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Talking Heads --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference provides sourced findings organized by research module. All claims are attributed to specific sources. Agents executing this mission should treat this reference as the authoritative source for the mission; only conduct additional web research to verify claims or fill noted gaps.
+
+\textbf{Key source organizations and references:}
+\begin{itemize}[leftmargin=*]
+  \item Wikipedia / Encyclopaedia Britannica (factual baseline, with cross-verification)
+  \item \textit{Rolling Stone} magazine (critical reception, rankings)
+  \item Library of Congress National Recording Registry (2017 \textit{Remain in Light} entry)
+  \item Rock and Roll Hall of Fame (2002 induction documentation)
+  \item Chris Frantz memoir: \textit{Remain in Love} (2020, Scribner) --- primary source for interpersonal history
+  \item EBSCO Research Starters: David Byrne, Talking Heads entries
+  \item NPR archival interviews (Eno on Fela Kuti introduction)
+  \item \textit{The Guardian}, \textit{NME}, \textit{Melody Maker} (contemporary critical reception)
+  \item Library of Congress David Byrne 2017 conversation (Byrne on \textit{Remain in Light} methodology)
+  \item \textit{Stop Making Sense} 4K restoration liner notes (2023, A24)
+  \item San Francisco International Film Festival program notes (1984 world premiere)
+\end{itemize}
+
+\subsection{Module 1 Reference: Origins and Formation}
+
+\subsubsection{RISD and the Artistics (1973--1974)}
+
+David Byrne (born May 14, 1952, Dumbarton, Scotland; raised in Baltimore, Maryland) enrolled briefly at RISD around 1970 before attending the Maryland Institute College of Art and dropping out in 1972. He returned to Providence and met Chris Frantz (born May 8, 1951, Fort Campbell, Kentucky) through a mutual friend who needed help on a student film soundtrack. The two formed a band called the Artistics, described by Frantz as ``a prototype punk band'' performing covers including tracks by the Sonics, the Who, and Al Green. The band was jokingly called ``the Autistics'' on campus due to Byrne's eccentric stage presence.
+
+Frantz began dating fellow RISD student Tina Weymouth (born November 22, 1950, Coronado, California). She did not play bass at the time. The Artistics dissolved in 1974 when members graduated. Importantly, the song ``Psycho Killer'' was already being written during the Artistics period, co-authored by Byrne, Frantz, and Weymouth.
+
+\subsubsection{New York and CBGB (1974--1976)}
+
+The trio moved to New York City in 1974, sharing a communal loft. They were unable to recruit a bassist through auditions. Byrne taught Weymouth to play bass, reportedly encouraging her to study Suzi Quatro albums. Byrne auditioned her three times before accepting her as a band member.
+
+The band played their first gig as Talking Heads on \textbf{June 5, 1975}, opening for the Ramones at CBGB in the East Village. The name ``Talking Heads'' came from a TV Guide article defining the term for a head-and-shoulders television shot: ``all content, no action.'' Within weeks of their debut, the band appeared on the cover of \textit{The Village Voice} in a 1975 article by James Wolcott.
+
+\textbf{Jerry Harrison} (born February 21, 1949, Milwaukee, Wisconsin) had studied architecture at Harvard and played with Jonathan Richman's Modern Lovers. Weymouth, a Modern Lovers fan, phoned Harrison and invited him to see the band play in Boston. Harrison eventually drove to New York for an all-night jam session and became the band's fourth member by early 1977. Harrison's prior experience with the Modern Lovers gave the band harmonic and melodic range that the trio had lacked.
+
+The band signed to \textbf{Sire Records} in November 1976, championed by label founder Seymour Stein. Their first single, ``Love $\to$ Building on Fire,'' was released in February 1977.
+
+\subsubsection{Debut Album: \textit{Talking Heads: 77}}
+
+Recorded at Sundragon Studio in New York with producer Tony Bongiovi (cousin of Jon Bon Jovi), the sessions were turbulent. The album was released in September 1977 to positive critical reception. ``Psycho Killer'' charted briefly and gained additional cultural traction due to its timing with the Son of Sam killings in New York. The album established Byrne's signature: anxious lyrics, a twitchy vocal delivery, and a post-punk sound distinct from the louder aggression of the Ramones or Television.
+
+\subsection{Module 2 Reference: The Eno Arc and Afrobeat Synthesis}
+
+\subsubsection{The Introduction of Brian Eno}
+
+Brian Eno encountered Talking Heads in May 1977 when he accompanied John Cale to a Ramones concert where Talking Heads were supporting. Eno's 1977 song ``King's Lead Hat'' (on the album \textit{Before and After Science}) is an anagram of ``Talking Heads.'' The day after the concert, Eno brought Byrne to his apartment and played him recordings of \textbf{Fela Kuti}, including the album \textit{Afrodisiac}. Eno later told the Guardian: ``I was very excited about this music at the time and they were pretty excited too. It was thrilling because no one in England was at all interested.''
+
+Eno announced he would produce the band's next album, displacing producer John Cale who had already made the same announcement. The Eno collaboration would span three albums and transform the band's musical architecture.
+
+\subsubsection{\textit{More Songs About Buildings and Food} (1978)}
+
+The first Eno collaboration, recorded at Compass Point Studios in Nassau, Bahamas --- a studio relationship the band would maintain for years. Eno added subtle electronic textures and began expanding the band's rhythmic range. The album included a cover of Al Green's ``Take Me to the River'' which became the band's first Billboard Top 30 hit. The Bahamas sessions established a working rhythm: communal recording, Eno as collaborative producer rather than outside director.
+
+\subsubsection{\textit{Fear of Music} (1979)}
+
+Music journalist Simon Reynolds cited this album as representing the Eno--Talking Heads collaboration ``at its most mutually fruitful and equitable.'' The album mixes post-punk darkness with funk and subliminal references to late-1970s geopolitical instability. Eno's Oblique Strategies card approach contributed to the songwriting: when Byrne struggled with lyrics, Eno suggested writing a ``table of contents'' of themes, which became the album's list-like titles: ``Paper,'' ``Air,'' ``Drugs,'' ``Animals.'' The opening track ``I Zimbra'' (co-written by Eno) was the first hint of the full Afrobeat integration to come. The single ``Life During Wartime'' --- ``This ain't no party, this ain't no disco'' --- referenced the Mudd Club and CBGB directly.
+
+\subsubsection{\textit{Remain in Light} (1980)}
+
+Released October 8, 1980, on Sire Records. The band's magnum opus and one of the most critically significant records of the decade. Key facts:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Parameter} & \tableheader{Detail} \\
+\midrule
+Recorded & Compass Point Studios, Nassau; Sigma Sound, New York; July--August 1980 \\
+Primary influence & Fela Kuti's Afrobeat (\textit{Afrodisiac} as compositional template) \\
+Recording methodology & Instrumental groove jams; Byrne/Eno added arrangements and lyrics afterward \\
+Byrne's lyrical approach & Stream-of-consciousness; inspired by early rap and academic texts on Africa \\
+Guest musicians & Adrian Belew (guitar), Nona Hendryx (vocals), Jon Hassell (trumpet), Robert Palmer \\
+Singles & ``Once in a Lifetime'' (Top 20 UK), ``Houses in Motion'' \\
+U.S. chart & No. 19 on Billboard 200 (first Top 40 album) \\
+Library of Congress & Added to National Recording Registry (2017) as ``culturally, historically, or aesthetically significant'' \\
+Equipment innovations & Lexicon 224 Digital Reverberator, Roland guitar synthesizer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The album required an expanded touring band of nine musicians. Harrison recruited Parliament-Funkadelic keyboardist \textbf{Bernie Worrell}, bassist \textbf{Busta ``Cherry'' Jones}, percussionist \textbf{Steven Scales}, guitarist \textbf{Adrian Belew}, and vocalist \textbf{Dolette MacDonald}. The expanded band's first appearance was at the Heatwave festival in Ontario, Canada, on August 23, 1980, before an audience of 70,000.
+
+Byrne stated: ``Even though the music didn't always sound particularly African, it shared that ecstatic communal feeling.'' In a 2017 conversation with the Library of Congress, Byrne described the methodology: ``Our process led us to something with an affinity to afro-funk, but we got there the long way round\ldots we didn't get it quite right, but in missing, we ended up with something new.''
+
+\subsubsection{Adjacent: \textit{My Life in the Bush of Ghosts} (1981)}
+
+Byrne and Eno's collaborative side album, released February 25, 1981, used the same polyrhythmic and found-sound techniques developed for \textit{Remain in Light}. The record incorporated taped radio broadcasts as vocal sources and is considered a pioneering work in sampling methodology. In 2006, stems for two songs were released under Creative Commons licenses for remixing.
+
+\subsection{Module 3 Reference: \textit{Stop Making Sense}}
+
+\subsubsection{Production History}
+
+Director Jonathan Demme encountered Talking Heads during their 1983 Speaking in Tongues tour and approached them about creating a concert film. Filmed over \textbf{four nights at Hollywood's Pantages Theatre}, December 13--16, 1983, with a budget of \$1.2 million, self-financed by the band. Cinematography by Jordan Cronenweth (who also shot \textit{Blade Runner}).
+
+\textbf{Key technical facts:}
+\begin{itemize}[leftmargin=*]
+  \item First music film to use direct-to-film digital re-recording technology
+  \item Originally analog; later transferred via Sony PCM-3324 24-track digital recorder
+  \item Demme's philosophy: minimal cuts, extended takes, no intrusive crowd shots until the final numbers
+  \item The film avoids audience reaction shots to preserve audience energy (filming the crowd required additional lighting that inhibited their movement)
+\end{itemize}
+
+\subsubsection{Staging Architecture}
+
+The film opens with Byrne alone on a bare stage, singing ``Psycho Killer'' to a backing tape on a boombox. With each subsequent song, a new band member or musician arrives, until all nine performers are on stage. This progressive accumulation is the film's structural spine.
+
+The \textbf{Big Suit} worn during ``Girlfriend is Better'' was partly inspired by Noh and Kabuki theater styles Byrne encountered during Japanese touring. Byrne said: ``I was in Japan in between tours and I was checking out traditional Japanese theater --- Kabuki, Noh, Bunraku.'' The suit became the film's iconic image, appearing on the movie poster and in pop culture shorthand.
+
+\subsubsection{Critical Reception and Legacy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Rotten Tomatoes & 100\% (71 reviews); average 9.4/10 \\
+Metacritic & 94/100 (``universal acclaim'') \\
+National Society of Film Critics & Best Non-Fiction Film, 1984 \\
+World premiere & San Francisco International Film Festival, April 24, 1984 (audience danced in aisles) \\
+Library of Congress & Added to National Film Registry (year after \textit{Remain in Light} recording registry addition) \\
+2023 Restoration & 4K IMAX release by A24; premiered at 2023 Toronto International Film Festival \\
+Soundtrack album & Over 2 million copies sold; spent over 2 years on Billboard 200 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Toronto 2023 premiere reunited all four band members for the first time since their 2002 Rock and Roll Hall of Fame induction, with a Q\&A hosted by Spike Lee.
+
+\subsection{Module 4 Reference: Discography and Commercial Reception}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.2cm}C{1cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Album} & \tableheader{Year} & \tableheader{Producer(s)} & \tableheader{Key Notes} \\
+\midrule
+\textit{Talking Heads: 77} & 1977 & Tony Bongiovi & Debut; ``Psycho Killer''; first charting single \\
+\textit{More Songs About Buildings and Food} & 1978 & Brian Eno & First Eno collab; ``Take Me to the River'' Top 30 hit; gold \\
+\textit{Fear of Music} & 1979 & Brian Eno & ``Life During Wartime''; No. 21 Billboard; gold \\
+\textit{Remain in Light} & 1980 & Brian Eno & No. 19 Billboard; Library of Congress; gold \\
+\textit{Speaking in Tongues} & 1983 & Talking Heads & ``Burning Down the House'' Top 10; gold \\
+\textit{Little Creatures} & 1985 & Talking Heads & Best-selling album; double platinum; ``Road to Nowhere'' \\
+\textit{True Stories} & 1986 & Talking Heads & Soundtrack to Byrne's film; gold \\
+\textit{Naked} & 1988 & Steve Lillywhite & Final album; worldbeat influence; Paris sessions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Institutional recognition:}
+\begin{itemize}[leftmargin=*]
+  \item Four albums on \textit{Rolling Stone}'s 2003 ``500 Greatest Albums of All Time''
+  \item Three songs (``Psycho Killer,'' ``Life During Wartime,'' ``Once in a Lifetime'') on Rock and Roll Hall of Fame's ``500 Songs That Shaped Rock and Roll''
+  \item VH1 ``100 Greatest Artists of All Time'': \#64
+  \item \textit{Rolling Stone} ``100 Greatest Artists of All Time'' (2011 update): \#100
+  \item Inducted into Rock and Roll Hall of Fame: \textbf{March 18, 2002} at the Waldorf-Astoria, New York; performed ``Psycho Killer,'' ``Life During Wartime,'' and ``Burning Down the House''
+\end{itemize}
+
+\textbf{Band dissolution:} In December 1991, Byrne announced the band's breakup in a \textit{Los Angeles Times} article without informing his bandmates. In 2020, Chris Frantz published his memoir \textit{Remain in Love} (Scribner), which documents both the love story between himself and Weymouth and the conflicts with Byrne. Weymouth has publicly described Byrne as ``incapable of returning friendship.''
+
+\subsection{Module 5 Reference: Legacy and Measured Influence}
+
+\subsubsection{Explicit Artist Citations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{Specific Citation} \\
+\midrule
+Radiohead & Took band name from 1986 Talking Heads song ``Radio Head''; cited \textit{Remain in Light} as critical influence on \textit{Kid A} (2000) \\
+LCD Soundsystem & James Murphy cites Talking Heads as primary influence; dance-rock synthesis \\
+Arcade Fire & Members have credited influence directly; Byrne joined them onstage to perform ``Heaven''; contributed backup vocals to \textit{The Suburbs} (deluxe edition, 2011) \\
+St. Vincent & Cites Byrne; collaborated with him on album \textit{Love This Giant} (2012) \\
+Franz Ferdinand & Frontman Alex Kapranos cites influence \\
+Trent Reznor & Cites Talking Heads \\
+Danny Brown & Cites influence \\
+The Weeknd & Cites influence \\
+Nelly Furtado & Cites influence \\
+Eddie Vedder & Cites influence \\
+Primus & Cites influence \\
+Foals & Cites influence \\
+Paolo Sorrentino & Italian filmmaker thanked Talking Heads in 2014 Oscar speech for \textit{La Grande Bellezza} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Broader Cultural Legacy}
+
+Fashion: The Big Suit became an enduring cultural symbol of experimental performance design. It has been referenced and reproduced in fashion editorials and music videos for four decades.
+
+Visual culture: Talking Heads' innovative approach to music videos (particularly the ``Once in a Lifetime'' clip, named by \textit{Time} as one of the greatest music videos ever) helped establish the artistic ambitions of the MTV era. Filmmakers Spike Jonze and Michel Gondry have been cited as heirs to this visual philosophy.
+
+David Byrne's post-Heads career: \textit{My Life in the Bush of Ghosts} (1981, with Eno) is recognized as a foundational text in sampling; the Broadway production \textit{American Utopia} (2019) performed Talking Heads songs to critical acclaim and a subsequent Spike Lee film. In June 2025, Byrne released new material (\textit{Who Is the Sky?}) continuing his practice of trans-genre collaboration.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Area} & \tableheader{Boundary Type} & \tableheader{Guidance} \\
+\midrule
+Afrobeat attribution & GATE & Always specify Fela Kuti by name and as Nigerian; do not generalize to ``African music'' without specificity \\
+Interpersonal dynamics & ANNOTATE & Present Weymouth/Frantz/Byrne tensions from published primary sources (\textit{Remain in Love}); avoid editorializing \\
+Source quality & ABSOLUTE & No entertainment blogs or unsourced claims; use published memoirs, institutional sources, major music journalism \\
+Numerical claims & ABSOLUTE & All chart positions, certification numbers, and audience figures attributed to specific sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Sources and Memoirs}
+\begin{itemize}[leftmargin=*]
+  \item Frantz, Chris. \textit{Remain in Love}. Scribner, 2020. (Primary source for band interpersonal history)
+  \item Gittins, Ian. \textit{Talking Heads: Once in a Lifetime: The Stories Behind Every Song}. Published source cited by Rock Era Insider and Grunge.
+  \item Byrne, David. Conversation with Library of Congress, 2017. (On \textit{Remain in Light} methodology)
+\end{itemize}
+
+\subsubsection{Institutional Sources}
+\begin{itemize}[leftmargin=*]
+  \item Library of Congress National Recording Registry. ``Remain in Light.'' Added 2017.
+  \item Library of Congress National Film Registry. \textit{Stop Making Sense}. Added (year of addition confirmed via Classic Pop Magazine reporting).
+  \item Rock and Roll Hall of Fame. Talking Heads induction documentation, March 18, 2002.
+  \item O'Dair, Barbara. ``Talking Heads.'' Rock and Roll Hall of Fame, March 2024. \url{rockhall.com/wp-content/uploads/2024/03/Talking_Heads_2002.pdf}
+\end{itemize}
+
+\subsubsection{Major Music Journalism and Encyclopedias}
+\begin{itemize}[leftmargin=*]
+  \item Erlewine, Stephen Thomas. AllMusic biography of Talking Heads. (``one of the most critically acclaimed bands of the '80s'')
+  \item Robbins, Ira A. Encyclopaedia Britannica entry: ``Talking Heads.'' October 27, 1999 (updated).
+  \item Fricke, David. \textit{Rolling Stone} review of \textit{Speaking in Tongues}.
+  \item Reynolds, Simon. Citation on \textit{Fear of Music} as Eno collaboration ``at its most mutually fruitful and equitable.''
+  \item Fennessey, Sean. Review of \textit{Remain in Light}. \textit{Vibe}, 2008.
+  \item Pareles, Jon. \textit{New York Times} review of \textit{Stop Making Sense} restoration, 2023.
+\end{itemize}
+
+\subsubsection{Professional Interview Sources}
+\begin{itemize}[leftmargin=*]
+  \item Eno, Brian. Interview with NPR on Fela Kuti introduction to Talking Heads.
+  \item Eno, Brian. Interview with the Guardian, 2009. On Fela Kuti: ``thrilling, because no one in England was at all interested.''
+  \item Eno, Brian. Interview with \textit{Rolling Stone}, 1981. On ``I Zimbra'' sessions.
+  \item Byrne, David. Interview with the Independent. On Eno: ``gave me confidence in the studio, to go in with nothing prepared.''
+  \item Weymouth, Tina. \textit{Stop Making Sense} (Deluxe Edition) liner notes, 2023. On Demme as collaborator.
+  \item Harrison, Jerry. Interview, 2024. On Eno's initial reluctance for \textit{Remain in Light}.
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%%  STAGE 3 — MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, sourced, publication-quality research document on Talking Heads covering all five modules: origins and formation, the Eno Afrobeat arc, \textit{Stop Making Sense} as architectural achievement, the full discography with reception history, and legacy with mapped influence. Deliver as a single integrated document suitable for archival reference, educational use, and GSD skill-creator module development.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0 (Foundation)
+  +-- Source Index + Chronological Schema
+  +-- Shared Templates (discography, citation, influence tables)
+
+  WAVE 1A (Parallel Track A)               WAVE 1B (Parallel Track B)
+  +-- Module 1: Origins Survey             +-- Module 3: Stop Making Sense
+  +-- Module 2: Eno Arc Analysis           +-- Module 4: Discography Survey
+
+  WAVE 2 (Synthesis)
+  +-- Module 5: Legacy and Influence Map
+  +-- Cross-Module Integration: Amiga Principle through-line
+  +-- Internal consistency verification
+
+  WAVE 3 (Publication)
+  +-- Final document assembly
+  +-- Source verification pass
+  +-- GSD handoff package
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared schemas, source index, chronological timeline scaffold
+  \item \textbf{Research Layer} --- Five parallel/sequential module documents with full sourcing
+  \item \textbf{Synthesis Layer} --- Cross-module integration, Amiga Principle analysis, through-line development
+  \item \textbf{Publication Layer} --- Final integrated document, verification, GSD packaging
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Origins Module & Timeline 1973--1977 complete; all 4 members profiled; CBGB debut dated & Sourced narrative + timeline table \\
+2 & Eno Arc Module & All 3 Eno albums analyzed; Fela Kuti attribution traced; guest musicians listed & 3-album analysis with production notes \\
+3 & Stop Making Sense Module & Staging architecture documented; 100\% RT confirmed; Big Suit origin sourced & Film analysis with production table \\
+4 & Discography Module & All 8 albums + chart data + certifications & Complete discography table + narrative \\
+5 & Legacy Module & $\ge$8 named artists with specific citations & Influence table + cultural legacy narrative \\
+6 & Synthesis Document & GSD through-line present; no cross-module contradictions & Integrated final document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Source Index & None & Haiku & 2k \\
+Chronological Schema & None & Haiku & 1k \\
+Shared Templates & None & Haiku & 2k \\
+Origins Survey (M1) & Schema & Sonnet & 8k \\
+Eno Arc Analysis (M2) & Schema, Source Index & Opus & 10k \\
+Stop Making Sense (M3) & Schema & Sonnet & 8k \\
+Discography Survey (M4) & Schema & Sonnet & 6k \\
+Legacy Influence Map (M5) & M1--M4 outputs & Opus & 10k \\
+Cross-Module Synthesis & M1--M5 outputs & Opus & 12k \\
+Final Assembly & All modules & Sonnet & 8k \\
+Verification Pass & Final Assembly & Sonnet & 5k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Model} & \tableheader{Pct.} & \tableheader{Assigned Work and Rationale} \\
+\midrule
+Opus & 30\% & Eno Arc (nuanced collaboration history), Legacy Map (cross-genre influence judgment), Synthesis (Amiga Principle through-line, cross-module integration requiring judgment) \\
+Sonnet & 60\% & Origins Survey, Stop Making Sense module, Discography module, Final Assembly, Verification --- structured content with clear sourcing requirements \\
+Haiku & 10\% & Source Index, Chronological Schema, Shared Templates --- scaffolding and structure with no analytical requirements \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Source index, schema, templates \\
+1A & Origins + Eno & Parallel & Sonnet + Opus & Modules 1 and 2 \\
+1B & SMS + Disco & Parallel & Sonnet + Sonnet & Modules 3 and 4 \\
+2 & Synthesis & Sequential & Opus & Module 5 + integration \\
+3 & Publication & Sequential & Sonnet & Final document + verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Build source index & BUDGET (Haiku) & Indexed bibliography with retrieval keys \\
+Build chronology schema & LOG (Haiku) & Dated timeline 1973--2026 \\
+Build shared templates & LOG (Haiku) & Discography table, influence table, film facts table \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (Origins + Eno Arc):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Origins survey & EXEC-1 (Sonnet) & Module 1 document (RISD through Talking Heads: 77) \\
+Eno arc analysis & CRAFT-ENO (Opus) & Module 2 document (3 Eno albums + Afrobeat synthesis) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Stop Making Sense + Discography):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Stop Making Sense analysis & EXEC-2 (Sonnet) & Module 3 document (film architecture + legacy) \\
+Discography survey & CRAFT-HIST (Sonnet) & Module 4 document (8 albums + reception + Hall of Fame) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Legacy / influence map & CRAFT-ENO (Opus) & Module 5 document (named artists, cultural legacy) \\
+Cross-module integration & INTEG (Opus) & Synthesis document with Amiga Principle through-line \\
+Internal consistency check & VERIFY (Sonnet) & Contradiction report + resolution notes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Final document assembly & EXEC-1 (Sonnet) & Integrated single-document deliverable \\
+Source verification pass & VERIFY (Sonnet) & All claims traced to bibliography \\
+GSD packaging & LOG (Sonnet) & Commit messages, milestone summary \\
+HITL review gate & CAPCOM & Human approval before handoff \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Place the source index (Wave 0 output) at top of context in every subsequent wave call
+  \item Run Waves 1A and 1B within a single 5-minute cache window where possible
+  \item Synthesis wave (Wave 2) loads all four module documents in one call; cache TTL exploitation reduces net token cost
+  \item Publication wave batches assembly and verification in a single call
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Total} \\
+\midrule
+Wave 0 (Foundation) & 5k & 5k & 10k \\
+Wave 1A (Track A) & 15k & 18k & 33k \\
+Wave 1B (Track B) & 15k & 14k & 29k \\
+Wave 2 (Synthesis) & 60k & 22k & 82k \\
+Wave 3 (Publication) & 80k & 15k & 95k \\
+\midrule
+\textbf{Total Estimate} & & & \textbf{$\sim$249k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0: Foundation]
+       |
+       +----[W1A-M1: Origins]-------+
+       |                             |
+       +----[W1A-M2: Eno Arc]--------+
+       |                             |
+       +----[W1B-M3: SMS Film]-------+-->[W2: Synthesis + Legacy]-->[W3: Publish]
+       |                             |
+       +----[W1B-M4: Discography]---+
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Target \%} \\
+\midrule
+Safety-critical & 5 & Mandatory & BLOCK & $\ge$15\% \\
+Core functionality & 18 & Required & BLOCK & $\sim$45\% \\
+Integration & 10 & Required & BLOCK & $\sim$25\% \\
+Edge cases & 6 & Best-effort & LOG & $\sim$15\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to major music journalism, institutional sources, peer-reviewed references, or published memoirs. Zero entertainment blogs or unsourced claims. \\
+SC-NUM & Numerical attribution & Every chart position, certification level, ticket sale figure, and audience count attributed to a specific source. \\
+SC-ADV & No advocacy & Document presents evidence of influence and innovation without advocating for specific critical verdicts. \\
+SC-AFR & Afrobeat attribution & All Afrobeat references specify Fela Kuti by name and as Nigerian. No generic ``African music'' claims without nation/artist specificity. \\
+SC-INT & Interpersonal accuracy & Weymouth/Frantz/Byrne tensions presented from primary sources only (\textit{Remain in Love}, published interviews). No invented motivations. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Formation timeline complete (1973--1977) & CF-01, CF-02 & Pending \\
+2. All four members individually profiled & CF-03, CF-04 & Pending \\
+3. All three Eno albums analyzed & CF-05, CF-06, CF-07 & Pending \\
+4. Fela Kuti introduction traced & CF-08, SC-AFR & Pending \\
+5. Stop Making Sense architecture documented & CF-09, CF-10 & Pending \\
+6. Complete discography table & CF-11 & Pending \\
+7. $\ge$8 named influence citations & CF-12, CF-13 & Pending \\
+8. Rolling Stone/Library of Congress/Rock Hall documented & CF-14 & Pending \\
+9. Band interpersonal dynamics covered & CF-15, SC-INT & Pending \\
+10. Internal tensions documented evenhandedly & CF-16, SC-INT & Pending \\
+11. Library of Congress NRR addition (2017) cited & CF-17 & Pending \\
+12. GSD through-line explicit in synthesis & IN-01, IN-02 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; go/no-go gates at wave boundaries \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache strategy \\
+SCOUT & Research Agent & Gap-fill web research; source verification \\
+EXEC-1 & Executor Alpha & Origins module (M1); Final document assembly \\
+EXEC-2 & Executor Beta & Stop Making Sense module (M3) \\
+CRAFT-ENO & Eno/Afrobeat Specialist & Eno Arc module (M2); Legacy and Influence map (M5) \\
+CRAFT-HIST & History Specialist & Discography module (M4); institutional reception \\
+VERIFY & Verification & Source validation; SC test execution; contradiction detection \\
+INTEG & Integration Agent & Cross-module relationship validation; Amiga Principle through-line \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; only human-crossing channel \\
+BUDGET & Resource Manager & Token budget tracking; 5-minute cache TTL exploitation \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & TH-DEEP-RESEARCH-v1.0 \\
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 \\
+Parallel Tracks & 2 (Wave 1A and 1B) \\
+Total Waves & 4 (0 through 3) \\
+Estimated Token Budget & $\sim$249k \\
+Estimated Sessions & 3 \\
+Safety-Critical Tests & 5 (all mandatory-pass/BLOCK) \\
+Total Test Cases & 39 \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+HITL Gates & 1 (end of Wave 3, pre-handoff) \\
+Primary Source & Frantz, \textit{Remain in Love} (2020) + Library of Congress + Rock Hall \\
+Key Sensitivity & Afrobeat attribution (SC-AFR mandatory) \\
+Handoff Target & gsd-skill-creator orchestrator \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\itshape\sffamily
+``Our process led us to something with an affinity to afro-funk, but we got there the long way round, and of course our vision sounded slightly off. We didn't get it quite right, but in missing, we ended up with something new.''
+
+\vspace{0.5em}
+\hfill --- David Byrne, in conversation with the Library of Congress, 2017
+
+\vspace{1em}
+\normalfont\sffamily\small
+The GSD Amiga Principle, rendered in sound: small building blocks, faithfully assembled, imprecisely aimed, produce something no blueprint could have specified. Talking Heads did not optimize for correctness. They optimized for the spaces between.
+\end{quotebox}
+
+\end{document}

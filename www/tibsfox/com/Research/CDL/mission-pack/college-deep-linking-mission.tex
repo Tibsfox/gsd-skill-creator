@@ -1,0 +1,1078 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Academic ────────────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Deep academic indigo
+\definecolor{secondary}{HTML}{E65100}     % Scholarly amber
+\definecolor{tertiary}{HTML}{37474F}      % Architectural slate
+\definecolor{accent}{HTML}{283593}        % Mid-indigo accent
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Indigo wash
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Amber wash
+\definecolor{lighttertiary}{HTML}{ECEFF1}  % Slate wash
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{amberbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ───────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{College Deep Linking}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={College of Knowledge -- Department Deep Linking Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ─── TITLE PAGE ──────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{College of Knowledge\\[0.3em]Department Deep Linking}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Research Dataset Integration \textsf{·} Hi-Fidelity Verbosity\\Learning Pathways \textsf{·} Code Examples}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 8--10 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ───────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{College Department Deep Linking --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Research}
+\metafield{Depends On:}{Cooking with Claude vision, Rosetta Core spec, College Structure spec, 10-Perl-CPAN Addendum, GSD Mathematical Foundations}
+\metafield{Context Window:}{gsd-skill-creator dev branch, v1.49+ (DACP milestone)}
+\metafield{Authors:}{Tibsfox (architecture), GSD Mission Crew}
+
+\subsection{Vision}
+
+The College of Knowledge has a structural insight at its core: code is the curriculum. When a learner walks through a department's source code, they are walking through the subject matter itself --- mathematics, cookery, music --- expressed as explorable, runnable logic. But there is a gap between the code-as-curriculum and the living scholarship that continuously advances each field. Research datasets update. New findings emerge. The scholarly conversation does not stop when the department source file was last committed.
+
+Deep linking closes that gap. It is the connective tissue between the College's static concept graph and the dynamic universe of research that feeds it. A Math Department concept node for \textit{exponential decay} should not merely contain runnable Rosetta Panel expressions --- it should carry a live link to the physics datasets at Zenodo that contain real decay measurements, and a link to the CPAN module that processes their format, and a Bloom-annotated code example that uses actual data to teach the concept. The concept node becomes a \textit{portal}, not a page.
+
+High-fidelity verbosity is the teaching philosophy that makes deep-linked content learnable rather than merely accessible. The history of literate programming --- from Knuth's CWEB through Perl's POD to Jupyter notebooks --- is a history of the realization that code embedded in narrative is more teachable than code alone. The ``spaces between'' the lines of code --- the why, the mathematical underpinning, the historical context, the connection to adjacent concepts --- are where understanding lives. A Rosetta Panel expression without those spaces is a library book without annotations. A deeply-linked, verbosely-annotated panel expression is a guided conversation with the subject matter itself.
+
+The xAPI Learning Record Store provides the tracking layer: every interaction a learner has with a department --- every panel they open, every dataset they query, every code cell they execute --- generates a structured learning statement. Over time, this record shapes a learner's Complex Plane of Experience. The department is not static; it learns too.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Static knowledge decay:} College department concept nodes are authored once and become stale. The scholarly datasets they implicitly reference evolve without updating the concept node's teaching content. A learner studying exponential decay from a 2024 concept node has no access to 2026 measurement datasets from CERN or NOAA --- even when those datasets would make the concept click.
+
+  \item \textbf{Toy data teaches toy lessons:} Rosetta Panel code examples overwhelmingly use fabricated data (temperature arrays, made-up measurements). Real research datasets carry context --- units, collection methodology, uncertainty bounds --- that teach epistemological habits no toy dataset can. Learners who have only ever run code on clean, synthetic data are unprepared for the messy richness of real scholarship.
+
+  \item \textbf{Verbosity without structure is noise:} Adding more annotations to code examples without a pedagogical framework produces commentary, not scaffolding. Bloom's taxonomy provides the missing architecture: code examples should be designed to move learners from Remember through Create, with each level of verbosity serving a specific cognitive objective. Without this framework, high-fidelity comments are walls of text.
+
+  \item \textbf{Learning pathways are invisible:} The College's concept dependency graph exists implicitly in the mathematical foundations (eight-layer progression from \textit{The Space Between}) but has no machine-readable expression that an xAPI LRS can track, an adaptive system can navigate, or a new learner can see. Pathways through the College are undiscoverable.
+
+  \item \textbf{Cross-department deep links are orphaned:} A concept in the Math Department (Fourier transforms) and a concept in the Music Department (timbre analysis) share a mathematical basis. The College has no standard protocol for expressing cross-department deep links, so each department authors its connections ad hoc --- or not at all.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Department as a Living Epistemic Node:} Each College department is a self-contained knowledge structure (concept graph + Rosetta Panel expressions) anchored to the living scholarly ecosystem through typed deep links (dataset catalogs, xAPI learning records, cross-department concept bridges), and expressed to learners through Bloom-scaffolded, maximally-verbose code examples.
+
+\subsubsection{Architecture Map}
+
+\begin{asciibox}
+COLLEGE OF KNOWLEDGE --- DEEP LINK ARCHITECTURE
+================================================
+
+  EXTERNAL SCHOLARSHIP                  COLLEGE DEPARTMENT
+  ─────────────────────                ─────────────────────────
+  Zenodo / OpenAIRE                    Concept Node
+  CKAN Data Catalogs   ──DCAT link──>  ┌──────────────────┐
+  Google Dataset Search                │  concept.ts       │
+  domain portals                       │  ├── panels/      │
+  NOAA / USGS / NASA                   │  │   ├── python   │
+  ArXiv / PubMed                       │  │   ├── cpp      │
+                                       │  │   ├── perl     │
+  LEARNING RECORD STORE                │  │   └── ...      │
+  ─────────────────────                │  ├── datasets/    │
+  xAPI statements ◄────track──────────│  │   └── refs.ts  │
+  Bloom level logging                  │  └── pathway.ts  │
+  ZPD progression                      └──────────────────┘
+  learner profiles                              │
+                                               │ cross-dept link
+  CROSS-DEPARTMENT                              ▼
+  ─────────────────────                SIBLING DEPARTMENT
+  Math ── Music                        Concept Node
+  Math ── Physics                      (same structure)
+  Math ── Cooking
+  Cooking ── Chemistry
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+FIVE RESEARCH MODULES
+=====================
+Module A: Dataset Catalog Integration
+  ├── DCAT / schema.org/Dataset vocabulary
+  ├── CKAN API integration patterns
+  ├── Google Dataset Search indexing
+  ├── Domain portal adapters (Zenodo, NOAA, NASA, PubMed)
+  └── Dataset freshness / version tracking
+
+Module B: Learning Pathway Architecture
+  ├── Concept dependency graph (machine-readable)
+  ├── xAPI statement vocabulary for College interactions
+  ├── Learning Record Store (LRS) schema
+  ├── ZPD progression engine
+  └── Bloom's taxonomy level tracking per concept
+
+Module C: Pedagogical Verbosity Engine
+  ├── Annotation layer specification (3-tier: glance/read/study)
+  ├── Bloom-scaffolded comment templates per panel family
+  ├── Mathematical-symbol-to-code mapping patterns
+  ├── POD lineage: embedded curriculum standard
+  └── Literate programming validation rules
+
+Module D: Rosetta Panel Code Example Standards
+  ├── Panel expression verbosity contract
+  ├── Real-data integration patterns (dataset → code example)
+  ├── Cross-panel consistency rules
+  ├── Fill-in-the-blank and Target Practice patterns
+  └── Auto-grade hooks for LRS tracking
+
+Module E: Department Seeding Protocol
+  ├── New department onboarding checklist
+  ├── Concept-to-dataset mapping workflow
+  ├── Cross-department link registration API
+  ├── Department "birth" xAPI statements
+  └── Stale-link detection and repair pipeline
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A: Dataset Catalog Integration}
+Defines the typed link standard connecting concept nodes to external research datasets. Covers DCAT (W3C Data Catalog Vocabulary), schema.org/Dataset, CKAN API patterns, and domain-specific portal adapters for Zenodo, NOAA, NASA Earthdata, OpenAIRE, PubMed, and arXiv. Specifies freshness tracking so a concept node knows when its linked dataset has been updated.
+
+\subsubsection{Module B: Learning Pathway Architecture}
+Defines machine-readable concept dependency graphs following the eight-layer mathematical progression from \textit{The Space Between}. Specifies xAPI statement vocabulary for all College interaction types (panel opened, code executed, dataset queried, concept marked understood). Defines the LRS schema and ZPD (Zone of Proximal Development) progression engine that selects the next concept node appropriate to a learner's current profile.
+
+\subsubsection{Module C: Pedagogical Verbosity Engine}
+Defines the three-tier annotation architecture (glance: one-line summary; read: pedagogical context and mathematical underpinning; study: full literate-programming treatment including code-to-symbol mapping, historical context, and adjacent concept links). Establishes Bloom's taxonomy scaffolding templates for each panel family. Inherits from POD's code-as-curriculum principle and Knuth's literate programming tradition.
+
+\subsubsection{Module D: Rosetta Panel Code Example Standards}
+Specifies the verbosity contract each panel implementation must satisfy: minimum annotation density per Bloom level, real-dataset integration patterns (loading a DCAT-linked dataset rather than a toy array), fill-in-the-blank scaffolding hooks, and LRS auto-grade events. Covers all seven panels: Python, C++, Java (systems), Perl (bridge), Lisp, Pascal, Fortran (heritage).
+
+\subsubsection{Module E: Department Seeding Protocol}
+Defines the lifecycle of a new department from concept: the onboarding checklist that ensures every concept node has at least one DCAT dataset link, one cross-department bridge, and one fully-annotated code example at each Bloom level. Specifies the cross-department link registration API and stale-link detection pipeline that runs as a scheduled GSD skill.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml --- College Deep Linking Mission
+agnus:                    # Orchestration / DMA / Context Management --- Opus
+  role: mission_director
+  responsibilities:
+    - cross-module dependency enforcement
+    - HITL CAPCOM gate management
+    - context window budget allocation
+    - xAPI vocabulary consistency audit
+
+denise:                   # Display / Output Rendering --- Sonnet
+  role: document_assembly
+  responsibilities:
+    - DCAT/schema.org reference compilation
+    - Panel standard document production
+    - Department seeding protocol formatting
+    - Bloom scaffold template generation
+
+paula:                    # Audio / I/O / Anticipatory --- Sonnet + Haiku
+  role: research_io
+  responsibilities:
+    - web research gap-filling
+    - source validation
+    - dataset catalog API testing patterns
+
+68000:                    # CPU / Glue Logic --- Haiku
+  role: scaffolding
+  responsibilities:
+    - shared schemas and type definitions
+    - JSON-LD template generation
+    - xAPI statement skeleton production
+    - DCAT namespace constants
+
+model_allocation:
+  opus:   30%   # synthesis, cross-module integration, Bloom scaffold design
+  sonnet: 60%   # module document production, panel standard authoring
+  haiku:  10%   # schema scaffolding, template generation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item DCAT / schema.org/Dataset typed link standard for concept nodes
+  \item xAPI statement vocabulary for all five College interaction types
+  \item LRS schema design and integration patterns
+  \item Three-tier Bloom-scaffolded annotation specification
+  \item Seven-panel verbosity contract (Python, C++, Java, Perl, Lisp, Pascal, Fortran)
+  \item Concept dependency graph format (JSON-LD)
+  \item Department onboarding checklist and seeding protocol
+  \item Cross-department link registration API specification
+  \item Real-dataset integration pattern for Math and Cooking departments (as pilot)
+  \item Stale-link detection skill specification
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Live LRS deployment or hosting (infrastructure milestone, post-v1.0)
+  \item VHDL hardware-description panel (v2.0)
+  \item Music Department seeding (scheduled for separate mission pack)
+  \item Machine learning--based ZPD prediction engine (research milestone)
+  \item Multi-language human-language support (Spanish, Mandarin, etc.) in annotations
+  \item College-wide search and discovery UI
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item DCAT link standard is specified with valid JSON-LD schema; at least one Math and one Cooking concept node demonstrates a live dataset link.
+  \item xAPI statement vocabulary covers all five College interaction types with IRI-compliant verb definitions.
+  \item LRS schema stores and retrieves Bloom-level data per concept per learner without information loss.
+  \item Concept dependency graph for the Math Department eight-layer progression is machine-readable and validated against the unit circle synthesis document.
+  \item Three-tier annotation specification (glance/read/study) is defined with concrete templates for all seven panel families.
+  \item Every panel verbosity contract includes at least one Bloom-scaffolded, real-dataset-powered code example for exponential decay (the flagship cross-department concept).
+  \item Fill-in-the-blank and Target Practice scaffolding patterns are specified for at least three Bloom levels (Remember, Apply, Analyze).
+  \item Cross-department link registration API accepts and validates Math-to-Music and Math-to-Cooking bridge definitions.
+  \item Department seeding protocol is a complete, executable checklist requiring zero additional context to follow.
+  \item Stale-link detection skill specification includes detection logic, threshold definition, and repair escalation path.
+  \item All DCAT dataset references point to real, live, professionally-maintained open data sources.
+  \item Mission package is self-contained: a fresh GSD orchestrator can execute all waves from this document alone.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Integration Point} \\
+\midrule
+Cooking with Claude Vision & Parent & College Structure, Rosetta Core definition \\
+Rosetta Core Spec & Parent & Panel interface this mission extends \\
+College Structure Spec & Parent & Department model this mission populates \\
+10-Perl-CPAN Addendum & Sibling & Perl as bridge panel; CPAN as dataset ecosystem precedent \\
+Math Department Blueprint & Sibling & Pilot department for Module A/B/C/D output \\
+GSD Mathematical Foundations & Foundation & Eight-layer progression for Module B dependency graph \\
+The Space Between (TSB) & Foundation & Mathematical underpinning of all annotation content \\
+GSD ISA Vision & Sibling & Token-efficient communication connects to xAPI verbosity budget \\
+Skill-Creator Observation Loop & Consumer & LRS data feeds the six-step observe/detect/suggest loop \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between the code lines are where understanding lives. This has always been true --- Knuth knew it when he invented literate programming in 1984, Perl knew it when it embedded POD documentation directly in source code in 1994, and Jupyter knew it when it wove executable cells into narrative prose in 2014. The College of Knowledge is the next iteration of this lineage: an entire institution built on the principle that code \textit{is} the curriculum, and that every space between a function call and its closing bracket is a teaching moment waiting to be filled.
+
+Deep linking to research datasets is the College's way of ensuring that those teaching moments connect to real scholarship rather than textbook abstraction. When a learner executes a Perl closure factory on actual radioactive decay measurements from CERN's open data portal --- measurements taken last Tuesday, with real uncertainty bounds and real unit conversions --- something different happens than when they run the same closure on a synthetic array. The data is alive. The concept becomes alive too. The Amiga Principle applies here as it does everywhere in this ecosystem: you do not need brute force when you have architectural leverage. One well-chosen real dataset, deeply linked and verbosely annotated, teaches more than a hundred toy examples.
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{College Department Deep Linking --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from web research and ecosystem knowledge. It is organized by module. Each section provides the research foundation an agent needs to produce the corresponding deliverable without independent web research.
+
+\textbf{Key source organizations:}
+\begin{itemize}[noitemsep]
+  \item W3C --- DCAT vocabulary, Data Catalog Vocabulary, RDF standards
+  \item ADL (Advanced Distributed Learning) --- xAPI specification, cmi5 profile
+  \item Project Jupyter / NumFOCUS --- Teaching and Learning with Jupyter handbook
+  \item schema.org community --- Dataset type specification, JSON-LD encoding
+  \item OpenAIRE / Zenodo --- European open research data infrastructure
+  \item resources.data.gov --- DCAT-US Schema v1.1 (US federal open data standard)
+  \item Berkeley School of Education --- Jupyter pedagogy research
+  \item IEEE --- xAPI standard (IEEE 9274.1.1-2023)
+\end{itemize}
+
+\subsection{Module A Reference: Dataset Catalog Integration}
+
+\subsubsection{DCAT: The W3C Data Catalog Vocabulary}
+
+DCAT is the authoritative W3C vocabulary for describing datasets and data catalogs in RDF. DCAT-US (v1.1) is the US federal implementation used at data.gov and maintained at resources.data.gov. The vocabulary defines three primary types: \texttt{dcat:Catalog} (a collection of datasets), \texttt{dcat:Dataset} (a single dataset), and \texttt{dcat:Distribution} (a specific format/access point for a dataset).
+
+DCAT-US specifies three tiers of metadata fields: Required, Required-if (conditionally required), and Expanded. Required fields include \texttt{title}, \texttt{description}, \texttt{contactPoint}, \texttt{publisher}, \texttt{identifier}, \texttt{accessLevel}, and \texttt{bureauCode}. The \texttt{accessLevel} field distinguishes public, restricted-public, and non-public datasets --- critical for College concept nodes that need to cite publicly accessible datasets.
+
+\textbf{Key integration point:} The DCAT-US field mappings explicitly cross-reference Schema.org, CKAN, and v1.0 field equivalents, providing the translation layer needed to bridge different open data portals. A College concept node's \texttt{datasetLink} field should use DCAT IRIs internally but render cleanly in human-readable UI as a simple dataset name and access URL.
+
+\subsubsection{schema.org/Dataset and Google Dataset Search}
+
+Schema.org's \texttt{Dataset} type was originally based on DCAT and is now the mechanism by which Google Dataset Search indexes open research data. As of 2022, over 44\% of websites include JSON-LD schema markup; Google's Dataset Search crawler specifically harvests \texttt{schema.org/Dataset} annotations. This means College department concept nodes can become discoverable through Google Dataset Search simply by including valid JSON-LD \texttt{Dataset} references in their metadata.
+
+The DSKG (Dataset Knowledge Graph) at \texttt{http://dskg.org} demonstrates the research infrastructure approach: a SPARQL-queryable RDF knowledge graph containing metadata from 2,208 datasets with 813,551 links to scientific publications, cross-linked via ORCID for author disambiguation. The DSKG is built from OpenAIRE and Wikidata sources and mapped to DCAT. It represents the kind of authoritative, machine-queryable dataset catalog that College concept nodes should link to rather than linking directly to individual dataset files.
+
+\subsubsection{CKAN: The Open Data Infrastructure}
+
+CKAN (Comprehensive Knowledge Archive Network), born from CPAN's 1995 architecture, provides the 20-year-proven open data cataloging infrastructure. CKAN exposes a JSON API at \texttt{/api/3/action/package\_list} and related endpoints; CKAN metadata fields map directly to DCAT as documented in DCAT-US v1.1. The College's CKAN integration pattern should use the CKAN Action API rather than scraping, providing stable, version-tracked dataset references.
+
+Primary CKAN instances for College department dataset linking:
+\begin{itemize}[noitemsep]
+  \item \textbf{data.gov} --- US federal open data; DCAT-US compliant
+  \item \textbf{datahub.io} --- curated datasets across domains
+  \item \textbf{data.europa.eu} --- European open data with DCAT-AP metadata
+  \item \textbf{Zenodo (CERN)} --- research data repository; REST API; CC-BY licensed by default
+  \item \textbf{OpenAIRE} --- European research output; 146M publication links
+\end{itemize}
+
+\subsubsection{Domain-Specific Open Data Sources by Department}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Department} & \tableheader{Primary Dataset Source} & \tableheader{Key Dataset Types} \\
+\midrule
+Mathematics & Zenodo + arXiv & Computational benchmarks, numeric datasets \\
+Physics & CERN Open Data Portal & Particle physics measurements, decay data \\
+Cooking/Food Science & USDA FoodData Central & Nutritional data, thermodynamic measurements \\
+Music & Zenodo (MIR datasets) & Audio features, frequency data, corpus datasets \\
+Computer Science & Papers With Code & ML benchmarks, algorithm performance \\
+Statistics & NIST Statistical Reference Datasets & Reference datasets for algorithm validation \\
+Ecology & USGS BISON, iNaturalist & Species occurrence, ecological measurements \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module B Reference: Learning Pathway Architecture}
+
+\subsubsection{xAPI: The Experience API (IEEE 9274.1.1-2023)}
+
+xAPI (also known as Tin Can API) is the IEEE-approved standard for tracking learning experiences across platforms and contexts. The core data model is the \textbf{xAPI statement}: a JSON object following the ``Actor + Verb + Object'' pattern, for example: \textit{``Learner executed the Python panel expression for exponential-decay in the Math Department at Bloom level Apply.''} Statements are stored in a Learning Record Store (LRS) --- a server that receives, stores, and serves xAPI statements via HTTP.
+
+Unlike SCORM (which could only track interactions within a single LMS), xAPI crosses system boundaries. A learner who executes a panel expression in GSD-OS, reads the gloss annotation in the web UI, and then queries a linked Zenodo dataset all generate distinct xAPI statements --- all flowing to the same LRS. This cross-context tracking is precisely what the College needs: understanding lives in the spaces between systems, and xAPI tracks the spaces.
+
+\textbf{Critical technical detail:} The ADL LRS Test Suite provides 1,300 specification conformance tests and issues certificates. Before deploying an LRS for the College, the implementation must pass the ADL Test Suite. xAPI Profiles (standardized IRI-based verb and activity type vocabularies) prevent vocabulary fragmentation --- the College must define its own xAPI Profile with College-specific verb IRIs.
+
+\subsubsection{Proposed College xAPI Statement Vocabulary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Verb IRI (college.gsd/vocab/)} & \tableheader{Human Label} & \tableheader{Triggered When} \\
+\midrule
+\texttt{opened-panel} & Opened Panel & Learner opens a Rosetta Panel expression \\
+\texttt{executed-code} & Executed Code & Learner runs a code cell in a panel \\
+\texttt{queried-dataset} & Queried Dataset & Learner fetches or filters a linked dataset \\
+\texttt{completed-bloom-level} & Completed Bloom Level & Learner passes a Bloom-level checkpoint \\
+\texttt{navigated-pathway} & Navigated Pathway & Learner follows a concept dependency link \\
+\texttt{bridged-department} & Bridged Department & Learner follows a cross-department concept link \\
+\texttt{annotated-code} & Annotated Code & Learner adds personal notes to a panel expression \\
+\texttt{assessed-understanding} & Self-Assessed & Learner self-rates their comprehension \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Bloom's Taxonomy Ladder in the College}
+
+Bloom's taxonomy provides the six-rung cognitive ladder: Remember, Understand, Apply, Analyze, Evaluate, Create. Research from Berkeley and mechanical engineering thermodynamics courses demonstrates that Jupyter notebooks (and by extension any executable-code learning environment) are specifically effective at moving learners from the lower three rungs (passive knowledge) to the upper three (active synthesis).
+
+The College's Bloom mapping for code examples:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Bloom Level} & \tableheader{Code Pattern} & \tableheader{Panel Annotation Requirement} \\
+\midrule
+Remember & Read-only panel, no modification & Gloss-tier annotation; formula stated explicitly \\
+Understand & Panel with worked example and explanation & Read-tier annotation; symbol-to-code mapping \\
+Apply & Fill-in-the-blank panel with test assertion & Study-tier annotation; real dataset reference \\
+Analyze & Panel with data exploration scaffold & Full literate-programming treatment; dataset query \\
+Evaluate & Comparative panels (two approaches) & Cross-panel comparison annotation \\
+Create & Empty panel with specification only & Study-tier with design rationale scaffold \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Zone of Proximal Development (ZPD) and Pathway Sequencing}
+
+Vygotsky's ZPD defines the ``sweet spot'' of learning difficulty: concepts a learner cannot yet grasp alone but can reach with scaffolding. The College's dependency graph encodes ZPD implicitly --- a concept reachable by traversing $n$ prerequisite edges from the learner's current frontier is within reach with $n$ units of scaffolding. The pathway engine should prefer concepts at ZPD distance 1--3 from the learner's current frontier, surfacing them as ``next recommended'' concept nodes.
+
+The eight-layer mathematical progression from \textit{The Space Between} provides the canonical ZPD ordering for the Math Department: Unit Circle $\rightarrow$ Pythagorean Theorem $\rightarrow$ Trigonometry $\rightarrow$ Vector Calculus $\rightarrow$ Set Theory $\rightarrow$ Category Theory $\rightarrow$ Information Systems Theory $\rightarrow$ L-Systems. Each layer is a ZPD step. The dependency graph must encode these ordered edges, not merely adjacency.
+
+\subsection{Module C Reference: Pedagogical Verbosity Engine}
+
+\subsubsection{The Literate Programming Lineage}
+
+The pedagogical verbosity engine inherits from a direct lineage:
+
+\begin{itemize}
+  \item \textbf{Knuth, CWEB (1984):} Programs are literature addressed to humans. Code is woven from prose and code fragments, both expressing the same idea in different registers. The TeX typesetting system was itself built using literate programming --- a tool built to build knowledge.
+  \item \textbf{Wall, POD (1994):} Perl's Plain Old Documentation embeds curriculum directly in source code. The interpreter ignores POD sections; documentation tools ignore code sections. Same file, dual audience. Every CPAN module carries its own teaching document as a structural invariant.
+  \item \textbf{Jupyter (2014):} Literate programming for the scientific computing era. Code cells execute; prose cells explain. At the top of Bloom's Taxonomy, students author complete ``computational essays.'' Berkeley research finds that students completing a full CFD module in Jupyter notebooks in two days match five weeks of traditional classroom instruction.
+\end{itemize}
+
+The College's three-tier annotation system formalizes this lineage into a structured verbosity contract:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{Reader Speed} & \tableheader{Content Specification} \\
+\midrule
+Glance & 10 seconds & One-line concept summary; what this code does in plain language \\
+Read & 2--3 minutes & Pedagogical context; mathematical underpinning; symbol-to-code mapping; why this approach \\
+Study & 15--30 minutes & Full literate-programming treatment; historical lineage; dataset provenance; adjacent concept links; exercises at Bloom levels Apply and Analyze \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Scaffolding Principles from Jupyter Research}
+
+Research from the Teaching and Learning with Jupyter handbook (Berkeley, 2018) establishes these empirical scaffolding principles directly applicable to the College's verbosity engine:
+
+\begin{itemize}
+  \item \textbf{Granularity calibration:} Learners can see and inspect surrounding code without being required to touch it. Scaffolding must match the concept's isolation --- if the critical idea is inside a for loop, show only the loop interior, not the full program.
+  \item \textbf{Symbol-to-code connection is mandatory:} There must be a clear, explicit connection between mathematical symbols (e.g., $\sum$) and their code expression (e.g., the for loop accumulator). Without this, learners study syntax without understanding.
+  \item \textbf{Real-world workflow over isolation:} Studying a concept in isolation may make it accessible but removes context. The verbosity engine must scaffold the concept's \textit{reason for existing}, not just its definition.
+  \item \textbf{Complexity ceiling:} Excessive scaffolding complexity causes learners to study the scaffolding rather than the concept. The verbosity engine must define maximum complexity thresholds per Bloom level.
+  \item \textbf{Fill-in-the-blank for practice:} A complete working example with some elements removed --- accompanied by a test assertion the filled-in code must pass --- is the highest-leverage pattern for the Apply level. This pattern is directly applicable to Rosetta Panel expressions.
+\end{itemize}
+
+\subsection{Module D Reference: Rosetta Panel Code Example Standards}
+
+\subsubsection{Panel Family Verbosity Profiles}
+
+Each of the seven panels has characteristic verbosity strengths based on the panel's pedagogical identity:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Panel} & \tableheader{Family} & \tableheader{Verbosity Strength} \\
+\midrule
+Python & Systems & Readable syntax mirrors pseudocode; ideal for Understand/Apply tier \\
+C++ & Systems & Explicit type declarations teach concept precision; ideal for Analyze tier \\
+Java & Systems & Object encapsulation teaches concept abstraction; Evaluate tier \\
+Perl & Bridge & POD blocks are native study-tier content; regex teaches formal language; ideal for cross-concept bridges \\
+Lisp & Heritage & Homoiconicity teaches code-as-data; s-expressions match mathematical notation; ideal for Category Theory \\
+Pascal & Heritage & Wirth's pedagogical design makes constraints explicit; ideal for Remember/Understand tiers \\
+Fortran & Heritage & Scientific computing lineage connects directly to research datasets; ideal for Apply with real data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Exponential Decay: The Flagship Real-Dataset Example}
+
+Exponential decay ($N(t) = N_0 \cdot e^{-\lambda t}$) is the College's cross-department anchor concept --- present in the Math Department (calculus), the Physics module (radioactive decay), and the Cooking Department (Newton's cooling law). The flagship verbosity example must:
+
+\begin{enumerate}[noitemsep]
+  \item Fetch real measurement data from CERN Open Data Portal (particle physics) or NIST decay datasets
+  \item Express the decay function in all seven panels with Bloom-appropriate annotations
+  \item Include a fill-in-the-blank version at the Apply level
+  \item Cross-link to the Cooking Department's Newton's cooling application
+  \item Track the code execution as an xAPI \texttt{executed-code} statement with \texttt{bloomLevel: "Apply"} extension
+\end{enumerate}
+
+\subsection{Module E Reference: Department Seeding Protocol}
+
+\subsubsection{CPAN as the Existence Proof}
+
+CPAN's architecture since 1995 demonstrates the department seeding pattern at scale: 220,000 modules, 14,500 contributors, automated testing, namespace coordination, mirror networks, dependency resolution. Every CPAN module carries its own POD documentation (embedded curriculum), its own dependency declarations (concept prerequisites), and its own test suite (Bloom-level verification). CKAN adapted these patterns for open data in 2006.
+
+The College's department seeding protocol adapts the CPAN pattern: each new department is a namespace, each concept node is a module, each dataset link is a dependency declaration, and each Bloom-level test is an automated test in the department's suite.
+
+\subsubsection{Stale Link Detection}
+
+A dataset link becomes stale when the linked resource returns a non-200 HTTP status, its \texttt{dcat:modified} timestamp exceeds a configurable threshold (default: 365 days without update), or its schema version changes incompatibly. The stale-link detection skill should run as a scheduled GSD observation loop task and emit stale-link events as xAPI statements with a \texttt{flagged-stale} verb, routing them to the CAPCOM gate for human review.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+Indigenous dataset sovereignty & ABSOLUTE & No Indigenous community datasets linked without explicit OCAP\textregistered{} compliance verification; nation-specific attribution always \\
+Learner data privacy (LRS) & GATE & All xAPI learner identifiers must be anonymized by default; FERPA/GDPR compliance required before deployment \\
+Dataset license verification & GATE & Only CC-BY or equivalent open licenses linked by default; \texttt{dcat:license} field must be populated \\
+Sensitive research domains & ANNOTATE & Medical, environmental, and weapons-adjacent datasets flagged with content sensitivity classifications \\
+Stale data teaching harm & ANNOTATE & Code examples using live datasets must display data vintage prominently to prevent learners from treating stale measurements as current \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Standards and Specifications}
+
+\begin{itemize}
+  \item W3C. (2020). \textit{Data Catalog Vocabulary (DCAT) -- Version 2}. W3C Recommendation. \url{https://www.w3.org/TR/vocab-dcat-2/}
+  \item IEEE. (2023). \textit{IEEE 9274.1.1-2023: Standard for Learning Technology -- xAPI}. \url{https://xapi.com/}
+  \item ADL Initiative. \textit{xAPI Specification}. \url{https://github.com/adlnet/xAPI-Spec}
+  \item resources.data.gov. \textit{DCAT-US Schema v1.1 (Project Open Data Metadata Schema)}. \url{https://resources.data.gov/resources/dcat-us/}
+  \item schema.org. \textit{Dataset type specification}. \url{https://schema.org/Dataset}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}
+  \item Färber, M., \& Lamprecht, D. (2021). The data set knowledge graph: Creating a linked open data source for data sets. \textit{Quantitative Science Studies}, 2(4), 1324--1355. \url{http://dskg.org}
+  \item Barba, L. A. et al. (2019). \textit{Teaching and Learning with Jupyter}. Open handbook, George Washington University. \url{https://jupyter4edu.github.io/jupyter-edu-book/}
+  \item Moriyama, C. (2020). Climbing Bloom's Taxonomy with Jupyter Notebooks: Experiences in Mechanical Engineering. \textit{Engineering Archive}. \url{https://engrxiv.org/preprint/view/869}
+\end{itemize}
+
+\subsubsection{Professional Organizations and Platforms}
+
+\begin{itemize}
+  \item CKAN Project. \textit{CKAN Open Source Data Portal}. \url{https://ckan.org}
+  \item Zenodo / CERN. \textit{Open Research Data Repository}. \url{https://zenodo.org}
+  \item OpenAIRE. \textit{European Open Science Infrastructure}. \url{https://openaire.eu}
+  \item USDA Agricultural Research Service. \textit{FoodData Central}. \url{https://fdc.nal.usda.gov}
+  \item Rustici Software / ADL. \textit{xAPI.com}. \url{https://xapi.com}
+\end{itemize}
+
+\subsubsection{GSD Ecosystem References}
+
+\begin{itemize}
+  \item Foxglove, M.T. \textit{The Space Between} (923 pp). \url{https://tibsfox.com/media/The_Space_Between.pdf}
+  \item GSD Project Knowledge: \texttt{cooking-with-claude-compiled-session.md} --- Rosetta Core and College Structure
+  \item GSD Project Knowledge: \texttt{10-perl-cpan-addendum.md} --- CPAN/CKAN lineage, Perl bridge panel
+  \item GSD Project Knowledge: \texttt{unit-circle-skill-creator-synthesis.md} --- Math Department eight-layer progression
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce the complete technical specification for College of Knowledge department deep linking: the DCAT/schema.org dataset link standard, xAPI learning pathway tracking, three-tier Bloom-scaffolded annotation system, seven-panel verbosity contract, and department seeding protocol. Deliver a self-contained package enabling a GSD orchestrator to produce all deliverables without additional context.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW
+========================
+Wave 0: Foundation
+  [Haiku] Shared schemas: DCAT type defs, xAPI vocabulary IRIs,
+          Bloom level constants, panel family enum
+
+Wave 1: Parallel Research + Document Tracks
+  Track A (Sonnet+Opus):     Track B (Sonnet):
+  Module A: Dataset Catalog   Module D: Panel Code Standards
+  Module B: Learning Pathway  Module E: Dept Seeding Protocol
+  Module C: Verbosity Engine
+
+Wave 2: Synthesis (Opus)
+  Cross-module integration: DCAT links ↔ xAPI tracking ↔ Bloom scaffold
+  Flagship exponential decay example (all 7 panels + dataset + LRS hook)
+  Cross-department bridge registration API spec
+
+Wave 3: Publication + Verification (Sonnet)
+  PDF assembly, test plan execution, HITL review
+  Final package: 5 module specs + 1 flagship example + 1 API spec
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Schema Layer:} DCAT/JSON-LD dataset link types, xAPI IRI vocabulary, Bloom constant definitions (Haiku, Wave 0)
+  \item \textbf{Catalog Integration Layer:} DCAT link standard, CKAN API patterns, domain portal adapters (Module A, Wave 1A)
+  \item \textbf{Pathway Layer:} xAPI statement vocabulary, LRS schema, ZPD dependency graph (Module B, Wave 1A)
+  \item \textbf{Verbosity Layer:} Three-tier annotation specification, Bloom scaffold templates, literate programming rules (Module C, Wave 1A)
+  \item \textbf{Panel Standard Layer:} Seven-panel verbosity contract, real-dataset integration patterns (Module D, Wave 1B)
+  \item \textbf{Protocol Layer:} Department seeding checklist, cross-dept link API, stale-link detection (Module E, Wave 1B)
+  \item \textbf{Synthesis Layer:} Cross-module flagship example, integrated API spec (Wave 2)
+  \item \textbf{Publication Layer:} All deliverables formatted and verified (Wave 3)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.4cm}L{4cm}L{5cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec File} \\
+\midrule
+1 & Shared Schemas & Valid TypeScript; all IRIs resolve; compiles without errors & \texttt{00-schemas.ts} \\
+2 & Dataset Catalog Spec & DCAT link standard; 3 domain portal adapters documented & \texttt{01-catalog-spec.md} \\
+3 & Learning Pathway Spec & xAPI vocabulary; LRS schema; ZPD graph format; 8-layer Math progression encoded & \texttt{02-pathway-spec.md} \\
+4 & Verbosity Engine Spec & 3-tier system; 7 panel templates; scaffolding rules with examples & \texttt{03-verbosity-spec.md} \\
+5 & Panel Code Standards & Verbosity contract per panel; real-dataset integration patterns & \texttt{04-panel-standards.md} \\
+6 & Dept Seeding Protocol & Complete checklist; cross-dept API spec; stale-link skill spec & \texttt{05-seeding-protocol.md} \\
+7 & Flagship Example & Exponential decay in all 7 panels; Zenodo/CERN dataset link; xAPI hook & \texttt{06-flagship-example/} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Shared schemas (TypeScript) & None & Haiku & 4K \\
+DCAT link standard doc & Schemas & Sonnet & 12K \\
+CKAN / portal adapter patterns & DCAT doc & Sonnet & 8K \\
+xAPI vocabulary spec & Schemas & Sonnet & 8K \\
+LRS schema design & xAPI vocab & Sonnet & 6K \\
+ZPD dependency graph format & Math progression & Opus & 10K \\
+Three-tier annotation spec & Bloom research & Opus & 14K \\
+Panel verbosity templates ($\times$7) & Annotation spec & Sonnet & 18K \\
+Fill-in-blank/Target Practice patterns & Panel templates & Sonnet & 8K \\
+Panel code standards doc & Panel templates & Sonnet & 10K \\
+Seeding protocol checklist & All module specs & Opus & 10K \\
+Cross-dept link API spec & Seeding protocol & Sonnet & 8K \\
+Stale-link detection skill spec & Seeding protocol & Sonnet & 6K \\
+Flagship exponential decay example & All specs & Opus & 20K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}C{1.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Purpose} & \tableheader{Mode} & \tableheader{Est. Tokens} & \tableheader{Sessions} \\
+\midrule
+0 & Foundation schemas & Sequential & 8K & 0.5 \\
+1A & Modules A/B/C & Parallel & 58K & 2 \\
+1B & Modules D/E & Parallel & 42K & 1.5 \\
+2 & Synthesis + flagship & Sequential & 30K & 1 \\
+3 & Publication + verify & Sequential & 10K & 0.5 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total}} & \textbf{148K} & \textbf{5.5} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{4cm}XC{1.5cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+0.1 & DCAT type definitions & TypeScript interfaces for \texttt{DatasetLink}, \texttt{DataCatalog}, \texttt{Distribution} & Haiku & 2K \\
+0.2 & xAPI IRI constants & All 8 College verb IRIs; Bloom level enum; panel family enum & Haiku & 1.5K \\
+0.3 & Bloom constant map & Bloom levels 1--6 with LRS extension key names & Haiku & 0.5K \\
+0.4 & Panel family enum & 7 panels with family classification and pedagogical focus metadata & Haiku & 1K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Tracks}
+
+\textbf{Track 1A: Catalog + Pathway + Verbosity (CRAFT-CATALOG, CRAFT-PEDAGOGY)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{3.5cm}XC{1.5cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+1A.1 & DCAT link standard & Full spec with JSON-LD example and field mapping to schema.org & Sonnet & 0.1 \\
+1A.2 & Portal adapter patterns & CKAN API, Zenodo REST, OpenAIRE; integration code patterns & Sonnet & 1A.1 \\
+1A.3 & xAPI vocabulary doc & All 8 verbs with IRI, description, extension fields & Sonnet & 0.2 \\
+1A.4 & LRS schema design & Statement storage schema; Bloom indexing; privacy-by-default & Sonnet & 1A.3 \\
+1A.5 & ZPD dependency graph & JSON-LD format; Math Dept 8-layer encoding; traversal algorithm & Opus & 0.1, 0.3 \\
+1A.6 & Three-tier annotation spec & Glance/Read/Study definitions; templates per panel family & Opus & 0.4, 1A.5 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track 1B: Panel Standards + Seeding Protocol (CRAFT-PANEL, EXEC-B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{3.5cm}XC{1.5cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+1B.1 & Panel verbosity contract & Per-panel verbosity requirements; annotation density minimums & Sonnet & 0.4 \\
+1B.2 & Real-dataset integration & Patterns for loading DCAT-linked data in each panel; error handling & Sonnet & 1B.1, 0.1 \\
+1B.3 & Fill-in-blank patterns & Scaffold patterns at Apply/Analyze; test assertion templates & Sonnet & 1B.1 \\
+1B.4 & Panel code standards doc & Compiled verbosity contract; all patterns; acceptance criteria & Sonnet & 1B.1-3 \\
+1B.5 & Seeding protocol checklist & New-dept onboarding; concept-to-dataset mapping workflow & Opus & 0.1-4 \\
+1B.6 & Cross-dept link API spec & Registration endpoint; link type taxonomy; validation rules & Sonnet & 1B.5 \\
+1B.7 & Stale-link detection skill & Detection logic; threshold config; xAPI event emission; repair escalation & Sonnet & 1B.5 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\textbf{HITL CAPCOM gate before Wave 2:} Review cross-module consistency; confirm Zenodo/CERN dataset license and API stability; approve flagship example scope.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{4cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+2.1 & Cross-module integration audit & Verify DCAT types used consistently in all 5 module specs & Opus & All 1x \\
+2.2 & Flagship example (Python) & Exponential decay: fetch Zenodo dataset, annotate all 3 tiers, xAPI hook & Opus & 2.1 \\
+2.3 & Flagship example (6 panels) & Translate Python flagship to C++, Java, Perl, Lisp, Pascal, Fortran & Sonnet & 2.2 \\
+2.4 & Cross-dept bridge example & Math $\rightarrow$ Cooking exponential decay bridge registration & Sonnet & 1B.6 \\
+2.5 & Synthesis validation & All 7 panels produce consistent output on same dataset & Opus & 2.3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{4cm}XC{1.5cm}C{1.2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Deps} \\
+\midrule
+3.1 & Test plan execution & Run all 40 tests against produced deliverables & Sonnet & All 2x \\
+3.2 & Verification matrix & Map all 12 success criteria to test results & Sonnet & 3.1 \\
+3.3 & Package assembly & Collect all 7 deliverable files into structured output directory & Sonnet & 3.1 \\
+3.4 & Commit messages & Write GSD-format commit messages for each deliverable & Haiku & 3.3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Schemas (Wave 0) cached as shared system prompt prefix for all Wave 1 agents
+  \item DCAT type definitions (0.1) included in both Track 1A and 1B system prompts
+  \item xAPI IRI constants (0.2) included in all agents that reference learning tracking
+  \item Panel family enum (0.4) included in Track 1B and Wave 2 system prompts
+  \item Research reference (Stage 2 of this document) included in Wave 1 agent contexts
+  \item Cache TTL: 5 minutes per GSD protocol; schedule wave transitions to exploit TTL
+\end{itemize}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+[0.1 DCAT Types] ──────────┐
+[0.2 xAPI IRIs] ──────────┤──> [1A.1] ──> [1A.2]
+[0.3 Bloom Map] ──────────┤──> [1A.3] ──> [1A.4]
+[0.4 Panel Enum] ──────────┘──> [1A.5] ──> [1A.6]
+                               [1B.1] ──> [1B.2]
+                                      └──> [1B.3] ──> [1B.4]
+                               [1B.5] ──> [1B.6]
+                                      └──> [1B.7]
+
+          ┌─────────────────────────────────────┐
+          │         CAPCOM GATE                  │
+          └─────────────────────────────────────┘
+
+[All 1A] ──┐
+[All 1B] ──┴──> [2.1] ──> [2.2] ──> [2.3] ──> [2.4] ──> [2.5]
+
+[All 2x] ──> [3.1] ──> [3.2] ──> [3.3] ──> [3.4]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 18 & Required & BLOCK \\
+Integration & 10 & Required & BLOCK \\
+Edge cases & 6 & Best-effort & LOG \\
+\midrule
+\textbf{Total} & \textbf{40} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All cited datasets are from government agencies, peer-reviewed repositories (Zenodo/OpenAIRE), or professional organizations; zero entertainment media or unverified blogs \\
+SC-NUM & Numerical attribution & Every dataset count, API version, and performance claim attributed to specific documented source \\
+SC-ADV & No policy advocacy & Document presents standards and findings without advocating specific legislative positions on open data policy \\
+SC-LRS & Learner data privacy & LRS schema specifies anonymized identifiers by default; FERPA/GDPR compliance language present \\
+SC-IND & Indigenous data sovereignty & No Indigenous datasets linked; OCAP\textregistered{} compliance language present in dataset linking section \\
+SC-LIC & Dataset license verification & All DCAT dataset references specify \texttt{dcat:license} field; only CC-BY or equivalent linked \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & DCAT link standard completeness & \texttt{DatasetLink} type contains all required DCAT-US fields; JSON-LD example validates against schema.org/Dataset \\
+CF-02 & Portal adapter coverage & At least 3 domain portal adapters documented (CKAN API, Zenodo REST, one domain-specific) \\
+CF-03 & xAPI vocabulary completeness & All 8 College verbs defined with IRI, label, trigger condition, and extension fields \\
+CF-04 & LRS schema functionality & Schema stores and retrieves Bloom-level data per concept per learner without information loss \\
+CF-05 & Dependency graph correctness & Math Dept 8-layer progression encoded as JSON-LD; traversal from Unit Circle to L-Systems returns correct ordered path \\
+CF-06 & Three-tier annotation spec & Glance/Read/Study tiers defined for all 7 panel families with concrete examples \\
+CF-07 & Fill-in-blank pattern spec & Apply-level and Analyze-level FIB patterns specified with test assertion template \\
+CF-08 & Flagship Python panel & Exponential decay fetches from real Zenodo/CERN dataset; three annotation tiers present; xAPI hook fires \\
+CF-09 & Flagship 7-panel completeness & All 7 panels produce consistent output on the same dataset \\
+CF-10 & Seeding protocol completeness & Checklist requires zero additional context; covers concept-to-dataset mapping and cross-dept link steps \\
+CF-11 & Stale-link detection spec & Detection logic defined; threshold configurable; xAPI \texttt{flagged-stale} verb fires on trigger condition \\
+CF-12 & Cross-dept API spec & Registration endpoint accepts Math-to-Cooking bridge definition; validation rules documented \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & DCAT types $\rightarrow$ xAPI tracking & DatasetLink references in concept nodes use same IRI identifiers tracked in xAPI \texttt{queried-dataset} statements \\
+IN-02 & Bloom levels $\rightarrow$ panel templates & Every Bloom level in the learning pathway spec maps to at least one concrete panel verbosity template \\
+IN-03 & Panel execution $\rightarrow$ LRS & Flagship Python panel execution generates valid xAPI statement stored in LRS schema \\
+IN-04 & ZPD graph $\rightarrow$ pathway navigation & Following one dependency edge in the Math Dept graph generates a \texttt{navigated-pathway} xAPI statement \\
+IN-05 & Cross-dept link $\rightarrow$ xAPI & Navigating Math $\rightarrow$ Cooking bridge generates \texttt{bridged-department} xAPI statement \\
+IN-06 & Stale-link $\rightarrow$ CAPCOM & Stale-link detection triggers xAPI event that routes to CAPCOM gate in skill-creator observation loop \\
+IN-07 & Document self-containment & A fresh GSD orchestrator can locate all 7 deliverables and their dependencies from this document alone \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. DCAT link standard with live demo & CF-01, CF-02 & Pending \\
+2. xAPI vocabulary: 5 interaction types & CF-03 & Pending \\
+3. LRS schema: Bloom-level storage & CF-04 & Pending \\
+4. Math Dept 8-layer dependency graph & CF-05 & Pending \\
+5. Three-tier annotation spec: all 7 panels & CF-06 & Pending \\
+6. Flagship example: all 7 panels + real data & CF-08, CF-09 & Pending \\
+7. FIB/Target Practice patterns: 3 Bloom levels & CF-07 & Pending \\
+8. Cross-dept link registration API & CF-12, IN-05 & Pending \\
+9. Department seeding protocol & CF-10 & Pending \\
+10. Stale-link detection skill & CF-11, IN-06 & Pending \\
+11. All dataset refs: live, professional sources & SC-SRC, SC-LIC & Pending \\
+12. Package self-containment & IN-07, SC-SRC & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; cross-wave consistency \\
+PLAN & Planner & Wave decomposition; dependency ordering; parallel track optimization \\
+SCOUT & Research Agent & Dataset catalog API research; xAPI spec gap-filling; source validation \\
+EXEC-A & Document Executor A & Track 1A document production (Modules A, B, C) \\
+EXEC-B & Document Executor B & Track 1B document production (Modules D, E) \\
+CRAFT-CATALOG & Catalog Specialist & DCAT/schema.org/CKAN expertise; dataset adapter patterns \\
+CRAFT-PEDAGOGY & Pedagogy Specialist & Bloom taxonomy; verbosity engine; literate programming lineage \\
+VERIFY & Verification Agent & Source validation; schema correctness; test plan execution \\
+INTEG & Integration Agent & Cross-module xAPI/DCAT consistency; flagship example validation \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; scope confirmation; sensitivity review \\
+BUDGET & Resource Manager & Token budget tracking; cache TTL optimization; session planning \\
+LOG & Chronicle Agent & Commit messages; milestone summary; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (A: Catalog, B: Pathway, C: Verbosity, D: Panel Standards, E: Seeding) \\
+Deliverables & 7 (5 specs + 1 flagship example directory + 1 API spec) \\
+Total Estimated Tokens & 148,000 \\
+Estimated Sessions & 5.5 context windows \\
+Parallel Tracks & 2 (Wave 1A and 1B simultaneous) \\
+HITL Gates & 1 (pre-Wave 2 scope confirmation + dataset license review) \\
+Total Tests & 40 (6 safety-critical, 18 core, 10 integration, 6 edge) \\
+Safety-Critical Tests & SC-SRC, SC-NUM, SC-ADV, SC-LRS, SC-IND, SC-LIC \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Key External Standards & DCAT v2 (W3C), xAPI (IEEE 9274.1.1-2023), schema.org/Dataset \\
+Key Ecosystem Ancestors & CPAN (1995), CKAN (2006), Knuth literate programming (1984), POD (1994) \\
+Department Pilots & Math (8-layer progression), Cooking (Newton's cooling / exponential decay) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\itshape
+The code is the curriculum. The spaces between the code lines are where understanding lives. And the dataset link is the thread connecting the classroom to the living scholarship that never stops. Deep linking is not a feature --- it is the College's commitment that its teaching will never become a museum exhibit of knowledge that was current when the file was committed. Every concept node that carries a live dataset link says: \textit{the conversation is still happening, and you are invited to join it.}
+
+\vspace{0.8em}
+\upshape
+\textbf{Amiga Principle:} Architectural elegance in the connection between code, scholarship, and learner --- not brute force coverage --- produces the learning environment that rewards exploration. One well-chosen real dataset, verbosely annotated across seven panel families with Bloom-scaffolded exercises, teaches more than a library of static textbooks. Build the spaces between.
+\end{quotebox}
+
+\end{document}

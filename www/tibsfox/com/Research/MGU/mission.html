@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Module Governance</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mgu">
+  <header>
+    <h1>Module Governance</h1>
+    <div class="subtitle">Versioning &middot; Upstream Intelligence &middot; Governance Frameworks &middot; Change Management &middot; Quality Gates</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-module-versioning-foundations">Versioning</a>
+      <a href="page.html?doc=02-upstream-dependency-tracking">Upstream Tracking</a>
+      <a href="page.html?doc=03-governance-frameworks-modular-systems">Governance</a>
+      <a href="page.html?doc=04-change-management-approval-workflows">Change Mgmt</a>
+      <a href="page.html?doc=05-quality-gates-open-ecosystems">Quality Gates</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Amiga didn't achieve its reputation by cramming everything into one chip. The magic was in the
+      boundaries: Agnus knew its job, Denise knew its job, Paula knew its job. When one chip tried to do
+      another chip's work, the system degraded &mdash; not catastrophically, but in ways that accumulated.
+      A research module that grows to 706 lines has become a chip trying to do two jobs simultaneously.
+      This mission applies that same principle at the document layer.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~56K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/module-governance-mission.pdf">Mission Package</a></td><td>PDF &middot; 31 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/module-governance-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/module-governance-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Manifest, schemas, content inventory</td><td>Sequential</td><td>3.5K</td></tr>
+        <tr><td>1A</td><td>Spec + Pointer</td><td>Track A: Bridge spec promotion + pointer module</td><td>Parallel</td><td>22K</td></tr>
+        <tr><td>1B</td><td>Monitor + Governance</td><td>Track B: Upstream monitor + governance contracts</td><td>Parallel</td><td>18K</td></tr>
+        <tr><td>2</td><td>Integration</td><td>Cross-validation, monitor test run, audit review</td><td>Sequential</td><td>6K</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Branch commits, index update, milestone summary</td><td>Sequential</td><td>6.5K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Model</th><th>Budget</th><th>Role</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Opus</td><td>~30%</td><td>Judgment + policy</td><td>Spec framing, governance policy, integration validation</td></tr>
+        <tr><td>Sonnet</td><td>~60%</td><td>Assembly + execution</td><td>Document assembly, LaTeX, monitor skill, pointer, audit</td></tr>
+        <tr><td>Haiku</td><td>~10%</td><td>Scaffolding + runtime</td><td>Schema generation, manifest, digest computation, cron</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Deliverables</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Deliverable</th><th>Acceptance Criteria</th><th>Module</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>bridge-architecture-spec.pdf</td><td>Compiles; GSD spec structure; registered in index; all Module 05 content preserved</td><td>M01</td></tr>
+        <tr><td>2</td><td>module-05-pointer.md</td><td>60&ndash;100 lines; path, digest, summary, reference table present</td><td>M02</td></tr>
+        <tr><td>3</td><td>upstream-monitor skill</td><td>Detects simulated drift; correct BLOCK/ADVISORY/LOG/CURRENT classification</td><td>M03</td></tr>
+        <tr><td>4</td><td>GOVERNANCE.md + audit-report.md</td><td>Size contracts defined; all existing modules audited with flag status</td><td>M04</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-BRANCH</td><td>Dev-only commits</td><td>All deliverables committed to dev branch only; main branch remains unchanged</td></tr>
+        <tr><td>SC-CONTENT</td><td>No content loss</td><td>Bridge spec contains all content from Module 05; line count &ge;706; zero info dropped</td></tr>
+        <tr><td>SC-BLOCK</td><td>Major drift halts</td><td>Monitor emits BLOCK event and halts on major semver delta in all simulated tests</td></tr>
+        <tr><td>SC-DIGEST</td><td>Pointer integrity</td><td>SHA-256 digest in pointer matches independently computed digest of spec PDF</td></tr>
+        <tr><td>SC-SRC</td><td>Source traceability</td><td>All version numbers and package IDs traceable to original mission pack manifest</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Test ID(s)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Bridge spec PDF compiles without errors from three XeLaTeX passes</td><td>CF-01</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Spec follows GSD spec structure (purpose, scope, version, interfaces, diagrams, budget, contracts)</td><td>CF-02</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Spec registered in GSD ecosystem document index</td><td>CF-04</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Pointer module at 60&ndash;100 lines with all required fields</td><td>CF-05, CF-06</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>Monitor detects simulated drift and classifies severity correctly</td><td>CF-07 &ndash; CF-11</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>Governance contracts defined with explicit size ranges for all document classes</td><td>CF-12, CF-13</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Module audit complete with flagged promotion candidates documented</td><td>CF-14</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>All four outputs committed to dev branch</td><td>SC-BRANCH</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>No content loss in Module 05 promotion</td><td>SC-CONTENT, CF-03</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Governance Ledger &mdash; Verification Matrix</h2>
+
+    <table>
+      <thead><tr><th>Check</th><th>What</th><th>Automated?</th><th>Failure Response</th></tr></thead>
+      <tbody>
+        <tr><td>Line count</td><td>Within size contract</td><td>Yes</td><td>PROMOTE or FAIL</td></tr>
+        <tr><td>Content markers</td><td>Spec-level content detected</td><td>Yes</td><td>PROMOTE</td></tr>
+        <tr><td>Source density</td><td>Adequate citation density</td><td>Yes</td><td>WARN</td></tr>
+        <tr><td>Cross-ref integrity</td><td>All references resolve</td><td>Yes</td><td>FAIL</td></tr>
+        <tr><td>Source currency</td><td>Cited sources still current</td><td>Semi</td><td>ADVISORY</td></tr>
+        <tr><td>Through-line</td><td>Narrative coherence</td><td>No (HITL)</td><td>REVISE</td></tr>
+        <tr><td>TOC structure</td><td>Section structure follows pattern</td><td>Yes</td><td>FAIL</td></tr>
+        <tr><td>Deduplication</td><td>No significant overlap</td><td>Semi</td><td>ADVISORY</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Mission Crew</h2>
+
+    <table>
+      <thead><tr><th>Role</th><th>Agent</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>FLIGHT</td><td>Orchestrator</td><td>Mission direction; go/no-go gates at wave boundaries</td></tr>
+        <tr><td>PLAN</td><td>Planner</td><td>Wave decomposition; parallel track optimization</td></tr>
+        <tr><td>SCOUT</td><td>Research Agent</td><td>Module 05 content inventory; package ID confirmation</td></tr>
+        <tr><td>EXEC-1</td><td>Spec Executor</td><td>Bridge spec assembly, compilation, pointer, commits</td></tr>
+        <tr><td>EXEC-2</td><td>Monitor Executor</td><td>Upstream monitor implementation, test harness, audit</td></tr>
+        <tr><td>CRAFT-SPEC</td><td>Spec Specialist</td><td>Spec document framing; purpose, scope, version header</td></tr>
+        <tr><td>CRAFT-GOV</td><td>Governance Specialist</td><td>Size contracts, GOVERNANCE.md, audit review</td></tr>
+        <tr><td>VERIFY</td><td>Verification</td><td>Content-loss verification, digest cross-check</td></tr>
+        <tr><td>INTEG</td><td>Integration Agent</td><td>Pointer&harr;spec consistency, version cross-check</td></tr>
+        <tr><td>CAPCOM</td><td>HITL Interface</td><td>Human approval at Wave 2 boundary</td></tr>
+        <tr><td>BUDGET</td><td>Resource Manager</td><td>Token budget tracking against 56K estimate</td></tr>
+        <tr><td>LOG</td><td>Chronicle Agent</td><td>Commit messages, milestone summary</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The Amiga didn't achieve its reputation by cramming everything into one chip. The magic was in the
+    boundaries: Agnus knew its job, Denise knew its job, Paula knew its job. When one chip tried to do
+    another chip's work, the system degraded &mdash; not catastrophically, but in ways that accumulated.
+    This mission applies that same principle at the document layer. A research module that knows what it is,
+    and a specification that knows what it is, will compose more cleanly than either alone. The version
+    sentinel acknowledges something simpler: the ecosystem is a river, and any snapshot taken of a river
+    is already historical. Building a lightweight watcher that reports on the gap between snapshot and
+    present is not an admission of failure &mdash; it is honest architecture. The v1.49.x series closes
+    with four artifacts: a promoted spec, a navigation pointer, a version sentinel, and a governance
+    contract. Small, principled, composable. The Amiga would approve.</p>
+  </main>
+
+  <footer>
+    <p>Module Governance &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

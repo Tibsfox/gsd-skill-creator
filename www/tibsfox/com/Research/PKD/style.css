@@ -1,0 +1,206 @@
+/* PKD — Reality palette, Philip K. Dick
+   Brand foundation loaded from brand.css */
+
+/* ═══════════════════════════════════════════
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   ═══════════════════════════════════════════ */
+
+:root {
+  --reality: #311B92;
+  --reality-light: #EDE7F6;
+  --reality-mid: #4527A0;
+  --reality-dark: #1A0E52;
+  --paranoia: #B71C1C;
+  --paranoia-light: #FFEBEE;
+  --paranoia-mid: #C62828;
+  --android: #37474F;
+  --android-light: #ECEFF1;
+  --android-mid: #455A64;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--reality);
+  --link-hover: var(--paranoia);
+  --accent: var(--reality);
+  --accent-light: var(--reality-light);
+  --accent-dark: var(--reality-dark);
+  --card-bg: white;
+  --card-border: #D1C4E9;
+  --card-shadow: rgba(49,27,146,0.12);
+  --border: #D1C4E9;
+  --parchment: var(--reality-light);
+}
+
+/* ═══════════════════════════════════════════
+   2. HEADER — reality/paranoia gradient
+   ═══════════════════════════════════════════ */
+
+header {
+  background: linear-gradient(135deg, #1A0E52 0%, #311B92 40%, #4A1A1A 100%);
+  border-bottom: 4px solid var(--reality);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(49,27,146,0.25) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(183,28,28,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #EDE7F6; }
+header .subtitle { color: #CE93D8; }
+
+/* ═══════════════════════════════════════════
+   3. TYPOGRAPHY COLOR OVERRIDES
+   ═══════════════════════════════════════════ */
+
+h2 {
+  color: var(--reality-dark);
+  border-bottom-color: var(--reality-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--reality); }
+
+/* ═══════════════════════════════════════════
+   4. THEMED COMPONENTS
+   ═══════════════════════════════════════════ */
+
+blockquote {
+  background: var(--reality-light);
+  border-left: 4px solid var(--reality);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--reality-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(49,27,146,0.04); }
+tr:hover { background: rgba(49,27,146,0.08); }
+
+pre {
+  background: #1A0E52;
+  color: #E8DEF8;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--paranoia-mid);
+}
+code {
+  background: var(--reality-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--reality);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ═══════════════════════════════════════════
+   5. CARDS — border-color hover
+   ═══��═══════════════════════════════════════ */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #D1C4E9;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(49,27,146,0.12); border-color: var(--reality); }
+
+/* ═══════════════════════════════════════════
+   6. STATS — grid layout
+   ═══════════════════════════════════════════ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #D1C4E9;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--reality);
+}
+
+/* ══════��════════════════════════════════════
+   7. TAGS
+   ════��══════════════════════════════════════ */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-bio { background: var(--reality-light); color: var(--reality); }
+.tag-phil { background: #FFF3E0; color: #E65100; }
+.tag-theo { background: var(--paranoia-light); color: var(--paranoia); }
+.tag-legacy { background: #E8F5E9; color: #2E7D32; }
+.tag-relevance { background: var(--android-light); color: var(--android); }
+
+/* ═══════════════════════════════════════════
+   8. SPECIAL COMPONENTS
+   ═══════════════════════════════════════════ */
+
+.sensitivity-callout {
+  background: #FFF3E0;
+  border: 1px solid #FFE0B2;
+  border-left: 4px solid #E65100;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.sensitivity-callout strong { color: #E65100; }
+
+.reality-diagram {
+  background: #1A0E52;
+  color: #CE93D8;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+  border-left: 3px solid var(--paranoia);
+}
+
+.cross-links {
+  background: white;
+  border: 1px solid #D1C4E9;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--reality); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--reality-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--reality);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #D1C4E9; text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   9. RESPONSIVE
+   ═══════════════��═══════════════════════════ */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSD Alignment &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gsa">
+  <header>
+    <h1>GSD Alignment</h1>
+    <div class="subtitle">Ecosystem Alignment &middot; Workflow-to-Outcome Mapping &middot; Bus Architecture &middot; Prompts to Silicon</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-yegge-ecosystem-alignment">Yegge Ecosystem</a>
+      <a href="page.html?doc=02-gas-city-chipset-bridge">Gas City Bridge</a>
+      <a href="page.html?doc=03-control-surface-wire-harness">Wire Harness</a>
+      <a href="page.html?doc=04-isa-bus-architecture">ISA &amp; Bus</a>
+      <a href="page.html?doc=05-intent-to-adapter-routing">Intent Routing</a>
+      <a href="page.html?doc=06-gpu-silicon-execution">GPU Silicon</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Amiga had copper lists. The copper processor ran against the beam &mdash; not waiting for the
+      CPU, not asking permission, but executing its own instruction stream at the precise moment the
+      electron gun crossed the right scanline. The CPU composed the list; the hardware consumed it.
+      The intelligence was in the list, and the list was cheap. The GSD Silicon Layer is the copper
+      list for the age of AI agents. Between the moment a human types a sentence and the moment a
+      tensor materializes on a GPU tile, there is a complete instruction pipeline &mdash; and every
+      stage of that pipeline maps exactly to hardware concepts that have existed since 1985.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">37</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">90+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Abstraction Layers</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-yegge-ecosystem-alignment" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Yegge Ecosystem Current State &amp; Delta Analysis</h3>
+        <div class="meta"><span class="tag tag-ecosystem">Ecosystem</span> Track A &middot; Delta analysis</div>
+        <p>Gastown v0.10.0 state, Trust Tier Escalation Engine, Wasteland Phase 1 protocol, Gas City declarative model. Five-phase skill-creator integration re-evaluation. CHANGELOG delta since March 6, 2026.</p>
+      </a>
+
+      <a href="page.html?doc=02-gas-city-chipset-bridge" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Gas City / Chipset YAML Bridge</h3>
+        <div class="meta"><span class="tag tag-bridge">Bridge</span> Track A &middot; Configuration mapping</div>
+        <p>Gas City declarative component model versus GSD chipset YAML architecture. Mayor/Polecat/Witness/Deacon/Refinery/Convoy mapped to Agnus/Denise/Paula/68000/Gary. Two-way bridge specification with YAML examples.</p>
+      </a>
+
+      <a href="page.html?doc=03-control-surface-wire-harness" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: GSD-OS Control Surface Wire Harness</h3>
+        <div class="meta"><span class="tag tag-bus">Bus</span> Track C &middot; Signal specification</div>
+        <p>Complete wire harness for the GSD-OS control surface. Blueprint Editor, Dashboard, Paula I/O, Boot Sequence, Skill Registry. Bus signal types, priorities, bandwidth allocations, latency budgets, interrupt vectors.</p>
+      </a>
+
+      <a href="page.html?doc=04-isa-bus-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: ISA &amp; Bus Architecture Specification</h3>
+        <div class="meta"><span class="tag tag-arch">Architecture</span> Track B &middot; Instruction set</div>
+        <p>Five-layer ISA abstraction stack. Register assignments, instruction encoding, copper list execution model. FPGA synthesis pipeline (6 stages). Register mapping across ARM A64, RISC-V, x86-64, and 68000.</p>
+      </a>
+
+      <a href="page.html?doc=05-intent-to-adapter-routing" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Intent Classification to LoRA Adapter Routing</h3>
+        <div class="meta"><span class="tag tag-silicon">Silicon</span> Track C &middot; Intent bridge</div>
+        <p>Three-tier intent classifier architecture. Skill registry adapter lookup. Hot/cold adapter swap protocols. VRAM residency policy for RTX 4060 Ti 8GB. vLLM, LoRAX, NVIDIA NIM integration patterns.</p>
+      </a>
+
+      <a href="page.html?doc=06-gpu-silicon-execution" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: GPU Silicon Execution Layer</h3>
+        <div class="meta"><span class="tag tag-silicon">Silicon</span> Track B &middot; Execution reference</div>
+        <p>QLoRA training pipeline through adapter distillation to CUDA kernel execution. LoRAFusion tile-level routing, LoRA-Switch token-wise routing, vLLM dynamic loading, NVIDIA NIM mixed-batch GEMM. RTX 4060 Ti benchmarks.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Gastown/Wasteland ecosystem</td><td>M1, M2</td><td>GSD2, CMH</td></tr>
+        <tr><td>Chipset YAML architecture</td><td>M2, M3, M4</td><td>GSD2, ACE, CMH</td></tr>
+        <tr><td>Gas City topology bridge</td><td>M2, M5</td><td>GSD2, MCF</td></tr>
+        <tr><td>Bus signal specification</td><td>M3, M4, M5</td><td>ACE, PMG</td></tr>
+        <tr><td>ISA five-layer stack</td><td>M4, M5</td><td>K8S, MGU</td></tr>
+        <tr><td>FPGA synthesis pipeline</td><td>M4, M6</td><td>COK, ACE</td></tr>
+        <tr><td>Intent classification</td><td>M5, M6</td><td>CMH, GSD2</td></tr>
+        <tr><td>LoRA adapter routing</td><td>M5, M6</td><td>MCF, COK</td></tr>
+        <tr><td>VRAM budget / residency</td><td>M3, M5, M6</td><td>K8S, MGU</td></tr>
+        <tr><td>Multi-LoRA serving (vLLM/NIM)</td><td>M5, M6</td><td>MCF, COK</td></tr>
+        <tr><td>Copper list execution model</td><td>M3, M4</td><td>ACE, PMG</td></tr>
+        <tr><td>Trust Tier Escalation</td><td>M1, M2</td><td>GSD2, CMH</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Full-Stack Abstraction Architecture</h2>
+
+    <pre>
+GSD ALIGNMENT -- FULL-STACK ABSTRACTION MAP
+================================================================
+
+  LEVEL 5: HUMAN INTENT         LEVEL 4: GSD WORKFLOW        LEVEL 3: GSD ASSEMBLY
+  +-------------------+         +-------------------+        +-------------------+
+  | Natural Language   |         | new-project       |        | LOAD SK, #pattern |
+  | "Build me a..."   |--------&gt;| research          |-------&gt;| EXEC PC, #phase   |
+  | Creative Act       |         | plan -> execute   |        | ROUTE GPU, #adapt |
+  +-------------------+         +-------------------+        +-------------------+
+                                                                      |
+                                                             ===THE BRIDGE===
+                                                                      |
+                                                                      v
+  LEVEL 2: ADAPTER ROUTING       LEVEL 1: GPU SILICON
+  +-------------------+         +-------------------+
+  | Intent Classifier  |         | QLoRA adapter     |
+  | Skill Registry     |--------&gt;| CUDA kernel       |
+  | LoRA hot-swap      |         | RTX 4060 Ti       |
+  | vLLM / NIM         |         | 40-53 tok/s       |
+  +-------------------+         +-------------------+
+
+  YEGGE ECOSYSTEM OVERLAY
+  +---------------------------------------------------+
+  | Gastown (Mayor/Polecat) &lt;-&gt; GSD (Agnus/Denise)   |
+  | Gas City (LEGO topology) &lt;-&gt; chipset.yaml bridge  |
+  | Wasteland (DoltHub federation) &lt;-&gt; Trust system   |
+  +---------------------------------------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+================================================================
+
+  Track A (Yegge):
+  [M1: Ecosystem Delta] -----------&gt; [M2: Gas City Bridge]
+
+  Track B (Architecture):
+  [M4: ISA + Bus Spec] -----------&gt; [M6: GPU Silicon Layer]
+
+  Track C (Control Surface):
+  [M3: Wire Harness] -----------&gt; [M5: Intent-&gt;Adapter Bridge]
+
+  Cross-track dependencies:
+    M5 requires register definitions from M4
+    M2 requires bus signal types from M3
+    M6 can proceed fully independently
+    M1 can proceed fully independently
+
+  Synthesis:
+    All 6 modules -&gt; [Wave 2: Integration + Gap Analysis]
+    </pre>
+  </main>
+
+  <footer>
+    <p>GSD Alignment &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

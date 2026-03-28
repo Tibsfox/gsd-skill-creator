@@ -1,0 +1,1362 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% COLOR SCHEME — Broadcast / Signal domain
+%% Primary: deep indigo (carrier wave, transmission depth)
+%% Secondary: phosphor teal (CRT glow, signal green)
+%% Tertiary: hot amber (analog warmth, phosphor orange)
+
+\definecolor{primary}{HTML}{1A237E}
+\definecolor{secondary}{HTML}{006064}
+\definecolor{tertiary}{HTML}{BF360C}
+\definecolor{accent}{HTML}{283593}
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E0F2F1}
+\definecolor{lighttertiary}{HTML}{FBE9E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% SECTION FORMATTING
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% CUSTOM ENVIRONMENTS
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% TABLE HELPERS
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% HEADERS / FOOTERS
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Polyrhythm Standard}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% HYPERLINKS
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={The Polyrhythm Standard -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% DOCUMENT
+\begin{document}
+
+%% =====================================================================
+%% TITLE PAGE
+%% =====================================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Polyrhythm Standard\\[0.3em]}}
+{\fontsize{16}{20}\selectfont\bfseries\sffamily\textcolor{secondary}{50/60\,Hz, NTSC/PAL, SMPTE, High-Frequency Displays,\\[0.2em]8K Video, and Large-Format Digital Imaging}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{tertiary}{Signal Engineering \& Visual Time Architecture}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{subtlegray}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Est.\ 8--10 context windows across 4--5 sessions}}
+\end{center}
+\newpage
+
+%% =====================================================================
+%% TABLE OF CONTENTS
+%% =====================================================================
+\tableofcontents
+\newpage
+
+%% =====================================================================
+%% STAGE 1 — VISION DOCUMENT
+%% =====================================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{The Polyrhythm Standard --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Initial Vision / Cold-Start Research Complete}
+\metafield{Depends On:}{gsd-skill-creator v1.49+, DACP milestone}
+\metafield{Context:}{Six-module Fleet mission; trilinear CCD and SMPTE timecode as architectural exemplars}
+
+\subsection{Vision}
+
+There is a rhythm at the heart of every screen you have ever watched, embedded so deeply it predates color
+television. When electrical engineers in the 1940s and 1950s wired the grids of North America at
+60\,Hz and Europe at 50\,Hz, they made a geopolitical decision that would reverberate through every
+broadcast, every edit bay, every game console, every cinema frame, and every museum-grade digitization
+workflow for the next eight decades. The television picture rate was locked to the local power frequency
+to avoid beating artifacts with fluorescent lighting and power hum. The Atlantic Ocean thus became a
+temporal fault line: 30 frames per second on one side, 25 on the other.
+
+These two frequencies --- 50\,Hz and 60\,Hz --- do not share a common sub-multiple below 10. Their
+Least Common Multiple is 300\,Hz. This is not a footnote. It is the hidden rhythm beneath every
+standards-conversion device, every PAL-to-NTSC frame-rate shimmy, every 3:2 pulldown that stretches
+24-fps film to 59.94 fields, and every modern high-frequency display that resolves the tension by
+simply running fast enough for both to divide evenly into it. The 50/60 polyrhythm is the oldest
+living constraint in consumer electronics, and the entire history of video engineering is, in some
+sense, the story of building machines that can hear both rhythms at once.
+
+SMPTE timecode is the first formal language invented to count those frames, and its drop-frame
+mechanism is a confession: the color NTSC system's frame rate is not 30 frames per second at all.
+When engineers added color to the monochrome signal in 1953, they needed the color subcarrier
+(3.579545\,MHz, precisely 315/88\,MHz) to interleave with the luminance harmonics without visible
+beating. The only clean solution was to slow every timing parameter by a factor of 1000/1001 --- a
+0.1\% reduction. The frame rate became 29.970030\,Hz. That invisible 0.1\% gap accumulates into 3.6
+seconds of drift per broadcast hour, 86.4 seconds of drift per broadcast day. Drop-frame timecode
+skips two frame numbers at the start of every minute (except every tenth minute) to stay synchronized
+with the wall clock. It is a rhythmic correction, not unlike a musician adding a grace note at the
+end of a phrase to arrive at the downbeat on time.
+
+High-frequency displays represent the upstream end of this lineage. Modern 120\,Hz displays emerged
+partly because 120 is the LCM of 24, 25, and 30 --- it can divide cleanly into film-at-24, PAL-at-25,
+and NTSC-at-30 without judder. The push to 240\,Hz, 360\,Hz, 500\,Hz, and beyond is driven by human
+physiology: the motion processing system of the visual cortex continues to extract useful information
+at frequencies well beyond 60\,Hz, and sample-and-hold displays produce motion blur that only resolves
+as frame time decreases. The resolution frontier is not resolution at all --- it is temporal density.
+
+At the high end of still imaging, the scanning back tells the same story in spatial rather than
+temporal terms. Where a single-shot matrix sensor captures a Bayer-filtered interpolation of color,
+the trilinear CCD scanning back makes three separate passes through red, green, and blue for every
+single pixel column, then scans the entire sensor width mechanically. This is the photographic
+equivalent of drop-frame correction: accepting slowness in exchange for absolute accuracy. Phase One's
+150-megapixel IQ4 back and BetterLight's Super8K system do not compete with matrix sensors on speed;
+they compete on truth. The spaces between their measurements are precisely calibrated.
+
+This mission documents the engineering archaeology of these standards, traces the polyrhythm from
+power grid to pixel, and builds a GSD research package suitable for multi-module Fleet execution.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+  \item \textbf{The 50/60 polyrhythm remains unresolved in modern workflows.}
+  Content produced in PAL (25\,fps) environments must cross into NTSC (29.97\,fps) broadcast chains
+  and vice versa. Standards conversion introduces either judder, motion blur, or temporal artifacts
+  because the two rates share no common sub-multiple below 300. Modern IP-based systems have
+  dissolved many format barriers but the underlying temporal mismatch persists in every live
+  broadcast, sports event, and theatrical exhibition.
+
+  \item \textbf{SMPTE timecode's drop-frame mechanism is routinely misunderstood, causing sync failures.}
+  The 0.1\% frequency offset between ``30\,fps'' and true 29.97\,fps is a mathematical constant that
+  propagates into DAWs, NLEs, and broadcast playout systems. Editors who mix drop-frame and
+  non-drop-frame timecode within a single project introduce 3.6 seconds of drift per hour --- enough
+  to miss broadcast windows, misalign audio, and corrupt archival timestamps.
+
+  \item \textbf{High-frequency displays have outpaced the understanding of their underlying science.}
+  Marketing has conflated ``motion rate,'' ``refresh rate,'' ``response time,'' and ``input lag'' into
+  a single undifferentiated metric. The actual perceptual science --- MPRT (Moving Picture Response
+  Time) versus GtG (gray-to-gray), sample-and-hold motion blur, VRR, and black frame insertion --- is
+  poorly communicated to both buyers and developers.
+
+  \item \textbf{8K and ultra-HD standards are fragmented across competing ecosystems.}
+  ITU-R BT.2020, the 8K Association, LG/CTA's competing standard, NHK's Super Hi-Vision (SHV), and
+  ATSC 3.0 broadcasting each define slightly different capability sets. HDR sub-standards
+  (HDR10, HDR10+, HLG, Dolby Vision) add a second axis of fragmentation. As Samsung holds near-monopoly
+  over 8K consumer television and Dolby Vision exits the segment, the content-display contract for
+  8K is unresolved.
+
+  \item \textbf{Scanning backs and ultra-high-resolution still imaging lack a unified technical reference.}
+  The trilinear CCD scanning back --- the closest digital equivalent to large-format sheet film --- is
+  undersupported in educational and practitioner literature. BetterLight's Super8K, Phase One's IQ4 150MP,
+  and Hasselblad's multi-shot 400MP compositing mode each represent distinct resolution strategies that
+  are poorly contextualized against each other and against 8K cinema acquisition.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Polyrhythm Standard:} two incommensurable temporal grids (50\,Hz / 60\,Hz) originating in
+infrastructure, propagating into every display, broadcast, and imaging standard, and resolved only by
+running fast enough (300\,Hz LCM), accurate enough (drop-frame), or slow enough (scanning back) to
+honor both.
+
+\subsubsection{Domain Map --- The Temporal Stack}
+
+\begin{asciibox}
+  SPATIAL RESOLUTION                         TEMPORAL RESOLUTION
+  (still imaging)                            (motion imaging)
+  
+  Scanning Back (trilinear CCD, 3-pass)      1000Hz+ displays (esports)
+    |  BetterLight Super8K: 12000x15990       |  360-500Hz competitive
+    |  Phase One IQ4: 150MP native            |  240Hz premium consumer
+    |  Hasselblad H6D-400c MS: 400MP          |  120Hz: LCM of 24/25/30
+    v  multi-shot composite                   v  60Hz: NTSC field rate
+  Medium Format (single-shot area array)        50Hz: PAL field rate
+    |  100-150MP CMOS matrix                SMPTE Drop Frame
+    |  Bayer filter / color interpolation     |  29.97 = 30/1.001 fps
+    v  Phase One, Hasselblad, Fuji GFX        |  2 frame-numbers dropped
+  35mm Full Frame                               |  per minute, not every 10th
+    |  24-61MP CMOS                           v  86.4ms residual drift/day
+    v  Canon, Sony, Nikon                   NTSC / PAL Standards
+  Cinema 4K-8K                               |  525 lines 60 fields (NTSC)
+    |  REDcode RAW, XAVC, ProRes              |  625 lines 50 fields (PAL)
+    v  7680x4320 @ 120fps emerging            v  Power grid origin: 60/50Hz AC
+  Consumer 4K → 8K                         Electrical Infrastructure
+    v  ITU-R BT.2020, HEVC/AV1              |  North America / Japan: 60Hz
+  Broadcast Delivery                         |  Europe / Africa / Asia: 50Hz
+    v  ATSC 3.0, DVB-T2, NHK SHV 8K        v  Historical fork: 1940s-1950s
+\end{asciibox}
+
+\subsubsection{Module Architecture --- Six Research Modules}
+
+\begin{asciibox}
+  [A] Temporal Origins         [D] The Polyrhythm Architecture
+      50/60Hz power grid            LCM=300Hz, standards conversion
+      NTSC/PAL divergence           3:2 pulldown, Tetra-sync
+      SECAM third standard          PAL-to-NTSC artifacts
+              |                              |
+              v                              v
+  [B] NTSC & PAL Engineering   [E] High-Frequency Refresh Science
+      Color subcarrier              120Hz LCM, 240-1000Hz arc
+      525/625 line systems          MPRT vs GtG, sample-and-hold
+      Interlace vs progressive      VRR / FreeSync / G-Sync / BFI
+              |                              |
+              v                              v
+  [C] SMPTE Timecode           [F] Large Format & Scanning Backs
+      29.97 drift anatomy           8K/SHV/ITU-R BT.2020
+      Drop-frame correction         Medium format area sensors
+      LTC / VITC / AES3             Trilinear CCD scanning backs
+      Broadcast sync chains         Multi-shot compositing
+
+  Modules A+B run in parallel (Wave 1 Track A)
+  Modules C+D run in parallel (Wave 1 Track B)
+  Modules E+F run in parallel (Wave 1 Track C)
+  Wave 2: cross-module synthesis (polyrhythm through-line)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module A --- Temporal Origins}
+Traces the 50/60\,Hz power-grid fork from 1940s infrastructure decisions through the establishment
+of NTSC (1941/1953), PAL (1963), and SECAM (1956). Documents why picture rate was locked to power
+frequency, the interlace bandwidth compromise, and the three-standard world it created. Geographic
+coverage includes North America, Japan, Western Europe, Eastern Europe/France, and the developing
+world's adoption patterns.
+
+\subsubsection{Module B --- NTSC and PAL Engineering}
+Technical dissection of both color encoding systems: NTSC's quadrature amplitude modulation of
+I and Q signals onto a 3.579545\,MHz subcarrier; PAL's phase-alternating line trick that
+self-corrects for phase errors; the Hanover bars artifact and PAL's 1-line delay correction circuit.
+Comparison of 525-line/59.94\,Hz versus 625-line/50\,Hz parameters including horizontal sync,
+blanking intervals, vertical resolution, and color bandwidth.
+
+\subsubsection{Module C --- SMPTE Timecode and the Drop-Frame Problem}
+Origin of the 0.1\% frequency offset in NTSC color standardization. Drop-frame timecode as a
+mathematical correction: 18 frame-numbers dropped per 10-minute block, residual error of 1.0\,ppm
+(86.4\,ms/day). LTC (Longitudinal Timecode), VITC (Vertical Interval Timecode), and AES3 timecode
+formats. Modern ST\,12-3 extensions for frame rates above 40\,fps, up to 120\,fps. Broadcast sync
+chains: black burst, tri-level sync, PTP (IEEE 1588).
+
+\subsubsection{Module D --- The Polyrhythm Architecture}
+LCM(50, 60) = 300\,Hz as the mathematical resolution of the 50/60 tension. Standards conversion
+methods: 3:2 pulldown (24fps film to NTSC 59.94 fields), frame-rate conversion artifacts (motion blur,
+judder), motion-compensated interpolation. The role of 120\,Hz as LCM(24, 25, 30) in modern TV.
+IP-era convergence: does baseband signal have a future? HFR cinema (48fps, 60fps, 120fps).
+
+\subsubsection{Module E --- High-Frequency Refresh Displays}
+Physics of sample-and-hold motion blur on LCD/OLED. The MPRT/GtG distinction. Scientific literature
+on human visual motion perception: PMC 8777290 (Frontiers in Neuroscience, 2022) recommending
+$\geq$120\,Hz for motion studies, $\geq$240\,Hz for high-velocity stimuli. The geometric refresh
+progression: 60\,$\rightarrow$\,120\,$\rightarrow$\,240\,$\rightarrow$\,480\,$\rightarrow$\,960\,Hz.
+Current state: 360-500\,Hz production panels (Dell Alienware AW2523HF). Black frame insertion (BFI),
+Variable Refresh Rate (VRR) standards. Input latency: 28\,ms system latency reduction at 360\,Hz vs
+60\,Hz in measured Fortnite benchmarks.
+
+\subsubsection{Module F --- Large Format, 8K, and Scanning Backs}
+Ultra-high-resolution still imaging: Phase One IQ4 150MP (53.7\,$\times$\,40.4\,mm sensor),
+Hasselblad X2D II 100C (43.8\,$\times$\,32.9\,mm), Fuji GFX 100S II. Multi-shot pixel-shift:
+Hasselblad H6D-400c MS (400MP composite). Scanning backs: BetterLight Super8K (12,000\,$\times$\,15,990
+pixels, 1.1\,GB 48-bit TIFF, trilinear CCD). Comparison to 8K cinema (7680\,$\times$\,4320 = 33.2\,MP).
+8K standards: ITU-R BT.2020, SMPTE ST 2036-1, NHK Super Hi-Vision (launched December 2018). HDR
+standards: HDR10, HDR10+, HLG, Dolby Vision; post-2026 fragmentation with Samsung near-monopoly
+at consumer 8K.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:            # Orchestration / DMA / context management
+    model: opus
+    role: FLIGHT + PLAN + INTEG + RETRO
+    focus:
+      - Cross-module polyrhythm synthesis
+      - Standards genealogy analysis
+      - Cultural and technical sensitivity
+      - Temporal accuracy (timecode, frame-rate math)
+
+  denise:           # Display / output rendering
+    model: sonnet
+    role: EXEC x3 + VERIFY + LOG
+    focus:
+      - Module document production (A through F)
+      - Source validation and citation accuracy
+      - Wave 3 publication assembly
+
+  paula:            # Audio / I/O / anticipatory
+    model: haiku
+    role: SCOUT + BUDGET + shared schemas
+    focus:
+      - Shared schema generation (frequency tables, frame-rate matrices)
+      - Token budget tracking
+      - Source index scaffolding
+
+  gary_68000:       # CPU / glue logic
+    model: sonnet
+    role: CRAFT-SIGNAL + CRAFT-OPTICS
+    focus:
+      - CRAFT-SIGNAL: broadcast engineering, SMPTE, sync standards
+      - CRAFT-OPTICS: large-format photography, sensor architecture
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item 50/60\,Hz power-grid origin and NTSC/PAL/SECAM divergence history
+  \item SMPTE 29.97 drop-frame mathematics and all major timecode formats (LTC, VITC, AES3)
+  \item High-frequency refresh display science from 60\,Hz through current 500\,Hz production hardware
+  \item 8K consumer/broadcast standards (ITU-R BT.2020, 8K Association, NHK SHV, ATSC 3.0)
+  \item HDR standards: HDR10, HDR10+, HLG, Dolby Vision --- current fragmentation state
+  \item Medium format digital photography (Phase One, Hasselblad, Fujifilm GFX)
+  \item Trilinear CCD scanning backs (BetterLight, Kigamo, Anagramm)
+  \item Multi-shot / pixel-shift compositing (Hasselblad H6D-400c MS)
+  \item Standards conversion artifacts (3:2 pulldown, motion-compensated interpolation)
+\end{itemize}
+
+\subsubsection{Out of Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+  \item SECAM engineering deep-dive (mentioned for completeness, not detailed)
+  \item Audio timecode formats (MTC, MIDI clock) beyond broadcast context
+  \item Virtual Reality and XR display systems
+  \item Cinema projector standards (DCI, Dolby Cinema) beyond reference
+  \item Satellite broadcast delivery infrastructure
+  \item Film scanning and photochemical workflows
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*.}]
+  \item Module A documents the power-grid to picture-rate causal chain with primary historical sources
+        covering NTSC (1941/1953), PAL (1963), and geographic adoption patterns.
+  \item Module B provides complete engineering parameters for both NTSC 525/59.94 and PAL 625/50
+        systems including color subcarrier frequencies, line timing, and color correction mechanisms.
+  \item Module C traces the 0.1\% frequency offset from its color-compatibility origin through the
+        drop-frame correction mechanism with exact mathematical values and residual error.
+  \item Module C documents all major SMPTE timecode variants (LTC, VITC, ST 12-3 HFR extensions)
+        with bit-field layouts and use cases.
+  \item Module D establishes LCM(50, 60) = 300\,Hz as a unifying structural concept and traces its
+        implications through standards conversion, modern TV, and HFR cinema.
+  \item Module D documents at least three standards conversion methods (3:2 pulldown, frame-rate
+        conversion interpolation, and motion-compensated conversion) with artifact descriptions.
+  \item Module E documents the scientific evidence base for display refresh rates at 60, 120, 240,
+        and 360+\,Hz including at least one peer-reviewed neuroscience citation.
+  \item Module E distinguishes MPRT from GtG, explains sample-and-hold motion blur physics, and
+        describes VRR, BFI, and strobed backlight operation.
+  \item Module F documents the complete medium format sensor landscape (Phase One IQ4, Hasselblad
+        X2D II, Fuji GFX 100S II) with sensor dimensions, bit depth, and dynamic range.
+  \item Module F documents trilinear CCD scanning back operation, key commercial systems (BetterLight
+        Super8K), and cultural heritage archival applications with file size data.
+  \item Module F documents 8K standards (ITU-R BT.2020, NHK SHV, SMPTE ST 2036-1) and current
+        consumer 8K market state including HDR standard fragmentation.
+  \item The synthesis module traces the polyrhythm concept coherently from power grid through
+        NTSC/PAL divergence to SMPTE drift to LCM display resolution to scanning-back temporal patience.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD Deep Audio Analyzer Mission & Overlaps on SMPTE sync, sample rate relationships & Sibling \\
+Fox Infrastructure Group Plan & Broadcast infrastructure cross-domain (FoxFiber, FoxData) & Downstream \\
+The Space Between (textbook) & Mathematical foundations: LCM as set-theory intersection concept & Upstream \\
+GSD Chipset Architecture Vision & Agnus/Denise/Paula model maps onto audio/video pipeline metaphor & Parallel \\
+College of Knowledge & Signal standards module candidate; cross-language concept translation & Downstream \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The history of visual standards is the history of spaces between. Between 50 and 60 lives the
+LCM at 300. Between 30 and 29.97 lives the 3.6-second hourly drift that drop-frame corrects with
+rhythmic grace. Between the single-shot Bayer matrix and the film-print lives the scanning back's
+trilinear patience, measuring red before green before blue, finding color in the pauses between passes.
+
+The Amiga Principle applies here at a civilizational scale: the 50 and 60\,Hz standards were not
+mistakes. They were the most efficient encodings of local physical constraint --- the power frequency
+beneath every CRT, the phosphor decay rate, the bandwidth that the electromagnetic spectrum could carry.
+The divergence produced incompatibility, but also diversity: PAL's self-correcting phase alternation
+was a more elegant color solution than NTSC's manual hue control; NTSC's higher field rate produced
+smoother motion. Neither was simply better. Both were architecturally principled responses to local
+conditions. The spaces between them --- the standards-conversion apparatus, the drop-frame workaround,
+the 120\,Hz LCM display --- are not failures of coordination. They are the connective tissue of a
+genuinely distributed visual world. This mission documents that tissue, understands its structure,
+and prepares it for execution.
+
+\newpage
+
+%% =====================================================================
+%% STAGE 2 — RESEARCH REFERENCE
+%% =====================================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{The Polyrhythm Standard --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides verified findings for all six modules. Each section contains
+quantitative data attributed to specific sources. The bibliography is organized by source category.
+All sources are professional organizations, standards bodies, peer-reviewed journals, or manufacturer
+technical documentation. No entertainment media or unsourced claims are included.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{SMPTE} (Society of Motion Picture and Television Engineers) --- ST\,12M, ST\,2036-1
+  \item \textbf{ITU-R} (International Telecommunication Union, Radiocommunication Sector) --- BT.2020, BT.709
+  \item \textbf{IEEE} --- 802.1AS (PTP), synchronization standards
+  \item \textbf{NHK} (Nippon Hoso Kyokai / Japan Broadcasting Corporation) --- Super Hi-Vision research
+  \item \textbf{EBU} (European Broadcasting Union) --- 25\,fps timecode, PAL broadcast engineering
+  \item \textbf{Frontiers in Neuroscience / PMC} --- Peer-reviewed motion perception research
+  \item \textbf{Phase One, Hasselblad, BetterLight} --- Manufacturer technical specifications
+  \item \textbf{CTA} (Consumer Technology Association) --- 8K TV standards
+  \item \textbf{8K Association} --- Industry 8K specification coalition
+\end{itemize}
+
+\subsection{Module A Reference --- Temporal Origins}
+
+\subsubsection{Power Grid to Picture Rate}
+
+The causal chain from electrical infrastructure to video standard is direct and documented. North
+American power grids settled on 60\,Hz AC supply in the early twentieth century, while European grids
+standardized on 50\,Hz. Early television engineers chose to synchronize the vertical field rate to
+the local power frequency to prevent visible interference patterns (``hum bars'') between the scanning
+electron beam and electromagnetic fields from power wiring (The Broadcast Bridge, 2022).
+
+The original U.S. monochrome television standard specified an exact 60.000\,Hz field rate, yielding
+exactly 30 frames per second in interlaced format (525 lines per frame, 262.5 lines per field). The
+EBU standard for Europe specified 50\,Hz field rate, 25 frames per second, 625 lines per frame
+(312.5 lines per field). The difference in line counts (525 vs.\ 625) reflected different bandwidth
+allocations: more lines required more horizontal bandwidth, and European standards were able to
+allocate more bandwidth per channel.
+
+\subsubsection{The Three-Standard World}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Standard} & \tableheader{Regions} & \tableheader{Lines} & \tableheader{Field Rate} & \tableheader{Color System} \\
+\midrule
+NTSC & N.\ America, Japan & 525 & 59.94\,Hz & QAM on 3.58\,MHz \\
+PAL  & W.\ Europe, Australia, China, India & 625 & 50\,Hz & Phase-alt on 4.43\,MHz \\
+SECAM & France, E.\ Europe, Middle East & 625 & 50\,Hz & FM sequential \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+NTSC (National Television System Committee) color was standardized by the FCC in December 1953.
+PAL (Phase Alternating Line) was developed by Walter Bruch at Telefunken in Hanover, West Germany,
+patented in December 1962, and first broadcast in the UK in July 1967 and West Germany in August 1967
+(Wikipedia, PAL). SECAM (Séquentiel Couleur à Mémoire) was developed by Henri de France and first
+broadcast in France in 1967.
+
+PAL's key engineering advantage: the phase of the color subcarrier is deliberately inverted on
+alternate lines. A simple 1-line delay circuit in the receiver allows phase errors to cancel,
+making PAL more robust against multipath propagation and antenna alignment errors than NTSC.
+This is why NTSC earned the informal nickname ``Never The Same Color.''
+
+\subsection{Module B Reference --- NTSC and PAL Engineering}
+
+\subsubsection{NTSC Color Subcarrier Derivation}
+
+The original NTSC monochrome standard used a 30.000\,Hz frame rate. When color was added in 1953,
+the 3.898125\,MHz candidate subcarrier produced visible interference with the 4.500\,MHz audio
+intercarrier. Engineers reduced the subcarrier multiple from 495 to 455 (half-line multiples) and
+moved the beat frequency from approximately 600\,kHz to approximately 920\,kHz. To make this beat
+frequency exactly equal to an odd multiple of half the line scan frequency, they reduced all timing
+parameters by 0.1\% (a factor of 1000/1001). The final values:
+\begin{itemize}[leftmargin=*]
+  \item Color subcarrier: $315/88\,\text{MHz} = 3.57954545\ldots\,\text{MHz}$
+  \item Line scan frequency: $9/572\,\text{MHz} = 15734.27\,\text{Hz}$
+  \item Frame rate: $30 \times 1000/1001 = 29.97002997\ldots\,\text{fps}$
+\end{itemize}
+(SMPTE Timecode article, Wikipedia; Phil Rees Timecode Reference)
+
+\subsubsection{PAL Color Subcarrier}
+
+PAL uses a subcarrier of 4.43361875\,MHz (PAL\,B/G/H/I/D). The phase alternation occurs on alternate
+lines: the subcarrier is rotated by $+90°$ on odd lines and $-90°$ on even lines relative to the
+reference burst. The receiver adds the current line to the 1-line-delayed previous line; phase errors
+cancel in the summation while chrominance information (which is $180°$ different between lines) combines
+constructively. PAL's 625-line system provides 576 active lines of vertical resolution compared to
+NTSC's 480 active lines --- a 20\% resolution advantage.
+
+\subsection{Module C Reference --- SMPTE Timecode}
+
+\subsubsection{The 29.97 Problem}
+
+The 0.1\% reduction in NTSC timing caused a specific problem: timecode that counted frames at
+exactly 30 per second (nominal) while the actual frame rate was 29.97\,fps caused cumulative drift.
+After one hour, the timecode read 01:00:00:00 while the wall clock showed 01:00:03.6 seconds. Over
+a broadcast day, the error approaches 86.4 seconds (SMPTE Timecode, Wikipedia; SMPTE Grokipedia, 2026).
+
+\subsubsection{Drop-Frame Correction}
+
+Drop-frame timecode, formalized in SMPTE 12M-1986, corrects this by skipping frame numbers 0 and 1
+at the start of every minute except minutes divisible by 10. Specifically:
+\begin{itemize}[leftmargin=*]
+  \item 18 frame-numbers dropped per 10-minute block (= 18,000 frames at 30\,fps)
+  \item Effective rate: $30 \times 0.999 = 29.97\,\text{fps}$
+  \item Residual error: $1.0\,\text{ppm}$ (approximately 86.4\,ms per day)
+\end{itemize}
+No actual video frames are dropped. Only the numbering labels skip. Drop-frame notation uses
+semicolons (;) as separators rather than colons (:).
+
+\subsubsection{Timecode Formats}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Format} & \tableheader{Description} & \tableheader{Standard} \\
+\midrule
+LTC & Longitudinal Timecode: biphase-mark encoded audio signal on dedicated track & ST 12-1 \\
+VITC & Vertical Interval Timecode: embedded in video blanking interval, readable at pause & ST 12-1 \\
+ATC & Ancillary Timecode: embedded in serial digital video SDI ancillary data space & ST 12-2 \\
+HFR TC & High Frame Rate extension for rates above 40\,fps (up to 120\,fps via user bits) & ST 12-3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+SMPTE ST 12 supports frame rates of: 23.976, 24, 25, 29.97, 30, 47.95, 48, 50, 59.94, and 60\,fps,
+with ST 12-3 extending support to 120\,fps (SMPTE Grokipedia, 2026).
+
+\subsubsection{Broadcast Sync}
+
+Modern broadcast synchronization uses IEEE\,1588 Precision Time Protocol (PTP), which replaces the
+analog black-burst (NTSC) and tri-level sync (HD) reference generators. PTP provides sub-microsecond
+accuracy over IP networks, enabling synchronized multi-camera production without physical sync cables.
+This represents the convergence point where the 50/60\,Hz physical reference becomes a digital
+timestamp.
+
+\subsection{Module D Reference --- The Polyrhythm Architecture}
+
+\subsubsection{The 300Hz LCM}
+
+The Least Common Multiple of 50 and 60 is 300. This means the two standards only synchronize
+(return to a common phase point) every 1/300th of a second. At 300\,Hz, both 50\,Hz (6 cycles per
+300\,Hz period) and 60\,Hz (5 cycles per 300\,Hz period) divide evenly. A 300\,Hz display, in
+principle, could present a frame aligned to either standard's field boundary with zero fractional
+offset. This mathematical property underlies the 120\,Hz television standard, which is LCM(24, 25, 30)
+and thus accommodates film (24\,fps), PAL video (25\,fps), and NTSC video (30\,fps) without judder.
+
+\subsubsection{3:2 Pulldown}
+
+To transfer 24\,fps film to NTSC's 59.94 fields per second, each film frame is assigned either
+2 or 3 video fields in alternating pattern (A=3, B=2, C=3, D=2, \ldots). This ``3:2 pulldown'' causes
+a periodic motion cadence artifact visible in slow-motion playback and in certain camera movements.
+The pattern repeats every 5 film frames, creating a 4:2 pulldown sequence at the sequence level.
+Reverse telecine (``inverse pulldown'') must detect and remove this pattern to recover the original
+24\,fps timing for DVD mastering or digital intermediate work.
+
+\subsubsection{Standards Conversion Methods}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Method} & \tableheader{Mechanism / Artifacts} & \tableheader{Quality} \\
+\midrule
+Frame dropping/duplication & Remove or repeat frames; produces temporal stutter & Poor \\
+3:2 pulldown & Cadence artifacts; acceptable for film-sourced content & Moderate \\
+Field blending & Mix adjacent fields; produces motion blur & Moderate \\
+Motion-compensated interpolation & Optical-flow frame synthesis; smooth but requires compute & Good \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module E Reference --- High-Frequency Refresh Displays}
+
+\subsubsection{Sample-and-Hold Motion Blur}
+
+Modern flat-panel displays (LCD, OLED) hold each frame on screen for the full frame period, unlike
+CRTs which scanned briefly and went dark. The eye, tracking a moving object, integrates the held
+image over the frame period, producing motion blur proportional to object velocity $\times$ frame
+time. At 60\,Hz (16.7\,ms frame time), this blur is substantial. At 240\,Hz (4.2\,ms), it is
+reduced by a factor of four. Formula: blur width (pixels) = motion speed (px/s) $\times$ frame
+time (s). At 3840\,px/s motion (1080p screen width per second), 60\,Hz produces 64 pixels of blur;
+240\,Hz produces 16 pixels (Medium, Luizbizzio, 2025).
+
+\subsubsection{MPRT vs GtG}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{GtG (Gray-to-Gray):} Time for a pixel to transition between two luminance levels.
+        Relevant for preventing ghosting/trailing.
+  \item \textbf{MPRT (Moving Picture Response Time):} Perceived blur duration during eye-tracking
+        motion. Combines pixel response time and display persistence. The more perceptually
+        relevant metric; MPRT $\leq$ 2\,ms is required for visibly sharp motion on 240+\,Hz displays.
+\end{itemize}
+
+\subsubsection{Perceptual Science}
+
+Frontiers in Neuroscience (PMC 8777290, 2022): An EEG study using Steady-State Motion Visual Evoked
+Potentials found that increasing refresh rate from 60\,Hz to 120\,Hz significantly improved visual
+motion evoked potential amplitude across stimulation frequencies of 7--28\,Hz. For high-velocity
+stimuli, 240\,Hz or greater was recommended. This provides peer-reviewed evidence that human motion
+perception extracts information beyond the classical ``24\,fps is sufficient'' claim.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Rate} & \tableheader{Frame Time} & \tableheader{Input Lag vs 60Hz} & \tableheader{Notes} \\
+\midrule
+60\,Hz & 16.7\,ms & baseline & Standard consumer; NTSC legacy \\
+120\,Hz & 8.3\,ms & $-$8.4\,ms & LCM(24/25/30); TV standard \\
+144\,Hz & 6.9\,ms & $-$9.8\,ms & Entry gaming; most common upgrade \\
+240\,Hz & 4.2\,ms & $-$12.5\,ms & Professional gaming sweet spot \\
+360\,Hz & 2.8\,ms & $-$13.9\,ms & Esports; Alienware AW2523HF \\
+500\,Hz & 2.0\,ms & est.\ $-$14.7\,ms & Production 2024--2025 \\
+1000\,Hz & 1.0\,ms & est.\ $-$15.7\,ms & Research/esports prototype \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Input lag reduction from 60\,Hz to 360\,Hz: up to 28\,ms in Fortnite benchmarks at Epic settings
+(PCWorld, 2023). Professional esports survey of 1,000+ players: 66\% use 240\,Hz, 11\% use 360\,Hz.
+
+\subsubsection{Variable Refresh Rate and BFI}
+
+VRR standards (VESA Adaptive Sync, AMD FreeSync, NVIDIA G-Sync) synchronize display refresh to GPU
+output, eliminating screen tearing and stuttering during frame rate variation. Black Frame Insertion
+(BFI) inserts a black frame between content frames, effectively halving persistence without reducing
+refresh rate, producing CRT-like clarity. BFI only works effectively at $\geq$240\,Hz to avoid
+visible flicker.
+
+\subsection{Module F Reference --- Large Format, 8K, and Scanning Backs}
+
+\subsubsection{Medium Format Sensor Landscape}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2.5cm}C{2cm}C{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{System} & \tableheader{Resolution} & \tableheader{Sensor Size} & \tableheader{Bit Depth} & \tableheader{Dynamic Range} \\
+\midrule
+Phase One IQ4 150MP & 150\,MP & 53.7$\times$40.4\,mm & 16-bit & 15\,stops \\
+Hasselblad X2D II 100C & 100\,MP & 43.8$\times$32.9\,mm & 16-bit & 15.3\,stops \\
+Fujifilm GFX 100S II & 100\,MP & 43.8$\times$32.9\,mm & 14-bit & $\sim$14\,stops \\
+Hasselblad H6D-400c MS & 400\,MP (composite) & 53.7$\times$40.4\,mm & 16-bit & 15\,stops \\
+Phase One IQ3 100MP & 100\,MP & 53.7$\times$40.4\,mm & 16-bit & 15\,stops \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Phase One sensor (53.7$\times$40.4\,mm) covers approximately the full frame of 645 medium
+format film. The Hasselblad/Fuji 43.8$\times$32.9\,mm sensor is a 1.3$\times$ crop of true 645,
+fitting between full-frame 35\,mm (36$\times$24\,mm) and full-645. (PetaPixel, Capture Integration
+shootout, July 2025; EOSHD medium format guide).
+
+\subsubsection{Trilinear CCD Scanning Backs}
+
+A digital scanning back replaces the matrix area sensor with a single row of trilinear CCD sensors
+(three rows: R, G, B) that sweeps mechanically across the focal plane. For each column position, the
+sensor captures full red, full green, and full blue data --- no Bayer filter, no color interpolation.
+This eliminates the mosaic color estimation that reduces effective resolution in matrix sensors.
+Advantages:
+\begin{itemize}[leftmargin=*]
+  \item True RGB color at every pixel: no Bayer interpolation artifacts
+  \item Immune to off-axis light fall-off (no vignetting from lens angle)
+  \item Very large scan areas compatible with 4$\times$5 view camera movements (rise, shift, tilt)
+  \item File sizes: BetterLight Super8K produces 1.1\,GB 48-bit uncompressed TIFF at maximum resolution
+        (12,000$\times$15,990 pixels $\approx$ 192\,MP, 300\,ppi over 40$\times$53 inch scan area)
+\end{itemize}
+Limitation: exposure time measured in minutes; no moving subjects. Cultural heritage and archival
+digitization applications (maps, manuscripts, paintings, architectural drawings).
+(Creekside Digital; Wikipedia, Digital Scan Back; Wikipedia, BetterLight)
+
+The 2025 DIY ``Project Gigapixel'' camera (Yannick Richter) achieved 3,200\,MP (80,000$\times$40,000
+pixels) using an Epson flatbed scanner's 12-line ILX561K CCD with custom Raspberry Pi control;
+a full-resolution capture takes over 30 minutes. (PetaPixel, November 2025)
+
+\subsubsection{8K Standards and NHK Super Hi-Vision}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Standard} & \tableheader{Resolution} & \tableheader{Frame Rate} & \tableheader{Notes} \\
+\midrule
+ITU-R BT.2020 & 7680$\times$4320 & Up to 120\,fps & 10/12-bit; Rec.2020 wide gamut \\
+SMPTE ST 2036-1 & 7680$\times$4320 & Up to 120\,fps & UHDTV2; defines MPEG-H / HEVC \\
+8K Association & 7680$\times$4320 & 24/30/60\,fps & 600\,nits peak; HEVC; HDMI 2.1 \\
+CTA 8K Standard & 7680$\times$4320 & 24/30/60\,fps & LG-aligned; competing with 8KA \\
+NHK SHV (BS8K) & 7680$\times$4320 & 60/120\,fps & Launched December 1, 2018 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Total pixel count: 33.2\,million per frame (4$\times$ 4K, 16$\times$ 1080p). NHK's BS8K channel
+launched December 1, 2018, carrying documentaries, sports, and remastered films including 2001:
+A Space Odyssey (from 70\,mm prints). NHK developed a 133-megapixel 8K CMOS prototype for 60\,fps
+capture. The Samsung QN990F (2025) features Mini-LED backlighting, NQ8 AI Gen3 processor for 8K
+upscaling, and motion rate up to 240\,Hz. (Wikipedia 8K Resolution; Grokipedia 8K Resolution, 2026)
+
+As of 2026, Samsung holds nearly the entire consumer 8K TV market following LG, Sony, and others
+exiting the segment. Dolby Vision is effectively absent from new consumer 8K televisions; Samsung's
+ecosystem is HDR10+. (Grokipedia, 2026)
+
+\subsubsection{HDR Standards Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Standard} & \tableheader{Bit Depth} & \tableheader{Metadata} & \tableheader{Notes} \\
+\midrule
+HDR10 & 10-bit & Static & Open standard; universal baseline \\
+HLG & 10-bit & None & BBC/NHK; backward compatible with SDR \\
+HDR10+ & 10-bit & Dynamic & Samsung/Amazon; open royalty-free \\
+Dolby Vision & 12-bit & Dynamic & Dolby proprietary; exits 8K segment 2026 \\
+Dolby Vision 2 & 12-bit & Dynamic & 2025 announcement; no 8K implementations yet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Action} \\
+\midrule
+Photosensitivity & High-frequency displays and flicker rates may be medically relevant for photosensitive users & ANNOTATE \\
+Numerical claims & All frequency values, resolution specs, and timecode mathematics must cite primary standards & GATE \\
+Geopolitical framing & The 50/60\,Hz divide has infrastructure-justice implications (Global South legacy adoption) & ANNOTATE \\
+Manufacturer claims & Distinguish marketing ``motion rate'' from measured MPRT; flag upscaled vs.\ native 8K & GATE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Standards Bodies and Technical Organizations}
+
+\begin{itemize}[leftmargin=*]
+  \item SMPTE ST 12M (SMPTE 12M-1975, revised 1986, split 2008 into ST 12-1 and ST 12-2)
+  \item SMPTE ST 12-3 (High Frame Rate Timecode extension)
+  \item SMPTE ST 2036-1 (Ultra High Definition Television, UHDTV2)
+  \item ITU-R BT.2020 (Parameter Values for Ultra High Definition Television)
+  \item ITU-R BT.709 (HDTV standard reference)
+  \item IEEE 1588 (Precision Time Protocol)
+  \item EBU Technical Recommendation R68 (25\,fps timecode)
+  \item VESA DisplayPort 1.4 specification (2016)
+  \item HDMI 2.1 specification (HDMI Forum, 2017)
+  \item CTA 8K Ultra HD TV standard (2019, LG-aligned)
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}[leftmargin=*]
+  \item Han, Xu, Zheng, et al. (2022). ``Assessing the Effect of the Refresh Rate of a Device on
+        Various Motion Stimulation Frequencies Based on Steady-State Motion Visual Evoked Potentials.''
+        \textit{Frontiers in Neuroscience}, PMC 8777290.
+\end{itemize}
+
+\subsubsection{Manufacturer Documentation}
+
+\begin{itemize}[leftmargin=*]
+  \item Hasselblad, ``Medium Format Advantages'' (hasselblad.com/learn/medium-format/)
+  \item Hasselblad, ``H6D-400c MS Press Release'' (2018)
+  \item Hasselblad, ``X1D II 50C Product Documentation'' (hasselblad.com)
+  \item Phase One, IQ3 100MP / IQ4 150MP product specifications
+  \item BetterLight, ``Digital Scanning Camera Inserts'' (betterlight.com)
+  \item Creekside Digital, ``Large Format Digitization'' (creeksidedigital.com)
+  \item Samsung 8K product specifications: QN900D (2024), QN990F (2025)
+\end{itemize}
+
+\subsubsection{Reference Articles}
+
+\begin{itemize}[leftmargin=*]
+  \item Wikipedia, ``PAL'' (accessed March 2026)
+  \item Wikipedia, ``SMPTE timecode'' (accessed March 2026)
+  \item Wikipedia, ``8K resolution'' (accessed March 2026)
+  \item Wikipedia, ``Digital scan back'' (accessed March 2026)
+  \item Grokipedia, ``SMPTE timecode'' (January 2026)
+  \item Grokipedia, ``8K resolution'' (March 2026)
+  \item Phil Rees, ``SMPTE EBU Timecode'' (philrees.co.uk)
+  \item The Broadcast Bridge, ``Timing: Part 4 --- Analog Television'' (March 2022)
+  \item PCWorld, ``240Hz is the new 120Hz'' (October 2023)
+  \item PetaPixel, ``Photographer Builds 3,200MP Camera Using CCD Scanner Sensor'' (November 2025)
+  \item PetaPixel, ``100-Megapixel Camera Image Quality Shootout'' (July 2025)
+\end{itemize}
+
+\newpage
+
+%% =====================================================================
+%% STAGE 3 — MISSION PACKAGE
+%% =====================================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive six-module research document on the architecture of visual time standards
+covering the 50/60\,Hz power-grid origin, NTSC/PAL engineering, SMPTE timecode mathematics, the
+polyrhythm structure at LCM=300\,Hz, high-frequency display science through 1000\,Hz, and large-format
+still imaging from medium-format area sensors through scanning backs and 8K acquisition. The final
+deliverable is a publication-quality PDF ($\geq$80 pages) with complete citation apparatus, wave-based
+parallel production, and a synthesis module tracing the polyrhythm concept across all six domains.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+  WAVE 0: Foundation (Sequential, Haiku)
+    Source index, shared frequency/resolution schema, module templates
+                |
+  WAVE 1: Parallel Research Production (Sonnet + Opus, 3 parallel tracks)
+    Track A         Track B         Track C
+    [A] Temporal    [C] SMPTE       [E] HF Refresh
+    [B] NTSC/PAL    [D] Polyrhythm  [F] LF / 8K
+                |
+  CAPCOM GATE (human review: numerical accuracy, HDR claims, scope check)
+                |
+  WAVE 2: Synthesis (Sequential, Opus)
+    Cross-module polyrhythm through-line
+    Integration of LCM mathematics across all six modules
+    Safety/sensitivity review
+                |
+  WAVE 3: Publication + Verification (Sequential, Sonnet)
+    Final PDF assembly, bibliography, verification matrix
+    CAPCOM final approval
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{L\arabic*.}]
+  \item \textbf{Shared Schema Layer} --- Frequency tables, frame-rate matrices, resolution comparisons
+  \item \textbf{Module Research Layer} --- Six parallel documents (one per module)
+  \item \textbf{Synthesis Layer} --- Cross-module polyrhythm essay
+  \item \textbf{Publication Layer} --- Assembled PDF with complete apparatus
+  \item \textbf{Verification Layer} --- Test plan execution, source audit
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}XC{2.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Shared Schema & Frequency/resolution tables, frame-rate conversion matrix & W0 \\
+2 & Module A Document & Power grid history, 50/60 origin, 3-standard world & W1-A \\
+3 & Module B Document & NTSC/PAL engineering parameters, subcarrier math & W1-A \\
+4 & Module C Document & SMPTE timecode, drop-frame proof, all formats & W1-B \\
+5 & Module D Document & LCM=300, pulldown, conversion methods & W1-B \\
+6 & Module E Document & HF refresh science, MPRT/GtG, VRR, peer-reviewed evidence & W1-C \\
+7 & Module F Document & MF sensors, scanning backs, 8K/SHV, HDR fragmentation & W1-C \\
+8 & Synthesis Essay & Polyrhythm through-line across all six modules & W2 \\
+9 & Final PDF & Assembled document $\geq$80 pages, full bibliography & W3 \\
+10 & Verification Report & All 12 success criteria tested, safety checks passed & W3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Source index & None & Haiku & 4,000 \\
+W0: Shared schema & None & Haiku & 6,000 \\
+W1-A: Module A & W0 & Sonnet & 18,000 \\
+W1-A: Module B & W0 & Sonnet & 20,000 \\
+W1-B: Module C & W0 & Sonnet & 22,000 \\
+W1-B: Module D & W0, W1-C partial & Sonnet & 16,000 \\
+W1-C: Module E & W0 & Sonnet & 18,000 \\
+W1-C: Module F & W0 & Opus & 24,000 \\
+W2: Synthesis & All W1 & Opus & 20,000 \\
+W3: Assembly & W2 & Sonnet & 12,000 \\
+W3: Verification & W3 & Sonnet & 8,000 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total estimated}} & \textbf{168,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}C{2cm}XC{2.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} & \tableheader{Assigned To} \\
+\midrule
+Opus & $\sim$30\% & Synthesis, cross-module judgment, Module F cultural complexity & W2 synthesis; Module F \\
+Sonnet & $\sim$60\% & Module document production, assembly, verification & Modules A-E; W3 \\
+Haiku & $\sim$10\% & Shared schemas, scaffolding, source index & W0 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Model} & \tableheader{CAPCOM} \\
+\midrule
+W0 & Foundation & Sequential & Haiku & No \\
+W1 & Research Production & Parallel ($\times$3) & Sonnet + Opus & Yes (post) \\
+W2 & Synthesis & Sequential & Opus & Yes (pre) \\
+W3 & Publication + Verify & Sequential & Sonnet & Yes (final) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Source index & Structured bibliography JSON; 30+ sources categorized & Haiku \\
+Frequency schema & Shared table: 50/60Hz, frame rates, LCM values, line counts & Haiku \\
+Resolution schema & Sensor dimensions, pixel counts, bit depths (all modules) & Haiku \\
+Module templates & Six document scaffolds with section headers pre-populated & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A --- Modules A and B} (run simultaneously, no dependencies between them)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Module} & \tableheader{Key Outputs} & \tableheader{Model} \\
+\midrule
+A & Power grid history; NTSC/PAL/SECAM adoption table; phosphor/flicker physics & Sonnet \\
+B & Color subcarrier derivation; 525 vs.\ 625 parameters; PAL phase alternation & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Modules C and D} (Module D may pull Module C output for LCM context)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Module} & \tableheader{Key Outputs} & \tableheader{Model} \\
+\midrule
+C & 0.1\% offset derivation; drop-frame proof with examples; LTC/VITC/ATC/ST 12-3 & Sonnet \\
+D & LCM=300 derivation; 3:2 pulldown walkthrough; conversion method comparison & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track C --- Modules E and F} (largest token budget; F uses Opus for sensor complexity)
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}XC{2cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{Module} & \tableheader{Key Outputs} & \tableheader{Model} \\
+\midrule
+E & MPRT/GtG distinction; sample-and-hold physics; neuroscience citation; display table & Sonnet \\
+F & Medium format table; scanning back operation; BetterLight spec; 8K standards table; HDR fragmentation & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+Polyrhythm through-line & Essay tracing 50/60Hz polyrhythm from power grid through every module & Opus \\
+LCM topology & Mathematical through-line: LCM(50,60)=300, LCM(24,25,30)=600, drop-frame as 1/1001 correction & Opus \\
+Cross-module consistency & Verify shared terms and numbers match across all six module documents & Opus \\
+Sensitivity review & Flag any medical (photosensitivity) or geopolitical framing issues & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} \\
+\midrule
+LaTeX assembly & Compile all six module documents + synthesis into master PDF & Sonnet \\
+Bibliography final & Consolidate and de-duplicate all citations; verify URLs live & Sonnet \\
+Verification matrix & Execute all test plan items; mark pass/fail & Sonnet \\
+CAPCOM final & Present to human for review before archive & Human (CAPCOM) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Wave 0 shared schema is placed at the start of every Wave 1 context window (cache prefix)
+  \item Frequency/resolution tables computed once in W0 and referenced, not recomputed
+  \item Source index JSON is the first attachment in every W1 context to enable consistent citations
+  \item 5-minute TTL cache exploited: all three W1 tracks should start within the cache window of W0
+  \item Module C's drop-frame proof is a standalone mathematical document; cache as a reusable component
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Wave} & \tableheader{Sessions} & \tableheader{Windows} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Foundation & 1 & 1 & 10,000 \\
+W1 Track A & 1 & 2 & 38,000 \\
+W1 Track B & 1 & 2 & 38,000 \\
+W1 Track C & 1--2 & 2 & 42,000 \\
+W2: Synthesis & 1 & 1 & 20,000 \\
+W3: Publication & 1 & 1--2 & 20,000 \\
+\midrule
+\textbf{Total} & \textbf{5--6} & \textbf{9--10} & \textbf{168,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+  [W0: Source Index + Shared Schema]
+        |        |        |
+        v        v        v
+  [W1-A:  ] [W1-B:  ] [W1-C:  ]     <-- Parallel
+  [Mod A  ] [Mod C  ] [Mod E  ]
+  [Mod B  ] [Mod D  ] [Mod F  ]
+        |        |        |
+        v        v        v
+  [CAPCOM GATE: numerical + scope review]
+                 |
+                 v
+         [W2: Synthesis]
+         [Polyrhythm essay]
+         [Cross-module check]
+                 |
+         [CAPCOM GATE: pre-publication]
+                 |
+                 v
+         [W3: Assembly + Verify]
+                 |
+         [CAPCOM FINAL]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Target \%} \\
+\midrule
+Safety-critical & 4 & Mandatory & BLOCK & 15\% \\
+Core functionality & 18 & Required & BLOCK & 50\% \\
+Integration & 8 & Required & BLOCK & 22\% \\
+Edge cases & 5 & Best-effort & LOG & 13\% \\
+\midrule
+\textbf{Total} & \textbf{35} & & & 100\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to standards bodies, peer-reviewed journals, or manufacturer documentation. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Every frequency value, frame rate, resolution, and timecode formula attributed to a specific standard or source \\
+SC-ADV & No policy advocacy & Document presents technical findings without advocating for one standard over another \\
+SC-MED & Photosensitivity disclaimer & Any discussion of flicker rates includes appropriate note re: photosensitive readers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Power grid causal chain (SC-1) & Module A contains explicit source linking 50/60Hz power frequency to broadcast field rate \\
+CF-02 & Three-standard table (SC-1) & NTSC/PAL/SECAM table with regions, line counts, field rates, color systems present \\
+CF-03 & NTSC subcarrier derivation (SC-2) & Module B contains exact value 315/88 MHz = 3.57954545 MHz with derivation steps \\
+CF-04 & PAL phase alternation (SC-2) & Module B explains the 1-line delay correction and Hanover bars suppression \\
+CF-05 & 0.1\% offset origin (SC-3) & Module C traces offset to color subcarrier compatibility requirement with exact factor 1000/1001 \\
+CF-06 & Drop-frame arithmetic (SC-3) & Module C shows 18 frames per 10 min block = 18,000 at 30fps, residual 86.4ms/day \\
+CF-07 & All timecode formats (SC-4) & Module C documents LTC, VITC, ATC, ST 12-3 with standards references \\
+CF-08 & LCM(50,60)=300 proof (SC-5) & Module D contains explicit LCM derivation and explanation of sync point frequency \\
+CF-09 & 3:2 pulldown walkthrough (SC-6) & Module D shows the A=3/B=2/C=3/D=2 field assignment pattern with example \\
+CF-10 & Neuroscience citation (SC-7) & Module E cites PMC 8777290 with correct findings ($\geq$120Hz recommendation) \\
+CF-11 & MPRT vs GtG distinction (SC-8) & Module E provides separate definitions with example values \\
+CF-12 & VRR and BFI operation (SC-8) & Module E describes both technologies with operational conditions \\
+CF-13 & Sensor dimension table (SC-9) & Module F table covers Phase One/Hasselblad/Fuji with sensor dimensions in mm \\
+CF-14 & Scanning back operation (SC-10) & Module F explains trilinear CCD sweep, no interpolation, scan time \\
+CF-15 & BetterLight spec data (SC-10) & Module F contains 12,000x15,990, 1.1GB, 48-bit, 300ppi values with source \\
+CF-16 & 8K standards table (SC-11) & Module F table covers ITU-R BT.2020, ST 2036-1, 8KA, NHK SHV \\
+CF-17 & HDR fragmentation (SC-11) & Module F documents Samsung near-monopoly and Dolby Vision exit from 8K \\
+CF-18 & Synthesis polyrhythm (SC-12) & Synthesis module traces polyrhythm concept through all six domain areas \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests (selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & Mod A $\rightarrow$ B cascade & Module B's NTSC subcarrier derivation explicitly references the 60Hz power-grid standard established in Module A \\
+IN-02 & Mod B $\rightarrow$ C cascade & Module C's 0.1\% offset derives from the same color subcarrier value established in Module B \\
+IN-03 & Mod C $\rightarrow$ D cascade & Module D's LCM analysis references the 29.97fps drop-frame context from Module C \\
+IN-04 & Mod D $\rightarrow$ E cascade & Module E's 120Hz as LCM(24,25,30) references the polyrhythm mathematical framework of Module D \\
+IN-05 & Mod E $\rightarrow$ F bridge & Module F's 8K frame rates (24/30/60fps) are contextualized against Module E's refresh science \\
+IN-06 & Cross-module consistency & The value 29.97fps appears consistently as 30/1.001 across Modules B, C, and D \\
+IN-07 & Self-containment & A reader without prior knowledge can follow the full power-grid-to-scanning-back lineage from Module A through F \\
+IN-08 & Synthesis integration & Synthesis essay references specific technical findings from all six modules, not generic claims \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1: Power grid causal chain & CF-01, CF-02, IN-01 & Pending \\
+SC-2: NTSC/PAL engineering parameters & CF-03, CF-04 & Pending \\
+SC-3: 0.1\% offset and drop-frame & CF-05, CF-06, IN-02 & Pending \\
+SC-4: All SMPTE timecode formats & CF-07 & Pending \\
+SC-5: LCM=300 polyrhythm foundation & CF-08, IN-03 & Pending \\
+SC-6: Standards conversion methods & CF-09 & Pending \\
+SC-7: Peer-reviewed neuroscience citation & CF-10 & Pending \\
+SC-8: MPRT/GtG/VRR/BFI documentation & CF-11, CF-12, IN-04 & Pending \\
+SC-9: Medium format sensor landscape & CF-13, IN-05 & Pending \\
+SC-10: Scanning back operation and specs & CF-14, CF-15 & Pending \\
+SC-11: 8K standards and HDR fragmentation & CF-16, CF-17 & Pending \\
+SC-12: Polyrhythm synthesis across all modules & CF-18, IN-08, IN-07 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at CAPCOM gates; wave sequencing \\
+PLAN & Planner & Wave decomposition; parallel track scheduling; dependency graph management \\
+TOPO & Topology & Agent team structure; mid-mission restructuring if a track stalls \\
+SCOUT & Research & Gap-fill web research; source validation; secondary searches \\
+ARCH & Architecture & Cross-cutting structural decisions; schema consistency \\
+EXEC-A & Executor Alpha & Wave 1 Track A production (Modules A and B) \\
+EXEC-B & Executor Beta & Wave 1 Track B production (Modules C and D) \\
+EXEC-C & Executor Gamma & Wave 1 Track C production (Modules E and F) \\
+CRAFT-SIGNAL & Domain Specialist & Broadcast engineering, SMPTE, sync chains, display science \\
+CRAFT-OPTICS & Domain Specialist & Large-format photography, sensor architecture, 8K imaging \\
+INTEG & Integration & Cross-module relationship validation; polyrhythm thread \\
+VERIFY & Verification & Source validation; numerical accuracy; test plan execution \\
+SECURE & Safety & SC-SRC, SC-NUM, SC-MED enforcement; photosensitivity flags \\
+ANALYST & Pattern Analyst & LCM topology detection; cross-module mathematical consistency \\
+CAPCOM & HITL Interface & Human approval channel; three CAPCOM gates (post W1, pre W2, post W3) \\
+BUDGET & Resource & Token budget tracking per wave; session planning \\
+RETRO & Retrospective & Post-wave analysis; schema version control \\
+SURGEON & Health Monitor & Research quality degradation detection; source drift alerts \\
+LOG & Chronicle & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & The Polyrhythm Standard \\
+Activation profile & Fleet (6+ modules) \\
+Module count & 6 (A: Origins, B: NTSC/PAL, C: SMPTE, D: Polyrhythm, E: HF Display, F: LF / 8K) \\
+Crew roles & 19 \\
+Wave count & 4 (W0--W3) \\
+Parallel tracks & 3 (Wave 1) \\
+CAPCOM gates & 3 \\
+Total estimated tokens & 168,000 \\
+Estimated sessions & 5--6 \\
+Estimated context windows & 9--10 \\
+Primary model split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Safety-critical tests & 4 (all BLOCK) \\
+Total tests & 35 \\
+Output document & Publication-quality PDF $\geq$80 pages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+%% CLOSING QUOTE
+\vspace{2em}
+\begin{quotebox}
+\textit{``The number 50 and the number 60 share nothing below 300. The history of video engineering
+is the story of what happens in those spaces between --- the standards conversion equipment, the
+drop-frame hack, the 120\,Hz LCM display, the scanning back's trilinear patience. Meaning lives
+not in the frequencies themselves but in the architecture built to reconcile them.''}
+
+\vspace{0.5em}
+\hfill{\small\sffamily\textcolor{subtlegray}{--- Research Mission Vision, GSD Ecosystem, March 2026}}
+\end{quotebox}
+
+\end{document}

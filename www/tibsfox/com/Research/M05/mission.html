@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Module Split Analysis</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-m05">
+  <header>
+    <h1>Module Split Analysis</h1>
+    <div class="subtitle">Module Sizing &middot; Cohesion Metrics &middot; Split Frameworks &middot; Cross-Reference Contracts &middot; Structural Remediation</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-when-and-why-to-split">When &amp; Why</a>
+      <a href="page.html?doc=02-module-sizing-principles">Sizing</a>
+      <a href="page.html?doc=03-cohesion-analysis">Cohesion</a>
+      <a href="page.html?doc=04-maintaining-coherence-after-splitting">Coherence</a>
+      <a href="page.html?doc=05-split-decision-framework">Framework</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The label and the neighborhood share a founding myth. Separating them into two modules does not
+      diminish that myth &mdash; it gives each half room to breathe, and room to mean what it actually means.
+      The NastyMix story is a story about what independent labels can build from a $900 budget and a
+      cassette player. The Central District story is a story about what a community preserves after the
+      buildings change hands. Both stories need the full stage.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Research Tracks</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~104K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">BLOCK Tests</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/mod05split-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/mod05split-index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schemas, cross-reference contracts, series integration map</td><td>Sequential</td><td>5K</td></tr>
+        <tr><td>1</td><td>Parallel Research</td><td>Track A: 05a Label (MA+MB+MC+MD) &middot; Track B: 05b Place (ME+MF+MG)</td><td>Parallel</td><td>64K</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-module integration, Emerald Street audit, line calibration</td><td>Sequential</td><td>25K</td></tr>
+        <tr><td>3</td><td>Verification</td><td>Final modules, success criteria checklist, CAPCOM review</td><td>Sequential</td><td>10K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Module</th><th>Scope</th><th>Primary Source</th><th>Target Lines</th><th>Cluster</th></tr></thead>
+      <tbody>
+        <tr><td>mod05a</td><td>NastyMix Label Ecosystem: founding, roster, economics, collapse</td><td>HistoryLink (9793, 9794), Emerald Street</td><td>280-320</td><td>Music Industry</td></tr>
+        <tr><td>mod05b</td><td>Central District Place Memory: spatial mapping, MOHAI, gentrification</td><td>MOHAI Legacy exhibit, UW CRL&amp;HP</td><td>280-320</td><td>Community Heritage</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Research Tracks</h2>
+
+    <table>
+      <thead><tr><th>Track</th><th>Subject</th><th>Module</th><th>Dependencies</th></tr></thead>
+      <tbody>
+        <tr><td>MA</td><td>NastyMix founding and co-founder profiles</td><td>05a</td><td>Wave 0</td></tr>
+        <tr><td>MB</td><td>Full roster: Northwest regional acts</td><td>05a</td><td>Wave 0, MA</td></tr>
+        <tr><td>MC</td><td>Full roster: national signings</td><td>05a</td><td>Wave 0, MA</td></tr>
+        <tr><td>MD</td><td>Business arc and collapse timeline</td><td>05a</td><td>Wave 0, MA-MC</td></tr>
+        <tr><td>ME</td><td>Central District spatial mapping and key sites</td><td>05b</td><td>Wave 0</td></tr>
+        <tr><td>MF</td><td>MOHAI as primary archive (Legacy exhibit)</td><td>05b</td><td>Wave 0, ME</td></tr>
+        <tr><td>MG</td><td>Gentrification arc and preservation response</td><td>05b</td><td>Wave 0, ME, MF</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-01</td><td>No undocumented financial claims</td><td>All dollar figures and sales numbers attributed to HistoryLink or Seattle Times or Abe</td></tr>
+        <tr><td>SC-02</td><td>Nes Rodriguez health note</td><td>Note included as preservation urgency, not exploited as tragedy narrative</td></tr>
+        <tr><td>SC-03</td><td>Gentrification data sourced</td><td>All demographic percentages attributed to MOHAI/AASLH documentation</td></tr>
+        <tr><td>SC-04</td><td>QTPOC Legacy exhibit content</td><td>Panel content presented from community-curated framing; not flattened or summarized</td></tr>
+        <tr><td>SA-01</td><td>Emerald Street cross-reference</td><td>All formation-era roster claims cross-referenced against Abe (2020)</td></tr>
+        <tr><td>SA-02</td><td>HistoryLink primary sourcing</td><td>Gold Party (1989) and Fifth Anniversary (1990) sourced to files 9793, 9794</td></tr>
+        <tr><td>SA-03</td><td>MOHAI exhibit accuracy</td><td>Dates, curators, partnerships, awards match MOHAI page and AASLH documentation</td></tr>
+        <tr><td>SA-04</td><td>UW Civil Rights for redlining</td><td>Redlining and restrictive covenant claims reference UW CRL&amp;HP bibliography</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix: The Split Report</h2>
+
+    <table>
+      <thead><tr><th>Success Criterion</th><th>Test ID(s)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Both modules land 280-320 lines</td><td>CF-01, CF-02</td><td>Pre-mission</td></tr>
+        <tr><td>Full roster with 2+ sentence profiles</td><td>CF-03</td><td>Pre-mission</td></tr>
+        <tr><td>Business arc traceable as dated timeline</td><td>CF-04, SA-02</td><td>Pre-mission</td></tr>
+        <tr><td>MOHAI exhibit documented at full detail</td><td>CF-05, SA-03</td><td>Pre-mission</td></tr>
+        <tr><td>Gentrification arc with 3+ sourced data points</td><td>CF-06, SC-03</td><td>Pre-mission</td></tr>
+        <tr><td>Founding moment cross-reference in both modules</td><td>INT-01</td><td>Pre-mission</td></tr>
+        <tr><td>Wave plan updated with 05a/05b as parallel tracks</td><td>INT-02</td><td>Pre-mission</td></tr>
+        <tr><td>All roster claims cross-referenced to Emerald Street</td><td>SA-01</td><td>Pre-mission</td></tr>
+        <tr><td>Nes Rodriguez preservation note handled appropriately</td><td>SC-02</td><td>Pre-mission</td></tr>
+        <tr><td>Both modules pass CAPCOM review before commit</td><td>CF-07</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Mission Crew Manifest</h2>
+
+    <table>
+      <thead><tr><th>Role</th><th>Agent</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>Mission Commander</td><td>DIRECTOR</td><td>Overall split execution; wave sequencing; series integration</td></tr>
+        <tr><td>Label Historian</td><td>ARCHIVIST-A</td><td>Tracks MA-MD; NastyMix founding, roster, business arc</td></tr>
+        <tr><td>Place Historian</td><td>ARCHIVIST-B</td><td>Tracks ME-MG; spatial mapping, MOHAI, gentrification</td></tr>
+        <tr><td>Synthesis Lead</td><td>WEAVER</td><td>Wave 2 cross-module integration; founding moment cross-reference</td></tr>
+        <tr><td>Source Auditor</td><td>VERITAS</td><td>Emerald Street cross-reference audit; HistoryLink sourcing verification</td></tr>
+        <tr><td>Safety Warden</td><td>GUARDIAN</td><td>SC-01 through SC-04; community content sensitivity review</td></tr>
+        <tr><td>Series Integrator</td><td>NAVIGATOR</td><td>Series wave plan update; 05a/05b integration into larger series</td></tr>
+        <tr><td>CAPCOM</td><td>CAPCOM</td><td>Human checkpoint before final commit</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>Nastymix's 1989 &ldquo;Gold Party&rdquo; was not only the moment which defined Northwest Hip-Hop's
+    arrival as a force in the local music community. The label and the neighborhood share a founding myth.
+    Separating them into two modules does not diminish that myth &mdash; it gives each half room to breathe,
+    and room to mean what it actually means. The NastyMix story is a story about what independent labels
+    can build from a $900 budget and a cassette player. The Central District story is a story about what
+    a community preserves after the buildings change hands. Both stories need the full stage.</p>
+  </main>
+
+  <footer>
+    <p>Module Split Analysis &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

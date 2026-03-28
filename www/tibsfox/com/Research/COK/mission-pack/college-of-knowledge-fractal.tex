@@ -1,0 +1,1151 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── COLOR SCHEME: Knowledge / Education / Growth ─────────────────────────────
+\definecolor{primary}{HTML}{1A237E}      % Deep indigo  — section headers
+\definecolor{secondary}{HTML}{E65100}    % Amber        — subsection headers
+\definecolor{tertiary}{HTML}{1B5E20}     % Forest green — subsubsection headers
+\definecolor{accent}{HTML}{283593}       % Mid indigo   — pipeline arrows
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── SECTION FORMATTING ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── CUSTOM ENVIRONMENTS ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{warnbox}{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=6pt, bottom=6pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── HEADERS / FOOTERS ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{College of Knowledge --- Fractal Push Expansion}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── HYPERLINKS ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={College of Knowledge -- Fractal Push Expansion},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ═════════════════════════════════════════════════════════════════════════════
+% TITLE PAGE
+% ═════════════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Full Monty\\[0.3em]College of Knowledge}}
+
+\vspace{0.6cm}
+{\Large\sffamily\textcolor{secondary}{Fractal Push Expansion}}
+
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{0.5cm}
+{\normalsize\sffamily\textcolor{subtlegray}{gsd-skill-creator · .college/ directory · Rosetta Core Architecture}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 26, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.4em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (6 modules) \quad|\quad Est.: 8--12 context windows across 3--4 sessions}}\\[0.4em]
+{\small\sffamily\textcolor{subtlegray}{``The user sees a friendly colleague. The engine sees math.''}}
+\end{center}
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+% STAGE 1 — VISION DOCUMENT
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{College of Knowledge --- Vision Guide}
+
+\metafield{Date:}{March 26, 2026}
+\metafield{Status:}{Deep Research --- Ready for Execution}
+\metafield{Depends on:}{Cooking with Claude session, unit-circle-skill-creator-synthesis, 10-perl-cpan-addendum, gsd-mathematical-foundations-conversation, gsd-learn-kung-fu-pack-vision}
+\metafield{Context:}{gsd-skill-creator dev branch, v1.49 DACP milestone, v1.50 retrospective pending}
+
+\subsection{Vision}
+
+There is a moment in every learner's life when a library stops being a collection of books and becomes a single organism. You pull one thread and feel the whole structure shift. You open one door and find ten more inside. That moment is not an accident of curation --- it is the signature of a self-similar architecture. The College of Knowledge is that architecture, built in code.
+
+The insight is deceptively simple: skill-creator is not a tool that \textit{has} a translation capability. It \textit{is} a translation engine. The Rosetta Core --- the ability to take a concept and express it in any language, any medium, any form the learner needs --- is the spark that makes the whole system alive. Everything else is projection. A webpage is a projection. A Minecraft world is a projection. A VR campus is a projection. The code is the truth. The College is the truth expressed once, rendered everywhere.
+
+The fractal push is the generative mechanism. Plant one seed --- \textit{The Space Between} in the Mathematics Department, \textit{Cooking with Claude} in the Culinary Arts Department, the Kung Fu pack in the Mind-Body Department --- and the Calibration Engine grows the full department from that seed: seven language panels, tiered difficulty rails modeled on Knuth's 0--50 scale, observation-compare-adjust-record feedback loops in every concept node. The same grammar at every scale. A student reading Python's \texttt{math.sin} and a student reading Fortran's \texttt{DSIN} are reading the same sentence in different dialects. The College teaches you to hear both at once.
+
+``The Full Monty'' is the comprehensive realization: every department seeded, every panel populated, every feedback loop closed. Not a curriculum --- a living knowledge ecosystem that expands by the same rules that built its first room.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Knowledge is siloed by medium, not organized by structure.} Traditional educational systems separate mathematics from music, cooking from chemistry, martial arts from physics --- even when these domains share deep structural identities. Learners who master the Observe--Compare--Adjust--Record calibration pattern in baking have already mastered the core loop of compiler optimization. Nobody tells them. The College connects these isomorphisms explicitly.
+
+  \item \textbf{The codebase is not yet its own curriculum.} The skill-creator codebase has grown to 500k+ LOC across 65+ milestones. The architectural intelligence embedded in it --- the Amiga Principle, the DACP bundles, the Rosetta translation engine --- is invisible to anyone who has not lived the journey. The \texttt{.college/} directory makes the codebase navigable as a learning institution: walk through the source, learn the subject.
+
+  \item \textbf{Multi-language literacy requires deliberate architecture.} A learner who knows only Python is literate in one dialect. The Rosetta panel system creates comparative fluency: the same concept expressed in Python (systems), Perl (bridge), Lisp (heritage), VHDL (hardware), and CKAN (data infrastructure) teaches the concept AND the space between implementations. Current learning tools do not do this systematically.
+
+  \item \textbf{The calibration loop is not surfaced as a first-class pattern.} The Observe--Compare--Adjust--Record feedback loop is the single most powerful pedagogical structure in the ecosystem --- applicable from baking temperature to compiler flag tuning to martial arts stance calibration. It exists implicitly in many places. The College must surface it explicitly as the connective tissue between all departments.
+
+  \item \textbf{New departments have no generative grammar.} Adding a new subject to the College currently requires manual design. The Fractal Expansion Engine --- the pattern that, given a seed text, automatically generates the full department structure --- does not yet exist as a documented, executable specification. This mission produces that specification.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} A seed text $\rightarrow$ Rosetta Core translation $\rightarrow$ N-panel department $\rightarrow$ calibration-closed concept graph $\rightarrow$ fractal self-similarity across all scales.
+
+The College is a fractal object. At the outermost scale, it is a set of departments. Zoom into any department: it is a set of wings. Zoom into any wing: it is a set of concept nodes. Zoom into any concept node: it is a set of language panel expressions. Zoom into any panel: it is a self-contained lesson with its own calibration loop. The same structure at every scale. This is not decoration --- it is the architecture.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+GSD Skill-Creator Ecosystem
+  └── .college/
+       ├── core/
+       │    ├── rosetta/          <- Translation engine (THE SPARK)
+       │    ├── calibration/      <- Observe-Compare-Adjust-Record pattern
+       │    └── panels/           <- 7 language families
+       │         ├── systems/     <- Python, C++, Java
+       │         ├── bridge/      <- Perl
+       │         ├── heritage/    <- Lisp, Fortran, Pascal
+       │         ├── hardware/    <- VHDL
+       │         └── data-infra/  <- CKAN/SGML/XML family
+       │
+       ├── departments/
+       │    ├── mathematics/      <- Seeded: "The Space Between" (923pp)
+       │    ├── culinary-arts/    <- Seeded: "Cooking with Claude"
+       │    ├── mind-body/        <- Seeded: Kung Fu / Tai Chi packs
+       │    ├── computer-science/ <- IS the Rosetta Core (self-seeding)
+       │    ├── music-audio/      <- Seeded: Deep Audio Analyzer mission
+       │    ├── literature/       <- Seeded: "The Hundred Voices" (733pp)
+       │    ├── philosophy/       <- Seeded: "The Quark and the Compiler"
+       │    ├── natural-sciences/ <- Seeded: PNW Taxonomy / Foxfire Heritage
+       │    └── economics-work/   <- Seeded: Wasteland / Fox Infrastructure
+       │
+       └── fractal-engine/       <- THIS MISSION: generative grammar for new depts
+            ├── seed-ingestor.ts
+            ├── panel-generator.ts
+            ├── calibration-installer.ts
+            └── department-scaffold.ts
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 1: Rosetta Core Architecture
+  Spec the translation engine, panel interface contracts, routing logic,
+  Complex Plane position influence on panel selection
+
+MODULE 2: Mathematics Department
+  The Space Between seeding, unit circle synthesis, Knuth TAOCP connection,
+  wing-to-panel cross-reference table (all 7 panels), difficulty rail spec
+
+MODULE 3: Culinary Arts Department
+  Cooking with Claude vision doc, thermodynamics wing, food science,
+  Calibration Engine as central pattern, CPAN/recipe catalog architecture
+
+MODULE 4: Mind-Body Department
+  Kung Fu / Tai Chi / Qigong pack, pattern-as-practice pedagogy,
+  biomechanics panels, calibration loop for physical skill acquisition
+
+MODULE 5: Knowledge Infrastructure
+  CKAN/CPAN architecture models, .college/ directory spec,
+  discovery engine design, fascicle publication model (Knuth)
+
+MODULE 6: Fractal Expansion Engine
+  The generative grammar: seed text -> full department scaffold,
+  automated panel population, calibration loop installation,
+  department-to-department cross-linking protocol
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 --- Rosetta Core Architecture}
+Define the complete specification for the translation engine that IS skill-creator's identity. Outputs: panel interface TypeScript contract, routing algorithm (including Complex Plane position weighting from \textit{The Space Between}), panel family taxonomy (systems / bridge / heritage / hardware / data-infra), and the mapping from concept type to panel priority ordering.
+
+\subsubsection{Module 2 --- Mathematics Department}
+Execute the full seeding of the Mathematics Department from \textit{The Space Between} (923 pages). Outputs: wing catalog (Algebra, Geometry, Calculus, Statistics, Complex Analysis, Trigonometry), concept-to-panel mapping for all 7 panel families, difficulty rail implementation following Knuth's 00--50 progressive disclosure scale, and the unit circle as the department's seed crystal demonstrating complete panel expression.
+
+\subsubsection{Module 3 --- Culinary Arts Department}
+Execute the full seeding of the Culinary Arts Department from the Cooking with Claude vision and research. Outputs: wing catalog (Thermodynamics, Food Chemistry, Technique Fundamentals, Baking Science, Cultural Foundations, Home Economics), Calibration Engine as the department's central organizing pattern, CPAN-style recipe catalog architecture, and Newton's cooling law as the thermodynamics seed crystal with all-panel expression.
+
+\subsubsection{Module 4 --- Mind-Body Department}
+Execute the seeding of the Mind-Body Department from the Kung Fu and Tai Chi packs. Outputs: wing catalog (Striking Fundamentals, Grappling, Weapons, Moving Meditation, Qigong, Conditioning), biomechanics and physics panels (torque, momentum, center-of-gravity as panel-expressible concepts), the calibration loop for physical skill acquisition (how ``slightly overdone'' maps to ``slightly off-balance''), and a scope boundary for safety-critical content.
+
+\subsubsection{Module 5 --- Knowledge Infrastructure}
+Design the \texttt{.college/} directory as a discoverable knowledge catalog following CKAN and CPAN architectural precedents. Outputs: directory schema, namespace conventions, metadata format for department registration, discovery index specification, and the fascicle publication model (pre-fascicle $\rightarrow$ fascicle $\rightarrow$ volume) as the department lifecycle protocol.
+
+\subsubsection{Module 6 --- Fractal Expansion Engine}
+Produce the generative grammar that automates department creation from a seed text. Outputs: \texttt{seed-ingestor.ts} spec (ingests any primary text and extracts concept graph), \texttt{panel-generator.ts} spec (populates all 7 panel families for each concept), \texttt{calibration-installer.ts} spec (installs Observe--Compare--Adjust--Record loop in every concept node), \texttt{department-scaffold.ts} spec (assembles complete \texttt{.college/departments/<name>/} structure), and the cross-department link protocol (how mathematics connects to culinary thermodynamics connects to martial arts physics).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:    # Orchestration + memory management
+    role: "College architecture direction; cross-department coherence"
+    model: opus
+    allocation: "30%"
+
+  denise:   # Display + rendering
+    role: "Panel expression quality; pedagogy rendering across media"
+    model: sonnet
+    allocation: "40%"
+
+  paula:    # Audio/data channels
+    role: "Data flow between concept nodes; calibration loop telemetry"
+    model: sonnet
+    allocation: "20%"
+
+  68000:    # Core execution
+    role: "Scaffolding; schema generation; template instantiation"
+    model: haiku
+    allocation: "10%"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Rosetta Core Architecture specification (complete TypeScript interface contracts)
+  \item Mathematics Department: full seeding from \textit{The Space Between}
+  \item Culinary Arts Department: full seeding from Cooking with Claude materials
+  \item Mind-Body Department: full seeding from Kung Fu / Tai Chi packs (conceptual scope --- not physical instruction)
+  \item \texttt{.college/} directory schema and namespace specification
+  \item Fractal Expansion Engine: complete generative grammar spec (4 TypeScript component specs)
+  \item All 7 panel families instantiated for at least one seed crystal per department
+  \item Calibration loop (Observe--Compare--Adjust--Record) installed as first-class pattern in every concept node
+  \item Department registration and discovery index
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Computer Science Department (IS the Rosetta Core --- self-seeding, deferred to v1.50)
+  \item Music/Audio Department (Deep Audio Analyzer mission handles this separately)
+  \item Literature Department (requires dedicated \textit{The Hundred Voices} analysis session)
+  \item Philosophy Department (deferred to v1.50 unit-circle retrospective)
+  \item Natural Sciences and Economics departments (v2.0 expansion)
+  \item VR / Minecraft / web rendering layers (projections of the code truth --- separate missions)
+  \item Physical instruction or safety certification for martial arts content
+  \item DACP bundle format for inter-department agent communication (covered by v1.49)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item The Rosetta Core panel interface TypeScript contract compiles without errors and is implemented by all 7 initial panels.
+  \item The Mathematics Department concept graph contains at least 40 concept nodes, each with full 7-panel expression and a difficulty rating on the 00--50 scale.
+  \item The unit circle seed crystal demonstrates complete panel expression across all 7 families, with all expressions mathematically consistent.
+  \item The Culinary Arts Department Newton's cooling law seed crystal demonstrates complete panel expression, with the Calibration Engine generating measurably different temperature profiles based on user feedback.
+  \item The Mind-Body Department contains at least 20 concept nodes covering all six wings, each with a calibration loop that translates subjective somatic feedback (``too stiff'', ``lost balance'') into quantified adjustment parameters.
+  \item The \texttt{.college/} directory schema validates via TypeScript type-checking with zero errors; all three seeded departments register successfully against the discovery index.
+  \item The Fractal Expansion Engine generates a new department scaffold from a test seed text in a single orchestrated run, with all 4 component specs executable by Claude Code.
+  \item At least 3 cross-department concept links are established (e.g., exponential decay appears in mathematics, culinary thermodynamics, and martial arts conditioning).
+  \item All panel expressions follow the DACP structured bundle format (intent + data + code) for agent-to-agent handoff compatibility.
+  \item The Calibration Pattern (Observe--Compare--Adjust--Record) is present as a named, testable interface in every concept node across all three departments.
+  \item The knowledge infrastructure fascicle lifecycle (seed $\rightarrow$ pre-fascicle $\rightarrow$ fascicle $\rightarrow$ volume) is implemented as a typed enum in the department registration schema.
+  \item The Fractal Expansion Engine correctly routes concept types to panel families using Complex Plane position (concrete $\rightarrow$ systems panels; abstract $\rightarrow$ heritage panels; text/NLP $\rightarrow$ Perl bridge panel).
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+cooking-with-claude-compiled-session.md & Seeds Module 3 & Primary source for Culinary Arts Dept; Rosetta Core origin story \\
+unit-circle-skill-creator-synthesis.md & Seeds Module 2 & Mathematics Dept seed crystal; fractal concept proof \\
+10-perl-cpan-addendum.md & Informs Module 1 & Perl bridge panel spec; CPAN as knowledge infra model \\
+gsd-learn-kung-fu-pack-vision.md & Seeds Module 4 & Mind-Body Dept primary source \\
+gsd-mathematical-foundations-conversation.md & Informs Module 2 & Math dept foundations \\
+gsd-skill-creator-analysis.md & Informs all modules & Current architecture baseline \\
+gsd-instruction-set-architecture-vision.md & Informs Module 6 & DACP bundle compatibility \\
+gsd-upstream-intelligence-pack-v1\_43.md & Informs Module 5 & Intelligence pack as fascicle precedent \\
+gsd-chipset-architecture-vision.md & Architecture ref & Agnus/Denise/Paula/68000 model assignment \\
+\textit{The Space Between} (923pp) & Seeds Module 2 & Primary mathematical foundation text \\
+TAOCP (Knuth) & Informs Modules 2,5 & Difficulty rails, fascicle model, literate programming \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga shipped in 1985 with a chipset of breathtaking sophistication. Agnus managed memory and DMA. Denise handled display. Paula managed audio and data channels. The 68000 executed the core logic. Four specialized chips, each doing one thing beautifully, coordinating at a level that left every competitor building monolithic general-purpose systems in the dust. The Amiga Principle is not nostalgia --- it is an epistemological theorem: architectural specialization produces emergent capability that brute force cannot touch.
+
+The College of Knowledge is the Amiga Principle applied to human learning. Each department is a specialized chip. The Rosetta Core is the chipset bus. The fractal expansion engine is the hardware design language that lets you add a new chip without re-engineering the bus. And the calibration loop --- Observe, Compare, Adjust, Record --- is the interrupt handler that runs at 60Hz underneath everything, keeping the system honest.
+
+\textit{The Space Between} is not just the mathematics textbook that seeds the math department. It is the philosophical proof that meaning lives in the spaces between things, not in the things themselves. A note is not music. Silence between notes is music. A word is not language. The gap between words is language. A concept node is not knowledge. The cross-department link between a Fourier transform and a tai chi stance is knowledge. The College builds the spaces deliberately.
+
+% ═════════════════════════════════════════════════════════════════════════════
+% STAGE 2 — RESEARCH REFERENCE
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{College of Knowledge --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from prior GSD ecosystem conversations, project knowledge, and gap-fill research. It is organized by module. Each module section provides the evidence base for the corresponding Mission Package component.
+
+Key source materials:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{cooking-with-claude-compiled-session.md} --- Primary source for Rosetta Core origin, College Structure, Calibration Engine, and Culinary Arts Dept
+  \item \textbf{10-perl-cpan-addendum.md} --- Perl bridge panel spec and CPAN ecosystem architecture
+  \item \textbf{unit-circle-skill-creator-synthesis.md} --- Mathematics Department seed crystal and fractal concept proof
+  \item \textbf{gsd-learn-kung-fu-pack-vision.md} --- Mind-Body Department curriculum
+  \item \textbf{Knuth, D.E. (1997)} --- TAOCP: difficulty rails (00--50), fascicle model, literate programming precedent
+  \item \textbf{Mandelbrot, B. (1982)} --- Fractal geometry: self-similarity as architectural principle
+  \item \textbf{Open Praxis (2017)} --- Fractal educational model: concept-based curriculum, heutagogy
+\end{itemize}
+
+\subsection{Module 1 Reference --- Rosetta Core Architecture}
+
+\subsubsection{The Translation Engine Identity}
+
+The fundamental architectural insight from the Cooking with Claude session: skill-creator should not \textit{have} a translation capability --- it should \textit{be} a translation engine. This is the distinction between a feature and an identity. The Rosetta Core is what makes the system alive.
+
+Three historical Rosetta patterns confirm the architectural validity:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{The Rosetta Stone} (artifact): Same message in three scripts. If you can read one, you decode the others. This is the \textit{key principle}: comparative expression reveals structure.
+  \item \textbf{Rosetta Code} (wiki): Same programming tasks in hundreds of languages side by side. Demonstrates that concept-invariant, language-variant expression is learnable at scale.
+  \item \textbf{Claude} (AI): Natively works across dozens of human AND programming languages simultaneously. The engine already exists --- the College gives it a home.
+\end{itemize}
+
+\subsubsection{Panel Family Taxonomy}
+
+Seven panel families, organized by epistemic distance from machine hardware:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Family} & \tableheader{Languages} & \tableheader{Pedagogical Focus} \\
+\midrule
+Systems & Python, C++, Java & Direct computation; standard library access; performance-visible \\
+Bridge & Perl & Designed by a linguist; regex as first-class syntax; CPAN ecosystem as knowledge catalog model; text/NLP concepts \\
+Heritage & Lisp, Fortran, Pascal & Foundational paradigms; Lisp homoiconicity (code = data); Fortran for scientific computing; Pascal designed for pedagogy \\
+Hardware & VHDL & Concepts expressed as circuits; ties to GSD chipset architecture \\
+Data Infrastructure & CKAN, XML, SGML, UML & Knowledge cataloging, structured markup, modeling lineage \\
+Mathematical & LaTeX, APL & Formal notation; symbol density; \textit{The Space Between} typesetting connection \\
+Natural Language & Markdown/POD & Literate programming; code as curriculum \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Complex Plane Routing Logic}
+
+From \textit{The Space Between}'s Complex Plane of Experience (Logic $\leftrightarrow$ Creativity on the real axis; Real $\leftrightarrow$ Imaginary on the imaginary axis), panel selection follows position:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Concrete / high-real-axis concepts $\rightarrow$ Systems panels (Python, C++, Java) prioritized
+  \item Abstract / high-imaginary-axis concepts $\rightarrow$ Heritage panels (Lisp, Fortran) prioritized
+  \item Text/NLP / linguistic-domain concepts $\rightarrow$ Perl bridge panel prioritized
+  \item Hardware / structural concepts $\rightarrow$ VHDL panel prioritized
+  \item Knowledge-organization concepts $\rightarrow$ Data Infrastructure panels prioritized
+\end{itemize}
+
+\subsection{Module 2 Reference --- Mathematics Department}
+
+\subsubsection{The Space Between as Seed Text}
+
+\textit{The Space Between} (923 pages, Miles Tiberius Foxglove) is the mathematical spine of the entire GSD ecosystem. Its core contribution is the Complex Plane of Experience --- a two-dimensional space in which all human experience can be positioned along Logic $\leftrightarrow$ Creativity and Real $\leftrightarrow$ Imaginary axes. This framework provides the routing grammar for the Rosetta Core's panel selection algorithm.
+
+The unit circle from trigonometry serves as the ideal seed crystal for the Mathematics Department: it is maximally cross-panel (expressible in Python with \texttt{math.sin}, in C++ with \texttt{cmath}, in Fortran with \texttt{DSIN}, in Lisp as recursive series expansion, in VHDL as CORDIC algorithm, in APL as \texttt{○} operator, in LaTeX as diagram) AND maximally cross-department (appears in music as wave function, in culinary arts as oven temperature oscillation models, in martial arts as rotation mechanics).
+
+\subsubsection{Knuth Difficulty Rails}
+
+Knuth's TAOCP exercise difficulty system provides the precision progressive disclosure model for the Mathematics Department:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rating} & \tableheader{Meaning} & \tableheader{College Application} \\
+\midrule
+00 & Extremely easy & Vocabulary introduction; single-panel orientation \\
+10 & Simple, one minute & Single-concept, one-panel expression \\
+20 & Average, 15--20 min & Cross-panel comparison; two or three families \\
+30 & Moderately hard & Full 7-panel expression; calibration loop active \\
+40 & Quite difficult & Cross-department links; synthesis required \\
+50 & Open research & Novel concept integration; fractal expansion trigger \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wing Catalog --- Mathematics Department}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wing} & \tableheader{Seed Concept} & \tableheader{Cross-Dept Links} \\
+\midrule
+Algebra & Complex numbers & Philosophy (logic structures), CS (type theory) \\
+Geometry & Unit circle & Martial arts (rotation), Music (wave), Architecture \\
+Calculus & Exponential decay & Culinary (cooling), Ecology (population), Physics \\
+Statistics & Normal distribution & Calibration engine (error modeling), Economics \\
+Complex Analysis & Mandelbrot set & Fractal engine (self-similarity), Visual arts \\
+Trigonometry & Fourier transform & Music (harmonics), Physics, Signal processing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 3 Reference --- Culinary Arts Department}
+
+\subsubsection{Cooking with Claude Philosophy}
+
+The Cooking with Claude initiative established the pedagogical philosophy for the entire College: ``It's not Claude does it for you. It's cooking \textit{together}.'' This is the heutagogical principle --- self-directed learning enhanced by a calibrated AI partner. The user brings senses, judgment, and the picture of what ``done'' looks like. The engine brings science, math, and memory.
+
+The Calibration Engine's universality was demonstrated in the culinary domain: a recipe calls for 350°F for 12 minutes, but the user's feedback says ``slightly overdone.'' Skill-creator applies Newton's cooling law, recalculates thermal diffusion, suggests 325°F for 10 minutes. The user does not need to know the thermodynamics. The engine does.
+
+\subsubsection{Newton's Cooling Law as Seed Crystal}
+
+Newton's law of cooling ($T(t) = T_{env} + (T_0 - T_{env})e^{-kt}$) is the perfect Culinary Arts seed crystal:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Python panel}: \texttt{scipy.integrate} or direct \texttt{math.exp} calculation
+  \item \textbf{C++ panel}: \texttt{cmath} exponential with thermal constants as constexpr
+  \item \textbf{Fortran panel}: Scientific computing home territory --- the original numerical recipe
+  \item \textbf{Perl panel}: Closure factory (from 10-perl-cpan-addendum.md): \texttt{make\_cooling\_curve(\$k)} returns a function reference
+  \item \textbf{Lisp panel}: Recursive series approximation; homoiconic expression of the Taylor expansion
+  \item \textbf{VHDL panel}: Fixed-point exponential approximation as hardware description
+  \item \textbf{Natural language panel}: ``Heat decreases proportionally to how far you are from room temperature'' --- the intuitive formulation that precedes all others
+\end{itemize}
+
+\subsubsection{Wing Catalog --- Culinary Arts Department}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wing} & \tableheader{Seed Concept} & \tableheader{Cross-Dept Links} \\
+\midrule
+Thermodynamics & Newton's cooling law & Mathematics (exponential decay), Physics \\
+Food Chemistry & Maillard reaction & Chemistry, Molecular biology \\
+Technique Fundamentals & Mise en place & Mind-Body (preparation ritual), Systems design \\
+Baking Science & Baker's percentages & Mathematics (ratios), Perl panel (text parsing) \\
+Cultural Foundations & Mother sauces & History, Cultural studies, Natural language \\
+Home Economics & Meal planning & Economics, Resource management, Operations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4 Reference --- Mind-Body Department}
+
+\subsubsection{Kung Fu Pack Pedagogy}
+
+The Kung Fu learning pack established the principle that physical skill acquisition IS calibration. The stance (horse stance, guard position) is the concept node. Correct mechanics is the target state. Somatic feedback (``shaking legs'', ``weight too far forward'') is the observation. The instructor's correction is the compare-adjust cycle. The three-breath hold is the record step. Every physical concept has this structure.
+
+The Tai Chi module added the \textit{moving meditation} dimension: slow-motion execution makes the calibration loop visible. You can feel what you normally cannot feel because you are moving too fast. Push Hands is the multi-agent calibration protocol --- two agents maintaining contact, each observing and adjusting to the other's center of gravity in real time.
+
+\subsubsection{Biomechanics as Panel-Expressible Concepts}
+
+Key insight: martial arts physics concepts are fully panel-expressible:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Torque} $\tau = r \times F$ (rotation mechanics of a strike): Python physics library, C++ rigid body dynamics, Fortran mechanics, VHDL motor control
+  \item \textbf{Center of gravity}: Statistics (mean of mass distribution), Python numpy, Lisp functional recursion over body segments
+  \item \textbf{Momentum transfer}: Mathematics (impulse-momentum theorem), cross-links to Culinary (knife work force application)
+\end{itemize}
+
+\subsubsection{Wing Catalog --- Mind-Body Department}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wing} & \tableheader{Seed Concept} & \tableheader{Cross-Dept Links} \\
+\midrule
+Striking Fundamentals & Torque / rotation & Mathematics (geometry), Physics \\
+Grappling & Center of gravity & Mathematics (statistics), Engineering \\
+Moving Meditation & Oscillation / flow & Mathematics (Fourier), Music (rhythm) \\
+Qigong & Breath mechanics & Biology, Chemistry (O$_2$ exchange) \\
+Conditioning & Progressive overload & Mathematics (exponential growth), Biology \\
+Weapons & Lever mechanics & Mathematics (ratios), Engineering \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 5 Reference --- Knowledge Infrastructure}
+
+\subsubsection{CKAN / CPAN as Architectural Precedents}
+
+CKAN (Comprehensive Knowledge Archive Network) provides 20 years of proven open data infrastructure: catalog-based discovery, metadata standards, namespace coordination, permission grants enabling collaboration without chaos. Its architecture is the direct model for the \texttt{.college/} discovery index.
+
+CPAN (Comprehensive Perl Archive Network), with 220,000+ modules, demonstrates the ecosystem architecture at knowledge scale: developer releases (pre-fascicle) $\rightarrow$ indexed releases (fascicle) $\rightarrow$ stable distributions (volume). Knuth's fascicle publication model for TAOCP Volume 4 is the pedagogical parallel: chapters released as standalone 128-page paperbacks before collection into hardcover volumes. This maps exactly to the College's knowledge lifecycle.
+
+\subsubsection{.college/ Directory Schema}
+
+\begin{asciibox}
+Department Registration Metadata (department.json):
+{
+  "id": "mathematics",
+  "name": "Mathematics Department",
+  "version": "0.1.0",
+  "lifecycle": "fascicle",         // pre-fascicle | fascicle | volume
+  "seed_texts": ["The Space Between (923pp)"],
+  "wings": ["algebra", "geometry", "calculus", "statistics",
+            "complex-analysis", "trigonometry"],
+  "panels_implemented": 7,
+  "concept_nodes": 0,              // populated by fractal engine
+  "calibration_loops": 0,          // populated by fractal engine
+  "cross_dept_links": [],
+  "rosetta_entry_point": "./core/index.ts"
+}
+\end{asciibox}
+
+\subsubsection{Fascicle Lifecycle as Typed Enum}
+
+\begin{asciibox}
+// lifecycle.ts
+export enum DepartmentLifecycle {
+  SEED        = 'seed',         // Primary text identified, not yet ingested
+  PRE_FASCICLE = 'pre-fascicle', // Concept graph extracted, panels not yet populated
+  FASCICLE    = 'fascicle',     // 1+ wings complete with full 7-panel expression
+  VOLUME      = 'volume'        // All wings complete; calibration loops active
+}
+\end{asciibox}
+
+\subsection{Module 6 Reference --- Fractal Expansion Engine}
+
+\subsubsection{The Generative Grammar}
+
+The Fractal Expansion Engine is the College's most important structural contribution. It answers: ``Given any seed text, how do you grow a department?'' The answer is a four-step pipeline:
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Seed Ingestor}: Parse the seed text, extract concept graph (nodes + relationships), assign each concept a Complex Plane position based on abstractness / concreteness
+  \item \textbf{Panel Generator}: For each concept node, instantiate all 7 panel families. Route panel priority via Complex Plane position. Generate panel expression skeletons.
+  \item \textbf{Calibration Installer}: For each concept node, install the Observe--Compare--Adjust--Record interface with domain-appropriate feedback types (somatic for Mind-Body, sensory for Culinary, formal-proof for Mathematics)
+  \item \textbf{Department Scaffold}: Assemble the complete \texttt{.college/departments/<name>/} directory structure, register with discovery index, establish cross-department links for shared seed concepts
+\end{enumerate}
+
+\subsubsection{Self-Similarity Across Scales}
+
+The fractal property: the same four-step pipeline runs at every scale:
+\begin{itemize}[leftmargin=1.5em]
+  \item Department scale: seed text $\rightarrow$ department scaffold
+  \item Wing scale: seed concept $\rightarrow$ wing scaffold (same four steps, smaller scope)
+  \item Concept node scale: concept definition $\rightarrow$ panel expressions (same four steps, atomic scope)
+  \item Panel expression scale: code block $\rightarrow$ calibration annotation (same four steps, inline scope)
+\end{itemize}
+
+This self-similarity is not decorative. It means a single implementation of the pipeline, called recursively with different scope parameters, generates the entire College.
+
+\subsubsection{Cross-Department Link Protocol}
+
+When the Fractal Expansion Engine identifies the same concept (e.g., exponential decay) appearing in multiple departments, it creates a typed cross-reference:
+
+\begin{asciibox}
+// cross-link.ts
+export interface CrossDeptLink {
+  conceptId: string;           // e.g., "exponential-decay"
+  sourceDept: string;          // e.g., "mathematics"
+  targetDept: string;          // e.g., "culinary-arts"
+  sourceWing: string;          // e.g., "calculus"
+  targetWing: string;          // e.g., "thermodynamics"
+  linkType: 'isomorphic'       // Same structure, different domain
+           | 'application'     // Source is abstract, target is applied
+           | 'analogy';        // Structural similarity, not identity
+  calibrationBridge?: string;  // Optional: shared calibration loop
+}
+\end{asciibox}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Domain} & \tableheader{Risk Type} & \tableheader{Mitigation} \\
+\midrule
+Mind-Body / Martial Arts & Physical safety & All technique content is conceptual/theoretical only; no physical instruction; explicit scope boundary in department.json \\
+Culinary Arts & Food safety & Temperature/time recommendations include standard food safety margins; calibration engine has hard lower bounds for pathogen kill temps \\
+Cultural content & Appropriation & Martial arts origin cultures (Chinese, Japanese, Korean) named specifically; Foxfire heritage content attributes Coast Salish and PNW sources nation-specifically \\
+Indigenous knowledge & Sovereignty & OCAP principles apply to any Traditional Knowledge integrated into Natural Sciences dept (future expansion); CARE Principles for data governance \\
+AI-generated curriculum & Accuracy & All cross-panel expressions verified against authoritative language documentation; mathematical panel expressions validated by symbolic computation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{GSD Ecosystem Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Tibsfox (2025). \textit{The Space Between: The Autodidact's Guide to the Galaxy}. 923pp. (pen name: Miles Tiberius Foxglove). Primary source for Mathematics Department seeding and Complex Plane of Experience framework.
+  \item Tibsfox (2026). \textit{Cooking with Claude} compiled session transcript. GSD Skill-Creator Project. Primary source for Culinary Arts Department and Rosetta Core identity insight.
+  \item Tibsfox (2025). \textit{The Hundred Voices}. 733pp. 100 authorial voices spanning 1926--2025. (Literature Department seed text, deferred to v2.0.)
+  \item Tibsfox (2025--2026). \textit{10-perl-cpan-addendum.md}. GSD Skill-Creator Project. Perl bridge panel specification and CPAN ecosystem architecture analysis.
+  \item Tibsfox (2025). \textit{GSD Learn Kung Fu Pack Vision}. Mind-Body Department primary curriculum source.
+  \item Tibsfox (2026). \textit{Unit Circle Skill-Creator Synthesis}. Mathematics Department seed crystal and fractal concept demonstration.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Academic Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Knuth, D.E. (1997--present). \textit{The Art of Computer Programming} (Vols. 1--4B). Addison-Wesley. Difficulty rail model (00--50), fascicle publication lifecycle, literate programming paradigm (WEB/CWEB, 1984), MIX/MMIX pedagogical ISA architecture.
+  \item Mandelbrot, B.B. (1982). \textit{The Fractal Geometry of Nature}. W.H. Freeman. Foundational text for self-similarity as architectural principle.
+  \item Dominus, M.J. (2005). \textit{Higher-Order Perl}. Morgan Kaufmann. Closure factory pattern for Perl bridge panel; full text: \url{http://hop.perl.plover.com/book/}
+  \item Dominguez Alfaro et al. (2017). ``Fractal: an educational model for the convergence of formal and non-formal education.'' \textit{Open Praxis} 9(4). Concept-based curriculum design and heutagogical approach as College Structure precedent.
+  \item Taylor, R. (2002). ``Fractal design strategies for enhancement of knowledge work environments.'' \textit{HFES Annual Meeting}. Fractal structures and cognitive engagement in learning environments.
+\end{itemize}
+
+\subsubsection{Professional Organizations and Reference Sites}
+\begin{itemize}[leftmargin=1.5em]
+  \item CKAN Project (2006--present). \url{https://ckan.org}. Open data infrastructure architecture; 20-year precedent for knowledge cataloging at scale.
+  \item CPAN (1995--present). \url{https://www.cpan.org}. 220,000+ modules; developer/indexed/stable lifecycle; namespace coordination model.
+  \item Rosetta Code (2007--present). \url{https://rosettacode.org}. Multi-language task expression wiki; direct architectural precedent for panel system.
+  \item cplusplus.com. \textit{cmath reference}. \url{https://cplusplus.com/reference/cmath/}. C++ systems panel authority.
+  \item Python Software Foundation. \textit{math module}. \url{https://docs.python.org/3/library/math.html}. Python systems panel authority.
+  \item Oracle. \textit{java.lang.Math}. \url{https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html}. Java systems panel authority.
+\end{itemize}
+
+% ═════════════════════════════════════════════════════════════════════════════
+% STAGE 3 — MISSION PACKAGE
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce the complete \texttt{.college/} directory architecture for the GSD skill-creator ecosystem, including the Rosetta Core Architecture specification, full seeding of three initial departments (Mathematics, Culinary Arts, Mind-Body), the Knowledge Infrastructure schema, and the Fractal Expansion Engine that enables any subsequent seed text to generate a complete department without manual design. All outputs must be TypeScript-typed, DACP-bundle-compatible, and calibration-loop-closed.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [0A] Schema + discovery index
+  [0B] Department.json template + DepartmentLifecycle enum
+
+          ┌──────────────────┐    ┌──────────────────┐
+WAVE 1:   │ 1A: Rosetta Core │    │ 1B: Math Dept    │
+          │ Panel interfaces │    │ Space Between    │
+          │ 7-family taxonomy│    │ seeding          │
+          └──────────────────┘    └──────────────────┘
+
+          ┌──────────────────┐    ┌──────────────────┐
+WAVE 2:   │ 2A: Culinary Dept│    │ 2B: Mind-Body    │
+          │ Cooking w Claude │    │ Kung Fu / TaiChi │
+          │ Calibration Eng  │    │ biomechanics     │
+          └──────────────────┘    └──────────────────┘
+
+WAVE 3: Synthesis
+  [3A] Cross-department links (shared concepts: exp decay, rotation, ratio)
+  [3B] Fractal Expansion Engine (4-component spec from Module 6)
+
+WAVE 4: Publication + Verification
+  [4A] Test suite (success criteria 1-12)
+  [4B] Discovery index validation + README generation
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Core Layer} --- Rosetta Core (panel interfaces + routing) + Calibration Pattern interface
+  \item \textbf{Department Layer} --- Mathematics, Culinary Arts, Mind-Body departments (seeded + registered)
+  \item \textbf{Infrastructure Layer} --- Discovery index, namespace registry, fascicle lifecycle manager
+  \item \textbf{Fractal Engine Layer} --- Seed ingestor, panel generator, calibration installer, department scaffold
+  \item \textbf{Verification Layer} --- Test suite, cross-panel consistency checker, DACP bundle validator
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{5cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec File} \\
+\midrule
+1 & Panel interface contract & Compiles; 7 panels implement it & 01-panel-interface.md \\
+2 & Routing algorithm & Correct Complex Plane routing for 10 test concepts & 02-routing-algorithm.md \\
+3 & Mathematics Dept & 40+ nodes; 7 panels; difficulty rails; unit circle crystal & 03-math-department.md \\
+4 & Culinary Arts Dept & Cooling law crystal; calibration engine; 6 wings & 04-culinary-department.md \\
+5 & Mind-Body Dept & 20+ nodes; biomechanics panels; safety boundary & 05-mind-body-department.md \\
+6 & .college/ schema & TypeScript; validates; 3 depts register & 06-college-schema.md \\
+7 & Fractal Engine (4 comps) & Generates test dept from seed in single run & 07-fractal-engine.md \\
+8 & Cross-dept link map & 3+ isomorphic links; typed CrossDeptLink objects & 08-cross-links.md \\
+9 & Test suite & 2+ tests per success criterion; all 12 verified & 09-test-suite.md \\
+10 & Discovery index & All 3 depts discoverable; README auto-generated & 10-discovery-index.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{1.8cm}C{1.8cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} & \tableheader{Deliverable} \\
+\midrule
+0A: Foundation schema & None & Haiku & 6K & D6 \\
+0B: Lifecycle enum & 0A & Haiku & 4K & D6 \\
+1A: Panel interface & 0A & Opus & 12K & D1, D2 \\
+1B: Math Dept seeding & 1A, Space Between & Opus & 20K & D3 \\
+2A: Culinary Dept & 1A, Cooking session & Sonnet & 18K & D4 \\
+2B: Mind-Body Dept & 1A, KF Pack & Sonnet & 14K & D5 \\
+3A: Cross-dept links & 1B, 2A, 2B & Opus & 10K & D8 \\
+3B: Fractal Engine & 1A, 3A & Opus & 16K & D7 \\
+4A: Test suite & All & Sonnet & 14K & D9 \\
+4B: Discovery + README & All & Sonnet & 8K & D10 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% & Rosetta Core architecture (judgment on panel routing design), Math Dept seeding (Complex Plane alignment), Cross-dept link identification (synthesis), Fractal Engine design (generative grammar = highest architectural judgment) \\
+Sonnet & $\sim$60\% & Culinary and Mind-Body department population (structured content generation), test suite assembly, discovery index, README generation \\
+Haiku & $\sim$10\% & Foundation schema, lifecycle enum, TypeScript scaffolding, shared templates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Focus} & \tableheader{Mode} & \tableheader{Model(s)} & \tableheader{Est. Tokens} & \tableheader{Sessions} \\
+\midrule
+0 & Foundation & Sequential & Haiku & 10K & 0.5 \\
+1 & Core + Math Dept & Parallel & Opus & 32K & 1.5 \\
+2 & Culinary + Mind-Body & Parallel & Sonnet & 32K & 1.5 \\
+3 & Synthesis & Sequential & Opus & 26K & 1.5 \\
+4 & Publication + Verify & Sequential & Sonnet & 22K & 1.0 \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total}} & \textbf{122K} & \textbf{6.0} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Deps} \\
+\midrule
+0A & \texttt{.college/} TypeScript schema; department.json template & Haiku & 6K & none \\
+0B & DepartmentLifecycle enum; CrossDeptLink interface; CalibrationLoop interface & Haiku & 4K & 0A \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks A and B}
+
+\textbf{Track A --- Rosetta Core (Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Deps} \\
+\midrule
+1A.1 & Panel interface TypeScript contract; 7-family taxonomy; routing spec & Opus & 12K & 0A \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Mathematics Department (Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Deps} \\
+\midrule
+1B.1 & Unit circle seed crystal: all 7 panels + difficulty rail (00--50) & Opus & 10K & 1A.1 \\
+1B.2 & Wing catalog: 40+ concept nodes, panel expressions, calibration loops & Opus & 10K & 1B.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Parallel Tracks A and B}
+
+\textbf{Track A --- Culinary Arts Department (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Deps} \\
+\midrule
+2A.1 & Newton's cooling law crystal: 7 panels + Calibration Engine integration & Sonnet & 8K & 1A.1 \\
+2A.2 & 6-wing catalog: thermodynamics, food chemistry, technique, baking, cultural, home-ec & Sonnet & 10K & 2A.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Mind-Body Department (Sonnet)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Deps} \\
+\midrule
+2B.1 & Biomechanics seed crystals: torque, center-of-gravity, momentum & Sonnet & 6K & 1A.1 \\
+2B.2 & 6-wing catalog; somatic calibration loops; safety boundary enforcement & Sonnet & 8K & 2B.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Deps} \\
+\midrule
+3A & Cross-dept link map: identify 3+ isomorphic concepts; generate CrossDeptLink objects & Opus & 10K & 1B.2, 2A.2, 2B.2 \\
+3B.1 & Fractal Engine: seed-ingestor.ts spec & Opus & 5K & 3A \\
+3B.2 & Fractal Engine: panel-generator.ts spec & Opus & 4K & 3B.1 \\
+3B.3 & Fractal Engine: calibration-installer.ts spec & Opus & 4K & 3B.2 \\
+3B.4 & Fractal Engine: department-scaffold.ts spec + integration test & Opus & 3K & 3B.3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 4: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{5cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Deps} \\
+\midrule
+4A.1 & Test suite: safety-critical tests + panel correctness & Sonnet & 8K & All Wave 3 \\
+4A.2 & Success criteria verification matrix (12 criteria $\times$ 2--4 tests) & Sonnet & 6K & 4A.1 \\
+4B.1 & Discovery index: 3-dept registration; namespace validation & Sonnet & 4K & All depts \\
+4B.2 & README auto-generation; College architecture summary & Sonnet & 4K & 4B.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Waves 0--1 produce shared schemas (0A, 0B, 1A.1) that are read by all subsequent tasks. Load these into cache at Wave 1 start and exploit the 5-minute cache window throughout Wave 2 parallel execution.
+  \item The Panel interface (1A.1) should be included in system prompt context for all Wave 2 department tasks --- it is the shared type contract that prevents cross-task type drift.
+  \item Cross-department links (3A) require all three department outputs simultaneously --- schedule Wave 3 immediately after Wave 2 completion to maximize cache hit on department schemas.
+  \item Fractal Engine tasks (3B.1--3B.4) are sequential by design (each spec consumes the previous) --- do not parallelize; maintain context continuity.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{2.5cm}C{2cm}C{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Cache Strategy} \\
+\midrule
+Wave 0: Foundation & Haiku & 10K & Prime cache \\
+Wave 1A: Rosetta Core & Opus & 12K & Exploit Wave 0 cache \\
+Wave 1B: Math Dept & Opus & 20K & Exploit 1A cache \\
+Wave 2A: Culinary Dept & Sonnet & 18K & Exploit 1A cache (parallel) \\
+Wave 2B: Mind-Body Dept & Sonnet & 14K & Exploit 1A cache (parallel) \\
+Wave 3A: Cross-dept links & Opus & 10K & All dept outputs in context \\
+Wave 3B: Fractal Engine & Opus & 16K & 3A + dept schemas \\
+Wave 4: Test + Publish & Sonnet & 22K & All outputs \\
+\midrule
+\textbf{Total} & Mixed & \textbf{122K} & 6 sessions est. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[0A: Schema] ──► [0B: Enums]
+      │
+      ▼
+[1A.1: Panel Interface] ─────────────────────────────┐
+      │                                               │
+      ├──► [1B.1: Math Crystal] ──► [1B.2: Math Wings]│
+      │                                               │
+      ├──► [2A.1: Culinary Crystal] ──► [2A.2: Wings] │
+      │                                               │
+      └──► [2B.1: Mind-Body Crystals] ──► [2B.2: Wings]
+                                                      │
+                    ┌─────────────────────────────────┘
+                    ▼
+            [3A: Cross-Dept Links]
+                    │
+                    ▼
+      [3B.1] ──► [3B.2] ──► [3B.3] ──► [3B.4: Fractal Engine]
+                                               │
+                                               ▼
+                              [4A: Tests] ──► [4B: Publish]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.8cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 5 & BLOCK & Mission HOLD until resolved \\
+Panel correctness & 14 & BLOCK & Wave 2 cannot start \\
+Calibration loops & 8 & HIGH & Flag; allow Wave 3 with caveat \\
+Cross-dept links & 6 & HIGH & Fractal Engine blocked \\
+Fractal Engine & 8 & HIGH & Deliverable incomplete \\
+Integration & 6 & MEDIUM & Document and defer \\
+Edge cases & 4 & LOW & Log; continue \\
+\midrule
+\textbf{Total} & \textbf{51} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+SC-01 & Mind-Body safety boundary & \texttt{department.json} for mind-body contains \texttt{"physical\_instruction": false}; no technique content without disclaimer \\
+SC-02 & Culinary temp lower bounds & Calibration Engine cannot recommend protein temps below 165°F (74°C) for poultry regardless of user feedback \\
+SC-03 & Cultural attribution & No martial arts content uses generic ``Asian'' or ``Eastern'' attribution; all sources named by specific art and origin country \\
+SC-04 & Indigenous knowledge gate & Any concept tagged \texttt{traditional\_knowledge: true} requires explicit sovereignty clearance before department registration \\
+SC-05 & DACP bundle integrity & All agent-to-agent handoffs in panel generator use structured DACP bundles; no raw markdown handoffs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{5.5cm}L{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Panel interface compiles; 7 panels implement it & PC-01 to PC-07 & \textendash \\
+2 & Math Dept: 40+ nodes, 7 panels, difficulty rails & MD-01 to MD-04 & \textendash \\
+3 & Unit circle: 7 panels, mathematically consistent & MD-05, MD-06 & \textendash \\
+4 & Culinary cooling law: 7 panels + calibration & CA-01, CA-02 & \textendash \\
+5 & Mind-Body: 20+ nodes; somatic calibration loops & MB-01, MB-02 & \textendash \\
+6 & .college/ schema TypeScript-valid; 3 depts register & CS-01, CS-02, CS-03 & \textendash \\
+7 & Fractal Engine generates dept from seed in single run & FE-01 to FE-04 & \textendash \\
+8 & 3+ isomorphic cross-dept links established & CD-01, CD-02, CD-03 & \textendash \\
+9 & DACP bundle format in all panel expressions & SC-05, INT-01 & \textendash \\
+10 & Calibration Pattern present in every concept node & CL-01 to CL-04 & \textendash \\
+11 & Fascicle lifecycle enum in dept registration schema & CS-04 & \textendash \\
+12 & Fractal Engine routes via Complex Plane position & FE-05, FE-06 & \textendash \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+Fleet Profile (6 modules; high architectural complexity).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; wave go/no-go; safety-critical gate enforcement \\
+PLAN & Planner & Wave decomposition; parallel track optimization; cache window management \\
+SCOUT & Research Agent & Source gathering; cross-panel consistency checks; Rosetta Code reference lookups \\
+EXEC-A & Executor Alpha & Rosetta Core + Mathematics Department production \\
+EXEC-B & Executor Beta & Culinary Arts + Mind-Body Department production \\
+CRAFT-ARCH & Architecture Specialist & Panel routing algorithm; Complex Plane alignment; TypeScript type contracts \\
+CRAFT-PEDA & Pedagogy Specialist & Difficulty rail calibration; Knuth scale mapping; concept node structure \\
+CRAFT-SAFE & Safety Specialist & Mind-Body scope boundary; culinary temp bounds; cultural attribution \\
+VERIFY & Verification Agent & Panel correctness; cross-dept link validation; DACP bundle integrity \\
+INTEG & Integration Agent & Cross-module relationship validation; fractal self-similarity checks \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; sole human-facing channel \\
+BUDGET & Resource Manager & Token budget tracking; session planning; cache exploitation \\
+SURGEON & Health Monitor & Research quality degradation detection; concept drift alerts \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if needed \\
+ARCH & Architecture Guard & Cross-cutting structural decisions; Amiga Principle enforcement \\
+RETRO & Retrospective & Post-wave analysis; lessons learned; v1.50 handoff notes \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries for v1.50 retrospective \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17 roles) \\
+Module Count & 6 \\
+Deliverable Count & 10 specification documents \\
+Department Count & 3 initial (Mathematics, Culinary Arts, Mind-Body) \\
+Panel Families & 7 (Systems, Bridge, Heritage, Hardware, Data Infra, Mathematical, Natural Language) \\
+Concept Nodes (minimum) & 100 across 3 departments \\
+Cross-Department Links & 3+ isomorphic concepts \\
+Estimated Token Budget & 122K \\
+Estimated Sessions & 6 \\
+Estimated Context Windows & 8--12 \\
+Wave Count & 5 (0--4) \\
+Parallel Tracks & 2 (Waves 1 and 2) \\
+Test Count & 51 (5 safety-critical BLOCK) \\
+Primary Models & Opus (30\%) / Sonnet (60\%) / Haiku (10\%) \\
+Safety-Critical Gates & 5 (all must pass before publication) \\
+Target Branch & gsd-skill-creator dev \\
+Target Directory & .college/ \\
+Depends On & v1.49 DACP; cooking-with-claude session; unit-circle synthesis \\
+Enables & v1.50 retrospective college audit; Wasteland ZFC integration; Virtual Black Rock City depts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+\begin{quotebox}
+\begin{center}
+{\large\sffamily\bfseries\textcolor{primary}{``The codebase is the library.}}\\[0.5em]
+{\large\sffamily\textcolor{primary}{Exploring it teaches you the subject matter}}\\[0.5em]
+{\large\sffamily\textcolor{primary}{the same way walking through a library's stacks}}\\[0.5em]
+{\large\sffamily\textcolor{primary}{teaches you a field.}}\\[0.5em]
+{\large\sffamily\bfseries\textcolor{primary}{The code is the truth.\\[0.3em]Everything else is projection.''}}\\[1em]
+{\normalsize\sffamily\itshape\textcolor{subtlegray}{--- Tibsfox, Cooking with Claude session, 2026}}
+\end{center}
+\vspace{0.5em}
+\normalsize\sffamily\textcolor{darktext}{The College of Knowledge is not a curriculum bolted onto skill-creator. It is skill-creator becoming self-aware of what it already is: a translation engine that has been building a library all along. The Full Monty is the moment the library acknowledges its own architecture, maps its own stacks, and writes the grammar by which any new room can be added by anyone with a seed text and a calibration loop. From one unit circle, an entire mathematics department. From one cooling curve, an entire kitchen. From one horse stance, an entire martial tradition. The Amiga Principle at the scale of human knowledge. Specialized execution paths, faithful iteration, staggering emergent complexity. The spaces between hold everything.}
+\end{quotebox}
+
+\end{document}

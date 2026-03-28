@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; GSD-OS GPU Orchestration</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-gpo">
+  <header>
+    <h1>GSD-OS GPU Orchestration</h1>
+    <div class="subtitle">CUDA Streams &middot; LoRA Adapters &middot; NVML Telemetry &middot; Hybrid Routing &middot; Silicon Governance</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-cuda-stream-orchestration">CUDA Streams</a>
+      <a href="page.html?doc=02-lora-adapter-pipeline">LoRA Pipeline</a>
+      <a href="page.html?doc=03-cuda-gl-dashboard">Dashboard</a>
+      <a href="page.html?doc=04-chipset-intent-router">Intent Router</a>
+      <a href="page.html?doc=05-hybrid-execution-protocol">Hybrid Exec</a>
+      <a href="page.html?doc=06-adapter-lifecycle-governance">Lifecycle</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The Quark and the Compiler traces a single arc: from the Denny's meeting where Jensen Huang
+      bet that the future belonged to specialized parallel processors, through the decade CUDA spent
+      invisible while the industry doubted it, to the moment AlexNet ran on two GTX 580s and the
+      world changed. The bet was not on raw power. It was on the principle that a processor which
+      does one thing supremely well &mdash; in parallel, at scale &mdash; will outperform a processor
+      that does everything adequately. The GSD Silicon Layer is that bet placed again, at the scale
+      of a single developer's workflow. The adapters are the Paula chip &mdash; handling the patterns
+      while the 68000 thinks about something harder.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~229K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/gpu-orchestration-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Est. Tokens</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Schema, source index, shared types</td><td>Sequential</td><td>8K</td></tr>
+        <tr><td>1</td><td>Parallel Research</td><td>Track A (M1+M4) &middot; Track B (M2+M5) &middot; Track C (M3+M6)</td><td>Parallel</td><td>133K</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-module reconciliation, silicon.yaml v2 design</td><td>Sequential</td><td>35K</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Final specs, GLSL shaders, verification matrix</td><td>Sequential</td><td>53K</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Resource orchestration</td><td>Haiku</td><td>Token budget, wave scheduling, schema scaffolding</td></tr>
+        <tr><td>Denise</td><td>Display + visualization</td><td>Sonnet</td><td>WebGL shaders, VRAM heat map, stream visualization</td></tr>
+        <tr><td>Paula</td><td>Training + I/O</td><td>Opus</td><td>QLoRA pipeline, confidence calibration, hybrid protocol</td></tr>
+        <tr><td>M68000</td><td>General computation</td><td>Opus</td><td>Cross-module synthesis, silicon.yaml v2 design authority</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-T01</td><td>Training pair privacy</td><td>No training pairs leave local filesystem without explicit <code>sharing: public</code> in silicon.yaml</td></tr>
+        <tr><td>SC-T02</td><td>VRAM budget enforcement</td><td>Adapter loading blocked when accumulated VRAM exceeds declared <code>vram_budget_gb</code></td></tr>
+        <tr><td>SC-T03</td><td>Community adapter quarantine</td><td>No community adapter executes inference before quarantine pipeline completes all 4 stages</td></tr>
+        <tr><td>SC-T04</td><td>Checksum verification</td><td>Adapter load blocked when SHA-256 hash does not match silicon.yaml declaration</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification Matrix &mdash; The GPU Report</h2>
+
+    <table>
+      <thead><tr><th>SC</th><th>Criterion</th><th>Test IDs</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>SC-1</td><td><code>gsd chipset init</code> operational &lt; 5 min on RTX 4060 Ti</td><td>CORE-01, 02</td><td>Pre-mission</td></tr>
+        <tr><td>SC-2</td><td>Six CUDA streams with documented SM fraction allocation</td><td>CORE-03, 04</td><td>Pre-mission</td></tr>
+        <tr><td>SC-3</td><td>Intent classifier routes &ge; 85% of invocations correctly</td><td>CORE-05, 06, 07</td><td>Pre-mission</td></tr>
+        <tr><td>SC-4</td><td>Adapter hot-swap latency &lt; 150ms on RTX 4060 Ti</td><td>PERF-01</td><td>Pre-mission</td></tr>
+        <tr><td>SC-5</td><td>Dashboard renders at 4Hz with &lt; 2% CPU overhead</td><td>PERF-02, 03</td><td>Pre-mission</td></tr>
+        <tr><td>SC-6</td><td>QLoRA adapter achieves &ge; 15% perplexity improvement</td><td>CORE-08, 09</td><td>Pre-mission</td></tr>
+        <tr><td>SC-7</td><td>Confidence model Brier score &lt; 0.15</td><td>CORE-10, INTEG-01</td><td>Pre-mission</td></tr>
+        <tr><td>SC-8</td><td>Staleness detection within 3 sessions of degradation</td><td>CORE-11, EDGE-01</td><td>Pre-mission</td></tr>
+        <tr><td>SC-9</td><td>Community quarantine completes &lt; 60 seconds</td><td>SC-T03, CORE-12</td><td>Pre-mission</td></tr>
+        <tr><td>SC-10</td><td>silicon.yaml v2 backward compatible with all v1 configs</td><td>INTEG-02</td><td>Pre-mission</td></tr>
+        <tr><td>SC-11</td><td>VRAM enforcement under all tested load conditions</td><td>SC-T02, PERF-04</td><td>Pre-mission</td></tr>
+        <tr><td>SC-12</td><td>Orchestration layer adds &lt; 500ms to session startup</td><td>INTEG-03</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Success Criteria</h2>
+
+    <table>
+      <thead><tr><th>SC#</th><th>Criterion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>RTX 4060 Ti user can run <code>gsd chipset init</code> with local inference operational within 5 minutes</td><td>Pre-mission</td></tr>
+        <tr><td>2</td><td>Six pipeline stages mapped to distinct named CUDA streams with SM fraction allocation</td><td>Pre-mission</td></tr>
+        <tr><td>3</td><td>Intent classifier correctly routes &ge; 85% of skill invocations to appropriate adapter</td><td>Pre-mission</td></tr>
+        <tr><td>4</td><td>Adapter hot-swap latency below 150ms on RTX 4060 Ti with Q4_K_M 8B model</td><td>Pre-mission</td></tr>
+        <tr><td>5</td><td>CUDA/GL dashboard renders at 4Hz without exceeding 2% CPU overhead</td><td>Pre-mission</td></tr>
+        <tr><td>6</td><td>QLoRA adapter achieves &ge; 15% lower perplexity than base model on holdout set</td><td>Pre-mission</td></tr>
+        <tr><td>7</td><td>Confidence model produces calibrated estimates (Brier score &lt; 0.15)</td><td>Pre-mission</td></tr>
+        <tr><td>8</td><td>Staleness detection triggers recommendation within 3 sessions of performance drop</td><td>Pre-mission</td></tr>
+        <tr><td>9</td><td>Community quarantine evaluates adapter in under 60 seconds on reference hardware</td><td>Pre-mission</td></tr>
+        <tr><td>10</td><td>silicon.yaml v2 validates without error for all existing v1 configurations</td><td>Pre-mission</td></tr>
+        <tr><td>11</td><td>VRAM budget enforcement prevents loading beyond declared limit under all conditions</td><td>Pre-mission</td></tr>
+        <tr><td>12</td><td>Complete orchestration layer adds less than 500ms to GSD session startup</td><td>Pre-mission</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The spaces between the cloud and the silicon are where the work happens. The orchestration layer
+    is the wiring that connects skill-creator's six-stage observation pipeline to the GPU's execution
+    primitives &mdash; CUDA streams, kernel graphs, VRAM allocations, SM occupancy. Without it, the
+    Silicon Layer is a beautiful configuration file. With it, the Silicon Layer becomes a living
+    coprocessor that thinks about your work while you're working.</p>
+
+    <p>The Amiga's custom chipset was not faster than the competition. It was wired differently. Agnus
+    handled the memory bus. Denise painted the screen. Paula drove the audio channels. The 68000
+    thought. None of them asked permission. None of them waited their turn. They had the register map.
+    They had the bus. They had the architecture.</p>
+
+    <p>The Silicon Layer is that wiring. The dashboard is that register map. The GPU does not replace
+    Claude. It handles the patterns Claude taught it, so Claude can think about something harder.
+    Your chipset will get faster as you use it. That is the Amiga Principle. That is the spaces between.</p>
+  </main>
+
+  <footer>
+    <p>GSD-OS GPU Orchestration &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
