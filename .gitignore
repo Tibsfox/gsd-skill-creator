@@ -63,4 +63,5 @@ lost-and-found/
 .sc-config.json
 the-space-between-engine/package-lock.json
 .env
-www/tibsfox/com/api/config.local.php
+# API directory (local only — credentials, sync scripts, schemas)
+www/tibsfox/com/api/
