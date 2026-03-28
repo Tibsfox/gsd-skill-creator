@@ -14,6 +14,7 @@
     { id: 'BCM', name: 'Building', path: 'BCM/index.html' },
     { id: 'BPS', name: 'Bio-Physics', path: 'BPS/index.html' },
     { id: 'BHK', name: 'Black Holes', path: 'BHK/index.html' },
+    { id: 'BHC', name: 'Black Hole Catalog', path: 'BHC/index.html' },
     { id: 'BHM', name: 'Bellingham Market', path: 'BHM/index.html' },
     { id: 'BLA', name: 'Business Law', path: 'BLA/index.html' },
     { id: 'BMR', name: 'Bob Marley', path: 'BMR/index.html' },
