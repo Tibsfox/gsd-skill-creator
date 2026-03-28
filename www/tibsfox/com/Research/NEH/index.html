@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeHe OpenGL &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-neh">
+  <header>
+    <h1>NeHe OpenGL</h1>
+    <div class="subtitle">Taxonomy &middot; Foundation Track &middot; Intermediate &middot; Advanced &middot; Expert &middot; Upstream</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-taxonomy-skill-mapping">Taxonomy</a>
+      <a href="page.html?doc=02-foundation-track">Foundation</a>
+      <a href="page.html?doc=03-intermediate-track">Intermediate</a>
+      <a href="page.html?doc=04-advanced-track">Advanced</a>
+      <a href="page.html?doc=05-expert-track">Expert</a>
+      <a href="page.html?doc=06-upstream-integration">Upstream</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Jeff Molofee's NeHe Productions &mdash; Neon Helium &mdash; was the corpus that defined an
+      entire generation of 3D graphics programmers. Between 1997 and 2012, the 48 tutorials taught
+      OpenGL to hundreds of thousands of developers: the ones who built the games, the simulations,
+      the visualizers. Every lesson was a handshake between a beginner and a coordinate system,
+      between a curious programmer and a rendering pipeline.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">48</span><span class="stat-label">Lessons</span></div>
+      <div class="stat"><span class="stat-value">43</span><span class="stat-label">Platform Ports</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Skill Tiers</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-taxonomy-skill-mapping" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Taxonomy &amp; Skill Mapping</h3>
+        <div class="meta"><span class="tag tag-taxonomy">Taxonomy</span> Track A &middot; Knowledge graph</div>
+        <p>Machine-readable knowledge graph for skill-creator: YAML taxonomy of all 48 lessons, JSON-LD concept DAG with prerequisite edges, skill definition for the "opengl-lesson" skill type. The intelligence backbone that all other modules flow through.</p>
+      </a>
+
+      <a href="page.html?doc=02-foundation-track" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Foundation Track (L01&ndash;L12)</h3>
+        <div class="meta"><span class="tag tag-foundation">Foundation</span> Track B &middot; Tier 0&ndash;1</div>
+        <p>Window setup, first triangle, color, rotation, 3D shapes, texture mapping, filters and lighting, blending, moving bitmaps, 3D world loading, flag/wave effect, display lists. The bedrock: from blank window to textured, lit 3D scene.</p>
+      </a>
+
+      <a href="page.html?doc=03-intermediate-track" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Intermediate Track (L13&ndash;L24)</h3>
+        <div class="meta"><span class="tag tag-intermediate">Intermediate</span> Track B &middot; Tier 2</div>
+        <p>Bitmap fonts, outline fonts, texture-mapped fonts, cool-looking fog, 2D texture font, quadrics, particle engine, line-based extensions, morphing, picking, reflections/clipping, TGA loading. Building the visual vocabulary.</p>
+      </a>
+
+      <a href="page.html?doc=04-advanced-track" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Advanced Track (L25&ndash;L36)</h3>
+        <div class="meta"><span class="tag tag-advanced">Advanced</span> Track C &middot; Tier 3</div>
+        <p>Morphing and OBJ loading, stencil buffer reflections, shadow volumes, Bezier patches, collision detection, heightmap terrain, text-to-texture, multi-texturing, cel shading, compressed textures (DXT), spring-mass physics, translucent objects.</p>
+      </a>
+
+      <a href="page.html?doc=05-expert-track" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Expert Track (L37&ndash;L48)</h3>
+        <div class="meta"><span class="tag tag-expert">Expert</span> Track C &middot; Tier 4</div>
+        <p>Cel-shading techniques, compressed textures, physical simulation, rope physics (Verlet integration), virtual worlds with ODE, multiple viewports, FreeType fonts, 3D lens flare, vertex buffer objects, fullscreen antialiasing, CG shader translation, ArcBall rotation.</p>
+      </a>
+
+      <a href="page.html?doc=06-upstream-integration" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Upstream Intelligence</h3>
+        <div class="meta"><span class="tag tag-upstream">Upstream</span> Synthesis &middot; Integration</div>
+        <p>The artifact that makes all other modules useful inside skill-creator: intelligence index for agent queries, DACP three-part bundle schemas for graphics handoffs, deprecation map (15+ legacy patterns flagged), documentation index searchable by concept/lesson/API function.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>OpenGL pipeline / state machine</td><td>M1, M2, M6</td><td>VKD, WAL</td></tr>
+        <tr><td>Texture mapping / filtering</td><td>M2, M3, M4</td><td>VKD</td></tr>
+        <tr><td>Lighting models (Phong, per-pixel)</td><td>M2, M4</td><td>VKD, WAL</td></tr>
+        <tr><td>Particle systems</td><td>M3, M5</td><td>VKD</td></tr>
+        <tr><td>Collision detection</td><td>M4, M5</td><td>VKD</td></tr>
+        <tr><td>Shadow techniques (stencil, volumes)</td><td>M4</td><td>VKD</td></tr>
+        <tr><td>Vertex buffer objects / modern GPU path</td><td>M5, M6</td><td>VKD</td></tr>
+        <tr><td>Shader translation (CG to GLSL)</td><td>M5, M6</td><td>VKD, WAL</td></tr>
+        <tr><td>Deprecation map (fixed-function to modern)</td><td>M6, M1</td><td>VKD</td></tr>
+        <tr><td>3D math (quaternions, ArcBall)</td><td>M5, M4</td><td>VKD, WAL</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+NEHE OPENGL CORPUS -- SKILL GRAPH OVERVIEW
+===============================================================
+
+  TIER 0: FOUNDATION (L01-L05)
+    L01 Window ──&gt; L02 Primitives ──&gt; L03 Color ──&gt; L04 Rotation ──&gt; L05 3D Shapes
+
+  TIER 1: TEXTURE &amp; LIGHT (L06-L12)
+    L06 Textures ──&gt; L07 Filters+Light ──&gt; L08 Blending ──&gt; L09 Bitmaps
+    L10 World ──&gt; L11 Flag/Wave ──&gt; L12 Display Lists
+
+  TIER 2: INTERMEDIATE (L13-L24)
+    L13 Bitmap Font ──&gt; L14 Outline Font ──&gt; L16 Fog ──&gt; L19 Particles
+    L21 Line Extrude ──&gt; L22 Morphing ──&gt; L24 TGA Loading
+
+  TIER 3: ADVANCED (L25-L36)
+    L25 OBJ Morphing ──&gt; L26 Stencil Reflect ──&gt; L27 Shadow Volumes
+    L28 Bezier ──&gt; L30 Collision ──&gt; L34 Terrain ──&gt; L36 Translucency
+
+  TIER 4: EXPERT (L37-L48)
+    L37 Cel Shade ──&gt; L39 Physics ──&gt; L40 Rope Sim ──&gt; L45 VBOs
+    L46 FSAA ──&gt; L47 CG Shaders ──&gt; L48 ArcBall Rotation
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Taxonomy &amp; Skill Mapping] ──────────────────────────────┐
+       |                                                        |
+       |  (knowledge graph informs all implementation tiers)    |
+       v                                                        v
+  [M2: Foundation L01-L12] ──&gt; [M3: Intermediate L13-L24]  [M6: Upstream]
+       |                              |                     Integration
+       v                              v                         ^
+  [M4: Advanced L25-L36] ──&gt; [M5: Expert L37-L48] ─────────────┘
+
+  Parallel tracks:
+    Track A: M1 (taxonomy + DACP schemas + deprecation map)
+    Track B: M2 + M3 (foundation + intermediate Python code)
+    Track C: M4 + M5 (advanced + expert Python code)
+    Synthesis: M6 (upstream integration -- requires all)
+    </pre>
+  </main>
+
+  <footer>
+    <p>NeHe OpenGL &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
