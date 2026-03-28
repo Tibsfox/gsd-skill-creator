@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Late Night: A Complete History — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4A148C;
+      --primary-light: #7B1FA2;
+      --secondary: #E65100;
+      --tertiary: #4E342E;
+      --accent: #9C27B0;
+      --bg: #FAFAFA;
+      --card: #F3E5F5;
+      --card-dark: #E8D5F0;
+      --text: #212121;
+      --muted: #5D4037;
+      --border: #CE93D8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #6A1B9A 50%, var(--primary-light) 100%);
+      color: white;
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 20px,
+        rgba(255,255,255,0.03) 20px,
+        rgba(255,255,255,0.03) 40px
+      );
+    }
+
+    .header-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #CE93D8;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    header h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #E1BEE7;
+      max-width: 600px;
+      margin: 0.5rem auto 1.5rem;
+      position: relative;
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: #CE93D8;
+      position: relative;
+    }
+
+    .header-meta span {
+      background: rgba(255,255,255,0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* File cards */
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .file-card {
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .file-card:hover {
+      background: var(--card);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(74,20,140,0.15);
+    }
+
+    .file-icon {
+      font-size: 1.8rem;
+    }
+
+    .file-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .file-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .file-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--primary);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      align-self: flex-start;
+    }
+
+    /* Contents breakdown */
+    .stages {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .stage {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .stage-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 1.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .stage-1 .stage-header { background: var(--primary); }
+    .stage-2 .stage-header { background: var(--secondary); }
+    .stage-3 .stage-header { background: var(--tertiary); }
+
+    .stage-body {
+      background: white;
+      padding: 1rem 1.2rem;
+    }
+
+    .stage-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .stage-items li {
+      font-size: 0.88rem;
+      color: var(--text);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .stage-items li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Module grid */
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .module-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+    }
+
+    .module-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .module-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .module-span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Usage instructions */
+    .instructions {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+
+    .step:last-child { margin-bottom: 0; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .step-text {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      padding-top: 0.3rem;
+    }
+
+    .step-text code {
+      background: var(--card);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: var(--primary);
+    }
+
+    /* Recompilation */
+    .compile-box {
+      background: #1A0030;
+      color: #E1BEE7;
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 2;
+      margin-bottom: 3rem;
+    }
+
+    .compile-box .comment { color: #7B1FA2; }
+
+    /* Quote */
+    .closing-quote {
+      background: var(--card);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 2rem;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      color: var(--primary);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .closing-quote cite {
+      display: block;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">GSD Research Mission Package</div>
+  <h1>Late Night</h1>
+  <h2>A Complete History — Origins, Golden Ages, Rivalries, Reinvention &amp; the Digital Reckoning</h2>
+  <div class="header-meta">
+    <span>March 2026</span>
+    <span>Fleet Profile · 17 Roles</span>
+    <span>6 Research Modules</span>
+    <span>1949 → 2026+</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- FILES -->
+  <p class="section-title">Package Files</p>
+  <div class="file-grid">
+    <a class="file-card" href="latenight.pdf" download>
+      <div class="file-icon">📄</div>
+      <div class="file-name">latenight.pdf</div>
+      <div class="file-desc">28-page complete mission package: Vision Guide, Research Reference, and Mission Package. Publication-quality. Ready to hand to gsd-skill-creator.</div>
+      <div class="file-tag">PRIMARY · DOWNLOAD</div>
+    </a>
+    <a class="file-card" href="latenight.tex" download>
+      <div class="file-icon">📝</div>
+      <div class="file-name">latenight.tex</div>
+      <div class="file-desc">XeLaTeX source file. Modify and recompile to update content, add findings, or extend with new research. Three-pass compilation required.</div>
+      <div class="file-tag">SOURCE · EDITABLE</div>
+    </a>
+  </div>
+
+  <!-- CONTENTS -->
+  <p class="section-title">Contents</p>
+  <div class="stages">
+    <div class="stage stage-1">
+      <div class="stage-header">Stage 1 — Vision Guide</div>
+      <div class="stage-body">
+        <ul class="stage-items">
+          <li>Vision narrative: late night as cultural processing engine</li>
+          <li>Five-point problem statement covering historiography gaps, diversity exclusion, economic collapse, real-time transitions, and futures</li>
+          <li>Domain architecture map (ASCII): American broadcast track, British/International track, Diversity track</li>
+          <li>Six research modules defined with scope and connections</li>
+          <li>Chipset YAML configuration (Agnus/Denise/Paula/68000 allocation)</li>
+          <li>12 testable success criteria</li>
+          <li>Through-line: the spaces between in late night comedy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="stage stage-2">
+      <div class="stage-header">Stage 2 — Research Reference</div>
+      <div class="stage-body">
+        <ul class="stage-items">
+          <li>Module 01: Origins — Faye Emerson, Steve Allen, Jack Paar, Johnny Carson with sourced facts</li>
+          <li>Module 02: Wars — Letterman/Leno succession battle, Arsenio Hall's cultural significance, failed challengers</li>
+          <li>Module 03: Satire Revolution — Daily Show, Colbert Report, Conan crisis, Fallon digital pivot</li>
+          <li>Module 04: Diversity — Women's history, Black hosts, LGBTQ+ firsts, structural exclusion analysis</li>
+          <li>Module 05: International — Parkinson, Wogan, Ross, Norton; weekly vs. nightly structural difference</li>
+          <li>Module 06: Digital Reckoning — Quantitative decline data, Colbert cancellation, podcast insurgency, Netflix deals</li>
+          <li>Safety &amp; sensitivity considerations table · Complete source bibliography (30+ sources)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="stage stage-3">
+      <div class="stage-header">Stage 3 — Mission Package</div>
+      <div class="stage-body">
+        <ul class="stage-items">
+          <li>Mission objective and 5-wave execution architecture (ASCII diagram)</li>
+          <li>9 deliverables table with acceptance criteria</li>
+          <li>Component breakdown with model assignments (Opus 30% / Sonnet 60% / Haiku 10%)</li>
+          <li>Wave execution plan with parallel Track A/B structure across Waves 1 and 2</li>
+          <li>Token budget (~218K total estimated)</li>
+          <li>Dependency graph (ASCII): Foundation → 6 Modules → INTEG → CAPCOM gate → Publication</li>
+          <li>36-test plan: 5 safety-critical (BLOCK), 18 core, 8 integration, 5 edge cases</li>
+          <li>Verification matrix mapping all 12 success criteria to test IDs</li>
+          <li>Fleet crew manifest: 17 named roles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULES -->
+  <p class="section-title">Research Modules</p>
+  <div class="modules">
+    <div class="module-card">
+      <div class="module-num">Module 01</div>
+      <div class="module-title">Origins &amp; Golden Age</div>
+      <div class="module-span">1949 – 1979</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Module 02</div>
+      <div class="module-title">The Wars &amp; Schism</div>
+      <div class="module-span">1982 – 1999</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Module 03</div>
+      <div class="module-title">The Satire Revolution</div>
+      <div class="module-span">2000 – 2015</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Module 04</div>
+      <div class="module-title">Diversity &amp; the Desk</div>
+      <div class="module-span">1949 – 2026</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Module 05</div>
+      <div class="module-title">British &amp; International</div>
+      <div class="module-span">1971 – Present</div>
+    </div>
+    <div class="module-card">
+      <div class="module-num">Module 06</div>
+      <div class="module-title">Digital Reckoning + Future</div>
+      <div class="module-span">2015 – Beyond</div>
+    </div>
+  </div>
+
+  <!-- USAGE -->
+  <p class="section-title">How to Use This Package</p>
+  <div class="instructions">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Download <code>latenight.pdf</code> — this is your complete three-stage mission package. Read the Vision Guide (Stage 1) to understand scope and philosophy.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Hand the PDF to your GSD orchestrator in Claude Code: <code>gsd execute latenight.pdf</code> or reference it as the mission specification in a new session.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">The mission uses <strong>Fleet activation</strong> (17 roles). Confirm the activation profile with your orchestrator before Wave 0 begins. Six context windows estimated across three sessions.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Two <strong>CAPCOM gates</strong> require your approval: after INTEG synthesis (before final document is produced) and after verification (before delivery).</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-text">The five <strong>safety-critical tests</strong> (SC-SRC, SC-NUM, SC-ADV, SC-DIV, SC-CONT) are hard BLOCK gates. Any failure halts the mission and requires human review before proceeding.</div>
+    </div>
+  </div>
+
+  <!-- RECOMPILE -->
+  <p class="section-title">Recompile the LaTeX Source</p>
+  <div class="compile-box">
+    <span class="comment"># Three passes required for TOC, cross-refs, and lastpage</span><br>
+    xelatex -interaction=nonstopmode latenight.tex<br>
+    xelatex -interaction=nonstopmode latenight.tex<br>
+    xelatex -interaction=nonstopmode latenight.tex<br>
+    <br>
+    <span class="comment"># Requirements: XeLaTeX + DejaVu fonts (pre-installed on Ubuntu)</span><br>
+    <span class="comment"># Packages: fontspec, tcolorbox, tabularx, colortbl, lastpage, fancyhdr</span>
+  </div>
+
+  <!-- CLOSING QUOTE -->
+  <div class="closing-quote">
+    "Late night began as a way to kill time. It was the networks realizing: 'Let's kick the football a little further down the road and see what happens at 11:30.'"
+    <cite>— Conan O'Brien, The Story of Late Night (CNN Original Series, 2020)</cite>
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · Late Night: A Complete History · March 2026 · Vision → Research → Mission
+</footer>
+
+</body>
+</html>

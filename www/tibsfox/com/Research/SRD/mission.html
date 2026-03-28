@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; SSH &amp; Remote Desktop Protocols</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-srd">
+  <header>
+    <h1>SSH &amp; Remote Desktop Protocols</h1>
+    <div class="subtitle">SSH Transport &middot; SSH Application &middot; RDP &middot; VNC/RFB &middot; SPICE &middot; Security</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-ssh-transport">SSH Transport</a>
+      <a href="page.html?doc=02-ssh-application">SSH Application</a>
+      <a href="page.html?doc=03-rdp-protocol">RDP Protocol</a>
+      <a href="page.html?doc=04-vnc-spice">VNC &amp; SPICE</a>
+      <a href="page.html?doc=05-security-hardening">Security</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The spaces between are where protocols live. Between the client's SSH_MSG_KEXINIT and the
+      server's reply is a negotiation of cryptographic primitives that will protect everything that
+      follows. Between the raw X.224 Connection Request and the first RDP graphics update are ten
+      phases of mutual configuration. Understanding it at wire level means never having to trust
+      a black box.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">9</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~76K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/ssh_rdp_mission.pdf">Mission Package</a></td><td>PDF &middot; 30 pages</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/ssh_rdp_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared schemas, templates, source index</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>SSH Track</td><td>M1 (SSH Transport) + M2 (SSH Application)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1B</td><td>RDP Track</td><td>M3 (RDP Protocol)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1C</td><td>Display Track</td><td>M4 (VNC/RFB &amp; SPICE)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>2</td><td>Security Synthesis</td><td>M5 (Security &amp; Hardening) + M6 (Implementation Guide)</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Assembly, bibliography validation, test execution</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Orchestration / DMA</td><td>Opus</td><td>Mission direction, security analysis synthesis, cross-protocol comparison, CVE impact assessment</td></tr>
+        <tr><td>Denise</td><td>Document production</td><td>Sonnet</td><td>Document assembly, table formatting, wire format diagrams, bibliography compilation</td></tr>
+        <tr><td>Paula</td><td>I/O / Anticipatory</td><td>Haiku</td><td>Shared schemas, template scaffolding, source index generation, boilerplate tables</td></tr>
+        <tr><td>Gary</td><td>Glue logic</td><td>Haiku</td><td>Validation passes, cross-reference checks, compilation verification</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-SRC</td><td>Source quality</td><td>All citations traceable to IETF RFCs, Microsoft Open Specifications, NIST, or IANA registries. Zero blog posts or untraceable sources.</td></tr>
+        <tr><td>SC-NUM</td><td>Numerical attribution</td><td>Every bit-width, field size, and port number traces to specific RFC section or MS-RDPBCGR page.</td></tr>
+        <tr><td>SC-SEC</td><td>Security sensitivity</td><td>Attack mechanics (BlueKeep, DejaBlue, SSH attacks) documented for defensive understanding only. No operational exploit detail.</td></tr>
+        <tr><td>SC-ADV</td><td>No policy advocacy</td><td>Document presents protocol mechanics and tradeoffs without advocating for specific deployment mandates.</td></tr>
+        <tr><td>SC-CANON</td><td>RFC accuracy</td><td>Every RFC listed as current actually is; obsoleted RFCs correctly labeled; SSH deprecations per RFC 9142 accurate.</td></tr>
+        <tr><td>SC-CVE</td><td>CVE attribution</td><td>Every CVE referenced includes correct CVE ID, affected protocol/version, and CVSS score from authoritative source.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>A 32-byte Curve25519 public key. A 4-byte MAC. A 1-byte padding length field. Each component
+    does its single job with mathematical precision, and together they produce a channel through which
+    anything &mdash; terminal sessions, file transfers, desktop pixels, audio streams &mdash; can flow securely.
+    The wire format is not bureaucracy. It is architecture.</p>
+
+    <p>Understanding it at this level means never having to wonder what is actually on the wire,
+    and never having to trust a black box to get it right.</p>
+
+    <p><em>&ldquo;A protocol specification is the most honest thing in computing.&rdquo;</em>
+    &mdash; SSH &amp; Remote Desktop Protocol Mission, GSD Ecosystem, 2026</p>
+  </main>
+
+  <footer>
+    <p>SSH &amp; Remote Desktop Protocols &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

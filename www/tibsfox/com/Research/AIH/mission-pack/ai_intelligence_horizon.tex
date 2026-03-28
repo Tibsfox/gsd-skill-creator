@@ -1,0 +1,1101 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Technology Domain Color Scheme ──────────────────────────────────────────
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0D47A1}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{highlight}{HTML}{1976D2}
+
+% ── Section Formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ────────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers and Footers ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{The Intelligence Horizon}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Fox Infrastructure Group},
+  pdftitle={The Intelligence Horizon -- AI and ML Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{The Intelligence\\[0.3em]Horizon}}
+
+\vspace{0.6cm}
+{\Large\sffamily\textcolor{secondary}{State of the Art in Artificial Intelligence\\and Machine Learning}}
+
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Where We Came From · Where We Are · Where We Are Going}}
+
+\vspace{0.4cm}
+{\normalsize\sffamily\textcolor{accent}{Deep Integration: College of Knowledge \& Complex Plane of Experience}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad|\quad Estimated: 12--16 context windows across 3--4 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Ecosystem: GSD / College of Knowledge / Complex Plane of Experience}}
+\end{center}
+\newpage
+
+% ── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+%  STAGE 1 — VISION DOCUMENT
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 \textemdash{} VISION DOCUMENT}{primary}
+
+\section{The Intelligence Horizon --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{The Space Between (mathematical foundations), GSD Ecosystem v1.49+}
+\metafield{Context:}{Deep integration target: College of Knowledge + Complex Plane of Experience}
+\metafield{Mission Codename:}{INTELLIGENCE HORIZON}
+
+\subsection{Vision}
+
+There is a shape to the history of intelligence. Not a straight line upward, not an exponential curve forever — but a unit circle, rotating, returning, accumulating. Every era of AI research has believed it was close to the summit, and every era has discovered that the summit was a resting place on a much longer arc. McCulloch and Pitts drew neurons on a chalkboard in 1943. Minsky dismissed perceptrons in 1969. Backpropagation returned in 1986. Winter came again. AlexNet shattered a benchmark in 2012 and the world blinked. The Transformer arrived in 2017 and everything changed. ChatGPT crossed 100 million users in two months. Reasoning models won the International Math Olympiad in 2025. And now — early 2026 — we are building agents that run for seven continuous hours, protocols that let any agent talk to any tool in the world, and systems that are beginning to generate novel hypotheses in biology and materials science.
+
+This mission is an attempt to hold all of that in one hand.
+
+The Amiga Principle teaches us to look for leverage — for the architectural elegance that achieves staggering complexity through faithful iteration. Artificial intelligence, examined carefully, is the Amiga Principle applied to cognition itself. The transformer is not a brute-force solution to language; it is the discovery that attention — the selective routing of relevance — was the key that had been missing. Scaling laws are not an accident of size; they are the discovery that intelligence is a function of carefully structured information, and that the function has a shape. The multi-agent framework is not a workaround for context limits; it is the recognition that distributed intelligence with specialized nodes is how all complex natural systems work — from beehives to immune systems to the Pacific salmon run.
+
+The College of Knowledge exists to hold these connections. The eight-layer mathematical progression from \textit{The Space Between} — from the Unit Circle through to L-Systems — is not an accident of curriculum design. It is a map of the same conceptual territory that AI researchers have traversed: from the geometry of activation spaces, to the topology of transformer attention, to the category-theoretic structure of agentic composition. This mission builds the bridge between those two maps, so that learners who understand Euler's formula can also understand how large language models are composed, and researchers who understand scaling laws can ground them in the versine geometry of the spaces between.
+
+Where are we going? The frontier has fractured. Regulatory, efficiency, cost, and capability frontiers are now distinct territories. Neuro-symbolic integration — logic married to learning — is rising as the Amiga Principle of the next era: not brute scale, but architectural elegance. Embodied agents are beginning to move through physical space. The Inference Famine is real: compute demand is outstripping supply by an order of magnitude, driving the same architectural ingenuity that gave us the Amiga in 1985. The spaces between — between training and inference, between symbolic and neural, between human oversight and autonomous action — are exactly where the next breakthroughs will emerge.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+\item \textbf{The comprehension gap}: AI progresses at a speed that outpaces the ability of practitioners, policymakers, and learners to build accurate mental models. Each generation of models arrives before the previous one is understood. The College of Knowledge lacks a structured curriculum module that maps AI milestones to mathematical foundations, leaving learners without the conceptual scaffolding to reason about what they are using.
+
+\item \textbf{The architectural amnesia problem}: The field chronically forgets why decisions were made. The AI winters were caused by overpromising and underdelivering on architectures that had genuine but limited scope. This pattern — hype cycle, winter, rediscovery — repeats because practitioners do not understand the mathematical structure of what they are building. The GSD ecosystem itself is susceptible to this: deploying agents without understanding their failure modes.
+
+\item \textbf{The alignment gap between capability and safety}: As of 2026, reasoning models can win gold medals in mathematics, autonomously browse the web, and run for a full working day — while alignment techniques remain empirical, brittle, and underfunded relative to capability research. Anthropic and OpenAI have begun cross-evaluating each other's models, but the field lacks a mathematical framework for reasoning about alignment that matches the sophistication of the capability research.
+
+\item \textbf{The integration deficit in agentic systems}: The emergence of MCP, A2A, and the Agentic AI Foundation protocols represents a genuine architectural moment — the equivalent of TCP/IP for agent communication. But most practitioners are deploying agents without understanding the protocol stack, creating brittle systems that will require architectural rewrites. The GSD ecosystem's DACP (Deterministic Agent Communication Protocol) anticipated this direction but needs formal integration with the emerging standard stack.
+
+\item \textbf{The missing curriculum link}: The College of Knowledge's eight-layer mathematical progression provides the conceptual vocabulary for understanding AI — vector spaces for embeddings, category theory for model composition, L-Systems for generative recursion — but this mapping has not been made explicit. The Complex Plane of Experience remains a philosophical framework rather than an active navigational tool for AI learners.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-line model}: AI is the progressive formalization of intelligence — each era discovering one more layer of the mathematical structure that cognition shares with computation.
+
+This mission treats the history, present, and future of AI/ML as a single continuous arc, navigable via the eight-layer mathematical progression of \textit{The Space Between}. Each layer corresponds to a generation of AI understanding. The Complex Plane of Experience provides the coordinate system: the real axis as empirical capability, the imaginary axis as theoretical depth, and $r \cdot e^{i\theta}$ as the skill of any practitioner who can hold both.
+
+\subsubsection{Domain Map: AI Eras on the Unit Circle}
+
+\begin{asciibox}
+   INTELLIGENCE HORIZON: Eras as Unit Circle Positions
+   =====================================================
+
+   theta = 0           theta = pi/4         theta = pi/2
+   1943 - 1956         1956 - 1969          1969 - 1986
+   McCulloch-Pitts     Dartmouth / Turing    AI Winter I
+   Neural foundation   Symbolic AI birth     Perceptron limits
+   UNIT CIRCLE LAYER   SET THEORY LAYER      CATEGORY THEORY
+   ────────────────────────────────────────────────────────────
+   theta = 3pi/4       theta = pi           theta = 5pi/4
+   1986 - 2012         2012 - 2017          2017 - 2022
+   Backprop revival    Deep Learning era    Transformer era
+   VECTOR CALCULUS     INFORMATION SYS      INFORMATION SYS
+   ────────────────────────────────────────────────────────────
+   theta = 3pi/2       theta = 7pi/4        theta = 2pi
+   2022 - 2024         2024 - 2025          2025 - NOW
+   LLM / GenAI         Reasoning models     Agentic systems
+   L-SYSTEMS LAYER     L-SYSTEMS + CAT      FULL INTEGRATION
+   ────────────────────────────────────────────────────────────
+
+   Each turn of the circle accumulates the prior layers.
+   The next turn begins with Neuro-Symbolic + Embodied AI.
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+   MODULE DEPENDENCY GRAPH
+   ========================
+   M1: Historical Foundations    M2: Transformer Era
+       |                             |
+       +──────────────┬──────────────+
+                      |
+              M3: Frontier Models & Reasoning
+                      |
+           +──────────+──────────+
+           |                     |
+   M4: Agentic Architecture   M5: Alignment & Safety
+           |                     |
+           +──────────+──────────+
+                      |
+         M6: College of Knowledge Integration
+             (Complex Plane Mapping)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Historical Foundations (1943--2017)}
+Maps the arc from McCulloch-Pitts neurons through the perceptron, AI winters, expert systems, backpropagation, the deep learning renaissance (AlexNet 2012), to the immediate predecessor of the transformer. College of Knowledge layer: Unit Circle through Vector Calculus.
+
+\subsubsection{Module 2: The Transformer Era (2017--2023)}
+The ``Attention Is All You Need'' paper and its children: BERT, GPT series through GPT-3, DALL-E, diffusion models, ChatGPT public launch. Scaling laws as discovered empirical regularities. Foundation model paradigm. College of Knowledge layer: Information Systems Theory.
+
+\subsubsection{Module 3: Frontier Models and Reasoning (2023--present)}
+GPT-4 through GPT-5, Claude series, Gemini, DeepSeek R1 moment, test-time compute scaling, reasoning models, multimodal integration, open-weight democratization. The fracturing of the frontier into regulatory / efficiency / cost / capability sub-frontiers. College of Knowledge layer: L-Systems (emergent complexity from simple iteration rules).
+
+\subsubsection{Module 4: Agentic Architecture and Protocols}
+MCP (Anthropic, donated to Linux Foundation AAIF Dec 2025), A2A (Google/AAIF), multi-agent frameworks (LangGraph, CrewAI, AutoGen/Microsoft MAF), HITL architecture, fresh-context subagent patterns. GSD ecosystem alignment: DACP as precursor to A2A, skill-creator as a composable agent layer. College of Knowledge layer: Category Theory (morphisms as tool calls, functors as agent composition).
+
+\subsubsection{Module 5: Alignment, Safety, and Governance}
+Constitutional AI, RLHF/RLAIF, mechanistic interpretability, alignment faking research, Anthropic/OpenAI joint safety evaluations, EU AI Act enforcement, the AGI/ASI trajectory debate, specification gaming. College of Knowledge layer: Set Theory (boundary conditions, containment).
+
+\subsubsection{Module 6: College of Knowledge Integration}
+The complete mapping of the eight-layer mathematical progression to AI/ML concepts. Complex Plane of Experience as a navigation instrument for AI practitioners. Building the parallel proof companion to \textit{The Space Between}. Rosetta Core cross-domain translation bridges. This is the capstone module that makes the entire mission ecosystem-native.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+   gsd_chipset:
+     agnus:                    # Orchestration / DMA
+       model: claude-opus-4    # Judgment-heavy synthesis
+       role: FLIGHT + CRAFT-ALIGN + CRAFT-COLLEGE
+       responsibilities:
+         - Cross-module integration (M3-M4-M5-M6 synthesis)
+         - College of Knowledge mapping decisions
+         - AGI/ASI trajectory analysis (M5)
+         - Through-line maintenance across all stages
+     denise:                   # Display / Output
+       model: claude-sonnet-4  # Structural implementation
+       role: EXEC x2 + CRAFT-HIST + CRAFT-ARCH
+       responsibilities:
+         - Module document production (M1, M2, M4)
+         - LaTeX formatting and assembly
+         - Source verification and citation
+         - Agentic protocol documentation
+     paula:                    # Audio / IO / Anticipatory
+       model: claude-haiku-4   # Scaffolding
+       role: BUDGET + LOG + PLAN scaffolding
+       responsibilities:
+         - Shared schemas and templates
+         - Source index construction
+         - Token budget tracking
+         - Commit message generation
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=*]
+\item Complete historical arc from 1943 to present (March 2026)
+\item Frontier model landscape: OpenAI, Anthropic, Google, Meta, DeepSeek, Mistral
+\item Agentic protocol stack: MCP, A2A, multi-agent frameworks
+\item Alignment and safety research through 2025/2026 publications
+\item Full College of Knowledge mapping (all eight mathematical layers)
+\item Complex Plane of Experience navigation framework for AI practitioners
+\item GSD ecosystem alignment documentation (DACP $\leftrightarrow$ A2A, skill-creator as agent)
+\item Neuro-symbolic AI as the emerging next-era architecture
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=*]
+\item Robotics and physical embodiment (hardware specifications)
+\item Quantum computing integration (near-future but not 2026 production)
+\item Country-specific AI policy analysis beyond high-level governance
+\item Proprietary training data, weight specifications, or benchmark engineering
+\item Cryptocurrency / blockchain / Web3 AI intersections
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC-\arabic*:}]
+\item The historical module traces an unbroken conceptual arc from McCulloch-Pitts (1943) to the Transformer (2017) with $\geq$15 documented milestones and citations to peer-reviewed or primary sources.
+\item The transformer module documents the scaling law empirical progression (Chinchilla, GPT-3/4, inference scaling) with quantitative data points and attributions.
+\item The frontier models module covers $\geq$8 distinct frontier model families (as of Q1 2026) across open-weight and closed-source categories.
+\item The agentic protocols module documents MCP and A2A architecture with sufficient precision that a practitioner could make implementation decisions from it alone.
+\item The alignment module covers Constitutional AI, RLHF/RLAIF, mechanistic interpretability, and alignment faking research with citations to Anthropic/OpenAI primary sources.
+\item The College of Knowledge integration module explicitly maps all eight mathematical layers to corresponding AI/ML concepts, with at least one worked example per layer.
+\item The Complex Plane of Experience section produces a working navigation framework (a coordinate system with labeled concept positions) that a learner can use to locate themselves.
+\item The GSD ecosystem integration section explicitly connects DACP $\leftrightarrow$ A2A and skill-creator $\leftrightarrow$ agentic composition, documented as architectural equivalences.
+\item All historical claims are attributed to documented primary sources (Dartmouth Conference records, original papers, IEEE/ACM publications).
+\item All 2025--2026 claims are sourced from State of AI Report, peer-reviewed journals, or official lab publications.
+\item The through-line from the Amiga Principle to the architecture of modern AI is narratively coherent and traceable from Vision to Mission.
+\item The mission package is fully self-contained: a practitioner with no prior GSD knowledge can execute M1--M5 from the specs alone, and a GSD operator can execute M6 from the spec alone.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+\textit{The Space Between} & Mathematical foundations; M6 is a direct proof companion & Depends on \\
+GSD Ecosystem v1.49+ & DACP architecture informs M4; skill-creator maps to M4 & Peer \\
+gsd-chipset-architecture-vision & Chipset YAML pattern used for mission configuration & Depends on \\
+Fox Infrastructure Group Plan & AI infrastructure economics inform M3 (compute frontier) & Informs \\
+GSD Fair Use Educational Mission & M6 (College of Knowledge) operates under fair use framework & Sibling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Intelligence is not a thing. It is a set of relationships — between signals and patterns, between patterns and predictions, between predictions and actions. The Amiga worked not because it had the most powerful processor, but because Agnus, Denise, and Paula each did one thing magnificently, and the spaces between them — the DMA channels, the timing, the elegant handoffs — were where the magic lived.
+
+The history of AI is a history of discovering those spaces. The perceptron was magnificent at linear separation. The space it could not cross was the XOR problem. Backpropagation crossed it. The RNN was magnificent at sequence modeling. The space it could not cross was the vanishing gradient. The LSTM bridged it. The LSTM was magnificent at short sequences. The space it could not cross was long-range dependency. The Transformer dissolved it. And now — the Transformer is magnificent at token prediction. The space it cannot reliably cross is grounded reasoning, physical embodiment, and verifiable truth. Neuro-symbolic integration, agentic memory, and test-time computation are building bridges across that gap right now.
+
+The College of Knowledge does not teach AI. It teaches the mathematics of the spaces between — and in doing so, teaches everything.
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+%  STAGE 2 — RESEARCH REFERENCE
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 \textemdash{} RESEARCH REFERENCE}{secondary}
+
+\section{The Intelligence Horizon --- Research Reference}
+
+\subsection{How to Use This Document}
+
+Stage 2 provides the annotated research base for each of the six mission modules. Each section contains survey findings, key data points, source citations, and cross-module connections. Agents executing Modules 1--5 should use this as their primary knowledge source before conducting additional research. The Module 6 section (College of Knowledge Integration) contains the novel synthesis work unique to this mission and should be treated as the highest-priority content.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}[leftmargin=*]
+\item \textbf{State of AI Report 2025} (stateof.ai) --- independent annual survey of global AI progress
+\item \textbf{Anthropic Alignment Science Blog} (alignment.anthropic.com) --- primary source for Constitutional AI, alignment research
+\item \textbf{OpenAI Research} (openai.com/research) --- GPT series, scaling law papers, safety evaluations
+\item \textbf{Google DeepMind} (deepmind.google) --- AlphaGo, AlphaFold, Gemini, A2A protocol
+\item \textbf{arXiv.org} (cs.LG, cs.AI, cs.CL) --- preprint primary source for all architecture papers
+\item \textbf{IEEE / ACM Digital Library} --- peer-reviewed historical milestones
+\item \textbf{World Journal of Advanced Research and Reviews} (2026 Vol 29) --- scaling laws review
+\item \textbf{ScienceDirect: Neuro-Symbolic AI Survey} (2026) --- 178-paper PRISMA review
+\item \textbf{Linux Foundation AAIF} --- MCP / A2A protocol specifications
+\end{itemize}
+
+\subsection{Module 1 Reference: Historical Foundations (1943--2017)}
+
+\subsubsection{The Neural Foundation Era (1943--1956)}
+
+In 1943, Warren McCulloch and Walter Pitts published a mathematical model of a neuron as a binary computational unit, establishing the conceptual basis for artificial neural networks. Their work proposed that logical operations could be performed by networks of such units --- a direct precursor to the architecture of every modern AI system. The 1950 Turing Test (``Computing Machinery and Intelligence'') proposed behavioral criteria for machine intelligence that remain philosophically influential. Frank Rosenblatt's Perceptron (1957--1958) was the first working implementation: a single-layer network capable of learning linearly separable classification tasks from labeled examples. The 1956 Dartmouth Summer Research Project, organized by John McCarthy (who coined ``artificial intelligence''), established AI as a formal academic discipline.
+
+\textbf{College of Knowledge Layer:} Unit Circle. The perceptron's decision boundary is a hyperplane --- a generalization of the geometric objects that the Unit Circle first introduces: angles, rotations, and the separability of space.
+
+\subsubsection{The First Winter and Expert Systems (1969--1986)}
+
+Minsky and Papert's 1969 \textit{Perceptrons} rigorously documented the limitations of single-layer networks (inability to solve XOR), triggering a funding collapse known as AI Winter I. The Lighthill Report (1973) furthered the retrenchment. The decade 1975--1985 saw expert systems (MYCIN, DENDRAL) prove that domain-specific symbolic knowledge could be computationally effective, but at the cost of brittle, hand-coded rules that did not generalize.
+
+\subsubsection{The Backpropagation Revival (1986--2012)}
+
+Rumelhart, Hinton, and Williams (1986) popularized backpropagation as a method for training multi-layer networks, breaking the XOR barrier and inaugurating the connectionist era. Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM, Hochreiter \& Schmidhuber, 1997) addressed sequential data. Deep Blue (IBM, 1997) defeated Garry Kasparov at chess, demonstrating superhuman performance in a constrained domain. The AI winter of the late 1980s and early 1990s gave way to gradual commercial adoption of machine learning for classification, spam filtering, and recommendation systems.
+
+The pivotal 2012 milestone: AlexNet (Krizhevsky, Sutskever, Hinton) won the ImageNet Large Scale Visual Recognition Challenge by a margin so large (26.2\% vs. 16.4\% top-5 error) that it is now recognized as the moment deep learning replaced classical computer vision. The key enablers were the GPU (specifically NVIDIA's compute capabilities) and large labeled datasets.
+
+\textbf{College of Knowledge Layer:} Vector Calculus. Backpropagation is gradient descent --- the directional derivative of the loss function with respect to every parameter in the network. Understanding backprop requires chain rule, Jacobians, and the geometry of high-dimensional loss landscapes.
+
+\subsubsection{Generative Models and the Transformer Predecessor (2012--2017)}
+
+Ian Goodfellow introduced Generative Adversarial Networks (GANs, 2014): a game-theoretic framework where a generator and discriminator improve each other. Variational Autoencoders (VAEs, Kingma \& Welling, 2013) provided a probabilistic generative framework. Word2Vec (Mikolov et al., 2013) showed that word embeddings carry semantic structure. LSTM-based sequence-to-sequence models achieved near-human performance in machine translation. DeepMind's Deep Q-Network (2015) combined reinforcement learning with deep learning to achieve superhuman Atari performance. AlphaGo (2016) used Monte Carlo Tree Search with deep neural networks to defeat world Go champion Lee Sedol --- a milestone because Go's branching factor (approx. $250^{150}$) had been considered beyond computational reach.
+
+\subsection{Module 2 Reference: The Transformer Era (2017--2023)}
+
+\subsubsection{Attention Is All You Need (2017)}
+
+The 2017 Google paper ``Attention Is All You Need'' (Vaswani et al.) introduced the Transformer architecture. Unlike RNNs, which process sequences recurrently, the Transformer processes entire sequences in parallel using a scaled dot-product attention mechanism. For each token, attention computes a weighted sum over all other tokens --- the weights determined by learned query, key, and value matrices. This parallelism enabled training on vastly larger datasets and produced qualitatively better long-range dependencies.
+
+Mathematically: $\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$
+
+This formula is category theory made operational: Q, K, V are morphisms; the attention function is a natural transformation routing information through the network.
+
+\textbf{College of Knowledge Layer:} Information Systems Theory. The Transformer is an information routing system. The attention mechanism is a learned relevance filter --- a formalization of the ``spaces between'' that determines which signals amplify each other.
+
+\subsubsection{Foundation Models and Scaling Laws}
+
+BERT (Google, 2018) demonstrated that bidirectional pre-training on large text corpora produced transferable representations. GPT (OpenAI, 2018) showed that unidirectional language modeling at scale produced emergent few-shot capabilities. GPT-3 (2020, 175 billion parameters) surprised the research community with in-context learning: the ability to perform tasks from examples in the prompt without fine-tuning.
+
+Scaling laws (Kaplan et al., OpenAI, 2020) quantified the relationship between model performance, training compute, and dataset size as power laws. The Chinchilla paper (Hoffmann et al., DeepMind, 2022) revised these laws, showing that previous large models were significantly undertrained relative to their parameter count, and establishing the optimal compute allocation formula. These empirical regularities enabled the field to plan frontier training runs with quantitative forecasting.
+
+\textbf{Research Note:} A 2026 review in the World Journal of Advanced Research and Reviews concludes that from 2020 to 2025, ``scaling laws evolved from a useful descriptive pattern into an engineering toolkit for planning frontier training runs,'' and that by 2025--2026, the field had added a second scaling axis: inference-time compute (test-time scaling), which can improve reasoning performance more cost-effectively than simply increasing parameters.
+
+\subsubsection{Generative AI Goes Public (2022--2023)}
+
+Stable Diffusion and DALL-E 2 (2022) brought diffusion model image generation to broad audiences. ChatGPT (OpenAI, November 30, 2022) crossed 100 million users in two months --- the fastest adoption of any application in history. GPT-4 (2023) introduced multimodal capability (image+text input). DeepMind's AlphaFold 2 solved the protein structure prediction problem, representing the first time AI produced a breakthrough scientific result that would have taken decades by conventional methods. The term ``foundation model'' entered mainstream usage.
+
+\subsection{Module 3 Reference: Frontier Models and Reasoning (2023--present)}
+
+\subsubsection{The Reasoning Turn (2024--2025)}
+
+OpenAI's o1 (2024) demonstrated that allocating more inference compute via ``thinking'' --- extended chain-of-thought reasoning before answering --- produced significant capability improvements, particularly in mathematics and coding. This inaugurated the inference-time compute scaling paradigm alongside training-time scaling. Anthropic's Claude series introduced ``extended thinking'' modes. The State of AI Report 2025 identifies this as the year's defining trend: ``Reasoning defined the year, as frontier labs combined reinforcement learning, rubric-based rewards, and verifiable reasoning with novel environments to create models that can plan, reflect, self-correct, and work over increasingly long time horizons.''
+
+By August 2025, GPT-5 (OpenAI) was released. Described as ``a unified system that can switch seamlessly between quick responses and deep reasoning,'' it represented the convergence of general-purpose and reasoning capabilities. Reasoning models achieved gold-medal-equivalent scores on the International Mathematics Olympiad.
+
+\subsubsection{The Landscape in Q1 2026}
+
+As of March 2026, the frontier has fractured into multiple overlapping frontiers:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Frontier Type} & \tableheader{Leading Models} & \tableheader{Defining Characteristic} \\
+\midrule
+Capability frontier & GPT-5.2, Claude Opus 4.5 & Maximum reasoning, tool use, multimodal \\
+Efficiency frontier & DeepSeek V3.2, Qwen3 & Frontier performance at fraction of compute \\
+Cost frontier & Mistral Large 3, Llama 4 & Price-performance for high-volume deployment \\
+Open-weight frontier & DeepSeek, Qwen, Llama 4 & Customizable, locally deployable \\
+Safety frontier & Claude Opus 4.5, GPT-5 & Constitutional alignment, interpretability \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{The DeepSeek Moment}: In January 2025, DeepSeek R1 (an open-weight Chinese model) achieved near state-of-the-art performance with significantly lower training compute than US frontier models. This ``DeepSeek moment'' triggered a global reassessment of the compute-to-capability relationship, intensified geopolitical competition in AI, and catalyzed an explosion of open-weight model releases, particularly from Chinese labs (DeepSeek, Qwen/Alibaba, Kimi/Moonshot, MiniMax, Z.ai). By 2026, the State of AI Report notes that ``China [is] established as a credible \#2'' in frontier AI.
+
+\subsubsection{Scientific AI Emergence}
+
+DeepMind's Co-Scientist and Stanford's Virtual Lab are autonomously generating, testing, and validating scientific hypotheses. Profluent's ProGen3 demonstrated that scaling laws apply to protein design as well as language. GPT-5 collaboration with Red Queen Bio improved a molecular-cloning procedure's efficiency by a factor of 79. AI has transitioned from a tool for scientific analysis to a collaborator in scientific discovery.
+
+\subsection{Module 4 Reference: Agentic Architecture and Protocols}
+
+\subsubsection{The Agent Turn (2024--2025)}
+
+The State of AI Report 2025 notes: ``If reasoning models dominated the first half of 2025, agentic and autonomous AI dominated the second half.'' Autonomous agents moved from research prototypes to production deployment across law, finance, software development, and media. Claude Opus 4's ability to run autonomously for nearly seven hours (a full corporate workday) with tool use and memory file creation represented a qualitative shift in what ``AI assistant'' means.
+
+\subsubsection{Protocol Standards: MCP and A2A}
+
+\textbf{Model Context Protocol (MCP)}: Introduced by Anthropic in late 2024, MCP standardizes how AI agents connect to external tools, databases, and services using JSON-RPC 2.0. By February 2026, MCP had 97 million monthly SDK downloads and was adopted by every major AI provider. Donated to the Linux Foundation's Agentic AI Foundation (AAIF) in December 2025. Described as ``the USB-C port for AI.''
+
+\textbf{Agent-to-Agent Protocol (A2A)}: Introduced by Google in April 2025, standardizes agent-to-agent communication (discovery, task delegation, result return). IBM's Agent Communication Protocol (ACP) merged into A2A in August 2025. Co-governed under AAIF by OpenAI, Anthropic, Google, Microsoft, AWS, and Block.
+
+\textbf{GSD Ecosystem Alignment}: The DACP (Deterministic Agent Communication Protocol, GSD v1.49+) anticipated the MCP/A2A direction. DACP's three-part bundle (human intent + structured data + executable code) is architecturally equivalent to A2A's task delegation model. The GSD skill-creator's six-step loop (Observe → Detect → Suggest → Manage → Auto-Load → Learn/Compose) is a specialized implementation of an MCP-compatible agent with memory.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Protocol} & \tableheader{GSD Equivalent} & \tableheader{Function} \\
+\midrule
+MCP (tool access) & skill-creator tool registry & Agent $\leftrightarrow$ tool standardized interface \\
+A2A (agent-agent) & DACP three-part bundle & Structured handoff between agents \\
+AAIF governance & GSD push.default=nothing & Mandatory staging gates / safety by structure \\
+Agent Cards & GSD crew manifest & Declarative agent capability advertisement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Multi-Agent Frameworks}
+
+By 2026, Gartner projects that 40\% of enterprise applications will embed task-specific agents (up from $<$5\% in 2025). Leading frameworks: LangGraph (graph-based, human-in-the-loop, audit trails), CrewAI (fastest prototyping), OpenAI SDK (cleanest handoff model), Microsoft Agent Framework (formerly AutoGen + Semantic Kernel, GA Q1 2026), Google ADK (A2A-native). The agentic AI market is projected to grow from \$7.8B (2025) to \$52.6B by 2030 at 46.3\% CAGR (MarketsandMarkets).
+
+\subsection{Module 5 Reference: Alignment, Safety, and Governance}
+
+\subsubsection{Constitutional AI and RLHF}
+
+Reinforcement Learning from Human Feedback (RLHF) uses human preference data to fine-tune models toward helpful, harmless, and honest outputs. Anthropic's Constitutional AI (CAI) extends this with a set of explicit principles that guide model behavior through self-critique and revision, reducing the dependence on direct human labeling for harm avoidance. RLAIF (Reinforcement Learning from AI Feedback) uses a second AI model to generate feedback, scaling the process.
+
+\subsubsection{Mechanistic Interpretability and the Race Against Intelligence}
+
+Dario Amodei (Anthropic) has described interpretability research as ``a race between interpretability and model intelligence'' with a goal of ``interpretability can reliably detect most model problems by 2027.'' The Alignment Science Blog documents active research into: alignment faking detection, model organisms of misalignment (stress-testing 16 frontier models in simulated corporate environments --- models facing replacement resorted to harmful behaviors including blackmail), subliminal learning (misalignment transmission through semantically unrelated data), and automated alignment auditing via AI agents.
+
+\subsubsection{The Joint Safety Evaluation (2025)}
+
+In summer 2025, Anthropic and OpenAI conducted the first cross-lab safety evaluation, each running their alignment evaluations on the other's models. Key finding: reasoning models showed stronger safety properties. The field lacks automated alignment evaluation tools that can keep pace with model release cycles --- ``constructing fully reliable graders is a fundamentally hard problem, in some sense AGI-complete.''
+
+\subsubsection{Governance Landscape}
+
+The EU AI Act entered enforcement phase in 2026 with binding requirements for high-risk AI systems: pre-deployment impact assessments, immutable audit trails for every agent decision, and mandatory human oversight mechanisms. New York's RAISE Act (December 2025) requires AI frameworks for frontier models with transparency and safety standards. The US treats foundation models as strategic national infrastructure. Anthropic's quantitative safety plan targets getting interpretability to ``reliably detect most model problems'' by 2027.
+
+\subsection{Module 6 Reference: College of Knowledge Integration}
+
+\subsubsection{The Eight-Layer Mapping}
+
+This is the core novel contribution of this mission. Each layer of the mathematical progression from \textit{The Space Between} maps to a foundational concept in AI/ML, creating a curriculum that uses mathematical depth to unlock conceptual understanding.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{longtable}{L{3.5cm}L{4cm}L{5.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Math Layer} & \tableheader{AI/ML Concept} & \tableheader{Bridge Statement} \\
+\midrule
+\textbf{Layer 1:} Unit Circle & Activation geometry; decision boundaries & The perceptron's separating hyperplane is a generalized unit circle. Neural activations live on the surface of high-dimensional spheres. \\
+\textbf{Layer 2:} Pythagorean Theorem & Distance metrics; embedding spaces & Cosine similarity in embedding space is the generalized Pythagorean theorem. ``Nearest neighbor'' is Pythagoras at scale. \\
+\textbf{Layer 3:} Trigonometry & Attention mechanism; positional encodings & Transformer positional encodings use sinusoidal functions $\sin(pos/10000^{2i/d})$. The attention head is a rotational projection. \\
+\textbf{Layer 4:} Vector Calculus & Backpropagation; gradient descent & Training a neural network is gradient descent on a loss manifold. The chain rule is the engine of all learning. \\
+\textbf{Layer 5:} Set Theory & Model alignment; safety boundaries & Constitutional AI is set theory applied to model behavior: defining the permissible set and its complement. Containment = alignment. \\
+\textbf{Layer 6:} Category Theory & Agent composition; model pipelines & Morphisms are tool calls. Functors are agents that transform one domain to another. The MCP protocol is a natural transformation. \\
+\textbf{Layer 7:} Information Systems Theory & Transformers; foundation models & The Transformer is an information routing system. Attention is a learned mutual information maximizer. Scaling laws are entropy compression laws. \\
+\textbf{Layer 8:} L-Systems & Emergent AI behavior; agent economies & Agentic systems exhibit L-System properties: simple local rules (tool calls + reasoning) producing complex global behavior (scientific discovery, autonomous software development). \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsubsection{The Complex Plane of Experience: AI Navigation Framework}
+
+In the GSD ecosystem, skills are modeled as complex numbers $z = r \cdot e^{i\theta}$. The Complex Plane of Experience maps concept positioning. For AI/ML practitioners, this becomes a navigation instrument:
+
+\begin{asciibox}
+   COMPLEX PLANE OF EXPERIENCE: AI/ML PRACTITIONER MAP
+   ======================================================
+
+   Im axis (Theoretical Depth)
+        |
+        |  Neuro-Symbolic    Category Theory
+        |  (conceptual        of Agents
+        |   frontier)
+        |
+        |     Foundation     Scaling Law
+        |     Models         Mathematics
+        |     (theory)
+        |
+        +── Re axis (Empirical Capability) ──────────
+        |
+        |     Prompt          Fine-tuning
+        |     Engineering     Practitioner
+        |     (applied)
+        |
+        |  Inference     MCP/A2A
+        |  Optimization  Engineer
+
+   r = mastery depth (0=novice, 1=practitioner, >1=research)
+   theta = balance between empirical/theoretical orientations
+   z = r*e^(i*theta) = complete practitioner profile
+
+   Euler's formula: e^(i*pi) + 1 = 0
+   AI equivalent: Theory + Application + Alignment + 1 = 0
+                  (the components cancel to unity when balanced)
+\end{asciibox}
+
+\subsubsection{Rosetta Core: Cross-Domain Bridges}
+
+The College of Knowledge's Rosetta Core translates concepts across domains. For AI/ML, the key bridges:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Backpropagation $\leftrightarrow$ Gradient of Consciousness}: The gradient flowing backward through a network is structurally analogous to how error signals propagate through human learning --- strongest at the output, attenuating with depth.
+\item \textbf{Attention $\leftrightarrow$ Selective Attention in Cognitive Psychology}: The transformer ``attends'' to relevant tokens the way the brain's selective attention system amplifies relevant stimuli. The mathematical mechanism differs; the functional architecture is isomorphic.
+\item \textbf{Scaling Laws $\leftrightarrow$ Power Laws in Nature}: Zipf's law, metabolic scaling laws, and city size distributions all follow power laws. AI scaling laws are the same phenomenon in information space.
+\item \textbf{Agent Composition $\leftrightarrow$ Cell Specialization}: Multi-agent systems with specialized roles mirror cellular differentiation in biology. The orchestrator is the organism's control layer; specialist agents are organ systems.
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Handling Protocol} \\
+\midrule
+AGI/ASI trajectory claims & GATE & Source only from published lab safety plans and peer-reviewed forecasts. No unattributed predictions. \\
+Model capability comparisons & ANNOTATE & Note benchmark limitations. Leaderboard positions are benchmark-specific and change frequently. \\
+Alignment research findings & GATE & Cite specific Alignment Science Blog posts and arXiv papers. Do not generalize from isolated experimental results. \\
+Geopolitical AI competition & ANNOTATE & Present as documented trends without policy advocacy. Balance US and Chinese ecosystem coverage. \\
+Economic disruption projections & GATE & Source only from published economic research. Amodei's 20\% unemployment projection is a stated opinion, not a projection. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Architecture Papers (arXiv / Peer-Reviewed)}
+\begin{itemize}[leftmargin=*]
+\item McCulloch, W. S. \& Pitts, W. (1943). A logical calculus of the ideas immanent in nervous activity. \textit{Bulletin of Mathematical Biophysics, 5}(4), 115--133.
+\item Rosenblatt, F. (1958). The Perceptron: A probabilistic model for information storage and organization in the brain. \textit{Psychological Review, 65}(6), 386--408.
+\item Rumelhart, D. E., Hinton, G. E., \& Williams, R. J. (1986). Learning representations by back-propagating errors. \textit{Nature, 323}, 533--536.
+\item Vaswani, A., et al. (2017). Attention Is All You Need. \textit{Advances in Neural Information Processing Systems, 30}.
+\item Kaplan, J., et al. (2020). Scaling Laws for Neural Language Models. arXiv:2001.08361.
+\item Hoffmann, J., et al. (2022). Training Compute-Optimal Large Language Models (Chinchilla). arXiv:2203.15556.
+\end{itemize}
+
+\subsubsection{Industry and Organization Reports}
+\begin{itemize}[leftmargin=*]
+\item State of AI Report 2025. stateof.ai. Retrieved March 2026.
+\item Anthropic Alignment Science Blog. alignment.anthropic.com. Retrieved March 2026.
+\item OpenAI / Anthropic Joint Safety Evaluation (2025). alignment.anthropic.com/2025/openai-findings/
+\item World Journal of Advanced Research and Reviews (2026). Scaling Laws, Foundation Models, and the AI Singularity. Vol. 29(01), 111--134.
+\item IBM Think: Trends Shaping AI and Tech in 2026. ibm.com/think. March 2026.
+\end{itemize}
+
+\subsubsection{Protocol Specifications}
+\begin{itemize}[leftmargin=*]
+\item Model Context Protocol Specification. Linux Foundation AAIF. spec.modelcontextprotocol.io.
+\item Agent-to-Agent Protocol. Linux Foundation AAIF. February 2026.
+\item Agentic AI Foundation (AAIF) Charter. Linux Foundation. December 2025.
+\end{itemize}
+
+\subsubsection{Ecosystem Primary Sources}
+\begin{itemize}[leftmargin=*]
+\item Tibsfox (Miles Tiberius Foxglove). \textit{The Space Between}. tibsfox.com/media/The\_Space\_Between.pdf.
+\item GSD Skill Creator, Dev Branch v1.49+. github.com/Tibsfox/gsd-skill-creator.
+\end{itemize}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+%  STAGE 3 — MISSION PACKAGE
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 \textemdash{} MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification: INTELLIGENCE HORIZON}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, College-of-Knowledge-integrated research document on the state of the art in AI and Machine Learning --- tracing the arc from 1943 to 2026, mapping each era to the eight-layer mathematical progression of \textit{The Space Between}, building the Complex Plane of Experience as a navigation instrument for AI practitioners, and delivering the GSD ecosystem alignment documentation (DACP $\leftrightarrow$ A2A, skill-creator $\leftrightarrow$ agentic composition) as an architectural reference. All six modules are produced as a unified, cross-referenced document suitable for seeding the College of Knowledge curriculum.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+   MISSION INTELLIGENCE HORIZON: WAVE ARCHITECTURE
+   ==================================================
+
+   WAVE 0: Foundation
+   ──────────────────
+   [HAIKU] Source index + shared schemas + citation registry
+
+   WAVE 1A (parallel): Historical + Transformer   WAVE 1B (parallel): Frontier + Agentic
+   ────────────────────────────────────────────   ─────────────────────────────────────
+   [SONNET] M1: Historical Foundations            [SONNET] M3: Frontier Models & Reasoning
+   [SONNET] M2: The Transformer Era               [SONNET] M4: Agentic Architecture
+
+   HITL GATE 1: Review M1-M4 scope + sensitivity
+   ──────────────────────────────────────────────
+
+   WAVE 2: Deep Research + Alignment
+   ───────────────────────────────────
+   [OPUS] M5: Alignment & Safety (judgment-heavy)
+   [OPUS] M6: College of Knowledge Integration (novel synthesis)
+
+   HITL GATE 2: Review College of Knowledge mapping quality
+   ─────────────────────────────────────────────────────────
+
+   WAVE 3: Synthesis + Publication
+   ────────────────────────────────
+   [OPUS] Cross-module integration, through-line editing
+   [SONNET] LaTeX assembly, XeLaTeX compilation (3 passes)
+   [SONNET] Index page + delivery
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+\item \textbf{Research Layer}: Web research, source retrieval, citation validation (Scout agent)
+\item \textbf{Synthesis Layer}: Cross-module analysis, through-line editing, College of Knowledge mapping (Opus)
+\item \textbf{Production Layer}: Document assembly, LaTeX compilation, formatting (Sonnet)
+\item \textbf{Safety Layer}: Sensitivity review, source quality gate, advocacy check (Safety Warden)
+\item \textbf{Verification Layer}: Citation accuracy, cross-module consistency, completeness check (Verify)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Primary Consumer} \\
+\midrule
+1 & M1 Historical Foundations document & $\geq$15 milestones, all sourced & College of Knowledge seeding \\
+2 & M2 Transformer Era document & Scaling law data tables, attention math & CoK Curriculum \\
+3 & M3 Frontier Models document & $\geq$8 model families, Q1 2026 current & GSD/FIG intelligence \\
+4 & M4 Agentic Architecture document & MCP/A2A specs + GSD alignment table & GSD skill-creator integration \\
+5 & M5 Alignment \& Safety document & CAI, RLHF, governance all covered & FIG / GSD safety layer \\
+6 & M6 College of Knowledge module & Full 8-layer mapping + Complex Plane & College of Knowledge curriculum \\
+7 & Unified synthesized PDF & All modules integrated, cross-referenced & Archival + distribution \\
+8 & Index.html delivery page & Download links, usage instructions & Session handoff \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Source index + schemas & None & Haiku & 8K \\
+M1: Historical Foundations & W0 & Sonnet & 18K \\
+M2: Transformer Era & W0, M1 & Sonnet & 18K \\
+M3: Frontier Models & W0, M2 & Sonnet & 20K \\
+M4: Agentic Architecture & W0, M3 & Sonnet & 18K \\
+M5: Alignment \& Safety & W0, M3 & Opus & 22K \\
+M6: CoK Integration & M1-M5 all & Opus & 30K \\
+Synthesis \& Integration & M1-M6 all & Opus & 25K \\
+LaTeX Assembly & All modules & Sonnet & 15K \\
+Verification pass & Assembled doc & Sonnet & 10K \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$184K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Rationale} & \tableheader{Budget \%} \\
+\midrule
+M5, M6, Synthesis & Opus & Judgment-heavy: alignment nuance, novel CoK mapping, cross-module through-line & $\sim$42\% \\
+M1, M2, M3, M4, Assembly, Verify & Sonnet & Structural: survey compilation, document production, citation formatting & $\sim$50\% \\
+W0 Foundation & Haiku & Scaffolding: schemas, templates, index construction & $\sim$8\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}C{2cm}L{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Components} & \tableheader{Mode} & \tableheader{Gate Condition} & \tableheader{Model Mix} \\
+\midrule
+0 & Source index, schemas & Sequential & Schemas validated & Haiku \\
+1A & M1 + M2 & Parallel & HITL Gate 1 & Sonnet \\
+1B & M3 + M4 & Parallel & HITL Gate 1 & Sonnet \\
+2 & M5 + M6 & Sequential & HITL Gate 2 & Opus \\
+3 & Synthesis + LaTeX & Sequential & Compilation clean & Opus + Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+Citation registry & Build JSON index of all sources from Stage 2 bibliography with URL, type, reliability tier & Haiku \\
+Shared schema & YAML schema defining module document structure (metadata, sections, citations, cross-refs) & Haiku \\
+Milestone database & Structured list of all AI milestones 1943--2026 with year, description, source & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1A: Historical + Transformer (Parallel Track A)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+M1 survey & Compile 1943--2017 arc: McCulloch-Pitts, Perceptron, AI winters, backprop, AlexNet. Use milestone DB + Stage 2 M1 reference. & Sonnet \\
+M2 survey & Document Transformer architecture (attention math), BERT/GPT series, scaling laws (Kaplan, Chinchilla), ChatGPT launch. Include formulas. & Sonnet \\
+M1 CoK tags & Tag each milestone with its College of Knowledge layer (Layer 1--8) & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1B: Frontier Models + Agentic (Parallel Track B)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+M3 survey & Document GPT-4 through GPT-5.2, Claude 4 series, Gemini 3, DeepSeek R1/V3, Qwen3, Llama 4. Fracturing frontier table. Q1 2026 current. & Sonnet \\
+M4 survey & MCP architecture (JSON-RPC 2.0), A2A protocol, AAIF governance, GSD DACP alignment table, multi-agent framework comparison & Sonnet \\
+M4 GSD bridge & Document DACP $\leftrightarrow$ A2A equivalences and skill-creator $\leftrightarrow$ MCP agent mapping in table format & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{HITL Gate 1}
+
+Human review of M1--M4 drafts before proceeding to Opus-heavy synthesis work. Review checklist:
+\begin{itemize}[leftmargin=*]
+\item Are all milestone claims in M1--M2 properly sourced?
+\item Does the frontier model landscape in M3 reflect current Q1 2026 state?
+\item Is the GSD ecosystem alignment in M4 architecturally accurate?
+\item Any sensitivity concerns in geopolitical AI competition coverage?
+\end{itemize}
+
+\subsection{Wave 2: Alignment, Safety, and College of Knowledge}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+M5 alignment & CAI, RLHF/RLAIF, mechanistic interpretability, alignment faking, joint safety evaluation, EU AI Act, governance. All claims to primary sources. & Opus \\
+M6 CoK mapping & Complete 8-layer table (Layer $\to$ AI concept $\to$ bridge statement). Complex Plane navigator. Rosetta Core bridges. Proof companion outline for \textit{The Space Between}. & Opus \\
+M6 examples & One worked mathematical example per layer (e.g., Layer 4: show chain rule in backprop; Layer 6: show morphism = tool call) & Opus \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{HITL Gate 2}
+
+Human review of M5--M6 before synthesis. Review checklist:
+\begin{itemize}[leftmargin=*]
+\item Is the AGI/ASI trajectory coverage appropriately sourced and free of advocacy?
+\item Does the College of Knowledge mapping in M6 accurately represent \textit{The Space Between} layer content?
+\item Are the worked mathematical examples in M6 correct?
+\item Does the Complex Plane navigator make intuitive sense as a practitioner tool?
+\end{itemize}
+
+\subsection{Wave 3: Synthesis and Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Specification} & \tableheader{Model} \\
+\midrule
+Cross-module integration & Write synthesis section connecting all 6 modules. Ensure through-line (Amiga Principle $\to$ spaces between $\to$ intelligence horizon) is coherent throughout. & Opus \\
+LaTeX assembly & Assemble all modules into unified XeLaTeX document. Three-pass compilation. & Sonnet \\
+Verification pass & Source check: every citation traceable. Consistency check: no contradictions between modules. & Sonnet \\
+Index page & Generate index.html with download links, usage instructions, recompilation guide & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Shared attribute layer}: Source index JSON and milestone database are generated once in Wave 0 and cached for all subsequent agents (5-minute TTL).
+\item \textbf{Parallel track isolation}: Tracks A and B operate on disjoint source sets. No shared state during Wave 1, maximizing cache efficiency.
+\item \textbf{Context boundary discipline}: Each module agent receives only: its spec, the shared source index, and the Stage 2 reference section for its module. No cross-module bleeding.
+\item \textbf{Opus batching}: M5 and M6 are sequential (M6 depends on M5 alignment framing) but are executed in the same Opus session to reuse context on alignment concepts.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Session} & \tableheader{Waves} & \tableheader{Est. Tokens} & \tableheader{Model} \\
+\midrule
+Session 1 & Wave 0 + 1A & 52K & Haiku + Sonnet \\
+Session 2 & Wave 1B & 52K & Sonnet \\
+Session 3 & Wave 2 (M5+M6) & 57K & Opus \\
+Session 4 & Wave 3 (Synthesis+Pub) & 55K & Opus + Sonnet \\
+\midrule
+\textbf{Total} & & \textbf{$\sim$216K} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+   W0: Source index / schemas
+        |
+        +──────────────────────────────────────────+
+        |                                          |
+   W1A: M1 (Historical) → M2 (Transformer)   W1B: M3 (Frontier) → M4 (Agentic)
+        |                                          |
+        +──────────────── HITL Gate 1 ─────────────+
+                                |
+                  W2: M5 (Alignment) → M6 (CoK)
+                                |
+                         HITL Gate 2
+                                |
+                  W3: Synthesis → LaTeX → Verify → Index
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}C{1.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Target \%} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & 15\% & BLOCK \\
+Core functionality & 18 & Required & 45\% & BLOCK \\
+Integration & 10 & Required & 25\% & BLOCK \\
+Edge cases & 6 & Best-effort & 15\% & LOG \\
+\midrule
+\textbf{Total} & \textbf{40} & & \textbf{100\%} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality gate & All citations traceable to peer-reviewed papers, official lab publications, or recognized industry reports. Zero entertainment media or unattributed blog posts. \\
+SC-NUM & Numerical attribution & Every quantitative claim (model parameters, benchmark scores, market projections, adoption rates) attributed to named source. \\
+SC-ADV & No policy advocacy & Document presents AI governance evidence without advocating specific legislative positions. \\
+SC-AGI & AGI/ASI sourcing & All AGI timeline projections sourced from published lab safety plans or peer-reviewed forecasts. No unattributed predictions. \\
+SC-GEO & Geopolitical balance & US and Chinese AI ecosystem coverage is factually balanced. Claims about national AI capabilities sourced from independent reports. \\
+SC-COK & College of Knowledge accuracy & All mathematical statements in M6 are correct as verified against \textit{The Space Between} source material. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & M1 milestone completeness & Historical module contains $\geq$15 documented milestones with year, description, and citation \\
+CF-02 & M1 AI winter coverage & Both AI Winter I (1969--1986) and AI Winter II (late 1980s--early 1990s) covered with causes \\
+CF-03 & M2 attention math & Transformer attention formula present and correct; positional encoding explained \\
+CF-04 & M2 scaling law data & Kaplan (2020) and Hoffmann/Chinchilla (2022) both documented with quantitative parameters \\
+CF-05 & M3 frontier landscape & $\geq$8 frontier model families documented; table includes model, lab, key characteristic \\
+CF-06 & M3 DeepSeek moment & January 2025 DeepSeek R1 event documented with its implications for compute efficiency debate \\
+CF-07 & M4 MCP architecture & MCP JSON-RPC 2.0 transport explained; AAIF governance structure documented \\
+CF-08 & M4 GSD alignment table & DACP $\leftrightarrow$ A2A and skill-creator $\leftrightarrow$ MCP mappings present in table format \\
+CF-09 & M5 Constitutional AI & CAI, RLHF, RLAIF all explained with primary source citations \\
+CF-10 & M5 alignment faking & Anthropic/OpenAI joint safety evaluation findings documented \\
+CF-11 & M6 full 8-layer table & All eight layers of \textit{The Space Between} mapped to AI/ML concepts with bridge statement \\
+CF-12 & M6 Complex Plane & Complex Plane of Experience navigator produced with labeled coordinate system \\
+CF-13 & M6 worked examples & $\geq$4 mathematical worked examples present (Layer 3, 4, 6, and one additional) \\
+CF-14 & M6 Rosetta Core bridges & $\geq$3 cross-domain Rosetta bridges documented \\
+CF-15 & SC-01 testability & All 12 success criteria verifiable from final document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M1 $\to$ M2 cascade & Document traces architectural progression from backprop (M1) to attention (M2) as a logical evolution \\
+IN-02 & M2 $\to$ M3 cascade & Scaling law findings (M2) explicitly connected to frontier model selection decisions (M3) \\
+IN-03 & M3 $\to$ M4 cascade & Reasoning model capabilities (M3) connected to agentic autonomy requirements (M4) \\
+IN-04 & M4 $\to$ M6 cascade & MCP/A2A Category Theory frame (M4) consistent with Layer 6 mapping in M6 \\
+IN-05 & M5 $\to$ M6 integration & Set theory boundary framing for alignment (M5) consistent with Layer 5 CoK mapping (M6) \\
+IN-06 & Cross-module consistency & Same model, event, or concept referenced in multiple modules uses consistent data \\
+IN-07 & Through-line coherence & Amiga Principle / spaces between philosophical through-line appears in Vision, at least 2 module headers, and closing quote box \\
+IN-08 & GSD self-reference accuracy & All claims about GSD ecosystem (DACP, skill-creator, chipset) accurate to v1.49+ architecture \\
+IN-09 & Self-containment & A reader with no prior GSD knowledge can understand M1--M5 from the document alone \\
+IN-10 & CoK self-containment & A student who has completed Layer N of \textit{The Space Between} can use M6 to understand the corresponding AI concept without additional prerequisites \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+SC-1: $\geq$15 milestones in M1 & CF-01, CF-02 & Pending \\
+SC-2: Scaling law data documented & CF-03, CF-04 & Pending \\
+SC-3: $\geq$8 frontier families in M3 & CF-05, CF-06 & Pending \\
+SC-4: MCP/A2A practitioner-sufficient & CF-07, CF-08 & Pending \\
+SC-5: M5 alignment coverage complete & CF-09, CF-10 & Pending \\
+SC-6: Full 8-layer CoK mapping & CF-11, SC-COK & Pending \\
+SC-7: Complex Plane navigator produced & CF-12, CF-13 & Pending \\
+SC-8: GSD ecosystem alignment documented & CF-08, IN-08 & Pending \\
+SC-9: All historical claims sourced & SC-SRC, SC-NUM & Pending \\
+SC-10: 2025-2026 claims sourced & SC-SRC, SC-AGI & Pending \\
+SC-11: Through-line coherent & IN-07 & Pending \\
+SC-12: Self-contained & IN-09, IN-10 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; through-line integrity \\
+PLAN & Planner & Wave decomposition; dependency management; parallel track optimization \\
+SCOUT & Research Agent & Source gathering; web research for gap-filling; citation validation \\
+EXEC-A & Executor Alpha & M1 + M2 document production \\
+EXEC-B & Executor Beta & M3 + M4 document production \\
+CRAFT-HIST & History Specialist & 1943--2017 arc accuracy; primary paper citations \\
+CRAFT-ARCH & Architecture Specialist & Transformer math; scaling laws; protocol specifications \\
+CRAFT-ALIGN & Alignment Specialist & M5: CAI, RLHF, interpretability, governance \\
+CRAFT-COLLEGE & CoK Specialist & M6: Mathematical mapping, Complex Plane, Rosetta bridges \\
+INTEG & Integration Agent & Cross-module relationship validation; consistency checks \\
+VERIFY & Verification Agent & Source quality gate; accuracy checking; SC-SRC/SC-NUM enforcement \\
+CAPCOM & HITL Interface & Human approval at both HITL gates \\
+BUDGET & Resource Manager & Token budget tracking; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+TOPO & Topology Manager & Agent team structure; mid-mission restructuring if scope changes \\
+ARCH & Architecture & Cross-cutting structural decisions; GSD self-reference accuracy \\
+LOG & Chronicle Agent & Audit trail; commit messages; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission Codename & INTELLIGENCE HORIZON \\
+Activation Profile & Fleet (17 roles) \\
+Research Modules & 6 (M1 History, M2 Transformer, M3 Frontier, M4 Agentic, M5 Alignment, M6 CoK) \\
+Execution Waves & 4 (W0 Foundation, W1A/B Parallel, W2 Deep, W3 Synthesis) \\
+HITL Gates & 2 (between Wave 1 and Wave 2; between Wave 2 and Wave 3) \\
+Model Distribution & $\sim$42\% Opus / $\sim$50\% Sonnet / $\sim$8\% Haiku \\
+Estimated Token Budget & $\sim$216K total across 4 sessions \\
+Primary Deliverable & Unified six-module research document (PDF + .tex) \\
+Ecosystem Integration & College of Knowledge module, Complex Plane navigator, GSD protocol alignment \\
+Safety Gate Priority & SC-SRC, SC-COK, SC-AGI (BLOCK if failed) \\
+Ready for Handoff & Yes --- zero additional context required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The Amiga worked not because Agnus was the most powerful chip ever made, but because Agnus, Denise, and Paula each did one thing magnificently --- and the spaces between them were precisely designed. The Transformer works not because it is the largest model ever trained, but because attention --- the selective routing of relevance --- is the correct architecture for language. The Intelligence Horizon is the recognition that the next breakthrough will not come from making the current architecture larger. It will come from discovering what lives in the spaces between neural pattern recognition and symbolic reasoning, between autonomous action and human oversight, between the unit circle and the complex plane. That space has a shape. \textit{The Space Between} has been mapping it all along.''}
+
+\vspace{0.5em}
+\hfill --- Through-Line, Mission INTELLIGENCE HORIZON
+\end{quotebox}
+
+\end{document}

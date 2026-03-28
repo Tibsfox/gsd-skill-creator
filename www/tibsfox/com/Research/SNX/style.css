@@ -1,0 +1,194 @@
+/* SNX — Classic NBC Gold / Blue theme, Saturday Night Live
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --snl-purple: #4A148C;
+  --snl-light: #F3E5F5;
+  --snl-mid: #6A1B9A;
+  --snl-dark: #311B92;
+  --nbc-gold: #F9A825;
+  --nbc-gold-light: #FFF8E1;
+  --nbc-gold-mid: #F57F17;
+  --stage-orange: #E65100;
+  --stage-light: #FFF3E0;
+  --stage-mid: #EF6C00;
+  --studio-dark: #3E2723;
+  --studio-light: #EFEBE9;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--snl-purple);
+  --link-hover: var(--snl-dark);
+  --accent: var(--nbc-gold);
+  --accent-light: var(--nbc-gold-light);
+  --accent-dark: #F57F17;
+  --card-bg: white;
+  --card-border: #B0BEC5;
+  --card-shadow: rgba(249,168,37,0.15);
+  --border: #B0BEC5;
+  --parchment: var(--studio-light);
+}
+
+/* ===================================================
+   2. HEADER -- studio dark/gold/purple gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #0d0d17 0%, #1a0d2e 30%, #2e1a0a 65%, #1a1200 100%);
+  border-bottom: 4px solid var(--nbc-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 25% 50%, rgba(74,20,140,0.2) 0%, transparent 55%),
+              radial-gradient(ellipse at 75% 50%, rgba(249,168,37,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+header > * { position: relative; z-index: 1; }
+header h1 { color: #FFF8E1; }
+header .subtitle { color: #FFE082; }
+
+/* ===================================================
+   3. TYPOGRAPHY COLOR OVERRIDES
+   =================================================== */
+
+h2 {
+  color: var(--studio-dark);
+  border-bottom-color: var(--studio-light);
+  padding-bottom: 0.3rem;
+}
+h3 { color: var(--snl-purple); }
+
+/* ===================================================
+   4. THEMED COMPONENTS
+   =================================================== */
+
+blockquote {
+  background: var(--snl-light);
+  border-left: 4px solid var(--snl-purple);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  color: #374151;
+}
+
+th { background: var(--studio-dark); }
+td { border-bottom-color: #F3F4F6; }
+tr:nth-child(even) { background: rgba(249,168,37,0.04); }
+tr:hover { background: rgba(249,168,37,0.08); }
+
+pre {
+  background: #0d0d17;
+  color: #FFE082;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.6;
+  border-left: 3px solid var(--stage-orange);
+}
+code {
+  background: var(--nbc-gold-light);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--stage-orange);
+}
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* ===================================================
+   5. CARDS -- border-color hover
+   =================================================== */
+
+main { max-width: 54rem; }
+
+.card {
+  border-color: #B0BEC5;
+  border-radius: 6px;
+  padding: 1.2rem;
+  position: relative;
+}
+.card:hover { box-shadow: 0 2px 12px rgba(249,168,37,0.15); border-color: var(--nbc-gold); }
+
+/* ===================================================
+   6. STATS -- grid layout
+   =================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.stat {
+  background: white;
+  border: 1px solid #B0BEC5;
+  border-radius: 6px;
+  padding: 0.8rem;
+}
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--snl-purple);
+}
+
+/* ===================================================
+   7. TAGS
+   =================================================== */
+
+.tag { font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.tag-origins { background: var(--snl-light); color: var(--snl-purple); }
+.tag-era { background: var(--nbc-gold-light); color: var(--nbc-gold-mid); }
+.tag-prod { background: var(--stage-light); color: var(--stage-orange); }
+.tag-politics { background: #FFEBEE; color: #B71C1C; }
+.tag-legacy { background: var(--studio-light); color: var(--studio-dark); }
+
+/* ===================================================
+   8. SPECIAL COMPONENTS
+   =================================================== */
+
+.safety-callout {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-left: 4px solid #DC2626;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.safety-callout strong { color: #DC2626; }
+
+.cross-links {
+  background: white;
+  border: 1px solid #B0BEC5;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.cross-links h4 { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--snl-purple); font-family: system-ui, sans-serif; }
+.cross-links ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cross-links li a {
+  display: inline-block;
+  background: var(--snl-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-family: system-ui, sans-serif;
+  color: var(--snl-purple);
+  transition: background 0.2s;
+}
+.cross-links li a:hover { background: #CE93D8; text-decoration: none; }
+
+/* ===================================================
+   9. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}

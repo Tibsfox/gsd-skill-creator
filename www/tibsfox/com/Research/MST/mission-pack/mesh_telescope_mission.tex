@@ -1,0 +1,1165 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% Color Scheme: Space/Physics
+\definecolor{primary}{HTML}{311B92}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{F9A825}
+\definecolor{accent}{HTML}{7B1FA2}
+\definecolor{lightprimary}{HTML}{EDE7F6}
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% Section Formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% Custom Environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+%% Table Helpers
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% Headers / Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Global Telescope Mesh Network}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Global Telescope Mesh Network -- Yuri's Night Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ============================================================
+%% TITLE PAGE
+%% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Eye on the Sky\\[0.3em]Global Telescope Mesh Network}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Linking Every Backyard Telescope in the World}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Yuri's Night Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles)  |  Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+%% ============================================================
+%% TABLE OF CONTENTS
+%% ============================================================
+\tableofcontents
+\newpage
+
+%% ============================================================
+%% STAGE 1: VISION DOCUMENT
+%% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Eye on the Sky --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Pre-Execution}
+\metafield{Depends On:}{GSD Mesh Prototype Spec, Fox Infrastructure Group Plan}
+\metafield{Context:}{Backyard astronomy is the oldest distributed sensor network humanity ever built. This mission asks what happens when we finally wire it together.}
+
+\subsection{Vision}
+
+On April 12, 1961, Yuri Gagarin rode a ball of fire above the atmosphere and looked down at a planet that had no idea it was being watched. He completed one orbit in 108 minutes. The entire human race participated, even those who didn't know it yet. That morning changed the geometry of what was possible.
+
+Sixty-five years later, on that same date, millions of people around the world point telescopes at the sky. They sit in backyards in Monterrey and apartments in Yerevan and community parks in Nairobi. They are not connected to each other. Each observer sees their small slice of the cosmos in isolation. There is no wire between them. The network exists physically --- distributed across six continents, pointed at the same sky --- but it has never been switched on.
+
+This mission proposes to switch it on. The core idea is simple and radical in equal measure: treat every backyard telescope as a node in a planetary-scale sensor mesh. Coordinate them around Yuri's Night as the annual anchor event --- the World Space Party becomes the world's largest distributed science experiment. A global shutter event at 00:00 UTC on April 12 triggers simultaneous observations from every connected telescope on Earth. The night sky, for the first time, is looked at all at once.
+
+The technical substrate already exists in fragments. The Unistellar network has more than 15,000 Wi-Fi-enabled telescopes across six continents. Las Cumbres Observatory operates 25 robotic telescopes as a single scheduler-managed entity. The Vera C.\ Rubin Observatory's LSST alert pipeline began issuing real-time transient events in February 2026 --- up to 7 million alerts per night. These systems speak different protocols, use different data formats, serve different communities. This mission maps those fragments, defines the bridge layer, and builds the GSD skill-creator integration that can orchestrate it all for one extraordinary night every April.
+
+The deeper resonance is this: the Amiga Principle teaches that staggering outcomes emerge not from adding more power but from connecting existing capability through elegant architecture. Every one of these telescopes already knows how to see. The spaces between them --- silent, unoccupied, waiting --- are where the science lives.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The fragmentation problem.} The world's backyard telescopes are isolated nodes. Unistellar's 15,000+ instruments, LCO's 25 robotic telescopes, and millions of amateur instruments using ASCOM/INDI protocols form entirely separate ecosystems with incompatible data formats, scheduling systems, and coordination layers. No federated identity layer exists to present them as a single observatory.
+
+  \item \textbf{The coordination problem.} Simultaneous multi-site observations currently require manual coordination via email lists, forum posts, and per-campaign registration forms. This works for small campaigns of dozens of observers. It does not scale to a global shutter event involving hundreds of thousands of instruments on one night.
+
+  \item \textbf{The alert-to-response latency problem.} Rubin Observatory's LSST now issues transient alerts within 2 minutes of image capture. There is no pathway for a backyard observer to receive that alert, evaluate whether their location and equipment can follow up, and accept an automated observation assignment --- all within the window of scientific relevance.
+
+  \item \textbf{The dark sky geography problem.} Professional telescopes are clustered at a small number of premier dark-sky sites. The citizen science network, by contrast, is globally distributed --- including in regions where professional coverage is sparse (equatorial Africa, Central Asia, interior South America). Coordinated amateur networks offer observational access that no professional network can match.
+
+  \item \textbf{The participation-to-impact gap.} Millions of people attend Yuri's Night events annually. Almost none contribute data. The event is a party, not an observatory. Closing the gap between celebration and scientific contribution requires infrastructure that does not yet exist.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Global Telescope Mesh (GTM):} A federated observation network where every connected telescope is a peer node, coordinated by a GSD skill-creator agent running a planetary observation scheduler, anchored to Yuri's Night as its annual convergence event.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+GLOBAL TELESCOPE MESH NETWORK --- NODE TOPOLOGY
+=================================================
+
+  TIER 1: Professional Networks
+  +------------------+     +------------------+     +------------------+
+  | Las Cumbres Obs  |     | Vera Rubin/LSST  |     | Zwicky Transient |
+  | 25 robotic tel.  |     | 7M alerts/night  |     | ZTF alert stream |
+  | Open-source OCS  |     | Broker ecosystem |     |  Babamul / ALeRCE|
+  +------------------+     +------------------+     +------------------+
+           |                        |                        |
+           +------------------------+------------------------+
+                                    |
+                            [GTM BROKER LAYER]
+                         Alert ingestion + routing
+                         FITS schema normalization
+                         Node capability matching
+                                    |
+           +------------------------+------------------------+
+           |                        |                        |
+  TIER 2: Citizen Science       TIER 3: Amateur / DIY
+  +------------------+     +------------------+     +------------------+
+  | Unistellar Net.  |     | SkyMapper (Web3) |     | ASCOM/INDI nodes |
+  | 15,000+ Wi-Fi    |     | Blockchain-verif.|     | Raspberry Pi rigs|
+  | eVscope fleet    |     | Edge AI, GPS-time|     | Open Astro Proj. |
+  +------------------+     +------------------+     +------------------+
+           |                        |                        |
+           +------------------------+------------------------+
+                                    |
+                    [GSD SKILL-CREATOR ORCHESTRATOR]
+                  Yuri's Night Campaign Scheduler
+                  Observation assignment engine
+                  DACP bundle handoffs to nodes
+                  HITL CAPCOM gates at wave boundaries
+                                    |
+                          [YURI'S NIGHT EVENT LAYER]
+                          April 12 global shutter
+                          Watch party live feed
+                          Citizen data portal
+                          Real-time sky mosaic
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULE STRUCTURE
+==========================
+
+  MODULE 01: Network Architecture
+  [Mesh topology, protocols, FITS standards, edge compute]
+
+  MODULE 02: Telescope Fleet Mapping
+  [Node census: Unistellar, LCO, SkyMapper, amateur base]
+
+  MODULE 03: Alert and Event Systems
+  [Rubin LSST, ZTF, broker ecosystem, real-time routing]
+
+  MODULE 04: Yuri's Night Integration
+  [Event infrastructure, global shutter, watch parties]
+
+  MODULE 05: Citizen Science Protocols
+  [Occultation, transit photometry, data quality, DART-type campaigns]
+
+  MODULE 06: GSD Deployment Layer
+  [skill-creator integration, DACP handoffs, planning inbox, MCP bridge]
+
+  PARALLEL EXECUTION:
+  Wave 1A: Modules 01 + 02 (network + fleet)
+  Wave 1B: Modules 03 + 04 (alerts + events)
+  Wave 1C: Module 05 (citizen science protocols)
+  Wave 2:  Module 06 + Cross-module synthesis
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Network Architecture}
+
+Survey the protocol landscape for federated telescope networks. Document the FITS (Flexible Image Transport System) data standard as the universal exchange format for astronomical imagery. Catalog open-source observatory control systems (LCO OCS, INDI, ASCOM). Define the GTM bridge layer specification: node identity schema, capability advertisement, observation request format (target, window, configuration), and data return path. Assess NASA meshNetwork (open-source, peer-to-peer, flight-tested on cubesat formations) as the P2P transport substrate.
+
+\subsubsection{Module 02: Telescope Fleet Mapping}
+
+Census the connectable node population. Quantify Unistellar eVscope fleet (15,000+ instruments, six continents, SETI Institute partnership). Map Las Cumbres Observatory network (25 telescopes, six sites, open-source OCS, NSF-funded open access). Document SkyMapper's Web3/blockchain-verified decentralized approach. Characterize the amateur ASCOM/INDI ecosystem. Identify geographic coverage gaps (equatorial Africa, Central Asia, Pacific Island nations) and coverage surpluses. Produce a per-hemisphere node density map.
+
+\subsubsection{Module 03: Alert and Event Systems}
+
+Document the Vera C.\ Rubin Observatory LSST alert pipeline (operational February 2026, 800,000 first-night alerts, target 7M/night, 2-minute alert latency). Survey the nine official Rubin alert brokers: ALeRCE, AMPEL, ANTARES, Babamul, Fink, Lasair, Pitt-Google, SNAPS, POI Broker. Characterize the Zwicky Transient Facility as the operational precursor. Define the alert-to-backyard pathway: broker filter $\rightarrow$ GTM scheduler $\rightarrow$ capability match $\rightarrow$ DACP observation bundle $\rightarrow$ node assignment $\rightarrow$ data return.
+
+\subsubsection{Module 04: Yuri's Night Integration}
+
+Map the Yuri's Night event ecosystem (organized since 2001, 567 events in 75 countries at 50th anniversary in 2011, annual events in 100+ locations). Document institutional anchors: yurisnight.net, Museum of Flight Seattle, NASA, SETI Institute. Design the ``Global Shutter'' event: 00:00 UTC April 12 simultaneous exposure, shared sky mosaic, live-stream aggregation. Define participation tiers: casual observer (visual only), data contributor (FITS submission), campaign observer (assigned target, precision timing). Map how PNW events (Museum of Flight, Burke Museum, observatory open nights) integrate as regional nodes.
+
+\subsubsection{Module 05: Citizen Science Protocols}
+
+Document the scientific methods accessible to distributed amateur networks: occultation timing (asteroid size/shape from multi-site light curves), exoplanet transit photometry (small brightness dips confirming orbital periods), nova and supernova monitoring, comet activity tracking, satellite brightness surveys. Cite the Unistellar network's documented science output: 136 asteroids detected, 20 exoplanet orbits refined, DART mission debris tracking published in Nature, 26-hour continuous exoplanet transit coverage with 26 observers. Define data quality gates for GTM ingestion: GPS-timestamped FITS headers, calibration frames (dark, flat, bias), minimum signal-to-noise criteria.
+
+\subsubsection{Module 06: GSD Deployment Layer}
+
+Specify how gsd-skill-creator orchestrates the GTM on Yuri's Night. The skill-creator runs a six-step loop: Observe (monitor alert broker feeds) $\rightarrow$ Detect (identify observation opportunities matching GTM node capabilities) $\rightarrow$ Suggest (propose campaign targets to FLIGHT agent) $\rightarrow$ Manage (assemble DACP bundles: intent + structured observation spec + executable telescope command) $\rightarrow$ Auto-Load (dispatch to connected nodes via MCP planning-bridge) $\rightarrow$ Learn/Compose (update skill library from campaign outcomes). Define HITL CAPCOM gates at: target selection, data quality review, and public release.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:                          # Orchestration / DMA / context management
+    model: claude-opus-4-6
+    role: FLIGHT + ARCH
+    responsibility: >
+      Campaign target selection, cross-module integration,
+      alert broker routing decisions, HITL gate management,
+      Yuri's Night event coordination strategy
+    allocation: 30%
+
+  denise:                         # Display / output rendering
+    model: claude-sonnet-4-6
+    role: EXEC (x3) + CRAFT agents
+    responsibility: >
+      Module document production, protocol specification,
+      node census tables, alert pipeline documentation,
+      citizen science protocol writeup, deployment specs
+    allocation: 60%
+
+  paula:                          # Audio / I/O / anticipatory
+    model: claude-haiku-4-5
+    role: PLAN + LOG + BUDGET + TOPO
+    responsibility: >
+      Shared FITS schema templates, node capability
+      advertisement format, wave scaffolding,
+      token budget tracking, commit messages
+    allocation: 10%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}
+  \item Survey of all major existing networked telescope systems (Unistellar, LCO, SkyMapper, ZTF, Rubin)
+  \item GTM bridge layer specification: node identity, observation request format, FITS data return
+  \item Yuri's Night Global Shutter event design and coordination protocol
+  \item Alert-to-backyard routing pathway from Rubin LSST broker ecosystem
+  \item Citizen science data quality standards for GTM ingestion
+  \item GSD skill-creator integration spec with DACP observation bundles
+  \item Geographic coverage analysis with gap identification
+  \item PNW regional node map (Seattle/Cascadia anchor events)
+\end{itemize}
+
+\subsubsection{Out of Scope (v1.0)}
+
+\begin{itemize}
+  \item Radio telescope federation (distinct protocol domain)
+  \item Space-based telescope integration (ISS, Hubble, JWST)
+  \item Commercial telescope rental platforms (distinct business model)
+  \item Light pollution monitoring (related but separate mission)
+  \item Full software implementation (this mission produces specs, not code)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item A complete census of GTM-connectable nodes is produced, with count, geographic distribution, and protocol classification.
+  \item The GTM bridge layer specification is complete: node identity schema, observation request format, and FITS return path are all fully defined.
+  \item The Rubin LSST alert-to-backyard routing pathway is specified end-to-end, from broker filter to DACP bundle to telescope command.
+  \item The Yuri's Night Global Shutter event protocol is fully documented: timing (00:00 UTC April 12), observation targets, data submission procedure, and live-stream aggregation method.
+  \item Citizen science data quality gates are defined with quantitative thresholds (minimum SNR, GPS timestamp precision, required calibration frames).
+  \item The GSD skill-creator integration spec is complete: six-step loop behavior, DACP bundle structure for telescope commands, and HITL CAPCOM gate positions are all documented.
+  \item Geographic coverage gaps are identified with at least three specific underserved regions and proposed outreach/partnership strategies.
+  \item The mission package is fully executable by a fresh GSD orchestrator instance with zero additional context.
+  \item All sources are government agencies, peer-reviewed publications, or professional observatory documentation.
+  \item PNW regional anchor events (Museum of Flight, Burke Museum, Cascadia astronomy clubs) are mapped and integrated into the GTM participation tier structure.
+  \item A dependency graph showing module execution order and CAPCOM gate positions is produced in the mission package.
+  \item The through-line connecting the GTM architecture to the Amiga Principle (distributed specialized nodes producing outcomes impossible for any single instrument) is articulated in the synthesis document.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+GSD Mesh Prototype Spec & Precursor & Network topology patterns directly applicable to GTM bridge layer \\
+Fox Infrastructure Group Plan & Parallel & FoxFiber/FoxData infrastructure can host GTM broker nodes; Pacific Spine corridor provides backbone \\
+GSD Skill-Creator v1.49+ & Integration Target & DACP bundles apply directly to observation request dispatch \\
+GSD Planning Docs Vision & Pattern source & Staging inbox / deposit\_mission tool maps to GTM campaign assignment flow \\
+Deep Audio Analyzer Mission & Sister mission & Multi-node synchronized capture pattern is directly analogous \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+In 1985, Commodore engineers built the Amiga by assigning each job in the computer to a chip that was born to do exactly that job. Agnus managed memory. Denise rendered the display. Paula handled sound and I/O. The CPU --- freed from busywork --- focused on computation. The result was a machine that outperformed computers with ten times the raw processing power, not because it had more, but because it was better connected.
+
+Every telescope in this network already knows how to see. The Unistellar eVscope in Monterrey can detect a Jupiter-sized planet transiting a star 300 light-years away. The Raspberry Pi rig in a Nairobi backyard can time an asteroid occultation to millisecond precision. What none of them can do alone is watch the whole sky at once, hand off continuous monitoring as the Earth rotates, or respond within 90 seconds to an alert from Rubin. That requires connection.
+
+The Global Telescope Mesh is not a new telescope. It is the wire that was always missing. Yuri's Night is the moment every year when we remember that looking up is a thing we do together.
+
+\newpage
+
+%% ============================================================
+%% STAGE 2: RESEARCH REFERENCE
+%% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Eye on the Sky --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles authoritative findings for all six mission modules. All numerical claims are sourced. Cultural and Indigenous considerations are noted in the sensitivity section. Agents should treat this document as the ground truth for document production in Waves 1 and 2.
+
+Key source organizations:
+\begin{itemize}
+  \item \textbf{SETI Institute} (seti.org) --- Unistellar citizen science partnership, campaign data
+  \item \textbf{Unistellar} (unistellar.com) --- eVscope fleet data, science results
+  \item \textbf{Las Cumbres Observatory} (lco.global) --- global telescope network architecture
+  \item \textbf{NSF-DOE Vera C.\ Rubin Observatory} (rubinobservatory.org) --- LSST alert pipeline
+  \item \textbf{Yuri's Night} (yurisnight.net) --- event history, global coordination
+  \item \textbf{NASA Open Source} (github.com/nasa/meshNetwork) --- P2P mesh protocol
+  \item \textbf{NSF NRAO} (nrao.edu) --- open-source radio data model (applicable standards reference)
+\end{itemize}
+
+\subsection{Module 01: Network Architecture Reference}
+
+\subsubsection{Existing Protocol Standards}
+
+The astronomical community has converged on the Flexible Image Transport System (FITS) as the universal data exchange format. FITS files carry both image data and metadata (coordinates, timestamps, instrument configuration) in a self-describing binary format. The International Virtual Observatory (IVOA) extends this with VO-Table formats and federated catalog search.
+
+For telescope control, two competing standards dominate the amateur space:
+\begin{itemize}
+  \item \textbf{ASCOM} (Astronomy Common Object Model): Windows-native, COM-based driver architecture; dominant in Northern Hemisphere amateur community
+  \item \textbf{INDI} (Instrument Neutral Distributed Interface): Linux/cross-platform XML-based protocol; used in Raspberry Pi and embedded systems; supports remote telescope control over TCP/IP
+\end{itemize}
+
+The open-source Observatory Control System developed by Las Cumbres Observatory is the most mature production example of a fully API-driven global network. It handles: observation request submission, scheduler integration, instrument configuration, and science archive ingestion.
+
+\subsubsection{NASA meshNetwork (Open Source)}
+
+NASA's open-source meshNetwork software (github.com/nasa/meshNetwork) implements a peer-to-peer communication architecture originally designed for cubesat formations. Key properties relevant to GTM:
+\begin{itemize}
+  \item Peer-to-peer topology --- no single point of failure
+  \item Flight-tested on small UAS formations with demonstrated low-latency data throughput
+  \item Released under NASA Open Source Agreement v1.3
+  \item Architecture is transport-agnostic: applicable to any node type
+\end{itemize}
+
+\subsubsection{SMA-X Real-Time Sharing}
+
+The Submillimeter Array Exchange (SMA-X), developed at the Center for Astrophysics Harvard \& Smithsonian, implements real-time data sharing between telescope control systems using a central Redis database with publish-subscribe messaging. Key features: low-latency (sub-second), atomic writes, decentralized decision-making support, and open-source availability.
+
+\subsubsection{NRAO Open-Source Data Model (2025)}
+
+The NSF National Radio Astronomy Observatory collaborated with SKAO, ESO, SARAO, NAOJ, and JIVE to publish a new open-source standardized data model for radio astronomical data in February 2025. While designed for radio, it establishes the pattern for multi-telescope interoperability: common schema, Python ecosystem integration, and 10-instrument validation testing.
+
+\subsection{Module 02: Telescope Fleet Mapping Reference}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Network} & \tableheader{Nodes} & \tableheader{Coverage} & \tableheader{Protocol / Notes} \\
+\midrule
+Unistellar eVscope & 15,000+ & 6 continents & Wi-Fi, proprietary app, SETI Institute partnership; 15,000 obs in 2025 (50\% YoY growth) \\
+Las Cumbres Obs & 25 & 6 sites & Open-source OCS; API-driven; NSF open-access since 2016 \\
+SkyMapper (Web3) & $\sim$1,000 target & Global & Blockchain-verified, edge AI, GPS timestamping, P2P \\
+Zwicky Transient Facility & 1 (wide-field) & Palomar, CA & Alert stream precursor; 47 deg$^2$ FOV \\
+GLORIA / BOOTES / MASTER & Dozens & Multi-site & Robotic professional/educational networks \\
+Amateur ASCOM/INDI & Millions & Global & Uncoordinated; accessible via standard protocol bridges \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Unistellar Network Science Output (Documented)}
+
+\begin{itemize}
+  \item 136 asteroids detected; orbits of approximately 20 exoplanets refined (American Geophysical Union, 2025)
+  \item DART mission debris tracking: citizen astronomers on R\'{e}union Island and Kenya captured asteroid impact
+  \item JWST trajectory monitoring: 55 observers, 145 observations from all continents except Antarctica
+  \item Comet 3I/ATLAS: magnitude 17.8 detection (faintest ever captured by citizen network)
+  \item BD+05 4868 b (disintegrating exoplanet): 26 observers, 26 hours continuous transit coverage --- impossible for any single ground observatory
+  \item NASA Artemis II support campaign: lunar impact flash monitoring, underway 2025--2026
+\end{itemize}
+
+\subsubsection{Las Cumbres Observatory Architecture}
+
+LCO operates as a \textit{single global observatory}: all 25 telescopes are scheduled by one AI-driven adaptive scheduler that recomputes the global plan every 5 minutes. Observation requests specify telescope class (2m, 1m, 0.4m) but not specific site. Key capabilities:
+\begin{itemize}
+  \item Continuous 24-hour monitoring: observations handed off site-to-site as Earth rotates
+  \item Rapid response: targets of opportunity within minutes of submission
+  \item Uniform instrumentation: all telescopes of a class are identical, enabling data combination
+  \item Full open-source: OCS released on GitHub for community reuse
+\end{itemize}
+
+\subsection{Module 03: Alert and Event Systems Reference}
+
+\subsubsection{Vera C.\ Rubin Observatory / LSST}
+
+First light of the full telescope and camera: April 15, 2025. First alerts issued: February 24, 2026 --- 800,000 alerts on Night 1. Target production rate: up to 7 million alerts per night across the LSST's 10-year Southern Hemisphere sky survey. Alert latency: 2 minutes from image capture to public availability.
+
+Alert production mechanism:
+\begin{enumerate}
+  \item Rubin captures new 40-second exposure every 40 seconds
+  \item Software subtracts template image; detects differences at 5$\sigma$ threshold
+  \item Alert packet (diaSource) generated: coordinates, photometry, cutout images
+  \item Alert transmitted via 100 Gbit/s dedicated link to USDF at SLAC
+  \item Public brokers receive full stream within 2 minutes
+\end{enumerate}
+
+\subsubsection{Official Rubin Broker Ecosystem}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Broker} & \tableheader{Host} & \tableheader{Specialization} \\
+\midrule
+ALeRCE & Chile & ML classification; light curve aggregation; early supernova ID \\
+AMPEL & Germany & Modular multi-messenger pipeline \\
+ANTARES & NOIRLab & Community filters; time-domain science \\
+Babamul & International & Lightweight topic channels; ZTF cross-reference \\
+Fink & France & Elasticity; filter diversity \\
+Lasair & Edinburgh/Oxford/Belfast & UK community broker; variable stars; gravitational wave crossmatch \\
+Pitt-Google & Pittsburgh/Google & Cloud-native; Python client (pittgoogle-client); low barrier entry \\
+SNAPS & Arizona & Solar System objects only (downstream) \\
+POI Broker & --- & Specific objects/events (downstream) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Alert-to-Backyard Routing Pathway}
+
+\begin{asciibox}
+Rubin captures image (every 40 seconds)
+       |
+       v
+Alert pipeline subtracts template image
+       |
+       v
+diaSource packet generated: RA, Dec, mag, cutouts
+       |
+       v  [2-minute latency]
+Broker receives full stream (ALeRCE / ANTARES / Pitt-Google)
+       |
+       v
+Broker applies ML classification + context enrichment
+       |
+       v
+GTM Scheduler ingests classified alert
+       |
+       v
+Capability matching: which GTM nodes can observe this target?
+(visibility window, aperture, weather, current schedule)
+       |
+       v
+DACP bundle assembled: intent + obs spec + telescope command
+       |
+       v
+Node receives assignment via MCP planning-bridge
+       |
+       v
+Observation executed; FITS returned to GTM archive
+       |
+       v
+Data quality gate: GPS timestamp check, SNR threshold, cal frames
+       |
+       v
+Verified observation ingested into public GTM archive
+\end{asciibox}
+
+\subsection{Module 04: Yuri's Night Integration Reference}
+
+\subsubsection{Event History and Scale}
+
+Yuri's Night was founded in 2000 by Loretta Hidalgo Whitesides, George T.\ Whitesides, and Trish Garner, first celebrated April 12, 2001. The event commemorates two anniversaries: Yuri Gagarin's Vostok 1 flight (April 12, 1961) and the first Space Shuttle launch STS-1 (April 12, 1981). At the 50th anniversary in 2011: over 100,000 attendees at 567 events in 75 countries across all 7 continents. The International Day of Human Space Flight has been officially recognized by the United Nations since 2011.
+
+\subsubsection{PNW Anchor Events}
+
+\begin{itemize}
+  \item \textbf{Museum of Flight, Seattle}: Annual Yuri's Night party (21+ event); 2025 featured Gene Farris; space-themed activities including spacesuit design and VR
+  \item \textbf{Seattle Astronomical Society}: Regional astronomy club with public star parties
+  \item \textbf{Burke Museum / University of Washington}: UW hosts DiRAC Institute (Rubin software development); astronomy outreach events
+  \item \textbf{Goldendale Observatory State Park}: Dark sky site in Central Washington; prime Yuri's Night observing location
+\end{itemize}
+
+\subsubsection{Global Shutter Event Design}
+
+The Global Shutter is a coordinated simultaneous exposure across all GTM nodes at 00:00:00 UTC on April 12. All connected telescopes point to their assigned target and begin a timed exposure at the same moment. The resulting data forms a mosaic of the entire observable sky, captured within the same 60-second window. Design parameters:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Parameter} & \tableheader{Value / Specification} \\
+\midrule
+Trigger time & 00:00:00.000 UTC, April 12 \\
+Timing source & GPS-synchronized NTP; precision $<$1 ms \\
+Exposure duration & 60 seconds (all nodes) \\
+Target assignment & Tiled sky mosaic; each node assigned one tile \\
+Data format & FITS with mandatory header fields \\
+Submission window & 30 minutes post-exposure \\
+Live stream & Aggregated mosaic rendered in near-real-time \\
+Public portal & yurisnight-gtm.org (proposed) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05: Citizen Science Protocols Reference}
+
+\subsubsection{Scientific Methods Accessible to Distributed Amateur Networks}
+
+\textbf{Occultation timing:} When an asteroid passes in front of a background star, multi-site timing of the brightness dip determines the asteroid's size, shape, and trajectory. The Unistellar network has achieved this for targets including the Lucy mission asteroid Eurybates. Precision requirement: $<$100 ms timing accuracy; GPS timestamp in FITS header mandatory.
+
+\textbf{Exoplanet transit photometry:} A planet crossing its host star causes a small ($<$1\%) brightness dip. Continuous monitoring by distributed observers produces light curves that confirm or deny orbital period candidates. The Unistellar network achieved 26 hours of continuous coverage of exoplanet BD+05 4868 b using 26 observers --- demonstrating that citizen networks can accomplish what no single observatory can.
+
+\textbf{Variable star monitoring:} Long-term brightness tracking of variable and nova systems (T Coronae Borealis, recurrent novae). Low precision requirement; excellent for entry-level observers.
+
+\textbf{Comet activity:} Brightness monitoring and fragment tracking during cometary breakup events. Unistellar captured all three fragments of Comet K1 during disintegration in November 2024.
+
+\textbf{Satellite brightness surveys:} Monitoring of rocket bodies and satellite brightness to improve orbital predictions and assess dark sky impact.
+
+\subsubsection{Data Quality Standards for GTM Ingestion}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Quality Gate} & \tableheader{Threshold} & \tableheader{Notes} \\
+\midrule
+GPS timestamp & $<$1 ms accuracy & Required for occultation/transit; GPS-disciplined NTP \\
+FITS header completeness & Mandatory fields & RA, Dec, JD start, exposure time, observer ID, node ID \\
+Calibration frames & Dark + flat & Required for photometric data; bias optional \\
+Signal-to-noise ratio & $>$10:1 & Minimum for photometric science; $>$50:1 for precision transit \\
+Plate solution & Optional & Enables precise astrometry; astrometry.net API usable \\
+Weather metadata & Seeing estimate & Required; cloud cover flag mandatory \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 06: GSD Deployment Layer Reference}
+
+\subsubsection{skill-creator Integration Architecture}
+
+The gsd-skill-creator six-step loop maps directly to GTM campaign orchestration:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Skill-Creator Step} & \tableheader{GTM Mapping} & \tableheader{Implementation} \\
+\midrule
+Observe & Monitor alert brokers & Subscribe to ALeRCE / Pitt-Google / ANTARES feeds \\
+Detect & Identify opportunities & Match alert coordinates + time window to node visibility \\
+Suggest & Campaign proposals & Ranked list of observation targets for FLIGHT agent review \\
+Manage & DACP bundle assembly & Intent (why) + ObsSpec (target/window/config) + TelescopeCmd (executable) \\
+Auto-Load & Node dispatch & MCP planning-bridge deposits bundle to node staging inbox \\
+Learn/Compose & Post-campaign update & Success/failure rates update node capability model \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{DACP Bundle Structure for Telescope Commands}
+
+The Deterministic Agent Communication Protocol (DACP) three-part bundle applies to observation dispatch:
+
+\begin{asciibox}
+DACP TELESCOPE OBSERVATION BUNDLE
+===================================
+
+PART 1 - HUMAN INTENT:
+  "Observe exoplanet transit TOI-5571.01 ingress
+   from GTM node YN-2026-SEA-007 (Seattle WA).
+   Window: 2026-04-12 03:14 - 03:58 UTC.
+   Campaign: Yuri's Night Global Shutter."
+
+PART 2 - STRUCTURED DATA:
+  {
+    "bundle_type": "telescope_observation",
+    "campaign_id": "yn-2026-global-shutter",
+    "node_id": "YN-2026-SEA-007",
+    "target": {
+      "name": "TOI-5571.01",
+      "ra": "19h 23m 44.2s",
+      "dec": "+41d 08m 12s",
+      "mag": 11.3,
+      "type": "exoplanet_transit"
+    },
+    "window": {
+      "start_utc": "2026-04-12T03:14:00Z",
+      "end_utc": "2026-04-12T03:58:00Z",
+      "priority": "HIGH"
+    },
+    "instrument_config": {
+      "filter": "V",
+      "exposure_sec": 30,
+      "count": 88,
+      "binning": "1x1"
+    },
+    "quality_gates": {
+      "gps_timestamp": true,
+      "calibration_required": ["dark", "flat"],
+      "min_snr": 50
+    }
+  }
+
+PART 3 - EXECUTABLE CODE:
+  # INDI/ASCOM telescope command (Python)
+  telescope.slew_to(ra=target.ra, dec=target.dec)
+  camera.configure(filter="V", exp=30, count=88)
+  for i in range(88):
+      gps_time = get_gps_timestamp()
+      img = camera.capture(exposure=30)
+      fits_write(img, header={"JD": gps_time, ...})
+      upload_to_gtm_archive(img, node_id, campaign_id)
+\end{asciibox}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Indigenous sky knowledge & ABSOLUTE & All Indigenous astronomical knowledge referenced must use nation-specific names (Lakota, Cree, Maori, etc.). Never generic ``Native'' framing. GTM participation protocols must include OCAP provisions for communities contributing traditional ecological knowledge. \\
+Near-Earth object tracking & GATE & Planetary defense observations (asteroid orbit refinement) require coordination with NASA CNEOS and ESA NEOCC before public release. \\
+Dark sky sites & ANNOTATE & GTM node deployment should not increase light pollution at sensitive sites. Coordinate with IDA (International Dark-Sky Association). \\
+Satellite brightness data & ANNOTATE & Data contributing to satellite operator accountability should be shared with ITU and relevant national regulators. \\
+Personal data of observers & GATE & Node identity scheme must not expose precise residential locations of private observers. Node IDs should be geohash-aggregated (city level). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}
+  \item NSF-DOE Vera C.\ Rubin Observatory. \textit{First Alerts from the LSST Alert Pipeline.} February 24, 2026. rubinobservatory.org/news/first-alerts
+  \item NASA Open Source. \textit{meshNetwork: Peer-to-Peer Communication Architecture.} github.com/nasa/meshNetwork
+  \item NSF National Radio Astronomy Observatory. \textit{New Open-Source Standardized Data Model for Radio Astronomy.} February 2025. phys.org/news/2025-02-paves-seamless-collaboration
+  \item University of Washington DiRAC Institute. \textit{Alert Production Pipeline Group, Rubin Observatory.} 2026.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}
+  \item Marchis, F.\ et al.\ \textit{Citizen Science Astronomy with the Unistellar Network.} EPSC 2019. ADS: 2019EPSC...13..898M
+  \item Marchis, F.\ et al.\ \textit{Citizen Science Astronomy with a Network of Small Telescopes: The Launch and Deployment of JWST.} ResearchGate, 2022.
+  \item Brown, T.\ et al.\ \textit{Las Cumbres Observatory Global Telescope Network.} PASP 125, 1031. July 2013. arXiv:1305.2437
+  \item Kovacs, A.\ et al.\ \textit{SMA-X: Versatile Information Sharing in and around Telescopes.} SPIE 13101, 2024. arXiv:2501.02328
+  \item Smith, R.\ et al.\ \textit{Enabling Science from the Rubin Alert Stream with Lasair.} RAS Techniques and Instruments, 2024. arXiv:2404.08315
+\end{itemize}
+
+\subsubsection{Professional Organizations}
+
+\begin{itemize}
+  \item SETI Institute. \textit{Unistellar Citizen Science.} seti.org/projects/unistellar-network/
+  \item Las Cumbres Observatory. \textit{Observatory Control System (Open Source).} observatorycontrolsystem.github.io
+  \item Unistellar. \textit{Citizen Science Network Live Map.} science.unistellar.com
+  \item Yuri's Night. \textit{World Space Party.} yurisnight.net
+  \item SkyMapper. \textit{Decentralized Astronomy Platform.} skymapper.io
+  \item Science News. \textit{Citizen scientists make cosmic discoveries with a global telescope network.} March 4, 2025.
+\end{itemize}
+
+\newpage
+
+%% ============================================================
+%% STAGE 3: MISSION PACKAGE
+%% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Eye on the Sky --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a publication-quality research package documenting the architecture, node census, alert systems, event integration, citizen science protocols, and GSD deployment layer for the Global Telescope Mesh Network, anchored to Yuri's Night as its annual convergence event. The output is a complete, handoff-ready specification that a GSD orchestrator instance can execute to build GTM v1.0.
+
+\textbf{Architecture Overview:}
+
+\begin{asciibox}
+WAVE EXECUTION OVERVIEW
+========================
+
+  WAVE 0: Foundation
+  [Haiku] Shared schemas: FITS header spec, node identity format,
+          DACP bundle template, quality gate definitions.
+          Outputs: schema.yaml, node-identity.json, dacp-template.json
+          Duration: 1 context window
+
+  WAVE 1 (Parallel Tracks A + B + C):
+  Track A: [Sonnet] Module 01 (Network Architecture) +
+           [Sonnet] Module 02 (Telescope Fleet Mapping)
+  Track B: [Sonnet] Module 03 (Alert Systems) +
+           [Opus]   Module 04 (Yuri's Night Integration)
+  Track C: [Sonnet] Module 05 (Citizen Science Protocols)
+           Duration: 2--3 context windows
+           CAPCOM GATE 1: Scope confirmation before synthesis
+
+  WAVE 2: Synthesis
+  [Opus]  Module 06 (GSD Deployment Layer)
+  [Opus]  Cross-module integration: alert-to-backyard pathway,
+          Global Shutter protocol, skill-creator campaign spec
+          CAPCOM GATE 2: Cultural sensitivity review
+          Duration: 1--2 context windows
+
+  WAVE 3: Publication + Verification
+  [Sonnet] Document assembly, source validation, dependency graph
+  [Sonnet] index.html, public portal wireframe
+  [Sonnet] Final LaTeX compilation and QA
+          CAPCOM GATE 3: Release approval
+          Duration: 1 context window
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Specification} \\
+\midrule
+1 & GTM Architecture Spec & All six layers documented; bridge layer fully specified & Module 01 output \\
+2 & Node Census Report & Count, geography, protocol per network; gap map & Module 02 output \\
+3 & Alert Pipeline Document & End-to-end routing from Rubin to backyard; all 9 brokers covered & Module 03 output \\
+4 & Yuri's Night Event Protocol & Global Shutter fully specified; PNW anchors mapped & Module 04 output \\
+5 & Citizen Science Protocol Guide & All science methods documented; quality gates quantified & Module 05 output \\
+6 & GSD Deployment Spec & DACP bundle structure; skill-creator loop mapping; HITL gates & Module 06 output \\
+7 & Cross-Module Synthesis & Alert-to-backyard pathway; Amiga Principle analysis & Wave 2 output \\
+8 & Public Portal Wireframe & yurisnight-gtm.org concept; data submission flow & Wave 3 output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Foundation schemas (Wave 0) & None & Haiku & 8K \\
+Module 01: Network Arch & Foundation schemas & Sonnet & 20K \\
+Module 02: Fleet Census & Foundation schemas & Sonnet & 25K \\
+Module 03: Alert Systems & Foundation schemas & Sonnet & 22K \\
+Module 04: Yuri's Night & Module 03 & Opus & 28K \\
+Module 05: Citizen Science & Modules 01--02 & Sonnet & 20K \\
+Module 06: GSD Deploy & All modules & Opus & 30K \\
+Cross-module synthesis & All modules & Opus & 25K \\
+Document assembly + QA & All modules & Sonnet & 15K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated:}} & \textbf{193K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task Category} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+Cross-module synthesis & Opus & Requires judgment: identifying non-obvious connections across network architecture, alert systems, and event coordination \\
+Yuri's Night protocol design & Opus & Cultural sensitivity; balancing scientific rigor with public accessibility; global coordination architecture \\
+GSD deployment spec & Opus & DACP bundle design; skill-creator loop mapping; HITL gate placement \\
+Module surveys (01--03, 05) & Sonnet & Structured research compilation; well-sourced domain; efficient production \\
+Foundation schemas & Haiku & Straightforward templating; high reuse across all waves \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Gate} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & None & Shared schemas \\
+1A & Network + Fleet & Parallel & CAPCOM-1 & Modules 01--02 \\
+1B & Alerts + Event & Parallel & CAPCOM-1 & Modules 03--04 \\
+1C & Citizen Science & Parallel & CAPCOM-1 & Module 05 \\
+2 & Synthesis + Deploy & Sequential & CAPCOM-2 & Module 06 + synthesis \\
+3 & Publication + QA & Sequential & CAPCOM-3 & Final package \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+FITS header schema & PLAN/Haiku & Mandatory fields: RA, Dec, JD, EXPTIME, NODE\_ID, CAMPAIGN, GPS\_PREC \\
+Node identity format & PLAN/Haiku & GeoHash-6 + network prefix + index (e.g., YN-SEA-Q5JXP-007) \\
+DACP bundle template & PLAN/Haiku & Three-part JSON: intent string + obs-spec object + executable code block \\
+Quality gate schema & PLAN/Haiku & Gate definitions with thresholds as machine-readable JSON \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Tracks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Module} & \tableheader{Agent} & \tableheader{Key Outputs} \\
+\midrule
+1A & Module 01: Network Arch & CRAFT-NET/Sonnet & Protocol comparison (ASCOM/INDI/OCS), bridge layer spec, NASA meshNetwork assessment \\
+1A & Module 02: Fleet Census & CRAFT-FLEET/Sonnet & Node count table, geographic coverage map, gap analysis \\
+1B & Module 03: Alert Systems & CRAFT-ALERT/Sonnet & Rubin pipeline doc, broker table, routing pathway diagram \\
+1B & Module 04: Yuri's Night & CRAFT-EVENT/Opus & Event protocol, Global Shutter spec, PNW anchor map \\
+1C & Module 05: Citizen Science & CRAFT-SCI/Sonnet & Science method catalog, data quality gate table \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Module 06: GSD deployment spec & ARCH/Opus & skill-creator loop mapping, DACP bundle structure, HITL gates \\
+Alert-to-backyard integration & INTEG/Opus & End-to-end pathway connecting Modules 03, 01, 06 \\
+Amiga Principle analysis & FLIGHT/Opus & Through-line: GTM as distributed specialized nodes \\
+Cultural sensitivity review & SECURE/Opus & CAPCOM-2 package; Indigenous sky knowledge protocol \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Document assembly & EXEC/Sonnet & Final LaTeX compilation (3 passes), PDF output \\
+Source validation & VERIFY/Sonnet & All numerical claims traced to sources; broken URLs flagged \\
+Portal wireframe & EXEC/Sonnet & index.html, yurisnight-gtm.org concept page \\
+Dependency graph & LOG/Sonnet & ASCII dependency map, CAPCOM gate positions \\
+Execution summary & BUDGET/Sonnet & Token budget actuals, session count, QA checklist \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item Wave 0 schemas (FITS header, node identity, quality gates) are written once and cached for reuse in all Wave 1 agents
+  \item Research Reference document (Stage 2) is loaded as shared context for all Wave 2 synthesis tasks, avoiding re-research
+  \item DACP bundle template computed once in Wave 0; all agents inherit it as immutable shared state
+  \item Yuri's Night event metadata (dates, locations, participation counts) stored in a single shared YAML read by all modules
+  \item GTM node census table stored in CSV; all modules reference the same file
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Tokens} & \tableheader{Model Split} & \tableheader{Notes} \\
+\midrule
+Wave 0: Foundation & 8K & 100\% Haiku & Templates only \\
+Wave 1A: Network + Fleet & 45K & 100\% Sonnet & Two modules parallel \\
+Wave 1B: Alerts + Event & 50K & 60\% Sonnet / 40\% Opus & Event module is Opus \\
+Wave 1C: Citizen Science & 20K & 100\% Sonnet & Protocol survey \\
+Wave 2: Synthesis & 55K & 80\% Opus / 20\% Sonnet & Integration-heavy \\
+Wave 3: Publication & 15K & 100\% Sonnet & Assembly and QA \\
+\midrule
+\textbf{Total} & \textbf{193K} & 30\% Opus / 60\% Sonnet / 10\% Haiku & Within target \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+=================
+
+  [Wave 0: Foundation Schemas]
+    schema.yaml + node-identity.json + dacp-template.json
+        |
+        +-- depends on: nothing
+        |
+        v  FEEDS ALL WAVES
+  +------+------+------+------+------+
+  |      |      |      |      |      |
+  v      v      v      v      v      v
+ M01    M02    M03    M04    M05   [cache]
+  |      |      |      |      |
+  +--+---+  +---+------+  +--+
+     |      |                |
+     v      v                v
+  [M01+M02  [M03+M04      [M05 done]
+  complete] complete]
+     |      |                |
+     +------+----------------+
+            |
+            |  [CAPCOM GATE 1: scope confirm]
+            v
+         Module 06 (GSD Deployment)
+            +
+         Cross-module synthesis
+            |
+            |  [CAPCOM GATE 2: cultural review]
+            v
+         Document Assembly
+            +
+         Source Validation
+            +
+         Portal Wireframe
+            |
+            |  [CAPCOM GATE 3: release approval]
+            v
+         Final PDF + index.html
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-critical & 4 & P0 & BLOCK; do not proceed \\
+Source validation & 8 & P1 & Fix before publication \\
+Completeness & 6 & P1 & Fix before publication \\
+Integration & 4 & P2 & Flag; proceed with note \\
+Edge case & 3 & P3 & Document; defer to v1.1 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Test} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Indigenous sky knowledge attribution & Any reference to Indigenous astronomical knowledge uses nation-specific names (e.g., Lakota, Maori, Cree). No generic ``Native'' framing. BLOCK if violated. \\
+SC-02 & Observer location privacy & No GTM node identifier reveals a private observer's precise residential coordinates. All IDs use GeoHash-6 or coarser. BLOCK if violated. \\
+SC-03 & Planetary defense coordination & Any asteroid tracking observation described in the package includes coordination step with NASA CNEOS before public release. BLOCK if missing. \\
+SC-04 & All numerical claims sourced & No unsourced quantitative claims in the final document. Every statistic traces to a named agency, paper, or observatory. BLOCK if any unsourced number is present. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{5cm}L{3cm}C{1.5cm}}
+\toprule
+\rowcolor{secondary}
+\tableheader{SC \#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Complete node census with geography and protocol & T-M02-01, T-M02-02 & OPEN \\
+2 & GTM bridge layer fully specified & T-M01-01, T-M01-02 & OPEN \\
+3 & Alert-to-backyard pathway end-to-end & T-M03-01, T-M06-01 & OPEN \\
+4 & Global Shutter fully documented & T-M04-01, T-M04-02 & OPEN \\
+5 & Data quality gates quantified & T-M05-01 & OPEN \\
+6 & GSD deployment spec complete & T-M06-01, T-M06-02 & OPEN \\
+7 & Coverage gaps identified & T-M02-03 & OPEN \\
+8 & Package self-contained for new orchestrator & T-INT-01 & OPEN \\
+9 & All sources professional/peer-reviewed & SC-04, T-VER-01 & OPEN \\
+10 & PNW events mapped and integrated & T-M04-03 & OPEN \\
+11 & Dependency graph produced & T-PKG-01 & OPEN \\
+12 & Through-line articulated & T-SYNTH-01 & OPEN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go at CAPCOM gates \\
+ARCH & Architecture (Opus) & Cross-cutting structural decisions; bridge layer authority \\
+PLAN & Planner (Haiku) & Wave decomposition; template generation; dependency tracking \\
+CRAFT-NET & Network Specialist (Sonnet) & Module 01: protocols, bridge layer, NASA meshNetwork \\
+CRAFT-FLEET & Fleet Mapper (Sonnet) & Module 02: node census, geographic analysis \\
+CRAFT-ALERT & Alert Systems (Sonnet) & Module 03: Rubin pipeline, broker ecosystem, routing \\
+CRAFT-EVENT & Event Architect (Opus) & Module 04: Yuri's Night integration, Global Shutter design \\
+CRAFT-SCI & Science Protocol (Sonnet) & Module 05: citizen science methods, data quality \\
+INTEG & Integration Agent (Opus) & Cross-module pathway synthesis \\
+EXEC-1 & Document Producer (Sonnet) & Track 1A assembly \\
+EXEC-2 & Document Producer (Sonnet) & Track 1B assembly \\
+EXEC-3 & Document Producer (Sonnet) & Wave 2--3 assembly \\
+VERIFY & Verification (Sonnet) & Source validation; numerical claim audit \\
+TOPO & Topology Manager (Haiku) & Agent team structure; mid-mission restructuring \\
+SECURE & Security / Sensitivity (Opus) & CAPCOM-2 cultural review; privacy gate \\
+CAPCOM & HITL Interface (Opus) & Three CAPCOM gates; the only channel to the human \\
+LOG & Chronicle (Haiku) & Commit messages; audit trail; session summaries \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (17--18 roles) \\
+Research Modules & 6 \\
+Parallel Tracks & 3 (Wave 1) \\
+HITL CAPCOM Gates & 3 \\
+Estimated Token Budget & 193K total \\
+Model Split & 30\% Opus / 60\% Sonnet / 10\% Haiku \\
+Estimated Sessions & 3--4 \\
+Estimated Context Windows & 8--12 \\
+Primary Data Standard & FITS (Flexible Image Transport System) \\
+Network Protocol Candidates & INDI, ASCOM, LCO OCS, NASA meshNetwork \\
+Alert Source & Vera C.\ Rubin LSST (operational February 2026) \\
+Target Event & April 12 --- Yuri's Night Global Shutter \\
+GSD Integration Point & skill-creator v1.49+ (DACP milestone) \\
+Safety-Critical Tests & 4 (all BLOCK) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily\large The spaces between the telescopes are not empty.}\\[0.5em]
+They are the network. They are where the science lives.\\[0.5em]
+Gagarin looked down and saw a planet. On April 12, a million backyard telescopes can look up and see, for the first time, something that no single one of them can see alone: the whole sky, watched all at once, by everyone.\\[1em]
+\textit{--- The Amiga Principle, applied to the cosmos: not more power, but better connection.}
+\end{quotebox}
+
+\end{document}

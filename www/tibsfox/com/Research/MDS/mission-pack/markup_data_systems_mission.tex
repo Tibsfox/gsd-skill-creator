@@ -1,0 +1,1139 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ── Technology Domain Color Scheme ─────────────────────────────────────────
+\definecolor{primary}{HTML}{263238}
+\definecolor{secondary}{HTML}{1565C0}
+\definecolor{tertiary}{HTML}{37474F}
+\definecolor{accent}{HTML}{0277BD}
+\definecolor{lightprimary}{HTML}{ECEFF1}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnred}{HTML}{B71C1C}
+\definecolor{okgreen}{HTML}{1B5E20}
+
+%% ── Section Formatting ──────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── Custom Environments ─────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── Headers / Footers ────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Markup, Data Flow \& Real-Time Systems}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={Markup Languages, Data Flow and Real-Time Systems -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+%% ════════════════════════════════════════════════════════════════════════════
+\begin{document}
+\thispagestyle{empty}
+
+%% ── Title Page ───────────────────────────────────────────────────────────────
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1.4cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{Markup Languages, Data Flow\\[0.3em]\& Real-Time Systems}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{HTML · CSS · XML · UML · SGML\\[0.2em]Hyperlinking · Semantic Web · Data-Driven Architectures\\[0.2em]Telemetry · RRDB · Time-Series Databases}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Six-Module Deep Research Study --- 5-Pass Refinement}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Activation Profile}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad|\quad Estimated: 12--18 context windows across 4--6 sessions}}
+\end{center}
+\newpage
+
+%% ── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ════════════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION DOCUMENT
+%% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research-Ready}
+\metafield{Depends On:}{GSD Ecosystem v1.49+, DACP milestone}
+\metafield{Context:}{GSD skill-creator dev branch; Fox Infrastructure Group digital backbone research}
+\metafield{Activation Profile:}{Fleet (6 modules, 17 roles, 3 parallel tracks)}
+
+\subsection{Vision}
+
+Every system that moves data from the world to a human mind passes through at least three layers: a representation layer that gives data shape and meaning, a linking layer that connects representations into navigable networks, and a display layer that collapses time into a comprehensible now. The standards covered in this research mission --- SGML, HTML, CSS, XML, UML, XLink, RDF, CCSDS telemetry, RRDtool, and the modern time-series database ecosystem --- are not a random collection of specifications. They are the accumulated answer to a single recurring question: \emph{How do we encode, connect, and render information so that it survives transit across time, distance, and context?}
+
+The Amiga Principle is alive in every layer of this stack. SGML achieved what no brute-force approach could: a meta-language flexible enough to birth both HTML and XML without itself needing to change. Tim Berners-Lee's hyperlink did not invent connectivity --- it leveraged the simplest possible mechanic (an anchor pointing to a URI) and let the network do the rest. RRDtool's circular buffer is the consummate architectural elegance move: a fixed-size store that never grows, never requires maintenance, and produces accurate trend data forever, simply by accepting that old precision must yield to new continuity.
+
+This research mission is also foundational infrastructure for the GSD ecosystem itself. The GSD-OS dashboard, real-time subagent telemetry displays, the Fox Infrastructure Group monitoring layer, and the skill-creator's anomaly detection all depend on the exact intersection of these six domains. Understanding them at depth is not academic. It is the scaffolding for everything that comes next.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Specification fragmentation.} HTML, XML, SGML, UML, and CSS have parallel and sometimes conflicting lineages (IETF, W3C, ISO, OMG), making it difficult to understand which authority governs which behavior and where the seams are between standards. Practitioners routinely conflate SGML application vs.\ XML subset vs.\ HTML living standard.
+  \item \textbf{Hyperlinking's unfinished promise.} Ted Nelson's bidirectional, transclusive Xanadu model was never realized at web scale. The web settled for one-directional \texttt{<a href>}, and XLink --- the richer W3C linking model --- was only partially implemented by browsers. Deep-mapping and semantic linking (RDF, XPointer, XLink extended links) remain underdeployed relative to their potential.
+  \item \textbf{Data-driven architecture plurality.} The term ``data-driven'' covers Lambda architecture, Kappa architecture, Data Mesh, Data Fabric, and event-driven microservices --- overlapping patterns with similar names and different tradeoffs. No single canonical reference maps them against each other for system designers.
+  \item \textbf{Real-time display scaling walls.} SVG and standard DOM approaches break down past roughly 1,000 data points. Canvas pushes to $\sim$10,000. Only WebGL (GPU-accelerated) can render 1M+ data points at 60fps, but WebGL introduces shader complexity, memory management, and a fundamentally different programming model that most dashboard developers have not crossed.
+  \item \textbf{Telemetry protocol fragmentation.} Industrial, aerospace (CCSDS), and IoT telemetry all solve the same problem --- timestamped sensor data delivery at guaranteed rates --- but use incompatible framing, encoding, and delivery guarantees. Bridging CCSDS virtual channels, SNMP counters, and MQTT topic trees into a unified time-series store requires explicit architectural decisions rarely documented together.
+  \item \textbf{Time-series storage selection complexity.} RRDtool, InfluxDB, Prometheus, OpenTSDB, TimescaleDB, and QuestDB each make different tradeoffs across write throughput, query expressiveness, cardinality, retention policy, and operational complexity. The decision matrix is rarely presented in a way that maps directly to GSD ecosystem use cases.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{center}
+\textit{``The meaning lives between the nodes --- in the link, the frame, the delta, the graph edge, and the rendered pixel.''}
+\end{center}
+
+The six research modules form a vertical stack from syntax to screen:
+
+\begin{asciibox}
+SYNTAX LAYER      SGML / XML / HTML / CSS / UML
+                       |
+LINKING LAYER     XLink / XPointer / RDF / Knowledge Graphs / Deep Mapping
+                       |
+ARCHITECTURE      Data-Driven Patterns (Lambda / Kappa / Mesh / Fabric / EDA)
+LAYER                  |
+TRANSPORT         Telemetry (CCSDS / SNMP / MQTT / OPC-UA)
+LAYER                  |
+STORAGE LAYER     RRD / InfluxDB / Prometheus / TimescaleDB / QuestDB
+                       |
+DISPLAY LAYER     WebGL / WebSocket / Canvas / D3 / deck.gl / ECharts
+\end{asciibox}
+
+Each layer depends on the ones below it and serves the ones above it. The research mission documents all six layers and their connection points.
+
+\subsection{Module Architecture}
+
+\begin{asciibox}
+MODULE 01  Markup Standards Genealogy
+           SGML (ISO 8879:1986) --> HTML 2.0 --> HTML5 Living Standard
+           SGML --> XML 1.0 (W3C 1998) --> XHTML --> XML Schema / XSD
+           CSS 1 (1996) --> CSS 2 (1998) --> CSS 3 (modular, ongoing)
+           UML 1.0 (1997) --> UML 2.5.1 (2017, OMG formal)
+
+MODULE 02  Hyperlinking and Semantic Deep-Mapping
+           Nelson 1965 --> Berners-Lee 1989 --> HTML <a> --> XLink 1.0/1.1
+           RDF 1999/2004/2014 --> SPARQL --> OWL --> Knowledge Graphs
+           Deep linking, transclusion, XPointer, JSONLD, schema.org
+
+MODULE 03  Data-Driven Software Architecture
+           MVC --> CQRS --> Event Sourcing --> Lambda / Kappa
+           Data Lake --> Lakehouse --> Data Mesh --> Data Fabric
+           Domain-Driven vs. Data-Driven; RDF as universal data model
+
+MODULE 04  Real-Time and High-Frequency Display Systems
+           SVG (1K pts) --> Canvas (10K pts) --> WebGL (1M+ pts)
+           WebSocket streams --> requestAnimationFrame --> GPU pipelines
+           Libraries: D3.js, deck.gl, ECharts, Plotly, webgl-plot
+
+MODULE 05  Telemetry Systems and Protocols
+           NASA/CCSDS: TM Frame / AOS / Space Packet Protocol
+           Industrial: SNMP, OPC-UA, MQTT, Modbus, DNP3
+           IoT edge: CFDP, proximity-1, edge-to-cloud (AWS IoT Greengrass)
+
+MODULE 06  Time-Series Databases: RRD and the Modern Stack
+           RRDtool (1999, Oetiker) --> MRTG lineage
+           OpenTSDB (HBase) --> InfluxDB (TSM-Tree) --> Prometheus (pull)
+           TimescaleDB (PostgreSQL) --> QuestDB --> IoTDB (Apache)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Markup Standards Genealogy}
+Traces the lineage from SGML (ISO 8879:1986) through HTML, XML, XHTML, HTML5, and the CSS cascade model. Documents the OMG's UML specification history from Three Amigos (Booch/Jacobson/Rumbaugh) through UML 2.5.1. Maps the relationships between DTDs, XML Schema (XSD), and RELAX NG. Covers DSSSL, XSL, and the separation of structure from presentation as a design principle.
+
+\subsubsection{Module 02 --- Hyperlinking and Semantic Deep-Mapping}
+Documents the Bush/Nelson/Engelbart lineage, HTML \texttt{<a>} mechanics, XLink/XPointer W3C specifications, and the full RDF/SPARQL/OWL semantic web stack. Maps deep linking, transclusion, and knowledge graph construction (DBpedia, Wikidata, schema.org) as implementations of the original hypertext vision.
+
+\subsubsection{Module 03 --- Data-Driven Software Architecture}
+Surveys the major patterns: MVC, CQRS/Event Sourcing, Lambda architecture (batch + speed layers), Kappa architecture (stream-only), Data Mesh (domain ownership), Data Fabric (automated integration), and the RDF-as-universal-data-model thesis. Benchmarks tradeoffs for GSD ecosystem adoption.
+
+\subsubsection{Module 04 --- Real-Time and High-Frequency Display Systems}
+Documents the SVG/Canvas/WebGL rendering performance hierarchy. Covers WebSocket bidirectional streaming, Server-Sent Events, requestAnimationFrame loop patterns, LTTB downsampling, GPU buffer management, and the WebAssembly optimization layer. Surveys production libraries (D3, deck.gl, ECharts, webgl-plot, Three.js).
+
+\subsubsection{Module 05 --- Telemetry Systems and Protocols}
+Covers the CCSDS protocol stack (Space Packet, TM/AOS Data Link, Proximity-1, CFDP), NASA Goddard ASIST/ITOS T\&C systems, and industrial telemetry (SNMP, OPC-UA, MQTT, Modbus). Maps how telemetry streams feed into time-series storage and real-time display layers. Includes DSN telemetry service architecture.
+
+\subsubsection{Module 06 --- Time-Series Databases: RRD and the Modern Stack}
+Deep-dives on RRDtool (circular buffer, RRA, consolidation functions, DS types), then surveys the modern TSDB landscape: InfluxDB (TSM-Tree, push, InfluxQL/Flux), Prometheus (pull, PromQL, delta-of-delta encoding), OpenTSDB (HBase), TimescaleDB (PostgreSQL extension), KairosDB (Cassandra), and QuestDB. Includes benchmark data and GSD use-case mapping.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+\# GSD Chipset YAML --- Markup, Data Flow \& Real-Time Systems Mission
+chipset:
+  agnus:                      \# Orchestration / DMA
+    model: claude-opus-4-6
+    roles: [FLIGHT, ARCH, TOPO, ANALYST, RETRO]
+    responsibilities:
+      - Cross-module synthesis and integration
+      - Safety boundary enforcement
+      - Wave go/no-go gates
+      - Cross-cutting architectural decisions
+  denise:                     \# Display / Output Rendering
+    model: claude-sonnet-4-6
+    roles: [EXEC-A, EXEC-B, EXEC-C, CRAFT-MARKUP, CRAFT-REALTIME]
+    responsibilities:
+      - Document production (Modules 01, 04)
+      - Survey compilation and verification
+      - Structured content assembly
+  paula:                      \# I/O / Anticipatory
+    model: claude-haiku-4-5-20251001
+    roles: [BUDGET, LOG, SCOUT-SCHEMAS]
+    responsibilities:
+      - Shared schema generation (Wave 0)
+      - Token budget tracking
+      - Audit trail and commit messages
+  cpu\_68000:                  \# Logic / Glue
+    model: claude-sonnet-4-6
+    roles: [PLAN, VERIFY, INTEG, CAPCOM, SURGEON,
+            CRAFT-DATA, CRAFT-TELEMETRY, CRAFT-TSDB, SECURE]
+    responsibilities:
+      - Wave decomposition and dependency management
+      - Source validation and accuracy checking
+      - Cross-module relationship validation
+      - Human approval interface
+      - Research quality monitoring
+      - Module 02/03/05/06 specialist analysis
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Full genealogy of SGML, HTML, CSS, XML, XHTML, HTML5, and UML specifications with version timelines
+  \item Hypertext theory lineage (Bush/Nelson/Engelbart/Berners-Lee) and implementation in XLink, XPointer, RDF, and knowledge graphs
+  \item Data-driven architecture patterns: Lambda, Kappa, CQRS, Event Sourcing, Data Mesh, Data Fabric, EDA
+  \item Real-time rendering pipeline from SVG through Canvas to WebGL, with performance benchmarks and library survey
+  \item Telemetry protocol coverage: CCSDS full stack, SNMP, OPC-UA, MQTT, NASA DSN architecture
+  \item Time-series database comparative analysis: RRDtool, InfluxDB, Prometheus, OpenTSDB, TimescaleDB, QuestDB
+  \item Cross-module connections: how telemetry feeds TSDB, how TSDB drives real-time displays, how markup structures data for semantic linking
+\end{itemize}
+
+\subsubsection{Out of Scope (v1.0)}
+\begin{itemize}[noitemsep]
+  \item Implementation of production systems (specification and design only)
+  \item Proprietary vendor extensions to any standard
+  \item Security cryptography depth (noted as boundary, referenced for future mission)
+  \item Machine learning over time-series data (separate mission)
+  \item CSS animation, Grid, and Flexbox layout --- display only (separate CSS deep-dive mission)
+  \item Specific GSD-OS CRT shader implementation details (separate GSD-OS mission)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Standard genealogy chart correctly maps SGML $\rightarrow$ HTML $\rightarrow$ XML $\rightarrow$ HTML5 with ISO/W3C/WHATWG authority boundaries identified
+  \item UML version timeline accurately documented from UML 1.0 (1997) through UML 2.5.1 (2017) with OMG metamodel layers explained
+  \item XLink 1.0/1.1 link model correctly described, including simple vs.\ extended links, arc model, and browser implementation status
+  \item RDF triple model, SPARQL query language, OWL ontology language, and knowledge graph construction documented with concrete examples
+  \item At least five data-driven architecture patterns documented with use-case tradeoff tables comparing Lambda vs.\ Kappa vs.\ Data Mesh
+  \item SVG/Canvas/WebGL performance boundary quantified (SVG $\sim$1K, Canvas $\sim$10K, WebGL $\sim$1M+ data points at 60fps)
+  \item WebSocket streaming architecture documented end-to-end from sensor to browser pixel
+  \item CCSDS protocol stack documented: Space Packet, TM Data Link, AOS, Proximity-1, and CFDP layers named and described
+  \item NASA Goddard ASIST/ITOS T\&C systems documented with CCSDS compliance characteristics
+  \item RRDtool circular buffer model, RRA, DS types (GAUGE/COUNTER/DERIVE/ABSOLUTE), and consolidation functions (AVERAGE/MAX/MIN/LAST) fully documented
+  \item TSDB comparison matrix covers at least six systems across: write throughput, query language, data model, storage engine, and cardinality handling
+  \item All six modules have at least one explicit cross-module relationship documented (e.g., telemetry feeds TSDB feeds WebGL display)
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+GSD-OS Desktop Vision & CRT shader WebGL pipeline is Module 04 in action & Depends on \\
+Fox Infrastructure Group & Telemetry + TSDB are monitoring backbone & Feeds into \\
+GSD Dashboard Console & Real-time display (Module 04) and time-series (Module 06) & Implements \\
+GSD Staging Layer Vision & Event-driven architecture (Module 03) governs staging gates & Informs \\
+Deep Audio Analyzer Mission & TSDB stores frequency time-series; WebGL renders waveform & Parallel \\
+GSD Chipset Architecture & Agnus/Paula/Denise map to data flow layers in Module 03 & Metaphor \\
+College of Knowledge & Markup standards genealogy is core curriculum content & Seeds \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+These six domains are not a list; they are a sentence. The sentence reads: ``SGML defined the \emph{atom} of structured information; hyperlinks gave atoms \emph{gravity}; semantic web gave gravity \emph{meaning}; data-driven architecture gave meaning \emph{flow}; telemetry gave flow \emph{urgency}; time-series databases gave urgency \emph{memory}; and real-time displays gave memory \emph{presence}.''
+
+This is the Amiga Principle at civilizational scale. Each layer achieves remarkable capability not by brute force but by defining a minimal, composable primitive and trusting the layers around it to do the rest. SGML did not need to know about the Web. The \texttt{<a>} anchor did not need to know about search engines. RRDtool did not need to know about Grafana. The circular buffer just needed to stay the same size forever.
+
+The GSD ecosystem is building in the same spirit. DACP's three-part bundle (intent + data + code) is the same architectural move as the XLink arc model: give the link enough metadata to be useful to any processor, without prescribing what any processor must do with it. The skill-creator's Complex Plane of Experience is the same move as RDF's triple graph: meaning lives not in the nodes but in the directed edges between them.
+
+
+%% ════════════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%% ════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference is organized by module. Each module section contains findings gathered through five-pass web research refinement. Sources are professional organizations, W3C/OMG/ISO specifications, peer-reviewed IEEE/ACM publications, and NASA technical reports. Key source organizations:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{W3C (World Wide Web Consortium)} --- HTML, CSS, XML, XLink, RDF, OWL, SPARQL, XHTML
+  \item \textbf{OMG (Object Management Group)} --- UML 2.5.1, Meta-Object Facility (MOF)
+  \item \textbf{ISO} --- SGML ISO 8879:1986, UML ISO/IEC 19501
+  \item \textbf{CCSDS (Consultative Committee for Space Data Systems)} --- Space telemetry protocols
+  \item \textbf{NASA GSFC / JPL (Goddard / Jet Propulsion Laboratory)} --- ASIST, ITOS, DSN
+  \item \textbf{IETF (Internet Engineering Task Force)} --- HTML 2.0 RFC, WebSocket RFC 6455
+  \item \textbf{Khronos Group} --- WebGL specification
+  \item \textbf{ACM / IEEE Xplore} --- Peer-reviewed visualization and database research
+  \item \textbf{InfluxData / Prometheus CNCF / Apache Foundation} --- Open-source TSDB documentation
+\end{itemize}
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection{Module 01 --- Markup Standards Genealogy}
+
+\subsubsection{SGML: The Root Standard (ISO 8879:1986)}
+
+Standard Generalized Markup Language was standardized by ISO in 1986 as ISO 8879. The core SGML insight was the separation of three concerns: content (the actual information), structure (described by a Document Type Definition or DTD), and presentation (handled by a separate style language such as DSSSL). SGML defines a meta-language: it does not itself define any tags, but provides the framework within which specific tag sets can be defined as SGML ``applications.''
+
+SGML's key contributions that survived into XML include: the separation of logical and physical structures (elements and entities), grammar-based validation via DTDs, the separation of data and metadata (elements and attributes), mixed content models, and processing instructions. SGML was designed for large-scale publishing and documentation management, and its full specification was acknowledged even by the W3C as expensive to implement fully.
+
+\subsubsection{HTML: SGML's First Great Application}
+
+HTML was created by Tim Berners-Lee at CERN in 1989 as an SGML application for sharing hyperlinked documents within the nuclear research facility. HTML's initial 18 elements were strongly influenced by CERN's in-house SGML documentation format. The first official W3C specification was HTML 2.0 (published by the IETF). There was never an HTML 1.0 specification.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Version} & \tableheader{Year} & \tableheader{Key Development} & \tableheader{Authority} \\
+\midrule
+HTML 2.0 & 1995 & First SGML-compliant spec & IETF \\
+HTML 3.2 & 1997 & Browser vendor additions; tables & W3C \\
+HTML 4.0 & 1997 & CSS encouraged; deprecated presentational tags & W3C \\
+HTML 4.01 & 1999 & Strict / Transitional / Frameset DTDs & W3C \\
+XHTML 1.0 & 2000 & HTML 4.01 reformulated as XML 1.0 & W3C \\
+XHTML 1.1 & 2001 & Modular; strict XML compliance & W3C \\
+HTML5 & 2014 & Living standard; abandons SGML basis & WHATWG/W3C \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+A critical schism occurred in 2004 when W3C was developing XHTML 2.0 (not backwards-compatible), while browser vendors (Opera, Apple, Mozilla) formed WHATWG to pursue HTML5 (pragmatic, web-compatible). In 2009, the W3C allowed the XHTML 2.0 Working Group charter to expire, adopting HTML5 as the path forward. The XHTML 1.0 and 1.1 recommendations were formally retired by W3C on March 27, 2018.
+
+\subsubsection{XML: SGML's Simplified Web Subset}
+
+XML was developed by a W3C working group beginning in mid-1996 (charter by Sun Microsystems engineer Jon Bosak), with the major design decisions made between August and November 1996. XML 1.0 became a W3C Recommendation on February 10, 1998. XML is formally a profile of SGML: it removes the SGML declaration (giving XML a fixed delimiter set), adopts Unicode as the document character set, and eliminates rarely-used complex SGML features to produce a specification simple enough to implement in a week rather than a year.
+
+Key XML design inheritances from SGML include element/entity separation, DTD-based grammar validation, mixed content, and processing instructions. Key XML departures from SGML include the removal of optional tag minimization, the addition of namespaces (XML Namespaces 1.0, 1999), and the strict well-formedness requirement. By 2017, XML had almost completely displaced SGML in practice (Scriptorium, 2017).
+
+\textbf{XML Ecosystem:} The XML family includes XSLT (transformation), XPath (addressing), XQuery (querying), XSD/XML Schema (stronger typing than DTDs), RELAX NG, Schematron, XHTML, SVG, MathML, RSS, Atom, SOAP, WSDL, and hundreds of industry-specific applications. XSD (XML Schema Definition) became the W3C-endorsed successor to DTDs, offering data typing, namespace-aware validation, and element/attribute reuse via complex and simple type definitions.
+
+\subsubsection{CSS: The Presentation Separation Engine}
+
+CSS (Cascading Style Sheets) was developed in response to HTML drifting from its semantic roots toward presentational markup. Håkon Wium Lie and Bert Bos proposed CSS on the HTML mailing list before the W3C existed; CSS 1 became a W3C Recommendation in December 1996. CSS 2 followed in May 1998. Unlike CSS 1 and 2, CSS 3 is not a monolithic specification --- it was split into modules (Color, Selectors, Box Model, Transforms, Animations, Grid, Flexbox, etc.) each at different levels of W3C maturity.
+
+The CSS cascade algorithm --- specificity, inheritance, and source order --- is the central mechanism that gives the language its name. CSS levels 1-3 introduced progressively more powerful selectors, layout models, and rendering capabilities. CSS Custom Properties (CSS Variables, Level 4) and Houdini (direct access to the CSS engine via JavaScript) represent the current frontier of the specification.
+
+\subsubsection{UML: The System Modeling Language}
+
+The Unified Modeling Language emerged from the convergence of three dominant object-oriented modeling approaches: Grady Booch's Booch method, James Rumbaugh's OMT (Object Modeling Technique), and Ivar Jacobson's OOSE (Object-Oriented Software Engineering). After Rational Software (Booch) hired Rumbaugh from GE in 1994 and acquired Jacobson's Objectory company, the Three Amigos produced UML 1.0, proposed to the OMG in January 1997. UML 1.1 was adopted by the OMG in November 1997.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Version} & \tableheader{Date} & \tableheader{Key Change} \\
+\midrule
+UML 1.0 & Jan 1997 & Initial OMG proposal from UML Partners consortium \\
+UML 1.1 & Nov 1997 & OMG formal adoption; semantics finalized \\
+UML 1.3--1.5 & 1999--2003 & Minor revisions; task force refinements \\
+UML 2.0 & 2005 & Major revision; MDD support; Infrastructure + Superstructure split \\
+UML 2.4.1 & 2011 & Consolidated superstructure; formal/2011-08-05 \\
+UML 2.5 & 2015 & Simplified; merged Infrastructure/Superstructure \\
+UML 2.5.1 & Dec 2017 & Current formal version; ISO/IEC 19501 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+UML 2.5.1 defines 14 diagram types in two categories: structural (Class, Object, Component, Deployment, Package, Composite Structure, Profile) and behavioral (Use Case, Activity, State Machine, Sequence, Communication, Interaction Overview, Timing). The OMG uses the Meta-Object Facility (MOF) four-layer metamodeling architecture (M0: instances, M1: model, M2: metamodel, M3: meta-metamodel) to define UML's formal semantics.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection{Module 02 --- Hyperlinking and Semantic Deep-Mapping}
+
+\subsubsection{Historical Lineage: Bush to Berners-Lee}
+
+The hyperlink concept traces to Vannevar Bush's 1945 essay ``As We May Think,'' which described the Memex: a microfilm-based machine that could link any two pages of information into a navigable ``trail.'' In 1965, Ted Nelson coined the terms ``hypertext'' and ``hyperlink'' at the start of Project Xanadu. Nelson's vision was bidirectional: links would be two-way, independent of files, and would support transclusion (embedding of referenced content). Douglas Engelbart's NLS (oNLine System) was the first implementation of hyperlinks for navigating within and between documents (1966--1968). Ben Shneiderman's HyperTIES (1983) introduced the highlighted link. Tim Berners-Lee acknowledged HyperTIES as a source for the link concept in his 1989 WWW proposal.
+
+\subsubsection{HTML Hyperlinks and XLink}
+
+HTML's \texttt{<a href="...">} anchor element implements the simplest possible hyperlink: unidirectional, source-expressed, URI-addressed, with user-agent-controlled traversal behavior. The W3C XLink specification (XLink 1.0, 2001; XLink 1.1, 2010) extends this model for XML documents with: multidirectional links, links stored separately from source documents, arc-based traversal with \texttt{from/to} role pairs, typed links with semantic roles, and \texttt{show/actuate} attributes controlling how and when links are traversed. XLink simple links correspond to HTML anchor behavior; XLink extended links enable the full Nelson-style multi-resource linking model.
+
+XPointer (the companion to XLink) allows links to address specific fragments of XML documents without requiring anchor tags in the target document, using XPath expressions as fragment identifiers. In practice, XLink extended links saw limited browser implementation, though XBRL (financial reporting) became one of the largest production XLink deployments.
+
+\subsubsection{RDF: The Graph Data Model of the Web}
+
+Resource Description Framework (RDF) was adopted as a W3C Recommendation in 1999 (RDF 1.0: 2004; RDF 1.1: 2014). RDF's data model is built on triples: subject--predicate--object statements about resources. A collection of RDF triples forms a directed labeled multigraph. The subject is a resource (identified by a URI/IRI or blank node), the predicate is a property (a URI), and the object is either a resource or a literal value.
+
+\begin{asciibox}
+RDF TRIPLE EXAMPLE:
+  Subject:    <https://tibsfox.com/person/miles>
+  Predicate:  <http://schema.org/name>
+  Object:     "Miles Tiberius Foxglove"
+
+  Subject:    <https://tibsfox.com/person/miles>
+  Predicate:  <http://schema.org/worksFor>
+  Object:     <https://tibsfox.com/org/fox-infrastructure-group>
+
+These triples form a directed graph where nodes are resources/literals
+and edges are labeled with predicates. SPARQL queries this graph.
+\end{asciibox}
+
+\textbf{RDF Ecosystem:} RDFS (RDF Schema) adds vocabulary for defining classes and properties. OWL (Web Ontology Language) adds expressive description logic for defining complex class relationships, property characteristics, and cardinality constraints. SPARQL (SPARQL Protocol and RDF Query Language) is the W3C-standard query language for RDF graphs, analogous to SQL for relational databases. SHACL (Shapes Constraint Language, 2017) provides constraint validation.
+
+\subsubsection{Knowledge Graphs and Deep-Mapping}
+
+Knowledge graphs represent semantics by describing entities and their relationships, often using RDF and OWL as the underlying technology. Google introduced their production Knowledge Graph in 2012, building on DBpedia and Freebase. Current major knowledge graphs include Wikidata (Wikimedia Foundation), DBpedia (extracted from Wikipedia), schema.org (shared vocabulary for web content), and enterprise knowledge graphs at Google, Microsoft (Bing), Amazon (Alexa), and LinkedIn.
+
+Deep-mapping extends the knowledge graph concept into spatial and temporal dimensions: layering historical, geographic, ecological, cultural, and narrative information onto geographic coordinates. In the GSD ecosystem context, deep-mapping is directly relevant to the Fox Infrastructure Group's Pacific Spine corridor --- where physical infrastructure, ecological data, tribal governance boundaries, and telemetry feeds must all be linked into a navigable, queryable graph.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection{Module 03 --- Data-Driven Software Architecture}
+
+\subsubsection{The Core Principle}
+
+Data-driven architecture inverts the traditional relationship between code and data: instead of code driving data, data drives software. Application-specific logic is decoupled from code and moved into data representations (configurations, rules, ontologies, schemas). The AtomGraph thesis expresses this as: ``application development becomes configuration more than coding.'' RDF is identified as the only web-native data model that fully supports this decoupling because it is the only standard graph model with a standard query language (SPARQL) designed for the open web.
+
+\subsubsection{Key Architectural Patterns}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Pattern} & \tableheader{Core Idea} & \tableheader{Best For} \\
+\midrule
+Lambda Architecture & Batch layer + speed layer + serving layer; reprocessing via batch corrects speed-layer errors & High-volume historical + real-time analytics \\
+Kappa Architecture & Stream-only; single processing path; replay from log; simpler ops than Lambda & Pure stream processing; simpler pipelines \\
+CQRS / Event Sourcing & Separate read/write models; all state changes as immutable events & Audit trails; temporal queries; complex domains \\
+Data Lakehouse & Combines data lake flexibility with data warehouse structure (Delta Lake, Apache Iceberg) & Mixed workloads; large-scale analytics \\
+Data Mesh & Domain-oriented, decentralized data ownership; data-as-a-product; federated governance & Large orgs with many data domains \\
+Data Fabric & Automated integration via metadata, AI, and ML; unified access across heterogeneous sources & Complex hybrid/multi-cloud environments \\
+Event-Driven Architecture & Events as primary communication; producers/consumers decoupled; IoT/streaming & Real-time reactive systems; IoT; microservices \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{GSD Ecosystem Relevance}
+
+The GSD workflow engine's wave-based execution model is an instance of Kappa architecture: each wave is a streaming batch, with DACP bundles as the event type and the staging layer as the event bus. The skill-creator's six-step Observe $\rightarrow$ Detect $\rightarrow$ Suggest $\rightarrow$ Manage $\rightarrow$ Auto-Load $\rightarrow$ Learn loop maps directly to an event-driven feedback system with CQRS separation between observation (read) and skill mutation (write).
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection{Module 04 --- Real-Time and High-Frequency Display Systems}
+
+\subsubsection{The Rendering Performance Hierarchy}
+
+Real-time data visualization has a hard performance hierarchy driven by the rendering technology's relationship to the GPU:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Technology} & \tableheader{Max Pts (60fps)} & \tableheader{DOM Nodes} & \tableheader{Notes} \\
+\midrule
+SVG & $\sim$1,000 & One per element & Retained mode; easiest to interact with \\
+HTML Canvas & $\sim$10,000 & Single element & Immediate mode; manual hit-testing \\
+WebGL & $1{,}000{,}000+$ & Single canvas & GPU-accelerated; shader pipeline \\
+WebGL + WASM & $10{,}000{,}000+$ & Single canvas & LTTB downsampling in WebAssembly \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+WebGL exposes the OpenGL ES 2.0/3.0 API to JavaScript via the browser. Data is loaded into GPU buffers (VBOs), and rendering is controlled by GLSL shader programs (vertex shader + fragment shader). For time-series visualization, the key optimization is delta-of-delta encoding (used by Prometheus's storage engine, borrowed from Facebook's Gorilla paper): storing differences between consecutive timestamps rather than absolute values dramatically reduces memory footprint for high-frequency data.
+
+\subsubsection{WebSocket Streaming Architecture}
+
+The real-time display pipeline from data source to screen:
+
+\begin{asciibox}
+SENSOR / SERVICE
+    |
+    v
+[TELEMETRY COLLECTOR]  (MQTT / OPC-UA / SNMP / direct UDP)
+    |
+    v
+[TIME-SERIES STORE]    (InfluxDB / Prometheus / RRDtool)
+    |
+    v
+[QUERY + STREAM SERVER]  (InfluxDB Flux / Grafana datasource)
+    |  WebSocket (RFC 6455) -- full-duplex, persistent TCP
+    v
+[BROWSER -- WebSocket API]
+    |
+    v
+[requestAnimationFrame loop]  (16.67ms budget at 60fps)
+    |
+    v
+[WebGL render pass]
+    |
+    v
+PIXELS ON SCREEN
+\end{asciibox}
+
+WebSocket (RFC 6455, 2011) provides full-duplex persistent TCP communication, replacing the earlier polling and long-polling patterns. The server can push data to the client at any time without being polled. This is essential for high-frequency displays where polling would introduce latency and server load. Server-Sent Events (SSE) provide a lighter-weight unidirectional alternative for server-to-client push.
+
+\subsubsection{Production Library Survey}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Library} & \tableheader{Renderer} & \tableheader{Strengths and Use Cases} \\
+\midrule
+D3.js + D3FC & SVG/Canvas/WebGL & Most flexible; data joins; 1M pts via WebGL extension \\
+deck.gl & WebGL & Geospatial; layered GPU rendering; 1M+ pts; Uber/OpenJS \\
+ECharts & Canvas/WebGL & Apache top-level; adaptive rendering; 60K+ GitHub stars \\
+Plotly.js & SVG/WebGL & 40+ chart types; scattergl/heatmapgl for large datasets \\
+Three.js & WebGL & 3D scenes; sensor visualization; waveform; games \\
+webgl-plot & WebGL & High-performance 2D waveforms; oscilloscope-style; Arduino/FPGA \\
+Chart.js & Canvas & Moderate datasets; easy API; not for HF data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Key optimization patterns for HF displays: LTTB (Largest-Triangle-Three-Buckets) downsampling reduces millions of points to visually representative samples; OffscreenCanvas + Web Workers offload rendering from the main thread; instanced rendering minimizes GPU draw calls; viewport-aware virtualization only renders visible data; Apache Arrow binary columnar format reduces serialization overhead.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection{Module 05 --- Telemetry Systems and Protocols}
+
+\subsubsection{CCSDS: The Space Telemetry Standard}
+
+The Consultative Committee for Space Data Systems (CCSDS), founded in 1982, defines the international standard protocol stack for spacecraft telemetry and command. Member agencies include NASA, ESA, JAXA, CNES, DLR, and 26+ others. The CCSDS protocol stack follows OSI layering:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Protocol} & \tableheader{CCSDS ID} & \tableheader{Function} \\
+\midrule
+Space Packet Protocol & 133.0-B-2 & Application-layer packets; APID identifies subsystem \\
+TM Space Data Link & 132.0-B-2 & Telemetry framing; virtual channels (multiplexing) \\
+AOS Space Data Link & 732.0-B-4 & Advanced Orbiting Systems; higher-rate missions \\
+TC Space Data Link & 231.0-B-4 & Telecommand uplink; COP-1 sequencing \\
+Proximity-1 & 211.0-B-5 & Short-range bi-directional links (Mars relay) \\
+CFDP & 727.0-B-5 & File delivery over unreliable space links \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The CCSDS telemetry architecture emerged in the ``early growth period of the space program'' and was designed for the constraints of early digital hardware. The introduction of concatenated convolutional and Reed-Solomon codes was described in the NASA technical literature as ``a major milestone'' that transformed telemetry by enabling packet telemetry and data compression. The Proximity-1 protocol, developed in early 2000 for short-range Mars relay links, has been deployed successfully on both NASA and ESA Mars missions.
+
+\subsubsection{NASA Goddard T\&C Systems}
+
+NASA's Goddard Engineering and Technology Directorate developed two flagship T\&C systems: ASIST (Advanced Spacecraft Integration and System Test) and ITOS (Integrated Test and Operations System). Both are capable of processing and encoding/decoding CCSDS-compliant data streams, supporting MIL-STD-1553, SpaceWire, and synchronous serial interfaces for hardware integration. ASIST pairs with the Front-End Data System (FEDS) for ground operations. ITOS performs frame synchronization, CRC, Reed-Solomon error correction, and pseudo-randomization without a dedicated front-end processor. Both systems logged hundreds of thousands of operational hours across NASA mission portfolio.
+
+\subsubsection{Industrial and IoT Telemetry}
+
+Outside aerospace, industrial telemetry uses a diverse protocol landscape:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{SNMP (Simple Network Management Protocol)} --- UDP-based; MIB-defined metrics; pull model; the MRTG/RRDtool origin protocol
+  \item \textbf{OPC-UA (OPC Unified Architecture)} --- Platform-independent industrial communication; replaces legacy OPC; supports subscriptions and history access
+  \item \textbf{MQTT (Message Queuing Telemetry Transport)} --- Lightweight pub/sub over TCP; designed for constrained IoT devices; quality-of-service levels 0/1/2
+  \item \textbf{Modbus TCP/RTU} --- Simple industrial serial protocol; de facto standard in PLCs and SCADA systems
+  \item \textbf{DNP3 (Distributed Network Protocol)} --- Utility/SCADA protocol; time-stamped events; integrity poll mechanism
+\end{itemize}
+
+AWS IoT Greengrass represents the edge-to-cloud telemetry pattern: devices generate data that Greengrass collects locally, then ingests into cloud services (AWS IoT Core / IoT SiteWise) for stream processing via Apache Flink and storage in time-series databases.
+
+%% ────────────────────────────────────────────────────────────────────────────
+\subsection{Module 06 --- Time-Series Databases: RRD and the Modern Stack}
+
+\subsubsection{RRDtool: The Circular Buffer Pioneer}
+
+RRDtool was written by Tobias Oetiker (ETH Zürich) and first released in 1999 under the GNU GPL, as an evolution of MRTG (Multi Router Traffic Grapher). The fundamental innovation is the Round Robin Archive: a circular buffer with a fixed pointer. Data is added along the perimeter of a conceptual circle; when the pointer returns to the start, it overwrites the oldest data. This design means an RRD file's storage footprint is determined at creation time and never grows, requiring zero ongoing database maintenance.
+
+\textbf{RRDtool Core Concepts:}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Data Source (DS)} --- The measured variable. DS types: \texttt{GAUGE} (value as-is, e.g.\ temperature), \texttt{COUNTER} (monotonically increasing, e.g.\ interface octets), \texttt{DERIVE} (rate of change, signed), \texttt{ABSOLUTE} (counter reset to zero after read)
+  \item \textbf{Round Robin Archive (RRA)} --- Stores timestamped values at a given consolidation resolution. Multiple RRAs in one RRD file enable multi-resolution storage (e.g., 1-minute data for 2 days, 5-minute for 2 weeks, hourly for 1 year)
+  \item \textbf{Consolidation Function (CF)} --- \texttt{AVERAGE}, \texttt{MAX}, \texttt{MIN}, \texttt{LAST} --- determines how multiple primary data points are combined into a consolidated data point
+  \item \textbf{Heartbeat} --- Maximum number of seconds between updates before the value is marked UNKNOWN
+  \item \textbf{xff (XFiles Factor)} --- Ratio of UNKNOWN primary data points still permitted when creating a consolidated point
+\end{itemize}
+
+RRDtool works with Unix timestamps (seconds since 1970-01-01 00:00:00 UTC) and requires data at predefined intervals. The three primary commands are \texttt{rrdtool create} (define the database), \texttt{rrdtool update} (add data), and \texttt{rrdtool graph} (render PNG time-series charts). Backend systems for Cacti, SmokePing, MRTG, Nagios, Zenoss, and collectd all use RRDtool as their storage engine.
+
+\subsubsection{The Modern TSDB Landscape}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Database} & \tableheader{Storage Engine} & \tableheader{Collection} & \tableheader{Query Language / Notes} \\
+\midrule
+RRDtool & Circular buffer (fixed-size RRA) & Pull/push & Proprietary rrdtool CLI; no ad-hoc queries \\
+InfluxDB 1.x & TSM-Tree (LSM variant) & Push & InfluxQL (SQL-like); Flux (v2.x) \\
+Prometheus & Custom TSDB (per-metric files) & Pull & PromQL; delta-of-delta encoding; Gorilla-style compression \\
+OpenTSDB & HBase (Hadoop) & Push & REST API only; no full query language; tag-based \\
+TimescaleDB & PostgreSQL extension & Push & Standard SQL + time-series functions; hypertables \\
+KairosDB & Cassandra & Push & REST API; modeled after OpenTSDB \\
+QuestDB & Column-oriented (SIMD-optimized) & Push & SQL + time-series extensions; very fast ingestion \\
+IoTDB (Apache) & TsFile column format & Push & SQL-like + IoTDB-specific; align-by-time support \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key Architecture Distinctions:}
+
+Prometheus uses a pull-based architecture (scrapes HTTP endpoints at intervals) while InfluxDB uses push. Prometheus's pull model gives the monitoring server control over ingestion rate, preventing it from being overwhelmed by burst data; it also makes service outage detection immediate (failed scrape = target down). InfluxDB's push model gives fine-grained control over what is sent and when, better suited for IoT edge devices and event-driven data.
+
+InfluxDB's TSM (Time-Structured Merge) Tree is optimized for time-series write patterns. Benchmark data from InfluxData (2018) shows InfluxDB outperforming OpenTSDB by 9$\times$ write throughput, 8$\times$ compression, and 7$\times$ query response time. OpenTSDB requires a full HBase/Hadoop stack which adds significant operational overhead.
+
+Prometheus uses delta-of-delta encoding (borrowed from Facebook's Gorilla TSDB paper): instead of storing absolute timestamps and values, it stores the differences between consecutive differences, achieving excellent compression for the smooth monotonic values typical of infrastructure metrics.
+
+TimescaleDB's relational model offers the advantage of standard SQL, making it accessible to teams with existing SQL expertise, and enabling joins with non-time-series relational data. Its hypertable abstraction partitions data by time automatically.
+
+\subsubsection{Consolidation and Downsampling: The Core TSDB Problem}
+
+Every time-series database must solve the same fundamental tension: high-frequency ingestion produces data volumes that cannot be stored indefinitely at full resolution, but downsampled data loses precision. RRDtool's solution (fixed-size circular buffers with explicit consolidation functions) is the most elegant and honest: it forces the designer to decide the resolution policy at database creation time, and the storage cost is a constant.
+
+Modern TSDBs address this with retention policies (InfluxDB), recording rules (Prometheus), and continuous queries. For display systems, LTTB (Largest-Triangle-Three-Buckets) provides a perceptually optimal downsampling algorithm: for a target number of displayed points, it selects the actual data points that maximize the visual area of the resulting polyline, preserving the visual ``shape'' of the signal more accurately than simple averaging.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Detail} & \tableheader{Type} \\
+\midrule
+CCSDS protocol security & Space data link security is a separate CCSDS working group (CCSDS 352.0-B-2); authenticated/encrypted uplink is mission-specific & GATE \\
+WebSocket security & RFC 6455 defines TLS upgrade (wss://); authentication is application-layer responsibility & ANNOTATE \\
+Time-series data retention & Regulatory requirements (FINRA/SEC for financial data) may require audit-compliant immutable storage, incompatible with RRDtool overwrite & GATE \\
+Telemetry data sensitivity & Industrial SCADA and OPC-UA data may contain critical infrastructure operational parameters & ANNOTATE \\
+Specification copyright & W3C and OMG specifications are freely available but copyright-protected; paraphrase rather than reproduce & ABSOLUTE \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{W3C / Standards Bodies}
+\begin{itemize}[noitemsep]
+  \item W3C. \textit{XML 1.0 Recommendation}. W3C, February 10, 1998. \url{https://www.w3.org/TR/1998/REC-xml-19980210}
+  \item W3C. \textit{XML Linking Language (XLink) Version 1.1}. W3C Recommendation, May 6, 2010. \url{https://www.w3.org/TR/xlink11/}
+  \item W3C. \textit{RDF 1.1 Concepts and Abstract Syntax}. W3C Recommendation, February 25, 2014. \url{https://www.w3.org/TR/rdf11-concepts/}
+  \item W3C. \textit{SGML, XML, and Structured Document Interchange}. W3C Activity Statement, 1996--2000. \url{https://www.w3.org/XML/Activity-19970610}
+  \item IETF. \textit{The WebSocket Protocol}. RFC 6455. December 2011.
+\end{itemize}
+
+\subsubsection{OMG / ISO Standards}
+\begin{itemize}[noitemsep]
+  \item Object Management Group. \textit{Unified Modeling Language 2.5.1}. OMG formal specification, December 2017. \url{https://www.omg.org/spec/UML/2.5.1/}
+  \item ISO. \textit{Standard Generalized Markup Language (SGML)}. ISO 8879:1986.
+  \item ISO / OMG. \textit{UML ISO/IEC 19501:2005}.
+\end{itemize}
+
+\subsubsection{NASA / CCSDS Technical Reports}
+\begin{itemize}[noitemsep]
+  \item CCSDS. \textit{Overview of Space Communications Protocols}. CCSDS 130.0-G-4. \url{https://ccsds.org/Pubs/130x0g4e1.pdf}
+  \item NASA NTRS. \textit{The CCSDS Next Generation Space Data Link Protocol (NGSLP)}. NTRS-20160008177, 2016.
+  \item NASA NTRS. \textit{Advanced Concepts for Telemetry Data Systems}. NTRS-19900041823.
+  \item NASA GSFC. \textit{Telemetry and Command (T\&C) Systems --- ASIST and ITOS}. ETD Capabilities, 2025. \url{https://etd.gsfc.nasa.gov/capabilities/capabilities-listing/telemetry-and-command-systems}
+  \item NASA JPL. \textit{Deep Space Network 102 Telemetry Services}. DSN 810-007-102.
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Professional Publications}
+\begin{itemize}[noitemsep]
+  \item PMC / NCBI. \textit{The SGML Standardization Framework and the Introduction of XML}. PMC1761852.
+  \item ACM CACM. \textit{Multipurpose Web Publishing: Using HTML, XML, and CSS}. Vol.\ 42, No.\ 10.
+  \item ACM. \textit{Real-Time Collaborative Scientific WebGL Visualization with WebSocket}. Web3D 2012. DOI: 10.1145/2338714.2338721
+  \item Springer. \textit{Hypertext, Hyperlinks, and the World Wide Web}. ISBN: 978-3-031-36033-6 Ch.\ 4.
+  \item IEEE. \textit{AI-Driven Design Pattern Recommendation System}. IEEE Xplore, 2025. DOI: 10.1109/...11308595
+  \item Springer. \textit{An Architectural Style for Data-Driven Systems (XPage)}. ICSR 2008. LNCS 5030.
+  \item Springer. \textit{The RML Ontology}. ISWC 2023. LNCS 14266. DOI: 10.1007/978-3-031-47243-5\_9
+  \item arxiv.org. \textit{Benchmarking Time Series Databases with IoTDB-Benchmark}. arXiv:1901.08304.
+\end{itemize}
+
+\subsubsection{Open Source / Professional Documentation}
+\begin{itemize}[noitemsep]
+  \item Oetiker, T. \textit{RRDtool --- The Time Series Database}. \url{https://oss.oetiker.ch/rrdtool/}
+  \item GitHub. \textit{oetiker/rrdtool-1.x}. \url{https://github.com/oetiker/rrdtool-1.x}
+  \item Prometheus. \textit{Comparison to Alternatives}. \url{https://prometheus.io/docs/introduction/comparison/}
+  \item InfluxData. \textit{InfluxDB vs.\ OpenTSDB Benchmark}. 2018. \url{https://www.influxdata.com/blog/influxdb-markedly-outperforms-opentsdb/}
+  \item AWS. \textit{Data-Driven Architectural Patterns}. AWS Whitepaper. \url{https://docs.aws.amazon.com/whitepapers/latest/build-e2e-data-driven-applications/}
+  \item AtomGraph. \textit{Data-Driven Software Architecture 2/3}. \url{https://atomgraph.com/blog/data-driven-software-architecture-2/}
+  \item Scott Logic. \textit{Rendering One Million Datapoints with D3 and WebGL}. 2020.
+  \item Cybergarden. \textit{7 Powerful Open-Source WebGL Data Visualization Tools for 2025}. 2025.
+\end{itemize}
+
+
+%% ════════════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%% ════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce six publication-quality research documents covering the complete technical stack from markup language specification through semantic hyperlinking, data-driven architecture, telemetry protocols, time-series storage, and real-time high-frequency display rendering. Each document must be self-contained, cross-referenced, and serve as authoritative reference material for the GSD ecosystem's Fox Infrastructure monitoring layer and GSD-OS dashboard system. The six documents collectively constitute the definitional foundation for any GSD component that reads, transmits, stores, or displays time-stamped data.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION (Sequential -- Haiku)
+  [Schema Agent]  shared data structures, citation schema, cross-ref index
+  [Template Agent] document template, color scheme, typography baseline
+
+WAVE 1: PARALLEL RESEARCH TRACKS (3 parallel tracks -- Sonnet/Opus)
+  Track A:  Module 01 (Markup) + Module 02 (Hyperlinking/Semantic)
+  Track B:  Module 03 (Data-Driven Arch) + Module 05 (Telemetry)
+  Track C:  Module 04 (Real-Time Display) + Module 06 (TSDB)
+  [CAPCOM gate after Wave 1 -- human review of draft documents]
+
+WAVE 2: SYNTHESIS (Sequential -- Opus)
+  [Integration Agent]  cross-module relationship document
+  [Synthesis Agent]    Through-line narrative + ecosystem implications
+  [ARCH Agent]         GSD component mapping table
+
+WAVE 3: PUBLICATION + VERIFICATION (Sequential -- Sonnet)
+  [Verify Agent]   source validation, numerical attribution check
+  [Pub Agent]      final PDF compilation + index.html
+  [Log Agent]      commit messages + milestone summary
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Section} \\
+\midrule
+D-01 & Module 01: Markup Standards & All 7 HTML versions + UML 8 versions in tables; DTD vs.\ XSD comparison & Module 01 Spec \\
+D-02 & Module 02: Hyperlinking + Semantic & XLink model diagram; RDF triple examples; knowledge graph use cases & Module 02 Spec \\
+D-03 & Module 03: Data-Driven Arch & Pattern comparison table; Lambda/Kappa/Mesh tradeoffs; GSD mapping & Module 03 Spec \\
+D-04 & Module 04: Real-Time Display & Rendering hierarchy table; WebSocket pipeline diagram; library survey & Module 04 Spec \\
+D-05 & Module 05: Telemetry & CCSDS stack table; ASIST/ITOS description; industrial protocol survey & Module 05 Spec \\
+D-06 & Module 06: TSDB & RRDtool concept documentation; 8-system TSDB comparison table & Module 06 Spec \\
+D-07 & Cross-Module Integration & All 6$\times$5=30 module pair relationships documented & Synthesis Spec \\
+D-08 & Mission Package PDF & This document; compiled to PDF via XeLaTeX; 3-stage structure & This document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Wave 0: Schema scaffold & None & Haiku & 2K \\
+Wave 0: Template & None & Haiku & 2K \\
+Track A: Module 01 & Wave 0 & Sonnet & 8K \\
+Track A: Module 02 & Wave 0 & Opus & 10K \\
+Track B: Module 03 & Wave 0 & Sonnet & 8K \\
+Track B: Module 05 & Wave 0 & Sonnet & 8K \\
+Track C: Module 04 & Wave 0 & Opus & 10K \\
+Track C: Module 06 & Wave 0 & Sonnet & 8K \\
+Wave 2: Integration & Wave 1 complete & Opus & 12K \\
+Wave 2: GSD Mapping & Wave 1 complete & Opus & 6K \\
+Wave 3: Verification & Wave 2 complete & Sonnet & 5K \\
+Wave 3: Publication & Wave 3 verify & Sonnet & 4K \\
+\midrule
+\rowcolor{lightprimary}
+\multicolumn{3}{l}{\textbf{Total Estimated}} & \textbf{$\sim$83K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas + templates \\
+1 & Research Tracks & 3-Parallel & Sonnet + Opus & 6 module draft documents \\
+{[}CAPCOM{]} & Human Gate & --- & --- & Scope confirm; sensitivity review \\
+2 & Synthesis & Sequential & Opus & Integration doc + GSD mapping \\
+3 & Publication & Sequential & Sonnet & Final PDFs + verification \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Citation schema definition & SCOUT (Haiku) & JSON schema: \{source, type, url, date, authority\} \\
+Cross-reference index & LOG (Haiku) & Module-to-module reference map \\
+LaTeX template & SCOUT (Haiku) & Base .tex with GSD tech color scheme \\
+Shared glossary & LOG (Haiku) & Terms: RRA, DS, CF, APID, XFF, VBO, LTTB, SPARQL \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Research Tracks}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track} & \tableheader{Modules} & \tableheader{Agents} & \tableheader{Parallel With} \\
+\midrule
+Track A & 01 (Markup) + 02 (Semantic) & EXEC-A + CRAFT-MARKUP & Tracks B and C \\
+Track B & 03 (Data-Driven) + 05 (Telemetry) & EXEC-B + CRAFT-DATA + CRAFT-TELEMETRY & Tracks A and C \\
+Track C & 04 (Real-Time) + 06 (TSDB) & EXEC-C + CRAFT-REALTIME + CRAFT-TSDB & Tracks A and B \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+\begin{itemize}[noitemsep]
+  \item Shared attribute: W3C/ISO/OMG authority framework computed once in Wave 0; inherited by all modules
+  \item Shared attribute: CCSDS protocol table rendered once; referenced by both Module 05 and Module 06
+  \item TTL window: All three Track agents launched within the 5-minute cache TTL window of the shared schema prompt
+  \item Token budgeting: Each track agent inherits the same base template and glossary; no re-derivation of shared context
+  \item Cross-module reference resolution deferred to Wave 2 to avoid early binding
+\end{itemize}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+Wave 0
+  SCHEMA-AGENT ─────────────────────────────────────┐
+  TEMPLATE-AGENT ───────────────────────────────────┤
+                                                     |
+Wave 1                                               |
+  TRACK-A [Mod01+02] ─────────┐                     v
+  TRACK-B [Mod03+05] ─────────┼──> [CAPCOM Gate] ──> Wave 2
+  TRACK-C [Mod04+06] ─────────┘
+
+Wave 2
+  INTEG-AGENT [cross-module] ──┐
+  ARCH-AGENT [GSD mapping] ────┼──> Wave 3
+  SYNTHESIS-AGENT [through-line]┘
+
+Wave 3
+  VERIFY ──> PUB ──> LOG ──> DONE
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-critical & 6 & Mandatory & BLOCK \\
+Core functionality & 22 & Required & BLOCK \\
+Integration & 9 & Required & BLOCK \\
+Edge cases & 7 & Best-effort & LOG \\
+\midrule
+\rowcolor{lightprimary}
+\multicolumn{2}{l}{\textbf{Total}} & & \textbf{44 tests} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to W3C/OMG/ISO/NASA/CCSDS/IEEE/ACM. Zero entertainment media or unattributed blogs \\
+SC-NUM & Numerical attribution & All performance figures (SVG 1K, WebGL 1M+, InfluxDB 9$\times$ etc.) attributed to specific source with date \\
+SC-ADV & No policy advocacy & Document presents protocol tradeoffs as engineering decisions, not advocacy for any vendor or organization \\
+SC-SEC & Security boundary & No operational SCADA system parameters, spacecraft APID registries, or mission-specific telemetry key material \\
+SC-VER & Version accuracy & All standard version numbers (UML 2.5.1, XML 1.0, HTML5) verified against authoritative specification documents \\
+SC-DATE & Publication dates & All specification publication dates cross-checked against W3C/OMG/ISO official records \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} \\
+\midrule
+CF-01 & SGML ISO 8879:1986 documented with core design principles (structure/content/presentation separation) \\
+CF-02 & HTML version timeline table covers all 7 versions (2.0 through HTML5) with authority column \\
+CF-03 & UML version table covers all 8 versions (1.0 through 2.5.1) with OMG/ISO authority \\
+CF-04 & XLink simple vs.\ extended link distinction clearly documented with arc model \\
+CF-05 & RDF triple model includes concrete subject-predicate-object example \\
+CF-06 & SPARQL described as the query language for RDF graphs with its W3C status noted \\
+CF-07 & OWL described as the ontology language layered on RDF \\
+CF-08 & Lambda vs.\ Kappa architecture tradeoffs documented with specific differentiators \\
+CF-09 & Data Mesh vs.\ Data Fabric distinction clearly documented \\
+CF-10 & SVG/Canvas/WebGL data point capacity thresholds cited (1K/10K/1M+) \\
+CF-11 & LTTB algorithm described as downsampling method for large datasets \\
+CF-12 & WebSocket RFC 6455 cited with bidirectional streaming architecture documented \\
+CF-13 & CCSDS Space Packet Protocol documented with APID identification function \\
+CF-14 & TM, AOS, TC, Proximity-1, and CFDP all named and described \\
+CF-15 & NASA Goddard ASIST and ITOS documented with CCSDS compliance \\
+CF-16 & SNMP, OPC-UA, MQTT, Modbus each described with primary use case \\
+CF-17 & RRDtool DS types (GAUGE/COUNTER/DERIVE/ABSOLUTE) all defined \\
+CF-18 & RRDtool consolidation functions (AVERAGE/MAX/MIN/LAST) all defined \\
+CF-19 & RRA circular buffer mechanism explained with heartbeat and xff \\
+CF-20 & TSDB comparison table covers $\geq$6 systems across $\geq$5 dimensions \\
+CF-21 & Prometheus pull vs.\ InfluxDB push architecture distinction documented \\
+CF-22 & Delta-of-delta encoding (Gorilla/Prometheus) described with compression rationale \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} \\
+\midrule
+IN-01 & Module 05 (Telemetry) $\rightarrow$ Module 06 (TSDB): document traces SNMP/MQTT feed into InfluxDB/RRDtool \\
+IN-02 & Module 06 (TSDB) $\rightarrow$ Module 04 (Display): document traces InfluxDB query $\rightarrow$ WebSocket $\rightarrow$ WebGL render \\
+IN-03 & Module 01 (Markup) $\rightarrow$ Module 02 (Semantic): document traces XML $\rightarrow$ RDF triples $\rightarrow$ knowledge graph \\
+IN-04 & Module 03 (Architecture) $\rightarrow$ Module 05 (Telemetry): document maps EDA pattern to MQTT pub/sub telemetry \\
+IN-05 & Module 02 (Semantic) $\rightarrow$ Module 03 (Architecture): document traces RDF as universal data model for data-driven arch \\
+IN-06 & GSD ecosystem mapping: all 6 modules linked to at least one GSD component (skill-creator, GSD-OS, Fox Infrastructure) \\
+IN-07 & Cross-module data consistency: CCSDS protocol versions consistent between Module 05 and any Module 06 reference \\
+IN-08 & Document self-containment: a reader with no prior knowledge can navigate all six modules without undefined terms \\
+IN-09 & Through-line coherence: the ``atom $\rightarrow$ gravity $\rightarrow$ meaning $\rightarrow$ flow $\rightarrow$ urgency $\rightarrow$ memory $\rightarrow$ presence'' chain verifiable from Stage 1 through Stage 2 content \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Markup genealogy chart correct & CF-01, CF-02, CF-03, SC-VER & Pending \\
+2. UML version timeline accurate & CF-03, SC-VER, SC-DATE & Pending \\
+3. XLink model correctly described & CF-04, SC-SRC & Pending \\
+4. RDF/SPARQL/OWL documented & CF-05, CF-06, CF-07, IN-03 & Pending \\
+5. Five+ data architecture patterns & CF-08, CF-09, IN-04, IN-05 & Pending \\
+6. Rendering performance thresholds & CF-10, CF-11, SC-NUM & Pending \\
+7. WebSocket architecture end-to-end & CF-12, IN-02 & Pending \\
+8. CCSDS full stack documented & CF-13, CF-14, CF-15, SC-SEC & Pending \\
+9. NASA T\&C systems described & CF-15, SC-SRC & Pending \\
+10. RRDtool fully documented & CF-17, CF-18, CF-19, IN-01 & Pending \\
+11. TSDB comparison matrix complete & CF-20, CF-21, CF-22, SC-NUM & Pending \\
+12. Cross-module relationships & IN-01, IN-02, IN-03, IN-06 & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent Name} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go; cross-cutting decisions \\
+ARCH & Architect & Cross-module structural decisions; GSD ecosystem integration \\
+TOPO & Topology & Agent team structure; mid-mission restructuring if needed \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency graph \\
+ANALYST & Pattern Analyst & Cross-module pattern detection; Amiga Principle verification \\
+RETRO & Retrospective & Post-wave lessons; quality degradation detection \\
+SCOUT & Research Agent & Source gathering; citation validation; gap-fill searches \\
+EXEC-A & Executor Alpha & Document production: Modules 01 and 02 (Track A) \\
+EXEC-B & Executor Bravo & Document production: Modules 03 and 05 (Track B) \\
+EXEC-C & Executor Charlie & Document production: Modules 04 and 06 (Track C) \\
+CRAFT-MARKUP & Markup Specialist & HTML/XML/CSS/SGML/UML authority; W3C/OMG genealogy \\
+CRAFT-DATA & Data Arch Specialist & Lambda/Kappa/Mesh/Fabric pattern analysis \\
+CRAFT-REALTIME & Display Specialist & WebGL/WebSocket/Canvas pipeline; rendering performance \\
+CRAFT-TELEMETRY & Telemetry Specialist & CCSDS protocol stack; NASA DSN; industrial protocols \\
+CRAFT-TSDB & TSDB Specialist & RRDtool internals; InfluxDB/Prometheus/TimescaleDB comparative \\
+SECURE & Security Warden & Safety boundary enforcement; SC-SEC gate \\
+CAPCOM & HITL Interface & Only channel crossing human-machine boundary; wave gate approval \\
+VERIFY & Verification & Source validation; SC tests; numerical attribution \\
+INTEG & Integration & Cross-module relationship validation; IN tests \\
+SURGEON & Health Monitor & Research quality degradation detection; context window budget \\
+BUDGET & Resource Manager & Token budget tracking per component; Wave 0 cache optimization \\
+LOG & Chronicle & Audit trail; commit messages; milestone summary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (6 modules, 22 roles) \\
+Parallel Tracks & 3 (Wave 1) \\
+Context Windows (estimated) & 12--18 across 4--6 sessions \\
+Total Tokens (estimated) & $\sim$83,000 \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Output & 6 module documents + 1 integration document \\
+Safety Gates & 6 mandatory-pass SC tests; 1 CAPCOM human gate \\
+Test Suite & 44 total tests (6 SC, 22 CF, 9 IN, 7 EC) \\
+Source Organizations & W3C, OMG, ISO, CCSDS, NASA, ACM, IEEE, IETF, Khronos \\
+Research Passes Completed & 5 per topic cluster (cold-start) \\
+Mission Package Generated & March 27, 2026 \\
+Ready for Handoff & Yes --- zero additional context required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+%% ── Closing Quote Box ────────────────────────────────────────────────────────
+\vspace{1.5em}
+\begin{quotebox}
+\begin{center}
+{\large\sffamily\bfseries\textcolor{primary}{``It's time for data to eat the software.''}}
+\\[0.6em]
+{\small\sffamily\textcolor{subtlegray}{--- AtomGraph, \textit{Data-Driven Software Architecture}, 2/3}}
+\\[1.2em]
+{\normalsize The through-line from SGML's atom to WebGL's pixel is not a list of standards.\\
+It is a single design decision made seven times: put the meaning in the connection,\\
+not the container. The spaces between carry the signal.\\[0.3em]
+\textit{Amiga Principle. Applied at civilizational scale.}}
+\end{center}
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local LLM + Claude Code — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #0277BD;
+      --tertiary: #00695C;
+      --accent: #1565C0;
+      --light-primary: #E8EAF6;
+      --light-secondary: #E1F5FE;
+      --bg: #F8F9FA;
+      --surface: #FFFFFF;
+      --border: #CFD8DC;
+      --text: #212121;
+      --muted: #546E7A;
+      --card-bg: #ECEFF1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #283593 50%, #0277BD 100%);
+      color: white;
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -10%;
+      width: 120%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.02) 40px,
+        rgba(255,255,255,0.02) 80px
+      );
+      pointer-events: none;
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-family: 'DM Sans', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: white;
+    }
+
+    header .subtitle {
+      font-size: 1.0rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      font-weight: 300;
+    }
+
+    .pipeline-badge {
+      font-family: 'DM Sans', monospace;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.08em;
+    }
+
+    .pipeline-badge span {
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--light-primary);
+    }
+
+    /* File Cards */
+    .files-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 580px) { .files-grid { grid-template-columns: 1fr; } }
+
+    .file-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .file-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26,35,126,0.15);
+      border-color: var(--secondary);
+    }
+
+    .file-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+    }
+
+    .file-card.pdf::before { background: var(--primary); }
+    .file-card.tex::before { background: var(--tertiary); }
+
+    .file-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .file-name {
+      font-family: 'DM Sans', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .file-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .file-size {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--tertiary);
+      font-family: 'DM Sans', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Contents Breakdown */
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 680px) { .stages-grid { grid-template-columns: 1fr; } }
+
+    .stage-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .stage-header {
+      padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .stage-1 .stage-header { background: var(--primary); }
+    .stage-2 .stage-header { background: var(--secondary); }
+    .stage-3 .stage-header { background: var(--tertiary); }
+
+    .stage-body {
+      padding: 1rem;
+      background: var(--surface);
+    }
+
+    .stage-body ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .stage-body li {
+      font-size: 0.82rem;
+      color: var(--text);
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #EEE;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .stage-body li:last-child { border-bottom: none; }
+
+    .stage-body li::before {
+      content: '›';
+      color: var(--muted);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05em;
+    }
+
+    /* Usage Instructions */
+    .steps-list {
+      counter-reset: steps;
+      list-style: none;
+      padding: 0;
+    }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .steps-list li:last-child { border-bottom: none; }
+
+    .steps-list li::before {
+      content: counter(steps);
+      background: var(--primary);
+      color: white;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .steps-list li strong {
+      font-weight: 600;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .steps-list li span { font-size: 0.9rem; color: var(--muted); }
+
+    /* Code block */
+    pre {
+      background: #1E1E2E;
+      color: #CDD6F4;
+      padding: 1.25rem;
+      border-radius: 6px;
+      font-family: 'DM Sans', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin-top: 0.75rem;
+    }
+
+    .cmd-comment { color: #6C7086; }
+    .cmd-key { color: #89DCEB; }
+
+    /* Quote */
+    blockquote {
+      border-left: 4px solid var(--primary);
+      background: var(--light-primary);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 6px 6px 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--primary);
+      line-height: 1.7;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-style: normal;
+      font-size: 0.78rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Meta row */
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .meta-item { flex: 1; min-width: 140px; }
+    .meta-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">GSD Research Mission Package</div>
+  <h1>Local Inference, LoRA Training,<br>and Claude Code Supercharging</h1>
+  <p class="subtitle">vLLM · Ollama · LM Studio · GPU Kernels · Fine-Tuning Pipelines · Running Your Own Intelligence on Your Own Hardware</p>
+  <div class="pipeline-badge">
+    <span>Vision</span> → <span>Research</span> → <span>Mission</span> · Full Pipeline Execution
+  </div>
+</header>
+
+<main>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">March 27, 2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Status</div>
+      <div class="meta-value">Ready for GSD Orchestrator</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Profile</div>
+      <div class="meta-value">Squadron (12 roles)</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Est. Tokens</div>
+      <div class="meta-value">~174K / 3–4 sessions</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Pages</div>
+      <div class="meta-value">29 pages</div>
+    </div>
+  </div>
+
+  <!-- Downloads -->
+  <section>
+    <h2>Mission Files</h2>
+    <div class="files-grid">
+      <a class="file-card pdf" href="local_llm_mission.pdf" download>
+        <div class="file-icon">📄</div>
+        <div class="file-name">local_llm_mission.pdf</div>
+        <div class="file-desc">Complete 29-page mission package — Vision Guide, Research Reference, and Mission Package with wave execution plan and crew manifest.</div>
+        <div class="file-size">PDF · 29 pages · Primary deliverable</div>
+      </a>
+      <a class="file-card tex" href="local_llm_mission.tex" download>
+        <div class="file-icon">🔧</div>
+        <div class="file-name">local_llm_mission.tex</div>
+        <div class="file-desc">Full XeLaTeX source. Recompile after edits with three xelatex passes. Modify tables, add modules, or update VRAM figures as the landscape evolves.</div>
+        <div class="file-size">XeLaTeX · DejaVu fonts · Editable</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Contents -->
+  <section>
+    <h2>Contents Breakdown</h2>
+    <div class="stages-grid">
+      <div class="stage-card stage-1">
+        <div class="stage-header">Stage 1 — Vision Guide</div>
+        <div class="stage-body">
+          <ul>
+            <li>Amiga Principle framing</li>
+            <li>5 problem statements</li>
+            <li>Local Intelligence Stack architecture diagram</li>
+            <li>5 research module definitions</li>
+            <li>Chipset YAML configuration</li>
+            <li>Scope boundaries</li>
+            <li>12 success criteria</li>
+            <li>Through-line: spaces between</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stage-card stage-2">
+        <div class="stage-header">Stage 2 — Research Reference</div>
+        <div class="stage-body">
+          <ul>
+            <li>vLLM, Ollama, LM Studio deep comparison</li>
+            <li>VRAM reference table (5 quant formats)</li>
+            <li>GPU hardware selection guide</li>
+            <li>Unsloth / Axolotl / Torchtune comparison</li>
+            <li>GSD-dialect dataset design</li>
+            <li>GGUF export pipeline</li>
+            <li>Claude Code integration recipes</li>
+            <li>Task routing architecture</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stage-card stage-3">
+        <div class="stage-header">Stage 3 — Mission Package</div>
+        <div class="stage-body">
+          <ul>
+            <li>10 deliverables with specs</li>
+            <li>Wave 0–3 execution plan</li>
+            <li>Parallel tracks (Inference + Training)</li>
+            <li>HITL CAPCOM gate</li>
+            <li>Token budget (~174K)</li>
+            <li>4 BLOCK-class safety tests</li>
+            <li>Verification matrix</li>
+            <li>12-role crew manifest</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage -->
+  <section>
+    <h2>How to Use This Package</h2>
+    <ol class="steps-list">
+      <li>
+        <div>
+          <strong>Read Stage 1</strong>
+          <span>Orient on the mission scope, chipset configuration, and success criteria before any execution.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Load into GSD Skill Creator</strong>
+          <span>Hand Stage 3 to the GSD orchestrator (Claude Code session). It contains everything needed to begin Wave 0 without returning to this document.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Execute Wave 0 first</strong>
+          <span>Paula (Haiku) generates shared schemas, VRAM calculator script, and dataset template. These shared artifacts reduce Wave 1 token spend.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Run Wave 1 parallel tracks</strong>
+          <span>Track A (Inference/GPU) and Track B (Training/Dataset) can run simultaneously. Bring both outputs to the CAPCOM gate.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>HITL gate: review dataset schema</strong>
+          <span>Before Opus begins synthesis, review the GSD-dialect dataset design. This is the highest-judgment artifact — it shapes the fine-tuned model's vocabulary.</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Wire Claude Code to local model</strong>
+          <span>Set ANTHROPIC_BASE_URL, confirm 25K+ context size, run a test task. Only then route real work to the local model.</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Quick Start -->
+  <section>
+    <h2>Quick Start: Claude Code → Ollama</h2>
+    <pre><code><span class="cmd-comment"># 1. Install Ollama and pull a coding model</span>
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen2.5-coder:32b      <span class="cmd-comment"># or your fine-tuned adapter</span>
+
+<span class="cmd-comment"># 2. Point Claude Code to your local model</span>
+<span class="cmd-key">export</span> ANTHROPIC_BASE_URL="http://localhost:11434"
+<span class="cmd-key">export</span> ANTHROPIC_API_KEY="ollama"
+<span class="cmd-key">echo</span> 'export ANTHROPIC_BASE_URL="http://localhost:11434"' >> ~/.bashrc
+
+<span class="cmd-comment"># 3. Launch Claude Code (it routes to local model)</span>
+claude
+
+<span class="cmd-comment"># 4. Verify: the model name in Claude Code should show</span>
+<span class="cmd-comment"># your local model, not claude-sonnet or claude-opus</span></code></pre>
+  </section>
+
+  <!-- Recompile -->
+  <section>
+    <h2>Recompiling the LaTeX Source</h2>
+    <pre><code><span class="cmd-comment"># Three passes required for TOC, cross-refs, and page count</span>
+xelatex -interaction=nonstopmode local_llm_mission.tex
+xelatex -interaction=nonstopmode local_llm_mission.tex
+xelatex -interaction=nonstopmode local_llm_mission.tex
+
+<span class="cmd-comment"># Requires: XeLaTeX + DejaVu fonts (Ubuntu: apt install texlive-xetex fonts-dejavu)</span></code></pre>
+  </section>
+
+  <!-- Quote -->
+  <section>
+    <blockquote>
+      "The Amiga's designers understood something that the industry forgot for twenty years: raw clock speed is less interesting than architectural leverage. When you train a local model on your own data, you are not trying to beat Claude. You are giving Claude a partner — one that speaks your language, knows your schemas, and costs nothing per token. The spaces between the API calls are where your productivity actually lives."
+      <cite>— GSD Ecosystem, Local Intelligence Stack Vision, March 2026</cite>
+    </blockquote>
+  </section>
+
+</main>
+
+<footer>
+  GSD Research Mission Package · Local LLM + Claude Code · March 27, 2026 · Squadron Profile · Ready for Orchestrator
+</footer>
+
+</body>
+</html>

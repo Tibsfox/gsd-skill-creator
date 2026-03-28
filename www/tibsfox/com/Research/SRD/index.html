@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSH &amp; Remote Desktop Protocols &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-srd">
+  <header>
+    <h1>SSH &amp; Remote Desktop Protocols</h1>
+    <div class="subtitle">SSH Transport &middot; SSH Application &middot; RDP &middot; VNC/RFB &middot; SPICE &middot; Security</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-ssh-transport">SSH Transport</a>
+      <a href="page.html?doc=02-ssh-application">SSH Application</a>
+      <a href="page.html?doc=03-rdp-protocol">RDP Protocol</a>
+      <a href="page.html?doc=04-vnc-spice">VNC &amp; SPICE</a>
+      <a href="page.html?doc=05-security-hardening">Security</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      A protocol specification is the most honest thing in computing. It does not have opinions,
+      does not defer to authority, does not explain itself in terms of what was intended. Security
+      is not a property you add to a protocol &mdash; it is either present in the wire format or it is not.
+      The spaces between are where protocols live.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">38</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">15+</span><span class="stat-label">RFCs Cited</span></div>
+      <div class="stat"><span class="stat-value">17</span><span class="stat-label">Fleet Roles</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-ssh-transport" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: SSH Core Transport</h3>
+        <div class="meta"><span class="tag tag-ssh">SSH</span> Track A &middot; Transport layer</div>
+        <p>SSH binary packet format (RFC 4253 &sect;6). Cipher negotiation, algorithm name-lists, key exchange (DH/ECDH/Curve25519). Protocol version exchange. Message type catalog. Block-size alignment and AEAD vs MAC-then-encrypt ordering.</p>
+      </a>
+
+      <a href="page.html?doc=02-ssh-application" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: SSH Application Layer</h3>
+        <div class="meta"><span class="tag tag-ssh">SSH</span> Track A &middot; Authentication &amp; channels</div>
+        <p>RFC 4252 authentication methods (publickey, password, keyboard-interactive). RFC 4254 connection protocol: channel lifecycle, flow control, port forwarding, X11 forwarding. SFTP subsystem message catalog.</p>
+      </a>
+
+      <a href="page.html?doc=03-rdp-protocol" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: RDP Protocol</h3>
+        <div class="meta"><span class="tag tag-rdp">RDP</span> Track B &middot; Remote desktop</div>
+        <p>MS-RDPBCGR wire format. Complete 10-phase connection sequence. Static virtual channels (max 31) and dynamic channel architecture. Graphics pipeline variants. NLA/CredSSP/TLS security modes.</p>
+      </a>
+
+      <a href="page.html?doc=04-vnc-spice" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: VNC/RFB &amp; SPICE</h3>
+        <div class="meta"><span class="tag tag-vnc">VNC</span> <span class="tag tag-spice">SPICE</span> Track C &middot; Display protocols</div>
+        <p>VNC/RFB RFC 6143: framebuffer model, encoding registry (Raw, CopyRect, Hextile, Tight, ZRLE), security type registry. SPICE multi-channel architecture: QXL device model, TLS/SASL auth. X11 forwarding and NX/XPRA.</p>
+      </a>
+
+      <a href="page.html?doc=05-security-hardening" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Security &amp; Hardening</h3>
+        <div class="meta"><span class="tag tag-sec">Security</span> Synthesis &middot; Cross-protocol</div>
+        <p>Protocol security comparison: SSH vs RDP vs VNC vs SPICE. CVE landscape (BlueKeep, DejaBlue, SSH historical). Hardening guidance per IETF RFC 9142 and NIST SP 800-series. Cipher suite recommendations.</p>
+      </a>
+
+      <a href="page.html?doc=06-implementation-guide" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Implementation Guide</h3>
+        <div class="meta"><span class="tag tag-app">Guide</span> Synthesis &middot; Practical reference</div>
+        <p>Protocol selection decision matrix. Performance characteristics and network overhead comparison. GSD Mesh applicability notes. SSH tunneling for mesh communications. Deployment architecture patterns.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>SSH binary packet format</td><td>M1, M2, M5</td><td>TCP, PNP, RFC</td></tr>
+        <tr><td>Key exchange (DH/ECDH)</td><td>M1, M5</td><td>FEC, TCP, RFC</td></tr>
+        <tr><td>SSH authentication methods</td><td>M2, M5</td><td>SYS, K8S</td></tr>
+        <tr><td>RDP 10-phase connection</td><td>M3, M5, M6</td><td>TCP, PNP</td></tr>
+        <tr><td>VNC/RFB encoding registry</td><td>M4, M6</td><td>MDS, CMH</td></tr>
+        <tr><td>SPICE channel architecture</td><td>M4, M5</td><td>K8S, SYS</td></tr>
+        <tr><td>CVE landscape</td><td>M5</td><td>SYS, RFC</td></tr>
+        <tr><td>Cipher suite recommendations</td><td>M1, M5</td><td>FEC, RFC</td></tr>
+        <tr><td>Port forwarding / tunneling</td><td>M2, M6</td><td>TCP, PNP, SYS</td></tr>
+        <tr><td>TLS/CredSSP security</td><td>M3, M5</td><td>TCP, DNS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+REMOTE ACCESS PROTOCOL LANDSCAPE -- DOMAIN MAP
+===============================================================
+
+  SSH FAMILY (IETF RFCs)            REMOTE DESKTOP FAMILY
+  ---------------------------       ---------------------------
+  TCP Port 22                       TCP Port 3389 (RDP)
+                                    TCP Port 5900 (VNC/RFB)
+
+  +-------------------+             +--------------------+
+  | SSH Connection    |             | SPICE (multi-TCP)  |
+  | Protocol RFC 4254 |             | QXL/VDI interface  |
+  +-------------------+             +--------------------+
+  | SSH Auth          |             | RDP / MS-RDPBCGR   |
+  | Protocol RFC 4252 |             | T.120 / MCS / GCC  |
+  +-------------------+             +--------------------+
+  | SSH Transport     |             | VNC / RFB RFC 6143 |
+  | Protocol RFC 4253 |             | Framebuffer model  |
+  +-------------------+             +--------------------+
+  | TCP / IP          |             | TCP / IP           |
+  +-------------------+             +--------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  Track A (SSH):
+  [M1: SSH Transport] --------&gt; [M2: SSH Application]
+       |                              |
+       v                              v
+  Track B:                     Track C:
+  [M3: RDP Protocol]          [M4: VNC &amp; SPICE]
+       |                              |
+       +----------- + ---------------+
+                     |
+                     v
+          [M5: Security &amp; Hardening]
+                     |
+                     v
+          [M6: Implementation Guide]
+    </pre>
+  </main>
+
+  <footer>
+    <p>SSH &amp; Remote Desktop Protocols &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

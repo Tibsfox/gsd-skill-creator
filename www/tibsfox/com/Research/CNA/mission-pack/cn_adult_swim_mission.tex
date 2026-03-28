@@ -1,0 +1,1045 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%% ── COLOR SCHEME: History/Media domain ──────────────────────────────────────
+\definecolor{primary}{HTML}{4A148C}       % Deep purple — creative gravity
+\definecolor{secondary}{HTML}{1565C0}     % Bold blue — nostalgia signal
+\definecolor{tertiary}{HTML}{4E342E}      % Warm brown — archival depth
+\definecolor{accent}{HTML}{7B1FA2}        % Purple accent
+\definecolor{lightprimary}{HTML}{F3E5F5}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+%% ── SECTION FORMATTING ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+%% ── CUSTOM ENVIRONMENTS ────────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable, skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+%% ── HEADERS AND FOOTERS ───────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Cartoon Network \& Adult Swim}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% ── HYPERLINKS ────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Cartoon Network and Adult Swim -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+%% ═══════════════════════════════════════════════════════════════════════════════
+%% TITLE PAGE
+%% ═══════════════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Cartoon Network\\[0.3em]\& Adult Swim}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{History, Creative Eras, Cultural Impact \& Current Crisis}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 6--8 context windows across 2--3 sessions}}
+\end{center}
+\newpage
+
+%% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════════
+%% STAGE 1 — VISION DOCUMENT
+%% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Cartoon Network \& Adult Swim --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Cold-Start Research Complete / Ready for Mission Execution}
+\metafield{Domain:}{American Broadcast/Cable Television History --- Animation Studies}
+\metafield{Depends On:}{Seattle Hip-Hop Cultural Module Series (parallel media history thread)}
+\metafield{Context:}{Deep Research Mission commissioned by Tibsfox / Miles Tiberius Foxglove}
+
+\subsection{Vision}
+
+There is a kind of architecture that appears when brilliant people are left alone in a rundown building. It happened in Atlanta, Georgia in the early 1990s, when Ted Turner's library of cartoon properties found an unlikely home on the first 24-hour animation cable channel. It happened again in 2001, when Mike Lazzo moved his Adult Swim operation across the street from Turner's main campus specifically so they wouldn't be bothered. Cartoon Network and Adult Swim are a two-act story of the \emph{Amiga Principle} playing out across thirty years of television history: remarkable outcomes achieved not through massive resources, but through architectural clarity, creative leverage, and the conviction that a narrow lane, owned completely, beats a wide lane owned poorly.
+
+Cartoon Network's founding premise was a compressed jewel of strategic thinking. Ted Turner had spent the 1980s assembling an animation library of extraordinary depth --- Hanna-Barbera's 3,000 half-hour catalog, the MGM cartoon archive including Tom and Jerry, and the pre-1948 Warner Bros. Looney Tunes library. He hadn't built a production machine. He'd built a \emph{library}. And from a library, if you have the conviction to run it 24 hours a day in a dedicated channel, you have the foundation for something new. The model was CNN: single genre, all in, no compromise. What Turner and founding president Betty Cohen understood intuitively is what the GSD ecosystem calls the ``spaces between'' --- the value that lives not in individual properties but in the connections between them, the context that makes a classic cartoon mean something to a new generation.
+
+The Adult Swim chapter is its own kind of study. Williams Street, the Atlanta production studio that became Adult Swim's creative engine, operated like a pirate ship. Small budgets, repurposed Hanna-Barbera character designs, staff executives writing scripts on their own time. Space Ghost Coast to Coast --- Cartoon Network's first original series --- was produced by executives who volunteered their evenings. This low-budget ethic wasn't a constraint; it was a \emph{permission structure}. When you're making something experimental with almost no money, you have nothing to lose. The experimental freedom that defines Adult Swim's DNA emerged directly from its financial reality. The absurdist, surrealist, improvised quality of Adult Swim at its peak is the sound of creative people with freedom and no resources.
+
+The third chapter, still being written, is one of institutional dissolution. Warner Bros. Discovery's post-merger content purges, layoffs, and the August 2024 shutdown of CartoonNetwork.com represent the threat that faces any creative institution once it becomes an asset to be managed rather than an architecture to be maintained. Understanding Cartoon Network and Adult Swim is, ultimately, an exercise in understanding how creative ecosystems are built --- and how they die.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The Library Leverage Problem:} How does a cable network transform a passive archive of legacy content into a living creative institution? Cartoon Network's evolution from a 1992 library outlet to the birthplace of landmark original properties (Dexter's Laboratory, Powerpuff Girls, Samurai Jack, Adventure Time) represents one of the most successful cases of library-to-creation transformation in television history.
+
+  \item \textbf{The Adult Swim Paradox:} How does a nighttime programming block on a children's cable network become the dominant force in American adult animation for two decades? The structural conditions that enabled Adult Swim's creative culture --- low budgets, physical separation from corporate, a showrunner with Dadaist instincts --- are almost impossible to replicate and are antithetical to how media conglomerates operate.
+
+  \item \textbf{The Anime Bridge Problem:} American television had largely failed to cultivate a mainstream anime audience before Toonami (1997) and Adult Swim's Cowboy Bebop debut (2001). The mechanism by which these programming blocks shifted anime from niche import to core component of American pop culture is a case study in cultural gatekeeping and its subversion.
+
+  \item \textbf{The Serialization Shift:} The 2010s Cartoon Network renaissance (Adventure Time, Regular Show, Steven Universe) represented a fundamental paradigm shift in American children's animation from episodic to serialized storytelling. This shift was not industry-driven --- it emerged from individual creators who were given unusual latitude and whose shows proved the commercial viability of narrative depth in kids' programming.
+
+  \item \textbf{The Institutional Death Problem:} The Warner Bros. Discovery era (2022--present) represents a systematic dismantling of the architectural conditions that made Cartoon Network and Adult Swim exceptional. Content removal from streaming, layoffs, the merger of Cartoon Network Studios with Warner Bros. Animation, and the shutdown of CartoonNetwork.com collectively constitute a case study in how corporate consolidation destroys creative infrastructure.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{quotebox}
+\textbf{The Single-Genre Leverage Model:} A dedicated creative channel --- when genuinely committed to its lane and granted structural autonomy --- can achieve cultural outcomes far beyond what its budget or corporate position would predict. The key variable is not resources but architectural coherence: who controls the creative decisions, how isolated they are from commercial pressure, and whether the institutional culture rewards genuine experimentation.
+\end{quotebox}
+
+\subsubsection{Domain Architecture Map}
+
+\begin{asciibox}
+CARTOON NETWORK / ADULT SWIM ECOSYSTEM
+========================================
+
+  CORPORATE LAYER
+  ┌──────────────────────────────────────────────────────┐
+  │  Turner Broadcasting (1992-1996)                     │
+  │    → Time Warner (1996-2018)                         │
+  │    → AT&T WarnerMedia (2018-2022)                    │
+  │    → Warner Bros. Discovery (2022-present)           │
+  └──────────────────────────────────────────────────────┘
+          │
+  CHANNEL LAYER
+  ┌──────────────────────────────────────────────────────┐
+  │  Cartoon Network (launched Oct 1, 1992)              │
+  │  ├── 6am-6pm: Children's programming                 │
+  │  └── 6pm-6am: [adult swim] block (2001-present)      │
+  └──────────────────────────────────────────────────────┘
+          │                           │
+  KIDS TRACK                   ADULT TRACK
+  ┌──────────────┐              ┌──────────────────────┐
+  │ Classic Era  │              │ Williams Street /    │
+  │ 1992-2004    │              │ Adult Swim           │
+  │              │              │ (Mike Lazzo era)     │
+  │ Golden Age   │              │                      │
+  │ 1996-2005    │              │ Space Ghost → ATHF   │
+  │              │              │ → Rick & Morty       │
+  │ Renaissance  │              │                      │
+  │ 2010-2018    │              │ Toonami anime block  │
+  └──────────────┘              └──────────────────────┘
+
+  PRODUCTION ENTITIES
+  ┌──────────────────────────────────────────────────────┐
+  │ Cartoon Network Studios (1994 → merged 2022)         │
+  │ Williams Street Productions (Adult Swim)             │
+  │ Hanna-Barbera (acquired 1991 → Studios Europe)       │
+  │ Warner Bros. Animation (absorbed CNS 2022)           │
+  └──────────────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+===================
+
+  [M1: Foundations]          [M2: Kids' Programming]
+  Corporate genealogy         Classic Era / Golden Age /
+  Library acquisition         2010s Renaissance
+  Betty Cohen era             Cartoon Cartoons / What A Cartoon!
+  Channel launch strategy     Adventure Time / Steven Universe
+         │                           │
+         └──────────┬────────────────┘
+                    │ Cross-module: creator pipelines,
+                    │ library-to-original transitions
+         ┌──────────┴────────────────┐
+         │                           │
+  [M3: Adult Swim]           [M4: Anime & Toonami]
+  Williams Street culture     Toonami founding (1997)
+  Mike Lazzo / pirate ship    Cowboy Bebop Adult Swim debut
+  Space Ghost → ATHF          Dragon Ball Z cultural impact
+  Rick & Morty era            US anime market development
+         │                           │
+         └──────────┬────────────────┘
+                    │ Cross-module: Adult Swim / Toonami
+                    │ symbiosis; anime in adult programming
+                    │
+  [M5: Corporate Dissolution / Current Crisis]
+  WBD merger fallout, layoffs, content removal
+  CartoonNetwork.com shutdown (Aug 2024)
+  CNS merger with WBA (Oct 2022)
+  Institutional legacy and preservation questions
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Foundations and Corporate Genealogy (1986--2001)}
+
+This module covers Ted Turner's animation library acquisition strategy (MGM/UA library 1986, Hanna-Barbera 1991), the founding philosophy and launch of Cartoon Network on October 1, 1992, Betty Cohen's tenure as founding president, the Turner-Time Warner merger (1996) and its creative implications, and the early programming strategy of building from a library toward original content. The key question is how a passive archive became an active creative institution.
+
+\subsubsection{Module 2: Kids' Programming Eras (1992--2023)}
+
+This module covers four distinct eras of children's programming: the Classic Era (1992--1995, library-driven), the Golden Age (1996--2005, Cartoon Cartoons and What A Cartoon! originals), the Dark Age (2006--2009, live-action CN Real experiment), and the 2010s Renaissance (Adventure Time, Regular Show, Steven Universe). The module emphasizes the What A Cartoon! / Cartoon Cartoons pipeline as a structural innovation for talent discovery and the serialization shift of the 2010s as a paradigm change in American children's animation.
+
+\subsubsection{Module 3: Adult Swim Culture and Programming (2001--present)}
+
+This module covers the founding and structure of Williams Street Productions, Mike Lazzo's creative philosophy, the September 2, 2001 launch with Home Movies, Aqua Teen Hunger Force, Sealab 2021, Harvey Birdman, and The Brak Show, Adult Swim's separation as a distinct Nielsen-rated entity (2005), the Family Guy and Futurama rescues (2003), the Rick and Morty era (2013--present) and its cultural and merchandising impact, and the Justin Roiland parting (2023).
+
+\subsubsection{Module 4: Toonami, Anime, and the Cultural Bridge (1997--present)}
+
+This module covers Toonami's March 17, 1997 founding as a weekday afternoon action block, its evolution into the primary US cable home for dubbed anime, Cowboy Bebop's debut on Adult Swim at midnight on September 2, 2001, Dragon Ball Z's role in mainstreaming anime, Toonami's 2008 cancellation and 2012 revival on Adult Swim, and Toonami's current position commissioning original anime productions (Fena: Pirate Princess, Blade Runner: Black Lotus, Rick and Morty: The Anime).
+
+\subsubsection{Module 5: Corporate Dissolution and Current Crisis (2022--2026)}
+
+This module covers the Discovery-WarnerMedia merger (April 2022), David Zaslav's cost-cutting strategy, the October 2022 layoffs and CNS/WBA merger announcement, the removal of Infinity Train, Summer Camp Island, and other shows from streaming (2022--2023), the August 2024 shutdown of CartoonNetwork.com, ongoing 2025 layoffs at Atlanta studios, and the existential questions facing both channels. This module also covers Cartoon Network's reduced broadcast window (now 6am--5pm) and Adult Swim's expansion (5pm--6am).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:  # Orchestration / DMA / Context
+    model: claude-opus-4
+    role: FLIGHT
+    responsibilities:
+      - Mission direction and go/no-go gates
+      - Cross-module synthesis decisions
+      - Cultural sensitivity review (representation analysis)
+      - Final integration of five module outputs
+
+  denise:  # Display / Output Rendering
+    model: claude-sonnet-4
+    role: EXEC (x2)
+    responsibilities:
+      - Module document production (M1+M2 and M3+M4 in parallel)
+      - Source compilation and verification
+      - Structured content assembly
+
+  paula:   # Audio / I-O / Anticipatory
+    model: claude-haiku-4
+    role: LOG + BUDGET
+    responsibilities:
+      - Shared schema initialization
+      - Source index scaffolding
+      - Token budget tracking
+      - Audit trail and commit messages
+
+craft_agents:
+  CRAFT-HIST:  # Corporate genealogy and media history
+    model: claude-opus-4
+    assigned_modules: [M1, M5]
+
+  CRAFT-PROG:  # Animation programming and creative culture
+    model: claude-sonnet-4
+    assigned_modules: [M2, M3]
+
+  CRAFT-CULT:  # Cultural studies, anime, industry analysis
+    model: claude-sonnet-4
+    assigned_modules: [M4]
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Full corporate genealogy: Turner → Time Warner → AOL-TW → AT\&T WarnerMedia → Warner Bros. Discovery
+  \item All five programming eras of Cartoon Network (Classic, Golden Age, Dark Age, Renaissance, WBD era)
+  \item Adult Swim founding culture, key shows, and Mike Lazzo's creative philosophy
+  \item Toonami's complete history including both the original CN block and the Adult Swim revival
+  \item The Cartoon Cartoons / What A Cartoon! pipeline as structural innovation
+  \item The 2010s serialization paradigm shift (Adventure Time, Regular Show, Steven Universe)
+  \item Rick and Morty as cultural phenomenon and merchandising case study
+  \item The WBD content purge and institutional dissolution analysis
+  \item Representation milestones (Steven Universe as first non-binary creator; LGBTQ+ visibility)
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}
+  \item International feeds and non-US Cartoon Network markets (Latin America, Europe, Asia)
+  \item Detailed analysis of individual show production histories (covered only at summary level)
+  \item Nickelodeon and Disney Channel as competitive analysis (referenced comparatively only)
+  \item Streaming platform strategy for Max (Adult Swim's current streaming home)
+  \item Merchandise and consumer products financials beyond narrative context
+  \item Boomerang channel detailed history
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Corporate timeline accurately maps all ownership transitions with dates, financial details, and creative implications from 1986 to 2026
+  \item The What A Cartoon! / Cartoon Cartoons pipeline is documented as a structural model, identifying the six series it produced and the talent pipelines that followed
+  \item Adult Swim's founding culture is captured through primary-source narrative (oral histories, creator statements), including the ``pirate ship'' dynamic and Williams Street's physical separation
+  \item Toonami's two-phase history (CN 1997--2008, Adult Swim 2012--present) is fully documented including key programming milestones and the Crunchyroll partnership
+  \item The anime bridge mechanism is clearly articulated: specific shows, specific audiences, specific cultural thresholds crossed by Toonami and Adult Swim's initial anime programming
+  \item The 2010s renaissance is characterized through the lens of the serialization shift, with Adventure Time, Regular Show, and Steven Universe as primary case studies
+  \item The WBD dissolution chapter documents specific content removals, specific layoff waves, and the structural decision to merge CNS with WBA, with timeline
+  \item Rick and Morty's arc from Adult Swim oddity to top-rated cable comedy franchise is documented including the Roiland separation and franchise continuation
+  \item All five modules have at least three quantitative data points (viewership figures, acquisition costs, household reach, episode counts) with sources
+  \item Cross-module creator lineages are traced (e.g., Tartakovsky and McCracken from What A Cartoon! through later careers; Adventure Time alumni who became showrunners elsewhere)
+  \item The document is self-contained: a reader unfamiliar with CN/Adult Swim history can achieve full contextual understanding without external references
+  \item Safety and sensitivity considerations are addressed for representation analysis and any potentially contested historical claims
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+Seattle Hip-Hop Cultural Module (05a/05b) & Parallel media history; Toonami's Seattle connection; hip-hop influence on Adult Swim programming culture & Parallel track \\
+Deep Audio Analyzer Mission & Adult Swim's music-forward bumper culture; Toonami's iconic music identity & Informs \\
+GSD College of Knowledge & Animation history curriculum seed material & Feeds into \\
+The Space Between & Spaces-between philosophy as lens for CN/AS creative architecture analysis & Philosophical frame \\
+Fox Infrastructure Group & Pacific Rim media distribution parallels & Tangential \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Amiga computer was remarkable not because it had the most powerful chip, but because its custom chipsets --- Agnus, Denise, and Paula --- divided labor with extraordinary architectural precision. Each chip knew exactly what it was for. Cartoon Network worked the same way in its creative prime. Betty Cohen knew the library was the Agnus: it held the context, managed the attention budget, kept 24 hours of programming alive when nothing else could. The What A Cartoon! program was the Denise: it rendered new realities from available inputs, took independent animators and produced six landmark series from 48 short experiments. Adult Swim's Williams Street was the Paula: anticipatory, listening for the signal in noise, converting low-budget improvisation into cultural transmission.
+
+What the GSD ecosystem understands as the ``spaces between'' finds its television expression in Adult Swim's bumper cards --- those minimalist black-on-white Helvetica text cards that appeared between shows, often non-sequiturs, often philosophical, always strange. They were the connective tissue. They were the thing that made 2am on Cartoon Network feel like a unified experience rather than a random playlist. The bumpers were Adult Swim's architecture made visible: meaning lives in the spaces between the nodes, not the nodes themselves.
+
+The WBD era is instructive precisely because it dismantles the architecture while keeping the nodes. The shows still exist (mostly). The channel still broadcasts. But CartoonNetwork.com --- the connective tissue between generations of fans and the shows that defined them --- is gone. The Williams Street creative culture that required physical separation from corporate is gone. The Cartoon Network Studios development team that specialized in original voices is merged into a franchise-delivery operation. You can remove the spaces between and still have nodes. But you no longer have architecture.
+
+\newpage
+%% ═══════════════════════════════════════════════════════════════════════════════
+%% STAGE 2 — RESEARCH REFERENCE
+%% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Cartoon Network \& Adult Swim --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from targeted web research conducted March 27, 2026. Primary sources include Wikipedia (History of Cartoon Network), Britannica, The Inverse oral history of Adult Swim's 20th anniversary, Deadline Hollywood coverage, industry press (IndieWire, Variety, The Wrap), and official WBD press releases. Entertainment media sources are used only for historical record and are not cited for factual claims where authoritative sources exist.
+
+Key source organizations and publications:
+\begin{itemize}
+  \item \textbf{Wikipedia / Grokipedia}: History of Cartoon Network, History of Adult Swim (used as indexed reference, verified against primary sources)
+  \item \textbf{Encyclopaedia Britannica}: Cartoon Network entry (authoritative overview)
+  \item \textbf{Inverse.com}: 20th Anniversary Oral History of Adult Swim (primary-source creator accounts)
+  \item \textbf{Deadline Hollywood}: Creator interviews (Tartakovsky, McCracken, Sugar at Annecy 2025)
+  \item \textbf{WBD Pressroom (press.wbd.com)}: Official announcements (Rick and Morty greenlight, anime commissions)
+  \item \textbf{IndieWire, The Wrap, Slate}: Industry coverage of WBD restructuring
+  \item \textbf{Cinemablend}: Toonami influence on US anime market
+  \item \textbf{Animation World Network}: Industry trade coverage
+\end{itemize}
+
+\subsection{Module 1: Foundations and Corporate Genealogy}
+
+\subsubsection{The Library Acquisition Strategy (1986--1991)}
+
+Ted Turner's animation empire was built through two pivotal acquisitions. In March 1986, Turner Broadcasting System purchased MGM/UA from Kirk Kerkorian for approximately \$1.5 billion. Financial pressure forced Turner to sell back the MGM name, studio, and production assets within 75 days, but he retained the entire pre-May 1986 MGM film and animation library. This included the MGM cartoon archive (Tom and Jerry, Droopy, and other theatrical shorts totaling over 700 cartoons) and, through United Artists' earlier acquisition of Associated Artists Productions, the pre-1948 Warner Bros. Looney Tunes and Merrie Melodies library. Turner Entertainment Co. was formed to hold these assets.
+
+In 1991, Turner acquired Hanna-Barbera Productions for \$320 million, outbidding MCA Inc. (Universal Studios) and Hallmark Cards. Hanna-Barbera's catalog comprised over 3,000 half-hour episodes of classic series --- The Flintstones, Yogi Bear, The Jetsons, Scooby-Doo, and hundreds of others --- representing more than 1,500 hours of programming. Combined with the MGM and Warner libraries, Turner now held a self-sustaining animation archive capable of supporting a 24-hour dedicated channel without dependence on external licensing.
+
+\subsubsection{Channel Launch and Early Strategy (1992--1995)}
+
+On February 18, 1992, Turner Broadcasting announced plans for Cartoon Network. Betty Cohen, previously Senior Vice President and General Manager at Turner Network Television, was appointed founding president. The Cartoon Network, Inc. was formally incorporated March 12, 1992. The channel launched October 1, 1992 at noon Eastern Time with the 1946 Looney Tunes short ``The Great Piggy Bank Robbery'' as its first broadcast. At launch, the channel reached approximately 2 million households through 233 cable systems.
+
+Turner modeled Cartoon Network explicitly on CNN: single genre, 24 hours, no compromise. Internal research at Turner found that 46\% of cable cartoon viewers were children and 44\% were adults, influencing a balanced approach. The channel initially consisted entirely of library content: Hanna-Barbera series, MGM cartoon shorts, and pre-1948 Looney Tunes. Original programming would not begin until 1994--1995.
+
+The first international feed launched April 30, 1993 in Latin America, followed by Cartoon Network Europe on September 17, 1993. By 1994, the channel ranked as the fifth most widely distributed US cable network.
+
+\subsubsection{The Turner-Time Warner Merger and Its Creative Implications (1996)}
+
+On October 10, 1996, Turner Broadcasting System merged with Time Warner. This had immediate creative implications: Warner Bros. Animation's post-1950 catalog (including the full Looney Tunes library beyond the pre-1948 material Turner had previously held) was now available to Cartoon Network. The merger also coincided with Cartoon Network Studios being formally established (originally founded 1994 as part of Hanna-Barbera) and the transition from library-only to active original production. The What A Cartoon! series had debuted in 1995, seeding the original programming pipeline that would define the Golden Age.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Year} & \tableheader{Event} & \tableheader{Creative Impact} & \tableheader{Financial Detail} \\
+\midrule
+1986 & MGM/UA acquisition & Pre-1948 WB Looney Tunes; Tom \& Jerry library secured & \$1.5B purchase; partial resale \\
+1991 & Hanna-Barbera acquisition & 3,000+ episodes; core CN library & \$320M \\
+1992 & CN channel launch & First 24-hr animation channel & 2M households at launch \\
+1994 & CN Studios founded & Original production capability & Internal investment \\
+1995 & What A Cartoon! debuts & Pilot incubator for originals & 48 shorts greenlit \\
+1996 & Turner-TW merger & Full WB library access & \$7.5B merger \\
+2001 & Adult Swim launches & Adult animation block born & Internal CN investment \\
+2005 & AS separate Nielsen entity & AS/CN split for ratings & Industry recognition \\
+2022 & WBD merger; CNS/WBA merge & Institutional restructuring & \$43B AT\&T/Discovery deal \\
+2024 & CartoonNetwork.com shutdown & Digital presence eliminated & Cost-cutting measure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Kids' Programming Eras}
+
+\subsubsection{The What A Cartoon! Pipeline (1994--1999)}
+
+Cartoon Network Studios was founded in 1994. Fred Seibert, who had previously guided Hanna-Barbera and played a driving role in Nickelodeon's original animation, proposed an animation anthology model: 48 short cartoon pilots produced by independent animators, giving the network 48 independent chances to discover a franchise. The pitch was expensive per-unit but produced extraordinary value: of the 48 shorts, six became full series.
+
+What A Cartoon! (also called World Premiere Toons) debuted 1995. The most significant outputs were:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Show} & \tableheader{Creator} & \tableheader{Significance} & \tableheader{Full Series} \\
+\midrule
+Dexter's Laboratory & Genndy Tartakovsky & First What A Cartoon! spinoff; highest-rated short in 1995 audience vote; primetime Emmy nominee & 1996--2003 \\
+The Powerpuff Girls & Craig McCracken & Highest-rated Cartoon Network premiere in history at time of debut (1998); 6 Emmy nominations & 1998--2005 \\
+Johnny Bravo & Van Partible & Adult comedy sensibility in children's programming & 1997--2004 \\
+Cow and Chicken & David Feiss & Absurdist humor; spawned I Am Weasel spinoff & 1997--1999 \\
+Courage the Cowardly Dog & John R. Dilworth & Horror-comedy; Oscar-nominated short origin & 1999--2002 \\
+Family Guy (prototype) & Seth MacFarlane & ``Larry and Steve'' short contained prototypes of Peter and Brian Griffin & Not at CN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Golden Age and Cartoon Cartoons Era (1996--2005)}
+
+The Cartoon Cartoons brand was formally introduced in July 1997. The Cartoon Cartoon Fridays block (launched June 11, 1999) became the marquee venue for original series premieres. This era also saw Toonami's launch (March 17, 1997), which introduced Dragon Ball Z and Sailor Moon to mainstream US cable audiences. By 2005, Cartoon Network was recognized as a golden age, running approximately 20 original series simultaneously.
+
+Samurai Jack (2001--2004, 2017), created by Genndy Tartakovsky, represented the artistic peak of the Golden Age --- cinematic direction, minimal dialogue, and serialized narrative continuity unprecedented in American children's animation at the time. Ed, Edd n Eddy ran 1999--2009, making it the longest-running original series of the Cartoon Cartoons era.
+
+\subsubsection{The Dark Age and CN Real (2006--2009)}
+
+After Betty Cohen's 2001 departure and through the Stuart Snyder presidency, Cartoon Network experimented with live-action programming under the ``CN Real'' banner. This period (roughly 2006--2009) produced the least well-regarded content in the channel's history and is uniformly identified as a ``Dark Age'' by fans and critics. The experiment was a strategic error: the channel's identity was built entirely on animation, and live-action eroded the brand without capturing meaningful audience from Nickelodeon or Disney Channel.
+
+\subsubsection{The 2010s Renaissance: The Serialization Paradigm Shift}
+
+Adventure Time's April 5, 2010 premiere is widely identified as the beginning of a new era. Created by Pendleton Ward (who had previously created a viral pilot for Nickelodeon's Random! Cartoons that Nickelodeon declined), Adventure Time debuted on Cartoon Network to critical and commercial success. Its significance was structural: it demonstrated that a children's animated series could sustain ongoing narrative arcs, world-building, and character development across its run while maintaining broad audience appeal.
+
+Regular Show (J.G. Quintel, premiered September 6, 2010) ran concurrently with Adventure Time through 2017, offering a parallel approach: adult slacker comedy sensibility calibrated for a children's channel. Both shows averaged 2--3 million viewers per episode and reinvigorated Cartoon Network's programming slate.
+
+Steven Universe (Rebecca Sugar, pilot May 2013; full series November 2013--2020) represented the artistic apex of the renaissance. Sugar was the first non-binary person to independently create a series for Cartoon Network. All five seasons hold a perfect 100\% on Rotten Tomatoes. Vanity Fair ranked it \#4 among the best TV shows of the 2010s. Steven Universe pioneered explicit LGBTQ+ representation in children's animation on American television, becoming a cultural landmark beyond the animation medium.
+
+\subsubsection{Adventure Time Alumni and the Creator Pipeline}
+
+Adventure Time served as a training ground for the next generation of animation showrunners. Rebecca Sugar developed Steven Universe while a storyboard artist on Adventure Time. This pattern of Cartoon Network series generating creator pipelines extends across the network's history --- from What A Cartoon! to the Cartoon Cartoons era to the 2010s renaissance.
+
+\subsection{Module 3: Adult Swim Culture and Programming}
+
+\subsubsection{The Williams Street Origin Story}
+
+Adult Swim's creative culture cannot be understood without understanding its physical and institutional separation. Mike Lazzo, who had worked his way from the TBS mailroom in 1984 to senior programming executive, was the creative architect of Adult Swim. When development began, Lazzo deliberately moved Williams Street Productions into a rundown building across the street from Turner's main campus. His stated rationale was that corporate distance meant creative freedom: if they were out of sight, they would be left alone.
+
+Cartoon Network had already established the experimental adult animation template with Space Ghost Coast to Coast (1994), which repurposed a forgotten 1960s Hanna-Barbera superhero into an absurdist talk show host. The show was produced on minimal budget by CN executives who volunteered their time. Its unexpected success over 10 seasons proved the audience existed for surrealist, low-budget adult animation on a children's cable channel.
+
+\subsubsection{The September 2, 2001 Launch}
+
+Adult Swim originally planned to launch April 1, 2001, but was delayed five months. It debuted on September 2, 2001 at 10:00pm ET with the shelved UPN episode of Home Movies. The initial lineup included Home Movies, Space Ghost Coast to Coast, The Brak Show, Sealab 2021, Harvey Birdman, Attorney at Law, Aqua Teen Hunger Force, and Cowboy Bebop. The block ran 10pm--1am on Sunday nights with Thursday replays.
+
+The four new original shows (ATHF, Sealab, Harvey Birdman, Brak Show) were all parodies and reimaginings of Hanna-Barbera properties --- the same library strategy that had founded Cartoon Network itself, now applied to adult comedy. Mike Lazzo described his aesthetic philosophy as demanding novelty: ``Show me something I haven't seen before. I'm bored with all these stories that have been told before.''
+
+The name came from the public pool convention of reserved adult-only swim times. The literal imagery --- lifeguards narrating over elderly people swimming --- defined the early bumper aesthetic before transitioning to the minimalist black-on-white Helvetica text cards that became iconic.
+
+\subsubsection{Expansion and the Network's Middle Period (2002--2012)}
+
+Adult Swim expanded to Saturdays in February 2002 with an anime-focused ``Adult Swim Action'' block. In 2003, Cartoon Network acquired canceled Fox series Futurama and Family Guy, growing Adult Swim to five nights per week. On March 28, 2005, Turner split Adult Swim from Cartoon Network for Nielsen ratings --- formal recognition that the block had become its own network demographically.
+
+Key shows of the middle period included The Boondocks (2005--2014), Robot Chicken (2005--present), Metalocalypse (2006--2013), Tim and Eric Awesome Show Great Job (2007--2010), and The Eric Andre Show (2012--present). The block's willingness to rescue canceled series, commission experimental pilots, and air unapologetically strange content created a creative culture unlike any other in American television.
+
+\subsubsection{The Rick and Morty Era (2013--present)}
+
+Rick and Morty premiered December 2, 2013, created by Justin Roiland and Dan Harmon. The show originated from an animated short parody of Back to the Future that Roiland had created for Channel 101, a short film festival Harmon co-founded. Adult Swim development executive Nick Weidenfeld suggested Rick be Morty's grandfather, a structural change that fundamentally shaped the show's dynamic.
+
+Rick and Morty became the \#1 comedy across all of cable during seasons 3, 4, 5, and 6. It won the Emmy for Outstanding Animated Program in 2018 and 2020. Adult Swim renewed it through Season 12 (announced October 2024 at New York Comic Con), with new seasons running through 2029. The show is a hundred-million dollar merchandising franchise and has been broadcast in over 134 countries in 38 languages.
+
+In January 2023, Adult Swim ended its relationship with Justin Roiland following felony domestic abuse charges. Ian Cardoni and Harry Belden were cast as Rick and Morty respectively beginning with Season 7 (premiered October 2023). Rick and Morty: The Anime, directed by Takashi Sano, premiered August 15, 2024 --- itself a demonstration of Adult Swim's full-circle relationship with anime.
+
+\subsection{Module 4: Toonami, Anime, and the Cultural Bridge}
+
+\subsubsection{Toonami Phase One: Cartoon Network (1997--2008)}
+
+Toonami launched March 17, 1997 as a weekday afternoon action block, initially replacing the Power Zone block. Hosted by a virtual character named Moltar (later Tom), it began with Western action animation (ThunderCats, The Real Adventures of Jonny Quest) before shifting decisively toward dubbed anime. Dragon Ball Z became the breakthrough: its popularity demonstrated that American audiences would embrace long-form serialized Japanese animation at scale.
+
+By 1999, Toonami had become one of the only TV venues for dubbed anime in the US. The ``Midnight Run'' block offered less-censored versions for older late-night viewers, planting seeds for Adult Swim's later anime programming. Key titles in Toonami's original CN run included Sailor Moon, Gundam, Tenchi Muyo, Outlaw Star, Mobile Suit Gundam, Yu Yu Hakusho, and Naruto. Toonami aired until September 2008 when it was canceled by CN.
+
+\subsubsection{Adult Swim's Anime Debut: Cowboy Bebop (2001)}
+
+When Adult Swim launched September 2, 2001, Cowboy Bebop aired uncensored at midnight --- a revolutionary decision. Before this, it was widely believed American audiences would not accept unfamiliar Japanese cultural markers in animation. Cowboy Bebop's reception proved otherwise. Adult Swim established itself as a venue where anime could be presented to adults without domesticating edits.
+
+\subsubsection{Toonami Phase Two: Adult Swim Revival (2012--present)}
+
+Toonami was relaunched on Adult Swim on May 26, 2012 as a Saturday-night ``block within a block.'' The revival was announced via a surprise April Fool's Day programming stunt. In its Adult Swim incarnation, Toonami expanded beyond acquisitions to commission original anime productions: Fena: Pirate Princess, Blade Runner: Black Lotus (co-produced with Alcon Entertainment), Shenmue the Animation, Uzumaki, and Housing Complex C. The block also partnered with Crunchyroll (which became a sister company through AT\&T's acquisitions) for expanded content.
+
+Adult Swim president Michael Ouweleen stated in 2022: ``Toonami helped introduce anime to a U.S. audience 25 years ago, and is creating new, dynamic originals for the next generation of anime fans.'' Rick and Morty: The Anime (premiered August 2024) represented the convergence of Adult Swim's biggest franchise with its anime programming arm.
+
+\subsection{Module 5: Corporate Dissolution and Current Crisis}
+
+\subsubsection{The WBD Merger and Its Immediate Impact (April--October 2022)}
+
+AT\&T finalized the sale of WarnerMedia to Discovery Communications on April 8, 2022, creating Warner Bros. Discovery under CEO David Zaslav. The immediate impact on Cartoon Network was substantial. In October 2022, WBD laid off 82 employees --- 19\% of the Television Group workforce --- across scripted, unscripted, and animation units. The same month, a leaked memo from WBTV Group Chair Channing Dungey announced that Cartoon Network Studios and Warner Bros. Animation development and production teams would be merged. All three animation labels (WBA, CNS, Hanna-Barbera Studios Europe) would continue to exist as brands, but CNS's development infrastructure was effectively absorbed into WBA, which specializes in franchise-based production (Scooby-Doo, Looney Tunes, DC animated).
+
+The structural analysis was clear to observers: CNS had been a generator of original voices and novel IP. WBA was an executor of existing franchises. Merging them while installing WBA executives in leadership positions over the combined entity effectively converted the original-voice pipeline into a franchise-delivery operation.
+
+\subsubsection{Content Removal and Streaming Purges (2022--2024)}
+
+WBD removed numerous animated titles from Max (formerly HBO Max) for cost reasons, including writing some off as tax losses. Casualties included Infinity Train, Summer Camp Island, and the completed-but-unaired TV film Driftwood. Classic Adult Swim series including Dexter's Laboratory and Space Ghost Coast to Coast were removed from streaming. Tigtone and Lazor Wulf were removed from the Adult Swim website.
+
+\subsubsection{The CartoonNetwork.com Shutdown (August 8, 2024)}
+
+On August 8, 2024, CartoonNetwork.com was shut down and redirected to Max with a pop-up encouraging visitors to subscribe. WBD reported a net loss of approximately \$10 billion in Q2 2024, including a \$9.1 billion non-cash goodwill impairment charge from the networks segment and \$2.1 billion in restructuring expenses. The website's 26-year archive of clips, show episodes, games, and fan resources was eliminated. An industry analyst piece in The Conversation (December 2025) described the situation: ``Since 2024, most of Cartoon Network's content has been cut from streaming libraries. What was once a prominent brand in the Warner Bros. portfolio seems forgotten.''
+
+\subsubsection{Current Programming State (2025--2026)}
+
+As of early 2026, Cartoon Network airs from 6am--5pm daily, with Adult Swim taking the remainder (5pm--6am). The channel's household reach has declined from a peak of 100 million households in 2011 to approximately 66 million as of November 2023. Additional layoffs at Atlanta studios were reported in June 2025, targeting animators, writers, and production personnel. The Burbank studio, a former animation hub, was left vacant.
+
+Rick and Morty (greenlit through Season 12, 2029) and Genndy Tartakovsky's Primal remain Adult Swim's flagship original productions. My Adventures with Superman and Smiling Friends are among the current Cartoon Network originals.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Consideration} & \tableheader{Handling} \\
+\midrule
+LGBTQ+ Representation & Steven Universe's role in children's animation LGBTQ+ visibility is a contested topic in some communities & Present as industry milestone; do not editorialize \\
+Roiland Separation & Justin Roiland's legal situation and departure from Rick and Morty involves ongoing legal proceedings & State factually; cite Adult Swim's public statement only \\
+WBD Coverage & Industry coverage of WBD's actions skews negative; some sources (Slate) are editorially critical & Balance with WBD official statements and industry press \\
+Archival Content & Some early CN content included culturally insensitive material that was edited or removed & Document historically without reproducing \\
+Labor Relations & Animation labor conditions and unionization efforts are politically active topics & State factually; present multiple perspectives \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Reference Encyclopedias and Databases}
+\begin{itemize}
+  \item Wikipedia: ``Cartoon Network,'' ``History of Cartoon Network,'' ``Adult Swim,'' ``The Cartoon Network, Inc.,'' ``Turner Broadcasting System,'' ``What a Cartoon!,'' ``Cartoon Cartoons,'' ``Toonami,'' ``Rick and Morty,'' ``Steven Universe,'' ``Adventure Time,'' ``The Powerpuff Girls''
+  \item Encyclopaedia Britannica: ``Cartoon Network'' entry
+  \item Grokipedia: ``History of Cartoon Network,'' ``The Cartoon Network, Inc.''
+\end{itemize}
+
+\subsubsection{Industry Press and Trade Publications}
+\begin{itemize}
+  \item Inverse.com: ``How the Adult Swim pirate ship set sail: An oral history'' (October 2021)
+  \item Deadline Hollywood: Creator interviews at Annecy 2025 (Tartakovsky, McCracken, Sugar)
+  \item IndieWire: ``Cartoon Network Going Corporate? Animators and Fans Are Worried'' (October 2022)
+  \item The Wrap: ``Cartoon Network Website Shuts Down, Visitors Redirected to Max'' (August 2024)
+  \item Slate: ``David Zaslav: The Warner Bros. Discovery CEO's crimes against culture'' (August 2024)
+  \item The Conversation: ``Cartoon Network changed animation forever -- Warner Bros. shouldn't let it die'' (December 2025)
+  \item Cinemablend: ``The Influence of Adult Swim and Toonami on the Popularity of Anime in America''
+  \item Animation World Network: ``Adult Swim Greenlights Rick and Morty: The Anime and Ninja Kamui''
+\end{itemize}
+
+\subsubsection{Official Sources}
+\begin{itemize}
+  \item WBD Pressroom (press.wbd.com): ``Adult Swim Delves into the Anime Multiverse'' (2022); ``Adult Swim Announces Two-Season Pickup of Rick and Morty'' (October 2024); ``Rick and Morty: The Anime Premieres August 15 on Adult Swim'' (July 2024)
+  \item TVLine: ``10 Best Cartoon Network Shows of the 2010s, Ranked''
+  \item SlashFilm: ``Cartoon Network's Steven Universe Made History Behind the Scenes''
+\end{itemize}
+
+\newpage
+%% ═══════════════════════════════════════════════════════════════════════════════
+%% STAGE 3 — MISSION PACKAGE
+%% ═══════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality research document covering the full history of Cartoon Network and Adult Swim across five modules: corporate foundations, children's programming eras, Adult Swim culture, Toonami/anime bridge, and current institutional crisis. The document will serve as a GSD College of Knowledge seed and reference for media history curriculum development, cross-referenced with the Seattle Hip-Hop and Deep Audio Analyzer mission tracks.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE
+==================
+
+  WAVE 0: FOUNDATION (Sequential, Haiku)
+  ├── Shared schema initialization
+  ├── Source index compilation
+  └── Token budget setup
+
+  WAVE 1A: PARALLEL TRACK A (Sonnet)          WAVE 1B: PARALLEL TRACK B (Sonnet+Opus)
+  ├── Module 1: Corporate Genealogy            ├── Module 3: Adult Swim Culture
+  └── Module 2: Kids' Programming Eras        └── Module 4: Toonami/Anime Bridge
+                   │                                           │
+                   └──────────────┬────────────────────────────┘
+                                  │
+  WAVE 2: SYNTHESIS (Sequential, Opus)
+  ├── Cross-module creator lineage mapping
+  ├── Library→Original transformation analysis
+  ├── Corporate dissolution impact assessment
+  └── Module 5: Current Crisis integration
+
+  WAVE 3: PUBLICATION + VERIFICATION (Sequential, Sonnet)
+  ├── Full document assembly
+  ├── Source verification sweep
+  ├── Sensitivity review
+  └── Final PDF compilation
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 1 document & Corporate timeline with all 8 ownership transitions, financial details, creative implications & 8--12 pages \\
+2 & Module 2 document & All four eras covered; What A Cartoon! pipeline with all 6 series; 2010s renaissance with 3 primary cases & 10--16 pages \\
+3 & Module 3 document & Adult Swim founding narrative; 10+ key shows profiled; Rick \& Morty arc complete & 10--14 pages \\
+4 & Module 4 document & Two-phase Toonami history; anime bridge mechanism articulated; current original productions listed & 8--12 pages \\
+5 & Module 5 document & WBD timeline; specific content removals; institutional analysis & 6--10 pages \\
+6 & Synthesis document & Cross-module creator lineages; Amiga Principle architectural analysis; through-line essay & 4--6 pages \\
+7 & Final compiled PDF & All modules integrated; TOC; bibliography; fully self-contained & 50--70 pages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}L{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0-SCHEMA & None & Haiku & 2k \\
+W0-INDEX & None & Haiku & 4k \\
+W1A-MOD1 & W0-SCHEMA, W0-INDEX & Sonnet & 18k \\
+W1A-MOD2 & W0-SCHEMA, W0-INDEX & Sonnet & 22k \\
+W1B-MOD3 & W0-SCHEMA, W0-INDEX & Sonnet+Opus & 22k \\
+W1B-MOD4 & W0-SCHEMA, W0-INDEX & Sonnet & 18k \\
+W2-MOD5 & W1A-MOD1, W1B-MOD3 & Opus & 14k \\
+W2-SYNTH & All W1 outputs & Opus & 18k \\
+W3-ASSEMBLE & All W2 outputs & Sonnet & 12k \\
+W3-VERIFY & W3-ASSEMBLE & Sonnet & 8k \\
+\midrule
+\multicolumn{3}{r}{\textbf{\sffamily Total estimated tokens:}} & \textbf{138k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Model} & \tableheader{Rationale} & \tableheader{\% Budget} \\
+\midrule
+FLIGHT/Synthesis & Opus & Cross-module integration, architectural analysis, cultural judgment & 30\% \\
+EXEC/Survey & Sonnet & Document production, structured content assembly, source compilation & 60\% \\
+LOG/BUDGET & Haiku & Schema init, token tracking, audit trail & 10\% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}L{2.5cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Phase} & \tableheader{Mode} & \tableheader{Outputs} & \tableheader{Gate} \\
+\midrule
+0 & Foundation & Sequential & Shared schema, source index & Auto-pass \\
+1A & M1 + M2 & Parallel & Corporate genealogy, Kids' eras & CAPCOM review \\
+1B & M3 + M4 & Parallel & Adult Swim, Toonami/Anime & CAPCOM review \\
+2 & Synthesis + M5 & Sequential & Cross-module analysis, WBD crisis doc & CAPCOM review \\
+3 & Publication & Sequential & Final compiled PDF, verification report & Human approval \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Initialize shared schemas & LOG & JSON schema for timeline entries, show profiles, corporate events & Haiku \\
+Compile source index & BUDGET & Indexed bibliography of all 20+ sources from Stage 2 & Haiku \\
+Set token budget & BUDGET & Budget allocation table; session planning & Haiku \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Tracks}
+
+\textbf{Track A (M1 + M2) --- CRAFT-HIST + EXEC-A:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Priority} \\
+\midrule
+Corporate genealogy document & CRAFT-HIST & M1 full document with timeline table, financial details & Required \\
+Classic Era research (1992--1995) & EXEC-A & Library strategy, channel launch, international expansion & Required \\
+Golden Age research (1996--2005) & EXEC-A & What A Cartoon! pipeline table; Cartoon Cartoons catalog & Required \\
+Dark Age documentation (2006--2009) & EXEC-A & CN Real analysis; brand erosion context & Required \\
+2010s Renaissance (2010--2018) & EXEC-A & Adventure Time/Regular Show/Steven Universe case studies; serialization shift analysis & Required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (M3 + M4) --- CRAFT-PROG + CRAFT-CULT + EXEC-B:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Priority} \\
+\midrule
+Williams Street origin and culture & CRAFT-PROG & Narrative account with creator oral history sourcing & Required \\
+Adult Swim founding and early era & EXEC-B & Launch lineup profiles; 2001--2010 programming catalog & Required \\
+Rick and Morty arc & CRAFT-PROG & Full show history including Roiland separation; franchise scope & Required \\
+Toonami Phase 1 history & CRAFT-CULT & Full CN-era Toonami with key shows and viewership context & Required \\
+Adult Swim anime debut & CRAFT-CULT & Cowboy Bebop case study; anime bridge mechanism & Required \\
+Toonami Phase 2 revival & CRAFT-CULT & AS-era Toonami; original commissions; Crunchyroll partnership & Required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Module 5: WBD Crisis document & CRAFT-HIST & Complete WBD dissolution timeline with specific events & Opus \\
+Cross-module creator lineages & FLIGHT & What A Cartoon! → Cartoon Cartoons → 2010s → streaming lineage map & Opus \\
+Library→Original transformation analysis & FLIGHT & Structural model for how CN achieved the transition & Opus \\
+Amiga Principle architectural essay & FLIGHT & Through-line synthesis connecting CN/AS architecture to GSD philosophy & Opus \\
+Integration sweep & INTEG & Cross-module consistency check; contradiction resolution & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}XL{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Model} \\
+\midrule
+Full document assembly & EXEC-A & Combined LaTeX source with all modules & Sonnet \\
+Source verification sweep & VERIFY & Verification report flagging any unsourced claims & Sonnet \\
+Sensitivity review & SURGEON & Representation content, Roiland coverage, WBD editorial balance & Sonnet \\
+XeLaTeX three-pass compile & LOG & Final PDF & Sonnet \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item All five modules share a common source index (initialized in Wave 0); cache the index as a shared attribute in the first call and reference it across all Wave 1 agents
+  \item Corporate timeline structure (owner transitions, financial figures, dates) is computed once in W1A-MOD1 and referenced by W2-MOD5 without re-derivation
+  \item Creator lineage data (What A Cartoon! alumni, Adventure Time alumni) is initialized in W1A-MOD2 and extended in W2-SYNTH
+  \item Toonami show catalog (Phase 1 + Phase 2) is built once in W1B-MOD4 and referenced by W2-SYNTH without re-listing
+  \item 5-minute cache TTL window: schedule Wave 1A and Wave 1B to begin within the same 5-minute window to exploit shared attribute caching
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+  W0-SCHEMA ──────────────────────────────────────────┐
+  W0-INDEX  ────────────┬────────────────┬────────────┤
+                        │                │            │
+                   W1A-MOD1         W1B-MOD3          │
+                   W1A-MOD2         W1B-MOD4          │
+                        │                │            │
+                        └────────┬───────┘            │
+                                 │                    │
+                           W2-MOD5 ←─────────────────┘
+                           W2-SYNTH
+                                 │
+                         W3-ASSEMBLE
+                         W3-VERIFY
+                                 │
+                           [FINAL PDF]
+
+  Legend:
+  ──→  data dependency (input required before task starts)
+  ←──  uses data from (reference without full dependency)
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XL{2.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Priority} & \tableheader{Count} \\
+\midrule
+Safety-critical & Non-negotiable source and sensitivity boundaries & BLOCK & 5 \\
+Core functionality & Deliverable acceptance criteria & BLOCK & 22 \\
+Integration & Cross-module validation & BLOCK & 8 \\
+Edge cases & Robustness and completeness & LOG & 5 \\
+\midrule
+\multicolumn{3}{r}{\textbf{\sffamily Total:}} & \textbf{40} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All financial figures, viewership statistics, and ownership dates traceable to encyclopedic or official press sources. Zero unsourced claims \\
+SC-NUM & Numerical attribution & Every acquisition cost, viewership figure, household count, and episode total attributed to a specific source \\
+SC-ADV & No policy advocacy & WBD dissolution coverage presents evidence without advocating for specific regulatory or business outcomes \\
+SC-REP & Representation accuracy & LGBTQ+ content discussion cites factual milestones (Sugar as first non-binary creator) without editorializing \\
+SC-LEG & Legal matter handling & Justin Roiland coverage states charges and Adult Swim's public response only; no unverified claims about legal proceedings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Sample)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Corporate timeline completeness & All 4 ownership transitions (Turner→TW, TW→AOL-TW, AOLTWMA→AT\&T, AT\&T→WBD) with dates and financial context \\
+CF-02 & Library acquisition details & Both MGM (1986) and Hanna-Barbera (1991) acquisitions with price, catalog scope, and strategic rationale \\
+CF-03 & What A Cartoon! pipeline & All 6 series spinoffs identified with creators, premiere dates, and run lengths \\
+CF-04 & Golden Age catalog & Cartoon Cartoons era documented with at least 10 series, Toonami launch included \\
+CF-05 & 2010s Renaissance case studies & Adventure Time, Regular Show, and Steven Universe individually profiled with premiere dates, run lengths, and cultural significance \\
+CF-06 & Serialization shift articulation & Document explicitly characterizes the paradigm change from episodic to serialized storytelling and identifies Adventure Time as the inflection point \\
+CF-07 & Adult Swim founding narrative & Williams Street physical separation context; Mike Lazzo philosophy; pirate ship culture documented \\
+CF-08 & Launch lineup completeness & All 7 shows from September 2, 2001 Adult Swim launch identified \\
+CF-09 & Rick and Morty arc & Premiere date, Emmy wins, Season 12 greenlight, Roiland separation, and international reach documented \\
+CF-10 & Toonami Phase 1 & Launch date (March 17, 1997), key anime titles, cancellation date (2008) documented \\
+CF-11 & Toonami Phase 2 & Revival date (May 26, 2012), original commissions (at least 3), Crunchyroll partnership documented \\
+CF-12 & Anime bridge mechanism & Document articulates specific mechanism: how Toonami/AS created cultural threshold for anime in US mainstream \\
+CF-13 & WBD timeline & October 2022 layoffs (82 employees, 19\%), CNS/WBA merger, content removals, August 2024 CN website shutdown with specific dates \\
+CF-14 & Viewership decline data & CN peak (100M households, 2011) vs current (66M, November 2023) documented with source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & M1→M2 library-to-original transition & Document traces causal chain from Turner's library acquisitions to What A Cartoon! to the Cartoon Cartoons era \\
+IN-02 & M2→M3 What A Cartoon! alumni lineage & Creator pipelines traced: at least 3 What A Cartoon! alumni whose later work shaped Adult Swim or the 2010s renaissance \\
+IN-03 & M3→M4 Adult Swim/Toonami symbiosis & Document characterizes the structural relationship: Toonami's Western action roots, Adult Swim's anime debut, and Toonami's revival under Adult Swim \\
+IN-04 & M2→M5 Renaissance vs. dissolution contrast & Document explicitly contrasts the creator-latitude conditions of the 2010s renaissance with WBD's franchise-delivery consolidation \\
+IN-05 & Cross-module consistency & No contradictions in dates, financial figures, or ownership claims across all five modules \\
+IN-06 & Self-containment test & Reader with no prior CN/AS knowledge can achieve full contextual understanding without external references \\
+IN-07 & Through-line coherence & Amiga Principle / spaces-between philosophical thread connects meaningfully from Vision through all five modules to the closing essay \\
+IN-08 & Timeline consistency & Corporate genealogy dates in M1 are consistent with contextual references to corporate context in M2, M3, M4, and M5 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Corporate timeline with all ownership transitions & CF-01, CF-02, IN-05 & Pending \\
+2. What A Cartoon! pipeline documented & CF-03, CF-04, IN-01 & Pending \\
+3. Adult Swim founding culture captured & CF-07, CF-08, SC-SRC & Pending \\
+4. Toonami two-phase history complete & CF-10, CF-11, IN-03 & Pending \\
+5. Anime bridge mechanism articulated & CF-12, IN-03 & Pending \\
+6. 2010s renaissance characterized & CF-05, CF-06, IN-04 & Pending \\
+7. WBD dissolution documented & CF-13, CF-14, SC-ADV & Pending \\
+8. Rick and Morty arc complete & CF-09, SC-LEG & Pending \\
+9. Quantitative data points (3+ per module) & SC-NUM & Pending \\
+10. Cross-module creator lineages traced & IN-02, IN-07 & Pending \\
+11. Document self-contained & IN-06 & Pending \\
+12. Sensitivity considerations addressed & SC-REP, SC-LEG, SC-ADV & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Overall mission direction; wave go/no-go gates; synthesis decisions \\
+PLAN & Planner & Wave decomposition; parallel track optimization; dependency management \\
+SCOUT & Research Agent & Supplemental web research to fill gaps identified during document assembly \\
+EXEC-A & Document Producer A & Track A: M1 (Corporate Genealogy) + M2 (Kids' Programming Eras) \\
+EXEC-B & Document Producer B & Track B: M3 (Adult Swim) + M4 (Toonami/Anime) \\
+CRAFT-HIST & History Specialist & Corporate genealogy depth analysis; WBD dissolution institutional analysis \\
+CRAFT-PROG & Programming Specialist & Creative culture analysis; Adult Swim philosophy; show development analysis \\
+CRAFT-CULT & Cultural Studies Specialist & Anime bridge mechanism; representation milestones; cultural impact analysis \\
+VERIFY & Verification Agent & Source validation; accuracy checking; numerical attribution audit \\
+INTEG & Integration Agent & Cross-module consistency; creator lineage mapping \\
+CAPCOM & HITL Interface & Human approval at wave boundaries; sensitive content review \\
+SURGEON & Health Monitor & Research quality degradation detection; editorial drift alerts \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Research Modules & 5 (M1: Foundations, M2: Kids' Eras, M3: Adult Swim, M4: Anime/Toonami, M5: WBD Crisis) \\
+Wave Count & 4 waves (W0: Foundation, W1: Parallel, W2: Synthesis, W3: Publication) \\
+Parallel Tracks & 2 in Wave 1 \\
+Estimated Token Budget & 138,000 tokens \\
+Estimated Context Windows & 6--8 \\
+Estimated Sessions & 2--3 \\
+HITL Gates & 3 (post-Wave 1, post-Wave 2, post-Wave 3) \\
+Safety-Critical Tests & 5 (all mandatory BLOCK) \\
+Total Tests & 40 \\
+Model Distribution & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Sources & 20+ (encyclopedic, trade press, official WBD pressroom) \\
+Target Output Length & 50--70 pages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Show me something I haven't seen before.''} --- Mike Lazzo, Adult Swim founder
+
+The history of Cartoon Network and Adult Swim is a proof of the Amiga Principle playing out across three decades of television. The remarkable thing about Cartoon Network's founding was not the idea of a 24-hour animation channel --- it was the architectural discipline of owning the lane completely. Turner's library wasn't a content library; it was a context machine. Adult Swim wasn't a programming block; it was a permission structure. The What A Cartoon! pipeline wasn't a talent search; it was a systematic exploration of the space between the shorts and the series, the space where six landmark franchises were discovered by giving 48 independent animators the freedom to fail. The spaces between are where it happens. They always are.
+
+The dissolution under Warner Bros. Discovery is a study in what happens when you remove the spaces and keep the nodes. The shows remain --- some of them. The channels remain --- reduced. But the institutional architecture that generated Dexter's Laboratory from a volunteer executive's side project, that produced Cowboy Bebop's uncensored midnight US premiere, that let a young non-binary CalArts graduate invent the most emotionally radical children's animated series in American history --- that architecture is being systematically eliminated in service of a \$9 billion quarterly write-down. Understanding how it was built is the prerequisite for understanding what has been lost. And what could, somewhere, sometime, be built again.
+\end{quotebox}
+
+\end{document}

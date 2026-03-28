@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cygnus X-3 Variable PeVatron — GSD Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #311B92;
+      --secondary: #0277BD;
+      --tertiary: #C77800;
+      --accent: #7B1FA2;
+      --light-primary: #EDE7F6;
+      --light-secondary: #E1F5FE;
+      --bg: #0A0A18;
+      --surface: #111128;
+      --card-bg: #1A1A38;
+      --border: #2D2D5A;
+      --text: #E8E8F0;
+      --muted: #9090B0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* Star field background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 20% 85%, rgba(180,140,255,0.4) 0%, transparent 100%),
+        radial-gradient(2px 2px at 55% 10%, rgba(140,180,255,0.5) 0%, transparent 100%),
+        radial-gradient(2px 2px at 90% 30%, rgba(255,200,100,0.3) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1A0A5A 0%, #0A1840 50%, #0A2050 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(49,27,146,0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-badge {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: #9B89E8;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #D0C8FF;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span {
+      color: #67B8E8;
+    }
+
+    .subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      font-weight: 300;
+    }
+
+    .pipeline {
+      margin-top: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #C4A8FF;
+      letter-spacing: 0.05em;
+    }
+
+    .pipeline span { color: #67B8E8; }
+
+    /* Main content */
+    main { padding-top: 2.5rem; }
+
+    /* File cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(2,119,189,0.2);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #C4A8FF;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .card .size-badge {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #67B8E8;
+    }
+
+    /* Section headings */
+    h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem;
+      color: #C4A8FF;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Contents list */
+    .contents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stage-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem;
+    }
+
+    .stage-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .stage-label.s1 { color: #9B89E8; }
+    .stage-label.s2 { color: #67B8E8; }
+    .stage-label.s3 { color: #F5A623; }
+
+    .stage-block h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .stage-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .stage-block ul li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+      padding-left: 0.9rem;
+      position: relative;
+    }
+
+    .stage-block ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: #9B89E8;
+    }
+
+    /* Usage section */
+    .usage-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .usage-block ol {
+      padding-left: 1.2rem;
+    }
+
+    .usage-block ol li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .usage-block ol li strong {
+      color: var(--text);
+    }
+
+    code {
+      background: rgba(49,27,146,0.3);
+      color: #C4A8FF;
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      font-size: 0.85em;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* Quote block */
+    .quote-block {
+      border-left: 3px solid var(--primary);
+      background: rgba(49,27,146,0.15);
+      padding: 1rem 1.4rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 2rem;
+    }
+
+    .quote-block p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #C4A8FF;
+      line-height: 1.7;
+    }
+
+    .quote-block .attribution {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Meta */
+    .meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding: 1rem 1.2rem;
+      background: rgba(49,27,146,0.12);
+      border-radius: 6px;
+      border: 1px solid rgba(49,27,146,0.3);
+    }
+
+    .meta-item {
+      font-size: 0.78rem;
+    }
+
+    .meta-item .label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.68rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .meta-item .value {
+      color: #C4A8FF;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="mission-badge">GSD Research Mission Package</div>
+    <h1>CYGNUS X-3<br><span>Variable PeVatron</span></h1>
+    <p class="subtitle">LHAASO Discovery · arXiv:2512.16638 · Ultra-High-Energy Gamma-Ray Astrophysics</p>
+    <div class="pipeline">
+      Vision <span>→</span> Research <span>→</span> Mission
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <main>
+
+    <div class="meta-strip" style="margin-top: 2rem;">
+      <div class="meta-item">
+        <span class="label">Date</span>
+        <span class="value">March 27, 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Profile</span>
+        <span class="value">Squadron (12 roles)</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Modules</span>
+        <span class="value">5 Research Modules</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Pages</span>
+        <span class="value">25 pages</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Source Paper</span>
+        <span class="value">LHAASO Collaboration 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Status</span>
+        <span class="value">Ready for GSD Orchestrator</span>
+      </div>
+    </div>
+
+    <!-- File Cards -->
+    <h2>Downloads</h2>
+    <div class="cards">
+      <a class="card" href="cygnus_x3_mission.pdf" download>
+        <div class="card-icon">📄</div>
+        <h3>Mission Package PDF</h3>
+        <p>Complete 25-page Vision → Research → Mission document. Compiled with XeLaTeX. Ready for archival and GSD handoff.</p>
+        <span class="size-badge">PDF · 3 stages · 25 pages</span>
+      </a>
+      <a class="card" href="cygnus_x3_mission.tex" download>
+        <div class="card-icon">🔧</div>
+        <h3>LaTeX Source (.tex)</h3>
+        <p>Full XeLaTeX source. Modify and recompile as the research evolves. Three-pass compilation required.</p>
+        <span class="size-badge">XeLaTeX · Editable</span>
+      </a>
+    </div>
+
+    <!-- Contents -->
+    <h2>Document Contents</h2>
+    <div class="contents-grid">
+
+      <div class="stage-block">
+        <div class="stage-label s1">Stage 1 — Vision</div>
+        <h4>Vision Guide</h4>
+        <ul>
+          <li>Narrative: 40-year detection arc</li>
+          <li>5-problem statement</li>
+          <li>System architecture diagram</li>
+          <li>5 research modules defined</li>
+          <li>Chipset configuration YAML</li>
+          <li>12 testable success criteria</li>
+          <li>Through-line: Amiga Principle</li>
+        </ul>
+      </div>
+
+      <div class="stage-block">
+        <div class="stage-label s2">Stage 2 — Research Reference</div>
+        <h4>Research Reference</h4>
+        <ul>
+          <li>Binary system parameters table</li>
+          <li>LHAASO SED + spectral data</li>
+          <li>Photomeson kinematic derivation</li>
+          <li>3 acceleration mechanism comparison</li>
+          <li>Multi-messenger: IceCube analysis</li>
+          <li>Microquasar PeVatron comparison</li>
+          <li>Historical timeline 1970s–2025</li>
+          <li>14-source bibliography</li>
+        </ul>
+      </div>
+
+      <div class="stage-block">
+        <div class="stage-label s3">Stage 3 — Mission Package</div>
+        <h4>Mission Package</h4>
+        <ul>
+          <li>Milestone specification</li>
+          <li>Wave execution plan (0–3)</li>
+          <li>7 deliverables with acceptance criteria</li>
+          <li>Component breakdown + model assignments</li>
+          <li>31 tests (4 safety-critical)</li>
+          <li>Verification matrix</li>
+          <li>12-role crew manifest</li>
+          <li>Token budget: ~185K</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Usage -->
+    <h2>How to Use This Package</h2>
+    <div class="usage-block">
+      <ol>
+        <li><strong>Review Stage 1</strong> — Confirm scope boundaries, success criteria, and module decomposition match your research intent.</li>
+        <li><strong>Hand Stage 3 to GSD Orchestrator</strong> — The Milestone Specification and Wave Execution Plan are designed to be executed via <code>gsd-skill-creator</code> (dev branch) without additional context.</li>
+        <li><strong>CAPCOM gate</strong> — The mission includes one human-in-the-loop approval gate between Wave 1 and Wave 2 (scope review before synthesis). Plan for this checkpoint.</li>
+        <li><strong>Model allocation</strong> — Follow the 30/60/10 Opus/Sonnet/Haiku split defined in the chipset YAML. The physics modules (MOD-03, MOD-04) require Opus-class judgment.</li>
+        <li><strong>Verify before archival</strong> — Run all 4 safety-critical tests (SC-SRC, SC-NUM, SC-ADV, SC-UNC) before committing final output to the College of Knowledge.</li>
+      </ol>
+    </div>
+
+    <!-- LaTeX recompile -->
+    <h2>Recompilation Instructions</h2>
+    <div class="usage-block">
+      <p style="font-size:0.85rem; color:var(--muted); margin-bottom:0.8rem;">Three passes required for TOC, cross-references, and lastpage counter:</p>
+      <code style="display:block; padding:0.8rem; line-height:2; font-size:0.8rem;">
+        xelatex -interaction=nonstopmode cygnus_x3_mission.tex<br>
+        xelatex -interaction=nonstopmode cygnus_x3_mission.tex<br>
+        xelatex -interaction=nonstopmode cygnus_x3_mission.tex
+      </code>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:0.8rem;">Requires: XeLaTeX, DejaVu fonts (pre-installed on Ubuntu), and standard TeX Live packages including <code>tcolorbox</code>, <code>fontspec</code>, <code>tabularx</code>, <code>colortbl</code>, <code>lastpage</code>, <code>fancyhdr</code>.</p>
+    </div>
+
+    <div class="quote-block">
+      <p>"The spaces between a Wolf-Rayet star and its invisible companion — a gap smaller than the diameter of the Sun, cycling in less time than a working day — produce the most energetic sustained photon emission ever measured from a resolved point source in our Galaxy."</p>
+      <div class="attribution">— Through-line, Cygnus X-3 Mission Package, Stage 1</div>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

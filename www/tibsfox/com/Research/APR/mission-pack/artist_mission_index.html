@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>So You Want To Be An Artist — GSD Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4A148C;
+      --secondary: #E65100;
+      --tertiary: #004D40;
+      --accent: #7B1FA2;
+      --light-primary: #F3E5F5;
+      --light-secondary: #FFF3E0;
+      --light-tertiary: #E0F2F1;
+      --gold: #F9A825;
+      --bg: #FAFAFA;
+      --surface: #FFFFFF;
+      --text: #212121;
+      --subtle: #757575;
+      --border: #E0E0E0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Hero Header ────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #6A1B9A 40%, var(--tertiary) 100%);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.02) 40px,
+        rgba(255,255,255,0.02) 80px
+      );
+    }
+    .hero-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    .hero h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ── Layout ─────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* ── File Cards ──────────────────────────────── */
+    .files-section {
+      margin: 2.5rem 0;
+    }
+    .section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 1rem;
+    }
+    .files-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .file-card {
+      display: block;
+      text-decoration: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.2s ease;
+      border-left: 4px solid var(--primary);
+    }
+    .file-card:hover {
+      box-shadow: 0 4px 16px rgba(74,20,140,0.15);
+      transform: translateY(-2px);
+      border-left-color: var(--secondary);
+    }
+    .file-card.tex { border-left-color: var(--secondary); }
+    .file-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .file-card-type {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 0.3rem;
+    }
+    .file-card-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+    .file-card.tex .file-card-name { color: var(--secondary); }
+    .file-card-desc {
+      font-size: 0.8rem;
+      color: var(--subtle);
+    }
+
+    /* ── Contents ────────────────────────────────── */
+    .contents-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .contents-section h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+    }
+    .stage-block {
+      margin-bottom: 1.25rem;
+    }
+    .stage-label {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      margin-bottom: 0.6rem;
+    }
+    .stage-label.s2 { background: var(--secondary); }
+    .stage-label.s3 { background: var(--tertiary); }
+    .stage-items {
+      list-style: none;
+      padding-left: 0.5rem;
+    }
+    .stage-items li {
+      font-size: 0.83rem;
+      color: var(--text);
+      padding: 0.2rem 0;
+      border-left: 2px solid var(--border);
+      padding-left: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+    .stage-items li strong { color: var(--primary); }
+
+    /* ── Module Grid ─────────────────────────────── */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .module-card {
+      background: var(--light-primary);
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+      border-left: 3px solid var(--accent);
+    }
+    .module-id {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .module-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+    .module-desc {
+      font-size: 0.72rem;
+      color: var(--subtle);
+    }
+
+    /* ── Usage ───────────────────────────────────── */
+    .usage-section {
+      background: var(--light-tertiary);
+      border: 1px solid var(--tertiary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .usage-section h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      color: var(--tertiary);
+      margin-bottom: 1rem;
+    }
+    .usage-steps {
+      counter-reset: steps;
+      list-style: none;
+    }
+    .usage-steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.6rem;
+      align-items: flex-start;
+    }
+    .usage-steps li::before {
+      content: counter(steps);
+      background: var(--tertiary);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* ── Recompile ───────────────────────────────── */
+    .compile-section {
+      background: #1A1A2E;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .compile-section h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .compile-section code {
+      display: block;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: #A8FF78;
+      line-height: 1.8;
+    }
+
+    /* ── Quote ───────────────────────────────────── */
+    .closing-quote {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: linear-gradient(135deg, var(--light-primary), var(--light-secondary));
+      border-radius: 8px;
+      margin: 2rem 0;
+      border: 1px solid rgba(74,20,140,0.15);
+    }
+    .closing-quote blockquote {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--primary);
+      max-width: 600px;
+      margin: 0 auto 0.75rem;
+    }
+    .closing-quote cite {
+      font-size: 0.8rem;
+      color: var(--subtle);
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--subtle);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">GSD Research Mission Package · Fleet Activation · Deep Research Study</div>
+  <h1>So You Want To Be An Artist</h1>
+  <h2>The Complete Encyclopedia of Visual Arts, Music, and the Creative Life — From Cave to Cloud</h2>
+  <div class="hero-meta">
+    <span class="hero-badge">📅 March 27, 2026</span>
+    <span class="hero-badge">📄 34 Pages</span>
+    <span class="hero-badge">🎨 7 Research Modules</span>
+    <span class="hero-badge">🚀 Fleet Profile · 23 Agents</span>
+    <span class="hero-badge">🏛️ Prehistory → Present Day</span>
+    <span class="hero-badge">🔗 College of Knowledge Deep-Linked</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Files -->
+  <div class="files-section">
+    <div class="section-title">Mission Files</div>
+    <div class="files-grid">
+      <a href="artist_mission.pdf" download class="file-card pdf">
+        <div class="file-card-icon">📕</div>
+        <div class="file-card-type">PDF · 34 Pages</div>
+        <div class="file-card-name">So You Want To Be An Artist</div>
+        <div class="file-card-desc">Full mission package — Vision, Research Reference, and Mission Package stages. XeLaTeX compiled, publication quality.</div>
+      </a>
+      <a href="artist_mission.tex" download class="file-card tex">
+        <div class="file-card-icon">📝</div>
+        <div class="file-card-type">LaTeX Source · XeLaTeX</div>
+        <div class="file-card-name">artist_mission.tex</div>
+        <div class="file-card-desc">Complete XeLaTeX source. Recompile to modify, extend, or adapt any section of the mission package.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Modules -->
+  <div class="section-title">Seven Research Modules</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="module-id">VIS-01</div>
+      <div class="module-name">Visual Arts Origins</div>
+      <div class="module-desc">Prehistoric (40,000 BCE) through Antiquity — Cave Art, Egypt, Greece, Rome, global traditions</div>
+    </div>
+    <div class="module-card">
+      <div class="module-id">VIS-02</div>
+      <div class="module-name">Classical → Impressionism</div>
+      <div class="module-desc">Medieval, Renaissance, Baroque, Rococo, Neoclassicism, Romanticism, Realism, Impressionism</div>
+    </div>
+    <div class="module-card">
+      <div class="module-id">VIS-03</div>
+      <div class="module-name">Modernism → Present</div>
+      <div class="module-desc">Post-Impressionism through Cubism, Surrealism, Abstract Expressionism, Pop, Digital, AI Art</div>
+    </div>
+    <div class="module-card">
+      <div class="module-id">MUS-01</div>
+      <div class="module-name">Music: Ancient → Romantic</div>
+      <div class="module-desc">Bone flutes → Medieval chant → Renaissance polyphony → Baroque → Classical → Romantic</div>
+    </div>
+    <div class="module-card">
+      <div class="module-id">MUS-02</div>
+      <div class="module-name">Music: Modern → Digital</div>
+      <div class="module-desc">Jazz, Blues, Rock, Soul, Funk, Hip-Hop, Electronic, Ambient, Industrial, Streaming, AI Music</div>
+    </div>
+    <div class="module-card">
+      <div class="module-id">BIZ-01</div>
+      <div class="module-name">Artist as Entrepreneur</div>
+      <div class="module-desc">Business structure, website, brand identity, copyright vs. trademark, USPTO registration, licensing</div>
+    </div>
+    <div class="module-card">
+      <div class="module-id">COK-01</div>
+      <div class="module-name">College of Knowledge</div>
+      <div class="module-desc">80+ concept nodes on Complex Plane · 25+ Rosetta Core translations · L-System art evolution grammar</div>
+    </div>
+  </div>
+
+  <!-- Contents -->
+  <div class="contents-section">
+    <h3>Document Contents — Three Stages</h3>
+
+    <div class="stage-block">
+      <span class="stage-label">Stage 1 — Vision</span>
+      <ul class="stage-items">
+        <li><strong>Vision narrative</strong> — The Creative Continuum: art as humanity's oldest language</li>
+        <li><strong>Problem Statement</strong> — 5 problems: fragmented knowledge, era-without-context, technology blindness, the business gap, disconnection from living tradition</li>
+        <li><strong>Core Concept</strong> — The Complex Plane mapping of all art across time</li>
+        <li><strong>Domain Architecture</strong> — ASCII diagram of all 7 modules and their connections</li>
+        <li><strong>Chipset Configuration</strong> — Agnus/Denise/Paula/68000 YAML with all 23 crew agents</li>
+        <li><strong>Success Criteria</strong> — 12 testable, observable criteria</li>
+        <li><strong>The Through-Line</strong> — Chauvet Cave to Amiga Principle</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <span class="stage-label s2">Stage 2 — Research Reference</span>
+      <ul class="stage-items">
+        <li><strong>VIS-01</strong> — Prehistoric: Sulawesi, Chauvet, Lascaux, Altamira, Blombos Cave; 7-site table; Egyptian, Mesopotamian, Greek, Roman, African, Asian, Pre-Columbian art</li>
+        <li><strong>VIS-02</strong> — Medieval → Impressionism: 8 movements with full analysis (technique, patronage, philosophical intent, societal context)</li>
+        <li><strong>VIS-03</strong> — Modernism → Present: Cubism, Dada, Surrealism, Abstract Expressionism, Pop, Minimalism, Street Art, Digital, NFT, AI Art</li>
+        <li><strong>MUS-01</strong> — 40,000 BCE bone flutes through Brahms and Wagner; Ancient Egypt, Greece, India; Gregorian chant; notation history; 6 classical eras</li>
+        <li><strong>MUS-02</strong> — Jazz, Blues, Hip-Hop, Electronic, Industrial, Streaming, AI composition; DAW genealogy</li>
+        <li><strong>BIZ-01</strong> — LLC/S-Corp/Sole Proprietorship; website 8-element checklist; brand identity; copyright vs. trademark table; USPTO 8-step trademark process; revenue channels table</li>
+        <li><strong>COK-01</strong> — 10-pair Rosetta Core table; Complex Plane positioning framework; L-System grammar spec</li>
+        <li><strong>Bibliography</strong> — 25+ verified scholarly and legal sources</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <span class="stage-label s3">Stage 3 — Mission Package</span>
+      <ul class="stage-items">
+        <li><strong>Milestone Specification</strong> — Mission objective, architecture overview, 9 deliverables table</li>
+        <li><strong>Component Breakdown</strong> — 11 components with model assignments and token estimates (~562K total)</li>
+        <li><strong>Wave Execution Plan</strong> — Wave 0 Foundation → Wave 1 A/B/C Parallel → Wave 2 Synthesis → Wave 3 Publication</li>
+        <li><strong>Dependency Graph</strong> — ASCII art showing all 7 modules flowing to Master PDF</li>
+        <li><strong>Test Plan</strong> — 47 tests across 6 categories; 8 Safety-Critical BLOCK tests</li>
+        <li><strong>Mission Crew Manifest</strong> — 23 named agents (PNW species naming convention)</li>
+        <li><strong>Closing Through-Line</strong> — The Amiga Principle applied to the human soul</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Usage -->
+  <div class="usage-section">
+    <h3>How to Hand This to GSD</h3>
+    <ol class="usage-steps">
+      <li>Open the PDF and read Stage 1 (Vision) to confirm scope and confirm you agree with the 12 success criteria and 7 module decomposition.</li>
+      <li>Hand the PDF to your GSD orchestrator (Claude Code / gsd-skill-creator) with the prompt: <em>"Execute this research mission package. Begin with Wave 0 Foundation. Activate Fleet profile."</em></li>
+      <li>Approve HITL Gate 0 (scope confirmation) before Wave 1 launches.</li>
+      <li>Review Rosetta Core translations and Complex Plane positioning at HITL Gate 2 before COK-01 locks.</li>
+      <li>Approve final delivery at HITL Gate 3. The CoK YAML seed file is automatically exported for College of Knowledge import.</li>
+    </ol>
+  </div>
+
+  <!-- Recompile -->
+  <div class="compile-section">
+    <h3>Recompile LaTeX Source</h3>
+    <code>xelatex -interaction=nonstopmode artist_mission.tex</code>
+    <code>xelatex -interaction=nonstopmode artist_mission.tex</code>
+    <code>xelatex -interaction=nonstopmode artist_mission.tex</code>
+  </div>
+
+  <!-- Closing Quote -->
+  <div class="closing-quote">
+    <blockquote>"The spaces between each era are not empty. They are the pressure that builds the next form. Every brushstroke inherits forty thousand years."</blockquote>
+    <cite>— So You Want To Be An Artist, Through-Line</cite>
+  </div>
+
+</div>
+
+<footer>
+  GSD Research Mission Package · Fleet Activation · So You Want To Be An Artist ·
+  College of Knowledge Deep-Link · Complex Plane of Experience ·
+  March 27, 2026
+</footer>
+
+</body>
+</html>

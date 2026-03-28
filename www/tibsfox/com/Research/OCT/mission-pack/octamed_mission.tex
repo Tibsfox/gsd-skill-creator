@@ -1,0 +1,1172 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ─── AMIGA BLUE COLOR SCHEME ────────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A237E}       % Amiga workbench blue
+\definecolor{secondary}{HTML}{BF360C}     % OCS copper / warm amber-red
+\definecolor{tertiary}{HTML}{37474F}      % Graphite
+\definecolor{accent}{HTML}{283593}        % Mid-blue accent
+\definecolor{lightprimary}{HTML}{E8EAF6}  % Pale blue
+\definecolor{lightsecondary}{HTML}{FBE9E7}
+\definecolor{lighttertiary}{HTML}{ECEFF1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{amigagold}{HTML}{F9A825}
+
+% ─── SECTION FORMATTING ─────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ─── CUSTOM ENVIRONMENTS ────────────────────────────────────────────────────
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+% ─── TABLE HELPERS ──────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ─── HEADERS / FOOTERS ──────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{OctaMED \& Mod Trackers}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ─── HYPERLINKS ─────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={OctaMED and Mod Trackers -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─── DOCUMENT ───────────────────────────────────────────────────────────────
+\begin{document}
+
+% ─── TITLE PAGE ─────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{OctaMED\\[0.3em]\& Mod Trackers}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Architecture, History, Paradigm, and Cultural Ecology}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{From Paula's four hardware channels to 64 virtual voices ---}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{the architecture of creativity under constraint}}
+
+\vspace{1.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet \quad|\quad Estimated: 6--8 context windows across 4--5 sessions}}
+
+\end{center}
+\newpage
+
+% ─── TABLE OF CONTENTS ──────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ════════════════════════════════════════════════════════════════════════════
+
+\section{OctaMED \& Mod Trackers --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Research / Ready for Mission Execution}
+\metafield{Depends On:}{GSD Amiga Principle (gsd-amiga-vision-architectural-leverage.md); GSD-OS Chipset Architecture (gsd-chipset-architecture-vision.md)}
+\metafield{Context:}{Deep Research Mission issued cold from single directive. Paula chip architecture directly informs GSD-OS chipset naming; OctaMED is a primary case study of the Amiga Principle applied to audio.}
+
+\subsection{Vision}
+
+The Commodore Amiga shipped in 1985 with a sound chip called Paula --- four DMA-driven 8-bit PCM channels, two panned hard-left and two panned hard-right, with 6-bit volume control and a hardware low-pass filter. That was it. The hardware was defined, finite, and unchangeable. And yet from those four channels, an entire musical culture emerged: the demoscene, breakcore, jungle, drum and bass, and eventually the chart-topping work of Calvin Harris --- all traced back to software that learned to multiply what the hardware could do.
+
+The music tracker is the instrument that made this possible. In 1987, Karsten Obarski wrote \textit{Ultimate Soundtracker} for the Amiga --- a radical new paradigm in which music was not recorded as waveforms but \textit{described} as a spreadsheet of events: which sample, which pitch, which effect, at which time. The result was a \textit{module file} --- a self-contained package carrying both samples and sequencing in a single distributable object. Small, fast to load, trivially shareable over BBS networks.
+
+OctaMED, written by Teijo Kinnunen beginning in 1989, took this paradigm further than anyone thought the hardware permitted. By performing software mixing --- routing two virtual channels through each of Paula's four hardware channels --- OctaMED doubled the Amiga's polyphony to eight voices. It did so at significant CPU cost (roughly 40\% versus the 3\% used by game-focused trackers), a trade that musicians were glad to make because OctaMED was not for games. It was for \textit{composition}: standalone musical works of arbitrary structural complexity, with native MIDI support, arbitrary-length patterns, and an expressive effects vocabulary that outpaced everything else on the platform.
+
+This mission examines OctaMED not merely as software history but as a perfect specimen of the Amiga Principle --- the idea that architectural leverage, intelligent allocation, and structured specialization produce outcomes that exceed what the raw resources would suggest. Four hardware channels. One Finnish programmer. A generation of electronic musicians.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{The hardware ceiling misconception.} The Amiga's four-channel Paula chip is routinely described as a ``limitation.'' In fact it was an \textit{architectural invitation} --- a fixed canvas that forced composers to develop extraordinary skill with effects, sampling, and structure. The problem is that this insight is poorly documented and poorly transmitted to contemporary practitioners.
+
+  \item \textbf{The tracker/DAW divide.} Modern music production defaults to horizontal DAW timelines (Ableton, Logic, Pro Tools). The vertical pattern paradigm of trackers encodes fundamentally different musical thinking --- explicit, deterministic, low-CPU, structurally transparent. This paradigm's advantages for certain domains (demoscene, chiptune, game music, sample-constrained work) are underappreciated.
+
+  \item \textbf{OctaMED's unique position is un-documented.} OctaMED is neither a ProTracker clone (game/demo focused) nor a simple sequencer. Its hybrid MIDI+sampler+tracker architecture was sui generis in 1991, and that architecture directly shaped professional electronic music production through the 1990s and 2000s. A comprehensive technical account is missing from the literature.
+
+  \item \textbf{The format genealogy is fragmented.} The lineage from MOD $\to$ S3M $\to$ XM $\to$ IT $\to$ modern formats is documented only in scattered wiki articles and historical FAQs. The architectural evolution --- what each format added and \textit{why} --- requires synthesis.
+
+  \item \textbf{Living culture without living documentation.} Renoise, OpenMPT, MilkyTracker, Furnace, and hardware trackers like Polyend Tracker carry the paradigm forward in 2026. But the connection from Paula's DMA registers to a Polyend Tracker pattern is not drawn anywhere as a coherent cultural and technical arc.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\begin{center}
+{\large\bfseries\sffamily\textcolor{primary}{Hardware Constraint $\times$ Software Leverage = Cultural Explosion}}
+\end{center}
+
+The tracker paradigm converts a fixed, resource-constrained sound system into an expressive composition environment by separating the \textit{description} of music from its \textit{playback}, packing both into a portable module file, and providing a grid-based editor where every parameter of every event is explicit and editable. OctaMED extended this paradigm by crossing the hardware channel ceiling via software mixing and by bridging the tracker world with MIDI-controlled external synthesis. The result was the first affordable platform for studio-quality electronic music production.
+
+\subsubsection{Paula Hardware Architecture (Conceptual Diagram)}
+
+\begin{asciibox}
+Paula (MOS 8364) -- Amiga Original Chip Set
++-------------------------------------------------+
+|                                                 |
+|  Channel 0 [8-bit PCM] -----> LEFT output  |   |
+|  Channel 1 [8-bit PCM] -----> RIGHT output |   |
+|  Channel 2 [8-bit PCM] -----> RIGHT output |   |
+|  Channel 3 [8-bit PCM] -----> LEFT output  |   |
+|                                                 |
+|  Each channel:                                  |
+|    - DMA-driven from RAM (zero CPU)             |
+|    - 6-bit volume (64 levels)                   |
+|    - Period register controls pitch (div-by-N)  |
+|    - Max sample rate ~28.8 kHz                  |
+|                                                 |
+|  Analog output: 12dB/oct Butterworth LPF ~3.3kHz|
+|  (controlled by power LED brightness)           |
++-------------------------------------------------+
+           |
+           | OctaMED software mixing layer
+           v
++-------------------------+-------------------------+
+| HW Channel 0 (LEFT)     | HW Channel 3 (LEFT)     |
+|  -> SW Channel 0        |  -> SW Channel 6        |
+|  -> SW Channel 1        |  -> SW Channel 7        |
++-------------------------+-------------------------+
+| HW Channel 1 (RIGHT)    | HW Channel 2 (RIGHT)    |
+|  -> SW Channel 2        |  -> SW Channel 4        |
+|  -> SW Channel 3        |  -> SW Channel 5        |
++-------------------------+-------------------------+
+  8 virtual voices from 4 hardware channels
+  CPU cost: ~40% of 68000 @ 7.14 MHz
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+ MODULE 01          MODULE 02          MODULE 03
+ Paula Hardware  -->  MOD Format    -->  OctaMED Deep Dive
+ Architecture        & Tracker           (focal instrument)
+ (physics layer)     Paradigm            (8ch + MIDI)
+                     (abstraction)
+       |                  |                   |
+       v                  v                   v
+ MODULE 04          MODULE 05          MODULE 06
+ Tracker            Demoscene &        Modern Tracker
+ Family Tree        Cultural           Ecosystem
+ (genealogy)        Ecology            (Renoise, OpenMPT,
+                    (community)         hardware)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Paula Architecture \& Hardware Constraints}
+The physics of the instrument. Paula's DMA-driven PCM channels, period register pitch control, 6-bit volume, analog filter chain, and stereo panning topology. How these constraints shaped the sound of an era. The 14-bit hack (pairing two channels for improved dynamic range). The OCS/ECS/AGA progression and what changed (and what did not) for audio.
+
+\subsubsection{Module 02: The MOD Format \& Tracker Paradigm}
+What a module file is: samples + patterns + order list in a single portable object. The pattern grid: channels, rows, cells, effect commands. MOD file binary layout (header, sample definitions, pattern table, raw PCM). The effect vocabulary: arpeggio, portamento, volume slide, vibrato, pattern jump. The VSync timing model. How the format was designed for zero-CPU playback on Amiga hardware.
+
+\subsubsection{Module 03: OctaMED Deep Dive}
+Full technical and historical account of MED through OctaMED Soundstudio. The software mixing architecture. The CPU/expressivity trade. Native MIDI via serial port (MED v2.0, 1990). The commercial history (RBF Software, Ray Burt-Frost; A-EON Technology). OctaMED's structural complexity: arbitrary-length patterns, blocks, sections --- the features that made it unsuitable for games and indispensable for musicians. Kjetil Matheussen's NSM binary-hacking extension layer. Notable artists.
+
+\subsubsection{Module 04: Tracker Family Tree}
+The genealogy from Chris Huelsbeck's C64 SoundMonitor $\to$ Ultimate Soundtracker (Obarski, 1987) $\to$ NoiseTracker $\to$ ProTracker (Amiga) $\to$ ScreamTracker 3 / S3M (Future Crew, PC, 1992) $\to$ FastTracker 2 / XM (Triton, 1993) $\to$ Impulse Tracker / IT (Jeffrey Lim, 1995) $\to$ MultiTracker / MTM. What each format added. The MED/OctaMED branch as parallel evolution. OpenMPT as living format archive.
+
+\subsubsection{Module 05: Demoscene \& Cultural Ecology}
+How tracker music became a community. BBS and FidoNet distribution. The demoscene competitive structure (demoparties, compos). MOD file sharing culture and modarchive.org. Keygen music as a genre. The UK rave/hardcore scene's adoption of Amiga trackers (ProTracker, OctaMED). Artists who crossed over: Calvin Harris, Venetian Snares, Paradox, DJ Zinc, Christoph de Babalon, EC8OR. The ``poor man's studio'' thesis.
+
+\subsubsection{Module 06: Modern Tracker Ecosystem}
+Renoise (2002--present) as professional-grade tracker DAW: vertical workflow, VST support, automation, LuaJIT scripting. OpenMPT (1997--present) as format museum and composition tool. MilkyTracker (FT2 clone, cross-platform). FamiTracker and Deflemask (hardware-constrained chiptune). Furnace (multi-chip tracker, simultaneous SID+PC-98). SunVox (modular synth + tracker). Hardware trackers: Polyend Tracker, Teenage Engineering Pocket Operator series. The living culture of demoparties in 2026.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# octamed-mod-trackers-mission.chipset.yaml
+mission: octamed_mod_trackers
+activation_profile: fleet
+
+agnus:
+  role: orchestration
+  model: claude-opus-4-6
+  responsibilities:
+    - cross-module synthesis
+    - Paula/OctaMED technical validation
+    - cultural ecology judgment calls
+    - through-line composition
+  allocation: 30%
+
+denise:
+  role: document_rendering
+  model: claude-sonnet-4-6
+  responsibilities:
+    - module surveys (01, 02, 04, 05, 06)
+    - source verification
+    - table composition
+    - structured content assembly
+  allocation: 60%
+
+paula:
+  role: scaffolding
+  model: claude-haiku-4-5
+  responsibilities:
+    - shared schemas and index files
+    - template instantiation
+    - bibliography formatting
+  allocation: 10%
+
+gary:
+  role: glue
+  model: claude-sonnet-4-6
+  notes: Module 03 (OctaMED deep dive) -- primary focal instrument
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Paula chip architecture and its role in constraining and enabling tracker music
+  \item MOD file format: structure, binary layout, effect vocabulary, timing model
+  \item OctaMED full history: MED v1.12 (1989) through OctaMED Soundstudio, NSM extensions
+  \item Tracker family tree: Soundtracker through IT/XM and OctaMED/MED branch
+  \item Demoscene cultural context and artist crossover to professional music
+  \item Modern tracker ecosystem: Renoise, OpenMPT, hardware trackers, chiptune tools
+  \item Format comparison tables: MOD, S3M, XM, IT, MED/MMD
+  \item GSD ecosystem through-line: Amiga Principle applied to audio architecture
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Full biographies of artists (reference only)
+  \item Sound design tutorials or composition technique
+  \item PC demoscene history (covered only as it intersects tracker formats)
+  \item MIDI sequencer history beyond OctaMED's integration
+  \item Commercial DAW history (Logic, Ableton, Pro Tools)
+  \item SID chip architecture or C64 music in depth
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Paula's four-channel architecture is documented with register-level accuracy (DMA period, volume, channel pairing, analog filter chain).
+  \item The MOD format binary layout is described with sufficient precision to implement a basic player from the specification alone.
+  \item OctaMED's software mixing technique is explained mechanically: how two virtual channels are multiplexed per hardware channel, what CPU cost this incurs, and what this enables musically.
+  \item The CPU/expressivity trade in OctaMED (40\% CPU usage vs. 3\% for game trackers) is quantified and contextualized against the 68000's 7.14 MHz clock.
+  \item The tracker effect vocabulary (arpeggio, portamento, volume slide, vibrato, pattern flow commands) is catalogued with hex codes for at least the MOD format.
+  \item The tracker genealogy from Soundtracker (1987) to Renoise (2026) is mapped as a complete annotated lineage with format innovations noted at each branch.
+  \item At least 8 artists who used OctaMED for professional/commercial releases are documented with album/release references.
+  \item The modern tracker ecosystem (Renoise, OpenMPT, MilkyTracker, Furnace, hardware trackers) is described with feature differentiators.
+  \item The connection between OctaMED's architecture and the GSD chipset naming convention (Agnus/Denise/Paula) is made explicit.
+  \item Format comparison table covers MOD, S3M, XM, IT, and MED/MMD with: channels, bit depth, instrument model, effects count, and year.
+  \item The demoscene distribution ecosystem (BBS, FidoNet, modarchive.org) is documented as a proto-open-source community.
+  \item All technical claims are sourced from specifications, Wikipedia with primary citations, or directly cited developer documentation.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{5cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Direction} \\
+\midrule
+gsd-amiga-vision-architectural-leverage.md & OctaMED is the canonical audio case study of the Amiga Principle & Informs this document \\
+gsd-chipset-architecture-vision.md & Agnus/Denise/Paula/Gary naming originates from Amiga OCS chipset documented here & Informs naming; this doc provides etymology \\
+gsd-os-desktop-vision.md & GSD-OS CRT shader aesthetic traces to demoscene; Paula audio layer & This doc provides cultural lineage \\
+gsd-learn-kung-fu-pack-vision.md & Constraint-based mastery (4 channels $\to$ virtuosity) echoes kung fu ``limits'' philosophy & Parallel metaphor \\
+deep-audio-analyzer-mission.pdf & OctaMED effect commands and MOD format are primary historical context for audio analysis & Predecessor context \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Paula had four channels. That was not a limitation --- it was a specification. Every instrument has one: the piano has 88 keys, the cello has four strings, the 808 has its fixed voice palette. The instrument does not contain the music; it defines the \textit{problem space} that the musician must solve. Karsten Obarski saw that problem space and wrote a tracker. Teijo Kinnunen saw it and wrote OctaMED --- which doubled the instrument by making the CPU pay the cost the hardware would not.
+
+This is the Amiga Principle in its purest form: the hardware is fixed; the software is leverage. Four channels become eight not by adding hardware but by being smarter about what the hardware does. The module file is self-contained because portability matters. The effect commands are hex codes because the machine is the notation system. The pattern grid scrolls vertically because time is explicit, not implied.
+
+In the GSD ecosystem, every context window is a Paula chip: fixed, finite, panned hard-left and hard-right by what the model knows and what the user provides. The skill-creator's job is to be OctaMED --- to multiply that resource through architectural leverage, pattern recognition, and deliberate specialization. The tracker paradigm teaches that the most expressive systems are not the ones with unlimited resources. They are the ones that have learned to count every tick.
+
+% ════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ════════════════════════════════════════════════════════════════════════════
+
+\section{OctaMED \& Mod Trackers --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from cold-start web research conducted on March 27, 2026. Module surveys draw from the following authoritative source organizations:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Wikipedia} (with primary citations): Music tracker, Module file, MOD file format, OctaMED, FastTracker 2, ProTracker, Amiga Original Chip Set
+  \item \textbf{OpenMPT Wiki} (wiki.openmpt.org): Module format specifications, effect commands, format comparison
+  \item \textbf{Amiga Hardware Reference Manual} (Miner et al., Addison-Wesley, 1991): Paula register documentation
+  \item \textbf{Sound On Sound} (soundonsound.com): OctaMED v6 and Sound Studio review (primary period review)
+  \item \textbf{MusicTech} (musictech.com): History of trackers overview
+  \item \textbf{Tracker History Graphing Project} (cmatsuoka/tracker-history, GitHub): Format genealogy
+  \item \textbf{modarchive.org}: Living archive of module files and community
+  \item \textbf{Renoise.com}: Modern tracker documentation and artist roster
+\end{itemize}
+
+\subsection{Module 01 Reference: Paula Architecture}
+
+\subsubsection{The OCS Chipset Context}
+
+The Original Chip Set (OCS) of the Commodore Amiga comprised four chips: \textbf{Agnus} (Address Generator --- DMA and memory arbitration), \textbf{Denise} (Display Enabler --- graphics), \textbf{Paula} (Ports/Audio/UART/Logic --- sound, serial, floppy, interrupts), and \textbf{Gary} (glue logic). All three custom chips were designed with deep involvement from Jay Miner, and share architectural DNA with the earlier Atari 8-bit chipset (ANTIC/GTIA/POKEY). The Amiga 1000 shipped July 23, 1985 at \$1,285 --- competitive with downmarket IBM offerings, but with capabilities that far exceeded any comparable price point in audio.
+
+\subsubsection{Paula Technical Specification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Specification} \\
+\midrule
+Chip designation & MOS 8364 (Paula) \\
+Audio channels & 4 independent DMA-driven channels \\
+Sample format & Signed linear 8-bit two's complement PCM \\
+Volume control & 6-bit per channel (64 levels: 0--63) \\
+Frequency control & Period register (div-by-N from ~3.546 MHz PAL clock) \\
+Max sample rate & ~28,867 Hz (limited by DMA bandwidth) \\
+Minimum period & 123 clock cycles \\
+Stereo topology & Ch0+Ch3 $\to$ LEFT; Ch1+Ch2 $\to$ RIGHT (hard-panned) \\
+Analog filter & 12 dB/oct Butterworth LPF at ~3.3 kHz (global, all channels) \\
+Filter control & Power LED brightness (software-accessible) \\
+DMA access & Via Agnus chip; CPU hands off to DMA for zero-CPU playback \\
+CPU interrupt mode & Also available; enables output rates exceeding 57 kHz \\
+Channel modulation & One channel can modulate adjacent channel's period or amplitude \\
+14-bit hack & Two channels paired with offset volume produce ~14-bit effective resolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Why Paula Mattered}
+
+In 1985, polyphonic sampling required a Fairlight CMI or Synclavier costing tens of thousands of dollars, or an Ensoniq Mirage at \$1,695. Paula offered four-voice 8-bit polyphonic sample playback at consumer prices, with the critical efficiency advantage that the 68000 CPU handed PCM data to Paula via DMA --- no CPU tax for playback. This left the processor free for graphics, game logic, or, crucially, software mixing.
+
+The hard stereo panning (channels 0 and 3 always left; 1 and 2 always right) was a common complaint with headphone listening but also became a characteristic aesthetic quality. The analog low-pass filter at ~3.3 kHz was designed as an anti-aliasing reconstruction filter, but its on/off toggle via the power LED became a production aesthetic choice in its own right.
+
+\subsection{Module 02 Reference: MOD Format \& Tracker Paradigm}
+
+\subsubsection{The Module File Concept}
+
+A module file stores music as two things: a set of digital audio samples (the instruments) and a set of patterns (the score). Unlike MIDI files, which depend on external synthesizers and cannot travel alone, a module file is completely self-contained. Unlike raw audio recordings, a module file is tiny --- a full song with 31 samples might occupy 100--200 KB. This self-containment made modules ideal for demoscene productions, game soundtracks, and BBS distribution.
+
+\subsubsection{MOD Binary Layout}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Offset} & \tableheader{Size} & \tableheader{Description} \\
+\midrule
+0 & 20 bytes & Song name (null-padded) \\
+20 & 30 bytes $\times$ 31 & Sample headers (name, length, finetune, volume, loop) \\
+950 & 1 byte & Song length (number of patterns in order list) \\
+951 & 1 byte & Legacy byte (ignored; historically ``restart position'') \\
+952 & 128 bytes & Pattern order list (0--127, values 0--63) \\
+1080 & 4 bytes & Magic: ``M.K.'' (31 samples) or absent (15 samples) \\
+1084 & Variable & Pattern data: 64 rows $\times$ 4 channels $\times$ 4 bytes per note \\
+End & Variable & Raw 8-bit PCM sample data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Each note cell is 4 bytes encoding: upper 4 bits of sample number, 12-bit period (pitch), lower 4 bits of sample number, effect command nibble, and effect parameter byte.
+
+\subsubsection{MOD Effect Vocabulary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Code} & \tableheader{Effect} & \tableheader{Description} \\
+\midrule
+0xy & Arpeggio & Rapidly cycle through note, +x semitones, +y semitones (chord simulation) \\
+1xx & Portamento Up & Slide pitch upward by xx units per tick \\
+2xx & Portamento Down & Slide pitch downward by xx units per tick \\
+3xx & Tone Portamento & Glide to target note over xx steps \\
+4xy & Vibrato & Oscillate pitch; x=speed, y=depth \\
+5xy & Vol Slide + Tone Port & Combined portamento and volume slide \\
+6xy & Vol Slide + Vibrato & Combined vibrato and volume slide \\
+7xy & Tremolo & Volume oscillation \\
+9xx & Sample Offset & Start playback at offset xx $\times$ 256 bytes into sample \\
+Axy & Volume Slide & Slide volume; x=up amount, y=down amount \\
+Bxx & Position Jump & Jump to pattern order position xx \\
+Cxx & Set Volume & Set channel volume to xx (0--64) \\
+Dxx & Pattern Break & Jump to next pattern, row xx \\
+Exx & Extended & Sub-commands: filter, fine slides, retrigger, note cut, delay \\
+Fxx & Set Speed/BPM & Values 1--31: ticks per row; 32--255: BPM \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Tracker Workflow}
+
+The tracker editor presents music as a vertical grid: time flows downward, channels are columns, and each cell can trigger a note with an effect. A \textbf{pattern} is typically 64 rows. Patterns are assembled in an \textbf{order list} to form a complete song. The VSync-based timing model (originally tied to the 50 Hz PAL or 60 Hz NTSC monitor refresh) meant that the minimum time unit was 0.02 seconds. The speed setting (effect F) controls how many VSync ticks each row lasts.
+
+This vertical, explicit, cell-by-cell composition model is the defining characteristic of the tracker paradigm and remains its central distinction from horizontal-timeline DAWs.
+
+\subsection{Module 03 Reference: OctaMED Deep Dive}
+
+\subsubsection{Development History}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Version} & \tableheader{Year} & \tableheader{Key Changes} \\
+\midrule
+MED 1.12 & 1989 & Initial release; public domain; 4 channels; basic tracker \\
+MED 2.00 & April 1990 & MIDI support via serial port (major differentiator) \\
+MED 3.xx & 1991 & Basis for commercial release; RBF Software (Ray Burt-Frost) \\
+OctaMED & 1991 & First commercial release; 8-channel software mixing; 8 tracks displayed \\
+OctaMED Professional & Early 1990s & Enhanced MIDI; keyboard split; external synth sequencing \\
+OctaMED v6 & Mid-1990s & 16-bit sample support; MIDI file types 0/1; ARexx; scroll bars; separate windows \\
+OctaMED Soundstudio & 1996 & Final Amiga version; up to 64 channels; stereo samples; hard disk recording \\
+MED Soundstudio (Win) & Post-1996 & Windows port; limited features; bugged; never matched Amiga release \\
+NSM extensions & 1997+ & Kjetil Matheussen binary-hacks OctaMED; CAMD MIDI, 48-ch MIDI, signal processing plugins \\
+A-EON Technology & 2010s+ & Current publisher; maintaining rights \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{The Software Mixing Architecture}
+
+Standard Amiga trackers (ProTracker, NoiseTracker) drove the four Paula hardware channels directly. Each channel played one sample at one pitch at one volume. The 68000 CPU handed off PCM data to Agnus/Paula's DMA with minimal overhead --- roughly 3\% CPU utilization.
+
+OctaMED used a fundamentally different approach. Instead of driving hardware channels directly, OctaMED ran a software mixer in the 68000 CPU. Two virtual channels were multiplexed into each of the four hardware channels --- the CPU computed a mixed output waveform in RAM, then DMA-streamed the pre-mixed result to Paula. This doubled polyphony at the cost of approximately 40\% CPU utilization on a stock 7.14 MHz 68000.
+
+The technique had specific trade-offs: paired software channels shared the hardware volume control, the higher-quality mixing routine required a faster CPU, and some louder samples could distort due to mixing headroom limitations. These were trade-offs that OctaMED's audience --- musicians composing standalone works --- were willing to accept.
+
+The technique of playing more channels than the hardware supports was first implemented by Jochen Hippel's ``Hippel 7V'' routine (adapted from Atari ST code), appeared in TFMX, and was optimized to 8 channels in Oktalyzer and Face The Music before OctaMED. OctaMED's 8-channel routine differed in pairing two software channels per hardware channel symmetrically, whereas TFMX and Oktalyzer used one hardware channel as a high-quality dedicated channel and software-mixed the rest.
+
+\subsubsection{The MIDI Hybrid}
+
+The distinguishing feature of MED/OctaMED was native MIDI support via the Amiga's serial port, available from MED v2.00 (April 1990). This meant a composer could sequence both Paula's internal samples and outboard studio equipment (synthesizers, drum machines, samplers) from a single interface. OctaMED effectively became a hybrid tracker/MIDI sequencer --- a configuration unavailable on any other tracker and unavailable in commercial sequencers at anything near the Amiga's price point.
+
+This hybrid capability is why OctaMED was used to produce commercial releases that would not be identifiable as ``Amiga music'' to casual listeners --- the Amiga was sequencing external hardware, not merely playing Paula samples.
+
+\subsubsection{Structural Complexity}
+
+OctaMED's MED/MMD format differed from the MOD format in a key structural way: patterns could be of \textit{arbitrary length}, not fixed at 64 rows. The format also introduced ``blocks'' and ``sections'' --- structural levels above the pattern that allowed compositional complexity beyond what a simple pattern list could express. This additional expressiveness came at a CPU cost and made MED files unsuitable for the tight interrupt-driven replay routines that game and demo music required.
+
+\subsubsection{Notable Artists}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Artist} & \tableheader{OctaMED Connection} \\
+\midrule
+Calvin Harris & Reportedly used OctaMED for \textit{I Created Disco} (2007); MIDI-hybrid approach \\
+Venetian Snares (Aaron Funk) & Used various OctaMED versions on both Amiga and PC; early career breakcore \\
+Christoph de Babalon & \textit{If You're Into It I'm Out of It} (1997): Amiga OctaMED + Yamaha RY-30 + Boss DD-3 \\
+Paradox & Drum and bass; uses OctaMED in studio and live on stage \\
+DJ Zinc & ``Super Sharp Shooter'' produced in OctaMED (``like being stuck in the matrix'') \\
+EC8OR & Digital Hardcore Recordings; OctaMED-produced breakcore from 1994 \\
+Pete Cannon & Uses OctaMED in most productions \\
+Legowelt & \textit{Amiga Railroad Adventures} (2009) produced on Amiga 1200 with OctaMED \\
+Matt Barker (Epicentre) & First tracks in OctaMED late 1990s \\
+Unleashed & Album \textit{Gasshouse Guerillas} produced almost entirely in OctaMED \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 04 Reference: Tracker Family Tree}
+
+\subsubsection{Genealogy Overview}
+
+\begin{asciibox}
+1987  Ultimate Soundtracker (Karsten Obarski) -- 4ch, 15 samples, .MOD origin
+       |
+       +--> NoiseTracker (1989) -- more effects, 31 samples
+       |     |
+       |     +--> ProTracker (1990) -- sample editor, keyboard split, .MOD reference
+       |           |
+       |           +--> Various Amiga derivatives (StarTrekker, etc.)
+       |           +--> VividTracker (iOS, 2014) -- faithful ProTracker clone
+       |
+       +--> MED / OctaMED branch (Kinnunen, 1989-1996) -- MIDI, 8ch, MMD format
+       |     |
+       |     +--> MED Soundstudio (Windows port) -- limited
+       |     +--> NSM extensions (Matheussen, 1997+)
+       |
+       +--> TFMX / Oktalyzer -- early 7-8ch prototypes
+       |
+1992  ScreamTracker 3 (Sami Tammilehto / Future Crew) -- PC, .S3M format
+       |  32 channels, OPL2 FM + samples, compressed patterns
+       |
+1993  FastTracker 2 (Triton: Huss + Hogdahl) -- PC, .XM format
+       |  32 channels, instrument envelopes, volume/pan automation
+       |  (Triton later founded Starbreeze Studios)
+       |
+1995  Impulse Tracker (Jeffrey Lim) -- PC, .IT format
+       |  64 channels, resonant filters, New Note Actions, NNAs
+       |
+1997  OpenMPT (PC) -- open-source multi-format player/editor (living)
+       |
+2002  Renoise (PC/Mac/Linux) -- modern DAW-class tracker (living)
+       |  VST/AU, automation, LuaJIT scripting, MIDI
+       |
+202x  Hardware Trackers: Polyend Tracker, Teenage Engineering PO series
+       Chip Trackers: Furnace (multi-chip), FamiTracker (NES), Deflemask
+\end{asciibox}
+
+\subsubsection{Format Evolution Table}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}C{1.5cm}C{2cm}C{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Format} & \tableheader{Year} & \tableheader{Max Ch.} & \tableheader{Bit Depth} & \tableheader{Instruments} & \tableheader{Key Innovation} \\
+\midrule
+MOD & 1987 & 4--8 & 8-bit & 15--31 samples & Module file concept \\
+MED/MMD & 1989 & 8 (SW) & 8-bit & 64+ & MIDI, arb. pattern length \\
+S3M & 1992 & 32 & 8/16-bit & 99 & FM+PCM, compressed patterns \\
+XM & 1993 & 32 & 8/16-bit & 128 & Instrument envelopes, panning \\
+IT & 1995 & 64 & 8/16-bit & 256 & Filters, NNAs, high polyphony \\
+MMD2/SS & 1996 & 64 & 16-bit & 256 & Stereo, hard disk, ARexx \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05 Reference: Demoscene \& Cultural Ecology}
+
+\subsubsection{Distribution Infrastructure}
+
+Tracker music spread through a pre-internet infrastructure: BBS networks and FidoNet, where module files were exchanged as easily as text messages. Their compact size (a full song in under 300 KB) made them ideal for modem distribution. The demoscene organized around \textit{demoparties} --- competitive events where groups submitted \textit{demos} (audiovisual programs demonstrating hardware mastery) and \textit{tracked music} as separate competition categories.
+
+The MOD scene gave rise to modarchive.org, which maintains a living archive of module files still receiving near-daily uploads in 2026. The Demoscene was recognized as UNESCO intangible cultural heritage in Finland in 2020 and Germany in 2021.
+
+\subsubsection{The Rave Connection}
+
+The UK hardcore and rave scene of the early 1990s found the Amiga --- primarily through ProTracker and OctaMED --- to be the most affordable production tool available. Sampler cartridges connected to the Amiga's parallel port cost under \textsterling{}50, turning the system into a complete sampling workstation. Australian speedcore group Nasenbluten used ProTracker prolifically. Rotterdam gabba crew Neophyte used ProTracker for studio production and live performance. OctaMED's MIDI support extended this capability to outboard drum machines and synthesizers.
+
+\subsubsection{The Cultural Through-Line: ``The Poor Man's Studio''}
+
+A 2022 article in Vice characterized Amiga tracker culture as ``the poor man's studio,'' but this framing understates the technical sophistication involved. OctaMED users were not making do with inferior tools --- they were using a system that, through architectural leverage, offered capabilities comparable to equipment costing ten to fifty times more. The Amiga's \$1,285 price point with Paula's 4-voice PCM at 28 kHz was competitive with professional audio hardware of the era. OctaMED's MIDI integration made it genuinely professional.
+
+\subsection{Module 06 Reference: Modern Tracker Ecosystem}
+
+\subsubsection{Renoise (2002--present)}
+
+Renoise is the canonical modern tracker: a full commercial DAW with the vertical pattern paradigm at its core. Features include VST/AU/LADSPA plugin hosting, automation curves, a mixer with send channels, MIDI support, LuaJIT scripting API, an integrated sample editor, and WAV export. Renoise runs on Windows, macOS, and Linux. In 2007, \textit{Computer Music Magazine} presented Renoise alongside OpenMPT as professional, inexpensive alternatives to mainstream DAWs. Notable Renoise artists include Blue Stahli (Cyberpunk 2077 soundtrack), John Tejada, and hunz. Renoise also ships Redux, a VST/AU plugin version of its sampler/instrument editor for use inside other DAWs.
+
+\subsubsection{OpenMPT (1997--present)}
+
+ModPlug Tracker, renamed OpenMPT (Open ModPlug Tracker) and open-sourced in 2004, is the primary multi-format module composition and playback tool for Windows. It supports MOD, S3M, XM, IT, and dozens of additional formats, with format-accurate quirk emulation for each. OpenMPT is the primary research and archival tool for the tracker format ecosystem.
+
+\subsubsection{MilkyTracker and Other Classic Emulators}
+
+MilkyTracker is a cross-platform FT2-accurate tracker. VividTracker (iOS, 2014) is a ProTracker-accurate mobile tracker. Both serve the ``faithful emulation'' niche for composers who want the original constraint environment.
+
+\subsubsection{Chiptune-Focused Trackers}
+
+Furnace is a multi-chip tracker allowing simultaneous composition for multiple sound chips (e.g., C64 SID + PC-98 OPN2). FamiTracker and its successor 0CC-FamiTracker target NES/Famicom audio hardware. Deflemask covers a wide range of retro game hardware. SunVox combines a tracker sequencer with a modular synthesizer engine. These tools address the ``hardware constraint'' dimension of the tracker paradigm directly, designing around specific silicon limitations.
+
+\subsubsection{Hardware Trackers}
+
+The Polyend Tracker (2020) is a standalone hardware device running a purpose-built tracker interface. Teenage Engineering's Pocket Operator series implements tracker-inspired step-sequencing in ultra-compact hardware. These represent the convergence of the ``hardware as instrument'' philosophy from the Amiga era with contemporary embedded systems design.
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Artist attribution & Accuracy gate & Verify all artist/album claims; OctaMED artist list has some apocryphal entries (Calvin Harris claim is ``reportedly'') \\
+Warez/crackers context & Annotate & Demoscene and warez scene overlap in history; present factually without glorifying illegal software distribution \\
+Proprietary format specs & Verify & MOD spec is public domain; MED/MMD spec is partially documented; note gaps accurately \\
+Cultural heritage (demoscene) & Note & UNESCO recognition of demoscene (Finland 2020, Germany 2021) should be noted as relevant cultural legitimization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary Technical Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Wikipedia: ``OctaMED'' (November 14, 2025 revision) --- \url{https://en.wikipedia.org/wiki/OctaMED}
+  \item Wikipedia: ``Music tracker'' --- \url{https://en.wikipedia.org/wiki/Music_tracker}
+  \item Wikipedia: ``Module file'' (November 1, 2025 revision) --- \url{https://en.wikipedia.org/wiki/Module_file}
+  \item Wikipedia: ``MOD (file format)'' (January 4, 2026 revision) --- \url{https://en.wikipedia.org/wiki/MOD_(file_format)}
+  \item Wikipedia: ``Amiga Original Chip Set'' --- \url{https://en.wikipedia.org/wiki/Amiga_Original_Chip_Set}
+  \item Wikipedia: ``FastTracker 2'' --- \url{https://en.wikipedia.org/wiki/FastTracker_2}
+  \item Wikipedia: ``ProTracker'' --- \url{https://en.wikipedia.org/wiki/Protracker}
+  \item OpenMPT Wiki: ``Module formats'' --- \url{https://wiki.openmpt.org/Manual:_Module_formats}
+  \item Miner, Jay et al. \textit{Amiga Hardware Reference Manual}, 3rd ed. Addison-Wesley, 1991.
+  \item cmatsuoka/tracker-history GitHub repository: MED history file --- \url{https://github.com/cmatsuoka/tracker-history}
+\end{itemize}
+
+\subsubsection{Historical \& Cultural Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Overaa, Paul. ``OctaMED v6 \& Sound Studio.'' \textit{Sound On Sound}, 1990s. --- \url{https://www.soundonsound.com/techniques/octamed-v6-sound-studio}
+  \item MusicTech: ``The history of trackers'' (December 21, 2022) --- \url{https://musictech.com/guides/essential-guide/history-of-trackers/}
+  \item Bargenquast, Matt. ``To BRBEATLP.958 and beyond (Part 2): Learning the family tree'' --- \url{https://bargenqua.st/posts/mods-2/}
+  \item VividSynths: ``Tracker History'' --- \url{https://www.vividsynths.com/doku.php?id=tracker_history}
+  \item Sonic State: ``40 Years of Paula --- The Amiga Sound Chip'' (July 24, 2025) --- \url{https://sonicstate.com/news/2025/07/24/40-years-of-paula-the-amiga-sound-chip/}
+\end{itemize}
+
+\subsubsection{Format Specification Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item ``The Amiga MOD Format'' (UC Berkeley) --- \url{https://www.ocf.berkeley.edu/~eek/index.html/tiny_examples/ptmod/ap12.html}
+  \item Hanning, Peter ``CRAYON.'' MOD specification (eblong.com) --- \url{https://www.eblong.com/zarf/blorb/mod-spec.txt}
+  \item ``The MOD Music File Format'' (fileformat.info) --- \url{https://www.fileformat.info/format/mod/corion.htm}
+  \item ``MOD (file format)'' Grokipedia --- \url{https://grokipedia.com/page/MOD_(file_format)}
+\end{itemize}
+
+% ════════════════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ════════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality deep research document on OctaMED and the MOD tracker ecosystem, covering Paula hardware architecture, the MOD format and tracker paradigm, OctaMED's technical history and software mixing innovations, the complete tracker format genealogy, demoscene cultural ecology, and the modern tracker landscape --- with explicit connections to the GSD Amiga Principle and GSD-OS chipset architecture. The output is a structured reference document executable by a Fleet-level gsd-skill-creator mission over 4--5 sessions.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: Foundation
+  [Haiku] Schema + source index + shared templates
+       |
+       v
+WAVE 1A (parallel)          WAVE 1B (parallel)
+[Sonnet] Module 01           [Sonnet] Module 04
+  Paula Hardware              Tracker Family Tree
+[Sonnet] Module 02           [Sonnet] Module 05
+  MOD Format + Paradigm       Demoscene Ecology
+       |                           |
+       +----------+----------------+
+                  v
+WAVE 2A (parallel)          WAVE 2B (parallel)
+[Opus]  Module 03           [Sonnet] Module 06
+  OctaMED Deep Dive           Modern Ecosystem
+       |                           |
+       +----------+----------------+
+                  v
+WAVE 3: Synthesis + Integration
+  [Opus] Cross-module integration, GSD through-line
+  [Sonnet] Format comparison tables, artist table
+       |
+       v
+WAVE 4: Publication + Verification
+  [Sonnet] Document assembly (LaTeX PDF)
+  [Sonnet] Source verification, accuracy audit
+  [Haiku] Bibliography formatting
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Hardware Layer} --- Paula chip physics; OCS chipset; period register; DMA architecture
+  \item \textbf{Format Layer} --- MOD binary structure; effect commands; the module file as unit of music
+  \item \textbf{Software Layer} --- OctaMED software mixing; MIDI integration; MED/MMD format extensions
+  \item \textbf{Genealogy Layer} --- Format evolution from MOD to IT/XM; tracker tool lineage
+  \item \textbf{Cultural Layer} --- Demoscene; BBS distribution; rave scene; artist crossover
+  \item \textbf{Contemporary Layer} --- Renoise; OpenMPT; hardware trackers; living communities
+  \item \textbf{Synthesis Layer} --- GSD ecosystem through-line; Amiga Principle applied to audio
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{4cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Source} \\
+\midrule
+1 & Paula Architecture Survey & Register-level accuracy; diagram; 14-bit hack explained & Module 01 Reference \\
+2 & MOD Format Specification & Binary layout table; complete effect vocabulary; VSync timing & Module 02 Reference \\
+3 & OctaMED Deep Dive Document & Full version history; software mixing mechanism; MIDI architecture; 10+ artists & Module 03 Reference \\
+4 & Tracker Genealogy Map & ASCII lineage diagram; format evolution table; branch points annotated & Module 04 Reference \\
+5 & Demoscene Cultural Survey & BBS/FidoNet distribution; demoparties; rave connection; UNESCO note & Module 05 Reference \\
+6 & Modern Ecosystem Survey & Renoise; OpenMPT; chip trackers; hardware trackers; current URLs & Module 06 Reference \\
+7 & Cross-Module Synthesis & GSD through-line; Amiga Principle integration; chipset etymology & Synthesis Layer \\
+8 & Compiled Research Document & Complete LaTeX PDF with all stages; 3-pass XeLaTeX compilation & This document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Schemas + index & None & Haiku & 2K \\
+W1A: Paula survey & None & Sonnet & 8K \\
+W1A: MOD format & None & Sonnet & 10K \\
+W1B: Genealogy & None & Sonnet & 10K \\
+W1B: Demoscene & None & Sonnet & 8K \\
+W2A: OctaMED deep dive & Paula, MOD, Genealogy & Opus & 15K \\
+W2B: Modern ecosystem & Genealogy & Sonnet & 8K \\
+W3: Synthesis + integration & All W1+W2 outputs & Opus & 12K \\
+W4: Publication assembly & All W3 outputs & Sonnet & 20K \\
+W4: Verification & All outputs & Sonnet & 8K \\
+W4: Bibliography & All outputs & Haiku & 2K \\
+\midrule
+\textbf{Total} & & & \textbf{$\sim$103K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Alloc.} & \tableheader{Tasks} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & OctaMED deep dive; synthesis; GSD through-line & Technical validation of mixing architecture; judgment on cultural significance; through-line composition requires nuance \\
+Sonnet & 60\% & All survey modules; document assembly; verification & Structured content from well-defined sources; table composition; accuracy checking \\
+Haiku & 10\% & Schemas; bibliography; scaffolding & Simple formatting; deterministic structure; no judgment required \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4.5cm}C{2cm}C{2cm}L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{HITL Gate} \\
+\midrule
+0 & Foundation & Sequential & Haiku & None \\
+1A & Hardware + Format & Parallel & Sonnet & Source quality check \\
+1B & Genealogy + Culture & Parallel & Sonnet & Source quality check \\
+2A & OctaMED Deep Dive & Sequential & Opus & Technical accuracy gate \\
+2B & Modern Ecosystem & Parallel & Sonnet & None \\
+3 & Synthesis + Integration & Sequential & Opus & GSD through-line approval \\
+4 & Publication + Verification & Sequential & Sonnet & Final document review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} & \tableheader{Notes} \\
+\midrule
+Source index & SCOUT / Haiku & sources.yaml & Index all bibliography entries with URLs and access dates \\
+Shared schema & Paula / Haiku & schema.yaml & Module structure, table headers, section template \\
+GSD context load & ARCH / Sonnet & context.md & Load relevant GSD vision docs for through-line \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks}
+
+\textbf{Track A (Hardware + Format):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Key Sources} \\
+\midrule
+Paula architecture survey & CRAFT-HW & Sonnet & Wikipedia OCS; AHRF; KVR Audio forum; Sonic State \\
+MOD format specification & CRAFT-FORMAT & Sonnet & Wikipedia MOD; OpenMPT wiki; eblong.com spec; fileformat.info \\
+Effect vocabulary table & EXEC-A & Sonnet & MOD spec; OpenMPT wiki; Grokipedia \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Genealogy + Culture):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Key Sources} \\
+\midrule
+Tracker genealogy map & CRAFT-HIST & Sonnet & cmatsuoka/tracker-history; Wikipedia tracker; Bargenquast blog \\
+Format evolution table & EXEC-B & Sonnet & OpenMPT wiki; Wikipedia module file \\
+Demoscene ecology survey & CRAFT-CULTURE & Sonnet & MusicTech history; Vapor95; demoscene.info \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{HITL CAPCOM Gate after Wave 1:} Review source quality, verify OctaMED artist list accuracy, confirm Calvin Harris claim is flagged as ``reportedly,'' approve scope before Opus consumption.
+
+\subsection{Wave 2: Deep Dives}
+
+\textbf{Module 03 (OctaMED --- Opus, Sequential):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Notes} \\
+\midrule
+Software mixing architecture & ANALYST / Opus & Mechanistic explanation of 2-per-channel multiplexing; CPU math \\
+MIDI hybrid analysis & ANALYST / Opus & Why MIDI + sampler + tracker is architecturally novel \\
+Version history table & EXEC-A / Opus & Compile from cmatsuoka, Wikipedia, Sound On Sound \\
+MED vs MOD format diff & ANALYST / Opus & Structural complexity; arbitrary pattern length; MMD format \\
+Artist verification & VERIFY & Cross-check all 10 artists against cited sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Module 06 (Modern Ecosystem --- Sonnet, Parallel with 2A):}
+
+Renoise feature survey; OpenMPT capabilities; chiptune tracker inventory; hardware tracker landscape.
+
+\textbf{HITL CAPCOM Gate after Wave 2:} Technical accuracy review of OctaMED mixing description; approve through-line direction for Wave 3.
+
+\subsection{Wave 3: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Notes} \\
+\midrule
+GSD through-line composition & AGNUS / Opus & ``4 channels as context window'' metaphor; Amiga Principle connection \\
+Chipset etymology integration & AGNUS / Opus & Agnus/Denise/Paula/Gary: from OCS to GSD-OS naming \\
+Cross-module connections & INTEG / Opus & Paula $\to$ MOD $\to$ OctaMED $\to$ Demoscene $\to$ Renoise arc \\
+Format comparison synthesis & EXEC-B / Sonnet & Final consolidated table; MOD/S3M/XM/IT/MMD \\
+Success criteria verification & VERIFY / Sonnet & Check all 12 criteria against produced content \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 4: Publication + Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Notes} \\
+\midrule
+LaTeX document assembly & DENISE / Sonnet & 3-pass XeLaTeX; Amiga-blue color scheme; Amiga Principle template \\
+Source verification pass & VERIFY / Sonnet & All URLs validated; dates confirmed; attribution accurate \\
+Bibliography formatting & PAULA / Haiku & Consistent citation format; sorted by category \\
+Index.html generation & DENISE / Sonnet & Color scheme matching LaTeX; download links; usage instructions \\
+Final HITL review & CAPCOM & User reviews PDF before delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Source index cached in Wave 0} and reused by all Wave 1 agents --- computed once, referenced many times
+  \item \textbf{GSD context document} (Amiga Principle, chipset architecture) cached at Wave 0 and fed to all Opus invocations as a shared prefix
+  \item \textbf{Wave 1A and 1B are independent} --- launch simultaneously; no shared state between tracks until Wave 3
+  \item \textbf{OctaMED deep dive (Wave 2A)} is Sequential/Opus by design --- artifact is the primary deliverable; cache all Wave 1 outputs as its input prefix
+  \item \textbf{5-minute TTL exploitation}: Run Wave 0 + Wave 1 in rapid succession to maximize prefix cache hits across concurrent Sonnet agents
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus} & \tableheader{Sonnet} & \tableheader{Haiku} & \tableheader{Total} \\
+\midrule
+Wave 0 & 0 & 2K & 4K & 6K \\
+Wave 1A & 0 & 18K & 0 & 18K \\
+Wave 1B & 0 & 18K & 0 & 18K \\
+Wave 2A (OctaMED) & 15K & 5K & 0 & 20K \\
+Wave 2B (Modern) & 0 & 8K & 0 & 8K \\
+Wave 3 (Synthesis) & 12K & 8K & 0 & 20K \\
+Wave 4 (Publication) & 0 & 20K & 3K & 23K \\
+\midrule
+\textbf{Total} & \textbf{27K} & \textbf{79K} & \textbf{7K} & \textbf{$\sim$113K} \\
+\midrule
+\textbf{\% Split} & \textbf{24\%} & \textbf{70\%} & \textbf{6\%} & \textbf{100\%} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+sources.yaml --> W1A-Paula
+schema.yaml  --> W1A-MOD
+             --> W1B-Genealogy
+             --> W1B-Demoscene
+
+W1A-Paula
+W1A-MOD       --> W2A-OctaMED (Opus)
+W1B-Genealogy --> W2A-OctaMED (Opus)
+                  W2B-Modern  (Sonnet, parallel)
+
+W2A-OctaMED
+W2B-Modern
+W1B-Demoscene --> W3-Synthesis (Opus)
+
+W3-Synthesis  --> W4-Publication (Sonnet)
+W4-Publication --> Final PDF + HTML
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}C{2cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical & 3 & MANDATORY & BLOCK release \\
+Core Technical & 5 & HIGH & REVISION required \\
+Integration & 4 & MEDIUM & ANNOTATE gap \\
+Edge Case & 3 & LOW & ANNOTATE if time permits \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Calvin Harris claim accuracy & Claim flagged as ``reportedly'' with source cited; not stated as fact without verification \\
+SC-02 & All artist attributions sourced & Every artist in Module 03 table has at least one traceable citation; no apocryphal entries passed as fact \\
+SC-03 & No warez glorification & Demoscene/warez overlap presented factually; software distribution legality not endorsed or condemned \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Technical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+CT-01 & Paula register accuracy & Period register described as DMA clock divider; max rate $\sim$28.8 kHz; 6-bit volume verified against OCS spec \\
+CT-02 & OctaMED CPU cost & 40\% CPU utilization cited with source (Wikipedia OctaMED); contrasted with 3\% for standard trackers \\
+CT-03 & 8-channel mixing mechanism & 2 SW channels per HW channel described mechanistically; paired volume sharing noted as limitation \\
+CT-04 & MOD effect codes accurate & Effect vocabulary table matches eblong.com spec and OpenMPT wiki; hex codes correct \\
+CT-05 & Format evolution dates & All years in format table verifiable against Wikipedia or OpenMPT wiki primary sources \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}X L{3cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Paula register-level accuracy & CT-01 & Open \\
+2 & MOD binary layout implementable & CT-04 & Open \\
+3 & OctaMED mixing explained mechanically & CT-03 & Open \\
+4 & CPU/expressivity trade quantified & CT-02 & Open \\
+5 & Effect vocabulary catalogued & CT-04 & Open \\
+6 & Tracker genealogy complete & CT-05 & Open \\
+7 & 8+ OctaMED artists documented & SC-02 & Open \\
+8 & Modern ecosystem described & Integration & Open \\
+9 & GSD chipset connection explicit & Integration & Open \\
+10 & Format comparison table complete & CT-05 & Open \\
+11 & Demoscene distribution documented & Integration & Open \\
+12 & All claims sourced & SC-01, SC-02 & Open \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go at HITL gates \\
+PLAN & Planner & Wave decomposition; parallel track optimization \\
+TOPO & Topology Mgr & Agent team structure; mid-mission restructuring \\
+ARCH & Architecture & Cross-cutting structural decisions; format schema \\
+SECURE & Security & Safety boundary enforcement (SC-01, SC-02, SC-03) \\
+SCOUT & Research Agent & Source gathering; web research; gap filling \\
+CRAFT-HW & Hardware Specialist & Paula architecture; OCS chipset; register docs \\
+CRAFT-FORMAT & Format Specialist & MOD/S3M/XM/IT specification; effect vocabulary \\
+CRAFT-HIST & History Specialist & Tracker genealogy; format evolution lineage \\
+CRAFT-CULTURE & Culture Specialist & Demoscene; rave scene; distribution ecosystem \\
+EXEC-A & Executor A & Wave 1A document production \\
+EXEC-B & Executor B & Wave 1B + 4 document production \\
+ANALYST & Pattern Analyst & OctaMED deep dive; cross-module patterns \\
+VERIFY & Verification & Source validation; accuracy auditing \\
+INTEG & Integration & Cross-module relationships; GSD through-line \\
+CAPCOM & HITL Interface & Human-machine boundary; Tibsfox approval channel \\
+BUDGET & Resource Mgr & Token budget; session planning \\
+SURGEON & Health Monitor & Research quality degradation detection \\
+RETRO & Retrospective & Post-wave analysis; lessons learned \\
+LOG & Chronicle & Commit messages; audit trail; milestone summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (20 roles) \\
+Research Modules & 6 \\
+Wave Count & 5 (0 through 4) \\
+Parallel Tracks & 2 (Wave 1: A+B; Wave 2: A+B) \\
+Estimated Context Windows & 6--8 \\
+Estimated Sessions & 4--5 \\
+Total Token Budget & $\sim$113K \\
+Opus Allocation & 24\% (judgment-heavy: OctaMED deep dive, synthesis, through-line) \\
+Sonnet Allocation & 70\% (surveys, assembly, verification) \\
+Haiku Allocation & 6\% (schemas, bibliography, scaffolding) \\
+HITL Gates & 3 (post-W1, post-W2A, post-W4) \\
+Safety Tests & 3 (all MANDATORY BLOCK) \\
+Domain Color Scheme & Amiga blue (\#1A237E) / OCS copper (\#BF360C) / Graphite (\#37474F) \\
+Primary Cultural Risk & Artist attribution accuracy \\
+GSD Ecosystem Connection & Amiga Principle; Agnus/Denise/Paula/Gary chipset naming etymology \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily\textcolor{primary}{The Through-Line}}
+
+\medskip
+Paula had four DMA channels. A Finnish programmer in 1989 saw those four channels and wrote a software mixing layer that gave composers eight voices --- doubling the instrument's polyphony at the cost of forty percent of a 7.14 MHz processor's time. The musicians who chose OctaMED were the ones who decided that expressivity was worth the CPU cost, that the complexity of arbitrary-length patterns was worth the incompatibility with game replay routines, that having MIDI on a budget machine was worth the latency of a serial port.
+
+\medskip
+Every tracker effect command --- the arpeggio, the portamento, the pattern jump --- is an instruction written in the spaces between note triggers. The music lives there. Not in the samples, not in the patterns, but in the transitions: what happens between one row and the next, between one channel firing and the next note arriving. The tracker paradigm makes those transitions explicit, addressable, composable.
+
+\medskip
+The GSD ecosystem names its orchestration chip Agnus, its display chip Denise, its I/O chip Paula. These are not decorative names. They are a claim about architecture: that the right division of labor, the right specialization of silicon, the right allocation of DMA bandwidth produces something greater than the sum of its channels. OctaMED proved this in 1991. The Amiga Principle holds it as a design philosophy. The skill-creator instantiates it in software. The spaces between --- always the spaces between.
+\end{quotebox}
+
+\end{document}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Source Code Review &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-scr">
+  <header>
+    <h1>The Source Code Tells the Story</h1>
+    <div class="subtitle">Observer Loop &middot; DACP &middot; Chipset &middot; Complex Plane &middot; College &middot; Holomorphic &middot; Safety &middot; CLI</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-observer-loop">Observer</a>
+      <a href="page.html?doc=02-dacp-protocol">DACP</a>
+      <a href="page.html?doc=03-chipset-arch">Chipset</a>
+      <a href="page.html?doc=04-complex-plane">Plane</a>
+      <a href="page.html?doc=05-college">College</a>
+      <a href="page.html?doc=06-holomorphic">Math</a>
+      <a href="page.html?doc=07-safety">Safety</a>
+      <a href="page.html?doc=08-cli-infra">CLI</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+  <main>
+    <blockquote>
+      The Amiga did not win by having more. It won by knowing exactly what each part was for,
+      and by making every bus between them a first-class design decision. The source code already
+      knows what it is for. This mission makes that knowledge legible to everyone who enters it.
+      Storage is cheap. Understanding is not.
+    </blockquote>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">46</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">8</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">17+</span><span class="stat-label">Fleet Roles</span></div>
+      <div class="stat"><span class="stat-value">~865K</span><span class="stat-label">Est. Tokens</span></div>
+    </div>
+    <h2>Research Modules</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-observer-loop" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Core Observer-Detective Loop</h3>
+        <div class="meta"><span class="tag tag-core">Core</span> Track A &middot; Lifecycle</div>
+        <p>Six-step lifecycle: Observe, Detect, Suggest, Manage, Auto-Load, Learn/Compose. TranscriptParser, SessionObserver, PatternSummarizer, PromotionEvaluator, DriftMonitor, LineageTracker. 16 key source files.</p>
+      </a>
+      <a href="page.html?doc=02-dacp-protocol" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: DACP Protocol</h3>
+        <div class="meta"><span class="tag tag-dacp">DACP</span> Track A &middot; Communication</div>
+        <p>Deterministic Agent Communication Protocol. FidelityLevel 0-4 model. Bus opcodes (9 values). Three-part bundles (intent + data + code). FilesystemBus routing. Bundle size limits.</p>
+      </a>
+      <a href="page.html?doc=03-chipset-arch" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Chipset Architecture</h3>
+        <div class="meta"><span class="tag tag-chipset">Chipset</span> Track B &middot; Northbridge</div>
+        <p>Copper list DMA scheduler, Blitter bulk operations, Gastown multi-agent orchestration, AMIGA 5-team governance (CE-1/GL-1/MC-1/ME-1/ICD). Northbridge coordination pattern.</p>
+      </a>
+      <a href="page.html?doc=04-complex-plane" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Application Pipeline &amp; Complex Plane</h3>
+        <div class="meta"><span class="tag tag-plane">Plane</span> Track B &middot; Geometry</div>
+        <p>Skill scoring on unit circle: z = r*e^(i*theta). Tangent activation engine. Token budgets, geometric scoring, chord detection. Application pipeline stages.</p>
+      </a>
+      <a href="page.html?doc=05-college" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: College of Knowledge</h3>
+        <div class="meta"><span class="tag tag-college">College</span> Track C &middot; Organization</div>
+        <p>42 academic departments. RosettaConcept cross-reference files. Priority tiers and progressive disclosure. Calibration models. Department-to-code module mapping.</p>
+      </a>
+      <a href="page.html?doc=06-holomorphic" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: Holomorphic Mathematics</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> Synthesis &middot; Dynamics</div>
+        <p>DMD variants, Koopman operators, Julia set computation. Mandelbrot iteration. Skill dynamics modeled as complex dynamical systems. Math coprocessor GPU integration.</p>
+      </a>
+      <a href="page.html?doc=07-safety" class="card" style="text-decoration:none;color:inherit">
+        <h3>M7: Safety &amp; Cultural Sovereignty</h3>
+        <div class="meta"><span class="tag tag-safety">Safety</span> Synthesis &middot; Policy</div>
+        <p>Heritage Skills warden. OCAP/CARE/UNDRIP four-level classification. Physical safety domains. 18 red-team scenarios. ABSOLUTE/GATE/ANNOTATE/BLOCK classification system.</p>
+      </a>
+      <a href="page.html?doc=08-cli-infra" class="card" style="text-decoration:none;color:inherit">
+        <h3>M8: CLI &amp; Infrastructure</h3>
+        <div class="meta"><span class="tag tag-cli">CLI</span> Track C &middot; Platform</div>
+        <p>CLI command structure, GitHub Actions CI/CD, documentation web layer, www/tibsfox research site architecture. Infrastructure and deployment patterns.</p>
+      </a>
+    </div>
+    <h2>Domain Architecture</h2>
+    <pre>
+gsd-skill-creator DOCUMENTATION WEB -- MODULE MAP
+===============================================================
+
+  Source File (any .ts)
+      |--- @module tag     --&gt; docs/architecture/ page
+      |--- @see tag        --&gt; College department wing
+      |--- @milestone tag  --&gt; CHANGELOG entry
+      |--- @mathematical   --&gt; The Space Between chapter
+      |--- @safety tag     --&gt; Safety policy document
+      v
+  Navigator Index (.planning/docs-index.json)
+      +--- by-module/      forward lookup: file -&gt; all links
+      +--- by-concept/     reverse lookup: concept -&gt; all files
+      +--- by-department/  College index: dept -&gt; code modules
+      +--- by-milestone/   temporal index: milestone -&gt; files
+    </pre>
+  </main>
+  <footer>
+    <p>Source Code Review &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

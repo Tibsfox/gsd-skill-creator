@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; NeHe OpenGL</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-neh">
+  <header>
+    <h1>NeHe OpenGL</h1>
+    <div class="subtitle">Taxonomy &middot; Foundation Track &middot; Intermediate &middot; Advanced &middot; Expert &middot; Upstream</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-taxonomy-skill-mapping">Taxonomy</a>
+      <a href="page.html?doc=02-foundation-track">Foundation</a>
+      <a href="page.html?doc=03-intermediate-track">Intermediate</a>
+      <a href="page.html?doc=04-advanced-track">Advanced</a>
+      <a href="page.html?doc=05-expert-track">Expert</a>
+      <a href="page.html?doc=06-upstream-integration">Upstream</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      The 48 NeHe lessons form a complete developmental arc: from the first blank window through
+      texture mapping, lighting, particle systems, shadow volumes, and ArcBall rotation. Each
+      lesson builds on the last &mdash; a curriculum so well-sequenced that it became the de facto
+      OpenGL textbook for a decade. This mission preserves that knowledge as executable intelligence
+      inside skill-creator.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~350K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/nehe_mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/nehe_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/nehe_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Lesson schema, DACP template, directory layout</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>Taxonomy Track</td><td>YAML taxonomy, JSON-LD DAG, deprecation map</td><td>Parallel</td><td>Opus</td></tr>
+        <tr><td>1B</td><td>Foundation + Intermediate</td><td>L01-L24 Python implementations + tests</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1C</td><td>Advanced + Expert</td><td>L25-L48 Python implementations</td><td>Parallel</td><td>Sonnet/Opus</td></tr>
+        <tr><td>2</td><td>Synthesis</td><td>Cross-module validation, intelligence index, integration</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>README, CHANGELOG, dev branch integration guide</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Synthesis + judgment</td><td>Opus</td><td>Deprecation map design, DACP schema architecture, expert tier code (L37-L48), cross-module integration</td></tr>
+        <tr><td>Denise</td><td>Code production</td><td>Sonnet</td><td>L01-L36 Python implementations, test suite, documentation index</td></tr>
+        <tr><td>Paula</td><td>Scaffolding + schema</td><td>Haiku</td><td>Lesson metadata schema, DACP bundle template, directory manifest</td></tr>
+        <tr><td>M68000</td><td>Logic / glue / routing</td><td>30% Opus / 60% Sonnet / 10% Haiku</td><td>Safety warden, visual correctness verification, API deprecation flagging</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-RUN</td><td>Code execution</td><td>All 48 Python implementations run on Ubuntu 24 without dependency errors.</td></tr>
+        <tr><td>SC-DEP</td><td>Deprecation accuracy</td><td>15+ legacy OpenGL patterns correctly identified with modern equivalents suggested.</td></tr>
+        <tr><td>SC-TAX</td><td>Taxonomy completeness</td><td>All 48 lessons present in YAML taxonomy with valid schema, all fields populated.</td></tr>
+        <tr><td>SC-DAG</td><td>DAG correctness</td><td>JSON-LD concept DAG has correct prerequisite edges; no cycles; all lessons reachable.</td></tr>
+        <tr><td>SC-SRC</td><td>Source attribution</td><td>All lesson descriptions traceable to nehe.gamedev.net or GitHub archive sources.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The NeHe corpus is a perfect example of structured, layered knowledge that maps to
+    skill-creator's architecture. Each lesson is a skill node with defined prerequisites,
+    concepts introduced, and successors. The 48 lessons form a directed acyclic graph &mdash;
+    the rendering knowledge graph &mdash; that can be traversed to answer graphics questions,
+    generate code at the right complexity level, or build multi-lesson learning sequences.</p>
+
+    <p>The modernization mandate transforms legacy Win32/glaux code into cross-platform Python
+    with ModernGL or PyOpenGL + GLFW. The deprecation map is not just a compatibility tool &mdash;
+    it is a model of how APIs evolve, how fixed-function pipelines become programmable shaders,
+    how the architecture of graphics itself has changed over two decades.</p>
+
+    <p><em>&ldquo;Every lesson was a handshake between a beginner and a coordinate system.&rdquo;</em></p>
+  </main>
+
+  <footer>
+    <p>NeHe OpenGL &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

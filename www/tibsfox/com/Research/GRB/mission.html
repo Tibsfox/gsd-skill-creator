@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; GRB 230906A</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-grb">
+  <header>
+    <h1>GRB 230906A</h1>
+    <div class="subtitle">Burst Properties &middot; Multi-wavelength Afterglow &middot; Host Environment &middot; Merger Demographics &middot; r-Process Enrichment</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-burst-properties">Burst</a>
+      <a href="page.html?doc=02-multiwavelength-afterglow">Afterglow</a>
+      <a href="page.html?doc=03-host-environment">Host</a>
+      <a href="page.html?doc=04-merger-demographics">Demographics</a>
+      <a href="page.html?doc=05-rprocess-enrichment">r-Process</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Mission Package</h2>
+    <blockquote>A neutron star merger inside the tidal tail of a galaxy merger inside a galaxy group. The r-process elements synthesized in this event may escape to the circumgalactic medium, enriching the next generation of stars. The nested-merger geometry is what makes GRB 230906A unique in the literature.</blockquote>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~160K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+    <h2>Mission Pack Files</h2>
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/grb230906a_mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/grb230906a_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/grb230906a_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+    <h2>Wave Execution Plan</h2>
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Redshift scenario JSON, observation table schema, source index</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>Burst + Afterglow</td><td>Track A: M1 (Burst Properties) + M2 (Multi-wavelength Afterglow)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1B</td><td>Environment + Demographics</td><td>Track B: M3 (Host Galaxy) + M4 (Merger Demographics)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>2</td><td>r-Process Synthesis</td><td>M5 (r-Process Enrichment, CGM implications, NewAthena)</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Assembly, bibliography validation, verification</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+    <h2>The Through-Line</h2>
+    <p>GRB 230906A represents a merger within a merger: a neutron star binary coalescence occurring inside the tidal tail of a galaxy merger occurring inside a galaxy group at z = 0.453. The r-process ejecta &mdash; gold, platinum, europium, lanthanides &mdash; disperse through low-density tidal material and may escape to the circumgalactic medium rather than being retained within the host. This provides a natural explanation for enhanced heavy-element abundances in the halos of interacting galaxies. Primary source: Dichiara et al. 2026, ApJL, 999, L42.</p>
+  </main>
+  <footer><p>GRB 230906A &middot; PNW Research Series &middot; gsd-skill-creator</p></footer>
+</body>
+</html>

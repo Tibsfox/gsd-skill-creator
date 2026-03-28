@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Intelligence Horizon — GSD Mission Package</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #37474F;
+    --accent: #0D47A1;
+    --light: #ECEFF1;
+    --lightblue: #E3F2FD;
+    --text: #212121;
+    --subtle: #546E7A;
+    --border: #B0BEC5;
+    --white: #FAFAFA;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F5F7FA;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.04) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(21,101,192,0.3) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    color: white;
+  }
+
+  .subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 0.4rem;
+  }
+
+  .tagline {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 0.6rem;
+  }
+
+  .pipeline-badge {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.4rem 1.2rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* MAIN CONTENT */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* META STRIP */
+  .meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    background: white;
+    border-left: 4px solid var(--secondary);
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .meta-item {
+    font-size: 0.82rem;
+    color: var(--subtle);
+    padding-right: 0.75rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .meta-item:last-child { border-right: none; }
+  .meta-item strong { color: var(--primary); font-weight: 600; }
+
+  /* FILE CARDS */
+  .cards-section h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 1rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .card {
+    background: var(--primary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+    transform: translate(20px, -20px);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(38,50,56,0.3);
+  }
+
+  .card-pdf { background: linear-gradient(135deg, var(--primary) 0%, #1A2530 100%); }
+  .card-tex { background: linear-gradient(135deg, var(--secondary) 0%, #0D47A1 100%); }
+
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+
+  .card-cta {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  /* CONTENTS */
+  .contents-section {
+    background: white;
+    border-radius: 10px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 2rem;
+  }
+
+  .contents-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--lightblue);
+  }
+
+  .stage-block { margin-bottom: 1.25rem; }
+
+  .stage-label {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 3px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-1 { background: var(--primary); color: white; }
+  .stage-2 { background: var(--secondary); color: white; }
+  .stage-3 { background: var(--tertiary); color: white; }
+
+  .contents-list {
+    list-style: none;
+    padding-left: 0.5rem;
+  }
+
+  .contents-list li {
+    font-size: 0.875rem;
+    color: var(--subtle);
+    padding: 0.22rem 0;
+    border-bottom: 1px dashed #ECEFF1;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .contents-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--secondary);
+    font-weight: 700;
+  }
+
+  /* USAGE */
+  .usage-section {
+    background: var(--lightblue);
+    border-radius: 10px;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--secondary);
+  }
+
+  .usage-section h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .usage-steps {
+    counter-reset: steps;
+    list-style: none;
+    padding: 0;
+  }
+
+  .usage-steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 0.65rem;
+    font-size: 0.88rem;
+    align-items: flex-start;
+  }
+
+  .usage-steps li::before {
+    content: counter(steps);
+    background: var(--secondary);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* RECOMPILE */
+  .recompile-section {
+    background: var(--primary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    color: white;
+  }
+
+  .recompile-section h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.75rem;
+  }
+
+  .code-block {
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+    font-size: 0.82rem;
+    color: #80DEEA;
+    line-height: 1.7;
+  }
+
+  /* CLOSING QUOTE */
+  .quote-section {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .quote-text {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--primary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .quote-attr {
+    font-size: 0.8rem;
+    color: var(--subtle);
+    text-align: right;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    color: var(--subtle);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">GSD Research Mission Package</p>
+  <h1>The Intelligence Horizon</h1>
+  <p class="subtitle">State of the Art in Artificial Intelligence &amp; Machine Learning</p>
+  <p class="tagline">Where We Came From &nbsp;·&nbsp; Where We Are &nbsp;·&nbsp; Where We Are Going</p>
+  <span class="pipeline-badge">Vision → Research → Mission &nbsp;|&nbsp; College of Knowledge Integration</span>
+</header>
+
+<main>
+
+  <div class="meta-strip">
+    <div class="meta-item"><strong>Date:</strong> March 27, 2026</div>
+    <div class="meta-item"><strong>Profile:</strong> Fleet (17 roles)</div>
+    <div class="meta-item"><strong>Modules:</strong> 6</div>
+    <div class="meta-item"><strong>Pages:</strong> 30</div>
+    <div class="meta-item"><strong>Budget:</strong> ~216K tokens / 4 sessions</div>
+    <div class="meta-item"><strong>Status:</strong> Ready for GSD Orchestrator</div>
+  </div>
+
+  <div class="cards-section">
+    <h2>Downloads</h2>
+    <div class="cards">
+      <a class="card card-pdf" href="ai_intelligence_horizon.pdf" download>
+        <div class="card-icon">📄</div>
+        <div class="card-title">Mission Package PDF</div>
+        <div class="card-desc">Complete three-stage document. 30 pages. All six research modules plus College of Knowledge integration.</div>
+        <span class="card-cta">Download PDF →</span>
+      </a>
+      <a class="card card-tex" href="ai_intelligence_horizon.tex" download>
+        <div class="card-icon">⚙️</div>
+        <div class="card-title">LaTeX Source (.tex)</div>
+        <div class="card-desc">XeLaTeX source file. Edit and recompile to customize, extend modules, or update with new research.</div>
+        <span class="card-cta">Download .tex →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="contents-section">
+    <h2>Document Contents</h2>
+
+    <div class="stage-block">
+      <span class="stage-label stage-1">Stage 1 — Vision</span>
+      <ul class="contents-list">
+        <li>Narrative vision: the Amiga Principle applied to the history of intelligence</li>
+        <li>5 problem statements (comprehension gap, architectural amnesia, alignment gap, integration deficit, curriculum link)</li>
+        <li>Core concept: AI as progressive formalization of intelligence</li>
+        <li>Domain map: AI eras mapped to unit circle positions</li>
+        <li>6 research modules with College of Knowledge layer tags</li>
+        <li>Chipset YAML configuration (Agnus/Denise/Paula)</li>
+        <li>12 testable success criteria</li>
+        <li>The through-line connecting Amiga Principle to Intelligence Horizon</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <span class="stage-label stage-2">Stage 2 — Research Reference</span>
+      <ul class="contents-list">
+        <li>M1: Historical foundations 1943–2017 (McCulloch-Pitts → Transformer)</li>
+        <li>M2: The Transformer era — attention math, scaling laws, foundation models</li>
+        <li>M3: Frontier models Q1 2026 — GPT-5.2, Claude Opus 4.5, DeepSeek moment</li>
+        <li>M4: Agentic architecture — MCP, A2A, AAIF, GSD/DACP alignment tables</li>
+        <li>M5: Alignment and safety — CAI, RLHF, mechanistic interpretability, governance</li>
+        <li>M6: College of Knowledge integration — full 8-layer mathematical mapping</li>
+        <li>Complex Plane of Experience navigator with labeled coordinate system</li>
+        <li>Rosetta Core cross-domain bridges (backprop ↔ learning, attention ↔ cognition)</li>
+        <li>Safety &amp; sensitivity table + complete source bibliography</li>
+      </ul>
+    </div>
+
+    <div class="stage-block">
+      <span class="stage-label stage-3">Stage 3 — Mission Package</span>
+      <ul class="contents-list">
+        <li>Milestone specification with wave architecture diagram</li>
+        <li>8 deliverables with acceptance criteria</li>
+        <li>Component breakdown: model assignments + token estimates</li>
+        <li>Wave 0–3 execution plan with parallel tracks and HITL gates</li>
+        <li>Cache optimization strategy</li>
+        <li>40-test plan: 6 safety-critical (BLOCK), 15 core, 10 integration, 6 edge</li>
+        <li>Verification matrix (all 12 success criteria mapped to test IDs)</li>
+        <li>Fleet crew manifest (17 roles)</li>
+        <li>Execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="usage-section">
+    <h2>How to Hand Off to GSD / skill-creator</h2>
+    <ol class="usage-steps">
+      <li>Open Claude Code in the <code>gsd-skill-creator</code> dev branch repository.</li>
+      <li>Drop this PDF into your planning staging inbox (<code>.planning/staging/inbox/</code>) or paste the Stage 3 mission spec into a new Claude Code session.</li>
+      <li>Provide the GSD orchestrator with the mission codename <strong>INTELLIGENCE HORIZON</strong> and the activation profile: <strong>Fleet (17 roles)</strong>.</li>
+      <li>Begin with Wave 0 — instruct the PLAN agent to generate the source index JSON from the Stage 2 bibliography before any module production begins.</li>
+      <li>Run Wave 1A (M1+M2) and Wave 1B (M3+M4) in parallel sessions. Present all four module drafts at <strong>HITL Gate 1</strong> for your review before proceeding.</li>
+      <li>Run Wave 2 (M5+M6) in a single Opus session. Present M6 College of Knowledge mapping at <strong>HITL Gate 2</strong> — verify the 8-layer mathematical mapping against <em>The Space Between</em> before synthesis.</li>
+      <li>Wave 3 synthesis and XeLaTeX assembly produces the final unified document for archival and College of Knowledge seeding.</li>
+    </ol>
+  </div>
+
+  <div class="recompile-section">
+    <h2>LaTeX Recompilation (Ubuntu / XeLaTeX)</h2>
+    <div class="code-block">
+# Requires: texlive-xetex + fonts-dejavu<br>
+# Three passes required for TOC + cross-refs + lastpage<br><br>
+xelatex -interaction=nonstopmode ai_intelligence_horizon.tex<br>
+xelatex -interaction=nonstopmode ai_intelligence_horizon.tex<br>
+xelatex -interaction=nonstopmode ai_intelligence_horizon.tex
+    </div>
+  </div>
+
+  <div class="quote-section">
+    <p class="quote-text">"The Transformer works not because it is the largest model ever trained, but because attention — the selective routing of relevance — is the correct architecture for language. The Intelligence Horizon is the recognition that the next breakthrough will not come from making the current architecture larger. It will come from discovering what lives in the spaces between neural pattern recognition and symbolic reasoning, between autonomous action and human oversight, between the unit circle and the complex plane. That space has a shape. <em>The Space Between</em> has been mapping it all along."</p>
+    <p class="quote-attr">— Through-Line, Mission INTELLIGENCE HORIZON · GSD Ecosystem · March 2026</p>
+  </div>
+
+</main>
+
+<footer>
+  GSD Research Mission Package &nbsp;·&nbsp; Intelligence Horizon &nbsp;·&nbsp; Fleet Profile (17 roles) &nbsp;·&nbsp; College of Knowledge Integration &nbsp;·&nbsp; March 27, 2026
+</footer>
+
+</body>
+</html>

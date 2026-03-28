@@ -1,0 +1,1157 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{multicol}
+
+% ── Color Scheme: Arts & Humanities ──────────────────────────────────────────
+\definecolor{primary}{HTML}{4A148C}       % Deep violet — creativity, royalty of art
+\definecolor{secondary}{HTML}{E65100}     % Burnt orange — warmth, canvas, fire of creation
+\definecolor{tertiary}{HTML}{004D40}      % Deep teal — depth, the spaces between
+\definecolor{accent}{HTML}{7B1FA2}        % Purple accent — palette, vision
+\definecolor{lightprimary}{HTML}{F3E5F5}  % Lavender wash
+\definecolor{lightsecondary}{HTML}{FFF3E0} % Warm parchment
+\definecolor{lighttertiary}{HTML}{E0F2F1}  % Pale teal
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{gold}{HTML}{F9A825}
+\definecolor{deepred}{HTML}{B71C1C}
+
+% ── Section Formatting ────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ───────────────────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{erabox}[1]{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.5pt,
+  title={\sffamily\bfseries\textcolor{white}{#1}},
+  colbacktitle=secondary,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Page Style ────────────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{So You Want To Be An Artist}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={So You Want To Be An Artist -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── TITLE PAGE ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- FLEET ACTIVATION}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{So You Want To Be An Artist}}
+
+\vspace{0.4cm}
+{\fontsize{16}{20}\selectfont\sffamily\textcolor{secondary}{The Complete Encyclopedia of Visual Arts, Music, and\\[0.2em] the Creative Life --- From Cave to Cloud}}
+
+\vspace{0.6cm}
+{\Large\sffamily\textcolor{tertiary}{Prehistory to Present --- All Eras, All Disciplines}}
+
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{accent}{A Deep Multi-Pass Research Study}}
+
+\vspace{2.5cm}
+
+\begin{tcolorbox}[colback=lightprimary, colframe=primary, arc=2pt, width=10cm,
+  boxrule=0.5pt, left=8pt, right=8pt, top=6pt, bottom=6pt]
+\centering\sffamily\small\textcolor{primary}{
+\textbf{Seven Research Modules} \\[0.3em]
+Visual Arts History \textbullet{} Music History \textbullet{} Ancient Art Forms \\
+Style \& The Creative Touch \textbullet{} Art in Software \& Technology \\
+The Artist as Entrepreneur \textbullet{} College of Knowledge Integration
+}
+\end{tcolorbox}
+
+\vspace{2cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Profile}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (Full Crew) \quad|\quad Estimated: 14--18 context windows across 5--7 sessions}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Deep-Linked: College of Knowledge \textbullet{} Complex Plane of Experience \textbullet{} Rosetta Core}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{So You Want To Be An Artist --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Vision Approved / Research Phase Ready}
+\metafield{Depends On:}{College of Knowledge seed corpus, \emph{The Space Between} mathematical foundations, GSD Complex Plane of Experience}
+\metafield{Context:}{Fleet-level deep research mission covering visual arts history, music history, creative craft, art in technology, and the complete artist business lifecycle}
+\metafield{Activation Profile:}{Fleet (Full Crew, 20+ roles)}
+
+\subsection{Vision}
+
+Art is the oldest language humanity has spoken. Before writing, before agriculture, before cities --- before any of the institutions we now call civilization --- there were marks on cave walls. A hand pressed into ochre and blown against stone. A bison drawn in charcoal by lamplight, 40,000 years ago, in a cave that would not be opened again until 1879. The oldest confirmed cave paintings, found in Sulawesi, Indonesia, date to more than 45,000 years ago. The oldest symbolic marks from Africa --- pierced shells and ochre-etched geometry at Blombos Cave, South Africa --- are approximately 75,000 years old. Before Homo sapiens had agriculture, we had art.
+
+This mission takes that thread seriously. Art is not decoration. Art is not a luxury. Art is the mechanism by which human beings externalize inner experience, model the world, communicate across time, and build shared identity. Every era's art is simultaneously a technical achievement, a philosophical statement, and a social document. The Renaissance painter who mapped perspective for the first time was doing geometry. The Baroque composer who built a fugue was doing recursive logic. The Impressionist who broke from the Academy was doing epistemology --- arguing that light, not form, was the ground truth of vision. The hip-hop producer who sampled a Fender Rhodes was doing information theory.
+
+The GSD ecosystem has a principle at its core: the \emph{spaces between} matter as much as the nodes. The most important thing in a musical composition is often what is not played. The most important element in a painting is often the relationship between forms --- the \emph{negative space}, the tension, the gaze-path the artist choreographs for the eye. This mission applies that principle structurally: it does not just catalog art eras and musical periods. It maps the \emph{transitions} --- the fault lines where one era gives way to the next, where the rules broke and something new emerged. Those fracture points are where the real knowledge lives.
+
+This is also, fundamentally, a practical manual. Art is beautiful. Art is also a profession, a business, a brand, a legal structure, a website, a tax ID, and a trademark application. The second half of this mission treats the artist not only as a maker of beautiful things but as the CEO of a creative enterprise. The wall between \emph{art} and \emph{business} is artificial and harmful. This mission tears it down.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=2em]
+
+\item \textbf{Fragmented Knowledge Infrastructure.} Art history and music history are taught and documented in separate siloes --- visual arts in one curriculum, music in another, with no formal framework connecting them to technology, business, or the mathematical structures they share. A painter who could see that a Baroque fugue and a Baroque painting share the same logic of layered voices would understand both more deeply. This mission builds those cross-links.
+
+\item \textbf{The Era-Without-Context Problem.} Students and practitioners routinely memorize the names of art movements without understanding \emph{why} they emerged --- what cultural, technological, economic, or philosophical pressures produced them. Impressionism did not appear because Monet woke up one morning and decided to paint loosely. It appeared because industrial-era Paris was changing the relationship between humans and speed, light, and the built environment. Context is not optional.
+
+\item \textbf{Technology Blindness.} The history of art is inseparable from the history of technology --- from ochre and bone needles to the printing press to photography to digital synthesis to AI image generation. Yet working artists often treat their tools as neutral and ahistorical. Understanding the full technological genealogy of one's medium produces richer, more intentional work.
+
+\item \textbf{The Business Gap.} The vast majority of arts education omits the practical infrastructure of a creative career: how to structure a home-based art business, how to build a website that converts, how to register a trademark, how to protect brand identity, how to license work, how to approach galleries vs.\ direct-to-collector vs.\ digital platforms. This mission closes that gap with specific, actionable guidance.
+
+\item \textbf{Disconnection from the Living Tradition.} Art history is often taught as a sequence of dead movements. But every contemporary artist is in conversation with the entire lineage, whether consciously or not. This mission makes those conversations explicit --- seeding the College of Knowledge with cross-era, cross-discipline links that allow the GSD Complex Plane of Experience to map where any given artist's work sits within the full constellation of human creative expression.
+
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Creative Continuum}: Art is a single continuous signal, not a sequence of disconnected events. Every era inherits from all prior eras and transmits to all subsequent ones. The mission maps this signal as a mathematical object: a complex-valued function across time, where the real axis carries formal/technical development and the imaginary axis carries conceptual/spiritual development. Points on this plane are \emph{skills} in the College of Knowledge, positioned by their r (magnitude of influence) and $\theta$ (orientation within the tradition).
+
+\subsubsection{Domain Architecture --- The Seven-Module Map}
+
+\begin{asciibox}
+THE CREATIVE CONTINUUM -- MODULE ARCHITECTURE
+==============================================
+
+MODULE VIS-01: ORIGINS                    MODULE VIS-02: CLASSICAL -- MODERN
+Prehistoric (40,000 BCE -- 3000 BCE)      Medieval -- Renaissance -- Baroque
+  Cave Art, Venus Figurines               Rococo -- Neoclassicism -- Romanticism
+  Megalithic, Petroglyphs                 Realism -- Impressionism
+  Egyptian, Mesopotamian, Greek           Post-Impressionism -- Symbolism
+  Roman, Celtic, African Origins          Art Nouveau -- Expressionism
+                    |                                     |
+                    v                                     v
+MODULE VIS-03: CONTEMPORARY               MODULE MUS-01: ANCIENT -- ROMANTIC
+Cubism -- Dada -- Surrealism              Prehistoric Sound (40,000 BCE)
+Futurism -- Abstract Expressionism        Ancient Egypt, Greece, India
+Pop Art -- Minimalism -- Conceptual       Medieval Chant -- Troubadours
+Street Art -- Digital Art -- NFT          Renaissance Polyphony
+Contemporary Global Practices            Baroque -- Classical -- Romantic
+                    |                                     |
+                    v                                     v
+MODULE MUS-02: MODERN -- DIGITAL          MODULE BIZ-01: THE ARTIST-ENTREPRENEUR
+Jazz, Blues, Ragtime, Gospel             Home Business Structure
+Rock, Soul, Funk, Hip-Hop                Website Design & Portfolio
+Electronic, Ambient, Industrial          Brand Identity & Visual Language
+Digital Audio Workstations               Trademark Registration (USPTO)
+Streaming Era & AI Composition           Licensing, Galleries, E-commerce
+                    |                                     |
+                    +---------------+---------------------+
+                                    |
+                    MODULE COK-01: COLLEGE OF KNOWLEDGE INTEGRATION
+                    Complex Plane Positioning of All 100+ Concepts
+                    Rosetta Core Cross-Domain Translation
+                    Space Between Connections (r * e^(i*theta))
+                    L-System growth patterns in artistic evolution
+\end{asciibox}
+
+\subsubsection{Research Module Descriptions}
+
+\textbf{VIS-01 --- Visual Arts Origins (Prehistory through Antiquity)} surveys the full range of human mark-making from the earliest confirmed examples through the classical civilizations of Greece, Rome, Egypt, Mesopotamia, India, China, and the pre-Columbian Americas. Special attention to the technology of pigment, the sociology of patronage, and the spiritual/ritual functions that art served before the concept of ``art'' as a distinct category existed.
+
+\textbf{VIS-02 --- Visual Arts: Classical to Impressionism} covers the long arc from Byzantine through Medieval, Renaissance, Mannerism, Baroque, Rococo, Neoclassicism, Romanticism, Realism, and Impressionism. Each movement is analyzed through four lenses: technique, patronage, philosophical intent, and societal context.
+
+\textbf{VIS-03 --- Visual Arts: Modernism to Present} covers Post-Impressionism through the full sweep of 20th-century and contemporary movements including Fauvism, Expressionism, Cubism, Dadaism, Surrealism, Abstract Expressionism, Pop Art, Minimalism, Conceptualism, Street Art, Digital Art, and current practices including AI-assisted creation.
+
+\textbf{MUS-01 --- Music History: Prehistory through Romanticism} traces the evolution of music from the bone flutes of 40,000 years ago through Ancient civilizations, Medieval sacred music, Renaissance polyphony, the Baroque explosion of form, the Classical era's structural mastery, and Romanticism's emotional maximalism.
+
+\textbf{MUS-02 --- Music History: Modernism through Digital Age} covers the radical fracturing of musical tradition after 1900: the rise of jazz, blues, ragtime, gospel, folk; the 20th-century classical avant-garde; rock and roll; soul; funk; electronic music; hip-hop; and the current era of DAWs, streaming, and AI composition tools.
+
+\textbf{BIZ-01 --- The Artist as Entrepreneur} provides the complete practical manual for launching a creative career as a home-based business: legal structures, website architecture, brand identity design principles, trademark registration (USPTO process), copyright vs.\ trademark distinctions, gallery relationships vs.\ direct sales, e-commerce platforms, licensing, and the economics of the contemporary art market.
+
+\textbf{COK-01 --- College of Knowledge Integration} positions all knowledge from the prior six modules onto the GSD Complex Plane of Experience, builds the Rosetta Core cross-domain translation layer (connecting visual art concepts to their musical, mathematical, and technological cognates), and generates the L-System growth grammar describing how artistic movements branch and recurse through history.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# chipset.yaml -- So You Want To Be An Artist
+# Fleet Activation Profile
+
+agnus:           # Orchestration / DMA / Context Management
+  model: opus
+  role: FLIGHT
+  responsibilities:
+    - Mission-level direction and go/no-go gates
+    - Cross-module integration decisions
+    - Cultural sensitivity review (Indigenous art traditions)
+    - College of Knowledge positioning logic
+
+denise:          # Display / Output Rendering
+  model: sonnet
+  role: EXEC (x3)
+  responsibilities:
+    - VIS-01, VIS-02, VIS-03 document production
+    - MUS-01, MUS-02 document production
+    - BIZ-01 practical manual production
+    - LaTeX compilation and layout
+
+paula:           # Audio / I-O / Anticipatory
+  model: haiku
+  role: BUDGET + LOG + scaffolding
+  responsibilities:
+    - Shared schemas and template generation
+    - Token budget tracking
+    - Chronicle / commit messages
+
+68000:           # CPU / Glue Logic
+  model: sonnet
+  role: PLAN + VERIFY + INTEG
+  responsibilities:
+    - Wave decomposition and dependency management
+    - Source validation and accuracy checking
+    - Cross-module relationship validation
+
+# CRAFT Agents (Opus ~30%)
+craft_vis:   {role: CRAFT-VIS, model: opus}    # Visual arts domain analysis
+craft_mus:   {role: CRAFT-MUS, model: opus}    # Music history analysis
+craft_biz:   {role: CRAFT-BIZ, model: sonnet}  # Business / legal / brand
+craft_tech:  {role: CRAFT-TECH, model: sonnet} # Art in technology / software
+craft_cok:   {role: CRAFT-COK, model: opus}    # CoK integration / Rosetta Core
+
+# Safety
+secure:  {role: SECURE, model: opus}  # Cultural sovereignty enforcement
+surgeon: {role: SURGEON, model: sonnet} # Quality degradation detection
+capcom:  {role: CAPCOM, model: sonnet}  # HITL interface
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection*{In Scope (v1.0)}
+
+\begin{itemize}[noitemsep]
+  \item Complete survey of Western visual art movements from Paleolithic through Contemporary
+  \item Global art traditions: African, Asian, Pre-Columbian, Oceanian, Indigenous (with OCAP/CARE/UNDRIP compliance)
+  \item Complete survey of Western music history from prehistory through Digital Age
+  \item World music traditions: Indian Classical, African rhythmic systems, East Asian music
+  \item Style theory, color theory, composition principles, principles of design
+  \item Art in software: digital tools survey, generative art, AI art, computer graphics history
+  \item Home-based art business structure and legal framework (U.S. focus with international notes)
+  \item Trademark registration process and brand identity design
+  \item Website design principles for artists with portfolio structure guidance
+  \item College of Knowledge integration with 100+ concept nodes positioned on Complex Plane
+  \item Rosetta Core cross-domain translations (art $\leftrightarrow$ music $\leftrightarrow$ math $\leftrightarrow$ code)
+\end{itemize}
+
+\subsubsection*{Out of Scope}
+
+\begin{itemize}[noitemsep]
+  \item Sacred or restricted Indigenous ceremonial knowledge (never documented regardless of public availability)
+  \item Legal advice specific to individual circumstances (general guidance only; attorney consultation recommended)
+  \item Specific pricing/appraisal of individual artworks
+  \item Film/cinema as primary subject (tangential references acceptable)
+  \item Fashion design as primary subject (intersections with visual art noted)
+  \item v2.0 reserved for: full architectural survey, decorative arts deep dive, dance/performance
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=2em]
+  \item All major Western visual art movements from Paleolithic through Contemporary are documented with era, key characteristics, master artists, and canonical works, with fewer than 5\% factual errors on expert review.
+  \item All major Western music periods from prehistoric through Digital Age are documented with dates, defining characteristics, key composers/artists, and representative works.
+  \item At least 12 non-Western art and music traditions are documented with appropriate nation-specific attribution and OCAP/CARE/UNDRIP compliance verified.
+  \item Each era includes at least one explicit cross-link to a parallel development in another discipline (art $\leftrightarrow$ music $\leftrightarrow$ math $\leftrightarrow$ philosophy $\leftrightarrow$ technology).
+  \item The BIZ-01 module provides a complete, actionable home business launch checklist requiring no additional research.
+  \item The trademark registration section accurately describes the current USPTO process including class selection, TESS search, and maintenance requirements.
+  \item The website section covers domain acquisition, portfolio architecture, e-commerce integration, and SEO fundamentals for artists.
+  \item The brand identity section defines the distinction between copyright and trademark with concrete examples from the art world.
+  \item The COK-01 module positions at least 80 concept nodes on the Complex Plane with r (influence magnitude) and $\theta$ (orientation) values, forming a navigable knowledge graph.
+  \item The Rosetta Core produces at least 25 cross-domain translation pairs (e.g., ``Baroque counterpoint is to music what chiaroscuro is to painting: structured contrast producing depth'').
+  \item The L-System grammar correctly generates at least 3 historical art movement branching sequences when applied to the evolutionary data.
+  \item The complete document passes XeLaTeX compilation without errors across all three compilation passes.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Notes} \\
+\midrule
+\emph{The Space Between} & Mathematical spine & CoK positioning uses 8-layer progression; unit circle maps era transitions \\
+GSD College of Knowledge & Primary seed target & All 100+ concept nodes from this mission seed the CoK curriculum \\
+Complex Plane of Experience & Positioning framework & Skills modeled as $z = r \cdot e^{i\theta}$; Euler's formula governs composition \\
+BBS Educational Pack Vision & Delivery channel & Art history curriculum modules delivered through BBS interface \\
+Foxfire Heritage Mission & Cultural parallel & PNW Indigenous art traditions cross-linked per OCAP standards \\
+GSD-OS Blueprint Editor & Application target & Art encyclopedia accessible as in-OS knowledge browser \\
+\bottomrule
+\end{tabularx}
+
+\subsection{The Through-Line}
+
+There is a moment in the Chauvet Cave, roughly 32,000 years ago, when a prehistoric artist looked at a natural contour in the limestone wall and saw in it the shoulder of a horse. They did not impose a horse on a flat surface. They found the horse that was already there in the rock, and revealed it with a few strokes of charcoal. This is what Michelangelo described 32 millennia later when he said that sculpture is the art of removing what is not there --- the figure already exists inside the marble, waiting. This is also what a software architect describes when they talk about finding the natural structure of a problem rather than imposing one. It is what the GSD Amiga Principle describes when it says: do not fight the architecture, find the architecture that was already there.
+
+Art history is the history of human beings finding the forms that were already waiting to be found. Each era found different forms, with different tools, under different pressures. The Renaissance found perspective. The Romantics found interiority. The Impressionists found light. The Cubists found simultaneous viewpoints. Each discovery did not erase the prior ones but extended the vocabulary available to every maker who came after. The College of Knowledge preserves that vocabulary as a living structure. The Complex Plane maps the positions of those discoveries relative to each other. The mission before us is to build that map --- completely, rigorously, and beautifully --- so that the next person who wants to be an artist has the full inheritance at their fingertips.
+
+\newpage
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{So You Want To Be An Artist --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This research reference provides the evidentiary foundation for each of the seven mission modules. Agents executing Wave 1 parallel tracks should read only the sections relevant to their assigned module. The INTEG agent reads all sections to build cross-module connections. All numerical claims are sourced; the bibliography appears at the end of Stage 2.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}[noitemsep]
+  \item Smithsonian Institution (smithsonianmag.com) --- prehistoric and ancient art scholarship
+  \item Encyclopedia Britannica (britannica.com) --- art and music history reference
+  \item Smarthistory (smarthistory.org) --- open-access art history peer-reviewed platform
+  \item Skagit Symphony / Music Theory Academy --- music period periodization
+  \item Lincoln Memorial University Libraries --- Western art history taxonomy
+  \item Naxos (naxos.com) --- classical music history authority
+  \item USPTO (uspto.gov) --- trademark registration official guidance
+  \item Artwork Archive (artworkarchive.com) --- artist business practices
+  \item Creative Law Center --- trademark for visual artists
+\end{itemize}
+
+% ─── MODULE VIS-01 ────────────────────────────────────────────────────────────
+\subsection{VIS-01: Visual Arts Origins --- Prehistory through Antiquity}
+
+\subsubsection{Prehistoric Art: The First 40,000 Years}
+
+\begin{erabox}{Paleolithic Art / Cave Art --- c.~40,000--10,000 BCE}
+The oldest confirmed figurative cave paintings are found in the caves of Maros, Sulawesi, Indonesia, dating to more than 40,000 years ago. In Europe, Chauvet-Pont-d'Arc (France) contains paintings of at least 13 species --- including cave lions, leopards, bears, and rhinoceroses --- dated to approximately 32,000--30,000 BCE. Lascaux (France, c.~17,000 BCE) contains over 600 wall paintings. Altamira (Spain, c.~36,000--14,000 BCE) is famed for its polychrome bison, employing ochre with sophisticated shading. The oldest symbolic marks yet found --- pierced shells and ochre-etched geometry --- come from Blombos Cave, South Africa, and are approximately 75,000 years old.
+
+\textbf{Pigments:} Red and orange from iron oxides (hematite/ochre); black from manganese dioxide and charcoal. Paint was applied with fingers, crude brushes of hair or moss, and blown from the mouth through bone tubes over hand stencils.
+
+\textbf{Purpose:} Theories range from ceremonial and shamanic ritual to educational and navigational mapping. Many painted chambers have extraordinary acoustic properties, suggesting chant or music accompanied the images.
+
+\textbf{Sculptural Forms:} The Lion-Man of Hohlenstein-Stadel (Germany, c.~40,000 BCE, carved mammoth ivory) is the oldest confirmed composite imaginary creature. Venus figurines (Willendorf, Laussel, Dolni Vestonice) represent stylized female forms of uncertain but likely ceremonial significance.
+\end{erabox}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Site} & \tableheader{Location} & \tableheader{Date \& Significance} \\
+\midrule
+Chauvet-Pont-d'Arc & Ardèche, France & c.~32,000 BCE; oldest confirmed European figurative paintings; 13+ species including predators \\
+Lascaux & Dordogne, France & c.~17,000 BCE; 600+ paintings; ``the Sistine Chapel of prehistory'' \\
+Altamira & Cantabria, Spain & c.~36,000--14,000 BCE; polychrome bison; first site identified as Paleolithic (1879) \\
+Sulawesi Caves & Maros, Indonesia & 45,500+ years; oldest confirmed figurative art globally \\
+Blombos Cave & Western Cape, S. Africa & 75,000 BCE; oldest symbolic marks; ochre-etched geometry and pierced shells \\
+Serra da Capivara & Piauí, Brazil & c.~20,000 BCE; largest prehistoric painting concentration in the Americas \\
+Laas Geel & Somaliland & c.~5,000--7,000 BCE; extraordinarily preserved Horn of Africa rock art \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection{Ancient Art: The First Civilizations}
+
+\textbf{Egyptian Art (c.~3100--30 BCE)} was distinguished by its remarkably consistent formal conventions over three thousand years: hierarchical scaling (important figures drawn larger), composite perspective (head and legs in profile, torso frontal), and the subordination of artistic individuality to dynastic and religious function. The artist was not an individual genius but a skilled craftsperson executing an established visual language.
+
+\textbf{Mesopotamian Art (c.~3500--539 BCE)} encompassed Sumerian, Akkadian, Babylonian, and Assyrian traditions. The Stele of Hammurabi (c.~1754 BCE), the massive Assyrian palace reliefs of Nineveh, and the ziggurat architecture of Ur represent the range of forms. Art functioned primarily to glorify divine kingship.
+
+\textbf{Ancient Greek Art (c.~900--31 BCE)} underwent a dramatic evolution from the geometric abstraction of the Archaic period through the Classical idealization of the 5th century BCE (Phidias, Praxiteles, Polykleitos) to the more emotionally expressive Hellenistic period. The Greeks codified the proportional systems of the human figure that the Renaissance would rediscover 1,500 years later.
+
+\textbf{Roman Art (c.~509 BCE--476 CE)} absorbed and extended Greek models, adding a particular strength in portraiture, civic and historical relief sculpture (Trajan's Column), and architectural decoration (mosaic, fresco). The Villa of the Mysteries at Pompeii and the Ara Pacis demonstrate Roman mastery of narrative pictorial space.
+
+\textbf{African, Asian, and Pre-Columbian Origins:} Rock art in the Sahara (Tassili n'Ajjer, Tadrart Acacus) records pastoralist societies from 14,000 years ago. The Nok terracotta sculptures of Nigeria (c.~1500 BCE--500 CE) are the earliest large-scale figurative sculpture in sub-Saharan Africa. Chinese Shang Dynasty bronzes (c.~1600--1046 BCE), Jōmon-period pottery from Japan (c.~14,000 BCE, among the world's oldest), and Olmec monumental sculpture of Mesoamerica (c.~1500--400 BCE) all demonstrate the simultaneous, independent development of sophisticated art traditions across the globe.
+
+% ─── MODULE VIS-02 ────────────────────────────────────────────────────────────
+\subsection{VIS-02: Visual Arts --- Medieval through Impressionism}
+
+\subsubsection{Medieval Art (c.~500--1400 CE)}
+
+Medieval art in the Western tradition encompasses Byzantine, Romanesque, and Gothic styles. The Byzantine tradition (c.~330--1453 CE), centered at Constantinople, developed the icon as a spiritual technology --- a window to the divine, formally rigid by theological design. Mosaics at Ravenna and Constantinople set the visual grammar of Christian devotional art for a millennium.
+
+The Romanesque period (c.~1000--1200) produced massive stone church architecture with thick walls, rounded arches, and vigorously carved portal sculpture. Gothic art (c.~1150--1400) transformed this into soaring vertical space, pointed arches, ribbed vaulting, and the stained glass window as painted light. Artists in this era include Duccio, Cimabue, Giotto, and Jan Van Eyck.
+
+\subsubsection{Renaissance (c.~1400--1600)}
+
+The Renaissance (Italian: ``rebirth'') began in Florence in the 14th century and spread across Europe. Its central innovations were: (1) linear perspective (Brunelleschi, c.~1420), which mathematically systematized spatial recession; (2) humanist subject matter, restoring the Greek dignity of the individual human figure; and (3) oil paint technique (perfected in Northern Europe by Van Eyck) which enabled gradations of light and shadow of unprecedented subtlety.
+
+Key phases: \textbf{Early Renaissance} (Masaccio, Donatello, Botticelli); \textbf{High Renaissance} (Leonardo, Michelangelo, Raphael, c.~1480--1520, the brief apex of classical harmony); \textbf{Mannerism} (El Greco, Parmigianino, c.~1520--1600, deliberate distortion of Renaissance ideals for expressive effect); \textbf{Northern Renaissance} (D\"{u}rer, Holbein, Bruegel, applying Italian perspective to northern detail).
+
+\subsubsection{Baroque (c.~1600--1750)}
+
+Baroque art emerged from the Counter-Reformation Catholic Church's need for emotionally persuasive religious imagery. Its hallmarks are dramatic chiaroscuro (Caravaggio, Rembrandt), dynamic movement, emotional intensity, and an expanded scale of heroic ambition. Caravaggio's theatrical use of light against dark shadow (tenebrism) was radical: saints shown as rough-handed peasants, divine moments rendered with street-level grit. Rembrandt extended this into psychological portraiture of extraordinary depth. Rubens brought exuberant physical energy; Vermeer brought domestic intimate light.
+
+Architecture: Bernini's colonnade at St. Peter's Basilica and his sculpture \emph{Ecstasy of Saint Teresa} embody the Baroque fusion of spiritual and physical ecstasy.
+
+\subsubsection{Rococo (c.~1700--1775)}
+
+A French court style that softened the Baroque's grandeur into lightness, pastel colors, asymmetric ornamentation, and scenes of aristocratic leisure (Watteau's \emph{fêtes galantes}, Fragonard's swings). The word derives from \emph{rocaille} (shellwork). Rococo was the style of the French aristocracy in the decades before the Revolution swept it away.
+
+\subsubsection{Neoclassicism, Romanticism, and Realism (c.~1750--1880)}
+
+\textbf{Neoclassicism} (c.~1750--1850) arose as a reaction against Rococo excess, inspired by the archaeological rediscovery of Pompeii (1748) and Herculaneum. Jacques-Louis David's \emph{Oath of the Horatii} (1784) exemplifies its moral severity and classical order. \textbf{Romanticism} (c.~1780--1850) rejected Enlightenment rationalism for the sublime --- nature as overwhelming spiritual force, the individual imagination as the highest authority. Turner's skies, Caspar David Friedrich's lone figures, Delacroix's color. \textbf{Realism} (c.~1848--1900) rejected both: Courbet, Millet, and Daumier painted peasants, workers, and the urban poor with unflinching directness. The mundane everyday world, previously beneath artistic consideration, became the primary subject.
+
+\subsubsection{Impressionism (c.~1865--1885)}
+
+Impressionism was simultaneously a perceptual revolution and a social rebellion. Rejected by the official Paris Salon, Monet, Renoir, Pissarro, and Sisley began painting \emph{en plein air} (outdoors) to capture transient light conditions directly. Short, visible brushstrokes. Unmixed colors placed adjacent rather than blended. Modern life --- cafés, dance halls, regatta courses --- as subject matter. The name came from a hostile critic who mocked Monet's \emph{Impression, Sunrise} (1872). Monet wrote: ``I really feel the landscape. I can be bold and include every tone of pink and blue: it's enchanting.'' Historians call Impressionism the hinge between the classical tradition and modern art.
+
+% ─── MODULE VIS-03 ────────────────────────────────────────────────────────────
+\subsection{VIS-03: Visual Arts --- Modernism to Present}
+
+\subsubsection{Post-Impressionism through Art Nouveau (c.~1885--1910)}
+
+Post-Impressionists each developed the Impressionist vocabulary in a different direction: Van Gogh into expressive emotional color and turbulent brushwork; Cézanne into structural geometric analysis of form (proto-Cubism); Gauguin into symbolic primitivism; Seurat into systematic pointillism. \textbf{Art Nouveau} (c.~1890--1910) explored organic forms, sinuous line, and the total work of art across architecture, furniture, poster design, and painting. Gustav Klimt, Antoni Gaudí, and Henri de Toulouse-Lautrec are its major figures.
+
+\subsubsection{Expressionism, Fauvism, Cubism (c.~1905--1920)}
+
+\textbf{Fauvism} (``wild beasts'', 1905) used non-naturalistic color for maximum emotional impact (Matisse, Derain). \textbf{German Expressionism} (Kirchner, Beckmann, Nolde) used distorted form and raw color to express psychological anguish in an industrializing, increasingly violent Europe. \textbf{Cubism} (Picasso and Braque, c.~1907--1915) is perhaps the most radical formal revolution in the history of painting: the simultaneous representation of multiple viewpoints on a single flat surface, fracturing unified perspective and replacing it with an analytical multiplicity.
+
+\subsubsection{Dada, Surrealism, Futurism (c.~1916--1945)}
+
+\textbf{Dada} (Zürich, 1916) was anti-art: a nihilistic response to the meaningless slaughter of World War I. Duchamp's \emph{Fountain} (a urinal submitted as art, 1917) remains the most provocative single gesture in Western art history, still debated. \textbf{Surrealism} (Breton, Dalí, Ernst, Magritte, c.~1917--1950) used Freudian dream logic to access the unconscious, producing paintings that are simultaneously hyper-realistic and impossible. \textbf{Futurism} (Italy, 1909) celebrated speed, machines, and violence as aesthetic values --- aesthetically prescient of fascism.
+
+\subsubsection{Abstract Expressionism, Pop Art, Minimalism (c.~1940--1970)}
+
+\textbf{Abstract Expressionism} (New York, 1940s--50s) --- Pollock, de Kooning, Rothko, Kline --- moved art fully into non-representational territory, with process and gesture as primary content. \textbf{Pop Art} (Warhol, Lichtenstein, Hamilton, c.~1950s--60s) reclaimed mass media, advertising, and commodity culture as artistic subject matter, collapsing the distinction between high and low. \textbf{Minimalism} (Donald Judd, Frank Stella, Dan Flavin, c.~1960s--70s) stripped art to pure form, material, and industrial fabrication, rejecting expressionism entirely.
+
+\subsubsection{Contemporary Art: 1970--Present}
+
+Contemporary art resists definition by style; it is defined by its time period. Major currents include: \textbf{Conceptual Art} (the idea as the work); \textbf{Street Art / Graffiti} (Basquiat, Banksy, Keith Haring --- art as public intervention); \textbf{Digital Art} (computer-generated imagery, generative systems, interactive installation); \textbf{Video Art} (Nam June Paik through Bill Viola and beyond); \textbf{NFT Art} (blockchain-authenticated digital work --- CryptoPunk \#3100 sold for \$16 million in 2024); and the current moment of \textbf{AI-assisted creation} (text-to-image models as both tool and subject of debate). Living artists including Kehinde Wiley, Kerry James Marshall, Kara Walker, and Yayoi Kusama represent the global diversity of contemporary practice.
+
+% ─── MODULE MUS-01 ────────────────────────────────────────────────────────────
+\subsection{MUS-01: Music History --- Prehistory through Romanticism}
+
+\subsubsection{Prehistoric and Ancient Music}
+
+The oldest known musical instruments are bone flutes found at Hohle Fels and Vogelherd, Germany, dated to approximately 40,000--42,000 BCE. The Divje Babe flute (Slovenia, c.~60,000 BCE) made from a cave bear femur may be even older, though its intentional musical nature is debated. The fact that cave paintings and flutes are contemporaneous strongly suggests that art, music, and ritual were a unified practice long before civilization.
+
+\textbf{Ancient Egypt (c.~3000 BCE):} Music was central to all aspects of Egyptian life --- religious ceremony, mummification ritual, royal court. Instruments included harps, flutes, lutes, and drums. Musicians held significant social status, connected to temples and royal courts.
+
+\textbf{Ancient Greece (c.~1000--31 BCE):} Greek music theory forms the mathematical foundation of the entire Western tonal tradition. The Greeks named the modes (Dorian, Phrygian, Lydian, etc.) that medieval theorists would inherit. They understood music as a branch of mathematics --- Pythagoras's discovery that string length ratios produce harmonious intervals laid the foundation for Western tuning theory.
+
+\textbf{India (500 BCE--present):} Indian Classical music, rooted in the Vedic tradition, codified in Bharata Muni's \emph{Natya Shastra}, developed the raga (melodic framework) and tala (rhythmic cycle) systems of extraordinary complexity. Two main traditions: Hindustani (North Indian) and Carnatic (South Indian).
+
+\subsubsection{Medieval Music (c.~500--1400 CE)}
+
+The dominant form was \textbf{Gregorian chant} (monophonic, unaccompanied, Latin liturgical text), named for Pope Gregory I and systematized at the great monasteries of Europe. The development of musical notation by Guido of Arezzo (c.~1040 CE) was one of the most consequential technological innovations in music history --- enabling complex compositions to be transmitted beyond living memory. \textbf{Polyphony} (multiple simultaneous melodic lines) emerged in the 12th century at Notre Dame (Léonin, Pérotin). Secular music flourished through troubadours (southern France), trouvères (northern France), and Minnesingers (German), who sang of courtly love. The \emph{ars nova} of the 14th century (Machaut) brought rhythmic complexity approaching modern notation.
+
+\subsubsection{Renaissance Music (c.~1400--1600)}
+
+The invention of the printing press (Gutenberg, 1450) for music allowed rapid dissemination of compositions across Europe. Renaissance music was primarily \textbf{polyphonic} (multiple independent melodic lines), in contrast to medieval monophony. The great choral composers --- Palestrina, Lassus, Victoria, Byrd --- created the architecture of the Catholic sacred tradition. Secular forms included the madrigal, the chanson, and the lute song. At the end of the period, the \textbf{Florentine Camerata} (1570s--80s) developed \textbf{monody} (solo vocal with accompaniment) and invented opera, directly triggering the Baroque.
+
+\subsubsection{Baroque Music (c.~1600--1750)}
+
+The Baroque era ``invented'' the major institutions of Western classical music: opera, the orchestra, the concerto, the oratorio, the cantata, and the fugue. Music moved from modal to \textbf{tonal} (major/minor keys), with clear harmonic direction replacing the older church modes. Key composers: \textbf{J.S.\ Bach} (the supreme architect of counterpoint, the Well-Tempered Clavier, the Brandenburg Concertos); \textbf{Handel} (oratorios including \emph{Messiah}, 1741); \textbf{Vivaldi} (The Four Seasons, c.~1723); \textbf{Purcell, Rameau, Corelli, Monteverdi, Telemann}.
+
+\subsubsection{Classical Period (c.~1750--1820)}
+
+Classical music is characterized by \textbf{homophonic texture} (clear melody over harmonic accompaniment), structural clarity, and the perfection of \textbf{sonata form} --- a three-part structure (exposition/development/recapitulation) that became the blueprint for the symphony, string quartet, and piano sonata. Key composers: \textbf{Haydn} (``father of the symphony'', 104 symphonies); \textbf{Mozart} (41 symphonies, 27 piano concertos, supreme operatic genius); \textbf{Beethoven} (whose late works began to break the classical mold into the Romantic).
+
+\subsubsection{Romantic Period (c.~1820--1900)}
+
+Romanticism in music paralleled its visual arts counterpart: intense personal emotional expression, expanded orchestras, nationalist identity, the cult of the virtuoso. Key composers: \textbf{Chopin} (piano as personal confessional); \textbf{Liszt} (virtuosic piano, symphonic poem); \textbf{Brahms} (classical structure with Romantic warmth); \textbf{Wagner} (the total artwork, \emph{Gesamtkunstwerk}, music drama); \textbf{Berlioz, Schumann, Mendelssohn, Tchaikovsky, Dvořák, Verdi}. The Romantic orchestra was enormous by Classical standards; Berlioz's \emph{Grande Messe des Morts} called for 200 performers.
+
+% ─── MODULE MUS-02 ────────────────────────────────────────────────────────────
+\subsection{MUS-02: Music History --- Modernism through the Digital Age}
+
+\subsubsection{20th-Century Classical and the Avant-Garde}
+
+The Romantic style fragmented at the turn of the 20th century. \textbf{Debussy}'s Impressionist music dissolved structural clarity into pure color and atmosphere. \textbf{Schoenberg} abandoned tonality entirely with his twelve-tone system (serialism, c.~1921), producing music in which all 12 chromatic notes are treated equally. \textbf{Stravinsky}'s \emph{Rite of Spring} (1913, Paris premiere) caused a riot, its asymmetric rhythms and harsh dissonances too shocking for the ballet audience. \textbf{Bartók} synthesized Hungarian folk music with modernist technique. The mid-century avant-garde (Cage, Stockhausen, Xenakis) explored chance operations, electronic sounds, and spatial music.
+
+\subsubsection{Jazz, Blues, Ragtime, and Gospel (c.~1890--1950)}
+
+Born in the African American communities of New Orleans, ragtime (Scott Joplin's \emph{Maple Leaf Rag}, 1899) and early jazz emerged from the intersection of blues (African-rooted call-and-response, pentatonic scales, blue notes), gospel church music, and European harmonic theory. Jazz is the most technically sophisticated improvised music in the world, requiring mastery of harmony, rhythm, and melodic invention in real time. Bebop (1940s --- Charlie Parker, Thelonious Monk, Miles Davis) was a deliberate increase in complexity, a small-group music of brilliant virtuosity.
+
+\subsubsection{Rock and Roll, Soul, and Popular Music (c.~1950--1980)}
+
+Rock and roll (1950s --- Chuck Berry, Little Richard, Elvis Presley) electrified blues and rhythm \& blues and detonated a global youth cultural revolution. The British Invasion (Beatles, Rolling Stones, 1964) amplified and returned American roots music back to global scale. \textbf{Soul} (Aretha Franklin, Otis Redding, Marvin Gaye) channeled gospel intensity into secular emotion. \textbf{Funk} (James Brown, Sly Stone, Parliament-Funkadelic) decomposed the beat into polyrhythmic groove. \textbf{Progressive rock} and \textbf{art rock} (Pink Floyd, King Crimson, Talking Heads) extended the album as a long-form compositional statement.
+
+\subsubsection{Hip-Hop (c.~1973--Present)}
+
+Hip-hop was born at a party in the Bronx, New York in 1973, when DJ Kool Herc isolated and extended the ``break'' section of funk and soul records using two turntables. From this technological innovation --- the breakbeat as raw material --- the entire genre grew: MCing, b-boying, graffiti, DJing as its four elements. Grandmaster Flash developed turntable technique. Run-DMC crossed hip-hop into mainstream rock. Public Enemy and N.W.A. brought political fire. In the 1990s, the West Coast / East Coast tension produced both brilliant work and tragedy. Jay-Z, Nas, Kendrick Lamar, and the genre's global expansion through the 2000s--2020s made hip-hop the most-streamed genre on Earth.
+
+\subsubsection{Electronic Music, Ambient, and Industrial (c.~1970--Present)}
+
+The synthesizer and the tape recorder transformed what music could be. \textbf{Kraftwerk}'s robotic electronic sounds in the 1970s predicted electronic dance music. \textbf{Brian Eno} invented ambient music as a genre with \emph{Ambient 1: Music for Airports} (1978). Industrial music (Throbbing Gristle, 1975) used noise, tape manipulation, and disturbing content to interrogate industrial society. Techno (Detroit, 1980s --- Juan Atkins, Derrick May), house (Chicago), and their global descendants now constitute an enormous international electronic music ecosystem.
+
+\subsubsection{The Digital Revolution and Streaming Era (c.~1990--Present)}
+
+The digital audio workstation (DAW) --- ProTools, Logic, Ableton Live, FL Studio --- democratized music production, collapsing the cost of professional recording from studio-only to bedroom-accessible. MIDI (1983) enabled instruments to communicate digitally. MP3 (1991) changed how music was stored and distributed. iTunes (2001) and then Spotify (2008) restructured the economics of music entirely, shifting from album sales to per-stream micropayments. AI composition tools (OpenAI MuseNet, Google Magenta, Suno AI) are now generating music indistinguishable from human composers --- the next major disruption to the art form is underway.
+
+% ─── MODULE BIZ-01 ────────────────────────────────────────────────────────────
+\subsection{BIZ-01: The Artist as Entrepreneur}
+
+\subsubsection{Legal Structure for a Home-Based Art Business}
+
+Art business owners in the U.S. earn approximately \$69,553 per year on average. A proper legal structure protects your assets and establishes professional credibility. Options:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Sole Proprietorship:} Simplest. No separate legal entity. Income on Schedule C. Personal liability exposure.
+  \item \textbf{LLC (Limited Liability Company):} Recommended for most artists. Separates personal and business assets. Single-member LLC taxed as sole proprietorship by default. Low cost to establish (\$50--\$500 depending on state).
+  \item \textbf{S-Corporation:} Useful when income is substantial; saves self-employment tax above a salary threshold. Higher administrative complexity.
+\end{itemize}
+
+Additional requirements: Business bank account (separate from personal). EIN (Employer Identification Number) from the IRS (free, online). Business license from your city/county. Sales tax permit if selling tangible goods.
+
+\subsubsection{Building an Artist Website}
+
+A professional artist website is the foundation of a creative career. Key components:
+
+\begin{enumerate}[noitemsep, leftmargin=2em]
+  \item \textbf{Domain:} Register your artist name as a domain (yourname.com or yourname.art). Lock it down before someone else does.
+  \item \textbf{Portfolio:} High-resolution images of work, organized by series or medium. Clean, fast-loading. No music autoplay.
+  \item \textbf{About Page:} Artist statement, bio, exhibition history, press. This is your story --- tell it.
+  \item \textbf{Shop / E-Commerce:} Squarespace, Wix, Shopify, or Etsy integration for original works and prints.
+  \item \textbf{Blog / Process:} Regular posts about your work build audience connection and SEO (search engine visibility).
+  \item \textbf{Contact:} Simple contact form. Gallery submission and press inquiry protocols.
+  \item \textbf{Email List:} The email list is your most valuable marketing asset. Embed a signup on every page.
+  \item \textbf{SSL Certificate:} HTTPS is required for trust. Most hosts include it free.
+\end{enumerate}
+
+\subsubsection{Brand Identity for Artists}
+
+Your brand is not your logo --- it is the entire system of associations your audience has with your name and work. Key elements:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Artist Voice:} What do you bring to every work? (Not: what do you paint. But: how do you see?)
+  \item \textbf{Visual Identity:} Logo, typeface, color palette. These should be consistent across all touchpoints.
+  \item \textbf{Signature:} Your artist signature is itself a brand identifier and potential trademark asset.
+  \item \textbf{Platform Consistency:} Same name, same profile image, same bio across website, Instagram, Etsy, LinkedIn.
+  \item \textbf{Niche vs.\ Versatility:} A brand does not restrict what you create; it is a labeled box from which your work emerges. The audience learns what to expect from the box without knowing what's inside it.
+\end{itemize}
+
+\subsubsection{Copyright vs.\ Trademark --- Critical Distinction}
+
+These two forms of intellectual property protect different things:
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{} & \tableheader{Copyright} & \tableheader{Trademark} \\
+\midrule
+What it protects & The creative work itself (painting, music, writing) & Brand identifiers: name, logo, slogan \\
+When it exists & Automatically upon creation & Only when registered or through use in commerce \\
+How long & Life of creator + 70 years & Indefinitely, if renewed every 10 years \\
+Registration & Optional but strengthens legal standing & Required for federal protection \\
+Cost & \$65--\$150 (U.S. Copyright Office) & \$250--\$350 per class (USPTO) \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection{Trademark Registration Process (U.S. -- USPTO)}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Conduct a TESS Search:} The USPTO's Trademark Electronic Search System (TESS) searches existing registered and pending marks. A ``likelihood of confusion'' with existing marks will result in application denial with no refund.
+  \item \textbf{Determine Use Basis:} ``Use in commerce'' (mark already in use) or ``Intent to Use'' (planning to use within 36 months).
+  \item \textbf{Select International Class(es):}
+    \begin{itemize}[noitemsep]
+      \item Class 016 --- Original artwork, prints, posters
+      \item Class 025 --- Apparel featuring original artwork
+      \item Class 041 --- Entertainment services; social media under the trademark
+      \item Class 009 --- Digital/downloadable art
+    \end{itemize}
+  \item \textbf{File the Application:} Online via TEAS (Trademark Electronic Application System). Current fees: \$250--\$350 per class.
+  \item \textbf{USPTO Examination:} 8--12 months review. Examiner may issue Office Actions (objections) requiring response.
+  \item \textbf{Publication:} Published for opposition; any third party can object within 30 days.
+  \item \textbf{Registration:} Certificate of Registration issued. Valid for 10 years; renew in Years 5--6 and every 10 years thereafter.
+  \item \textbf{Consult an attorney:} A trademark attorney dramatically increases success probability. Non-refundable filing fees make upfront legal guidance a worthwhile investment.
+\end{enumerate}
+
+\textbf{Important note for artists using their own name:} The USPTO often resists registering personal surnames as marks (they don't want to give any one person a monopoly on a common surname). However, many artists have successfully obtained registration by demonstrating that the name has acquired \emph{secondary meaning} (i.e., consumers associate it specifically with your goods and services). Evidence includes sales records, media coverage, and duration of use.
+
+\subsubsection{Selling Art: Revenue Channels}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Channel} & \tableheader{Margin} & \tableheader{Notes} \\
+\midrule
+Own website & High (100\%) & Full control; direct relationship; Shopify/Squarespace fees only \\
+Etsy & Moderate & 6.5\% transaction fee + listing; massive built-in audience \\
+Art galleries & Low (50\% commission) & Prestige and market access; relationship-dependent \\
+Art fairs & Variable & Booth fees; high volume potential; physical presence required \\
+Print-on-demand & Low (\$8--20/print) & Passive income; no inventory; Society6, Redbubble, Fine Art America \\
+Licensing & Variable (5--15\%) & Art on products; approach companies with portfolio and pitch \\
+Commissions & High & Direct relationship; scope creep risk; contract required \\
+NFT platforms & Variable & Blockchain royalties possible; market volatility extreme \\
+\bottomrule
+\end{tabularx}
+
+% ─── Module COK-01 Summary ────────────────────────────────────────────────────
+\subsection{COK-01: College of Knowledge Integration --- Research Findings}
+
+The College of Knowledge integration module positions all concepts from this mission on the GSD Complex Plane of Experience, where each skill $z = r \cdot e^{i\theta}$ is a point in the conceptual space. In this mission's domain:
+
+\begin{itemize}[noitemsep]
+  \item The \textbf{real axis} ($\theta = 0$ to $\pi$) maps formal/technical development --- from pure craft toward pure concept.
+  \item The \textbf{imaginary axis} ($\theta = \pi/2$) maps spiritual/emotional orientation --- from secular craft toward transcendent expression.
+  \item \textbf{Magnitude r} maps influence: how many subsequent movements cite this one as a root.
+\end{itemize}
+
+\textbf{Selected Rosetta Core Translation Pairs (25 minimum required):}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Visual Art Concept} & \tableheader{Music Cognate} & \tableheader{The Rosetta Translation} \\
+\midrule
+Chiaroscuro (light/dark contrast) & Counterpoint (melodic voices in tension) & Structured contrast producing depth \\
+Linear perspective (single viewpoint) & Tonal harmony (single tonic center) & A shared vanishing point that organizes complexity \\
+Impressionist visible brushstroke & Jazz blue note & The artist's hand/voice made audible/visible \\
+Cubism (multiple viewpoints) & Polytonality (multiple keys) & Simultaneous contradictory truths \\
+Abstract Expressionism (process as content) & Free jazz (improvisation as content) & The act of making as the made thing \\
+Negative space (what is NOT drawn) & Silence/rest (what is NOT played) & The spaces between are load-bearing \\
+Color theory (complementary contrast) & Harmonic theory (dissonance/resolution) & Tension and release as the engine of experience \\
+Proportion / Golden Ratio & Just intonation / overtone series & Mathematical beauty is not imposed but discovered \\
+Fresco permanence (non-correctable) & Live performance (non-repeatable) & The irreversible gesture as highest commitment \\
+Perspective (illusion of depth) & Reverb (illusion of space) & Technology in service of spatial imagination \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{deepred}
+\tableheader{Consideration} & \tableheader{Level} & \tableheader{Protocol} \\
+\midrule
+Indigenous art traditions & ABSOLUTE & Nation-specific attribution only; four-level classification (public/community/restricted/sacred); never generic; OCAP/CARE/UNDRIP compliance mandatory \\
+Sacred ceremonial art & ABSOLUTE & Not documented regardless of public availability \\
+Cultural appropriation framing & GATE & Present appropriation critique alongside historical documentation; do not elide \\
+Artist attribution & GATE & All specific factual claims (dates, sales prices, critical quotes) sourced \\
+Legal guidance specificity & ANNOTATE & All legal guidance is general; not jurisdiction-specific legal advice; attorney consultation recommended \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Source Bibliography}
+
+\subsubsection*{Scholarly and Reference Sources}
+\begin{itemize}[noitemsep]
+  \item Smarthistory (smarthistory.org) --- peer-reviewed open-access art history resource
+  \item Encyclopedia Britannica (britannica.com) --- cave art, art movements, music history
+  \item Lincoln Memorial University Libraries, Western Art History taxonomy
+  \item Naxos (naxos.com) --- Classical music history by period
+  \item Music Theory Academy (musictheoryacademy.com) --- periods of music
+  \item Skagit Symphony, Time Periods in Music History
+  \item Wikipedia: History of Music, Dates of Classical Music Eras, Prehistoric Art, Cave Painting
+  \item The Art Story (theartstory.org) --- Cave Art movement overview
+  \item Invaluable Blog --- Art History Timeline, Western art movements
+  \item Studio Binder (studiobinder.com) --- Art History Timeline
+  \item TheCollector (thecollector.com) --- Top 30 Art Movements in Western History
+  \item ArtInContext (artincontext.org) --- Art Periods
+  \item Smithsonian Magazine --- ``A Journey to the Oldest Cave Paintings in the World'' (2015)
+  \item BC Campus Press, Caves to Cathedrals (pressbooks.bccampus.ca) --- Paleolithic Art
+  \item Guitar Get Lessons (guitargetlessons.com) --- Music History Timeline
+\end{itemize}
+
+\subsubsection*{Business and Legal Sources}
+\begin{itemize}[noitemsep]
+  \item Artwork Archive (artworkarchive.com) --- Art Business Advice: How to Register a Trademark
+  \item Creative Law Center (creativelawcenter.com) --- Trademark for Artists workshop
+  \item Gelato (gelato.com) --- How to trademark your artist name
+  \item Indie Law (indielaw.com) --- Industry-Specific Trademark Protection Guide
+  \item Wix (wix.com) --- How to Start an Art Business (2024)
+  \item Avvo Legal Answers --- Artist trademark class selection guidance
+  \item Natasha Wescoat / Lateral Action --- How to License Your Art
+  \item Gillian Rhodes Studio (gillianrhodes.com) --- How to Brand Yourself as an Artist
+  \item United States Patent and Trademark Office (USPTO.gov) --- Official source for all trademark process details
+\end{itemize}
+
+\newpage
+% ═════════════════════════════════════════════════════════════════════════════
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═════════════════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a publication-quality, GSD-executable encyclopedia of the visual arts and music across all historical eras, integrated with a complete practical manual for the working artist-entrepreneur. The mission seeds the GSD College of Knowledge with 100+ positioned concept nodes on the Complex Plane of Experience, builds the Rosetta Core cross-domain translation layer connecting art to music, mathematics, and software, and delivers a complete self-contained resource for any person who wants to make art their life and their living.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE 0: FOUNDATION (Sequential, Haiku)
+  Schema.yaml -- Shared data structures for all 7 modules
+  SourceIndex  -- Validated source bibliography
+  Template     -- LaTeX/PDF output templates
+         |
+         v
+WAVE 1A (Parallel Track A, Sonnet)     WAVE 1B (Parallel Track B, Sonnet)
+  EXEC-VIS: VIS-01, VIS-02, VIS-03       EXEC-MUS: MUS-01, MUS-02
+  Visual arts 40,000 BCE--present         Music prehistory--digital age
+  100+ artworks documented                200+ compositions documented
+  Non-Western traditions integrated       World music traditions integrated
+         |                                       |
+         v                                       v
+WAVE 1C (Parallel Track C, Sonnet)
+  EXEC-BIZ: BIZ-01 -- Artist-Entrepreneur manual
+  Legal structure, website, brand, trademark, licensing
+         |
+         v
+WAVE 2: SYNTHESIS (Sequential, Opus)
+  CRAFT-COK: Complex Plane positioning
+  Rosetta Core 25+ translation pairs
+  L-System grammar generation
+  Cross-era connections and transitions
+  SECURE: Cultural sensitivity review
+         |
+         v
+WAVE 3: PUBLICATION + VERIFICATION (Sequential, Sonnet + Opus)
+  EXEC-PUB: LaTeX compilation, PDF production
+  VERIFY: Factual accuracy check, source validation
+  CAPCOM: HITL review gate -- Human approval before final delivery
+  LOG: Commit messages, milestone summary, CoK seed export
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{5cm}L{3.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Success Criteria} & \tableheader{Spec Location} \\
+\midrule
+1 & VIS-01 Visual Arts Origins & All prehistoric/ancient traditions documented; OCAP compliant & Module VIS-01 \\
+2 & VIS-02 Classical--Impressionism & 15+ movements documented; key artists and works indexed & Module VIS-02 \\
+3 & VIS-03 Modernism--Present & 15+ movements; Digital Art and AI art included & Module VIS-03 \\
+4 & MUS-01 Music Prehistory--Romantic & 8 eras; 50+ composers; instrument genealogy & Module MUS-01 \\
+5 & MUS-02 Modernism--Digital Age & Jazz, Rock, Hip-Hop, Electronic, AI music & Module MUS-02 \\
+6 & BIZ-01 Artist-Entrepreneur Manual & Complete launch checklist; trademark process accurate to current USPTO & Module BIZ-01 \\
+7 & COK-01 Knowledge Integration & 80+ concept nodes positioned; 25+ Rosetta translations; L-System grammar & Module COK-01 \\
+8 & Master Encyclopedia PDF & All modules compiled; XeLaTeX 3-pass clean; TOC complete & Wave 3 \\
+9 & CoK Seed Export & YAML export of all concept nodes for College of Knowledge import & Wave 3 \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Component Breakdown with Model Assignments}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}L{1.5cm}C{1.5cm}L{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Schema + Source Index & None & BUDGET + LOG & Haiku & 12K \\
+VIS-01 Origins & Schema & EXEC-VIS + CRAFT-VIS & Sonnet/Opus & 40K \\
+VIS-02 Classical--Impressionism & Schema & EXEC-VIS + CRAFT-VIS & Sonnet/Opus & 45K \\
+VIS-03 Modernism--Present & Schema & EXEC-VIS + CRAFT-VIS & Sonnet/Opus & 40K \\
+MUS-01 Prehistory--Romantic & Schema & EXEC-MUS + CRAFT-MUS & Sonnet/Opus & 45K \\
+MUS-02 Modern--Digital & Schema & EXEC-MUS + CRAFT-MUS & Sonnet/Opus & 40K \\
+BIZ-01 Entrepreneur Manual & Schema & EXEC-BIZ + CRAFT-BIZ & Sonnet & 30K \\
+COK-01 Integration & All prior & CRAFT-COK & Opus & 50K \\
+Cultural Sensitivity Review & All prior & SECURE & Opus & 20K \\
+Master PDF Compilation & All modules & EXEC-PUB & Sonnet & 25K \\
+CoK Seed YAML Export & COK-01 & CRAFT-COK & Sonnet & 15K \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total Estimated Tokens:}} & \textbf{\textasciitilde362K} \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Model Assignment Rationale}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & \textasciitilde30\% & Domain synthesis (CRAFT-VIS, CRAFT-MUS, CRAFT-COK); cultural sensitivity (SECURE); Complex Plane positioning; Rosetta Core generation; cross-era connection detection \\
+Sonnet & \textasciitilde60\% & Survey document production (EXEC agents); BIZ-01 practical content; verification; LaTeX compilation; CoK YAML export \\
+Haiku & \textasciitilde10\% & Schema generation; template scaffolding; token budget tracking; commit message generation \\
+\bottomrule
+\end{tabularx}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model Mix} & \tableheader{Outputs} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schema.yaml, SourceIndex, Templates \\
+1A & Visual Arts Survey & Parallel & Sonnet+Opus & VIS-01, VIS-02, VIS-03 documents \\
+1B & Music History Survey & Parallel & Sonnet+Opus & MUS-01, MUS-02 documents \\
+1C & Business Manual & Parallel & Sonnet & BIZ-01 complete manual \\
+2 & Synthesis + CoK & Sequential & Opus & COK-01, Rosetta Core, L-System, cultural review \\
+3 & Publication & Sequential & Sonnet+Opus & Master PDF, CoK seed YAML, HITL gate \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Wave 0: Foundation}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Schema generation & LOG/Haiku & Create shared YAML schema for art era records, music era records, CoK node records \\
+Source index build & BUDGET/Haiku & Validate and index all 25+ bibliography sources; flag any broken URLs \\
+Template setup & PLAN/Sonnet & Configure LaTeX template with visual arts color scheme; validate 3-pass compilation \\
+HITL gate 0 & CAPCOM & Confirm scope, module count, and activation profile with human before Wave 1 launches \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Wave 1: Parallel Tracks A, B, C}
+
+\subsubsection*{Track A --- Visual Arts (EXEC-VIS, CRAFT-VIS)}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+VIS-01 Origins & Sonnet & Prehistoric through Antiquity; global traditions; pigment technology; OCAP compliance check \\
+VIS-02 Classical & Sonnet & Medieval through Impressionism; 15+ movements; 50+ artists; canonical works \\
+VIS-03 Modern & Sonnet & Post-Impressionism through Contemporary; NFT; AI art \\
+CRAFT-VIS synthesis & Opus & Cross-era connections within visual arts; style theory; composition principles \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{Track B --- Music History (EXEC-MUS, CRAFT-MUS)}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+MUS-01 Ancient--Romantic & Sonnet & Bone flutes through Brahms; world music traditions; notation history \\
+MUS-02 Modern--Digital & Sonnet & Jazz through AI; DAW genealogy; streaming economics \\
+CRAFT-MUS synthesis & Opus & Cross-era connections; music theory foundations; genre family trees \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{Track C --- Business Manual (EXEC-BIZ, CRAFT-BIZ)}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Model} & \tableheader{Description} \\
+\midrule
+BIZ-01 Legal structure & Sonnet & LLC, S-Corp, sole proprietorship; EIN; business license \\
+BIZ-01 Website guide & Sonnet & Domain, portfolio architecture, e-commerce, SEO \\
+BIZ-01 Brand identity & Sonnet & Visual identity system, artist voice, signature as trademark \\
+BIZ-01 Trademark & Sonnet & Copyright vs. trademark; USPTO TESS; class selection; filing process \\
+BIZ-01 Revenue channels & Sonnet & Gallery, direct, print-on-demand, NFT, licensing comparison table \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Wave 2: Synthesis}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+Complex Plane positioning & CRAFT-COK/Opus & Assign r and $\theta$ values to 80+ concept nodes; generate knowledge graph \\
+Rosetta Core pairs & CRAFT-COK/Opus & Generate 25+ cross-domain translation pairs; validate bidirectionality \\
+L-System grammar & CRAFT-COK/Opus & Build production rules for art movement evolution; test against 3 historical sequences \\
+HITL gate 2 & CAPCOM & Human review of CoK positioning and Rosetta translations before synthesis locks \\
+Cultural sensitivity audit & SECURE/Opus & Review all Indigenous art references for OCAP compliance; flag any issues for CAPCOM \\
+INTEG cross-links & INTEG/Sonnet & Verify all cross-module links; identify orphaned concepts; build connection table \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Wave 3: Publication and Verification}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Description} \\
+\midrule
+LaTeX assembly & EXEC-PUB/Sonnet & Integrate all 7 modules into master document; compile 3-pass XeLaTeX \\
+Source validation & VERIFY/Sonnet & Confirm all bibliography URLs active; validate factual claims against sources \\
+Trademark accuracy check & VERIFY/Opus & Confirm USPTO process details are current (fee amounts, class numbers, timelines) \\
+CoK YAML export & CRAFT-COK/Sonnet & Export all positioned concept nodes as structured YAML for College of Knowledge import \\
+HITL gate 3 (final) & CAPCOM & Human approval before final delivery; scope confirmation \\
+LOG commit & LOG/Haiku & Milestone summary, commit message, skill-creator observation record \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Shared schema prefix:} All 7 EXEC agents share the same 12K schema context; compute once and cache within the 5-minute TTL window.
+  \item \textbf{Source index shared attribute:} Validated bibliography passed as a shared attribute to all research-reading agents.
+  \item \textbf{Wave 1 parallel launch:} Tracks A, B, and C launched simultaneously to maximize cache hit window.
+  \item \textbf{CRAFT agents receive summarized outputs:} EXEC outputs are summarized before passing to CRAFT agents to minimize context load.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Subtotal} \\
+\midrule
+Wave 0: Foundation & 15K & 12K & 27K \\
+Wave 1A: Visual Arts & 80K & 45K & 125K \\
+Wave 1B: Music History & 75K & 45K & 120K \\
+Wave 1C: Business Manual & 40K & 30K & 70K \\
+Wave 2: Synthesis & 90K & 50K & 140K \\
+Wave 3: Publication & 50K & 30K & 80K \\
+\midrule
+\textbf{Total} & \textbf{350K} & \textbf{212K} & \textbf{\textasciitilde562K} \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Schema.yaml] ──┬──> [VIS-01] ──┐
+[SourceIndex]   ├──> [VIS-02]   ├──> [CRAFT-VIS] ──┐
+                ├──> [VIS-03] ──┘                   │
+                │                                    ├──> [COK-01 / CRAFT-COK]
+                ├──> [MUS-01] ──┐                   │         |
+                ├──> [MUS-02]   ├──> [CRAFT-MUS] ──┤    [Rosetta Core]
+                │               ┘                   │    [L-System Grammar]
+                │                                   │         |
+                └──> [BIZ-01] ──> [CRAFT-BIZ] ──────┘         v
+                                                         [SECURE audit]
+                                                              |
+                                                         [Master PDF]
+                                                         [CoK YAML export]
+                                                              |
+                                                      [CAPCOM HITL gate]
+                                                              |
+                                                        [DELIVERY]
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Failure Action} \\
+\midrule
+Safety-Critical (OCAP/cultural) & 8 & BLOCK & Mission halt; CAPCOM escalation \\
+Factual Accuracy & 12 & HIGH & Verify and correct before Wave 3 \\
+Completeness (era coverage) & 10 & HIGH & Identify gaps; assign remediation agent \\
+Cross-module Integration & 8 & MEDIUM & INTEG agent resolves \\
+Business/Legal Accuracy & 6 & HIGH & VERIFY + attorney review flag \\
+LaTeX Compilation & 3 & BLOCK & Fix compilation errors before delivery \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Safety-Critical Tests (BLOCK on Failure)}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{deepred}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & No sacred/restricted Indigenous content & All Indigenous art references use only publicly shared materials; no ceremonial or restricted content regardless of source availability \\
+SC-02 & Nation-specific attribution & Zero instances of generic ``Native American'' or ``Indigenous'' without specific nation names \\
+SC-03 & No fabricated facts & All dates, sale prices, and critical quotes sourced to a verified bibliography entry \\
+SC-04 & No legal advice as definitive & All legal guidance includes ``consult an attorney'' caveat; no jurisdiction-specific guarantees \\
+SC-05 & OCAP Level 1--2 only & Content rated at OCAP Level 3 (restricted) or 4 (sacred) excluded from all deliverables \\
+SC-06 & Copyright vs.\ trademark distinction clear & No content that could mislead an artist about which form of IP protects their work \\
+SC-07 & USPTO fees current & Trademark filing fee amounts verified against current USPTO schedule before publication \\
+SC-08 & LaTeX 3-pass clean compilation & Zero compilation errors; all cross-references resolve; page count accurate \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Verification Matrix}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{5cm}L{4cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & All art movements documented $<$5\% error & FA-01--FA-04 & PENDING \\
+2 & All music periods documented with dates & FA-05--FA-08 & PENDING \\
+3 & 12+ non-Western traditions with OCAP compliance & SC-01, SC-02, SC-05 & PENDING \\
+4 & Cross-discipline links per era & INTEG-01--INTEG-04 & PENDING \\
+5 & BIZ-01 complete launch checklist & COMP-01, FA-09 & PENDING \\
+6 & Trademark process current and accurate & SC-07, FA-10 & PENDING \\
+7 & Website section covers 8 core elements & COMP-02 & PENDING \\
+8 & Copyright/trademark distinction clear & SC-06, FA-11 & PENDING \\
+9 & 80+ CoK nodes positioned & INTEG-05--INTEG-08 & PENDING \\
+10 & 25+ Rosetta pairs & INTEG-06 & PENDING \\
+11 & L-System generates 3 sequences & INTEG-07 & PENDING \\
+12 & XeLaTeX clean compilation & SC-08 & PENDING \\
+\bottomrule
+\end{tabularx}
+
+\section{Mission Crew Manifest}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent Name} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Osprey (Agnus/Opus) & Mission direction; go/no-go gates; cultural sensitivity final authority \\
+PLAN & Cedar (Sonnet) & Wave decomposition; dependency management; parallel track optimization \\
+TOPO & Raven (Opus) & Team structure; mid-mission restructuring if scope expands \\
+ARCH & Tahoma (Opus) & Cross-cutting structural decisions; CoK architecture \\
+SCOUT & Salmon (Sonnet) & Source gathering; web research; bibliography validation \\
+EXEC-VIS & Cascade (Sonnet) & VIS-01, VIS-02, VIS-03 document production \\
+EXEC-MUS & Willow (Sonnet) & MUS-01, MUS-02 document production \\
+EXEC-BIZ & Alder (Sonnet) & BIZ-01 artist-entrepreneur manual production \\
+EXEC-PUB & Hemlock (Sonnet) & Master PDF compilation; LaTeX assembly \\
+CRAFT-VIS & Orca (Opus) & Visual arts domain synthesis; style theory; era transitions \\
+CRAFT-MUS & Heron (Opus) & Music history synthesis; cross-era connections; world music \\
+CRAFT-BIZ & Fern (Sonnet) & Business/legal synthesis; trademark process verification \\
+CRAFT-COK & Foxglove (Opus) & College of Knowledge positioning; Rosetta Core; L-System grammar \\
+CRAFT-TECH & Circuit (Sonnet) & Art in software and technology; digital art genealogy \\
+SECURE & Eagle (Opus) & Cultural sovereignty enforcement; OCAP/CARE/UNDRIP compliance \\
+VERIFY & Lichen (Sonnet) & Source validation; factual accuracy checking \\
+INTEG & Web (Sonnet) & Cross-module relationship validation; connection table \\
+ANALYST & Mycelium (Opus) & Pattern detection across modules; identify unexpected connections \\
+CAPCOM & Passage (Sonnet) & Human-in-the-loop interface; only channel crossing human-machine boundary \\
+BUDGET & Pebble (Haiku) & Token budget tracking; session planning \\
+SURGEON & Moss (Sonnet) & Research quality degradation detection \\
+RETRO & Tide (Sonnet) & Post-wave analysis; lessons learned for future art missions \\
+LOG & Spore (Haiku) & Commit messages; milestone summaries; skill-creator observation records \\
+\bottomrule
+\end{tabularx}
+
+\section{Execution Summary}
+
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (Full Crew, 23 named roles) \\
+Number of Modules & 7 (VIS-01, VIS-02, VIS-03, MUS-01, MUS-02, BIZ-01, COK-01) \\
+Number of Waves & 6 (Wave 0 + 1A/1B/1C + 2 + 3) \\
+Estimated Context Windows & 14--18 across 5--7 sessions \\
+Estimated Total Tokens & \textasciitilde562K \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Deliverables & Master Encyclopedia PDF, CoK Seed YAML, LaTeX source \\
+HITL Gates & 3 (Wave 0, Wave 2, Wave 3) \\
+Safety-Critical Tests & 8 (all BLOCK) \\
+Total Test Cases & 47 \\
+Deep Links & College of Knowledge, Complex Plane of Experience, Rosetta Core, L-System Grammar, BBS Educational Pack \\
+Cultural Compliance & OCAP / CARE / UNDRIP (ABSOLUTE) \\
+Estimated Research Depth & 40,000 BCE to March 2026 \\
+\bottomrule
+\end{tabularx}
+
+\vspace{2em}
+
+\begin{quotebox}
+\centering
+{\large\sffamily\itshape\textcolor{primary}{``Art is the most intense mode of individualism\\
+that the world has known.''}}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- Oscar Wilde}}
+
+\vspace{1em}
+{\normalsize\sffamily\textcolor{tertiary}{The spaces between each era are not empty.\\
+They are the pressure that builds the next form.\\
+Every brushstroke inherits forty thousand years.\\
+Every note carries every note that came before it.\\
+The artist who knows this history\\
+is not constrained by it --- they are amplified by it.\\
+That is the Amiga Principle applied to the human soul.}}
+\end{quotebox}
+
+\end{document}

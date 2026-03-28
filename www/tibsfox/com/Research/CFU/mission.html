@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; ComfyUI Integration</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-cfu">
+  <header>
+    <h1>ComfyUI Integration</h1>
+    <div class="subtitle">API Bridge &middot; Image Pipeline &middot; Video Pipeline &middot; Skill-Creator Integration &middot; Security</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-api-bridge">API Bridge</a>
+      <a href="page.html?doc=02-image-pipeline">Image</a>
+      <a href="page.html?doc=03-video-pipeline">Video</a>
+      <a href="page.html?doc=04-skill-integration">Integration</a>
+      <a href="page.html?doc=05-security-sandboxing">Security</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      A local, sovereign image and video production layer &mdash; no cloud fees, no prompt logging,
+      no content filters imposed from outside &mdash; woven directly into the skill-creator ecosystem
+      via structured DACP bundles. The meaning is not in the image itself; it lives in the connection
+      between the user's intent, the workflow graph, and the artifact that emerges.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">14</span><span class="stat-label">Deliverables</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">~349K</span><span class="stat-label">Est. Tokens</span></div>
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Agent Roles</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/comfyui_mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete three-stage document: vision, research reference, and mission specification</td></tr>
+        <tr><td><a href="mission-pack/comfyui_mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/comfyui_mission_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Components</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>DACP schema, VRAM tier table, node allowlist, workflow templates</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1A</td><td>API Bridge</td><td>Track A: M1 (REST client, WebSocket handler, artifact retrieval)</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>1B</td><td>Pipelines</td><td>Track B: M2 (Image) + M3 (Video) workflow templates</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>2</td><td>Integration + Security</td><td>M4 (DACP + MCP bridge) + M5 (Docker + node audit)</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Publication</td><td>Integration test, documentation, skill registration</td><td>Sequential</td><td>Sonnet</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Synthesis + judgment</td><td>Opus</td><td>DACP integration architecture, MCP bridge design, registry feedback loop, Docker security spec</td></tr>
+        <tr><td>Denise</td><td>Document production</td><td>Sonnet</td><td>API bridge documentation, workflow template specs, pipeline guides</td></tr>
+        <tr><td>Paula</td><td>Scaffolding + schema</td><td>Haiku</td><td>DACP bundle schema, VRAM tier table, node allowlist, template stubs</td></tr>
+        <tr><td>M68000</td><td>Logic / glue / routing</td><td>Mixed</td><td>Safety warden, custom node scanning, push gating</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Deliverable Matrix</h2>
+
+    <table>
+      <thead><tr><th>#</th><th>Deliverable</th><th>Acceptance Criterion</th><th>Wave</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>DACP bundle schema</td><td>JSON Schema spec passes validation; all three fields required</td><td>Wave 0</td></tr>
+        <tr><td>2</td><td>VRAM tier routing table</td><td>Covers 8/12/16/24GB tiers; auto-selects model variant</td><td>Wave 0</td></tr>
+        <tr><td>3</td><td>Node allowlist</td><td>10+ audited nodes; eval/exec and runtime-pip checks complete</td><td>Wave 0</td></tr>
+        <tr><td>4</td><td>Workflow templates</td><td>5+ templates (FLUX FP8, SDXL, SDXL+ControlNet, LTX-2.3 T2V, Wan T2V)</td><td>Wave 0</td></tr>
+        <tr><td>5</td><td>ComfyUI Python skill</td><td>Dispatches workflow, tracks WebSocket, retrieves artifact</td><td>Wave 1A</td></tr>
+        <tr><td>6</td><td>Model auto-discovery</td><td>/object_info parsed at startup; checkpoints enumerated</td><td>Wave 1A</td></tr>
+        <tr><td>7</td><td>Image pipeline</td><td>FLUX FP8 round-trip &lt;90s on 16GB GPU</td><td>Wave 1B</td></tr>
+        <tr><td>8</td><td>Video pipeline</td><td>LTX-2.3 or Wan 2.2 T2V completes; MP4 artifact returned</td><td>Wave 1B</td></tr>
+        <tr><td>9</td><td>MCP bridge spec</td><td>Planning-bridge pattern adapted for ComfyUI; handshake documented</td><td>Wave 2</td></tr>
+        <tr><td>10</td><td>Registry feedback loop</td><td>10-generation test: metadata logged, patterns surfaced</td><td>Wave 2</td></tr>
+        <tr><td>11</td><td>Docker Compose spec</td><td>Isolated container: only /models, /input, /output mounts</td><td>Wave 2</td></tr>
+        <tr><td>12</td><td>Security boundary tests</td><td>Container cannot access host FS outside mounts (verified)</td><td>Wave 2</td></tr>
+        <tr><td>13</td><td>Integration test</td><td>Full brief-to-artifact pipeline runs without human intervention</td><td>Wave 3</td></tr>
+        <tr><td>14</td><td>Skill documentation</td><td>SKILL.md, README, and workflow template usage guide</td><td>Wave 3</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>ComfyUI is the Amiga Principle applied to image generation: a directed acyclic graph
+    where each node does one thing, connections define data flow, and partial re-execution
+    prevents redundant computation. Skill-Creator provides the orchestration layer that
+    turns isolated generation into a learning system. The spaces between &mdash; between intent
+    and artifact, between prompt and latent space, between human meaning and machine
+    traversal &mdash; are where the creative process lives.</p>
+
+    <p><em>&ldquo;The meaning is not in the image itself. It lives in the connection between
+    the user's intent, the workflow graph, the model's latent space traversal, and the
+    artifact that emerges.&rdquo;</em></p>
+  </main>
+
+  <footer>
+    <p>ComfyUI Integration &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
