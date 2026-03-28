@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AM Radio West Coast &amp; PNW — GSD Research Mission</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:      #B71C1C;
+      --amber:    #E65100;
+      --navy:     #1A237E;
+      --red-lt:   #FFEBEE;
+      --amber-lt: #FFF3E0;
+      --navy-lt:  #E8EAF6;
+      --card-bg:  #F5F0EE;
+      --border:   #BDBDBD;
+      --text:     #212121;
+      --muted:    #757575;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FAF7F5;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--red) 0%, #7B0000 60%, var(--navy) 100%);
+      color: white;
+      padding: 56px 40px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 10%;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    .header-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 16px;
+    }
+    .header-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .header-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .meta-chip {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ── MAIN ───────────────────────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── FILES ──────────────────────────────────────────────── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 600px) {
+      .file-grid { grid-template-columns: 1fr; }
+    }
+
+    .file-card {
+      display: block;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 20px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    }
+    .file-card:hover {
+      border-color: var(--red);
+      box-shadow: 0 4px 18px rgba(183,28,28,0.12);
+      transform: translateY(-2px);
+    }
+    .file-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .file-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+    .file-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .file-size {
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    /* ── CONTENTS ───────────────────────────────────────────── */
+    .contents-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 700px) {
+      .contents-grid { grid-template-columns: 1fr; }
+    }
+
+    .stage-card {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+    .stage-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .badge-1 { background: var(--red-lt); color: var(--red); }
+    .badge-2 { background: var(--amber-lt); color: var(--amber); }
+    .badge-3 { background: var(--navy-lt); color: var(--navy); }
+    .stage-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .stage-items {
+      list-style: none;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .stage-items li::before {
+      content: '›  ';
+      color: var(--border);
+    }
+
+    /* ── USAGE ──────────────────────────────────────────────── */
+    .usage-block {
+      background: #1C1C1E;
+      color: #F5F5F5;
+      border-radius: 8px;
+      padding: 24px 20px;
+      margin-bottom: 16px;
+      font-family: 'DM Sans Mono', 'DejaVu Sans Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .usage-comment { color: #888; }
+    .usage-cmd     { color: #FF9F0A; }
+    .usage-arg     { color: #30D158; }
+    .usage-flag    { color: #64D2FF; }
+
+    .prose-section h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.2rem;
+      color: var(--red);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #EEE;
+    }
+    .prose-section p {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .prose-section ol {
+      padding-left: 20px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.9;
+    }
+
+    /* ── QUOTE ──────────────────────────────────────────────── */
+    blockquote {
+      border-left: 4px solid var(--red);
+      background: var(--red-lt);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+      margin: 40px 0 0;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #5a2020;
+      line-height: 1.7;
+    }
+    blockquote cite {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid #EEE;
+    }
+    footer span { color: var(--red); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="header-eyebrow">GSD Research Mission Package &nbsp;·&nbsp; Fox Infrastructure Group</p>
+  <h1 class="header-title">The AM Radio Dial<br/>West Coast &amp; PNW</h1>
+  <p class="header-subtitle">History · Stations · Licensing · Spectrum · Future<br/>
+  Pacific Northwest &amp; California Deep Research Study</p>
+  <div class="header-meta">
+    <span class="meta-chip">38 Pages</span>
+    <span class="meta-chip">Fleet Profile · 17 Roles</span>
+    <span class="meta-chip">6 Research Modules</span>
+    <span class="meta-chip">March 27, 2026</span>
+    <span class="meta-chip">Ready for GSD Orchestrator</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- FILES -->
+  <p class="section-label">Mission Files</p>
+  <div class="file-grid">
+    <a class="file-card" href="am_radio_mission.pdf" download>
+      <div class="file-icon">📻</div>
+      <div class="file-name">am_radio_mission.pdf</div>
+      <div class="file-desc">Full three-stage mission package. Vision guide, research reference with sourced findings, and complete mission execution plan.</div>
+      <div class="file-size">PDF · 38 Pages</div>
+    </a>
+    <a class="file-card" href="am_radio_mission.tex" download>
+      <div class="file-icon">⚙️</div>
+      <div class="file-name">am_radio_mission.tex</div>
+      <div class="file-desc">Full XeLaTeX source. Modify and recompile with <code>xelatex</code> (three passes) to customize any section.</div>
+      <div class="file-size">LaTeX Source</div>
+    </a>
+  </div>
+
+  <!-- CONTENTS -->
+  <p class="section-label">Document Contents</p>
+  <div class="contents-grid">
+    <div class="stage-card">
+      <span class="stage-badge badge-1">Stage 1</span>
+      <div class="stage-title">Vision Document</div>
+      <ul class="stage-items">
+        <li>Problem Statement (5 problems)</li>
+        <li>West Coast Broadcast Geography</li>
+        <li>6-Module Architecture Diagram</li>
+        <li>Chipset Configuration (YAML)</li>
+        <li>Scope Boundaries</li>
+        <li>12 Success Criteria</li>
+        <li>Through-Line Narrative</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <span class="stage-badge badge-2">Stage 2</span>
+      <div class="stage-title">Research Reference</div>
+      <ul class="stage-items">
+        <li>AM Band Foundations &amp; Physics</li>
+        <li>PNW Stations (KJR, KOMO, KIRO…)</li>
+        <li>California Stations (KFI, KGO, KCBS…)</li>
+        <li>Spectrum &amp; Licensing Pathways</li>
+        <li>47 CFR Part 73 Regulations</li>
+        <li>Digital Future &amp; EV Interference</li>
+        <li>Sourced Bibliography (30+ refs)</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <span class="stage-badge badge-3">Stage 3</span>
+      <div class="stage-title">Mission Package</div>
+      <ul class="stage-items">
+        <li>Milestone Specification</li>
+        <li>4-Wave Execution Plan</li>
+        <li>Component Breakdown &amp; Token Budget</li>
+        <li>Dependency Graph (ASCII)</li>
+        <li>45-Test Test Plan</li>
+        <li>Verification Matrix</li>
+        <li>17-Role Fleet Crew Manifest</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- USAGE -->
+  <div class="prose-section" style="margin-bottom: 32px;">
+    <h2>How to Use This Package</h2>
+    <ol>
+      <li>Hand <strong>am_radio_mission.pdf</strong> (or the .tex source) to your GSD orchestrator / Claude Code session</li>
+      <li>Tell the orchestrator: <em>"Execute this research mission. Begin with Wave 0."</em></li>
+      <li>The orchestrator will spawn agents per the crew manifest and begin parallel research tracks in Wave 1</li>
+      <li>Approve Wave 1 output at the CAPCOM gate before Wave 2 synthesis begins</li>
+      <li>Final human review gate (W3-C) before PDF generation and delivery</li>
+    </ol>
+  </div>
+
+  <!-- RECOMPILE -->
+  <div class="prose-section" style="margin-bottom: 40px;">
+    <h2>Recompiling the LaTeX Source</h2>
+    <p>Three passes are required to resolve the table of contents, cross-references, and page count:</p>
+    <div class="usage-block">
+      <span class="usage-comment"># Requires XeLaTeX (TeX Live 2020+)</span><br/>
+      <span class="usage-cmd">xelatex</span> <span class="usage-flag">-interaction=nonstopmode</span> <span class="usage-arg">am_radio_mission.tex</span><br/>
+      <span class="usage-cmd">xelatex</span> <span class="usage-flag">-interaction=nonstopmode</span> <span class="usage-arg">am_radio_mission.tex</span><br/>
+      <span class="usage-cmd">xelatex</span> <span class="usage-flag">-interaction=nonstopmode</span> <span class="usage-arg">am_radio_mission.tex</span>
+    </div>
+    <p>Required packages: <code>fontspec</code>, <code>xcolor</code>, <code>tcolorbox</code> (with listings, breakable, skins), <code>tabularx</code>, <code>titlesec</code>, <code>fancyhdr</code>, <code>booktabs</code>, <code>colortbl</code>, <code>hyperref</code>, <code>enumitem</code>, <code>lastpage</code>, <code>listings</code>. All are included in a standard TeX Live installation.</p>
+  </div>
+
+  <blockquote>
+    "Before the internet, the radio dial was the only place where a single voice could reach
+    the entire Pacific Northwest at once—in the dark, in the mountains, across the water.
+    The frequency was free. The license was granted by the public. The obligation was to serve.
+    That architecture still exists."
+    <cite>— GSD Research Mission Vision, 2026 · Fox Infrastructure Group</cite>
+  </blockquote>
+
+</main>
+
+<footer>
+  Generated by <span>GSD Research Mission Generator</span> &nbsp;·&nbsp;
+  Fox Infrastructure Group &nbsp;·&nbsp; March 27, 2026
+</footer>
+
+</body>
+</html>
