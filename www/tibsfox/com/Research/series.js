@@ -24,6 +24,7 @@
     { id: 'CMH', name: 'Comp. Mesh', path: 'CMH/index.html' },
     { id: 'CAR', name: 'The Cars', path: 'CAR/index.html' },
     { id: 'CBC', name: 'CBC/Radio-Canada', path: 'CBC/index.html' },
+    { id: 'CCT', name: 'Comedy Central', path: 'CCT/index.html' },
     { id: 'CGI', name: 'Caliber Integration', path: 'CGI/index.html' },
     { id: 'CHS', name: 'Chaos Sense', path: 'CHS/index.html' },
     { id: 'CDL', name: 'College Deep Linking', path: 'CDL/index.html' },
