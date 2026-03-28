@@ -1,0 +1,1032 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Space/Physics color scheme
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple — Section headers
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue — Subsection headers
+\definecolor{tertiary}{HTML}{B8860B}      % Deep gold — Subsubsection headers
+\definecolor{accent}{HTML}{1565C0}        % Highlights, pipeline arrows
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Quote boxes
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% Table helpers
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers/footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Listening to Space}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Miles Tiberius Foxglove},
+  pdftitle={Listening to Space -- Astronomical Data Sonification Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{LISTENING TO SPACE\\[0.3em]Astronomical Data Sonification}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Chandra X-ray Photons to Human Hearing}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026\ \ |\ \ Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)\ \ |\ \ Estimated: 8--12 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Listening to Space — Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Research Complete / Ready for Execution}
+\metafield{Depends On:}{Chandra X-ray Center (CXC) data pipelines; NASA Universe of Learning corpus}
+\metafield{Context:}{GSD Ecosystem — Deep Research Mission; Amiga Principle applied to multimodal astronomy}
+\metafield{Activation Profile:}{Squadron (12 roles)}
+
+\subsection{Vision}
+
+There is a long-held myth about the cosmos: it is silent. In the vacuum between galaxies, no medium exists to carry a pressure wave, and so the popular imagination renders space as the ultimate quiet. But this is only partly true. Galaxy clusters — the largest gravitationally bound structures in the universe — are permeated by vast halos of superheated plasma. That plasma is a medium. Black holes at galactic centers have been pumping pressure waves through it for billions of years. The cosmos, at certain scales, is already making sound. We simply lack ears tuned to 57 octaves below B-flat.
+
+The Chandra X-ray Observatory, operated for NASA by the Smithsonian Astrophysical Observatory, changed that in 2003 when it detected pressure-wave ripples in the Perseus galaxy cluster's hot gas, directly attributable to its central supermassive black hole. Two decades later, the Chandra X-ray Center's ``A Universe of Sound'' project has grown into the first sustained, ongoing sonification program at NASA — translating telescope data from Chandra, Hubble, James Webb, and others into audio that humans can actually hear. By May 2022, their black hole sonifications had accumulated over four million listens across NASA's media accounts alone.
+
+This research mission maps that entire territory: the physics of sound in space, the engineering of data-to-audio pipelines, the landmark objects that have been sonified, the accessibility revolution that sonification enables for blind and low-vision (BLV) astronomers, and the open-source tool ecosystem that makes future exploration possible. The through-line is distinctly GSD: the meaning doesn't live in the raw X-ray data any more than it lives in the silence of the void. It lives in the translation — in the spaces between the photon counts and the human ear.
+
+The Amiga Principle applies here directly. These sonifications are not brute-force renderings. They are architecturally elegant transformations: a specific data-mapping philosophy (inverse spectrogram, left-to-right scan, brightness-to-volume, position-to-pitch) applied with enough fidelity that listeners — sighted and blind alike — exhibit statistically significant learning gains, emotional responses, and the desire to know more. Small, principled transformations producing staggering perceptual complexity. A galaxy cluster, compressed to 34 seconds, revealing the sound of a black hole that has been singing in B-flat for ten million years.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The sensorium gap.} Astronomy is overwhelmingly visual in its professional practice. Light curves, spectral plots, false-color images — these formats exclude anyone with print disabilities from full participation in scientific discovery. Blind astronomers exist, but often at the cost of extraordinary compensatory effort rather than inclusive design.
+
+  \item \textbf{Data without intuition.} Human pattern recognition is exquisitely tuned to temporal audio. The auditory system detects signals embedded in noise in ways the visual system cannot replicate efficiently. Multi-dimensional astronomical datasets (X-ray, optical, radio simultaneously) remain underexplored by ear, despite evidence that sonification can reveal structures invisible to visual analysis.
+
+  \item \textbf{No standard for meaning.} Each sonification project currently defines its own mapping conventions, making it difficult for listeners to build transferable intuitions. A brightness-to-pitch mapping in one system may be a brightness-to-volume mapping in another. There is no shared grammar for astronomical sound.
+
+  \item \textbf{The public engagement ceiling.} Space imagery drives enormous public engagement — the Hubble Deep Field, Webb's first images. But static images have a ceiling. Sonifications opened a new channel: the Perseus black hole went viral on Reddit, was requested by the BBC and Netflix, and reached audiences that telescope imagery alone had not reached.
+
+  \item \textbf{Real sound versus metaphor.} The most profound finding in this domain is under-communicated: some of these sonifications are not metaphors. The Perseus cluster pressure waves are \emph{actual acoustic waves} propagating through plasma. The LIGO chirp is \emph{actual spacetime vibration}. The distinction between ``data translated into sound'' and ``data that was already sound, made audible'' is scientifically and philosophically significant.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Astronomical sonification} is the principled translation of telescope data — photon counts, intensity maps, spectral lines, time-series — into audible sound through defined parameter mappings (position $\rightarrow$ pitch, brightness $\rightarrow$ volume, wavelength $\rightarrow$ instrument family), enabling human perception of cosmic phenomena at scales and frequencies otherwise inaccessible to unaided senses.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+LISTENING TO SPACE — DOMAIN ARCHITECTURE
+
+   PHYSICAL LAYER                    PERCEPTION LAYER
+   ┌─────────────────────┐           ┌──────────────────────┐
+   │  Pressure waves     │           │  Human auditory       │
+   │  in plasma          │           │  cortex (20Hz–20kHz) │
+   │  (real acoustics)   │           │                      │
+   └──────────┬──────────┘           └──────────┬───────────┘
+              │                                  │
+   ┌──────────▼──────────┐    DATA    ┌──────────▼───────────┐
+   │  X-ray / optical /  │ ─────────▶ │  Sonification        │
+   │  radio telescope    │  PIPELINE  │  engine              │
+   │  data arrays        │            │  (CXC / SYSTEM Sounds│
+   └─────────────────────┘            │  / sonoUno / STRAUSS)│
+                                      └──────────────────────┘
+
+   WAVELENGTH BANDS → INSTRUMENT FAMILIES
+   Radio  ──────────────────────────────▶ Bass / low tones
+   Optical ─────────────────────────────▶ Mid-range tones
+   X-ray  ──────────────────────────────▶ High tones / treble
+
+   SPATIAL MAPPING
+   Left ───────────────────────────────▶ Right (scan direction)
+   Bottom ──────────────────────────────▶ Top (pitch gradient)
+   Bright ──────────────────────────────▶ Loud (volume mapping)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+RESEARCH MODULES — SQUADRON PROFILE
+
+  ┌──────────────────────────────────────────────────────────┐
+  │  MODULE 1: SONIFICATION PHYSICS                          │
+  │  Sound in plasma; pressure waves; LIGO spacetime chirp   │
+  └───────────────────────┬──────────────────────────────────┘
+                          │
+  ┌───────────────────────▼──────────────────────────────────┐
+  │  MODULE 2: CHANDRA & MULTI-TELESCOPE PIPELINE            │
+  │  Inverse spectrogram; data-to-audio mapping techniques   │
+  └───────────────────────┬──────────────────────────────────┘
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                 ▼                 ▼
+  ┌──────────┐    ┌──────────────┐   ┌──────────────┐
+  │ MODULE 3 │    │   MODULE 4   │   │   MODULE 5   │
+  │ LANDMARK │    │ ACCESSIBILITY│   │ TOOLS &      │
+  │ OBJECTS  │    │ & PERCEPTION │   │ OPEN ECOSYS. │
+  └──────────┘    └──────────────┘   └──────────────┘
+        │                 │                 │
+        └─────────────────▼─────────────────┘
+                   SYNTHESIS LAYER
+            Cross-module integration report
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1 — Sonification Physics}
+Covers the physical basis of sound in astronomical media: plasma as acoustic medium, pressure wave propagation in galaxy clusters, the discovery of the Perseus black hole's acoustic signature (57 octaves below middle C), gravitational waves as spacetime vibration (the LIGO chirp), and the crucial distinction between genuine acoustic phenomena and data-mapping metaphor.
+
+\subsubsection{Module 2 — Chandra \& Multi-Telescope Pipeline}
+Documents the technical workflow from raw telescope data to audible output: the Chandra X-ray Center ``A Universe of Sound'' program (est.\ 2020), key personnel (Dr.\ Kimberly Arcand, Dr.\ Matt Russo, Andrew Santaguida), the inverse spectrogram technique, left-to-right spatial scan conventions, wavelength-to-instrument-family assignments, multiwavelength layering (Chandra + Hubble + ALMA), and the NASA SoundCloud / YouTube distribution infrastructure.
+
+\subsubsection{Module 3 — Landmark Sonified Objects}
+A reference catalog of the most scientifically and culturally significant sonifications: Perseus Cluster (2003/2022), M87 black hole (multiwavelength), Galactic Center, Crab Nebula, Cassiopeia A, SN 1987A, LIGO GW150914, Andromeda (M31), and JWST first-light objects. Each entry: object type, data source, mapping technique, and notable features.
+
+\subsubsection{Module 4 — Accessibility \& Human Perception}
+Reviews the research literature on sonification effectiveness: the Arcand et al.\ (2024) Frontiers study on BLV participant response (high learning gains, emotional engagement); the Gould et al.\ (2024) Astronomical Journal study on transit detection accuracy; the career of Wanda Diaz-Merced as a blind astrophysicist; psychoacoustic principles governing effective mapping; and the distinction between sonification-as-outreach versus sonification-as-research-tool.
+
+\subsubsection{Module 5 — Tools \& Open Ecosystem}
+Catalogs the current software landscape: SYSTEM Sounds (Russo/Santaguida), sonoUno (Casado/Diaz-Merced/Garcia), STRAUSS, StarSound (Cooke et al.), xSonify (NASA), the MAST Python library for time-series sonification, the Data Sonification Archive, the ``NASA Space Jam'' interactive coding environment, and the SN1987A interactive P5.js application.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# listening_to_space_mission_chipset.yaml
+# GSD Amiga-Principle Chipset — Squadron Profile
+
+chipset:
+  agnus:                            # Orchestration / DMA / Context
+    model: claude-opus-4-5
+    role: FLIGHT + INTEG
+    responsibility: |
+      Mission direction; cross-module integration;
+      synthesis of acoustic physics with accessibility
+      research; distinguishing real vs. metaphorical
+      sound — judgment-heavy domain.
+    token_budget: 32000
+
+  denise:                           # Display / Output Rendering
+    model: claude-sonnet-4-5
+    role: EXEC (x2) + VERIFY
+    responsibility: |
+      Document production for all five modules;
+      LaTeX compilation; source validation;
+      table assembly; bibliography formatting.
+    token_budget: 80000
+
+  paula:                            # Audio / I-O / Anticipatory
+    model: claude-haiku-4-5
+    role: SCOUT + BUDGET + LOG
+    responsibility: |
+      Web research queries; shared schema generation;
+      token budget tracking; commit messages.
+      Named Paula for the audio I/O chip — fitting
+      for a mission about making space audible.
+    token_budget: 12000
+
+  mc68000:                          # CPU / Glue Logic
+    model: claude-opus-4-5
+    role: CRAFT-PHYS + CRAFT-ACCESS
+    responsibility: |
+      CRAFT-PHYS: plasma acoustics, gravitational
+        wave physics, frequency scaling mathematics
+      CRAFT-ACCESS: BLV research literature,
+        psychoacoustics, ISO 9241 accessibility
+    token_budget: 24000
+
+mission_params:
+  activation_profile: Squadron
+  parallel_tracks: 2
+  wave_count: 4
+  total_sessions_estimated: 3-4
+  cache_ttl_minutes: 5
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}
+  \item Sonification of electromagnetic data from professional telescopes (Chandra, Hubble, JWST, ALMA, VLA)
+  \item Gravitational wave sonification (LIGO, Virgo, KAGRA)
+  \item The CXC ``A Universe of Sound'' program and its published findings
+  \item Software tools with published documentation or peer-reviewed description
+  \item Accessibility research with published peer-reviewed outcomes
+  \item Public engagement metrics where officially published by NASA/CXC
+  \item The physical acoustics of galaxy cluster plasma
+  \item Historical context: Musica Universalis through to modern sonification (conceptual bridge only)
+\end{itemize}
+
+\subsubsection{Out of Scope (v1.0)}
+\begin{itemize}
+  \item Sonification of non-astronomical scientific data (geology, biology, etc.)
+  \item Artistic/musical compositions that use space \emph{themes} but not actual telescope data
+  \item Radio astronomy in the traditional sense (electromagnetic waves, not acoustic)
+  \item DIY / amateur sonification projects without peer review or professional affiliation
+  \item Specific clinical outcomes for BLV individuals beyond published research findings
+  \item Commercial licensing or IP questions around sonification products
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item The distinction between genuine acoustic phenomena (plasma pressure waves, gravitational waves) and data-mapping sonification is clearly and accurately drawn, with specific sourced examples of each.
+
+  \item The Perseus cluster discovery narrative is documented end-to-end: 2003 Chandra detection $\rightarrow$ 57-octave calculation $\rightarrow$ 2022 audible extraction $\rightarrow$ 144 quadrillion times frequency scaling.
+
+  \item The Chandra CXC pipeline is documented with named personnel, institutional affiliations, and the technical mapping conventions used across multiple objects.
+
+  \item At least 15 landmark sonified objects are individually profiled with: object type, data source, mapping technique, and cultural/scientific significance.
+
+  \item The LIGO GW150914 chirp is documented as a separate category: actual spacetime vibration converted to sound without frequency rescaling in the original detection.
+
+  \item The accessibility research findings from Arcand et al.\ (2024) are accurately summarized, including methodology, BLV vs.\ sighted participant comparison, and key outcomes.
+
+  \item At least four distinct sonification software tools are documented with capabilities, status (open/closed source), and peer-reviewed references.
+
+  \item The psychoacoustic rationale for sonification's perceptual advantages is documented (signal-in-noise detection, temporal pattern recognition, auditory multidimensionality).
+
+  \item The Wanda Diaz-Merced biographical and scientific contribution arc is accurately documented from primary sources.
+
+  \item The public engagement reach of the 2022 black hole sonifications (4M+ listens, Reddit viral, BBC/Netflix) is cited with attributable sources.
+
+  \item All five research modules are individually executable as self-contained agent contexts.
+
+  \item The document contains no claims about the subjective ``beauty'' or ``musical quality'' of specific sonifications without attributing such assessments to named researchers or participants in published studies.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{5cm}L{4.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency Direction} \\
+\midrule
+Deep Audio Analyzer Mission & Parallel audio analysis mission; shares psychoacoustics module & Peer — bidirectional reference \\
+The Space Between (TSB) & Mathematical foundations; wave theory, Euler's formula, complex plane & TSB informs frequency-mapping mathematics \\
+GSD Chipset Architecture & Paula chip (audio I/O) is the namesake for this mission's Haiku role & Conceptual — Amiga metaphor \\
+Fox Infrastructure Group & Ocean compute / undersea cable acoustic environments & Adjacent — potential future module \\
+GSD BBS Educational Pack & Sonification as teaching tool — College of Knowledge integration & Downstream consumer of this research \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The ``spaces between'' philosophy, as it runs through the GSD ecosystem, holds that meaning does not live in nodes — it lives in the connections. A skill is not its YAML; it is the relationship between the agent and the context it enters. A sound is not a frequency; it is the relationship between vibration and the eardrum that receives it.
+
+Astronomical sonification makes this literal. The telescope data — a grid of integer photon counts, ones and zeros captured in the cold machinery of a satellite — is not the thing. The human ear encountering that data, transformed by a principled mapping into frequencies it can parse, \emph{that} is where the knowledge lives. In the translation. In the space between the instrument and the listener.
+
+And the deepest versions of this are not metaphors at all. The Perseus black hole has been vibrating plasma at one cycle per 300 million million seconds for longer than the Earth has existed. That is a real sound. We just needed the right ears — Chandra's X-ray mirrors, the mathematics of a 57-octave pitch shift, and a speaker — to finally hear it. The universe was already speaking. The Amiga Principle applies: it did not require brute force. It required the right architecture.
+
+% ============================================================
+% STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Listening to Space — Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles verified research findings across all five modules. All sources are professional organizations, peer-reviewed journals, or government agencies. Numerical claims are attributed to specific sources. Agents executing individual modules should treat this reference as ground truth for their context windows.
+
+\textbf{Key source organizations:}
+\begin{itemize}
+  \item NASA Chandra X-ray Center (CXC) / Harvard-Smithsonian Center for Astrophysics
+  \item NASA Universe of Learning (UoL) — Space Telescope Science Institute partnership
+  \item SYSTEM Sounds project (Russo \& Santaguida) — \url{https://www.system-sounds.com}
+  \item LIGO Scientific Collaboration / Caltech
+  \item Frontiers in Communication (peer-reviewed journal)
+  \item Nature Astronomy (peer-reviewed journal)
+  \item The Astronomical Journal (peer-reviewed journal)
+  \item American Astronomical Society (AAS)
+  \item arXiv (preprints — treat as preliminary unless published)
+\end{itemize}
+
+\subsection{Module 1 Reference — Sonification Physics}
+
+\subsubsection{Sound in Space: The Medium Problem}
+
+Sound requires a medium for propagation. Most of space is a near-vacuum; this is the source of the popular misconception that space is entirely silent. However, galaxy clusters are not vacuums. The Perseus galaxy cluster, for example, contains a hot plasma halo at temperatures exceeding 50 million degrees Fahrenheit (Chandra X-ray Center, 2003). This plasma provides a propagation medium for pressure waves.
+
+Sound waves in this medium are generated by jets from a supermassive black hole at the cluster center. These jets blow cavities (``bubbles'') in the plasma, which then act as pistons, generating pressure waves that propagate outward through the gas. The Chandra X-ray Observatory detected these waves as ripples in the X-ray brightness of the cluster — visible in X-ray because the hot plasma glows at those wavelengths.
+
+\subsubsection{The Perseus Calculation}
+
+The acoustic properties of the Perseus cluster's black hole are well-documented:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Value / Description} \\
+\midrule
+Discovery & 2003, British astronomers, Chandra X-ray Observatory data \\
+Wave interval & Approximately one cycle per 300 million million seconds \\
+True pitch & Approximately 57 octaves below B-flat above middle C \\
+Frequency scaling (2022) & 57--58 octaves upward; 144--288 quadrillion times original frequency \\
+Cluster distance & Approximately 240 million light-years from Earth \\
+Cluster span & Approximately 11 million light-years across \\
+Source & NASA Chandra X-ray Center; chandra.si.edu/sound/perseus.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The 2022 sonification extracted these waves in radial directions from the center, using a radar-like scan technique, allowing listeners to hear waves emitted in different directions (NASA/CXC, 2022).
+
+\subsubsection{LIGO and Gravitational Wave Acoustics}
+
+LIGO represents a categorically different case: the ``sound'' is not a metaphorical translation of electromagnetic data, but an actual measurement of spacetime vibration.
+
+On September 14, 2015, LIGO detected gravitational waves from the merger of two black holes approximately 30 solar masses each, located 1.3 billion light-years away. The event released approximately 50 times more energy than all stars in the observable universe combined, but lasted only fractions of a second (LIGO/Caltech, 2016). The gravitational wave frequencies of GW150914 rise through the audio range during the final inspiral — scientists call these signals ``chirps.'' The chirp rose to approximately the note of middle C before abruptly stopping at merger (New York Times, 2016 — citing LIGO team). The audible conversion required only modest frequency scaling because the inspiral itself sweeps through the audio range.
+
+\subsection{Module 2 Reference — Chandra \& Multi-Telescope Pipeline}
+
+\subsubsection{The CXC ``A Universe of Sound'' Program}
+
+Launched in 2020, the CXC program is described as the first ongoing, sustained sonification initiative at NASA (Chandra X-ray Center, 2020). The core team:
+
+\begin{itemize}
+  \item \textbf{Dr.\ Kimberly Arcand} — Visualization Scientist, CXC; program lead; principal investigator on accessibility research
+  \item \textbf{Dr.\ Matt Russo} — Astrophysicist and musician, SYSTEM Sounds
+  \item \textbf{Andrew Santaguida} — Musician and sound engineer, SYSTEM Sounds
+  \item \textbf{Christine Malec} — Accessibility consultant; podcaster; blind community member
+\end{itemize}
+
+As of the research date, the program has produced sonifications of over 35 distinct objects (see the full catalog at \url{https://chandra.cfa.harvard.edu/sound/}).
+
+\subsubsection{Core Mapping Technique: Inverse Spectrogram}
+
+The inverse spectrogram is the most common image mapping technique (Sanz et al., 2014, cited in Arcand et al., 2024). Key conventions used by CXC:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Data Dimension} & \tableheader{Audio Mapping} \\
+\midrule
+Horizontal position (image) & Time (left-to-right scan) \\
+Vertical position (image) & Pitch (bottom = lower, top = higher) \\
+Pixel brightness & Volume / loudness \\
+Radio wavelength & Lowest frequency tones \\
+Optical wavelength & Mid-range tones \\
+X-ray wavelength & Highest frequency tones \\
+Distinct object types & Distinct instrument families \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The caption for each sonification explicitly describes the mapping used, as the team acknowledges that intelligibility requires the listener to understand the translation conventions (Arcand et al., 2024).
+
+\subsubsection{Multiwavelength Integration: M87 Example}
+
+The M87 black hole sonification (2022) demonstrates multi-telescope data layering. The visual form contains three panels: X-ray (Chandra), optical (Hubble), and radio (ALMA). The left-to-right scan maps each wavelength band to a distinct audio range simultaneously, with the 6.5-billion-solar-mass black hole corresponding to the loudest portion of the sonification (NASA, 2022). The M87 sonification was released alongside the Perseus sonification in May 2022, together accumulating over four million listens and views across NASA media accounts (Arcand et al., 2024 — Frontiers).
+
+\subsection{Module 3 Reference — Landmark Sonified Objects}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Object} & \tableheader{Type} & \tableheader{Data Source} & \tableheader{Notable Feature} \\
+\midrule
+Perseus Cluster & Galaxy cluster & Chandra X-ray & Real acoustic pressure waves; 57 octaves below B-flat \\
+M87 Galaxy & Active galaxy & Chandra + Hubble + ALMA & Three-wavelength layered scan; 6.5B solar mass black hole \\
+Galactic Center & Milky Way core & Multi-telescope & Vast star-forming region; complex spatial scan \\
+Crab Nebula & Supernova remnant & Chandra + optical & 1054 CE explosion remnant; pulsar at center \\
+Cassiopeia A & Supernova remnant & Chandra (multi) & Color-coded by element; iron, silicon, sulfur layers \\
+SN 1987A & Supernova remnant & Chandra + Hubble & Interactive P5.js application available; weeks of gamma-ray data compressed \\
+LIGO GW150914 & Black hole merger & LIGO detectors & Actual spacetime vibration; the historic ``chirp'' \\
+M16 Pillars of Creation & Star-forming nebula & Hubble + JWST & Iconic image translated to spatial audio \\
+Stephan's Quintet & Galaxy group & JWST first light & JWST public release sonification \\
+Vela Pulsar & Neutron star & Chandra & Jet structure and pulsar wind nebula \\
+Andromeda (M31) & Galaxy & Chandra + optical & Nearest major galaxy to Milky Way \\
+Eta Carinae & Massive star & Chandra + optical & Hypernova candidate; extreme luminosity \\
+Sagittarius A* (EHT) & Black hole & EHT + Chandra & Milky Way's central black hole; Event Horizon Telescope data \\
+Jupiter & Planet & Chandra X-ray & Unusual — X-ray data from solar system object \\
+Hubble Ultra Deep Field & Deep field & Hubble & One note per galaxy; later = farther; pitch = color (2014 data) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Hubble Ultra Deep Field (HUDF) special note:} The HUDF sonification plays a single note per galaxy. The timing of the note encodes distance (later = farther). Pitch encodes color (lower = redder, higher = bluer). Volume encodes apparent size. In under one minute, the listener can hear nearly 13 billion years back to the earliest galaxies visible in the field (NASA/HST, via science.nasa.gov).
+
+\subsection{Module 4 Reference — Accessibility \& Human Perception}
+
+\subsubsection{The Arcand et al. (2024) Study}
+
+The first peer-reviewed study of astronomical sonification responses from the BLV community was published in Frontiers in Communication in 2024 (Arcand, Schonhut-Stasik, Kane, Sturdevant, Russo, Watzke, Hsu, and Smith; doi: 10.3389/fcomm.2024.1288896). Key findings:
+
+\begin{itemize}
+  \item Both BLV and sighted participants exhibited high learning gains from sonification exposure
+  \item Strong emotional responses were recorded across both groups
+  \item Participants reported wanting to know or learn more after sonification experience
+  \item User testing encompassed students, adults, and specifically BLV participants
+  \item The study acknowledges the BLV category spans a wide range of sight loss; future work must recruit more broadly across this spectrum
+\end{itemize}
+
+\subsubsection{Transit Detection Accuracy (Gould et al., 2024)}
+
+A study accepted for publication in The Astronomical Journal examined detection of transit-like features in light curves under visual vs.\ auditory conditions (Gould et al., 2024; doi: 10.3847/1538-3881/ad24aa). Key findings:
+
+\begin{itemize}
+  \item Participants could detect transits with above-chance performance using auditory stimuli alone
+  \item Visual stimuli led to higher overall detection accuracy than auditory stimuli
+  \item Astronomers outperformed non-astronomers in both modalities
+  \item Visual presentation induced conservative response bias (reluctance to say ``yes'')
+  \item Sonification induced more liberal response bias (more ``yes'' responses)
+  \item The complementary bias profiles suggest combined visual+auditory analysis could improve overall detection
+\end{itemize}
+
+\subsubsection{Wanda Diaz-Merced}
+
+Dr.\ Wanda Diaz-Merced is a blind astrophysicist whose career demonstrates both the necessity and the scientific value of sonification. After losing her eyesight, she continued astronomical research using data sonification to analyze light curves of gamma-ray bursts — work she had previously done visually (Accessible Astronomy community sources; NPR, September 2025). Her colleague Garry Foran and Nic Bonne are also cited in AAS literature as examples of blind astronomers whose careers were enabled by sonification tools. She has given a TED Talk on the topic and was associated with the Harvard-Smithsonian Center for Astrophysics at the time of the 2015 LIGO detection.
+
+\subsubsection{Psychoacoustic Foundations}
+
+The auditory system possesses specific perceptual advantages for data analysis that the visual system does not replicate (Walker and Nees, 2011, cited in Arcand et al., 2024):
+
+\begin{itemize}
+  \item \textbf{Temporal pattern sensitivity:} Hearing is exquisitely sensitive to pattern variation over time, whether perceived as discrete rhythms or changing pitch — useful for periodic signals in time-series data
+  \item \textbf{Signal-in-noise detection:} Focused or selective hearing can identify desired signals amidst noise or competing signals (exploited in StarSound, Cooke et al., 2019)
+  \item \textbf{Multidimensionality:} Sound can carry multiple simultaneous dimensions (pitch, volume, timbre, spatial position, rhythm) — more dimensions than a standard 2D plot
+  \item \textbf{Optimal perception range:} Sulis (2024) found maximum depth of perception in the 4,000--6,000 Hz range with a threshold resolution of 0.7\%--1.8\% of the stimulus frequency
+\end{itemize}
+
+\subsection{Module 5 Reference — Tools \& Open Ecosystem}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tool} & \tableheader{Affiliation} & \tableheader{Status} & \tableheader{Capabilities} \\
+\midrule
+SYSTEM Sounds & Russo / Santaguida & Active & Primary CXC collaboration; gravitational wave sonifications; educational materials \\
+sonoUno & Casado, Diaz-Merced, García & Open source (JOSS 2024) & Research-focused; absorption/emission line marking; multicolumn spectral comparison; ISO 9241-171 accessibility \\
+STRAUSS & Zanella, Harrison, et al. & Peer-reviewed & Sound design for astronomy research and public engagement \\
+StarSound & Cooke et al. & Research prototype & Stereophonic sound for light curves, spectra, power spectra; 3D audio; VR integration \\
+xSonify & NASA & Available & X-ray astronomy time-series; Java-based; identified frequencies in EX Hya (Chandra data) \\
+MAST Python Library & STScI (MAST) & Open source & Python library for time-series and spectral sonification; maps pitch to brightness \\
+NASA Space Jam & CXC (educational) & Web-based & Interactive coding environment for sonification; accessible at chandra.cfa.harvard.edu/sound/code/ \\
+SN1987A Interactive & CXC & Web-based (P5.js) & Interactive sonification application for SN1987A data \\
+Sonification Symphony & CXC & Web-based & Play NASA data as a symphony; chandra.cfa.harvard.edu/sound/symphony.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Domain} & \tableheader{Level} & \tableheader{Guidance} \\
+\midrule
+BLV community representation & GATE & Never generalize across BLV community; acknowledge the full spectrum of sight loss; follow Arcand et al. (2024) framing \\
+Attribution of sonification quality & ANNOTATE & Aesthetic assessments (``haunting,'' ``beautiful'') should be attributed to named researchers or study participants, not asserted by the document \\
+LIGO frequency claims & GATE & The ``middle C'' characterization of GW150914 comes from specific published sources; verify before repeating \\
+``Sound in space'' claim & ANNOTATE & Always distinguish plasma acoustic waves (real) from data-mapping sonification (translation); the misconception ``there is no sound in space'' deserves careful qualification \\
+Source attribution for reach stats & GATE & 4M+ listens figure attributed to NASA media accounts per Arcand et al. (2024) Frontiers — not an independent estimate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+
+\begin{itemize}
+  \item NASA Chandra X-ray Center. ``A Universe of Sound.'' \url{https://chandra.cfa.harvard.edu/sound/} (active program, est.\ 2020)
+  \item NASA Science. ``Data Sonifications: Black Holes.'' \url{https://science.nasa.gov/science-research/astrophysics/data-sonifications/}
+  \item NASA Science / Hubble. ``Sonifications.'' \url{https://science.nasa.gov/mission/hubble/multimedia/sonifications/}
+  \item NASA. ``New NASA Black Hole Sonifications with a Remix.'' nasa.gov, 2022.
+  \item LIGO Lab / Caltech. ``The Sound of Two Black Holes Colliding.'' \url{https://www.ligo.caltech.edu/video/ligo20160211v2}
+  \item Chandra X-ray Center. ``How an X-ray Telescope Detected Sound Produced by a Black Hole.'' Chronicles, September 16, 2003. \url{https://chandra.harvard.edu/chronicle/0303/perseus/index.html}
+  \item NASA Universe of Learning. \url{https://www.universe-of-learning.org/}
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+
+\begin{itemize}
+  \item Arcand, K.K., Schonhut-Stasik, J.S., Kane, S.G., Sturdevant, G., Russo, M., Watzke, M., Hsu, B., and Smith, L.F. ``A Universe of Sound: processing NASA data into sonifications to explore participant response.'' \textit{Frontiers in Communication} 9:1288896, 2024. doi: 10.3389/fcomm.2024.1288896
+  \item Zanella, A., Harrison, C. M., Lenzi, S., Cooke, J., Damsma, P., and Fleming, S. W. ``Sonification and sound design for astronomy research, education and public engagement.'' \textit{Nature Astronomy} 6, 1241--1248, 2022. doi: 10.1038/s41550-022-01721-z
+  \item Gould, et al. ``Evaluation of the Effectiveness of Sonification for Time-series Data Exploration.'' \textit{The Astronomical Journal}, 167, 150, 2024. doi: 10.3847/1538-3881/ad24aa
+  \item Casado, J., Diaz-Merced, W., García, B. ``Analysis of astronomical data through sonification: reaching more inclusion for visual disable scientists.'' arXiv:2402.00611, February 2024.
+  \item Casado, J., de la Vega, G., \& García, B. (2024) sonoUno software. \textit{Journal of Open Source Software (JOSS)}, accepted. doi: 10.5281/zenodo.10303871
+  \item Sulis, V. ``Sonification of Astronomical Data.'' SSRN:4891458, 2024. doi: 10.2139/ssrn.4891458
+  \item Cooke, J., et al. ``Exploring Data Sonification to Enable, Enhance, and Accelerate the Analysis of Big, Noisy, and Multi-Dimensional Data.'' \textit{Proceedings of the IAU}, Vol.\ 14, Issue S339, 2019.
+  \item Walker, B., and Nees, M. (2011). Theory of sonification. In: Hermann, T., Hunt, A., \& Neuhoff, J. (Eds.), \textit{The Sonification Handbook}. Logos Verlag Berlin. (Cited in Arcand et al., 2024)
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Programs}
+
+\begin{itemize}
+  \item American Astronomical Society. ``Sonification: Listening to Data.'' \url{https://aas.org/posts/news/2023/09/sonification-listening-data}
+  \item SYSTEM Sounds project. \url{https://www.system-sounds.com}
+  \item Data Sonification Archive. (Referenced in AAS, 2023 and Zanella et al., 2022)
+  \item Sounds of Spacetime (gravitational wave sonification). \url{https://www.soundsofspacetime.org/}
+  \item Mikulski Archive for Space Telescopes (MAST). Python sonification library. STScI.
+\end{itemize}
+
+% ============================================================
+% STAGE 3 — MISSION PACKAGE
+% ============================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Mission Package — Listening to Space}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a comprehensive, publication-quality reference document on astronomical data sonification spanning five research modules: the physics of sound in space, the Chandra/CXC pipeline, landmark sonified objects, accessibility and perception research, and the open software ecosystem. The deliverable is a structured document suitable for seeding the GSD College of Knowledge and providing ground-truth reference for subsequent educational module development.
+
+\textbf{Milestone Designation:} AUDIO-COSMOS-v1.0
+
+\textbf{Architecture Overview:}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE — AUDIO-COSMOS-v1.0
+
+ WAVE 0: FOUNDATION (Sequential, Haiku/Paula)
+ ┌──────────────────────────────────────────────┐
+ │ Shared schemas; source index; mapping         │
+ │ conventions reference; object catalog stub    │
+ └──────────────────────┬───────────────────────┘
+                        │
+ WAVE 1: PARALLEL RESEARCH (Parallel, Sonnet+Opus)
+ ┌──────────────────────┴───────────────────────┐
+ │   TRACK A                    TRACK B          │
+ │  Module 1 (Physics)         Module 4 (Access) │
+ │  Module 3 (Objects)         Module 5 (Tools)  │
+ └──────────────────────┬───────────────────────┘
+                        │
+                   CAPCOM GATE
+                        │
+ WAVE 1B: PIPELINE MODULE (Sequential, Opus)
+ ┌──────────────────────┴───────────────────────┐
+ │   Module 2 (CXC Pipeline — depends on         │
+ │   Module 1 physics foundations)               │
+ └──────────────────────┬───────────────────────┘
+                        │
+ WAVE 2: SYNTHESIS (Sequential, Opus/Agnus)
+ ┌──────────────────────┴───────────────────────┐
+ │ Cross-module integration: physics ↔ objects   │
+ │ accessibility ↔ tools; through-line assembly  │
+ └──────────────────────┬───────────────────────┘
+                        │
+ WAVE 3: PUBLICATION + VERIFICATION (Sonnet/Denise)
+ ┌──────────────────────┴───────────────────────┐
+ │ Final document assembly; source validation;   │
+ │ LaTeX compilation; index.html; delivery        │
+ └──────────────────────────────────────────────┘
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{4cm}L{5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criterion} & \tableheader{Spec} \\
+\midrule
+1 & Physics Module (D1) & All 12 success criteria covered for Module 1; Perseus calculation complete & 800--1200 words; 2+ tables; sourced \\
+2 & Pipeline Module (D2) & CXC team named; 8+ objects in mapping table & 600--900 words; inverse spectrogram explained \\
+3 & Objects Catalog (D3) & 15+ objects individually documented & Table format; source per object \\
+4 & Accessibility Module (D4) & Arcand 2024 and Gould 2024 both summarized; Diaz-Merced arc documented & 700--1000 words; no overgeneralization \\
+5 & Tools Catalog (D5) & 8+ tools documented with status and source & Table + narrative; open-source flagged \\
+6 & Synthesis Report & Cross-module connections explicit; through-line present & 400--600 words \\
+7 & Final PDF & LaTeX compiled; no errors; all 12 criteria verified & XeLaTeX 3-pass; PDF/A preferred \\
+8 & index.html & Download links; usage instructions; color-matched & Self-contained HTML \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Token Budget} \\
+\midrule
+Source Index (Wave 0) & None & Haiku & 4,000 \\
+Shared Schema (Wave 0) & None & Haiku & 3,000 \\
+D1: Physics Module & Source Index & Opus & 12,000 \\
+D3: Objects Catalog & Source Index & Sonnet & 14,000 \\
+D4: Accessibility Module & Source Index & Opus & 10,000 \\
+D5: Tools Catalog & Source Index & Sonnet & 8,000 \\
+D2: Pipeline Module & D1 (physics) & Opus & 10,000 \\
+Synthesis Report & D1--D5 & Opus & 8,000 \\
+Verification Pass & All Modules & Sonnet & 6,000 \\
+Final Assembly & All & Sonnet & 8,000 \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & & \textbf{83,000} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget \%} & \tableheader{Rationale} \\
+\midrule
+Opus & $\approx$32\% & Physics module (frequency scaling mathematics, plasma acoustics); accessibility module (careful BLV community framing, nuanced study summaries); synthesis (cross-module integration judgment); pipeline module (technical accuracy) \\
+Sonnet & $\approx$58\% & Objects catalog production; tools catalog; verification; final document assembly; source validation; LaTeX compilation \\
+Haiku & $\approx$10\% & Shared schemas; source index scaffolding; token budget tracking; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{2.5cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Execution} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schemas + Source Index \\
+1A & Parallel Track A & Parallel & Sonnet+Opus & D1 + D3 \\
+1B & Parallel Track B & Parallel & Opus+Sonnet & D4 + D5 \\
+1C & Pipeline Module & Sequential & Opus & D2 \\
+2 & Synthesis & Sequential & Opus & Synthesis Report \\
+3 & Publication & Sequential & Sonnet & Final PDF + index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W0-01: Source index & Compile all bibliography entries into a structured index with citation keys & Paula (Haiku) \\
+W0-02: Object catalog stub & Create skeleton table of 35+ objects from CXC website for D3 population & Paula (Haiku) \\
+W0-03: Mapping schema & Define canonical data-to-audio parameter mapping table as shared reference & Paula (Haiku) \\
+W0-04: Glossary stub & Define terms: sonification, inverse spectrogram, BLV, chirp, plasma, pressure wave & Paula (Haiku) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1A: Parallel Track A (Physics + Objects)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W1A-01: D1 Physics draft & Perseus calculation; LIGO chirp; plasma acoustics; real vs.\ metaphor distinction & CRAFT-PHYS (Opus) \\
+W1A-02: D3 Objects catalog & Populate 15+ object entries using W0-02 stub and Research Reference Module 3 & EXEC-A (Sonnet) \\
+W1A-03: HUDF deep-dive & Special section on Hubble Ultra Deep Field temporal encoding & CRAFT-PHYS (Opus) \\
+W1A-04: Physics review & Verify all numerical claims in D1 against source index & VERIFY (Sonnet) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1B: Parallel Track B (Accessibility + Tools)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}XC{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Description} & \tableheader{Agent} \\
+\midrule
+W1B-01: D4 Accessibility draft & Arcand 2024 summary; Gould 2024 summary; Diaz-Merced arc; psychoacoustics & CRAFT-ACCESS (Opus) \\
+W1B-02: D5 Tools catalog & Populate tool table with 8+ entries; flag open-source status; add narrative & EXEC-B (Sonnet) \\
+W1B-03: BLV framing review & Verify D4 language against sensitivity guidance; no overgeneralization & VERIFY (Sonnet) \\
+W1B-04: sonoUno deep-dive & Special note on JOSS publication; ISO 9241-171 compliance & CRAFT-ACCESS (Opus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+
+\begin{itemize}
+  \item The Source Index (W0-01) and Mapping Schema (W0-03) are included in every subsequent agent context — computed once, reused across all waves
+  \item Tracks 1A and 1B share no dependencies; execute in parallel to minimize wall time
+  \item The 5-minute cache TTL on the Research Reference document should be exploited by initiating Track 1A and Track 1B within the same burst window
+  \item D2 (Pipeline Module) is deliberately staged after Wave 1A because it requires the physics foundations from D1 — this is a structural dependency, not a timing preference
+  \item Wave 2 (Synthesis) waits for all five D-documents; the INTEG agent should be given all five in a single context window
+\end{itemize}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH — AUDIO-COSMOS-v1.0
+
+  W0-01 Source Index ─────────────────────────┐
+  W0-02 Object Stub ──────────────┐            │
+  W0-03 Mapping Schema ───────────┤            │
+  W0-04 Glossary Stub ────────────┤            │
+                                  ▼            ▼
+             ┌──────────── W1A: D1 Physics ───────────────┐
+             │                                             │
+             │             W1A: D3 Objects ───────────┐   │
+             │                                         │   │
+             │             W1B: D4 Access ─────────┐  │   │
+             │                                      │  │   │
+             │             W1B: D5 Tools ───────────┤  │   │
+             │                                      │  │   │
+             └─────────────────────────────────────▼──▼───▼
+                         W1C: D2 Pipeline (needs D1)
+                                    │
+                                    ▼
+                           W2: Synthesis (needs D1-D5)
+                                    │
+                             CAPCOM GATE
+                                    │
+                                    ▼
+                          W3: Publication + index.html
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XC{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Failure} \\
+\midrule
+Safety-critical & Non-negotiable boundaries (source quality, BLV framing, real/metaphor distinction) & 6 & BLOCK \\
+Core functionality & Deliverable acceptance (all 12 criteria met) & 18 & BLOCK \\
+Integration & Cross-module validation & 6 & BLOCK \\
+Edge cases & Robustness; data gaps; temporal currency & 5 & LOG \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & & \textbf{35} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All citations traceable to NASA/CXC, peer-reviewed journals, or professional organizations. Zero entertainment media as primary source. \\
+SC-NUM & Numerical attribution & Every frequency, octave count, distance, energy measurement, and viewership statistic attributed to a specific source \\
+SC-BLV & BLV community framing & No generalization across the BLV community; all claims match Arcand et al. (2024) framing; no clinical claims beyond published findings \\
+SC-REAL & Real vs.\ metaphor distinction & Perseus pressure waves and LIGO chirp are clearly distinguished from data-mapping sonification; no conflation \\
+SC-ADV & No policy advocacy & Document presents findings without advocating for specific funding, legislative, or policy positions \\
+SC-ATTR & Aesthetic attribution & Subjective quality assessments attributed to named researchers or published study participants only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Perseus calculation completeness & Document contains: 57-octave figure, ``300 million million seconds'' wave interval, 144/288 quadrillion frequency scaling, 2022 sonification extraction \\
+CF-02 & LIGO documentation & GW150914 documented as spacetime vibration; ``chirp'' term used; merger date (Sept.\ 14, 2015) present; no frequency conflation with CXC sonifications \\
+CF-03 & Objects catalog breadth & 15 or more objects individually documented with type, data source, and notable feature \\
+CF-04 & HUDF temporal encoding & HUDF sonification documented: one note per galaxy; timing = distance; pitch = color; volume = size \\
+CF-05 & Arcand 2024 accuracy & Learning gains, emotional response, and desire-to-learn-more findings all present; participant populations correctly described \\
+CF-06 & Gould 2024 accuracy & Both complementary bias findings (conservative visual, liberal auditory) documented; above-chance auditory performance stated \\
+CF-07 & Diaz-Merced arc & Career arc documented from sighted astronomer through vision loss to sonification-enabled research \\
+CF-08 & CXC team named & Arcand, Russo, Santaguida, and Malec all named with roles \\
+CF-09 & Tools count & 8 or more tools documented with name, affiliation, open/closed status, and reference \\
+CF-10 & sonoUno JOSS publication & sonoUno correctly identified as published in JOSS (2024); ISO 9241-171 compliance noted \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Real vs.\ metaphor distinction drawn & SC-REAL, CF-01, CF-02 & Pending \\
+2. Perseus end-to-end narrative & CF-01 & Pending \\
+3. CXC pipeline documented with personnel & CF-08 & Pending \\
+4. 15+ objects profiled & CF-03 & Pending \\
+5. LIGO chirp as separate category & CF-02 & Pending \\
+6. Arcand 2024 findings summarized & CF-05, SC-BLV & Pending \\
+7. 4+ software tools documented & CF-09, CF-10 & Pending \\
+8. Psychoacoustic rationale present & CF-05, CF-06 & Pending \\
+9. Diaz-Merced arc documented & CF-07 & Pending \\
+10. 4M+ listens cited with source & SC-NUM & Pending \\
+11. Modules individually executable & IN-03 & Pending \\
+12. No unsourced aesthetic claims & SC-ATTR & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator (Opus) & Mission direction; go/no-go at CAPCOM gates; synthesis judgment \\
+PLAN & Planner (Sonnet) & Wave decomposition; parallel track scheduling; dependency management \\
+SCOUT & Research Agent (Haiku) & Source gathering; evidence compilation; bibliography \\
+EXEC-A & Document Executor A (Sonnet) & D3 Objects catalog; D3 table population; formatting \\
+EXEC-B & Document Executor B (Sonnet) & D5 Tools catalog; narrative sections; formatting \\
+CRAFT-PHYS & Physics Specialist (Opus) & D1 physics module; plasma acoustics; LIGO documentation; frequency math \\
+CRAFT-ACCESS & Accessibility Specialist (Opus) & D4 accessibility module; BLV framing; psychoacoustic summary \\
+VERIFY & Verification Agent (Sonnet) & Source validation; SC test execution; numerical spot-checks \\
+INTEG & Integration Agent (Opus) & Wave 2 synthesis; cross-module relationship mapping \\
+CAPCOM & HITL Interface (Human) & Wave boundary approvals; scope confirmation; sensitive content review \\
+BUDGET & Resource Manager (Haiku) & Token budget tracking; session planning; alert at 80\% \\
+LOG & Chronicle Agent (Haiku) & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Milestone designation & AUDIO-COSMOS-v1.0 \\
+Activation profile & Squadron (12 roles) \\
+Research modules & 5 (Physics, Pipeline, Objects, Accessibility, Tools) \\
+Deliverables & 8 (D1--D5 + Synthesis + PDF + index.html) \\
+Wave count & 4 waves (0 sequential + 1A/1B parallel + 1C + 2 + 3) \\
+Parallel tracks & 2 (Wave 1A and 1B concurrent) \\
+Total token budget & $\approx$83,000 tokens \\
+Estimated sessions & 3--4 \\
+CAPCOM gates & 2 (post-Wave 1A/1B; pre-Wave 3) \\
+Total tests & 35 (6 safety-critical / 18 core / 6 integration / 5 edge) \\
+Model split & Opus 32\% / Sonnet 58\% / Haiku 10\% \\
+Primary authority & NASA Chandra X-ray Center; Frontiers in Communication (Arcand 2024) \\
+Safety-critical domains & BLV community framing; real vs.\ metaphor distinction; numerical attribution \\
+GSD College of Knowledge & Module seeded as ``Astronomical Sonification'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+\begin{quotebox}
+\textbf{\sffamily\large The universe was not silent. It was waiting.}
+
+\vspace{0.5em}
+The Perseus black hole has been producing one of the lowest notes in the observable universe for longer than the Earth has existed. For most of that time, there was no instrument to hear it, no mind to process it, no architecture to bridge the gap between a 300-million-million-second wave cycle and a human auditory cortex tuned for speech and birdsong. The Chandra X-ray Observatory provided the data. Dr.\ Arcand's team provided the translation. The meaning lived in neither place alone. It lived in the space between them.
+
+This is the Amiga Principle operating at cosmological scale: not brute force, not a more powerful telescope, not a louder speaker. A principled architecture. A 57-octave transposition. A left-to-right scan. The right mapping, applied with enough fidelity that four million people heard a black hole sing and wanted to know more.
+
+\vspace{0.5em}
+\textit{--- GSD Ecosystem through-line: AUDIO-COSMOS-v1.0}
+\end{quotebox}
+
+\end{document}

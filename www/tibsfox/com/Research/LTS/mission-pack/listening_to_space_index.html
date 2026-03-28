@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listening to Space — GSD Research Mission Package</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #311B92;
+      --secondary: #0277BD;
+      --tertiary: #B8860B;
+      --accent: #1565C0;
+      --light-primary: #EDE7F6;
+      --light-secondary: #E1F5FE;
+      --bg: #0A0A1A;
+      --surface: #131328;
+      --card: #1A1A3A;
+      --card-hover: #1F1F45;
+      --text: #E8E8F0;
+      --text-muted: #9090B0;
+      --border: #2A2A50;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Star field background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 15%, rgba(200,200,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 85%, rgba(200,200,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 35%, rgba(255,200,100,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 75% 55%, rgba(200,200,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.4) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #1A0E5A 0%, #0D1B3E 40%, #0A2040 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 0 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #5C35C8, #0277BD, #5C35C8, transparent);
+    }
+
+    .gsd-badge {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #9580E0;
+      background: rgba(49, 27, 146, 0.3);
+      border: 1px solid rgba(92, 53, 200, 0.4);
+      padding: 5px 16px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 700;
+      color: #E8E0FF;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 40px rgba(92, 53, 200, 0.5);
+    }
+
+    header h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(14px, 2.5vw, 18px);
+      font-weight: 400;
+      font-style: italic;
+      color: #6BB8E8;
+      margin-bottom: 20px;
+    }
+
+    .pipeline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #7080C0;
+      text-transform: uppercase;
+    }
+
+    .pipeline span { color: #5C35C8; }
+
+    .meta-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .meta-item strong {
+      color: #A0A8D0;
+      font-weight: 600;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding: 48px 0 64px;
+    }
+
+    /* FILE CARDS */
+    .files-section h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #6070A0;
+      margin-bottom: 20px;
+    }
+
+    .file-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .file-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .file-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .file-card:hover {
+      background: var(--card-hover);
+      border-color: #3A3A60;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(49, 27, 146, 0.2);
+    }
+
+    .file-card:hover::before { opacity: 1; }
+
+    .file-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .file-card h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #C8C0F0;
+      margin-bottom: 4px;
+    }
+
+    .file-format {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 10px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .file-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .download-hint {
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #5C35C8;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* CONTENTS */
+    .contents-section {
+      margin-bottom: 48px;
+    }
+
+    .contents-section h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #6070A0;
+      margin-bottom: 20px;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .stage-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+    }
+
+    .stage-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .stage-1 .stage-label { background: rgba(49,27,146,0.3); color: #9580E0; border: 1px solid rgba(49,27,146,0.5); }
+    .stage-2 .stage-label { background: rgba(2,119,189,0.25); color: #6BB8E8; border: 1px solid rgba(2,119,189,0.4); }
+    .stage-3 .stage-label { background: rgba(184,134,11,0.2); color: #D4A830; border: 1px solid rgba(184,134,11,0.35); }
+
+    .stage-block h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #C0B8E8;
+      margin-bottom: 10px;
+    }
+
+    .stage-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .stage-block ul li {
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 3px 0;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .stage-block ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #4A4A80;
+      font-size: 10px;
+    }
+
+    /* USAGE */
+    .usage-section {
+      margin-bottom: 48px;
+    }
+
+    .usage-section h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #6070A0;
+      margin-bottom: 20px;
+    }
+
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .usage-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+    }
+
+    .usage-block h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #A0A8D0;
+      margin-bottom: 12px;
+    }
+
+    .usage-block ol {
+      padding-left: 18px;
+    }
+
+    .usage-block ol li {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      padding: 3px 0;
+      line-height: 1.5;
+    }
+
+    .usage-block code {
+      font-family: 'DM Sans', monospace;
+      font-size: 11px;
+      background: rgba(49,27,146,0.2);
+      color: #A090E0;
+      padding: 2px 6px;
+      border-radius: 2px;
+      border: 1px solid rgba(49,27,146,0.3);
+    }
+
+    /* CLOSING QUOTE */
+    .quote-section {
+      background: linear-gradient(135deg, rgba(49,27,146,0.15) 0%, rgba(2,119,189,0.1) 100%);
+      border: 1px solid rgba(49,27,146,0.3);
+      border-radius: 6px;
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .quote-section blockquote {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: #C0B8E8;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .quote-attribution {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #6070A0;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: #4A4A70;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    footer p + p { margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="gsd-badge">GSD Research Mission Package</div>
+      <h1>Listening to Space</h1>
+      <h2>Astronomical Data Sonification — From Chandra X-ray Photons to Human Hearing</h2>
+      <div class="pipeline">
+        <span>Vision</span> → <span>Research</span> → <span>Mission</span>
+      </div>
+      <div class="meta-row">
+        <div class="meta-item"><strong>Date:</strong> March 27, 2026</div>
+        <div class="meta-item"><strong>Profile:</strong> Squadron (12 roles)</div>
+        <div class="meta-item"><strong>Modules:</strong> 5</div>
+        <div class="meta-item"><strong>Pages:</strong> 26</div>
+        <div class="meta-item"><strong>Status:</strong> Ready for GSD Orchestrator</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- FILE CARDS -->
+      <div class="files-section">
+        <h3>Package Files</h3>
+        <div class="file-cards">
+
+          <a href="listening_to_space_mission.pdf" download class="file-card">
+            <div class="file-icon">🌌</div>
+            <div class="file-format">PDF · 26 pages</div>
+            <h4>Full Mission Package</h4>
+            <p>Complete three-stage document: Vision Guide, Research Reference, and Mission Package. Publication-quality LaTeX typesetting.</p>
+            <div class="download-hint">↓ Download PDF</div>
+          </a>
+
+          <a href="listening_to_space_mission.tex" download class="file-card">
+            <div class="file-icon">📄</div>
+            <div class="file-format">LaTeX · XeLaTeX source</div>
+            <h4>LaTeX Source</h4>
+            <p>Full .tex source for recompilation, modification, and extension. Recompile with XeLaTeX (three passes) using DejaVu fonts.</p>
+            <div class="download-hint">↓ Download .tex</div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- CONTENTS BREAKDOWN -->
+      <div class="contents-section">
+        <h3>Document Contents</h3>
+        <div class="stage-grid">
+
+          <div class="stage-block stage-1">
+            <span class="stage-label">Stage 1 · Vision</span>
+            <h4>Vision Guide</h4>
+            <ul>
+              <li>4-paragraph narrative (Amiga Principle at cosmological scale)</li>
+              <li>5-problem problem statement</li>
+              <li>Domain map + module architecture (ASCII)</li>
+              <li>5 research module descriptions</li>
+              <li>Chipset YAML configuration (Paula, Agnus, Denise, 68000)</li>
+              <li>Scope boundaries (in/out)</li>
+              <li>12 testable success criteria</li>
+              <li>GSD ecosystem cross-reference table</li>
+              <li>The through-line: spaces between</li>
+            </ul>
+          </div>
+
+          <div class="stage-block stage-2">
+            <span class="stage-label">Stage 2 · Research</span>
+            <h4>Research Reference</h4>
+            <ul>
+              <li>Module 1: Sound in plasma; Perseus 57-octave calculation</li>
+              <li>Module 1: LIGO GW150914 chirp documentation</li>
+              <li>Module 2: CXC pipeline; inverse spectrogram; named team</li>
+              <li>Module 2: Multiwavelength integration (M87)</li>
+              <li>Module 3: 15+ landmark objects table</li>
+              <li>Module 3: HUDF temporal encoding special entry</li>
+              <li>Module 4: Arcand 2024 &amp; Gould 2024 studies</li>
+              <li>Module 4: Wanda Diaz-Merced arc; psychoacoustics</li>
+              <li>Module 5: 9 tools documented with status and source</li>
+              <li>Safety/sensitivity table; full bibliography (3 categories)</li>
+            </ul>
+          </div>
+
+          <div class="stage-block stage-3">
+            <span class="stage-label">Stage 3 · Mission</span>
+            <h4>Mission Package</h4>
+            <ul>
+              <li>Milestone spec: AUDIO-COSMOS-v1.0</li>
+              <li>Wave architecture diagram (ASCII)</li>
+              <li>8 deliverables with acceptance criteria</li>
+              <li>Component breakdown with model assignments &amp; token budgets</li>
+              <li>Wave 0/1A/1B/1C/2/3 execution tables</li>
+              <li>Cache optimization strategy</li>
+              <li>Dependency graph (ASCII)</li>
+              <li>35-test plan (6 safety-critical, 18 core, 6 integration, 5 edge)</li>
+              <li>12-criterion verification matrix</li>
+              <li>Squadron crew manifest (12 roles)</li>
+              <li>Execution summary table</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- USAGE INSTRUCTIONS -->
+      <div class="usage-section">
+        <h3>Usage Instructions</h3>
+        <div class="usage-grid">
+
+          <div class="usage-block">
+            <h4>🚀 Hand to GSD / Claude Code</h4>
+            <ol>
+              <li>Download the PDF</li>
+              <li>Open a Claude Code session with gsd-skill-creator</li>
+              <li>Attach the PDF and say:<br><code>Execute AUDIO-COSMOS-v1.0 — start Wave 0</code></li>
+              <li>The orchestrator reads Stage 3 for the full execution plan</li>
+              <li>Approve CAPCOM gates as they appear</li>
+              <li>Receive five research module documents + synthesis report</li>
+            </ol>
+          </div>
+
+          <div class="usage-block">
+            <h4>📚 Seed College of Knowledge</h4>
+            <ol>
+              <li>Stage 2 (Research Reference) is structured for direct ingestion</li>
+              <li>Module headers map to College of Knowledge taxonomy</li>
+              <li>Each module is self-contained — can be added independently</li>
+              <li>Rosetta Core cross-domain links: physics ↔ accessibility ↔ tools</li>
+              <li>Bibliography section provides citation chain for validation</li>
+            </ol>
+          </div>
+
+          <div class="usage-block">
+            <h4>🔧 Recompile LaTeX</h4>
+            <ol>
+              <li>Requires: XeLaTeX, DejaVu fonts, standard TeX Live packages</li>
+              <li>Three passes required:<br>
+                <code>xelatex mission.tex</code><br>
+                <code>xelatex mission.tex</code><br>
+                <code>xelatex mission.tex</code>
+              </li>
+              <li>Packages: tcolorbox, tabularx, longtable, colortbl, lastpage, fancyhdr, fontspec</li>
+              <li>Modify color scheme: change <code>\definecolor{primary}</code> in preamble</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CLOSING QUOTE -->
+      <div class="quote-section">
+        <blockquote>
+          "The Perseus black hole has been producing one of the lowest notes in the observable universe for longer than the Earth has existed. The meaning lived in neither the data nor the silence alone. It lived in the space between them."
+        </blockquote>
+        <div class="quote-attribution">GSD Ecosystem · AUDIO-COSMOS-v1.0 through-line · March 2026</div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>GSD Research Mission Package · Listening to Space · Astronomical Data Sonification</p>
+      <p>Primary Authority: NASA Chandra X-ray Center · Arcand et al. (2024) Frontiers in Communication</p>
+    </div>
+  </footer>
+
+</body>
+</html>
