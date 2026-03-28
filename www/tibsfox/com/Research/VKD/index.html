@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vulkan Desktop &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-vkd">
+  <header>
+    <h1>Vulkan Desktop</h1>
+    <div class="subtitle">API Foundations &middot; Extensions &middot; Performance &middot; Framework &middot; Upstream &middot; Wiring</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-api-foundations">API</a>
+      <a href="page.html?doc=02-extension-corpus">Extensions</a>
+      <a href="page.html?doc=03-performance-patterns">Performance</a>
+      <a href="page.html?doc=04-framework-build">Framework</a>
+      <a href="page.html?doc=05-upstream-intelligence">Upstream</a>
+      <a href="page.html?doc=06-skill-creator-wiring">Wiring</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      The Vulkan Samples repository from KhronosGroup is not just a tutorial collection &mdash;
+      it is the canonical living reference for best-practice GPU programming across the entire
+      modern hardware ecosystem. Each sample is a distillation of accumulated wisdom from ARM,
+      NVIDIA, AMD, Valve, Google, and dozens of contributors. The spaces between the samples
+      &mdash; the connections between concepts &mdash; are where the real architectural knowledge lives.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">80+</span><span class="stat-label">Samples</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">1.4</span><span class="stat-label">Vulkan Version</span></div>
+      <div class="stat"><span class="stat-value">24</span><span class="stat-label">Perf Patterns</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-api-foundations" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: API Foundations</h3>
+        <div class="meta"><span class="tag tag-api">API</span> Track A &middot; Core samples</div>
+        <p>14 core API samples + 14 Vulkan-Hpp C++ variants. Hello Triangle through Compute N-body. HDR, instancing, terrain tessellation, dynamic rendering, timeline semaphores. Each sample mapped as a DACP-compatible skill stub with version requirements.</p>
+      </a>
+
+      <a href="page.html?doc=02-extension-corpus" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Extension Corpus</h3>
+        <div class="meta"><span class="tag tag-ext">Extensions</span> Track B &middot; 47 samples</div>
+        <p>Complete catalogue of extension samples: ray tracing (KHR), mesh shaders, dynamic rendering, descriptor indexing, fragment shading rate, buffer device address. Extension family maps showing promotion paths from vendor to KHR. Version requirement matrix.</p>
+      </a>
+
+      <a href="page.html?doc=03-performance-patterns" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Performance Patterns</h3>
+        <div class="meta"><span class="tag tag-perf">Performance</span> Track C &middot; 24 patterns</div>
+        <p>24 performance optimization samples with profiling annotations formalized as machine-readable preconditions. Multi-draw indirect, pipeline caching, render pass optimization, subpass dependencies, command buffer management, descriptor set strategies.</p>
+      </a>
+
+      <a href="page.html?doc=04-framework-build" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Framework &amp; Build</h3>
+        <div class="meta"><span class="tag tag-framework">Framework</span> Track A &middot; Architecture</div>
+        <p>Vulkan Samples framework architecture: Application, Platform, RenderContext abstractions. CMake build system with Gradle Android integration. CI harness patterns for GPU validation. Git LFS asset management. Cross-platform compilation targets.</p>
+      </a>
+
+      <a href="page.html?doc=05-upstream-intelligence" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Upstream Intelligence</h3>
+        <div class="meta"><span class="tag tag-upstream">Upstream</span> Synthesis &middot; Version tracking</div>
+        <p>Vulkan 1.4 spec changes, SDK 1.4.341 updates, Roadmap 2026 extensions. Extension promotion tracking (vendor to EXT to KHR). Breaking changes in descriptor heap architecture. Tensor processing extensions (VK_ARM_tensors). Float8 shader support frontier.</p>
+      </a>
+
+      <a href="page.html?doc=06-skill-creator-wiring" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: skill-creator Wiring</h3>
+        <div class="meta"><span class="tag tag-wiring">Wiring</span> Integration &middot; DACP</div>
+        <p>80+ DACP bundles mapping each sample to a skill stub. Version gate skill for extension availability checking. ZFC stamp candidate for federation compliance. The artifact that makes the entire Vulkan corpus queryable by skill-creator agents.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>GPU pipeline architecture</td><td>M1, M3, M5</td><td>NEH, WAL</td></tr>
+        <tr><td>Ray tracing (KHR)</td><td>M2, M5</td><td>NEH</td></tr>
+        <tr><td>Mesh shaders</td><td>M2, M3</td><td>NEH</td></tr>
+        <tr><td>Descriptor management</td><td>M1, M2, M3</td><td>NEH</td></tr>
+        <tr><td>Compute shaders / N-body</td><td>M1, M3</td><td>NEH, WAL</td></tr>
+        <tr><td>Extension promotion paths</td><td>M2, M5</td><td>NEH</td></tr>
+        <tr><td>Tensor / ML inference on GPU</td><td>M2, M5</td><td>WAL</td></tr>
+        <tr><td>CMake build systems</td><td>M4</td><td>NEH, SYS</td></tr>
+        <tr><td>DACP bundle schemas</td><td>M6, M1</td><td>NEH, WAL</td></tr>
+        <tr><td>Performance profiling</td><td>M3, M5</td><td>NEH, WAL</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+VULKAN DESKTOP -- SAMPLE UNIVERSE MAP
+===============================================================
+
+  API FOUNDATIONS (28)      EXTENSION CORPUS (47)   PERFORMANCE (24)
+  +---------------+         +----------------+      +---------------+
+  | Hello Triangle|         | Ray Tracing    |      | Multi-draw    |
+  | Compute N-body|--------&gt;| Mesh Shaders   |-----&gt;| Pipeline Cache|
+  | HDR / Dynamic |         | Descriptor Idx |      | Render Passes |
+  | Timeline Sema |         | Frag Shading   |      | Subpasses     |
+  +---------------+         +----------------+      +---------------+
+        |                         |                       |
+        v                         v                       v
+  +---------------+         +----------------+      +---------------+
+  | FRAMEWORK     |         | UPSTREAM INTEL |      | WIRING        |
+  | Application   |         | Vulkan 1.4     |      | 80+ DACP      |
+  | Platform      |         | SDK 1.4.341    |      | Version gate  |
+  | RenderContext |         | Roadmap 2026   |      | ZFC stamp     |
+  | CMake / CI    |         | Tensor / Float8|      | Agent queries |
+  +---------------+         +----------------+      +---------------+
+        |                         |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |  SKILL-CREATOR LAYER  |
+                    |                       |
+                    |  Structured queries   |
+                    |  Deprecation alerts   |
+                    |  Extension availability|
+                    |  DACP handoff bundles |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: API Foundations] ──────&gt; [M4: Framework &amp; Build]
+       |                              |
+       v                              v
+  [M2: Extension Corpus]       [M3: Performance Patterns]
+       |                              |
+       +----------- + ---------------+
+                     |
+                     v
+          [M5: Upstream Intelligence]
+          (version tracking, extension promotion)
+                     |
+                     v
+          [M6: skill-creator Wiring]
+          (DACP bundles, version gate, ZFC)
+
+  Parallel tracks:
+    Track A: M1 + M4 (API foundations + framework)
+    Track B: M2 (extension corpus)
+    Track C: M3 (performance patterns)
+    Synthesis: M5 (upstream -- requires all Wave 1)
+    Integration: M6 (wiring -- requires M5)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Vulkan Desktop &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
