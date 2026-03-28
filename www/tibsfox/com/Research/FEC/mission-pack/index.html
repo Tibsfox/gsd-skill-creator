@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forward Error Correction — GSD Deep Research Mission Package</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #1565C0;
+      --tertiary: #37474F;
+      --accent: #1976D2;
+      --light-primary: #E8EAF6;
+      --light-secondary: #E3F2FD;
+      --bg: #F8F9FD;
+      --card-bg: #FFFFFF;
+      --border: #C5CAE9;
+      --text: #212121;
+      --muted: #546E7A;
+      --code-bg: #ECEFF1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* HERO HEADER */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #283593 50%, #1565C0 100%);
+      color: white;
+      padding: 64px 40px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: -40px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(100,160,255,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      color: #90CAF9;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .meta-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .meta-chip .dot {
+      width: 6px; height: 6px;
+      background: #64B5F6;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    /* SHANNON QUOTE */
+    .shannon-quote {
+      background: var(--light-primary);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      font-family: 'Crimson Text', serif;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--primary);
+    }
+
+    .shannon-quote cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* FILE CARDS */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 16px;
+    }
+
+    .file-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .file-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .file-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .file-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px rgba(26, 35, 126, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .file-icon {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .file-icon.pdf { background: #E8EAF6; }
+    .file-icon.tex { background: #E3F2FD; }
+
+    .file-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .file-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .file-stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      background: var(--code-bg);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--tertiary);
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 14px;
+      transition: background 0.15s;
+    }
+
+    .download-btn:hover { background: var(--secondary); }
+
+    /* CONTENTS BREAKDOWN */
+    .contents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 680px) {
+      .contents-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 28px; }
+      .main { padding: 32px 20px; }
+    }
+
+    .stage-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .stage-header {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .stage-header.s1 { background: var(--light-primary); color: var(--primary); }
+    .stage-header.s2 { background: var(--light-secondary); color: var(--secondary); }
+    .stage-header.s3 { background: #ECEFF1; color: var(--tertiary); }
+
+    .stage-items {
+      list-style: none;
+    }
+
+    .stage-items li {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 4px 0;
+      border-bottom: 1px solid #F0F0F0;
+      line-height: 1.4;
+    }
+
+    .stage-items li:last-child { border-bottom: none; }
+
+    .stage-items li::before {
+      content: '→ ';
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* USAGE INSTRUCTIONS */
+    .instructions {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 32px;
+    }
+
+    .instructions h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .step-list {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .step-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .step-list li::before {
+      content: counter(steps);
+      background: var(--primary);
+      color: white;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: #1A237E0A;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .code-block pre {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--primary);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    /* MODULE GRID */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 680px) {
+      .module-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .module-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .mod-num {
+      font-size: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .mod-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .mod-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    footer strong { color: white; }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">GSD Research Mission Package · Fleet Profile · Five-Pass Deep Research</div>
+    <h1>Forward Error<br><span>Correction</span></h1>
+    <p class="hero-subtitle">Channel Coding Theory · Code Families · Applications · Quantum Frontiers · Fox Infrastructure Architecture</p>
+    <div class="hero-meta">
+      <div class="meta-chip"><span class="dot"></span>46 pages</div>
+      <div class="meta-chip"><span class="dot"></span>6 research modules</div>
+      <div class="meta-chip"><span class="dot"></span>20-agent Fleet crew</div>
+      <div class="meta-chip"><span class="dot"></span>Shannon (1948) → QEC (2025)</div>
+      <div class="meta-chip"><span class="dot"></span>March 27, 2026</div>
+      <div class="meta-chip"><span class="dot"></span>GSD v1.49+ / DACP milestone</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="shannon-quote">
+    "The fundamental problem of communication is that of reproducing at one point either exactly or approximately a message selected at another point."
+    <cite>— Claude Shannon, A Mathematical Theory of Communication, 1948</cite>
+  </div>
+
+  <!-- FILES -->
+  <div class="section-label">Mission Documents</div>
+  <div class="file-cards">
+    <div class="file-card">
+      <div class="file-icon pdf">📄</div>
+      <div class="file-name">fec_mission.pdf</div>
+      <div class="file-desc">Complete three-stage mission package: Vision Guide, Research Reference, and Mission Package. 46 pages.</div>
+      <div class="file-stats">
+        <span class="stat-pill">46 pages</span>
+        <span class="stat-pill">XeLaTeX</span>
+        <span class="stat-pill">Fleet Profile</span>
+      </div>
+      <a href="fec_mission.pdf" download class="download-btn">⬇ Download PDF</a>
+    </div>
+
+    <div class="file-card">
+      <div class="file-icon tex">📝</div>
+      <div class="file-name">fec_mission.tex</div>
+      <div class="file-desc">Full LaTeX source. Recompile with XeLaTeX (three passes). DejaVu fonts required (pre-installed Ubuntu).</div>
+      <div class="file-stats">
+        <span class="stat-pill">XeLaTeX</span>
+        <span class="stat-pill">DejaVu fonts</span>
+        <span class="stat-pill">Tech blue scheme</span>
+      </div>
+      <a href="fec_mission.tex" download class="download-btn">⬇ Download .tex</a>
+    </div>
+  </div>
+
+  <!-- MODULES -->
+  <div class="section-label">Six Research Modules</div>
+  <div class="module-grid">
+    <div class="module-card">
+      <div class="mod-num">MODULE 01 · OPUS</div>
+      <div class="mod-title">Theoretical Foundations</div>
+      <div class="mod-desc">Shannon theorem · Channel capacity · Hamming distance · Code rate math · BER curves · Cliff effect</div>
+    </div>
+    <div class="module-card">
+      <div class="mod-num">MODULE 02 · SONNET</div>
+      <div class="mod-title">Code Families Taxonomy</div>
+      <div class="mod-desc">Hamming · BCH · Reed-Solomon · Convolutional · Turbo · LDPC · Polar · Raptor/RaptorQ · Timeline 1948–2025</div>
+    </div>
+    <div class="module-card">
+      <div class="mod-num">MODULE 03 · SONNET</div>
+      <div class="mod-title">Decoding Algorithms</div>
+      <div class="mod-desc">Viterbi · MAP/BCJR · Belief propagation · Sum-product · Successive cancellation · Error floor · Neural decoders</div>
+    </div>
+    <div class="module-card">
+      <div class="mod-num">MODULE 04 · SONNET</div>
+      <div class="mod-title">Application Domains</div>
+      <div class="mod-desc">5G NR · Optical transport · Deep space/NASA · Flash storage · Streaming/ATSC 3.0 · SD-WAN mesh</div>
+    </div>
+    <div class="module-card">
+      <div class="mod-num">MODULE 05 · OPUS</div>
+      <div class="mod-title">Emerging Frontiers</div>
+      <div class="mod-desc">Quantum LDPC · Google Willow · IBM qLDPC · Neural FEC · 6G channel coding · AI-native decoders</div>
+    </div>
+    <div class="module-card">
+      <div class="mod-num">MODULE 06 · OPUS</div>
+      <div class="mod-title">GSD / Fox Infrastructure</div>
+      <div class="mod-desc">Pacific Spine FEC selection · DACP reliability overlay · CSZ emergency Raptor spec · Fox Infrastructure architecture</div>
+    </div>
+  </div>
+
+  <!-- CONTENTS BREAKDOWN -->
+  <div class="section-label">Three-Stage Document Structure</div>
+  <div class="contents-grid">
+    <div class="stage-card">
+      <div class="stage-header s1">Stage 1 · Vision Guide</div>
+      <ul class="stage-items">
+        <li>Document metadata + ecosystem role</li>
+        <li>Vision narrative (5 paragraphs)</li>
+        <li>5 concrete problem statements</li>
+        <li>Domain architecture ASCII map</li>
+        <li>6 module descriptions + chipset YAML</li>
+        <li>Scope boundaries (in/out)</li>
+        <li>12 success criteria</li>
+        <li>Relationship to GSD docs</li>
+        <li>Through-line + Amiga Principle</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <div class="stage-header s2">Stage 2 · Research Reference</div>
+      <ul class="stage-items">
+        <li>Shannon theorem (with math)</li>
+        <li>Hamming distance formalism</li>
+        <li>Code rate / overhead tradeoff tables</li>
+        <li>NCG definitions and values</li>
+        <li>Code families + parameter tables</li>
+        <li>Historical timeline 1948–2025</li>
+        <li>Decoder taxonomy + complexity</li>
+        <li>5G NR / optical / deep space / flash</li>
+        <li>Quantum error correction 2024–25</li>
+        <li>Pacific Spine FEC selection guide</li>
+        <li>DACP reliability overlay spec</li>
+        <li>CSZ fountain code architecture</li>
+        <li>Safety considerations + bibliography</li>
+      </ul>
+    </div>
+    <div class="stage-card">
+      <div class="stage-header s3">Stage 3 · Mission Package</div>
+      <ul class="stage-items">
+        <li>Milestone specification + objective</li>
+        <li>Architecture overview ASCII diagram</li>
+        <li>10 deliverables with acceptance criteria</li>
+        <li>Component breakdown + token budgets</li>
+        <li>Model assignment rationale (30/60/10)</li>
+        <li>Wave execution plan (5 waves)</li>
+        <li>Cache optimization strategy</li>
+        <li>Token budget table (421k total)</li>
+        <li>Dependency graph ASCII art</li>
+        <li>45-test test plan (7 safety-critical)</li>
+        <li>Verification matrix (12 criteria)</li>
+        <li>20-agent crew manifest</li>
+        <li>Execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- USAGE INSTRUCTIONS -->
+  <div class="instructions">
+    <h3>Handing to GSD / skill-creator</h3>
+    <ol class="step-list">
+      <li>Download both <code>fec_mission.pdf</code> and <code>fec_mission.tex</code> from above.</li>
+      <li>Place the PDF in your GSD project's <code>.planning/staging/inbox/</code> directory (or use the <code>deposit_mission</code> MCP tool if the planning-bridge server is active).</li>
+      <li>Open a Claude Code session and provide the mission package path. The Stage 3 component specs are self-contained — each agent can execute from its spec alone.</li>
+      <li>Begin with Wave 0: run the schema generation pass (Paula/Haiku) to produce <code>schema.json</code>, <code>sources.bib</code>, and the shared glossary.</li>
+      <li>Launch Wave 1A in parallel: three agents (CRAFT-THEORY, CRAFT-CODE, CRAFT-DECODE) running simultaneously, each consuming Wave 0 outputs.</li>
+      <li>After CAPCOM Gate 1 review, launch Wave 1B (CRAFT-APP + CRAFT-FRONTIER), then Wave 2 synthesis, then Wave 3 publication.</li>
+    </ol>
+    <div class="code-block">
+      <pre>
+# LaTeX recompilation (Ubuntu / WSL)
+apt-get install texlive-xetex fonts-dejavu   # if needed
+xelatex -interaction=nonstopmode fec_mission.tex
+xelatex -interaction=nonstopmode fec_mission.tex
+xelatex -interaction=nonstopmode fec_mission.tex
+# Three passes required: TOC + cross-refs + lastpage counter
+      </pre>
+    </div>
+  </div>
+
+  <!-- CLOSING QUOTE -->
+  <div class="shannon-quote" style="font-size:15px; margin-bottom:0;">
+    "Every breakthrough was not more redundancy — it was better architecture. Not louder, but smarter. Not more bits, but better structure. The spaces between valid codewords carry more information about what was sent than the codewords themselves, because the geometry of those gaps is exactly what the channel has to distort to corrupt a message beyond recovery."
+    <cite>— GSD FEC Research Mission, March 2026 · The Amiga Principle at Cosmological Scale</cite>
+  </div>
+
+</div>
+
+<footer>
+  <strong>GSD Research Mission Package</strong> · Forward Error Correction · Deep Research · Five Passes · Fleet Profile<br>
+  Miles Tiberius Foxglove / Tibsfox · github.com/Tibsfox/gsd-skill-creator · tibsfox.com · March 27, 2026
+</footer>
+
+</body>
+</html>

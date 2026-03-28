@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forward Error Correction &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-fec">
+  <header>
+    <h1>Forward Error Correction</h1>
+    <div class="subtitle">Theoretical Foundations &middot; Code Families &middot; Decoding &middot; Applications &middot; Emerging Frontiers &middot; Infrastructure</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-theoretical-foundations">Theory</a>
+      <a href="page.html?doc=02-code-families">Code Families</a>
+      <a href="page.html?doc=03-decoding-algorithms">Decoding</a>
+      <a href="page.html?doc=04-application-domains">Applications</a>
+      <a href="page.html?doc=05-emerging-frontiers">Frontiers</a>
+      <a href="page.html?doc=06-infrastructure">Infrastructure</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+  <main>
+    <blockquote>
+      The fundamental problem of communication is that of reproducing at one point either exactly
+      or approximately a message selected at another point. &mdash; Claude Shannon, 1948
+    </blockquote>
+    <div class="stats">
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">45</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">20</span><span class="stat-label">Fleet Agents</span></div>
+      <div class="stat"><span class="stat-value">46</span><span class="stat-label">Pages</span></div>
+    </div>
+    <h2>Research Modules</h2>
+    <div class="card-grid">
+      <a href="page.html?doc=01-theoretical-foundations" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Theoretical Foundations</h3>
+        <div class="meta"><span class="tag tag-theory">Theory</span> Opus &middot; Information theory</div>
+        <p>Shannon's noisy-channel coding theorem. Channel capacity C = B*log2(1+S/N). Hamming distance formalism. Code rate, overhead tradeoffs. BER curves. The cliff effect at capacity boundary.</p>
+      </a>
+      <a href="page.html?doc=02-code-families" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Code Families Taxonomy</h3>
+        <div class="meta"><span class="tag tag-codes">Codes</span> Sonnet &middot; Classification</div>
+        <p>Hamming codes, BCH, Reed-Solomon, Convolutional, Turbo codes, LDPC, Polar codes, Raptor/RaptorQ fountain codes. Historical timeline 1948-2025. Parameter tables and performance comparison.</p>
+      </a>
+      <a href="page.html?doc=03-decoding-algorithms" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Decoding Algorithms</h3>
+        <div class="meta"><span class="tag tag-decode">Decode</span> Sonnet &middot; Algorithms</div>
+        <p>Viterbi algorithm, MAP/BCJR, belief propagation, sum-product on factor graphs, successive cancellation for Polar codes. Error floor analysis. Neural decoders and ML approaches.</p>
+      </a>
+      <a href="page.html?doc=04-application-domains" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Application Domains</h3>
+        <div class="meta"><span class="tag tag-app">Apps</span> Sonnet &middot; Deployed systems</div>
+        <p>5G NR (LDPC for data, Polar for control). Optical transport (ITU-T G.709). NASA deep space (concatenated RS+Conv, now LDPC). Flash storage (BCH/LDPC). Streaming/ATSC 3.0. SD-WAN mesh.</p>
+      </a>
+      <a href="page.html?doc=05-emerging-frontiers" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Emerging Frontiers</h3>
+        <div class="meta"><span class="tag tag-frontier">Frontier</span> Opus &middot; Quantum &amp; AI</div>
+        <p>Quantum LDPC codes. Google Willow QEC demonstration (Dec 2024). IBM qLDPC roadmap. Neural FEC decoders. 6G channel coding candidates. AI-native decoder architectures.</p>
+      </a>
+      <a href="page.html?doc=06-infrastructure" class="card" style="text-decoration:none;color:inherit">
+        <h3>M6: GSD / Fox Infrastructure</h3>
+        <div class="meta"><span class="tag tag-infra">Infra</span> Opus &middot; Architecture</div>
+        <p>Pacific Spine FEC selection guide. DACP reliability overlay specification. CSZ emergency Raptor/fountain code architecture. Fox Infrastructure Group communications resilience design.</p>
+      </a>
+    </div>
+    <h2>Domain Architecture</h2>
+    <pre>
+FEC RESEARCH DOMAIN ARCHITECTURE
+===============================================================
+
+  INFORMATION THEORY FOUNDATIONS
+  +-----------------------------------+
+  | Shannon (1948): C = B*log2(1+S/N) |
+  | Hamming (1950): distance metric   |
+  | Gallager (1960): sparse graphs    |
+  +-----------------------------------+
+                  |
+        +---------+---------+
+        |                   |
+  CLASSICAL FEC          QUANTUM FEC
+  (Block &amp; Conv.)        (Stabilizer)
+        |                   |
+  LDPC / Polar / Turbo   qLDPC / Surface
+        |                   |
+  DECODING ALGORITHMS       |
+  Viterbi / BP / SC / MAP   |
+  Neural / ML Decoders      |
+        |                   |
+  APPLICATION LAYER ---------+
+  5G NR | Optical | Space | Storage | Mesh
+    </pre>
+  </main>
+  <footer>
+    <p>Forward Error Correction &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
