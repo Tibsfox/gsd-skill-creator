@@ -1,0 +1,1249 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Studio Teal / Electric Blue / Warm Gold ──
+\definecolor{primary}{HTML}{004D5E}
+\definecolor{secondary}{HTML}{0277BD}
+\definecolor{tertiary}{HTML}{8B6914}
+\definecolor{accent}{HTML}{00838F}
+\definecolor{lightprimary}{HTML}{E0F7FA}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% ── Section Formatting ──
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+% ── Table Helpers ──
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% ── Headers / Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Ableton Live Research Mission}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={Ableton Live -- Architecture, Extensibility \& Ecosystem -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% =========================================================
+\begin{document}
+% =========================================================
+
+% ── Title Page ──
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Ableton Live\\[0.3em]Architecture, Extensibility \& Ecosystem}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Digital Audio Workstation --- Deep Research Study}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{From Clip Paradigm to Live Object Model}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Estimated: 8--12 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% ── Table of Contents ──
+\tableofcontents
+\newpage
+
+% =========================================================
+% STAGE 1 — VISION DOCUMENT
+% =========================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Ableton Live --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Depends On:}{Deep Audio Analyzer Mission (prior GSD artifact)}
+\metafield{Informs:}{College of Knowledge Audio Module, GSD-OS Audio Integration}
+\metafield{Version:}{v1.0}
+
+\subsection{Vision}
+
+Ableton Live is not a conventional digital audio workstation. It is, at its core, a philosophical
+statement about the relationship between improvisation and composition---the space between
+a free-flowing jam and a committed arrangement. The software's founders, Gerhard Behles and
+Robert Henke, embedded that tension directly into the interface: two views, Session and
+Arrangement, sharing the same tracks but offering radically different relationships with time.
+
+Where nearly every other DAW imposes a linear timeline as the primary mode of
+working---treating music-making as a left-to-right accumulation of fixed decisions---Live's
+Session View holds open a non-linear field of possibility. Clips launch on demand. Scenes
+trigger in combinations. The music breathes without committing. Only when the producer is
+ready does the Arrangement View crystallize that improvisation into a linear form.
+
+This duality maps directly onto the ``spaces between'' that animate the GSD ecosystem. The
+Session View is the world of pure potential---the gap before commitment, where combinations
+form and dissolve. The Arrangement View is where that potential collapses into execution. The
+Tab key that switches between them is among the most philosophically loaded keystrokes in
+music software.
+
+Live 12 (released early 2024) extends this philosophy into new territories: generative MIDI
+transformations, alternative tuning systems, MPE-native instruments like Meld and an updated
+Granulator III, and a sophisticated extensibility layer---Max for Live, Python MIDI Remote
+Scripts, and the AbletonOSC protocol---that allows the DAW to be reshaped from outside as
+readily as from within. Understanding this extensibility layer is the key to integrating Live
+deeply with the GSD ecosystem's audio analysis and creative automation capabilities.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Dual-View Cognitive Load.} The Session/Arrangement paradigm is Ableton's
+  greatest strength and its steepest learning curve. New users consistently struggle to
+  understand why clips launched in Session do not affect the Arrangement timeline, and
+  vice versa. The ``Back to Arrangement'' button---a small control with enormous behavioral
+  consequences---trips up experienced users for months. A structured model of the
+  two-view interaction resolves this and unlocks the paradigm's creative power.
+
+  \item \textbf{Synthesis Depth vs.\ Accessibility.} Live 12 ships with 20 instruments spanning
+  physical modeling (Analog, Collision, Tension), FM synthesis (Operator), wavetable
+  (Wavetable), bi-timbral macro oscillators (Meld), subtractive MPE (Drift), granular
+  (Granulator III), and sampling (Sampler, Simpler). The breadth is extraordinary but
+  opaque. There is no cohesive synthesis taxonomy guiding a producer from one architecture
+  to the next, nor a map of which instrument fits which sound-design intent.
+
+  \item \textbf{Extensibility Layer Fragmentation.} Three parallel extension mechanisms
+  co-exist without clear hierarchy: Max for Live (visual patching with full API access),
+  Python MIDI Remote Scripts (compiled bytecode interface), and AbletonOSC (network-based
+  OSC control). Each accesses the Live Object Model differently. A unified map of the
+  extensibility stack---and guidance on when to use which path---is absent from official
+  documentation.
+
+  \item \textbf{Hardware Ecosystem Complexity.} Push 3 ships in two configurations---standalone
+  and controller---powered by an Intel NUC compute element and running a subset of Live 12
+  Suite. Move (October 2024) adds a compact groovebox tier. Ableton Link connects these and
+  third-party apps over local networks. Understanding the hardware/software boundary, its
+  current limitations (no Arrangement View in Push standalone as of 2025), and the
+  community workarounds is essential for workflow design.
+
+  \item \textbf{Education Gap at Scale.} Ableton's Certified Trainer program spans 50 countries
+  and 38 languages, with more than 360 trainers. Yet formal documentation of Live's deeper
+  architectural decisions---why Session View works the way it does, why the clip paradigm
+  was chosen, how the Live Object Model is structured---is scattered across forum posts,
+  decompiled Python bytecode, and third-party tutorials. A cohesive reference synthesizing
+  architecture, instruments, extensibility, and educational pathways does not yet exist.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{The Clip Paradigm as Architectural Foundation}
+
+Live's fundamental unit is the clip---a bounded, loopable segment of audio or MIDI. Everything
+in Live's architecture flows from this choice. Session View is a two-dimensional field of clips
+organized into tracks (vertical) and scenes (horizontal). Arrangement View is the same clips
+arranged on a linear timeline. The audio engine treats both identically; only the launching
+mechanism differs.
+
+\subsubsection{Dual-View Architecture (ASCII)}
+
+\begin{asciibox}
+SESSION VIEW                          ARRANGEMENT VIEW
+============                          ================
+
+Track 1 | [Clip A] [Clip B] [Clip C]  Track 1 |----[A]------[B]---[C]---->
+Track 2 | [Clip D] [Clip E] [   ]     Track 2 |--------[D]----[E]-------->
+Track 3 | [Clip F] [   ]   [Clip G]   Track 3 |--[F]-----------[G]------->
+                                                         time --------->
+
+Scene 1 = Launch A+D+F simultaneously
+Scene 2 = Launch B+E simultaneously
+Scene 3 = Launch C+G simultaneously
+
+[ Tab key ] switches views. Tracks are SHARED.
+Session clips and Arrangement clips are MUTUALLY EXCLUSIVE per track.
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+  +-----------+   +-----------+   +------------+   +-----------+   +-----------+
+  | MODULE 01 |   | MODULE 02 |   | MODULE 03  |   | MODULE 04 |   | MODULE 05 |
+  | Core Arch |   | Synthesis |   | Hardware   |   | Extension |   | Education |
+  | & Engine  |   | Arsenal   |   | Ecosystem  |   | Layer     |   | Community |
+  +-----------+   +-----------+   +------------+   +-----------+   +-----------+
+       |               |               |               |               |
+       +-------+-------+               +-------+-------+               |
+               |                               |                       |
+         WAVE 1-A                         WAVE 1-B                 WAVE 1-C
+    (Architecture +               (Hardware + Extension)        (Education)
+      Instruments)
+               \                               /                       /
+                +------------- WAVE 2 ---------+---------------------+
+                               (Synthesis: Cross-module integration)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01 --- Core Architecture and Audio Engine}
+The fundamental clip paradigm; Session View vs.\ Arrangement View behavioral model;
+audio warping engine; MIDI routing; automation; Warp Modes; the ``Back to Arrangement''
+state machine; global quantization; Ableton's edition tiers (Intro / Standard / Suite).
+
+\subsubsection{Module 02 --- Instruments and Sound Design Arsenal}
+All 20 instruments in Live 12 Suite: physical modeling (Analog, Collision, Electric, Tension),
+FM (Operator), wavetable (Wavetable), subtractive MPE (Drift), bi-timbral macro oscillators
+(Meld), granular (Granulator III), sampling (Sampler, Simpler), drums (Drum Rack, Drum Synths,
+Impulse), bass (Bass, Poli); Live 12 additions (Meld, Roar); MPE capability taxonomy.
+
+\subsubsection{Module 03 --- Hardware Ecosystem}
+Push 3 (Controller and Standalone configurations); Intel NUC compute element; MPE pad grid;
+built-in audio interface; ADAT I/O; Ableton Move (October 2024 groovebox); Ableton Link
+protocol; third-party hardware integration (Akai APC, Novation Launchpad, Push 1/2 legacy).
+
+\subsubsection{Module 04 --- Extensibility Layer}
+Max for Live (M4L) and the Live Object Model (LOM); Python MIDI Remote Scripts (bytecode
+architecture, Python 3 in Live 11+); AbletonOSC (OSC-based full API access via ideoforms);
+ClyphX Pro; Remotify; community API documentation resources (NSUSpray, Julien Bayle);
+extension mechanism decision tree.
+
+\subsubsection{Module 05 --- Education, Community and Ecosystem}
+Ableton Certified Trainer program (360+ trainers, 50 countries, 38 languages, since 2008);
+key training institutions (343 Labs NYC/Berlin, Point Blank, Delta Sound Labs/Case Western);
+Ableton's free online learning resources; community platforms; the ``Learning Music'' browser
+app; festival culture influence; historical context (Monolake / Robert Henke's departure 2016).
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# ableton-live-mission-chipset.yaml
+# GSD Amiga Chipset Assignment
+
+agnus:                        # Orchestration / DMA / Context
+  model: claude-opus-4-6
+  role: FLIGHT + INTEG
+  responsibilities:
+    - Mission direction and wave gate decisions
+    - Cross-module synthesis (architecture --> instruments --> hardware)
+    - Live Object Model deep analysis
+    - GSD ecosystem connection analysis
+
+denise:                       # Display / Output Rendering
+  model: claude-sonnet-4-6
+  role: EXEC-1 + EXEC-2 + CRAFT-ARCH + CRAFT-EXT
+  responsibilities:
+    - Module 01 document production (Core Architecture)
+    - Module 02 instrument taxonomy compilation
+    - Module 04 extensibility layer mapping
+    - Final document assembly and formatting
+
+paula:                        # Audio / I-O / Anticipatory
+  model: claude-haiku-4-5
+  role: SCOUT + BUDGET + LOG
+  responsibilities:
+    - Source gathering and gap-fill web research
+    - Token budget tracking
+    - Shared schema and template scaffolding
+    - Commit messages and audit trail
+
+68000:                        # CPU / Glue Logic
+  model: claude-sonnet-4-6
+  role: PLAN + VERIFY + SURGEON + CAPCOM
+  responsibilities:
+    - Wave decomposition and parallel track management
+    - Source validation and accuracy checking
+    - Research quality degradation detection
+    - Human approval at wave boundaries
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Ableton Live 12 (current release as of March 2026)
+  \item All five research modules as defined above
+  \item Live editions: Intro, Standard, Suite (not Lite)
+  \item Push 3 (Controller and Standalone), Ableton Move
+  \item Max for Live, Python MIDI Remote Scripts, AbletonOSC
+  \item Certified Trainer network overview (not individual trainer profiles)
+  \item GSD ecosystem integration opportunities identified per module
+  \item Ableton Link protocol and network synchronization
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Third-party VST/AU plugin ecosystem (Serum, Massive, Omnisphere, etc.)
+  \item Competitive DAW comparison (Logic, Pro Tools, FL Studio, Bitwig)
+  \item Audio mastering workflows in depth
+  \item Ableton's business/financial history
+  \item Push 1 and Push 2 (legacy hardware) beyond brief historical mention
+  \item Individual artist production technique analysis
+  \item Video production or scoring-to-picture workflows
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Session View and Arrangement View behavioral model fully documented, including the
+  clip exclusivity rule and ``Back to Arrangement'' state transitions.
+
+  \item All 20 instruments in Live 12 Suite catalogued with synthesis architecture, key
+  parameters, and recommended use-cases.
+
+  \item Extensibility mechanism decision tree produced: when to use M4L vs.\ Python Remote
+  Scripts vs.\ AbletonOSC for a given integration goal.
+
+  \item Live Object Model hierarchy documented to at least three levels: Song $\to$ Track $\to$
+  Clip with key observable properties identified.
+
+  \item Push 3 Standalone limitations (as of 2025/2026) documented alongside community
+  workarounds; Ableton Move capabilities enumerated.
+
+  \item Ableton Link protocol behavior documented: tempo negotiation, quantization, start/stop
+  independence, network topology.
+
+  \item Education ecosystem mapped: Certified Trainer program scale and structure; top
+  institutions; free learning resources available via ableton.com.
+
+  \item GSD integration pathways identified for at least three modules (suggested: Core
+  Architecture $\to$ workflow templates; Extensibility $\to$ Python script generation;
+  Hardware $\to$ Push/Move as GSD output device).
+
+  \item All instrument and device claims sourced to Ableton's official reference manual
+  (Version 12) or verifiable product announcements.
+
+  \item Document is self-contained: a reader with no prior Ableton knowledge can orient
+  themselves using Stage 1 alone.
+
+  \item Synthesis taxonomy produced linking instrument architecture to GSD mathematical
+  foundations (e.g., Operator's FM synthesis $\to$ complex number modulation from
+  \textit{The Space Between}).
+
+  \item Test plan covers all five modules with at least two tests per success criterion
+  and all safety-critical source-attribution tests passing.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Dependency Direction} \\
+\midrule
+Deep Audio Analyzer Mission & Prior GSD artifact & This mission extends audio analysis to DAW integration \\
+The Space Between (Tibsfox) & Mathematical spine & FM synthesis (Operator) maps to complex number modulation; L-Systems map to generative MIDI \\
+GSD-OS Desktop Vision & Platform context & Audio integration layer for GSD-OS uses Live extensibility findings \\
+College of Knowledge & Educational layer & Audio module seeded by this research; instrument taxonomy feeds curriculum \\
+Skill-Creator (v1.49+) & Execution engine & Mission handed to skill-creator for agent-based execution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+Ableton Live embodies the Amiga Principle at its most musical. A minimal architectural
+decision---two views sharing the same tracks---produces a creative topology that has reshaped
+how electronic music is made worldwide, contributed to the rise of global festival culture
+through the 2000s, and made the laptop a legitimate instrument on stage alongside guitars
+and drums. The sophistication is not in the number of features, but in the principled elegance
+of a single foundational idea: a clip is a bounded unit of musical potential, and the space
+between its launch and its commitment to the timeline is where music lives.
+
+In the GSD framework, this maps precisely to the subagent architecture: each agent operates
+on a bounded context (a clip), can be triggered non-linearly (Session View), and eventually
+contributes its output to a linear pipeline (Arrangement View). The Tab key between Session
+and Arrangement is the same conceptual move as GSD's transition from wave-based exploration
+to committed synthesis. Max for Live's extensibility model---where any Live parameter can be
+observed, queried, and controlled via the Live Object Model---is a precursor to the kind of
+deterministic inter-agent communication that DACP formalizes in the skill-creator ecosystem.
+The spaces between the clips are not silence; they are the architecture's most eloquent feature.
+
+% =========================================================
+% STAGE 2 — RESEARCH REFERENCE
+% =========================================================
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Ableton Live --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles findings from web research conducted March 27, 2026. All claims are
+sourced to Ableton's official documentation (Reference Manual Version 12), official product
+announcements, or established audio technology publications. Entertainment media and unsourced
+forum opinions are excluded from findings (though community forum context is used to identify
+known user pain points).
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Ableton AG} --- Official Reference Manual v12 (ableton.com/en/manual)
+  \item \textbf{Ableton Help Center} --- Product support and API documentation
+  \item \textbf{CDM Create Digital Music} --- Authoritative electronic music technology press
+  \item \textbf{Sound on Sound} --- Professional audio publication
+  \item \textbf{Cycling '74} --- Max/MSP developer (Max for Live partner)
+  \item \textbf{Wikipedia} --- Ableton Live article for historical facts and edition lists
+  \item \textbf{GitHub (ideoforms/AbletonOSC)} --- AbletonOSC open-source project
+  \item \textbf{GitHub (gluon/AbletonLive11\_MIDIRemoteScripts)} --- Community API documentation
+\end{itemize}
+
+\subsection{Module 01 Reference: Core Architecture and Audio Engine}
+
+\subsubsection{The Session View Paradigm}
+
+Ableton's Session View is designed explicitly for the non-linear creative modes that a
+traditional DAW timeline cannot support: live performance, DJing, improvisation, and
+score-reactive theatre work. According to the official Reference Manual Version 12, the view
+``centers around improvisation, looping, and clip launching'' and allows music to be structured
+and restructured without stopping playback.
+
+Each track in Session View contains a vertical column of clip slots. Each clip slot can hold
+one audio or MIDI clip. At any moment, at most one clip per track is playing. Scenes---rows
+across the Session grid---provide a mechanism for launching multiple clips simultaneously with
+a single trigger, enabling full ``song sections'' to fire at once.
+
+The \textbf{global launch quantization} setting is among Session View's most consequential
+controls: it determines how long Live waits after a clip trigger before actually starting
+playback, ensuring clips launch on a musically sensible boundary (a bar, a beat, etc.)
+rather than mid-phrase.
+
+\subsubsection{The Arrangement View Paradigm}
+
+The Arrangement View is a conventional horizontal timeline---analogous to the edit windows in
+Pro Tools, Cubase, or Logic---where clips are placed at specific positions in musical time.
+Audio and MIDI clips appear as colored blocks on track lanes; the user edits them by dragging,
+resizing, and applying automation envelopes.
+
+A critical and often-misunderstood feature governs the interaction between the two views:
+\textbf{Session clips and Arrangement clips on any given track are mutually exclusive}---only
+one can play at a time. When a Session clip is launched, Live halts that track's Arrangement
+playback in favor of the Session clip. The Arrangement only resumes when the user explicitly
+clicks the ``Back to Arrangement'' button, which lights up as a reminder that what is being
+heard differs from the saved Arrangement state.
+
+\subsubsection{Core Editing Capabilities (Arrangement View)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Feature} & \tableheader{Description} \\
+\midrule
+Clip warping & Audio clips can be time-stretched to any tempo using six Warp Modes \\
+Automation & All Live parameters can be automated as breakpoint curves on the timeline \\
+Time signature markers & Not quantized; can be placed anywhere; fragmentary bars supported \\
+Fade/crossfade & 4\,ms auto-crossfades on adjacent clips; custom fade handles available \\
+Selection-based editing & Cut, copy, paste, duplicate operate on timeline selections \\
+Waveform zoom & Vertical waveform zoom slider; non-destructive; applies to all audio tracks \\
+Locators & Named position markers for navigation during recording and performance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Edition Tiers}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Edition} & \tableheader{Instruments} & \tableheader{Notable Inclusions / Exclusions} \\
+\midrule
+Intro & 4 & Impulse, Simpler, Instrument Rack, Drum Rack; limited tracks \\
+Standard & 6+ & Adds External Instrument; unlimited tracks; all mixing effects \\
+Suite & 20 & All instruments; 58 audio effects; 14 MIDI effects; Max for Live; 71+ GB content \\
+Lite & (bundled) & Similar to Intro; bundled with hardware; not sold standalone \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 02 Reference: Instruments and Sound Design Arsenal}
+
+\subsubsection{Synthesis Architecture Taxonomy (Live 12 Suite)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Instrument} & \tableheader{Architecture} & \tableheader{Key Characteristics} \\
+\midrule
+Analog & Physical modeling & Simulates analog circuits via real-time math; no wavetables; warm, vintage character \\
+Collision & Physical modeling & Mallet percussion synthesis; two resonator bodies \\
+Electric & Physical modeling & Electric piano tine/fork mechanism; modeled in real time \\
+Tension & Physical modeling & String synthesis; bow, hammer, finger excitation models \\
+Operator & FM synthesis & 4-operator FM with subtractive filter and additive mix \\
+Wavetable & Wavetable & 2 oscillators + sub; wavetable morphing; analog-modeled filters \\
+Drift & Subtractive / MPE & MPE-capable subtractive; per-note pressure and slide \\
+Meld & Macro-oscillator / MPE & Bi-timbral; 2 macro oscillators with swappable engines; Mutable-inspired; 12-voice MPE \\
+Granulator III & Granular & Robert Henke's device; real-time audio capture; MPE; glissando and vibrato \\
+Sampler & Multi-sample & Multi-layer sampling; extensive modulation \\
+Simpler & Single-sample & Slice, Classic, 1-Shot modes; granular pitch in 1-Shot \\
+Impulse & Drum machine & 8-slot sample-based drum machine; per-slot tuning/stretch \\
+Drum Rack & Drum framework & Maps MIDI notes to instrument chains; 128-note capacity \\
+Drum Synths & Synthesis drums & 8 devices for kick, snare, hi-hat, etc.\ via synthesis \\
+Bass & Monophonic analog & Virtual analog bass; monophonic only \\
+Poli & Virtual analog & Subtractive + FM combination; polyphonic \\
+CV Instrument & Hardware bridge & Sends CV/gate signals to modular/analog gear \\
+CV Triggers & Hardware bridge & Gate triggers for modular/analog \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Live 12 New Instruments and Effects}
+
+\textbf{Meld} (new in Live 12): A bi-timbral, 12-voice MPE-capable synthesizer with two
+independent macro oscillators. Each oscillator offers multiple synthesis ``engines''---modes
+with different underlying algorithms (analog, wavetable, spectral, FM-like). Two macro controls
+per oscillator provide immediate sound-shaping without exposing underlying complexity. According
+to CDM's pre-release coverage (November 2023), Meld was designed to bridge accessible
+entry-level exploration with deep modular-inspired modulation---``for both ends of the
+spectrum.'' Its design was influenced by Mutable Instruments' Eurorack modules.
+
+\textbf{Roar} (new in Live 12): A multi-stage saturation and coloring effect. Three saturation
+stages configurable in serial, parallel, mid/side, or multiband modes. Built-in compressor and
+feedback routing. Full modulation matrix. The Ableton product page describes it as offering
+``subtle warmth to wild and unpredictable sound degradation.''
+
+\textbf{Granulator III} (updated in Live 12): Third generation of Robert Henke's granular
+synthesis device. New MPE capability enables per-note bends, glissando, and vibrato.
+Real-time audio capture added---start granularizing incoming audio immediately without
+pre-recording.
+
+\subsubsection{MPE Capability Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Instrument} & \tableheader{MPE Capable} & \tableheader{Notes} \\
+\midrule
+Meld & Yes & 12-voice polyphonic; per-note pressure, slide, bend \\
+Drift & Yes & Per-note modulation via MPE dimensions \\
+Granulator III & Yes (v3) & Bend, glissando, vibrato per note \\
+Wavetable & Partial & MPE support added in Live 11 \\
+Analog & No & Physical modeling; polyphonic but not MPE-native \\
+Operator & No & FM engine; polyphonic but not MPE-native \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 03 Reference: Hardware Ecosystem}
+
+\subsubsection{Push 3 --- Two Configurations}
+
+Push 3 (released May 2023) ships in two configurations:
+
+\textbf{Push 3 Controller:} Functions as a USB-powered control surface for Live running on a
+connected computer. Full feature parity with the standalone version for all controller
+functions. Significantly lower price point. Recommended entry point according to trained
+educators at Future Sound Academy.
+
+\textbf{Push 3 Standalone:} Contains an Intel NUC Compute Element (processor + RAM + WiFi
+in a credit-card-sized module). Runs a version of Live 12 Suite onboard without a computer.
+Battery life approximately 2.5 hours. Built-in 2-channel audio interface with 6.35\,mm balanced
+I/O. ADAT input/output sockets. Two stereo CV/gate signals (four mono). MIDI in/out. USB-A host
+port for class-compliant MIDI devices. The compute element and battery are user-replaceable.
+
+\textbf{Key Push 3 hardware features:}
+\begin{itemize}[leftmargin=1.5em]
+  \item 64 newly-developed MPE-capable pads (finger pressure and placement across X and Y axes)
+  \item Full-color display strip across the top
+  \item Large center encoder (new vs.\ Push 2)
+  \item Wi-Fi for over-the-air software updates and Ableton Link
+  \item Engineered originally in collaboration with Akai Professional (Push 1)
+\end{itemize}
+
+\textbf{Known limitation (as of early 2026):} Push 3 Standalone lacks a full Arrangement View,
+no Follow Actions, and no per-Scene time signatures or tempos. Community response has included
+a Max for Live--based arranger workaround (shared via Gumroad) that reconstructs basic
+arrangement functionality in pure Max without JavaScript.
+
+\subsubsection{Ableton Move (October 2024)}
+
+A compact standalone groovebox announced October 8, 2024. Features include: battery power,
+headphone socket, audio input, USB host port, USB-C. Positioned below Push 3 in the hardware
+lineup. Designed as a companion device for sketching ideas that export directly into Ableton
+Live. Community response noted limitations when used simultaneously with Push 3 (two devices
+cannot independently control two different tracks).
+
+\subsubsection{Ableton Link Protocol}
+
+Ableton Link is a network synchronization technology integrated into Live and a growing
+ecosystem of iOS and desktop applications. Key behaviors:
+\begin{itemize}[leftmargin=1.5em]
+  \item Keeps devices on the same local network in tempo and quantization phase
+  \item Each device starts and stops independently (no master/slave)
+  \item First app to join a session sets initial tempo; any participant can change tempo
+  \item When multiple participants change tempo simultaneously, last-write wins
+  \item MIDI Clock and MIDI Timecode also supported for non-Link hardware
+\end{itemize}
+
+\subsection{Module 04 Reference: Extensibility Layer}
+
+\subsubsection{Max for Live (M4L)}
+
+Max for Live integrates Cycling '74's Max/MSP visual programming environment directly into
+Live's device chain. M4L devices have full access to the Live Object Model (LOM) and can
+observe, query, and control any Live parameter. Key access mechanisms:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{live.object}, \texttt{live.observer}, \texttt{live.remote} Max objects
+  \item JavaScript support via \texttt{js} object (often preferred for complex LOM traversal)
+  \item Max for Live devices appear identically to native Live devices in the device chain
+  \item Live 12 adds ``Edit in Max'' option from device title bar context menu
+  \item Performance Pack (Live 12) ships four new M4L devices for live performance
+  \item LFO, Shaper, Envelope Follower M4L devices now allow offset adjustment of modulated
+  destinations---a significant usability improvement in Live 12
+\end{itemize}
+
+\subsubsection{Python MIDI Remote Scripts}
+
+Live's MIDI Remote Scripts are Python modules that configure control surfaces (hardware
+controllers). Key technical facts:
+\begin{itemize}[leftmargin=1.5em]
+  \item Live ships Python bytecode (\texttt{.pyc}) files for all supported controllers
+  \item Community member Julien Bayle (structure-void.com) decompiled these scripts beginning
+  in 2011, enabling unofficial modification and extension
+  \item Live 11 upgraded from Python 2 to Python 3; all custom scripts must use Python 3
+  \item Scripts live at: \texttt{Users/[user]/Music/Ableton/User Library/Remote Scripts} (macOS)
+  \item Full unofficial API documentation maintained by NSUSpray and Julien Bayle
+  \item Ableton's co-founder Robert Henke acknowledged the decompilation community early on:
+  community reports quote him as saying ``we know you can. do what you can but we won't support it''
+\end{itemize}
+
+\subsubsection{AbletonOSC}
+
+AbletonOSC (GitHub: ideoforms/AbletonOSC) is an open-source MIDI Remote Script providing
+comprehensive OSC (Open Sound Control) access to the full LOM:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Object Type} & \tableheader{Key Capabilities via OSC} \\
+\midrule
+Song & Tempo, track names, scene list, transport, global properties \\
+Track & Volume, pan, mute, solo, arm, send levels, clip slot queries \\
+Clip & Launch/stop, note query/add/remove, playing position, quantization \\
+Device & Parameter names and values, device enable/disable \\
+MIDI CC & Create CC-to-parameter assignments \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+AbletonOSC listens on port 11000 by default. A command-line console utility (\texttt{run-console.py})
+ships with the project for rapid testing.
+
+\subsubsection{Extensibility Decision Tree}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Goal} & \tableheader{Recommended Path} & \tableheader{Rationale} \\
+\midrule
+Build a custom instrument or effect & Max for Live & Full audio/MIDI processing in device chain \\
+Control Live parameters from external app & AbletonOSC & Network-accessible, no Live restart required \\
+Deep controller customization & Python Scripts & Closest to hardware; handles LED feedback \\
+No-code controller mapping & UserConfiguration.txt & Simplest path for basic transport/track control \\
+Automate Live from command line & AbletonOSC & Platform-agnostic; works over localhost or LAN \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 05 Reference: Education, Community, and Ecosystem}
+
+\subsubsection{Certified Trainer Program}
+
+Launched by Ableton in 2008. As of the most recent program data: more than 360 certified
+trainers operating across 50 countries in 38 languages. Certification requires an in-person
+event at a location sourced by Ableton; online certification is explicitly not offered.
+Candidates must demonstrate teaching and Live skills over several days of presentations.
+
+\textbf{Notable training institutions:}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{343 Labs} (New York City and Berlin): Production and performance community with
+  multiple Certified Trainers; free weekly masterclasses via Discord and YouTube
+  \item \textbf{Point Blank} (London, Los Angeles, Mumbai, Ibiza, China, Online): Named
+  ``Best Music Production School'' by DJ Mag; offers 2-year and 4-year degree programs
+  alongside Live training
+  \item \textbf{Delta Sound Labs} (Online, in collaboration with Case Western Reserve University,
+  Cleveland): Intensive online production education since 2018; synchronous winter/summer sessions
+\end{itemize}
+
+\subsubsection{Free Learning Resources}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Learning Music} (learningmusic.ableton.com): Browser-based synthesizer and
+  interactive lessons covering fundamentals of music making; no software installation required
+  \item \textbf{74 Creative Strategies for Electronic Producers}: Free online resource; tips
+  from Ableton's creative blog
+  \item \textbf{Ableton Reference Manual v12}: Comprehensive official documentation; among the
+  most thorough DAW manuals in the industry
+  \item \textbf{Loop Summit}: Ableton's annual conference for music makers; archived talks
+  available online
+\end{itemize}
+
+\subsubsection{Historical Context}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Live created by Gerhard Behles, Robert Henke, and Bernd Roggendorf in the mid-1990s
+  \item Ableton described as having ``made it easier for musicians to use computers as instruments
+  in live performance without programming''---Wikipedia credits this with contributing to the
+  rise of global festival culture in the 2000s
+  \item 2010: Max for Live introduced, enabling direct Max/MSP integration
+  \item 2016: Robert Henke left Ableton to focus on his artistic project Monolake; his
+  Granulator III device continues to ship with Live Suite
+  \item Push 1 (engineered by Akai Professional), Push 2 (2015), Push 3 (2023), Move (2024)
+  mark a hardware evolution from controller to standalone instrument
+\end{itemize}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Area} & \tableheader{Level} & \tableheader{Guidance} \\
+\midrule
+Source attribution & GATE & All instrument specs cite Ableton Reference Manual v12 or official product pages \\
+API documentation & ANNOTATE & Python decompilation community is unofficial; Ableton does not support it \\
+Pricing data & ANNOTATE & Prices change; cite at time of research and advise verification \\
+Push 3 Standalone limits & GATE & Document limitation status accurately per date; note community workarounds with appropriate caveats \\
+Robert Henke attribution & STANDARD & Granulator III is his device; credit accurately \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Primary: Official Ableton Documentation}
+\begin{itemize}[leftmargin=1.5em]
+  \item Ableton AG. \textit{Ableton Live Reference Manual, Version 12}. ableton.com/en/manual/ (2024--2026)
+  \item Ableton AG. \textit{Session View --- Reference Manual v12}. ableton.com/en/manual/session-view/
+  \item Ableton AG. \textit{Arrangement View --- Reference Manual v12}. ableton.com/en/manual/arrangement-view/
+  \item Ableton AG. \textit{Live Instrument Reference --- Manual v12}. ableton.com/en/manual/live-instrument-reference/
+  \item Ableton AG. \textit{Synchronizing with Link, Tempo Follower, and MIDI --- Manual v12}
+  \item Ableton AG. \textit{Live 12 Release Notes}. ableton.com/en/release-notes/live-12/
+  \item Ableton AG. \textit{What's New in Live 12}. ableton.com/en/live/
+  \item Ableton AG. \textit{Certification Program}. ableton.com/en/education/certification-program/
+  \item Ableton AG. \textit{Push 3 Manual}. ableton.com/en/push/manual/
+  \item Ableton AG. \textit{Meld: A Look at Live 12's New Bi-Timbral Synth} (blog post, 2024)
+  \item Ableton AG. \textit{Installing Third-Party Remote Scripts}. help.ableton.com
+  \item Ableton AG. \textit{Creating Your Own Control Surface Script}. help.ableton.com
+  \item Ableton AG. \textit{Controlling Live Using Max for Live}. help.ableton.com
+\end{itemize}
+
+\subsubsection{Professional and Technical Publications}
+\begin{itemize}[leftmargin=1.5em]
+  \item Sherburne, Philip. ``Ableton Live 12: A Guide to Everything That's New.'' \textit{CDM Create Digital Music}, November 17, 2023. cdm.link
+  \item Ableton Live. \textit{Wikipedia}. Accessed March 2026. (Historical facts and edition lists)
+  \item \textit{Resident Advisor}. ``Ableton Reveals New Features in Live 12.'' ra.co/news/79804, November 2023
+  \item \textit{Synth Anatomy}. ``Ableton Push 3 --- The Popular Live MIDI Controller Goes Standalone with MPE.'' May 23, 2023
+  \item \textit{Sound on Sound}. ``Ableton Live: Session \& Arrangement Views.'' soundonsound.com
+  \item Future Sound Academy. ``Ableton Push 3 Review 2026: Standalone vs Controller.'' 2026
+\end{itemize}
+
+\subsubsection{Open Source and Community}
+\begin{itemize}[leftmargin=1.5em]
+  \item Fisher, Ian (ideoforms). \textit{AbletonOSC}. GitHub: ideoforms/AbletonOSC (MIDI Remote Script for OSC control)
+  \item Bayle, Julien. \textit{Ableton Live 11 MIDI Remote Scripts (Decompiled)}. GitHub: gluon/AbletonLive11\_MIDIRemoteScripts; structure-void.com
+  \item NSUSpray. \textit{Unofficial Live API Documentation}. nsuspray.github.io/Live\_API\_Doc/
+\end{itemize}
+
+% =========================================================
+% STAGE 3 — MISSION PACKAGE
+% =========================================================
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, self-contained research document on Ableton Live 12 covering its
+core dual-view architecture, 20-instrument synthesis arsenal, hardware ecosystem (Push 3,
+Move, Ableton Link), extensibility layer (M4L, Python scripts, AbletonOSC/LOM), and education
+community. The deliverable serves as both a standalone reference and as the research foundation
+for integrating Ableton Live into the GSD ecosystem's audio analysis, College of Knowledge,
+and GSD-OS audio layer.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+MISSION: ABLETON LIVE DEEP RESEARCH
+=====================================
+
+[WAVE 0: FOUNDATION]
+  Haiku: Shared schemas, source index, bibliography template, test scaffolding
+  Output: ableton_schema.json, source_index.md
+
+[WAVE 1-A: CORE + INSTRUMENTS] (parallel)          [WAVE 1-B: HARDWARE + EXT] (parallel)
+  Sonnet (EXEC-1 + CRAFT-ARCH):                      Sonnet (EXEC-2 + CRAFT-EXT):
+    - Module 01: Core Architecture doc                  - Module 03: Hardware Ecosystem doc
+    - Module 02: Synthesis Arsenal doc                  - Module 04: Extensibility Layer doc
+  Opus: Domain analysis + LOM deep dive              Sonnet: LOM hierarchy mapping
+  Output: mod01.md, mod02.md                         Output: mod03.md, mod04.md
+
+[WAVE 1-C: EDUCATION] (parallel with 1-A and 1-B)
+  Sonnet (EXEC): Module 05: Education + Community doc
+  Output: mod05.md
+
+[CAPCOM GATE]: Human review of five module docs -- approve before synthesis
+
+[WAVE 2: SYNTHESIS]
+  Opus (INTEG + FLIGHT):
+    - Cross-module connections (instrument --> hardware MPE; LOM --> GSD DACP)
+    - Synthesis taxonomy (architecture --> Space Between math)
+    - GSD integration pathway document
+  Output: synthesis_notes.md, integration_map.md
+
+[WAVE 3: PUBLICATION + VERIFICATION]
+  Sonnet (VERIFY + LOG):
+    - Source validation against all module citations
+    - Final compiled PDF (XeLaTeX, 3 passes)
+    - Index HTML generation
+  Output: ableton_live_mission_final.pdf, index.html
+
+TOTAL: 3 parallel track waves + 1 synthesis + 1 publication
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}
+  \item \textbf{Foundation Layer}: Shared schema, source index, test scaffolding (Wave 0, Haiku)
+  \item \textbf{Research Layer A}: Core architecture and synthesis arsenal (Wave 1-A, Sonnet/Opus)
+  \item \textbf{Research Layer B}: Hardware ecosystem and extensibility (Wave 1-B, Sonnet)
+  \item \textbf{Research Layer C}: Education and community (Wave 1-C, Sonnet)
+  \item \textbf{Synthesis Layer}: Cross-module integration and GSD connection analysis (Wave 2, Opus)
+  \item \textbf{Publication Layer}: Compiled document and verification (Wave 3, Sonnet)
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 01: Core Architecture & Session/Arrangement model fully documented & Markdown, sourced to Ableton Manual v12 \\
+2 & Module 02: Synthesis Arsenal & All 20 instruments catalogued with taxonomy & Table + prose, sourced to Ableton Manual v12 \\
+3 & Module 03: Hardware Ecosystem & Push 3, Move, Link documented with limitations & Markdown, sourced to Ableton product pages \\
+4 & Module 04: Extensibility Layer & M4L/Python/OSC decision tree produced & Markdown with decision table \\
+5 & Module 05: Education Community & Trainer program, institutions, free resources & Markdown, sourced to ableton.com \\
+6 & Synthesis Document & Cross-module connections + GSD pathways & Markdown, Opus-produced \\
+7 & Final PDF & All 5 modules + synthesis compiled, LaTeX & XeLaTeX, 3-pass compilation \\
+8 & Index HTML & Download portal with usage instructions & HTML with color scheme matching PDF \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+Schema + source index & None & Haiku & 2K \\
+Module 01 (Core Arch) & Schema & Sonnet & 12K \\
+Module 02 (Synthesis) & Schema & Sonnet & 15K \\
+Module 03 (Hardware) & Schema & Sonnet & 10K \\
+Module 04 (Extension) & Schema & Sonnet & 12K \\
+Module 05 (Education) & Schema & Sonnet & 8K \\
+LOM deep analysis & Mod 04 & Opus & 10K \\
+Synthesis doc & Mod 01--05 & Opus & 15K \\
+GSD integration map & Synthesis & Opus & 8K \\
+PDF compilation & All modules & Sonnet & 6K \\
+Index HTML & PDF & Sonnet & 3K \\
+\midrule
+\multicolumn{3}{l}{\textbf{Total Estimated}} & \textbf{\textasciitilde 101K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Rationale} \\
+\midrule
+FLIGHT & Orchestrator & Opus (\textasciitilde 30\%) & Mission direction; cross-module synthesis judgment; GSD connection analysis \\
+EXEC-1 & Document prod & Sonnet (\textasciitilde 60\%) & Structured content assembly; Module 01--02 \\
+EXEC-2 & Document prod & Sonnet & Structured content assembly; Module 03--04 \\
+EXEC-3 & Document prod & Sonnet & Module 05 + Index HTML \\
+CRAFT-ARCH & Domain spec & Opus & Core architecture and LOM deep analysis \\
+CRAFT-EXT & Domain spec & Sonnet & Extensibility layer technical mapping \\
+SCOUT & Research & Haiku (\textasciitilde 10\%) & Web search gap-fill; source validation \\
+VERIFY & Verification & Sonnet & Citation tracing; accuracy checking \\
+INTEG & Integration & Opus & Cross-module relationship validation \\
+BUDGET & Resources & Haiku & Token tracking \\
+SURGEON & Health & Sonnet & Research quality monitoring \\
+LOG & Chronicle & Haiku & Commit messages; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Outputs} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Schema, source index, test scaffolding \\
+1-A & Core + Instruments & Parallel & Sonnet/Opus & Module 01, Module 02, LOM analysis \\
+1-B & Hardware + Extension & Parallel & Sonnet & Module 03, Module 04, decision tree \\
+1-C & Education & Parallel & Sonnet & Module 05 \\
+GATE & CAPCOM Review & --- & Human & 5-module review + approval \\
+2 & Synthesis & Sequential & Opus & Synthesis doc, GSD integration map \\
+3 & Publication & Sequential & Sonnet & Final PDF, Index HTML \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item System prompt (schema, source index, style guide) computed once in Wave 0 and
+  reused across all Wave 1 agents---\textbf{5-minute TTL cache window} exploited by
+  starting all three Wave 1 tracks within the same session
+  \item Shared attribute layer (instrument list, edition tiers, edition-instrument mapping)
+  produced in Wave 0 and injected into Modules 01 and 02 without re-derivation
+  \item LOM hierarchy analysis (Wave 1-A Opus) cached and passed directly into Wave 2
+  Synthesis agent---no re-traversal needed
+  \item Module markdown files passed to Wave 2 as document context, not re-generated
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input} & \tableheader{Output} & \tableheader{Total} & \tableheader{Notes} \\
+\midrule
+Wave 0 & 5K & 5K & 10K & Foundation only \\
+Wave 1-A & 20K & 30K & 50K & Core + Instruments, LOM \\
+Wave 1-B & 20K & 25K & 45K & Hardware + Extension \\
+Wave 1-C & 10K & 10K & 20K & Education \\
+Wave 2 & 50K & 25K & 75K & Synthesis (large context) \\
+Wave 3 & 30K & 10K & 40K & Publication + verification \\
+\midrule
+\multicolumn{3}{l}{\textbf{Grand Total}} & \textbf{240K} & \textbf{Across 3 sessions} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+[Wave 0: Schema] ──────────────────────────────────────────────┐
+        |                                                       |
+        ├──────────── [Wave 1-A] ─────────────────────────┐    |
+        |   Mod01 (Sonnet) ──> LOM Analysis (Opus)        |    |
+        |   Mod02 (Sonnet)                                 |    |
+        |                                                  |    |
+        ├──────────── [Wave 1-B] ─────────────────────┐   |    |
+        |   Mod03 (Sonnet)                            |   |    |
+        |   Mod04 (Sonnet) ──> Decision Tree          |   |    |
+        |                                             |   |    |
+        └──────────── [Wave 1-C] ─────────────────┐  |   |    |
+                     Mod05 (Sonnet)                |  |   |    |
+                                                   |  |   |    |
+                           [CAPCOM GATE]           |  |   |    |
+                               |                   |  |   |    |
+                    [Wave 2: Synthesis] <───────────┘──┘───┘    |
+                         Opus: Cross-module                      |
+                         Opus: GSD integration map               |
+                               |                                 |
+                    [Wave 3: Publication] <───────────────────────┘
+                         Sonnet: XeLaTeX PDF
+                         Sonnet: Index HTML
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}XC{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Purpose} & \tableheader{Count} & \tableheader{Action} \\
+\midrule
+Safety-critical & Non-negotiable source and attribution boundaries & 4 & BLOCK \\
+Core functionality & Module deliverable acceptance criteria & 20 & BLOCK \\
+Integration & Cross-module and GSD-connection validation & 6 & BLOCK \\
+Edge cases & Robustness and currency & 4 & LOG \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & \textbf{34} & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-SRC & Source quality & All instrument specs, hardware specs, and API documentation claims trace to Ableton's official manual, official product pages, CDM, or open-source GitHub repositories. Zero entertainment media. \\
+SC-NUM & Numerical attribution & Edition counts (20 instruments, 58 audio effects, 14 MIDI effects, 71\,GB content, 360+ trainers, 50 countries, 38 languages) each attributed to specific source \\
+SC-ADV & No advocacy & Document presents Ableton Live's features factually; no recommendation over competing DAWs; push-back on limitations documented objectively \\
+SC-API & API unofficial status & Python MIDI Remote Script decompilation and AbletonOSC clearly noted as unofficial/community tools; no claim that Ableton supports them \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Core Functionality Tests (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+CF-01 & Session/Arrangement exclusivity & Document explicitly states clip exclusivity rule and ``Back to Arrangement'' state transition \\
+CF-02 & Warping engine & Six Warp Modes documented with use-cases \\
+CF-03 & Instrument taxonomy completeness & All 20 Suite instruments listed with synthesis architecture \\
+CF-04 & MPE instrument identification & Table identifies which instruments support MPE and at what level \\
+CF-05 & Push 3 configuration accuracy & Standalone vs.\ Controller differences documented; Intel NUC cited \\
+CF-06 & Push 3 limitation currency & Arrangement View absence noted with date qualifier \\
+CF-07 & Ableton Move documented & October 2024 release; key form factor and capabilities \\
+CF-08 & Link protocol behavior & Tempo negotiation, start/stop independence, quantization documented \\
+CF-09 & M4L LOM access documented & At least three LOM object types with key properties listed \\
+CF-10 & Extensibility decision tree & Table or flowchart mapping integration goal to recommended mechanism \\
+CF-11 & Trainer program scale & 360+, 50 countries, 38 languages, since 2008 --- all four figures cited \\
+CF-12 & Free resources listed & Learning Music browser app and Reference Manual both identified \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+IN-01 & MPE hardware--instrument link & Push 3 MPE pads explicitly connected to MPE-capable instruments (Meld, Drift, Granulator III) \\
+IN-02 & Extensibility--hardware link & AbletonOSC access documented as applicable to Push 3 Standalone via network \\
+IN-03 & GSD subagent analogy & Synthesis document draws explicit connection between Session View clip model and GSD subagent architecture \\
+IN-04 & Space Between math link & Operator FM synthesis linked to complex number modulation from \textit{The Space Between} \\
+IN-05 & Cross-module data consistency & Instrument counts in Module 02 match edition table in Module 01 \\
+IN-06 & Self-containment & A reader with no prior Ableton knowledge can understand the full ecosystem from Stage 1 alone \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{3.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. Session/Arrangement model fully documented & CF-01, IN-06 & Pending \\
+2. All 20 instruments catalogued & CF-03, CF-04, IN-05 & Pending \\
+3. Extensibility decision tree produced & CF-09, CF-10 & Pending \\
+4. LOM documented to three levels & CF-09, IN-02 & Pending \\
+5. Push 3 limitations documented & CF-05, CF-06 & Pending \\
+6. Link protocol documented & CF-08 & Pending \\
+7. Education ecosystem mapped & CF-11, CF-12 & Pending \\
+8. GSD integration pathways & IN-03, IN-04 & Pending \\
+9. All claims sourced to official docs & SC-SRC, SC-NUM & Pending \\
+10. Document self-contained & IN-06 & Pending \\
+11. Synthesis taxonomy with math link & CF-03, IN-04 & Pending \\
+12. Test plan covers all modules & All CF, IN & Pending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent Name} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & Orchestrator & Mission direction; go/no-go gates; GSD synthesis \\
+PLAN & Planner & Wave decomposition; dependency management; cache planning \\
+SCOUT & Research Agent & Source gathering; gap-fill web research; bibliography \\
+EXEC-1 & Sonnet-Alpha & Module 01 + 02 document production \\
+EXEC-2 & Sonnet-Beta & Module 03 + 04 document production \\
+EXEC-3 & Sonnet-Gamma & Module 05 + Index HTML production \\
+CRAFT-ARCH & Tahoma & Core architecture and Live Object Model deep analysis \\
+CRAFT-EXT & Raven & Extensibility layer technical mapping \\
+VERIFY & Verification & Source validation; accuracy checking against Ableton Manual \\
+INTEG & Integration & Cross-module relationships; GSD pathway validation \\
+CAPCOM & HITL Interface & Human approval at module-review gate \\
+BUDGET & Resource Manager & Token budget tracking across 3 sessions \\
+SURGEON & Health Monitor & Research quality and citation completeness monitoring \\
+LOG & Osprey & Commit messages; milestone summaries; audit trail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission name & Ableton Live: Architecture, Extensibility \& Ecosystem \\
+Activation profile & Squadron (12 active roles; 14 crew total) \\
+Research modules & 5 (Core Architecture, Instruments, Hardware, Extension, Education) \\
+Wave count & 7 (0, 1-A, 1-B, 1-C, GATE, 2, 3) \\
+Parallel tracks & 3 (Waves 1-A, 1-B, 1-C run simultaneously) \\
+HITL gates & 1 (post Wave 1, pre Wave 2) \\
+Estimated token budget & 240K across 3 sessions \\
+Primary model & Sonnet (\textasciitilde 60\%) \\
+Judgment model & Opus (\textasciitilde 30\%) \\
+Scaffold model & Haiku (\textasciitilde 10\%) \\
+Deliverable count & 8 (5 modules + synthesis + PDF + HTML) \\
+Handoff target & gsd-skill-creator dev branch; \texttt{.planning/staging/inbox/} \\
+GSD milestone context & Post-v1.50 audio integration layer \\
+Safety tests & 4 mandatory-pass / BLOCK \\
+Core tests & 20 mandatory-pass / BLOCK \\
+Integration tests & 6 mandatory-pass / BLOCK \\
+Edge case tests & 4 best-effort / LOG \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``In Live's Arrangement View, as in all traditional sequencing programs, everything
+happens along a fixed song timeline. For a number of applications, this is a limiting paradigm.
+This is exactly what Live's unique Session View is for.''}
+
+\vspace{0.5em}
+{\small\sffamily\textcolor{subtlegray}{--- Ableton Reference Manual, Version 12 (paraphrased)}}
+
+\vspace{1em}
+\noindent The space between the Session's open field and the Arrangement's committed timeline
+is not a limitation to be engineered away. It is the creative gap where music---and
+agents---find their most interesting decisions. In the GSD ecosystem, every subagent lives
+in this space: bounded by its context window (a clip), free to launch non-linearly (Session
+View), and eventually committed to the pipeline (Arrangement View). Ableton Live did not
+invent this architecture. It discovered it.
+\end{quotebox}
+
+\end{document}

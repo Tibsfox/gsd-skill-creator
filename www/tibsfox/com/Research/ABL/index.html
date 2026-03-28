@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ableton Live &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-abl">
+  <header>
+    <h1>Ableton Live</h1>
+    <div class="subtitle">Core Architecture &middot; Instruments &middot; Hardware &middot; Extensibility &middot; Education</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-core-architecture">Core Architecture</a>
+      <a href="page.html?doc=02-instruments">Instruments</a>
+      <a href="page.html?doc=03-hardware-ecosystem">Hardware</a>
+      <a href="page.html?doc=04-extensibility">Extensibility</a>
+      <a href="page.html?doc=05-education-ecosystem">Education</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Ableton Live is not a conventional digital audio workstation. It is a philosophical statement
+      about the relationship between improvisation and composition &mdash; the space between a
+      free-flowing jam and a committed arrangement. The Tab key that switches between Session View
+      and Arrangement View is among the most philosophically loaded keystrokes in music software.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">20</span><span class="stat-label">Instruments</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">Live 12</span><span class="stat-label">Version</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Extension APIs</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-core-architecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Core Architecture</h3>
+        <div class="meta"><span class="tag tag-arch">Architecture</span> Track A &middot; Audio engine</div>
+        <p>Session View vs. Arrangement View duality. The dual-timeline paradigm, clip launching, scene triggering, Back to Arrangement mechanics. Audio engine internals: sample rate handling, latency compensation, warping algorithms (Complex Pro, Beats, Tones, Texture, Re-Pitch).</p>
+      </a>
+
+      <a href="page.html?doc=02-instruments" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Instruments &amp; Sound Design</h3>
+        <div class="meta"><span class="tag tag-synth">Synthesis</span> Track A &middot; Sound design</div>
+        <p>Complete taxonomy of all 20 Live 12 instruments: Analog, Operator, Wavetable, Meld, Drift, Collision, Tension, Electric, Granulator III, Sampler, Simpler, and more. Synthesis architectures mapped: subtractive, FM, wavetable, physical modeling, granular, MPE-native.</p>
+      </a>
+
+      <a href="page.html?doc=03-hardware-ecosystem" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Hardware Ecosystem</h3>
+        <div class="meta"><span class="tag tag-hw">Hardware</span> Track B &middot; Controllers</div>
+        <p>Push 3 (standalone and tethered), Ableton Move, Ableton Link protocol. The evolution from Push 1 through Push 3's ARM-based standalone mode. Hardware-software co-design philosophy. Link's peer-to-peer tempo synchronization across devices.</p>
+      </a>
+
+      <a href="page.html?doc=04-extensibility" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Extensibility Layer</h3>
+        <div class="meta"><span class="tag tag-ext">Extension</span> Track B &middot; APIs</div>
+        <p>Max for Live (M4L) visual patching with full Live Object Model access. Python MIDI Remote Scripts for control surface integration. AbletonOSC for network-based parameter control. LOM hierarchy documented to three levels. Decision tree: when to use which API.</p>
+      </a>
+
+      <a href="page.html?doc=05-education-ecosystem" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Education &amp; Ecosystem</h3>
+        <div class="meta"><span class="tag tag-edu">Education</span> Synthesis &middot; Community</div>
+        <p>Ableton Certified Trainer program, institutional partnerships, Learning Synths and Learning Music web apps. Loop Summit and community events. The ecosystem of third-party Max for Live developers, Pack creators, and the Ableton user community.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Session/Arrangement duality</td><td>M1, M3, M4</td><td>FLS, OCT, WAL</td></tr>
+        <tr><td>Audio engine &amp; warping</td><td>M1, M2</td><td>FLS, DAA, WAL</td></tr>
+        <tr><td>Synthesis architectures</td><td>M2, M4</td><td>FLS, OCT, SYN</td></tr>
+        <tr><td>MPE / expressive control</td><td>M2, M3</td><td>FLS, WAL</td></tr>
+        <tr><td>Push hardware design</td><td>M3, M1</td><td>OCT, WAL</td></tr>
+        <tr><td>Max for Live / LOM</td><td>M4, M2, M5</td><td>WAL, SYN</td></tr>
+        <tr><td>Python scripting APIs</td><td>M4, M3</td><td>FLS, NEH</td></tr>
+        <tr><td>OSC protocol</td><td>M4</td><td>SYS, WAL</td></tr>
+        <tr><td>Music education platforms</td><td>M5, M1</td><td>FLS, WAL, OCT</td></tr>
+        <tr><td>Link tempo sync</td><td>M3, M1</td><td>WAL, SYS</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+ABLETON LIVE ECOSYSTEM -- DOMAIN MAP
+===============================================================
+
+  SESSION VIEW              ARRANGEMENT VIEW        AUDIO ENGINE
+  +---------------+         +----------------+      +---------------+
+  | Clip Slots    |         | Linear Timeline|      | Core Audio    |
+  | Scene Launch  |--------&gt;| Automation     |-----&gt;| ASIO / WASAPI |
+  | Non-linear    |   Tab   | Left-to-right  |      | Warping Algos |
+  | Improvisation |   key   | Composition    |      | PDC / Latency |
+  +---------------+         +----------------+      +---------------+
+        |                         |                       |
+        v                         v                       v
+  +---------------+         +----------------+      +---------------+
+  | Instruments   |         | Hardware       |      | Extension     |
+  | 20 synths     |         | Push 3         |      | Max for Live  |
+  | Sampler/Simpl |         | Move / Link    |      | Python MIDI   |
+  | Effects chain |         | Standalone ARM |      | AbletonOSC    |
+  +---------------+         +----------------+      +---------------+
+        |                         |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |    EDUCATION LAYER    |
+                    |                       |
+                    |  Certified Trainers   |
+                    |  Learning Synths      |
+                    |  Loop Summit          |
+                    |  Pack Ecosystem       |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Core Architecture] --------&gt; [M3: Hardware Ecosystem]
+       |      (audio engine, views)          |
+       |                                     |
+       v                                     v
+  [M2: Instruments] --------&gt; [M4: Extensibility Layer]
+       |                              |
+       |                              |
+       +----------- + ---------------+
+                     |
+                     v
+          [M5: Education &amp; Ecosystem]
+          (community, certification, learning)
+
+  Parallel tracks:
+    Track A: M1 + M2 (core architecture + instruments)
+    Track B: M3 + M4 (hardware + extensibility)
+    Synthesis: M5 (education + cross-module integration)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Ableton Live &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
