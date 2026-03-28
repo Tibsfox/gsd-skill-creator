@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Governance &mdash; PNW Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-mgu">
+  <header>
+    <h1>Module Governance</h1>
+    <div class="subtitle">Versioning &middot; Upstream Intelligence &middot; Governance Frameworks &middot; Change Management &middot; Quality Gates</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-module-versioning-foundations">Versioning</a>
+      <a href="page.html?doc=02-upstream-dependency-tracking">Upstream Tracking</a>
+      <a href="page.html?doc=03-governance-frameworks-modular-systems">Governance</a>
+      <a href="page.html?doc=04-change-management-approval-workflows">Change Mgmt</a>
+      <a href="page.html?doc=05-quality-gates-open-ecosystems">Quality Gates</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      A version number is a promise. A governance framework is the system that ensures promises are kept.
+      When Module 05 grew to 706 lines with TypeScript interfaces, ASCII diagrams, and token budget
+      analysis inside a container sized for 400 lines, the content wasn't wrong &mdash; the container was.
+      Module governance is the practice of drawing boundaries that respect what things are, not just
+      how big they are. The Amiga didn't achieve its reputation by cramming everything into one chip.
+      The magic was in the boundaries.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Research Modules</span></div>
+      <div class="stat"><span class="stat-value">28</span><span class="stat-label">Test Cases</span></div>
+      <div class="stat"><span class="stat-value">5</span><span class="stat-label">Safety-Critical</span></div>
+      <div class="stat"><span class="stat-value">2</span><span class="stat-label">Parallel Tracks</span></div>
+      <div class="stat"><span class="stat-value">80+</span><span class="stat-label">Sources Cited</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Deliverables</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-module-versioning-foundations" class="card" style="text-decoration:none;color:inherit">
+        <h3>M1: Module Versioning Foundations</h3>
+        <div class="meta"><span class="tag tag-version">Versioning</span> Track A &middot; Semantic contracts</div>
+        <p>Semantic versioning as a communication protocol. Module identity and namespacing. Version pinning strategies. Drift detection and currency monitoring. The frozen snapshot problem. Automated version sentinels and their design principles.</p>
+      </a>
+
+      <a href="page.html?doc=02-upstream-dependency-tracking" class="card" style="text-decoration:none;color:inherit">
+        <h3>M2: Upstream Dependency Tracking</h3>
+        <div class="meta"><span class="tag tag-supply">Supply Chain</span> Track A &middot; Dependency intelligence</div>
+        <p>Dependency graphs as infrastructure. Direct vs. transitive dependencies and the transitive risk multiplier. Supply chain attacks and trust boundaries. SBOM standards (SPDX, CycloneDX). The npm and Cargo ecosystems as case studies.</p>
+      </a>
+
+      <a href="page.html?doc=03-governance-frameworks-modular-systems" class="card" style="text-decoration:none;color:inherit">
+        <h3>M3: Governance Frameworks for Modular Systems</h3>
+        <div class="meta"><span class="tag tag-gov">Governance</span> Track B &middot; Policy architecture</div>
+        <p>Change management frameworks (ITIL, Kotter). Approval workflows and HITL gates. Quality gates in CI/CD. The governance problem in open ecosystems. CNCF graduation model. RFC processes. Ostrom's commons governance principles.</p>
+      </a>
+
+      <a href="page.html?doc=04-change-management-approval-workflows" class="card" style="text-decoration:none;color:inherit">
+        <h3>M4: Change Management &amp; Approval Workflows</h3>
+        <div class="meta"><span class="tag tag-change">Change Mgmt</span> Track B &middot; Promotion pipelines</div>
+        <p>The promotion problem. Document class taxonomy. Size contracts as governance instruments. The promotion pipeline from detection through validation. Pointer reference architecture. Content integrity during promotion. Module 05 case study.</p>
+      </a>
+
+      <a href="page.html?doc=05-quality-gates-open-ecosystems" class="card" style="text-decoration:none;color:inherit">
+        <h3>M5: Quality Gates &amp; the Governance Problem in Open Ecosystems</h3>
+        <div class="meta"><span class="tag tag-gate">Quality</span> Track B &middot; Enforcement &amp; health</div>
+        <p>Gate design principles and taxonomy. The Governance Ledger as verification matrix. Ecosystem health monitoring. License and security governance. SLSA build integrity framework. Governance patterns from Kubernetes, Rust, Apache, and Debian.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Semantic versioning</td><td>M1, M4, M5</td><td>PMG, GSD2, CDL</td></tr>
+        <tr><td>Dependency graphs</td><td>M2, M3, M4</td><td>K8S, SYS, GSD2</td></tr>
+        <tr><td>Supply chain security</td><td>M2, M3, M5</td><td>SYS, ACE, K8S</td></tr>
+        <tr><td>Version drift / sentinels</td><td>M1, M2, M5</td><td>SYS, K8S, PMG</td></tr>
+        <tr><td>Size contracts / promotion</td><td>M1, M3, M4</td><td>GSD2, COK, ACE</td></tr>
+        <tr><td>SBOM standards</td><td>M2, M4</td><td>SYS, CDL, K8S</td></tr>
+        <tr><td>Quality gates / CI-CD</td><td>M3, M5</td><td>K8S, SYS, CDL</td></tr>
+        <tr><td>Open ecosystem governance</td><td>M3, M5</td><td>PMG, ACE, COK</td></tr>
+        <tr><td>CNCF graduation model</td><td>M3, M5</td><td>K8S, GSD2, ACE</td></tr>
+        <tr><td>Module identity / namespacing</td><td>M1, M3, M4</td><td>GSD2, MCF, COK</td></tr>
+        <tr><td>Governance Ledger</td><td>M3, M4, M5</td><td>GSD2, COK, PMG</td></tr>
+        <tr><td>License / security governance</td><td>M2, M5</td><td>CDL, SYS, ACE</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Domain Architecture</h2>
+
+    <pre>
+MODULE GOVERNANCE -- DOMAIN MAP
+===============================================================
+
+  VERSION DOMAIN           GOVERNANCE DOMAIN       ENFORCEMENT DOMAIN
+  +---------------+       +----------------+      +----------------+
+  | Semantic Ver  |       | Document Class |      | Quality Gates  |
+  | Module ID     |------&gt;| Size Contracts |-----&gt;| CI/CD Pipeline |
+  | Pinning       |       | Promotion Trig |      | HITL Gates     |
+  | Drift Detect  |       | Approval Flow  |      | Gov. Ledger    |
+  +---------------+       +----------------+      +----------------+
+        |                       |                       |
+        v                       v                       v
+  +---------------+       +----------------+      +----------------+
+  | Version       |       | Change Mgmt    |      | Ecosystem      |
+  | Sentinels     |       | RFC Process    |      | Health Monitor |
+  | SBOM / BOM    |       | Pointer Arch.  |      | License Audit  |
+  | Lockfile      |       | Content Integ. |      | Security Scan  |
+  +---------------+       +----------------+      +----------------+
+        |                       |                       |
+        +-----------------------+-----------------------+
+                                |
+                    +-----------+-----------+
+                    |   SUPPLY CHAIN LAYER  |
+                    |                       |
+                    |  Dependency Graphs    |
+                    |  Transitive Risk      |
+                    |  Trust Boundaries     |
+                    |  Attack Vectors       |
+                    |  Commons Governance   |
+                    +-----------------------+
+    </pre>
+
+    <h2>Module Dependency Graph</h2>
+
+    <pre>
+MODULE DEPENDENCY GRAPH
+===============================================================
+
+  [M1: Versioning Foundations] --------&gt; [M2: Upstream Tracking]
+         |                                       |
+         |                                       |
+         v                                       v
+  [M4: Change Mgmt &amp; Promotion] &lt;--- [M3: Governance Frameworks]
+                    |
+                    v
+         [M5: Quality Gates &amp; Ecosystems]
+
+  Parallel tracks:
+    Track A: M1 + M2 (version intelligence + supply chain)
+    Track B: M3 + M4 + M5 (governance + change + enforcement)
+    </pre>
+  </main>
+
+  <footer>
+    <p>Module Governance &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
