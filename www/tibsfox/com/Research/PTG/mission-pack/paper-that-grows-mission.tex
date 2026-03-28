@@ -1,0 +1,1100 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% === COLOR SCHEME: Botanical / Community (Ecology + Civic) ===
+\definecolor{primary}{HTML}{1B5E20}
+\definecolor{secondary}{HTML}{2E7D32}
+\definecolor{tertiary}{HTML}{4E342E}
+\definecolor{accent}{HTML}{388E3C}
+\definecolor{lightprimary}{HTML}{E8F5E9}
+\definecolor{lightsecondary}{HTML}{F1F8E9}
+\definecolor{lighttertiary}{HTML}{EFEBE9}
+\definecolor{stageB}{HTML}{1565C0}
+\definecolor{stageC}{HTML}{4A148C}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% === SECTION FORMATTING ===
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% === CUSTOM ENVIRONMENTS ===
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% === HEADERS / FOOTERS ===
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{Paper That Grows}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% === HYPERLINKS ===
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Fox Infrastructure Group},
+  pdftitle={Paper That Grows -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+%  TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{Paper That Grows\\[0.3em]The Living Community Newsletter}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Hyperlocal Publishing · Native Seed Integration · Circular Delivery}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Deep Research Study}}
+
+\vspace{3cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{3cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 27, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles) \quad|\quad Estimated: 6--8 context windows across 3--4 sessions}}
+\end{center}
+\newpage
+
+% ============================================================
+%  TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+%  STAGE 1 — VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Paper That Grows --- Vision Guide}
+
+\metafield{Date:}{March 27, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends On:}{Fox Infrastructure Group ecosystem; PNW bioregion taxonomy; GSD Skill-Creator v1.49+}
+\metafield{Context:}{Community systems design · Ecological restoration · Hyperlocal publishing · Circular economy}
+
+\subsection{Vision}
+
+There is a kind of mail that arrives on Monday and is gone by spring. Not discarded, not recycled, not shredded --- but planted. The \textit{Paper That Grows} concept begins with a simple inversion: what if the final act of reading your community newsletter was pressing it gently into the soil?
+
+The vision is a weekly, opt-in hyperlocal newsletter printed on fully biodegradable, seed-embedded paper manufactured locally from post-consumer pulp. The pulp is balanced --- pH-neutral, chlorine-free, bound with biodegradable non-toxic agents --- so that the finished sheet requires nothing more than placement on the ground and modest moisture to begin its second life as a flowering plant that supports the local food chain. Seeds are selected not from a generic wildflower catalog but from a microclimate-specific palette: the exact species whose roots stabilize the specific soils of that neighborhood, whose blooms feed the specific pollinators that visit those blocks, whose seed heads feed the birds that winter in those streets.
+
+The newsletter itself is the connective tissue of local commerce and community. Restaurants update their weekly specials. Local services announce availability. Neighborhood events are listed. All of it is opt-in, meaning every copy delivered is a copy wanted. An always-current digital edition mirrors the print, so nothing is stale. Advertising is hyperlocal and relevant --- businesses reaching the precise households most likely to walk through their door. Produced over the weekend, delivered Monday morning, composted into living ground cover by the following season.
+
+This is not merely an ecological gesture. It is a systems redesign of the junk mail problem --- one of the most invisible and persistent environmental failures of modern consumer culture. Americans receive an average of 41 pounds of junk mail per household annually, with 44 percent going to the landfill unopened, requiring more than 100 million trees per year and 28 billion gallons of water to produce. The Paper That Grows model reframes the entire postal advertising stack: instead of unsolicited mass saturation, a trusted, wanted, locally-produced artifact that literally grows the ecosystem it lands in.
+
+The Amiga Principle applies at every layer. The paper does not need to be buried, watered with precision, or tended. It needs only to be placed. The seed selection does not require a botanist per delivery zone --- it requires a one-time curation pass per microclimate region, producing a durable seed matrix that is then embedded at manufacturing scale. The business model does not require a newsroom --- it requires a template, a local ad-sales relationship, and a weekend production cycle. Small, principled inputs; staggering outputs. The space between a discarded flyer and a flowering meadow is exactly one intentional act.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Junk mail is ecologically catastrophic and broadly unwanted.} Over 100 million trees are destroyed annually to produce direct mail in the United States, generating greenhouse gas emissions equivalent to more than 9 million cars. Approximately 44 percent is discarded unopened. There is currently no federal opt-out mechanism for Every Door Direct Mail (EDDM), making it legally impossible for residents to refuse saturation advertising.
+
+  \item \textbf{Local advertising has no efficient, trusted physical channel.} Small businesses --- restaurants, services, repair shops --- struggle to reach their immediate neighborhood audience. National digital platforms absorb advertising dollars without creating local community value. Print options tend toward either expensive glossy formats or mass-blast saturation mailing, neither of which builds genuine neighborhood trust or ecological goodwill.
+
+  \item \textbf{Native plant restoration lacks an accessible delivery vector.} Pacific Northwest microclimates are host to dozens of pollinator-critical native species --- camas, miner's lettuce, Clarkia, yarrow, aster --- whose populations are under pressure from habitat loss, invasive species, and climate-driven phenological mismatch. Restoration programs exist but require homeowner action, nursery access, and horticultural knowledge. A passive seed delivery system that requires no action beyond placement eliminates all three barriers.
+
+  \item \textbf{The circular economy of print media ends at recycling, not restoration.} Recycled paper is a closed loop: paper becomes paper. The Paper That Grows model opens a new loop --- paper becomes soil amendment, becomes root zone, becomes flower, becomes pollinator habitat, becomes food chain. Composting without the second life of germination is a lower-order outcome than this living chain.
+
+  \item \textbf{Hyperlocal publishing models lack physical differentiation.} Newsletters proliferate digitally but lack physical presence and community ritual. The act of receiving, reading, and planting a newsletter creates a tangible community ritual --- an analog engagement that no email open rate can replicate. The physical artifact has narrative value beyond its content.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{One-Line Model:} A locally-manufactured, seed-embedded, soy-ink-printed weekly newsletter that completes its lifecycle as native plant habitat.
+
+The model operates at three simultaneous levels: (1) a sustainable paper substrate that composts without toxin residue and germinates without intervention; (2) a hyperlocal community publishing platform with print and digital editions, weekly local advertising, and opt-in-only distribution; and (3) an ecological restoration delivery mechanism that seeds microclimate-appropriate native plants across residential and commercial landscapes at neighborhood scale.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+PAPER THAT GROWS - SYSTEM LAYERS
+=================================
+
+  ECOLOGICAL LAYER
+  +--------------+    +------------------+    +------------------+
+  | Seed Curation|    | Pulp Substrate   |    | Compost/Germinate|
+  | per microzone|    | pH-balanced      |    | Ground placement |
+  | Non-invasive |    | Non-toxic binder |    | No intervention  |
+  | Non-GMO seed |    | Recycled fiber   |    | needed           |
+  +--------------+    +------------------+    +------------------+
+         |                    |                       |
+         +--------------------+-----------------------+
+                              |
+                      MATERIAL LAYER
+         +--------------------+-----------------------+
+         |                    |                       |
+  +------+-------+   +--------+-------+   +----------+-----+
+  | Local Pulp   |   | Soy/Vegetable  |   | Weekend Print  |
+  | Manufacturer |   | Ink Printing   |   | Production Run |
+  | (contracted) |   | Zero VOC       |   | Offset press   |
+  +--------------+   +----------------+   +----------------+
+                              |
+                     PUBLISHING LAYER
+         +--------------------+-----------------------+
+         |                    |                       |
+  +------+-------+   +--------+-------+   +----------+-----+
+  | Weekly Local |   | Digital Mirror |   | Monday Morning |
+  | Advertising  |   | Always current |   | Opt-in Deliver |
+  | Restaurant   |   | QR code bridge |   | USPS / local   |
+  | menus/svcs   |   | Online edition |   | carrier route  |
+  +--------------+   +----------------+   +----------------+
+                              |
+                     COMMUNITY LAYER
+  +--------------------+-----+---------------------+
+  |                    |                            |
+  | Opt-in Subscriber  | Local Business             |
+  | (household unit)   | Advertiser Network         |
+  | Registers once     | Weekly menu + service ads  |
+  | plants newsletter  | Restaurant specials        |
+  +--------------------+----------------------------+
+\end{asciibox}
+
+\subsubsection{Research Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+===================
+
+  MODULE 01         MODULE 02         MODULE 03
+  Seed Paper        Native Plant      Eco-Printing
+  Material Sci.     Ecosystem Integ.  Technology
+  +-----------+     +-----------+     +-----------+
+  | Pulp      |     | Microzone |     | Soy Ink   |
+  | chemistry |     | seed sel. |     | Offset    |
+  | Germinate |     | Food chain|     | VOC-free  |
+  | viability |     | Pollin.   |     | Weekend   |
+  +-----------+     +-----------+     | production|
+       |                 |            +-----------+
+       +--------+--------+                 |
+                |                          |
+       +--------+--------+                 |
+       |                 |                 |
+  MODULE 04         MODULE 05         All Modules
+  Hyperlocal        Circular Econ.    Converge
+  Publishing        & Regulatory      Final Design
+  +-----------+     +-----------+     +-----------+
+  | Opt-in    |     | Junk mail |     | Integrated|
+  | ad model  |     | law       |     | spec for  |
+  | Digital   |     | Opt-in    |     | v1.0 of   |
+  | mirror    |     | framework |     | Paper That|
+  | Community |     | Lifecycle |     | Grows     |
+  | ritual    |     | metrics   |     +-----------+
+  +-----------+     +-----------+
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 01: Seed Paper Material Science}
+Investigation of seed-embedded paper manufacturing: pulp composition (recycled cotton, paper, wood fiber), biodegradable binder chemistry, seed integration methods that preserve germination viability, pH balance requirements for ground placement without soil amendment, scale-up from artisan to commercial production, and germination rate benchmarking under PNW climate conditions.
+
+\subsubsection{Module 02: Native Plant Ecosystem Integration}
+Curation of microclimate-specific native seed palettes for PNW bioregions (Maritime Northwest and Inland Northwest separately). Species selection criteria: food chain support value, pollinator specificity, seed size compatibility with paper embedding, germination without tillage, non-invasive status, non-GMO sourcing. Cross-reference against Xerces Society pollinator plant lists and NRCS USDA plant materials guidance.
+
+\subsubsection{Module 03: Eco-Printing Technology}
+Survey of soy-based and water-based inks compatible with seed paper substrate: VOC emission profiles, color gamut, drying time on porous uncoated stock, toxicity at soil contact, compatibility with offset and flexographic printing. Weekend production cycle design: batch sizing, press scheduling, distribution timing for Monday delivery. QR code integration for digital edition bridge.
+
+\subsubsection{Module 04: Hyperlocal Community Publishing Model}
+Business architecture for an opt-in weekly newsletter: advertiser acquisition (restaurants, services, local retailers), tiered ad format options, digital edition platform, subscriber management, production workflow (Friday close, weekend print, Monday delivery), revenue model, community trust-building and ritual formation. Case studies: Naptown Scoop, Crosstown LA, Reporter Newspapers.
+
+\subsubsection{Module 05: Circular Economy and Regulatory Framework}
+Environmental impact quantification: junk mail waste statistics (100M trees/year, 28B gallons water), comparison to Paper That Grows lifecycle. Opt-in regulatory landscape: DMA Do Not Mail list, EDDM limitations, state-level Do Not Mail bill history, Netherlands JA/JA opt-in model, Germany Keine Werbung precedent. Composting and germination lifecycle metrics. Carbon sequestration credit potential.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+# paper-that-grows-chipset.yaml
+# Amiga-inspired agent allocation for the Paper That Grows mission
+
+agnus:   # Orchestration / DMA / Context Management
+  model: claude-opus-4-6
+  role: FLIGHT
+  responsibilities:
+    - Ecosystem integration (all 5 modules into coherent design)
+    - Seed selection cultural/ecological sensitivity review
+    - Regulatory gap detection
+    - Final synthesis of material + publishing + ecosystem specs
+
+denise:  # Display / Output Rendering
+  model: claude-sonnet-4-6
+  role: EXEC (x2)
+  responsibilities:
+    - Module document production (01-02 Track A, 03-05 Track B)
+    - LaTeX compilation and formatting
+    - Digital edition specification
+    - Ad template design specs
+
+paula:   # Audio / I-O / Anticipatory
+  model: claude-haiku-4-5
+  role: PLAN + BUDGET + LOG
+  responsibilities:
+    - Wave decomposition and dependency tracking
+    - Token budget monitoring
+    - Shared seed schema and pulp spec YAML generation
+    - Commit message generation
+
+68000:   # CPU / Glue Logic
+  model: claude-sonnet-4-6
+  role: CRAFT-ECO + CRAFT-PUB
+  responsibilities:
+    - CRAFT-ECO: Native plant species curation per microzone
+    - CRAFT-PUB: Hyperlocal publishing business model analysis
+    - VERIFY: Source validation against USDA/Xerces/EPA
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Seed paper substrate specification: pulp formula, binder chemistry, seed integration method
+  \item Native plant seed palette for 3 PNW microzones (Maritime Coast, Puget Lowland, Inland Northwest)
+  \item Eco-ink specification: soy/water-based, VOC-free, soil-safe at compost contact
+  \item Hyperlocal newsletter business model: opt-in distribution, local advertiser tiers, weekly cadence
+  \item Digital edition architecture: always-current online mirror with QR bridge
+  \item Production cycle design: Friday ad close, weekend print run, Monday delivery
+  \item Circular economy lifecycle: delivery $\rightarrow$ read $\rightarrow$ plant $\rightarrow$ compost $\rightarrow$ germinate
+  \item Regulatory compliance framework: opt-in postal law, DMA compliance, non-invasive seed certification
+  \item Environmental impact comparison: Paper That Grows vs. conventional EDDM junk mail
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[leftmargin=1.5em]
+  \item Paper manufacturing facility construction (contracted local supplier model)
+  \item Seed breeding or cultivation (sourced from certified non-GMO native nurseries)
+  \item Full USPS carrier route logistics (assumed third-party or standard postal service)
+  \item Tree species or large-seed plants (seed size constraint: compatible with paper pulp embedding)
+  \item National rollout architecture (v1.0 is single neighborhood / pilot community)
+  \item Political advocacy for Do Not Mail legislation (documented as context, not mission scope)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item Seed paper substrate passes compostability certification (EN 13432 or equivalent) and demonstrates non-toxic soil contact profile.
+  \item Germination rate of embedded native seeds meets or exceeds 60\% under standard PNW spring conditions (no soil amendment required).
+  \item Pulp pH is within 6.0--7.5 range (neutral to slightly acidic), appropriate for ground placement across PNW soil types without additional amendment.
+  \item Minimum 3 distinct native seed palettes are specified --- one per PNW microclimate zone --- each containing at least 4 species with documented food chain support value (pollinator, bird, beneficial insect).
+  \item All ink formulations are verified as: zero VOC, fully biodegradable, non-toxic at 100\% soil contact, and compatible with offset printing on uncoated seed paper stock.
+  \item A complete weekend production schedule is specified: Friday ad close, Saturday pulp/print, Sunday dry/package, Monday delivery --- including minimum batch sizes and press specifications.
+  \item The digital edition architecture supports real-time updates (restaurant menu changes, service availability) and is accessible via QR code printed on the physical edition.
+  \item The advertiser model supports at least 3 tiers (micro-business, standard, premium) with pricing validated against hyperlocal newsletter market rates (CPM benchmarks from Lenfest Institute or equivalent).
+  \item Opt-in subscriber management system satisfies DMA Mail Preference Service requirements and is structured to prohibit list rental, sale, or exchange.
+  \item Environmental lifecycle analysis demonstrates measurable improvement over conventional EDDM on at least 3 metrics (paper mass, carbon, water, landfill contribution).
+  \item A pilot community specification is complete: subscriber count target, geographic radius, advertiser count minimum, and launch production run volume.
+  \item Safety review confirms no introduced invasive species, no prohibited seed types per Washington State Noxious Weed Control Board or equivalent state authority.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Interface} \\
+\midrule
+Fox Infrastructure Group Plan & Sibling initiative & FoxEnergy local print supply chain; FoxFiber distribution network potential \\
+GSD Foxfire Heritage Skills Vision & Parallel & Traditional craft knowledge of local paper-making and plant lore \\
+GSD Fair Use Educational Mission & Supporting & Seed identification guides and planting instructions content \\
+GSD BBS Educational Pack Vision & Supporting & Neighborhood newsletter as digital/analog hybrid learning node \\
+The Space Between & Philosophical spine & Amiga Principle; meaning in the spaces between nodes; versine gaps \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The spaces between. The junk mail that fills the mailbox is information that fills a space with noise --- a broadcast into a void, expecting nothing back, offering nothing forward. The Paper That Grows newsletter is different in kind, not just degree. It does not fill a space; it opens one. The space between reading and planting. The space between a neighborhood block and the food web that supports the sparrows nesting in the eaves above it. The space between a restaurant's weekly special and the camas blooming two seasons later in the planter out front.
+
+This is the Amiga Principle operating at the neighborhood scale. The newsletter itself is modest --- a sheet or two, printed over the weekend, designed quickly, delivered quietly. But its architecture is anything but modest. Every element is load-bearing: the pulp is the soil amendment; the seed is the restoration program; the opt-in is the trust infrastructure; the hyperlocal ad model is the funding engine; the digital mirror is the living document. No redundant element. No waste pathway. The lifecycle is: deliver $\rightarrow$ read $\rightarrow$ place $\rightarrow$ compost $\rightarrow$ germinate $\rightarrow$ bloom $\rightarrow$ feed $\rightarrow$ seed $\rightarrow$ deliver again --- but this time through the food chain, not the postal route.
+
+\newpage
+
+% ============================================================
+%  STAGE 2 — RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{stageB}
+
+\section{Paper That Grows --- Research Reference}
+
+\subsection{How to Use This Document}
+This stage synthesizes research from web sources, peer-reviewed literature, government agency publications, and professional organizations. All claims are sourced. Agents should consult this reference before generating any module documents and conduct additional targeted searches only to fill gaps specific to their assigned module.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Xerces Society for Invertebrate Conservation (pollinator plant lists, PNW regional guides)
+  \item USDA Natural Resources Conservation Service / Plant Materials Centers (seed mix guidance, PNW-specific)
+  \item USDA Climate Hubs --- Northwest (pollinator-climate interaction data)
+  \item EPA / State environmental agencies (ink VOC standards, composting certification)
+  \item American Soybean Association (SoySeal ink standards)
+  \item Direct Marketing Association / DMAchoice (opt-in postal compliance)
+  \item Eco-Cycle / Zero Junk Mail (junk mail environmental statistics)
+  \item Lenfest Institute for Journalism (hyperlocal newsletter business metrics)
+  \item Botanical PaperWorks / Seedpaperwork.com (commercial seed paper manufacturing)
+  \item Oxford Academic: Environmental Entomology (PNW native plant-pollinator research, Hayes et al. 2025)
+\end{itemize}
+
+\subsection{Module 01: Seed Paper Material Science}
+
+\subsubsection{Manufacturing Process Overview}
+Seed paper is a biodegradable paper substrate manufactured by embedding live seeds into recycled pulp during the papermaking process. The core production sequence is: (1) collect and shred post-consumer recycled paper; (2) soak in warm water and blend to a smooth pulp slurry; (3) add seeds by hand after blending to preserve viability --- blender blades will crush seeds if added during pulping; (4) spread slurry onto a mesh mould-and-deckle frame; (5) press to remove excess water; (6) air-dry flat to minimize imperfections; (7) cut and print.
+
+Commercial-scale seed paper production replicates this process on industrial equipment, achieving consistent sheet dimensions and surface texture suitable for offset printing. The mechanical processes used at commercial scale can reduce germination rates, making seed selection and integration method critical engineering variables.
+
+\subsubsection{Pulp Chemistry and Substrate Requirements}
+The base pulp must meet the following criteria for the Paper That Grows application:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{pH 6.0--7.5}: Neutral-to-slightly-acidic to match PNW soil profiles and avoid seed inhibition
+  \item \textbf{No chlorine bleaching}: Standard chlorine bleaching residues inhibit germination and add soil toxins
+  \item \textbf{No petroleum-based binders}: Synthetic polymer binders persist in soil; biodegradable starch or cellulose binders required
+  \item \textbf{No glossy coating}: Glossy coatings impede water absorption and compost breakdown
+  \item \textbf{Post-consumer recycled fiber}: 100\% PCR base eliminates virgin fiber requirement; cotton, linen, and recycled paper all suitable
+  \item \textbf{Weight range}: 60--90 gsm typical for seed paper; heavier stock improves seed retention during handling
+\end{itemize}
+
+\subsubsection{Seed Selection Constraints}
+Only small seeds are compatible with paper pulp embedding. Large seeds (squash, coriander) fall out of dried paper. Suitable size range is approximately 0.5--3 mm. Seeds must be:
+\begin{itemize}[leftmargin=1.5em]
+  \item Non-invasive per state Noxious Weed Control Board lists
+  \item Non-GMO (USDA certified organic preferred)
+  \item Capable of germination without pre-treatment (stratification, scarification) or with pre-treatment completable during storage in the paper
+  \item Viable at room temperature storage for at least 6 months post-manufacture (newsletter shelf life consideration)
+\end{itemize}
+
+\subsubsection{Compostability Standards}
+For ground-placement composting (no active compost bin required), the substrate must degrade within one growing season under PNW spring/summer conditions. European standard EN 13432 (industrial compostability) and ASTM D6400 (US equivalent) are reference points. For ground-placed consumer products, the more relevant standard is home-composting certification (OK Compost Home), which requires degradation at ambient temperatures without active turning or management.
+
+\subsection{Module 02: Native Plant Ecosystem Integration}
+
+\subsubsection{PNW Microclimate Zones for Seed Curation}
+The Pacific Northwest encompasses multiple distinct climate zones, each requiring a different native seed palette. Three zones are targeted for v1.0:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Zone} & \tableheader{Region} & \tableheader{Characteristics} \\
+\midrule
+Maritime Coast & Western WA/OR coast, fog belt & High rainfall, mild temps, clay soils, salt spray influence \\
+Puget Sound Lowland & Seattle metro, Willamette Valley & Moderate rainfall, summer drought, varied urban soils \\
+Inland Northwest & Eastern WA/OR, northern ID & Semi-arid, hot summers, cold winters, sagebrush steppe interface \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Candidate Native Species for Seed Embedding (Maritime / Puget Lowland)}
+The following species are recommended by the Xerces Society's Maritime Northwest native plant list as highly attractive to pollinators and compatible with small-seed embedding:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Species} & \tableheader{Common Name} & \tableheader{Ecosystem Value} \\
+\midrule
+\textit{Camassia quamash} & Camas & Major pollinator resource; historically significant food plant \\
+\textit{Eschscholzia californica} & California poppy & Annual; attracts native bees; establishes readily from seed \\
+\textit{Clarkia amoena} & Farewell-to-spring & Annual; high pollinator visitation; small seed, ideal for embedding \\
+\textit{Achillea millefolium} & Yarrow & Perennial; attracts parasitoid wasps and hoverflies; pest control \\
+\textit{Symphyotrichum subspicatum} & Douglas aster & Perennial; late-season bloom critical for overwintering pollinators \\
+\textit{Sidalcea malviflora} & Meadow checkermallow & Sole nectar source for Fender's blue butterfly (endangered) \\
+\textit{Gilia capitata} & Blue-headed gilia & Annual; small seed; exceptional bee attractant \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Research by Hayes et al. (2025) in \textit{Environmental Entomology} confirms that wild-type native plants support greater pollinator species richness and functional diversity than cultivars, particularly for specialist bee taxa. The Paper That Grows seed palette must use wild-type, locally-sourced seed stock --- not ornamental cultivars --- to maximize ecosystem benefit.
+
+\subsubsection{Food Chain Support Value}
+Native plants in PNW urban landscapes support multiple trophic levels. A yard with 70\% locally-appropriate native plants provides essential wildlife habitat. The Pacific Northwest hosts over 30 crops including apples, blueberries, cherries, and alfalfa that depend on insect pollination. Restoring pollinator habitat in residential zones creates corridor connectivity between fragmented agricultural and wild landscapes.
+
+\subsubsection{Ground Placement Germination}
+The design specification calls for no-intervention germination: a recipient places the newsletter on the ground, and spring rains do the rest. This requires:
+\begin{itemize}[leftmargin=1.5em]
+  \item Seeds pre-adapted to cold-moist stratification occurring naturally in PNW winters
+  \item Paper substrate thin enough to allow root penetration without mechanical resistance
+  \item No light-exclusion coating that would suppress photosensitive seeds
+  \item Pulp weight calibrated so paper does not become waterproof when wet (must remain permeable)
+\end{itemize}
+
+\subsection{Module 03: Eco-Printing Technology}
+
+\subsubsection{Soy and Vegetable-Based Inks}
+Soy-based ink was developed by the Newspaper Association of America in the late 1970s as a petroleum alternative, first successfully tested by \textit{The Gazette} in Iowa in 1987. The SoySeal certification (American Soybean Association) requires a minimum of 40\% soybean oil content for news inks, with specifications varying by ink type.
+
+Key performance characteristics relevant to seed paper printing:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Soy/Vegetable Ink} & \tableheader{Relevance to Seed Paper} \\
+\midrule
+VOC emissions & Zero to near-zero (vs. 25--35\% for petroleum) & Soil-safe; no atmospheric emissions in print facility \\
+Biodegradability & High; biodegrades in soil contact & Essential for ground-placement composting \\
+Color gamut & Broader than petroleum; vibrant colors & Full-color newsletter printing feasible \\
+Drying time & Slower than UV inks & Managed by weekend production schedule \\
+Substrate adhesion & Good on uncoated paper & Seed paper is uncoated; soy ink preferred \\
+Toxicity & Non-toxic; food-safe formulations exist & No germination inhibition risk \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Algae Ink (EcoEnclose) represents the frontier of sustainable printing ink: carbon-negative pigment derived from algae waste, available in water-based and soy-based formulations. Offset Algae Ink has 83\% biorenewable content; Flexographic Algae Ink reaches 90\%. This represents an aspirational ink specification for the Paper That Grows premium edition.
+
+\subsubsection{Weekend Production Cycle}
+The production cadence must deliver from advertiser submission to doorstep in approximately 72 hours:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Day} & \tableheader{Activity} & \tableheader{Notes} \\
+\midrule
+Friday 5pm & Ad copy deadline & All advertisers submit weekly content; menus, specials, events \\
+Friday evening & Layout \& design & Template-driven; 2--3 hours max per zone edition \\
+Saturday morning & Plate preparation & Offset press plate exposure; soy ink mixing \\
+Saturday afternoon & Print run & Full zone volume printed; UV-free drying begins \\
+Sunday & Dry \& bundle & Air-dry complete; sort by postal route; bundle for delivery \\
+Monday morning & Delivery & USPS carrier route or local delivery cooperative \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{QR Code Digital Bridge}
+Each printed edition carries a QR code linking to the always-current digital edition. This serves three functions: (1) restaurant menus and service listings can be updated in real time after print; (2) readers who have already composted their copy can access current content; (3) new subscribers can register via the digital edition without requiring a previous print copy.
+
+\subsection{Module 04: Hyperlocal Community Publishing Model}
+
+\subsubsection{Market Architecture}
+The hyperlocal newsletter model is proven at scale. Naptown Scoop (Annapolis, MD) reached 18,000+ subscribers. The Lenfest Institute documents that hyperlocal newsletters command CPM rates significantly higher than broad display advertising due to geographic targeting precision. The Paper That Grows model overlays a physical artifact and ecological value proposition onto this proven digital-hyperlocal framework.
+
+Revenue model benchmarks: at 10,000 subscribers, a hyperlocal newsletter generating \$10--15 per subscriber annually in advertising revenue produces \$100,000--150,000 gross. The Paper That Grows model targets smaller initial scale (1,000--3,000 households per pilot zone) with proportionally lower but sustainable revenue.
+
+\subsubsection{Advertiser Tier Structure}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{Weekly Rate} & \tableheader{Format \& Includes} \\
+\midrule
+Seedling & \$25--50 & 2'' $\times$ 2'' display ad; business name, address, hours \\
+Canopy & \$75--125 & 1/4 page; full menu listing or service catalog; QR code to business website \\
+Grove & \$200--350 & Half-page feature; full menu + weekly specials; photo; social links; digital edition placement \\
+Sponsor & \$500+ & Back cover; annual commitment; ``Brought to you by'' branding; digital header \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Opt-In Distribution Architecture}
+The opt-in model is the defining ethical distinction from junk mail. Households register to receive the newsletter --- they are not enrolled by default. This has operational advantages beyond ethics: (1) every delivered copy is a wanted copy, maximizing read rates and advertiser value; (2) list management costs are lower than saturation mailing; (3) subscriber goodwill creates community ritual and identity.
+
+The DMA Mail Preference Service and DMAchoice framework provide a compliance baseline for addressed mail. The Paper That Grows system goes further: explicit opt-in at registration, no list rental or sale, easy unsubscribe, and an annual confirmation request.
+
+\subsubsection{Digital Edition Platform}
+The digital mirror operates as an always-current community resource. Recommended architecture: static site generator (Hugo, Eleventy) with a weekly-refresh content layer. Advertisers update their own listings via a simple CMS. The digital edition is publicly accessible without subscription, serving as discovery surface for new subscribers and as a resource for existing subscribers between print editions.
+
+\subsection{Module 05: Circular Economy and Regulatory Framework}
+
+\subsubsection{Junk Mail Environmental Baseline}
+The conventional EDDM junk mail system represents a significant environmental cost:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Annual Scale} & \tableheader{Source} \\
+\midrule
+Trees destroyed & 100+ million & Ocean Futures Society / Eco-Cycle \\
+Water consumed & 28 billion gallons & Ocean Futures Society \\
+GHG equivalent & 9+ million cars & Ocean Futures Society \\
+Pieces mailed & 130 billion & Eco-Cycle (2021 USPS data) \\
+Average per household & 41 pounds/year & Center for Dev. of Recycling, SJSU \\
+Opened by recipient & 56\% (44\% discarded) & Eco-Cycle \\
+Response rate (prospective) & 2.9\% & Eco-Cycle (2017 USPS data) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Opt-In Regulatory Landscape}
+Current US law has significant gaps for consumer mail opt-out:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Addressed mail}: DMAchoice provides opt-out for participating companies; not legally binding; limited effectiveness
+  \item \textbf{EDDM (Every Door Direct Mail)}: No federal opt-out exists. Unlike CAN-SPAM (email) or Do Not Call, postal advertisers have no federal legal obligation to honor opt-out requests for unaddressed saturation mail
+  \item \textbf{State-level Do Not Mail bills}: 18 state bills introduced; all withdrawn following lobbying by the Mail Moves America coalition (2007); no federal legislation has passed
+  \item \textbf{International models}: Netherlands JA/JA opt-in system achieved 30\% reduction in advertising mail; Germany Keine Werbung stickers are legally binding; UK Mail Preference Service covers unaddressed mail
+\end{itemize}
+
+The Paper That Grows model operates entirely within the opt-in framework, making it legally and ethically distinct from the EDDM system and positioning it favorably in any future regulatory environment.
+
+\subsubsection{Lifecycle Comparison}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3.5cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Stage} & \tableheader{EDDM Junk Mail} & \tableheader{Paper That Grows} \\
+\midrule
+Manufacture & Virgin/mixed pulp; chemical bleach; petroleum ink & PCR pulp; no chlorine; soy/algae ink \\
+Distribution & Saturation (all addresses) & Opt-in only (wanted recipients) \\
+Recipient action & Sort, read or discard & Read, place outdoors \\
+End of life & 44\% landfill; 56\% recycle & 100\% compost pathway \\
+Downstream value & None & Native plant germination; pollinator habitat \\
+Carbon impact & Net positive (emissions only) & Net negative (plant growth sequesters CO2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Mitigation} \\
+\midrule
+Invasive species introduction & ABSOLUTE BLOCK & All seeds verified against WA/OR Noxious Weed Control Board lists before inclusion \\
+Seed viability claims & GATE & Germination rate claims require testing data; no unverified claims in subscriber communications \\
+Allergy-triggering species & ANNOTATE & High-pollen species (e.g., ragweed-adjacent) must be flagged; avoid in standard palettes \\
+Soil toxin concerns & GATE & Full toxicology profile of ink+pulp combination required before commercial launch \\
+Indigenous plant knowledge & ABSOLUTE & All traditional use context for native species must be nation-specific, attributed, and at publicly-shared knowledge tier only \\
+Advertiser content standards & ANNOTATE & Newsletter editorial standards prohibit predatory lending, tobacco, and high-sugar food targeting children \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government \& Agency Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item USDA NRCS Plant Materials Technical Note 11733 (2011). \textit{Plants for Pollinators in the Inland Northwest.} Washington State Plant Materials Center.
+  \item USDA Climate Hubs Northwest. \textit{Northwest Pollinators and Climate Change.} climatehubs.usda.gov/hubs/northwest.
+  \item Washington State Noxious Weed Control Board. \textit{Pacific Lowland Pollinator Guide.} nwcb.wa.gov.
+  \item EPA Clean Air Act standards governing VOC emissions in printing inks.
+  \item Congressional Research Service (2008). \textit{Do Not Mail Initiatives and Their Potential Effects.} EveryCRSReport RL34643.
+  \item City of Commerce, CA. \textit{Junk Mail Reduction Resource.} (References Center for Development of Recycling, SJSU data.)
+\end{itemize}
+
+\subsubsection{Peer-Reviewed Research}
+\begin{itemize}[leftmargin=1.5em]
+  \item Hayes, J.J-M., et al. (2025). ``Pacific Northwest native plants and native cultivars, part I: pollinator visitation.'' \textit{Environmental Entomology}, 54(1), 199--214. doi:10.1093/ee/nvae126.
+  \item Hayes, J.J-M., et al. (2025). ``Pacific Northwest native plants and native cultivars part II: plant and pollinator traits.'' \textit{Environmental Entomology}, 54(6), 1386--1402. doi:10.1093/ee/nvaf105.
+  \item Journal of Applied Biomaterials and Functional Materials. Study comparing vegetable-based inks and petroleum-based inks for offset printing. (Referenced via BambooInk, 2019.)
+\end{itemize}
+
+\subsubsection{Professional Organizations \& Industry Sources}
+\begin{itemize}[leftmargin=1.5em]
+  \item Xerces Society for Invertebrate Conservation. \textit{Native Plants for Pollinators and Beneficial Insects: Maritime Northwest Region.} xerces.org.
+  \item Xerces Society. \textit{Pollinator Conservation Resources: Pacific Northwest.} xerces.org/pollinator-resource-center/pnw.
+  \item American Soybean Association. \textit{Soy-Based Ink Standards (SoySeal).} soygrowers.com.
+  \item Botanical PaperWorks. \textit{How Plantable Paper Works.} botanicalpaperworks.com. (B Corporation certified seed paper manufacturer.)
+  \item Seedpaperwork.com. \textit{Seed Paper Manufacturing.} Commercial seed paper manufacturer documentation.
+  \item EcoEnclose. \textit{What Is the Most Sustainable Ink?} ecoenclose.com.
+  \item Eco-Cycle. \textit{Junk Mail Facts \& FAQs.} ecocycle.org.
+  \item Zero Junk Mail. \textit{EDDM Opt-Out Analysis and Do Not Mail Registry Campaign.} zerojunkmail.org.
+  \item Ocean Futures Society / Jean-Michel Cousteau. \textit{Junk Mail Environmental Statistics.} oceanfutures.org.
+  \item Sierra Club. \textit{Let's Ban Junk Mail Already.} sierraclub.org. (Cites NASA-funded 2016 pulpwood carbon study.)
+  \item Lenfest Institute for Journalism. Research on hyperlocal newsletter engagement rates and CPM benchmarks.
+  \item Crosstown LA / WAN-IFRA (2024). \textit{How Crosstown Built a Platform for Neighbourhood Newsletters.} wan-ifra.org.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+%  STAGE 3 — MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{stageC}
+
+\section{Paper That Grows --- Mission Package}
+
+\subsection{Milestone Specification}
+
+\textbf{Mission Objective:} Produce a publication-quality research and design specification for the Paper That Grows community newsletter system, including: seed paper substrate formula, microclimate-specific native seed palettes for 3 PNW zones, eco-ink specification, weekly production cycle design, hyperlocal publishing business model, digital edition architecture, and circular economy lifecycle analysis. The output must be sufficient for a local paper manufacturer and community publisher to launch a pilot program in a single neighborhood.
+
+\subsubsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE --- PAPER THAT GROWS MISSION
+===============================================
+
+  WAVE 0: FOUNDATION (Sequential, Haiku)
+  ----------------------------------------
+  [Shared Schema] [Seed Matrix Template] [Source Index]
+
+  WAVE 1: PARALLEL RESEARCH TRACKS (Sonnet + Opus)
+  --------------------------------------------------
+  TRACK A                          TRACK B
+  [Module 01: Material Science] -- [Module 03: Eco-Printing Tech]
+  [Module 02: Ecosystem Integ.] -- [Module 04: Publishing Model]
+                                -- [Module 05: Circular Economy]
+
+  WAVE 2: SYNTHESIS (Sequential, Opus)
+  ----------------------------------------
+  [Cross-module integration] [Seed-Ink compatibility check]
+  [Lifecycle validation] [Regulatory compliance review]
+
+  WAVE 3: PUBLICATION + VERIFICATION (Sonnet)
+  ----------------------------------------
+  [Design specification document] [Pilot community launch spec]
+  [Safety review] [Final delivery package]
+\end{asciibox}
+
+\subsubsection{System Layers}
+\begin{enumerate}
+  \item \textbf{Foundation Layer} --- Shared data schemas, seed classification YAML, source index, safety boundary definitions
+  \item \textbf{Material Layer} --- Substrate specification, ink specification, pulp formula, compostability certification path
+  \item \textbf{Ecological Layer} --- Native seed palettes per microzone, food chain mapping, germination specification
+  \item \textbf{Production Layer} --- Weekend print cycle, press specification, batch sizing, distribution logistics
+  \item \textbf{Publishing Layer} --- Advertiser tiers, digital edition architecture, subscriber management, editorial standards
+  \item \textbf{Compliance Layer} --- Opt-in postal framework, noxious weed clearance, ink toxicology profile
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.6cm}L{3.5cm}L{4cm}L{4cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec Reference} \\
+\midrule
+1 & Seed Paper Substrate Spec & pH, binder, fiber source, weight, compostability certification path & Module 01 \\
+2 & Native Seed Palette (3 zones) & 4+ species per zone; non-invasive; non-GMO; small-seed; food chain value documented & Module 02 \\
+3 & Eco-Ink Specification & Zero VOC; biodegradable; offset-compatible; soil-safe; SoySeal or equivalent certified & Module 03 \\
+4 & Weekend Production Cycle & Friday--Monday schedule; press spec; batch size; drying protocol & Module 03 \\
+5 & Advertiser Tier Model & 4 tiers; weekly rate card; format specs; digital placement included & Module 04 \\
+6 & Digital Edition Architecture & CMS choice; update frequency; QR bridge; subscriber portal & Module 04 \\
+7 & Opt-In Compliance Framework & DMA compliance; no-list-rental covenant; unsubscribe mechanism & Modules 04+05 \\
+8 & Lifecycle Comparison Report & 3+ metric improvement vs. EDDM baseline; carbon, water, landfill & Module 05 \\
+9 & Pilot Community Launch Spec & Geographic radius; subscriber target; advertiser minimum; volume; seed zone assignment & Synthesis \\
+10 & Safety \& Regulatory Clearance & Noxious weed verification; ink toxicology; composting certification path & Synthesis \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{2cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+Foundation schemas \& source index & None & Haiku & 4k \\
+Substrate specification & Schemas & Sonnet & 12k \\
+Native seed palette (3 zones) & Schemas, USDA/Xerces data & Opus & 18k \\
+Eco-ink specification & Substrate spec & Sonnet & 10k \\
+Weekend production cycle & Ink + substrate & Sonnet & 8k \\
+Advertiser model & None & Sonnet & 10k \\
+Digital edition architecture & Advertiser model & Sonnet & 8k \\
+Opt-in compliance framework & Regulatory research & Sonnet & 8k \\
+Lifecycle comparison & All module data & Opus & 12k \\
+Pilot community launch spec & All modules & Opus & 10k \\
+Safety \& regulatory clearance & Seed palette, ink spec & Opus & 8k \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated tokens:} 108k across 3--4 context windows.
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Budget \%} & \tableheader{Assigned Tasks} \\
+\midrule
+Opus & 30\% & Native seed ecological judgment; cross-module synthesis; lifecycle analysis; safety review; pilot spec integration \\
+Sonnet & 60\% & Substrate spec; ink spec; production cycle; advertiser model; digital architecture; compliance framework; document assembly \\
+Haiku & 10\% & Foundation schemas; seed matrix YAML template; source index; commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{2.5cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Models} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, source index, seed matrix template \\
+1 & Research Tracks & Parallel & Sonnet + Opus & 5 module documents (2 tracks) \\
+2 & Synthesis & Sequential & Opus & Integrated design spec, compatibility review \\
+3 & Publication & Sequential & Sonnet & Final deliverable package, safety clearance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Seed schema YAML & PLAN (Paula) & Haiku & seed\_matrix.yaml: zone, species, size, viability, food chain value \\
+Source index & LOG (Paula) & Haiku & source\_index.md: all research sources with retrieval keys \\
+Safety boundary definitions & SECURE & Haiku & safety\_gates.md: noxious weed lists, toxicology thresholds \\
+Shared pulp spec template & EXEC & Haiku & substrate\_template.yaml: pH, weight, binder, fiber type \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Parallel Research Tracks}
+\textbf{Track A --- Material \& Ecology (Modules 01 + 02):}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Substrate specification & EXEC-A & Sonnet & substrate\_spec.md \\
+Compostability analysis & CRAFT-ECO & Sonnet & compost\_path.md \\
+Native seed palette (3 zones) & CRAFT-ECO & Opus & seed\_palettes\_pnw.md \\
+Food chain mapping & CRAFT-ECO & Opus & food\_chain\_map.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B --- Technology \& Publishing (Modules 03 + 04 + 05):}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Eco-ink specification & EXEC-B & Sonnet & ink\_spec.md \\
+Production cycle design & EXEC-B & Sonnet & production\_cycle.md \\
+Advertiser model \& tiers & CRAFT-PUB & Sonnet & advertiser\_model.md \\
+Digital edition architecture & CRAFT-PUB & Sonnet & digital\_edition\_spec.md \\
+Lifecycle comparison & CRAFT-PUB & Sonnet & lifecycle\_comparison.md \\
+Regulatory framework & VERIFY & Sonnet & compliance\_framework.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 2: Synthesis}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Seed-ink compatibility review & INTEG & Opus & compatibility\_matrix.md: verify no ink toxin inhibits seed germination \\
+Full design integration & FLIGHT & Opus & integrated\_design\_spec.md \\
+Pilot community spec & FLIGHT & Opus & pilot\_launch\_spec.md \\
+Safety \& regulatory clearance & SURGEON & Opus & safety\_clearance.md \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 3: Publication \& Verification}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+Final deliverable package & EXEC & Sonnet & Full specification bundle (10 deliverables) \\
+Source citation verification & VERIFY & Sonnet & Verified source list; broken links flagged \\
+Executive summary & EXEC & Sonnet & 2-page summary for community publisher pitch \\
+Commit \& audit trail & LOG & Haiku & Mission completion log \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Cache Optimization Strategy}
+\begin{itemize}[leftmargin=1.5em]
+  \item Shared seed matrix YAML computed once in Wave 0 and cached; all module agents reference cached version
+  \item Xerces Society plant list and USDA NRCS guidance cached as shared context in Wave 1 launch prompt
+  \item Source index cached across all waves; agents append rather than regenerate
+  \item Safety boundary definitions loaded once; SURGEON monitors compliance passively from cached definitions
+  \item 5-minute TTL window: Track A and Track B Wave 1 launches within same session to maximize cache reuse
+\end{itemize}
+
+\subsubsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2.5cm}C{2.5cm}C{2.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Input Tokens} & \tableheader{Output Tokens} & \tableheader{Wave Total} \\
+\midrule
+Wave 0 & 8k & 4k & 12k \\
+Wave 1 Track A & 20k & 18k & 38k \\
+Wave 1 Track B & 22k & 20k & 42k \\
+Wave 2 & 35k & 12k & 47k \\
+Wave 3 & 30k & 8k & 38k \\
+\midrule
+\rowcolor{lightprimary}
+\textbf{Total} & \textbf{115k} & \textbf{62k} & \textbf{177k} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+  [Wave 0: Schemas + Source Index]
+           |
+           +---------------------------+
+           |                           |
+  [Wave 1 Track A]             [Wave 1 Track B]
+  Substrate Spec               Ink Spec
+  Seed Palettes (3 zones)      Production Cycle
+  Food Chain Map               Advertiser Model
+           |                   Digital Edition
+           |                   Lifecycle Compare
+           |                   Compliance Framework
+           |                           |
+           +---------------------------+
+                       |
+              [Wave 2: Synthesis]
+              Seed-Ink Compatibility
+              Integrated Design Spec
+              Pilot Launch Spec
+              Safety Clearance
+                       |
+              [Wave 3: Publication]
+              Final Deliverable Package
+              Source Verification
+              Executive Summary
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} \\
+\midrule
+Safety-Critical & 4 & P0 BLOCK & Mission halts; human review required \\
+Core Functionality & 8 & P1 & Revision required before Wave 3 \\
+Integration & 5 & P2 & Flag and annotate; proceed with caveat \\
+Edge Cases & 3 & P3 & Document; defer to post-pilot iteration \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests (MANDATORY PASS / BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & All seeds verified against WA/OR Noxious Weed Control Board Class A/B lists & Zero matches; all species confirmed non-listed \\
+SC-02 & Ink formulation soil-contact toxicity profile & No phytotoxic compounds; no heavy metals above EPA residential soil screening levels \\
+SC-03 & No GMO seed sources & All seeds from USDA certified organic or certified non-GMO suppliers \\
+SC-04 & Indigenous traditional use content (if included) & Nation-specific attribution only; publicly-shared knowledge tier; OCAP framework confirmed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{4.5cm}L{2.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+1 & Substrate passes compostability certification path & CORE-01, CORE-02 & TBD \\
+2 & Germination rate $\geq$60\% under PNW spring conditions & CORE-03 & TBD \\
+3 & Pulp pH within 6.0--7.5 range & CORE-04 & TBD \\
+4 & 3 distinct native seed palettes, 4+ species each & CORE-05, SC-01, SC-03 & TBD \\
+5 & All inks: zero VOC, biodegradable, soil-safe, offset-compatible & SC-02, CORE-06 & TBD \\
+6 & Complete weekend production schedule specified & CORE-07 & TBD \\
+7 & Digital edition supports real-time updates, QR bridge & CORE-08 & TBD \\
+8 & Advertiser model validated against hyperlocal CPM benchmarks & INTEG-01 & TBD \\
+9 & Opt-in system satisfies DMA MPS requirements & INTEG-02 & TBD \\
+10 & Lifecycle analysis: 3+ metric improvement vs. EDDM & INTEG-03 & TBD \\
+11 & Pilot community spec complete & INTEG-04 & TBD \\
+12 & No invasive species; no prohibited seeds & SC-01, SC-03 & TBD \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent (Chipset)} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & Agnus (Opus) & Overall mission direction; synthesis authority; go/no-go at each wave gate \\
+PLAN & Paula (Haiku) & Wave decomposition; dependency management; schedule optimization \\
+SCOUT & Paula (Haiku) & Source gathering; supplemental web research to fill gaps \\
+EXEC-A & Denise (Sonnet) & Track A document production (substrate, ecology modules) \\
+EXEC-B & Denise (Sonnet) & Track B document production (technology, publishing, regulatory modules) \\
+CRAFT-ECO & 68000 (Opus) & Native plant ecological analysis; seed palette curation; food chain mapping \\
+CRAFT-PUB & 68000 (Sonnet) & Hyperlocal publishing model; advertiser tier design; digital edition spec \\
+VERIFY & Gary (Sonnet) & Source validation; accuracy checking; noxious weed list cross-reference \\
+INTEG & Agnus (Opus) & Seed-ink compatibility; cross-module coherence; lifecycle integration \\
+CAPCOM & Human interface & Wave boundary approvals; seed palette sign-off; safety gate review \\
+SURGEON & Gary (Sonnet) & Research quality monitoring; germination claim verification; safety threshold checks \\
+LOG & Paula (Haiku) & Audit trail; commit messages; milestone completion summaries \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Module Count & 5 (Material, Ecology, Printing, Publishing, Circular Economy) \\
+Wave Count & 4 (Foundation, Parallel, Synthesis, Publication) \\
+Parallel Tracks & 2 (Wave 1) \\
+Total Deliverables & 10 specification documents + 1 executive summary \\
+Estimated Token Budget & 177k total (115k input / 62k output) \\
+Estimated Sessions & 3--4 Claude Code sessions \\
+Safety Gates (BLOCK) & 4 mandatory-pass tests \\
+HITL Checkpoints & Wave 0$\rightarrow$1, Wave 1$\rightarrow$2 (seed palette review), Wave 2$\rightarrow$3 (safety clearance) \\
+Model Split & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Primary Authority Sources & Xerces Society, USDA NRCS, American Soybean Assoc., Eco-Cycle \\
+Geographic Scope & Pacific Northwest (3 microclimate zones) \\
+Pilot Target & Single neighborhood; 1,000--3,000 opt-in households \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily\large The Living Newsletter}
+
+\vspace{0.5em}
+{\itshape Every piece of mail is a transaction. Most transactions end with a landfill.
+The Paper That Grows inverts the terminal condition of print: the newsletter does not die when you are done reading it.
+It waits. It needs only to be placed on the ground, where it becomes the ground, and then becomes the meadow.
+The space between the mailbox and the soil is smaller than it seems ---
+it is exactly the width of one deliberate decision.
+
+In the Amiga Principle, this is what we mean by architectural leverage:
+not a larger force, but a more precisely applied one.
+Not more paper, but paper that does two jobs at once ---
+and the second job lasts a season, and feeds the bees.}
+
+\vspace{0.5em}
+\textit{--- Vision through-line: Paper That Grows, Mission Package v1.0, March 2026}
+\end{quotebox}
+
+\end{document}
