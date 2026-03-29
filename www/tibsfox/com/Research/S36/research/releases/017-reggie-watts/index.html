@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 17&deg; &mdash; Reggie Watts &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #E53935);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFCDD2;
+      color: #B71C1C;
+      border: 1px solid #E57373;
+    }
+
+    .genre-shift-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E1BEE7;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .cornish-pipeline-box {
+      background: #E0F2F1;
+      border: 1px solid #80CBC4;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cornish-pipeline-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #00695C;
+      font-family: system-ui, sans-serif;
+    }
+    .cornish-pipeline-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cornish-pipeline-box td, .cornish-pipeline-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #B2DFDB;
+    }
+    .cornish-pipeline-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #00695C;
+    }
+
+    .genre-shift-box {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .genre-shift-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .genre-shift-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .loop-pedal-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .loop-pedal-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .loop-pedal-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .amiga-box {
+      background: #FCE4EC;
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .amiga-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #AD1457;
+      font-family: system-ui, sans-serif;
+    }
+    .amiga-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">17&deg;</div>
+      <div>
+        <h1>Reggie Watts</h1>
+        <div class="subtitle">Jazz/Comedy &middot; Beatbox &middot; Looping / Improvisation / Performance Art &mdash; Born Stuttgart 1972 &mdash; various
+          <span class="energy-badge">Energy 3</span>
+          <span class="genre-shift-badge">Second Genre Shift</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../016-jeff-lorber/index.html">Degree 16&deg; (Lorber)</a>
+      <a href="../002-wayne-horvitz/index.html">Degree 2&deg; (Horvitz)</a>
+      <a href="../001-bill-frisell/index.html">Degree 1&deg; (Frisell)</a>
+      <a href="../007-julian-priester/index.html">Degree 7&deg; (Priester)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Stuttgart born, 1972. Great Falls, Montana raised. Cornish trained &mdash;
+          jazz piano and acting. One microphone. One loop pedal. One voice that becomes
+          an entire orchestra of contradictions. Beatbox, bass, harmony, melody, comedy
+          &mdash; all at once, all improvised, all live. <em>The first artist in the
+          engine who cannot be categorized.</em> Jazz/Comedy is not a genre. It is a
+          refusal to be contained.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Uncategorizable</h2>
+
+        <p>Reggie Watts was born in <strong>Stuttgart, Germany in 1972</strong> to a
+        <strong>French mother and an African American father</strong> (U.S. Army
+        stationed in Germany) &mdash; the <strong>first artist in the engine born
+        outside the United States</strong>. His family moved to <strong>Great Falls,
+        Montana</strong> when he was five. He grew up on the high plains east of the
+        Rocky Mountain Front, absorbing music through records, radio, and the eclectic
+        isolation of a small Montana town with no dominant local scene to conform to.</p>
+
+        <p>Watts studied <strong>jazz piano and acting</strong> at <strong>Cornish
+        College of the Arts</strong> in Seattle &mdash; the <strong>third Cornish
+        connection</strong> in the engine after Julian Priester (degree 7&deg;, faculty)
+        and Hadley Caliman (degree 9&deg;, faculty), and the <strong>first Cornish
+        student</strong> (both prior connections were faculty). His dual-discipline
+        training is unique in the engine &mdash; the first artist to formally study
+        across two disciplines simultaneously.</p>
+
+        <p>After Cornish, Watts emerged from Seattle&rsquo;s performance art, comedy,
+        and music scenes in the 2000s. He performed with <strong>Wayne Horvitz</strong>
+        (degree 2&deg;) and other Seattle musicians, placing him directly in the network
+        documented at degree 2. Horvitz&rsquo;s infrastructure (Royal Room, curatorial
+        programming) directly supported artists like Watts &mdash; the artist-as-institution
+        pattern enabled the emergence of the uncategorizable artist.</p>
+
+        <p>Watts became the <strong>bandleader on The Late Late Show with James Corden</strong>
+        (CBS, 2015&ndash;2023) &mdash; eight years on national television. He also performed
+        on <strong>Comedy Bang! Bang!</strong> (IFC), gave <strong>TED talks</strong>,
+        and released comedy specials. His work defies categorization: part jazz, part
+        comedy, part performance art, part electronic music, all improvised in real-time
+        using a loop station, his voice, and his body.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Cornish College
+        of the Arts; CBS/The Late Late Show; IFC/Comedy Bang! Bang!; TED; AllMusic; NPR;
+        various interviews and profiles</p>
+
+        <!-- ========================================
+             GENRE SHIFT
+             ======================================== -->
+
+        <div class="genre-shift-box">
+          <h4>Second Genre Shift: Jazz/Comedy &mdash; The Absence of Genre</h4>
+          <p>After Lorber&rsquo;s Jazz Fusion (degree 16&deg;) softened the genre boundary,
+          Watts <strong>obliterates it</strong>. &ldquo;Jazz/Comedy&rdquo; is not a
+          recognized genre in any taxonomy. No record store has a Jazz/Comedy section. No
+          streaming service has the tag. The slash is not a fusion (genres merged into a
+          new whole) but a <strong>superposition</strong> (two modes coexisting without
+          merging). When Watts performs, he is simultaneously making music and doing comedy
+          &mdash; neither subordinate to the other. <strong>The refusal to categorize IS
+          the statement.</strong></p>
+          <p style="margin-top:0.6rem">Three-stage genre evolution in the engine:
+          (1)&nbsp;single genre (degrees 0&ndash;15, all &ldquo;Jazz&rdquo;),
+          (2)&nbsp;compound genre (degree 16, &ldquo;Jazz Fusion&rdquo;),
+          (3)&nbsp;superposition (degree 17, &ldquo;Jazz/Comedy&rdquo;). The genre
+          boundary does not soften further &mdash; it ceases to apply.</p>
+        </div>
+
+        <!-- ========================================
+             LOOP PEDAL LINEAGE
+             ======================================== -->
+
+        <div class="loop-pedal-box">
+          <h4>Loop Pedal Lineage: Frisell (1&deg;) to Watts (17&deg;)</h4>
+          <p>Both use technology to multiply a single voice into an ensemble. <strong>Frisell</strong>
+          (degree 1&deg;): delay pedals creating <strong>contemplative atmospheres</strong> &mdash;
+          sustained guitar tones layered into ambient textures. <strong>Watts</strong> (degree
+          17&deg;): loop station creating <strong>absurdist collages</strong> &mdash; beatbox
+          rhythms layered with vocal harmonies, bass lines, and comedy.</p>
+          <p style="margin-top:0.6rem">Same principle (technology as multiplier), opposite
+          aesthetic (contemplation vs. absurdism). The loop pedal lineage <strong>brackets the
+          first quadrant</strong> of the circle &mdash; Frisell at the beginning, Watts near
+          the end of the jazz arc. Frisell&rsquo;s delay is analog and continuous (sound decays);
+          Watts&rsquo;s loop station is digital and persistent (loops hold indefinitely).</p>
+        </div>
+
+        <!-- ========================================
+             CORNISH PIPELINE
+             ======================================== -->
+
+        <div class="cornish-pipeline-box">
+          <h4>The Cornish Pipeline: Three Members, Two Modes</h4>
+          <table>
+            <tr>
+              <th>Artist</th>
+              <th>Degree</th>
+              <th>Cornish Role</th>
+              <th>Style</th>
+            </tr>
+            <tr>
+              <td>Julian Priester</td>
+              <td>7&deg;</td>
+              <td>Faculty</td>
+              <td>Experimental jazz, trombone</td>
+            </tr>
+            <tr>
+              <td>Hadley Caliman</td>
+              <td>9&deg;</td>
+              <td>Faculty</td>
+              <td>Hard bop, saxophone</td>
+            </tr>
+            <tr>
+              <td><strong>Reggie Watts</strong></td>
+              <td><strong>17&deg;</strong></td>
+              <td><strong>Student</strong></td>
+              <td><strong>Jazz/Comedy, beatbox, performance art</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">The pipeline gains its first
+          <strong>student</strong> after two faculty members &mdash; now <strong>bidirectional</strong>.
+          Three institutional pipelines at three members each: Berklee (divergence &mdash; no
+          interaction), UW (convergence &mdash; teacher-student), Cornish (bidirectional &mdash;
+          faculty + student). Watts is also the first <strong>interdisciplinary</strong> member:
+          jazz piano AND acting. The Cornish College of the <em>Arts</em> (plural).</p>
+        </div>
+
+        <!-- ========================================
+             AMIGA PRINCIPLE
+             ======================================== -->
+
+        <div class="amiga-box">
+          <h4>The Amiga Principle: Absolute Minimum Resources</h4>
+          <p>One person. One microphone. One loop pedal. <strong>Creating entire worlds.</strong>
+          The Amiga Principle has tracked resource efficiency since degree 0&deg; (Quincy Jones
+          leveraging an orchestra through arrangement). At degree 17&deg;, the resource count
+          reaches its <strong>absolute minimum</strong>: one human body, one mic, one loop
+          station. The architectural leverage reaches its <strong>maximum</strong>: multi-layered
+          compositions spanning genres, moods, and modes of performance, all from these three
+          elements. The ratio of output complexity to input resources is the highest in the engine.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Third Consecutive Energy-3: Longest Streak</h4>
+          <table>
+            <tr>
+              <th>Energy</th>
+              <th>Character</th>
+              <th>Count</th>
+              <th>Artists</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Meditative, introspective</td>
+              <td>2</td>
+              <td>Peacock (8&deg;), Lanphere (12&deg;)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sustaining, atmospheric</td>
+              <td>13</td>
+              <td>All others (0&deg;&ndash;7&deg;, 9&deg;&ndash;11&deg;, 13&deg;&ndash;14&deg;)</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td><strong>Assertive, projective</strong></td>
+              <td><strong>3</strong></td>
+              <td><strong>Marriott (15&deg;), Lorber (16&deg;), Watts (17&deg;)</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Distribution shifts to
+          <strong>2:13:3</strong>. Three consecutive energy-3 artists &mdash; the
+          <strong>longest energy-3 streak</strong>. Three subtypes: acoustic-assertive
+          (Marriott), electronic-propulsive (Lorber), and <strong>performative-explosive</strong>
+          (Watts &mdash; full-body performance, voice as percussion-bass-melody-comedy
+          simultaneously). The energy escalation signals the end of the first jazz
+          quadrant.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory: The Body as Complete Orchestra</h2>
+
+        <ul>
+          <li><strong>Beatboxing as drum synthesis:</strong> Biological percussion &mdash;
+          kick drums (bilabial plosive with subharmonic chest resonance), snare (alveolar
+          clicks with aspirated fricatives), hi-hats (dental fricatives). The mouth becomes
+          a drum machine with infinite programmability. No external instrument mediates.</li>
+          <li><strong>Loop-based composition (real-time layering as arrangement):</strong>
+          Foundation loop (beatbox rhythm), plus vocal bass, plus harmonic fragments, plus
+          melody/speech &mdash; built in real-time with zero editing. Each performance unique.
+          Multitrack production performed live.</li>
+          <li><strong>Improvisation as composition:</strong> No score, no rehearsal, each
+          performance unique. The purest form of improvisation-as-composition in the engine.
+          Mistakes become features. Imperfections become texture.</li>
+          <li><strong>Genre-crossing as theoretical position:</strong> The refusal to
+          categorize IS the statement. Within a single performance: jazz harmony, hip-hop
+          rhythms, electronic textures, spoken-word poetry, physical comedy &mdash; not in
+          sequence but in superposition.</li>
+        </ul>
+
+        <hr class="section-divider">
+        <h2>Music Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Loop-Based Beatbox Composition</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Voice as universal sound generator: biological drum synthesis, vocal bass,
+            harmony, melody. Loop station as real-time multitrack recorder. Amiga Principle
+            at absolute minimum resources &mdash; one person, one mic, one loop pedal.</p>
+            <div class="examples">Watts &mdash; live loop performances (each unique);
+            Frisell (1&deg;) &mdash; delay pedal atmospheres (comparison);
+            Lorber (16&deg;) &mdash; synthesizer layers (comparison);
+            Bobby McFerrin &mdash; vocal percussion precedent</div>
+            <div class="genealogy"><strong>Lineage:</strong> Descends from loop/delay
+            lineage (Frisell 1) plus vocal tradition (Anderson 3) plus body-as-sound-source
+            thread (all degrees). Voice as eleventh instrument in the thread &mdash;
+            the most radical: body replaces ALL other instruments simultaneously.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Genre Superposition</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Jazz/Comedy as simultaneous coexistence of music and comedy at full
+            intensity without subordination. Superposition, not fusion. The refusal to
+            categorize IS the statement. Eighteenth artist-city pattern: The Uncategorizable.</p>
+            <div class="examples">Watts (17&deg;) &mdash; Jazz/Comedy superposition;
+            Lorber (16&deg;) &mdash; Jazz Fusion compound (comparison);
+            Parks (14&deg;) &mdash; post-genre floating (comparison);
+            Horvitz (2&deg;) &mdash; genre-bridging through composition (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Third stage of genre evolution:
+            (1) single genre (0&ndash;15), (2) compound genre (16), (3) superposition (17).
+            The genre boundary ceases to apply. The Uncategorizable is the terminal point
+            of the jazz arc&rsquo;s genre dissolution.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Cornish Pipeline (Bidirectional)</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Three members, two modes (faculty + student). Priester (7&deg;) and Caliman
+            (9&deg;) taught INTO Cornish; Watts (17&deg;) drew FROM Cornish. First
+            student, first interdisciplinary (jazz piano + acting).</p>
+            <div class="examples">Priester (7&deg;) &mdash; experimental trombone faculty;
+            Caliman (9&deg;) &mdash; hard bop saxophone faculty;
+            Watts (17&deg;) &mdash; beatbox/performance art student;
+            Berklee (0, 1, 16) &mdash; divergence model (comparison);
+            UW (13, 14, 15) &mdash; convergence model (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Three pipelines at three members
+            each: Berklee (divergence, no interaction), UW (convergence, teacher-student),
+            Cornish (bidirectional, faculty-then-student). Twentieth educational pipeline
+            documented in the engine.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Vocal Glide</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Seventeenth deployment. Continuous vocal pitch glides approaching scale tones
+            without landing. Zero mechanical intermediary &mdash; the most direct blue note
+            mechanism in the engine.</p>
+            <div class="examples">Watts (17&deg;) &mdash; vocal glide, zero intermediary;
+            Lorber (16&deg;) &mdash; synthesizer pitch bend (electronic);
+            Marriott (15&deg;) &mdash; half-valve bend (brass);
+            Anderson (3&deg;) &mdash; vocal blue note (first vocal deployment)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Seventeen deployments across
+            eighteen degrees. Seventeen mechanisms: bass-line (0), guitar (1), vocal (3),
+            trumpet-warm (4), piano crush (5), altered voicings (6), trombone slide (7),
+            bass fundamental (8), sax voice (9), alto cool bend (10), flute bent (11),
+            bebop chromatic (12), modal integration (13), post-genre floating (14),
+            assertive brass (15), synth pitch bend (16), <strong>vocal glide (17)</strong>.
+            Second vocal deployment in radically different context.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Born 1972 &mdash; Stuttgart, Germany</div>
+          <p>Born to a French mother and African American father (U.S. Army). First artist
+          in the engine born outside the United States. Transatlantic origin &mdash; European
+          birth, American upbringing.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Age 5 &mdash; Great Falls, Montana</div>
+          <p>Moved to Great Falls on the high plains east of the Rocky Mountain Front.
+          Small-city isolation incubated an omnivorous musical appetite with no dominant
+          local scene to conform to.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Cornish College of the Arts &mdash; Seattle</div>
+          <p>Studied jazz piano and acting. Third Cornish connection (Priester 7&deg;,
+          Caliman 9&deg;). First Cornish student. First interdisciplinary training in
+          the engine. The acting training is structural to his career.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2000s &mdash; Seattle Performance Scene</div>
+          <p>Emerged from Seattle&rsquo;s performance art, comedy, and music scenes.
+          Performed with Wayne Horvitz (degree 2&deg;). Built reputation through live
+          performances combining beatbox, looping, music, and comedy.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">TED Talks &amp; Viral Performances</div>
+          <p>TED talks demonstrated the loop-based composition method to a global
+          audience. Expanded visibility beyond the live performance circuit into
+          mainstream cultural awareness.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2010 &mdash; Why Shit So Crazy? (Comedy Central)</div>
+          <p>Debut comedy special. Establishes the performance-art identity nationally:
+          beatboxing, looping, improvised music, and comedy woven into continuous
+          performance. Comedy Central release positions Watts in comedy, not music.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Comedy Bang! Bang! (IFC)</div>
+          <p>Regular performer and bandleader on Scott Aukerman&rsquo;s television show.
+          The comedy-music intersection as a sustained format.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2015&ndash;2023 &mdash; The Late Late Show (CBS)</div>
+          <p><strong>Bandleader on The Late Late Show with James Corden</strong> for
+          the show&rsquo;s entire CBS run. Eight years on national television nightly.
+          The most sustained national TV presence of any artist in the S36 engine.
+          Beatboxing, looping, and performance art on network television.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2016 &mdash; Spatial (Netflix)</div>
+          <p>Netflix comedy special in a custom-designed spatial audio environment.
+          Loop-based composition at its most technically sophisticated. Global
+          streaming audience.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Present &mdash; NYC / LA</div>
+          <p>Based in New York and Los Angeles. Seattle remains the formative city.
+          The Seattle-to-national trajectory mirrors the Export pattern (Jones 0&deg;)
+          but for a different reason: Watts&rsquo;s art required a larger stage.</p>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.92rem;border-collapse:collapse">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;width:30%;font-weight:600">S36-001 (Bill Frisell)</td>
+            <td style="padding:0.6rem">Loop/delay pedal lineage. Both use technology to
+            multiply a single voice into an ensemble. Frisell: contemplative atmospheres.
+            Watts: absurdist collages. Same principle, opposite aesthetic. Brackets the
+            first quadrant (1&deg; to 17&deg;).</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-002 (Wayne Horvitz)</td>
+            <td style="padding:0.6rem">Direct collaboration. Watts performed with Horvitz
+            in Seattle&rsquo;s experimental music scene. Horvitz&rsquo;s infrastructure
+            (Royal Room) directly supported artists like Watts. Infrastructure precedes
+            innovation. First direct artist-to-artist collaboration in the engine.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-007 (Julian Priester)</td>
+            <td style="padding:0.6rem">Cornish pipeline. Third connection. Priester as
+            faculty (experimental trombone); Watts as student (performance art). Pipeline
+            inverts to bidirectional. Stylistic range rivals Berklee&rsquo;s divergence.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-009 (Hadley Caliman)</td>
+            <td style="padding:0.6rem">Cornish pipeline. Caliman as faculty (hard bop sax);
+            Watts as student (jazz piano + acting). The pipeline now has both directions:
+            expertise flows in (Caliman) and trained artists flow out (Watts).</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;font-weight:600">S36-016 (Jeff Lorber)</td>
+            <td style="padding:0.6rem">Genre shift sequence. Lorber&rsquo;s Jazz Fusion
+            softened the boundary; Watts&rsquo;s Jazz/Comedy obliterates it. Compound genre
+            vs. absence of genre. Synthesizer layers vs. biological synthesis &mdash; Lorber
+            used electronics; Watts uses his body.</td>
+          </tr>
+        </table>
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield High School Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Quincy Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Ernestine Anderson &mdash; Garfield, late 1940s</td></tr>
+            <tr><td>Degrees 4&deg;&ndash;16&deg;</td><td>No confirmed Garfield products (thirteen consecutive)</td></tr>
+            <tr><td>Degree 17&deg;</td><td>Reggie Watts &mdash; NOT a Garfield product. Born Stuttgart, Germany. Great Falls, Montana. Cornish College of the Arts. Eleventh consecutive non-Garfield degree. First artist born outside the US.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Key Carry-Forward Items for Degree 18</h4>
+          <ul>
+            <li><strong>Genre rotation:</strong> EIGHTEEN consecutive jazz/jazz-adjacent artists. Second genre shift (Jazz/Comedy) at 17 &mdash; genre boundary obliterated. Three-stage evolution: single, compound, superposition.</li>
+            <li><strong>Genre superposition (NEW at 17):</strong> Music and comedy coexist without merging. The Uncategorizable as artist-city pattern. Track dissolution.</li>
+            <li><strong>Energy spectrum:</strong> 2:13:3. Three consecutive energy-3 artists (15&ndash;17). Longest streak. Three subtypes. Track escalation.</li>
+            <li><strong>Cornish pipeline (EXTENDED at 17):</strong> Three members (7, 9, 17). Bidirectional. Tied with Berklee and UW at three each.</li>
+            <li><strong>Loop pedal lineage (EXTENDED at 17):</strong> Frisell (1&deg;) to Watts (17&deg;). Brackets first quadrant.</li>
+            <li><strong>Horvitz collaboration (NEW at 17):</strong> First direct artist-to-artist collaboration in the engine.</li>
+            <li><strong>First non-US birth (NEW at 17):</strong> Stuttgart, Germany. Track subsequent non-US births.</li>
+            <li><strong>Vocal theory branch:</strong> EXTENDED to seven nodes &mdash; rivals saxophone/reed branch.</li>
+            <li><strong>Gender dimension:</strong> Twelve consecutive male artists (7&ndash;17). Two women in eighteen degrees. CRITICAL.</li>
+            <li><strong>Central District:</strong> Absent at degrees 12&ndash;17. Six consecutive absences. Longest streak.</li>
+            <li><strong>Duwamish territorial acknowledgment:</strong> BLOCKING. EIGHTEEN releases overdue.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">17&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#B71C1C">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz/Comedy</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Voice / Beatbox / Loop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2000s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">various</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City Pattern</span>
+            <span class="stat-value">The Uncategorizable</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jazz streak</span>
+            <span class="stat-value">18 consecutive</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre label</span>
+            <span class="stat-value">SECOND SHIFT</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cornish pipeline</span>
+            <span class="stat-value">3rd (first student)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born outside US</span>
+            <span class="stat-value">FIRST</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy spectrum</span>
+            <span class="stat-value">2:13:3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Vocal branch</span>
+            <span class="stat-value">7 nodes</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">17th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note</span>
+            <span class="stat-value">17th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City taxonomy</span>
+            <span class="stat-value">18 patterns</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Works</h4>
+          <div class="stat-row">
+            <span class="stat-label"><em>Why Shit So Crazy?</em></span>
+            <span class="stat-value">2010</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Late Late Show</em></span>
+            <span class="stat-value">2015&ndash;2023</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Spatial</em></span>
+            <span class="stat-value">2016 (Netflix)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-References</h4>
+          <div class="stat-row">
+            <span class="stat-label">Frisell</span>
+            <span class="stat-value">1&deg; loop/delay</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Horvitz</span>
+            <span class="stat-value">2&deg; collab</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Priester</span>
+            <span class="stat-value">7&deg; Cornish</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Caliman</span>
+            <span class="stat-value">9&deg; Cornish</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lorber</span>
+            <span class="stat-value">16&deg; genre shift</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 17&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine
+    &mdash; <a href="../../index.html">Back to S36</a></p>
+  </footer>
+</body>
+</html>

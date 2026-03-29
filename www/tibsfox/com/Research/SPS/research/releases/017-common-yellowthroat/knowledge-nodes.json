@@ -1,0 +1,393 @@
+{
+  "degree": 17,
+  "species": "Common Yellowthroat",
+  "scientific_name": "Geothlypis trichas",
+  "sound_type": "witchety-witchety-witchety",
+  "energy": 3,
+  "ecosystem": "marsh edge",
+  "season": "summer (neotropical migrant -- arrives late April/May, departs September/October)",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds across nearly all of North America, the most widespread warbler on the continent. PNW birds are subspecies arizela (Pacific Northwest) and occidentalis (western interior)."
+  },
+  "physical": {
+    "length_in": "4.3-5.3",
+    "wingspan_in": "5.9-7.5",
+    "weight_g": "8.5-12"
+  },
+  "plumage": {
+    "overall": "Males: broad black mask bordered above by pale band, vivid yellow throat and breast, olive-brown upperparts, buffy flanks. Females: olive-brown above, yellowish below, no mask -- one of the most dramatic sexual dimorphisms in North American warblers.",
+    "head": "Males: black mask from bill across face and ear coverts, narrow whitish to pale gray border above mask. The 'masked bandit' look -- unmistakable. Females: plain face with pale eyering, no mask.",
+    "body": "Olive-brown upperparts, yellow throat and upper breast, buffy-white lower breast and flanks. Males show crisp contrast between yellow throat and olive body. Females and immatures are diffusely yellowish below.",
+    "bill": "Thin, pointed warbler bill -- insectivore design. Similar to MacGillivray's Warbler (degree 14, same genus).",
+    "subspecies": "Approximately 13 subspecies across vast range. PNW birds: G. t. arizela (Pacific Northwest) and G. t. occidentalis (western interior). Subspecific variation is clinal -- gradual change across geography in yellow intensity, mask width, and plumage saturation.",
+    "field_id": "Males unmistakable: black mask + yellow throat + olive body. The masked bandit of the cattails. Females are nondescript olive-yellowish -- one of the most challenging female warblers to identify. Both sexes skulk in dense marsh vegetation but males sing from exposed perches."
+  },
+  "frequency_range": {
+    "witchety_unit_hz": "2500-5500 (two-syllable ascending cell: lower intro note + higher accented note)",
+    "full_song_hz": "2500-5500 (combined range of 3-5 witchety repetitions)",
+    "tchep_hz": "3000-5000 (sharp contact/alarm/agitation note)",
+    "flight_song_hz": "2500-6000 (extended, more complex version of territorial song)",
+    "register": "Mid-range (2.5-5.5 kHz -- centered in the sweet spot of human hearing. Lower spectral centroid than Yellow Warbler at degree 16. Broader bandwidth than MacGillivray's at degree 14)"
+  },
+  "song_metrics": {
+    "duration_s": "1.5-3 per song phrase",
+    "note_count": "6-10 notes per song (3-5 witchety units, 2 notes each)",
+    "witchety_unit_duration_s": "0.25-0.35 per witchety unit",
+    "units_per_song": "3-5 (typically 3-4)",
+    "songs_per_minute": "6-12 during active singing bouts",
+    "structure": "Rhythmically regular repeated two-note cells. Each 'witchety' is a lower intro note + higher accented note. Tempo is constant. Volume is constant. Pattern is identical unit to unit. The structure IS the repetition.",
+    "variation": "Males typically sing 2-5 song types that differ in pitch, tempo, and the number of witchety repetitions. All types share the core two-note cell structure. Geographic dialects are documented -- neighboring males share song types. The hook is universal; the details vary locally.",
+    "perceived_quality": "Loud, emphatic, rhythmically insistent. The most recognizable bird song mnemonic in North America. The song sounds like its name. 'Witchety-witchety-witchety' is not an approximation -- it is the song.",
+    "waveform_analog": "Hook -- rhythmic two-note cell repeated at constant tempo and volume. The biological pop chorus. All chorus, no verse. Max Martin compressed to 2 seconds.",
+    "key_property": "The first species in the engine that achieves MEMORABILITY as its primary acoustic strategy. Not complexity (wren, degree 1), not silence (heron, degree 0), not code (chickadee, degree 3), not persistence (vireo, degree 13), not narrative (MacGillivray's, degree 14). CATCHINESS. The hook. The earworm. The part of the song you cannot get out of your head."
+  },
+  "hook": {
+    "type": "Rhythmic two-note cell repeated 3-5 times at constant tempo and volume -- the biological earworm",
+    "properties": [
+      "Simple melodic pattern: two syllables per unit, immediately graspable",
+      "Strong rhythmic pulse: metronomic repetition at walking tempo (~100-130 BPM equivalent)",
+      "Exact repetition: 3-5 identical units, minimal variation -- once is event, twice is coincidence, three times is pattern",
+      "Onomatopoeic fidelity: 'witchety' IS the sound -- zero gap between mnemonic and vocalization"
+    ],
+    "earworm_criteria": [
+      "Simple pitch contour (Jakubowski et al. 2017) -- rising two-note cell, predictable",
+      "Strong metric rhythm -- march-like regularity activating motor planning areas",
+      "Moderate tempo (~100-130 BPM) -- natural walking pace, optimal for involuntary recall",
+      "Repetition without variation -- identical units reinforcing each iteration",
+      "Phonetic salience -- sharp consonants (w, tch, t) creating percussive onsets",
+      "Semantic void -- 'witchety' has no English meaning, cannot be resolved semantically, keeps cycling in phonological loop"
+    ],
+    "music_parallels": [
+      "Max Martin pop hooks: songs constructed as delivery vehicles for hooks -- 'Baby One More Time', 'I Want It That Way', 'Shake It Off'. Remove the hook and there is nothing left. The yellowthroat IS the hook.",
+      "All-chorus pop song: verse-chorus-verse structure exists to make chorus memorable. The yellowthroat eliminates structure -- goes straight to chorus. No setup, no contrast. Just the hook, repeated.",
+      "Advertising jingles: 'I'm Lovin' It', 'Ba da ba ba ba'. Short, rhythmic, repeated, impossible to forget. The yellowthroat is nature's jingle.",
+      "Reggie Watts vocal loops: rhythmic nonsense syllables that become earworms through repetition and phonetic play. The yellowthroat does this instinctively."
+    ],
+    "vs_ostinato": "The Hutton's Vireo (degree 13) repeats the same phrase endlessly but at the background level -- it becomes wallpaper, fading from conscious attention. The yellowthroat repeats with EMPHASIS at the FOREGROUND level -- it forces itself into memory. Both repeat. The vireo's repetition induces habituation. The yellowthroat's repetition induces memorization. Same mechanism, opposite psychological effect.",
+    "vs_narrative": "The MacGillivray's Warbler (degree 14, same genus Geothlypis) uses AAB structure -- repetition building to resolution, the narrative arc. The yellowthroat eliminates resolution -- every unit is the same. No payoff, no ending, no story. Just the hook. The MacGillivray's is a storyteller. The yellowthroat is a jingle writer. Both are Geothlypis.",
+    "engine_significance": "The first species in the engine whose primary acoustic strategy is CATCHINESS. Previous species achieved identity through complexity (degree 1), meaning (degree 3), persistence (degree 13), narrative (degree 14), urgency (degree 15), or brightness (degree 16). The yellowthroat achieves identity through MEMORABILITY -- the song that sticks. This introduces the hook as a fundamental acoustic strategy category, distinct from all previous categories."
+  },
+  "behavioral_visibility": {
+    "activity_level": "Active in dense vegetation but males sing from exposed perches -- cattail tops, shrub tips, fence posts at marsh edge. The bold singing posture contrasts with the secretive foraging behavior.",
+    "foraging_height": "Low -- ground level to 2 meters in dense marsh vegetation, cattails, sedges, shrubby edges. Forages by hopping through dense cover, gleaning insects.",
+    "visibility": "Males conspicuous during song: exposed perches, emphatic delivery, black mask is a visual signal. Otherwise skulking in dense vegetation. Females and non-singing males difficult to see.",
+    "concealment_type": "BOLD when singing (exposed perches, visual mask display); SKULKING when foraging (dense marsh vegetation). Dual mode: conspicuous broadcaster / secretive forager.",
+    "contrast_with_genus_pair": "MacGillivray's (degree 14, same genus): SKULKING -- hidden in dense shrub, heard far more than seen. Yellowthroat: BOLD when singing -- exposed cattail perches, mask as visual signal. The genus contains both the hidden skulker and the bold masked broadcaster."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The Hook (the melodic or rhythmic phrase that captures attention and makes a song memorable -- the commercial core of a pop song, compressed to 2 seconds)",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/hook/",
+      "examples": [
+        "The yellowthroat's witchety-witchety-witchety: two-note cell repeated 3-5 times, immediately recognizable, impossible to forget",
+        "Max Martin pop hooks: 'Baby One More Time', 'I Want It That Way' -- songs that ARE their hooks",
+        "Advertising jingles: 'I'm Lovin' It', 'Ba da ba ba ba' -- short rhythmic patterns designed for maximum memorability",
+        "Reggie Watts vocal loops: rhythmic nonsense syllables that become earworms through repetition and phonetic play"
+      ],
+      "music_theory_parallel": "The hook is the most commercially and psychologically potent element of a pop song -- the phrase you hum after the song is over, the element you recognize in the first two seconds. The yellowthroat's song IS a hook: simple pattern, strong rhythm, exact repetition, onomatopoeic fidelity. The first species in the engine whose primary acoustic strategy is CATCHINESS rather than complexity, meaning, persistence, or narrative."
+    },
+    {
+      "concept": "Earworm psychology (involuntary musical imagery -- INMI -- why certain melodic patterns replay in memory without conscious intent)",
+      "level": "intermediate",
+      "department": "music-theory/perception",
+      "college_path": ".college/music/theory/perception/earworm/",
+      "examples": [
+        "The yellowthroat's witchety matches every INMI criterion: simple pitch contour, strong metric rhythm, moderate tempo, exact repetition, phonetic salience",
+        "Sharp consonants (w, tch, t) create percussive onsets activating attention networks -- phonetic shape matches acoustic shape",
+        "Nonsense word 'witchety' cannot be resolved semantically -- keeps cycling in phonological loop of working memory",
+        "Motor engagement: march-like rhythm activates SMA and premotor cortex, and motor memory is persistent"
+      ],
+      "music_theory_parallel": "The neuroscience of earworms (Jakubowski et al. 2017, Williamson et al. 2012) reveals that the yellowthroat's song matches the profile of maximally sticky melodies. Simple pitch contour, strong metric rhythm in the 100-130 BPM range (walking tempo), exact repetition, and phonetic salience. The 'witchety' mnemonic is a pure phonetic loop that the brain cannot resolve semantically, forcing continued replay in working memory. The yellowthroat is an optimally designed involuntary auditory memory."
+    },
+    {
+      "concept": "The mnemonic as song (when the description of a sound IS the sound -- onomatopoeic fidelity as the limiting case of iconic representation)",
+      "level": "intermediate",
+      "department": "music-theory/semiotics",
+      "college_path": ".college/music/theory/semiotics/mnemonic-identity/",
+      "examples": [
+        "'Witchety-witchety-witchety' is not a metaphor for the song -- it IS the song. Say it out loud rhythmically and you are producing a reasonable approximation of the actual vocalization.",
+        "Contrast with Black-capped Chickadee (degree 3): 'chick-a-dee-dee-dee' captures the call but not the territorial song (fee-bee). The yellowthroat's mnemonic captures the PRIMARY vocalization.",
+        "In semiotics: the sign so faithful to its referent that it becomes the referent. The signifier and the signified collapse into one.",
+        "In music: when the hook IS the title IS the lyric -- 'yeah yeah yeah', 'na na na', 'witchety-witchety-witchety'"
+      ],
+      "music_theory_parallel": "The yellowthroat achieves maximum onomatopoeic fidelity -- the mnemonic IS the song. This is the limiting case of iconic representation in Peircean semiotics: a sign so faithful to its referent that the distinction between sign and referent dissolves. The chickadee (degree 3) approaches this with its call but not its song. The yellowthroat achieves it with its PRIMARY territorial vocalization. Zero gap between description and described."
+    },
+    {
+      "concept": "Three kinds of repetition (ostinato vs. narrative vs. hook -- same mechanism, three psychological effects: habituation, structure, memorization)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/repetition-taxonomy/",
+      "examples": [
+        "Hutton's Vireo (degree 13): ostinato -- repetition below attention threshold, fades to wallpaper, induces habituation",
+        "MacGillivray's Warbler (degree 14): ternary AAB -- repetition building to resolution, creates narrative, induces structural expectation",
+        "Common Yellowthroat (degree 17): hook -- repetition at foreground level, forces memorability, induces earworm",
+        "In music: drone (background repetition), verse-chorus (structural repetition), jingle (memorability repetition)"
+      ],
+      "music_theory_parallel": "The engine now distinguishes three psychological effects of repetition: (1) HABITUATION -- the Hutton's Vireo's ostinato repeats below the attention threshold, becoming wallpaper that the listener stops noticing. (2) STRUCTURE -- the MacGillivray's ternary AAB creates expectation and resolution, using repetition to build a narrative arc. (3) MEMORIZATION -- the yellowthroat's hook repeats at the foreground level with emphasis, forcing the pattern into long-term memory. Same mechanism (exact repetition), three different psychological outcomes. The repetition taxonomy is now three-dimensional."
+    },
+    {
+      "concept": "Marsh edge acoustics (open wetland sound environment -- less canopy filtering, more wind, louder delivery required)",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/marsh-edge/",
+      "examples": [
+        "First marsh/wetland species in the engine -- cattails, sedges, wet meadows, emergent vegetation",
+        "Marsh is AREAL (fills basins) vs. riparian is LINEAR (follows streams) -- fundamentally different habitat geometry",
+        "Open acoustic environment requires louder, more emphatic delivery than forest interior or dense shrub",
+        "PNW marsh sites: Nisqually Delta, Skagit Flats, Padilla Bay, beaver pond margins throughout lowland Puget Sound"
+      ],
+      "music_theory_parallel": "The marsh edge introduces a new acoustic environment to the engine. Previous water-associated habitats were riparian (streamside, with canopy filtering and limited sound propagation distance). Marsh is open -- less vegetation filtering, more wind, greater propagation distance. The yellowthroat's loud, emphatic, rhythmically regular song is adapted to this open environment: it must carry across water and emergent vegetation without the benefit of canopy amplification. The song's emphasis on rhythm and volume over tonal complexity matches the acoustic demands of the habitat."
+    },
+    {
+      "concept": "Intra-genus contrast (congeners with fundamentally different acoustic strategies -- same genus, opposite approaches)",
+      "level": "intermediate",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/genus-pair/",
+      "examples": [
+        "Geothlypis trichas (degree 17) and Geothlypis tolmiei (degree 14): same genus, opposite strategies",
+        "MacGillivray's: narrative (AAB, resolution, storytelling). Yellowthroat: hook (exact repetition, memorability, earworm).",
+        "MacGillivray's: skulking, hidden, western-only. Yellowthroat: bold, masked, continent-wide.",
+        "The genus expanded by DNA evidence (Oporornis collapsed into Geothlypis) now expanded by the engine's own logic"
+      ],
+      "music_theory_parallel": "The first intra-genus pair in the engine demonstrates that congeners -- species sharing a recent common ancestor -- can employ fundamentally different acoustic strategies. The MacGillivray's Warbler (degree 14) uses narrative structure (AAB with resolution). The Common Yellowthroat (degree 17) uses the hook (exact repetition for memorability). The genus Geothlypis contains both the storyteller and the jingle writer. In music: same genre, same era, same label -- but one act writes progressive concept albums and the other writes radio hits. Both effective. Both Geothlypis."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "SAME GENUS, OPPOSITE STRATEGY. Both Geothlypis. MacGillivray's (G. tolmiei) uses AAB narrative structure -- repetition with resolution, the storyteller. The yellowthroat (G. trichas) uses the hook -- repetition as memorability, the earworm. The engine's first intra-genus pair demonstrates that congeners can employ fundamentally different acoustic strategies. One tells stories (narrative arc with payoff). The other writes jingles (pattern that lodges in memory). Both are effective territorial signals. Both are Parulidae. Both are Geothlypis. The genus contains multitudes."
+    },
+    {
+      "project": "SPS-013",
+      "title": "Hutton's Vireo (Degree 13)",
+      "connection": "REPETITION AS IDENTITY vs. REPETITION AS MEMORABILITY. The vireo (degree 13) repeats the same two-note phrase endlessly -- ostinato, persistence below the attention threshold, the sound that fades to wallpaper. The yellowthroat (degree 17) repeats the same witchety phrase emphatically -- hook, memorability above the attention threshold, the sound that forces itself into memory. Both use exact repetition. The vireo's repetition induces habituation (you stop hearing it). The yellowthroat's repetition induces memorization (you cannot stop hearing it). Same mechanism, opposite psychological effect. The ostinato and the earworm."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "PARULIDAE FOURTH ENTRY. Fourth warbler in the engine. First return to a previously represented genus (Geothlypis -- also present at degree 14). AVI documents PNW warbler diversity including Common Yellowthroat breeding status, marsh/wetland habitat associations, and distribution across PNW wetland systems. The yellowthroat is one of the most widespread and abundant warblers in AVI's PNW coverage area."
+    },
+    {
+      "project": "ECO",
+      "title": "Ecology of the PNW",
+      "connection": "MARSH/WETLAND ECOSYSTEM. First marsh/wetland species in the engine. ECO documents PNW ecosystem structure including wetland classification (palustrine emergent, lacustrine fringe, riverine), cattail/sedge marsh ecology, and the critical role of wetlands in Pacific Northwest hydrology, flood control, and water quality. The yellowthroat carries the marsh into the engine -- the first species not associated with forest, shrub, or streamside."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Reggie Watts at degree 17. Both are impossibly catchy. Watts creates vocal loops -- rhythmic, often nonsensical, hypnotic patterns that become earworms through repetition and phonetic play. The yellowthroat does the same thing with witchety. Both achieve maximum memorability through the hook principle: simple pattern, strong rhythm, exact repetition, phonetic stickiness. Both make you unable to stop hearing them. Watts loops words until they become music. The yellowthroat loops witchety until it becomes permanent auditory memory."
+    },
+    {
+      "project": "SPS-016",
+      "title": "Yellow Warbler (Degree 16)",
+      "connection": "COWBIRD RESPONSE CONTRAST. Both species are frequent Brown-headed Cowbird hosts. The Yellow Warbler (degree 16) responds architecturally -- buries cowbird eggs under a new nest floor, building over the problem (the Amiga Principle, up to 6 layers). The Common Yellowthroat does NOT bury cowbird eggs -- it frequently accepts and raises cowbird young at the expense of its own offspring. Two Parulidae, two parasitism strategies: one builds over the problem (architectural defense), the other absorbs it (acceptance). The architectural defense is not universal even within the warbler family."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- the Common Yellowthroat introduces a NINTH communication modality: the hook-repetition territorial song. A rhythmically regular, emphatic, exactly-repeated two-note cell designed for MEMORABILITY rather than urgency, persistence, or narrative. Distinct from all eight previous modalities.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "warbler_role": "The Common Yellowthroat produces a loud, emphatic, rhythmically regular witchety-witchety-witchety song from exposed perches at marsh edges. Its communication is primarily INTRASPECIFIC: the song establishes territory and attracts mates through a hook -- a rhythmically insistent, exactly-repeated two-note cell designed for maximum memorability. The yellowthroat introduces a NINTH communication modality: the hook-repetition territorial song -- a signal defined by its catchiness and onomatopoeic fidelity rather than tempo variation, dynamic change, narrative structure, or persistent ostinato. Previous modalities: alarm broadcast (chickadees, degrees 3/9), swarm cohesion (bushtit, degree 10), territorial trill (junco, degree 11), flock sweep (siskin, degree 12), persistent ostinato (vireo, degree 13), structured ternary song (MacGillivray's, degree 14), tempo-varying burst (Wilson's, degree 15), dynamic-crescendo song (Yellow, degree 16). The yellowthroat adds: hook-repetition song (degree 17).",
+    "note": "The alarm network remains at 4 nodes. Nine parallel communication channels now documented in the forest: alarm broadcast, swarm cohesion, territorial trill, flock sweep, persistent ostinato, structured ternary song, tempo-varying burst, dynamic-crescendo song, and hook-repetition song."
+  },
+  "part_a_parallel": {
+    "artist": "Reggie Watts",
+    "degree": 17,
+    "genre": "S36",
+    "instrument": "Voice / Loop Station",
+    "label": "Sub Pop / Comedy Central",
+    "era": "2000s-present",
+    "shared_principle": "Both are impossibly catchy. Watts creates vocal loops -- rhythmic, often nonsensical, hypnotic patterns that become earworms through repetition and phonetic play. The yellowthroat does the same thing with witchety. Both achieve maximum memorability through the hook principle: simple pattern, strong rhythm, exact repetition, phonetic stickiness. Where Lorber at degree 16 layered complexity into fusion escalation, Watts at degree 17 strips everything to the loop -- the repeated pattern that sticks. The catchiness IS the art.",
+    "resonance_points": [
+      "Both impossibly catchy: Watts' vocal loops and the yellowthroat's witchety are both patterns that lodge in memory and refuse to leave. Once heard, never forgotten. The earworm principle in biological and artistic form.",
+      "Phonetic play as music: Watts uses nonsense syllables, beatboxing, and vocal manipulation to create rhythmic patterns that transcend language. The yellowthroat's 'witchety' is a phonetic loop with no semantic content -- pure rhythm and sound. Both achieve musicality through phonetics rather than lyrics.",
+      "Repetition as the art: Watts loops a pattern until it becomes hypnotic, until the repetition itself generates meaning and pleasure. The yellowthroat repeats witchety 3-5 times per phrase, hundreds of times per day. In both cases, the repetition IS the point -- not a means to an end but the end itself.",
+      "Seattle connection: Watts is from Great Falls, Montana but based in the broader West Coast creative ecosystem. The yellowthroat breeds across the PNW including the Puget Sound basin. Both operate in the same cultural geography."
+    ]
+  },
+  "degree_arc": {
+    "position": "The witchety-witchety-witchety -- the hook, memorability as acoustic strategy, the earworm. The third energy-3. The first marsh species. The first intra-genus pair. The fourth Parulidae.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15) -> ascending sweet crescendo / dynamic intensification within vocalization (16) -> witchety hook / memorability through rhythmic repetition (17)",
+    "key_insight": "Degree 17 introduces three new dimensions: (1) THE HOOK -- the first species whose primary acoustic strategy is CATCHINESS, memorability through rhythmic repetition of a simple, onomatopoeic two-note cell. (2) MARSH EDGE HABITAT -- the first wetland species, breaking out of riparian (streamside) into marsh (basin), introducing emergent cattail/sedge ecology. (3) INTRA-GENUS PAIR -- the first time two species from the same genus appear at different degrees, demonstrating that congeners can employ fundamentally different strategies (MacGillivray's narrative vs. yellowthroat hook).",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)",
+      "degree_14": "Ternary / AAB (repeated identical syllables followed by contrasting resolution syllable -- the minimal narrative arc, repetition with destination)",
+      "degree_15": "Accelerando (tempo-varying chattering series -- the first species defined by rate of change rather than pitch, timbre, or pattern)",
+      "degree_16": "Crescendo (dynamic-varying sweet series -- volume and pitch increase within a single vocalization, the sibling of accelerando applied through dynamic rather than temporal parameters)",
+      "degree_17": "Hook (rhythmic two-note cell repeated at constant tempo and volume -- the first species defined by MEMORABILITY as primary acoustic strategy, the earworm, the pop chorus in biological form)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)",
+      "degree_11": "Mid-range (3-6 kHz -- comfortably within human hearing, return to accessible mid-range)",
+      "degree_12": "Wide-band (2-10 kHz -- the ascending sweep traverses more of the frequency spectrum than any previous single vocalization)",
+      "degree_13": "Mid-range (2.5-5 kHz -- centered in the speech frequency band, easily audible, comfortably accessible)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz -- churry syllables in the upper portion, sweet resolution descending into mid-range)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz -- chi syllables in upper portion, chet syllables descending slightly. Brighter overall than degree 14)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz -- ascending crescendo from lower-mid to upper register. Brightest warbler song yet)",
+      "degree_17": "Mid-range (2.5-5.5 kHz -- centered in the sweet spot of human hearing. Lower spectral centroid than degree 16 but broader bandwidth. The frequency placement maximizes human audibility -- the earworm frequency)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)",
+      "degree_11": "Territory + mate attraction through trill (I am here, I am fit, this is my edge)",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (I am here, I am Pine Siskin, where are we going -- nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (I am still here, this is still my territory -- temporal continuity as content)",
+      "degree_14": "Territory + mate attraction through structured song with resolution (I am here, this phrase has a beginning and an end -- narrative as content)",
+      "degree_15": "Territory + mate attraction through accelerating burst (I am here, I am URGENT -- tempo change as fitness signal)",
+      "degree_16": "Territory + mate attraction through ascending crescendo (I am here, I am GROWING -- dynamic intensification as fitness signal)",
+      "degree_17": "Territory + mate attraction through the hook (I am here, I am UNFORGETTABLE -- memorability as fitness signal, the song that sticks, the earworm as territorial strategy)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows, emergent vegetation -- first wetland habitat in the engine)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Marsh edge habitat -- cattails (Typha), bulrushes (Schoenoplectus), sedges (Carex), and other emergent vegetation at the edges of freshwater marshes, wet meadows, beaver ponds, and slow-moving waterways. Also uses dense shrubby vegetation near water, overgrown fields with standing water, and edges of saltwater marshes. In the PNW, found in lowland freshwater marshes, Puget Sound salt marsh edges, and wet meadows throughout the Puget Trough and river valleys.",
+    "niche": "Low-shrub and emergent vegetation insectivore in marsh and wetland edge habitat. Forages by hopping through dense vegetation near ground level, gleaning insects from stems and leaves. Males sing from exposed perches (cattail tops, shrub tips) but forage in dense cover.",
+    "foraging_strategy": "Active gleaner in dense low vegetation -- hops through cattails, sedges, and marsh shrubs picking insects from stems and leaf surfaces. Occasionally hawks insects in short sallies. Forages lower than most warblers -- typically ground level to 2 meters.",
+    "diet": "Insects (caterpillars, beetles, flies, mosquitoes, leafhoppers, dragonflies, damselflies, spiders gleaned from marsh vegetation). Almost entirely insectivorous. Takes some seeds during fall migration.",
+    "nesting": "Nest on or near the ground in dense marsh vegetation -- supported by cattail stalks, sedge tussocks, or low shrubs, typically 0-3 feet above ground or water. Open cup of grass, sedge leaves, bark strips, and marsh plant material, lined with fine grass and hair. Well-concealed in dense vegetation. Female builds; female incubates.",
+    "irruptive_movement": false,
+    "resident_status": "NEOTROPICAL MIGRANT -- breeds across North America (April-September in PNW), winters from southern US through Mexico to Panama. Some populations resident in southern US and coastal California. Fifth neotropical migrant in the engine after Pacific-slope Flycatcher (degree 6), MacGillivray's Warbler (degree 14), Wilson's Warbler (degree 15), and Yellow Warbler (degree 16).",
+    "flock_size": "Solitary or in pairs during breeding season. Males are territorial. Does not form large conspecific flocks on breeding grounds. May join loose mixed-species groups during migration.",
+    "population_trend": "MODERATE DECLINE -- approximately 0.7% per year since 1966 (BBS data). Steeper than Yellow Warbler (0.2-0.3%) but less steep than some forest interior species. Cumulative ~38-40% decline over 6 decades. Driven primarily by wetland loss."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~77-87 million (Partners in Flight 2020)",
+    "trend": "Moderate decline -- approximately 0.7% per year since 1966 (Breeding Bird Survey). Cumulative ~38-40% decline over 6 decades. Driven by wetland and marsh habitat loss.",
+    "threats": "Wetland loss and degradation (agricultural conversion, urban development, hydrological modification, drainage, channelization); Brown-headed Cowbird parasitism (frequent host, does NOT bury eggs -- often raises cowbird young at expense of own); wintering ground habitat loss; pesticide exposure; climate-driven changes to wetland hydrology.",
+    "vulnerability": "Dependent on marsh and wetland edge habitat that has been severely reduced across the US (53% of original wetlands lost per Dahl 1990). The species' habitat generalism (uses a wide variety of marsh, wet meadow, and shrubby edge habitats) provides resilience, but the continental population trend remains negative.",
+    "unique_feature": "One of the most frequent cowbird hosts among North American warblers. Unlike the Yellow Warbler (degree 16), does NOT bury cowbird eggs. Frequently accepts and raises cowbird young. Cowbird parasitism rates can exceed 40% in fragmented landscapes.",
+    "wetland_context": "The Common Yellowthroat's population trend tracks wetland loss. Where wetlands are protected and restored, yellowthroat populations stabilize or increase. The species serves as an informal indicator of wetland health -- not as formally as the Yellow Warbler for riparian, but the correlation between marsh quality and yellowthroat abundance is well-documented."
+  },
+  "key_sites": [
+    {
+      "name": "Nisqually National Wildlife Refuge",
+      "type": "breeding (summer)",
+      "description": "Extensive freshwater and saltwater marsh habitat at the mouth of the Nisqually River on Puget Sound. Cattail marshes, sedge meadows, and marsh edges provide prime yellowthroat breeding habitat.",
+      "region": "Thurston County, WA"
+    },
+    {
+      "name": "Skagit Wildlife Area / Skagit Flats",
+      "type": "breeding (summer)",
+      "description": "Large freshwater marshes, wet meadows, and agricultural wetlands in the Skagit River delta. Extensive cattail and bulrush stands support high breeding densities.",
+      "region": "Skagit County, WA"
+    },
+    {
+      "name": "Montlake Fill / Union Bay Natural Area",
+      "type": "breeding (summer)",
+      "description": "Urban marsh and wetland habitat adjacent to the University of Washington in Seattle. Cattail marshes along Union Bay of Lake Washington. Accessible urban location demonstrating the species' tolerance for urban-adjacent marsh habitat.",
+      "region": "King County, WA (Seattle)"
+    },
+    {
+      "name": "Billy Frank Jr. Nisqually NWR boardwalk marshes",
+      "type": "breeding (summer)",
+      "description": "Boardwalk access through freshwater marsh habitat where Common Yellowthroats sing from cattail tops at close range. One of the best sites in the PNW to hear and observe the species.",
+      "region": "Thurston County, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the rhythmically regular witchety-witchety-witchety pattern with identical two-note cells repeated at constant tempo and volume",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Common Yellowthroat song shows RHYTHMICALLY REGULAR TWO-NOTE CELLS: each 'witchety' unit appears as a lower-frequency introductory note followed by a higher-frequency accented note, with nearly identical spacing between units. The spectrogram shows remarkable consistency in amplitude, frequency, and timing from unit to unit -- the visual equivalent of the earworm's auditory regularity. Compare to the Yellow Warbler (degree 16) whose spectrogram shows ascending amplitude and frequency (crescendo), and to the MacGillivray's (degree 14) whose spectrogram shows repeated identical units followed by a contrasting terminal element (AAB). The yellowthroat's spectrogram is the most rhythmically regular of any warbler in the engine."
+  },
+  "sources": [
+    "Guzy, M.J. and Ritchison, G. (2020). Common Yellowthroat (Geothlypis trichas). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Common Yellowthroat. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Common Yellowthroat. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Common Yellowthroat species account. birdweb.org",
+    "Linnaeus, C. (1766). Systema Naturae, 12th ed. [Original description as Turdus trichas.]",
+    "Lovette, I.J. et al. (2010). Comprehensive multilocus phylogeny for wood-warblers and revised classification of Parulidae. Mol Phylogenet Evol 57: 753-770.",
+    "Chesser, R.T. et al. (2011). Fifty-second supplement to the AOU Check-list. The Auk 128: 600-613.",
+    "Barker, F.K. et al. (2015). New insights into New World biogeography. The Auk 132: 333-348.",
+    "Spector, D.A. (1992). Wood-warbler song systems: A review of paruline singing behaviors. Current Ornithology 9: 199-238.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Catchpole, C.K. and Slater, P.J.B. (2008). Bird Song: Biological Themes and Variations. 2nd ed. Cambridge University Press.",
+    "Jakubowski, K., Finkel, S., Stewart, L., and Muellensiefen, D. (2017). Dissecting an earworm: Melodic features and song popularity predict involuntary musical imagery. Psychology of Aesthetics, Creativity, and the Arts 11(2): 122-135.",
+    "Williamson, V.J. et al. (2012). How do 'earworms' start? Psychology of Music 40(3): 259-284.",
+    "Levitin, D.J. (2006). This Is Your Brain on Music. Dutton.",
+    "Margulis, E.H. (2014). On Repeat: How Music Plays the Mind. Oxford University Press.",
+    "Burns, G. (1987). A typology of 'hooks' in popular records. Popular Music 6(1): 1-20.",
+    "Temperley, D. (2018). The Musical Language of Rock. Oxford University Press.",
+    "Dahl, T.E. (1990). Wetlands Losses in the United States, 1780's to 1980's. US Fish and Wildlife Service.",
+    "Mitsch, W.J. and Gosselink, J.G. (2015). Wetlands. 5th ed. Wiley.",
+    "Weller, M.W. (1999). Wetland Birds: Habitat Resources and Conservation Implications. Cambridge University Press.",
+    "Lowther, P.E. (2020). Brown-headed Cowbird parasitism. Birds of the World.",
+    "Rothstein, S.I. (1975). Experimental and teleonomic investigation of avian brood parasitism. Condor 77: 250-271.",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey, Results and Analysis 1966-2019. USGS Patuxent.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Common Yellowthroat (Geothlypis trichas). iucnredlist.org",
+    "eBird. Common Yellowthroat observation data, Pacific Northwest. ebird.org/species/comyel",
+    "Washington Department of Fish and Wildlife. PHS: Wetland and marsh habitats. wdfw.wa.gov",
+    "Macaulay Library. Common Yellowthroat recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "017",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
