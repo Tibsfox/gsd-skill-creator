@@ -1,0 +1,379 @@
+{
+  "degree": 24,
+  "species": "Western Tanager",
+  "scientific_name": "Piranga ludoviciana",
+  "slug": "024-western-tanager",
+  "sound_type": "hoarse robin-like warble",
+  "energy": 4,
+  "ecosystem": "conifer forest",
+  "season": "summer (breeding -- mid-May through August, peak song late May through July)",
+  "family": "Cardinalidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; conifer and mixed conifer forest throughout the Puget Sound region, Cascades foothills, Olympic lowlands -- Douglas fir, western hemlock, western red cedar canopy."
+  },
+  "taxonomy_note": {
+    "description": "The Western Tanager was historically placed in Thraupidae (true tanagers). Molecular phylogenetics (Sibley & Ahlquist 1990, Klicka et al. 2007, Barker et al. 2013) moved Piranga into Cardinalidae. The AOS/AOU formally reclassified the genus in 2008. The common name 'tanager' is retained by convention but is phylogenetically misleading. This is the SECOND Cardinalidae in the engine (after Black-headed Grosbeak at degree 23), NOT the first Thraupidae.",
+    "current_family": "Cardinalidae",
+    "historical_family": "Thraupidae",
+    "reclassification_year": 2008,
+    "family_count_in_engine": 15,
+    "cardinalidae_count_in_engine": 2
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,500-4,500",
+    "peak_energy_band_hz": "2,000-3,500",
+    "song_duration_s": "2-4",
+    "phrases_per_bout": "5-12",
+    "phrase_rate_per_second": "2-4",
+    "phrase_type": "Hoarse slurred whistles -- each phrase a rough pitch glide (upslur or downslur), alternating in direction. Fewer phrases per bout than the grosbeak (5-12 vs. 10-20), giving each phrase more perceptual weight.",
+    "timbre": "Husky, rough-edged, warm but grainy. Harmonic sidebands, frequency jitter, and amplitude irregularities produce a burry quality. 'A robin with a sore throat.' The hoarseness is the species-specific timbral signature.",
+    "amplitude": "Moderate to loud. Sings from upper conifer canopy (15-30 m). Song carries well through open canopy structure despite needle attenuation.",
+    "call_note": "Sharp 'pit-ik' or 'pit-er-ick' -- diagnostic two- or three-syllable contact/alarm call. Faster and more clipped than the grosbeak's 'pik' call.",
+    "hoarseness_sources": [
+      "Syringeal morphology: species-specific irregular oscillations producing additional harmonic content and frequency jitter",
+      "Bill morphology: slender bill (~9-10 mm deep) creates different vocal-tract resonance than grosbeak's massive bill",
+      "Habitat adaptation: broad-spectrum signal may survive conifer needle attenuation better than pure tones",
+      "Species recognition: hoarseness distinguishes tanager from grosbeak and robin in sympatric mixed/transitional forest"
+    ],
+    "key_property": "THE HOARSE WARBLE -- the 25th acoustic element. Tonal melody with spectral roughness. Robin-like architecture delivered through a grainy medium. Remove the hoarseness and you have a robin. Keep it and you have a tanager. Timbral distortion as acoustic identity."
+  },
+  "convergence_trio": {
+    "description": "Three consecutive degrees (23, 24, 25) produce robin-like warbles from different lineages. This is CONVERGENT ARCHITECTURE WITH DIVERGENT IMPLEMENTATION -- the same song plan built with different materials. The archetype (American Robin) arrives LAST.",
+    "members": [
+      {
+        "degree": 23,
+        "species": "Black-headed Grosbeak",
+        "family": "Cardinalidae",
+        "timbre": "Rich, smooth, mellow",
+        "role": "Preview A"
+      },
+      {
+        "degree": 24,
+        "species": "Western Tanager",
+        "family": "Cardinalidae",
+        "timbre": "Hoarse, rough, burry",
+        "role": "Preview B"
+      },
+      {
+        "degree": 25,
+        "species": "American Robin",
+        "family": "Turdidae",
+        "timbre": "Bright, clean, clipped",
+        "role": "Archetype"
+      }
+    ],
+    "shared_features": [
+      "Frequency range: 2.0-3.5 kHz center",
+      "Phrase structure: slurred whistles alternating in direction",
+      "Rhythmic cadence: rolling warble at 2-5 phrases/sec",
+      "Mid-frequency warmth: substantial energy below 3 kHz"
+    ],
+    "divergent_features": [
+      "Timbre: smooth (23) vs. hoarse (24) vs. clean (25)",
+      "Bill shape: massive conical (23) vs. slender pointed (24) vs. moderate curved (25)",
+      "Phrase rate: 3-5/sec (23) vs. 2-4/sec (24) vs. 3-5/sec (25)",
+      "Phrase variety: high (23) vs. moderate (24) vs. cyclic (25)"
+    ],
+    "principle": "Acoustic convergence across degrees -- the robin-like warble as an archetype approached from multiple directions before the archetype itself appears. Pre-echo as structural foreshadowing."
+  },
+  "rhodoxanthin": {
+    "description": "The male Western Tanager's red head plumage is colored by rhodoxanthin -- a rare ketocarotenoid that the bird CANNOT enzymatically synthesize. Unlike cardinals and House Finches (which convert dietary yellow carotenoids to red ketocarotenoids), the tanager must obtain rhodoxanthin directly from dietary sources, primarily insect prey. This makes the red head an HONEST SIGNAL of foraging quality -- brighter red = better forager.",
+    "pigment_type": "Rhodoxanthin (ketocarotenoid)",
+    "synthesis_capability": "NONE -- cannot be produced by the bird's metabolism",
+    "dietary_sources": [
+      "Insect prey (hemipterans and larvae containing rhodoxanthin from plant sources)",
+      "Conifer-associated food webs (yew arils, certain lichens)",
+      "Seasonal availability during pre-molt period (late summer)"
+    ],
+    "honest_signal_properties": [
+      "Cannot be faked -- no endogenous production pathway",
+      "Brightness correlates with foraging success",
+      "Territory quality affects access to rhodoxanthin-rich prey",
+      "Body condition determines allocation of rare pigment to plumage vs. other needs"
+    ],
+    "key_references": [
+      "Brush and Johnson 1976 (first identification of rhodoxanthin in tanager plumage)",
+      "Hudon 1991 (confirmation that tanagers cannot metabolically produce rhodoxanthin)",
+      "Hill 2002 (carotenoid honest signaling theory)"
+    ],
+    "uniqueness": "The Western Tanager is the only North American passerine known to rely on rhodoxanthin for plumage coloration. Most red-plumaged birds use enzymatically converted ketocarotenoids (3-hydroxy-echinenone, astaxanthin). The tanager's pathway is essentially unique."
+  },
+  "bill_comparison": {
+    "tanager_bill_depth_mm": "9-10",
+    "grosbeak_bill_depth_mm": "15-17",
+    "robin_bill_depth_mm": "~11-12",
+    "tanager_bill_function": "Insect capture (sallying, gleaning), fruit processing. NOT a seed-cracker. Slender, slightly hooked bill for aerial insect capture.",
+    "acoustic_consequence": "The slender bill creates a different vocal-tract resonance profile than the grosbeak's massive bill. Where the grosbeak's large cavity emphasizes low-frequency warmth, the tanager's narrower cavity may contribute to the hoarse quality by emphasizing different harmonic sidebands."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The convergence trio (three consecutive species producing robin-like warbles -- convergent architecture with divergent timbral implementation, the archetype arriving last as structural foreshadowing)",
+      "level": "advanced",
+      "department": "music-theory/evolution",
+      "college_path": ".college/music/theory/evolution/convergence-trio/",
+      "examples": [
+        "Degrees 23-24-25: grosbeak (smooth warble), tanager (hoarse warble), robin (clean warble) -- same architecture, three textures",
+        "In music: three cover versions of the same song by different artists, each adding their own timbral signature -- the original comes last",
+        "Film scoring: a melodic motif introduced first in distorted/partial form, then in full orchestration -- the previews before the main statement",
+        "Jazz standards: the head played rough and improvised before the definitive statement -- the chart comes after the jam"
+      ],
+      "music_theory_parallel": "The convergence trio is structural foreshadowing through acoustic approximation. The engine builds the robin's song from two angles before the robin sings. The grosbeak provides the smooth version. The tanager provides the hoarse version. The robin will provide the clean version. Each preview reveals a different facet of the archetype. This mirrors the classical technique of thematic foreshadowing -- fragments and variations of a theme appearing before the theme itself, so that when the theme finally arrives, it feels both new and recognized. The listener has been hearing the robin for two degrees without knowing it."
+    },
+    {
+      "concept": "Rhodoxanthin as honest signal (a pigment the bird cannot synthesize, obtained only from diet, making plumage brightness a direct, unfakeable indicator of foraging quality and territory value)",
+      "level": "advanced",
+      "department": "ecology/signaling",
+      "college_path": ".college/ecology/signaling/honest-pigment/",
+      "examples": [
+        "Western Tanager: rhodoxanthin from insect prey, cannot be endogenously produced. Red head brightness = foraging quality = honest signal",
+        "House Finch: red from converted dietary carotenoids -- the bird CAN synthesize the red form, so the honesty constraint is weaker",
+        "Peacock tail: honest signal of genetic quality through costly ornament maintenance -- the principle of handicap signaling (Zahavi 1975)",
+        "In music: a singer's natural vocal range vs. studio pitch correction -- the honest signal is the live performance where the capability cannot be faked"
+      ],
+      "music_theory_parallel": "The rhodoxanthin pathway is the biological equivalent of a live performance. You cannot lip-sync rhodoxanthin. The red head is proof-of-work -- the bird has found and consumed rhodoxanthin-rich insects, which requires effective foraging in quality habitat. A bright red head cannot be produced by a bird in poor condition or poor territory. The signal is honest because the production pathway is constrained. In music, the most honest signals of skill are those that cannot be post-produced: the live vocal take, the improvised solo, the unrehearsed jam session. The tanager's red head is a live performance painted in feathers."
+    },
+    {
+      "concept": "Timbral distortion as acoustic identity (the hoarse warble -- tonal melody carried through a grainy medium, where the roughness IS the species signature, not an impairment)",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/hoarse-warble/",
+      "examples": [
+        "Western Tanager: robin-like warble with hoarse, burry quality -- 'a robin with a sore throat.' The hoarseness distinguishes it from grosbeak and robin in sympatric zones",
+        "Distorted electric guitar: the distortion IS the sound of rock -- remove it and you have a clean jazz guitar. The roughness is the genre",
+        "Tom Waits' vocal style: the gravel and rasp ARE the artistic identity. A 'clean' Tom Waits would not be Tom Waits",
+        "Analog tape saturation: the harmonic distortion adds warmth and character. The 'imperfection' is the sound engineers seek"
+      ],
+      "music_theory_parallel": "The hoarse warble introduces the concept of productive distortion -- spectral roughness that adds identity rather than degrading it. In audio engineering, distortion is not inherently negative. Tube amplifier warmth, tape saturation, vinyl surface noise, vocal rasp -- all are forms of spectral energy added to the 'clean' signal that become inseparable from the desired sound. The tanager's hoarseness is not a damaged robin song. It is a tanager song -- the roughness is the species. The 25th acoustic element: tonal melody + spectral grain = hoarse warble."
+    },
+    {
+      "concept": "Conifer canopy as acoustic filter (needle attenuation selectively absorbing high frequencies, favoring mid-frequency and broad-spectrum signals -- the habitat shapes the song through transmission physics)",
+      "level": "intermediate",
+      "department": "ecology/acoustics",
+      "college_path": ".college/ecology/acoustics/conifer-filtering/",
+      "examples": [
+        "Western Tanager: hoarse broad-spectrum warble propagating through needle-dense canopy. Spectral breadth provides attenuation robustness",
+        "Spotted Owl (degree 4): low-frequency hoots propagating through old-growth canopy -- low frequencies pass through needle layers",
+        "In audio: equalizer curves shaped by room acoustics -- the venue determines which frequencies survive",
+        "Underwater acoustics: low frequencies propagate farther in ocean water -- the medium selects the viable signal"
+      ],
+      "music_theory_parallel": "Conifer canopy is a natural equalizer. Needles scatter and absorb frequencies above ~4 kHz preferentially, creating a low-pass filtering effect. A pure-toned signal at 3 kHz might be adequate in open air but fragile in dense canopy -- if its narrow frequency band hits an attenuation pocket, the signal disappears. A hoarse, broad-spectrum signal distributes energy across a wider band. If some frequencies are attenuated, others persist. The signal survives through spectral redundancy. The roughness is not a cost -- it is an insurance policy. The habitat selects for signals that can tolerate its filtering. The conifer canopy is the venue; the hoarse warble is the band that sounds good in it."
+    },
+    {
+      "concept": "Phylogenetic reclassification as taxonomic lesson (the 'tanager' that is actually a cardinal -- common names as fossils of outdated taxonomy, molecular evidence overturning morphological classification)",
+      "level": "intermediate",
+      "department": "taxonomy/systematics",
+      "college_path": ".college/taxonomy/systematics/reclassification/",
+      "examples": [
+        "Western Tanager (Piranga): moved from Thraupidae to Cardinalidae by molecular evidence. Common name retained despite being misleading",
+        "Shrikes (Laniidae): convergent bill morphology with unrelated raptors -- appearance does not equal relationship",
+        "In music: genres named after their origins that no longer describe their sound -- 'country music' from Nashville vs. country music from a field",
+        "Scientific nomenclature as living document: names change when evidence accumulates, but common usage lags behind"
+      ],
+      "music_theory_parallel": "The Western Tanager's name is a historical artifact. It was called a tanager because it looks like a tanager -- bright colors, forest habitat, insectivorous diet. But looking like something does not make you that thing. Convergent morphology (looking similar) and convergent behavior (similar ecological roles) can arise independently in unrelated lineages. The molecular evidence reveals the true family tree: the tanager is a cardinal. The grosbeak at degree 23 is its actual relative. The name 'tanager' persists because cultural naming systems change slowly. This is the taxonomic equivalent of a musician still being called 'jazz' after switching to electronic music -- the label reflects history, not current reality."
+    },
+    {
+      "concept": "Energy plateau extension (fourth consecutive E=4 degree -- the sustained high-energy baseline accommodating varied acoustic character: percussion, smooth warble, hoarse warble)",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-quartet/",
+      "examples": [
+        "Degrees 21-24: hammer (metronomic vocal E=4), drum (broadband mechanical E=4), smooth warble (rich melodic E=4), hoarse warble (rough melodic E=4)",
+        "Compare initial E=2 plateau (degrees 0-7): eight degrees at low energy. The E=4 plateau at 21-24 is the high-energy counterpart",
+        "In music: the climactic section of a symphony that sustains fortissimo through varied orchestration -- strings, brass, percussion all at full intensity",
+        "A DJ set sustaining peak energy through genre transitions -- the tempo and volume hold while the texture rotates"
+      ],
+      "music_theory_parallel": "The E=4 plateau at degrees 21-24 demonstrates that sustained high energy is not monotony. The engine maintains the same dynamic level across four fundamentally different acoustic events: metronomic vocal percussion (the flicker's wick call), broadband mechanical percussion (the flicker's drum), smooth rich warble (the grosbeak), and hoarse rough warble (the tanager). Same loudness, four different timbral characters. This is the orchestration principle -- a sustained dynamic level achieves variety through instrumentation change, not volume change. The engine has recalibrated to E=4 as its working baseline. The question is no longer 'how loud' but 'what kind of loud.'"
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-023",
+      "title": "Black-headed Grosbeak (Degree 23)",
+      "connection": "THE CONVERGENCE DEEPENS. Two consecutive Cardinalidae. Two consecutive robin-like warbles. Degree 23 was smooth and rich; degree 24 is hoarse and rough. Same family, same archetype, different texture. The robin-like warble is a Cardinalidae trait expressed in two timbral registers. The grosbeak's massive bill produces warm resonance; the tanager's slender bill produces rough resonance. Different bills, same song architecture."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "THE CONVERGENCE TRIO COMPLETES. Three consecutive robin-like warbles: grosbeak (23, Cardinalidae, smooth), tanager (24, Cardinalidae, hoarse), robin (25, Turdidae, clean). The archetype arrives last. Two previews from Cardinalidae, then the original from Turdidae. Convergent architecture with divergent implementation -- the same song plan built with different materials."
+    },
+    {
+      "project": "SPS-007",
+      "title": "Hermit Thrush (Degree 7)",
+      "connection": "FOUR RICH WARBLES. The engine's warm-voice cluster expands: Hermit Thrush (7, harmonic spiral), Swainson's Thrush (18, ascending spiral), Black-headed Grosbeak (23, smooth warble), and now Western Tanager (24, hoarse warble). Four mid-frequency, melodically complex woodland warbles from three families. The robin at degree 25 will add a fifth."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "PLAINEST TO MOST SPECTACULAR. The Orange-crowned Warbler at degree 20 is the plainest bird in the engine -- cryptic olive-yellow, invisible crown patch. The Western Tanager at degree 24 is the most spectacular -- brilliant yellow body, flame-red head, jet-black wings. Four degrees from drab to dazzling. The plumage spectrum widens dramatically."
+    },
+    {
+      "project": "SPS-009",
+      "title": "Chestnut-backed Chickadee (Degree 9)",
+      "connection": "CONIFER FOREST RETURN. The last conifer-specialist species was the Chestnut-backed Chickadee at degree 9. Fifteen degrees later, the engine returns to closed conifer canopy. Different acoustic environment than mixed forest (23), forest snag (22), or open woodland (21). Needle attenuation, trunk reverberation, vertical stratification shape the tanager's song."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Voice (Degree 21)",
+      "connection": "ENERGY 4 QUARTET. Four consecutive E=4 degrees: flicker voice (21, the hammer), flicker drum (22, resonant percussion), grosbeak warble (23, smooth groove reset), tanager warble (24, hoarse stolen pigment). Four forms of acoustic power -- metronomic vocal, broadband mechanical, smooth melodic, rough melodic. The longest sustained energy plateau in the engine."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Western Tanager documented in AVI as a conifer-forest summer breeder, long-distance neotropical migrant (winters Mexico to Costa Rica). Rhodoxanthin pigmentation noted. Insectivorous foraging strategy. Sallying and gleaning in upper canopy."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Conifer forest ecology: Douglas fir-hemlock-cedar canopy structure, needle attenuation acoustic properties, upper-canopy insect communities. The tanager's habitat is the cathedral forest -- the defining PNW forest type."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Ron Artis II (Soul/Jazz, E=4, Hawaii to Seattle, KEXP). Both are long-distance migrants who find identity in rough, honest texture. The hoarseness IS the signal. KEXP as broadcast medium parallels conifer canopy as acoustic medium. Fourth consecutive E=4."
+    }
+  ],
+  "degree_arc": {
+    "position": "The hoarse warble -- second robin-like warble in two degrees, second Cardinalidae in two degrees, the convergence trio's middle member. Rhodoxanthin honest signaling. Conifer forest return. Fourth consecutive E=4. 25th acoustic element. 23rd unique species.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic spiral (7) -> ultrasonic threshold (8) -> variation (9) -> minimum signal (10) -> trill/tremolo (11) -> sawtooth sweep (12) -> ostinato (13) -> repetition-resolution (14) -> accelerando (15) -> crescendo (16) -> the hook (17) -> ascending spiral (18) -> descending spiral (19) -> sustain/the release (20) -> the hammer (21) -> resonant percussion (22) -> the groove reset (23) -> the hoarse warble (24)",
+    "key_insight": "Degree 24 introduces THREE new structural dimensions: (1) THE CONVERGENCE TRIO -- three consecutive robin-like warbles (23-24-25) from two families, with the archetype arriving last. Convergent architecture with divergent timbral implementation. (2) RHODOXANTHIN -- the stolen pigment. The only North American passerine whose red plumage depends on a pigment it cannot synthesize. Honest signaling through dietary constraint. (3) TIMBRAL DISTORTION AS IDENTITY -- the hoarse warble is not a degraded robin song but a species-specific acoustic signature. The roughness IS the tanager. Plus: second Cardinalidae (the 'tanager' that is actually a cardinal), conifer forest return (first since degree 9), and fourth consecutive E=4 extending the energy plateau.",
+    "acoustic_element_25": "THE HOARSE WARBLE -- robin-like architecture (slurred phrases in the 2.0-3.5 kHz band, alternating pitch direction, rolling cadence) delivered with spectral roughness (harmonic sidebands, frequency jitter, amplitude irregularities). Tonal melody through a grainy medium. The 25th element: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, release, the hammer, resonant percussion, the groove reset, THE HOARSE WARBLE.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide)",
+      "degree_7": "Harmonic series navigation (mathematical melody)",
+      "degree_8": "Ultra-high ascending series (audiometric boundary crossing)",
+      "degree_9": "Variation on combinatorial syntax (the cover version)",
+      "degree_10": "Minimum viable signal (1-bit presence, swarm cohesion)",
+      "degree_11": "Tremolo / trill (rapid repetition at fusion threshold)",
+      "degree_12": "Ascending sawtooth sweep (buzzy waveform ascending)",
+      "degree_13": "Ostinato (two-note repeated phrase below fusion threshold)",
+      "degree_14": "Ternary / AAB (repetition with contrasting resolution)",
+      "degree_15": "Accelerando (tempo-varying chattering series)",
+      "degree_16": "Crescendo (dynamic-varying sweet series)",
+      "degree_17": "Hook (rhythmic two-note cell, memorability through repetition)",
+      "degree_18": "Ascending spiral (sequential phrases each higher)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each lower, bilateral syrinx)",
+      "degree_20": "Trill with parametric decay / ADSR release (triple descent, fade-out)",
+      "degree_21": "The hammer (sustained discrete metronomic repetition at constant pitch, constant volume, energy 4)",
+      "degree_22": "Resonant percussion (broadband substrate-dependent mechanical percussion above fusion threshold -- the first non-vocal sound)",
+      "degree_23": "The groove reset (rich robin-like warble of rapidly alternating slurred phrases -- return to tonal melody after percussion, convergent with American Robin, both sexes sing)",
+      "degree_24": "The hoarse warble (robin-like architecture with spectral roughness -- tonal melody through grainy medium, timbral distortion as species identity, convergence trio middle member)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz)",
+      "degree_8": "Ultra-high (6-10 kHz)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz)",
+      "degree_21": "Mid-range to upper-mid (1.5-4.0 kHz -- tonal, pitched, harmonic content)",
+      "degree_22": "BROADBAND (100 Hz to 8+ kHz -- no fundamental pitch, substrate-dependent peak energy 500 Hz to 4 kHz)",
+      "degree_23": "Mid-range (1.5-4.5 kHz -- warm, rich, robin-like. Peak energy 2.0-3.5 kHz. The return to tonal, pitched, harmonically rich sound after broadband percussion)",
+      "degree_24": "Mid-range (1.5-4.5 kHz -- hoarse, rough, robin-like. Peak energy 2.0-3.5 kHz. Same frequency range as degree 23 but with added spectral roughness)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel)",
+      "degree_9": "Referential threat information (conserved content, varied delivery)",
+      "degree_10": "Pure presence / flock cohesion (1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep",
+      "degree_13": "Territory + pair bond through persistent repetition",
+      "degree_14": "Territory + mate attraction through narrative",
+      "degree_15": "Territory + mate attraction through urgency",
+      "degree_16": "Territory + mate attraction through brightness",
+      "degree_17": "Territory + mate attraction through the hook",
+      "degree_18": "Territory + mate attraction through ascending spiral",
+      "degree_19": "Territory + mate attraction through descending spiral",
+      "degree_20": "Territory + mate attraction through fading trill (evaporation)",
+      "degree_21": "Territory + mate attraction through the hammer (sustained metronomic vocal force at energy 4)",
+      "degree_22": "Territory + mate attraction + HABITAT QUALITY through resonant percussion (the substrate encodes territory quality)",
+      "degree_23": "Territory + mate attraction + PAIR COORDINATION through both-sex warble (vocal symmetry as reproductive strategy)",
+      "degree_24": "Territory + mate attraction + FORAGING QUALITY through hoarse warble + honest plumage signal (the song declares territory, the plumage declares foraging ability -- dual-channel honest signaling)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood)",
+      "degree_19": "Lowland riparian (deciduous thicket, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside)",
+      "degree_21": "Open woodland (scattered trees with broken canopy, grassy openings, mosaic)",
+      "degree_22": "Forest snag (dead standing wood -- the instrument IS the habitat)",
+      "degree_23": "Mixed forest (any mixture of deciduous and conifer trees -- the broadest ecosystem category, the generalist venue)",
+      "degree_24": "Conifer forest (Douglas fir-hemlock-cedar closed canopy -- return to the cathedral, needle attenuation as acoustic filter)"
+    }
+  },
+  "conservation": {
+    "population_estimate": "Approximately 15 million breeding individuals (Partners in Flight 2020)",
+    "trend": "Stable overall. BBS data show slight declines in some western regions (~0.5% annual) but stable or increasing in others. The species remains widespread and common.",
+    "threats": [
+      "Habitat loss (logging of mature conifer forest, conversion to plantation monoculture)",
+      "Fire regime alteration (fire suppression creating dense understory that reduces foraging habitat)",
+      "Climate change (shifting timing of insect emergence, potential mismatch with breeding season)",
+      "Window collisions during migration"
+    ],
+    "conservation_status": "IUCN Least Concern. Not currently at risk at the species level.",
+    "rhodoxanthin_vulnerability": "If insect prey populations decline (pesticides, habitat degradation), rhodoxanthin availability decreases, potentially reducing plumage brightness and honest signal quality. The dietary pigment dependency creates an indirect vulnerability to ecosystem health."
+  },
+  "part_a_parallel": {
+    "artist": "Ron Artis II",
+    "degree": 24,
+    "genre": "Soul/Jazz",
+    "location": "Hawaii to Seattle",
+    "era": "KEXP",
+    "release_type": "Independent / KEXP",
+    "shared_principle": "Both are long-distance migrants who find their identity in rough, honest texture. Ron Artis II brings raw, gritty soul from Hawaii to Seattle. The Western Tanager brings a hoarse warble from Central America to the PNW. Both are energy-4 performers whose rough edges are features, not flaws. KEXP is the broadcast medium that shapes the signal, just as conifer canopy is the acoustic medium that shapes the song.",
+    "resonance_points": [
+      "Long-distance migration: Hawaii to Seattle parallels Central America to PNW. Both cross significant distances to inhabit the Pacific Northwest soundscape.",
+      "Rough texture as identity: Ron Artis II's raw, gritty vocal style and the tanager's hoarse warble both find their character in roughness. The distortion IS the signal.",
+      "Energy 4 through authenticity: fourth consecutive E=4. Both sustain energy through honest, unpolished performance -- not studio-smoothed or electronically amplified.",
+      "KEXP as conifer canopy: the broadcast platform and the forest canopy both filter and color the signal in transmission. What the listener receives has been shaped by the medium."
+    ]
+  }
+}

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 24&deg; &mdash; Western Tanager &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.convergence { background: #7B1FA2; }
+    .theory-icon.pigment { background: #D32F2F; }
+    .theory-icon.hoarse { background: #E65100; }
+    .theory-icon.conifer { background: #2E7D32; }
+    .theory-icon.taxonomy { background: #1565C0; }
+    .theory-icon.plateau { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Convergence trio card */
+    .convergence-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 1px solid #AB47BC;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .convergence-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #6A1B9A;
+    }
+
+    /* Pigment card */
+    .pigment-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF9A9A 100%);
+      border: 1px solid #E53935;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pigment-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Hoarseness card */
+    .hoarse-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #F57C00;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .hoarse-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Taxonomy card */
+    .taxonomy-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 1px solid #42A5F5;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .taxonomy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Conifer card */
+    .conifer-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .conifer-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">24&deg;</div>
+      <div class="release-title-block">
+        <h2>Western Tanager</h2>
+        <div class="scientific">Piranga ludoviciana &middot; Family Cardinalidae (Cardinals &amp; Grosbeaks)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Hoarse Robin-like Warble &middot; Conifer Forest &middot; Summer &middot; Energy 4</div>
+
+    <blockquote>
+      High in the Douglas fir canopy, a flash of yellow and flame-red moves
+      along a branch &mdash; the most spectacular songbird in the PNW, the Western
+      Tanager, a tropical explosion in the evergreen cathedral. It opens a
+      slender bill and pours out a rolling warble &mdash; robin-like in architecture
+      but hoarse, rough, grainy, as if the robin&rsquo;s song had been run through
+      sandpaper. This is the second robin-like warble in two degrees, from the
+      second Cardinalidae in two degrees. The robin itself arrives at degree 25.
+      Three species converging on one song. The convergence trio. And in the
+      tanager&rsquo;s flame-red head, a pigment the bird cannot make &mdash; rhodoxanthin,
+      stolen from insects, deposited as an honest signal of foraging quality.
+      The color is borrowed. The song is rough. Both are real.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Convergence Trio Card -->
+        <div class="convergence-card">
+          <h3>The Convergence Trio: Three Robin-like Warbles in Three Degrees</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>Degrees 23, 24, 25:</strong> Three consecutive species produce robin-like warbles.
+            Black-headed Grosbeak (23, Cardinalidae) &mdash; smooth. Western Tanager (24, Cardinalidae)
+            &mdash; hoarse. American Robin (25, Turdidae) &mdash; clean. Same frequency range
+            (2&ndash;3.5 kHz center), same phrase structure (slurred whistles), different timbral
+            textures. <strong>Convergent architecture with divergent implementation</strong> &mdash;
+            the same house plan built with different materials.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Grosbeak (23)</th><th>Tanager (24)</th><th>Robin (25)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Family</td><td>Cardinalidae</td><td>Cardinalidae</td><td>Turdidae</td></tr>
+              <tr><td>Timbre</td><td>Rich, smooth</td><td>Hoarse, rough</td><td>Bright, clean</td></tr>
+              <tr><td>Phrase rate</td><td>3&ndash;5/sec</td><td>2&ndash;4/sec</td><td>3&ndash;5/sec</td></tr>
+              <tr><td>Bill shape</td><td>Massive conical</td><td>Slender pointed</td><td>Moderate curved</td></tr>
+              <tr><td>Phrase variety</td><td>High</td><td>Moderate</td><td>Cyclic</td></tr>
+              <tr style="background: rgba(171,71,188,0.15); font-weight: 600;"><td>Engine role</td><td>Preview A (smooth)</td><td><strong>Preview B (hoarse)</strong></td><td>Archetype</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pigment Card -->
+        <div class="pigment-card">
+          <h3>The Stolen Pigment: Rhodoxanthin</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The male Western Tanager&rsquo;s flame-red head is colored by <strong>rhodoxanthin</strong>
+            &mdash; a rare ketocarotenoid the bird <strong>cannot synthesize</strong>. Most red birds
+            (cardinals, House Finches) convert dietary yellow carotenoids to red pigments using their
+            own enzymes. The tanager cannot. It must obtain rhodoxanthin directly from insect prey.
+            The red head is an <strong>honest signal</strong> &mdash; it cannot be faked. Brighter red
+            = better forager = better territory = better mate. The color is dietary proof of quality.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Red Pigment Source</th><th>Mechanism</th><th>Species Example</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Enzymatic conversion</td><td>Bird converts yellow carotenoids to red ketocarotenoids</td><td>Northern Cardinal, House Finch</td></tr>
+              <tr style="background: rgba(229,57,53,0.15); font-weight: 600;"><td><strong>Direct dietary deposition</strong></td><td><strong>Bird obtains rhodoxanthin from insects; cannot synthesize it</strong></td><td><strong>Western Tanager</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Hoarseness Card -->
+        <div class="hoarse-card">
+          <h3>The Hoarse Warble: Timbral Distortion as Identity</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            &ldquo;A robin with a sore throat.&rdquo; The tanager&rsquo;s song is robin-like in
+            architecture but <strong>hoarse, rough, and burry</strong> in texture. The phrases contain
+            additional spectral energy &mdash; harmonic sidebands, frequency jitter, amplitude
+            irregularities &mdash; producing a grainy quality absent from both the grosbeak (smooth)
+            and the robin (clean). This hoarseness may be adaptive: in conifer canopy, a broad-spectrum
+            signal survives needle attenuation better than a pure tone. The roughness is the robustness.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics</h2>
+        <p>
+          The Western Tanager delivers a rolling warble of <strong>5&ndash;12 hoarse,
+          slurred phrases</strong> per bout, each phrase a rough pitch glide alternating
+          in direction. The song lasts <strong>2&ndash;4 seconds</strong> at approximately
+          <strong>2&ndash;4 phrases per second</strong>.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>1.5&ndash;4.5 kHz</td></tr>
+            <tr><td>Peak energy</td><td>2.0&ndash;3.5 kHz</td></tr>
+            <tr><td>Song duration</td><td>2&ndash;4 seconds</td></tr>
+            <tr><td>Phrases per bout</td><td>5&ndash;12</td></tr>
+            <tr><td>Phrase rate</td><td>2&ndash;4 per second</td></tr>
+            <tr><td>Phrase type</td><td>Hoarse slurred whistles (rough pitch glides)</td></tr>
+            <tr><td>Timbre</td><td>Husky, rough, burry &mdash; &ldquo;robin with a sore throat&rdquo;</td></tr>
+            <tr><td>Amplitude</td><td>Moderate-loud &mdash; carries from upper conifer canopy</td></tr>
+            <tr><td>Call note</td><td>&ldquo;Pit-ik&rdquo; or &ldquo;pit-er-ick&rdquo; &mdash; sharp, diagnostic</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Taxonomy Card -->
+        <div class="taxonomy-card">
+          <h3>The Tanager That Isn&rsquo;t a Tanager</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Western Tanager was historically placed in Thraupidae (true tanagers). Molecular
+            phylogenetics (Klicka et al. 2007; Barker et al. 2013) moved <em>Piranga</em> into
+            <strong>Cardinalidae</strong>. The common name &ldquo;tanager&rdquo; is retained by
+            convention but is phylogenetically misleading. The Western Tanager is a cardinal, not a
+            tanager &mdash; genetically closer to the Black-headed Grosbeak than to any true tanager.
+            Two consecutive Cardinalidae at degrees 23&ndash;24: grosbeak and &ldquo;tanager,&rdquo;
+            siblings that look nothing alike.
+          </p>
+        </div>
+
+        <!-- Conifer Card -->
+        <div class="conifer-card">
+          <h3>Conifer Forest: Return to the Cathedral</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Western Tanager is a <strong>conifer forest specialist</strong> &mdash; the first since
+            degree 9 (Chestnut-backed Chickadee). After mixed forest (23), forest snag (22), and open
+            woodland (21), the engine returns to <strong>closed conifer canopy</strong>: Douglas fir,
+            western hemlock, western red cedar. The tanager forages at 15&ndash;30 m height, sallying
+            from branch tips to capture flying insects. Its hoarse warble filters down through needle
+            layers to reach ground-level listeners &mdash; the song is heard more often than the bird
+            is seen.
+          </p>
+        </div>
+
+        <!-- Migration -->
+        <h2>Long-Distance Migrant</h2>
+        <p>
+          The Western Tanager is one of the PNW&rsquo;s longest-distance neotropical migrants,
+          wintering from Mexico through Central America to <strong>Costa Rica</strong> &mdash;
+          up to 4,500 km one-way. It arrives in the PNW in <strong>mid-May</strong> (later than
+          the grosbeak) and departs by <strong>early September</strong>. Peak song occurs
+          <strong>late May through mid-July</strong>.
+        </p>
+
+        <!-- Sexual Dimorphism -->
+        <h2>Plumage: Tropical Explosion</h2>
+        <p>
+          <strong>Male:</strong> Flame-orange to scarlet head (rhodoxanthin pigment), brilliant
+          lemon-yellow body, black back and wings with bold yellow and white wing bars, slender
+          slightly hooked bill. One of the most visually spectacular PNW birds.
+        </p>
+        <p>
+          <strong>Female:</strong> Olive-yellow overall, duller above, brighter below. No red.
+          Two wing bars. Same slender bill shape.
+        </p>
+        <p>
+          The engine moves from its <strong>plainest species</strong> (Orange-crowned Warbler,
+          degree 20) to one of its <strong>most spectacular</strong> in four degrees.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon convergence">T</div>
+            <div class="theory-content">
+              <h4>Convergence Trio &mdash; Three Robin-like Warbles</h4>
+              <p>Degrees 23-24-25: grosbeak (smooth), tanager (hoarse), robin (clean). Same architecture, different textures. Convergent structure with divergent implementation. The archetype arrives last.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pigment">R</div>
+            <div class="theory-content">
+              <h4>Rhodoxanthin &mdash; The Stolen Pigment</h4>
+              <p>The only North American passerine whose red plumage comes from a pigment it cannot synthesize. Rhodoxanthin from insect diet, deposited directly. Honest signal of foraging quality.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hoarse">H</div>
+            <div class="theory-content">
+              <h4>Timbral Distortion as Acoustic Identity</h4>
+              <p>The hoarse warble is the 25th acoustic element. Tonal melody with spectral roughness &mdash; melodic content carried through a grainy medium. Remove the hoarseness and you have a robin. Keep it and you have a tanager.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon conifer">C</div>
+            <div class="theory-content">
+              <h4>Conifer Canopy Acoustic Filtering</h4>
+              <p>Conifer needles scatter high frequencies, favoring mid-frequency signals. The hoarse, broad-spectrum warble may survive needle attenuation better than pure tones. The roughness is the robustness.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon taxonomy">P</div>
+            <div class="theory-content">
+              <h4>Phylogenetic Surprise &mdash; Cardinalidae, Not Thraupidae</h4>
+              <p>The &ldquo;tanager&rdquo; is a cardinal. Molecular phylogenetics moved <em>Piranga</em> from Thraupidae to Cardinalidae. The common name is a fossil of outdated taxonomy. Second Cardinalidae after the grosbeak.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon plateau">E</div>
+            <div class="theory-content">
+              <h4>Energy Plateau: Sustained E=4 &mdash; Fourth Consecutive</h4>
+              <p>Degrees 21&ndash;24: hammer, drum, smooth warble, hoarse warble. Four forms of acoustic power at sustained high energy. The engine has recalibrated to E=4 as baseline.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-023: Black-headed Grosbeak</strong>
+            <p>THE CONVERGENCE DEEPENS. Two consecutive Cardinalidae. Two consecutive robin-like warbles. Smooth vs. hoarse. Same family, same archetype, different texture.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>THE CONVERGENCE TRIO COMPLETES. Three consecutive robin-like warbles from two families. Grosbeak (smooth), tanager (hoarse), robin (clean). The archetype arrives last.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-007: Hermit Thrush</strong>
+            <p>FOUR RICH WARBLES. Hermit Thrush (7), Swainson&rsquo;s (18), Grosbeak (23), Tanager (24). Four mid-frequency melodic woodland warbles from three families. Degree 25 adds a fifth.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>PLAINEST TO MOST SPECTACULAR. OC Warbler (20): cryptic olive-yellow. Western Tanager (24): flame-red, lemon-yellow, jet-black. Four degrees from drab to dazzling.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-009: Chestnut-backed Chickadee</strong>
+            <p>CONIFER FOREST RETURN. Last conifer specialist was degree 9. Fifteen degrees later, the engine returns to closed conifer canopy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker (Voice)</strong>
+            <p>ENERGY 4 QUARTET. Four consecutive E=4 degrees (21&ndash;24): hammer, drum, smooth warble, hoarse warble. The longest sustained energy plateau in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Western Tanager documented as conifer-forest summer breeder. Rhodoxanthin pigmentation noted. Insectivorous foraging strategy. Long-distance migrant.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Conifer forest ecology: Douglas fir-hemlock-cedar canopy, needle attenuation acoustics, upper-canopy insect communities.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: Ron Artis II (Soul/Jazz, E=4, Hawaii to Seattle, KEXP). Both are long-distance migrants who find identity in rough, honest texture.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Hudon, J. (1991). Unusual carotenoid use by the Western Tanager. <em>Canadian Journal of Zoology</em> 69(9): 2311&ndash;2320.</li>
+          <li>Hudon, J. (1999). Western Tanager (<em>Piranga ludoviciana</em>). <em>Birds of North America</em>. Cornell Lab of Ornithology.</li>
+          <li>Klicka, J. et al. (2007). Defining a monophyletic Cardinalini. <em>Mol. Phylogenetics Evol.</em> 45(3): 1014&ndash;1032.</li>
+          <li>Barker, F.K. et al. (2013). Contrasting rates of diversification in New World passerines. <em>Systematic Biology</em> 62(2): 298&ndash;320.</li>
+          <li>Brush, A.H. and Johnson, N.K. (1976). Carotenoid pigment evolution. <em>Condor</em> 78(3): 412&ndash;414.</li>
+          <li>Hill, G.E. (2002). <em>A Red Bird in a Brown Bag</em>. Oxford University Press.</li>
+          <li>Podos, J. (2001). Correlated evolution of morphology and vocal signal structure. <em>Nature</em> 409: 185&ndash;188.</li>
+          <li>Boncoraglio, G. and Saino, N. (2007). Habitat structure and bird song evolution. <em>Functional Ecology</em> 21(1): 134&ndash;142.</li>
+          <li>Wiley, R.H. and Richards, D.G. (1982). Adaptations for acoustic communication in birds. <em>Acoustic Communication in Birds</em> 1: 131&ndash;181.</li>
+          <li>BirdWeb (Seattle Audubon Society). Western Tanager. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates: Western Tanager. partnersinflight.org</li>
+          <li>Macaulay Library. Western Tanager recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">24&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Cardinalidae</div>
+          <div class="stat-detail">Second Cardinalidae &mdash; reclassified from Thraupidae</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Hoarse warble</div>
+          <div class="stat-detail">Robin-like but rough, burry, grainy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Fourth consecutive E=4 (degrees 21&ndash;24)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Conifer forest</div>
+          <div class="stat-detail">Douglas fir, hemlock, cedar &mdash; upper canopy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; mid-May to Sep</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">1.5&ndash;4.5 kHz</div>
+          <div class="stat-detail">Peak energy 2.0&ndash;3.5 kHz (hoarse mid-range)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Red Pigment</div>
+          <div class="stat-value">Rhodoxanthin</div>
+          <div class="stat-detail">Cannot synthesize &mdash; obtained from insect diet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Migration</div>
+          <div class="stat-value">4,000+ km</div>
+          <div class="stat-detail">Winters Mexico to Costa Rica</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Convergence</div>
+          <div class="stat-value">Robin-like trio</div>
+          <div class="stat-detail">23 (smooth) &rarr; 24 (hoarse) &rarr; 25 (clean)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Taxonomy Note</div>
+          <div class="stat-value">Not a tanager</div>
+          <div class="stat-detail"><em>Piranga</em> moved from Thraupidae to Cardinalidae</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 24 &mdash; S36</div>
+          <div class="parallel-name">Ron Artis II</div>
+          <div class="parallel-detail">Soul/Jazz &middot; E=4 &middot; Hawaii to Seattle &middot; KEXP</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Both are long-distance migrants who find identity in rough,
+            honest texture. The hoarseness IS the signal. Fourth consecutive E=4.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 24&deg; of 360&deg; &mdash; v1.49.160</p>
+  </footer>
+</body>
+</html>
