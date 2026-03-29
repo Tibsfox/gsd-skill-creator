@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 19&deg; &mdash; Veery &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.descending { background: #283593; }
+    .theory-icon.chorus { background: #00838F; }
+    .theory-icon.triptych { background: #7B1FA2; }
+    .theory-icon.resolution { background: #E65100; }
+    .theory-icon.bilateral { background: #1565C0; }
+    .theory-icon.turdidae { background: #4E342E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Catharus triptych card */
+    .triptych-card {
+      background: linear-gradient(135deg, #EDE7F6 0%, #B39DDB 100%);
+      border: 1px solid #7E57C2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .triptych-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #311B92;
+    }
+
+    /* Spiral pair card */
+    .spiral-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #9FA8DA 100%);
+      border: 1px solid #5C6BC0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .spiral-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Bilateral syrinx card */
+    .syrinx-card {
+      background: linear-gradient(135deg, #E0F7FA 0%, #80DEEA 100%);
+      border: 1px solid #00ACC1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .syrinx-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #006064;
+    }
+
+    /* Riparian card */
+    .riparian-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .riparian-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">19&deg;</div>
+      <div class="release-title-block">
+        <h2>Veery</h2>
+        <div class="scientific">Catharus fuscescens &middot; Family Turdidae (Thrushes)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Downward Spiraling Veer-Veer &middot; Lowland Riparian &middot; Summer Migrant &middot; Energy 3</div>
+
+    <blockquote>
+      As the ascending staircase reaches its final step and the last phrase of the
+      Swainson&rsquo;s Thrush hangs in the evening air, a different voice answers from
+      a willow thicket at the range&rsquo;s western edge. The Veery. Warm cinnamon-brown,
+      faint spots, the most ethereal voice. It begins high and spirals downward &mdash;
+      <em>veer, veer, veer</em> &mdash; each phrase lower, each step descending, two
+      syrinx voices shimmering against each other like a song heard underwater. The third
+      <em>Catharus</em>. The triptych complete. The answer to the question.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Third Catharus</h2>
+        <p>
+          The Veery is a medium-small passerine of the family <strong>Turdidae</strong>
+          (thrushes). The genus <em>Catharus</em> &mdash; from Greek <em>katharos</em>,
+          &ldquo;pure&rdquo; &mdash; now has three representatives in the circle. At
+          degree 7&deg;, the Hermit Thrush introduced the genus. At degree 18&deg;, the
+          Swainson&rsquo;s Thrush returned to it. Now at degree 19&deg;, the Veery
+          becomes the <strong>third <em>Catharus</em></strong>, completing the
+          <strong>Catharus triptych</strong>. The species epithet <strong>fuscescens</strong>
+          means &ldquo;becoming dusky&rdquo; (Latin). The common name is onomatopoeic
+          &mdash; the bird named itself: <em>veer-veer-veer</em>.
+        </p>
+        <p>
+          The Veery is the <strong>least common</strong> of the three <em>Catharus</em>
+          in the PNW &mdash; at the <strong>western edge of its breeding range</strong>.
+          It is the <strong>warmest-toned</strong>: uniform warm cinnamon-brown upperparts,
+          <strong>minimal spotting</strong> (faint, blurred breast spots that fade quickly),
+          no bold eyering, no rufous tail contrast. The gentlest, plainest, most ethereal
+          of the three.
+        </p>
+
+        <!-- Catharus Triptych Card -->
+        <div class="triptych-card">
+          <h3>The Catharus Triptych: Complete</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Three <em>Catharus</em> thrushes, three pitch directions, three musical functions:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Strategy</th><th>Pitch Direction</th><th>Musical Function</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>7&deg;</td><td>Hermit Thrush</td><td>Harmonic series</td><td>STATIC (vertical/chordal)</td><td>Harmony &mdash; the chord</td></tr>
+              <tr><td>18&deg;</td><td>Swainson&rsquo;s</td><td>Ascending spiral</td><td>ASCENDING (horizontal up)</td><td>Tension &mdash; the question</td></tr>
+              <tr style="background: rgba(126,87,194,0.15); font-weight: 600;"><td><strong>19&deg;</strong></td><td><strong>Veery</strong></td><td><strong>Descending spiral</strong></td><td><strong>DESCENDING (horizontal down)</strong></td><td><strong>Resolution &mdash; the answer</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #311B92; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Static, ascending, descending &mdash; these three directions exhaust the possibilities.
+            The genus named &ldquo;pure&rdquo; maps the complete pitch space of music.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Descending Spiral</h2>
+        <h3>The Song That Falls</h3>
+        <p>
+          The Veery&rsquo;s song is the <strong>mirror image</strong> of the Swainson&rsquo;s
+          Thrush. Where the Swainson&rsquo;s spirals upward, the Veery spirals
+          <strong>downward</strong>: a series of ethereal, reedy phrases, each phrase
+          <strong>lower</strong> than the last, creating a descending helical staircase
+          through pitch space. The quality is &ldquo;dreamy,&rdquo; &ldquo;underwater,&rdquo;
+          &ldquo;otherworldly&rdquo; &mdash; the most ethereal voice in North American
+          birdsong. The rapid modulation from its bilateral syrinx creates a shimmering
+          texture that makes the song seem to come from everywhere and nowhere.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>1.5&ndash;4.5 kHz (across descending phrases)</td></tr>
+            <tr><td>Starting pitch</td><td>~3.0&ndash;4.5 kHz (first phrase, highest)</td></tr>
+            <tr><td>Terminal pitch</td><td>~1.5&ndash;2.5 kHz (final phrase, lowest)</td></tr>
+            <tr><td>Phrase duration</td><td>0.5&ndash;1.5 s per phrase</td></tr>
+            <tr><td>Phrases per song</td><td>3&ndash;6 descending phrases</td></tr>
+            <tr><td>Song duration</td><td>2&ndash;5 s (full descending sequence)</td></tr>
+            <tr><td>Timbre</td><td>Reedy, ethereal, shimmering &mdash; bilateral syrinx chorus</td></tr>
+            <tr><td>Key property</td><td><strong>DESCENDING &mdash; each phrase lower than the last</strong></td></tr>
+            <tr><td>Key property 2</td><td><strong>BILATERAL SYRINX SHIMMER &mdash; chorus effect</strong></td></tr>
+          </tbody>
+        </table>
+
+        <!-- Bilateral Syrinx Card -->
+        <div class="syrinx-card">
+          <h3>Bilateral Syrinx: The Chorus Effect in Biological Form</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Veery&rsquo;s ethereal shimmer comes from <strong>bilateral syrinx
+            polyphony</strong> &mdash; two independent fundamental frequencies from the
+            left and right syrinx halves, closely spaced, creating beat frequencies that
+            produce the sensation of shimmering. This is the <strong>chorus effect</strong>
+            in biological form &mdash; identical to the guitar chorus pedal (Roland CE-1,
+            1976).
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Bilateral Syrinx Use</th><th>Musical Analogy</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pacific Wren</td><td>1&deg;</td><td>Two independent melodic lines &mdash; complexity</td><td>Two-part counterpoint (Bach fugue)</td></tr>
+              <tr style="background: rgba(0,131,143,0.12); font-weight: 600;"><td><strong>Veery</strong></td><td><strong>19&deg;</strong></td><td><strong>Two closely-spaced tones &mdash; shimmer</strong></td><td><strong>Chorus pedal (detuned voices)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #006064; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Same organ, different purpose. The Wren uses two voices for information density.
+            The Veery uses two voices for atmosphere. One is a virtuoso playing two lines.
+            The other is a single voice wrapped in reverb.
+          </p>
+        </div>
+
+        <!-- Spiral Pair Card -->
+        <div class="spiral-card">
+          <h3>The Matched Pair: Ascending and Descending Spirals</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Adjacent degrees, both <em>Catharus</em>, opposite trajectories &mdash;
+            tension and resolution:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Direction</th><th>Musical Function</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Swainson&rsquo;s Thrush</td><td>18&deg;</td><td>UPWARD</td><td>Tension, aspiration, the question</td></tr>
+              <tr style="background: rgba(92,107,192,0.15); font-weight: 600;"><td><strong>Veery</strong></td><td><strong>19&deg;</strong></td><td><strong>DOWNWARD</strong></td><td><strong>Resolution, homecoming, the answer</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1A237E; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The most fundamental pairing in tonal music: tension and resolution. The
+            Swainson&rsquo;s asks the question. The Veery answers it. Degrees 18&ndash;19
+            enact the oldest story in music: you go out, and then you come home.
+          </p>
+        </div>
+
+        <h3>The Descending Sequence in Music</h3>
+        <p>
+          In music, <strong>descending motion</strong> implies resolution, relaxation, return.
+          The descending bass line (<strong>lamento bass</strong>, the baroque passacaglia),
+          <strong>Debussy&rsquo;s</strong> cascading whole-tone passages (the same dreamy,
+          underwater quality), the <strong>blues turnaround</strong> (V chord descending back
+          to I &mdash; coming home). The Veery&rsquo;s descending spiral carries this weight:
+          each phrase lower, each step settling, the melody unwinding toward resolution. The
+          physics of descending pitch produce the perception of arrival in any pitch-sensitive
+          listener.
+        </p>
+
+        <!-- Habitat -->
+        <h2>Lowland Riparian &mdash; The Thicket at the Edge of Range</h2>
+
+        <div class="riparian-card">
+          <h3>Habitat at the Western Margin</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Veery breeds in <strong>lowland riparian thickets</strong> &mdash; dense,
+            deciduous undergrowth along streams and rivers. In the PNW, this means willow-alder
+            thickets, cottonwood bottomlands, and dense deciduous understory. But the critical
+            fact: the Veery is <strong>uncommon here</strong>. This is the western edge of its
+            breeding range. Unlike the abundant Swainson&rsquo;s Thrush, the Veery is a sparse,
+            local breeder &mdash; present in some years, absent in others.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Comparison</th><th>Swainson&rsquo;s (18&deg;)</th><th>Veery (19&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Habitat structure</td><td>Closed-canopy riparian forest</td><td>Low deciduous riparian thicket</td></tr>
+              <tr><td>Canopy position</td><td>Sings from mid-canopy (10&ndash;30 ft)</td><td>Sings from thicket interior (&lt;10 ft)</td></tr>
+              <tr><td>PNW abundance</td><td>Abundant (core range)</td><td><strong>Uncommon (range edge)</strong></td></tr>
+              <tr><td>Song adaptation</td><td>Ascending sweep through vertical layers</td><td>Descending fill of horizontal thicket</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>The descending spiral as resolution.</strong> Descending pitch in vocal
+          communication implies closure, completion, finality. A falling inflection is a
+          statement (not a question). A falling melody is resolved tension. The Veery&rsquo;s
+          descending song carries this emotional content: each phrase lower, the trajectory
+          downward, the resolution in the final phrase at the bottom of the staircase.
+          Where the Swainson&rsquo;s leaves the listener at the top (unresolved, reaching),
+          the Veery brings the listener to the bottom (resolved, arrived, home).
+        </p>
+        <p>
+          <strong>Bilateral syrinx as chorus effect.</strong> Two slightly detuned voices
+          create beat frequencies &mdash; periodic amplitude fluctuations perceived as shimmer.
+          This is identical to the guitar chorus pedal: duplicate the signal, detune the copy,
+          mix them. The Veery has been doing this for millions of years. The beat frequency
+          (shimmer rate) depends on the frequency difference between the two syrinx halves
+          &mdash; the bird modulates its own chorus effect dynamically within phrases.
+        </p>
+        <p>
+          <strong>The triptych as complete pitch grammar.</strong> Three <em>Catharus</em>
+          thrushes map the three fundamental pitch directions: static (7&deg;), ascending
+          (18&deg;), descending (19&deg;). Every melody in every tradition can be decomposed
+          into these three motions: staying, rising, falling. The genus named &ldquo;pure&rdquo;
+          maps the complete vocabulary of pitch direction.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon descending">D</div>
+            <div class="theory-content">
+              <h4>The Descending Sequence <span class="theory-level foundational">Foundational</span></h4>
+              <p>Each phrase transposed downward &mdash; the spiral staircase descending. The mirror of the ascending sequence (degree 18&deg;). Descending pitch = resolution, relaxation, homecoming. The same physics that makes a lullaby soothing and a cadence final.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon chorus">C</div>
+            <div class="theory-content">
+              <h4>Bilateral Syrinx as Chorus Effect <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Two closely-spaced tones from left and right syrinx halves create beat frequencies &mdash; periodic shimmer. Identical physics to the guitar chorus pedal (Roland CE-1, 1976). The Veery IS a biological chorus processor. Pacific Wren (1&deg;) uses the same organ for complexity; the Veery uses it for atmosphere.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon triptych">T</div>
+            <div class="theory-content">
+              <h4>The Catharus Triptych <span class="theory-level advanced">Advanced</span></h4>
+              <p>Three <em>Catharus</em>, three pitch directions: static/harmonic (7&deg;), ascending/tension (18&deg;), descending/resolution (19&deg;). These exhaust the possibilities. The genus named &ldquo;pure&rdquo; maps the complete pitch space of music. The most complete within-genus acoustic comparison in the engine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon resolution">R</div>
+            <div class="theory-content">
+              <h4>Tension-Resolution Pair <span class="theory-level foundational">Foundational</span></h4>
+              <p>Degrees 18&ndash;19 form a question-and-answer pair: ascending spiral (tension, aspiration) followed by descending spiral (resolution, homecoming). The half cadence and the authentic cadence. The most fundamental structure in tonal music, mapped by two species from the same genus at consecutive positions.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon bilateral">B</div>
+            <div class="theory-content">
+              <h4>Beat Frequency Physics <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>When two tones of slightly different frequency are sounded together, they produce periodic amplitude fluctuation at the difference frequency. 2 Hz difference = 2 beats/second (slow pulsation). 10 Hz = rapid shimmer. The Veery modulates this dynamically &mdash; controlling shimmer rate as a musical parameter in real time.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon turdidae">T</div>
+            <div class="theory-content">
+              <h4>Turdidae Acoustic Diversity <span class="theory-level advanced">Advanced</span></h4>
+              <p>Four thrushes, four strategies: AM drone (Varied, 2&deg;), harmonic series (Hermit, 7&deg;), ascending sequence (Swainson&rsquo;s, 18&deg;), descending sequence with chorus shimmer (Veery, 19&deg;). The Turdidae extend their lead as the most acoustically diverse family in the circle.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-018</strong> &mdash; Swainson&rsquo;s Thrush
+            <p>THE MATCHED PAIR. Swainson&rsquo;s (18&deg;) spirals UPWARD &mdash; aspiration, tension, the question. Veery (19&deg;) spirals DOWNWARD &mdash; resolution, homecoming, the answer. Adjacent degrees, both <em>Catharus</em>, opposite trajectories. Tension and resolution at consecutive positions.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-007</strong> &mdash; Hermit Thrush
+            <p>THE CATHARUS TRIPTYCH COMPLETE. Three species, three strategies: harmonic series / static (7&deg;), ascending spiral / tension (18&deg;), descending spiral / resolution (19&deg;). The genus named &ldquo;pure&rdquo; maps the complete pitch space &mdash; no other directions exist.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>BILATERAL SYRINX &mdash; DIFFERENT PURPOSE. Both use bilateral polyphony. The Wren for melodic complexity (100 notes in 10 seconds). The Veery for atmospheric shimmer (chorus effect from beat frequencies). Same organ, opposite applications.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the PNW
+            <p>Third <em>Catharus</em> entry, completing the genus in the AVI thrush section. AVI documents the Veery as an uncommon breeder at the western edge of its range &mdash; far less common than Hermit or Swainson&rsquo;s Thrush.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Ecology of the PNW
+            <p>Lowland riparian ecology, willow-alder-cottonwood thickets, range-edge population dynamics. The Veery&rsquo;s habitat is structurally distinct from the Swainson&rsquo;s: lower, denser, more deciduous.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Fly Moon Royale at degree 19&deg;. Both at the resolution/groove end of their arcs &mdash; settling into pocket grooves rather than escalating. The Veery descends into repose; Fly Moon Royale resolves into feel.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Fourth Turdidae in the engine (degrees 2, 7, 18, 19). Four thrushes, four acoustic strategies. The Turdidae extend their lead as the most acoustically diverse family in the circle.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Bevier, L.R., Poole, A.F., &amp; Moskoff, W. (2020). &ldquo;Veery.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Veery. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Veery. birdweb.org</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Doolittle, E.L. &amp; Brumm, H. (2014). Harmonic series in Hermit Thrush song. <em>PNAS</em> 111(46). [Comparative <em>Catharus</em> reference.]</li>
+          <li>Suthers, R.A. (1990). Bilateral syrinx contributions. <em>Nature</em> 347. [Two-voice production.]</li>
+          <li>Suthers, R.A., Goller, F., &amp; Pytte, C. (1999). Neuromuscular control of birdsong. <em>Phil Trans R Soc B</em> 354.</li>
+          <li>Zollinger, S.A. &amp; Suthers, R.A. (2004). Motor mechanisms of a vocal mimic. <em>Proc R Soc B</em> 271.</li>
+          <li>Catchpole, C.K. &amp; Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. Cambridge University Press.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Weir, J.T. &amp; Schluter, D. (2004). Ice sheets promote speciation in boreal birds. <em>Proc R Soc B</em> 271.</li>
+          <li>Rossing, T.D. et al. (2002). <em>The Science of Sound</em>. 3rd ed. [Beat frequency physics.]</li>
+          <li>Roads, C. (1996). <em>The Computer Music Tutorial</em>. MIT Press. [Chorus effect synthesis.]</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+          <li>Lerdahl, F. &amp; Jackendoff, R. (1983). <em>A Generative Theory of Tonal Music</em>. MIT Press.</li>
+          <li>Huron, D. (2006). <em>Sweet Anticipation</em>. MIT Press. [Descending pitch as resolution.]</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. Veery. wdfw.wa.gov</li>
+          <li>Macaulay Library. Veery recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Turdidae</div>
+          <div class="stat-detail">Thrushes &mdash; 4th in engine (degrees 2, 7, 18, 19)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Catharus</em></div>
+          <div class="stat-detail">3rd <em>Catharus</em> &mdash; triptych complete</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">6.5&ndash;7.5 in</div>
+          <div class="stat-detail">16.5&ndash;19 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">26&ndash;54 g</div>
+          <div class="stat-detail">Similar to other <em>Catharus</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Warm Cinnamon</div>
+          <div class="stat-detail">Minimal spotting, no eyering, warmest of three</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">PNW Status</div>
+          <div class="stat-value">Range Edge</div>
+          <div class="stat-detail">Uncommon &mdash; western breeding limit</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Descending spiral</div>
+          <div class="stat-detail">Each phrase lower than the last</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">1.5&ndash;4.5 kHz</div>
+          <div class="stat-detail">Descends from upper to mid register</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Song Duration</div>
+          <div class="stat-value">2&ndash;5 s</div>
+          <div class="stat-detail">3&ndash;6 descending phrases</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Chorus Shimmer</div>
+          <div class="stat-detail">Bilateral syrinx beat frequencies</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">19&deg;</div>
+          <div class="stat-detail">The descending spiral &mdash; resolution in sound</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #C62828;">3</div>
+          <div class="stat-detail">Fifth energy-3 &mdash; plateau continues</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Lowland Riparian</div>
+          <div class="stat-detail">Deciduous thicket, range edge</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; 7th in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Descending Spiral</div>
+          <div class="stat-detail">Sequential phrases + bilateral syrinx chorus</div>
+        </div>
+
+        <h3>Catharus Triptych</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree 7&deg;</div>
+          <div class="stat-value">Hermit Thrush</div>
+          <div class="stat-detail">Harmonic series (static &mdash; vertical)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Degree 18&deg;</div>
+          <div class="stat-value">Swainson&rsquo;s Thrush</div>
+          <div class="stat-detail">Ascending spiral (tension &mdash; up)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Degree 19&deg;</div>
+          <div class="stat-value">Veery</div>
+          <div class="stat-detail">Descending spiral (resolution &mdash; down)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 19&deg; &mdash; S36</div>
+          <div class="parallel-name">Fly Moon Royale</div>
+          <div class="parallel-detail">Both at the resolution/groove end of their respective arcs. Fly Moon Royale settles into pocket grooves &mdash; the music resolves into feel rather than escalating. The Veery&rsquo;s descending spiral resolves into repose rather than climbing. Both are about arrival, not departure. Where Maktub (18&deg;) builds upward through ensemble layers, Fly Moon Royale and the Veery settle downward into resolution.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 019 of 360 &middot;
+      <a href="../018-swainsons-thrush/index.html">Degree 18&deg;: Swainson&rsquo;s Thrush</a> &middot;
+      <a href="../007-hermit-thrush/index.html">Degree 7&deg;: Hermit Thrush</a> &middot;
+      <a href="../001-pacific-wren/index.html">Degree 1&deg;: Pacific Wren</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

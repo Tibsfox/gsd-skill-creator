@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 19&deg; &mdash; Fly Moon Royale &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #E53935);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFCDD2;
+      color: #B71C1C;
+      border: 1px solid #E57373;
+    }
+
+    .cd-return-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #C8E6C9;
+      color: #2E7D32;
+      border: 1px solid #81C784;
+      margin-left: 0.3rem;
+    }
+
+    .collective-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E1BEE7;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .cd-return-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cd-return-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .cd-return-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .cd-return-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cd-return-box td, .cd-return-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .cd-return-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+
+    .collective-box {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .collective-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .collective-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .collective-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .collective-box td, .collective-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #E1BEE7;
+    }
+    .collective-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #6A1B9A;
+    }
+
+    .syncopation-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .syncopation-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .syncopation-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FCE4EC;
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #AD1457;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #F8BBD0;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #AD1457;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">19&deg;</div>
+      <div>
+        <h1>Fly Moon Royale</h1>
+        <div class="subtitle">Jazz/Soul &middot; Neo-Soul / R&amp;B / Live Band &mdash; Seattle 2012&ndash;present &mdash; Independent
+          <span class="energy-badge">Energy 3</span>
+          <span class="cd-return-badge">CD Returns</span>
+          <span class="collective-badge">First Collective</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../018-maktub/index.html">Degree 18&deg; (Maktub)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../011-joe-brazil/index.html">Degree 11&deg; (Brazil)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The Central District returns. Seven consecutive absences (12&ndash;18),
+          the longest gap in the engine &mdash; and now, at degree 19, a new
+          generation of CD music. Neo-soul and R&amp;B replace straight jazz, but
+          the groove-first tradition persists. The neighborhood changes; the music
+          continues. <em>The first collective in the engine.</em>
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The New Generation</h2>
+
+        <p>Fly Moon Royale is a <strong>Seattle-based neo-soul/jazz collective</strong>
+        that emerged from the <strong>Central District</strong> around <strong>2012</strong>,
+        led by vocalist and bandleader <strong>Parker</strong>. The project draws
+        rotating musicians from Seattle&rsquo;s jazz and soul scenes &mdash; a
+        different ensemble at each performance, orbiting a central creative vision.
+        The sound blends classic soul (Stevie Wonder, D&rsquo;Angelo) with
+        contemporary R&amp;B and live jazz improvisation.</p>
+
+        <p>Parker&rsquo;s vocals anchor the collective &mdash; warm, textured,
+        drawing from the neo-soul lineage that D&rsquo;Angelo and Erykah Badu
+        defined nationally, filtered through a distinctly Seattle sensibility.
+        The rotating cast includes players from Seattle&rsquo;s jazz conservatory
+        pipeline, working R&amp;B musicians, and session players whose allegiance
+        is to the music rather than the brand. Any given show might feature a
+        different rhythm section, different horn arrangements, different keyboard
+        textures &mdash; but the vocal center and aesthetic direction remain
+        constant.</p>
+
+        <p>Known for live shows at <strong>Neumos</strong>, <strong>The
+        Crocodile</strong>, and other Capitol Hill / Central District venues.
+        Active in <strong>KEXP sessions</strong> and the <strong>Pacific
+        Northwest festival circuit</strong>. Several EPs and singles released
+        independently via Bandcamp and streaming platforms.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: KEXP
+        session archives; Neumos/Crocodile venue archives; The Stranger; Seattle
+        Weekly; Bandcamp; local press</p>
+
+        <!-- ========================================
+             CENTRAL DISTRICT RETURNS
+             ======================================== -->
+
+        <div class="cd-return-box">
+          <h4>Central District Returns: The Oscillation Pattern Confirmed</h4>
+          <table>
+            <tr>
+              <th>Degrees</th>
+              <th>CD Status</th>
+              <th>Context</th>
+            </tr>
+            <tr>
+              <td>0&ndash;6</td>
+              <td>Present (7 consecutive)</td>
+              <td>Jackson Street corridor, postwar jazz</td>
+            </tr>
+            <tr>
+              <td>7&ndash;10</td>
+              <td>Absent (4 consecutive)</td>
+              <td>Chicago, Idaho, Oklahoma, Ohio origins</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Returns (1 degree)</td>
+              <td>Brazil &mdash; Detroit transplant, salon model</td>
+            </tr>
+            <tr>
+              <td>12&ndash;18</td>
+              <td>Absent (7 consecutive)</td>
+              <td>Wenatchee, UW, NYC/LA, Portland, Capitol Hill</td>
+            </tr>
+            <tr>
+              <td><strong>19</strong></td>
+              <td><strong>Returns</strong></td>
+              <td><strong>FMR &mdash; new generation, neo-soul/R&amp;B, gentrification context</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">The Central District
+          of 2012 is not the Central District of 1950. Gentrification has
+          restructured the neighborhood profoundly. But the music continues.
+          The genre transforms (straight jazz to neo-soul/R&amp;B), the community
+          transforms, but the <strong>geographic thread persists</strong>. The
+          groove-as-composition tradition connects Berry (5&deg;) to FMR (19&deg;):
+          same neighborhood, same groove-first philosophy, different genre
+          vocabulary, six decades apart.</p>
+        </div>
+
+        <!-- ========================================
+             FIRST COLLECTIVE
+             ======================================== -->
+
+        <div class="collective-box">
+          <h4>First Collective: Third Organizational Type</h4>
+          <table>
+            <tr>
+              <th>Type</th>
+              <th>Degrees</th>
+              <th>Characteristics</th>
+            </tr>
+            <tr>
+              <td>Solo artist / bandleader</td>
+              <td>0&ndash;17</td>
+              <td>One creative authority, music orbits single identity</td>
+            </tr>
+            <tr>
+              <td>Fixed band</td>
+              <td>18 (Maktub)</td>
+              <td>Permanent members, collective identity, emergent composition</td>
+            </tr>
+            <tr>
+              <td><strong>Collective</strong></td>
+              <td><strong>19 (FMR)</strong></td>
+              <td><strong>Central authority + rotating musicians, consistent aesthetic, variable ensemble</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">The collective occupies
+          space between solo artist and fixed band. Like a solo artist, there is a
+          central vision (Parker). Like a band, the music is created collectively.
+          Unlike a fixed band, the collaborators change &mdash; the identity is the
+          <strong>aesthetic, not the personnel</strong>. More resilient (survives
+          personnel changes) but less unique in moment-to-moment expression (lacks
+          irreplaceable chemistry of specific individuals).</p>
+        </div>
+
+        <!-- ========================================
+             SYNCOPATION
+             ======================================== -->
+
+        <div class="syncopation-box">
+          <h4>Syncopation: The Off-Beat Rhythmic Emphasis</h4>
+          <p>The defining rhythmic device of neo-soul and R&amp;B. Syncopation
+          displaces accents from strong beats (1 and 3) to weak beats (2 and 4)
+          or subdivisions between beats. Neo-soul takes this further: every attack
+          microscopically displaced from the grid, creating a
+          <strong>rhythmic haze</strong> that IS the groove. D&rsquo;Angelo&rsquo;s
+          <em>Voodoo</em> (2000) is the national landmark.</p>
+          <p style="margin-top:0.6rem">In a collective with rotating musicians,
+          syncopation must be a <strong>shared vocabulary</strong> rather than a
+          developed chemistry. The musicians must agree on where the beat ISN&rsquo;T.
+          This functions as an audition criterion: if you can&rsquo;t feel the
+          displacement, you can&rsquo;t play in this collective. Connects to
+          Berry (5&deg;) groove syncopation and Maktub (18&deg;) funk-inflected
+          collective pocket.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Fifth Consecutive Energy-3: Longest Streak Extends</h4>
+          <table>
+            <tr>
+              <th>Energy</th>
+              <th>Character</th>
+              <th>Count</th>
+              <th>Artists</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Meditative, introspective</td>
+              <td>2</td>
+              <td>Peacock (8&deg;), Lanphere (12&deg;)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sustaining, atmospheric</td>
+              <td>13</td>
+              <td>All others (0&deg;&ndash;7&deg;, 9&deg;&ndash;11&deg;, 13&deg;&ndash;14&deg;)</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td><strong>Assertive, projective</strong></td>
+              <td><strong>5</strong></td>
+              <td><strong>Marriott (15&deg;), Lorber (16&deg;), Watts (17&deg;), Maktub (18&deg;), FMR (19&deg;)</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Distribution shifts to
+          <strong>2:13:5</strong>. Five consecutive energy-3 artists &mdash; the
+          <strong>longest streak extends</strong>. Five subtypes: acoustic-assertive
+          (Marriott), electronic-propulsive (Lorber), performative-explosive (Watts),
+          groove-collective (Maktub), and <strong>soul-communal</strong> (FMR &mdash;
+          collective groove, rotating ensemble, audience-band communion through
+          neo-soul performance ritual).</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory: Syncopation &amp; the Collective Groove</h2>
+
+        <ul>
+          <li><strong>Syncopation (off-beat emphasis):</strong> The defining
+          rhythmic device of neo-soul/R&amp;B. Accents displaced from strong
+          beats to weak beats and subdivisions. Micro-displacement creates
+          rhythmic haze that IS the groove. The collective model requires
+          syncopation as shared vocabulary &mdash; rotating musicians must
+          agree on where the beat isn&rsquo;t.</li>
+          <li><strong>Neo-soul harmony (jazz-informed chords in groove context):</strong>
+          Extended voicings, altered tensions, suspended structures over
+          groove-first rhythm section. Continues the harmonic vocabulary from
+          Maktub (18&deg;) but deployed through shared convention rather than
+          long-developed ensemble chemistry.</li>
+          <li><strong>Collective improvisation with rotating personnel:</strong>
+          Improvisation relies on shared conventions (neo-soul/R&amp;B/jazz
+          vocabulary as lingua franca) rather than shared history. The deeper
+          each musician&rsquo;s command of the vocabulary, the more
+          sophisticated the collective improvisation.</li>
+          <li><strong>The live show as primary medium:</strong> The recording
+          documents the performance, not the other way around. Each show is
+          unique because the ensemble is potentially different. Extends Maktub
+          (18&deg;) live-improvisation thread with the variable-personnel
+          dimension.</li>
+        </ul>
+
+        <hr class="section-divider">
+        <h2>Music Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Syncopation (Neo-Soul Off-Beat)</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Off-beat rhythmic emphasis as the defining device of neo-soul/R&amp;B.
+            Micro-displacement of every attack from the grid creates a rhythmic haze.
+            In a collective, syncopation must be shared vocabulary &mdash; the
+            audition criterion for rotating musicians.</p>
+            <div class="examples">FMR &mdash; syncopated neo-soul groove with
+            rotating rhythm section; D&rsquo;Angelo &mdash; Voodoo (national
+            template); Berry (5&deg;) &mdash; groove syncopation in jazz piano
+            (comparison); Maktub (18&deg;) &mdash; funk-inflected collective
+            pocket (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Descends from groove
+            tradition (Berry 5, Maktub 18) but foregrounds the off-beat displacement
+            that defines neo-soul/R&amp;B. The collective model makes syncopation
+            convention-dependent rather than chemistry-dependent. First theory node
+            foregrounding syncopation as primary technique.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Collective (Third Organizational Type)</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Central creative authority + rotating musicians. Third type after
+            solo artist (0&ndash;17) and fixed band (18). Identity is the aesthetic,
+            not the personnel. Lingua franca improvisation based on shared conventions
+            rather than shared history.</p>
+            <div class="examples">FMR &mdash; Parker + rotating cast, different
+            ensemble each show; Maktub (18&deg;) &mdash; fixed four-piece
+            (comparison); Watts solo (17&deg;) &mdash; one person, all parts
+            (comparison); Jones (0&deg;) &mdash; bandleader directing composed
+            parts (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Extends creative unit
+            spectrum from binary (individual vs. group) to three-part: solo,
+            collective, fixed band. The most fluid organizational form &mdash;
+            identity persists as every other element changes. Organizational
+            evolution: solo &rarr; fixed band (18) &rarr; collective (19).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>CD Geographic Persistence</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Central District oscillation pattern confirmed: present (0&ndash;6),
+            absent (7&ndash;10), returns (11), absent (12&ndash;18), returns (19).
+            The neighborhood transforms but the music persists. Neo-soul/R&amp;B
+            replaces straight jazz; groove tradition connects Berry (5&deg;) to
+            FMR (19&deg;).</p>
+            <div class="examples">FMR (19&deg;) &mdash; CD 2012, neo-soul collective;
+            Brazil (11&deg;) &mdash; CD return after 7&ndash;10 absence, Detroit
+            transplant; Berry (5&deg;) &mdash; CD groove piano; Jones (0&deg;) to
+            Bown (6&deg;) &mdash; Jackson Street founding geography</div>
+            <div class="genealogy"><strong>Lineage:</strong> The CD oscillation
+            tracks a neighborhood&rsquo;s musical identity across seven decades
+            and twenty degrees. Each return (11, 19) represents a different
+            generation&rsquo;s relationship with the same geographic space.
+            Degree 19 occurs during active gentrification &mdash; the music&rsquo;s
+            persistence despite transformation is the finding.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Collective-Soul</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Nineteenth deployment. Syncopated vocal bending in rotating ensemble
+            context. The blue note as communal expression &mdash; must convey intent
+            clearly to unfamiliar collaborators. Fourth vocal deployment. Returns to
+            the Central District after eighteen degrees.</p>
+            <div class="examples">FMR (19&deg;) &mdash; collective-soul bending over
+            rotating ensemble groove; Maktub (18&deg;) &mdash; soul-vocal, fixed band
+            (comparison); Watts solo (17&deg;) &mdash; vocal glide (comparison);
+            Anderson (3&deg;) &mdash; vocal blue note, CD jazz ballad (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Nineteen deployments
+            across twenty degrees. Fourth vocal (Anderson 3, Watts solo 17, Maktub
+            18, FMR 19). First in rotating-ensemble context. Nineteen mechanisms
+            documented. Demonstrates organizational-dependence: deployment character
+            changes when ensemble is fluid rather than fixed.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">~2012 &mdash; Emergence, Central District, Seattle</div>
+          <p>Neo-soul/jazz collective coalesced in the Central District. Led by
+          vocalist/bandleader Parker, drawing rotating musicians from Seattle&rsquo;s
+          jazz and soul scenes. Rooted in the neighborhood that sustained Seattle&rsquo;s
+          Black music tradition since the Jackson Street era, even as gentrification
+          was actively reshaping it.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">KEXP Sessions</div>
+          <p>In-studio performances at KEXP (90.3 FM) capturing the collective&rsquo;s
+          live energy in a controlled setting. Demonstrates the robustness of the
+          collective model &mdash; cohesive neo-soul performance with varying
+          musician configurations.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Live Circuit &mdash; Neumos, The Crocodile, CD / Capitol Hill Venues</div>
+          <p>Regular performances across the Capitol Hill and Central District venue
+          network. FMR is CD-based but performs in Capitol Hill venues, bridging the
+          two neighborhood threads in the engine. The collective&rsquo;s rotating
+          musicians draw from both neighborhoods&rsquo; scenes.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Independent Releases &mdash; EPs &amp; Singles</div>
+          <p>Several EPs and singles released independently via <strong>Bandcamp</strong>
+          and digital streaming platforms. The independent release strategy aligns
+          with the collective model: music released as created, recordings documenting
+          specific configurations at specific moments rather than definitive studio
+          versions.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">PNW Festival Circuit</div>
+          <p>Active in Pacific Northwest festivals, positioning FMR within the regional
+          neo-soul/R&amp;B/jazz ecosystem beyond the Capitol Hill / CD venue circuit.</p>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.92rem;border-collapse:collapse">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;width:30%;font-weight:600">S36-018 (Maktub)</td>
+            <td style="padding:0.6rem">Direct predecessor in neo-soul thread. Both
+            neo-soul/R&amp;B, both collective creative units (fixed band vs. rotating
+            collective), both groove-first. Maktub on Capitol Hill (1998&ndash;2007),
+            FMR in Central District (2012&ndash;present). Organizational evolution:
+            fixed band to rotating collective.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-003 (Ernestine Anderson)</td>
+            <td style="padding:0.6rem">Vocal tradition and Central District geography.
+            Anderson is the first vocal-primary CD artist. Parker/FMR is vocal-primary
+            and CD-based. The vocal tradition returns to the Central District after
+            eighteen degrees.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-005 (Overton Berry)</td>
+            <td style="padding:0.6rem">Central District groove. Berry established
+            groove-as-composition in the CD. FMR extends it: same neighborhood, same
+            groove-first philosophy, different genre (jazz piano vs. neo-soul collective).
+            Spanning fourteen degrees and six decades.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-011 (Joe Brazil)</td>
+            <td style="padding:0.6rem">Central District return pattern. Brazil was the
+            first CD return after the 7&ndash;10 absence. FMR is the second CD return
+            after the 12&ndash;18 absence. Both represent the CD&rsquo;s persistence
+            through transformation.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;font-weight:600">S36-017 (Reggie Watts)</td>
+            <td style="padding:0.6rem">CD-adjacent to CD-proper. Watts (17&deg;) was
+            Capitol Hill-based. FMR (19&deg;) is Central District. The geographic
+            thread shifts back to CD-proper. Neo-soul vocal tradition connects through
+            Watts/Maktub (18&deg;) to FMR (19&deg;).</td>
+          </tr>
+        </table>
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield High School Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Quincy Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Ernestine Anderson &mdash; Garfield, late 1940s</td></tr>
+            <tr><td>Degrees 4&deg;&ndash;18&deg;</td><td>No confirmed Garfield products (fifteen consecutive)</td></tr>
+            <tr><td>Degree 19&deg;</td><td>Fly Moon Royale &mdash; NOT a Garfield product. Collective formed in Central District. Parker&rsquo;s educational background not documented. Rotating musicians&rsquo; backgrounds not individually documented. Thirteenth consecutive non-Garfield degree. First collective in the engine. Central District returns but not through the Garfield pipeline.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Key Carry-Forward Items for Degree 20</h4>
+          <ul>
+            <li><strong>Central District returns (at 19):</strong> CD oscillation pattern confirmed. Present (0&ndash;6), absent (7&ndash;10), returns (11), absent (12&ndash;18), returns (19). Track duration of this return.</li>
+            <li><strong>Third organizational type (NEW at 19):</strong> The collective joins solo artist and fixed band. Identity is the aesthetic, not the personnel. Track subsequent collectives.</li>
+            <li><strong>Neo-soul thread EXTENDED:</strong> TWO entries (Maktub 18, FMR 19) in consecutive degrees. Track continuation.</li>
+            <li><strong>Groove-as-composition EXTENDED:</strong> THREE entries (Berry 5, Maktub 18, FMR 19). Principle persistent and scalable across all organizational types.</li>
+            <li><strong>Syncopation thread (NEW at 19):</strong> First foregrounded entry. Connected to groove tradition. Track.</li>
+            <li><strong>Energy spectrum:</strong> 2:13:5. FIVE consecutive energy-3 (15&ndash;19). Longest streak extends. Five subtypes. Track whether streak continues at degree 20.</li>
+            <li><strong>Jazz-as-method:</strong> TWO consecutive degrees (18, 19) with Jazz as modifier. The pattern solidifies. Track.</li>
+            <li><strong>Gender dimension:</strong> Fourteen consecutive male or male-led (7&ndash;19). Two women in twenty degrees. CRITICAL. ESCALATED.</li>
+            <li><strong>The New Root archetype (NEW at 19):</strong> Twentieth pattern. New generation rooting in transformed neighborhood.</li>
+            <li><strong>Vocal theory branch:</strong> EXTENDED to nine nodes &mdash; continues to exceed saxophone/reed (seven).</li>
+            <li><strong>Duwamish territorial acknowledgment:</strong> BLOCKING. TWENTY releases overdue.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">19&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#B71C1C">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Collective (first)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2012&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Independent</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City Pattern</span>
+            <span class="stat-value">The New Root</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jazz arc</span>
+            <span class="stat-value">Jazz as modifier</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre label</span>
+            <span class="stat-value">Jazz/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Creative unit</span>
+            <span class="stat-value">FIRST COLLECTIVE</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Central District</span>
+            <span class="stat-value">RETURNS (at 19)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy spectrum</span>
+            <span class="stat-value">2:13:5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neo-soul thread</span>
+            <span class="stat-value">2 entries</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Groove-as-comp</span>
+            <span class="stat-value">3 entries</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Vocal branch</span>
+            <span class="stat-value">9 nodes</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">19th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note</span>
+            <span class="stat-value">19th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City taxonomy</span>
+            <span class="stat-value">20 patterns</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Personnel</h4>
+          <div class="stat-row">
+            <span class="stat-label">Parker</span>
+            <span class="stat-value">vocals, leader</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Rotating cast</span>
+            <span class="stat-value">Seattle jazz/soul</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Releases</h4>
+          <div class="stat-row">
+            <span class="stat-label">Format</span>
+            <span class="stat-value">EPs / singles</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Platform</span>
+            <span class="stat-value">Bandcamp / streaming</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Independent</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-References</h4>
+          <div class="stat-row">
+            <span class="stat-label">Maktub</span>
+            <span class="stat-value">18&deg; neo-soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Anderson</span>
+            <span class="stat-value">3&deg; CD vocal</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Berry</span>
+            <span class="stat-value">5&deg; CD groove</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Brazil</span>
+            <span class="stat-value">11&deg; CD return</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Watts</span>
+            <span class="stat-value">17&deg; CD-adjacent</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 19&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine
+    &mdash; <a href="../../index.html">Back to S36</a></p>
+  </footer>
+</body>
+</html>
