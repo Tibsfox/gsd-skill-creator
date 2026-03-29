@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 16&deg; &mdash; Yellow Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.crescendo { background: #F9A825; }
+    .theory-icon.intensification { background: #E65100; }
+    .theory-icon.brightness { background: #FFD600; color: #5D4037; }
+    .theory-icon.architecture { background: #6D4C41; }
+    .theory-icon.riparian { background: #1B5E20; }
+    .theory-icon.niche { background: #2E7D32; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Crescendo card (unique to degree 16) */
+    .crescendo-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 30%, #FFF9C4 100%);
+      border: 1px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .crescendo-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #F57F17;
+    }
+
+    /* Cowbird defense card */
+    .cowbird-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 1px solid #8D6E63;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .cowbird-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4E342E;
+    }
+
+    /* Riparian card */
+    .riparian-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .riparian-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Warbler cluster card */
+    .cluster-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFCC80 100%);
+      border: 1px solid #FB8C00;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .cluster-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">16&deg;</div>
+      <div class="release-title-block">
+        <h2>Yellow Warbler</h2>
+        <div class="scientific">Setophaga petechia &middot; Family Parulidae (New World Warblers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Sweet-Sweet-Sweeter-Than-Sweet &middot; Riparian Willow &middot; Summer Migrant &middot; Energy 3</div>
+
+    <blockquote>
+      The most purely yellow bird in the PNW perches on a willow branch overhanging a lowland
+      stream. The song begins soft, sweet, gentle &mdash; sweet-sweet-sweet &mdash; and then
+      it grows. Each note louder than the last. Each note higher than the last. The crescendo
+      builds until the final &ldquo;sweet&rdquo; rings out at full volume, the brightest sound
+      from the brightest bird. Where the Wilson&rsquo;s Warbler accelerated, the Yellow Warbler
+      crescendos. Two kinds of intensification. Two faces of escalation.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Quintessential Bright Yellow Bird</h2>
+        <p>
+          The Yellow Warbler is a small passerine of the family <strong>Parulidae</strong>
+          (New World warblers), the third representative of this family in the engine. Formerly
+          classified as <em>Dendroica petechia</em>, it was moved to <strong><em>Setophaga</em></strong>
+          in 2011 when molecular phylogenetics collapsed <em>Dendroica</em> into <em>Setophaga</em>,
+          creating the largest warbler genus in the Americas (&gt;30 species). The species name
+          <em>petechia</em> derives from the Italian for &ldquo;red spot,&rdquo; referencing
+          the chestnut-red breast streaks of the male &mdash; the only warbler in North America
+          with red streaking on a yellow background.
+        </p>
+        <p>
+          At <strong>4.7&ndash;5.1 inches</strong> and <strong>9&ndash;11 grams</strong>, slightly
+          larger than the Wilson&rsquo;s Warbler (degree 15&deg;). Males are <strong>brilliant
+          yellow</strong> &mdash; the brightest warbler in the PNW. Dark beady eye on an entirely
+          yellow face. Chestnut-red breast streaks. No wing bars, no white in tail. The overall
+          impression: a living highlighter pen in the willows. One of the most widespread warblers
+          in the Americas, with approximately <strong>35 subspecies</strong> in three major clades.
+          PNW birds are the <strong>aestiva group</strong>.
+        </p>
+
+        <!-- Warbler Cluster -->
+        <div class="cluster-card">
+          <h3>The Warbler Cluster: Three Consecutive Parulidae</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Three consecutive degrees, three Parulidae, three genera, three strategies:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Song Strategy</th><th>Resolution</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>14&deg;</td><td>MacGillivray&rsquo;s</td><td><em>Geothlypis</em></td><td>Ternary (AAB)</td><td>YES &mdash; arrives at &ldquo;sweet&rdquo;</td></tr>
+              <tr><td>15&deg;</td><td>Wilson&rsquo;s</td><td><em>Cardellina</em></td><td>Accelerando</td><td>NO &mdash; cuts off</td></tr>
+              <tr style="background: #FFF3E0; font-weight: 600;"><td><strong>16&deg;</strong></td><td><strong>Yellow</strong></td><td><strong><em>Setophaga</em></strong></td><td><strong>Crescendo</strong></td><td><strong>Partial &mdash; peaks and stops</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #E65100; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Three rhetorical strategies for territorial song: the story, the chase, the swell.
+            Three genera from one family. Three visibility strategies: hidden &rarr; active &rarr; prominent.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Sweet-Sweet-Sweeter</h2>
+        <h3>Crescendo: Volume and Pitch as Structure</h3>
+        <p>
+          The Yellow Warbler&rsquo;s song is a series of <strong>6&ndash;10 bright, musical
+          &ldquo;sweet&rdquo; syllables</strong> delivered over <strong>1.5&ndash;3 seconds</strong>.
+          The defining characteristic: <strong>the song crescendos</strong>. The initial syllables
+          are lower in pitch (~3.5&ndash;4.5 kHz) and softer. The terminal syllables rise to
+          ~5&ndash;6.5 kHz and are delivered with more volume and emphasis. The trajectory:
+          <strong>louder and higher</strong>. An ascending intensification.
+        </p>
+
+        <!-- Crescendo Card -->
+        <div class="crescendo-card">
+          <h3>Crescendo vs. Accelerando: The Sibling Distinction</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degree 15 changed TEMPO (accelerando: notes got faster). Degree 16 changes DYNAMICS
+            AND PITCH (crescendo: notes get louder and higher). Two different kinds of intensification.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Parameter</th><th>Wilson&rsquo;s (15&deg;)</th><th>Yellow (16&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Dynamic change</td><td>Accelerando (tempo)</td><td><strong>Crescendo (volume + pitch)</strong></td></tr>
+              <tr><td>What changes</td><td>Note spacing compresses</td><td>Notes get louder and higher</td></tr>
+              <tr><td>What stays constant</td><td>Volume roughly constant</td><td>Tempo roughly constant</td></tr>
+              <tr><td>Musical analog</td><td>EDM build-up, punk crash</td><td><strong>Ravel&rsquo;s <em>Bol&eacute;ro</em>, Barber&rsquo;s <em>Adagio</em></strong></td></tr>
+              <tr><td>Perceived effect</td><td>Urgency (driving forward)</td><td><strong>Intensity (building up)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #F57F17; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Ravel&rsquo;s <em>Bol&eacute;ro</em>: 15 minutes of the same melody, growing from
+            ppp to fff. The Yellow Warbler compresses the Bol&eacute;ro principle into 2 seconds:
+            same syllable type, escalating volume and pitch. Same material, growing louder.
+          </p>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Structure</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Opening sweet syllables</td><td>3.5&ndash;4.5 kHz</td><td>~0.2&ndash;0.25 s each</td><td>3&ndash;5 at moderate volume</td><td>Setup</td></tr>
+            <tr><td>Terminal sweet syllables</td><td>5&ndash;6.5 kHz</td><td>~0.15&ndash;0.25 s each</td><td>3&ndash;5 at increased volume</td><td>Climax</td></tr>
+            <tr><td>Full song</td><td>3.5&ndash;6.5 kHz</td><td>1.5&ndash;3 s</td><td>Ascending crescendo</td><td>Territory, mate</td></tr>
+            <tr><td>Chip note</td><td>3&ndash;5 kHz</td><td>~0.05 s</td><td>Single metallic</td><td>Contact, alarm</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Cowbird Defense -->
+        <h2>Brown-headed Cowbird Defense</h2>
+
+        <div class="cowbird-card">
+          <h3>Architecture as Response: The Multi-Story Nest</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Yellow Warblers can recognize cowbird eggs. Rather than ejecting them (the small bill
+            makes this difficult), the warbler builds a <strong>NEW NEST FLOOR</strong> over the
+            parasitized clutch, burying the foreign eggs. Up to <strong>6 layers</strong> documented.
+            A six-story nest. The constraint produces the architecture.
+          </p>
+          <p style="font-size: 0.85rem; color: #4E342E; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            <strong>The Amiga Principle:</strong> Creative constraints produce architectural
+            innovation rather than limitation. The Commodore Amiga&rsquo;s hardware limitations
+            produced the distinctive Amiga aesthetic. The cowbird&rsquo;s parasitism produces the
+            multi-story nest. In music: <strong>variation form</strong> (same theme, modified),
+            <strong>palimpsest</strong> (layers covering but not destroying),
+            <strong>passacaglia</strong> (repeated foundation, new content on each layer).
+          </p>
+        </div>
+
+        <!-- Riparian -->
+        <h2>Riparian Willow &mdash; The Fourth Streamside Voice</h2>
+
+        <div class="riparian-card">
+          <h3>The Riparian Thread</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Fourth riparian species in the engine. Shares willow riparian with Wilson&rsquo;s
+            Warbler (degree 15&deg;) but partitioned by elevation: Wilson&rsquo;s favors montane/subalpine;
+            Yellow favors lowland valley bottoms.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Riparian Type</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pacific-slope Flycatcher</td><td>6&deg;</td><td>Alder-dominated streamside forest</td></tr>
+              <tr><td>MacGillivray&rsquo;s Warbler</td><td>14&deg;</td><td>Dense shrub (includes riparian)</td></tr>
+              <tr><td>Wilson&rsquo;s Warbler</td><td>15&deg;</td><td>Willow thickets &mdash; montane/subalpine</td></tr>
+              <tr style="background: #E8F5E9; font-weight: 600;"><td><strong>Yellow Warbler</strong></td><td><strong>16&deg;</strong></td><td><strong>Willow thickets &mdash; lowland valleys</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1B5E20; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The Yellow Warbler is a recognized <strong>indicator species for riparian health</strong>.
+            Where riparian willow corridors are intact, Yellow Warblers are abundant. Where degraded,
+            they decline. The bird IS a biological sensor for stream corridor quality.
+          </p>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Crescendo.</strong> The most instinctive musical device: louder = more important
+          = pay attention. Ravel&rsquo;s <em>Bol&eacute;ro</em> (same melody, escalating volume
+          through orchestral addition), Barber&rsquo;s <em>Adagio for Strings</em> (simple melody
+          climbing to devastating climax), film score swells (orchestra building behind dialogue).
+          The Yellow Warbler compresses any of these into 2 seconds.
+        </p>
+        <p>
+          <strong>Brightness as timbre.</strong> In audio engineering, &ldquo;brightness&rdquo; is
+          a measurable property: spectral energy distribution toward higher frequencies. The Yellow
+          Warbler is the brightest yellow bird in the PNW, and its song has among the highest
+          spectral centroids. Bright plumage + bright sound = the biological equivalent of
+          Scriabin&rsquo;s color-hearing synesthesia.
+        </p>
+        <p>
+          <strong>Architectural layering.</strong> The multi-story cowbird-defense nest maps to
+          variation form, palimpsest, and ground bass. Each layer covers but does not destroy
+          the previous. Bach&rsquo;s <em>Passacaglia in C minor</em>: same bass line, 20 variations.
+          The nest IS the bass line; each floor IS a variation. Constraint IS creativity.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon crescendo">C</div>
+            <div class="theory-content">
+              <h4>Crescendo <span class="theory-level foundational">Foundational</span></h4>
+              <p>Dynamic intensification &mdash; volume and pitch increase within a single phrase. The most emotionally direct dynamic device. Ravel&rsquo;s <em>Bol&eacute;ro</em> compressed to 2 seconds: same syllable type, escalating volume and pitch.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon intensification">I</div>
+            <div class="theory-content">
+              <h4>Accelerando vs. Crescendo <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Two routes to intensification: tempo change (degree 15&deg;, accelerando) vs. dynamic change (degree 16&deg;, crescendo). Same family, same habitat, same energy &mdash; different escalation parameter. The engine now distinguishes tempo-based from dynamics-based escalation.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon brightness">B</div>
+            <div class="theory-content">
+              <h4>Brightness as Timbre <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Yellow = bright = high spectral centroid = forward mix position. The first species where visual brightness (plumage) and acoustic brightness (song) are synesthetically aligned. Scriabin&rsquo;s color-hearing in biological form.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon architecture">A</div>
+            <div class="theory-content">
+              <h4>Architectural Defense <span class="theory-level advanced">Advanced</span></h4>
+              <p>The multi-story cowbird-defense nest &mdash; up to 6 layers. The Amiga Principle: constraint produces architecture. Maps to variation form, palimpsest, passacaglia. Each layer covers but does not destroy the previous.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon riparian">R</div>
+            <div class="theory-content">
+              <h4>Riparian Indicator <span class="theory-level foundational">Foundational</span></h4>
+              <p>The Yellow Warbler as biological sensor for riparian health. Present where corridors are intact, absent where degraded. Fourth riparian species, niche-partitioned from Wilson&rsquo;s by elevation.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon niche">N</div>
+            <div class="theory-content">
+              <h4>Niche Partitioning <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Wilson&rsquo;s and Yellow Warblers share willow riparian but partition by elevation: montane vs. lowland. The ecological equivalent of EQ carving &mdash; each species in its own frequency space to avoid masking.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-015</strong> &mdash; Wilson&rsquo;s Warbler
+            <p>ACCELERANDO vs. CRESCENDO. Wilson&rsquo;s: notes get FASTER (tempo). Yellow: notes get LOUDER and HIGHER (dynamics + pitch). Two kinds of intensification at sequential degrees. Same family, same habitat, same energy &mdash; different escalation parameter. The first PAIRED INTENSIFICATION in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014</strong> &mdash; MacGillivray&rsquo;s Warbler
+            <p>THE WARBLER CLUSTER. Three consecutive Parulidae from three genera. MacGillivray&rsquo;s resolves (AAB). Wilson&rsquo;s accelerates and cuts off. Yellow crescendos to a peak. Three rhetorical strategies: the story, the chase, the swell.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the PNW
+            <p>PARULIDAE EXPANSION. Third warbler in the engine. Three consecutive Parulidae spanning three genera, demonstrating the family&rsquo;s structural and strategic diversity.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Ecology of the PNW
+            <p>RIPARIAN INDICATOR. The Yellow Warbler is a recognized indicator species for riparian health. ECO documents the critical role of riparian zones in Pacific Northwest watersheds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Jeff Lorber at degree 16&deg;. Both energy-3. Both build intensity through layered escalation. Lorber&rsquo;s jazz fusion adds metric modulation and synthesizer layers; the warbler adds volume and pitch. Lorber layers; the warbler crescendos. The S36 parallel mirrors the SPS parallel.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>BRIGHTNESS REVISITED. Wren: maximum complexity in the upper frequency range (complex-bright). Yellow: maximum brightness in a simpler package (simple-bright). Both are bright. One is many notes. The other is few notes at maximum clarity.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Lowther, P.E. et al. (2020). &ldquo;Yellow Warbler.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Chesser, R.T. et al. (2011). Fifty-second supplement to the AOU Check-list. <em>The Auk</em> 128. [<em>Dendroica</em> collapsed into <em>Setophaga</em>.]</li>
+          <li>Lovette, I.J. et al. (2010). Multilocus phylogeny for wood-warblers. <em>Mol Phylogenet Evol</em> 57.</li>
+          <li>Spector, D.A. (1992). Wood-warbler song systems. <em>Current Ornithology</em> 9.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Catchpole, C.K. &amp; Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. Cambridge University Press.</li>
+          <li>Sealy, S.G. (1995). Burial of cowbird eggs by parasitized Yellow Warblers. <em>Animal Behaviour</em> 49.</li>
+          <li>Clark, K.L. &amp; Robertson, R.J. (1981). Cowbird parasitism and anti-parasite strategies in Yellow Warbler. <em>Wilson Bulletin</em> 93.</li>
+          <li>Gregory, S.V. et al. (1991). Ecosystem perspective of riparian zones. <em>BioScience</em> 41.</li>
+          <li>Nur, N. et al. (1999). Statistical guide to avian monitoring programs. USFWS BTP-R6001-1999.</li>
+          <li>Lerdahl, F. &amp; Jackendoff, R. (1983). <em>A Generative Theory of Tonal Music</em>. MIT Press.</li>
+          <li>London, J. (2012). <em>Hearing in Time</em>. 2nd ed. Oxford University Press.</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Yellow Warbler. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Yellow Warbler. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. PHS: Riparian habitats. wdfw.wa.gov</li>
+          <li>Macaulay Library. Yellow Warbler recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Parulidae</div>
+          <div class="stat-detail">New World Warblers &mdash; 3rd in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.7&ndash;5.1 in</div>
+          <div class="stat-detail">12&ndash;13 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">9&ndash;11 g</div>
+          <div class="stat-detail">Slightly larger than Wilson&rsquo;s</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Brilliant yellow</div>
+          <div class="stat-detail">Chestnut-red breast streaks (males)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Formerly</div>
+          <div class="stat-value"><em>Dendroica</em></div>
+          <div class="stat-detail">Reclassified to <em>Setophaga</em> in 2011</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Sweet-sweet-sweeter</div>
+          <div class="stat-detail">Ascending crescendo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">3.5&ndash;6.5 kHz</div>
+          <div class="stat-detail">Opening (3.5&ndash;4.5) &rarr; terminal (5&ndash;6.5)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value">1.5&ndash;3 s</div>
+          <div class="stat-detail">6&ndash;10 notes per song</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Crescendo</div>
+          <div class="stat-detail">First dynamic intensification in the engine</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">16&deg;</div>
+          <div class="stat-detail">Crescendo &mdash; brightness as structure</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #C62828;">3</div>
+          <div class="stat-detail">Second energy-3 &mdash; paired with degree 15&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Riparian Willow</div>
+          <div class="stat-detail">Lowland valley bottoms &amp; urban corridors</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; 4th in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Crescendo</div>
+          <div class="stat-detail">Dynamic-varying sweet series</div>
+        </div>
+
+        <h3>Cowbird Defense</h3>
+        <div class="stat-card">
+          <div class="stat-label">Strategy</div>
+          <div class="stat-value">Nest burial</div>
+          <div class="stat-detail">Up to 6 layers &mdash; builds over parasitized clutch</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 16&deg; &mdash; S36</div>
+          <div class="parallel-name">Jeff Lorber</div>
+          <div class="parallel-detail">Both energy-3. Both build intensity through layered escalation. Lorber&rsquo;s jazz fusion adds metric modulation, synthesizer layers, and harmonic complexity on top of a groove. The warbler crescendos through the same syllable type, escalating volume and pitch. Where Marriott (15&deg;) used double-time directness, Lorber (16&deg;) uses fusion layering. The S36 parallel mirrors the SPS parallel: tempo-drive vs. dynamic-layering.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 016 of 360 &middot;
+      <a href="../015-wilsons-warbler/index.html">Degree 15&deg;: Wilson&rsquo;s Warbler</a> &middot;
+      <a href="../014-macgillivrays-warbler/index.html">Degree 14&deg;: MacGillivray&rsquo;s Warbler</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

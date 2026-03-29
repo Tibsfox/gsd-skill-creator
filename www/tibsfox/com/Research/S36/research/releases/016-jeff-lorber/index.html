@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 16&deg; &mdash; Jeff Lorber &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #E53935);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFCDD2;
+      color: #B71C1C;
+      border: 1px solid #E57373;
+    }
+
+    .genre-shift-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E1BEE7;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .berklee-pipeline-box {
+      background: #E0F2F1;
+      border: 1px solid #80CBC4;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .berklee-pipeline-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #00695C;
+      font-family: system-ui, sans-serif;
+    }
+    .berklee-pipeline-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .berklee-pipeline-box td, .berklee-pipeline-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #B2DFDB;
+    }
+    .berklee-pipeline-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #00695C;
+    }
+
+    .genre-shift-box {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .genre-shift-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .genre-shift-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .incubator-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .incubator-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .incubator-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .keyboard-arc-box {
+      background: #FCE4EC;
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .keyboard-arc-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #AD1457;
+      font-family: system-ui, sans-serif;
+    }
+    .keyboard-arc-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .keyboard-arc-box td, .keyboard-arc-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #F8BBD0;
+    }
+    .keyboard-arc-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #AD1457;
+    }
+
+    .energy-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">16&deg;</div>
+      <div>
+        <h1>Jeff Lorber</h1>
+        <div class="subtitle">Jazz Fusion &middot; Keyboards &middot; Smooth Jazz / Funk &mdash; Born Philadelphia 1952 &mdash; Arista / Verve / Shanachie
+          <span class="energy-badge">Energy 3</span>
+          <span class="genre-shift-badge">First Fusion Label</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../015-thomas-marriott/index.html">Degree 15&deg; (Marriott)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../001-bill-frisell/index.html">Degree 1&deg; (Frisell)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Philadelphia born, 1952. Berklee trained. Portland&rsquo;s Jeff Lorber Fusion,
+          1977. Discovered Kenny G &mdash; who became the best-selling instrumental musician
+          of all time. <em>Water Sign</em>, <em>Galaxian</em>, <em>Prototype</em> (Grammy
+          winner). The first artist labeled &ldquo;Jazz Fusion&rdquo; &mdash; the engine
+          crosses genre boundaries. Synthesizers meet jazz meet funk. The spaces between
+          genres are navigable territory.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Fusion Architect</h2>
+
+        <p>Jeff Lorber was born in <strong>Philadelphia, Pennsylvania in 1952</strong> &mdash;
+        the seventeenth artist in the S36 engine, the seventeenth consecutive jazz artist, and
+        critically the <strong>first artist labeled &ldquo;Jazz Fusion&rdquo;</strong> rather
+        than straight jazz. He studied at <strong>Berklee College of Music</strong>, making
+        him the <strong>third Berklee graduate</strong> in the engine after Quincy Jones
+        (degree 0&deg;) and Bill Frisell (degree 1&deg;).</p>
+
+        <p>After Berklee, Lorber moved to <strong>Portland, Oregon</strong> in the 1970s
+        and formed the <strong>Jeff Lorber Fusion</strong> in 1977 &mdash; a band that would
+        become one of the defining ensembles of the jazz fusion movement. The band&rsquo;s
+        early recordings established the template: jazz improvisation over funk grooves,
+        synthesizer layers creating electronic texture, and a rhythmic drive that owed as
+        much to Earth, Wind &amp; Fire as to Miles Davis&rsquo;s electric period.</p>
+
+        <p>Lorber subsequently moved to the <strong>Seattle area</strong>, deepening his
+        Pacific Northwest roots. His career arc spans four decades and maps the entire
+        history of fusion as a genre &mdash; from its birth in jazz-rock experimentation
+        through the smooth jazz boom to a Grammy-winning return to substantive fusion
+        with <strong><em>Prototype</em></strong> (2015).</p>
+
+        <p>Lorber discovered and mentored <strong>Kenny G</strong> (Kenneth Gorelick), who
+        played in the Jeff Lorber Fusion before becoming the <strong>best-selling instrumental
+        musician of all time</strong> (75+ million records). He also mentored
+        <strong>Dave Koz</strong> and <strong>Eric Benet</strong>.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Arista Records;
+        Verve Records; Shanachie Records; AllMusic; Grammy.com; DownBeat; JazzTimes;
+        Billboard; Berklee College of Music</p>
+
+        <!-- ========================================
+             GENRE SHIFT
+             ======================================== -->
+
+        <div class="genre-shift-box">
+          <h4>First Genre Shift: Jazz Fusion &mdash; The Spaces Between</h4>
+          <p>For sixteen degrees (0&ndash;15), every artist has been classified under the
+          jazz umbrella. Lorber breaks the label &mdash; not by leaving jazz, but by
+          formally combining jazz with funk and electronic music in a way that demands a
+          compound label. <strong>Fusion is the first demonstration that the S36 engine
+          operates on a continuous genre spectrum, not in discrete categories.</strong>
+          The &ldquo;fusion&rdquo; label declares that genre boundaries are permeable.
+          The engine is approaching the boundary where jazz blends into funk, R&amp;B,
+          and electronic &mdash; and Lorber occupies the transitional zone.</p>
+        </div>
+
+        <!-- ========================================
+             BERKLEE PIPELINE
+             ======================================== -->
+
+        <div class="berklee-pipeline-box">
+          <h4>The Berklee Pipeline: Three Graduates, Three Vocabularies</h4>
+          <table>
+            <tr>
+              <th>Artist</th>
+              <th>Degree</th>
+              <th>Berklee Era</th>
+              <th>Output Vocabulary</th>
+            </tr>
+            <tr>
+              <td>Quincy Jones</td>
+              <td>0&deg;</td>
+              <td>Early 1950s</td>
+              <td>Arranger-producer-composer</td>
+            </tr>
+            <tr>
+              <td>Bill Frisell</td>
+              <td>1&deg;</td>
+              <td>1970s</td>
+              <td>Guitar deconstruction, Americana-jazz</td>
+            </tr>
+            <tr>
+              <td><strong>Jeff Lorber</strong></td>
+              <td><strong>16&deg;</strong></td>
+              <td><strong>1970s</strong></td>
+              <td><strong>Jazz fusion keyboards, synthesizer integration</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Three Berklee graduates in
+          seventeen degrees &mdash; the <strong>longest-running institutional thread</strong>
+          in the engine. Unlike the UW pipeline (where graduates interact), the Berklee
+          pipeline is a <strong>divergence engine</strong>: one institution, maximum
+          stylistic spread.</p>
+        </div>
+
+        <!-- ========================================
+             KEYBOARD ARC
+             ======================================== -->
+
+        <div class="keyboard-arc-box">
+          <h4>Keyboard Evolution: Berry (5&deg;) to Lorber (16&deg;)</h4>
+          <table>
+            <tr>
+              <th>Degree</th>
+              <th>Artist</th>
+              <th>Keyboard Type</th>
+              <th>Energy</th>
+            </tr>
+            <tr>
+              <td>5&deg;</td>
+              <td>Berry</td>
+              <td>Acoustic piano (cocktail jazz)</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>6&deg;</td>
+              <td>Bown</td>
+              <td>Acoustic piano (hard bop)</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>13&deg;</td>
+              <td>Seales</td>
+              <td>Acoustic piano (post-bop, modal)</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>14&deg;</td>
+              <td>Parks</td>
+              <td>Acoustic piano (post-genre)</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td><strong>16&deg;</strong></td>
+              <td><strong>Lorber</strong></td>
+              <td><strong>Synthesizers + acoustic (fusion)</strong></td>
+              <td><strong>3</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Lorber breaks the acoustic-piano
+          continuity. Every prior keyboard artist plays acoustic piano as primary instrument.
+          Lorber defines his sound through <strong>synthesizers</strong> &mdash; the keyboard
+          evolves in <strong>technology</strong>, not just style. Keyboard/piano theory branch
+          extends to <strong>ten nodes</strong>.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Second Consecutive Energy-3: The Warming Continues</h4>
+          <table>
+            <tr>
+              <th>Energy</th>
+              <th>Character</th>
+              <th>Count</th>
+              <th>Artists</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Meditative, introspective</td>
+              <td>2</td>
+              <td>Peacock (8&deg;), Lanphere (12&deg;)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sustaining, atmospheric</td>
+              <td>13</td>
+              <td>All others (0&deg;&ndash;7&deg;, 9&deg;&ndash;11&deg;, 13&deg;&ndash;14&deg;)</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td><strong>Assertive, projective</strong></td>
+              <td><strong>2</strong></td>
+              <td><strong>Marriott (15&deg;), Lorber (16&deg;)</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Distribution shifts to
+          <strong>2:13:2</strong>. Two consecutive energy-3 artists confirms the escalation
+          is a trend, not an anomaly. Two energy-3 subtypes: acoustic-assertive (Marriott)
+          and electronic-propulsive (Lorber).</p>
+        </div>
+
+        <!-- ========================================
+             FUSION THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Jazz Fusion Theory &amp; Synthesizer Integration</h2>
+
+        <p>Lorber&rsquo;s musical vocabulary introduces <strong>four new theoretical
+        threads</strong> to the engine and extends several existing ones:</p>
+
+        <ul>
+          <li><strong>Metric modulation (tempo within tempo):</strong> Shifting the perceived
+          tempo by reinterpreting the subdivision of the beat. In fusion, the keyboard or drums
+          establish a new tempo relationship that coexists with the original pulse &mdash;
+          creating the sensation of two tempos simultaneously. First metric modulation thread
+          in the engine.</li>
+          <li><strong>Synthesizer integration (Rhodes/Minimoog/DX7):</strong> First artist
+          whose instrumental identity is tied to <strong>electronic instruments</strong>.
+          Fender Rhodes (warm, bell-like overtones), Minimoog (fat, monophonic bass and leads),
+          Yamaha DX7 (digital FM synthesis defining the 1980s sound). Electronic keyboard
+          identity is NEW in the engine.</li>
+          <li><strong>Funk rhythm (syncopated 16th-note grooves):</strong> The rhythmic
+          foundation of fusion &mdash; syncopated 16th-note grooves from James Brown,
+          Sly Stone, and Parliament-Funkadelic. The emphasis on &ldquo;the one&rdquo; as
+          structural principle. Fusion layers jazz harmony and improvisation over this bed.</li>
+          <li><strong>Smooth jazz production (polished, radio-friendly):</strong> The fourth
+          major production aesthetic position, joining Blue Note/Van Gelder, ECM/Eicher, and
+          Origin/Bishop. Controlled dynamics, melodic accessibility, and a sonic surface
+          designed for repeated casual listening. The most commercially successful and
+          critically attacked aesthetic in jazz history.</li>
+        </ul>
+
+        <hr class="section-divider">
+        <h2>Music Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Jazz Fusion Keyboard Vocabulary</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Metric modulation (tempo within tempo), synthesizer integration
+            (Rhodes/Minimoog/DX7), funk rhythm (syncopated 16th-note grooves, emphasis on
+            the one), smooth jazz production (fourth major aesthetic position).</p>
+            <div class="examples">Lorber &mdash; Water Sign (1979), Galaxian (1981),
+            Prototype (2015); Herbie Hancock &mdash; Head Hunters; Chick Corea &mdash;
+            Return to Forever; Joe Zawinul &mdash; Weather Report</div>
+            <div class="genealogy"><strong>Lineage:</strong> Fusion keyboard descends from
+            jazz piano (Berry 5, Bown 6, Seales 13, Parks 14) plus electronic instruments
+            (Minimoog, DX7). Keyboard/piano branch extends to ten nodes. First electronic
+            keyboard identity in the engine.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Talent Incubator</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Musician whose bands serve as launching pads for other careers. Sideman
+            position IS the education; graduation is a solo career. Seventeenth artist-city
+            pattern.</p>
+            <div class="examples">Lorber &rarr; Kenny G (best-selling instrumental musician,
+            75M+ records); Lorber &rarr; Dave Koz (smooth jazz headliner); Lorber &rarr;
+            Eric Benet (R&amp;B vocalist). Standifer (4&deg;) &mdash; The Teacher;
+            Seales (13&deg;) &mdash; Institutional Anchor; Marriott (15&deg;) &mdash;
+            Builder-Stayer</div>
+            <div class="genealogy"><strong>Lineage:</strong> Artist-city taxonomy extends
+            to seventeen named patterns. The Incubator launches through professional platform
+            &mdash; a new mentorship mechanism distinct from bandstand (Standifer), university
+            (Seales), and infrastructure investment (Marriott).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Smooth Jazz Production Aesthetic</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Fourth major production position. Controlled dynamics, polished mix, melodic
+            accessibility, radio-friendly. The most commercially successful production
+            aesthetic in jazz history.</p>
+            <div class="examples">Blue Note/Van Gelder &mdash; warm compression (position 1);
+            ECM/Eicher &mdash; spacious reverb (position 2); Origin/Bishop &mdash; documentary
+            realism (position 3); <strong>Smooth jazz &mdash; polished radio-ready
+            (position 4)</strong></div>
+            <div class="genealogy"><strong>Lineage:</strong> Label/production threads expand.
+            Four aesthetic positions now documented. Smooth jazz is the most commercially
+            productive and the most critically contested.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Synthesizer Pitch Bend</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Sixteenth deployment. The pitch bend wheel on a synthesizer performing the
+            same function as a half-valve bend on trumpet or a string bend on guitar. Electronic
+            blue note mechanism &mdash; new to the engine.</p>
+            <div class="examples">Lorber (16&deg;) &mdash; pitch bend wheel on Rhodes/Minimoog;
+            Marriott (15&deg;) &mdash; half-valve bend on trumpet; Frisell (1&deg;) &mdash;
+            string bend on guitar; Standifer (4&deg;) &mdash; warm brass blue note</div>
+            <div class="genealogy"><strong>Lineage:</strong> Sixteen deployments across seventeen
+            degrees. Electronic mechanism is NEW. Blue note mechanisms: bass-line (0), guitar (1),
+            vocal (3), trumpet-warm (4), piano crush (5), altered voicings (6), trombone slide (7),
+            bass fundamental (8), sax voice (9), alto cool bend (10), flute bent (11), bebop
+            chromatic (12), modal integration (13), post-genre floating (14), assertive brass (15),
+            <strong>synthesizer pitch bend (16)</strong>.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             INCUBATOR PATTERN
+             ======================================== -->
+
+        <div class="incubator-box">
+          <h4>Seventeenth Artist-City Pattern: The Talent Incubator</h4>
+          <p><strong>Conditions:</strong> (1) A working band that attracts young talent
+          (Jeff Lorber Fusion). (2) At least one protege achieves significant independent
+          success (Kenny G &mdash; 75M+ records sold; Dave Koz; Eric Benet). (3) The
+          mentor&rsquo;s own career continues independently of protege success (Lorber&rsquo;s
+          career spans four decades beyond the Kenny G connection).</p>
+          <p>The most commercially productive mentorship in the engine by orders of magnitude.
+          The Incubator teaches through <strong>professional opportunity</strong> &mdash;
+          giving sidemen a platform that becomes a springboard. Distinct from The Teacher
+          (bandstand), The Institutional Anchor (university), and The Builder-Stayer
+          (local investment).</p>
+        </div>
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Born 1952 &mdash; Philadelphia</div>
+          <p>Philadelphia, Pennsylvania. Deep jazz city: Coltrane, Tyner, Morgan, Golson.
+          Eighteenth educational pipeline: Berklee College of Music.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Berklee College of Music &mdash; 1970s</div>
+          <p>Third Berklee graduate in the engine (after Jones 0&deg;, Frisell 1&deg;).
+          The Berklee pipeline is a divergence engine: one institution, maximum stylistic spread.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1977 &mdash; Jeff Lorber Fusion (Portland, OR)</div>
+          <p>Formed in Portland. First Portland-based artist in the engine. The fusion
+          template: jazz improvisation over funk grooves, synthesizer layers, rhythmic drive.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1970s &mdash; Kenny G Discovery</div>
+          <p>Kenneth Gorelick joined the Jeff Lorber Fusion. Launched the most commercially
+          successful instrumental career in history. 75+ million records sold worldwide.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1979 &mdash; Water Sign (Arista)</div>
+          <p>Breakthrough album. Rhodes/Minimoog layers over funk grooves with jazz harmony.
+          First major-label placement for a PNW fusion artist in the engine.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1981 &mdash; Galaxian (Arista)</div>
+          <p>Electronic expansion. DX7 and digital synthesizer integration. Navigated the
+          analog-to-digital technological shift in real time.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1993 &mdash; Worth Waiting For (Verve)</div>
+          <p>Smooth jazz production at its most polished. Lorber&rsquo;s compositional
+          craft beneath the radio-friendly surface. Grammy nominations.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2015 &mdash; Prototype (Shanachie) &mdash; Grammy Win</div>
+          <p><strong>Grammy Award for Best Contemporary Instrumental Album.</strong> Fusion
+          intensity reclaimed within modern production. The validation Lorber&rsquo;s fusion
+          work had long deserved.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Present &mdash; Seattle Area</div>
+          <p>Based in the Seattle area. Four decades of continuous recording and performing.
+          The Portland-to-Seattle migration completes the PNW geographic arc.</p>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.92rem;border-collapse:collapse">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;width:30%;font-weight:600">S36-000 (Quincy Jones)</td>
+            <td style="padding:0.6rem">Berklee pipeline. Third Berklee graduate after Jones (0&deg;)
+            and Frisell (1&deg;). Same institution, maximum stylistic divergence. The Berklee
+            pipeline is the longest-running institutional thread in the engine.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-001 (Bill Frisell)</td>
+            <td style="padding:0.6rem">Berklee pipeline. Both 1970s graduates. Frisell
+            deconstructed guitar; Lorber expanded keyboard into electronic orchestra. Both
+            relocated to the PNW. Both transformed their instruments&rsquo; role in jazz.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-005 (Overton Berry)</td>
+            <td style="padding:0.6rem">Keyboard lineage. Fifth keyboard artist. Berry&rsquo;s
+            cocktail acoustic piano to Lorber&rsquo;s synthesizer fusion &mdash; the keyboard
+            evolves in technology, not just style. Branch extends to ten nodes.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-013 (Marc Seales)</td>
+            <td style="padding:0.6rem">Keyboard contrast. Both keyboard artists with
+            institutional roots &mdash; Seales through UW, Lorber through Berklee. Acoustic
+            piano in the university vs. synthesizer on the stage.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;font-weight:600">S36-014 (Aaron Parks)</td>
+            <td style="padding:0.6rem">Keyboard contrast. Parks floats between genres
+            unconsciously (post-genre); Lorber fuses genres deliberately (jazz fusion).
+            Parks&rsquo;s metric ambiguity anticipated Lorber&rsquo;s metric modulation.</td>
+          </tr>
+        </table>
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield High School Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Quincy Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Ernestine Anderson &mdash; Garfield, late 1940s</td></tr>
+            <tr><td>Degrees 4&deg;&ndash;15&deg;</td><td>No confirmed Garfield products (twelve consecutive)</td></tr>
+            <tr><td>Degree 16&deg;</td><td>Jeff Lorber &mdash; NOT a Garfield product. Born Philadelphia, PA. Berklee College of Music. Tenth consecutive non-Garfield degree.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Key Carry-Forward Items for Degree 17</h4>
+          <ul>
+            <li><strong>Genre rotation:</strong> SEVENTEEN consecutive jazz/jazz-adjacent artists. First compound label (Jazz Fusion) at 16 &mdash; the boundary softens but does not break.</li>
+            <li><strong>First fusion label:</strong> The engine now operates on a continuous genre spectrum. Track subsequent compound labels.</li>
+            <li><strong>Energy spectrum:</strong> 2:13:2. Two consecutive energy-3 artists (15, 16). Track continued warming.</li>
+            <li><strong>Berklee pipeline:</strong> Three graduates (0, 1, 16). Longest institutional thread. Divergence engine.</li>
+            <li><strong>Kenny G connection:</strong> Most commercially productive mentor-protege relationship in the engine. Track smooth jazz thread.</li>
+            <li><strong>Talent Incubator (NEW at 16):</strong> Seventeenth artist-city pattern. Track subsequent incubators.</li>
+            <li><strong>Synthesizer integration (NEW at 16):</strong> First electronic keyboard identity. Track electronic instrument thread.</li>
+            <li><strong>Gender dimension:</strong> Eleven consecutive male artists (7&ndash;16). Two women in seventeen degrees. CRITICAL.</li>
+            <li><strong>Central District:</strong> Absent at degrees 12&ndash;16. Five consecutive absences.</li>
+            <li><strong>Keyboard/piano branch:</strong> Ten nodes &mdash; RICHEST BRANCH, extended.</li>
+            <li><strong>Duwamish territorial acknowledgment:</strong> BLOCKING. SEVENTEEN releases overdue.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">16&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#B71C1C">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz Fusion</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Keyboards / Synth</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1980s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Arista / Verve / Shanachie</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City Pattern</span>
+            <span class="stat-value">Talent Incubator</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jazz streak</span>
+            <span class="stat-value">17 consecutive</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre label</span>
+            <span class="stat-value">FIRST FUSION</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Keyboardist</span>
+            <span class="stat-value">5th (first synth)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Berklee pipeline</span>
+            <span class="stat-value">3rd graduate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy spectrum</span>
+            <span class="stat-value">2:13:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Keyboard branch</span>
+            <span class="stat-value">10 nodes</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">16th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note</span>
+            <span class="stat-value">16th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City taxonomy</span>
+            <span class="stat-value">17 patterns</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label"><em>Water Sign</em></span>
+            <span class="stat-value">1979</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Galaxian</em></span>
+            <span class="stat-value">1981</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Worth Waiting For</em></span>
+            <span class="stat-value">1993</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Prototype</em></span>
+            <span class="stat-value">2015 (Grammy)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-References</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jones</span>
+            <span class="stat-value">0&deg; Berklee</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Frisell</span>
+            <span class="stat-value">1&deg; Berklee</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Berry</span>
+            <span class="stat-value">5&deg; keyboard</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seales</span>
+            <span class="stat-value">13&deg; keyboard</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Parks</span>
+            <span class="stat-value">14&deg; keyboard</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 16&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine
+    &mdash; <a href="../../index.html">Back to S36</a></p>
+  </footer>
+</body>
+</html>
