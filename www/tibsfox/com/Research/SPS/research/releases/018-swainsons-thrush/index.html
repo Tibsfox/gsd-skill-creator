@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 18&deg; &mdash; Swainson&rsquo;s Thrush &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.ascending { background: #1565C0; }
+    .theory-icon.harmonic-melodic { background: #7B1FA2; }
+    .theory-icon.aspiration { background: #E65100; }
+    .theory-icon.coda { background: #00695C; }
+    .theory-icon.riparian { background: #2E7D32; }
+    .theory-icon.turdidae { background: #4E342E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Catharus comparison card */
+    .catharus-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #9FA8DA 100%);
+      border: 1px solid #5C6BC0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .catharus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Spiral pair card */
+    .spiral-card {
+      background: linear-gradient(135deg, #E1F5FE 0%, #81D4FA 100%);
+      border: 1px solid #0288D1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .spiral-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #01579B;
+    }
+
+    /* Riparian card */
+    .riparian-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .riparian-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">18&deg;</div>
+      <div class="release-title-block">
+        <h2>Swainson&rsquo;s Thrush</h2>
+        <div class="scientific">Catharus ustulatus &middot; Family Turdidae (Thrushes)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Upward Spiraling Fluty Phrases &middot; Riparian Forest &middot; Summer Migrant &middot; Energy 3</div>
+
+    <blockquote>
+      As evening light fades over a riparian corridor, a modest olive-brown bird with
+      spectacle-like eyerings perches in the alder canopy. It begins to sing. The first phrase
+      is low, fluty, warm. The second phrase is the same shape but higher. The third, higher
+      still. Each phrase a step on a spiral staircase, each step ascending, the melody climbing
+      through the forest canopy as the light climbs down. The second <em>Catharus</em>. The
+      melodist to the Hermit Thrush&rsquo;s harmonist. Vertical and horizontal. The genus
+      that means &ldquo;pure&rdquo; now sings on both axes.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Second Catharus</h2>
+        <p>
+          The Swainson&rsquo;s Thrush is a medium-small passerine of the family
+          <strong>Turdidae</strong> (thrushes). The genus <em>Catharus</em> &mdash; from Greek
+          <em>katharos</em>, &ldquo;pure&rdquo; &mdash; contains five North American species.
+          At degree 7&deg;, the Hermit Thrush introduced the genus to the engine. Now at degree
+          18&deg;, the Swainson&rsquo;s Thrush becomes the <strong>second <em>Catharus</em>
+          in the circle</strong>. The species epithet <strong>ustulatus</strong> means
+          &ldquo;scorched&rdquo; (Latin), referring to the warm tawny-brown tones of the plumage.
+        </p>
+        <p>
+          Two well-differentiated subspecies groups, sometimes argued as distinct species:
+          <strong>olive-backed</strong> (<em>ustulatus</em> group, coastal Pacific &mdash; the
+          primary PNW birds) and <strong>russet-backed</strong> (<em>swainsoni</em> group,
+          interior). They differ in plumage tone, migration routes, and vocalizations. At
+          <strong>6.3&ndash;7.5 inches</strong> and <strong>23&ndash;45 grams</strong>.
+          The diagnostic field mark: a <strong>bold, buffy eyering</strong> and warm
+          <strong>buffy face wash</strong> &mdash; the &ldquo;spectacled&rdquo; <em>Catharus</em>.
+        </p>
+
+        <!-- Catharus Comparison Card -->
+        <div class="catharus-card">
+          <h3>The Catharus Pair: Harmonic vs. Melodic</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Two <em>Catharus</em> thrushes, eleven degrees apart, two axes of musical thought:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Hermit Thrush (7&deg;)</th><th>Swainson&rsquo;s (18&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Phrase contour</td><td>Arch (ascending then descending)</td><td><strong>Ascending (each phrase higher)</strong></td></tr>
+              <tr><td>Pitch organization</td><td>Harmonic series (vertical intervals)</td><td><strong>Sequential ascent (horizontal progression)</strong></td></tr>
+              <tr><td>Musical axis</td><td>VERTICAL (harmony &mdash; chord tones)</td><td><strong>HORIZONTAL (melody &mdash; where the line goes)</strong></td></tr>
+              <tr><td>Emotional arc</td><td>Contemplation (turns back on itself)</td><td><strong>Aspiration (keeps climbing)</strong></td></tr>
+              <tr><td>Diagnostic visual</td><td>Rufous tail</td><td><strong>Buffy eyering (&ldquo;spectacles&rdquo;)</strong></td></tr>
+              <tr><td>Habitat</td><td>Mountain forest (elevation-defined)</td><td><strong>Riparian forest (moisture-defined)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1A237E; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The Hermit Thrush asks: what notes sound good TOGETHER (vertical). The Swainson&rsquo;s
+            asks: where does the line go NEXT (horizontal). Same genus, both axes.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Ascending Spiral</h2>
+        <h3>The Song That Climbs</h3>
+        <p>
+          The Swainson&rsquo;s Thrush&rsquo;s song is an <strong>upward-spiraling series of
+          fluty phrases</strong>, each phrase pitched higher than the last, creating a staircase
+          of sound that literally climbs through pitch space. Each individual phrase consists of
+          several fluty notes &mdash; breathy, warm, with internal turns and ornaments. But the
+          defining feature is the <strong>inter-phrase pitch trajectory</strong>: each successive
+          phrase begins at a higher pitch. The cumulative effect is a melody that ascends.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>1.5&ndash;5.0 kHz (across ascending phrases)</td></tr>
+            <tr><td>Starting pitch</td><td>~1.5&ndash;2.5 kHz (first phrase)</td></tr>
+            <tr><td>Terminal pitch</td><td>~3.5&ndash;5.0 kHz (final phrase)</td></tr>
+            <tr><td>Phrase duration</td><td>1.0&ndash;2.5 s per phrase</td></tr>
+            <tr><td>Phrases per song</td><td>3&ndash;8 ascending phrases</td></tr>
+            <tr><td>Song duration</td><td>4&ndash;12 s (full ascending sequence)</td></tr>
+            <tr><td>Timbre</td><td>Fluty, breathy, warm &mdash; wooden flute quality</td></tr>
+            <tr><td>Key property</td><td><strong>ASCENDING &mdash; each phrase higher than the last</strong></td></tr>
+          </tbody>
+        </table>
+
+        <!-- Spiral Pair Card -->
+        <div class="spiral-card">
+          <h3>The Matched Pair: Ascending and Descending Spirals</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Adjacent degrees, both <em>Catharus</em>, opposite trajectories:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Direction</th><th>Emotional Content</th></tr>
+            </thead>
+            <tbody>
+              <tr style="background: #E1F5FE; font-weight: 600;"><td><strong>Swainson&rsquo;s Thrush</strong></td><td><strong>18&deg;</strong></td><td><strong>UPWARD</strong></td><td><strong>Aspiration, hope, reaching</strong></td></tr>
+              <tr><td>Veery</td><td>19&deg;</td><td>DOWNWARD</td><td>Resolution, settling, ethereal descent</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #01579B; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            With the Hermit Thrush at degree 7&deg;, three <em>Catharus</em> thrushes form a
+            triptych: harmonic series (7&deg;), ascending spiral (18&deg;), descending
+            spiral (19&deg;). The genus named &ldquo;pure&rdquo; provides the engine&rsquo;s
+            most complete exploration of pitch organization.
+          </p>
+        </div>
+
+        <h3>The Ascending Sequence in Music</h3>
+        <p>
+          The <strong>ascending sequence</strong> is a compositional device of building tension
+          and aspiration. A musical idea is stated, then restated at a higher pitch level,
+          creating directional momentum experienced as reaching upward. Think of the opening of
+          <strong>&ldquo;The Star-Spangled Banner&rdquo;</strong> (ascending broken triad),
+          <strong>Coltrane&rsquo;s &ldquo;A Love Supreme&rdquo;</strong> (ascending modal
+          explorations), <strong>Ravel&rsquo;s &ldquo;Bolero&rdquo;</strong> (theme restated
+          at progressively higher registers). The Swainson&rsquo;s Thrush&rsquo;s song IS an
+          ascending sequence &mdash; the same compositional device, evolved independently in a
+          biological system.
+        </p>
+
+        <!-- Riparian Habitat -->
+        <h2>Riparian Forest &mdash; The Stream-Edge Canopy</h2>
+
+        <div class="riparian-card">
+          <h3>Habitat as Acoustic Architecture</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Dense, moist, deciduous-conifer mixed forest along streams and rivers. Alder-willow-cottonwood
+            corridors with salmonberry understory. The bird sings from concealed mid-canopy perches
+            (10&ndash;30 ft). The ascending song sweeps through the vertical acoustic layers of
+            the riparian forest:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Forest Layer</th><th>Acoustic Property</th><th>Phrase Position</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Dense understory</td><td>Absorbs &amp; scatters high frequencies</td><td>Lower phrases propagate here</td></tr>
+              <tr><td>Mid-canopy</td><td>Moderate transmission</td><td>Middle phrases reach this zone</td></tr>
+              <tr><td>Canopy gaps</td><td>Transmit high frequencies effectively</td><td>Higher phrases escape upward</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1B5E20; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The ascending spiral is acoustically functional: it sweeps through the frequency channels
+            of the riparian forest, sampling each layer in turn. A spotlight moving vertically through
+            the canopy.
+          </p>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Harmonic vs. melodic thinking.</strong> The distinction between harmonic and melodic
+          thinking is one of the deepest in music theory. Harmonic thinking is VERTICAL: which notes
+          sound good together, what intervals, what chords. The Hermit Thrush at degree 7&deg;. Melodic
+          thinking is HORIZONTAL: where does the line go next, what is the trajectory through time.
+          The Swainson&rsquo;s Thrush at degree 18&deg;. The <em>Catharus</em> genus contains both
+          axes. Same genus, different questions. The two fundamental questions of music theory,
+          answered by two thrushes from the genus named &ldquo;pure.&rdquo;
+        </p>
+        <p>
+          <strong>The dusk song as coda.</strong> The Swainson&rsquo;s Thrush is a prominent
+          <strong>dusk singer</strong> &mdash; its ascending spiral fills riparian corridors as
+          evening light fades. In musical form, the coda is the closing section. The dusk song is
+          the daily coda of the riparian forest soundscape: the ascending melody that plays as the
+          day closes, the last voice to spiral upward before night arrives. Aspiration as the
+          closing gesture. Hope as the final note.
+        </p>
+        <p>
+          <strong>Ascending pitch as emotional narrative.</strong> Rising pitch in vocal
+          communication &mdash; across languages and species &mdash; is associated with increased
+          arousal, attention-seeking, and incompleteness. A rising inflection is a question. A
+          rising melody is unresolved tension. The Swainson&rsquo;s Thrush&rsquo;s ascending song
+          carries this emotional weight: each phrase higher, the trajectory upward, the resolution
+          in the silence at the top of the staircase.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon ascending">A</div>
+            <div class="theory-content">
+              <h4>The Ascending Sequence <span class="theory-level foundational">Foundational</span></h4>
+              <p>Each phrase transposed upward &mdash; the spiral staircase. The same compositional device used in &ldquo;The Star-Spangled Banner,&rdquo; Coltrane&rsquo;s &ldquo;A Love Supreme,&rdquo; and Ravel&rsquo;s &ldquo;Bolero.&rdquo; Aspiration as compositional form. Evolved independently in a biological system.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon harmonic-melodic">H</div>
+            <div class="theory-content">
+              <h4>Harmonic vs. Melodic Thinking <span class="theory-level advanced">Advanced</span></h4>
+              <p>The two axes of pitch organization. Hermit Thrush (7&deg;): VERTICAL &mdash; overtone series intervals within phrases. Swainson&rsquo;s (18&deg;): HORIZONTAL &mdash; sequential ascending phrases, directional trajectory. The <em>Catharus</em> genus contains both fundamental dimensions of music theory.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon aspiration">P</div>
+            <div class="theory-content">
+              <h4>Ascending Pitch as Aspiration <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Rising pitch = tension, incompleteness, reaching. The Swainson&rsquo;s ascends and STOPS &mdash; the resolution is in the silence, not in a downward return. The physics of ascending pitch produce the perception of hope in any pitch-sensitive listener.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon coda">C</div>
+            <div class="theory-content">
+              <h4>The Dusk Song as Coda <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Prominent dusk singer &mdash; the ascending spiral fills riparian corridors as evening light fades. The daily coda of the forest soundscape: the ascending melody that plays as the day closes. Aspiration as the closing gesture.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon riparian">R</div>
+            <div class="theory-content">
+              <h4>Riparian Acoustic Architecture <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The ascending spiral sweeps through the vertical frequency channels of the riparian forest. Lower phrases in the understory, higher phrases through canopy gaps. Acoustically functional: a layer-by-layer scan of the habitat&rsquo;s transmission properties.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon turdidae">T</div>
+            <div class="theory-content">
+              <h4>Turdidae Acoustic Diversity <span class="theory-level advanced">Advanced</span></h4>
+              <p>Three thrushes, three strategies: AM drone (Varied, 2&deg;), harmonic series (Hermit, 7&deg;), ascending sequence (Swainson&rsquo;s, 18&deg;). The Turdidae become the most acoustically diverse family in the circle.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-007</strong> &mdash; Hermit Thrush
+            <p>SAME GENUS, DIFFERENT AXIS. Both <em>Catharus</em>. Hermit Thrush navigates pitch VERTICALLY (harmonic series, overtone ratios). Swainson&rsquo;s navigates HORIZONTALLY (ascending sequential phrases). The genus named &ldquo;pure&rdquo; contains both the harmonist and the melodist.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-019</strong> &mdash; Veery
+            <p>THE MATCHED PAIR. Swainson&rsquo;s (18&deg;) spirals UPWARD. Veery (19&deg;) spirals DOWNWARD. Adjacent degrees, both <em>Catharus</em>, opposite trajectories. Three <em>Catharus</em> thrushes form a triptych: harmonic series (7&deg;), ascending (18&deg;), descending (19&deg;).</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the PNW
+            <p>Second <em>Catharus</em> entry. AVI documents the Swainson&rsquo;s Thrush as one of the most abundant breeding songbirds in PNW riparian corridors. Thrush section now includes three Turdidae species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Ecology of the PNW
+            <p>Riparian forest ecology: alder-willow-cottonwood corridor structure, moist understory communities. The three-dimensional canopy structure that shapes the ascending song&rsquo;s transmission characteristics.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Maktub at degree 18&deg;. Both build through layered ascent &mdash; Maktub layers groove, keys, and horns upward through ensemble performance; the Swainson&rsquo;s layers phrases upward through sequential pitch ascent.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>Third Turdidae in the engine. The thrush family now spans three acoustic strategies: AM drone (2&deg;), harmonic series (7&deg;), ascending sequence (18&deg;). The most acoustically diverse family in the circle.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Mack, D.E. &amp; Yong, W. (2020). &ldquo;Swainson&rsquo;s Thrush.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Ruegg, K.C. et al. (2006). Climate change and migratory pathways in Swainson&rsquo;s Thrush. <em>J Biogeography</em> 33.</li>
+          <li>Delmore, K.E. et al. (2012). Dramatic intraspecific differences in migratory routes. <em>Proc R Soc B</em> 279.</li>
+          <li>Doolittle, E.L. &amp; Brumm, H. (2014). Harmonic series in Hermit Thrush song. <em>PNAS</em> 111(46). [Comparative <em>Catharus</em> reference.]</li>
+          <li>Catchpole, C.K. &amp; Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. Cambridge University Press.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Loss, S.R. et al. (2014). Bird-building collisions in the United States. <em>Condor</em> 116.</li>
+          <li>Lerdahl, F. &amp; Jackendoff, R. (1983). <em>A Generative Theory of Tonal Music</em>. MIT Press.</li>
+          <li>Huron, D. (2006). <em>Sweet Anticipation: Music and the Psychology of Expectation</em>. MIT Press.</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Swainson&rsquo;s Thrush. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Swainson&rsquo;s Thrush. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. Swainson&rsquo;s Thrush. wdfw.wa.gov</li>
+          <li>Macaulay Library. Swainson&rsquo;s Thrush recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Turdidae</div>
+          <div class="stat-detail">Thrushes &mdash; 3rd in engine (degrees 2, 7, 18)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Catharus</em></div>
+          <div class="stat-detail">2nd <em>Catharus</em> &mdash; also at degree 7&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">6.3&ndash;7.5 in</div>
+          <div class="stat-detail">16&ndash;19 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">23&ndash;45 g</div>
+          <div class="stat-detail">Similar to Hermit Thrush</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Spectacled</div>
+          <div class="stat-detail">Bold buffy eyering + face wash</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value">Olive-backed (PNW)</div>
+          <div class="stat-detail">Potential species-level split</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Ascending spiral</div>
+          <div class="stat-detail">Each phrase higher than the last</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">1.5&ndash;5.0 kHz</div>
+          <div class="stat-detail">Sweeps from mid to upper register</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Song Duration</div>
+          <div class="stat-value">4&ndash;12 s</div>
+          <div class="stat-detail">3&ndash;8 ascending phrases</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Horizontal melody</div>
+          <div class="stat-detail">Sequential ascent &mdash; directional trajectory</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">18&deg;</div>
+          <div class="stat-detail">The ascending spiral &mdash; aspiration in sound</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #C62828;">3</div>
+          <div class="stat-detail">Fourth energy-3 &mdash; plateau continues</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Riparian Forest</div>
+          <div class="stat-detail">Closed canopy, moist understory</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; 6th in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Ascending Spiral</div>
+          <div class="stat-detail">Sequential phrases, each higher</div>
+        </div>
+
+        <h3>Catharus Triptych</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree 7&deg;</div>
+          <div class="stat-value">Hermit Thrush</div>
+          <div class="stat-detail">Harmonic series (vertical axis)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Degree 18&deg;</div>
+          <div class="stat-value">Swainson&rsquo;s Thrush</div>
+          <div class="stat-detail">Ascending spiral (horizontal axis)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Degree 19&deg;</div>
+          <div class="stat-value">Veery</div>
+          <div class="stat-detail">Descending spiral (matched pair)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 18&deg; &mdash; S36</div>
+          <div class="parallel-name">Maktub</div>
+          <div class="parallel-detail">Both build through layered ascent. Maktub&rsquo;s music layers groove, keys, and horns upward through ensemble performance. The Swainson&rsquo;s layers phrases upward through sequential pitch ascent. Both are collaborative, both are about the climb. Both deliver aspiration through accumulation &mdash; the whole is built by the ascent, not by any single moment.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 018 of 360 &middot;
+      <a href="../017-common-yellowthroat/index.html">Degree 17&deg;: Common Yellowthroat</a> &middot;
+      <a href="../007-hermit-thrush/index.html">Degree 7&deg;: Hermit Thrush</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

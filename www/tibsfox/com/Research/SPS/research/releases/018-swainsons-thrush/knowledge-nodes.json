@@ -1,0 +1,397 @@
+{
+  "degree": 18,
+  "species": "Swainson's Thrush",
+  "scientific_name": "Catharus ustulatus",
+  "subspecies": "Two subspecies groups: olive-backed (ustulatus group, coastal Pacific -- the primary PNW birds) and russet-backed (swainsoni group, interior). Potential species-level split supported by molecular data, migratory route divergence, and plumage differences.",
+  "sound_type": "upward spiraling fluty phrases",
+  "energy": 3,
+  "ecosystem": "riparian forest",
+  "season": "summer (neotropical migrant -- arrives May, departs September)",
+  "family": "Turdidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds across the forested PNW, concentrated in riparian corridors and moist conifer understory. PNW coastal birds are primarily olive-backed (ustulatus group)."
+  },
+  "physical": {
+    "length_in": "6.3-7.5",
+    "wingspan_in": "11.4-12.2",
+    "weight_g": "23-45"
+  },
+  "plumage": {
+    "overall": "Uniform olive-brown to warm brown upperparts (depending on subspecies group). Pale underparts with bold dark spots on breast arranged as smudged chevrons. Bold buffy eyering and warm buffy wash on face and upper breast -- the 'spectacled' look.",
+    "head": "Bold buffy eyering -- the diagnostic field mark. Warm buffy wash on face and lores. The 'spectacles' distinguish Swainson's from Hermit Thrush (thin pale eyering, rufous tail) and Gray-cheeked Thrush (no eyering).",
+    "body": "Olive-brown upperparts (coastal olive-backed) or warmer rufescent upperparts (interior russet-backed). Pale underparts with dark breast spots as smudged chevrons, concentrated on upper breast and fading on flanks.",
+    "tail": "Same color as back -- no rufous contrast (unlike the Hermit Thrush's diagnostic rufous tail)",
+    "bill": "Thin, slightly decurved -- typical Catharus thrush bill for ground-foraging insects and berries. Similar to Hermit Thrush.",
+    "legs": "Pink to flesh-colored",
+    "diagnostic_visual": "Bold buffy eyering and warm buffy face wash -- the 'spectacled' Catharus. No rufous tail contrast (distinguishes from Hermit Thrush). Uniform olive-brown upperparts.",
+    "subspecies_note": "Olive-backed (coastal): grayer/more olive upperparts. Russet-backed (interior): warmer, browner upperparts. The two groups may represent distinct species."
+  },
+  "frequency_range": {
+    "full_range_hz": "1500-5000 (across ascending phrase sequence)",
+    "starting_pitch_hz": "1500-2500 (first phrase, lowest in sequence)",
+    "terminal_pitch_hz": "3500-5000 (final phrase, highest in sequence)",
+    "register": "Mid-range to upper-mid (1.5-5.0 kHz -- the ascending range sweeps from mid-range into the upper register)"
+  },
+  "vocalization_metrics": {
+    "primary_song": {
+      "name": "Ascending spiral -- upward-spiraling fluty phrases",
+      "phrase_duration_s": "1.0-2.5",
+      "inter_phrase_interval_s": "0.5-2",
+      "phrases_per_song": "3-8 ascending phrases per bout",
+      "song_duration_s": "4-12 (full ascending sequence)",
+      "phrase_contour": "Each phrase contains multiple fluty notes with internal turns; successive phrases ascend in pitch",
+      "timbre": "Fluty, breathy, warm -- the wooden flute quality shared with the Hermit Thrush. Pure-toned, minimal harshness.",
+      "calling_period": "Dawn and dusk peaks; prominent DUSK SINGER -- the ascending song fills riparian corridors as evening light fades",
+      "key_property": "ASCENDING PITCH TRAJECTORY -- each successive phrase higher than the last, creating a spiral staircase in sound. The defining feature is the inter-phrase pitch relationship, not the internal structure of individual phrases."
+    },
+    "call": {
+      "name": "Whit call",
+      "description": "Sharp, single-noted 'whit' -- used as contact and alarm call. Higher and sharper than the fluty song phrases.",
+      "frequency_hz": "3000-6000"
+    },
+    "night_flight_call": {
+      "name": "Spring peep / quirt",
+      "description": "Short, clear, upslurred 'quirt' given during nocturnal migration. One of the most commonly detected nocturnal migration calls in the PNW.",
+      "frequency_hz": "2500-4000"
+    }
+  },
+  "catharus_comparison": {
+    "principle": "The genus Catharus ('pure') contains both VERTICAL (harmonic) and HORIZONTAL (melodic) pitch organization strategies, representing the two fundamental axes of musical thought",
+    "hermit_thrush": {
+      "degree": 7,
+      "strategy": "Harmonic series navigation -- notes within phrases follow overtone ratios (Doolittle & Brumm 2014). VERTICAL pitch organization: consonance from mathematical intervals within phrases.",
+      "phrase_contour": "Arch (ascending then descending within one phrase)",
+      "spiral_type": "Orbiting -- successive phrases at different starting pitches create orbital motion through pitch space",
+      "musical_axis": "VERTICAL (harmonic thinking: which notes relate as chord tones)",
+      "emotional_arc": "Contemplation (the arch turns back on itself)"
+    },
+    "swainsons_thrush": {
+      "degree": 18,
+      "strategy": "Ascending sequential phrases -- each phrase higher than the last. HORIZONTAL pitch organization: aspiration from directional trajectory across phrases.",
+      "phrase_contour": "Complex internal structure but defining feature is the inter-phrase ASCENT",
+      "spiral_type": "Climbing -- successive phrases at progressively higher pitches create upward staircase",
+      "musical_axis": "HORIZONTAL (melodic thinking: where does the line go next)",
+      "emotional_arc": "Aspiration (the line keeps climbing, never descends)"
+    },
+    "design_principle": "Two axes of pitch organization from the same genus. The Hermit Thrush asks: what notes sound good TOGETHER (vertical/harmonic)? The Swainson's Thrush asks: where does the line go NEXT (horizontal/melodic)? These are the two fundamental questions of music theory, and the genus Catharus answers both."
+  },
+  "matched_pair": {
+    "ascending": {
+      "species": "Swainson's Thrush",
+      "degree": 18,
+      "direction": "UPWARD -- each phrase higher than the last",
+      "emotional_content": "Aspiration, hope, yearning, reaching upward"
+    },
+    "descending": {
+      "species": "Veery",
+      "degree": 19,
+      "direction": "DOWNWARD -- a cascading descending spiral",
+      "emotional_content": "Resolution, settling, ethereal descent"
+    },
+    "principle": "Adjacent degrees (18 and 19), both Catharus, opposite spirals. The ascending and descending trajectories placed side by side. With the Hermit Thrush at degree 7, three Catharus thrushes form a triptych: harmonic series (7), ascending spiral (18), descending spiral (19)."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Ascending sequence (each phrase transposed upward -- the spiral staircase, aspiration as compositional device)",
+      "level": "foundational",
+      "department": "music-theory/melody",
+      "college_path": ".college/music/theory/melody/ascending-sequence/",
+      "examples": [
+        "The Swainson's Thrush song: each phrase pitched higher than the last, creating a directional trajectory that climbs through pitch space",
+        "Star-Spangled Banner opening: ascending broken triad, each melodic peak higher -- aspiration, dawn, reaching",
+        "Coltrane's 'A Love Supreme': four-note motif transposed upward through ascending modal explorations -- spiritual intensity through sequential ascent",
+        "Ravel's Bolero: theme restated at progressively higher registers with increasing orchestral density -- the spiral staircase in orchestral form"
+      ],
+      "music_theory_parallel": "The ascending sequence is a compositional device of building tension and aspiration. A musical idea is stated, then restated at a higher pitch level, creating directional momentum experienced as reaching upward. The Swainson's Thrush's song IS an ascending sequence -- the same compositional device, evolved independently in a biological system."
+    },
+    {
+      "concept": "Harmonic vs. melodic thinking (vertical and horizontal axes of pitch organization -- the two fundamental questions of music theory)",
+      "level": "advanced",
+      "department": "music-theory/analysis",
+      "college_path": ".college/music/theory/analysis/harmonic-melodic/",
+      "examples": [
+        "Hermit Thrush (degree 7): harmonic thinking -- notes within phrases follow the overtone series, vertical pitch relationships, consonance from mathematical ratios",
+        "Swainson's Thrush (degree 18): melodic thinking -- phrases follow a sequential ascent, horizontal pitch relationships, trajectory through time",
+        "Bach chorale: vertical harmony (chords) + horizontal melody (voice leading) integrated",
+        "The musical staff itself: y-axis = pitch = harmony (vertical), x-axis = time = melody (horizontal)"
+      ],
+      "music_theory_parallel": "The distinction between harmonic and melodic thinking is one of the deepest in music theory. Harmonic thinking concerns simultaneous or closely successive pitch relationships -- intervals, chords, overtone ratios (vertical). Melodic thinking concerns sequential pitch relationships -- where the line goes next, directional trajectory through time (horizontal). The Catharus genus contains both: Hermit Thrush = harmonic (degree 7), Swainson's Thrush = melodic (degree 18)."
+    },
+    {
+      "concept": "Ascending pitch as emotional narrative (rising pitch = tension, aspiration, incompleteness -- the psychoacoustics of direction)",
+      "level": "intermediate",
+      "department": "music-theory/perception",
+      "college_path": ".college/music/theory/perception/pitch-direction/",
+      "examples": [
+        "Rising inflection in speech = question (incomplete, seeking response)",
+        "Ascending melody = unresolved tension (the line has not yet reached its goal)",
+        "The Swainson's Thrush ascends and STOPS -- the resolution is in the silence, not in a downward return",
+        "Contrast with the Hermit Thrush's arch: ascends THEN descends (resolution within the phrase). The Swainson's only ascends."
+      ],
+      "music_theory_parallel": "Why does the ascending line feel like aspiration? Ascending pitch in vocal communication -- across languages and species -- is associated with increased arousal, attention-seeking, and incompleteness. A rising inflection is a question. A rising melody is unresolved tension. The Swainson's Thrush's ascending song carries this emotional weight: each phrase higher, the trajectory upward, the resolution in the silence at the top. The physics of ascending pitch produce the perception of hope in any pitch-sensitive listener."
+    },
+    {
+      "concept": "The dusk song as coda (the closing section of the daily soundscape -- the ascending spiral as the forest's final word)",
+      "level": "intermediate",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/coda/",
+      "examples": [
+        "The Swainson's Thrush is a prominent dusk singer -- the ascending song fills riparian corridors as evening light fades",
+        "In musical form, the coda is the closing section that follows the main body and brings the work to its end",
+        "The dusk song as daily coda: the last voice to spiral upward before night arrives",
+        "The ascending trajectory at day's end: aspiration as the final gesture, hope as the closing note"
+      ],
+      "music_theory_parallel": "The coda in musical form is the closing section -- the passage that brings the work to its end. The Swainson's Thrush's prominent dusk singing positions it as the daily coda of the riparian forest soundscape: the ascending melody that plays as the day closes, the last voice to spiral upward before night arrives. The emotional content (aspiration, reaching upward) intensifies at dusk -- the ascending line against the descending light."
+    },
+    {
+      "concept": "Riparian acoustic architecture (vertical frequency stratification in closed-canopy riparian forest -- ascending song as layer sweep)",
+      "level": "intermediate",
+      "department": "ecology/bioacoustics",
+      "college_path": ".college/ecology/bioacoustics/riparian-acoustics/",
+      "examples": [
+        "Dense understory absorbs and scatters high frequencies preferentially",
+        "Canopy gaps transmit high frequencies more effectively",
+        "The ascending spiral sweeps through acoustic layers -- lower phrases in understory, higher phrases through canopy gaps",
+        "Acoustic equivalent of a spotlight sweeping vertically through a building, illuminating each floor in turn"
+      ],
+      "music_theory_parallel": "The ascending spiral is not merely beautiful -- it is acoustically functional. By ascending through its frequency range phrase by phrase, the Swainson's Thrush effectively sweeps through the acoustic layers of the riparian forest, testing different frequency channels in sequence. Lower frequencies propagate through the dense understory; higher frequencies escape through canopy gaps. The ascending song samples the vertical acoustic heterogeneity of the habitat."
+    },
+    {
+      "concept": "Turdidae acoustic diversity (three thrushes, three strategies: AM drone, harmonic series, ascending sequence)",
+      "level": "advanced",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/turdidae-strategies/",
+      "examples": [
+        "Varied Thrush (degree 2): AM drone -- rich timbre, simple melody, one sustained pitch per phrase",
+        "Hermit Thrush (degree 7): Harmonic series -- pure timbre, arch form, overtone ratios within phrases (vertical)",
+        "Swainson's Thrush (degree 18): Ascending sequence -- fluty timbre, ascending phrases, directional trajectory (horizontal)",
+        "The Turdidae family now holds three distinct acoustic strategies in the engine -- the most acoustically diverse family in the circle"
+      ],
+      "music_theory_parallel": "The family Turdidae now spans three acoustic strategies in the engine: (1) AM drone (Varied Thrush, degree 2) -- complexity in timbre, simplicity in melody. (2) Harmonic series navigation (Hermit Thrush, degree 7) -- complexity in vertical pitch relationships within phrases. (3) Ascending melodic sequence (Swainson's Thrush, degree 18) -- complexity in horizontal pitch trajectory across phrases. Three thrushes, three strategies. The Turdidae become the most acoustically diverse family in the circle."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-007",
+      "title": "Hermit Thrush (Degree 7)",
+      "connection": "SAME GENUS, DIFFERENT AXIS. Both Catharus. The Hermit Thrush (degree 7) navigates pitch VERTICALLY -- harmonic series intervals within phrases, overtone ratios as consonance (Doolittle & Brumm 2014, PNAS). The Swainson's Thrush (degree 18) navigates pitch HORIZONTALLY -- ascending sequential phrases, directional trajectory as form. Two thrushes from the genus named 'pure,' occupying the two fundamental axes of musical thought: harmonic (vertical) and melodic (horizontal). The engine's most complete exploration of pitch organization."
+    },
+    {
+      "project": "SPS-019",
+      "title": "Veery (Degree 19)",
+      "connection": "THE MATCHED PAIR -- ASCENDING vs. DESCENDING SPIRAL. The Swainson's Thrush (degree 18) spirals UPWARD: each phrase higher than the last, aspiration in sound. The Veery (degree 19) spirals DOWNWARD: a cascading, descending ethereal spiral. Adjacent degrees, both Catharus, opposite trajectories. With the Hermit Thrush at degree 7, three Catharus thrushes form a triptych of pitch strategies: harmonic series (7), ascending spiral (18), descending spiral (19)."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Second Catharus thrush in the engine. AVI documents the Swainson's Thrush as one of the most abundant breeding songbirds in PNW riparian corridors. Thrush section now includes three species: Varied Thrush, Hermit Thrush, and Swainson's Thrush -- the most represented Turdidae lineage in the PNW research."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Riparian forest ecology: alder-willow-cottonwood corridor structure, moist understory communities, vertical acoustic stratification. ECO documents the riparian ecosystems that the Swainson's Thrush depends on, including the three-dimensional canopy structure that shapes the ascending song's transmission characteristics."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Maktub at degree 18. Both are collaborative/ensemble artists who build through layered ascent. Maktub's music layers groove, keys, and horns upward through collective performance. The Swainson's Thrush layers phrases upward through sequential pitch ascent. Both are about the climb. Both are about building something that rises through accumulation."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Third Turdidae in the engine (degrees 2, 7, 18). The thrush family now spans three acoustic strategies: AM drone (Varied Thrush, degree 2 -- timbre complexity), harmonic series navigation (Hermit Thrush, degree 7 -- vertical pitch complexity), ascending melodic sequence (Swainson's Thrush, degree 18 -- horizontal pitch complexity). The Turdidae become the most acoustically diverse family in the circle."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- the Swainson's Thrush introduces a TENTH communication modality: the ascending-spiral territorial song. A series of fluty phrases, each higher than the last, producing a directional ascending trajectory that functions as territory declaration, mate attraction, and dusk signaling. Distinct from all nine previous modalities.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "thrush_role": "The Swainson's Thrush produces a fluty, ascending-spiral song from concealed mid-canopy perches in riparian forest. Its communication is primarily INTRASPECIFIC: the ascending song establishes territory and attracts mates. The ascending spiral is functionally adapted to the vertical acoustic structure of riparian forest -- lower phrases propagate through dense understory, higher phrases escape through canopy gaps. Prominent DUSK SINGER: the ascending spiral fills riparian corridors as evening light fades. The tenth communication modality: ascending-spiral territorial song (degree 18).",
+    "note": "Alarm network remains at 4 nodes. Ten parallel communication channels now documented: alarm broadcast, swarm cohesion, territorial trill, flock sweep, persistent ostinato, structured ternary song, tempo-varying burst, dynamic-crescendo song, hook-repetition song, and ascending-spiral song."
+  },
+  "part_a_parallel": {
+    "artist": "Maktub",
+    "degree": 18,
+    "genre": "S36",
+    "shared_principle": "Both are collaborative/ensemble artists who build through layered ascent. Maktub's music layers groove, keys, horns, and vocals upward through collective performance -- a group climb where each instrument adds another level. The Swainson's Thrush layers phrases upward through sequential pitch ascent -- each phrase a new step on a rising staircase. Both achieve their effect through accumulation: the whole is built by the climb, not by any single moment.",
+    "resonance_points": [
+      "Layered ascent: Maktub builds upward through ensemble layers -- bass groove, keys, horns, vocals accumulating into a rising wall of sound. The Swainson's Thrush builds upward through sequential phrases -- each one higher, the melody climbing. Both are about the accumulation.",
+      "Collaborative/ensemble: Maktub is a band, not a solo artist. The Swainson's Thrush's song is a collaboration between phrases -- each phrase builds on the previous, none is complete without the trajectory. Both are ensemble constructions where the architecture matters more than any single voice.",
+      "The climb as emotional arc: Maktub's live performances escalate through collective energy -- the band builds together toward peaks that the audience rides. The Swainson's ascending spiral escalates through sequential pitch -- the listener rides the upward trajectory. Both deliver aspiration through ascent.",
+      "Dusk energy: Maktub was known for late-night performances where the energy built as the evening deepened. The Swainson's Thrush is a prominent dusk singer -- the ascending song intensifies as evening light fades. Both are artists of the approaching night."
+    ]
+  },
+  "degree_arc": {
+    "position": "The ascending spiral -- aspiration in sound, the staircase that climbs. The second Catharus thrush. Harmonic (degree 7) meets melodic (degree 18). The matched pair begins (ascending at 18, descending at 19).",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15) -> ascending sweet crescendo / dynamic intensification within vocalization (16) -> witchety hook / memorability through rhythmic repetition (17) -> ascending spiral / each phrase higher than the last (18)",
+    "key_insight": "Degree 18 introduces three new dimensions: (1) THE ASCENDING SPIRAL -- each phrase pitched higher than the last, creating a directional trajectory that climbs through pitch space. The defining feature is inter-phrase pitch trajectory, not intra-phrase structure. (2) HARMONIC vs. MELODIC THINKING -- the second Catharus thrush creates the engine's first same-genus comparison of vertical (harmonic, degree 7) and horizontal (melodic, degree 18) pitch organization. (3) THE MATCHED PAIR BEGINS -- degrees 18 (ascending) and 19 (descending) form a paired set of opposite spirals, both Catharus, placed at adjacent degrees.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)",
+      "degree_14": "Ternary / AAB (repeated identical syllables followed by contrasting resolution syllable -- the minimal narrative arc, repetition with destination)",
+      "degree_15": "Accelerando (tempo-varying chattering series -- the first species defined by rate of change rather than pitch, timbre, or pattern)",
+      "degree_16": "Crescendo (dynamic-varying sweet series -- volume and pitch increase within a single vocalization)",
+      "degree_17": "Hook (rhythmic two-note cell repeated at constant tempo and volume -- memorability as primary acoustic strategy)",
+      "degree_18": "Ascending spiral (sequential phrases each pitched higher than the last -- horizontal melodic thinking, directional trajectory as form, aspiration in sound)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz -- earworm frequency, sweet spot of human hearing)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz -- ascending range sweeps from mid-range into upper register)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- 1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (temporal continuity as content)",
+      "degree_14": "Territory + mate attraction through structured song with resolution (narrative as content)",
+      "degree_15": "Territory + mate attraction through accelerating burst (urgency as content)",
+      "degree_16": "Territory + mate attraction through ascending crescendo (brightness as content)",
+      "degree_17": "Territory + mate attraction through the hook (memorability as content)",
+      "degree_18": "Territory + mate attraction through ascending spiral (aspiration as content -- the song that climbs, fitness signaled through sustained directional ascent)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood with developed vertical structure -- moist understory)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Riparian forest -- dense, moist deciduous-conifer mixed forest along streams, rivers, and wet drainages. Alder-willow-cottonwood corridors, moist conifer forest with developed shrub understory (salmonberry, thimbleberry, sword fern), wet ravines and gullies. Sings from concealed mid-canopy perches (10-30 ft). In the PNW, concentrated in lowland riparian corridors and moist forest throughout the Puget Sound basin, Olympic Peninsula, and Cascade foothills.",
+    "niche": "Mid-canopy and understory insectivore/frugivore in dense riparian forest. Forages by hopping along branches, gleaning insects from leaves and bark, catching insects in short sallies. Takes berries extensively during fall migration. Sings from concealed perches in the mid-canopy transition zone between understory shrubs and canopy trees.",
+    "foraging_strategy": "Active gleaner and sally-hover forager in mid-canopy and upper understory. Hops along branches, pausing to glean insects from leaf surfaces, bark crevices, and moss. Takes berries (salal, huckleberry, elderberry, dogwood) heavily during fall migration and on wintering grounds.",
+    "diet": "Insects (caterpillars, beetles, flies, ants, wasps, spiders) during breeding season. Berries and fruit during fall migration and winter (salal, huckleberry, elderberry, dogwood, blackberry). One of the most frugivorous Catharus thrushes during migration.",
+    "nesting": "Low shrub or small tree in dense understory -- typically 2-10 feet above ground. Compact cup nest of moss, twigs, leaves, bark strips, lined with fine rootlets and skeletal leaves. Concealed in dense vegetation. Female builds; female incubates.",
+    "resident_status": "NEOTROPICAL MIGRANT -- breeds across temperate North America (May-September in PNW), winters from Mexico to South America. Olive-backed birds (coastal PNW) migrate through the western US; russet-backed birds (interior) migrate through central/eastern US. One of the most commonly detected nocturnal migrants in the PNW (night flight calls).",
+    "flock_size": "Solitary or in pairs during breeding season. Males are territorial. During migration, may occur in loose association with mixed-species flocks in fruiting trees and shrubs."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~100 million (Partners in Flight 2020)",
+    "trend": "Moderate decline -- approximately 0.7% per year since 1966 (Breeding Bird Survey). Steeper declines in some western populations. Cumulative ~35-40% decline over 6 decades.",
+    "threats": "Riparian habitat loss (logging, agricultural conversion, urban development of river valleys); building collision mortality during nocturnal migration (Loss et al. 2014: 1-4 billion birds/year in US, nocturnal migrants disproportionately affected); artificial light at night (ALAN) disrupting migratory orientation and dusk singing behavior; wintering ground habitat loss in Central and South America.",
+    "vulnerability": "Dependent on dense riparian forest and moist understory. Riparian buffer regulations in the PNW have helped maintain breeding habitat along major waterways, but smaller streams and drainages remain poorly protected. As a long-distance nocturnal migrant, faces cumulative mortality from building collisions, tower strikes, and light pollution across the full migratory range.",
+    "dusk_singer_note": "As a prominent dusk singer, the Swainson's Thrush is particularly sensitive to artificial light at night (ALAN), which extends twilight conditions and disrupts the natural dusk singing period. Light pollution in riparian corridors near urban areas affects both singing behavior and migratory departure timing."
+  },
+  "key_sites": [
+    {
+      "name": "Cedar River watershed riparian corridors",
+      "type": "breeding (summer)",
+      "description": "Dense riparian forest along the Cedar River and its tributaries east of Seattle. Alder-willow-cottonwood corridors with developed understory -- prime Swainson's Thrush breeding habitat.",
+      "region": "King County, WA"
+    },
+    {
+      "name": "Hoh Rain Forest riparian areas",
+      "type": "breeding (summer)",
+      "description": "Old-growth and mature riparian forest in the Hoh River valley on the Olympic Peninsula. Some of the densest and most structurally complex riparian habitat in the PNW.",
+      "region": "Jefferson County, WA (Olympic Peninsula)"
+    },
+    {
+      "name": "Skagit River riparian forest",
+      "type": "breeding (summer)",
+      "description": "Riparian corridors along the Skagit River and tributaries. Alder-dominated riparian forest with dense salmonberry understory. High breeding densities.",
+      "region": "Skagit County, WA"
+    },
+    {
+      "name": "Puget Sound lowland riparian corridors",
+      "type": "breeding (summer)",
+      "description": "Riparian forest along streams and rivers throughout the Puget Sound basin. Urban and suburban riparian corridors retain Swainson's Thrush breeding populations where forest structure is maintained.",
+      "region": "Puget Sound lowlands, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "MAINTAINED -- Macaulay Library provides recordings showing the ascending-spiral pattern: successive phrases at progressively higher pitches, each phrase a complex fluty unit with internal turns",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Swainson's Thrush song shows ASCENDING SEQUENTIAL PHRASES: each phrase appears as a complex cluster of notes in the 1.5-5.0 kHz range, with each successive phrase cluster positioned higher on the frequency axis than the previous. The visual pattern is a staircase: discrete clusters stepping upward through frequency space. Compare to the Hermit Thrush (degree 7) whose spectrograms show arch-form phrases (ascending then descending within a single phrase, with overtone-series pitch selection), and to the Veery (degree 19) whose spectrograms show descending cascading patterns. The Swainson's ascending staircase is the most directionally consistent phrase-to-phrase contour in the Catharus genus."
+  },
+  "sources": [
+    "Mack, D.E. and Yong, W. (2020). Swainson's Thrush (Catharus ustulatus). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Swainson's Thrush. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Swainson's Thrush. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Swainson's Thrush species account. birdweb.org",
+    "Sibley, D.A. (2014). The Sibley Guide to Birds, 2nd ed. Alfred A. Knopf. [Catharus thrush identification.]",
+    "Ruegg, K.C., Hijmans, R.J., and Moritz, C. (2006). Climate change and origin of migratory pathways in Swainson's Thrush. J Biogeography 33: 1172-1182.",
+    "Delmore, K.E., Fox, J.W., and Irwin, D.E. (2012). Dramatic intraspecific differences in migratory routes revealed using geolocators. Proc R Soc B 279: 4582-4589.",
+    "Doolittle, E.L. and Brumm, H. (2014). Quantifying the harmonic series in Hermit Thrush song. PNAS 111(46): 16616-16621. [Comparative reference for Catharus vocalizations.]",
+    "Catchpole, C.K. and Slater, P.J.B. (2008). Bird Song: Biological Themes and Variations. 2nd ed. Cambridge University Press.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Loss, S.R., Will, T., Loss, S.S., and Marra, P.P. (2014). Bird-building collisions in the United States. Condor 116: 8-23.",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey, Results and Analysis 1966-2019. USGS Patuxent.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Swainson's Thrush (Catharus ustulatus). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Swainson's Thrush. wdfw.wa.gov",
+    "eBird. Swainson's Thrush observation data, Pacific Northwest. ebird.org/species/swathr",
+    "Macaulay Library. Swainson's Thrush recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org",
+    "Lerdahl, F. and Jackendoff, R. (1983). A Generative Theory of Tonal Music. MIT Press.",
+    "Huron, D. (2006). Sweet Anticipation: Music and the Psychology of Expectation. MIT Press."
+  ],
+  "release_metadata": {
+    "release_number": "018",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
