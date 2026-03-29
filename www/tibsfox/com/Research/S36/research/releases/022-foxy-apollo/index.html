@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 22&deg; &mdash; Foxy Apollo &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E65100, #FF6D00);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .consecutive-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+      margin-left: 0.3rem;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #9FA8DA;
+      margin-left: 0.3rem;
+    }
+
+    .doc-gap-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF9C4;
+      color: #F57F17;
+      border: 1px solid #FFD54F;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #FFB74D;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #E65100;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #E65100;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .doc-gap-box {
+      background: #FFF9C4;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .doc-gap-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .doc-gap-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .consecutive-box {
+      background: #E8EAF6;
+      border: 2px solid #1A237E;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .consecutive-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .consecutive-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .consecutive-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .consecutive-box td, .consecutive-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C5CAE9;
+    }
+    .consecutive-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #1A237E;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">22&deg;</div>
+      <div>
+        <h1>Foxy Apollo</h1>
+        <div class="subtitle">Jazz/Funk &middot; Funk / Jazz / Psych Rock / R&amp;B / Pop &mdash; Seattle 2018&ndash;present &mdash; Self-released
+          <span class="energy-badge">Energy 4</span>
+          <span class="consecutive-badge">First Same-Genre Pair</span>
+          <span class="genre-badge">Jazz/Funk x2</span>
+          <span class="doc-gap-badge">Documentation Gap</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../021-polyrhythmics/index.html">Degree 21&deg; (Polyrhythmics)</a>
+      <a href="../018-maktub/index.html">Degree 18&deg; (Maktub)</a>
+      <a href="../019-fly-moon-royale/index.html">Degree 19&deg; (FMR)</a>
+      <a href="../020-whitney-menge/index.html">Degree 20&deg; (Monge)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The groove resets. Foxy Apollo is a young jazz/funk collective formed by
+          high schoolers in Seattle &mdash; the first artist in the engine who grew
+          up inside the scene that degrees 0&ndash;21 built. Same genre as Polyrhythmics
+          (Jazz/Funk), completely different music: vocal pop-funk on a groove
+          platform. <em>The Inheritor.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Foxy Apollo&rsquo;s dispersed geography (Seattle, Bellingham,
+          Anacortes) spans the broader Coast Salish world. The Duwamish Tribe remains
+          federally unrecognized. This acknowledgment was established at degree 20
+          and applies to all releases.</p>
+        </div>
+
+        <!-- ========================================
+             CONSECUTIVE SAME-GENRE PAIR
+             ======================================== -->
+
+        <div class="consecutive-box">
+          <h4>First Consecutive Same-Genre Pair &mdash; Jazz/Funk at Degrees 21&ndash;22</h4>
+          <p>Foxy Apollo is the second consecutive Jazz/Funk entry, following Polyrhythmics.
+          In twenty-two prior degrees, no two adjacent entries shared the exact same genre
+          compound. The repetition reveals the genre&rsquo;s range: Jazz/Funk contains both
+          instrumental polyrhythmic Afrobeat AND vocal psychedelic pop-funk.</p>
+          <table>
+            <tr><th>Dimension</th><th>Polyrhythmics (21&deg;)</th><th>Foxy Apollo (22&deg;)</th></tr>
+            <tr><td>Funk role</td><td>Sovereign (groove IS composition)</td><td>Platform (groove carries voice)</td></tr>
+            <tr><td>Vocals</td><td>None (instrumental)</td><td>Central (Ashkenazy sings)</td></tr>
+            <tr><td>Formation</td><td>Recording project by veterans</td><td>High school friends</td></tr>
+            <tr><td>Size</td><td>7&ndash;8 (stable)</td><td>4&ndash;6 (flexible)</td></tr>
+            <tr><td>Song length</td><td>4&ndash;8 min, circular</td><td>2&ndash;4 min, compact</td></tr>
+            <tr><td>Geography</td><td>Fremont-rooted</td><td>I-5 corridor dispersed</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Second Consecutive E=4 &mdash; Energy Streak Begins</h4>
+          <p>Two consecutive E=4 degrees (21&ndash;22) confirm the energy threshold
+          crossing was not a single-degree event. Distribution shifts from 2:13:6:1
+          to <strong>2:13:6:2</strong>. The E=4 streak may extend through degrees 23&ndash;24.</p>
+          <table>
+            <tr><th>Energy</th><th>Count</th><th>Degrees</th><th>Character</th></tr>
+            <tr><td>1</td><td>2</td><td>1, 2</td><td>Atmospheric, textural</td></tr>
+            <tr><td>2</td><td>13</td><td>0, 3&ndash;12, 14</td><td>Standard jazz energy</td></tr>
+            <tr><td>3</td><td>6</td><td>13, 15&ndash;20</td><td>Assertive, projective</td></tr>
+            <tr><td><strong>4</strong></td><td><strong>2</strong></td><td><strong>21, 22</strong></td><td><strong>Ensemble/collective kinetic</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Young Funk Collective</h2>
+
+        <p>Foxy Apollo is a jazz/funk collective founded in <strong>2016</strong>
+        by guitarist and vocalist <strong>Sam Ashkenazy</strong> while still in high
+        school. Ashkenazy and drummer Satchel Schwartz reconnected through their
+        school&rsquo;s jazz band and started making music together, quickly recruiting
+        bassist Jack Christian. What started as a teenage jazz-funk trio has grown
+        into a <strong>six-piece ensemble</strong> with keyboards, trumpet, and
+        saxophone.</p>
+
+        <p>Current members: <strong>Sam Ashkenazy</strong> (guitar, vocals),
+        <strong>Zachary Schmidt</strong> (bass), <strong>Dallas Quick</strong> (drums),
+        <strong>Shaun Quick</strong> (guitar), <strong>Jackson Cruz</strong>
+        (keys/trumpet), <strong>Andrew Hewitt</strong> (saxophone).
+        Earlier members include Satchel Schwartz (drums), Jack Christian (bass),
+        and TyeLeah Nanto (credited on <em>Sweet Talk</em>).</p>
+
+        <p>Members hail from <strong>Seattle, Bellingham, and Anacortes</strong>
+        &mdash; the first degree with a dispersed I-5 corridor geographic identity
+        rather than a single Seattle neighborhood. Ashkenazy relocated from Seattle
+        to Bellingham. <em>Saturated, Faded</em> was recorded at Champion Street
+        Studios in Bellingham.</p>
+
+        <p>The Daily UW described the early sound as evoking &ldquo;an easy &rsquo;70s
+        feel, with bluesy guitar licks and vocals in the style of the late, great
+        Jimi Hendrix.&rdquo; The Cascadia Daily News captured the mature sound:
+        &ldquo;pop melodies, jazz textures, R&amp;B grooves or psychedelic rock
+        twists.&rdquo;</p>
+
+        <!-- ========================================
+             DOCUMENTATION GAP
+             ======================================== -->
+
+        <div class="doc-gap-box">
+          <h4>Documentation Gap &mdash; Honestly Acknowledged</h4>
+          <p>Foxy Apollo has <strong>significantly less documentation</strong> than
+          any prior artist in the engine (21 sources vs. prior range of 24&ndash;38).
+          No KEXP sessions, no KNKX features, no long-form interviews, no music press
+          album reviews in available sources. The gap reflects the band&rsquo;s youth
+          (formed by high schoolers in 2016, two full-length albums) and grassroots
+          career stage (219 Spotify monthly listeners). This is not a quality judgment
+          &mdash; the engine documents what the scene produces, including young bands
+          still building their documentation footprint.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <h2>Career Timeline</h2>
+
+        <div class="timeline-entry">
+          <div class="era">2016 &middot; Formation</div>
+          <p>Sam Ashkenazy and Satchel Schwartz form Foxy Apollo in high school.
+          Original trio with bassist Jack Christian. U-District house shows begin.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2017 &middot; Foxy Apollo EP</div>
+          <p>Debut EP (5 tracks). Raw garage-funk: &ldquo;I Think I&rsquo;m Mad,&rdquo;
+          &ldquo;Mental Breakdown,&rdquo; &ldquo;Free Steppin,&rdquo; &ldquo;Hey Sexy,&rdquo;
+          &ldquo;Fucked Beyond Belief&rdquo; (feat. Brennan Tien, trumpet).
+          Genre tags: funk, indie, jazz-funk, rock, garage.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2018 &middot; Tangie EP</div>
+          <p>Second EP (4 tracks). &ldquo;Palomino&rdquo; first appears here (later
+          re-recorded for <em>Saturated, Faded</em>). Credits: Ashkenazy and Schwartz only.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2019 &middot; House Shows to Venues</div>
+          <p>Daily UW interview. Shows at <strong>Chop Suey</strong>, <strong>The
+          Rendezvous</strong>. Live at the Moth Manor and Live at Louie G&rsquo;s
+          recordings. Lineup shifts: Quick replaces Schwartz, Schmidt replaces Christian.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2020 &middot; Sweet Talk</div>
+          <p>Debut full-length (9 tracks). Six-piece lineup. Recorded by Alex Dillard.
+          Released during pandemic &mdash; unable to tour. &ldquo;Someday&rdquo; and
+          &ldquo;Boatplane&rdquo; become best-known tracks.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2021 &middot; New Shade of Blue</div>
+          <p>First post-pandemic single. Ashkenazy: &ldquo;It represents turning a
+          new leaf and expanding your perspective over and over again.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2022 &middot; Tractor Tavern</div>
+          <p>Show at Seattle&rsquo;s <strong>Tractor Tavern</strong> with Alfredo Ghosts
+          and Crazy Eyes. Significant venue graduation for the young band.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2023 &middot; Saturated, Faded</div>
+          <p>Second full-length LP (9 tracks). Recorded at <strong>Champion Street
+          Studios</strong> (Bellingham). Mixed by Ben McLeod, mastered by Chris Longwood.
+          West Coast tour from <strong>Wild Buffalo</strong>. Themes: &ldquo;seizing
+          opportunities, embracing change.&rdquo;</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <h2>Music Theory Mapping</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Vocal Funk as Platform</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>The funk groove serves as a <strong>delivery platform</strong> for
+            vocals, pop melodies, jazz textures, and psychedelic exploration. The
+            groove carries rather than constitutes. Distinct from Polyrhythmics&rsquo;
+            funk-as-sovereign-groove where rhythm IS the composition. The polarity
+            of Jazz/Funk revealed by consecutive same-genre pair.</p>
+            <div class="examples">Sly Stone &rarr; James Brown &rarr; Prince &rarr;
+            Maktub (18&deg; voice-centered) &rarr; Polyrhythmics (21&deg; groove-sovereign)
+            &rarr; Foxy Apollo (22&deg; groove-as-platform)</div>
+            <div class="genealogy"><strong>Ancestors:</strong> James Brown (the One)
+            &rarr; Sly Stone (vocal accessibility) &rarr; Prince (multi-genre platform)
+            &rarr; Seattle funk ecosystem &rarr; Foxy Apollo</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Generational Inheritance</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>The younger band that grows up inside an existing music ecosystem,
+            absorbs its values through direct participation (house shows, venues,
+            school jazz band), and carries the scene&rsquo;s DNA into the next
+            generation. First direct generational transfer within the same genre
+            compound in the engine.</p>
+            <div class="examples">Polyrhythmics (21&deg;) builds the scene (Ensemble
+            Anchor) &rarr; Foxy Apollo (22&deg;) grows up in it (The Inheritor).
+            Complementary patterns: one creates conditions, the other emerges.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Seattle jazz/funk
+            ecosystem (degrees 0&ndash;21) &rarr; U-District house show scene &rarr;
+            high school jazz band pipeline &rarr; Foxy Apollo inherits</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Dispersed Geographic Identity</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>A band whose identity extends beyond a single neighborhood or city,
+            with members distributed along the I-5 corridor (Anacortes &ndash;
+            Bellingham &ndash; Seattle). First non-neighborhood-specific entry in
+            twenty-three degrees. May represent a generational shift in how
+            musicians relate to place.</p>
+            <div class="examples">Central District concentrated (0&ndash;6&deg;) &rarr;
+            multi-neighborhood (2&ndash;21&deg;) &rarr; city-general/regional
+            (22&deg;). Geographic radius expands with each stage.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> CD hyper-local identity
+            &rarr; Fremont infrastructure (21&deg;) &rarr; Anacortes DIY scene
+            &rarr; internet-era distribution &rarr; I-5 corridor dispersal</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Vocal-Funk</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-second deployment of the blue note thread. Vocal bending in
+            pop-funk context serving both jazz authenticity and pop accessibility.
+            Plus Hendrix-lineage psychedelic-funk guitar bending. First <strong>dual
+            voice+guitar</strong> blue note deployment by the same artist.</p>
+            <div class="examples">Twenty-two mechanisms: bass-line (0&deg;), guitar (1&deg;),
+            vocal (3&deg;)&hellip; through funk-brass (21&deg;), now vocal-funk (22&deg;).
+            Hendrix guitar lineage adds psychedelic dimension.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> All twenty-one prior
+            deployments &rarr; soul-vocal (18&deg;) &rarr; americana-soul (20&deg;)
+            &rarr; funk-brass (21&deg;) &rarr; vocal-funk (22&deg;)</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ACOUSTIC ELEMENT
+             ======================================== -->
+
+        <h2>Acoustic Element #23: The Groove Reset</h2>
+
+        <p>The ADSR envelope completed at degree 21 (the release). Degree 22 begins
+        a <strong>new cycle</strong> &mdash; but not from silence. The groove reset
+        is the moment after the release when a new groove locks in from the residual
+        energy of the previous cycle. The sound never fully stops; the new attack
+        begins from a non-zero amplitude.</p>
+
+        <p>In Foxy Apollo&rsquo;s practice: the transition between songs in a live
+        set &mdash; one funk groove ends, the drums snap into the next pattern, the
+        bass locks to a new pocket, the horns introduce a new theme. The groove
+        transforms without stopping. Generationally: the engine completed one ADSR
+        cycle spanning twenty-two degrees of veteran musicians. The youngest act in
+        the engine resets the groove.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ARTIST-CITY PATTERN
+             ======================================== -->
+
+        <h2>Artist-City Pattern #23: The Inheritor</h2>
+
+        <p>A young artist who <strong>grew up inside</strong> an existing music scene,
+        absorbed its values through direct participation (house shows, local venues,
+        school jazz bands), and carries the scene&rsquo;s DNA into the next generation.
+        Did not build the scene, did not arrive at the scene &mdash; was born inside
+        it and metabolized it as part of growing up.</p>
+
+        <p>The Inheritor is the generational complement to The Ensemble Anchor
+        (Polyrhythmics, 21&deg;): one creates the conditions, the other emerges from them.
+        Together they demonstrate how a music scene reproduces itself.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.9rem;border-collapse:collapse">
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600;width:25%"><a href="../021-polyrhythmics/index.html">S36-021 Polyrhythmics</a></td>
+            <td style="padding:0.5rem">Consecutive Jazz/Funk pair. Same genre, different music: instrumental polyrhythmic ensemble vs. vocal pop-funk collective. Generational succession: Ensemble Anchor (21&deg;) creates scene, Inheritor (22&deg;) grows up in it.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../018-maktub/index.html">S36-018 Maktub</a></td>
+            <td style="padding:0.5rem">Vocalist-centered funk. Watts as creative engine of 4-piece (Soul/Jazz, E=3) vs. Ashkenazy as creative engine of 4-to-6-piece (Jazz/Funk, E=4). Different generations, same vocalist-over-groove model.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../019-fly-moon-royale/index.html">S36-019 FMR</a></td>
+            <td style="padding:0.5rem">Collectives with central authority and changing membership. FMR rotation is deliberate; Foxy Apollo flexibility is organic. Both from Seattle DIY/funk ecosystem.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../005-overton-berry/index.html">S36-005 Berry</a></td>
+            <td style="padding:0.5rem">Groove-as-platform thread: Berry (solo piano, E=2) &rarr; Maktub (band-voice, E=3) &rarr; Polyrhythmics (ensemble-sovereign, E=4) &rarr; Foxy Apollo (vocal-platform, E=4). Four entries.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../020-whitney-menge/index.html">S36-020 Monge</a></td>
+            <td style="padding:0.5rem">Energy-4 comparison. Both self-released Seattle independents. Both have dispersed geographic identities (Rainier Valley / I-5 corridor).</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../017-reggie-watts/index.html">S36-017 Watts</a></td>
+            <td style="padding:0.5rem">Generational echo. Watts (Cornish) and Ashkenazy (high school jazz band): different institutions, similar trajectory from training to band leadership.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem;font-weight:600"><a href="../001-bill-frisell/index.html">S36-001 Frisell</a></td>
+            <td style="padding:0.5rem">Guitar thread: texture (1&deg;) &rarr; rhythm-section (20&deg;) &rarr; mediator (21&deg;) &rarr; funk-lead (22&deg; Ashkenazy).</td>
+          </tr>
+        </table>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield / Cornish / Institutional Pipeline Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Anderson &mdash; Garfield, same era as Jones</td></tr>
+            <tr><td>Degree 7&deg;</td><td>Priester &mdash; NOT Garfield. <strong>Cornish faculty.</strong></td></tr>
+            <tr><td>Degree 9&deg;</td><td>Caliman &mdash; NOT Garfield. <strong>Cornish faculty.</strong></td></tr>
+            <tr><td>Degree 17&deg;</td><td>Watts &mdash; NOT Garfield. <strong>Cornish student.</strong></td></tr>
+            <tr><td>Degree 21&deg;</td><td>Schroff &mdash; NOT Garfield. <strong>Cornish graduate.</strong></td></tr>
+            <tr><td><strong>Degree 22&deg;</strong></td><td><strong>Ashkenazy &mdash; NOT Garfield. NOT Cornish. High school jazz band (school unspecified). No institutional pipeline connection.</strong></td></tr>
+          </table>
+          <p style="font-size:0.82rem;margin-top:0.5rem;color:#F57F17"><strong>First degree with NO institutional pipeline:</strong>
+          no Garfield, no Cornish, no UW. The Inheritor enters through house shows and informal scene participation, not institutional channels.</p>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 23</h4>
+          <ul>
+            <li><strong>SECOND E=4:</strong> Distribution 2:13:6:2. Two consecutive E=4. Track streak (Allen Stone at 23 also E=4).</li>
+            <li><strong>The groove reset:</strong> Twenty-third acoustic element. New ADSR cycle from non-zero energy. Track element 24.</li>
+            <li><strong>First consecutive same-genre pair:</strong> Jazz/Funk at 21&ndash;22. Track whether degree 23 (Soul/Jazz) breaks the pair.</li>
+            <li><strong>The Inheritor:</strong> Twenty-third artist-city pattern. Generational succession. Track.</li>
+            <li><strong>Dispersed geography (NEW):</strong> I-5 corridor. First non-neighborhood entry. Track.</li>
+            <li><strong>Documentation gap:</strong> 21 sources (lowest in engine). Track at degree 23.</li>
+            <li><strong>Gender gap continues:</strong> 3:20 (women:men). Track degree 23.</li>
+            <li><strong>Four organizational models:</strong> centered/fixed (18), central/rotating (19), distributed/fixed (21), founder-led/flexible (22). Track fifth.</li>
+            <li><strong>Guitar thread:</strong> Four models (texture 1, rhythm-section 20, mediator 21, funk-lead 22). Track.</li>
+            <li><strong>Blue note:</strong> TWENTY-TWO deployments. Vocal-funk at 22. First dual voice+guitar. Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">22&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Foxy Apollo</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Jazz/Funk</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">4 (2nd consecutive)</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2018&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Seattle (general)</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Self-released</span></div>
+          <div class="stat-row"><span class="stat-label">Members</span><span class="stat-value">4&ndash;6</span></div>
+          <div class="stat-row"><span class="stat-label">Org Type</span><span class="stat-value">Flexible collective</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.158</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row"><span class="stat-label">2017</span><span class="stat-value">Foxy Apollo (EP)</span></div>
+          <div class="stat-row"><span class="stat-label">2018</span><span class="stat-value">Tangie (EP)</span></div>
+          <div class="stat-row"><span class="stat-label">2020</span><span class="stat-value">Sweet Talk</span></div>
+          <div class="stat-row"><span class="stat-label">2021</span><span class="stat-value">New Shade of Blue (single)</span></div>
+          <div class="stat-row"><span class="stat-label">2023</span><span class="stat-value">Saturated, Faded</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Context</h4>
+          <div class="stat-row"><span class="stat-label">Acoustic</span><span class="stat-value">#23: Groove reset</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">#23: The Inheritor</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">5: Jazz/Funk x2</span></div>
+          <div class="stat-row"><span class="stat-label">Same-Genre</span><span class="stat-value">First pair (21-22)</span></div>
+          <div class="stat-row"><span class="stat-label">Theory</span><span class="stat-value">Vocal funk platform</span></div>
+          <div class="stat-row"><span class="stat-label">Gender</span><span class="stat-value">3:20 (gap continues)</span></div>
+          <div class="stat-row"><span class="stat-label">Sources</span><span class="stat-value">21 (lowest)</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 22&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine &mdash; PNW Research Series</p>
+    <p>Research completed 2026-03-29 &middot; <a href="research.md">Full research</a> &middot; <a href="knowledge-nodes.json">Knowledge nodes</a> &middot; <a href="retrospective.md">Retrospective</a></p>
+  </footer>
+</body>
+</html>
