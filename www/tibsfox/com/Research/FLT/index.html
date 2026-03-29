@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleet Feature Refinement &mdash; Research Series</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-flt">
+  <header>
+    <h1>Fleet Feature Refinement</h1>
+    <div class="subtitle">10 Modules &middot; 4 Teams &middot; 1 Architecture &mdash; v1.50 Blueprint</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-vision-guide">Vision</a>
+      <a href="page.html?doc=02-research-reference">Research</a>
+      <a href="page.html?doc=03-milestone-spec">Milestone</a>
+      <a href="page.html?doc=retrospective">Retrospective</a>
+      <a href="mission.html">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Same destination. Original path. The fox finds where the ground has been worn smooth &mdash; then builds a better road.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Teams</span></div>
+      <div class="stat"><span class="stat-value">72</span><span class="stat-label">Tests</span></div>
+      <div class="stat"><span class="stat-value">~18K</span><span class="stat-label">Lines</span></div>
+      <div class="stat"><span class="stat-value">8/8</span><span class="stat-label">Safety</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Waves</span></div>
+    </div>
+
+    <h2>Research Modules</h2>
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-vision-guide" class="card" style="text-decoration:none;color:inherit">
+        <h3>Vision</h3>
+        <div class="meta"><span class="tag tag-vision">Vision</span> Foundation &middot; Through-Line</div>
+        <p>The 45-year engineering career through-line, Amiga Principle, convergent discovery with thepopebot, clean-room discipline, and 10 problem statements.</p>
+      </a>
+
+      <a href="page.html?doc=02-research-reference" class="card" style="text-decoration:none;color:inherit">
+        <h3>Research Reference</h3>
+        <div class="meta"><span class="tag tag-theory">Research</span> Convergence &middot; Modules</div>
+        <p>All 10 modules with convergent discovery proofs, GSD-native design summaries, chipset YAML extensions, and DACP operation types.</p>
+      </a>
+
+      <a href="page.html?doc=03-milestone-spec" class="card" style="text-decoration:none;color:inherit">
+        <h3>Milestone Specification</h3>
+        <div class="meta"><span class="tag tag-arch">Architecture</span> Deliverables &middot; Crew</div>
+        <p>Architecture overview, 10-deliverable table, rollout sequence, wave execution plan (7 waves, 3 CAPCOM gates), test plan, and crew manifest.</p>
+      </a>
+
+      <a href="page.html?doc=retrospective" class="card" style="text-decoration:none;color:inherit">
+        <h3>Retrospective</h3>
+        <div class="meta"><span class="tag tag-exec">Retro</span> Lessons &middot; Metrics</div>
+        <p>What worked (4 parallel teams, Opus synthesis, CAPCOM gates), what failed, lessons learned, and mission statistics.</p>
+      </a>
+    </div>
+
+    <h2>Cross-Reference Map</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Appears In</th>
+          <th>Related Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Amiga Principle / chipset model</td><td>Vision, Research, Milestone</td><td>ABL, S36, WAL</td></tr>
+        <tr><td>DACP event bus integration</td><td>Research, Milestone</td><td>AAR, WAL, DAA</td></tr>
+        <tr><td>Safety warden / credential tiering</td><td>Research, Milestone, Test Plan</td><td>AAR, ABL, WAL</td></tr>
+        <tr><td>Cluster topology / model routing</td><td>Research, Milestone</td><td>AAR, DAA, WAL</td></tr>
+        <tr><td>Skill audit trail / pattern detection</td><td>Research, Milestone</td><td>AAR, WAL, ABL</td></tr>
+        <tr><td>Chipset schema extensions</td><td>Research, Milestone, Vision</td><td>ABL, S36, WAL</td></tr>
+        <tr><td>Intake layer / validation</td><td>Research, Milestone</td><td>S36, WAL, AAR</td></tr>
+        <tr><td>Retro loop / carry-forward</td><td>Milestone, Retrospective</td><td>S36, WAL, AAR</td></tr>
+        <tr><td>Team-of-teams topology</td><td>Vision, Milestone</td><td>AAR, DAA</td></tr>
+        <tr><td>Clean-room compliance</td><td>Vision, Research</td><td>AAR, ABL</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Module Architecture</h2>
+
+    <pre>
+FLEET FEATURE REFINEMENT -- MODULE DEPENDENCY GRAPH
+===============================================================
+
+  M8: SAFETY WARDEN          M3: CREDENTIAL TIERING
+  +-------------------+      +-------------------+
+  | Block-level gates |      | Role / scope /    |
+  | on all outputs    |      | clearance tiers   |
+  +-------------------+      +-------------------+
+          |                          |
+          v                          v
+  M6: CHIPSET SCHEMA   &lt;----  M4: DACP EVENT BUS
+  +-------------------+      +-------------------+
+  | YAML extensions   |      | Cross-module      |
+  | versioning rules  |      | event routing     |
+  +-------------------+      +-------------------+
+          |                          |
+          v                          v
+  M1: CLUSTER TOPOLOGY        M7: MODEL ROUTING
+  +-------------------+      +-------------------+
+  | Node registration |      | Workload dispatch |
+  | health + failover |      | cost optimization |
+  +-------------------+      +-------------------+
+          |                          |
+          v                          v
+  M2: INTAKE LAYER            M5: SKILL AUDIT TRAIL
+  +-------------------+      +-------------------+
+  | Input validation  |      | Immutable log     |
+  | contract enforce  |      | lineage tracking  |
+  +-------------------+      +-------------------+
+          |                          |
+          v                          v
+  M9: PATTERN DETECTION  ---&gt; M10: RETRO LOOP
+  +-------------------+      +-------------------+
+  | Anomaly + signal  |      | NASA SE lessons   |
+  | surface to retro  |      | carry-forward     |
+  +-------------------+      +-------------------+
+
+  Rollout: M8 -&gt; M3 -&gt; M6 -&gt; M4 -&gt; M1 -&gt; M7 -&gt; M2 -&gt; M5 -&gt; M9 -&gt; M10
+    </pre>
+
+    <h2>Team Topology</h2>
+
+    <pre>
+FOUR-TEAM EXECUTION TOPOLOGY
+===============================================================
+
+  TEAM ALPHA (Foundation)      TEAM BRAVO (Bus + Routing)
+  +--------------------+       +--------------------+
+  | M8: Safety Warden  |       | M4: DACP Event Bus |
+  | M3: Credentials    |       | M7: Model Router   |
+  | M6: Chipset Schema |       | M1: Cluster Topo   |
+  +--------------------+       +--------------------+
+
+  TEAM CHARLIE (Intake + Audit) TEAM DELTA (Intelligence)
+  +--------------------+        +--------------------+
+  | M2: Intake Layer   |        | M9: Pattern Detect |
+  | M5: Skill Audit    |        | M10: Retro Loop    |
+  +--------------------+        +--------------------+
+
+  CAPCOM gates: after Wave 2 (Alpha done), Wave 4 (Bravo+Charlie done),
+                Wave 6 (Delta done)
+
+  Synthesis: Opus reads all team outputs -&gt; integration spec
+    </pre>
+  </main>
+
+  <footer>
+    <p>Fleet Feature Refinement &middot; Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

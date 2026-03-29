@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Pack &mdash; Fleet Feature Refinement</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-flt">
+  <header>
+    <h1>Fleet Feature Refinement</h1>
+    <div class="subtitle">10 Modules &middot; 4 Teams &middot; 1 Architecture &mdash; v1.50 Blueprint</div>
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="page.html?doc=01-vision-guide">Vision</a>
+      <a href="page.html?doc=02-research-reference">Research</a>
+      <a href="page.html?doc=03-milestone-spec">Milestone</a>
+      <a href="page.html?doc=retrospective">Retrospective</a>
+      <a href="mission.html" class="active">Mission Pack</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Mission Package</h2>
+
+    <blockquote>
+      Ten modules. Four teams. One architecture. Zero borrowed code. The Fleet Feature Refinement
+      mission is not a patch release &mdash; it is a structural clarification. Every module was
+      independently specified, convergently discovered, and GSD-natively designed before a single
+      line was written. The fox finds where the ground has been worn smooth, then builds a better road.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">10</span><span class="stat-label">Modules</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Teams</span></div>
+      <div class="stat"><span class="stat-value">7</span><span class="stat-label">Waves</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">CAPCOM Gates</span></div>
+      <div class="stat"><span class="stat-value">72</span><span class="stat-label">Tests</span></div>
+      <div class="stat"><span class="stat-value">8/8</span><span class="stat-label">Safety-Critical</span></div>
+    </div>
+
+    <h2>Mission Pack Files</h2>
+
+    <table>
+      <thead><tr><th>File</th><th>Format</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="mission-pack/fleet-refinement-mission.pdf">Mission Package</a></td><td>PDF</td><td>Complete mission document: vision, research reference, and milestone specification</td></tr>
+        <tr><td><a href="mission-pack/fleet-refinement-mission.tex">LaTeX Source</a></td><td>TEX &middot; XeLaTeX</td><td>Editable source file. Recompile with three XeLaTeX passes.</td></tr>
+        <tr><td><a href="mission-pack/README.md">README</a></td><td>Markdown</td><td>Mission pack overview and build instructions</td></tr>
+        <tr><td><a href="mission-pack/fleet_refinement_index.html">Index Page</a></td><td>HTML</td><td>Standalone index page for the mission package files</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wave Execution Plan</h2>
+
+    <table>
+      <thead><tr><th>Wave</th><th>Name</th><th>Teams / Modules</th><th>Mode</th><th>Model</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Foundation</td><td>Shared types, schema definitions, test scaffolding</td><td>Sequential</td><td>Haiku</td></tr>
+        <tr><td>1</td><td>Alpha Team</td><td>M8 Safety Warden + M3 Credential Tiering + M6 Chipset Schema</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>2</td><td>CAPCOM Gate 1</td><td>Alpha review: safety contracts + credential spec + chipset extensions verified</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>3</td><td>Bravo + Charlie</td><td>M4 DACP Bus + M7 Model Router + M1 Cluster Topo + M2 Intake + M5 Audit</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>4</td><td>CAPCOM Gate 2</td><td>Bravo/Charlie review: bus contracts + routing logic + intake validation verified</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>5</td><td>Delta Team</td><td>M9 Pattern Detection + M10 Retro Loop</td><td>Parallel</td><td>Sonnet</td></tr>
+        <tr><td>6</td><td>CAPCOM Gate 3</td><td>Delta review + full-cycle integration test (all 10 modules end-to-end)</td><td>Sequential</td><td>Opus</td></tr>
+        <tr><td>7</td><td>Synthesis</td><td>Cross-module integration spec, retrospective, carry-forward</td><td>Sequential</td><td>Opus</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Chipset Configuration</h2>
+
+    <table>
+      <thead><tr><th>Chip</th><th>Role</th><th>Model</th><th>Manages</th></tr></thead>
+      <tbody>
+        <tr><td>Agnus</td><td>Synthesis + judgment</td><td>Opus &middot; 25%</td><td>CAPCOM gate reviews, cross-module synthesis, integration spec, retrospective</td></tr>
+        <tr><td>Denise</td><td>Module production</td><td>Sonnet &middot; 65%</td><td>All 10 module specs, test suites, chipset YAML extensions, audit trail schemas</td></tr>
+        <tr><td>Paula</td><td>Scaffolding + schema</td><td>Haiku &middot; 10%</td><td>Shared type definitions, test harness templates, YAML validation scaffolding</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Safety-Critical Tests (BLOCK Level)</h2>
+
+    <table>
+      <thead><tr><th>ID</th><th>Verifies</th><th>Expected Result</th></tr></thead>
+      <tbody>
+        <tr><td>SC-CRD</td><td>Credential boundary enforcement</td><td>No operation proceeds beyond its assigned clearance tier. Zero privilege escalation paths.</td></tr>
+        <tr><td>SC-AUD</td><td>Audit trail completeness</td><td>Every skill invocation produces an immutable log entry. No silent execution. Zero unlogged operations.</td></tr>
+        <tr><td>SC-GAT</td><td>Safety warden gate integrity</td><td>All outputs pass Safety Warden before delivery. No bypass path exists. Gate is non-optional.</td></tr>
+        <tr><td>SC-SCH</td><td>Chipset schema backward compatibility</td><td>Existing YAML chipset definitions load without modification after schema extension. Zero breakage.</td></tr>
+        <tr><td>SC-BUS</td><td>DACP event bus isolation</td><td>Events from one module cannot poison another module's queue. Cross-module contamination is impossible.</td></tr>
+        <tr><td>SC-INT</td><td>Intake contract enforcement</td><td>Malformed inputs are rejected at the intake layer. No malformed input reaches downstream modules.</td></tr>
+        <tr><td>SC-RTR</td><td>Model routing fallback</td><td>If primary model is unavailable, routing falls back gracefully. No silent failure. Zero data loss.</td></tr>
+        <tr><td>SC-CLN</td><td>Clean-room compliance</td><td>No module implementation references or copies thepopebot source. Convergent design only. Zero code borrowing.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The Through-Line</h2>
+
+    <p>The Fleet Feature Refinement mission is the Amiga Principle applied to fleet architecture:
+    a single chipset model (Safety Warden + Credential Tiering + Chipset Schema) serving as the
+    foundation that every other module builds on simultaneously. Just as the Amiga's custom chips
+    let Agnus, Denise, and Paula each address the same memory through different lenses, the FLT
+    architecture lets the same fleet dataset be addressed through different lenses: credential
+    enforcement (who can do what), event routing (what gets dispatched where), cluster topology
+    (where resources live), model routing (which model handles which workload), intake validation
+    (what enters the system), audit trail (what happened and when), pattern detection (what
+    anomalies emerged), and retrospective loop (what to carry forward).</p>
+
+    <p>The rollout sequence (M8 first, M10 last) is deliberate: safety gates are installed before
+    any other feature can run. You cannot bolt safety onto a running system &mdash; you build it
+    in at the foundation. This is the 45-year engineering career through-line: the constraint that
+    teaches itself. The fox knows the trail because the fox is from these woods. The road built
+    here will be worn smooth by every agent that walks it after.</p>
+  </main>
+
+  <footer>
+    <p>Fleet Feature Refinement &middot; Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>
