@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 25&deg; &mdash; Black Stax &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4A148C, #7B1FA2);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .cd-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F3E5F5;
+      color: #4A148C;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .neosoul-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #9FA8DA;
+      margin-left: 0.3rem;
+    }
+
+    .guardian-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF8E1;
+      color: #F57F17;
+      border: 1px solid #FFD54F;
+      margin-left: 0.3rem;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E0F2F1;
+      color: #004D40;
+      border: 1px solid #80CBC4;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #CE93D8;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #7B1FA2;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #7B1FA2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .cd-box {
+      background: #F3E5F5;
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cd-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .cd-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .cd-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cd-box td, .cd-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #E1BEE7;
+    }
+    .cd-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #4A148C;
+    }
+
+    .guardian-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .guardian-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .guardian-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">25&deg;</div>
+      <div>
+        <h1>Black Stax</h1>
+        <div class="subtitle">Neo-Soul &middot; Hip-Hop / Soul / Blues / Spoken Word &mdash; Central District, Seattle 2009&ndash;present
+          <span class="energy-badge">Energy 4</span>
+          <span class="cd-badge">Central District x4</span>
+          <span class="neosoul-badge">First Neo-Soul Standalone</span>
+          <span class="guardian-badge">Cultural Guardian</span>
+          <span class="genre-badge">Jazz Absent</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../024-ron-artis-ii/index.html">Degree 24&deg; (Ron Artis II)</a>
+      <a href="../019-fly-moon-royale/index.html">Degree 19&deg; (Fly Moon Royale)</a>
+      <a href="../011-joe-brazil/index.html">Degree 11&deg; (Joe Brazil)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The congregation assembles. Black Stax is a hip-hop soul trio from
+          Seattle&rsquo;s Central District &mdash; MC Jace ECAj, MC Silas Blak,
+          and vocalist/actress Felicia Loud &mdash; each with 25+ years on stage.
+          They call their sound <em>vibrational music</em>. Their mission: honor
+          the legacy of Black Arts &amp; Culture by stacking all forms of Black
+          music and art. The Central District returns for the fourth time. Jazz
+          is absent from the genre label for the first time in 26 degrees.
+          <em>The Cultural Guardian.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Black Stax are Central District artists whose work is rooted in
+          the same Jackson Street corridor that sustained Quincy Jones, Ernestine
+          Anderson, and the founding cluster. The Central District was shaped by
+          redlining: Black people were confined to specific neighborhoods by
+          discriminatory lending practices. The music that emerged from that
+          confinement became one of America&rsquo;s great artistic traditions.
+          The Duwamish Tribe remains federally unrecognized. This acknowledgment
+          was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             CENTRAL DISTRICT RETURNS
+             ======================================== -->
+
+        <div class="cd-box">
+          <h4>Central District Returns &mdash; Fourth Oscillation</h4>
+          <p>The CD oscillation pattern is now fully legible. The Central District
+          is the engine&rsquo;s <strong>grounding wire</strong> &mdash; when the
+          engine departs, it always returns. Each return finds a more depleted
+          community and a more evolved musical response.</p>
+          <table>
+            <tr><th>Phase</th><th>Degrees</th><th>Character</th></tr>
+            <tr><td>Founding cluster</td><td>0&ndash;6</td><td>Jackson Street jazz, 73% Black CD</td></tr>
+            <tr><td>First return</td><td>11</td><td>Salon keeper (Brazil), CD still intact</td></tr>
+            <tr><td>Second return</td><td>19</td><td>Neo-soul collective (FMR), gentrified CD</td></tr>
+            <tr><td><strong>Third return</strong></td><td><strong>25</strong></td><td><strong>Cultural guardian (Black Stax), ~9% Black CD</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             THE THREE PILLARS
+             ======================================== -->
+
+        <h2>The Three Pillars</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Jace ECAj &mdash; MC, Community Organizer</div>
+          <p>Veteran MC and &ldquo;Seattle Hip Hop Icon.&rdquo; Grew up between
+          Seattle and Richmond, California. Director of Community and Artist
+          Development at <strong>The Residency</strong> (youth hip-hop
+          organization). Creative writing educator for 20+ years. Previously half
+          of <strong>Silent Lambs Project</strong> (with Silas Blak, formed 1997;
+          K Records releases). Influences: Otis Redding, Earth Wind &amp; Fire,
+          Al Green, Nina Simone.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Silas Blak &mdash; MC, Poet-Militant</div>
+          <p>Formative work in <strong>Blind Council</strong>, <strong>Silent
+          Lambs Project</strong>, and Black Stax. Solo releases through
+          <strong>K Records</strong> (Olympia, WA). Delivery described as
+          &ldquo;edgy and filled with tension.&rdquo; Collaborative work in
+          Silent Lambs and Black Stax considered &ldquo;integral installments
+          in the 206 rap canon.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Felicia Loud &mdash; Vocalist, Actress, Playwright</div>
+          <p>Born in Louisiana, moved to Seattle at age four. <strong>40+ years on
+          Seattle stages.</strong> Youth theater at Langston Hughes Cultural Center.
+          <strong>Gregory Award nominee 2018</strong> (Billie Holiday in <em>Lady Day
+          at Emerson&rsquo;s Bar and Grill</em>). Credits at Seattle Rep, Intiman,
+          ArtsWest, 5th Avenue, Book-It. Wrote and starred in <strong><em>Here There
+          Be Dragons</em></strong> (ArtsWest, 2022). Coined the term
+          <strong>&ldquo;vibrational music.&rdquo;</strong></p>
+        </div>
+
+        <!-- ========================================
+             CULTURAL GUARDIAN
+             ======================================== -->
+
+        <div class="guardian-box">
+          <h4>The Cultural Guardian &mdash; 26th Artist-City Pattern</h4>
+          <p>Black Stax&rsquo;s relationship to Seattle is <strong>defensive</strong>:
+          the Central District&rsquo;s Black population fell from 73% (1970) to ~9%
+          (2020). The group combines <strong>performance + education + institutional
+          stewardship</strong> into a platform whose purpose is ensuring the
+          tradition survives. Jace runs youth programs at The Residency. Both Jace
+          and Felicia are teaching artists in schools and libraries statewide.
+          They performed at LHPAI&rsquo;s 50th anniversary. The city is the cause.</p>
+        </div>
+
+        <!-- ========================================
+             DISCOGRAPHY
+             ======================================== -->
+
+        <h2>Discography</h2>
+
+        <div class="timeline-entry">
+          <div class="era">2010</div>
+          <p><strong><em>Talking Buildings</em></strong> &mdash; Debut album.
+          Three MCs + vocalist + trumpet (Owuor Arunga, Garfield Jazz Band alumnus).
+          &ldquo;I Love My Life&rdquo; video played in Foot Locker stores nationwide.
+          &ldquo;Spell on You&rdquo; reached video charts in Nigeria.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2012</div>
+          <p><strong><em>High Rhymes Smoking Jackets</em></strong> (EP) &mdash;
+          Produced by Rob Castro. Neo-soul blues hip-hop hybrid.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2013</div>
+          <p><strong><em>Black Stax LIVE at the Triple Door</em></strong> &mdash;
+          Live album captured at Seattle&rsquo;s Triple Door venue.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2015</div>
+          <p><strong><em>Movement Music EP</em></strong> &mdash; 6 tracks
+          including &ldquo;Exit US,&rdquo; &ldquo;Tears,&rdquo; &ldquo;Driftin.&rdquo;
+          Political and personal.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2017</div>
+          <p><strong><em>The Revival</em></strong> &mdash; Full-length statement.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ENERGY STREAK
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Fifth Consecutive E=4 &mdash; Distribution 2:13:6:5</h4>
+          <p>Longest sustained energy streak in the engine extends to five degrees.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th></tr>
+            <tr><td>21</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td></tr>
+            <tr><td>22</td><td>Foxy Apollo</td><td>Collective-kinetic</td></tr>
+            <tr><td>23</td><td>Allen Stone</td><td>Vocal-kinetic</td></tr>
+            <tr><td>24</td><td>Ron Artis II</td><td>Dynastic-kinetic</td></tr>
+            <tr><td><strong>25</strong></td><td><strong>Black Stax</strong></td><td><strong>Congregational-kinetic</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield Thread &mdash; 60+ Years, One School</h4>
+          <table>
+            <tr><td>Degree 0</td><td>Quincy Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3</td><td>Ernestine Anderson &mdash; Garfield, same era</td></tr>
+            <tr><td>Degree 4</td><td>Floyd Standifer &mdash; CD community</td></tr>
+            <tr><td>Degree 25</td><td><strong>Owuor Arunga</strong> (trumpet on <em>Talking Buildings</em>) &mdash;
+              Garfield Jazz Band alumnus; later Macklemore&rsquo;s trumpet on <em>The Heist</em></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Central District Cultural Guardianship</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Third-generation CD music: activist platform defending Black
+            heritage against gentrification. CD oscillation 0-6, 11, 19, 25.
+            Community centers as alternative institutions. Buildings as witnesses.
+            73% Black (1970) to ~9% (2020).</p>
+            <div class="examples">Brazil (11) private salon &rarr; FMR (19) neo-soul observer &rarr; Black Stax (25) cultural guardian</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Jackson Street corridor, LHPAI (1972), CD demographic displacement, Arte Noir ecosystem</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Three-Voice MC-MC-Vocalist</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Two MCs with contrasting styles (Jace smooth, Silas edgy) plus
+            soul/theater vocalist (Felicia). Unprecedented in engine. Hip-hop
+            dual-MC tradition merged with soul vocal tradition. &ldquo;Vibrational
+            music.&rdquo;</p>
+            <div class="examples">Silent Lambs Project (two-MC) + Felicia Loud (40yr theater/soul) = Black Stax tripartite voice</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Run-DMC/Black Star dual-MC, Holiday/Simone vocal tradition, Silent Lambs Project (1997)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Community-Organization Pipeline</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Fourth institutional category: LHPAI + The Residency + teaching-artist
+            practice. Produces cultural stewards, not graduates. Joe Brazil&rsquo;s
+            salon model scaled to organizational level.</p>
+            <div class="examples">Schools (Garfield/Cornish) &rarr; Churches (Stone 23) &rarr; Families (Artis 24) &rarr; Community orgs (Black Stax 25)</div>
+            <div class="genealogy"><strong>Ancestors:</strong> LHPAI (1972), The Residency, Artist Trust GAP 2019, 4Culture Touring Arts</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Collective-Activist</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-fifth deployment. Three simultaneous blue-note voices:
+            two MCs bending words rhythmically, one vocalist bending notes
+            melodically. Produces a blue-note <em>field</em> rather than
+            a point. Deployed for communal mobilization.</p>
+            <div class="examples">Felicia Loud&rsquo;s Holiday-lineage vocal bending + Jace&rsquo;s smooth MC inflection + Silas&rsquo;s edgy MC tension</div>
+            <div class="genealogy"><strong>Ancestors:</strong> All 24 prior blue notes; Holiday vocal tradition via Gregory Award portrayal; hip-hop word-bending technique</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ACOUSTIC ELEMENT
+             ======================================== -->
+
+        <h2>Acoustic Element #26: The Congregation</h2>
+
+        <p>The liturgical sequence builds: <strong>groove reset</strong> (22) &rarr;
+        <strong>testimony</strong> (23) &rarr; <strong>invocation</strong> (24) &rarr;
+        <strong>congregation</strong> (25). The band plays, the preacher testifies,
+        the preacher invokes, the congregation rises. Black Stax&rsquo;s hip-hop
+        soul fusion IS this liturgical structure secularized &mdash; the Central
+        District as church, the music as sermon, the community as congregation.
+        The boundary between performer and audience dissolves.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <div class="carry-forward-box">
+          <h4>Key Connections</h4>
+          <ul>
+            <li><strong>S36-024 Ron Artis II:</strong> Invocation &rarr; congregation. Both E=4. Dynasty vs community platform.</li>
+            <li><strong>S36-019 Fly Moon Royale:</strong> CD neo-soul. FMR observes gentrification; Black Stax defends against it.</li>
+            <li><strong>S36-011 Joe Brazil:</strong> CD pedagogy. Brazil&rsquo;s salon scaled to community-organization level.</li>
+            <li><strong>S36-000 Quincy Jones:</strong> Garfield thread. Jones (1950) &rarr; Arunga (2000s jazz band) &rarr; Black Stax trumpet.</li>
+            <li><strong>S36-003 Ernestine Anderson:</strong> CD founding female voice (3) &rarr; latest CD female voice (25, Felicia Loud).</li>
+            <li><strong>S36-017 Reggie Watts:</strong> Cross-form art. Watts = comedy+music; Loud = theater+music.</li>
+            <li><strong>S36-004 Floyd Standifer:</strong> Three pedagogy models: UW faculty (4) &rarr; salon (11) &rarr; community org (25).</li>
+          </ul>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 26</h4>
+          <ul>
+            <li><strong>Fifth E=4</strong> (2:13:6:5). Five subtypes. Track if streak continues.</li>
+            <li><strong>Neo-Soul standalone.</strong> Jazz absent. Stage 8. Track genre at 26.</li>
+            <li><strong>CD oscillation:</strong> 0-6, 11, 19, 25. Gap lengths 4, 7, 5. Track next return.</li>
+            <li><strong>Congregation:</strong> 26th acoustic element. Liturgical sequence continues.</li>
+            <li><strong>Cultural Guardian:</strong> 26th artist-city pattern. Track.</li>
+            <li><strong>Community-organization pipeline:</strong> 4th institutional category. Track.</li>
+            <li><strong>Seven organizational models.</strong> Trio-platform/activist-embedded at 25. Track 8th.</li>
+            <li><strong>Gender gap:</strong> 4:22. Felicia Loud as 4th female artist. Track.</li>
+            <li><strong>Garfield thread:</strong> 0, 3, 4, 25 (via Arunga). 60+ year span. Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Release Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">25 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Version</span>
+            <span class="stat-value">v1.49.161</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Neo-Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">4 (Congregational)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2010s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-released</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jace ECAj</span>
+            <span class="stat-value">MC</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Silas Blak</span>
+            <span class="stat-value">MC</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Felicia Loud</span>
+            <span class="stat-value">Vocals/Actress</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">CD Returns</span>
+            <span class="stat-value">4th (0-6, 11, 19, 25)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4 Streak</span>
+            <span class="stat-value">5th (21-25)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic #</span>
+            <span class="stat-value">26: Congregation</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern #</span>
+            <span class="stat-value">26: Cultural Guardian</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note #</span>
+            <span class="stat-value">25: Collective-Activist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Org Model</span>
+            <span class="stat-value">7: Trio-Platform</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Sources</h4>
+          <div style="font-size:0.82rem;line-height:1.5">
+            KEXP (interview + live session) &middot;
+            KUOW (Felicia Loud profile) &middot;
+            Artist Trust &middot;
+            4Culture &middot;
+            Seattle Refined &middot;
+            206 Zulu &middot;
+            Town Love &middot;
+            ArtsWest &middot;
+            The Residency &middot;
+            HistoryLink &middot;
+            K Records &middot;
+            Bandcamp &middot;
+            Seattle Met &middot;
+            Seattle Weekly
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 25&deg; of 360 &mdash; Seattle 360 Deep Research Series (S36)
+    &mdash; <a href="../../index.html">Return to Index</a></p>
+  </footer>
+</body>
+</html>

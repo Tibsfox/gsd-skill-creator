@@ -1,0 +1,404 @@
+{
+  "degree": 25,
+  "species": "American Robin",
+  "scientific_name": "Turdus migratorius",
+  "slug": "025-american-robin",
+  "sound_type": "cheerily cheer-up cheerio",
+  "energy": 4,
+  "ecosystem": "lawn and woodland",
+  "season": "resident (year-round -- behaviorally flexible, shifts from territorial singing to nomadic flocking seasonally)",
+  "family": "Turdidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; lawns, parks, gardens, woodland edges, clearings, suburban and urban neighborhoods throughout the Puget Sound lowlands -- the most human-adjacent ecosystem in the engine."
+  },
+  "taxonomy_note": {
+    "description": "The American Robin is genus Turdus -- the TYPE GENUS of the family Turdidae. The family is literally named for this genus. The previous four Turdidae in the engine were Ixoreus (Varied Thrush, degree 2) and Catharus (Hermit 7, Swainson's 18, Veery 19). The robin is the first Turdus -- THE thrush. The common name 'robin' is a misnomer applied by European colonists reminded of the European Robin (Erithacus rubecula, Muscicapidae), a completely unrelated species. The American Robin is a thrush, not a robin.",
+    "current_family": "Turdidae",
+    "type_genus": true,
+    "turdidae_count_in_engine": 5,
+    "family_count_in_engine": 15,
+    "name_etymology": "Turdus = Latin for 'thrush' (the word the family is named from). Migratorius = 'migratory/wandering' (Linnaeus 1766), ironic given that the species is a year-round resident through much of its range including the PNW.",
+    "pnw_subspecies": "T. m. caurinus -- the Northwestern Robin. Slightly darker than nominate eastern T. m. migratorius. Name from Latin caurus, the northwest wind."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-4,000",
+    "peak_energy_band_hz": "2,000-3,500",
+    "song_duration_s": "2-3 per phrase group",
+    "phrases_per_bout": "6-20 (organized into subgroups of 2-4)",
+    "phrase_rate_per_second": "3-5",
+    "phrase_type": "Clear slurred whistles alternating in pitch direction, grouped into recognizable subgroups. The mnemonic 'cheerily cheer-up cheerio' captures one subgroup's cadence. Cyclic repetition of 8-20 distinct phrase types in predictable order.",
+    "timbre": "Bright, clean, clipped. Pure-toned with minimal harmonic sidebands, little frequency jitter, sharp onset/offset transients. The defining contrast against the grosbeak (smooth) and tanager (hoarse). No graininess, no lushness -- direct, efficient, transparent.",
+    "amplitude": "Moderate to loud. Sings from exposed perches (treetops, rooftops, wires, fence posts) with clear acoustic paths. Designed for open-space propagation.",
+    "dawn_chorus": "Typically the FIRST species to begin singing at dawn -- 30-50 minutes before civil twilight. The robin opens each day. Other species join in sequence.",
+    "call_note": "Sharp 'tut-tut-tut' alarm call -- instantly recognizable, learned and responded to by other species. Also a thin 'seee' flight call.",
+    "repertoire_size": "8-20 distinct phrase types cycled in predictable order",
+    "key_property": "THE CAROLING -- the 26th acoustic element. Cyclic melodic repetition as a recognition strategy. Not through-composed improvisation (grosbeak), not static repetition (vireo), but structured repeating melodic patterns. The song teaches itself through repetition. The most recognized birdsong in North America."
+  },
+  "convergence_trio": {
+    "description": "COMPLETE. Three consecutive degrees (23, 24, 25) produce robin-like warbles from two families. The archetype (the robin) arrives LAST. Two previews preceded the original. Structural foreshadowing resolved.",
+    "status": "RESOLVED at degree 25",
+    "members": [
+      {
+        "degree": 23,
+        "species": "Black-headed Grosbeak",
+        "family": "Cardinalidae",
+        "timbre": "Rich, smooth, mellow",
+        "role": "Preview A"
+      },
+      {
+        "degree": 24,
+        "species": "Western Tanager",
+        "family": "Cardinalidae",
+        "timbre": "Hoarse, rough, burry",
+        "role": "Preview B"
+      },
+      {
+        "degree": 25,
+        "species": "American Robin",
+        "family": "Turdidae",
+        "timbre": "Bright, clean, clipped",
+        "role": "THE ARCHETYPE"
+      }
+    ],
+    "shared_features": [
+      "Frequency range: 2.0-3.5 kHz center",
+      "Phrase structure: slurred whistles alternating in direction",
+      "Rhythmic cadence: rolling warble at 3-5 phrases/sec",
+      "Mid-frequency warmth: substantial energy below 3 kHz"
+    ],
+    "divergent_features": [
+      "Timbre: smooth (23) vs. hoarse (24) vs. clean (25)",
+      "Bill shape: massive conical (23) vs. slender pointed (24) vs. moderate curved (25)",
+      "Phrase variety: high/improvised (23) vs. moderate (24) vs. low/cyclic (25)",
+      "Singing posture: canopy interior (23) vs. upper canopy (24) vs. exposed perch (25)"
+    ],
+    "narrative_structure": "The archetype arrives last. Two approximations precede the original. The listener builds a concept of 'robin-like' from two non-robins, then encounters the robin. The recognition is immediate. The engine teaches the robin's song before the robin sings it. Structural foreshadowing resolved.",
+    "acoustic_attractor": "The robin-like warble is an acoustic attractor -- a song design that multiple lineages converge upon because it works: mid-frequency slurred phrases carry well across open/semi-open habitat, are melodically rich enough for individual recognition, and occupy a frequency band with low ambient noise in temperate forests."
+  },
+  "worm_pulling": {
+    "description": "The most commonly observed predator-prey interaction between any wild bird and any invertebrate. The robin locates earthworms primarily by VISUAL detection, not hearing or vibration.",
+    "primary_sense": "Vision",
+    "head_tilt_function": "The characteristic head-tilt brings one laterally-placed eye into near-vertical alignment with the soil surface, providing high-resolution detection of subtle movement or soil displacement indicating a worm's position. It is LOOKING, not listening.",
+    "key_reference": "Heppner 1965 (The Living Bird) -- definitive experimental evidence",
+    "secondary_sense": "Auditory (contributes but not primary; Montgomerie & Weatherhead 1997)",
+    "vibrotactile_sense": "Not supported experimentally. Robin feet lack specialized Herbst corpuscles found in probing shorebird bills.",
+    "strike_sequence": [
+      "1. Hop-and-pause (2-4 body lengths, then stop -- stable visual platform)",
+      "2. Head-tilt (1-3 seconds, one eye aligned with ground surface)",
+      "3. Lunge (100-200 ms from initiation to bill contact)",
+      "4. Pull (sustained force against worm's setae-anchored grip, may last several seconds)",
+      "5. Extraction and consumption (or transport to nestlings)"
+    ],
+    "capture_rate": "10-15 earthworms per hour during active foraging on managed lawns (Eiserer 1980)"
+  },
+  "lawn_ecology": {
+    "description": "The American Robin's primary habitat is lawn and woodland -- the most human-adjacent ecosystem in the engine. Lawns replicate the robin's ancestral habitat (short-grass clearings in open woodland) at continental scale. The robin did not adapt to lawns. Lawns replicate conditions that favor the robin's foraging strategy.",
+    "factors": [
+      "Earthworm abundance: managed lawns support high densities, especially irrigated turf in PNW",
+      "Short vegetation: mowing maintains visual access to soil surface for prey detection",
+      "Open space: unobstructed foraging area for hop-and-pause hunting",
+      "Adjacent tall structure: suburban trees, rooftops, poles for singing and nesting",
+      "Year-round food: PNW lawns remain green and moist; winter fruit from ornamental plantings"
+    ],
+    "commensalism": "The robin benefits from human habitat modification without directly harming or helping humans. Nests on building ledges, forages on managed lawns, roosts in ornamental plantings. One of the most successful examples of wildlife commensalism in North America.",
+    "human_proximity": "MAXIMUM -- the most human-adjacent species in the engine. The robin lives where people live."
+  },
+  "cultural_significance": {
+    "idiom": "'The first robin of spring' -- American cultural idiom with no equivalent for any other wild bird. In PNW, the robin never left; it becomes more VISIBLE in spring as it shifts from winter flocking to spring territorial behavior.",
+    "state_bird_of": ["Connecticut", "Michigan", "Wisconsin"],
+    "population_estimate": "~370 million breeding individuals (Partners in Flight 2020)",
+    "recognition": "The most frequently identified bird by sound among non-birders (Cornell Lab survey). Not the loudest, not the most complex -- the most KNOWN.",
+    "color_named_for_species": "Robin's-egg blue -- a recognized color name derived from the robin's pale blue eggs",
+    "key_insight": "The robin is famous for being ORDINARY -- so ubiquitous that it has become the default bird in the collective imagination. When a non-birder thinks 'bird,' they probably picture a robin."
+  },
+  "turdidae_arc": {
+    "description": "Five Turdidae across 23 degrees: Varied Thrush (2), Hermit Thrush (7), Swainson's Thrush (18), Veery (19), American Robin (25). Two genera (Ixoreus, Catharus, Turdus). From forest-interior ethereal vocalists to suburban caroler. The widest ecological range of any family in the engine.",
+    "vocal_progression": [
+      "Degree 2 -- Varied Thrush: sustained tone (drone). One note held. Minimal statement.",
+      "Degree 7 -- Hermit Thrush: harmonic spiral. Mathematical beauty. Harmonic series navigation.",
+      "Degree 18 -- Swainson's Thrush: ascending spiral. Sequential phrases, each higher. Aspiration.",
+      "Degree 19 -- Veery: descending spiral with shimmer. Bilateral syrinx interference.",
+      "Degree 25 -- American Robin: caroling. Cyclic melodic repetition. The democratic thrush."
+    ],
+    "accessibility_gradient": "From esoteric to universal across 23 degrees. The Varied Thrush requires patience. The Hermit Thrush requires knowledge. The robin requires only ears."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The convergence trio completes -- archetype arrives last (three consecutive robin-like warbles from two families; the model appears after the copies; structural foreshadowing resolved)",
+      "level": "advanced",
+      "department": "music-theory/evolution",
+      "college_path": ".college/music/theory/evolution/convergence-trio-resolution/",
+      "examples": [
+        "Degrees 23-24-25: grosbeak (smooth), tanager (hoarse), robin (clean) -- same architecture, three textures. The robin is THE source and arrives last.",
+        "In film: a musical theme heard in fragmentary, distorted forms throughout the first two acts, then played in full orchestration at the climax. The audience recognizes what they have been hearing all along.",
+        "In literature: foreshadowing resolved -- Chekhov's gun fires. The robin-like warble was hung on the wall at degree 23 and goes off at degree 25.",
+        "In jazz: the head stated after an extended solo section -- the melody resolves what the improvisation explored"
+      ],
+      "music_theory_parallel": "The convergence trio is resolved at degree 25 with the arrival of the archetype. The grosbeak and tanager were covers; the robin is the original. But the covers played first. This is a reversal of the normal cover-version relationship (original, then covers). The engine presented the copies before the model, building recognition through approximation. When the robin sings, the listener already knows the song -- they have heard two versions of it. The archetype arrives as both discovery and recognition simultaneously. This is the structural equivalent of a theme and variations where the theme is stated LAST."
+    },
+    {
+      "concept": "Cyclic melodic repetition as recognition strategy (the caroling -- structured repeating melody that teaches itself through repetition, producing the most recognized birdsong on the continent)",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/cyclic-repetition/",
+      "examples": [
+        "American Robin: 8-20 phrase types cycled in predictable order. Hear it for 30 seconds and you know the song. The repetition IS the pedagogy.",
+        "Pop music verse-chorus form: the chorus repeats, each repetition deepening recognition. The hook works because you hear it again.",
+        "Ravel's Bolero: one melody repeated with orchestration changes. The repetition hypnotizes; the variation sustains.",
+        "Advertising jingles: cyclic melodic repetition is the deliberate engineering of memorability"
+      ],
+      "music_theory_parallel": "The robin's caroling is the birdsong equivalent of verse-chorus form. Not through-composed (grosbeak), not static loop (vireo), but a structured melody that returns. The phrase types are the vocabulary; the cyclic order is the grammar; the repetition is the teacher. The robin's song is the most recognized because it is the most repeated. Recognition is not a property of the first hearing -- it is a property of the hundredth. The robin ensures the hundredth hearing by cycling its phrases every few seconds. The song IS the advertisement for itself."
+    },
+    {
+      "concept": "Visual prey detection and the head-tilt (the robin locates earthworms by sight, not sound -- the characteristic head-tilt brings one eye into alignment with the ground surface for high-resolution movement detection)",
+      "level": "intermediate",
+      "department": "ecology/sensory",
+      "college_path": ".college/ecology/sensory/visual-hunting/",
+      "examples": [
+        "American Robin: head-tilt = visual alignment, not auditory scanning. Heppner 1965 definitively proved visual detection primary.",
+        "Herons (degree 0): visual strike predators -- motionless waiting followed by visual-triggered lunge. Same sensory strategy, different scale.",
+        "Spotted Owl (degree 4): nocturnal auditory hunting in darkness. Opposite sensory modality from the diurnal, visual robin.",
+        "In music: visual vs. auditory musicians -- conductors who read the score (visual) vs. improvisers who respond to what they hear (auditory). Different sensory primacy for different contexts."
+      ],
+      "music_theory_parallel": "The robin hunts by looking, not listening. This is counterintuitive for a bird in a bioacoustics engine -- the assumption is that bird senses default to hearing. But the robin's foraging is a visual process: the head-tilt, the eye alignment, the movement detection. The robin listens when it sings; it looks when it hunts. The sensory modality shifts with the behavioral context. In music, the same principle applies: a conductor reads the score visually while listening to the orchestra aurally. The robin is a visual predator and an auditory communicator. Different channels for different functions."
+    },
+    {
+      "concept": "Lawn ecology as human commensalism (managed grassland replicates the robin's ancestral foraging habitat at continental scale; the robin did not adapt to lawns, lawns replicate conditions that favor the robin)",
+      "level": "intermediate",
+      "department": "ecology/commensalism",
+      "college_path": ".college/ecology/commensalism/lawn-robin/",
+      "examples": [
+        "American Robin on lawns: short grass exposes soil surface for visual worm detection. Irrigation maintains earthworm availability. Adjacent structures provide singing perches.",
+        "House Sparrows in cities: another commensal of human settlement, exploiting architecture for nesting and food waste for feeding",
+        "Barn Owls in agricultural buildings: human structures replicate cliff-face cavities for nesting",
+        "In music: musicians who thrive in spaces designed for other purposes -- warehouse concerts, subway performances, cafe sessions. The space was not built for them, but it works."
+      ],
+      "music_theory_parallel": "The robin-lawn system is a case of accidental habitat creation. Humans mow lawns for aesthetic reasons. The side effect is continental-scale robin habitat. The robin's foraging strategy (visual detection of earthworms in short grass near elevated perches) is perfectly served by the suburban yard. This is not adaptation -- the robin did not evolve to exploit lawns. It is pre-adaptation -- the robin's existing strategy happened to match a habitat that humans created. In music, this is the musician who discovers that a new venue has perfect acoustics by accident. The space was not designed for them. It works anyway. The robin found the venue already built."
+    },
+    {
+      "concept": "The type genus arrives (Turdus is THE thrush -- the genus the family Turdidae is named for; after four thrushes from other genera, the namesake appears at degree 25)",
+      "level": "intermediate",
+      "department": "taxonomy/systematics",
+      "college_path": ".college/taxonomy/systematics/type-genus/",
+      "examples": [
+        "American Robin: genus Turdus, the type genus of Turdidae. The four previous Turdidae (Ixoreus, Catharus x3) were named thrushes because of their relationship to Turdus. The original arrives last.",
+        "Naming conventions: a family named after its most representative member. Canidae from Canis (dog). Felidae from Felis (cat). Turdidae from Turdus (thrush).",
+        "In music: the genre named after its defining artist -- when the artist finally appears, the genre snaps into focus",
+        "The Western Tanager at degree 24 was a cardinal mislabeled as a tanager. The American Robin at degree 25 is a thrush mislabeled as a robin. Two consecutive misnomers."
+      ],
+      "music_theory_parallel": "The American Robin is Turdus -- the word that gives the entire family its name. Every thrush in the engine (Varied Thrush, Hermit Thrush, Swainson's Thrush, Veery) is called a thrush because of its phylogenetic relationship to genus Turdus. But the engine encountered four thrushes before meeting the one the family is named for. This is like studying 'jazz' for 25 lessons and only now hearing the musician the genre was named after. The type genus is the taxonomic anchor -- the reference point that defines the family. At degree 25, the reference point arrives."
+    },
+    {
+      "concept": "Energy quintet -- five consecutive E=4 degrees (21-25) demonstrating sustained high energy across percussion, warble, and caroling, with acoustic character rotating while dynamic level holds)",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-quintet/",
+      "examples": [
+        "Degrees 21-25: hammer (metronomic vocal), drum (broadband mechanical), smooth warble (grosbeak), hoarse warble (tanager), caroling (robin). Five textures at sustained E=4.",
+        "In orchestral music: a five-movement fortissimo suite with each movement scored for different instruments -- strings, brass, winds, percussion, full tutti. Same volume, five colors.",
+        "A DJ set maintaining peak energy across five genre transitions: house, techno, drum & bass, garage, breaks. The tempo and level hold while everything else changes.",
+        "Compare the initial E=2 run (degrees 0-7): eight degrees at low energy. The E=4 quintet is the high-energy counterpart."
+      ],
+      "music_theory_parallel": "Five consecutive E=4 degrees is the engine's longest sustained energy plateau, now formally a quintet. The five members span the engine's full range of sound-production mechanisms: metronomic vocalization (flicker voice), broadband mechanical percussion (flicker drum), smooth tonal warble (grosbeak), hoarse rough warble (tanager), and clean cyclic caroling (robin). Same energy level, five fundamentally different acoustic events. This demonstrates the orchestration principle at extended scale: sustained dynamic intensity achieves variety through timbral and structural change, not volume change. The engine has proven that E=4 can sustain five degrees without repetition."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-023",
+      "title": "Black-headed Grosbeak (Degree 23)",
+      "connection": "THE CONVERGENCE TRIO -- COMPLETE. Three consecutive robin-like warbles: grosbeak (23, Cardinalidae, smooth), tanager (24, Cardinalidae, hoarse), robin (25, Turdidae, clean). The archetype arrives last. Two previews from Cardinalidae, then the original from Turdidae. Convergent architecture with divergent timbral implementation."
+    },
+    {
+      "project": "SPS-024",
+      "title": "Western Tanager (Degree 24)",
+      "connection": "PREVIEW B RESOLVED. The tanager's hoarse warble was the second preview of the robin's song. Now the robin sings clean and bright. The hoarseness was the tanager's identity; the cleanness is the robin's. Same architecture, opposite timbral surfaces."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "FIVE TURDIDAE. The Varied Thrush opened the thrush arc at degree 2 with a single sustained tone. The robin at degree 25 represents the family's opposite pole: cyclic rhythmic melody from an exposed suburban perch. Twenty-three degrees of Turdidae evolution within the engine."
+    },
+    {
+      "project": "SPS-007",
+      "title": "Hermit Thrush (Degree 7)",
+      "connection": "FIVE RICH WARBLES. The warm-voice cluster now has five members: Hermit Thrush (7), Swainson's (18), Veery (19), Grosbeak (23), Robin (25). Five mid-frequency melodic woodland voices from two families."
+    },
+    {
+      "project": "SPS-018",
+      "title": "Swainson's Thrush (Degree 18)",
+      "connection": "THE SPIRAL AND THE CYCLE. Swainson's ascending spiral (18) is open-ended -- each phrase reaches higher. The robin's caroling (25) is cyclic -- phrases repeat in predictable sequence. Two Turdidae, two approaches: linear escalation vs. circular return."
+    },
+    {
+      "project": "SPS-019",
+      "title": "Veery (Degree 19)",
+      "connection": "THE SHIMMER AND THE CLARITY. The Veery (19) descends with bilateral syrinx shimmer. The robin (25) sings clean, clipped phrases -- no shimmer, no harmonic overlap. The most otherworldly thrush vs. the most earthly."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Voice (Degree 21)",
+      "connection": "ENERGY QUINTET. Five consecutive E=4 degrees (21-25): hammer, drum, smooth warble, hoarse warble, caroling. Five forms of acoustic power. The longest sustained energy plateau in the engine."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "American Robin documented in AVI as year-round PNW resident, lawn and woodland habitat, worm-pulling specialist. Most abundant PNW land bird (~370 million continent-wide). Dawn chorus leader."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Lawn ecology: managed grassland as foraging habitat, earthworm abundance in irrigated turf, suburban commensalism. The robin-lawn system as the most widespread human-wildlife interface in North America."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Black Stax (Neo-Soul, E=4, Central District, self-released). Both are the neighborhood sound. Both the archetype everyone knows. Both sustain energy through consistent presence. Fifth consecutive E=4."
+    }
+  ],
+  "degree_arc": {
+    "position": "The caroling -- the archetype arrives. Convergence trio complete. Fifth Turdidae. First Turdus. The most recognized birdsong in North America. Lawn and woodland -- the most human-adjacent ecosystem. Year-round resident. Fifth consecutive E=4. 26th acoustic element. 24th unique species.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic spiral (7) -> ultrasonic threshold (8) -> variation (9) -> minimum signal (10) -> trill/tremolo (11) -> sawtooth sweep (12) -> ostinato (13) -> repetition-resolution (14) -> accelerando (15) -> crescendo (16) -> the hook (17) -> ascending spiral (18) -> descending spiral (19) -> sustain/the release (20) -> the hammer (21) -> resonant percussion (22) -> the groove reset (23) -> the hoarse warble (24) -> the caroling (25)",
+    "key_insight": "Degree 25 is the ANCHOR. The American Robin is the most recognized, most abundant, most culturally embedded wild bird in North America. It completes the convergence trio as the archetype that arrives last. It is the fifth Turdidae and the first Turdus -- the type genus the family is named for. Its habitat (lawn and woodland) is the most human-adjacent in the engine. Its residency (year-round) grounds the engine after two summer migrants. Its song (cyclic melodic repetition) introduces a new recognition strategy. The robin IS the bird. Everyone knows it. The engine arrives at its most familiar species at degree 25.",
+    "acoustic_element_26": "THE CAROLING -- cyclic melodic repetition of clear, bright, clipped slurred whistles grouped into recognizable subgroups. 8-20 phrase types cycled in predictable order at 3-5 phrases/sec in the 2.0-3.5 kHz band. The song teaches itself through repetition. The most recognized birdsong in North America. The 26th element: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, release, the hammer, resonant percussion, the groove reset, the hoarse warble, THE CAROLING.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide)",
+      "degree_7": "Harmonic series navigation (mathematical melody)",
+      "degree_8": "Ultra-high ascending series (audiometric boundary crossing)",
+      "degree_9": "Variation on combinatorial syntax (the cover version)",
+      "degree_10": "Minimum viable signal (1-bit presence, swarm cohesion)",
+      "degree_11": "Tremolo / trill (rapid repetition at fusion threshold)",
+      "degree_12": "Ascending sawtooth sweep (buzzy waveform ascending)",
+      "degree_13": "Ostinato (two-note repeated phrase below fusion threshold)",
+      "degree_14": "Ternary / AAB (repetition with contrasting resolution)",
+      "degree_15": "Accelerando (tempo-varying chattering series)",
+      "degree_16": "Crescendo (dynamic-varying sweet series)",
+      "degree_17": "Hook (rhythmic two-note cell, memorability through repetition)",
+      "degree_18": "Ascending spiral (sequential phrases each higher)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each lower, bilateral syrinx)",
+      "degree_20": "Trill with parametric decay / ADSR release (triple descent, fade-out)",
+      "degree_21": "The hammer (sustained discrete metronomic repetition at constant pitch, constant volume, energy 4)",
+      "degree_22": "Resonant percussion (broadband substrate-dependent mechanical percussion above fusion threshold -- the first non-vocal sound)",
+      "degree_23": "The groove reset (rich robin-like warble of rapidly alternating slurred phrases -- return to tonal melody after percussion, convergent with American Robin, both sexes sing)",
+      "degree_24": "The hoarse warble (robin-like architecture with spectral roughness -- tonal melody through grainy medium, timbral distortion as species identity, convergence trio middle member)",
+      "degree_25": "The caroling (cyclic melodic repetition of clear bright slurred whistles -- the archetype. Convergence trio resolved. 8-20 phrase types cycled predictably. The most recognized birdsong in North America)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz)",
+      "degree_8": "Ultra-high (6-10 kHz)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz)",
+      "degree_21": "Mid-range to upper-mid (1.5-4.0 kHz -- tonal, pitched, harmonic content)",
+      "degree_22": "BROADBAND (100 Hz to 8+ kHz -- no fundamental pitch, substrate-dependent peak energy 500 Hz to 4 kHz)",
+      "degree_23": "Mid-range (1.5-4.5 kHz -- warm, rich, robin-like. Peak energy 2.0-3.5 kHz. The return to tonal, pitched, harmonically rich sound after broadband percussion)",
+      "degree_24": "Mid-range (1.5-4.5 kHz -- hoarse, rough, robin-like. Peak energy 2.0-3.5 kHz. Same frequency range as degree 23 but with added spectral roughness)",
+      "degree_25": "Mid-range (2.0-4.0 kHz -- bright, clean, clipped. Peak energy 2.0-3.5 kHz. Tighter frequency range than grosbeak or tanager. Pure-toned, transparent, direct)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel)",
+      "degree_9": "Referential threat information (conserved content, varied delivery)",
+      "degree_10": "Pure presence / flock cohesion (1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep",
+      "degree_13": "Territory + pair bond through persistent repetition",
+      "degree_14": "Territory + mate attraction through narrative",
+      "degree_15": "Territory + mate attraction through urgency",
+      "degree_16": "Territory + mate attraction through brightness",
+      "degree_17": "Territory + mate attraction through the hook",
+      "degree_18": "Territory + mate attraction through ascending spiral",
+      "degree_19": "Territory + mate attraction through descending spiral",
+      "degree_20": "Territory + mate attraction through fading trill (evaporation)",
+      "degree_21": "Territory + mate attraction through the hammer (sustained metronomic vocal force at energy 4)",
+      "degree_22": "Territory + mate attraction + HABITAT QUALITY through resonant percussion (the substrate encodes territory quality)",
+      "degree_23": "Territory + mate attraction + PAIR COORDINATION through both-sex warble (vocal symmetry as reproductive strategy)",
+      "degree_24": "Territory + mate attraction + FORAGING QUALITY through hoarse warble + honest plumage signal (dual-channel honest signaling)",
+      "degree_25": "Territory + mate attraction + SEASONAL PRESENCE through cyclic caroling (year-round residency, dawn chorus leadership, the most recognized territorial declaration in North America)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood)",
+      "degree_19": "Lowland riparian (deciduous thicket, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside)",
+      "degree_21": "Open woodland (scattered trees with broken canopy, grassy openings, mosaic)",
+      "degree_22": "Forest snag (dead standing wood -- the instrument IS the habitat)",
+      "degree_23": "Mixed forest (any mixture of deciduous and conifer trees -- the broadest ecosystem category, the generalist venue)",
+      "degree_24": "Conifer forest (Douglas fir-hemlock-cedar closed canopy -- return to the cathedral, needle attenuation as acoustic filter)",
+      "degree_25": "Lawn and woodland (managed grassland adjacent to trees -- the most human-adjacent ecosystem in the engine, suburban yards, parks, gardens)"
+    }
+  },
+  "conservation": {
+    "population_estimate": "Approximately 370 million breeding individuals (Partners in Flight 2020) -- one of the most abundant land birds in North America",
+    "trend": "Stable to slightly increasing across most of range. BBS data show no significant continental decline. Some local declines in areas with heavy pesticide use (disrupts earthworm prey base).",
+    "threats": [
+      "Pesticide exposure (particularly lawn chemicals that reduce earthworm populations or cause secondary poisoning)",
+      "Window collisions (the robin's suburban habitat places it near buildings; estimated 600 million birds killed annually by window collisions in North America, with robins among the most frequent victims)",
+      "Domestic cat predation (suburban cats kill an estimated 1.3-4.0 billion birds annually in the U.S.; robins are among the most commonly killed species due to their ground-foraging behavior)",
+      "West Nile Virus (American Robins are highly susceptible and serve as amplifying hosts; significant local die-offs documented since 2002)"
+    ],
+    "conservation_status": "IUCN Least Concern. Not currently at risk at the species level. Population large, range expanding, highly adaptable."
+  },
+  "part_a_parallel": {
+    "artist": "Black Stax",
+    "degree": 25,
+    "genre": "Neo-Soul",
+    "location": "Central District, Seattle",
+    "era": "Self-released",
+    "release_type": "Self-released",
+    "shared_principle": "Both are the neighborhood sound -- so local they are invisible until you listen. Black Stax is from the Central District, not transplanted from elsewhere. The robin is from the lawn outside your door, not the deep forest. Both are the archetype everyone knows. Both sustain energy through consistent presence. Fifth consecutive E=4.",
+    "resonance_points": [
+      "The neighborhood sound: Black Stax from the Central District, the robin from the backyard lawn. Both are so local they are invisible until you listen. The yard bird and the block artist.",
+      "Self-released as self-sufficient: Black Stax operates outside major label infrastructure. The robin operates outside specialized habitat requirements. Both succeed by needing less.",
+      "The archetype everyone knows: the robin's caroling IS birdsong for non-birders. Black Stax IS the Central District sound. Not the most complex -- the most KNOWN. Recognition as currency.",
+      "Sustained energy through presence: fifth consecutive E=4. Both sustain power through consistent showing up. The robin never leaves. Black Stax keeps releasing. The plateau is the performance."
+    ]
+  }
+}
