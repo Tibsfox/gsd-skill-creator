@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 29&deg; &mdash; Ivan &ldquo;Boogaloo Joe&rdquo; Jones &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #3949AB);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .jazz-funk-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8F5E9;
+      color: #1B5E20;
+      border: 1px solid #66BB6A;
+      margin-left: 0.3rem;
+    }
+
+    .prestige-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #212121;
+      color: #FFD600;
+      border: 1px solid #757575;
+      margin-left: 0.3rem;
+    }
+
+    .catalog-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #7986CB;
+      margin-left: 0.3rem;
+    }
+
+    .unconfirmed-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFEBEE;
+      color: #B71C1C;
+      border: 1px solid #EF9A9A;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #3949AB;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #1A237E;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #1A237E;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .prestige-box {
+      background: #212121;
+      color: #ECEFF1;
+      border: 2px solid #757575;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .prestige-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFD600;
+      font-family: system-ui, sans-serif;
+    }
+    .prestige-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .prestige-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #37474F;
+      color: #ECEFF1;
+    }
+    .prestige-box td:first-child { font-weight: 600; width: 30%; color: #FFD600; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .geographic-box {
+      background: #FFEBEE;
+      border: 2px solid #EF5350;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .geographic-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #B71C1C;
+      font-family: system-ui, sans-serif;
+    }
+    .geographic-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .catalog-box {
+      background: #E8EAF6;
+      border: 2px solid #3949AB;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .catalog-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .catalog-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">29&deg;</div>
+      <div>
+        <h1>Ivan &ldquo;Boogaloo Joe&rdquo; Jones</h1>
+        <div class="subtitle">Jazz/Funk &middot; Prestige Records Soul-Jazz Guitar &mdash; 7 Albums, 1969&ndash;1974
+          <span class="energy-badge">Energy 4</span>
+          <span class="jazz-funk-badge">Jazz/Funk</span>
+          <span class="prestige-badge">Prestige</span>
+          <span class="catalog-badge">The Catalog</span>
+          <span class="unconfirmed-badge">Seattle Unconfirmed</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../028-night-owls/index.html">Degree 28&deg; (Night Owls)</a>
+      <a href="../027-the-dynamics/index.html">Degree 27&deg; (Dynamics)</a>
+      <a href="../021-polyrhythmics/index.html">Degree 21&deg; (Polyrhythmics)</a>
+      <a href="../022-foxy-apollo/index.html">Degree 22&deg; (Foxy Apollo)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Seven albums for Prestige Records between 1969 and 1974. The same
+          label that recorded Miles Davis, John Coltrane, Thelonious Monk,
+          and Sonny Rollins. The name tells you what the music does before
+          you hear a note: <em>Boogaloo Joe</em> &mdash; a verb disguised as
+          a name, a dance instruction embedded in an identity. His guitar
+          is a brook &mdash; continuous, channeled, rhythmic, never pausing
+          for applause. The organ provides the streambed. The drums provide
+          the gradient. The guitar is the water. <em>The liquid brook.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine is placed within the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Jones&rsquo; documented career centers on the East Coast; his
+          Seattle placement is a CSV curatorial assignment documented with full
+          transparency. The Duwamish Tribe remains federally unrecognized.
+          This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             GEOGRAPHIC TRANSPARENCY
+             ======================================== -->
+
+        <div class="geographic-box">
+          <h4>Geographic Transparency &mdash; Seattle Connection Unconfirmed</h4>
+          <p>The CSV places Jones in Seattle. <strong>No biographical evidence
+          confirms a Pacific Northwest connection.</strong> Jones&rsquo; documented
+          career centers entirely on the East Coast: born in Newark, NJ; recorded
+          for Prestige Records (Bergenfield, NJ); sidemen from the New York/Newark/Philadelphia
+          studio circuit. Post-1974 career is undocumented &mdash; a later relocation
+          to Seattle cannot be confirmed or ruled out.</p>
+          <p style="margin-top:0.8rem">The engine introduces <strong>The Catalog</strong>
+          as the thirtieth artist-city pattern: Jones&rsquo; seven Prestige albums are
+          present in Seattle&rsquo;s record stores, streaming queues, and DJ playlists.
+          The catalog travels where the artist may not have. Recorded music is a form
+          of presence independent of physical location.</p>
+        </div>
+
+        <!-- ========================================
+             PRESTIGE RECORDS
+             ======================================== -->
+
+        <div class="prestige-box">
+          <h4>Prestige Records &mdash; The Most Significant Label in the Engine</h4>
+          <table>
+            <tr><td>Founded</td><td>1949 by Bob Weinstock. Sold to Fantasy Records 1971.</td></tr>
+            <tr><td>Canonical Artists</td><td>Miles Davis (1951&ndash;56), John Coltrane (1957&ndash;58), Thelonious Monk (1952&ndash;54), Sonny Rollins (1951&ndash;56)</td></tr>
+            <tr><td>Jones&rsquo; Catalog</td><td>7 leader dates (1969&ndash;1974): <em>Introducing Boogaloo Joe Jones</em>, <em>No Way!</em>, <em>Right On Brother</em>, <em>What It Is</em>, <em>Boogaloo Joe</em>, <em>Snake Rhythm Rock</em>, <em>Sweetback</em></td></tr>
+            <tr><td>Label Halo</td><td>Jones&rsquo; albums sit in the same catalog as the greatest jazz recordings ever made. The algorithm does not distinguish between canonical and assembly-line &mdash; it sees <strong>Prestige Records</strong> and recommends.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY ARC
+             ======================================== -->
+
+        <h2>The Boogaloo Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">c. 1940 &mdash; Newark, New Jersey</div>
+          <p>Born <strong>Joseph Henry Jones III</strong>. Grew up in the East Coast
+          R&amp;B and jazz scene. Newark&rsquo;s proximity to New York City placed
+          Jones within the orbit of the soul-jazz organ-trio circuit &mdash; Harlem,
+          Newark, and Philadelphia nightclubs where the Hammond B-3 organ was king.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1966&ndash;1969 &mdash; The Boogaloo Craze</div>
+          <p>The <strong>boogaloo</strong> &mdash; a Latin/R&amp;B dance craze merging
+          mambo and cha-cha with African-American rhythm and blues &mdash; swept through
+          New York and Newark. Joe Cuba&rsquo;s &ldquo;Bang Bang&rdquo; (1966) and Pete
+          Rodriguez&rsquo;s &ldquo;I Like It Like That&rdquo; (1967) were the anthems.
+          Jones adopted <strong>&ldquo;Boogaloo Joe&rdquo;</strong> as his performing name:
+          a declaration that his guitar was for dancing.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1969 &mdash; Prestige Debut</div>
+          <p><em>Introducing Boogaloo Joe Jones</em>. Debut album for <strong>Prestige
+          Records</strong>. Soul-jazz guitar showcase with Danny Turner (flute, alto sax)
+          and Ben Dixon (drums). The assembly line begins.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970&ndash;1974 &mdash; The Prestige Catalog</div>
+          <p>Six more albums in five years: <em>No Way!</em> (1970, with <strong>Bernard
+          Purdie</strong>), <em>Right On Brother</em> (1970, with Rusty Bryant),
+          <em>What It Is</em> (1971, with <strong>Idris Muhammad</strong>),
+          <em>Boogaloo Joe</em> (1972), <em>Snake Rhythm Rock</em> (1973),
+          <em>Sweetback</em> (1974). Continuous production &mdash; the liquid brook.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Post-1974 &mdash; The Brook Goes Underground</div>
+          <p>No further recordings documented. The Prestige soul-jazz market collapsed
+          as disco and jazz-fusion dominated. Jones&rsquo; post-1974 career is
+          <strong>entirely undocumented</strong> &mdash; no performances, no interviews,
+          no obituary. The water is still there, but the surface channel dried up.</p>
+        </div>
+
+        <!-- ========================================
+             CATALOG PATTERN
+             ======================================== -->
+
+        <div class="catalog-box">
+          <h4>The Catalog &mdash; 30th Artist-City Pattern</h4>
+          <p>An artist whose relationship to a city is mediated through
+          <strong>recorded output rather than physical presence</strong>.
+          Jones&rsquo; seven Prestige albums exist in Seattle&rsquo;s record stores,
+          streaming queues, and DJ playlists. When a Seattle listener discovers Jones
+          through a Prestige Records recommendation or a soul-jazz playlist, Jones
+          becomes present through his recordings. The catalog travels where the artist
+          may not have. This is the first engine pattern that separates the artist&rsquo;s
+          body from the artist&rsquo;s work as distinct entities with different
+          geographic ranges.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             DISCOGRAPHY
+             ======================================== -->
+
+        <h2>Prestige Discography</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1969 &mdash; Introducing Boogaloo Joe Jones</div>
+          <p>Debut. Danny Turner (fl, as), Ben Dixon (dm). Soul-jazz guitar showcase.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970 &mdash; No Way!</div>
+          <p>Rusty Bryant (as, ts), Jimmy Lewis (b), <strong>Bernard Purdie</strong> (dm).
+          Funk-forward. Purdie on drums signals crossover intent &mdash; the same drummer
+          who played on Aretha Franklin&rsquo;s sessions.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970 &mdash; Right On Brother</div>
+          <p>Rusty Bryant (as, ts), rhythm section. The title is the era speaking.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1971 &mdash; What It Is</div>
+          <p>Rusty Bryant (as, ts), Jimmy Lewis (b), <strong>Idris Muhammad</strong> (dm).
+          New Orleans second-line rhythms enter the jazz-funk vocabulary.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1972 &mdash; Boogaloo Joe</div>
+          <p>Self-titled. Brand consolidation. The name IS the album.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1973 &mdash; Snake Rhythm Rock</div>
+          <p>The title describes the guitar&rsquo;s physical motion on the fretboard.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1974 &mdash; Sweetback</div>
+          <p>Named for <em>Sweet Sweetback&rsquo;s Baadasssss Song</em> (1971).
+          Blaxploitation-era signaling. Final documented album.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ENERGY STREAK
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Ninth Consecutive E=4 &mdash; Distribution 2:13:6:9</h4>
+          <p>Longest sustained energy streak in the engine extends to nine degrees.
+          E=4 approaches E=2&rsquo;s cumulative total (9 vs. 13).</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th></tr>
+            <tr><td>21</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td></tr>
+            <tr><td>22</td><td>Foxy Apollo</td><td>Collective-kinetic</td></tr>
+            <tr><td>23</td><td>Allen Stone</td><td>Vocal-kinetic</td></tr>
+            <tr><td>24</td><td>Ron Artis II</td><td>Dynastic-kinetic</td></tr>
+            <tr><td>25</td><td>Black Stax</td><td>Congregational-kinetic</td></tr>
+            <tr><td>26</td><td>Shaina Shepherd</td><td>Metamorphic-kinetic</td></tr>
+            <tr><td>27</td><td>The Dynamics</td><td>Incubator-kinetic</td></tr>
+            <tr><td>28</td><td>Night Owls</td><td>Ambient-kinetic</td></tr>
+            <tr><td><strong>29</strong></td><td><strong>Boogaloo Joe Jones</strong></td><td><strong>Groove-kinetic</strong></td></tr>
+          </table>
+          <p style="margin-top:0.8rem"><strong>Groove-kinetic:</strong> the purest functional
+          expression of E=4. The boogaloo is literally a <em>dance instruction</em>.
+          The name, the genre, the rhythm, and the guitar tone all point in one direction
+          &mdash; make the listener&rsquo;s body move. Energy IS the groove.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Catalog</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>An artist-city pattern where the relationship to a city is mediated through
+            <strong>recorded output</strong> rather than physical presence. Jones&rsquo;
+            seven Prestige albums exist in Seattle&rsquo;s record stores and streaming
+            queues. The catalog travels where the artist may not have. First pattern
+            that does not require physical co-location.</p>
+            <div class="examples">7 Prestige albums (1969&ndash;1974) available on all streaming platforms. The algorithm recommends Jones alongside Grant Green and George Benson to Seattle listeners.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Prestige distribution network (1949&ndash;present), record store infrastructure, streaming algorithms, phonograph (Edison 1877)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Label Halo Effect</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>A recording artist&rsquo;s discoverability amplified by the reputation of
+            their label. Jones is on <strong>Prestige Records</strong> alongside Miles Davis,
+            Coltrane, Monk, and Rollins. The algorithm sees &ldquo;Prestige&rdquo; and
+            recommends. The label is the gateway. The halo is strongest for marginal artists
+            &mdash; Jones benefits more than Davis does.</p>
+            <div class="examples">Browse Prestige on Spotify: Jones sits alongside Coltrane&rsquo;s Soultrane. The label name literally means &ldquo;distinguished reputation.&rdquo;</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Prestige Records (Weinstock 1949), Fantasy acquisition (1971), streaming algorithms, record store organization</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Boogaloo as Functional Naming</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>The performing name <strong>&ldquo;Boogaloo Joe&rdquo;</strong> is a verb
+            disguised as a noun &mdash; it describes what the music does to the listener&rsquo;s
+            body. First name in the engine that functions as a kinetic instruction. The
+            boogaloo dance craze (1966&ndash;1969) is the source of this functional grammar.</p>
+            <div class="examples">Joe Cuba &ldquo;Bang Bang&rdquo; (1966), Pete Rodriguez &ldquo;I Like It Like That&rdquo; (1967). The name IS the advertisement.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Boogaloo dance craze (NYC/Newark 1966&ndash;69), soul-jazz naming conventions (Right On Brother, What It Is, Snake Rhythm Rock)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Boogaloo Guitar Bend</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-ninth deployment. The single-note guitar line bent toward the dance
+            floor &mdash; not the concert-stage bend of a jazz solo but the groove-locked
+            bend that sustains the boogaloo rhythm. The blue note as <strong>kinetic fuel</strong>
+            rather than emotional expression. The most functionally specific blue note
+            in the engine.</p>
+            <div class="examples">Grant Green lineage: warm tone, single-note lines, blues-inflected bends serving the groove rather than showcasing.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> 28 prior deployments, Grant Green soul-jazz guitar vocabulary, boogaloo dance rhythm as kinetic context</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Degrees 21&ndash;22 &mdash; Polyrhythmics / Foxy Apollo</div>
+          <p><strong>Genre twins.</strong> Jazz/Funk at degrees 21&ndash;22 and degree 29.
+          Polyrhythmics and Foxy Apollo are the contemporary Seattle inheritors of the groove
+          Jones helped define on Prestige. Same genre label, fifty years apart. The ancestor
+          and the inheritors.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Degrees 27&ndash;28 &mdash; The Dynamics / Night Owls</div>
+          <p><strong>Liquid triad completion.</strong> Gurgle (27) + twitter (28) + brook (29).
+          The Dynamics&rsquo; proto-fusion laboratory is the unformed potential; Night Owls&rsquo;
+          crystallized repertoire is the articulate song; Jones&rsquo; assembly-line Prestige
+          output is the continuous channeled flow.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Degree 5 &mdash; Overton Berry</div>
+          <p><strong>Small-group parallel.</strong> Berry played in piano duo/trio formats
+          that mirror the organ trio&rsquo;s economy. Berry&rsquo;s piano occupies the
+          same functional role as the Hammond organ in Jones&rsquo; recordings &mdash;
+          harmonic foundation plus melodic lead.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Degree 0 &mdash; Quincy Jones</div>
+          <p><strong>Jones-to-Jones.</strong> Quincy Jones (global export, degree 0) and
+          Ivan Jones (catalog presence, degree 29). Both named Jones. Both are jazz musicians.
+          The coincidence is superficial but the structural parallel is real: both are present
+          in Seattle through their recordings more than through their residence.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 30</h4>
+          <ul>
+            <li><strong>NINTH E=4</strong> (21&ndash;29). Distribution 2:13:6:9. Groove-kinetic subtype new. Approaching E=2 total (9 vs. 13).</li>
+            <li><strong>Liquid brook</strong> = 30th acoustic element. Liquid triad complete (gurgle + twitter + brook). Track element 31.</li>
+            <li><strong>Jazz/Funk Stage 11</strong> &mdash; GENRE RECURRENCE from degrees 21&ndash;22. Breaks Soul/R&amp;B repeat.</li>
+            <li><strong>The Catalog</strong> = 30th artist-city pattern. Recorded output as geographic proxy. First pattern without physical presence.</li>
+            <li><strong>Label halo</strong> = Prestige Records. Miles, Coltrane, Monk, Rollins in same catalog. Deepest label in the engine.</li>
+            <li><strong>Boogaloo naming</strong> = first functional/kinetic name in the engine. Dance instruction as identity.</li>
+            <li><strong>Geographic discrepancy</strong> = first engine degree with unconfirmed city connection. Documented transparently.</li>
+            <li><strong>Organ trio</strong> = minimum viable band (3 musicians). Smallest ensemble documented.</li>
+            <li><strong>Post-1974 gap</strong> = career effectively ends after <em>Sweetback</em>. No documented activity.</li>
+            <li><strong>Gender gap</strong> unchanged at 6:24 (~20%). Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">29 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Version</span>
+            <span class="stat-value">v1.49.165</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz/Funk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">4 (groove-kinetic)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1960s&ndash;1980s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle (unconfirmed)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Prestige Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums</span>
+            <span class="stat-value">7 (1969&ndash;1974)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">c. 1940, Newark NJ</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Acoustic Progression</h4>
+          <div class="stat-row">
+            <span class="stat-label">Element #30</span>
+            <span class="stat-value">The liquid brook</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Series</span>
+            <span class="stat-value">Liquid triad (27&ndash;29)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Phase</span>
+            <span class="stat-value">Channeled flow</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">#30</span>
+            <span class="stat-value">The Catalog</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Key Feature</span>
+            <span class="stat-value">No physical presence</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Mechanism</span>
+            <span class="stat-value">Recorded output</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Streak</h4>
+          <div class="stat-row">
+            <span class="stat-label">Consecutive E=4</span>
+            <span class="stat-value">9 (21&ndash;29)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">2:13:6:9</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Subtype</span>
+            <span class="stat-value">Groove-kinetic</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Genre Evolution</h4>
+          <div class="stat-row">
+            <span class="stat-label">Stage</span>
+            <span class="stat-value">11</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Jazz/Funk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Note</span>
+            <span class="stat-value">Recurrence from 21&ndash;22</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Research Depth</h4>
+          <div class="stat-row">
+            <span class="stat-label">Words</span>
+            <span class="stat-value">~4,500</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Theory Nodes</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sources</span>
+            <span class="stat-value">15</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">7 degrees</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 Engine &middot; Degree 29&deg; &middot; Ivan &ldquo;Boogaloo Joe&rdquo; Jones &middot; v1.49.165</p>
+    <p><a href="../../index.html">S36 Home</a> &middot;
+       <a href="../../../index.html">Research Series</a> &middot;
+       <a href="../028-night-owls/index.html">&larr; Degree 28&deg;</a></p>
+  </footer>
+</body>
+</html>
