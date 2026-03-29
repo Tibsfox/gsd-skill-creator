@@ -1,0 +1,284 @@
+{
+  "degree": 21,
+  "artist": "Polyrhythmics",
+  "slug": "021-polyrhythmics",
+  "genre": "Jazz/Funk (instrumental funk, Afrobeat, psychedelic rock, progressive jazz)",
+  "energy": 4,
+  "era": "2011-present",
+  "location": {
+    "origin": "Seattle, Washington -- formed in late 2010 by Ben Bloom (guitarist, various Seattle funk/soul/R&B collectives, West Sound Union with Joel Ricci/Lucky Brown) and Grant Schroff (drummer, Cornish College of the Arts graduate, jazz/funk/hip-hop/reggae groups throughout Seattle)",
+    "formative": "Seattle underground deep funk scene -- the band originated as a recording project (intended to cut a single 45 RPM vinyl) that became a permanent live ensemble after the first release show generated ecstatic audience response; Fremont neighborhood base; KEXP live sessions (2016, 2020, 2023); Nectar Lounge, The Showbox, and other Seattle venues",
+    "career": "Seattle-based 2010-present; Fremont neighborhood; national touring from 2015+; festival circuit including Bumbershoot, High Sierra, Vancouver International Jazz Fest, Telluride Jazz Festival, Joshua Tree Music Festival, Psycho Las Vegas; Color Red Music (Eddie Roberts' label) from 2020; KEXP Song of the Day features; KNKX studio sessions; 15+ year continuous operation"
+  },
+  "born": null,
+  "died": null,
+  "labels": ["Independent", "Color Red Music"],
+  "members": [
+    {"name": "Ben Bloom", "role": "Guitar, co-founder", "note": "West Sound Union with Joel Ricci/Lucky Brown; effects-forward guitar (Strymon Timeline, Teese/RMC wah, Strymon Flint); guitar as rhythmic mediator between rhythm section and horn section"},
+    {"name": "Grant Schroff", "role": "Drums, co-founder", "note": "Cornish College of the Arts graduate -- extends Cornish pipeline to four members (Priester 7 faculty, Caliman 9 faculty, Watts 17 student, Schroff 21 graduate); aka 'Champagne Bubblebath'"},
+    {"name": "Nathan Spicer", "role": "Keyboards", "note": "Rhythmic mediator alongside guitar; washes and textures that bridge rhythm section and horn section"},
+    {"name": "Jason Gray", "role": "Bass", "note": "Foundational groove; pocket-creating bass lines that operate in slightly different subdivision than drums"},
+    {"name": "Lalo Bello", "role": "Percussion", "note": "Cross-rhythmic patterns against Grant Schroff's drum kit; 3:2 and 4:3 polyrhythmic layering; Afrobeat percussion vocabulary"},
+    {"name": "Scott Morning", "role": "Trumpet", "note": "Horn section lead voice; trumpet-trombone-sax trio creates Afrobeat-style call-and-response against rhythm section"},
+    {"name": "Elijah Clark", "role": "Trombone", "note": "Horn section low-mid voice; trombone slide contributes to blue note bending in ensemble context"},
+    {"name": "Art Brown", "role": "Saxophone, flute", "note": "Horn section high voice; flute featured on 'Interlube' (Life from Below); multi-instrument versatility within horn section"}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Polyrhythmic layering as compositional architecture (simultaneous stacking of multiple independent rhythmic patterns creating emergent grooves -- drums vs. percussion 3:2 cross-rhythm, bass vs. drums creating the pocket, brass vs. rhythm section Afrobeat call-and-response, guitar/keys as rhythmic mediators; the groove is not a single pattern but a field of interlocking patterns; rhythm as primary structure, not accompaniment)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/polyrhythmic-layering-compositional-architecture.md",
+      "examples": [
+        "Polyrhythmics -- seven-to-eight-piece ensemble where drums, percussion, bass, guitar, keys, and three horns each operate in semi-independent rhythmic frameworks that phase-lock at regular intervals; the listener hears a rhythmic ecosystem, not a single beat",
+        "Fela Kuti (primary influence) -- single bass lines for 20 minutes creating trance state; the polyrhythmic foundation puts listeners in a receptive state for melodic content; the groove is the message delivery system (comparison -- the source tradition)",
+        "The Meters (comparison) -- New Orleans foundational funk; the pocket as fundamental unit; four-piece creating polyrhythmic density through minimal instrumentation",
+        "Antibalas (comparison) -- Brooklyn Afrobeat orchestra; large ensemble polyrhythm in American context; horn-forward arrangement over West African rhythmic foundation",
+        "Overton Berry (degree 5) -- groove-as-composition in solo piano context; single instrument creating rhythmic density through technique (comparison -- solo vs. ensemble)",
+        "Maktub (degree 18) -- band groove with vocalist; rhythm serves the voice (comparison -- vocalist-centered vs. rhythm-sovereign)"
+      ],
+      "description": "Polyrhythmic layering is the technique of simultaneously stacking multiple independent rhythmic patterns that interact to create emergent grooves more complex than any single pattern. This operates at four levels in Polyrhythmics' music: (1) drums vs. percussion -- Grant Schroff's kit and Lalo Bello's percussion operate in different rhythmic frameworks, sharing downbeats but diverging between them (West African 3:2 cross-rhythm in funk context); (2) bass vs. drums -- Jason Gray's bass lines create the characteristic deep funk 'pocket' by operating in slightly different subdivision; (3) brass vs. rhythm section -- horn riffs in a different rhythmic cycle than the rhythm section (Afrobeat model); (4) guitar and keyboards as rhythmic mediators -- sometimes aligning with rhythm section, sometimes with horns, sometimes introducing a third layer. The result is a polymetric texture where the groove is a field of interlocking patterns. The band's name is their thesis: rhythm is the composition.",
+      "genealogy": {
+        "ancestors": ["West African 3:2 cross-rhythm -- the foundational polyrhythmic cell of sub-Saharan African music; three evenly-spaced beats against two (hemiola)", "Fela Kuti Afrobeat -- circular groove creating trance state; polyrhythmic layering as message delivery system; the direct inspiration cited by Ben Bloom", "The Meters -- New Orleans foundational funk; the pocket; minimal-instrumentation polyrhythmic density", "Antibalas -- Brooklyn Afrobeat orchestra; large-ensemble polyrhythm adapted for American context", "Dap-Kings -- retro-soul/funk ensemble; horn-forward arrangement serving groove", "Seattle underground deep funk scene -- the local context from which Polyrhythmics emerged"],
+        "relationship": "Polyrhythmic layering descends from the West African 3:2 cross-rhythm through two main branches: (1) Fela Kuti's Afrobeat, which adapted polyrhythm for large-ensemble political music, creating trance states through extended circular groove; (2) The Meters' New Orleans funk, which condensed polyrhythm into a four-piece pocket. Polyrhythmics synthesizes both branches: the large-ensemble scale of Afrobeat with the groove density of New Orleans funk. This is the engine's first rhythm-primary ensemble -- every prior degree placed rhythm in dialogue with melody, harmony, or lyrics. At degree 21, rhythm is sovereign."
+      }
+    },
+    {
+      "concept": "Groove-as-composition at ensemble scale (the groove is sovereign -- no vocals, no lyrics to share compositional authority; rhythm is the primary structure and everything else serves it; third entry in the groove-as-composition thread: Berry 5 solo piano, Maktub 18 band, Polyrhythmics 21 ensemble; each escalation adds musicians and rhythmic layers while deepening groove sovereignty)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/groove-as-composition-ensemble-scale.md",
+      "examples": [
+        "Polyrhythmics (degree 21) -- seven-to-eight-piece instrumental ensemble where the groove IS the composition; no vocalist, no lyrics; rhythm is sovereign; democratic filter system means composition emerges from collective rhythmic interaction",
+        "Overton Berry (degree 5) -- groove-as-composition in solo piano context; the groove is the primary compositional element but one person generates it (comparison -- solo vs. ensemble, E=2 vs. E=4)",
+        "Maktub (degree 18) -- groove-as-composition in band context but WITH vocalist; Watts's voice shares compositional authority with the groove (comparison -- vocalist-centered vs. rhythm-sovereign, E=3 vs. E=4)",
+        "Fela Kuti (external reference) -- groove-as-composition at its most extreme; twenty-minute single-groove sections where the rhythm IS the content and the vocals are messages delivered through the trance"
+      ],
+      "description": "Groove-as-composition at ensemble scale represents the culmination of a thread that began at degree 5 with Overton Berry's solo piano groove. At degree 21, the groove achieves full sovereignty: there are no vocals, no lyrics, no competing compositional authority. Seven-to-eight musicians generate a polyrhythmic field that IS the composition. The democratic 'filter system' means every member writes and arranges, but only what serves the groove survives the collective filtering process. This is composition-as-polyrhythm: multiple creative voices operating simultaneously, with the ensemble resolving them into unified output. The three-degree thread traces an escalation: solo groove (Berry, E=2), band groove with voice (Maktub, E=3), ensemble groove sovereign (Polyrhythmics, E=4). Each step adds musicians, rhythmic layers, and energy while deepening groove primacy.",
+      "genealogy": {
+        "ancestors": ["Groove-as-composition -- Berry (degree 5); solo piano groove as primary compositional element; one person generating rhythmic density through technique", "Groove-as-composition -- Maktub (degree 18); band groove with vocalist; rhythm serves the voice but groove IS the compositional foundation", "Afrobeat ensemble composition -- Fela Kuti; large-ensemble groove where rhythm is sovereign and vocal messages are delivered through the trance state", "Democratic ensemble composition -- jazz collective improvisation tradition; multiple voices resolving into unified output"],
+        "relationship": "Three entries in the groove-as-composition thread trace an escalation from solo (Berry 5, E=2) through band-with-voice (Maktub 18, E=3) to sovereign-ensemble (Polyrhythmics 21, E=4). Each step adds musicians and energy while deepening groove primacy. At degree 21, the groove achieves total sovereignty -- no vocals compete for compositional authority. The democratic filter system ensures composition emerges from collective rhythmic interaction, not individual authority."
+      }
+    },
+    {
+      "concept": "Democratic filter system (collective compositional process where every member writes and arranges; individual ideas are filtered through ensemble rehearsal and performance until only what serves the groove survives; composition-as-polyrhythm where multiple creative voices resolve into unified output; contrasts with Maktub's centered creative authority and FMR's rotating membership)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/composition/democratic-filter-system-ensemble-composition.md",
+      "examples": [
+        "Polyrhythmics (degree 21) -- the 'filter system' named by the band themselves; seventh album titled 'Filter System' (2023) after the process; every member writes, the ensemble filters; only what serves the groove survives",
+        "Maktub (degree 18) -- centered creative authority (Watts as creative engine); composition flows from a single center through the band (comparison -- centered vs. distributed)",
+        "Fly Moon Royale (degree 19) -- collective with rotating membership and central authority (Parker); different musicians contribute different textures but the central vision remains (comparison -- rotating vs. stable membership)"
+      ],
+      "description": "The democratic filter system is Polyrhythmics' named compositional process: every member writes and arranges, individual ideas enter the ensemble, and the group collectively filters them through rehearsal and performance until only what serves the groove survives. The seventh album 'Filter System' (2023) is titled after this process. This organizational principle mirrors the band's musical technique: just as polyrhythmic layering creates emergent grooves from multiple rhythmic streams, the filter system creates compositions from multiple creative voices. The result is music that no single member authored -- it emerged from the ensemble's collective intelligence. This contrasts sharply with Maktub (degree 18), where Watts served as a centered creative engine, and with FMR (degree 19), where Parker maintained central authority over rotating membership.",
+      "genealogy": {
+        "ancestors": ["Collective jazz improvisation -- the tradition of ensemble-generated composition through interaction", "Afrobeat ensemble model -- Fela Kuti's large-ensemble process where rhythmic patterns emerge from collective interaction rather than individual composition", "Maktub centered composition (degree 18) -- the immediate contrast; single creative center vs. distributed authority", "FMR collective composition (degree 19) -- rotating membership with central authority vs. stable membership with distributed authority"],
+        "relationship": "The democratic filter system extends the organizational spectrum established at degrees 18-19. Three models now exist: centered authority with fixed band (Maktub 18), central authority with rotating collective (FMR 19), and distributed authority with fixed ensemble (Polyrhythmics 21). The filter system is the most democratic: no single member controls the output. The composition emerges from collective filtering, mirroring the polyrhythmic music itself."
+      }
+    },
+    {
+      "concept": "Blue note -- funk-brass (twenty-first deployment; horn section bending between minor and major thirds in ensemble funk context; the blue note as collective expression rather than individual voice; three horns sharing the bending -- trumpet, trombone, saxophone; funk-brass deployment connects to assertive brass at degree 15 Marriott while adding ensemble dimensionality)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/blue-note-funk-brass-ensemble.md",
+      "examples": [
+        "Polyrhythmics (degree 21) -- horn section (Morning trumpet, Clark trombone, Brown sax) bending collectively in funk/Afrobeat context; the blue note distributed across three instruments rather than concentrated in one voice",
+        "Thomas Marriott (degree 15) -- assertive brass blue note; single trumpet projection; energy-3 (comparison -- solo brass vs. ensemble brass)",
+        "Whitney Monge (degree 20) -- americana-soul blue note; vocal bending returning to country-blues origin (comparison -- vocal vs. brass, solo vs. ensemble)",
+        "Fela Kuti (external) -- Afrobeat horn sections bending blue notes over polyrhythmic foundation; the direct precedent for ensemble brass blue note deployment"
+      ],
+      "description": "Twenty-first deployment of the blue note thread. The funk-brass blue note is the first deployment where the technique is distributed across multiple instruments simultaneously. Three horns (trumpet, trombone, saxophone) share the blue note bending, creating a thicker, more harmonically complex version of the technique than any single-instrument deployment. This connects to Marriott's assertive brass blue note at degree 15 but adds ensemble dimensionality: where Marriott's trumpet bent alone, Polyrhythmics' horn section bends together. The Afrobeat influence brings the blue note into a specifically African-diasporic context -- the technique connects West African vocal traditions (through the diaspora) to modern ensemble funk brass.",
+      "genealogy": {
+        "ancestors": ["Blue note -- all twenty prior deployments (degrees 0-20)", "Blue note -- assertive brass (degree 15, Marriott); single trumpet blue note", "Blue note -- americana-soul (degree 20, Monge); vocal bending in blues/folk context", "Afrobeat horn section blue note -- Fela Kuti; ensemble brass bending in politically charged large-ensemble context"],
+        "relationship": "Twenty-one deployments across twenty-two degrees. First ensemble deployment -- the blue note distributed across three instruments rather than concentrated in one. Twenty-one mechanisms: bass-line (0), guitar (1), vocal (3), trumpet-warm (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), sax voice (9), alto cool bend (10), flute bent (11), bebop chromatic (12), modal integration (13), post-genre floating (14), assertive brass (15), synthesizer pitch bend (16), vocal glide (17), soul-vocal (18), collective-soul (19), americana-soul (20), funk-brass (21). The funk-brass deployment is the first to distribute the technique across multiple simultaneous instruments."
+      }
+    }
+  ],
+  "cross_references": ["S36-018", "S36-019", "S36-017", "S36-007", "S36-005", "S36-016", "S36-001", "S36-020"],
+  "seattle_connection": "Seven-to-eight-piece instrumental ensemble formed in Seattle's underground deep funk scene in late 2010 by Ben Bloom and Grant Schroff. Fremont neighborhood base (sixth neighborhood in the engine). Cornish pipeline extended -- Schroff is a Cornish College of the Arts graduate (fourth member: Priester 7 faculty, Caliman 9 faculty, Watts 17 student, Schroff 21 graduate). FIRST ENERGY-4 ARTIST in twenty-two degrees -- the energy ceiling rises. Six albums plus EPs over fifteen years: self-titled (2011), Labrador Lounge EP (2012), Libra Stripes (2013, EXCLAIM! 8/10), Octagon (2015), Caldera (2017, best-ranked), Man from the Future (2020, Color Red Music), Fondue Party EP (2020), Filter System (2023), Life from Below (2025). Multiple KEXP sessions (2016, 2020, 2023). KNKX coverage. Festivals: Bumbershoot, High Sierra, Vancouver Jazz, Telluride Jazz. KEXP/Amanda Gorman 'Zion' mashup (2021). First vocal collaboration with Adryon de Leon on 'Smoke & Mirrors' (2025). THE ENSEMBLE ANCHOR pattern: crystallized existing deep funk scene into permanent touring/recording entity. Jazz/Funk as FIFTH genre evolution stage -- funk named in genre label for first time. THE RELEASE as twenty-second acoustic element -- ADSR envelope completes. Polyrhythmic layering as primary technique. Democratic filter system as organizational principle. Groove-as-composition thread extended (Berry 5, Maktub 18, Polyrhythmics 21). Guitar mediator model (Bloom 21, between Frisell 1 texture and Monge 20 rhythm-section).",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Polyrhythmic layering as compositional architecture (simultaneous stacking of multiple independent rhythmic patterns -- drums vs. percussion 3:2 cross-rhythm, bass vs. drums pocket, brass vs. rhythm section call-and-response, guitar/keys as mediators; first rhythm-primary ensemble in the engine; the groove is a field of interlocking patterns, not a single beat)",
+      "Groove-as-composition at ensemble scale (third entry: Berry 5 solo piano E=2, Maktub 18 band-with-voice E=3, Polyrhythmics 21 ensemble-sovereign E=4; each escalation adds musicians, layers, and energy while deepening groove primacy; at degree 21 groove achieves total sovereignty -- no vocals compete)",
+      "Democratic filter system (every member writes and arranges; individual ideas filtered through ensemble until only what serves groove survives; composition-as-polyrhythm; contrasts with Maktub centered authority 18 and FMR rotating membership 19; three organizational models now documented)",
+      "Blue note -- twenty-first deployment; funk-brass (horn section bending collectively; first ensemble deployment where blue note distributed across trumpet, trombone, saxophone simultaneously; connects assertive brass 15 to Afrobeat ensemble tradition)"
+    ],
+    "immediate_items": [
+      "FIRST ENERGY-4: Energy ceiling now 4. Distribution 2:13:6:1. E-3 streak (15-20) BROKEN by escalation. Track whether degree 22 continues E=4 or returns to E=3.",
+      "The release (NEW at 21): twenty-second acoustic element. ADSR envelope now complete (Attack 0-3, Decay 4-10, Sustain 11-20, Release 21). Track new cycle at degree 22.",
+      "Fremont (NEW at 21): sixth neighborhood thread. Music-making infrastructure (Studio Litho, Nectar Lounge, Hidden Hall, Earshot Jazz HQ, Dusty Strings, Jive Time Records). Track whether subsequent degrees return.",
+      "The Ensemble Anchor (NEW at 21): twenty-second artist-city pattern. Large stable ensemble crystallizing existing scene. Track.",
+      "Jazz/Funk (NEW at 21): fifth genre evolution stage. Funk named as genre component for first time. Track continuation at degree 22.",
+      "Cornish pipeline EXTENDED to four members: Priester (7 faculty), Caliman (9 faculty), Watts (17 student), Schroff (21 graduate). Teacher-to-student genealogy. Track fifth member.",
+      "Groove-as-composition EXTENDED to three entries: Berry (5), Maktub (18), Polyrhythmics (21). Track.",
+      "Band organizational spectrum: THREE models (Maktub 18 centered/fixed, FMR 19 central/rotating, Polyrhythmics 21 distributed/fixed). Track.",
+      "Guitar thread EXTENDED: three models (Frisell 1 texture, Monge 20 rhythm-section, Bloom 21 mediator). Track.",
+      "Gender gap CONTINUES: 3:19. All-male ensemble at degree 21. Adryon de Leon guest vocal on 'Smoke & Mirrors' 2025 but not membership. Track.",
+      "Blue note thread EXTENDED to twenty-one deployments across twenty-two degrees. Funk-brass at 21. First ensemble deployment. Track.",
+      "Duwamish acknowledgment: INHERITED. All subsequent releases inherit from degree 20.",
+      "All carry-forward items from degrees 5-20 not listed here."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: TWENTY-TWO named patterns (adding The Ensemble Anchor at degree 21). Classify every degree.",
+      "Educator spectrum: eight modes. Polyrhythmics operates as educator-through-example (the democratic filter system teaches compositional process by demonstrating it). Track.",
+      "Composition-improvisation spectrum: SEVENTEEN positions. Democratic-ensemble-filter added at degree 21 (collective composition through ensemble interaction, distinct from individual improvisation). Track.",
+      "Rhythmic spectrum: SEVENTEEN positions. Polyrhythmic-layering-ensemble added at degree 21 (multiple simultaneous independent rhythmic patterns). Track.",
+      "Chromaticism thread: TWENTY-ONE deployments. Funk-chromatic added at degree 21 (chromatic horn riffs and guitar figures in funk/Afrobeat context). Track.",
+      "Blue note thread: TWENTY-ONE deployments across twenty-two degrees. Funk-brass at 21 -- FIRST ENSEMBLE deployment. Twenty-one mechanisms documented. Track.",
+      "Artist-as-institution spectrum: TWENTY-TWO positions. The Ensemble Anchor added (no institution appointed them; they became the institution through fifteen years of ensemble mass). Track.",
+      "Keyboard/piano theory branch: ten nodes. Stable. Track.",
+      "Vocal theory branch: TEN nodes. Stable (Polyrhythmics is instrumental). Track.",
+      "Bass theory branch: SIX nodes. EXTENDED at 21 (Jason Gray's pocket-creating bass lines in polyrhythmic context). Track.",
+      "Brass theory branch: FIVE nodes. EXTENDED at 21 (three-horn ensemble: Morning trumpet, Clark trombone, Brown sax/flute). Track.",
+      "Saxophone/reed theory branch: EIGHT nodes. EXTENDED at 21 (Art Brown sax and flute). Track.",
+      "Flute theory branch: THREE nodes. EXTENDED at 21 (Art Brown flute on 'Interlube'). Track.",
+      "Guitar theory branch: EXTENDED at 21. Three models: texture (1 Frisell), rhythm-section (20 Monge), mediator (21 Bloom). Track.",
+      "Percussion theory branch: NEW at 21. Lalo Bello -- dedicated percussion separate from drum kit. First dedicated percussion node. Track.",
+      "Body-as-sound-source thread: THIRTEEN instruments. Extended (percussion instruments at 21). Track.",
+      "Amiga Principle gradient: SEVENTEEN scales. Large-ensemble Amiga Principle added at degree 21 (seven-to-eight people maximizing rhythmic density through polyrhythmic layering and democratic composition). Track.",
+      "Educational pipeline diversity: TWENTY-TWO pipelines. Extended (Cornish graduate-to-band pipeline). Track.",
+      "Gender-barrier gradient: 3:19. UNCHANGED from degree 20. All-male ensemble. Track.",
+      "Energy spectrum: 2:13:6:1. FIRST E=4. Energy-4 subtype: ensemble-kinetic (combined rhythmic output of large instrumental ensemble whose primary function is to move bodies). Track.",
+      "Within-family groups: brass QUARTET (4/7/15/21). EXTENDED at 21 -- now matches saxophone/reed count. Track.",
+      "Genre evolution: FIVE stages. Funk-primary compound at degree 21. Funk named in genre label for first time. Track.",
+      "Label threads: Color Red Music NEW at 21 (Eddie Roberts/New Mastersounds label). Independent extended. Track.",
+      "Groove-as-composition: THREE entries (5, 18, 21). Each escalates ensemble size and energy. Track.",
+      "Band-as-organizational-type: THREE entries (Maktub 18 fixed/centered, FMR 19 collective/central, Polyrhythmics 21 fixed/distributed). Three organizational models. Track.",
+      "Cornish pipeline: FOUR members (7, 9, 17, 21). Faculty-student-graduate genealogy. Track fifth.",
+      "Fremont geographic thread: NEW at 21. First entry. Music-making infrastructure neighborhood. Track.",
+      "Deep funk scene thread: NEW at 21. Seattle underground deep funk as musical ecosystem. Track.",
+      "Recording project origin: NEW at 21. Band formed as recording project, became live ensemble. Track.",
+      "Fela Kuti influence thread: NEW at 21. Explicit Afrobeat lineage. Track.",
+      "45 RPM vinyl culture: NEW at 21. Deep funk's physical-media foundation. Track."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "Polyrhythmics",
+      "year": "2011",
+      "label": "Self-released",
+      "format": "Full-length (debut)",
+      "status": "released",
+      "significance": "Debut album. Originally intended as a recording project. The release show transformed the studio project into a permanent live band when audience response proved the music demanded live performance."
+    },
+    {
+      "title": "Labrador Lounge",
+      "year": "2012",
+      "label": "Self-released",
+      "format": "EP",
+      "status": "released",
+      "significance": "Early EP establishing the instrumental, brass-forward, groove-centric identity. Solidified the seven-piece configuration."
+    },
+    {
+      "title": "Libra Stripes",
+      "year": "2013",
+      "label": "Self-released",
+      "format": "Full-length",
+      "status": "released",
+      "significance": "EXCLAIM! 8/10: 'among the best of the genre, a must-have for fans.' City Arts Album of the Month November 2013. First national critical attention. 2022 remaster on vinyl."
+    },
+    {
+      "title": "Octagon",
+      "year": "2015",
+      "label": "Self-released",
+      "format": "Full-length (8 tracks)",
+      "status": "released",
+      "significance": "Title structural (one track per member). National touring begins. Psychedelic palette expands over Afrobeat foundation. KEXP live session 2016."
+    },
+    {
+      "title": "Caldera",
+      "year": "2017",
+      "label": "Self-released",
+      "format": "Full-length",
+      "status": "released",
+      "significance": "Ranked as best Polyrhythmics album by Best Ever Albums. Most cinematic work. KNKX: 'calling to mind Antibalas, the Dap-Kings, The Meters, and Fela Kuti.' Erupting psych-funk."
+    },
+    {
+      "title": "Man from the Future",
+      "year": "2020",
+      "label": "Color Red Music",
+      "format": "Full-length",
+      "status": "released",
+      "significance": "First release on Color Red (Eddie Roberts' label). Most evocative and cinematic. Glide Magazine: 'transcends formula, creates vibe pockets.' KEXP 10th anniversary session."
+    },
+    {
+      "title": "Fondue Party",
+      "year": "2020",
+      "label": "Color Red Music",
+      "format": "EP (5 tracks)",
+      "status": "released",
+      "significance": "Companion to Man from the Future. Downtempo, chilled-out side with heavy dub influence. Limited edition citron vinyl. Discogs average rating 4.9/5."
+    },
+    {
+      "title": "Filter System",
+      "year": "2023",
+      "label": "Self-released",
+      "format": "Full-length (10 tracks)",
+      "status": "released",
+      "significance": "Seventh album. Title names the band's democratic compositional process. Recorded live in studio. KEXP November 2023 session."
+    },
+    {
+      "title": "Life from Below",
+      "year": "2025",
+      "label": "Self-released",
+      "format": "Full-length (8 tracks)",
+      "status": "released",
+      "significance": "Fifteenth anniversary album. First vocal collaboration with Adryon de Leon on 'Smoke & Mirrors.' FunkCity: 'outstanding album.' KNKX August 2025 studio session. Limited edition sky blue with white swirl vinyl."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Maktub", "relationship": "Two fixed bands in the engine. Vocalist-centered (4 members, Watts creative engine, Soul/Jazz, E=3) vs. rhythm-centered (7-8 members, democratic filter system, Jazz/Funk, E=4). The band-funk spectrum's two poles: voice-led vs. groove-sovereign.", "future_degree": 18},
+    {"name": "Fly Moon Royale", "relationship": "Collective vs. ensemble. FMR rotates membership around central authority. Polyrhythmics anchors with stable membership and distributed authority. Both multi-musician units from the same Seattle scene, divergent organizational models.", "future_degree": 19},
+    {"name": "Reggie Watts", "relationship": "Cornish pipeline overlap. Watts (student, degree 17) and Schroff (graduate, degree 21) in the same Seattle funk/experimental scene. Solo performer vs. ensemble drummer. Both Cornish products with divergent career paths.", "future_degree": 17},
+    {"name": "Julian Priester", "relationship": "Cornish pipeline genealogy. Priester (faculty, degree 7) and Schroff (graduate, degree 21). Teacher-to-student thread spanning fourteen degrees. Four Cornish members now documented.", "future_degree": 7},
+    {"name": "Overton Berry", "relationship": "Groove-as-composition thread: Berry (solo piano, E=2, degree 5), Maktub (band, E=3, degree 18), Polyrhythmics (ensemble, E=4, degree 21). Each escalation adds musicians, layers, and energy.", "future_degree": 5},
+    {"name": "Jeff Lorber", "relationship": "Funk in the engine: electronic funk (Lorber, synthesizer Jazz Fusion, degree 16) vs. analog ensemble funk (Polyrhythmics, Afrobeat polyrhythm, degree 21). Opposite production philosophies.", "future_degree": 16},
+    {"name": "Whitney Monge", "relationship": "Immediate predecessor. Solo (E=3, degree 20) to large ensemble (E=4, degree 21). Most extreme organizational shift in the engine. Both independent, both connected to Fremont infrastructure (Monge at Studio Litho, Polyrhythmics in Fremont venue ecosystem).", "future_degree": 20},
+    {"name": "Bill Frisell", "relationship": "Guitar thread extended: texture (Frisell, degree 1) to rhythm-section (Monge, degree 20) to mediator (Bloom, degree 21). Three guitar models spanning twenty degrees.", "future_degree": 1}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones -- Garfield class of 1950",
+    "degree_3": "Ernestine Anderson -- Garfield, same era as Jones",
+    "degree_7": "Julian Priester -- NOT Garfield. DuSable (Chicago). Cornish College of the Arts faculty.",
+    "degree_9": "Hadley Caliman -- NOT Garfield. LA jazz scene. Cornish College of the Arts faculty.",
+    "degree_17": "Reggie Watts -- NOT Garfield. Great Falls, MT. Cornish College of the Arts student.",
+    "degree_21": "Grant Schroff (Polyrhythmics co-founder) -- NOT Garfield. Cornish College of the Arts graduate. Fifteenth consecutive non-Garfield degree (7-21). Cornish pipeline now FOUR members: faculty (7, 9), student (17), graduate (21).",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": false,
+    "the_erasure": false,
+    "pedagogue_draw": false,
+    "quiet_draw": false,
+    "the_seeker": false,
+    "working_pedagogue_draw": false,
+    "late_homestead": false,
+    "salon_keeper": false,
+    "the_prodigal": false,
+    "the_institutional_anchor": false,
+    "the_prodigy_export": false,
+    "the_builder_stayer": false,
+    "the_talent_incubator": false,
+    "the_uncategorizable": false,
+    "the_workshop": false,
+    "the_new_root": false,
+    "the_street_laureate": false,
+    "the_ensemble_anchor": true,
+    "native_born": false,
+    "self_taught": false,
+    "institution_type": "the ensemble anchor -- large stable ensemble formed from within existing deep funk scene; gathered best available players; developed distinctive collective identity through fifteen years of live performance; became a fixture that other musicians and audiences orient around; no institution appointed them, they became the institution through ensemble mass and continuous performance",
+    "amiga_principle": "large_ensemble_polyrhythmic_layering_democratic_composition",
+    "gender": "all-male (seven-to-eight male members; gender gap continues at 3:19; Adryon de Leon guest vocalist on 2025 'Smoke & Mirrors' but not band member)",
+    "instrumentalist": true,
+    "gender_barrier": "CONTINUES -- all-male ensemble; gender gap unchanged at 3:19 (women:men); third consecutive male/male-led entry after gender gap was broken at degree 20; first vocal collaboration with Adryon de Leon (2025) introduces female voice but not membership"
+  },
+  "duwamish_acknowledgment": "Inherited from degree 20. Fremont sits on the north shore of the Lake Washington Ship Canal, on land the Duwamish and related Coast Salish peoples used for seasonal camps, fishing, and trade along the waterways connecting Lake Union to Salmon Bay. All releases inherit the Duwamish territorial acknowledgment established at degree 20.",
+  "sources_count": 32,
+  "word_count_research": 5000,
+  "release_date": "2026-03-29"
+}
