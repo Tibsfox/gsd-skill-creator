@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 15&deg; &mdash; Wilson&rsquo;s Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.accelerando { background: #D84315; }
+    .theory-icon.chattering { background: #F57F17; }
+    .theory-icon.noresolution { background: #4A148C; }
+    .theory-icon.energy { background: #C62828; }
+    .theory-icon.riparian { background: #1B5E20; }
+    .theory-icon.tempo { background: #E65100; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Accelerando card (unique to degree 15) */
+    .accelerando-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FF8A65 30%, #FFCCBC 100%);
+      border: 1px solid #E64A19;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .accelerando-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Energy breakthrough card */
+    .energy-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF9A9A 100%);
+      border: 1px solid #E53935;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Riparian card */
+    .riparian-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .riparian-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">15&deg;</div>
+      <div class="release-title-block">
+        <h2>Wilson&rsquo;s Warbler</h2>
+        <div class="scientific">Cardellina pusilla &middot; Family Parulidae (New World Warblers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Rapid Chattering Chi-Chi-Chet &middot; Willow Riparian &middot; Summer Migrant &middot; Energy 3</div>
+
+    <blockquote>
+      A bright yellow flash through a willow thicket along a mountain stream. Black cap,
+      impossible to miss. The song comes in a burst: chi-chi-chi-chi-chi-chet-chet-chet,
+      each note closer to the last, the tempo climbing, the rhythm compressing, the urgency
+      building &mdash; and then silence. No resolution. No contrasting final note. The song
+      was still accelerating when it stopped. The first energy-3. The first accelerando.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Father of American Ornithology</h2>
+        <p>
+          The Wilson&rsquo;s Warbler is a small passerine of the family <strong>Parulidae</strong>
+          (New World warblers), the second representative of this family in the engine. Named for
+          <strong>Alexander Wilson (1766&ndash;1813)</strong>, a Scottish-American naturalist
+          universally recognized as the <strong>&ldquo;Father of American Ornithology.&rdquo;</strong>
+          Wilson produced <em>American Ornithology</em> (1808&ndash;1814) &mdash; the first
+          comprehensive illustrated account of North American birds &mdash; describing 268 species.
+          The bird was originally <em>Muscicapa pusilla</em> (Wilson, 1811), later placed in
+          <em>Wilsonia</em> for over a century, before molecular phylogenetics moved it to
+          <strong><em>Cardellina</em></strong> in 2011.
+        </p>
+        <p>
+          At <strong>4.3&ndash;5.0 inches</strong> and <strong>5&ndash;10 grams</strong>, one of the
+          smallest North American warblers. Males are <strong>bright olive-yellow</strong> above and
+          <strong>vivid yellow</strong> below, with a conspicuous <strong>glossy black cap</strong>
+          &mdash; the bird&rsquo;s most diagnostic field mark. The overall impression: a tiny,
+          hyperactive, entirely yellow-and-olive bird with a black beret. Where the MacGillivray&rsquo;s
+          (degree 14&deg;) hides, the Wilson&rsquo;s is <strong>conspicuously active</strong>.
+        </p>
+
+        <!-- Energy Breakthrough -->
+        <div class="energy-card">
+          <h3>First Energy-3: The Circle Heats Up</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            For fourteen degrees, the engine operated at energy levels 0&ndash;2. Fifteen species and
+            the loudest were merely &ldquo;present.&rdquo; The Wilson&rsquo;s Warbler
+            <strong>breaks the ceiling</strong>. Energy 3. The chattering chi-chi-chet carries &mdash;
+            insistent, rapid, percussive. The tempo acceleration amplifies perceived intensity: a
+            signal that is getting faster <em>feels</em> louder.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Energy</th><th>Species (Count)</th><th>Character</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0</td><td>Heron (1)</td><td>Silence</td></tr>
+              <tr><td>1</td><td>Kinglet, Bushtit, Siskin (3)</td><td>Whisper, noise floor</td></tr>
+              <tr><td>2</td><td>Wren, Thrush, Chickadees, Owl, Nuthatch, Flycatcher, H. Thrush, Junco, Vireo, MacGillivray&rsquo;s (11)</td><td>Present, audible</td></tr>
+              <tr style="background: #FFEBEE; font-weight: 600;"><td>3</td><td><strong>Wilson&rsquo;s Warbler (1)</strong></td><td><strong>Intense, urgent, carrying</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Chi-Chi-Chet</h2>
+        <h3>Accelerando: Speed as Structure</h3>
+        <p>
+          The Wilson&rsquo;s Warbler&rsquo;s song is a rapid series of <strong>10&ndash;15 sharp,
+          chattering notes</strong> delivered over <strong>1.5&ndash;2.5 seconds</strong>. The
+          defining characteristic: <strong>the song accelerates</strong>. Initial notes spaced
+          ~0.1&ndash;0.15 seconds apart; terminal notes compress to ~0.06&ndash;0.08 seconds.
+          The pitch drops slightly toward the end. The trajectory: <strong>faster and lower</strong>.
+          An accelerating descent. A ball rolling downhill.
+        </p>
+
+        <!-- Accelerando Card -->
+        <div class="accelerando-card">
+          <h3>The Rallentando Inverse</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            This is the first species in the engine defined by <strong>TEMPO CHANGE within a single
+            vocalization</strong>. Every previous species maintained constant tempo. The Wilson&rsquo;s
+            Warbler&rsquo;s song IS the tempo change.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Tempo Behavior</th><th>Musical Term</th><th>Meaning</th><th>Species</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Slowing down</td><td>Ritardando</td><td>Closure, arrival, &ldquo;we are done&rdquo;</td><td>(none yet)</td></tr>
+              <tr style="background: #FBE9E7; font-weight: 600;"><td>Speeding up</td><td><strong>Accelerando</strong></td><td><strong>Urgency, momentum, &ldquo;we are NOT done&rdquo;</strong></td><td><strong>Wilson&rsquo;s (15&deg;)</strong></td></tr>
+              <tr><td>Constant</td><td>A tempo</td><td>Steady state</td><td>All previous (0&ndash;14&deg;)</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #BF360C; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The song <strong>accelerates and stops</strong>. No resolution. No contrasting terminal
+            element. The momentum was still building when the sound stopped. The EDM build-up
+            without the drop. The punk song that crashes to a halt.
+          </p>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Structure</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Chi syllables (opening)</td><td>4.5&ndash;7 kHz</td><td>~0.1&ndash;0.15 s each</td><td>5&ndash;8 at moderate tempo</td><td>Setup</td></tr>
+            <tr><td>Chet syllables (terminal)</td><td>3.5&ndash;5.5 kHz</td><td>~0.06&ndash;0.08 s each</td><td>5&ndash;7 at accelerated tempo</td><td>Build</td></tr>
+            <tr><td>Full song</td><td>3.5&ndash;7 kHz</td><td>1.5&ndash;2.5 s</td><td>Accelerating series</td><td>Territory, mate</td></tr>
+            <tr><td>Chip note</td><td>3&ndash;5 kHz</td><td>~0.05 s</td><td>Single</td><td>Contact, alarm</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Riparian -->
+        <h2>Willow Riparian &mdash; The Third Streamside Voice</h2>
+
+        <div class="riparian-card">
+          <h3>The Riparian Thread</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Third riparian species in the engine. The most strictly streamside obligate yet &mdash;
+            the Wilson&rsquo;s Warbler tracks the willow, the willow tracks the water.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Riparian Type</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pacific-slope Flycatcher</td><td>6&deg;</td><td>Alder-dominated streamside forest</td></tr>
+              <tr><td>MacGillivray&rsquo;s Warbler</td><td>14&deg;</td><td>Dense shrub (includes riparian)</td></tr>
+              <tr style="background: #E8F5E9; font-weight: 600;"><td><strong>Wilson&rsquo;s Warbler</strong></td><td><strong>15&deg;</strong></td><td><strong>Willow-dominated streamside thickets</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1B5E20; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Willows are keystone riparian plants: first to colonize disturbed stream banks,
+            stabilize soil with dense roots, shade streams for salmonid habitat. Over 30
+            <em>Salix</em> species in the PNW. The Wilson&rsquo;s needs the structure willows
+            create: dense, moist, shrubby, streamside.
+          </p>
+        </div>
+
+        <p>
+          The Wilson&rsquo;s Warbler breeds in <strong>willow riparian</strong> habitat &mdash;
+          dense stands of willow, alder, and moist shrubby vegetation along streams, rivers,
+          bogs, and wet meadows. Strongly associated with willow thickets in mountain valleys,
+          subalpine meadow margins, and lowland stream corridors. Also uses moist forest clearings,
+          avalanche chutes, and boggy areas where willow and shrub alder dominate.
+        </p>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Accelerando.</strong> The song IS a tempo increase within a single phrase.
+          In classical music: the device of climax (Beethoven, Liszt, Ravel&rsquo;s
+          <em>Bol&eacute;ro</em>). In electronic music: the build-up before the drop &mdash;
+          hi-hats getting faster, snare rolls compressing, then silence. In jazz: the double-time
+          passage where the soloist accelerates over the changes. In punk: songs that get faster
+          until they crash.
+        </p>
+        <p>
+          <strong>No resolution.</strong> The song accelerates and stops. No contrasting terminal
+          element. No arrival. Where the MacGillivray&rsquo;s (degree 14&deg;) resolves with a
+          &ldquo;sweet&rdquo; &mdash; the first narrative arc &mdash; the Wilson&rsquo;s builds
+          momentum and is cut off. The build-up without the drop. The interrupted cadence. The
+          punk ending: just stop.
+        </p>
+        <p>
+          <strong>Chattering texture.</strong> Rapid discrete notes approaching the fusion
+          threshold identified at degree 11&deg; (Oregon Junco). The initial chi syllables are
+          clearly discrete; the terminal chet syllables approach the boundary where pulses begin
+          to fuse into continuous tone &mdash; but stay just this side of it. The texture
+          <strong>thickens in real time</strong>. The listener&rsquo;s perception of the sound
+          changes during the vocalization because the temporal density changes.
+        </p>
+        <p>
+          <strong>Energy escalation.</strong> Intensity as content. Speed and urgency are not
+          decorations on top of structure &mdash; they ARE the structure. The dynamic arc:
+          the transition from quiet to loud, slow to fast. Fifteen degrees of whispering, and
+          now the forest gets louder.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon accelerando">A</div>
+            <div class="theory-content">
+              <h4>Accelerando <span class="theory-level foundational">Foundational</span></h4>
+              <p>Tempo increase within a single phrase &mdash; urgency as compositional device. The song starts moderate and speeds up. The first species in the engine defined by tempo change. Rallentando inverse: most music slows at the end; the Wilson&rsquo;s speeds up.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon chattering">C</div>
+            <div class="theory-content">
+              <h4>Chattering Texture <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Rapid discrete notes at the boundary of rhythmic perception. Connects to junco&rsquo;s trill (degree 11&deg;) but with tempo variation &mdash; starts below fusion, accelerates toward it without crossing. The texture thickens in real time.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon noresolution">X</div>
+            <div class="theory-content">
+              <h4>Anti-Resolution <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The song builds momentum and stops without resolving. No contrasting terminal element, no arrival. The opposite of degree 14&deg;&rsquo;s narrative arc. The punk ending, the interrupted cadence, the build-up without the drop.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Escalation <span class="theory-level foundational">Foundational</span></h4>
+              <p>The transition from quiet to loud, slow to fast. Intensity as content. Speed and urgency ARE the structure, not decoration. The dynamic arc &mdash; fifteen degrees of whispering, now the forest gets louder.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon riparian">R</div>
+            <div class="theory-content">
+              <h4>Willow Riparian Ecology <span class="theory-level foundational">Foundational</span></h4>
+              <p>Willow-dominated streamside thickets &mdash; the purest riparian obligate in the engine. Keystone riparian plants that stabilize banks, shade streams, and create the dense moist structure the warbler requires.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon tempo">T</div>
+            <div class="theory-content">
+              <h4>Tempo as Identity <span class="theory-level advanced">Advanced</span></h4>
+              <p>The first species whose defining acoustic characteristic is temporal behavior rather than pitch, timbre, or repetition pattern. The song is identified by HOW FAST it goes, not what pitch it reaches or what pattern it repeats.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-011</strong> &mdash; Oregon Junco
+            <p>CONSTANT vs. ACCELERATING TEMPO. Junco: single-note trill at constant rate above fusion (continuous, steady-state). Wilson&rsquo;s: chattering at accelerating rate, starting below fusion and compressing toward it. Same domain (rapid discrete notes), opposite temporal behavior.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014</strong> &mdash; MacGillivray&rsquo;s Warbler
+            <p>RESOLUTION vs. NO RESOLUTION. MacGillivray&rsquo;s: A-A-A-B, resolves with contrasting &ldquo;sweet.&rdquo; Wilson&rsquo;s: accelerates and stops &mdash; no resolution, no arrival. Sequential Parulidae, sequential degrees, opposite endings. The song that arrives vs. the song that was still going when it stopped.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-006</strong> &mdash; Pacific-slope Flycatcher
+            <p>RIPARIAN TRIO. Flycatcher: alder corridors (degree 6&deg;). MacGillivray&rsquo;s: dense riparian shrub (14&deg;). Wilson&rsquo;s: willow-dominated streamside (15&deg;). Three degrees of streamside habitat &mdash; a riparian gradient from forest canopy to open willow thicket.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the PNW
+            <p>PARULIDAE EXPANSION. Second warbler in the engine (after MacGillivray&rsquo;s at 14&deg;). Back-to-back Parulidae with contrasting strategies: one hides, one displays. One resolves, one doesn&rsquo;t.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Thomas Marriott at degree 15&deg;. Both are the FIRST ENERGY-3 in their respective circles. Both are contemporary, Seattle-based, and build momentum through forward-driving phrasing. Marriott&rsquo;s trumpet pushes through changes with double-time intensity. The warbler pushes through with accelerating tempo.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>COMPLEXITY REVISITED. Wren: maximum note density through cascading improvisation (complex-fast). Wilson&rsquo;s: high note density through acceleration (simple-fast). Both are fast. One is many different notes. The other is the same note, speeding up.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Ammon, E.M. &amp; Gilbert, W.M. (2020). &ldquo;Wilson&rsquo;s Warbler.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Lovette, I.J. et al. (2010). Multilocus phylogeny for wood-warblers and revised Parulidae classification. <em>Mol Phylogenet Evol</em> 57.</li>
+          <li>Chesser, R.T. et al. (2011). Fifty-second supplement to the AOU Check-list. <em>The Auk</em> 128. [Cardellina reclassification.]</li>
+          <li>Barker, F.K. et al. (2015). New insights into New World biogeography. <em>The Auk</em> 132.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Catchpole, C.K. &amp; Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. Cambridge University Press.</li>
+          <li>Gregory, S.V. et al. (1991). Ecosystem perspective of riparian zones. <em>BioScience</em> 41.</li>
+          <li>Ammon, E.M. (1995). Reproductive ecology of Wilson&rsquo;s Warbler in subalpine meadow. <em>Condor</em> 97.</li>
+          <li>Lerdahl, F. &amp; Jackendoff, R. (1983). <em>A Generative Theory of Tonal Music</em>. MIT Press.</li>
+          <li>London, J. (2012). <em>Hearing in Time</em>. 2nd ed. Oxford University Press.</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+          <li>Loss, S.R. et al. (2014). Bird-building collisions in the United States. <em>The Condor</em> 116.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Wilson&rsquo;s Warbler. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Wilson&rsquo;s Warbler. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. PHS: Riparian habitats. wdfw.wa.gov</li>
+          <li>Macaulay Library. Wilson&rsquo;s Warbler recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Parulidae</div>
+          <div class="stat-detail">New World Warblers &mdash; 2nd in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.3&ndash;5.0 in</div>
+          <div class="stat-detail">11&ndash;12.7 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">5&ndash;10 g</div>
+          <div class="stat-detail">One of the smallest warblers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Black cap</div>
+          <div class="stat-detail">Bright yellow below, olive-yellow above</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Named For</div>
+          <div class="stat-value">Alexander Wilson</div>
+          <div class="stat-detail">&ldquo;Father of American Ornithology&rdquo;</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Chi-chi-chet</div>
+          <div class="stat-detail">Rapid chattering &mdash; accelerando</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">3.5&ndash;7 kHz</div>
+          <div class="stat-detail">Chi (4.5&ndash;7) + chet (3.5&ndash;5.5)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value">1.5&ndash;2.5 s</div>
+          <div class="stat-detail">10&ndash;15 notes per song</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Accelerando</div>
+          <div class="stat-detail">First tempo change within a single vocalization</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">15&deg;</div>
+          <div class="stat-detail">Accelerando &mdash; urgency as structure</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #C62828;">3</div>
+          <div class="stat-detail">FIRST energy-3 &mdash; the ceiling breaks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Willow Riparian</div>
+          <div class="stat-detail">Streamside willow thickets</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; 3rd in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Accelerando</div>
+          <div class="stat-detail">Tempo-varying chattering series</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 15&deg; &mdash; S36</div>
+          <div class="parallel-name">Thomas Marriott</div>
+          <div class="parallel-detail">Both are the FIRST energy-3 in their respective circles. Both are contemporary, Seattle-based, and build momentum through forward-driving phrasing. Marriott&rsquo;s trumpet pushes through changes with double-time intensity. The warbler pushes through with accelerating tempo. Both break the energy ceiling that constrained the previous fourteen degrees.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 015 of 360 &middot;
+      <a href="../014-macgillivrays-warbler/index.html">Degree 14&deg;: MacGillivray&rsquo;s Warbler</a> &middot;
+      <a href="../013-huttons-vireo/index.html">Degree 13&deg;: Hutton&rsquo;s Vireo</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
