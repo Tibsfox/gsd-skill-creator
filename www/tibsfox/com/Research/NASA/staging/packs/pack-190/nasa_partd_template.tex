@@ -1,0 +1,1406 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ============================================================
+% ENGINEERING COLOR SCHEME
+% Industrial precision: graphite + forge orange + blueprint blue
+% Distinct from: A (cosmic purple), B (steel navy), C (library brown)
+% ============================================================
+\definecolor{primary}{HTML}{1C2833}       % Forge black — steel, precision, seriousness
+\definecolor{secondary}{HTML}{BA4A00}     % Molten orange — heat, energy, creation
+\definecolor{tertiary}{HTML}{1A5276}      % Blueprint blue — design, technical drawing
+\definecolor{accent}{HTML}{2E4057}        % Dark slate — structural, grounded
+\definecolor{lightprimary}{HTML}{EAECEE}  % Light graphite
+\definecolor{lightsecondary}{HTML}{FDEBD0} % Pale forge
+\definecolor{lighttertiary}{HTML}{D6EAF8}  % Blueprint wash
+\definecolor{mathbg}{HTML}{F4F6F7}        % Math box background
+\definecolor{engbg}{HTML}{FEF9E7}         % Engineering spec background
+\definecolor{matbg}{HTML}{EAFAF1}         % Materials data background
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{warnorange}{HTML}{E67E22}
+\definecolor{paramred}{HTML}{B71C1C}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% Math box — equations and derivations
+\newtcolorbox{mathbox}[1]{
+  colback=mathbg, colframe=tertiary,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\small\bfseries\sffamily\textcolor{white}{\faFormula\ #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tertiary, arc=1pt, boxrule=0pt},
+  fonttitle=\small\bfseries\sffamily,
+  breakable
+}
+
+% Engineering notebook box — design decisions, trade studies
+\newtcolorbox{engbox}[1]{
+  colback=engbg, colframe=secondary,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\small\bfseries\sffamily\textcolor{white}{ENGINEERING NOTEBOOK: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=secondary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Materials data box — properties, compositions, comparisons
+\newtcolorbox{matbox}[1]{
+  colback=matbg, colframe=secondary!60!primary,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\small\bfseries\sffamily\textcolor{white}{MATERIALS DATA: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=secondary!60!primary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Problem set box — engineering problems for students
+\newtcolorbox{problembox}[1]{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=0.6pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{ENGINEERING PROBLEM: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tertiary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\param}[1]{\textcolor{paramred}{\textbf{\{#1\}}}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\reqbox}[1]{\colorbox{lightprimary}{\small\sffamily\textbf{REQ:} #1}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{So You Want to Be an Engineer — NASA Engineering Deep Dive}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Part D}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=tertiary,
+  urlcolor=tertiary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={NASA Engineering Deep Dive Template -- Part D},
+  pdfsubject={Mechanical Engineering and Materials Science Mission Template},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.8cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- PART D}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1cm}
+{\fontsize{13}{16}\selectfont\sffamily\textcolor{secondary}{\textbf{SO YOU WANT TO BE AN ENGINEER}}}
+
+\vspace{0.4cm}
+{\fontsize{22}{28}\selectfont\bfseries\sffamily\textcolor{primary}{NASA Engineering\\[0.3em]Deep Dive Template}}
+
+\vspace{0.6cm}
+{\Large\sffamily\textcolor{tertiary}{Mechanical Engineering \& Materials Science}}\\[0.3em]
+{\large\sffamily\textcolor{secondary}{The Math, the Metal, and the Mission}}
+
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{accent}{Input: \param{MISSION\_NAME} — Engineering Record from Parts A \& B}}
+
+\vspace{1.6cm}
+\begin{center}
+\begin{tabular}{ccccccccc}
+{\small\sffamily\textcolor{subtlegray}{Part A}} &
+{\small\sffamily\textcolor{subtlegray}{$\to$}} &
+{\small\sffamily\textcolor{subtlegray}{Part B}} &
+{\small\sffamily\textcolor{subtlegray}{$\to$}} &
+{\small\sffamily\textcolor{subtlegray}{Part C}} &
+{\small\sffamily\textcolor{subtlegray}{$\to$}} &
+\colorbox{secondary}{\textcolor{white}{\small\bfseries\sffamily\ Part D\ }} &
+{\small\sffamily\textcolor{subtlegray}{$\to$}} &
+{\small\sffamily\textcolor{subtlegray}{Release}}\\
+{\tiny\sffamily\textcolor{subtlegray}{History}} & &
+{\tiny\sffamily\textcolor{subtlegray}{Science}} & &
+{\tiny\sffamily\textcolor{subtlegray}{Education}} & &
+{\tiny\sffamily\textcolor{subtlegray}{Engineering}} & &
+{\tiny\sffamily\textcolor{subtlegray}{v1.50.\param{SLUG}.ENG}}
+\end{tabular}
+\end{center}
+
+\vspace{1.6cm}
+\begin{center}
+\colorbox{lightprimary}{\parbox{12cm}{\centering\small\sffamily\textcolor{primary}{%
+\textbf{CORE DISCIPLINES:} Mechanical Engineering $\cdot$ Materials Science $\cdot$\\[0.2em]
+Structural Analysis $\cdot$ Thermal Engineering $\cdot$ Engineering Mathematics\\[0.2em]
+Systems Engineering $\cdot$ Manufacturing \& Testing
+}}}
+\end{center}
+
+\vspace{1.6cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 29, 2026  |  Status: Template --- Ready for Parameterization}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (16 roles)  |  Est.\ 7--10 context windows per mission run}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Target: GSD College of Knowledge --- Engineering \& Physics Departments}}
+\end{center}
+\newpage
+
+% ============================================================
+% PIPELINE PAGE
+% ============================================================
+\thispagestyle{fancy}
+\section*{Pipeline Architecture: Parts A+B $\rightarrow$ Part D $\rightarrow$ ENG Release}
+\addcontentsline{toc}{section}{Pipeline Architecture}
+
+\begin{asciibox}
+FOUR-PART PIPELINE — ENGINEERING LAYER
+=========================================
+
+PART A: NASA MISSION HISTORY
+  → Mission catalog: era, type, hardware overview, inheritance graph
+
+PART B: SINGLE-MISSION DEEP RESEARCH
+  → science_results JSON + hardware_record:
+    {
+      "spacecraft_design":     { mass, power, propulsion, comms },
+      "launch_vehicle":        { name, thrust, staging, propellants },
+      "key_engineering_challenges": [ "challenge_1", "challenge_2", ... ],
+      "novel_materials":       [ { name, application, properties_ref } ],
+      "critical_mechanisms":   [ { name, function, heritage } ],
+      "structural_loads":      { launch_g_load, thermal_range_K, pressure }
+    }
+
+PART C: SCIENCE EDUCATION PACK
+  → CK study guides; Try Sessions; Claude teaching scripts
+  → (Part D is parallel to Part C — both consume Part B output)
+
+PART D: ENGINEERING DEEP DIVE (THIS DOCUMENT — TEMPLATE)
+  Input:  Part B hardware_record + Part A mission context
+  Focus:  Mechanical Engineering + Materials Science
+          Engineering Mathematics underpinning each discipline
+          "So you want to be an engineer" career/skill framing
+  Output: Engineering curriculum pack — study guides, math workbooks,
+          design exercises, materials data sheets, engineering notebooks
+          + Claude engineering tutor scripts
+          + CK Engineering Department contributions
+
+RELEASE: gsd-skill-creator v1.50.{MISSION_SLUG}.ENG
+  → College of Knowledge: Engineering Department
+  → GSD-OS: Engineering discipline browser
+  → Career path integration: "How to become a [role]" entries
+\end{asciibox}
+
+\textbf{What distinguishes Part D from Parts B and C:}
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item Part B asks \textit{what did we discover?} --- Part D asks \textit{what did we have to invent to get there?}
+  \item Part C teaches the science to students --- Part D teaches the engineering and mathematics to aspiring engineers
+  \item Part D surfaces the real engineering math: stress tensors, phase diagrams, Fourier heat equations, fracture mechanics, rocket equation derivations --- not simplified analogies, but the actual tools of the discipline
+  \item Part D explicitly connects each engineering challenge to the career paths of the engineers who solved it: structural engineer, materials scientist, thermal engineer, systems engineer, manufacturing engineer
+\end{itemize}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{NASA Engineering Deep Dive --- Vision Guide}
+
+\metafield{Template Version:}{v1.0 (Part D of NASA Mission Engineering series)}
+\metafield{Input Mission:}{\param{MISSION\_NAME} (from Part B hardware\_record)}
+\metafield{Mission Slug:}{\param{MISSION\_SLUG}}
+\metafield{Part B Release:}{v1.50.\param{MISSION\_SLUG} (must be complete before Part D)}
+\metafield{EDU Release:}{v1.50.\param{MISSION\_SLUG}.EDU (Part C; Part D runs in parallel)}
+\metafield{ENG Release Target:}{gsd-skill-creator v1.50.\param{MISSION\_SLUG}.ENG}
+\metafield{Primary Disciplines:}{Mechanical Engineering, Materials Science, Engineering Mathematics}
+
+\subsection{Vision}
+
+Every NASA mission that left the atmosphere had to solve engineering problems that had never been solved before. Not just technical challenges in the abstract --- real, specific, career-defining problems that required people who understood the mathematics of stress, heat, vibration, and material failure to invent new answers under extreme time pressure with no margin for error.
+
+The Apollo heat shield could not fail. The Cassini RTG could not leak. The Hubble primary mirror had to be ground to tolerances measured in nanometers. The James Webb Space Telescope's beryllium mirror segments had to stay aligned to within a fraction of a wavelength of light while cooling to 40 Kelvin in deep space. None of this happened because engineers had a hunch. It happened because engineers knew the mathematics of their disciplines deeply enough to design with confidence, test to failure deliberately, and solve novel problems systematically.
+
+Part D exists to make that engineering knowledge accessible and teachable. Not as a watered-down survey, but as a serious engagement with the actual disciplines: structural analysis, materials selection, thermal engineering, mechanism design, manufacturing metrology, and the mathematics that makes all of them precise. The framing is deliberately aspirational --- \textit{So you want to be an engineer} --- because the right response to encountering the engineering behind a NASA mission is not just admiration. It is the recognition that these are learnable skills with known curricula, established career paths, and communities of practice that a motivated person can enter.
+
+For each mission in the Part A catalog, Part D answers: what engineering problems had to be solved, what mathematical tools were required, what materials were selected and why, what mechanisms had to work without failure in an environment where nobody could go fix them --- and what a student needs to learn to eventually solve problems like these themselves.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{Engineering knowledge locked in technical reports:} The engineering innovations of NASA missions live in internal design documents, AIAA conference papers, and NASA Technical Reports Server entries that are rarely synthesized into teachable curriculum. Part D unlocks this knowledge for learners.
+  \item \textbf{Mathematics presented without engineering context:} Students learn stress-strain relationships, Fourier heat equations, and eigenvalue problems in isolation. Part D situates these mathematical frameworks in the real engineering decisions of \param{MISSION\_NAME} --- the actual numbers, the actual constraints, the actual consequences of getting the math wrong.
+  \item \textbf{Materials science invisible in mission histories:} Part B and Part C cover science discoveries and teaching curriculum. Neither treats materials science as a primary subject. Yet the choice of material for a spacecraft component is often the most consequential engineering decision made. Part D makes materials selection and materials science central.
+  \item \textbf{Mechanical engineering fragmented across disciplines:} Structural analysis, thermal engineering, vibration, fluid mechanics, and mechanism design are taught as separate courses. In a spacecraft, they are coupled --- a thermal load causes structural stress; a vibration mode drives fatigue; a mechanism's mass budget constrains the structural margins. Part D shows those couplings as they actually appear in \param{MISSION\_NAME}.
+  \item \textbf{Career path invisible from science-first narrative:} Parts B and C emphasize science and discovery. Part D adds the engineering career perspective --- what role a structural engineer, materials scientist, thermal analyst, or systems engineer played in \param{MISSION\_NAME}, and what education and experience path leads there.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} Each NASA mission as an engineering school --- a set of real, unsolved problems that forced the development or application of specific engineering disciplines, mathematical frameworks, and materials capabilities, all of which remain teachable and career-relevant today.
+
+\subsubsection{The Five Engineering Pillars (Universal Across All Missions)}
+
+\begin{asciibox}
+FIVE ENGINEERING PILLARS — APPLICABLE TO EVERY MISSION
+=========================================================
+
+PILLAR 1: STRUCTURAL MECHANICS
+  The spacecraft must survive launch loads, thermal cycling, and
+  operational loads without yielding, fracturing, or fatiguing.
+  Math: Stress tensors, Mohr's circle, beam bending, buckling
+        Finite element analysis fundamentals, safety factors
+  Materials interface: Yield strength, ultimate strength, fatigue life
+
+PILLAR 2: THERMAL ENGINEERING
+  The spacecraft must maintain components within operating temperature
+  bounds across environments ranging from direct sunlight to deep space.
+  Math: Fourier conduction equation, Stefan-Boltzmann radiation,
+        Thermal network analysis, transient heat equations
+  Materials interface: Thermal conductivity, emissivity, α/ε ratio
+
+PILLAR 3: MATERIALS SCIENCE & SELECTION
+  Every component is made of something. The choice determines
+  mass, strength, thermal behavior, and mission viability.
+  Math: Crystal structure geometry, phase diagram reading,
+        Ashby charts, specific strength calculations
+  Mechanics interface: Modulus, CTE, fracture toughness, creep
+
+PILLAR 4: MECHANISM DESIGN & DYNAMICS
+  Deployable structures, gimbal systems, articulating arms,
+  valve assemblies — mechanisms that must work in vacuum, at
+  cryogenic temperature, after months of launch vibration.
+  Math: Kinematics equations, gear analysis, vibration modes,
+        Natural frequency, damping ratios
+  Materials interface: Tribology, cold welding, lubricant selection
+
+PILLAR 5: SYSTEMS ENGINEERING & MARGINS
+  The whole must work even when individual components are at
+  the edge of their specifications. Mass, power, and reliability
+  budgets govern every decision.
+  Math: Link budgets, mass fraction equations, reliability FMEA,
+        Probability of success calculations
+  Materials interface: Mass properties, outgassing, radiation tolerance
+\end{asciibox}
+
+\subsubsection{The Engineering Mathematics Hierarchy}
+
+Part D traces the mathematical lineage underlying each engineering decision in \param{MISSION\_NAME}. Every engineering pillar has foundational mathematics that must be understood before the engineering application is meaningful:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Engineering Pillar} & \tableheader{Foundational Math} & \tableheader{Mission Application} \\
+\midrule
+Structural Mechanics & Linear algebra, calculus, differential equations & Stress at a fastener joint; panel buckling load; fatigue life calculation \\
+Thermal Engineering & Partial differential equations, numerical methods & Heat rejection through radiator panels; transient cool-down time \\
+Materials Science & Chemistry, crystallography, thermodynamics & Phase diagram reading; alloy selection for cryogenic use \\
+Mechanism Design & Trigonometry, dynamics, vibration theory & Natural frequency of a deployable boom; gear ratio for antenna drive \\
+Systems Engineering & Probability, statistics, optimization & Mass budget allocation; reliability target from FMEA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+SIX-MODULE ENGINEERING CURRICULUM ARCHITECTURE
+================================================
+
+MODULE 1: ENGINEERING REQUIREMENTS & HERITAGE
+  What problems HAD to be solved for {MISSION_NAME}?
+  → Requirements flow-down from mission objectives to engineering specs
+  → Heritage: what was inherited vs. what had to be invented
+  → Trade study examples: mass vs. strength vs. cost
+  → The role of safety factors in aerospace engineering culture
+
+MODULE 2: MECHANICAL ENGINEERING DEEP DIVE
+  Structural, dynamic, and thermal-mechanical analysis
+  → Primary structural analysis: loads, stress, safety margins
+  → Vibration environment: launch acoustic + random vibration
+  → Mechanism design: deployables, actuators, bearings
+  → Thermal-structural coupling: CTE mismatch stress calculation
+  → Math: full treatment of stress analysis for key components
+
+MODULE 3: MATERIALS SCIENCE & SELECTION
+  Every material choice for {MISSION_NAME} — justified
+  → Primary structural materials: why this alloy, not that one
+  → Thermal materials: coatings, MLI, ablatives, radiators
+  → Mechanisms materials: lubricants, bearings, cold welding
+  → Novel materials: what was new about {MISSION_NAME}'s material choices
+  → Math: Ashby chart methodology, specific strength, CTE calculations
+
+MODULE 4: ENGINEERING MATHEMATICS WORKBOOK
+  The actual math — worked through for {MISSION_NAME}
+  → Rocket equation: derivation and application
+  → Structural: stress at a critical joint (real mission geometry)
+  → Thermal: steady-state heat balance for a mission component
+  → Materials: material selection via property indices
+  → Mechanics: natural frequency of a deployable component
+
+MODULE 5: MANUFACTURING, TESTING & VERIFICATION
+  How {MISSION_NAME} components were made and proven
+  → Manufacturing process selection for key components
+  → Test philosophy: proto vs. qualification vs. acceptance
+  → Environmental testing: thermal-vacuum, vibration, acoustics
+  → Metrology and inspection: how tolerances were verified
+  → The culture of aerospace quality and traceability
+
+MODULE 6: ENGINEERING CAREER PATHS & LEGACY
+  How to become the engineer who solves these problems
+  → Role profiles: structural, thermal, materials, mechanisms, systems
+  → Education pathway: degrees, skills, tools, certifications
+  → Innovations from {MISSION_NAME} in use today
+  → Engineering legacy: what subsequent missions inherited
+  → Resources: textbooks, software tools, professional societies
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Engineering Requirements \& Heritage}
+
+Traces the requirements chain for \param{MISSION\_NAME} from mission-level objectives (``survive transit to Saturn'') down through system-level requirements (``spacecraft must survive 3,600 kg launch mass in 6g axial load environment'') to component specifications (``primary structure shall not yield at 125\% design limit load''). Documents what engineering was directly inherited from predecessor missions (heritage design) and what had to be newly developed (new development). For each major new development, documents the trade study that selected the solution approach.
+
+\textbf{Key engineering questions:} What was the single most demanding structural requirement of \param{MISSION\_NAME}? What heritage components carried over from predecessors? What new development items drove the schedule and technical risk?
+
+\subsubsection{Module 2: Mechanical Engineering Deep Dive}
+
+The central technical module. Covers the structural analysis of the primary load-bearing elements, the vibration and acoustic environment and how components were designed to survive it, the mechanism design of critical deployable or articulating systems, and the thermal-structural coupling analysis where temperature gradients create stress. Includes real numbers from \param{MISSION\_NAME}'s engineering record wherever available in open literature.
+
+\textbf{Structural focus:} Primary structure, propulsion support structure, instrument mounting. Documents wall thickness decisions, material selection, and calculated safety margins.
+
+\textbf{Dynamics focus:} Launch vibration environment (random, sinusoidal, acoustic), first natural frequency requirements, modal analysis approach, vibration isolation systems.
+
+\textbf{Mechanisms focus:} Solar array deployment, antenna pointing mechanisms, instrument scan platforms, valve assemblies. Documents actuator selection, bearing specification, and mechanism-level testing.
+
+\subsubsection{Module 3: Materials Science \& Selection}
+
+The dedicated materials module --- the element most often absent from mission-level narratives. Covers every significant material choice in \param{MISSION\_NAME}: the primary structural alloy or composite, the thermal protection material (if applicable), the optical coatings, the lubricants, the adhesives, the fastener materials, and any novel or mission-unique materials that were developed or first applied on this mission.
+
+For each material, documents: what property drove its selection (specific strength? thermal conductivity? emissivity? radiation tolerance?), what the second-best candidate was, what testing was required to qualify it, and whether the material was subsequently adopted by other missions.
+
+\textbf{Special attention:} Novel or first-use materials. What did \param{MISSION\_NAME} contribute to the materials library that aerospace engineers now use routinely?
+
+\subsubsection{Module 4: Engineering Mathematics Workbook}
+
+The mathematics module --- the element that transforms Part D from a history into a curriculum. Works through, with full derivations appropriate to the difficulty level, the key equations behind \param{MISSION\_NAME}'s engineering decisions. Every worked problem uses real parameters from the mission where available in open sources, or representative parameters from the mission class where exact values are not public.
+
+The workbook addresses: the Tsiolkovsky rocket equation (every mission), a stress analysis problem keyed to \param{MISSION\_NAME}'s primary structure, a thermal analysis problem from the mission's thermal design, a material selection problem using the Ashby methodology, and a dynamics problem from the mission's vibration environment. Problems are presented at three levels: conceptual (algebra), working engineer (calculus), and advanced (numerical/FEM approach).
+
+\subsubsection{Module 5: Manufacturing, Testing \& Verification}
+
+Covers the fabrication and verification of \param{MISSION\_NAME}'s key components: what manufacturing processes were used (machining, composite layup, electron beam welding, precision grinding), what test philosophy governed the program (protoflight, qualification/flight build, etc.), and what the key environmental tests looked like (thermal-vacuum cycling, vibration table, acoustic chamber, mass properties).
+
+Special attention to the metrology and quality culture of aerospace manufacturing: how tolerances are measured, how traceability is maintained, what ``acceptance test'' means versus ``qualification test,'' and why the culture of aerospace quality is itself a learnable and transferable engineering skill.
+
+\subsubsection{Module 6: Engineering Career Paths \& Legacy}
+
+The ``so you want to be an engineer'' payoff module. Profiles the engineering roles that were central to \param{MISSION\_NAME}: structural analyst, thermal engineer, materials engineer, mechanisms engineer, systems engineer, manufacturing engineer, test engineer. For each role: what a typical day looks like, what education is needed (BS/MS/PhD?), what tools are used (NASTRAN, ANSYS, NX, MATLAB, Python), what professional societies are relevant, and what a career progression from entry level to lead engineer looks like.
+
+Documents the specific engineering innovations from \param{MISSION\_NAME} that persisted into subsequent missions or commercial applications --- the engineering legacy that is parallel to the scientific legacy covered in Parts B and C.
+
+\subsection{Chipset Configuration (Template)}
+
+\begin{asciibox}
+chipset:
+  # Part D: Engineering-specific role configuration
+
+  agnus:              # Engineering Orchestration
+    model: opus
+    role: FLIGHT + CRAFT-ENG
+    responsibility: >
+      Cross-pillar engineering synthesis; trade study evaluation;
+      math correctness judgment; materials selection rationale;
+      career path narrative; engineering culture voice
+
+  denise:             # Document Assembly — Technical Writing
+    model: sonnet
+    role: EXEC-STRUCT + EXEC-MAT
+    responsibility: >
+      Module 2 structural/dynamic content; Module 3 materials content;
+      engineering specifications tables; materials data sheets;
+      technical drawing descriptions (ASCII format)
+
+  paula:              # Math Workbook + Exercises
+    model: sonnet
+    role: EXEC-MATH + CRAFT-PROB
+    responsibility: >
+      Module 4 worked examples; problem set generation;
+      equation derivations; numerical examples with mission parameters;
+      three-level problem scaffolding (conceptual/working/advanced)
+
+  gary:               # Verification + Requirements Architecture
+    model: sonnet
+    role: CRAFT-REQT + VERIFY
+    responsibility: >
+      Module 1 requirements flow-down; heritage vs. new-development
+      classification; engineering claim verification against Part B;
+      safety factor documentation; NASA standards cross-reference
+
+  68000:              # Haiku Scaffolding
+    model: haiku
+    role: BUDGET + LOG + PLAN
+    responsibility: >
+      Engineering parameter schema; CK YAML scaffolding;
+      career path template; token tracking; release packaging
+
+model_allocation:
+  opus: 30%     # Engineering synthesis, math verification, career narrative
+  sonnet: 60%   # Content production across modules 1-5
+  haiku: 10%    # Schema, templates, packaging, tracking
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (every Part D run)}
+
+\begin{itemize}[leftmargin=*]
+  \item Mechanical engineering analysis (structural, thermal, vibration, mechanisms) specific to \param{MISSION\_NAME}
+  \item Materials science: selection rationale, property data, novel materials, qualification testing
+  \item Engineering mathematics: fully worked examples using mission parameters
+  \item Manufacturing and test philosophy for key components
+  \item Systems engineering: requirements, margins, trade studies, FMEA
+  \item Engineering career path profiles for roles central to \param{MISSION\_NAME}
+  \item CK Engineering Department contributions (study guides, problem sets, data sheets)
+  \item Cross-mission engineering inheritance links (from Part A graph)
+  \item Engineering legacy: innovations that persisted to subsequent missions
+  \item Release artifact: v1.50.\param{MISSION\_SLUG}.ENG
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Detailed electrical/electronic engineering (avionics, power systems, comms hardware) --- separate future Part E
+  \item Software engineering, flight software, guidance algorithms --- separate future Part F
+  \item Science instrument internal engineering (covered in Part B)
+  \item Propulsion chemistry (covered in Part B chemistry context)
+  \item Classified or ITAR-controlled technical details
+  \item Component-level drawings or proprietary specifications
+  \item Science results and discoveries (Part B)
+  \item Teaching curriculum for non-engineers (Part C)
+\end{itemize}
+
+\subsubsection{Engineering Evidence Calibration}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Evidence Level} & \tableheader{Mission Examples} & \tableheader{Open Literature} & \tableheader{Calibration} \\
+\midrule
+Rich & Apollo, Hubble, Cassini, ISS & Extensive NTRS, AIAA papers & Full treatment; real numbers \\
+Standard & Most flagship missions & Some NTRS; mission reports & Full treatment; some representative numbers \\
+Sparse & Early Mercury, some probes & Limited open documentation & Document what's available; flag gaps \\
+Active & JWST, Perseverance, Parker & Growing literature & Current as of run date; flag preliminary \\
+Proprietary risk & All missions & Some specs ITAR-controlled & Representative industry parameters used \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item Module 1 establishes the top-level engineering requirements for \param{MISSION\_NAME} and classifies each major subsystem as heritage or new development.
+  \item Module 2 provides structural analysis of at least one primary structural element: loads, material, calculated stress, safety factor, and design decision rationale.
+  \item Module 2 identifies the launch vibration environment and describes how at least one component was designed or tested to survive it.
+  \item Module 2 covers at least one mechanism (deployable, pointing, or valve) with actuator type, bearing specification, and heritage or development history.
+  \item Module 3 provides a materials selection rationale for at least three distinct components, with candidate comparison and selection basis.
+  \item Module 3 identifies at least one novel or first-use material in \param{MISSION\_NAME} and documents its properties and qualification approach.
+  \item Module 4 delivers at least five fully worked engineering problems using \param{MISSION\_NAME} parameters: rocket equation, stress analysis, thermal analysis, material selection calculation, and one dynamics problem.
+  \item Module 4 presents each worked problem at three levels: conceptual, working engineer, and advanced.
+  \item Module 5 covers the manufacturing process for at least one key component and the test philosophy for the mission (qualification/flight or protoflight approach).
+  \item Module 6 profiles at least four engineering career roles central to \param{MISSION\_NAME} with education requirements, tools, and professional societies.
+  \item All engineering claims cite Part B or open-source technical literature (NASA NTRS, AIAA papers, mission reports); no engineering claims introduced without a source.
+  \item Release artifact correctly versioned as v1.50.\param{MISSION\_SLUG}.ENG; deposited to correct output path.
+\end{enumerate}
+
+\subsection{The Through-Line}
+
+The hardest problems in aerospace engineering are not solved by people who are smart. They are solved by people who know their mathematics deeply enough to reason about the problem before building anything, and know their materials well enough to choose the right medium for the solution before the first drawing is made. Intuition is earned through mastery of fundamentals.
+
+The Saturn V F-1 engine was the most powerful liquid-fueled rocket engine ever flown --- and it suffered catastrophic combustion instability during early testing that threatened the Apollo program. The solution was not found by guessing. It was found by Rocketdyne engineers who understood the acoustics of a combustion chamber well enough to design baffles that changed the acoustic mode structure of the combustion zone. They knew the mathematics of acoustic resonance. They knew the materials that could survive the resulting thermal and structural loads. They solved it by knowing things.
+
+Part D is a doorway into knowing those things --- not at the level of a casual observer, but at the level of someone who wants to actually do this work. Every module in this template is a chapter of the engineering education that the people who built \param{MISSION\_NAME} had completed before they were given the problem to solve. The math is here. The materials are here. The problems are here. The career path is here. What comes next is up to the student.
+
+\newpage
+
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{NASA Engineering Deep Dive --- Research Reference}
+
+\subsection{How to Use This Reference}
+
+Part D agents consume Part B's \texttt{hardware\_record} JSON as their primary input. Secondary input is the Part A mission record for heritage/successor context. Unlike Parts B and C, Part D agents also conduct targeted research in the NASA Technical Reports Server (NTRS), AIAA digital library, and mission-specific technical documentation to source engineering details not captured in Part B.
+
+\subsection{Input Bundle Schema}
+
+\begin{asciibox}
+INPUT BUNDLE SCHEMA — PART D ENGINEERING RECORD
+=================================================
+From: Part B release + Part A catalog
+
+{
+  "mission_name":     "string",
+  "mission_slug":     "string",
+  "mission_era":      "string",
+  "mission_type":     "string",
+
+  "hardware_record": {
+    "spacecraft": {
+      "name":              "string",    // e.g. "Cassini Orbiter"
+      "dry_mass_kg":       number,
+      "launch_mass_kg":    number,
+      "power_w":           number,
+      "power_source":      "Solar|RTG|Battery|Hybrid",
+      "structure_material":"string",    // primary structural material
+      "thermal_control":   ["string"]   // methods used: MLI, heaters, radiators...
+    },
+    "launch_vehicle": {
+      "name":              "string",    // e.g. "Titan IV-B/Centaur"
+      "max_axial_g":       number,      // peak launch acceleration
+      "acoustic_db":       number,      // acoustic environment OASPL
+      "random_vib_grms":   number       // random vibration environment
+    },
+    "key_engineering_challenges": [
+      { "challenge": "string", "discipline": "Structural|Thermal|Materials|Mechanisms|Systems",
+        "solution":  "string", "novel": boolean }
+    ],
+    "materials_used": [
+      { "component": "string", "material": "string", "application": "string",
+        "why_selected": "string", "first_use_on_mission": boolean }
+    ],
+    "mechanisms": [
+      { "name": "string", "function": "string", "actuator_type": "string",
+        "heritage": "string" }
+    ],
+    "thermal_environment": {
+      "min_temp_k": number,    // minimum component temperature
+      "max_temp_k": number,    // maximum component temperature
+      "thermal_cycling_dt": number  // delta-T across thermal cycle
+    },
+    "structural_loads": {
+      "design_limit_load_g": number,
+      "safety_factor": number,
+      "primary_load_path": "string"
+    }
+  },
+
+  "predecessors": ["string"],   // from Part A — for heritage documentation
+  "successors":   ["string"],   // for engineering legacy section
+  "part_b_sources": ["string"]  // Part B bibliography — first-tier sources
+}
+\end{asciibox}
+
+\subsection{Source Hierarchy}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{Source Type} & \tableheader{Examples for Engineering Content} \\
+\midrule
+T1 & NASA Technical Reports Server & ntrs.nasa.gov --- design documents, test reports, lessons learned \\
+T2 & AIAA conference and journal papers & AIAA SciTech, Journal of Spacecraft and Rockets \\
+T3 & Mission-specific JPL/GSFC publications & Mission System Engineering documents, publicly released \\
+T4 & NASA NTIS / mission press kits & Press kit engineering sections; fact sheets with mass/power data \\
+T5 & Peer-reviewed materials journals & Acta Materialia, Composites Science and Technology \\
+T6 & Engineering textbook cross-reference & Shigley's, Incropera, Ashby --- for math framework only \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{ITAR and proprietary boundary:} If a specific engineering parameter is not in T1--T5 sources, use class-representative values from analogous missions. Flag all representative values explicitly. Never estimate classified performance data.
+
+\subsection{Research Protocol by Module}
+
+\subsubsection{Module 1: Requirements \& Heritage Research}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Query Template} & \tableheader{Target} \\
+\midrule
+\texttt{\{MISSION\_SLUG\} system requirements specification} & Top-level engineering requirements \\
+\texttt{\{MISSION\_NAME\} mass budget structural requirements} & Mass and structural load requirements \\
+\texttt{\{MISSION\_NAME\} heritage design from \{PREDECESSOR\}} & What was directly inherited \\
+\texttt{\{MISSION\_NAME\} new development technology risk} & Novel engineering items \\
+\texttt{\{MISSION\_NAME\} trade study selection rationale} & Design decision documentation \\
+\texttt{NASA systems engineering handbook spacecraft} & NASA SE methodology framework \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Module 2: Mechanical Engineering Research}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Query Template} & \tableheader{Target} \\
+\midrule
+\texttt{\{MISSION\_NAME\} structural analysis primary structure} & Main load paths; stress analysis results \\
+\texttt{\{MISSION\_NAME\} launch vibration acoustic test} & Environmental test conditions and survival \\
+\texttt{\{MISSION\_NAME\} deployable mechanism solar array} & Mechanism design; actuator details \\
+\texttt{\{MISSION\_NAME\} thermal control design radiator} & Thermal architecture; radiator sizing \\
+\texttt{\{MISSION\_NAME\} NTRS structural design report} & Technical report with engineering detail \\
+\texttt{\{MISSION\_NAME\} natural frequency modal survey} & Vibration analysis; first mode frequency \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Module 3: Materials Science Research}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Query Template} & \tableheader{Target} \\
+\midrule
+\texttt{\{MISSION\_NAME\} material selection \{COMPONENT\}} & Per-component material with justification \\
+\texttt{\{MISSION\_NAME\} novel material first use spacecraft} & Novel materials first applied on this mission \\
+\texttt{\{MISSION\_NAME\} thermal protection ablative coating} & Heat shield or coating material details \\
+\texttt{\{MISSION\_NAME\} composite carbon fiber structure} & Composite usage and layup approach \\
+\texttt{aerospace material \{MATERIAL\_NAME\} properties} & T5/T6 property data for identified materials \\
+\texttt{\{MISSION\_NAME\} material qualification test NTRS} & How novel materials were proven \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Module 4: Engineering Mathematics Research}
+
+Module 4 is produced from first principles (the mathematics is well-established) using \param{MISSION\_NAME} parameters sourced from T1--T4. The workbook agent (EXEC-MATH) derives the mathematics independently; the mission parameters are the inputs, not the derivations. Cross-reference:
+
+\begin{itemize}[leftmargin=*]
+  \item Rocket equation: launch vehicle specific impulse, propellant mass fraction from mission data
+  \item Stress problem: structural load, material yield strength, cross-section geometry from Part B hardware record
+  \item Thermal problem: solar flux at mission orbit, surface area, absorptivity/emissivity from thermal control description
+  \item Material selection: properties of at least three candidate materials from T5/T6; Ashby index calculation
+  \item Dynamics problem: component geometry and material for natural frequency estimate
+\end{itemize}
+
+\subsubsection{Module 5: Manufacturing \& Test Research}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Query Template} & \tableheader{Target} \\
+\midrule
+\texttt{\{MISSION\_NAME\} manufacturing process fabrication} & How key components were made \\
+\texttt{\{MISSION\_NAME\} thermal vacuum test qualification} & Environmental test approach \\
+\texttt{\{MISSION\_NAME\} protoflight qualification test plan} & Test philosophy documentation \\
+\texttt{\{MISSION\_NAME\} mass properties measurement} & Mass measurement and uncertainty \\
+\texttt{aerospace spacecraft acceptance test procedures} & General aerospace test culture \\
+\texttt{\{MISSION\_NAME\} anomaly test failure lessons learned} & Test failures and resolution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Module 6: Career Paths Research}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Query Template} & \tableheader{Target} \\
+\midrule
+\texttt{NASA structural engineer career path education} & Structural engineer role at NASA \\
+\texttt{aerospace materials engineer skills tools} & Materials engineer role profile \\
+\texttt{AIAA thermal engineer spacecraft career} & Thermal engineer profile \\
+\texttt{systems engineer NASA JPL requirements skills} & Systems engineer role profile \\
+\texttt{\{MISSION\_NAME\} engineering innovation commercial} & Legacy applications outside NASA \\
+\texttt{spacecraft mechanisms engineer tribology career} & Mechanisms engineer profile \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Engineering Mathematics Framework Reference}
+
+The following equations are universally relevant across all missions. Module 4 always includes these, populated with mission-specific parameters:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Equation} & \tableheader{Domain} & \tableheader{Mission Application} \\
+\midrule
+$\Delta v = I_{sp} g_0 \ln(m_0/m_f)$ & Rocket equation (Tsiolkovsky) & Propellant mass budget; mission $\Delta v$ trades \\
+$\sigma = F/A$ (simple); $\sigma = Mc/I$ (bending) & Structural mechanics & Primary structure stress at design limit load \\
+$\nabla^2 T = \frac{1}{\alpha}\frac{\partial T}{\partial t}$ & Fourier heat equation & Transient thermal response of spacecraft panel \\
+$q_{rad} = \varepsilon \sigma T^4$ & Stefan-Boltzmann radiation & Radiator sizing for heat rejection \\
+$f_n = \frac{1}{2\pi}\sqrt{k/m}$ & Natural frequency (SDOF) & First mode requirement for deployable structure \\
+$\sigma_{y,specific} = \sigma_y / \rho$ & Specific strength & Material selection for mass-critical structure \\
+$\Delta T_{max} = Q/(UA)$ & Thermal network (conductance) & Conductance path sizing for thermal interface \\
+$K_{Ic} = \sigma\sqrt{\pi a}\cdot Y$ & Fracture mechanics & Flaw tolerance in structural material \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Materials Property Reference Schema}
+
+Every material identified in Module 3 is documented in a standard data sheet format:
+
+\begin{asciibox}
+MATERIALS DATA SHEET SCHEMA
+=============================
+material_name:       "string"          // e.g., "6061-T6 Aluminum"
+material_class:      "string"          // Metal|Ceramic|Polymer|Composite|Coating
+mission_application: "string"          // Where used on {MISSION_NAME}
+
+mechanical_properties:
+  density_kg_m3:         number
+  youngs_modulus_GPa:    number
+  yield_strength_MPa:    number
+  ultimate_strength_MPa: number
+  fracture_toughness_MPa_sqrt_m: number
+  fatigue_limit_MPa:     number | null
+
+thermal_properties:
+  thermal_conductivity_W_mK:   number
+  specific_heat_J_kgK:         number
+  CTE_per_K:                   number   // coefficient of thermal expansion
+  max_service_temp_K:          number
+  min_service_temp_K:          number
+
+space_environment_properties:
+  radiation_tolerance:   "string"       // TID rating or "excellent/good/limited"
+  outgassing_CVCM_pct:   number | null  // condensable volatiles
+  cold_welding_risk:     "string"       // "high/medium/low" for mechanisms
+  UV_stability:          "string"
+
+selection_basis:
+  why_selected:   "string"
+  candidates_considered: ["string"]
+  key_trade:      "string"
+
+qualification_status:
+  first_use_on:   "string"             // {MISSION_NAME} or earlier mission
+  heritage_uses:  ["string"]           // subsequent missions using this material
+\end{asciibox}
+
+\subsection{Safety and Technical Accuracy Rules}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rule} & \tableheader{Type} & \tableheader{Application} \\
+\midrule
+No ITAR data & ABSOLUTE & If a parameter is classified or export-controlled, use representative class data; flag explicitly \\
+Math correctness & BLOCK & All equations checked by FLIGHT (Opus); no incorrect derivations; units explicitly stated throughout \\
+No invented properties & BLOCK & All material properties sourced from T5/T6; no estimated or interpolated values without flagging \\
+Safety factor honesty & GATE & Document actual safety factors if in open literature; use ``typical aerospace'' range if not \\
+Representative parameters flagged & GATE & Any number that is representative (not from \param{MISSION\_NAME} directly) marked $\dagger$ with note \\
+Career claim accuracy & ANNOTATE & Salary ranges, program durations, and job titles sourced from BLS or institutional data \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete College of Knowledge engineering curriculum pack for NASA mission \param{MISSION\_NAME}, covering the mechanical engineering, materials science, and engineering mathematics required to understand and build upon the engineering achievements of the mission. Deliver structured study guides, worked mathematics, design exercises, materials data sheets, engineering notebooks, Claude engineering tutor scripts, and four engineering career path profiles. Release as v1.50.\param{MISSION\_SLUG}.ENG to the GSD College of Knowledge Engineering Department.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE — {MISSION_NAME} ENGINEERING PACK
+===============================================================
+
+  [WAVE 0: ENGINEERING INVENTORY + PARAMETER INJECTION]
+  Ingest Part B hardware_record; classify engineering challenges
+  by pillar; identify novel materials; extract load environment.
+  (Haiku + CRAFT-REQT)
+         |
+   ______|________
+  |               |
+[W1A: MECH ENG]  [W1B: MATERIALS]
+ Module 2          Module 3
+ Structural +      Materials data
+ Thermal +         sheets; selection
+ Mechanisms        rationale;
+ (Sonnet EXEC)     novel materials
+                   (Sonnet EXEC)
+  |_______________|
+         |
+  [WAVE 2A: MATH WORKBOOK]
+  Module 4: Five worked problems × 3 levels
+  Rocket equation + stress + thermal + material + dynamics
+  (Sonnet EXEC-MATH + Opus math verification)
+         |
+  [WAVE 2B: REQUIREMENTS + MANUFACTURING]
+  Module 1: Requirements flow-down; heritage analysis
+  Module 5: Manufacturing process; test philosophy
+  (Sonnet EXEC)
+         |
+  [SYNC: Waves 1 and 2 complete]
+         |
+  [WAVE 3: SYNTHESIS + CAREER PATHS]
+  Module 6: Engineering career profiles; legacy analysis
+  Claude engineering tutor scripts (Opus — CRAFT-ENG)
+  Cross-mission engineering inheritance links
+         |
+  [WAVE 4: CK DEPOSIT + RELEASE]
+  Engineering study guides; data sheets; problem sets
+  CK Engineering Dept YAML entries
+  Release packaging
+         |
+  [WAVE 4B: CAPCOM GATE]
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Agent} & \tableheader{Acceptance Criteria} \\
+\midrule
+1 & Engineering challenge inventory (Module 1) & CRAFT-REQT & All challenges from Part B hardware\_record classified; heritage/new-dev labelled \\
+2 & Requirements flow-down (Module 1) & CRAFT-REQT & Top-level $\to$ subsystem $\to$ component chain documented for primary structure \\
+3 & Structural analysis study guide (Module 2) & EXEC-STRUCT & Loads, material, stress calc, safety factor for at least one element \\
+4 & Vibration/dynamics study (Module 2) & EXEC-STRUCT & Launch environment; at least one component modal analysis \\
+5 & Mechanisms study guide (Module 2) & EXEC-STRUCT & At least one mechanism with actuator, bearing, heritage \\
+6 & Materials data sheets (Module 3) & EXEC-MAT & Full schema for $\geq$3 components; novel material identified \\
+7 & Materials selection rationale (Module 3) & EXEC-MAT & Candidate comparison for at least 2 selections; Ashby index noted \\
+8 & Math workbook — 5 problems × 3 levels (Module 4) & EXEC-MATH & All equations correct; units stated; mission parameters used \\
+9 & Manufacturing \& test guide (Module 5) & EXEC-STRUCT & One component process description; test philosophy; key environmental test \\
+10 & Engineering career profiles × 4 roles (Module 6) & CRAFT-ENG & Education, tools, societies, progression per role \\
+11 & Engineering legacy analysis (Module 6) & CRAFT-ENG & $\geq$2 innovations named; successor mission usage documented \\
+12 & Claude engineering tutor scripts & CRAFT-ENG (Opus) & Canonical explanations; misconceptions; engineering-appropriate boundary handling \\
+13 & CK Engineering Dept YAML entries & LOG & Schema validates; all modules linked \\
+14 & Release artifact v1.50.\param{MISSION\_SLUG}.ENG & LOG & Correct version; correct output path \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Engineering inventory & Part B YAML & Haiku & 8K \\
+W1A: Structural analysis guide & W0 & Sonnet & 28K \\
+W1A: Vibration/dynamics guide & W0 & Sonnet & 22K \\
+W1A: Mechanisms guide & W0 & Sonnet & 20K \\
+W1B: Materials data sheets ($\geq$3) & W0 & Sonnet & 30K \\
+W1B: Materials selection rationale & W0 & Sonnet & 18K \\
+W2A: Math workbook (5 problems $\times$ 3) & W0 & Sonnet+Opus & 45K \\
+W2B: Requirements flow-down (Mod 1) & W0 & Sonnet & 18K \\
+W2B: Manufacturing \& test guide (Mod 5) & W1A & Sonnet & 20K \\
+W3: Career profiles $\times$ 4 roles & W1A,B,2A,B & Sonnet & 24K \\
+W3: Engineering legacy analysis & W1A,B & Opus & 18K \\
+W3: Claude tutor scripts & W1--W2 & Opus & 36K \\
+W4: CK YAML + packaging & W3 & Haiku & 6K \\
+Contingency (10\%) & --- & Mixed & 30K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total per mission run:}} & \textbf{$\sim$323K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Math correctness verification (critical); engineering legacy judgment; Claude tutor script authorship (tone of a seasoned mentor engineer); trade study evaluation quality \\
+Sonnet & 60\% & Study guide production for all modules; materials data sheets; worked math problems (with Opus verification); manufacturing guides; career path content \\
+Haiku & 10\% & Engineering inventory schema; YAML scaffolding; release packaging; token tracking \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave 0: Engineering Inventory}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Ingest Part B hardware\_record & BUDGET & Validated parameter bundle; pillar classification per challenge \\
+Classify each challenge by pillar & CRAFT-REQT & Structural / Thermal / Materials / Mechanisms / Systems \\
+Flag novel materials for Module 3 & CRAFT-REQT & Novel-material list with first-use flag \\
+Extract math parameter values & EXEC-MATH & Seed values for Module 4 workbook problems \\
+Initialize CK YAML scaffolds & LOG & One engineering entry YAML per module \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 0 Go Condition:} All five engineering pillars have at least one challenge assigned; at least three materials identified; math seed parameters available for all five problem types. BLOCK if Part B hardware\_record is empty or missing key fields.
+
+\subsection{Waves 1 \& 2: Parallel Production}
+
+\textbf{Track A — Mechanical Engineering (Modules 2 + 5)} runs in parallel with \textbf{Track B — Materials Science (Module 3)}:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Track} & \tableheader{Key Deliverable Requirements} \\
+\midrule
+W1A: Structural & Primary structural member: material, geometry (approximate), design load, stress calculation, safety factor, design decision; sourced to T1--T4 or flagged representative \\
+W1A: Vibration & Launch environment description (axial g, random vibration g$_{rms}$, acoustic dB); first natural frequency requirement; how at least one component was designed/tested to survive \\
+W1A: Mechanisms & Named mechanism from Part B; actuator type; bearing type and lubricant (including cold-welding risk in vacuum); functional test approach \\
+W1B: Data sheets & Full schema data sheet for $\geq$3 components using identified materials; all properties sourced; representative values flagged $\dagger$ \\
+W1B: Selection & Candidate comparison for $\geq$2 material selections; Ashby performance index stated; why winner beat candidates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 2A: Mathematics Workbook} runs after W0 (seed parameters available) in parallel with W2B:
+
+Each problem appears in a \texttt{mathbox} environment. All five problems are worked at three levels. Opus verifies all equations before Wave 3 proceeds.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Problem} & \tableheader{Math Domain} & \tableheader{Levels} \\
+\midrule
+P1: Rocket equation & Tsiolkovsky / exponential & Conceptual: plug-in; Working: $\Delta v$ budget; Advanced: multi-stage optimization \\
+P2: Structural stress & Mechanics of materials & Conceptual: axial stress $\sigma=F/A$; Working: bending + safety factor; Advanced: von Mises + margin \\
+P3: Thermal balance & Radiation / conduction & Conceptual: equilibrium temperature; Working: radiator sizing; Advanced: transient cool-down \\
+P4: Material selection & Ashby methodology & Conceptual: specific strength ranking; Working: performance index calculation; Advanced: multi-attribute decision \\
+P5: Natural frequency & Dynamics (SDOF) & Conceptual: spring-mass analogy; Working: $f_n = \frac{1}{2\pi}\sqrt{k/m}$; Advanced: beam mode shape \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Synthesis --- Career Paths \& Claude Tutor Scripts}
+
+Wave 3 is the Opus synthesis wave. CRAFT-ENG reads all W1/W2 content and produces:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{accent}
+\tableheader{Synthesis Task} & \tableheader{Description} \\
+\midrule
+Career profile $\times$ 4 roles & Structural engineer, materials engineer, thermal engineer, and one mission-specific role (e.g., mechanisms engineer for missions with complex deployables). Each profile: education path, tools, professional societies, day-in-the-life, progression to lead \\
+Engineering legacy analysis & Name $\geq$2 specific innovations from \param{MISSION\_NAME} traceable to subsequent missions or commercial applications; write the causal paragraph for each \\
+Claude tutor scripts & Canonical engineering explanations per pillar; engineering misconception map; ``if student asks X, suggest Y'' patterns for engineering reasoning; escalation from conceptual to working level; boundary handling for classified/ITAR questions \\
+Math verification pass & Opus reviews all five Module 4 problems for mathematical correctness, unit consistency, and physical reasonableness of results \\
+Cross-mission engineering links & From Part A inheritance graph: what did predecessors contribute? What did \param{MISSION\_NAME} contribute that appears in successors? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 3 Go Condition:} All five math problems pass Opus verification; all four career profiles complete; legacy analysis identifies $\geq$2 innovations with causal explanation; CAPCOM notified.
+
+\subsection{Wave 4: CK Deposit \& Release}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Gate} \\
+\midrule
+CK Engineering Dept YAML entries & LOG & Schema validates; all 14 deliverables linked \\
+VERIFY spot-check (10 eng. claims) & VERIFY & All 10 traced to T1--T5; representative values flagged \\
+Math correctness final check & VERIFY & 2 problems re-derived independently; results match \\
+Release packaging & LOG & All files at correct output path; version string correct \\
+CAPCOM review & CAPCOM & Human approval before release tag \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Pillar batching:} W1A processes all structural content before dynamics, then mechanisms. Each sub-track shares the structural material context, enabling cache reuse.
+  \item \textbf{Math seed prefix:} All five W2A problems begin with the same mission-parameter table (mass, load environment, material properties). One cache hit covers all five problems.
+  \item \textbf{Materials cross-reference:} If Module 3 material appears in Module 2 (same material, structural and thermal use), EXEC-STRUCT and EXEC-MAT share the data sheet rather than each generating separately.
+  \item \textbf{Era batching:} Like Parts B and C, batch missions from the same era. Apollo-era missions share Aluminum 2024-T4, Inconel 718, and fiberglass MLI; these material context blocks are cached across all Apollo Part D runs.
+  \item \textbf{Opus single-pass:} All Wave 3 Opus tasks (career profiles, tutor scripts, math verification, legacy analysis) run in a single Opus context window to maximize consistency.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (K)} & \tableheader{Sonnet (K)} & \tableheader{Haiku (K)} \\
+\midrule
+Wave 0 & --- & 6 & 2 \\
+Wave 1A (Mech Eng) & --- & 70 & --- \\
+Wave 1B (Materials) & --- & 48 & --- \\
+Wave 2A (Math workbook) & 12 & 33 & --- \\
+Wave 2B (Reqts + Mfg) & --- & 38 & --- \\
+Wave 3 (Synthesis + Opus) & 54 & 24 & --- \\
+Wave 4 (CK + Release) & --- & --- & 6 \\
+Contingency (10\%) & 7 & 22 & 1 \\
+\midrule
+\textbf{Total} & \textbf{73K} & \textbf{241K} & \textbf{9K} \\
+\multicolumn{3}{r}{\textbf{Grand Total:}} & \textbf{$\sim$323K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH — {MISSION_NAME} ENGINEERING PACK
+====================================================
+
+PART B RELEASE + PART A CATALOG (external inputs)
+  ↓
+W0: ENGINEERING INVENTORY (Haiku + CRAFT-REQT)
+  ↓
+  +──────────────────────┬──────────────────────+
+  |                      |                      |
+W1A: STRUCTURAL        W1B: MATERIALS         W2B: REQUIREMENTS
+     GUIDE                  DATA SHEETS             + MFG GUIDE
+  |  (EXEC-STRUCT)          (EXEC-MAT)              (EXEC-STRUCT)
+  |                      |                      |
+W1A: VIBRATION/DYN     W1B: SELECTION         W2A: MATH WORKBOOK
+     GUIDE                  RATIONALE               5 problems × 3 levels
+  |  (EXEC-STRUCT)          (EXEC-MAT)              (EXEC-MATH + Opus verify)
+  |                      |                      |
+W1A: MECHANISMS        |                      |
+     GUIDE             |                      |
+     (EXEC-STRUCT)     |                      |
+  |___________________|_____________________|
+                        |
+  [SYNC: All W1 + W2 complete]
+                        |
+  W3: SYNTHESIS (Opus — CRAFT-ENG)
+      Career profiles × 4 + Legacy + Tutor scripts
+      + Math verification pass
+                        |
+  W4: CK YAML + VERIFY + RELEASE PACKAGING
+                        |
+  W4B: CAPCOM GATE
+                        |
+  RELEASE: v1.50.{MISSION_SLUG}.ENG
+  → .planning/outputs/missions/{MISSION_SLUG}/eng/
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Description} \\
+\midrule
+Safety-Critical & 5 & P0 & BLOCK & Math correctness, ITAR boundary, materials accuracy \\
+Core Completeness & 12 & P1 & BLOCK & One per success criterion \\
+Engineering Quality & 8 & P2 & REVISION & Technical accuracy; problem scaffolding; career realism \\
+Integration & 6 & P2 & REVISION & Cross-module consistency; pillar coupling \\
+Edge Case & 4 & P3 & ANNOTATE & Sparse data, classified parameters, active missions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK on Failure)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Math correctness (Opus verified) & All five Module 4 problems independently re-derived; results physically reasonable; no dimensional errors \\
+SC-02 & ITAR/proprietary boundary & No classified performance data present; all representative values flagged $\dagger$; no export-controlled propellant specifics \\
+SC-03 & Materials properties sourced & All property values in data sheets trace to T5/T6 source; no invented or interpolated properties unflagged \\
+SC-04 & No new science claims & Part D introduces no science facts not in Part B; engineering context only \\
+SC-05 & Safety factor accuracy & Safety factors documented as actual (from open lit.) or ``typical aerospace'' range; never invented specific values \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Engineering Quality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Quality Check} & \tableheader{Acceptance Standard} \\
+\midrule
+EQ-01 & Structural problem physical reasonableness & Calculated stress is $<$ yield strength (otherwise design would have failed); safety factor is in credible aerospace range (1.25--2.0) \\
+EQ-02 & Thermal problem equilibrium check & Equilibrium temperature is within known operating range for that mission's orbit/environment \\
+EQ-03 & Material selection non-obvious & Selection rationale explains why the obvious choice (e.g., aluminum) was or was not used; candidate comparison is genuine \\
+EQ-04 & Three-level math scaffolding & Conceptual level requires only algebra; Working level introduces calculus or data lookup; Advanced level is genuinely open-ended \\
+EQ-05 & Career profile realism & Education requirements accurate for US aerospace industry; tool list reflects current industry practice; salary range sourced or omitted \\
+EQ-06 & Engineering legacy causal & Legacy statement is causal (``X enabled Y because Z'') not correlational (``Y came after X'') \\
+EQ-07 & Novel material genuinely novel & First-use claim verified against T1/T5 heritage dates; not routine \\
+EQ-08 & Mechanism vacuum consideration & Any mechanism guide discusses vacuum tribology and cold-welding risk; lubricant selection addressed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Cross-Module Check} & \tableheader{Expected} \\
+\midrule
+IN-01 & Module 2 $\leftrightarrow$ Module 3 coupling & Material used in structural analysis matches material in data sheet; properties consistent \\
+IN-02 & Module 4 $\leftrightarrow$ Module 3 coupling & Stress problem uses yield strength from Module 3 data sheet; thermal problem uses conductivity from data sheet \\
+IN-03 & Module 1 $\to$ Module 2 coverage & Every challenge classified ``Structural'' or ``Mechanisms'' in Module 1 appears in Module 2 study guide \\
+IN-04 & Module 6 $\to$ Module 2 legacy & Engineering legacy innovations are traceable to specific Module 2 or 3 engineering decisions \\
+IN-05 & Part A inheritance $\leftrightarrow$ Module 1 heritage & Heritage items in Module 1 match predecessor missions listed in Part A inheritance graph \\
+IN-06 & Math workbook $\to$ Module 3 material selection & Module 4 Ashby problem uses materials from Module 3; winner matches Module 3 selection \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{5cm}L{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & Challenges classified; heritage/new-dev labelled & CF-01, IN-05 & TBD \\
+SC2 & Structural analysis with stress and safety factor & CF-02, EQ-01, IN-01 & TBD \\
+SC3 & Vibration environment; component survival design & CF-03, IN-03 & TBD \\
+SC4 & Mechanism with actuator, bearing, heritage & CF-04, EQ-08 & TBD \\
+SC5 & Materials data sheets $\geq$3; selection rationale & CF-05, SC-03, EQ-03 & TBD \\
+SC6 & Novel material identified and qualified & CF-06, EQ-07 & TBD \\
+SC7 & Math workbook: 5 problems, mission parameters & CF-07, SC-01, IN-02 & TBD \\
+SC8 & Three-level math scaffolding per problem & CF-08, EQ-04 & TBD \\
+SC9 & Manufacturing process + test philosophy & CF-09 & TBD \\
+SC10 & Career profiles $\times$4 with education and tools & CF-10, EQ-05 & TBD \\
+SC11 & Engineering legacy $\geq$2 innovations, causal & CF-11, EQ-06, IN-04 & TBD \\
+SC12 & Release versioned correctly; path correct & CF-12 & TBD \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent (PNW Naming)} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & RAVEN & Mission direction; math verification oversight; trade study judgment; engineering culture voice \\
+PLAN & SALMON & Wave decomposition; parallel track optimization; W2A math sequencing \\
+CRAFT-ENG & OWL & Engineering synthesis; Claude tutor script authorship; career profile narrative; legacy causal analysis \\
+CRAFT-REQT & EAGLE & Requirements flow-down; heritage classification; engineering challenge taxonomy; NASA SE methodology \\
+EXEC-STRUCT & CEDAR & Modules 2+5: structural, vibration, mechanisms, manufacturing, test guides \\
+EXEC-MAT & HEMLOCK & Module 3: materials data sheets; selection rationale; novel material documentation \\
+EXEC-MATH & ALDER & Module 4: five worked problems $\times$ three levels; equation derivations; unit checking \\
+VERIFY & HAWK & Source tracing; ITAR boundary check; math spot-check (2 independent re-derivations); properties sourcing \\
+INTEG & HERON & Cross-module consistency; Module 2/3 property coupling; inheritance graph cross-reference \\
+CAPCOM & FOXGLOVE & Human gate; revision loop; ITAR escalation if needed \\
+BUDGET & WREN & Token tracking; era-batch optimization; math problem seed parameter management \\
+LOG & MARTIN & CK YAML generation; release packaging; output path management; commit messages \\
+TOPO & BEAR & Multi-track topology management; W1A/1B/2A/2B parallel coordination \\
+ARCH & WOLF & Cross-pillar structural decisions; ensures thermal-structural coupling appears in both Mod 2 and 3 \\
+SECURE & CRANE & ITAR and proprietary boundary enforcement; flags any potential export-control issues before EXEC writes \\
+RETRO & OSPREY & Post-wave analysis; documents lessons learned for Part D template improvement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Sample Deliverable: Worked Engineering Problem (Illustrative)}
+
+The following illustrates Module 4 output format for one problem at the Working Engineer level, using representative Cassini mission parameters.
+
+\begin{mathbox}{MODULE 4 — PROBLEM 3: THERMAL BALANCE — CASSINI ORBITER (Representative)}
+\textbf{Mission context:} Cassini operated at Saturn, 9.5 AU from the Sun. The spacecraft used three Multi-Mission Radioisotope Thermoelectric Generators (MMRTGs) for power, each producing $\sim$4.5 kW of thermal waste at beginning-of-mission. The spacecraft needed to reject excess heat via two $\sim$3 m$^2$ radiator panels while maintaining electronics above 0$^\circ$C.
+
+\textbf{Working Engineer Level:}
+
+\textbf{Step 1: Solar flux at Saturn.}
+$G_{Saturn} = G_{Earth}/d^2 = 1361 \text{ W/m}^2 / (9.5)^2 \approx 15.1 \text{ W/m}^2$
+
+\textbf{Step 2: MMRTG total waste heat.}
+$Q_{waste} = 3 \times 4{,}500 \text{ W} = 13{,}500 \text{ W}$
+
+\textbf{Step 3: Required radiator temperature} (Stefan-Boltzmann).
+$Q = \varepsilon \sigma A T^4 \Rightarrow T = \left(\frac{Q}{\varepsilon \sigma A}\right)^{1/4}$
+
+With $A = 6 \text{ m}^2$, $\varepsilon = 0.90$ (black anodize), $\sigma = 5.67 \times 10^{-8}$ W/m$^2$K$^4$:
+$T = \left(\frac{13{,}500}{0.90 \times 5.67 \times 10^{-8} \times 6}\right)^{1/4} \approx 311 \text{ K} = 38^\circ\text{C}$\dagger
+
+\textbf{Result:} Radiators operating at $\sim$38$^\circ$C at beginning-of-mission, well above the 0$^\circ$C electronics minimum. Thermal design margin is adequate. As RTGs decay over the 13-year mission, $Q_{waste}$ decreases, requiring heater power to maintain minimum temperatures. This is why Cassini carried internal heaters.
+
+\textit{\small \dagger Representative calculation; actual Cassini thermal design includes view factors, planetary IR, conduction paths, and multi-node model. See Ganapathi et al., AIAA 1994-4014 for Cassini thermal design overview.}
+\end{mathbox}
+
+\begin{engbox}{Engineering Notebook — The RTG Thermal Management Trade}
+\textbf{The problem:} RTGs produce far more heat than electrical power (efficiency $\sim$6\%). Most of that heat must go somewhere that doesn't overheat electronics.
+
+\textbf{Option A: Reject all waste heat to space via large radiators.} Pro: Simple. Con: At Saturn, very cold environment risks overcooling during low-power phases; requires large, heavy radiator panels.
+
+\textbf{Option B: Use waste heat intentionally as spacecraft heater, reject the rest.} This is what Cassini did. Heat pipes redistributed RTG waste heat to electronics bays. Louvers controlled heat rejection from radiators. The ``bus'' was kept warm at Saturn using the same heat that would be a cooling problem in Earth orbit.
+
+\textbf{Engineering lesson:} In spacecraft thermal design, a ``waste'' is often a resource in disguise. The RTG heat that needed to be rejected in inner-solar-system orbit became the primary spacecraft heating system at Saturn. The engineer who recognized this reframing saved mass, simplified the design, and solved two problems with one thermal network.
+
+\textbf{Career note:} Thermal engineers at JPL routinely use this kind of systems thinking. The tool is a thermal math model (SINDA/FLUINT or Thermal Desktop); the skill is knowing which heat loads to fight and which to embrace.
+\end{engbox}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (16 roles) \\
+Est. Token Budget (median mission) & $\sim$323K \\
+Est. Token Budget (flagship, Apollo/Cassini) & $\sim$450K \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Context Windows per Run & 7--10 \\
+Wave Structure & 0, 1A/1B/2A/2B (parallel), 3 (Opus synthesis), 4, 4B (CAPCOM) \\
+Safety-Critical Gates & 5 BLOCK tests (math correctness, ITAR, materials sourcing) \\
+Engineering Quality Tests & 8 REVISION gates \\
+Math Problems & 5 types $\times$ 3 levels = 15 worked problem variants \\
+Career Profiles & 4 roles per mission run \\
+Output per Run & 14 deliverables including study guides, data sheets, math workbook, career profiles, Claude tutor scripts \\
+Release Version & v1.50.\param{MISSION\_SLUG}.ENG \\
+Output Path & \texttt{.planning/outputs/missions/\param{MISSION\_SLUG}/eng/} \\
+CK Department Target & Engineering + Physics (cross-links) \\
+Parallel to & Part C (both consume Part B; run simultaneously) \\
+Resumability & Tracked in \texttt{part-d-progress.json} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Intuition is the residue of mastery. The structural engineer who looks at a fastener pattern and immediately knows it's undertorqued, or the materials scientist who holds a sample and suspects intergranular corrosion before the SEM confirms it --- they are not guessing. They are doing rapidly what they once did slowly, with equations and reference books and test data. The fast path to good intuition is the slow path through the fundamentals.''}\\[0.6em]
+Part D does not offer shortcuts. It offers the fundamentals of mechanical engineering and materials science as they were actually applied on \param{MISSION\_NAME} --- with real loads, real temperatures, real material properties, and real consequences. A student who works through the Module 4 problems with pencil and paper and then reads the engineering notebook for that same mission component is doing, in miniature, the same work that the engineers at JPL or GSFC or MSFC did before the first drawing was released.\\[0.6em]
+\textbf{That is how you become an engineer. One correctly-solved problem at a time.}
+\end{quotebox}
+
+\end{document}

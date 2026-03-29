@@ -1,0 +1,157 @@
+{
+  "mission": "1.0",
+  "title": "NASA Agency Founding",
+  "description": "Open datasets and source materials relevant to the NACA-to-NASA transition (1958) and Armillaria ostoyae (Malheur National Forest, Oregon)",
+  "sources": [
+    {
+      "id": "nasa-history-office",
+      "name": "NASA History Office -- NACA to NASA Transition",
+      "url": "https://www.nasa.gov/history/the-national-advisory-committee-for-aeronautics-naca/",
+      "type": "primary-source",
+      "category": "institutional-history",
+      "description": "Official NASA History Office page on NACA, including founding, laboratory establishment, research contributions, and the 1958 transition. Links to further reading on the NACA-to-NASA institutional transformation.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp-4508",
+      "name": "Legislative Origins of the National Aeronautics and Space Act of 1958 (SP-4508)",
+      "url": "https://www.nasa.gov/wp-content/uploads/2023/04/sp-4508.pdf",
+      "type": "primary-source",
+      "category": "legislative-history",
+      "description": "Full-text NASA Special Publication documenting the legislative process that created NASA. Includes congressional hearing transcripts, Eisenhower correspondence, bill drafts, and committee reports. Essential primary source for understanding the political architecture of NASA's founding.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp-4102",
+      "name": "Managing NASA in the Apollo Era (SP-4102)",
+      "url": "https://history.nasa.gov/SP-4102/ch7.htm",
+      "type": "primary-source",
+      "category": "budget-history",
+      "description": "NASA Special Publication on management and budget history. Chapter 7 covers budget chronology from FY1959 forward, including the initial appropriations that funded NASA's transition from NACA.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp-4219",
+      "name": "The Transonic Wind Tunnel and the NACA Technical Culture (SP-4219)",
+      "url": "https://www.nasa.gov/history/SP-4219/Chapter4-revised.html",
+      "type": "primary-source",
+      "category": "research-culture",
+      "description": "Detailed study of NACA's engineering culture through the lens of transonic wind tunnel development. Documents the research-authorize methodology, parameter-variation approach, and the collaborative bench-level teamwork that defined NACA's institutional DNA.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "ntrs-naca-reports",
+      "name": "NASA Technical Reports Server (NTRS) -- NACA Technical Reports Collection",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "archive",
+      "category": "research-publications",
+      "description": "Searchable archive of NACA Technical Reports, Technical Notes, and Research Memorandums. Contains the complete published output of NACA's 43-year research program, including airfoil data, cowling studies, wind tunnel results, and propulsion research. Search for 'NACA' to access the historical collection.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "nssdc-master-catalog",
+      "name": "NSSDC Master Catalog -- Early NASA Missions",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/",
+      "type": "database",
+      "category": "mission-catalog",
+      "description": "NASA Space Science Data Coordinated Archive master catalog. Contains detailed records for all NASA spacecraft, including the earliest missions (Explorer 1, Pioneer series, Vanguard) that bridged the NACA-to-NASA transition period. Searchable by mission name, date, and type.",
+      "format": "HTML/database",
+      "access": "open"
+    },
+    {
+      "id": "nasa-glennan-bio",
+      "name": "T. Keith Glennan -- NASA Administrator Biography",
+      "url": "https://history.nasa.gov/Biographies/glennan.html",
+      "type": "primary-source",
+      "category": "personnel",
+      "description": "Official NASA biography of T. Keith Glennan, first NASA Administrator (1958-1961). Covers his background at Case Institute of Technology, AEC service, and his insistence that Hugh Dryden serve as Deputy Administrator.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-von-braun",
+      "name": "Wernher von Braun -- NASA People Profile",
+      "url": "https://www.nasa.gov/people/wernher-von-braun/",
+      "type": "primary-source",
+      "category": "personnel",
+      "description": "Official NASA profile of Wernher von Braun, first director of Marshall Space Flight Center. Documents his career from the Army Ballistic Missile Agency through the Saturn V program.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-budget-history",
+      "name": "NASA Budget Chronological History FY1959-1979",
+      "url": "https://www.nasa.gov/wp-content/uploads/2023/12/o45128943-1959-1979.pdf",
+      "type": "primary-source",
+      "category": "budget-history",
+      "description": "Official NASA budget history document covering the agency's first two decades of appropriations. Includes authorizations, appropriations, and expenditures from FY1959 (the first NASA budget) through FY1979.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "usfs-armillaria",
+      "name": "USDA Forest Service -- Armillaria Root Disease in Pacific Northwest Forests",
+      "url": "https://www.fs.usda.gov/",
+      "type": "research",
+      "category": "forest-pathology",
+      "description": "USDA Forest Service Forest Health Protection publications on Armillaria root disease (Armillaria ostoyae) in Pacific Northwest forests. Covers disease ecology, management recommendations, and the interaction between fire suppression and disease spread. Search Forest Service publications for 'Armillaria' and 'Pacific Northwest Research Station'.",
+      "format": "various",
+      "access": "open"
+    },
+    {
+      "id": "oregon-encyclopedia-fungus",
+      "name": "Oregon Encyclopedia -- Humongous Fungus (Armillaria ostoyae)",
+      "url": "https://www.oregonencyclopedia.org/articles/humongous-fungus-armillaria-ostoyae/",
+      "type": "reference",
+      "category": "organism-overview",
+      "description": "Comprehensive article on the Humongous Fungus from the Oregon Encyclopedia, a peer-reviewed publication of the Oregon Historical Society and Portland State University. Covers discovery, size, age estimates, ecological significance, and Catherine Parks's research.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "pnw-research-station",
+      "name": "USDA Pacific Northwest Research Station -- La Grande, Oregon",
+      "url": "https://www.fs.usda.gov/research/pnw",
+      "type": "research",
+      "category": "forest-research",
+      "description": "The Pacific Northwest Research Station in La Grande, Oregon, where Catherine Parks conducted the 1998 field investigation that identified the Malheur National Forest Armillaria individual. Station publications include ongoing research on forest pathogens, fire ecology, and forest health in the Blue Mountains.",
+      "format": "various",
+      "access": "open"
+    },
+    {
+      "id": "malheur-national-forest",
+      "name": "Malheur National Forest -- USDA Forest Service",
+      "url": "https://www.fs.usda.gov/malheur",
+      "type": "reference",
+      "category": "forest-management",
+      "description": "Official USDA Forest Service page for the Malheur National Forest in the Blue Mountains of eastern Oregon. Includes forest management plans, recreation information, and ecological context for the Humongous Fungus location (Reynolds Creek and Clear Creek drainages east of Prairie City).",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-naca-oral-histories",
+      "name": "NACA Oral Histories -- NASA History Office",
+      "url": "https://www.nasa.gov/history/history-publications-and-resources/oral-histories/naca/",
+      "type": "primary-source",
+      "category": "oral-history",
+      "description": "Oral history interviews with NACA veterans who lived through the transition to NASA. First-person accounts of the institutional culture, research methodology, and the October 1, 1958 transition. Invaluable primary sources for understanding the human dimension of institutional transformation.",
+      "format": "HTML/transcript",
+      "access": "open"
+    },
+    {
+      "id": "national-space-act-1958",
+      "name": "National Aeronautics and Space Act of 1958 (Unamended Text)",
+      "url": "https://www.nasa.gov/history/national-aeronautics-and-space-act-of-1958-unamended/",
+      "type": "primary-source",
+      "category": "legislative-text",
+      "description": "Full text of the National Aeronautics and Space Act of 1958 (Public Law 85-568) as originally enacted. The founding document of NASA, including the declaration that 'activities in space should be devoted to peaceful purposes for the benefit of all mankind.'",
+      "format": "HTML",
+      "access": "open"
+    }
+  ]
+}

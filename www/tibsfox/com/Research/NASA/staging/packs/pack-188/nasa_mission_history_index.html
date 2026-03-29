@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASA Mission History — GSD Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #311B92;
+    --secondary: #0277BD;
+    --accent: #4527A0;
+    --gold: #F9A825;
+    --light-primary: #EDE7F6;
+    --light-secondary: #E1F5FE;
+    --dark: #1A1A2E;
+    --text: #212121;
+    --subtle: #757575;
+    --border: #BDBDBD;
+    --row-gray: #F5F5F5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: #0D0D1A;
+    min-height: 100vh;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 5% 85%, rgba(249,168,37,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 55% 90%, rgba(249,168,37,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 80% 5%, rgba(249,168,37,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, #1A0050 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '★ NASA ★';
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: rgba(249, 168, 37, 0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(249, 168, 37, 0.15);
+    border: 1px solid rgba(249, 168, 37, 0.4);
+    color: var(--gold);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    color: white;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  header .subtitle {
+    font-size: 1rem;
+    color: rgba(200, 180, 255, 0.9);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  header .tagline {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(180, 160, 220, 0.7);
+  }
+
+  .pipeline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: rgba(249, 168, 37, 0.8);
+    letter-spacing: 0.1em;
+  }
+
+  .pipeline span { font-weight: 700; }
+  .pipeline .arrow { opacity: 0.5; }
+
+  /* Main content */
+  main {
+    background: #F8F7FF;
+    min-height: 100vh;
+  }
+
+  .content {
+    padding: 2.5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* File cards */
+  .files-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .files-grid { grid-template-columns: 1fr; }
+  }
+
+  .file-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    transition: all 0.2s ease;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 2px 6px rgba(49, 27, 146, 0.08);
+  }
+
+  .file-card:hover {
+    box-shadow: 0 4px 16px rgba(49, 27, 146, 0.18);
+    transform: translateY(-2px);
+    border-left-color: var(--gold);
+  }
+
+  .file-card .file-icon {
+    font-size: 2rem;
+    margin-bottom: 0.7rem;
+    display: block;
+  }
+
+  .file-card .file-type {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--subtle);
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+
+  .file-card .file-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.4rem;
+    font-family: 'Libre Baskerville', serif;
+  }
+
+  .file-card .file-desc {
+    font-size: 0.8rem;
+    color: var(--subtle);
+    line-height: 1.4;
+  }
+
+  /* Section headings */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+
+  h3 {
+    color: var(--secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-top: 1.5rem;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+  }
+
+  /* Contents breakdown */
+  .stage-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .stage-header {
+    padding: 0.6rem 1rem;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .stage-1 .stage-header { background: var(--primary); }
+  .stage-2 .stage-header { background: var(--secondary); }
+  .stage-3 .stage-header { background: var(--accent); }
+
+  .stage-body {
+    padding: 0.8rem 1rem;
+  }
+
+  .stage-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .stage-items li {
+    font-size: 0.82rem;
+    padding: 0.2rem 0;
+    color: #444;
+    border-bottom: 1px solid #F0F0F0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .stage-items li:last-child { border-bottom: none; }
+
+  .stage-items li::before {
+    content: '›';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.1em;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat-box {
+    background: var(--light-primary);
+    border: 1px solid rgba(49, 27, 146, 0.15);
+    border-radius: 6px;
+    padding: 0.8rem;
+    text-align: center;
+  }
+
+  .stat-box .stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Libre Baskerville', serif;
+    display: block;
+  }
+
+  .stat-box .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--subtle);
+    margin-top: 0.2rem;
+  }
+
+  /* Instructions */
+  .instructions {
+    background: var(--light-secondary);
+    border: 1px solid rgba(2, 119, 189, 0.2);
+    border-radius: 6px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .instructions ol {
+    padding-left: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  .instructions li {
+    font-size: 0.82rem;
+    padding: 0.2rem 0;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  /* Code block */
+  pre {
+    background: #1A1A2E;
+    color: #E0E0E0;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    font-size: 0.75rem;
+    overflow-x: auto;
+    margin-top: 0.6rem;
+    font-family: 'DejaVu Sans Mono', 'Courier New', monospace;
+  }
+
+  code {
+    background: #F3F0FF;
+    color: var(--primary);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.8em;
+  }
+
+  /* Quote */
+  .closing-quote {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    border-radius: 8px;
+    padding: 1.8rem 2rem;
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+
+  .closing-quote blockquote {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+    opacity: 0.9;
+  }
+
+  .closing-quote .attribution {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .gold { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">GSD Research Mission Package</div>
+    <h1>A Complete History of<br>NASA Missions</h1>
+    <p class="subtitle">From Founding to the Present Day — 1958 to 2026</p>
+    <p class="tagline">68 years · 6 eras · one unbroken arc of exploration</p>
+    <div class="pipeline">
+      <span>Vision</span>
+      <span class="arrow">→</span>
+      <span>Research</span>
+      <span class="arrow">→</span>
+      <span>Mission</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="content">
+
+  <div class="stats-strip">
+    <div class="stat-box">
+      <span class="stat-value">68</span>
+      <div class="stat-label">Years Covered</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-value">6</span>
+      <div class="stat-label">Research Modules</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-value">29</span>
+      <div class="stat-label">Pages</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-value">Fleet</span>
+      <div class="stat-label">Activation Profile</div>
+    </div>
+  </div>
+
+  <h2>Download Files</h2>
+
+  <div class="files-grid">
+    <a class="file-card" href="nasa_mission_history.pdf" download>
+      <span class="file-icon">📄</span>
+      <div class="file-type">PDF Document</div>
+      <div class="file-name">nasa_mission_history.pdf</div>
+      <div class="file-desc">Complete 29-page three-stage mission package. Print-ready, bookmarked, with page numbers and full bibliography.</div>
+    </a>
+    <a class="file-card" href="nasa_mission_history.tex" download>
+      <span class="file-icon">📝</span>
+      <div class="file-type">LaTeX Source</div>
+      <div class="file-name">nasa_mission_history.tex</div>
+      <div class="file-desc">Full XeLaTeX source. Modify and recompile to update active missions, extend coverage, or adjust formatting.</div>
+    </a>
+  </div>
+
+  <h2>Contents Breakdown</h2>
+
+  <div class="stage-card stage-1">
+    <div class="stage-header">Stage 1 — Vision Document</div>
+    <div class="stage-body">
+      <ul class="stage-items">
+        <li>Vision narrative: 68-year arc as directed graph of technological inheritance</li>
+        <li>5-problem problem statement: fragmentation, era-siloing, robotic/human split, current missions gap, institutional failure patterns</li>
+        <li>Domain epoch map: ASCII timeline from NACA (1958) to Artemis IV (2028)</li>
+        <li>6-module architecture diagram with full scope per module</li>
+        <li>Chipset configuration (YAML): Agnus/Denise/Paula/Gary/68000 role assignments</li>
+        <li>12 testable success criteria</li>
+        <li>Through-line connecting unit circle philosophy to the NASA arc</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage-card stage-2">
+    <div class="stage-header">Stage 2 — Research Reference</div>
+    <div class="stage-body">
+      <ul class="stage-items">
+        <li>Module 1: Mercury (6 crewed missions table) + Gemini (10 crewed missions table), 1958–1966</li>
+        <li>Module 2: Apollo full timeline, Apollo 1 fire, 7 lunar landing missions table with sites and samples, Apollo 13 narrative</li>
+        <li>Module 3: Skylab (3 crews), Apollo-Soyuz, Pioneer, Viking, Voyager Grand Tour and 2012 interstellar crossing</li>
+        <li>Module 4: Space Shuttle program, 5 orbiters, 135 missions, Challenger and Columbia disaster analyses, key achievements</li>
+        <li>Module 5: Great Observatories, full Mars exploration lineage table (Mariner 4 to Perseverance 2026), Galileo, Cassini, New Horizons, Parker Solar Probe (27 encounters through March 2026), JWST</li>
+        <li>Module 6: ISS continuous habitation, Commercial Crew, Artemis I–IV with February 2026 restructure reflected</li>
+        <li>Safety/sensitivity table; complete 20+ source bibliography (government and peer sources only)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage-card stage-3">
+    <div class="stage-header">Stage 3 — Mission Package</div>
+    <div class="stage-body">
+      <ul class="stage-items">
+        <li>Milestone specification with 9 deliverables and acceptance criteria</li>
+        <li>Wave execution plan: Wave 0 (Foundation), Wave 1A/1B (Parallel), Wave 2 (Synthesis, Opus), Wave 3 (Publication), Wave 3B (CAPCOM gate)</li>
+        <li>Component breakdown with model assignments and token estimates (~292K total)</li>
+        <li>Model allocation rationale: Opus 30% / Sonnet 60% / Haiku 10%</li>
+        <li>Cache optimization strategy for 6-module parallel execution</li>
+        <li>Test plan: 4 BLOCK safety-critical tests + 12 core + 6 integration + 4 edge cases</li>
+        <li>Verification matrix mapping 12 success criteria to test IDs</li>
+        <li>16-role Fleet crew manifest (PNW bioregion naming: Raven, Salmon, Osprey, Cedar, Hemlock…)</li>
+        <li>ASCII dependency graph; execution summary table</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How to Hand Off to GSD Orchestrator</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Place the <code>nasa_mission_history.pdf</code> in your GSD project's <code>.planning/reference/</code> directory.</li>
+      <li>Open Claude Code and invoke the skill-creator: <code>gsd run skill-creator --mission nasa_mission_history.pdf</code></li>
+      <li>The orchestrator reads the Stage 3 wave plan and activates the Fleet profile. Wave 0 runs first (schema + source index).</li>
+      <li>Approve each CAPCOM gate as waves complete. Wave 3B is the final human review before document delivery.</li>
+      <li>The full reference document is deposited to <code>.planning/outputs/nasa-mission-history/</code> as PDF + .tex source.</li>
+    </ol>
+  </div>
+
+  <h2>Recompile the LaTeX Source</h2>
+
+  <div class="instructions">
+    <p style="font-size:0.82rem;color:#444;margin-bottom:0.5rem;">To update active mission data or add new sections, edit <code>nasa_mission_history.tex</code> and recompile with XeLaTeX (three passes required for TOC and page numbers):</p>
+    <pre>xelatex -interaction=nonstopmode nasa_mission_history.tex
+xelatex -interaction=nonstopmode nasa_mission_history.tex
+xelatex -interaction=nonstopmode nasa_mission_history.tex</pre>
+    <p style="font-size:0.75rem;color:var(--subtle);margin-top:0.6rem;">Requires: <code>texlive-xetex</code>, <code>fonts-dejavu</code>. On Ubuntu: <code>sudo apt install texlive-xetex texlive-fonts-recommended texlive-latex-extra fonts-dejavu</code></p>
+  </div>
+
+  <div class="closing-quote">
+    <blockquote>
+      "We choose to go to the Moon in this decade and do the other things, not because they are easy,
+      but because they are hard — because that goal will serve to organize and measure the best of
+      our energies and skills."
+    </blockquote>
+    <p class="attribution">— President Kennedy, Rice University, September 12, 1962</p>
+    <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin-top:1rem;font-style:italic;">
+      Sixty-eight years on, the arc continues. The spaces between the missions are where the meaning lives.
+    </p>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <p>GSD Research Mission Package · NASA Mission History · March 29, 2026 · Activation: <span class="gold">Fleet Profile</span></p>
+  <p style="margin-top:0.3rem;">Vision → Research → Mission · Ready for gsd-skill-creator execution via Claude Code</p>
+</footer>
+
+</body>
+</html>

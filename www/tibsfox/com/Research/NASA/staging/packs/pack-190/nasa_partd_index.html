@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So You Want to Be an Engineer — NASA Engineering Deep Dive — GSD Part D</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1C2833;
+    --secondary: #BA4A00;
+    --tertiary: #1A5276;
+    --accent: #2E4057;
+    --forge-light: #FDEBD0;
+    --blueprint-light: #D6EAF8;
+    --graphite-light: #EAECEE;
+    --math-bg: #F4F6F7;
+    --border: #BDBDBD;
+    --row-gray: #F5F5F5;
+    --subtle: #757575;
+    --text: #212121;
+    --orange-bright: #E67E22;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: #F0F2F5;
+    min-height: 100vh;
+  }
+
+  /* Header — industrial, precise, dramatic */
+  header {
+    background: linear-gradient(160deg, #0A0F14 0%, var(--primary) 50%, var(--accent) 100%);
+    border-bottom: 4px solid var(--secondary);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid texture overlay */
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,82,118,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,82,118,0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pipeline-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .step {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.22rem 0.65rem;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .step-done { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+  .step-active { background: var(--secondary); color: white; }
+  .step-next { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3); }
+  .arrow { color: rgba(255,255,255,0.2); font-size: 0.8rem; }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    color: white;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 em {
+    color: rgba(200,220,255,0.85);
+    font-style: italic;
+    font-size: 1rem;
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .discipline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+  }
+
+  .dtag {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.68rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .dtag.hot { background: rgba(186,74,0,0.3); border-color: var(--secondary); color: rgba(255,200,150,0.9); }
+
+  .param-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(186, 74, 0, 0.9);
+    background: rgba(0,0,0,0.4);
+    display: inline-block;
+    padding: 0.22rem 0.7rem;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+    border-left: 2px solid var(--secondary);
+  }
+
+  /* Main */
+  main { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.7rem; margin-bottom: 2rem; }
+  @media(max-width:700px) { .stats { grid-template-columns: repeat(3,1fr); } }
+  @media(max-width:450px) { .stats { grid-template-columns: repeat(2,1fr); } }
+
+  .stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--primary);
+    border-radius: 4px;
+    padding: 0.8rem 0.6rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(28,40,51,0.08);
+  }
+
+  .stat .val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Libre Baskerville', serif;
+    display: block;
+  }
+
+  .stat .lbl {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--subtle);
+    margin-top: 0.2rem;
+  }
+
+  /* Section headings */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--graphite-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Five pillars grid */
+  .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
+  @media(max-width:700px) { .pillars { grid-template-columns: repeat(3,1fr); } }
+  @media(max-width:450px) { .pillars { grid-template-columns: repeat(2,1fr); } }
+
+  .pillar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.8rem 0.6rem;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+  }
+
+  .pillar:hover { transform: translateY(-2px); }
+
+  .pillar .p-icon { font-size: 1.5rem; margin-bottom: 0.4rem; display: block; }
+  .pillar .p-name { font-size: 0.68rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+  .pillar .p-math { font-size: 0.6rem; color: var(--subtle); font-family: 'DM Mono', monospace; line-height: 1.3; }
+
+  /* File cards */
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  @media(max-width:580px) { .files { grid-template-columns: 1fr; } }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 5px;
+    padding: 1.2rem;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    box-shadow: 0 2px 6px rgba(28,40,51,0.07);
+    transition: all 0.2s;
+  }
+
+  .card:hover { transform: translateY(-2px); box-shadow: 0 5px 16px rgba(28,40,51,0.15); border-left-color: var(--secondary); }
+
+  .card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+  .card .type { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--subtle); font-weight: 700; margin-bottom: 0.2rem; }
+  .card .name { font-size: 0.9rem; font-weight: 700; color: var(--primary); font-family: 'Libre Baskerville', serif; margin-bottom: 0.3rem; }
+  .card .desc { font-size: 0.76rem; color: var(--subtle); line-height: 1.45; }
+
+  /* Math workbook preview */
+  .math-preview {
+    background: var(--math-bg);
+    border: 1px solid rgba(26,82,118,0.2);
+    border-left: 4px solid var(--tertiary);
+    border-radius: 5px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .math-preview .math-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--tertiary);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .math-preview .eq-row {
+    font-size: 0.78rem;
+    color: #1A3A5C;
+    padding: 0.2rem 0;
+    line-height: 1.6;
+  }
+
+  .math-preview .eq-label {
+    color: var(--subtle);
+    font-size: 0.68rem;
+    margin-left: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-style: italic;
+  }
+
+  /* Engineering notebook preview */
+  .eng-preview {
+    background: var(--forge-light);
+    border: 1px solid rgba(186,74,0,0.25);
+    border-left: 4px solid var(--secondary);
+    border-radius: 5px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .eng-preview .eng-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .eng-preview p { font-size: 0.79rem; color: #333; line-height: 1.55; }
+
+  /* Stage cards */
+  .stage { background: white; border: 1px solid var(--border); border-radius: 5px; margin-bottom: 0.8rem; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .sh { padding: 0.55rem 1rem; font-weight: 700; font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; color: white; }
+  .sh-1 { background: var(--primary); }
+  .sh-2 { background: var(--secondary); }
+  .sh-3 { background: var(--accent); }
+  .sb { padding: 0.7rem 1rem; }
+  .items { list-style: none; padding: 0; }
+  .items li { font-size: 0.78rem; padding: 0.2rem 0; color: #444; border-bottom: 1px solid #F0F0F0; display: flex; gap: 0.5rem; align-items: flex-start; }
+  .items li:last-child { border-bottom: none; }
+  .items li::before { content: '⚙'; font-size: 0.65rem; color: var(--secondary); flex-shrink: 0; margin-top: 0.15em; }
+
+  /* Career row */
+  .career-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
+  @media(max-width:700px) { .career-grid { grid-template-columns: repeat(2,1fr); } }
+
+  .career-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.9rem 0.8rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .career-card .c-icon { font-size: 1.4rem; margin-bottom: 0.4rem; display: block; }
+  .career-card .c-title { font-size: 0.72rem; font-weight: 700; color: var(--primary); margin-bottom: 0.2rem; }
+  .career-card .c-detail { font-size: 0.65rem; color: var(--subtle); line-height: 1.35; }
+
+  /* Instructions */
+  .instructions { background: var(--blueprint-light); border: 1px solid rgba(26,82,118,0.2); border-radius: 5px; padding: 1.2rem 1.5rem; margin-bottom: 1rem; }
+  .instructions ol { padding-left: 1.2rem; margin-top: 0.5rem; }
+  .instructions li { font-size: 0.79rem; padding: 0.22rem 0; color: #333; line-height: 1.5; }
+
+  pre { background: #0D1B2A; color: #7EC8E3; border-radius: 4px; padding: 0.8rem 1rem; font-size: 0.7rem; overflow-x: auto; font-family: 'DM Mono', monospace; margin-top: 0.6rem; }
+  code { background: var(--graphite-light); color: var(--primary); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.77em; font-family: 'DM Mono', monospace; border: 1px solid #D5D8DC; }
+
+  /* Closing */
+  .closing {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 6px;
+    padding: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid var(--secondary);
+  }
+
+  .closing::after {
+    content: '∑ ∫ ∂ σ ε λ';
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1rem;
+    font-size: 1.5rem;
+    opacity: 0.06;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.3rem;
+  }
+
+  .closing blockquote { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.88rem; line-height: 1.75; margin-bottom: 1rem; opacity: 0.9; max-width: 700px; }
+  .closing .callout { font-size: 0.82rem; font-weight: 700; color: rgba(255,200,100,0.9); }
+  .closing .attr { font-size: 0.65rem; opacity: 0.45; margin-top: 0.5rem; }
+
+  footer { background: #0A0F14; color: rgba(255,255,255,0.3); text-align: center; padding: 1.2rem; font-size: 0.65rem; letter-spacing: 0.08em; margin-top: 2rem; }
+  .orange { color: rgba(230,130,60,0.8); }
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+  <div class="pipeline-bar">
+    <span class="step step-done">Part A ✓</span>
+    <span class="arrow">→</span>
+    <span class="step step-done">Part B ✓</span>
+    <span class="arrow">→</span>
+    <span class="step step-done">Part C ✓</span>
+    <span class="arrow">→</span>
+    <span class="step step-active">Part D: Engineering ◀</span>
+    <span class="arrow">→</span>
+    <span class="step step-next">v1.50.{SLUG}.ENG</span>
+  </div>
+  <p class="eyebrow">GSD Research Mission Package — Part D</p>
+  <h1>
+    <em>So you want to be an engineer.</em>
+    NASA Engineering Deep Dive Template
+  </h1>
+  <div class="discipline-tags">
+    <span class="dtag hot">Mechanical Engineering</span>
+    <span class="dtag hot">Materials Science</span>
+    <span class="dtag">Structural Analysis</span>
+    <span class="dtag">Thermal Engineering</span>
+    <span class="dtag">Engineering Mathematics</span>
+    <span class="dtag">Mechanism Design</span>
+    <span class="dtag">Systems Engineering</span>
+  </div>
+  <div class="param-line">Input: Part B hardware_record for {MISSION_NAME} → v1.50.{MISSION_SLUG}.ENG</div>
+</div>
+</header>
+
+<main>
+
+  <div class="stats">
+    <div class="stat"><span class="val">6</span><div class="lbl">Modules</div></div>
+    <div class="stat"><span class="val">35</span><div class="lbl">Pages</div></div>
+    <div class="stat"><span class="val">5×3</span><div class="lbl">Math Problems</div></div>
+    <div class="stat"><span class="val">~323K</span><div class="lbl">Tokens/Run</div></div>
+    <div class="stat"><span class="val">Fleet</span><div class="lbl">16 Roles</div></div>
+  </div>
+
+  <h2>Download Files</h2>
+
+  <div class="files">
+    <a class="card" href="nasa_partd_template.pdf" download>
+      <span class="icon">🔧</span>
+      <div class="type">PDF Template</div>
+      <div class="name">nasa_partd_template.pdf</div>
+      <div class="desc">35-page engineering mission template. Five engineering pillars, full math workbook (5 problems × 3 levels), materials science data sheet schema, Fleet crew manifest (16 roles), engineering notebook and math box environments.</div>
+    </a>
+    <a class="card" href="nasa_partd_template.tex" download>
+      <span class="icon">📐</span>
+      <div class="type">LaTeX Source</div>
+      <div class="name">nasa_partd_template.tex</div>
+      <div class="desc">Full XeLaTeX source with industrial color scheme (forge black + molten orange + blueprint blue). Four custom environments: mathbox, engbox, matbox, problembox.</div>
+    </a>
+  </div>
+
+  <h2>⚙ The Five Engineering Pillars</h2>
+
+  <div class="pillars">
+    <div class="pillar">
+      <span class="p-icon">🏗</span>
+      <div class="p-name">Structural</div>
+      <div class="p-math">σ = F/A<br>M·c/I<br>Safety factor</div>
+    </div>
+    <div class="pillar">
+      <span class="p-icon">🌡</span>
+      <div class="p-name">Thermal</div>
+      <div class="p-math">∇²T = ∂T/∂t<br>q = εσT⁴<br>Radiator sizing</div>
+    </div>
+    <div class="pillar">
+      <span class="p-icon">🔬</span>
+      <div class="p-name">Materials</div>
+      <div class="p-math">Ashby charts<br>σy/ρ index<br>Phase diagrams</div>
+    </div>
+    <div class="pillar">
+      <span class="p-icon">⚙</span>
+      <div class="p-name">Mechanisms</div>
+      <div class="p-math">fₙ = √(k/m)<br>Kinematics<br>Tribology</div>
+    </div>
+    <div class="pillar">
+      <span class="p-icon">📊</span>
+      <div class="p-name">Systems</div>
+      <div class="p-math">Δv = Isp·ln(m₀/mf)<br>FMEA<br>Margins</div>
+    </div>
+  </div>
+
+  <h2>🧮 Math Workbook Preview</h2>
+
+  <div class="math-preview">
+    <div class="math-label">Module 4 — Working Engineer Level — Thermal Balance (Cassini Representative)</div>
+    <div class="eq-row">G_Saturn = G_Earth / d² = 1361 / (9.5)² ≈ 15.1 W/m² <span class="eq-label">solar flux at Saturn</span></div>
+    <div class="eq-row">Q_waste = 3 × 4,500 W = 13,500 W <span class="eq-label">MMRTG total waste heat</span></div>
+    <div class="eq-row">T = (Q / εσA)^(1/4) = (13500 / 0.90 × 5.67e-8 × 6)^(1/4) ≈ 311 K <span class="eq-label">radiator temperature</span></div>
+    <div class="eq-row" style="color:#BA4A00;font-size:0.7rem;margin-top:0.4rem;">→ 38°C radiator operating temp — adequate margin above 0°C electronics minimum †</div>
+  </div>
+
+  <div class="eng-preview">
+    <div class="eng-label">Engineering Notebook — The RTG Thermal Trade</div>
+    <p>RTGs produce far more heat than electrical power (efficiency ~6%). Most of that heat must go somewhere that doesn't overheat electronics. <strong>The engineering insight:</strong> at Saturn, where the spacecraft needs heat to stay warm, the "waste" from the RTG becomes the primary heating system. The engineer who recognized this reframing saved mass, simplified the design, and solved two problems with one thermal network. <em>This kind of systems thinking — seeing heat as a resource rather than a problem — is a signature skill of experienced spacecraft thermal engineers.</em></p>
+  </div>
+
+  <h2>👷 Engineering Career Profiles (Module 6)</h2>
+
+  <div class="career-grid">
+    <div class="career-card">
+      <span class="c-icon">🏗</span>
+      <div class="c-title">Structural Engineer</div>
+      <div class="c-detail">BS/MS Mech Eng<br>NASTRAN, ANSYS<br>AIAA member<br>→ Lead Structures</div>
+    </div>
+    <div class="career-card">
+      <span class="c-icon">🔬</span>
+      <div class="c-title">Materials Engineer</div>
+      <div class="c-detail">BS/MS Mat Sci<br>SEM, XRD, tensile<br>ASM member<br>→ Chief Materials</div>
+    </div>
+    <div class="career-card">
+      <span class="c-icon">🌡</span>
+      <div class="c-title">Thermal Engineer</div>
+      <div class="c-detail">BS Mech/Aero Eng<br>Thermal Desktop<br>AIAA member<br>→ Lead Thermal</div>
+    </div>
+    <div class="career-card">
+      <span class="c-icon">⚙</span>
+      <div class="c-title">Mechanisms Eng.</div>
+      <div class="c-detail">BS Mech Eng<br>NX, MATLAB<br>Tribology focus<br>→ Lead Mechanisms</div>
+    </div>
+  </div>
+
+  <h2>📦 Contents Breakdown</h2>
+
+  <div class="stage">
+    <div class="sh sh-1">Stage 1 — Vision Document</div>
+    <div class="sb">
+      <ul class="items">
+        <li>Full four-part pipeline: Parts A+B → Part D → ENG release; Part D runs in parallel with Part C</li>
+        <li>Five engineering pillars (Structural, Thermal, Materials, Mechanisms, Systems) — universal across all mission types</li>
+        <li>Engineering mathematics hierarchy: which foundational math underlies each pillar</li>
+        <li>Six-module curriculum: Requirements → Mech Eng → Materials → Math Workbook → Manufacturing → Career Paths</li>
+        <li>Mission-class math equations table: 8 universal equations with mission application for each</li>
+        <li>Fleet crew manifest: 16 roles including mission-unique TOPO, ARCH, SECURE (ITAR boundary), and RETRO (template improvement)</li>
+        <li>Evidence calibration by mission class: Rich (Apollo, Cassini), Standard, Sparse, Active, Proprietary-risk</li>
+        <li>12 success criteria; through-line: "Intuition is the residue of mastery"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-2">Stage 2 — Research Reference</div>
+    <div class="sb">
+      <ul class="items">
+        <li>Input bundle schema: Part B hardware_record JSON — spacecraft mass/power/structure, launch vehicle loads, materials used, mechanisms, thermal environment, structural loads</li>
+        <li>6-tier source hierarchy (T1: NASA NTRS → T6: Engineering textbooks); ITAR boundary explicitly stated</li>
+        <li>6 research protocol tables — targeted query templates per module (Requirements, Mechanical, Materials, Math parameters, Manufacturing, Career)</li>
+        <li>Engineering mathematics reference table: 8 equations with domain and mission application</li>
+        <li>Materials property data sheet schema — full field specification: mechanical, thermal, space-environment properties, selection basis, qualification status</li>
+        <li>Safety rules: ITAR/no classified data (ABSOLUTE), math correctness (BLOCK), no invented properties (BLOCK), representative parameters flagged with †</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-3">Stage 3 — Mission Package</div>
+    <div class="sb">
+      <ul class="items">
+        <li>14 deliverables: engineering inventory, requirements flow-down, structural/vibration/mechanisms guides, ≥3 material data sheets, 5-problem math workbook, manufacturing guide, 4 career profiles, engineering legacy, Claude tutor scripts, CK YAML, release artifact</li>
+        <li>Token budget: ~323K median; ~450K for flagship missions; scales with engineering documentation depth</li>
+        <li>Wave structure: W0 (inventory), W1A/W1B/W2A/W2B (four parallel tracks), W3 (Opus synthesis), W4 (CK deposit), W4B (CAPCOM)</li>
+        <li>Math workbook: 5 problem types × 3 levels = 15 worked variants; Opus verifies all equations independently</li>
+        <li>5 BLOCK safety tests: math correctness (Opus-verified), ITAR boundary, materials sourced, no new science, safety factors accurate</li>
+        <li>8 Engineering Quality REVISION tests: physical reasonableness of stress/thermal calcs, material selection non-obviousness, three-level scaffolding integrity, career realism, legacy causal vs. correlational</li>
+        <li>6 Integration tests: Module 2↔3 material coupling, Module 4↔3 property coupling, requirements→module 2 coverage</li>
+        <li>Worked sample: Cassini RTG thermal balance (Working Engineer level) + Engineering Notebook on the thermal trade</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How to Run Part D</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Confirm Part B is complete: <code>v1.50.{MISSION_SLUG}</code> release exists with a populated <code>hardware_record</code> in the CK YAML.</li>
+      <li>Part D runs in parallel with Part C — both consume the Part B output independently. No Part C dependency.</li>
+      <li>Hand the template and Part B hardware record to gsd-skill-creator:<br>
+        <code>gsd run skill-creator --template nasa_partd_template.pdf --input {MISSION_SLUG}.ck.yaml --mode engineering</code></li>
+      <li>Wave 0 validates the hardware record. BLOCK fires if key engineering fields are missing — escalate to CAPCOM for manual data entry from NTRS sources.</li>
+      <li>Waves 1A, 1B, 2A, 2B run in parallel: structural/vibration/mechanisms, materials, math workbook, requirements/manufacturing.</li>
+      <li>Wave 3 (Opus): career profiles, tutor scripts, math verification, legacy analysis — all in one Opus context window.</li>
+      <li>Approve CAPCOM Wave 4B gate. Release tagged <code>v1.50.{MISSION_SLUG}.ENG</code>.</li>
+    </ol>
+  </div>
+
+  <h2>Recompile the Template</h2>
+
+  <div class="instructions">
+    <p style="font-size:0.78rem;color:#333;margin-bottom:0.5rem;">Requires <code>amsmath</code> and <code>amssymb</code> in addition to the standard LaTeX stack. Three XeLaTeX passes required:</p>
+    <pre>xelatex -interaction=nonstopmode nasa_partd_template.tex
+xelatex -interaction=nonstopmode nasa_partd_template.tex
+xelatex -interaction=nonstopmode nasa_partd_template.tex</pre>
+    <p style="font-size:0.7rem;color:var(--subtle);margin-top:0.5rem;">Custom environments: <code>mathbox</code> (blueprint blue border, equations), <code>engbox</code> (forge orange, design decisions), <code>matbox</code> (green, materials data), <code>problembox</code> (blueprint, student problems).</p>
+  </div>
+
+  <div class="closing">
+    <blockquote>"Intuition is the residue of mastery. The structural engineer who looks at a fastener pattern and immediately knows it's undertorqued, or the materials scientist who holds a sample and suspects intergranular corrosion before the SEM confirms it — they are not guessing. They are doing rapidly what they once did slowly, with equations and reference books and test data. The fast path to good intuition is the slow path through the fundamentals."</blockquote>
+    <p class="callout">That is how you become an engineer. One correctly-solved problem at a time.</p>
+    <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin-top:0.8rem;">Part D runs once per mission after Part B — parallel to Part C. Across ~80 missions,<br>it builds a complete engineering education grounded in the real problems NASA had to solve.</p>
+    <p class="attr">GSD Part D · NASA Engineering Deep Dive Template · March 29, 2026</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>GSD Research Mission Package — Part D · So You Want to Be an Engineer · March 29, 2026</p>
+  <p style="margin-top:0.3rem;">Mechanical Engineering · Materials Science · Engineering Mathematics · <span class="orange">Fleet Profile (16 roles)</span> · ~323K tokens per mission run</p>
+</footer>
+
+</body>
+</html>
