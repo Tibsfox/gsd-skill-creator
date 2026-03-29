@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 17&deg; &mdash; Common Yellowthroat &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.hook { background: #D32F2F; }
+    .theory-icon.earworm { background: #7B1FA2; }
+    .theory-icon.repetition { background: #E65100; }
+    .theory-icon.marsh { background: #1B5E20; }
+    .theory-icon.genus { background: #0277BD; }
+    .theory-icon.mnemonic { background: #F57F17; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Hook card (unique to degree 17) */
+    .hook-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF9A9A 30%, #FFCDD2 100%);
+      border: 1px solid #D32F2F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .hook-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Genus pair card */
+    .genus-card {
+      background: linear-gradient(135deg, #E1F5FE 0%, #81D4FA 100%);
+      border: 1px solid #0288D1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #01579B;
+    }
+
+    /* Marsh card */
+    .marsh-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .marsh-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Repetition comparison card */
+    .repetition-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFCC80 100%);
+      border: 1px solid #FB8C00;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .repetition-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">17&deg;</div>
+      <div class="release-title-block">
+        <h2>Common Yellowthroat</h2>
+        <div class="scientific">Geothlypis trichas &middot; Family Parulidae (New World Warblers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Witchety-Witchety-Witchety &middot; Marsh Edge &middot; Summer Migrant &middot; Energy 3</div>
+
+    <blockquote>
+      A small masked bird sits on a cattail stalk at the edge of a marsh. Black mask, yellow
+      throat, olive back &mdash; the masked bandit. And then it sings. Witchety-witchety-witchety.
+      Three times, four times, five. The same phrase, the same rhythm, the same emphatic two-note
+      cell. You have heard it before, even if you have never heard it before. It is the hook.
+      The part of the song that sticks. The mnemonic that IS the song. From the same genus as
+      the storytelling MacGillivray&rsquo;s, a bird that does not tell stories &mdash; it writes jingles.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Masked Bandit Returns to Geothlypis</h2>
+        <p>
+          The Common Yellowthroat is a small passerine of the family <strong>Parulidae</strong>
+          (New World warblers), the fourth representative of this family in the engine. One of the
+          first New World warblers described by Western science &mdash; <strong>Linnaeus named it
+          in 1766</strong> as <em>Turdus trichas</em>, initially misclassifying it as a thrush.
+          Now placed in <strong><em>Geothlypis</em></strong> &mdash; the same genus as the
+          MacGillivray&rsquo;s Warbler at degree 14&deg;. The engine&rsquo;s <strong>first
+          intra-genus pair from different degrees</strong>.
+        </p>
+        <p>
+          At <strong>4.3&ndash;5.3 inches</strong> and <strong>8.5&ndash;12 grams</strong>.
+          Males are unmistakable: a broad <strong>black mask</strong> bordered above by a pale band,
+          with a <strong>vivid yellow throat</strong> and olive-brown upperparts. The masked bandit.
+          Females lack the mask &mdash; one of the most dramatic sexual dimorphisms in North American
+          warblers. The <strong>most widespread warbler in North America</strong>, breeding in all
+          48 contiguous states and every Canadian province.
+        </p>
+
+        <!-- Genus Pair Card -->
+        <div class="genus-card">
+          <h3>The Geothlypis Pair: Same Genus, Opposite Strategies</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Two <em>Geothlypis</em> species, three degrees apart, fundamentally different approaches:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>MacGillivray&rsquo;s (14&deg;)</th><th>Yellowthroat (17&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Song strategy</td><td>Ternary (AAB) &mdash; narrative</td><td><strong>Hook &mdash; memorability</strong></td></tr>
+              <tr><td>Repetition purpose</td><td>Setup for payoff</td><td><strong>Embedding in memory</strong></td></tr>
+              <tr><td>Visibility</td><td>Skulking &mdash; hidden</td><td><strong>Bold &mdash; exposed perches, black mask</strong></td></tr>
+              <tr><td>Habitat</td><td>Dense shrub (forest edge)</td><td><strong>Marsh edge (cattails, sedges)</strong></td></tr>
+              <tr><td>Range</td><td>Western North America</td><td><strong>All of North America</strong></td></tr>
+              <tr><td>Energy</td><td>2</td><td><strong>3</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #01579B; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The MacGillivray&rsquo;s tells stories. The yellowthroat writes jingles. Same genus,
+            opposite strategies. The engine&rsquo;s first intra-genus pair.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Witchety-Witchety-Witchety</h2>
+        <h3>The Hook: Memorability as Acoustic Strategy</h3>
+        <p>
+          The Common Yellowthroat&rsquo;s song is one of the most immediately recognizable bird
+          vocalizations in North America. A loud, emphatic, rhythmically regular phrase:
+          <strong>&ldquo;witchety-witchety-witchety&rdquo;</strong> repeated <strong>3&ndash;5
+          times</strong>. Each &ldquo;witchety&rdquo; is a two-syllable cell: lower intro note
+          + higher accented note. Frequency range: <strong>2.5&ndash;5.5 kHz</strong>. Duration:
+          <strong>1.5&ndash;3 seconds</strong>. The mnemonic IS the song.
+        </p>
+
+        <!-- Hook Card -->
+        <div class="hook-card">
+          <h3>The Hook: Why Witchety Sticks</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The first species in the engine that achieves <strong>MEMORABILITY</strong> as its
+            primary acoustic strategy. Not complexity. Not silence. Not narrative. CATCHINESS.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Hook Property</th><th>Yellowthroat Implementation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Simple melodic pattern</td><td>Two syllables per unit &mdash; immediately graspable</td></tr>
+              <tr><td>Strong rhythmic pulse</td><td>Metronomic repetition at walking tempo (~100&ndash;130 BPM)</td></tr>
+              <tr><td>Exact repetition</td><td>3&ndash;5 identical witchety units &mdash; once is an event, twice is coincidence, three times is a pattern</td></tr>
+              <tr><td>Onomatopoeic fidelity</td><td>&ldquo;Witchety&rdquo; IS the sound &mdash; zero gap between mnemonic and vocalization</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #B71C1C; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The biological equivalent of a pop hit&rsquo;s chorus: simple, rhythmic, repeated,
+            inescapable. A song that is ALL CHORUS with no verse, no bridge, no modulation.
+          </p>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Structure</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Witchety unit (single)</td><td>2.5&ndash;5.5 kHz</td><td>~0.25&ndash;0.35 s</td><td>Two-note ascending cell</td><td>The hook</td></tr>
+            <tr><td>Full witchety phrase</td><td>2.5&ndash;5.5 kHz</td><td>1.5&ndash;3 s</td><td>3&ndash;5 identical repetitions</td><td>Territory, mate</td></tr>
+            <tr><td>Tchep call</td><td>3&ndash;5 kHz</td><td>~0.05 s</td><td>Single sharp note</td><td>Contact, alarm</td></tr>
+            <tr><td>Flight song</td><td>2.5&ndash;6 kHz</td><td>2&ndash;5 s</td><td>Extended, more complex</td><td>Intense courtship</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Three Kinds of Repetition -->
+        <div class="repetition-card">
+          <h3>Three Kinds of Repetition: Ostinato vs. Narrative vs. Hook</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The engine now contains three species that use repetition as primary strategy,
+            each for a different psychological purpose:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Repetition Type</th><th>Purpose</th><th>Memorability</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Hutton&rsquo;s Vireo</td><td>13&deg;</td><td>Ostinato</td><td>Persistence &mdash; never stops</td><td>Low (fades to background)</td></tr>
+              <tr><td>MacGillivray&rsquo;s</td><td>14&deg;</td><td>Ternary (AAB)</td><td>Narrative &mdash; builds to payoff</td><td>Medium (the resolution sticks)</td></tr>
+              <tr style="background: #FFF3E0; font-weight: 600;"><td><strong>Yellowthroat</strong></td><td><strong>17&deg;</strong></td><td><strong>Hook</strong></td><td><strong>Catchiness &mdash; lodges in memory</strong></td><td><strong>Maximum (the earworm)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #E65100; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The vireo is hold music. The MacGillivray&rsquo;s is a short story. The yellowthroat is a hit single.
+          </p>
+        </div>
+
+        <!-- Marsh Habitat -->
+        <h2>Marsh Edge &mdash; The First Wetland Species</h2>
+
+        <div class="marsh-card">
+          <h3>A New Ecosystem Type</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The engine&rsquo;s <strong>FIRST MARSH/WETLAND species</strong>. All previous
+            water-associated species were riparian (streamside). The yellowthroat is a
+            marsh bird: cattails, sedges, wet meadows, emergent vegetation.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Water Association</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Great Blue Heron</td><td>0&deg;</td><td>Estuary / tidal flats</td></tr>
+              <tr><td>Pacific-slope Flycatcher</td><td>6&deg;</td><td>Riparian alder corridor</td></tr>
+              <tr><td>MacGillivray&rsquo;s Warbler</td><td>14&deg;</td><td>Dense shrub (includes riparian)</td></tr>
+              <tr><td>Wilson&rsquo;s Warbler</td><td>15&deg;</td><td>Willow riparian (montane)</td></tr>
+              <tr><td>Yellow Warbler</td><td>16&deg;</td><td>Willow riparian (lowland)</td></tr>
+              <tr style="background: #E8F5E9; font-weight: 600;"><td><strong>Common Yellowthroat</strong></td><td><strong>17&deg;</strong></td><td><strong>Marsh edge (cattails, sedges, wet meadows)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1B5E20; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Riparian is LINEAR (follows streams). Marsh is AREAL (fills basins). Different vegetation,
+            different acoustics, different open-air sound environment. The marsh has found its voice.
+          </p>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>The hook.</strong> In pop songwriting, the hook is the element that sells the song.
+          Max Martin constructs songs as delivery vehicles for hooks. The yellowthroat&rsquo;s song
+          IS the hook: the witchety phrase is the entire song. No verse, no bridge &mdash; just chorus,
+          repeated. The commercial core with nothing around it. A song that is ALL CHORUS.
+        </p>
+        <p>
+          <strong>Earworm psychology.</strong> The witchety song matches every criterion of maximally
+          sticky melodies: simple pitch contour, strong metric rhythm, moderate tempo (~100&ndash;130
+          BPM range), repetition without variation, and phonetic salience. The sharp consonants
+          (w, tch, t) create percussive onsets that activate attention networks. The nonsense word
+          &ldquo;witchety&rdquo; cannot be resolved semantically, so the phonological loop keeps
+          cycling it through working memory.
+        </p>
+        <p>
+          <strong>The mnemonic as song.</strong> When the description of a sound IS the sound,
+          maximum possible memorability has been achieved. &ldquo;Witchety-witchety-witchety&rdquo;
+          is not an approximation &mdash; it is a near-exact phonetic transcription. The signifier
+          and the signified collapse into one. In semiotics, this is the limiting case of iconic
+          representation: a sign so faithful to its referent that it becomes the referent.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon hook">H</div>
+            <div class="theory-content">
+              <h4>The Hook <span class="theory-level foundational">Foundational</span></h4>
+              <p>The melodic or rhythmic phrase that captures attention and makes a song memorable. The yellowthroat&rsquo;s song IS a hook: simple pattern, strong rhythm, exact repetition. A biological pop chorus. The first species in the engine whose primary acoustic strategy is CATCHINESS.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon earworm">E</div>
+            <div class="theory-content">
+              <h4>Earworm Psychology <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Involuntary musical imagery (INMI) &mdash; melodies that replay in memory without conscious intent. The witchety song matches every criterion: simple pitch contour, strong metric rhythm, moderate tempo, exact repetition, phonetic salience. Optimally designed for involuntary recall.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon mnemonic">M</div>
+            <div class="theory-content">
+              <h4>The Mnemonic as Song <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>When the description of a sound IS the sound. &ldquo;Witchety&rdquo; is not a metaphor &mdash; it is a phonetic transcription. Zero gap between signifier and signified. The limiting case of iconic representation in semiotics.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon repetition">R</div>
+            <div class="theory-content">
+              <h4>Three Kinds of Repetition <span class="theory-level advanced">Advanced</span></h4>
+              <p>Ostinato (degree 13&deg;: persistence below attention), narrative (degree 14&deg;: repetition building to resolution), hook (degree 17&deg;: repetition forcing memorability). Same mechanism, three psychological effects. The engine now distinguishes background, structure, and earworm.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon marsh">W</div>
+            <div class="theory-content">
+              <h4>Marsh Acoustics <span class="theory-level foundational">Foundational</span></h4>
+              <p>First marsh/wetland species. Open acoustic environment &mdash; less canopy filtering, more wind exposure. The yellowthroat&rsquo;s loud, emphatic song is adapted to carry across open water and emergent vegetation. Marsh is areal, riparian is linear.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon genus">G</div>
+            <div class="theory-content">
+              <h4>Intra-Genus Contrast <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>First genus pair in the engine: <em>Geothlypis trichas</em> (degree 17&deg;) and <em>Geothlypis tolmiei</em> (degree 14&deg;). Same genus, opposite strategies. The storyteller and the jingle writer. Congeners can employ fundamentally different acoustic strategies.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-014</strong> &mdash; MacGillivray&rsquo;s Warbler
+            <p>SAME GENUS, OPPOSITE STRATEGY. Both <em>Geothlypis</em>. MacGillivray&rsquo;s uses AAB narrative (the storyteller). Yellowthroat uses the hook (the earworm). The engine&rsquo;s first intra-genus pair. One tells stories, the other writes jingles.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-013</strong> &mdash; Hutton&rsquo;s Vireo
+            <p>REPETITION AS IDENTITY vs. MEMORABILITY. The vireo repeats endlessly (ostinato &mdash; fades from awareness). The yellowthroat repeats emphatically (hook &mdash; forces itself into memory). Same mechanism, opposite psychological effect.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the PNW
+            <p>PARULIDAE FOURTH ENTRY. Fourth warbler in engine. First return to a previously represented genus (Geothlypis). AVI documents Common Yellowthroat breeding status and marsh/wetland habitat associations.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Ecology of the PNW
+            <p>MARSH/WETLAND ECOSYSTEM. First marsh species in the engine. ECO documents PNW wetland classification, emergent vegetation communities, and the role of marshes in Pacific Northwest hydrology.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Reggie Watts at degree 17&deg;. Both impossibly catchy. Both achieve memorability through rhythmic repetition and phonetic play. Watts loops vocal patterns into earworms; the yellowthroat loops witchety until you can never unhear it.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-016</strong> &mdash; Yellow Warbler
+            <p>COWBIRD RESPONSE CONTRAST. Both are frequent cowbird hosts. Yellow Warbler buries eggs (architectural defense). Yellowthroat does NOT bury &mdash; often raises cowbird young. Two Parulidae, two parasitism strategies: build over vs. absorb.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Guzy, M.J. &amp; Ritchison, G. (2020). &ldquo;Common Yellowthroat.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Linnaeus, C. (1766). <em>Systema Naturae</em>, 12th ed. [Original description as <em>Turdus trichas</em>.]</li>
+          <li>Lovette, I.J. et al. (2010). Multilocus phylogeny for wood-warblers. <em>Mol Phylogenet Evol</em> 57.</li>
+          <li>Chesser, R.T. et al. (2011). Fifty-second supplement to the AOU Check-list. <em>The Auk</em> 128.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Catchpole, C.K. &amp; Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. Cambridge University Press.</li>
+          <li>Jakubowski, K. et al. (2017). Dissecting an earworm: Melodic features and song popularity. <em>Psychol Aesthetics Creativity Arts</em> 11(2).</li>
+          <li>Williamson, V.J. et al. (2012). How do &lsquo;earworms&rsquo; start? <em>Psychology of Music</em> 40(3).</li>
+          <li>Margulis, E.H. (2014). <em>On Repeat: How Music Plays the Mind</em>. Oxford University Press.</li>
+          <li>Burns, G. (1987). A typology of &lsquo;hooks&rsquo; in popular records. <em>Popular Music</em> 6(1).</li>
+          <li>Dahl, T.E. (1990). <em>Wetlands Losses in the United States</em>. US Fish &amp; Wildlife Service.</li>
+          <li>Mitsch, W.J. &amp; Gosselink, J.G. (2015). <em>Wetlands</em>. 5th ed. Wiley.</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Common Yellowthroat. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Common Yellowthroat. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. PHS: Wetland habitats. wdfw.wa.gov</li>
+          <li>Macaulay Library. Common Yellowthroat recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Parulidae</div>
+          <div class="stat-detail">New World Warblers &mdash; 4th in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Geothlypis</em></div>
+          <div class="stat-detail">Same genus as MacGillivray&rsquo;s (14&deg;)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.3&ndash;5.3 in</div>
+          <div class="stat-detail">11&ndash;13.5 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">8.5&ndash;12 g</div>
+          <div class="stat-detail">Similar to MacGillivray&rsquo;s</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Masked bandit</div>
+          <div class="stat-detail">Black mask, yellow throat (males)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Named by</div>
+          <div class="stat-value">Linnaeus (1766)</div>
+          <div class="stat-detail">Originally <em>Turdus trichas</em></div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Witchety-witchety</div>
+          <div class="stat-detail">The hook &mdash; memorability as strategy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2.5&ndash;5.5 kHz</div>
+          <div class="stat-detail">Mid-range &mdash; sweet spot of human hearing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value">1.5&ndash;3 s</div>
+          <div class="stat-detail">3&ndash;5 witchety units per song</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">The Hook</div>
+          <div class="stat-detail">First earworm in the engine</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">17&deg;</div>
+          <div class="stat-detail">The hook &mdash; memorability as structure</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #C62828;">3</div>
+          <div class="stat-detail">Third energy-3 &mdash; energy plateau continues</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Marsh Edge</div>
+          <div class="stat-detail">First marsh/wetland species in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; 5th in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Hook / Earworm</div>
+          <div class="stat-detail">Rhythmic two-note cell repeated</div>
+        </div>
+
+        <h3>Genus Pair</h3>
+        <div class="stat-card">
+          <div class="stat-label">Congener</div>
+          <div class="stat-value">MacGillivray&rsquo;s (14&deg;)</div>
+          <div class="stat-detail"><em>G. tolmiei</em> &mdash; first intra-genus pair</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 17&deg; &mdash; S36</div>
+          <div class="parallel-name">Reggie Watts</div>
+          <div class="parallel-detail">Both impossibly catchy. Watts creates vocal loops that become earworms &mdash; rhythmic, nonsensical, hypnotic patterns that lodge in memory through repetition and phonetic play. The yellowthroat loops witchety until you can never unhear it. Both achieve maximum memorability through the hook principle: simple pattern, strong rhythm, phonetic stickiness. Both make you unable to stop hearing them.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 017 of 360 &middot;
+      <a href="../016-yellow-warbler/index.html">Degree 16&deg;: Yellow Warbler</a> &middot;
+      <a href="../014-macgillivrays-warbler/index.html">Degree 14&deg;: MacGillivray&rsquo;s Warbler</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
