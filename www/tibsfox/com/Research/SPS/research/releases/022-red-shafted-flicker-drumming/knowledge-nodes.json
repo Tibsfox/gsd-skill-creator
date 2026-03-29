@@ -1,0 +1,340 @@
+{
+  "degree": 22,
+  "species": "Northern Flicker",
+  "scientific_name": "Colaptes auratus",
+  "subspecies": "C. a. cafer (Red-shafted Flicker -- the PNW form)",
+  "slug": "022-red-shafted-flicker-drumming",
+  "sound_type": "resonant hollow-tree percussion (drumming)",
+  "energy": 4,
+  "ecosystem": "forest snag",
+  "season": "spring (breeding -- peak drumming February through June)",
+  "family": "Picidae",
+  "order": "Piciformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; same species as degree 21. The Red-shafted Flicker drums on dead trees, utility poles, metal chimney caps, and other resonant surfaces throughout the PNW lowlands."
+  },
+  "flicker_pair": {
+    "description": "Degree 22 is the SECOND HALF of the flicker pair (degrees 21-22). Degree 21 delivered the vocal wick-wick-wick call (syrinx-produced). Degree 22 delivers the mechanical drum (bill on resonant substrate). Same species, two fundamentally different sound-production mechanisms. The flicker pair is now COMPLETE.",
+    "degree_21": {
+      "sound": "Wick-wick-wick call",
+      "mechanism": "Syrinx (vocal organ)",
+      "character": "Tonal, pitched, 2.0-2.5 kHz fundamental, harmonic content",
+      "fusion": "Below -- each note heard individually (the hammer)",
+      "duration": "5-8 seconds (long series)",
+      "engine_role": "21st vocal species, 22nd acoustic element (the hammer)"
+    },
+    "degree_22": {
+      "sound": "Drumming -- resonant hollow-tree percussion",
+      "mechanism": "Bill striking resonant substrate (mechanical percussion)",
+      "character": "Broadband, non-pitched, percussive transient, substrate-dependent timbre",
+      "fusion": "Above -- individual strikes merge into a continuous rapid roll",
+      "duration": "0.6-1.2 seconds (short rapid burst)",
+      "engine_role": "FIRST non-vocal sound in the engine, 23rd acoustic element (resonant percussion)"
+    },
+    "principle": "Dual-channel communication: voice (wick call, degree 21) and percussion (drum, degree 22) serve overlapping territorial/mate-attraction functions through different physical mechanisms. Environmental robustness, temporal complementarity, information partitioning, and receiver differentiation. The first redundant-channel pair in the engine is now complete."
+  },
+  "drumming_metrics": {
+    "strike_rate_per_second": "~25 (Stark, Dodenhoff, and Johnson 1998)",
+    "bout_duration_s": "0.6-1.2",
+    "strikes_per_bout": "~15-30",
+    "temporal_pattern": "Even tempo with slight terminal deceleration -- species-diagnostic",
+    "amplitude_envelope": "Full force at onset, maintained through most of bout, slight decay at end",
+    "frequency_content": "BROADBAND -- 100 Hz to 8+ kHz, peak energy 500 Hz to 4 kHz. No pitched fundamental. Dominant frequency determined by substrate resonance.",
+    "inter_bout_interval_s": "10-30 (during dawn drumming sessions)",
+    "bouts_per_dawn_session": "20-50 (over 15-30 minutes)",
+    "fusion_state": "ABOVE -- individual strikes merge into a continuous rapid roll (contrast: wick call at degree 21 is BELOW fusion, each note heard individually)",
+    "key_property": "FIRST NON-VOCAL SOUND IN THE ENGINE. Broadband, substrate-dependent, mechanically produced percussion. The substrate IS the instrument -- the flicker selects its drum."
+  },
+  "substrate_resonance": {
+    "description": "The Northern Flicker preferentially selects maximally resonant surfaces for drumming. The substrate determines the drum's frequency, amplitude, timbre, and propagation distance. Substrate selection is an active behavior -- flickers return to the same preferred surface day after day.",
+    "substrates": [
+      {
+        "type": "Hollow dead tree (snag)",
+        "resonant_frequency": "Low-mid (200-1,000 Hz dominant)",
+        "amplitude": "Moderate",
+        "sustain": "Short",
+        "character": "Hollow, woody thud -- the natural acoustic ideal",
+        "notes": "Heart-rot-hollowed snags (Fomitopsis pinicola, Phellinus pini) produce the best natural resonance -- thin-walled hollow cylinders."
+      },
+      {
+        "type": "Metal chimney cap",
+        "resonant_frequency": "High (1,000-6,000 Hz dominant)",
+        "amplitude": "Very high",
+        "sustain": "Long (metallic ringing)",
+        "character": "Metallic rattle, piercing -- carries across entire residential neighborhoods",
+        "notes": "Metal has higher Q factor than wood. Flickers actively seek metal surfaces. One of the most startling urban wildlife encounters in the PNW."
+      },
+      {
+        "type": "Metal rain gutter",
+        "resonant_frequency": "Mid-high (800-4,000 Hz dominant)",
+        "amplitude": "High",
+        "sustain": "Moderate",
+        "character": "Resonant metallic roll"
+      },
+      {
+        "type": "Cedar utility pole",
+        "resonant_frequency": "Low-mid (300-1,200 Hz dominant)",
+        "amplitude": "Moderate-high",
+        "sustain": "Moderate",
+        "character": "Deep, resonant knock"
+      },
+      {
+        "type": "House fascia board",
+        "resonant_frequency": "Mid (400-2,000 Hz dominant)",
+        "amplitude": "Moderate",
+        "sustain": "Short-moderate",
+        "character": "Wooden rap, house structure amplifies"
+      }
+    ],
+    "principle": "Substrate selection as instrument choice. The flicker that finds the loudest substrate wins the loudest voice. Metal surfaces are a human-provided acoustic upgrade. The urban flicker on a chimney cap is louder than any forest flicker on any tree."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Resonant percussion (substrate-dependent, broadband, mechanically produced, rhythmically structured noise above the perceptual fusion threshold -- the 23rd acoustic element)",
+      "level": "foundational",
+      "department": "music-theory/percussion",
+      "college_path": ".college/music/theory/percussion/resonant-percussion/",
+      "examples": [
+        "Northern Flicker drum: ~25 strikes/sec on hollow snag or metal surface -- broadband, non-pitched, substrate determines timbre",
+        "Snare drum vs. floor tom: same drummer, same stroke, different instrument produces different sound -- the substrate IS the timbre",
+        "Tabla: hand striking a tuned drum head -- the resonant properties of the drum body shape the sound as much as the strike technique",
+        "Industrial music: found-object percussion where the object IS the instrument (metal pipes, oil drums, sheet metal)"
+      ],
+      "music_theory_parallel": "Resonant percussion is the concept that the struck object, not the striker, determines the timbral character of percussion. In a drum kit, the drummer's hand/stick is constant -- the drum, cymbal, or surface is what varies. The Northern Flicker's bill strike is anatomically constant. What varies is what it strikes. A hollow dead alder produces a deep woody thud. A metal chimney cap produces a piercing metallic rattle. Same bird, same strike rate, completely different sound. This is the first time the engine contains a sound whose character is determined by an external object rather than by the performer's anatomy."
+    },
+    {
+      "concept": "Dual-channel communication (same species transmitting territorial information through both vocal and mechanical channels -- redundant signaling across different physical domains)",
+      "level": "advanced",
+      "department": "music-theory/orchestration",
+      "college_path": ".college/music/theory/orchestration/dual-channel/",
+      "examples": [
+        "Northern Flicker: wick call (vocal, tonal, 5-8 sec) + drum (mechanical, broadband, 0.6-1.2 sec) -- same territorial function, different physics",
+        "Orchestral doubling: melody in strings AND winds simultaneously -- redundancy ensures the message reaches the listener through at least one channel",
+        "Parallel compression in recording: clean signal path (detailed, nuanced) + compressed signal path (powerful, impactful) blended together",
+        "Human speech + gesture: the same message conveyed through voice and hand movement simultaneously"
+      ],
+      "music_theory_parallel": "Dual-channel communication is the biological equivalent of orchestral doubling: the same message transmitted through two different instrument families to maximize the probability of reception. The wick call is the clean channel (tonal, detailed, long, frequency-specific). The drum is the compressed channel (broadband, powerful, short, substrate-amplified). Together they create a territorial signal that combines clarity with impact. The flicker pair at degrees 21-22 completes the engine's first redundant-channel signaling system."
+    },
+    {
+      "concept": "Substrate selection as instrument choice (the performer actively selecting which external object to strike, optimizing for resonance, amplitude, and propagation distance)",
+      "level": "intermediate",
+      "department": "music-theory/percussion",
+      "college_path": ".college/music/theory/percussion/substrate-selection/",
+      "examples": [
+        "Flicker choosing a metal chimney cap over a solid tree branch -- empirical resonance optimization",
+        "Drummer choosing a ride cymbal vs. crash cymbal vs. hi-hat -- same stick technique, different instrument, different sound",
+        "Steel pan tuner selecting oil drum gauge and tempering -- the container becomes the instrument through selection and preparation",
+        "Found-object percussion: selecting which dumpster, pipe, or fence to play based on its resonant properties"
+      ],
+      "music_theory_parallel": "Substrate selection introduces the concept of instrument choice to the engine. Every previous species played a fixed instrument (its own syrinx). The flicker is the first species that chooses its instrument from available options. This is the percussionist's fundamental creative act: which surface do I strike? The flicker that finds a hollow dead alder plays a warm, woody drum. The flicker that finds a metal chimney cap plays a bright, piercing rattle. Same performer, different instrument, different sound. The substrate IS the instrument."
+    },
+    {
+      "concept": "The fusion trilogy (three positions on the perceptual fusion continuum: at threshold, below threshold, above threshold -- trill, hammer, drum roll)",
+      "level": "advanced",
+      "department": "music-theory/psychoacoustics",
+      "college_path": ".college/music/theory/psychoacoustics/fusion-continuum/",
+      "examples": [
+        "Degree 11 (Oregon Junco trill): ~10-20 notes/sec -- AT the fusion threshold. Discrete notes perceived as a continuous buzz.",
+        "Degree 21 (Northern Flicker wick call): ~6-10 notes/sec -- BELOW fusion. Each note heard individually. The hammer.",
+        "Degree 22 (Northern Flicker drum): ~25 strikes/sec -- ABOVE fusion. Individual strikes merge into a continuous roll.",
+        "In music: tremolo (at fusion), metronomic beat (below fusion), drum roll (above fusion) -- three textures from rate variation alone."
+      ],
+      "music_theory_parallel": "The fusion continuum describes how the perceived character of rapid repetition changes as a function of rate. Below ~15 events per second, the brain resolves each event individually (the hammer, the metronomic beat). Near 15-20 per second, the brain wavers between perceiving individual events and a continuous stream (the trill, the tremolo). Above ~20-25 per second, individual events fuse into a continuous tone or roll. The engine now maps all three regions: the junco trill at the boundary (degree 11), the flicker wick call below (degree 21), and the flicker drum above (degree 22). The same species spans two of the three positions. The fusion trilogy is complete."
+    },
+    {
+      "concept": "Forest snag as acoustic habitat (dead standing wood as the ecological substrate that enables mechanical percussion -- the instrument IS the habitat)",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/forest-snag/",
+      "examples": [
+        "Heart-rot-hollowed snags (thin-walled cylinders) produce the best natural drumming resonance",
+        "Snag density of 8-20 per hectare in mature PNW forests vs. <3 per hectare in managed stands -- fewer snags = fewer drums",
+        "Fire-killed snags: hard exterior, variable interior -- bright, sharp percussion character",
+        "Snag removal (forestry, urban maintenance) directly eliminates drumming habitat -- the instrument disappears"
+      ],
+      "music_theory_parallel": "The forest snag is the first ecosystem in the engine defined by dead wood rather than living community. The snag is simultaneously habitat (the flicker lives in it), instrument (the flicker drums on it), and signal (the drum's resonance advertises habitat quality). In music, this parallels the venue: the room where you play IS part of the sound. A cathedral, a jazz club, a concrete parking garage -- the space shapes the music. The forest snag is the flicker's venue, and its acoustic properties are as much a part of the drum as the bird's bill."
+    },
+    {
+      "concept": "Broadband percussion vs. tonal voice (the first unpitched sound in the engine -- noise as communication, structured rhythmic noise as territorial signal)",
+      "level": "intermediate",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/broadband-percussion/",
+      "examples": [
+        "Flicker drum: energy spread across 100 Hz to 8+ kHz, no fundamental pitch -- pure percussion",
+        "Snare drum in an ensemble: broadband noise burst that cuts through pitched instruments because it occupies frequency space no pitched sound can fill",
+        "Hi-hat: broadband metallic noise providing rhythmic structure without pitch -- the timekeeper",
+        "Clapping: the simplest human broadband percussion -- no pitch, all rhythm"
+      ],
+      "music_theory_parallel": "Twenty-one degrees of the engine contained only pitched, tonal sounds produced by the syrinx. Degree 22 introduces the first broadband, unpitched sound. In music, the addition of percussion to a pitched ensemble is a paradigm shift: drums do not compete with melodies in frequency space. They occupy the spaces between pitched sounds, providing rhythmic structure and impulsive energy. The flicker drum does not compete with the dawn chorus of tonal passerine songs. It cuts through them. Broadband percussion occupies different perceptual channels than tonal voice -- which is exactly why dual-channel communication works."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Wick Call (Degree 21)",
+      "connection": "THE OTHER HALF. Same species, different mechanism. Degree 21 = voice (syrinx, tonal, discrete notes below fusion, 5-8 sec, the hammer). Degree 22 = drum (bill on substrate, broadband, fused strikes above fusion, 0.6-1.2 sec, resonant percussion). Together they form the flicker pair -- the engine's first species-pair. Dual-channel communication: voice and percussion serving overlapping territorial functions through different physics."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "THE THREE NON-VOCAL MOMENTS. Degree 0 = silence (no sound at all). Degree 22 = percussion (non-vocal mechanical sound). The engine's first and twenty-third entries share the property of containing no voice. The heron offered the absence of sound. The flicker offers sound without voice. Silence and noise bookend the vocal spectrum."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "THE FUSION TRILOGY COMPLETE. Degree 11 = trill (at fusion threshold -- notes blur into buzz). Degree 21 = hammer (below fusion -- each note discrete). Degree 22 = drum roll (above fusion -- strikes merge into continuous roll). Three positions on the perceptual fusion continuum. The Oregon Junco's trill was the boundary. The flicker maps both sides."
+    },
+    {
+      "project": "SPS-013",
+      "title": "Hutton's Vireo (Degree 13)",
+      "connection": "REPETITION IN THREE DIMENSIONS. Ostinato (degree 13: slow vocal repetition, meditative). Hammer (degree 21: fast vocal repetition, urgent). Drum (degree 22: fast mechanical repetition, percussive). Three rates, two mechanisms, one principle: repetition as territorial signal."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "THE RELEASE AND THE STRIKE. Degree 20 faded into silence (ADSR release, the song that dissolves). Degree 22 strikes into resonance (percussive attack, the impact that rings). From the softest ending to the hardest beginning in two degrees."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Northern Flicker drumming documented in AVI as a species-diagnostic behavioral cue. Drumming on metal surfaces noted as a common urban wildlife encounter in the Puget Sound region. Snag-dependent species."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Forest snag ecology: dead wood as keystone habitat structure. Snag formation pathways (fire, heart-rot fungi, bark beetles). Snag density in mature vs. managed forests. Dead standing wood as the substrate for both woodpecker nesting and drumming."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Foxy Apollo at degree 22 (Jazz/Funk, E=4, Seattle, self-released, 2018-present). Both are energy-4, self-directed, percussion-forward. Substrate selection as creative act parallels instrument/production choices in self-released music."
+    }
+  ],
+  "degree_arc": {
+    "position": "Resonant percussion -- the first non-vocal sound in the engine. The second half of the flicker pair (degrees 21-22). Broadband, substrate-dependent, mechanically produced, above the perceptual fusion threshold. The 23rd acoustic element. The drum that completes what the voice began.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15) -> ascending sweet crescendo / dynamic intensification (16) -> witchety hook / memorability through rhythmic repetition (17) -> ascending spiral / each phrase higher (18) -> descending spiral with chorus shimmer / each phrase lower, bilateral syrinx (19) -> trilling descending rattle / fade, ADSR release, triple descent (20) -> loud wick-wick-wick / the hammer, sustained metronomic repetition at energy 4 (21) -> resonant hollow-tree percussion / the drum, first non-vocal sound, broadband substrate-dependent percussion above fusion threshold (22)",
+    "key_insight": "Degree 22 introduces THREE new structural dimensions: (1) RESONANT PERCUSSION -- 23rd acoustic element, the first non-vocal, non-syringeal, mechanically produced sound. (2) EXTERNAL INSTRUMENT -- the first sound whose character depends on an external object (substrate selection). (3) BROADBAND SOUND -- the first unpitched, wide-spectrum percussive transient in the engine. Plus it COMPLETES two concepts: the flicker pair (degrees 21-22) and the fusion trilogy (degrees 11, 21, 22).",
+    "acoustic_element_23": "RESONANT PERCUSSION -- substrate-dependent, broadband, mechanically produced, rhythmically structured percussion at or above the perceptual fusion threshold (~25 strikes/sec), amplified by the resonant properties of the struck surface. The 23rd element: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, release, the hammer, RESONANT PERCUSSION.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide)",
+      "degree_7": "Harmonic series navigation (mathematical melody)",
+      "degree_8": "Ultra-high ascending series (audiometric boundary crossing)",
+      "degree_9": "Variation on combinatorial syntax (the cover version)",
+      "degree_10": "Minimum viable signal (1-bit presence, swarm cohesion)",
+      "degree_11": "Tremolo / trill (rapid repetition at fusion threshold)",
+      "degree_12": "Ascending sawtooth sweep (buzzy waveform ascending)",
+      "degree_13": "Ostinato (two-note repeated phrase below fusion threshold)",
+      "degree_14": "Ternary / AAB (repetition with contrasting resolution)",
+      "degree_15": "Accelerando (tempo-varying chattering series)",
+      "degree_16": "Crescendo (dynamic-varying sweet series)",
+      "degree_17": "Hook (rhythmic two-note cell, memorability through repetition)",
+      "degree_18": "Ascending spiral (sequential phrases each higher)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each lower, bilateral syrinx)",
+      "degree_20": "Trill with parametric decay / ADSR release (triple descent, fade-out)",
+      "degree_21": "The hammer (sustained discrete metronomic repetition at constant pitch, constant volume, energy 4)",
+      "degree_22": "Resonant percussion (broadband substrate-dependent mechanical percussion above fusion threshold -- the first non-vocal sound)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz)",
+      "degree_8": "Ultra-high (6-10 kHz)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz)",
+      "degree_21": "Mid-range to upper-mid (1.5-4.0 kHz -- tonal, pitched, harmonic content)",
+      "degree_22": "BROADBAND (100 Hz to 8+ kHz -- no fundamental pitch, substrate-dependent peak energy 500 Hz to 4 kHz)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel)",
+      "degree_9": "Referential threat information (conserved content, varied delivery)",
+      "degree_10": "Pure presence / flock cohesion (1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep",
+      "degree_13": "Territory + pair bond through persistent repetition",
+      "degree_14": "Territory + mate attraction through narrative",
+      "degree_15": "Territory + mate attraction through urgency",
+      "degree_16": "Territory + mate attraction through brightness",
+      "degree_17": "Territory + mate attraction through the hook",
+      "degree_18": "Territory + mate attraction through ascending spiral",
+      "degree_19": "Territory + mate attraction through descending spiral",
+      "degree_20": "Territory + mate attraction through fading trill (evaporation)",
+      "degree_21": "Territory + mate attraction through the hammer (sustained metronomic vocal force at energy 4)",
+      "degree_22": "Territory + mate attraction + HABITAT QUALITY through resonant percussion (the substrate encodes territory quality -- the first sound carrying environmental information beyond the performer's body)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood)",
+      "degree_19": "Lowland riparian (deciduous thicket, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside)",
+      "degree_21": "Open woodland (scattered trees with broken canopy, grassy openings, mosaic)",
+      "degree_22": "Forest snag (dead standing wood -- the instrument IS the habitat)"
+    }
+  },
+  "conservation": {
+    "snag_conservation_note": "Dead tree removal (forestry, urban maintenance, hazard mitigation) directly eliminates drumming habitat. The flicker's drumming requires standing dead wood. Snag retention policies in forest management are critical for maintaining woodpecker drumming territories. Where snags are removed, flickers shift to artificial substrates (metal, wood structures) -- acoustically effective but ecologically degraded.",
+    "see_degree_21": "Full conservation data (population 9.9M, declining 1.2%/yr, starling competition, pesticide impacts) documented at degree 21. Not repeated here."
+  },
+  "part_a_parallel": {
+    "artist": "Foxy Apollo",
+    "degree": 22,
+    "genre": "Jazz/Funk",
+    "location": "Seattle",
+    "era": "2018-present",
+    "release_type": "Self-released",
+    "shared_principle": "Both are energy-4, self-directed, percussion-forward. Foxy Apollo is self-released -- independent, outside the label system, making music with available instruments. The Northern Flicker is self-amplified -- finding resonant surfaces, making percussion with available substrates. Both operate outside institutional infrastructure. The DIY percussionist. Substrate selection (which surface to drum) parallels instrument/production choices in self-released music. Energy 4 sustained for the second consecutive degree in both engines.",
+    "resonance_points": [
+      "Self-released percussion: both operate outside institutional infrastructure, making music with available instruments and distributing directly. The DIY percussionist.",
+      "Instrument selection as creative act: Foxy Apollo selects production tools and sonic palette. The flicker selects drumming substrates for resonance. The choice of instrument IS the creative act.",
+      "Energy 4 sustained: second consecutive degree at E=4 in both engines. Not a spike -- a new baseline.",
+      "The pair concept: flicker pair (21-22) = one species, two mechanisms. Polyrhythmics (21) to Foxy Apollo (22) = same city, same energy, different project. Transition from ensemble to individual mirrors vocal-to-percussion."
+    ]
+  }
+}
