@@ -1,0 +1,393 @@
+{
+  "degree": 16,
+  "species": "Yellow Warbler",
+  "scientific_name": "Setophaga petechia",
+  "sound_type": "sweet-sweet-sweeter-than-sweet",
+  "energy": 3,
+  "ecosystem": "riparian willow",
+  "season": "summer (neotropical migrant -- arrives late April/May, departs August/September)",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds from Alaska to Mexico, one of the most widespread warblers in the Americas. PNW birds are aestiva group (subspecies morcomi/brewsteri)."
+  },
+  "physical": {
+    "length_in": "4.7-5.1",
+    "wingspan_in": "6.3-7.9",
+    "weight_g": "9-11"
+  },
+  "plumage": {
+    "overall": "Brilliant yellow -- the brightest warbler in the PNW. Olive-yellow back, vivid yellow underparts with chestnut-red breast streaks (males). Females duller with faint or absent streaking.",
+    "head": "Entirely yellow face with conspicuous dark eye on yellow field -- open, alert expression. No cap (unlike Wilson's at degree 15). No spectacles (unlike MacGillivray's at degree 14).",
+    "body": "Vivid yellow underparts, olive-yellow back. Males show chestnut-red breast streaks -- the only North American warbler with red streaking on yellow. No wing bars, no white in tail.",
+    "bill": "Thin, pointed warbler bill -- insectivore design. Slightly heavier than Wilson's Warbler, but still a gleaner's bill.",
+    "subspecies": "Approximately 35 subspecies in three major clades: aestiva group (North American migrant -- PNW birds), petechia group (Caribbean/Central American mangrove resident), erithachorides group (Caribbean island resident). PNW birds: S. p. morcomi and S. p. brewsteri.",
+    "field_id": "The most purely, intensely yellow bird in the PNW. Bright yellow everywhere -- face, breast, belly. Males show chestnut breast streaks. No wing bars, no white in tail. Dark beady eye on yellow face. Conspicuously perches and sings from willow tops. The living highlighter pen."
+  },
+  "frequency_range": {
+    "opening_sweet_hz": "3500-4500 (clear, whistled -- softer, lower pitch)",
+    "terminal_sweet_hz": "5000-6500 (louder, more emphatic -- higher pitch with slight warble)",
+    "full_song_hz": "3500-6500 (combined range of opening + terminal sweet syllables)",
+    "chip_hz": "3000-5000 (sharp metallic contact/alarm note)",
+    "seet_hz": "6000-8000 (thin, high, descending flight call)",
+    "register": "Upper-mid to high (3.5-6.5 kHz -- bright, clear, carrying. Higher spectral centroid than Wilson's Warbler at degree 15)"
+  },
+  "song_metrics": {
+    "duration_s": "1.5-3 per song",
+    "note_count": "6-10 notes per song",
+    "initial_interval_s": "0.2-0.25 between opening sweet syllables",
+    "terminal_interval_s": "0.15-0.25 between terminal sweet syllables (tempo roughly constant; volume and pitch increase)",
+    "songs_per_minute": "5-10 during active singing bouts",
+    "structure": "Ascending crescendo -- volume and pitch increase from beginning to end. Tempo remains roughly constant (unlike Wilson's accelerando). The dynamic profile is the identity.",
+    "variation": "Males sing two song types (type I: simpler, accented ending; type II: more complex, variable). Both types show the ascending crescendo pattern. Repertoire size typically 2-6 song types per male.",
+    "perceived_quality": "Bright, cheerful, musical -- the quintessential 'sweet' warbler song. Clear whistled notes building in volume and pitch. Sounds like sunshine translated to sound.",
+    "waveform_analog": "Crescendo -- dynamic intensification within a single phrase. Ravel's Bolero compressed to 2 seconds. Barber's Adagio in miniature. The Shepard tone in slow motion.",
+    "key_property": "The second species in the engine defined by WITHIN-SONG INTENSIFICATION, but through a different parameter than degree 15. Wilson's: accelerando (tempo). Yellow: crescendo (volume + pitch). Two routes to escalation. The engine now distinguishes tempo-based from dynamics-based intensification."
+  },
+  "crescendo": {
+    "type": "Natural crescendo within single vocalization -- volume and pitch increase",
+    "initial_volume": "Moderate (mf) -- opening sweet syllables are clear but not emphatic",
+    "terminal_volume": "Loud (f to ff) -- terminal sweet syllables are louder, more emphatic, more carrying",
+    "pitch_trajectory": "Ascending -- opening notes lower (3.5-4.5 kHz), terminal notes higher (5-6.5 kHz). The pitch climbs approximately 1.5-2 kHz across the song.",
+    "tempo_trajectory": "Roughly constant -- unlike the Wilson's accelerando, the Yellow Warbler's note spacing does not compress significantly. The escalation is dynamic, not temporal.",
+    "resolution": "Partial -- the song peaks at the final emphatic note and stops. The peak IS the ending. Unlike the Wilson's abrupt cut-off (no resolution), the Yellow Warbler reaches a climax and concludes. Not a narrative resolution (like MacGillivray's A-A-A-B) but a dynamic resolution: the loudest note is the last note.",
+    "music_parallels": [
+      "Ravel's Bolero: 15 minutes of the same melody, growing from ppp to fff through orchestral addition -- the most famous crescendo in Western classical music. The warbler compresses this to 2 seconds.",
+      "Barber's Adagio for Strings: single melodic line climbing from whisper to devastating climax before falling to silence. Emotional power is entirely in the dynamic arc.",
+      "Shepard tone (slow motion): each phrase higher than the last creates a sense of endless ascent within a finite song. The ascending pitch IS the structure.",
+      "Film score swell: the orchestra builds behind dialogue, the strings get louder, the brass enters, the percussion adds weight -- the most instinctive cinematic device for building emotional intensity."
+    ],
+    "engine_significance": "The second species defined by within-song intensification (after Wilson's accelerando at degree 15), but through dynamics/pitch rather than tempo. The engine now distinguishes two fundamental categories of musical escalation: temporal (faster) and dynamic (louder/higher). The paired intensification at degrees 15-16 is structurally significant: same family, same habitat, different escalation parameters."
+  },
+  "cowbird_defense": {
+    "strategy": "Architectural -- builds new nest floor over parasitized clutch, burying cowbird eggs",
+    "mechanism": "Egg recognition (can distinguish cowbird eggs from own) + nest burial (builds fresh layer of nesting material over the parasitized clutch, then lays new eggs on the new floor)",
+    "max_layers": 6,
+    "cost": "Each re-nesting event reduces reproductive output for the season. Heavily parasitized females may spend entire breeding season building and burying rather than successfully raising young.",
+    "alternative_strategies": "Some females desert the nest entirely rather than burying. The choice between burial and desertion may depend on how early in the nesting cycle the parasitism occurs.",
+    "amiga_principle": "The constraint (parasitism) produces the architecture (multi-story nest). The warbler does not fight the intruder directly -- it builds over the problem. The Commodore Amiga's hardware limitations produced the distinctive Amiga aesthetic; the cowbird's parasitism produces the multi-story nest. Constraint IS creativity.",
+    "compositional_parallels": [
+      "Variation form: each nest floor is a variation on the same structure, built in response to previous iteration's failure",
+      "Palimpsest: layers that cover but do not destroy previous content -- history stacked, not erased",
+      "Ground bass / passacaglia: repeated harmonic foundation over which new content is laid",
+      "Augmentation: each layer makes the nest larger -- proportional expansion of the original theme"
+    ]
+  },
+  "behavioral_visibility": {
+    "activity_level": "Active and conspicuous during breeding season -- sings frequently from exposed perches at tops of willows and shrubs. Less hyperactively mobile than Wilson's Warbler but more prominently perched.",
+    "foraging_height": "Low to mid-canopy -- 1-5 meters in willow and shrub layer. Gleans insects from foliage; also hawks insects in short sallies.",
+    "visibility": "Highly visible during breeding season. Brilliant yellow plumage + exposed singing perches + frequent song = one of the most conspicuous warblers in riparian habitat.",
+    "concealment_type": "NONE -- the Yellow Warbler is as conspicuous as the Wilson's Warbler (degree 15) and opposite from the MacGillivray's concealment (degree 14). The brightest plumage in the warbler cluster, singing from the most exposed perches.",
+    "contrast_with_cluster": "MacGillivray's (14): distinctive plumage but hides in dense shrub. Wilson's (15): bright yellow, hyperactive, conspicuous. Yellow (16): brightest yellow, sings from exposed perches, most visible of the three. The warbler cluster progression: hidden -> active -> prominent."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Crescendo (dynamic intensification -- volume and pitch increase within a single phrase)",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/crescendo/",
+      "examples": [
+        "The warbler's sweet-sweet-sweeter-than-sweet: each note louder and higher than the last, building from mf to ff across 6-10 notes",
+        "Ravel's Bolero: 15 minutes of the same melody growing from ppp to fff -- the most famous crescendo in Western classical music",
+        "Barber's Adagio for Strings: single melodic line climbing from whisper to devastating climax before falling to silence",
+        "Film score swell: orchestra building behind dialogue, strings louder, brass entering, percussion adding weight"
+      ],
+      "music_theory_parallel": "The crescendo is the most emotionally direct dynamic device -- getting louder = getting more intense = demanding attention. The Yellow Warbler's song IS a crescendo: same syllable type, escalating volume and pitch. Where degree 15 introduced the accelerando (tempo-based escalation), degree 16 introduces the crescendo (dynamics-based escalation). Two fundamental categories of musical intensification, demonstrated by two consecutive Parulidae species."
+    },
+    {
+      "concept": "Accelerando vs. Crescendo (two routes to intensification -- tempo change vs. dynamic change)",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/intensification-pair/",
+      "examples": [
+        "Wilson's Warbler (degree 15): chi-chi-chet accelerates -- notes get FASTER (accelerando, tempo-based)",
+        "Yellow Warbler (degree 16): sweet-sweet-sweeter gets LOUDER and HIGHER (crescendo, dynamics-based)",
+        "EDM build-up: combines both -- hi-hats accelerate AND volume rises before the drop",
+        "Orchestral climax: tempo may increase AND volume increases -- the two mechanisms often combine in practice but are analytically distinct"
+      ],
+      "music_theory_parallel": "The paired intensification at degrees 15-16 is the engine's first demonstration that escalation can be decomposed into independent parameters: tempo (how fast) and dynamics (how loud/high). The Wilson's changes tempo at roughly constant volume. The Yellow changes volume/pitch at roughly constant tempo. Same family, same habitat, same energy, different mechanism. In music production, these are independently controllable: automation curves for tempo (BPM) and volume (dB) are separate. The warbler cluster makes this distinction biological."
+    },
+    {
+      "concept": "Brightness as timbre (spectral centroid alignment -- yellow = bright = high harmonics = forward mix position)",
+      "level": "intermediate",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/brightness/",
+      "examples": [
+        "The Yellow Warbler: brightest yellow plumage AND brightest (highest spectral centroid) song in the PNW warbler guild",
+        "Audio engineering: 'brightness' = energy distribution toward high frequencies (3-8 kHz), placing sounds perceptually 'forward' in the mix",
+        "Scriabin's Prometheus: color-hearing synesthesia, yellow mapped to D major (the 'bright' key)",
+        "Messiaen's modes of limited transposition: color-sound correspondences in orchestration"
+      ],
+      "music_theory_parallel": "The Yellow Warbler is the biological embodiment of audio synesthesia: bright color (yellow) + bright sound (high spectral centroid). In audio engineering, 'brightness' is measurable -- spectral energy distribution toward higher frequencies. The species name 'petechia' and the common name 'Yellow' both reference the visual brightness. The song's placement at 4-6 kHz spectral centroid mirrors the visual brightness. This is the first species in the engine where the visual and acoustic channels are synesthetically aligned."
+    },
+    {
+      "concept": "Architectural defense as composition (building layers over problems -- the Amiga Principle)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/architectural-defense/",
+      "examples": [
+        "The multi-story cowbird-defense nest: up to 6 layers, each burying a parasitized clutch -- the constraint produces the architecture",
+        "Variation form: same structure, modified repetition, each iteration responding to changed circumstances",
+        "Palimpsest: layers that cover but do not destroy previous content -- history stacked, not erased",
+        "Bach's Passacaglia in C minor (BWV 582): same 8-bar bass line, 20 variations -- the ground stays the same; what happens on top changes"
+      ],
+      "music_theory_parallel": "The cowbird defense maps directly to the Amiga Principle: hardware constraints (parasitism) produce creative architecture (multi-story nest) rather than limitation. The Commodore Amiga's 512KB RAM produced the demo scene; the cowbird's eggs produce the layered nest. In composition: variation form (same theme, modified), palimpsest (layers covering but not destroying), ground bass (repeated foundation, new content). The Yellow Warbler's nest is the most architecturally complex structure in the engine -- and the architecture was produced by constraint."
+    },
+    {
+      "concept": "Riparian indicator ecology (species presence as biological measurement of habitat quality)",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/riparian-indicator/",
+      "examples": [
+        "Yellow Warbler as riparian health indicator: present where willow corridors are intact, absent where degraded",
+        "Fourth riparian species in engine: flycatcher (alder, 6), MacGillivray's (shrub, 14), Wilson's (montane willow, 15), Yellow (lowland willow, 16)",
+        "Niche partitioning with Wilson's Warbler: both use willow riparian, but Yellow prefers lowland while Wilson's prefers montane/subalpine",
+        "Indicator species concept: the species' presence/absence measures ecosystem quality more efficiently than direct habitat measurement"
+      ],
+      "music_theory_parallel": "The riparian thread now spans four species across the engine's first seventeen degrees, forming a coherent ecological narrative from alder canopy through dense shrub to montane willow to lowland willow. The Yellow Warbler adds the indicator dimension: the bird IS a measurement. In audio terms, the Yellow Warbler is a VU meter for riparian health -- its signal level tells you the channel's condition."
+    },
+    {
+      "concept": "Niche partitioning (co-occurring species dividing shared habitat along measurable axes)",
+      "level": "intermediate",
+      "department": "ecology/community",
+      "college_path": ".college/ecology/community/niche-partitioning/",
+      "examples": [
+        "Wilson's Warbler (degree 15) and Yellow Warbler (degree 16): both in willow riparian, partitioned by elevation (montane vs. lowland)",
+        "The warbler cluster (degrees 14-16): three Parulidae in similar habitats, partitioned by microhabitat, elevation, and behavioral strategy",
+        "Frequency partitioning in mixed-species flocks: species adjust song frequency to reduce overlap with co-occurring species",
+        "In mixing: EQ carving -- giving each instrument its own frequency space to avoid masking. Niche partitioning IS EQ carving for birds."
+      ],
+      "music_theory_parallel": "Niche partitioning is the ecological equivalent of EQ carving in audio mixing: each species (instrument) occupies its own space in the available spectrum (frequency, habitat, elevation, timing) to avoid masking (competitive exclusion). The Wilson's and Yellow Warblers demonstrate this: same habitat type (willow riparian), different elevation bands. In a mix, two instruments at the same frequency compete for space. In an ecosystem, two species at the same niche compete for resources. The solution in both cases: partition the space."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-015",
+      "title": "Wilson's Warbler (Degree 15)",
+      "connection": "ACCELERANDO vs. CRESCENDO. The Wilson's (degree 15) builds intensity through TEMPO -- notes get faster (accelerando). The Yellow (degree 16) builds intensity through DYNAMICS AND PITCH -- notes get louder and higher (crescendo). Two different kinds of intensification at sequential degrees. Same family (Parulidae), same habitat (riparian willow), same energy (3), same migration (neotropical), different escalation parameter. The first PAIRED INTENSIFICATION in the engine -- two fundamental categories of musical escalation distinguished by consecutive species."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "THE WARBLER CLUSTER. Three consecutive Parulidae (degrees 14, 15, 16) from three different genera (Geothlypis, Cardellina, Setophaga). MacGillivray's resolves (AAB narrative). Wilson's accelerates and cuts off (anti-resolution). Yellow crescendos to a peak (dynamic resolution). Three rhetorical strategies for territorial song: the story, the chase, the swell. The cluster also spans three visibility strategies: hidden (14), active (15), prominent (16)."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "PARULIDAE EXPANSION. Third warbler in the engine, completing a three-species cluster spanning three genera. AVI documents PNW warbler diversity including Yellow Warbler breeding status, riparian habitat associations, and cowbird parasitism vulnerability."
+    },
+    {
+      "project": "ECO",
+      "title": "Ecology of the PNW",
+      "connection": "RIPARIAN INDICATOR. The Yellow Warbler is a recognized indicator species for riparian health -- its presence or absence measures stream corridor quality. ECO documents PNW ecosystem structure including the critical role of riparian zones. The indicator species concept connects to ecosystem monitoring: the bird IS a biological sensor."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Jeff Lorber at degree 16. Both are energy-3. Both build intensity through layered escalation. Lorber's jazz fusion adds metric modulation, synthesizer layers, and harmonic complexity on top of a groove -- layers building intensity through addition. The warbler's crescendo builds intensity through the same material getting louder and higher. Where Marriott at degree 15 used directness (double-time drive, single-horn), Lorber at degree 16 uses layering (fusion ensemble, multiple keyboards, metric modulation). The escalation principle applied through different mechanisms: the S36 parallel mirrors the SPS parallel."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "BRIGHTNESS REVISITED. The wren (degree 1) delivered maximum complexity in the upper frequency range -- fast, intricate, soprano (complex-bright). The Yellow Warbler (degree 16) delivers maximum brightness in a simpler package -- clear whistled notes in the bright 4-6 kHz range (simple-bright). Both are bright. One is many notes at high frequency. The other is few notes at high clarity. Two paths to brightness."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- the Yellow Warbler introduces an EIGHTH communication modality: the dynamic-crescendo territorial song. A volume-and-pitch-escalating signal distinct from alarm broadcasting (chickadees), swarm cohesion (bushtit), territorial trill (junco), buzzy flock sweep (siskin), persistent ostinato (vireo), structured ternary resolution (MacGillivray's), and tempo-varying burst (Wilson's).",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "warbler_role": "The Yellow Warbler produces a bright, ascending crescendo song (sweet-sweet-sweeter-than-sweet) from exposed perches in riparian willow habitat. Its communication is primarily INTRASPECIFIC: the song establishes territory and attracts mates through a dynamic crescendo that conveys fitness and intensity. The Yellow Warbler introduces an EIGHTH communication modality: the dynamic-crescendo territorial song -- a signal defined by its volume and pitch escalation rather than tempo, repetition pattern, or content. Previous modalities: alarm broadcast (chickadees, degrees 3/9), swarm cohesion (bushtit, degree 10), territorial trill (junco, degree 11), flock sweep (siskin, degree 12), persistent ostinato (vireo, degree 13), structured ternary song (MacGillivray's, degree 14), tempo-varying burst (Wilson's, degree 15). The Yellow adds: dynamic-crescendo song (degree 16).",
+    "note": "The alarm network remains at 4 nodes. Eight parallel communication channels now documented in the forest: alarm broadcast, swarm cohesion, territorial trill, flock sweep, persistent ostinato, structured ternary song, tempo-varying burst, and dynamic-crescendo song."
+  },
+  "part_a_parallel": {
+    "artist": "Jeff Lorber",
+    "degree": 16,
+    "genre": "S36",
+    "instrument": "Keyboards / Synthesizers",
+    "label": "Arista",
+    "era": "1980s-present",
+    "shared_principle": "Both are energy-3. Both build intensity through layered escalation. Lorber's jazz fusion adds metric modulation, synthesizer layers, and harmonic complexity on top of a groove -- layers building intensity through addition. The warbler's crescendo builds intensity through the same material getting louder and higher. Where Marriott at degree 15 used directness (double-time trumpet drive), Lorber at degree 16 uses layering (fusion ensemble, multiple keyboards, metric modulation). The escalation mechanism mirrors the SPS parallel: tempo-drive (Marriott/Wilson's) vs. dynamic-layering (Lorber/Yellow).",
+    "resonance_points": [
+      "Energy-3 (energy match): Both are energy-3 in their respective circles. Lorber's fusion is intense, layered, building. The warbler's crescendo builds from soft to loud. Both operate at the same intensity level.",
+      "Layered escalation: Lorber builds intensity by adding layers -- keyboards, synths, metric modulation stacking. The warbler builds intensity by escalating volume and pitch on the same material. Both are about escalation through building up rather than speeding up.",
+      "Metric modulation vs. crescendo: Lorber's signature device is metric modulation -- tempo within tempo, polyrhythmic layering that creates the perception of simultaneous tempi. The warbler's device is crescendo -- dynamic escalation within a single phrase. Both are within-song intensification techniques, applied in different domains.",
+      "The layering parallel mirrors the SPS parallel: Marriott (15) uses double-time directness (paralleling Wilson's accelerando). Lorber (16) uses layered fusion (paralleling Yellow's crescendo). The S36 and SPS engines produce aligned pairs."
+    ]
+  },
+  "degree_arc": {
+    "position": "The sweet-sweet-sweeter-than-sweet -- crescendo within a single vocalization, brightness as structure. The second energy-3. The first crescendo. The warbler cluster completes its third voice.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15) -> ascending sweet crescendo / dynamic intensification within vocalization (16)",
+    "key_insight": "Degree 16 introduces three new dimensions: (1) CRESCENDO -- the first species defined by dynamic (volume + pitch) change within a single vocalization, the sibling of degree 15's accelerando but through different parameters. (2) COWBIRD DEFENSE ARCHITECTURE -- the first species whose nesting behavior introduces the constraint-produces-architecture principle (Amiga Principle). (3) BRIGHTNESS AS SYNESTHESIA -- the first species where visual brightness (yellow plumage) and acoustic brightness (high spectral centroid) are aligned, introducing the color-sound correspondence.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)",
+      "degree_14": "Ternary / AAB (repeated identical syllables followed by contrasting resolution syllable -- the minimal narrative arc, repetition with destination)",
+      "degree_15": "Accelerando (tempo-varying chattering series -- the first species defined by rate of change rather than pitch, timbre, or pattern)",
+      "degree_16": "Crescendo (dynamic-varying sweet series -- volume and pitch increase within a single vocalization, the sibling of accelerando applied through dynamic rather than temporal parameters)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)",
+      "degree_11": "Mid-range (3-6 kHz -- comfortably within human hearing, return to accessible mid-range)",
+      "degree_12": "Wide-band (2-10 kHz -- the ascending sweep traverses more of the frequency spectrum than any previous single vocalization)",
+      "degree_13": "Mid-range (2.5-5 kHz -- centered in the speech frequency band, easily audible, comfortably accessible)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz -- churry syllables in the upper portion, sweet resolution descending into mid-range)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz -- chi syllables in upper portion, chet syllables descending slightly. Brighter overall than degree 14)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz -- ascending crescendo from lower-mid to upper register. Brightest warbler song yet -- highest spectral centroid in the cluster)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)",
+      "degree_11": "Territory + mate attraction through trill (I am here, I am fit, this is my edge)",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (I am here, I am Pine Siskin, where are we going -- nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (I am still here, this is still my territory, the signal has not stopped -- temporal continuity as content)",
+      "degree_14": "Territory + mate attraction through structured song with resolution (I am here, I am MacGillivray's Warbler, and this phrase has a beginning and an end -- narrative as content)",
+      "degree_15": "Territory + mate attraction through accelerating burst (I am here, I am Wilson's Warbler, and I am URGENT -- tempo change as fitness signal, intensity as content)",
+      "degree_16": "Territory + mate attraction through ascending crescendo (I am here, I am Yellow Warbler, and I am GROWING -- dynamic intensification as fitness signal, brightness as content)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)",
+      "degree_10": "Shrubby woodland edge (ecotone -- the transition zone between forest and open habitat)",
+      "degree_11": "Forest edge (ecotone -- the threshold between forest interior and open ground)",
+      "degree_12": "Conifer seed crop (not a fixed habitat but a resource -- the siskin goes where the seeds are)",
+      "degree_13": "Oak woodland (Garry oak / Oregon white oak -- the first non-conifer-dominated habitat in the engine, a threatened fire-dependent savanna ecosystem)",
+      "degree_14": "Dense shrub (salal, salmonberry, thimbleberry, snowberry thickets -- early-successional and edge habitats maintained by disturbance)",
+      "degree_15": "Willow riparian (willow-dominated streamside thickets along streams, rivers, bogs, and wet meadows -- montane/subalpine emphasis)",
+      "degree_16": "Riparian willow (willow-dominated streamside corridors -- lowland valley bottoms, urban stream corridors, agricultural margins. Niche-partitioned from degree 15 by elevation)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Riparian willow habitat -- dense stands of willow (Salix spp.), red-osier dogwood, and moist shrubby vegetation along streams, rivers, marshes, and wet meadows. In PNW, primarily a lowland riparian specialist: valley bottoms, urban stream corridors, agricultural ditch margins. Also uses shrubby habitats near water in parks and gardens.",
+    "niche": "Mid-shrub insectivore in moist riparian habitat. Forages actively in willow and shrub canopy, gleaning insects from foliage and small branches. More of a canopy-top singer than Wilson's Warbler -- sings from exposed perches.",
+    "foraging_strategy": "Active gleaner -- moves through willow and shrub foliage picking insects from leaf surfaces and twigs. Also hawks insects in short sallies from perches. Less hyperactive than Wilson's Warbler; more methodical.",
+    "diet": "Insects (caterpillars, beetles, flies, wasps, mosquitoes, mayflies, spiders gleaned from foliage). Almost entirely insectivorous during breeding season. Takes some berries during fall migration.",
+    "nesting": "Nest in upright fork of shrub or small tree, typically 2-12 feet above ground in willow, dogwood, or other riparian shrub. Open cup of plant fibers, bark strips, grass, and plant down, lined with fine grass, hair, and plant down. Well-constructed but not concealed -- exposed enough to be found by cowbirds. Female builds; female incubates.",
+    "irruptive_movement": false,
+    "resident_status": "NEOTROPICAL MIGRANT -- breeds across North America (April-September), winters from Mexico through Central America and northern South America. Fourth neotropical migrant in the engine after Pacific-slope Flycatcher (degree 6), MacGillivray's Warbler (degree 14), and Wilson's Warbler (degree 15).",
+    "flock_size": "Solitary or in pairs during breeding season. Joins mixed-species flocks during migration. Does not form large conspecific flocks on breeding grounds.",
+    "population_trend": "SLIGHT DECLINE -- approximately 0.2-0.3% per year since 1966 (BBS data). Less steep than Wilson's Warbler (1.3%) but persistent. Still abundant (~90-100 million). Used as riparian health indicator species."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~90-100 million (Partners in Flight 2020)",
+    "trend": "Slight decline -- approximately 0.2-0.3% per year since 1966 (Breeding Bird Survey). Persistent but gradual. Cumulative ~15-20% decline over 6 decades.",
+    "threats": "Riparian willow habitat loss (water diversion, livestock grazing, urban development, stream channelization); Brown-headed Cowbird parasitism (significant in fragmented landscapes -- the multi-story nest defense is effective but costly); wintering ground habitat loss in Mexico and Central America; pesticide exposure (insectivore dependent on insect prey); climate-driven phenological mismatch.",
+    "vulnerability": "The paradox of ubiquity: one of the most widespread and abundant warblers in the Americas, but dependent on a habitat type (riparian willow) that is disproportionately degraded. Used as indicator species for riparian health -- where riparian zones are intact, Yellow Warblers are abundant; where degraded, they decline.",
+    "unique_feature": "The multi-story cowbird defense nest -- up to 6 layers, the most architecturally complex nest structure of any small passerine. The species' anti-parasitism strategy is an architectural response rather than an egg-ejection response.",
+    "indicator_status": "Recognized riparian indicator species -- presence/absence and abundance correlate with riparian habitat quality. Used in habitat assessment protocols across western North America."
+  },
+  "key_sites": [
+    {
+      "name": "Snoqualmie Valley lowland riparian",
+      "type": "breeding (summer)",
+      "description": "Willow and dogwood thickets along the Snoqualmie River and tributaries in lowland King County. Prime lowland riparian breeding habitat.",
+      "region": "King County, WA"
+    },
+    {
+      "name": "Skagit River delta riparian",
+      "type": "breeding (summer)",
+      "description": "Extensive willow riparian corridors along the Skagit River and agricultural margins in the Skagit Valley. High-quality lowland riparian habitat.",
+      "region": "Skagit County, WA"
+    },
+    {
+      "name": "Nisqually National Wildlife Refuge",
+      "type": "breeding (summer)",
+      "description": "Riparian and wetland habitats at the mouth of the Nisqually River on Puget Sound. Yellow Warbler breeding habitat in willow and shrub margins.",
+      "region": "Thurston County, WA"
+    },
+    {
+      "name": "Green River / lowland urban riparian",
+      "type": "breeding (summer)",
+      "description": "Lowland riparian willow corridors along urban and suburban streams in the greater Seattle area. Fragmented but still used -- demonstrates the species' tolerance for urban-adjacent riparian.",
+      "region": "King County, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the ascending crescendo pattern with initial sweet syllables at lower volume and pitch building to terminal emphatic syllables at higher volume and pitch",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Yellow Warbler song shows a CLEAR ASCENDING PATTERN: initial notes at lower frequency (3.5-4.5 kHz) and lower amplitude, progressively building to terminal notes at higher frequency (5-6.5 kHz) and higher amplitude. The crescendo is visible as increasing amplitude envelope AND ascending frequency from left to right on the spectrogram. Compare to the Wilson's Warbler (degree 15) whose spectrogram shows DECREASING inter-note gaps (accelerando) at roughly constant amplitude, and to the MacGillivray's (degree 14) whose spectrogram shows constant-rate syllables with a contrasting terminal element."
+  },
+  "sources": [
+    "Lowther, P.E., Celada, C., Klein, N.K., Rimmer, C.C., and Spector, D.A. (2020). Yellow Warbler (Setophaga petechia). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Yellow Warbler. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Yellow Warbler. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Yellow Warbler species account. birdweb.org",
+    "Chesser, R.T. et al. (2011). Fifty-second supplement to the AOU Check-list. The Auk 128: 600-613.",
+    "Lovette, I.J. et al. (2010). Comprehensive multilocus phylogeny for wood-warblers and revised classification of Parulidae. Mol Phylogenet Evol 57: 753-770.",
+    "Barker, F.K. et al. (2015). New insights into New World biogeography. The Auk 132: 333-348.",
+    "Spector, D.A. (1992). Wood-warbler song systems: A review of paruline singing behaviors. Current Ornithology 9: 199-238.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Catchpole, C.K. and Slater, P.J.B. (2008). Bird Song: Biological Themes and Variations. 2nd ed. Cambridge University Press.",
+    "Sealy, S.G. (1995). Burial of cowbird eggs by parasitized Yellow Warblers: An empirical and experimental study. Animal Behaviour 49: 877-889.",
+    "Clark, K.L. and Robertson, R.J. (1981). Cowbird parasitism and evolution of anti-parasite strategies in the Yellow Warbler. Wilson Bulletin 93: 249-258.",
+    "Rothstein, S.I. (1975). Experimental and teleonomic investigation of avian brood parasitism. Condor 77: 250-271.",
+    "Gregory, S.V. et al. (1991). An ecosystem perspective of riparian zones. BioScience 41: 540-551.",
+    "Knopf, F.L. and Samson, F.B. (1994). Scale perspectives on avian diversity in western riparian ecosystems. Conservation Biology 8: 669-676.",
+    "Nur, N., Jones, S.L., and Geupel, G.R. (1999). Statistical guide to data analysis of avian monitoring programs. US Fish and Wildlife Service BTP-R6001-1999.",
+    "Ammon, E.M. (1995). Reproductive ecology of Wilson's Warbler in subalpine meadow. Condor 97: 1028-1039.",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey, Results and Analysis 1966-2019. USGS Patuxent.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Yellow Warbler (Setophaga petechia). iucnredlist.org",
+    "eBird. Yellow Warbler observation data, Pacific Northwest. ebird.org/species/yelwar",
+    "Lowther, P.E. (2020). Brown-headed Cowbird parasitism. Birds of the World.",
+    "Rich, T.D. et al. (2004). Partners in Flight North American Landbird Conservation Plan. Cornell Lab of Ornithology.",
+    "Washington Department of Fish and Wildlife. PHS: Riparian and wetland habitats. wdfw.wa.gov",
+    "Lerdahl, F. and Jackendoff, R. (1983). A Generative Theory of Tonal Music. MIT Press.",
+    "London, J. (2012). Hearing in Time. 2nd ed. Oxford University Press.",
+    "Levitin, D.J. (2006). This Is Your Brain on Music. Dutton.",
+    "Macaulay Library. Yellow Warbler recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "016",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
