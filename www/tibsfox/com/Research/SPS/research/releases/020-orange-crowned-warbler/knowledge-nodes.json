@@ -1,0 +1,468 @@
+{
+  "degree": 20,
+  "species": "Orange-crowned Warbler",
+  "scientific_name": "Leiothlypis celata",
+  "slug": "020-orange-crowned-warbler",
+  "sound_type": "trilling descending rattle",
+  "energy": 3,
+  "ecosystem": "shrubby slope",
+  "season": "summer (partial migrant -- some Pacific coast lutescens overwinter in mild coastal areas; others migrate to Mexico/Central America)",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds across western North America from Alaska to Baja California. PNW subspecies is L. c. lutescens -- the brightest, most yellow Pacific coast form. Common and widespread in brushy habitats from sea level to subalpine."
+  },
+  "physical": {
+    "length_in": "4.5-5.5",
+    "wingspan_in": "7.0-7.5",
+    "weight_g": "7-11"
+  },
+  "plumage": {
+    "overall": "The plainest of North American warblers. Olive-green to olive-yellow above, dull yellowish below, with faint dusky breast streaking visible only at close range. No wing bars, no bold eyering, no bright patches. PNW lutescens is the brightest form but still remarkably plain.",
+    "head": "Thin, indistinct broken eyering and faint dark eyeline. The ORANGE CROWN PATCH -- faint orange-rufous feathers on center of crown -- is concealed beneath olive-green crown feathers and almost never visible in the field. Revealed only during agitation or display.",
+    "body": "Olive-green above, dull yellowish below. Faint dusky breast streaking concentrated on upper breast. No wing bars. Overall impression: featureless.",
+    "undertail": "BRIGHT YELLOW undertail coverts -- the single most reliable field mark. Often the best way to confirm identification.",
+    "bill": "Thin, sharply pointed -- slightly more pointed than most Parulidae. Insectivore design.",
+    "legs": "Dark grayish",
+    "diagnostic_visual": "Identification by ABSENCE of field marks. Plain olive-green warbler with no wing bars, no bold eyering, no bright patches. Bright yellow undertail coverts. Hidden orange crown patch. The warbler whose identity IS its lack of identity."
+  },
+  "frequency_range": {
+    "full_range_hz": "3000-6500 (across the descending trill)",
+    "starting_pitch_hz": "4500-6500 (initial notes, highest pitch in trill)",
+    "terminal_pitch_hz": "3000-4500 (final notes, lowest pitch as trill fades)",
+    "register": "Upper-mid to mid (3.0-6.5 kHz -- the descending trill sweeps from upper-mid register down into mid-range as it fades)"
+  },
+  "vocalization_metrics": {
+    "primary_song": {
+      "name": "Trilling descending rattle -- rapid trill that descends in pitch and fades in volume",
+      "trill_rate_per_second": "8-16",
+      "song_duration_s": "1.5-3.0",
+      "pitch_contour": "DESCENDING -- notes drop in pitch across the trill, from ~4.5-6.5 kHz to ~3.0-4.5 kHz",
+      "amplitude_contour": "DESCENDING -- song fades in volume toward the end, gradually dissolving",
+      "timbre": "Musical, thin, colorless -- rapid trill without strong harmonic content. Often described as 'colorless' or 'insipid' in field guides.",
+      "calling_period": "Primarily morning and throughout the day during breeding season. One of the earliest spring singers in the PNW.",
+      "key_property": "TRIPLE DESCENT -- pitch falls, amplitude falls, and trill rate sometimes decelerates. Three parameters descending simultaneously.",
+      "key_property_2": "EVAPORATION -- the song does not end with a terminal accent, contrasting syllable, or abrupt cutoff. It fades. It dissolves. The boundary between song and silence is blurred. The natural fade-out.",
+      "three_part_architecture": {
+        "onset": "Rapid series of clear, musical notes at moderate-to-high pitch (~4.5-6.5 kHz). Brightest and most distinct.",
+        "descent": "Pitch gradually descends across the trill, settling 0.5-1.5 kHz lower than the opening notes.",
+        "fade": "Final notes lose energy -- softer, less distinct, sometimes slightly slower. The song trails off into ambient noise."
+      }
+    },
+    "call": {
+      "name": "Sharp 'stik' or 'tsik' call",
+      "description": "A sharp, metallic chip note -- one of the most distinctive call notes among PNW warblers. Often the first indication of the species' presence. Sharper and more metallic than most warbler chip notes.",
+      "frequency_hz": "5000-8000"
+    },
+    "flight_call": {
+      "name": "High, thin 'seet'",
+      "description": "A high, thin, slightly descending call given in flight. Similar to other warbler flight calls but with a slight buzzy quality.",
+      "frequency_hz": "6000-9000"
+    }
+  },
+  "hidden_crown": {
+    "description": "The orange crown patch is a small area of orange-rufous feathers on the center of the crown, concealed beneath olive-green crown feathers. Almost never visible in the field except during agitation, excitement, or display. Males show a slightly more prominent patch than females. Most birders who have observed hundreds of Orange-crowned Warblers have never seen the orange crown.",
+    "naming_paradox": "The bird is named for a feature that is almost never visible. The species epithet 'celata' (Latin: hidden) explicitly acknowledges this. A name that references something concealed.",
+    "engine_theme": "Connects to the engine's motif of hidden features: silence as sound (degree 0), invisibility in darkness (degree 4), signal at the noise floor (degree 10), concealed crown (degree 20). Four instances in twenty-one degrees of names or features that reference absence, concealment, or the threshold between visible and invisible."
+  },
+  "warbler_quintet": {
+    "principle": "Five Parulidae in twenty degrees -- the largest family representation in the engine. Five species, five genera, five acoustic strategies, five song endings. The quintet maps every possible energy trajectory a song can take: flat-then-down, accelerating, ascending, flat, descending.",
+    "members": [
+      {
+        "degree": 14,
+        "species": "MacGillivray's Warbler",
+        "genus": "Geothlypis",
+        "strategy": "Ternary / AAB (churry-sweet -- narrative)",
+        "ending": "RESOLUTION (contrasting terminal note)",
+        "energy_trajectory": "Stable then resolves down"
+      },
+      {
+        "degree": 15,
+        "species": "Wilson's Warbler",
+        "genus": "Cardellina",
+        "strategy": "Accelerando (chattering -- urgency)",
+        "ending": "INTERRUPTION (accelerates and stops)",
+        "energy_trajectory": "Builds then cuts off"
+      },
+      {
+        "degree": 16,
+        "species": "Yellow Warbler",
+        "genus": "Setophaga",
+        "strategy": "Crescendo (sweet -- brightness)",
+        "ending": "CLIMAX (builds to brightest note)",
+        "energy_trajectory": "Ascending crescendo"
+      },
+      {
+        "degree": 17,
+        "species": "Common Yellowthroat",
+        "genus": "Geothlypis",
+        "strategy": "Hook (witchety -- memorability)",
+        "ending": "REPETITION (witchety repeated at constant energy)",
+        "energy_trajectory": "Flat / metronomic"
+      },
+      {
+        "degree": 20,
+        "species": "Orange-crowned Warbler",
+        "genus": "Leiothlypis",
+        "strategy": "Descending trill (rattle -- evaporation)",
+        "ending": "EVAPORATION (fades and dissolves)",
+        "energy_trajectory": "Descending in all parameters"
+      }
+    ],
+    "completeness": "Five song endings -- resolve, interrupt, climax, repeat, fade -- exhaust the possibilities of how a song can conclude. Just as the Catharus triptych (degrees 7, 18, 19) mapped the three pitch directions, the Parulidae quintet maps the five possible song conclusions."
+  },
+  "trill_comparison": {
+    "oregon_junco": {
+      "degree": 11,
+      "trill_character": "Metallic, buzzy, uniform",
+      "pitch_contour": "FLAT (constant pitch throughout)",
+      "amplitude_contour": "FLAT (constant volume throughout)",
+      "ending": "Abrupt cessation",
+      "synth_analogy": "Oscillator (constant output, instant off)"
+    },
+    "orange_crowned": {
+      "degree": 20,
+      "trill_character": "Musical, thin, descending",
+      "pitch_contour": "DESCENDING (pitch drops across trill)",
+      "amplitude_contour": "DESCENDING (volume fades)",
+      "ending": "Gradual fade (evaporation)",
+      "synth_analogy": "Oscillator with long release envelope (ADSR decay)"
+    },
+    "principle": "Same synthesis mechanism (rapid note repetition at/near the perceptual fusion threshold), different envelope. The junco is a sustained oscillator. The Orange-crowned is a note with the release knob turned up. Degree 11 introduced the trill as steady-state. Degree 20 revisits it with parametric decay."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The fade / evaporation (song ending as gradual dissolution -- pitch, amplitude, and rate all descend, the natural fade-out)",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/fade-out/",
+      "examples": [
+        "The Orange-crowned Warbler's song: trill descends in pitch and volume, dissolving into ambient noise without a defined ending gesture",
+        "Pop music fade-out (1950s-1990s): 30-40% of Billboard hits used fade-out endings -- the mixing board faders pulled down gradually",
+        "Holst's The Planets (Neptune): the final movement fades with a women's chorus receding into inaudibility -- the first orchestral fade-out",
+        "Ambient music (Eno, Stars of the Lid): pieces that dissolve rather than conclude, blurring the boundary between music and silence"
+      ],
+      "music_theory_parallel": "The fade-out is a deliberate refusal to conclude. Where resolution provides closure (degree 14), interruption provides surprise (degree 15), climax provides catharsis (degree 16), and repetition provides persistence (degree 17), the fade-out provides ambiguity. The song does not end -- it ceases to be audible. The distinction matters: ending is a decision; fading is a process. The Orange-crowned Warbler's song does not decide to stop. It runs out of energy."
+    },
+    {
+      "concept": "ADSR release envelope (the controlled decay from sustain to silence -- the 'R' in Attack-Decay-Sustain-Release)",
+      "level": "intermediate",
+      "department": "music-theory/synthesis",
+      "college_path": ".college/music/theory/synthesis/adsr-release/",
+      "examples": [
+        "The Orange-crowned Warbler's trill decays like a synthesizer note with a long release parameter -- gradual, smooth, no hard cutoff",
+        "Oregon Junco (degree 11): trill is steady-state with instant-off -- zero release time, the opposite envelope",
+        "Synthesizer pad sounds: long release times create lingering, atmospheric tails that blur note boundaries",
+        "Piano sustain pedal: releases the dampers, allowing notes to decay naturally rather than being cut off -- a mechanical release envelope"
+      ],
+      "music_theory_parallel": "The ADSR envelope is the fundamental amplitude shaper in synthesis. The Release parameter determines the transition from sound to silence. A release of zero = instant off (the Oregon Junco's trill). A long release = gradual fade (the Orange-crowned's trill). The engine now contains both extremes: the trill with zero release (degree 11) and the trill with maximum release (degree 20). The 21st acoustic element in the progression is the Release itself -- the controlled decay that transitions between presence and absence."
+    },
+    {
+      "concept": "The Parulidae quintet (five warblers, five genera, five song strategies, five endings -- a complete taxonomy of song conclusions)",
+      "level": "advanced",
+      "department": "music-theory/analysis",
+      "college_path": ".college/music/theory/analysis/parulidae-quintet/",
+      "examples": [
+        "MacGillivray's (14): A-A-A-B -- repetition then resolution. Song ARRIVES.",
+        "Wilson's (15): accelerando then stop -- song INTERRUPTS without arriving.",
+        "Yellow (16): ascending crescendo -- song CLIMBS to its peak.",
+        "Yellowthroat (17): repeated hook at constant energy -- song PERSISTS.",
+        "Orange-crowned (20): descending, fading trill -- song DISSOLVES."
+      ],
+      "music_theory_parallel": "The five Parulidae map the five possible energy trajectories a song can take: (1) flat-then-down (resolution), (2) accelerating (urgency), (3) ascending (crescendo), (4) flat (repetition), (5) descending (fade). These exhaust the options. Every song in every tradition ends in one of these five ways. The Parulidae quintet is a closed set of conclusions, just as the Catharus triptych was a closed set of pitch directions."
+    },
+    {
+      "concept": "Trill with parametric decay (rapid repetition with simultaneous descent of pitch, amplitude, and rate -- the triple descent)",
+      "level": "intermediate",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/parametric-decay/",
+      "examples": [
+        "The Orange-crowned's trill: pitch drops 1-2 kHz, amplitude fades, rate sometimes decelerates -- three parameters falling at once",
+        "Degree 11 (Oregon Junco) trill: constant pitch, constant volume, constant rate -- zero parametric change. The baseline trill.",
+        "Tremolo with diminuendo: orchestral technique of rapid repetition that fades in volume (Shostakovich string quartets)",
+        "Doppler effect: a passing sound source descends in pitch and fades in amplitude simultaneously -- the train whistle receding"
+      ],
+      "music_theory_parallel": "Parametric decay is what happens when multiple dimensions of a sound decrease together. The Orange-crowned Warbler's song is not merely quieter at the end -- it is lower, softer, and (sometimes) slower. This triple descent creates the perception of a sound source that is simultaneously receding in distance, descending in register, and losing energy. The song does not stop. It retreats."
+    },
+    {
+      "concept": "Interspecies eavesdropping network -- 5th node (Orange-crowned Warbler as Parulidae receiver in mixed-species flock alarm system)",
+      "level": "foundational",
+      "department": "ecology/behavior",
+      "college_path": ".college/ecology/behavior/eavesdropping-network/",
+      "examples": [
+        "Orange-crowned Warblers respond to Black-capped Chickadee (degree 3) alarm calls by increasing vigilance",
+        "In winter mixed-species flocks, Orange-crowned Warblers join chickadee-led groups and use alarm calls as threat detection",
+        "Five-node network: 2 broadcasters (Black-capped Chickadee degree 3, Chestnut-backed Chickadee degree 9) + 3 receivers (Nuthatch degree 5, Kinglet degree 8, Orange-crowned Warbler degree 20)",
+        "First Parulidae species in the alarm network -- warblers enter the interspecies communication system"
+      ],
+      "music_theory_parallel": "The eavesdropping network is an interspecies communication system where some species broadcast alarm calls and others listen. The Orange-crowned Warbler is a receiver -- it responds to chickadee alarms but does not produce the alarm calls that other species monitor. In music terms: the audience, not the performer. The warbler that listens."
+    },
+    {
+      "concept": "The hidden feature (names and identities defined by what is concealed, absent, or invisible -- the crown you cannot see)",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/hidden-features/",
+      "examples": [
+        "Orange-crowned Warbler (degree 20): named for a crown patch that is almost never visible -- celata means 'hidden'",
+        "Great Blue Heron (degree 0): acoustic identity defined by silence -- the absence of sound",
+        "Spotted Owl (degree 4): more heard than seen, invisible in old-growth darkness",
+        "Bushtit (degree 10): contact call at the noise floor -- barely distinguishable from ambient noise"
+      ],
+      "music_theory_parallel": "In music, the concept of the hidden feature appears as the implied note -- the tone that a listener infers from context without it being sounded. A chord can imply its root even when the root is not played. The Orange-crowned Warbler's hidden crown is the ornithological equivalent: the feature is there, but you have to know about it to look for it, and even then you probably will not see it. The identity is defined not by what is visible but by what is concealed."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "WARBLER QUINTET -- FIRST MEMBER. Degree 14 introduced Parulidae to the engine with the AAB narrative song. The MacGillivray's resolved; the Orange-crowned fades. Same family, opposite endings. The MacGillivray's song arrives at a destination (the contrasting terminal 'sweet'). The Orange-crowned's song dissolves without arriving. Two warblers, two philosophies of conclusion."
+    },
+    {
+      "project": "SPS-015",
+      "title": "Wilson's Warbler (Degree 15)",
+      "connection": "ACCELERANDO VS. FADE. Wilson's (degree 15) accelerates and stops -- energy builds then cuts off. Orange-crowned (degree 20) decelerates and fades -- energy drains and dissolves. Both end without a resolution gesture, but the trajectories are opposite: Wilson's builds to an abrupt edge; Orange-crowned descends to a gradual disappearance."
+    },
+    {
+      "project": "SPS-016",
+      "title": "Yellow Warbler (Degree 16)",
+      "connection": "CRESCENDO VS. DECRESCENDO. Yellow (degree 16) ascends in pitch and volume -- the song gets louder and brighter. Orange-crowned (degree 20) descends in pitch and volume -- the song gets quieter and darker. Perfect mirror pair. The Yellow Warbler is the engine's brightest warbler; the Orange-crowned is its most subdued."
+    },
+    {
+      "project": "SPS-017",
+      "title": "Common Yellowthroat (Degree 17)",
+      "connection": "THE HOOK VS. THE FADE. The Yellowthroat (degree 17) repeats a catchy phrase at constant energy -- maximally memorable. The Orange-crowned (degree 20) delivers a trill that fades to nothing -- minimally memorable. The catchiest warbler versus the most forgettable. Both operate in the mid-frequency range, but one sticks and the other dissolves."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "TRILL COMPARISON. Both produce rapid trills at or near the perceptual fusion threshold. The junco's trill is steady-state: constant pitch, constant volume, abrupt stop. The Orange-crowned's trill is decaying: descending pitch, fading volume, gradual dissolution. Same synthesis mechanism, different envelope. The oscillator (degree 11) versus the oscillator with a release envelope (degree 20)."
+    },
+    {
+      "project": "SPS-019",
+      "title": "Veery (Degree 19)",
+      "connection": "DESCENDING PITCH -- DIFFERENT MECHANISM. Both descend in pitch: the Veery descends in discrete steps between phrases (a staircase), the Orange-crowned descends as a continuous glide within a trill (a ramp). The Veery's descent is ethereal and resolved; the Orange-crowned's descent is mundane and dissolved."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Fifth Parulidae warbler in the AVI documentation. AVI records the Orange-crowned Warbler as one of the most common and widespread warblers in the PNW -- abundant in brushy habitats from sea level to subalpine, yet frequently overlooked due to its plain appearance."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Shrubby slope ecology: early-successional habitats, post-disturbance shrub communities (post-fire, post-logging recovery), hillside vegetation structure. The Orange-crowned's habitat preference connects to ECO's documentation of successional dynamics and the role of disturbance in creating suitable breeding habitat."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Whitney Menge at degree 20. Both are understated presences whose quality rewards attention. Menge's Jazz/R&B is self-released and community-rooted in Rainier Valley -- not flashy or commercially promoted. The Orange-crowned Warbler is common, plain, overlooked, but structurally fascinating. Both hide their best qualities beneath unassuming surfaces. The hidden crown. The quiet voice."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXPANDED TO 5 NODES. The Orange-crowned Warbler adds the FIFTH NODE to the interspecies alarm eavesdropping network, and the first Parulidae receiver. Orange-crowned Warblers respond to Black-capped Chickadee and Chestnut-backed Chickadee alarm calls in mixed winter flocks, altering foraging behavior and increasing vigilance.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" },
+      { "species": "Orange-crowned Warbler", "degree": 20, "role": "receiver", "habitat": "shrubby slope / mixed winter flocks" }
+    ],
+    "warbler_role": "The Orange-crowned Warbler participates in mixed-species winter flocks led by chickadees and kinglets in PNW lowlands. It eavesdrops on chickadee alarm calls, using the alarm broadcast network as a threat detection system. This is a RECEIVER role -- the warbler listens but does not broadcast alarms that other species monitor. The first Parulidae to enter the interspecies communication network.",
+    "note": "Alarm network now at 5 nodes (2 broadcasters, 3 receivers). Twelve parallel communication channels documented: alarm broadcast, swarm cohesion, territorial trill, flock sweep, persistent ostinato, structured ternary song, tempo-varying burst, dynamic-crescendo song, hook-repetition song, ascending-spiral song, descending-spiral song with chorus shimmer, and fading descending trill."
+  },
+  "part_a_parallel": {
+    "artist": "Whitney Menge",
+    "degree": 20,
+    "genre": "Jazz/R&B",
+    "location": "Rainier Valley, Seattle",
+    "era": "2015-present",
+    "release_model": "self-released",
+    "shared_principle": "Both are understated presences whose craft rewards attention. Menge's Jazz/R&B is self-released, community-based, and rooted in Rainier Valley rather than the Seattle spotlight. The Orange-crowned Warbler is the commonest warbler nobody notices -- plain, cryptic, overlooked. Both carry diagnostic quality beneath unassuming surfaces. The crown is concealed. The voice is understated. The reveal requires attention.",
+    "resonance_points": [
+      "Understated craft: Menge's vocal ability and compositional sophistication become apparent only when you listen closely. The Orange-crowned's structural complexity (descending trill, triple descent, ADSR envelope) hides beneath a colorless exterior. Both reward attention.",
+      "Hidden features: Menge self-releases -- the music is there but not promoted through major channels. The Orange-crowned's crown patch is there but concealed. Both carry hidden diagnostic quality.",
+      "Community embedding: Menge is rooted in Rainier Valley, building from a local base. The Orange-crowned is embedded in PNW shrubby slopes, a constant common presence. Both are from here in a way that matters.",
+      "Energy 3 -- moderate intensity: Both operate at energy level 3. Menge's R&B has warmth and soul without histrionics. The Orange-crowned's trill is musical but not loud, not bright, not insistent. Power through restraint."
+    ]
+  },
+  "degree_arc": {
+    "position": "The release -- the fade, the ADSR envelope, the song that dissolves. The fifth Parulidae, the hidden crown, the partial migrant. Degree 20 opens the third decade with a new synthesis type (trill with parametric decay), a new ecosystem (upland shrubby slope breaking the riparian streak), a new migration category (partial migrant), and the completion of the Parulidae quintet.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15) -> ascending sweet crescendo / dynamic intensification within vocalization (16) -> witchety hook / memorability through rhythmic repetition (17) -> ascending spiral / each phrase higher than the last (18) -> descending spiral with chorus shimmer / each phrase lower, bilateral syrinx beat frequencies (19) -> trilling descending rattle / fade, ADSR release envelope, triple descent (20)",
+    "key_insight": "Degree 20 introduces four new dimensions: (1) THE FADE/EVAPORATION -- the song dissolves rather than concluding, the natural equivalent of the pop music fade-out. (2) THE ADSR RELEASE ENVELOPE -- the trill's gradual decay maps to the Release parameter in synthesizer envelope design. (3) THE PARULIDAE QUINTET COMPLETE -- five warblers, five genera, five strategies, five endings (resolve, interrupt, climax, repeat, fade). (4) THE HIDDEN CROWN -- identification by absence, the name that references what you cannot see.",
+    "acoustic_element_21": "THE RELEASE -- the controlled decay that transitions a sound from presence to absence without a hard boundary. The ADSR Release parameter made biological. The 21st element in the progression: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, RELEASE.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)",
+      "degree_14": "Ternary / AAB (repeated identical syllables followed by contrasting resolution syllable -- the minimal narrative arc, repetition with destination)",
+      "degree_15": "Accelerando (tempo-varying chattering series -- the first species defined by rate of change rather than pitch, timbre, or pattern)",
+      "degree_16": "Crescendo (dynamic-varying sweet series -- volume and pitch increase within a single vocalization)",
+      "degree_17": "Hook (rhythmic two-note cell repeated at constant tempo and volume -- memorability as primary acoustic strategy)",
+      "degree_18": "Ascending spiral (sequential phrases each pitched higher than the last -- horizontal melodic thinking upward, aspiration in sound)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each pitched lower than the last + bilateral syrinx beat frequencies -- horizontal melodic thinking downward, resolution in sound)",
+      "degree_20": "Trill with parametric decay / ADSR release (rapid trill that descends in pitch, amplitude, and rate simultaneously -- the triple descent, the fade-out, the release envelope in biological form)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz -- earworm frequency, sweet spot of human hearing)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz -- ascending range sweeps from mid-range into upper register)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz -- descending range sweeps from upper register down into mid-range)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz -- trill descends from upper-mid into mid-range as it fades)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- 1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (temporal continuity as content)",
+      "degree_14": "Territory + mate attraction through structured song with resolution (narrative as content)",
+      "degree_15": "Territory + mate attraction through accelerating burst (urgency as content)",
+      "degree_16": "Territory + mate attraction through ascending crescendo (brightness as content)",
+      "degree_17": "Territory + mate attraction through the hook (memorability as content)",
+      "degree_18": "Territory + mate attraction through ascending spiral (aspiration as content)",
+      "degree_19": "Territory + mate attraction through descending spiral with chorus shimmer (resolution as content)",
+      "degree_20": "Territory + mate attraction through fading descending trill (evaporation as content -- the song that dissolves, fitness signaled through sustained trill production and controlled parametric decay)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood with developed vertical structure)",
+      "degree_19": "Lowland riparian (deciduous thicket -- willow-alder-cottonwood, lower canopy than degree 18, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside -- salal, oceanspray, snowberry, young conifers. First upland ecosystem since degree 13.)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Shrubby slopes -- open, brushy hillsides with mixed low vegetation: salal, oceanspray, snowberry, young conifers, and deciduous shrubs. Early-successional habitats created by fire, logging, or windthrow. Also found in chaparral, coastal scrub, and brushy forest edges. Less tied to water than the previous six species in the engine.",
+    "niche": "Active foliage gleaner in low-to-mid shrub layer. Searches methodically through dense vegetation, probing leaf clusters, bark crevices, and flower heads for insects and nectar. One of the few warblers that regularly feeds on nectar and sap.",
+    "foraging_strategy": "Methodical foliage gleaner -- works through dense shrubs from base to crown, probing and hovering. Takes insects (caterpillars, beetles, flies, aphids) by gleaning and occasional hover-snatching. Also feeds on nectar from flowers (especially manzanita, currant) and sap from sapsucker wells. The nectar/sap feeding is unusual among Parulidae.",
+    "diet": "Insects (caterpillars, beetles, flies, aphids, spiders) during breeding season. Nectar, sap, berries, and fruit supplement the diet year-round. In winter, one of the most omnivorous warblers -- exploiting nectar, fruit, and insects in a way that allows it to overwinter farther north than most Parulidae.",
+    "nesting": "Nest placed on or near the ground in dense shrub cover -- typically in a sheltered spot on a slope or bank, concealed by overhanging vegetation. Cup nest of bark strips, dead leaves, and grass, lined with fur, hair, and fine plant fibers. Low nest placement is consistent with shrubby slope habitat.",
+    "resident_status": "PARTIAL MIGRANT. Pacific coast lutescens is one of the few Parulidae that regularly overwinters along the Pacific coast from British Columbia to California. Other populations (boreal celata, interior orestera) are fully migratory, wintering in Mexico and Central America. The engine's first species that blurs the migrant/resident boundary -- some individuals migrate, some stay, and the decision correlates with latitude, elevation, and local winter conditions.",
+    "early_spring_arrival": "One of the earliest spring migrants in the PNW -- lutescens arrives in late March to early April, well ahead of most other warbler species. Some individuals never left. The early arrival and late departure (October/November) give the Orange-crowned Warbler one of the longest breeding-season presences of any PNW warbler.",
+    "flock_size": "Solitary or in pairs during breeding season. In winter, joins mixed-species foraging flocks with chickadees, kinglets, nuthatches, and other small passerines. The mixed-flock participation is key to its role in the eavesdropping network."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~82 million (Partners in Flight 2020) -- one of the most abundant warblers on the continent",
+    "trend": "Slight decline -- approximately 0.5% per year since 1966 (Breeding Bird Survey). Less steep than the Veery (1.5%/year) or Swainson's Thrush (0.7%/year). Pacific coast lutescens populations relatively stable.",
+    "threats": "Habitat loss from development and fire suppression (reduces early-successional shrub habitat); window collision mortality during migration; domestic cat predation; climate change effects on phenology. Benefits from certain disturbance types (fire, logging) that create preferred brushy habitat.",
+    "pnw_status": "Common and widespread. One of the most frequently encountered warblers in the PNW, present in suitable habitat from sea level to subalpine. Among the least threatened species in the engine."
+  },
+  "key_sites": [
+    {
+      "name": "Discovery Park slopes",
+      "type": "breeding / year-round",
+      "description": "Brushy slopes and early-successional habitat in Seattle's largest park. Orange-crowned Warblers breed in the shrubby hillsides and some overwinter in the coastal-influenced microclimate.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "San Juan Islands scrub",
+      "type": "breeding (summer)",
+      "description": "Open brushy hillsides and coastal scrub on the San Juan Islands. Classic shrubby slope habitat with oceanspray, snowberry, and young Douglas fir.",
+      "region": "San Juan County, WA"
+    },
+    {
+      "name": "Olympic Peninsula coastal slopes",
+      "type": "breeding / partial year-round",
+      "description": "Brushy slopes and post-logging recovery habitat along the Olympic Peninsula coast. Mild maritime climate allows some individuals to overwinter.",
+      "region": "Clallam/Jefferson Counties, WA"
+    },
+    {
+      "name": "Cascade foothills clearcuts and burns",
+      "type": "breeding (summer)",
+      "description": "Early-successional shrub habitat in logged or burned areas of the Cascade foothills. The Orange-crowned Warbler is one of the first breeding birds to colonize recovering clearcuts.",
+      "region": "Western Cascades, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "MAINTAINED -- Macaulay Library provides recordings showing the descending-trill pattern: a rapid series of musical notes that descends in both pitch and amplitude across the duration of the song",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Orange-crowned Warbler song shows a DESCENDING TRILL: a rapid series of notes (8-16 per second) that traces a downward-sloping line on the spectrogram. The initial notes appear at ~4.5-6.5 kHz and the final notes settle at ~3.0-4.5 kHz. Unlike the Veery's descending staircase (discrete phrase clusters stepping down), the Orange-crowned's descent is a CONTINUOUS SLOPE -- a ramp rather than a staircase. The amplitude also decreases visibly on the spectrogram, with the final notes appearing as progressively fainter traces. The song dissolves rather than concluding."
+  },
+  "sources": [
+    "Gilbert, W.M., Sogge, M.K., and Van Riper III, C. (2020). Orange-crowned Warbler (Leiothlypis celata). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Orange-crowned Warbler. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Orange-crowned Warbler. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Orange-crowned Warbler species account. birdweb.org",
+    "Sibley, D.A. (2014). The Sibley Guide to Birds, 2nd ed. Alfred A. Knopf. [Leiothlypis identification.]",
+    "Lovette, I.J. et al. (2010). Comprehensive multilocus phylogeny for the wood-warblers and a revised classification of the Parulidae. Mol Phylogenet Evol 57(2): 753-770.",
+    "Chesser, R.T. et al. (2011). Fifty-second supplement to AOU Check-list. The Auk 128(3): 600-613.",
+    "Catchpole, C.K. and Slater, P.J.B. (2008). Bird Song: Biological Themes and Variations. 2nd ed. Cambridge University Press.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Templeton, C.N., Greene, E., and Davis, K. (2005). Allometry of alarm calls: Black-capped chickadees encode information about predator size. Science 308: 1934-1937.",
+    "Magrath, R.D. et al. (2015). Eavesdropping on heterospecific alarm calls. Biol Rev 90(2): 560-586.",
+    "Sridhar, H., Beauchamp, G., and Shanker, K. (2009). Why do birds participate in mixed-species foraging flocks? Anim Behav 78(2): 337-347.",
+    "Morse, D.H. (1970). Ecological aspects of some mixed-species foraging flocks. Ecol Monogr 40(1): 119-168.",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey, Results and Analysis 1966-2019. USGS Patuxent.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Orange-crowned Warbler (Leiothlypis celata). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Orange-crowned Warbler. wdfw.wa.gov",
+    "eBird. Orange-crowned Warbler observation data, Pacific Northwest. ebird.org/species/orcwar",
+    "Macaulay Library. Orange-crowned Warbler recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org",
+    "Huron, D. (2006). Sweet Anticipation: Music and the Psychology of Expectation. MIT Press.",
+    "Roads, C. (1996). The Computer Music Tutorial. MIT Press. [ADSR envelope.]",
+    "Russ, M. (2009). Sound Synthesis and Sampling. 3rd ed. Focal Press. [Envelope generators.]"
+  ],
+  "release_metadata": {
+    "release_number": "020",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-29"
+  }
+}
