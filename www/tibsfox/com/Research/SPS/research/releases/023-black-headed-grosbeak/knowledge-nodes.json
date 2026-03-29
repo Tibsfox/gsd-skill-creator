@@ -1,0 +1,342 @@
+{
+  "degree": 23,
+  "species": "Black-headed Grosbeak",
+  "scientific_name": "Pheucticus melanocephalus",
+  "slug": "023-black-headed-grosbeak",
+  "sound_type": "rich robin-like warble with slurs",
+  "energy": 4,
+  "ecosystem": "mixed forest",
+  "season": "summer (breeding -- late April through August, peak song May through July)",
+  "family": "Cardinalidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; mixed deciduous-conifer woodland throughout the Puget Sound lowlands and foothills, riparian corridors, suburban shade trees."
+  },
+  "first_cardinalidae": {
+    "description": "The Black-headed Grosbeak is the FIRST Cardinalidae in the engine -- the 15th family across 24 degrees. Cardinalidae are defined by heavy conical bills, powerful jaw musculature, and seed-crushing palates. The family includes cardinals, grosbeaks, buntings, and allies. The grosbeak's massive bill is the largest and most powerful in the engine to date.",
+    "family_count": 15,
+    "families": "Ardeidae (1), Troglodytidae (1), Turdidae (4), Paridae (2), Strigidae (1), Sittidae (1), Tyrannidae (1), Regulidae (1), Aegithalidae (1), Passerellidae (1), Fringillidae (1), Vireonidae (1), Parulidae (5), Picidae (1+1), Cardinalidae (1)"
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,500-4,500",
+    "peak_energy_band_hz": "2,000-3,500",
+    "song_duration_s": "2-5 (up to 6-8 in extended bouts)",
+    "phrases_per_bout": "10-20",
+    "phrase_rate_per_second": "3-5",
+    "phrase_type": "Slurred whistles -- each phrase a continuous pitch glide (upslur, downslur, or arcing slur). Phrases vary within a bout; rarely repeats the same phrase within a song.",
+    "timbre": "Rich, warm, full-bodied. Substantial low-frequency content. Smooth harmonic structure. Warm and rounded -- the large bill and vocal tract emphasize mid-frequency resonance.",
+    "amplitude_modulation": "Moderate -- gently undulating volume contour, relatively consistent throughout",
+    "robin_resemblance": "The song is universally described as 'robin-like' -- same frequency range (2-3.5 kHz center), same phrase structure (rapidly alternating slurred whistles), same rhythmic cadence (3-5 phrases/sec). This is CONVERGENT EVOLUTION, not mimicry. Two unrelated families (Cardinalidae, diverged ~40 Mya from Turdidae) arriving at similar acoustic solutions through independent paths. Large bills in both species produce similar vocal-tract resonances.",
+    "key_property": "THE GROOVE RESET -- the return to tonal melody after two degrees of percussion. Rich, rolling, warm warble that resets the engine to melodic flow. 24th acoustic element."
+  },
+  "both_sexes_sing": {
+    "description": "One of the most remarkable features of the Black-headed Grosbeak: BOTH males AND females sing. Female song is structurally similar to male song -- a warble of slurred phrases -- but typically shorter (1-3 sec vs. 2-5 sec), softer, and less elaborate.",
+    "female_song_contexts": [
+      "On the nest (singing while incubating -- documented by Ritchison 1983)",
+      "Countersinging with the male (duetting for pair bond reinforcement)",
+      "Post-fledging (contact calls near fledglings)"
+    ],
+    "male_incubation": "Both sexes incubate eggs -- males during midday, females during morning, late afternoon, and overnight. Males sing while incubating. The only species in the engine where BOTH parents incubate AND both sing.",
+    "hypotheses": [
+      "Ancestral retention -- female song may be the ancestral oscine condition",
+      "Mate coordination -- shared incubation favors vocal communication between partners",
+      "Nest defense -- singing female signals active defense",
+      "Sexual selection symmetry -- mutual mate assessment where both sexes invest heavily in parental care"
+    ]
+  },
+  "bill_mechanics": {
+    "bill_depth_mm": "15-17 (males)",
+    "bill_width_mm": "14-16",
+    "bite_force_N": "35-50 (estimated, among highest for comparable-mass North American passerines)",
+    "seed_cracking_time_s": "2-3 per sunflower seed",
+    "bill_functions": [
+      "Seed-cracking (sunflower, safflower, native seeds)",
+      "Fruit processing (berry crushing)",
+      "Insect capture (large beetles, caterpillars)",
+      "Cowbird egg ejection (~30-40% rejection rate)",
+      "Vocal resonance (large bill produces warm, low-frequency song character)"
+    ],
+    "acoustic_consequence": "The large bill acts as a horn, filtering and shaping syrinx output. Deeper bills produce lower-frequency, more resonant sounds (Podos 2001). The grosbeak's 'robin-like' quality partly arises because its large bill produces similar resonance to the robin's equally substantial bill. The seed-cracker IS the sound shaper."
+  },
+  "convergence_pair": {
+    "description": "The Black-headed Grosbeak (degree 23, Cardinalidae) and the American Robin (degree 25, Turdidae) form a CONVERGENCE PAIR -- different families producing remarkably similar songs through independent evolutionary paths. Not mimicry. Not learning. Convergent acoustic evolution driven by similar bill morphology, similar habitat, and similar acoustic niche.",
+    "shared_features": [
+      "Frequency range: 2.0-3.5 kHz center",
+      "Phrase structure: rapidly alternating slurred whistles",
+      "Rhythmic cadence: 3-5 phrases per second",
+      "Timbre: rich, warm, full-bodied",
+      "Bill size: both have large, deep bills producing similar vocal-tract resonance"
+    ],
+    "distinguishing_features": [
+      "Grosbeak: higher phrase variety, more continuous flow, occasionally slightly buzzy",
+      "Robin: more cyclic phrase repetition, grouped into clear phrase sets, brighter tone"
+    ],
+    "principle": "Acoustic convergence across families -- a new concept for the engine. The grosbeak precedes the robin by two degrees but sounds like it. The preview before the archetype."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The groove reset (return to tonal melody after percussion -- the 24th acoustic element, the engine exhaling after holding its breath through two degrees of percussive force)",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/groove-reset/",
+      "examples": [
+        "Black-headed Grosbeak warble after Northern Flicker drum: the melody returns after the breakdown",
+        "In music production: the moment after a drum solo or breakdown when the full band re-enters with the groove",
+        "A DJ set: the melodic track following a percussion-heavy buildup -- the crowd exhales and flows",
+        "A symphony: the return of the principal theme after a development section dominated by timpani and percussion"
+      ],
+      "music_theory_parallel": "The groove reset is the structural moment when a musical system that has been building through escalation, tension, and rhythmic intensity returns to melodic flow. In the engine, degrees 21-22 were escalation (the hammer) and percussion (the drum). Degree 23 returns to tonal melody -- but enriched by what came before. The warble at degree 23 carries more weight than it would have at degree 20, because it arrives after percussion. In music, the groove reset is not a return to the beginning -- it is a return to melody that incorporates the energy of the breakdown. The groove is richer for having been away."
+    },
+    {
+      "concept": "Acoustic convergence across families (two unrelated species producing remarkably similar songs through independent evolutionary paths -- convergent acoustic evolution, not mimicry, not learning)",
+      "level": "advanced",
+      "department": "music-theory/evolution",
+      "college_path": ".college/music/theory/evolution/acoustic-convergence/",
+      "examples": [
+        "Black-headed Grosbeak (Cardinalidae) and American Robin (Turdidae): similar rich warbles, similar frequency range, similar phrase structure, ~40 million years of independent evolution",
+        "Nashville Warbler and Virginia's Warbler: convergent songs in allopatric sister species",
+        "In music: soul music and gospel arriving at similar vocal conventions through parallel cultural paths",
+        "Blues and fado: different continents, different traditions, converging on similar vocal-emotional expressions"
+      ],
+      "music_theory_parallel": "Acoustic convergence is the biological equivalent of parallel musical invention -- two traditions arriving at similar sounds without direct contact. The grosbeak and the robin never learned from each other. Their songs converged because both species evolved large bills (producing similar vocal-tract resonance), occupy similar forest habitats (selecting for mid-frequency propagation), and fill similar ecological niches (territorial songbird in mixed woodland). The selective pressures are the same; the solutions converge. In music, soul and gospel converged on similar vocal ornamentation because both traditions valued emotional vocal expression and both drew on the same African American church-and-community performance context. Different lineages, same pressures, similar sounds."
+    },
+    {
+      "concept": "Both-sex singing (female song as functional, elaborate, and ancestral -- not a degraded version of male song but a retained behavioral capacity with distinct communicative functions)",
+      "level": "intermediate",
+      "department": "music-theory/performance",
+      "college_path": ".college/music/theory/performance/both-sex-singing/",
+      "examples": [
+        "Black-headed Grosbeak: both males and females sing warbles, both incubate eggs, both defend territory vocally",
+        "Tropical duetting species (e.g., Buff-breasted Wren): male and female alternate phrases in coordinated duets",
+        "In music: ensemble singing where all members contribute melody, not just the lead vocalist -- choir vs. soloist model",
+        "Jazz vocal groups (Lambert, Hendricks & Ross): all members are lead-quality vocalists taking turns"
+      ],
+      "music_theory_parallel": "Both-sex singing challenges the soloist model -- the assumption that one performer (the male, the lead vocalist) carries the melody while others support. In the grosbeak, both sexes are capable melodists. The female sings on the nest, during pair exchanges, near fledglings. The male sings while incubating. Both are simultaneously caregivers and performers. In music, this maps to the ensemble model: every member can carry the tune, and the distinction between 'lead' and 'backup' dissolves. The grosbeak pair is a duet of equals."
+    },
+    {
+      "concept": "Bill morphology as acoustic resonator (the seed-cracking bill doubling as a vocal tract shaping element -- the tool IS the instrument, the anatomy serves two functions)",
+      "level": "foundational",
+      "department": "music-theory/acoustics",
+      "college_path": ".college/music/theory/acoustics/bill-resonance/",
+      "examples": [
+        "Black-headed Grosbeak: 15-17 mm deep bill produces warm, low-frequency vocal resonance -- 'robin-like' quality from robin-sized bill",
+        "Darwin's finches: bill depth correlates with song frequency (Podos 2001) -- larger bills, lower songs",
+        "In music: the shape of a brass instrument's bell determines its timbral character -- the 'bill' of the horn",
+        "Vocal resonance in human singing: the size and shape of the oral cavity (the 'bill') shapes vowel formants and timbral warmth"
+      ],
+      "music_theory_parallel": "The grosbeak's bill is simultaneously a feeding tool and an acoustic resonator. A deep, wide bill produces a larger vocal-tract cavity, which emphasizes lower frequencies and produces a warmer, richer tone -- the same physics as a large-bore trombone producing a warmer sound than a small-bore trumpet. The bill evolved for seed-cracking (ecological function), but its acoustic side effects (lower-frequency resonance, warmer timbre) are subject to sexual selection -- females prefer richer songs, which selects for larger bills, which improves seed-cracking. Ecology and acoustics co-evolve through the bill. The tool IS the instrument."
+    },
+    {
+      "concept": "Mixed forest as generalist acoustic niche (the broadest ecosystem category in the engine -- a habitat defined by structural diversity rather than a single dominant species or structure)",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/mixed-forest/",
+      "examples": [
+        "PNW mixed forest: red alder, bigleaf maple, black cottonwood alongside Douglas fir, western red cedar, western hemlock",
+        "Suburban Seattle: mature shade trees creating mixed canopy -- the most commonly encountered forest type in settled areas",
+        "The Black-headed Grosbeak's habitat requirement: any mixture of deciduous and conifer trees with mid-canopy structure",
+        "In music: the mixed forest is the open mic night -- any genre, any style, the venue accommodates all"
+      ],
+      "music_theory_parallel": "Mixed forest is the acoustic venue that accommodates the widest range of performers. Unlike old-growth (degree 1, optimized for low-frequency propagation) or marsh edge (degree 17, optimized for open-air broadcast), mixed forest provides a heterogeneous acoustic environment where mid-frequency sounds propagate through variable canopy gaps. The grosbeak's 2-3.5 kHz warble is optimized for this medium -- loud enough to carry through gaps, warm enough to resonate off trunks, rich enough to remain identifiable after multiple reflections. The habitat is a generalist venue, and the grosbeak is a generalist performer with a voice that works everywhere."
+    },
+    {
+      "concept": "Energy plateau as sustained baseline (three consecutive degrees at E=4 establishing a new energy floor -- not a spike, not escalation, but a sustained level of acoustic power)",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-plateau/",
+      "examples": [
+        "Degrees 21-23: hammer (vocal E=4) -> drum (mechanical E=4) -> warble (melodic E=4) -- three forms of acoustic power",
+        "Compare degrees 0-7: eight consecutive degrees at E=2 -- the opening baseline",
+        "In music: a song that holds fortissimo for three verses -- the loudness is the new normal, not an accent",
+        "A DJ set at peak energy: the plateau before the eventual descent"
+      ],
+      "music_theory_parallel": "An energy plateau is the dynamic state where a system has reached a sustained intensity level and the listener's expectation recalibrates. The first few bars of fortissimo are experienced as LOUD. After several phrases, the loudness becomes the baseline and the ear adjusts. Degrees 21-23 at E=4 have reached that recalibration point -- the engine is now in a sustained high-energy state. But each degree expresses E=4 differently: metronomic vocal percussion (21), broadband mechanical percussion (22), and now rich melodic warble (23). The loudness is constant; the character rotates. This is the groove at peak energy -- varied expression at a sustained level."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-022",
+      "title": "Northern Flicker -- Drumming (Degree 22)",
+      "connection": "THE GROOVE RESET. Degree 22 was resonant percussion -- broadband, non-vocal, substrate-dependent, the first drum. Degree 23 returns to tonal melody -- pitched, vocal, body-produced, warm and rolling. The engine exhales. Percussion yields to warble. The groove resets."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "THE CONVERGENCE PAIR. The grosbeak (degree 23, Cardinalidae) sounds like the robin (degree 25, Turdidae). Same frequency range, phrase structure, rhythmic cadence. Different families, ~40 million years of independent evolution. Convergent acoustic evolution -- the preview before the archetype."
+    },
+    {
+      "project": "SPS-007",
+      "title": "Hermit Thrush (Degree 7)",
+      "connection": "THREE RICH WARBLES. Hermit Thrush (7, harmonic spiral), Black-headed Grosbeak (23, robin-like warble), and American Robin (25, cheerily-cheer-up). Three of North America's most celebrated bird songs. Three families. All centered in the 2-4 kHz warm-voice band. The engine's rich-warble cluster."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "NEAR-FUSION TEMPO. The junco's trill (~10-20 notes/sec) was at the perceptual fusion threshold. The grosbeak's phrase rate (~3-5 phrases/sec) is below fusion for phrases but approaches cognitive blurring for untrained listeners. Both species occupy the temporal territory where discrete events begin to merge."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Voice (Degree 21)",
+      "connection": "ENERGY 4 TRILOGY. Three consecutive E=4 degrees: flicker voice (21, the hammer), flicker drum (22, resonant percussion), grosbeak warble (23, the groove reset). Three forms of acoustic power -- metronomic vocal, broadband mechanical, melodic vocal. The E=4 plateau is now the longest since the opening E=2 baseline."
+    },
+    {
+      "project": "SPS-018",
+      "title": "Swainson's Thrush (Degree 18)",
+      "connection": "SPIRAL TO WAVE. The Swainson's Thrush ascends phrase by phrase (ascending spiral). The grosbeak undulates phrase by phrase -- rising and falling continuously. The spiral became the wave. Both are mid-frequency, warm-toned, forest-dwelling Passeriformes."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Black-headed Grosbeak documented in AVI as a mixed-forest summer breeder, neotropical migrant. Both-sex singing behavior noted. Cowbird resistance documented. One of the latest-arriving and earliest-departing migratory species."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mixed forest ecology: deciduous-conifer interaction zones, second-growth dynamics, suburban canopy structure. The broadest ecosystem type in the engine corresponds to the most commonly encountered PNW forest type."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Allen Stone (Soul/Jazz, E=4, Chewelah to Seattle, ATO Records). Both are energy-4 vocal performances. The groove reset: melody returning after percussion. Small-town origin, big-stage voice. Soul as convergent genre."
+    }
+  ],
+  "degree_arc": {
+    "position": "The groove reset -- return to tonal melody after two degrees of percussion. First Cardinalidae. First acoustic convergence pair (with American Robin at degree 25). Both sexes sing. Third consecutive E=4. 24th acoustic element. 22nd unique species.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic spiral (7) -> ultrasonic threshold (8) -> variation (9) -> minimum signal (10) -> trill/tremolo (11) -> sawtooth sweep (12) -> ostinato (13) -> repetition-resolution (14) -> accelerando (15) -> crescendo (16) -> the hook (17) -> ascending spiral (18) -> descending spiral (19) -> sustain/the release (20) -> the hammer (21) -> resonant percussion (22) -> the groove reset (23)",
+    "key_insight": "Degree 23 introduces THREE new structural dimensions: (1) THE GROOVE RESET -- 24th acoustic element, the return to tonal melody after percussion. (2) ACOUSTIC CONVERGENCE -- the grosbeak sounds like the robin (degree 25) through independent evolution, establishing the engine's first convergence pair across families. (3) BOTH-SEX SINGING -- the first species where females produce elaborate, functional song. Plus: first Cardinalidae (15th family), mixed forest as broadest ecosystem, third consecutive E=4 establishing an energy plateau, and the massive conical bill as dual-purpose tool (seed-cracker AND vocal resonator).",
+    "acoustic_element_24": "THE GROOVE RESET -- a rich, rolling, tonal warble of rapidly alternating slurred phrases in the 2.0-3.5 kHz band, returning to melodic flow after two degrees of percussion. Not a return to simplicity but a return to melody enriched by everything the engine has learned. The 24th element: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, release, the hammer, resonant percussion, THE GROOVE RESET.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide)",
+      "degree_7": "Harmonic series navigation (mathematical melody)",
+      "degree_8": "Ultra-high ascending series (audiometric boundary crossing)",
+      "degree_9": "Variation on combinatorial syntax (the cover version)",
+      "degree_10": "Minimum viable signal (1-bit presence, swarm cohesion)",
+      "degree_11": "Tremolo / trill (rapid repetition at fusion threshold)",
+      "degree_12": "Ascending sawtooth sweep (buzzy waveform ascending)",
+      "degree_13": "Ostinato (two-note repeated phrase below fusion threshold)",
+      "degree_14": "Ternary / AAB (repetition with contrasting resolution)",
+      "degree_15": "Accelerando (tempo-varying chattering series)",
+      "degree_16": "Crescendo (dynamic-varying sweet series)",
+      "degree_17": "Hook (rhythmic two-note cell, memorability through repetition)",
+      "degree_18": "Ascending spiral (sequential phrases each higher)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each lower, bilateral syrinx)",
+      "degree_20": "Trill with parametric decay / ADSR release (triple descent, fade-out)",
+      "degree_21": "The hammer (sustained discrete metronomic repetition at constant pitch, constant volume, energy 4)",
+      "degree_22": "Resonant percussion (broadband substrate-dependent mechanical percussion above fusion threshold -- the first non-vocal sound)",
+      "degree_23": "The groove reset (rich robin-like warble of rapidly alternating slurred phrases -- return to tonal melody after percussion, convergent with American Robin, both sexes sing)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz)",
+      "degree_8": "Ultra-high (6-10 kHz)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz)",
+      "degree_21": "Mid-range to upper-mid (1.5-4.0 kHz -- tonal, pitched, harmonic content)",
+      "degree_22": "BROADBAND (100 Hz to 8+ kHz -- no fundamental pitch, substrate-dependent peak energy 500 Hz to 4 kHz)",
+      "degree_23": "Mid-range (1.5-4.5 kHz -- warm, rich, robin-like. Peak energy 2.0-3.5 kHz. The return to tonal, pitched, harmonically rich sound after broadband percussion)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel)",
+      "degree_9": "Referential threat information (conserved content, varied delivery)",
+      "degree_10": "Pure presence / flock cohesion (1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep",
+      "degree_13": "Territory + pair bond through persistent repetition",
+      "degree_14": "Territory + mate attraction through narrative",
+      "degree_15": "Territory + mate attraction through urgency",
+      "degree_16": "Territory + mate attraction through brightness",
+      "degree_17": "Territory + mate attraction through the hook",
+      "degree_18": "Territory + mate attraction through ascending spiral",
+      "degree_19": "Territory + mate attraction through descending spiral",
+      "degree_20": "Territory + mate attraction through fading trill (evaporation)",
+      "degree_21": "Territory + mate attraction through the hammer (sustained metronomic vocal force at energy 4)",
+      "degree_22": "Territory + mate attraction + HABITAT QUALITY through resonant percussion (the substrate encodes territory quality)",
+      "degree_23": "Territory + mate attraction + PAIR COORDINATION through both-sex warble (the first species where female song is elaborate and functional, where both partners sing and both incubate -- vocal symmetry as reproductive strategy)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood)",
+      "degree_19": "Lowland riparian (deciduous thicket, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside)",
+      "degree_21": "Open woodland (scattered trees with broken canopy, grassy openings, mosaic)",
+      "degree_22": "Forest snag (dead standing wood -- the instrument IS the habitat)",
+      "degree_23": "Mixed forest (any mixture of deciduous and conifer trees -- the broadest ecosystem category, the generalist venue)"
+    }
+  },
+  "conservation": {
+    "population_estimate": "Approximately 14 million breeding individuals (Partners in Flight 2020)",
+    "trend": "Stable to slightly declining (BBS data show ~0.5% annual decline 1966-2019 in some regions, stable in others)",
+    "threats": [
+      "Habitat loss (conversion of mixed forest to development)",
+      "Brown-headed Cowbird parasitism (10-30% nest parasitism in some populations)",
+      "Window collisions during migration",
+      "Pesticide impacts on insect prey"
+    ],
+    "conservation_status": "IUCN Least Concern. Not currently at risk at the species level but declining in some western regions where mixed forest is being converted.",
+    "monarch_connection": "One of the few bird predators of overwintering Monarch butterflies in Mexico -- partial resistance to cardenolide toxins. The grosbeak-Monarch interaction links PNW breeding ecology to Mexican overwintering ecology."
+  },
+  "part_a_parallel": {
+    "artist": "Allen Stone",
+    "degree": 23,
+    "genre": "Soul/Jazz",
+    "location": "Chewelah, WA to Seattle",
+    "era": "ATO Records",
+    "release_type": "Label (ATO Records)",
+    "shared_principle": "Both are energy-4 vocal performances where the voice IS the instrument. Allen Stone's soul voice and the grosbeak's warble both achieve E=4 through vocal richness alone, not amplification or percussion. The groove reset: melody returning after percussion-forward degrees. Small-town origin (Chewelah / Mexico wintering grounds) to big-stage performance (Seattle / PNW breeding territory). Soul as convergent genre parallels the grosbeak's convergent song.",
+    "resonance_points": [
+      "The groove reset: melody returning after percussion. Allen Stone follows Foxy Apollo (percussion-forward) just as the grosbeak follows the flicker drum.",
+      "Small-town to big-stage: Chewelah to Seattle parallels Mexico to Puget Sound. Both arrive from elsewhere and become part of the summer soundscape.",
+      "Energy 4 through vocal richness: both sustain E=4 through the power of the voice itself -- warm, full, mid-range, emotionally resonant.",
+      "Soul as convergent genre: soul converges gospel, R&B, jazz, and blues. The grosbeak converges on robin-like sound from independent evolutionary origins. Convergence as creative strategy."
+    ]
+  }
+}

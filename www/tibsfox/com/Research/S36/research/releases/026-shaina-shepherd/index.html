@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 26&deg; &mdash; Shaina Shepherd &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #E53935);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .soul-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FCE4EC;
+      color: #880E4F;
+      border: 1px solid #F48FB1;
+      margin-left: 0.3rem;
+    }
+
+    .grunge-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #263238;
+      color: #ECEFF1;
+      border: 1px solid #546E7A;
+      margin-left: 0.3rem;
+    }
+
+    .transmuter-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF8E1;
+      color: #F57F17;
+      border: 1px solid #FFD54F;
+      margin-left: 0.3rem;
+    }
+
+    .female-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F3E5F5;
+      color: #4A148C;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #E53935;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #B71C1C;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #B71C1C;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .grunge-thread {
+      background: #263238;
+      color: #ECEFF1;
+      border: 2px solid #546E7A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .grunge-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #B0BEC5;
+      font-family: system-ui, sans-serif;
+    }
+    .grunge-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .grunge-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #37474F;
+      color: #ECEFF1;
+    }
+    .grunge-thread td:first-child { font-weight: 600; width: 35%; color: #B0BEC5; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .simone-box {
+      background: #EDE7F6;
+      border: 2px solid #7E57C2;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .simone-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #4527A0;
+      font-family: system-ui, sans-serif;
+    }
+    .simone-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .simone-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .simone-box td, .simone-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #D1C4E9;
+    }
+    .simone-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #4527A0;
+    }
+
+    .transmuter-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .transmuter-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .transmuter-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">26&deg;</div>
+      <div>
+        <h1>Shaina Shepherd</h1>
+        <div class="subtitle">Soul &middot; Gospel / Opera / Rock / Grunge / Classical &mdash; Tacoma &rarr; Seattle 2010s&ndash;present
+          <span class="energy-badge">Energy 4</span>
+          <span class="soul-badge">Soul Stripped Bare</span>
+          <span class="grunge-badge">Grunge Thread Enters</span>
+          <span class="transmuter-badge">The Transmuter</span>
+          <span class="female-badge">5th Woman</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../025-black-stax/index.html">Degree 25&deg; (Black Stax)</a>
+      <a href="../023-allen-stone/index.html">Degree 23&deg; (Allen Stone)</a>
+      <a href="../020-whitney-menge/index.html">Degree 20&deg; (Whitney Monge)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../017-reggie-watts/index.html">Degree 17&deg; (Watts)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The song moves outward. Shaina Shepherd is a Tacoma-born, gospel-raised,
+          classically trained, opera-injured, grunge-baptized soul singer who
+          carries her voice from church choir to Soundgarden reunion to community
+          ceremony. She names <em>Nina Simone</em> and <em>Quincy Jones</em> as
+          influences. Jack Endino &mdash; the godfather of grunge &mdash; produced
+          her band&rsquo;s debut. The surviving members of Soundgarden chose her to
+          sing Chris Cornell&rsquo;s parts. The genre label is one word: <strong>Soul</strong>.
+          <em>The Transmuter.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish &amp; Puyallup Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Shaina Shepherd was born and raised in Tacoma on the ancestral
+          territory of the <strong>Puyallup Tribe of Indians</strong> and now works
+          in Seattle on Duwamish land. The Duwamish Tribe remains federally
+          unrecognized. This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             GRUNGE THREAD
+             ======================================== -->
+
+        <div class="grunge-thread">
+          <h4>Grunge Thread Enters the Engine &mdash; Degree 26</h4>
+          <table>
+            <tr><td>Jack Endino</td><td>Produced BEARAXE <em>Last Call</em> EP (2018). &ldquo;Godfather of grunge.&rdquo; Recorded Nirvana <em>Bleach</em>.</td></tr>
+            <tr><td>Soundgarden / Nudedragons</td><td>Thayil + Cameron + B. Shepherd chose Shaina to sing Cornell&rsquo;s parts (Dec 2024 SMooCH benefit). 6 songs. $2.2M raised.</td></tr>
+            <tr><td>Duff McKagan</td><td>Guns N&rsquo; Roses bassist. &ldquo;A Change Is Gonna Come&rdquo; collaboration. Joined Nudedragons set.</td></tr>
+            <tr><td>Nancy Wilson</td><td>Heart. Collaboration. Proto-grunge pioneer.</td></tr>
+            <tr><td>Mike McCready</td><td>Pearl Jam. Collaboration.</td></tr>
+            <tr><td>Sub Pop Records</td><td>Released &ldquo;Never Be Another You&rdquo; (SP1496). The label that signed Nirvana.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY ARC
+             ======================================== -->
+
+        <h2>The Classical-to-Soul Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Tacoma &mdash; Gospel Foundation</div>
+          <p>Born and raised in Tacoma, WA. Father: military, then federal intelligence.
+          Mother: teacher. Grew up around <strong>gospel music and not much else</strong>.
+          Watched her mother sing in the church choir. Youngest sibling. Studied
+          vocals under an older sister. The church was everything.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">NYU &mdash; Classical Training</div>
+          <p>Passion for vocal technique led to <strong>opera</strong>, then musical
+          theater, then back to opera. Studied at <strong>NYU Steinhardt</strong>
+          (first East Coast conservatory in the engine). Influenced by
+          <strong>Leontyne Price</strong> (opera) and <strong>Kurt Carr</strong>
+          (gospel).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Age 22 &mdash; The Injury</div>
+          <p><strong>Vocal cord injury</strong> destroyed her opera career. Turned to
+          contemporary music. Discovered rock through a library card and Joan Jett&rsquo;s
+          &ldquo;Cherry Bomb&rdquo; &mdash; what her gospel upbringing called
+          <strong>&ldquo;the Devil&rsquo;s music.&rdquo;</strong></p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">New York &mdash; Symphony Administrator</div>
+          <p>After NYU, worked as an administrator in the symphony world.
+          Worked closely with classical musicians. This insider view of music
+          industry structure later informed the founding of <strong>The ARM</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2016 &mdash; BEARAXE</div>
+          <p>Returned to the Pacific Northwest. Started playing <strong>piano in
+          November 2017</strong>. Became front-woman of <strong>BEARAXE</strong>,
+          a soul-grunge band. Debut EP <em>Last Call</em> (2018) produced by
+          <strong>Jack Endino</strong> at Soundhouse Studios. &ldquo;Like Sharon
+          Jones fronting M&ouml;tley Cr&uuml;e.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2020&ndash;Present &mdash; Solo Career</div>
+          <p>Debut solo single <em>The Virus</em> (2020, Freakout Records).
+          Sub Pop release <em>Never Be Another You</em> (2021, SP1496).
+          Nordstrom holiday campaign. Proceeds to <strong>Africatown Community
+          Land Trust</strong> (Central District). Nina Simone tribute show at
+          the Royal Room (2019). <em>JAMUARY</em> album (2025). Soundgarden
+          reunion at SMooCH benefit (December 2024).</p>
+        </div>
+
+        <!-- ========================================
+             NINA SIMONE PARALLEL
+             ======================================== -->
+
+        <div class="simone-box">
+          <h4>The Nina Simone Structural Parallel</h4>
+          <p>Shepherd names Nina Simone as her primary influence &mdash;
+          &ldquo;above all others.&rdquo; Their arcs are structurally identical:</p>
+          <table>
+            <tr><th>Phase</th><th>Simone</th><th>Shepherd</th></tr>
+            <tr><td>Foundation</td><td>Church pianist, Tryon NC</td><td>Church choir, Tacoma WA</td></tr>
+            <tr><td>Classical</td><td>Juilliard</td><td>NYU Steinhardt</td></tr>
+            <tr><td>Interruption</td><td>Rejected from Curtis (racism)</td><td>Vocal cord injury at 22</td></tr>
+            <tr><td>Redirection</td><td>Jazz/soul/protest</td><td>Rock/soul/community organizing</td></tr>
+            <tr><td>Activism</td><td>Civil rights movement</td><td>The ARM, Africatown, Sunday Sessions</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             TRANSMUTER PATTERN
+             ======================================== -->
+
+        <div class="transmuter-box">
+          <h4>The Transmuter &mdash; 27th Artist-City Pattern</h4>
+          <p>Shepherd&rsquo;s relationship to Seattle is <strong>alchemical</strong>:
+          she fuses the city&rsquo;s multiple genre traditions through a single voice.
+          Her collaborators span grunge (Endino, Soundgarden, McKagan), rock
+          (Heart, Pearl Jam), indie (Acid Tongue), electronic (Chong the Nomad),
+          classical (Andrew Joslyn), and soul. No prior engine artist has working
+          relationships across this many genre worlds. The city is the crucible;
+          Shepherd is the transmuting agent.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             DISCOGRAPHY
+             ======================================== -->
+
+        <h2>Discography</h2>
+
+        <div class="timeline-entry">
+          <div class="era">2018</div>
+          <p><strong><em>Last Call</em></strong> EP (BEARAXE) &mdash; Produced by
+          <strong>Jack Endino</strong> at Soundhouse Studios. Soul-grunge.
+          &ldquo;Unapologetically chaotic story of Black Feminism.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2020</div>
+          <p><strong><em>Harambee // The Virus</em></strong> &mdash; Debut solo
+          single on 7&rdquo; vinyl (Freakout Records, 300 copies). KEXP premiere.
+          Pandemic disconnection + Capitol Hill Occupied Protest.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2021</div>
+          <p><strong><em>Never Be Another You</em></strong> &mdash; Lee Fields cover.
+          <strong>Sub Pop Records</strong> (SP1496). Nordstrom holiday campaign.
+          Proceeds to Africatown Community Land Trust.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2021</div>
+          <p><strong><em>A Change Is Gonna Come</em></strong> &mdash; Sam Cooke cover
+          with Duff McKagan + Chad Smith. Benefit for SMASH.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2025</div>
+          <p><strong><em>JAMUARY</em></strong> &mdash; Album (Feb 14, 2025).
+          10 of 31 daily demos from January. Producer development project.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ENERGY STREAK
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Sixth Consecutive E=4 &mdash; Distribution 2:13:6:6</h4>
+          <p>Longest sustained energy streak in the engine extends to six degrees.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th></tr>
+            <tr><td>21</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td></tr>
+            <tr><td>22</td><td>Foxy Apollo</td><td>Collective-kinetic</td></tr>
+            <tr><td>23</td><td>Allen Stone</td><td>Vocal-kinetic</td></tr>
+            <tr><td>24</td><td>Ron Artis II</td><td>Dynastic-kinetic</td></tr>
+            <tr><td>25</td><td>Black Stax</td><td>Congregational-kinetic</td></tr>
+            <tr><td><strong>26</strong></td><td><strong>Shaina Shepherd</strong></td><td><strong>Metamorphic-kinetic</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Grunge-Soul Fusion Pipeline</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>First engine connection to Seattle&rsquo;s grunge movement.
+            Jack Endino (BEARAXE producer) + Soundgarden reunion (Nudedragons)
+            + Sub Pop (SP1496) + collaborations with Heart, Pearl Jam, GN&rsquo;R.
+            Grunge DNA enters through collaboration network, not genre label.</p>
+            <div class="examples">Endino: Nirvana <em>Bleach</em> &rarr; BEARAXE <em>Last Call</em>. Soundgarden &rarr; Nudedragons with Shepherd.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Reciprocal Recording (1986), Sub Pop (1988), Soundgarden (1984), grunge movement, Seattle rock ecology</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Nina Simone Structural Parallel</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Identical arc: church foundation &rarr; classical training &rarr;
+            interruption (injury/rejection) &rarr; redirection into soul/activism.
+            Shepherd organized a Nina Simone tribute (Royal Room 2019).
+            Continuation, not homage.</p>
+            <div class="examples">Simone (Curtis rejection) &rarr; jazz/protest. Shepherd (vocal cord injury at 22) &rarr; rock/soul/community.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Nina Simone, Leontyne Price, Billie Holiday, classical-to-popular redirection tradition</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Metamorphic Voice Architecture</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Voice as palimpsest: gospel (foundation) + opera (technique) +
+            rock (release) + soul (integration). Each layer visible through those
+            above it. Voice transforms between styles within a single performance.
+            &ldquo;Sharon Jones fronting M&ouml;tley Cr&uuml;e.&rdquo;</p>
+            <div class="examples">BEARAXE soul-grunge &rarr; Sub Pop soul single &rarr; Soundgarden reunion rock &rarr; community ceremony</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Gospel choir (Tacoma), NYU opera, vocal cord injury redirection, BEARAXE soul-grunge</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Metamorphic</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-sixth deployment. A bend that <strong>changes character
+            mid-bend</strong>: begins as gospel melisma, passes through operatic
+            vibrato, lands as rock scream. The first blue note that transforms
+            during execution.</p>
+            <div class="examples">Gospel melisma start &rarr; operatic vibrato passage &rarr; rock scream landing</div>
+            <div class="genealogy"><strong>Ancestors:</strong> All 25 prior blue notes; gospel vocal tradition; operatic technique; grunge vocal release</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ACOUSTIC ELEMENT
+             ======================================== -->
+
+        <h2>Acoustic Element #27: The Caroling</h2>
+
+        <p>The liturgical sequence deploys outward: <strong>groove reset</strong> (22) &rarr;
+        <strong>testimony</strong> (23) &rarr; <strong>invocation</strong> (24) &rarr;
+        <strong>congregation</strong> (25) &rarr; <strong>caroling</strong> (26).
+        The congregation gathered; the caroling carries the song into the world.
+        Shepherd moves from gospel choir to opera stage to rock club to symphony hall
+        to Soundgarden reunion to community ceremony. Each space receives her voice.
+        Each space is changed. She moves on. The caroling is the acoustic element
+        that <strong>carries the song beyond its origin</strong>.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             COMMUNITY WORK
+             ======================================== -->
+
+        <h2>Community Work</h2>
+
+        <div class="timeline-entry">
+          <div class="era">The ARM (Artist Reclamation Movement)</div>
+          <p>Co-founded to reclaim the artist industry to serve creators first,
+          shift culture to respect creative professionals, and build an artistic
+          middle class. First artist-founded <strong>advocacy organization</strong>
+          for industry reform in the engine.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Sunday Sessions</div>
+          <p>Weekly ceremony at Tim&rsquo;s Tavern. Modern vaudevillian series.
+          Family-friendly, donation-based. Created from a personal journey
+          navigating mental health: &ldquo;I needed to do this to force myself
+          to be a listener.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Jam Jar</div>
+          <p>Weekly event at Cafe Racer, Capitol Hill. All-Star backing band
+          hosts notable local artists. Shepherd as <strong>curator and host</strong>,
+          not performer. Creating conditions for others to explore.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <div class="carry-forward-box">
+          <h4>Key Connections</h4>
+          <ul>
+            <li><strong>S36-025 Black Stax:</strong> Congregation &rarr; caroling. Both E=4 community organizers. Collective platform vs solo transmuter.</li>
+            <li><strong>S36-023 Allen Stone:</strong> Gospel pipeline comparison. Both church-to-soul. Stone rural (Chewelah) vs Shepherd urban (Tacoma).</li>
+            <li><strong>S36-000 Quincy Jones:</strong> Named as influence. The engine&rsquo;s origin in degree 26&rsquo;s stated influences. The circle curves.</li>
+            <li><strong>S36-017 Reggie Watts:</strong> Genre-crossing. Watts = comedy+music; Shepherd = gospel+opera+rock+grunge+soul. Both resist single labels.</li>
+            <li><strong>S36-020 Whitney Monge:</strong> Female solo artist. Both E=4 solo women in the soul zone.</li>
+            <li><strong>S36-003 Ernestine Anderson:</strong> Seattle&rsquo;s female vocal lineage. Anderson (jazz) &rarr; Shepherd (soul), across 23 degrees.</li>
+          </ul>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 27</h4>
+          <ul>
+            <li><strong>Sixth E=4</strong> (2:13:6:6). Six subtypes. Track if streak continues or breaks.</li>
+            <li><strong>Soul standalone.</strong> Simplest genre label (one word). Stage 9. Track genre at 27.</li>
+            <li><strong>Grunge thread:</strong> Entered at 26 via Endino + Soundgarden + Sub Pop. Track if grunge connections continue.</li>
+            <li><strong>Caroling:</strong> 27th acoustic element. Liturgical sequence deploys outward. Track.</li>
+            <li><strong>The Transmuter:</strong> 27th artist-city pattern. City as crucible. Track.</li>
+            <li><strong>Gender gap:</strong> 5:22. Back-to-back women (25-26). Track if continues.</li>
+            <li><strong>Eight organizational models.</strong> Solo-multivalent/community-embedded at 26. Track 9th.</li>
+            <li><strong>Tacoma origin:</strong> First non-Seattle-proper artist. Track geographic expansion.</li>
+            <li><strong>Quincy Jones influence citation:</strong> Engine origin in degree 26 influences. Track circle.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Release Data</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">26 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Version</span>
+            <span class="stat-value">v1.49.162</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">4 (Metamorphic)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2010s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Tacoma, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Base</span>
+            <span class="stat-value">Seattle (general)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-released / Sub Pop</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Endino</span>
+            <span class="stat-value">Producer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Soundgarden</span>
+            <span class="stat-value">Vocalist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Duff McKagan</span>
+            <span class="stat-value">Collaborator</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Nancy Wilson</span>
+            <span class="stat-value">Collaborator</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sub Pop</span>
+            <span class="stat-value">SP1496</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=4 Streak</span>
+            <span class="stat-value">6th (21-26)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic #</span>
+            <span class="stat-value">27: The Caroling</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern #</span>
+            <span class="stat-value">27: The Transmuter</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note #</span>
+            <span class="stat-value">26: Metamorphic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Org Model</span>
+            <span class="stat-value">8: Solo-Multivalent</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women Count</span>
+            <span class="stat-value">5th (5:22)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Sources</h4>
+          <div style="font-size:0.82rem;line-height:1.5">
+            KEXP (premieres + Throwaway Style feature) &middot;
+            Sub Pop Records (SP1496) &middot;
+            KNKX &middot;
+            South Seattle Emerald &middot;
+            Sonic Guild &middot;
+            Rolling Stone &middot;
+            Seattle Times &middot;
+            Revolver &middot;
+            American Songwriter &middot;
+            Audiofemme &middot;
+            CanvasRebel &middot;
+            Converge Media &middot;
+            Arte Noir &middot;
+            Cascade PBS &middot;
+            Bandcamp &middot;
+            KING5 &middot;
+            Essence &middot;
+            Nordstrom Press &middot;
+            Freakout Records
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 26&deg; of 360 &mdash; Seattle 360 Deep Research Series (S36)
+    &mdash; <a href="../../index.html">Return to Index</a></p>
+  </footer>
+</body>
+</html>

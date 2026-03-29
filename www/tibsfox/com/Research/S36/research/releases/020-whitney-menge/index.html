@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 20&deg; &mdash; Whitney Menge &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #E53935);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFCDD2;
+      color: #B71C1C;
+      border: 1px solid #E57373;
+    }
+
+    .gender-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F3E5F5;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #C8E6C9;
+      color: #2E7D32;
+      border: 1px solid #81C784;
+      margin-left: 0.3rem;
+    }
+
+    .duwamish-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF8E1;
+      color: #F57F17;
+      border: 1px solid #FFD54F;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .gender-box {
+      background: #F3E5F5;
+      border: 2px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .gender-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .gender-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .gender-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .gender-box td, .gender-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #E1BEE7;
+    }
+    .gender-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #6A1B9A;
+    }
+
+    .neighborhood-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .neighborhood-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .neighborhood-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .neighborhood-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .neighborhood-box td, .neighborhood-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .neighborhood-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+
+    .energy-box {
+      background: #FCE4EC;
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #AD1457;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #F8BBD0;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #AD1457;
+    }
+
+    .sustain-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .sustain-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .sustain-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">20&deg;</div>
+      <div>
+        <h1>Whitney Menge</h1>
+        <div class="subtitle">Jazz/R&amp;B &middot; Americana Soul / Blues / Indie Folk &mdash; Seattle 2015&ndash;present &mdash; Self-released
+          <span class="energy-badge">Energy 3</span>
+          <span class="gender-badge">Gender Gap Broken</span>
+          <span class="neighborhood-badge">New: Rainier Valley</span>
+          <span class="duwamish-badge">Duwamish Land</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../019-fly-moon-royale/index.html">Degree 19&deg; (FMR)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../006-patti-brown/index.html">Degree 6&deg; (Bown)</a>
+      <a href="../001-bill-frisell/index.html">Degree 1&deg; (Frisell)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The fourteen-degree gender gap ends here. Whitney Monge is the third
+          woman in twenty-one degrees &mdash; a Black woman from Spokane who
+          built her career busking at Pike Place Market, collaborated with the
+          Seattle Symphony at Benaroya Hall, and introduced Rainier Valley as a
+          new geographic thread in the engine. <em>The Street Laureate.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment &mdash; Twenty-One Releases Overdue</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. The Duwamish people have lived on and stewarded these lands
+          for at least 10,000 years. Rainier Valley sits along the historical
+          drainage of the Duwamish River watershed. The city takes its name from
+          Chief Si&rsquo;ahl (Seattle), who signed the Treaty of Point Elliott
+          in 1855. The Duwamish Tribe remains federally unrecognized despite
+          continuous habitation and cultural practice.</p>
+          <p style="margin-top:0.5rem"><strong>This acknowledgment applies
+          retroactively to all twenty-one releases (degrees 0&ndash;20).</strong>
+          Every subsequent release inherits it.</p>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Busker&rsquo;s Arc</h2>
+
+        <p>Whitney Monge (born January 16, 1987, Spokane, Washington) is an
+        American singer, songwriter, and guitarist whose career traces one of
+        the most structurally significant arcs in the Seattle 360 engine. She
+        arrived in Seattle at age 20 in 2007, enrolled at The Art Institute
+        of Seattle for audio engineering, quit after two quarters, and found
+        her calling on the street. She spent <strong>over eight years</strong>
+        busking at <strong>Pike Place Market</strong>, building an audience
+        one passerby at a time.</p>
+
+        <p>Her style &mdash; which she calls <strong>&ldquo;Americana
+        Soul&rdquo;</strong> &mdash; fuses blues, indie folk, rock, and soul
+        into a raw, guitar-driven sound built for open air. Comparisons to
+        Tracy Chapman, Richie Havens, and Brittany Howard. The Seattle Weekly
+        named her the <strong>best street performer in the Northwest</strong>
+        (2014). From Pike Place Market to a sold-out Triple Door to Benaroya
+        Hall with the Seattle Symphony &mdash; three blocks and thirteen years.</p>
+
+        <p>Appeared in the award-winning <strong><em>Find Your Way: A
+        Busker&rsquo;s Documentary</em></strong> (2014), alongside Chris
+        Ballew (Presidents of the United States of America) and Joshua Bell.
+        Nominated for ten film awards, screened at the CBGB Festival in New York.</p>
+
+        <p>Monge left Seattle in 2021, relocated to Asheville (NC), then Nashville
+        (TN) after Hurricane Helene in 2024. Won the <strong>2025 Cayamo
+        Soundcheck Contest</strong>. Debut full-length album anticipated 2026.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Whitney
+        Monge official website; Wikipedia; KEXP interviews 2018; The Seattle Times
+        profiles; KNKX Public Radio 2023; King5 TV; Sonic Guild; Bandcamp;
+        Pike Place Market blog; IMDb</p>
+
+        <!-- ========================================
+             GENDER GAP
+             ======================================== -->
+
+        <div class="gender-box">
+          <h4>Gender Gap Broken: Third Woman in Twenty-One Degrees</h4>
+          <table>
+            <tr>
+              <th>Degree</th>
+              <th>Artist</th>
+              <th>Instrument</th>
+              <th>Neighborhood</th>
+              <th>Outcome</th>
+            </tr>
+            <tr>
+              <td>3&deg;</td>
+              <td>Ernestine Anderson</td>
+              <td>Vocals (jazz)</td>
+              <td>Central District</td>
+              <td>Left and returned</td>
+            </tr>
+            <tr>
+              <td>6&deg;</td>
+              <td>Patti Bown</td>
+              <td>Piano (jazz)</td>
+              <td>Central District</td>
+              <td>Left, never returned</td>
+            </tr>
+            <tr>
+              <td><strong>20&deg;</strong></td>
+              <td><strong>Whitney Monge</strong></td>
+              <td><strong>Vocals + guitar (Americana Soul)</strong></td>
+              <td><strong>Rainier Valley</strong></td>
+              <td><strong>Built career, then left</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Fourteen consecutive
+          male or male-led artists (degrees 7&ndash;19). The longest gender gap
+          in the engine ends at degree 20. Distribution shifts from 2:18 to
+          <strong>3:18</strong> (women:men). Monge is a <strong>Black
+          woman</strong> in the Americana tradition &mdash; performed with
+          <strong>Black Opry</strong> at the <strong>2023 Newport Folk
+          Festival</strong>. All three women in the engine are Black.
+          All three eventually left Seattle.</p>
+        </div>
+
+        <!-- ========================================
+             NEW NEIGHBORHOOD
+             ======================================== -->
+
+        <div class="neighborhood-box">
+          <h4>New Neighborhood: Rainier Valley Enters the Engine</h4>
+          <table>
+            <tr>
+              <th>Neighborhood</th>
+              <th>Degrees</th>
+              <th>Character</th>
+            </tr>
+            <tr>
+              <td>Central District</td>
+              <td>0&ndash;6, 11, 19</td>
+              <td>Founding geography, Jackson Street corridor, postwar jazz through neo-soul</td>
+            </tr>
+            <tr>
+              <td>Capitol Hill</td>
+              <td>2, 18</td>
+              <td>Adjacent to CD, venue network, indie/neo-soul</td>
+            </tr>
+            <tr>
+              <td>University District</td>
+              <td>13, 14, 15</td>
+              <td>UW pipeline, academic jazz, institutional anchor</td>
+            </tr>
+            <tr>
+              <td><strong>Rainier Valley</strong></td>
+              <td><strong>20</strong></td>
+              <td><strong>Southeast Seattle, diverse community, street-to-stage arc, no historical jazz infrastructure</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Rainier Valley is one
+          of the most ethnically diverse neighborhoods in the United States. Unlike
+          the Central District (which had a concentrated Black cultural infrastructure),
+          the Valley&rsquo;s musical identity is polyglot and DIY. Monge&rsquo;s
+          busking origin fits: she emerged from public space, not neighborhood
+          institutions.</p>
+        </div>
+
+        <!-- ========================================
+             SUSTAIN
+             ======================================== -->
+
+        <div class="sustain-box">
+          <h4>Acoustic Element #21: Sustain</h4>
+          <p><strong>Sustain</strong> is the twenty-first acoustic progression
+          element. A busker&rsquo;s instrument must sustain &mdash; the voice holds
+          a note over street noise, the guitar rings out against traffic and
+          footsteps. Sustain is the acoustic property that allows a signal to persist
+          in a hostile environment.</p>
+          <p style="margin-top:0.6rem">After ascending spiral (18&deg;) and
+          descending spiral (19&deg;), sustain (20&deg;) is the <strong>held tone
+          at the bottom of the descent</strong> &mdash; the note that does not
+          resolve further but simply persists. Monge&rsquo;s sustained vocal
+          projection was developed through eight years of outdoor performance
+          where the sound must carry without amplification. The busker&rsquo;s
+          sustain: not electronic, not reverberant, but <strong>raw endurance</strong>.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Sixth Consecutive Energy-3: Unprecedented Streak</h4>
+          <table>
+            <tr>
+              <th>Energy</th>
+              <th>Character</th>
+              <th>Count</th>
+              <th>Artists</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Meditative, introspective</td>
+              <td>2</td>
+              <td>Peacock (8&deg;), Lanphere (12&deg;)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sustaining, atmospheric</td>
+              <td>13</td>
+              <td>All others (0&deg;&ndash;7&deg;, 9&deg;&ndash;11&deg;, 13&deg;&ndash;14&deg;)</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td><strong>Assertive, projective</strong></td>
+              <td><strong>6</strong></td>
+              <td><strong>Marriott (15&deg;), Lorber (16&deg;), Watts (17&deg;), Maktub (18&deg;), FMR (19&deg;), Monge (20&deg;)</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Distribution shifts to
+          <strong>2:13:6</strong>. Six consecutive energy-3 artists &mdash;
+          <strong>unprecedented</strong>. Six subtypes: acoustic-assertive
+          (Marriott), electronic-propulsive (Lorber), performative-explosive (Watts),
+          groove-collective (Maktub), soul-communal (FMR), and
+          <strong>raw-projective</strong> (Monge &mdash; solo voice and guitar
+          sustaining in open air without amplification or band support).</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory: Sustained Vocal Projection &amp; The Solo Acoustic Voice</h2>
+
+        <ul>
+          <li><strong>Sustained vocal projection:</strong> The technique of
+          maintaining vocal tone, presence, and emotional intensity through
+          extended phrases in acoustically challenging environments. Not belting,
+          not melisma, not vibrato &mdash; the ability to <em>hold</em>.
+          Developed through eight years of outdoor performance at Pike Place
+          Market.</li>
+          <li><strong>Guitar as one-person rhythm section:</strong> Percussive,
+          bluesy guitar style creating sustain through rhythmic repetition. Open
+          tunings, overlapping fingerpicking, body percussion. Born of
+          necessity &mdash; a busker cannot bring a rhythm section to the
+          street.</li>
+          <li><strong>Jazz-informed harmony in acoustic folk context:</strong>
+          Compositions reveal extended voicings and modal ambiguity when
+          orchestrated (Seattle Symphony album). Jazz-as-method continues:
+          jazz is not the genre label but the compositional DNA.</li>
+          <li><strong>Vocal branch extends to ten nodes:</strong> Now
+          <strong>tied with keyboard/piano</strong> as the richest instrumental
+          branch. Five deployment contexts across five vocal entries: solo jazz
+          (3&deg;), solo performance-art (17&deg;), fixed band (18&deg;),
+          rotating collective (19&deg;), solo acoustic busking (20&deg;).</li>
+        </ul>
+
+        <hr class="section-divider">
+        <h2>Music Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Sustained Vocal Projection</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Maintaining vocal tone, presence, and intensity in acoustically
+            hostile environments. The busker&rsquo;s sustain: raw endurance
+            without amplification. Eight years of daily open-air performance
+            selecting for projective vocal power with warmth.</p>
+            <div class="examples">Monge &mdash; Pike Place Market, voice
+            sustaining over street noise; Anderson (3&deg;) &mdash; jazz vocal
+            sustain in controlled environments (comparison); Watts (17&deg;)
+            &mdash; technological sustain via loop pedals (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Fifth vocal entry
+            (Anderson 3, Watts 17, Maktub 18, FMR 19, Monge 20). Most exposed
+            deployment context &mdash; no band, no amplification, no controlled
+            acoustics. Sustain as survival skill rather than artistic choice.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Guitar as Rhythm Section</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Percussive, bluesy acoustic guitar creating continuous sound through
+            rhythmic repetition, open tunings, body percussion. The solo
+            busker&rsquo;s solution: one instrument providing melody, harmony,
+            rhythm, and groove simultaneously.</p>
+            <div class="examples">Monge &mdash; percussive acoustic guitar,
+            Pike Place Market; Frisell (1&deg;) &mdash; guitar-as-texture with
+            effects/looping (comparison &mdash; opposite pole); Berry (5&deg;)
+            &mdash; piano as one-person groove source (comparison &mdash;
+            different instrument, same principle)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Guitar thread
+            extends from Frisell (1) effects-and-texture to Monge (20) raw-and-
+            percussive. Nineteen degrees apart, opposite poles of guitar practice.
+            The self-accompaniment principle connects to Berry (5) piano as
+            self-contained groove instrument.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Jazz-as-Method (Third Degree)</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Jazz/R&amp;B genre label: Jazz as harmonic vocabulary underlying
+            Americana Soul compositions. Third consecutive jazz-as-modifier
+            degree (18, 19, 20). Orchestral arrangements reveal extended
+            voicings and modal ambiguity beneath folk-soul surface.</p>
+            <div class="examples">Monge &mdash; Seattle Symphony orchestrations
+            revealing jazz-informed structure; Maktub (18&deg;) &mdash; jazz as
+            modifier of Soul/funk (comparison); FMR (19&deg;) &mdash; jazz as
+            modifier of Soul/R&amp;B (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Jazz-as-method
+            solidifies across three consecutive degrees (18&ndash;20). The genre
+            evolution: single genre (0&ndash;15) &rarr; compound (16) &rarr;
+            superposition (17) &rarr; modifier-inversion (18&ndash;20).
+            Three degrees of Jazz-as-modifier confirms pattern stability.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Americana-Soul</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twentieth deployment. The blue note in acoustic Americana Soul
+            context &mdash; vocal bending between minor and major thirds over
+            solo acoustic guitar, drawing from blues tradition. The most
+            historically rooted deployment: the blue note returning to its
+            blues-vocal origin.</p>
+            <div class="examples">Monge (20&deg;) &mdash; solo vocal bending
+            in blues/folk context, open-air acoustic; FMR (19&deg;) &mdash;
+            collective-soul bending over rotating ensemble (comparison);
+            Anderson (3&deg;) &mdash; jazz vocal blue note (comparison);
+            Berry (5&deg;) &mdash; piano crush notes (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Twenty deployments
+            across twenty-one degrees. Fifth vocal deployment (Anderson 3, Watts 17,
+            Maktub 18, FMR 19, Monge 20). The Americana-soul blue note is the
+            most historically rooted &mdash; closest to the country-blues origin
+            of the technique. Full circle from jazz blue note to blues blue note.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1987&ndash;2007 &mdash; Spokane, Washington</div>
+          <p>Born January 16, 1987. Grew up in Spokane, eastern Washington.
+          Odd jobs, searching for direction. First artist in the engine from
+          east of the Cascades.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2007 &mdash; Art Institute of Seattle</div>
+          <p>Arrived in Seattle at age 20 to study audio engineering. Quit after
+          two quarters. The institutional path was not her path.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2007&ndash;2015 &mdash; Pike Place Market (Busking Years)</div>
+          <p>Over eight years busking at Pike Place Market. Named best street
+          performer in the Northwest (Seattle Weekly, 2014). Built audience one
+          passerby at a time from a 100-sq-ft apartment overlooking the Market.
+          The formative chapter &mdash; solo voice and guitar, raw and unprocessed.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2014 &mdash; Find Your Way: A Busker&rsquo;s Documentary + Steadfast EP</div>
+          <p>Award-winning documentary (10 film award nominations, CBGB Festival
+          screening) alongside Chris Ballew and Joshua Bell. <em>Steadfast</em>
+          EP produced by Grammy winner Pete Stewart.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2016&ndash;2017 &mdash; Stone EP / Studio Litho</div>
+          <p>Self-produced EP recorded at <strong>Studio Litho</strong> (Stone
+          Gossard, Pearl Jam). Sold-out release show at The Triple Door on her
+          30th birthday &mdash; three blocks from Pike Place Market.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2018 &mdash; Carry On EP / European Tour / Jazz Alley</div>
+          <p>Third EP recorded at Robert Lang Studios and Studio Litho. KEXP
+          premiere. Release party at Dimitriou&rsquo;s Jazz Alley with Naomi
+          Wachira. First European tour.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2020 &mdash; Black Fret / Sonic Guild Grant</div>
+          <p>Selected as one of ten inaugural Black Fret Seattle (now Sonic Guild)
+          grant recipients. $50,000 distributed among local musicians.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2020&ndash;2021 &mdash; Seattle Symphony at Benaroya Hall</div>
+          <p>Twelve original songs orchestrated by Andrew Joslyn, performed by
+          the Grammy-winning Seattle Symphony, conducted by Lee Mills. Forty-piece
+          orchestra at Benaroya Hall. The career&rsquo;s defining document.
+          Album released August 2021.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2021&ndash;2024 &mdash; Departure, Asheville, Hurricane Helene</div>
+          <p>Left Seattle 2021. Spent a year as a &ldquo;vagabond.&rdquo;
+          Settled in Asheville, NC. Hurricane Helene forced relocation to
+          Nashville, TN in September 2024.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2025&ndash;present &mdash; Nashville, Cayamo, Debut Album</div>
+          <p>Won the 2025 Cayamo Soundcheck Contest. Performed alongside
+          Jeff Tweedy, Emmylou Harris, Ani DiFranco. Debut full-length album
+          set for 2026 release. Newport Folk Festival with Black Opry (2023).</p>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.92rem;border-collapse:collapse">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;width:30%;font-weight:600">S36-003 (Anderson)</td>
+            <td style="padding:0.6rem">First and third women in the engine. Both
+            Black women. Both vocal-primary. Anderson: Central District, left and
+            returned. Monge: Rainier Valley, built career then left. Mirror images
+            of the departure pattern.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-006 (Patti Bown)</td>
+            <td style="padding:0.6rem">Second and third women. Bown: pianist-composer
+            who left Seattle for New York (The Erasure). Monge: singer-songwriter-guitarist
+            who left for Asheville/Nashville. All three women in the engine eventually left.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-001 (Bill Frisell)</td>
+            <td style="padding:0.6rem">Guitar thread bookends. Frisell (1&deg;): guitar-as-texture
+            with effects and looping. Monge (20&deg;): guitar-as-rhythm-section, acoustic,
+            percussive, raw. Opposite poles across nineteen degrees.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-018/019 (Maktub / FMR)</td>
+            <td style="padding:0.6rem">Neo-soul thread and jazz-as-modifier pattern.
+            Three consecutive degrees (18&ndash;20) with Jazz as modifier. Organizational
+            arc: band (18) &rarr; collective (19) &rarr; solo (20) &mdash; full circle
+            back to solo artist but in transformed state.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-005 (Overton Berry)</td>
+            <td style="padding:0.6rem">Self-taught thread. Berry (5&deg;): autodidact,
+            no formal music education. Monge (20&deg;): quit Art Institute, trained
+            herself on the street. Both Black artists. Both developed art through
+            sustained public performance.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;font-weight:600">S36-012 (Don Lanphere)</td>
+            <td style="padding:0.6rem">Eastern Washington thread. Lanphere (12&deg;):
+            Wenatchee. Monge (20&deg;): Spokane. First two artists from east of the
+            Cascades. Both came west to Seattle.</td>
+          </tr>
+        </table>
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield High School Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Quincy Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Ernestine Anderson &mdash; Garfield, late 1940s</td></tr>
+            <tr><td>Degrees 4&deg;&ndash;19&deg;</td><td>No confirmed Garfield products (sixteen consecutive)</td></tr>
+            <tr><td>Degree 20&deg;</td><td>Whitney Monge &mdash; NOT a Garfield product. From Spokane, WA. Art Institute of Seattle (quit). Self-trained via busking. Fourteenth consecutive non-Garfield degree. First artist from eastern Washington.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Key Carry-Forward Items for Degree 21</h4>
+          <ul>
+            <li><strong>Duwamish acknowledgment (RESOLVED at 20):</strong> Implemented. Applies retroactively to degrees 0&ndash;20. All subsequent releases inherit it.</li>
+            <li><strong>Gender gap (BROKEN at 20):</strong> Third woman (Monge). Distribution 3:18. All three women are Black. All three eventually left Seattle. Track whether degree 21 continues gender diversity or returns to male.</li>
+            <li><strong>Rainier Valley (NEW at 20):</strong> Fifth neighborhood thread. Track whether subsequent degrees return or this is a single-degree introduction.</li>
+            <li><strong>Sustain (NEW at 20):</strong> Twenty-first acoustic element. Busker&rsquo;s sustained projection. Track progression.</li>
+            <li><strong>The Street Laureate (NEW at 20):</strong> Twenty-first artist-city pattern. Non-institutional origin, public-space career. Track.</li>
+            <li><strong>Energy-3 streak:</strong> SIX consecutive (15&ndash;20). Distribution 2:13:6. Unprecedented. Track whether streak continues.</li>
+            <li><strong>Jazz-as-modifier:</strong> THREE consecutive degrees (18&ndash;20). Pattern confirmed. Track continuation.</li>
+            <li><strong>Solo artist returns:</strong> Organizational arc completes: solo (0&ndash;17) &rarr; band (18) &rarr; collective (19) &rarr; solo (20). Track next organizational type.</li>
+            <li><strong>Eastern Washington thread (NEW at 20):</strong> Two artists (Lanphere 12, Monge 20). Track.</li>
+            <li><strong>Self-taught thread EXTENDED:</strong> Berry (5) autodidact + Monge (20) busker-trained. Track.</li>
+            <li><strong>Vocal branch:</strong> TEN nodes &mdash; ties keyboard/piano as richest. Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">20&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#B71C1C">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Solo artist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2015&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-released</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City Pattern</span>
+            <span class="stat-value">The Street Laureate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gender</span>
+            <span class="stat-value" style="color:#6A1B9A">Woman (3rd)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jazz arc</span>
+            <span class="stat-value">Jazz as modifier</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre label</span>
+            <span class="stat-value">Jazz/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Creative unit</span>
+            <span class="stat-value">Solo artist (returns)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Rainier Valley (NEW)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy spectrum</span>
+            <span class="stat-value">2:13:6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gender ratio</span>
+            <span class="stat-value">3:18 (w:m)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Vocal branch</span>
+            <span class="stat-value">10 nodes (tied #1)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">20th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note</span>
+            <span class="stat-value">20th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City taxonomy</span>
+            <span class="stat-value">21 patterns</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">Steadfast</span>
+            <span class="stat-value">EP, 2014</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Stone</span>
+            <span class="stat-value">EP, 2016</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Carry On</span>
+            <span class="stat-value">EP, 2018</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">w/ Symphony</span>
+            <span class="stat-value">Live, 2021</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-References</h4>
+          <div class="stat-row">
+            <span class="stat-label">Anderson</span>
+            <span class="stat-value">3&deg; 1st woman</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bown</span>
+            <span class="stat-value">6&deg; 2nd woman</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Frisell</span>
+            <span class="stat-value">1&deg; guitar</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Maktub/FMR</span>
+            <span class="stat-value">18&deg;/19&deg; neo-soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Berry</span>
+            <span class="stat-value">5&deg; self-taught</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lanphere</span>
+            <span class="stat-value">12&deg; E. Washington</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 20&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine
+    &mdash; <a href="../../index.html">Back to S36</a></p>
+  </footer>
+</body>
+</html>

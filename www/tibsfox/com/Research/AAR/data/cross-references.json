@@ -1,8 +1,8 @@
 {
-  "generated": "2026-03-28",
-  "version": "v1.49.132",
-  "total_projects": 177,
-  "total_edges": 739,
+  "generated": "2026-03-29",
+  "version": "v1.49.155",
+  "total_projects": 178,
+  "total_edges": 745,
   "nodes": [
     {
       "id": "ABL",
@@ -888,6 +888,11 @@
       "id": "YNT",
       "name": "Yuri's Night",
       "cluster": "Science"
+    },
+    {
+      "id": "FLT",
+      "name": "Fleet Refinement",
+      "cluster": "AI"
     }
   ],
   "edges": [
@@ -4585,6 +4590,42 @@
       "source": "YNT",
       "target": "BRC",
       "type": "cites"
+    },
+    {
+      "source": "FLT",
+      "target": "AAR",
+      "type": "extends",
+      "label": "Architecture alignment audit informs fleet mission"
+    },
+    {
+      "source": "FLT",
+      "target": "SCR",
+      "type": "extends",
+      "label": "DACP protocol foundation"
+    },
+    {
+      "source": "FLT",
+      "target": "SST",
+      "type": "extends",
+      "label": "Shannon fungibility theorem applied"
+    },
+    {
+      "source": "FLT",
+      "target": "ACE",
+      "type": "references",
+      "label": "Amiga chipset architecture principle"
+    },
+    {
+      "source": "FLT",
+      "target": "PMG",
+      "type": "references",
+      "label": "Upstream intelligence methodology"
+    },
+    {
+      "source": "FLT",
+      "target": "GSD2",
+      "type": "extends",
+      "label": "GSD workflow infrastructure"
     }
   ],
   "clusters": {

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 22&deg; &mdash; Red-shafted Flicker Drumming &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.percussion { background: #BF360C; }
+    .theory-icon.dual { background: #7B1FA2; }
+    .theory-icon.substrate { background: #E65100; }
+    .theory-icon.fusion { background: #1B5E20; }
+    .theory-icon.snag { background: #795548; }
+    .theory-icon.broadband { background: #00838F; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Flicker pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 1px solid #AB47BC;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #6A1B9A;
+    }
+
+    /* Percussion card */
+    .percussion-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FF8A65 100%);
+      border: 1px solid #E64A19;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .percussion-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Substrate card */
+    .substrate-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 1px solid #8D6E63;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .substrate-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4E342E;
+    }
+
+    /* Snag card */
+    .snag-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .snag-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">22&deg;</div>
+      <div class="release-title-block">
+        <h2>Red-shafted Flicker Drumming</h2>
+        <div class="scientific">Colaptes auratus cafer &middot; Family Picidae (Woodpeckers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Resonant Hollow-Tree Percussion &middot; Forest Snag &middot; Spring (Breeding) &middot; Energy 4</div>
+
+    <blockquote>
+      At dawn on a March morning, a large brown-barred woodpecker lands on a dead alder &mdash;
+      a snag, hollow-hearted, still standing. The bird hitches upward to a spot where the
+      bark has long since fallen away, exposing pale wood thinned by years of heart-rot fungi.
+      It braces its stiffened tail against the trunk, grips with zygodactyl feet, draws its
+      head back three centimeters, and strikes. Twenty-five times per second. For one full
+      second. The dead tree rings like a drum &mdash; a deep, resonant, rolling percussion
+      that carries across the morning woodland. Then silence. Ten seconds later, it strikes
+      again. The same spot. The same rate. The same resonance. This is not foraging. This is
+      not excavation. This is communication. The first non-vocal sound in the engine. The drum.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Flicker Pair Card -->
+        <div class="pair-card">
+          <h3>The Flicker Pair: Complete</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degrees 21&ndash;22 form the engine&rsquo;s first <strong>species-pair</strong>.
+            Degree 21 delivered the Northern Flicker&rsquo;s vocal call (wick-wick-wick,
+            syrinx-produced, tonal, below fusion). Degree 22 delivers the same species&rsquo;
+            <strong>drum</strong> (bill striking resonant substrate, broadband, above fusion).
+            Same bird. Different physics. The pair is now complete.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Degree 21: Wick Call</th><th>Degree 22: Drum</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Source</td><td>Syrinx (vocal)</td><td>Bill on substrate (mechanical)</td></tr>
+              <tr><td>Character</td><td>Tonal (pitched, 2.0&ndash;2.5 kHz)</td><td>Broadband (no pitch, substrate-dependent)</td></tr>
+              <tr><td>Fusion</td><td>Below (each note discrete)</td><td>Above (strikes merge into roll)</td></tr>
+              <tr><td>Duration</td><td>5&ndash;8 seconds</td><td>0.6&ndash;1.2 seconds</td></tr>
+              <tr><td>Rate</td><td>6&ndash;10 notes/sec</td><td>~25 strikes/sec</td></tr>
+              <tr style="background: rgba(171,71,188,0.15); font-weight: 600;"><td>Engine role</td><td>21st vocal species</td><td><strong>First non-vocal sound</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Percussion Card -->
+        <div class="percussion-card">
+          <h3>First Non-Vocal Sound in the Engine</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>Twenty-one degrees of voice.</strong> Every sound through degree 21 was
+            produced by the syrinx &mdash; the vocal organ. Degree 22 introduces the first
+            sound that bypasses the syrinx entirely. The drum is a solid object striking
+            another solid object. Bill hitting wood. The physics of percussion. The engine&rsquo;s
+            acoustic vocabulary expands from &ldquo;sounds produced by voice&rdquo; to
+            &ldquo;sounds produced by any mechanism.&rdquo;
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Drumming Bioacoustics</h2>
+        <p>
+          The Northern Flicker drums by striking its bill against a resonant surface at
+          approximately <strong>25 strikes per second</strong> in bursts of
+          <strong>0.6&ndash;1.2 seconds</strong>. The strike rate is remarkably consistent
+          between bouts. The temporal pattern is even-tempo with a characteristic
+          <strong>slight deceleration at the end</strong> &mdash; a species-diagnostic
+          feature that distinguishes the flicker drum from co-occurring woodpeckers.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Strike rate</td><td>~25 per second</td></tr>
+            <tr><td>Bout duration</td><td>0.6&ndash;1.2 seconds</td></tr>
+            <tr><td>Strikes per bout</td><td>~15&ndash;30</td></tr>
+            <tr><td>Frequency content</td><td>Broadband (100 Hz&ndash;8+ kHz)</td></tr>
+            <tr><td>Peak energy</td><td>500 Hz&ndash;4 kHz (substrate-dependent)</td></tr>
+            <tr><td>Pitch</td><td>NONE &mdash; broadband, no fundamental</td></tr>
+            <tr><td>Fusion</td><td>Above threshold &mdash; strikes merge into roll</td></tr>
+            <tr><td>Temporal pattern</td><td>Even with slight terminal deceleration</td></tr>
+            <tr><td>Inter-bout interval</td><td>10&ndash;30 seconds</td></tr>
+            <tr><td>Dawn session</td><td>20&ndash;50 bouts over 15&ndash;30 minutes</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Substrate Card -->
+        <div class="substrate-card">
+          <h3>Substrate Selection: The Instrument IS the Sound</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The flicker <strong>selects its instrument</strong>. Different substrates produce
+            different sounds from the same bill strike. Flickers preferentially seek out
+            maximally resonant surfaces, returning to the same substrate day after day.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Substrate</th><th>Character</th><th>Amplitude</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Hollow dead alder</td><td>Deep, woody, resonant thud</td><td>Moderate</td></tr>
+              <tr><td>Solid dead conifer</td><td>Dry, sharp tap</td><td>Low-moderate</td></tr>
+              <tr style="background: rgba(141,110,99,0.2); font-weight: 600;"><td><strong>Metal chimney cap</strong></td><td><strong>Piercing metallic rattle</strong></td><td><strong>Very high</strong></td></tr>
+              <tr><td>Metal rain gutter</td><td>Resonant metallic roll</td><td>High</td></tr>
+              <tr><td>Cedar utility pole</td><td>Deep, resonant knock</td><td>Moderate-high</td></tr>
+              <tr><td>House fascia board</td><td>Wooden rap, house amplifies</td><td>Moderate</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0; font-family: system-ui, sans-serif;">
+            Metal surfaces have a higher Q factor (quality of resonance) than wood &mdash;
+            they ring longer and louder. A flicker on a metal chimney cap is audible across
+            an entire neighborhood. The bird has discovered, empirically, that metal
+            out-performs wood as a resonant surface.
+          </p>
+        </div>
+
+        <!-- Snag Card -->
+        <div class="snag-card">
+          <h3>Forest Snag: The Instrument IS the Habitat</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            A <strong>snag</strong> is a standing dead tree &mdash; the first ecosystem in
+            the engine defined by dead wood rather than living community. Heart-rot fungi
+            hollow the interior while the harder sapwood shell remains standing, creating
+            thin-walled hollow cylinders: the flicker&rsquo;s ideal natural drum. Where
+            you hear flicker drumming, dead wood is present. Where snags are removed,
+            the drum falls silent.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Forest Type</th><th>Snag Density</th><th>Drumming Potential</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mature / old-growth</td><td>8&ndash;20 per hectare</td><td>High &mdash; abundant resonant substrates</td></tr>
+              <tr><td>Managed / second-growth</td><td>&lt;3 per hectare</td><td>Low &mdash; limited drumming stations</td></tr>
+              <tr><td>Urban (varies)</td><td>Variable</td><td>Metal substitutes available</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Dual Channel -->
+        <h2>Dual-Channel Communication</h2>
+        <p>
+          The Northern Flicker is the first organism in the engine to communicate through
+          two fundamentally different physical channels: <strong>air-borne vocal sound</strong>
+          (the wick call, degree 21) and <strong>substrate-borne mechanical percussion</strong>
+          (the drum, degree 22). These are not variations on the same mechanism. They are
+          different physics serving overlapping functions.
+        </p>
+        <p>
+          <strong>Why two channels?</strong> Environmental robustness (broadband percussion
+          penetrates dense vegetation that attenuates tonal calls). Temporal complementarity
+          (the call is long and mobile; the drum is short and location-anchored). Information
+          partitioning (the drum carries substrate-quality data the call cannot &mdash; where
+          a flicker drums on a resonant snag, it advertises habitat quality). Receiver
+          differentiation (two independent identification channels reduce territorial
+          misidentification).
+        </p>
+
+        <!-- PNW Woodpecker Drum Comparison -->
+        <h2>PNW Woodpecker Drumming Signatures</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Species</th><th>Rate</th><th>Duration</th><th>Pattern</th></tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 600; background: rgba(0,105,92,0.08);">
+              <td><strong>Northern Flicker</strong></td><td><strong>~25/sec</strong></td><td><strong>0.6&ndash;1.2 s</strong></td><td><strong>Even, terminal deceleration</strong></td>
+            </tr>
+            <tr><td>Downy Woodpecker</td><td>~15&ndash;17/sec</td><td>0.8&ndash;1.5 s</td><td>Even tempo, short bouts</td></tr>
+            <tr><td>Hairy Woodpecker</td><td>~25/sec</td><td>0.5&ndash;0.8 s</td><td>Even tempo, shorter</td></tr>
+            <tr><td>Pileated Woodpecker</td><td>~15&ndash;17/sec</td><td>2&ndash;3 s</td><td>Accelerating then decelerating</td></tr>
+            <tr><td>Red-breasted Sapsucker</td><td>Irregular</td><td>Variable</td><td>Stuttering, uneven</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon percussion">R</div>
+            <div class="theory-content">
+              <h4>Resonant Percussion &mdash; 23rd Acoustic Element</h4>
+              <p>Substrate-dependent, broadband, mechanically produced percussion above fusion threshold. The first non-vocal sound. The struck surface determines the timbre.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dual">D</div>
+            <div class="theory-content">
+              <h4>Dual-Channel Communication</h4>
+              <p>Same species transmitting through vocal and mechanical channels. Redundant signaling &mdash; environmental robustness, temporal complementarity, information partitioning. The flicker pair complete.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon substrate">S</div>
+            <div class="theory-content">
+              <h4>Substrate Selection as Instrument Choice</h4>
+              <p>The performer actively selecting which object to strike. Metal chimney cap vs. hollow snag vs. utility pole. The first external instrument in the engine.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon fusion">F</div>
+            <div class="theory-content">
+              <h4>The Fusion Trilogy Complete</h4>
+              <p>Degree 11 (trill, at fusion). Degree 21 (hammer, below fusion). Degree 22 (drum roll, above fusion). Three positions on the perceptual fusion continuum. The same species spans two of the three.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon snag">T</div>
+            <div class="theory-content">
+              <h4>Forest Snag as Acoustic Habitat</h4>
+              <p>Dead standing wood as the ecological substrate for mechanical percussion. The instrument IS the habitat. Snag removal eliminates drumming territory.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon broadband">B</div>
+            <div class="theory-content">
+              <h4>Broadband Percussion vs. Tonal Voice</h4>
+              <p>The first unpitched sound in the engine. Wide-spectrum percussive transients occupy different perceptual channels than pitched voice &mdash; cutting through the dawn chorus rather than competing with it.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker (Voice)</strong>
+            <p>THE OTHER HALF. Same species, different mechanism. Voice (21) and percussion (22) form the flicker pair. Dual-channel communication: vocal tonal series + mechanical broadband percussion.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>THE THREE NON-VOCAL MOMENTS. Degree 0 = silence (no sound). Degree 22 = percussion (non-vocal sound). The first and twenty-third entries share the property of containing no voice.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011: Oregon Junco</strong>
+            <p>THE FUSION TRILOGY. Degree 11 = at fusion (trill blurs). Degree 21 = below fusion (hammer, each note discrete). Degree 22 = above fusion (drum roll, strikes merge). Three continuum positions.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-013: Hutton&rsquo;s Vireo</strong>
+            <p>REPETITION IN THREE DIMENSIONS. Ostinato (13, slow vocal). Hammer (21, fast vocal). Drum (22, fast mechanical). Three rates, two mechanisms, one principle.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>THE RELEASE AND THE STRIKE. Degree 20 faded into silence (ADSR release). Degree 22 strikes into resonance (percussive attack). Softest ending to hardest beginning.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Northern Flicker drumming documented as species-diagnostic behavioral cue. Drumming on metal surfaces noted as common urban wildlife encounter in Puget Sound region.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Forest snag ecology: dead wood as keystone habitat. Snag formation pathways, density requirements, and the role of dead standing wood in PNW forest ecosystems.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: Foxy Apollo (Jazz/Funk, E=4, Seattle, self-released). Both are energy-4, self-directed, percussion-forward. Substrate selection parallels instrument choice.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Wiebe, K.L. and Moore, W.S. (2020). Northern Flicker (<em>Colaptes auratus</em>). <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Stark, R.D., Dodenhoff, D.J., and Johnson, E.V. (1998). A quantitative analysis of woodpecker drumming. <em>Condor</em> 100(2): 350&ndash;356.</li>
+          <li>Dodenhoff, D.J., Stark, R.D., and Johnson, E.V. (2001). Do woodpecker drums encode information for species recognition? <em>Condor</em> 103(1): 143&ndash;150.</li>
+          <li>Van Wassenbergh, S., et al. (2022). Woodpeckers minimize cranial absorption of shocks. <em>Current Biology</em> 32(14): 3189&ndash;3194.</li>
+          <li>Kilham, L. (1959). Behavior and methods of communication of Pileated Woodpeckers. <em>Condor</em> 61(6): 377&ndash;387.</li>
+          <li>Bull, E.L., Parks, C.G., and Torgersen, T.R. (1997). Trees and logs important to wildlife. USDA Forest Service PNW-GTR-391.</li>
+          <li>Thomas, J.W. et al. (1979). Snags. In <em>Wildlife Habitats in Managed Forests</em>. USDA Handbook 553.</li>
+          <li>Miles, M.C. and Fuxjager, M.J. (2018). Animal muscles and their diversity. <em>Integrative and Comparative Biology</em> 58(2): 293&ndash;302.</li>
+          <li>Macaulay Library. Northern Flicker drumming recordings. Cornell Lab of Ornithology. macaulaylibrary.org</li>
+          <li>BirdWeb (Seattle Audubon Society). Northern Flicker. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates: Northern Flicker. partnersinflight.org</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">22&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Picidae</div>
+          <div class="stat-detail">Woodpeckers &mdash; same species as degree 21</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Drumming</div>
+          <div class="stat-detail">First non-vocal sound in the engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Second consecutive E=4 degree</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Forest snag</div>
+          <div class="stat-detail">Dead standing wood &mdash; the instrument</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Spring</div>
+          <div class="stat-detail">Peak drumming Feb&ndash;Jun (breeding)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">Broadband</div>
+          <div class="stat-detail">100 Hz&ndash;8+ kHz, no fundamental pitch</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Strike Rate</div>
+          <div class="stat-value">~25/sec</div>
+          <div class="stat-detail">Even tempo, terminal deceleration</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Bout Duration</div>
+          <div class="stat-value">0.6&ndash;1.2 s</div>
+          <div class="stat-detail">Short rapid burst, ~25 strikes per bout</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Flicker Pair</div>
+          <div class="stat-value">Degrees 21&ndash;22</div>
+          <div class="stat-detail">Voice (21) + Drum (22) &mdash; COMPLETE</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Fusion State</div>
+          <div class="stat-value">Above</div>
+          <div class="stat-detail">Strikes merge into continuous roll</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 22 &mdash; S36</div>
+          <div class="parallel-name">Foxy Apollo</div>
+          <div class="parallel-detail">Jazz/Funk &middot; E=4 &middot; Seattle &middot; Self-released &middot; 2018&ndash;present</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Both are energy-4, self-directed, percussion-forward.
+            Foxy Apollo is self-released &mdash; making music with available instruments.
+            The flicker is self-amplified &mdash; finding resonant surfaces, broadcasting directly.
+            Substrate selection parallels instrument and production choices.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 22&deg; of 360&deg; &mdash; v1.49.158</p>
+  </footer>
+</body>
+</html>

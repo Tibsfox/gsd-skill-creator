@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 23&deg; &mdash; Allen Stone &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E65100, #FF6D00);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8F5E9;
+      color: #2E7D32;
+      border: 1px solid #81C784;
+      margin-left: 0.3rem;
+    }
+
+    .rural-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF8E1;
+      color: #F57F17;
+      border: 1px solid #FFD54F;
+      margin-left: 0.3rem;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #9FA8DA;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #FFB74D;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #E65100;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #E65100;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .label-box {
+      background: #E8F5E9;
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .label-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .label-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .label-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .label-box td, .label-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .label-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+
+    .rural-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .rural-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .rural-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">23&deg;</div>
+      <div>
+        <h1>Allen Stone</h1>
+        <div class="subtitle">Soul/Jazz &middot; Soul / R&amp;B / Gospel-rooted / Blue-eyed Soul &mdash; Chewelah to Seattle 2010&ndash;present &mdash; ATO Records
+          <span class="energy-badge">Energy 4</span>
+          <span class="label-badge">First Label</span>
+          <span class="rural-badge">First Rural Origin</span>
+          <span class="genre-badge">Soul/Jazz Returns</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../022-foxy-apollo/index.html">Degree 22&deg; (Foxy Apollo)</a>
+      <a href="../018-maktub/index.html">Degree 18&deg; (Maktub)</a>
+      <a href="../019-fly-moon-royale/index.html">Degree 19&deg; (FMR)</a>
+      <a href="../021-polyrhythmics/index.html">Degree 21&deg; (Polyrhythmics)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The testimony begins. Allen Stone is a gospel-trained soul singer from
+          Chewelah, Washington &mdash; population 2,600, 300 miles east of Seattle
+          across the Cascades. The first artist from outside the metro area. The first
+          on a real label (ATO Records). The first career launched by a viral YouTube
+          video. A preacher&rsquo;s son who taught himself soul music from Stevie
+          Wonder records in a small town where nobody else was listening.
+          <em>The Rural Draw.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Allen Stone&rsquo;s career was built in Seattle; his Chewelah
+          origin falls within the broader Inland Salish world including Kalispel,
+          Spokane, and Colville Confederated Tribes territory. The Duwamish Tribe
+          remains federally unrecognized. This acknowledgment was established at
+          degree 20 and applies to all releases.</p>
+        </div>
+
+        <!-- ========================================
+             FIRST RURAL ORIGIN
+             ======================================== -->
+
+        <div class="rural-box">
+          <h4>First Rural Origin &mdash; Chewelah, WA (pop ~2,600)</h4>
+          <p>Allen Stone is the first artist in twenty-four degrees who did not
+          originate in or near Seattle or another major city. Chewelah is in
+          Stevens County, northeast Washington &mdash; 300 miles east of Seattle,
+          across the Cascade Range, in a different climate zone, cultural zone,
+          and musical ecosystem. Stone grew up singing in his father&rsquo;s church.
+          He did not discover soul music until age 15 (Stevie Wonder&rsquo;s
+          <em>Innervisions</em>). No music scene, no record stores, no mentors
+          in the genre. The autodidact from the country.</p>
+        </div>
+
+        <!-- ========================================
+             FIRST LABEL
+             ======================================== -->
+
+        <div class="label-box">
+          <h4>First Active Label &mdash; ATO Records</h4>
+          <p>Allen Stone on ATO Records is the first degree where an active,
+          independent label is a structural part of the career narrative. ATO
+          (founded 2000 by Dave Matthews and Coran Capshaw) focuses on
+          <strong>career-building over hits</strong>, artist creative control,
+          and master rights retention.</p>
+          <table>
+            <tr><th>Label Model</th><th>Character</th><th>Example</th></tr>
+            <tr><td>Major label</td><td>Label directs creative output</td><td>Stone&rsquo;s Radius on Capitol (asked to be dropped)</td></tr>
+            <tr><td><strong>Independent label</strong></td><td><strong>Label amplifies existing direction</strong></td><td><strong>Stone on ATO (career-long partnership)</strong></td></tr>
+            <tr><td>Self-released</td><td>No amplification</td><td>Foxy Apollo, Polyrhythmics (22&deg;, 21&deg;)</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Third Consecutive E=4 &mdash; Energy Streak Continues</h4>
+          <p>Three consecutive E=4 degrees (21&ndash;23) confirm a sustained
+          high-energy streak. Distribution shifts to <strong>2:13:6:3</strong>.
+          Three different E=4 subtypes from three different sources.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th><th>Source</th></tr>
+            <tr><td>21&deg;</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td><td>7&ndash;8 people, polyrhythmic mass</td></tr>
+            <tr><td>22&deg;</td><td>Foxy Apollo</td><td>Collective-kinetic</td><td>Young band, raw energy</td></tr>
+            <tr><td><strong>23&deg;</strong></td><td><strong>Allen Stone</strong></td><td><strong>Vocal-kinetic</strong></td><td><strong>Gospel-trained voice, physical command</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Preacher&rsquo;s Son</h2>
+
+        <p>Allen Stone was born on <strong>March 13, 1987</strong> in
+        <strong>Chewelah, Washington</strong> &mdash; a town of ~2,600 people
+        in Stevens County, northeast Washington. His father Danny Stone was a
+        minister at Addy New Life Christian Center. Stone began singing in church
+        at <strong>age 3</strong> and was leading worship by <strong>age 14</strong>.</p>
+
+        <p>At age 15, he discovered <strong>Stevie Wonder&rsquo;s <em>Innervisions</em></strong>
+        and began a self-directed education in soul and R&amp;B: Marvin Gaye,
+        Donny Hathaway, Bill Withers, Sam Cooke. No teacher, no conservatory,
+        no local scene &mdash; just records in a small town. A close friend,
+        <strong>Stacie Orrico</strong>, achieved pop success from Chewelah,
+        proving it was possible.</p>
+
+        <p>After high school, Stone moved to <strong>Seattle</strong> and began
+        playing the small-venue circuit: Crocodile, Neumos, Triple Door, Nectar
+        Lounge. His debut album <em>Last to Speak</em> (2010) was self-released.
+        Then came the viral moment.</p>
+
+        <p>In April 2011, Stone filmed <strong>&ldquo;Unaware&rdquo; live from
+        his mother&rsquo;s living room</strong> in Chewelah. The video &mdash;
+        a gospel-trained voice filling a modest room &mdash; has been viewed
+        <strong>over 16 million times</strong>. It led to appearances on
+        <strong>Conan O&rsquo;Brien, David Letterman, and Jay Leno</strong>,
+        and a deal with <strong>ATO Records</strong> (2012).</p>
+
+        <p>USA Today called Stone a <strong>&ldquo;pitch-perfect powerhouse.&rdquo;</strong>
+        The New York Times compared his music to <strong>Stevie Wonder, Marvin Gaye,
+        Donny Hathaway, and Bill Withers</strong>. He describes himself as
+        &ldquo;a hippie with soul&rdquo; and &ldquo;a pale country kid from
+        Washington State singing soul and R&amp;B music.&rdquo;</p>
+
+        <p>Stone now lives in <strong>Spokane, WA</strong> with his wife
+        <strong>Tara Lawson</strong> (Australian photographer, married 2018/2019)
+        and two children. He toured 70 shows in 2024, was named <strong>Berklee
+        College of Music Herb Alpert Visiting Artist</strong> in 2023, and released
+        <em>Echoes of Harmony</em> in 2025. The Boomerang trajectory: rural origin
+        to city career to rural return.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CAPITOL RECORDS
+             ======================================== -->
+
+        <h2>The Capitol Records Cautionary Tale</h2>
+
+        <p>In 2015, Stone signed with <strong>Capitol Records</strong> and
+        released <em>Radius</em> (#80 Billboard 200). The experience was
+        damaging: the A&amp;R team that signed him <strong>left the label
+        within 12 months</strong>. The replacement team rejected his authentic
+        recordings (made in Sweden), demanded outside songwriting collaborators,
+        and pushed for pop-oriented material. Stone has described &ldquo;Freedom,&rdquo;
+        a Capitol-championed track, as &ldquo;probably the worst song I&rsquo;d
+        ever written.&rdquo;</p>
+
+        <p>Stone <strong>asked Capitol to drop him</strong> &mdash; a remarkable
+        act of creative self-preservation. He returned to ATO Records, which
+        re-released <em>Radius</em> in its intended form. The major-label detour
+        is the engine&rsquo;s first direct documentation of the tension between
+        <strong>institutional hit-seeking</strong> and <strong>artistic
+        authenticity</strong> in soul music.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <h2>Career Timeline</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1987&ndash;2005 &middot; Chewelah</div>
+          <p>Born in Chewelah, WA. Singing in father&rsquo;s church from age 3.
+          Worship leader by 14. Discovers Stevie Wonder at 15. Self-educates in
+          soul/R&amp;B from recordings. No formal training. Friend Stacie Orrico
+          proves music career is possible from small town.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">~2008 &middot; Moves to Seattle</div>
+          <p>Rural-to-urban migration. Begins playing open mics and small venues.
+          Enters the same venue ecosystem (Crocodile, Neumos) documented across
+          degrees 0&ndash;22, but from outside rather than inside the scene.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2010 &middot; Last to Speak</div>
+          <p>Self-released debut album. Raw talent, limited production. The calling
+          card of a singer still finding professional footing.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2011 &middot; Allen Stone (self-released) + Viral Video</div>
+          <p>Self-titled album released October 2011. &ldquo;Unaware&rdquo; from
+          mother&rsquo;s living room goes viral (16M+ YouTube views). Late-night TV:
+          Conan, Letterman, Leno. #2 iTunes R&amp;B/Soul. Backed by Raphael Saadiq&rsquo;s
+          rhythm section and Deron Johnson (Miles Davis keyboardist).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2012 &middot; ATO Records Signing</div>
+          <p>ATO re-releases <em>Allen Stone</em> nationally. First label deal.
+          Career transitions from local to national. Theatre tours begin.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2015 &middot; Radius (Capitol Records)</div>
+          <p>Major-label debut. #80 Billboard 200. A&amp;R team departs. Creative
+          conflicts. Stone asks to be dropped. Returns to ATO. <em>Radius</em>
+          re-released independently.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2019 &middot; Building Balance</div>
+          <p>Return to ATO. 1970s soul + 1990s New Jack Swing. Compared to
+          D&rsquo;Angelo and Stevie Wonder. Artistic control restored.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2021 &middot; APART</div>
+          <p>First all-acoustic album. Catalog favorites stripped to voice and guitar.
+          The most honest document of Stone&rsquo;s vocal instrument.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2023 &middot; Berklee Visiting Artist</div>
+          <p>Named <strong>Herb Alpert Visiting Artist</strong> at Berklee College of
+          Music. The autodidact invited to teach at the institution that trained
+          Jones (0&deg;), Frisell (1&deg;), and Lorber (16&deg;).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2025 &middot; Echoes of Harmony</div>
+          <p>Latest album. Features &ldquo;Back to the Roots&rdquo; single. Soul,
+          R&amp;B, folk. Released from Spokane home base. 70 shows in 2024.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <h2>Music Theory Mapping</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Gospel-to-Soul Pipeline</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Church worship vocal technique (melisma, dynamic range, falsetto,
+            call-and-response) channeled <strong>directly</strong> into soul music
+            without conservatory, jazz, or formal training. The most direct
+            gospel-to-soul connection in the engine. Church as conservatory-equivalent
+            with different content.</p>
+            <div class="examples">Church worship (age 3) &rarr; Stevie Wonder
+            recordings (age 15) &rarr; soul performance. No intermediary institution.
+            Three pipeline nodes: Anderson (3&deg; mediated-jazz), Maktub (18&deg;
+            institutional-soul), Stone (23&deg; unmediated-soul).</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Gospel worship
+            tradition &rarr; Sam Cooke sacred-to-secular &rarr; Aretha Franklin
+            church-to-R&amp;B &rarr; Anderson (3&deg;) jazz-mediated &rarr;
+            Stone (23&deg;) unmediated</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Internet-Mediated Career Ignition</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>First career in the engine launched by a <strong>viral video</strong>
+            rather than live reputation, institutional connections, or label
+            investment. &ldquo;Unaware&rdquo; from mother&rsquo;s living room
+            (16M+ YouTube views) converted a local singer into a national touring
+            artist. The medium changes the velocity.</p>
+            <div class="examples">Every prior degree: career built through
+            performance, institutions, or labels. Stone (23&deg;): career ignited
+            by a single YouTube video filmed in rural WA.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> YouTube platform
+            &rarr; living room authenticity signal &rarr; late-night TV amplification
+            &rarr; ATO Records deal. Pre-viral career existed (Last to Speak 2010)
+            but the video was the ignition event.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Independent Label as Amplifier</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>ATO Records model: label <strong>amplifies</strong> the artist&rsquo;s
+            existing creative direction rather than directing it. Contrasted with
+            Capitol Records (major-label-as-director model, Stone asked to be
+            dropped). First active label in twenty-four degrees. Soul music
+            benefits from independent model because authenticity is incompatible
+            with hit-oriented creative direction.</p>
+            <div class="examples">Self-released (degrees 18&ndash;22) &rarr;
+            ATO independent (23&deg;). Stone also experienced: Capitol major
+            (Radius 2015, creative compromise, asked to be dropped).</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Self-release
+            tradition (18&ndash;22) &rarr; ATO founding (2000, Dave Matthews)
+            &rarr; Brittany Howard / Black Pumas / Alabama Shakes roster pattern
+            &rarr; Stone signs (2012)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Gospel-Vocal</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-third deployment of the blue note thread. Gospel-derived
+            vocal bending &mdash; melismatic movement between minor and major
+            thirds inherited from church worship. <strong>Emotionally expressive</strong>
+            rather than harmonically exploratory. The most direct church-to-stage
+            blue note in the engine.</p>
+            <div class="examples">Twenty-three mechanisms: bass-line (0&deg;),
+            guitar (1&deg;), vocal (3&deg;)&hellip; through vocal-funk (22&deg;),
+            now gospel-vocal (23&deg;). The ancestral form of the blue note &mdash;
+            worship singing.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> All twenty-two prior
+            deployments &rarr; vocal (3&deg;) &rarr; soul-vocal (18&deg;) &rarr;
+            vocal-funk (22&deg;) &rarr; gospel-vocal (23&deg; &mdash; most direct
+            church-to-stage)</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ACOUSTIC ELEMENT
+             ======================================== -->
+
+        <h2>Acoustic Element #24: The Testimony</h2>
+
+        <p>In the gospel tradition, a <strong>testimony</strong> is the moment when
+        an individual stands before the congregation and tells their story &mdash;
+        raw, unscripted, emotionally direct. Not performance in the entertainment
+        sense; <strong>witness</strong>. Allen Stone&rsquo;s music IS testimony:
+        church-derived vocal technique, confessional lyrics, the &ldquo;Unaware&rdquo;
+        video literally a man in a modest room telling his truth.</p>
+
+        <p>The testimony follows the groove reset (22&deg;) because the new ADSR
+        cycle, having re-engaged from non-zero energy, now needs <strong>content</strong>
+        &mdash; something to say. The groove reset established rhythmic foundation.
+        The testimony provides vocal-narrative content. First <strong>semantic
+        element</strong> in the second ADSR cycle.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ARTIST-CITY PATTERN
+             ======================================== -->
+
+        <h2>Artist-City Pattern #24: The Rural Draw</h2>
+
+        <p>An artist drawn to Seattle from a <strong>rural origin</strong> within
+        Washington State. Not from another city, not from another country &mdash;
+        from Chewelah (pop ~2,600), 300 miles east across the Cascades. The Rural
+        Draw is also the engine&rsquo;s first <strong>Boomerang trajectory</strong>:
+        Stone came to Seattle, built his career, and returned to eastern Washington
+        (Spokane). The internet and touring decoupled career from geography.
+        Seattle was the launch pad, not the permanent address.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.9rem;border-collapse:collapse">
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600;width:25%"><a href="../018-maktub/index.html">S36-018 Maktub</a></td>
+            <td style="padding:0.5rem">Soul/Jazz genre match. Both voice-centered. Different pipelines: Watts Cornish-trained; Stone church-trained autodidact. Different Seattle relationships. Maktub E=3 vs. Stone E=4.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../022-foxy-apollo/index.html">S36-022 Foxy Apollo</a></td>
+            <td style="padding:0.5rem">Immediate neighbor. Both E=4, opposite origins: Inheritor (inside scene) vs. Rural Draw (outside scene). Jazz/Funk (22&deg;) to Soul/Jazz (23&deg;) = genre shift after same-genre pair.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../021-polyrhythmics/index.html">S36-021 Polyrhythmics</a></td>
+            <td style="padding:0.5rem">E=4 streak (third consecutive). Three subtypes: ensemble (21&deg;), collective (22&deg;), vocal (23&deg;). Instrumental funk vs. vocal soul.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../003-ernestine-anderson/index.html">S36-003 Anderson</a></td>
+            <td style="padding:0.5rem">Gospel-to-performance pipeline. Both church-trained. Anderson through jazz; Stone through soul. Same source, different genres, different eras.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../000-quincy-jones/index.html">S36-000 Jones</a></td>
+            <td style="padding:0.5rem">Berklee connection. Jones attended (1951); Stone named 2023 Visiting Artist. The autodidact invited to teach at the prodigy&rsquo;s institution.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../012-don-lanphere/index.html">S36-012 Lanphere</a></td>
+            <td style="padding:0.5rem">Eastern Washington connection. Lanphere from Wenatchee; Stone from Chewelah. Both crossed the Cascades. Prodigal (12&deg;) prefigures Rural Draw/Boomerang (23&deg;).</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem;font-weight:600"><a href="../019-fly-moon-royale/index.html">S36-019 FMR</a></td>
+            <td style="padding:0.5rem">Soul/Jazz genre match. Both vocalist-centered. FMR rotating collective vs. Stone solo with touring band.</td>
+          </tr>
+        </table>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield / Cornish / Institutional Pipeline Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Anderson &mdash; Garfield, same era as Jones</td></tr>
+            <tr><td>Degree 7&deg;</td><td>Priester &mdash; NOT Garfield. <strong>Cornish faculty.</strong></td></tr>
+            <tr><td>Degree 9&deg;</td><td>Caliman &mdash; NOT Garfield. <strong>Cornish faculty.</strong></td></tr>
+            <tr><td>Degree 17&deg;</td><td>Watts &mdash; NOT Garfield. <strong>Cornish student.</strong></td></tr>
+            <tr><td>Degree 21&deg;</td><td>Schroff &mdash; NOT Garfield. <strong>Cornish graduate.</strong></td></tr>
+            <tr><td>Degree 22&deg;</td><td>Ashkenazy &mdash; NOT Garfield. NOT Cornish. High school jazz band.</td></tr>
+            <tr><td><strong>Degree 23&deg;</strong></td><td><strong>Stone &mdash; NOT Garfield. NOT Cornish. NOT UW. Church worship leader (Chewelah). Berklee Visiting Artist 2023. Second consecutive non-institutional entry via different alternative pathway (church + autodidact).</strong></td></tr>
+          </table>
+          <p style="font-size:0.82rem;margin-top:0.5rem;color:#F57F17"><strong>Berklee circle closes:</strong>
+          Jones (0&deg;) and Frisell (1&deg;) trained at Berklee. Stone (23&deg;) was invited to TEACH at Berklee.
+          The autodidact enters the institution from the other direction.</p>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 24</h4>
+          <ul>
+            <li><strong>THIRD E=4:</strong> Distribution 2:13:6:3. Three consecutive E=4 (21&ndash;23). Track (Ron Artis II at 24 also E=4).</li>
+            <li><strong>The testimony:</strong> Twenty-fourth acoustic element. Gospel-derived vocal witness. Track element 25.</li>
+            <li><strong>Genre oscillation:</strong> Soul/Jazz returns (same as 18&ndash;19). Engine orbits soul-funk-jazz triangle. Track at 24.</li>
+            <li><strong>The Rural Draw (NEW):</strong> Twenty-fourth artist-city pattern. First rural origin. Boomerang trajectory. Track.</li>
+            <li><strong>First active label:</strong> ATO Records. Independent-amplifier model. Track label at subsequent degrees.</li>
+            <li><strong>Internet-mediated career (NEW):</strong> First viral-video career ignition. Track.</li>
+            <li><strong>Berklee circle:</strong> Four connections (Jones 0, Frisell 1, Lorber 16, Stone 23). Track.</li>
+            <li><strong>Five organizational models:</strong> solo-led/band-supported added at 23. Track sixth.</li>
+            <li><strong>Gender gap continues:</strong> 3:21 (women:men). Track.</li>
+            <li><strong>Blue note:</strong> TWENTY-THREE deployments. Gospel-vocal at 23. Track.</li>
+            <li><strong>Gospel-to-soul pipeline:</strong> Three nodes (3, 18, 23). Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">23&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Allen Stone</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Soul/Jazz</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">4 (3rd consecutive)</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2010&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Chewelah, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">ATO Records</span></div>
+          <div class="stat-row"><span class="stat-label">Born</span><span class="stat-value">March 13, 1987</span></div>
+          <div class="stat-row"><span class="stat-label">Org Type</span><span class="stat-value">Solo + touring band</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.159</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row"><span class="stat-label">2010</span><span class="stat-value">Last to Speak</span></div>
+          <div class="stat-row"><span class="stat-label">2011</span><span class="stat-value">Allen Stone</span></div>
+          <div class="stat-row"><span class="stat-label">2015</span><span class="stat-value">Radius (Capitol)</span></div>
+          <div class="stat-row"><span class="stat-label">2019</span><span class="stat-value">Building Balance</span></div>
+          <div class="stat-row"><span class="stat-label">2021</span><span class="stat-value">APART (acoustic)</span></div>
+          <div class="stat-row"><span class="stat-label">2025</span><span class="stat-value">Echoes of Harmony</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Context</h4>
+          <div class="stat-row"><span class="stat-label">Acoustic</span><span class="stat-value">#24: The testimony</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">#24: Rural Draw</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">7: Soul/Jazz returns</span></div>
+          <div class="stat-row"><span class="stat-label">Blue Note</span><span class="stat-value">#23: Gospel-vocal</span></div>
+          <div class="stat-row"><span class="stat-label">Theory</span><span class="stat-value">Gospel-to-soul pipeline</span></div>
+          <div class="stat-row"><span class="stat-label">Gender</span><span class="stat-value">3:21 (gap continues)</span></div>
+          <div class="stat-row"><span class="stat-label">Sources</span><span class="stat-value">32 (recovered)</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Firsts at Degree 23</h4>
+          <div class="stat-row"><span class="stat-label">Rural origin</span><span class="stat-value">Chewelah, WA</span></div>
+          <div class="stat-row"><span class="stat-label">Active label</span><span class="stat-value">ATO Records</span></div>
+          <div class="stat-row"><span class="stat-label">Viral career</span><span class="stat-value">YouTube ignition</span></div>
+          <div class="stat-row"><span class="stat-label">Boomerang</span><span class="stat-value">Returns to E. WA</span></div>
+          <div class="stat-row"><span class="stat-label">Blue-eyed soul</span><span class="stat-value">Race-genre tension</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 23&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine &mdash; PNW Research Series</p>
+    <p>Research completed 2026-03-29 &middot; <a href="research.md">Full research</a> &middot; <a href="knowledge-nodes.json">Knowledge nodes</a> &middot; <a href="retrospective.md">Retrospective</a></p>
+  </footer>
+</body>
+</html>

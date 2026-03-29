@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 21&deg; &mdash; Polyrhythmics &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E65100, #FF6D00);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .energy-threshold-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #C8E6C9;
+      color: #2E7D32;
+      border: 1px solid #81C784;
+      margin-left: 0.3rem;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #9FA8DA;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #FFB74D;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #E65100;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #E65100;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .neighborhood-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .neighborhood-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .neighborhood-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .neighborhood-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .neighborhood-box td, .neighborhood-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .neighborhood-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">21&deg;</div>
+      <div>
+        <h1>Polyrhythmics</h1>
+        <div class="subtitle">Jazz/Funk &middot; Instrumental Funk / Afrobeat / Psychedelic &mdash; Seattle 2011&ndash;present &mdash; Independent
+          <span class="energy-badge">Energy 4</span>
+          <span class="energy-threshold-badge">First E=4</span>
+          <span class="neighborhood-badge">New: Fremont</span>
+          <span class="genre-badge">Funk Enters Engine</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../020-whitney-menge/index.html">Degree 20&deg; (Monge)</a>
+      <a href="../018-maktub/index.html">Degree 18&deg; (Maktub)</a>
+      <a href="../019-fly-moon-royale/index.html">Degree 19&deg; (FMR)</a>
+      <a href="../017-reggie-watts/index.html">Degree 17&deg; (Watts)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The energy ceiling rises. Polyrhythmics is the first energy-4 artist
+          in twenty-two degrees &mdash; a seven-to-eight-piece instrumental
+          ensemble from Fremont whose polyrhythmic grooves put listeners in a
+          trance. Fifteen years of circular and oval shaped funk. The groove
+          is the composition. <em>The Ensemble Anchor.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Fremont sits on the north shore of the Lake Washington Ship
+          Canal, on land the Duwamish and related peoples used for seasonal camps,
+          fishing, and trade along the waterways. The Duwamish Tribe remains
+          federally unrecognized. This acknowledgment was established at degree 20
+          and applies to all releases.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY THRESHOLD
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Energy Threshold Crossing &mdash; First E=4 in Twenty-Two Degrees</h4>
+          <p>The energy-3 streak (degrees 15&ndash;20, six consecutive) ends not
+          by regression but by <strong>escalation</strong>. Polyrhythmics at E=4
+          is a new energy tier. The energy ceiling rises from 3 to 4. Distribution
+          shifts from 2:13:6:0 to <strong>2:13:6:1</strong>.</p>
+          <table>
+            <tr><th>Energy</th><th>Count</th><th>Degrees</th><th>Character</th></tr>
+            <tr><td>1</td><td>2</td><td>1, 2</td><td>Atmospheric, textural</td></tr>
+            <tr><td>2</td><td>13</td><td>0, 3&ndash;12, 14</td><td>Standard jazz energy</td></tr>
+            <tr><td>3</td><td>6</td><td>13, 15&ndash;20</td><td>Assertive, projective</td></tr>
+            <tr><td><strong>4</strong></td><td><strong>1</strong></td><td><strong>21</strong></td><td><strong>Ensemble-kinetic, dance-floor</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Groove Collective</h2>
+
+        <p>Polyrhythmics is a seven-to-eight-piece instrumental ensemble founded
+        in late 2010 in Seattle by guitarist <strong>Ben Bloom</strong> and drummer
+        <strong>Grant Schroff</strong>. The band was not conceived as a band &mdash;
+        it began as a recording project. Bloom and Schroff gathered the best available
+        players to record a 45 RPM vinyl single. The celebratory release show
+        generated such an ecstatic crowd response that the recording project became
+        a permanent live band.</p>
+
+        <p>Members: <strong>Ben Bloom</strong> (guitar), <strong>Grant Schroff</strong>
+        (drums), <strong>Nathan Spicer</strong> (keys), <strong>Jason Gray</strong>
+        (bass), <strong>Lalo Bello</strong> (percussion), <strong>Scott Morning</strong>
+        (trumpet), <strong>Elijah Clark</strong> (trombone), <strong>Art Brown</strong>
+        (sax/flute). All male &mdash; gender gap continues (3:19).</p>
+
+        <p>Schroff graduated from <strong>Cornish College of the Arts</strong>,
+        extending the Cornish pipeline to four members: Priester (7&deg; faculty),
+        Caliman (9&deg; faculty), Watts (17&deg; student), Schroff (21&deg; graduate).</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             FREMONT NEIGHBORHOOD
+             ======================================== -->
+
+        <div class="neighborhood-box">
+          <h4>Fremont &mdash; Sixth Neighborhood Thread</h4>
+          <p>Fremont is a music-making neighborhood with infrastructure for
+          recording (<strong>Studio Litho</strong>), performing (<strong>Nectar Lounge</strong>,
+          <strong>Hidden Hall</strong>, <strong>Fremont Abbey</strong>), buying
+          instruments (<strong>Dusty Strings</strong>), buying records
+          (<strong>Jive Time Records</strong>), and organizing festivals
+          (<strong>Earshot Jazz</strong> headquarters). Self-declared &ldquo;Center
+          of the Universe.&rdquo;</p>
+          <table>
+            <tr><th>Neighborhood</th><th>Degrees</th><th>Character</th></tr>
+            <tr><td>Central District</td><td>0&ndash;6, 11, 19</td><td>Founding, Jackson Street corridor</td></tr>
+            <tr><td>Capitol Hill</td><td>2, 18</td><td>Venue network, indie/neo-soul</td></tr>
+            <tr><td>U-District</td><td>13&ndash;15</td><td>UW pipeline, academic jazz</td></tr>
+            <tr><td>Rainier Valley</td><td>20</td><td>Southeast Seattle, DIY</td></tr>
+            <tr><td><strong>Fremont</strong></td><td><strong>21</strong></td><td><strong>North Seattle, arts/eclectic, recording infrastructure</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <h2>Career Timeline</h2>
+
+        <div class="timeline-entry">
+          <div class="era">2010&ndash;2011 &middot; Formation</div>
+          <p>Founded as a recording project by Ben Bloom and Grant Schroff.
+          Self-titled debut album (2011). First release show transforms the
+          studio project into a live band.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2012 &middot; Labrador Lounge</div>
+          <p>EP release establishing the instrumental, brass-forward, groove-centric identity.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2013 &middot; Libra Stripes</div>
+          <p>Second full-length. EXCLAIM! 8/10: &ldquo;among the best of the genre.&rdquo;
+          City Arts Album of the Month. First national critical attention.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2015 &middot; Octagon</div>
+          <p>Third album. National touring begins. KEXP live session (2016).
+          Psychedelic palette expands over Afrobeat foundation.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2017 &middot; Caldera</div>
+          <p>Ranked as best album. KNKX: &ldquo;impossibly tight grooves&hellip;
+          calling to mind Antibalas, the Dap-Kings, The Meters, and Fela Kuti.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2020 &middot; Man from the Future + Fondue Party</div>
+          <p>Released on <strong>Color Red Music</strong>. Most evocative and cinematic work.
+          Companion EP <em>Fondue Party</em> explores downtempo dub. KEXP 10th anniversary session.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2021 &middot; Zion &times; Amanda Gorman</div>
+          <p>KEXP mashup of Polyrhythmics&rsquo; &ldquo;Zion&rdquo; with Amanda Gorman&rsquo;s
+          inauguration poem. Instrumental music acquires explicit political resonance
+          through external curation.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2023 &middot; Filter System</div>
+          <p>Seventh album. Title describes the democratic compositional process.
+          Recorded live in studio. KEXP November session.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2025 &middot; Life from Below</div>
+          <p>Fifteenth anniversary. First vocal collaboration with <strong>Adryon de Le&oacute;n</strong>
+          on &ldquo;Smoke &amp; Mirrors.&rdquo; KNKX studio session. FunkCity: &ldquo;outstanding.&rdquo;</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <h2>Music Theory Mapping</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Polyrhythmic Layering</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Simultaneous stacking of multiple independent rhythmic patterns
+            that interact to create emergent grooves. Drums vs. percussion (3:2
+            cross-rhythm), bass vs. drums (the pocket), brass vs. rhythm section
+            (Afrobeat call-and-response), guitar/keys as rhythmic mediators.
+            The groove is not a single pattern but a <strong>field</strong> of
+            interlocking patterns.</p>
+            <div class="examples">Fela Kuti&rsquo;s 20-minute circular grooves &rarr;
+            Polyrhythmics&rsquo; &ldquo;circular and oval shaped grooves&rdquo; creating
+            trance states. The Meters&rsquo; pocket funk. Antibalas&rsquo; Afrobeat horn cycles.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> West African 3:2 cross-rhythm
+            &rarr; Fela Kuti Afrobeat &rarr; The Meters New Orleans funk &rarr;
+            Antibalas Brooklyn Afrobeat &rarr; Seattle deep funk scene &rarr; Polyrhythmics</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Groove-as-Composition (Ensemble)</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>The groove is sovereign &mdash; no vocals, no lyrics to share
+            compositional authority. Rhythm is the primary structure; melody
+            and harmony serve the groove. Third entry in the groove-as-composition
+            thread: Berry (5&deg; solo piano), Maktub (18&deg; band), Polyrhythmics
+            (21&deg; ensemble polyrhythm).</p>
+            <div class="examples">Berry&rsquo;s piano groove (solo, E=2) &rarr;
+            Maktub&rsquo;s neo-soul groove (band, E=3) &rarr; Polyrhythmics&rsquo;
+            polyrhythmic groove (ensemble, E=4). Each escalation adds musicians
+            and rhythmic layers.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Overton Berry (5&deg;)
+            piano-as-groove &rarr; Maktub (18&deg;) band-groove &rarr;
+            Polyrhythmics (21&deg;) ensemble-polyrhythm</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Democratic Filter System</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Every member writes and arranges. Individual ideas are filtered
+            through collective rehearsal until only what serves the groove survives.
+            Composition-as-polyrhythm: multiple creative voices resolving into
+            unified output. No single member controls the composition.</p>
+            <div class="examples">Contrast with Maktub (18&deg;): Watts as
+            centered creative engine vs. Polyrhythmics&rsquo; distributed authority.
+            Contrast with FMR (19&deg;): rotating membership vs. stable ensemble.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Collective jazz
+            improvisation tradition &rarr; Afrobeat ensemble composition &rarr;
+            Deep funk democratic writing &rarr; Polyrhythmics filter system</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Funk-Brass</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-first deployment of the blue note thread. Funk-brass blue note:
+            horn section bending between minor and major thirds in ensemble funk
+            context. The blue note as collective expression rather than individual
+            voice. Three horns (trumpet, trombone, sax) share the bending.</p>
+            <div class="examples">Twenty-one mechanisms documented: bass-line (0&deg;),
+            guitar (1&deg;), vocal (3&deg;), through americana-soul (20&deg;),
+            now funk-brass (21&deg;). Twenty-one deployments across twenty-two degrees.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> All twenty prior
+            deployments &rarr; brass-specific: assertive brass (15&deg; Marriott)
+            &rarr; funk-brass ensemble blue note (21&deg; Polyrhythmics)</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ACOUSTIC ELEMENT
+             ======================================== -->
+
+        <h2>Acoustic Element #22: The Release</h2>
+
+        <p>In the ADSR envelope, the release is the final phase &mdash; the controlled
+        letting-go. In Polyrhythmics&rsquo; music, the release is the <strong>groove
+        reset</strong>: the moment between sections when the old pattern releases
+        and the new one locks in. The trance deepens rather than breaks.</p>
+
+        <p>After sustain (20&deg;, Monge&rsquo;s raw vocal endurance), the release
+        is the transformation that allows the next cycle to begin. The ADSR envelope
+        that has been implicitly building across twenty-two degrees is now complete:
+        Attack (0&ndash;3), Decay (4&ndash;10), Sustain (11&ndash;20), Release (21).</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ARTIST-CITY PATTERN
+             ======================================== -->
+
+        <h2>Artist-City Pattern #22: The Ensemble Anchor</h2>
+
+        <p>A large, stable ensemble that forms from within the existing music scene,
+        gathers the best available players, develops a distinctive collective identity
+        through years of live performance, and becomes a <strong>fixture</strong>.
+        The band did not create a new scene; it crystallized the existing deep funk
+        scene into a permanent, touring, recording entity.</p>
+
+        <p>Differs from Institutional Anchor (Seales, 13&deg;): Seales anchored through
+        a university position. Polyrhythmics anchors through ensemble mass and
+        fifteen years of continuous performance. No institution appointed them;
+        they became the institution.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.9rem;border-collapse:collapse">
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600;width:25%"><a href="../018-maktub/index.html">S36-018 Maktub</a></td>
+            <td style="padding:0.5rem">Two fixed bands. Vocalist-centered (4 members, Watts creative engine, E=3) vs. rhythm-centered (7-8 members, democratic filter, E=4). The band-funk spectrum&rsquo;s two poles.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../019-fly-moon-royale/index.html">S36-019 FMR</a></td>
+            <td style="padding:0.5rem">Collective vs. ensemble. FMR rotates membership; Polyrhythmics anchors with stable lineup. Both multi-musician, same scene.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../017-reggie-watts/index.html">S36-017 Watts</a></td>
+            <td style="padding:0.5rem">Cornish pipeline. Watts (student) and Schroff (graduate) overlap in Seattle funk scene. Solo performer vs. ensemble drummer.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../005-overton-berry/index.html">S36-005 Berry</a></td>
+            <td style="padding:0.5rem">Groove-as-composition: Berry (solo piano, E=2) &rarr; Maktub (band, E=3) &rarr; Polyrhythmics (ensemble, E=4).</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../016-jeff-lorber/index.html">S36-016 Lorber</a></td>
+            <td style="padding:0.5rem">Funk in the engine. Electronic funk (Lorber, synthesizer Jazz Fusion) vs. analog ensemble funk (Polyrhythmics, Afrobeat polyrhythm).</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../020-whitney-menge/index.html">S36-020 Monge</a></td>
+            <td style="padding:0.5rem">Immediate predecessor. Solo (E=3) to large ensemble (E=4). Most extreme organizational shift in the engine. Both independent, both connected to Fremont infrastructure.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem;font-weight:600"><a href="../001-bill-frisell/index.html">S36-001 Frisell</a></td>
+            <td style="padding:0.5rem">Guitar thread: texture (1&deg;) &rarr; rhythm-section (20&deg;) &rarr; mediator (21&deg; Bloom).</td>
+          </tr>
+        </table>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield / Cornish Pipeline Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Anderson &mdash; Garfield, same era as Jones</td></tr>
+            <tr><td>Degree 7&deg;</td><td>Priester &mdash; NOT Garfield. DuSable (Chicago). <strong>Cornish faculty.</strong></td></tr>
+            <tr><td>Degree 9&deg;</td><td>Caliman &mdash; NOT Garfield. LA jazz scene. <strong>Cornish faculty.</strong></td></tr>
+            <tr><td>Degree 17&deg;</td><td>Watts &mdash; NOT Garfield. Great Falls, MT. <strong>Cornish student.</strong></td></tr>
+            <tr><td><strong>Degree 21&deg;</strong></td><td><strong>Schroff &mdash; NOT Garfield. <em>Cornish graduate.</em> Co-founder of Polyrhythmics.</strong></td></tr>
+          </table>
+          <p style="font-size:0.82rem;margin-top:0.5rem;color:#F57F17"><strong>Cornish pipeline now FOUR members:</strong>
+          faculty (7&deg;, 9&deg;) &rarr; student (17&deg;) &rarr; graduate (21&deg;). Teacher-to-student genealogy confirmed.</p>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 22</h4>
+          <ul>
+            <li><strong>FIRST E=4:</strong> Energy ceiling now 4. Distribution 2:13:6:1. Track E=4 streak.</li>
+            <li><strong>The release:</strong> Twenty-second acoustic element. ADSR envelope complete. Track new cycle.</li>
+            <li><strong>Fremont (NEW):</strong> Sixth neighborhood. Music-making infrastructure. Track return.</li>
+            <li><strong>The Ensemble Anchor:</strong> Twenty-second artist-city pattern. Track.</li>
+            <li><strong>Jazz/Funk (NEW):</strong> Fifth genre evolution stage. Funk named for first time. Track.</li>
+            <li><strong>Cornish pipeline EXTENDED:</strong> Four members (7, 9, 17, 21). Track fifth.</li>
+            <li><strong>Groove-as-composition:</strong> Three entries (5, 18, 21). Track.</li>
+            <li><strong>Gender gap continues:</strong> 3:19 (women:men). All-male ensemble. Track.</li>
+            <li><strong>Band organizational spectrum:</strong> Three entries (Maktub 18 fixed/centered, FMR 19 collective, Polyrhythmics 21 fixed/distributed). Track.</li>
+            <li><strong>Guitar thread:</strong> Three models (texture 1, rhythm-section 20, mediator 21). Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">21&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Polyrhythmics</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Jazz/Funk</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">4 (FIRST)</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2011&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Neighborhood</span><span class="stat-value">Fremont</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">Independent / Color Red</span></div>
+          <div class="stat-row"><span class="stat-label">Members</span><span class="stat-value">7&ndash;8</span></div>
+          <div class="stat-row"><span class="stat-label">Org Type</span><span class="stat-value">Fixed ensemble</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.157</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row"><span class="stat-label">2011</span><span class="stat-value">Polyrhythmics (debut)</span></div>
+          <div class="stat-row"><span class="stat-label">2012</span><span class="stat-value">Labrador Lounge (EP)</span></div>
+          <div class="stat-row"><span class="stat-label">2013</span><span class="stat-value">Libra Stripes</span></div>
+          <div class="stat-row"><span class="stat-label">2015</span><span class="stat-value">Octagon</span></div>
+          <div class="stat-row"><span class="stat-label">2017</span><span class="stat-value">Caldera</span></div>
+          <div class="stat-row"><span class="stat-label">2020</span><span class="stat-value">Man from the Future</span></div>
+          <div class="stat-row"><span class="stat-label">2020</span><span class="stat-value">Fondue Party (EP)</span></div>
+          <div class="stat-row"><span class="stat-label">2023</span><span class="stat-value">Filter System</span></div>
+          <div class="stat-row"><span class="stat-label">2025</span><span class="stat-value">Life from Below</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Context</h4>
+          <div class="stat-row"><span class="stat-label">Acoustic</span><span class="stat-value">#22: The release</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">#22: Ensemble Anchor</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">5: Funk-primary</span></div>
+          <div class="stat-row"><span class="stat-label">Cornish</span><span class="stat-value">4th member (graduate)</span></div>
+          <div class="stat-row"><span class="stat-label">Theory</span><span class="stat-value">Polyrhythmic layering</span></div>
+          <div class="stat-row"><span class="stat-label">Gender</span><span class="stat-value">3:19 (gap continues)</span></div>
+          <div class="stat-row"><span class="stat-label">Sources</span><span class="stat-value">32</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 21&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine &mdash; PNW Research Series</p>
+    <p>Research completed 2026-03-29 &middot; <a href="research.md">Full research</a> &middot; <a href="knowledge-nodes.json">Knowledge nodes</a> &middot; <a href="retrospective.md">Retrospective</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,402 @@
+{
+  "degree": 26,
+  "species": "Purple Martin",
+  "scientific_name": "Progne subis",
+  "slug": "026-purple-martin",
+  "sound_type": "rich gurgling liquid song",
+  "energy": 4,
+  "ecosystem": "open sky near water",
+  "season": "summer (neotropical migrant -- breeds PNW April-August, winters in South America)",
+  "family": "Hirundinidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; open water, harbors, marinas, lakeshores, river mouths, and nest box colonies throughout the Puget Sound lowlands -- the most aerial ecosystem in the engine."
+  },
+  "taxonomy_note": {
+    "description": "The Purple Martin is the largest North American swallow (45-60 g) and the FIRST Hirundinidae in the engine -- the 16th family. Genus Progne from Greek mythology (Procne, transformed into a swallow). PNW subspecies P. s. arboricola historically nested in natural tree cavities but is now almost entirely dependent on human-provided nest boxes due to competition from introduced European Starlings and House Sparrows. The swallow family is the first in the engine defined primarily by its mode of locomotion -- flight.",
+    "current_family": "Hirundinidae",
+    "new_family": true,
+    "family_count_in_engine": 16,
+    "hirundinidae_count_in_engine": 1,
+    "name_etymology": "Progne = from Greek mythology (Procne, who was transformed into a swallow in Ovid's Metamorphoses). Subis = from Pliny the Elder, describing a bird that broke eagle eggs. The etymology is mythological and uncertain.",
+    "pnw_subspecies": "P. s. arboricola -- the Pacific subspecies. Historically nested in natural cavities, now almost entirely dependent on human-provided nest boxes. Recovered from <200 breeding pairs (1970s) to 800-1,000+ pairs (2020s) through coordinated nest box programs."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,000-8,000",
+    "peak_energy_band_hz": "2,000-6,000",
+    "song_duration_s": "3-6 per song bout",
+    "note_rate_per_second": "8-15 (fastest in engine -- approaches perceptual fusion threshold in rapid gurgling passages)",
+    "note_types": "Three primary: (1) Gurgling notes -- low rapid FM sweeps, 5-10 ms each, sinusoidal contour producing 'liquid' quality. (2) Chirping notes -- higher-pitched sharp notes for contrast/punctuation. (3) Rich warbling notes -- mid-frequency with harmonic content.",
+    "phrase_structure": "NO discrete phrase boundaries. Continuous flowing stream. Notes grade into each other. The song is a STREAM, not a series of packets. Contrast with robin's clipped discrete phrase groups.",
+    "timbre": "Liquid, rich, gurgling. Soft onsets and offsets -- notes grade into each other without sharp transients. Rapid sinusoidal FM modulation produces a water-like quality that is structurally (not just metaphorically) similar to flowing water acoustics.",
+    "amplitude": "Moderate to loud. Energy 4. Sings from exposed perches near nest sites and in flight. Projects across open sky.",
+    "dawn_song": "Pre-dawn colony chorus, 30-45 minutes before civil twilight. Multiple males singing simultaneously create a polyphonic gurgling wall of sound. The engine's first ensemble vocal display.",
+    "context": "Sung primarily at or near nesting colony. Given from perches (nest box rooftops, wires, dead branches) and in flight. Colonial context creates aggregate acoustic display qualitatively different from solo territorial songs.",
+    "key_property": "THE LIQUID GURGLE -- the 27th acoustic element. Continuous liquid vocalization produced by rapid sinusoidal FM modulation with smooth transitions. Sound that flows rather than strikes. The first genuinely new sound texture since the hoarse warble at degree 24. Notes merge into a textured flow -- where does one note end and the next begin? In the fastest passages, it doesn't."
+  },
+  "aerial_insectivory": {
+    "description": "The engine's first obligate aerial insectivore. Catches ALL food on the wing in continuous sustained flight. Does not return to perch between captures (unlike flycatcher sallying). Remains airborne 30-60 minutes without landing during foraging bouts.",
+    "foraging_modes": [
+      "Hawking -- continuous flight through insect-rich air, mouth open, catching prey opportunistically",
+      "Pursuing -- spotting individual prey items and changing course to intercept"
+    ],
+    "prey": "Flying insects of moderate to large size: dragonflies, damselflies, beetles, moths, flies, wasps, flying ants, winged termites. Large body allows larger prey than smaller swallows.",
+    "foraging_altitude": "Variable: 15 m to 150+ m. Adjusts with insect distribution (thermals carry insects higher on warm days).",
+    "weather_dependence": "CRITICAL. Cold rainy weather suppresses insect flight and can cause severe food stress, nestling death, adult torpor. No fallback foraging strategy -- the robin can switch to berries, the martin must wait.",
+    "anatomy": {
+      "wings": "Long, pointed, swept-back. High aspect ratio for efficient sustained flight.",
+      "tail": "Moderately forked. Differential drag control for agile turning.",
+      "gape": "Enormous relative to body size. Bill short and triangular, mouth opening acts as aerial net. Rictal bristles may help channel prey.",
+      "legs": "Short and weak. Adapted for gripping (perching, clinging to nest cavity entrance) but not terrestrial locomotion.",
+      "eyes": "Large. Forward-biased binocular field for tracking prey during high-speed pursuit. Detection range 5-15 m."
+    },
+    "mosquito_myth": "The claim that Purple Martins eat '2,000 mosquitoes per day' is NOT supported. Dietary studies (Johnston 1967, Kale 1968, Walsh 1978) show mosquitoes <3% of diet. Martins prefer larger prey and forage above mosquito flight zones. The claim originated from 1960s nest house marketing. The human-martin relationship is aesthetic, not transactional."
+  },
+  "nest_box_conservation": {
+    "description": "The Purple Martin in the PNW is almost entirely dependent on human-provided nest boxes. Populations collapsed in the 20th century due to snag removal and introduced competitor species. Coordinated nest box programs have recovered the population but the species remains management-dependent.",
+    "collapse_causes": [
+      "Snag removal from managed forests, urban areas, and shorelines eliminated natural nesting cavities",
+      "European Starling competition -- larger, more aggressive, usurps cavities and kills martin eggs/nestlings",
+      "House Sparrow competition -- similarly aggressive, kills eggs and nestlings",
+      "Natural cavity competition from native species (flicker, other woodpeckers, flying squirrels)"
+    ],
+    "recovery_strategy": [
+      "Entrance holes sized to admit martins (~5.7 cm) but exclude starlings",
+      "Over-water placement reduces terrestrial predator access",
+      "Colony decoy protocols: recorded vocalizations + decoy figures attract prospecting birds",
+      "Ongoing monitoring: checking for starling intrusion, seasonal cleaning, structure maintenance"
+    ],
+    "population_trajectory": {
+      "1970s": "<200 breeding pairs in western Washington",
+      "1990": "Systematic nest box installation begins (WDFW + partners)",
+      "2000": "Approximately 400-500 breeding pairs",
+      "2010": "Continued expansion, >70% nest box occupancy at established sites",
+      "2020s": "Estimated 800-1,000+ breeding pairs"
+    },
+    "key_insight": "Conservation as ACTIVE management. The Spotted Owl (degree 4) is conserved by protecting existing habitat (passive). The Purple Martin is conserved by creating new habitat (active). Remove the nest boxes and the population collapses. The martin's presence in the PNW soundscape is maintained, not natural."
+  },
+  "colonial_nesting": {
+    "description": "The Purple Martin is an obligate colonial nester -- requires proximity of other nesting pairs. PNW colonies range from 2-3 to 50+ pairs on managed nest box structures in harbors and marinas.",
+    "colony_sites": "Fort Worden, Steigerwald Lake, Port of Kalama, San Juan Islands, Tacoma waterfront, and other managed sites.",
+    "functions": [
+      "Information sharing -- returning foragers indicate productive foraging directions",
+      "Predator detection -- distributed alarm network, collective mobbing",
+      "Nest site aggregation -- good sites independently attract multiple pairs",
+      "Reproductive synchronization -- social cues accelerate breeding timing, enable predator swamping"
+    ],
+    "dawn_song_acoustics": "Colony dawn song is a collective event: multiple males singing simultaneously 30-45 min before civil twilight. Individual songs (1-8 kHz) overlap to create a broad-band wall of sound. Perceptually denser, richer, and more immersive than individual song. The difference between a solo instrument and an orchestra."
+  },
+  "swallow_trio": {
+    "description": "The Purple Martin begins a three-degree Hirundinidae cluster (degrees 26-28): Purple Martin, Violet-green Swallow, Tree Swallow. Three aerial insectivores from one family with different sizes, nest strategies, and acoustic signatures.",
+    "status": "BEGINS at degree 26",
+    "members": [
+      {
+        "degree": 26,
+        "species": "Purple Martin",
+        "mass_g": "45-60",
+        "nest_strategy": "Colonial nest box",
+        "role": "Patriarch -- largest, most colonial, most conservation-dependent"
+      },
+      {
+        "degree": 27,
+        "species": "Violet-green Swallow",
+        "mass_g": "14",
+        "nest_strategy": "Cavity (scattered/solitary)",
+        "role": "Cliff dweller"
+      },
+      {
+        "degree": 28,
+        "species": "Tree Swallow",
+        "mass_g": "17-25",
+        "nest_strategy": "Cavity (loose colony)",
+        "role": "Wetland specialist"
+      }
+    ],
+    "comparison_to_convergence_trio": "The convergence trio (23-24-25) was three species from two families converging on one sound (robin-like warble). The swallow trio (26-27-28) is three species from one family diverging into three niches. Convergence resolved; divergence begins.",
+    "comparison_to_warbler_quintet": "The warbler quintet (14-17, 20) showed within-family variation in habitat. The swallow trio shows within-family variation in size, coloniality, and nest strategy while sharing the same habitat (sky). Warblers varied by where; swallows vary by how."
+  },
+  "plumage": {
+    "males": "Entirely dark, iridescent purple-black. Structural coloration -- light interference in feather barbule microstructure, not pigment. Color shifts between deep blue, violet, and near-black with viewing angle. In shade: black. In sunlight: blazing purple.",
+    "females": "Dark gray-brown above, pale gray below with faint breast scaling. Pronounced sexual dimorphism.",
+    "significance": "First STRUCTURAL iridescence in the engine. Previous species used pigment-based coloration (robin's orange, tanager's red-yellow, grosbeak's orange). The martin's color is in the light hitting the feather, not in the feather itself."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Liquid vocalization -- the gurgling song (rapid sinusoidal FM sweeps with smooth transitions produce a water-like acoustic quality; sound that flows rather than strikes; the 27th acoustic element)",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/liquid-vocalization/",
+      "examples": [
+        "Purple Martin: rapid FM sweeps (5-10 ms, sinusoidal) with soft onsets/offsets. Notes grade into each other. The song IS a stream.",
+        "Flowing water: broadband noise with rapid continuous spectral variation, no abrupt transitions. The martin's gurgles replicate this spectral pattern biologically.",
+        "In music: legato passages vs. staccato passages. The robin (degree 25) is staccato -- clean, clipped, bounded. The martin is legato -- connected, flowing, unbounded.",
+        "Synthesizer: portamento (continuous pitch glide between notes) vs. discrete note triggering. The martin's FM sweeps are natural portamento."
+      ],
+      "music_theory_parallel": "The liquid gurgle introduces a fundamentally different relationship between notes. In every previous vocal species, individual notes or phrases are identifiable discrete units separated by silence or sharp transitions. The Purple Martin's gurgling passages dissolve the boundary between notes. Sound flows continuously, with pitch and amplitude varying but never stopping. This is the birdsong equivalent of legato -- connected articulation where one note blends into the next without interruption. The robin was staccato. The martin is legato. The contrast in a single degree step (25 to 26) is the engine's sharpest articulation change."
+    },
+    {
+      "concept": "Aerial insectivory -- obligate continuous flight foraging (the first species defined by its relationship to the air column, not to a surface; a three-dimensional habitat)",
+      "level": "foundational",
+      "department": "ecology/foraging",
+      "college_path": ".college/ecology/foraging/aerial-insectivory/",
+      "examples": [
+        "Purple Martin: catches all food in sustained flight (30-60 min without landing). The sky is the habitat.",
+        "Pacific-slope Flycatcher (degree 6): sallies from a perch -- short flights, returns to perch. A surface-based aerial forager.",
+        "American Robin (degree 25): ground forager -- hops on lawn, visual prey detection, surface-bound.",
+        "In music: the difference between studio musicians (surface-based, fixed position) and street performers who roam. Or: busking vs. seated orchestra. The martin performs while moving through space."
+      ],
+      "music_theory_parallel": "The Purple Martin is the engine's first species whose primary habitat is a VOLUME rather than a SURFACE. Every previous species occupies a surface: the ground, a branch, a canopy layer, a marsh edge. The martin occupies the air column -- a three-dimensional foraging space. This shifts the engine's spatial model from 2D (surfaces and edges) to 3D (volumes and trajectories). In acoustic terms, the martin's song projects into open space without the vegetation filtering that shapes every previous species' acoustic environment. No canopy attenuation, no ground reflection, no understory scatter. The signal propagates through free air. This is the acoustic equivalent of an anechoic chamber -- the cleanest propagation path in the engine."
+    },
+    {
+      "concept": "Conservation as active management (nest box dependency transforms the Purple Martin from an absent species to a managed presence; passive vs. active conservation models)",
+      "level": "intermediate",
+      "department": "ecology/conservation",
+      "college_path": ".college/ecology/conservation/active-management/",
+      "examples": [
+        "Purple Martin: <200 pairs (1970s) to 800+ pairs (2020s) through coordinated nest box programs. Remove the boxes, lose the species.",
+        "Spotted Owl (degree 4): passive conservation -- protect old-growth habitat and the species persists. Do not build. Preserve.",
+        "American Robin (degree 25): no conservation needed -- the most abundant land bird, thriving in human-modified habitat without intervention.",
+        "In music: a venue that must be actively maintained (sound system, acoustics, booking) vs. a street corner that is always available. The martin needs the maintained venue."
+      ],
+      "music_theory_parallel": "The Purple Martin's conservation story introduces the concept of ACTIVE MAINTENANCE as a prerequisite for the sound's existence. The robin's caroling requires no human intervention -- the robin will sing whether or not anyone helps. The owl's hooting requires habitat preservation -- leave the old growth alone. The martin's gurgling requires active construction and ongoing maintenance of nest boxes. Three conservation models: no intervention needed (robin), passive protection (owl), active creation (martin). The martin's voice in the PNW soundscape is a managed sound -- it exists because humans decided it should and did the work. The parallel to music infrastructure is direct: some venues exist naturally, some need preservation, some must be built and maintained."
+    },
+    {
+      "concept": "Colonial acoustics -- the ensemble voice (obligate colonial nesting produces polyphonic aggregate vocal displays qualitatively different from individual song; solo to orchestra in one degree)",
+      "level": "intermediate",
+      "department": "music-theory/ensemble",
+      "college_path": ".college/music/theory/ensemble/colonial-acoustics/",
+      "examples": [
+        "Purple Martin colony dawn song: multiple males singing simultaneously, overlapping liquid songs creating a broad-band wall of sound. More than the sum of parts.",
+        "Bushtit flock calls (degree 10): many birds calling simultaneously, but each call is minimal (1-bit 'seep'). The martin's individual songs are already complex before aggregation.",
+        "In orchestral music: a single cello line vs. the full string section playing the same passage. The aggregate fills the spectrum differently. The colony is the string section.",
+        "In gospel choir: individual voice → section → full choir. The Purple Martin colony dawn song is the full choir moment."
+      ],
+      "music_theory_parallel": "The Purple Martin introduces the concept of AGGREGATE ACOUSTIC DISPLAY -- multiple complex individual signals overlapping to produce an emergent collective sound. The bushtit flock (degree 10) aggregated minimal signals (1-bit presence calls). The martin colony aggregates complex signals (rich gurgling songs). The perceptual result is qualitatively different from any individual song: denser, broader, more immersive, with spectral coverage that no single bird achieves. This is the acoustic principle of the chorus -- not unison (where voices duplicate) but polyphony (where voices fill different spectral and temporal spaces). The engine has been solo for 26 degrees. The Purple Martin opens the ensemble."
+    },
+    {
+      "concept": "The swallow trio begins -- degrees 26-28 (three consecutive Hirundinidae showing within-family divergence, contrasting the convergence trio's between-family convergence)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/swallow-trio/",
+      "examples": [
+        "Degrees 26-28: Purple Martin (large, colonial, liquid gurgle), Violet-green Swallow (small, solitary, rapid twitter), Tree Swallow (medium, semi-colonial, liquid twitter). One family, three expressions.",
+        "Convergence trio (23-24-25): three species from two families converging on one sound. The opposite pattern.",
+        "Warbler quintet (14-17, 20): five species from one family varying by habitat. The swallows vary by size and sociality while sharing habitat.",
+        "In music: a theme and variations where the theme is the swallow body plan and each variation explores a different parameter (size, coloniality, acoustic texture)"
+      ],
+      "music_theory_parallel": "The swallow trio inverts the convergence trio's structural principle. Degrees 23-25 asked: how do different lineages arrive at the same sound? Degrees 26-28 ask: how does one lineage produce different sounds? The convergence trio was about CONVERGENCE -- independent paths to a shared acoustic attractor. The swallow trio is about DIVERGENCE -- a shared ancestry producing different ecological and acoustic solutions. The engine alternates between convergent and divergent family patterns: first showing that different families can sound alike (robin-like warbles), then showing that the same family can sound different (swallow trio). This convergence/divergence alternation is the engine's deepest structural rhythm at the multi-degree scale."
+    },
+    {
+      "concept": "Energy sextet -- six consecutive E=4 degrees (21-26) demonstrating sustained high energy across percussion, warble, caroling, and liquid gurgle, with acoustic character rotating while dynamic level holds",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-sextet/",
+      "examples": [
+        "Degrees 21-26: hammer (metronomic vocal), drum (broadband percussion), smooth warble (grosbeak), hoarse warble (tanager), caroling (robin), liquid gurgle (martin). Six textures at sustained E=4.",
+        "In orchestral music: a six-movement fortissimo suite -- strings, brass, winds, percussion, choir, electronics. Same volume, six colors.",
+        "A DJ set maintaining peak energy across six genre transitions: house, techno, drum & bass, garage, breaks, ambient bass. The intensity holds while everything else changes.",
+        "Compare the initial E=2 run (degrees 0-7): eight degrees at low energy. The E=4 sextet is the high-energy counterpart, nearing the same duration."
+      ],
+      "music_theory_parallel": "Six consecutive E=4 degrees is now the engine's longest sustained energy plateau, formally a sextet. The six members span the engine's full range of acoustic event types: metronomic vocalization (flicker voice), broadband mechanical percussion (flicker drum), smooth tonal warble (grosbeak), hoarse rough warble (tanager), clean cyclic caroling (robin), and continuous liquid gurgling (martin). Six fundamentally different sounds at the same energy level. This is orchestration at maximum diversity within a dynamic constraint. The engine has proven that E=4 can sustain six degrees without repetition -- each degree introduces a new sound type while holding the energy constant. The question becomes: when does the plateau break?"
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "THE CONTRAST. Robin: clean, clipped, cyclic, terrestrial, lawn habitat. Martin: liquid, continuous, flowing, aerial, open sky habitat. Maximum acoustic and ecological contrast in a single degree step. The convergence trio resolves at 25; the swallow trio begins at 26."
+    },
+    {
+      "project": "SPS-006",
+      "title": "Pacific-slope Flycatcher (Degree 6)",
+      "connection": "AERIAL INSECTIVORY COMPARISON. Two modes of catching flying insects. Flycatcher sallies -- short perch-based flights. Martin hawks -- continuous sustained flight. Short-range interceptor vs. long-range cruiser. Both insectivores, fundamentally different strategies."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Spotted Owl (Degree 4)",
+      "connection": "CAVITY NESTING AND CONSERVATION CONTRAST. Both secondary cavity nesters. Owl: natural cavities in old growth, passive conservation (protect habitat). Martin: human-built nest boxes, active conservation (create habitat). Two species, two conservation philosophies."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Voice (Degree 21)",
+      "connection": "CAVITY ECONOMY AND ENERGY SEXTET. The flicker excavates cavities that martins might use (if starlings don't get there first). Also: energy sextet continues -- six consecutive E=4 degrees (21-26), the longest sustained energy plateau in the engine."
+    },
+    {
+      "project": "SPS-010",
+      "title": "Bushtit (Degree 10)",
+      "connection": "COLONIAL COMPARISON. Bushtit: social foraging flocks in motion (mobile sociality). Martin: stationary breeding colonies (fixed-site sociality). Two models of avian social organization. Also: bushtit aggregated minimal signals (1-bit seep); martin aggregates complex signals (rich gurgling songs)."
+    },
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "WIDEBAND COMPARISON. Siskin: 2-10 kHz wideband ascending buzz. Martin: 1-8 kHz wideband liquid gurgle. Two broadband species spanning wide frequency ranges -- one buzzy and ascending, one liquid and tumbling."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Purple Martin documented in AVI as PNW conservation success story. Nest box dependency. Colonial nesting. Aerial insectivore. Recovery from <200 to 800+ breeding pairs through coordinated management programs."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Aerial food web: aquatic insect emergence from productive water bodies supports aerial insectivore populations. Water quality degradation reduces insect emergence and martin food base. The connection between water health and air-column species."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Shaina Shepherd (Soul, E=4, Seattle, self-released). Both liquid in quality. Both floating above. Both sustained by alternative platforms (nest boxes / independent release). Sixth consecutive E=4."
+    }
+  ],
+  "degree_arc": {
+    "position": "The liquid gurgle -- the sky opens. First Hirundinidae (16th family). First aerial insectivore. The swallow trio begins. Nest box conservation success story. Colonial nesting introduces ensemble acoustics. Sixth consecutive E=4. 27th acoustic element. 25th unique species.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic spiral (7) -> ultrasonic threshold (8) -> variation (9) -> minimum signal (10) -> trill/tremolo (11) -> sawtooth sweep (12) -> ostinato (13) -> repetition-resolution (14) -> accelerando (15) -> crescendo (16) -> the hook (17) -> ascending spiral (18) -> descending spiral (19) -> sustain/the release (20) -> the hammer (21) -> resonant percussion (22) -> the groove reset (23) -> the hoarse warble (24) -> the caroling (25) -> the liquid gurgle (26)",
+    "key_insight": "Degree 26 breaks the engine open. The Purple Martin moves the engine from terrestrial to aerial, from solo to ensemble, from discrete phrases to continuous flow, from the convergence trio to the swallow trio, from surface habitats to a three-dimensional volume. The first new family since Cardinalidae at degree 23. The first genuinely new sound texture since the hoarse warble at degree 24. The nest box conservation story adds the concept of managed presence -- a species that exists in the PNW soundscape because humans built its housing and continue to maintain it. After the archetype bird (the robin) at degree 25, the engine needed maximum contrast. The Purple Martin delivers: liquid where the robin was clipped, aerial where the robin was terrestrial, colonial where the robin was territorial, migratory where the robin was resident. The sky opens.",
+    "acoustic_element_27": "THE LIQUID GURGLE -- rapid sinusoidal FM sweeps with smooth transitions, producing continuous flowing vocalization. 8-15 notes/sec in the fastest passages, approaching perceptual fusion. 1-8 kHz wideband. Three note types interleaved: low gurgling FM sweeps, high chirps, mid-frequency rich warbles. No discrete phrase boundaries -- the song is a stream. The 27th element: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, release, the hammer, resonant percussion, the groove reset, the hoarse warble, the caroling, THE LIQUID GURGLE.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide)",
+      "degree_7": "Harmonic series navigation (mathematical melody)",
+      "degree_8": "Ultra-high ascending series (audiometric boundary crossing)",
+      "degree_9": "Variation on combinatorial syntax (the cover version)",
+      "degree_10": "Minimum viable signal (1-bit presence, swarm cohesion)",
+      "degree_11": "Tremolo / trill (rapid repetition at fusion threshold)",
+      "degree_12": "Ascending sawtooth sweep (buzzy waveform ascending)",
+      "degree_13": "Ostinato (two-note repeated phrase below fusion threshold)",
+      "degree_14": "Ternary / AAB (repetition with contrasting resolution)",
+      "degree_15": "Accelerando (tempo-varying chattering series)",
+      "degree_16": "Crescendo (dynamic-varying sweet series)",
+      "degree_17": "Hook (rhythmic two-note cell, memorability through repetition)",
+      "degree_18": "Ascending spiral (sequential phrases each higher)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each lower, bilateral syrinx)",
+      "degree_20": "Trill with parametric decay / ADSR release (triple descent, fade-out)",
+      "degree_21": "The hammer (sustained discrete metronomic repetition at constant pitch, constant volume, energy 4)",
+      "degree_22": "Resonant percussion (broadband substrate-dependent mechanical percussion above fusion threshold -- the first non-vocal sound)",
+      "degree_23": "The groove reset (rich robin-like warble of rapidly alternating slurred phrases -- return to tonal melody after percussion, convergent with American Robin, both sexes sing)",
+      "degree_24": "The hoarse warble (robin-like architecture with spectral roughness -- tonal melody through grainy medium, timbral distortion as species identity, convergence trio middle member)",
+      "degree_25": "The caroling (cyclic melodic repetition of clear bright slurred whistles -- the archetype. Convergence trio resolved. 8-20 phrase types cycled predictably. The most recognized birdsong in North America)",
+      "degree_26": "The liquid gurgle (rapid sinusoidal FM sweeps with smooth transitions -- continuous flowing vocalization without discrete phrase boundaries. 8-15 notes/sec. 1-8 kHz wideband. Three interleaved note types. Sound that flows rather than strikes. The first aerial species)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz)",
+      "degree_8": "Ultra-high (6-10 kHz)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz)",
+      "degree_21": "Mid-range to upper-mid (1.5-4.0 kHz -- tonal, pitched, harmonic content)",
+      "degree_22": "BROADBAND (100 Hz to 8+ kHz -- no fundamental pitch, substrate-dependent peak energy 500 Hz to 4 kHz)",
+      "degree_23": "Mid-range (1.5-4.5 kHz -- warm, rich, robin-like. Peak energy 2.0-3.5 kHz)",
+      "degree_24": "Mid-range (1.5-4.5 kHz -- hoarse, rough, robin-like. Peak energy 2.0-3.5 kHz)",
+      "degree_25": "Mid-range (2.0-4.0 kHz -- bright, clean, clipped. Peak energy 2.0-3.5 kHz)",
+      "degree_26": "Wideband (1.0-8.0 kHz -- liquid, gurgling, continuous. Peak energy 2.0-6.0 kHz. Widest vocal frequency range since Pine Siskin)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel)",
+      "degree_9": "Referential threat information (conserved content, varied delivery)",
+      "degree_10": "Pure presence / flock cohesion (1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep",
+      "degree_13": "Territory + pair bond through persistent repetition",
+      "degree_14": "Territory + mate attraction through narrative",
+      "degree_15": "Territory + mate attraction through urgency",
+      "degree_16": "Territory + mate attraction through brightness",
+      "degree_17": "Territory + mate attraction through the hook",
+      "degree_18": "Territory + mate attraction through ascending spiral",
+      "degree_19": "Territory + mate attraction through descending spiral",
+      "degree_20": "Territory + mate attraction through fading trill (evaporation)",
+      "degree_21": "Territory + mate attraction through the hammer (sustained metronomic vocal force at energy 4)",
+      "degree_22": "Territory + mate attraction + HABITAT QUALITY through resonant percussion (the substrate encodes territory quality)",
+      "degree_23": "Territory + mate attraction + PAIR COORDINATION through both-sex warble (vocal symmetry as reproductive strategy)",
+      "degree_24": "Territory + mate attraction + FORAGING QUALITY through hoarse warble + honest plumage signal (dual-channel honest signaling)",
+      "degree_25": "Territory + mate attraction + SEASONAL PRESENCE through cyclic caroling (year-round residency, dawn chorus leadership, the most recognized territorial declaration in North America)",
+      "degree_26": "Colony cohesion + mate attraction + NEST SITE ADVERTISEMENT through liquid gurgling (colonial display, ensemble acoustics, managed habitat, the first sound that requires a built infrastructure to exist)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood)",
+      "degree_19": "Lowland riparian (deciduous thicket, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside)",
+      "degree_21": "Open woodland (scattered trees with broken canopy, grassy openings, mosaic)",
+      "degree_22": "Forest snag (dead standing wood -- the instrument IS the habitat)",
+      "degree_23": "Mixed forest (any mixture of deciduous and conifer trees -- the broadest ecosystem category, the generalist venue)",
+      "degree_24": "Conifer forest (Douglas fir-hemlock-cedar closed canopy -- return to the cathedral, needle attenuation as acoustic filter)",
+      "degree_25": "Lawn and woodland (managed grassland adjacent to trees -- the most human-adjacent ecosystem in the engine, suburban yards, parks, gardens)",
+      "degree_26": "Open sky near water (three-dimensional air column above harbors, lakes, rivers -- the most aerial ecosystem in the engine, no vegetation structure, foraging volume not surface)"
+    }
+  },
+  "conservation": {
+    "population_estimate": "Estimated 7 million breeding individuals continent-wide (Partners in Flight 2020). PNW subspecies (P. s. arboricola) is a small fraction -- 800-1,000+ breeding pairs in western Washington as of 2020s.",
+    "trend": "Continental population stable to slightly declining (BBS data show modest long-term decline in some regions). PNW population INCREASING due to active nest box management -- one of few populations with a documented positive trend driven by conservation intervention.",
+    "threats": [
+      "European Starling competition for nest cavities (the primary threat -- starlings are larger, more aggressive, and usurp cavities)",
+      "House Sparrow competition (kills eggs and nestlings in nest boxes)",
+      "Snag removal (eliminates potential natural nesting cavities -- though nest box programs now provide the majority of PNW nest sites)",
+      "Extended cold/wet weather during breeding season (suppresses insect flight, causes nestling starvation and adult torpor)",
+      "Insecticide use (reduces aerial insect prey base)",
+      "Climate change (altered insect emergence timing may cause phenological mismatch with martin breeding)"
+    ],
+    "conservation_status": "IUCN Least Concern (species level). PNW subspecies P. s. arboricola is a state species of concern (Washington). Recovery dependent on continued nest box management. Not self-sustaining without human intervention in the PNW."
+  },
+  "part_a_parallel": {
+    "artist": "Shaina Shepherd",
+    "degree": 26,
+    "genre": "Soul",
+    "location": "Seattle",
+    "era": "Self-released",
+    "release_type": "Self-released",
+    "shared_principle": "Both liquid in quality -- the melismatic soul vocal and the gurgling swallow song share a flowing, connected, legato character. Both float above their foundation (the rhythm section / the water surface). Both are sustained by alternative platforms (independent release / nest boxes). Sixth consecutive E=4.",
+    "resonance_points": [
+      "Liquid sound: Shaina Shepherd's melismatic soul vocals flow between notes with legato phrasing. The Purple Martin's gurgling song flows between notes with smooth FM transitions. Both produce sound that moves, not strikes.",
+      "Floating above: Shaina Shepherd's soul vocals float above the rhythm section, stretching and bending over the groove. The Purple Martin floats above the water, catching food on the wing. Both are defined by what they do in the air above the foundation.",
+      "Alternative platforms: Shaina Shepherd is self-released, building independently. The Purple Martin depends on community-built nest boxes, not natural infrastructure. Both succeed through alternative support structures.",
+      "Sustained energy: sixth consecutive E=4. Both sustain power through consistent presence. The energy plateau is now the longest in the engine's history."
+    ]
+  }
+}

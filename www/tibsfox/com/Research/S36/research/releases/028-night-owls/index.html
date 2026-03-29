@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 28&deg; &mdash; Night Owls &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #3949AB);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .soul-rb-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FCE4EC;
+      color: #880E4F;
+      border: 1px solid #F48FB1;
+      margin-left: 0.3rem;
+    }
+
+    .resident-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #7986CB;
+      margin-left: 0.3rem;
+    }
+
+    .owl-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #263238;
+      color: #ECEFF1;
+      border: 1px solid #546E7A;
+      margin-left: 0.3rem;
+    }
+
+    .invisible-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF8E1;
+      color: #F57F17;
+      border: 1px solid #FFD54F;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #3949AB;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #1A237E;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #1A237E;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .continuity-box {
+      background: #263238;
+      color: #ECEFF1;
+      border: 2px solid #546E7A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .continuity-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #B0BEC5;
+      font-family: system-ui, sans-serif;
+    }
+    .continuity-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .continuity-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #37474F;
+      color: #ECEFF1;
+    }
+    .continuity-box td:first-child { font-weight: 600; width: 30%; color: #B0BEC5; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .invisible-box {
+      background: #EFEBE9;
+      border: 2px solid #795548;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .invisible-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #4E342E;
+      font-family: system-ui, sans-serif;
+    }
+    .invisible-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .resident-box {
+      background: #E8EAF6;
+      border: 2px solid #3949AB;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .resident-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .resident-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">28&deg;</div>
+      <div>
+        <h1>Night Owls</h1>
+        <div class="subtitle">Soul/R&amp;B &middot; Seattle&rsquo;s Supper-Club Soul Ensemble &mdash; 150+ Gigs/Year, 2010s&ndash;Present
+          <span class="energy-badge">Energy 4</span>
+          <span class="soul-rb-badge">Soul/R&amp;B</span>
+          <span class="resident-badge">The Resident Band</span>
+          <span class="owl-badge">Owl Resonance</span>
+          <span class="invisible-badge">No Recordings</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../027-the-dynamics/index.html">Degree 27&deg; (Dynamics)</a>
+      <a href="../026-shaina-shepherd/index.html">Degree 26&deg; (Shepherd)</a>
+      <a href="../023-allen-stone/index.html">Degree 23&deg; (Stone)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          They play every Friday night. Every Saturday night. At restaurants,
+          wineries, hotel lobbies, farmers markets. 150 gigs a year, 60 venues,
+          no albums, no press, no archive. They are the sound of Seattle&rsquo;s
+          live-music economy at ground level &mdash; the bass note that keeps
+          the system vibrating when the headliners are between tours. Their
+          bassist played with <strong>Overton Berry</strong>. Their guitarist&rsquo;s
+          father won a Latin Grammy Lifetime Achievement Award. They cover
+          <strong>Allen Stone</strong> and <strong>Ray Charles</strong> in the
+          same set. They are the <em>resident band</em> &mdash; the nocturnal
+          presence that holds territory the way the Spotted Owl holds old-growth
+          forest. <em>The liquid twitter.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Night Owls perform at venues spanning the full Puget Sound
+          corridor &mdash; from Everett to SeaTac, from Issaquah to Pioneer Square
+          &mdash; all on Duwamish land. The Duwamish Tribe remains federally
+          unrecognized. This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             CONTINUITY CHAIN
+             ======================================== -->
+
+        <div class="continuity-box">
+          <h4>Continuity Agent &mdash; The Berry-Davies-Night Owls Chain</h4>
+          <table>
+            <tr><td>Overton Berry</td><td>Degree 5 (&ldquo;The Persistence&rdquo;). Seattle jazz legend. Jazz Hall of Fame 2012. Mentored Larry Coryell. Died October 7, 2020, age 84.</td></tr>
+            <tr><td>Jeff Davies</td><td>Berry&rsquo;s regular bassist (2010s&ndash;2020). Night Owls bassist (2015&ndash;present). Same hands, same bass, same harmonic vocabulary &mdash; connecting the jazz zone to the soul/R&amp;B zone.</td></tr>
+            <tr><td>The Chain</td><td>Berry mentored Coryell (1960s) &rarr; Coryell played in The Dynamics (degree 27) &rarr; Davies played with Berry (2010s) &rarr; Davies plays in Night Owls (degree 28). <strong>Four nodes, three edges, sixty years.</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY ARC
+             ======================================== -->
+
+        <h2>The Ensemble</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Nikki Schilling &mdash; Vocals, Keys</div>
+          <p>Band leader. Studied jazz and classical performance at <strong>Edmonds
+          Community College</strong>. Award-winning soloist with <strong>Soundsation
+          Jazz Choir</strong>. Draws from Ella Fitzgerald, Anita O&rsquo;Day, Norah
+          Jones, Adele. Performs <strong>150+ gigs per year</strong> at 60+ Northwest
+          venues including Tula&rsquo;s Jazz Club, 13 Coins, and dozens of wineries,
+          bistros, and festival stages.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Jeff Davies &mdash; Upright/Electric Bass, Vocals</div>
+          <p>Veteran Seattle bassist. Regular performing partner of <strong>Overton Berry</strong>
+          (degree 5) until Berry&rsquo;s death in 2020. Runs <strong>Jeff Davies Music</strong>
+          (booking/contracting). Fluent in jazz, blues, R&amp;B, country, rock, standards.
+          Also performs with The Abiders, The Allnight Allstars, and Swinging Good Time
+          Easy Street Band. The <strong>continuity agent</strong> who connects the engine&rsquo;s
+          jazz zone to its soul/R&amp;B zone.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Andre Thomas &mdash; Drums, Vocals, Percussion</div>
+          <p>Described as <strong>&ldquo;one of the Northwest&rsquo;s best drummers.&rdquo;</strong>
+          Soul and R&amp;B specialist. Limited biographical documentation available &mdash;
+          representative of the invisibility of working sidemen in the supper-club circuit.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Christian Fattoruso &mdash; Guitar, Vocals</div>
+          <p>Playing since 1986. Son of <strong>Hugo Fattoruso</strong> (Montevideo, Uruguay,
+          b. 1943) &mdash; Los Shakers, Opa (jazz-fusion + Afro-Uruguayan candombe),
+          Milton Nascimento collaborator (Grammy-winning 1997 album), <strong>Latin Grammy
+          Lifetime Achievement Award 2019</strong>. Inherited &ldquo;the gifts of melody,
+          harmony and rhythm&rdquo; from his father. First <strong>Latin American musical DNA</strong>
+          documented in the engine.</p>
+        </div>
+
+        <!-- ========================================
+             INVISIBLE BAND
+             ======================================== -->
+
+        <div class="invisible-box">
+          <h4>The Invisible Majority &mdash; No Recordings, No Archive</h4>
+          <p>Night Owls have <strong>no commercial studio albums, no KEXP sessions,
+          no Bandcamp page, no Spotify artist profile, no press coverage</strong> in
+          The Stranger or Seattle Times. Their output is <strong>ephemeral</strong>:
+          experienced only by the diners, wedding guests, farmers-market shoppers,
+          and hotel lobby passersby who are present when the band plays.</p>
+          <p style="margin-top:0.8rem">This is the engine&rsquo;s first documentation of the
+          <strong>dark matter of the music economy</strong> &mdash; the working bands
+          who fill the calendars while the headlining acts fill the archives. For every
+          KEXP session, for every Bandcamp release, there are thousands of performances
+          at restaurants, receptions, and lobbies that exist only in the moment.
+          Night Owls represent this invisible majority.</p>
+        </div>
+
+        <!-- ========================================
+             RESIDENT BAND PATTERN
+             ======================================== -->
+
+        <div class="resident-box">
+          <h4>The Resident Band &mdash; 29th Artist-City Pattern</h4>
+          <p>An ensemble that defines its relationship to a city through
+          <strong>continuous occupation of the live-performance infrastructure</strong>.
+          Night Owls are residents in the ecological sense &mdash; organisms that
+          do not migrate, that occupy a stable niche, that are always present when
+          you look for them. Without Night Owls and bands like them, the restaurants
+          have no live music, the wineries have no entertainment, the farmers markets
+          have no soundtrack. They are the <strong>fundamental frequency</strong> that
+          keeps the system vibrating.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             PERFORMANCE CIRCUIT
+             ======================================== -->
+
+        <h2>Performance Circuit</h2>
+
+        <div class="timeline-entry">
+          <div class="era">13 Coins Restaurant</div>
+          <p>SeaTac, Bellevue, Pioneer Square. Seattle institution since <strong>1967</strong>.
+          Late-night jazz supper club. Documented performances from 2016.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Tula&rsquo;s Jazz Club</div>
+          <p>Belltown (2214 2nd Ave). Seattle&rsquo;s premier jazz room from 1993.
+          Between The Crocodile and Belltown&rsquo;s dive bars.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Aurora Borealis</div>
+          <p>Shoreline. Live music venue on <strong>Aurora Avenue</strong> &mdash;
+          the same highway where The Dynamics played Parker&rsquo;s at degree 27
+          in 1964. Same road, sixty years apart.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">60+ Venues</div>
+          <p>Pogacha (Issaquah), Maxwell Hotel, Bhu-Ping Thai (Everett),
+          Everett Farmers Market, wineries, bistros, festivals, weddings,
+          private events &mdash; spanning the full Puget Sound corridor.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ENERGY STREAK
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Eighth Consecutive E=4 &mdash; Distribution 2:13:6:8</h4>
+          <p>Longest sustained energy streak in the engine extends to eight degrees.
+          E=4 is now the zone default for Soul/R&amp;B.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th></tr>
+            <tr><td>21</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td></tr>
+            <tr><td>22</td><td>Foxy Apollo</td><td>Collective-kinetic</td></tr>
+            <tr><td>23</td><td>Allen Stone</td><td>Vocal-kinetic</td></tr>
+            <tr><td>24</td><td>Ron Artis II</td><td>Dynastic-kinetic</td></tr>
+            <tr><td>25</td><td>Black Stax</td><td>Congregational-kinetic</td></tr>
+            <tr><td>26</td><td>Shaina Shepherd</td><td>Metamorphic-kinetic</td></tr>
+            <tr><td>27</td><td>The Dynamics</td><td>Incubator-kinetic</td></tr>
+            <tr><td><strong>28</strong></td><td><strong>Night Owls</strong></td><td><strong>Ambient-kinetic</strong></td></tr>
+          </table>
+          <p style="margin-top:0.8rem"><strong>Ambient-kinetic:</strong> energy through
+          <em>persistence</em> rather than intensity. 150+ gigs per year generates
+          cumulative energy output equal to headlining acts &mdash; distributed across
+          hundreds of smaller events rather than concentrated in peak moments.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Resident Band Infrastructure</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>A band whose significance is purely infrastructural &mdash; they fill
+            the venue calendars that keep the city&rsquo;s live-music economy alive.
+            150+ gigs/year, 60+ venues, no recordings. The dark matter of the music
+            economy: the mass that holds the system together but no telescope can see.</p>
+            <div class="examples">Night Owls: 13 Coins, Tula&rsquo;s, Aurora Borealis, 60+ venues. Zero albums.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Supper-club tradition (13 Coins since 1967), working-musician economy (performance fees, not royalties), Berry lineage via Davies</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Continuity Agent</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>A musician whose career physically connects two points in the engine&rsquo;s
+            rotation. Jeff Davies played with <strong>Overton Berry</strong> (degree 5)
+            and plays with <strong>Night Owls</strong> (degree 28). Same bass, same hands,
+            same harmonic vocabulary &mdash; bridging the jazz and soul/R&amp;B zones.</p>
+            <div class="examples">Berry &rarr; Coryell &rarr; Dynamics (27) AND Berry &rarr; Davies &rarr; Night Owls (28). Four nodes, three edges, sixty years.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Berry (degree 5), The Dynamics (degree 27) via Coryell mentorship, Jeff Davies Music infrastructure</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Hemispheric Music DNA</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>The first non-North-American musical lineage in the engine. Christian
+            Fattoruso carries <strong>Hugo Fattoruso&rsquo;s</strong> Afro-Uruguayan
+            candombe, Brazilian MPB, and Latin American rock into Seattle&rsquo;s
+            soul/R&amp;B supper-club circuit. Latin Grammy Lifetime Achievement 2019.</p>
+            <div class="examples">Hugo: Los Shakers, Opa, Milton Nascimento (Grammy 1997). Christian: &ldquo;the gifts of melody, harmony and rhythm.&rdquo;</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Hugo Fattoruso (Uruguay, b. 1943), Afro-Uruguayan candombe, Brazilian MPB, Seattle&rsquo;s immigrant musician ecosystem</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Supper-Club Vocal Bend</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-eighth deployment. The blue note calibrated to dining-room acoustics
+            &mdash; persuasive rather than commanding, inviting rather than demanding.
+            The bend says &ldquo;join me if you want&rdquo; rather than &ldquo;listen to me now.&rdquo;
+            First blue note in a service environment.</p>
+            <div class="examples">Schilling bending soul vocals at 13 Coins: audible without being intrusive, soulful without stopping dinner.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> 27 prior deployments, supper-club performance tradition (13 Coins 1967+, Tula&rsquo;s 1993+)</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Degree 5 &mdash; Overton Berry</div>
+          <p><strong>Direct personnel link.</strong> Jeff Davies was Berry&rsquo;s regular
+          bassist. Berry was inducted into Seattle Jazz Hall of Fame 2012. Died October 7,
+          2020. Davies carries Berry&rsquo;s harmonic vocabulary into Night Owls&rsquo; sets.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Degree 23 &mdash; Allen Stone</div>
+          <p><strong>Repertoire overlap.</strong> Night Owls include Allen Stone in their
+          setlist alongside classic soul artists. Same era, same genre zone, same city.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Degree 27 &mdash; The Dynamics</div>
+          <p><strong>Structural inversion.</strong> The Dynamics were a conduit that dissolved;
+          Night Owls are a resident that persists. Both play on <strong>Aurora Avenue</strong>
+          venues &mdash; Parker&rsquo;s (1964) and Aurora Borealis (2010s). Same highway,
+          sixty years apart. Berry mentored Coryell (Dynamics); Davies played with Berry
+          (Night Owls).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Degree 0 &mdash; Quincy Jones</div>
+          <p><strong>Central District lineage completion.</strong> Jones (global export) &rarr;
+          Berry (local persistence) &rarr; Davies (continuity agent) &rarr; Night Owls
+          (resident band). The CD DNA flows from Jackson Street to the supper-club circuit.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 29</h4>
+          <ul>
+            <li><strong>EIGHTH E=4</strong> (21-28). Distribution 2:13:6:8. Ambient-kinetic subtype new. Zone default locked.</li>
+            <li><strong>Liquid twitter</strong> = 29th acoustic element. Liquid dyad complete (gurgle + twitter). Track element 30.</li>
+            <li><strong>Soul/R&amp;B Stage 11</strong> &mdash; FIRST CONSECUTIVE GENRE REPEAT. Track if continues.</li>
+            <li><strong>The Resident Band</strong> = 29th artist-city pattern. Continuous infrastructure occupation.</li>
+            <li><strong>Continuity agent</strong> = Jeff Davies bridges degree 5 (Berry) to degree 28. Living cross-reference.</li>
+            <li><strong>Hemispheric DNA</strong> = Hugo Fattoruso lineage. First non-North-American musical lineage in the engine.</li>
+            <li><strong>Owl resonance</strong> = Night Owls (28) echoes Spotted Owl (degree 4 species). First artist-species name resonance.</li>
+            <li><strong>Aurora Avenue</strong> thread = Parker&rsquo;s (27) and Aurora Borealis (28) on SR-99.</li>
+            <li><strong>No recordings</strong> = first engine degree with no commercial discography. Dark matter documented.</li>
+            <li><strong>Gender gap</strong> narrowed to 6:23 (~21%). Nikki Schilling = female band leader.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">28 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Version</span>
+            <span class="stat-value">v1.49.164</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Soul/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">4 (ambient-kinetic)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2010s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle (60+ venues)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-released</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums</span>
+            <span class="stat-value">None documented</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gigs/Year</span>
+            <span class="stat-value">150+</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Acoustic Progression</h4>
+          <div class="stat-row">
+            <span class="stat-label">Element #29</span>
+            <span class="stat-value">The liquid twitter</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pair</span>
+            <span class="stat-value">Liquid dyad (27-28)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Phase</span>
+            <span class="stat-value">Crystallized song</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">#29</span>
+            <span class="stat-value">The Resident Band</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Key Link</span>
+            <span class="stat-value">Berry (deg 5)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Agent</span>
+            <span class="stat-value">Jeff Davies</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Streak</h4>
+          <div class="stat-row">
+            <span class="stat-label">Consecutive E=4</span>
+            <span class="stat-value">8 (21&ndash;28)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">2:13:6:8</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Subtype</span>
+            <span class="stat-value">Ambient-kinetic</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Genre Evolution</h4>
+          <div class="stat-row">
+            <span class="stat-label">Stage</span>
+            <span class="stat-value">11</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Soul/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Note</span>
+            <span class="stat-value">1st consecutive repeat</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Research Depth</h4>
+          <div class="stat-row">
+            <span class="stat-label">Words</span>
+            <span class="stat-value">~4,800</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Theory Nodes</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sources</span>
+            <span class="stat-value">19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">6 degrees</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 Engine &middot; Degree 28&deg; &middot; Night Owls &middot; v1.49.164</p>
+    <p><a href="../../index.html">S36 Home</a> &middot;
+       <a href="../../../index.html">Research Series</a> &middot;
+       <a href="../027-the-dynamics/index.html">&larr; Degree 27&deg;</a></p>
+  </footer>
+</body>
+</html>

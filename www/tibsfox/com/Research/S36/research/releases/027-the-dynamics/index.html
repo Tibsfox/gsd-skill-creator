@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 27&deg; &mdash; The Dynamics &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4E342E, #795548);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .soul-rb-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FCE4EC;
+      color: #880E4F;
+      border: 1px solid #F48FB1;
+      margin-left: 0.3rem;
+    }
+
+    .temporal-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #7986CB;
+      margin-left: 0.3rem;
+    }
+
+    .conduit-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF8E1;
+      color: #F57F17;
+      border: 1px solid #FFD54F;
+      margin-left: 0.3rem;
+    }
+
+    .fusion-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #263238;
+      color: #ECEFF1;
+      border: 1px solid #546E7A;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #795548;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4E342E;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #4E342E;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .fusion-thread {
+      background: #263238;
+      color: #ECEFF1;
+      border: 2px solid #546E7A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .fusion-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #B0BEC5;
+      font-family: system-ui, sans-serif;
+    }
+    .fusion-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .fusion-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #37474F;
+      color: #ECEFF1;
+    }
+    .fusion-thread td:first-child { font-weight: 600; width: 30%; color: #B0BEC5; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .bridge-box {
+      background: #EFEBE9;
+      border: 2px solid #795548;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .bridge-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #4E342E;
+      font-family: system-ui, sans-serif;
+    }
+    .bridge-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .bridge-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .bridge-box td, .bridge-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #D7CCC8;
+    }
+    .bridge-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #4E342E;
+    }
+
+    .conduit-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .conduit-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .conduit-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">27&deg;</div>
+      <div>
+        <h1>The Dynamics</h1>
+        <div class="subtitle">Soul/R&amp;B &middot; Seattle&rsquo;s Premier 1960s Teen-R&amp;B Band &mdash; Central District Lineage 1959&ndash;1968
+          <span class="energy-badge">Energy 4</span>
+          <span class="soul-rb-badge">Soul/R&amp;B Root</span>
+          <span class="temporal-badge">1st Temporal Regression</span>
+          <span class="conduit-badge">The Conduit</span>
+          <span class="fusion-badge">Proto-Fusion Lab</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../026-shaina-shepherd/index.html">Degree 26&deg; (Shepherd)</a>
+      <a href="../025-black-stax/index.html">Degree 25&deg; (Black Stax)</a>
+      <a href="../018-maktub/index.html">Degree 18&deg; (Maktub)</a>
+      <a href="../016-jeff-lorber/index.html">Degree 16&deg; (Lorber)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The room is full before anyone knows what the room contains.
+          The Dynamics are Seattle&rsquo;s premier 1960s teen-R&amp;B band &mdash;
+          a revolving-membership ensemble whose guitarist becomes the godfather
+          of jazz-rock fusion, whose trumpet player joins The Electric Flag,
+          whose drummer records with Jimi Hendrix, and whose vocalist ranks
+          with Bobby Bland. They cover <strong>Dave Lewis</strong> from the
+          Central District and carry his R&amp;B into the suburban teen-dance
+          circuit. They are the <em>conduit</em> &mdash; energy flowing from
+          source to destination, dissolving when the current is spent.
+          <em>The liquid gurgle.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. The Dynamics performed across the Puget Sound corridor &mdash;
+          from the Spanish Castle (Highway 99) to Parker&rsquo;s (Aurora Avenue)
+          to Central District-connected venues &mdash; all on Duwamish land.
+          The Duwamish Tribe remains federally unrecognized. This acknowledgment
+          was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             PROTO-FUSION LABORATORY
+             ======================================== -->
+
+        <div class="fusion-thread">
+          <h4>Proto-Fusion Laboratory &mdash; Where the Members Went</h4>
+          <table>
+            <tr><td>Larry Coryell</td><td>Guitar (1961&ndash;64). &ldquo;Godfather of jazz-rock fusion.&rdquo; Chico Hamilton, Eleventh House, trio with McLaughlin + Di Meola. 40+ albums. d. 2017.</td></tr>
+            <tr><td>Marcus Doubleday</td><td>Trumpet. The Electric Flag (Mike Bloomfield). Blues-rock with horns. d. 2004.</td></tr>
+            <tr><td>Ron Woods</td><td>Drums. Buddy Miles Express. Pacific Gas &amp; Electric. Sessions with <strong>Jimi Hendrix</strong> at Electric Lady Studios. Hendrix&rsquo;s schoolmate.</td></tr>
+            <tr><td>Jimmy Hanna</td><td>Vocals (1961&ndash;66). Own 11-piece blues big-band. Studio owner + music instructor, San Antonio TX.</td></tr>
+            <tr><td>Harry Wilson</td><td>Guitar (1965+). The Casuals &rarr; Springfield Rifle &rarr; Springfield Flute.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY ARC
+             ======================================== -->
+
+        <h2>The Teen-R&amp;B Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1959 &mdash; Formation</div>
+          <p>Formed around vocalist <strong>Tom Larson</strong> with <strong>Terry Afdem</strong>
+          (keys), <strong>Jeff Afdem</strong> (sax), <strong>Pete Borg</strong> (bass),
+          <strong>Wally Griffin</strong> (guitar), <strong>Tracy Townsend</strong> (drums).
+          Debut single <strong>&ldquo;Baby&rdquo; / &ldquo;Aces Up&rdquo;</strong>
+          (Penguin #1006, July 1959). Picked up nationally by Guaranteed Records NY.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1961 &mdash; The Reformation</div>
+          <p><strong>Jimmy Hanna</strong> (vocals), <strong>Larry Coryell</strong> (guitar,
+          from Yakima&rsquo;s Checkers), <strong>Marcus Doubleday</strong> (trumpet),
+          and <strong>Ron Woods</strong> (drums) join. This lineup records the band&rsquo;s
+          most celebrated material. Hanna&rsquo;s vocals: &ldquo;rich, smooth &mdash;
+          almost Bobby Bland-like.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1962 &mdash; Dave Lewis Cover</div>
+          <p>Cover of <strong>Dave Lewis&rsquo; &ldquo;J.A.J.&rdquo;</strong>
+          (Seafair-Bolo #45-730). Lewis was the <strong>Central District&rsquo;s
+          R&amp;B king</strong> &mdash; house band leader at <strong>Birdland</strong>
+          (21st &amp; E Madison). The cover received national distribution.
+          <em>The genre bridge: CD Black R&amp;B enters the teen-dance circuit.</em></p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1964 &mdash; The Album</div>
+          <p><strong><em>The Dynamics with Jimmy Hanna</em></strong> (Seafair-Bolo
+          BLP-8001). Live remote recording at <strong>Parker&rsquo;s</strong>
+          (17001 Seattle-Everett Highway). Engineers: Ray Van Patten, C.A. Noland.
+          Singles &ldquo;Busybody&rdquo; and <strong>&ldquo;Leavin&rsquo; Here&rdquo;</strong>
+          (Eddie Holland/HDH cover) distributed nationally by <strong>Atlantic Records</strong>.
+          &ldquo;Ranks just behind &lsquo;Louie Louie&rsquo; as a Northwest classic.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1965&ndash;66 &mdash; Dispersal</div>
+          <p>Coryell departs for New York (September 1965) &mdash; &ldquo;the rest is
+          jazz history.&rdquo; Hanna leaves to front 11-piece blues band.
+          Final Dynamics single: <strong>&ldquo;I&rsquo;ll Be Standing There&rdquo;</strong>
+          (Jerden #800, April 1966). Band revamps as <strong>Springfield Rifle</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2000 &mdash; EMP Reunion</div>
+          <p>Reunited July 28, 2000, for the <strong>Experience Music Project
+          Grand Opening</strong> (now MoPOP) at Seattle Center. &ldquo;Northwest
+          Legends&rdquo; concert alongside The Wailers and The Viceroys.
+          Coryell, Hanna, Woods, Wilson, Borg, and Afdem brothers all present.</p>
+        </div>
+
+        <!-- ========================================
+             CENTRAL DISTRICT GENRE BRIDGE
+             ======================================== -->
+
+        <div class="bridge-box">
+          <h4>Central District Genre Bridge</h4>
+          <p>Two parallel circuits. Same songs. Different audiences.</p>
+          <table>
+            <tr><th>Circuit</th><th>Venues</th><th>Audience</th></tr>
+            <tr><td>Central District clubs</td><td>Birdland, Black and Tan, Golden Crown</td><td>Predominantly Black, adult</td></tr>
+            <tr><td>Teen-dance circuit</td><td>Spanish Castle, Parker&rsquo;s, school dances</td><td>Predominantly white, all-ages</td></tr>
+          </table>
+          <p style="margin-top:0.8rem">The Dynamics covered <strong>Dave Lewis</strong>
+          compositions and performed Central District R&amp;B repertoire for the
+          suburban teen-dance audience. The musical DNA traveled from Birdland
+          to Parker&rsquo;s &mdash; same notes, different rooms. The genre bridge
+          is the structural mechanism by which Black R&amp;B crossed Seattle&rsquo;s
+          racial divide in the 1960s.</p>
+        </div>
+
+        <!-- ========================================
+             CONDUIT PATTERN
+             ======================================== -->
+
+        <div class="conduit-box">
+          <h4>The Conduit &mdash; 28th Artist-City Pattern</h4>
+          <p>A band that functions as a <strong>transmission channel</strong>
+          between musical communities that would not otherwise connect. The
+          Dynamics conducted energy from the Central District&rsquo;s R&amp;B
+          tradition into the teen-dance circuit, and from that circuit into
+          the national music industry via members who dispersed to New York,
+          Los Angeles, and San Francisco. The band itself dissolved; the energy
+          it transmitted persists. A conduit does not generate its own power
+          &mdash; it transmits power from source to destination.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             DISCOGRAPHY
+             ======================================== -->
+
+        <h2>Discography</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1959</div>
+          <p><strong>&ldquo;Baby&rdquo; / &ldquo;Aces Up&rdquo;</strong> &mdash;
+          Penguin #1006 (July). National: Guaranteed #201 (September).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1960</div>
+          <p><strong>&ldquo;Onion Salad&rdquo; / &ldquo;Lonesome Llama&rdquo;</strong>
+          &mdash; Seafair #100 (June 25).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1962</div>
+          <p><strong>&ldquo;J.A.J.&rdquo; / &ldquo;At The Mardi Gras&rdquo;</strong>
+          &mdash; Seafair-Bolo #45-730 (April 20). Dave Lewis cover.
+          National distribution.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1964</div>
+          <p><strong><em>The Dynamics with Jimmy Hanna</em></strong> &mdash;
+          LP, Seafair-Bolo BLP-8001 (September 28). Live at Parker&rsquo;s.
+          Singles: &ldquo;Busybody,&rdquo; &ldquo;Leavin&rsquo; Here.&rdquo;
+          National via Atlantic Records.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1966</div>
+          <p><strong>&ldquo;I&rsquo;ll Be Standing There&rdquo; / &ldquo;All She Said&rdquo;</strong>
+          &mdash; Jerden #800 (April). Final single under Dynamics name.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1983</div>
+          <p><strong><em>Memory Bank of Early N.W. Sounds</em></strong> &mdash;
+          LP, Seafair-Bolo BSLP 8003. Archival live tracks 1962&ndash;65.
+          Mixed by <strong>Kearney Barton</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2009</div>
+          <p><strong><em>The Dynamics with Jimmy Hanna 1961&ndash;1965</em></strong>
+          &mdash; CD reissue, Seafair-Bolo BSCD 8009-2.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ENERGY STREAK
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Seventh Consecutive E=4 &mdash; Distribution 2:13:6:7</h4>
+          <p>Longest sustained energy streak in the engine extends to seven degrees.
+          E=4 now leads all other levels.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th></tr>
+            <tr><td>21</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td></tr>
+            <tr><td>22</td><td>Foxy Apollo</td><td>Collective-kinetic</td></tr>
+            <tr><td>23</td><td>Allen Stone</td><td>Vocal-kinetic</td></tr>
+            <tr><td>24</td><td>Ron Artis II</td><td>Dynastic-kinetic</td></tr>
+            <tr><td>25</td><td>Black Stax</td><td>Congregational-kinetic</td></tr>
+            <tr><td>26</td><td>Shaina Shepherd</td><td>Metamorphic-kinetic</td></tr>
+            <tr><td><strong>27</strong></td><td><strong>The Dynamics</strong></td><td><strong>Incubator-kinetic</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Proto-Fusion Laboratory</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>A band containing the pre-differentiated raw material of jazz-rock
+            fusion, blues-rock, psychedelic funk, and R&amp;B. Significance lies
+            in what members became after dispersal: Coryell &rarr; fusion,
+            Doubleday &rarr; Electric Flag, Woods &rarr; Hendrix sessions.</p>
+            <div class="examples">Parker&rsquo;s 1964: one room, four future genres, no labels yet.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Central District R&amp;B, KJR teen-dance circuit, UW (Coryell), Seafair-Bolo Records</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Central District Genre Bridge</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>The mechanism by which Black R&amp;B from the CD&rsquo;s club ecosystem
+            was transmitted into the white suburban teen-dance circuit. Dave Lewis
+            covers as the transmission medium. Same songs, different venues,
+            different audiences, different commercial outcomes.</p>
+            <div class="examples">Dave Lewis &ldquo;J.A.J.&rdquo; (Birdland, CD) &rarr; The Dynamics (Parker&rsquo;s, Aurora Ave). National distribution.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Jackson Street jazz scene, Birdland (1941+), Dave Lewis Combo, KJR/Pat O&rsquo;Day</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Talent Dispersal as Legacy</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>A band whose historical significance is measured by former
+            members&rsquo; later careers. <strong>Divergence point</strong>,
+            not convergence. The inverse of the Transmuter pattern (degree 26)
+            where multiple genres flow into one voice. Here, one band feeds
+            multiple genre streams.</p>
+            <div class="examples">Dynamics &rarr; fusion (Coryell) + blues-rock (Doubleday) + funk (Woods) + blues (Hanna) + pop-rock (Wilson)</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Central District R&amp;B source pool, UW (institutional draw), teen-dance circuit (steady work)</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Brass-Section Smear</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-seventh deployment. Horn section bends <strong>as a unit</strong>:
+            trumpet and saxophone sliding in approximate parallel, producing a
+            &ldquo;smear&rdquo; wider than any single-instrument bend. The sound
+            of a live teen-R&amp;B band at full volume in a roadhouse.</p>
+            <div class="examples">Afdem (sax) + Doubleday (trumpet) bending together at Parker&rsquo;s. Live-remote imprecision.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> All 26 prior blue notes; assertive brass (15); sax voice (9); teen-R&amp;B horn tradition</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ACOUSTIC ELEMENT
+             ======================================== -->
+
+        <h2>Acoustic Element #28: The Liquid Gurgle</h2>
+
+        <p>The sound of <strong>too many talented people in one room</strong>,
+        all playing at full capacity, before anyone has learned to leave space.
+        Coryell&rsquo;s guitar overdrives into Afdem&rsquo;s saxophone;
+        Doubleday&rsquo;s trumpet bleeds into Hanna&rsquo;s vocal; the rhythm
+        section pushes tempos the melody can&rsquo;t quite keep up with.
+        The <strong>liquid gurgle</strong> is unsorted potential &mdash; the
+        acoustic state before individual genius separates into distinct streams.
+        The Dynamics at Parker&rsquo;s in 1964 <em>is</em> the gurgle: fusion,
+        blues-rock, funk, and R&amp;B all fermenting in one room, not yet
+        crystallized, more exciting for the imprecision.</p>
+
+        <p>The gurgle follows the caroling (26) because the outward movement
+        has reached <strong>acoustic saturation</strong>: the song has been
+        carried outward and arrived where multiple streams converge and overflow.
+        It is pre-harmonic &mdash; raw material still finding its shape.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             PAT O'DAY INFRASTRUCTURE
+             ======================================== -->
+
+        <h2>The Teen-Dance Circuit</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Pat O&rsquo;Day / KJR Radio</div>
+          <p>DJ and promoter who built Seattle&rsquo;s teen-dance infrastructure.
+          KJR commanded <strong>37% audience share</strong> &mdash; unprecedented
+          dominance. The teen-dance circuit (Spanish Castle, Parker&rsquo;s,
+          school dances) was the parallel economy to the Central District&rsquo;s
+          adult club scene.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Spanish Castle Ballroom</div>
+          <p>Highway 99, midway between Seattle and Tacoma. The region&rsquo;s
+          premier teen-dance venue. The Dynamics shared bills with
+          <strong>The Beach Boys, Roy Orbison, Bobby Freeman, Jan &amp; Dean,
+          The Astronauts</strong>. Also performed alongside NW bands:
+          The Wailers, The Sonics, The Frantics, The Casuals.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Parker&rsquo;s</div>
+          <p>17001 Seattle-Everett Highway (Aurora Avenue North). Site of the
+          1964 live album recording. The definitive document of 1960s NW teen-R&amp;B.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <div class="carry-forward-box">
+          <h4>Engine Connections</h4>
+          <ul>
+            <li><strong>Degree 0 (Quincy Jones):</strong> Central District musical lineage.
+            Both products of the CD&rsquo;s musical ecosystem &mdash; Jones through
+            Garfield/Jackson Street jazz, The Dynamics through Dave Lewis covers.</li>
+            <li><strong>Degree 16 (Jeff Lorber):</strong> Talent Incubator parallel.
+            Both developed musicians who achieved prominence elsewhere.
+            Lorber through teaching; The Dynamics through peer-level incubation.</li>
+            <li><strong>Degree 18 (Maktub):</strong> The Workshop. Ensemble significance
+            IS the ensemble. Inverse of Dynamics where significance IS the dispersal.</li>
+            <li><strong>Degree 26 (Shaina Shepherd):</strong> Genre bridge vs. genre bridge.
+            Shepherd bridges genres through one voice (convergence); The Dynamics
+            bridge genres through dispersing members (divergence).</li>
+            <li><strong>Jimi Hendrix (external):</strong> Ron Woods = schoolmate + later
+            sessions at Electric Lady Studios. Hendrix&rsquo;s early bands gigged at
+            Birdland 1959&ndash;60, same years The Dynamics formed.</li>
+          </ul>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 28</h4>
+          <ul>
+            <li><strong>SEVENTH E=4</strong> (2:13:6:7). Incubator-kinetic subtype. Zone-relative energy confirmed.</li>
+            <li><strong>The liquid gurgle</strong> &mdash; 28th acoustic element. Unsorted potential before crystallization.</li>
+            <li><strong>The Conduit</strong> &mdash; 28th artist-city pattern. Band as transmission channel.</li>
+            <li><strong>Soul/R&amp;B</strong> &mdash; Stage 10. R&amp;B modifier returns. Historical root compound.</li>
+            <li><strong>First temporal regression</strong> &mdash; 2010s to 1960s. Engine now oscillates in time.</li>
+            <li><strong>CD oscillation accelerates</strong> &mdash; three consecutive degrees (25&ndash;26&ndash;27).</li>
+            <li><strong>Proto-fusion laboratory</strong> &mdash; Coryell, Doubleday, Woods. Dispersal as legacy.</li>
+            <li><strong>Hendrix connection</strong> &mdash; Ron Woods. First direct link in the engine.</li>
+            <li><strong>Dave Lewis / Birdland</strong> &mdash; Central District R&amp;B source material documented.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Degree 27 &mdash; Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Artist</span>
+            <span class="stat-value">The Dynamics</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Soul/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">4 (incubator)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1960&ndash;1970</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District*</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label (CSV)</span>
+            <span class="stat-value">Calla</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Primary Labels</span>
+            <span class="stat-value">Seafair-Bolo, Jerden</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Active</span>
+            <span class="stat-value">1959&ndash;1968</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Version</span>
+            <span class="stat-value">v1.49.163</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Members</h4>
+          <div class="stat-row">
+            <span class="stat-label">Vocals</span>
+            <span class="stat-value">Jimmy Hanna</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Guitar</span>
+            <span class="stat-value">Larry Coryell</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Trumpet</span>
+            <span class="stat-value">Marcus Doubleday</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Drums</span>
+            <span class="stat-value">Ron Woods</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Saxophone</span>
+            <span class="stat-value">Jeff Afdem</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Keyboards</span>
+            <span class="stat-value">Terry Afdem</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#28: Liquid Gurgle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City Pattern</span>
+            <span class="stat-value">#28: The Conduit</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#27: Brass Smear</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">10: Soul/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4 Streak</span>
+            <span class="stat-value">7 (21&ndash;27)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Streak</span>
+            <span class="stat-value">3 (25&ndash;27)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>* Neighborhood Note</h4>
+          <p style="font-size:0.82rem;color:#757575;margin:0">
+            CSV designates Central District. Homebase was 7757 30th Ave SW
+            (West Seattle). &ldquo;Central District&rdquo; reflects the musical
+            lineage (Dave Lewis, Birdland, R&amp;B tradition), not residential
+            address.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 &mdash; Sound of Puget Sound &middot; Degree 27 of 360
+    &middot; v1.49.163 &middot; <a href="../../index.html">Back to S36</a></p>
+  </footer>
+</body>
+</html>
