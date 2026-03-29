@@ -1,0 +1,249 @@
+{
+  "degree": 19,
+  "artist": "Fly Moon Royale",
+  "slug": "019-fly-moon-royale",
+  "genre": "Jazz/Soul (neo-soul, R&B, live band)",
+  "energy": 3,
+  "era": "2012-present",
+  "location": {
+    "origin": "Seattle, Central District -- neo-soul/jazz collective formed ~2012; the first collective (rotating musicians) in the S36 engine; Central District returns after seven consecutive absences (12-18)",
+    "formative": "Central District music community; Capitol Hill venue circuit (Neumos, The Crocodile); KEXP sessions; PNW festival circuit; the new generation of CD music -- neo-soul/R&B replacing straight jazz but the geographic thread persists through gentrification",
+    "career": "Seattle-based, active 2012-present; Central District rooted; performs across CD and Capitol Hill venue networks; independent releases via Bandcamp and streaming; PNW festival circuit"
+  },
+  "born": "Collective formed Seattle ~2012",
+  "died": null,
+  "labels": ["Independent"],
+  "members": [
+    {"name": "Parker", "role": "Vocals, bandleader", "note": "Central creative authority of the collective; neo-soul vocalist; the consistent identity around which rotating musicians orbit"},
+    {"name": "Rotating musicians", "role": "Various (keys, bass, drums, horns, guitar)", "note": "Third organizational type: collective with rotating cast from Seattle jazz and soul scenes; different ensemble at each performance"}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Syncopation as primary rhythmic device (off-beat emphasis defining neo-soul and R&B -- displacement of accents from strong beats to weak beats and subdivisions; the groove created by where the beat ISN'T; D'Angelo/Questlove micro-displacement tradition; collective syncopation requiring shared understanding of displacement vocabulary among rotating musicians)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/syncopation-neo-soul-off-beat-emphasis.md",
+      "examples": [
+        "Fly Moon Royale -- syncopated neo-soul groove: kick drum on the 'and' of 4, bass anticipating chord changes by a sixteenth, vocal phrases starting early or lagging behind harmonic rhythm; the rhythmic haze where every attack is microscopically displaced from the grid",
+        "D'Angelo -- Voodoo (2000): the national landmark for neo-soul syncopation; Questlove and Pino Palladino playing simple grooves with micro-displacements that no quantized drum machine can replicate; FMR's regional expression of the same rhythmic principle",
+        "Maktub (degree 18) -- collective groove syncopation: funk-inflected pocket vs. FMR's R&B-inflected pocket; the funk pocket hits hard, the neo-soul pocket breathes (comparison)",
+        "Overton Berry (degree 5) -- groove-based piano: left-hand rhythmic patterns anticipating chord changes; Berry's groove syncopation in jazz tradition vs. FMR's in neo-soul tradition (comparison)",
+        "Ernestine Anderson (degree 3) -- vocal phrasing floating across bar lines; melodic syncopation vs. FMR's rhythmic-and-melodic vocal syncopation (comparison)"
+      ],
+      "description": "Syncopation -- the displacement of rhythmic accents from strong beats to weak beats and subdivisions -- is the defining rhythmic device of neo-soul and R&B, and the primary technique at degree 19. In technical terms, accents shift from beats 1 and 3 to beats 2 and 4, or to the subdivisions between beats ('and', 'e', 'a' in sixteenth-note subdivision). Neo-soul takes displacement further: every attack is microscopically displaced from where rigid notation would place it, creating a rhythmic haze that IS the groove. D'Angelo's Voodoo (2000) is the national template. Fly Moon Royale operates in this tradition, but the collective model adds complexity: rotating musicians must share an understanding of where the beat ISN'T. The syncopation vocabulary functions as an audition criterion -- if you can't feel the displacement, you can't play in this collective. Nineteenth chromaticism deployment: soul chromatic -- chromatic grace notes in bass lines and vocal melisma serving the R&B feel rather than jazz melodic development.",
+      "genealogy": {
+        "ancestors": ["Groove-based piano syncopation -- Berry (degree 5); left-hand patterns anticipating chord changes in jazz context", "Neo-soul groove rhythm -- Maktub (degree 18); funk-inflected collective pocket", "Vocal syncopation -- Anderson (degree 3); phrase shapes crossing rhythmic boundaries", "National neo-soul syncopation -- D'Angelo, Erykah Badu, Questlove; the micro-displacement tradition"],
+        "relationship": "Syncopation as primary technique descends from the groove tradition documented across the engine (Berry degree 5 groove-based piano, Maktub degree 18 collective groove) but foregrounds the off-beat displacement that defines neo-soul/R&B as distinct from jazz and funk. The collective model (rotating musicians) requires syncopation to be a shared vocabulary rather than a developed chemistry, making it more convention-dependent and less idiosyncratic than fixed-band syncopation (Maktub). Extends the neo-soul thread from degree 18 with a rhythmic focus."
+      }
+    },
+    {
+      "concept": "Collective as organizational type (rotating musicians around central creative authority -- third type after solo artist and fixed band; consistent aesthetic with variable personnel; the collective's identity is the bandleader's aesthetic vision, not the irreplaceable chemistry of specific individuals; lingua franca improvisation)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/composition/collective-organizational-type-rotating-ensemble.md",
+      "examples": [
+        "Fly Moon Royale -- Parker (vocals/bandleader) as gravitational center; rotating jazz and soul musicians from Seattle scenes; different ensemble at each performance; consistent neo-soul aesthetic with variable timbral colors and improvisation instincts",
+        "Maktub (degree 18) -- fixed band: four permanent members whose collective chemistry WAS the sound; irreplaceable personnel; band dissolves when one member leaves (comparison -- fixed vs. rotating)",
+        "Reggie Watts solo (degree 17) -- solo artist: one person, all parts; no collaboration required (comparison -- solo vs. collective)",
+        "Quincy Jones (degree 0) -- bandleader/arranger: one creative authority directing many musicians through composed parts; top-down vs. FMR's semi-directed collective improvisation (comparison)"
+      ],
+      "description": "The collective is the third organizational type for creative units in the engine, joining solo artist (degrees 0-17) and fixed band (degree 18). In a collective, a central creative authority (Parker) defines the aesthetic direction while rotating musicians provide the instrumental realization. The identity is the aesthetic, not the personnel. This occupies space between solo artist (one person, full control) and fixed band (multiple people, collective identity). Like a solo artist, there is a central vision. Like a band, the music is created collectively. Unlike a solo artist, the music is genuinely collaborative. Unlike a fixed band, the collaborators change. The collective model is more resilient (survives personnel changes) but less unique in moment-to-moment expression (lacks the irreplaceable chemistry of specific individuals). Improvisation in the collective relies on shared convention (neo-soul/R&B/jazz vocabulary as lingua franca) rather than shared history (years of playing together).",
+      "genealogy": {
+        "ancestors": ["Fixed band -- Maktub (degree 18); four permanent members, collective identity, emergent composition", "Solo artist/bandleader -- all prior degrees (0-17); one creative authority", "Orchestral arrangement -- Jones (degree 0); one person directing many through composed parts"],
+        "relationship": "The collective extends the engine's understanding of creative units from a binary (individual vs. group) to a three-part spectrum: solo (one person, full control), collective (central authority + rotating collaborators), fixed band (permanent members, shared identity). The progression solo -> fixed band -> collective across degrees 0-18-19 is also a progression in organizational fluidity. The collective is the most fluid form: the identity persists even as every other element changes."
+      }
+    },
+    {
+      "concept": "Central District geographic persistence through gentrification (the CD oscillation pattern confirmed -- present 0-6, absent 7-10, returns 11, absent 12-18, returns 19; the neighborhood changes but the music continues; new generation of CD music where neo-soul/R&B replaces straight jazz but the groove-first tradition persists)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/engine/central-district-oscillation-geographic-persistence.md",
+      "examples": [
+        "Fly Moon Royale (degree 19) -- Central District, 2012-present; neo-soul/R&B collective; the CD produces music through gentrification; the genre transforms but the geographic thread holds",
+        "Joe Brazil (degree 11) -- Central District return after four-degree absence; Detroit jazz transplant running salon model; the CD's first return was a transplant, not a native",
+        "Overton Berry (degree 5) -- Central District native; groove-based piano; the groove-as-composition principle in the CD's historical jazz context; FMR inherits this groove tradition in neo-soul vocabulary",
+        "Quincy Jones (degree 0) to Patti Bown (degree 6) -- the Jackson Street corridor; the CD's founding geography; seven consecutive degrees of Central District jazz"
+      ],
+      "description": "The Central District oscillation pattern is now fully visible: present at degrees 0-6 (founding geography, Jackson Street corridor), absent 7-10, returns 11 (Brazil), absent 12-18 (longest absence), returns 19 (Fly Moon Royale). Each return occurs in a different era, different genre, and different community context. The pattern demonstrates geographic persistence -- the Central District does not disappear from Seattle's musical identity even as gentrification transforms the neighborhood. The music transforms (straight jazz to neo-soul/R&B), the community transforms (concentrated Black neighborhood to gentrifying mixed community), but the geographic thread persists. The groove-as-composition tradition connects Berry (degree 5, CD jazz piano) to FMR (degree 19, CD neo-soul collective): same neighborhood, same groove-first philosophy, different genre vocabulary.",
+      "genealogy": {
+        "ancestors": ["Central District founding geography -- Jones (0), Standifer (4), Berry (5), Bown (6); the Jackson Street corridor", "Central District return -- Brazil (11); first return after absence, Detroit transplant", "CD community infrastructure -- documented across degrees 0-6, 11; nightclubs, Black-owned businesses, cultural institutions"],
+        "relationship": "The Central District oscillation pattern tracks a neighborhood's musical identity across seven decades and twenty degrees. The founding geography (0-6) established the CD as the engine's primary location. Each return (11, 19) represents a different generation's relationship with the same geographic space. Degree 19 is the most significant return because it occurs in the context of active gentrification -- the neighborhood is being transformed in real-time, and the music's persistence despite that transformation is the finding."
+      }
+    },
+    {
+      "concept": "Blue note -- collective-soul (nineteenth deployment; syncopated vocal bending within rotating ensemble groove context; the blue note as communal expression rather than individual statement; neo-soul vocal micro-tonal bending coordinated with shifting ensemble dynamics; energy-3 soul deployment in collective)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/vocal/blue-note-collective-soul-rotating-ensemble.md",
+      "examples": [
+        "Fly Moon Royale (degree 19) -- Parker's vocal bending between minor and major thirds over rotating ensemble's groove; the blue note responding to different instrumental contexts at each performance; syncopated placement within the groove",
+        "Maktub (degree 18) -- soul-vocal blue note; fixed band context; Watts's emotional directness in groove (comparison -- fixed vs. rotating ensemble context)",
+        "Reggie Watts solo (degree 17) -- vocal glide blue note; performance-art context; same vocal tradition, different deployment (comparison)",
+        "Ernestine Anderson (degree 3) -- vocal blue note; jazz ballad context, energy-2; the CD vocal tradition's first entry (comparison -- CD geographic connection)"
+      ],
+      "description": "Nineteenth deployment of the blue note thread. The collective-soul blue note operates in the neo-soul tradition (bending between minor and major thirds) but is distinguished by its context: a rotating ensemble means the blue note responds to different instrumental environments at each performance. In a fixed band (Maktub degree 18), the vocalist learns exactly how the band responds to blue-note bending and calibrates accordingly. In a collective, the vocalist must deploy the blue note more autonomously -- it is a statement that the ensemble receives and responds to, rather than a negotiated element of a familiar arrangement. This makes the collective-soul blue note more communicative (it must convey intent clearly to unfamiliar collaborators) and more assertive (it cannot rely on the ensemble's learned response). Fourth vocal blue note deployment (Anderson 3, Watts solo 17, Maktub 18, FMR 19). Third CD-based blue note deployment (Anderson 3, Berry 5, FMR 19 -- counting Berry's piano crush as CD-based). The blue note returns to the Central District after eighteen degrees.",
+      "genealogy": {
+        "ancestors": ["Blue note -- all eighteen prior deployments (degrees 0-18)", "Blue note -- soul-vocal (degree 18, Maktub); the immediately preceding deployment in fixed-band neo-soul context", "Blue note -- vocal (degree 3, Anderson); the first vocal deployment, jazz ballad context, Central District", "Neo-soul vocal tradition -- D'Angelo, Erykah Badu; the national context for soul-vocal blue note deployment"],
+        "relationship": "Nineteen deployments across twenty degrees. The collective-soul blue note is the fourth vocal deployment (Anderson 3, Watts solo 17, Maktub 18, FMR 19) and the first in a rotating-ensemble context. Nineteen mechanisms: bass-line (0), guitar (1), vocal (3), trumpet-warm (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), sax voice (9), alto cool bend (10), flute bent (11), bebop chromatic (12), modal integration (13), post-genre floating (14), assertive brass (15), synthesizer pitch bend (16), vocal glide (17), soul-vocal (18), collective-soul (19). The collective-soul blue note demonstrates organizational-dependence: the deployment's character changes when the ensemble is fluid rather than fixed."
+      }
+    }
+  ],
+  "cross_references": ["S36-018", "S36-003", "S36-005", "S36-011", "S36-017"],
+  "seattle_connection": "Central District neo-soul/jazz collective formed ~2012. Led by vocalist/bandleader Parker with rotating musicians from Seattle's jazz and soul scenes. CENTRAL DISTRICT RETURNS after seven consecutive absences (12-18) -- the CD oscillation pattern confirmed: present (0-6), absent (7-10), returns (11), absent (12-18), returns (19). New generation of CD music: neo-soul/R&B replaces straight jazz but the groove-first tradition persists through gentrification. THIRD ORGANIZATIONAL TYPE: the collective joins solo artist and fixed band -- central creative authority + rotating musicians, identity is the aesthetic not the personnel. Known for live shows at Neumos, The Crocodile, and the Capitol Hill/CD venue network. KEXP sessions. Independent releases via Bandcamp. SYNCOPATION as primary technique: off-beat rhythmic emphasis defining neo-soul/R&B, micro-displacement groove, shared vocabulary among rotating musicians. Fifth consecutive energy-3 artist (15-16-17-18-19). Distribution 2:13:5. Soul-communal subtype. Neo-soul thread extended to two entries (Maktub 18, FMR 19). Groove-as-composition extended to three entries (Berry 5, Maktub 18, FMR 19). Twentieth artist-city pattern: The New Root (new generation rooting in a transformed neighborhood, genre evolves but geographic commitment persists).",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Syncopation as primary rhythmic device (off-beat emphasis defining neo-soul/R&B -- micro-displacement groove, shared vocabulary among rotating musicians, the beat defined by where it ISN'T) -- first theory node foregrounding syncopation as the primary technique; nineteenth chromaticism deployment (soul chromatic -- chromatic grace notes in bass lines and vocal melisma serving R&B feel)",
+      "Collective as organizational type (third type after solo artist and fixed band -- central creative authority + rotating musicians; identity is the aesthetic, not the personnel; lingua franca improvisation based on shared conventions rather than shared history; most fluid organizational form in the engine)",
+      "Central District geographic persistence through gentrification (CD oscillation pattern confirmed: present 0-6, absent 7-10, returns 11, absent 12-18, returns 19; the neighborhood transforms but the music persists; neo-soul/R&B replaces straight jazz; groove tradition connects Berry degree 5 to FMR degree 19)",
+      "Blue note -- nineteenth deployment; collective-soul (syncopated vocal bending in rotating ensemble context; the blue note as communal expression; fourth vocal deployment, first in collective context; deployment character changes when ensemble is fluid; returns to Central District after eighteen degrees)"
+    ],
+    "immediate_items": [
+      "Genre rotation: NINETEEN jazz-adjacent degrees (0-17 had Jazz as primary/compound; 18 Jazz as modifier of Soul; 19 Jazz as modifier of Soul). Jazz/Soul label continues jazz-as-method pattern. Track whether Jazz remains in label at degree 20.",
+      "Jazz-as-method evolution: TWO consecutive degrees (18, 19) with Jazz as modifier. The pattern is solidifying -- jazz is now a toolkit applied to other genres. Track continuation or disruption.",
+      "Third organizational type (NEW at 19): the collective (rotating musicians around central authority). Three types now: solo artist, fixed band, collective. Track subsequent collective entries.",
+      "Neo-soul thread EXTENDED to TWO entries (Maktub 18, FMR 19). Two consecutive degrees. Track whether neo-soul thread continues.",
+      "Central District oscillation: RETURNS at 19 after seven consecutive absences (12-18). The CD oscillation pattern is now confirmed. Track duration of this return.",
+      "Gender dimension: two women in twenty degrees (Anderson 3, Bown 6). Eighteen men. CRITICAL. Fourteen consecutive male or male-led artists (7-19). ESCALATED.",
+      "Energy-3 cluster: FIVE members (Marriott 15, Lorber 16, Watts 17, Maktub 18, FMR 19). FIVE consecutive -- longest streak extends. Distribution 2:13:5. Track continuation.",
+      "Cornish pipeline: THREE artists (Priester 7, Caliman 9, Watts 17). Stable. Not applicable to collectives. Track.",
+      "Bebop genealogy: root (12), modal (13), post-genre (14), hard bop trumpet (15), fusion keyboard (16), performance-art vocal (17), soul-vocal band (18), collective-soul (19). Track widening.",
+      "Loop pedal lineage: Frisell (1) to Watts solo (17). PAUSED at 18-19 (band/collective, not loop technology). Track resumption.",
+      "Band-as-collective thread EXTENDED: Maktub (18) fixed band + FMR (19) rotating collective = TWO entries. Track.",
+      "Groove-as-composition thread EXTENDED to THREE entries: Berry (5) solo piano, Maktub (18) band, FMR (19) collective. Track.",
+      "Capitol Hill geography: TWO entries (Horvitz 2, Maktub 18). Stable. FMR is CD-based but performs in Capitol Hill venues -- bridges the two neighborhood threads. Track.",
+      "Addiction-and-recovery thread: one instance (Lanphere 12). Track.",
+      "Horvitz collaboration thread: one direct instance (Watts 17), indirect Capitol Hill connection (Maktub 18). Track.",
+      "Performance art thread: one instance (Watts solo 17). Track.",
+      "Late-night bandleader thread: one instance (Watts solo 17). Track.",
+      "The Uncategorizable archetype: one instance (Watts solo 17). Track.",
+      "Dual-discipline training: one instance (Watts). Track.",
+      "Non-US birth: one instance (Watts, Stuttgart). Track.",
+      "Talent Incubator archetype: one instance (Lorber 16). Track.",
+      "Synthesizer integration thread: one instance (Lorber 16). Track.",
+      "Smooth jazz production: not applicable. Track.",
+      "Portland-Seattle corridor: one instance (Lorber 16). Track.",
+      "Berklee divergence engine: three graduates (0, 1, 16). Stable. Track.",
+      "Commercial-artistic tension: FMR operates in independent scene. Track.",
+      "Origin Records thread: one artist (Marriott 15). Track.",
+      "Builder-Stayer archetype: one instance (Marriott 15). Track.",
+      "UW three-product pipeline: stable. Track.",
+      "Trumpet arc: Standifer (4) to Marriott (15). Track.",
+      "Velour/Livewire label thread: one entry (Maktub 18). Not applicable to FMR (independent). Track.",
+      "The Workshop archetype: one instance (Maktub 18). Track.",
+      "Multi-degree artist thread: one instance (Watts 17/18). Track subsequent multi-degree appearances.",
+      "The New Root archetype (NEW at 19): twentieth artist-city pattern. New generation rooting in a transformed neighborhood. Track.",
+      "Independent label thread (NEW at 19): first entry. FMR releases independently. Track.",
+      "Live-show-as-primary-medium thread (NEW at 19): the recording documents the performance, not the other way around. Connected to Maktub (18) live improvisation. Track.",
+      "Various source depth items carried from degrees 5-18."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: TWENTY named patterns (adding The New Root at degree 19 -- new generation rooting in transformed neighborhood). Classify every degree.",
+      "Educator spectrum: eight modes. FMR is a performing collective, not an educator. Track.",
+      "Composition-improvisation spectrum: FIFTEEN positions. Collective-lingua-franca position added at degree 19 (improvisation based on shared conventions rather than shared history). New dimension: convention vs. history.",
+      "Rhythmic spectrum: FIFTEEN positions. Neo-soul syncopation (micro-displacement groove, the beat defined by where it ISN'T) added at degree 19.",
+      "Chromaticism thread: NINETEEN deployments. Soul chromatic added at degree 19 (chromatic grace notes in bass lines and vocal melisma serving R&B feel).",
+      "Blue note thread: NINETEEN deployments across twenty degrees. Collective-soul at 19 -- fourth vocal deployment, first in rotating-ensemble context. Nineteen mechanisms documented.",
+      "Artist-as-institution spectrum: TWENTY positions. The New Root added (new generation in transformed geography).",
+      "Keyboard/piano theory branch: ten nodes. Stable. Still richest.",
+      "Vocal theory branch: NINE nodes. EXTENDED at 19 (collective-soul blue note, syncopated neo-soul vocal phrasing). Exceeds saxophone/reed (seven).",
+      "Bass theory branch: FIVE nodes. EXTENDED at 19 (syncopated R&B bass, soul chromatic grace notes). Growing.",
+      "Brass theory branch: four nodes. Stable.",
+      "Saxophone/reed theory branch: seven nodes. Stable.",
+      "Flute theory branch: two nodes. Stable.",
+      "Body-as-sound-source thread: eleven instruments. Stable.",
+      "Amiga Principle gradient: FIFTEEN scales. Collective Amiga Principle added at degree 19 (rotating musicians maximizing output through shared vocabulary rather than individual versatility or fixed collective synergy).",
+      "Educational pipeline diversity: twenty pipelines. Stable (FMR does not add a new pipeline).",
+      "Gender-barrier gradient: two women, eighteen men in twenty degrees. CRITICAL. Fourteen consecutive male or male-led. ESCALATED.",
+      "Jackson Street corridor: FMR is the new generation of CD music. Not Jackson Street era, but CD geography persists. The corridor has transformed but the thread holds.",
+      "Label threads: all prior stable. Independent release added (NEW at 19).",
+      "Electronic jazz waves: four waves (from 16). FMR is organic/live. Track.",
+      "Zen thread: from degree 8. Not applicable. Track.",
+      "Energy spectrum: 2:13:5. FIVE consecutive energy-3 artists. Longest streak extends. Five subtypes: acoustic-assertive (15), electronic-propulsive (16), performative-explosive (17), groove-collective (18), soul-communal (19).",
+      "Three pipelines at three members: Berklee, UW, Cornish. Stable. Track fourth.",
+      "West Coast / LA pipeline: three artists (8, 9, 10). Stable.",
+      "Within-family groups: vocal QUARTET (3/17/18/19 -- EXTENDED at 19), keyboard quintet (5/6/13/14/16), etc. Vocal group now LARGEST.",
+      "Central District oscillation: present (0-6), absent (7-10), returns (11), absent (12-18), RETURNS (19). Pattern confirmed. Track duration of return.",
+      "Bebop genealogy tree: widening to include collective-soul (degree 19). Tree spans eight degrees (12-19).",
+      "Genre evolution: FOUR stages documented (single, compound, superposition, modifier-inversion). Degree 19 continues modifier-inversion stage. Track fifth stage or continued modifier.",
+      "Loop pedal lineage: Frisell (1) to Watts solo (17). Paused at 18-19. Track resumption.",
+      "Capitol Hill geography: TWO entries (2, 18). FMR bridges CD and Capitol Hill venue networks. Track.",
+      "Groove-as-composition: THREE entries (5, 18, 19). Solo, band, and collective scales. Principle persistent and scalable across all organizational types.",
+      "Band-as-collective: TWO entries (18 fixed band, 19 collective). Organizational spectrum established.",
+      "Multi-degree artist: ONE instance (Watts 17/18). Track.",
+      "Neo-soul thread: TWO entries (18, 19). Two consecutive. Track continuation.",
+      "Collective-as-organizational-type: ONE entry (19). First. Track subsequent collectives.",
+      "Syncopation thread (NEW at 19): first foregrounded entry. Connected to groove tradition (Berry 5, Maktub 18). Track."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "EPs and Singles",
+      "year": "2012-present",
+      "label": "Independent (Bandcamp / streaming)",
+      "format": "Digital",
+      "status": "ongoing independent releases",
+      "significance": "Independent releases via Bandcamp and streaming platforms. The collective releases music as it is created, in whatever format suits the moment. Recordings document specific configurations of the collective at specific moments rather than attempting to create a definitive studio version. The live show is the primary medium; recordings are documents, not definitive statements."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Maktub", "relationship": "Direct predecessor in neo-soul thread. Both neo-soul/R&B, both collective creative units (fixed band vs. rotating collective), both groove-first composition. Maktub on Capitol Hill (1998-2007), FMR in Central District (2012-present). Organizational evolution: fixed band to rotating collective. Genre continuity across consecutive degrees.", "future_degree": 18},
+    {"name": "Ernestine Anderson", "relationship": "Vocal tradition and Central District geography. Anderson (degree 3) is the first vocal-primary artist and CD-based. Parker/FMR (degree 19) is vocal-primary and CD-based. The vocal tradition returns to the Central District after eighteen degrees. Blue note connection: Anderson's jazz vocal (energy-2) vs. FMR's collective-soul vocal (energy-3).", "future_degree": 3},
+    {"name": "Overton Berry", "relationship": "Central District groove. Berry (degree 5) established groove-as-composition in the CD. FMR extends it in the CD: same neighborhood, same groove-first philosophy, different genre (jazz piano vs. neo-soul collective). The CD groove thread: Berry (5) to FMR (19), spanning fourteen degrees and six decades.", "future_degree": 5},
+    {"name": "Joe Brazil", "relationship": "Central District return pattern. Brazil (degree 11) was the first CD return after the 7-10 absence. FMR (degree 19) is the second CD return after the 12-18 absence. Both represent the CD's persistence through transformation.", "future_degree": 11},
+    {"name": "Reggie Watts", "relationship": "CD-adjacent to CD-proper. Watts at degree 17 was Capitol Hill-based. FMR at degree 19 is Central District-based. The geographic thread shifts from CD-adjacent back to CD-proper. Neo-soul vocal tradition connects through Watts/Maktub (18) to FMR (19).", "future_degree": 17}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones -- attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson -- attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer -- Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry -- Central District native, self-taught. No institutional music education. Autodidact path.",
+    "degree_6": "Patti Bown -- Central District native, Seattle University (not Garfield). Formal training via Jesuit university.",
+    "degree_7": "Julian Priester -- NOT a Garfield product. DuSable High School (Chicago) under Captain Dyett. Cornish College of the Arts faculty.",
+    "degree_8": "Gary Peacock -- NOT a Garfield product. Burley, Idaho. Westlake College (LA). U.S. Army (Germany).",
+    "degree_9": "Hadley Caliman -- NOT a Garfield product. Idabel, Oklahoma. Los Angeles jazz scene. Cornish College of the Arts faculty.",
+    "degree_10": "Bud Shank -- NOT a Garfield product. Dayton, Ohio. University of North Carolina. Stan Kenton Orchestra. Los Angeles / Pacific Jazz.",
+    "degree_11": "Joe Brazil -- NOT a Garfield product. Detroit, Michigan. Detroit jazz scene. Settled in Central District as salon-model educator.",
+    "degree_12": "Don Lanphere -- NOT a Garfield product. Wenatchee, Washington. Northwestern University. NYC 52nd Street bebop scene.",
+    "degree_13": "Marc Seales -- NOT confirmed as Garfield product. Seattle native. University of Washington (DMA). Seventh consecutive non-Garfield degree. First UW-complete pipeline.",
+    "degree_14": "Aaron Parks -- NOT confirmed as Garfield product. Born Seattle 1983. UW pre-college at 14, MSM at 16. Eighth consecutive non-Garfield degree. Exported before completing high school in Seattle.",
+    "degree_15": "Thomas Marriott -- NOT confirmed as Garfield product. Born Seattle 1979. UW jazz studies under Seales. Ninth consecutive non-Garfield degree. Stayed in Seattle, built career locally via Origin Records.",
+    "degree_16": "Jeff Lorber -- NOT a Garfield product. Born Philadelphia, PA. Berklee College of Music. Portland, OR then Seattle area. Tenth consecutive non-Garfield degree.",
+    "degree_17": "Reggie Watts -- NOT a Garfield product. Born Stuttgart, Germany. Great Falls, Montana. Cornish College of the Arts in Seattle (student, jazz piano and acting). Eleventh consecutive non-Garfield degree. First artist born outside the US.",
+    "degree_18": "Maktub -- NOT a Garfield product. Band formed on Capitol Hill, Seattle. Watts (see degree 17) is the only member with documented educational pedigree (Cornish). Twelfth consecutive non-Garfield degree. First band in the engine.",
+    "degree_19": "Fly Moon Royale -- NOT a Garfield product. Collective formed in Central District, Seattle. Parker's educational background not documented. Rotating musicians' backgrounds not individually documented. Thirteenth consecutive non-Garfield degree. First collective in the engine. Central District returns but not through the Garfield pipeline.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": false,
+    "the_erasure": false,
+    "pedagogue_draw": false,
+    "quiet_draw": false,
+    "the_seeker": false,
+    "working_pedagogue_draw": false,
+    "late_homestead": false,
+    "salon_keeper": false,
+    "the_prodigal": false,
+    "the_institutional_anchor": false,
+    "the_prodigy_export": false,
+    "the_builder_stayer": false,
+    "the_talent_incubator": false,
+    "the_uncategorizable": false,
+    "the_workshop": false,
+    "the_new_root": true,
+    "native_born": false,
+    "self_taught": false,
+    "institution_type": "the new root -- a collective rooted in the Central District circa 2012; new generation of CD music where neo-soul/R&B replaces straight jazz but the groove-first tradition and geographic commitment persist through gentrification; the neighborhood changes but the music continues",
+    "amiga_principle": "collective_lingua_franca_rotating_musicians_shared_vocabulary",
+    "gender": "male (Parker male, rotating cast predominantly male)",
+    "instrumentalist": true,
+    "gender_barrier": "not applicable (male-led collective)"
+  },
+  "sources_count": 15,
+  "word_count_research": 3200,
+  "release_date": "2026-03-28"
+}
