@@ -1,0 +1,369 @@
+{
+  "degree": 14,
+  "species": "MacGillivray's Warbler",
+  "scientific_name": "Geothlypis tolmiei",
+  "sound_type": "churry-churry-churry-sweet",
+  "energy": 2,
+  "ecosystem": "dense shrub",
+  "season": "summer (neotropical migrant -- arrives late May, departs September)",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds in dense shrubby habitats throughout western North America from southeastern Alaska to central Mexico"
+  },
+  "physical": {
+    "length_in": "4.7-5.3",
+    "wingspan_in": "~7.5",
+    "weight_g": "9-13"
+  },
+  "plumage": {
+    "overall": "Slate-gray hood, olive-green back, bright yellow belly and undertail coverts, broken white eye arcs (crescents above and below eye)",
+    "hood": "Distinctive dark slate-gray hood covering head and upper breast -- diagnostic male field mark",
+    "eye_arcs": "Conspicuous broken white eye arcs (crescents above and below eye, NOT a complete ring) -- key distinction from Mourning Warbler",
+    "belly": "Bright yellow belly and undertail coverts -- the flash of color visible in dense shrub",
+    "bill": "Thin, pointed warbler bill -- insectivore design, finer than vireo bill",
+    "east_west_pair": "Nearly identical to Mourning Warbler (Geothlypis philadelphia) -- eastern counterpart. Distinguished by range, eye arcs (MacGillivray's has distinct arcs; Mourning typically lacks them), and subtle vocal differences.",
+    "field_id": "Small warbler with gray hood, olive back, yellow belly, broken white eye arcs, singing from inside dense shrub. Heard far more than seen. Distinguished from Mourning Warbler by range (west of Great Plains) and eye arcs."
+  },
+  "frequency_range": {
+    "churry_hz": "3500-5500 (rising, buzzy -- repeated identical syllables)",
+    "sweet_hz": "2000-3500 (descending, tonal -- single contrasting terminal element)",
+    "full_song_hz": "2000-6000 (combined range of churry + sweet)",
+    "chip_hz": "3000-5000 (sharp contact/alarm note)",
+    "register": "Mid-range to upper-mid (2-6 kHz -- overlapping with human speech band, easily audible)"
+  },
+  "song_metrics": {
+    "duration_s": "1.5-2.5 per song",
+    "churry_count": "3-5 identical syllables per song",
+    "churry_duration_s": "0.2-0.3 per syllable",
+    "sweet_duration_s": "0.3-0.5 (single occurrence)",
+    "songs_per_minute": "6-10 during active singing bouts",
+    "structure": "A-A-A-B (repetition + resolution) -- 3-5 identical churry syllables followed by 1 contrasting sweet syllable",
+    "variation": "Churry syllables are identical within a song. The sweet provides contrast. Between songs, the overall pattern is consistent but individual syllable details may vary slightly across males.",
+    "perceived_quality": "Buzzy, rhythmic repeated syllables building to a clear tonal resolution -- a distinctly two-part song with a sense of arrival",
+    "waveform_analog": "Ternary form / AAB / call-and-response with self -- the minimal narrative arc (setup → payoff)",
+    "key_property": "The first species in the engine whose song contains an explicit NARRATIVE ARC: beginning (repeated churry), middle (building anticipation), end (resolving sweet). Where the vireo (degree 13) repeated without resolution, the warbler repeats AND resolves."
+  },
+  "east_west_pair": {
+    "western_species": "MacGillivray's Warbler (Geothlypis tolmiei)",
+    "eastern_species": "Mourning Warbler (Geothlypis philadelphia)",
+    "family": "Parulidae",
+    "genus": "Geothlypis (formerly Oporornis -- reclassified by molecular phylogenetics)",
+    "relationship": "SIBLING SPECIES -- closest relatives, recently separated by geographic isolation along the Great Plains / Rocky Mountain crest",
+    "shared_traits": "Gray hood, olive back, yellow belly, skulking behavior, dense shrub habitat, neotropical migrant, similar song structure",
+    "diagnostic_differences": [
+      "Eye markings: MacGillivray's has distinct broken white eye arcs; Mourning typically lacks them or has very faint ones",
+      "Range: MacGillivray's west of Great Plains; Mourning east of Great Plains",
+      "Song: Subtle vocal differences -- MacGillivray's churry syllables tend to be buzzier; Mourning's tend to be more musical",
+      "Hybridization: Occasional hybridization in narrow contact zone (western Great Plains, boreal Alberta/BC)"
+    ],
+    "engine_connection": "Another East/West species pair in North American ornithology -- the same evolutionary story as Bullock's/Baltimore Oriole, Black-headed/Rose-breasted Grosbeak, Spotted/Eastern Towhee, Steller's/Blue Jay. A common ancestor split by the continental interior, diverging in isolation.",
+    "music_parallel": "Regional variants of the same tradition -- Delta blues vs. Chicago blues, East Coast hip-hop vs. West Coast, Nashville country vs. Bakersfield sound. Same foundation, different inflection, shaped by geographic isolation."
+  },
+  "behavioral_invisibility": {
+    "skulking_behavior": "One of the most skulking birds in the PNW -- forages low in dense shrub, sings from concealed perches, rarely exposes itself",
+    "foraging_height": "Usually below 6 feet / 2 meters -- ground to low shrub layer",
+    "visibility": "Heard far more than seen. Birders may hear the song all day without getting a visual.",
+    "concealment_type": "BEHAVIORAL -- the bird has distinctive plumage (gray hood, yellow belly, eye arcs) but CHOOSES to stay hidden in dense vegetation",
+    "contrast_with_degree_6": "Pacific-slope Flycatcher (degree 6) has MORPHOLOGICAL crypticity (Empidonax all look alike, MUST be heard for ID). MacGillivray's has BEHAVIORAL invisibility (distinctive plumage but refuses to be seen). Imposed vs. chosen concealment.",
+    "music_parallel": "The session musician, the ghost writer, the unseen performer. Artists who let the work carry the identity while the maker stays hidden. The studio guitarist whose riff is on a hundred records but whose face is unknown."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Repetition-resolution (the minimal narrative: setup followed by payoff -- A-A-A-B)",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/repetition-resolution/",
+      "examples": [
+        "The warbler's churry-churry-churry-sweet: repeated elements build anticipation, contrasting terminal element resolves it",
+        "12-bar blues: I-I-I-I (repetition/establishment) → IV-IV (contrast) → V-IV-I (resolution)",
+        "Joke structure: setup-setup-setup-punchline -- repetition establishes expectation, deviation delivers the payoff",
+        "Sonata form (exposition → development → recapitulation): statement → elaboration → resolution at the largest scale"
+      ],
+      "music_theory_parallel": "The warbler's song is the smallest possible narrative arc: repetition builds expectation, contrast releases it. This is the fundamental engine of Western tonal music -- tension and resolution. Where the vireo (degree 13) repeated without resolving, the warbler repeats AND resolves. One structural addition transforms the loop into a phrase, the ostinato into a cadence."
+    },
+    {
+      "concept": "Ternary form at minimum scale (AAB -- statement, repetition, contrast/resolution)",
+      "level": "intermediate",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/ternary/",
+      "examples": [
+        "AABA form: the standard 32-bar song form of Tin Pan Alley and jazz standards -- 'Over the Rainbow', 'I Got Rhythm', 'Body and Soul'",
+        "AAB (12-bar blues): two identical vocal lines followed by a contrasting resolution line",
+        "Minuet and trio: ABA at the movement level -- statement, contrast, return",
+        "The warbler's churry-churry-churry-sweet: AAB compressed to seconds -- statement repeated, then resolved"
+      ],
+      "music_theory_parallel": "Ternary form (ABA or AAB) is the most fundamental structural principle in Western music: establish a pattern, introduce contrast, resolve. The warbler compresses this to its minimum expression: 3-5 identical syllables (A) followed by 1 contrasting syllable (B). No return needed -- the B resolves the phrase. The most common song form in popular music, delivered in 2 seconds by a bird in a thicket."
+    },
+    {
+      "concept": "Tension-release (the fundamental harmonic/melodic principle -- preparation resolves to cadence)",
+      "level": "foundational",
+      "department": "music-theory/harmony",
+      "college_path": ".college/music/theory/harmony/tension-release/",
+      "examples": [
+        "Dominant → tonic resolution: V → I, the fundamental cadence in Western tonal music",
+        "Dissonance → consonance: the suspension resolves, the appoggiatura steps down, the tritone collapses to a third",
+        "Melodic tension: ascending motion creates tension, descending motion releases it -- the warbler's churry (rising/buzzy) resolves to sweet (descending/tonal)",
+        "Rhythmic tension: syncopation or repeated patterns build anticipation, downbeat arrival resolves it"
+      ],
+      "music_theory_parallel": "The churry syllables are harmonically tense: rising, buzzy, unresolved. The sweet is the cadence: descending, clear, resolved. Every tonal composition operates on this principle. The warbler delivers it in its purest biological form -- tension built through identical repetitions, released through a single contrasting element."
+    },
+    {
+      "concept": "Concealment as performance choice (behavioral invisibility -- the hidden singer)",
+      "level": "intermediate",
+      "department": "music-theory/performance",
+      "college_path": ".college/music/theory/performance/concealment/",
+      "examples": [
+        "Session musicians: play on hundreds of records, credited on none -- the sound carries the identity, the maker is invisible",
+        "Ghost writers: pen hit songs under another artist's name -- the work is famous, the author is unknown",
+        "Film composers: shape audience emotions while attribution goes to actors -- invisible emotional architecture",
+        "Producers (Lee Scratch Perry, Brian Eno, Phil Spector): ARE the sound but not the face -- the maker behind the board",
+        "The MacGillivray's Warbler: distinctive plumage it COULD show, but sings from concealment -- the bird that chooses to be a voice, not a body"
+      ],
+      "music_theory_parallel": "The warbler is visually distinctive but behaviorally invisible. It could be identified by sight but refuses to show itself. The song carries the identity. This maps to performance traditions where the sound is everything and the performer is hidden -- the work IS the presence, and the maker's visibility is irrelevant or deliberately withheld."
+    },
+    {
+      "concept": "East/West species pair (sibling species divided by geography -- the same bird in two rooms)",
+      "level": "advanced",
+      "department": "ecology/biogeography",
+      "college_path": ".college/ecology/biogeography/east-west-pairs/",
+      "examples": [
+        "MacGillivray's Warbler (west) / Mourning Warbler (east): gray-hooded ground warblers split by the Great Plains",
+        "Bullock's Oriole / Baltimore Oriole: formerly lumped as 'Northern Oriole', now recognized as distinct species that hybridize narrowly",
+        "Black-headed Grosbeak / Rose-breasted Grosbeak: West/East seed-cracking specialists",
+        "Steller's Jay / Blue Jay: West/East corvids -- crested, intelligent, loud"
+      ],
+      "music_theory_parallel": "Regional variants of the same musical tradition shaped by geographic isolation. Delta blues and Chicago blues. East Coast and West Coast hip-hop. Nashville country and Bakersfield sound. Same ancestral form, different regional inflection, diverging slowly through cultural isolation. Given enough time, the variants become distinct genres. The MacGillivray's/Mourning pair is in the early stages of this divergence."
+    },
+    {
+      "concept": "Dense shrub as acoustic stage (the habitat that hides the singer and amplifies the song)",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/dense-shrub/",
+      "examples": [
+        "Salal, salmonberry, thimbleberry, snowberry, willow thickets: the PNW dense shrub layer where the warbler breeds",
+        "Early-successional and edge habitats: forest clearings, logged areas, stream margins, mountain meadow edges",
+        "Disturbance-dependent habitat: fire, logging, windthrow create and maintain the dense shrub the warbler requires",
+        "The acoustic effect: dense vegetation attenuates high frequencies and creates a reverberant environment that carries song while concealing the singer"
+      ],
+      "music_theory_parallel": "The dense shrub is the warbler's recording studio -- an environment that shapes the sound while hiding the source. The vegetation attenuates and filters frequencies, creating a specific acoustic character. Like a recording studio, the room IS part of the sound. The warbler does not sing in the open; it sings in an acoustic environment that colors its voice and conceals its body."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-013",
+      "title": "Hutton's Vireo (Degree 13)",
+      "connection": "REPETITION WITHOUT RESOLUTION vs. REPETITION WITH RESOLUTION. The vireo (degree 13) repeats A-A-A-A-A... indefinitely -- the ostinato, the loop, no destination. The warbler (degree 14) repeats A-A-A-B -- the same repetition, but with a contrasting terminal element that resolves the phrase. Sequential degrees, one structural addition: the resolution. Degree 13 is the question asked forever. Degree 14 is the question answered."
+    },
+    {
+      "project": "SPS-006",
+      "title": "Pacific-slope Flycatcher (Degree 6)",
+      "connection": "HIDDEN MIGRANT PAIR. Both are neotropical migrants. Both are heard far more than seen. But the flycatcher (degree 6) MUST be heard for identification (morphological crypticity -- Empidonax all look alike). The warbler (degree 14) COULD be seen (distinctive plumage) but CHOOSES concealment in dense shrub. Crypticity imposed vs. concealment chosen."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "PARULIDAE ENTRY. The MacGillivray's Warbler is the first Parulidae (New World warbler) representative in the 360 Species engine. The most species-rich warbler family in the Americas, entering through one of its most secretive members. AVI documents PNW avian taxonomy including warbler diversity."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "DENSE SHRUB ECOLOGY. Dense shrubby undergrowth (salal, salmonberry, thimbleberry, snowberry) as a distinct habitat layer within PNW forests. The warbler depends on early-successional and edge habitats where disturbance maintains shrub density. ECO documents PNW ecosystem dynamics including successional stages."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Aaron Parks at degree 14. Both are young, contemporary, carrying forward traditions with a new twist. Parks takes inherited jazz structures and adds fresh harmonic resolution -- transforming familiar patterns by where he takes them at the end. The warbler takes the vireo's repetition and adds a resolution syllable that changes the meaning of everything before it."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "TRILL vs. TERNARY. The junco (degree 11) produces a rapid single-note trill -- repetition above the fusion threshold, perceived as continuous tone, with no endpoint. The warbler (degree 14) produces repeated syllables BELOW fusion followed by a resolution -- repetition as discrete events leading to a structural endpoint. The trill has no ending. The churry-sweet DOES."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "COMPLEXITY BOOKEND. The wren (degree 1) was maximum complexity -- cascading improvisation, no repetition, no pattern. The warbler (degree 14) is structured simplicity -- a clear A-A-A-B pattern with a beginning, middle, and end. The first degree had no structure. The fourteenth has the minimal narrative. Fourteen degrees from chaos to the first story."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- the MacGillivray's Warbler introduces a SIXTH communication modality: the ternary territorial song with explicit resolution. Distinct from alarm broadcasting (chickadees), swarm cohesion (bushtit), territorial trill (junco), buzzy flock sweep (siskin), and persistent ostinato (vireo).",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "warbler_role": "The MacGillivray's Warbler produces a structured ternary territorial song (churry-churry-churry-sweet) from concealed perches in dense shrub. It does not participate in the chickadee alarm network (different habitat layer, different social structure). Its communication is primarily INTRASPECIFIC: the song establishes territory and attracts mates through a structured phrase with a clear endpoint. The warbler introduces a SIXTH communication modality: the ternary song with explicit resolution -- a signal that has a beginning, builds through repetition, and arrives at a conclusion. Previous modalities: alarm broadcast (chickadees, degrees 3/9), swarm cohesion (bushtit, degree 10), territorial trill (junco, degree 11), flock sweep (siskin, degree 12), persistent ostinato (vireo, degree 13). The warbler adds: structured phrase with resolution (degree 14).",
+    "note": "The alarm network remains at 4 nodes. Six parallel communication channels now documented in the forest: alarm broadcast, swarm cohesion, territorial trill, flock sweep, persistent ostinato, and structured ternary song."
+  },
+  "part_a_parallel": {
+    "artist": "Aaron Parks",
+    "degree": 14,
+    "genre": "S36",
+    "shared_principle": "Both are young, contemporary, carrying forward traditions with a new twist. Parks takes inherited jazz structures (bebop harmony, modal frameworks, standard forms) and adds fresh resolution -- his playing transforms familiar patterns by where he takes them at the end, how he resolves the phrase. The warbler takes the repetition principle (established by the vireo at degree 13) and adds one structural element -- the resolution syllable -- that transforms the loop into a narrative. Both inherit and resolve. Both carry tradition forward by adding something new at the end that changes the meaning of everything before it.",
+    "resonance_points": [
+      "Contemporary inheritor: Parks is a young jazz pianist carrying forward the tradition of his predecessors at the piano. The warbler carries forward the repetition principle from degree 13 with a new structural addition. Both are 'next generation' -- same roots, new growth.",
+      "Resolution as transformation: Parks' harmonic resolutions transform standard jazz phrases. The warbler's sweet syllable transforms repeated churry syllables. In both cases, the ending changes the meaning of the beginning.",
+      "Energy 2 (energy match): Both are energy-2 -- present, audible, engaged, but not flashy. Not the loudest voice in the room. Understated presence with structural depth.",
+      "Hidden depth: Parks' playing has more happening under the surface than shows at first listen. The warbler has more distinctive plumage than you will ever see. Both reveal their full nature only to careful attention."
+    ]
+  },
+  "degree_arc": {
+    "position": "The churry-churry-churry-sweet -- repetition with resolution, the minimal narrative. The first song in the engine with a beginning, middle, and end. The hidden singer in the dense shrub.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14)",
+    "key_insight": "Degree 14 introduces three new dimensions: (1) REPETITION WITH RESOLUTION -- the first species whose song contains an explicit narrative arc (setup → payoff, A-A-A-B), transforming the vireo's endless loop into a phrase with a destination. (2) BEHAVIORAL INVISIBILITY -- the first species that has distinctive visual field marks but CHOOSES concealment, singing from dense shrub. (3) PARULIDAE ENTRY -- the first New World warbler in the engine, and only the second neotropical migrant (after degree 6).",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)",
+      "degree_14": "Ternary / AAB (repeated identical syllables followed by contrasting resolution syllable -- the minimal narrative arc, repetition with destination)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)",
+      "degree_11": "Mid-range (3-6 kHz -- comfortably within human hearing, return to accessible mid-range)",
+      "degree_12": "Wide-band (2-10 kHz -- the ascending sweep traverses more of the frequency spectrum than any previous single vocalization)",
+      "degree_13": "Mid-range (2.5-5 kHz -- centered in the speech frequency band, easily audible, comfortably accessible)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz -- churry syllables in the upper portion, sweet resolution descending into mid-range)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)",
+      "degree_11": "Territory + mate attraction through trill (I am here, I am fit, this is my edge)",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (I am here, I am Pine Siskin, where are we going -- nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (I am still here, this is still my territory, the signal has not stopped -- temporal continuity as content)",
+      "degree_14": "Territory + mate attraction through structured song with resolution (I am here, I am MacGillivray's Warbler, and this phrase has a beginning and an end -- narrative as content)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)",
+      "degree_10": "Shrubby woodland edge (ecotone -- the transition zone between forest and open habitat)",
+      "degree_11": "Forest edge (ecotone -- the threshold between forest interior and open ground)",
+      "degree_12": "Conifer seed crop (not a fixed habitat but a resource -- the siskin goes where the seeds are)",
+      "degree_13": "Oak woodland (Garry oak / Oregon white oak -- the first non-conifer-dominated habitat in the engine, a threatened fire-dependent savanna ecosystem)",
+      "degree_14": "Dense shrub (salal, salmonberry, thimbleberry, snowberry thickets -- early-successional and edge habitats maintained by disturbance)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Dense shrubby undergrowth in forest clearings, edges, and regenerating areas. Salal, salmonberry, thimbleberry, snowberry, willow, young conifers. Requires thick shrub layer with good ground cover for foraging and concealment.",
+    "niche": "Low-shrub insectivore in dense understory. Forages from ground level to 2 meters, gleaning insects from leaf surfaces, branches, and leaf litter. Strongly tied to shrub structure rather than canopy type.",
+    "foraging_strategy": "Ground-to-low-shrub gleaner -- hops through dense vegetation near ground level, picking insects from leaves, twigs, and litter. Rarely forages above 2 meters. Stays concealed while foraging.",
+    "diet": "Insects (caterpillars, beetles, flies, spiders, aphids gleaned from shrub foliage and litter). Almost entirely insectivorous during breeding season.",
+    "nesting": "Nest in dense shrub or low vegetation, typically 1-3 feet (0.3-1 m) above ground. Open cup of grass, bark strips, and plant fibers, lined with fine grass and hair. Well-concealed in densest available vegetation. Both sexes build nest; female incubates.",
+    "irruptive_movement": false,
+    "resident_status": "NEOTROPICAL MIGRANT -- breeds in western North America (May-September), winters in Mexico and Central America (highlands from Sonora to Panama). Second neotropical migrant in the engine after Pacific-slope Flycatcher (degree 6).",
+    "flock_size": "Solitary or in pairs during breeding season. May join loose mixed-species flocks during migration. Does not form conspecific flocks.",
+    "disturbance_dependency": "HIGH -- depends on habitat disturbance (fire, logging, windthrow) that creates and maintains dense shrub layers. Complete fire suppression reduces habitat by allowing canopy closure. The species exists in the dynamic space between disturbance and maturity."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~8-12 million (Partners in Flight 2020)",
+    "trend": "Stable to slightly declining -- localized losses from habitat maturation and fire suppression",
+    "threats": "Loss of dense shrub habitat through fire suppression (canopy closure), forest maturation, urbanization in lowland areas, overgrazing on public lands, wintering ground deforestation in Mexico and Central America",
+    "vulnerability": "The disturbance paradox: depends on habitat disturbance that creates dense shrub, but also vulnerable to habitat destruction. The species thrives in the dynamic successional stage between disturbance and mature forest.",
+    "unique_feature": "An early-successional specialist -- one of the few PNW species that benefits from moderate forest disturbance. Timber harvest and fire create the shrubby regrowth the warbler requires. Conservation requires maintaining a mosaic of successional stages, not just preserving mature forest.",
+    "two_hemisphere_threat": "As a neotropical migrant, faces threats on both breeding and wintering grounds -- a vulnerability shared by all long-distance migrants."
+  },
+  "key_sites": [
+    {
+      "name": "Discovery Park / Magnolia (Seattle)",
+      "type": "breeding (summer)",
+      "description": "Dense shrubby areas along trails and forest edges in Seattle's largest park. Summer breeding habitat with good shrub structure from second-growth forest edges.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Cascade foothills clearings",
+      "type": "breeding (summer)",
+      "description": "Forest clearings and regenerating logged areas in the western Cascade foothills provide extensive dense shrub habitat. One of the core breeding areas in Washington.",
+      "region": "Western Cascades, WA"
+    },
+    {
+      "name": "Olympic Peninsula lowland trails",
+      "type": "breeding (summer)",
+      "description": "Trailside salmonberry and thimbleberry thickets along rivers and forest edges on the Olympic Peninsula. Dense shrub habitat where the song is commonly heard in June-July.",
+      "region": "Olympic Peninsula, WA"
+    },
+    {
+      "name": "Mountain meadow margins (subalpine)",
+      "type": "breeding (summer)",
+      "description": "Shrubby edges of mountain meadows at higher elevations in the Cascades and Olympics. The warbler breeds up to subalpine elevations where dense shrub persists.",
+      "region": "Cascade and Olympic Range, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the churry-churry-churry-sweet structure with repeated identical buzzy syllables and contrasting tonal terminal element",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the MacGillivray's Warbler song shows a CLEAR TWO-PART STRUCTURE: repeated identical buzzy syllables (churry, 3.5-5.5 kHz, rising) followed by a single contrasting tonal element (sweet, 2-3.5 kHz, descending). The transition from churry to sweet is visible as a distinct change in frequency, bandwidth, and harmonic content. Compare to the Hutton's Vireo (degree 13) whose spectrogram shows identical repeated phrases with NO structural contrast or resolution. The warbler's spectrogram visually demonstrates the A-A-A-B ternary structure."
+  },
+  "sources": [
+    "Pitocchelli, J. (2020). MacGillivray's Warbler (Geothlypis tolmiei). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: MacGillivray's Warbler. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: MacGillivray's Warbler. audubon.org",
+    "BirdWeb (Seattle Audubon Society). MacGillivray's Warbler species account. birdweb.org",
+    "Lovette, I.J. et al. (2010). Comprehensive multilocus phylogeny for wood-warblers and revised classification of Parulidae. Mol Phylogenet Evol 57: 753-770.",
+    "Irwin, D.E. et al. (2009). Extensive hybridization in MacGillivray's/Mourning Warbler contact zone. J Avian Biol 40: 539-552.",
+    "Curson, J., Quinn, D., and Beadle, D. (1994). Warblers of the Americas. Houghton Mifflin.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Franklin, J.F. and Dyrness, C.T. (1973). Natural Vegetation of Oregon and Washington. Oregon State University Press.",
+    "Hagar, J.C. (1999). Influence of riparian buffer width on bird assemblages in western Oregon. J Wildl Manage 63: 484-496.",
+    "Manuwal, D.A. and Huff, M.H. (1987). Spring and winter bird populations in a Douglas-fir forest sere. J Wildl Manage 51: 586-595.",
+    "Rappole, J.H. (1995). The Ecology of Migrant Birds: A Neotropical Perspective. Smithsonian Institution Press.",
+    "Marra, P.P. and Holmes, R.T. (2001). Consequences of dominance-mediated habitat segregation in American Redstarts. Auk 118: 92-104.",
+    "Lerdahl, F. and Jackendoff, R. (1983). A Generative Theory of Tonal Music. MIT Press.",
+    "Meyer, L.B. (1956). Emotion and Meaning in Music. University of Chicago Press.",
+    "Margulis, E.H. (2014). On Repeat: How Music Plays the Mind. Oxford University Press.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. MacGillivray's Warbler (Geothlypis tolmiei). iucnredlist.org",
+    "eBird. MacGillivray's Warbler observation data, Pacific Northwest. ebird.org/species/macwar",
+    "Washington Department of Fish and Wildlife. PHS: Shrubsteppe and early-successional habitats. wdfw.wa.gov",
+    "Macaulay Library. MacGillivray's Warbler recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "014",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

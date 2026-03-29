@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 14&deg; &mdash; MacGillivray&rsquo;s Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.resolution { background: #BF360C; }
+    .theory-icon.ternary { background: #E65100; }
+    .theory-icon.tension { background: #1B5E20; }
+    .theory-icon.concealment { background: #4E342E; }
+    .theory-icon.eastwest { background: #1565C0; }
+    .theory-icon.shrub { background: #33691E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Ternary form card (unique to degree 14) */
+    .ternary-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FFCCBC 100%);
+      border: 1px solid #FF8A65;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .ternary-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Hidden singer card */
+    .hidden-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #D7CCC8 100%);
+      border: 1px solid #A1887F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .hidden-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4E342E;
+    }
+
+    /* East/West pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      border: 1px solid #64B5F6;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1565C0;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">14&deg;</div>
+      <div class="release-title-block">
+        <h2>MacGillivray&rsquo;s Warbler</h2>
+        <div class="scientific">Geothlypis tolmiei &middot; Family Parulidae (New World Warblers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Churry-Churry-Churry-Sweet &middot; Dense Shrub &middot; Summer Migrant &middot; Energy 2</div>
+
+    <blockquote>
+      A voice from inside a salmonberry thicket. Churry-churry-churry-sweet. You cannot
+      see the singer &mdash; the shrub is too dense, the bird too low, the leaves too thick.
+      But the song is unmistakable: three harsh syllables building anticipation, then one
+      clear note that resolves the tension. Setup and payoff. Question and answer. The
+      smallest possible story, told from a hiding place.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; Audubon&rsquo;s Gift to a Scotsman</h2>
+        <p>
+          The MacGillivray&rsquo;s Warbler is a small passerine of the family <strong>Parulidae</strong>
+          (New World warblers), the first representative of this family in the engine. Named by
+          <strong>John James Audubon</strong> for his friend <strong>William MacGillivray
+          (1796&ndash;1852)</strong>, a Scottish ornithologist who never visited North America.
+          The scientific epithet <em>tolmiei</em> honors <strong>William Fraser Tolmie</strong>,
+          a physician at Fort Nisqually on Puget Sound who collected the type specimen. Two
+          Scotsmen, one bird, and the tangled colonial history of PNW natural history.
+        </p>
+        <p>
+          Formerly placed in genus <em>Oporornis</em>, molecular phylogenetics reclassified the
+          MacGillivray&rsquo;s into <strong><em>Geothlypis</em></strong> (with the Common Yellowthroat),
+          revealing the old genus was polyphyletic. At <strong>4.7&ndash;5.3 inches</strong> and
+          <strong>9&ndash;13 grams</strong>, the male shows a distinctive <strong>slate-gray hood</strong>,
+          olive-green back, bright yellow belly, and conspicuous <strong>broken white eye arcs</strong>
+          &mdash; crescents above and below the eye, not a complete ring.
+        </p>
+
+        <!-- East/West Pair -->
+        <div class="pair-card">
+          <h3>The East/West Species Pair</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The MacGillivray&rsquo;s Warbler (west) and <strong>Mourning Warbler</strong> (east)
+            are sibling species &mdash; nearly identical in plumage, divided by the Great Plains.
+            Distinguished by range, eye arcs (MacGillivray&rsquo;s has distinct arcs; Mourning
+            typically lacks them), and subtle vocal differences. They hybridize where ranges meet.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Feature</th><th>MacGillivray&rsquo;s</th><th>Mourning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Range</strong></td><td>West of Great Plains</td><td>East of Great Plains</td></tr>
+              <tr><td><strong>Eye marks</strong></td><td>Distinct white eye arcs</td><td>Faint or absent</td></tr>
+              <tr><td><strong>Genus</strong></td><td colspan="2"><em>Geothlypis</em> (both reclassified from <em>Oporornis</em>)</td></tr>
+              <tr><td><strong>Relationship</strong></td><td colspan="2">Closest relatives &mdash; recently separated, still hybridize</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1565C0; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            In music: regional variants of the same tradition &mdash; Delta blues vs. Chicago blues,
+            East Coast vs. West Coast hip-hop. Same foundation, different inflection, shaped by
+            geographic isolation.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Churry-Sweet</h2>
+        <h3>Repetition With Resolution</h3>
+        <p>
+          The MacGillivray&rsquo;s Warbler&rsquo;s song is a distinctive <strong>two-part
+          structure</strong>: <strong>3&ndash;5 identical &ldquo;churry&rdquo; syllables</strong>
+          (buzzy, rising, 3.5&ndash;5.5 kHz) followed by a <strong>single contrasting
+          &ldquo;sweet&rdquo;</strong> (clear, descending, 2&ndash;3.5 kHz). Total duration
+          approximately <strong>1.5&ndash;2.5 seconds</strong>. The song contains an explicit
+          <strong>narrative arc</strong>: beginning (repeated churry), anticipation (building
+          through repetition), and resolution (the sweet).
+        </p>
+
+        <!-- Ternary Form Card -->
+        <div class="ternary-card">
+          <h3>The Minimal Narrative: A-A-A-B</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            This is the first species in the engine whose song contains an explicit
+            <strong>narrative arc</strong> &mdash; a beginning, middle, and end within a single
+            utterance. Where the Hutton&rsquo;s Vireo (degree 13&deg;) repeated A-A-A-A-A&hellip;
+            without resolution, the warbler repeats <strong>A-A-A-B</strong> &mdash; the same
+            repetition, with a contrasting terminal element that resolves the phrase.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Structure</th><th>Resolution</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pacific Wren</td><td>1&deg;</td><td>Cascade (no repetition)</td><td>None &mdash; continuous improvisation</td></tr>
+              <tr><td>Hutton&rsquo;s Vireo</td><td>13&deg;</td><td>A-A-A-A-A&hellip; (ostinato)</td><td>None &mdash; repetition without end</td></tr>
+              <tr><td><strong>MacGillivray&rsquo;s Warbler</strong></td><td><strong>14&deg;</strong></td><td><strong>A-A-A-B (ternary)</strong></td><td><strong>YES &mdash; contrasting sweet resolves the phrase</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #BF360C; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            This is <strong>ternary form</strong> at minimum scale. The churry syllables build
+            tension through repetition. The sweet releases it through contrast. Setup and payoff.
+            The smallest possible story. The 12-bar blues compressed to 2 seconds.
+          </p>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Structure</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Churry syllables</td><td>3.5&ndash;5.5 kHz</td><td>0.2&ndash;0.3 s each</td><td>3&ndash;5 identical</td><td>Setup (repetition)</td></tr>
+            <tr><td>Sweet syllable</td><td>2&ndash;3.5 kHz</td><td>0.3&ndash;0.5 s</td><td>Single</td><td>Resolution (contrast)</td></tr>
+            <tr><td>Full song</td><td>2&ndash;6 kHz</td><td>1.5&ndash;2.5 s</td><td>A-A-A-B</td><td>Territory, mate</td></tr>
+            <tr><td>Chip note</td><td>3&ndash;5 kHz</td><td>~0.05&ndash;0.1 s</td><td>Single</td><td>Contact, alarm</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Hidden Singer -->
+        <h2>Dense Shrub &mdash; The Hidden Singer</h2>
+
+        <div class="hidden-card">
+          <h3>Behavioral Invisibility</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The MacGillivray&rsquo;s Warbler is one of the most <strong>skulking</strong> birds
+            in the PNW. It sings from concealed perches inside dense shrub thickets &mdash; salal,
+            salmonberry, thimbleberry, snowberry. You hear it far more than you see it. The bird
+            <strong>has</strong> distinctive plumage (gray hood, yellow belly, eye arcs) but
+            <strong>chooses</strong> concealment.
+          </p>
+          <p style="font-size: 0.85rem; color: #4E342E; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Compare to the Pacific-slope Flycatcher (degree 6&deg;): the flycatcher <strong>must</strong>
+            be heard because Empidonax all look alike (morphological crypticity). The warbler
+            <strong>could</strong> be seen but refuses (behavioral invisibility). Imposed vs. chosen.
+            In music: the session musician, the ghost writer, the producer behind the board &mdash;
+            artists who let the work carry the identity while the maker stays hidden.
+          </p>
+        </div>
+
+        <p>
+          The dense shrub layer &mdash; salal, salmonberry, thimbleberry, snowberry, willow &mdash;
+          is a disturbance-dependent habitat. Fire, selective logging, and windthrow create the
+          dense regrowth the warbler requires. Complete fire suppression allows canopy closure,
+          reducing MacGillivray&rsquo;s habitat. The species exists in the dynamic space between
+          disturbance and maturity &mdash; the successional stage where the thickets are thick
+          and the canopy has not yet closed.
+        </p>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Repetition-resolution.</strong> The warbler&rsquo;s churry-churry-churry-sweet
+          is the smallest possible musical narrative: setup followed by payoff. The repeated
+          churry syllables build tension through anticipation. The sweet releases it through
+          contrast. Where the vireo (degree 13&deg;) gave us the ostinato &mdash; the loop that
+          never resolves &mdash; the warbler takes the same repetition and adds a destination.
+          The loop becomes a phrase. The ostinato becomes a cadence.
+        </p>
+        <p>
+          <strong>Ternary form (AAB).</strong> The AAAB structure maps to ternary form at its
+          smallest scale. In the 32-bar AABA form (&ldquo;Over the Rainbow,&rdquo; &ldquo;I Got
+          Rhythm&rdquo;), the A section establishes a theme, the B section (the bridge) provides
+          contrast. The warbler compresses this: multiple A statements followed by a single B.
+          The most compressed version of the most common song form in Western popular music.
+        </p>
+        <p>
+          <strong>Tension-release.</strong> The fundamental harmonic/melodic principle. The
+          churry syllables are harmonically tense: rising, buzzy, unresolved. The sweet is
+          the cadence: descending, clear, resolved. Dominant to tonic. Dissonance to consonance.
+          Every cadence in every piece of tonal music follows this trajectory.
+        </p>
+        <p>
+          <strong>Concealment as performance choice.</strong> The hidden singer maps to the
+          session musician, the ghost writer, the film composer &mdash; artists whose work
+          IS the presence, whose visibility is irrelevant or deliberately withheld. The
+          MacGillivray&rsquo;s Warbler could perch in the open. It does not. It lets the
+          song do the work.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon resolution">R</div>
+            <div class="theory-content">
+              <h4>Repetition-Resolution <span class="theory-level foundational">Foundational</span></h4>
+              <p>The minimal narrative: setup followed by payoff. A-A-A-B. The churry syllables build anticipation; the sweet releases it. Where the vireo looped forever, the warbler arrives. The ostinato becomes a cadence.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon ternary">T</div>
+            <div class="theory-content">
+              <h4>Ternary Form (AAB) <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The most fundamental structural principle in Western music at minimum scale. Statement, repetition, contrast. The 32-bar AABA form compressed to 2 seconds. The 12-bar blues arc in a bird song.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon tension">H</div>
+            <div class="theory-content">
+              <h4>Tension-Release <span class="theory-level foundational">Foundational</span></h4>
+              <p>Dissonance to consonance. Dominant to tonic. Rising buzzy churry (tension) to descending tonal sweet (release). The engine that drives all tonal music, delivered in its purest biological form.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon concealment">C</div>
+            <div class="theory-content">
+              <h4>Concealment as Performance <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The hidden singer who could reveal itself but does not. The session musician, the ghost writer, the producer. Let the work carry the identity. The maker stays behind the thicket.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon eastwest">E</div>
+            <div class="theory-content">
+              <h4>East/West Species Pair <span class="theory-level advanced">Advanced</span></h4>
+              <p>Sibling species divided by geography. MacGillivray&rsquo;s (west) / Mourning (east). The same bird in two rooms. Regional variants of the same tradition shaped by isolation &mdash; Delta blues vs. Chicago blues.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon shrub">S</div>
+            <div class="theory-content">
+              <h4>Dense Shrub Ecology <span class="theory-level foundational">Foundational</span></h4>
+              <p>Disturbance-dependent habitat: salal, salmonberry, thimbleberry thickets. The acoustic stage that hides the singer and colors the sound. The recording studio of the understory.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-013</strong> &mdash; Hutton&rsquo;s Vireo
+            <p>REPETITION WITHOUT vs. WITH RESOLUTION. Vireo: A-A-A-A&hellip; (ostinato, no destination). Warbler: A-A-A-B (repetition + resolution). Sequential degrees, one structural addition: the sweet. The loop becomes a phrase.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-006</strong> &mdash; Pacific-slope Flycatcher
+            <p>HIDDEN MIGRANT PAIR. Both neotropical migrants, both heard more than seen. Flycatcher: MUST be heard (morphological crypticity). Warbler: COULD be seen but CHOOSES concealment. Imposed vs. chosen invisibility.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the PNW
+            <p>PARULIDAE ENTRY. First New World warbler in the engine. The most species-rich warbler family in the Americas, entering through one of its most secretive members.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>DENSE SHRUB ECOLOGY. Salal, salmonberry, thimbleberry thickets as distinct habitat layer. Early-successional and edge habitats maintained by disturbance. The acoustic stage of the understory.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Aaron Parks at degree 14&deg;. Both young, contemporary, carrying tradition forward with a new twist. Both take inherited structures and add resolution that transforms the pattern.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011</strong> &mdash; Oregon Junco
+            <p>TRILL vs. TERNARY. Junco: single-note trill above fusion (continuous, no endpoint). Warbler: repeated syllables below fusion + resolution (discrete events leading to structural endpoint). The trill has no ending. The churry-sweet does.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>COMPLEXITY BOOKEND. Wren: maximum complexity, cascading improvisation, no pattern. Warbler: structured simplicity, clear A-A-A-B with beginning, middle, end. Fourteen degrees from chaos to the first story.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Pitocchelli, J. (2020). &ldquo;MacGillivray&rsquo;s Warbler.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Lovette, I.J. et al. (2010). Multilocus phylogeny for wood-warblers and revised Parulidae classification. <em>Mol Phylogenet Evol</em> 57.</li>
+          <li>Irwin, D.E. et al. (2009). Hybridization in MacGillivray&rsquo;s/Mourning Warbler contact zone. <em>J Avian Biol</em> 40.</li>
+          <li>Curson, J., Quinn, D. &amp; Beadle, D. (1994). <em>Warblers of the Americas</em>. Houghton Mifflin.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Franklin, J.F. &amp; Dyrness, C.T. (1973). <em>Natural Vegetation of Oregon and Washington</em>. Oregon State University Press.</li>
+          <li>Hagar, J.C. (1999). Riparian buffer width and bird assemblages in western Oregon. <em>J Wildl Manage</em> 63.</li>
+          <li>Lerdahl, F. &amp; Jackendoff, R. (1983). <em>A Generative Theory of Tonal Music</em>. MIT Press.</li>
+          <li>Meyer, L.B. (1956). <em>Emotion and Meaning in Music</em>. University of Chicago Press.</li>
+          <li>Margulis, E.H. (2014). <em>On Repeat: How Music Plays the Mind</em>. Oxford University Press.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: MacGillivray&rsquo;s Warbler. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: MacGillivray&rsquo;s Warbler. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. PHS: Shrubsteppe habitats. wdfw.wa.gov</li>
+          <li>Macaulay Library. MacGillivray&rsquo;s Warbler recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Parulidae</div>
+          <div class="stat-detail">New World Warblers &mdash; first in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.7&ndash;5.3 in</div>
+          <div class="stat-detail">12&ndash;13.5 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">9&ndash;13 g</div>
+          <div class="stat-detail">Small warbler</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Gray hood</div>
+          <div class="stat-detail">Olive back, yellow belly, white eye arcs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">East/West Pair</div>
+          <div class="stat-value">Mourning</div>
+          <div class="stat-detail">Eastern counterpart &mdash; sibling species</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Churry-sweet</div>
+          <div class="stat-detail">A-A-A-B &mdash; repetition + resolution</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2&ndash;6 kHz</div>
+          <div class="stat-detail">Churry (3.5&ndash;5.5) + sweet (2&ndash;3.5)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value">1.5&ndash;2.5 s</div>
+          <div class="stat-detail">Per song (6&ndash;10 songs/min)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Resolution</div>
+          <div class="stat-detail">First song with narrative arc (setup &rarr; payoff)</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">14&deg;</div>
+          <div class="stat-detail">Ternary &mdash; repetition with resolution</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Present, audible, understated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Dense Shrub</div>
+          <div class="stat-detail">Salal, salmonberry, thimbleberry thickets</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; 2nd in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Ternary / AAB</div>
+          <div class="stat-detail">Repeated syllables + contrasting resolution</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 14&deg; &mdash; S36</div>
+          <div class="parallel-name">Aaron Parks</div>
+          <div class="parallel-detail">Both are young, contemporary, carrying tradition forward with a new twist. Parks takes inherited jazz structures and adds fresh harmonic resolution. The warbler takes the vireo&rsquo;s repetition and adds a resolution syllable. Both transform inherited patterns by adding something at the end that changes the meaning of everything before it.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 014 of 360 &middot;
+      <a href="../013-huttons-vireo/index.html">Degree 13&deg;: Hutton&rsquo;s Vireo</a> &middot;
+      <a href="../012-pine-siskin/index.html">Degree 12&deg;: Pine Siskin</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
