@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 23&deg; &mdash; Black-headed Grosbeak &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.groove { background: #E65100; }
+    .theory-icon.convergence { background: #7B1FA2; }
+    .theory-icon.duet { background: #00695C; }
+    .theory-icon.bill { background: #BF360C; }
+    .theory-icon.mixed { background: #33691E; }
+    .theory-icon.plateau { background: #1565C0; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Groove reset card */
+    .groove-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #F57C00;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .groove-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Convergence card */
+    .convergence-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 1px solid #AB47BC;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .convergence-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #6A1B9A;
+    }
+
+    /* Both-sex singing card */
+    .duet-card {
+      background: linear-gradient(135deg, #E0F2F1 0%, #80CBC4 100%);
+      border: 1px solid #00897B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .duet-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #004D40;
+    }
+
+    /* Bill card */
+    .bill-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FF8A65 100%);
+      border: 1px solid #E64A19;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .bill-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">23&deg;</div>
+      <div class="release-title-block">
+        <h2>Black-headed Grosbeak</h2>
+        <div class="scientific">Pheucticus melanocephalus &middot; Family Cardinalidae (Cardinals &amp; Grosbeaks)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Rich Robin-like Warble with Slurs &middot; Mixed Forest &middot; Summer &middot; Energy 4</div>
+
+    <blockquote>
+      In mid-June, from the canopy of a bigleaf maple along a suburban creek,
+      a rich warble pours down &mdash; a rolling, liquid stream of slurred whistles
+      rising and falling in pitch, each phrase different from the last, delivered
+      at a pace that blurs the boundary between distinct notes and continuous melody.
+      It sounds like a robin. It is not a robin. It is a chunky, front-heavy bird
+      with a jet-black head, warm cinnamon-orange breast, and a pale conical bill
+      so massive it looks borrowed from a bird twice its size. The Black-headed
+      Grosbeak &mdash; seed-cracker, Monarch-eater, neotropical migrant, the summer
+      voice of PNW mixed forest. The groove resets. The melody returns.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Groove Reset Card -->
+        <div class="groove-card">
+          <h3>The Groove Reset: Melody After Percussion</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>Two degrees of percussion.</strong> Degree 21 was the hammer (loud metronomic
+            wick call). Degree 22 was the drum (broadband mechanical percussion &mdash; the first
+            non-vocal sound). Now degree 23 returns to <strong>tonal melody</strong> &mdash; a rich,
+            rolling warble of slurred phrases in the warm mid-frequency band. The engine exhales.
+            The groove resets. The 24th acoustic element.
+          </p>
+        </div>
+
+        <!-- Convergence Card -->
+        <div class="convergence-card">
+          <h3>Acoustic Convergence: Sounds Like a Robin, Isn&rsquo;t a Robin</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Black-headed Grosbeak (Cardinalidae) and the American Robin (Turdidae, degree 25)
+            produce remarkably similar songs &mdash; same frequency range (2&ndash;3.5 kHz center),
+            same phrase structure (rapidly alternating slurred whistles), same rhythmic cadence.
+            These families diverged approximately <strong>40 million years ago</strong>. This is not
+            mimicry. It is <strong>convergent acoustic evolution</strong> &mdash; two lineages arriving
+            at the same solution through independent paths. Similar large bills produce similar
+            vocal-tract resonances. Similar habitats select for similar acoustic properties.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Black-headed Grosbeak</th><th>American Robin</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Family</td><td>Cardinalidae</td><td>Turdidae</td></tr>
+              <tr><td>Frequency center</td><td>2.0&ndash;3.5 kHz</td><td>2.0&ndash;3.5 kHz</td></tr>
+              <tr><td>Phrase variety</td><td>Higher &mdash; rarely repeats</td><td>Lower &mdash; cyclic repetition</td></tr>
+              <tr><td>Tone</td><td>Slightly richer, more mellow</td><td>Slightly brighter, more clipped</td></tr>
+              <tr><td>Song structure</td><td>Continuous flow</td><td>Grouped phrase sets</td></tr>
+              <tr style="background: rgba(171,71,188,0.15); font-weight: 600;"><td>Engine position</td><td><strong>Degree 23 (preview)</strong></td><td><strong>Degree 25 (archetype)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics</h2>
+        <p>
+          The Black-headed Grosbeak delivers a rapid, continuous warble of
+          <strong>10&ndash;20 slurred whistled phrases</strong> per song bout, each phrase a
+          smooth pitch glide &mdash; upslur, downslur, or arcing slur. The song lasts
+          <strong>2&ndash;5 seconds</strong> and is delivered at approximately <strong>3&ndash;5
+          phrases per second</strong>, creating a rolling, liquid texture.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>1.5&ndash;4.5 kHz</td></tr>
+            <tr><td>Peak energy</td><td>2.0&ndash;3.5 kHz</td></tr>
+            <tr><td>Song duration</td><td>2&ndash;5 seconds (up to 6&ndash;8 extended)</td></tr>
+            <tr><td>Phrases per bout</td><td>10&ndash;20</td></tr>
+            <tr><td>Phrase rate</td><td>3&ndash;5 per second</td></tr>
+            <tr><td>Phrase type</td><td>Slurred whistles (continuous pitch glides)</td></tr>
+            <tr><td>Timbre</td><td>Rich, warm, full-bodied &mdash; &ldquo;robin-like&rdquo;</td></tr>
+            <tr><td>Amplitude</td><td>Moderate-loud &mdash; carries well through mixed canopy</td></tr>
+            <tr><td>Unique feature</td><td>Both sexes sing</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Both-Sex Singing Card -->
+        <div class="duet-card">
+          <h3>Both Sexes Sing</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Black-headed Grosbeak is one of the few North American passerines where
+            <strong>both males and females produce elaborate song</strong>. Female song is
+            structurally similar to the male&rsquo;s &mdash; a warble of slurred phrases &mdash;
+            but typically shorter and softer.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Behavior</th><th>Male</th><th>Female</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Song</td><td>Loud, elaborate, 2&ndash;5 sec</td><td>Softer, 1&ndash;3 sec</td></tr>
+              <tr><td>Incubation</td><td>Yes (midday shift)</td><td>Yes (morning, evening, overnight)</td></tr>
+              <tr><td>Sings on nest</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>Territorial defense</td><td>Song + display</td><td>Song + aggression near nest</td></tr>
+              <tr style="background: rgba(0,137,123,0.15); font-weight: 600;"><td>Engine significance</td><td colspan="2"><strong>First species in the engine where both sexes produce elaborate, functional song</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bill Card -->
+        <div class="bill-card">
+          <h3>The Bill: Seed-Cracker and Sound Shaper</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The grosbeak&rsquo;s massive conical bill (15&ndash;17 mm deep, bite force
+            35&ndash;50 N) is the most powerful seed-processing apparatus in the engine. But
+            the bill also shapes the song. In passerines, bill morphology affects vocal-tract
+            resonance &mdash; <strong>larger bills produce warmer, lower-frequency sounds</strong>
+            (Podos 2001). The grosbeak&rsquo;s &ldquo;robin-like&rdquo; quality partly arises because
+            its large bill produces similar resonance to the robin&rsquo;s equally substantial bill.
+            The seed-cracker IS the sound shaper.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Bill Function</th><th>Detail</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Seed-cracking</td><td>Sunflower in 2&ndash;3 sec, 35&ndash;50 N bite force</td></tr>
+              <tr><td>Fruit processing</td><td>Berry flesh crushing</td></tr>
+              <tr><td>Insect capture</td><td>Large beetles, caterpillars</td></tr>
+              <tr><td>Cowbird egg ejection</td><td>~30&ndash;40% rejection rate</td></tr>
+              <tr style="background: rgba(191,54,12,0.15); font-weight: 600;"><td><strong>Vocal resonance</strong></td><td><strong>Large bill = warm, low-frequency song character</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Migration -->
+        <h2>Neotropical Migrant: The Summer Voice</h2>
+        <p>
+          The Black-headed Grosbeak is a long-distance neotropical migrant, wintering in
+          western Mexico and breeding in the PNW from <strong>late April through August</strong>.
+          Peak song occurs <strong>late May through mid-July</strong> &mdash; approximately 6&ndash;8
+          weeks of full territorial singing. The grosbeak is the sound of PNW summer.
+        </p>
+        <p>
+          An ecological footnote: the Black-headed Grosbeak is one of the few birds that feeds
+          on <strong>Monarch butterflies</strong> at Mexican overwintering sites, tolerating
+          cardenolide toxins that deter most predators. The same bird that sings in a Seattle
+          backyard in June feeds on toxic butterflies in a Mexican fir forest in January.
+        </p>
+
+        <!-- Sexual Dimorphism -->
+        <h2>Sexual Dimorphism</h2>
+        <p>
+          <strong>Male:</strong> Jet-black head (bold hood from crown to chin), rich cinnamon-orange
+          breast, black back with tawny streaks, bold white wing bars and primary patches, large
+          pale blue-gray conical bill. One of the most striking passerines in the PNW.
+        </p>
+        <p>
+          <strong>Female:</strong> Brown head with bold white supercilium, warm buff-to-ochre
+          underparts with fine flank streaking, less bold wing bars, same large pale bill. Cryptic
+          for nest concealment. Bill size is NOT sexually dimorphic &mdash; both sexes need the
+          same seed-cracking and vocal-resonance apparatus.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon groove">G</div>
+            <div class="theory-content">
+              <h4>The Groove Reset &mdash; 24th Acoustic Element</h4>
+              <p>Return to tonal melody after two degrees of percussion. Rich rolling warble resets the engine to melodic flow, enriched by everything that came before.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon convergence">C</div>
+            <div class="theory-content">
+              <h4>Acoustic Convergence Across Families</h4>
+              <p>Grosbeak (Cardinalidae) and Robin (Turdidae) produce similar songs from ~40 Mya of independent evolution. Same frequency range, phrase structure, bill-shaped resonance. Convergence, not mimicry.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon duet">D</div>
+            <div class="theory-content">
+              <h4>Both-Sex Singing</h4>
+              <p>Female song as functional, elaborate, and ancestral &mdash; not degraded male song. Both sexes sing, both incubate. Vocal symmetry as reproductive strategy.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bill">B</div>
+            <div class="theory-content">
+              <h4>Bill Morphology as Acoustic Resonator</h4>
+              <p>The massive conical bill (15&ndash;17 mm deep, 35&ndash;50 N bite force) simultaneously cracks seeds and shapes song. The seed-cracker IS the sound shaper.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mixed">M</div>
+            <div class="theory-content">
+              <h4>Mixed Forest as Generalist Acoustic Niche</h4>
+              <p>The broadest ecosystem category in the engine. Any mixture of deciduous and conifer trees &mdash; the generalist venue that accommodates the widest range of performers.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon plateau">E</div>
+            <div class="theory-content">
+              <h4>Energy Plateau: Sustained E=4 Baseline</h4>
+              <p>Third consecutive E=4 degree (21&ndash;23). Three forms of acoustic power: metronomic vocal (hammer), broadband mechanical (drum), melodic vocal (warble). The loudness is the new normal.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-022: Northern Flicker (Drum)</strong>
+            <p>THE GROOVE RESET. Degree 22 was broadband percussion. Degree 23 returns to tonal melody. The engine exhales. Percussion yields to warble.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>THE CONVERGENCE PAIR. Grosbeak (23, Cardinalidae) sounds like Robin (25, Turdidae). Same frequency, phrase structure, cadence. ~40 Mya of independent evolution. The preview before the archetype.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-007: Hermit Thrush</strong>
+            <p>THREE RICH WARBLES. Hermit Thrush (7), Grosbeak (23), Robin (25) &mdash; three celebrated warm-voiced woodland singers from three families, all in the 2&ndash;4 kHz band.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker (Voice)</strong>
+            <p>ENERGY 4 TRILOGY. Three consecutive E=4 degrees (21&ndash;23): hammer, drum, warble. Three forms of acoustic power at sustained high energy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011: Oregon Junco</strong>
+            <p>NEAR-FUSION TEMPO. Junco trill at fusion threshold. Grosbeak phrase rate (~3&ndash;5/sec) approaches cognitive blurring for untrained listeners. Both occupy the temporal territory where events begin to merge.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018: Swainson&rsquo;s Thrush</strong>
+            <p>SPIRAL TO WAVE. Swainson&rsquo;s ascends phrase by phrase. The grosbeak undulates &mdash; rising and falling continuously. The spiral became the wave.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Black-headed Grosbeak documented as mixed-forest summer breeder. Both-sex singing and cowbird resistance noted.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Mixed forest ecology: deciduous-conifer interaction zones, suburban canopy dynamics. The broadest ecosystem type corresponds to the most common PNW forest structure.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: Allen Stone (Soul/Jazz, E=4, Chewelah to Seattle, ATO Records). The groove reset: melody returning after percussion. Small-town origin, big-stage voice.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Ortega, C.P. and Hill, G.E. (2020). Black-headed Grosbeak (<em>Pheucticus melanocephalus</em>). <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Groschupf, K. and Thompson, C.F. (1998). Black-headed Grosbeak. <em>The Birds of North America</em>. Cornell Lab of Ornithology.</li>
+          <li>Ritchison, G. (1983). The function of singing in female Black-headed Grosbeaks. <em>Auk</em> 100(1): 105&ndash;116.</li>
+          <li>Odom, K.J. et al. (2014). Female song is widespread and ancestral in songbirds. <em>Nature Communications</em> 5: 3379.</li>
+          <li>Podos, J. (2001). Correlated evolution of morphology and vocal signal structure in Darwin&rsquo;s finches. <em>Nature</em> 409: 185&ndash;188.</li>
+          <li>Herrel, A. et al. (2005). Bite performance and morphology in Darwin&rsquo;s finches. <em>Functional Ecology</em> 19(1): 43&ndash;48.</li>
+          <li>Van der Meij, M.A.A. and Bout, R.G. (2004). Scaling of jaw muscle size and maximal bite force in finches. <em>J. Exp. Biology</em> 207(16): 2745&ndash;2753.</li>
+          <li>Rothstein, S.I. (1975). An experimental investigation of avian brood parasitism. <em>Condor</em> 77(3): 250&ndash;271.</li>
+          <li>Peer, B.D. and Sealy, S.G. (2004). Correlates of egg rejection in hosts of the Brown-headed Cowbird. <em>Studies in Avian Biology</em> 27: 120&ndash;127.</li>
+          <li>Brower, L.P. and Calvert, W.H. (1985). Foraging dynamics of bird predators on overwintering Monarch butterflies. <em>Evolution</em> 39(4): 852&ndash;868.</li>
+          <li>Boncoraglio, G. and Saino, N. (2007). Habitat structure and bird song evolution. <em>Functional Ecology</em> 21(1): 134&ndash;142.</li>
+          <li>Macaulay Library. Black-headed Grosbeak recordings. Cornell Lab of Ornithology. macaulaylibrary.org</li>
+          <li>BirdWeb (Seattle Audubon Society). Black-headed Grosbeak. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates: Black-headed Grosbeak. partnersinflight.org</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">23&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Cardinalidae</div>
+          <div class="stat-detail">First cardinal/grosbeak in the engine &mdash; 15th family</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Rich warble</div>
+          <div class="stat-detail">Robin-like warble with slurs &mdash; the groove reset</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Third consecutive E=4 degree (21&ndash;23)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mixed forest</div>
+          <div class="stat-detail">Broadest ecosystem category in the engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant &mdash; late Apr to Aug</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">1.5&ndash;4.5 kHz</div>
+          <div class="stat-detail">Peak energy 2.0&ndash;3.5 kHz (warm mid-range)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Bill Depth</div>
+          <div class="stat-value">15&ndash;17 mm</div>
+          <div class="stat-detail">Bite force 35&ndash;50 N &mdash; largest bill in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Song Duration</div>
+          <div class="stat-value">2&ndash;5 sec</div>
+          <div class="stat-detail">10&ndash;20 slurred phrases per bout</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Both Sexes Sing</div>
+          <div class="stat-value">Yes</div>
+          <div class="stat-detail">Male + female &mdash; both incubate, both sing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Convergence</div>
+          <div class="stat-value">Robin-like</div>
+          <div class="stat-detail">Convergent with Turdidae at degree 25</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 23 &mdash; S36</div>
+          <div class="parallel-name">Allen Stone</div>
+          <div class="parallel-detail">Soul/Jazz &middot; E=4 &middot; Chewelah to Seattle &middot; ATO Records</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Both are energy-4 vocal performances where the voice IS the instrument.
+            The groove reset: melody returning after percussion.
+            Small-town to big-stage. Soul as convergent genre.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 23&deg; of 360&deg; &mdash; v1.49.159</p>
+  </footer>
+</body>
+</html>
