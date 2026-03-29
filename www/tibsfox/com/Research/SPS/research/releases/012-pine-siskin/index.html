@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 12&deg; &mdash; Pine Siskin &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.sawtooth { background: #C62828; }
+    .theory-icon.stochastic { background: #1565C0; }
+    .theory-icon.buzzy { background: #E65100; }
+    .theory-icon.temporal { background: #2E7D32; }
+    .theory-icon.masting { background: #7B1FA2; }
+    .theory-icon.xenakis { background: var(--puget-dark); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Zhreee card (unique to degree 12) */
+    .zhreee-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .zhreee-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #F57F17;
+    }
+
+    /* Irruption card */
+    .irruption-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      border: 1px solid #64B5F6;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .irruption-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1565C0;
+    }
+
+    /* Temporal modes comparison */
+    .temporal-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .temporal-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #2E7D32;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">12&deg;</div>
+      <div class="release-title-block">
+        <h2>Pine Siskin</h2>
+        <div class="scientific">Spinus pinus &middot; Family Fringillidae (True Finches)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Rising Zhreee / Buzzy Warble &middot; Conifer Seed Crop &middot; Irruptive &middot; Energy 1</div>
+
+    <blockquote>
+      A tiny electrical zap ascending through the harmonics. The first electronic sound in
+      biological form. The bird was not here last year. It may not be here next year. Its
+      presence is not scheduled &mdash; it is stochastic, driven by seed crop failure a
+      thousand miles north. Residents are constants. Migrants are periodic. The siskin is noise.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Unpredictable Finch</h2>
+        <p>
+          The Pine Siskin is a small finch in the family <strong>Fringillidae</strong> (true
+          finches), genus <em>Spinus</em> &mdash; sister to the American Goldfinch, Lesser
+          Goldfinch, and Lawrence&rsquo;s Goldfinch. Where the goldfinches announce themselves
+          with bright yellow plumage and clean, sweet vocalizations, the siskin hides in plain
+          sight: a small, heavily streaked, brown-and-beige bird with only the faintest hint of
+          yellow at the base of the flight feathers &mdash; visible in flight, invisible at rest.
+        </p>
+        <p>
+          <strong>Physical description.</strong> Small: <strong>4.3&ndash;5.5 inches</strong>,
+          <strong>12&ndash;18 grams</strong>. Heavily streaked with a <strong>slender, pointed
+          bill</strong> specialized for extracting seeds from conifer cones. Highly variable
+          plumage &mdash; some individuals show prominent yellow wing bars, others show almost
+          none. The variability itself is diagnostic. The sharp bill is the key to everything:
+          it inserts between cone scales to pry out small, flat, winged seeds. Bill shape drives
+          ecology. Ecology drives everything else.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Zhreee</h2>
+        <h3>An Ascending Sawtooth in Feathers</h3>
+        <p>
+          The Pine Siskin&rsquo;s signature vocalization is a <strong>rising &ldquo;zhreee&rdquo;</strong>
+          &mdash; a distinctive ascending buzzy call that sounds like a tiny electrical zap.
+          Duration <strong>0.3&ndash;0.8 seconds</strong>, sweeping upward through roughly
+          <strong>2&ndash;8 kHz</strong>. The sound quality is unmistakable: dry, buzzy,
+          electrically charged, ascending.
+        </p>
+        <ul>
+          <li><strong>Buzzy:</strong> Rich in harmonics &mdash; multiple overtone bands sweeping upward in parallel (sawtooth-like spectrum)</li>
+          <li><strong>Ascending:</strong> Frequency sweep from low to high &mdash; a linear pitch ramp</li>
+          <li><strong>Electronic:</strong> The first species in the engine that sounds like a synthesizer</li>
+          <li><strong>Also:</strong> Extended buzzy warble (5&ndash;15 s) incorporating the zhreee as a recurring motif within a stream of buzzy, twittering phrases</li>
+        </ul>
+
+        <!-- Zhreee / Sawtooth Card -->
+        <div class="zhreee-card">
+          <h3>The Sawtooth Wave Connection</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The zhreee maps directly to synthesizer waveform terminology. A <strong>sawtooth
+            wave</strong> contains all harmonics (odd and even) at amplitudes decreasing as 1/n
+            &mdash; the richest, buzziest standard waveform. The siskin&rsquo;s zhreee shows
+            multiple parallel frequency bands sweeping upward on the spectrogram &mdash; the
+            spectral signature of a sawtooth-like waveform with a frequency sweep applied.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Waveform</th><th>Harmonics</th><th>Timbre</th><th>Biological Analog</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sine wave</td><td>Fundamental only</td><td>Pure, smooth</td><td>Varied Thrush whistle (degree 2&deg;)</td></tr>
+              <tr><td>Square/pulse wave</td><td>Odd harmonics</td><td>Hollow, reedy</td><td>Spotted Owl hoot (degree 4&deg;)</td></tr>
+              <tr><td><strong>Sawtooth wave</strong></td><td><strong>All harmonics</strong></td><td><strong>Buzzy, rich</strong></td><td><strong>Pine Siskin zhreee (degree 12&deg;)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #F57F17; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Engage a sawtooth oscillator. Apply an LFO to pitch with positive modulation. Sweep
+            low to high over 0.3&ndash;0.8 seconds. The result is the zhreee. The siskin IS a synthesizer.
+          </p>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Sweep</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Rising zhreee</td><td>2&ndash;8 kHz</td><td>0.3&ndash;0.8 s</td><td>Ascending</td><td>Contact, identity, flight</td></tr>
+            <tr><td>Buzzy warble</td><td>2&ndash;10 kHz</td><td>5&ndash;15 s</td><td>Variable</td><td>Territory, mate attraction</td></tr>
+            <tr><td>&ldquo;Tee-tee&rdquo; flight calls</td><td>3&ndash;6 kHz</td><td>0.05&ndash;0.15 s</td><td>Flat/slight ascent</td><td>Flock contact in flight</td></tr>
+            <tr><td>Soft chatter</td><td>3&ndash;7 kHz</td><td>Variable</td><td>Varied</td><td>Social, feeding</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Irruptive Migration -->
+        <h2>Irruptive Migration &mdash; Stochastic Presence</h2>
+
+        <div class="irruption-card">
+          <h3>The Three Temporal Modes</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Every species in the engine so far has had a predictable presence pattern &mdash;
+            either resident (always there) or migratory (arrives on schedule). The Pine Siskin
+            is the first species with <strong>stochastic presence</strong>: present in some
+            years, absent in others, with no fixed schedule. The siskin introduces
+            <strong>noise</strong> into the engine.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Mode</th><th>Signal Type</th><th>Timing</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Resident</strong></td><td>DC (constant)</td><td>Always present</td><td>Heron, Wren, Chickadees, Junco</td></tr>
+              <tr><td><strong>Migrant</strong></td><td>Periodic (sine wave)</td><td>Calendar-driven</td><td>Pacific-slope Flycatcher (degree 6&deg;)</td></tr>
+              <tr><td><strong>Irruptive</strong></td><td><strong>Stochastic (noise)</strong></td><td><strong>Event-driven (seed crop)</strong></td><td><strong>Pine Siskin (degree 12&deg;)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1565C0; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The flycatcher arrives on the calendar. The siskin arrives on the crisis. Conifer seed
+            crop failure in boreal/montane forests drives massive nomadic southward dispersal.
+            The siskin&rsquo;s presence in Seattle is a signal that something has gone wrong in
+            forests a thousand miles north.
+          </p>
+        </div>
+
+        <p>
+          Pine Siskin irruptions are driven by <strong>conifer seed crop failure</strong>. Conifers
+          <strong>mast</strong> &mdash; synchronized boom-and-bust seed production across large areas.
+          In mast years: abundant food, siskins stay in the breeding range. In mast failure years:
+          food collapses, siskins irrupt southward in massive nomadic movements. The bird&rsquo;s
+          presence at any location is an information signal about resource conditions elsewhere.
+        </p>
+        <p>
+          In music, this maps to <strong>free jazz timing</strong>: events occur when conditions
+          demand, not on a metered grid. John Cage&rsquo;s chance operations determine musical events
+          via external conditions (I Ching) rather than internal score. Xenakis&rsquo;s stochastic
+          compositions govern individual note events by probability distributions while the aggregate
+          follows deterministic laws. Each siskin&rsquo;s path is unpredictable. The population follows
+          the resource gradient. <strong>Individual chaos, collective pattern.</strong>
+        </p>
+
+        <!-- Energy 1 Comparison -->
+        <h2>Energy 1: The Quiet Stochastic Signal</h2>
+
+        <div class="temporal-card">
+          <h3>Energy-1 Comparison: Bushtit (10&deg;) vs. Pine Siskin (12&deg;)</h3>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th></th><th>Bushtit (10&deg;)</th><th>Pine Siskin (12&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Energy</strong></td><td>1</td><td><strong>1</strong></td></tr>
+              <tr><td><strong>Presence</strong></td><td>Resident &mdash; always there</td><td><strong>Irruptive &mdash; stochastic</strong></td></tr>
+              <tr><td><strong>Signal type</strong></td><td>DC quiet signal (constant whisper)</td><td><strong>Stochastic quiet signal (appears/vanishes)</strong></td></tr>
+              <tr><td><strong>Sound</strong></td><td>Thin seep at noise floor</td><td><strong>Buzzy zhreee &mdash; quiet but distinctive</strong></td></tr>
+              <tr><td><strong>Flock</strong></td><td>Tight cohesive flock, 20&ndash;40 birds</td><td><strong>Variable flock, 5 to hundreds</strong></td></tr>
+              <tr><td><strong>Timbre</strong></td><td>Near-noise &mdash; 1-bit signal</td><td><strong>Harmonically rich &mdash; sawtooth-like</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #2E7D32; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The bushtit whispers constantly. The siskin whispers &mdash; when it shows up at all.
+            Same energy, opposite temporal behavior. The quiet constant vs. the quiet stochastic.
+          </p>
+        </div>
+
+        <p>
+          The Part A parallel at degree 12 is <strong>Lanphere</strong> from S36. Both are energy-1.
+          Both disappear and return unpredictably. The irruptive cycle (present / absent / present)
+          mirrors Lanphere&rsquo;s arc (present / absent / present). Both carry more significance
+          when they appear because the appearance cannot be scheduled.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon sawtooth">S</div>
+            <div class="theory-content">
+              <h4>Ascending Sawtooth Wave <span class="theory-level advanced">Advanced</span></h4>
+              <p>The zhreee is a sawtooth wave with ascending frequency sweep &mdash; all harmonics present, sweeping upward simultaneously. LFO on oscillator pitch. The first electronic sound in biological form.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon stochastic">F</div>
+            <div class="theory-content">
+              <h4>Free Jazz / Stochastic Timing <span class="theory-level advanced">Advanced</span></h4>
+              <p>Irruptive presence maps to free jazz timing &mdash; events driven by conditions, not a grid. Cage&rsquo;s chance operations, Xenakis&rsquo;s stochastic music, Ornette Coleman&rsquo;s free rhythm. Clock-driven becomes event-driven.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon buzzy">B</div>
+            <div class="theory-content">
+              <h4>Buzzy Timbre: Harmonic Density <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>&ldquo;Buzzy&rdquo; = dense harmonic content (all harmonics at significant amplitude). Sine wave is smooth. Sawtooth is buzzy. The siskin is consistently buzzy &mdash; every vocalization shares this rough, electrically charged timbre.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon temporal">T</div>
+            <div class="theory-content">
+              <h4>Three Temporal Modes <span class="theory-level foundational">Foundational</span></h4>
+              <p>Resident = DC. Migrant = periodic. Irruptive = stochastic. The siskin completes the taxonomy of presence: constant, clock-driven, and event-driven. All three temporal modes now represented in the engine.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon masting">M</div>
+            <div class="theory-content">
+              <h4>Conifer Masting Cycle <span class="theory-level foundational">Foundational</span></h4>
+              <p>Boom-and-bust seed production drives the irruptive cycle. Mast years = fortissimo (resources abundant). Failure years = silence and dispersal. The biological crescendo-decrescendo at multi-year timescales.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon xenakis">X</div>
+            <div class="theory-content">
+              <h4>Xenakis: Stochastic Composition <span class="theory-level advanced">Advanced</span></h4>
+              <p>Each siskin&rsquo;s path is unpredictable. The aggregate population follows the resource gradient. Individual chaos, collective pattern &mdash; the defining property of both stochastic music and irruptive migration. Pithoprakta in feathers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Ascending sawtooth sweep.</strong> Engage a sawtooth oscillator, apply positive
+          LFO to pitch, sweep upward. The result: a buzzy, harmonically rich ascending sound.
+          The zhreee in electronic form. The flycatcher (degree 6&deg;) swept a sine wave upward
+          (clean whistle). The siskin sweeps a sawtooth wave upward (buzzy rasp). Same direction,
+          radically different timbre. The flycatcher asks a question. The siskin fires a signal.
+        </p>
+        <p>
+          <strong>Free jazz timing.</strong> In traditional music, events fall on a grid. In free
+          jazz, events occur when conditions demand. The siskin arrives not on schedule but on
+          crisis &mdash; when seed crops fail, when resources dictate. Ornette Coleman&rsquo;s free
+          rhythm. John Cage&rsquo;s chance operations. The ecological equivalent of music determined
+          by external conditions rather than internal score.
+        </p>
+        <p>
+          <strong>Stochastic composition.</strong> Xenakis used probability distributions to govern
+          individual note events while making the statistical properties of the whole deterministic.
+          Each siskin&rsquo;s flight path is unpredictable. The aggregate movement of the population
+          follows the seed crop gradient. <strong>Micro-stochastic, macro-deterministic.</strong>
+          Pithoprakta in feathers.
+        </p>
+        <p>
+          <strong>The electronic sound.</strong> The siskin is the first species in the engine whose
+          voice sounds like a machine &mdash; buzzy, synthesizer-like, electrically charged. Previous
+          species produced whistles, trills, cascades, chip notes. None sounded electronic. The
+          biological voice and the electronic instrument converge in the zhreee.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-006</strong> &mdash; Pacific-slope Flycatcher
+            <p>FIRST MIGRANT VS. FIRST IRRUPTIVE. The flycatcher introduced periodicity (calendar-driven arrivals). The siskin introduces stochasticity (event-driven presence). Together with residents (DC), they define the three temporal modes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; Built &amp; Physical Systems
+            <p>FREQUENCY SWEEP. The zhreee is a linear frequency sweep &mdash; the same signal used in radar chirps and audio test sweeps. A biological chirp signal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>LED</strong> &mdash; LED Research
+            <p>SAWTOOTH WAVE. The zhreee&rsquo;s harmonic structure maps to a sawtooth waveform &mdash; all harmonics present, amplitude decreasing as 1/n. The acoustic analog of a harmonically rich electronic signal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SHE</strong> &mdash; Shelter / Electronics
+            <p>THE ELECTRONIC SOUND. The first species in the engine that sounds like a synthesizer. Buzzy, harmonically dense, electrically charged. The biological voice converges with the electronic instrument.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Lanphere at degree 12&deg;. Both are energy-1. Both disappear and return unpredictably. Both are defined by absence as much as presence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-010</strong> &mdash; Bushtit
+            <p>ENERGY-1 CONTRAST. Both energy-1, both heard in flocks. Bushtit is resident (DC quiet). Siskin is irruptive (stochastic quiet). Same energy, opposite temporal behavior.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011</strong> &mdash; Oregon Junco
+            <p>ADJACENT DEGREES, CONTRASTING STRATEGIES. Junco: Emberizidae, resident, single-pitch trill. Siskin: Fringillidae, irruptive, ascending buzzy sweep. Sequential degrees, fundamentally different acoustic and ecological strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>CONIFER SEED CROP ECOLOGY. The siskin&rsquo;s life history is driven by conifer masting dynamics. ECO documents PNW forest systems. The siskin is the mobile indicator of conifer forest health.</p>
+          </div>
+          <div class="xref-card">
+            <strong>CAS</strong> &mdash; Cascade Range
+            <p>MONTANE CONIFER HABITAT. The Cascades are core siskin breeding habitat. CAS documents the conifer belt whose seed crops determine whether siskins stay or irrupt.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Dawson, W.R. (1997). &ldquo;Pine Siskin.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Koenig, W.D. &amp; Knops, J.M.H. (2001). Seed-crop size and eruptions of boreal seed-eating birds. <em>J Anim Ecol</em> 70.</li>
+          <li>Bock, C.E. &amp; Lepthien, L.W. (1976). Synchronous eruptions of boreal seed-eating birds. <em>Am Nat</em> 110.</li>
+          <li>Newton, I. (2006). Advances in the study of irruptive migration. <em>Ardea</em> 94.</li>
+          <li>Zuccon, D. et al. (2012). Phylogenetic relationships of finches. <em>Mol Phylogenet Evol</em> 62.</li>
+          <li>Mundinger, P.C. (1979). Call learning in the Carduelinae. <em>Syst Zool</em> 28.</li>
+          <li>Kelly, D. &amp; Sork, V.L. (2002). Mast seeding in perennial plants. <em>Ann Rev Ecol Syst</em> 33.</li>
+          <li>Xenakis, I. (1971/1992). <em>Formalized Music</em>. Pendragon Press.</li>
+          <li>Cage, J. (1961). <em>Silence</em>. Wesleyan University Press.</li>
+          <li>Litweiler, J. (1984). <em>The Freedom Principle</em>. Da Capo Press.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Pine Siskin. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Pine Siskin. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Macaulay Library. Pine Siskin recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Fringillidae</div>
+          <div class="stat-detail">True Finches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.3&ndash;5.5 in</div>
+          <div class="stat-detail">11&ndash;14 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">12&ndash;18 g</div>
+          <div class="stat-detail">Small finch</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Streaked</div>
+          <div class="stat-detail">Brown-beige, subtle yellow wing flash</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Bill</div>
+          <div class="stat-value">Slender</div>
+          <div class="stat-detail">Pointed &mdash; conifer seed tweezer</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Rising zhreee</div>
+          <div class="stat-detail">Ascending buzzy sweep + extended warble</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2&ndash;8 kHz</div>
+          <div class="stat-detail">Wide-band ascending sweep</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value">0.3&ndash;0.8 s</div>
+          <div class="stat-detail">Zhreee call (warble: 5&ndash;15 s)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Timbre</div>
+          <div class="stat-value">Buzzy</div>
+          <div class="stat-detail">Harmonically rich &mdash; sawtooth-like</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Electronic</div>
+          <div class="stat-detail">First synthesizer-like sound in engine</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">12&deg;</div>
+          <div class="stat-detail">Ascending buzzy sweep &mdash; stochastic</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">1</div>
+          <div class="stat-detail">Quiet &mdash; distinctive but not loud</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Conifer Seed</div>
+          <div class="stat-detail">Resource-defined, not location-defined</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Irruptive</div>
+          <div class="stat-detail">Stochastic &mdash; not resident, not migrant</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Sawtooth</div>
+          <div class="stat-detail">Ascending sweep with all harmonics</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 12&deg; &mdash; S36</div>
+          <div class="parallel-name">Lanphere</div>
+          <div class="parallel-detail">Both are energy-1. Both disappear and return unpredictably. Both are defined by absence as much as presence. The irruptive cycle mirrors Lanphere&rsquo;s arc: present, absent, present &mdash; with the return carrying weight because it cannot be scheduled.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 012 of 360 &middot;
+      <a href="../011-oregon-junco/index.html">Degree 11&deg;: Oregon Junco</a> &middot;
+      <a href="../010-bushtit/index.html">Degree 10&deg;: Bushtit</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
