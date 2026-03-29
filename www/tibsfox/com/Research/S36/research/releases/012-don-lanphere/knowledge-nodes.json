@@ -1,0 +1,234 @@
+{
+  "degree": 12,
+  "artist": "Don Lanphere",
+  "slug": "012-don-lanphere",
+  "genre": "Jazz (alto/tenor saxophone, bebop)",
+  "energy": 1,
+  "era": "1940s-2000s",
+  "location": {
+    "origin": "Wenatchee, Washington -- Apple Capital of the World, small city on the Columbia River in the eastern Cascades foothills; one of the very few PNW-born bebop musicians",
+    "formative": "Northwestern University (Evanston, Illinois); New York City 52nd Street bebop scene (late 1940s); Blue Note sessions with Fats Navarro (1949); Woody Herman band",
+    "career": "New York City (late 1940s-early 1950s, bebop ascent); Washington state (1950s-early 1980s, lost years); Seattle (1980s-2003, comeback and elder status via Fresh Sound Records)"
+  },
+  "born": "1928",
+  "died": "2003",
+  "labels": ["Fresh Sound", "Blue Note (as sideman, Navarro sessions)"],
+  "theory_nodes": [
+    {
+      "concept": "Bebop vocabulary (chromatic approach notes, enclosure patterns, tritone substitution at speed, chord extensions, rhythmic displacement)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/saxophone/bebop-vocabulary-chromatic-approach-enclosure.md",
+      "examples": [
+        "Don Lanphere -- alto saxophone on 1949 Fats Navarro Blue Note sessions; fully fluent bebop improvisation learned at the source",
+        "Charlie Parker -- 'Ko-Ko,' 'Donna Lee,' 'Confirmation': the canonical bebop alto saxophone voice",
+        "Dizzy Gillespie -- 'A Night in Tunisia,' 'Groovin' High': bebop trumpet vocabulary applied to composition and improvisation",
+        "Bud Powell -- 'Tempus Fugit,' 'Un Poco Loco': bebop piano vocabulary, translating Parker's horn lines to keyboard"
+      ],
+      "description": "Bebop vocabulary is the foundational improvisational language of modern jazz, invented in the 1940s. Core techniques: (1) Chromatic approach notes -- targeting chord tones from a half-step above or below, creating fluid chromatic melodic lines organized around harmonic structure. (2) Enclosure patterns -- surrounding a target note by playing notes immediately above and below before arriving, creating gravitational inevitability. (3) Tritone substitution at speed -- replacing dominant chords with dominants a tritone away, executed in real time during improvisation. (4) Chord extensions beyond the seventh -- using 9ths, 11ths, 13ths, and altered extensions (b9, #9, #11, b13) as standard melodic targets. (5) Rhythmic displacement -- shifting accent structure to weak beats and offbeats, creating perpetual rhythmic suspension. Lanphere learned this vocabulary from its creators on 52nd Street and in Blue Note recording sessions. This is the ROOT NODE of the jazz theory genealogy: all subsequent jazz improvisational vocabularies (hard bop, cool, modal, free) descend from this language.",
+      "genealogy": {
+        "ancestors": ["Charlie Parker alto saxophone innovations (1940s)", "Dizzy Gillespie harmonic sophistication", "Thelonious Monk chord voicings and angular melody", "Coleman Hawkins harmonic improvisation (pre-bebop)"],
+        "relationship": "Bebop vocabulary is the ancestral root of both hard bop (Caliman, degree 9) and cool jazz (Shank, degree 10). Where Caliman's hard bop vocabulary adds blues intensity and rhythmic grounding to bebop, and Shank's cool vocabulary subtracts heat and adds restraint, Lanphere's bebop vocabulary IS the source language. This node is the parent; all subsequent saxophone theory nodes in jazz are descendants. The twelfth chromaticism thread deployment -- and the most systematic: chromatic motion as the organizing principle of melody."
+      }
+    },
+    {
+      "concept": "Alto-to-tenor doubling (register shift across career arc, recapitulating genre evolution from bebop to post-bop)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/saxophone/alto-tenor-doubling-register-shift.md",
+      "examples": [
+        "Don Lanphere -- alto primary in NYC bebop sessions (1940s), tenor primary in Fresh Sound comeback (1980s-2000s)",
+        "Cannonball Adderley -- alto primary, but Nat Adderley's cornet paralleled the lower-register energy of tenor",
+        "Sonny Stitt -- doubled on alto and tenor throughout career, bridging Parker's alto legacy with post-bop tenor traditions",
+        "Dexter Gordon -- established tenor as the post-bebop voice; the register Lanphere moved toward in his later career"
+      ],
+      "description": "Alto-to-tenor saxophone doubling within a single career reveals the relationship between the two horns and their genre associations. The alto defined bebop (Parker's voice), while the tenor defined hard bop and post-bop (Coltrane, Rollins, Shorter). Lanphere's shift from alto-primary (NYC sessions) to tenor-primary (Fresh Sound albums) recapitulates this genre evolution within one player's career arc. The alto is brighter, more cutting, higher in register -- it matches bebop's intensity and speed. The tenor is warmer, darker, lower -- it matches the more reflective, grounded quality of Lanphere's late-career playing after recovery. The register shift is also an emotional shift: from the urgency of youth to the depth of experience.",
+      "genealogy": {
+        "ancestors": ["Saxophone tone production -- reed vibration (degree 9, Caliman)", "Cool saxophone voicings (degree 10, Shank)", "Multi-reed embouchure technique (degree 11, Brazil)"],
+        "relationship": "Lanphere's alto-to-tenor doubling bridges the saxophone thread: Caliman (9, tenor, hard bop) and Shank (10, alto, cool) represent single-horn positions on the post-bebop spectrum. Lanphere played both horns, carrying the pre-split bebop vocabulary on whichever instrument the music required. This adds the seventh node to the saxophone/reed theory branch and the first node documenting within-player register evolution."
+      }
+    },
+    {
+      "concept": "Blue note -- bebop chromatic approach (twelfth deployment, systematic chromatic targeting of blue-note positions)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/saxophone/blue-note-bebop-chromatic-approach.md",
+      "examples": [
+        "Don Lanphere -- bebop blue-note phrasing on 1949 Navarro sessions and Fresh Sound recordings",
+        "Charlie Parker -- the canonical bebop blue note: chromatic approach to b3, b5, and b7 positions at speed",
+        "Fats Navarro -- trumpet blue notes with bebop precision, targeting the flatted fifth",
+        "Sonny Stitt -- Parker-derived blue-note vocabulary carried forward on both alto and tenor"
+      ],
+      "description": "Twelfth deployment of the blue note thread. Bebop systematized the blue note by integrating it into chromatic approach-note vocabulary. The b3 (minor third), b5 (flatted fifth / tritone), and b7 (dominant seventh) -- the traditional blue-note positions -- are targeted through chromatic enclosures and approach patterns, making the blue note not just an expressive inflection but a structural element of the melodic line. In bebop, the blue note is approached from above and below chromatically, enclosed, and resolved -- all at tempo. This is the most systematized blue-note deployment in the engine: where previous deployments treated the blue note as an expressive gesture (vocal bend, trombone slide, piano crush), bebop treats it as a melodic architecture component.",
+      "genealogy": {
+        "ancestors": ["Blue note -- flute bent note (degree 11, Brazil)", "Blue note -- alto cool bend (degree 10, Shank)", "Blue note -- saxophone voice (degree 9, Caliman)", "Blue note -- all eleven prior deployments (degrees 0-11)"],
+        "relationship": "Twelve deployments across thirteen degrees. The bebop blue note is the most systematized mechanism: chromatic approach + enclosure patterns targeting blue-note positions. Paradoxically, this is the OLDEST blue-note mechanism in the engine (1940s), but it enters the thread last because bebop itself enters at degree 12. The thread's historical root is documented after its branches -- Caliman's hard bop blue note (9) and Shank's cool blue note (10) both descend from Lanphere's bebop blue note. Twelve deployments: bass-line (0), guitar (1), vocal (3), trumpet (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), sax voice (9), alto cool bend (10), flute bent note (11), bebop chromatic approach (12)."
+      }
+    },
+    {
+      "concept": "Addiction and recovery in jazz (systemic pattern, not individual failing -- community-created conditions, externally-sourced recovery)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/history/jazz-addiction-recovery-systemic-pattern.md",
+      "examples": [
+        "Don Lanphere -- heroin addiction (1950s), recovery through faith community (1980s), Fresh Sound comeback",
+        "Art Pepper -- heroin and prison, *Straight Life* memoir, late-career Galaxy recordings as redemption documentation",
+        "Chet Baker -- lifelong addiction, career destruction and partial recoveries, final productive period in Europe",
+        "Dexter Gordon -- heroin, prison, European exile (1962-1976), American comeback (1976), *Homecoming* album as return narrative"
+      ],
+      "description": "Jazz addiction-and-recovery as a systemic pattern: the artistic community creates the conditions for addiction (proximity to substances, peer modeling via Charlie Parker's drug use, no institutional health infrastructure), and recovery requires structures that the music community does not provide (faith communities, prison, European exile, personal determination). This is the first recovery narrative in the S36 engine. Lanphere lost approximately thirty years of active career to heroin addiction -- the decades when hard bop, cool jazz, modal jazz, free jazz, and fusion were invented. His recovery through faith community involvement and return to performing via Fresh Sound Records documents resilience within a systemic failure. The pattern is structural, not biographical gossip: it identifies the conditions that produce both the destruction and the recovery.",
+      "genealogy": {
+        "ancestors": ["Career-arc documentation (all previous degrees)", "Community-builder archetype and salon vulnerability (degree 11, Brazil)", "The Erasure pattern -- career destruction through external forces (degree 6, Bown)"],
+        "relationship": "NEW thread. The addiction-and-recovery narrative has no direct ancestor in the engine's theory genealogy because previous degrees documented career arcs without substance-abuse dimensions. The closest structural parallel is Bown's erasure (degree 6) -- career destruction through forces beyond the artist's musical ability. But Bown's erasure was caused by industry racism and gender barriers; Lanphere's was caused by a drug that the music community itself distributed. The recovery dimension is new: Lanphere rebuilt, Bown did not. Track all subsequent addiction-and-recovery narratives against this template."
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-008", "S36-009", "S36-010"],
+  "seattle_connection": "Born in Wenatchee, Washington -- one of the very few PNW-born musicians who participated in bebop's first generation in NYC. After heroin addiction destroyed his career, returned to Washington state and eventually to Seattle, where he rebuilt his career through Fresh Sound Records and became a Seattle jazz elder. Performed and taught in Seattle from the 1980s until his death in 2003. The Prodigal pattern: PNW-born, left for the center, destroyed by the scene, returned to origin, rebuilt. Energy-1 profile -- quiet intensity sourced in recovery and faith, not meditation. Second energy-1 artist after Peacock (degree 8).",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Bebop vocabulary (chromatic approach notes, enclosure patterns, tritone substitution at speed) -- the ROOT NODE of jazz theory genealogy; all subsequent jazz improvisational vocabularies descend from this language; Lanphere learned it directly from its creators",
+      "Alto-to-tenor doubling -- register shift across career arc recapitulating genre evolution from bebop (alto/Parker) to post-bop (tenor/Coltrane); seventh node in the reed branch",
+      "Blue note -- twelfth deployment; bebop chromatic approach targeting blue-note positions; the most systematized mechanism and paradoxically the historical root of the thread",
+      "Addiction and recovery -- NEW thread; systemic pattern documenting community-created conditions for addiction and externally-sourced recovery; first recovery narrative in the engine"
+    ],
+    "immediate_items": [
+      "Genre rotation: STILL CRITICAL. THIRTEEN consecutive jazz artists. Documented as intentional CSV architecture (degrees 0-22 are jazz). Pressure continues.",
+      "Central District geographic oscillation: Lanphere is NOT Central District. CD returned at 11, departs again at 12. Track next CD appearance.",
+      "Cornish pipeline: two artists (Priester 7, Caliman 9). Stable. Lanphere is not Cornish -- Northwestern/NYC pipeline.",
+      "Gender dimension: two women in thirteen degrees (Anderson 3, Bown 6). Eleven men. CRITICAL. Seven consecutive male artists (7-12). ESCALATED.",
+      "Bebop genealogy (NEW at 12): root node documented. Lanphere (bebop) -> Caliman (hard bop) + Shank (cool jazz). Track all subsequent bebop connections.",
+      "Addiction-and-recovery thread (NEW at 12): first recovery narrative. Track all subsequent addiction narratives against this template.",
+      "Energy-1 cluster: two members (Peacock 8, Lanphere 12). Meditative vs. redemptive quiet. Track all subsequent energy-1 artists.",
+      "Fresh Sound Records label thread (NEW at 12): first non-domestic independent label. Barcelona-based reissue/recording specialist for overlooked jazz. Track all subsequent Fresh Sound connections.",
+      "Fats Navarro session documentation: 1949 Blue Note sessions. Lanphere as personnel. Primary bebop document.",
+      "Wenatchee/eastern Washington pipeline (NEW at 12): fourteenth educational pipeline. First from eastern Washington.",
+      "Northwestern University pipeline (NEW at 12): first Big Ten university pipeline. Separate from Wenatchee origin.",
+      "Educator spectrum: Lanphere's late-career teaching adds a sixth mode -- the elder-as-living-archive. Not salon (Brazil), not institutional (Standifer), but the recovered elder who carries living memory of a vanished era.",
+      "The Prodigal archetype (NEW at 12): PNW-born, departed, destroyed, returned, rebuilt. Thirteenth artist-city pattern.",
+      "Pacific Jazz label thread: one artist (Shank 10). Stable.",
+      "Bossa nova / cross-cultural fusion thread: one entry (Shank 10). Stable.",
+      "Jazz-pop crossover thread: one entry (Shank 10). Stable.",
+      "Within-family stylistic pairs: saxophone (Caliman/Shank 9/10), flute (Shank/Brazil 10/11). Two pairs. Lanphere connects to BOTH saxophone pair members as ancestor.",
+      "Saxophone/reed theory branch: seven nodes at degree 12. Bebop vocabulary adds foundational node. Richest wind branch extends.",
+      "ECM label thread: three artists (Frisell 1, Priester 7, Peacock 8). Stable.",
+      "Shank Pacific Jazz discography. Carried from degree 10.",
+      "Caliman Cornish teaching specifics. Carried from degree 9.",
+      "Peacock Seattle-area documentation. Carried from degree 8.",
+      "Bown session discography. Carried from degree 6.",
+      "Berry recordings catalog. Carried from degree 5.",
+      "Post-Jackson Street venue mapping. Carried from degree 5.",
+      "Ray Charles as Central District contemporary. Carried from degrees 4-12.",
+      "Brazil student roster. Carried from degree 11.",
+      "Brazil Detroit lineage. Carried from degree 11.",
+      "Brazil Seattle ensemble catalog. Carried from degree 11.",
+      "Brazil teaching methods. Carried from degree 11."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: thirteen named patterns (Export, Draw, Exile, Stay, Teacher, Persistence, Erasure, Pedagogue-Draw, Quiet Draw, Working Pedagogue-Draw, Late Homestead, Salon Keeper, The Prodigal). Classify every degree.",
+      "Educator spectrum: three core models (institutional, performance, salon) plus elder-as-living-archive variant at degree 12. Track all subsequent educators.",
+      "Composition-improvisation spectrum: nine positions stable. Lanphere is improvisation-primary (bebop improviser, not primarily a composer).",
+      "Rhythmic spectrum: ten positions. Bebop rhythmic displacement added (accent on weak beats/offbeats). Root of post-swing rhythm.",
+      "Chromaticism thread: twelve deployments. Bebop structural chromaticism is the ROOT -- the most systematic and the historical ancestor of all subsequent jazz chromaticism.",
+      "Blue note thread: twelve deployments across thirteen degrees. Bebop chromatic approach is the most systematized mechanism. Historical root documented after its branches.",
+      "Artist-as-institution spectrum: thirteen positions. The Prodigal added (Lanphere). Continue tracking.",
+      "Saxophone/reed theory branch: seven nodes at degree 12. Bebop vocabulary adds foundational node. Two sub-branches (saxophone and flute). Richest wind branch.",
+      "Flute theory branch: two nodes from degree 11. Stable.",
+      "Bass theory branch: three nodes from degree 8. Stable.",
+      "Vocal theory branch: five nodes from degree 3. Stable.",
+      "Brass theory branch: three nodes across two degrees. Stable.",
+      "Piano theory branch: seven nodes across degrees 5-6. Now tied with saxophone/reed as richest branch.",
+      "Body-as-sound-source thread: eight instruments stable. Lanphere's alto and tenor already represented. Alto-to-tenor doubling adds within-player register shift dimension.",
+      "Amiga Principle gradient: eight scales (large ensemble/Jones, small group/Bown, solo/Berry, piano trio/Peacock, hard bop combo/Caliman, studio session/Shank, salon/Brazil, bebop session/Lanphere). Bebop combo added at degree 12.",
+      "Educational pipeline diversity: fourteen pipelines across thirteen degrees (Garfield, Berklee, UC Santa Cruz, UW, bandstand apprenticeship, self-taught, Seattle University, DuSable, Cornish, Westlake/LA, LA club scene, University of North Carolina, Detroit jazz scene, Wenatchee/Northwestern). Two new pipelines at degree 12.",
+      "Formal/informal pedagogy axis: six modes (institutional, bandstand, self-taught, performance, salon, elder-as-living-archive). Elder mode added at degree 12.",
+      "Gender-barrier gradient: two women, eleven men in thirteen degrees. CRITICAL. Seven consecutive male artists (7-12).",
+      "Jackson Street corridor categories: Lanphere arrived post-corridor era. Benefits from the CD jazz infrastructure Jackson Street built.",
+      "Label threads: Mercury (0, 3), Columbia (6), ECM (1, 7, 8), Catalyst/Mainstream (9), Pacific Jazz/World Pacific (10), local (4, 5, 11), Fresh Sound (12), Blue Note (12, sideman). Fresh Sound is first non-domestic independent label.",
+      "Electronic jazz waves: three waves stable. Lanphere is acoustic. Represents the bebop/acoustic pole.",
+      "Zen thread: from degree 8. Not applicable to Lanphere. Continue tracking.",
+      "Energy spectrum: distribution 2:7:4. Energy-1 gains second member (Lanphere). Two energy-1 artists: meditative (Peacock) and redemptive (Lanphere).",
+      "Cornish College pipeline: two artists (7, 9). Stable. Lanphere is not Cornish.",
+      "West Coast / LA pipeline: three artists (8, 9, 10). Stable. Lanphere's LA connection is indirect (Navarro sessions were NYC).",
+      "Within-family stylistic pairs: saxophone (9/10), flute (10/11). Two pairs stable. Lanphere connects to saxophone pair as ancestor (bebop root for both hard bop and cool).",
+      "Cross-cultural fusion thread: one entry (Shank 10, bossa nova). Stable.",
+      "Jazz-pop crossover thread: one entry (Shank 10, California Dreamin'). Stable.",
+      "Central District geographic oscillation: present (0-6), absent (7-10), returns (11), absent again (12). Track next CD appearance.",
+      "Addiction-and-recovery thread (NEW at 12): first recovery narrative. Systemic pattern: community-created conditions, externally-sourced recovery. Track all subsequent.",
+      "Bebop genealogy (NEW at 12): root node. Lanphere -> Caliman (hard bop branch) + Shank (cool branch). Direct lineage documented.",
+      "Fresh Sound Records thread (NEW at 12): Barcelona-based independent label. Specialists in overlooked jazz artists. Track all subsequent Fresh Sound connections."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "Fats Navarro Featured with the Tadd Dameron Band (Blue Note sessions, 1949 -- as sideman)",
+      "year": "1949",
+      "label": "Blue Note",
+      "format": "78 rpm / later compiled on LP and CD",
+      "status": "historically essential -- primary bebop document",
+      "significance": "The 1949 Blue Note sessions with Fats Navarro are among the most important bebop recordings. Lanphere's alto saxophone is fully integrated into the bebop language. These sessions place a PNW-born musician at the exact moment of bebop's creation. Navarro died one year later. The recordings are primary documents of a vanished art form at its peak."
+    },
+    {
+      "title": "From Out of Nowhere (Fresh Sound Records, 1982)",
+      "year": "1982",
+      "label": "Fresh Sound",
+      "format": "LP",
+      "status": "comeback documentation",
+      "significance": "Lanphere's first recording after approximately thirty years of silence. The title is apt -- he returned from nowhere. Documents the mature voice: still bebop-rooted but carrying the weight of recovery. The Fresh Sound label (Barcelona) provided a platform when no American label would."
+    },
+    {
+      "title": "Don Lanphere -- various Fresh Sound releases (1980s-1990s)",
+      "year": "1980s-1990s",
+      "label": "Fresh Sound",
+      "format": "LP/CD",
+      "status": "late-career catalog",
+      "significance": "A series of recordings documenting Lanphere's post-recovery artistry. Tenor-primary (shift from early-career alto). Bebop vocabulary intact but delivered with earned restraint -- the quiet intensity of energy-1. These recordings are the redemption arc made audible."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Hadley Caliman", "relationship": "Hard bop descendant. Caliman's hard bop vocabulary descends directly from bebop. Lanphere (bebop root) -> Caliman (hard bop branch). Both saxophone. Both Pacific Northwest. Direct genealogical connection: hard bop is bebop's blues-drenched child.", "future_degree": 9},
+    {"name": "Bud Shank", "relationship": "Cool jazz descendant. Shank's cool vocabulary descends from bebop through relaxation of intensity. Lanphere (bebop root) -> Shank (cool branch). Both saxophone/multi-instrumentalist. The engine now documents the root and both primary branches.", "future_degree": 10},
+    {"name": "Quincy Jones", "relationship": "NYC connection. Both PNW-born musicians who went to New York at the moment when the most important developments in American music were happening. Jones (early 1950s, big band arranging) and Lanphere (late 1940s, bebop). Different paths, same destination.", "future_degree": 0},
+    {"name": "Gary Peacock", "relationship": "Energy-1 parallel. Second energy-1 artist. Peacock (meditative quiet, Zen-sourced) vs. Lanphere (redemptive quiet, recovery-sourced). Two different paths to the same energy level. Both PNW-connected.", "future_degree": 8}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones -- attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson -- attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer -- Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry -- Central District native, self-taught. No institutional music education. Autodidact path.",
+    "degree_6": "Patti Bown -- Central District native, Seattle University (not Garfield). Formal training via Jesuit university.",
+    "degree_7": "Julian Priester -- NOT a Garfield product. DuSable High School (Chicago) under Captain Dyett. Cornish College of the Arts faculty.",
+    "degree_8": "Gary Peacock -- NOT a Garfield product. Burley, Idaho. Westlake College (LA). U.S. Army (Germany).",
+    "degree_9": "Hadley Caliman -- NOT a Garfield product. Idabel, Oklahoma. Los Angeles jazz scene. Cornish College of the Arts faculty.",
+    "degree_10": "Bud Shank -- NOT a Garfield product. Dayton, Ohio. University of North Carolina. Stan Kenton Orchestra. Los Angeles / Pacific Jazz.",
+    "degree_11": "Joe Brazil -- NOT a Garfield product. Detroit, Michigan. Detroit jazz scene. Settled in Central District as salon-model educator.",
+    "degree_12": "Don Lanphere -- NOT a Garfield product. Wenatchee, Washington. Northwestern University. NYC 52nd Street bebop scene. Sixth consecutive non-Garfield degree. First eastern Washington origin.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": false,
+    "the_erasure": false,
+    "pedagogue_draw": false,
+    "quiet_draw": false,
+    "the_seeker": false,
+    "working_pedagogue_draw": false,
+    "late_homestead": false,
+    "salon_keeper": false,
+    "the_prodigal": true,
+    "native_born": true,
+    "self_taught": false,
+    "institution_type": "the prodigal -- PNW-born bebop prodigy, NYC ascent, heroin-driven fall, return to Washington, recovery through faith community, Fresh Sound comeback, Seattle jazz elder",
+    "amiga_principle": "bebop_session_small_group",
+    "gender": "male",
+    "instrumentalist": true,
+    "gender_barrier": "not applicable (male)"
+  },
+  "sources_count": 18,
+  "word_count_research": 3400,
+  "release_date": "2026-03-28"
+}

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 13&deg; &mdash; Hutton&rsquo;s Vireo &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.ostinato { background: #4E342E; }
+    .theory-icon.persistence { background: #2E7D32; }
+    .theory-icon.minimal { background: #E65100; }
+    .theory-icon.convergent { background: #1565C0; }
+    .theory-icon.monotony { background: #7B1FA2; }
+    .theory-icon.oakland { background: #827717; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Ostinato card (unique to degree 13) */
+    .ostinato-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #D7CCC8 100%);
+      border: 1px solid #A1887F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .ostinato-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4E342E;
+    }
+
+    /* Convergent evolution card */
+    .convergent-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+      border: 1px solid #64B5F6;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .convergent-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1565C0;
+    }
+
+    /* Oak woodland card */
+    .oak-card {
+      background: linear-gradient(135deg, #F9FBE7 0%, #F0F4C3 100%);
+      border: 1px solid #C5E1A5;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .oak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #33691E;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">13&deg;</div>
+      <div class="release-title-block">
+        <h2>Hutton&rsquo;s Vireo</h2>
+        <div class="scientific">Vireo huttoni &middot; Family Vireonidae (Vireos)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Repeated Rising-Falling Zuit &middot; Oak Woodland &middot; Resident &middot; Energy 2</div>
+
+    <blockquote>
+      A small olive-green bird sits in a Garry oak and sings the same two notes it sang
+      an hour ago. Zu-wee. Zu-wee. Zu-wee. It will not change. It will not develop.
+      It will not stop. The oak woodland knows this bird is here because the signal
+      never ceases. Look at it closely and you see a Ruby-crowned Kinglet &mdash; the same
+      size, the same color, the same wing bars. But the song is wrong. Two unrelated
+      lineages wearing the same costume, singing different songs.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Kinglet&rsquo;s Double</h2>
+        <p>
+          The Hutton&rsquo;s Vireo is a small passerine of the family <strong>Vireonidae</strong>
+          (vireos), named for <strong>William Hutton (1826&ndash;1861)</strong>, a California
+          naturalist who collected the type specimen during the Pacific Railroad Surveys.
+          At <strong>4.5&ndash;5 inches</strong> and <strong>10&ndash;14 grams</strong>, it is
+          olive-green above, pale below, with a conspicuous <strong>broken white eye ring</strong>,
+          two white wing bars, and a <strong>thick, slightly hooked bill</strong> &mdash; the
+          classic vireo bill, heavier than a warbler&rsquo;s, lighter than a finch&rsquo;s.
+        </p>
+        <p>
+          The Hutton&rsquo;s Vireo is remarkable for its near-identical appearance to the
+          <strong>Ruby-crowned Kinglet</strong> (Regulidae) &mdash; a species in a completely
+          different family. This is <strong>convergent evolution</strong>: two unrelated lineages
+          arriving at the same physical solution because the solution works. The ear resolves
+          what the eye cannot &mdash; the vireo repeats a monotonous &ldquo;zu-wee&rdquo;; the
+          kinglet chatters. Voice is the diagnostic.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Zuit</h2>
+        <h3>Repetition Without Variation</h3>
+        <p>
+          The Hutton&rsquo;s Vireo&rsquo;s signature vocalization is a <strong>simple two-note
+          phrase</strong> &mdash; a rising-then-falling &ldquo;zu-wee&rdquo; or &ldquo;zuit&rdquo;
+          &mdash; approximately <strong>0.4&ndash;0.7 seconds</strong> in duration, in the range
+          of roughly <strong>2.5&ndash;5 kHz</strong>. The first note rises; the second falls.
+          Question-answer compressed to two syllables.
+        </p>
+        <p>
+          The defining characteristic is the <strong>repetition</strong>. The vireo repeats its
+          phrase <strong>hundreds of times per hour</strong> with minimal variation. Males have been
+          recorded delivering the same &ldquo;zu-wee&rdquo; continuously for 10&ndash;20 minutes
+          without change. No development, no ornament, no transposition. Pure persistence.
+        </p>
+
+        <!-- Ostinato Card -->
+        <div class="ostinato-card">
+          <h3>The Ostinato Principle</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            This is the first species in the engine defined by <strong>repetition without
+            variation</strong>. The Chestnut-backed Chickadee (degree 9&deg;) varied on a theme.
+            The Oregon Junco (degree 11&deg;) trilled a single note above the fusion threshold.
+            The Hutton&rsquo;s Vireo repeats a two-note phrase <strong>below</strong> the fusion
+            threshold &mdash; each repetition a discrete event, each one the same.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Species</th><th>Degree</th><th>Repetition Type</th><th>Variation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pacific Wren</td><td>1&deg;</td><td>Cascade (no repetition)</td><td>Maximum &mdash; improvisation</td></tr>
+              <tr><td>CB Chickadee</td><td>9&deg;</td><td>Theme and variation</td><td>Same syntax, modified delivery</td></tr>
+              <tr><td>Oregon Junco</td><td>11&deg;</td><td>Single-note trill (above fusion)</td><td>None &mdash; but perceived as continuous tone</td></tr>
+              <tr><td><strong>Hutton&rsquo;s Vireo</strong></td><td><strong>13&deg;</strong></td><td><strong>Two-note ostinato (below fusion)</strong></td><td><strong>None &mdash; each repetition heard as discrete event</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #4E342E; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            In music, the <strong>ostinato</strong> is a phrase repeated persistently without change &mdash;
+            the riff, the hook, the loop. The vireo IS the ostinato. Identity through persistence.
+          </p>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Rate</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Rising-falling zuit</td><td>2.5&ndash;5 kHz</td><td>0.4&ndash;0.7 s</td><td>1 per 2&ndash;4 s</td><td>Territory, pair bond</td></tr>
+            <tr><td>Scolding chatter</td><td>3&ndash;6 kHz</td><td>Variable</td><td>Irregular</td><td>Alarm, agitation</td></tr>
+            <tr><td>Contact calls</td><td>2&ndash;4 kHz</td><td>0.1&ndash;0.3 s</td><td>Variable</td><td>Pair communication</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Convergent Evolution -->
+        <h2>Convergent Evolution &mdash; Two Lineages, One Solution</h2>
+
+        <div class="convergent-card">
+          <h3>The Vireo / Kinglet Problem</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Hutton&rsquo;s Vireo (Vireonidae) and Ruby-crowned Kinglet (Regulidae) are
+            nearly identical in appearance despite being <strong>completely unrelated</strong>.
+            Two families that diverged tens of millions of years ago arrived at the same
+            physical solution: small, olive-green, white-wing-barred mid-canopy birds.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Feature</th><th>Hutton&rsquo;s Vireo</th><th>Ruby-crowned Kinglet</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Family</strong></td><td>Vireonidae (vireos)</td><td>Regulidae (kinglets)</td></tr>
+              <tr><td><strong>Bill</strong></td><td>Thick, hooked</td><td>Thin, pointed</td></tr>
+              <tr><td><strong>Plumage</strong></td><td>Olive-green, wing bars</td><td>Olive-green, wing bars</td></tr>
+              <tr><td><strong>Song</strong></td><td>Repeated &ldquo;zu-wee&rdquo;</td><td>Complex warble/chatter</td></tr>
+              <tr><td><strong>Behavior</strong></td><td>Slow, deliberate</td><td>Hyperactive, fast</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1565C0; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            In music: different artists in different traditions independently arriving at the same
+            musical solution. The pentatonic scale emerges across cultures. The blues form converges
+            from multiple traditions. The solution pre-exists the solver.
+          </p>
+        </div>
+
+        <p>
+          The Golden-crowned Kinglet at degree 8&deg; documented the <strong>Regulidae</strong> family.
+          Degree 13&deg; documents the unrelated species that converges on their appearance. The engine
+          now contains both sides of the convergent pair: the original lineage and the mimic.
+        </p>
+
+        <!-- Oak Woodland -->
+        <h2>Oak Woodland &mdash; A New Ecosystem</h2>
+
+        <div class="oak-card">
+          <h3>Garry Oak: The First Non-Conifer Habitat</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Every previous species in the engine has been associated with conifer-dominated
+            ecosystems. The Hutton&rsquo;s Vireo introduces <strong>Pacific Northwest oak
+            woodland</strong> &mdash; Garry oak (<em>Quercus garryana</em>), the only native
+            oak of the PNW. A fire-dependent, drought-adapted savanna ecosystem that has
+            declined <strong>90&ndash;95%</strong> from pre-settlement extent.
+          </p>
+          <p style="font-size: 0.85rem; color: #33691E; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Garry oak woodland was maintained by Coast Salish burning practices for millennia.
+            Fire suppression after colonization allows conifer encroachment. The vireo is an
+            <strong>indicator species</strong> for oak woodland health &mdash; where it persists,
+            the ecosystem is functional.
+          </p>
+        </div>
+
+        <p>
+          The first twelve degrees played in the key of conifer. Degree 13 modulates to the
+          <strong>key of oak</strong> &mdash; a rare, threatened tonal center that needs active
+          maintenance to persist. A different canopy structure, a different understory, a different
+          relationship with fire. The forest IS the conifer story. The oak woodland is the
+          counterpoint &mdash; the ecosystem that was here before the conifers closed in, maintained
+          by people who understood the deal.
+        </p>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Ostinato.</strong> The vireo&rsquo;s song is a pure ostinato &mdash; a melodic-rhythmic
+          figure repeated without development. In classical music: the chaconne, the passacaglia, the
+          ground bass. In popular music: the riff, the hook, the loop. In electronic music: the
+          sequence that cycles unchanged while other layers modulate above it. The ostinato is
+          <strong>structural</strong>, not decorative. It creates the framework.
+        </p>
+        <p>
+          <strong>Minimal melody.</strong> The rising-falling &ldquo;zu-wee&rdquo; is the
+          <strong>minimum possible melody</strong>: two notes, one rising, one falling. Tension
+          (the rise) followed by release (the fall). A half cadence followed by a resolution,
+          compressed to two notes. The irreducible kernel of melodic motion.
+        </p>
+        <p>
+          <strong>Persistence as identity.</strong> The vireo&rsquo;s song is recognizable
+          <em>because</em> of its repetition, not despite it. The best musical hooks are simple
+          phrases that become unforgettable through repetition. &ldquo;Na na na na na na na, hey
+          Jude.&rdquo; The hook is not complex. The hook is persistent. Identity is not what you
+          say but how long you say it.
+        </p>
+        <p>
+          <strong>Convergent evolution as independent discovery.</strong> Two unrelated lineages
+          arriving at the same morphological solution parallels two unrelated musical traditions
+          arriving at the same harmonic structure. Different starting points, same destination.
+          The solution works, so independent paths find it.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon ostinato">O</div>
+            <div class="theory-content">
+              <h4>Ostinato <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The repeated figure without variation &mdash; the riff, the hook, the loop. The vireo&rsquo;s &ldquo;zu-wee&rdquo; IS the ostinato: a short melodic figure cycling without development, creating structural identity through persistence.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon persistence">P</div>
+            <div class="theory-content">
+              <h4>Persistence as Identity <span class="theory-level foundational">Foundational</span></h4>
+              <p>Recognition through repetition. The signal IS the repetition. The vireo is the most conservative singer in the engine &mdash; where the wren improvised and the chickadee varied, the vireo repeats. The Amiga Principle in biological form.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon minimal">M</div>
+            <div class="theory-content">
+              <h4>Minimal Melody <span class="theory-level foundational">Foundational</span></h4>
+              <p>Two notes: up, then down. Question, then answer. The irreducible minimum of melodic content. Every melody contains this motion. The vireo delivers it raw, stripped of everything else.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon convergent">C</div>
+            <div class="theory-content">
+              <h4>Convergent Evolution <span class="theory-level advanced">Advanced</span></h4>
+              <p>Independent lineages arriving at the same solution. The vireo and the kinglet face the same environmental pressures and converge on the same body plan. Different musicians face the same harmonic pressures and converge on the same structures.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon monotony">T</div>
+            <div class="theory-content">
+              <h4>Monotony Threshold <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The point where repetition stops conveying new information and starts maintaining presence. The first &ldquo;zu-wee&rdquo; identifies the bird. The fiftieth maintains the territory. Past the threshold, repetition creates environment rather than narrative.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon oakland">G</div>
+            <div class="theory-content">
+              <h4>Garry Oak Ecosystem <span class="theory-level foundational">Foundational</span></h4>
+              <p>The first non-conifer-dominated habitat in the engine. A fire-dependent savanna in a rainforest landscape, declined 90&ndash;95% from pre-settlement extent. A new tonal center &mdash; the key of oak.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-008</strong> &mdash; Golden-crowned Kinglet
+            <p>CONVERGENT EVOLUTION PAIR. Degree 8&deg; documented the Regulidae. Degree 13&deg; documents the unrelated species (Vireonidae) that looks like them. Both sides of the convergent pair now in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005</strong> &mdash; Red-breasted Nuthatch
+            <p>PERSISTENCE PAIR. Nuthatch repeats a single note (the metronome). Vireo repeats a two-note phrase (the ostinato). Both define themselves through repetition. Point repeated vs. line repeated.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-009</strong> &mdash; Chestnut-backed Chickadee
+            <p>VARIATION VS. PERSISTENCE. Degree 9&deg; varied on a theme &mdash; same syntax, modified delivery. Degree 13&deg; does NOT vary. The cover version vs. the same track on repeat.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012</strong> &mdash; Pine Siskin
+            <p>ADJACENT DEGREES, OPPOSITE STRATEGIES. Siskin: irruptive, stochastic, disappears for years. Vireo: resident, constant, same phrase year after year. Noise vs. constancy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>OAK WOODLAND ECOSYSTEM. First oak-associated species. Garry oak declined 90&ndash;95%. The vireo connects the engine to the threatened oak-savanna landscape maintained by Coast Salish fire management.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Marc Seales at degree 13&deg;. Both persistent, systematic, academic. The educator who shows up and teaches the tradition. The vireo that shows up and sings the phrase.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011</strong> &mdash; Oregon Junco
+            <p>TRILL VS. OSTINATO. Junco: single note above fusion threshold (trill = continuous). Vireo: two-note phrase below fusion threshold (ostinato = discrete). Same principle, different rate, different perception.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Davis, J. (2020). &ldquo;Hutton&rsquo;s Vireo.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Cody, M.L. (1969). Convergent characteristics in sympatric species. <em>The Condor</em> 71.</li>
+          <li>Moynihan, M. (1968). Social mimicry: character convergence vs. displacement. <em>Evolution</em> 22.</li>
+          <li>Slager, D.L. et al. (2014). Multilocus phylogeny of Vireonidae. <em>Mol Phylogenet Evol</em> 80.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Fuchs, M.A. (2001). Recovery strategy for Garry oak ecosystems in Canada. Environment Canada.</li>
+          <li>Dunwiddie, P.W. &amp; Bakker, J.D. (2011). Future of prairie-oak ecosystems in the PNW. <em>NW Science</em> 85(2).</li>
+          <li>Gedalof, Z. et al. (2006). Three centuries of environmental change, Rocky Point, Vancouver Island. <em>NW Science</em> 80.</li>
+          <li>Margulis, E.H. (2014). <em>On Repeat: How Music Plays the Mind</em>. Oxford University Press.</li>
+          <li>Middleton, R. (1990). <em>Studying Popular Music</em>. Open University Press.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Hutton&rsquo;s Vireo. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Hutton&rsquo;s Vireo. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. Priority Habitats: Garry Oak Woodland. wdfw.wa.gov</li>
+          <li>Macaulay Library. Hutton&rsquo;s Vireo recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Vireonidae</div>
+          <div class="stat-detail">Vireos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.5&ndash;5 in</div>
+          <div class="stat-detail">11&ndash;13 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">10&ndash;14 g</div>
+          <div class="stat-detail">Small vireo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Olive-green</div>
+          <div class="stat-detail">Broken eye ring, wing bars, hooked bill</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Bill</div>
+          <div class="stat-value">Thick</div>
+          <div class="stat-detail">Slightly hooked &mdash; the vireo bill</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Repeated zuit</div>
+          <div class="stat-detail">Rising-falling &ldquo;zu-wee&rdquo; on loop</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2.5&ndash;5 kHz</div>
+          <div class="stat-detail">Mid-range, speech band</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value">0.4&ndash;0.7 s</div>
+          <div class="stat-detail">Per phrase (15&ndash;30 per minute)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Repetition</div>
+          <div class="stat-value">Hundreds/hr</div>
+          <div class="stat-detail">10&ndash;20 min continuous documented</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Persistence</div>
+          <div class="stat-detail">Repetition WITHOUT variation</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">13&deg;</div>
+          <div class="stat-detail">Ostinato &mdash; persistence as identity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Present, audible, steady</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Oak Woodland</div>
+          <div class="stat-detail">Garry oak &mdash; first non-conifer habitat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round &mdash; only resident PNW vireo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Ostinato</div>
+          <div class="stat-detail">Two-note phrase looped without variation</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 13&deg; &mdash; S36</div>
+          <div class="parallel-name">Marc Seales</div>
+          <div class="parallel-detail">Both are persistent, systematic, academic &mdash; defined by disciplined repetition of fundamentals. Seales the jazz educator at UW, the vireo the territorial broadcaster in the oaks. Both show up. Both repeat. Both maintain the tradition through presence.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 013 of 360 &middot;
+      <a href="../012-pine-siskin/index.html">Degree 12&deg;: Pine Siskin</a> &middot;
+      <a href="../011-oregon-junco/index.html">Degree 11&deg;: Oregon Junco</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,368 @@
+{
+  "degree": 12,
+  "species": "Pine Siskin",
+  "scientific_name": "Spinus pinus",
+  "sound_type": "rising zhreee / buzzy warble",
+  "energy": 1,
+  "ecosystem": "conifer seed crop",
+  "season": "irruptive (stochastic -- present or absent based on seed crop conditions, not calendar)",
+  "family": "Fringillidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; actual presence determined by continental-scale seed crop conditions, not geographic fidelity to a single location"
+  },
+  "physical": {
+    "length_in": "4.3-5.5",
+    "wingspan_in": "7.1-8.7",
+    "weight_g": "12-18"
+  },
+  "plumage": {
+    "overall": "Heavily streaked brown-and-beige with subtle yellow at base of flight feathers and tail, visible in flight",
+    "streaking": "Heavy, dense brown streaks on whitish-buff underparts and back",
+    "yellow": "Variable -- subtle yellow flash at base of primaries and outer tail feathers, visible in flight, invisible at rest",
+    "bill": "Slender, pointed -- more tweezer than nutcracker, specialized for extracting conifer seeds from cone scales",
+    "variability": "Highly variable plumage -- some individuals show prominent yellow wing bars, others show almost none. The variability itself is diagnostic.",
+    "field_id": "Small, heavily streaked finch with sharp pointed bill + subtle yellow wing flash in flight + buzzy zhreee call. Often confused with female House Finch or sparrows until the zhreee identifies it."
+  },
+  "frequency_range": {
+    "zhreee_hz": "2000-8000 (ascending sweep -- fundamental plus harmonics sweeping upward simultaneously)",
+    "warble_hz": "2000-10000 (complex -- multiple phrase types with variable frequency contours)",
+    "flight_call_hz": "3000-6000 (flat or slightly ascending tee-tee notes)",
+    "register": "Wide range (2-10 kHz) -- the ascending sweep traverses a broader frequency range than any previous species in a single vocalization"
+  },
+  "zhreee_metrics": {
+    "duration_s": "0.3-0.8",
+    "sweep_direction": "Ascending (low to high)",
+    "harmonic_content": "Rich -- multiple harmonic bands sweeping upward simultaneously (sawtooth-like spectrum)",
+    "perceived_quality": "Buzzy, electrically charged, ascending zap -- distinctly 'electronic' sound quality",
+    "waveform_analog": "Ascending sawtooth wave with LFO sweep on pitch parameter",
+    "key_property": "The first distinctly 'electronic' sound in the engine -- buzzy timbre + frequency sweep = synthesizer in biological form"
+  },
+  "warble_metrics": {
+    "duration_s": "5-15",
+    "structure": "Extended buzzy warble incorporating zhreee as recurring motif within stream of buzzy trills, chattering runs, and descending warbles",
+    "complexity": "High -- multiple phrase types interleaved, all sharing buzzy timbre",
+    "function": "Territory, mate attraction"
+  },
+  "irruptive_behavior": {
+    "type": "IRRUPTIVE -- stochastic presence driven by conifer seed crop failure",
+    "trigger": "Mast failure in boreal/montane conifer forests (spruce, hemlock, pine, fir)",
+    "mechanism": "Seed crop collapse in breeding range drives massive nomadic southward/downslope dispersal",
+    "temporal_pattern": "NOT periodic (no fixed schedule) -- event-driven, determined by seed crop conditions",
+    "signal_model": "Stochastic signal -- neither DC (resident) nor periodic (migrant) but event-driven colored noise",
+    "key_distinction": "First species in the engine with chaotic/unpredictable presence. Residents are constants. Migrants are periodic. Siskins are stochastic.",
+    "information_value": "Siskin presence at lowland/southern locations is a SIGNAL that seed crops have failed in boreal/montane forests -- the bird carries information about distant ecosystems",
+    "key_study": "Koenig & Knops (2001) -- irruptive movements correlated with cone crop failure across continental scale"
+  },
+  "conifer_dependency": {
+    "primary_food": "Conifer seeds -- spruce, hemlock, pine, fir, larch, cedar",
+    "bill_adaptation": "Slender, pointed bill for inserting between cone scales and extracting small winged seeds",
+    "masting_connection": "Conifer masting (synchronized boom-and-bust seed production) drives the irruptive cycle",
+    "pnw_conifers": [
+      "Sitka spruce (Picea sitchensis) -- coastal",
+      "Western hemlock (Tsuga heterophylla) -- dominant canopy",
+      "Douglas fir (Pseudotsuga menziesii) -- iconic PNW tree",
+      "Western white pine (Pinus monticola) -- montane",
+      "Western redcedar (Thuja plicata) -- ubiquitous",
+      "Lodgepole pine (Pinus contorta) -- subalpine and disturbed"
+    ]
+  },
+  "theory_nodes": [
+    {
+      "concept": "Ascending sawtooth wave (buzzy frequency sweep -- the electronic sound in biological form)",
+      "level": "advanced",
+      "department": "music-theory/synthesis",
+      "college_path": ".college/music/theory/synthesis/sawtooth-sweep/",
+      "examples": [
+        "Sawtooth oscillator with LFO on pitch: all harmonics present, amplitude decreasing as 1/n, frequency sweeping upward",
+        "Radar chirp: linear frequency sweep used for range detection -- the siskin's zhreee is a biological chirp",
+        "Synthesizer filter sweep: the classic 'wah' effect of sweeping a filter across a harmonically rich oscillator",
+        "The siskin's zhreee: multiple harmonic bands sweeping upward simultaneously on the spectrogram"
+      ],
+      "music_theory_parallel": "The zhreee is a sawtooth wave with an ascending frequency sweep. In synthesizer terms: engage a sawtooth oscillator, apply an LFO to pitch with positive modulation, sweep low to high over 0.3-0.8 seconds. The result is a buzzy, harmonically rich, ascending sound. The siskin IS a synthesizer."
+    },
+    {
+      "concept": "Irruptive rhythm as free jazz timing (stochastic presence -- event-driven, not clock-driven)",
+      "level": "advanced",
+      "department": "music-theory/rhythm",
+      "college_path": ".college/music/theory/rhythm/stochastic-timing/",
+      "examples": [
+        "Free jazz: rhythmic events occur when conditions demand, not on a metered grid",
+        "John Cage's Music of Changes (1951): compositional decisions determined by I Ching (external conditions)",
+        "Xenakis stochastic music: probability distributions governing individual events, deterministic statistical properties",
+        "Pine Siskin irruption: presence determined by seed crop failure (external condition), not by calendar (internal clock)"
+      ],
+      "music_theory_parallel": "The siskin's irruptive presence is the ecological equivalent of free jazz timing. In traditional music, events occur on a grid (the beat) or in predictable relationship to it. In free jazz, events occur when conditions demand. The siskin arrives not on schedule but on crisis. Clock-driven becomes event-driven."
+    },
+    {
+      "concept": "Buzzy timbre as harmonic density (sawtooth/pulse waveform with all harmonics present)",
+      "level": "intermediate",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/buzzy-electronic/",
+      "examples": [
+        "Sawtooth wave: all harmonics (odd + even), amplitude 1/n -- the buzziest standard waveform",
+        "Square/pulse wave: odd harmonics only -- buzzy but less dense than sawtooth",
+        "Sine wave: no harmonics -- pure, smooth, not buzzy at all",
+        "Siskin zhreee: harmonically dense, rough-textured, electrically charged -- sawtooth-like spectrum"
+      ],
+      "music_theory_parallel": "'Buzzy' = dense harmonic content. A sine wave is smooth. A sawtooth is buzzy. The siskin's vocalizations are consistently buzzy -- every call shares this rough, harmonically rich, electrically charged timbre. The biological voice converges with the electronic instrument."
+    },
+    {
+      "concept": "Three temporal modes (DC / periodic / stochastic -- resident / migrant / irruptive)",
+      "level": "foundational",
+      "department": "ecology/movement",
+      "college_path": ".college/ecology/movement/temporal-modes/",
+      "examples": [
+        "Resident (DC signal): present year-round, constant -- Great Blue Heron, Pacific Wren, chickadees, junco",
+        "Migrant (periodic signal): arrives and departs on calendar schedule, 12-month period -- Pacific-slope Flycatcher",
+        "Irruptive (stochastic signal): present or absent based on external resource conditions, no fixed schedule -- Pine Siskin",
+        "The three modes exhaust the major categories of animal presence: constant, periodic, event-driven"
+      ],
+      "music_theory_parallel": "Resident = whole note held indefinitely (DC). Migrant = oscillation with fixed period (sine wave). Irruptive = event-driven trigger, no fixed timing (stochastic process). The siskin completes the taxonomy of temporal modes in the engine."
+    },
+    {
+      "concept": "Conifer masting as boom-and-bust resource cycle",
+      "level": "foundational",
+      "department": "ecology/forest",
+      "college_path": ".college/ecology/forest/masting/",
+      "examples": [
+        "Masting: synchronized seed production across large areas -- evolutionary predator-satiation strategy",
+        "Mast years: abundant food, high breeding success, population increase in seed-dependent species",
+        "Mast failure years: food scarcity, breeding failure, irruptive dispersal of seed-dependent species",
+        "The siskin's irruptive cycle is the dispersal phase of the masting boom-and-bust"
+      ],
+      "music_theory_parallel": "Masting is a biological crescendo-decrescendo cycle at multi-year timescales. The boom years are fortissimo -- abundant resources, high productivity, full orchestra. The bust years are the silence between movements. The siskin's irruption is the fermata -- the pause before the next movement, filled with restless motion."
+    },
+    {
+      "concept": "Nomadic movement as stochastic composition (Xenakis probability distributions in ecology)",
+      "level": "advanced",
+      "department": "music-theory/composition",
+      "college_path": ".college/music/theory/composition/stochastic/",
+      "examples": [
+        "Xenakis Metastaseis (1954): glissandi determined by mathematical functions, individual paths unpredictable, aggregate behavior deterministic",
+        "Xenakis Pithoprakta (1956): note events governed by Maxwell-Boltzmann gas dynamics distributions",
+        "Pine Siskin irruption: individual bird movements unpredictable, aggregate population follows resource gradient",
+        "Individual chaos, collective pattern -- the defining characteristic of both stochastic music and irruptive migration"
+      ],
+      "music_theory_parallel": "Xenakis used probability distributions to govern individual note events while making the statistical properties of the whole deterministic. Each siskin's flight path is unpredictable. The aggregate movement follows the seed crop gradient. Micro-stochastic, macro-deterministic. Pithoprakta in feathers."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-006",
+      "title": "Pacific-slope Flycatcher (Degree 6)",
+      "connection": "FIRST MIGRANT VS. FIRST IRRUPTIVE. The flycatcher was the first non-resident species -- a seasonal migrant with predictable, calendar-driven arrivals and departures (periodic signal). The siskin is the first irruptive species -- present or absent based on seed crop conditions (stochastic signal). Together with resident species (DC signal), they define the three temporal modes of the engine."
+    },
+    {
+      "project": "BPS",
+      "title": "Built & Physical Systems",
+      "connection": "FREQUENCY SWEEP. The siskin's ascending zhreee is a linear frequency sweep -- the same signal used in radar chirps, audio test sweeps, and signal processing. BPS documents frequency-domain analysis and signal processing. The siskin provides the biological frequency sweep -- a chirp signal in feathers."
+    },
+    {
+      "project": "LED",
+      "title": "LED Research",
+      "connection": "SAWTOOTH WAVE. The zhreee's harmonic structure maps to a sawtooth waveform -- all harmonics present, amplitude decreasing as 1/n. LED documents electronic systems including PWM and signal generation. The siskin's buzzy timbre is the acoustic analog of a harmonically rich electronic waveform."
+    },
+    {
+      "project": "SHE",
+      "title": "Shelter / Electronics Research",
+      "connection": "THE ELECTRONIC SOUND. The siskin is the first species in the engine whose vocalizations sound distinctly 'electronic' -- buzzy, synthesizer-like, harmonically dense. SHE documents electronic systems. The biological voice and the electronic instrument converge in the siskin's zhreee."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Lanphere at degree 12. Both are energy-1. Both disappear and return unpredictably. Both are defined by absence as much as presence. Lanphere's arc (present/absent/present) parallels the siskin's irruptive cycle (present/absent/present). Both carry more significance when they appear because the appearance cannot be scheduled."
+    },
+    {
+      "project": "SPS-010",
+      "title": "Bushtit (Degree 10)",
+      "connection": "ENERGY-1 CONTRAST. Both are energy-1, both are small, both are heard in flocks. But the bushtit is RESIDENT -- always present, whispering constantly (DC quiet signal). The siskin is IRRUPTIVE -- sometimes present, sometimes absent for years (stochastic quiet signal). Same energy, opposite temporal behavior."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "ADJACENT DEGREES, CONTRASTING STRATEGIES. The junco is Emberizidae at the forest edge, resident, single-pitch trill. The siskin is Fringillidae in the conifer canopy, irruptive, ascending frequency sweep. The junco's trill is the analog-to-digital boundary (discrete-to-continuous). The siskin's zhreee is the ascending sawtooth (frequency sweep with harmonic richness). Sequential degrees exploring fundamentally different acoustic and ecological strategies."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "CONIFER SEED CROP ECOLOGY. The siskin's entire life history is driven by conifer masting dynamics -- the boom-and-bust cycle of seed production that shapes PNW forest ecosystems. ECO documents these forest systems and their processes. The siskin is the mobile indicator of conifer forest health -- its presence signals seed crop conditions across the region."
+    },
+    {
+      "project": "CAS",
+      "title": "Cascade Range Research",
+      "connection": "MONTANE CONIFER HABITAT. The Cascade Range is core Pine Siskin breeding habitat in Washington -- subalpine fir, mountain hemlock, lodgepole pine, Engelmann spruce. CAS documents the Cascade conifer belt. The siskin connects lowland observation points to Cascade headwater forests through its irruptive movements."
+    }
+  ],
+  "interspecies_network": {
+    "status": "NOT EXTENDED -- the Pine Siskin does not participate in the chickadee alarm broadcasting network. It forms its own flocking network with conspecifics and occasionally associates with goldfinch, crossbill, and other finch flocks.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "siskin_role": "The Pine Siskin forms dense conspecific flocks (dozens to hundreds) that move through conifer canopy and visit feeders. It does not participate in the chickadee alarm protocol but benefits from general alarm behavior in mixed-species flocks. The siskin's communication is INTRASPECIFIC: zhreee calls maintain flock cohesion during flight and foraging, functioning like the bushtit's contact seep but with a richer, more distinctive signal. The siskin introduces a FOURTH communication modality to the forest: the buzzy frequency-sweep flock call.",
+    "note": "The alarm network remains at 4 nodes. The swarm cohesion network (bushtit) remains at 1 node. The trill territorial network (junco) remains at 1 node. The siskin adds a fourth modality: buzzy frequency-sweep intraspecific flock communication. Four parallel communication channels now documented in the forest."
+  },
+  "part_a_parallel": {
+    "artist": "Lanphere",
+    "degree": 12,
+    "genre": "S36",
+    "shared_principle": "Both are energy-1. Both disappear and return unpredictably. Both are defined by absence as much as presence. The irruptive cycle and Lanphere's arc share the same temporal structure: present, then absent, then present again -- with the return carrying weight precisely because it could not be scheduled.",
+    "resonance_points": [
+      "Unpredictable presence: Lanphere's appearances in the Seattle music scene were not on a fixed schedule -- periods of visibility alternated with periods of absence. The siskin's presence at any given location is similarly stochastic -- driven by external conditions, not a calendar.",
+      "Defined by absence: Both carry more significance when they appear because the appearance cannot be taken for granted. A resident species (or a musician who is always at the same club every Tuesday) becomes background. An irruptive species (or a musician who surfaces unpredictably) commands attention when present.",
+      "Energy 1: Both are quiet. The siskin's zhreee is distinctive but not loud. Lanphere's energy level is similarly restrained -- not a powerhouse projection but a distinctive, recognizable signal at close range.",
+      "Redemption arc structure: Present, absent, present. The return is not guaranteed. When it happens, it resets the context. The siskin's irruptive return to a location after years of absence is an ecological redemption arc -- the forest's seed crop has recovered, the bird is back, the cycle continues."
+    ]
+  },
+  "degree_arc": {
+    "position": "The rising zhreee -- ascending buzzy sweep, the first electronic sound in biological form. The first irruptive species. Stochastic presence.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12)",
+    "key_insight": "Degree 12 introduces three new dimensions: (1) THE ELECTRONIC SOUND -- the first species whose vocalizations sound distinctly like a synthesizer, with buzzy timbre mapping to sawtooth waveform and ascending pitch sweep mapping to LFO on oscillator pitch. (2) IRRUPTIVE MIGRATION -- the first species with stochastic (non-resident, non-migratory) presence, driven by conifer seed crop failure, introducing noise/randomness into the temporal model. (3) INFORMATION CARRIER -- the siskin's presence is a signal about distant ecosystem conditions; the bird carries data about forests you cannot see.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)",
+      "degree_11": "Mid-range (3-6 kHz -- comfortably within human hearing, return to accessible mid-range)",
+      "degree_12": "Wide-band (2-10 kHz -- the ascending sweep traverses more of the frequency spectrum than any previous single vocalization)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)",
+      "degree_11": "Territory + mate attraction through trill (I am here, I am fit, this is my edge)",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (I am here, I am Pine Siskin, where are we going -- nomadic coordination)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)",
+      "degree_10": "Shrubby woodland edge (ecotone -- the transition zone between forest and open habitat)",
+      "degree_11": "Forest edge (ecotone -- the threshold between forest interior and open ground)",
+      "degree_12": "Conifer seed crop (not a fixed habitat but a resource -- the siskin goes where the seeds are, making its ecosystem a FUNCTION of seed availability rather than a fixed geographic location)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Conifer forests with seed-bearing trees (spruce, hemlock, pine, fir, larch, cedar). Breeding habitat is boreal and montane conifer forest. Winter/irruption habitat is wherever conifer seeds, birch catkins, alder catkins, or feeder sunflower seeds are available.",
+    "niche": "Conifer seed specialist -- nomadic, irruptive, following the resource. The siskin's niche is defined by a food source rather than a geographic location.",
+    "foraging_strategy": "Canopy and mid-story gleaner in conifer trees -- hangs acrobatically from cone clusters, inserting slender bill between cone scales to extract seeds. Also feeds on birch and alder catkins, weed seeds, and readily visits bird feeders (thistle/nyjer seed is a strong attractant).",
+    "diet": "Seeds (conifer seeds in breeding season; thistle, nyjer, sunflower, alder catkins, birch catkins in winter/irruption), insects (especially in breeding season for nestlings -- aphids, caterpillars, small beetles), buds.",
+    "nesting": "Nest typically in conifer trees, 10-50 feet up, well-concealed on a horizontal branch. Cup nest of twigs, bark strips, rootlets, lined with fine plant material, fur, feathers, and thistle down. Often nests in loose colonies when seed crops are abundant.",
+    "irruptive_movement": true,
+    "flock_size": "Variable -- small groups (5-20) to large flocks (hundreds) during irruptions",
+    "feeder_bird": true,
+    "salmonellosis_vulnerability": "HIGH -- dense flock feeding at contaminated feeders causes periodic die-offs. Clean feeders are critical during irruption years."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~50 million (Partners in Flight 2020)",
+    "trend": "Long-term decline (~1-2% per year since 1960s per BBS data, but signal is noisy due to irruptive variation in counts)",
+    "threats": "Salmonellosis at bird feeders (siskins are particularly susceptible), domestic cat predation, window strikes, conifer habitat loss from logging, climate change altering masting patterns and fire regimes, northward shift of boreal spruce belt increasing energetic costs of irruptive dispersal",
+    "vulnerability": "Moderately resilient but declining. The irruptive behavior makes population monitoring difficult -- Christmas Bird Count and BBS numbers swing wildly year to year depending on irruption status.",
+    "unique_feature": "The irruptive behavior itself is a conservation concern: it makes the species appear abundant in irruption years and absent in non-irruption years, potentially masking long-term decline. The dependence on conifer seed crops makes the species vulnerable to any factor that disrupts masting cycles (climate change, forest fragmentation, fire regime alteration)."
+  },
+  "key_sites": [
+    {
+      "name": "Seattle backyard feeders (irruption years only)",
+      "type": "irruptive/winter",
+      "description": "In irruption years, Pine Siskins flood into Seattle-area feeders, sometimes in flocks of 50+. In non-irruption years, feeders may see zero siskins for the entire winter. The contrast is extreme.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Cascade Range montane forests",
+      "type": "breeding",
+      "description": "Subalpine fir, mountain hemlock, and Engelmann spruce forests in the Washington Cascades are core breeding habitat when seed crops are adequate.",
+      "region": "Washington Cascades"
+    },
+    {
+      "name": "Olympic National Park conifer forests",
+      "type": "year-round (variable)",
+      "description": "Sitka spruce and western hemlock forests support siskins when cone crops are productive. Presence varies year to year.",
+      "region": "Olympic Peninsula, WA"
+    },
+    {
+      "name": "Mount Rainier National Park subalpine zone",
+      "type": "breeding",
+      "description": "High-elevation conifer forests with mountain hemlock and subalpine fir provide breeding habitat and seed resources.",
+      "region": "Mount Rainier, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the ascending frequency sweep of the zhreee with multiple harmonic bands, and the extended buzzy warble",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Pine Siskin zhreee shows MULTIPLE PARALLEL ASCENDING LINES -- the fundamental frequency plus overtones all sweeping upward simultaneously. This is the spectral signature of a sawtooth-like waveform with a frequency sweep. Compare to the Pacific-slope Flycatcher (degree 6) whose ascending whistle shows a SINGLE ascending line (pure tone / sine wave). The siskin's multi-band ascending sweep vs. the flycatcher's single-band ascending sweep is the visual difference between a sawtooth and a sine wave on a spectrogram."
+  },
+  "sources": [
+    "Dawson, W.R. (1997). Pine Siskin (Spinus pinus). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Pine Siskin. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Pine Siskin. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Pine Siskin species account. birdweb.org",
+    "Koenig, W.D. and Knops, J.M.H. (2001). Seed-crop size and eruptions of boreal seed-eating birds. J Anim Ecol 70: 609-620.",
+    "Bock, C.E. and Lepthien, L.W. (1976). Synchronous eruptions of boreal seed-eating birds. Am Nat 110: 559-571.",
+    "Newton, I. (2006). Advances in the study of irruptive migration. Ardea 94: 433-460.",
+    "Newton, I. (2012). Obligate and Facultative Migration in Birds. J Ornithol 153(S1): 171-180.",
+    "Zuccon, D. et al. (2012). Phylogenetic relationships of finches (Fringillidae). Mol Phylogenet Evol 62: 581-596.",
+    "Clement, P. et al. (1993). Finches and Sparrows: An Identification Guide. Princeton University Press.",
+    "Mundinger, P.C. (1979). Call learning in the Carduelinae. Syst Zool 28: 270-283.",
+    "Kelly, D. and Sork, V.L. (2002). Mast seeding in perennial plants. Ann Rev Ecol Syst 33: 427-447.",
+    "Keeton, W.S. and Franklin, J.F. (2005). Remnant old-growth trees and succession in Douglas-fir forests. Ecol Monogr 75: 103-118.",
+    "Xenakis, I. (1971/1992). Formalized Music. Pendragon Press.",
+    "Cage, J. (1961). Silence: Lectures and Writings. Wesleyan University Press.",
+    "Litweiler, J. (1984). The Freedom Principle: Jazz After 1958. Da Capo Press.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Pine Siskin (Spinus pinus). iucnredlist.org",
+    "eBird. Pine Siskin observation data, Pacific Northwest. ebird.org/species/pinsis",
+    "Dhondt, A.A. et al. (1998). Epidemic mycoplasmal conjunctivitis in house finches. J Wildl Dis 34: 265-280.",
+    "Macaulay Library. Pine Siskin recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "012",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

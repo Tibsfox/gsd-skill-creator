@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 13&deg; &mdash; Marc Seales &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .pedagogy-box {
+      background: #E0F2F1;
+      border: 1px solid #80CBC4;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .pedagogy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #00695C;
+      font-family: system-ui, sans-serif;
+    }
+    .pedagogy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .pedagogy-box td, .pedagogy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #B2DFDB;
+    }
+    .pedagogy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #00695C;
+    }
+
+    .piano-lineage-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .piano-lineage-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .piano-lineage-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .piano-lineage-box td, .piano-lineage-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .piano-lineage-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .institution-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .institution-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .institution-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">13&deg;</div>
+      <div>
+        <h1>Marc Seales</h1>
+        <div class="subtitle">Jazz &middot; Piano &middot; Post-Bop / Contemporary &mdash; Seattle native &mdash; UW School of Music &mdash; Naim Records</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../012-don-lanphere/index.html">Degree 12&deg; (Lanphere)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../006-patti-brown/index.html">Degree 6&deg; (Bown)</a>
+      <a href="../004-floyd-standifer/index.html">Degree 4&deg; (Standifer)</a>
+      <a href="../007-julian-priester/index.html">Degree 7&deg; (Priester)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Seattle born. University of Washington doctorate. Director of jazz studies.
+          The first PhD in the engine. Third pianist after Berry and Bown.
+          Modal voicings, quartal harmony, Naim Records.
+          Where Standifer taught by playing, Seales teaches by knowing &mdash;
+          and plays what he knows. The institutional anchor at degree 13.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Academic-Performer</h2>
+
+        <p>Marc Seales was born in <strong>Seattle, Washington</strong> &mdash; a native-born
+        Seattle musician who represents the institutional formalization of jazz education at
+        the university level. He is the first <strong>PhD-holding artist</strong> in the S36
+        engine, the third pianist (after Berry at degree 5&deg; and Bown at degree 6&deg;),
+        and the artist who completes the pedagogical arc that Floyd Standifer began at
+        degree 4&deg;.</p>
+
+        <p>Seales earned his <strong>Doctor of Musical Arts</strong> from the University of
+        Washington, where he has served on the faculty of the <strong>School of Music</strong>
+        for decades, directing the <strong>jazz studies program</strong>. The UW is the Pacific
+        Northwest&rsquo;s flagship research university, and its jazz program under Seales has
+        become the institutional pipeline for the next generation of Seattle jazz musicians.</p>
+
+        <p>Where Standifer (degree 4&deg;) taught through doing &mdash; playing,
+        demonstrating, transmitting through live performance &mdash; Seales teaches through
+        a formalized academic structure: <strong>curriculum design, ensemble direction,
+        theory courses, graduate advising</strong>, and the full apparatus of a university
+        music department.</p>
+
+        <p>As a performer, Seales is a working musician whose piano spans post-bop,
+        contemporary jazz, and the modal language that defines modern jazz piano. He has
+        recorded for <strong>Naim Records</strong>, a UK-based audiophile label. His
+        collaborations with Seattle musicians &mdash; including <strong>Julian Priester</strong>
+        (degree 7&deg;) &mdash; position him at the center of Seattle&rsquo;s contemporary
+        jazz network. Seales bridges performance and scholarship: his playing is informed
+        by theory at the doctoral level, and his teaching is informed by decades of
+        performance.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: UW School of Music;
+        Naim Records; AllMusic; JazzTimes; Earshot Jazz; KNKX Jazz Northwest;
+        Paul de Barros, <em>Jackson Street After Hours</em>, 1993</p>
+
+        <!-- ========================================
+             PEDAGOGY ARC
+             ======================================== -->
+
+        <div class="pedagogy-box">
+          <h4>The Standifer-to-Seales Arc: Jazz Pedagogy Formalized</h4>
+          <table>
+            <tr>
+              <th>Position</th>
+              <th>Artist</th>
+              <th>Model</th>
+              <th>Knowledge Transmission</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Berry (5&deg;)</td>
+              <td>Self-taught autodidact</td>
+              <td>Playing IS teaching; no formal instruction</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Standifer (4&deg;)</td>
+              <td>Experiential teacher</td>
+              <td>UW faculty; teaching through demonstration</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Brazil (11&deg;)</td>
+              <td>Salon keeper</td>
+              <td>Home-based informal pedagogy</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Lanphere (12&deg;)</td>
+              <td>Elder-as-living-archive</td>
+              <td>Living memory of a vanished era</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Priester (7&deg;), Caliman (9&deg;)</td>
+              <td>Pedagogue-draws</td>
+              <td>Working musicians teaching at Cornish</td>
+            </tr>
+            <tr>
+              <td><strong>6</strong></td>
+              <td><strong>Seales (13&deg;)</strong></td>
+              <td><strong>University scholar-performer</strong></td>
+              <td><strong>DMA; curriculum, degrees, doctoral advising</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">The full arc from experiential
+          teaching to doctoral academic program &mdash; at the <strong>same institution</strong>
+          (UW). Standifer&rsquo;s model depended on his personal presence. Seales&rsquo;s model
+          is institutional &mdash; the program can persist beyond any individual teacher.
+          <strong>Seventh pedagogical mode in the engine.</strong></p>
+        </div>
+
+        <!-- ========================================
+             PIANO LINEAGE
+             ======================================== -->
+
+        <div class="piano-lineage-box">
+          <h4>Piano Lineage: Three Eras of Seattle Jazz Piano</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Berry (5&deg;)</th>
+              <th>Bown (6&deg;)</th>
+              <th>Seales (13&deg;)</th>
+            </tr>
+            <tr>
+              <td><strong>Era</strong></td>
+              <td>1940s&ndash;2020s</td>
+              <td>1950s&ndash;1970s</td>
+              <td>1990s&ndash;present</td>
+            </tr>
+            <tr>
+              <td><strong>Style</strong></td>
+              <td>Stride, cocktail, swing</td>
+              <td>Hard bop, orchestral</td>
+              <td>Modal, post-bop, contemporary</td>
+            </tr>
+            <tr>
+              <td><strong>Training</strong></td>
+              <td>Self-taught</td>
+              <td>Seattle University (undergrad)</td>
+              <td>UW DMA (doctoral)</td>
+            </tr>
+            <tr>
+              <td><strong>Technique</strong></td>
+              <td>Left-hand stride bass</td>
+              <td>Two-handed orchestral density</td>
+              <td>Quartal voicings, extended chords</td>
+            </tr>
+            <tr>
+              <td><strong>Pattern</strong></td>
+              <td>The Persistence</td>
+              <td>The Erasure</td>
+              <td>The Institutional Anchor</td>
+            </tr>
+            <tr>
+              <td><strong>Teaching</strong></td>
+              <td>Performance model</td>
+              <td>No known teaching</td>
+              <td>University program director</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Three pianists, three eras, three
+          educational paths: <strong>autodidact &rarr; undergraduate &rarr; doctorate</strong>.
+          The piano theory branch extends to <strong>eight nodes</strong> &mdash; now the
+          richest branch in the engine, surpassing saxophone/reed (seven).</p>
+        </div>
+
+        <!-- ========================================
+             MODAL JAZZ THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Modal Jazz &amp; Post-Bop Harmony</h2>
+
+        <p>Seales&rsquo;s piano vocabulary is built on the <strong>modal jazz revolution</strong>
+        that Miles Davis initiated with <em>Kind of Blue</em> (1959) and that Herbie Hancock,
+        McCoy Tyner, Chick Corea, and Keith Jarrett developed into the standard language of
+        contemporary jazz piano:</p>
+
+        <ul>
+          <li><strong>Modal scales as compositional basis:</strong> Dorian, Mixolydian, Lydian,
+          Aeolian modes sustained for extended periods. Horizontal (scale-based) rather than
+          vertical (chord-based) improvisation. A fundamentally different organizational principle
+          from bebop&rsquo;s chord-change navigation.</li>
+          <li><strong>Quartal voicings:</strong> McCoy Tyner&rsquo;s innovation &mdash; chords
+          built from stacked fourths (C-F-Bb-Eb) rather than stacked thirds. Open, ambiguous,
+          modern sound avoiding functional resolution. Now standard vocabulary.</li>
+          <li><strong>Extended chord structures:</strong> 9ths, 11ths, 13ths as standard
+          voicing components. Where Berry used triads and Bown used dense altered voicings,
+          Seales builds textures with four or five distinct extensions.</li>
+          <li><strong>Lydian and Lydian Dominant color:</strong> The raised fourth degree (#11)
+          as the signature pitch of contemporary jazz harmony. George Russell&rsquo;s
+          <em>Lydian Chromatic Concept</em> (1953) as theoretical foundation; Davis and Coltrane
+          as deployers; Seales&rsquo;s generation as inheritors.</li>
+          <li><strong>Academic integration:</strong> The DMA-level understanding connects
+          performing knowledge (how Dorian feels under the hands) with scholarly knowledge
+          (why Dorian produces its particular emotional quality, and Davis&rsquo;s historical
+          deployment on <em>Kind of Blue</em>).</li>
+        </ul>
+
+        <p><strong>Thirteenth chromaticism deployment:</strong> Modal chromaticism &mdash;
+        chromatic alterations within and between modal frameworks as
+        <strong>structural modal choices</strong>. The raised fourth (Lydian), the flatted
+        seventh over major (Lydian Dominant), the Dorian natural sixth over minor. Not
+        passing tones (bebop) or blue notes (blues) but defining modal pitches.</p>
+
+        <!-- ========================================
+             INSTITUTION-DEPENDENCY SPECTRUM
+             ======================================== -->
+
+        <div class="institution-box">
+          <h4>Institution-Dependency Spectrum (NEW at Degree 13&deg;)</h4>
+          <p>New analytical axis: the degree to which jazz knowledge transmission depends on
+          an individual person versus an institutional structure.</p>
+          <p><strong>Person-dependent pole:</strong> Brazil&rsquo;s salon (degree 11&deg;) &mdash;
+          when Brazil dies, the salon dies. Knowledge survives only in students who were present.</p>
+          <p><strong>Institution-dependent pole:</strong> Seales&rsquo;s UW program (degree 13&deg;)
+          &mdash; curriculum, degree requirements, faculty positions, administrative structure
+          that can persist beyond any individual teacher. The program generates its own
+          successors through degree granting.</p>
+          <p>Standifer (4&deg;) is in the middle: UW appointment provided institutional
+          backing, but his teaching model relied on personal presence. Priester and Caliman
+          (7&deg;, 9&deg;) are closer to Standifer&rsquo;s position: institutional appointments
+          at Cornish, but teaching primarily through performance credential.</p>
+        </div>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Born in Seattle, Washington</div>
+          <p>Native-born Seattle musician. Fifteenth educational pipeline in the engine &mdash;
+          the first where the artist&rsquo;s entire educational path through the terminal
+          degree is completed within the Seattle metropolitan area.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">University of Washington &mdash; Student</div>
+          <p>Studied at the <strong>University of Washington</strong>, earning a
+          <strong>Doctor of Musical Arts</strong>. The terminal degree in music performance
+          and scholarship. Deep engagement with jazz history, theory, pedagogy, and its
+          place in the broader landscape of American music.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">University of Washington &mdash; Faculty</div>
+          <p>Joined the <strong>UW School of Music</strong> faculty. Eventually became
+          <strong>director of jazz studies</strong>. Decades of continuous faculty service &mdash;
+          the longest-running institutional jazz position in the engine.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Naim Records</div>
+          <p>Recorded for <strong>Naim Records</strong>, a UK-based audiophile label founded
+          in Salisbury, England. The label&rsquo;s audio engineering ethos treats the recording
+          as a high-fidelity document of the performance. Second international label in the
+          engine (after Fresh Sound at degree 12&deg;). First UK-based label.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Seattle Jazz Network &mdash; The Collaborator</div>
+          <p>Performed and recorded with numerous Seattle musicians, including
+          <strong>Julian Priester</strong> (degree 7&deg;). Network node where the academic
+          pipeline (UW students, faculty) intersects with the performance community
+          (Seattle clubs, festivals, recordings). Unique intersection point in the engine.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">The Program Director</div>
+          <p>As director of jazz studies at UW: curriculum design, student ensemble direction,
+          graduate research supervision. The students who pass through carry Seales&rsquo;s
+          influence into their own careers. <strong>Institutional reproduction:</strong>
+          the program generates its own successors.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Four theory nodes &mdash; modal jazz piano vocabulary (the contemporary
+        post-bop language), academic jazz pedagogy (the university scholar-performer
+        model), piano lineage (three eras), and the thirteenth blue note deployment
+        (modal integration).</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Modal Jazz Piano Vocabulary</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Dorian, Mixolydian, Lydian scales as basis. Quartal voicings (stacked fourths).
+            Extended chord structures (9ths, 11ths, 13ths). Lydian Dominant color (#11).
+            Academic integration: performing knowledge + scholarly framework.
+            <strong>Eighth node on the piano branch</strong> &mdash; now the richest in the
+            engine. Inherits from bebop (degree 12&deg;) through the Davis/Coltrane/Tyner
+            modal revolution.</p>
+            <div class="examples">Tyner (&ldquo;Passion Dance&rdquo;); Hancock (&ldquo;Maiden Voyage&rdquo;); Jarrett (K&ouml;ln Concert); Corea (&ldquo;Spain&rdquo;); Seales (Naim recordings)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Bebop vocabulary (Lanphere 12&deg;) &rarr; Davis modal revolution &rarr; Tyner quartal innovation &rarr; Hancock fusion of modal + funk &rarr; academic codification &rarr; Seales. Thirteenth chromaticism deployment: modal chromaticism as structural choice.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Academic Jazz Pedagogy</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>The university scholar-performer as integration point. DMA-level curriculum
+            design. Formal knowledge transmission through degree-granting institution.
+            <strong>Seventh pedagogical mode.</strong> Completes the Standifer-to-Seales arc:
+            experiential teaching (4&deg;) &rarr; doctoral academic program (13&deg;) at the
+            same institution. Introduces the institution-dependency spectrum.</p>
+            <div class="examples">Seales (UW jazz studies director); Standifer (UW experiential, 4&deg;); Priester/Caliman (Cornish, 7&deg;/9&deg;); Berklee (national comparison)</div>
+            <div class="genealogy"><strong>Spectrum:</strong> Person-dependent (Brazil salon 11&deg;) &rarr; partially institutional (Standifer 4&deg;) &rarr; fully institutional (Seales 13&deg;). The program generates its own successors through degree granting.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Piano Lineage: Three Eras</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Berry (5&deg;, stride/cocktail, self-taught) &rarr; Bown (6&deg;, hard bop/orchestral,
+            Seattle University) &rarr; Seales (13&deg;, modal/contemporary, UW DMA). Three eras,
+            three educational paths: <strong>autodidact &rarr; undergraduate &rarr; doctorate</strong>.
+            Maps the full arc of jazz piano evolution and jazz education in Seattle. Piano
+            becomes a <strong>trio</strong> (no longer a pair). Eight nodes on the piano branch.</p>
+            <div class="examples">Berry (stride bass, right-hand melodic); Bown (two-handed orchestral density); Seales (quartal voicings, extended chords); Tyner/Hancock/Jarrett (national context)</div>
+            <div class="genealogy"><strong>Branch:</strong> Piano surpasses saxophone/reed (7 nodes) as the richest theory branch at degree 13. The educational escalation (self-taught &rarr; undergrad &rarr; doctoral) parallels the stylistic evolution and maps the professionalization of jazz education.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Modal Integration</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Thirteenth deployment. In modal jazz, the blue note undergoes a conceptual
+            transformation: the b3, b7, and natural-6-over-minor that were blues inflections
+            become <strong>defining pitches of the mode</strong>. In Dorian, the b3 and b7
+            ARE the mode &mdash; not departures from it. The blue note is absorbed into the
+            scale itself. <strong>The most fully integrated deployment</strong>: from expressive
+            gesture to structural identity.</p>
+            <div class="examples">Seales (modal blue note); Tyner (quartal voicings with blue-note positions); Hancock (&ldquo;Maiden Voyage&rdquo;); Davis (&ldquo;So What&rdquo; &mdash; Dorian b3 and b7 as mode)</div>
+            <div class="genealogy"><strong>Thirteen deployments:</strong> bass-line (0&deg;), guitar (1&deg;), vocal (3&deg;), trumpet (4&deg;), piano crush (5&deg;), altered voicings (6&deg;), trombone slide (7&deg;), bass fundamental (8&deg;), sax voice (9&deg;), alto cool bend (10&deg;), flute bent note (11&deg;), bebop chromatic approach (12&deg;), modal integration (13&deg;).</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             ENERGY SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Energy Spectrum: 2:8:4</h2>
+
+        <p>Seales is the <strong>eighth energy-2 artist</strong> in the engine.
+        Energy-2 gains its academic-warmth variant: the energy of a musician who is
+        simultaneously a working performer and a university professor. The distribution
+        shifts from 2:7:4 to <strong>2:8:4</strong>.</p>
+
+        <table>
+          <thead>
+            <tr><th>Energy</th><th>Artists</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Peacock (8&deg;), Lanphere (12&deg;)</td><td>Meditative / Redemptive &mdash; intensity redirected inward</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Frisell (1&deg;), Standifer (4&deg;), Berry (5&deg;), Priester (7&deg;), Caliman (9&deg;), Shank (10&deg;), Brazil (11&deg;), Seales (13&deg;)</strong></td><td><strong>Atmospheric, warm, sustaining, community-embedded, academic-warmth</strong></td></tr>
+            <tr><td>3</td><td>Jones (0&deg;), Horvitz (2&deg;), Anderson (3&deg;), Bown (6&deg;)</td><td>Commanding, intense, projective</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Fourteen Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator</td></tr>
+            <tr><td>The Quiet Draw</td><td>Peacock (8&deg;)</td><td>Global cultivation &rarr; PNW settlement &rarr; gravitational presence</td></tr>
+            <tr><td>The Working Pedagogue-Draw</td><td>Caliman (9&deg;)</td><td>Global cultivation &rarr; educator AND performer</td></tr>
+            <tr><td>The Late Homestead</td><td>Shank (10&deg;)</td><td>Prolific career elsewhere &rarr; PNW as later-career base</td></tr>
+            <tr><td>The Salon Keeper</td><td>Brazil (11&deg;)</td><td>Settled in CD &rarr; community building through home-based pedagogy</td></tr>
+            <tr><td>The Prodigal</td><td>Lanphere (12&deg;)</td><td>PNW-born &rarr; left for center &rarr; destroyed &rarr; returned &rarr; rebuilt</td></tr>
+            <tr><td><strong>The Institutional Anchor</strong></td><td><strong>Seales (13&deg;)</strong></td><td><strong>Native-born &rarr; terminal degree &rarr; permanent institutional appointment &rarr; active performer</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>The Institutional Anchor is the most institutionally embedded position in the
+        taxonomy. Three conditions: native-born (or long-resident from formative years),
+        advanced degree (terminal degree in the field), and permanent institutional appointment.
+        Distinct from The Teacher (Standifer &mdash; experiential, not doctoral), The
+        Pedagogue-Draw (Priester &mdash; arrived from outside), and The Salon Keeper
+        (Brazil &mdash; informal, home-based).</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;12&deg;</h4>
+          <ul>
+            <li><strong>Piano branch richest:</strong> Eight nodes at degree 13&deg; &mdash;
+            surpasses saxophone/reed (seven). Berry (stride) &rarr; Bown (hard bop) &rarr;
+            Seales (modal). Trio, not pair.</li>
+            <li><strong>Standifer-to-Seales arc:</strong> NEW. Experiential teaching (4&deg;)
+            to doctoral academic program (13&deg;) at the same institution (UW). The full
+            formalization of jazz pedagogy.</li>
+            <li><strong>Institution-dependency spectrum:</strong> NEW. Person-dependent
+            (Brazil salon) to institution-dependent (Seales UW program). New analytical axis.</li>
+            <li><strong>Naim Records:</strong> NEW. First UK-based label. Second international
+            after Fresh Sound (12&deg;).</li>
+            <li><strong>The Institutional Anchor:</strong> NEW. Fourteenth artist-city pattern.
+            Native-born, terminal degree, permanent institutional appointment.</li>
+            <li><strong>Blue note thread:</strong> Thirteen deployments. Modal integration is
+            the most fully integrated &mdash; blue note absorbed into the mode itself.</li>
+            <li><strong>Chromaticism thread:</strong> Thirteen deployments. Modal chromaticism
+            added &mdash; structural modal choices, not passing tones.</li>
+            <li><strong>Genre rotation:</strong> STILL CRITICAL for degree 14. Fourteen
+            consecutive jazz artists. Intentional CSV architecture.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../005-overton-berry/index.html">S36-005 &mdash; Overton Berry (Degree 5&deg;)</a> &mdash; Piano lineage (first chair). Berry&rsquo;s stride/cocktail vocabulary is the oldest piano tradition. Self-taught. Seales is the third pianist, the most contemporary and most formally educated. From autodidact to doctorate across three degrees.</li>
+            <li><a href="../006-patti-brown/index.html">S36-006 &mdash; Patti Bown (Degree 6&deg;)</a> &mdash; Piano lineage (second chair). Bown&rsquo;s hard bop/orchestral approach is the middle generation. Seattle University training. Educational escalation: Berry (self-taught) &rarr; Bown (undergraduate) &rarr; Seales (doctoral).</li>
+            <li><a href="../004-floyd-standifer/index.html">S36-004 &mdash; Floyd Standifer (Degree 4&deg;)</a> &mdash; Pedagogical arc. Standifer was UW faculty teaching through experience. Seales is UW faculty teaching through academic scholarship. The arc from experiential teaching to doctoral pedagogy at the same institution.</li>
+            <li><a href="../007-julian-priester/index.html">S36-007 &mdash; Julian Priester (Degree 7&deg;)</a> &mdash; Collaborator and fellow educator. Priester at Cornish, Seales at UW &mdash; two institutional jazz programs in Seattle. Priester arrived from outside; Seales is native-born.</li>
+            <li><a href="../012-don-lanphere/index.html">S36-012 &mdash; Don Lanphere (Degree 12&deg;)</a> &mdash; Bebop genealogy. Lanphere&rsquo;s bebop vocabulary (1940s) is the ancestor of the modal vocabulary Seales deploys. Bebop &rarr; modal &rarr; contemporary post-bop.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>University of Washington School of Music. Faculty directory, jazz studies program documentation, and course catalogs.</li>
+          <li>Naim Records. Marc Seales artist catalog, album liner notes, and discography.</li>
+          <li>AllMusic. Marc Seales artist biography and discography.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="4">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>Gioia, Ted. <em>The History of Jazz</em>. Oxford University Press, 2nd ed., 2011.</li>
+          <li>Russell, George. <em>Lydian Chromatic Concept of Tonal Organization</em>. Concept Publishing, 4th ed., 2001.</li>
+        </ol>
+
+        <h3>Institutional &amp; Comparative</h3>
+        <ol start="7">
+          <li>Earshot Jazz. Seattle jazz community coverage, UW jazz program profiles.</li>
+          <li>KNKX/KPLU Jazz Northwest. Pacific Northwest jazz community coverage.</li>
+          <li>JazzTimes. Seattle jazz profiles, UW program coverage.</li>
+          <li>The Seattle Times. Marc Seales profiles and Seattle jazz coverage.</li>
+          <li>DownBeat. University jazz program surveys and rankings.</li>
+          <li>Cornish College of the Arts. Jazz faculty and program documentation (comparison).</li>
+          <li>Berklee College of Music program documentation (national comparison).</li>
+          <li>North Texas State University (UNT) jazz program documentation (historical comparison).</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Seattle (native)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Piano</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">UW (DMA)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">13&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (post-bop)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1990s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Naim</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Legacy</h4>
+          <div class="stat-row">
+            <span class="stat-label">UW Faculty</span>
+            <span class="stat-value">Decades</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jazz Studies Dir.</span>
+            <span class="stat-value">UW School of Music</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">DMA (first PhD)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano Chair</span>
+            <span class="stat-value">3rd (Berry, Bown)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano Branch</span>
+            <span class="stat-value">8 nodes (richest)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">5 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Firsts at Degree 13&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Credential</span>
+            <span class="stat-value">PhD/DMA (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Archetype</span>
+            <span class="stat-value">Institutional Anchor</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Axis</span>
+            <span class="stat-value">Institution-dependency</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipeline</span>
+            <span class="stat-value">UW complete (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Naim (1st UK)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Institutional Anchor</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Native + DMA + faculty</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Native-born</span>
+            <span class="stat-value">Yes (Seattle)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">UW pipeline</span>
+            <span class="stat-value">15th pipeline (NEW)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Energy 1</span>
+            <span class="stat-value">Peacock (8&deg;), Lanphere (12&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 2</span>
+            <span class="stat-value">8 artists (incl. Seales)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 3</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">2:8:4</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;12&deg; &rarr; 13&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Piano Branch</span>
+            <span class="stat-value">8 nodes (RICHEST)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">13th (modal)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">13th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">14 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">15 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 13&deg; / 360 &middot;
+      <a href="../012-don-lanphere/index.html">Prev: 12&deg; Lanphere</a> &middot;
+      <a href="../005-overton-berry/index.html">5&deg; Berry</a> &middot;
+      <a href="../006-patti-brown/index.html">6&deg; Bown</a> &middot;
+      <a href="../004-floyd-standifer/index.html">4&deg; Standifer</a> &middot;
+      <a href="../007-julian-priester/index.html">7&deg; Priester</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
