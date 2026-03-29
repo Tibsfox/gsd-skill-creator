@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 26&deg; &mdash; Purple Martin &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.liquid { background: #0277BD; }
+    .theory-icon.aerial { background: #00838F; }
+    .theory-icon.nestbox { background: #2E7D32; }
+    .theory-icon.colony { background: #F57C00; }
+    .theory-icon.swallow-trio { background: #7B1FA2; }
+    .theory-icon.energy { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Swallow trio card */
+    .trio-card {
+      background: linear-gradient(135deg, #E0F7FA 0%, #80DEEA 100%);
+      border: 2px solid #00838F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trio-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #006064;
+    }
+
+    /* Aerial card */
+    .aerial-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .aerial-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Nestbox card */
+    .nestbox-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .nestbox-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Colony card */
+    .colony-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #F57C00;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .colony-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">26&deg;</div>
+      <div class="release-title-block">
+        <h2>Purple Martin</h2>
+        <div class="scientific">Progne subis &middot; Family Hirundinidae (Swallows) &middot; First Swallow</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Rich Gurgling Liquid Song &middot; Open Sky Near Water &middot; Summer &middot; Energy 4</div>
+
+    <blockquote>
+      Over a Puget Sound harbor, a dark iridescent bird sweeps through the air,
+      mouth open, catching insects on the wing. It lands on a nest box perch and
+      pours out a rich, gurgling, liquid song &mdash; tumbling notes that flow like
+      water over stones. The Purple Martin. The largest North American swallow.
+      The first Hirundinidae in the engine. The sky opens. The swallow trio begins.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Swallow Trio Card -->
+        <div class="trio-card">
+          <h3>The Swallow Trio Begins: Degrees 26&ndash;28</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Three consecutive Hirundinidae. Three aerial insectivores. One family,
+            three variations. The only comparable cluster is the warbler quintet
+            (degrees 14&ndash;17, 20).
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Purple Martin (26)</th><th>Violet-green (27)</th><th>Tree Swallow (28)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mass</td><td><strong>45&ndash;60 g</strong></td><td>14 g</td><td>17&ndash;25 g</td></tr>
+              <tr><td>Nest strategy</td><td><strong>Colonial nest box</strong></td><td>Cavity (scattered)</td><td>Cavity (loose colony)</td></tr>
+              <tr><td>Song quality</td><td><strong>Rich gurgling liquid</strong></td><td>Rapid twittering</td><td>Liquid twittering</td></tr>
+              <tr><td>Coloniality</td><td><strong>Obligate colonial</strong></td><td>Solitary/loose</td><td>Semi-colonial</td></tr>
+              <tr style="background: rgba(0,131,143,0.15); font-weight: 600;"><td>Trio role</td><td><strong>PATRIARCH</strong></td><td>Cliff dweller</td><td>Wetland specialist</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #006064; margin: 0.5rem 0;">
+            <strong>The convergence trio (23&ndash;25) showed three families converging on one sound.
+            The swallow trio (26&ndash;28) shows one family diverging into three niches.</strong>
+            Convergence resolved; divergence begins.
+          </p>
+        </div>
+
+        <!-- Aerial Card -->
+        <div class="aerial-card">
+          <h3>The First Aerial Insectivore: A Life on the Wing</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Purple Martin catches <strong>all of its food in flight</strong>. Not from a perch
+            (flycatcher). Not from a surface (chickadee). Not from the ground (robin). From
+            the air, in continuous sustained flight, mouth open, sweeping through aerial insect
+            swarms at altitudes from 15 to 150+ meters. The sky is not a corridor between
+            perches &mdash; it is the habitat. The engine has been terrestrial for 26 degrees.
+            <strong>Now it becomes aerial.</strong>
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: The Liquid Gurgle</h2>
+        <p>
+          The Purple Martin&rsquo;s song is a <strong>rich, gurgling, liquid stream</strong> of
+          tumbling notes &mdash; rapid frequency modulation with smooth transitions, creating
+          a sound that flows like water over stones. Not whistled (thrush), not warbled
+          (grosbeak), not trilled (junco) &mdash; <em>gurgled</em>. A genuinely new texture.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>1.0&ndash;8.0 kHz (widest since Pine Siskin)</td></tr>
+            <tr><td>Song duration</td><td>3&ndash;6 seconds per bout</td></tr>
+            <tr><td>Note rate</td><td>8&ndash;15 per second (fastest in engine)</td></tr>
+            <tr><td>Structure</td><td>Continuous stream &mdash; no discrete phrase boundaries</td></tr>
+            <tr><td>Note types</td><td>Gurgling (low FM sweeps) + chirps + rich warbles</td></tr>
+            <tr><td>Timbre</td><td>Liquid, rich, flowing &mdash; soft onsets, no clipping</td></tr>
+            <tr><td>Amplitude</td><td>Moderate-loud &mdash; projects across open sky</td></tr>
+            <tr><td>Dawn song</td><td>Pre-dawn colony chorus &mdash; polyphonic liquid wall</td></tr>
+            <tr><td>Context</td><td>Near nest colony &mdash; perch and flight song</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>Why &ldquo;liquid&rdquo;?</strong> The gurgling notes consist of rapid sinusoidal
+          FM sweeps (5&ndash;10 ms each) with smooth transitions &mdash; no sharp onset transients.
+          Each note grades into the next. The spectral pattern is structurally identical to
+          flowing water, which also produces rapid continuous spectral variation without abrupt
+          transitions. The bird sounds like water because rapid smooth FM modulation IS the
+          acoustic signature of flowing water, whether the source is a stream or a syrinx.
+        </p>
+
+        <!-- Nestbox Card -->
+        <div class="nestbox-card">
+          <h3>Nest Box Dependency: Conservation as Active Management</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            In the PNW, Purple Martin populations collapsed to <strong>&lt;200 breeding pairs</strong>
+            by the 1970s due to snag removal and competition from introduced European Starlings
+            and House Sparrows. Coordinated nest box programs &mdash; boxes over water, entrance
+            holes sized to exclude starlings, colony decoy protocols &mdash; have recovered the
+            population to <strong>800&ndash;1,000+ pairs</strong>. The recovery is real but
+            <strong>fragile</strong>: remove the nest boxes and the population collapses again.
+            The Purple Martin in PNW is a <strong>managed species</strong>. Its presence depends
+            on continued human effort.
+          </p>
+        </div>
+
+        <!-- Colony Card -->
+        <div class="colony-card">
+          <h3>Colonial Nesting: The First Ensemble Voice</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Purple Martin is an <strong>obligate colonial nester</strong> &mdash; it requires
+            the proximity of other breeding pairs. PNW colonies range from 2&ndash;3 to 50+ pairs
+            on managed nest box structures in harbors and marinas. The colony dawn song is the
+            engine&rsquo;s first <strong>ensemble vocal display</strong>: multiple males singing
+            simultaneously, overlapping liquid songs creating a polyphonic gurgling chorus. Not
+            a single bird &mdash; a collective. Twenty-six degrees of solo voices, and now an
+            orchestra.
+          </p>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: The Largest Swallow</h2>
+        <p>
+          <em>Progne subis</em> is the largest of approximately 90 swallow species worldwide
+          and the largest swallow in North America &mdash; roughly three times the mass of the
+          smaller swallows at degrees 27 and 28. The genus name <em>Progne</em> comes from
+          Greek mythology (Procne, transformed into a swallow). The PNW subspecies is
+          <em>P. s. arboricola</em>, historically a natural cavity nester now almost entirely
+          dependent on human-provided nest boxes.
+        </p>
+        <p>
+          <strong>First Hirundinidae.</strong> Sixteenth family in the engine. The first family
+          defined primarily by its mode of locomotion &mdash; <strong>flight</strong>. Turdidae
+          by song. Parulidae by habitat. Picidae by percussion. Hirundinidae by flight.
+        </p>
+
+        <!-- Plumage -->
+        <h2>Iridescent Purple-Black: Structural Color</h2>
+        <p>
+          Males are entirely dark, iridescent purple-black &mdash; <strong>structural
+          coloration</strong> produced by light interference in feather barbule microstructure,
+          not pigment. The color shifts between deep blue, violet, and near-black depending on
+          angle and light. In overcast conditions, the bird appears simply black. In sunlight,
+          it blazes. The first structural iridescence in the engine &mdash; previous species used
+          pigment-based coloration. The martin wears the visible spectrum.
+        </p>
+
+        <!-- Mosquito myth -->
+        <h2>The Mosquito Myth: Debunked</h2>
+        <p>
+          The persistent claim that Purple Martins eat &ldquo;2,000 mosquitoes per day&rdquo;
+          is <strong>not supported by dietary studies</strong>. Mosquitoes constitute &lt;3% of
+          the diet (Johnston 1967, Kale 1968, Walsh 1978). Martins prefer larger prey (beetles,
+          dragonflies, moths) and forage at altitudes above mosquito flight zones. The claim
+          originated from 1960s nest house marketing. The human-martin relationship is
+          <strong>aesthetic, not transactional</strong>. The martins benefit from nest boxes.
+          The humans benefit from beauty.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon liquid">L</div>
+            <div class="theory-content">
+              <h4>Liquid Vocalization &mdash; The Gurgling Song</h4>
+              <p>Rapid sinusoidal FM sweeps with smooth transitions produce a water-like quality. Sound that flows rather than strikes. The 27th acoustic element. The first genuinely new sound texture since the hoarse warble.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon aerial">A</div>
+            <div class="theory-content">
+              <h4>Aerial Insectivory &mdash; A Life in Three Dimensions</h4>
+              <p>The first obligate aerial forager. Catches all food on the wing. Sustained flight of 30&ndash;60 minutes without landing. The sky is the habitat, not a corridor. The engine becomes aerial.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon nestbox">N</div>
+            <div class="theory-content">
+              <h4>Conservation as Active Management</h4>
+              <p>Nest box dependency: populations collapsed without natural cavities, recovered through human-built structures. Passive conservation (protect habitat) vs. active conservation (create habitat). A managed species.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon colony">C</div>
+            <div class="theory-content">
+              <h4>Colonial Acoustics &mdash; The Ensemble Voice</h4>
+              <p>Obligate colonial nesting produces the engine&rsquo;s first polyphonic vocal display. Multiple simultaneously singing males create an aggregate &ldquo;wall of liquid sound.&rdquo; Solo to ensemble in one degree.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon swallow-trio">S</div>
+            <div class="theory-content">
+              <h4>The Swallow Trio Begins &mdash; Degrees 26&ndash;28</h4>
+              <p>Three consecutive Hirundinidae: Purple Martin, Violet-green Swallow, Tree Swallow. One family, three sizes, three niches. The convergence trio converged; the swallow trio diverges.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Sextet: Sixth Consecutive E=4</h4>
+              <p>Degrees 21&ndash;26: hammer, drum, smooth warble, hoarse warble, caroling, liquid gurgle. Six forms of acoustic power. The longest sustained energy plateau in the engine&rsquo;s history.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>THE CONTRAST. Robin: clean, clipped, cyclic, terrestrial. Martin: liquid, continuous, flowing, aerial. Maximum acoustic and ecological contrast in a single degree step.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-006: Pacific-slope Flycatcher</strong>
+            <p>AERIAL INSECTIVORY COMPARISON. Flycatcher sallies from a perch. Martin hawks in continuous flight. Short-range interceptor vs. long-range cruiser.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>CAVITY NESTING CONTRAST. Both need cavities. Owl: natural cavities, passive conservation. Martin: human-built boxes, active conservation. Two species, two conservation philosophies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021/022: Northern Flicker</strong>
+            <p>CAVITY ECONOMY. Flicker excavates cavities. Martin uses but cannot excavate. The woodpecker creates habitat the swallow needs.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-010: Bushtit</strong>
+            <p>COLONIAL COMPARISON. Bushtit: social foraging flocks in motion. Martin: stationary breeding colonies. Two models of avian sociality.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>WIDEBAND COMPARISON. Siskin: 2&ndash;10 kHz wideband buzz. Martin: 1&ndash;8 kHz wideband gurgle. Two broadband species &mdash; one buzzy, one liquid.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Purple Martin: conservation success, nest box dependency, colonial nester, aerial insectivore. PNW recovery from &lt;200 to 800+ pairs.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Aerial food web: aquatic insect emergence supports aerial insectivores. Water quality links to martin populations.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: Shaina Shepherd (Soul, E=4, Seattle, self-released). Both liquid. Both floating above. Both sustained by alternative platforms.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Brown, C.R. (1997). Purple Martin (<em>Progne subis</em>). <em>Birds of North America</em>, No. 287. Cornell Lab of Ornithology.</li>
+          <li>Tarof, S.A. and Briskie, J.V. (2008). Purple Martin (<em>Progne subis</em>), version 2.0. <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Cousens, B., Lee, J.C., and Darling, L.M. (2005). Status and management of Purple Martins in British Columbia. <em>BC Ministry of Environment</em>.</li>
+          <li>Johnston, R.F. (1967). Seasonal variation in the food of the Purple Martin. <em>Ibis</em> 109(1): 8&ndash;13.</li>
+          <li>Kale, H.W. (1968). Relationship of Purple Martins to mosquito control. <em>Auk</em> 85(4): 654&ndash;661.</li>
+          <li>Walsh, H. (1978). Food of nestling Purple Martins. <em>Wilson Bulletin</em> 90(2): 248&ndash;260.</li>
+          <li>Purple Martin Conservation Association. purplemartin.org</li>
+          <li>Washington Department of Fish and Wildlife. Purple Martin management plan. wdfw.wa.gov</li>
+          <li>Turner, A. and Rose, C. (1989). <em>A Handbook to the Swallows and Martins of the World</em>. Christopher Helm.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Macaulay Library. Purple Martin recordings. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon). Purple Martin. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">26&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Hirundinidae</div>
+          <div class="stat-detail">First swallow &mdash; 16th family in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Liquid Gurgle</div>
+          <div class="stat-detail">Rich gurgling liquid song</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Sixth consecutive E=4 (degrees 21&ndash;26)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Open Sky</div>
+          <div class="stat-detail">Near water &mdash; most aerial in the engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">1.0&ndash;8.0 kHz</div>
+          <div class="stat-detail">Widest range since Pine Siskin (deg 12)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">45&ndash;60 g</div>
+          <div class="stat-detail">Largest North American swallow</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Nest Box Dependent</div>
+          <div class="stat-detail">&lt;200 pairs (1970s) &rarr; 800+ pairs (2020s)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nesting</div>
+          <div class="stat-value">Colonial</div>
+          <div class="stat-detail">Obligate colonial &mdash; 2&ndash;50+ pairs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Swallow Trio</div>
+          <div class="stat-value">1 of 3</div>
+          <div class="stat-detail">Degrees 26, 27, 28 &mdash; Hirundinidae</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 26 &mdash; S36</div>
+          <div class="parallel-name">Shaina Shepherd</div>
+          <div class="parallel-detail">Soul &middot; E=4 &middot; Seattle &middot; Self-released</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Both liquid. Both floating above. Both sustained
+            by alternative platforms. Sixth consecutive E=4.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 26&deg; of 360&deg; &mdash; v1.49.162</p>
+  </footer>
+</body>
+</html>
