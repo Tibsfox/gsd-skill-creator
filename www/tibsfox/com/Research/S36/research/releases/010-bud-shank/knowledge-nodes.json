@@ -1,0 +1,233 @@
+{
+  "degree": 10,
+  "artist": "Bud Shank",
+  "slug": "010-bud-shank",
+  "genre": "Jazz (alto saxophone, flute -- West Coast cool jazz)",
+  "energy": 2,
+  "era": "1950s-2009",
+  "location": {
+    "origin": "Dayton, Ohio -- southwestern Ohio, industrial midwestern city",
+    "formative": "University of North Carolina (formal music study); Los Angeles -- Stan Kenton Orchestra (1947-51), Lighthouse All-Stars, Pacific Jazz label; West Coast cool jazz movement (1950s-1960s)",
+    "career": "Los Angeles (1950s-2000s); Pacific Northwest (later career); Pacific Jazz/World Pacific Records artist; 60+ albums as leader"
+  },
+  "born": "1926",
+  "died": "2009",
+  "labels": ["Pacific Jazz", "World Pacific"],
+  "theory_nodes": [
+    {
+      "concept": "West Coast cool jazz voicings (lighter tone, arranged textures, classical influence, extended chords, counterpoint)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/west-coast-cool-jazz-voicings.md",
+      "examples": [
+        "Bud Shank -- clean, centered alto tone with classical precision on Pacific Jazz recordings (1950s-60s)",
+        "Gerry Mulligan Quartet -- pianoless counterpoint: baritone sax and trumpet as independent melodic voices",
+        "Chet Baker -- cool trumpet: lyrical, restrained, melodically focused",
+        "Paul Desmond -- alto saxophone tone closest to Shank's: dry, precise, melodically elegant"
+      ],
+      "description": "West Coast cool jazz voicings differ from hard bop in four key ways: (1) Extended chord voicings -- heavy use of 9ths, 11ths, 13ths creating lush, open harmonic color rather than blues-based tension. (2) Counterpoint -- multiple independent melodic lines sounding simultaneously, in the Bach tradition. (3) Classical tone production -- less vibrato, more focused airstream, cleaner articulation than the blues-rooted hard bop sound. (4) Space and restraint -- silence and space as compositional elements, notes breathing rather than insisting. Shank's Kenton Orchestra background (1947-51) instilled section discipline and arranged-texture orientation. His Pacific Jazz recordings document the cool jazz harmonic vocabulary at its peak.",
+      "genealogy": {
+        "ancestors": ["Hard bop melodic vocabulary (degree 9, Caliman)", "Hard bop comping vocabulary (degree 6, Bown)", "Composition-improvisation spectrum (multiple degrees)"],
+        "relationship": "Cool jazz voicings are the harmonic counterpart to Caliman's (degree 9) hard bop vocabulary and Bown's (degree 6) hard bop comping. Where hard bop foregrounds blues-based tension and emotional directness, cool jazz foregrounds extended-chord color and classical restraint. Both are valid harmonic languages for jazz improvisation; they produce different timbral and emotional results. The S36 engine now documents both poles of the West Coast harmonic vocabulary -- the first within-family stylistic contrast."
+      }
+    },
+    {
+      "concept": "Jazz flute tone production (air-column vibration, embouchure across aperture, no reed -- the bird-like voice)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/flute/jazz-flute-tone-production-embouchure.md",
+      "examples": [
+        "Bud Shank -- cool, lyrical flute over bossa nova and West Coast jazz arrangements",
+        "Herbie Mann -- funkier, more rhythmic jazz flute with world music inflections",
+        "Hubert Laws -- classical-jazz crossover flute with virtuosic technique",
+        "Yusef Lateef -- world music and Eastern inflections on jazz flute"
+      ],
+      "description": "The flute produces sound through air blown across the embouchure hole (lip plate) -- no reed, no vibrating element touching the player's mouth. The air column inside the cylindrical tube vibrates, producing a pure, clear tone dominated by the fundamental frequency with relatively few overtones. The flute sound is breathy, transparent, and bright -- the opposite of the saxophone's warm, reedy density. The embouchure is aerodynamic (air direction and speed) rather than tactile (reed pressure). Shank was one of the first to make the flute a viable jazz instrument, alongside Herbie Mann and Yusef Lateef. The flute brings a bird-like quality to jazz -- connecting to the Hermit Thrush's 'flute-like song' noted at degree 7.",
+      "genealogy": {
+        "ancestors": ["Tenor saxophone tone production -- reed vibration, embouchure (degree 9, Caliman)", "Voice as instrument -- body IS sound source (degree 3, Anderson)", "Hermit Thrush flute-like song connection (degree 7, Priester retrospective)"],
+        "relationship": "Caliman (degree 9) introduced the saxophone reed -- a vibrating element in physical contact with the player's embouchure. Shank (degree 10) introduces the flute -- where the vibrating element (air column) is not in physical contact with the player in the same tactile way. The flute's pure, overtone-sparse tone is the timbral opposite of the saxophone's warm, overtone-rich sound. Anderson (degree 3) is the human voice -- body as instrument. The flute is the first wind instrument where the player's body does not touch the vibrating element. Body-as-sound-source thread gains its eighth instrument."
+      }
+    },
+    {
+      "concept": "Bossa nova rhythm (syncopated 2-3 pattern, jazz-Brazilian fusion, cross-cultural bridge-building)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/bossa-nova-syncopated-2-3-pattern.md",
+      "examples": [
+        "Bud Shank & Laurindo Almeida, Brazilliance (1953-54) -- pioneering jazz-Brazilian fusion, a decade before the bossa nova craze",
+        "Stan Getz & Joao Gilberto, Getz/Gilberto (1964) -- the commercial breakthrough that brought bossa nova to America",
+        "Antonio Carlos Jobim -- the composer-pianist who codified bossa nova harmony",
+        "Joao Gilberto -- the guitarist who codified the bossa nova guitar pattern"
+      ],
+      "description": "The bossa nova rhythm groups eighth notes in a syncopated 2-3 pattern (3+3+2 or variations), creating a flowing, circular feel distinct from straight-ahead jazz swing. The bossa nova guitar pattern provides both rhythm and harmony simultaneously -- percussion (syncopation) and harmonic color (extended chord voicings). Cool jazz and bossa nova share structural DNA: emphasis on melody over rhythmic intensity, lighter dynamics, harmonic sophistication (extended chords, chromatic passing tones), and aesthetic understatement. The Shank-Almeida collaboration (1953-54) discovered this compatibility before anyone codified it -- cross-cultural bridge-building through shared musical values, predating the bossa nova craze by nearly a decade.",
+      "genealogy": {
+        "ancestors": ["Rhythmic spectrum -- eight positions through degree 9 (multiple degrees)", "Composition-improvisation spectrum (multiple degrees)"],
+        "relationship": "The bossa nova rhythm is the first non-American rhythmic tradition in the S36 engine. It extends the rhythmic spectrum to nine positions: regular (Jones 0), polymetric (Horvitz 2), rubato (Anderson 3), elastic swing (Standifer 4), hard bop drive (Bown 6), electronic-spatial (Priester 7), breath-driven organic (Peacock 8), behind-the-beat (Caliman 9), and now bossa nova syncopation (Shank 10). The cross-cultural dimension is new: all previous rhythmic entries were within the American jazz tradition. Bossa nova introduces Brazilian rhythmic DNA into the engine."
+      }
+    },
+    {
+      "concept": "Blue note -- alto saxophone cool bend (tenth deployment, restrained classical-inflected bend)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/saxophone/blue-note-alto-cool-bend.md",
+      "examples": [
+        "Bud Shank -- restrained, precise blue-note inflection in cool jazz context; less overt bending than hard bop",
+        "Paul Desmond -- the driest blue note: barely there, implied rather than stated",
+        "Lee Konitz -- cool alto blue note as chromatic color rather than blues cry",
+        "Art Pepper -- West Coast alto with more overt blue-note bending than Shank or Desmond"
+      ],
+      "description": "Tenth deployment. The alto saxophone cool blue note differs from Caliman's (degree 9) hard bop tenor blue note in character and execution. The hard bop blue note is overt: a warm, behind-the-beat bend through the quarter-tone zone, emphasizing blues feeling. The cool blue note is understated: a precise chromatic inflection that colors the melodic line without dominating it. The embouchure mechanics are the same (jaw pressure manipulation to bend pitch), but the aesthetic intent is different -- suggestion rather than insistence, chromatic color rather than blues cry. Shank's blue notes are in the Paul Desmond/Lee Konitz tradition: present but restrained, decorative rather than structural.",
+      "genealogy": {
+        "ancestors": ["Blue note -- saxophone voice, ninth deployment (degree 9, Caliman)", "Blue note -- vocal melisma (degree 3, Anderson)", "Blue note -- all nine prior deployments"],
+        "relationship": "Ten deployments across eleven degrees. The cool alto blue note provides the first stylistic contrast WITHIN the blue note thread: Caliman (degree 9, hard bop) bends overtly and warmly; Shank (degree 10, cool) bends precisely and restrainedly. Same embouchure mechanism, different aesthetic intent. The thread now documents not just instrument-specific blue notes but style-specific blue notes within the same instrument family. Ten deployments: bass-line (0), guitar (1), vocal (3), trumpet (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), saxophone voice (9), alto cool bend (10)."
+      }
+    },
+    {
+      "concept": "Jazz-pop crossover (the 'California Dreamin'' moment -- session musician bridging jazz and popular music)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/crossover/jazz-pop-session-crossover.md",
+      "examples": [
+        "Bud Shank -- sixteen-bar alto solo on 'California Dreamin'' (1965), one of the most widely heard jazz solos in pop history",
+        "Phil Woods -- alto solo on Billy Joel's 'Just the Way You Are' (1977), another jazz-into-pop crossover moment",
+        "Tom Scott -- jazz saxophone session work on pop and rock recordings (1970s-80s)",
+        "David Sanborn -- alto saxophone as pop/R&B session voice (1970s-present)"
+      ],
+      "description": "The 'California Dreamin'' solo is the engine's first documentation of the jazz-pop crossover moment: a jazz musician applying their improvisational vocabulary to a popular music context, reaching an audience of millions who may never have heard the artist's jazz recordings. Shank's sixteen bars apply West Coast cool jazz phrasing -- lyrical, space-conscious, harmonically aware -- to a folk-rock harmonic progression. The cool jazz aesthetic works in pop because it values melody and space, which are exactly what a pop song needs. The hard bop approach would have been too intense for the context. This documents the economics of the studio session musician: the same skills that produced Pacific Jazz recordings also produced hit pop records, sustaining a career across both markets.",
+      "genealogy": {
+        "ancestors": ["Composition-improvisation spectrum (multiple degrees)", "Artist-as-institution spectrum -- session work dimension (multiple degrees)", "The Erasure pattern (degree 6, Bown -- jazz musician's relationship to commercial work)"],
+        "relationship": "The crossover moment connects to Bown's (degree 6) Erasure pattern: jazz musicians whose commercial and session work was economically necessary but historically under-documented. Shank's 'California Dreamin'' solo is the opposite of erasure -- it is the most famous thing he ever recorded, yet it does not represent his primary artistic identity. The jazz-pop crossover documents the tension between artistic identity (Pacific Jazz cool jazz) and public visibility (pop hit solo). Jones (degree 0) navigated this tension at the arrangement/production level; Shank navigated it at the solo/session level."
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-003", "S36-007", "S36-009"],
+  "seattle_connection": "Moved to Pacific Northwest later in career as home base while continuing active performance and recording schedule. Late Homestead pattern: prolific career elsewhere (LA, 60+ albums as leader), PNW as later-career settlement. Not an educator-draw (unlike Priester and Caliman at Cornish) -- a working musician who changed his address. Died in Tucson, AZ (2009), not in PNW -- distinguishing the Late Homestead from the permanent commitments of Caliman (died in Tacoma) and Peacock (died in NJ but with deep PNW roots). Energy-2 profile consistent with professional, productive, session-prolific musician.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "West Coast cool jazz voicings -- extended chords, counterpoint, classical tone, space and restraint; the harmonic opposite of hard bop; first within-family stylistic contrast in the engine",
+      "Jazz flute tone production -- air-column vibration, no reed, pure tone with few overtones; the bird-like voice; first flute in the engine; body-as-sound-source gains eighth instrument",
+      "Bossa nova rhythm -- syncopated 2-3 pattern, first non-American rhythmic tradition in the engine; cross-cultural bridge-building through shared musical values",
+      "Blue note -- tenth deployment; the cool alto bend is the first style-specific contrast within the blue note thread (hard bop overt vs. cool restrained)",
+      "Jazz-pop crossover -- the 'California Dreamin'' moment; session musician economics; jazz vocabulary applied to popular music reaching millions"
+    ],
+    "immediate_items": [
+      "Genre rotation: STILL CRITICAL. ELEVEN consecutive jazz artists. The CSV structure places all jazz at the opening degrees (0-22). Document this as intentional dataset architecture, not an engine failure. Non-jazz genres will arrive when the data rotation reaches them.",
+      "Continue geographic diversification. Four non-CD degrees (7, 8, 9, 10). The engine has rotated away from Central District concentration.",
+      "Cornish pipeline: two artists (Priester 7, Caliman 9). Shank is NOT Cornish. Pipeline stable. Track all subsequent Cornish connections.",
+      "Gender dimension: two women in eleven degrees (Anderson 3, Bown 6). Nine men. CRITICAL. Five consecutive male artists (7, 8, 9, 10). ESCALATED.",
+      "Pacific Jazz label thread (NEW): first dedicated jazz label in S36 -- the label that documented the West Coast cool jazz movement. Label-as-movement-documentation.",
+      "Flute jazz theory branch (NEW): first flute-specific node. Track all subsequent flute appearances.",
+      "Bossa nova / cross-cultural fusion thread (NEW): first non-American musical tradition. Track all subsequent non-American influences.",
+      "Jazz-pop crossover thread (NEW): 'California Dreamin'' as the paradigm. Track all subsequent crossover moments.",
+      "Saxophone/reed theory branch: extended from three nodes (degree 9) to five nodes (degree 10 adds cool voicings, flute). Two instrument sub-branches.",
+      "Shank's complete Pacific Jazz discography not fully cataloged (dozens of sessions as leader and sideman). Cross-reference Pacific Jazz label catalog.",
+      "Shank's specific Pacific Northwest residence dates and venues not fully documented.",
+      "Caliman Cornish teaching specifics -- carried from degree 9.",
+      "Caliman session discography -- carried from degree 9.",
+      "ECM label thread: three artists (Frisell 1, Priester 7, Peacock 8). Stable. Track subsequent.",
+      "Peacock Seattle-area documentation -- carried from degree 8.",
+      "Bown session discography -- carried from degree 6.",
+      "Berry recordings catalog -- carried from degree 5.",
+      "Post-Jackson Street venue mapping -- carried from degree 5.",
+      "Ray Charles as Central District contemporary -- carried from degrees 4-10.",
+      "Duwamish territorial acknowledgment -- BLOCKING. ELEVEN releases overdue. ESCALATED AGAIN."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: eleven named patterns (Export, Draw, Exile, Stay, Teacher, Persistence, Erasure, Pedagogue-Draw, Quiet Draw, Working Pedagogue-Draw, Late Homestead). Classify every degree.",
+      "Composition-improvisation spectrum: nine positions. Shank adds arranged cool jazz -- compositional emphasis over raw improvisation. Continue tracking.",
+      "Rhythmic spectrum: nine positions. Bossa nova syncopation added (Shank, Almeida collaboration). First non-American rhythm. Continue tracking.",
+      "Chromaticism thread: ten deployments. Cool jazz chromaticism adds classical-precision chromatic lines. Continue tracking.",
+      "Blue note thread: ten deployments across eleven degrees. First within-thread stylistic contrast (hard bop overt vs. cool restrained). Continue tracking.",
+      "Artist-as-institution spectrum: eleven positions (The Session Prolific added -- 60+ albums, studio musician economics). Continue tracking.",
+      "Saxophone/reed theory branch: five nodes at degree 10 (tone production, hard bop vocabulary, overtone control, cool voicings, flute production). Two sub-branches: saxophone and flute. Richest wind branch.",
+      "Bass theory branch: three nodes from degree 8. Stable.",
+      "Vocal theory branch: five nodes from degree 3. Stable.",
+      "Brass theory branch: three nodes across two degrees. Stable.",
+      "Piano theory branch: seven nodes across degrees 5-6. Richest branch overall.",
+      "Flute theory branch: one node at degree 10. NEW branch.",
+      "Body-as-sound-source thread: eight instruments (voice, trumpet, piano-as-percussion, piano-as-percussive-comping, trombone-as-electroacoustic-source, bass-as-vibrating-string, saxophone-as-reed-voice, flute-as-air-column). Flute is the first where vibrating element is not in physical contact with the player's body.",
+      "Amiga Principle gradient: six scales (large ensemble/Jones, small group/Bown, solo/Berry, piano trio/Peacock, hard bop combo/Caliman, studio session/Shank). Continue tracking.",
+      "Educational pipeline diversity: twelve pipelines across eleven degrees (Garfield, Berklee, UC Santa Cruz, UW, bandstand apprenticeship, self-taught, Seattle University, DuSable, Cornish, Westlake/LA, LA club scene, University of North Carolina). UNC adds first southern university.",
+      "Formal/informal pedagogy axis: four modes stable. Shank is not primarily an educator.",
+      "Gender-barrier gradient: two women, nine men in eleven degrees. CRITICAL tracking continues.",
+      "Jackson Street corridor categories: four non-corridor artists (Priester 7, Peacock 8, Caliman 9, Shank 10). Classify all future artists.",
+      "Label threads: Mercury (0, 3), Columbia (6), ECM (1, 7, 8), Catalyst/Mainstream (9), Pacific Jazz/World Pacific (10 -- NEW). Track all label connections.",
+      "Electronic jazz waves: three waves stable. Shank is acoustic. Represents the cool jazz pole.",
+      "Zen thread: from degree 8. Not applicable to Shank. Continue tracking.",
+      "Energy spectrum: distribution 1:6:4 (one 1, six 2s, four 3s). Energy-2 extends dominance. Track asymmetries.",
+      "Cornish College pipeline: two artists (Priester 7, Caliman 9). Stable. Shank is not Cornish.",
+      "West Coast / LA pipeline: three artists (Peacock 8, Caliman 9, Shank 10). All passed through LA jazz scene. Shank spent the longest there.",
+      "Within-family stylistic pairs: Caliman/Shank is the first (hard bop tenor vs. cool alto). Track subsequent within-family contrasts.",
+      "Cross-cultural fusion thread: Shank-Almeida bossa nova is the first. Track subsequent non-American musical influences.",
+      "Jazz-pop crossover thread: 'California Dreamin'' is the first documented moment. Track subsequent crossover events."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "Brazilliance",
+      "year": 1953,
+      "label": "Pacific Jazz",
+      "format": "LP",
+      "status": "available (reissued on CD and digital)",
+      "significance": "Pioneering jazz-Brazilian fusion with guitarist Laurindo Almeida. Predates the bossa nova craze by nearly a decade. Among the earliest recorded fusions of jazz and Brazilian music. Cross-cultural bridge-building through shared musical values (melody, space, harmonic sophistication). The landmark achievement of Shank's career."
+    },
+    {
+      "title": "California Dreamin' (session: The Mamas & The Papas)",
+      "year": 1965,
+      "label": "Dunhill",
+      "format": "single/LP",
+      "status": "widely available (one of the best-known pop recordings of the 1960s)",
+      "significance": "Shank's sixteen-bar alto saxophone solo introduced cool jazz phrasing to millions of listeners who had never heard of Pacific Jazz. The most widely heard example of West Coast cool jazz in popular music. Jazz-pop crossover paradigm: the same skills that produced jazz recordings also produced a defining pop moment."
+    },
+    {
+      "title": "Pacific Jazz recordings (multiple sessions)",
+      "year": 1952,
+      "label": "Pacific Jazz / World Pacific",
+      "format": "LP (multiple titles)",
+      "status": "available (many reissued on CD and digital)",
+      "significance": "Dozens of sessions as leader and sideman for the label that documented the West Coast cool jazz movement. Shank's prolific Pacific Jazz discography is the primary documentary record of his cool jazz identity: lighter tone, arranged textures, classical influence, melodic precision. 60+ albums as leader across his career."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Hadley Caliman", "relationship": "Saxophone family contrast -- the engine's first within-family stylistic pair. Caliman (tenor, hard bop, blues-rooted, Dexter Gordon lineage) vs. Shank (alto, cool, classically influenced, Kenton/Lighthouse lineage). Same era, same West Coast geography, opposite aesthetic poles.", "future_degree": 9},
+    {"name": "Julian Priester", "relationship": "Flute-thrush connection -- Priester's degree noted the Hermit Thrush's flute-like song; Shank introduces the actual flute to the engine. Both bridge traditions: Priester (acoustic/electronic), Shank (jazz/bossa nova).", "future_degree": 7},
+    {"name": "Ernestine Anderson", "relationship": "Melodic storytelling parallel -- both prioritize lyrical narrative over technical display. Anderson through voice, Shank through alto and flute. Both crossed from jazz to wider audiences (Anderson via live performance, Shank via 'California Dreamin'').", "future_degree": 3},
+    {"name": "Quincy Jones", "relationship": "Arranging connection -- both shaped by big band arranging tradition. Jones as arranger/producer, Shank as Kenton Orchestra reed section member. Both value compositional structure over raw improvisation. Shared Pacific Jazz-adjacent label ecosystem.", "future_degree": 0}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones -- attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson -- attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer -- Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry -- Central District native, self-taught. No institutional music education. Autodidact path.",
+    "degree_6": "Patti Bown -- Central District native, Seattle University (not Garfield). Formal training via Jesuit university.",
+    "degree_7": "Julian Priester -- NOT a Garfield product. DuSable High School (Chicago) under Captain Dyett. Cornish College of the Arts faculty.",
+    "degree_8": "Gary Peacock -- NOT a Garfield product. Burley, Idaho. Westlake College (LA). U.S. Army (Germany).",
+    "degree_9": "Hadley Caliman -- NOT a Garfield product. Idabel, Oklahoma. Los Angeles jazz scene. Cornish College of the Arts faculty.",
+    "degree_10": "Bud Shank -- NOT a Garfield product. Dayton, Ohio. University of North Carolina. Stan Kenton Orchestra. Los Angeles / Pacific Jazz. Fourth consecutive non-Garfield, non-CD degree.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": false,
+    "the_erasure": false,
+    "pedagogue_draw": false,
+    "quiet_draw": false,
+    "the_seeker": false,
+    "working_pedagogue_draw": false,
+    "late_homestead": true,
+    "native_born": false,
+    "self_taught": false,
+    "institution_type": "session prolific -- 60+ albums as leader, studio musician economics across jazz and pop",
+    "amiga_principle": "studio_session_prolific",
+    "gender": "male",
+    "instrumentalist": true,
+    "gender_barrier": "not applicable (male)"
+  },
+  "sources_count": 16,
+  "word_count_research": 3400,
+  "release_date": "2026-03-28"
+}
