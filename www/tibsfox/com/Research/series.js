@@ -64,6 +64,7 @@
     { id: 'FEG', name: 'FoxEdu Gap-Fill', path: 'FEG/index.html' },
     { id: 'FFA', name: 'Fur & Feathers', path: 'FFA/index.html' },
     { id: 'FLS', name: 'FL Studio', path: 'FLS/index.html' },
+    { id: 'FLT', name: 'Fleet Refinement', path: 'FLT/index.html' },
     { id: 'FQC', name: 'Freq. Continuum', path: 'FQC/index.html' },
     { id: 'GDN', name: 'Gardening', path: 'GDN/index.html' },
     { id: 'GGT', name: 'Geggy Tah', path: 'GGT/index.html' },
@@ -198,7 +199,7 @@
     { name: 'Science', color: '#5C6BC0', ids: ['BHK','LGW','SET','SGM','BNY','ABM','CHS'] },
     { name: 'Music', color: '#EF5350', ids: ['WAL','DDA','GRV','PJM','SNY','COI','GGT','GTP','CDP','KGX','HJX','B52','CAR','TKH','DPM','DRN','SMP','BMR','SOC','CRY','SRG','PRS','ABL','FLS','OCT','SFH','GRG','MDB','S36','SPS'] },
     { name: 'Space', color: '#1E88E5', ids: ['CYG','SMB','GRB','BHC','LTS','YNT','MST'] },
-    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR'] },
+    { name: 'AI', color: '#7E57C2', ids: ['SST','CFU','LLM','AIH','AAR','FLT'] },
     { name: 'Graphics', color: '#8E24AA', ids: ['NEH','VKD','VKS'] }
   ];
 

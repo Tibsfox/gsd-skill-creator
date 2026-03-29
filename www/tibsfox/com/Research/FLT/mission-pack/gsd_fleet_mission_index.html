@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gsd-skill-creator Fleet Mission: Feature Refinement & System Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:     #1A237E;
+      --blue:     #1565C0;
+      --green:    #2E7D32;
+      --gold:     #F9A825;
+      --red:      #B71C1C;
+      --accent:   #1E88E5;
+      --lnav:     #E8EAF6;
+      --lblue:    #E3F2FD;
+      --lgreen:   #E8F5E9;
+      --lgold:    #FFFDE7;
+      --lred:     #FFEBEE;
+      --bg:       #F8F9FA;
+      --text:     #212121;
+      --subtle:   #757575;
+      --border:   #BDBDBD;
+      --rowgray:  #F5F5F5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* Header */
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      border-bottom: 4px solid var(--gold);
+    }
+    .fleet-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 3px;
+      margin-bottom: 1.2rem;
+    }
+    header h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.4rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    header .subtitle {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.05rem;
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+    }
+    .pipeline-tag {
+      display: inline-flex;
+      gap: 0.4rem;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--gold);
+      background: rgba(249,168,37,0.1);
+      padding: 0.4rem 1.2rem;
+      border-radius: 4px;
+      border: 1px solid rgba(249,168,37,0.3);
+    }
+
+    /* Meta strip */
+    .meta-strip {
+      background: var(--lnav);
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      font-size: 0.78rem;
+      color: var(--subtle);
+    }
+    .meta-strip strong { color: var(--text); }
+
+    /* Stats bar */
+    .stats-bar {
+      background: var(--navy);
+      padding: 1.2rem 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0;
+    }
+    .stat {
+      text-align: center;
+      padding: 0.6rem 0.8rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      color: white;
+    }
+    .stat:last-child { border-right: none; }
+    .stat .num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .stat .label {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+    h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--lnav);
+    }
+
+    /* File cards */
+    .files-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2.5rem; }
+    @media (max-width: 600px) { .files-grid { grid-template-columns: 1fr; } }
+
+    .file-card {
+      display: block; text-decoration: none; color: white;
+      background: var(--navy); padding: 1.5rem; border-radius: 6px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .file-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,35,126,0.3); }
+    .file-card.tex { background: var(--blue); }
+    .file-card .icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .file-card .fname { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+    .file-card .ftitle { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+    .file-card .fdesc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+    /* Teams grid */
+    .teams-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+    @media (max-width: 620px) { .teams-grid { grid-template-columns: 1fr; } }
+    .team-card {
+      border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+    }
+    .team-header {
+      padding: 0.6rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: white;
+    }
+    .team-alpha .team-header { background: var(--navy); }
+    .team-beta .team-header  { background: var(--red); }
+    .team-gamma .team-header { background: var(--green); }
+    .team-delta .team-header { background: #37474F; }
+    .team-body { background: white; padding: 0.75rem 1rem; }
+    .team-module {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      padding: 0.35rem 0; border-bottom: 1px solid var(--rowgray);
+      font-size: 0.85rem;
+    }
+    .team-module:last-child { border-bottom: none; }
+    .mod-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: white;
+      background: var(--navy);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .team-beta .mod-tag  { background: var(--red); }
+    .team-gamma .mod-tag { background: var(--green); }
+    .team-delta .mod-tag { background: #37474F; }
+
+    /* Waves */
+    .waves-section { margin-bottom: 2.5rem; }
+    .wave {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 0.9rem 1rem; background: white;
+      border: 1px solid var(--border); border-radius: 6px;
+      margin-bottom: 0.6rem;
+    }
+    .wave-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--navy); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace; font-size: 0.85rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .wave.capcom-gate .wave-num { background: var(--gold); color: var(--navy); }
+    .wave-content { flex: 1; }
+    .wave-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 0.2rem; }
+    .wave-detail { font-size: 0.8rem; color: var(--subtle); }
+    .wave-badge {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700;
+      padding: 0.2rem 0.5rem; border-radius: 3px; white-space: nowrap;
+      align-self: center;
+    }
+    .badge-opus  { background: var(--lgold); color: #7B5800; }
+    .badge-sonnet { background: var(--lblue); color: var(--blue); }
+    .badge-mixed { background: var(--lnav); color: var(--navy); }
+    .badge-haiku { background: var(--lgreen); color: var(--green); }
+    .badge-gate  { background: var(--lgold); color: #7B5800; border: 1px solid var(--gold); }
+
+    /* Safety block */
+    .block-alert {
+      background: var(--lred); border: 1px solid var(--red);
+      border-left: 4px solid var(--red); border-radius: 6px;
+      padding: 1rem 1.25rem; margin-bottom: 2.5rem;
+    }
+    .block-alert h3 { color: var(--red); font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .block-test { font-size: 0.84rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(183,28,28,0.15); }
+    .block-test:last-child { border-bottom: none; }
+    .block-test .bid { font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 700; color: var(--red); margin-right: 0.5rem; }
+
+    /* Deliverables */
+    .deliverables { margin-bottom: 2.5rem; }
+    .deliv-item {
+      display: flex; gap: 0.75rem; padding: 0.75rem 1rem;
+      background: white; border: 1px solid var(--border); border-radius: 6px;
+      margin-bottom: 0.5rem; font-size: 0.87rem;
+    }
+    .deliv-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--lnav); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .deliv-name { font-weight: 600; margin-bottom: 0.1rem; }
+    .deliv-desc { font-size: 0.78rem; color: var(--subtle); }
+
+    /* Usage steps */
+    .steps { margin-bottom: 2.5rem; }
+    .step {
+      display: flex; gap: 1rem; padding: 1rem;
+      background: white; border: 1px solid var(--border); border-radius: 6px;
+      margin-bottom: 0.6rem;
+    }
+    .step-n {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--navy); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+    }
+    .step strong { display: block; margin-bottom: 0.25rem; font-size: 0.9rem; }
+    .step p { font-size: 0.84rem; color: var(--subtle); }
+
+    code { font-family: 'DM Mono', monospace; font-size: 0.82rem; background: var(--lnav); padding: 0.1em 0.4em; border-radius: 3px; color: var(--navy); }
+    pre { font-family: 'DM Mono', monospace; font-size: 0.78rem; background: var(--navy); color: rgba(255,255,255,0.85); padding: 1.1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 2.5rem; }
+
+    footer {
+      text-align: center; padding: 2rem;
+      color: var(--subtle); font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Libre Baskerville', serif; font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="fleet-badge">⚓ Full Fleet Profile — 22 Roles</div>
+  <h1>gsd-skill-creator<br>Feature Refinement &amp; System Engineering</h1>
+  <p class="subtitle">Convergent discovery → clean-room implementation. 10 modules. 4 specialist teams. gsd-skill-creator v1.50 blueprint.</p>
+  <div class="pipeline-tag">Vision → Research → Mission → Implementation</div>
+</header>
+
+<div class="meta-strip">
+  <span>📦 <strong>Upstream Source:</strong> thepopebot v1.2.73-beta (clean-room)</span>
+  <span>🎯 <strong>Target:</strong> gsd-skill-creator dev (v1.49.x DACP)</span>
+  <span>🏷 <strong>Output Tag:</strong> v1.50-spec</span>
+  <span>📅 <strong>Date:</strong> March 29, 2026</span>
+  <span>🔒 <strong>Clean-Room:</strong> SC-05 mandatory pass</span>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="num">22</span><span class="label">Fleet Roles</span></div>
+  <div class="stat"><span class="num">10</span><span class="label">Modules</span></div>
+  <div class="stat"><span class="num">4</span><span class="label">Spec Teams</span></div>
+  <div class="stat"><span class="num">6</span><span class="label">Waves</span></div>
+  <div class="stat"><span class="num">3</span><span class="label">CAPCOM Gates</span></div>
+  <div class="stat"><span class="num">72</span><span class="label">Tests</span></div>
+  <div class="stat"><span class="num">8</span><span class="label">BLOCK Tests</span></div>
+  <div class="stat"><span class="num">475K</span><span class="label">Est. Tokens</span></div>
+  <div class="stat"><span class="num">35</span><span class="label">Pages</span></div>
+</div>
+
+<main>
+
+  <section style="margin-bottom:2.5rem">
+    <h2>Download Files</h2>
+    <div class="files-grid">
+      <a href="gsd_fleet_feature_refinement_mission.pdf" download class="file-card">
+        <div class="icon">📄</div>
+        <div class="fname">gsd_fleet_feature_refinement_mission.pdf</div>
+        <div class="ftitle">Fleet Mission Package — 35 pages</div>
+        <div class="fdesc">Complete Vision → Research → Mission pipeline. All 10 module specs, chipset YAML extensions, DACP bundle formats, 72-test harness, 22-role crew manifest. Hand to gsd-skill-creator for v1.50 execution.</div>
+      </a>
+      <a href="gsd_fleet_feature_refinement_mission.tex" download class="file-card tex">
+        <div class="icon">📝</div>
+        <div class="fname">gsd_fleet_feature_refinement_mission.tex</div>
+        <div class="ftitle">XeLaTeX Source</div>
+        <div class="fdesc">Full source for modification. Add modules, refine specs, update DACP schemas, adjust wave structure. Three xelatex passes to recompile.</div>
+      </a>
+    </div>
+  </section>
+
+  <section style="margin-bottom:2.5rem">
+    <h2>Four Specialist Teams</h2>
+    <div class="teams-grid">
+      <div class="team-card team-alpha">
+        <div class="team-header">⚙️ Team Alpha — Persistence &amp; State</div>
+        <div class="team-body">
+          <div class="team-module"><span class="mod-tag">M1</span><div>Autonomous Intake Layer (KF-1) — file watch trigger, DACP intake bundles, Safety Warden pre-flight</div></div>
+          <div class="team-module"><span class="mod-tag">M2</span><div>Skill Evolution Audit Trail (KF-2) — git-as-memory, DACP bundle commit format, silicon layer feed</div></div>
+          <div class="team-module"><span class="mod-tag">M5</span><div>Persistent Cluster Topology (KF-5) — DoltHub state store, UUID workers, warm-start protocol</div></div>
+        </div>
+      </div>
+      <div class="team-card team-beta">
+        <div class="team-header">🔒 Team Beta — Security &amp; Credentials</div>
+        <div class="team-body">
+          <div class="team-module"><span class="mod-tag">M3</span><div>Safety Warden Infrastructure Gate (KF-3) — safety.yaml, glob matching, two-layer pre-commit + CAPCOM</div></div>
+          <div class="team-module"><span class="mod-tag">M6</span><div>Credential Tiering Architecture (KF-6) — credentials.yaml, spawn hook, FILTERED/LLM_ACCESSIBLE/WORKFLOW_ONLY</div></div>
+        </div>
+      </div>
+      <div class="team-card team-gamma">
+        <div class="team-header">🏗 Team Gamma — Architecture &amp; Routing</div>
+        <div class="team-body">
+          <div class="team-module"><span class="mod-tag">M4</span><div>Chipset-Tier Model Routing (KF-4) — Agnus/Denise/Paula tier map, strict dispatch enforcement</div></div>
+          <div class="team-module"><span class="mod-tag">M8</span><div>Chipset YAML Schema &amp; Validator — JSON Schema Draft 7, gsd:validate-chipset CLI, dacp_version pinning</div></div>
+        </div>
+      </div>
+      <div class="team-card team-delta">
+        <div class="team-header">🔭 Team Delta — Integration &amp; Observability</div>
+        <div class="team-body">
+          <div class="team-module"><span class="mod-tag">M7</span><div>DACP External Event Intake Protocol — 5-source taxonomy (FILE/WEBHOOK/CRON/MCP/VOICE)</div></div>
+          <div class="team-module"><span class="mod-tag">M9</span><div>Cross-Session Safety Warden Pattern Detection — observation store, 3 anomaly patterns</div></div>
+          <div class="team-module"><span class="mod-tag">M10</span><div>Institutionalized Retrospective Loop — structured YAML template, lessons promotion pipeline</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="waves-section">
+    <h2>Six-Wave Execution Plan</h2>
+    <div class="wave">
+      <div class="wave-num">0</div>
+      <div class="wave-content">
+        <div class="wave-name">Foundation</div>
+        <div class="wave-detail">Chipset validation · shared schemas · team charters · TOPO registers 4 teams · token budget</div>
+      </div>
+      <div class="wave-badge badge-haiku">Haiku + Sonnet</div>
+    </div>
+    <div class="wave">
+      <div class="wave-num">1</div>
+      <div class="wave-content">
+        <div class="wave-name">Team Specs — 4 parallel tracks</div>
+        <div class="wave-detail">Alpha (M1,M2,M5) · Beta (M3,M6) · Gamma (M4,M8) · Delta (M7,M9,M10) — all simultaneously</div>
+      </div>
+      <div class="wave-badge badge-sonnet">Sonnet ×4</div>
+    </div>
+    <div class="wave capcom-gate">
+      <div class="wave-num">⊕</div>
+      <div class="wave-content">
+        <div class="wave-name">CAPCOM Gate 1</div>
+        <div class="wave-detail">Human reviews all 10 draft specs before integration begins</div>
+      </div>
+      <div class="wave-badge badge-gate">HUMAN GATE</div>
+    </div>
+    <div class="wave">
+      <div class="wave-num">2</div>
+      <div class="wave-content">
+        <div class="wave-name">Cross-Team Integration</div>
+        <div class="wave-detail">INTEG + ARCH synthesis · DACP coherence · chipset YAML composition · Wave 1 retrospective</div>
+      </div>
+      <div class="wave-badge badge-opus">Opus</div>
+    </div>
+    <div class="wave">
+      <div class="wave-num">3</div>
+      <div class="wave-content">
+        <div class="wave-name">Implementation Spec Refinement — 2 parallel tracks</div>
+        <div class="wave-detail">Track A (M1–M5) · Track B (M6–M10) · test harness designs written in parallel</div>
+      </div>
+      <div class="wave-badge badge-sonnet">Sonnet ×2</div>
+    </div>
+    <div class="wave">
+      <div class="wave-num">4</div>
+      <div class="wave-content">
+        <div class="wave-name">Synthesis + Risk</div>
+        <div class="wave-detail">v1.50 blueprint assembled · implementation gap analysis · final risk table · Wave 3 retrospective</div>
+      </div>
+      <div class="wave-badge badge-opus">Opus</div>
+    </div>
+    <div class="wave capcom-gate">
+      <div class="wave-num">⊕</div>
+      <div class="wave-content">
+        <div class="wave-name">CAPCOM Gate 2</div>
+        <div class="wave-detail">Human reviews v1.50 blueprint. Final approval before verification.</div>
+      </div>
+      <div class="wave-badge badge-gate">HUMAN GATE</div>
+    </div>
+    <div class="wave">
+      <div class="wave-num">5</div>
+      <div class="wave-content">
+        <div class="wave-name">Verification — 72 tests</div>
+        <div class="wave-detail">8 BLOCK safety-critical · ~32 core · ~20 integration · ~12 edge · clean-room compliance SC-05</div>
+      </div>
+      <div class="wave-badge badge-sonnet">Sonnet</div>
+    </div>
+    <div class="wave capcom-gate">
+      <div class="wave-num">⊕</div>
+      <div class="wave-content">
+        <div class="wave-name">CAPCOM Gate 3</div>
+        <div class="wave-detail">Human reviews verification report. Approves publication.</div>
+      </div>
+      <div class="wave-badge badge-gate">HUMAN GATE</div>
+    </div>
+    <div class="wave">
+      <div class="wave-num">6</div>
+      <div class="wave-content">
+        <div class="wave-name">Publication</div>
+        <div class="wave-detail">All 10 deliverables assembled · DACP commit messages · final retrospective · tagged v1.50-spec</div>
+      </div>
+      <div class="wave-badge badge-mixed">Sonnet + Haiku</div>
+    </div>
+  </section>
+
+  <div class="block-alert">
+    <h3>🛑 8 Safety-Critical Tests — All BLOCK Authority</h3>
+    <div class="block-test"><span class="bid">SC-01</span> chipset.yaml in block_paths — agents cannot modify their own constitution</div>
+    <div class="block-test"><span class="bid">SC-02</span> FILTERED tier deletion (not hiding) — env sanitization before exec, not after</div>
+    <div class="block-test"><span class="bid">SC-03</span> Glob matching only — zero prefix matching in safety.yaml schema</div>
+    <div class="block-test"><span class="bid">SC-04</span> Safety Warden script scan — blocks on FILTERED variable reference in scripts/</div>
+    <div class="block-test"><span class="bid">SC-05</span> Clean-room compliance — no thepopebot code patterns in any of the 10 module designs</div>
+    <div class="block-test"><span class="bid">SC-06</span> DACP bundle completeness — all three parts required; no two-part bundles accepted</div>
+    <div class="block-test"><span class="bid">SC-07</span> CAPCOM gate non-bypass — no path through wave execution skips any of the 3 gates</div>
+    <div class="block-test"><span class="bid">SC-08</span> Retro promotion gate — ARCH review required; no lesson auto-applied to chipset</div>
+  </div>
+
+  <section class="deliverables">
+    <h2>10 Deliverables</h2>
+    <div class="deliv-item"><div class="deliv-num">1</div><div><div class="deliv-name">10 Module Implementation Specs</div><div class="deliv-desc">Each: problem statement, convergent discovery proof, GSD-native design, DACP format, chipset YAML, test harness</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">2</div><div><div class="deliv-name">Chipset YAML Extensions</div><div class="deliv-desc">7 new fields: intake, skill_evolution, cluster, safety, credentials, model_routing, triggers</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">3</div><div><div class="deliv-name">JSON Schema for chipset.yaml</div><div class="deliv-desc">Complete Draft 7 schema, version-tagged to DACP v1.49, validator CLI spec</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">4</div><div><div class="deliv-name">Rollout Sequence</div><div class="deliv-desc">10 modules sequenced by dependency, each tagged to v1.50-* milestone</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">5</div><div><div class="deliv-name">Test Harness Designs</div><div class="deliv-desc">72 tests across 4 categories; verification matrix mapping all 16 success criteria</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">6</div><div><div class="deliv-name">Safety Warden Upgrade Spec</div><div class="deliv-desc">Modules 3, 6, 9 combined into cohesive Safety Warden architecture upgrade</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">7</div><div><div class="deliv-name">DACP Event Intake Spec</div><div class="deliv-desc">Five-source taxonomy (FILE/WEBHOOK/CRON/MCP/VOICE), intake bundle schema, routing table</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">8</div><div><div class="deliv-name">Clean-Room Compliance Report</div><div class="deliv-desc">Verification that no thepopebot code patterns appear in any GSD-native implementation</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">9</div><div><div class="deliv-name">Retrospective Archive</div><div class="deliv-desc">Three wave retrospectives in .planning/retro/ YAML format with lessons promotion flags</div></div></div>
+    <div class="deliv-item"><div class="deliv-num">10</div><div><div class="deliv-name">gsd-skill-creator v1.50 Blueprint</div><div class="deliv-desc">Synthesized document integrating all 9 deliverables into the complete engineering blueprint</div></div></div>
+  </section>
+
+  <section class="steps">
+    <h2>How to Execute</h2>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div>
+        <strong>Deposit to planning-bridge inbox</strong>
+        <p>Drop <code>gsd_fleet_feature_refinement_mission.pdf</code> into <code>.planning/staging/inbox/</code> or paste the Stage 3 mission spec directly to Claude Code on the dev branch.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div>
+        <strong>Validate chipset before Wave 0</strong>
+        <p>Run <code>gsd:validate-chipset</code> on the fleet chipset configuration. Exit code 0 = proceed. Exit code 2 = BLOCK. Do not skip this gate.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div>
+        <strong>Wave 0 → Wave 1 (TOPO registers all 4 teams)</strong>
+        <p>TOPO registers Alpha, Beta, Gamma, Delta in the cluster state store. All four teams launch simultaneously in Wave 1. Monitor via SURGEON health telemetry.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div>
+        <strong>Three CAPCOM gates — all human-required</strong>
+        <p>Wave 1 exit · Wave 4 exit · Wave 5 exit. Each gate is structural. No wave begins until CAPCOM approves the previous gate. The gates are not advisory.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div>
+        <strong>v1.50-spec tag on clean Wave 6 completion</strong>
+        <p>LOG agent commits all 10 deliverables and tags <code>v1.50-spec</code> on the <code>skills-evolution</code> branch. This tag is the handoff point for the implementation team.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Recompile LaTeX Source</h2>
+    <pre>xelatex -interaction=nonstopmode gsd_fleet_feature_refinement_mission.tex
+xelatex -interaction=nonstopmode gsd_fleet_feature_refinement_mission.tex
+xelatex -interaction=nonstopmode gsd_fleet_feature_refinement_mission.tex</pre>
+    <p style="font-size:0.83rem;color:var(--subtle);">Requires XeLaTeX + DejaVu fonts (pre-installed Ubuntu). Three passes for TOC, cross-references, LastPage. Uses <code>tcbuselibrary{breakable,skins}</code> — ensure tcolorbox is current.</p>
+  </section>
+
+</main>
+
+<footer>
+  "Same destination. Original path. The fox finds where the ground has been worn smooth — then builds a better road."<br>
+  gsd-skill-creator Fleet Mission · Tibsfox / GSD Ecosystem · March 29, 2026
+</footer>
+
+</body>
+</html>

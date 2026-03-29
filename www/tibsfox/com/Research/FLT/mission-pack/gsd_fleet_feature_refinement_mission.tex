@@ -1,0 +1,1497 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Technology / Engineering color scheme — deeper, heavier weight for Fleet
+\definecolor{primary}{HTML}{1A237E}       % Deep navy — command authority
+\definecolor{secondary}{HTML}{1565C0}     % Electric blue — execution
+\definecolor{tertiary}{HTML}{2E7D32}      % Engineering green — systems
+\definecolor{accent}{HTML}{1E88E5}
+\definecolor{fleetgold}{HTML}{F9A825}     % Fleet gold — synthesis/Opus
+\definecolor{fleetalert}{HTML}{B71C1C}    % Fleet red — BLOCK authority
+\definecolor{lightprimary}{HTML}{E8EAF6}
+\definecolor{lightsecondary}{HTML}{E3F2FD}
+\definecolor{lighttertiary}{HTML}{E8F5E9}
+\definecolor{lightgold}{HTML}{FFFDE7}
+\definecolor{lightalert}{HTML}{FFEBEE}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{blockbox}{
+  colback=lightalert, colframe=fleetalert,
+  arc=2pt, boxrule=1.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{goldbox}{
+  colback=lightgold, colframe=fleetgold,
+  arc=2pt, boxrule=1pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newtcolorbox{implbox}{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=1pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable,
+  title={\textbf{\sffamily Implementation Spec}},
+  fonttitle=\small\sffamily\color{white},
+  colbacktitle=tertiary,
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{gsd-skill-creator Fleet Mission: Feature Refinement}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{Full Fleet Profile}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem / Tibsfox},
+  pdftitle={gsd-skill-creator Full Fleet Feature Refinement Mission},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.8cm}
+
+\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}
+\vspace{0.3cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD DEEP RESEARCH MISSION PACKAGE --- FULL FLEET PROFILE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}
+
+\vspace{1.2cm}
+{\fontsize{28}{34}\selectfont\bfseries\sffamily\textcolor{primary}{gsd-skill-creator\\[0.3em]Feature Refinement \&\\[0.3em]System Engineering}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Convergent Discovery $\rightarrow$ Clean-Room Implementation\\Derived from thepopebot Upstream Intelligence}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{A Full Fleet Deep Research \& Implementation Mission}}
+
+\vspace{1.8cm}
+
+\begin{center}
+\rowcolors{2}{lightprimary}{lightsecondary}
+\begin{tabularx}{13cm}{L{4.5cm}X}
+\textbf{\sffamily Activation Profile:} & \textbf{Full Fleet (22 roles, 4 specialist teams)} \\
+\textbf{\sffamily Mission Type:} & Feature Refinement \& System Engineering \\
+\textbf{\sffamily Modules:} & 10 (6 KF implementation + 4 cross-cutting systems) \\
+\textbf{\sffamily Waves:} & 6 (Foundation → Teams → Synthesis → Spec → Verify → Publish) \\
+\textbf{\sffamily Estimated Tokens:} & $\sim$480K across all waves \\
+\textbf{\sffamily Estimated Sessions:} & 18--24 sessions \\
+\textbf{\sffamily CAPCOM Gates:} & 3 (Wave 2 exit, Wave 4 exit, Wave 5 exit) \\
+\textbf{\sffamily Safety-Critical Tests:} & 8 (all BLOCK authority) \\
+\textbf{\sffamily Total Tests:} & 72 \\
+\textbf{\sffamily Author:} & Miles Tiberius Foxglove (Tibsfox) / GSD Ecosystem \\
+\textbf{\sffamily Target Repository:} & \texttt{gsd-skill-creator} (dev branch, v1.49.x DACP) \\
+\textbf{\sffamily Date:} & March 29, 2026 \\
+\textbf{\sffamily Upstream Source:} & \texttt{github.com/stephengpope/thepopebot} (MIT, clean-room) \\
+\end{tabularx}
+\end{center}
+
+\vspace{1.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission $\rightarrow$ Implementation}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution --- Fleet Grade}}
+
+\vspace{0.4cm}
+\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}
+
+\end{center}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ============================================================
+
+\section{Feature Refinement \& System Engineering --- Vision Guide}
+
+\metafield{Date:}{March 29, 2026}
+\metafield{Status:}{Research Complete / Ready for Fleet Execution}
+\metafield{Activation:}{Full Fleet --- 22 roles, team-of-teams topology, 6 waves}
+\metafield{Depends on:}{thepopebot-upstream-intelligence-mission.pdf, gsd-chipset-architecture-vision.md, gsd-staging-layer-vision.md, gsd-silicon-layer-spec.md, DACP spec v1.49}
+\metafield{Clean-Room Policy:}{All implementations are original. thepopebot provides requirement proof, not implementation reference.}
+
+\subsection{Vision}
+
+gsd-skill-creator is not a framework adaptation. It is a clean-room build carrying 45 years of engineering pattern recognition from a builder who has traced signals through hardware since age five --- through Bilocon, Fluke, InVision Technology, Cisco Systems, ICG Communications, Phillips Semiconductor, EA, and VMware. That career spans every layer of the stack: the analog world of electronics education at age five, VLSI and semiconductor design, enterprise networking routing tables, real-time game engine architecture, and hypervisor-level hardware abstraction. Each layer taught the same lesson in a different language: \textit{when resources are bounded, the architecture is not a choice --- it is a constraint solution.}
+
+The LLM context window is the latest instance of a constraint that hardware engineers have been solving for decades. The 64K RAM of the C64 demanded bank switching. The 512K of the Amiga demanded copper lists and DMA. The 7MHz 68000 demanded Agnus, Denise, and Paula. The 200K token context window demands skill-creator's progressive disclosure architecture, subagent bank-switching, and the chipset's coprocessor model. The pattern is identical. Only the substrate changes.
+
+This mission operationalizes a specific discovery: two autonomous agent frameworks, developed in complete isolation, converged on the same six architectural patterns. thepopebot arrived at them through 42 production releases and community pressure. gsd-skill-creator will arrive at them through first-principles engineering and the Amiga Principle. The convergence is not coincidence. It is what the problem space demands. Any serious agentic system that operates continuously, manages secrets, coordinates multiple workers, maintains auditable state, and enforces safety boundaries \textit{must} build these six things. The only question is whether to build them pragmatically under pressure or architecturally from design.
+
+This mission chooses architecture. The six convergent patterns become ten implementation modules --- each one specified to the level of chipset YAML schema, DACP message format, Safety Warden gate requirements, and test harness design. When these modules land in gsd-skill-creator, they will be native to the system, not bolted on. They will extend the chipset model, speak DACP, and integrate with the planning-bridge, the staging layer, and the silicon layer without seams.
+
+The mission is structured as a Full Fleet operation because the scope demands it. Six clean-room implementation specs, each with its own DACP bundle format, chipset extension, test harness, and rollout sequence. Four cross-cutting systems that connect the six implementations into a coherent whole. A Safety Warden upgrade that enforces all of it at the infrastructure layer. This is not a research report to be filed. It is a flight plan to be executed.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{The staging inbox has no autonomous intake layer.} \texttt{.planning/staging/inbox/} receives mission packs via planning-bridge MCP, but nothing watches it. Files arrive and wait for a human to dispatch them. This is a resolved problem --- chokidar-based file watching with debounce is battle-tested in production --- but the GSD-native implementation must be chipset-YAML-driven, DACP-aligned, and integrated with the Safety Warden's ALLOWED\_PATHS gate.
+
+  \item \textbf{Skill evolution has no auditable history.} Skills are created, modified, and replaced without a commit trail. There is no way to revert a skill regression, diff two versions of a skill, or understand when a skill changed and why. The git-as-memory pattern is an established production architecture. The GSD-native implementation must use DACP bundle commit messages, integrate with the planning-docs dashboard, and feed the silicon layer's adapter evolution tracking.
+
+  \item \textbf{The Safety Warden operates only at the prompt layer.} BLOCK authority is documented as a mission parameter but has no infrastructure enforcement. A sufficiently creative agent prompt could theoretically bypass it. The ALLOWED\_PATHS pattern --- where auto-merge structurally refuses to merge files outside approved paths --- is a proven infrastructure gate. The GSD-native implementation must be governed by a \texttt{safety.yaml} chipset field, validated by the Safety Warden before every commit, with zero bypass path.
+
+  \item \textbf{The 30/60/10 model allocation is aspirational, not enforced.} The Opus/Sonnet/Haiku split is documented in every mission package but has no enforcement at the dispatch layer. Jobs are manually assigned to models. Per-job model routing --- driven by a \texttt{chipset\_tier} field in the mission pack header --- would make the allocation a system property, not a human memory requirement.
+
+  \item \textbf{Activation profiles cold-start every session.} Squadron and Fleet profiles define crew sizes and roles, but each activation spins up from scratch. There is no persistent multi-worker infrastructure that survives between sessions, carries shared state, and wakes up ready to work. A persistent cluster topology --- backed by a state store, with UUID-identified workers and shared folder management --- is the missing persistence layer for the chipset architecture.
+
+  \item \textbf{Credential access has no tiered enforcement.} All agent-accessible secrets are equally exposed within a session. There is no structural distinction between credentials the agent needs to read (API keys for external services) and credentials the agent should never see (infrastructure tokens, GitHub tokens). A spawn-hook-enforced tiering model, governed by a \texttt{credentials.yaml} chipset field, closes this gap without requiring Docker flags or infrastructure changes.
+
+  \item \textbf{The DACP event bus has no external intake protocol.} DACP v1.49 defines agent-to-agent communication formats, but there is no standard format for external events (file arrivals, webhook triggers, cron firings) to enter the DACP message stream. Without a defined intake protocol, each new trigger type requires ad-hoc integration.
+
+  \item \textbf{Chipset YAML has no formal schema or validation layer.} Chipset configurations are authored by hand and validated by convention. There is no machine-readable schema, no validation tooling, and no guarantee that a chipset configuration will parse correctly before a mission starts. A formal schema with a pre-flight validator closes this gap.
+
+  \item \textbf{The Safety Warden has no cross-module pattern detection.} The current Safety Warden enforces boundaries within a single mission context. It cannot detect patterns that span multiple sessions --- a skill that has been modified in suspicious ways across three separate sessions, or a credential that has been accessed at an unusual frequency. Cross-session pattern analysis is the missing capability.
+
+  \item \textbf{Post-wave retrospectives are not institutionalized.} Lessons learned within a wave are lost at context reset. There is no structured retrospective format, no persistent lessons store, and no mechanism for RETRO findings to inform the next wave's configuration. Institutionalizing the retrospective loop closes the observation cycle.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{``Ten modules. Four teams. One architecture. Zero borrowed code.''}
+
+The mission decomposes into four specialist teams operating in parallel, each responsible for a cluster of related modules. Team Alpha handles persistence and state. Team Beta handles security and credentials. Team Gamma handles routing and architecture. Team Delta handles integration and observability. All four teams feed a synthesis layer where Opus agents compose the findings into a coherent system architecture, then a publication layer where the implementation specs are finalized, validated, and committed.
+
+\subsubsection{Team-of-Teams Topology}
+\begin{asciibox}
+FLEET TEAM-OF-TEAMS TOPOLOGY
+=============================
+
+  FLIGHT (Opus)
+     |
+  TOPO (manages team structure)
+     |
+  +--+----------+----------+----------+
+  |             |          |          |
+TEAM ALPHA    TEAM BETA  TEAM GAMMA  TEAM DELTA
+Persistence   Security   Architecture Integration
++ State       + Creds    + Routing   + Observ.
+  |             |          |          |
+  M1: Intake   M3: Safety  M4: Model  M7: Event Bus
+  M2: Git-Mem  M6: Creds   M8: Chipset M9: SafeWarden
+  M5: Cluster  Schema      YAML       M10: Retro Loop
+              (CRAFT-SEC) (CRAFT-ARCH)
+  (CRAFT-INFRA)           (CRAFT-IMPL)  (CRAFT-INTEG)
+  EXEC-A       EXEC-B     EXEC-C       EXEC-D
+     |             |          |          |
+     +------+-------+----------+---------+
+            |
+         INTEG (Opus) - cross-team synthesis
+         ARCH (Opus)  - structural decisions
+         ANALYST      - pattern detection
+            |
+         VERIFY + SECURE
+            |
+         CAPCOM (Gate 1: Wave 2 | Gate 2: Wave 4 | Gate 3: Wave 5)
+            |
+         LOG / RETRO
+\end{asciibox}
+
+\subsection{Ten Research and Implementation Modules}
+
+\subsubsection{Team Alpha: Persistence and State}
+
+\textbf{Module 1 --- Autonomous Intake Layer (KF-1 Clean-Room Implementation)}\\
+File watch trigger as a first-class GSD primitive. Chipset-YAML-driven. DACP-aligned intake bundles. Integration with \texttt{.planning/staging/inbox/} and \texttt{.planning/staging/processed/}. Debounce specification. Safety Warden pre-flight gate on arriving files.
+
+\textbf{Module 2 --- Skill Evolution Audit Trail (KF-2 Clean-Room Implementation)}\\
+Git-as-memory for skill lifecycle. DACP bundle commit message format for every skill create/modify/deprecate event. Milestone tags as skill version anchors. Dashboard integration via planning-docs. Silicon layer adapter evolution feed.
+
+\textbf{Module 5 --- Persistent Cluster Topology (KF-5 Clean-Room Implementation)}\\
+Persistent multi-worker infrastructure for activation profiles. State store design (SQLite or DoltHub). UUID worker identity. Shared folder model. Cluster toggle. Worker warm-start protocol. Session handoff format.
+
+\subsubsection{Team Beta: Security and Credentials}
+
+\textbf{Module 3 --- Safety Warden Infrastructure Gate (KF-3 Clean-Room Implementation)}\\
+ALLOWED\_PATHS enforcement at the infrastructure layer. \texttt{safety.yaml} chipset field schema. Pre-commit validation hook. BLOCK authority that operates without prompt context. Glob-based path matching (not prefix). CAPCOM notification on violation.
+
+\textbf{Module 6 --- Credential Tiering Architecture (KF-6 Clean-Room Implementation)}\\
+Three-tier credential model enforced at spawn hook. \texttt{credentials.yaml} chipset field. FILTERED tier (structurally removed before child process exec). LLM\_ACCESSIBLE tier (documented, intentional). WORKFLOW\_ONLY tier (never in agent container). Safety Warden validation of skill scripts against FILTERED tier.
+
+\subsubsection{Team Gamma: Architecture and Routing}
+
+\textbf{Module 4 --- Chipset-Tier Model Routing (KF-4 Clean-Room Implementation)}\\
+Per-job model routing driven by \texttt{chipset\_tier} field in mission pack headers. Agnus/Opus, Denise/Sonnet, Paula/Haiku tier mapping. Fallback tier specification. Routing enforcement at dispatch layer. Integration with DACP three-part bundle format.
+
+\textbf{Module 8 --- Chipset YAML Schema \& Validator}\\
+Formal JSON Schema definition for \texttt{chipset.yaml}. Machine-readable validation. Pre-flight validator CLI command (\texttt{gsd:validate-chipset}). Schema versioning tied to DACP spec version. Error messages that identify the exact field and remediation path.
+
+\subsubsection{Team Delta: Integration and Observability}
+
+\textbf{Module 7 --- DACP External Event Intake Protocol}\\
+Standard format for external events (file arrivals, webhook triggers, cron firings, MCP deposits) to enter the DACP message stream as three-part bundles. Event source taxonomy. Intake bundle schema. Routing table from event type to dispatch target.
+
+\textbf{Module 9 --- Cross-Session Safety Warden Pattern Detection}\\
+Extend Safety Warden from single-session boundary enforcement to cross-session pattern analysis. Persistent observation store for safety events. Anomaly detection patterns: repeated skill modification, unusual credential access frequency, ALLOWED\_PATHS violation clustering. Alert format and escalation protocol.
+
+\textbf{Module 10 --- Institutionalized Retrospective Loop}\\
+Structured retrospective format for post-wave capture. Persistent lessons store (\texttt{.planning/retro/}). RETRO agent role specification. Lesson promotion pipeline (session lesson $\rightarrow$ planning artifact $\rightarrow$ chipset refinement suggestion). Integration with planning-docs dashboard.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset: gsd-fleet-feature-refinement
+version: "1.49.x-compatible"
+domain: agentic-systems-engineering
+activation\_profile: fleet
+
+\# Tier 1: Command
+flight:
+  model: opus
+  role: FLIGHT
+  responsibility: "Mission direction; go/no-go gates; CAPCOM decisions"
+topo:
+  model: opus
+  role: TOPO
+  responsibility: "Team-of-teams structure; mid-mission restructuring"
+arch:
+  model: opus
+  role: ARCH
+  responsibility: "Cross-cutting structural decisions; DACP alignment"
+plan:
+  model: sonnet
+  role: PLAN
+  responsibility: "Wave decomposition; parallel track optimization"
+
+\# Tier 2: Specialist Teams
+craft\_infra:
+  model: sonnet
+  role: CRAFT-INFRA
+  team: alpha
+  responsibility: "Modules 1,2,5 — persistence, state, intake patterns"
+craft\_sec:
+  model: sonnet
+  role: CRAFT-SEC
+  team: beta
+  responsibility: "Modules 3,6 — safety gates, credential tiering"
+craft\_impl:
+  model: sonnet
+  role: CRAFT-IMPL
+  team: gamma
+  responsibility: "Modules 4,8 — routing, chipset schema"
+craft\_integ:
+  model: sonnet
+  role: CRAFT-INTEG
+  team: delta
+  responsibility: "Modules 7,9,10 — event bus, pattern detection, retro"
+
+\# Tier 2: Execution
+exec\_a:
+  model: sonnet
+  role: EXEC-A
+  team: alpha
+  responsibility: "Team Alpha document production (M1, M2, M5)"
+exec\_b:
+  model: sonnet
+  role: EXEC-B
+  team: beta
+  responsibility: "Team Beta document production (M3, M6)"
+exec\_c:
+  model: sonnet
+  role: EXEC-C
+  team: gamma
+  responsibility: "Team Gamma document production (M4, M8)"
+exec\_d:
+  model: sonnet
+  role: EXEC-D
+  team: delta
+  responsibility: "Team Delta document production (M7, M9, M10)"
+
+\# Tier 2: Analysis and Integration
+scout:
+  model: sonnet
+  role: SCOUT
+  responsibility: "Source gathering; thepopebot pattern extraction"
+integ:
+  model: opus
+  role: INTEG
+  responsibility: "Cross-module synthesis; GSD system coherence"
+analyst:
+  model: sonnet
+  role: ANALYST
+  responsibility: "Cross-module pattern detection; architectural consistency"
+retro:
+  model: sonnet
+  role: RETRO
+  responsibility: "Post-wave retrospectives; lessons store management"
+
+\# Tier 3: Infrastructure
+verify:
+  model: sonnet
+  role: VERIFY
+  responsibility: "Implementation spec validation; DACP schema checks"
+secure:
+  model: sonnet
+  role: SECURE
+  responsibility: "Safety boundary enforcement; credential audit"
+capcom:
+  model: sonnet
+  role: CAPCOM
+  responsibility: "HITL interface; 3 approval gates"
+surgeon:
+  model: haiku
+  role: SURGEON
+  responsibility: "Quality degradation detection; health telemetry"
+budget:
+  model: haiku
+  role: BUDGET
+  responsibility: "Token budget tracking; session planning"
+log:
+  model: haiku
+  role: LOG
+  responsibility: "Audit trail; DACP commit messages; changelog"
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0 Fleet Mission)}
+\begin{itemize}[noitemsep]
+  \item All ten modules fully specified to implementation level
+  \item DACP bundle formats for each module's primary operations
+  \item Chipset YAML extensions for each KF (schema fragments)
+  \item Safety Warden gate requirements per module
+  \item Test harness designs (unit, integration, safety-critical)
+  \item Rollout sequence with milestone tags and dependency ordering
+  \item \texttt{credentials.yaml}, \texttt{safety.yaml}, \texttt{cluster.yaml} chipset field schemas
+  \item Cross-session Safety Warden pattern detection algorithm design
+  \item Retrospective loop format and lessons promotion pipeline
+  \item Full JSON Schema for \texttt{chipset.yaml} validation
+\end{itemize}
+
+\subsubsection{Out of Scope}
+\begin{itemize}[noitemsep]
+  \item Actual TypeScript/Rust implementation (execution follows this spec)
+  \item Gastown/Wasteland federation integration (separate mission)
+  \item Silicon layer LoRA adapter training pipeline (separate mission)
+  \item thepopebot code review or contribution (clean-room boundary)
+  \item UI/UX design for GSD-OS (separate vision)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All 10 modules specified to implementation level: each has a problem statement, convergent discovery proof, GSD-native design, chipset YAML extension, DACP bundle format, and test harness design
+  \item \texttt{credentials.yaml} chipset field schema complete with three tiers (FILTERED, LLM\_ACCESSIBLE, WORKFLOW\_ONLY), spawn hook enforcement spec, and Safety Warden validation rules
+  \item \texttt{safety.yaml} chipset field schema complete with ALLOWED\_PATHS (glob-based), BLOCK\_PATHS, violation handling, and CAPCOM notification format
+  \item \texttt{cluster.yaml} chipset field schema complete with worker identity, shared folder model, trigger types, and session handoff protocol
+  \item Chipset YAML formal JSON Schema complete and version-tagged to DACP v1.49
+  \item DACP external event intake protocol specified: source taxonomy, bundle schema, routing table
+  \item Skill evolution commit message format specified in DACP bundle format with all three parts (human intent, structured data, executable reference)
+  \item Chipset-tier model routing spec complete: Agnus/Denise/Paula tier map, fallback logic, dispatch enforcement
+  \item Cross-session Safety Warden pattern detection algorithm designed: observation store schema, anomaly detection patterns, alert escalation
+  \item Retrospective loop format specified: post-wave template, lessons store schema, promotion pipeline
+  \item Rollout sequence complete: 10 modules sequenced by dependency, each tagged to a gsd-skill-creator milestone
+  \item Test harness designs complete: 72 tests across 8 safety-critical, $\sim$32 core, $\sim$20 integration, $\sim$12 edge cases
+  \item All Safety Warden gate requirements specified: which module activations require CAPCOM approval, which are auto-proceed, which are BLOCK
+  \item Clean-room compliance verified: no thepopebot code patterns reproduced; all implementations derived from GSD-native first principles
+  \item Team-of-teams communication protocol documented: inter-team handoff formats, shared state schema, TOPO restructuring triggers
+  \item Retrospective lessons from each wave captured and promoted to \texttt{.planning/retro/} before mission close
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Connection} \\
+\midrule
+thepopebot-upstream-intelligence-mission.pdf & Prerequisite & Convergent discovery proof and thepopebot pattern documentation \\
+gsd-chipset-architecture-vision.md & Extends & M4, M8 add tier routing and formal schema \\
+gsd-staging-layer-vision.md & Directly implements & M1 is the inbox watcher the staging layer specifies \\
+gsd-silicon-layer-spec.md & Feeds & M2 skill evolution audit trail feeds adapter tracking \\
+gsd-instruction-set-architecture-vision.md & Grounds & M7 DACP intake maps to ISA external event interface \\
+gsd-skill-creator-analysis.md & Operationalizes & All 10 modules address gaps identified in the analysis \\
+gsd-upstream-intelligence-pack-v1\_43.md & Extends & This mission carries the upstream intelligence discipline forward \\
+gsd-planning-docs-vision.md & Integrates & M2, M9, M10 feed dashboard and planning artifacts \\
+gsd-mission-crew-manifest.md & Authorizes & All 22 roles sourced from the crew manifest \\
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The 45-year engineering career behind this mission is not background. It is the calibration instrument. At Fluke, you learn that measurement precision is not optional --- a calibration lab does not approximate; it establishes ground truth. At Cisco, you learn that routing tables are a contract --- packets go where the table says they go, and the table has no opinion about your intent. At Phillips Semiconductor, you learn that silicon is unforgiving --- the mask is the design; there is no runtime negotiation. At EA, you learn that real-time systems have no budget for overhead --- every cycle not spent on the game is a cycle stolen from the player. At VMware, you learn that the hypervisor's job is to make hardware multiplexing invisible --- the guest OS should not know or care that it is sharing a substrate.
+
+Every one of those lessons is in this mission. The spawn-hook credential tiering is the Cisco routing table: the agent goes where the table says it goes, and the table has no opinion about intent. The ALLOWED\_PATHS gate is the VMware hypervisor: the agent does not know or care that a boundary exists --- it simply cannot cross it. The chipset YAML schema is the Phillips mask: the configuration is the design; there is no runtime negotiation. The skill evolution audit trail is the Fluke calibration log: precision is not optional; every change is recorded, attributed, and reversible.
+
+thepopebot arrived at the same architecture through a different instrument: community pressure, production failures, and 42 releases. Both paths are valid. The convergence is the proof. The clean-room implementation is the discipline. And when these ten modules land in gsd-skill-creator, they will not be features that were added --- they will be properties the system always had, waiting to be expressed.
+
+\newpage
+
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ============================================================
+
+\section{Feature Refinement --- Research Reference}
+
+\subsection{How to Use This Reference}
+
+Each section below corresponds to one of the ten implementation modules. Each module entry contains: the requirement (what GSD needs), the convergent discovery proof (what thepopebot built), the clean-room design (GSD-native approach derived from first principles), the chipset YAML extension, the DACP bundle format, and the implementation notes.
+
+Agents should read their assigned module(s) before beginning spec work. CRAFT agents read all modules in their team. ARCH and INTEG read all ten.
+
+\textbf{Clean-room discipline:} All design decisions must derive from GSD-native first principles (Amiga Principle, chipset model, DACP protocol, unit circle composition law). thepopebot patterns are cited as \textit{proof of requirement} only. No thepopebot code, data structures, or specific API designs should appear in GSD implementations.
+
+\subsection{Team Alpha Modules}
+
+\subsubsection{Module 1: Autonomous Intake Layer}
+
+\textbf{Requirement:} \texttt{.planning/staging/inbox/} needs an autonomous watcher that dispatches skill creation work when mission packs arrive, without human intervention.
+
+\textbf{Convergent discovery proof:} thepopebot's file watch trigger (v1.2.73-beta.32, March 2026) uses \texttt{chokidar} with debounce logic watching paths configured in the cluster spec. Monitored paths are comma-separated, relative to the cluster data directory. Debounce prevents duplicate dispatches on rapid writes. Only workers in enabled clusters are monitored.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 1}
+
+Trigger source: \texttt{.planning/staging/inbox/} (and any configured additional paths)\\
+Debounce: 500ms default, configurable in \texttt{intake.yaml} chipset field\\
+Pattern matching: \texttt{*.md}, \texttt{*.yaml}, \texttt{*.json} (mission pack formats)\\
+On detection: validate file against Safety Warden ALLOWED\_PATHS, then dispatch to skill-creation agent with file as DACP intake bundle\\
+On completion: move file to \texttt{.planning/staging/processed/\{timestamp\}/}\\
+On failure: move to \texttt{.planning/staging/failed/} with error bundle
+
+DACP intake bundle format:
+\begin{verbatim}
+[human intent]    "New mission pack detected: {filename}"
+[structured data] {
+  "event": "file-arrived",
+  "source": ".planning/staging/inbox/{filename}",
+  "detected_at": "{iso-timestamp}",
+  "file_size_bytes": N,
+  "chipset_tier": "sonnet"  // default dispatch tier
+}
+[executable]      gsd:dispatch-mission-pack --file {path}
+\end{verbatim}
+\end{implbox}
+
+\begin{asciibox}
+Chipset YAML extension:
+intake:
+  watch\_paths:
+    - .planning/staging/inbox
+  debounce\_ms: 500
+  patterns: ["*.md", "*.yaml", "*.json"]
+  on\_detect:
+    safety\_check: true        \# Safety Warden pre-flight
+    dispatch\_tier: sonnet
+    move\_on\_complete: .planning/staging/processed
+    move\_on\_failure: .planning/staging/failed
+    notify: CAPCOM
+\end{asciibox}
+
+\textbf{Safety Warden gate:} Every arriving file is validated against \texttt{safety.yaml} ALLOWED\_PATHS before dispatch. Files from outside approved paths are quarantined with a CAPCOM notification. This gate cannot be bypassed by the file's content.
+
+\subsubsection{Module 2: Skill Evolution Audit Trail}
+
+\textbf{Requirement:} Every skill lifecycle event (create, modify, deprecate, promote, rollback) must be recorded as an auditable, reversible commit with a structured DACP bundle message.
+
+\textbf{Convergent discovery proof:} thepopebot's core architecture treats the repository as the agent's brain. Every action is a git commit. Fork = clone personality + history. PR = self-evolution gated by review. The \texttt{push.default=nothing} discipline in GSD already enforces staging; the missing piece is the structured commit message format and the skills-evolution branch as a required ref.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 2}
+
+Branch: \texttt{skills-evolution} (required pre-push ref alongside \texttt{main})\\
+Commit trigger: any SKILL.md creation, modification, or deletion\\
+Commit format: DACP three-part bundle in commit message body\\
+Version anchor: skill milestones tagged as \texttt{skill-\{name\}-v\{N\}}\\
+Rollback: \texttt{gsd:rollback-skill --name \{name\} --to \{tag\}}\\
+Dashboard feed: LOG agent pushes skill event summaries to \texttt{.planning/docs/skills.json}
+
+DACP skill evolution commit message:
+\begin{verbatim}
+SKILL-EVOLVE(v1.49): {create|modify|deprecate} {skill-name}
+
+[human intent]    "{Why this change happened}"
+[structured data] {
+  "skill": "{name}",
+  "operation": "create|modify|deprecate|promote|rollback",
+  "module": "{college-module}",
+  "trigger_words": [...],
+  "previous_version": "{tag}|null",
+  "session_id": "{id}",
+  "wave": N,
+  "chipset_tier_used": "sonnet"
+}
+[executable]      .college/{module}/{skill-name}/SKILL.md
+\end{verbatim}
+\end{implbox}
+
+\begin{asciibox}
+Chipset YAML extension:
+skill\_evolution:
+  branch: skills-evolution
+  required\_pre\_push: true
+  commit\_format: dacp\_bundle
+  auto\_tag\_milestones: true
+  tag\_pattern: "skill-{name}-v{N}"
+  dashboard\_feed: .planning/docs/skills.json
+  silicon\_layer\_feed: true   \# adapter evolution tracking
+\end{asciibox}
+
+\subsubsection{Module 5: Persistent Cluster Topology}
+
+\textbf{Requirement:} Activation profiles (Patrol/Squadron/Fleet) must persist between sessions. Workers must wake up with shared state, assigned roles, and pending work --- not cold-start from scratch.
+
+\textbf{Convergent discovery proof:} thepopebot's cluster system (v1.2.73-beta.32--34) uses SQLite-backed persistent entities with UUID worker IDs (rename-safe), shared folder management, cluster toggle (enabled/disabled without deletion), and chokidar file watch triggers per cluster. Workers ordered by creation time, not replica index.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 5}
+
+State store: DoltHub (preferred for diff/version/branch semantics) or SQLite\\
+Worker identity: UUID short IDs (not replica numbers --- rename-safe, restart-safe)\\
+Cluster persistence: toggle enabled/disabled; deletion is explicit, not implicit\\
+Shared folder model: \texttt{.planning/clusters/\{cluster-id\}/shared/}\\
+Worker folders: \texttt{.planning/clusters/\{cluster-id\}/workers/\{uuid\}/}\\
+Session handoff: each worker writes \texttt{handoff.md} on clean shutdown\\
+Warm-start: worker reads \texttt{handoff.md} and \texttt{shared/state.json} before first action
+
+cluster.yaml schema (chipset field):
+\begin{verbatim}
+cluster:
+  id: "{uuid-short}"
+  name: "skill-creator-squadron"
+  profile: squadron|fleet
+  enabled: true
+  shared_folders: [inbox, output, staging, retro]
+  workers:
+    - id: "{uuid}"
+      role: CRAFT-ARCH
+      folders: [arch-workspace, arch-output]
+      triggers: [file-watch:arch-inbox]
+      handoff_on_shutdown: true
+\end{verbatim}
+\end{implbox}
+
+\subsection{Team Beta Modules}
+
+\subsubsection{Module 3: Safety Warden Infrastructure Gate}
+
+\textbf{Requirement:} BLOCK authority must operate at the infrastructure layer, not just the prompt layer. A structural gate that refuses to merge, commit, or execute any operation involving files outside approved paths --- with zero bypass path.
+
+\textbf{Convergent discovery proof:} thepopebot's ALLOWED\_PATHS restriction in \texttt{auto-merge.yml} checks every changed file against an approved list before merging. A PR touching any file outside ALLOWED\_PATHS is blocked regardless of how the job was framed. Known issue: prefix matching (not glob) creates a surface where \texttt{logs\_malicious.js} could pass a \texttt{logs} prefix check.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 3}
+
+Gate location: pre-commit hook + CAPCOM review gate (two-layer)\\
+Path matching: glob-based (not prefix) --- \texttt{src/skills/**} not \texttt{src/skills}\\
+Configuration: \texttt{safety.yaml} chipset field (cannot be modified by agent)\\
+Violation handling: BLOCK + CAPCOM notification + append to safety audit log\\
+Audit log: \texttt{.planning/safety/violations.jsonl} (append-only)\\
+Override: CAPCOM explicit approval only; logged with reason and session ID
+
+safety.yaml schema (chipset field):
+\begin{verbatim}
+safety:
+  allowed_paths:
+    - "src/skills/**"
+    - ".college/**"
+    - ".planning/**"
+    - "docs/**"
+  block_paths:
+    - "src/core/**"
+    - ".github/workflows/**"
+    - "package.json"
+    - "chipset.yaml"   \# chipset cannot modify itself
+  on_violation: BLOCK
+  notify: CAPCOM
+  audit_log: .planning/safety/violations.jsonl
+  glob_matching: true  \# never prefix matching
+\end{verbatim}
+\end{implbox}
+
+\begin{blockbox}
+\textbf{\sffamily SAFETY WARDEN NOTE}
+
+\texttt{chipset.yaml} itself must appear in \texttt{block\_paths}. An agent that can modify its own chipset configuration can bypass every other safety gate. This is not a policy choice --- it is a structural requirement. The chipset is the agent's constitution; the agent cannot amend its own constitution.
+\end{blockbox}
+
+\subsubsection{Module 6: Credential Tiering Architecture}
+
+\textbf{Requirement:} Agent-accessible credentials must be formally tiered. Credentials the agent needs to use (API keys for services) are distinct from credentials the agent should structurally never see (infrastructure tokens, repository access tokens). The distinction must be enforced at the process spawn boundary, not by convention.
+
+\textbf{Convergent discovery proof:} thepopebot's SECRETS (filtered from LLM via bash spawn hook) vs. LLM\_SECRETS (accessible to LLM) model, enforced by reading SECRETS JSON and deleting each key from child environment before exec. Three-tier model: SECRETS (filtered), LLM\_SECRETS (accessible), no-prefix (workflow only, never in container). Zero Docker flags required.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 6}
+
+Enforcement point: bash spawn hook intercepts every child process\\
+FILTERED tier: structurally deleted from child env before exec (not hidden --- deleted)\\
+LLM\_ACCESSIBLE tier: present in child env; documented as intentional LLM access\\
+WORKFLOW\_ONLY tier: never passed to any agent container; CI/CD pipeline only\\
+Configuration: \texttt{credentials.yaml} chipset field\\
+Safety Warden validation: scan all skill \texttt{scripts/} files for references to FILTERED-tier variable names; flag as violation if found
+
+credentials.yaml schema (chipset field):
+\begin{verbatim}
+credentials:
+  filtered:             \# Deleted from child env before exec
+    - GH_TOKEN
+    - ANTHROPIC_API_KEY
+    - CLOUDFLARE_TOKEN
+    - DOLT_WRITE_TOKEN
+  llm_accessible:       \# Present in child env; intentional
+    - BRAVE_API_KEY
+    - DOLT_READ_TOKEN
+    - PLANNING_BRIDGE_TOKEN
+  workflow_only:        \# Never in agent container
+    - GH_WEBHOOK_SECRET
+    - NPM_PUBLISH_TOKEN
+safety_check:
+  scan_skill_scripts: true
+  block_on_filtered_reference: true
+\end{verbatim}
+\end{implbox}
+
+\subsection{Team Gamma Modules}
+
+\subsubsection{Module 4: Chipset-Tier Model Routing}
+
+\textbf{Requirement:} The 30/60/10 Opus/Sonnet/Haiku allocation must be enforced at the job dispatch layer, not documented as a guideline. Every mission pack, skill creation job, and agent dispatch carries a \texttt{chipset\_tier} field that the routing layer enforces.
+
+\textbf{Convergent discovery proof:} thepopebot's per-cron \texttt{llm} field override in CRONS.json allows individual jobs to specify model and provider. The Event Handler and Agent layers use independently configurable models. Per-cron override format: \texttt{\{"provider": "anthropic", "model": "claude-opus-4-5"\}}.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 4}
+
+Tier map:
+  Agnus (30\%) $\rightarrow$ Opus: synthesis, judgment, cultural sensitivity, safety\\
+  Denise (60\%) $\rightarrow$ Sonnet: structural implementation, document production\\
+  Paula (10\%) $\rightarrow$ Haiku: scaffolding, budget tracking, boilerplate
+
+chipset\_tier field in mission pack header:
+\begin{verbatim}
+mission:
+  name: "{mission-name}"
+  chipset_tier: sonnet        \# Denise — default for structural work
+  fallback_tier: haiku        \# Paula — if Sonnet unavailable
+  synthesis_required: false   \# true = Agnus/Opus required
+  safety_sensitive: false     \# true = Agnus/Opus required for all gates
+\end{verbatim}
+
+Routing enforcement:
+  synthesis\_required: true $\rightarrow$ FLIGHT and INTEG must use Opus\\
+  safety\_sensitive: true $\rightarrow$ SECURE and VERIFY must use Opus\\
+  Default dispatch: Sonnet for EXEC, Haiku for BUDGET/LOG/SURGEON\\
+  Override: CAPCOM approval required to dispatch Opus for non-synthesis work
+\end{implbox}
+
+\begin{asciibox}
+Chipset YAML extension:
+model\_routing:
+  agnus:    \# Opus -- synthesis, judgment
+    model: claude-opus-4-6
+    roles: [FLIGHT, INTEG, ARCH, TOPO]
+    default\_tasks: [synthesis, safety-gate, cultural-review]
+  denise:   \# Sonnet -- structural implementation
+    model: claude-sonnet-4-6
+    roles: [EXEC-A, EXEC-B, EXEC-C, EXEC-D, CRAFT-*, VERIFY]
+    default\_tasks: [document-production, spec-writing, survey]
+  paula:    \# Haiku -- scaffolding, boilerplate
+    model: claude-haiku-4-5-20251001
+    roles: [BUDGET, LOG, SURGEON]
+    default\_tasks: [schema-gen, commit-messages, token-tracking]
+  enforcement: strict   \# reject dispatch that violates tier assignment
+\end{asciibox}
+
+\subsubsection{Module 8: Chipset YAML Schema and Validator}
+
+\textbf{Requirement:} \texttt{chipset.yaml} is the agent's constitution. It must have a machine-readable schema, a pre-flight validator, and a versioning system tied to the DACP spec version. Configuration errors must be caught before a mission starts, not discovered mid-execution.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 8}
+
+Schema format: JSON Schema (Draft 7, compatible with AJV validator)\\
+Schema location: \texttt{.chipset-schema/chipset.v1.49.schema.json}\\
+Validator CLI: \texttt{gsd:validate-chipset [--chipset path] [--strict]}\\
+Pre-flight gate: chipset validation runs before every Wave 0 start\\
+Error format: field path + human-readable message + remediation link\\
+Version pinning: \texttt{chipset.yaml} includes \texttt{dacp\_version: "1.49"} field; validator checks schema compatibility\\
+Schema fields covered: activation\_profile, agents (role/model/responsibility), intake, skill\_evolution, cluster, safety, credentials, model\_routing, triggers
+
+Validator exit codes:
+  0 = valid
+  1 = warnings (proceed with caution)
+  2 = errors (BLOCK -- do not proceed)
+  3 = schema version mismatch (BLOCK -- upgrade required)
+\end{implbox}
+
+\subsection{Team Delta Modules}
+
+\subsubsection{Module 7: DACP External Event Intake Protocol}
+
+\textbf{Requirement:} External events (file arrivals, webhook triggers, cron firings, MCP deposits, voice transcriptions) must enter the DACP message stream as structured three-part bundles. Without a defined intake protocol, every new trigger type requires ad-hoc integration.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 7}
+
+Event source taxonomy (5 types):
+  FILE: file system events (intake watcher, Module 1)\\
+  WEBHOOK: HTTP POST to \texttt{/api/create-job} with API key\\
+  CRON: scheduled trigger from \texttt{.planning/crons.yaml}\\
+  MCP: planning-bridge deposit or other MCP server event\\
+  VOICE: transcribed audio input (AssemblyAI or Whisper)
+
+All five types produce the same DACP intake bundle schema:
+\begin{verbatim}
+[human intent]    "{Natural language description of event}"
+[structured data] {
+  "event_type": "FILE|WEBHOOK|CRON|MCP|VOICE",
+  "source": "{origin identifier}",
+  "received_at": "{iso-timestamp}",
+  "payload": { ... event-specific fields ... },
+  "routing": {
+    "chipset_tier": "sonnet",
+    "target_role": "FLIGHT|EXEC-A|...",
+    "safety_check_required": true
+  }
+}
+[executable]      {dispatch command or null for passive events}
+\end{verbatim}
+
+Routing table: defined in \texttt{triggers.yaml} chipset field; maps event\_type + source pattern to target role and chipset tier.
+\end{implbox}
+
+\subsubsection{Module 9: Cross-Session Safety Warden Pattern Detection}
+
+\textbf{Requirement:} The Safety Warden must detect anomalous patterns that only become visible across multiple sessions --- repeated skill modification, unusual credential access frequency, violation clustering. Single-session enforcement is necessary but not sufficient.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 9}
+
+Observation store: \texttt{.planning/safety/observations.jsonl} (append-only across sessions)\\
+Observation schema: timestamp, session\_id, wave, role, operation, target, outcome\\
+Detection patterns (three initial):
+  RAPID\_MODIFY: same skill modified $\geq$3 times in $\leq$5 sessions $\rightarrow$ ALERT\\
+  VIOLATION\_CLUSTER: $\geq$3 ALLOWED\_PATHS violations from same role in $\leq$10 sessions $\rightarrow$ ESCALATE\\
+  FILTERED\_PROBE: any attempt to reference FILTERED-tier variable in skill script $\rightarrow$ BLOCK + immediate CAPCOM
+
+Alert escalation levels:
+  ANNOTATE: logged, no action\\
+  ALERT: CAPCOM notified, proceed with caution flag\\
+  ESCALATE: CAPCOM approval required before next operation\\
+  BLOCK: operation halted, CAPCOM must explicitly clear
+
+ANALYST agent runs pattern detection at the start of each Wave 1 using the last 30 days of observations.
+\end{implbox}
+
+\subsubsection{Module 10: Institutionalized Retrospective Loop}
+
+\textbf{Requirement:} Lessons learned within a wave are lost at context reset. The RETRO agent must capture structured retrospectives after each wave, store them in a persistent lessons artifact, and promote high-value lessons to chipset refinement suggestions.
+
+\begin{implbox}
+\textbf{GSD-Native Design --- Module 10}
+
+Retrospective trigger: automatic after every CAPCOM gate and wave completion\\
+Retrospective template:
+\begin{verbatim}
+retro:
+  wave: N
+  session_id: "{id}"
+  completed_at: "{iso-timestamp}"
+  what_worked:
+    - description: "..."
+      promote_to_chipset: false
+  what_failed:
+    - description: "..."
+      root_cause: "..."
+      remediation: "..."
+  lessons:
+    - text: "..."
+      severity: low|medium|high
+      promote_to_chipset: true|false
+      chipset_field: "intake.debounce_ms"  \# if promoting
+\end{verbatim}
+
+Storage: \texttt{.planning/retro/wave-\{N\}-\{session-id\}.yaml}\\
+Dashboard feed: LOG agent aggregates retro files into \texttt{.planning/docs/retro.json}\\
+Promotion pipeline: lessons with \texttt{promote\_to\_chipset: true} are surfaced to ARCH agent for chipset refinement review at start of next mission
+\end{implbox}
+
+\subsection{Cross-Cutting Reference: Clean-Room Compliance}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Module} & \tableheader{thepopebot Proof} & \tableheader{GSD-Native Divergence} \\
+\midrule
+M1 Intake & chokidar + cluster data dir & DACP intake bundle; Safety Warden pre-flight; chipset-YAML-driven paths \\
+M2 Skill Audit & git commit per action & DACP bundle commit format; skills-evolution branch; DoltHub state store \\
+M3 Safety Gate & ALLOWED\_PATHS in workflow & \texttt{safety.yaml} chipset field; glob matching; two-layer pre-commit + CAPCOM \\
+M4 Model Routing & per-cron llm field & chipset\_tier in mission pack header; Agnus/Denise/Paula tier map; strict enforcement \\
+M5 Cluster & SQLite workers table & DoltHub state store; cluster.yaml chipset field; DACP handoff format \\
+M6 Credentials & SECRETS/LLM\_SECRETS env vars & credentials.yaml chipset field; Safety Warden script scan; three-tier taxonomy \\
+M7 Event Bus & event handler layer & DACP five-source intake taxonomy; routing table in triggers.yaml \\
+M8 Chipset Schema & N/A (GSD original) & JSON Schema Draft 7; gsd:validate-chipset CLI; dacp\_version pinning \\
+M9 Pattern Detection & N/A (GSD original) & Cross-session observation store; three detection patterns; ANALYST role \\
+M10 Retro Loop & N/A (GSD original) & Structured YAML template; promotion pipeline; dashboard integration \\
+\end{tabularx}
+\end{center}
+
+\subsection{Rollout Sequence}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Order} & \tableheader{Module} & \tableheader{GSD Milestone Tag} & \tableheader{Dependency} \\
+\midrule
+1 & M8: Chipset Schema & v1.50-schema & None --- foundation \\
+2 & M6: Credentials & v1.50-creds & M8 (schema required) \\
+3 & M3: Safety Gate & v1.50-safety & M8, M6 \\
+4 & M4: Model Routing & v1.50-routing & M8 \\
+5 & M7: Event Bus & v1.50-eventbus & M4 \\
+6 & M1: Intake Layer & v1.50-intake & M7, M3 \\
+7 & M2: Skill Audit & v1.50-audit & M1 \\
+8 & M5: Cluster & v1.50-cluster & M1, M2 \\
+9 & M9: Pattern Detection & v1.50-patterns & M3, M2 \\
+10 & M10: Retro Loop & v1.50-retro & M9 \\
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Handling} \\
+\midrule
+\texttt{chipset.yaml} self-modification & BLOCK & \texttt{chipset.yaml} must be in \texttt{block\_paths}; agents cannot modify their own constitution \\
+FILTERED tier bypass via script & BLOCK & Safety Warden scans all \texttt{scripts/} files for FILTERED variable names; blocks on match \\
+ALLOWED\_PATHS glob vs. prefix & GATE & All implementations must use glob matching; prefix matching is a known vulnerability \\
+Cross-session observation store privacy & GATE & Observation store contains only operation metadata, never payload content \\
+Cluster state store write access & GATE & WORKFLOW\_ONLY credentials govern state store writes; agents use read-only tokens \\
+Retrospective lessons auto-promotion & ANNOTATE & Lessons require ARCH review before chipset modification; no auto-apply \\
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\begin{itemize}[noitemsep]
+  \item Pope, Stephen G. \textit{thepopebot} v1.2.73-beta. GitHub, 2026. (MIT License --- clean-room reference only)
+  \item Tibsfox. \textit{gsd-chipset-architecture-vision.md}. GSD Ecosystem, 2026.
+  \item Tibsfox. \textit{gsd-staging-layer-vision.md}. GSD Ecosystem, 2026.
+  \item Tibsfox. \textit{gsd-silicon-layer-spec.md}. GSD Ecosystem, 2026.
+  \item Tibsfox. \textit{gsd-instruction-set-architecture-vision.md}. GSD Ecosystem, 2026.
+  \item Tibsfox. \textit{gsd-upstream-intelligence-pack-v1\_43.md}. GSD Ecosystem, 2026.
+  \item Anthropic. \textit{Agent Skills Standard / SKILL.md format}. \texttt{github.com/anthropics/skills}, 2024--2026.
+  \item JSON Schema Org. \textit{JSON Schema Specification, Draft 7}. \texttt{json-schema.org}, 2018.
+  \item DoltHub. \textit{Dolt: Git for Data}. \texttt{dolthub.com}, 2024--2026.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ============================================================
+
+\section{Milestone Specification}
+
+\textbf{Mission Objective:} Produce ten implementation-ready module specs for gsd-skill-creator that operationalize the six convergent patterns discovered via thepopebot upstream intelligence research, plus four cross-cutting systems that integrate them into a coherent architecture. Each spec is self-contained, DACP-aligned, chipset-YAML-extended, and includes a test harness design. The product of this mission is the complete engineering blueprint for gsd-skill-creator v1.50.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+FLEET WAVE EXECUTION ARCHITECTURE
+==================================
+
+  Wave 0: Foundation               [Sequential, Haiku + Sonnet]
+  ──────────────────────────────────────────────────────────────
+  Chipset validation | Shared schemas | Source index | Budget
+  Team charters | Communication protocol | TOPO registers teams
+
+  Wave 1: Team Alpha Specs         [Parallel, 4 Teams]
+  Wave 1: Team Beta Specs          [All Sonnet + CRAFT leads]
+  Wave 1: Team Gamma Specs         [All simultaneously]
+  Wave 1: Team Delta Specs         [CAPCOM Gate 1 at exit]
+  ──────────────────────────────────────────────────────────────
+  10 module specs drafted in parallel across 4 specialist teams
+  Each team: CRAFT lead + EXEC + SCOUT
+
+  Wave 2: Cross-Team Integration   [Sequential, Opus]
+  ──────────────────────────────────────────────────────────────
+  INTEG: module dependency graph | ARCH: structural coherence
+  ANALYST: cross-cutting pattern check | SECURE: safety audit
+  RETRO: Wave 1 retrospective  →  CAPCOM Gate 2
+
+  Wave 3: Implementation Spec Refinement [Parallel, Sonnet]
+  ──────────────────────────────────────────────────────────────
+  DACP bundle formats finalized | Chipset YAML stubs completed
+  Rollout sequence validated | Test harness designs written
+  Track A: M1,M2,M3,M4,M5  ||  Track B: M6,M7,M8,M9,M10
+
+  Wave 4: Synthesis + Risk         [Sequential, Opus]
+  ──────────────────────────────────────────────────────────────
+  ARCH: full system coherence review | SECURE: risk table final
+  ANALYST: implementation gap detection | TOPO: final team check
+  RETRO: Wave 3 retrospective  →  CAPCOM Gate 3
+
+  Wave 5: Verification             [Sequential, Sonnet]
+  ──────────────────────────────────────────────────────────────
+  VERIFY: all 72 tests executed against specs
+  SECURE: safety-critical tests (8 BLOCK authority tests)
+  All 16 success criteria verified
+
+  Wave 6: Publication              [Sequential, Sonnet + Haiku]
+  ──────────────────────────────────────────────────────────────
+  LOG: DACP commit messages | RETRO: final mission retro
+  Package delivery: specs + chipset stubs + test harnesses
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}XL{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Format} \\
+\midrule
+1 & 10 Module Implementation Specs & Each: problem, proof, GSD design, DACP format, chipset YAML, test harness & Markdown \\
+2 & Chipset YAML Extensions & All 7 new fields (\texttt{intake}, \texttt{skill\_evolution}, \texttt{cluster}, \texttt{safety}, \texttt{credentials}, \texttt{model\_routing}, \texttt{triggers}) as schema fragments & YAML \\
+3 & JSON Schema for chipset.yaml & Complete Draft 7 schema, version-tagged to DACP v1.49, validator passes & JSON \\
+4 & Rollout Sequence & 10 modules sequenced by dependency, each tagged to v1.50 milestone & Markdown \\
+5 & Test Harness Designs & 72 tests: 8 safety-critical, $\sim$32 core, $\sim$20 integration, $\sim$12 edge cases & Markdown \\
+6 & Safety Warden Upgrade Spec & Modules 3, 6, 9 combined into cohesive Safety Warden architecture & Markdown \\
+7 & DACP Event Intake Spec & Five-source taxonomy, intake bundle schema, routing table template & YAML \\
+8 & Clean-Room Compliance Report & Verification that no thepopebot code patterns reproduced & Markdown \\
+9 & Retrospective Archive & All three wave retrospectives in \texttt{.planning/retro/} format & YAML \\
+10 & gsd-skill-creator v1.50 Blueprint & Synthesized document integrating all 9 deliverables & PDF \\
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}C{1.5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est. Tokens} \\
+\midrule
+W0: Foundation + schemas & None & Haiku & 12K \\
+W0: Team charters + TOPO & W0 schemas & Sonnet & 8K \\
+W1A: Team Alpha (M1,M2,M5) & W0 & Sonnet & 45K \\
+W1B: Team Beta (M3,M6) & W0 & Sonnet & 35K \\
+W1C: Team Gamma (M4,M8) & W0 & Sonnet & 30K \\
+W1D: Team Delta (M7,M9,M10) & W0 & Sonnet & 40K \\
+W2: Cross-team integration & W1 all & Opus & 40K \\
+W2: ARCH structural review & W1 all & Opus & 25K \\
+W2: SECURE safety audit & W1 all & Sonnet & 20K \\
+W2: RETRO Wave 1 & W1 all & Sonnet & 10K \\
+W3A: Spec refinement (M1-5) & W2 & Sonnet & 40K \\
+W3B: Spec refinement (M6-10) & W2 & Sonnet & 40K \\
+W4: System coherence & W3 all & Opus & 35K \\
+W4: Risk table final & W3 all & Sonnet & 15K \\
+W4: RETRO Wave 3 & W3 all & Sonnet & 10K \\
+W5: Verification (72 tests) & W4 & Sonnet & 35K \\
+W6: Publication + LOG & W5 & Sonnet + Haiku & 25K \\
+W6: Final retro & W5 & Sonnet & 10K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total Estimated}} & \textbf{$\sim$475K} \\
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Allocation} & \tableheader{Rationale} \\
+\midrule
+Opus & $\sim$30\% (142K) & W2 and W4 synthesis requires architectural judgment across 10 modules simultaneously. ARCH structural review requires deep GSD ecosystem knowledge. System coherence check requires the kind of cross-domain reasoning that smaller models degrade under. \\
+Sonnet & $\sim$60\% (285K) & All team-level module spec production, verification, spec refinement, publication. High-volume structured work with clear spec format. \\
+Haiku & $\sim$10\% (47K) & W0 schema generation, SURGEON health monitoring, BUDGET tracking, LOG commit messages. Fast, cheap, deterministic formatting tasks. \\
+\end{tabularx}
+\end{center}
+
+\subsection{Wave Execution Plan}
+
+\subsubsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3cm}L{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku + Sonnet & Schemas, team charters, chipset validation \\
+1 & Team Specs & Parallel (4 teams) & Sonnet & 10 module draft specs \\
+2 & Integration & Sequential & Opus & Cross-module synthesis + CAPCOM Gate 1 \\
+3 & Refinement & Parallel (2 tracks) & Sonnet & Finalized specs, test harnesses \\
+4 & Synthesis + Risk & Sequential & Opus & System blueprint + CAPCOM Gate 2 \\
+5 & Verification & Sequential & Sonnet & 72 tests executed + CAPCOM Gate 3 \\
+6 & Publication & Sequential & Sonnet + Haiku & All 10 deliverables committed \\
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Validate chipset.yaml & SECURE/Sonnet & Pre-flight chipset validation report \\
+Generate shared schemas & BUDGET/Haiku & Module spec template, DACP bundle format, chipset YAML fragment template \\
+Build source index & LOG/Haiku & Indexed thepopebot docs + GSD vision docs \\
+Initialize output dirs & LOG/Haiku & Directory structure for all 10 deliverables \\
+Team charters & TOPO/Sonnet & Each team's scope, comm protocol, handoff format \\
+Token budget allocation & BUDGET/Haiku & Per-wave and per-team token budgets \\
+Register teams & TOPO/Sonnet & Team Alpha, Beta, Gamma, Delta registered in TOPO \\
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 1: Four Parallel Team Tracks}
+
+All four teams execute simultaneously. Inter-team communication via TOPO-managed shared state in \texttt{.planning/clusters/fleet-\{id\}/shared/}.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Team} & \tableheader{Modules} & \tableheader{CRAFT Lead} & \tableheader{Tasks} \\
+\midrule
+Alpha & M1, M2, M5 & CRAFT-INFRA & Draft specs for intake, skill audit, cluster topology \\
+Beta & M3, M6 & CRAFT-SEC & Draft specs for safety gate, credential tiering \\
+Gamma & M4, M8 & CRAFT-IMPL & Draft specs for model routing, chipset schema \\
+Delta & M7, M9, M10 & CRAFT-INTEG & Draft specs for event bus, pattern detection, retro loop \\
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate 1} (end of Wave 1): Human reviews all 10 draft specs. Approves, requests revision, or escalates. Required before Wave 2 begins.
+
+\subsubsection{Wave 2: Cross-Team Integration (Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Module dependency graph & INTEG/Opus & Cross-module dependency map; contradiction resolution \\
+DACP coherence review & ARCH/Opus & All DACP bundle formats use consistent schema \\
+Chipset YAML coherence & ARCH/Opus & All 7 chipset extensions compose without field conflicts \\
+Rollout sequence validation & INTEG/Opus & Confirmed rollout order; dependency bottlenecks identified \\
+Safety architecture audit & SECURE/Sonnet & Modules 3, 6, 9 reviewed as unified Safety Warden upgrade \\
+Cross-module pattern detection & ANALYST/Sonnet & Identify architectural redundancies and optimizations \\
+Wave 1 retrospective & RETRO/Sonnet & Lessons from Wave 1; promote to retro archive \\
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate 2} (end of Wave 2): Human reviews integration synthesis. Key question: does the 10-module architecture compose cleanly, or are there conflicts that require scope reduction?
+
+\subsubsection{Wave 3: Implementation Spec Refinement (Parallel)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track A (M1-5)} & \tableheader{Agent} & \tableheader{Tasks} \\
+\midrule
+Finalize M1 spec & EXEC-A & DACP intake bundle finalized; chipset YAML stub validated \\
+Finalize M2 spec & EXEC-A & DACP commit format finalized; skills-evolution branch protocol \\
+Finalize M3 spec & EXEC-B & safety.yaml schema finalized; pre-commit hook spec \\
+Finalize M4 spec & EXEC-C & Model routing enforcement spec; fallback logic \\
+Finalize M5 spec & EXEC-A & cluster.yaml schema finalized; handoff protocol \\
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Track B (M6-10)} & \tableheader{Agent} & \tableheader{Tasks} \\
+\midrule
+Finalize M6 spec & EXEC-B & credentials.yaml schema; spawn hook enforcement spec \\
+Finalize M7 spec & EXEC-D & Five-source event taxonomy; routing table template \\
+Finalize M8 spec & EXEC-C & JSON Schema; gsd:validate-chipset CLI spec \\
+Finalize M9 spec & EXEC-D & Observation store schema; 3 detection patterns \\
+Finalize M10 spec & EXEC-D & Retro template; promotion pipeline \\
+\end{tabularx}
+\end{center}
+
+\textbf{Test harness designs} (both tracks, parallel with finalization):\\
+VERIFY agent writes test harness designs for each module as specs are finalized.
+
+\subsubsection{Wave 4: Synthesis and Risk (Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Full system coherence & ARCH/Opus & v1.50 blueprint: all 10 modules as coherent system \\
+Implementation gap analysis & ANALYST/Sonnet & Identify any spec gaps before verification \\
+Final risk table & SECURE/Sonnet & Safety/sensitivity table with handling \\
+TOPO final check & TOPO/Opus & Team-of-teams communication protocol documented \\
+Wave 3 retrospective & RETRO/Sonnet & Lessons from Wave 3; promote to retro archive \\
+\end{tabularx}
+\end{center}
+
+\textbf{CAPCOM Gate 3} (end of Wave 4): Human reviews v1.50 blueprint. This is the final human approval before verification and publication.
+
+\subsubsection{Wave 5: Verification (72 Tests)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Safety-critical tests (8) & SECURE/Sonnet & All 8 pass or BLOCK \\
+Core functionality tests ($\sim$32) & VERIFY/Sonnet & Pass/fail per module \\
+Integration tests ($\sim$20) & INTEG/Sonnet & Cross-module connection verification \\
+Edge case tests ($\sim$12) & VERIFY/Sonnet & Robustness and gap acknowledgment \\
+Clean-room compliance check & SECURE/Sonnet & No thepopebot patterns reproduced \\
+All 16 success criteria & VERIFY/Sonnet & Full verification matrix completed \\
+\end{tabularx}
+\end{center}
+
+\subsubsection{Wave 6: Publication}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Assemble all 10 deliverables & EXEC-A--D & Final spec package \\
+DACP commit messages & LOG/Haiku & Structured commit for each deliverable \\
+Final mission retrospective & RETRO/Sonnet & Third retro to \texttt{.planning/retro/} \\
+Push to skills-evolution & LOG/Haiku & Mission artifacts committed, tagged v1.50-spec \\
+Notify CAPCOM & LOG/Haiku & Delivery notification with deliverable index \\
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Stage 1 Vision + Stage 2 Research Reference loaded as system context prefix across all waves
+  \item Team charters (Wave 0) cached as system context for each team's Wave 1 agents
+  \item Module draft specs (Wave 1) committed to \texttt{.planning/staging/} between waves --- enables context fork (bank switching)
+  \item Wave 2 synthesis uses only module output summaries, not full specs --- minimize Opus context
+  \item Wave 3 finalization agents receive only their assigned module's draft + integration notes
+  \item DACP bundle format template cached as system context for all EXEC agents
+\end{itemize}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH (FLEET)
+========================
+
+  [W0: Foundation]
+         |
+  +------+------+------+------+
+  |      |      |      |      |
+  W1A   W1B    W1C    W1D    (all parallel)
+  M1,2,5 M3,6  M4,8  M7,9,10
+  |      |      |      |
+  +------+------+------+------+
+                |
+          [CAPCOM Gate 1]
+                |
+         [W2: Integration -- Opus]
+                |
+          [CAPCOM Gate 2]
+                |
+         [W3A || W3B -- Sonnet]
+                |
+         [W4: Synthesis -- Opus]
+                |
+          [CAPCOM Gate 3]
+                |
+         [W5: Verification]
+                |
+         [W6: Publication]
+                |
+           [DELIVERED]
+
+Parallel: W1A || W1B || W1C || W1D
+Parallel: W3A || W3B
+Gates: W2, W4, W5 each require CAPCOM
+Critical path: W0 → W1(longest) → W2 → W3A → W4 → W5 → W6
+\end{asciibox}
+
+\subsection{Test Plan}
+
+\subsubsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action} & \tableheader{Notes} \\
+\midrule
+Safety-critical & 8 & Mandatory & BLOCK & All must pass; any failure halts publication \\
+Core functionality & 32 & Required & BLOCK & $\sim$2 per module per success criterion \\
+Integration & 20 & Required & BLOCK & Cross-module dependency chain validation \\
+Edge cases & 12 & Best-effort & LOG & Robustness, gaps, clean-room compliance \\
+\midrule
+\textbf{Total} & \textbf{72} & & & \\
+\end{tabularx}
+\end{center}
+
+\subsubsection{Safety-Critical Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Behavior} \\
+\midrule
+SC-01 & chipset.yaml in block\_paths & M3 spec explicitly places \texttt{chipset.yaml} in \texttt{block\_paths}; agent cannot modify its own constitution \\
+SC-02 & FILTERED tier structural deletion & M6 spec uses deletion (not hiding) from child env; env sanitization runs before exec, not after \\
+SC-03 & Glob matching enforcement & M3 spec uses glob patterns; zero prefix matching anywhere in safety.yaml schema \\
+SC-04 & Safety Warden script scan & M6 spec includes Safety Warden scan of \texttt{scripts/} for FILTERED variable references; blocks on match \\
+SC-05 & Clean-room compliance & No thepopebot code patterns reproduced in any of the 10 module designs; all implementations derived from GSD-native first principles \\
+SC-06 & DACP bundle format completeness & All DACP bundles include all three parts (human intent, structured data, executable); no two-part bundles accepted \\
+SC-07 & CAPCOM gate non-bypass & No path through wave execution skips any of the three CAPCOM gates; gates are structural, not advisory \\
+SC-08 & Retro promotion gate & No lesson auto-promoted to chipset modification; ARCH review required before any chipset field change \\
+\end{tabularx}
+\end{center}
+
+\subsubsection{Verification Matrix (Selected)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{XL{4cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test ID(s)} & \tableheader{Status} \\
+\midrule
+1. All 10 modules specified to implementation level & CF-01 through CF-10 & Pending \\
+2. credentials.yaml schema complete with 3 tiers & CF-11, SC-02, SC-04 & Pending \\
+3. safety.yaml schema complete with glob matching & CF-12, SC-01, SC-03 & Pending \\
+4. cluster.yaml schema complete & CF-13 & Pending \\
+5. Chipset YAML JSON Schema complete & CF-14, CF-15 & Pending \\
+6. DACP event intake protocol specified & CF-16, SC-06 & Pending \\
+7. Skill evolution commit format specified & CF-17 & Pending \\
+8. Model routing spec complete & CF-18 & Pending \\
+9. Cross-session pattern detection designed & CF-19 & Pending \\
+10. Retrospective loop format specified & CF-20 & Pending \\
+11. Rollout sequence complete & IN-01, IN-02 & Pending \\
+12. Test harnesses complete (72 tests) & IN-03 & Pending \\
+13. Safety Warden gate requirements specified & SC-07, CF-21 & Pending \\
+14. Clean-room compliance verified & SC-05, EC-01 & Pending \\
+15. Team-of-teams protocol documented & CF-22, IN-04 & Pending \\
+16. Retro lessons captured per wave & CF-23, SC-08 & Pending \\
+\end{tabularx}
+\end{center}
+
+\subsection{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent} & \tableheader{Model} & \tableheader{Responsibility} \\
+\midrule
+\multicolumn{4}{l}{\textbf{\sffamily Tier 1: Command}} \\
+FLIGHT & Orchestrator & Opus & Mission direction; go/no-go gates \\
+TOPO & Topology Manager & Opus & Team structure; mid-mission restructuring \\
+ARCH & Architecture & Opus & Cross-cutting structural decisions; DACP alignment \\
+PLAN & Planner & Sonnet & Wave decomposition; parallel track optimization \\
+\midrule
+\multicolumn{4}{l}{\textbf{\sffamily Tier 2: Specialist Teams}} \\
+CRAFT-INFRA & Infra Specialist & Sonnet & Team Alpha --- M1, M2, M5 \\
+CRAFT-SEC & Security Specialist & Sonnet & Team Beta --- M3, M6 \\
+CRAFT-IMPL & Implementation Spec & Sonnet & Team Gamma --- M4, M8 \\
+CRAFT-INTEG & Integration Spec & Sonnet & Team Delta --- M7, M9, M10 \\
+EXEC-A & Executor Alpha & Sonnet & Team Alpha document production \\
+EXEC-B & Executor Beta & Sonnet & Team Beta document production \\
+EXEC-C & Executor Gamma & Sonnet & Team Gamma document production \\
+EXEC-D & Executor Delta & Sonnet & Team Delta document production \\
+\midrule
+\multicolumn{4}{l}{\textbf{\sffamily Tier 2: Analysis}} \\
+SCOUT & Research Agent & Sonnet & Source gathering; pattern extraction \\
+INTEG & Integration Agent & Opus & Cross-module synthesis \\
+ANALYST & Pattern Analyst & Sonnet & Architectural consistency; cross-module patterns \\
+RETRO & Retrospective Agent & Sonnet & Post-wave retros; lessons archive \\
+\midrule
+\multicolumn{4}{l}{\textbf{\sffamily Tier 3: Infrastructure}} \\
+VERIFY & Verification & Sonnet & 72 tests; all 16 criteria \\
+SECURE & Security & Sonnet & Safety boundary enforcement; SC tests \\
+CAPCOM & HITL Interface & Sonnet & 3 approval gates; human boundary \\
+SURGEON & Health Monitor & Haiku & Quality degradation detection \\
+BUDGET & Resource Manager & Haiku & Token budget; session planning \\
+LOG & Chronicle & Haiku & DACP commits; audit trail; changelog \\
+\midrule
+\multicolumn{4}{r}{\textbf{Total: 22 roles}} \\
+\end{tabularx}
+\end{center}
+
+\subsection{Communication Loops}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Loop} & \tableheader{Participants} & \tableheader{Purpose} \\
+\midrule
+Command & FLIGHT $\leftrightarrow$ TOPO $\leftrightarrow$ ARCH & Mission direction; structural decisions \\
+Execution & PLAN $\leftrightarrow$ EXEC-A/B/C/D $\leftrightarrow$ VERIFY & Core build-verify cycle \\
+Team Alpha & CRAFT-INFRA $\leftrightarrow$ EXEC-A & M1, M2, M5 coordination \\
+Team Beta & CRAFT-SEC $\leftrightarrow$ EXEC-B & M3, M6 coordination \\
+Team Gamma & CRAFT-IMPL $\leftrightarrow$ EXEC-C & M4, M8 coordination \\
+Team Delta & CRAFT-INTEG $\leftrightarrow$ EXEC-D & M7, M9, M10 coordination \\
+Cross-team & TOPO $\leftrightarrow$ all CRAFT leads & Handoff coordination; shared state \\
+User & CAPCOM $\leftrightarrow$ Human & Only channel crossing human-machine boundary \\
+Health & SURGEON $\leftarrow$ all agents & Telemetry; quality degradation signals \\
+Budget & BUDGET $\leftarrow$ all agents & Token consumption; session boundary warnings \\
+\end{tabularx}
+\end{center}
+
+\subsection{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Full Fleet (22 roles) \\
+Specialist Teams & 4 (Alpha/Beta/Gamma/Delta) \\
+Total Modules & 10 (6 KF clean-room + 4 cross-cutting) \\
+Parallel Wave Tracks & 4 (Wave 1) + 2 (Wave 3) \\
+Estimated Total Tokens & $\sim$475K across all waves \\
+Estimated Sessions & 18--24 sessions \\
+Estimated Context Windows & 35--50 windows \\
+Human Checkpoints (CAPCOM) & 3 (Wave 1 exit, Wave 4 exit, Wave 5 exit) \\
+Safety-Critical Tests & 8 (all BLOCK authority) \\
+Total Tests & 72 \\
+Deliverables & 10 \\
+Target Repository & \texttt{gsd-skill-creator} (dev branch, v1.49.x) \\
+Mission Output Tag & \texttt{v1.50-spec} \\
+Clean-Room Policy & Enforced --- SC-05 mandatory pass \\
+Convergent Patterns Operationalized & 6 (KF-1 through KF-6) \\
+GSD-Original Modules & 4 (M7, M8, M9, M10) \\
+45-Year Engineering Substrate & Active calibration instrument throughout \\
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textbf{\sffamily\textcolor{primary}{The Through-Line}}
+
+\textit{Every bounded-resource problem the builder has solved in 45 years of engineering is in this mission. The spawn hook that structurally removes FILTERED credentials before a child process executes is the Cisco routing table: it has no opinion about intent; packets go where the table says, and the table is not negotiable. The ALLOWED\_PATHS gate that refuses to merge outside approved paths is the VMware hypervisor: the guest does not know the boundary exists, and the boundary does not care what the guest wants. The chipset YAML schema with its pre-flight validator is the Phillips semiconductor mask: the design is the configuration; there is no runtime negotiation.}
+
+\textit{thepopebot arrived at the same architecture through 42 production releases and 1,000 stars. gsd-skill-creator arrives at it through first principles, clean-room discipline, and the Amiga Principle applied to every layer of the stack. Both are correct. The convergence is the proof. The ten modules in this mission are not features being added to gsd-skill-creator --- they are properties the system always had, waiting to be expressed in code.}
+
+\textit{Same destination. Original path. The fox finds where the ground has been worn smooth --- then builds a better road.}
+\end{quotebox}
+
+\end{document}

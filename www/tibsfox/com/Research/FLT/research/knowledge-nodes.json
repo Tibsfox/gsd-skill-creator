@@ -1,0 +1,123 @@
+{
+  "project": "FLT",
+  "title": "Fleet Feature Refinement",
+  "cluster": "AI & Computation",
+  "description": "Ten GSD-native fleet modules built clean-room: safety, credentials, schema, event bus, topology, routing, intake, audit, pattern detection, and retrospective loop.",
+  "nodes": [
+    {
+      "id": "flt-001",
+      "concept": "Safety Warden",
+      "description": "Block-level gate on all fleet outputs. Non-optional, non-bypassable, deterministic pass/fail with traceable reason. The Paula of the fleet chipset.",
+      "connections": ["flt-003", "flt-004", "flt-008", "flt-010", "ABL-amiga-principle", "AAR-safety-warden"]
+    },
+    {
+      "id": "flt-002",
+      "concept": "Credential Tiering",
+      "description": "Operations authorized by tier, not identity. Tiers encode role, scope, and clearance. Identity-to-tier mapping is separate from tier definitions.",
+      "connections": ["flt-001", "flt-003", "flt-004", "flt-007", "AAR-credential-model"]
+    },
+    {
+      "id": "flt-003",
+      "concept": "Chipset Schema",
+      "description": "Formal JSON Schema for YAML chipset definitions with versioning contract. Extensions are additive. Existing definitions load without modification after schema updates.",
+      "connections": ["flt-002", "flt-004", "flt-007", "ABL-chipset-yaml", "S36-amiga-principle"]
+    },
+    {
+      "id": "flt-004",
+      "concept": "DACP Event Bus",
+      "description": "Typed cross-module event routing. Events are declared, not inferred. Per-module queue isolation prevents cross-contamination. Dead letter handling for undeliverable events.",
+      "connections": ["flt-001", "flt-002", "flt-003", "flt-005", "flt-006", "flt-007", "flt-008", "flt-009", "flt-010", "WAL-dacp-integration"]
+    },
+    {
+      "id": "flt-005",
+      "concept": "Cluster Topology",
+      "description": "Node registration with capability declaration. Health monitoring with configurable polling. Failover paths pre-computed eagerly at registration time, not at failure time.",
+      "connections": ["flt-004", "flt-006", "AAR-cluster-model"]
+    },
+    {
+      "id": "flt-006",
+      "concept": "Model Routing",
+      "description": "Workload complexity profiles matched to model capability ranges. Cost tracked per workload class. Fallback paths explicit and logged. Routing decisions auditable.",
+      "connections": ["flt-004", "flt-005", "flt-001", "flt-008", "flt-009", "AAR-model-routing"]
+    },
+    {
+      "id": "flt-007",
+      "concept": "Intake Layer",
+      "description": "Contract-declared input validation at the pipeline boundary. Violations rejected with user-facing messages. Nothing malformed reaches downstream modules. Contract registry is queryable.",
+      "connections": ["flt-002", "flt-003", "flt-004", "flt-008", "S36-csv-intake"]
+    },
+    {
+      "id": "flt-008",
+      "concept": "Skill Audit Trail",
+      "description": "Immutable append-only log of every skill invocation. SHA-256 hashes of input and output. Read-only query interface. Permanent retention with cold-storage archival.",
+      "connections": ["flt-004", "flt-003", "flt-009", "flt-001", "AAR-audit-trail"]
+    },
+    {
+      "id": "flt-009",
+      "concept": "Pattern Detection",
+      "description": "Continuous analysis of audit trail and event bus. Four pattern classes: PERFORMANCE, CORRECTNESS, SAFETY, COST. Threshold, trend, and comparison-based detection modes.",
+      "connections": ["flt-004", "flt-005", "flt-008", "flt-010", "S36-retrospective-engine"]
+    },
+    {
+      "id": "flt-010",
+      "concept": "Retro Loop",
+      "description": "Structured lesson records from pattern signals, mapped to NASA SE categories. Carry-forward packages compound knowledge across missions. Same mechanism as S36 carry-forward controller.",
+      "connections": ["flt-001", "flt-006", "flt-009", "S36-carry-forward", "AAR-lessons-learned"]
+    },
+    {
+      "id": "flt-011",
+      "concept": "Clean-Room Compliance",
+      "description": "All 10 modules specified independently before any thepopebot source was reviewed. Convergence verified after specification. SC-CLN safety test enforces zero code borrowing.",
+      "connections": ["flt-001", "flt-002", "flt-003", "flt-004", "flt-005", "flt-006", "flt-007", "flt-008", "flt-009", "flt-010", "AAR-clean-room"]
+    },
+    {
+      "id": "flt-012",
+      "concept": "Amiga Principle",
+      "description": "Specialize the hardware, share the bus, free the CPU. Safety Warden=Paula (gates). Credential Tiering=Denise (renders access picture). DACP Event Bus=Agnus (schedules and routes).",
+      "connections": ["flt-001", "flt-002", "flt-004", "ABL-amiga-principle", "S36-amiga-principle", "WAL-amiga-connection"]
+    },
+    {
+      "id": "flt-013",
+      "concept": "Team-of-Teams Topology",
+      "description": "Four specialized teams (Alpha: foundation, Bravo: bus+routing, Charlie: intake+audit, Delta: intelligence) with three CAPCOM synthesis gates between tier completions.",
+      "connections": ["flt-003", "flt-004", "AAR-team-topology", "S36-wave-structure"]
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "ABL",
+      "title": "Amiga Lives",
+      "connection": "Chipset model (Agnus/Denise/Paula) as architectural pattern. FLT maps the pattern to fleet module roles."
+    },
+    {
+      "project": "AAR",
+      "title": "After-Action Review",
+      "connection": "Architecture audit methodology. FLT implements recommendations from AAR for safety warden, credential model, and audit trail."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360",
+      "connection": "Wave execution pattern, carry-forward controller, retrospective engine. FLT extends these patterns to fleet architecture."
+    },
+    {
+      "project": "WAL",
+      "title": "Weird Al Yankovic",
+      "connection": "DACP integration. Lex's theorem on convergent systems proves architectural correctness through independent discovery."
+    },
+    {
+      "project": "DAA",
+      "title": "Dorothea Anga Archival",
+      "connection": "Fleet research generation pattern. FLT audit trail and pattern detection share lineage with DAA archival fingerprint methodology."
+    }
+  ],
+  "metadata": {
+    "mission_id": "FLT",
+    "version": "1.0",
+    "date": "2026-03-29",
+    "cluster": "AI & Computation",
+    "total_modules": 10,
+    "total_nodes": 13,
+    "safety_critical_tests": 8,
+    "total_tests": 72
+  }
+}
