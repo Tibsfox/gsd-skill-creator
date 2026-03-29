@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 11&deg; &mdash; Joe Brazil &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .educator-spectrum {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .educator-spectrum h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .educator-spectrum table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .educator-spectrum td, .educator-spectrum th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .educator-spectrum th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+
+    .flute-contrast {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .flute-contrast h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .flute-contrast table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .flute-contrast td, .flute-contrast th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #E1BEE7;
+    }
+    .flute-contrast th {
+      text-align: left;
+      font-weight: 600;
+      color: #6A1B9A;
+    }
+
+    .salon-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .salon-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .salon-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">11&deg;</div>
+      <div>
+        <h1>Joe Brazil</h1>
+        <div class="subtitle">Jazz &middot; Flute, Saxophone &amp; Clarinet &middot; Educator &amp; Community Builder &mdash; Detroit 1928 &rarr; Seattle Central District &mdash; d. 2008</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../010-bud-shank/index.html">Degree 10&deg; (Shank)</a>
+      <a href="../004-floyd-standifer/index.html">Degree 4&deg; (Standifer)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Detroit jazz roots. Central District salon.
+          Flute, saxophone, clarinet &mdash; three instruments, three embouchures, one tradition.
+          No major recordings. No national fame. Universally respected.
+          The mentor who kept the tradition alive through direct personal transmission.
+          The salon keeper enters at degree 11 &mdash; completing the educator spectrum.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Salon Keeper</h2>
+
+        <p>Joseph Brazil was born in 1928 in <strong>Detroit, Michigan</strong> &mdash; a city
+        whose jazz lineage produced Yusef Lateef, Donald Byrd, Ron Carter, Kenny Burrell,
+        Elvin Jones, Tommy Flanagan, Barry Harris, and dozens more. He is the first
+        Detroit-born artist in the S36 engine, the second flutist, and the first artist
+        whose primary legacy is <strong>community mentorship</strong> rather than
+        recordings or performances.</p>
+
+        <p>Brazil was a <strong>multi-instrumentalist</strong>: flute, saxophone, and
+        clarinet &mdash; three instruments spanning two different tone-production families,
+        requiring fundamentally different embouchure techniques. He developed this
+        multi-reed fluency in Detroit&rsquo;s clubs and sessions before moving to Seattle
+        in the 1960s.</p>
+
+        <p>He settled in the <strong>Central District</strong> and became one of Seattle&rsquo;s
+        most important jazz educators. But &ldquo;educator&rdquo; requires careful qualification.
+        He did not teach at a university like Standifer (degree 4&deg;). He did not teach at a
+        college like Priester (degree 7&deg;) and Caliman (degree 9&deg;) at Cornish.
+        <strong>Brazil taught privately, at community venues, and in his own home.</strong></p>
+
+        <p>His home in the Central District became a <strong>gathering place for musicians</strong>
+        &mdash; a salon where younger players came to learn, to play, to absorb the tradition
+        through proximity to someone who carried it in his body and ears. The
+        <strong>salon model</strong> is older than jazz: a knowledgeable practitioner opens their
+        home, and students come to learn by being present.</p>
+
+        <p>Brazil was known throughout the Seattle jazz community as a <strong>generous, patient
+        mentor</strong> who nurtured younger musicians without fanfare, without institutional
+        backing, without the documentation that comes with a faculty appointment. He played in
+        various Seattle jazz ensembles, but performance was never his primary mode. The real
+        work happened in the living room.</p>
+
+        <p>Brazil died in 2008, at the age of 80, in Seattle &mdash; the chronologically
+        earliest death among S36 artists.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: HistoryLink.org;
+        Seattle Times; KNKX/KPLU Jazz Northwest; Earshot Jazz; Paul de Barros,
+        <em>Jackson Street After Hours</em>, 1993; Central District oral histories</p>
+
+        <!-- ========================================
+             SALON MODEL
+             ======================================== -->
+
+        <div class="salon-box">
+          <h4>The Salon Model: Knowledge Transmitted Through Presence</h4>
+          <p>Brazil represents the <strong>Community Builder archetype</strong> &mdash; an
+          artist whose primary contribution is not any artifact (recording, performance,
+          composition) but the <strong>human network</strong> they create and sustain through
+          direct personal engagement. No major label recordings. No critical retrospectives.
+          No Grammy nominations. What exists is a community that functions differently because
+          Brazil was in it. The musicians he mentored carry his influence in their playing,
+          their teaching, their approach to the tradition. The transmission is
+          <strong>invisible to anyone who was not in the room</strong>.</p>
+        </div>
+
+        <!-- ========================================
+             EDUCATOR SPECTRUM
+             ======================================== -->
+
+        <div class="educator-spectrum">
+          <h4>The Educator Spectrum: Three Models (Complete at Degree 11&deg;)</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Institutional (Standifer, 4&deg;)</th>
+              <th>Performance (Berry, 5&deg;)</th>
+              <th>Salon (Brazil, 11&deg;)</th>
+            </tr>
+            <tr>
+              <td>Intention</td>
+              <td>Explicit teaching</td>
+              <td>Implicit (performance as lesson)</td>
+              <td>Explicit teaching</td>
+            </tr>
+            <tr>
+              <td>Setting</td>
+              <td>University classroom</td>
+              <td>Club stage</td>
+              <td>Living room, community venue</td>
+            </tr>
+            <tr>
+              <td>Documentation</td>
+              <td>Academic records, curriculum</td>
+              <td>None (the music is the record)</td>
+              <td>Oral history only</td>
+            </tr>
+            <tr>
+              <td>Access</td>
+              <td>Enrolled students (gatekept)</td>
+              <td>Anyone who shows up</td>
+              <td>Invited / self-selecting</td>
+            </tr>
+            <tr>
+              <td>Survival</td>
+              <td>Institutional memory</td>
+              <td>Community memory</td>
+              <td>Personal memory (most fragile)</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             FLUTE CONTRAST
+             ======================================== -->
+
+        <div class="flute-contrast">
+          <h4>The Flute Thread: Second Data Point (Cool vs. Blues)</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Shank (10&deg;, cool flute)</th>
+              <th>Brazil (11&deg;, blues flute)</th>
+            </tr>
+            <tr>
+              <td>Context</td>
+              <td>Cool jazz, West Coast, studio</td>
+              <td>Blues-based, Central District, salon</td>
+            </tr>
+            <tr>
+              <td>Approach</td>
+              <td>Lyrical, classical influence</td>
+              <td>Blues-rooted, informal, direct</td>
+            </tr>
+            <tr>
+              <td>Function</td>
+              <td>Recording instrument (Pacific Jazz)</td>
+              <td>Teaching instrument (salon demos)</td>
+            </tr>
+            <tr>
+              <td>Legacy</td>
+              <td>Documented in recordings</td>
+              <td>Documented in students</td>
+            </tr>
+            <tr>
+              <td>Tone</td>
+              <td>Cool, transparent, bossa nova lyricism</td>
+              <td>Warm, blues-inflected, overblown grit</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             MULTI-REED TECHNIQUE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Multi-Reed Technique: Three Instruments, Three Worlds</h2>
+
+        <p>Brazil played three instruments that require <strong>fundamentally different
+        embouchure techniques</strong>:</p>
+
+        <table>
+          <thead>
+            <tr><th>Instrument</th><th>Embouchure</th><th>Tone Character</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Flute</strong></td>
+              <td>Aerodynamic &mdash; air across embouchure hole, no reed</td>
+              <td>Pure, breathy, overtone-sparse, bird-like</td>
+            </tr>
+            <tr>
+              <td><strong>Saxophone</strong></td>
+              <td>Single reed &mdash; lower lip supports reed against mouthpiece</td>
+              <td>Warm, reedy, voice-like, overtone-rich</td>
+            </tr>
+            <tr>
+              <td><strong>Clarinet</strong></td>
+              <td>Single reed &mdash; tighter lip seal, cylindrical bore</td>
+              <td>Woody, hollow, emphasizes odd harmonics</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Switching between instruments requires <strong>resetting embouchure muscle
+        memory</strong> &mdash; different jaw pressures, tongue positions, and air speeds.
+        The multi-reed approach was invaluable for teaching: Brazil could demonstrate the
+        same melodic idea on three instruments, showing how <strong>timbre shapes musical
+        meaning</strong>. A blues phrase on flute is airy and exposed; on saxophone, warm
+        and vocal; on clarinet, dark and registrally varied. Same notes, three emotional
+        characters.</p>
+
+        <!-- ========================================
+             BLUES FLUTE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Blues-Based Flute: Techniques</h2>
+
+        <ul>
+          <li><strong>Overblowing:</strong> Pushing air beyond the bore&rsquo;s design capacity,
+          creating distorted, harmonically complex sound &mdash; the flute equivalent of
+          guitar overdrive. Deliberately abandoning the clean, transparent classical tone.</li>
+          <li><strong>Humming while playing:</strong> Simultaneously singing and playing,
+          creating multiphonic two-pitch chords from a single player. Adds gritty, vocal
+          quality that bridges toward the saxophone&rsquo;s richness.</li>
+          <li><strong>Bent notes (blue notes):</strong> Partial fingering + airstream angle
+          changes to bend pitch. Less controllable than saxophone blue notes, giving an
+          unstable, yearning quality. The <strong>eleventh blue note deployment</strong>
+          &mdash; first using partial-fingering mechanism.</li>
+          <li><strong>Percussive tonguing:</strong> Hard rhythmic tongue attacks and
+          flutter-tonguing that give the flute drum-like rhythmic presence.</li>
+        </ul>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1928 &mdash; Born in Detroit, Michigan</div>
+          <p>Born in 1928 in one of the deepest jazz cities in America. Home to Yusef Lateef,
+          Barry Harris, Elvin Jones, Tommy Flanagan, and dozens more. Thirteenth educational
+          pipeline in the engine &mdash; first major-city jazz infrastructure pipeline.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Detroit Jazz Scene &mdash; Multi-Reed Development</div>
+          <p>Developed fluency in flute, saxophone, and clarinet through Detroit&rsquo;s clubs,
+          sessions, and house parties. Absorbed the multi-instrumentalist tradition that
+          produced Yusef Lateef and Eric Dolphy.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1960s &mdash; Migration to Seattle</div>
+          <p>Moved to Seattle and settled in the <strong>Central District</strong>. Joined the
+          same neighborhood that had shaped Jones (0&deg;), Anderson (3&deg;), Standifer (4&deg;),
+          and Berry (5&deg;). The CD returns to the engine after four-degree absence.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1960s&ndash;2000s &mdash; The Salon Years</div>
+          <p>Decades of private teaching, community venue performance, and home-based mentorship.
+          His Central District home became a <strong>gathering place for musicians</strong> at
+          every level. Played in various Seattle jazz ensembles and at local clubs and community
+          events. The salon model: open-ended, student-driven, presence-first.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2008 &mdash; Death in Seattle</div>
+          <p>Died in 2008, at age 80, in Seattle. The chronologically earliest death among S36
+          artists (before Shank 2009, Caliman 2010, Anderson 2016, Peacock 2020). The end of a
+          generation of Central District jazz mentors who sustained the tradition through
+          personal engagement.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Four theory nodes &mdash; extending the flute branch (blues-based technique),
+        adding the multi-reed embouchure node, documenting the salon pedagogy model, and
+        the eleventh blue note deployment.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Multi-Reed Embouchure Technique</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Three distinct embouchure configurations: flute (aerodynamic, no reed),
+            saxophone (single reed, jaw pressure), clarinet (single reed, tighter seal,
+            cylindrical bore). Switching between instruments requires resetting muscle
+            memory. The multi-reed approach enables pedagogy through timbral comparison
+            &mdash; same musical idea, three different emotional characters.</p>
+            <div class="examples">Brazil (flute/sax/clarinet); Dolphy (flute/alto/bass clarinet); Lateef (flute/sax/oboe); Kirk (multiple winds simultaneously)</div>
+            <div class="genealogy"><strong>Extends:</strong> Standifer (4&deg;) multi-instrumentalism (trumpet/sax/voice &mdash; cross-family) into woodwind-specific territory (flute/sax/clarinet &mdash; within-family). Sixth node in the reed branch.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blues-Based Flute Technique</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Overblowing for timbral grit. Humming while playing (multiphonics). Bent
+            notes via partial fingering + airstream angle. Percussive tonguing and
+            flutter-tonguing. Transforms the flute from cool/transparent to
+            warm/gritty/blues-capable. The stylistic opposite of Shank&rsquo;s (10&deg;)
+            cool, classically influenced flute.</p>
+            <div class="examples">Kirk (flute as blues instrument); Dolphy (angular blues flute); Laws (classical + blues); Steig (rock-influenced jazz flute)</div>
+            <div class="genealogy"><strong>Contrast:</strong> Shank (10&deg;) cool flute = pure, transparent, lyrical. Brazil (11&deg;) blues flute = gritty, overblown, vocal. First within-instrument flute contrast &mdash; mirrors the saxophone cool/hard bop pair at 9&deg;/10&deg;.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Salon Pedagogy Model</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Community-based pedagogy: a knowledgeable practitioner opens their home, and
+            students learn by being present. Explicit and intentional teaching without
+            institutional mediation. No formal curriculum, no academic records. The most
+            vulnerable to erasure &mdash; when the salon keeper dies, the knowledge
+            survives only in students who were present. Completes the three-point
+            educator spectrum.</p>
+            <div class="examples">Brazil (Central District home); Barry Harris (Detroit/NYC workshops); Tristano (private instruction producing Konitz, Marsh); the African-American church tradition</div>
+            <div class="genealogy"><strong>Spectrum:</strong> Standifer (4&deg;, institutional) &rarr; Berry (5&deg;, performance) &rarr; Brazil (11&deg;, salon). Three models, three survival profiles. Salon is highest-fidelity, most fragile.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Flute Bent Note</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Eleventh deployment. Achieved through partial fingering (lifting keys partially
+            to detune) combined with airstream angle changes. No reed, no slide, no key
+            crush &mdash; the bending mechanism is aerodynamic and digital simultaneously.
+            The pitch sits in an unstable zone between two defined notes, giving it a
+            yearning, unresolved quality. The most mechanically distinctive deployment
+            in the thread.</p>
+            <div class="examples">Brazil (blues flute bending); Kirk (extreme flute pitch bending); Dolphy (angular bends); Laws (controlled partial-fingering bends)</div>
+            <div class="genealogy"><strong>Eleven deployments:</strong> bass-line (0&deg;), guitar (1&deg;), vocal (3&deg;), trumpet (4&deg;), piano crush (5&deg;), altered voicings (6&deg;), trombone slide (7&deg;), bass fundamental (8&deg;), sax voice (9&deg;), alto cool bend (10&deg;), flute bent note (11&deg;). First with no physical contact between player and vibrating element during the bend.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             ENERGY SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Energy 2: The Community Sustainer</h2>
+
+        <p>Brazil is the <strong>seventh energy-2 artist</strong> in the engine. Energy-2
+        extends its dominance further. Brazil&rsquo;s energy-2 profile reflects the
+        community-sustaining register: steady, warm, decades-long presence without
+        spectacle or withdrawal. The energy of the mentor who is always there.</p>
+
+        <table>
+          <thead>
+            <tr><th>Energy</th><th>Artists</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Peacock (8&deg;)</td><td>Meditative, foundational, ego-dissolved</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Frisell (1&deg;), Standifer (4&deg;), Berry (5&deg;), Priester (7&deg;), Caliman (9&deg;), Shank (10&deg;), Brazil (11&deg;)</strong></td><td><strong>Atmospheric, warm, sustaining, community-embedded</strong></td></tr>
+            <tr><td>3</td><td>Jones (0&deg;), Horvitz (2&deg;), Anderson (3&deg;), Bown (6&deg;)</td><td>Commanding, intense, projective</td></tr>
+          </tbody>
+        </table>
+
+        <p>Distribution: <strong>1:7:4</strong>. Energy-2 now holds seven of twelve artists
+        &mdash; nearly twice the energy-3 cluster (7 vs. 4). The sustaining frequency
+        continues to dominate.</p>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Twelve Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator</td></tr>
+            <tr><td>The Quiet Draw</td><td>Peacock (8&deg;)</td><td>Global cultivation &rarr; PNW settlement &rarr; gravitational presence</td></tr>
+            <tr><td>The Working Pedagogue-Draw</td><td>Caliman (9&deg;)</td><td>Global cultivation &rarr; educator AND performer</td></tr>
+            <tr><td>The Late Homestead</td><td>Shank (10&deg;)</td><td>Prolific career elsewhere &rarr; PNW as later-career base</td></tr>
+            <tr><td><strong>The Salon Keeper</strong></td><td><strong>Brazil (11&deg;)</strong></td><td><strong>Settled in CD &rarr; community building through informal pedagogy in the home &rarr; presence-first model</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>Brazil&rsquo;s <strong>Salon Keeper</strong> pattern is distinct from both the
+        Teacher (Standifer) and the Persistence (Berry). The salon keeper does not need
+        a stage or a classroom &mdash; only a room and an open door. The primary contribution
+        is the <strong>human network</strong>, not any recorded or performed artifact.</p>
+
+        <!-- ========================================
+             CENTRAL DISTRICT RETURN
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Central District Returns</h2>
+
+        <p>Degrees 7&ndash;10 rotated away from the Central District &mdash; the longest
+        geographic departure from the engine&rsquo;s founding neighborhood since degree 0.
+        <strong>Degree 11 returns.</strong> Brazil&rsquo;s salon was physically located in
+        the CD. The neighborhood&rsquo;s cultural infrastructure &mdash; built by Jackson
+        Street, sustained by Berry, anchored by Standifer at UW &mdash; was the
+        precondition for Brazil&rsquo;s salon to exist.</p>
+
+        <p>The CD geographic oscillation: <strong>present</strong> at degrees 0&ndash;6,
+        <strong>absent</strong> at degrees 7&ndash;10, <strong>returns</strong> at degree 11.
+        The engine tracks this oscillation because it maps the evolving geography of
+        Seattle&rsquo;s jazz community.</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;10&deg;</h4>
+          <ul>
+            <li><strong>Educator spectrum complete:</strong> Three models &mdash; institutional
+            (Standifer 4&deg;), performance (Berry 5&deg;), salon (Brazil 11&deg;). First
+            complete pedagogical taxonomy in the engine.</li>
+            <li><strong>Flute thread extended:</strong> Two data points. Shank (10&deg;, cool)
+            vs. Brazil (11&deg;, blues). First within-instrument flute contrast.</li>
+            <li><strong>Community-builder archetype:</strong> NEW. First artist whose primary
+            legacy is people, not artifacts. No major recordings.</li>
+            <li><strong>Central District returns:</strong> After four-degree absence (7&ndash;10).
+            Geographic oscillation continues.</li>
+            <li><strong>Blue note thread:</strong> Eleven deployments across twelve degrees.
+            Flute bent note is the most mechanically distinctive mechanism.</li>
+            <li><strong>Multi-reed technique:</strong> Three embouchures, three tone worlds.
+            Reed branch extended to six nodes.</li>
+            <li><strong>Energy spectrum:</strong> Distribution now 1:7:4. Energy-2 extends
+            dominance with seventh artist.</li>
+            <li><strong>Genre rotation:</strong> STILL CRITICAL for degree 12. Twelve consecutive
+            jazz artists. Documented as intentional CSV architecture.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../004-floyd-standifer/index.html">S36-004 &mdash; Floyd Standifer (Degree 4&deg;)</a> &mdash; Educator spectrum: institutional (Standifer, UW) vs. salon (Brazil, home). Both multi-instrumentalists. Both Central District. Different methods, same mission.</li>
+            <li><a href="../005-overton-berry/index.html">S36-005 &mdash; Overton Berry (Degree 5&deg;)</a> &mdash; CD persistence parallel. Berry persists through performance; Brazil through teaching. Both local, un-famous, and essential.</li>
+            <li><a href="../010-bud-shank/index.html">S36-010 &mdash; Bud Shank (Degree 10&deg;)</a> &mdash; Second flute in the engine. Shank (cool, recorded) vs. Brazil (blues, unrecorded). First within-instrument flute contrast.</li>
+            <li><a href="../003-ernestine-anderson/index.html">S36-003 &mdash; Ernestine Anderson (Degree 3&deg;)</a> &mdash; Central District return. Anderson established the CD as the engine&rsquo;s founding neighborhood. Brazil reaffirms it after four non-CD degrees.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>HistoryLink.org. Central District cultural history and jazz profiles.</li>
+          <li>Seattle Times. Joe Brazil profiles, obituary, and community tributes.</li>
+          <li>KNKX/KPLU Jazz Northwest. Seattle jazz community coverage and oral histories.</li>
+          <li>Earshot Jazz. Joe Brazil profiles, community features, and tribute coverage.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="5">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>Seattle Civil Rights &amp; Labor History Project, UW. Central District cultural documentation.</li>
+          <li>Central District oral history collections. Community-maintained jazz history.</li>
+          <li>Detroit jazz history. Barry Harris, Yusef Lateef, and the Detroit multi-instrumentalist tradition.</li>
+        </ol>
+
+        <h3>Institutional &amp; Comparative</h3>
+        <ol start="9">
+          <li>UW Music Department. Floyd Standifer faculty records (comparative context).</li>
+          <li>Cornish College of the Arts. Priester and Caliman faculty records (comparative context).</li>
+          <li>Earshot Jazz Festival. Seattle jazz community documentation and performer archives.</li>
+          <li>Harris, Barry. Workshop documentation and teaching lineage records.</li>
+          <li>Tristano, Lennie. Private teaching model and student lineage documentation.</li>
+          <li>Kirk, Rahsaan Roland. Multi-instrument technique documentation and discography.</li>
+          <li>Dolphy, Eric. Multi-reed technique documentation and discography.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1928</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">2008</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Detroit, Michigan</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instruments</span>
+            <span class="stat-value">Flute, Sax, Clarinet</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">Detroit jazz scene</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">11&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (multi-reed)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1960s&ndash;2000s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">local</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Legacy</h4>
+          <div class="stat-row">
+            <span class="stat-label">Recordings</span>
+            <span class="stat-value">None (major)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Primary Mode</span>
+            <span class="stat-value">Salon mentorship</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Teaching Site</span>
+            <span class="stat-value">CD home + community</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Method</span>
+            <span class="stat-value">Direct transmission</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reed Branch</span>
+            <span class="stat-value">6 nodes (extended)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">4 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Firsts at Degree 11&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Archetype</span>
+            <span class="stat-value">Community Builder</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pedagogy</span>
+            <span class="stat-value">Salon model (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Detroit (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Recordings</span>
+            <span class="stat-value">None significant (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Return</span>
+            <span class="stat-value">After 4-degree absence</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">The Salon Keeper</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Presence-first model</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died in Seattle</span>
+            <span class="stat-value">Yes (2008)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Detroit pipeline</span>
+            <span class="stat-value">13th pipeline (NEW)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Energy 1</span>
+            <span class="stat-value">Peacock (8&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 2</span>
+            <span class="stat-value">7 artists (dominant)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 3</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">1:7:4</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;10&deg; &rarr; 11&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Flute Branch</span>
+            <span class="stat-value">2 nodes (extended)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reed Branch</span>
+            <span class="stat-value">6 nodes (extended)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">11th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">12 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">13 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 11&deg; / 360 &middot;
+      <a href="../010-bud-shank/index.html">Prev: 10&deg; Shank</a> &middot;
+      <a href="../004-floyd-standifer/index.html">4&deg; Standifer</a> &middot;
+      <a href="../005-overton-berry/index.html">5&deg; Berry</a> &middot;
+      <a href="../003-ernestine-anderson/index.html">3&deg; Anderson</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

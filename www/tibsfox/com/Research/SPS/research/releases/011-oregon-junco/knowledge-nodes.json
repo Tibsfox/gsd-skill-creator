@@ -1,0 +1,362 @@
+{
+  "degree": 11,
+  "species": "Oregon Junco",
+  "scientific_name": "Junco hyemalis oreganus group",
+  "subspecies": "J. h. oreganus (Oregon group -- Pacific coast, the most common Dark-eyed Junco in the PNW)",
+  "sound_type": "metallic trill on single pitch",
+  "energy": 2,
+  "ecosystem": "forest edge",
+  "season": "resident (year-round in forest edges, suburban yards, trailhead margins, and second-growth clearings)",
+  "family": "Emberizidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Beacon Hill / Puget Sound reference; the Oregon form ranges from southern Alaska through the Pacific coast to Baja California"
+  },
+  "physical": {
+    "length_in": "5.5-6.3",
+    "wingspan_in": "7.5-9.8",
+    "weight_g": "18-30"
+  },
+  "plumage": {
+    "overall": "Dark slate-to-black hood sharply contrasting with warm rusty-brown back and pink-brown flanks",
+    "hood": "Dark slate to black (males), paler gray (females)",
+    "back": "Rusty-brown to warm brown",
+    "flanks": "Pink-brown to rufous",
+    "tail": "White outer tail feathers -- flash conspicuously in flight (visual signal)",
+    "bill": "Pale pinkish -- diagnostic junco field mark",
+    "field_id": "Dark hood + rusty back + pink flanks + white outer tail flash + pink bill. Instantly distinguishable from Slate-colored form."
+  },
+  "taxonomy_note": {
+    "status": "CONTESTED -- formerly a separate species, lumped into Dark-eyed Junco complex by AOU in 1973, may be split again based on molecular phylogenetics",
+    "lump_year": 1973,
+    "forms_in_complex": [
+      "Oregon (oreganus) -- Pacific coast",
+      "Slate-colored (hyemalis) -- Eastern",
+      "Pink-sided (mearnsi) -- Rocky Mountains",
+      "Gray-headed (caniceps) -- Southern Rockies",
+      "White-winged (aikeni) -- Black Hills"
+    ],
+    "key_studies": [
+      "Milá et al. 2007 -- significant genetic divergence between forms",
+      "Friis et al. 2016 -- narrow, stable hybrid zone in Great Plains",
+      "Rising 1983 -- classic hybrid zone analysis"
+    ],
+    "lesson": "Taxonomy is a human classification applied to biological continua. The Oregon Junco's history is the history of where to draw the line on a gradient."
+  },
+  "frequency_range": {
+    "song_trill_hz": "3000-6000 (single pitch per song, maintained throughout trill)",
+    "chip_note_hz": "4000-7000 (broadband, sharp)",
+    "flight_call_hz": "3000-5000 (soft tsew)",
+    "register": "Mid-range (3-6 kHz -- comfortably within human hearing range)"
+  },
+  "trill_metrics": {
+    "trill_rate_per_second": "10-25",
+    "fusion_threshold": "~15 notes/s (above this rate, discrete pulses perceived as continuous tone)",
+    "duration_s": "1-2",
+    "pitch_modulation": "None -- single pitch maintained throughout",
+    "perceived_quality": "Metallic buzz / sustained tone (despite being structurally discrete)",
+    "structural_reality": "Discrete individual note pulses with brief gaps between them",
+    "perceptual_result": "Continuous-sounding metallic tone above fusion threshold",
+    "key_principle": "The analog-to-digital boundary -- discrete pulses perceived as continuous signal when repetition rate exceeds temporal resolution"
+  },
+  "chip_note_metrics": {
+    "call_type": "Sharp tick/tik",
+    "duration_s": "0.02-0.05",
+    "quality": "Sharp, dry, metallic -- percussive onset",
+    "function": "Contact, alarm, social communication",
+    "comparison_to_bushtit": "Louder, sharper, more individually distinctive than the bushtit's noise-floor seep"
+  },
+  "theory_nodes": [
+    {
+      "concept": "Trill as tremolo (rapid repetition creating illusion of sustained tone)",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/technique/tremolo/",
+      "examples": [
+        "Violin tremolo: rapid bow alternation on one note -- discrete strokes perceived as continuous tone",
+        "Mandolin tremolo picking: rapid plectrum strokes creating sustain on a plucked instrument",
+        "Piano tremolo: rapid key re-strikes creating sustain on a percussion instrument",
+        "Timpani roll: rapid mallet strikes creating the illusion of a sustained drum tone"
+      ],
+      "music_theory_parallel": "The tremolo is the musical exploitation of the flicker fusion threshold. The junco's trill is the biological original. Discrete attacks perceived as continuous tone -- the same principle in biology, music, radio, film, and LED technology."
+    },
+    {
+      "concept": "Stroboscopic effect / flicker fusion in acoustics (analog-to-digital boundary)",
+      "level": "advanced",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/flicker-fusion/",
+      "examples": [
+        "Strobe light: discrete flashes perceived as continuous illumination above fusion frequency",
+        "Film projection: 24 fps perceived as continuous motion",
+        "LED PWM dimming: on/off flashing perceived as steady light at set brightness",
+        "AM radio: carrier wave on/off switching perceived as audio tone above modulation frequency",
+        "Junco trill: discrete note pulses perceived as continuous buzzy tone above ~15 notes/s"
+      ],
+      "music_theory_parallel": "The Nyquist-Shannon sampling theorem demonstrated in biology. Discrete samples (trill notes) reconstructed as continuous signal (perceived tone) when sampling rate (trill rate) exceeds the auditory system's temporal resolution threshold."
+    },
+    {
+      "concept": "Metallic timbre (rich harmonic spectrum -- strong upper partials)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/timbre/metallic/",
+      "examples": [
+        "Harpsichord vs. piano: harpsichord has more upper harmonic content = 'metallic' quality",
+        "Steel-string vs. nylon-string guitar: steel is brighter, more harmonically rich",
+        "Snare drum (snares on) vs. tom-tom: snare wires add high-frequency metallic buzz",
+        "Trumpet vs. French horn: trumpet is brighter, more forward, more 'metallic'"
+      ],
+      "music_theory_parallel": "'Metallic' in acoustic terms means rich in upper harmonics -- the fundamental frequency accompanied by strong overtone content extending well above the fundamental, giving the sound a hard, bright, ringing edge. The junco's metallic quality places it at the bright, harmonically rich end of the avian timbral spectrum."
+    },
+    {
+      "concept": "Ostinato at maximum rate (repetition becoming frequency)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/structure/ostinato/",
+      "examples": [
+        "Baroque ground bass (chaconne, passacaglia): repeated bass figure underpinning variation",
+        "Steve Reich phasing: repeated patterns shifting against each other until they recombine",
+        "Philip Glass arpeggios: rapid repetitive figures creating a continuous texture",
+        "Junco trill: one note repeated so fast the figure dissolves into a tone -- the ostinato's endpoint"
+      ],
+      "music_theory_parallel": "The junco's trill is an ostinato reduced to its absolute minimum: one note at maximum rate. At this rate, the pattern (repetition) disappears and only the product (tone) remains. The figure dissolves into its own frequency. This is the limit case of repetition -- the point where time-domain pattern becomes frequency-domain signal."
+    },
+    {
+      "concept": "Edge ecology as musical threshold (cadence ornament at the ecotone)",
+      "level": "foundational",
+      "department": "ecology",
+      "college_path": ".college/ecology/ecotone/forest-edge/",
+      "examples": [
+        "Classical trill ornament at cadence point: the note AT the boundary between phrases",
+        "Baroque cadential trill: ornaments the penultimate note before resolution",
+        "Tremolo as mood transition in orchestral writing: signals shift between dynamic or tonal sections",
+        "Junco at forest edge: the bird AT the boundary between forest interior and open ground"
+      ],
+      "music_theory_parallel": "The trill ornaments the boundary. In music, the trill decorates the cadence point -- the note at the threshold between tension and resolution. In ecology, the junco trills at the ecotone -- the threshold between forest and field. The trill IS the sound of transition."
+    },
+    {
+      "concept": "Lumping/splitting as classification boundary problem",
+      "level": "advanced",
+      "department": "science/taxonomy",
+      "college_path": ".college/science/taxonomy/species-concepts/",
+      "examples": [
+        "AOU 1973 lump: five species merged into one based on hybridization (Biological Species Concept)",
+        "Molecular phylogenetics (2007, 2016): significant genetic divergence suggests they may be split",
+        "The hybrid zone is narrow and stable, not expanding -- limited gene flow",
+        "The bird doesn't change. The label does."
+      ],
+      "music_theory_parallel": "Where do you draw the line between genres? Jazz and blues? Classical and romantic? The boundary is a human decision applied to a continuum. The junco complex is the taxonomic equivalent of the genre boundary problem: five forms on a gradient, with the line drawn differently depending on which criterion you prioritize."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "CONTINUOUS VS. DISCRETE. The deepest connection in the circle. Both produce sounds perceived as sustained tones at a single pitch. But the thrush's tone is genuinely continuous (analog -- solid spectrogram line). The junco's trill is structurally discrete (digital -- row of individual dashes). Same perceptual output, opposite structural architecture. The thrush HOLDS a note. The junco BUILDS a note from atoms."
+    },
+    {
+      "project": "BPS",
+      "title": "Built & Physical Systems",
+      "connection": "NYQUIST / SAMPLING. The junco trill demonstrates the Nyquist-Shannon sampling theorem in biology. Discrete samples (trill notes) are reconstructed as continuous signal (perceived tone) when the sampling rate (trill rate) exceeds the auditory system's Nyquist threshold (flicker fusion frequency). Shannon's theorem in feathers."
+    },
+    {
+      "project": "LED",
+      "title": "LED Research",
+      "connection": "PERSISTENCE OF VISION. PWM dimming, frame rate, flicker fusion -- the junco trill is the acoustic version of every visual persistence-of-vision technology. Discrete on/off pulses above the fusion threshold are perceived as continuity. Light, sound, film, biology -- the same principle across domains."
+    },
+    {
+      "project": "MDB",
+      "title": "Moody Blues Research",
+      "connection": "THRESHOLD ARCHITECTURE. The junco lives at the ecological threshold (forest edge). MDB documents musical threshold architecture (boundaries between sections, genres, movements). The trill ornaments the cadence point. The junco ornaments the ecotone. Edge as structural position in both domains."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Edge ecology, ecotone dynamics, forest-meadow mosaic, the edge effect (increased productivity and species diversity at habitat boundaries). Vertical partitioning of the ecotone with bushtit (degree 10): bushtit in shrub canopy, junco on the ground."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Joe Brazil at degree 11. Both are community-embedded, edge-dwelling figures -- always present at the threshold. Brazil was the neighborhood musician between venues, between genres, between stage and street. The junco is the neighborhood bird between forest and yard, between wild and domestic. Fixtures of place."
+    },
+    {
+      "project": "SPS-010",
+      "title": "Bushtit (Degree 10)",
+      "connection": "EDGE PARTITIONING. Both are edge/ecotone species at the forest margin. The bushtit works the shrub canopy; the junco works the ground layer. Vertical partitioning of the same edge habitat. Both are residents, year-round, common in suburban Seattle. The bushtit's signal is at the noise floor (energy 1); the junco's trill is above it (energy 2)."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "TRILL COMPARISON. The wren's cascade contains trills as one element within a complex song of 100+ notes. The junco's entire song IS a trill -- nothing else. The wren embeds the trill in maximum complexity. The junco isolates it in minimum context. Maximum vs. minimum framing for the same acoustic technique."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "REPETITION RATE. Both repeat a single note. The nuthatch repeats at metronomic rate below the fusion threshold -- you hear individual beats (click, click, click). The junco repeats above the fusion threshold -- you hear a continuous buzz. Same strategy (single-note repetition), different rate, qualitatively different perception. The nuthatch is the metronome. The junco is the tremolo."
+    }
+  ],
+  "interspecies_network": {
+    "status": "NOT EXTENDED -- the Oregon Junco does not participate in the chickadee alarm broadcasting network as a broadcaster or documented eavesdropper. It benefits passively from alarm behavior in mixed-species flocks.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "junco_role": "The Oregon Junco forages on the ground at forest edges, often in loose proximity to mixed-species flocks containing chickadees and other passerines. It benefits from general alarm behavior but is not a documented participant in the A-B-C-D alarm protocol. Its own communication operates on a separate channel: song trill (territory/mate) and chip note (contact/alarm). The junco introduces a THIRD communication modality to the forest: the trill as territorial/mating signal.",
+    "note": "The alarm network remains at 4 nodes (2 broadcasters, 2 receivers). The swarm cohesion network (bushtit) remains at 1 node. The junco introduces a trill-based territorial signal that operates alongside both existing networks -- the forest now has three parallel communication channels."
+  },
+  "part_a_parallel": {
+    "artist": "Joe Brazil",
+    "degree": 11,
+    "genre": "S36",
+    "shared_principle": "Community-embedded, edge-dwelling, always present. Joe Brazil was the neighborhood musician -- always at the threshold between venues, between genres, between stage and street. The Oregon Junco is the neighborhood bird -- always at the threshold between forest and yard, between wild and domestic. Both are fixtures of place. Both define the edge they inhabit.",
+    "resonance_points": [
+      "Edge-dwelling: Brazil worked the boundary between the jazz club and the neighborhood. The junco works the boundary between the forest and the yard. Both are threshold figures -- not deep inside, not fully outside, but AT the edge where two worlds meet.",
+      "Community-embedded: Brazil was not a touring star but a community fixture -- the musician who was always there, always playing, always part of the local fabric. The junco is the same -- the most common backyard bird in Seattle, always present at the feeder, always trilling from the low branch at the forest margin.",
+      "Persistent presence: Both define their locale through consistent, repeated presence. Brazil played the same venues year after year. The junco trills the same trill from the same edge perch year-round. Resident. Reliable. The sound of the place.",
+      "Threshold signal: Brazil's music carried between the inside (the club) and the outside (the street). The junco's trill carries between the inside (the forest) and the outside (the clearing). Both signals cross the boundary in both directions."
+    ]
+  },
+  "degree_arc": {
+    "position": "The metallic trill -- discrete pulses perceived as continuous tone. The analog-to-digital boundary in biological acoustics. The tremolo in feathers.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11)",
+    "key_insight": "Degree 11 introduces three new dimensions: (1) THE TRILL -- rapid single-note repetition above the temporal fusion threshold, creating the perception of a continuous tone from discrete pulses; this is the analog-to-digital boundary in biological acoustics, the biological tremolo, the Nyquist threshold demonstrated in song. (2) CONTESTED TAXONOMY -- the Oregon Junco's lumping/splitting history makes classification itself a subject of the research, not just a background fact. (3) EDGE ECOLOGY AS THRESHOLD -- the junco's forest-edge habitat maps to the musical cadence point, the trill to the cadential ornament, the ecotone to the transition between sections.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)",
+      "degree_11": "Mid-range (3-6 kHz -- comfortably within human hearing, the first return to accessible mid-range since degree 5)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)",
+      "degree_11": "Territory + mate attraction through trill (I am here, I am fit, this is my edge -- territorial song from the forest margin)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)",
+      "degree_10": "Shrubby woodland edge (ecotone -- the transition zone between forest and open habitat)",
+      "degree_11": "Forest edge (ecotone -- the threshold between forest interior and open ground)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Forest edges, second-growth margins, suburban yards with adjacent tree cover, trailhead clearings, logged edges with residual canopy. Requires the boundary between forest and open ground.",
+    "niche": "Forest edge specialist -- the ecotone. Ground-foraging at the boundary between cover and exposure. Scratches in leaf litter, hops on trails, feeds at the interface.",
+    "foraging_strategy": "Ground gleaner -- scratches in leaf litter with both feet simultaneously (double-scratch technique), exposing seeds, insects, and other invertebrates. Readily comes to bird feeders.",
+    "diet": "Seeds (especially in winter -- millet, sunflower, weed seeds), insects (especially in breeding season -- beetles, caterpillars, ants, flies), spiders, and other small invertebrates.",
+    "nesting": "Nest on the ground or in low vegetation at forest edges. Cup nest of grass, bark strips, and moss, lined with fine grass, hair, and feathers. Typically hidden under overhanging vegetation or in a bank cut.",
+    "white_tail_flash": "The diagnostic white outer tail feathers flash conspicuously when the bird takes flight. This visual signal may serve multiple functions: startling predators, communicating flock alarm, and species recognition.",
+    "ground_foraging": true,
+    "double_scratch": true,
+    "feeder_bird": true
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~260 million (Partners in Flight 2020)",
+    "trend": "Stable. One of the most abundant birds in North America.",
+    "threats": "Domestic cat predation (ground foraging = maximum cat-hunting zone), window strikes (readily approaches structures), pesticide exposure from lawn chemicals, habitat loss where forest edges are paved over",
+    "vulnerability": "Highly resilient -- thrives in edge habitat, suburban landscapes, and disturbed areas that human land use creates and expands. One of the most common feeder birds in the PNW.",
+    "unique_feature": "The Oregon form's distinctiveness from other Dark-eyed Junco forms, combined with its contested taxonomy, makes it a case study in how classification decisions affect conservation priority -- subspecies receive less protection than full species under most frameworks."
+  },
+  "key_sites": [
+    {
+      "name": "Seattle suburban neighborhoods",
+      "type": "year-round",
+      "description": "The most common winter feeder bird in Seattle. Any yard with adjacent trees or shrubs will have Oregon Juncos from October through March, and resident pairs year-round.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Discovery Park forest edges",
+      "type": "year-round",
+      "description": "Forest-meadow ecotone along trails and at the transition between old-growth remnants and open bluffs.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Seward Park perimeter",
+      "type": "year-round",
+      "description": "Forest edge along the shore loop trail, where mature forest meets maintained lawn and lakeside habitat.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Trailheads throughout Puget Sound lowlands",
+      "type": "year-round",
+      "description": "Juncos are the bird hopping on the gravel at parking lots, picnic areas, and trailhead margins throughout the region.",
+      "region": "Puget Sound, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the discrete-pulse structure of the trill at constant pitch, and the sharp chip note",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Oregon Junco trill shows a row of individual note dashes at constant pitch -- a DOTTED line on the spectrogram, contrasting with the Varied Thrush's SOLID line (degree 2). This visual difference IS the structural difference: discrete vs. continuous. The chip note appears as a short, broad-band vertical mark -- a click."
+  },
+  "sources": [
+    "Nolan, V., Ketterson, E.D., Cristol, D.A. et al. (2002). Dark-eyed Junco (Junco hyemalis). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Dark-eyed Junco. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Dark-eyed Junco. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Dark-eyed Junco species account. birdweb.org",
+    "Milá, B. et al. (2007). Postglacial range expansion drives rapid diversification in Junco. Proc R Soc B 274: 2653-2660.",
+    "Friis, G. et al. (2016). Genomic signatures of historical isolation and gene flow in a junco hybrid zone. Mol Ecol 25: 4965-4983.",
+    "Rising, J.D. (1983). The Great Plains hybrid zones. Current Ornithology 1: 131-157.",
+    "AOU Committee (1973). Thirty-second supplement to the AOU Check-list. Auk 90: 411-419.",
+    "Konishi, M. (1964). Song variation in a population of Oregon Juncos. Condor 66: 423-436.",
+    "Viemeister, N.F. and Wakefield, G.H. (1991). Temporal integration and multiple looks. JASA 90(2): 858-865.",
+    "Moore, B.C.J. (2012). An Introduction to the Psychology of Hearing. 6th ed. Brill.",
+    "Ries, L. et al. (2004). Ecological responses to habitat edges. Ann Rev Ecol Evol Syst 35: 491-522.",
+    "Harnoncourt, N. (1988). Baroque Music Today. Amadeus Press.",
+    "Fux, J.J. (1725/1965). The Study of Counterpoint. Trans. A. Mann. Norton.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Dark-eyed Junco (Junco hyemalis). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Dark-eyed Junco. wdfw.wa.gov",
+    "eBird. Dark-eyed Junco (Oregon) observation data, Pacific Northwest. ebird.org/species/daejun",
+    "Macaulay Library. Dark-eyed Junco recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "011",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

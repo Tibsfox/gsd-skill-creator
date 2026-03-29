@@ -1,0 +1,205 @@
+{
+  "degree": 11,
+  "artist": "Joe Brazil",
+  "slug": "011-joe-brazil",
+  "genre": "Jazz (flute, saxophone, clarinet -- educator, community builder)",
+  "energy": 2,
+  "era": "1960s-2000s",
+  "location": {
+    "origin": "Detroit, Michigan -- one of the deepest jazz cities in America, home to Yusef Lateef, Donald Byrd, Ron Carter, Kenny Burrell, Elvin Jones, Tommy Flanagan, Barry Harris",
+    "formative": "Detroit jazz scene (clubs, house parties, public school music programs); multi-reed development in flute, saxophone, clarinet",
+    "career": "Seattle, Central District (1960s-2008); private teaching, community venues, home-based salon; various Seattle jazz ensembles"
+  },
+  "born": "1928",
+  "died": "2008",
+  "labels": ["local"],
+  "theory_nodes": [
+    {
+      "concept": "Multi-reed embouchure technique (flute/saxophone/clarinet -- three tone-production systems, three embouchure configurations)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/woodwinds/multi-reed-embouchure-technique.md",
+      "examples": [
+        "Joe Brazil -- flute, saxophone, and clarinet across teaching and performance in the Central District salon",
+        "Eric Dolphy -- flute, alto saxophone, bass clarinet: the paradigmatic multi-reed voice in jazz",
+        "Yusef Lateef -- flute, saxophone, oboe: Detroit multi-instrumentalist (same city pipeline as Brazil)",
+        "Rahsaan Roland Kirk -- multiple saxophones, flute, other winds simultaneously"
+      ],
+      "description": "A multi-reed player maintains three distinct embouchure configurations: (1) Flute -- aerodynamic embouchure, air directed across the embouchure hole, no reed, air column vibrates. Pure, breathy tone. (2) Saxophone -- single-reed embouchure, lower lip supports reed against mouthpiece, jaw pressure controls vibration. Warm, reedy, voice-like tone. (3) Clarinet -- single-reed embouchure similar to saxophone but with smaller mouthpiece, narrower reed, tighter lip seal. Cylindrical bore emphasizes odd harmonics, producing woody, hollow quality. Switching between instruments within a single session requires resetting the embouchure muscle memory -- different jaw pressures, different tongue positions, different air speeds. The multi-reed approach is particularly valuable for pedagogy: the same melodic concept demonstrated on three instruments reveals how timbre shapes musical meaning.",
+      "genealogy": {
+        "ancestors": ["Jazz flute tone production (degree 10, Shank)", "Saxophone reed vibration (degree 9, Caliman)", "Multi-instrumentalism (degree 4, Standifer -- trumpet/saxophone/voice)"],
+        "relationship": "Brazil extends the multi-instrumentalist thread from Standifer (degree 4, trumpet/saxophone/voice -- brass and reed families) into the woodwind family specifically. Where Standifer crosses instrument families (brass + reed + voice), Brazil spans within the woodwind family (flute + saxophone + clarinet), requiring three different embouchure configurations for the same family of instruments. The multi-reed technique adds the sixth node to the saxophone/reed theory branch, now the richest wind instrument branch in the engine."
+      }
+    },
+    {
+      "concept": "Blues-based flute technique (overblowing, humming, bent notes, percussive tonguing -- the flute as blues instrument)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/flute/blues-based-flute-technique.md",
+      "examples": [
+        "Joe Brazil -- blues-rooted flute in the Central District salon, teaching through timbral comparison across instruments",
+        "Rahsaan Roland Kirk -- flute as blues instrument with multiphonics, overblowing, percussive attack",
+        "Eric Dolphy -- angular blues phrasing on flute, avant-garde extensions of the blues tradition",
+        "Jeremy Steig -- rock-influenced jazz flute with aggressive overblowing and distortion"
+      ],
+      "description": "Blues-based flute playing transforms the flute from a cool, transparent instrument into a warm, gritty, blues-capable voice. Techniques include: (1) Overblowing -- pushing air beyond the bore's design capacity, creating harmonically complex distortion. (2) Humming while playing -- singing a note while playing a different note, producing multiphonic two-pitch chords from a single player. (3) Bent notes -- partial fingering (lifting keys partially) combined with airstream angle changes to achieve blue-note pitch bending. The flute blue note is less controllable than the saxophone blue note, giving it an unstable, yearning quality. (4) Percussive tonguing -- hard, rhythmic tongue attacks and flutter-tonguing that give the flute drum-like rhythmic presence. These techniques represent the opposite aesthetic from Shank's (degree 10) cool, classical-influenced flute.",
+      "genealogy": {
+        "ancestors": ["Jazz flute tone production (degree 10, Shank)", "Blue note thread -- ten prior deployments (degrees 0-10)", "Blues tradition in the Central District (degrees 3, 4, 5)"],
+        "relationship": "Brazil's blues-based flute is the stylistic opposite of Shank's (degree 10) cool flute -- the first within-instrument stylistic contrast for the flute. The flute thread now mirrors the saxophone thread's cool/hard bop contrast (Caliman 9 vs. Shank 10). The blue note thread gains its eleventh deployment with a mechanically unique entry: partial fingering + airstream angle, distinct from all previous deployments (embouchure pressure, slide, key crush, etc.). Two flute nodes, two approaches: cool/recorded (Shank) and blues/oral (Brazil)."
+      }
+    },
+    {
+      "concept": "Community-based pedagogy (the salon model -- informal teaching through personal presence, home as classroom)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/pedagogy/salon-model-community-pedagogy.md",
+      "examples": [
+        "Joe Brazil -- home in the Central District as gathering place for musicians, decades of private mentorship",
+        "Barry Harris -- informal bebop piano workshops in Detroit and New York living rooms for decades",
+        "Lennie Tristano -- private cool jazz instruction producing Lee Konitz, Warne Marsh, and a lineage of players",
+        "The African-American church tradition -- music learned through participation, not formal instruction"
+      ],
+      "description": "The salon model of jazz pedagogy: a knowledgeable practitioner opens their home, and students come to learn by being present. No institutional affiliation, no formal curriculum, no academic records. Unlike Berry's (degree 5) implicit performance-as-pedagogy, the salon model is explicit and intentional -- the teacher knows they are teaching, the student knows they are learning. The relationship is direct, personal, sustained, and open-ended. The salon predates the conservatory in every musical tradition. In jazz, where the music was excluded from academic institutions until the 1960s, the salon was the primary transmission vector. The model is the most vulnerable to erasure because it produces the least documentation -- when the salon keeper dies, the knowledge survives only in the students who were present.",
+      "genealogy": {
+        "ancestors": ["Institutional pedagogy -- UW faculty (degree 4, Standifer)", "Performance pedagogy -- nightly playing as implicit teaching (degree 5, Berry)", "Formal/informal pedagogy axis (degrees 4-10)"],
+        "relationship": "Brazil completes a three-point educator spectrum: Institutional (Standifer 4, university), Performance (Berry 5, nightly playing), and Salon (Brazil 11, home-based mentorship). The three models have radically different survival characteristics: recordings are most durable, institutions second, oral tradition most fragile. The salon model is explicit teaching (unlike Berry's implicit performance) but without institutional mediation (unlike Standifer's university structure). The pedagogy axis extends from four modes to five with the salon model added."
+      }
+    },
+    {
+      "concept": "Blue note -- flute bent note (eleventh deployment, partial fingering + airstream angle mechanism)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/flute/blue-note-flute-bent-partial-fingering.md",
+      "examples": [
+        "Joe Brazil -- blues-inflected flute bending in the Central District salon tradition",
+        "Rahsaan Roland Kirk -- extreme flute pitch bending with overblown multiphonics",
+        "Eric Dolphy -- angular blue-note bending on flute, pushing the pitch language beyond conventional blues",
+        "Hubert Laws -- classical technique applied to blues material, controlled partial-fingering bends"
+      ],
+      "description": "Eleventh deployment of the blue note thread. The flute blue note is achieved through partial fingering (lifting keys partially to detune the air column) combined with airstream angle changes (tilting the embouchure to alter pitch). Unlike the saxophone blue note (jaw pressure on reed, degree 9-10) or the trombone blue note (slide position, degree 7), the flute blue note requires balancing between two fingering positions while maintaining tone -- the pitch sits in an unstable zone between two defined notes, giving it a yearning, unresolved quality. This is the most mechanically distinctive blue-note deployment in the engine: no reed, no slide, no key crush. The bending mechanism is aerodynamic (airstream) and digital (finger position) simultaneously.",
+      "genealogy": {
+        "ancestors": ["Blue note -- alto cool bend (degree 10, Shank)", "Blue note -- saxophone voice (degree 9, Caliman)", "Blue note -- all ten prior deployments (degrees 0-10)"],
+        "relationship": "Eleven deployments across twelve degrees. The flute blue note adds the most mechanically distinctive mechanism yet: partial fingering + airstream angle, with no vibrating element the player touches directly. The thread now has three wind-instrument entries: saxophone voice (9), alto cool bend (10), and flute bent note (11). The flute entry is the first where the bending mechanism involves no physical contact with the vibrating element -- the player bends the pitch by changing the air, not by changing pressure on a reed or slide. Eleven deployments: bass-line (0), guitar (1), vocal (3), trumpet (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), sax voice (9), alto cool bend (10), flute bent note (11)."
+      }
+    }
+  ],
+  "cross_references": ["S36-003", "S36-004", "S36-005", "S36-010"],
+  "seattle_connection": "Moved to Seattle in the 1960s and settled in the Central District. His home became a gathering place for musicians -- the site of decades of informal jazz pedagogy. Brazil's primary contribution was not recordings or performances but the direct, personal transmission of musical knowledge through community mentorship. The Salon Keeper pattern: presence-first model where the primary legacy is people, not artifacts. Central District return after four non-CD degrees (7-10). Energy-2 profile consistent with steady, community-sustaining, decades-long presence.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Multi-reed embouchure technique -- three tone-production systems (flute/saxophone/clarinet), three distinct embouchure configurations; extends multi-instrumentalist thread from Standifer (4) into woodwind-specific territory",
+      "Blues-based flute technique -- overblowing, humming, bent notes, percussive tonguing; the stylistic opposite of Shank's (10) cool flute; first within-instrument flute contrast",
+      "Community-based pedagogy (salon model) -- completes three-point educator spectrum: institutional (Standifer 4), performance (Berry 5), salon (Brazil 11); most fragile survival profile",
+      "Blue note -- eleventh deployment; flute bent note via partial fingering + airstream angle; most mechanically distinctive mechanism in the thread"
+    ],
+    "immediate_items": [
+      "Genre rotation: STILL CRITICAL. TWELVE consecutive jazz artists. Documented as intentional CSV architecture (degrees 0-22 are jazz). The pressure continues to build.",
+      "Central District returns at degree 11 after four-degree absence (7-10). Geographic oscillation documented.",
+      "Cornish pipeline: two artists (Priester 7, Caliman 9). Stable. Brazil is not Cornish -- salon model, not institutional.",
+      "Gender dimension: two women in twelve degrees (Anderson 3, Bown 6). Ten men. CRITICAL. Six consecutive male artists (7-11). ESCALATED.",
+      "Flute jazz theory branch: extended from one to two nodes. Blues-based flute (Brazil 11) contrasts cool flute (Shank 10). First within-instrument flute contrast.",
+      "Educator spectrum (NEW): three models documented -- institutional (Standifer 4), performance (Berry 5), salon (Brazil 11). Complete pedagogical taxonomy.",
+      "Community-builder archetype (NEW): artist whose primary legacy is people, not artifacts. No major recordings. Track subsequent artists with similar profiles.",
+      "Salon model survival vulnerability: Brazil's knowledge survives only in the students who were present. Document this fragility for all future oral-tradition entries.",
+      "Detroit jazz pipeline (NEW): thirteenth educational pipeline. First major-city jazz infrastructure pipeline in the engine.",
+      "Pacific Jazz label thread: one artist (Shank 10). Stable. Not applicable to Brazil (local label only).",
+      "Bossa nova / cross-cultural fusion thread: one entry (Shank 10). Stable. Not applicable to Brazil.",
+      "Jazz-pop crossover thread: one entry (Shank 10). Stable. Not applicable to Brazil.",
+      "Within-family stylistic pairs: Caliman/Shank saxophone pair (9/10). Track flute pair: Shank/Brazil (10/11) -- cool vs. blues flute.",
+      "Saxophone/reed theory branch: six nodes at degree 11 (tone production, hard bop vocabulary, overtone control, cool voicings, flute production, multi-reed technique). Richest wind branch.",
+      "Shank Pacific Jazz discography (full catalog). Carried from degree 10.",
+      "Caliman Cornish teaching specifics. Carried from degree 9.",
+      "ECM label thread: three artists (Frisell 1, Priester 7, Peacock 8). Stable.",
+      "Peacock Seattle-area documentation. Carried from degree 8.",
+      "Bown session discography. Carried from degree 6.",
+      "Berry recordings catalog. Carried from degree 5.",
+      "Post-Jackson Street venue mapping. Carried from degree 5.",
+      "Ray Charles as Central District contemporary. Carried from degrees 4-11."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: twelve named patterns (Export, Draw, Exile, Stay, Teacher, Persistence, Erasure, Pedagogue-Draw, Quiet Draw, Working Pedagogue-Draw, Late Homestead, Salon Keeper). Classify every degree.",
+      "Educator spectrum: three models (institutional, performance, salon). NEW complete taxonomy. Track all subsequent educators.",
+      "Composition-improvisation spectrum: nine positions stable. Brazil is not primarily a composer or performer in the recorded sense.",
+      "Rhythmic spectrum: nine positions stable from degree 10. Bossa nova syncopation most recent addition.",
+      "Chromaticism thread: eleven deployments. Multi-reed chromaticism across three instruments added (Brazil).",
+      "Blue note thread: eleven deployments across twelve degrees. Flute bent note is the most mechanically distinctive mechanism. Three wind-instrument entries now (9, 10, 11).",
+      "Artist-as-institution spectrum: twelve positions (The Salon Keeper added -- presence-first, community-building, no artifacts). Continue tracking.",
+      "Saxophone/reed theory branch: six nodes at degree 11. Two sub-branches (saxophone and flute). Richest wind branch.",
+      "Flute theory branch: two nodes at degree 11 (cool flute production at 10, blues-based technique at 11). First within-instrument contrast.",
+      "Bass theory branch: three nodes from degree 8. Stable.",
+      "Vocal theory branch: five nodes from degree 3. Stable.",
+      "Brass theory branch: three nodes across two degrees. Stable.",
+      "Piano theory branch: seven nodes across degrees 5-6. Richest branch overall.",
+      "Body-as-sound-source thread: eight instruments stable. Brazil's instruments (flute, saxophone, clarinet) already represented. Multi-instrument switching dimension is the new contribution.",
+      "Amiga Principle gradient: seven scales (large ensemble/Jones, small group/Bown, solo/Berry, piano trio/Peacock, hard bop combo/Caliman, studio session/Shank, salon/Brazil). Continue tracking.",
+      "Educational pipeline diversity: thirteen pipelines across twelve degrees (Garfield, Berklee, UC Santa Cruz, UW, bandstand apprenticeship, self-taught, Seattle University, DuSable, Cornish, Westlake/LA, LA club scene, University of North Carolina, Detroit jazz scene). Detroit adds first major-city jazz infrastructure pipeline.",
+      "Formal/informal pedagogy axis: five modes (institutional, bandstand, self-taught, performance, salon). Salon added at degree 11.",
+      "Gender-barrier gradient: two women, ten men in twelve degrees. CRITICAL tracking continues. Six consecutive male artists.",
+      "Jackson Street corridor categories: four non-corridor artists (7, 8, 9, 10). Brazil (11) arrived post-corridor decline but benefits from the cultural infrastructure Jackson Street built.",
+      "Label threads: Mercury (0, 3), Columbia (6), ECM (1, 7, 8), Catalyst/Mainstream (9), Pacific Jazz/World Pacific (10), local (4, 5, 11). Track all label connections.",
+      "Electronic jazz waves: three waves stable. Brazil is acoustic. Represents the oral tradition pole.",
+      "Zen thread: from degree 8. Not applicable to Brazil. Continue tracking.",
+      "Energy spectrum: distribution 1:7:4 (one 1, seven 2s, four 3s). Energy-2 extends dominance with seventh artist. Dominant cluster now nearly twice the energy-3 cluster.",
+      "Cornish College pipeline: two artists (Priester 7, Caliman 9). Stable. Brazil is not Cornish.",
+      "West Coast / LA pipeline: three artists (8, 9, 10). Stable. Brazil is not LA -- Detroit pipeline.",
+      "Within-family stylistic pairs: saxophone pair (Caliman 9 / Shank 10), flute pair (Shank 10 / Brazil 11 -- cool vs. blues). Two pairs now.",
+      "Cross-cultural fusion thread: one entry (Shank 10, bossa nova). Stable.",
+      "Jazz-pop crossover thread: one entry (Shank 10, California Dreamin'). Stable.",
+      "Central District geographic oscillation: CD at degrees 0-6, absent 7-10, returns at 11. Track future oscillations."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "No major commercial recordings",
+      "year": null,
+      "label": "local",
+      "format": "N/A",
+      "status": "no known commercially available recordings",
+      "significance": "Brazil's absence from the recorded catalog is not a gap in the research -- it IS the research finding. His primary contribution was community mentorship, not recorded output. The salon model produces people, not artifacts. This is the first S36 artist whose key album entry documents the absence of albums as the structurally significant fact."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Floyd Standifer", "relationship": "Educator spectrum: institutional (Standifer, UW faculty) vs. salon (Brazil, home teaching). Both multi-instrumentalists. Both Central District. Both committed to transmitting the tradition. Different methods, same mission.", "future_degree": 4},
+    {"name": "Overton Berry", "relationship": "Central District persistence parallel. Berry persists through performance; Brazil persists through teaching. Both are local, un-famous, and essential. Two complementary nodes of community sustenance.", "future_degree": 5},
+    {"name": "Bud Shank", "relationship": "Second flute in the engine. Shank (cool, recorded, West Coast) vs. Brazil (blues-based, unrecorded, Central District). Flute thread gains second data point and first internal contrast.", "future_degree": 10},
+    {"name": "Ernestine Anderson", "relationship": "Central District return. Anderson established the CD as the engine's founding neighborhood. Brazil returns to the CD after four non-CD degrees (7-10), reaffirming the neighborhood's centrality to Seattle jazz.", "future_degree": 3}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones -- attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson -- attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer -- Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry -- Central District native, self-taught. No institutional music education. Autodidact path.",
+    "degree_6": "Patti Bown -- Central District native, Seattle University (not Garfield). Formal training via Jesuit university.",
+    "degree_7": "Julian Priester -- NOT a Garfield product. DuSable High School (Chicago) under Captain Dyett. Cornish College of the Arts faculty.",
+    "degree_8": "Gary Peacock -- NOT a Garfield product. Burley, Idaho. Westlake College (LA). U.S. Army (Germany).",
+    "degree_9": "Hadley Caliman -- NOT a Garfield product. Idabel, Oklahoma. Los Angeles jazz scene. Cornish College of the Arts faculty.",
+    "degree_10": "Bud Shank -- NOT a Garfield product. Dayton, Ohio. University of North Carolina. Stan Kenton Orchestra. Los Angeles / Pacific Jazz.",
+    "degree_11": "Joe Brazil -- NOT a Garfield product. Detroit, Michigan. Detroit jazz scene. Settled in Central District as salon-model educator. Fifth consecutive non-Garfield degree.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": false,
+    "the_erasure": false,
+    "pedagogue_draw": false,
+    "quiet_draw": false,
+    "the_seeker": false,
+    "working_pedagogue_draw": false,
+    "late_homestead": false,
+    "salon_keeper": true,
+    "native_born": false,
+    "self_taught": false,
+    "institution_type": "salon keeper -- presence-first community builder, home-based mentorship, no significant recorded output, primary legacy is the musicians he nurtured",
+    "amiga_principle": "salon_community_builder",
+    "gender": "male",
+    "instrumentalist": true,
+    "gender_barrier": "not applicable (male)"
+  },
+  "sources_count": 15,
+  "word_count_research": 3580,
+  "release_date": "2026-03-28"
+}
