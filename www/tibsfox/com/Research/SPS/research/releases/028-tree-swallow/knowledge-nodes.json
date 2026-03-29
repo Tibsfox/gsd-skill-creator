@@ -1,0 +1,286 @@
+{
+  "degree": 28,
+  "species": "Tree Swallow",
+  "scientific_name": "Tachycineta bicolor",
+  "slug": "028-tree-swallow",
+  "sound_type": "liquid twittering gurgle",
+  "energy": 4,
+  "ecosystem": "open field near water",
+  "season": "spring/summer (earliest-arriving PNW swallow -- late February to mid-March, breeding through August, bayberry diet enables early migration and northern overwintering)",
+  "family": "Hirundinidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; open agricultural fields, freshwater marshes, lakeshores, beaver ponds, and roadside nest box routes throughout the Puget Sound lowlands and Skagit Valley -- wherever standing water meets open grassland."
+  },
+  "taxonomy_note": {
+    "description": "The Tree Swallow is the third Hirundinidae in the engine and the trio closer. Genus Tachycineta from Greek takhys (swift) + kineo (to move) = 'the swift-mover.' Species epithet bicolor from Latin bi- (two) + color = 'two-colored,' describing the dramatic iridescent blue-green above / clean white below plumage. Full binomial: 'the two-colored swift-mover.' Completes the Tachycineta pair with Violet-green Swallow (T. thalassina) at degree 27.",
+    "current_family": "Hirundinidae",
+    "new_family": false,
+    "family_count_in_engine": 16,
+    "hirundinidae_count_in_engine": 3,
+    "name_etymology": "Tachycineta = Greek takhys (swift, fast) + kineo (to move, to set in motion). The genus name means 'the one that moves swiftly' -- the swift-mover. Bicolor = Latin bi- (two) + color (color), meaning 'two-colored.' Describes the stark blue-green dorsal / white ventral contrast. Full translation: 'the two-colored swift-mover.' Compare: T. thalassina = 'the sea-colored swift-one.'",
+    "genus_note": "Tachycineta contains 9 species, all in the Americas. Two are common PNW breeders: T. thalassina (Violet-green Swallow, degree 27) and T. bicolor (Tree Swallow, degree 28). Both now in the engine at consecutive degrees, completing the Tachycineta pair.",
+    "tachycineta_pair": {
+      "degree_27": "Tachycineta thalassina (Violet-green Swallow) -- sea-colored, cliff/montane specialist, no dietary backup",
+      "degree_28": "Tachycineta bicolor (Tree Swallow) -- two-colored, wetland/field generalist, bayberry dietary flexibility",
+      "comparison_to_catharus": "Parallels the Catharus pair at degrees 18-19 (Swainson's Thrush, Veery). Both pairs place same-genus species in consecutive degrees. Catharus: ascending vs. descending spiral (direction). Tachycineta: cliff alpine specialist vs. lowland wetland generalist (habitat niche).",
+      "status": "COMPLETE"
+    },
+    "swallow_trio": {
+      "degree_26": "Progne subis (Purple Martin) -- patriarch, large, colonial, liquid gurgle, stream",
+      "degree_27": "Tachycineta thalassina (Violet-green Swallow) -- cliff dweller, small, solitary, liquid twitter, rain",
+      "degree_28": "Tachycineta bicolor (Tree Swallow) -- centrist, medium, loosely colonial, liquid twittering gurgle, brook",
+      "status": "COMPLETE",
+      "structure": "Bookend extremes (26, 27) with centrist resolution (28). One family, three liquid states, full within-family gradient."
+    }
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-8,000",
+    "peak_energy_band_hz": "3,000-6,000",
+    "call_duration_s": "1-3 per twittering bout",
+    "note_rate_per_second": "8-15 (at perceptual fusion threshold -- some passages fuse into gurgle, some remain discrete twitter, creating mixed articulation)",
+    "note_structure": "Semi-fused FM elements with soft onset/offset boundaries. Less sharply defined than Violet-green chips, less continuous than martin gurgle. Notes perceptible but not sharply separated -- like bowed strings with faster bow changes rather than plucked strings.",
+    "note_types": "Three primary: (1) Twittering gurgle -- the primary vocalization, rapid semi-fused notes with liquid bubbling quality, the brook. (2) Three-note call -- veet-veet-veet contact call near nest, higher-pitched and discrete. (3) Churring -- harsh buzzy element used in aggressive cavity defense encounters.",
+    "phrase_structure": "More complex than either predecessor. Primary twittering gurgle has tumbling quality -- notes overlapping, bleeding into each other, separating briefly, rejoining. Not burst-like (Violet-green) or stream-like (martin) but flowing with visible structure.",
+    "timbre": "Moderate, warm, liquid. Between the martin's rich opacity and the Violet-green's crystalline transparency. More body than the Violet-green's thin chips, less depth than the martin's resonant gurgle. Often described as 'pleasant,' 'cheerful,' 'chirpy.'",
+    "amplitude": "Moderate. Louder than the Violet-green, quieter than the martin. The centrist dynamic.",
+    "context": "Vocalizes from perches near nest (fence posts, wire, nest box tops) and in flight. Roughly equal perched vs. aerial delivery. Dawn singing from nest box common and conspicuous.",
+    "key_property": "THE LIQUID TWITTERING GURGLE -- the 29th acoustic element. Semi-continuous mixed articulation at the perceptual fusion threshold. The brook: water that moves in visible pulses over stones. Synthesis of the martin's stream (26) and the Violet-green's rain (27). Third and final liquid sound in the liquid trilogy."
+  },
+  "liquid_trilogy": {
+    "degree_26": {
+      "species": "Purple Martin",
+      "sound": "liquid gurgle",
+      "metaphor": "stream",
+      "articulation": "legato (continuous)",
+      "continuity": "notes flow into each other without breaks"
+    },
+    "degree_27": {
+      "species": "Violet-green Swallow",
+      "sound": "liquid twitter",
+      "metaphor": "rain",
+      "articulation": "staccato (discrete)",
+      "continuity": "each chip a complete event with micro-silences between"
+    },
+    "degree_28": {
+      "species": "Tree Swallow",
+      "sound": "liquid twittering gurgle",
+      "metaphor": "brook",
+      "articulation": "mixed (semi-continuous)",
+      "continuity": "notes perceptible but grading into each other -- tumbling"
+    },
+    "principle": "A single timbral quality (liquid) maps to three different sounds depending on temporal organization (articulation). Timbre and articulation are independent dimensions. You need both coordinates to locate a sound in acoustic space."
+  },
+  "plumage": {
+    "males": "Entire dorsal surface (back, rump, crown, nape) brilliant iridescent blue-green. Underparts clean bright white. Stark two-toned contrast. Bicolor = literally true.",
+    "females": "Similar pattern but duller. First-year females: brown-green back, becoming more iridescent with age. Full adult female plumage may not develop until 2nd-3rd year. Unique age-dependent female plumage in the trio.",
+    "comparison": {
+      "purple_martin_26": "Uniformly dark iridescent purple-black (male). Minimal contrast.",
+      "violet_green_27": "Iridescent green + violet above, white below. Maximum contrast. White face/rump patches.",
+      "tree_swallow_28": "Iridescent blue-green above, white below. High contrast but simpler pattern -- no face or rump marks. Clean two-toned."
+    }
+  },
+  "dietary_flexibility": {
+    "description": "The Tree Swallow is the ONLY North American swallow that can eat plant material -- bayberries (Myrica spp.) and other small waxy fruits. No other Hirundinidae in the Western Hemisphere has this capability.",
+    "consequences": [
+      "Overwintering farther north than any other North American swallow (Gulf Coast, Carolinas, occasionally mid-Atlantic)",
+      "Earliest spring arrival in PNW (late February to mid-March, weeks ahead of other swallows)",
+      "Cold-snap survival when flying insects vanish (berry backup fuels during insect-poor periods)",
+      "Widest breeding range of any North American swallow (Alaska to Newfoundland)"
+    ],
+    "mechanism": "Specialized lipase production for waxy lipid digestion, adjustable gut transit time (short for insects, long for berries), seasonal gizzard flexibility.",
+    "significance": "The centrist's unique capability. Neither the Purple Martin nor the Violet-green Swallow can eat plant material. The Tree Swallow's middle position on most axes frees it from constraints that trap the bookends. Dietary flexibility is the clearest expression of this freedom."
+  },
+  "nest_box_competition": {
+    "description": "The Tree Swallow uses both natural cavities and artificial nest boxes. Where nest boxes are present, it competes with Eastern Bluebirds and House Sparrows.",
+    "competitors": [
+      "Eastern Bluebird (Sialia sialis) -- similar size, similar habitat, similar cavity requirements. Resolved by paired-box spacing (5 m apart).",
+      "House Sparrow (Passer domesticus) -- aggressive, destroys eggs, kills nestlings/adults. Requires active management.",
+      "Conspecifics -- female-female aggression for nest sites, male territorial defense of boxes."
+    ],
+    "strategy": "Middle nesting strategy: benefits from nest boxes but not trapped by them. Remove all boxes and the species persists in natural cavities. Flexible, not dependent."
+  },
+  "model_organism": {
+    "description": "The most intensively studied swallow in North America. Model organism for aerial insectivore ecology.",
+    "research_advantages": [
+      "Nest box acceptance (standardized monitoring)",
+      "Continent-wide range (environmental gradient studies)",
+      "Handling tolerance (low observer effects)",
+      "Single-brood strategy (clean reproductive metrics)",
+      "Aerial insectivore bioindicator (tracks insect abundance)"
+    ],
+    "landmark_findings": [
+      "Insect decline: declining clutch sizes over 30-40 years tracking 'insect apocalypse'",
+      "Mercury bioaccumulation: sentinel for contaminated freshwater food webs",
+      "Agricultural impacts: reduced success near intensive farming (pesticides, monoculture)",
+      "Climate phenology: spring arrival advanced 9-12 days over 50 years",
+      "Extra-pair paternity: 50-80% of broods contain extra-pair young in some populations"
+    ]
+  },
+  "theory_nodes": [
+    {
+      "concept": "The liquid twittering gurgle -- semi-continuous mixed articulation at the perceptual fusion threshold (the brook -- water that moves in visible pulses over stones, synthesis of the stream and the rain, the 29th acoustic element, the liquid trilogy's resolution)",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/liquid-twittering-gurgle/",
+      "examples": [
+        "Tree Swallow: semi-fused FM notes at 8-15/sec, wobbling around the perceptual fusion threshold. Some passages fuse (gurgle). Some remain discrete (twitter). Mixed articulation.",
+        "Purple Martin (degree 26): continuous FM stream, all notes fused, legato. The stream.",
+        "Violet-green Swallow (degree 27): discrete FM chips with clean boundaries, staccato. The rain.",
+        "Brook analogy: a brook has visible pulses (water going over stones) within continuous flow. Not smooth like a deep stream. Not separated like raindrops. Tumbling. The Tree Swallow IS the brook."
+      ],
+      "music_theory_parallel": "The liquid twittering gurgle completes the liquid trilogy by occupying the mixed-articulation position between legato (martin) and staccato (Violet-green). The notes hover at the perceptual fusion threshold where the ear cannot decide if the sound is continuous or discrete. This threshold region is musically important: it is where tremolo lives (rapid alternation that is neither sustained nor fully articulated), where trills become rolls, where individual drum hits become a buzz. The Tree Swallow's vocalization is the tremolo of the swallow family -- right at the edge where discrete becomes continuous."
+    },
+    {
+      "concept": "The swallow trio complete -- three consecutive Hirundinidae mapping the full within-family gradient (patriarch-cliff dweller-centrist, stream-rain-brook, the engine's densest family cluster, three degrees zero gaps)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/swallow-trio-complete/",
+      "examples": [
+        "Degree 26 (Purple Martin): heavy, low, colonial, dependent. The patriarch. The stream.",
+        "Degree 27 (Violet-green Swallow): light, high, solitary, independent. The cliff dweller. The rain.",
+        "Degree 28 (Tree Swallow): medium, moderate, loosely colonial, flexible. The centrist. The brook.",
+        "Structural pattern: thesis (26), antithesis (27), synthesis (28). ABA form. Bookend extremes resolved by a centrist that has its own unique capabilities (berries, most-studied)."
+      ],
+      "music_theory_parallel": "The swallow trio is the engine's most concentrated family exploration: three consecutive degrees, no gaps, full gradient. It maps the complete variation space of PNW Hirundinidae in minimum degrees. The structure is thesis-antithesis-synthesis (Hegelian dialectic in three degrees): the martin states the theme, the Violet-green inverts it, the Tree Swallow resolves it. But the resolution is not mere average -- it introduces novel elements (dietary flexibility, model organism status) that neither extreme possesses. The centrist is richer than the mean. In sonata form: exposition (26), development (27), recapitulation with new material (28)."
+    },
+    {
+      "concept": "Dietary flexibility -- the only North American swallow that can eat plant material (bayberry backup enables northern overwintering, earliest arrival, cold-snap survival, widest range -- the centrist's unique trick)",
+      "level": "intermediate",
+      "department": "ecology/foraging",
+      "college_path": ".college/ecology/foraging/dietary-flexibility/",
+      "examples": [
+        "Tree Swallow: insects + bayberries (Myrica spp.) + small waxy fruits. Specialized lipases for wax digestion. Adjustable gut transit time.",
+        "Purple Martin (26): insects only. Obligate aerial insectivore. No plant backup.",
+        "Violet-green Swallow (27): insects only. Obligate aerial insectivore. No plant backup.",
+        "Consequence: Tree Swallow overwinters farther north, arrives earliest in spring, survives cold snaps that starve other swallows. The backup plan changes the continental range."
+      ],
+      "music_theory_parallel": "The Tree Swallow's bayberry diet is a backup instrument -- the ability to switch from the primary (insects/main instrument) to a secondary (berries/backup instrument) when conditions require it. In music, this is the multi-instrumentalist advantage: a musician who plays both guitar and piano can perform in contexts where either instrument alone would fail. The versatility is not about being best at either but about being competent at both. The Tree Swallow is not the best insect hunter (the martin catches larger prey, the Violet-green is more agile). It is the most versatile feeder. Versatility, not specialization, is the centrist's advantage."
+    },
+    {
+      "concept": "Model organism -- the most-studied swallow in North America (decades of nest box data, continent-wide datasets, sentinel for insect decline, mercury, agricultural impacts, climate change -- a distributed environmental sensor network)",
+      "level": "intermediate",
+      "department": "ecology/monitoring",
+      "college_path": ".college/ecology/monitoring/model-organism/",
+      "examples": [
+        "Tree Swallow nest box monitoring: standardized data collection across hundreds of sites, thousands of nests per year, decades of continuous records.",
+        "Insect decline sentinel: declining clutch sizes and later laying dates over 30-40 years correlate with declining insect populations.",
+        "Mercury biomonitor: Tree Swallows near contaminated waterways accumulate mercury from aquatic insect prey, making invisible pollution visible.",
+        "Climate phenology: spring arrival advancing 9-12 days over 50 years across North America -- one of the strongest datasets for climate-driven phenological shift."
+      ],
+      "music_theory_parallel": "The Tree Swallow as model organism is the reference recording -- the canonical performance against which all others are measured. In music theory, certain recordings serve as reference standards (Glenn Gould's Goldberg Variations, Miles Davis's Kind of Blue). The Tree Swallow is the reference swallow: when you want to know what aerial insectivores are doing, you check the Tree Swallow data first. Its nest box programs are the continuous monitoring feed. Its reproductive metrics are the signal. Its long-term datasets are the archive. The most-studied species is the one with the deepest recording history."
+    },
+    {
+      "concept": "Tachycineta pair complete -- two same-genus species in consecutive degrees (sea-colored 27, two-colored 28), the engine's second same-genus pair, paralleling Catharus (18-19), nested within the Hirundinidae trio (26-28)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/tachycineta-pair-complete/",
+      "examples": [
+        "Tachycineta: Violet-green Swallow (27, sea-colored, alpine cliff specialist) and Tree Swallow (28, two-colored, lowland wetland generalist). Same genus, opposite niches.",
+        "Catharus: Swainson's Thrush (18, ascending spiral) and Veery (19, descending spiral). Same genus, opposite acoustic direction.",
+        "Both pairs demonstrate: same evolutionary hardware, different ecological/acoustic parameters. The genus is the shared platform. The species is the divergent configuration.",
+        "Tachycineta pair is nested within Hirundinidae trio (26-28): family > genus > species expressed in sequential degrees."
+      ],
+      "music_theory_parallel": "The Tachycineta pair completes the engine's second same-genus consecutive adjacency. The pair is now fully resolvable: both members known, both compared. The key finding is that within-genus variation in Tachycineta is organized along a habitat axis (cliff/alpine vs. field/wetland) while within-genus variation in Catharus was organized along an acoustic axis (ascending vs. descending). Different genera, different axes of variation. The engine now has two data points for how genera diversify, and they diversify differently. The genus is not a universal template -- it is a platform that each lineage customizes in its own way."
+    },
+    {
+      "concept": "Energy octet -- eight consecutive E=4 degrees (21-28) demonstrating sustained high energy across eight different acoustic textures while the dynamic level holds constant (the longest plateau in engine history -- must break)",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-octet/",
+      "examples": [
+        "Degrees 21-28: hammer, drum, groove reset, hoarse warble, caroling, liquid gurgle, liquid twitter, liquid twittering gurgle. Eight textures at sustained E=4.",
+        "The E=4 octet: the longest energy plateau in engine history. Eight degrees. Eight different sounds. Same dynamic level. Exceeds the initial E=2 run (degrees 0-7).",
+        "The plateau now spans more than one-fifth of all degrees emitted. The engine has been at E=4 since the Northern Flicker's wick-wick-wick at degree 21.",
+        "In a symphony: the sustained fortissimo passage that has gone on so long the audience wonders if the music has only one dynamic level. The break, when it comes, will be the most dramatic contrast in the engine's history."
+      ],
+      "music_theory_parallel": "Eight consecutive E=4 degrees is the engine's energy octet -- formally the longest unbroken energy plateau. The octet now exceeds the initial E=2 run (degrees 0-7, which contained a 0-to-2 transition). Eight degrees at a sustained high dynamic is exceptional. The variety within the plateau is remarkable: percussion (flicker voice, drum), tonal melody (grosbeak, tanager, robin), and three liquid textures (martin, Violet-green, Tree Swallow). The dynamic holds constant while every other parameter changes. The plateau MUST break. Eight degrees of E=4 cannot continue without the engine losing dynamic range. The break -- whether to E=5 (louder: gull, corvid, raptor) or back to E=2 or E=3 (quieter: a sandpiper, a grebe, a rail) -- will be the most impactful dynamic event since the original E=2 to E=3 transition at degree 15."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-026",
+      "title": "Purple Martin (Degree 26)",
+      "connection": "SWALLOW TRIO BOOKEND. The large extreme. Martin: 45-60 g, obligate colonial, continuous liquid gurgle, sea-level, dependent on nest boxes. Tree Swallow: 17-25 g, loosely colonial, liquid twittering gurgle, lowland fields, flexible nest strategy. The patriarch and the centrist. The stream and the brook. First and last of three swallows."
+    },
+    {
+      "project": "SPS-027",
+      "title": "Violet-green Swallow (Degree 27)",
+      "connection": "TACHYCINETA PAIR COMPLETE. Same genus (Tachycineta), consecutive degrees. Violet-green: T. thalassina, sea-colored, cliff-dwelling alpine specialist, insects only, 14 g. Tree Swallow: T. bicolor, two-colored, wetland-dwelling lowland generalist, insects + berries, 17-25 g. Sister species with maximum niche separation. Two swift-movers named for their colors."
+    },
+    {
+      "project": "SPS-018",
+      "title": "Swainson's Thrush (Degree 18)",
+      "connection": "SAME-GENUS PAIR COMPARISON (first pair, first member). The Catharus pair (18-19) parallels the Tachycineta pair (27-28). Both place same-genus species in consecutive degrees. Catharus diversifies along an acoustic axis (direction of spiral). Tachycineta diversifies along a habitat axis (cliff/alpine vs. field/wetland). Different genera, different axes of variation."
+    },
+    {
+      "project": "SPS-019",
+      "title": "Veery (Degree 19)",
+      "connection": "SAME-GENUS PAIR COMPARISON (first pair, second member). The Veery completes the Catharus pair. The Tree Swallow completes the Tachycineta pair. Both are the second/closing members of same-genus consecutive pairs. Both resolve the within-genus variation introduced by the first member."
+    },
+    {
+      "project": "SPS-023",
+      "title": "Black-headed Grosbeak (Degree 23)",
+      "connection": "CONVERGENCE VS. DIVERGENCE, COMPLETE. The convergence trio (23-25) showed different families producing similar sounds. The swallow trio (26-28) shows one family producing different sounds. Both trios now complete. Opposite structural principles in consecutive multi-degree arcs."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Voice (Degree 21)",
+      "connection": "CAVITY ECONOMY EXTENDED. The flicker excavates cavities at degrees 21-22. The Tree Swallow uses old woodpecker holes at degree 28. The cavity economy spans seven degrees (21-28). Also: energy octet -- eight consecutive E=4 degrees (21-28), the longest plateau in engine history."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "FAMILY CLUSTER COMPARISON. The warbler quintet spans seven degrees (14-20) with a gap. The swallow trio spans three degrees (26-28) with no gaps. Both are multi-degree family explorations. The swallow trio is denser, more concentrated. The engine learned to represent families faster."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "RECOGNIZABILITY. Both are common, widespread, familiar birds known to the public. After the Violet-green's anonymity (degree 27), the Tree Swallow at degree 28 returns to familiarity. The robin was the archetype. The Tree Swallow is the model organism."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Tree Swallow documented as abundant breeder in the PNW. Nest box ecology, insect prey, bayberry diet, mercury biomonitoring, migration timing, climate change phenology."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Freshwater wetland and agricultural field ecosystems. Aquatic insect emergences as food source. Nest box management in agricultural landscapes. Intersection of farming and aerial insectivore ecology."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Night Owls (Soul/R&B, E=4, Seattle, self-released). The centrist sound. Middle-ground soul -- accessible, warm, moderate. Eighth consecutive E=4."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 27,
+    "total_entries": 29,
+    "families_represented": 16,
+    "largest_families": {
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Hirundinidae": 3,
+      "Paridae": 2,
+      "Cardinalidae": 2
+    },
+    "energy_plateau": "E=4 for 8 consecutive degrees (21-28) -- MUST BREAK",
+    "passeriformes_streak": "6 consecutive (23-28) -- MUST BREAK",
+    "open_ecosystem_streak": "3 consecutive (26-28)",
+    "liquid_trilogy": "COMPLETE (26-27-28)",
+    "swallow_trio": "COMPLETE (26-27-28)",
+    "tachycineta_pair": "COMPLETE (27-28)",
+    "same_genus_pairs": ["Catharus (18-19)", "Tachycineta (27-28)"],
+    "critical_gaps": [
+      "No marine/shoreline species in 28 degrees of 'The Sound of Puget Sound'",
+      "No corvid (Steller's Jay, crow, raven)",
+      "No raptor (Accipitridae, Falconidae)",
+      "No nocturnal species since degree 4 (24 degrees ago)",
+      "E=5 never used",
+      "Six consecutive Passeriformes"
+    ]
+  }
+}

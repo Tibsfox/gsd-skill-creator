@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 24&deg; &mdash; Ron Artis II &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #BF360C, #E65100);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .kexp-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E3F2FD;
+      color: #0D47A1;
+      border: 1px solid #64B5F6;
+      margin-left: 0.3rem;
+    }
+
+    .hawaii-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8F5E9;
+      color: #1B5E20;
+      border: 1px solid #66BB6A;
+      margin-left: 0.3rem;
+    }
+
+    .motown-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FCE4EC;
+      color: #880E4F;
+      border: 1px solid #F06292;
+      margin-left: 0.3rem;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8EAF6;
+      color: #1A237E;
+      border: 1px solid #9FA8DA;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #FFB74D;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #BF360C;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #BF360C;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .motown-box {
+      background: #FCE4EC;
+      border: 2px solid #880E4F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .motown-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #880E4F;
+      font-family: system-ui, sans-serif;
+    }
+    .motown-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .kexp-box {
+      background: #E3F2FD;
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .kexp-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #0D47A1;
+      font-family: system-ui, sans-serif;
+    }
+    .kexp-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .kexp-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .kexp-box td, .kexp-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #BBDEFB;
+    }
+    .kexp-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #0D47A1;
+    }
+
+    .hawaii-box {
+      background: #E8F5E9;
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .hawaii-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1B5E20;
+      font-family: system-ui, sans-serif;
+    }
+    .hawaii-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">24&deg;</div>
+      <div>
+        <h1>Ron Artis II</h1>
+        <div class="subtitle">Soul/Jazz &middot; Soul / R&amp;B / Gospel / Funk / Blues &mdash; Haleiwa, HI to Seattle 2010&ndash;present
+          <span class="energy-badge">Energy 4</span>
+          <span class="motown-badge">Motown Lineage</span>
+          <span class="hawaii-badge">First Pacific Origin</span>
+          <span class="kexp-badge">KEXP Label Proxy</span>
+          <span class="genre-badge">Soul/Jazz x2</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../023-allen-stone/index.html">Degree 23&deg; (Allen Stone)</a>
+      <a href="../018-maktub/index.html">Degree 18&deg; (Maktub)</a>
+      <a href="../021-polyrhythmics/index.html">Degree 21&deg; (Polyrhythmics)</a>
+      <a href="../022-foxy-apollo/index.html">Degree 22&deg; (Foxy Apollo)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          The invocation begins. Ron Artis II is the son of a Motown session player
+          who put keyboards on Michael Jackson&rsquo;s <em>Thriller</em> &mdash; the
+          best-selling album in history. Born on the mainland, raised on the North
+          Shore of Oahu in a family of eleven musicians, he carries a dynasty&rsquo;s
+          worth of musical DNA into every performance. Multi-instrumentalist. Family
+          bandleader. KEXP favorite. The first Pacific Island origin in the engine.
+          <em>The Island Export.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Every artist in the Seattle 360 engine created their music on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. Ron Artis II performs regularly in Seattle (Neptune Theatre, festivals)
+          on Duwamish land. His Haleiwa origin falls on the ancestral territory of
+          the <strong>Native Hawaiian people</strong> (Kanaka Maoli), specifically the
+          ahupua&lsquo;a of Waialua on the island of O&lsquo;ahu. The Duwamish Tribe
+          remains federally unrecognized. This acknowledgment was established at
+          degree 20 and applies to all releases.</p>
+        </div>
+
+        <!-- ========================================
+             MOTOWN LINEAGE
+             ======================================== -->
+
+        <div class="motown-box">
+          <h4>Motown Dynasty &mdash; Father on <em>Thriller</em>, Mother with Lena Horne</h4>
+          <p>Ron Artis II is the engine&rsquo;s first artist with <strong>direct Motown lineage</strong>.
+          His father <strong>Ron Artis Sr.</strong> was a Motown session player who played
+          keyboards on <strong>Michael Jackson&rsquo;s <em>Thriller</em></strong> &mdash;
+          the best-selling album in history. His mother <strong>Victoria Artis</strong> toured
+          as a vocalist with <strong>Lena Horne</strong> and other Motown greats. Eleven
+          children, all raised in music. The family IS the institution.</p>
+        </div>
+
+        <!-- ========================================
+             HAWAII ORIGIN
+             ======================================== -->
+
+        <div class="hawaii-box">
+          <h4>First Pacific Island Origin &mdash; Haleiwa, North Shore Oahu</h4>
+          <p>Ron Artis II grew up on the <strong>North Shore of Oahu, Hawaii</strong> &mdash;
+          2,680 miles from Seattle across the Pacific Ocean. The family settled in
+          <strong>Haleiwa</strong>, operating <strong>Art...is</strong>, a gallery and
+          music venue on their property. Every child plays multiple instruments.
+          Hawaiian music culture (slack-key, ukulele, kanikapila jam sessions, genre
+          fluidity, aloha ethic) is deeply embedded in Ron II&rsquo;s artistic DNA.
+          The first origin outside the continental United States.</p>
+        </div>
+
+        <!-- ========================================
+             KEXP AS LABEL
+             ======================================== -->
+
+        <div class="kexp-box">
+          <h4>First Media-Institution as Label &mdash; KEXP</h4>
+          <p>KEXP is a <strong>non-commercial, listener-supported radio station</strong>
+          (90.3 FM Seattle) that functions as the most powerful tastemaker in PNW
+          independent music. KEXP in the label field means: <strong>amplification and
+          legitimacy without any creative compromise</strong>. No masters owned,
+          no hits demanded, no creative direction imposed.</p>
+          <table>
+            <tr><th>Function</th><th>Traditional Label</th><th>KEXP</th></tr>
+            <tr><td>Discovery</td><td>A&amp;R scouts</td><td>DJ selection for rotation</td></tr>
+            <tr><td>Amplification</td><td>Marketing, distribution</td><td>Live sessions (YouTube/broadcast), playlists</td></tr>
+            <tr><td>Legitimacy</td><td>Label brand association</td><td>&ldquo;KEXP favorite&rdquo; as quality signal</td></tr>
+            <tr><td>Creative control</td><td>Label may direct</td><td>Zero interference</td></tr>
+            <tr><td>Master ownership</td><td>Label typically owns</td><td>Artist retains everything</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Fourth Consecutive E=4 &mdash; Longest Streak in the Engine</h4>
+          <p>Four consecutive E=4 degrees (21&ndash;24) &mdash; the longest sustained
+          energy level in the engine. Distribution shifts to <strong>2:13:6:4</strong>.
+          Four different subtypes, four different energy sources.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th><th>Source</th></tr>
+            <tr><td>21&deg;</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td><td>7&ndash;8 people, polyrhythmic mass</td></tr>
+            <tr><td>22&deg;</td><td>Foxy Apollo</td><td>Collective-kinetic</td><td>Young band, raw energy</td></tr>
+            <tr><td>23&deg;</td><td>Allen Stone</td><td>Vocal-kinetic</td><td>Gospel-trained voice, physical command</td></tr>
+            <tr><td><strong>24&deg;</strong></td><td><strong>Ron Artis II</strong></td><td><strong>Dynastic-kinetic</strong></td><td><strong>Motown lineage, family band, multi-instrumental virtuosity</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Motown Lineage</h2>
+
+        <p>Ron Artis II was born on <strong>August 31, 1986</strong> on the
+        mainland United States. His father <strong>Ron Artis Sr.</strong> was a
+        Motown session player &mdash; keyboards on Michael Jackson&rsquo;s
+        <em>Thriller</em>. His mother <strong>Victoria</strong> toured as a
+        vocalist with <strong>Lena Horne</strong>. When Ron II was approximately
+        four, the family moved to <strong>Oahu, Hawaii</strong>, settling on
+        the <strong>North Shore in Haleiwa</strong>.</p>
+
+        <p>The second eldest of <strong>eleven children</strong> &mdash; Stephanie,
+        Ron II, Victor, Stevon, PraiseJesus, Spirit, Martis, Kailua, American,
+        Thunderstorm, and Artis &mdash; Ron grew up in the
+        <strong>Ron Artis Family Band</strong>, learning piano by age four and
+        receiving a guitar at thirteen. The family operated <strong>Art...is</strong>,
+        a gallery and music venue in Haleiwa that became a community institution.</p>
+
+        <p>Brother <strong>Thunderstorm Artis</strong> reached the finals of
+        <strong>NBC&rsquo;s <em>The Voice</em> Season 18</strong> (2020), turning
+        all four coaches&rsquo; chairs. Brother <strong>Stevon</strong> plays drums
+        in Ron II&rsquo;s band <strong>The Truth</strong>.</p>
+
+        <p>Ron II has performed and collaborated with <strong>Mick Fleetwood</strong>
+        (Fleetwood Mac), <strong>Jack Johnson</strong>, <strong>Jake Shimabukuro</strong>,
+        <strong>Booker T. Jones</strong>, <strong>Eric Krasno</strong> (Soulive/Lettuce),
+        <strong>G Love</strong>, <strong>John Oates</strong> (Hall &amp; Oates), and
+        <strong>Joan Baez</strong>. Blues &amp; Soul Magazine called his voice
+        <strong>&ldquo;a voice from heaven, a cross between Eric Bibb and Al Jarreau.&rdquo;</strong></p>
+
+        <p>In December 2023, following the devastating <strong>Maui wildfires</strong>,
+        Ron II returned to Hawaii and donated <strong>over 200 instruments</strong> to
+        children who had lost theirs &mdash; featured on <strong>ABC&rsquo;s Good Morning
+        America</strong>. His song <strong>&ldquo;No Weight&rdquo;</strong>, performed
+        with daughter <strong>Ida Marie Artis</strong>, became the relief anthem.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <h2>Career Timeline</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1986 &middot; Born</div>
+          <p>Born August 31, 1986. Parents: Ron Artis Sr. (Motown session keyboards,
+          <em>Thriller</em>) and Victoria Artis (vocalist, toured with Lena Horne).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">~1990 &middot; Family Moves to Hawaii</div>
+          <p>Family relocates to Oahu. First Kailua, then Haleiwa on the North Shore.
+          Ron Artis Family Band begins. Art...is gallery and venue opens on Kupahu Street.
+          Piano by age 4. Eleven siblings, all musicians.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1999 &middot; Guitar at 13</div>
+          <p>Receives guitar for his thirteenth birthday. Develops mastery alongside piano.
+          Multi-instrumental prowess becomes evident &mdash; guitar, piano, ukulele, bass,
+          vocals.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2000s &middot; Hawaii Music Scene</div>
+          <p>Performs across Hawaii&rsquo;s most prestigious venues with The Truth
+          (featuring brother Stevon on drums). Collaborations with <strong>Mick Fleetwood</strong>,
+          <strong>Jack Johnson</strong>, and <strong>Jake Shimabukuro</strong> begin
+          through the North Shore music community.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2016 &middot; What Music Means to Me</div>
+          <p>Early album release. Features &ldquo;Before You Go,&rdquo; later performed
+          with <strong>Joan Baez</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2018 &middot; Soul Street</div>
+          <p>Debut full-length. 15 tracks, 56 minutes. Delta blues + gospel + Northern
+          soul + R&amp;B. &ldquo;A voice from heaven, a cross between Eric Bibb and
+          Al Jarreau&rdquo; (Blues &amp; Soul). Wide critical praise. Career-defining album.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2021 &middot; Purpose</div>
+          <p>Pandemic-era album. 13 tracks, 47 minutes. Themes of reflection, celebration,
+          and community. Released November 2021.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2022&ndash;2023 &middot; Seattle / Neptune Theatre</div>
+          <p>Plays <strong>Neptune Theatre</strong> in Seattle (October 2022, March 2023).
+          Opens for <strong>Jack Johnson&rsquo;s North American tour</strong>.
+          KEXP recognition grows.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2023 &middot; Maui Fire Response</div>
+          <p>After devastating Maui wildfires (August 2023), returns in December to donate
+          <strong>200+ instruments</strong> to children. Partners with Free Guitars 4 Kids.
+          Featured on <strong>ABC Good Morning America</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2024 &middot; We Are Not Machines</div>
+          <p>Latest album. 11 tracks, 42 minutes. &ldquo;The Human Experience&rdquo; &mdash;
+          loss, joy, love, pain, doubt, forgiveness. <strong>Grammy nomination submitted
+          by John Oates</strong>. Only 150 signed vinyl pressed.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2025 &middot; Hawaii State Tour + Made of Love Tour</div>
+          <p>Tours Hawaii (Blue Note Hawaii, Mulligans on the Blue) and mainland.
+          Performs with brother <strong>Thunderstorm Artis</strong> at The Reser.
+          15 countries and counting.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <h2>Music Theory Mapping</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Motown Dynasty Pipeline</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>First direct Motown lineage in the engine. Father played keyboards
+            on <em>Thriller</em>; mother toured with Lena Horne. Musical education
+            is <strong>genetic and pedagogical</strong> &mdash; Ron II learned piano
+            from a man who played on the best-selling album in history. The family
+            IS the institution. Eleven siblings, all musicians.</p>
+            <div class="examples">Motown (Detroit 1959) &rarr; Hitsville USA &rarr;
+            Ron Artis Sr. (Thriller sessions) &rarr; Hawaii relocation (~1990)
+            &rarr; Ron Artis Family Band &rarr; Ron Artis II &amp; The Truth
+            &rarr; Seattle/KEXP/national touring.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Motown session pool
+            &rarr; Ron Artis Sr. (keyboards) &rarr; Victoria Artis (vocals, Lena
+            Horne) &rarr; family band &rarr; Ron II. <strong>Bridge:</strong>
+            Booker T. Jones collaboration = Motown-Stax unification.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>KEXP as Label Proxy</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>First media-institution as label in the engine. KEXP provides
+            <strong>amplification and legitimacy without creative compromise</strong>.
+            No masters owned, no hits demanded. The station is Seattle&rsquo;s most
+            powerful music institution &mdash; more influential than any single
+            label, venue, or school in determining which artists achieve national
+            visibility from the PNW.</p>
+            <div class="examples">ATO Records (23&deg;, independent-amplifier) vs.
+            KEXP (24&deg;, media-institution-as-kingmaker). Capitol (23&deg;, label-as-director)
+            as negative contrast. Both KEXP and ATO: artist retains creative control
+            and masters.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> KEXP founding (UW
+            student radio &rarr; 90.3 FM &rarr; international tastemaker) &rarr;
+            YouTube live sessions &rarr; label-equivalent amplification without
+            label-equivalent control</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Hawaiian Multi-Instrumentalism</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Multi-instrumentalism as <strong>cultural default</strong> rather than
+            individual acquisition. Piano (age 4), guitar (age 13), ukulele, bass,
+            vocals &mdash; all learned within family band context. Hawaiian music
+            culture treats this as normal, not exceptional. Produces composition
+            from multiple timbral perspectives: songs as full arrangements, not
+            melodies on a single instrument.</p>
+            <div class="examples">Frisell (1&deg;) guitar+effects; Berry (5&deg;)
+            piano+organ; Watts (17&deg;) everything/comedy. Artis (24&deg;):
+            piano+guitar+ukulele+bass+vocals, all from family/cultural context.
+            Most documented multi-instrumentalist in the engine.</div>
+            <div class="genealogy"><strong>Ancestors:</strong> Hawaiian kanikapila
+            tradition &rarr; Artis Family Band &rarr; Ron Artis Sr. instruction
+            &rarr; North Shore jam culture &rarr; professional multi-instrumental
+            practice</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Dynastic-Soul</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Twenty-fourth deployment. Vocal and instrumental bending inherited from
+            <strong>direct Motown lineage</strong> &mdash; the specific warm, inviting,
+            slightly sweet Motown session player note-bending passed from father to
+            son. Not the angular jazz blue note, not the raw gospel blue note, but the
+            <strong>production-aware Motown blue note</strong>.</p>
+            <div class="examples">Twenty-four mechanisms across twenty-five degrees.
+            Gospel-vocal (23&deg;, church-to-stage) &rarr; dynastic-soul (24&deg;,
+            Motown-to-stage via family).</div>
+            <div class="genealogy"><strong>Ancestors:</strong> All twenty-three prior
+            deployments &rarr; gospel-vocal (23&deg;) &rarr; dynastic-soul (24&deg;
+            &mdash; Motown-specific variant, session player heritage)</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ACOUSTIC ELEMENT
+             ======================================== -->
+
+        <h2>Acoustic Element #25: The Invocation</h2>
+
+        <p>In both gospel and Hawaiian spiritual traditions, an <strong>invocation</strong>
+        is the act of calling something into being &mdash; summoning presence, energy,
+        spirit through sound. Distinct from testimony (23&deg;, reporting what happened),
+        invocation is <strong>summons</strong> (calling what is needed into the room).</p>
+
+        <p>Ron Artis II&rsquo;s music operates as invocation: his father&rsquo;s
+        Motown lineage is <strong>invoked</strong> every time he sits at a piano.
+        The family band tradition is invoked in every communal performance. The
+        Maui fire instrument donation is invocation at its most literal &mdash;
+        putting instruments in children&rsquo;s hands to call music back into a
+        devastated community.</p>
+
+        <p>In the second ADSR cycle: groove reset (22&deg;, rhythmic foundation)
+        &rarr; testimony (23&deg;, narrative content) &rarr; <strong>invocation
+        (24&deg;, activation energy)</strong>. The cycle accelerates toward peak.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ARTIST-CITY PATTERN
+             ======================================== -->
+
+        <h2>Artist-City Pattern #25: The Island Export</h2>
+
+        <p>An artist originating from an <strong>island culture</strong> (Hawaii)
+        who engages with mainland infrastructure (Seattle venues, KEXP, national
+        touring) while maintaining deep ties to the island origin.
+        Unlike the Boomerang (Stone, 23&deg; &mdash; sequential, left then returned),
+        the Island Export operates in <strong>both worlds simultaneously</strong> &mdash;
+        Hawaii AND mainland, concurrently, continuously. The first origin outside
+        the continental United States.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.9rem;border-collapse:collapse">
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600;width:25%"><a href="../023-allen-stone/index.html">S36-023 Allen Stone</a></td>
+            <td style="padding:0.5rem">Immediate predecessor. Both Soul/Jazz, both E=4. Complementary opposites: Stone = self-made autodidact from rural church; Artis = lineage-born dynasty from Motown family. Stone&rsquo;s ATO label vs Artis&rsquo;s KEXP proxy.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../000-quincy-jones/index.html">S36-000 Quincy Jones</a></td>
+            <td style="padding:0.5rem"><strong>Literal <em>Thriller</em> connection.</strong> Jones produced <em>Thriller</em>; Ron Artis Sr. played keyboards on it. Degree 0 and degree 24 share a direct credit on the same album.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../018-maktub/index.html">S36-018 Maktub</a></td>
+            <td style="padding:0.5rem">Soul/Jazz genre match (first pair). Both voice-centered with community/family ties. Different energy (Maktub E=3, Artis E=4). Different origins (Seattle-formed vs Hawaii-to-mainland).</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../021-polyrhythmics/index.html">S36-021 Polyrhythmics</a></td>
+            <td style="padding:0.5rem">E=4 streak originator. Both ensemble-oriented. Four consecutive E=4 degrees (21&ndash;24), four different mechanisms. Assembled collective (21&deg;) vs born dynasty (24&deg;).</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../003-ernestine-anderson/index.html">S36-003 Anderson</a></td>
+            <td style="padding:0.5rem">Gospel/vocal lineage. Anderson church-trained through jazz; Artis&rsquo;s mother Victoria Motown-trained. Both represent vocal traditions passed through Black American musical institutions to new generations.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8EAF6">
+            <td style="padding:0.5rem;font-weight:600"><a href="../001-bill-frisell/index.html">S36-001 Frisell</a></td>
+            <td style="padding:0.5rem">Multi-instrumentalism thread. Frisell guitar+effects/loops; Artis piano+guitar+ukulele+vocals. Both compose from multiple timbral perspectives. Frisell textural, Artis timbral.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem;font-weight:600"><a href="../019-fly-moon-royale/index.html">S36-019 FMR</a></td>
+            <td style="padding:0.5rem">Soul/Jazz genre match (first pair partner). Both collective enterprises with family elements. FMR rotating collective; Artis family dynasty. Same genre compound, different organizational model.</td>
+          </tr>
+        </table>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield / Cornish / Institutional Pipeline Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Anderson &mdash; Garfield, same era as Jones</td></tr>
+            <tr><td>Degree 7&deg;</td><td>Priester &mdash; <strong>Cornish faculty</strong></td></tr>
+            <tr><td>Degree 9&deg;</td><td>Caliman &mdash; <strong>Cornish faculty</strong></td></tr>
+            <tr><td>Degree 17&deg;</td><td>Watts &mdash; <strong>Cornish student</strong></td></tr>
+            <tr><td>Degree 21&deg;</td><td>Schroff &mdash; <strong>Cornish graduate</strong></td></tr>
+            <tr><td>Degree 22&deg;</td><td>Ashkenazy &mdash; High school jazz band</td></tr>
+            <tr><td>Degree 23&deg;</td><td>Stone &mdash; Church worship leader. Berklee Visiting Artist 2023</td></tr>
+            <tr><td><strong>Degree 24&deg;</strong></td><td><strong>Artis &mdash; NOT Garfield. NOT Cornish. NOT UW. NOT Berklee. MOTOWN FAMILY. Father played on <em>Thriller</em>. Mother toured with Lena Horne. Family band on North Shore Oahu. THIRD consecutive non-institutional entry via THIRD different pathway.</strong></td></tr>
+          </table>
+          <p style="font-size:0.82rem;margin-top:0.5rem;color:#F57F17"><strong><em>Thriller</em> circle:</strong>
+          Jones (0&deg;) PRODUCED <em>Thriller</em>. Artis (24&deg;) is the SON of a session player ON <em>Thriller</em>.
+          Degrees 0 and 24 share a literal album credit.</p>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 25</h4>
+          <ul>
+            <li><strong>FOURTH E=4:</strong> Distribution 2:13:6:4. Four consecutive E=4 (21&ndash;24). Longest streak. Track if streak continues or breaks.</li>
+            <li><strong>The invocation:</strong> Twenty-fifth acoustic element. Motown-lineage activation energy. Track element 26.</li>
+            <li><strong>Genre:</strong> SECOND consecutive Soul/Jazz (23&ndash;24). Mirrors first pair (18&ndash;19). Track if third consecutive or genre shift.</li>
+            <li><strong>The Island Export (NEW):</strong> Twenty-fifth artist-city pattern. First Pacific Island origin. Concurrent dual-geography. Track.</li>
+            <li><strong>KEXP as label proxy (NEW):</strong> First media-institution in label field. Kingmaker model. Track label type at subsequent degrees.</li>
+            <li><strong>Motown lineage (NEW):</strong> Father on <em>Thriller</em>, mother with Lena Horne. First direct Motown connection. Track.</li>
+            <li><strong><em>Thriller</em> circle:</strong> Jones (0&deg;) produced it. Artis Sr. played keyboards on it. Degrees 0 and 24 linked by literal album credit.</li>
+            <li><strong>Six organizational models:</strong> Dynasty-led/family-embedded added at 24. Track seventh.</li>
+            <li><strong>Gender gap continues:</strong> 3:22 (women:men). Track.</li>
+            <li><strong>Blue note:</strong> TWENTY-FOUR deployments. Dynastic-soul at 24. Track.</li>
+            <li><strong>Maui fire instrument donation:</strong> Community service as artistic practice. NEW pattern. Track.</li>
+            <li><strong>Multi-instrumentalist thread:</strong> Most documented in engine. Piano+guitar+ukulele+bass+vocals. Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row"><span class="stat-label">Degree</span><span class="stat-value">24&deg; / 360&deg;</span></div>
+          <div class="stat-row"><span class="stat-label">Artist</span><span class="stat-value">Ron Artis II</span></div>
+          <div class="stat-row"><span class="stat-label">Genre</span><span class="stat-value">Soul/Jazz</span></div>
+          <div class="stat-row"><span class="stat-label">Energy</span><span class="stat-value">4 (4th consecutive)</span></div>
+          <div class="stat-row"><span class="stat-label">Era</span><span class="stat-value">2010&ndash;present</span></div>
+          <div class="stat-row"><span class="stat-label">Origin</span><span class="stat-value">Haleiwa, Oahu, HI</span></div>
+          <div class="stat-row"><span class="stat-label">Label</span><span class="stat-value">KEXP (media proxy)</span></div>
+          <div class="stat-row"><span class="stat-label">Born</span><span class="stat-value">August 31, 1986</span></div>
+          <div class="stat-row"><span class="stat-label">Org Type</span><span class="stat-value">Dynasty + touring band</span></div>
+          <div class="stat-row"><span class="stat-label">Version</span><span class="stat-value">v1.49.160</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row"><span class="stat-label">2016</span><span class="stat-value">What Music Means to Me</span></div>
+          <div class="stat-row"><span class="stat-label">2018</span><span class="stat-value">Soul Street (15 tracks)</span></div>
+          <div class="stat-row"><span class="stat-label">2021</span><span class="stat-value">Purpose (13 tracks)</span></div>
+          <div class="stat-row"><span class="stat-label">2024</span><span class="stat-value">We Are Not Machines</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Family &amp; Collaborators</h4>
+          <div class="stat-row"><span class="stat-label">Father</span><span class="stat-value">Ron Artis Sr. (Motown)</span></div>
+          <div class="stat-row"><span class="stat-label">Mother</span><span class="stat-value">Victoria (Lena Horne)</span></div>
+          <div class="stat-row"><span class="stat-label">Siblings</span><span class="stat-value">11 total (all musical)</span></div>
+          <div class="stat-row"><span class="stat-label">Brother</span><span class="stat-value">Thunderstorm (The Voice)</span></div>
+          <div class="stat-row"><span class="stat-label">Brother</span><span class="stat-value">Stevon (drums, The Truth)</span></div>
+          <div class="stat-row"><span class="stat-label">Daughter</span><span class="stat-value">Ida Marie Artis</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Context</h4>
+          <div class="stat-row"><span class="stat-label">Acoustic</span><span class="stat-value">#25: The invocation</span></div>
+          <div class="stat-row"><span class="stat-label">Pattern</span><span class="stat-value">#25: Island Export</span></div>
+          <div class="stat-row"><span class="stat-label">Genre Stage</span><span class="stat-value">7: Soul/Jazz x2</span></div>
+          <div class="stat-row"><span class="stat-label">Blue Note</span><span class="stat-value">#24: Dynastic-soul</span></div>
+          <div class="stat-row"><span class="stat-label">Theory</span><span class="stat-value">Motown dynasty pipeline</span></div>
+          <div class="stat-row"><span class="stat-label">Gender</span><span class="stat-value">3:22 (gap continues)</span></div>
+          <div class="stat-row"><span class="stat-label">Sources</span><span class="stat-value">28+</span></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Firsts at Degree 24</h4>
+          <div class="stat-row"><span class="stat-label">Pacific origin</span><span class="stat-value">Haleiwa, Oahu, HI</span></div>
+          <div class="stat-row"><span class="stat-label">Motown lineage</span><span class="stat-value">Father on <em>Thriller</em></span></div>
+          <div class="stat-row"><span class="stat-label">Media-as-label</span><span class="stat-value">KEXP as proxy</span></div>
+          <div class="stat-row"><span class="stat-label">Family dynasty</span><span class="stat-value">11 siblings, all musical</span></div>
+          <div class="stat-row"><span class="stat-label">Longest E=4</span><span class="stat-value">4th consecutive</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 24&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine &mdash; PNW Research Series</p>
+    <p>Research completed 2026-03-29 &middot; <a href="research.md">Full research</a> &middot; <a href="knowledge-nodes.json">Knowledge nodes</a> &middot; <a href="retrospective.md">Retrospective</a></p>
+  </footer>
+</body>
+</html>

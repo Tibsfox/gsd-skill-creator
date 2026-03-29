@@ -1,0 +1,475 @@
+{
+  "degree": 21,
+  "species": "Northern Flicker",
+  "scientific_name": "Colaptes auratus",
+  "subspecies": "C. a. cafer (Red-shafted Flicker -- the PNW form)",
+  "slug": "021-northern-flicker",
+  "sound_type": "loud wick-wick-wick call",
+  "energy": 4,
+  "ecosystem": "open woodland",
+  "season": "year-round (resident -- Red-shafted form is sedentary in PNW lowlands; some northern populations partially migratory)",
+  "family": "Picidae",
+  "order": "Piciformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; widespread across North America. The Red-shafted subspecies (C. a. cafer) dominates the PNW. Common in urban and suburban open woodland, parks, and yards with scattered trees."
+  },
+  "physical": {
+    "length_in": "12.5-14",
+    "wingspan_in": "19-21",
+    "weight_g": "110-160",
+    "note": "LARGEST BIRD IN THE ENGINE by a substantial margin -- nearly three times the mass of the next-heaviest passerine. The first Picidae is also the first medium-bodied bird."
+  },
+  "plumage": {
+    "overall": "Large, brown, barred woodpecker. Brown-barred back, black bib on upper chest, bold black belly spots. Conspicuous white rump patch visible in flight. Red-shafted form: salmon-red feather shafts on underwings and undertail.",
+    "head": "Gray crown (Red-shafted form), brown face, red moustachial stripe in males (black in females). No crown patch or crest.",
+    "body": "Brown with heavy black barring above. Beige-buff below with bold black spots. Black crescent bib on upper breast.",
+    "flight": "UNDULATING FLIGHT -- a few rapid wingbeats followed by a swooping bound. White rump patch and salmon-red underwings flash conspicuously. One of the most diagnostic flight patterns of any PNW bird.",
+    "bill": "Slightly curved -- less chisel-like than tree-foraging woodpeckers. Adapted for probing soil rather than excavating wood, though fully capable of cavity excavation.",
+    "legs": "Gray, with zygodactyl feet (2 toes forward, 2 back) -- the Piciformes grip for vertical clinging.",
+    "tail": "Stiffened rectrices with reinforced shafts -- structural brace for tripod posture against tree trunks.",
+    "diagnostic_visual": "White rump patch in flight. Salmon-red underwings and undertail. Undulating flight pattern. Black bib + bold belly spots on ground. The most recognizable PNW woodpecker in flight."
+  },
+  "frequency_range": {
+    "full_range_hz": "1500-4000 (fundamental + harmonics across the wick series)",
+    "fundamental_hz": "2000-2500 (steady -- no modulation across the series)",
+    "register": "Mid-range to upper-mid (1.5-4.0 kHz -- lower fundamental than most passerines in the engine, with strong harmonic content)"
+  },
+  "vocalization_metrics": {
+    "primary_call": {
+      "name": "Wick-wick-wick -- loud, rapid series of identical sharp notes for territorial advertisement and mate attraction",
+      "note_rate_per_second": "6-10",
+      "series_length_notes": "25-36 (range: 15-50+)",
+      "series_duration_s": "5-8",
+      "pitch_contour": "FLAT -- every note at the same pitch, no ascending, descending, or modulatory pattern",
+      "amplitude_contour": "FLAT -- every note at the same volume, no fade, no crescendo",
+      "timbre": "Sharp, emphatic, bright -- each note clearly articulated with a percussive onset attack",
+      "amplitude": "LOUD -- one of the loudest PNW woodland vocalizations, carries 500+ meters across open terrain",
+      "ending": "ABRUPT CESSATION -- the series simply stops at full volume, no fade, no terminal accent",
+      "calling_period": "Year-round, peaking spring (March-June). Early morning and throughout the day.",
+      "key_property": "SUSTAINED METRONOMIC REPETITION at energy 4 -- the hammer strike delivered as a vocal series. Below perceptual fusion threshold (each wick note heard individually, unlike the junco trill at degree 11). The foundational beat.",
+      "key_property_2": "THE HAMMER -- identical notes at identical volume at identical intervals. No variation. No development. No contour. Pure metronomic repetition. The elemental building block of percussion."
+    },
+    "alarm_call": {
+      "name": "Kyeer! -- sharp, loud, emphatic alarm call",
+      "description": "A single loud, broadband burst given when disturbed or when predators approach. Functions as a general-purpose alarm -- klaxon-style (ungraded, no size encoding). Louder and more far-carrying than passerine alarm calls.",
+      "frequency_hz": "1500-5000"
+    },
+    "klee-yer_call": {
+      "name": "Klee-yer -- two-syllable call",
+      "description": "A softer, two-syllable call used in close-range interactions between mates and at the nest cavity. Less loud than the wick call.",
+      "frequency_hz": "2000-4000"
+    },
+    "drum": {
+      "name": "Drumming -- mechanical percussion (DEGREE 22, not this release)",
+      "description": "Bill strikes against resonant substrate (dead tree, metal surface, chimney). Broadband, non-pitched, percussive. The first non-vocal sound in the engine. Documented here as context for the flicker pair (degrees 21-22) but the drum is the subject of degree 22's release.",
+      "note": "The flicker drum is notably LONGER and SLOWER than other woodpecker drums -- approximately 25 beats per second for 1 second (compared to Downy Woodpecker at 15-17 beats/s or Pileated at 11-30 beats in rapid succession)."
+    }
+  },
+  "taxonomic_significance": {
+    "passerine_streak_broken": "TWENTY CONSECUTIVE PASSERINES (degrees 1-20) end at degree 21. The Northern Flicker is the SECOND NON-PASSERINE in the engine (after the Great Blue Heron at degree 0, Pelecaniformes). The ratio shifts from 20:1 to 20:2. This is the most significant taxonomic event since the engine started.",
+    "third_avian_order": "Piciformes enters the circle as the THIRD avian order (after Pelecaniformes at degree 0 and Passeriformes at degrees 1-20). Piciformes brings capabilities Passeriformes cannot provide: mechanical percussion, zygodactyl feet, hyoid tongue extension, cavity excavation, shock-absorbing skull.",
+    "first_picidae": "The FIRST woodpecker in the engine. Opens the Picidae family, the most species-rich family in Piciformes, with approximately 240 species worldwide and 14+ in the PNW region.",
+    "what_piciformes_brings": [
+      "PERCUSSION -- bill strikes on resonant substrates (drumming), the first non-vocal sound production mechanism in the engine",
+      "ZYGODACTYL FEET -- 2 toes forward, 2 back, optimized for vertical clinging (vs. anisodactyl 3+1 of passerines)",
+      "HYOID TONGUE -- wraps around skull, extends 2+ inches beyond bill tip, barbed and sticky for ant extraction",
+      "STIFFENED TAIL -- rectrices function as structural brace, forming tripod with feet against tree trunks",
+      "SHOCK-ABSORBING SKULL -- reinforced spongy bone, thickened cerebrospinal fluid (or rigid hammer -- Van Wassenbergh 2022 revision)",
+      "CAVITY EXCAVATION -- creates own nest holes in dead wood, providing housing for dozens of secondary cavity-nesting species"
+    ]
+  },
+  "energy_significance": {
+    "first_energy_4": "The Northern Flicker is the FIRST energy-4 species in the engine. The previous ceiling was energy 3, held for six consecutive species (degrees 15-20). The jump from E=3 to E=4 is qualitative: energy-3 species contribute to the ambient soundscape; energy-4 species CUT THROUGH it.",
+    "part_a_synchronization": "Part A (Polyrhythmics) is also energy 4 at degree 21. BOTH engines cross the energy-4 threshold at the same degree. This is the first time the Part A and Part B engines have simultaneously entered a new energy level. The synchronization is structural: an 8-piece Jazz/Funk band delivers the same acoustic authority as a 14-inch woodpecker delivering 36 wick notes across open woodland.",
+    "energy_progression": {
+      "energy_1": "Degrees 8, 10, 12 (kinglet, bushtit, siskin -- quiet, threshold)",
+      "energy_2": "Degrees 0-7, 9, 11, 13, 14 (12 species -- moderate, baseline)",
+      "energy_3": "Degrees 15-20 (6 species -- active, emphatic)",
+      "energy_4": "Degree 21 (1 species -- FIRST -- loud, commanding)"
+    }
+  },
+  "flicker_pair": {
+    "description": "The Northern Flicker appears at TWO consecutive degrees -- the engine's first species-pair. Degree 21 = vocal call (wick-wick-wick, syrinx-produced). Degree 22 = drum (bill striking resonant substrate, mechanical percussion). Same species, two fundamentally different sound-production mechanisms.",
+    "degree_21": {
+      "sound": "Wick-wick-wick call",
+      "mechanism": "Syrinx (vocal organ)",
+      "character": "Tonal, pitched, harmonic content",
+      "engine_role": "21st vocal species"
+    },
+    "degree_22": {
+      "sound": "Drumming",
+      "mechanism": "Bill on substrate (mechanical percussion)",
+      "character": "Broadband, non-pitched, percussive transient",
+      "engine_role": "FIRST non-vocal, non-syringeal, purely mechanical sound in the engine"
+    },
+    "principle": "Redundant channels -- the same territorial/mate-attraction message delivered through two different physical systems. Voice and percussion. The flicker pair bridges vocal and mechanical sound production, transitioning the engine from its 21-degree syrinx dependency toward a broader timbral vocabulary."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The hammer (sustained, discrete, metronomic, loud repetition of identical percussive-attack notes at constant pitch and constant volume -- the 22nd acoustic element)",
+      "level": "foundational",
+      "department": "music-theory/rhythm",
+      "college_path": ".college/music/theory/rhythm/hammer/",
+      "examples": [
+        "Northern Flicker wick-wick-wick: 25-36 identical notes at 6-10 per second, constant pitch, constant volume, abrupt stop",
+        "Bass drum quarter notes in a march: identical strikes at identical intervals, the anchor beat",
+        "Kick drum four-on-the-floor: metronomic pulse that drives a dance beat -- the hammer as groove foundation",
+        "Jackhammer: sustained mechanical repetition at a rate fast enough for urgency but slow enough that each impact is felt"
+      ],
+      "music_theory_parallel": "The hammer is the most elemental striking technique in percussion: a single repeated metronomic impact at constant force and interval. It does not groove (that requires subdivision). It does not swing (that requires unequal spacing). It does not polyrhythm (that requires simultaneous contrasting patterns). It simply strikes. The Northern Flicker's wick call is a biological hammer -- identical notes at identical volume at identical intervals, fast enough for rhythmic urgency but slow enough that each note is individually heard. This is the foundational building block of percussion, arriving at the same degree as Polyrhythmics, whose art form is built on what you do AFTER the basic hammer beat is established."
+    },
+    {
+      "concept": "Passerine streak broken (20 consecutive passerines end at degree 21 -- third avian order Piciformes enters the circle, bringing percussion, new anatomy, new ecological capabilities)",
+      "level": "advanced",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/passerine-streak/",
+      "examples": [
+        "Degrees 1-20: 20 consecutive Passeriformes species -- 8 families, all syrinx-dependent vocal production",
+        "Degree 0: Great Blue Heron (Pelecaniformes) -- the only previous non-passerine, establishing silence as origin",
+        "Degree 21: Northern Flicker (Piciformes) -- the streak breaker, introducing zygodactyl feet, hyoid tongue, cavity excavation, percussion",
+        "The ratio shifts from 20:1 to 20:2. Three avian orders now represented. The circle opens from 'The Sound of Passerines' to something broader."
+      ],
+      "music_theory_parallel": "In music, a streak of pieces in the same key creates a tonal center. Breaking the streak -- a modulation -- redefines the harmonic landscape. The 20-degree passerine streak established the syrinx as the engine's tonal center. The Northern Flicker modulates to a new key: Piciformes. The modulation is dramatic because it was deferred so long. The return to non-passerine territory after 20 degrees is the harmonic surprise that the engine has been building toward since degree 1."
+    },
+    {
+      "concept": "First energy 4 with Part A synchronization (both engines cross the energy-4 threshold at the same degree for the first time)",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-threshold/",
+      "examples": [
+        "Northern Flicker (Part B, degree 21): wick-wick-wick at energy 4 -- loudest vocalization in the engine, carries 500+ meters",
+        "Polyrhythmics (Part A, degree 21): 8-piece Jazz/Funk band at energy 4 -- loudest ensemble so far, commands the room",
+        "Six-degree E=3 plateau (degrees 15-20): energy ceiling held at moderate-active for the warbler/thrush cluster",
+        "The jump from E=3 to E=4 is qualitative: energy-3 species contribute to the soundscape; energy-4 species CUT THROUGH it"
+      ],
+      "music_theory_parallel": "In dynamics, the jump from mezzo-forte to forte is not just louder -- it changes the relationship between the instrument and the ensemble. At mezzo-forte, an instrument participates. At forte, it leads. The Northern Flicker at energy 4 does not participate in the dawn chorus. It cuts through it. The same threshold crossing, at the same degree, in both the Part A and Part B engines, creates a stereo forte -- both channels commanding simultaneously."
+    },
+    {
+      "concept": "The flicker pair (degrees 21-22: same species, two sound-production mechanisms -- vocal call and mechanical drum as redundant territorial channels)",
+      "level": "advanced",
+      "department": "music-theory/orchestration",
+      "college_path": ".college/music/theory/orchestration/flicker-pair/",
+      "examples": [
+        "Degree 21: wick-wick-wick call (syrinx -- vocal, tonal, pitched)",
+        "Degree 22: drumming (bill on substrate -- mechanical, broadband, percussive)",
+        "Both serve territorial advertisement and mate attraction -- redundant channels, same message, different physical domains",
+        "The first species-pair in the engine: one organism mapped to two consecutive degrees because it produces two qualitatively different sounds"
+      ],
+      "music_theory_parallel": "In orchestration, doubling a melody in two different instrument families (strings and winds, for example) creates redundancy that ensures the message reaches the listener through at least one channel even if the other is masked. The flicker pair doubles its territorial message across vocal and mechanical channels. The wick call carries in open air; the drum resonates through solid substrates. Two transmission media, one message. This is the first redundant channel pair in the engine."
+    },
+    {
+      "concept": "Interspecies eavesdropping network -- 6th node (Northern Flicker as klaxon-style alarm broadcaster -- ungraded, loud, broadband)",
+      "level": "foundational",
+      "department": "ecology/behavior",
+      "college_path": ".college/ecology/behavior/eavesdropping-network/",
+      "examples": [
+        "Northern Flicker kyeer! alarm: loud, emphatic, broadband burst -- general-purpose alarm without predator-size encoding",
+        "Chickadee alarm system (degrees 3, 9): graded, encoded -- number of dee syllables encodes predator size (Templeton et al. 2005)",
+        "The network gains its third broadcaster and first from outside Passeriformes",
+        "Six nodes: 3 broadcasters (Black-capped Chickadee, Chestnut-backed Chickadee, Northern Flicker) + 3 receivers (Nuthatch, Kinglet, Orange-crowned Warbler)"
+      ],
+      "music_theory_parallel": "The alarm network now has two types of broadcast: encoded (chickadee -- graded information, the security report) and klaxon (flicker -- ungraded alert, the fire alarm). In music: the chickadee alarm is a melody (pitches carry information), the flicker alarm is a cymbal crash (volume IS the information). Both are valid broadcast strategies. Together they provide high-resolution intelligence and far-carrying general alert."
+    },
+    {
+      "concept": "Ground-foraging woodpecker ecology (anting behavior, hyoid tongue anatomy, ant dietary specialization -- the woodpecker that walks on earth)",
+      "level": "foundational",
+      "department": "ecology/foraging",
+      "college_path": ".college/ecology/foraging/ground-foraging-woodpecker/",
+      "examples": [
+        "75%+ foraging time on the ground -- the most ground-foraging woodpecker in North America",
+        "Ants constitute 45-75% of diet by volume. A single stomach contained 5,000+ ants (Beal 1911).",
+        "Hyoid tongue wraps around skull, extends 2 inches beyond bill, barbed and sticky -- precision extraction tool at 2 probes per second",
+        "Anting behavior: deliberately places ants on feathers or sits on ant mounds. Formic acid likely kills ectoparasites."
+      ],
+      "music_theory_parallel": "The flicker's ground-foraging ecology is the biological equivalent of a drummer who plays floor percussion rather than elevated kit. Most woodpeckers are vertical (climbing trunks, drumming on standing trees). The flicker is horizontal (hopping across lawns, probing soil). Same family, different axis. Same rhythmic toolkit, different performance surface."
+    },
+    {
+      "concept": "Primary cavity excavator as ecological infrastructure (nest cavities used by dozens of secondary species -- the builder whose construction benefits a community)",
+      "level": "foundational",
+      "department": "ecology/ecosystem-services",
+      "college_path": ".college/ecology/ecosystem-services/cavity-excavation/",
+      "examples": [
+        "Northern Flicker excavates a new nest cavity each year in dead wood (snags)",
+        "Abandoned flicker cavities are used by: Tree Swallows, Mountain Bluebirds, American Kestrels, Northern Saw-whet Owls, flying squirrels, and many others",
+        "The flicker's decline (1.2%/year since 1966) ripples through the cavity-nesting community -- less excavation = less housing",
+        "Parallels the Polyrhythmics Part A: both are infrastructure species/institutions that others depend on"
+      ],
+      "music_theory_parallel": "The flicker is an infrastructure species -- it builds the physical structures (cavities) that enable an entire community of secondary users. In music, this parallels the role of a venue or a rehearsal space: the physical infrastructure that enables performance. Polyrhythmics (Part A) serves a similar role in Seattle's music scene -- an ensemble that provides the rhythmic backbone for the city's funk and jazz ecosystem. Both build housing that others occupy."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "THE OTHER NON-PASSERINE. Degree 0 established silence with the only previous non-passerine (Pelecaniformes). Degree 21 breaks the 20-degree passerine streak with the second non-passerine (Piciformes). The heron is stillness; the flicker is percussion. The heron hunts by silence; the flicker announces by volume. Two non-passerines, two completely different strategies, 21 degrees apart. Together they bookend the first arc of passerine saturation."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Spotted Owl (Degree 4)",
+      "connection": "TERRITORIAL SOUND -- DIFFERENT ORDERS. The Spotted Owl uses a four-note motif at E=2 in old-growth darkness. The Northern Flicker uses a rapid wick series at E=4 in open woodland. Both are territorial advertisers. Both are non-passerine (owl = Strigiformes, flicker = Piciformes). The flicker operates in a completely different acoustic regime: louder, faster, brighter, open-habitat."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "METRONOMIC REPETITION -- DIFFERENT FUSION STATES. The junco trills at or above the perceptual fusion threshold -- discrete notes perceived as a continuous buzz. The flicker repeats at a rate below fusion -- each wick note heard individually. Both are metronomic. One fuses into a tone (trill). The other stays discrete (hammer). Same principle (rapid repetition), different perceptual result."
+    },
+    {
+      "project": "SPS-013",
+      "title": "Hutton's Vireo (Degree 13)",
+      "connection": "REPETITION -- DIFFERENT RATES, DIFFERENT SCALES. The Hutton's Vireo repeats a two-note ostinato at a slow, deliberate rate -- persistence without variation. The flicker repeats a single note at a fast, metronomic rate -- hammering without variation. Both repeat. Both persist. One is meditative. The other is urgent. One whispers the same thing forever. The other shouts it rapidly and stops."
+    },
+    {
+      "project": "SPS-017",
+      "title": "Common Yellowthroat (Degree 17)",
+      "connection": "THE HOOK VS. THE HAMMER. The Yellowthroat repeats a patterned rhythmic cell (witchety -- internal structure, catchiness). The flicker repeats a single undifferentiated note (wick -- no internal structure, pure pulse). The hook has groove. The hammer has beat. Melodic repetition vs. rhythmic repetition."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "THE FADE VS. THE HAMMER. Degree 20 dissolved -- the trill faded in pitch, volume, and rate, evaporating into silence. Degree 21 maintains full power until cessation. The Orange-crowned attenuated. The flicker maintains full power until it stops. Controlled decay (20) vs. sustained force (21). Maximum contrast in energy management."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "The Northern Flicker is documented in AVI as one of the most recognizable PNW woodpeckers -- widespread, common, ground-foraging, with distinctive undulating flight and white rump patch. Primary cavity excavator documented as a keystone ecosystem service provider."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Open woodland ecology: Garry oak savanna, forest-meadow edges, urban parkland mosaic. Dead wood (snags) as keystone habitat structure for cavity nesters. The flicker's dependence on the tree-ground interface connects to ECO's documentation of ecotone dynamics."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Polyrhythmics at degree 21. Both are energy-4 presences that command attention through volume and rhythmic power. An 8-piece Jazz/Funk band from Fremont meets a 14-inch woodpecker hammering 36 wick notes across open woodland. Both represent a scale increase -- larger ensemble, larger bird, louder sound. Both are infrastructure: Polyrhythmics for Seattle's funk scene, the flicker for the cavity-nesting community."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXPANDED TO 6 NODES. The Northern Flicker adds the SIXTH NODE and the THIRD BROADCASTER to the interspecies alarm eavesdropping network. The flicker's alarm is a klaxon-style broadcast -- loud, ungraded, broadband -- compared to the chickadee's encoded, graded system. First non-passerine broadcaster.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster (encoded)", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster (encoded)", "habitat": "coastal conifer" },
+      { "species": "Orange-crowned Warbler", "degree": 20, "role": "receiver", "habitat": "shrubby slope / mixed winter flocks" },
+      { "species": "Northern Flicker", "degree": 21, "role": "broadcaster (klaxon)", "habitat": "open woodland" }
+    ],
+    "flicker_role": "The Northern Flicker broadcasts loud, ungraded alarm calls (kyeer!) that alert other species across a wide area. Unlike the encoded chickadee alarms (which specify predator size via syllable count), the flicker alarm is a general-purpose klaxon: 'danger, here, now.' Its body size (largest in engine) and call volume create a sentinel effect -- the alarm carries farther and is less likely to be missed. First non-passerine in the network. The fire alarm, not the security report.",
+    "note": "Alarm network now at 6 nodes (3 broadcasters, 3 receivers). Two broadcast types: encoded (chickadees -- graded information) and klaxon (flicker -- ungraded alert). Thirteen parallel communication channels documented."
+  },
+  "part_a_parallel": {
+    "artist": "Polyrhythmics",
+    "degree": 21,
+    "genre": "Jazz/Funk",
+    "location": "Fremont, Seattle",
+    "era": "2008-present",
+    "ensemble_size": "8-piece band",
+    "shared_principle": "Both are energy-4 presences that command the acoustic space rather than fitting into it. Polyrhythmics fills the room with an 8-piece band (horns, keys, guitar, bass, drums, percussion). The Northern Flicker fills open woodland with a call that carries 500+ meters. Both are the loudest thing in their respective environments. Both represent a scale increase from previous degrees. Both build infrastructure that others depend on.",
+    "resonance_points": [
+      "Energy 4 -- commanding volume: both cross the energy-4 threshold simultaneously. Both engines escalate together for the first time. Both command rather than contribute.",
+      "Repetition as foundation: Polyrhythmics builds from a rhythmic groove -- the locked beat that every other element rides. The flicker builds from the hammer -- the metronomic pulse. Both start from repetition. The difference is what they build on top.",
+      "Scale increase: Polyrhythmics is 8 musicians (largest Part A ensemble). The Northern Flicker is 110-160 g (largest Part B species). Energy 4 requires mass. Bigger band, bigger bird, bigger sound.",
+      "Community infrastructure: Polyrhythmics provides rhythmic backbone for Seattle's funk/jazz scene. The Northern Flicker excavates cavities that house dozens of other species. Both build infrastructure that others depend on."
+    ]
+  },
+  "degree_arc": {
+    "position": "The hammer -- sustained, discrete, metronomic repetition at energy 4. The passerine streak breaker. The first Picidae. The second non-passerine. The first energy 4. Degree 21 breaks three plateaus simultaneously: the passerine order monopoly, the energy-3 ceiling, and the migrant streak. The flicker pair (21-22) bridges vocal and mechanical sound production.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15) -> ascending sweet crescendo / dynamic intensification (16) -> witchety hook / memorability through rhythmic repetition (17) -> ascending spiral / each phrase higher (18) -> descending spiral with chorus shimmer / each phrase lower, bilateral syrinx (19) -> trilling descending rattle / fade, ADSR release, triple descent (20) -> loud wick-wick-wick / the hammer, sustained metronomic repetition at energy 4 (21)",
+    "key_insight": "Degree 21 introduces FIVE new structural dimensions: (1) THE HAMMER -- 22nd acoustic element, sustained discrete metronomic repetition at constant pitch and volume. (2) PASSERINE STREAK BROKEN -- third avian order (Piciformes) enters, bringing percussion, new anatomy, new ecology. (3) FIRST ENERGY 4 -- synchronized with Part A (Polyrhythmics), breaking the 6-degree E=3 plateau. (4) THE FLICKER PAIR -- first species-pair, degrees 21-22, same species delivering both vocal and mechanical sound (degree 22 will be the first non-vocal sound in the engine). (5) YEAR-ROUND RESIDENT -- first strict resident since degree 13, breaking the 7-degree migrant streak.",
+    "acoustic_element_22": "THE HAMMER -- sustained, discrete, metronomic, loud repetition of identical percussive-attack notes at constant pitch and constant volume, below the perceptual fusion threshold (each note heard individually). The 22nd element in the progression: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, release, HAMMER.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide)",
+      "degree_7": "Harmonic series navigation (mathematical melody)",
+      "degree_8": "Ultra-high ascending series (audiometric boundary crossing)",
+      "degree_9": "Variation on combinatorial syntax (the cover version)",
+      "degree_10": "Minimum viable signal (1-bit presence, swarm cohesion)",
+      "degree_11": "Tremolo / trill (rapid repetition above fusion threshold)",
+      "degree_12": "Ascending sawtooth sweep (buzzy waveform ascending)",
+      "degree_13": "Ostinato (two-note repeated phrase below fusion threshold)",
+      "degree_14": "Ternary / AAB (repetition with contrasting resolution)",
+      "degree_15": "Accelerando (tempo-varying chattering series)",
+      "degree_16": "Crescendo (dynamic-varying sweet series)",
+      "degree_17": "Hook (rhythmic two-note cell, memorability through repetition)",
+      "degree_18": "Ascending spiral (sequential phrases each higher)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each lower, bilateral syrinx)",
+      "degree_20": "Trill with parametric decay / ADSR release (triple descent, fade-out)",
+      "degree_21": "The hammer (sustained discrete metronomic repetition at constant pitch, constant volume, energy 4 -- each note individually heard, below fusion threshold, percussive onset attack)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz)",
+      "degree_8": "Ultra-high (6-10 kHz)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz)",
+      "degree_21": "Mid-range to upper-mid (1.5-4.0 kHz -- lower fundamental than most engine passerines, strong harmonic content)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel)",
+      "degree_9": "Referential threat information (conserved content, varied delivery)",
+      "degree_10": "Pure presence / flock cohesion (1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep",
+      "degree_13": "Territory + pair bond through persistent repetition",
+      "degree_14": "Territory + mate attraction through narrative",
+      "degree_15": "Territory + mate attraction through urgency",
+      "degree_16": "Territory + mate attraction through brightness",
+      "degree_17": "Territory + mate attraction through the hook",
+      "degree_18": "Territory + mate attraction through ascending spiral",
+      "degree_19": "Territory + mate attraction through descending spiral",
+      "degree_20": "Territory + mate attraction through fading trill (evaporation)",
+      "degree_21": "Territory + mate attraction through the hammer (sustained metronomic force at energy 4 -- the loudest, most commanding territorial signal in the engine, delivered by the first non-passerine since degree 0)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood)",
+      "degree_19": "Lowland riparian (deciduous thicket, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside)",
+      "degree_21": "Open woodland (scattered trees with broken canopy, grassy openings, mosaic of trees + ground -- Garry oak savanna, mixed conifer-deciduous edges, urban parkland)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Open woodland -- scattered trees with broken or discontinuous canopy, interspersed with grassy openings, shrubby patches, and bare ground. In PNW: Garry oak savanna, mixed conifer-deciduous edges, urban/suburban parkland with scattered trees and lawns, post-fire and post-disturbance woodland. Needs all three components: trees (nesting cavities), open ground (ant foraging), elevated perches (territorial display).",
+    "niche": "Ground-foraging ant specialist. Hops across lawns, meadows, forest clearings, and bare ground, probing with extended tongue for ants. Also forages on tree trunks for beetles, ants, and bark invertebrates. The most ground-foraging woodpecker in North America.",
+    "foraging_strategy": "Ground probing -- drives bill into soil and extracts ants with barbed, sticky tongue at ~2 probes per second. Also flakes bark, probes crevices, and catches aerial insects. Estimated 75%+ of foraging time on the ground (Elchuk and Wiebe 2003).",
+    "diet": "Ants constitute 45-75% of diet by volume (Formica, Camponotus, Lasius, Tapinoma). Also eats beetles, caterpillars, flies, and other invertebrates. Fruits and seeds supplement the diet in fall/winter. In urban areas, visits suet feeders.",
+    "anting_behavior": "Deliberately places ants on feathers (active anting) or sits on ant mounds (passive anting). Leading hypothesis: formic acid kills feather ectoparasites (lice, mites). May also condition feathers or discharge ant defensive chemicals before eating.",
+    "tongue_anatomy": "Hyoid apparatus wraps around skull, extends tongue ~2 inches beyond bill tip. Tongue is barbed and coated in sticky alkaline saliva. Precision extraction tool for ant tunnels. Cycling rate: ~2 probes per second (Spring 1965).",
+    "cavity_nesting": "Primary cavity excavator -- excavates a new nest cavity each year in dead wood (snags), typically 6-20 feet above ground. Cavity entrance is round, approximately 3 inches in diameter. Abandoned cavities are used by Tree Swallows, Mountain Bluebirds, American Kestrels, Northern Saw-whet Owls, flying squirrels, and many other species. The flicker is an ecological infrastructure species.",
+    "resident_status": "YEAR-ROUND RESIDENT in PNW lowlands (C. a. cafer). First strict resident since Hutton's Vireo at degree 13. Some northern populations (Alaska, northern BC) are partially migratory. Seattle-area population is sedentary. Present and potentially vocal in every month of the year.",
+    "flock_size": "Solitary or in pairs during breeding season. In fall/winter, may form small loose flocks of 3-8 birds at productive foraging sites. Does not typically join mixed-species flocks in the way that small passerines do."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~9.9 million (Partners in Flight 2020)",
+    "trend": "Persistent long-term decline -- approximately 1.2% per year since 1966 (Breeding Bird Survey). Cumulative loss of approximately 47% over the survey period. Steeper than most species in the engine except the Spotted Owl.",
+    "threats": [
+      "Snag removal (eliminates cavity-nesting sites)",
+      "European Starling competition (cavity usurpation, 10-20% reproductive success reduction)",
+      "Pesticide impact on ant populations (primary prey base)",
+      "Window collision mortality (year-round urban resident with moderate-height flight)",
+      "Fire suppression (reduces snag creation and open woodland habitat)"
+    ],
+    "pnw_status": "Common and widespread but declining. One of the most frequently encountered woodpeckers in urban and suburban Seattle. Regularly visits suet feeders. Its familiarity makes its population decline easy to overlook -- a common bird slowly becoming less common.",
+    "ecosystem_service": "Primary cavity excavator -- creates nest cavities used by dozens of secondary cavity-nesting species. Its decline ripples through the entire cavity-nesting community."
+  },
+  "key_sites": [
+    {
+      "name": "Discovery Park",
+      "type": "year-round / breeding",
+      "description": "Open woodland and forest edge habitat in Seattle's largest park. Northern Flickers forage on lawns and meadow edges, nest in snags within the mixed forest. Common year-round.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Seward Park",
+      "type": "year-round / breeding",
+      "description": "Old-growth forest with surrounding park edges and lawns. Flickers use the interface between the ancient forest and the open ground -- the mosaic they require.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "San Juan Islands Garry oak prairie",
+      "type": "year-round",
+      "description": "Classic open Garry oak woodland with grass and wildflower understory. Ideal flicker habitat -- scattered trees for nesting, open ground for ant foraging.",
+      "region": "San Juan County, WA"
+    },
+    {
+      "name": "Fort Steilacoom Park and prairie",
+      "type": "year-round",
+      "description": "One of the largest remaining Garry oak prairies in the South Puget Sound lowlands. Open woodland mosaic with meadows, scattered oaks, and dead wood.",
+      "region": "Lakewood, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "MAINTAINED -- Macaulay Library provides extensive recordings of Northern Flicker wick-wick-wick calls showing the characteristic flat-pitch, flat-amplitude rapid series of identical notes",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Northern Flicker wick call shows a METRONOMIC SERIES of identical notes: each wick appears as a sharp, short-duration mark at approximately 2.0-2.5 kHz fundamental with harmonics to 4.0 kHz. The series maintains constant pitch and constant amplitude across its 5-8 second duration. The spectrogram looks like a picket fence -- evenly spaced, identical marks at a steady rate of 6-10 per second. This is structurally the opposite of the Orange-crowned Warbler's descending, fading trill (degree 20): where that spectrogram showed a downward-sloping, attenuating trace, the flicker's shows a horizontal, constant-amplitude sequence."
+  },
+  "sources": [
+    "Wiebe, K.L. and Moore, W.S. (2020). Northern Flicker (Colaptes auratus). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Northern Flicker. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Northern Flicker. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Northern Flicker species account. birdweb.org",
+    "Sibley, D.A. (2014). The Sibley Guide to Birds, 2nd ed. Alfred A. Knopf.",
+    "Bent, A.C. (1939). Life Histories of North American Woodpeckers. U.S. National Museum Bulletin 174. Smithsonian.",
+    "Moore, W.S. and Price, J.T. (1993). Nature of selection in the Northern Flicker hybrid zone. Evolution 47(4): 1004-1020.",
+    "Wiebe, K.L. and Short, L.L. (1970). Taxonomy and behavior of the Northern Flicker. In Woodpeckers of the World. Delaware Museum of Natural History.",
+    "Winkler, H. and Christie, D.A. (2002). Family Picidae (Woodpeckers). Handbook of the Birds of the World, Vol. 7. Lynx Edicions.",
+    "Catchpole, C.K. and Slater, P.J.B. (2008). Bird Song: Biological Themes and Variations. 2nd ed. Cambridge University Press.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Schwab, I.R. (2002). Cure for a headache. Br J Ophthalmol 86(8): 843.",
+    "Van Wassenbergh, S., et al. (2022). Woodpeckers minimize cranial absorption of shocks. Current Biology 32(14): 3189-3194.",
+    "Spring, L.W. (1965). Climbing and pecking adaptations in some North American woodpeckers. Condor 67(6): 457-488.",
+    "Beal, F.E.L. (1911). Food of the woodpeckers. USDA Biological Survey Bulletin 37: 1-64.",
+    "Elchuk, C.L. and Wiebe, K.L. (2003). Home-range size of Northern Flickers. Can J Zool 81(6): 954-961.",
+    "Revis, H.C. and Waller, D.A. (2004). Bactericidal and fungicidal activity of ant chemicals on feather parasites. Chemoecology 14(2): 85-93.",
+    "Ingold, D.J. (1994). Influence of nest-site competition between European Starlings and woodpeckers. Wilson Bulletin 106(2): 227-241.",
+    "Wiebe, K.L. (2003). Delayed timing as a strategy to avoid nest-site competition. Oikos 100(2): 291-298.",
+    "Templeton, C.N., Greene, E., and Davis, K. (2005). Allometry of alarm calls. Science 308: 1934-1937.",
+    "Magrath, R.D. et al. (2015). Eavesdropping on heterospecific alarm calls. Biol Rev 90(2): 560-586.",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey 1966-2019. USGS Patuxent.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Northern Flicker (Colaptes auratus). iucnredlist.org",
+    "WDFW. Northern Flicker species account. wdfw.wa.gov",
+    "eBird. Northern Flicker observation data, Pacific Northwest. ebird.org/species/norfli",
+    "Macaulay Library. Northern Flicker recordings and spectrograms. macaulaylibrary.org",
+    "Pressing, J. (2002). Black Atlantic rhythm. Music Perception 19(3): 285-310.",
+    "London, J. (2012). Hearing in Time. 2nd ed. Oxford University Press."
+  ],
+  "release_metadata": {
+    "release_number": "021",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "version": "v1.49.157",
+    "date": "2026-03-29"
+  }
+}

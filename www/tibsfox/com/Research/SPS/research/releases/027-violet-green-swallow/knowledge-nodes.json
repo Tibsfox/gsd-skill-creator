@@ -1,0 +1,368 @@
+{
+  "degree": 27,
+  "species": "Violet-green Swallow",
+  "scientific_name": "Tachycineta thalassina",
+  "slug": "027-violet-green-swallow",
+  "sound_type": "twitter and liquid chips",
+  "energy": 4,
+  "ecosystem": "open water",
+  "season": "summer (neotropical migrant -- breeds PNW April-August, winters in Mexico and Central America)",
+  "family": "Hirundinidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; open water, cliff faces, forest clearings, lakeshores, and mountain meadows throughout the Puget Sound lowlands and Cascade foothills -- from sea level to alpine treeline."
+  },
+  "taxonomy_note": {
+    "description": "The Violet-green Swallow is the second Hirundinidae in the engine and the smallest swallow in the trio (14 g). Genus Tachycineta from Greek takhys (swift) + kineo (to move) = 'the swift-mover.' Species epithet thalassina from Greek thalassa (the sea) = 'sea-colored.' Full binomial: 'the sea-colored swift-one.' Shares genus with Tree Swallow (T. bicolor) at degree 28, creating the engine's tightest same-genus consecutive adjacency.",
+    "current_family": "Hirundinidae",
+    "new_family": false,
+    "family_count_in_engine": 16,
+    "hirundinidae_count_in_engine": 2,
+    "name_etymology": "Tachycineta = Greek takhys (swift, fast) + kineo (to move, to set in motion). The genus name means 'the one that moves swiftly' -- the swift-mover. Thalassina = Greek thalassa (the sea), meaning 'sea-colored.' Describes the iridescent green dorsal plumage that resembles sunlit ocean water. Full translation: 'the sea-colored swift-one.'",
+    "genus_note": "Tachycineta contains 9 species, all in the Americas. Two are common PNW breeders: T. thalassina (Violet-green Swallow, more western/montane/cliff-associated) and T. bicolor (Tree Swallow, more widespread/wetland-associated). Both appear in the engine at consecutive degrees 27-28.",
+    "tachycineta_pair": {
+      "degree_27": "Tachycineta thalassina (Violet-green Swallow)",
+      "degree_28": "Tachycineta bicolor (Tree Swallow)",
+      "comparison_to_catharus": "Parallels the Catharus pair at degrees 18-19 (Swainson's Thrush, Veery). Both pairs place same-genus species in consecutive degrees. Catharus: ascending vs. descending spiral. Tachycineta: high rapid twitter vs. moderate liquid twitter."
+    }
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "3,000-9,000",
+    "peak_energy_band_hz": "5,000-8,000",
+    "call_duration_s": "0.5-2.0 per twitter sequence",
+    "chip_rate_per_second": "10-20 (faster than martin's 8-15, but chips remain individually discrete -- no perceptual fusion)",
+    "chip_structure": "Brief descending FM sweep (15-30 ms duration, 1-2 kHz frequency drop per chip). Each chip begins at a higher frequency and drops, creating the water-drop 'liquid' quality. Clean onset and offset -- each chip is a discrete acoustic event.",
+    "note_types": "Two primary: (1) Liquid chips -- brief descending FM notes, the defining element. Rapid repetition creates the 'twitter' quality. (2) Contact notes -- simpler, shorter, single-pitch chips used in flight between foraging bouts and during pair interactions.",
+    "phrase_structure": "Organized as rapid series of similar chips with clear beginning and ending boundaries. DISCRETE -- not continuous like the martin's stream. Each twitter sequence is a BURST, not a flow. Compare: martin = stream, Violet-green = rain (drops).",
+    "timbre": "Thin, high, crystalline, transparent. A smaller number of spectral components concentrated in a high band. Where the martin's song is rich and opaque (many components filling a wide band), the Violet-green's twitter is transparent and narrow. Described as 'sweet' or 'tinkling' -- sound that sparkles rather than pours.",
+    "amplitude": "Soft to moderate. Energy 4 reflects persistent delivery and ecological presence (ubiquity) rather than raw volume. The bird calls frequently throughout the day during flight.",
+    "context": "Primarily in flight -- during foraging, territorial interactions, and courtship. Also from perches near nest cavity. No elaborate dawn chorus like the martin's colony display. More intimate, scattered, personal.",
+    "key_property": "THE LIQUID TWITTER -- the 28th acoustic element. Rapid descending FM chips with discrete boundaries. Each chip is a complete sound event with onset, peak, and offset. The twitter is the rain to the martin's stream: same 'liquid' quality, different time-domain structure (discrete vs. continuous). Two liquid textures in consecutive degrees."
+  },
+  "plumage": {
+    "males": "Crown and nape: iridescent violet-bronze. Back and rump: brilliant iridescent green (thalassina = sea-colored). Underparts: clean white. Distinctive white patches above and behind the eye (facial white extending onto forehead) and on rump flanks (white saddle visible in flight). Wings and tail: dark brownish-black.",
+    "females": "Similar pattern but duller. Iridescent green and violet less brilliant, more bronze-toned. White facial patches smaller, less distinct. Underparts white with possible faint gray-brown breast wash.",
+    "comparison_to_martin": {
+      "purple_martin_26": "Uniformly dark iridescent purple-black (male). Low contrast. Dark above and below. Stealthy in flight.",
+      "violet_green_27": "Green above, white below. Maximum contrast. White facial patches and rump patches diagnostic. Conspicuous in flight -- white underparts visible against sky.",
+      "shared_mechanism": "Both use structural coloration (thin-film interference in feather barbule nanostructure). Same physics, different colors, opposite contrast strategies."
+    },
+    "significance": "The name 'Violet-green' is literally true: violet on the crown, green on the back. And thalassina (sea-colored) describes the green. One of the most accurately named birds in North American ornithology. Name = appearance = taxonomy."
+  },
+  "cavity_nesting": {
+    "description": "The Violet-green Swallow nests in NATURAL cavities -- woodpecker holes, tree hollows, cliff crevices, rock outcrops, and occasionally human structures. Unlike the Purple Martin, it does NOT depend on human-provided nest boxes. It is self-sufficient in the cavity market.",
+    "nest_site_types": [
+      "Woodpecker holes (old holes from smaller woodpeckers -- Downy, Hairy, sapsucker)",
+      "Natural tree hollows (rot cavities in dead/dying trees, broken conifer tops)",
+      "Cliff crevices (cracks in rock faces, especially south-facing with morning sun)",
+      "Rock outcrops (montane and alpine crevices above treeline)",
+      "Human structures (occasional -- under eaves, siding gaps, nest boxes -- but NOT dependent)"
+    ],
+    "altitude_range": "Sea level to 2,500+ m (8,000+ ft). Widest altitudinal range of any swallow in the engine. The cliff-nesting habit enables high-elevation breeding where trees are sparse.",
+    "starling_advantage": "Small body (14 g) fits cavity entrances too small for European Starlings (~4.5 cm requirement). Natural 'starling-proofing' through body size. This is why the Violet-green never suffered the population collapse that devastated the Purple Martin.",
+    "comparison_to_martin": {
+      "purple_martin_26": "Almost entirely dependent on human-built nest boxes (90%+). Sea level only. Obligate colonial. Severely affected by starling competition. Managed species.",
+      "violet_green_27": "Natural cavities across full altitude range. Solitary/paired. Small size excludes starling competition. Self-sustaining. No management needed."
+    }
+  },
+  "aerial_insectivory": {
+    "description": "Aerial insectivore like the Purple Martin but with different flight characteristics reflecting smaller body. Low wing loading gives exceptional maneuverability -- tight turns, abrupt direction changes, rapid altitude adjustments. The fighter jet of the swallow trio.",
+    "flight_comparison": {
+      "purple_martin_26": "Heavy (45-60 g), powerful direct flight, wide turns, forages at 15-150+ m, sustained 30-60 min bouts, takes large insects (dragonflies, beetles).",
+      "violet_green_27": "Light (14 g), agile darting flight, tight turns, forages at 5-100 m, shorter bouts (10-30 min), takes small insects (midges, gnats, small flies)."
+    },
+    "resource_partitioning": "When both species forage over the same water body, they occupy the same airspace but eat different prey sizes. Martin takes large insects, Violet-green takes small insects. Size-based resource partitioning allows coexistence.",
+    "prey": "Small flying insects: midges, gnats, small flies, mosquitoes, winged aphids, small beetles. Prey items too small for the larger Purple Martin."
+  },
+  "western_specialty": {
+    "description": "The Violet-green Swallow is a western endemic -- breeding range restricted to western North America from Alaska to Mexico. In the PNW, it is one of the most common swallows -- roughly 20:1 more numerous than the Purple Martin. Yet less well-known to the public because: (1) nests in inconspicuous locations, (2) no compelling conservation narrative, (3) quiet vocalization, (4) small size.",
+    "population": "Approximately 7.7 million breeding individuals continent-wide (Partners in Flight). Tens of thousands of breeding pairs in the PNW.",
+    "paradox": "More common but less known. Self-sufficiency is less newsworthy than dependency. The quiet, common, independent bird lives in the shadow of the loud, rare, managed one."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The liquid twitter -- rapid descending FM chips with discrete boundaries (each chip a complete acoustic event, the 28th element, the rain to the martin's stream -- two liquid textures with different time-domain structures)",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/liquid-twitter/",
+      "examples": [
+        "Violet-green Swallow: rapid descending FM chips (15-30 ms, 1-2 kHz drop per chip, 10-20 chips/sec). Each chip discrete with onset, peak, offset. A burst of drops.",
+        "Purple Martin (degree 26): continuous FM sweeps flowing into each other without discrete boundaries. A stream.",
+        "Rain vs. stream: same substance (water), same descriptor (liquid), different physical structure (discrete drops vs. continuous flow). The Violet-green is the rain. The martin is the stream.",
+        "In music: staccato pizzicato (plucked string -- each note a discrete event) vs. legato arco (bowed string -- notes flowing). The Violet-green is pizzicato, the martin is arco."
+      ],
+      "music_theory_parallel": "The liquid twitter introduces a second 'liquid' texture that differs from the first (degree 26) in time-domain structure. The martin's gurgle is continuous -- no boundaries between notes, sound flows without interruption. The Violet-green's twitter is discrete -- each chip is a complete event separated by micro-silences. Both are 'liquid' in timbre (smooth FM contours, no harsh transients), but the organization is opposite: legato vs. staccato, arco vs. pizzicato, stream vs. rain. This demonstrates that a single timbral quality (liquid) can produce two fundamentally different acoustic textures depending on temporal organization. The adjective is necessary but not sufficient -- you must also specify the time structure."
+    },
+    {
+      "concept": "Tachycineta consecutive pair -- same-genus species in consecutive degrees (27-28), the engine's tightest taxonomic adjacency, nested within the Hirundinidae trio (26-28)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/tachycineta-pair/",
+      "examples": [
+        "Tachycineta: Violet-green Swallow (27, high twitter) and Tree Swallow (28, moderate twitter). Same genus, consecutive degrees, different acoustic expression.",
+        "Catharus: Swainson's Thrush (18, ascending spiral) and Veery (19, descending spiral). Same genus, consecutive degrees, opposite acoustic direction.",
+        "Nested taxonomy: Hirundinidae (family, 26-28) contains Tachycineta (genus, 27-28). Family-level trio contains genus-level pair. The engine has never created this kind of nested hierarchy.",
+        "In music: a symphony movement (family-level form) containing a theme-and-variation section (genus-level form). The macro structure nests the micro structure."
+      ],
+      "music_theory_parallel": "The Tachycineta pair at degrees 27-28 is the engine's second same-genus consecutive pair (after Catharus at 18-19) and its first nested-within-a-family-cluster. The Hirundinidae trio (26-28) is the family-level form; within it, the Tachycineta pair (27-28) is the genus-level subform. This nesting creates a taxonomic hierarchy expressed in sequential degrees: family > genus > species. The engine has been building toward finer and finer taxonomic resolution -- from order-level to family-level to genus-level. The Tachycineta pair is the finest grain yet: two species from the same genus, consecutive degrees, exploring the smallest evolutionary distance the engine has attempted."
+    },
+    {
+      "concept": "Within-family plumage divergence -- two iridescent swallows with opposite visual strategies (uniformly dark vs. high-contrast green-and-white, same structural coloration mechanism, different evolutionary solutions)",
+      "level": "intermediate",
+      "department": "ecology/signaling",
+      "college_path": ".college/ecology/signaling/plumage-divergence/",
+      "examples": [
+        "Purple Martin (26): uniformly dark iridescent purple-black. Low contrast. Male appears nearly black from any distance. Stealthy in flight.",
+        "Violet-green Swallow (27): iridescent green above, clean white below. Maximum contrast. White patches on face and rump are species-diagnostic. Conspicuous in flight.",
+        "Same physical mechanism (thin-film interference in feather barbule nanostructure) producing different colors and different contrast levels. The physics is shared; the implementation diverges.",
+        "In music: two artists using the same instrument (electric guitar) with radically different tone settings. One plays clean and bright (Violet-green's high contrast). One plays overdriven and dark (martin's uniformly dark). Same instrument, different signal."
+      ],
+      "music_theory_parallel": "The two iridescent swallows demonstrate that shared physics can produce divergent aesthetics. Structural coloration is the mechanism for both species, but the nanostructure of the feather barbules is tuned differently: the martin produces deep violet-purple (low brightness, low contrast with dark underparts), while the Violet-green produces brilliant green and violet (high brightness, maximum contrast with white underparts). This is analogous to two synthesizers sharing the same oscillator architecture but producing radically different timbres through different filter settings. The hardware is conserved; the parameters vary."
+    },
+    {
+      "concept": "Natural cavity independence -- size as competitive advantage (small body fits small holes that exclude starlings, enabling self-sufficient housing without human intervention)",
+      "level": "intermediate",
+      "department": "ecology/nesting",
+      "college_path": ".college/ecology/nesting/cavity-independence/",
+      "examples": [
+        "Violet-green Swallow: 14 g body, uses cavity entrances too small for European Starlings. Natural 'starling-proofing.' No nest box programs needed.",
+        "Purple Martin (degree 26): 45-60 g body, needs larger cavities that starlings can also use. Lost the competition. Now managed.",
+        "The Spotted Owl (degree 4): uses large old-growth cavities. Conservation = protect the trees. The Violet-green uses diverse small cavities. Conservation = nothing needed.",
+        "In economics: small businesses that serve niches too small for large corporations to bother with. The Violet-green is the niche operator. The martin tried to compete at the same scale as starlings and lost."
+      ],
+      "music_theory_parallel": "The Violet-green Swallow solved its housing crisis by being small enough to use resources the competition cannot access. This is the principle of niche differentiation through body size -- the same principle that allows both species to coexist as aerial insectivores (martin takes large prey, Violet-green takes small prey). Size is the master variable: it determines frequency range (smaller syrinx = higher pitch), prey selection (smaller gape = smaller insects), cavity access (smaller body = smaller holes), and flight agility (lower mass = tighter turns). The Violet-green is the engine's demonstration that being small is not a disadvantage but a STRATEGY -- a coherent solution to multiple ecological problems."
+    },
+    {
+      "concept": "The swallow trio middle movement -- degrees 26-28 gradient deepens (heavy/low/colonial -> light/high/solitary -> medium/moderate/semi-colonial, bookend extremes with centrist in between)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/swallow-trio/",
+      "examples": [
+        "Degree 26 (Purple Martin): heavy, low-pitched, colonial, dependent. The patriarch.",
+        "Degree 27 (Violet-green Swallow): light, high-pitched, solitary, self-sufficient. The cliff dweller.",
+        "Degree 28 (Tree Swallow): medium, moderate-pitched, semi-colonial, partially dependent. The centrist.",
+        "In sonata form: exposition (26, establishes the theme), development (27, explores the opposite extreme), recapitulation (28, finds the middle ground). The swallow trio IS sonata form in three degrees."
+      ],
+      "music_theory_parallel": "The swallow trio at degree 27 reveals its structure as a three-part gradient with bookend extremes. The Purple Martin (26) is the heavy, low, colonial pole. The Violet-green Swallow (27) is the light, high, solitary pole. The Tree Swallow (28) will occupy the center -- medium in every dimension. This ABA-like structure (extreme-opposite extreme-middle) is a classical form: thesis, antithesis, synthesis. The convergence trio (23-25) was three species converging on one point. The swallow trio is three species spanning a gradient. Convergence gave the engine a point attractor. Divergence gives it a line of variation."
+    },
+    {
+      "concept": "Energy septet -- seven consecutive E=4 degrees (21-27) demonstrating sustained high energy across seven different acoustic textures while the dynamic level holds constant",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-septet/",
+      "examples": [
+        "Degrees 21-27: hammer, drum, groove reset, hoarse warble, caroling, liquid gurgle, liquid twitter. Seven textures at sustained E=4.",
+        "The E=4 septet: the longest energy plateau in engine history. Seven degrees. Seven different sounds. Same dynamic level.",
+        "Compare the initial E=2 run (degrees 0-7): eight degrees at low energy. The E=4 septet is approaching the same duration at high energy.",
+        "In a DJ set: maintaining peak energy across seven genre transitions. House, techno, drum & bass, garage, breaks, ambient bass, liquid funk. Intensity holds while everything else changes."
+      ],
+      "music_theory_parallel": "Seven consecutive E=4 degrees is now the engine's longest sustained energy plateau, formally a septet. The seven members span percussion (flicker voice, flicker drum), tonal melody (grosbeak warble, tanager warble, robin caroling), and two liquid textures (martin gurgle, Violet-green twitter). Seven fundamentally different sound types at the same energy level. The plateau is now one degree longer than the initial E=2 run (degrees 0-7, eight degrees, but with a 1-to-2 transition at degree 0). The question sharpens: when does the plateau break? The energy has been at 4 for nearly a quarter of all degrees emitted. Something must change."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-026",
+      "title": "Purple Martin (Degree 26)",
+      "connection": "WITHIN-FAMILY CONTRAST. Same family (Hirundinidae), maximum species-level contrast. Martin: large (45-60 g), colonial, low-pitched (2-6 kHz peak), continuous liquid stream, sea-level, conservation-dependent. Violet-green: small (14 g), solitary, high-pitched (5-8 kHz peak), discrete liquid chips, valley-to-alpine, self-sufficient. The heavy bomber and the fighter jet. The cello and the piccolo."
+    },
+    {
+      "project": "SPS-018",
+      "title": "Swainson's Thrush (Degree 18)",
+      "connection": "SAME-GENUS CONSECUTIVE PAIR (first instance). The Catharus pair (18-19) parallels the Tachycineta pair (27-28). Both place same-genus species in consecutive degrees. Catharus: ascending spiral (18) vs. descending spiral (19). Tachycineta: high twitter (27) vs. moderate twitter (28). The engine's finest taxonomic resolution."
+    },
+    {
+      "project": "SPS-019",
+      "title": "Veery (Degree 19)",
+      "connection": "SAME-GENUS CONSECUTIVE PAIR (second member). The Veery completes the Catharus pair at degree 19. The Violet-green Swallow begins the Tachycineta pair at degree 27. Same structural pattern: same genus, consecutive degrees, acoustic variation within the tightest evolutionary relationship."
+    },
+    {
+      "project": "SPS-023",
+      "title": "Black-headed Grosbeak (Degree 23)",
+      "connection": "CONVERGENCE VS. DIVERGENCE. The convergence trio (23-24-25) showed different lineages arriving at similar sounds (robin-like warbles). The swallow trio (26-27-28) shows one lineage producing different sounds (gurgle, twitter, liquid twitter). Opposite structural principles in consecutive multi-degree arcs."
+    },
+    {
+      "project": "SPS-008",
+      "title": "Golden-crowned Kinglet (Degree 8)",
+      "connection": "HIGH-FREQUENCY COMPARISON. Kinglet: 6-10 kHz ultra-high (canopy apex). Violet-green: 5-8 kHz peak (aerial apex). Two of the highest-pitched species in the engine. Both small-bodied -- size constrains fundamental frequency upward."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Voice (Degree 21)",
+      "connection": "CAVITY ECONOMY. The flicker excavates cavities at degrees 21-22. The Violet-green uses old woodpecker holes at degree 27. The woodpecker's work becomes the swallow's home. Also: energy septet continues -- seven consecutive E=4 degrees (21-27)."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Spotted Owl (Degree 4)",
+      "connection": "CAVITY NESTING, SELF-SUFFICIENT MODEL. Both secondary cavity nesters using natural cavities. Owl: large old-growth cavities (rare, threatened). Violet-green: diverse small cavities across cliff, tree, and rock (abundant). The owl needs old growth preserved. The Violet-green needs nothing."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Violet-green Swallow documented in AVI as common western swallow. Breeding ecology, migration timing, aerial insectivory, cavity nesting in diverse substrates."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Cliff and rock face ecosystems as nesting habitat. Montane and alpine insect communities as food base. Altitudinal range from valley floor to above treeline. The vertical dimension of PNW ecology."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: The Dynamics (Soul/R&B, E=4, Central District, Calla). Both produce liquid sound that moves quickly. Both are rooted in a specific community and place. Seventh consecutive E=4."
+    }
+  ],
+  "degree_arc": {
+    "position": "The liquid twitter -- the second swallow, the swallow trio's middle movement. Second Hirundinidae. First Tachycineta (genus shared with Tree Swallow at degree 28). Seventh consecutive E=4. 28th acoustic element. 26th unique species. The stream becomes rain.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic spiral (7) -> ultrasonic threshold (8) -> variation (9) -> minimum signal (10) -> trill/tremolo (11) -> sawtooth sweep (12) -> ostinato (13) -> repetition-resolution (14) -> accelerando (15) -> crescendo (16) -> the hook (17) -> ascending spiral (18) -> descending spiral (19) -> sustain/the release (20) -> the hammer (21) -> resonant percussion (22) -> the groove reset (23) -> the hoarse warble (24) -> the caroling (25) -> the liquid gurgle (26) -> the liquid twitter (27)",
+    "key_insight": "Degree 27 is the within-family contrast point. If degree 26 opened the sky with the largest swallow, degree 27 fills that sky with its smallest and most agile resident. The Violet-green Swallow is everything the Purple Martin is not: small where the martin is large, solitary where the martin is colonial, high-pitched where the martin is low, discrete where the martin is continuous, self-sufficient where the martin is managed. The same family, the same bauplan, the same aerial insectivore lifestyle -- but every parameter is set to the opposite extreme. This is the engine's clearest demonstration of within-family divergence: shared ancestry producing maximal ecological and acoustic differentiation. The convergence trio asked how different families arrive at the same sound. The swallow trio asks how one family departs in every direction.",
+    "acoustic_element_28": "THE LIQUID TWITTER -- rapid descending FM chips (15-30 ms, 1-2 kHz drop per chip) at 10-20 chips/sec with discrete boundaries. Each chip is a complete sound event. The twitter is organized as a burst (0.5-2.0 sec) of similar chips. 3-9 kHz frequency range, peak energy 5-8 kHz. Thin, high, crystalline timbre. The 28th element: silence, cascade, drone, language, motif, metronome, question, harmonic spiral, ultrasonic threshold, variation, minimum signal, trill/tremolo, sawtooth sweep, ostinato, repetition-resolution, accelerando, crescendo, the hook, ascending spiral, descending spiral, release, the hammer, resonant percussion, the groove reset, the hoarse warble, the caroling, the liquid gurgle, THE LIQUID TWITTER.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide)",
+      "degree_7": "Harmonic series navigation (mathematical melody)",
+      "degree_8": "Ultra-high ascending series (audiometric boundary crossing)",
+      "degree_9": "Variation on combinatorial syntax (the cover version)",
+      "degree_10": "Minimum viable signal (1-bit presence, swarm cohesion)",
+      "degree_11": "Tremolo / trill (rapid repetition at fusion threshold)",
+      "degree_12": "Ascending sawtooth sweep (buzzy waveform ascending)",
+      "degree_13": "Ostinato (two-note repeated phrase below fusion threshold)",
+      "degree_14": "Ternary / AAB (repetition with contrasting resolution)",
+      "degree_15": "Accelerando (tempo-varying chattering series)",
+      "degree_16": "Crescendo (dynamic-varying sweet series)",
+      "degree_17": "Hook (rhythmic two-note cell, memorability through repetition)",
+      "degree_18": "Ascending spiral (sequential phrases each higher)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each lower, bilateral syrinx)",
+      "degree_20": "Trill with parametric decay / ADSR release (triple descent, fade-out)",
+      "degree_21": "The hammer (sustained discrete metronomic repetition at constant pitch, constant volume, energy 4)",
+      "degree_22": "Resonant percussion (broadband substrate-dependent mechanical percussion above fusion threshold -- the first non-vocal sound)",
+      "degree_23": "The groove reset (rich robin-like warble of rapidly alternating slurred phrases -- return to tonal melody after percussion, convergent with American Robin, both sexes sing)",
+      "degree_24": "The hoarse warble (robin-like architecture with spectral roughness -- tonal melody through grainy medium, timbral distortion as species identity, convergence trio middle member)",
+      "degree_25": "The caroling (cyclic melodic repetition of clear bright slurred whistles -- the archetype. Convergence trio resolved. The most recognized birdsong in North America)",
+      "degree_26": "The liquid gurgle (rapid sinusoidal FM sweeps with smooth transitions -- continuous flowing vocalization without discrete phrase boundaries. The first aerial species)",
+      "degree_27": "The liquid twitter (rapid descending FM chips with discrete boundaries -- each chip a complete acoustic event. The rain to the martin's stream. Two liquid textures. The second aerial species)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz)",
+      "degree_8": "Ultra-high (6-10 kHz)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz)",
+      "degree_20": "Upper-mid to mid (3.0-6.5 kHz)",
+      "degree_21": "Mid-range to upper-mid (1.5-4.0 kHz -- tonal, pitched, harmonic content)",
+      "degree_22": "BROADBAND (100 Hz to 8+ kHz -- no fundamental pitch, substrate-dependent peak energy 500 Hz to 4 kHz)",
+      "degree_23": "Mid-range (1.5-4.5 kHz -- warm, rich, robin-like. Peak energy 2.0-3.5 kHz)",
+      "degree_24": "Mid-range (1.5-4.5 kHz -- hoarse, rough, robin-like. Peak energy 2.0-3.5 kHz)",
+      "degree_25": "Mid-range (2.0-4.0 kHz -- bright, clean, clipped. Peak energy 2.0-3.5 kHz)",
+      "degree_26": "Wideband (1.0-8.0 kHz -- liquid, gurgling, continuous. Peak energy 2.0-6.0 kHz)",
+      "degree_27": "High (3.0-9.0 kHz -- thin, crystalline, discrete chips. Peak energy 5.0-8.0 kHz. Highest-pitched swallow in engine)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel)",
+      "degree_9": "Referential threat information (conserved content, varied delivery)",
+      "degree_10": "Pure presence / flock cohesion (1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep",
+      "degree_13": "Territory + pair bond through persistent repetition",
+      "degree_14": "Territory + mate attraction through narrative",
+      "degree_15": "Territory + mate attraction through urgency",
+      "degree_16": "Territory + mate attraction through brightness",
+      "degree_17": "Territory + mate attraction through the hook",
+      "degree_18": "Territory + mate attraction through ascending spiral",
+      "degree_19": "Territory + mate attraction through descending spiral",
+      "degree_20": "Territory + mate attraction through fading trill (evaporation)",
+      "degree_21": "Territory + mate attraction through the hammer (sustained metronomic vocal force at energy 4)",
+      "degree_22": "Territory + mate attraction + HABITAT QUALITY through resonant percussion (the substrate encodes territory quality)",
+      "degree_23": "Territory + mate attraction + PAIR COORDINATION through both-sex warble (vocal symmetry as reproductive strategy)",
+      "degree_24": "Territory + mate attraction + FORAGING QUALITY through hoarse warble + honest plumage signal (dual-channel honest signaling)",
+      "degree_25": "Territory + mate attraction + SEASONAL PRESENCE through cyclic caroling (year-round residency, dawn chorus leadership)",
+      "degree_26": "Colony cohesion + mate attraction + NEST SITE ADVERTISEMENT through liquid gurgling (colonial display, ensemble acoustics)",
+      "degree_27": "Pair coordination + CAVITY DEFENSE through liquid twitter (in-flight contact, nest site proximity signals, aerial mate tracking -- the sound of the paired cliff-dwelling insectivore)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood)",
+      "degree_19": "Lowland riparian (deciduous thicket, range edge)",
+      "degree_20": "Shrubby slope (upland brushy hillside)",
+      "degree_21": "Open woodland (scattered trees with broken canopy, grassy openings, mosaic)",
+      "degree_22": "Forest snag (dead standing wood -- the instrument IS the habitat)",
+      "degree_23": "Mixed forest (any mixture of deciduous and conifer trees)",
+      "degree_24": "Conifer forest (Douglas fir-hemlock-cedar closed canopy)",
+      "degree_25": "Lawn and woodland (managed grassland adjacent to trees -- most human-adjacent)",
+      "degree_26": "Open sky near water (three-dimensional air column above harbors, lakes, rivers)",
+      "degree_27": "Open water (air column over water + cliff faces + montane -- the ecosystem extends vertically from sea level to alpine)"
+    }
+  },
+  "conservation": {
+    "population_estimate": "Approximately 7.7 million breeding individuals continent-wide (Partners in Flight 2020). Tens of thousands of breeding pairs in the PNW.",
+    "trend": "Stable to slightly declining in some regions. No major conservation concerns. Self-sustaining without human intervention.",
+    "threats": [
+      "General habitat loss (snag removal reduces some cavity availability, but cliff and rock crevice sites are unaffected)",
+      "Insecticide use (reduces aerial insect prey base)",
+      "Climate change (altered insect emergence timing, phenological mismatch potential)",
+      "Window strikes (small size and fast flight make window collisions a mortality factor)"
+    ],
+    "conservation_status": "IUCN Least Concern. No state or federal listing. Self-sustaining population. No management programs required. Contrast with Purple Martin's management dependency."
+  },
+  "part_a_parallel": {
+    "artist": "The Dynamics",
+    "degree": 27,
+    "genre": "Soul/R&B",
+    "location": "Central District, Seattle",
+    "era": "Calla",
+    "release_type": "Calla",
+    "shared_principle": "Both produce liquid sound that moves quickly -- the Dynamics' tight soul/R&B arrangements and the Violet-green's rapid liquid chips share a quality of swift, clean, musical precision. Both are rooted in a specific community and place (Central District / PNW cliff and forest). Seventh consecutive E=4.",
+    "resonance_points": [
+      "Liquid precision: The Dynamics' soul vocals are tight, clean, quick-moving. The Violet-green's chips are thin, clean, rapid. Both are lighter and faster than their predecessor parallels (Shaina Shepherd / Purple Martin at degree 26).",
+      "Community roots: The Dynamics are a Central District band -- rooted in Seattle's historically Black neighborhood. The Violet-green is rooted in the PNW's western mountains and cliffs. Both belong to a specific place.",
+      "Less known than the predecessor: The Dynamics are less widely known than Shaina Shepherd. The Violet-green is less known than the Purple Martin. Both are the quieter, more common presence.",
+      "Seventh consecutive E=4: the energy plateau extends to its longest run. Seven degrees. Seven textures. When does it break?"
+    ]
+  }
+}

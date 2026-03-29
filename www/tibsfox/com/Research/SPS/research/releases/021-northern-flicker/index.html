@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 21&deg; &mdash; Northern Flicker &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.hammer { background: #BF360C; }
+    .theory-icon.streak { background: #1B5E20; }
+    .theory-icon.energy { background: #E65100; }
+    .theory-icon.cavity { background: #795548; }
+    .theory-icon.eavesdrop { background: #2E7D32; }
+    .theory-icon.tongue { background: #00838F; }
+    .theory-icon.pair { background: #7B1FA2; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Streak-breaker card */
+    .streak-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FF8A65 100%);
+      border: 1px solid #E64A19;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Order progression card */
+    .order-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .order-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #FF9800;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Flicker pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 1px solid #AB47BC;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #6A1B9A;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">21&deg;</div>
+      <div class="release-title-block">
+        <h2>Northern Flicker</h2>
+        <div class="scientific">Colaptes auratus cafer &middot; Family Picidae (Woodpeckers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Loud Wick-wick-wick Call &middot; Open Woodland &middot; Year-round Resident &middot; Energy 4</div>
+
+    <blockquote>
+      On a bright morning in an open woodland park, a large brown-barred bird lands on the
+      ground &mdash; not a branch, not a trunk, the ground. It hops forward, drives its bill
+      into the earth. From the top of a nearby dead alder, a call erupts: wick-wick-wick-wick-wick.
+      Loud. Emphatic. Each note a hammer strike. The same pitch. The same volume. Thirty times.
+      Then silence. The call does not fade. It stops. On the next upward swoop of undulating
+      flight, the white rump patch flashes and salmon-red underwings catch the morning light.
+      The Northern Flicker. The first Picidae. The second non-passerine. The hammer.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Streak-Breaker Card -->
+        <div class="streak-card">
+          <h3>The Passerine Streak Is Broken</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>Twenty consecutive passerines.</strong> Degrees 1&ndash;20: every species
+            from a single order (Passeriformes). The only non-passerine was the Great Blue
+            Heron at degree 0. The Northern Flicker breaks the streak. The ratio shifts from
+            20:1 to 20:2. A third avian order enters the circle.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Order</th><th>Family</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0&deg;</td><td>Great Blue Heron</td><td>Pelecaniformes</td><td>Ardeidae</td></tr>
+              <tr style="color: var(--page-text-light);"><td>1&deg;&ndash;20&deg;</td><td>(20 passerines)</td><td>Passeriformes</td><td>(8 families)</td></tr>
+              <tr style="background: rgba(230,74,25,0.15); font-weight: 600;"><td><strong>21&deg;</strong></td><td><strong>Northern Flicker</strong></td><td><strong>Piciformes</strong></td><td><strong>Picidae</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Woodpecker That Walks</h2>
+        <p>
+          The Northern Flicker (<em>Colaptes auratus</em>) belongs to the family
+          <strong>Picidae</strong> (woodpeckers) within the order <strong>Piciformes</strong>.
+          The PNW subspecies is the <strong>Red-shafted Flicker</strong>
+          (<em>C. a. cafer</em>) &mdash; named by Gmelin in 1788 under the mistaken belief
+          the specimen came from South Africa. Salmon-red underwings and undertail feathers.
+          Males show a red moustachial stripe.
+        </p>
+        <p>
+          <strong>Dimensions:</strong> 12.5&ndash;14 inches (32&ndash;36 cm), wingspan
+          19&ndash;21 inches, weight 110&ndash;160 g. <strong>The largest bird in the
+          engine</strong> &mdash; nearly three times the mass of the next-heaviest passerine.
+          Brown-barred back, black bib, bold black belly spots, conspicuous white rump patch,
+          and the flash of salmon-red feather shafts in undulating flight.
+        </p>
+
+        <!-- Order Progression Card -->
+        <div class="order-card">
+          <h3>Order Piciformes: What Woodpeckers Bring</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Piciformes brings capabilities that Passeriformes cannot provide:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Capability</th><th>Passeriformes (1&ndash;20)</th><th>Piciformes (21+)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sound</td><td>Syrinx only (vocal)</td><td>Syrinx + bill percussion</td></tr>
+              <tr><td>Foraging</td><td>Gleaning, probing</td><td>Ground probing, bark excavation</td></tr>
+              <tr><td>Body</td><td>7&ndash;100 g</td><td>110&ndash;160 g (largest in engine)</td></tr>
+              <tr><td>Feet</td><td>Anisodactyl (3+1)</td><td>Zygodactyl (2+2)</td></tr>
+              <tr><td>Tongue</td><td>Short, standard</td><td>Hyoid-wrapped, barbed, sticky</td></tr>
+              <tr><td>Nesting</td><td>Cups, domes</td><td>Cavity excavation (creates housing)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Wick-Wick-Wick Call</h2>
+        <p>
+          A loud, far-carrying series of rapidly repeated &ldquo;wick&rdquo; notes at
+          <strong>6&ndash;10 notes per second</strong>, lasting <strong>5&ndash;8 seconds</strong>
+          (25&ndash;36 notes per burst). Each note is sharp, emphatic, and downward-inflected.
+          Frequency band: <strong>1.5&ndash;4.0 kHz</strong>, fundamental near 2.0&ndash;2.5 kHz.
+          Pitch is <strong>constant</strong> across the series &mdash; no ascending, descending,
+          or modulatory contour. Volume is <strong>constant</strong> &mdash; no fade, no crescendo.
+          Then the call simply <strong>stops</strong>. The hammer.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>1.5&ndash;4.0 kHz</td></tr>
+            <tr><td>Fundamental</td><td>~2.0&ndash;2.5 kHz (steady)</td></tr>
+            <tr><td>Series length</td><td>25&ndash;36 notes (range: 15&ndash;50+)</td></tr>
+            <tr><td>Duration</td><td>5&ndash;8 seconds</td></tr>
+            <tr><td>Note rate</td><td>~6&ndash;10 per second</td></tr>
+            <tr><td>Timbre</td><td>Sharp, emphatic, bright</td></tr>
+            <tr><td>Amplitude</td><td>LOUD &mdash; carries 500+ meters</td></tr>
+            <tr><td>Pitch contour</td><td>FLAT &mdash; every note identical</td></tr>
+            <tr><td>Key property</td><td>Sustained metronomic repetition at E=4</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>First Energy 4: Crossing the Threshold</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The previous energy ceiling was 3, held for six consecutive species (degrees 15&ndash;20).
+            The Northern Flicker is the first species in the engine rated at energy 4.
+            Part A (Polyrhythmics) also crosses to E=4 at the same degree &mdash;
+            <strong>both engines synchronize their energy escalation</strong> for the first time.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Energy</th><th>Degrees</th><th>Character</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>8, 10, 12</td><td>Quiet / threshold</td></tr>
+              <tr><td>2</td><td>0&ndash;7, 9, 11, 13, 14</td><td>Moderate / baseline</td></tr>
+              <tr><td>3</td><td>15&ndash;20</td><td>Active / emphatic</td></tr>
+              <tr style="background: rgba(255,152,0,0.18); font-weight: 600;"><td><strong>4</strong></td><td><strong>21</strong></td><td><strong>Loud / commanding</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Flicker Pair Card -->
+        <div class="pair-card">
+          <h3>The Flicker Pair: Degrees 21 &amp; 22</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Northern Flicker appears at <strong>two consecutive degrees</strong> &mdash;
+            the engine&rsquo;s first species-pair. Degree 21 is the vocal call (wick-wick-wick,
+            syrinx-produced). Degree 22 will be the <strong>drum</strong> (bill striking a
+            resonant substrate &mdash; the first non-vocal, mechanical sound in the engine).
+            Same species, two fundamentally different sound-production mechanisms.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Degree 21: Wick Call</th><th>Degree 22: Drum</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Source</td><td>Syrinx (vocal)</td><td>Bill on substrate (mechanical)</td></tr>
+              <tr><td>Character</td><td>Tonal (pitched)</td><td>Broadband (percussive)</td></tr>
+              <tr><td>Engine role</td><td>21st vocal species</td><td>First non-vocal sound</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ecology -->
+        <h2>Ground-Foraging Ecology</h2>
+        <p>
+          The most ground-foraging woodpecker in North America. Spends <strong>75%+</strong>
+          of its foraging time on the ground, primarily eating <strong>ants</strong>
+          (<em>Formica</em>, <em>Camponotus</em>, <em>Lasius</em>). A single stomach was
+          found to contain <strong>5,000+ ants</strong>. The flicker&rsquo;s tongue &mdash;
+          supported by hyoid bones that wrap around the skull &mdash; extends <strong>2 inches
+          beyond the bill tip</strong>, barbed and coated in sticky saliva. A precision
+          extraction tool cycling at two probes per second.
+        </p>
+        <p>
+          <strong>Anting behavior:</strong> The flicker deliberately places ants on its feathers
+          or sits on ant mounds, likely for ectoparasite control via formic acid. The most
+          ant-dependent bird in North America engaging in the most frequent anting behavior.
+        </p>
+        <p>
+          <strong>Cavity-nesting ecosystem service:</strong> As a primary cavity excavator,
+          the flicker creates nest holes used by dozens of species &mdash; swallows, bluebirds,
+          kestrels, saw-whet owls, flying squirrels. Its excavation builds housing for an
+          entire community.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon hammer">H</div>
+            <div class="theory-content">
+              <h4>The Hammer &mdash; 22nd Acoustic Element</h4>
+              <p>Sustained, discrete, metronomic, loud repetition of identical percussive-attack notes at constant pitch and volume. Below fusion threshold (each note heard individually). The foundational beat.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon streak">S</div>
+            <div class="theory-content">
+              <h4>Passerine Streak Broken</h4>
+              <p>20 consecutive passerines end at degree 21. Third avian order (Piciformes) enters the circle. Woodpeckers bring percussion, zygodactyl feet, hyoid tongues, cavity excavation.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>First Energy 4</h4>
+              <p>Six-degree E=3 plateau broken. Part A (Polyrhythmics) and Part B (Northern Flicker) cross the threshold simultaneously &mdash; synchronized energy escalation.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">P</div>
+            <div class="theory-content">
+              <h4>The Flicker Pair (Degrees 21&ndash;22)</h4>
+              <p>First species-pair: same organism, two sound-production mechanisms (vocal call at 21, mechanical drum at 22). Redundant channels &mdash; same territorial message, different physical domains.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon eavesdrop">N</div>
+            <div class="theory-content">
+              <h4>Eavesdropping Network &mdash; 6th Node</h4>
+              <p>Third broadcaster. Ungraded klaxon alarm (loud &ldquo;kyeer!&rdquo;) vs. chickadee encoded alarms. The fire alarm, not the security report. First non-passerine in the network.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon tongue">T</div>
+            <div class="theory-content">
+              <h4>The Hyoid Tongue</h4>
+              <p>Tongue wraps around skull, extends 2 inches beyond bill, barbed and sticky. The feeding adaptation that makes the flicker&rsquo;s ground-foraging, ant-eating ecology possible.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon cavity">C</div>
+            <div class="theory-content">
+              <h4>Primary Cavity Excavator</h4>
+              <p>Creates nest cavities used by swallows, bluebirds, kestrels, owls, and flying squirrels. Ecological infrastructure species &mdash; its excavation builds housing for a community.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>THE OTHER NON-PASSERINE. Degree 0 established silence (Pelecaniformes). Degree 21 brings percussion (Piciformes). The heron hunts by silence; the flicker announces by volume. Two non-passerines bookending the passerine arc.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>Territorial sound from different orders. The owl&rsquo;s four-note motif at E=2 in darkness vs. the flicker&rsquo;s wick series at E=4 in open woodland. Both territorial, both non-passerine-adjacent.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011: Oregon Junco</strong>
+            <p>METRONOMIC REPETITION &mdash; DIFFERENT FUSION. Junco trills above fusion threshold (notes blur into buzz). Flicker repeats below fusion (each wick heard individually). Same principle, different perceptual result.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-013: Hutton&rsquo;s Vireo</strong>
+            <p>REPETITION AT DIFFERENT SCALES. Vireo repeats slowly (meditative ostinato). Flicker repeats fast (urgent hammer). One whispers forever. The other shouts rapidly and stops.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-017: Common Yellowthroat</strong>
+            <p>THE HOOK VS. THE HAMMER. The hook has groove (patterned cell, internal structure). The hammer has beat (uniform pulse, no internal structure). Melodic repetition vs. rhythmic repetition.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>THE FADE VS. THE HAMMER. Degree 20 dissolved (triple descent, evaporation). Degree 21 maintains full power until cessation. Controlled decay vs. sustained force. Maximum contrast.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>One of the most recognizable PNW woodpeckers. Primary cavity excavator documented as a keystone ecosystem service provider in the PNW wildlife survey.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: Polyrhythmics (8-piece Jazz/Funk, Fremont, E=4). Both are energy-4 presences commanding acoustic space. The hammer meets the polyrhythm. Scale increase in both engines.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Open woodland ecology: Garry oak savanna, forest-meadow edges, urban parkland. Dead wood (snags) as keystone habitat structure for cavity nesters.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Wiebe, K.L. and Moore, W.S. (2020). Northern Flicker (<em>Colaptes auratus</em>). <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Northern Flicker. allaboutbirds.org</li>
+          <li>BirdWeb (Seattle Audubon Society). Northern Flicker species account. birdweb.org</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Bent, A.C. (1939). <em>Life Histories of North American Woodpeckers.</em> Smithsonian Institution.</li>
+          <li>Moore, W.S. and Price, J.T. (1993). Nature of selection in the Northern Flicker hybrid zone. <em>Evolution</em> 47(4): 1004&ndash;1020.</li>
+          <li>Van Wassenbergh, S., et al. (2022). Woodpeckers minimize cranial absorption of shocks. <em>Current Biology</em> 32(14): 3189&ndash;3194.</li>
+          <li>Beal, F.E.L. (1911). Food of the woodpeckers. <em>USDA Biological Survey Bulletin</em> 37: 1&ndash;64.</li>
+          <li>Elchuk, C.L. and Wiebe, K.L. (2003). Home-range size of Northern Flickers. <em>Can J Zool</em> 81(6): 954&ndash;961.</li>
+          <li>Templeton, C.N., Greene, E., and Davis, K. (2005). Allometry of alarm calls. <em>Science</em> 308: 1934&ndash;1937.</li>
+          <li>Partners in Flight (2020). Population estimates: Northern Flicker. partnersinflight.org</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey 1966&ndash;2019. USGS Patuxent.</li>
+          <li>Macaulay Library. Northern Flicker recordings. Cornell Lab of Ornithology. macaulaylibrary.org</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">21&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Picidae</div>
+          <div class="stat-detail">Woodpeckers &mdash; 1st in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Piciformes</div>
+          <div class="stat-detail">3rd order in engine (after Pelecaniformes, Passeriformes)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">FIRST energy 4 &mdash; breaks 6-degree E=3 plateau</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Open woodland</div>
+          <div class="stat-detail">Scattered trees + open ground mosaic</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">First strict resident since degree 13</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">1.5&ndash;4.0 kHz</div>
+          <div class="stat-detail">Fundamental ~2.0&ndash;2.5 kHz, constant pitch</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value"><em>C. a. cafer</em></div>
+          <div class="stat-detail">Red-shafted Flicker &mdash; PNW form</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">110&ndash;160 g</div>
+          <div class="stat-detail">Largest bird in engine (~3x next-heaviest passerine)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~9.9 M</div>
+          <div class="stat-detail">Declining ~1.2%/yr since 1966 (BBS)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">IUCN</div>
+          <div class="stat-value">Least Concern</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 21 &mdash; S36</div>
+          <div class="parallel-name">Polyrhythmics</div>
+          <div class="parallel-detail">Jazz/Funk &middot; E=4 &middot; Fremont &middot; 8-piece band</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Both are energy-4 presences that command the acoustic space.
+            Polyrhythmics builds polyrhythmic complexity from a locked groove.
+            The flicker delivers the foundational hammer beat. Both represent
+            a scale increase &mdash; bigger ensemble, bigger bird, bigger sound.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 21&deg; of 360&deg; &mdash; v1.49.157</p>
+  </footer>
+</body>
+</html>
