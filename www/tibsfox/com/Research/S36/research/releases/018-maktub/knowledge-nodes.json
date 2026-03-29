@@ -1,0 +1,260 @@
+{
+  "degree": 18,
+  "artist": "Maktub",
+  "slug": "018-maktub",
+  "genre": "Soul/Jazz (neo-soul, funk, rock fusion)",
+  "energy": 3,
+  "era": "1998-2007",
+  "location": {
+    "origin": "Seattle, Capitol Hill -- formed 1998 as a four-piece band; the first band (not solo artist or bandleader) in the S36 engine",
+    "formative": "Capitol Hill music scene (Crocodile Cafe, Showbox, Neumo's, Capitol Hill block parties); the post-grunge incubation space for genre-crossing live music; second Capitol Hill entry after Horvitz (degree 2)",
+    "career": "Seattle-based throughout active period (1998-2007); disbanded when Watts moved to NYC for comedy career; Goldman, Veley, Martin continued in Seattle music scene"
+  },
+  "born": "Formed Seattle 1998",
+  "died": "Disbanded 2007",
+  "labels": ["Velour Recordings", "Livewire Records"],
+  "members": [
+    {"name": "Reggie Watts", "role": "Vocals, keyboards", "note": "Also appears at degree 17 (solo) -- first multi-degree artist in the engine"},
+    {"name": "Kevin Goldman", "role": "Guitar", "note": "Rock edge, wah-pedal funk, clean jazz voicings"},
+    {"name": "Alex Veley", "role": "Bass, keyboards", "note": "Neo-soul harmonic bed, jazz-informed bass lines"},
+    {"name": "Davis Martin", "role": "Drums", "note": "Hard-hitting, funk-inflected, pocket grooves and explosive fills"}
+  ],
+  "theory_nodes": [
+    {
+      "concept": "Neo-soul harmony in groove context (extended jazz chords -- major 9ths, minor 11ths, altered dominants, suspended structures -- deployed over groove-first rhythm section; harmonic movement through voice-leading within chords rather than chord-to-chord functional progression; the groove IS the composition, harmony provides atmosphere)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/neo-soul-groove-harmony-extended-chords.md",
+      "examples": [
+        "Maktub -- neo-soul harmony over funk grooves: Goldman's guitar voicings (close-voiced extensions, altered tensions) in funk/rock rhythmic context; Veley's bass implying changes through motion rather than following charts; sustained minor 9th chords over eight-bar grooves with inner voice movement",
+        "D'Angelo -- Voodoo (2000): the national template for neo-soul harmony; extended chords floating over deep pocket grooves; Maktub's regional expression of the same harmonic language",
+        "Erykah Badu -- Baduizm (1997): jazz-informed soul harmony; the neo-soul movement that provided Maktub's harmonic vocabulary",
+        "Overton Berry (degree 5) -- groove-based piano: the groove-as-composition principle in solo piano form; Maktub extends this to full band (comparison)",
+        "Jeff Lorber (degree 16) -- fusion harmony: extended chords in a production context; composed vs. Maktub's emergent arrangement (comparison)"
+      ],
+      "description": "Neo-soul harmony takes the extended chord voicings of jazz and places them in a groove context where the rhythm section provides the structural framework and the chords provide color rather than functional direction. In traditional jazz, chords follow functional progressions (ii-V-I, circle-of-fifths); in neo-soul, chords float -- a minor 9th sustains for eight bars while the bass and drums establish a groove, and harmonic movement happens through voice-leading within the chord rather than chord-to-chord motion. Maktub operated in this harmonic space with jazz musicians' command of the language: Goldman's guitar drew from jazz chord vocabulary deployed in funk/rock rhythmic context; Veley's bass combined R&B pocket with jazz harmonic awareness. The groove IS the composition; harmony provides atmosphere. This is the first theory node deploying extended jazz harmony primarily in a soul/groove context rather than a jazz or fusion context. Eighteenth chromaticism deployment: groove chromaticism -- chromatic passing tones in bass line and guitar voicings serving the funk feel rather than melodic development.",
+      "genealogy": {
+        "ancestors": ["Groove-based piano -- Berry (degree 5); the groove-as-composition principle established", "Jazz Fusion harmony -- Lorber (degree 16); extended chords in a production/fusion context", "Vocal jazz harmony -- Anderson (degree 3); jazz voicings supporting vocal expression", "Neo-soul movement -- D'Angelo, Erykah Badu, Maxwell (national context); extended jazz harmony in soul/R&B framework"],
+        "relationship": "Neo-soul groove harmony descends from the jazz harmony tradition (documented at every prior degree) but inverts the hierarchy: in jazz, harmony is structural and rhythm is supportive; in neo-soul, rhythm is structural and harmony is atmospheric. The groove-as-composition principle was first documented at degree 5 (Berry's groove-based piano) and is now extended to a full band context. The neo-soul movement (D'Angelo, Badu, Maxwell) provided the national harmonic vocabulary that Maktub deployed in Seattle's Capitol Hill live-music context."
+      }
+    },
+    {
+      "concept": "Band arrangement as emergent composition (multiple instruments finding collective voice through real-time negotiation rather than top-down composed or arranged parts; the first BAND in the engine -- creative unit shifts from individual to group; collective improvisation as band identity)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/composition/band-arrangement-emergent-collective-voice.md",
+      "examples": [
+        "Maktub -- four musicians (vocals, guitar, bass/keys, drums) creating arrangements through collective listening and real-time response; no single composer directing; the groove as shared contract enabling collective exploration; songs stretching from four-minute studio versions to fifteen-minute live jams",
+        "Reggie Watts solo (degree 17) -- solo improvisation with loop station; one person's stream of consciousness; no negotiation required (comparison -- solo vs. collective improvisation)",
+        "Wayne Horvitz (degree 2) -- composed improvisation; parts written for ensemble by a single composer; top-down arrangement vs. Maktub's bottom-up emergence (comparison)",
+        "Quincy Jones (degree 0) -- orchestral arrangement; every note notated, every voicing deliberate; maximum composition, minimum improvisation (comparison)"
+      ],
+      "description": "Band arrangement through emergent composition represents a fundamentally different creative model from all prior degrees in the engine. Every previous degree featured a solo artist or bandleader -- a single creative authority around whom the music orbits. Maktub is the first project where the creative unit is plural: four musicians creating a unified voice through real-time negotiation. The distinction from composed arrangement (Horvitz, Jones) is that no single person controls the outcome. The distinction from solo improvisation (Watts degree 17) is that four streams of consciousness must negotiate coherence in real-time. The groove serves as the contract that makes band improvisation possible -- as long as all members hold the groove, exploration above it can proceed freely. This shifts the engine's understanding of composition from 'one person's vision distributed to many instruments' to 'many instruments finding a collective vision through shared listening.'",
+      "genealogy": {
+        "ancestors": ["Solo improvisation -- Watts (degree 17); one person's stream, no negotiation required", "Composed improvisation -- Horvitz (degree 2); top-down arrangement with improvised sections", "Orchestral arrangement -- Jones (degree 0); maximum composition, every note notated", "Groove-based composition -- Berry (degree 5); the groove as primary compositional element"],
+        "relationship": "Band arrangement as emergent composition inverts the engine's prior composition models. Jones (degree 0): fully composed for orchestra. Horvitz (degree 2): composed framework with improvised sections. Watts solo (degree 17): fully improvised by one person. Maktub (degree 18): fully improvised by four people collectively. The progression maps a two-dimensional space: (1) composed vs. improvised and (2) individual vs. collective. Maktub occupies the collective-improvised quadrant -- the first entry there."
+      }
+    },
+    {
+      "concept": "Multi-degree artist and project-based engine identity (Reggie Watts at degree 17 solo and degree 18 Maktub -- the same person producing radically different music in different creative configurations; the engine tracks projects not biographies; a project is a specific creative configuration of artist(s), genre, era, location, and relationships)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/engine/multi-degree-artist-project-identity.md",
+      "examples": [
+        "Reggie Watts degree 17 (solo) -- Jazz/Comedy, loop station, beatbox, one-man show, 2000s-present; The Uncategorizable archetype",
+        "Reggie Watts degree 18 (Maktub) -- Soul/Jazz, band frontman, soul singer, collective improvisation, 1998-2007; the workshop that preceded the solo career",
+        "Quincy Jones (degree 0) -- single degree, multiple roles (arranger, producer, bandleader) but one creative identity (comparison -- one person, one degree, multiple facets)",
+        "Bill Frisell (degree 1) -- single degree, multiple projects (solo, ensembles, film scores) but one creative identity (comparison)"
+      ],
+      "description": "The multi-degree artist concept establishes that the S36 engine tracks projects, not biographies. A project is a specific creative configuration: an artist or group, a genre context, an era, a location, and a set of relationships. Watts-as-solo-artist (degree 17) is a different project than Watts-as-Maktub-frontman (degree 18) because every dimension differs except the person: different creative unit (solo vs. band), different genre (Jazz/Comedy vs. Soul/Jazz), different composition method (solo looping vs. collective improvisation), different temporal range (2000s-present vs. 1998-2007). The chronological relationship matters: Maktub preceded the solo career, serving as the workshop where Watts developed the skills deployed solo. This introduces a new engine concept: project succession, where one degree's project is the developmental precursor to another degree's project.",
+      "genealogy": {
+        "ancestors": ["Solo loop-based performance -- Watts (degree 17); the solo deployment of skills developed in Maktub", "The Uncategorizable archetype -- Watts (degree 17); the artist-city pattern that emerged from the solo career, not from the band context"],
+        "relationship": "The multi-degree artist concept emerges at degree 18 as a structural necessity: the engine encounters the same person in a fundamentally different creative configuration and must treat them as separate projects rather than collapsing them into a single biography. The Maktub project (degree 18) is the developmental precursor to the Watts solo project (degree 17) -- chronologically earlier but documented later because the engine encountered the solo work first. Project succession: Maktub was the workshop, the solo career was the product."
+      }
+    },
+    {
+      "concept": "Blue note -- soul-vocal (eighteenth deployment; neo-soul vocal bending between minor and major thirds with the emotional directness of soul singing; the blue note as emotional weapon deployed for maximum affective impact within groove context; energy-3 soul vocal deployment)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/vocal/blue-note-soul-vocal-groove-context.md",
+      "examples": [
+        "Maktub (degree 18) -- Watts's soul vocals bending between minor and major thirds with raw emotional directness; the blue note in neo-soul groove context at energy-3; deployed for maximum affective impact within the groove",
+        "Reggie Watts solo (degree 17) -- vocal glide blue note; zero mechanical intermediary; performance-art context rather than soul context (comparison -- same voice, different deployment)",
+        "Ernestine Anderson (degree 3) -- vocal blue note; jazz ballad context, energy-2; melisma and bent notes in the jazz vocal tradition (comparison -- first vocal deployment)",
+        "D'Angelo -- neo-soul vocal blue note; the national template for soul-vocal pitch bending over deep grooves (context)"
+      ],
+      "description": "Eighteenth deployment of the blue note thread. The soul-vocal blue note operates in the neo-soul tradition: bending between minor and major thirds with the emotional directness characteristic of soul singing rather than the instrumental precision of jazz or the theatrical delivery of performance art. In Maktub's context, the blue note is deployed as an emotional weapon -- raw, unmediated, designed for maximum affective impact within the groove. This is the third vocal blue note deployment (after Anderson degree 3 jazz vocal and Watts degree 17 vocal glide) but operates in a groove context rather than a ballad context (Anderson) or a performance-art context (Watts solo). At energy-3, the soul-vocal blue note is assertive and projective -- Watts's Maktub singing is powerful, direct, and groove-locked rather than exploratory or comedic. The same vocalist produces structurally different blue note deployments at degrees 17 and 18, demonstrating that the blue note's character depends on the creative configuration, not just the performer.",
+      "genealogy": {
+        "ancestors": ["Blue note -- all seventeen prior deployments (degrees 0-17)", "Blue note -- vocal glide (degree 17, Watts solo); the immediately preceding deployment by the same vocalist in a different context", "Blue note -- vocal (degree 3, Anderson); the first vocal deployment, jazz ballad context", "Neo-soul vocal tradition -- D'Angelo, Erykah Badu; the national context for soul-vocal blue note deployment"],
+        "relationship": "Eighteen deployments across nineteen degrees. The soul-vocal blue note is the third vocal deployment (after Anderson 3 and Watts solo 17) and the second by the same performer (Watts). Eighteen mechanisms: bass-line (0), guitar (1), vocal (3), trumpet-warm (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), sax voice (9), alto cool bend (10), flute bent (11), bebop chromatic (12), modal integration (13), post-genre floating (14), assertive brass (15), synthesizer pitch bend (16), vocal glide (17), soul-vocal (18). The soul-vocal blue note demonstrates context-dependence: same voice, different project, different blue note character."
+      }
+    }
+  ],
+  "cross_references": ["S36-017", "S36-002", "S36-016", "S36-003", "S36-005"],
+  "seattle_connection": "Formed Seattle 1998 on Capitol Hill -- the second Capitol Hill entry after Wayne Horvitz (degree 2). Four members: Reggie Watts (vocals, keyboards -- same person as degree 17), Kevin Goldman (guitar), Alex Veley (bass, keyboards), Davis Martin (drums). The first BAND (not solo artist or bandleader) in the engine -- creative unit shifts from individual to group. THIRD GENRE SHIFT: Soul/Jazz puts Soul first, Jazz as modifier for the first time. Jazz center of gravity shifts from genre to method. First multi-degree artist: Watts at both 17 (solo) and 18 (Maktub). Maktub preceded solo career chronologically (1998-2007); the band was the workshop where Watts developed skills deployed solo. Known for incendiary live performances blending neo-soul, funk, jazz improvisation, and rock energy. Released Khronos (2002), Say What You Mean (2003), Subtle Ways (2006). Disbanded 2007 when Watts moved to NYC. Capitol Hill scene: Crocodile Cafe, Showbox, Neumo's, Capitol Hill block parties. Neo-soul harmony (extended jazz chords in groove context), emergent band arrangement (collective voice through real-time negotiation), live improvisation as composition (groove as contract for collective exploration). Fourth consecutive energy-3 artist (15-16-17-18). Distribution 2:13:4. Nineteenth artist-city pattern: The Workshop (project that develops artists for subsequent projects).",
+  "carry_forward": {
+    "theory_genealogy": [
+      "Neo-soul groove harmony (extended jazz chords in groove context -- harmonic movement through voice-leading within chords rather than chord-to-chord progression; the groove IS the composition, harmony provides atmosphere) -- first theory node deploying extended jazz harmony primarily in a soul/groove context; eighteenth chromaticism deployment (groove chromaticism)",
+      "Band arrangement as emergent composition (first BAND in the engine -- creative unit shifts from individual to group; collective improvisation where four streams of consciousness negotiate coherence; the groove as contract enabling collective exploration) -- composition spectrum now includes collective-improvised quadrant",
+      "Multi-degree artist and project-based identity (Watts at 17 solo and 18 Maktub -- same person, different project; engine tracks projects not biographies; project succession where Maktub was workshop, solo career was product) -- new engine concept established",
+      "Blue note -- eighteenth deployment; soul-vocal (neo-soul bending between minor and major thirds, emotional directness in groove context, energy-3; third vocal deployment, second by same performer demonstrating context-dependence)"
+    ],
+    "immediate_items": [
+      "Genre rotation: EIGHTEEN degrees of jazz-adjacent music (0-17 had Jazz as primary/compound). Degree 18 shifts Jazz to MODIFIER. Third genre shift in three degrees (16 compound, 17 superposition, 18 Jazz-as-modifier). Jazz evolves from genre to method. Track whether Jazz remains in label at degree 19.",
+      "Third genre shift: Soul/Jazz puts Soul first. Jazz center of gravity has shifted. Track genre evolution.",
+      "First BAND: Maktub is the first collective creative unit. All prior degrees were solo artists or bandleaders. Track subsequent band entries.",
+      "First multi-degree artist: Watts at degrees 17 and 18. Engine tracks projects not biographies. Track subsequent multi-degree appearances.",
+      "Capitol Hill geography: TWO entries (Horvitz 2, Maktub 18). Second neighborhood thread after Central District. Track Capitol Hill growth.",
+      "Central District geographic oscillation: CD absent at 12-18. SEVEN consecutive absences -- longest streak extends. Track next CD appearance.",
+      "Gender dimension: two women in nineteen degrees (Anderson 3, Bown 6). Seventeen men. CRITICAL. Thirteen consecutive male artists (7-18 counting Maktub as male-led band). ESCALATED.",
+      "Energy-3 cluster: FOUR members (Marriott 15, Lorber 16, Watts 17, Maktub 18). FOUR consecutive -- longest streak extends. Distribution 2:13:4. Track whether streak continues.",
+      "Cornish pipeline: THREE artists (Priester 7, Caliman 9, Watts 17). Stable. Not applicable to Maktub as a band (though Watts is a member).",
+      "Bebop genealogy: root at 12, modal at 13, post-genre at 14, hard bop trumpet at 15, fusion keyboard at 16, performance-art vocal at 17, soul-vocal band at 18. Tree continues widening.",
+      "Addiction-and-recovery thread: one instance (Lanphere 12). Not applicable. Track.",
+      "Loop pedal lineage: Frisell (1) to Watts (17). Maktub does NOT use loop technology -- the band replaces the loop station. The lineage pauses. Track.",
+      "Horvitz collaboration thread (from 17): one instance. Horvitz's Capitol Hill infrastructure supported the scene Maktub inhabited. Indirect connection. Track.",
+      "First non-US birth (from 17): Stuttgart, Germany (Watts). Maktub formed in Seattle. Track.",
+      "Performance art thread (from 17): one instance (Watts solo). Maktub is not performance art -- it is a band. Track.",
+      "Late-night bandleader thread (from 17): one instance (Watts solo). Not applicable to Maktub. Track.",
+      "The Uncategorizable archetype (from 17): one instance (Watts solo). Maktub IS categorizable (Soul/Jazz). Different archetype. Track.",
+      "Dual-discipline training (from 17): one instance (Watts -- jazz piano + acting at Cornish). Applies to Watts individually but not to Maktub as a band project. Track.",
+      "Talent Incubator archetype (from 16): one instance (Lorber). Track.",
+      "Synthesizer integration thread (from 16): one instance (Lorber). Maktub uses keyboards but primarily in a groove context, not a synthesizer-integration context. Track.",
+      "Smooth jazz production aesthetic (from 16): not applicable. Maktub is live/raw. Track.",
+      "Portland-Seattle corridor (from 16): one instance (Lorber). Not applicable. Track.",
+      "Berklee divergence engine: three graduates (0, 1, 16). Stable. Not applicable. Track.",
+      "Kenny G mentor-protege thread (from 16): one instance. Not applicable. Track.",
+      "Commercial-artistic tension thread (from 16): Maktub operated in the independent/local scene. No major-label commercial pressure. Track.",
+      "Origin Records label thread (from 15): one artist (Marriott 15). Not applicable. Track.",
+      "Builder-Stayer archetype (from 15): one instance (Marriott). Track.",
+      "UW three-product pipeline (from 15): anchor (13), export (14), builder (15). Not applicable. Track.",
+      "Trumpet arc (from 15): Standifer (4) to Marriott (15). Not applicable. Track.",
+      "Velour/Livewire label thread (NEW at 18): first entry. Seattle independent labels. Track.",
+      "The Workshop archetype (NEW at 18): nineteenth artist-city pattern. A project that develops artists for subsequent projects. Maktub was the workshop where Watts developed skills deployed solo. Track.",
+      "Neo-soul thread (NEW at 18): first entry. Maktub as regional expression of the national neo-soul movement. Track.",
+      "Band-as-collective thread (NEW at 18): first entry. Maktub as first band in the engine. Track subsequent band entries.",
+      "Groove-as-composition thread (EXTENDED at 18): Berry (5) established in solo piano; Maktub extends to full band. Two entries. Track.",
+      "Monk Competition thread: one instance (Parks 14). Not applicable. Track.",
+      "Blue Note label thread: two connections (Lanphere 12, Parks 14). Not applicable. Track.",
+      "ECM label thread: four artists (Frisell 1, Priester 7, Peacock 8, Parks 14). Not applicable. Track.",
+      "Various source depth items carried from degrees 5-17."
+    ],
+    "pattern_items": [
+      "Artist-city taxonomy: NINETEEN named patterns (adding The Workshop at degree 18 -- a project that develops artists for subsequent projects). Classify every degree.",
+      "Educator spectrum: eight modes. Maktub is a performing band, not an educational institution. Track.",
+      "Composition-improvisation spectrum: FOURTEEN positions. Collective-improvised position added at degree 18 (first band entry at the collective-improvised extreme). New dimension: individual vs. collective.",
+      "Rhythmic spectrum: FOURTEEN positions. Neo-soul groove rhythm (funk pocket with jazz-informed bass motion) added at degree 18.",
+      "Chromaticism thread: EIGHTEEN deployments. Groove chromaticism added at degree 18 (chromatic passing tones serving funk feel).",
+      "Blue note thread: EIGHTEEN deployments across nineteen degrees. Soul-vocal blue note at 18 -- third vocal deployment, second by same performer. Eighteen mechanisms documented.",
+      "Artist-as-institution spectrum: NINETEEN positions. The Workshop added (project-as-incubator for subsequent projects).",
+      "Keyboard/piano theory branch: ten nodes. Stable (not extended at 18, though Watts and Veley played keyboards in Maktub, the primary theory contribution is harmonic/groove, not keyboard-specific). Still richest branch.",
+      "Vocal theory branch: EIGHT nodes. EXTENDED at 18 (soul-vocal blue note, neo-soul vocal harmony in groove context). Now EXCEEDS saxophone/reed branch (seven).",
+      "Brass theory branch: four nodes. Stable.",
+      "Saxophone/reed theory branch: seven nodes. Stable.",
+      "Flute theory branch: two nodes. Stable.",
+      "Bass theory branch: FOUR nodes. EXTENDED at 18 (groove bass as compositional voice, not just accompaniment). Veley's bass lines as co-compositional.",
+      "Body-as-sound-source thread: eleven instruments. Stable (Maktub uses standard instruments, not body-as-universal-generator).",
+      "Amiga Principle gradient: FOURTEEN scales. Collaborative Amiga Principle added at degree 18 (four instruments producing one groove -- resource efficiency through collective synergy rather than individual versatility).",
+      "Educational pipeline diversity: twenty pipelines. Stable (Maktub does not add a new pipeline).",
+      "Gender-barrier gradient: two women, seventeen men in nineteen degrees. CRITICAL. Thirteen consecutive male or male-led (7-18). ESCALATED.",
+      "Jackson Street corridor: Maktub is post-corridor era. Capitol Hill, not Central District. No direct corridor connection.",
+      "Label threads: all prior threads stable. Velour/Livewire added (NEW at 18). First Seattle independent labels in the engine.",
+      "Electronic jazz waves: four waves (from 16). Maktub is organic/live, not electronic. Track.",
+      "Zen thread: from degree 8. Not applicable. Track.",
+      "Energy spectrum: 2:13:4. FOUR consecutive energy-3 artists. Longest streak extends. Four subtypes: acoustic-assertive (15), electronic-propulsive (16), performative-explosive (17), groove-collective (18).",
+      "Three pipelines at three members: Berklee (divergence), UW (convergence), Cornish (bidirectional). Stable. Not applicable. Track fourth pipeline.",
+      "West Coast / LA pipeline: three artists (8, 9, 10). Stable.",
+      "Within-family groups: saxophone (9/10), flute (10/11), keyboard quintet (5/6/13/14/16), trumpet (4/15), vocal TRIO (3/17/18 -- EXTENDED at 18). Vocal group now largest tied with keyboard quintet when counting members with keyboard overlap.",
+      "Central District oscillation: present (0-6), absent (7-10), returns (11), absent (12-18). SEVEN consecutive absences -- longest streak extends.",
+      "Bebop genealogy tree: root (12), modal (13), post-genre (14), hard bop trumpet (15), fusion keyboard (16), performance-art vocal (17), soul-vocal band (18). Widening to include non-jazz-primary genres.",
+      "Genre evolution: FOUR stages (single, compound, superposition, Jazz-as-modifier). Track what comes next.",
+      "Loop pedal lineage: Frisell (1) to Watts (17). Paused at 18 (Maktub uses band, not loops). Track.",
+      "Capitol Hill geography thread (EXTENDED at 18): TWO entries (Horvitz 2, Maktub 18). Second neighborhood thread after Central District."
+    ]
+  },
+  "key_albums": [
+    {
+      "title": "Khronos",
+      "year": "2002",
+      "label": "Velour Recordings",
+      "format": "CD / digital",
+      "status": "debut album -- establishes the Maktub sound",
+      "significance": "Debut album establishing the Maktub sound: neo-soul vocals over funk grooves with jazz harmony and rock energy. The title (from Greek chronos, time) reflects the band's temporal relationship with live performance -- songs as vehicles for improvisation that transcend studio time constraints. Velour Recordings release positions the band in Seattle's independent music infrastructure."
+    },
+    {
+      "title": "Say What You Mean",
+      "year": "2003",
+      "label": "Velour Recordings",
+      "format": "CD / digital",
+      "status": "second album -- tighter songwriting, deeper soul territory",
+      "significance": "Second album pushing further into soul territory while maintaining jazz-informed improvisation. More confident songwriting and tighter arrangements but still built on the live-performance energy that defined the band. Demonstrates the band's development from raw energy toward crafted expression."
+    },
+    {
+      "title": "Subtle Ways",
+      "year": "2006",
+      "label": "Livewire Records",
+      "format": "CD / digital",
+      "status": "third and final album -- most polished expression",
+      "significance": "Third and final album, representing the most polished Maktub -- studio craft meeting live energy. The album demonstrates the band's full range: delicate ballads alongside explosive funk workouts, intimate vocals alongside full-band improvisation. Livewire Records release. The last studio document of the band before disbandment in 2007."
+    }
+  ],
+  "degree_neighbors": [
+    {"name": "Reggie Watts (solo)", "relationship": "Same vocalist at both degrees. Watts appears at degree 17 (solo: Jazz/Comedy, loop station, beatbox, one-man show, 2000s-present) and degree 18 (Maktub: Soul/Jazz, band frontman, soul singer, collective improvisation, 1998-2007). First multi-degree artist. Maktub preceded solo career chronologically -- the band was the workshop, the solo career was the product. Different creative units, different genres, different composition methods.", "future_degree": 17},
+    {"name": "Wayne Horvitz", "relationship": "Capitol Hill geography. Both Horvitz and Maktub based on Capitol Hill -- second and third entries in the neighborhood thread. Horvitz active from 1980s, Maktub 1998-2007. Horvitz built infrastructure (Royal Room, curatorial programming) that supported the live-music ecosystem Maktub inhabited. Two decades apart, two completely different genre orientations, same permissive neighborhood.", "future_degree": 2},
+    {"name": "Jeff Lorber", "relationship": "Fusion lineage. Lorber's Jazz Fusion (degree 16) demonstrated genre combination through electronic production. Maktub's Soul/Jazz demonstrates genre combination through live band performance. Both are multi-genre projects; the mechanism differs (studio production vs. live improvisation). Genre shift sequence: single (0-15), compound (16), superposition (17), Jazz-as-modifier (18).", "future_degree": 16},
+    {"name": "Ernestine Anderson", "relationship": "Vocal tradition. Anderson (degree 3) is the engine's first vocal-primary artist. Watts in Maktub is the second vocal-primary artist in a band context. Both deploy blue notes through vocal technique: Anderson in jazz ballad context (energy-2), Watts in neo-soul groove context (energy-3). The vocal tradition now spans from jazz standard to neo-soul groove.", "future_degree": 3},
+    {"name": "Overton Berry", "relationship": "Groove tradition. Berry (degree 5) established the groove-as-composition principle in solo piano form. Maktub extends it to a full band: four instruments dedicated to groove-first composition. Berry was solo groove; Maktub is collective groove. The rhythm section IS the composition, inverting the Western hierarchy of melody-first.", "future_degree": 5}
+  ],
+  "garfield_thread": {
+    "degree_0": "Quincy Jones -- attended late 1940s, class of 1950. Arranger/producer. Left Seattle.",
+    "degree_3": "Ernestine Anderson -- attended late 1940s, same era as Jones. Vocalist. Left and returned.",
+    "degree_4": "Floyd Standifer -- Central District post-WWII, educational path not confirmed as Garfield. Multi-instrumentalist and educator. Never left.",
+    "degree_5": "Overton Berry -- Central District native, self-taught. No institutional music education. Autodidact path.",
+    "degree_6": "Patti Bown -- Central District native, Seattle University (not Garfield). Formal training via Jesuit university.",
+    "degree_7": "Julian Priester -- NOT a Garfield product. DuSable High School (Chicago) under Captain Dyett. Cornish College of the Arts faculty.",
+    "degree_8": "Gary Peacock -- NOT a Garfield product. Burley, Idaho. Westlake College (LA). U.S. Army (Germany).",
+    "degree_9": "Hadley Caliman -- NOT a Garfield product. Idabel, Oklahoma. Los Angeles jazz scene. Cornish College of the Arts faculty.",
+    "degree_10": "Bud Shank -- NOT a Garfield product. Dayton, Ohio. University of North Carolina. Stan Kenton Orchestra. Los Angeles / Pacific Jazz.",
+    "degree_11": "Joe Brazil -- NOT a Garfield product. Detroit, Michigan. Detroit jazz scene. Settled in Central District as salon-model educator.",
+    "degree_12": "Don Lanphere -- NOT a Garfield product. Wenatchee, Washington. Northwestern University. NYC 52nd Street bebop scene.",
+    "degree_13": "Marc Seales -- NOT confirmed as Garfield product. Seattle native. University of Washington (DMA). Seventh consecutive non-Garfield degree. First UW-complete pipeline.",
+    "degree_14": "Aaron Parks -- NOT confirmed as Garfield product. Born Seattle 1983. UW pre-college at 14, MSM at 16. Eighth consecutive non-Garfield degree. Exported before completing high school in Seattle.",
+    "degree_15": "Thomas Marriott -- NOT confirmed as Garfield product. Born Seattle 1979. UW jazz studies under Seales. Ninth consecutive non-Garfield degree. Stayed in Seattle, built career locally via Origin Records.",
+    "degree_16": "Jeff Lorber -- NOT a Garfield product. Born Philadelphia, PA. Berklee College of Music. Portland, OR then Seattle area. Tenth consecutive non-Garfield degree.",
+    "degree_17": "Reggie Watts -- NOT a Garfield product. Born Stuttgart, Germany. Great Falls, Montana. Cornish College of the Arts in Seattle (student, jazz piano and acting). Eleventh consecutive non-Garfield degree. First artist born outside the US.",
+    "degree_18": "Maktub -- NOT a Garfield product. Band formed on Capitol Hill, Seattle. Watts (see degree 17) is the only member with documented educational pedigree (Cornish). Goldman, Veley, Martin educational backgrounds not documented. Twelfth consecutive non-Garfield degree. First band in the engine.",
+    "future": ["Buddy Catlett (class of 1949, bassist)", "Jimi Hendrix (attended 1959-60, did not graduate)"]
+  },
+  "cultural_patterns": {
+    "export_pattern": false,
+    "seattle_draw": false,
+    "european_exile": false,
+    "the_stay": false,
+    "the_teacher": false,
+    "the_persistence": false,
+    "the_erasure": false,
+    "pedagogue_draw": false,
+    "quiet_draw": false,
+    "the_seeker": false,
+    "working_pedagogue_draw": false,
+    "late_homestead": false,
+    "salon_keeper": false,
+    "the_prodigal": false,
+    "the_institutional_anchor": false,
+    "the_prodigy_export": false,
+    "the_builder_stayer": false,
+    "the_talent_incubator": false,
+    "the_uncategorizable": false,
+    "the_workshop": true,
+    "native_born": false,
+    "self_taught": false,
+    "institution_type": "the workshop -- a band formed on Capitol Hill Seattle 1998; the project that developed Reggie Watts from neo-soul vocalist to the uncategorizable solo artist documented at degree 17; Maktub was the incubator, the solo career was the product; disbanded 2007 when the product was ready for deployment",
+    "amiga_principle": "collaborative_synergy_four_instruments_one_groove",
+    "gender": "male (all four members male)",
+    "instrumentalist": true,
+    "gender_barrier": "not applicable (all-male band)"
+  },
+  "sources_count": 14,
+  "word_count_research": 3200,
+  "release_date": "2026-03-28"
+}
