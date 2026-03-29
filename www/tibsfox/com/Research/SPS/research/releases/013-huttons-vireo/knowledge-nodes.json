@@ -1,0 +1,360 @@
+{
+  "degree": 13,
+  "species": "Hutton's Vireo",
+  "scientific_name": "Vireo huttoni",
+  "sound_type": "repeated rising-falling zuit",
+  "energy": 2,
+  "ecosystem": "oak woodland",
+  "season": "resident (year-round in Pacific Northwest Garry oak and mixed woodland)",
+  "family": "Vireonidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; core habitat is Garry oak / Oregon white oak woodland of the Puget Trough, Willamette Valley, and southern Vancouver Island"
+  },
+  "physical": {
+    "length_in": "4.5-5",
+    "wingspan_in": "~8",
+    "weight_g": "10-14"
+  },
+  "plumage": {
+    "overall": "Olive-green above, pale grayish-white below, with broken white eye ring, two white wing bars, and thick slightly hooked bill",
+    "eye_ring": "Conspicuous white eye ring broken by dark line above the eye -- the 'spectacled' look",
+    "wing_bars": "Two white wing bars with dark area between them (diagnostic vs. kinglet)",
+    "bill": "Thick, slightly hooked -- the vireo bill, heavier than a warbler's, lighter than a finch's",
+    "convergent_mimic": "Nearly identical in appearance to Ruby-crowned Kinglet (Regulidae) -- convergent evolution, NOT related",
+    "field_id": "Small olive-green bird with broken white eye ring + two wing bars + thick hooked bill + repeated 'zu-wee' song. Distinguished from Ruby-crowned Kinglet by bill shape (thicker), foot color (bluish-gray vs. dark), wing bar pattern, and song."
+  },
+  "frequency_range": {
+    "zuit_hz": "2500-5000 (rising then falling -- two-note phrase)",
+    "scold_hz": "3000-6000 (irregular alarm bursts)",
+    "contact_hz": "2000-4000 (pair communication)",
+    "register": "Mid-range (2.5-5 kHz -- comfortably within human hearing, centered in the speech frequency band)"
+  },
+  "zuit_metrics": {
+    "duration_s": "0.4-0.7 per phrase",
+    "repetition_rate": "1 phrase every 2-4 seconds (15-30 per minute)",
+    "repetition_sustained": "10-20 minutes of continuous repetition without significant variation documented",
+    "phrases_per_hour": "Hundreds (estimated 450-900 at sustained singing rate)",
+    "variation": "MINIMAL -- the defining characteristic. The phrase repeats without melodic, rhythmic, or timbral development.",
+    "perceived_quality": "Monotonous, persistent, metronomic at the phrase level -- simple rising-falling two-note figure repeated indefinitely",
+    "waveform_analog": "Ostinato / loop -- a short melodic figure cycling without variation",
+    "key_property": "The first species in the engine defined by REPETITION WITHOUT VARIATION. Where the Chestnut-backed Chickadee (degree 9) varied on a theme, the vireo does NOT vary. It persists."
+  },
+  "convergent_evolution": {
+    "mimic_species": "Hutton's Vireo (Vireo huttoni)",
+    "target_species": "Ruby-crowned Kinglet (Regulus calendula)",
+    "mimic_family": "Vireonidae",
+    "target_family": "Regulidae",
+    "type": "CONVERGENT EVOLUTION -- independent lineages arriving at the same physical solution through entirely different evolutionary paths",
+    "shared_traits": "Small size, olive-green plumage, white eye ring, two white wing bars, mid-canopy foraging in Pacific Northwest woodland",
+    "diagnostic_differences": [
+      "Bill shape: vireo thick/hooked, kinglet thin/pointed",
+      "Foot color: vireo bluish-gray, kinglet dark brown-black",
+      "Wing bar pattern: vireo has dark area between wing bars, kinglet has different lower wing bar border",
+      "Song: vireo repeats 'zu-wee' monotonously, kinglet produces complex chattering warble"
+    ],
+    "engine_connection": "SPS-008 (Golden-crowned Kinglet) documented the Regulidae family. SPS-013 (Hutton's Vireo) documents the unrelated family that converges on the Regulidae appearance. The engine now holds both sides of the convergent pair.",
+    "music_parallel": "Independent discovery -- different artists in different traditions arriving at the same musical solution. The pentatonic scale, the 12-bar blues, subtractive synthesis architecture all emerged independently in multiple lineages."
+  },
+  "oak_woodland": {
+    "habitat_type": "Pacific Northwest Garry oak (Oregon white oak, Quercus garryana) woodland",
+    "distinction": "FIRST oak-associated species in the engine. All previous species (degrees 0-12) were associated with conifer-dominated ecosystems or general mixed woodland.",
+    "decline": "90-95% loss from pre-European-settlement extent in the Pacific Northwest",
+    "threats": "Fire suppression (allows conifer encroachment), urban development, agricultural conversion, invasive species (Scotch broom, English ivy, Himalayan blackberry)",
+    "conservation_status": "Priority habitat in Washington state (WDFW)",
+    "fire_dependency": "Garry oak woodland is fire-dependent -- maintained by Coast Salish burning practices for millennia. Fire suppression after colonization is the primary driver of decline.",
+    "restoration": "Active restoration programs throughout Puget Sound, Willamette Valley, southern Vancouver Island using prescribed fire, invasive removal, and oak planting"
+  },
+  "theory_nodes": [
+    {
+      "concept": "Ostinato (repeated figure without variation -- the riff, the hook, the loop)",
+      "level": "intermediate",
+      "department": "music-theory/composition",
+      "college_path": ".college/music/theory/composition/ostinato/",
+      "examples": [
+        "Classical: chaconne, passacaglia, ground bass -- a short melodic/harmonic figure repeated as structural foundation",
+        "Popular: the riff (Chuck Berry 'Johnny B. Goode', Queen/Bowie 'Under Pressure') -- identity through repetition",
+        "Electronic: the sequence / loop -- a programmed pattern cycling unchanged while other layers modulate",
+        "Hutton's Vireo: 'zu-wee' repeated hundreds of times per hour without variation -- the biological ostinato"
+      ],
+      "music_theory_parallel": "The ostinato is structural, not decorative. It does not exist to be interesting in itself. It exists to create a stable framework that makes other events meaningful. The vireo's 'zu-wee' is not interesting on the hundredth repetition. But it creates a territorial acoustic identity that is unambiguous and persistent. Identity through repetition."
+    },
+    {
+      "concept": "Persistence as identity (recognition through repetition -- the signal IS the repetition)",
+      "level": "foundational",
+      "department": "music-theory/perception",
+      "college_path": ".college/music/theory/perception/persistence/",
+      "examples": [
+        "Musical hooks: simple phrases that become unforgettable through repetition ('na na na na na na na, hey Jude')",
+        "Branding: advertising jingles, station IDs, notification sounds -- identity through consistent repetition",
+        "Territorial birdsong: the territory holder's identity is established not by a single song but by persistent, repeated singing from the same location",
+        "The Amiga Principle: simple structure faithfully repeated produces cumulative effect"
+      ],
+      "music_theory_parallel": "The vireo's song is recognizable precisely BECAUSE it never changes. The most conservative singer in the engine. Where the chickadee varied (degree 9) and the wren improvised (degree 1), the vireo repeats. Identity is not what you say but how long you say it."
+    },
+    {
+      "concept": "Two-note phrase as minimal melody (rising-falling = question-answer compressed to minimum)",
+      "level": "foundational",
+      "department": "music-theory/melody",
+      "college_path": ".college/music/theory/melody/minimal-phrase/",
+      "examples": [
+        "Half cadence + resolution: tension (rise) followed by release (fall) in two notes",
+        "Question-answer form: the irreducible kernel of melodic motion -- up then down",
+        "Infant-directed speech ('motherese'): rising-falling intonation is the universal human prosodic contour for attention",
+        "Hutton's Vireo 'zu-wee': rise then fall, repeated indefinitely -- the minimum melodic unit as persistent signal"
+      ],
+      "music_theory_parallel": "Every melody contains the rising-falling motion as a component. The vireo delivers it raw, stripped of everything else. Two notes: up, then down. Question, then answer. Tension, then release. The irreducible minimum of melodic content, repeated until it becomes identity."
+    },
+    {
+      "concept": "Convergent evolution as independent discovery (different lineages finding the same solution)",
+      "level": "advanced",
+      "department": "ecology/evolution",
+      "college_path": ".college/ecology/evolution/convergent/",
+      "examples": [
+        "Hutton's Vireo (Vireonidae) and Ruby-crowned Kinglet (Regulidae): same appearance, different families -- convergent evolution in Pacific Northwest woodland birds",
+        "Pentatonic scale: emerges independently across cultures worldwide -- the same tonal solution from different traditions",
+        "Subtractive synthesis: multiple designers independently arrive at oscillator->filter->amplifier architecture",
+        "12-bar blues: converged upon from multiple African-American musical traditions in the Mississippi Delta"
+      ],
+      "music_theory_parallel": "When the selection pressure is the same, independent lineages arrive at the same solution. The vireo and the kinglet face the same environmental pressures. Different musicians face the same harmonic pressures. Both converge. The solution pre-exists the solver."
+    },
+    {
+      "concept": "Monotony threshold (the point where repetition stops conveying new information and starts maintaining presence)",
+      "level": "intermediate",
+      "department": "music-theory/perception",
+      "college_path": ".college/music/theory/perception/monotony-threshold/",
+      "examples": [
+        "Territorial birdsong: the first phrase identifies the species and individual; subsequent repetitions maintain territorial claim without adding information",
+        "Musical loops: beyond a certain number of repetitions, the listener stops hearing individual statements and begins hearing the loop as an environment",
+        "Ambient music (Brian Eno): repetition past the monotony threshold creates atmosphere rather than narrative",
+        "The vireo's song: crosses the monotony threshold to become a persistent presence signal rather than an information-carrying utterance"
+      ],
+      "music_theory_parallel": "The first 'zu-wee' tells you the bird is there and what species it is. The fiftieth adds no new information. But it adds temporal persistence -- the territory is held, the pair bond is active, the signal is maintained. Past the monotony threshold, repetition creates presence rather than content. The vireo is ambient music in biological form."
+    },
+    {
+      "concept": "Garry oak woodland as threatened PNW ecosystem (fire-dependent savanna in a rainforest landscape)",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/oak-woodland/",
+      "examples": [
+        "Garry oak (Quercus garryana): the only native oak of the Pacific Northwest -- fire-dependent, drought-adapted, structurally distinct from surrounding conifer forests",
+        "90-95% decline from pre-settlement extent -- one of the most threatened ecosystems in the PNW",
+        "Coast Salish fire management: maintained open park-like oak savanna structure for millennia -- loss of these practices drives decline",
+        "Restoration: prescribed fire, invasive removal, and oak planting programs throughout Puget Sound, Willamette Valley, and southern Vancouver Island"
+      ],
+      "music_theory_parallel": "The oak woodland is a different key from the conifer forest that has dominated the engine. A new tonal center. The first 12 degrees played in the key of conifer. Degree 13 modulates to the key of oak -- a rare, threatened tonal center that needs active maintenance (fire management / restoration) to persist."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-008",
+      "title": "Golden-crowned Kinglet (Degree 8)",
+      "connection": "CONVERGENT EVOLUTION PAIR. The Hutton's Vireo (Vireonidae) converges on the physical appearance of the Ruby-crowned Kinglet (Regulidae, same family as the Golden-crowned Kinglet at degree 8). Degree 8 documented the Regulidae. Degree 13 documents the unrelated species that looks like them. The engine now holds both sides of the convergent pair: the original and the mimic."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "PERSISTENCE PAIR. The nuthatch (degree 5) repeats a single note in steady rhythm -- the metronome, the temporal foundation. The vireo (degree 13) repeats a two-note phrase in steady rhythm -- the ostinato, the melodic foundation. Both are persistent, both are reliable, both define themselves through repetition. The nuthatch is a point repeated. The vireo is a line repeated."
+    },
+    {
+      "project": "SPS-009",
+      "title": "Chestnut-backed Chickadee (Degree 9)",
+      "connection": "VARIATION VS. PERSISTENCE. Degree 9 varied on a theme -- same syntactic structure as degree 3, but modified. Degree 13 does NOT vary. The chickadee plays the cover version. The vireo plays the same track on repeat. Variation vs. persistence as contrasting strategies for identity."
+    },
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "ADJACENT DEGREES, OPPOSITE STRATEGIES. The siskin (degree 12) is irruptive -- stochastic, unpredictable, sometimes absent for years. The vireo (degree 13) is resident -- always present, repeating the same phrase year after year. The siskin introduces noise. The vireo introduces constancy. Sequential degrees, opposite temporal philosophies."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "OAK WOODLAND ECOSYSTEM. The vireo is the first oak-associated species in the engine, introducing Garry oak woodland -- a distinct, critically threatened PNW ecosystem that has declined 90-95% from pre-settlement extent. ECO documents PNW living systems. The vireo connects the engine to the oak-savanna landscape maintained by Coast Salish fire management."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Marc Seales at degree 13. Both are persistent, systematic, academic -- defined by disciplined repetition of fundamentals. Seales the jazz pianist, the UW faculty member, the educator who shows up and teaches the tradition. The vireo shows up and sings the phrase. Both are present consistently. Both are defined by what they faithfully repeat."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "TRILL VS. OSTINATO. The junco (degree 11) repeats a single note above the fusion threshold -- the repetition becomes a continuous tone (the trill). The vireo (degree 13) repeats a two-note phrase BELOW the fusion threshold -- each repetition is heard as a discrete event (the ostinato). Same principle (repetition), different rate, different perceptual result."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- the Hutton's Vireo introduces a FIFTH communication modality: the persistent ostinato territorial signal. Distinct from alarm broadcasting (chickadees), swarm cohesion (bushtit), territorial trill (junco), and buzzy flock sweep (siskin).",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "vireo_role": "The Hutton's Vireo produces a persistent, repetitive territorial song from mid-canopy perches in oak woodland. It does not participate in the chickadee alarm network (different habitat, different social structure). Its communication is primarily INTRASPECIFIC: the repeated 'zu-wee' maintains territory boundaries and pair bonds through sheer persistence. The vireo introduces a FIFTH communication modality: the persistent ostinato -- a signal whose content is not new information but temporal continuity. Previous modalities: alarm broadcast (chickadees, degrees 3/9), swarm cohesion (bushtit, degree 10), territorial trill (junco, degree 11), buzzy flock sweep (siskin, degree 12). The vireo adds: persistent phrase repetition (degree 13).",
+    "note": "The alarm network remains at 4 nodes. The swarm cohesion network (bushtit) remains at 1 node. The trill territorial network (junco) remains at 1 node. The buzzy flock sweep (siskin) remains at 1 node. The vireo adds a fifth modality: persistent ostinato territorial signaling. Five parallel communication channels now documented in the forest."
+  },
+  "part_a_parallel": {
+    "artist": "Marc Seales",
+    "degree": 13,
+    "genre": "S36",
+    "shared_principle": "Both are persistent, systematic, academic -- defined by disciplined repetition of fundamentals. Seales is a jazz pianist and University of Washington faculty member, an educator who teaches the jazz tradition through consistent, reliable engagement. The vireo sings the same phrase without variation, maintaining its territory through persistence. Both are present consistently. Both are defined not by what they improvise but by what they faithfully repeat.",
+    "resonance_points": [
+      "Academic persistence: Seales is a teacher -- a professor at UW, sustaining the jazz tradition through education. The vireo is a territorial broadcaster -- sustaining its presence through repetition. Both maintain something larger through disciplined practice.",
+      "Systematic approach: Seales works within the tradition systematically -- modal jazz, harmonic fundamentals, the discipline of jazz education. The vireo works within its two-note phrase systematically -- no improvisation, no variation, just the phrase and its repetition. System over spontaneity.",
+      "Energy 2 (energy match): Both are energy-2 -- present, audible, engaged, but not explosive. Not the loudest voice in the room. The consistent, reliable middle ground.",
+      "Resident / persistent: Both are always there. Seales at UW, the vireo in the oak woodland. Neither disappears unpredictably like Lanphere (degree 12). Both are constants."
+    ]
+  },
+  "degree_arc": {
+    "position": "The repeated zuit -- repetition without variation, persistence as identity. The first oak woodland species. The convergent evolution mimic.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13)",
+    "key_insight": "Degree 13 introduces three new dimensions: (1) REPETITION WITHOUT VARIATION -- the first species whose defining acoustic characteristic is the monotonous repetition of a simple phrase, crossing the monotony threshold into persistent presence signaling rather than information transmission. (2) OAK WOODLAND -- the first non-conifer-dominated habitat in the engine, introducing Garry oak ecosystem as a threatened, fire-dependent PNW landscape. (3) CONVERGENT EVOLUTION -- the first species whose visual identity is defined by resemblance to an unrelated species (Ruby-crowned Kinglet), demonstrating independent lineages arriving at the same morphological solution.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)",
+      "degree_11": "Mid-range (3-6 kHz -- comfortably within human hearing, return to accessible mid-range)",
+      "degree_12": "Wide-band (2-10 kHz -- the ascending sweep traverses more of the frequency spectrum than any previous single vocalization)",
+      "degree_13": "Mid-range (2.5-5 kHz -- centered in the speech frequency band, easily audible, comfortably accessible)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)",
+      "degree_11": "Territory + mate attraction through trill (I am here, I am fit, this is my edge)",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (I am here, I am Pine Siskin, where are we going -- nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (I am still here, this is still my territory, the signal has not stopped -- temporal continuity as content)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)",
+      "degree_10": "Shrubby woodland edge (ecotone -- the transition zone between forest and open habitat)",
+      "degree_11": "Forest edge (ecotone -- the threshold between forest interior and open ground)",
+      "degree_12": "Conifer seed crop (not a fixed habitat but a resource -- the siskin goes where the seeds are)",
+      "degree_13": "Oak woodland (Garry oak / Oregon white oak -- the first non-conifer-dominated habitat in the engine, a threatened fire-dependent savanna ecosystem)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Garry oak (Oregon white oak) woodland and mixed oak-conifer forest. Requires dense mid-canopy foliage for nesting and foraging. Also found in live oak, madrone, and oak-Douglas fir ecotone habitats along the Pacific coast from southern Vancouver Island to Baja California.",
+    "niche": "Mid-canopy insectivore and frugivore in oak-dominated woodland. Forages deliberately through dense foliage, gleaning insects from leaves and branches. Slower and more methodical than warblers in the same habitat.",
+    "foraging_strategy": "Deliberate mid-canopy gleaner -- moves slowly through oak foliage, picking insects from leaf surfaces, undersides of branches, and bark crevices. Also takes small berries and occasionally seeds. Foraging pace is distinctly slower than warblers or kinglets in the same habitat.",
+    "diet": "Insects (beetles, caterpillars, aphids, spiders, flies gleaned from oak foliage), small berries, occasionally seeds. Insect-heavy diet in breeding season; more fruit in winter.",
+    "nesting": "Nest in dense foliage of oak or associated trees (madrone, Douglas fir at ecotone), typically 6-25 feet up. Pendulous cup nest suspended from a forked branch -- the classic vireo nest architecture, woven from plant fibers, bark strips, spider silk, and lichen. Well-concealed in dense foliage.",
+    "irruptive_movement": false,
+    "resident_status": "RESIDENT -- the only year-round vireo in the Pacific Northwest. All other PNW vireos (Cassin's, Warbling, Red-eyed) are migratory.",
+    "flock_size": "Solitary or in pairs. Does not form flocks. Occasionally joins mixed-species foraging flocks in winter but maintains individual spacing.",
+    "oak_dependency": "HIGH -- population viability is tied to Garry oak woodland extent and quality. Indicator species for oak woodland health."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~3-4 million (Partners in Flight 2020)",
+    "trend": "Stable to slightly declining -- directly correlated with Garry oak woodland extent",
+    "threats": "Garry oak habitat loss (90-95% decline from pre-settlement extent), fire suppression allowing conifer encroachment, urban development fragmenting remaining oak stands, invasive species degrading understory (Scotch broom, English ivy, Himalayan blackberry), window strikes, domestic cat predation",
+    "vulnerability": "Population is stable where habitat persists, but habitat itself is critically threatened. The bird's conservation is an ecosystem conservation problem -- the species cannot be saved without saving the oak woodland.",
+    "unique_feature": "The Hutton's Vireo is an indicator species for Garry oak woodland restoration success. Where the vireo persists, the ecosystem is functional. Where it disappears, the oak woodland has been degraded or converted.",
+    "restoration_link": "Active Garry oak restoration programs (prescribed fire, invasive removal, oak planting) throughout Puget Sound, Willamette Valley, and southern Vancouver Island directly benefit this species."
+  },
+  "key_sites": [
+    {
+      "name": "Fort Lewis / Joint Base Lewis-McChord prairies",
+      "type": "year-round",
+      "description": "One of the largest remaining Garry oak prairie complexes in Washington state. Military training lands have inadvertently preserved oak habitat that was lost elsewhere to development. Active Garry oak restoration programs.",
+      "region": "South Puget Sound, WA"
+    },
+    {
+      "name": "San Juan Islands",
+      "type": "year-round",
+      "description": "Garry oak woodland on San Juan, Orcas, and Lopez Islands provides year-round Hutton's Vireo habitat in the rain shadow of the Olympic Mountains.",
+      "region": "San Juan Islands, WA"
+    },
+    {
+      "name": "Willamette Valley oak savannas",
+      "type": "year-round",
+      "description": "Remnant and restored Garry oak savannas in the Willamette Valley of Oregon support resident populations. The valley was historically one of the largest Garry oak landscapes in the PNW.",
+      "region": "Willamette Valley, OR"
+    },
+    {
+      "name": "Victoria / Saanich Peninsula, Vancouver Island",
+      "type": "year-round",
+      "description": "Southern Vancouver Island hosts the northernmost significant Garry oak woodland -- the northern range limit for both the tree and the vireo in the Pacific Northwest.",
+      "region": "Southern Vancouver Island, BC"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the repeated rising-falling 'zu-wee' phrase with consistent inter-phrase intervals and minimal variation between repetitions",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Hutton's Vireo song shows a REPEATING TWO-NOTE FIGURE with a rising first element and a falling second element, delivered at regular intervals of 2-4 seconds. The key diagnostic is the CONSISTENCY between repetitions -- pitch, duration, and phrasing remain nearly identical across hundreds of phrases. Compare to the Oregon Junco (degree 11) whose trill repeats a single note faster than fusion threshold, and to the Chestnut-backed Chickadee (degree 9) which varies its delivery. The vireo's consistency is the visual (and audible) signature of the ostinato."
+  },
+  "sources": [
+    "Davis, J. (2020). Hutton's Vireo (Vireo huttoni). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Hutton's Vireo. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Hutton's Vireo. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Hutton's Vireo species account. birdweb.org",
+    "Cody, M.L. (1969). Convergent characteristics in sympatric species. Condor 71: 222-239.",
+    "Moynihan, M. (1968). Social mimicry: character convergence vs. displacement. Evolution 22: 315-331.",
+    "Slager, D.L. et al. (2014). Multilocus phylogeny of Vireonidae. Mol Phylogenet Evol 80: 95-104.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Fuchs, M.A. (2001). Recovery strategy for Garry oak ecosystems in Canada. Environment Canada.",
+    "Dunwiddie, P.W. and Bakker, J.D. (2011). Future of prairie-oak ecosystems in the PNW. NW Science 85(2).",
+    "Gedalof, Z. et al. (2006). Three centuries of environmental change at Rocky Point, Vancouver Island. NW Science 80: 34-46.",
+    "Margulis, E.H. (2014). On Repeat: How Music Plays the Mind. Oxford University Press.",
+    "Middleton, R. (1990). Studying Popular Music. Open University Press.",
+    "Taruskin, R. (2005). Oxford History of Western Music. Oxford University Press.",
+    "Ricklefs, R.E. (2008). The Economy of Nature. 6th ed. W.H. Freeman.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Hutton's Vireo (Vireo huttoni). iucnredlist.org",
+    "eBird. Hutton's Vireo observation data, Pacific Northwest. ebird.org/species/hutvir",
+    "Washington Department of Fish and Wildlife. Priority Habitats: Garry Oak Woodland. wdfw.wa.gov",
+    "Macaulay Library. Hutton's Vireo recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "013",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
