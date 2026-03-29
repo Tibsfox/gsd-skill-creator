@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 25&deg; &mdash; American Robin &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.trio { background: #7B1FA2; }
+    .theory-icon.caroling { background: #E65100; }
+    .theory-icon.worm { background: #4E342E; }
+    .theory-icon.lawn { background: #2E7D32; }
+    .theory-icon.type-genus { background: #1565C0; }
+    .theory-icon.quintet { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Convergence trio card -- RESOLVED */
+    .trio-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trio-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #6A1B9A;
+    }
+
+    /* Anchor card -- the robin as THE bird */
+    .anchor-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .anchor-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Worm card */
+    .worm-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 1px solid #8D6E63;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .worm-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Lawn card */
+    .lawn-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .lawn-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Turdidae card */
+    .turdidae-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #F57C00;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .turdidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">25&deg;</div>
+      <div class="release-title-block">
+        <h2>American Robin</h2>
+        <div class="scientific">Turdus migratorius &middot; Family Turdidae (Thrushes) &middot; Type Genus</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Cheerily Cheer-up Cheerio &middot; Lawn &amp; Woodland &middot; Year-round Resident &middot; Energy 4</div>
+
+    <blockquote>
+      On the lawn outside your door, on the fence post, on the rooftop at dawn
+      &mdash; the American Robin opens its bill and pours out the most recognized
+      birdsong in North America. <em>Cheerily cheer-up cheerio.</em> Everyone has
+      heard this. Everyone knows this sound. For two degrees the engine played
+      previews &mdash; the grosbeak&rsquo;s smooth warble at 23, the tanager&rsquo;s
+      hoarse warble at 24 &mdash; both described as &ldquo;robin-like.&rdquo; Now
+      the robin arrives. The archetype. The original. THE bird. The convergence
+      trio is complete.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Convergence Trio Card -- RESOLVED -->
+        <div class="trio-card">
+          <h3>The Convergence Trio: COMPLETE</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Three consecutive degrees. Three species. Two families. One acoustic architecture.
+            The archetype arrives <strong>last</strong>.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Grosbeak (23)</th><th>Tanager (24)</th><th>Robin (25)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Family</td><td>Cardinalidae</td><td>Cardinalidae</td><td><strong>Turdidae</strong></td></tr>
+              <tr><td>Timbre</td><td>Rich, smooth</td><td>Hoarse, rough</td><td><strong>Bright, clean</strong></td></tr>
+              <tr><td>Phrase rate</td><td>3&ndash;5/sec</td><td>2&ndash;4/sec</td><td><strong>3&ndash;5/sec</strong></td></tr>
+              <tr><td>Phrase variety</td><td>High (improvised)</td><td>Moderate</td><td><strong>Low (cyclic)</strong></td></tr>
+              <tr><td>Singing posture</td><td>Canopy interior</td><td>Upper canopy</td><td><strong>Exposed perch</strong></td></tr>
+              <tr style="background: rgba(171,71,188,0.15); font-weight: 600;"><td>Engine role</td><td>Preview A</td><td>Preview B</td><td><strong>THE ARCHETYPE</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #6A1B9A; margin: 0.5rem 0;">
+            <strong>The model arrived after the copies.</strong> Two species that sound
+            &ldquo;like a robin&rdquo; preceded the robin itself. Structural foreshadowing
+            &mdash; the previews make the archetype hit harder.
+          </p>
+        </div>
+
+        <!-- Anchor Card -->
+        <div class="anchor-card">
+          <h3>THE Bird: The Most Recognized Wild Birdsong in North America</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>~370 million</strong> breeding individuals. State bird of three states.
+            The first species to sing at dawn. The bird that non-birders can name by sound.
+            &ldquo;The first robin of spring&rdquo; is a cultural idiom. &ldquo;Robin&rsquo;s-egg
+            blue&rdquo; is a color. The American Robin is not merely familiar &mdash; it is the
+            <strong>default bird in the collective imagination</strong>.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: The Caroling</h2>
+        <p>
+          The robin&rsquo;s caroling is a series of <strong>clear, bright, clipped slurred
+          whistles</strong> grouped into recognizable subgroups of 2&ndash;4 phrases each.
+          Each phrase alternates in pitch direction (rising, falling, rising). The song
+          cycles through <strong>8&ndash;20 distinct phrase types</strong> in predictable order,
+          creating the cyclic melodic repetition that makes the song instantly learnable.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>2.0&ndash;4.0 kHz</td></tr>
+            <tr><td>Peak energy</td><td>2.0&ndash;3.5 kHz</td></tr>
+            <tr><td>Song duration</td><td>2&ndash;3 seconds per phrase group</td></tr>
+            <tr><td>Phrases per bout</td><td>6&ndash;20 (in subgroups of 2&ndash;4)</td></tr>
+            <tr><td>Phrase rate</td><td>3&ndash;5 per second</td></tr>
+            <tr><td>Phrase variety</td><td>8&ndash;20 types, cycled predictably</td></tr>
+            <tr><td>Timbre</td><td>Bright, clean, clipped &mdash; pure-toned, direct</td></tr>
+            <tr><td>Amplitude</td><td>Moderate-loud &mdash; sings from exposed perches</td></tr>
+            <tr><td>Dawn chorus</td><td>First to sing, 30&ndash;50 min before civil twilight</td></tr>
+            <tr><td>Alarm call</td><td>&ldquo;Tut-tut-tut&rdquo; &mdash; neighborhood alarm system</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Worm Card -->
+        <div class="worm-card">
+          <h3>Worm-Pulling: Vision, Not Hearing</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The robin&rsquo;s head-tilt when hunting on lawns is <strong>looking, not
+            listening</strong>. Heppner (1965) proved that robins locate earthworms primarily
+            by <strong>visual detection</strong> &mdash; the head-tilt brings one laterally-placed
+            eye into near-vertical alignment with the soil surface to detect subtle movement.
+            Auditory cues contribute but are secondary. The strike sequence: hop-and-pause,
+            head-tilt, lunge (100&ndash;200 ms), pull, extract. Capture rate: <strong>10&ndash;15
+            worms per hour</strong> on managed lawns.
+          </p>
+        </div>
+
+        <!-- Lawn Card -->
+        <div class="lawn-card">
+          <h3>Lawn and Woodland: The Most Human-Adjacent Ecosystem</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The robin lives where people live. <strong>Lawn and woodland</strong> is the most
+            human-adjacent ecosystem in the engine &mdash; a single-degree leap from the deep
+            conifer canopy of degree 24 to the suburban backyard. Managed lawns replicate the
+            robin&rsquo;s ancestral habitat (short-grass clearings in open woodland) at continental
+            scale. Short grass exposes the soil surface. Irrigation maintains earthworm availability.
+            Adjacent trees provide singing perches. The robin did not adapt to lawns &mdash;
+            lawns replicate conditions that already favor the robin.
+          </p>
+        </div>
+
+        <!-- Turdidae Card -->
+        <div class="turdidae-card">
+          <h3>Five Turdidae: From Forest Drone to Backyard Caroling</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The American Robin is the engine&rsquo;s <strong>fifth Turdidae</strong> &mdash; and the
+            first <em>Turdus</em>, the <strong>type genus</strong> the family is named for. Previous
+            thrushes: Varied Thrush (2, <em>Ixoreus</em>, sustained drone), Hermit Thrush (7,
+            <em>Catharus</em>, harmonic spiral), Swainson&rsquo;s Thrush (18, <em>Catharus</em>,
+            ascending spiral), Veery (19, <em>Catharus</em>, descending shimmer). The
+            <em>Catharus</em> thrushes sing ethereal, flute-like songs from concealed forest
+            positions. The robin sings bright, clipped caroling from a rooftop. From the esoteric
+            to the universal across 23 degrees of Turdidae.
+          </p>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: A Thrush Called &ldquo;Robin&rdquo;</h2>
+        <p>
+          The American Robin is <strong>not a robin</strong>. European colonists named it after
+          the European Robin (<em>Erithacus rubecula</em>, Muscicapidae) based on its red breast.
+          The two species are not closely related. The American Robin is a <em>Turdus</em> thrush
+          &mdash; more closely related to the Eurasian Blackbird than to any Old World robin.
+          At degree 24, the Western Tanager was a cardinal mislabeled as a tanager. At degree 25,
+          the American Robin is a thrush mislabeled as a robin. <strong>Two consecutive
+          misnomers.</strong>
+        </p>
+        <p>
+          PNW subspecies: <em>T. m. caurinus</em>, the Northwestern Robin &mdash; slightly darker
+          than eastern birds. Named from Latin <em>caurus</em>, the northwest wind.
+        </p>
+
+        <!-- Residency -->
+        <h2>Year-Round Resident: Behavioral Flexibility</h2>
+        <p>
+          The robin is the engine&rsquo;s <strong>second strict year-round resident</strong> after
+          the Northern Flicker (degree 21). But &ldquo;resident&rdquo; is misleading &mdash; the
+          robin does not stay in one mode. In <strong>spring/summer</strong>: territorial, singing
+          from exposed perches, diet shifts to earthworms, pairs defend territories. In
+          <strong>fall/winter</strong>: gregarious, nomadic flocks roaming ornamental plantings
+          for fruit, silent. Same bird, same location, different ecological strategy. The
+          &ldquo;first robin of spring&rdquo; never left &mdash; it became more visible.
+        </p>
+
+        <!-- Cultural -->
+        <h2>Cultural Anchor</h2>
+        <p>
+          &ldquo;The first robin of spring&rdquo; is a cultural idiom for seasonal renewal.
+          &ldquo;Robin&rsquo;s-egg blue&rdquo; is a color named for this species&rsquo; pale
+          blue eggs. The robin is state bird of Connecticut, Michigan, and Wisconsin. Emily
+          Dickinson wrote, &ldquo;I dreaded that first Robin so.&rdquo; The robin appears in
+          children&rsquo;s books, on postage stamps, in the common vocabulary. No other species
+          in the engine occupies this depth of cultural embedding.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon trio">T</div>
+            <div class="theory-content">
+              <h4>Convergence Trio: Archetype Arrives Last</h4>
+              <p>Degrees 23-24-25: grosbeak (smooth), tanager (hoarse), robin (clean). The model after the copies. Structural foreshadowing resolved. Three textures, one architecture.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon caroling">C</div>
+            <div class="theory-content">
+              <h4>Cyclic Melodic Repetition &mdash; The Caroling</h4>
+              <p>8&ndash;20 phrase types cycled predictably. The song teaches itself through repetition. Not improvisation (grosbeak), not static loop (vireo) &mdash; structured repeating melody. The most recognized birdsong because it is the most repeated.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon worm">W</div>
+            <div class="theory-content">
+              <h4>Visual Prey Detection &mdash; The Head-Tilt</h4>
+              <p>The robin locates earthworms by sight, not sound. The head-tilt brings one eye into alignment with the ground surface. Looking, not listening. Heppner 1965.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon lawn">L</div>
+            <div class="theory-content">
+              <h4>Lawn Ecology &mdash; Human Commensalism</h4>
+              <p>Managed lawns replicate ancestral short-grass clearings at continental scale. The robin did not adapt to lawns. Lawns replicate conditions favoring the robin. The most human-adjacent ecosystem in the engine.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon type-genus">T</div>
+            <div class="theory-content">
+              <h4>The Type Genus Arrives &mdash; <em>Turdus</em></h4>
+              <p>After four thrushes from other genera (<em>Ixoreus</em>, <em>Catharus</em> x3), the genus the family is NAMED for finally appears. <em>Turdus</em> = Turdidae. The original arrives last &mdash; echoing the convergence trio pattern.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon quintet">E</div>
+            <div class="theory-content">
+              <h4>Energy Quintet: Fifth Consecutive E=4</h4>
+              <p>Degrees 21&ndash;25: hammer, drum, smooth warble, hoarse warble, caroling. Five forms of acoustic power at sustained high energy. The longest plateau in the engine.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-023: Black-headed Grosbeak</strong>
+            <p>CONVERGENCE TRIO COMPLETE. Grosbeak (23, smooth), Tanager (24, hoarse), Robin (25, clean). Two Cardinalidae previews, then the Turdidae archetype. The model arrived last.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-024: Western Tanager</strong>
+            <p>PREVIEW B RESOLVED. The tanager&rsquo;s hoarse warble was the second preview. The robin sings clean and bright. Same architecture, opposite surfaces.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002: Varied Thrush</strong>
+            <p>FIVE TURDIDAE. Sustained drone (2) to cyclic caroling (25). From forest interior to suburban lawn. Twenty-three degrees of thrush evolution. Turdidae now leads all families with 5 species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-007: Hermit Thrush</strong>
+            <p>FIVE RICH WARBLES. Hermit (7), Swainson&rsquo;s (18), Veery (19), Grosbeak (23), Robin (25). Five mid-frequency melodic voices. The robin is the most public of the five.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018: Swainson&rsquo;s Thrush</strong>
+            <p>THE SPIRAL AND THE CYCLE. Swainson&rsquo;s ascending spiral (18) is open-ended. The robin&rsquo;s caroling (25) is cyclic. Linear escalation vs. circular return.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-019: Veery</strong>
+            <p>THE SHIMMER AND THE CLARITY. Veery (19): bilateral syrinx shimmer, otherworldly. Robin (25): clean clipped phrases, earthly. Two Turdidae extremes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker</strong>
+            <p>ENERGY QUINTET. Five consecutive E=4 (21&ndash;25): hammer, drum, smooth warble, hoarse warble, caroling. Five textures at sustained high energy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>American Robin: year-round resident, lawn and woodland, ~370 million individuals. Dawn chorus leader. Worm-pulling specialist.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Lawn ecology: managed grassland as robin habitat. Earthworm abundance. Suburban commensalism. The robin-lawn system.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: Black Stax (Neo-Soul, E=4, Central District, self-released). Both the neighborhood sound. Both the archetype everyone knows.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Sallabanks, R. and James, F.C. (1999). American Robin (<em>Turdus migratorius</em>). <em>Birds of North America</em>. Cornell Lab of Ornithology.</li>
+          <li>Vanderhoff, N. et al. (2020). American Robin (<em>Turdus migratorius</em>). <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Heppner, F. (1965). Sensory mechanisms in earthworm location by the American Robin. <em>The Living Bird</em> 4: 63&ndash;80.</li>
+          <li>Montgomerie, R. and Weatherhead, P.J. (1997). How robins find worms. <em>Animal Behaviour</em> 54(1): 143&ndash;151.</li>
+          <li>Eiserer, L.A. (1980). Effects of grass length on robin foraging. <em>Auk</em> 97(3): 576&ndash;580.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Voelker, G. et al. (2007). Molecular systematics of <em>Turdus</em> thrushes. <em>Mol. Phylogenetics Evol.</em> 42(2): 422&ndash;434.</li>
+          <li>Partners in Flight (2020). Population estimates: American Robin. partnersinflight.org</li>
+          <li>Wiley, R.H. and Richards, D.G. (1982). Adaptations for acoustic communication. <em>Acoustic Communication in Birds</em> 1: 131&ndash;181.</li>
+          <li>Boncoraglio, G. and Saino, N. (2007). Habitat structure and bird song evolution. <em>Functional Ecology</em> 21(1): 134&ndash;142.</li>
+          <li>BirdWeb (Seattle Audubon Society). American Robin. birdweb.org</li>
+          <li>Macaulay Library. American Robin recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">25&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Turdidae</div>
+          <div class="stat-detail">Fifth Turdidae &mdash; first <em>Turdus</em> (type genus)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Caroling</div>
+          <div class="stat-detail">Cheerily cheer-up cheerio</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Fifth consecutive E=4 (degrees 21&ndash;25)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Lawn &amp; Woodland</div>
+          <div class="stat-detail">Most human-adjacent in the engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Resident &mdash; behaviorally flexible</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2.0&ndash;4.0 kHz</div>
+          <div class="stat-detail">Peak 2.0&ndash;3.5 kHz (bright, clean mid-range)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~370 million</div>
+          <div class="stat-detail">One of North America&rsquo;s most abundant land birds</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dawn Chorus</div>
+          <div class="stat-value">First to sing</div>
+          <div class="stat-detail">30&ndash;50 min before civil twilight</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Convergence</div>
+          <div class="stat-value">Trio: COMPLETE</div>
+          <div class="stat-detail">23 (smooth) &rarr; 24 (hoarse) &rarr; 25 (clean)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Turdidae Arc</div>
+          <div class="stat-value">5 species</div>
+          <div class="stat-detail">Degrees 2, 7, 18, 19, 25 &mdash; widest family span</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 25 &mdash; S36</div>
+          <div class="parallel-name">Black Stax</div>
+          <div class="parallel-detail">Neo-Soul &middot; E=4 &middot; Central District &middot; Self-released</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Both the neighborhood sound. The yard bird and the block artist.
+            Both the archetype everyone knows. Fifth consecutive E=4.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 25&deg; of 360&deg; &mdash; v1.49.161</p>
+  </footer>
+</body>
+</html>
