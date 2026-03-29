@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 15&deg; &mdash; Thomas Marriott &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #E53935);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFCDD2;
+      color: #B71C1C;
+      border: 1px solid #E57373;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .trumpet-arc-box {
+      background: #FCE4EC;
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .trumpet-arc-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #AD1457;
+      font-family: system-ui, sans-serif;
+    }
+    .trumpet-arc-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .trumpet-arc-box td, .trumpet-arc-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #F8BBD0;
+    }
+    .trumpet-arc-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #AD1457;
+    }
+
+    .uw-pipeline-box {
+      background: #E0F2F1;
+      border: 1px solid #80CBC4;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .uw-pipeline-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #00695C;
+      font-family: system-ui, sans-serif;
+    }
+    .uw-pipeline-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .uw-pipeline-box td, .uw-pipeline-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #B2DFDB;
+    }
+    .uw-pipeline-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #00695C;
+    }
+
+    .energy-threshold-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-threshold-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-threshold-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-threshold-box td, .energy-threshold-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-threshold-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .builder-stayer-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .builder-stayer-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .builder-stayer-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">15&deg;</div>
+      <div>
+        <h1>Thomas Marriott</h1>
+        <div class="subtitle">Jazz &middot; Trumpet &middot; Post-Bop / Hard Bop &mdash; Born Seattle 1979 &mdash; Origin Records
+          <span class="energy-badge">Energy 3 &mdash; First</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../014-aaron-parks/index.html">Degree 14&deg; (Parks)</a>
+      <a href="../013-marc-seales/index.html">Degree 13&deg; (Seales)</a>
+      <a href="../004-floyd-standifer/index.html">Degree 4&deg; (Standifer)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Seattle born, 1979. Studied at UW under Seales. One of Seattle&rsquo;s
+          most active jazz trumpeters. Origin Records &mdash; Seattle&rsquo;s premier
+          jazz label. <em>Flexicon</em>, <em>Human</em>, <em>Dialogue</em>,
+          <em>Urban Folklore</em>. Played with Maynard Ferguson, Benny Golson.
+          The first energy-3 artist in the engine &mdash; the circle is warming up.
+          He could have left for New York. He stayed and built.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Builder-Stayer</h2>
+
+        <p>Thomas Marriott was born in <strong>Seattle, Washington in 1979</strong> &mdash;
+        the sixteenth artist in the S36 engine, the sixteenth consecutive jazz artist, and the
+        second trumpeter (after Floyd Standifer at degree 4&deg;). He studied jazz at the
+        <strong>University of Washington</strong> under <strong>Marc Seales</strong>
+        (degree 13&deg;) and made the choice that defines his structural position in the
+        engine: <strong>he stayed</strong>.</p>
+
+        <p>Where Aaron Parks (degree 14&deg;) used the UW pipeline as a launching pad
+        to Manhattan School of Music at 16 and never returned, Marriott completed his
+        studies in Seattle, built his career in Seattle, and remains in Seattle. The UW
+        pipeline produces both exports and anchors &mdash; Marriott is the anchor
+        product, the builder who invested his training back into the local scene.</p>
+
+        <p>Marriott became one of Seattle&rsquo;s most active jazz trumpeters: leading
+        his own groups, recording regularly for <strong>Origin Records</strong>
+        (Seattle&rsquo;s premier independent jazz label, founded by John Bishop in 1997),
+        and maintaining a consistent presence at Jazz Alley, Tula&rsquo;s, the Royal Room,
+        and the <strong>Earshot Jazz Festival</strong>.</p>
+
+        <p>His discography on Origin Records includes <strong><em>Flexicon</em></strong>
+        (2006), <strong><em>Human</em></strong> (2008),
+        <strong><em>Dialogue</em></strong> (2010), and
+        <strong><em>Urban Folklore</em></strong> (2013) &mdash; over a decade of consistent
+        output documenting his evolution within the hard bop and post-bop vocabulary.</p>
+
+        <p>Marriott has performed with <strong>Maynard Ferguson</strong>,
+        <strong>Benny Golson</strong>, and other nationally recognized jazz artists,
+        demonstrating that his chops are competitive at the national level. He chose not
+        to relocate. This is the critical structural distinction: national-level ability,
+        local investment. Where Parks was exported, Marriott could have exported himself
+        and chose not to.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Origin Records;
+        AllMusic; DownBeat; JazzTimes; Earshot Jazz; KNKX Jazz Northwest; University of
+        Washington School of Music</p>
+
+        <!-- ========================================
+             UW PIPELINE
+             ======================================== -->
+
+        <div class="uw-pipeline-box">
+          <h4>The UW Pipeline: Three Products, Three Patterns</h4>
+          <table>
+            <tr>
+              <th>Artist</th>
+              <th>Degree</th>
+              <th>UW Connection</th>
+              <th>Pattern</th>
+            </tr>
+            <tr>
+              <td>Marc Seales</td>
+              <td>13&deg;</td>
+              <td>Director of jazz studies</td>
+              <td>Institutional Anchor</td>
+            </tr>
+            <tr>
+              <td>Aaron Parks</td>
+              <td>14&deg;</td>
+              <td>Pre-college (exported to MSM)</td>
+              <td>Prodigy-Export</td>
+            </tr>
+            <tr>
+              <td><strong>Thomas Marriott</strong></td>
+              <td><strong>15&deg;</strong></td>
+              <td><strong>Jazz studies (completed, stayed)</strong></td>
+              <td><strong>Builder-Stayer</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Three consecutive degrees, all
+          UW-connected, all structurally different. The UW pipeline is not a single mechanism &mdash;
+          it produces <strong>anchors</strong> (who teach), <strong>exports</strong> (who leave),
+          and <strong>builders</strong> (who stay and invest in the local scene).</p>
+        </div>
+
+        <!-- ========================================
+             TRUMPET ARC
+             ======================================== -->
+
+        <div class="trumpet-arc-box">
+          <h4>Trumpet Arc: Standifer (4&deg;) to Marriott (15&deg;)</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Standifer (4&deg;, energy 2)</th>
+              <th>Marriott (15&deg;, energy 3)</th>
+            </tr>
+            <tr>
+              <td><strong>Era</strong></td>
+              <td>1950s&ndash;2000s</td>
+              <td>2000s&ndash;present</td>
+            </tr>
+            <tr>
+              <td><strong>Born</strong></td>
+              <td>Wilmington, NC (1929)</td>
+              <td>Seattle (1979)</td>
+            </tr>
+            <tr>
+              <td><strong>Style</strong></td>
+              <td>Swing, bebop, multi-instrumental</td>
+              <td>Hard bop, post-bop, trumpet-focused</td>
+            </tr>
+            <tr>
+              <td><strong>Training</strong></td>
+              <td>Experiential (Jackson Street)</td>
+              <td>Institutional (UW under Seales)</td>
+            </tr>
+            <tr>
+              <td><strong>Energy</strong></td>
+              <td>2 (educational warmth)</td>
+              <td>3 (assertive projection)</td>
+            </tr>
+            <tr>
+              <td><strong>Instruments</strong></td>
+              <td>Trumpet, sax, voice (multi)</td>
+              <td>Trumpet (specialist)</td>
+            </tr>
+            <tr>
+              <td><strong>Label</strong></td>
+              <td>Local / undocumented</td>
+              <td>Origin Records</td>
+            </tr>
+            <tr>
+              <td><strong>Pattern</strong></td>
+              <td>The Teacher</td>
+              <td>The Builder-Stayer</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">The Standifer&ndash;Marriott arc
+          mirrors the Berry&ndash;Seales piano arc: elder to contemporary at the same instrument.
+          Same instrument, different generation, different energy. The trumpet in Seattle jazz
+          has gained a full energy level across the arc.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY THRESHOLD
+             ======================================== -->
+
+        <div class="energy-threshold-box">
+          <h4>First Energy-3: The Intensity Threshold</h4>
+          <table>
+            <tr>
+              <th>Energy</th>
+              <th>Character</th>
+              <th>Count</th>
+              <th>Artists</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Meditative, introspective</td>
+              <td>2</td>
+              <td>Peacock (8&deg;), Lanphere (12&deg;)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sustaining, atmospheric</td>
+              <td>13</td>
+              <td>All others (0&deg;&ndash;7&deg;, 9&deg;&ndash;11&deg;, 13&deg;&ndash;14&deg;)</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td><strong>Assertive, projective</strong></td>
+              <td><strong>1</strong></td>
+              <td><strong>Marriott (15&deg;)</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Distribution shifts to
+          <strong>2:13:1</strong> &mdash; the first <strong>ternary</strong> distribution.
+          The engine is warming up as it moves through the jazz quadrant toward soul, R&amp;B,
+          and rock. Marriott at energy-3 is the threshold crossing.</p>
+        </div>
+
+        <!-- ========================================
+             HARD BOP THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Hard Bop Trumpet &amp; The Origin Records Aesthetic</h2>
+
+        <p>Marriott&rsquo;s trumpet vocabulary is rooted in the <strong>hard bop tradition</strong>
+        as transmitted through the <strong>Clifford Brown lineage</strong> &mdash; the most direct
+        inheritance of the bebop revolution documented at degree 12&deg;, filtered through the
+        hard bop transformation of the late 1950s and refined into a contemporary post-bop
+        vocabulary.</p>
+
+        <ul>
+          <li><strong>Clifford Brown lineage (bebop phrases at brass tempo):</strong> Brown
+          demonstrated that bebop&rsquo;s chromatic vocabulary could be executed on trumpet at
+          comparable speed. Marriott inherits this directly: rapid chromatic runs, arpeggiated
+          chord tones at tempo, and the physical endurance to sustain complex phrases across
+          multiple choruses. Fifteenth chromaticism deployment.</li>
+          <li><strong>Post-bop harmonic language (altered dominants):</strong> Altered dominant
+          chords (b9, #9, #11, b13), tritone substitutions as standard vocabulary, upper-structure
+          triads, pentatonic superimposition. The full post-bop harmonic palette deployed as
+          professional standard equipment.</li>
+          <li><strong>The Origin Records sound (documentary realism):</strong> Clean recordings,
+          natural acoustic space, minimal post-production. Not the ECM aesthetic (spacious,
+          reverberant) nor the Blue Note/Van Gelder sound (warm compression). A third position:
+          <strong>the recording captures the ensemble as it sounds in the room</strong>. The label
+          documents the scene rather than defining it.</li>
+          <li><strong>Hard bop rhythmic vocabulary:</strong> Swing-to-even-eighths continuum.
+          Predominantly swing-based but flexible enough to straighten when the tune calls for it.
+          The contemporary hard bop player navigates standards (swing), originals (variable), and
+          modern compositions (even eighths).</li>
+          <li><strong>Blue note as brass assertion:</strong> Half-valve bend, crushed grace note,
+          scooped approach from below. Brass-specific technique &mdash; physical manipulation of
+          the instrument produces microtonal shadings unavailable on piano or guitar. Second
+          brass-specific blue note deployment after Standifer (4&deg;), but at higher energy.</li>
+        </ul>
+
+        <hr class="section-divider">
+        <h2>Music Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Hard Bop Trumpet Vocabulary</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Clifford Brown lineage: bebop phrases at brass tempo, post-bop harmonic
+            language (altered dominants, tritone subs as standard equipment), the Origin Records
+            documentary realism aesthetic, swing-to-even-eighths rhythmic continuum.</p>
+            <div class="examples">Marriott &mdash; Flexicon (2006), Urban Folklore (2013);
+            Clifford Brown &mdash; Study in Brown; Freddie Hubbard &mdash; Red Clay;
+            Woody Shaw &mdash; Rosewood</div>
+            <div class="genealogy"><strong>Lineage:</strong> Bebop vocabulary (degree 12,
+            Lanphere) &rarr; hard bop trumpet (Brown, Hubbard, Shaw) &rarr; Marriott&rsquo;s
+            post-bop synthesis. Brass branch extends to four nodes.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Builder-Stayer Archetype</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>National-level ability + conscious local investment. Scene-mediated stay
+            (not institution-mediated). Origin Records partnership as infrastructure building.
+            Generational complement to The Persistence (Berry, degree 5&deg;).</p>
+            <div class="examples">Berry (5&deg;) &mdash; The Persistence (passive retention);
+            Seales (13&deg;) &mdash; Institutional Anchor (university-mediated);
+            Parks (14&deg;) &mdash; Prodigy-Export (left at 16);
+            Marriott (15&deg;) &mdash; Builder-Stayer (active investment)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Artist-city taxonomy extends
+            to sixteen named patterns. Marriott adds the scene-mediated stay &mdash;
+            a new mechanism for local retention.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Origin Records as Local Infrastructure</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Seattle-based independent jazz label (founded John Bishop, 1997). Documentary
+            realism production aesthetic. The first label in the engine where both artist and
+            label are Seattle-based and Seattle-committed.</p>
+            <div class="examples">Origin Records catalog &mdash; Marriott, Bishop, and the
+            Pacific Northwest jazz community; Blue Note (national, Parks 14&deg;);
+            ECM (European, Frisell 1&deg;, Peacock 8&deg;); Columbia (major, Bown 6&deg;)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Label threads: Mercury (0, 3),
+            Columbia (6), ECM (1, 7, 8, 14), Blue Note (12, 14), Naim (13), Ropeadope (14),
+            <strong>Origin (15 &mdash; NEW)</strong>. First explicitly local institutional label.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Assertive Brass</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Fifteenth deployment. The blue note in hard bop trumpet: half-valve bend, crushed
+            grace note, scooped approach from below. Brass-specific technique producing microtonal
+            shadings. At energy-3: assertive and driving, not warm and educational.</p>
+            <div class="examples">Standifer (4&deg;) &mdash; warm brass blue note;
+            Marriott (15&deg;) &mdash; assertive brass blue note; Clifford Brown &mdash;
+            precise, clean blue note at tempo; Miles Davis &mdash; muted half-valve blue note</div>
+            <div class="genealogy"><strong>Lineage:</strong> Fifteen deployments across sixteen
+            degrees. Blue note mechanisms: bass-line (0), guitar (1), vocal (3), trumpet-warm (4),
+            piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8),
+            sax voice (9), alto cool bend (10), flute bent (11), bebop chromatic (12), modal
+            integration (13), post-genre floating (14), <strong>assertive brass (15)</strong>.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             BUILDER-STAYER PATTERN
+             ======================================== -->
+
+        <div class="builder-stayer-box">
+          <h4>Sixteenth Artist-City Pattern: The Builder-Stayer</h4>
+          <p><strong>Conditions:</strong> (1) National-level ability demonstrated through
+          performances with nationally recognized artists. (2) Conscious choice to remain
+          in origin city. (3) Active investment in local infrastructure &mdash; recording,
+          performing, building relationships. (4) Career based locally, not as satellite.</p>
+          <p>Marriott meets all four. He has played with Maynard Ferguson and Benny Golson.
+          He chose Seattle. He records for Origin Records. His career is based in Seattle.
+          The Persistence (Berry, 5&deg;) is passive retention. <strong>The Builder-Stayer
+          is active investment.</strong> Same outcome, different agency.</p>
+        </div>
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Born 1979 &mdash; Seattle</div>
+          <p>Native-born, Generation X. First artist born in the late 1970s.
+          Seventeenth educational pipeline: UW jazz studies under Seales, completed locally.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">University of Washington &mdash; Jazz Studies</div>
+          <p>Studied under Marc Seales (degree 13&deg;). Third UW pipeline product.
+          Unlike Parks (14&deg;, exported to MSM), Marriott completed at UW and remained.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2006 &mdash; Flexicon (Origin Records)</div>
+          <p>Hard bop trumpet debut. Crisp articulation, melodic invention, rhythmic drive.
+          First Origin Records appearance in the engine.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2008 &mdash; Human (Origin Records)</div>
+          <p>Extended palette toward lyrical, open playing. Ballad expressiveness,
+          dynamic control, full emotional range of the trumpet.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2010 &mdash; Dialogue (Origin Records)</div>
+          <p>Interactive group dynamics &mdash; jazz as conversation between musicians.
+          Post-bop ensemble playing where every musician shapes direction in real time.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2013 &mdash; Urban Folklore (Origin Records)</div>
+          <p>Jazz vocabulary connected to urban experience. The lived reality of a
+          musician embedded in a specific city. The Builder-Stayer ethos in album form.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">National Appearances &mdash; Ferguson, Golson</div>
+          <p>Performed with Maynard Ferguson and Benny Golson. National credentials
+          established while maintaining Seattle as home base.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Present &mdash; Seattle</div>
+          <p>Remains based in Seattle. Jazz Alley, Tula&rsquo;s, the Royal Room,
+          Earshot Jazz Festival. The Builder-Stayer in continuous operation.</p>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.92rem;border-collapse:collapse">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;width:30%;font-weight:600">S36-004 (Floyd Standifer)</td>
+            <td style="padding:0.6rem">Trumpet lineage. Second trumpeter after Standifer.
+            Elder-to-contemporary at the same instrument. Energy 2 &rarr; 3.
+            Multi-instrumental &rarr; trumpet-focused. The trumpet gains a full
+            energy level in Seattle jazz.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-013 (Marc Seales)</td>
+            <td style="padding:0.6rem">UW teacher-student. Seales trained Marriott.
+            Third UW pipeline product. Institutional Anchor trains the Builder-Stayer.
+            Three consecutive UW-connected degrees (13, 14, 15).</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-014 (Aaron Parks)</td>
+            <td style="padding:0.6rem">Generational contrast &mdash; stayed vs. left.
+            Both UW pipeline products. Parks exported at 16; Marriott stayed and built.
+            Near-generational peers (born 1979 vs. 1983) who made opposite choices.
+            Hard bop vs. post-genre. Origin Records vs. Blue Note/ECM.</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;font-weight:600">S36-005 (Overton Berry)</td>
+            <td style="padding:0.6rem">Persistence parallel. Berry stayed because the scene
+            was the world (passive retention). Marriott stays because he chose to
+            (active investment). Same outcome, different agency.</td>
+          </tr>
+        </table>
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield High School Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Quincy Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Ernestine Anderson &mdash; Garfield, late 1940s</td></tr>
+            <tr><td>Degrees 4&deg;&ndash;14&deg;</td><td>No confirmed Garfield products (eleven consecutive)</td></tr>
+            <tr><td>Degree 15&deg;</td><td>Thomas Marriott &mdash; NOT confirmed as Garfield product. Born Seattle 1979. UW jazz studies pipeline. Ninth consecutive non-Garfield degree.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Key Carry-Forward Items for Degree 16</h4>
+          <ul>
+            <li><strong>Genre rotation:</strong> SIXTEEN consecutive jazz artists. Intentional CSV architecture (degrees 0&ndash;22).</li>
+            <li><strong>Energy spectrum:</strong> First ternary distribution (2:13:1). Track energy-3 growth.</li>
+            <li><strong>Gender dimension:</strong> Ten consecutive male artists (7&ndash;15). Two women in sixteen degrees. CRITICAL.</li>
+            <li><strong>Central District:</strong> Absent at degrees 12&ndash;15. Four consecutive absences.</li>
+            <li><strong>Origin Records thread (NEW at 15):</strong> First Seattle-based label. Track subsequent Origin artists.</li>
+            <li><strong>Builder-Stayer archetype (NEW at 15):</strong> Track subsequent national-ability local-investors.</li>
+            <li><strong>UW three-product pipeline:</strong> Anchor (13), Export (14), Builder (15). Track subsequent UW products.</li>
+            <li><strong>Trumpet arc:</strong> Standifer (4&deg;) &rarr; Marriott (15&deg;). Two trumpeters, two eras, energy 2 &rarr; 3.</li>
+            <li><strong>Brass theory branch:</strong> Four nodes. Track growth vs. piano (ten nodes).</li>
+            <li><strong>Duwamish territorial acknowledgment:</strong> BLOCKING. SIXTEEN releases overdue.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">15&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#B71C1C">3 (FIRST)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Trumpet</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2000s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Origin Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City Pattern</span>
+            <span class="stat-value">Builder-Stayer</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jazz streak</span>
+            <span class="stat-value">16 consecutive</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Trumpeter</span>
+            <span class="stat-value">2nd (after Standifer)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">UW pipeline</span>
+            <span class="stat-value">3rd product</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy spectrum</span>
+            <span class="stat-value">2:13:1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Brass branch</span>
+            <span class="stat-value">4 nodes</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">15th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note</span>
+            <span class="stat-value">15th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City taxonomy</span>
+            <span class="stat-value">16 patterns</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label"><em>Flexicon</em></span>
+            <span class="stat-value">2006</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Human</em></span>
+            <span class="stat-value">2008</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Dialogue</em></span>
+            <span class="stat-value">2010</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Urban Folklore</em></span>
+            <span class="stat-value">2013</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-References</h4>
+          <div class="stat-row">
+            <span class="stat-label">Standifer</span>
+            <span class="stat-value">4&deg; trumpet</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seales</span>
+            <span class="stat-value">13&deg; teacher</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Parks</span>
+            <span class="stat-value">14&deg; contrast</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Berry</span>
+            <span class="stat-value">5&deg; persistence</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 15&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine
+    &mdash; <a href="../../index.html">Back to S36</a></p>
+  </footer>
+</body>
+</html>

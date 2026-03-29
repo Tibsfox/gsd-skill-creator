@@ -1,0 +1,370 @@
+{
+  "degree": 15,
+  "species": "Wilson's Warbler",
+  "scientific_name": "Cardellina pusilla",
+  "sound_type": "rapid chattering chi-chi-chet",
+  "energy": 3,
+  "ecosystem": "willow riparian",
+  "season": "summer (neotropical migrant -- arrives late April/early May, departs September)",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds in moist shrubby habitats across western North America from Alaska to southern California and New Mexico"
+  },
+  "physical": {
+    "length_in": "4.3-5.0",
+    "wingspan_in": "5.5-6.7",
+    "weight_g": "5-10"
+  },
+  "plumage": {
+    "overall": "Bright olive-yellow above, vivid yellow below, conspicuous glossy black cap (males). Females/immatures show reduced or absent cap.",
+    "cap": "Glossy black skullcap -- the diagnostic male field mark. Neat, round, distinctive. Females show olive or grayish-olive crown.",
+    "body": "Entirely yellow face (no eye ring, no wing bars, no streaking), olive-yellow back, bright yellow underparts",
+    "bill": "Thin, pointed warbler bill -- insectivore design",
+    "subspecies": "Three recognized: C. p. pusilla (eastern/boreal), C. p. pileolata (Pacific coast -- brightest), C. p. chryseola (coastal California -- smallest, most golden). PNW birds are primarily pileolata.",
+    "field_id": "Tiny hyperactive warbler, entirely yellow-and-olive with glossy black cap (males). Conspicuously active -- constantly moving, flicking tail. No wing bars, no eye ring. The opposite of the MacGillivray's concealment strategy -- this bird is easy to see."
+  },
+  "frequency_range": {
+    "chi_hz": "4500-7000 (sharp, staccato -- opening syllables at moderate tempo)",
+    "chet_hz": "3500-5500 (slightly lower, more emphatic -- terminal syllables at accelerated tempo)",
+    "full_song_hz": "3500-7000 (combined range of chi + chet)",
+    "chip_hz": "3000-5000 (sharp contact/mild alarm note)",
+    "register": "Mid-range to upper (3.5-7 kHz -- above speech band, easily audible, bright and sharp)"
+  },
+  "song_metrics": {
+    "duration_s": "1.5-2.5 per song",
+    "note_count": "10-15 notes per song",
+    "initial_interval_s": "0.1-0.15 between opening chi syllables",
+    "terminal_interval_s": "0.06-0.08 between terminal chet syllables (approaching fusion threshold)",
+    "songs_per_minute": "5-10 during active singing bouts",
+    "structure": "Accelerating series -- tempo increases from beginning to end, pitch drops slightly. No contrasting terminal element. The song speeds up and stops.",
+    "variation": "Tempo acceleration is consistent across renditions. Individual note quality may vary slightly between males, but the acceleration pattern is diagnostic.",
+    "perceived_quality": "Rapid chattering burst that gets faster and more urgent -- insistent, percussive, carrying. The acceleration amplifies perceived intensity.",
+    "waveform_analog": "Accelerando -- tempo increase within a single phrase. The EDM build-up. The double-time passage. The punk song that crashes to a halt.",
+    "key_property": "The first species in the engine defined by TEMPO CHANGE within a single vocalization. Every previous species maintained constant tempo. The Wilson's Warbler's song IS the tempo change. Also the first ENERGY-3 -- the circle's energy ceiling breaks."
+  },
+  "accelerando": {
+    "type": "Natural accelerando within single vocalization",
+    "initial_tempo": "~7-10 notes/second (opening chi syllables)",
+    "terminal_tempo": "~12-17 notes/second (terminal chet syllables)",
+    "acceleration_factor": "Approximately 1.5-2x speed increase from start to end",
+    "pitch_trajectory": "Slight descent -- opening notes higher (4.5-7 kHz), terminal notes lower (3.5-5.5 kHz)",
+    "resolution": "NONE -- the song accelerates and stops. No contrasting terminal element. No arrival. Anti-resolution.",
+    "fusion_threshold_approach": "Terminal notes approach the ~15-20 Hz fusion threshold (0.06-0.08 s intervals ≈ 12-17 Hz repetition rate) without crossing. The chattering thickens but remains perceptually discrete.",
+    "music_parallels": [
+      "Classical accelerando: Beethoven's climactic passages, Liszt's rhapsodic drives, Ravel's Bolero final pages",
+      "EDM build-up: hi-hats accelerating, snare rolls compressing, then silence before the drop -- the Wilson's is the build-up without the drop",
+      "Jazz double-time: soloist shifts to playing twice as fast over same changes -- Thomas Marriott's trumpet approach",
+      "Punk/hardcore: songs that get faster until they crash -- the Ramones' frantic tempo, blast beats pushing to the breaking point"
+    ],
+    "engine_significance": "The first species defined by temporal behavior rather than pitch, timbre, or repetition pattern. Introduces a new dimension: RATE OF CHANGE as acoustic identity."
+  },
+  "behavioral_visibility": {
+    "activity_level": "One of the most ACTIVE and conspicuous warblers in the PNW -- constantly moving, flicking tail, gleaning insects from foliage in open understory",
+    "foraging_height": "Low to mid-shrub layer -- 0.5-3 meters, but does not hide in dense interior like MacGillivray's",
+    "visibility": "Easily seen during breeding season. Bright yellow plumage and constant motion make it conspicuous.",
+    "concealment_type": "NONE -- the Wilson's Warbler is the opposite of the MacGillivray's concealment strategy. Distinctive plumage AND conspicuous behavior. You will hear it and see it.",
+    "contrast_with_degree_14": "MacGillivray's Warbler (degree 14) has distinctive plumage but CHOOSES concealment in dense shrub (behavioral invisibility). Wilson's Warbler has distinctive plumage AND conspicuous active behavior. Sequential Parulidae with opposite visibility strategies."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Accelerando (tempo increase within a single phrase -- urgency as compositional device)",
+      "level": "foundational",
+      "department": "music-theory/tempo",
+      "college_path": ".college/music/theory/tempo/accelerando/",
+      "examples": [
+        "The warbler's chi-chi-chi-chet-chet-chet: each note closer to the last, tempo climbing from ~7 to ~15 notes/second",
+        "Classical accelerando: Beethoven's climactic drives, Liszt's rhapsodic passages, Ravel's Bolero building to its final pages",
+        "EDM build-up: hi-hats accelerating, snare rolls compressing -- the build-up before the drop (but the warbler never drops)",
+        "Jazz double-time: soloist shifts to twice the prevailing tempo -- Thomas Marriott's trumpet approach"
+      ],
+      "music_theory_parallel": "The accelerando is the rallentando inverse. Most music slows at the end (ritardando = closure, arrival). The Wilson's Warbler speeds up (accelerando = urgency, forward momentum, NOT arriving). The song is structurally identical to the EDM build-up without the drop. The tension is left hanging. The first species in the engine defined by tempo change."
+    },
+    {
+      "concept": "Chattering texture (rapid discrete notes at the boundary of rhythmic perception -- tempo-varying)",
+      "level": "intermediate",
+      "department": "music-theory/rhythm",
+      "college_path": ".college/music/theory/rhythm/chattering-texture/",
+      "examples": [
+        "The warbler's accelerating chatter: starts below fusion (~7-10 Hz), accelerates toward fusion (~12-17 Hz) without crossing",
+        "Snare drum rolls: discrete strikes that thicken into perceived continuous sound at high rates",
+        "Guitar tremolo picking: discrete notes that fuse into sustained tone above ~15-20 Hz",
+        "Gamelan: interlocking rapid discrete notes creating a composite texture that shifts between discrete and fused perception"
+      ],
+      "music_theory_parallel": "Connects to the junco's trill (degree 11) but with the critical difference of tempo variation. The junco is steady-state: same rate, crossing the fusion threshold uniformly. The Wilson's Warbler varies the rate, starting below fusion and accelerating toward it. The texture thickens in real time. The first species where the listener's perception changes during the vocalization because of temporal density change."
+    },
+    {
+      "concept": "Anti-resolution (the song that builds momentum and stops without resolving -- the abrupt ending)",
+      "level": "intermediate",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/anti-resolution/",
+      "examples": [
+        "The warbler's song: accelerates and stops. No contrasting terminal element. No cadence. No arrival.",
+        "Punk endings: the song crashes to a halt -- no fade-out, no ritardando, no final chord ringing",
+        "Tape stop: sound slows and dies as if the machine was switched off -- mechanical failure as aesthetic",
+        "The interrupted/deceptive cadence: V to vi instead of V to I -- the expected resolution is denied"
+      ],
+      "music_theory_parallel": "The structural opposite of degree 14 (MacGillivray's resolution). The MacGillivray's Warbler introduced the first song with a narrative arc that arrives (A-A-A-B). The Wilson's Warbler at degree 15 introduces anti-resolution: the song builds and is cut off. No arrival. Sequential degrees, opposite approaches to ending. The engine now contains both: the song that arrives and the song that was still going somewhere when it stopped."
+    },
+    {
+      "concept": "Energy escalation (the transition from quiet to loud, slow to fast -- intensity as content)",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-escalation/",
+      "examples": [
+        "The Wilson's Warbler: first energy-3 in the engine after 14 degrees at energy 0-2. The ceiling breaks.",
+        "The dynamic arc in arrangement: a band that builds from whisper to scream tells a story with dynamics",
+        "Crescendo: the gradual increase in volume that is the backbone of orchestral dramatic structure",
+        "Ravel's Bolero: 15 minutes of continuous crescendo -- the most famous dynamic arc in classical music"
+      ],
+      "music_theory_parallel": "The 360 Species engine has been whispering for fifteen degrees. The Wilson's Warbler turns up the dial. Not all the way -- energy 3 is not a scream -- but enough to change the room. The acceleration amplifies perceived intensity: a signal that is getting faster FEELS louder than a signal at constant tempo, even at the same amplitude. Speed and intensity are not decorations on structure; they ARE the structure."
+    },
+    {
+      "concept": "Willow riparian ecology (keystone riparian habitat -- the water's edge as acoustic stage)",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/willow-riparian/",
+      "examples": [
+        "Willow thickets along mountain streams: the Wilson's Warbler's primary breeding habitat in the PNW",
+        "Over 30 Salix species in the PNW: from low alpine willows to Pacific willow trees reaching 40 feet",
+        "Keystone riparian function: bank stabilization, stream shading (salmonid habitat), flood attenuation, sediment filtering",
+        "Third riparian species in engine: flycatcher (alder, degree 6), MacGillivray's (dense shrub, degree 14), Wilson's (willow, degree 15)"
+      ],
+      "music_theory_parallel": "The willow riparian is the Wilson's Warbler's stage. The stream provides white noise background; the willow canopy creates a semi-open acoustic environment that carries the chattering song. Unlike the MacGillivray's dense thicket (which muffles and conceals), the willow riparian is open enough to project sound. The habitat matches the bird's strategy: visible, audible, carrying."
+    },
+    {
+      "concept": "Tempo as identity (the first species whose defining characteristic is temporal behavior rather than pitch or timbre)",
+      "level": "advanced",
+      "department": "music-theory/identity",
+      "college_path": ".college/music/theory/identity/tempo-identity/",
+      "examples": [
+        "The Wilson's Warbler: identified by HOW FAST it goes, not what pitch it reaches or what pattern it repeats",
+        "Drum and bass: the genre is DEFINED by its tempo (~160-180 BPM) more than by any harmonic or melodic content",
+        "The Ramones: the band's identity WAS its tempo -- faster than anyone else, three chords, no solos, maximum speed",
+        "Double-time feel in jazz: the soloist's tempo shift IS the emotional content -- not the notes, the speed"
+      ],
+      "music_theory_parallel": "Every previous species in the engine was defined by pitch (kinglet's ultra-high, thrush's harmonic series), timbre (siskin's buzzy sawtooth, wren's complex cascade), repetition pattern (vireo's ostinato, warbler's ternary AAB), or content (chickadee's referential syntax). The Wilson's Warbler introduces a new identity axis: temporal behavior. The song is identified by its RATE OF CHANGE. This parallels genres and artists defined by tempo rather than harmony."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "CONSTANT TEMPO vs. ACCELERATING TEMPO. The junco (degree 11) trills at a constant rate -- rapid single-note repetition above the fusion threshold, perceived as continuous tone, unvarying. The Wilson's Warbler (degree 15) chatters at an ACCELERATING rate -- starting below fusion and compressing toward it. Same domain (rapid discrete notes), opposite temporal behavior (constant vs. changing). The junco is steady-state. The Wilson's is a ramp."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "RESOLUTION vs. NO RESOLUTION. The MacGillivray's (degree 14) resolves with a contrasting terminal 'sweet' -- the first song in the engine with a narrative arc that arrives (A-A-A-B). The Wilson's (degree 15) accelerates and stops -- no resolution, no contrasting element, no arrival. Sequential Parulidae, sequential degrees, opposite endings. Also: same family (Parulidae), same migration (neotropical), same season (summer), but opposite visibility strategies (MacGillivray's hides, Wilson's displays)."
+    },
+    {
+      "project": "SPS-006",
+      "title": "Pacific-slope Flycatcher (Degree 6)",
+      "connection": "RIPARIAN TRIO. The flycatcher (degree 6) introduced riparian alder corridors. The MacGillivray's (degree 14) added dense riparian shrub. The Wilson's Warbler (degree 15) completes a riparian triplet with willow-dominated streamside thickets -- the most strictly riparian species yet. Three degrees of streamside habitat spanning the engine's first 16 species."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "PARULIDAE EXPANSION. Second warbler in the engine (after MacGillivray's at degree 14). Back-to-back Parulidae entries with contrasting strategies: the MacGillivray's hides, the Wilson's displays. The MacGillivray's resolves, the Wilson's doesn't. AVI documents PNW warbler diversity and ecology including Wilson's Warbler breeding status and habitat."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Thomas Marriott at degree 15. Both are the FIRST ENERGY-3 in their respective circles. Both are contemporary, Seattle-based, and build momentum through forward-driving phrasing. Marriott's trumpet playing pushes through changes with double-time intensity; the warbler pushes through its song with accelerating tempo. Both break the energy ceiling that constrained the previous fourteen degrees. Marriott's theory node: chord extensions (9, 11, 13) -- tertian harmony beyond the 7th."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "COMPLEXITY REVISITED. The wren (degree 1) delivered maximum note density through cascading improvisation -- fast, complex, unpredictable (complex-fast). The Wilson's Warbler (degree 15) delivers high note density through ACCELERATION -- fast, simple (same note type repeated), predictable trajectory (simple-fast). Both are fast. One is many different notes. The other is the same note, speeding up. Two paths to high note density."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- the Wilson's Warbler introduces a SEVENTH communication modality: the tempo-varying territorial burst. Distinct from alarm broadcasting (chickadees), swarm cohesion (bushtit), territorial trill (junco), buzzy flock sweep (siskin), persistent ostinato (vireo), and structured ternary resolution (MacGillivray's).",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "warbler_role": "The Wilson's Warbler produces a rapid, accelerating chattering burst (chi-chi-chet) from conspicuous perches in willow riparian habitat. Its communication is primarily INTRASPECIFIC: the song establishes territory and attracts mates through an accelerating phrase that conveys urgency and fitness. The Wilson's Warbler introduces a SEVENTH communication modality: the tempo-varying territorial burst -- a signal defined by its rate of change rather than its pitch, timbre, or repetition pattern. Previous modalities: alarm broadcast (chickadees, degrees 3/9), swarm cohesion (bushtit, degree 10), territorial trill (junco, degree 11), flock sweep (siskin, degree 12), persistent ostinato (vireo, degree 13), structured ternary song (MacGillivray's, degree 14). The Wilson's adds: tempo-varying burst (degree 15).",
+    "note": "The alarm network remains at 4 nodes. Seven parallel communication channels now documented in the forest: alarm broadcast, swarm cohesion, territorial trill, flock sweep, persistent ostinato, structured ternary song, and tempo-varying burst."
+  },
+  "part_a_parallel": {
+    "artist": "Thomas Marriott",
+    "degree": 15,
+    "genre": "S36",
+    "instrument": "Trumpet",
+    "label": "Origin Records",
+    "era": "2000s-present",
+    "shared_principle": "Both are the FIRST ENERGY-3 in their respective circles. Both are contemporary, Seattle-based, and build momentum through forward-driving phrasing. Marriott's trumpet playing pushes through changes with double-time intensity -- his solos build urgency through increasing rhythmic density, accelerating through the harmony. The warbler pushes through its song with accelerating tempo. Both break the energy ceiling that constrained the previous fourteen degrees. Where Aaron Parks at degree 14 added resolution (the ending that changes meaning), Marriott at degree 15 adds INTENSITY (the drive that builds without stopping).",
+    "resonance_points": [
+      "First energy-3 (energy match): Both are the first energy-3 in their circles. The S36 data shows Marriott at energy 3, matching the Wilson's Warbler. After fourteen degrees of energy 1-2, both circles heat up at the same position.",
+      "Forward-driving momentum: Marriott's trumpet solos build through increasing rhythmic density and harmonic tension -- the musical accelerando. The warbler's song literally accelerates. Both create urgency through forward motion.",
+      "Contemporary and Seattle-based: Marriott is a 2000s-present Seattle jazz trumpeter on Origin Records. The Wilson's Warbler breeds in Seattle-area riparian habitat every summer. Both are current, local, present tense.",
+      "No resolution: Marriott's solos push forward without settling -- the energy drives through to the next phrase rather than resolving into consonance. The warbler's song accelerates and stops without resolving. Both leave the tension hanging."
+    ]
+  },
+  "degree_arc": {
+    "position": "The rapid chattering chi-chi-chet -- accelerando within a single vocalization, urgency as structure. The first energy-3. The first tempo change. The circle heats up.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15)",
+    "key_insight": "Degree 15 introduces three new dimensions: (1) ACCELERANDO -- the first species defined by tempo change within a single vocalization, where every previous species maintained constant tempo. (2) FIRST ENERGY-3 -- the energy ceiling that persisted for 14 degrees finally breaks. (3) ANTI-RESOLUTION -- the song that builds momentum and stops without resolving, the structural opposite of degree 14's narrative arc.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)",
+      "degree_14": "Ternary / AAB (repeated identical syllables followed by contrasting resolution syllable -- the minimal narrative arc, repetition with destination)",
+      "degree_15": "Accelerando (tempo-varying chattering series -- the first species defined by rate of change rather than pitch, timbre, or pattern)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)",
+      "degree_11": "Mid-range (3-6 kHz -- comfortably within human hearing, return to accessible mid-range)",
+      "degree_12": "Wide-band (2-10 kHz -- the ascending sweep traverses more of the frequency spectrum than any previous single vocalization)",
+      "degree_13": "Mid-range (2.5-5 kHz -- centered in the speech frequency band, easily audible, comfortably accessible)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz -- churry syllables in the upper portion, sweet resolution descending into mid-range)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz -- chi syllables in the upper portion, chet syllables descending slightly. Brighter and higher overall than degree 14)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)",
+      "degree_11": "Territory + mate attraction through trill (I am here, I am fit, this is my edge)",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (I am here, I am Pine Siskin, where are we going -- nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (I am still here, this is still my territory, the signal has not stopped -- temporal continuity as content)",
+      "degree_14": "Territory + mate attraction through structured song with resolution (I am here, I am MacGillivray's Warbler, and this phrase has a beginning and an end -- narrative as content)",
+      "degree_15": "Territory + mate attraction through accelerating burst (I am here, I am Wilson's Warbler, and I am URGENT -- tempo change as fitness signal, intensity as content)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)",
+      "degree_10": "Shrubby woodland edge (ecotone -- the transition zone between forest and open habitat)",
+      "degree_11": "Forest edge (ecotone -- the threshold between forest interior and open ground)",
+      "degree_12": "Conifer seed crop (not a fixed habitat but a resource -- the siskin goes where the seeds are)",
+      "degree_13": "Oak woodland (Garry oak / Oregon white oak -- the first non-conifer-dominated habitat in the engine, a threatened fire-dependent savanna ecosystem)",
+      "degree_14": "Dense shrub (salal, salmonberry, thimbleberry, snowberry thickets -- early-successional and edge habitats maintained by disturbance)",
+      "degree_15": "Willow riparian (willow-dominated streamside thickets along streams, rivers, bogs, and wet meadows -- the purest riparian obligate in the engine)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Willow riparian thickets -- dense stands of willow (Salix spp.), alder, and moist shrubby vegetation along streams, rivers, bogs, and wet meadows. In PNW, strongly associated with willow thickets in mountain valleys, subalpine meadow margins, and lowland stream corridors. Also uses moist forest clearings, avalanche chutes, and boggy areas.",
+    "niche": "Low-to-mid-shrub insectivore in moist willow riparian habitat. Forages actively from ground to mid-canopy, gleaning insects from foliage with rapid flitting movements. More actively foraging and conspicuous than MacGillivray's Warbler.",
+    "foraging_strategy": "Active gleaner -- flits rapidly through willow and shrub foliage, picking insects from leaf surfaces and small twigs. Also hawks insects in short sallies. Tail-flicking behavior is constant and diagnostic.",
+    "diet": "Insects (caterpillars, beetles, flies, wasps, aphids, spiders gleaned from foliage). Almost entirely insectivorous during breeding season. Takes some berries during fall migration.",
+    "nesting": "Nest on or near the ground, typically concealed in dense vegetation at the base of a shrub or in moss/grass. Open cup of leaves, grass, bark strips, and moss, lined with fine grass and hair. Well-concealed at ground level. Female builds nest alone; female incubates.",
+    "irruptive_movement": false,
+    "resident_status": "NEOTROPICAL MIGRANT -- breeds in western North America (April-September), winters from Mexico through Central America. Third neotropical migrant in the engine after Pacific-slope Flycatcher (degree 6) and MacGillivray's Warbler (degree 14).",
+    "flock_size": "Solitary or in pairs during breeding season. Joins mixed-species flocks during migration. Does not form large conspecific flocks.",
+    "population_trend": "DECLINING -- approximately 1.3% per year since 1966 (BBS data). Cumulative loss of roughly 50% over past five decades. Still abundant (~60-70 million) but trajectory is concerning."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~60-70 million (Partners in Flight 2020)",
+    "trend": "Declining -- approximately 1.3% per year since 1966 (Breeding Bird Survey). Cumulative ~50% decline over 5 decades.",
+    "threats": "Loss of riparian willow habitat (water diversion, livestock grazing, development); Brown-headed Cowbird parasitism in fragmented habitats; climate-driven phenological mismatch (insect emergence shifting out of sync with arrival); wintering ground habitat loss in Mexico and Central America; building window collisions (top 10 most vulnerable species).",
+    "vulnerability": "The paradox of abundance: 60 million birds and declining at 1.3% per year. Still common but the trajectory is downward. At the current rate, the population will halve again within 50 years.",
+    "unique_feature": "Among the top 10 species for building collision mortality in North America -- small size, nocturnal migration, and attraction to lighted structures make it exceptionally vulnerable to window strikes.",
+    "two_hemisphere_threat": "As a neotropical migrant, faces threats on both breeding and wintering grounds. Riparian habitat loss in the PNW reduces breeding capacity; deforestation in Mexico/Central America reduces wintering habitat."
+  },
+  "key_sites": [
+    {
+      "name": "Cascade mountain stream corridors",
+      "type": "breeding (summer)",
+      "description": "Willow-lined mountain streams in the western Cascades -- subalpine meadow margins and montane riparian zones. Core breeding habitat in Washington state.",
+      "region": "Western Cascades, WA"
+    },
+    {
+      "name": "Olympic Peninsula riparian zones",
+      "type": "breeding (summer)",
+      "description": "Willow and alder thickets along rivers and streams on the Olympic Peninsula. Dense riparian habitat in the temperate rainforest zone.",
+      "region": "Olympic Peninsula, WA"
+    },
+    {
+      "name": "Snoqualmie Pass / subalpine meadows",
+      "type": "breeding (summer)",
+      "description": "Subalpine willow bogs and wet meadow margins at higher elevations in the central Cascades. Reliable breeding habitat where willow dominates stream margins.",
+      "region": "Central Cascades, WA"
+    },
+    {
+      "name": "Green River / lowland riparian",
+      "type": "breeding (summer)",
+      "description": "Lowland riparian willow corridors along urban and suburban streams in the greater Seattle area. Increasingly fragmented but still used during breeding season.",
+      "region": "King County, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the accelerating chattering structure with initial chi syllables at wider spacing compressing to terminal chet syllables at narrower spacing",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Wilson's Warbler song shows a CLEAR ACCELERATING PATTERN: initial notes spaced at wider intervals (~0.1-0.15 s) with higher frequency (4.5-7 kHz), progressively compressing to terminal notes at narrower intervals (~0.06-0.08 s) with slightly lower frequency (3.5-5.5 kHz). The acceleration is visible as decreasing inter-note gaps from left to right on the spectrogram. Compare to the Oregon Junco (degree 11) whose spectrogram shows evenly-spaced notes at constant rate, and to the MacGillivray's Warbler (degree 14) whose spectrogram shows evenly-spaced churry syllables followed by a distinct contrasting sweet."
+  },
+  "sources": [
+    "Ammon, E.M. and Gilbert, W.M. (2020). Wilson's Warbler (Cardellina pusilla). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Wilson's Warbler. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Wilson's Warbler. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Wilson's Warbler species account. birdweb.org",
+    "Lovette, I.J. et al. (2010). Comprehensive multilocus phylogeny for wood-warblers and revised classification of Parulidae. Mol Phylogenet Evol 57: 753-770.",
+    "Barker, F.K. et al. (2015). New insights into New World biogeography. The Auk 132: 333-348.",
+    "Chesser, R.T. et al. (2011). Fifty-second supplement to the AOU Check-list. The Auk 128: 600-613.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Catchpole, C.K. and Slater, P.J.B. (2008). Bird Song: Biological Themes and Variations. 2nd ed. Cambridge University Press.",
+    "Gregory, S.V. et al. (1991). An ecosystem perspective of riparian zones. BioScience 41: 540-551.",
+    "Knopf, F.L. and Samson, F.B. (1994). Scale perspectives on avian diversity in western riparian ecosystems. Conservation Biology 8: 669-676.",
+    "Ammon, E.M. (1995). Reproductive ecology of Wilson's Warbler in subalpine meadow. Condor 97: 1028-1039.",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey, Results and Analysis 1966-2019. USGS Patuxent.",
+    "Loss, S.R., Will, T., and Marra, P.P. (2014). Bird-building collisions in the United States. The Condor 116: 8-23.",
+    "Lowther, P.E. (2020). Brown-headed Cowbird parasitism of Wilson's Warbler. Birds of the World.",
+    "Lerdahl, F. and Jackendoff, R. (1983). A Generative Theory of Tonal Music. MIT Press.",
+    "London, J. (2012). Hearing in Time. 2nd ed. Oxford University Press.",
+    "Levitin, D.J. (2006). This Is Your Brain on Music. Dutton.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Wilson's Warbler (Cardellina pusilla). iucnredlist.org",
+    "eBird. Wilson's Warbler observation data, Pacific Northwest. ebird.org/species/wilwar",
+    "Washington Department of Fish and Wildlife. PHS: Riparian and wetland habitats. wdfw.wa.gov",
+    "Macaulay Library. Wilson's Warbler recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org"
+  ],
+  "release_metadata": {
+    "release_number": "015",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
