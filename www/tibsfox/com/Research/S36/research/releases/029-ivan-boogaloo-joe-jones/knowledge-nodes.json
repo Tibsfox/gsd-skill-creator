@@ -1,0 +1,128 @@
+{
+  "degree": 29,
+  "artist": "Ivan \"Boogaloo Joe\" Jones",
+  "slug": "029-ivan-boogaloo-joe-jones",
+  "genre": "Jazz/Funk",
+  "energy": 4,
+  "era": "1960s-1980s",
+  "location": {
+    "origin": "Newark, New Jersey (biographical origin). CSV designates Seattle. No confirmed Seattle connection found. Jones' documented career centers on the East Coast soul-jazz circuit: Newark, New York, Philadelphia, Englewood Cliffs (Rudy Van Gelder Studio). Geographic discrepancy documented with full transparency.",
+    "formative": "Newark, New Jersey (born c. 1940). East Coast R&B and jazz scene. The boogaloo dance craze (1966-1969) of New York/Newark Latin and African-American dancehalls. The Prestige Records soul-jazz stable (Bergenfield, NJ). Rudy Van Gelder Studio (Englewood Cliffs, NJ). The organ-trio circuit of Harlem, Newark, and Philadelphia nightclubs.",
+    "career": "Prestige Records recording artist (1969-1974): 7 leader dates including Introducing Boogaloo Joe Jones (1969), No Way! (1970), Right On Brother (1970), What It Is (1971), Boogaloo Joe (1972), Snake Rhythm Rock (1973), Sweetback (1974). Sideman appearances on additional Prestige sessions. Post-1974 career undocumented. Part of the Grant Green / George Benson soul-jazz guitar lineage. Recorded with Bernard Purdie, Idris Muhammad, Rusty Bryant, Jimmy Lewis. CSV places artist in Seattle; no biographical evidence confirms Pacific Northwest connection."
+  },
+  "born": "c. 1940, Newark, New Jersey (estimated from career timeline)",
+  "formed": null,
+  "died": null,
+  "labels": ["Prestige Records (1969-1974)", "Fantasy Records (post-1971 acquisition of Prestige)"],
+  "members": [],
+  "associated_musicians": [
+    {"name": "Rusty Bryant", "role": "Saxophonist (alto, tenor) on multiple Jones albums", "note": "Prestige soul-jazz regular with own leader dates. Appears on No Way!, Right On Brother, What It Is. Part of the Prestige assembly-line stable."},
+    {"name": "Bernard Purdie", "role": "Drummer on No Way! (1970)", "note": "One of the most recorded session drummers in American music history. The 'Purdie Shuffle' is a foundational groove pattern. Also recorded with Aretha Franklin, King Curtis, Donny Hathaway, Steely Dan."},
+    {"name": "Idris Muhammad", "role": "Drummer on What It Is (1971)", "note": "Born Leo Morris, New Orleans. Brought New Orleans second-line rhythms into jazz-funk. Also recorded with Pharoah Sanders, Roberta Flack, Lou Donaldson."},
+    {"name": "Jimmy Lewis", "role": "Bassist on No Way! and What It Is", "note": "Session bassist bridging jazz and R&B studio worlds. Part of the New York/Newark rhythm section infrastructure."},
+    {"name": "Danny Turner", "role": "Flute/alto sax on Introducing Boogaloo Joe Jones (1969)", "note": "Debut album personnel."},
+    {"name": "Ben Dixon", "role": "Drums on Introducing Boogaloo Joe Jones (1969)", "note": "Also recorded with Grant Green on Blue Note sessions."},
+    {"name": "Grant Green", "role": "Lineage ancestor (Blue Note soul-jazz guitar)", "note": "No documented co-recording. Shared sidemen (Purdie, Muhammad, Dixon) and sonic vocabulary. Green is the purest soul-jazz guitar expression; Jones is the funkiest."},
+    {"name": "George Benson", "role": "Lineage peer (Prestige/CTI/Warner soul-jazz guitar)", "note": "Benson recorded early sessions for Prestige (1964-1965) before Jones' debut. The most commercially successful expression of the soul-jazz guitar lineage."}
+  ],
+  "former_members": [],
+  "theory_nodes": [
+    {
+      "concept": "The Catalog (artist-city pattern where the relationship to a city is mediated through recorded output rather than physical presence -- Jones' seven Prestige albums exist in Seattle's record stores, streaming queues, and DJ playlists regardless of whether Jones ever visited the city; the catalog travels where the artist does not; first engine pattern that acknowledges recorded music as a form of presence)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/structure/the-catalog-pattern.md",
+      "examples": [
+        "Ivan 'Boogaloo Joe' Jones (degree 29) -- 7 Prestige albums present in Seattle's musical ecosystem through record stores, streaming platforms, and DJ sets; no confirmed physical presence in Seattle; the catalog IS the connection",
+        "Night Owls (degree 28) -- 'The Resident Band' inverse: Night Owls are physically present at 150+ gigs/year but have no catalog; Jones has a catalog but no confirmed physical presence. Presence vs. recording as two modes of musical existence",
+        "Quincy Jones (degree 0) -- 'Export' pattern: Q. Jones left Seattle physically but his catalog returned via global distribution. Different mechanism (person left, catalog stayed vs. person may never have arrived, catalog arrived independently)",
+        "The Dynamics (degree 27) -- 'The Conduit': left a single live album and an archival compilation. Jones left seven studio albums. Both are known primarily through their catalogs rather than their live presence."
+      ],
+      "description": "The Catalog is the thirtieth artist-city pattern in the Seattle 360 engine. It describes an artist whose relationship to a city is mediated entirely through their recorded output. Ivan 'Boogaloo Joe' Jones' seven Prestige Records albums (1969-1974) exist in Seattle's record stores, streaming platforms, and DJ playlists. When a Seattle listener discovers Jones through a Prestige Records playlist or an algorithm that recommends him alongside Grant Green or George Benson, Jones becomes present in the city through his recordings even though no biographical evidence places him there physically. This is the first engine pattern that separates the artist's body from the artist's work as distinct entities with different geographic ranges. All prior patterns assume the artist and the city share physical space (living, performing, teaching, building). The Catalog acknowledges that recorded music has its own geography -- it goes where it is distributed, played, sampled, and recommended, independent of the musician's physical location.",
+      "genealogy": {
+        "ancestors": ["Prestige Records distribution network (1949-present) -- the label's catalog has been continuously available since the 1950s, through LP, CD, and streaming eras", "Rudy Van Gelder Studio (Englewood Cliffs, NJ) -- the physical room where the catalog was recorded; the studio's acoustics are part of the catalog's identity", "Record store infrastructure -- Seattle's record stores (Bop Street, Easy Street, Everyday Music) carry Prestige catalog as part of their jazz inventory", "Streaming platform algorithms -- Spotify, Apple Music, Tidal recommend Jones alongside Grant Green and George Benson; the algorithm creates geographic presence"],
+        "relationship": "The Catalog pattern exists because recorded music decouples the artist from the listener's location. Before recording technology, The Catalog could not exist -- music required physical co-presence of performer and audience. Edison's phonograph (1877) created the possibility; Prestige Records' distribution network realized it for jazz; streaming platforms universalized it. Jones' presence in Seattle (if it exists) is entirely a product of recording and distribution technology. The pattern is historically bound: it could not have occurred before the late 19th century."
+      }
+    },
+    {
+      "concept": "Label halo effect (a recording artist's discoverability and perceived significance amplified by the reputation of their label -- Jones is on Prestige Records alongside Miles Davis, John Coltrane, Thelonious Monk, and Sonny Rollins; the label is the gateway; the algorithm does not distinguish between canonical masterpiece and assembly-line product; it sees 'Prestige Records' and recommends)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/industry/label-halo-effect.md",
+      "examples": [
+        "Ivan 'Boogaloo Joe' Jones (degree 29) -- on Prestige alongside Miles Davis, Coltrane, Monk, Rollins; the halo makes Jones discoverable through the greatest jazz catalog ever assembled",
+        "George Benson (external) -- early Prestige sessions (1964-1965) benefit from the same halo; Benson's later commercial success on Warner Bros. is a different mechanism (artist halo, not label halo)",
+        "Allen Stone (degree 23) -- on ATO Records alongside Dave Matthews and My Morning Jacket; a modest version of the halo effect (ATO is respected but not canonical)",
+        "Grant Green (external) -- on Blue Note alongside Art Blakey, Horace Silver, Wayne Shorter; Blue Note's halo is comparable to Prestige's"
+      ],
+      "description": "The label halo effect describes how a recording artist's discoverability and perceived significance are amplified by the reputation of the label that released their recordings. Ivan 'Boogaloo Joe' Jones recorded seven albums for Prestige Records, a label whose catalog includes some of the most important jazz recordings ever made (Miles Davis' marathon sessions, Coltrane's Soultrane, Monk's early dates, Rollins' Saxophone Colossus-era work). On streaming platforms, Jones' albums sit in the same catalog as these masterworks. Algorithmic recommendation does not distinguish between canonical and assembly-line -- it sees shared label, shared genre, shared era, and recommends accordingly. A listener who discovers Coltrane may be recommended Jones. The label is the channel; the catalog flows through it. The halo effect is particularly strong for Prestige because the label's name literally means 'distinguished reputation' -- the brand promise is built into the word itself.",
+      "genealogy": {
+        "ancestors": ["Prestige Records (founded 1949 by Bob Weinstock) -- the label's canonical jazz catalog (Davis, Coltrane, Monk, Rollins) creates the halo", "Fantasy Records acquisition (1971) -- kept the Prestige catalog in print and in distribution, maintaining the halo across decades", "Streaming platform algorithms -- recommend by label, genre, and era; the technical mechanism that transmits the halo to new listeners", "Record store organization -- physical record stores shelve Prestige releases together; browsing creates the halo in physical space"],
+        "relationship": "The label halo effect exists because record labels aggregate diverse artists under a single brand. When that brand carries canonical significance (Prestige = jazz, Blue Note = jazz, Motown = soul, Sun = rockabilly), every artist on the label benefits from the association. The effect is strongest for lesser-known artists -- Jones benefits more from the Prestige halo than Davis does, because Davis has his own name recognition. The halo is the label's gift to its marginal artists: visibility they could not earn alone."
+      }
+    },
+    {
+      "concept": "Boogaloo as functional naming (the performing name 'Boogaloo Joe' is a verb disguised as a noun -- it describes what the music does to the listener's body rather than who the musician is; the first name in the engine that functions as a kinetic instruction; the boogaloo dance craze of 1966-1969 as the source of the name's functional grammar)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/genre/boogaloo-functional-naming.md",
+      "examples": [
+        "Ivan 'Boogaloo Joe' Jones (degree 29) -- the name tells the audience what the music does: it makes you boogaloo (dance). The name is an advertisement, a promise, a kinetic instruction.",
+        "Reggie Watts (degree 17) -- 'The Uncategorizable': Watts' name does not describe his music's function. Jones' name does. The difference is between identity-naming and function-naming.",
+        "Polyrhythmics (degree 21) -- the band name describes a musical technique (polyrhythm) rather than a physical response. Jones' name describes the physical response (boogaloo = dance).",
+        "Pete Rodriguez (external) -- 'I Like It Like That' (1967): the song title functions as boogaloo instruction. The boogaloo's entire aesthetic is functional: music exists to produce dancing."
+      ],
+      "description": "Boogaloo as functional naming documents the phenomenon where a performing name describes the music's effect on the listener's body rather than the musician's identity. 'Boogaloo Joe' is a compound that fuses a dance (boogaloo) with a name (Joe), creating a hybrid identity-instruction: 'I am Joe and I make you boogaloo.' This is the first name in the engine that functions as a kinetic command. All prior artist names are identity labels (who the person is) or aesthetic labels (what the project sounds like). 'Boogaloo Joe' is a functional label (what the music does to you). The boogaloo dance craze (1966-1969) is the source of this naming grammar -- an entire genre built around the principle that music exists to produce physical movement, not aesthetic contemplation. Jones' name carries this principle as a permanent brand: even without hearing a note, you know what the music is for.",
+      "genealogy": {
+        "ancestors": ["Boogaloo dance craze (1966-1969) -- Joe Cuba, Pete Rodriguez, Johnny Colon; Latin/R&B crossover dance phenomenon centered in New York/Newark", "Soul-jazz naming conventions -- album titles as advertising (Right On Brother, What It Is, Sweetback, Snake Rhythm Rock); the Prestige catalog used titles as marketing", "African-American naming traditions in jazz -- bebop names (Dizzy, Thelonious) conveyed personality; soul-jazz names (Boogaloo, Groove, Funky) conveyed function"],
+        "relationship": "Boogaloo as functional naming exists because the soul-jazz market of the late 1960s was a dance-music market. The recordings were sold to jukeboxes, nightclubs, and budget record buyers who wanted music that made them move. In this market, a name that promises dancing is worth more than a name that promises artistry. 'Boogaloo Joe' is the name of a musician who understood his market. The functional naming convention died with the boogaloo craze (by the mid-1970s, 'boogaloo' sounded dated), but the principle -- name the function, not the art -- persists in DJ culture, electronic music, and hip-hop production credits."
+      }
+    },
+    {
+      "concept": "Blue note -- boogaloo guitar bend (twenty-ninth deployment; the single-note guitar line bent toward the dance floor -- not the concert-stage bend of a jazz solo but the groove-locked bend that sustains the boogaloo rhythm without breaking the dancers' momentum; the blue note as kinetic fuel rather than emotional expression)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/blue-note-boogaloo-guitar-bend.md",
+      "examples": [
+        "Ivan 'Boogaloo Joe' Jones (degree 29) -- single-note soul-jazz guitar lines with blues-inflected bends; the bend sustains the groove rather than interrupting it for a solo moment",
+        "Night Owls (degree 28) -- supper-club vocal bend: calibrated to the dining room. Jones' bend is calibrated to the dance floor. Both are service-environment blue notes (comparison: service-vocal vs. service-kinetic)",
+        "Grant Green (external) -- Blue Note soul-jazz guitar: the purest expression of the single-note blue-note bend. Jones' bend is funkier, more rhythmically locked, less melodically free.",
+        "Polyrhythmics (degree 21) -- funk-brass blue note: ensemble brass bends. Jones' bend is a single guitar, not a horn section. Same kinetic purpose, different instrumentation."
+      ],
+      "description": "Twenty-ninth deployment of the blue note thread. The boogaloo guitar bend is the blue note adapted to the specific demands of dance-floor soul-jazz guitar. In Jones' recordings, the guitar plays primarily single-note lines (in the Grant Green tradition) with blues-inflected pitch bends that serve a kinetic function: they add urgency to the groove without disrupting its momentum. The bend does not say 'listen to my expression' (concert blue note) or 'join me if you want' (supper-club blue note, degree 28); it says 'keep moving.' The bend is fuel for the boogaloo -- it heats the groove, lubricates the rhythm, keeps the dancers' feet in motion. This is the blue note stripped to its most functional purpose: not expression, not invitation, but propulsion. Twenty-nine deployments across thirty degrees.",
+      "genealogy": {
+        "ancestors": ["Blue note -- all twenty-eight prior deployments (degrees 0-28)", "Blue note -- supper-club vocal bend (degree 28, Night Owls); service-environment calibration", "Blue note -- funk-brass (degree 21, Polyrhythmics); kinetic purpose via brass ensemble", "Grant Green soul-jazz guitar vocabulary -- the lineage ancestor for all soul-jazz guitar bends", "Boogaloo dance rhythm -- the kinetic context that shapes the bend's purpose"],
+        "relationship": "Twenty-nine deployments across thirty degrees. The boogaloo guitar bend is the most functionally specific blue note in the engine. All prior blue notes serve some combination of emotional expression, harmonic color, and stylistic identity. The boogaloo guitar bend serves one purpose: kinetic propulsion. The bend exists because the boogaloo demands it -- the dance needs rhythmic urgency, and the guitar bend provides it at the micro-level (individual note bends) while the groove provides it at the macro-level (rhythmic pattern). Twenty-nine mechanisms: bass-line (0), guitar (1), vocal (3), trumpet-warm (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), sax voice (9), alto cool bend (10), flute bent (11), bebop chromatic (12), modal integration (13), post-genre floating (14), assertive brass (15), synthesizer pitch bend (16), vocal glide (17), soul-vocal (18), collective-soul (19), americana-soul (20), funk-brass (21), vocal-funk (22), gospel-vocal (23), dynastic-soul (24), collective-activist (25), metamorphic (26), brass-section smear (27), supper-club vocal bend (28), boogaloo guitar bend (29)."
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-005", "S36-016", "S36-021", "S36-022", "S36-027", "S36-028"],
+  "seattle_connection": "UNCONFIRMED. CSV designates Seattle; no biographical evidence confirms Pacific Northwest connection. Ivan 'Boogaloo Joe' Jones (born c. 1940, Newark, NJ) recorded 7 albums for PRESTIGE RECORDS (1969-1974) -- the most historically significant label in the engine (Miles Davis, Coltrane, Monk, Rollins). Career centered entirely on East Coast soul-jazz circuit (Newark, New York, Philadelphia, Englewood Cliffs NJ / Rudy Van Gelder Studio). Possible explanations: later-life relocation (undocumented, parallels Late Homestead pattern at degree 10), touring performances at Seattle jazz clubs (plausible but undocumented), or curatorial CSV placement. GEOGRAPHIC DISCREPANCY DOCUMENTED WITH FULL TRANSPARENCY per engine integrity standard. THE CATALOG as 30th artist-city pattern -- relationship to city mediated through recorded output rather than physical presence. LABEL HALO EFFECT -- Prestige catalog places Jones algorithmically adjacent to the greatest jazz recordings ever made. JAZZ/FUNK RETURNS from degrees 21-22 -- genre recurrence (not repeat). Third instance of Jazz/Funk in the engine. NINTH CONSECUTIVE E=4 (2:13:6:9) -- groove-kinetic subtype (the boogaloo: music as dance instruction; the name IS the kinetic command). THE LIQUID BROOK as 30th acoustic element -- continuous channeled flow; completes the liquid triad (gurgle 27, twitter 28, brook 29). BOOGALOO AS FUNCTIONAL NAMING -- first name in the engine that describes what the music does to the listener's body. ORGAN TRIO -- minimum viable band format (3 musicians producing full rhythmic/harmonic/melodic texture). GRANT GREEN / GEORGE BENSON lineage -- soul-jazz guitar vocabulary. BERNARD PURDIE + IDRIS MUHAMMAD on Jones sessions -- two of the most significant drummers in American music history. POST-1974 CAREER UNDOCUMENTED -- the brook went underground.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "The Catalog (artist-city pattern where relationship to city is mediated through recorded output; first pattern that does not require physical presence; seven Prestige albums as geographic proxy)",
+      "Label halo effect (Prestige Records alongside Davis, Coltrane, Monk, Rollins; the label is the channel; algorithmic adjacency amplifies discoverability of marginal artists)",
+      "Boogaloo as functional naming (the name describes what the music does to the listener's body; first kinetic-instruction name in the engine; boogaloo dance craze 1966-1969 as source)",
+      "Blue note -- boogaloo guitar bend (twenty-ninth deployment; kinetic propulsion; the bend sustains the dance floor's momentum; most functionally specific blue note in the engine)",
+      "All carry-forward items from degrees 0-28"
+    ],
+    "engine_sequencing": [
+      "NINTH consecutive E=4 (degrees 21-29): longest streak extends to nine. Distribution 2:13:6:9. Nine subtypes: ensemble (21), collective (22), vocal (23), dynastic (24), congregational (25), metamorphic (26), incubator (27), ambient (28), groove (29). Track if streak continues or breaks at degree 30.",
+      "GENRE Stage 11 at degree 29: Jazz/Funk. GENRE RECURRENCE -- Jazz/Funk returns from degrees 21-22 after six-degree gap. Breaks the Soul/R&B consecutive repeat (27-28). Track what comes next at degree 30.",
+      "LIQUID TRIAD complete: gurgle (27) + twitter (28) + brook (29). Three consecutive liquid-prefix acoustic elements. Track if liquid series continues to a fourth element or a new phase begins at degree 30.",
+      "PRESTIGE RECORDS documented: most historically significant label in the engine. Track if other major labels appear.",
+      "SEATTLE CONNECTION UNCONFIRMED: first engine degree with a documented geographic discrepancy. Handled with transparency. Track if pattern recurs.",
+      "POST-1974 CAREER GAP: Jones' recording career effectively ends after Sweetback (1974). No documented activity after. Track.",
+      "All engine sequencing items from degrees 0-28"
+    ],
+    "cultural_patterns": [
+      "Artist-city taxonomy: THIRTY named patterns (adding The Catalog at degree 29). Classify every degree.",
+      "Gender gap: 6:24 (women:men/male-led). Jones = male. No change to ratio. Track.",
+      "BOOGALOO dance craze thread: 1966-1969 Latin/R&B crossover. Second Latin American cultural vector in consecutive degrees (Hugo Fattoruso at 28, boogaloo at 29). Track.",
+      "ORGAN TRIO: minimum viable band (3 musicians). Smallest ensemble documented in the engine. Track.",
+      "EAST COAST SOUL-JAZZ CIRCUIT: Newark/New York/Philadelphia. First documented East Coast circuit in the engine (all prior circuits are Seattle-based). Track.",
+      "ASSEMBLY-LINE RECORDING MODEL: 7 albums in 5 years at Prestige. Continuous production. Track.",
+      "All cultural pattern items from degrees 0-28"
+    ]
+  }
+}
