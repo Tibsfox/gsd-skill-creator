@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 30&deg; &mdash; Barn Swallow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.warble { background: #1565C0; }
+    .theory-icon.quintet { background: #7B1FA2; }
+    .theory-icon.archetype { background: #00695C; }
+    .theory-icon.commensal { background: #E65100; }
+    .theory-icon.tail { background: #2E7D32; }
+    .theory-icon.energy { background: #B71C1C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Quintet card -- the closing movement */
+    .quintet-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .quintet-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Archetype card */
+    .archetype-card {
+      background: linear-gradient(135deg, #E0F2F1 0%, #80CBC4 100%);
+      border: 2px solid #00695C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .archetype-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #004D40;
+    }
+
+    /* Commensalism card */
+    .commensal-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE082 100%);
+      border: 1px solid #FFA000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .commensal-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Tail card */
+    .tail-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #43A047;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .tail-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">30&deg;</div>
+      <div class="release-title-block">
+        <h2>Barn Swallow</h2>
+        <div class="scientific">Hirundo rustica &middot; Family Hirundinidae (Swallows) &middot; Fifth Swallow &mdash; The Archetype</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Long Liquid Twittering Warble &middot; Open Farmland &middot; Summer &middot; Energy 4</div>
+
+    <blockquote>
+      Over the farmland, where the barn door stands open and wire fences cross
+      the pasture, a bird sweeps low &mdash; long forked tail streaming behind,
+      steel-blue back catching the light, russet throat flashing warm against
+      the sky. From a wire it pours out a long, liquid, twittering warble
+      &mdash; the most complex swallow song the engine has heard. The stream,
+      the rain, the brook, the sandpaper &mdash; all absorbed into the river.
+      <em>Hirundo rustica.</em> The country swallow. The type genus of the
+      family. The archetype that arrived last. The quintet closes.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Quintet Card: The Complete Swallow Run -->
+        <div class="quintet-card">
+          <h3>Swallow Quintet Complete (Degrees 26&ndash;30)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Five consecutive Hirundinidae. Five degrees. Zero gaps.
+            <strong>100% density</strong> &mdash; the densest family cluster
+            in the engine. The warbler quintet took 7 degrees (71% density).
+            The thrush quintet took 24 degrees (21% density). The swallow
+            quintet: 5 in 5. Unprecedented. The timbral arc:
+            liquid&ndash;liquid&ndash;liquid&ndash;rough&ndash;<strong>liquid</strong>.
+            The dissenter is framed by liquid. The archetype closes the family.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Sound</th><th>Liquid?</th><th>Role</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>26</td><td>Purple Martin</td><td><em>Progne</em></td><td>Liquid gurgle</td><td>Yes</td><td>PATRIARCH</td></tr>
+              <tr><td>27</td><td>Violet-green Swallow</td><td><em>Tachycineta</em></td><td>Liquid twitter</td><td>Yes</td><td>CLIFF DWELLER</td></tr>
+              <tr><td>28</td><td>Tree Swallow</td><td><em>Tachycineta</em></td><td>Liquid twittering gurgle</td><td>Yes</td><td>CENTRIST</td></tr>
+              <tr style="background: rgba(121,85,72,0.12);"><td>29</td><td>Rough-winged Swallow</td><td><em>Stelgidopteryx</em></td><td>Rough buzzy brrit</td><td><strong>No</strong></td><td>DISSENTER</td></tr>
+              <tr style="background: rgba(21,101,192,0.15); font-weight: 600;"><td>30</td><td>Barn Swallow</td><td><em>Hirundo</em></td><td><strong>Long liquid twittering warble</strong></td><td><strong>Yes</strong></td><td><strong>ARCHETYPE</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Archetype Card -->
+        <div class="archetype-card">
+          <h3>The Archetype Arrives Last</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <em>Hirundo</em> is the <strong>type genus</strong> of family
+            Hirundinidae &mdash; the genus that defines all swallows. It arrives
+            at degree 30, after four other swallow species across three other
+            genera. The definition comes after the examples. This mirrors the
+            American Robin (<em>Turdus</em>, type genus of Turdidae) arriving
+            last in the thrush sequence at degree 25. The engine&rsquo;s
+            pedagogy: <strong>learn the edges, then learn the center.</strong>
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Genus</th><th>Etymology</th><th>Naming Strategy</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><em>Progne</em> (26)</td><td>Procne (Greek myth)</td><td>Classical allusion</td></tr>
+              <tr><td><em>Tachycineta</em> (27&ndash;28)</td><td>Swift-mover</td><td>Behavioral description</td></tr>
+              <tr><td><em>Stelgidopteryx</em> (29)</td><td>Scraper-wing</td><td>Anatomical precision</td></tr>
+              <tr style="background: rgba(0,105,92,0.12); font-weight: 600;"><td><em>Hirundo</em> (30)</td><td>Swallow (Latin)</td><td><strong>Identity &mdash; the thing itself</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Myth &rarr; behavior &rarr; anatomy &rarr; identity. The naming
+            arc moves from abstraction to concreteness to self. The final answer
+            is the simplest: the thing is what it is. <em>Hirundo.</em> Swallow.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: Long Liquid Twittering Warble</h2>
+        <p>
+          The Barn Swallow produces the <strong>most complex swallow song</strong>
+          in the engine &mdash; a sustained, melodic, frequency-modulated warble
+          lasting 3&ndash;8 seconds with 8&ndash;16 notes per second. Liquid
+          returns after the rough break at degree 29. The sound synthesizes all
+          three previous liquid swallows: duration from the martin (stream),
+          twittering from the Violet-green (rain), complexity from the Tree
+          Swallow (brook). Stream + rain + brook = <strong>river</strong>.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>2.0&ndash;7.5 kHz (wider than Rough-winged, comparable to Tree Swallow)</td></tr>
+            <tr><td>Peak energy</td><td>3.0&ndash;6.0 kHz (broad, melodic &mdash; bandwidth for pitch variation)</td></tr>
+            <tr><td>Song duration</td><td>3&ndash;8 seconds per warble phrase (longest swallow vocalization)</td></tr>
+            <tr><td>Note rate</td><td>8&ndash;16 notes/sec (rapid but perceptible &mdash; twittering quality)</td></tr>
+            <tr><td>Note structure</td><td>FM tones &mdash; pitch sweeps, upslurs, downslurs, chevrons. Clear pitch.</td></tr>
+            <tr><td>Phrase types</td><td>Warble (primary) + terminal buzz + twitter (contact)</td></tr>
+            <tr><td>Timbre</td><td>Liquid, twittering, melodic, warm &mdash; the river</td></tr>
+            <tr><td>Amplitude</td><td>Moderate to high &mdash; projects across open farmland</td></tr>
+            <tr><td>Context</td><td>From wires, fences, barn roofs, and in flight &mdash; most vocal swallow</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>The 31st acoustic element.</strong> After the rough buzzy
+          brrit shattered liquid at degree 29, the warble restores it with the
+          quintet&rsquo;s most elaborate performance. The terminal buzz within
+          the warble embeds a fragment of the Rough-winged&rsquo;s rough quality
+          &mdash; the dissenter&rsquo;s voice surviving inside the archetype&rsquo;s song.
+        </p>
+
+        <!-- Tail Card -->
+        <div class="tail-card">
+          <h3>The Deeply Forked Tail: Shape as Signature</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The most deeply forked tail of any North American swallow. Long
+            outer streamers visible in flight from distance. The first
+            <strong>shape-based diagnostic</strong> in the swallow quintet
+            (previous swallows: color). Three functions: (1)
+            <strong>aerodynamic</strong> &mdash; tight turns for low-altitude
+            insectivory; (2) <strong>sexual selection</strong> &mdash; females
+            prefer males with longer, more symmetrical streamers (M&oslash;ller
+            1988); (3) <strong>parasite signal</strong> &mdash; symmetry
+            correlates with health. The longest tail and the longest song: both
+            products of sexual selection creating <strong>elongation</strong>
+            on two channels.
+          </p>
+        </div>
+
+        <!-- Commensalism Card -->
+        <div class="commensal-card">
+          <h3>Human Commensalism: The Barn Is the Habitat</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            In North America, the Barn Swallow nests <strong>almost exclusively
+            on human structures</strong> &mdash; barns, bridges, culverts,
+            porches, docks. Natural cliff/cave nesting essentially abandoned.
+            The most anthropogenic ecosystem in the engine. Historical
+            mutualism: swallows eat ~850 pest insects per day, farmers provide
+            nesting structures. <strong>Now declining</strong> ~1% per year
+            since the mid-1980s (30&ndash;40% cumulative loss). Causes: sealed
+            modern barns, pesticides, monoculture. The species that became the
+            most widespread landbird by depending on humans is declining because
+            human agriculture is changing.
+          </p>
+        </div>
+
+        <!-- Global Range -->
+        <h2>Global Distribution: Six Continents</h2>
+        <p>
+          The Barn Swallow is the <strong>most widespread landbird in the
+          world</strong>. Breeding range spans North America, Europe, Asia,
+          and North Africa. Migrates to South America, sub-Saharan Africa, and
+          Southeast Asia. No other landbird breeds on six continents. Its success
+          is built on human commensalism: wherever humans farm and build
+          structures, the Barn Swallow can breed. The engine has moved from
+          local (PNW endemic), to continental (American Robin), to
+          <strong>global</strong> (Barn Swallow).
+        </p>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: Hirundo rustica</h2>
+        <p>
+          <em>Hirundo</em>: Latin for &ldquo;swallow&rdquo; &mdash; no compound,
+          no metaphor. The genus IS the word. <em>Rustica</em>: Latin for
+          &ldquo;of the countryside, rural.&rdquo; The full binomial:
+          <strong>&ldquo;the country swallow.&rdquo;</strong> Named by
+          <strong>Linnaeus in 1758</strong> in the 10th edition of <em>Systema
+          Naturae</em>. The <strong>type genus of Hirundinidae</strong> &mdash;
+          the genus that defines all swallows. The fourth Hirundinidae genus in
+          the engine, after <em>Progne</em> (myth), <em>Tachycineta</em>
+          (behavior), and <em>Stelgidopteryx</em> (anatomy).
+        </p>
+        <p>
+          <strong>Fifth Hirundinidae.</strong> Three families now tied at five
+          species: Hirundinidae, Turdidae, Parulidae. But Hirundinidae achieved
+          five in <strong>five consecutive degrees with zero gaps</strong>.
+          The most efficient family representation in the engine.
+        </p>
+
+        <!-- Ecosystem -->
+        <h2>Ecosystem: Open Farmland</h2>
+        <p>
+          Pastures, fields, barns, stables, bridges, fences &mdash; the most
+          <strong>human-modified landscape</strong> in the engine. The Barn
+          Swallow does not merely tolerate human structures; it depends on them.
+          The quintet&rsquo;s ecosystems: sky (26) &rarr; cliff (27) &rarr;
+          field/water (28) &rarr; river bank (29) &rarr;
+          <strong>farmland (30)</strong>. Five ecosystems, five degrees.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon warble">W</div>
+            <div class="theory-content">
+              <h4>The Long Liquid Twittering Warble &mdash; The River</h4>
+              <p>31st acoustic element. LIQUID RETURNS after the rough break. Synthesizes duration (martin) + twittering (Violet-green) + complexity (Tree Swallow). Stream + rain + brook = river. Terminal buzz embeds a trace of the dissenter. The family&rsquo;s most complex vocal performance.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon quintet">Q</div>
+            <div class="theory-content">
+              <h4>Swallow Quintet Complete &mdash; 100% Density</h4>
+              <p>Five consecutive Hirundinidae, 4 genera, zero gaps. The densest family cluster in engine history. Liquid-liquid-liquid-rough-liquid: ABBA+coda. The dissenter framed by liquid. The archetype closes with the strongest performance.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon archetype">A</div>
+            <div class="theory-content">
+              <h4>Archetype Arriving Last &mdash; Hirundo = The Definition</h4>
+              <p>The type genus enters after all other family genera. Definition after examples. Mirrors Turdus/American Robin at degree 25. The engine&rsquo;s pedagogy: learn the edges, then learn the center.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon commensal">C</div>
+            <div class="theory-content">
+              <h4>Human Commensalism &mdash; Obligate Commensal</h4>
+              <p>First species dependent on human architecture. The barn IS the habitat. Historical mutualism now breaking: sealed barns, pesticides, 30&ndash;40% decline. The conservation crisis of a dissolving partnership.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon tail">T</div>
+            <div class="theory-content">
+              <h4>The Deeply Forked Tail &mdash; Dual Sexual Selection</h4>
+              <p>Most deeply forked tail + longest song = elongation on two channels. Aerodynamic + mate signal + parasite indicator. Form follows song. Both visual and acoustic fermatas.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Decet: Tenth Consecutive E=4</h4>
+              <p>Degrees 21&ndash;30: ten textures at E=4. Nearly one-third of all degrees. The longest plateau in engine history. The dynamic range has collapsed. CRITICALLY must break at degree 31.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-026: Purple Martin</strong>
+            <p>QUINTET MEMBER 1. Bookend voices: martin opens (liquid gurgle, stream), Barn Swallow closes (long liquid twittering warble, river). Both the longest, most complex performances. The stream flows into the river.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-027: Violet-green Swallow</strong>
+            <p>QUINTET MEMBER 2. The &ldquo;twittering&rdquo; in the Barn Swallow&rsquo;s sound echoes the Violet-green&rsquo;s defining vocal quality. The cliff-dweller&rsquo;s voice lives inside the archetype&rsquo;s song.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-028: Tree Swallow</strong>
+            <p>QUINTET MEMBER 3. Closest in mass. Both vocally rich. The centrist and the archetype often share airspace over open areas near water.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-029: Rough-winged Swallow</strong>
+            <p>QUINTET MEMBER 4. Maximum acoustic contrast: rough brrit vs. liquid warble. The Barn Swallow&rsquo;s terminal buzz acknowledges the dissenter. Rough embedded in liquid.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>ARCHETYPE PARALLEL. Turdus at degree 25, Hirundo at degree 30. Both type genera arriving last. Both most familiar, most widespread family member. The pattern repeats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>NOISE BRACKET. Zhreee (12) and brrit (29) = two noise events. Barn Swallow&rsquo;s warble (30) restores tonal/liquid quality immediately after the second noise event.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014&ndash;020: Warbler Quintet</strong>
+            <p>FAMILY QUINTET COMPARISON. Both 5 species. Warblers: 7 degrees, 71% density. Swallows: 5 degrees, 100% density. Swallow quintet is the denser.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Barn Swallow: common but declining breeder. Aerial insectivore. Deeply forked tail. Human commensalism and conservation concerns.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Agricultural ecosystem ecology. Human-modified landscapes. Commensalism. Insect population dynamics and pesticide impacts.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A: Ray Charles (R&amp;B/Jazz, E=4, Central District, Atlantic). The archetype. Charles defined soul for the world. Barn Swallow defines &ldquo;swallow&rdquo; for the world. Tenth consecutive E=4.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Brown, C.R. and Brown, M.B. (2020). Barn Swallow (<em>Hirundo rustica</em>), version 1.0. <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Turner, A. and Rose, C. (1989). <em>A Handbook to the Swallows and Martins of the World</em>. Christopher Helm.</li>
+          <li>M&oslash;ller, A.P. (1994). <em>Sexual Selection and the Barn Swallow</em>. Oxford University Press.</li>
+          <li>M&oslash;ller, A.P. (1988). Female choice selects for male sexual tail ornaments in the monogamous swallow. <em>Nature</em> 332: 640&ndash;642.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Macaulay Library. Barn Swallow recordings. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon). Barn Swallow. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Sauer, J.R., et al. (2020). North American Breeding Bird Survey, 1966&ndash;2019. USGS.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>. 2nd ed. Knopf.</li>
+          <li>Winkler, D.W., Billerman, S.M., and Lovette, I.J. (2020). Swallows and Martins (Hirundinidae). <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Ambrosini, R., et al. (2011). Negative effects of climate change on Barn Swallow. <em>Global Change Biology</em> 17: 1666&ndash;1678.</li>
+          <li>Safran, R.J. and McGraw, K.J. (2004). Plumage coloration in North American Barn Swallows. <em>Behavioral Ecology</em> 15: 455&ndash;461.</li>
+          <li>Linnaeus, C. (1758). <em>Systema Naturae</em>. 10th ed.</li>
+          <li>Pyle, P. (1997). <em>Identification Guide to North American Birds, Part 1</em>. Slate Creek Press.</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">30&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Hirundinidae</div>
+          <div class="stat-detail">Fifth swallow &mdash; quintet CLOSED</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Hirundo</div>
+          <div class="stat-detail">TYPE GENUS of the family</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Long Liquid Twittering Warble</div>
+          <div class="stat-detail">LIQUID RETURNS &mdash; most complex swallow song</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Tenth consecutive E=4 (degrees 21&ndash;30)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Open Farmland</div>
+          <div class="stat-detail">Most anthropogenic ecosystem in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Arrives late April, departs Aug&ndash;Sep</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2.0&ndash;7.5 kHz</div>
+          <div class="stat-detail">Peak 3.0&ndash;6.0 kHz &mdash; broad, melodic</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">17&ndash;20 g</div>
+          <div class="stat-detail">Medium &mdash; close to Tree Swallow</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Steel Blue + Russet</div>
+          <div class="stat-detail">First warm-toned underparts in swallows</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Tail</div>
+          <div class="stat-value">Deeply Forked</div>
+          <div class="stat-detail">Most deeply forked of any NA swallow</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Global Range</div>
+          <div class="stat-value">6 Continents</div>
+          <div class="stat-detail">Most widespread landbird on Earth</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Mud Cup on Structure</div>
+          <div class="stat-detail">Almost exclusively human-built structures</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Swallow Run</div>
+          <div class="stat-value">5 of 5</div>
+          <div class="stat-detail">Degrees 26&ndash;30 &mdash; QUINTET CLOSED</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 30 &mdash; S36</div>
+          <div class="parallel-name">Ray Charles</div>
+          <div class="parallel-detail">R&amp;B/Jazz &middot; E=4 &middot; Central District &middot; Atlantic</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            The archetype. Charles defined soul for the world.
+            The Barn Swallow defines &ldquo;swallow&rdquo; for the world.
+            Both globally recognized. Both synthesize what came before.
+            Tenth consecutive E=4.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 30&deg; of 360&deg; &mdash; v1.49.166</p>
+  </footer>
+</body>
+</html>
