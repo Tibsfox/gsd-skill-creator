@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 11&deg; &mdash; Oregon Junco &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.tremolo { background: #C62828; }
+    .theory-icon.strobe { background: #1565C0; }
+    .theory-icon.metallic { background: #E65100; }
+    .theory-icon.ostinato { background: #7B1FA2; }
+    .theory-icon.threshold { background: #2E7D32; }
+    .theory-icon.taxonomy { background: var(--puget-dark); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Trill card (unique to degree 11) */
+    .trill-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FCE4EC 100%);
+      border: 1px solid #FFAB91;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trill-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Taxonomy card */
+    .taxonomy-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #E0F2F1 100%);
+      border: 1px solid #A5D6A7;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .taxonomy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #2E7D32;
+    }
+
+    /* Continuous vs Discrete comparison */
+    .compare-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #EDE7F6 100%);
+      border: 1px solid #90CAF9;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .compare-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1565C0;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">11&deg;</div>
+      <div class="release-title-block">
+        <h2>Oregon Junco</h2>
+        <div class="scientific">Junco hyemalis oreganus group &middot; Family Emberizidae (New World Sparrows)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Metallic Trill on Single Pitch &middot; Forest Edge &middot; Resident &middot; Energy 2</div>
+
+    <blockquote>
+      One note, repeated so rapidly it becomes a metallic buzz. Discrete pulses fusing into a
+      continuous tone. The Varied Thrush held a note that WAS continuous. The Oregon Junco builds
+      a note from atoms so fast you can&rsquo;t tell the difference. Same pitch, same duration,
+      opposite architecture. The analog-to-digital boundary in song. The trill at the threshold.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Lumping Problem</h2>
+        <p>
+          The Oregon Junco was a species, then it wasn&rsquo;t, and it may become one again.
+          Formerly treated as a separate species, the Oregon Junco was merged into the
+          <strong>Dark-eyed Junco</strong> (<em>Junco hyemalis</em>) complex by the AOU in
+          <strong>1973</strong>, along with four other forms: Slate-colored, Pink-sided,
+          Gray-headed, and White-winged. Five species became one. The rationale: they hybridize
+          where ranges overlap.
+        </p>
+        <p>
+          But molecular phylogenetic work (Mil&aacute; et al. 2007; Friis et al. 2016) shows
+          significant genetic divergence between the forms, particularly between Oregon and
+          Slate-colored. The hybrid zone in the Great Plains is <strong>narrow and stable</strong>,
+          not expanding. By the Phylogenetic Species Concept, the Oregon Junco is a species. A
+          future AOU revision may restore it. The bird at the feeder does not care.
+        </p>
+
+        <!-- Taxonomy Card -->
+        <div class="taxonomy-card">
+          <h3>The Five Forms of the Dark-eyed Junco Complex</h3>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Form</th><th>Range</th><th>Diagnostic Feature</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Oregon</strong> (<em>oreganus</em>)</td><td>Pacific coast (AK to Baja)</td><td><strong>Dark hood + rusty back + pink flanks</strong></td></tr>
+              <tr><td>Slate-colored (<em>hyemalis</em>)</td><td>Eastern N. America</td><td>Uniform dark slate above</td></tr>
+              <tr><td>Pink-sided (<em>mearnsi</em>)</td><td>Rocky Mountains</td><td>Broad pink flanks, gray hood</td></tr>
+              <tr><td>Gray-headed (<em>caniceps</em>)</td><td>S. Rocky Mountains</td><td>Gray head, rusty back</td></tr>
+              <tr><td>White-winged (<em>aikeni</em>)</td><td>Black Hills</td><td>Larger, paler, white wing bars</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #2E7D32; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Taxonomy is not fixed truth &mdash; it is a human classification applied to biological
+            continua. The Oregon Junco&rsquo;s history is the history of where to draw the line on a gradient.
+          </p>
+        </div>
+
+        <p>
+          <strong>Physical description.</strong> Medium-sized sparrow: <strong>5.5&ndash;6.3
+          inches</strong>, <strong>18&ndash;30 grams</strong>. Males show a dark slate-to-black
+          hood sharply contrasting with warm rusty-brown back and pink-brown flanks. The diagnostic
+          junco field marks: <strong>white outer tail feathers</strong> that flash conspicuously in
+          flight, and a <strong>pale pinkish bill</strong>. The white tail flash is a signal &mdash;
+          a visual burst that punctuates every takeoff and landing.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Trill</h2>
+        <h3>Discrete Pulses as Continuous Tone</h3>
+        <p>
+          The Oregon Junco&rsquo;s song is a <strong>metallic trill on a single pitch</strong> &mdash;
+          one note repeated rapidly for 1&ndash;2 seconds. Frequency typically <strong>3&ndash;6
+          kHz</strong>. Trill rate approximately <strong>10&ndash;25 notes per second</strong>. At
+          rates above ~15 per second, the human auditory system can no longer resolve individual
+          notes &mdash; the trill is perceived as a continuous, buzzy, metallic tone.
+        </p>
+        <ul>
+          <li><strong>Metallic:</strong> Hard, bright, ringing quality &mdash; rich in upper harmonics</li>
+          <li><strong>Single pitch:</strong> One frequency maintained throughout the trill</li>
+          <li><strong>Rapid repetition:</strong> 10&ndash;25 discrete notes per second</li>
+          <li><strong>Fusion:</strong> Above ~15 Hz repetition, pulses merge into perceived continuous tone</li>
+          <li><strong>Also:</strong> Sharp &ldquo;tick&rdquo; chip note (0.02&ndash;0.05 s, 4&ndash;7 kHz) for contact and alarm</li>
+        </ul>
+
+        <!-- Trill / Tremolo Card -->
+        <div class="trill-card">
+          <h3>The Stroboscopic Principle in Sound</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            A strobe light flashes discrete pulses. Below the flicker fusion threshold, you see
+            flashes. Above it, you see continuous light. The junco&rsquo;s trill is the acoustic
+            equivalent: below ~15 notes/second, you hear a rattle. Above it, you hear a continuous
+            buzz. The trill IS the <strong>analog-to-digital boundary</strong>.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Domain</th><th>Discrete Signal</th><th>Fusion Threshold</th><th>Perceived as Continuous</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Junco trill</strong></td><td>Individual note pulses</td><td><strong>~15 notes/s</strong></td><td>Metallic buzz / sustained tone</td></tr>
+              <tr><td>Tremolo (music)</td><td>Rapid bow strokes / key strikes</td><td>~12&ndash;20 Hz</td><td>Sustained tone on instrument</td></tr>
+              <tr><td>AM radio</td><td>Carrier wave on/off switching</td><td>Modulation frequency</td><td>Audio tone</td></tr>
+              <tr><td>Film / video</td><td>Individual frames</td><td>24&ndash;60 fps</td><td>Continuous motion</td></tr>
+              <tr><td>LED PWM dimming</td><td>On/off flashes</td><td>~60&ndash;120 Hz</td><td>Steady light at set brightness</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #BF360C; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The trill is tremolo in biological form. Discrete attacks perceived as continuous tone.
+            The musical exploitation of the flicker fusion threshold &mdash; and the junco is the biological original.
+          </p>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Trill Rate</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Song trill</td><td>3&ndash;6 kHz</td><td>1&ndash;2 s</td><td>10&ndash;25/s</td><td>Territory, mate attraction</td></tr>
+            <tr><td>Chip note &ldquo;tik&rdquo;</td><td>4&ndash;7 kHz</td><td>0.02&ndash;0.05 s</td><td>Single</td><td>Contact, alarm, social</td></tr>
+            <tr><td>Soft &ldquo;tsew&rdquo;</td><td>3&ndash;5 kHz</td><td>0.05&ndash;0.1 s</td><td>Single</td><td>Flight call, mild alarm</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Continuous vs Discrete -->
+        <h2>Continuous vs. Discrete: The Degree 2 Connection</h2>
+
+        <div class="compare-card">
+          <h3>Varied Thrush (2&deg;) vs. Oregon Junco (11&deg;)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Both produce sounds perceived as sustained tones at a single pitch. But the architecture
+            is opposite. This is the deepest connection in the circle so far.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th></th><th>Varied Thrush (2&deg;)</th><th>Oregon Junco (11&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Signal structure</strong></td><td>Genuinely continuous</td><td><strong>Discrete pulses at rapid rate</strong></td></tr>
+              <tr><td><strong>Spectrogram</strong></td><td>Solid horizontal line</td><td><strong>Row of individual dashes</strong></td></tr>
+              <tr><td><strong>Analogy</strong></td><td>Analog signal</td><td><strong>Digital-to-analog conversion</strong></td></tr>
+              <tr><td><strong>Timbre</strong></td><td>Woody, haunting whistle</td><td><strong>Metallic, bright, buzzy</strong></td></tr>
+              <tr><td><strong>Habitat</strong></td><td>Deep mature conifer</td><td><strong>Forest edge / ecotone</strong></td></tr>
+              <tr><td><strong>Perception</strong></td><td>The tone IS sustained</td><td><strong>The tone is CONSTRUCTED from atoms</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1565C0; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The thrush holds a note. The junco builds a note from atoms. Same perceptual result,
+            opposite structural strategy. Shannon&rsquo;s sampling theorem in feathers.
+          </p>
+        </div>
+
+        <!-- Ecology -->
+        <h2>Forest Edge: Ecology of the Threshold</h2>
+        <p>
+          The Oregon Junco is a <strong>forest edge</strong> species &mdash; not deep forest, not
+          open field, but the boundary where one meets the other. The <strong>ecotone</strong>: the
+          zone of maximum species diversity and productivity. Forest margins, second-growth edges,
+          suburban yards, trailhead parking lots. The junco IS the backyard bird of the PNW &mdash;
+          the most common winter feeder visitor in Seattle.
+        </p>
+        <p>
+          The bushtit (degree 10&deg;) also occupies the edge but works the <strong>shrub
+          canopy</strong>. The junco works the <strong>ground layer</strong> &mdash; scratching in
+          leaf litter, hopping on trails, flashing white tail feathers when flushed. Both are
+          edge species. They partition the edge vertically: bushtit above, junco below.
+        </p>
+        <p>
+          The MDB (Moody Blues) research documents <strong>threshold architecture</strong> &mdash;
+          boundaries between genres, movements, sections. The junco lives at the ecological threshold.
+          Its trill carries across the boundary &mdash; audible from within the forest AND from the
+          clearing. The trill IS the cadence ornament of the forest edge: the sound of transition.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon tremolo">T</div>
+            <div class="theory-content">
+              <h4>Trill as Tremolo <span class="theory-level foundational">Foundational</span></h4>
+              <p>Rapid repetition creating the illusion of sustain. Violin tremolo, mandolin picking, piano re-strikes &mdash; all are the same principle the junco exploits biologically. Discrete attacks perceived as continuous tone.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon strobe">S</div>
+            <div class="theory-content">
+              <h4>Stroboscopic Effect / Flicker Fusion <span class="theory-level advanced">Advanced</span></h4>
+              <p>The analog-to-digital boundary. Below ~15 notes/s: rattle. Above: continuous buzz. The trill rate is the sampling rate. When it exceeds the auditory Nyquist threshold, the brain reconstructs continuity from discrete samples.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon metallic">M</div>
+            <div class="theory-content">
+              <h4>Metallic Timbre: Rich Harmonic Spectrum <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>&ldquo;Metallic&rdquo; = rich in upper harmonics. Harpsichord vs. piano, steel-string vs. nylon, snare vs. tom. The junco&rsquo;s bright, hard, ringing quality places it in the harmonically rich zone of the timbral spectrum.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon ostinato">O</div>
+            <div class="theory-content">
+              <h4>Ostinato at Maximum Rate <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>One note repeated so fast the pattern dissolves into a tone. The ostinato&rsquo;s endpoint &mdash; where repetition becomes frequency. Bass ostinato (Baroque), rhythmic ostinato (minimalism), junco trill (biology). The figure disappears into its own rate.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon threshold">E</div>
+            <div class="theory-content">
+              <h4>Edge as Musical Threshold <span class="theory-level foundational">Foundational</span></h4>
+              <p>The trill ornaments the cadence point in classical music &mdash; the note at the boundary between tension and resolution. The junco trills at the boundary between forest and field. The trill IS the cadence ornament of the ecotone.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon taxonomy">L</div>
+            <div class="theory-content">
+              <h4>Lumping/Splitting as Classification Problem <span class="theory-level advanced">Advanced</span></h4>
+              <p>Five species became one in 1973. Genetic work suggests they may split again. Taxonomy is a human classification applied to biological continua &mdash; where you draw the line on a gradient is a decision, not a discovery.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>Tremolo.</strong> The rapid repetition of a single note creating the illusion of
+          sustain. A violinist&rsquo;s bow vibrating on one note. A mandolin&rsquo;s rapid picking.
+          The tremolo exploits the same flicker fusion threshold the junco&rsquo;s trill exploits.
+          Discrete strikes, perceived continuous tone. The junco IS the biological tremolo.
+        </p>
+        <p>
+          <strong>Metallic timbre.</strong> In acoustic terms, &ldquo;metallic&rdquo; means rich in
+          upper harmonics &mdash; strong overtone content giving a hard, bright edge. Harpsichord
+          vs. piano. Steel-string vs. nylon. Trumpet vs. French horn. The junco&rsquo;s metallic
+          quality is the harmonically rich end of the avian timbral spectrum.
+        </p>
+        <p>
+          <strong>Ostinato at maximum rate.</strong> An ostinato is a repeated musical figure. The
+          junco&rsquo;s trill is an ostinato reduced to one note at maximum rate &mdash; the point
+          where repetition becomes so rapid that the pattern dissolves into a tone. The figure
+          disappears into its own frequency. Steve Reich&rsquo;s phasing, taken to the biological limit.
+        </p>
+        <p>
+          <strong>Cadence ornament.</strong> In Baroque and Classical music, the trill ornaments the
+          penultimate note before resolution &mdash; the note AT the boundary between phrases. The
+          junco trills at the boundary between forest and field. Ecologically and musically, the
+          trill is a threshold signal.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-002</strong> &mdash; Varied Thrush
+            <p>CONTINUOUS VS. DISCRETE. The deepest connection in the circle. Both produce perceived sustained tones at single pitch. The thrush&rsquo;s is genuinely continuous (analog). The junco&rsquo;s is structurally discrete (digital). Solid line vs. dotted line.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; Built &amp; Physical Systems
+            <p>NYQUIST / SAMPLING. The trill demonstrates the sampling theorem in biology. Discrete samples (notes) reconstructed as continuous signal (perceived tone) when trill rate exceeds the auditory Nyquist threshold.</p>
+          </div>
+          <div class="xref-card">
+            <strong>LED</strong> &mdash; LED Research
+            <p>PERSISTENCE OF VISION. PWM dimming, frame rate, flicker fusion &mdash; the junco trill is the acoustic version of every visual persistence-of-vision technology. Discrete pulses above fusion threshold = perceived continuity.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MDB</strong> &mdash; Moody Blues
+            <p>THRESHOLD ARCHITECTURE. The junco at the ecological threshold (forest edge) maps to MDB&rsquo;s musical threshold architecture (boundaries between sections, genres, movements). Edge as structural position.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Edge ecology, ecotone dynamics, forest-meadow mosaic, edge effect. Vertical partitioning of edge habitat with bushtit (degree 10&deg;).</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Joe Brazil at degree 11&deg;. Community-embedded, edge-dwelling, always present. The neighborhood musician at the threshold between venues, genres, stage and street.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-010</strong> &mdash; Bushtit
+            <p>EDGE PARTITIONING. Both are edge/ecotone species. Bushtit works the shrub canopy; junco works the ground layer. Vertical partitioning of the same habitat.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>TRILL COMPARISON. The wren&rsquo;s cascade embeds trills within 100+ note complexity. The junco&rsquo;s entire song IS a trill. Maximum context vs. minimum context for the same technique.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005</strong> &mdash; Red-breasted Nuthatch
+            <p>REPETITION RATE. Both repeat a single note. The nuthatch is below the fusion threshold (you hear beats). The junco is above it (you hear a buzz). Same strategy, different rate, qualitatively different perception.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Nolan, V. et al. (2002). &ldquo;Dark-eyed Junco.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Mil&aacute;, B. et al. (2007). Postglacial range expansion in <em>Junco</em>. <em>Proc R Soc B</em> 274.</li>
+          <li>Friis, G. et al. (2016). Genomic signatures in junco hybrid zone. <em>Mol Ecol</em> 25.</li>
+          <li>Rising, J.D. (1983). Great Plains hybrid zones. <em>Current Ornithology</em> 1.</li>
+          <li>Konishi, M. (1964). Song variation in Oregon Juncos. <em>Condor</em> 66.</li>
+          <li>Viemeister, N.F. &amp; Wakefield, G.H. (1991). Temporal integration. <em>JASA</em> 90(2).</li>
+          <li>Moore, B.C.J. (2012). <em>An Introduction to the Psychology of Hearing</em>. 6th ed. Brill.</li>
+          <li>Ries, L. et al. (2004). Ecological responses to habitat edges. <em>Ann Rev Ecol Evol Syst</em> 35.</li>
+          <li>AOU (1973). Thirty-second supplement. <em>Auk</em> 90.</li>
+          <li>Harnoncourt, N. (1988). <em>Baroque Music Today</em>. Amadeus Press.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Dark-eyed Junco. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Dark-eyed Junco. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Macaulay Library. Dark-eyed Junco recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Emberizidae</div>
+          <div class="stat-detail">New World Sparrows</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">5.5&ndash;6.3 in</div>
+          <div class="stat-detail">14&ndash;16 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">18&ndash;30 g</div>
+          <div class="stat-detail">Medium-sized sparrow</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Dark hood</div>
+          <div class="stat-detail">Rusty back, pink flanks, white outer tail</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Taxonomy</div>
+          <div class="stat-value">Contested</div>
+          <div class="stat-detail">Lumped 1973, may split again</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Metallic trill</div>
+          <div class="stat-detail">One note, rapid repetition, single pitch</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">3&ndash;6 kHz</div>
+          <div class="stat-detail">Mid-range, within comfortable hearing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Trill Rate</div>
+          <div class="stat-value">10&ndash;25/s</div>
+          <div class="stat-detail">Above auditory fusion threshold</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value">1&ndash;2 s</div>
+          <div class="stat-detail">Sustained buzz from discrete pulses</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Fusion</div>
+          <div class="stat-detail">Discrete &rarr; continuous perception</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">11&deg;</div>
+          <div class="stat-detail">The trill &mdash; digital-to-analog boundary</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">2</div>
+          <div class="stat-detail">Moderate &mdash; audible but not loud</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Forest Edge</div>
+          <div class="stat-detail">Ecotone &mdash; the threshold habitat</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Tremolo</div>
+          <div class="stat-detail">Discrete pulses &rarr; continuous tone</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 11&deg; &mdash; S36</div>
+          <div class="parallel-name">Joe Brazil</div>
+          <div class="parallel-detail">Community-embedded, edge-dwelling, always present. The neighborhood musician at the threshold between venues, between genres, between stage and street. Both are fixtures of place.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 011 of 360 &middot;
+      <a href="../010-bushtit/index.html">Degree 10&deg;: Bushtit</a> &middot;
+      <a href="../009-chestnut-backed-chickadee/index.html">Degree 9&deg;: Chestnut-backed Chickadee</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

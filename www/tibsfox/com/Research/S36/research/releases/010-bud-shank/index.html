@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 10&deg; &mdash; Bud Shank &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .sax-contrast {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .sax-contrast h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .sax-contrast table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .sax-contrast td, .sax-contrast th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #E1BEE7;
+    }
+    .sax-contrast th {
+      text-align: left;
+      font-weight: 600;
+      color: #6A1B9A;
+    }
+
+    .bossa-nova-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .bossa-nova-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .bossa-nova-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .crossover-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .crossover-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .crossover-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">10&deg;</div>
+      <div>
+        <h1>Bud Shank</h1>
+        <div class="subtitle">Jazz &middot; Alto Saxophone &amp; Flute &middot; West Coast Cool Jazz &mdash; Dayton, Ohio 1926 &rarr; Pacific Northwest &mdash; d. 2009</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../009-hadley-caliman/index.html">Degree 9&deg; (Caliman)</a>
+      <a href="../007-julian-priester/index.html">Degree 7&deg; (Priester)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Stan Kenton Orchestra. Lighthouse All-Stars. Pacific Jazz Records.
+          Cool alto saxophone and flute from Ohio through Los Angeles to the Pacific Northwest.
+          Bossa nova pioneer with Laurindo Almeida &mdash; a decade before the world caught up.
+          The &ldquo;California Dreamin&rsquo;&rdquo; solo heard by millions.
+          The cool stream enters at degree 10 &mdash; counterpoint to the hard bop flame at degree 9.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Cool Stream Enters</h2>
+
+        <p>Clifford Everett Shank Jr. was born on May 27, 1926, in <strong>Dayton, Ohio</strong>.
+        He is the first multi-instrumentalist whose instruments span different instrument families
+        (alto saxophone and flute), the first Ohio-born artist, and the first whose primary
+        stylistic identity is <strong>West Coast cool jazz</strong> &mdash; placing him in direct
+        contrast with Caliman&rsquo;s hard bop (degree 9&deg;).</p>
+
+        <p>Shank studied at the <strong>University of North Carolina</strong>, then moved to
+        Los Angeles and joined the <strong>Stan Kenton Orchestra</strong> (1947&ndash;51) &mdash;
+        the large ensemble that combined jazz improvisation with classical orchestral ambition,
+        dense harmonic voicings, and a self-conscious modernism. Four years in the Kenton reed
+        section gave Shank the technical foundation and aesthetic orientation that defined his
+        career: lighter tone, arranged textures, classical precision, compositional structure.</p>
+
+        <p>After Kenton, Shank became a central figure in the West Coast cool jazz movement:
+        a regular with the <strong>Lighthouse All-Stars</strong> at Howard Rumsey&rsquo;s
+        Lighthouse Cafe in Hermosa Beach, and a prolific recording artist for
+        <strong>Pacific Jazz Records</strong> &mdash; the first label dedicated specifically
+        to West Coast jazz. Over his career, he recorded <strong>60+ albums as leader</strong>.</p>
+
+        <p>His collaboration with Brazilian guitarist <strong>Laurindo Almeida</strong> in 1953&ndash;54
+        produced <strong><em>Brazilliance</em></strong> &mdash; among the earliest fusions of jazz
+        and Brazilian music, predating the bossa nova craze by nearly a decade. He also performed
+        the iconic alto saxophone solo on <strong>&ldquo;California Dreamin&rsquo;&rdquo;</strong>
+        by The Mamas &amp; The Papas (1965), reaching millions of listeners.</p>
+
+        <p>Later in his career, Shank moved to the <strong>Pacific Northwest</strong>, where he
+        continued to perform and record actively. He died on April 2, 2009, at age 82, in
+        <strong>Tucson, Arizona</strong>.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Pacific Jazz Records; AllMusic;
+        JazzTimes; DownBeat; Ted Gioia, <em>West Coast Jazz</em>, 1992; <em>Brazilliance</em>
+        liner notes; Lighthouse All-Stars documentation</p>
+
+        <!-- ========================================
+             SAX CONTRAST
+             ======================================== -->
+
+        <div class="sax-contrast">
+          <h4>The Saxophone Contrast: Cool vs. Hard Bop (First Within-Family Pair)</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Caliman (9&deg;, tenor, hard bop)</th>
+              <th>Shank (10&deg;, alto, cool)</th>
+            </tr>
+            <tr>
+              <td>Register</td>
+              <td>Tenor &mdash; lower, warmer, more voice-like</td>
+              <td>Alto &mdash; higher, brighter, more focused</td>
+            </tr>
+            <tr>
+              <td>Tone</td>
+              <td>Warm, reedy, vibrato-rich, blues-inflected</td>
+              <td>Clean, centered, less vibrato, classical influence</td>
+            </tr>
+            <tr>
+              <td>Phrasing</td>
+              <td>Behind-the-beat, blues-driven</td>
+              <td>On-the-beat, melodically precise</td>
+            </tr>
+            <tr>
+              <td>Harmonic</td>
+              <td>Blues-based, bebop enclosures, modal</td>
+              <td>Extended voicings, contrapuntal, chromatic</td>
+            </tr>
+            <tr>
+              <td>Label</td>
+              <td>Catalyst (small independent)</td>
+              <td>Pacific Jazz (dedicated cool jazz label)</td>
+            </tr>
+            <tr>
+              <td>Lineage</td>
+              <td>Dexter Gordon, Sonny Rollins, Coltrane</td>
+              <td>Lee Konitz, Paul Desmond, classical tradition</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BOSSA NOVA
+             ======================================== -->
+
+        <div class="bossa-nova-box">
+          <h4>Bossa Nova Pioneer: The Shank-Almeida Bridge (1953&ndash;54)</h4>
+          <p>The <strong><em>Brazilliance</em></strong> recordings with guitarist
+          <strong>Laurindo Almeida</strong> were among the earliest fusions of jazz and
+          Brazilian music &mdash; <strong>years before &ldquo;The Girl from Ipanema&rdquo;</strong>.
+          Cool jazz and bossa nova share structural DNA: emphasis on melody over rhythmic intensity,
+          lighter dynamics, harmonic sophistication, and aesthetic understatement. The bridge was
+          natural because the two traditions already shared musical values. This is the
+          <strong>first non-American musical tradition</strong> documented in the S36 engine.</p>
+        </div>
+
+        <!-- ========================================
+             CROSSOVER
+             ======================================== -->
+
+        <div class="crossover-box">
+          <h4>The &ldquo;California Dreamin&rsquo;&rdquo; Moment (1965)</h4>
+          <p>Shank&rsquo;s <strong>sixteen-bar alto solo</strong> on The Mamas &amp; The Papas&rsquo;
+          hit applied West Coast cool jazz phrasing &mdash; lyrical, space-conscious, harmonically
+          aware &mdash; to a folk-rock progression. The solo introduced Shank&rsquo;s sound to
+          <strong>millions of listeners</strong> who had never heard of Pacific Jazz or the Lighthouse
+          All-Stars. The cool jazz aesthetic works in pop because it values melody and space &mdash;
+          exactly what a pop song needs. This is the engine&rsquo;s first documented
+          <strong>jazz-pop crossover moment</strong>.</p>
+        </div>
+
+        <!-- ========================================
+             FLUTE IN JAZZ
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The Flute: A New Voice in the Engine</h2>
+
+        <p>Shank introduces the <strong>flute as a jazz instrument</strong> to the S36 engine.
+        He was one of the first &mdash; alongside Herbie Mann and Yusef Lateef &mdash; to make
+        the flute a viable voice in jazz.</p>
+
+        <p>Flute tone production is fundamentally different from the saxophone: the player blows
+        air across the <strong>embouchure hole</strong> (lip plate) with no reed &mdash; no
+        vibrating element touching the player&rsquo;s mouth. The <strong>air column</strong> inside
+        the cylindrical tube vibrates, producing a pure, clear tone with relatively few overtones.
+        The sound is <strong>breathy, transparent, and bright</strong> &mdash; the timbral opposite
+        of the saxophone&rsquo;s warm, reedy density.</p>
+
+        <table>
+          <thead>
+            <tr><th>Instrument</th><th>Tone Production</th><th>S36 Artist</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Voice</td><td>Vocal cords &mdash; body IS the instrument</td><td>Anderson (3&deg;)</td></tr>
+            <tr><td>Trumpet</td><td>Lip buzz into brass tube &mdash; valves select pitch</td><td>Standifer (4&deg;)</td></tr>
+            <tr><td>Trombone</td><td>Lip buzz + slide &mdash; continuous pitch access</td><td>Priester (7&deg;)</td></tr>
+            <tr><td>Piano</td><td>Hammers striking strings &mdash; mechanical separation</td><td>Berry (5&deg;), Bown (6&deg;)</td></tr>
+            <tr><td>Guitar</td><td>Plucked strings &mdash; finger to string</td><td>Frisell (1&deg;)</td></tr>
+            <tr><td>Bass</td><td>Plucked/bowed strings &mdash; lowest register</td><td>Peacock (8&deg;)</td></tr>
+            <tr><td>Tenor Saxophone</td><td>Reed + embouchure &mdash; closest to voice</td><td>Caliman (9&deg;)</td></tr>
+            <tr><td><strong>Alto Sax + Flute</strong></td><td><strong>Reed (sax) / Air column (flute) &mdash; two timbres</strong></td><td><strong>Shank (10&deg;)</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>The flute connects to the <strong>Hermit Thrush</strong> at degree 7&deg; &mdash;
+        the bird whose song has been described as &ldquo;flute-like&rdquo; since the earliest
+        ornithological literature. The bird metaphor becomes a literal instrument.</p>
+
+        <!-- ========================================
+             WEST COAST COOL JAZZ
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>West Coast Cool Jazz: The Aesthetic</h2>
+
+        <ul>
+          <li><strong>Lighter tone:</strong> Clean, centered, less vibrato than hard bop. Closer
+          to the classical clarinet tradition than to the bluesy, vibrato-laden hard bop sound.
+          Every note placed with intention, no wasted energy.</li>
+          <li><strong>Arranged textures:</strong> Greater emphasis on written arrangements, counterpoint,
+          and compositional structure. The Kenton orchestra background gave Shank this orientation.</li>
+          <li><strong>Classical influence:</strong> Bach, Bartok, Ravel as reference points rather
+          than blues and gospel. Contrapuntal awareness, classical form, refined tone production.</li>
+          <li><strong>Space and restraint:</strong> Silence as compositional element. Notes breathe,
+          phrases decay, silences speak. Suggestion rather than insistence.</li>
+        </ul>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1926 &mdash; Born in Dayton, Ohio</div>
+          <p>Born May 27, 1926. Industrial midwestern city, home of the Wright brothers.
+          First Ohio-born artist in the S36 engine.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">University of North Carolina &mdash; Formal Music Study</div>
+          <p>Studied saxophone and clarinet at UNC. The twelfth educational pipeline in the engine
+          &mdash; the first from the American South&rsquo;s university system.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1947&ndash;1951 &mdash; Stan Kenton Orchestra</div>
+          <p>Four years in the Kenton reed section. Classical precision, section discipline, dense
+          harmonic voicings, modernist ambition. The finishing school for West Coast jazz.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1950s &mdash; Lighthouse All-Stars &amp; Pacific Jazz</div>
+          <p>Central figure in West Coast cool jazz. Regular at the Lighthouse Cafe, Hermosa Beach.
+          Prolific recordings for <strong>Pacific Jazz Records</strong> &mdash; the first label
+          dedicated to West Coast jazz.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1953&ndash;1954 &mdash; Brazilliance (with Laurindo Almeida)</div>
+          <p>Pioneering jazz-Brazilian fusion on Pacific Jazz. Among the earliest recorded fusions of
+          jazz and bossa nova &mdash; nearly a decade before the craze. Cross-cultural bridge-building
+          through shared musical values.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1965 &mdash; &ldquo;California Dreamin&rsquo;&rdquo; Solo</div>
+          <p>Sixteen-bar alto solo on The Mamas &amp; The Papas hit. Cool jazz phrasing enters the
+          pop mainstream. One of the most widely heard saxophone solos in popular music history.
+          Jazz-pop crossover paradigm.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970s&ndash;2000s &mdash; Prolific Career &amp; PNW Settlement</div>
+          <p>Continued recording and performing through five decades. 60+ albums as leader. Moved
+          to the <strong>Pacific Northwest</strong> later in career while maintaining active
+          performance schedule. Late Homestead pattern: PNW as home base, not retirement.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2009 &mdash; Death in Tucson, Arizona</div>
+          <p>Died April 2, 2009, at age 82. The chronologically first S36 artist to die (before
+          Caliman 2010, Anderson 2016, Peacock 2020). The West Coast cool jazz tradition lost
+          one of its last original voices.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Five theory nodes &mdash; extending the saxophone/reed theory branch (two new nodes:
+        cool jazz voicings, flute tone production) plus the tenth blue note deployment, bossa nova
+        rhythm, and jazz-pop crossover documentation.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>West Coast Cool Jazz Voicings</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Extended chord voicings (9ths, 11ths, 13ths) creating lush, open harmonic color.
+            Contrapuntal writing &mdash; multiple independent melodic lines (Mulligan pianoless
+            quartet paradigm). Classical tone production: less vibrato, focused airstream, clean
+            articulation. Space and restraint as compositional elements. Kenton Orchestra
+            background instilled section discipline and arranged-texture orientation.</p>
+            <div class="examples">Shank/Pacific Jazz (1950s-60s); Mulligan Quartet (pianoless counterpoint); Baker (cool trumpet); Desmond (dry alto)</div>
+            <div class="genealogy"><strong>Contrast:</strong> Caliman (9&deg;) hard bop vocabulary = blues-based, emotionally direct. Shank (10&deg;) cool voicings = extended-chord color, classically restrained. First within-family harmonic contrast.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Jazz Flute: Tone Production</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Air blown across embouchure hole &mdash; no reed, no vibrating element touching the
+            player. Air column vibrates inside cylindrical tube. Pure, clear tone with few overtones.
+            Breathy, transparent, bright &mdash; the timbral opposite of the saxophone. Embouchure
+            is aerodynamic (air direction and speed) rather than tactile (reed pressure). First
+            air-column-only instrument in the engine. Connects to the Hermit Thrush&rsquo;s
+            &ldquo;flute-like song&rdquo; noted at degree 7&deg;.</p>
+            <div class="examples">Shank (cool lyrical flute); Herbie Mann (rhythmic jazz flute); Hubert Laws (classical-jazz); Lateef (world inflections)</div>
+            <div class="genealogy"><strong>Thread:</strong> Anderson (3&deg;, voice) &rarr; Standifer (4&deg;, trumpet) &rarr; Priester (7&deg;, trombone) &rarr; Caliman (9&deg;, sax/reed) &rarr; Shank (10&deg;, flute/air column). Eight instruments. First where vibrating element is not in physical contact with player&rsquo;s body.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Bossa Nova: Syncopated 2-3 Pattern</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Groups eighth notes as 3+3+2 (or variations), creating a flowing, circular rhythmic
+            feel distinct from straight-ahead jazz swing. The guitar pattern provides both rhythm
+            (syncopation) and harmony (extended chords) simultaneously. Cool jazz and bossa nova
+            share structural DNA: melody over intensity, lighter dynamics, harmonic sophistication,
+            understatement. First non-American rhythmic tradition in the engine.</p>
+            <div class="examples">Shank &amp; Almeida/<em>Brazilliance</em> (1953-54); Getz &amp; Gilberto (1964); Jobim/<em>Wave</em> (1967)</div>
+            <div class="genealogy"><strong>Extends rhythmic spectrum to nine positions:</strong> regular (0&deg;), polymetric (2&deg;), rubato (3&deg;), elastic swing (4&deg;), hard bop drive (6&deg;), electronic-spatial (7&deg;), breath-driven (8&deg;), behind-the-beat (9&deg;), bossa nova (10&deg;). First non-American entry.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Alto Cool Bend</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Tenth deployment. The cool alto blue note differs from the hard bop tenor blue note
+            (degree 9&deg;) in character: <strong>understated</strong>, a precise chromatic inflection
+            that colors the line without dominating it. Same embouchure mechanics as degree 9
+            (jaw pressure manipulation), but the aesthetic intent is suggestion rather than
+            insistence &mdash; chromatic color rather than blues cry. First <strong>within-thread
+            stylistic contrast</strong>.</p>
+            <div class="examples">Shank (restrained inflection); Desmond (driest blue note); Konitz (cool chromatic color); Art Pepper (more overt West Coast bending)</div>
+            <div class="genealogy"><strong>Ten deployments:</strong> bass-line (0&deg;), guitar (1&deg;), vocal (3&deg;), trumpet (4&deg;), piano crush (5&deg;), altered voicings (6&deg;), trombone slide (7&deg;), bass fundamental (8&deg;), sax voice (9&deg;), alto cool bend (10&deg;). First stylistic contrast within the thread.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Jazz-Pop Crossover: Session Economics</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>The &ldquo;California Dreamin&rsquo;&rdquo; solo: cool jazz vocabulary applied to
+            a folk-rock progression, reaching millions. The cool aesthetic works in pop because
+            it values melody and space &mdash; what pop songs need. Documents the economics of the
+            studio session musician: jazz skills sustain careers across both jazz and pop markets.
+            The most famous thing Shank recorded was not his primary artistic identity &mdash; the
+            tension between visibility and artistry.</p>
+            <div class="examples">&ldquo;California Dreamin&rsquo;&rdquo; (1965); Phil Woods/Billy Joel (1977); Tom Scott (session sax); Sanborn (pop sax)</div>
+            <div class="genealogy"><strong>Connects:</strong> Bown (6&deg;) Erasure pattern &mdash; jazz musician&rsquo;s relationship to commercial work. Jones (0&deg;) &mdash; arrangement/production crossover. Shank (10&deg;) &mdash; solo/session crossover. Three modes of jazz entering the popular market.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             ENERGY SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Energy 2: The Prolific Professional</h2>
+
+        <p>Shank is the <strong>sixth energy-2 artist</strong> in the engine. Energy-2 extends its
+        dominance. Shank&rsquo;s energy-2 profile reflects the prolific professional register:
+        60+ albums, decades of consistent recording, technically refined without being sonically
+        extreme. The energy of productivity and craft.</p>
+
+        <table>
+          <thead>
+            <tr><th>Energy</th><th>Artists</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Peacock (8&deg;)</td><td>Meditative, foundational, ego-dissolved</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Frisell (1&deg;), Standifer (4&deg;), Berry (5&deg;), Priester (7&deg;), Caliman (9&deg;), Shank (10&deg;)</strong></td><td><strong>Atmospheric, warm, professional, productive</strong></td></tr>
+            <tr><td>3</td><td>Jones (0&deg;), Horvitz (2&deg;), Anderson (3&deg;), Bown (6&deg;)</td><td>Commanding, intense, projective</td></tr>
+          </tbody>
+        </table>
+
+        <p>Distribution: <strong>1:6:4</strong>. Energy-2 continues to dominate &mdash; six of
+        eleven artists. The sustaining frequency of music-making: consistent, professional,
+        career-spanning.</p>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Eleven Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator</td></tr>
+            <tr><td>The Quiet Draw</td><td>Peacock (8&deg;)</td><td>Global cultivation &rarr; PNW settlement &rarr; gravitational presence</td></tr>
+            <tr><td>The Working Pedagogue-Draw</td><td>Caliman (9&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; educator AND performer</td></tr>
+            <tr><td><strong>The Late Homestead</strong></td><td><strong>Shank (10&deg;)</strong></td><td><strong>Prolific career elsewhere &rarr; PNW as later-career home base &rarr; still actively performing</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>Shank&rsquo;s <strong>Late Homestead</strong> pattern is distinct from the Pedagogue-Draw
+        variants: no teaching emphasis, just a working musician changing home base. The PNW was a
+        chapter, not a conclusion &mdash; Shank died in Tucson, unlike Caliman who died in Tacoma.</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;9&deg;</h4>
+          <ul>
+            <li><strong>Saxophone contrast:</strong> FIRST within-family stylistic pair. Caliman
+            (9&deg;, hard bop tenor) vs. Shank (10&deg;, cool alto). Same era, opposite aesthetics.</li>
+            <li><strong>Flute enters:</strong> Eighth instrument family. Air-column vibration with
+            no reed &mdash; first instrument where vibrating element is not in physical contact
+            with the player&rsquo;s body. Hermit Thrush connection realized.</li>
+            <li><strong>Bossa nova:</strong> FIRST non-American musical tradition in the engine.
+            Cross-cultural bridge-building. Shank-Almeida (1953-54) predates the craze by a decade.</li>
+            <li><strong>Jazz-pop crossover:</strong> &ldquo;California Dreamin&rsquo;&rdquo; solo
+            as the paradigm. Jazz skills entering the popular market.</li>
+            <li><strong>Blue note thread:</strong> Ten deployments across eleven degrees. First
+            within-thread stylistic contrast (hard bop overt vs. cool restrained).</li>
+            <li><strong>Energy spectrum:</strong> Distribution now 1:6:4. Energy-2 extends dominance.</li>
+            <li><strong>Genre rotation:</strong> STILL CRITICAL for degree 11. Eleven consecutive jazz
+            artists. Documented as intentional CSV architecture.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../009-hadley-caliman/index.html">S36-009 &mdash; Hadley Caliman (Degree 9&deg;)</a> &mdash; Saxophone family contrast: hard bop tenor (Caliman) vs. cool alto (Shank). First within-family stylistic pair in the engine.</li>
+            <li><a href="../007-julian-priester/index.html">S36-007 &mdash; Julian Priester (Degree 7&deg;)</a> &mdash; Flute-thrush connection: Hermit Thrush &ldquo;flute-like song&rdquo; (7&deg;) becomes literal instrument (10&deg;). Both bridge traditions.</li>
+            <li><a href="../003-ernestine-anderson/index.html">S36-003 &mdash; Ernestine Anderson (Degree 3&deg;)</a> &mdash; Melodic storytelling parallel: voice (Anderson) and alto/flute (Shank). Both crossed from jazz to wider audiences.</li>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a> &mdash; Arranging connection: big band tradition, compositional structure over raw improvisation, LA scene overlap.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Shank, Bud. Pacific Jazz Records discography (1952&ndash;1960s). Multiple sessions.</li>
+          <li>Shank, Bud &amp; Laurindo Almeida. <em>Brazilliance</em>. Pacific Jazz Records, 1953&ndash;54.</li>
+          <li>The Mamas &amp; The Papas. &ldquo;California Dreamin&rsquo;.&rdquo; Dunhill Records, 1965.</li>
+          <li>DownBeat. Bud Shank reviews and artist mentions, 1950s&ndash;2009.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="5">
+          <li>Gioia, Ted. <em>West Coast Jazz</em>. Oxford University Press, 1992.</li>
+          <li>AllMusic. Bud Shank artist biography and discography.</li>
+          <li>JazzTimes. West Coast jazz history and artist coverage.</li>
+          <li>Bossa nova history and the jazz-Brazilian fusion timeline.</li>
+        </ol>
+
+        <h3>Institutional &amp; Discographic</h3>
+        <ol start="9">
+          <li>Pacific Jazz Records. Label catalog and Richard Bock documentation.</li>
+          <li>World Pacific Records. Successor label catalog.</li>
+          <li>Lighthouse Cafe (Hermosa Beach). Venue history and All-Stars documentation.</li>
+          <li>Stan Kenton Orchestra. Discography and personnel records.</li>
+          <li>University of North Carolina. Music program historical records.</li>
+          <li>Laurindo Almeida discography. Pacific Jazz and classical guitar recordings.</li>
+          <li>Chet Baker discography. Pacific Jazz catalog.</li>
+          <li>Gerry Mulligan discography. Pacific Jazz and pianoless quartet recordings.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1926</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">2009</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Birth Name</span>
+            <span class="stat-value">Clifford E. Shank Jr.</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Dayton, Ohio</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">PNW (general)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">School</span>
+            <span class="stat-value">Univ. of North Carolina</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Alto Sax, Flute</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">10&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (alto/flute)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1950s&ndash;2009</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Pacific Jazz</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">Landmark</span>
+            <span class="stat-value">Brazilliance (1953)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Crossover</span>
+            <span class="stat-value">Calif. Dreamin' (1965)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Pacific Jazz / World Pacific</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums as Leader</span>
+            <span class="stat-value">60+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Collaborator</span>
+            <span class="stat-value">Laurindo Almeida</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reed Branch</span>
+            <span class="stat-value">5 nodes (extended)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">4 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Firsts at Degree 10&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Multi-family</span>
+            <span class="stat-value">Sax + Flute</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cool Jazz</span>
+            <span class="stat-value">1st cool identity</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bossa Nova</span>
+            <span class="stat-value">1st non-American</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Flute</span>
+            <span class="stat-value">1st in engine</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Crossover</span>
+            <span class="stat-value">1st jazz-pop moment</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Late Homestead</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Later-career PNW base</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died in PNW</span>
+            <span class="stat-value">No (Tucson, AZ)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">LA pipeline</span>
+            <span class="stat-value">3 artists (8-9-10&deg;)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Energy 1</span>
+            <span class="stat-value">Peacock (8&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 2</span>
+            <span class="stat-value">6 artists (dominant)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 3</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">1:6:4</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;9&deg; &rarr; 10&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">New Branch</span>
+            <span class="stat-value">Flute (1 node)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reed Branch</span>
+            <span class="stat-value">5 nodes (extended)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">10th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">11 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">12 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 10&deg; / 360 &middot;
+      <a href="../009-hadley-caliman/index.html">Prev: 9&deg; Caliman</a> &middot;
+      <a href="../007-julian-priester/index.html">7&deg; Priester</a> &middot;
+      <a href="../003-ernestine-anderson/index.html">3&deg; Anderson</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
