@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 10&deg; &mdash; Bushtit &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.click-track { background: #C62828; }
+    .theory-icon.swarm { background: #1565C0; }
+    .theory-icon.noise-floor { background: #37474F; }
+    .theory-icon.automata { background: #7B1FA2; }
+    .theory-icon.minimum { background: #E65100; }
+    .theory-icon.cool-jazz { background: var(--puget-dark); }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Swarm card (unique to degree 10) */
+    .swarm-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #E8F5E9 100%);
+      border: 1px solid #90CAF9;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .swarm-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1565C0;
+    }
+
+    /* Network comparison card */
+    .network-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #E0F2F1 100%);
+      border: 1px solid #A5D6A7;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .network-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #2E7D32;
+    }
+
+    /* Minimum signal card */
+    .minimum-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #ECEFF1 100%);
+      border: 1px solid #FFCC80;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .minimum-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">10&deg;</div>
+      <div class="release-title-block">
+        <h2>Bushtit</h2>
+        <div class="scientific">Psaltriparus minimus &middot; Family Aegithalidae (Long-tailed Tits)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Thin Insect-like Seep &middot; Shrubby Woodland Edge &middot; Resident &middot; Energy 1</div>
+
+    <blockquote>
+      The minimum of everything &mdash; minimum size, minimum volume, minimum information, minimum
+      energy. But maximum coordination. Thirty tiny birds, each producing a thin seep barely above
+      the noise floor, move through shrubbery as a self-organizing superorganism. One bit is enough.
+      The Amiga Principle at biological minimum.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &amp; Physical Description</h2>
+        <p>
+          The Bushtit is a tiny, social passerine of the family <strong>Aegithalidae</strong>
+          (long-tailed tits), order Passeriformes. It is the <strong>only member of its family
+          in the New World</strong> &mdash; every other aegithalid lives in Eurasia. A taxonomic
+          island: one species carrying an entire family&rsquo;s representation across the Western
+          Hemisphere. The genus <em>Psaltriparus</em> is monotypic &mdash; it contains only
+          <em>P. minimus</em>. The most socially dependent bird in the PNW is the most
+          taxonomically isolated.
+        </p>
+        <p>
+          Among the <strong>smallest birds in North America</strong>: <strong>2.8&ndash;3.1
+          inches</strong> (7&ndash;8 cm) in length, <strong>4&ndash;6 grams</strong> in weight
+          &mdash; less than two pennies. Smaller than the Golden-crowned Kinglet (4&ndash;8 g,
+          degree 8&deg;) at the low end. Plain gray-brown, essentially featureless &mdash;
+          identified by the <strong>absence</strong> of field marks: tiny, long-tailed, always
+          in flocks, always in shrubbery.
+        </p>
+        <p>
+          The Pacific group (<em>P. m. minimus</em>) is the PNW subspecies. Males have dark
+          eyes; females have pale yellowish eyes &mdash; one of the few dimorphic features in
+          this remarkably plain bird.
+        </p>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Noise Floor</h2>
+        <h3>The Minimum Viable Call</h3>
+        <p>
+          The bushtit&rsquo;s vocalization is a thin, high-pitched <strong>&ldquo;tsit&rdquo;</strong>
+          or <strong>&ldquo;seep&rdquo;</strong> &mdash; a contact call so quiet it barely rises
+          above ambient environmental noise. This is <strong>not song</strong>. Bushtits do not sing
+          a territorial song. They do not produce complex vocalizations. The entire vocal repertoire
+          is a small set of nearly identical, extremely quiet, extremely short contact notes.
+        </p>
+        <ul>
+          <li><strong>Quiet:</strong> Barely audible beyond a few meters &mdash; easily mistaken for wind or insects</li>
+          <li><strong>Short:</strong> 0.05&ndash;0.1 seconds per call &mdash; a single pulse, no internal structure</li>
+          <li><strong>High-pitched:</strong> 6&ndash;9 kHz dominant frequencies &mdash; near the upper limit of human hearing</li>
+          <li><strong>Simple:</strong> No frequency modulation, no harmonic complexity. A thin dash on the spectrogram.</li>
+          <li><strong>Constant:</strong> Produced continuously while foraging &mdash; a near-constant background pulse</li>
+        </ul>
+
+        <!-- Minimum Signal Card -->
+        <div class="minimum-card">
+          <h3>1 Bit: The Information Floor</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The bushtit call encodes <strong>one bit of information: present/absent</strong>.
+            &ldquo;I am here.&rdquo; No predator encoding. No territory. No mate attraction. No
+            combinatorial syntax. Just presence. This is the Shannon information floor &mdash;
+            the minimum non-zero unit of information. The bushtit proves that 1 bit is sufficient
+            for complex collective behavior.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Property</th><th>Chickadee (3&deg;/9&deg;)</th><th>Bushtit (10&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Information</strong></td><td>Multi-bit (predator ID, threat level)</td><td><strong>1 bit (present/absent)</strong></td></tr>
+              <tr><td><strong>Syntax</strong></td><td>Combinatorial (A-B-C-D)</td><td><strong>None</strong></td></tr>
+              <tr><td><strong>Volume</strong></td><td>Carrying (30+ meters)</td><td><strong>Noise floor (few meters)</strong></td></tr>
+              <tr><td><strong>Function</strong></td><td>Alarm broadcast</td><td><strong>Flock cohesion</strong></td></tr>
+              <tr><td><strong>Individual complexity</strong></td><td>High</td><td><strong>Minimum</strong></td></tr>
+              <tr><td><strong>Collective complexity</strong></td><td>Network</td><td><strong>Swarm (superorganism)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Vocalization</th>
+              <th>Frequency</th>
+              <th>Duration</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Contact &ldquo;tsit&rdquo; / &ldquo;seep&rdquo;</td><td>6&ndash;9 kHz</td><td>0.05&ndash;0.1 s</td><td>Flock cohesion (&ldquo;I am here&rdquo;)</td></tr>
+            <tr><td>Alarm chatter</td><td>5&ndash;9 kHz</td><td>0.03&ndash;0.08 s</td><td>Mild alarm / disturbance</td></tr>
+            <tr><td>Trill (rare)</td><td>5&ndash;8 kHz</td><td>0.3&ndash;0.5 s total</td><td>Agitation, close-range social</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Swarm Intelligence -->
+        <h2>The Flock as Superorganism: Swarm Intelligence</h2>
+        <p>
+          A bushtit flock is a <strong>superorganism</strong> &mdash; a collective entity that
+          moves, forages, and navigates as a single unit. A typical flock of <strong>10&ndash;40
+          birds</strong> moves through shrubbery as a coherent cloud, each bird maintaining
+          spacing through continuous quiet contact calls. No leader. No hierarchy. The collective
+          direction emerges from the aggregate of individual signals.
+        </p>
+
+        <!-- Swarm Card -->
+        <div class="swarm-card">
+          <h3>Swarm Intelligence: Simple Rules, Complex Behavior</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Each bird follows simple rules: stay near the group, call continuously, track
+            neighbors&rsquo; calls, move toward the density of calls. No centralized coordination.
+            The complex behavior &mdash; coherent movement, systematic foraging, collective
+            predator avoidance &mdash; <strong>emerges</strong> from the aggregation of minimal signals.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>System</th><th>Individual Rule</th><th>Emergent Behavior</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Bushtit flock</strong></td><td>Call &ldquo;I am here,&rdquo; track neighbors</td><td>Self-organizing superorganism</td></tr>
+              <tr><td>Conway&rsquo;s Game of Life</td><td>Check neighbors, apply 3 rules</td><td>Gliders, oscillators, Turing completeness</td></tr>
+              <tr><td>Reynolds&rsquo; boids</td><td>Separation + alignment + cohesion</td><td>Realistic flocking</td></tr>
+              <tr><td>Ant colony</td><td>Follow pheromone trail</td><td>Colony-level optimization</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1565C0; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The Amiga Principle at biological minimum: the simplest possible individual signal
+            producing the most complex possible collective behavior.
+          </p>
+        </div>
+
+        <p>
+          The bushtit also builds the most remarkable nest of any North American bird: a
+          <strong>pendulous, woven sock</strong> up to a foot long, suspended from a branch,
+          constructed collectively using spider silk, plant fibers, and lichens. Multiple
+          adults participate &mdash; bushtits practice <strong>cooperative breeding</strong>.
+          The nest is collective. The flock is collective. The call is collective. Everything
+          about the bushtit is collective. The meaningful unit is the group.
+        </p>
+
+        <!-- Ecology -->
+        <h2>Ecological Niche: The Edge Between</h2>
+        <p>
+          The bushtit occupies the <strong>edge</strong> &mdash; not deep forest, not open field,
+          but the transitional zone where woodland meets clearing. This is the <strong>ecotone</strong>:
+          the boundary between ecosystems. In the Puget Sound region: deciduous and mixed shrub
+          thickets, woodland margins, riparian corridors, suburban gardens. One of the most common
+          backyard birds in Seattle.
+        </p>
+        <p>
+          The species is a <strong>habitat generalist within the shrub layer</strong>. It does not
+          require old growth or closed canopy. It requires <strong>dense, low, branching
+          vegetation</strong> &mdash; the structural substrate that allows a flock of 30 tiny birds
+          to move through three-dimensional space. The vegetation is the medium. The flock is the
+          message.
+        </p>
+
+        <!-- Parallel Networks Card -->
+        <div class="network-card">
+          <h3>Two Parallel Communication Networks</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The forest now has <strong>two simultaneous communication systems</strong>.
+            The chickadee alarm network and the bushtit swarm cohesion network operate in
+            parallel in mixed-species winter flocks.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th></th><th>Alarm Network</th><th>Swarm Cohesion</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Species</strong></td><td>Chickadees (3&deg;, 9&deg;)</td><td><strong>Bushtit (10&deg;)</strong></td></tr>
+              <tr><td><strong>Signal</strong></td><td>A-B-C-D combinatorial</td><td><strong>Contact seep (1 bit)</strong></td></tr>
+              <tr><td><strong>Content</strong></td><td>Referential threat info</td><td><strong>Presence only</strong></td></tr>
+              <tr><td><strong>Volume</strong></td><td>Loud, carrying</td><td><strong>Noise floor</strong></td></tr>
+              <tr><td><strong>Range</strong></td><td>30+ meters</td><td><strong>Few meters</strong></td></tr>
+              <tr><td><strong>Architecture</strong></td><td>Broadcast (1-to-many)</td><td><strong>Mesh (many-to-many)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon click-track">C</div>
+            <div class="theory-content">
+              <h4>Contact Call as Click Track <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The click track keeps musicians synchronized &mdash; infrastructure, not music. The bushtit contact call keeps the flock synchronized &mdash; infrastructure, not song. The nuthatch (5&deg;) is the audible metronome; the bushtit is the inaudible click track.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon swarm">S</div>
+            <div class="theory-content">
+              <h4>Flock as Ensemble / Amiga Principle <span class="theory-level advanced">Advanced</span></h4>
+              <p>Unlike an orchestra (complex individual parts), the bushtit ensemble requires IDENTICAL individual parts &mdash; every bird produces the same call, at the same volume, continuously. The purest form of collective emergence. The intelligence is in the architecture, not the component.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon noise-floor">N</div>
+            <div class="theory-content">
+              <h4>The Noise Floor <span class="theory-level foundational">Foundational</span></h4>
+              <p>Tape hiss, quantization noise, thermal noise &mdash; the level below which signal disappears. The bushtit call lives at this boundary. Barely distinguishable from wind and leaf rustle. The noise floor is where absence meets presence.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon automata">A</div>
+            <div class="theory-content">
+              <h4>Swarm Dynamics as Cellular Automata <span class="theory-level advanced">Advanced</span></h4>
+              <p>Conway&rsquo;s Game of Life, Wolfram&rsquo;s Rule 110, Reynolds&rsquo; boids &mdash; simple local rules producing complex global patterns. The bushtit is the biological Rule 110: simplest possible signal, complex collective computation.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon minimum">M</div>
+            <div class="theory-content">
+              <h4>Minimum Viable Signal (1 Bit) <span class="theory-level foundational">Foundational</span></h4>
+              <p>Shannon information theory: 1 bit is the minimum non-zero unit. The bushtit transmits exactly this. The question is not &ldquo;how much can one signal carry?&rdquo; but &ldquo;how many minimum signals produce a swarm?&rdquo;</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon cool-jazz">Q</div>
+            <div class="theory-content">
+              <h4>Cool Jazz as Noise-Floor Aesthetics <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Bud Shank played at the dynamic floor of jazz &mdash; quiet, precise, more air than substance. Where bebop is density (the wren&rsquo;s cascade), cool jazz is economy (the bushtit&rsquo;s seep). Restraint IS the signal.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>The click track.</strong> In music production, the click track is the timing
+          infrastructure &mdash; constant, quiet, unvarying, heard only by the ensemble, never
+          by the audience. The nuthatch (degree 5&deg;) was the <strong>metronome</strong>
+          &mdash; the audible, public beat. The bushtit is the <strong>click track</strong>
+          &mdash; quieter, continuous, private. Both maintain synchronization. The difference
+          is volume and audience.
+        </p>
+        <p>
+          <strong>The noise floor.</strong> Brian Eno&rsquo;s <em>Music for Airports</em>,
+          Ryoji Ikeda&rsquo;s <em>+/-</em>, Alvin Lucier&rsquo;s <em>I Am Sitting in a Room</em>
+          &mdash; all explore the boundary between signal and noise as a fundamental musical
+          question. How quiet can sound be before it ceases to be music? The bushtit answers:
+          one bit at the noise floor is enough, if there are enough transmitters.
+        </p>
+        <p>
+          <strong>Ensemble over soloist.</strong> The bushtit flock is an ensemble where every
+          player has the same part, at the same volume, continuously. No score, no conductor,
+          no soloists. Just the aggregate. This is the Amiga Principle compressed to its absolute
+          minimum: simplest possible individual contribution, richest possible collective behavior.
+        </p>
+        <p>
+          <strong>Cellular automata.</strong> Conway&rsquo;s Game of Life and Wolfram&rsquo;s
+          Rule 110 prove that simple local rules produce complex global patterns &mdash; even
+          Turing-complete computation. The bushtit flock is the biological instantiation: 1-bit
+          signals + local movement rules = self-organizing superorganism. The mathematical
+          structure beneath all self-organizing systems.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-008</strong> &mdash; Golden-crowned Kinglet
+            <p>SIZE PARALLEL. The two smallest birds in the circle. Kinglet 4&ndash;8 g, bushtit 4&ndash;6 g. Contrasting strategies: the kinglet is individually distinctive (private channel); the bushtit is collectively anonymous (swarm).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003</strong> &mdash; Black-capped Chickadee
+            <p>COMPLEXITY CONTRAST. Chickadee A-B-C-D syntax = maximum call complexity. Bushtit seep = minimum. Both are social, flock-forming. The chickadee encodes information; the bushtit encodes only presence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-009</strong> &mdash; Chestnut-backed Chickadee
+            <p>Same complexity contrast. In mixed-species flocks, chickadees provide alarm broadcasts; bushtits provide cohesion hum. Two complementary systems in the same flock.</p>
+          </div>
+          <div class="xref-card">
+            <strong>BPS</strong> &mdash; Built &amp; Physical Systems
+            <p>Swarm intelligence and mesh networking. The bushtit flock&rsquo;s contact-call coordination maps directly to mesh network protocols &mdash; each node broadcasting &ldquo;I am here,&rdquo; intelligence emerging from the aggregate.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Living Systems
+            <p>Edge ecology, ecotone dynamics, cooperative breeding, communal roosting as thermoregulation for minimum-mass endotherms.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Bud Shank at degree 10&deg;. Cool jazz as quiet jazz &mdash; minimum volume, maximum subtlety. The noise floor as deliberate aesthetic. Restraint as artistic statement.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000</strong> &mdash; Great Blue Heron
+            <p>The two quietest positions in the first eleven degrees. Silence (0&deg;) and the noise floor (10&deg;). Together they bracket the threshold where absence meets presence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-005</strong> &mdash; Red-breasted Nuthatch
+            <p>Metronome vs. click track. The nuthatch is the audible public beat. The bushtit is the sub-audible private pulse. Both maintain synchronization. The difference is audience.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001</strong> &mdash; Pacific Wren
+            <p>Maximum vs. minimum vocal complexity. The wren produces 100+ notes per song. The bushtit produces a single tsit. Opposite ends of the complexity spectrum.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Sloane, S.A. (2001). &ldquo;Bushtit.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Dai, C. et al. (2010). Climatic effects on East Asian tits. <em>MPE</em> 55(3).</li>
+          <li>Couzin, I.D. (2009). Collective cognition in animal groups. <em>Trends Cogn Sci</em> 13(1).</li>
+          <li>Couzin, I.D. &amp; Krause, J. (2003). Self-organization in vertebrates. <em>Adv Study Behav</em> 32.</li>
+          <li>Reynolds, C.W. (1987). Flocks, herds and schools. <em>ACM SIGGRAPH</em> 21(4).</li>
+          <li>Wolfram, S. (2002). <em>A New Kind of Science</em>. Wolfram Media.</li>
+          <li>Marler, P. (2004). Bird calls and behavioral neurobiology. <em>Ann NY Acad Sci</em> 1016.</li>
+          <li>Hailman, J.P. (1989). Organization of major vocalizations in the Paridae. <em>Wilson Bulletin</em> 101(2).</li>
+          <li>Sloane, S.A. (2003). Breeding ecology of bushtits. <em>Condor</em> 105(2).</li>
+          <li>Gardner, M. (1970). Conway&rsquo;s Game of Life. <em>Scientific American</em> 223(4).</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Bushtit. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Bushtit. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Macaulay Library. Bushtit recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Aegithalidae</div>
+          <div class="stat-detail">Only New World member</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">2.8&ndash;3.1 in</div>
+          <div class="stat-detail">7&ndash;8 cm (among smallest in N. America)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">4&ndash;6 g</div>
+          <div class="stat-detail">Less than two pennies</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Flock Size</div>
+          <div class="stat-value">10&ndash;40+</div>
+          <div class="stat-detail">Always in flocks, never alone</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Plain gray</div>
+          <div class="stat-detail">No field marks &mdash; ID&rsquo;d by absence</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Call Type</div>
+          <div class="stat-value">Contact seep</div>
+          <div class="stat-detail">Not song &mdash; no territorial or mating function</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">6&ndash;9 kHz</div>
+          <div class="stat-detail">Near upper limit of human hearing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Volume</div>
+          <div class="stat-value">Noise floor</div>
+          <div class="stat-detail">Barely audible beyond a few meters</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Information</div>
+          <div class="stat-value">1 bit</div>
+          <div class="stat-detail">Present / absent &mdash; nothing more</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">Swarm</div>
+          <div class="stat-detail">Minimum signal, maximum coordination</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">10&deg;</div>
+          <div class="stat-detail">The minimum &mdash; swarm from noise floor</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">1</div>
+          <div class="stat-detail">The floor (same as degree 8&deg;)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Shrubby Edge</div>
+          <div class="stat-detail">Ecotone &mdash; the transition zone</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Network Role</div>
+          <div class="stat-value">Parallel</div>
+          <div class="stat-detail">Swarm cohesion (separate from alarm)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 10&deg; &mdash; S36</div>
+          <div class="parallel-name">Bud Shank</div>
+          <div class="parallel-detail">Cool jazz as quiet jazz. Minimum volume, maximum nuance. The noise floor is not a limitation &mdash; it is where subtlety lives. Restraint IS the signal.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 010 of 360 &middot;
+      <a href="../009-chestnut-backed-chickadee/index.html">Degree 9&deg;: Chestnut-backed Chickadee</a> &middot;
+      <a href="../008-golden-crowned-kinglet/index.html">Degree 8&deg;: Golden-crowned Kinglet</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>

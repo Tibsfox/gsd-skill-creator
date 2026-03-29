@@ -1,0 +1,345 @@
+{
+  "degree": 10,
+  "species": "Bushtit",
+  "scientific_name": "Psaltriparus minimus",
+  "subspecies": "P. m. minimus (Pacific group -- PNW population)",
+  "sound_type": "thin insect-like seep contact calls",
+  "energy": 1,
+  "ecosystem": "shrubby woodland edge",
+  "season": "resident (year-round in shrubby woodland, urban gardens, and edge habitat)",
+  "family": "Aegithalidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle / Puget Sound reference; range extends from southwestern British Columbia through the western United States to Guatemala"
+  },
+  "physical": {
+    "length_in": "2.8-3.1",
+    "wingspan_in": "~6",
+    "weight_g": "4-6"
+  },
+  "plumage": {
+    "overall": "Plain gray-brown above, slightly paler below -- essentially featureless",
+    "cap": "Gray-brown, no contrasting cap color",
+    "eye": "Males dark-eyed; females pale (yellowish) eyes -- one of the few dimorphic features",
+    "bill": "Tiny, short, dark",
+    "tail": "Long relative to body -- characteristic of Aegithalidae",
+    "field_id": "Identified by ABSENCE of field marks: tiny, plain, gray-brown, long-tailed, always in flocks in shrubbery"
+  },
+  "frequency_range": {
+    "contact_tsit_hz": "6000-9000 (narrow band, centered ~7500 Hz)",
+    "alarm_chatter_hz": "5000-9000 (broader, faster rate)",
+    "trill_hz": "5000-8000 (rare, agitation)",
+    "register": "Ultra-high (6-9 kHz -- at or above comfortable hearing threshold for many adults)"
+  },
+  "contact_call_metrics": {
+    "call_type": "Contact seep/tsit",
+    "duration_s": "0.05-0.1",
+    "volume": "Extremely quiet -- barely above ambient noise floor",
+    "information_content": "1 bit: present/absent ('I am here')",
+    "production_rate": "Near-continuous while foraging (constant background pulse)",
+    "audible_range": "A few meters -- does not project",
+    "combinatorial": false,
+    "referential": false,
+    "territorial": false,
+    "reproductive": false,
+    "function": "Flock cohesion -- maintains spacing and direction in the moving flock",
+    "comparison_to_chickadee": "Where the chickadee (degrees 3, 9) produces complex, information-rich combinatorial calls, the bushtit produces the SIMPLEST possible call -- no encoding, no syntax, no variation. Pure presence signal."
+  },
+  "flock_behavior": {
+    "typical_flock_size": "10-40 (sometimes 50+)",
+    "flock_structure": "No leader. No hierarchy. Self-organizing swarm. Movement direction emerges from aggregate of individual signals.",
+    "flock_cohesion_mechanism": "Continuous contact calls from all members. Each bird monitors neighbors' calls and adjusts position to maintain spacing.",
+    "superorganism": true,
+    "swarm_intelligence": true,
+    "cooperative_breeding": true,
+    "communal_roosting": true,
+    "nest_type": "Pendulous woven sock (up to 12 inches long), constructed collectively over weeks using spider silk, plant fibers, lichens, moss, and feathers"
+  },
+  "theory_nodes": [
+    {
+      "concept": "Contact call as click track (constant sub-audible synchronization pulse)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/rhythm/click-track/",
+      "examples": [
+        "The click track keeps musicians synchronized -- it is infrastructure, not music",
+        "The bushtit contact call keeps the flock synchronized -- it is infrastructure, not song",
+        "The nuthatch (degree 5) is the audible metronome; the bushtit is the inaudible click track",
+        "Both maintain synchronization. The difference is volume and audience: public beat vs. private pulse."
+      ],
+      "music_theory_parallel": "The click track as hidden infrastructure -- the timing signal that the audience never hears but the ensemble depends on. The bushtit's contact call is the biological click track: constant, quiet, essential, invisible to non-participants."
+    },
+    {
+      "concept": "Flock as ensemble / Amiga Principle at biological minimum",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/ensemble/swarm/",
+      "examples": [
+        "An orchestra produces music no individual player creates alone -- collective output exceeds individual capacity",
+        "A bushtit flock produces swarm behavior no individual bird directs -- collective navigation from individual 'I am here' signals",
+        "The Amiga produced rich multimedia from simple, elegant hardware. The bushtit flock produces complex behavior from the simplest possible signal.",
+        "Unlike an orchestra (complex individual parts), the bushtit ensemble requires IDENTICAL individual parts -- the purest form of collective emergence"
+      ],
+      "music_theory_parallel": "The Amiga Principle at its absolute minimum: the simplest possible individual signal producing the most complex possible collective behavior. If one bit per individual is sufficient for swarm intelligence, then individual complexity is not what produces collective intelligence. Architecture is."
+    },
+    {
+      "concept": "The noise floor as compositional position (barely above silence)",
+      "level": "foundational",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/dynamics/noise-floor/",
+      "examples": [
+        "Tape hiss in analog recording -- the sound that is always present below the music",
+        "Quantization noise in digital audio -- the irreducible minimum of the medium",
+        "Brian Eno's ambient music -- exploring the boundary between signal and environmental sound",
+        "The bushtit call lives at the noise floor: barely distinguishable from wind, leaf rustle, insect stridulation"
+      ],
+      "music_theory_parallel": "The noise floor is not a dead zone -- it is the basement of emergence. Below it, silence (degree 0). Above it, the first presence. The bushtit occupies the threshold where absence meets presence, where noise meets signal, where the simplest possible communication begins."
+    },
+    {
+      "concept": "Swarm dynamics as cellular automata (emergent pattern from simple rules)",
+      "level": "advanced",
+      "department": "science/mathematics",
+      "college_path": ".college/science/mathematics/cellular-automata/",
+      "examples": [
+        "Conway's Game of Life: 3 rules, binary cells, nearest-neighbor checks -> gliders, oscillators, Turing completeness",
+        "Wolfram's Rule 110: 1D binary automaton that is provably Turing-complete from minimal rules",
+        "Reynolds' boids algorithm (1987): 3 simple rules (separation, alignment, cohesion) -> realistic flocking",
+        "The bushtit flock: simple call ('I am here') + local movement rules -> self-organizing superorganism"
+      ],
+      "music_theory_parallel": "The mathematical structure beneath ALL self-organizing systems: simple local rules applied in parallel producing complex global patterns. The bushtit is the biological Rule 110 -- the simplest possible signal producing complex collective computation."
+    },
+    {
+      "concept": "Minimum viable signal (1 bit: present/absent -- the information floor)",
+      "level": "foundational",
+      "department": "science/bioacoustics",
+      "college_path": ".college/science/bioacoustics/avian/minimum-signal/",
+      "examples": [
+        "The chickadee call encodes predator identity, threat level, and urgency -- many bits per call",
+        "The bushtit call encodes only 'I am here' -- 1 bit per call",
+        "Shannon information theory: 1 bit is the minimum non-zero unit of information",
+        "The bushtit proves that 1 bit is sufficient for complex collective behavior when the number of transmitters is large enough"
+      ],
+      "music_theory_parallel": "In information theory, the minimum viable signal is 1 bit -- a single binary distinction (present/absent, on/off, yes/no). The bushtit transmits exactly this minimum. No less is possible without silence. The question is not 'how much information can one signal carry?' but 'how many minimum signals produce a swarm?'"
+    },
+    {
+      "concept": "Cool jazz as noise-floor aesthetics (restraint as artistic signal)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/dynamics/cool-jazz/",
+      "examples": [
+        "Bud Shank: alto sax and flute, Pacific Jazz Records, the sound of West Coast restraint",
+        "Cool jazz defined by what it does NOT do -- does not shout, does not overplay, does not fill every beat",
+        "Where bebop is density (the wren's cascade), cool jazz is economy (the bushtit's seep)",
+        "The noise floor is not a limitation -- it is a deliberate aesthetic position. Restraint IS the signal."
+      ],
+      "music_theory_parallel": "Cool jazz operates at the dynamic floor of the jazz tradition -- minimum volume, maximum nuance. The bushtit operates at the dynamic floor of the avifauna -- minimum volume, maximum collective effect. In both cases, restraint is not absence. It is a positive choice."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-008",
+      "title": "Golden-crowned Kinglet (Degree 8)",
+      "connection": "SIZE PARALLEL. The two smallest birds in the circle. Kinglet 4-8 g, bushtit 4-6 g. But contrasting strategies: the kinglet's signal is ultrasonic and individually distinctive (conspecific private channel); the bushtit's signal is at the noise floor and collectively anonymous (swarm synchronization). Two solutions to being tiny: be distinctive or be collective."
+    },
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "COMPLEXITY CONTRAST. Maximum vs. minimum call complexity. The chickadee's A-B-C-D combinatorial syntax encodes predator identity, threat level, urgency. The bushtit's tsit encodes only presence. Both are social, flock-forming species. The chickadee is the information-rich broadcaster; the bushtit is the minimum-viable-signal swarm node."
+    },
+    {
+      "project": "SPS-009",
+      "title": "Chestnut-backed Chickadee (Degree 9)",
+      "connection": "Same complexity contrast as SPS-003. The bushtit often flocks alongside chickadees in mixed-species winter foraging groups. In these mixed flocks, the chickadees provide the alarm broadcasts while the bushtits provide the cohesion hum -- two complementary communication strategies in the same flock."
+    },
+    {
+      "project": "BPS",
+      "title": "Built & Physical Systems",
+      "connection": "Swarm intelligence and mesh networking parallel. The bushtit flock's contact-call coordination maps to mesh network protocols where each node broadcasts 'I am here' and network intelligence emerges from the aggregate of local signals. The flock IS a mesh network."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Edge ecology, ecotone dynamics, cooperative breeding behavior, communal roosting as thermoregulation for minimum-mass endotherms, swarm intelligence in vertebrate groups."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Bud Shank at degree 10. Cool jazz as quiet jazz -- minimum volume, maximum subtlety. The noise floor as a deliberate aesthetic position. Restraint as artistic statement."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "The two quietest positions in the first eleven degrees. Silence (degree 0) and the noise floor (degree 10). The heron produces nothing. The bushtit produces the minimum above nothing. Together they bracket the threshold where absence meets presence."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "Metronome vs. click track. The nuthatch is the audible, public beat (degree 5). The bushtit is the sub-audible, private pulse (degree 10). Both maintain synchronization. The difference is audience: the nuthatch's beat is heard by the forest; the bushtit's pulse is heard only by the flock."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "Maximum vs. minimum vocal complexity. The wren produces 100+ notes per song in cascading FM complexity (the soloist's cadenza). The bushtit produces a single tsit (one instrument in a swarm ensemble). Opposite ends of the complexity spectrum."
+    }
+  ],
+  "interspecies_network": {
+    "status": "NOT EXTENDED -- the bushtit does not participate in the chickadee alarm broadcasting network. It does not produce alarm calls that other species decode, and its contact calls do not carry alarm information.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "bushtit_role": "The bushtit participates in mixed-species winter flocks alongside chickadees, nuthatches, and kinglets but functions as a PASSIVE BENEFICIARY of the alarm network, not a broadcaster or documented eavesdropper. It benefits from the general alarm behavior of the flock without contributing to or decoding the A-B-C-D protocol. Its own communication operates on a separate, parallel channel: the contact-call cohesion system.",
+    "note": "The alarm network remains at 4 nodes (2 broadcasters, 2 receivers). The bushtit introduces a SECOND communication system that operates alongside the alarm network: the swarm cohesion channel. The forest now has two parallel communication networks: the alarm broadcast network (chickadee-mediated, referential, loud) and the swarm cohesion network (bushtit-mediated, non-referential, quiet)."
+  },
+  "part_a_parallel": {
+    "artist": "Bud Shank",
+    "degree": 10,
+    "genre": "S36",
+    "shared_principle": "Cool jazz as quiet jazz -- minimum volume, maximum nuance. Bud Shank operated at the dynamic floor of the jazz tradition. The bushtit operates at the dynamic floor of the avifauna. Both prove that restraint is not absence -- it is a positive aesthetic choice. The noise floor is not a limitation. It is where subtlety lives.",
+    "resonance_points": [
+      "Volume as aesthetic: Shank's alto and flute work is defined by its quietness -- the opposite of hard bop's volume. The bushtit's contact call is defined by its quietness -- the opposite of the chickadee's carrying alarm. Both operate at the noise floor of their respective domains.",
+      "West Coast specificity: Shank was Pacific Jazz Records, the sound of the West Coast. The bushtit is the backyard bird of the Pacific coast -- from BC to Baja. Both are thoroughly western, thoroughly local, thoroughly embedded in place.",
+      "Ensemble over soloist: Cool jazz values the ensemble -- the collective sound, the arrangement, the interplay between voices. The bushtit flock values the collective -- no soloists, no leaders, no individuals distinguished from the group. The meaningful unit is the group, not the individual.",
+      "Restraint as signal: In both domains, what is NOT done is as important as what IS done. Shank does not overplay. The bushtit does not over-signal. The space between the notes. The silence between the seeps. Restraint IS the message."
+    ]
+  },
+  "degree_arc": {
+    "position": "The minimum viable signal -- swarm intelligence from the noise floor. The simplest possible individual signal producing complex collective behavior. The Amiga Principle at biological minimum.",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10)",
+    "key_insight": "Degree 10 introduces four new dimensions: (1) MINIMUM VIABLE SIGNAL -- the simplest possible call (1 bit: present/absent), proving that complex behavior requires only sufficient QUANTITY of minimal signals, not complex individual signals; (2) SWARM INTELLIGENCE -- the first species whose primary significance is collective behavior, not individual vocalization; (3) NOISE FLOOR -- the threshold where signal meets noise, where acoustic communication barely qualifies as distinguishable from environmental sound; (4) PARALLEL COMMUNICATION NETWORK -- the forest now has two communication systems operating simultaneously: the alarm broadcast network (chickadee-mediated) and the swarm cohesion network (bushtit-mediated).",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3, same register zone)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz -- in the same ultra-high register as degree 8 but quieter and structurally simpler)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- no predator encoding, no territory, no mate attraction. 1 bit.)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime -- Sitka spruce, western hemlock, western redcedar)",
+      "degree_10": "Shrubby woodland edge (ecotone -- the transition zone between forest and open habitat)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Dense, low, branching vegetation -- shrub thickets, woodland edges, riparian corridors, suburban gardens, second-growth scrub. Requires shrub-layer structural complexity, not specific tree species or forest type.",
+    "niche": "Shrubby woodland edge specialist. Occupies the ecotone -- the transition zone between forest and open habitat. Habitat generalist within the shrub layer.",
+    "foraging_strategy": "Active gleaner in shrub and low canopy. Moves through vegetation as a flock, systematically gleaning insects and spider eggs from leaves and bark. The flock functions as a collective foraging unit.",
+    "diet": "Insects, spiders, spider eggs, and other small arthropods. Occasionally small seeds. Entirely insectivorous in summer.",
+    "nesting": "Pendulous woven sock (up to 30 cm long), suspended from branch. Constructed by both pair members over several weeks using spider silk, plant fibers, lichens, moss, feathers. Cooperative breeding with non-breeding helpers.",
+    "communal_roosting": "In cold weather, bushtits roost communally -- multiple birds huddling together in a tight cluster to share body heat. Essential for survival: their tiny body mass provides almost no thermal buffer.",
+    "flock_year_round": true,
+    "flock_type": "Non-breeding flocks of 10-40 birds persist year-round outside the breeding season. Even breeding pairs maintain contact with the larger flock."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~31 million (Partners in Flight 2020)",
+    "trend": "Stable. The species adapts well to suburban and disturbed habitats.",
+    "threats": "Severe cold snaps (no thermal buffer at 4-6 g), pesticide reduction of insect prey, cat predation (shrub-level foraging is in the maximum cat-hunting zone)",
+    "vulnerability": "Highly resilient -- tolerates urbanization, suburbanization, and habitat disturbance. Requires only dense shrubbery, which human land use often increases.",
+    "unique_risk": "Entire flock vulnerable to a single predation event -- a Cooper's Hawk or Sharp-shinned Hawk striking a bushtit flock can take multiple individuals. The dense flock is both a defense (many eyes, dilution effect) and a vulnerability (attractive target, close spacing)."
+  },
+  "key_sites": [
+    {
+      "name": "Seattle suburban neighborhoods",
+      "type": "year-round",
+      "description": "One of the most common backyard birds in Seattle. Any neighborhood with mature shrubs and hedgerows will have bushtit flocks.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Discovery Park / Magnolia",
+      "type": "year-round",
+      "description": "Edge habitat between forest and meadow. Mixed shrub thickets along trails and bluffs.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Seward Park",
+      "type": "year-round",
+      "description": "Shrub layer and edge habitat at the forest margins. Often in mixed-species flocks with chickadees and kinglets.",
+      "region": "Seattle, WA"
+    },
+    {
+      "name": "Puget Sound lowland riparian corridors",
+      "type": "year-round",
+      "description": "Willow, alder, and snowberry thickets along streams and rivers throughout the lowlands.",
+      "region": "Puget Sound, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "ADDRESSED -- Macaulay Library provides recordings showing the thin, high-frequency contact seep and the continuous calling pattern of foraging flocks",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis shows the bushtit contact call as a brief, narrow-band pulse centered around 7-8 kHz -- visually, a short thin dash on the spectrogram, contrasting sharply with the complex, structured spectrograms of wren songs, thrush songs, or chickadee alarm calls. The call's visual simplicity on the spectrogram is a direct representation of its informational simplicity."
+  },
+  "sources": [
+    "Sloane, S.A. (2001). Bushtit (Psaltriparus minimus). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Bushtit. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Bushtit. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Bushtit species account. birdweb.org",
+    "Dai, C. et al. (2010). Profound climatic effects on two East Asian black-throated tits. MPE 55(3): 1047-1058.",
+    "Hailman, J.P. (1989). Organization of major vocalizations in the Paridae. Wilson Bulletin 101(2): 305-343.",
+    "Marler, P. (2004). Bird calls: their potential for behavioral neurobiology. Ann NY Acad Sci 1016: 31-44.",
+    "Couzin, I.D. (2009). Collective cognition in animal groups. Trends in Cognitive Sciences 13(1): 36-43.",
+    "Couzin, I.D. and Krause, J. (2003). Self-organization and collective behavior in vertebrates. Advances in the Study of Behavior 32: 1-75.",
+    "Reynolds, C.W. (1987). Flocks, herds and schools: A distributed behavioral model. ACM SIGGRAPH 21(4): 25-34.",
+    "Wolfram, S. (2002). A New Kind of Science. Wolfram Media.",
+    "Sloane, S.A. (2003). Breeding ecology of bushtits. Condor 105(2): 309-318.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Bushtit (Psaltriparus minimus). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Bushtit. wdfw.wa.gov",
+    "eBird. Bushtit observation data, Pacific Northwest. ebird.org/species/bushti",
+    "Macaulay Library. Bushtit recordings. Cornell Lab of Ornithology. macaulaylibrary.org",
+    "Gardner, M. (1970). Conway's Game of Life. Scientific American 223(4): 120-123.",
+    "Eno, B. (1978). Ambient 1: Music for Airports. EG Records."
+  ],
+  "release_metadata": {
+    "release_number": "010",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}
