@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 30&deg; &mdash; Ray Charles &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #D32F2F);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .rb-jazz-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FCE4EC;
+      color: #880E4F;
+      border: 1px solid #F48FB1;
+      margin-left: 0.3rem;
+    }
+
+    .atlantic-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1A237E;
+      color: #FFD600;
+      border: 1px solid #3949AB;
+      margin-left: 0.3rem;
+    }
+
+    .incubation-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8F5E9;
+      color: #1B5E20;
+      border: 1px solid #66BB6A;
+      margin-left: 0.3rem;
+    }
+
+    .cd-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #212121;
+      color: #ECEFF1;
+      border: 1px solid #616161;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .level-foundational { background: #FCE4EC; color: #880E4F; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #D32F2F;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #B71C1C;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #B71C1C;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .atlantic-box {
+      background: #1A237E;
+      color: #ECEFF1;
+      border: 2px solid #3949AB;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .atlantic-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFD600;
+      font-family: system-ui, sans-serif;
+    }
+    .atlantic-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .atlantic-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #283593;
+      color: #ECEFF1;
+    }
+    .atlantic-box td:first-child { font-weight: 600; width: 30%; color: #FFD600; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .quincy-box {
+      background: #E8F5E9;
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .quincy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1B5E20;
+      font-family: system-ui, sans-serif;
+    }
+    .quincy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .soul-box {
+      background: linear-gradient(135deg, #FCE4EC, #F3E5F5);
+      border: 2px solid #AD1457;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .soul-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #880E4F;
+      font-family: system-ui, sans-serif;
+    }
+    .soul-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">30&deg;</div>
+      <div>
+        <h1>Ray Charles</h1>
+        <div class="subtitle">R&amp;B/Jazz &middot; The Inventor of Soul Music &mdash; Central District 1947&ndash;1950
+          <span class="energy-badge">Energy 4</span>
+          <span class="rb-jazz-badge">R&amp;B/Jazz</span>
+          <span class="atlantic-badge">Atlantic</span>
+          <span class="incubation-badge">The Incubation</span>
+          <span class="cd-badge">Central District</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../004-floyd-standifer/index.html">Degree 4&deg; (Standifer)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../025-black-stax/index.html">Degree 25&deg; (Black Stax)</a>
+      <a href="../029-ivan-boogaloo-joe-jones/index.html">Degree 29&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          A blind sixteen-year-old orphan from Florida arrived in Seattle&rsquo;s
+          Central District in 1947 and found a city small enough to compress
+          him into greatness. He played the Jackson Street clubs. He formed
+          the Maxin Trio. He charted nationally with &ldquo;Confession Blues.&rdquo;
+          He befriended a fourteen-year-old named Quincy Jones. Then he left.
+          Within five years, at Atlantic Records, he combined gospel and R&amp;B
+          in a way no one had done before and invented a genre called
+          <em>soul music</em>. Every soul artist who followed &mdash; Aretha Franklin,
+          Otis Redding, Stevie Wonder, Marvin Gaye, Al Green &mdash; walks in
+          the path he cut. The Central District incubated him. The world
+          received the result. <em>The rough brrit.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>Ray Charles lived and performed on Duwamish land during his Seattle
+          years (1947&ndash;1950). The Central District and Jackson Street corridor
+          sit on the ancestral territory of the <strong>Duwamish Tribal Organization</strong>,
+          the <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. The Duwamish Tribe remains federally unrecognized.
+          This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             QUINCY JONES CONNECTION
+             ======================================== -->
+
+        <div class="quincy-box">
+          <h4>The Strongest Cross-Degree Link in the Engine &mdash; Degree 0 / Degree 30</h4>
+          <p><strong>Ray Charles and Quincy Jones</strong> met as teenagers in Seattle&rsquo;s
+          Central District around 1947. Charles was sixteen; Jones was fourteen. They
+          practiced together, arranged together, learned from each other on the Jackson
+          Street scene. Jones later called Charles <em>the most important person in his
+          musical education</em>. This is not a cross-reference &mdash; it is a
+          cross-degree bridge. The degree 0 research documents this friendship from
+          Jones&rsquo;s perspective. Degree 30 documents it from Charles&rsquo;s. Two of the
+          most important musicians in American history, forged in the same neighborhood,
+          at the same time, as teenagers.</p>
+          <p style="margin-top:0.8rem"><a href="../000-quincy-jones/index.html"
+            style="color:#1B5E20;font-weight:600">Read Degree 0&deg; &mdash; Quincy Jones</a></p>
+        </div>
+
+        <!-- ========================================
+             ATLANTIC RECORDS
+             ======================================== -->
+
+        <div class="atlantic-box">
+          <h4>Atlantic Records &mdash; The Most Important Label in the Engine</h4>
+          <table>
+            <tr><td>Founded</td><td>1947 by Ahmet Ertegun and Herb Abramson, New York City.</td></tr>
+            <tr><td>Charles&rsquo; Years</td><td>1952&ndash;1959. &ldquo;I Got a Woman&rdquo; (1954), &ldquo;What&rsquo;d I Say&rdquo; (1959), <em>The Genius of Ray Charles</em> (1959). The invention of soul music.</td></tr>
+            <tr><td>Also on Atlantic</td><td>Aretha Franklin, John Coltrane (<em>Giant Steps</em>), Led Zeppelin, Otis Redding, Ruth Brown, The Drifters, Roberta Flack.</td></tr>
+            <tr><td>Significance</td><td>Eclipses Prestige Records (degree 29) as the most important label in the engine. Atlantic&rsquo;s catalog spans jazz, R&amp;B, soul, and rock &mdash; the most genre-diverse major label in American recording history.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             SOUL MUSIC INVENTION
+             ======================================== -->
+
+        <div class="soul-box">
+          <h4>The Invention of Soul Music</h4>
+          <p>Between 1954 and 1959 at Atlantic Records, Charles took gospel music&rsquo;s
+          emotional intensity and call-and-response structure and fused it with secular
+          R&amp;B lyrics and rhythm. &ldquo;I Got a Woman&rdquo; (1954) adapted the
+          gospel hymn &ldquo;It Must Be Jesus&rdquo; into a secular love song. &ldquo;What&rsquo;d
+          I Say&rdquo; (1959) was structured like a gospel service &mdash; building from
+          quiet to ecstatic collective singing. The result was <strong>soul music</strong>:
+          the genre that would produce Aretha Franklin, Otis Redding, Stevie Wonder,
+          Marvin Gaye, and Al Green. The seeds were planted in the Central District,
+          where the boundary between sacred and secular was already thin &mdash; the same
+          musicians played the churches and the nightclubs.</p>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY ARC
+             ======================================== -->
+
+        <h2>The Seattle Years: 1947&ndash;1950</h2>
+
+        <div class="timeline-entry">
+          <div class="era">September 23, 1930 &mdash; Albany, Georgia</div>
+          <p>Born <strong>Ray Charles Robinson</strong>. Family moves to Greenville,
+          Florida. Begins losing sight at age four to glaucoma. Completely blind by seven.
+          Mother enrolls him at the <strong>Florida School for the Deaf and the Blind</strong>
+          in St. Augustine. Eight years of rigorous musical education: piano, clarinet,
+          saxophone, organ, trumpet, braille music notation.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1945 &mdash; Orphaned at Fifteen</div>
+          <p>Mother Aretha Williams dies (1945). Father Bailey Robinson had died the
+          previous year. Charles leaves the Florida school. Begins working as a musician
+          in Jacksonville and Orlando.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1947 &mdash; Seattle, Central District</div>
+          <p>At sixteen, Charles moves to Seattle &mdash; <em>&ldquo;the farthest city
+          from Florida on the map.&rdquo;</em> Settles in the <strong>Central District</strong>.
+          Sits in at <strong>Jackson Street</strong> clubs: the Black and Tan Club,
+          the Mardi Gras, the Elks Club. Meets <strong>Quincy Jones</strong> (degree 0),
+          then fourteen. They become close friends and musical collaborators.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1947&ndash;1948 &mdash; The Maxin Trio</div>
+          <p>Forms the <strong>Maxin Trio</strong> (also McSon Trio) modeled on the
+          <strong>Nat King Cole Trio</strong>: Charles on piano/vocals, <strong>Gossie
+          McKee</strong> on guitar, <strong>Milton Garred</strong> on bass. Plays
+          regularly at Jackson Street venues. Style is smooth, controlled, Cole-influenced.
+          The original Ray Charles voice has not yet emerged.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1948&ndash;1949 &mdash; First Recordings</div>
+          <p>Records for <strong>Down Beat Records</strong> (Seattle). <strong>&ldquo;Confession
+          Blues&rdquo;</strong> reaches <strong>No. 2 on the Billboard R&amp;B chart</strong>
+          (1949). One of the earliest nationally charting recordings from the Seattle
+          music scene. The &ldquo;before&rdquo; photograph: smooth, polished, no
+          gospel edge.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1950 &mdash; Departure</div>
+          <p>Leaves Seattle for <strong>Los Angeles</strong>. Driven by ambition:
+          the West Coast R&amp;B scene is larger, better connected to the national
+          recording industry. Signs with Swingtime Records, then <strong>Atlantic
+          Records</strong> (1952). The incubation is over; the invention begins.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1954&ndash;1959 &mdash; Atlantic Records</div>
+          <p>The gospel&ndash;R&amp;B fusion: &ldquo;I Got a Woman&rdquo; (1954),
+          &ldquo;A Fool for You&rdquo; (1955), &ldquo;Hallelujah I Love Her So&rdquo;
+          (1956), &ldquo;What&rsquo;d I Say&rdquo; (1959). <strong>Soul music is
+          invented.</strong></p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1962 &mdash; Modern Sounds</div>
+          <p><em>Modern Sounds in Country and Western Music</em>. 14 weeks at No. 1.
+          A Black R&amp;B singer claims country music as his own and proves that genre
+          boundaries are commercial constructions, not musical realities.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">June 10, 2004 &mdash; Beverly Hills, California</div>
+          <p>Ray Charles Robinson dies at age 73. Rock &amp; Roll Hall of Fame (1986,
+          inaugural class). 17 Grammy Awards. Lifetime Achievement Award (1987).
+          <em>&ldquo;I was born with music inside me.&rdquo;</em></p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Knowledge Architecture</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Incubation</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Thirty-first artist-city pattern. A short but transformative residency
+            during which the artist develops from talented to extraordinary &mdash;
+            but the full flowering happens elsewhere. Charles lived in Seattle for
+            three years. The Central District incubated him. Soul music was born
+            after he left.</p>
+            <div class="examples">Distinct from Export (degree 0): Jones was formed in Seattle;
+            Charles arrived with raw materials and used Seattle as a crucible.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Rough Brrit</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Thirty-first acoustic element. The rough, gravelly, voiced exhalation
+            that defined Charles&rsquo;s vocal signature &mdash; a sound between language
+            and music, between sacred and secular. Breaks the liquid triad (degrees 27&ndash;29).
+            The brook flowed smooth; the brrit IS friction.</p>
+            <div class="examples">Connects to &ldquo;language&rdquo; (degree 3, Anderson):
+            both Central District vocalists. Anderson speaks; Charles testifies.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Gospel&ndash;Secular Fusion</h4>
+            <div class="level level-foundational">Foundational</div>
+            <p>The deliberate combination of gospel music&rsquo;s emotional vocabulary
+            (call-and-response, ecstatic delivery, congregational singing) with secular
+            R&amp;B content. Charles did not borrow gospel inflections &mdash; he rebuilt
+            secular music on a gospel foundation. The result was soul music.</p>
+            <div class="examples">&ldquo;I Got a Woman&rdquo; adapted &ldquo;It Must Be
+            Jesus&rdquo;; &ldquo;What&rsquo;d I Say&rdquo; structured like a service.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Gospel-Soul Rasp</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Thirtieth deployment of the blue note thread. The gospel-soul rasp is
+            the blue note expressed as vocal grain &mdash; the catch, the growl, the
+            rough edge that turns a clean melodic line into a testimony. Not the
+            controlled bend of jazz but the involuntary crack of spiritual intensity
+            breaking through physical limits.</p>
+            <div class="genealogy"><strong>30 deployments:</strong> bass-line (0) through
+            boogaloo guitar bend (29) to gospel-soul rasp (30). The rasp is the
+            most emotionally loaded blue note in the engine.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Energy Level 4 &mdash; Tectonic-Kinetic (Tenth Consecutive)</h4>
+          <p><strong>Distribution: 2:13:6:10</strong> (E1:E2:E3:E4).
+          TENTH consecutive E=4 (degrees 21&ndash;30) &mdash; the first double-digit
+          energy streak. Tectonic-kinetic: not the energy of a loud singer but the
+          energy of a tectonic plate &mdash; a slow, massive, irresistible force that
+          shifts the entire genre landscape.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th></tr>
+            <tr><td>21</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td></tr>
+            <tr><td>22</td><td>Foxy Apollo</td><td>Collective-kinetic</td></tr>
+            <tr><td>23</td><td>Allen Stone</td><td>Vocal-kinetic</td></tr>
+            <tr><td>24</td><td>Ron Artis II</td><td>Dynastic-kinetic</td></tr>
+            <tr><td>25</td><td>Black Stax</td><td>Congregational-kinetic</td></tr>
+            <tr><td>26</td><td>Shaina Shepherd</td><td>Metamorphic-kinetic</td></tr>
+            <tr><td>27</td><td>The Dynamics</td><td>Incubator-kinetic</td></tr>
+            <tr><td>28</td><td>Night Owls</td><td>Ambient-kinetic</td></tr>
+            <tr><td>29</td><td>Boogaloo Joe Jones</td><td>Groove-kinetic</td></tr>
+            <tr><td><strong>30</strong></td><td><strong>Ray Charles</strong></td><td><strong>Tectonic-kinetic</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <ul>
+          <li><strong>Degree 0 &mdash; Quincy Jones:</strong> THE STRONGEST LINK. Teenage friends,
+          Central District, 1947&ndash;1950. Complementary accounts of the same friendship.</li>
+          <li><strong>Degree 3 &mdash; Ernestine Anderson:</strong> Jackson Street contemporaries.
+          Same circuit, same years, same community of Black musicians.</li>
+          <li><strong>Degree 4 &mdash; Floyd Standifer:</strong> Central District teacher-performer.
+          Teaching infrastructure coexisting with Charles&rsquo;s performing career.</li>
+          <li><strong>Degree 5 &mdash; Overton Berry:</strong> Piano succession. Berry became
+          the CD&rsquo;s resident pianist after Charles left. Opposite trajectories, same instrument.</li>
+          <li><strong>Degree 11 &mdash; Joe Brazil:</strong> Jackson Street salon tradition.</li>
+          <li><strong>Degree 25 &mdash; Black Stax:</strong> Central District continuity.
+          Same neighborhood, sixty years later.</li>
+          <li><strong>Degree 29 &mdash; Boogaloo Joe Jones:</strong> Consecutive label significance
+          (Prestige/Atlantic). Groove-kinetic energy descends from the gospel-R&amp;B
+          fusion Charles pioneered.</li>
+          <li><strong>Degree 23 &mdash; Allen Stone:</strong> Gospel-soul vocal lineage.
+          Stone&rsquo;s gospel training descends from the tradition Charles pioneered.</li>
+          <li><strong>Degree 24 &mdash; Ron Artis II:</strong> Dynastic soul inherits the
+          genre Charles created.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward Items for Degree 31</h4>
+          <ul>
+            <li><strong>TENTH E=4:</strong> Distribution 2:13:6:10. Double-digit streak. Track if continues.</li>
+            <li><strong>The rough brrit:</strong> 31st acoustic element. Breaks the liquid triad. New phase begins.</li>
+            <li><strong>R&amp;B/Jazz:</strong> Genre Stage 12. R&amp;B takes primary position for the first time.</li>
+            <li><strong>The Incubation:</strong> 31st artist-city pattern. Short transformative residency.</li>
+            <li><strong>Atlantic Records:</strong> Most important label in the engine. Eclipses Prestige.</li>
+            <li><strong>Central District at 30:</strong> Fifth return. Oscillation period shortening.</li>
+            <li><strong>Gospel-secular fusion:</strong> Genre-creating mechanism. The most significant
+            musical innovation documented in the engine.</li>
+            <li><strong>Blue note:</strong> THIRTY deployments. Gospel-soul rasp at 30.</li>
+            <li><strong>Quincy Jones bridge:</strong> Degree 0 / Degree 30. Strongest cross-degree
+            link in the engine. Complementary accounts.</li>
+          </ul>
+        </div>
+
+      </div><!-- .content -->
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Fast Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Sept. 23, 1930</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Birthplace</span>
+            <span class="stat-value">Albany, GA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">June 10, 2004</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle Years</span>
+            <span class="stat-value">1947&ndash;1950</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">R&amp;B/Jazz</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">4 (tectonic)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Atlantic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">30&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Version</span>
+            <span class="stat-value">v1.49.166</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">The rough brrit</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">The Incubation</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4 Streak</span>
+            <span class="stat-value">10 (21&ndash;30)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">First Chart Hit</span>
+            <span class="stat-value">Confession Blues (1949)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Soul Invention</span>
+            <span class="stat-value">I Got a Woman (1954)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Culmination</span>
+            <span class="stat-value">What&rsquo;d I Say (1959)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Breaker</span>
+            <span class="stat-value">Modern Sounds (1962)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Awards &amp; Honors</h4>
+          <div class="stat-row">
+            <span class="stat-label">Grammys</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Rock Hall</span>
+            <span class="stat-value">1986 (inaugural)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lifetime Ach.</span>
+            <span class="stat-value">Grammy 1987</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-Degree Links</h4>
+          <div class="stat-row">
+            <span class="stat-label">Primary</span>
+            <span class="stat-value">Deg 0 (Q. Jones)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Thread</span>
+            <span class="stat-value">0,3,4,5,11,25</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label Axis</span>
+            <span class="stat-value">Deg 29 (Prestige)</span>
+          </div>
+        </div>
+      </div><!-- .sidebar -->
+
+    </div><!-- .release-layout -->
+  </main>
+
+  <footer>
+    <p>Seattle 360 &mdash; Degree 30&deg; &mdash; Ray Charles &mdash; v1.49.166</p>
+    <p>Part of the <a href="../../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>
