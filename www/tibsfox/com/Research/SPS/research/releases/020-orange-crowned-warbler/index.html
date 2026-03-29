@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 20&deg; &mdash; Orange-crowned Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.fade { background: #546E7A; }
+    .theory-icon.trill { background: #00838F; }
+    .theory-icon.quintet { background: #7B1FA2; }
+    .theory-icon.release { background: #E65100; }
+    .theory-icon.eavesdrop { background: #2E7D32; }
+    .theory-icon.hidden { background: #795548; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Warbler quintet card */
+    .quintet-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFE082 100%);
+      border: 1px solid #FFB300;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .quintet-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Trill comparison card */
+    .trill-card {
+      background: linear-gradient(135deg, #E0F7FA 0%, #80DEEA 100%);
+      border: 1px solid #00ACC1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trill-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #006064;
+    }
+
+    /* Habitat card */
+    .habitat-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .habitat-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Hidden crown card */
+    .crown-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FFAB91 100%);
+      border: 1px solid #FF7043;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .crown-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">20&deg;</div>
+      <div class="release-title-block">
+        <h2>Orange-crowned Warbler</h2>
+        <div class="scientific">Leiothlypis celata &middot; Family Parulidae (New World Warblers)</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Trilling Descending Rattle &middot; Shrubby Slope &middot; Summer (Partial Migrant) &middot; Energy 3</div>
+
+    <blockquote>
+      On a brushy hillside above the city, a plain olive-green bird with no wing bars,
+      no eyering, no bold patches begins a rapid trill. The notes come fast &mdash; musical
+      and thin. Then the pitch drops. Then the volume drops. The trill descends and fades
+      until the boundary between song and silence dissolves. The Orange-crowned Warbler.
+      The plainest warbler in North America, named for a crown nobody sees, singing a song
+      that fades to nothing. The fifth Parulidae. The hidden crown. The release.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy &mdash; The Plainest Warbler</h2>
+        <p>
+          The Orange-crowned Warbler is a small passerine of the family <strong>Parulidae</strong>
+          (New World warblers). The species epithet <strong>celata</strong> is Latin for
+          &ldquo;hidden&rdquo; &mdash; named by <strong>Thomas Say</strong> in 1823 for the
+          faint orange-rufous crown patch concealed beneath olive crown feathers. The patch
+          is <strong>almost never visible</strong> in the field. A bird named for what you
+          cannot see. Formerly in <em>Vermivora</em>, reassigned to <strong><em>Leiothlypis</em></strong>
+          (Greek: &ldquo;smooth finch&rdquo;) by Lovette et al. (2010) when molecular
+          phylogenetics revealed <em>Vermivora</em> was polyphyletic.
+        </p>
+        <p>
+          The PNW subspecies is <strong><em>L. c. lutescens</em></strong> &mdash; the
+          brightest, most yellow form, breeding along the Pacific coast. Even at its
+          brightest, the Orange-crowned Warbler remains the <strong>plainest of North
+          American warblers</strong>: olive-green above, dull yellowish below, faint
+          streaking, no wing bars, no bold eye markings. Identification by the
+          <em>absence</em> of field marks. The warbler whose identity IS its lack of identity.
+        </p>
+
+        <!-- Hidden Crown Card -->
+        <div class="crown-card">
+          <h3>The Hidden Crown: Names That Reference What You Cannot See</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The orange crown patch is concealed beneath olive feathers and only revealed
+            during moments of agitation or display. Most birders who have observed hundreds
+            of Orange-crowned Warblers have never seen it. The bird is named for its secret.
+            This connects to a broader engine theme:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Hidden Feature</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0&deg;</td><td>Great Blue Heron</td><td>Silence &mdash; sound defined by its absence</td></tr>
+              <tr><td>4&deg;</td><td>Spotted Owl</td><td>Invisible in darkness &mdash; heard, not seen</td></tr>
+              <tr><td>10&deg;</td><td>Bushtit</td><td>Signal at the noise floor &mdash; barely audible</td></tr>
+              <tr style="background: rgba(255,112,67,0.15); font-weight: 600;"><td><strong>20&deg;</strong></td><td><strong>Orange-crowned Warbler</strong></td><td><strong>Crown concealed &mdash; named for what you cannot see</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Warbler Quintet Card -->
+        <div class="quintet-card">
+          <h3>The Warbler Quintet: Five Parulidae, Five Strategies</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Five warblers, five genera, five ways to end a song:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Song Strategy</th><th>Song Ending</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>14&deg;</td><td>MacGillivray&rsquo;s</td><td><em>Geothlypis</em></td><td>Ternary / AAB</td><td>Resolution (contrasting note)</td></tr>
+              <tr><td>15&deg;</td><td>Wilson&rsquo;s</td><td><em>Cardellina</em></td><td>Accelerando</td><td>Interruption (builds &amp; stops)</td></tr>
+              <tr><td>16&deg;</td><td>Yellow</td><td><em>Setophaga</em></td><td>Crescendo</td><td>Climax (brightest note)</td></tr>
+              <tr><td>17&deg;</td><td>Yellowthroat</td><td><em>Geothlypis</em></td><td>Hook</td><td>Repetition (constant energy)</td></tr>
+              <tr style="background: rgba(255,179,0,0.18); font-weight: 600;"><td><strong>20&deg;</strong></td><td><strong>Orange-crowned</strong></td><td><strong><em>Leiothlypis</em></strong></td><td><strong>Descending trill</strong></td><td><strong>Evaporation (fades to nothing)</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #E65100; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            Five song endings exhaust the possibilities: resolve, interrupt, climax, repeat, fade.
+            The Parulidae quintet is a complete taxonomy of conclusions.
+          </p>
+        </div>
+
+        <!-- Bioacoustics -->
+        <h2>Bioacoustics &mdash; The Trilling Descending Rattle</h2>
+        <h3>The Song That Fades</h3>
+        <p>
+          The Orange-crowned Warbler&rsquo;s song is a <strong>rapid trill</strong> &mdash;
+          a series of musical notes delivered at 8&ndash;16 notes per second &mdash; that
+          <strong>descends in pitch and fades in volume</strong> toward the end. The song
+          has a three-part architecture: a bright onset, a descending middle, and a
+          <strong>gradual dissolution</strong> into silence. The song does not end with a
+          terminal accent, a contrasting syllable, or an abrupt cutoff. It
+          <strong>evaporates</strong>. The boundary between song and silence is blurred.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>3.0&ndash;6.5 kHz (across the trill)</td></tr>
+            <tr><td>Starting pitch</td><td>~4.5&ndash;6.5 kHz (initial notes, highest)</td></tr>
+            <tr><td>Terminal pitch</td><td>~3.0&ndash;4.5 kHz (final notes, lowest)</td></tr>
+            <tr><td>Trill rate</td><td>~8&ndash;16 notes per second</td></tr>
+            <tr><td>Song duration</td><td>1.5&ndash;3.0 s</td></tr>
+            <tr><td>Timbre</td><td>Musical, thin, colorless &mdash; without strong harmonics</td></tr>
+            <tr><td>Key property</td><td><strong>TRIPLE DESCENT &mdash; pitch, volume, and rate all fall</strong></td></tr>
+            <tr><td>Key property 2</td><td><strong>EVAPORATION &mdash; no terminal gesture, song fades to nothing</strong></td></tr>
+          </tbody>
+        </table>
+
+        <!-- Trill Comparison Card -->
+        <div class="trill-card">
+          <h3>Trill Comparison: Steady-State vs. Decay</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Both produce rapid trills near the perceptual fusion threshold, but their
+            envelopes are fundamentally different:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Oregon Junco (11&deg;)</th><th>Orange-crowned (20&deg;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pitch contour</td><td>FLAT (constant)</td><td><strong>DESCENDING (drops)</strong></td></tr>
+              <tr><td>Amplitude contour</td><td>FLAT (constant)</td><td><strong>DESCENDING (fades)</strong></td></tr>
+              <tr><td>Timbre</td><td>Metallic, rich harmonics</td><td>Musical, thin, pure</td></tr>
+              <tr><td>Ending</td><td>Abrupt cessation</td><td><strong>Gradual fade (evaporation)</strong></td></tr>
+              <tr><td>Synth analogy</td><td>Oscillator (constant output)</td><td><strong>Oscillator + release envelope</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #006064; margin: 0.5rem 0 0; font-family: system-ui, sans-serif;">
+            The junco persists; the warbler dissipates. One is a sustained oscillator.
+            The other is a note with the release knob turned up &mdash; a long, slow ADSR release.
+          </p>
+        </div>
+
+        <h3>The Triple Descent</h3>
+        <p>
+          The Orange-crowned Warbler&rsquo;s song descends in <strong>three simultaneous
+          parameters</strong>: pitch falls, amplitude falls, and trill rate sometimes
+          decelerates. This is a triple descent &mdash; all energy vectors pointing downward
+          at once. The Veery (degree 19&deg;) descends in pitch between discrete phrases
+          (a staircase). The Orange-crowned descends in pitch <em>within</em> a continuous
+          trill (a ramp). Both descend, but the Veery&rsquo;s descent is ethereal and
+          resolved; the Orange-crowned&rsquo;s is mundane and dissolved.
+        </p>
+
+        <!-- Habitat -->
+        <h2>Shrubby Slope &mdash; Breaking the Riparian Streak</h2>
+
+        <div class="habitat-card">
+          <h3>The First Upland Ecosystem Since Degree 13</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Orange-crowned Warbler breeds on <strong>shrubby slopes</strong> &mdash;
+            open, brushy hillsides with mixed low vegetation: salal, oceanspray, snowberry,
+            young conifers, and deciduous shrubs. This is a <strong>departure from the
+            riparian dominance</strong> of degrees 14&ndash;19. Six of the previous seven
+            degrees were riparian-associated. The shrubby slope is the first genuinely
+            upland ecosystem since the Hutton&rsquo;s Vireo&rsquo;s oak woodland at
+            degree 13&deg;.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Recent Ecosystems</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>14&deg; Dense shrub</td><td>Includes riparian edge</td></tr>
+              <tr><td>15&deg; Willow riparian</td><td>Riparian</td></tr>
+              <tr><td>16&deg; Riparian willow</td><td>Riparian</td></tr>
+              <tr><td>17&deg; Marsh edge</td><td>Wetland</td></tr>
+              <tr><td>18&deg; Riparian forest</td><td>Riparian</td></tr>
+              <tr><td>19&deg; Lowland riparian</td><td>Riparian (range edge)</td></tr>
+              <tr style="background: rgba(102,187,106,0.18); font-weight: 600;"><td><strong>20&deg; Shrubby slope</strong></td><td><strong>Upland (no water association)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Music Theory -->
+        <h2>Music Theory Mapping</h2>
+        <p>
+          <strong>The fade as compositional device.</strong> The fade-out was the most
+          common ending in popular music from the 1950s through the 1990s &mdash; 30&ndash;40%
+          of Billboard Hot 100 hits used fade-out endings. The Orange-crowned Warbler&rsquo;s
+          song IS a natural fade-out: the trill begins at full energy, descends in pitch
+          and volume, and dissolves into the ambient soundscape. No button says &ldquo;stop.&rdquo;
+          The song attenuates. The energy decays.
+        </p>
+        <p>
+          <strong>The ADSR envelope.</strong> In synthesizer design, every sound is shaped
+          by Attack, Decay, Sustain, Release. The <strong>Release</strong> parameter controls
+          how quickly the sound fades to zero after the note ends. A short release = sharp
+          cutoff. A long release = lingering fade. The Orange-crowned Warbler&rsquo;s song
+          has a <strong>long release</strong> &mdash; the trill decays gradually like a
+          synth pad with the release knob turned up. This is the <strong>21st acoustic
+          element</strong> in the engine&rsquo;s progression: <strong>the release</strong>.
+        </p>
+        <p>
+          <strong>The warbler quintet as complete ending taxonomy.</strong> Five Parulidae,
+          five song endings: resolve (14&deg;), interrupt (15&deg;), climax (16&deg;),
+          repeat (17&deg;), fade (20&deg;). Every possible way to end a song is represented.
+          The family that teaches every conclusion.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Mapping</h3>
+          <div class="theory-node">
+            <div class="theory-icon fade">F</div>
+            <div class="theory-content">
+              <h4>The Fade / Evaporation <span class="theory-level foundational">Foundational</span></h4>
+              <p>The song does not end &mdash; it dissolves. Pitch descends, amplitude fades, the boundary between song and silence blurs. The natural equivalent of the pop music fade-out. The first species whose song ending is a gradual disappearance rather than a defined gesture.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon release">R</div>
+            <div class="theory-content">
+              <h4>ADSR Release Envelope <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The Orange-crowned&rsquo;s trill decays like a synthesizer note with a long release parameter. Where the Oregon Junco (11&deg;) is a constant oscillator (instant off), the Orange-crowned is an oscillator with a slow release envelope. Same trill mechanism, different amplitude shaping. The 21st acoustic element: the release.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon quintet">Q</div>
+            <div class="theory-content">
+              <h4>The Parulidae Quintet <span class="theory-level advanced">Advanced</span></h4>
+              <p>Five warblers, five genera, five song strategies, five endings. Resolve (14&deg;), interrupt (15&deg;), climax (16&deg;), repeat (17&deg;), fade (20&deg;). The quintet maps every possible energy trajectory: flat-then-down, accelerating, ascending, flat, descending. A complete taxonomy of song conclusions.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon trill">T</div>
+            <div class="theory-content">
+              <h4>Trill with Parametric Decay <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Degree 11 introduced the trill as steady-state rapid repetition. Degree 20 revisits the trill with parametric decay &mdash; pitch, amplitude, and rate all descend simultaneously. The triple descent: three parameters falling at once. The trill that melts.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon eavesdrop">E</div>
+            <div class="theory-content">
+              <h4>Eavesdropping Network &mdash; 5th Node <span class="theory-level foundational">Foundational</span></h4>
+              <p>Orange-crowned Warblers respond to chickadee alarm calls in mixed winter flocks. Fifth node in the interspecies alarm network: two broadcasters (Black-capped &amp; Chestnut-backed Chickadees) and three receivers (Nuthatch, Kinglet, and now Orange-crowned Warbler). Parulidae enters the eavesdropping system.</p>
+            </div>
+          </div>
+          <div class="theory-node">
+            <div class="theory-icon hidden">H</div>
+            <div class="theory-content">
+              <h4>The Hidden Crown <span class="theory-level foundational">Foundational</span></h4>
+              <p>Named for a crown patch almost never visible in the field. Identification by absence of field marks. The plainest warbler, carrying a concealed diagnostic feature. Connects to the engine&rsquo;s theme of hidden features: silence (0&deg;), invisibility (4&deg;), noise floor (10&deg;), concealed crown (20&deg;).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-014</strong> &mdash; MacGillivray&rsquo;s Warbler
+            <p>WARBLER QUINTET &mdash; first member. Degree 14&deg; introduced Parulidae with the AAB narrative song that resolves. Degree 20&deg; fades. Same family, opposite endings: the MacGillivray&rsquo;s arrives at a destination; the Orange-crowned dissolves without arriving.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-015</strong> &mdash; Wilson&rsquo;s Warbler
+            <p>ACCELERANDO VS. FADE. Wilson&rsquo;s (15&deg;) accelerates and stops &mdash; energy builds then cuts off. Orange-crowned (20&deg;) decelerates and fades &mdash; energy drains and dissolves. Both end without resolution, but opposite trajectories.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-016</strong> &mdash; Yellow Warbler
+            <p>CRESCENDO VS. DECRESCENDO. Yellow (16&deg;) ascends in pitch and volume. Orange-crowned (20&deg;) descends in pitch and volume. Perfect mirror pair &mdash; the brightest warbler vs. the most subdued.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-017</strong> &mdash; Common Yellowthroat
+            <p>THE HOOK VS. THE FADE. Yellowthroat (17&deg;) repeats a catchy phrase at constant energy &mdash; maximally memorable. Orange-crowned (20&deg;) delivers a trill that fades to nothing &mdash; minimally memorable. The catchiest vs. the most forgettable.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011</strong> &mdash; Oregon Junco
+            <p>TRILL COMPARISON. Both produce rapid trills at the fusion threshold. The junco&rsquo;s trill is steady-state (constant, abrupt stop). The Orange-crowned&rsquo;s is decaying (descending, gradual fade). Oscillator vs. oscillator with release envelope.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-019</strong> &mdash; Veery
+            <p>DESCENDING PITCH &mdash; DIFFERENT MECHANISM. Both descend: the Veery in discrete steps between phrases (staircase), the Orange-crowned within a continuous trill (ramp). Ethereal vs. mundane. Resolved vs. dissolved.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI</strong> &mdash; Wings of the PNW
+            <p>Fifth Parulidae in the AVI documentation. Records the Orange-crowned Warbler as one of the most common and widespread warblers in the PNW &mdash; abundant yet overlooked.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO</strong> &mdash; Ecology of the PNW
+            <p>Shrubby slope ecology: early-successional habitats, post-disturbance shrub communities. The Orange-crowned&rsquo;s habitat connects to ECO&rsquo;s documentation of successional dynamics and hillside vegetation structure.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36</strong> &mdash; Seattle 360 Music
+            <p>Part A parallel: Whitney Menge at degree 20&deg;. Both are understated presences whose quality rewards attention &mdash; self-released R&amp;B from Rainier Valley, the common warbler nobody notices. Hidden crown, quiet voice.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Gilbert, W.M., Sogge, M.K., &amp; Van Riper III, C. (2020). &ldquo;Orange-crowned Warbler.&rdquo; <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Cornell Lab of Ornithology. All About Birds: Orange-crowned Warbler. allaboutbirds.org</li>
+          <li>Seattle Audubon Society. BirdWeb: Orange-crowned Warbler. birdweb.org</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Lovette, I.J. et al. (2010). Comprehensive multilocus phylogeny for the wood-warblers. <em>Mol Phylogenet Evol</em> 57(2). [Established <em>Leiothlypis</em>.]</li>
+          <li>Chesser, R.T. et al. (2011). Fifty-second supplement to AOU Check-list. <em>The Auk</em> 128(3).</li>
+          <li>Catchpole, C.K. &amp; Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. Cambridge University Press.</li>
+          <li>Kroodsma, D.E. (2005). <em>The Singing Life of Birds</em>. Houghton Mifflin.</li>
+          <li>Templeton, C.N. et al. (2005). Chickadees encode predator size. <em>Science</em> 308. [Alarm broadcast system.]</li>
+          <li>Magrath, R.D. et al. (2015). Eavesdropping on heterospecific alarm calls. <em>Biol Rev</em> 90(2).</li>
+          <li>Sridhar, H. et al. (2009). Mixed-species foraging flocks. <em>Anim Behav</em> 78(2).</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Washington Dept. of Fish &amp; Wildlife. Orange-crowned Warbler. wdfw.wa.gov</li>
+          <li>Huron, D. (2006). <em>Sweet Anticipation</em>. MIT Press. [Fade-out endings.]</li>
+          <li>Roads, C. (1996). <em>The Computer Music Tutorial</em>. MIT Press. [ADSR envelope.]</li>
+          <li>Macaulay Library. Orange-crowned Warbler recordings. Cornell Lab of Ornithology.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Parulidae</div>
+          <div class="stat-detail">New World Warblers &mdash; 5th in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Leiothlypis</em></div>
+          <div class="stat-detail">4th warbler genus in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Length</div>
+          <div class="stat-value">4.5&ndash;5.5 in</div>
+          <div class="stat-detail">11.5&ndash;14 cm</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">7&ndash;11 g</div>
+          <div class="stat-detail">One of the lightest warblers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Plain Olive</div>
+          <div class="stat-detail">No wing bars, no eyering, hidden crown</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">PNW Status</div>
+          <div class="stat-value">Common</div>
+          <div class="stat-detail">Widespread &mdash; partial migrant</div>
+        </div>
+
+        <h3>Acoustic Profile</h3>
+        <div class="stat-card">
+          <div class="stat-label">Song Type</div>
+          <div class="stat-value">Descending trill</div>
+          <div class="stat-detail">Fades in pitch, volume, and rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">3.0&ndash;6.5 kHz</div>
+          <div class="stat-detail">Descends across the trill</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Trill Rate</div>
+          <div class="stat-value">8&ndash;16 /sec</div>
+          <div class="stat-detail">Near perceptual fusion threshold</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Key Property</div>
+          <div class="stat-value">The Fade</div>
+          <div class="stat-detail">Song evaporates &mdash; no terminal gesture</div>
+        </div>
+
+        <h3>Unit Circle Position</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">20&deg;</div>
+          <div class="stat-detail">The release &mdash; the fade, the ADSR envelope</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #C62828;">3</div>
+          <div class="stat-detail">Sixth energy-3 &mdash; plateau persists</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Shrubby Slope</div>
+          <div class="stat-detail">Upland &mdash; breaks riparian streak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Partial migrant &mdash; some overwinter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Synthesis</div>
+          <div class="stat-value">Trill + Release</div>
+          <div class="stat-detail">Rapid repetition with ADSR decay</div>
+        </div>
+
+        <h3>Warbler Quintet</h3>
+        <div class="stat-card">
+          <div class="stat-label">14&deg; MacGillivray&rsquo;s</div>
+          <div class="stat-value">Resolve</div>
+          <div class="stat-detail"><em>Geothlypis</em> &mdash; AAB narrative</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">15&deg; Wilson&rsquo;s</div>
+          <div class="stat-value">Interrupt</div>
+          <div class="stat-detail"><em>Cardellina</em> &mdash; accelerando</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">16&deg; Yellow</div>
+          <div class="stat-value">Climax</div>
+          <div class="stat-detail"><em>Setophaga</em> &mdash; crescendo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">17&deg; Yellowthroat</div>
+          <div class="stat-value">Repeat</div>
+          <div class="stat-detail"><em>Geothlypis</em> &mdash; hook</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">20&deg; Orange-crowned</div>
+          <div class="stat-value">Fade</div>
+          <div class="stat-detail"><em>Leiothlypis</em> &mdash; evaporation</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 20&deg; &mdash; S36</div>
+          <div class="parallel-name">Whitney Menge</div>
+          <div class="parallel-detail">Both are understated presences whose craft rewards attention. Menge&rsquo;s Jazz/R&amp;B is self-released and community-rooted in Rainier Valley. The Orange-crowned Warbler is common, plain, and overlooked. Both hide their best qualities beneath unassuming surfaces. Hidden crown. Quiet voice. The reveal requires attention.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Release 020 of 360 &middot;
+      <a href="../019-veery/index.html">Degree 19&deg;: Veery</a> &middot;
+      <a href="../017-common-yellowthroat/index.html">Degree 17&deg;: Common Yellowthroat</a> &middot;
+      <a href="../014-macgillivrays-warbler/index.html">Degree 14&deg;: MacGillivray&rsquo;s Warbler</a> &middot;
+      <a href="../011-oregon-junco/index.html">Degree 11&deg;: Oregon Junco</a> &middot;
+      <a href="../../../index.html">The Sound of Puget Sound</a> &middot;
+      <a href="../../../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
