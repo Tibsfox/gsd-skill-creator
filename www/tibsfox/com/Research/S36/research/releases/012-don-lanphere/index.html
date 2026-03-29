@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 12&deg; &mdash; Don Lanphere &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .redemption-box {
+      background: #FCE4EC;
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .redemption-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #AD1457;
+      font-family: system-ui, sans-serif;
+    }
+    .redemption-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .bebop-root-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .bebop-root-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .bebop-root-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .bebop-root-box td, .bebop-root-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .bebop-root-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+
+    .energy-1-box {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-1-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-1-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-1-box td, .energy-1-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #E1BEE7;
+    }
+    .energy-1-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #6A1B9A;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">12&deg;</div>
+      <div>
+        <h1>Don Lanphere</h1>
+        <div class="subtitle">Jazz &middot; Alto &amp; Tenor Saxophone &middot; Bebop &mdash; Wenatchee 1928 &rarr; NYC 52nd Street &rarr; Seattle &mdash; d. 2003</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../011-joe-brazil/index.html">Degree 11&deg; (Brazil)</a>
+      <a href="../009-hadley-caliman/index.html">Degree 9&deg; (Caliman)</a>
+      <a href="../010-bud-shank/index.html">Degree 10&deg; (Shank)</a>
+      <a href="../008-gary-peacock/index.html">Degree 8&deg; (Peacock)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Wenatchee kid. Blue Note sessions at 21. Fats Navarro&rsquo;s saxophone player.
+          Heroin took thirty years. Faith gave them back.
+          Fresh Sound Records, Seattle jazz elder, the bebop root enters the engine.
+          The prodigal returns at degree 12 &mdash; the quiet fire after the storm.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Bebop Root</h2>
+
+        <p>Donald Byrd Lanphere was born on June 26, 1928, in <strong>Wenatchee,
+        Washington</strong> &mdash; a small city on the Columbia River in the eastern
+        Cascades foothills, the Apple Capital of the World. He is the first bebop
+        musician in the S36 engine, the first artist born in eastern Washington, and
+        the first whose career arc follows the <strong>rise-fall-redemption</strong>
+        pattern.</p>
+
+        <p>Lanphere showed exceptional musical talent in Wenatchee&rsquo;s public schools,
+        studied at <strong>Northwestern University</strong> in Evanston, Illinois, and by
+        the late 1940s had moved to New York City and inserted himself into the most
+        important musical revolution of the twentieth century.</p>
+
+        <p>In <strong>1949</strong>, at the age of 21, Lanphere recorded with
+        <strong>Fats Navarro</strong> &mdash; the trumpet virtuoso whose technical
+        brilliance and harmonic sophistication made him one of the two most important
+        bebop trumpet voices. The sessions, released on <strong>Blue Note Records</strong>,
+        are among the most important bebop recordings in existence. Lanphere&rsquo;s
+        alto saxophone on these sessions is fluent, confident, and fully inside the
+        bebop language. He was not a tourist. He belonged.</p>
+
+        <p>Lanphere also played with <strong>Woody Herman&rsquo;s</strong> band and
+        sat in on <strong>52nd Street</strong> &mdash; the legendary block of nightclubs
+        where bebop was performed nightly, placing him in proximity to Charlie Parker,
+        Dizzy Gillespie, Bud Powell, and Thelonious Monk. He was one of the very few
+        musicians from the Pacific Northwest who was physically present at the birth
+        of the music.</p>
+
+        <p>Lanphere died on October 10, 2003, at the age of 75, in Seattle &mdash;
+        the chronologically earliest death among S36 artists.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Fresh Sound Records;
+        Blue Note session discography; AllMusic; DownBeat; The Seattle Times; Wenatchee World;
+        KNKX Jazz Northwest; Paul de Barros, <em>Jackson Street After Hours</em>, 1993</p>
+
+        <!-- ========================================
+             REDEMPTION ARC
+             ======================================== -->
+
+        <div class="redemption-box">
+          <h4>The Redemption Arc: Rise, Fall, Return</h4>
+          <p>Lanphere&rsquo;s career divides into three phases:
+          <strong>Phase I &mdash; The Ascent</strong> (1940s-early 1950s): Wenatchee prodigy,
+          Northwestern, NYC, 52nd Street, Blue Note sessions with Fats Navarro at age 21.
+          <strong>Phase II &mdash; The Fall</strong> (1950s-1970s): Heroin addiction.
+          Charlie Parker&rsquo;s drug use modeled a lethal syllogism for younger musicians:
+          Parker plays like a god, Parker uses heroin, therefore heroin produces the playing.
+          The syllogism killed dozens and damaged hundreds. Lanphere lost approximately
+          <strong>thirty years</strong>.
+          <strong>Phase III &mdash; The Return</strong> (1980s-2003): Recovery through faith
+          community. Fresh Sound Records (Barcelona) gave him a recording platform. Seattle
+          jazz elder. The bebop vocabulary intact, but burning at a different temperature.
+          <strong>The first recovery narrative in the engine.</strong></p>
+        </div>
+
+        <!-- ========================================
+             BEBOP ROOT NODE
+             ======================================== -->
+
+        <div class="bebop-root-box">
+          <h4>Bebop as the Missing Root: The Jazz Genealogy Tree</h4>
+          <table>
+            <tr>
+              <th>Form</th>
+              <th>Era</th>
+              <th>S36 Artist</th>
+              <th>Character</th>
+            </tr>
+            <tr>
+              <td><strong>Bebop (ROOT)</strong></td>
+              <td><strong>1940s</strong></td>
+              <td><strong>Lanphere (12&deg;)</strong></td>
+              <td><strong>Harmonic complexity at speed &mdash; chromatic approach, enclosures, tritone subs</strong></td>
+            </tr>
+            <tr>
+              <td>Hard Bop</td>
+              <td>1950s-60s</td>
+              <td>Caliman (9&deg;)</td>
+              <td>Blues intensity + rhythmic grounding + bebop vocabulary</td>
+            </tr>
+            <tr>
+              <td>Cool Jazz</td>
+              <td>1950s</td>
+              <td>Shank (10&deg;)</td>
+              <td>Relaxed intensity + subtracted heat + bebop sophistication</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">The engine now documents the
+          <strong>root and both primary branches</strong> of post-war jazz evolution through
+          direct artist lineage. Lanphere learned bebop from its creators; Caliman and Shank
+          carry its descendant vocabularies. The tree has a trunk now.</p>
+        </div>
+
+        <!-- ========================================
+             BEBOP VOCABULARY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Bebop Vocabulary: The Language That Changed Everything</h2>
+
+        <p>Bebop invented a new improvisational vocabulary in the 1940s. Lanphere learned
+        it <strong>directly from its creators</strong> on 52nd Street and in Blue Note
+        sessions:</p>
+
+        <ul>
+          <li><strong>Chromatic approach notes:</strong> Targeting chord tones from a
+          half-step above or below. Fluid, chromatic melodic motion organized around
+          harmonic structure. The atomic unit of bebop melody.</li>
+          <li><strong>Enclosure patterns:</strong> Surrounding a target note by playing
+          notes immediately above and below before arriving (e.g., Ab-F#-G to target G).
+          Creates gravitational inevitability &mdash; the target feels &ldquo;earned.&rdquo;
+          Parker used enclosures obsessively; Lanphere absorbed them directly.</li>
+          <li><strong>Tritone substitution at speed:</strong> Replacing a dominant chord
+          with the dominant a tritone away (G7 &rarr; Db7), executed in real time during
+          improvisation. Requires harmonic vocabulary so deeply internalized that substitution
+          is automatic.</li>
+          <li><strong>Chord extensions beyond the seventh:</strong> 9ths, 11ths, 13ths,
+          and altered extensions (b9, #9, #11, b13) as standard melodic targets.
+          Notes considered &ldquo;wrong&rdquo; in swing-era playing became the standard
+          palette.</li>
+          <li><strong>Rhythmic displacement:</strong> Shifting accents to weak beats and
+          offbeats, creating perpetual rhythmic suspension. The rhythmic analogue of
+          harmonic complexity.</li>
+        </ul>
+
+        <p><strong>Twelfth chromaticism deployment</strong> &mdash; and the ROOT. Bebop
+        structural chromaticism is not ornamental, not timbral, not cool-register: it is
+        <strong>chromatic motion as the organizing principle of melody itself</strong>.
+        All subsequent jazz chromaticism descends from this vocabulary.</p>
+
+        <!-- ========================================
+             ALTO-TO-TENOR
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Alto-to-Tenor Doubling: Register Shift Across a Career</h2>
+
+        <table>
+          <thead>
+            <tr><th>Dimension</th><th>Alto Saxophone</th><th>Tenor Saxophone</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Range</strong></td>
+              <td>Eb instrument, higher register</td>
+              <td>Bb instrument, lower register</td>
+            </tr>
+            <tr>
+              <td><strong>Timbre</strong></td>
+              <td>Bright, cutting, vocal-upper-register</td>
+              <td>Warm, dark, vocal-lower-register</td>
+            </tr>
+            <tr>
+              <td><strong>Bebop role</strong></td>
+              <td>Parker&rsquo;s voice (the canonical bebop instrument)</td>
+              <td>Gordon, Rollins, Coltrane (the post-bebop evolution)</td>
+            </tr>
+            <tr>
+              <td><strong>Lanphere</strong></td>
+              <td>Early career (NYC sessions, Navarro recordings)</td>
+              <td>Later career (Fresh Sound albums, Seattle performances)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Lanphere&rsquo;s personal evolution from alto to tenor <strong>recapitulates
+        the genre&rsquo;s evolution</strong> from bebop to post-bop. The alto defined
+        bebop (Parker). The tenor defined what came after (Coltrane, Rollins). One player&rsquo;s
+        career arc mirrors the music&rsquo;s own development.</p>
+
+        <!-- ========================================
+             THE NAVARRO SESSIONS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>The 1949 Blue Note Sessions</h2>
+
+        <p>The sessions with <strong>Fats Navarro</strong> are primary documents &mdash;
+        audio evidence of a PNW-born musician participating in the foundational act of
+        bebop. Navarro&rsquo;s trumpet: clean, precise, harmonically advanced, burning
+        with intensity. Lanphere&rsquo;s alto: fluent, confident, fully inside the language.</p>
+
+        <p>Navarro died on July 7, 1950, at the age of <strong>26</strong> &mdash; one
+        year after these sessions. Tuberculosis, exacerbated by heroin. The line runs:
+        <strong>Navarro &rarr; Brown &rarr; Hubbard &rarr; Shaw</strong> &rarr; the entire
+        modern jazz trumpet tradition. Lanphere was in the room when it started.</p>
+
+        <p>This is the inverse of the salon model (Brazil, degree 11&deg;): where Brazil&rsquo;s
+        knowledge survived only in students present, Navarro and Lanphere&rsquo;s knowledge
+        survives because someone <strong>pressed record</strong>.</p>
+
+        <!-- ========================================
+             ENERGY-1 CONTRAST
+             ======================================== -->
+
+        <div class="energy-1-box">
+          <h4>Energy 1: The Introvert&rsquo;s Fire &mdash; Second Deployment</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Peacock (8&deg;, energy 1)</th>
+              <th>Lanphere (12&deg;, energy 1)</th>
+            </tr>
+            <tr>
+              <td>Source of quiet</td>
+              <td>Zen practice, ego dissolution</td>
+              <td>Recovery, faith, hard-won stillness</td>
+            </tr>
+            <tr>
+              <td>Musical expression</td>
+              <td>Sparse, floating, ECM ambient space</td>
+              <td>Bebop vocabulary, deliberate, fire turned inward</td>
+            </tr>
+            <tr>
+              <td>Relationship to silence</td>
+              <td>Silence as presence (space between notes)</td>
+              <td>Silence as history (thirty years of not playing)</td>
+            </tr>
+            <tr>
+              <td>Career pattern</td>
+              <td>Steady, continuous, decades of active playing</td>
+              <td>Interrupted &mdash; brilliant youth, lost decades, late return</td>
+            </tr>
+            <tr>
+              <td>PNW connection</td>
+              <td>Settled by choice, gravitational presence</td>
+              <td>Born there, left for NYC, returned after the fall</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Energy-1 is not passivity,
+          not withdrawal, not low output. It is <strong>intensity redirected inward</strong>.
+          Peacock&rsquo;s quiet is chosen (meditative). Lanphere&rsquo;s quiet is earned
+          (redemptive). The introvert&rsquo;s fire.</p>
+        </div>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1928 &mdash; Born in Wenatchee, Washington</div>
+          <p>Born on June 26, 1928 &mdash; Apple Capital of the World, Columbia River,
+          eastern Cascades foothills. Fourteenth educational pipeline in the engine.
+          First eastern Washington origin.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1940s &mdash; Northwestern University &amp; New York</div>
+          <p>Studied at Northwestern University (Evanston, Illinois). Moved to
+          <strong>New York City</strong> and immersed in the 52nd Street bebop scene.
+          Played alongside the creators of the music: Parker, Gillespie, Powell, Monk.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1949 &mdash; The Fats Navarro Blue Note Sessions</div>
+          <p>Recorded with <strong>Fats Navarro</strong> on Blue Note Records at age 21.
+          Sessions including &ldquo;Go&rdquo; are among the most important bebop recordings.
+          Alto saxophone fully integrated into the bebop language. Navarro died one year later.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Early 1950s &mdash; Woody Herman &amp; The Descent</div>
+          <p>Played with Woody Herman&rsquo;s band. Heroin addiction took hold. The bebop
+          scene&rsquo;s drug culture &mdash; modeled on Charlie Parker &mdash; claimed
+          another musician.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1950s&ndash;Early 1980s &mdash; The Lost Years</div>
+          <p>Approximately <strong>thirty years of silence</strong>. Returned to Washington.
+          Disappeared from the national jazz scene. The decades when hard bop, cool jazz,
+          modal jazz, free jazz, and fusion were invented &mdash; Lanphere missed all of it.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1980s &mdash; The Return</div>
+          <p>Got clean through faith community involvement. Began performing again in Seattle.
+          <strong>Fresh Sound Records</strong> (Barcelona) provided a recording platform.
+          Released a series of albums documenting his mature voice: still bebop-rooted, but
+          carrying the weight of recovery.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1980s&ndash;2003 &mdash; Seattle Jazz Elder</div>
+          <p>Teaching, performing locally, and serving as a <strong>living link</strong> to
+          the music&rsquo;s foundational era. One of the last surviving musicians who had
+          played with Fats Navarro and been physically present on 52nd Street during
+          bebop&rsquo;s creation.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2003 &mdash; Death in Seattle</div>
+          <p>Died on October 10, 2003, at the age of 75, in Seattle. The chronologically
+          earliest death among S36 artists. The last musician who had played with
+          Fats Navarro.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Four theory nodes &mdash; the foundational bebop vocabulary (root of the jazz
+        theory tree), alto-to-tenor doubling and register shift, the twelfth blue note
+        deployment, and the addiction-and-recovery systemic pattern.</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Bebop Vocabulary</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Chromatic approach notes, enclosure patterns, tritone substitution at speed,
+            chord extensions beyond the seventh, rhythmic displacement. The foundational
+            improvisational language of modern jazz, invented in the 1940s. Lanphere
+            learned it directly from its creators. <strong>ROOT NODE</strong> of the jazz
+            theory genealogy &mdash; all subsequent vocabularies descend from this.</p>
+            <div class="examples">Parker (&ldquo;Ko-Ko,&rdquo; &ldquo;Donna Lee&rdquo;); Navarro + Lanphere (1949 Blue Note); Gillespie (&ldquo;A Night in Tunisia&rdquo;); Powell (&ldquo;Tempus Fugit&rdquo;)</div>
+            <div class="genealogy"><strong>Root:</strong> Hard bop (Caliman 9&deg;) and cool jazz (Shank 10&deg;) both descend from this vocabulary. Lanphere is the trunk; they are the branches. Twelfth chromaticism deployment &mdash; the most systematic and the historical ancestor of all subsequent jazz chromaticism.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Alto-to-Tenor Doubling</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Register shift across a career arc. Alto (bright, cutting, Parker&rsquo;s voice)
+            in NYC bebop sessions. Tenor (warm, dark, Coltrane&rsquo;s register) in Fresh Sound
+            comeback. Lanphere&rsquo;s personal evolution recapitulates the genre&rsquo;s
+            evolution from bebop (alto) to post-bop (tenor). Seventh node in the reed branch.</p>
+            <div class="examples">Lanphere (alto NYC, tenor Seattle); Sonny Stitt (doubled throughout career); Dexter Gordon (established tenor as post-bop voice)</div>
+            <div class="genealogy"><strong>Bridges:</strong> Caliman (9&deg;, tenor, hard bop) and Shank (10&deg;, alto, cool) represent single-horn positions. Lanphere played both, carrying the pre-split vocabulary on whichever horn the music required.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Bebop Chromatic Approach</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Twelfth deployment. Bebop systematized the blue note by integrating it
+            into chromatic approach vocabulary. The b3, b5, and b7 positions are targeted
+            through enclosures and approach patterns &mdash; making the blue note a
+            <strong>structural element</strong>, not just an expressive gesture. The most
+            systematized deployment and paradoxically the historical root of the thread.</p>
+            <div class="examples">Lanphere (bebop blue phrasing); Parker (canonical bebop blue note); Navarro (trumpet blue notes with bebop precision); Stitt (Parker-derived blue vocabulary)</div>
+            <div class="genealogy"><strong>Twelve deployments:</strong> bass-line (0&deg;), guitar (1&deg;), vocal (3&deg;), trumpet (4&deg;), piano crush (5&deg;), altered voicings (6&deg;), trombone slide (7&deg;), bass fundamental (8&deg;), sax voice (9&deg;), alto cool bend (10&deg;), flute bent note (11&deg;), bebop chromatic approach (12&deg;). The historical root documented last.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Addiction &amp; Recovery in Jazz</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Systemic pattern, not individual biography. The artistic community creates
+            conditions for addiction (proximity, peer modeling via Parker, no health
+            infrastructure). Recovery requires external structure (faith, prison, exile).
+            Lanphere lost ~30 years. <strong>First recovery narrative in the engine.</strong>
+            The pattern identifies the system, not the gossip.</p>
+            <div class="examples">Lanphere (heroin, recovery via faith, Fresh Sound comeback); Art Pepper (heroin, prison, Galaxy comeback); Chet Baker (lifelong addiction, European exile); Dexter Gordon (heroin, prison, European exile, American return)</div>
+            <div class="genealogy"><strong>NEW thread.</strong> No direct ancestor in the theory genealogy. Closest parallel: Bown&rsquo;s erasure (6&deg;) &mdash; career destruction through external forces. But Bown&rsquo;s was caused by racism; Lanphere&rsquo;s by a drug the music community distributed. Lanphere rebuilt; Bown did not.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             ENERGY SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Energy Spectrum: 2:7:4</h2>
+
+        <p>Lanphere is the <strong>second energy-1 artist</strong> in the engine.
+        Energy-1 gains its first internal contrast: meditative (Peacock) vs. redemptive
+        (Lanphere). The distribution shifts from 1:7:4 to <strong>2:7:4</strong>.</p>
+
+        <table>
+          <thead>
+            <tr><th>Energy</th><th>Artists</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td><strong>Peacock (8&deg;), Lanphere (12&deg;)</strong></td><td><strong>Meditative / Redemptive &mdash; intensity redirected inward</strong></td></tr>
+            <tr><td>2</td><td>Frisell (1&deg;), Standifer (4&deg;), Berry (5&deg;), Priester (7&deg;), Caliman (9&deg;), Shank (10&deg;), Brazil (11&deg;)</td><td>Atmospheric, warm, sustaining, community-embedded</td></tr>
+            <tr><td>3</td><td>Jones (0&deg;), Horvitz (2&deg;), Anderson (3&deg;), Bown (6&deg;)</td><td>Commanding, intense, projective</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Thirteen Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator</td></tr>
+            <tr><td>The Quiet Draw</td><td>Peacock (8&deg;)</td><td>Global cultivation &rarr; PNW settlement &rarr; gravitational presence</td></tr>
+            <tr><td>The Working Pedagogue-Draw</td><td>Caliman (9&deg;)</td><td>Global cultivation &rarr; educator AND performer</td></tr>
+            <tr><td>The Late Homestead</td><td>Shank (10&deg;)</td><td>Prolific career elsewhere &rarr; PNW as later-career base</td></tr>
+            <tr><td>The Salon Keeper</td><td>Brazil (11&deg;)</td><td>Settled in CD &rarr; community building through home-based pedagogy</td></tr>
+            <tr><td><strong>The Prodigal</strong></td><td><strong>Lanphere (12&deg;)</strong></td><td><strong>PNW-born &rarr; left for the center &rarr; destroyed &rarr; returned &rarr; rebuilt</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>The Prodigal goes home not in triumph but in need, and then finds a way to
+        make art again from the place that raised them. Distinct from The Export (success
+        without return), The Stay (return by choice), The Erasure (destruction without
+        recovery), and The Late Homestead (arrival while successful).</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;11&deg;</h4>
+          <ul>
+            <li><strong>Bebop root node:</strong> The engine&rsquo;s jazz genealogy has a
+            trunk now. Lanphere (bebop) &rarr; Caliman (hard bop) + Shank (cool jazz).
+            Tree structure, not flat list.</li>
+            <li><strong>Redemption arc:</strong> NEW. First recovery narrative. Systemic
+            pattern: community creates conditions for addiction, recovery requires external
+            structure.</li>
+            <li><strong>Energy-1 at two points:</strong> Meditative (Peacock 8&deg;) vs.
+            redemptive (Lanphere 12&deg;). Distribution shifts to 2:7:4.</li>
+            <li><strong>The Prodigal:</strong> NEW. Thirteenth artist-city pattern. PNW-born,
+            departed, destroyed, returned, rebuilt.</li>
+            <li><strong>Blue note thread:</strong> Twelve deployments across thirteen degrees.
+            Bebop chromatic approach is the most systematized and the historical root.</li>
+            <li><strong>Chromaticism thread:</strong> Twelve deployments. Bebop structural
+            chromaticism is the ROOT &mdash; all subsequent jazz chromaticism descends.</li>
+            <li><strong>Reed branch:</strong> Seven nodes (extended). Bebop vocabulary adds
+            the foundational node. Now tied with piano as richest branch.</li>
+            <li><strong>Genre rotation:</strong> STILL CRITICAL for degree 13. Thirteen
+            consecutive jazz artists. Intentional CSV architecture.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../009-hadley-caliman/index.html">S36-009 &mdash; Hadley Caliman (Degree 9&deg;)</a> &mdash; Hard bop descendant. Caliman&rsquo;s hard bop vocabulary descends directly from bebop. Lanphere (root) &rarr; Caliman (branch). Both saxophone. Both Pacific Northwest. Direct genealogical connection.</li>
+            <li><a href="../010-bud-shank/index.html">S36-010 &mdash; Bud Shank (Degree 10&deg;)</a> &mdash; Cool jazz descendant. Shank&rsquo;s cool vocabulary descends from bebop through relaxation of intensity. Lanphere (root) &rarr; Shank (branch). The engine now documents root and both primary branches.</li>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a> &mdash; NYC connection. Both PNW-born musicians who went to New York at the moment when the most important developments in American music were happening. Different paths, same destination.</li>
+            <li><a href="../008-gary-peacock/index.html">S36-008 &mdash; Gary Peacock (Degree 8&deg;)</a> &mdash; Energy-1 parallel. Peacock (meditative, Zen-sourced) vs. Lanphere (redemptive, recovery-sourced). Two different paths to quiet intensity.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Fresh Sound Records. Don Lanphere album catalog, liner notes, and session documentation.</li>
+          <li>Blue Note Records. Fats Navarro session discography and personnel listings (1949).</li>
+          <li>AllMusic. Don Lanphere artist biography and discography.</li>
+          <li>DownBeat. Don Lanphere profiles, reviews, and retrospective coverage.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="5">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>DeVeaux, Scott. <em>The Birth of Bebop</em>. University of California Press, 1997.</li>
+          <li>Gioia, Ted. <em>The History of Jazz</em>. Oxford University Press, 2nd ed., 2011.</li>
+          <li>Giddins, Gary. <em>Celebrating Bird</em>. Beech Tree Books, 1987.</li>
+          <li>Gitler, Ira. <em>Jazz Masters of the Forties</em>. Macmillan, 1966.</li>
+        </ol>
+
+        <h3>Institutional &amp; Comparative</h3>
+        <ol start="10">
+          <li>The Seattle Times. Don Lanphere obituary and profile articles.</li>
+          <li>Wenatchee World. Local coverage of Lanphere&rsquo;s career and legacy.</li>
+          <li>KNKX/KPLU Jazz Northwest. Pacific Northwest jazz community coverage.</li>
+          <li>JazzTimes. Lanphere profiles and review coverage.</li>
+          <li>Earshot Jazz. Seattle jazz community documentation.</li>
+          <li>Fitzgerald, Michael. <em>Blue Note Records: The Biography</em>. Da Capo Press, 2000.</li>
+          <li>Pepper, Art. <em>Straight Life</em>. Schirmer Books, 1979.</li>
+          <li>Charlie Parker discography and biographical literature.</li>
+          <li>Fats Navarro complete discography.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1928</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">2003</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Wenatchee, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Seattle (general)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instruments</span>
+            <span class="stat-value">Alto &amp; Tenor Sax</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">Northwestern / NYC</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">12&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (bebop)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1940s&ndash;2000s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Fresh Sound</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Legacy</h4>
+          <div class="stat-row">
+            <span class="stat-label">Navarro Sessions</span>
+            <span class="stat-value">1949 (Blue Note)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lost Years</span>
+            <span class="stat-value">~30 years</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Comeback</span>
+            <span class="stat-value">1980s (Fresh Sound)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Role</span>
+            <span class="stat-value">Seattle jazz elder</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reed Branch</span>
+            <span class="stat-value">7 nodes (extended)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">4 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Firsts at Degree 12&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Root</span>
+            <span class="stat-value">Bebop (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Archetype</span>
+            <span class="stat-value">The Prodigal</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Thread</span>
+            <span class="stat-value">Addiction/Recovery (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">E. Washington (1st)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Fresh Sound (1st int&rsquo;l)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">The Prodigal</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Rise-fall-redemption</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died in Seattle</span>
+            <span class="stat-value">Yes (2003)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Wenatchee pipeline</span>
+            <span class="stat-value">14th pipeline (NEW)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Energy 1</span>
+            <span class="stat-value">Peacock (8&deg;), Lanphere (12&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 2</span>
+            <span class="stat-value">7 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 3</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">2:7:4</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;11&deg; &rarr; 12&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Reed Branch</span>
+            <span class="stat-value">7 nodes (extended)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">12th (ROOT)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">12th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">13 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">14 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 12&deg; / 360 &middot;
+      <a href="../011-joe-brazil/index.html">Prev: 11&deg; Brazil</a> &middot;
+      <a href="../009-hadley-caliman/index.html">9&deg; Caliman</a> &middot;
+      <a href="../010-bud-shank/index.html">10&deg; Shank</a> &middot;
+      <a href="../008-gary-peacock/index.html">8&deg; Peacock</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
