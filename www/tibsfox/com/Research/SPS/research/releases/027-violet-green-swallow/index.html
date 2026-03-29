@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 27&deg; &mdash; Violet-green Swallow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.twitter { background: #0288D1; }
+    .theory-icon.genus { background: #00838F; }
+    .theory-icon.plumage { background: #2E7D32; }
+    .theory-icon.cavity { background: #5D4037; }
+    .theory-icon.swallow-trio { background: #7B1FA2; }
+    .theory-icon.energy { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Swallow trio card */
+    .trio-card {
+      background: linear-gradient(135deg, #E0F7FA 0%, #80DEEA 100%);
+      border: 2px solid #00838F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trio-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #006064;
+    }
+
+    /* Genus pair card */
+    .genus-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Plumage card */
+    .plumage-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #66BB6A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .plumage-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Cavity card */
+    .cavity-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 1px solid #8D6E63;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .cavity-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">27&deg;</div>
+      <div class="release-title-block">
+        <h2>Violet-green Swallow</h2>
+        <div class="scientific">Tachycineta thalassina &middot; Family Hirundinidae (Swallows) &middot; Second Swallow</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Twitter and Liquid Chips &middot; Open Water &middot; Summer &middot; Energy 4</div>
+
+    <blockquote>
+      High above a mountain lake, a small iridescent shape darts and flickers
+      through the air &mdash; brilliant green above, clean white below, white
+      patches flashing above the eyes. It twists, banks, snaps upward, drops
+      &mdash; and from it comes a rapid, crystalline twitter of liquid chips,
+      each one a tiny water-drop of sound. The Violet-green Swallow. The
+      sea-colored swift-one. The second Hirundinidae. The swallow trio&rsquo;s
+      middle movement. The western specialty that lives from harbor to alpine
+      and needs no house that humans built.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Swallow Trio Card -->
+        <div class="trio-card">
+          <h3>The Swallow Trio: Middle Movement (Degree 27 of 26&ndash;28)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Three consecutive Hirundinidae. The Purple Martin was the patriarch &mdash;
+            the heavy bomber. The Violet-green Swallow is the opposite extreme: the
+            lightest, highest-pitched, most independent, most vertically distributed.
+            The fighter jet. The piccolo.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Purple Martin (26)</th><th style="background: rgba(0,131,143,0.15);">Violet-green (27)</th><th>Tree Swallow (28)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mass</td><td>45&ndash;60 g</td><td style="background: rgba(0,131,143,0.08);"><strong>14 g</strong></td><td>17&ndash;25 g</td></tr>
+              <tr><td>Pitch center</td><td>Low-mid (2&ndash;6 kHz)</td><td style="background: rgba(0,131,143,0.08);"><strong>High (5&ndash;8 kHz)</strong></td><td>Mid (3&ndash;6 kHz)</td></tr>
+              <tr><td>Sound character</td><td>Continuous liquid gurgle</td><td style="background: rgba(0,131,143,0.08);"><strong>Discrete liquid chips</strong></td><td>Liquid twittering</td></tr>
+              <tr><td>Nest strategy</td><td>Colonial nest box</td><td style="background: rgba(0,131,143,0.08);"><strong>Natural cavities (cliff, tree)</strong></td><td>Cavity (loose colony)</td></tr>
+              <tr><td>Coloniality</td><td>Obligate colonial</td><td style="background: rgba(0,131,143,0.08);"><strong>Solitary/paired</strong></td><td>Semi-colonial</td></tr>
+              <tr><td>Altitude range</td><td>Sea level</td><td style="background: rgba(0,131,143,0.08);"><strong>Valley to alpine</strong></td><td>Lowland to mid-elevation</td></tr>
+              <tr style="background: rgba(0,131,143,0.15); font-weight: 600;"><td>Trio role</td><td>PATRIARCH</td><td><strong>CLIFF DWELLER</strong></td><td>Wetland specialist</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #006064; margin: 0.5rem 0;">
+            <strong>The martin is the stream. The Violet-green is the rain.</strong>
+            Both liquid. Different states. Same element, different time-domain structures.
+          </p>
+        </div>
+
+        <!-- Genus Pair Card -->
+        <div class="genus-card">
+          <h3>Tachycineta: Same-Genus Consecutive Pair (Degrees 27&ndash;28)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Violet-green Swallow (<em>T. thalassina</em>) and Tree Swallow
+            (<em>T. bicolor</em>) share the genus <em>Tachycineta</em> &mdash; the
+            engine&rsquo;s <strong>tightest same-genus adjacency</strong>. Two consecutive
+            degrees, same genus, different species. The only precedent is the Catharus
+            pair at degrees 18&ndash;19 (Swainson&rsquo;s Thrush, Veery). Nested within
+            the Hirundinidae trio: family (26&ndash;28) contains genus (27&ndash;28).
+            The engine&rsquo;s finest taxonomic resolution yet.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: Twitter and Liquid Chips</h2>
+        <p>
+          The Violet-green Swallow&rsquo;s vocalization is a <strong>rapid, high-pitched
+          twitter</strong> of discrete liquid chips &mdash; each chip a brief descending
+          FM note with a water-drop quality. Not a continuous stream like the martin&rsquo;s
+          gurgle, but a rapid series of individual drops. The stream vs. the rain.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>3.0&ndash;9.0 kHz (higher than Purple Martin)</td></tr>
+            <tr><td>Peak energy</td><td>5.0&ndash;8.0 kHz (second-highest in engine after kinglet)</td></tr>
+            <tr><td>Call duration</td><td>0.5&ndash;2.0 seconds per twitter sequence</td></tr>
+            <tr><td>Chip rate</td><td>10&ndash;20 per second (faster than martin, remains discrete)</td></tr>
+            <tr><td>Chip structure</td><td>Descending FM sweep (15&ndash;30 ms, 1&ndash;2 kHz drop)</td></tr>
+            <tr><td>Note types</td><td>Liquid chips (descending FM) + contact notes (simple high chips)</td></tr>
+            <tr><td>Timbre</td><td>Thin, high, crystalline &mdash; transparent vs. martin&rsquo;s opaque</td></tr>
+            <tr><td>Amplitude</td><td>Soft to moderate &mdash; energy in ubiquity, not volume</td></tr>
+            <tr><td>Context</td><td>Primarily in flight &mdash; foraging, territorial, courtship</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>Stream vs. rain.</strong> The Purple Martin&rsquo;s song is a continuous
+          flow &mdash; legato, notes grading into each other. The Violet-green&rsquo;s
+          twitter is rapid discrete drops &mdash; each chip complete with onset, peak,
+          offset, and a micro-silence before the next. Same &ldquo;liquid&rdquo; quality.
+          Different time-domain structure. A stream flows. Rain drips. Both are water.
+        </p>
+
+        <!-- Plumage Card -->
+        <div class="plumage-card">
+          <h3>Iridescent Green and Violet: The Sea-Colored Swift-One</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>Males:</strong> Crown iridescent violet-bronze; back and rump brilliant
+            iridescent green (<em>thalassina</em> &mdash; sea-colored); underparts clean
+            white; distinctive <strong>white patches above the eye</strong> and on the rump
+            flanks. <strong>Females:</strong> Similar but duller, reduced white patches.
+            Compared to the Purple Martin&rsquo;s uniformly dark iridescence, the
+            Violet-green shows <strong>maximum contrast</strong>: vivid green above,
+            bright white below. The name is literally true &mdash; violet crown, green
+            back. One of the most accurately named birds in North American ornithology.
+          </p>
+        </div>
+
+        <!-- Cavity Card -->
+        <div class="cavity-card">
+          <h3>Cavity Nesting: Natural Independence</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Where the Purple Martin depends on human-built nest boxes, the Violet-green
+            Swallow retains <strong>complete housing independence</strong>. It nests in
+            woodpecker holes, natural tree hollows, cliff crevices, rock outcrops, and
+            occasionally human structures &mdash; from sea level to above alpine treeline
+            (2,500+ m). Its small body (<strong>14 g</strong>) lets it use cavity entrances
+            too small for European Starlings, providing <strong>natural
+            &ldquo;starling-proofing&rdquo;</strong> that the larger Purple Martin lacks.
+            Size is the Violet-green&rsquo;s competitive advantage in the cavity market.
+            No conservation crisis. No management dependency. Self-sufficient.
+          </p>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: Tachycineta thalassina</h2>
+        <p>
+          <em>Tachycineta</em>: Greek <em>takhys</em> (swift) + <em>kineo</em> (to move)
+          &mdash; &ldquo;the swift-mover.&rdquo; <em>Thalassina</em>: Greek
+          <em>thalassa</em> (the sea) &mdash; &ldquo;sea-colored.&rdquo; The full binomial
+          translates as <strong>&ldquo;the sea-colored swift-one&rdquo;</strong> &mdash;
+          one of the most evocative names in North American ornithology. The common name
+          &ldquo;Violet-green&rdquo; matches the actual plumage: violet crown, green back.
+          Name, taxonomy, and appearance align perfectly. The bird IS the name.
+        </p>
+        <p>
+          <strong>Second Hirundinidae.</strong> The swallow family now holds two species in
+          the engine. After degree 28, it will hold three &mdash; becoming the engine&rsquo;s
+          third-largest family behind Turdidae (5) and Parulidae (5).
+        </p>
+
+        <!-- Western specialty -->
+        <h2>The Western Specialty: More Common, Less Known</h2>
+        <p>
+          The Violet-green Swallow outnumbers the Purple Martin roughly
+          <strong>20:1</strong> in the PNW &mdash; tens of thousands of breeding pairs vs.
+          the martin&rsquo;s 800&ndash;1,000. Yet it is far less known to the public.
+          Why? The martin nests in conspicuous harbors and has a compelling conservation
+          story. The Violet-green nests in cliff crevices and forest snags, has no drama,
+          and makes a quiet sound. <strong>Self-sufficiency is less newsworthy than
+          dependency.</strong> The quiet, common, independent bird lives in the shadow of
+          the loud, rare, managed one.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon twitter">T</div>
+            <div class="theory-content">
+              <h4>The Liquid Twitter &mdash; Discrete Drops vs. Continuous Stream</h4>
+              <p>Rapid descending FM chips with discrete boundaries. Each chip is a complete sound event. The 28th acoustic element: the rain to the martin&rsquo;s stream. Two liquid textures &mdash; one legato (26), one staccato (27).</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon genus">G</div>
+            <div class="theory-content">
+              <h4>Tachycineta Consecutive Pair &mdash; Finest Taxonomic Resolution</h4>
+              <p>Same genus in consecutive degrees (27&ndash;28). Nested within the Hirundinidae trio (26&ndash;28). Family contains genus contains species. Parallels the Catharus pair (18&ndash;19). The engine zooms to its finest resolution.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon plumage">P</div>
+            <div class="theory-content">
+              <h4>Within-Family Plumage Divergence &mdash; Two Iridescent Strategies</h4>
+              <p>Martin: uniformly dark iridescent (low contrast, stealthy). Violet-green: green above, white below (high contrast, visible). Same structural coloration mechanism, opposite visual strategies. Size maps to display: small = conspicuous, large = cryptic.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon cavity">C</div>
+            <div class="theory-content">
+              <h4>Natural Cavity Independence &mdash; Size as Competitive Advantage</h4>
+              <p>Small body fits small holes that exclude starlings. No nest box dependency. Valley to alpine altitude range via cliff crevices. The Violet-green solved the starling problem by being small. Conservation through body plan, not human intervention.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon swallow-trio">S</div>
+            <div class="theory-content">
+              <h4>The Swallow Trio &mdash; Middle Movement (2 of 3)</h4>
+              <p>The gradient deepens: martin (heavy, low, colonial) &rarr; Violet-green (light, high, solitary) &rarr; Tree Swallow (medium, moderate, semi-colonial). Bookend extremes with a centrist in between. One family, maximum within-family divergence.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Septet: Seventh Consecutive E=4</h4>
+              <p>Degrees 21&ndash;27: hammer, drum, groove reset, hoarse warble, caroling, liquid gurgle, liquid twitter. Seven textures at sustained E=4. The longest energy plateau in engine history extends by one more degree.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-026: Purple Martin</strong>
+            <p>WITHIN-FAMILY CONTRAST. Same family, opposite extremes. Large vs. small. Colonial vs. solitary. Low vs. high. Stream vs. drops. Dependent vs. self-sufficient. The heavy bomber and the fighter jet.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018/019: Swainson&rsquo;s Thrush + Veery</strong>
+            <p>SAME-GENUS CONSECUTIVE PAIR. Catharus (18&ndash;19) and Tachycineta (27&ndash;28). Both pairs place same-genus species in consecutive degrees. Within-genus acoustic variation at the finest taxonomic resolution.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-023/024/025: Convergence Trio</strong>
+            <p>CONVERGENCE VS. DIVERGENCE. The convergence trio showed different families producing similar sounds. The swallow trio shows one family producing different sounds. Opposite structural principles.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-008: Golden-crowned Kinglet</strong>
+            <p>HIGH-FREQUENCY COMPARISON. Kinglet: 6&ndash;10 kHz (canopy apex). Violet-green: 5&ndash;8 kHz peak (aerial apex). Two of the highest-pitched species. Both small-bodied. Size constrains frequency.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021/022: Northern Flicker</strong>
+            <p>CAVITY ECONOMY. Flicker excavates cavities at degrees 21&ndash;22. Violet-green uses old woodpecker holes at degree 27. The carpenter&rsquo;s work becomes the swallow&rsquo;s home, six degrees later.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>CAVITY NESTING, SELF-SUFFICIENT MODEL. Both use natural cavities. Owl: old-growth (rare, threatened). Violet-green: cliff + tree + rock (diverse, abundant). The cavity nester that found enough options to thrive.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Violet-green Swallow: common western specialty, breeding ecology, migration timing, cavity nesting, aerial insectivore.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Cliff and rock face ecosystems. Montane and alpine insect communities. Altitudinal range: valley floor to above treeline.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: The Dynamics (Soul/R&amp;B, E=4, Central District, Calla). Liquid sound that moves quickly. Community roots in a specific place.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Brown, C.R., Airola, D.A., and Tarof, S.A. (2021). Violet-green Swallow (<em>Tachycineta thalassina</em>), version 2.0. <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Edson, J.M. (1943). A study of the Violet-green Swallow. <em>Auk</em> 60(3): 396&ndash;403.</li>
+          <li>Turner, A. and Rose, C. (1989). <em>A Handbook to the Swallows and Martins of the World</em>. Christopher Helm.</li>
+          <li>Brawn, J.D. and Balda, R.P. (1988). Population biology and ecology of cavity-nesting birds. <em>Current Ornithology</em> 6: 255&ndash;289.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Macaulay Library. Violet-green Swallow recordings. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon). Violet-green Swallow. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Pyle, P. (1997). <em>Identification Guide to North American Birds, Part 1</em>. Slate Creek Press.</li>
+          <li>Washington Department of Fish and Wildlife. Breeding bird atlas data. wdfw.wa.gov</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">27&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Hirundinidae</div>
+          <div class="stat-detail">Second swallow &mdash; 16th family in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Tachycineta</div>
+          <div class="stat-detail">Shared with Tree Swallow (deg 28)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Liquid Twitter</div>
+          <div class="stat-detail">Rapid descending FM chips</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Seventh consecutive E=4 (degrees 21&ndash;27)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Open Water</div>
+          <div class="stat-detail">Air column over water + cliff + montane</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Neotropical migrant (April&ndash;August)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">3.0&ndash;9.0 kHz</div>
+          <div class="stat-detail">Peak 5.0&ndash;8.0 kHz &mdash; highest swallow in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">14 g</div>
+          <div class="stat-detail">Smallest swallow &mdash; 1/4 the martin&rsquo;s mass</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Self-sustaining</div>
+          <div class="stat-detail">No management dependency</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nesting</div>
+          <div class="stat-value">Natural Cavities</div>
+          <div class="stat-detail">Cliff, tree, rock &mdash; valley to alpine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Swallow Trio</div>
+          <div class="stat-value">2 of 3</div>
+          <div class="stat-detail">Degrees 26, 27, 28 &mdash; Hirundinidae</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 27 &mdash; S36</div>
+          <div class="parallel-name">The Dynamics</div>
+          <div class="parallel-detail">Soul/R&amp;B &middot; E=4 &middot; Central District &middot; Calla</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Both liquid, both quick. Community-rooted sound
+            from a specific place. Seventh consecutive E=4.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 27&deg; of 360&deg; &mdash; v1.49.163</p>
+  </footer>
+</body>
+</html>
