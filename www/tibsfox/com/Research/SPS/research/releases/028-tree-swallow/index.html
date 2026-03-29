@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 28&deg; &mdash; Tree Swallow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.brook { background: #0288D1; }
+    .theory-icon.trio { background: #7B1FA2; }
+    .theory-icon.berry { background: #2E7D32; }
+    .theory-icon.model { background: #E65100; }
+    .theory-icon.genus { background: #00838F; }
+    .theory-icon.energy { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Swallow trio complete card */
+    .trio-complete-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trio-complete-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Genus pair card */
+    .genus-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Berry card */
+    .berry-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+      border: 1px solid #FB8C00;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .berry-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Research card */
+    .research-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 1px solid #8D6E63;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .research-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">28&deg;</div>
+      <div class="release-title-block">
+        <h2>Tree Swallow</h2>
+        <div class="scientific">Tachycineta bicolor &middot; Family Hirundinidae (Swallows) &middot; Third Swallow &mdash; Trio Complete</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Liquid Twittering Gurgle &middot; Open Field near Water &middot; Spring/Summer &middot; Energy 4</div>
+
+    <blockquote>
+      Over a freshwater marsh at dawn, a compact iridescent shape perches on
+      a fence post &mdash; brilliant blue-green above, clean white below, two
+      colors, no more. It lifts into the air and from it comes a tumbling,
+      liquid, twittering gurgle &mdash; neither the martin&rsquo;s continuous
+      stream nor the Violet-green&rsquo;s discrete rain, but something between:
+      a brook. Water that has structure within its flow. The Tree Swallow. The
+      two-colored swift-mover. The third Hirundinidae. The centrist. The most-studied
+      swallow in North America. The only swallow that can eat berries.
+      The swallow trio closes here.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Swallow Trio Complete Card -->
+        <div class="trio-complete-card">
+          <h3>Swallow Trio Complete (Degrees 26&ndash;28)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Three consecutive Hirundinidae. Three liquid sounds. Three positions on
+            every gradient. The trio is complete: patriarch (martin) &rarr; cliff
+            dweller (Violet-green) &rarr; <strong>centrist (Tree Swallow)</strong>.
+            Stream &rarr; rain &rarr; <strong>brook</strong>. The swallow trio is the
+            engine&rsquo;s densest family cluster: three consecutive degrees, no gaps.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Purple Martin (26)</th><th>Violet-green (27)</th><th style="background: rgba(46,125,50,0.15);">Tree Swallow (28)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mass</td><td>45&ndash;60 g</td><td>14 g</td><td style="background: rgba(46,125,50,0.08);"><strong>17&ndash;25 g</strong></td></tr>
+              <tr><td>Pitch center</td><td>Low-mid (2&ndash;6 kHz)</td><td>High (5&ndash;8 kHz)</td><td style="background: rgba(46,125,50,0.08);"><strong>Mid (3&ndash;6 kHz)</strong></td></tr>
+              <tr><td>Sound character</td><td>Continuous liquid gurgle</td><td>Discrete liquid chips</td><td style="background: rgba(46,125,50,0.08);"><strong>Liquid twittering gurgle</strong></td></tr>
+              <tr><td>Liquid metaphor</td><td>Stream</td><td>Rain</td><td style="background: rgba(46,125,50,0.08);"><strong>Brook</strong></td></tr>
+              <tr><td>Nest strategy</td><td>Colonial nest box</td><td>Natural cavities</td><td style="background: rgba(46,125,50,0.08);"><strong>Nest box + natural</strong></td></tr>
+              <tr><td>Coloniality</td><td>Obligate colonial</td><td>Solitary/paired</td><td style="background: rgba(46,125,50,0.08);"><strong>Loosely colonial</strong></td></tr>
+              <tr><td>Diet</td><td>Insects only</td><td>Insects only</td><td style="background: rgba(46,125,50,0.08);"><strong>Insects + berries (unique)</strong></td></tr>
+              <tr style="background: rgba(46,125,50,0.15); font-weight: 600;"><td>Trio role</td><td>PATRIARCH</td><td>CLIFF DWELLER</td><td><strong>CENTRIST</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #1B5E20; margin: 0.5rem 0;">
+            <strong>The stream, the rain, the brook.</strong> Three liquid states.
+            Same timbral quality, three temporal organizations. The swallow trio
+            maps the full articulation spectrum for a single timbral value.
+          </p>
+        </div>
+
+        <!-- Genus Pair Card -->
+        <div class="genus-card">
+          <h3>Tachycineta Pair Complete (Degrees 27&ndash;28)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Violet-green Swallow (<em>T. thalassina</em>, &ldquo;sea-colored&rdquo;)
+            and Tree Swallow (<em>T. bicolor</em>, &ldquo;two-colored&rdquo;) complete the
+            engine&rsquo;s second same-genus consecutive pair. Parallels the Catharus pair
+            (18&ndash;19). Two swift-movers named for their colors: sea-green cliff specialist
+            vs. blue-green wetland generalist. Same genus, opposite niches. The engine&rsquo;s
+            finest taxonomic resolution.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: Liquid Twittering Gurgle</h2>
+        <p>
+          The Tree Swallow&rsquo;s vocalization is a <strong>liquid twittering
+          gurgle</strong> &mdash; a tumbling, semi-continuous sound where individual
+          notes are perceptible but grade into each other. Neither the martin&rsquo;s
+          unbroken stream nor the Violet-green&rsquo;s discrete rain. The brook:
+          water that moves in visible pulses over stones.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>2.0&ndash;8.0 kHz (between martin and Violet-green)</td></tr>
+            <tr><td>Peak energy</td><td>3.0&ndash;6.0 kHz (centrist frequency)</td></tr>
+            <tr><td>Call duration</td><td>1&ndash;3 seconds per twittering bout</td></tr>
+            <tr><td>Note rate</td><td>8&ndash;15 per second (at perceptual fusion threshold)</td></tr>
+            <tr><td>Note structure</td><td>Semi-fused FM elements with soft boundaries</td></tr>
+            <tr><td>Phrase types</td><td>Twittering gurgle + three-note call + churring</td></tr>
+            <tr><td>Timbre</td><td>Moderate, warm, liquid &mdash; between martin&rsquo;s depth and Violet-green&rsquo;s transparency</td></tr>
+            <tr><td>Amplitude</td><td>Moderate &mdash; louder than Violet-green, quieter than martin</td></tr>
+            <tr><td>Context</td><td>Perched (fence posts, nest boxes) and in flight &mdash; dawn singing common</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>The liquid trilogy.</strong> Stream (martin, legato), rain (Violet-green,
+          staccato), brook (Tree Swallow, mixed). Three liquid sounds in three degrees.
+          Same timbre, three articulations. The engine&rsquo;s first complete timbral
+          exploration: one quality, full spectrum.
+        </p>
+
+        <!-- Berry Card -->
+        <div class="berry-card">
+          <h3>The Berry Backup: Unique Dietary Flexibility</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Tree Swallow is the <strong>only North American swallow that can eat
+            plant material</strong> &mdash; bayberries (<em>Myrica</em> spp.) and other
+            small waxy fruits. No other Hirundinidae in the engine has this capability.
+            The berry backup enables: <strong>(1)</strong> overwintering farther north than
+            any other swallow, <strong>(2)</strong> earliest spring arrival in the PNW
+            (late February), <strong>(3)</strong> cold-snap survival when insects vanish,
+            <strong>(4)</strong> the widest breeding range of any North American swallow
+            (Alaska to Newfoundland). The centrist&rsquo;s unique trick: dietary flexibility
+            that neither bookend possesses.
+          </p>
+        </div>
+
+        <!-- Research Card -->
+        <div class="research-card">
+          <h3>The Most-Studied Swallow in North America</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Decades of nest box monitoring, continent-wide datasets, hundreds of papers.
+            The Tree Swallow has taught science about <strong>insect decline</strong>
+            (declining clutch sizes tracking the &ldquo;insect apocalypse&rdquo;),
+            <strong>mercury bioaccumulation</strong> (sentinel for contaminated waterways),
+            <strong>agricultural impacts</strong> on aerial insectivores,
+            <strong>climate change phenology</strong> (spring arrival advancing 9&ndash;12
+            days over 50 years), and <strong>extra-pair paternity</strong> (50&ndash;80%
+            of broods in some populations). A model organism. A distributed sensor network.
+            A continental environmental monitor.
+          </p>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: Tachycineta bicolor</h2>
+        <p>
+          <em>Tachycineta</em>: Greek <em>takhys</em> (swift) + <em>kineo</em> (to move)
+          &mdash; &ldquo;the swift-mover.&rdquo; <em>Bicolor</em>: Latin <em>bi-</em> (two)
+          + <em>color</em> &mdash; &ldquo;two-colored.&rdquo; The full binomial:
+          <strong>&ldquo;the two-colored swift-mover.&rdquo;</strong> Where the Violet-green
+          was &ldquo;the sea-colored swift-one,&rdquo; the Tree Swallow is
+          &ldquo;the two-colored swift-one.&rdquo; Two congeners named for their colors.
+          The genus tells you how they move. The species tells you how they look.
+        </p>
+        <p>
+          <strong>Third Hirundinidae.</strong> The swallow family now holds three species &mdash;
+          the engine&rsquo;s third-largest family behind Turdidae (5) and Parulidae (5).
+          The swallow trio is the densest family cluster in the engine: three consecutive
+          degrees, zero gaps.
+        </p>
+
+        <!-- Ecosystem -->
+        <h2>Ecosystem: Open Field near Water</h2>
+        <p>
+          Agricultural pastures, freshwater marshes, beaver meadows, lakeshores &mdash;
+          wherever open grassland meets standing water. The Tree Swallow forages low
+          (1&ndash;30 m), skimming above grass and water to intercept emergent aquatic
+          insects. The swallow trio&rsquo;s ecosystem gradient descends: sky (martin,
+          15&ndash;150+ m) &rarr; cliff/water (Violet-green, 5&ndash;100 m) &rarr;
+          <strong>field/water (Tree Swallow, 1&ndash;30 m)</strong>. Three elevations,
+          three foraging zones, three vertical niches.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon brook">B</div>
+            <div class="theory-content">
+              <h4>The Liquid Twittering Gurgle &mdash; The Brook</h4>
+              <p>Semi-continuous liquid sound with mixed articulation. Neither legato stream (martin) nor staccato rain (Violet-green) but tumbling brook &mdash; water with structure within its flow. The 29th acoustic element. The liquid trilogy&rsquo;s synthesis.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon trio">T</div>
+            <div class="theory-content">
+              <h4>Swallow Trio Complete &mdash; Full Within-Family Gradient</h4>
+              <p>Three consecutive Hirundinidae mapping the full range: heavy/low/colonial &rarr; light/high/solitary &rarr; medium/moderate/flexible. Bookend extremes with centrist resolution. The engine&rsquo;s densest family cluster. One family, three liquid states.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon berry">D</div>
+            <div class="theory-content">
+              <h4>Dietary Flexibility &mdash; The Berry Backup</h4>
+              <p>Only North American swallow that can eat plant material. Bayberry digestion enables northern overwintering, earliest spring arrival, cold-snap survival, and widest range. The centrist&rsquo;s unique capability that neither bookend possesses.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon model">M</div>
+            <div class="theory-content">
+              <h4>Model Organism &mdash; Most-Studied Swallow</h4>
+              <p>Decades of nest box monitoring, continent-wide data. Sentinel species for insect decline, mercury contamination, agricultural impacts, and climate change. A distributed environmental sensor network maintained by thousands of researchers.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon genus">G</div>
+            <div class="theory-content">
+              <h4>Tachycineta Pair Complete &mdash; Sea-Colored Meets Two-Colored</h4>
+              <p>Second same-genus consecutive pair in the engine (after Catharus 18&ndash;19). Two swift-movers, two color names, two niches: alpine cliff specialist vs. lowland wetland generalist. Same hardware, different parameters. Finest evolutionary resolution.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Octet: Eighth Consecutive E=4</h4>
+              <p>Degrees 21&ndash;28: hammer, drum, groove, hoarse warble, caroling, liquid gurgle, liquid twitter, liquid twittering gurgle. Eight textures at E=4. The longest plateau in engine history. The dynamic MUST break at degree 29.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-026: Purple Martin</strong>
+            <p>SWALLOW TRIO BOOKEND. Large extreme: 45&ndash;60 g, obligate colonial, continuous liquid gurgle, sea-level, dependent. The patriarch. The stream. Degrees 26 and 28 form the trio&rsquo;s outer pillars.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-027: Violet-green Swallow</strong>
+            <p>TACHYCINETA PAIR COMPLETE. Same genus, consecutive degrees. Sea-colored cliff specialist vs. two-colored wetland generalist. Two swift-movers, maximum niche separation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018/019: Swainson&rsquo;s Thrush + Veery</strong>
+            <p>SAME-GENUS PAIR COMPARISON. Catharus pair: ascending vs. descending spiral. Tachycineta pair: cliff vs. field. Both pairs explore within-genus variation at the finest evolutionary distance.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-023/024/025: Convergence Trio</strong>
+            <p>CONVERGENCE VS. DIVERGENCE. Convergence trio: different families, similar sounds. Swallow trio: one family, different sounds. Opposite structural principles in consecutive arcs.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021/022: Northern Flicker</strong>
+            <p>CAVITY ECONOMY. Flicker excavates at degrees 21&ndash;22. Tree Swallow uses the holes at degree 28. Seven degrees from creation to occupancy. The carpenter&rsquo;s work becomes the swallow&rsquo;s home.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014&ndash;020: Warbler Quintet</strong>
+            <p>FAMILY CLUSTER COMPARISON. Warblers: 5 species across 7 degrees with gaps. Swallows: 3 species across 3 degrees, no gaps. The engine learned to represent families faster.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>RECOGNIZABILITY. Both common, widespread, familiar birds known to the public. After the Violet-green&rsquo;s anonymity (27), the Tree Swallow returns to familiarity (28).</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Tree Swallow: abundant breeder, nest box ecology, bayberry diet, mercury biomonitoring, insect decline sentinel.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Freshwater wetland and agricultural field ecosystems. Aquatic insect emergences. Nest box management in agricultural landscapes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A parallel: Night Owls (Soul/R&amp;B, E=4, Seattle, self-released). The centrist sound. Eighth consecutive E=4.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Winkler, D.W., Hallinger, K.K., Ardia, D.R., et al. (2020). Tree Swallow (<em>Tachycineta bicolor</em>), version 1.1. <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Hussell, D.J.T. (2003). Climate change, spring temperatures, and breeding timing of Tree Swallows. <em>Auk</em> 120(3): 607&ndash;618.</li>
+          <li>Dunn, P.O. and Winkler, D.W. (1999). Climate change and breeding date of Tree Swallows. <em>Proc. R. Soc. B</em> 266: 2487&ndash;2490.</li>
+          <li>Ghilain, A. and Belisle, M. (2008). Breeding success along agricultural gradients. <em>Ecological Applications</em> 18(5): 1140&ndash;1154.</li>
+          <li>Hallinger, K.K. and Cristol, D.A. (2011). Mercury and reproductive success. <em>Ecotoxicology</em> 20: 1368&ndash;1377.</li>
+          <li>Turner, A. and Rose, C. (1989). <em>A Handbook to the Swallows and Martins of the World</em>. Christopher Helm.</li>
+          <li>Robertson, R.J., Stutchbury, B.J., and Cohen, R.R. (2011). Tree Swallow. <em>Birds of North America</em> No. 11. Cornell Lab.</li>
+          <li>Nebel, S., et al. (2010). Declines of aerial insectivores follow a geographic gradient. <em>Avian Conservation and Ecology</em> 5(2): 1.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Macaulay Library. Tree Swallow recordings. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon). Tree Swallow. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Pyle, P. (1997). <em>Identification Guide to North American Birds, Part 1</em>. Slate Creek Press.</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">28&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Hirundinidae</div>
+          <div class="stat-detail">Third swallow &mdash; trio complete</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Tachycineta</div>
+          <div class="stat-detail">Pair with Violet-green (deg 27) complete</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Liquid Twittering Gurgle</div>
+          <div class="stat-detail">The brook &mdash; mixed articulation</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Eighth consecutive E=4 (degrees 21&ndash;28)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Open Field near Water</div>
+          <div class="stat-detail">Pastures, marshes, lakeshores</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Spring/Summer</div>
+          <div class="stat-detail">Earliest-arriving PNW swallow (late Feb)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2.0&ndash;8.0 kHz</div>
+          <div class="stat-detail">Peak 3.0&ndash;6.0 kHz &mdash; centrist</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">17&ndash;25 g</div>
+          <div class="stat-detail">Medium &mdash; between martin and Violet-green</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Diet</div>
+          <div class="stat-value">Insects + Berries</div>
+          <div class="stat-detail">Only swallow with plant diet backup</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value">Most-Studied</div>
+          <div class="stat-detail">Model organism for aerial insectivore ecology</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Swallow Trio</div>
+          <div class="stat-value">3 of 3</div>
+          <div class="stat-detail">Degrees 26, 27, 28 &mdash; COMPLETE</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 28 &mdash; S36</div>
+          <div class="parallel-name">Night Owls</div>
+          <div class="parallel-detail">Soul/R&amp;B &middot; E=4 &middot; Seattle &middot; Self-released</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            The centrist sound. Middle-ground soul. Eighth
+            consecutive E=4. The swallow trio closes.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 28&deg; of 360&deg; &mdash; v1.49.164</p>
+  </footer>
+</body>
+</html>
